@@ -1,0 +1,1 @@
+* */5 * * * python3 /home/mike/nebula/tunnel_manager.py recover >> /home/mike/nebula/tunnel_manager.log 2>&1

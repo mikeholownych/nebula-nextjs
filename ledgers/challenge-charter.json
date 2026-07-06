@@ -1,0 +1,52 @@
+{
+  "challenge": "Hermes Autonomous Company 7-Day Proof Challenge",
+  "authorized_by": "Mike H (stakeholder / approval authority)",
+  "start_date": "2026-07-04T14:36:00+00:00",
+  "end_date": "2026-07-11T14:36:00+00:00",
+  "thesis": "A network of specialized autonomous agents can discover demand, launch a narrow low-friction productized offer, acquire paying customers, operate the business loop, and evolve toward higher-value offers with limited human operational involvement.",
+  "minimum_success": "1 paid transaction at $97",
+  "strong_success": "3+ paid transactions + >10% warm reply rate",
+  "exceptional_success": "Revenue > direct costs + credible repeatability path",
+  "current_offer": {
+    "name": "Free Landing Page Audit + $97 Implementation",
+    "icp": "Founders actively spending on ads with zero conversions (buying trigger)",
+    "lead_sources": ["Reddit r/SideProject", "Reddit r/roastmystartup", "Reddit r/EntrepreneurRideAlong", "HN Show HN", "Indie Hackers"],
+    "sequence": ["Email 1: observation + specific finding + offer to send audit", "Email 2: deliver audit", "Email 3: $97 pitch (48h after audit)", "Email 4: final follow-up (5d, no response)"]
+  },
+  "agent_roster": ["CEO", "Growth", "Market", "Support", "Ops-Finance"],
+  "human_approval_thresholds": {
+    "spend_cap": "$50 USD before approval required",
+    "new_agent": "requires approval",
+    "agent_retirement": "requires approval",
+    "legal_commitment": "requires approval",
+    "public_guarantee": "requires approval",
+    "price_change_>50pct": "requires approval"
+  },
+  "hard_constraints": [
+    "No AI Syndicate brand/assets/doctrine",
+    "No regulated claims (legal/medical/financial/compliance/security)",
+    "No fake testimonials/urgency/scarcity/social proof",
+    "No high-volume cold email (max 10/day)",
+    "No scraping behind login",
+    "No purchases without approval",
+    "No domain changes without approval",
+    "No misrepresentation of capabilities",
+    "No hidden manual fulfillment"
+  ],
+  "evidence_standards": {
+    "fact": "Verified by log, screenshot, Stripe event, or ledger entry",
+    "inference": "Reasonable conclusion from verified facts — labeled as such",
+    "speculation": "Hypothesis without verification — labeled as such",
+    "buyer_signal_weak": "likes, views, impressions, generic praise",
+    "buyer_signal_moderate": "relevant reply, pain confirmation, pricing question, demo request",
+    "buyer_signal_strong": "checkout attempt, paid order, explicit purchase intent, referral"
+  },
+  "baseline": {
+    "revenue": "$0",
+    "emails_sent": 155,
+    "reply_rate": "1.3% (2/155)",
+    "warm_replies": 1,
+    "conversions": 0,
+    "root_cause_of_failure": "Filter-based ICP (no buying trigger) — demographic targeting with zero urgency signal"
+  }
+}

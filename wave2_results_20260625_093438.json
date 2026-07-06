@@ -1,0 +1,190 @@
+{
+  "timestamp": "2026-06-25T09:34:15.272881",
+  "campaign": "wave2_dual_ab",
+  "results": [
+    {
+      "sender": "nebulashop@",
+      "angle": "template",
+      "status": "sent",
+      "to": "tianyajinhui@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "template",
+      "status": "sent",
+      "to": "voder.ai.agent@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "template",
+      "status": "sent",
+      "to": "releaselogofficial@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "template",
+      "status": "sent",
+      "to": "gupta.shivani7896@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "template",
+      "status": "sent",
+      "to": "career4lucas@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "template",
+      "status": "sent",
+      "to": "scalewords.agency@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "template",
+      "status": "failed",
+      "to": "dinirangapremanayake@gmail.com",
+      "error": "(550, b'550 5.7.1 Access denied')"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "template",
+      "status": "sent",
+      "to": "algor.tago@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "template",
+      "status": "sent",
+      "to": "stellytips@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "template",
+      "status": "sent",
+      "to": "rcschupp@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "template",
+      "status": "sent",
+      "to": "muhammadabusufyangoraya@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "template",
+      "status": "sent",
+      "to": "vsl.and@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "template",
+      "status": "sent",
+      "to": "matze.schedel@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "template",
+      "status": "sent",
+      "to": "shadowroot47@outlook.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "template",
+      "status": "failed",
+      "to": "hello@buildingstuff.io",
+      "error": "(550, b'550 5.7.1 Access denied')"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "audit",
+      "status": "sent",
+      "to": "quietpulse.social@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "audit",
+      "status": "sent",
+      "to": "quratulaincreatives@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "audit",
+      "status": "sent",
+      "to": "rkotcher@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "audit",
+      "status": "sent",
+      "to": "kevin.chisumdev@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "audit",
+      "status": "sent",
+      "to": "shawnxu0208@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "audit",
+      "status": "sent",
+      "to": "zyvara.group@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "audit",
+      "status": "sent",
+      "to": "beniciocardozomdp@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "audit",
+      "status": "sent",
+      "to": "jerryatbusiness@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "audit",
+      "status": "sent",
+      "to": "lholmes274@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "audit",
+      "status": "sent",
+      "to": "davidwang913526@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "audit",
+      "status": "sent",
+      "to": "nedco80@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "audit",
+      "status": "sent",
+      "to": "bjoroen.eirik@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "audit",
+      "status": "sent",
+      "to": "ainikaautomation@gmail.com"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "audit",
+      "status": "failed",
+      "to": "founder@shipyard.build",
+      "error": "(550, b'550 5.7.1 Access denied')"
+    },
+    {
+      "sender": "nebulashop@",
+      "angle": "audit",
+      "status": "failed",
+      "to": "team@launchingai.co",
+      "error": "(550, b'550 5.7.1 Access denied')"
+    }
+  ]
+}

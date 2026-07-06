@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-07-05T19:48:36.316303+00:00",
+  "stuck": [
+    {
+      "email": "test@example.com",
+      "stage": "audit_delivered",
+      "hours_stuck": 52.5,
+      "url": "https://nebulacomponents.shop"
+    },
+    {
+      "email": "verify@test.com",
+      "stage": "audit_delivered",
+      "hours_stuck": 16.1,
+      "url": "free_kit"
+    },
+    {
+      "email": "fixmap-test@example.com",
+      "stage": "audit_delivered",
+      "hours_stuck": 12.6,
+      "url": "https://example.com"
+    }
+  ]
+}

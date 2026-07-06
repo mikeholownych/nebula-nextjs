@@ -1,0 +1,3340 @@
+{
+  "adam@hard-book.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "adam@hard-book.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:44.604818Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.073558Z",
+    "last_seen": "2026-07-05T07:47:26.073558Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "ainikaautomation@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "ainikaautomation@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:44.757249Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.074476Z",
+    "last_seen": "2026-07-05T07:47:26.074476Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "algor.tago@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "algor.tago@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:45.235831Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.098148Z",
+    "last_seen": "2026-07-05T07:47:26.098148Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "alloceraintelligence@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "alloceraintelligence@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:45.605072Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.149583Z",
+    "last_seen": "2026-07-05T07:47:26.149583Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": "https://alloceraintelligence.com"
+  },
+  "beniciocardozomdp@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "beniciocardozomdp@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:45.969212Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.079916Z",
+    "last_seen": "2026-07-05T07:47:26.079916Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "bjoroen.eirik@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "bjoroen.eirik@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:46.326102Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.075420Z",
+    "last_seen": "2026-07-05T07:47:26.075420Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "career4lucas@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "career4lucas@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:46.717799Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.101661Z",
+    "last_seen": "2026-07-05T07:47:26.101661Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "contact@qlp.jp": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "contact@qlp.jp",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:47.055455Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.170037Z",
+    "last_seen": "2026-07-05T07:47:26.170037Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "contact@reddbot.ai": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "contact@reddbot.ai",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:47.331756Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.333961Z",
+    "last_seen": "2026-07-05T07:47:26.333961Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "contact@skillsips.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "contact@skillsips.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:47.781266Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.072738Z",
+    "last_seen": "2026-07-05T07:47:26.072738Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "contact@smartwatermark.app": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "contact@smartwatermark.app",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:47.874321Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.131139Z",
+    "last_seen": "2026-07-05T07:47:26.131139Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "contactus@treelance.app": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "contactus@treelance.app",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:48.194467Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.266300Z",
+    "last_seen": "2026-07-05T07:47:26.266300Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "davidwang913526@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "davidwang913526@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:48.559689Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.076515Z",
+    "last_seen": "2026-07-05T07:47:26.076515Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "deepanshu11madan@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "deepanshu11madan@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:48.947697Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.152231Z",
+    "last_seen": "2026-07-05T07:47:26.152231Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": "https://naxely.com"
+  },
+  "dinirangapremanayake@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "dinirangapremanayake@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:49.224324Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.115072Z",
+    "last_seen": "2026-07-05T07:47:26.115072Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "direct@test.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "direct@test.com",
+    "first_seen": "2026-07-05T10:12:45.892460Z",
+    "last_seen": "2026-07-05T10:12:45.892460Z",
+    "name": "Direct Test",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "rb2b_visitor"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": "https://direct.com"
+  },
+  "flynn@snipprompts.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "flynn@snipprompts.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:49.315255Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.136211Z",
+    "last_seen": "2026-07-05T07:47:26.136211Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "founder@shipyard.build": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "founder@shipyard.build",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:49.582034Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.121725Z",
+    "last_seen": "2026-07-05T07:47:26.121725Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "ghostaicorp@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "ghostaicorp@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:49.671236Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.280527Z",
+    "last_seen": "2026-07-05T07:47:26.280527Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "gupta.shivani7896@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "gupta.shivani7896@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:50.024372Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.103507Z",
+    "last_seen": "2026-07-05T07:47:26.103507Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hallo@knallhart.dev": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hallo@knallhart.dev",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:50.382082Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.228372Z",
+    "last_seen": "2026-07-05T07:47:26.228372Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@3minuteanimal.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@3minuteanimal.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:50.748242Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.182647Z",
+    "last_seen": "2026-07-05T07:47:26.182647Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@adsby.co": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@adsby.co",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:51.094024Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.374044Z",
+    "last_seen": "2026-07-05T07:47:26.374044Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": "https://usemagnetiq.com"
+  },
+  "hello@anvevoice.app": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@anvevoice.app",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:51.458774Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.242962Z",
+    "last_seen": "2026-07-05T07:47:26.242962Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@askviv.id": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@askviv.id",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:51.831331Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.276328Z",
+    "last_seen": "2026-07-05T07:47:26.276328Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@boothkeepos.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@boothkeepos.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:52.177658Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.141739Z",
+    "last_seen": "2026-07-05T07:47:26.141739Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": "https://boothkeepos.polsia.app"
+  },
+  "hello@botwork.network": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@botwork.network",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:52.511940Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.206193Z",
+    "last_seen": "2026-07-05T07:47:26.206193Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@buildingstuff.io": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@buildingstuff.io",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:52.922794Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.119460Z",
+    "last_seen": "2026-07-05T07:47:26.119460Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@bunzee.ai": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@bunzee.ai",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:53.010106Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.318302Z",
+    "last_seen": "2026-07-05T07:47:26.318302Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@coachdesk.co.uk": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@coachdesk.co.uk",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:53.115358Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.246775Z",
+    "last_seen": "2026-07-05T07:47:26.246775Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@edkit.ca": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@edkit.ca",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:53.485393Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.176330Z",
+    "last_seen": "2026-07-05T07:47:26.176330Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@filoo.app": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@filoo.app",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:53.591876Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.123963Z",
+    "last_seen": "2026-07-05T07:47:26.123963Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@flowly.run": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@flowly.run",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:53.934604Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.202256Z",
+    "last_seen": "2026-07-05T07:47:26.202256Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@goldenweeks.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@goldenweeks.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:54.330344Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.262271Z",
+    "last_seen": "2026-07-05T07:47:26.262271Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@hizzr.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@hizzr.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:54.421647Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.348368Z",
+    "last_seen": "2026-07-05T07:47:26.348368Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@linkvault.biz": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@linkvault.biz",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:54.851045Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.254425Z",
+    "last_seen": "2026-07-05T07:47:26.254425Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@lintract.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@lintract.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:55.215677Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.221118Z",
+    "last_seen": "2026-07-05T07:47:26.221118Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@listendock.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@listendock.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:55.583682Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.192244Z",
+    "last_seen": "2026-07-05T07:47:26.192244Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@meetsoto.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@meetsoto.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:56.017857Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.155026Z",
+    "last_seen": "2026-07-05T07:47:26.155026Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@monday5.co": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@monday5.co",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:56.315716Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.071133Z",
+    "last_seen": "2026-07-05T07:47:26.071133Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@northcoast.dev": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@northcoast.dev",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:56.702603Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.160783Z",
+    "last_seen": "2026-07-05T07:47:26.160783Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@notilens.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@notilens.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:57.179712Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.353255Z",
+    "last_seen": "2026-07-05T07:47:26.353255Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@nuda-kit.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@nuda-kit.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:57.487251Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.157797Z",
+    "last_seen": "2026-07-05T07:47:26.157797Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@nvsn.ai": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@nvsn.ai",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:57.829967Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.293896Z",
+    "last_seen": "2026-07-05T07:47:26.293896Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@ozigi.app": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@ozigi.app",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:57.931117Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.198920Z",
+    "last_seen": "2026-07-05T07:47:26.198920Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@personal-pod.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@personal-pod.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:58.315852Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.284814Z",
+    "last_seen": "2026-07-05T07:47:26.284814Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@postclaw.io": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@postclaw.io",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:58.656448Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.163630Z",
+    "last_seen": "2026-07-05T07:47:26.163630Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@postdew.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@postdew.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:58.742465Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.233369Z",
+    "last_seen": "2026-07-05T07:47:26.233369Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@retryfix.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@retryfix.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:59.128878Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.343615Z",
+    "last_seen": "2026-07-05T07:47:26.343615Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@savefordinner.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@savefordinner.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:59.468700Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.185764Z",
+    "last_seen": "2026-07-05T07:47:26.185764Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@sillonmusic.app": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@sillonmusic.app",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:48:59.811887Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.179395Z",
+    "last_seen": "2026-07-05T07:47:26.179395Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@skillsips.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@skillsips.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:00.155610Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.188992Z",
+    "last_seen": "2026-07-05T07:47:26.188992Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@snaplead.biz": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@snaplead.biz",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:00.248463Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.270577Z",
+    "last_seen": "2026-07-05T07:47:26.270577Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@statsy.page": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@statsy.page",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:00.608751Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.338687Z",
+    "last_seen": "2026-07-05T07:47:26.338687Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@takt.chat": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@takt.chat",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:00.955363Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.068330Z",
+    "last_seen": "2026-07-05T07:47:26.068330Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@theogeo.ai": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@theogeo.ai",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:01.049061Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.144411Z",
+    "last_seen": "2026-07-05T07:47:26.144411Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": "https://theogeo.ai"
+  },
+  "hello@truthscore.online": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@truthscore.online",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:01.140599Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.323045Z",
+    "last_seen": "2026-07-05T07:47:26.323045Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@tryoutboundglow.email": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@tryoutboundglow.email",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:01.234355Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.224755Z",
+    "last_seen": "2026-07-05T07:47:26.224755Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@tryreleaselog.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@tryreleaselog.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:01.570262Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.250628Z",
+    "last_seen": "2026-07-05T07:47:26.250628Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@uvilox.ai": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@uvilox.ai",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:01.663433Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.070361Z",
+    "last_seen": "2026-07-05T07:47:26.070361Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@valinexa.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@valinexa.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:02.091048Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.209783Z",
+    "last_seen": "2026-07-05T07:47:26.209783Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@vevid.xyz": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@vevid.xyz",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:02.485380Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.173215Z",
+    "last_seen": "2026-07-05T07:47:26.173215Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@vibeinharmony.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@vibeinharmony.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:02.867404Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.238076Z",
+    "last_seen": "2026-07-05T07:47:26.238076Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hello@voiceinvoice.net": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hello@voiceinvoice.net",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:03.275854Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.195650Z",
+    "last_seen": "2026-07-05T07:47:26.195650Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "hola@atiendo24.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "hola@atiendo24.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:03.360568Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.328814Z",
+    "last_seen": "2026-07-05T07:47:26.328814Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "info@cuneiform.chat": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "info@cuneiform.chat",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:03.757104Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.167005Z",
+    "last_seen": "2026-07-05T07:47:26.167005Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "info@tryreplify.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "info@tryreplify.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:03.851530Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.214012Z",
+    "last_seen": "2026-07-05T07:47:26.214012Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "iuri.jorbenadze@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "iuri.jorbenadze@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:04.185834Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.363760Z",
+    "last_seen": "2026-07-05T07:47:26.363760Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "jerryatbusiness@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "jerryatbusiness@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:04.552850Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.078788Z",
+    "last_seen": "2026-07-05T07:47:26.078788Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "john@company.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "john@company.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:04.901294Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.298205Z",
+    "last_seen": "2026-07-05T07:47:26.298205Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "kevin.chisumdev@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "kevin.chisumdev@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:05.278559Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.083804Z",
+    "last_seen": "2026-07-05T07:47:26.083804Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "lakisha@goldenweeks.co": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "lakisha@goldenweeks.co",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:05.637414Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.146986Z",
+    "last_seen": "2026-07-05T07:47:26.146986Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": "https://goldenweeks.co"
+  },
+  "lholmes274@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "lholmes274@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:06.001587Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.077633Z",
+    "last_seen": "2026-07-05T07:47:26.077633Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "linkedin_acoaaaav8qabseg-cpkwfq5iupiw5bg37v17zuq@placeholder.nebula": {
+    "content_angle": "hook",
+    "content_post_url": "https://www.linkedin.com/feed/update/urn:li:activity:7478763831968768000/",
+    "content_posts": [
+      {
+        "angle": "hook",
+        "first_seen": "2026-07-05T13:57:49.398585Z",
+        "url": "https://www.linkedin.com/feed/update/urn:li:activity:7478763831968768000/"
+      }
+    ],
+    "current_stage": "lead_free_kit",
+    "email": "linkedin_acoaaaav8qabseg-cpkwfq5iupiw5bg37v17zuq@placeholder.nebula",
+    "first_seen": "2026-07-05T13:57:49.398585Z",
+    "last_seen": "2026-07-05T13:57:49.398585Z",
+    "name": "Florence Divet \u2600\ufe0f",
+    "notes": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "linkedin_post_like"
+    ],
+    "stages": [
+      "lead_free_kit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "updated_at": "2026-07-06T20:21:15.501672Z",
+    "url": ""
+  },
+  "linkedin_acoaaaeo9-wbjz5cwcx1ex9zkdaug8_hnxonyeu@placeholder.nebula": {
+    "content_angle": "teach",
+    "content_post_url": "https://www.linkedin.com/feed/update/urn:li:share:7479391233749131264",
+    "content_posts": [
+      {
+        "angle": "teach",
+        "first_seen": "2026-07-05T13:57:49.418834Z",
+        "url": "https://www.linkedin.com/feed/update/urn:li:share:7479391233749131264"
+      }
+    ],
+    "current_stage": "lead_free_kit",
+    "email": "linkedin_acoaaaeo9-wbjz5cwcx1ex9zkdaug8_hnxonyeu@placeholder.nebula",
+    "first_seen": "2026-07-05T13:57:49.418834Z",
+    "last_seen": "2026-07-05T13:57:49.418834Z",
+    "name": "Will Stewart, MBA",
+    "notes": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "linkedin_post_like"
+    ],
+    "stages": [
+      "lead_free_kit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "updated_at": "2026-07-06T20:21:15.501717Z",
+    "url": ""
+  },
+  "linkedin_acoaactonqybjfveg2hy1p3xd_qi_abt5-w8qo4@placeholder.nebula": {
+    "content_angle": "teach",
+    "content_post_url": "https://www.linkedin.com/feed/update/urn:li:share:7479391233749131264",
+    "content_posts": [
+      {
+        "angle": "teach",
+        "first_seen": "2026-07-05T13:57:49.407257Z",
+        "url": "https://www.linkedin.com/feed/update/urn:li:share:7479391233749131264"
+      }
+    ],
+    "current_stage": "lead_free_kit",
+    "email": "linkedin_acoaactonqybjfveg2hy1p3xd_qi_abt5-w8qo4@placeholder.nebula",
+    "first_seen": "2026-07-05T13:57:49.407257Z",
+    "last_seen": "2026-07-05T13:57:49.407257Z",
+    "name": "Oussama Maachi",
+    "notes": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "linkedin_post_like"
+    ],
+    "stages": [
+      "lead_free_kit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "updated_at": "2026-07-06T20:21:15.501730Z",
+    "url": ""
+  },
+  "linkedin_oussama-maachi@placeholder.nebula": {
+    "content_posts": [
+      {
+        "angle": "teach",
+        "first_seen": "2026-07-05T13:57:37.763546Z",
+        "url": "https://www.linkedin.com/feed/update/urn:li:share:7479391233749131264"
+      }
+    ],
+    "current_stage": "lead_free_kit",
+    "email": "linkedin_oussama-maachi@placeholder.nebula",
+    "first_seen": "2026-07-05T13:57:37.763546Z",
+    "last_seen": "2026-07-05T13:57:37.763546Z",
+    "name": "Oussama Maachi",
+    "notes": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "linkedin_post_comment"
+    ],
+    "stages": [
+      "lead_free_kit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "matze.schedel@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "matze.schedel@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:06.373137Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.089690Z",
+    "last_seen": "2026-07-05T07:47:26.089690Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "meetsoto.app@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "meetsoto.app@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:06.717575Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.128643Z",
+    "last_seen": "2026-07-05T07:47:26.128643Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "miadorothy250@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "miadorothy250@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:07.072990Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.110868Z",
+    "last_seen": "2026-07-05T07:47:26.110868Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "muhammadabusufyangoraya@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "muhammadabusufyangoraya@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:07.409456Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.093046Z",
+    "last_seen": "2026-07-05T07:47:26.093046Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "nedco80@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "nedco80@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:07.780916Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.112921Z",
+    "last_seen": "2026-07-05T07:47:26.112921Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "p0-suppressed@example.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "p0-suppressed@example.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:07.871897Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.126231Z",
+    "last_seen": "2026-07-05T07:47:26.126231Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "quietpulse.social@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "quietpulse.social@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:07.964807Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.086699Z",
+    "last_seen": "2026-07-05T07:47:26.086699Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "quratulaincreatives@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "quratulaincreatives@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:08.330755Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.085123Z",
+    "last_seen": "2026-07-05T07:47:26.085123Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "rcschupp@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "rcschupp@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:08.699432Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.094816Z",
+    "last_seen": "2026-07-05T07:47:26.094816Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "releaselogofficial@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "releaselogofficial@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:09.027127Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.105289Z",
+    "last_seen": "2026-07-05T07:47:26.105289Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "rkotcher@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "rkotcher@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:09.346631Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.069530Z",
+    "last_seen": "2026-07-05T07:47:26.069530Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "sales@thehiveryiq.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "sales@thehiveryiq.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:09.696051Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.289435Z",
+    "last_seen": "2026-07-05T07:47:26.289435Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "scalewords.agency@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "scalewords.agency@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:09.784598Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.099925Z",
+    "last_seen": "2026-07-05T07:47:26.099925Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "shadowroot47@outlook.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "shadowroot47@outlook.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:10.114314Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.088176Z",
+    "last_seen": "2026-07-05T07:47:26.088176Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "shawnxu0208@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "shawnxu0208@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:10.495881Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.082428Z",
+    "last_seen": "2026-07-05T07:47:26.082428Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "stellytips@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "stellytips@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:10.805568Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.096417Z",
+    "last_seen": "2026-07-05T07:47:26.096417Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "support@adcopystyles.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "support@adcopystyles.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:11.143025Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.304814Z",
+    "last_seen": "2026-07-05T07:47:26.304814Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "support@click-thumb.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "support@click-thumb.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:11.468191Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.358526Z",
+    "last_seen": "2026-07-05T07:47:26.358526Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "support@fenly.me": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "support@fenly.me",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:11.808140Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.309370Z",
+    "last_seen": "2026-07-05T07:47:26.309370Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "support@invoicingapi.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "support@invoicingapi.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:11.900024Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.369096Z",
+    "last_seen": "2026-07-05T07:47:26.369096Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": "https://invoicingapi.com"
+  },
+  "support@melororium.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "support@melororium.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:12.229246Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.139162Z",
+    "last_seen": "2026-07-05T07:47:26.139162Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "support@mirowl.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "support@mirowl.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:12.757123Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.133778Z",
+    "last_seen": "2026-07-05T07:47:26.133778Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "support@privacykit.eu": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "support@privacykit.eu",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:13.098827Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.217539Z",
+    "last_seen": "2026-07-05T07:47:26.217539Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "support@referralful.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "support@referralful.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:13.385945Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.258332Z",
+    "last_seen": "2026-07-05T07:47:26.258332Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "support@voiceinvoice.net": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "support@voiceinvoice.net",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:13.824999Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.071922Z",
+    "last_seen": "2026-07-05T07:47:26.071922Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "team@launchingai.co": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "team@launchingai.co",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:13.913954Z",
+        "sent_steps": []
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.117338Z",
+    "last_seen": "2026-07-05T07:47:26.117338Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "test@rb2b.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "test@rb2b.com",
+    "first_seen": "2026-07-05T10:03:20.043625Z",
+    "last_seen": "2026-07-05T10:03:20.043625Z",
+    "name": "Test User",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "rb2b_visitor"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": "https://test.com"
+  },
+  "thimas@sby.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "thimas@sby.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:14.010324Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.313793Z",
+    "last_seen": "2026-07-05T07:47:26.313793Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "tianyajinhui@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "tianyajinhui@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:14.363008Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.108964Z",
+    "last_seen": "2026-07-05T07:47:26.108964Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "voder.ai.agent@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "voder.ai.agent@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:14.717115Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.107102Z",
+    "last_seen": "2026-07-05T07:47:26.107102Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "vsl.and@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "vsl.and@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:15.057040Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.091348Z",
+    "last_seen": "2026-07-05T07:47:26.091348Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  },
+  "webhook@testwebhook.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "webhook@testwebhook.com",
+    "first_seen": "2026-07-05T10:08:59.233355Z",
+    "last_seen": "2026-07-05T10:08:59.233355Z",
+    "name": "Webhook Test",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "page_visits": [
+      {
+        "page": "/pricing",
+        "timestamp": "2026-07-05T10:00:00"
+      }
+    ],
+    "product_stage": "",
+    "sources": [
+      "rb2b_visitor"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": "https://testwebhook.com"
+  },
+  "zyvara.group@gmail.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "zyvara.group@gmail.com",
+    "email_sequences": {
+      "post_audit": {
+        "completed": false,
+        "enrolled_at": "2026-07-05T07:49:15.455425Z",
+        "sent_steps": [
+          "audit_delivery"
+        ]
+      }
+    },
+    "first_seen": "2026-07-05T07:47:26.081097Z",
+    "last_seen": "2026-07-05T07:47:26.081097Z",
+    "name": "",
+    "notes": "",
+    "offer": "audit",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "contacted_migration"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "url": ""
+  }
+}

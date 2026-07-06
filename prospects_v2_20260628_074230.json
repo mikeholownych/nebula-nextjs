@@ -1,0 +1,29 @@
+[
+  {
+    "source": "ih",
+    "author": "adam albo",
+    "ih_handle": "SuchABag",
+    "product": "Hardbook",
+    "product_url": "https://hard-book.com",
+    "contact_guess": "adam@hard-book.com",
+    "notes": "Asked for landing page roast June 23 2026"
+  },
+  {
+    "source": "ih",
+    "author": "ks_jpr",
+    "ih_handle": "ks_jpr",
+    "product": "SkillSips",
+    "product_url": "https://skillsips.com",
+    "contact_guess": "contact@skillsips.com",
+    "notes": "First landing page, asked for feedback June 7 2026"
+  },
+  {
+    "source": "ih",
+    "author": "ifhitori",
+    "ih_handle": "ifhitori",
+    "product": "QLP URL Screenshot Tool",
+    "product_url": "https://app.qlp.jp/open_urls/en/index.html",
+    "contact_guess": "hello@app.qlp.jp",
+    "notes": "Zero traction on Show IH, asked for positioning help"
+  }
+]

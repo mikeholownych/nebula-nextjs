@@ -1,0 +1,53 @@
+{
+  "ceo": {
+    "risks": [
+      "66 trigger sends with 0 warm replies",
+      "real revenue remains $0",
+      "trigger scoring not producing warm replies"
+    ],
+    "score": 55,
+    "signals": {
+      "bottleneck": "audit_to_payment_conversion"
+    }
+  },
+  "growth": {
+    "risks": [
+      "66 trigger sends with 0 warm replies"
+    ],
+    "score": 40,
+    "signals": {
+      "trigger_based_sends": 66,
+      "trigger_reply_rate": 0.0,
+      "trigger_warm_replies": 0
+    }
+  },
+  "market": {
+    "risks": [
+      "trigger scoring not producing warm replies"
+    ],
+    "score": 45,
+    "signals": {
+      "current_bottleneck": "audit_to_payment_conversion"
+    }
+  },
+  "ops-finance": {
+    "risks": [
+      "real revenue remains $0"
+    ],
+    "score": 60,
+    "signals": {
+      "real_payments": 0,
+      "real_revenue": 0,
+      "test_revenue_excluded": true
+    }
+  },
+  "support": {
+    "risks": [],
+    "score": 75,
+    "signals": {
+      "hot_lead_pitches_sent": 7,
+      "hot_leads_pending": 8,
+      "pitch_overdue": 0
+    }
+  }
+}

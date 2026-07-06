@@ -1,0 +1,31 @@
+services:
+  db:
+    image: mysql:8.0
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: nebula_blog_root_2026
+      MYSQL_DATABASE: nebula_blog
+      MYSQL_USER: nebula_user
+      MYSQL_PASSWORD: nebula_pass_2026
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    ports:
+      - "8766:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: nebula_user
+      WORDPRESS_DB_PASSWORD: nebula_pass_2026
+      WORDPRESS_DB_NAME: nebula_blog
+      WORDPRESS_TABLE_PREFIX: wp_
+    volumes:
+      - wp_data:/var/www/html
+
+volumes:
+  db_data:
+  wp_data:

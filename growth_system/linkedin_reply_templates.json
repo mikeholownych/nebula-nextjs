@@ -1,0 +1,66 @@
+{
+  "comment_templates": {
+    "thanks_for_comment": {
+      "trigger": "Any positive or neutral comment",
+      "template": "Appreciate the engagement {{name}}. The tool's free if you want to run it on your own page — curious if you find any of these leaks on yours.",
+      "tone": "conversational",
+      "cta": "implicit — curiosity-driven visit"
+    },
+    "question_about_audit": {
+      "trigger": "How does the audit work / what does it check / is it accurate",
+      "template": "Good question. It checks 5 dimensions — headline clarity, CTA actionability, trust proof placement, page speed, and mobile responsiveness. Each gets a score + specific fix recommendation. Takes 30 seconds: paste URL → get scores → done.",
+      "tone": "informative",
+      "cta": "direct — here's how it works"
+    },
+    "question_about_scope": {
+      "trigger": "Does it work for [my type of page / industry]",
+      "template": "The audit checks universal conversion principles — not design opinions. Same rubric works for SaaS landing pages, service pages, lead gen forms. If your page asks someone to take action, the same 5 leaks apply. Run it and see: {{audit_url}}",
+      "tone": "confident",
+      "cta": "direct — try it"
+    },
+    "skeptical": {
+      "trigger": "How is this different from [tool / GPT / agency]",
+      "template": "Fair question. The audit is a fixed rubric, not AI guesswork. It checks specific signals in the page HTML and content. The free Fix Kit gives you templates to apply the fixes yourself. The $97 pack implements them. No churn-and-burn model.",
+      "tone": "direct",
+      "cta": "bridges to tool"
+    },
+    "objection_free": {
+      "trigger": "Nothing is free / what's the catch",
+      "template": "No catch. The audit itself is free with no email gate — see results immediately. If you want the Fix Kit with templates + checklist, that requires an email. Same model as every other SaaS top-of-funnel.",
+      "tone": "transparent",
+      "cta": "reassurance"
+    },
+    "objection_paid_followup": {
+      "trigger": "How much does the full fix cost",
+      "template": "$97 for the Conversion Fix Pack — implemented hero, CTA, trust, FAQ sections based on your audit. One checkout, delivered in 24h. $997 for the Growth Launch which includes the fix + 200 triggered prospects + outreach + first customer guarantee. No sales call on either.",
+      "tone": "pricing transparent",
+      "cta": "pricing anchor"
+    },
+    "question_about_results": {
+      "trigger": "What results have you seen / case studies",
+      "template": "Most pages running paid traffic to a <2% converting page see 2-3x improvement after fixing headline + CTA — the two most common leaks. The audit shows you exactly where you sit. I share breakdowns publicly on this feed — check my previous posts for examples.",
+      "tone": "evidence-backed",
+      "cta": "social proof"
+    },
+    "sharing_pain": {
+      "trigger": "I have this exact problem / spending on ads with no conversions",
+      "template": "That's exactly who this is for. Run the audit — it's 30 seconds and tells you exactly which leaks are costing you. If you want me to look at the results with you, DM me after. No pitch, just practical next steps.",
+      "tone": "empathetic + action",
+      "cta": "audit + DM open"
+    },
+    "scenario_known_expert": {
+      "trigger": "Someone who clearly knows what they're talking about in the space",
+      "template": "Appreciate that. The tool's built on the same rubric I use for paid audits — just automated the first pass so founders can self-diagnose before spending money.",
+      "tone": "humble",
+      "cta": "reinforces credibility"
+    }
+  },
+  "engagement_rules": {
+    "respond_within": "24 hours",
+    "never_argue": "If someone disagrees, thank them for the perspective and move on",
+    "never_link_directly_in_linkedin": "LinkedIn flags external links in comments. Say 'link in my profile' or 'free tool, Google Nebula Components'",
+    "dm_high_value": "High-value engagers (score >= 7 + comment) → DM them directly after replying publicly",
+    "dm_template": "Hey {{name}}, saw your comment on my post about landing page leaks. Happy to run your page through the audit personally if you want — just send the URL. No pitch, no follow-up pressure.",
+    "tag_team": "If someone asks a question you can't answer well, pause → Mike should answer that one"
+  }
+}

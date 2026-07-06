@@ -1,0 +1,10 @@
+Subject: Your $97 Automated Implementation is Ready
+
+Hi {name},
+
+Thank you for purchasing our $97 Automated Implementation. We’ve implemented your audit findings automatically.
+
+Here’s your implementation report: {implementation_report_link}
+
+Best,
+Nebula Components

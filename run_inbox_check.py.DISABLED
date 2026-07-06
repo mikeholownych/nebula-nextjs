@@ -1,0 +1,165 @@
+#!/usr/bin/env python3
+"""Nebula Components inbox checker - reads unseen messages and replies with purchase info."""
+import ssl, imaplib, email, smtplib, os, time, json
+from email.header import decode_header
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+IMAP_HOST = "imap.agentmail.to"
+IMAP_PORT = 993
+SMTP_HOST = "smtp.agentmail.to"
+SMTP_PORT = 465
+INBOX_ADDR = "nebulashop@agentmail.to"
+LOG_FILE = "/home/mike/nebula/check_inbox.log"
+
+# Load API key
+KEY_FILE = os.path.expanduser("~/.hermes/secrets/agentmail.key")
+with open(KEY_FILE) as f:
+    API_KEY = f.read().strip()
+
+def decode_str(s):
+    if s is None:
+        return ""
+    parts = decode_header(s)
+    result = []
+    for part, enc in parts:
+        if isinstance(part, bytes):
+            result.append(part.decode(enc or "utf-8", errors="ignore"))
+        else:
+            result.append(str(part))
+    return " ".join(result)
+
+def get_body(msg):
+    if msg.is_multipart():
+        for part in msg.walk():
+            ct = part.get_content_type()
+            cd = str(part.get("Content-Disposition", ""))
+            if ct == "text/plain" and "attachment" not in cd:
+                payload = part.get_payload(decode=True)
+                if payload:
+                    return payload.decode("utf-8", errors="ignore")
+    else:
+        payload = msg.get_payload(decode=True)
+        if payload:
+            return payload.decode("utf-8", errors="ignore")
+    return ""
+
+def is_bounce(from_addr, subject, body):
+    bounce_indicators = [
+        "mailer-daemon", "postmaster", "noreply", "no-reply",
+        "delivery status notification", "delivery failure",
+        "undeliverable", "mail delivery failed", "returned mail",
+        "auto-reply", "out of office", "automatic reply",
+        "bounce", "ndresource@", "notification@"
+    ]
+    from_lower = (from_addr or "").lower()
+    subj_lower = (subject or "").lower()
+    body_lower = (body or "").lower()[:500]
+    for ind in bounce_indicators:
+        if ind in from_lower or ind in subj_lower:
+            return True
+    if "550" in body_lower or "554" in body_lower or "user unknown" in body_lower:
+        return True
+    return False
+
+REPLY_TEMPLATE = """Hi there,
+
+Thanks for reaching out about Nebula Components!
+
+Nebula Components is a pack of 7 dark-themed, production-ready HTML/CSS landing page components designed for SaaS products. Everything is included in a one-time purchase — no subscriptions, no recurring fees.
+
+What's included:
+- 7 dark-themed landing page components (hero, pricing, features, testimonials, CTA, navbar, footer)
+- Clean, modern SaaS-focused design
+- Easy to integrate into any project
+- Commercial license included
+
+Price: $29 one-time
+
+Purchase here: https://nebulacomponents.shop/checkout.html
+
+You can also browse the full sales page at: https://nebulacomponents.shop
+
+If you have any questions before purchasing, feel free to reply — happy to help!
+
+Best,
+Mike
+Nebula Components
+"""
+
+def send_reply(to_addr, orig_subject, orig_msg_id):
+    msg = MIMEMultipart("alternative")
+    subj = orig_subject or ""
+    if subj and not subj.lower().startswith("re:"):
+        subj = f"Re: {subj}"
+    elif not subj:
+        subj = "Re: Nebula Components"
+    msg["Subject"] = subj
+    msg["From"] = INBOX_ADDR
+    msg["To"] = to_addr
+    if orig_msg_id:
+        msg["In-Reply-To"] = orig_msg_id
+        msg["References"] = orig_msg_id
+    msg.attach(MIMEText(REPLY_TEMPLATE, "plain"))
+    with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT) as server:
+        server.login(INBOX_ADDR, API_KEY)
+        server.sendmail(INBOX_ADDR, [to_addr], msg.as_string())
+
+def log(message):
+    timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+    line = f"{timestamp} - {message}"
+    print(line)
+    with open(LOG_FILE, "a") as f:
+        f.write(line + "\n")
+
+results = {"checked": 0, "bounces": 0, "replied": 0, "errors": [], "messages": []}
+
+try:
+    context = ssl.create_default_context()
+    mail = imaplib.IMAP4_SSL(IMAP_HOST, IMAP_PORT, ssl_context=context)
+    mail.login(INBOX_ADDR, API_KEY)
+    mail.select("INBOX")
+
+    status, messages = mail.search(None, "UNSEEN")
+    email_ids = messages[0].split()
+
+    log(f"INBOX CHECK: Found {len(email_ids)} unseen messages")
+    results["checked"] = len(email_ids)
+
+    for eid in email_ids:
+        status, msg_data = mail.fetch(eid, "(RFC822)")
+        raw = msg_data[0][1]
+        msg = email.message_from_bytes(raw)
+
+        from_addr = msg.get("From", "")
+        subject = decode_str(msg.get("Subject", ""))
+        msg_id = msg.get("Message-ID", "")
+        date = msg.get("Date", "")
+        body = get_body(msg)
+
+        if is_bounce(from_addr, subject, body):
+            results["bounces"] += 1
+            log(f"  BOUNCE/AUTO-REPLY skipped: from={from_addr[:60]} subj={subject[:50]}")
+            continue
+
+        log(f"  CUSTOMER MESSAGE: from={from_addr} | subj={subject[:60]} | date={date[:30]}")
+        results["messages"].append({"from": from_addr, "subject": subject, "date": date})
+
+        try:
+            send_reply(from_addr, subject, msg_id)
+            log(f"  REPLIED to {from_addr} with purchase info ($29 checkout link)")
+            results["replied"] += 1
+            mail.store(eid, "+FLAGS", "\\Seen")
+        except Exception as e:
+            err = f"Failed to reply to {from_addr}: {e}"
+            log(f"  ERROR: {err}")
+            results["errors"].append(err)
+
+    mail.logout()
+
+except Exception as e:
+    results["errors"].append(str(e))
+    log(f"IMAP ERROR: {e}")
+
+print("\n=== SUMMARY ===")
+print(json.dumps(results, indent=2))

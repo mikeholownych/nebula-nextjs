@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+"""Create the $97 entry-point offer"""
+import json
+from datetime import datetime
+
+OFFER = {
+    "name": "Managed Outreach Audit",
+    "price": 97,
+    "currency": "USD",
+    "duration": "3 days",
+    "deliverables": [
+        "Prospect list review (quality + ICP fit)",
+        "Email template optimization (subject line + body)",
+        "10 test emails sent on your behalf",
+        "Reply analysis + conversion report",
+        "Recommendations for next 100 emails"
+    ],
+    "ideal_for": [
+        "Founders with 0-10 customers",
+        "SaaS builders testing cold outreach",
+        "Agencies wanting to test email channels",
+        "Anyone unsure if their list/message works"
+    ],
+    "what_you_need": [
+        "Prospect email list (10-50 people)",
+        "Current email template or subject line",
+        "Your core offer/pain point"
+    ],
+    "turnaround": "Results in 72 hours",
+    "guarantee": "30-day refund if no replies detected"
+}
+
+# Save offer spec
+with open("offer_97_spec.json", "w") as f:
+    json.dump(OFFER, f, indent=2)
+
+print("[OFFER] $97 Managed Outreach Audit created")
+print(json.dumps(OFFER, indent=2))

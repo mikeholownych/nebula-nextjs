@@ -1,0 +1,140 @@
+# ── Python ──────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+dist/
+build/
+*.whl
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── Virtual environment ─────────────────────────
+venv/
+.venv/
+env/
+.env/
+
+# ── Secrets & credentials ───────────────────────
+*secret*
+*key*.pem
+*key*.key
+*.p12
+*.pfx
+secrets/
+credentials/*
+local_settings.py
+firebase*.json
+service-account*.json
+
+# ── IDE / editor ────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ── OS artifacts ─────────────────────────────────
+.cargo/
+target/
+debug/
+result
+result-*
+**/*.rs.bk
+/.envrc
+/.direnv
+.metadata/
+out/
+.idea_modules/
+atlassian-ide-plugin.xml
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+# ── Operational logs (keep business ledgers) ────
+*.log
+!ledgers/*.log
+
+# ── Runtime state / data files ──────────────────
+trigger_leads.jsonl
+signal_queue.jsonl
+signal_seen.json
+followup_state.jsonl
+dm_queue.jsonl
+contacted.json
+outreach_evidence.jsonl
+payments.log
+ramp_pipeline_report.json
+hot_lead_watcher_state.json
+warmup_state.json
+inbox_monitor_state.json
+ih_post_state.json
+tunnel_*.log
+watchdog*.log
+monitor*.log
+inbox_check.log
+check_inbox.log
+auto_responder*.log
+auto_responses.log
+crontab_backup.log
+campaign_run_*.log
+wave*_execution.log
+sre_remediation.log
+break_even.log
+revenue.log
+sales.log
+outreach_log.txt
+
+# ── Generated HTML / artifacts ──────────────────
+accessible-nebula.html
+ad-burn-leaderboard.html
+audit.html
+checkout.html
+index.html
+launch_page_97.html
+what-is-landing-page-audit.html
+
+# ── Growth system data ──────────────────────────
+growth_system/__pycache__/
+
+# ── Lead data (not source) ──────────────────────
+audit_leads.jsonl
+reddit_enriched_prospects.jsonl
+reddit_scraped_ids.jsonl
+google_scraped_urls.jsonl
+pullpush_scraped_ids.jsonl
+local_business_prospects.jsonl
+reddit_signals.jsonl
+reddit_reply_drafts.jsonl
+reply_drafts.jsonl
+ad_burn_public_reply_queue.jsonl
+leaderboard_submissions.jsonl
+support_handoff_*.jsonl
+skill-intake-candidates.jsonl
+waterfall_icp_config.json
+
+# ── Build artifacts ──────────────────────────────
+*.tar.gz
+*.bak
+nebula-v1.0.0.tar.gz
+himalaya/
+himalaya_env/
+himalaya-venv/
+
+# ── Code intelligence ───────────────────────────
+.codegraph/
+
+# ── Node.js ──────────────────────────────────────
+node_modules/
+
+# ── Generated web assets ─────────────────────────
+sitemap.xml
+
+# ── Mystery artifacts ────────────────────────────
+3

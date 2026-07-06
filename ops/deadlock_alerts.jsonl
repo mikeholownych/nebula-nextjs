@@ -1,0 +1,457 @@
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T02:58:15Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T02:58:15Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T02:58:46Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T02:58:46Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T02:59:18Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T02:59:18Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T03:29:45Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T03:29:45Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T03:59:51Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T03:59:51Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "31 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T04:29:59Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T04:29:59Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T04:29:59Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "31 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T05:00:05Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T05:00:05Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T05:00:05Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "33 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T05:30:11Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T05:30:11Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T05:30:11Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "33 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T06:01:31Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T06:01:31Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T06:01:31Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "35 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T06:32:22Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T06:32:22Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T06:32:22Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "35 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T07:02:28Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T07:02:28Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T07:02:28Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "37 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T07:32:33Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T07:32:33Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T07:32:33Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "37 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T08:02:40Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T08:02:40Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T08:02:40Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "39 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T08:32:45Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T08:32:45Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T08:32:45Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "39 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T09:02:51Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T09:02:51Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T09:02:51Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "41 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T09:32:56Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T09:32:56Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T09:32:56Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "41 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T10:03:02Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T10:03:02Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["ask@timetechnologiesllc.com", "contact@funghiclear.com", "info@magnoliamedspaandwellness.com", "support@invoicingapi.com", "hello@adsby.co", "contact@calisim.com", "info@sarojhospital.com"], "message": "7 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-04T10:03:02Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T10:03:02Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "43 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T10:33:09Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T10:33:09Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T10:33:09Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "43 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T11:03:14Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T11:03:14Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T11:03:14Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "45 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T11:33:19Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T11:33:19Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T11:33:19Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "45 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T12:03:24Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T12:03:24Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T12:03:24Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "47 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T12:33:30Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T12:33:30Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T12:33:30Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "47 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T13:03:36Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T13:03:36Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T13:03:36Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "49 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T13:33:42Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T13:33:42Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T13:33:42Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "50 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T14:03:49Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T14:03:49Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T14:03:49Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "50 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T14:33:55Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T14:33:55Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T14:33:55Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "52 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T15:04:02Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T15:04:02Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T15:04:02Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "52 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T15:34:09Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T15:34:09Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T15:34:09Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "54 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T16:04:15Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T16:04:15Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T16:04:15Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "54 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T16:34:20Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T16:34:20Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T16:34:20Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "56 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T17:04:26Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T17:04:26Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T17:04:26Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "56 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T17:34:32Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T17:34:32Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T17:34:32Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "58 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T18:04:39Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T18:04:39Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T18:04:39Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "58 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T18:34:44Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T18:34:44Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T18:34:44Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "60 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T19:04:50Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T19:04:50Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T19:04:50Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "60 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T19:34:55Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T19:34:55Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T19:34:55Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "60 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T20:05:02Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T20:05:02Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T20:05:02Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "60 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T20:35:25Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T20:35:25Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T20:35:25Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "62 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T21:06:25Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T21:06:25Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T21:06:25Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "62 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T21:36:30Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T21:36:30Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T21:36:30Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "64 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T22:06:36Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T22:06:36Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T22:06:36Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "64 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T22:36:41Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T22:36:41Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T22:36:41Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T23:01:23Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "24 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T23:01:23Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T23:01:23Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T23:04:35Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T23:04:35Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T23:04:35Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T23:06:49Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T23:06:49Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T23:06:49Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-04T23:36:54Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-04T23:36:54Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-04T23:36:54Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T00:10:33Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T00:10:33Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T00:10:33Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T00:41:06Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T00:41:06Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T00:41:06Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T01:11:12Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T01:11:12Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T01:11:12Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T01:41:17Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T01:41:17Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T01:41:17Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T02:11:23Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T02:11:23Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T02:11:23Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T02:41:28Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T02:41:28Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T02:41:28Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T03:11:34Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T03:11:34Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T03:11:34Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T03:41:40Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T03:41:40Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T03:41:40Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T04:11:52Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T04:11:52Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T04:11:52Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T04:41:57Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T04:41:57Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T04:41:57Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T05:12:03Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T05:12:03Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T05:12:03Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T05:42:09Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T05:42:09Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T05:42:09Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T06:12:14Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T06:12:14Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T06:12:14Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T06:42:20Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T06:42:20Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T06:42:20Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T07:12:29Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T07:12:29Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T07:12:29Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T07:42:36Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T07:42:36Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T07:42:36Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T08:12:55Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "26 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T08:12:55Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T08:12:55Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T08:43:07Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T08:43:07Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T08:43:07Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T09:13:14Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T09:13:14Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["simon@spsroof.com", "office@salisroofing.com", "info@brookerlaw.com"], "message": "3 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T09:13:14Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T09:13:14Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T09:43:21Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T09:43:21Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "accounting@mana.cpa", "info@greensustainabilitysolutions.com", "shaadisouk@outlook.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T09:43:21Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T09:43:21Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T10:13:27Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T10:13:27Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "store@yourpapersource.com", "support@foundcall.org", "info@magnolia-club.org"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T10:13:27Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T10:13:27Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T10:43:34Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T10:43:34Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "admin@meadowsgaragedoors.com", "info@saputo.law", "info@brooksplumbingtexas.com", "ratner@ratnerpt.com", "whitehorseflowersbalwyn@gmail.com", "info@gepettosguild.com"], "message": "8 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T10:43:34Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T10:43:34Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T11:13:39Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T11:13:39Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "admin@meadowsgaragedoors.com", "info@saputo.law", "info@brooksplumbingtexas.com", "ratner@ratnerpt.com", "whitehorseflowersbalwyn@gmail.com", "info@gepettosguild.com"], "message": "8 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T11:13:39Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T11:13:39Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T11:43:44Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T11:43:44Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law"], "message": "3 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T11:43:44Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T11:43:44Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T12:13:50Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T12:13:50Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T12:13:50Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T12:13:50Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T12:44:25Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T12:44:25Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T12:44:25Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T12:44:25Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T13:14:41Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T13:14:41Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T13:14:41Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T13:14:41Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T13:44:47Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T13:44:47Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T13:44:47Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T13:44:47Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T14:15:08Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T14:15:08Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T14:15:08Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T14:15:08Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T14:45:15Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T14:45:15Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T14:45:15Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T14:45:15Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T15:15:20Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T15:15:20Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T15:15:20Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T15:15:20Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T15:45:26Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T15:45:26Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T15:45:26Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T15:45:26Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T16:15:33Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T16:15:33Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T16:15:33Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T16:15:33Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T16:45:38Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T16:45:38Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T16:45:38Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T16:45:38Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T17:15:44Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T17:15:44Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T17:15:44Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T17:15:44Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T17:45:50Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T17:45:50Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T17:45:50Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T17:45:50Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T18:15:57Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T18:15:57Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T18:15:57Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T18:15:57Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T18:46:02Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T18:46:02Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T18:46:02Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T18:46:02Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T19:16:08Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T19:16:08Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T19:16:08Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T19:16:08Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T19:46:43Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T19:46:43Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T19:46:43Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T19:46:43Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T20:16:50Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T20:16:50Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T20:16:50Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T20:16:50Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T20:46:55Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T20:46:55Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T20:46:55Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T20:46:55Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T21:17:07Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T21:17:07Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T21:17:07Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T21:17:07Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T21:47:40Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T21:47:40Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T21:47:40Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T21:47:40Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T22:17:46Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T22:17:46Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T22:17:46Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T22:17:46Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T22:47:51Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T22:47:51Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T22:47:51Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T22:47:51Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T23:17:57Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T23:17:57Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T23:17:57Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T23:17:57Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-05T23:48:03Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-05T23:48:03Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-05T23:48:03Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-05T23:48:03Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T00:18:09Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T00:18:09Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["info@brookerlaw.com", "info@magnolia-club.org", "info@saputo.law", "patriciasfnunes@gmail.com"], "message": "4 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T00:18:09Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T00:18:09Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T00:48:15Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T00:48:15Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T00:48:15Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T00:48:15Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T01:18:22Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T01:18:22Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T01:18:22Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T01:18:22Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T01:49:13Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T01:49:13Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T01:49:13Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T01:49:13Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T02:19:42Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T02:19:42Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T02:19:42Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T02:19:42Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T02:49:53Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T02:49:53Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T02:49:53Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T02:49:53Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T03:19:59Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T03:19:59Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T03:19:59Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T03:19:59Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T03:50:05Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T03:50:05Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T03:50:05Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T03:50:05Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T04:20:11Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T04:20:11Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T04:20:11Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T04:20:11Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T04:50:16Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T04:50:16Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T04:50:16Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T04:50:16Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T05:20:22Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T05:20:22Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T05:20:22Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T05:20:22Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T05:50:28Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T05:50:28Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T05:50:28Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T05:50:28Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T06:20:35Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T06:20:35Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T06:20:35Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T06:20:35Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T06:50:41Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T06:50:41Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T06:50:41Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T06:50:41Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T07:20:46Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T07:20:46Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T07:20:46Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T07:20:46Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T07:50:52Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T07:50:52Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T07:50:52Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T07:50:52Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T08:20:59Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T08:20:59Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T08:20:59Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T08:20:59Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T08:51:05Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T08:51:05Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T08:51:05Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T08:51:05Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T09:21:11Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T09:21:11Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T09:21:11Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T09:21:11Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T09:51:19Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T09:51:19Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T09:51:19Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T09:51:19Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T10:21:27Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "27 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T10:21:27Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T10:21:27Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T10:21:27Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T10:51:35Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "28 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T10:51:35Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T10:51:35Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T10:51:35Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T11:21:41Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "28 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T11:21:41Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["patriciasfnunes@gmail.com"], "message": "1 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-06T11:21:41Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T11:21:41Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T11:51:48Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "29 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T11:51:48Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T11:51:48Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T12:21:56Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "32 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T12:21:56Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T12:21:56Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T12:52:11Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "32 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T12:52:11Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T12:52:11Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T13:22:19Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "33 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T13:22:19Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T13:22:19Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T13:52:25Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "33 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T13:52:25Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T13:52:25Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T14:22:32Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "33 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T14:22:32Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T14:22:32Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T14:52:39Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "33 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T14:52:39Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T14:52:39Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T15:22:45Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "33 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T15:22:45Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T15:22:45Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T15:52:51Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "33 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T15:52:51Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T15:52:51Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T16:22:58Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "33 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T16:22:58Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T16:22:58Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T16:53:06Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "33 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T16:53:06Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T16:53:06Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T17:23:13Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "33 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T17:23:13Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T17:23:13Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T17:53:19Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "33 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T17:53:19Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T17:53:19Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T18:23:25Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "33 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T18:23:25Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T18:23:25Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T18:53:32Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "33 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T18:53:32Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T18:53:32Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T19:23:38Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "33 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T19:23:38Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T19:23:38Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T19:53:46Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "33 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T19:53:46Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T19:53:46Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T20:23:53Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "34 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T20:23:53Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T20:23:53Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-06T20:54:00Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "34 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-06T20:54:00Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-06T20:54:00Z"}

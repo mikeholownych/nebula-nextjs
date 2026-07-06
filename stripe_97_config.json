@@ -1,0 +1,10 @@
+{
+  "product": "Managed Outreach Audit",
+  "amount_cents": 9700,
+  "amount_dollars": 97,
+  "currency": "USD",
+  "billing_behavior": "payment",
+  "redirect_success": "https://launchcrate.io/audit-success.html",
+  "redirect_cancel": "https://nebulacomponents.shop",
+  "status": "PENDING - create in Stripe Dashboard"
+}

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Marketing Ops — Nebula Components</title>
+  <meta name="description" content="Autonomous lead gen, outreach, audit delivery, and monthly CRO — running 24/7 for your business. No agency retainer. No headcount. $497/mo.">
+  <link rel="canonical" href="https://nebulacomponents.shop/marketing-ops.html" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a; --surface: #111; --border: #1f1f1f;
+      --text: #e8e8e8; --muted: #777; --accent: #6366f1;
+      --accent2: #10b981; --accent-dim: rgba(99,102,241,0.1);
+    }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 16px; line-height: 1.6; }
+
+    .header { border-bottom: 1px solid var(--border); padding: 18px 24px; display: flex; align-items: center; gap: 12px; }
+    .logo-mark { width: 30px; height: 30px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 13px; color: #fff; flex-shrink: 0; }
+    .logo-name { font-weight: 700; font-size: 14px; }
+
+    .page { max-width: 680px; margin: 0 auto; padding: 0 20px 80px; }
+
+    /* HERO */
+    .hero { padding: 60px 0 44px; border-bottom: 1px solid var(--border); }
+    .badge { display: inline-block; background: var(--accent-dim); border: 1px solid rgba(99,102,241,0.25); color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; margin-bottom: 20px; }
+    .hero h1 { font-size: clamp(26px, 5vw, 38px); font-weight: 900; line-height: 1.15; letter-spacing: -0.8px; margin-bottom: 16px; }
+    .hero h1 span { color: var(--accent); }
+    .hero p { font-size: 16px; color: var(--muted); max-width: 560px; line-height: 1.7; }
+    .hero-cta-row { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .btn-primary { background: var(--accent); color: #fff; font-weight: 800; font-size: 15px; text-decoration: none; padding: 14px 24px; border-radius: 8px; letter-spacing: -0.2px; transition: opacity 0.15s; }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-ghost { color: var(--muted); font-size: 14px; text-decoration: none; }
+    .btn-ghost:hover { color: var(--text); }
+
+    /* WHAT IT IS */
+    .section { padding: 44px 0; border-bottom: 1px solid var(--border); }
+    .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--muted); font-weight: 600; margin-bottom: 20px; }
+    .section h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 14px; }
+    .section p { color: #aaa; font-size: 15px; line-height: 1.7; }
+
+    /* AGENT LOOP */
+    .loop-grid { display: grid; gap: 10px; margin-top: 20px; }
+    .loop-step { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; display: flex; gap: 16px; align-items: flex-start; }
+    .step-num { width: 28px; height: 28px; background: var(--accent-dim); border: 1px solid rgba(99,102,241,0.3); color: var(--accent); font-weight: 800; font-size: 13px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-body strong { font-size: 14px; display: block; margin-bottom: 3px; }
+    .step-body p { font-size: 13px; color: var(--muted); margin: 0; }
+
+    /* WHAT'S INCLUDED */
+    .includes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+    @media (max-width: 500px) { .includes-grid { grid-template-columns: 1fr; } }
+    .inc-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+    .inc-item .icon { font-size: 20px; margin-bottom: 8px; }
+    .inc-item strong { font-size: 13px; display: block; margin-bottom: 4px; }
+    .inc-item p { font-size: 12px; color: var(--muted); margin: 0; }
+
+    /* PRICING */
+    .pricing-card { background: var(--surface); border: 1px solid rgba(99,102,241,0.3); border-radius: 12px; padding: 32px; margin-top: 20px; }
+    .price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+    .price-big { font-size: 48px; font-weight: 900; letter-spacing: -2px; color: var(--accent); line-height: 1; }
+    .price-period { font-size: 15px; color: var(--muted); }
+    .price-note { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+    .price-list { list-style: none; margin-bottom: 28px; }
+    .price-list li { font-size: 14px; padding: 8px 0; border-bottom: 1px solid #1a1a1a; display: flex; gap: 10px; }
+    .price-list li:last-child { border: none; }
+    .chk { color: var(--accent2); font-weight: 700; flex-shrink: 0; }
+    .cta-full { display: block; width: 100%; background: var(--accent); color: #fff; font-weight: 800; font-size: 16px; text-align: center; text-decoration: none; padding: 16px; border-radius: 8px; letter-spacing: -0.2px; transition: opacity 0.15s; }
+    .cta-full:hover { opacity: 0.88; }
+    .cta-sub { text-align: center; font-size: 12px; color: var(--muted); margin-top: 10px; }
+
+    /* WHO IT'S FOR */
+    .icp-grid { display: grid; gap: 10px; margin-top: 18px; }
+    .icp-item { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+    .icp-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .icp-item strong { font-size: 14px; display: block; margin-bottom: 2px; }
+    .icp-item p { font-size: 13px; color: var(--muted); margin: 0; }
+
+    /* VS TABLE */
+    .vs-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 13px; }
+    .vs-table th { text-align: left; color: var(--muted); font-weight: 600; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    .vs-table td { padding: 11px 12px; border-bottom: 1px solid #181818; }
+    .vs-table tr:last-child td { border: none; }
+    .vs-table td:first-child { color: #ccc; }
+    .vs-table td.bad { color: #ef4444; }
+    .vs-table td.good { color: var(--accent2); font-weight: 600; }
+
+    /* FAQ */
+    .faq-list { margin-top: 20px; display: grid; gap: 8px; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; }
+    .faq-item strong { font-size: 14px; display: block; margin-bottom: 6px; }
+    .faq-item p { font-size: 13px; color: var(--muted); margin: 0; }
+
+    /* BOTTOM CTA */
+    .bottom-cta { padding: 52px 0 0; text-align: center; }
+    .bottom-cta h2 { font-size: 26px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 10px; }
+    .bottom-cta p { font-size: 15px; color: var(--muted); margin-bottom: 24px; }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo-mark">N</div>
+  <div class="logo-name">Nebula Components</div>
+</header>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="badge">AI Marketing Ops</div>
+    <h1>Your marketing engine,<br><span>running 24/7 without you.</span></h1>
+    <p>We deploy the same autonomous lead-gen + conversion stack we built for ourselves — running continuously for your business. No agency markup. No headcount. No Monday morning stand-ups.</p>
+    <div class="hero-cta-row">
+      <a href="mailto:ops@launchcrate.io?subject=AI Marketing Ops inquiry" class="btn-primary">Talk to us →</a>
+      <a href="#pricing" class="btn-ghost">See pricing ↓</a>
+    </div>
+  </div>
+
+  <!-- WHAT IT IS -->
+  <div class="section">
+    <div class="section-label">What it is</div>
+    <h2>A full outbound + conversion loop — autonomous</h2>
+    <p>We run a multi-agent pipeline that continuously finds leads with active buying signals, reaches out with a useful artifact (a real audit of their page), and pushes qualified respondents toward your offer — all without human handoff.</p>
+  </div>
+
+  <!-- AGENT LOOP -->
+  <div class="section">
+    <div class="section-label">How it works</div>
+    <h2>The agent loop</h2>
+    <div class="loop-grid">
+      <div class="loop-step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Trigger detection</strong>
+          <p>Agents scan Reddit, Upwork, LinkedIn, and Product Hunt 24/7 for founders posting buying signals — "my page isn't converting," "running ads with no ROI," "bounce rate too high."</p>
+        </div>
+      </div>
+      <div class="loop-step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>ICP qualification</strong>
+          <p>Every lead scored against your ICP — budget signals, company size, platform, vertical. Off-ICP leads discarded automatically.</p>
+        </div>
+      </div>
+      <div class="loop-step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Value-first outreach</strong>
+          <p>Lead receives a personalized artifact — a real audit of their landing page with specific findings — before any pitch. Not a cold email. A free consult frame.</p>
+        </div>
+      </div>
+      <div class="loop-step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Auto follow-up + upsell</strong>
+          <p>Responders are tracked. Non-buyers get a retainer pitch at 24h. Buyers get delivery confirmation + onboarding automatically.</p>
+        </div>
+      </div>
+      <div class="loop-step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <strong>Daily ops report</strong>
+          <p>Every morning you get a digest: leads contacted, replies received, proposals queued, revenue events logged. Nothing to manage.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT'S INCLUDED -->
+  <div class="section">
+    <div class="section-label">What's included</div>
+    <h2>Full stack, configured for your business</h2>
+    <div class="includes-grid">
+      <div class="inc-item">
+        <div class="icon">🔍</div>
+        <strong>Trigger-aware lead scraper</strong>
+        <p>Reddit, Upwork, LinkedIn — qualified by buying signal, not demographics</p>
+      </div>
+      <div class="inc-item">
+        <div class="icon">📊</div>
+        <strong>Automated audit engine</strong>
+        <p>5-dimension page audit generated per lead, delivered as a personalized email</p>
+      </div>
+      <div class="inc-item">
+        <div class="icon">✉️</div>
+        <strong>Outreach + follow-up sequences</strong>
+        <p>Initial contact, retainer upsell, and digest — all autonomous via AgentMail</p>
+      </div>
+      <div class="inc-item">
+        <div class="icon">💳</div>
+        <strong>Self-serve checkout pipeline</strong>
+        <p>Stripe-linked delivery — buyer pays, receives deliverables automatically</p>
+      </div>
+      <div class="inc-item">
+        <div class="icon">📈</div>
+        <strong>Lead state tracking</strong>
+        <p>SQLite ledger — every lead tracked from discovery to paid, with full audit trail</p>
+      </div>
+      <div class="inc-item">
+        <div class="icon">🛡️</div>
+        <strong>SRE + health monitoring</strong>
+        <p>Cron health checks, dead letter queue, bounce handling, Telegram alerts</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHO IT'S FOR -->
+  <div class="section">
+    <div class="section-label">Who it's for</div>
+    <h2>SMBs replacing manual marketing ops</h2>
+    <div class="icp-grid">
+      <div class="icp-item">
+        <div class="icp-icon">🏢</div>
+        <div>
+          <strong>Agencies with a productized service</strong>
+          <p>You have an offer. You just need a machine that finds buyers and books the work.</p>
+        </div>
+      </div>
+      <div class="icp-item">
+        <div class="icp-icon">🚀</div>
+        <div>
+          <strong>SaaS companies running performance marketing</strong>
+          <p>Outbound + landing page optimization running as a single autonomous loop.</p>
+        </div>
+      </div>
+      <div class="icp-item">
+        <div class="icp-icon">🛒</div>
+        <div>
+          <strong>E-commerce brands spending on ads</strong>
+          <p>Continuous CRO audit loop — catch conversion drops before they compound.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VS TABLE -->
+  <div class="section">
+    <div class="section-label">Why not an agency</div>
+    <h2>Autonomous ops vs. traditional agency</h2>
+    <table class="vs-table">
+      <thead>
+        <tr><th>Factor</th><th>Agency retainer</th><th>Nebula AI Ops</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Monthly cost</td><td class="bad">$3,000–$10,000</td><td class="good">$497/mo</td></tr>
+        <tr><td>Lead gen</td><td class="bad">Manual SDR team</td><td class="good">Autonomous, 24/7</td></tr>
+        <tr><td>Outreach personalization</td><td class="bad">Templates + bulk sends</td><td class="good">Per-lead artifact (real audit)</td></tr>
+        <tr><td>Reporting</td><td class="bad">Monthly PDF deck</td><td class="good">Daily digest, real data</td></tr>
+        <tr><td>Human required</td><td class="bad">Account manager + weekly calls</td><td class="good">None (escalation only)</td></tr>
+        <tr><td>Setup time</td><td class="bad">4–8 weeks onboarding</td><td class="good">1 week</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PRICING -->
+  <div class="section" id="pricing">
+    <div class="section-label">Pricing</div>
+    <h2>One flat monthly rate</h2>
+    <div class="pricing-card">
+      <div class="price-row">
+        <div class="price-big">$497</div>
+        <div class="price-period">/month</div>
+      </div>
+      <div class="price-note">No contract. Cancel any time. Setup fee: $0.</div>
+      <ul class="price-list">
+        <li><span class="chk">✓</span> Full trigger-aware lead scraper (Reddit + Upwork + LinkedIn)</li>
+        <li><span class="chk">✓</span> Automated audit generation + outreach emails</li>
+        <li><span class="chk">✓</span> Retainer upsell + follow-up sequences</li>
+        <li><span class="chk">✓</span> Self-serve Stripe checkout + automated delivery</li>
+        <li><span class="chk">✓</span> Lead state DB + daily ops digest</li>
+        <li><span class="chk">✓</span> SRE health monitoring + Telegram alerts</li>
+        <li><span class="chk">✓</span> 1-week setup + handover documentation</li>
+        <li><span class="chk">✓</span> Monthly strategy call (optional, 30 min)</li>
+      </ul>
+      <a href="mailto:ops@launchcrate.io?subject=AI Marketing Ops — let%27s talk" class="cta-full">Get started — email us →</a>
+      <p class="cta-sub">We onboard 2–3 clients/month. Reply and we'll confirm availability.</p>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section">
+    <div class="section-label">FAQ</div>
+    <h2>Common questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <strong>Is this just a SaaS tool I configure myself?</strong>
+        <p>No. We deploy, configure, and operate the full pipeline for your business. You receive daily reports. We handle everything else.</p>
+      </div>
+      <div class="faq-item">
+        <strong>What do I need to provide?</strong>
+        <p>Your offer URL, your ICP definition, and your Stripe account. We handle scraping, outreach infrastructure, audit generation, and delivery.</p>
+      </div>
+      <div class="faq-item">
+        <strong>How many leads does it generate per month?</strong>
+        <p>Depends on your ICP density. Typical range: 30–150 qualified leads/month contacted. We track reply rate and iterate on messaging.</p>
+      </div>
+      <div class="faq-item">
+        <strong>What if I already have a CRM?</strong>
+        <p>We export lead data as JSON/CSV daily. HubSpot/Airtable webhook integration available on request.</p>
+      </div>
+      <div class="faq-item">
+        <strong>Do I need to approve every outreach email?</strong>
+        <p>No. The pipeline is autonomous. You can review the proposals queue before submission if preferred — that's a config toggle.</p>
+      </div>
+      <div class="faq-item">
+        <strong>What's the cancellation policy?</strong>
+        <p>Cancel any time. No long-term contract. Your data is exported and handed off on cancel.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <div class="bottom-cta">
+    <h2>Ready to run on autopilot?</h2>
+    <p>Email us and we'll confirm availability. Onboarding takes 1 week.</p>
+    <a href="mailto:ops@launchcrate.io?subject=AI Marketing Ops — let%27s talk" class="btn-primary">ops@launchcrate.io →</a>
+  </div>
+
+</div>
+
+</body>
+</html>

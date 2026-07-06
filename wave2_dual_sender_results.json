@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-06-25T09:32:16.499543",
+  "wave": "Wave 2 - Dual Sender A/B Test",
+  "sender_a": {
+    "email": "templates@agentmail.to",
+    "subject": "How to launch a landing page in 2 hours",
+    "total": 2,
+    "sent": 0,
+    "failed": 2
+  },
+  "sender_b": {
+    "email": "audits@agentmail.to",
+    "subject": "Want more cold email replies?",
+    "total": 2,
+    "sent": 0,
+    "failed": 2
+  },
+  "combined": {
+    "total_sent": 0,
+    "total_failed": 4
+  }
+}

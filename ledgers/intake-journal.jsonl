@@ -1,0 +1,3 @@
+{"timestamp": "2026-07-05T03:31:54.787008Z", "type": "growth_launch_intake", "name": "Test User", "email": "test@example.com", "url": "https://test.com", "offer": "Test product", "target_customer": "Freelancers", "product_stage": "live", "extra_context": "Testing the intake endpoint", "status": "received"}
+{"timestamp": "2026-07-05T03:37:31.901230Z", "type": "free_kit_download", "email": "test@example.com", "source": "verify_test", "email_sent": true, "status": "captured"}
+{"timestamp": "2026-07-05T03:39:54.380786Z", "type": "free_kit_download", "email": "verify@test.com", "source": "final_verify", "email_sent": true, "status": "captured"}

@@ -1,0 +1,12 @@
+{
+  "time": "2026-07-03 11:57:41",
+  "type": "sale",
+  "product": "landing-page-audit",
+  "amount_cents": 9700,
+  "amount_dollars": "$97.00",
+  "email": "fix-test@example.com",
+  "payment_id": "cs_test_fix_001",
+  "customer_id": "",
+  "subscription_id": "",
+  "mode": "payment"
+}

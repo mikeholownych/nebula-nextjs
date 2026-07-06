@@ -1,0 +1,10 @@
+{
+  "product": "Landing Page Component Pack",
+  "amount_cents": 700,
+  "amount_dollars": 7,
+  "currency": "USD",
+  "billing_behavior": "payment",
+  "redirect_success": "https://nebulacomponents.shop/success-template.html",
+  "redirect_cancel": "https://nebulacomponents.shop",
+  "status": "PENDING - create in Stripe Dashboard"
+}

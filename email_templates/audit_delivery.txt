@@ -1,0 +1,14 @@
+Subject: Your Free Landing Page Audit is Ready
+
+Hi {name},
+
+Here’s your free landing page audit for {url}:
+
+{audit_summary}
+
+You can implement these fixes yourself with our $7 DIY Kit: {diy_kit_link}
+
+Or let our AI implement them automatically with our $97 Automated Implementation: {implementation_link}
+
+Best,
+Nebula Components

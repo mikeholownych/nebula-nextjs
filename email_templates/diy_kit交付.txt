@@ -1,0 +1,12 @@
+Subject: Your $7 DIY Kit is Ready
+
+Hi {name},
+
+Thank you for purchasing our $7 DIY Kit. Here’s your 5-step checklist to implement your audit findings:
+
+{checklist}
+
+Follow these steps to boost your conversions.
+
+Best,
+Nebula Components

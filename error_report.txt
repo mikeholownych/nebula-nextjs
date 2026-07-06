@@ -1,0 +1,1 @@
+API key file /tmp/am_key is missing. Please contact AgentMail support for assistance with API key permissions and the SMTP/IMAP bypass method.

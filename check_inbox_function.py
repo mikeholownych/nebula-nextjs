@@ -1,0 +1,1 @@
+def main(): messages = check_inbox(); if "7 template" in messages: send_response("template"); log_response("template"); elif "97 audit" in messages: send_response("audit"); log_response("audit"); time.sleep(300); if __name__ == "__main__": main()

@@ -1,0 +1,44 @@
+{
+  "company": "Nebula Components",
+  "current_bottleneck": "audit_to_payment_conversion",
+  "customer_events": {
+    "audit_delivered": 37,
+    "checkout_attempts": 18,
+    "payments": 2,
+    "warm_replies": 0
+  },
+  "funnel": {
+    "audits_delivered": 34,
+    "emails_sent": 155,
+    "hot_lead_pitches_sent": 7,
+    "replies": 3,
+    "trigger_based_sends": 66,
+    "trigger_reply_rate": 0.0,
+    "trigger_warm_replies": 0,
+    "warm_leads": 1
+  },
+  "generated_at": "2026-07-06T20:54:00Z",
+  "kill_criteria": {
+    "audit": "3 audits delivered and 0 payments",
+    "checkout": "buyer cannot pay self-serve",
+    "outreach": "30 sends and 0 warm replies"
+  },
+  "offer": "Free landing page audit -> $97 implementation",
+  "pipeline": {
+    "hot_leads_pending": 8,
+    "overdue_emails": [],
+    "pitch_overdue": 0,
+    "pitch_sent": 21,
+    "total": 34
+  },
+  "revenue": {
+    "real_payments": 0,
+    "real_revenue": 0,
+    "test_revenue_excluded": true
+  },
+  "trust_ladder": [
+    "$7 impulse",
+    "$97 audit/implementation",
+    "$1.5k-$5k SDR service"
+  ]
+}

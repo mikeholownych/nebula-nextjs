@@ -1,0 +1,52 @@
+{
+  "naxely.com": {
+    "url": "https://naxely.com",
+    "emails": [],
+    "found_at": "https://naxely.com"
+  },
+  "socialpost.ai": {
+    "url": "https://socialpost.ai",
+    "emails": [],
+    "found_at": "https://socialpost.ai"
+  },
+  "alloceraintelligence.com": {
+    "url": "https://alloceraintelligence.com",
+    "emails": [
+      "you@yourcompany.com",
+      "alloceraintelligence@gmail.com"
+    ],
+    "found_at": "https://alloceraintelligence.com"
+  },
+  "boothkeepos.polsia.app": {
+    "url": "https://boothkeepos.polsia.app",
+    "emails": [
+      "hello@boothkeepos.com",
+      "your@email.com"
+    ],
+    "found_at": "https://boothkeepos.polsia.app"
+  },
+  "devora.sh": {
+    "url": "https://devora.sh",
+    "emails": [],
+    "found_at": "https://devora.sh"
+  },
+  "theogeo.ai": {
+    "url": "https://theogeo.ai",
+    "emails": [
+      "hello@theogeo.ai"
+    ],
+    "found_at": "https://theogeo.ai/about"
+  },
+  "goldenweeks.co": {
+    "url": "https://goldenweeks.co",
+    "emails": [
+      "lakisha@goldenweeks.co"
+    ],
+    "found_at": "https://goldenweeks.co"
+  },
+  "lintract.com": {
+    "url": "https://lintract.com",
+    "emails": [],
+    "found_at": "https://lintract.com"
+  }
+}

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Your Landing Page Isn't Converting (And How to Fix It)</title>
+  <meta name="description" content="The 5 reasons your landing page isn't converting — with specific fixes for each. Covers headline clarity, CTA strength, social proof, load speed, and mobile layout." />
+  <link rel="canonical" href="https://nebulacomponents.shop/why-landing-pages-dont-convert.html" />
+  <meta property="og:title" content="Why Your Landing Page Isn't Converting (And How to Fix It)" />
+  <meta property="og:description" content="The 5 reasons your landing page isn't converting — with specific fixes for each." />
+  <meta property="og:url" content="https://nebulacomponents.shop/why-landing-pages-dont-convert.html" />
+  <meta property="og:type" content="article" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Why Your Landing Page Isn't Converting (And How to Fix It)",
+    "description": "The 5 reasons your landing page isn't converting — with specific fixes for each.",
+    "url": "https://nebulacomponents.shop/why-landing-pages-dont-convert.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Nebula Components",
+      "url": "https://nebulacomponents.shop"
+    }
+  }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0a0a0f;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+    header {
+      border-bottom: 1px solid #1e1e2e;
+      padding-bottom: 24px;
+      margin-bottom: 48px;
+    }
+    .logo {
+      color: #6366f1;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      color: #f8fafc;
+      margin: 32px 0 16px;
+    }
+    .subtitle {
+      color: #94a3b8;
+      font-size: 1.05rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin: 48px 0 16px;
+      padding-left: 16px;
+      border-left: 3px solid #6366f1;
+    }
+    p { margin-bottom: 16px; color: #cbd5e1; }
+    .problem-block {
+      background: #12121c;
+      border: 1px solid #1e1e2e;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+    .problem-block .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ef4444;
+      margin-bottom: 8px;
+    }
+    .fix-block {
+      background: #0d1117;
+      border: 1px solid #1e3a5f;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 16px 0 32px;
+    }
+    .fix-block .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #22c55e;
+      margin-bottom: 8px;
+    }
+    .cta-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #6366f1;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+    .cta-inline:hover { background: #5254cc; }
+    .cta-section {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16162a 100%);
+      border: 1px solid #2d2d4e;
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      margin-top: 56px;
+    }
+    .cta-section h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 12px;
+    }
+    .cta-section p { color: #94a3b8; margin-bottom: 24px; }
+    .cta-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #6366f1;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: 10px;
+      text-decoration: none;
+    }
+    .cta-main:hover { background: #5254cc; }
+    ol { padding-left: 24px; margin-bottom: 16px; }
+    ol li { margin-bottom: 8px; color: #cbd5e1; }
+    code {
+      background: #1e1e2e;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      color: #a5b4fc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="/" class="logo">Nebula Components</a>
+      <span style="float:right;font-size:13px;">
+        <a href="/why-landing-pages-dont-convert.html" style="color:#64748b;margin-left:12px;">Blog</a>
+        <a href="/ai-sdr-vs-audit.html" style="color:#64748b;margin-left:12px;">AI SDR vs. Audit</a>
+      </span>
+    </header>
+
+    <h1>Why Your Landing Page Isn't Converting (And How to Fix It)</h1>
+    <p class="subtitle">Most landing pages have the same 5 problems. Here's how to find and fix yours.</p>
+
+    <p>You've launched. You're getting traffic. But signups are flat, or worse — zero. The frustrating part: you can't tell why by staring at the page. Every founder thinks their copy is fine, their CTA is obvious, and their offer is clear. But conversion data tells a different story.</p>
+
+    <p>After auditing 50+ indie founder landing pages, the same five problems come up over and over. Here they are — with the specific fix for each.</p>
+
+    <!-- 1 -->
+    <h2>1. Your Headline Doesn't Say What You Do</h2>
+
+    <div class="problem-block">
+      <div class="label">The problem</div>
+      <p style="margin:0">Most SaaS headlines are aspirational instead of descriptive. "Transform your workflow" or "The future of productivity" tell visitors nothing. A visitor who doesn't immediately understand what you do will leave in under 5 seconds — and they won't know why they left.</p>
+    </div>
+
+    <div class="fix-block">
+      <div class="label">The fix</div>
+      <p style="margin-bottom:12px">Your headline should answer: <strong>who it's for, what it does, and what outcome it delivers</strong>. Use this formula: <code>[Audience] can [action] without [pain]</code>.</p>
+      <ol>
+        <li>Write 10 versions of your headline in 10 minutes</li>
+        <li>Read each one to someone unfamiliar with your product — they should be able to explain it back</li>
+        <li>The clearest one wins, not the cleverest</li>
+      </ol>
+    </div>
+
+    <a href="/audit.html" class="cta-inline">Check your headline score free →</a>
+
+    <!-- 2 -->
+    <h2>2. Your CTA Is Weak or Buried</h2>
+
+    <div class="problem-block">
+      <div class="label">The problem</div>
+      <p style="margin:0">The most common CTA mistake isn't bad copy — it's placement. "Sign up" below the fold gets ignored. Vague CTAs like "Learn more" or "Get started" create friction because they don't tell the visitor what happens next. Low-contrast buttons disappear against the background.</p>
+    </div>
+
+    <div class="fix-block">
+      <div class="label">The fix</div>
+      <ol>
+        <li>Put your primary CTA <strong>above the fold</strong> — visible without scrolling on every device</li>
+        <li>Use action + outcome language: "Start my free audit" not "Get started"</li>
+        <li>Button color must pass WCAG AA contrast — test at <code>contrast-ratio.com</code></li>
+        <li>One primary CTA per page. Remove everything competing with it.</li>
+      </ol>
+    </div>
+
+    <a href="/audit.html" class="cta-inline">Check your CTA score free →</a>
+
+    <!-- 3 -->
+    <h2>3. You Have No Social Proof (Or the Wrong Kind)</h2>
+
+    <div class="problem-block">
+      <div class="label">The problem</div>
+      <p style="margin:0">Visitors arrive skeptical. Logos without names, generic testimonials ("Great product!"), or fake-looking avatars actively destroy trust. Missing social proof is the #1 objection you're not answering. If you have zero customers, you're still not off the hook — there are alternatives.</p>
+    </div>
+
+    <div class="fix-block">
+      <div class="label">The fix</div>
+      <ol>
+        <li>Real testimonials with full name, photo, and company are 3x more effective than anonymous ones</li>
+        <li>Specificity converts: "Saved me 4 hours a week" beats "Really useful"</li>
+        <li>No customers yet? Use: user count ("47 founders using this"), beta feedback quotes, or a "Built in public" transparency section</li>
+        <li>Place social proof <strong>directly next to your CTA</strong>, not at the bottom</li>
+      </ol>
+    </div>
+
+    <a href="/audit.html" class="cta-inline">Check your social proof score free →</a>
+
+    <!-- 4 -->
+    <h2>4. Your Page Loads Too Slowly</h2>
+
+    <div class="problem-block">
+      <div class="label">The problem</div>
+      <p style="margin:0">53% of mobile users abandon a page that takes longer than 3 seconds to load. Every extra second of load time costs you roughly 7% of conversions. Most founders don't know their page speed — they test it on a fast connection and assume it's fine.</p>
+    </div>
+
+    <div class="fix-block">
+      <div class="label">The fix</div>
+      <ol>
+        <li>Run your page through <code>pagespeed.web.dev</code> — target 90+ on mobile</li>
+        <li>Compress all images with <code>squoosh.app</code> (free) and serve as WebP</li>
+        <li>Remove any third-party scripts that aren't essential (chat widgets, analytics with 200ms+ blocking)</li>
+        <li>Use a CDN. Cloudflare free tier adds 200-400ms improvement with zero effort.</li>
+      </ol>
+    </div>
+
+    <a href="/audit.html" class="cta-inline">Check your speed score free →</a>
+
+    <!-- 5 -->
+    <h2>5. It Breaks on Mobile</h2>
+
+    <div class="problem-block">
+      <div class="label">The problem</div>
+      <p style="margin:0">Over 60% of web traffic is mobile — but most indie founders build on desktop and never test on an actual phone. The most common failures: text too small to read without zooming, CTAs too small to tap, horizontal scroll that breaks layout, hero images that overflow their container.</p>
+    </div>
+
+    <div class="fix-block">
+      <div class="label">The fix</div>
+      <ol>
+        <li>Test on a real phone, not just browser dev tools — they lie</li>
+        <li>Minimum tap target size: 44×44px for any interactive element</li>
+        <li>Minimum body font: 16px. Smaller requires pinch-to-zoom, which kills conversions.</li>
+        <li>Use <code>clamp()</code> for responsive font sizes: <code>font-size: clamp(1rem, 4vw, 1.2rem)</code></li>
+        <li>Your hero image on mobile should either be hidden or explicitly sized — never allowed to overflow</li>
+      </ol>
+    </div>
+
+    <a href="/audit.html" class="cta-inline">Check your mobile score free →</a>
+
+    <!-- Closing -->
+    <p style="margin-top:48px">The honest truth: most of these problems take under an hour to fix. The issue is that founders can't see their own page clearly — you're too close to it. The headline that seems obvious to you is confusing to everyone else. The CTA you think is prominent is invisible to a first-time visitor.</p>
+
+    <p>That's why an outside audit matters. Not to tell you what you want to hear — but to score each dimension against what actually converts.</p>
+
+    <div class="cta-section">
+      <h3>See exactly where your page is losing conversions</h3>
+      <p>Paste your URL. Get your score across all 5 dimensions in 60 seconds. Free, no signup required.</p>
+      <a href="/audit.html" class="cta-main">Run your free audit →</a>
+    </div>
+  </div>
+</body>
+</html>

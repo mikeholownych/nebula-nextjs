@@ -1,0 +1,60 @@
+{
+  "zamp": {
+    "headline": "AI employees that own outcomes end-to-end across your business",
+    "problem_claimed": "You need full-time roles (marketing, sales, ops) but can't hire or scale fast enough",
+    "icp_description": "Mid-market to enterprise companies ($10m+) evaluating digital workforce deployment",
+    "pricing": "$25k-$75k pilot per AI employee, custom enterprise pricing",
+    "messaging_angles": [
+      "AI employees replace human roles entirely",
+      "Own outcomes end-to-end like a person would",
+      "Enterprise-grade autonomous workforce",
+      "Deploy across every function (CS, eng, marketing, finance)",
+      "Sales-led deployment with demo and pilot",
+      "AI employees cost fraction of human salary",
+      "Digital workforce management platform",
+      "Enterprise security (SOC2/HIPAA/SOX)",
+      "Perceive → Reason → Act → Hand off framework"
+    ],
+    "what_they_dont_say": [
+      "Trigger-based lead targeting",
+      "Self-serve onboarding or free entry point",
+      "Product-led growth or checkout",
+      "Founders or small business pricing",
+      "Fixed-price deliverables under $1k",
+      "Landing page or conversion optimization",
+      "No sales call required",
+      "Conversion funnel analytics",
+      "Outbound/GTM lead generation"
+    ],
+    "source": "zamp.ai website + blog, July 2026"
+  },
+  "oxygen": {
+    "headline": "GTM infrastructure engineered to 10x revenue — run your entire GTM from Claude Code",
+    "problem_claimed": "Go-to-market is too fragmented: separate tools for data, enrichment, sequences, CRM; AI coding agents need a durable GTM workspace",
+    "icp_description": "Technical founders, GTM engineers, small revenue teams using Claude Code/Codex",
+    "pricing": "Self-serve with free tier. Free → $99/mo → $249/mo → $749/mo → $2k/mo managed. No sales call needed.",
+    "messaging_angles": [
+      "AI-native GTM workspace — database + enrichment + sequences + CRM",
+      "Waterfall enrichment across 6 providers",
+      "Multichannel sequences (email + phone + LinkedIn)",
+      "Variable-aware AI prompts per lead",
+      "CRM that keeps itself clean",
+      "Built for Claude Code, Codex and MCP agents",
+      "Forward-deployed GTM engineer on enterprise accounts",
+      "One managed key replaces 50 API keys",
+      "Signal-based targeting"
+    ],
+    "what_they_dont_say": [
+      "Trigger-aware or buying signal targeting",
+      "Free audit entry point",
+      "Landing page or conversion optimization",
+      "Founder-friendly narrative or positioning",
+      "Content/SEO presence",
+      "Message or offer quality testing",
+      "Website audits or CRO",
+      "Fixed-price one-off deliverables",
+      "No meetings required"
+    ],
+    "source": "oxygen-agent.com website + pricing page, July 2026"
+  }
+}

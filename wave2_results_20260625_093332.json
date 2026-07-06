@@ -1,0 +1,186 @@
+{
+  "timestamp": "2026-06-25T09:33:19.892710",
+  "campaign": "wave2_dual_ab",
+  "results": [
+    {
+      "sender": "templates@",
+      "status": "failed",
+      "to": "tianyajinhui@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'templates@agentmail.to')"
+    },
+    {
+      "sender": "templates@",
+      "status": "failed",
+      "to": "voder.ai.agent@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'templates@agentmail.to')"
+    },
+    {
+      "sender": "templates@",
+      "status": "failed",
+      "to": "releaselogofficial@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'templates@agentmail.to')"
+    },
+    {
+      "sender": "templates@",
+      "status": "failed",
+      "to": "gupta.shivani7896@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'templates@agentmail.to')"
+    },
+    {
+      "sender": "templates@",
+      "status": "failed",
+      "to": "career4lucas@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'templates@agentmail.to')"
+    },
+    {
+      "sender": "templates@",
+      "status": "failed",
+      "to": "scalewords.agency@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'templates@agentmail.to')"
+    },
+    {
+      "sender": "templates@",
+      "status": "failed",
+      "to": "dinirangapremanayake@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'templates@agentmail.to')"
+    },
+    {
+      "sender": "templates@",
+      "status": "failed",
+      "to": "algor.tago@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'templates@agentmail.to')"
+    },
+    {
+      "sender": "templates@",
+      "status": "failed",
+      "to": "stellytips@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'templates@agentmail.to')"
+    },
+    {
+      "sender": "templates@",
+      "status": "failed",
+      "to": "rcschupp@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'templates@agentmail.to')"
+    },
+    {
+      "sender": "templates@",
+      "status": "failed",
+      "to": "muhammadabusufyangoraya@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'templates@agentmail.to')"
+    },
+    {
+      "sender": "templates@",
+      "status": "failed",
+      "to": "vsl.and@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'templates@agentmail.to')"
+    },
+    {
+      "sender": "templates@",
+      "status": "failed",
+      "to": "matze.schedel@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'templates@agentmail.to')"
+    },
+    {
+      "sender": "templates@",
+      "status": "failed",
+      "to": "shadowroot47@outlook.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'templates@agentmail.to')"
+    },
+    {
+      "sender": "templates@",
+      "status": "failed",
+      "to": "hello@buildingstuff.io",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'templates@agentmail.to')"
+    },
+    {
+      "sender": "audits@",
+      "status": "failed",
+      "to": "quietpulse.social@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'audits@agentmail.to')"
+    },
+    {
+      "sender": "audits@",
+      "status": "failed",
+      "to": "quratulaincreatives@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'audits@agentmail.to')"
+    },
+    {
+      "sender": "audits@",
+      "status": "failed",
+      "to": "rkotcher@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'audits@agentmail.to')"
+    },
+    {
+      "sender": "audits@",
+      "status": "failed",
+      "to": "kevin.chisumdev@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'audits@agentmail.to')"
+    },
+    {
+      "sender": "audits@",
+      "status": "failed",
+      "to": "shawnxu0208@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'audits@agentmail.to')"
+    },
+    {
+      "sender": "audits@",
+      "status": "failed",
+      "to": "zyvara.group@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'audits@agentmail.to')"
+    },
+    {
+      "sender": "audits@",
+      "status": "failed",
+      "to": "beniciocardozomdp@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'audits@agentmail.to')"
+    },
+    {
+      "sender": "audits@",
+      "status": "failed",
+      "to": "jerryatbusiness@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'audits@agentmail.to')"
+    },
+    {
+      "sender": "audits@",
+      "status": "failed",
+      "to": "lholmes274@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'audits@agentmail.to')"
+    },
+    {
+      "sender": "audits@",
+      "status": "failed",
+      "to": "davidwang913526@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'audits@agentmail.to')"
+    },
+    {
+      "sender": "audits@",
+      "status": "failed",
+      "to": "nedco80@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'audits@agentmail.to')"
+    },
+    {
+      "sender": "audits@",
+      "status": "failed",
+      "to": "bjoroen.eirik@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'audits@agentmail.to')"
+    },
+    {
+      "sender": "audits@",
+      "status": "failed",
+      "to": "ainikaautomation@gmail.com",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'audits@agentmail.to')"
+    },
+    {
+      "sender": "audits@",
+      "status": "failed",
+      "to": "founder@shipyard.build",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'audits@agentmail.to')"
+    },
+    {
+      "sender": "audits@",
+      "status": "failed",
+      "to": "team@launchingai.co",
+      "error": "(550, b'550 5.1.8 Sender address rejected', 'audits@agentmail.to')"
+    }
+  ]
+}

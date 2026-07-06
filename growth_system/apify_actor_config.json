@@ -1,0 +1,33 @@
+{
+  "actors": {
+    "post_search": "apimaestro/linkedin-posts-search-scraper-no-cookies",
+    "post_engagers": "scraping_solutions/linkedin-posts-engagers-likers-and-commenters-no-cookies",
+    "profile_enrich": "harvestapi/linkedin-profile-scraper",
+    "company_enrich": "harvestapi/linkedin-company",
+    "profile_search_fallback": "harvestapi/linkedin-profile-search"
+  },
+  "owned_pages_suppressed": [
+    "ai syndicate",
+    "mike h",
+    "mike holownych",
+    "startup spotlight canada"
+  ],
+  "input_files": {
+    "post_search": "growth_system/apify_inputs/post_search.json",
+    "post_engagers_likers": "growth_system/apify_inputs/post_engagers_likers.json",
+    "post_engagers_commenters": "growth_system/apify_inputs/post_engagers_commenters.json",
+    "profile_search_fallback": "growth_system/apify_inputs/profile_search_fallback.json",
+    "profile_enrich": "growth_system/apify_inputs/profile_enrich.json",
+    "company_enrich": "growth_system/apify_inputs/company_enrich.json"
+  },
+  "policy": {
+    "primary": "post_engagers on owned/high-signal posts",
+    "secondary": "post_search for trigger post discovery",
+    "enrich_after_signal_only": true,
+    "avoid": [
+      "cookie actors",
+      "LinkedIn DM senders",
+      "inbox automation"
+    ]
+  }
+}

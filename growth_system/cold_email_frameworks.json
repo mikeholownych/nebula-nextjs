@@ -1,0 +1,67 @@
+{
+  "source": "Oxygen Cold Email Playbook (adapted for Nebula audit-first model)",
+  "note": "All frameworks rewritten to use the free audit as the hook, not 'book a meeting'.",
+  "frameworks": [
+    {
+      "id": "audit_case_study",
+      "name": "Audit + same-industry case study",
+      "original": "Lead magnet + same-industry case study",
+      "template": "{{first_name}}, ran a conversion audit for {{company}} using the same {{mechanism}} we used to help {{client_in_same_industry}} increase conversions by {{result}}. Your audit is ready: {{audit_url}}",
+      "nebula_adaptation": "{{first_name}}, ran a landing page audit for {{company}} — same process we used to help a {{client_in_same_industry}} go from 0.8% to 2.4% conversion rate. Your results: {{audit_url}}",
+      "cta": "audit results — no email required",
+      "when_to_use": "After identifying a buying trigger (ad spend + no conversions)"
+    },
+    {
+      "id": "free_work_offer",
+      "name": "Free audit-as-gift",
+      "original": "One-line free-work offer",
+      "template": "{{first_name}}, interested in a free conversion audit for {{company}}? P.S. {{social_proof}}",
+      "nebula_adaptation": "{{first_name}}, ran a free landing page audit for {{company}}. Takes 30 seconds, shows you exactly what's costing conversions. {{audit_url}} P.S. Same tool found {{common_leak}} in 60% of SaaS pages we scanned last month.",
+      "cta": "direct audit link",
+      "when_to_use": "Warm leads (engagers, followers, reply to previous outreach)"
+    },
+    {
+      "id": "guarantee",
+      "name": "Risk-reversed audit",
+      "original": "Guarantee / risk reversal",
+      "template": "{{first_name}}, interested in {{dream_result}} with {{mechanism}} for {{company}} in the next {{timeframe}}? Our {{mechanism}} guarantees {{dream_result}} in {{timeframe}} or {{risk_reversal}}.",
+      "nebula_adaptation": "{{first_name}}, interested in doubling your landing page conversion rate in the next 30 days — without spending more on traffic? Run the free audit first. If it doesn't show you at least 3 conversion leaks you didn't know about, you're out nothing. {{audit_url}}",
+      "cta": "risk-free audit",
+      "when_to_use": "Objection-prone prospects (founders who've been burned by agencies)"
+    },
+    {
+      "id": "pain_solution",
+      "name": "Pain question → audit",
+      "original": "Pain question, then solution",
+      "template": "{{first_name}}, {{question_about_pain_point}}? Our {{solution}} {{how_it_fixes_it}} so you {{end_result}}. P.S. {{social_proof}}",
+      "nebula_adaptation": "{{first_name}}, running ads with conversion under 2%? The audit diagnoses exactly which leak is costing you — headline, CTA, trust, speed, or mobile. 30 seconds, no sales call. {{audit_url}} P.S. Pages that fix their headline see 2-3x improvement within 7 days.",
+      "cta": "audit + proof",
+      "when_to_use": "Triggered leads — people who've posted/complained about ad spend with no conversions"
+    },
+    {
+      "id": "signal_quick_fix",
+      "name": "Signal + quick fix",
+      "original": "Signal touchpoint, pain, quick fix",
+      "template": "{{first_name}}, {{relevant_touchpoint}}. Noticed {{relevant_pain_point}}. Interested in {{quick_fix}}?",
+      "nebula_adaptation": "{{first_name}}, saw your post about {{their_recent_post_or_comment}}. Noticed you mentioned ad spend with no conversions. The landing page is usually the bottleneck — not the ads. Run a free audit: 30 seconds, shows you exactly what to fix. {{audit_url}}",
+      "cta": "trigger-relevant audit link",
+      "when_to_use": "Reddit/LinkedIn trigger monitor finds a post — reply value-first, then follow up with this email"
+    },
+    {
+      "id": "insight_followup",
+      "name": "Market insight + audit invite",
+      "original": "Touchpoint + unique market insight",
+      "template": "{{first_name}}, {{question_about_touchpoint}}. {{unique_market_insight}}. {{cta_to_implement}}",
+      "nebula_adaptation": "{{first_name}}, you're in {{industry}}, right? We audited 100 landing pages in that space last month. Only 6 had a clear CTA above the fold. That's a $0 fix that doubles conversion rate. Curious where yours lands: {{audit_url}}",
+      "cta": "curiosity-driven audit",
+      "when_to_use": "Industry-specific outreach — show you understand their vertical"
+    }
+  ],
+  "implementation_notes": [
+    "Never use these as-is. Rewrite in your own voice.",
+    "Remove {{placeholder}} tokens — fill with real data before sending.",
+    "Audit URL should be a unique tracking link per lead (pass email as query param for auto-fill).",
+    "Follow-up sequence: Day 0 audit email → Day 3 'did you run it?' → Day 7 'here's a similar page's results' → Day 14 last touch. No more than 4 touches per cycle.",
+    "Recircle cadence: same ICP every 30-60 days with new audit findings / new content."
+  ]
+}

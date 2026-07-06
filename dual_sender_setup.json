@@ -1,0 +1,33 @@
+{
+  "timestamp": "2026-06-24T16:55:40.427441",
+  "strategy": "Dual sender A/B test",
+  "inboxes": [
+    {
+      "name": "templates",
+      "email": "templates@agentmail.to",
+      "purpose": "$7 template offer",
+      "wave": "Wave 2 - Test sender A",
+      "expected_opens": "Higher (cleaner subject line)"
+    },
+    {
+      "name": "audits",
+      "email": "audits@agentmail.to",
+      "purpose": "$97 audit offer",
+      "wave": "Wave 2 - Test sender B",
+      "expected_opens": "Baseline (original positioning)"
+    },
+    {
+      "name": "nebulashop",
+      "email": "nebulashop@agentmail.to",
+      "purpose": "Original sender (control)",
+      "wave": "Wave 1, Cold Email 2",
+      "expected_opens": "Baseline"
+    }
+  ],
+  "test_hypothesis": "Different sender addresses + different subject lines = different reply rates",
+  "success_metrics": {
+    "templates_inbox_reply_rate": "Track separately",
+    "audits_inbox_reply_rate": "Track separately",
+    "control_reply_rate": "nebulashop baseline"
+  }
+}

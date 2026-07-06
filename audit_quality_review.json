@@ -1,0 +1,17 @@
+{
+  "condition": "7+ pitches and $0 real revenue",
+  "triggered": true,
+  "hot_lead_pitches_sent": 7,
+  "real_payments": 0,
+  "audit_count_with_scores": 23,
+  "score_min": 4.8,
+  "score_max": 7.8,
+  "score_avg": 6.73,
+  "diagnosis": "mixed severity; inspect outliers first",
+  "required_change_if_triggered": [
+    "Add one quantified leak estimate per audit",
+    "Add first-screen screenshot/section-specific critique",
+    "Pitch one concrete $97 fix, not generic implementation",
+    "Stop sending generic B/C score summaries as the main urgency driver"
+  ]
+}

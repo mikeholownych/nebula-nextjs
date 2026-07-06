@@ -1,0 +1,80 @@
+{
+  "total_trigger_sends": 13,
+  "total_warm_replies": 0,
+  "overall_reply_rate_pct": 0.0,
+  "segments_ranked": [
+    {
+      "segment": "weak_local_page | home_services | audit_first_97_checkout",
+      "sent": 2,
+      "warm_replies": 0,
+      "reply_rate_pct": 0.0
+    },
+    {
+      "segment": "ad_bleed_zero_conversion | accounting_for_law_firms | audit_first_97_checkout",
+      "sent": 1,
+      "warm_replies": 0,
+      "reply_rate_pct": 0.0
+    },
+    {
+      "segment": "ad_bleed_zero_conversion | local_waste_services | audit_first_97_checkout",
+      "sent": 1,
+      "warm_replies": 0,
+      "reply_rate_pct": 0.0
+    },
+    {
+      "segment": "ad_bleed_zero_conversion | wedding_marketplace | audit_first_97_checkout",
+      "sent": 1,
+      "warm_replies": 0,
+      "reply_rate_pct": 0.0
+    },
+    {
+      "segment": "ad_bleed_zero_conversion | ecommerce_packaging | audit_first_97_checkout",
+      "sent": 1,
+      "warm_replies": 0,
+      "reply_rate_pct": 0.0
+    },
+    {
+      "segment": "landing_page_not_converting | nonprofit_pet_safety | audit_first_97_checkout",
+      "sent": 1,
+      "warm_replies": 0,
+      "reply_rate_pct": 0.0
+    },
+    {
+      "segment": "ad_bleed_zero_conversion | paid_membership_waitlist | audit_first_97_checkout",
+      "sent": 1,
+      "warm_replies": 0,
+      "reply_rate_pct": 0.0
+    },
+    {
+      "segment": "ad_clicks_no_sales | ecommerce_artist_apparel | audit_first_97_checkout",
+      "sent": 1,
+      "warm_replies": 0,
+      "reply_rate_pct": 0.0
+    },
+    {
+      "segment": "weak_local_page | law_firm | audit_first_97_checkout",
+      "sent": 1,
+      "warm_replies": 0,
+      "reply_rate_pct": 0.0
+    },
+    {
+      "segment": "weak_local_page | med_spa_wellness | audit_first_97_checkout",
+      "sent": 1,
+      "warm_replies": 0,
+      "reply_rate_pct": 0.0
+    },
+    {
+      "segment": "google_ads_no_sales | ecommerce_florist | audit_first_97_checkout",
+      "sent": 1,
+      "warm_replies": 0,
+      "reply_rate_pct": 0.0
+    },
+    {
+      "segment": "google_ads_clicks_no_conversions | custom_guitars | audit_first_97_checkout",
+      "sent": 1,
+      "warm_replies": 0,
+      "reply_rate_pct": 0.0
+    }
+  ],
+  "recommendation": "Not enough data yet to kill/scale any segment (need 10+ sends per segment for signal)."
+}

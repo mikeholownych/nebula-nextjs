@@ -1,0 +1,98 @@
+{
+  "bottleneck": "audit_to_payment_conversion",
+  "generated_at": "2026-07-06T20:54:00Z",
+  "queues": [
+    {
+      "acceptance": "audit/pitch/payment event is written to customer ledger and HOT_LEAD state is advanced",
+      "agent": "support",
+      "handoff_to": "ops-finance",
+      "priority": 95,
+      "required_artifact": "checkout-safe audit-to-$97 pitch flow verified by dry run/test and ledger row",
+      "score": 75,
+      "stage": "closer_delivery",
+      "trigger": "audits delivered but paid conversion is weak"
+    },
+    {
+      "acceptance": "lead has URL, contact route, trigger_type, trigger_excerpt, and signal_strength >= 6",
+      "agent": "market",
+      "handoff_to": "growth",
+      "priority": 90,
+      "required_artifact": "10 ranked strong-trigger leads with evidence URL/excerpt and weak-signal exclusions",
+      "score": 45,
+      "stage": "scout",
+      "trigger": "trigger outreach produced 0 warm replies"
+    },
+    {
+      "acceptance": "company_brain numbers match ledgers and false revenue is excluded",
+      "agent": "ops-finance",
+      "handoff_to": "ceo",
+      "priority": 85,
+      "required_artifact": "revenue-evidence snapshot proving checkout/payment state and excluding tests",
+      "score": 60,
+      "stage": "mission_control_evidence",
+      "trigger": "real revenue remains zero or unverified"
+    },
+    {
+      "acceptance": "audit artifact or outreach row includes exact trigger context and no-call self-serve CTA",
+      "agent": "growth",
+      "handoff_to": "support",
+      "priority": 80,
+      "required_artifact": "10 value-first audit artifacts/outreach rows with trigger_context and self-serve CTA",
+      "score": 40,
+      "stage": "writer_rep",
+      "trigger": "market lead queue needs trigger-specific artifacts"
+    },
+    {
+      "acceptance": "audit artifact or outreach row includes exact trigger context and no-call self-serve CTA",
+      "agent": "growth",
+      "handoff_to": "support",
+      "priority": 70,
+      "required_artifact": "rewrite audit artifact ending around implementation-ready fix pack, no human-contact CTA",
+      "score": 40,
+      "stage": "writer_rep",
+      "trigger": "paid conversion bottleneck requires stronger value proof before more volume"
+    },
+    {
+      "acceptance": "latest_ceo_directive names one bottleneck, one kill/scale decision, and next agent orders",
+      "agent": "ceo",
+      "handoff_to": null,
+      "priority": 60,
+      "required_artifact": "one bottleneck, one kill/scale decision, and next 3 agent orders in latest_ceo_directive",
+      "score": 55,
+      "stage": "mission_control_decision",
+      "trigger": "daily mission control synthesis"
+    }
+  ],
+  "stage_agents": {
+    "ceo": {
+      "done_when": "latest_ceo_directive names one bottleneck, one kill/scale decision, and next agent orders",
+      "handoff_to": null,
+      "owns": "bottleneck decision, kill/scale orders, and escalation gates",
+      "stage": "mission_control_decision"
+    },
+    "growth": {
+      "done_when": "audit artifact or outreach row includes exact trigger context and no-call self-serve CTA",
+      "handoff_to": "support",
+      "owns": "turn qualified trigger evidence into value-first audit artifact/outreach",
+      "stage": "writer_rep"
+    },
+    "market": {
+      "done_when": "lead has URL, contact route, trigger_type, trigger_excerpt, and signal_strength >= 6",
+      "handoff_to": "growth",
+      "owns": "find public buying-trigger evidence and reject weak/no-trigger leads",
+      "stage": "scout"
+    },
+    "ops-finance": {
+      "done_when": "company_brain numbers match ledgers and false revenue is excluded",
+      "handoff_to": "ceo",
+      "owns": "truth ledger, revenue evidence, attribution, incident reports, and kill criteria",
+      "stage": "mission_control_evidence"
+    },
+    "support": {
+      "done_when": "audit/pitch/payment event is written to customer ledger and HOT_LEAD state is advanced",
+      "handoff_to": "ops-finance",
+      "owns": "audit delivery, inbox classification, checkout handoff, and fulfillment queue",
+      "stage": "closer_delivery"
+    }
+  }
+}

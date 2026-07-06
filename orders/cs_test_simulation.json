@@ -1,0 +1,9 @@
+{
+  "time": "2026-06-23 06:59:51",
+  "type": "sale",
+  "product": "nebula-components",
+  "amount_cents": 700,
+  "amount_dollars": "$7.00",
+  "email": "test-buyer@example.com",
+  "payment_id": "cs_test_simulation"
+}

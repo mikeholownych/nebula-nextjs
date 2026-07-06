@@ -1,0 +1,133 @@
+{
+  "generated_at": "2026-07-04T23:06:02Z",
+  "source_task": "t_5623a68a",
+  "agent": "market",
+  "handoff_to": "growth",
+  "acceptance": "Each lead has URL, contact route, trigger_type, trigger_excerpt, and signal_strength >= 6.",
+  "filters_applied": [
+    "Suppressed weak/no-trigger discussion posts and advice/AMA/self-promotional posts.",
+    "Suppressed already-contacted/self-owned items where the source did not show fresh buying pain.",
+    "Suppressed medical/health-offer pages from the send queue unless a later risk-approved workflow explicitly accepts them."
+  ],
+  "leads": [
+    {
+      "rank": 1,
+      "url": "https://www.reddit.com/r/FacebookAds/comments/1ulelga/suddenly_zero_sales_on_30_june_till_29_june_i_got/",
+      "contact_route": "reddit_dm:u/Mindless_Pumpkin1111",
+      "trigger_type": "ad_bleed_sudden_zero_sales",
+      "trigger_excerpt": "Suddenly Zero sales on 30 June till 29 June i got 5-8 sales everyday; prior lead notes record $11k spend with zero sales on the cliff day.",
+      "signal_strength": 10,
+      "why_strong": "High-dollar active Meta/ecommerce spend plus sudden revenue cliff; urgent breakage-audit trigger, not generic CRO interest.",
+      "growth_angle": "Lead with conversion-path breakage checklist: checkout/payment, product availability, redirect/page speed, pixel/event changes around June 30."
+    },
+    {
+      "rank": 2,
+      "url": "https://www.reddit.com/r/PPC/comments/1ju0tsg/help_my_landing_page_1000_in_ads_no_conversions/",
+      "contact_route": "website_manual_contact:https://curbcaddie.com OR reddit_dm:u/Suspicious_Role5912",
+      "trigger_type": "ad_bleed_zero_conversions",
+      "trigger_excerpt": "Help my landing page. $1000 in ads, no conversions; poster says they are burning money and only got one non-paying form fill.",
+      "signal_strength": 9,
+      "why_strong": "Named product/site, active Google Ads, explicit dollar loss, and failed checkout/form workaround.",
+      "growth_angle": "Audit Curb Caddie's first-screen coverage/trust/CTA clarity before pitching implementation."
+    },
+    {
+      "rank": 3,
+      "url": "https://www.reddit.com/r/googleads/comments/1uju7wr/spent_800_on_google_ads_for_my_small_online_store/",
+      "contact_route": "reddit_dm:u/Adventurous_Wear4815",
+      "trigger_type": "ad_bleed_zero_purchases",
+      "trigger_excerpt": "Spent $800 on Google Ads for my small online store, getting clicks but zero purchases. What am I missing?",
+      "signal_strength": 9,
+      "why_strong": "Paid search spend, ecommerce store, clicks but zero purchases, and explicit help request.",
+      "growth_angle": "Offer a 3-point page audit around product trust, marketplace differentiation, shipping/returns clarity, and ad-to-product match."
+    },
+    {
+      "rank": 4,
+      "url": "https://www.reddit.com/r/FacebookAds/comments/1uhw3yk/im_done_with_meta/",
+      "contact_route": "reddit_dm:u/Warm-Friend987",
+      "trigger_type": "ad_bleed_click_to_visit_loss_zero_sales",
+      "trigger_excerpt": "$400 today, 300 link clicks, 150 visitors on Shopify, 0 sales. I'm done with Meta.",
+      "signal_strength": 9,
+      "why_strong": "Same-day dollar burn with measurable click-to-visitor loss and zero Shopify sales; visible audit outcome.",
+      "growth_angle": "Separate 300-to-150 traffic loss from on-page conversion leak; make first artifact a diagnostic checklist, not copy advice."
+    },
+    {
+      "rank": 5,
+      "url": "https://www.reddit.com/r/LinkedinAds/comments/1umjwh0/i_need_help_what_should_i_do/",
+      "contact_route": "reddit_dm:u/HardilAzeez",
+      "trigger_type": "paid_b2b_zero_form_completions",
+      "trigger_excerpt": "LinkedIn B2B lead gen campaign — $1,500 budget, 31 days, zero form completions; explicit 'I need help' post.",
+      "signal_strength": 8,
+      "why_strong": "Expensive paid channel, long enough test window, zero form fills, and public help request.",
+      "growth_angle": "Audit offer/form promise before audience: make payoff concrete before the lead form."
+    },
+    {
+      "rank": 6,
+      "url": "https://www.reddit.com/r/PPC/comments/1ehhcsd/0_conversions_on_google_ads_after_800_spend/",
+      "contact_route": "reddit_dm:u/Junior_Ride5781",
+      "trigger_type": "google_ads_zero_conversions",
+      "trigger_excerpt": "0 conversions on Google Ads after $800 spend; running separate ads/landing pages, awareness campaign with 8% CTR, landing page experience below average, and ~$70 daily budget.",
+      "signal_strength": 8,
+      "why_strong": "Explicit dollar spend, campaign/landing-page details, CTR signal proving traffic, and zero conversions.",
+      "growth_angle": "Lead with landing-page experience mismatch and campaign-to-page routing audit."
+    },
+    {
+      "rank": 7,
+      "url": "https://www.reddit.com/r/PPC/comments/1ogeww7/help_why_this_landing_page_not_converting/",
+      "contact_route": "email:ask@timetechnologiesllc.com OR reddit_dm:u/BlacksmithDue2467",
+      "trigger_type": "paid_clicks_zero_form_fills",
+      "trigger_excerpt": "Running Google and Facebook ads, 50+ clicks on both platforms, zero form fills or bookings; landing page shared for realistic critique.",
+      "signal_strength": 8,
+      "why_strong": "Paid traffic, zero bookings/form fills, live business contact email found, and landing page URL available.",
+      "growth_angle": "Mention the posted sales-letter URL currently appears broken/404 before any broader CRO recommendations."
+    },
+    {
+      "rank": 8,
+      "url": "https://www.reddit.com/r/FacebookAds/comments/1uni06l/new_meta_campaign_started_strong_then_zero_sales/",
+      "contact_route": "reddit_dm:u/Mysterious-Body1017",
+      "trigger_type": "meta_ads_zero_sales_after_start",
+      "trigger_excerpt": "New Meta campaign started strong, then zero sales. What would you investigate?",
+      "signal_strength": 7,
+      "why_strong": "Active campaign, recent performance decay, zero sales, and explicit diagnostic ask.",
+      "growth_angle": "Frame as post-launch funnel/offer breakage audit: what changed between early sales and flatline."
+    },
+    {
+      "rank": 9,
+      "url": "https://www.reddit.com/r/FacebookAds/comments/1ujr4tb/2_meta_ads_questionsdo_all_changes_need_to_be/",
+      "contact_route": "reddit_dm:u/amandaspades",
+      "trigger_type": "meta_ads_tanked_zero_conversions",
+      "trigger_excerpt": "2 Meta Ads Questions — hired a digital marketer, June tanked, literally no conversions after prior good April/May performance.",
+      "signal_strength": 7,
+      "why_strong": "Existing business with prior conversion baseline, hired workaround already tried, and now zero conversions.",
+      "growth_angle": "Compare April/May winning path to June path; audit whether landing experience changed or tracking/offer mismatch appeared."
+    },
+    {
+      "rank": 10,
+      "url": "https://www.reddit.com/r/shopify_hustlers/comments/1ujgms9/first_month_was_rough_not_sure_what_to_change/",
+      "contact_route": "reddit_dm:u/Loose-Double5521",
+      "trigger_type": "new_shopify_ads_clicks_no_conversions",
+      "trigger_excerpt": "First month was rough, not sure what to change; prior lead notes identify ads getting clicks but no conversions on a first-month Shopify store.",
+      "signal_strength": 7,
+      "why_strong": "Recent launch plus paid clicks and zero conversions; explicit change/help request.",
+      "growth_angle": "Audit first-time buyer confidence: above-fold clarity, product proof, shipping/returns, and reason to trust a new store."
+    }
+  ],
+  "rejections": [
+    {
+      "url": "https://www.reddit.com/r/PPC/comments/1kchxnn/landing_page_not_converting/",
+      "reason": "Strong trigger but health/medical product; suppressed from growth send queue pending explicit risk approval."
+    },
+    {
+      "url": "https://www.reddit.com/r/PPC/comments/1pzojnz/why_is_my_landing_page_not_converting/",
+      "reason": "Strong trigger but testosterone/wellness medical-adjacent offer and appears already in audit pipeline; suppress duplicate/risk."
+    },
+    {
+      "url": "https://www.reddit.com/r/PPC/comments/1lk5pbv/ive_managed_google_ads_for_9_figure_high_ticket/",
+      "reason": "Advice/thought-leadership post by ads operator, not a buyer pain trigger."
+    },
+    {
+      "url": "https://www.reddit.com/r/SaaS/comments/1s3rpjk/im_15_and_built_my_first_product_social_media/",
+      "reason": "Minor/age-sensitive and mostly organic distribution pain; suppress."
+    }
+  ],
+  "next_stage_instruction": "Growth should create value-first audit/outreach rows using exact trigger_excerpt and a self-serve CTA only; do not ask for a call or calendar booking."
+}

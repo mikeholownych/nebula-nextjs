@@ -1,0 +1,14 @@
+{
+  "failures": {},
+  "last_run": "2026-07-06T17:45:23.436043+00:00",
+  "last_actions": [],
+  "hard_bounce_ack": {
+    "acked_at": "2026-07-06T11:31:00Z",
+    "addresses": [
+      "info@brookerlaw.com",
+      "info@magnolia-club.org",
+      "info@saputo.law"
+    ],
+    "status": "suppressed_in_db"
+  }
+}

@@ -1,0 +1,1 @@
+*/5 * * * * python3 /home/mike/nebula/tunnel_liveliness_check.py >> /home/mike/nebula/tunnel_liveliness.log 2>&1

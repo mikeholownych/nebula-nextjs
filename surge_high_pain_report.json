@@ -1,0 +1,59 @@
+{
+  "timestamp": "2026-07-06T16:08:57.398912+00:00",
+  "counts": {
+    "audit_sent": 0,
+    "contact_forms": 0,
+    "skipped": 2,
+    "failed": 4
+  },
+  "audit_sent": [],
+  "contact_forms": [],
+  "skipped": [
+    {
+      "site": "https://www.calisim.com/plans",
+      "trigger": "Google ads, 5% CTR, 191 clicks, no conversions",
+      "source_url": "https://www.reddit.com/r/PPC/comments/1m37t5a/google_ads_5_ctr_191_clicks_no_conversions/",
+      "status": "duplicate"
+    },
+    {
+      "site": "https://repairandsquare.com/washing-machine-repairs/",
+      "trigger": "Google Ads 0 conversions; landing page repair service",
+      "source_url": "https://www.reddit.com/r/googleads/comments/1kpwhb8/ready_to_bash_my_head_against_a_wall/",
+      "status": "duplicate"
+    }
+  ],
+  "failed": [
+    {
+      "site": "https://203.io",
+      "trigger": "First month in Google Ads, no conversions; Shopify smart keyboard controller",
+      "source_url": "https://www.reddit.com/r/PPC/comments/1fueirw/first_month_in_google_ads_no_conversions/",
+      "ok": false,
+      "error": "no_submittable_form",
+      "status": "unreachable"
+    },
+    {
+      "site": "https://therollupinvestor.carrd.co/",
+      "trigger": "PPC thread asking if simple landing page can convert",
+      "source_url": "https://www.reddit.com/r/PPC/comments/11hnafg/is_it_possible_for_a_dead_simple_landing_page_to/",
+      "ok": false,
+      "error": "no_submittable_form",
+      "status": "unreachable"
+    },
+    {
+      "site": "https://lovebyintention.com",
+      "trigger": "Ad says $13 product but landing page not converting at all",
+      "source_url": "https://www.reddit.com/r/PPC/comments/1il83x3/tell_me_why_my_landing_page_sucks/",
+      "ok": false,
+      "error": "no_submittable_form",
+      "status": "unreachable"
+    },
+    {
+      "site": "https://lowtdfw.com/variation-b-page",
+      "trigger": "Low CPC traffic but poor bookings/show rate; alternate landing page",
+      "source_url": "https://www.reddit.com/r/PPC/comments/1pzojnz/why_is_my_landing_page_not_converting/",
+      "ok": false,
+      "error": "no_submittable_form",
+      "status": "unreachable"
+    }
+  ]
+}

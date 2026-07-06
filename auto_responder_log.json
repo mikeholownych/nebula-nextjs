@@ -1,0 +1,74 @@
+[
+  {
+    "message_id": "1",
+    "from": "Nebula Components <nebulashop@agentmail.to>",
+    "subject": "Test from Nebula Components",
+    "date": "Tue, 23 Jun 2026 01:32:54 +0000",
+    "interest_detected": null,
+    "response_sent": false,
+    "processed_at": "2026-06-26T16:48:38.080169"
+  },
+  {
+    "message_id": "2",
+    "from": "MAILER-DAEMON@amazonses.com",
+    "subject": "Delivery Status Notification (Failure)",
+    "date": "Tue, 23 Jun 2026 01:37:31 +0000",
+    "interest_detected": null,
+    "response_sent": false,
+    "processed_at": "2026-06-26T16:48:38.184647"
+  },
+  {
+    "message_id": "3",
+    "from": "Nebula Components <nebulashop@agentmail.to>",
+    "subject": "Rate limit test",
+    "date": "Tue, 23 Jun 2026 20:00:00 +0000",
+    "interest_detected": null,
+    "response_sent": false,
+    "processed_at": "2026-06-26T16:48:38.293581"
+  },
+  {
+    "message_id": "4",
+    "from": "MAILER-DAEMON@amazonses.com",
+    "subject": "Delivery Status Notification (Failure)",
+    "date": "Wed, 24 Jun 2026 15:07:27 +0000",
+    "interest_detected": null,
+    "response_sent": false,
+    "processed_at": "2026-06-26T16:48:38.398627"
+  },
+  {
+    "message_id": "5",
+    "from": "MAILER-DAEMON@amazonses.com",
+    "subject": "Delivery Status Notification (Failure)",
+    "date": "Wed, 24 Jun 2026 15:15:48 +0000",
+    "interest_detected": null,
+    "response_sent": false,
+    "processed_at": "2026-06-26T16:48:38.497845"
+  },
+  {
+    "message_id": "6",
+    "from": "Dorothy mia <miadorothy250@gmail.com>",
+    "subject": "I might have a few ideas that could fit what you're building",
+    "date": "Thu, 25 Jun 2026 02:10:26 +0100",
+    "interest_detected": null,
+    "response_sent": false,
+    "processed_at": "2026-06-26T16:48:38.611904"
+  },
+  {
+    "message_id": "7",
+    "from": "MAILER-DAEMON@amazonses.com",
+    "subject": "Delivery Status Notification (Failure)",
+    "date": "Thu, 25 Jun 2026 05:07:28 +0000",
+    "interest_detected": null,
+    "response_sent": false,
+    "processed_at": "2026-06-26T16:48:38.737375"
+  },
+  {
+    "message_id": "8",
+    "from": "MAILER-DAEMON@amazonses.com",
+    "subject": "Delivery Status Notification (Failure)",
+    "date": "Thu, 25 Jun 2026 05:07:30 +0000",
+    "interest_detected": null,
+    "response_sent": false,
+    "processed_at": "2026-06-26T16:48:38.849886"
+  }
+]

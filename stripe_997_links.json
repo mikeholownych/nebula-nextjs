@@ -1,0 +1,15 @@
+{
+  "growth_launch_997": {
+    "product_id": "prod_UpLQnnWstdtFty",
+    "price_id": "price_1TpgjBEINR1kU9chEkEOkiHg",
+    "payment_link": "https://buy.stripe.com/4gMcN5aYk92Qaa5drY43S09",
+    "amount_dollars": 997,
+    "description": "Growth Launch \u2014 First Customer Guarantee"
+  },
+  "trigger_pipeline_197": {
+    "product_id": "prod_UpLQVRdoZv5Aww",
+    "price_id": "price_1TpgjCEINR1kU9ch4VU56XRe",
+    "amount_dollars": 197,
+    "description": "Trigger Pipeline \u2014 Monthly Lead Feed"
+  }
+}

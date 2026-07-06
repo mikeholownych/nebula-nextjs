@@ -1,0 +1,12 @@
+{
+  "time": "2026-06-24 01:13:26",
+  "type": "sale",
+  "product": "outbound-managed-pilot",
+  "amount_cents": 49700,
+  "amount_dollars": "$497.00",
+  "email": "pilot-test-buyer@example.com",
+  "payment_id": "cs_test_pilot_001",
+  "customer_id": "",
+  "subscription_id": "",
+  "mode": "payment"
+}

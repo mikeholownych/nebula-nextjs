@@ -1,0 +1,14 @@
+venv/
+.codegraph/
+__pycache__/
+*.pyc
+node_modules/
+.git/
+ledgers/
+*.jsonl
+*.json
+*.db
+*.db-shm
+*.db-wal
+*.log
+*.pdf

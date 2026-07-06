@@ -1,0 +1,81 @@
+import os
+import time
+import imaplib
+import email
+from email.header import decode_header
+
+# Configuration
+IMAP_SERVER = 'imap.your_actual_server.com'
+IMAP_PORT = 993
+EMAIL_USERNAME = 'your_email@example.com'
+EMAIL_PASSWORD = 'your_password'
+
+# Connect to the IMAP server
+def connect_to_imap():
+    imap = imaplib.IMAP4_SSL(IMAP_SERVER, IMAP_PORT)
+    imap.login(EMAIL_USERNAME, EMAIL_PASSWORD)
+    return imap
+
+# Check the inbox for new emails
+def check_inbox(imap):
+    imap.select('inbox')
+    status, messages = imap.search(None, 'UNSEEN')
+    if status!= 'OK':
+        print('Error checking inbox.')
+        return
+    email_ids = messages[0].split()
+    for email_id in email_ids:
+        process_email(imap, email_id)
+
+# Process an individual email
+def process_email(imap, email_id):
+    status, data = imap.fetch(email_id, '(RFC822)')
+    if status!= 'OK':
+        print(f'Error fetching email {email_id}.')
+        return
+    raw_email = data[0][1]
+    msg = email.message_from_bytes(raw_email)
+    subject = decode_header(msg['subject'])[0][0]
+    body = ''
+    if msg.is_multipart():
+        for part in msg.walk():
+            if part.get_content_type() == 'text/plain':
+                body = part.get_payload(decode=True).decode()
+                break
+    else:
+        body = msg.get_payload(decode=True).decode()
+    respond_to_email(email_id, subject, body)
+
+# Respond to the email based on its content
+def respond_to_email(email_id, subject, body):
+    if 'template' in body.lower():
+        send_response(email_id, 'template')
+    elif 'audit' in body.lower():
+        send_response(email_id, 'audit')
+    elif 'template' in body.lower() and 'audit' in body.lower():
+        send_response(email_id, 'both')
+    else:
+        print(f'No response needed for email {email_id}.')
+
+# Send a customized response
+def send_response(email_id, response_type):
+    if response_type == 'template':
+        print(f'Responding to email {email_id} with template download links.')
+    elif response_type == 'audit':
+        print(f'Responding to email {email_id} with audit details.')
+    elif response_type == 'both':
+        print(f'Responding to email {email_id} with both template and audit details.')
+    log_response(email_id, response_type)
+
+# Log the response type
+def log_response(email_id, response_type):
+    with open('/home/mike/nebula/response_log.txt', 'a') as f:
+        f.write(f'{email_id},{response_type}\n')
+
+# Main loop
+if __name__ == '__main__':
+    while True:
+        imap = connect_to_imap()
+        check_inbox(imap)
+        imap.logout()
+        time.sleep(300)

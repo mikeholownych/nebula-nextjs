@@ -1,0 +1,6 @@
+{
+  "subreddit": ["entrepreneur", "startups", "SaaS", "PPC", "smallbusiness"],
+  "postLimit": 20,
+  "sort": "new",
+  "timeFilter": "week"
+}

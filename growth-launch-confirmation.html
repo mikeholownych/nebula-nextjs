@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Growth Launch — You're In | Nebula Components</title>
+  <meta name="description" content="Your Growth Launch purchase is confirmed. Here's what happens next and how to submit your project details." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0a0a0f;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      font-size: 17px;
+    }
+    .container { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+
+    .confirmation {
+      text-align: center;
+      padding: 60px 24px 40px;
+    }
+    .confirmation .check {
+      width: 80px;
+      height: 80px;
+      background: #22c55e;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      margin: 0 auto 24px;
+      color: #0a0a0f;
+    }
+    .confirmation h1 { font-size: 2rem; font-weight: 800; color: #f8fafc; margin-bottom: 12px; }
+    .confirmation p { color: #94a3b8; max-width: 500px; margin: 0 auto; }
+
+    .card {
+      background: #12121c;
+      border: 1px solid #1e1e2e;
+      border-radius: 14px;
+      padding: 32px;
+      margin: 32px 0;
+    }
+    .card h2 { font-size: 1.3rem; font-weight: 700; color: #f1f5f9; margin-bottom: 16px; }
+
+    .timeline { list-style: none; padding: 0; }
+    .timeline li {
+      padding: 12px 0 12px 36px;
+      border-left: 2px solid #1e1e2e;
+      position: relative;
+      margin-left: 12px;
+    }
+    .timeline li::before {
+      content: '';
+      width: 12px;
+      height: 12px;
+      background: #6366f1;
+      border-radius: 50%;
+      position: absolute;
+      left: -7px;
+      top: 16px;
+    }
+    .timeline li:last-child { border-left-color: transparent; }
+    .timeline .step-label { color: #818cf8; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .timeline .step-desc { color: #cbd5e1; font-size: 0.95rem; }
+    .timeline .step-desc strong { color: #f1f5f9; }
+
+    label { display: block; font-weight: 600; margin: 20px 0 6px; color: #e2e8f0; }
+    input, textarea, select {
+      width: 100%;
+      padding: 14px;
+      background: #0d1117;
+      border: 1px solid #2d2d4e;
+      border-radius: 10px;
+      font-size: 16px;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+    }
+    input:focus, textarea:focus { outline: none; border-color: #6366f1; }
+    textarea { resize: vertical; min-height: 100px; }
+    .hint { color: #64748b; font-size: 13px; margin-top: 4px; }
+
+    button {
+      display: inline-block;
+      background: #22c55e;
+      color: #0a0a0f;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 16px 36px;
+      border: 0;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 24px;
+      transition: background 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    button:hover { background: #16a34a; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .status { margin-top: 16px; padding: 12px; border-radius: 8px; display: none; }
+    .status.success { display: block; background: #0a1a0f; border: 1px solid #22c55e; color: #22c55e; }
+    .status.error { display: block; background: #1c1010; border: 1px solid #ef4444; color: #ef4444; }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .nav a { color: #64748b; font-size: 14px; text-decoration: none; }
+    .nav .logo { color: #6366f1; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    @media (max-width: 640px) {
+      .card { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="/" class="logo">Nebula</a>
+    <div>
+      <a href="/" style="margin-right:16px;">Home</a>
+      <a href="/growth-launch.html">Growth Launch</a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div class="confirmation">
+      <div class="check">✓</div>
+      <h1>You're In. Let's Get You Customers.</h1>
+      <p>Your Growth Launch purchase is confirmed. Here's exactly what happens next — and the information we need from you to start.</p>
+    </div>
+
+    <div class="card">
+      <h2>📋 The Timeline</h2>
+      <ul class="timeline">
+        <li>
+          <div class="step-label">Step 1 — Right now</div>
+          <div class="step-desc"><strong>Fill out the intake form below.</strong> Takes 5 minutes. Tell us your URL, what you sell, and who you sell to.</div>
+        </li>
+        <li>
+          <div class="step-label">Step 2 — Within 24 hours</div>
+          <div class="step-desc"><strong>Landing page audit delivered.</strong> We'll send you the full audit report with the top 5 conversion leaks identified.</div>
+        </li>
+        <li>
+          <div class="step-label">Step 3 — Within 48 hours</div>
+          <div class="step-desc"><strong>Landing page rewrite delivered.</strong> Rewritten copy for every section, implemented or ready to deploy. Your call.</div>
+        </li>
+        <li>
+          <div class="step-label">Step 4 — Within 72 hours</div>
+          <div class="step-desc"><strong>200 triggered prospects delivered.</strong> The prospect list with buying signals annotated. You can review before we send.</div>
+        </li>
+        <li>
+          <div class="step-label">Step 5 — Day 3-17</div>
+          <div class="step-desc"><strong>Outreach campaign runs.</strong> We send value-first emails to all 200 prospects. Replies managed daily. You get warm handoffs.</div>
+        </li>
+        <li>
+          <div class="step-label">Step 6 — Day 60</div>
+          <div class="step-desc"><strong>You have a customer or we keep working free.</strong> That's the guarantee. No expiration.</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card" id="intake-form-card">
+      <h2>📝 Your Project Details</h2>
+      <p style="color:#94a3b8;margin-bottom:8px;">Fill this out and we'll start within the hour. Every field helps us deliver a better result.</p>
+
+      <form id="intake-form">
+        <label for="name">Your name</label>
+        <input id="name" name="name" type="text" required placeholder="e.g. Jane Smith" />
+
+        <label for="email">Email (we'll use this for delivery)</label>
+        <input id="email" name="email" type="email" required value="" placeholder="you@example.com" />
+
+        <label for="url">Your landing page URL</label>
+        <input id="url" name="url" type="url" required placeholder="https://your-product.com" />
+        <p class="hint">If you don't have one yet, write "need one built" — we'll build from scratch.</p>
+
+        <label for="offer">What do you sell? (one sentence)</label>
+        <input id="offer" name="offer" type="text" required placeholder="e.g. A scheduling tool for freelancers" />
+
+        <label for="target">Who is your target customer? (describe them)</label>
+        <textarea id="target" name="target" required placeholder="e.g. Freelance designers who bill by the hour and struggle to manage client schedules"></textarea>
+
+        <label for="product_stage">Product stage</label>
+        <select id="product_stage" name="product_stage">
+          <option value="live">Live — ready to accept customers</option>
+          <option value="beta">Beta — free tier available, paid coming soon</option>
+          <option value="prelaunch">Pre-launch — taking pre-orders or interest</option>
+          <option value="idea">Just an idea (not yet ready)</option>
+        </select>
+
+        <label for="extra">Anything else? (competitors, past outreach attempts, specific goals)</label>
+        <textarea id="extra" name="extra" placeholder="Optional, but the more context the better."></textarea>
+
+        <button type="submit" id="submit-btn">Submit & Start My Growth Launch →</button>
+        <div id="form-status" class="status"></div>
+      </form>
+    </div>
+
+    <div class="card" style="text-align:center;border:2px solid #fbbf24;">
+      <h2 style="margin-bottom:8px;">🛡️ Your Guarantee Is Active</h2>
+      <p style="margin-bottom:0;color:#94a3b8;">If you haven't closed a paying customer within 60 days of today, we keep working — at no additional cost — until you do. You keep every deliverable. No clawback. No fine print.</p>
+    </div>
+
+  </div>
+
+  <script>
+    // Pre-fill email from URL param if available
+    const params = new URLSearchParams(window.location.search);
+    const emailParam = params.get('email');
+    if (emailParam) {
+      document.getElementById('email').value = emailParam;
+    }
+
+    document.getElementById('intake-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      const status = document.getElementById('form-status');
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+      status.className = 'status';
+
+      const data = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        url: document.getElementById('url').value.trim(),
+        offer: document.getElementById('offer').value.trim(),
+        target: document.getElementById('target').value.trim(),
+        product_stage: document.getElementById('product_stage').value,
+        extra: document.getElementById('extra').value.trim()
+      };
+
+      try {
+        const resp = await fetch('/api/intake', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const result = await resp.json();
+        if (!resp.ok) throw new Error(result.error || 'Submission failed');
+
+        status.className = 'status success';
+        status.textContent = '✅ Got it! You\'ll receive your audit within 24 hours at ' + data.email + '. Check your inbox — we\'re starting now.';
+        document.getElementById('intake-form-card').querySelector('h2').textContent = '✅ Submitted!';
+        btn.style.display = 'none';
+      } catch (err) {
+        status.className = 'status error';
+        status.textContent = '❌ ' + err.message + ' — Please email ops@launchcrate.io with your details and we\'ll process it manually.';
+        btn.disabled = false;
+        btn.textContent = 'Submit & Start My Growth Launch →';
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+[
+  {
+    "activity_id": "7479184386219851779",
+    "post_url": "https://www.linkedin.com/posts/krishan-kumar-awasthi-5153b4290_github-krishankumarawasthivybehavefun-activity-7479184386219851779-O_Fl?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAGq_9S0Bnghgjfow2D-GHgIpgT_yHNrcbpc",
+    "text": "🚀 Excited to share my latest full-stack project: Vybe! 🚀\nVybe is a feature-rich, real-time social media platform designed to bring people together through posts, stories, real-time messaging, and short-form video content. Built using the MERN stack and WebSocket architecture, it mimics modern social experiences with smooth, reactive user interfaces. \n🛠️ The Tech Stack\nFrontend: React, Vite, Redux Toolkit (for global state management across user, post, and chat flows). \nBackend: Node.js, Express.js, MongoDB via Mongoose. \nReal-Time Capabilities: Socket.io for live chat messaging and real-time online user tracking. \nMedia Management: Cloudinary API combined with Multer for handling seamless image/video uploads. \n\n🌟 Core Features\nInteractive Feed: Share, edit, and discover multimedia posts and ephemeral stories. \n\"Loops\": A dedicated short-form video streaming component with custom playback controls. \nReal-Time Chat: A full-fledged messaging area with active conversation tracking and instant delivery. \nInstant Notifications: Get notified in real-time when users interact with your profile or content. \nUser Networking: Custom follow/unfollow system, search utility, and personalized user profiles. \n\n🔗 Check it out!\n🌐 Live Demo: https://lnkd.in/gscgce-K\n💻 GitHub Repo: https://lnkd.in/gwaCHZec\n\nBuilding this helped me dive deeper into structuring highly scalable MongoDB models, handling asynchronous state with Redux, and optimizing real-time server connections. I would love to hear your feedback or any suggestions for improvements! \n#MERNStack #ReactJS #NodeJS #WebDevelopment #SocketIO #FullStackDeveloper #CodingProject #OpenSource",
+    "full_urn": "urn:li:activity:7479184386219851779",
+    "author": {
+      "name": "Krishan Kumar Awasthi",
+      "headline": "Software Developer | MERN Stack & Next.js Developer | Node.js • React • Prisma • PostgreSQL | CSE @ Chandigarh University",
+      "profile_id": "1183431905",
+      "profile_url": "https://www.linkedin.com/in/krishan-kumar-awasthi-5153b4290?miniProfileUrn=urn%3Ali%3Afsd_profile%3AACoAAEaJvOEBGB6hJPYHpGUtcO-ae5-J-d7vrys",
+      "image_url": "https://media.licdn.com/dms/image/v2/D5603AQFk6Vd7AtwtTg/profile-displayphoto-scale_100_100/B56Z7pPqqnG8AY-/0/1782029660506?e=1784764800&v=beta&t=erMNUS9QBV9gTa9GgpCBlX85YP8cJdmudP7X5D3748Y"
+    },
+    "stats": {
+      "total_reactions": 0,
+      "comments": 0,
+      "shares": 0,
+      "reactions": []
+    },
+    "posted_at": {
+      "display_text": "20m",
+      "date": "2026-07-04 16:48:34",
+      "timestamp": 1783176514201
+    },
+    "hashtags": [
+      "MERNStack",
+      "ReactJS",
+      "NodeJS",
+      "WebDevelopment",
+      "SocketIO",
+      "FullStackDeveloper",
+      "CodingProject",
+      "OpenSource"
+    ],
+    "content": {
+      "type": "article",
+      "article": {
+        "title": "GitHub - KrishanKumarAwasthi/Vybe_Have_Fun",
+        "subtitle": "github.com",
+        "url": "https://github.com/KrishanKumarAwasthi/Vybe_Have_Fun",
+        "thumbnail_url": "https://media.licdn.com/dms/image/sync/v2/D5627AQHpMi2EfiDaUQ/articleshare-shrink_1280_800/B56Z8tme7SG4As-/0/1783176491532?e=1783785600&v=beta&t=ZA4V8TUF9oISCQ-4j7qs8lX9NLAHq4Ux5BQDwsApOnQ"
+      }
+    },
+    "is_reshare": false,
+    "metadata": {
+      "total_count": 15,
+      "count": 15,
+      "page": 1,
+      "page_size": 50,
+      "total_pages": 1,
+      "has_next_page": false,
+      "has_prev_page": false
+    },
+    "search_input": "ad spend OR zero conversions OR landing page pain OR not converting OR no demos"
+  },
+  {
+    "activity_id": "7479184402808238081",
+    "post_url": "https://www.linkedin.com/posts/billmckay_hoadoctor-america250-independenceday-activity-7479184402808238081-LxMJ?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAGq_9S0Bnghgjfow2D-GHgIpgT_yHNrcbpc",
+    "text": "America is celebrating 250 years of independence.\n\nToday, 77 million homeowners just gained something they’ve never had before.\n\n🎥 Watch this 60-second demo.\n\nToday, we’re proud to officially launch HOA Doctor®.\n\nFor the first time, verified homeowners can rate and review their HOA Board and Property Management Company through one trusted platform.\n\nNo anonymous accounts.\n\nNo fake reviews.\n\nVerified Voices. Protected Identities™\n\nIf you live in an HOA or condominium community, your experience matters.\n\nRate your HOA Board.\n\nRate your Property Management Company.\n\nHelp build greater transparency and accountability for millions of homeowners across America.\n\nThis Independence Day, let’s celebrate more than homeownership.\n\nLet’s celebrate giving homeowners a voice.\n\nWelcome to HOA Doctor®.\n\nRate. Review. Make Your Voice Count.\n\nWe also invite journalists, consumer advocates, regulators, legislators, board members, property management professionals, REALTORS®, lenders, title professionals, and real estate leaders to see how verified homeowner feedback can help build more transparent communities across America.\n\n#HOADoctor #America250 #IndependenceDay #HOA #Condominium #Homeowners #Transparency #ConsumerProtection #ConsumerRights #PropertyManagement #CommunityAssociations #RealEstate #Housing #PropTech #InvestigativeJournalism #HousingPolicy",
+    "full_urn": "urn:li:ugcPost:7479184350274572289",
+    "author": {
+      "name": "Bill McKay",
+      "headline": "Author of HOAs Unmasked | Founder, HOA Doctor® | Building the Trust Layer for America’s $11 Trillion HOA System",
+      "profile_id": "66074573",
+      "profile_url": "https://www.linkedin.com/in/billmckay?miniProfileUrn=urn%3Ali%3Afsd_profile%3AACoAAAPwN80BNrBHgex1eQpMSIOEg1oBUe7E6qk",
+      "image_url": "https://media.licdn.com/dms/image/v2/D5603AQFNh1VQSZ1YNw/profile-displayphoto-scale_100_100/B56ZonZbhhHAAc-/0/1761597570263?e=1784764800&v=beta&t=l3pd861KDgPTArjHp5MY9d4CH4NIEVE2lgxTqHzx2lA"
+    },
+    "stats": {
+      "total_reactions": 0,
+      "comments": 0,
+      "shares": 0,
+      "reactions": []
+    },
+    "posted_at": {
+      "display_text": "20m",
+      "date": "2026-07-04 16:48:38",
+      "timestamp": 1783176518156
+    },
+    "hashtags": [
+      "HOADoctor",
+      "America250",
+      "IndependenceDay",
+      "HOA",
+      "Condominium",
+      "Homeowners",
+      "Transparency",
+      "ConsumerProtection",
+      "ConsumerRights",
+      "PropertyManagement",
+      "CommunityAssociations",
+      "RealEstate",
+      "Housing",
+      "PropTech",
+      "InvestigativeJournalism",
+      "HousingPolicy"
+    ],
+    "content": {
+      "type": "video",
+      "url": "https://dms.licdn.com/playlist/vid/v2/D5605AQHRR5sS4IdH0w/mp4-720p-30fp-crf28/B56Z8tmi2sIMB8-/0/1783176511825?e=1783785600&v=beta&t=gAu6JTld1tuvy4sopegDAxqeqy3R32MpF_-IPP4VcFQ",
+      "thumbnail_url": "https://media.licdn.com/dms/image/v2/D5605AQHRR5sS4IdH0w/videocover-high/B56Z8tmi2sIMBM-/0/1783176508316?e=1783785600&v=beta&t=sCAIZdoSdOzxw_olx81OgV_zgip1zHCRZe5q27CuEn8",
+      "duration_ms": 55566
+    },
+    "is_reshare": false,
+    "metadata": {
+      "total_count": 15,
+      "count": 15,
+      "page": 1,
+      "page_size": 50,
+      "total_pages": 1,
+      "has_next_page": false,
+      "has_prev_page": false
+    },
+    "search_input": "ad spend OR zero conversions OR landing page pain OR not converting OR no demos"
+  },
+  {
+    "activity_id": "7479184464347086849",
+    "post_url": "https://www.linkedin.com/posts/enricopapalini_the-kowalski-loop-turning-a-local-model-activity-7479184464347086849-bu8c?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAGq_9S0Bnghgjfow2D-GHgIpgT_yHNrcbpc",
+    "text": "I got Claude Code running with a local model on Apple Silicon.\nEverything looked great.\n\n“Smile and wave, boys. Smile and wave.”\n\nThen I tried letting it run unattended. And that’s when it got interesting: ballooning prompts, creative timeouts, tasks marked “done” with zero evidence, and a noticeable “Rico, kaboom?” energy.\n\nSo I built the Kowalski Loop: less magic, more discipline.\n- atomic task planning \n- deterministic verification gates (no “trust me bro”) \n- retries driven by actual failure feedback \n- Git checkpoints for validated progress\n- model/backend switching (DFlash, MLX, TurboQuant) without rewriting half the stack\n\nResult: from a cool demo to a real local engineering system.\n“Kowalski, analysis.”\n“Skipper, we can run this unattended now.”\n\nFull story in the new Medium article (Part 3):",
+    "full_urn": "urn:li:activity:7479184464347086849",
+    "author": {
+      "name": "Enrico Papalini",
+      "headline": "Head of Software Development - Issuances, Custody & Data @ Euronext Securities | Author of “NON-DETERMINISTIC Software Engineering”",
+      "profile_id": "2057055",
+      "profile_url": "https://www.linkedin.com/in/enricopapalini?miniProfileUrn=urn%3Ali%3Afsd_profile%3AACoAAAAfY18BWy8gZbPnicTg4teQyM9lJi19xis",
+      "image_url": "https://media.licdn.com/dms/image/v2/C4E03AQHqhRg1-cTcVA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1655482923847?e=1784764800&v=beta&t=UNsOVybP06KR6NH70viUd2BKv_Bhs5jRiH7MqDaQCpI"
+    },
+    "stats": {
+      "total_reactions": 0,
+      "comments": 0,
+      "shares": 0,
+      "reactions": []
+    },
+    "posted_at": {
+      "display_text": "20m",
+      "date": "2026-07-04 16:48:52",
+      "timestamp": 1783176532828
+    },
+    "hashtags": [],
+    "content": {
+      "type": "article",
+      "article": {
+        "title": "The Kowalski Loop: Turning a Local Model into a Verified Coding System",
+        "subtitle": "medium.com",
+        "url": "https://medium.com/p/the-kowalski-loop-turning-a-local-model-into-a-verified-coding-system-2f37d399ec61?source=social.linkedin&_nonce=SsgJ6uJ5",
+        "thumbnail_url": "https://media.licdn.com/dms/image/sync/v2/D4D27AQGcL56T05-xGg/articleshare-shrink_1280_800/B4DZ8tmBNGIIAg-/0/1783176370390?e=1783785600&v=beta&t=eRBLYWxTawa_ljECuE5vfoGN-TzWXhacKLglSW-kwD0"
+      }
+    },
+    "is_reshare": false,
+    "metadata": {
+      "total_count": 15,
+      "count": 15,
+      "page": 1,
+      "page_size": 50,
+      "total_pages": 1,
+      "has_next_page": false,
+      "has_prev_page": false
+    },
+    "search_input": "ad spend OR zero conversions OR landing page pain OR not converting OR no demos"
+  },
+  {
+    "activity_id": "7479184473222217729",
+    "post_url": "https://www.linkedin.com/posts/jonas-manthey-961062121_day-2-of-testing-claude-manus-and-chatgpt-activity-7479184473222217729-SMxk?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAGq_9S0Bnghgjfow2D-GHgIpgT_yHNrcbpc",
+    "text": "Day 2 of testing Claude, Manus and ChatGPT on a simple kitchen and pantry floor plan.\n\n2 out of 3 still delivered nonsense.\n\nNot because the task was complex. It wasn't. But because none of them had the honesty to say \"I don't understand\" when they didn't. Instead: confident output, wrong assumptions, wasted time.\n\nThat's not an AI problem. That's a culture problem baked into the training. Looks a little bit like too much Gen Z in training 😃 \n\nI cancelled all my paid subscriptions. Not out of frustration – out of principle. Poor value for money is poor value for money, regardless of how impressive the demo looked.\n\nWe are about to rebuild entire industries on tools that can't plan a kitchen without making things up.\n\nMaybe worth thinking about that before we hand them the blueprint for everything else.\n\nBiggest problem seems to be doors by the way, for whatever reasons.\n\nFeel free to share your AI nightmares 😉",
+    "full_urn": "urn:li:activity:7479184473222217729",
+    "author": {
+      "name": "Jonas Manthey",
+      "headline": "Ich löse #Mediaprobleme #Agenturprobleme #KPIprobleme u.v.m. | ROI statt Bauchgefühl & Wirkung statt Geldverbrennen - Media & Marketing Consultant (Freelance / Interim)",
+      "profile_id": "504760537",
+      "profile_url": "https://www.linkedin.com/in/jonas-manthey-961062121?miniProfileUrn=urn%3Ali%3Afsd_profile%3AACoAAB4WCNkBW9lXTkufLLa3HJXXPbrMZcF2qRQ",
+      "image_url": "https://media.licdn.com/dms/image/v2/D4E03AQHDGX4-nepHAw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1727881104986?e=1784764800&v=beta&t=pEso1c9gircvrjBdnsMU_nBCc3i6EHN36DRlOq52ieE"
+    },
+    "stats": {
+      "total_reactions": 0,
+      "comments": 0,
+      "shares": 0,
+      "reactions": []
+    },
+    "posted_at": {
+      "display_text": "20m",
+      "date": "2026-07-04 16:48:54",
+      "timestamp": 1783176534944
+    },
+    "hashtags": [],
+    "content": {
+      "type": "image",
+      "url": "https://media.licdn.com/dms/image/v2/D4E22AQHEYLpsvEFDfQ/feedshare-image-high-res/B4EZ8tmpVKHwAU-/0/1783176533556?e=1784764800&v=beta&t=SsP3bzqHBPIl3qpsGpPQyhlz7plGaYOEtsbBNcEx_K8",
+      "images": [
+        {
+          "url": "https://media.licdn.com/dms/image/v2/D4E22AQHEYLpsvEFDfQ/feedshare-shrink_800/B4EZ8tmpVKHwAc-/0/1783176533557?e=1784764800&v=beta&t=7pfPbcUzYSu7Wb5DGJkJuMfd8ArC0gBU7FGbjZMyEwA",
+          "width": 800,
+          "height": 422
+        },
+        {
+          "url": "https://media.licdn.com/dms/image/v2/D4E22AQHEYLpsvEFDfQ/feedshare-shrink_1280/B4EZ8tmpVKHwAM-/0/1783176533557?e=1784764800&v=beta&t=jKmR3hdQ4R1uGAmAIvYujx70So6rloPUuID30hibBMA",
+          "width": 1280,
+          "height": 676
+        },
+        {
+          "url": "https://media.licdn.com/dms/image/v2/D4E22AQHEYLpsvEFDfQ/feedshare-image-high-res/B4EZ8tmpVKHwAU-/0/1783176533556?e=1784764800&v=beta&t=SsP3bzqHBPIl3qpsGpPQyhlz7plGaYOEtsbBNcEx_K8",
+          "width": 1402,
+          "height": 741
+        }
+      ]
+    },
+    "is_reshare": false,
+    "metadata": {
+      "total_count": 15,
+      "count": 15,
+      "page": 1,
+      "page_size": 50,
+      "total_pages": 1,
+      "has_next_page": false,
+      "has_prev_page": false
+    },
+    "search_input": "ad spend OR zero conversions OR landing page pain OR not converting OR no demos"
+  },
+  {
+    "activity_id": "7479184485318840320",
+    "post_url": "https://www.linkedin.com/posts/nda-technology_ehs-safety-qms-activity-7479184485318840320-M_CZ?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAGq_9S0Bnghgjfow2D-GHgIpgT_yHNrcbpc",
+    "text": "🚀 EHS & HRMS Software – 12+ વર્ષના ઇન્ડસ્ટ્રીયલ અનુભવનું પરિણામ\n\nમેન્યુફેક્ચરિંગ ઇન્ડસ્ટ્રીમાં 12+ વર્ષ (HR & EHS) નો અનુભવ મેળવ્યા બાદ, ઓડિટ્સ, ડોક્યુમેન્ટેશન, ટ્રેનિંગ અને EHS Compliance દરમિયાન આવતી વાસ્તવિક સમસ્યાઓને ધ્યાનમાં રાખીને આ EHS & HRMS Software વિકસાવવામાં આવ્યું છે.\n\n\"આ Salary Software નથી\"\n\nઆ એક IATF 16949, ISO 14001 અને ISO 45001 ની જરૂરિયાતોને ધ્યાનમાં રાખીને બનાવાયેલ સંપૂર્ણ Digital Management System છે.\n\n✅ HRMS Modules (IATF Based & Systematic Digital Solutions)\n\n✔ Digital QR Forms (Staff & Workers)\n✔ Manpower Requisition (Digitally via 🔗 Link)\n✔ Employee Document Management (Digitally via 🔗 Link)\n✔ Fully Digital Organization Structure (Drag & Drop System)\n✔ Smart Skill Matrix with History Tracking\n✔ Training Management (Induction & On-the-Job Training)\n✔ Online Evaluation System (Question Paper Link) with Automatic Result & Skill Matrix Update\n✔ Task Management (Performance Management)\n✔ Employee Suggestions (Digitally via 🔗 Link)\n✔ Employment Letters (All Required HR Letters Covered)\n✔ Employee Exit Interview (Digitally via 🔗 Link)\n✔ ID Card Generation\n✔ Fine Register (Aligned with Government Guidelines)\n✔ Legal Register with 90-Day Expiry Alerts\n✔ Asset Management\n✔ Expiry Alert Management\n✔ અને અન્ય ઘણા મહત્વપૂર્ણ HR Modules\n\n🌱 EHS Modules (ISO 14001 & ISO 45001 Based)\n\n✔ 5S Audits\n✔ Digital Checklists with Actual Results & Performance Measurement\n✔ Legal Compliance (90-Day Advance Notifications)\n✔ Incident / Accident Management (Built-in Safety Tree)\n✔ CAPA & Why-Why Analysis\n✔ Risk Assessment\n✔ Work Permit System\n✔ Inspection & Audit Management (With Expiry Alerts)\n✔ Carbon Footprint Calculation & Reports (Scope-wise)\n✔ અને તમામ મહત્વપૂર્ણ EHS Modules (24 Module and 45+ Sub modules)\n\n✅ POKA-YOKE (Mistake Proofing) System\n\nસોફ્ટવેરમાં POKA-YOKE (Mistake Proofing) સિસ્ટમ અમલમાં મૂકવામાં આવી છે, જેથી વારંવાર આવતી NC (Non-Conformity) અટકાવવામાં મદદ મળે, પ્રક્રિયાઓ Standardize થાય અને Audit Readiness સતત જળવાઈ રહે.\n\n🔗 તમામ Modules એકબીજા સાથે Interlinked હોવાથી Data Duplication ઘટે છે, Manual Work ઓછું થાય છે અને Documentation તથા Compliance Management વધુ સરળ અને અસરકારક બને છે.\n\n💰 Affordable Pricing: Pay Only for What You Need.\n\nએક વખત Live Demo જોશો તો આ Software ની વાસ્તવિક શક્તિ, Automation અને Practical ઉપયોગિતા સ્પષ્ટ રીતે સમજાઈ જશે.\n\n📞 Contact: 99099 59526\n📧 Email: ndatechnology04@gmail.com\n\n\n#EHS #Safety #QMS #Casting #Manufacturing #Foundry #PeopleAndOperations #Sandcasting #CastingIndustry #HSE #Cfbr #Rajkotupdate  #Machineshop #automotive  #Engineering #Innovation #Manufacturing #Director #CEO #MR #Gujarat #Manufacturing #IndustrialAutomation #DigitalTransformation #HRMS #EHS #EnvironmentHealthSafety #WorkplaceSafety #ISO14001 #ISO45001 #IATF16949 #ComplianceManagement #AuditManagement #RiskAssessment #CarbonFootprint #Sustainability #HRTechnology #ManufacturingIndustry #AutomobileIndustry #SmartFactory #Industry40 #BusinessGrowth #Productivity #Automation #NDATechnology",
+    "full_urn": "urn:li:activity:7479184485318840320",
+    "author": {
+      "name": "NDA Technology",
+      "headline": "82 followers",
+      "profile_id": "122803955",
+      "profile_url": "https://www.linkedin.com/company/nda-technology/posts",
+      "image_url": "https://media.licdn.com/dms/image/v2/D4D0BAQE1uZV36UmBdw/company-logo_100_100/B4DZ5TIqP0IUAI-/0/1779511239885?e=1784764800&v=beta&t=X8G3cbM2FAn0eyFsceM30zvpkIfMF6qxIJQt3B_e9Gg"
+    },
+    "stats": {
+      "total_reactions": 1,
+      "comments": 0,
+      "shares": 1,
+      "reactions": [
+        {
+          "type": "LIKE",
+          "count": 1
+        }
+      ]
+    },
+    "posted_at": {
+      "display_text": "20m",
+      "date": "2026-07-04 16:48:57",
+      "timestamp": 1783176537828
+    },
+    "hashtags": [
+      "EHS",
+      "Safety",
+      "QMS",
+      "Casting",
+      "Manufacturing",
+      "Foundry",
+      "PeopleAndOperations",
+      "Sandcasting",
+      "CastingIndustry",
+      "HSE",
+      "Cfbr",
+      "Rajkotupdate",
+      "Machineshop",
+      "automotive",
+      "Engineering",
+      "Innovation",
+      "Director",
+      "CEO",
+      "MR",
+      "Gujarat",
+      "IndustrialAutomation",
+      "DigitalTransformation",
+      "HRMS",
+      "EnvironmentHealthSafety",
+      "WorkplaceSafety",
+      "ISO14001",
+      "ISO45001",
+      "IATF16949",
+      "ComplianceManagement",
+      "AuditManagement",
+      "RiskAssessment",
+      "CarbonFootprint",
+      "Sustainability",
+      "HRTechnology",
+      "ManufacturingIndustry",
+      "AutomobileIndustry",
+      "SmartFactory",
+      "Industry40",
+      "BusinessGrowth",
+      "Productivity",
+      "Automation",
+      "NDATechnology"
+    ],
+    "content": {
+      "type": "image",
+      "url": "https://media.licdn.com/dms/image/v2/D4D22AQF-Pk7dCYBHlA/feedshare-image-high-res/B4DZ8tmY4NI4AU-/0/1783176466443?e=1784764800&v=beta&t=rbEvsPk_M-mZ_yZ2oHEQ8aOotbuwGlAX413-4ibbckc",
+      "images": [
+        {
+          "url": "https://media.licdn.com/dms/image/v2/D4D22AQF-Pk7dCYBHlA/feedshare-image-high-res/B4DZ8tmY4NI4AU-/0/1783176466443?e=1784764800&v=beta&t=rbEvsPk_M-mZ_yZ2oHEQ8aOotbuwGlAX413-4ibbckc",
+          "width": 1024,
+          "height": 1536
+        },
+        {
+          "url": "https://media.licdn.com/dms/image/v2/D4D22AQF-Pk7dCYBHlA/feedshare-shrink_800/B4DZ8tmY4NI4Ac-/0/1783176466443?e=1784764800&v=beta&t=mpCAFczxE0E3ajaJRSFLjyD0kfFdKUcmIIcAP42iEh4",
+          "width": 800,
+          "height": 1200
+        },
+        {
+          "url": "https://media.licdn.com/dms/image/v2/D4D22AQF-Pk7dCYBHlA/feedshare-shrink_1280/B4DZ8tmY4NI4AM-/0/1783176466444?e=1784764800&v=beta&t=iM5QNb-E7engxJ7jFpT4t1L0GWXXNyIU7xf2Edq6x78",
+          "width": 1024,
+          "height": 1536
+        }
+      ]
+    },
+    "is_reshare": false,
+    "metadata": {
+      "total_count": 15,
+      "count": 15,
+      "page": 1,
+      "page_size": 50,
+      "total_pages": 1,
+      "has_next_page": false,
+      "has_prev_page": false
+    },
+    "search_input": "ad spend OR zero conversions OR landing page pain OR not converting OR no demos"
+  }
+]

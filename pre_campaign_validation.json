@@ -1,0 +1,50 @@
+{
+  "timestamp": "2026-06-24T16:59:37.395530",
+  "checks": [
+    {
+      "name": "Local Endpoint (8765)",
+      "status": "pass"
+    },
+    {
+      "name": "Cloudflare Tunnel",
+      "status": "fail"
+    },
+    {
+      "name": "SMTP Credentials File",
+      "status": "pass"
+    },
+    {
+      "name": "SMTP Connectivity",
+      "status": "pass"
+    },
+    {
+      "name": "Wave 1 Results",
+      "status": "fail"
+    },
+    {
+      "name": "Wave 2 Script Ready",
+      "status": "pass"
+    },
+    {
+      "name": "Auto-Responder Script",
+      "status": "pass"
+    },
+    {
+      "name": "Cron Jobs Deployed",
+      "status": "pass"
+    },
+    {
+      "name": "Tracking Log Ready",
+      "status": "pass"
+    },
+    {
+      "name": "Tunnel Metrics Ready",
+      "status": "pass"
+    }
+  ],
+  "all_passed": false,
+  "failures": [
+    "Cloudflare Tunnel",
+    "Wave 1 Results"
+  ]
+}

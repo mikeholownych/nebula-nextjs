@@ -1,0 +1,244 @@
+[2026-06-27 15:36:43 UTC] START audit delivery | url=https://nebulacomponents.shop | to=mike+test@agentmail.to | dry_run=True
+[2026-06-27 15:36:43 UTC] Scraping https://nebulacomponents.shop...
+[2026-06-27 15:36:43 UTC] Scraped OK | headline='Stop spending weeks on your landing page.Ship in 30 minutes.' | ctas=['ð\x9f\x9b\x92 Buy Now â\x80\x94 $7 â\x86\x92', 'ð\x9f\x91\x80 See the Live Demo First'] | load=290ms | proof=['testimonials', 'press mention', 'guarantee']
+[2026-06-27 15:36:43 UTC] Audit complete | overall=7.2/10 (B) | headline=8 | cta=5 | social_proof=8 | speed=9 | mobile=6
+[2026-06-27 15:36:43 UTC] Email composed | subject='Your nebulacomponents.shop audit — B overall, here's the fix'
+[2026-06-27 15:36:43 UTC] DRY RUN complete — no email sent
+[2026-06-27 15:36:47 UTC] START audit delivery | url=https://nebulacomponents.shop | to=nebulashop@agentmail.to | dry_run=False
+[2026-06-27 15:36:47 UTC] Scraping https://nebulacomponents.shop...
+[2026-06-27 15:36:47 UTC] Scraped OK | headline='Stop spending weeks on your landing page.Ship in 30 minutes.' | ctas=['ð\x9f\x9b\x92 Buy Now â\x80\x94 $7 â\x86\x92', 'ð\x9f\x91\x80 See the Live Demo First'] | load=99ms | proof=['testimonials', 'press mention', 'guarantee']
+[2026-06-27 15:36:47 UTC] Audit complete | overall=7.2/10 (B) | headline=8 | cta=5 | social_proof=8 | speed=9 | mobile=6
+[2026-06-27 15:36:47 UTC] Email composed | subject='Your nebulacomponents.shop audit — B overall, here's the fix'
+[2026-06-27 15:36:47 UTC] Sending via AgentMail REST to nebulashop@agentmail.to...
+[2026-06-27 15:36:48 UTC] Email SENT | result={"message_id": "<0100019f09b9eeca-3126ade8-bbfc-4d68-a41a-615008f93c95-000000@email.amazonses.com>", "thread_id": "c9e98cd8-e8ab-4507-9261-477bcd8a9b5b"}
+[2026-06-27 15:36:48 UTC] DONE | audit delivered to nebulashop@agentmail.to | HOT_LEAD.json updated | ledger written
+[2026-06-28 07:31:54 UTC] START audit delivery | url=https://nebulacomponents.shop | to=test@example.com | dry_run=True
+[2026-06-28 07:31:54 UTC] Scraping https://nebulacomponents.shop...
+[2026-06-28 07:31:54 UTC] Scraped OK | headline='Stop spending weeks on your landing page.Ship in 30 minutes.' | ctas=['ð\x9f\x9b\x92 Buy Now â\x80\x94 $7 â\x86\x92', 'ð\x9f\x91\x80 See the Live Demo First'] | load=107ms | proof=['testimonials', 'press mention', 'guarantee']
+[2026-06-28 07:31:54 UTC] Audit complete | overall=7.2/10 (B) | headline=8 | cta=5 | social_proof=8 | speed=9 | mobile=6
+[2026-06-28 07:31:54 UTC] Email composed | subject='Your nebulacomponents.shop audit — B overall, here's the fix'
+[2026-06-28 07:31:54 UTC] DRY RUN complete — no email sent
+[2026-07-02 10:05:55 UTC] START audit delivery | url=https://nebulacomponents.shop | to=test@example.com | dry_run=True
+[2026-07-02 10:05:55 UTC] Scraping https://nebulacomponents.shop...
+[2026-07-02 10:05:55 UTC] Scraped OK | headline='Stop spending weeks on your landing page.Ship in 30 minutes.' | ctas=['ð\x9f\x9b\x92 Buy Now â\x80\x94 $7 â\x86\x92', 'ð\x9f\x91\x80 See the Live Demo First'] | load=102ms | proof=['testimonials', 'press mention', 'guarantee']
+[2026-07-02 10:05:55 UTC] Audit complete | overall=7.2/10 (B) | headline=8 | cta=5 | social_proof=8 | speed=9 | mobile=6
+[2026-07-02 10:05:55 UTC] Email composed | subject='Your nebulacomponents.shop audit — B overall, here's the fix'
+[2026-07-02 10:05:55 UTC] DRY RUN complete — no email sent
+[2026-07-02 10:42:29 UTC] START audit delivery | url=https://www.timetechnologiesllc.com/sales-letter/website-development-san-francisco | to=ask@timetechnologiesllc.com | dry_run=False
+[2026-07-02 10:42:29 UTC] Scraping https://www.timetechnologiesllc.com/sales-letter/website-development-san-francisco...
+[2026-07-02 10:42:29 UTC] SCRAPE FAILED: HTTP 404
+[2026-07-02 10:43:05 UTC] START audit delivery | url=https://www.timetechnologiesllc.com/ | to=ask@timetechnologiesllc.com | dry_run=False
+[2026-07-02 10:43:05 UTC] Scraping https://www.timetechnologiesllc.com/...
+[2026-07-02 10:43:06 UTC] Scraped OK | headline='Attract More Clients. Automate Intake. Run a More Efficient ' | ctas=['Law Firm Website Design', 'Get Case Study'] | load=569ms | proof=['testimonials', 'trust signal', 'quote/testimonial', 'guarantee']
+[2026-07-02 10:43:06 UTC] Audit complete | overall=7.2/10 (B) | headline=5 | cta=8 | social_proof=8 | speed=9 | mobile=6
+[2026-07-02 10:43:06 UTC] Email composed | subject='Your www.timetechnologiesllc.com audit — B overall, here's the fix'
+[2026-07-02 10:43:06 UTC] Sending via AgentMail REST to ask@timetechnologiesllc.com...
+[2026-07-02 10:43:07 UTC] Email SENT | result={"message_id": "<0100019f226cd994-ce804e23-454a-48da-afe5-277661f561cb-000000@email.amazonses.com>", "thread_id": "496a7eb0-f0f5-487c-a0c6-8e73b9bedee1"}
+[2026-07-02 10:43:07 UTC] DONE | audit delivered to ask@timetechnologiesllc.com | HOT_LEAD.json updated | ledger written
+[2026-07-02 10:44:24 UTC] START audit delivery | url=https://funghiclear.com/products/funghiclear-nail-spray-with-manuka-oil | to=contact@funghiclear.com | dry_run=False
+[2026-07-02 10:44:24 UTC] Scraping https://funghiclear.com/products/funghiclear-nail-spray-with-manuka-oil...
+[2026-07-02 10:44:24 UTC] Scraped OK | headline='FunghiClear® Nail Spray | Manuka Oil Toenail Treatment' | ctas=['Order wholesale'] | load=400ms | proof=['customer count', 'testimonials', 'guarantee']
+[2026-07-02 10:44:24 UTC] Audit complete | overall=7.2/10 (B) | headline=5 | cta=8 | social_proof=8 | speed=9 | mobile=6
+[2026-07-02 10:44:24 UTC] Email composed | subject='Your funghiclear.com audit — B overall, here's the fix'
+[2026-07-02 10:44:24 UTC] Sending via AgentMail REST to contact@funghiclear.com...
+[2026-07-02 10:44:25 UTC] Email SENT | result={"message_id": "<0100019f226e0a3f-dce8b69c-83aa-4cb4-944a-e6eb977d9d5e-000000@email.amazonses.com>", "thread_id": "7c8cd0c6-6103-4de6-b447-78eb62996c82"}
+[2026-07-02 10:44:25 UTC] DONE | audit delivered to contact@funghiclear.com | HOT_LEAD.json updated | ledger written
+[2026-07-02 10:44:27 UTC] START audit delivery | url=https://lowtdfw.com/offer | to=info@magnoliamedspaandwellness.com | dry_run=False
+[2026-07-02 10:44:27 UTC] Scraping https://lowtdfw.com/offer...
+[2026-07-02 10:44:28 UTC] Scraped OK | headline='Always Tired? Flat in the Gym? Not Yourself at Home?' | ctas=['CHECK MY LEVELS – FREE100% Private. No Insurance Headaches.', 'Claim My Free Hormone And Body Comp Check100% Private. No Insurance Headaches.'] | load=173ms | proof=['testimonials', 'quote/testimonial', 'star rating']
+[2026-07-02 10:44:28 UTC] Audit complete | overall=7.2/10 (B) | headline=5 | cta=8 | social_proof=8 | speed=9 | mobile=6
+[2026-07-02 10:44:28 UTC] Email composed | subject='Your lowtdfw.com audit — B overall, here's the fix'
+[2026-07-02 10:44:28 UTC] Sending via AgentMail REST to info@magnoliamedspaandwellness.com...
+[2026-07-02 10:44:28 UTC] Email SENT | result={"message_id": "<0100019f226e179a-14bba836-4e7b-49d6-b20e-1b1c1f6eade2-000000@email.amazonses.com>", "thread_id": "55369b5f-b403-4499-a218-9cea41a492d2"}
+[2026-07-02 10:44:28 UTC] DONE | audit delivered to info@magnoliamedspaandwellness.com | HOT_LEAD.json updated | ledger written
+[2026-07-02 12:05:14 UTC] START audit delivery | url=https://invoicingapi.com | to=support@invoicingapi.com | dry_run=False
+[2026-07-02 12:05:14 UTC] Scraping https://invoicingapi.com...
+[2026-07-02 12:05:15 UTC] Scraped OK | headline='Invoice creation and payment for any business' | ctas=['Get Your Free API Key'] | load=533ms | proof=['quote/testimonial', 'guarantee']
+[2026-07-02 12:05:15 UTC] Audit complete | overall=7.8/10 (B) | headline=8 | cta=8 | social_proof=8 | speed=9 | mobile=6
+[2026-07-02 12:05:15 UTC] Email composed | subject='Your invoicingapi.com audit — B overall, here's the fix'
+[2026-07-02 12:05:15 UTC] Sending via AgentMail REST to support@invoicingapi.com...
+[2026-07-02 12:05:15 UTC] Email SENT | result={"message_id": "<0100019f22b80e68-feaa2e5e-d766-4721-9538-f8e3c99a1b11-000000@email.amazonses.com>", "thread_id": "cde8b6a6-2252-4275-8f34-bd70081f1f97"}
+[2026-07-02 12:05:15 UTC] DONE | audit delivered to support@invoicingapi.com | HOT_LEAD.json updated | ledger written
+[2026-07-02 12:05:21 UTC] START audit delivery | url=https://usemagnetiq.com | to=hello@adsby.co | dry_run=False
+[2026-07-02 12:05:21 UTC] Scraping https://usemagnetiq.com...
+[2026-07-02 12:05:22 UTC] Scraped OK | headline='Automate Your PPCWorkflow Save Hours Every Day.' | ctas=['Free Tools', 'Get Started'] | load=431ms | proof=['customer count', 'testimonials']
+[2026-07-02 12:05:22 UTC] Audit complete | overall=6.6/10 (C) | headline=5 | cta=5 | social_proof=8 | speed=9 | mobile=6
+[2026-07-02 12:05:22 UTC] Email composed | subject='Your usemagnetiq.com audit — C overall, here's the fix'
+[2026-07-02 12:05:22 UTC] Sending via AgentMail REST to hello@adsby.co...
+[2026-07-02 12:05:22 UTC] Email SENT | result={"message_id": "<0100019f22b82a5f-7b0debf4-c979-4f58-9ccd-7db6d5bb3287-000000@email.amazonses.com>", "thread_id": "0d773ad1-60cf-4c6c-b9ff-8552932b14d2"}
+[2026-07-02 12:05:22 UTC] DONE | audit delivered to hello@adsby.co | HOT_LEAD.json updated | ledger written
+[2026-07-02 14:00:11 UTC] START audit delivery | url=https://www.calisim.com/plans | to=contact@calisim.com | dry_run=False
+[2026-07-02 14:00:11 UTC] Scraping https://www.calisim.com/plans...
+[2026-07-02 14:00:12 UTC] Scraped OK | headline='Cali Sim | Wholesale Travel eSIMs - Same Network, Lower Pric' | ctas=['contact@calisim.com'] | load=442ms | proof=['guarantee']
+[2026-07-02 14:00:12 UTC] Audit complete | overall=6.6/10 (C) | headline=5 | cta=8 | social_proof=5 | speed=9 | mobile=6
+[2026-07-02 14:00:12 UTC] Email composed | subject='Your www.calisim.com audit — C overall, here's the fix'
+[2026-07-02 14:00:12 UTC] Sending via AgentMail REST to contact@calisim.com...
+[2026-07-02 14:00:12 UTC] Email SENT | result={"message_id": "<0100019f23214bf4-4c51d16b-b901-4409-8f9f-b5a6bb12d029-000000@email.amazonses.com>", "thread_id": "b3d48ad2-7b75-4e3f-a50a-e16fc78cca65"}
+[2026-07-02 14:00:12 UTC] DONE | audit delivered to contact@calisim.com | HOT_LEAD.json updated | ledger written
+[2026-07-02 14:00:33 UTC] START audit delivery | url=https://repairandsquare.com/washing-machine-repairs | to=danny@repairandsquare.com | dry_run=False
+[2026-07-02 14:00:33 UTC] Scraping https://repairandsquare.com/washing-machine-repairs...
+[2026-07-02 14:00:33 UTC] SCRAPE FAILED: HTTP 429
+[2026-07-02 14:01:05 UTC] START audit delivery | url=https://repairandsquare.com | to=danny@repairandsquare.com | dry_run=False
+[2026-07-02 14:01:05 UTC] Scraping https://repairandsquare.com...
+[2026-07-02 14:01:05 UTC] SCRAPE FAILED: HTTP 429
+[2026-07-02 16:17:48 UTC] START audit delivery | url=https://www.themidlifealpha.com/90-day-plan | to=anthony@themidlifealpha.com | dry_run=False
+[2026-07-02 16:17:48 UTC] Scraping https://www.themidlifealpha.com/90-day-plan...
+[2026-07-02 16:17:48 UTC] SCRAPE FAILED: HTTP 404
+[2026-07-02 16:18:04 UTC] START audit delivery | url=https://www.sarojhospital.com/gastro-care | to=info@sarojhospital.com | dry_run=False
+[2026-07-02 16:18:04 UTC] Scraping https://www.sarojhospital.com/gastro-care...
+[2026-07-02 16:18:05 UTC] Scraped OK | headline='Gastro Care' | ctas=[] | load=1085ms | proof=['press mention']
+[2026-07-02 16:18:05 UTC] Audit complete | overall=6.6/10 (C) | headline=5 | cta=8 | social_proof=5 | speed=9 | mobile=6
+[2026-07-02 16:18:05 UTC] Email composed | subject='Your www.sarojhospital.com audit — C overall, here's the fix'
+[2026-07-02 16:18:05 UTC] Sending via AgentMail REST to info@sarojhospital.com...
+[2026-07-02 16:18:05 UTC] Email SENT | result={"message_id": "<0100019f239f8855-c44966fe-5b52-4772-8a77-3d156fe476f1-000000@email.amazonses.com>", "thread_id": "83003795-5016-4ae7-a6b7-9b7e67de7028"}
+[2026-07-02 16:18:05 UTC] DONE | audit delivered to info@sarojhospital.com | HOT_LEAD.json updated | ledger written
+[2026-07-03 09:06:28 UTC] START audit delivery | url=https://spsroof.com | to=simon@spsroof.com | dry_run=False
+[2026-07-03 09:06:28 UTC] Scraping https://spsroof.com...
+[2026-07-03 09:06:28 UTC] Scraped OK | headline='ROOFING DONERIGHT SINCE 1991' | ctas=['CONTACT', 'CONTACT US NOW'] | load=104ms | proof=['guarantee']
+[2026-07-03 09:06:28 UTC] Audit complete | overall=6.6/10 (C) | headline=5 | cta=8 | social_proof=5 | speed=9 | mobile=6
+[2026-07-03 09:06:28 UTC] Email composed | subject='Your spsroof.com audit — C overall, here's the fix'
+[2026-07-03 09:06:28 UTC] Sending via AgentMail REST to simon@spsroof.com...
+[2026-07-03 09:06:28 UTC] Email SENT | result={"message_id": "<0100019f273abc53-a852c710-0c23-4615-b9e9-ddde91641b8c-000000@email.amazonses.com>", "thread_id": "5d8db750-64c5-4a00-9f30-9ee994c95012"}
+[2026-07-03 09:06:28 UTC] DONE | audit delivered to simon@spsroof.com | HOT_LEAD.json updated | ledger written
+[2026-07-03 09:06:30 UTC] START audit delivery | url=https://salisroofing.com | to=office@salisroofing.com | dry_run=False
+[2026-07-03 09:06:30 UTC] Scraping https://salisroofing.com...
+[2026-07-03 09:06:34 UTC] Scraped OK | headline='Premier roofing solutions for long-termpeace of mind' | ctas=['Contact', 'Get a free estimate'] | load=3998ms | proof=['customer count', 'testimonials', 'trust signal', 'guarantee']
+[2026-07-03 09:06:34 UTC] Audit complete | overall=6.6/10 (C) | headline=8 | cta=8 | social_proof=8 | speed=3 | mobile=6
+[2026-07-03 09:06:34 UTC] Email composed | subject='Your salisroofing.com audit — C overall, here's the fix'
+[2026-07-03 09:06:34 UTC] Sending via AgentMail REST to office@salisroofing.com...
+[2026-07-03 09:06:35 UTC] Email SENT | result={"message_id": "<0100019f273ad5fc-80424c38-f31e-4042-bb2b-e28871defe39-000000@email.amazonses.com>", "thread_id": "1cdc3364-02d8-4445-9c97-ee97ba522a9a"}
+[2026-07-03 09:06:35 UTC] DONE | audit delivered to office@salisroofing.com | HOT_LEAD.json updated | ledger written
+[2026-07-03 09:06:37 UTC] START audit delivery | url=https://www.brookerlaw.com | to=info@brookerlaw.com | dry_run=False
+[2026-07-03 09:06:37 UTC] Scraping https://www.brookerlaw.com...
+[2026-07-03 09:06:38 UTC] Scraped OK | headline='There is no greater power than awell-told story.' | ctas=['DesignWithMikey'] | load=285ms | proof=['testimonials', 'trust signal']
+[2026-07-03 09:06:38 UTC] Audit complete | overall=7.2/10 (B) | headline=5 | cta=8 | social_proof=8 | speed=9 | mobile=6
+[2026-07-03 09:06:38 UTC] Email composed | subject='Your www.brookerlaw.com audit — B overall, here's the fix'
+[2026-07-03 09:06:38 UTC] Sending via AgentMail REST to info@brookerlaw.com...
+[2026-07-03 09:06:38 UTC] Email SENT | result={"message_id": "<0100019f273ae28b-1e3dd7c0-c978-4ae4-8050-ca27af661b7a-000000@email.amazonses.com>", "thread_id": "708f2c16-c4ea-4f94-9062-edb55c21beed"}
+[2026-07-03 09:06:38 UTC] DONE | audit delivered to info@brookerlaw.com | HOT_LEAD.json updated | ledger written
+[2026-07-03 09:23:22 UTC] START audit delivery | url=https://example.com | to=lead@example.com | dry_run=True
+[2026-07-03 09:23:22 UTC] Scraping https://example.com...
+[2026-07-03 09:23:22 UTC] Scraped OK | headline='Example Domain' | ctas=[] | load=113ms | proof=[]
+[2026-07-03 09:23:22 UTC] Audit complete | overall=4.8/10 (D) | headline=5 | cta=2 | social_proof=2 | speed=9 | mobile=6
+[2026-07-03 09:23:22 UTC] Email composed | subject='Your example.com audit — D overall, here's the fix'
+[2026-07-03 09:23:22 UTC] DRY RUN complete — no email sent
+[2026-07-03 09:29:04 UTC] START audit delivery | url=https://www.manacpa.com/managed-accounting | to=accounting@mana.cpa | dry_run=False
+[2026-07-03 09:29:04 UTC] Scraping https://www.manacpa.com/managed-accounting...
+[2026-07-03 09:29:05 UTC] Scraped OK | headline='The Financial PartnerLaw Firms Trust' | ctas=['Bookkeeping', 'Free Tools'] | load=794ms | proof=[]
+[2026-07-03 09:29:05 UTC] Audit complete | overall=6.0/10 (C) | headline=5 | cta=8 | social_proof=2 | speed=9 | mobile=6
+[2026-07-03 09:29:05 UTC] Email composed | subject='Your www.manacpa.com audit — C overall, here's the fix'
+[2026-07-03 09:29:05 UTC] Sending via AgentMail REST to accounting@mana.cpa...
+[2026-07-03 09:29:05 UTC] Email SENT | result={"message_id": "<0100019f274f7084-c4c9d7d3-a731-4ac1-86b1-82a5f15186b7-000000@email.amazonses.com>", "thread_id": "5ac3134c-2d9f-4d55-adee-e096cf2eb911"}
+[2026-07-03 09:29:05 UTC] DONE | audit delivered to accounting@mana.cpa | HOT_LEAD.json updated | ledger written
+[2026-07-03 09:32:43 UTC] START audit delivery | url=https://greensustainabilitysolutions.com | to=info@greensustainabilitysolutions.com | dry_run=False
+[2026-07-03 09:32:43 UTC] Scraping https://greensustainabilitysolutions.com...
+[2026-07-03 09:32:43 UTC] Scraped OK | headline='Save Up To $150 Per Week With Our Sustainable Waste Manageme' | ctas=['Sustainable Demolition', 'Contact'] | load=85ms | proof=[]
+[2026-07-03 09:32:43 UTC] Audit complete | overall=5.4/10 (C) | headline=5 | cta=5 | social_proof=2 | speed=9 | mobile=6
+[2026-07-03 09:32:43 UTC] Email composed | subject='Your greensustainabilitysolutions.com audit — C overall, here's the fix'
+[2026-07-03 09:32:43 UTC] Sending via AgentMail REST to info@greensustainabilitysolutions.com...
+[2026-07-03 09:32:43 UTC] Email SENT | result={"message_id": "<0100019f2752c423-af881ae4-12c0-4687-927b-077169927e42-000000@email.amazonses.com>", "thread_id": "23b7f340-4a40-4c8f-8e7c-715bb8d8ffac"}
+[2026-07-03 09:32:43 UTC] DONE | audit delivered to info@greensustainabilitysolutions.com | HOT_LEAD.json updated | ledger written
+[2026-07-03 09:32:45 UTC] START audit delivery | url=https://www.shaadisouk.com | to=shaadisouk@outlook.com | dry_run=False
+[2026-07-03 09:32:45 UTC] Scraping https://www.shaadisouk.com...
+[2026-07-03 09:32:45 UTC] Scraped OK | headline='Shaadisouk | Home' | ctas=[] | load=321ms | proof=[]
+[2026-07-03 09:32:45 UTC] Audit complete | overall=4.8/10 (D) | headline=5 | cta=2 | social_proof=2 | speed=9 | mobile=6
+[2026-07-03 09:32:45 UTC] Email composed | subject='Your www.shaadisouk.com audit — D overall, here's the fix'
+[2026-07-03 09:32:45 UTC] Sending via AgentMail REST to shaadisouk@outlook.com...
+[2026-07-03 09:32:46 UTC] Email SENT | result={"message_id": "<0100019f2752ce99-a7468471-3662-4cd9-a3ce-ace75ab527ad-000000@email.amazonses.com>", "thread_id": "c06a15dc-91d6-4c6d-b2c3-d9a48860a06e"}
+[2026-07-03 09:32:46 UTC] DONE | audit delivered to shaadisouk@outlook.com | HOT_LEAD.json updated | ledger written
+[2026-07-03 10:06:16 UTC] START audit delivery | url=https://yourpapersource.com/collections/ | to=store@yourpapersource.com | dry_run=False
+[2026-07-03 10:06:16 UTC] Scraping https://yourpapersource.com/collections/...
+[2026-07-03 10:06:16 UTC] Scraped OK | headline='Our Products' | ctas=['Freezer Paper', 'Contact'] | load=304ms | proof=['press mention', 'guarantee']
+[2026-07-03 10:06:16 UTC] Audit complete | overall=7.2/10 (B) | headline=5 | cta=8 | social_proof=8 | speed=9 | mobile=6
+[2026-07-03 10:06:16 UTC] Email composed | subject='Your yourpapersource.com audit — B overall, here's the fix'
+[2026-07-03 10:06:16 UTC] Sending via AgentMail REST to store@yourpapersource.com...
+[2026-07-03 10:06:17 UTC] Email SENT | result={"message_id": "<0100019f27717d45-29aeb2ff-da3e-4675-98a3-749cf573c72f-000000@email.amazonses.com>", "thread_id": "718c15a7-a3c4-4c83-9c29-616663ce5f53"}
+[2026-07-03 10:06:17 UTC] DONE | audit delivered to store@yourpapersource.com | HOT_LEAD.json updated | ledger written
+[2026-07-03 10:06:19 UTC] START audit delivery | url=https://foundcall.org | to=support@foundcall.org | dry_run=False
+[2026-07-03 10:06:19 UTC] Scraping https://foundcall.org...
+[2026-07-03 10:06:19 UTC] Scraped OK | headline='Missing petsdepend on yourphone number.' | ctas=['Join Now', 'Get Your Free Guide Now!'] | load=120ms | proof=['press mention', 'quote/testimonial']
+[2026-07-03 10:06:19 UTC] Audit complete | overall=7.2/10 (B) | headline=5 | cta=8 | social_proof=8 | speed=9 | mobile=6
+[2026-07-03 10:06:19 UTC] Email composed | subject='Your foundcall.org audit — B overall, here's the fix'
+[2026-07-03 10:06:19 UTC] Sending via AgentMail REST to support@foundcall.org...
+[2026-07-03 10:06:19 UTC] Email SENT | result={"message_id": "<0100019f27718710-be2cc383-47ae-42c8-96d4-286d94dcbaa1-000000@email.amazonses.com>", "thread_id": "f9133e49-3f3e-4bce-b66e-4a5abf627338"}
+[2026-07-03 10:06:19 UTC] DONE | audit delivered to support@foundcall.org | HOT_LEAD.json updated | ledger written
+[2026-07-03 10:06:21 UTC] START audit delivery | url=https://magnolia-club.org | to=info@magnolia-club.org | dry_run=False
+[2026-07-03 10:06:21 UTC] Scraping https://magnolia-club.org...
+[2026-07-03 10:06:21 UTC] Scraped OK | headline='Magnolia Club' | ctas=[] | load=234ms | proof=[]
+[2026-07-03 10:06:21 UTC] Audit complete | overall=6.0/10 (C) | headline=5 | cta=8 | social_proof=2 | speed=9 | mobile=6
+[2026-07-03 10:06:21 UTC] Email composed | subject='Your magnolia-club.org audit — C overall, here's the fix'
+[2026-07-03 10:06:21 UTC] Sending via AgentMail REST to info@magnolia-club.org...
+[2026-07-03 10:06:22 UTC] Email SENT | result={"message_id": "<0100019f277191ad-e883b334-1bdc-43ac-b203-731bb1db3b4e-000000@email.amazonses.com>", "thread_id": "f2194134-33b1-427e-bff3-53a4fc6ceecc"}
+[2026-07-03 10:06:22 UTC] DONE | audit delivered to info@magnolia-club.org | HOT_LEAD.json updated | ledger written
+[2026-07-03 10:06:31 UTC] START audit delivery | url=https://flyoff.com.au/pages/fly-off-electric-mosquito-zapper | to=information@flyoff.com.au | dry_run=False
+[2026-07-03 10:06:31 UTC] Scraping https://flyoff.com.au/pages/fly-off-electric-mosquito-zapper...
+[2026-07-03 10:06:31 UTC] SCRAPE FAILED: Connection failed: HTTPSConnectionPool(host='flyoff.com.au', port=443): Max retries exceeded with url: /pages/fly-off-electric-mosquito-zapper (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))
+[2026-07-03 10:13:48 UTC] START audit delivery | url=https://obakura.com | to=contact@support.obakura.com | dry_run=False
+[2026-07-03 10:13:48 UTC] Scraping https://obakura.com...
+[2026-07-03 10:13:49 UTC] Scraped OK | headline='Obakura clothing | Comfy clothes, original designs' | ctas=[] | load=180ms | proof=['press mention']
+[2026-07-03 10:13:49 UTC] Audit complete | overall=6.6/10 (C) | headline=5 | cta=8 | social_proof=5 | speed=9 | mobile=6
+[2026-07-03 10:13:49 UTC] Email composed | subject='Your obakura.com audit — C overall, here's the fix'
+[2026-07-03 10:13:49 UTC] Sending via AgentMail REST to contact@support.obakura.com...
+[2026-07-03 10:13:49 UTC] Email SENT | result={"message_id": "<0100019f2778649b-aeb1fa2c-93e4-4d43-a40b-6561fa8a8ff9-000000@email.amazonses.com>", "thread_id": "ef04c966-812a-4e40-91b9-f3d2bf3bcfed"}
+[2026-07-03 10:13:49 UTC] DONE | audit delivered to contact@support.obakura.com | HOT_LEAD.json updated | ledger written
+[2026-07-03 10:24:52 UTC] START audit delivery | url=https://www.meadowsgaragedoors.com/service-areas/north-dallas-tx | to=admin@meadowsgaragedoors.com | dry_run=False
+[2026-07-03 10:24:52 UTC] Scraping https://www.meadowsgaragedoors.com/service-areas/north-dallas-tx...
+[2026-07-03 10:24:53 UTC] Scraped OK | headline='Garage Doors in North Dallas, TX' | ctas=['Garage Door Design Services', 'Contact'] | load=769ms | proof=['testimonials']
+[2026-07-03 10:24:53 UTC] Audit complete | overall=6.6/10 (C) | headline=5 | cta=8 | social_proof=5 | speed=9 | mobile=6
+[2026-07-03 10:24:53 UTC] Email composed | subject='Your www.meadowsgaragedoors.com audit — C overall, here's the fix'
+[2026-07-03 10:24:53 UTC] Sending via AgentMail REST to admin@meadowsgaragedoors.com...
+[2026-07-03 10:24:53 UTC] Email SENT | result={"message_id": "<0100019f2782863f-eb3ba755-096a-42e2-86f3-bff5e1f3dc13-000000@email.amazonses.com>", "thread_id": "e07af00a-8f3f-4531-bc80-09c1df6bf23b"}
+[2026-07-03 10:24:53 UTC] DONE | audit delivered to admin@meadowsgaragedoors.com | HOT_LEAD.json updated | ledger written
+[2026-07-03 10:24:55 UTC] START audit delivery | url=https://saputo.law | to=info@saputo.law | dry_run=False
+[2026-07-03 10:24:55 UTC] Scraping https://saputo.law...
+[2026-07-03 10:24:56 UTC] Scraped OK | headline='Dallas Criminal Defense Lawyer' | ctas=['Contact Us', 'Book a Consultation'] | load=410ms | proof=['testimonials', 'trust signal', 'press mention', 'guarantee']
+[2026-07-03 10:24:56 UTC] Audit complete | overall=7.2/10 (B) | headline=5 | cta=8 | social_proof=8 | speed=9 | mobile=6
+[2026-07-03 10:24:56 UTC] Email composed | subject='Your saputo.law audit — B overall, here's the fix'
+[2026-07-03 10:24:56 UTC] Sending via AgentMail REST to info@saputo.law...
+[2026-07-03 10:24:56 UTC] Email SENT | result={"message_id": "<0100019f2782933d-535b1978-2da3-4ba1-9960-f94f2c044705-000000@email.amazonses.com>", "thread_id": "3dd2ca76-784f-4513-b451-18eca3573a2b"}
+[2026-07-03 10:24:56 UTC] DONE | audit delivered to info@saputo.law | HOT_LEAD.json updated | ledger written
+[2026-07-03 10:24:58 UTC] START audit delivery | url=https://brooksplumbingtexas.com | to=info@brooksplumbingtexas.com | dry_run=False
+[2026-07-03 10:24:58 UTC] Scraping https://brooksplumbingtexas.com...
+[2026-07-03 10:25:00 UTC] Scraped OK | headline='The Local Plumbing Company You Can Rely On' | ctas=['Book online', 'Contact Us'] | load=402ms | proof=['testimonials', 'trust signal', 'press mention']
+[2026-07-03 10:25:00 UTC] Audit complete | overall=7.2/10 (B) | headline=5 | cta=8 | social_proof=8 | speed=9 | mobile=6
+[2026-07-03 10:25:00 UTC] Email composed | subject='Your brooksplumbingtexas.com audit — B overall, here's the fix'
+[2026-07-03 10:25:00 UTC] Sending via AgentMail REST to info@brooksplumbingtexas.com...
+[2026-07-03 10:25:00 UTC] Email SENT | result={"message_id": "<0100019f2782a2ff-9689e579-fc6c-4de1-a688-11037fd0cf33-000000@email.amazonses.com>", "thread_id": "87a07105-adbd-43fc-9a56-8e9bae8bebf0"}
+[2026-07-03 10:25:00 UTC] DONE | audit delivered to info@brooksplumbingtexas.com | HOT_LEAD.json updated | ledger written
+[2026-07-03 10:25:02 UTC] START audit delivery | url=https://ratnerpt.com | to=ratner@ratnerpt.com | dry_run=False
+[2026-07-03 10:25:02 UTC] Scraping https://ratnerpt.com...
+[2026-07-03 10:25:03 UTC] Scraped OK | headline='Welcome toRatner Center for Physical Therapy & Wellness' | ctas=['Joint Pain & Arthritis', 'Balance & Dizziness Disorders'] | load=724ms | proof=['testimonials', 'press mention']
+[2026-07-03 10:25:03 UTC] Audit complete | overall=7.2/10 (B) | headline=8 | cta=5 | social_proof=8 | speed=9 | mobile=6
+[2026-07-03 10:25:03 UTC] Email composed | subject='Your ratnerpt.com audit — B overall, here's the fix'
+[2026-07-03 10:25:03 UTC] Sending via AgentMail REST to ratner@ratnerpt.com...
+[2026-07-03 10:25:04 UTC] Email SENT | result={"message_id": "<0100019f2782b01e-70b6cc30-dd08-48cd-8b67-4f1565d44787-000000@email.amazonses.com>", "thread_id": "484c8643-3bed-4892-8256-08fd622b8057"}
+[2026-07-03 10:25:04 UTC] DONE | audit delivered to ratner@ratnerpt.com | HOT_LEAD.json updated | ledger written
+[2026-07-03 10:33:35 UTC] START audit delivery | url=https://whitehorseflowers.com.au/collections/sympathy-flowers | to=whitehorseflowersbalwyn@gmail.com | dry_run=False
+[2026-07-03 10:33:35 UTC] Scraping https://whitehorseflowers.com.au/collections/sympathy-flowers...
+[2026-07-03 10:33:36 UTC] Scraped OK | headline='Sympathy Flowers' | ctas=['Same Day Delivery Across Melbourne. Order before 3PM.', 'Get Well Soon Flowers'] | load=561ms | proof=['testimonials', 'press mention']
+[2026-07-03 10:33:36 UTC] Audit complete | overall=7.2/10 (B) | headline=5 | cta=8 | social_proof=8 | speed=9 | mobile=6
+[2026-07-03 10:33:36 UTC] Email composed | subject='Your whitehorseflowers.com.au audit — B overall, here's the fix'
+[2026-07-03 10:33:36 UTC] Sending via AgentMail REST to whitehorseflowersbalwyn@gmail.com...
+[2026-07-03 10:33:36 UTC] Email SENT | result={"message_id": "<0100019f278a8161-9b8781ba-21eb-4958-a9da-77ca736cfb67-000000@email.amazonses.com>", "thread_id": "5cd03456-bed0-4fe2-81d9-19b83cfc897a"}
+[2026-07-03 10:33:36 UTC] DONE | audit delivered to whitehorseflowersbalwyn@gmail.com | HOT_LEAD.json updated | ledger written
+[2026-07-03 10:33:38 UTC] START audit delivery | url=https://www.gepettosguild.com/custom-quote/ | to=info@gepettosguild.com | dry_run=False
+[2026-07-03 10:33:38 UTC] Scraping https://www.gepettosguild.com/custom-quote/...
+[2026-07-03 10:33:39 UTC] Scraped OK | headline='Custom Quote' | ctas=['Contact Us'] | load=1125ms | proof=['guarantee']
+[2026-07-03 10:33:39 UTC] Audit complete | overall=6.6/10 (C) | headline=5 | cta=8 | social_proof=5 | speed=9 | mobile=6
+[2026-07-03 10:33:39 UTC] Email composed | subject='Your www.gepettosguild.com audit — C overall, here's the fix'
+[2026-07-03 10:33:39 UTC] Sending via AgentMail REST to info@gepettosguild.com...
+[2026-07-03 10:33:40 UTC] Email SENT | result={"message_id": "<0100019f278a8fb3-11eae24c-1e36-40d1-8747-4127e25320ef-000000@email.amazonses.com>", "thread_id": "e6e7af38-0882-4226-ae1a-65b75a5648a4"}
+[2026-07-03 10:33:40 UTC] DONE | audit delivered to info@gepettosguild.com | HOT_LEAD.json updated | ledger written
+[2026-07-03 10:33:42 UTC] START audit delivery | url=https://www.patricianunes.pt/lisbon-couples-photoshoot | to=patriciasfnunes@gmail.com | dry_run=False
+[2026-07-03 10:33:42 UTC] Scraping https://www.patricianunes.pt/lisbon-couples-photoshoot...
+[2026-07-03 10:33:42 UTC] SCRAPE FAILED: HTTP 404
+{"timestamp": "2026-07-04T23:02:44Z", "email": "support@invoicingapi.com", "url": "https://invoicingapi.com", "score": 8.0, "sent": true, "trigger_context": "Saw your public post: InvoicingAPI landing page roast", "thread_id": null, "message_id": "<0100019f2f5eb6da-f66fc3e8-6928-411b-9c99-ff0f0fc7a1d1-000000@email.amazonses.com>"}
+{"timestamp": "2026-07-04T23:02:52Z", "email": "hello@adsby.co", "url": "https://usemagnetiq.com", "score": 7.4, "sent": true, "trigger_context": "Saw your public post: \u20ac800 Google Ads learnings / cold visitor conversion", "thread_id": null, "message_id": "<0100019f2f5ed67b-4a3cb641-ca02-433a-a067-7e5202d3e8a0-000000@email.amazonses.com>"}
+{"timestamp": "2026-07-05T08:14:36Z", "email": "contact@curbcaddie.com", "url": "https://curbcaddie.com", "score": 8.0, "sent": true, "trigger_context": "Web developer launched Curb Caddie, spent $1,000 on Google Ads over two weeks, said they are \u201cburning money,\u201d and got only one non-paying form fill after testing checkout and multi-step forms.", "thread_id": null, "message_id": "<0100019f3157f830-fd01f318-1f1d-4619-9c9f-cc404c85925b-000000@email.amazonses.com>"}
+{"timestamp": "2026-07-06T10:50:46Z", "email": "hello@hacktron.ai", "url": "https://hacktron.ai", "score": 6.6, "sent": true, "trigger_context": "Saw your public post: Claude made my landing page beautiful", "source_url": null, "lead_id": null, "thread_id": null, "message_id": "<0100019f370d4b8d-2a569b90-31d5-4e66-b9f4-ef2e180db091-000000@email.amazonses.com>"}
+{"timestamp": "2026-07-06T11:46:18Z", "email": "hello@aijournal.store", "url": "https://play.google.com/store/apps/details?id=com.calmjournal.calm_journal_template", "score": 6.0, "sent": true, "trigger_context": "Saw your public post: I built a free app for people who overthink and need a place to clear their minds", "source_url": null, "lead_id": null, "thread_id": null, "message_id": "<0100019f37402295-5be99751-6b44-483e-8e61-bdd7bb0ec4f1-000000@email.amazonses.com>"}
+{"timestamp": "2026-07-06T12:04:48Z", "email": "help@nypost.com", "url": "https://nypost.com/2026/06/28/us-news/patriotic-californians-explode-at-hoas-crazy-anti-american-demand-ahead-of-fourth-of-july", "score": 5.9, "sent": true, "trigger_context": "Saw your public post: Patriotic Californians explode at HOA\u2019s \u2018crazy anti-American\u2019 demand ahead of Fourth of July", "source_url": null, "lead_id": null, "thread_id": null, "message_id": "<0100019f37511485-938820e7-998f-498d-bde4-793b6f897e51-000000@email.amazonses.com>"}
+{"timestamp": "2026-07-06T12:05:00Z", "email": "info@xpertstart.com.au", "url": "https://www.xpertstart.com.au", "score": 6.2, "sent": true, "trigger_context": "Saw your public post: Hi everyone! I'd love your feedback on my website", "source_url": null, "lead_id": null, "thread_id": null, "message_id": "<0100019f3751438b-f552b2fc-9dbc-4d17-9cf0-d9fa112cae0c-000000@email.amazonses.com>"}
+{"timestamp": "2026-07-06T12:05:43Z", "email": "info@2getherewesave.com", "url": "https://2getherwesave.com", "score": 6.8, "sent": true, "trigger_context": "Saw your public post: A Revolutionary New Way to Buy and Sell", "source_url": null, "lead_id": null, "thread_id": null, "message_id": "<0100019f3751e955-10ff5f47-7152-4f97-8792-ff9ea58766ac-000000@email.amazonses.com>"}
+{"timestamp": "2026-07-06T13:13:36Z", "email": "danny@repairandsquare.com", "url": "https://repairandsquare.com/washing-machine-repairs/", "score": 6.4, "sent": true, "trigger_context": "Saw your public post: Ready to bash my head against a wall \u2014 Google Ads clicks but zero conversions", "source_url": "https://www.reddit.com/r/googleads/comments/1kpwhb8/ready_to_bash_my_head_against_a_wall/", "lead_id": null, "thread_id": null, "message_id": "<0100019f37900f2c-628f7a27-d751-4237-9e34-bc30a747e859-000000@email.amazonses.com>"}
+{"timestamp": "2026-07-06T20:08:37Z", "email": "hello@ziplead.ai", "url": "https://ziplead.ai", "score": 6.5, "sent": true, "trigger_context": "Saw your public post: /u/PhotoInformal3266 on I cold-call 100 SMBs a day. Built the tool I wish I had, launching Wednesday. Would rather hear ", "source_url": null, "lead_id": null, "thread_id": null, "message_id": "<0100019f390c0504-212c7945-8d29-4893-b726-9c628d4f67b8-000000@email.amazonses.com>"}

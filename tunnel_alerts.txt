@@ -1,0 +1,9 @@
+2026-06-24T17:00:30.013682: CRITICAL: Local site up but tunnel down — customer access blocked
+2026-06-24T17:05:28.624712: CRITICAL: Local site up but tunnel down — customer access blocked
+2026-06-24T17:10:32.163040: CRITICAL: Local site up but tunnel down — customer access blocked
+2026-06-24T17:15:29.456954: CRITICAL: Local site up but tunnel down — customer access blocked
+2026-06-24T17:35:32.388691: CRITICAL: Local site up but tunnel down — customer access blocked
+2026-06-24T17:40:35.743945: CRITICAL: Local site up but tunnel down — customer access blocked
+2026-06-24T17:45:33.418300: CRITICAL: Local site up but tunnel down — customer access blocked
+2026-06-24T17:50:35.405752: CRITICAL: Local site up but tunnel down — customer access blocked
+2026-06-24T17:55:36.536696: CRITICAL: Local site up but tunnel down — customer access blocked

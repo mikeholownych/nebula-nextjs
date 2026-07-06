@@ -1,0 +1,170 @@
+{
+  "campaign": "v1_smtp_followup",
+  "started": "2026-06-24T14:41:27.065524",
+  "sends": [
+    {
+      "timestamp": "2026-06-24T14:41:27.065549",
+      "email": "tianyajinhui@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.065981",
+      "email": "quietpulse.social@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.066321",
+      "email": "voder.ai.agent@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.067049",
+      "email": "quratulaincreatives@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.067852",
+      "email": "releaselogofficial@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.068384",
+      "email": "rkotcher@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.068827",
+      "email": "gupta.shivani7896@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.069462",
+      "email": "kevin.chisumdev@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.070067",
+      "email": "career4lucas@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.070731",
+      "email": "shawnxu0208@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.071523",
+      "email": "scalewords.agency@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.072148",
+      "email": "zyvara.group@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.072826",
+      "email": "dinirangapremanayake@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.073424",
+      "email": "beniciocardozomdp@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.074011",
+      "email": "algor.tago@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.074627",
+      "email": "jerryatbusiness@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.075284",
+      "email": "stellytips@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.076015",
+      "email": "lholmes274@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.076678",
+      "email": "rcschupp@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.077593",
+      "email": "davidwang913526@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.078269",
+      "email": "muhammadabusufyangoraya@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.079009",
+      "email": "nedco80@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.079695",
+      "email": "vsl.and@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.080424",
+      "email": "bjoroen.eirik@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.081115",
+      "email": "matze.schedel@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.081902",
+      "email": "ainikaautomation@gmail.com",
+      "method": "SMTP",
+      "status": "sent"
+    },
+    {
+      "timestamp": "2026-06-24T14:41:27.082553",
+      "email": "shadowroot47@outlook.com",
+      "method": "SMTP",
+      "status": "sent"
+    }
+  ],
+  "replies": [],
+  "conversions": []
+}

@@ -1,0 +1,97 @@
+#!/usr/bin/env python3
+"""
+Nebula Inbox Checker — reads from AgentMail via IMAP
+Loads API key from ~/.hermes/secrets/agentmail.key
+"""
+import os, imaplib, email, time
+
+IMAP_HOST = 'imap.agentmail.to'
+IMAP_PORT = 993
+INBOX_USER = 'nebulashop@agentmail.to'
+SKIP_SENDERS = ['nebulashop@agentmail.to', 'MAILER-DAEMON', 'mailer-daemon', 'postmaster', 'Delivery Status']
+LOG_FILE = '/home/mike/nebula/check_inbox.log'
+
+def load_api_key():
+    # Try env first, then permanent secrets location
+    key = os.environ.get('AGENTMAIL_API_KEY') or os.environ.get('AM_KEY')
+    if not key:
+        try:
+            with open(os.path.expanduser('~/.hermes/secrets/agentmail.key')) as f:
+                key = f.read().strip()
+        except FileNotFoundError:
+            pass
+    return key
+
+def check_inbox():
+    api_key = load_api_key()
+    if not api_key:
+        print('ERROR: AgentMail API key not found at ~/.hermes/secrets/agentmail.key')
+        return 0, [], False
+
+    try:
+        mail = imaplib.IMAP4_SSL(IMAP_HOST, IMAP_PORT)
+        mail.login(INBOX_USER, api_key)
+        mail.select('inbox')
+
+        status, messages = mail.search(None, 'ALL')
+        message_ids = messages[0].split()
+
+        replied_count = 0
+        repliers = []
+        sales_detected = False
+
+        for msg_id in message_ids:
+            status, msg_data = mail.fetch(msg_id, '(RFC822)')
+            for response_part in msg_data:
+                if isinstance(response_part, tuple):
+                    msg = email.message_from_bytes(response_part[1])
+                    from_addr = msg.get('From', '')
+                    subject = msg.get('Subject', '')
+
+                    # Skip our own sent emails
+                    if 'nebulashop@agentmail.to' in from_addr:
+                        continue
+
+                    replied_count += 1
+                    repliers.append(from_addr)
+
+                    # Detect sales signals
+                    body = ''
+                    if msg.is_multipart():
+                        for part in msg.walk():
+                            if part.get_content_type() == 'text/plain':
+                                payload = part.get_payload(decode=True)
+                                if payload:
+                                    body += payload.decode('utf-8', errors='ignore')
+                    else:
+                        payload = msg.get_payload(decode=True)
+                        if payload:
+                            body = payload.decode('utf-8', errors='ignore')
+
+                    combined = (subject + ' ' + body).lower()
+                    if any(w in combined for w in ['buy', 'purchase', 'payment', 'stripe', 'paid', 'interested', 'yes', 'send']):
+                        sales_detected = True
+                        print(f'🔥 SALE SIGNAL from {from_addr}: {subject}')
+
+        mail.close()
+        mail.logout()
+        return replied_count, repliers, sales_detected
+
+    except Exception as e:
+        print(f'ERROR: {e}')
+        return 0, [], False
+
+def main():
+    replied_count, repliers, sales_detected = check_inbox()
+    print(f'[INBOX] Replies: {replied_count}')
+    if repliers:
+        for r in repliers:
+            print(f'  - {r}')
+    if sales_detected:
+        print('🚨 SALES DETECTED — immediate action required')
+    
+    with open(LOG_FILE, 'a') as f:
+        f.write(f'{time.strftime("%Y-%m-%d %H:%M:%S")} replies={replied_count} sales={sales_detected}\n')
+
+if __name__ == '__main__':
+    main()

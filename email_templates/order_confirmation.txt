@@ -1,0 +1,13 @@
+Subject: Order Confirmation
+
+Hi {name},
+
+Thank you for your purchase. Your order is confirmed.
+
+Offer: {offer}
+Amount: ${amount}
+
+You’ll receive your deliverable shortly.
+
+Best,
+Nebula Components

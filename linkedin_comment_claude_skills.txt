@@ -1,0 +1,7 @@
+This is a solid playbook — especially the competitor-gap and ai-visibility pieces. Most people skip the "protect" phase entirely.
+
+One thing I'd add: there's a layer underneath keyword-scout that most teams miss — trigger-aware targeting. Instead of finding terms where Reddit already ranks, find the people actively posting "I'm bleeding money on ads and getting zero conversions." Those are buying signals, not just search volume. The reply rate on a value-first comment there is 5-12x what you get from keyword-optimized posts.
+
+We automated that at Nebula Components — the audit tool itself (free, 30 seconds) acts as the landing page hook. Person posts pain → we reply with value → they audit their own page → we follow up if they want the fix. No sequence, no 8-tool context switch.
+
+Would love to hear how you're handling the handoff from thread engagement to actual pipeline. That's where most Reddit plays I've seen break down.

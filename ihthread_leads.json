@@ -1,0 +1,84 @@
+{
+  "naxely.com": {
+    "url": "https://naxely.com",
+    "headline": "Naxely \u2014 AI Report Generator",
+    "error": null,
+    "load_ms": 489,
+    "emails_found": [],
+    "ctas": []
+  },
+  "socialpost.ai": {
+    "url": "https://socialpost.ai",
+    "headline": "Your silent LinkedInis costing you deals.|",
+    "error": null,
+    "load_ms": 385,
+    "emails_found": [],
+    "ctas": [
+      "Design",
+      "Contact",
+      "Start For Free"
+    ]
+  },
+  "alloceraintelligence.com": {
+    "url": "https://alloceraintelligence.com",
+    "headline": "You have enough dashboards. Now get adecision.",
+    "error": null,
+    "load_ms": 1073,
+    "emails_found": [],
+    "ctas": [
+      "Request a Free Distortion Audit",
+      "Subscribe Free \u2192",
+      "Request a Free Distortion Audit \u2192"
+    ]
+  },
+  "boothkeepos.polsia.app": {
+    "url": "https://boothkeepos.polsia.app",
+    "headline": "Stop overselling across your website, print shops, and conventions.",
+    "error": null,
+    "load_ms": 443,
+    "emails_found": [],
+    "ctas": [
+      "Try Live Demo \u2192",
+      "Start Free Trial\u2192",
+      "Try Live Demo\u2192"
+    ]
+  },
+  "devora.sh": {
+    "url": "https://devora.sh",
+    "headline": "Let your team see whatusers see \u2014 without passwords",
+    "error": null,
+    "load_ms": 296,
+    "emails_found": [],
+    "ctas": []
+  },
+  "theogeo.ai": {
+    "url": "https://theogeo.ai",
+    "headline": "Is your brandthe trustedanswer?",
+    "error": null,
+    "load_ms": 383,
+    "emails_found": [],
+    "ctas": [
+      "Sign in",
+      "Get access",
+      "Try free"
+    ]
+  },
+  "goldenweeks.co": {
+    "url": "https://goldenweeks.co",
+    "headline": "Finally finish your project in Zanzibar \u2014 goldenweeks",
+    "error": null,
+    "load_ms": 214,
+    "emails_found": [],
+    "ctas": []
+  },
+  "lintract.com": {
+    "url": "https://lintract.com",
+    "headline": "Don't sign that contractuntil you'vechecked it.",
+    "error": null,
+    "load_ms": 1109,
+    "emails_found": [],
+    "ctas": [
+      "Disclaimer"
+    ]
+  }
+}

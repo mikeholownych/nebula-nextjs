@@ -1,0 +1,10 @@
+{
+  "timestamp": "2026-07-06T12:10:01.234304+00:00",
+  "system": "claude_growth_system",
+  "engagers_ingested": 2,
+  "dms_written": 2,
+  "followups_queued": 0,
+  "calendar_days": 30,
+  "apify_token_configured": true,
+  "next_action": "Export LinkedIn/Apify engagers to growth_system/apify_linkedin_engagers.json, then rerun."
+}
