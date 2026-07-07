@@ -1,46 +1,46 @@
 {
-  "generated_at": "2026-07-07T12:15:08.569108+00:00",
+  "generated_at": "2026-07-07T12:45:16.029499+00:00",
   "stuck": [
     {
       "email": "support@invoicingapi.com",
       "stage": "pitch_sent",
-      "hours_stuck": 73.9,
+      "hours_stuck": 74.4,
       "url": "https://invoicingapi.com"
     },
     {
       "email": "hello@adsby.co",
       "stage": "pitch_sent",
-      "hours_stuck": 73.9,
+      "hours_stuck": 74.4,
       "url": "https://usemagnetiq.com"
     },
     {
       "email": "ask@timetechnologiesllc.com",
       "stage": "pitch_sent",
-      "hours_stuck": 73.9,
+      "hours_stuck": 74.4,
       "url": "https://www.timetechnologiesllc.com/"
     },
     {
       "email": "contact@funghiclear.com",
       "stage": "pitch_sent",
-      "hours_stuck": 73.9,
+      "hours_stuck": 74.4,
       "url": "https://funghiclear.com/products/funghiclear-nail-spray-with-manuka-oil"
     },
     {
       "email": "info@magnoliamedspaandwellness.com",
       "stage": "pitch_sent",
-      "hours_stuck": 73.9,
+      "hours_stuck": 74.4,
       "url": "https://lowtdfw.com/offer"
     },
     {
       "email": "contact@calisim.com",
       "stage": "pitch_sent",
-      "hours_stuck": 73.9,
+      "hours_stuck": 74.4,
       "url": "https://www.calisim.com/plans"
     },
     {
       "email": "info@sarojhospital.com",
       "stage": "pitch_sent",
-      "hours_stuck": 73.9,
+      "hours_stuck": 74.4,
       "url": "https://www.sarojhospital.com/gastro-care"
     }
   ]

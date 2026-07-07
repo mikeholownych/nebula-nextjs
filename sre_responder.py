@@ -202,6 +202,12 @@ def fix_stuck_leads():
                            notes=f'sre_requeue: stuck {hours}h in audit_delivered')
             if hours > 4 else None
         ),
+        # pitch_sent >168h (7d) without recycler engagement → flag for human review
+        'pitch_sent': lambda email, hours: (
+            db.upsert_lead(email=email, stage='needs_review',
+                           notes=f'sre_escalate: pitch_sent {hours}h, recycler exhausted')
+            if hours > 168 else None
+        ),
     }
 
     actioned = 0
@@ -378,6 +384,14 @@ def main():
                     escalations.append(f'`{name}` failed {failures}x: {detail}')
                 else:
                     log(f'[watch] {name} failed (attempt {failures}/3): {detail}')
+
+            # Clear failure counters for checks that have recovered
+            current_failing = {c.get('name') for c in actionable_failures}
+            for check_name in list(state.get('failures', {}).keys()):
+                if check_name not in current_failing:
+                    prev = state['failures'].pop(check_name, None)
+                    if prev is not None:
+                        log(f'[recovered] Cleared failure counter for "{check_name}" (was {prev})')
         except Exception as e:
             log(f'[health-read] Error: {e}')
 

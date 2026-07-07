@@ -1,5 +1,29 @@
 [
   {
+    "timestamp": "2026-07-07T12:30:13Z",
+    "sender": "Ligia Peres <peresligia@gmail.com>",
+    "subject": "re: play.google.com audit \u2014 did that make sense?",
+    "thread_id": "a353ec63-e777-482c-936e-3da5a6d0d84e",
+    "preview": "STOP\n\nNebula Components <ops@launchcrate.io> escreveu em ter., 7/07/2026 \u00e0s 13:00\n:\n\n> Hey,\n>\n> Quick check \u2014 the play.google.com audit flagged above_fold. I wrote Place\n> H1 headline, primary CTA but",
+    "stage": "awaiting_url_or_schedule",
+    "action": "deliver_audit",
+    "status": "awaiting_url_or_schedule",
+    "classification": "other",
+    "updated_at": "2026-07-07T12:35:02.061334+00:00"
+  },
+  {
+    "timestamp": "2026-07-07T12:30:13Z",
+    "sender": "Berkay Yavuz <berkay@adsby.co>",
+    "subject": "re: usemagnetiq.com \u2014 similar case, if useful",
+    "thread_id": "db09f2e5-2b92-42d5-8b61-a74801a0edcc",
+    "preview": "STOP\n\nOn Tue, Jul 7, 2026 at 3:00\u202fPM 'Nebula Components' via Hello Adsby <\nhello@adsby.co> wrote:\n\n> Hi,\n>\n> Following up on the usemagnetiq.com audit.\n>\n> A SaaS founder had the same issue: headline ",
+    "stage": "awaiting_url_or_schedule",
+    "action": "deliver_audit",
+    "status": "awaiting_url_or_schedule",
+    "classification": "other",
+    "updated_at": "2026-07-07T12:35:02.061457+00:00"
+  },
+  {
     "timestamp": "2026-07-06T18:00:21Z",
     "sender": "Mike Holownych <mike.holownych@aisyndicate.io>",
     "subject": "Quick check-in",

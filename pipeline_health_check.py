@@ -127,14 +127,14 @@ def count_lead_stages():
 
 def detect_stuck_leads(stages):
     """Leads stuck in a stage beyond stage-specific thresholds without advancement."""
-    # Thresholds per stage — pitch_sent waits on human reply, needs longer window
+    # Thresholds per stage
+    # pitch_sent is handled by followup_sequence.py recycler — not tracked as stuck
     THRESHOLDS = {
         "audit_delivered": 12,   # hours — should pitch within 12h of audit send
-        "pitch_sent": 72,        # hours — human reply can take up to 3 days
     }
     stuck = []
     for email, entry in stages.items():
-        if entry["stage"] not in ("audit_delivered", "pitch_sent"):
+        if entry["stage"] not in ("audit_delivered",):
             continue
         ts = entry.get("ts", "")
         if not ts:
