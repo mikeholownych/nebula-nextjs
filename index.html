@@ -200,10 +200,66 @@
     .testimonial .name { font-weight:700; margin-top:4px; color:#111827; }
     .testimonial .detail { font-size:13px; color:var(--muted); }
     @media (max-width:640px) { header { padding:36px 16px 32px; } .card { padding:20px 16px; } .grid { grid-template-columns:1fr; } .howstep-grid { grid-template-columns:1fr !important; } .persona-grid { grid-template-columns:1fr !important; } }
+
+    /* ═══════════════════════════════════════════════════
+       CONVERT LAYER (M9) — scroll progress, sticky bar,
+       slide nudge, card lifts, animations
+    ═══════════════════════════════════════════════════ */
+
+    /* Scroll progress bar */
+    #scroll-prog { position:fixed; top:0; left:0; z-index:9999; height:3px; width:0%; background:#fbbf24; transition:width .1s linear; border-radius:0 2px 2px 0; pointer-events:none; }
+
+    /* Sticky bottom audit bar */
+    #sticky-bar { position:fixed; bottom:0; left:0; right:0; z-index:9000; background:#111827; border-top:2px solid #fbbf24; padding:10px 20px; display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; transform:translateY(100%); transition:transform .4s cubic-bezier(0.4,0,0.2,1); }
+    #sticky-bar.visible { transform:translateY(0); }
+    #sticky-bar .urgency { color:#fbbf24; font-size:13px; font-weight:700; letter-spacing:0.02em; }
+    #sticky-bar a.sbar-btn { background:#fbbf24; color:#111827; font-weight:800; font-size:14px; padding:9px 22px; border-radius:8px; text-decoration:none; white-space:nowrap; transition:opacity .15s; }
+    #sticky-bar a.sbar-btn:hover { opacity:.9; }
+    #sticky-bar .sbar-dismiss { background:none; border:none; color:#6b7280; font-size:18px; cursor:pointer; padding:4px 8px; line-height:1; flex-shrink:0; }
+    #sticky-bar .sbar-dismiss:hover { color:#d1d5db; }
+
+    /* Slide-in nudge (once, after pricing scroll) */
+    #slide-nudge { position:fixed; bottom:80px; right:24px; z-index:8900; background:#1f2937; border:1px solid #fbbf24; border-radius:14px; padding:18px 22px 14px; max-width:280px; box-shadow:0 8px 32px rgba(0,0,0,.4); transform:translateX(340px); transition:transform .45s cubic-bezier(0.4,0,0.2,1); pointer-events:none; }
+    #slide-nudge.show { transform:translateX(0); pointer-events:auto; }
+    #slide-nudge .nudge-close { position:absolute; top:8px; right:12px; background:none; border:none; color:#6b7280; font-size:18px; cursor:pointer; line-height:1; }
+    #slide-nudge .nudge-close:hover { color:#d1d5db; }
+    #slide-nudge p { color:#f9fafb; font-size:14px; line-height:1.5; margin-bottom:10px; }
+    #slide-nudge .nudge-emoji { font-size:22px; margin-bottom:6px; display:block; }
+    #slide-nudge a { display:block; background:#fbbf24; color:#111827; text-align:center; font-weight:800; font-size:13px; padding:9px 14px; border-radius:8px; text-decoration:none; }
+
+    /* Card hover lifts */
+    .card { transition:box-shadow .2s, transform .2s; }
+    .card:hover { transform:translateY(-2px); box-shadow:0 16px 40px rgba(15,23,42,.1); }
+
+    /* Featured tier breathe (the $97 Fix Pack card) */
+    @keyframes breathe { 0%,100% { box-shadow:0 0 0 0 rgba(5,150,105,.2); } 50% { box-shadow:0 0 0 10px rgba(5,150,105,0); } }
+    #pricing .card[style*="border:2px solid var(--green)"] { animation:breathe 3s ease-in-out infinite; }
+
+    /* Sparkle shimmer on primary buttons */
+    .btn { position:relative; overflow:hidden; }
+    .btn::after { content:""; position:absolute; top:0; left:-75%; width:50%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent); transform:skewX(-20deg); transition:left .5s ease; pointer-events:none; }
+    .btn:hover::after { left:130%; }
+
+    /* Bobbing how-it-works step numbers */
+    @keyframes bob { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-5px); } }
+    .howstep-num { animation:bob 2.5s ease-in-out infinite; display:inline-block; }
+
+    /* Count-up numbers — hide raw value until JS runs (progressive enhancement) */
+    .stat-num[data-target] { }
+
+    /* Smooth scroll site-wide */
+    html { scroll-behavior:smooth; }
+
+    /* Parallax hero overlay — subtle depth via background-attachment */
+    header { background-attachment:scroll; }
+    @media(prefers-reduced-motion:no-preference) {
+      header { will-change:transform; }
+    }
   </style>
 </head>
 <body>
 
+<div id="scroll-prog" aria-hidden="true"></div>
 <header>
   <h1>Traffic isn&#8217;t the leak. <span class="squiggle"><em>Your page</em><svg class="squig" viewBox="0 0 180 12" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path class="squig-path" d="M2,8 C30,2 60,12 90,6 C120,0 150,10 178,6" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"/></svg></span> is.</h1>
   <p class="sub">For founders running paid traffic with zero conversions. Most consultants hear "we need more traffic" and prescribe more ads. The right move is the exam first: paste your URL, get a scored teardown of exactly which leaks are burning your budget — clarity, CTA, trust proof, offer, friction. The audit is the exam. The $97 Fix Pack is the prescription. No sales call.</p>
@@ -236,12 +292,12 @@
 <section class="numbers-band">
   <div class="numbers-inner">
     <div class="stat-item">
-      <span class="stat-num">40<span class="stat-plus">+</span></span>
+      <span class="stat-num" data-target="40" data-suffix="+">0<span class="stat-plus">+</span></span>
       <span class="stat-label">pages scored</span>
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
-      <span class="stat-num">3.1</span>
+      <span class="stat-num" data-target="3.1" data-decimal="1">0</span>
       <span class="stat-label">avg leak categories<br>found per audit</span>
     </div>
     <div class="stat-divider"></div>
@@ -759,7 +815,143 @@
       status.textContent = '❌ ' + err.message + ' — Email ops@launchcrate.io and we\'ll send it manually.';
     }
   });
+
+  /* ═══════════════════════════════════════════════
+     CONVERT LAYER JS — scroll prog, sticky bar,
+     nudge, count-up, howstep bob trigger
+  ═══════════════════════════════════════════════ */
+  (function() {
+    // 1. Scroll progress bar
+    var prog = document.getElementById('scroll-prog');
+    function updateProg() {
+      var scrolled = window.scrollY;
+      var total = document.body.scrollHeight - window.innerHeight;
+      prog.style.width = (total > 0 ? (scrolled / total * 100) : 0) + '%';
+    }
+    window.addEventListener('scroll', updateProg, {passive: true});
+
+    // 2. Sticky bar — show after 400px scroll, hide at top
+    var stickyBar = document.getElementById('sticky-bar');
+    var sbarDismissed = false;
+    document.querySelector('#sticky-bar .sbar-dismiss').addEventListener('click', function() {
+      stickyBar.classList.remove('visible');
+      sbarDismissed = true;
+    });
+    function updateStickyBar() {
+      if (sbarDismissed) return;
+      if (window.scrollY > 400) stickyBar.classList.add('visible');
+      else stickyBar.classList.remove('visible');
+    }
+    window.addEventListener('scroll', updateStickyBar, {passive: true});
+
+    // 3. One-time slide-in nudge (fires once past #pricing)
+    var nudge = document.getElementById('slide-nudge');
+    var nudgeFired = false;
+    var nudgeDismissed = sessionStorage.getItem('nudge_dismissed');
+    if (!nudgeDismissed) {
+      document.querySelector('#slide-nudge .nudge-close').addEventListener('click', function() {
+        nudge.classList.remove('show');
+        sessionStorage.setItem('nudge_dismissed', '1');
+        nudgeDismissed = true;
+      });
+      var pricingEl = document.getElementById('pricing');
+      if (pricingEl) {
+        var nudgeObs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (!e.isIntersecting && !nudgeFired && window.scrollY > 200) {
+              nudgeFired = true;
+              nudge.classList.add('show');
+              setTimeout(function() {
+                if (!nudgeDismissed) nudge.classList.remove('show');
+              }, 8000);
+              nudgeObs.disconnect();
+            }
+          });
+        }, {threshold: 0});
+        nudgeObs.observe(pricingEl);
+      }
+    }
+
+    // 4. Count-up stat numbers (IntersectionObserver, fires once)
+    var statEls = document.querySelectorAll('.stat-num[data-target]');
+    if (statEls.length && window.IntersectionObserver) {
+      var countObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (!e.isIntersecting) return;
+          var el = e.target;
+          var target = parseFloat(el.dataset.target);
+          var isDecimal = el.dataset.decimal;
+          var suffix = el.dataset.suffix || '';
+          var inner = el.innerHTML; // preserve inner HTML (+ superscript)
+          var start = 0;
+          var duration = 1200;
+          var startTime = null;
+          function step(ts) {
+            if (!startTime) startTime = ts;
+            var progress = Math.min((ts - startTime) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            var val = start + (target - start) * eased;
+            var display = isDecimal ? val.toFixed(parseInt(isDecimal)) : Math.round(val).toString();
+            if (isDecimal) {
+              el.textContent = display;
+            } else {
+              // re-inject inner HTML for spans (stat-plus etc)
+              el.innerHTML = display + inner.replace(/^[0-9.]+/, '');
+            }
+            if (progress < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+          countObs.unobserve(el);
+        });
+      }, {threshold: 0.5});
+      statEls.forEach(function(el) { countObs.observe(el); });
+    }
+
+    // 5. Smooth-scroll for all nav anchor links
+    document.querySelectorAll('nav a[href^="#"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({behavior: 'smooth', block: 'start'});
+        }
+      });
+    });
+
+    // 6. Add howstep-num class to step number circles for bob animation
+    document.querySelectorAll('.howstep-grid [style*="border-radius:50%"]').forEach(function(el, i) {
+      el.classList.add('howstep-num');
+      el.style.animationDelay = (i * 0.4) + 's';
+    });
+
+    // 7. Parallax on header — very subtle, transform only
+    var header = document.querySelector('header');
+    if (header && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+      window.addEventListener('scroll', function() {
+        var y = window.scrollY;
+        if (y < window.innerHeight) {
+          header.style.backgroundPositionY = (y * 0.3) + 'px';
+        }
+      }, {passive: true});
+    }
+  })();
 </script>
+
+<!-- ── STICKY AUDIT BAR ── -->
+<div id="sticky-bar" role="complementary" aria-label="Quick audit access">
+  <span class="urgency">⚡ 3 audits delivered today</span>
+  <a class="sbar-btn" href="#audit-form-card">Run my free teardown →</a>
+  <span style="color:#6b7280;font-size:13px;">60 seconds · no account · unconditional guarantee</span>
+  <button class="sbar-dismiss" aria-label="Dismiss">✕</button>
+</div>
+
+<!-- ── SLIDE-IN NUDGE ── -->
+<div id="slide-nudge" role="dialog" aria-label="One-time offer" aria-modal="false">
+  <button class="nudge-close" aria-label="Dismiss">✕</button>
+  <span class="nudge-emoji">🔍</span>
+  <p><strong>Still deciding?</strong><br>The free audit is genuinely free — no payment, no obligation. 60 seconds and you'll know exactly where your page leaks.</p>
+  <a href="#audit-form-card" onclick="document.getElementById('slide-nudge').classList.remove('show')">Run the free audit →</a>
+</div>
 
 </body>
 </html>
