@@ -1113,6 +1113,13 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
 
         url = (body.get("url") or "").strip()
         email = (body.get("email") or "").strip()
+        stated_goal = (body.get("goal") or "sales").strip()
+        stated_role = (body.get("role") or "").strip()
+        _spend_raw = body.get("monthly_spend", "")
+        try:
+            monthly_spend = float(_spend_raw) if _spend_raw else None
+        except (ValueError, TypeError):
+            monthly_spend = None
 
         if not url:
             return self._send_json(400, {"error": "url is required"})
@@ -1210,7 +1217,7 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
         if email:
             try:
                 key = open("/home/mike/.hermes/secrets/agentmail.key").read().strip()
-                email_data = compose_audit_email(page, audit, email, monthly_spend=monthly_spend)
+                email_data = compose_audit_email(page, audit, email, monthly_spend=monthly_spend, stated_goal=stated_goal, stated_role=stated_role)
 
                 # Use AgentMail REST API — SMTP is blocked
                 import urllib.request, urllib.error

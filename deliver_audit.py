@@ -232,6 +232,8 @@ def score_audit(page):
     # Process archaeology: detect checkout present but no confirmation loop
     has_checkout = bool(re.search(r'stripe|checkout|buy now|add to cart|place order', lower))
     broken_funnel = has_checkout and not thankyou  # residue contradiction = finding
+
+
     signals_found = sum([fb_pixel, ga4, utm_links, thankyou])
     ad_signals_score = min(2 + 2 * signals_found, 10)
     found_list = [name for flag, name in [
@@ -395,6 +397,65 @@ def score_audit(page):
     return {"overall": overall, "overall_grade": grade, "dimensions": dimensions}
 
 
+
+def detect_goal_contradictions(page, stated_goal):
+    """
+    CAIOS M5 — Stakeholder contradiction detection.
+    Compares what the prospect SAID their goal is vs. what their page SHOWS.
+    Returns a list of (claim, evidence, severity) tuples.
+    """
+    contradictions = []
+    lower = page.get("html", "").lower()
+    ctas = [c.lower() for c in page.get("ctas", [])]
+    has_price = bool(re.search(r'\$[\d,]+|\.\d{2}\b|per month|per year|pricing', lower))
+    has_checkout = bool(re.search(r'stripe|checkout|buy now|add to cart|place order|pay now', lower))
+    has_lead_form = bool(re.search(r'<form|subscribe|get access|download|sign up|book a|schedule', lower))
+    has_phone = bool(re.search(r'tel:|call us|\(\d{3}\)|phone', lower))
+
+    goal = (stated_goal or "sales").lower()
+
+    if goal == "sales":
+        if not has_price:
+            contradictions.append((
+                "Stated goal: Sales",
+                "No price point, pricing tier, or payment signal found on the page",
+                "HIGH"
+            ))
+        if not has_checkout:
+            contradictions.append((
+                "Stated goal: Sales",
+                "No checkout, buy button, or payment processor detected — visitor has nowhere to pay",
+                "HIGH"
+            ))
+
+    elif goal == "leads":
+        if not has_lead_form:
+            contradictions.append((
+                "Stated goal: Lead generation",
+                "No lead capture form, email subscribe, or download CTA found on the page",
+                "HIGH"
+            ))
+
+    elif goal == "bookings":
+        if not has_phone and not re.search(r'calendly|cal\.com|acuity|book a|schedule', lower):
+            contradictions.append((
+                "Stated goal: Bookings",
+                "No booking widget, calendar link, or phone number found — no path to schedule",
+                "HIGH"
+            ))
+
+    elif goal == "signups":
+        if not has_lead_form and not re.search(r'create account|sign up free|get started', lower):
+            contradictions.append((
+                "Stated goal: Signups",
+                "No signup form, account creation CTA, or free trial offer found",
+                "MEDIUM"
+            ))
+
+    return contradictions
+
+
+
 def normalize_trigger_context(trigger_context):
     """Return a safe one-line opener explaining the buying trigger, or None."""
     if not trigger_context:
@@ -474,7 +535,7 @@ def detect_stack(html_text):
     return ", ".join(signals[:5])  # cap at 5 to keep opener tight
 
 
-def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=None):
+def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=None, stated_goal=None, stated_role=None):
     """Compose structured audit email — free-consulting frame, not report delivery."""
     DIM_LABELS = {
         "headline": "Headline",
@@ -516,6 +577,34 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         spend_label = f"${monthly_spend:,.0f}/mo"
     else:
         spend_label = "$2K/mo"
+
+    # Goal-vs-page contradiction detection (CAIOS M5)
+    contradictions = detect_goal_contradictions(page, stated_goal)
+
+    # Role-specific personalized question (transversal = audit itself; personalized = follow-up)
+    _role = (stated_role or "").lower()
+    if "founder" in _role or "ceo" in _role or "owner" in _role:
+        personalized_q = (
+            "One question before I close the loop: what's the one thing that needs to be true "
+            "in 90 days for you to consider this fixed? That anchors what we build."
+        )
+    elif "marketer" in _role or "marketing" in _role or "growth" in _role or "ads" in _role:
+        personalized_q = (
+            "Quick follow-up: which campaign is sending traffic to this page right now — "
+            "paid search, paid social, or email? Knowing the traffic source changes the fix priority."
+        )
+    elif "agency" in _role or "freelance" in _role or "consultant" in _role:
+        personalized_q = (
+            "Quick question: is this your client's page or yours? "
+            "If it's a client, I can format the fix list so you can hand it straight to them."
+        )
+    elif "dev" in _role or "engineer" in _role or "tech" in _role:
+        personalized_q = (
+            "One thing: do you have direct access to the page's HTML/CMS, or does every change "
+            "go through an approval queue? That changes whether the $97 fix is a 2-hour job or a 2-week one."
+        )
+    else:
+        personalized_q = ""  # no role = no personalized Q; keep email tight
 
     # Advisor framing: point at specific dollars, not vague "conversion issues" (CAIOS lesson: advisor sentences name amounts)
     if score < 4:
@@ -591,6 +680,18 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         for key, item in issues[:1]:
             label = DIM_LABELS.get(key, key.replace("_", " ").title())
             lines.append(f"- {label}: {item['issue']} Fix: {item['fix']}")
+
+    # ── Contradiction block (CAIOS M5: highest-value finding, named explicitly) ──
+    if contradictions:
+        lines.append("")
+        lines.append("⚠️  What your page claims vs. what it shows:")
+        for claim, evidence, severity in contradictions:
+            lines.append(f"   {claim} → {evidence}")
+
+    # ── Personalized follow-up question (role-specific, aimed-first) ──
+    if personalized_q:
+        lines.append("")
+        lines.append(personalized_q)
 
     lines.extend(retainer_lines)
 

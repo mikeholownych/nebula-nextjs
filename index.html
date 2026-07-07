@@ -312,6 +312,14 @@
         <option value="signups">Signups</option>
         <option value="bookings">Bookings</option>
       </select>
+      <label for="role" style="margin-top:10px;">Your role (optional — tailors the fix recommendations)</label>
+      <select id="role" name="role">
+        <option value="">Prefer not to say</option>
+        <option value="founder">Founder / CEO / Owner</option>
+        <option value="marketer">Marketer / Growth / Ads</option>
+        <option value="agency">Agency / Freelancer / Consultant</option>
+        <option value="developer">Developer / Engineer</option>
+      </select>
       <label for="monthly_spend" style="margin-top:10px;">Monthly ad spend (optional — helps size the waste estimate)</label>
       <select id="monthly_spend" name="monthly_spend">
         <option value="">I prefer not to say</option>
@@ -632,6 +640,7 @@
       url: form.url.value.trim(),
       email: form.email.value.trim(),
       goal: form.goal.value,
+      role: form.role ? form.role.value || null : null,
       monthly_spend: form.monthly_spend ? Number(form.monthly_spend.value) || null : null,
       source_type: 'homepage_audit_form',
       trigger_type: 'self_serve_url_submit',
