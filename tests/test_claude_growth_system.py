@@ -22,15 +22,26 @@ from claude_growth_system import (
 
 
 class ClaudeGrowthSystemTests(unittest.TestCase):
-    def test_load_strategy_creates_icp_positioning_and_banned_words(self):
+    def test_load_strategy_creates_all_project_inputs(self):
         with tempfile.TemporaryDirectory() as td:
             strategy = load_strategy(Path(td))
             self.assertIn("founders actively bleeding money on ads", strategy["icp"].lower())
             self.assertIn("autonomous", strategy["positioning"].lower())
             self.assertIn("book a call", strategy["banned_words"])
-            self.assertTrue((Path(td) / "growth_system" / "ICP.md").exists())
-            self.assertTrue((Path(td) / "growth_system" / "Positioning.md").exists())
-            self.assertTrue((Path(td) / "growth_system" / "Banned_Words.txt").exists())
+            self.assertIn("conversion leak", strategy["voice_dna"].lower())
+            self.assertEqual(strategy["skills"], ["audit", "fix", "compose", "score", "followup", "repurpose"])
+            self.assertIn("AskUserQuestion", strategy["ask_user_questions"])
+            expected_files = [
+                "ICP.md", "Positioning.md", "Banned_Words.txt",
+                "Nebula_Voice_DNA.md", "Nebula_Repurpose_Skill.md",
+                "Nebula_Audit_Skill.md", "Nebula_Fix_Skill.md",
+                "Nebula_Compose_Skill.md", "Nebula_Score_Skill.md",
+                "Nebula_Followup_Skill.md", "Ask_User_Questions.md",
+                "Tools_Map.md",
+            ]
+            gs = Path(td) / "growth_system"
+            for f in expected_files:
+                self.assertTrue((gs / f).exists(), f"Missing {f}")
 
     def test_calendar_maps_30_days_before_writing_posts(self):
         calendar = build_content_calendar()

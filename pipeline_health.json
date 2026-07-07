@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-07-07T10:15:39.517397+00:00",
+  "timestamp": "2026-07-07T10:30:43.603416+00:00",
   "healthy": false,
-  "passed": 14,
-  "failed": 1,
+  "passed": 13,
+  "failed": 2,
   "total": 15,
   "checks": [
     {
@@ -63,7 +63,7 @@
     {
       "name": "Pipeline ramp recent run",
       "passed": false,
-      "detail": "129m ago — stale"
+      "detail": "144m ago — stale"
     },
     {
       "name": "Dead letter queue",
@@ -71,9 +71,9 @@
       "detail": "Empty — no permanently stalled prospects"
     },
     {
-      "name": "Stuck leads",
-      "passed": true,
-      "detail": "No leads stalled >4h"
+      "name": "Stuck leads detected",
+      "passed": false,
+      "detail": "7 leads stalled >4h"
     },
     {
       "name": "Copy fatigue detector",
@@ -81,7 +81,50 @@
       "detail": "outreach_log: 190 entries; run copy_fatigue_detector.py for full diagnosis"
     }
   ],
-  "stuck_leads": [],
+  "stuck_leads": [
+    {
+      "email": "support@invoicingapi.com",
+      "stage": "pitch_sent",
+      "hours_stuck": 72.1,
+      "url": "https://invoicingapi.com"
+    },
+    {
+      "email": "hello@adsby.co",
+      "stage": "pitch_sent",
+      "hours_stuck": 72.1,
+      "url": "https://usemagnetiq.com"
+    },
+    {
+      "email": "ask@timetechnologiesllc.com",
+      "stage": "pitch_sent",
+      "hours_stuck": 72.1,
+      "url": "https://www.timetechnologiesllc.com/"
+    },
+    {
+      "email": "contact@funghiclear.com",
+      "stage": "pitch_sent",
+      "hours_stuck": 72.1,
+      "url": "https://funghiclear.com/products/funghiclear-nail-spray-with-manuka-oil"
+    },
+    {
+      "email": "info@magnoliamedspaandwellness.com",
+      "stage": "pitch_sent",
+      "hours_stuck": 72.1,
+      "url": "https://lowtdfw.com/offer"
+    },
+    {
+      "email": "contact@calisim.com",
+      "stage": "pitch_sent",
+      "hours_stuck": 72.1,
+      "url": "https://www.calisim.com/plans"
+    },
+    {
+      "email": "info@sarojhospital.com",
+      "stage": "pitch_sent",
+      "hours_stuck": 72.1,
+      "url": "https://www.sarojhospital.com/gastro-care"
+    }
+  ],
   "lead_stages": {
     "audit_delivered": 15,
     "pitch_sent": 20,

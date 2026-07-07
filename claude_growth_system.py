@@ -3,6 +3,11 @@
 
 Implements the six-step playbook without adding new infrastructure:
 ICP/positioning/banned words -> 30d calendar -> content skills -> engager ingest -> DM queue -> weekly summary.
+
+Based on the Solo Founder LinkedIn Operating System pattern:
+Voice DNA (what you sound like) + Skill Commands (what you can do)
++ Ask User Questions (before composing) + Tools Map (auto vs manual)
++ 1M Token Window (feed past patterns into context).
 """
 
 from __future__ import annotations
@@ -54,15 +59,51 @@ BANNED_WORDS = [
     "game-changing",
 ]
 
-VOICE_SKILL = """# Nebula Post Voice Skill
+VOICE_DNA = """# Nebula Voice DNA
 
-Write like Mike/Nebula:
-- Short lines.
-- Direct claims.
-- Proof over polish.
-- Founder pain first.
-- No hype words.
-- Every post points to a measurable leak, shipped asset, or revenue bottleneck.
+## Who We Are
+Nebula Components is the autonomous conversion leak detector for founders burning ad budget. We are not an agency. We are not consultants. We are a self-serve engine that finds and fixes landing page leaks without calls, calendars, or manual review.
+
+## Sentence Structure
+- Short declarative sentences. 12-18 words average.
+- One claim per sentence. One idea per paragraph.
+- Lead with the problem or the number. "4% CTR. 0% conversion. Here's where it breaks."
+- No throat-clearing. Cut "we believe," "we think," "it's important to note."
+
+## Word Choice
+- Concrete nouns. Specific numbers. No abstractions.
+- Use: leak, bleed, burn, fix, ship, score, trigger, gap, friction, proof
+- Avoid: optimize (use fix or improve), empower, leverage, best-in-class, holistic, robust, seamless, cutting-edge
+- Dollar amounts always: "$97 fix pack" not "premium service tier"
+- Never "book a call," "jump on a call," "schedule a meeting," "let me know"
+
+## Hook Patterns
+- Pain-first: "Your ads may not be broken. Your landing page is leaking the money."
+- Specific number + gap: "$3,000/mo in ad spend. Zero conversions. One leak."
+- Insider term: "Message-match gap. CPM creep. ROAS cliff. You know the feeling."
+- Curiosity + outcome: "Founders who fix their above-fold CTA see 2-3x more audits. Here's the one I use."
+
+## Proof Rules
+- Every claim needs evidence within 2 sentences.
+- Trust signals must be shown, not just claimed: star ratings, named customers, count numbers, screenshots.
+- "Founded in 2026" is a disadvantage — lead with product proof, not company age.
+- Reference the self-audit case study: "Score 6.8/10 B. We fixed the 3/10 SEO in 2 minutes."
+
+## CTA Format
+- Action verb + outcome + link: "Run my free audit →" not "Click here for more info"
+- No friction claim: "No call. No calendar. No card required."
+- Ends at the URL: every CTA points to nebulacomponents.shop or the audit tool.
+
+## Voice Examples
+- "Paste the URL. Get the scored teardown. Buy the $97 fix pack. No sales call."
+- "Your ads might be fine. The page is where money goes to die. We can show you exactly where in 60 seconds."
+- "Spent $10k on ads and got barely any orders? The leak isn't in the targeting. It's in the page."
+
+## Enforcement
+- When composing any outbound, read Voice DNA first.
+- If the draft would sound generic, delete and restart.
+- Read the draft aloud. If it sounds like a freelancer pitch, rewrite.
+- CTA must be the last sentence. No exceptions.
 """
 
 REPURPOSE_SKILL = """# Nebula Repurposing Skill
@@ -73,6 +114,125 @@ For every post, create:
 3. Email subject + short body.
 4. DM opener for engagers.
 5. Build-in-public proof snippet.
+"""
+
+# ── Nebula Skill Commands ──────────────────────────────────────────
+
+AUDIT_SKILL = """# /audit — Run Conversion Audit
+
+Paste any landing page URL. Returns scored breakdown:
+- Headline: clarity, length, keyword overlap with title
+- CTA: action language, number of CTAs, placement above fold
+- Social Proof: claimed vs. shown (the "say vs show" gap)
+- Mobile: viewport tag, responsive detection
+- Load Speed: HTML size, WordPress detection
+- Above Fold: CTA visibility in first viewport
+- Ad Signals: GA4, Facebook Pixel, UTM params, thank-you page
+- SEO Foundations: title length, meta description, H1 alignment
+- Opp Matrix: impact vs effort for every finding (quick win / major project)
+- Overall score 0-10 + grade (A/B/C/D/F)
+
+Deliver via AgentMail to prospect.
+"""
+
+FIX_SKILL = """# /fix — Generate Fix Recommendations
+
+From an audit result, produce implementation-ready fixes:
+- For each dimension scoring < 6: specific code change, copy edit, or config update
+- Priority-ordered by impact/effort quadrant
+- Plain language — the prospect can hand it to a developer or implement themselves
+- Gated behind $97 fix pack purchase
+"""
+
+COMPOSE_SKILL = """# /compose — Write Outbound Message
+
+Rules:
+1. Load Voice DNA first. Read all sections.
+2. Load the prospect's buying trigger signal.
+3. Load the prospect's ICP fit score.
+4. If < 24 hours since last touch, skip.
+5. Open with their specific pain (quote their comment or ad symptom).
+6. State the diagnosis you found (or can find with the audit).
+7. CTA: the free audit URL.
+8. Max 150 words for DM, 200 for email.
+9. Check for banned words. If present, rewrite.
+10. Read aloud. If it sounds like a template, delete and restart.
+"""
+
+SCORE_SKILL = """# /score — Score Prospect ICP Fit
+
+Evaluate against buying triggers:
+- Spending on ads? (paid traffic, ad spend, google ads, meta ads, campaigns)
+- Bleeding on conversions? (zero conversions, no sales, not converting, no leads)
+- Has a landing page? (live URL or offer page to audit)
+
+Score 0-100:
+- 80-100: Red alert — contact immediately
+- 50-79: Warm — queue for today's outreach
+- 20-49: Tepid — research first, need more signal
+- 0-19: Not ICP — do not contact
+
+Return: score, trigger match (list), gap (list for missing triggers), recommendation.
+"""
+
+FOLLOWUP_SKILL = """# /followup — Write Follow-Up Message
+
+When prospect was contacted but silent for 5+ days:
+1. Never re-pitch the same message.
+2. Add new value: "Ran the audit on a similar page yesterday — found X leak. Your page may have the same pattern."
+3. Prove you are not a bot: reference their specific industry or role.
+4. End with the audit URL. No ask. No urgency.
+5. If 3 follow-ups sent with no reply, archive to cold_pool.jsonl.
+
+Follow-up cadence:
+- Day 5: value-add (new finding from similar audit)
+- Day 14: social proof (case study or testimonial)
+- Day 30: final (archive unless reply)
+"""
+
+# ── Ask User Questions ─────────────────────────────────────────────
+
+ASK_USER_QUESTIONS = """# AskUserQuestion — Pre-Composition Discovery
+
+Before composing any outbound, check what data is available:
+1. Do we have the prospect's URL? If yes → run audit first.
+2. Do we have the prospect's comment/signal? If yes → extract the specific pain.
+3. Do we have the prospect's role and company? If yes → personalize industry context.
+4. Do we have past audit results for similar prospects? If yes → compare patterns.
+5. Is it < 24h since last contact? If yes → skip.
+
+If none of the above is available, ask the user:
+- "What's their landing page URL?"
+- "What did they say or post that flagged them?"
+- "What industry are they in?"
+- "Do we have a previous conversation with this prospect?"
+
+Only compose after at least 2 of (1) URL, (2) pain signal, (3) industry context are answered.
+"""
+
+# ── Tools Connectivity Map ─────────────────────────────────────────
+
+TOOLS_MAP = """# Tools Map — Auto vs Manual
+
+## CONNECTS AUTOMATICALLY
+| Tool | What it does | Connected since |
+|------|-------------|-----------------|
+| Apify (balm_snowflake) | Scrapes LinkedIn engagers from post comments/likes | √ |
+| AgentMail (nebulashop@agentmail.to) | Sends audit emails, deliverability, open tracking | √ |
+| Stripe | Checkout for $97 fix pack, $1,497 retainer | √ (via buy.stripe.com) |
+
+## CONNECTS MANUALLY (needs user action)
+| Tool | What's missing | To automate |
+|------|---------------|-------------|
+| LinkedIn feed read | Claude cannot natively read LinkedIn feed | Use Apify on-demand scrape |
+| LinkedIn DM send | Claude writes DMs; user sends manually | Buffer / Taplio scheduling |
+| Notion content calendar | Can read/write via ntn CLI | Already wired — manual trigger |
+| Gmail | Pulls email threads for reply drafting | Via AgentMail for audits only |
+| Post to LinkedIn/X | Claude writes; user copies + pastes | Scheduling via Buffer or Typefully |
+
+## RULE
+If a tool icon has a red X in the infographic, Claude can write/create but not publish.
+Always write in Claude. Publish via the manual bridge tool.
 """
 
 
@@ -92,17 +252,27 @@ def write_if_missing(path: Path, content: str) -> None:
 
 
 def load_strategy(base: Path = DEFAULT_BASE) -> dict:
-    """Create/load the Claude Project inputs: ICP, Positioning, Banned Words."""
+    """Create/load the Claude Project inputs: ICP, Positioning, Banned Words, Voice DNA, Skills, AskUserQuestions, ToolsMap."""
     gs = system_path(base)
     write_if_missing(gs / "ICP.md", ICP_TEXT)
     write_if_missing(gs / "Positioning.md", POSITIONING_TEXT)
     write_if_missing(gs / "Banned_Words.txt", "\n".join(BANNED_WORDS) + "\n")
-    write_if_missing(gs / "Nebula_Post_Voice_Skill.md", VOICE_SKILL)
+    write_if_missing(gs / "Nebula_Voice_DNA.md", VOICE_DNA)
     write_if_missing(gs / "Nebula_Repurpose_Skill.md", REPURPOSE_SKILL)
+    write_if_missing(gs / "Nebula_Audit_Skill.md", AUDIT_SKILL)
+    write_if_missing(gs / "Nebula_Fix_Skill.md", FIX_SKILL)
+    write_if_missing(gs / "Nebula_Compose_Skill.md", COMPOSE_SKILL)
+    write_if_missing(gs / "Nebula_Score_Skill.md", SCORE_SKILL)
+    write_if_missing(gs / "Nebula_Followup_Skill.md", FOLLOWUP_SKILL)
+    write_if_missing(gs / "Ask_User_Questions.md", ASK_USER_QUESTIONS)
+    write_if_missing(gs / "Tools_Map.md", TOOLS_MAP)
     return {
         "icp": (gs / "ICP.md").read_text(),
         "positioning": (gs / "Positioning.md").read_text(),
         "banned_words": [line.strip() for line in (gs / "Banned_Words.txt").read_text().splitlines() if line.strip()],
+        "voice_dna": (gs / "Nebula_Voice_DNA.md").read_text(),
+        "skills": ["audit", "fix", "compose", "score", "followup", "repurpose"],
+        "ask_user_questions": (gs / "Ask_User_Questions.md").read_text(),
     }
 
 
