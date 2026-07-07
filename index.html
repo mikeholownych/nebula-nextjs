@@ -294,10 +294,13 @@
 
 <div id="scroll-prog" aria-hidden="true"></div>
 <header>
-  <h1>Stop burning ad spend on a page that <span class="squiggle"><em>can&#8217;t close.</em><svg class="squig" viewBox="0 0 180 12" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path class="squig-path" d="M2,8 C30,2 60,12 90,6 C120,0 150,10 178,6" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"/></svg></span></h1>
-  <p class="sub">Paste your URL. Get a scored teardown of exactly where your page leaks — clarity, CTA, trust proof, offer friction. In your inbox in 60 seconds. Free. No sales call. No agency. No commitment.</p>
+  <h1>4% CTR. 0% conversion. <span class="squiggle"><em>Here&#8217;s where it breaks.</em><svg class="squig" viewBox="0 0 180 12" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path class="squig-path" d="M2,8 C30,2 60,12 90,6 C120,0 150,10 178,6" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"/></svg></span></h1>
+  <p class="sub">Your ad spend is leaking somewhere between the click and the checkout. This finds the exact gap, estimates the monthly dollar cost, and gives you the fix. 60 seconds. $0. No testing phase. No agency.</p>
   <div style="text-align:center;margin:0 auto 14px;font-size:14px;color:#6ee7b7;font-weight:600;">
     97% of ad clicks don't convert. <span style="color:#9ca3af;font-weight:400;">Most vendors sell you more traffic. We tell you the specific dollar amount burning on your page — then fix it.</span>
+  </div>
+  <div style="text-align:center;margin:0 auto 18px;font-size:13px;color:#9ca3af;max-width:560px;line-height:1.5;">
+    No testing phase. No 3-month retainer. No discovery call. Paste your URL, see your leak, buy the fix if you want it. That's the whole thing.
   </div>
   <div class="trust-row">
     <span class="pill">No sales call</span>
@@ -812,7 +815,13 @@
         '<li><strong>' + escapeHtml(item.dim) + ':</strong> ' + escapeHtml(item.issue)
         + ' <br><span class="micro">Fix: ' + escapeHtml(item.fix) + '</span></li>'
       ).join('');
+      const leakBanner = data.monthly_leak
+        ? '<div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:14px;color:#991b1b;">'
+          + '⚠️ Estimated monthly leak at your traffic level: <strong>' + escapeHtml(data.monthly_leak) + '</strong> in recoverable conversions.'
+          + '</div>'
+        : '';
       result.innerHTML = '<h2>Your audit is ready</h2>'
+        + leakBanner
         + '<p><strong>Score:</strong> ' + escapeHtml(data.score) + '/10 · <strong>Grade:</strong> ' + escapeHtml(data.grade) + '</p>'
         + '<p>' + escapeHtml(data.overall_verdict || '') + '</p>'
         + '<ul>' + issues + '</ul>'

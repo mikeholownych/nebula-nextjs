@@ -71,6 +71,70 @@ def score_engager(profile):
     return max(0, min(10, score))
 
 
+# ─── SYNTHETIC CONTENT FIREWALL (TrustOS Forensic AI Research method) ─────────
+# Filters comments before treating them as buying signals.
+# Returns (passes: bool, reason: str)
+
+_FORBIDDEN_VOCAB = {
+    "leverage", "harness", "unleash", "unlock", "unveil", "delve", "deep dive",
+    "underscore", "navigate", "elevate", "supercharge", "synergy",
+    "game-changing", "transformative", "innovative", "cutting-edge", "revolutionary",
+    "robust", "seamless", "holistic", "meticulous", "pivotal", "crucial", "vital",
+    "nuanced", "multifaceted", "comprehensive", "a testament to",
+    "in today's fast-paced world", "in the ever-evolving landscape",
+    "it is important to note", "a key takeaway is", "that being said",
+    "furthermore", "moreover", "additionally", "therefore", "thus", "consequently",
+    "notably", "tapestry", "symphony", "realm", "embark", "evoke", "illuminate",
+    "whisper", "echo", "journey",
+}
+
+_VENDOR_CAMOUFLAGE_PHRASES = [
+    "how i used to", "i used to struggle", "i solved this by", "that's why i built",
+    "check out my", "book a call", "link in bio", "dm me", "our tool",
+    "this highlights the need", "this underscores the importance",
+]
+
+_ACTIVE_SUFFERING_SIGNALS = [
+    "help", "rant", "drowning", "is this normal", "what am i doing wrong",
+    "no conversions", "barely any", "zero sales", "doesn't convert", "won't convert",
+    "wasting money", "burning money", "no idea what's broken", "landing page sucks",
+    "ads not working", "clicks but no", "spent and got nothing",
+]
+
+def passes_content_firewall(comment: str) -> tuple:
+    """
+    Forensic AI Research Synthetic Content Firewall.
+    Returns (True, 'active_suffering') if comment shows real buying pain.
+    Returns (False, reason) if comment is AI-generated, vendor-disguised, or generic.
+    """
+    text = (comment or "").lower()
+    if not text.strip():
+        return False, "empty"
+
+    # Reject vendor camouflage
+    for phrase in _VENDOR_CAMOUFLAGE_PHRASES:
+        if phrase in text:
+            return False, f"vendor_camouflage:{phrase}"
+
+    # Reject forbidden vocabulary (AI / marketing signatures)
+    for word in _FORBIDDEN_VOCAB:
+        if word in text:
+            return False, f"ai_vocab:{word}"
+
+    # Reject "not X, but Y" antithesis structure (AI tell)
+    import re
+    if re.search(r"\bnot\b.{1,40}\bbut\b", text):
+        return False, "antithesis_structure"
+
+    # Require active suffering signal for HIGH classification
+    has_signal = any(sig in text for sig in _ACTIVE_SUFFERING_SIGNALS)
+    if has_signal:
+        return True, "active_suffering"
+
+    # Neutral — not AI spam but not buying signal either
+    return True, "neutral"
+
+
 def load_state():
     """Load state from previous run."""
     if MONITOR_STATE.exists():

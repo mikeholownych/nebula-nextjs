@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-07-07T03:30:40.193280+00:00",
+  "timestamp": "2026-07-07T07:45:32.236760+00:00",
   "healthy": true,
-  "passed": 14,
+  "passed": 15,
   "failed": 0,
-  "total": 14,
+  "total": 15,
   "checks": [
     {
       "name": "File: ramp_pipeline_fill.py",
@@ -13,17 +13,17 @@
     {
       "name": "File: followup_sequence.py",
       "passed": true,
-      "detail": "30,724 bytes"
+      "detail": "32,118 bytes"
     },
     {
       "name": "File: deliver_audit.py",
       "passed": true,
-      "detail": "39,163 bytes"
+      "detail": "49,319 bytes"
     },
     {
       "name": "File: agentic_server.py",
       "passed": true,
-      "detail": "62,318 bytes"
+      "detail": "65,217 bytes"
     },
     {
       "name": "SMTP connectivity",
@@ -63,7 +63,7 @@
     {
       "name": "Pipeline ramp recent run",
       "passed": true,
-      "detail": "54m ago"
+      "detail": "98m ago"
     },
     {
       "name": "Dead letter queue",
@@ -74,16 +74,21 @@
       "name": "Stuck leads",
       "passed": true,
       "detail": "No leads stalled >4h"
+    },
+    {
+      "name": "Copy fatigue detector",
+      "passed": true,
+      "detail": "outreach_log: 190 entries; run copy_fatigue_detector.py for full diagnosis"
     }
   ],
   "stuck_leads": [],
   "lead_stages": {
-    "audit_delivered": 13,
+    "audit_delivered": 14,
     "pitch_sent": 20,
     "paid": 0,
     "bounced": 30,
     "contacted": 75,
     "unknown": 0
   },
-  "total_leads": 138
+  "total_leads": 139
 }

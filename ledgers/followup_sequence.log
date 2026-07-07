@@ -337,3 +337,32 @@ Recycle candidates (pitch_sent, no payment): 21
 
 ============================================================
 Due: 16  Sent: 0  delivered
+followup_sequence.py (LIVE) — 2026-07-07 06:17 UTC
+============================================================
+
+Audit leads: 17
+  [email1_direct] patriciasfnunes@gmail.com (www.patricianunes.pt)
+  [AM FAILED] patriciasfnunes@gmail.com: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: patriciasfnunes@gmail.com (Unsubscribe
+  [SUPPRESSED->DEAD] patriciasfnunes@gmail.com
+
+Cold-only leads: 101
+  [day8_cold_breakup] hello@theogeo.ai
+  [AM FAILED] hello@theogeo.ai: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@theogeo.ai (bounced)"}
+  [SUPPRESSED->DEAD] hello@theogeo.ai
+  [day8_cold_breakup] hello@northcoast.dev
+  [SENT] hello@northcoast.dev: should I close your file?
+  [day8_cold_breakup] hello@postclaw.io
+  [AM FAILED] hello@postclaw.io: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@postclaw.io (bounced)"}
+  [SUPPRESSED->DEAD] hello@postclaw.io
+  [skip bounced] info@brookerlaw.com
+  [skip bounced] info@magnolia-club.org
+  [skip bounced] info@saputo.law
+
+HOT_LEAD pitch due: 0  Sent: 0
+
+Revive candidates (contacted, no audit): 101
+
+Recycle candidates (pitch_sent, no payment): 21
+
+============================================================
+Due: 4  Sent: 1  delivered

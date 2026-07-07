@@ -1162,21 +1162,27 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
             for k, v in sorted_dims
         ]
 
-        # Overall verdict copy
+        # Overall verdict copy + dollar leak estimate (surface before email gate)
+        monthly_spend_est = body.get("monthly_spend") or 2000
         if overall >= 8:
             verdict = "Your page is in great shape. A few tweaks could push it over the top."
+            monthly_leak = None
         elif overall >= 6:
             verdict = "Decent foundation — but you're leaving conversions on the table. The fixes below are quick wins."
+            monthly_leak = f"~${int(monthly_spend_est * 0.20):,}–${int(monthly_spend_est * 0.45):,}/mo"
         elif overall >= 4:
             verdict = "Your page has real conversion blockers. Fixing the top issues could meaningfully increase signups."
+            monthly_leak = f"~${int(monthly_spend_est * 0.40):,}–${int(monthly_spend_est * 0.65):,}/mo"
         else:
             verdict = "Critical issues found. Visitors are likely bouncing fast. Prioritize the top 2 fixes immediately."
+            monthly_leak = f"~${int(monthly_spend_est * 0.60):,}–${int(monthly_spend_est * 0.80):,}/mo"
 
         result = {
             "score":           overall,
             "grade":           grade,
             "top_issues":      top_issues,
             "overall_verdict": verdict,
+            "monthly_leak":    monthly_leak,
         }
 
         # ── Log captured lead ───────────────────────────────────────
