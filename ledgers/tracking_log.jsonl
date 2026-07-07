@@ -1,0 +1,6 @@
+{"type": "open", "email": "test@test.com", "timestamp": "2026-07-07T01:15:35.497618+00:00", "ip": "127.0.0.1", "ua": "curl/8.5.0"}
+{"type": "open", "email": "hello%40flowly.run", "timestamp": "2026-07-07T01:16:57.075752+00:00", "ip": "127.0.0.1", "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246 Mozilla/5.0"}
+{"type": "open", "email": "founder@shipyard.build", "timestamp": "2026-07-07T01:18:24.073610+00:00", "ip": "127.0.0.1", "ua": "curl/8.5.0"}
+{"type": "open", "email": "shawnxu0208@gmail.com", "timestamp": "2026-07-07T01:56:51.789644+00:00", "ip": "127.0.0.1", "ua": "Mozilla/5.0"}
+{"type": "open", "email": "hola@atiendo24.com", "timestamp": "2026-07-07T02:41:25.446103+00:00", "ip": "127.0.0.1", "ua": "Mozilla/5.0"}
+{"type": "open", "email": "miadorothy250@gmail.com", "timestamp": "2026-07-07T02:45:59.099948+00:00", "ip": "127.0.0.1", "ua": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)"}

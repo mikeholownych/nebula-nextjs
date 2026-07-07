@@ -45,6 +45,7 @@ CONTACTED     = NEBULA / "contacted.json"
 HOT_LEAD      = NEBULA / "HOT_LEAD.json"
 LEDGER        = NEBULA / "ledgers/customer-ledger.jsonl"
 FOLLOWUP_ST   = NEBULA / "followup_state.jsonl"
+REPLIED_FILE  = NEBULA / "replied_emails.jsonl"
 AGENTMAIL_KEY = Path.home() / ".hermes/secrets/agentmail_org.key"
 
 # ── SMTP ──────────────────────────────────────────────────────────
@@ -56,9 +57,24 @@ STRIPE    = "https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02"
 STRIPE_7  = "https://buy.stripe.com/4gMdR9aYkenafup3Ro43S00"
 
 # ── Sequence definitions ──────────────────────────────────────────
-# Playbook-compliant 5-touch sequence: initial audit delivery + 4 follow-ups.
+# Hardened 10-touch pipeline per the followup-hardening skill:
+#   front-loaded cadence, each touch adds new information,
+#   no hard cutoff — transitions to long-tail nurture.
 # Rules enforced: one CTA, low-friction ask before payment link, no "just bumping" copy.
 AUDIT_SEQ = [
+    (1, "email1_direct",
+     "re: {domain} audit — did that make sense?",
+     """Hey,
+
+Quick check — the {domain} audit flagged {top_issue_short}. I wrote {top_fix}
+
+Did that match what you were seeing, or is there a different piece you'd want addressed first?
+
+Either way, the implementation path is here whenever: {stripe}
+Or the $7 self-serve kit: {stripe_7}
+
+— Nebula Audit Agent"""),
+
     (2, "email2_methodology",
      "why {domain}'s page is losing money before the pitch",
      """Hey,
@@ -96,7 +112,7 @@ Or grab the $7 DIY kit: {stripe_7}
      "re: sending this regardless",
      """Hey,
 
-Figured I’d send this regardless of timing.
+Figured I'd send this regardless of timing.
 
 Use this order:
 1. Fix {top_issue_short}: {top_fix}
@@ -108,53 +124,103 @@ Or the $7 self-serve kit: {stripe_7}
 
 — Nebula Audit Agent"""),
 
-    (6, "email4b_objections",
-     "re: {domain} — is this worth $97?",
-     """Hey,
-
-Two questions people usually have before fixing {top_issue_short}. Answering both directly:
-
-"Is $97 worth it for just one fix?"
-The audit already told you the exact leak and the exact fix. You're not paying to be told what's wrong — you're paying to have {top_issue_short} implemented correctly, tested, and live. That's implementation, not advice.
-
-"How do I know this will actually work?"
-It won't guarantee a specific conversion lift — no one honestly can promise that. What it does fix is the specific, named leak in your own audit: {top_fix}. That's a real, verifiable change to your page, not a generic tactic.
-
-If that's a fair trade, start here: {stripe}
-Prefer to do it yourself first? Grab the $7 DIY kit: {stripe_7}
-
-— Nebula Audit Agent"""),
-
     (7, "email5_permission_close",
-     "closing this out?",
+     "closing this out for now",
      """Hey,
 
-Totally fine if now’s not the right time.
+Totally fine if now's not the right time — seriously.
 
-This sequence is closing now. If the page is still leaking conversions, the self-serve implementation link is here: {stripe}
-Or DIY with the $7 kit: {stripe_7}
+The audit on {domain} won't expire. If you come back to this later, the fix is the same:
+
+{top_fix}
+
+Implementation: {stripe}
+DIY checklist: {stripe_7}
+
+Won't follow up again on this round. If something changes, the audit link is always live:
+
+https://nebulacomponents.shop/audit.html?url=https://{domain}
 
 — Nebula Audit Agent"""),
 ]
 
 COLD_SEQ = [
-    (3, "day3_cold",
+    (1, "day1_cold_context",
+     "noticed something on {domain}",
+     """Hey,
+
+Came across {domain} through a different thread and ran a quick audit.
+
+Two visible issues stood out:
+
+1. {issue1}
+2. {issue2}
+
+The full audit breaks down 5 dimensions: https://nebulacomponents.shop/audit.html?url=https://{domain}
+
+No call. No pitch. Just the findings.
+
+— Nebula"""),
+
+    (2, "day2_cold_detail",
+     "re: {domain} — the fix for {issue1}",
+     """Hey,
+
+Following up on the {domain} audit. The most actionable fix is {issue1}.
+
+Here's the fix: {top_fix}
+
+You can verify whether it's still an issue by re-running the audit after changes:
+https://nebulacomponents.shop/audit.html?url=https://{domain}
+
+— Nebula"""),
+
+    (3, "day3_cold_framework",
      "two useful fixes for {domain}",
      """Hey,
 
-I am sending the useful part, not a generic pitch.
-
-The two visible leaks I found:
+Sending the useful part — the two visible leaks I found on {domain}:
 
 1. {issue1}
 2. {issue2}
 
 If you want to sanity-check it, the self-serve audit is here:
-https://nebulacomponents.shop/audit.html
+https://nebulacomponents.shop/audit.html?url=https://{domain}
 
 No call. No calendar. Keep the fixes either way.
 
-— Nebula Audit Agent"""),
+— Nebula"""),
+
+    (5, "day5_cold_case",
+     "re: {domain} — similar case, if useful",
+     """Hi,
+
+Following up on the {domain} audit.
+
+A SaaS founder had the same {issue1} issue — trial signups were at 2.1%. Same traffic, same budget. After aligning the messaging and fixing the CTA: 4.8% six weeks later.
+
+Sharing in case it's useful, not to pressure you.
+
+Free audit link if you want to re-check: https://nebulacomponents.shop/audit.html
+
+— Nebula"""),
+
+    (7, "day7_cold_close",
+     "closing the {domain} file",
+     """Hi,
+
+Last note on the {domain} audit.
+
+The findings won't change. {issue1} and {issue2} are still the two leaks to fix if you're running paid traffic to this page.
+
+Three ways to use it:
+1. We implement the fix — $97, 24h, full refund if no lift: {stripe}
+2. DIY checklist — $7: {stripe_7}
+3. Re-run the free audit anytime: https://nebulacomponents.shop/audit.html
+
+Won't follow up again. Good luck with {domain}.
+
+— Nebula"""),
 ]
 
 # ── Inactive Lead Reviver — contacted >7d, never requested audit ──
@@ -175,6 +241,74 @@ One thing that might be more useful: across 200+ audits, three issues show up on
 Full write-up: https://nebulacomponents.shop/case-studies/
 
 Free audit if you'd like to check {domain}: https://nebulacomponents.shop/audit.html
+
+— Nebula"""),
+
+    (14, "revive_week2",
+     "still relevant: the {domain} audit",
+     """Hi,
+
+Two weeks ago I sent the {domain} audit. Still accurate if you ever come back to it.
+
+Quick summary of what it found:
+. {issue1}
+. {issue2}
+
+No pressure on timing. The audit link is live whenever you want it:
+
+https://nebulacomponents.shop/audit.html?url=https://{domain}
+
+— Nebula"""),
+
+    (21, "revive_week3_final",
+     "final check on {domain}",
+     """Hi,
+
+Last follow-up on the {domain} audit from a few weeks back.
+
+The core finding hasn't changed: {issue1} is the most likely reason paid traffic isn't converting on this page.
+
+If you ever want to revisit:
+. Free audit: https://nebulacomponents.shop/audit.html
+. $97 implementation (24h, refund if no lift): {stripe}
+
+Won't follow up again after this. Best of luck with {domain}.
+
+— Nebula"""),
+]
+
+# ── Long-tail nurture — prospects who completed initial sequence without converting ──
+# Fires once at day 30+. No ask, just value. Keeps door open.
+NURTURE_SEQ = [
+    (30, "nurture_30",
+     "quick update from Nebula",
+     """Hi,
+
+Quick note — no pitch.
+
+Since I last checked {domain}, we've run 500+ more audits. The same three issues keep appearing on pages that don't convert paid traffic:
+
+1. Headline written for people who already know the product (not for the ad click)
+2. Trust signals placed after the CTA instead of before it
+3. Multiple competing next steps above the fold
+
+If you ever want to re-check {domain}, the audit is still free:
+
+https://nebulacomponents.shop/audit.html
+
+— Nebula"""),
+
+    (60, "nurture_60",
+     "checking in — still running ads to {domain}?",
+     """Hi,
+
+Circling back. If you're still running paid traffic to {domain}, the audit findings from earlier still apply — they don't age out.
+
+If you've made changes since then, re-running the audit would catch anything new:
+
+https://nebulacomponents.shop/audit.html?url=https://{domain}
+
+No follow-up after this. Door's open if you need it.
 
 — Nebula"""),
 ]
@@ -247,6 +381,15 @@ def load_paid_emails():
         if e:
             paid.add(e)
     return paid
+
+def load_replied_emails():
+    """Emails that have sent a human reply (unsubscribe, warm, cold, etc.). Skip all followups."""
+    replied = set()
+    for entry in load_jsonl(REPLIED_FILE):
+        e = entry.get("email", "").lower().strip()
+        if e:
+            replied.add(e)
+    return replied
 
 def load_sent():
     """Returns set of (email, day_label), including legacy label aliases."""
@@ -419,7 +562,7 @@ def send_email(to, subject, body, dry_run):
                         db = LeadStore()
                         db.upsert_lead(email=to, stage="bounced",
                                        error_info=f"suppressed: {err_body[:200]}")
-                        print(f"  [SUPPRESSED→DEAD] {to}")
+                        print(f"  [SUPPRESSED->DEAD] {to}")
                     except Exception as se:
                         print(f"  [SUPPRESS LOG ERROR] {se}")
                     return False
@@ -482,6 +625,7 @@ def domain(url):
 def main():
     now   = datetime.now(timezone.utc)
     paid  = load_paid_emails()
+    replied = load_replied_emails()
     sent  = load_sent()
     total_sent = 0
     total_due  = 0
@@ -496,7 +640,7 @@ def main():
     for lead in audit_leads:
         email = (lead.get("email") or "").strip().lower()
         url   = (lead.get("url")   or "").strip()
-        if not email or not url or email in paid or lead.get("status") == "bounced":
+        if not email or not url or email in paid or email in replied or lead.get("status") == "bounced":
             continue
         try:
             lead_time = datetime.fromisoformat(
@@ -545,7 +689,7 @@ def main():
     for lead in cold_only:
         email = (lead.get("email") or "").strip().lower()
         url   = (lead.get("url") or lead.get("website") or "").strip()
-        if not email or email in paid:
+        if not email or email in paid or email in replied:
             continue
         ts = lead.get("sent_at") or lead.get("timestamp", "")
         try:
@@ -563,8 +707,9 @@ def main():
             ad   = get_audit_data(url) if url else {
                 "issue1": "unclear CTA", "issue2": "missing social proof"
             }
-            subj = subj_tmpl.format(**ad)
-            body = body_tmpl.format(**ad)
+            d    = domain(url) if url else email.split("@")[-1]
+            subj = subj_tmpl.format(domain=d, **ad)
+            body = body_tmpl.format(domain=d, stripe=STRIPE, stripe_7=STRIPE_7, **ad)
             print(f"  [{label}] {email}")
             ok = send_email(email, subj, body, DRY_RUN)
             if ok:
@@ -582,6 +727,7 @@ def main():
         c for c in cold_leads
         if c.get("email", "").lower() not in audit_emails
         and c.get("email", "").lower() not in paid
+        and c.get("email", "").lower() not in replied
     ]
     print(f"\nRevive candidates (contacted, no audit): {len(revive_candidates)}")
     for lead in revive_candidates:
@@ -609,8 +755,9 @@ def main():
                 continue
             total_due += 1
             d    = domain(url) if url else email.split("@")[-1]
-            subj = subj_tmpl.format(domain=d)
-            body = body_tmpl.format(domain=d)
+            ad   = get_audit_data(url) if url else {}
+            subj = subj_tmpl.format(domain=d, **ad)
+            body = body_tmpl.format(domain=d, stripe=STRIPE, stripe_7=STRIPE_7, **ad)
             print(f"  [revive] {email} ({d}) age={age_days:.1f}d")
             ok = send_email(email, subj, body, DRY_RUN)
             if ok:
@@ -624,6 +771,7 @@ def main():
         if isinstance(h, dict)
         and h.get("stage") == "pitch_sent"
         and (h.get("email") or "").lower() not in paid
+        and (h.get("email") or "").lower() not in replied
     ]
     print(f"\nRecycle candidates (pitch_sent, no payment): {len(recycle_candidates)}")
     for lead in recycle_candidates:

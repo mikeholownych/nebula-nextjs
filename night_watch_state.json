@@ -1,0 +1,47 @@
+{
+  "hello@boothkeepos.com": {
+    "url": "https://boothkeepos.polsia.app",
+    "title": "BoothKeep \u2014 Stop Overselling. Manage Every Channel in One Place.",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 0,
+    "content_hash": "7c3f04a73dbab897ed52870fd5f105d3",
+    "scraped_at": "2026-07-07T02:00:23.434996+00:00"
+  },
+  "hello@theogeo.ai": {
+    "url": "https://theogeo.ai",
+    "title": "theogeo.ai \u2014 AI Brand Visibility &amp; Intelligence Platform",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 0,
+    "content_hash": "9707ad4afbc45d288671313126908d18",
+    "scraped_at": "2026-07-07T02:00:23.822603+00:00"
+  },
+  "lakisha@goldenweeks.co": {
+    "url": "https://goldenweeks.co",
+    "title": "Digital Nomad Retreat in Zanzibar | goldenweeks Retreats",
+    "status": "ok",
+    "page_size_kb": 26.1,
+    "cta_count": 0,
+    "content_hash": "118258f0ae8c5185ff08530a058192a3",
+    "scraped_at": "2026-07-07T02:00:24.001737+00:00"
+  },
+  "alloceraintelligence@gmail.com": {
+    "url": "https://alloceraintelligence.com",
+    "title": "True Cost Per Lead Analytics \u2014 CDAI Engine | Allocera Intelligence",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 0,
+    "content_hash": "90a65000eb3a78e9ad34e1dbb1ce0b27",
+    "scraped_at": "2026-07-07T02:00:25.267360+00:00"
+  },
+  "deepanshu11madan@gmail.com": {
+    "url": "https://naxely.com",
+    "title": "Naxely \u2014 AI-Powered PDF Report Generator",
+    "status": "ok",
+    "page_size_kb": 48.1,
+    "cta_count": 0,
+    "content_hash": "1b31afd904745c729a0ddc6a34788f39",
+    "scraped_at": "2026-07-07T02:00:25.678440+00:00"
+  }
+}

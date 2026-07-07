@@ -223,6 +223,90 @@ def score_audit(page):
         ad_signals_issue = "No ad tracking signals detected (Facebook Pixel, GA4, UTM, thank-you page)."
     ad_signals_fix = "Install Facebook Pixel + GA4 conversion events on thank-you page to measure true ROAS"
 
+    # --- SEO Foundations dimension (naming conventions) ---
+    _soup = BeautifulSoup(html_text, "html.parser") if html_text else None
+    title_tag = _soup.title.get_text(" ", strip=True) if _soup and _soup.title else ""
+    meta_desc = ""
+    meta_desc_tag = _soup.find("meta", attrs={"name": "description"}) if _soup else None
+    if meta_desc_tag and meta_desc_tag.get("content"):
+        meta_desc = meta_desc_tag["content"].strip()
+    h1_tags = _soup.find_all("h1") if _soup else []
+    h1_count = len(h1_tags)
+    h1_text = h1_tags[0].get_text(" ", strip=True) if h1_tags else ""
+
+    seo_score = 5  # baseline
+    seo_issues = []
+
+    # Title tag
+    if not title_tag:
+        seo_issues.append("Missing <title> tag")
+        seo_score -= 2
+    elif len(title_tag) < 15:
+        seo_issues.append(f"Title tag too short ({len(title_tag)} chars)")
+        seo_score -= 1
+    elif len(title_tag) > 70:
+        seo_issues.append(f"Title tag may truncate in SERP ({len(title_tag)} chars)")
+        seo_score -= 1
+    else:
+        seo_score += 1  # good length
+
+    # Meta description
+    if not meta_desc:
+        seo_issues.append("Missing meta description")
+        seo_score -= 1
+    elif len(meta_desc) < 80:
+        seo_issues.append(f"Meta description too short ({len(meta_desc)} chars)")
+        seo_score -= 1
+    elif len(meta_desc) > 170:
+        seo_issues.append(f"Meta description may truncate in SERP ({len(meta_desc)} chars)")
+        seo_score -= 0.5
+    else:
+        seo_score += 1  # good length
+
+    # H1 structure
+    if h1_count == 0:
+        seo_issues.append("Missing H1 tag")
+        seo_score -= 2
+    elif h1_count > 1:
+        seo_issues.append(f"Multiple H1 tags ({h1_count}) — should have exactly one")
+        seo_score -= 1.5
+
+    if h1_text and len(h1_text) < 5:
+        seo_issues.append("H1 content is too short, likely non-descriptive")
+        seo_score -= 0.5
+
+    # H1-to-title naming consistency
+    if title_tag and h1_text:
+        title_lower = title_tag.lower()
+        h1_lower = h1_text.lower()
+        # Check if H1 concept overlaps with title (shared significant words)
+        title_words = set(re.findall(r"[a-z]+", title_lower))
+        h1_words = set(re.findall(r"[a-z]+", h1_lower))
+        common = title_words & h1_words
+        # Filter out stop words
+        stop_words = {"the", "a", "an", "in", "on", "at", "to", "for", "of", "and", "or", "is", "your", "our", "we", "you"}
+        significant_common = common - stop_words
+        if len(significant_common) == 0:
+            seo_issues.append("H1 and title tag share no significant keywords — messaging misalignment")
+            seo_score -= 1
+        elif len(significant_common) < 2:
+            seo_issues.append("H1 and title tag have weak keyword overlap — consider aligning messaging")
+            seo_score -= 0.5
+        else:
+            seo_score += 1  # aligned messaging
+
+    seo_score = max(1, min(10, round(seo_score)))
+
+    if seo_score >= 7:
+        seo_issue_text = "SEO foundations are solid — title, meta description, and H1 structure are well aligned."
+        seo_fix_text = "Monitor ranking performance; consider adding structured data for rich results."
+    elif seo_score >= 4:
+        seo_issue_text = "SEO foundations need work: " + "; ".join(seo_issues[:3])
+        seo_fix_text = "Write a unique 30-60 char title and 120-160 char meta description. Ensure exactly one descriptive H1 that shares keywords with the title."
+    else:
+        seo_issue_text = "Critical SEO gaps: " + "; ".join(seo_issues[:3])
+        seo_fix_text = "Add a <title> tag and <meta name=\"description\"> immediately. Create a single H1 that contains your primary keyword and matches your title intent."
+
     dimensions = {
         "headline": {
             "score": headline_score,
@@ -272,6 +356,12 @@ def score_audit(page):
             "issue": ad_signals_issue,
             "fix": ad_signals_fix,
         },
+        "seo_foundations": {
+            "score": seo_score,
+            "weight": "high",
+            "issue": seo_issue_text,
+            "fix": seo_fix_text,
+        },
     }
     overall = round(sum(v["score"] for v in dimensions.values()) / len(dimensions), 1)
     grade = "A" if overall >= 8 else "B" if overall >= 6.5 else "C" if overall >= 5 else "D"
@@ -301,11 +391,18 @@ def compose_audit_email(page, audit, email, trigger_context=None):
         "social_proof": "Social Proof",
         "speed": "Speed",
         "mobile": "Mobile",
+        "seo_foundations": "SEO Foundations",
+        "ad_signals": "Ad Tracking",
+        "pagespeed": "Page Speed",
+        "above_fold": "Above Fold",
     }
     issues = sorted(audit["dimensions"].items(), key=lambda x: x[1]["score"])
     broken_only = [(k, v) for k, v in issues if v["score"] < 7]
     worst_key, worst_item = (broken_only[0] if broken_only else issues[0])
-    worst_label = DIM_LABELS.get(worst_key, worst_key.replace("_", " ").title())
+    worst_label = (DIM_LABELS.get(worst_key, worst_key.replace("_", " ").title())) or worst_key
+    # Vowel-rule for indefinite article
+    _label_lower = worst_label.lower().lstrip()
+    _article = "an" if _label_lower and _label_lower[0] in "aeiou" else "a"
     domain = page["url"].replace("https://", "").replace("http://", "").split("/")[0]
 
     lines = []
@@ -314,27 +411,87 @@ def compose_audit_email(page, audit, email, trigger_context=None):
         lines.append(trigger_opener)
         lines.append("")
 
+    score = audit["overall"]
+
+    # Advisor framing: point at specific dollars, not vague "conversion issues" (CAIOS lesson: advisor sentences name amounts)
+    if score < 4:
+        monthly_leak = "~$1,600–$4,000/mo"
+        waste_pct = "70–80%"
+        body_opener = (
+            f"I ran {domain} through our conversion analyzer. The {worst_label.lower()} alone is likely killing every visitor who lands on your page. "
+            f"Pages scoring {score}/10 waste {waste_pct} of paid clicks — at a $2K/mo ad budget that's {monthly_leak} evaporating before a single conversion."
+        )
+        pitch_line = "The diagnosis is above. The $97 is the prescription — we ship every fix in 24h, no call required."
+    elif score < 6.5:
+        monthly_leak = "~$800–$1,800/mo"
+        waste_pct = "40–50%"
+        body_opener = (
+            f"I ran your landing page through our conversion analyzer — your {worst_label.lower()} is the leak. "
+            f"Pages at {score}/10 lose {waste_pct} of ad clicks to friction. At $2K/mo in traffic that's {monthly_leak} in recoverable waste."
+        )
+        pitch_line = "The diagnosis is above. The $97 is the prescription — plug these leaks in 24h and your ad spend starts working."
+    elif score < 8:
+        monthly_leak = "~$250–$700/mo"
+        waste_pct = "15–20%"
+        body_opener = (
+            f"Checked {domain} — you're closer than most ({score}/10). "
+            f"One or two friction points are likely costing {waste_pct} of conversions — {monthly_leak} at a $2K ad budget, more at scale."
+        )
+        pitch_line = "The diagnosis is above. The $97 is the prescription — surgical fixes, not a rebuild, shipped in 24h."
+    else:
+        monthly_leak = "~$100–$300/mo"
+        waste_pct = "5–10%"
+        body_opener = (
+            f"Ran {domain} through our analyzer — it's structurally solid ({score}/10). "
+            f"Found a nuance that may account for {waste_pct} of unconverted clicks — {monthly_leak} at typical spend levels."
+        )
+        pitch_line = "The $97 implements the fix in 24h. Might be the highest-ROI move you make this week. No call required."
+
+    # ── Retainer seed (transition beats before $97 pitch) ──
+    retainer_lines = [
+        "",
+        "─" * 40,
+        "",
+        "That leak is real, and it won't fix itself.",
+        "Pages decay. Campaigns change. Content drifts.",
+        "The fix you apply today needs monitoring, or you redo this audit in 12 months.",
+        "",
+        "AI Ops Retainer — $1,497/mo:",
+        "• Monthly audit refresh — catch drift before it costs you",
+        "• Up to 4 fixes per month — no per-ticket negotiation",
+        "• AI governance — know which models touch your data, where, and why",
+        "• Priority support — direct line, <30 min response, 24/7",
+        "",
+        "3-month pilot. No long-term contract. Cancel anytime.",
+        "Full details: https://nebulacomponents.shop/ai-ops-retainer.html",
+        "",
+        "─" * 40,
+    ]
+
     if broken_only:
-        lines.append(f"I ran your landing page through our conversion analyzer — your {worst_label.lower()} is the leak.")
+        lines.append(body_opener)
         lines.append("")
-        lines.append(f"Score: {audit['overall']}/10 · Grade {audit['overall_grade']}")
+        lines.append(f"Score: {score}/10 · Grade {audit['overall_grade']}")
         lines.append("")
         lines.append("What's costing you conversions:")
         for key, item in broken_only:
             label = DIM_LABELS.get(key, key.replace("_", " ").title())
             lines.append(f"- {label}: {item['issue']} Fix: {item['fix']}")
     else:
-        lines.append(f"Ran {page['url']} through our converter — structurally solid ({audit['overall']}/10). One thing worth tightening:")
+        lines.append(body_opener)
         lines.append("")
         for key, item in issues[:1]:
             label = DIM_LABELS.get(key, key.replace("_", " ").title())
             lines.append(f"- {label}: {item['issue']} Fix: {item['fix']}")
 
+    lines.extend(retainer_lines)
+
     lines.extend([
         "",
         "DIY kit (free): https://nebulacomponents.shop/checkout.html",
+        "Full breakdown: https://nebulacomponents.shop/7-systems.html (the 7 systems every page needs)",
         "",
-        "$97 — we implement the fixes in 24h, no calls, no production changes without your say-so:",
+        f"$97 — {pitch_line}",
         "Details + FAQ: https://nebulacomponents.shop/primer.html",
         "One-click checkout: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02",
         "",
@@ -363,11 +520,15 @@ def compose_audit_email(page, audit, email, trigger_context=None):
     else:
         html_body = "<p>" + "</p><p>".join(line or "&nbsp;" for line in lines) + "</p>"
     
-        # Subject: specific problem found, not generic "audit"
-    if broken_only:
-        subject = f"Spotted a {worst_label.lower()} problem on {domain}"
+        # Subject: score-tier differentiated
+    if score < 4:
+        subject = f"Critical conversion blockers found on {domain}"
+    elif score < 6.5:
+        subject = f"Found {_article} {worst_label.lower()} problem costing you conversions on {domain}"
+    elif score < 8:
+        subject = f"{domain} is close — one fix could make ads profitable"
     else:
-        subject = f"Quick look at {domain} — one thing to tighten"
+        subject = f"Tightening {domain} — quick opportunity spotted"
     return {"subject": subject, "text": text_body, "html": html_body}
 
 
@@ -450,27 +611,86 @@ def _latest_inbound_message_id(am, thread_id):
 
 
 def send_via_agentmail(to, subject, body, html=None, thread_id=None, message_id=None):
-    """Send or reply via the repo AgentMail REST client; returns a structured result."""
-    try:
-        from agentmail_client import AgentMailClient
-        am = AgentMailClient()
-        reply_to = message_id or _latest_inbound_message_id(am, thread_id)
-        if reply_to:
-            data = am.reply(reply_to, text=body, html=html)
-        else:
-            data = am.send(to=[to], subject=subject, text=body, html=html)
-        if data.get("_error"):
-            print(f"❌ AgentMail error: {data.get('_error')} {data.get('_body', '')}")
-            return {"ok": False, "status": "error", "error": data.get("_error"), "raw": data}
-        data.setdefault("status", "sent")
-        data["ok"] = True
-        if thread_id:
-            data.setdefault("thread_id", thread_id)
-        print(f"✅ Sent to {to}{' in-thread' if reply_to else ''}")
-        return data
-    except Exception as e:
-        print(f"❌ Send error: {e}")
-        return {"ok": False, "status": "error", "error": str(e)}
+    """Send or reply via the repo AgentMail REST client with 3-attempt retry + Resend fallback.
+
+    Attempt 1: AgentMail (auto-fails to Resend on 5xx in the client).
+    Attempts 2-3: AgentMail-only (Resend already tried).
+    403 (suppressed) is NOT retried.
+    Logs failures to incident ledger after 3 failed attempts.
+    """
+    from agentmail_client import AgentMailClient
+    am = AgentMailClient()
+    reply_to = message_id or _latest_inbound_message_id(am, thread_id)
+
+    last_error = None
+    for attempt in range(1, 4):
+        if attempt > 1:
+            import time
+            delay = attempt * 15  # 30s, 45s backoff
+            print(f"[retry {attempt}/3] waiting {delay}s before retry...")
+            time.sleep(delay)
+
+        try:
+            if reply_to:
+                data = am.reply(reply_to, text=body, html=html)
+            else:
+                data = am.send(to=[to], subject=subject, text=body, html=html)
+
+            if data.get("_error"):
+                err = data["_error"]
+                # 403 = suppressed — do NOT retry
+                if err == 403:
+                    print(f"❌ AgentMail 403 (suppressed): {to}")
+                    return {"ok": False, "status": "suppressed", "error": "403 suppressed"}
+                # 5xx or network — will retry unless it's attempt 3
+                if attempt < 3 and isinstance(err, int) and err >= 500:
+                    print(f"⚠️  AgentMail {err} on attempt {attempt}/3 for {to}")
+                    last_error = data
+                    continue
+                # Other errors — log and move on
+                print(f"❌ AgentMail error: {data.get('_error')} {data.get('_body', '')}")
+                if attempt == 3:
+                    _log_delivery_crash(to, subject, data, attempt)
+                return {"ok": False, "status": "error", "error": str(err), "raw": data}
+
+            data.setdefault("status", "sent")
+            data["ok"] = True
+            if thread_id:
+                data.setdefault("thread_id", thread_id)
+            via = data.get("_via", "agentmail")
+            print(f"✅ Sent to {to} via {via}{' in-thread' if reply_to else ''}")
+            if attempt > 1:
+                print(f"  (succeeded on retry {attempt})")
+            return data
+
+        except Exception as e:
+            last_error = str(e)
+            print(f"❌ Send exception (attempt {attempt}/3): {e}")
+            if attempt == 3:
+                _log_delivery_crash(to, subject, {"error": str(e)}, attempt)
+
+    # All 3 attempts failed
+    print(f"❌❌ All 3 attempts failed for {to}")
+    return {"ok": False, "status": "failed", "error": str(last_error)}
+
+
+def _log_delivery_crash(to, subject, data, attempt):
+    """Log a permanent delivery failure to the incident ledger."""
+    import traceback
+    entry = {
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "event_type": "delivery_failure",
+        "to": to,
+        "subject": subject[:80],
+        "attempt": attempt,
+        "error": str(data.get("_error") or data.get("error") or data),
+        "traceback": traceback.format_exc(limit=3),
+    }
+    ledger_path = LEDGERS_DIR / "incident-ledger.jsonl"
+    ledger_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(ledger_path, "a") as f:
+        f.write(json.dumps(entry) + "\n")
+    print(f"[incident-logged] delivery_failure for {to}")
 
 def main():
     parser = argparse.ArgumentParser(description="Deliver audit to lead")

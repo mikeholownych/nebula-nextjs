@@ -134,3 +134,15 @@
 {"agent": "ceo", "alerts": 3, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-06T19:53:46Z"}
 {"agent": "ceo", "alerts": 3, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-06T20:23:53Z"}
 {"agent": "ceo", "alerts": 3, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-06T20:54:00Z"}
+{"agent": "ceo", "alerts": 3, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-06T21:24:10Z"}
+{"agent": "ceo", "alerts": 3, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-06T21:54:21Z"}
+{"agent": "ceo", "alerts": 3, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-06T22:24:34Z"}
+{"agent": "ceo", "alerts": 3, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-06T22:54:45Z"}
+{"agent": "ceo", "alerts": 3, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-06T23:24:52Z"}
+{"agent": "ceo", "alerts": 3, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-06T23:55:47Z"}
+{"agent": "ceo", "alerts": 3, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-07T00:25:54Z"}
+{"agent": "ceo", "alerts": 3, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-07T00:56:01Z"}
+{"agent": "ceo", "alerts": 3, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-07T01:26:08Z"}
+{"agent": "ceo", "alerts": 3, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-07T01:56:15Z"}
+{"agent": "ceo", "alerts": 3, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-07T02:26:22Z"}
+{"agent": "ceo", "alerts": 3, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-07T02:56:30Z"}

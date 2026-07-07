@@ -2,13 +2,13 @@
   "company": "Nebula Components",
   "current_bottleneck": "audit_to_payment_conversion",
   "customer_events": {
-    "audit_delivered": 37,
+    "audit_delivered": 40,
     "checkout_attempts": 18,
     "payments": 2,
     "warm_replies": 0
   },
   "funnel": {
-    "audits_delivered": 34,
+    "audits_delivered": 37,
     "emails_sent": 155,
     "hot_lead_pitches_sent": 7,
     "replies": 3,
@@ -17,7 +17,7 @@
     "trigger_warm_replies": 0,
     "warm_leads": 1
   },
-  "generated_at": "2026-07-06T20:54:00Z",
+  "generated_at": "2026-07-07T02:56:30Z",
   "kill_criteria": {
     "audit": "3 audits delivered and 0 payments",
     "checkout": "buyer cannot pay self-serve",
@@ -25,11 +25,11 @@
   },
   "offer": "Free landing page audit -> $97 implementation",
   "pipeline": {
-    "hot_leads_pending": 8,
+    "hot_leads_pending": 11,
     "overdue_emails": [],
     "pitch_overdue": 0,
     "pitch_sent": 21,
-    "total": 34
+    "total": 37
   },
   "revenue": {
     "real_payments": 0,

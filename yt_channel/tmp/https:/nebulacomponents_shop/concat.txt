@@ -1,0 +1,17 @@
+file '/home/mike/nebula/yt_channel/tmp/https:/nebulacomponents_shop/frames/frame_0000.png'
+duration 20.161
+file '/home/mike/nebula/yt_channel/tmp/https:/nebulacomponents_shop/frames/frame_0001.png'
+duration 12.850
+file '/home/mike/nebula/yt_channel/tmp/https:/nebulacomponents_shop/frames/frame_0002.png'
+duration 18.832
+file '/home/mike/nebula/yt_channel/tmp/https:/nebulacomponents_shop/frames/frame_0003.png'
+duration 7.090
+file '/home/mike/nebula/yt_channel/tmp/https:/nebulacomponents_shop/frames/frame_0004.png'
+duration 4.209
+file '/home/mike/nebula/yt_channel/tmp/https:/nebulacomponents_shop/frames/frame_0005.png'
+duration 8.197
+file '/home/mike/nebula/yt_channel/tmp/https:/nebulacomponents_shop/frames/frame_0006.png'
+duration 8.197
+file '/home/mike/nebula/yt_channel/tmp/https:/nebulacomponents_shop/frames/frame_0007.png'
+duration 5.760
+file '/home/mike/nebula/yt_channel/tmp/https:/nebulacomponents_shop/frames/frame_0007.png'

@@ -271,3 +271,69 @@ Recycle candidates (pitch_sent, no payment): 21
 
 ============================================================
 Due: 0  Sent: 0  delivered
+followup_sequence.py (LIVE) — 2026-07-07 00:17 UTC
+============================================================
+
+Audit leads: 11
+
+Cold-only leads: 101
+  [day7_cold_close] hello@postclaw.io
+  [AM FAILED] hello@postclaw.io: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@postclaw.io (bounced)"}
+  [SUPPRESSED->DEAD] hello@postclaw.io
+  [day7_cold_close] info@cuneiform.chat
+  [AM FAILED] info@cuneiform.chat: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: info@cuneiform.chat (complained)"}
+  [SUPPRESSED->DEAD] info@cuneiform.chat
+  [day7_cold_close] contact@qlp.jp
+  [AM FAILED] contact@qlp.jp: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: contact@qlp.jp (bounced)"}
+  [SUPPRESSED->DEAD] contact@qlp.jp
+  [day7_cold_close] hello@edkit.ca
+  [AM FAILED] hello@edkit.ca: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@edkit.ca (bounced)"}
+  [SUPPRESSED->DEAD] hello@edkit.ca
+  [day7_cold_close] hello@3minuteanimal.com
+  [AM FAILED] hello@3minuteanimal.com: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@3minuteanimal.com (bounced)"}
+  [SUPPRESSED->DEAD] hello@3minuteanimal.com
+  [day7_cold_close] hello@skillsips.com
+  [AM FAILED] hello@skillsips.com: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@skillsips.com (bounced)"}
+  [SUPPRESSED->DEAD] hello@skillsips.com
+  [day7_cold_close] hello@listendock.com
+  [AM FAILED] hello@listendock.com: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@listendock.com (bounced)"}
+  [SUPPRESSED->DEAD] hello@listendock.com
+  [day7_cold_close] hello@voiceinvoice.net
+  [AM FAILED] hello@voiceinvoice.net: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@voiceinvoice.net (bounced)"}
+  [SUPPRESSED->DEAD] hello@voiceinvoice.net
+  [day7_cold_close] hello@tryreleaselog.com
+  [AM FAILED] hello@tryreleaselog.com: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@tryreleaselog.com (bounced)"}
+  [SUPPRESSED->DEAD] hello@tryreleaselog.com
+  [day7_cold_close] hello@goldenweeks.com
+  [AM FAILED] hello@goldenweeks.com: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@goldenweeks.com (bounced)"}
+  [SUPPRESSED->DEAD] hello@goldenweeks.com
+  [day7_cold_close] sales@thehiveryiq.com
+  [AM FAILED] sales@thehiveryiq.com: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: sales@thehiveryiq.com (bounced)"}
+  [SUPPRESSED->DEAD] sales@thehiveryiq.com
+  [day7_cold_close] hello@nvsn.ai
+  [AM FAILED] hello@nvsn.ai: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@nvsn.ai (bounced)"}
+  [SUPPRESSED->DEAD] hello@nvsn.ai
+  [day7_cold_close] support@fenly.me
+  [AM FAILED] support@fenly.me: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: support@fenly.me (bounced)"}
+  [SUPPRESSED->DEAD] support@fenly.me
+  [day7_cold_close] hello@bunzee.ai
+  [AM FAILED] hello@bunzee.ai: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@bunzee.ai (bounced)"}
+  [SUPPRESSED->DEAD] hello@bunzee.ai
+  [day7_cold_close] hello@truthscore.online
+  [AM FAILED] hello@truthscore.online: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@truthscore.online (bounced)"}
+  [SUPPRESSED->DEAD] hello@truthscore.online
+  [day7_cold_close] contact@reddbot.ai
+  [AM FAILED] contact@reddbot.ai: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: contact@reddbot.ai (Unsubscribed via L
+  [SUPPRESSED->DEAD] contact@reddbot.ai
+  [skip bounced] info@brookerlaw.com
+  [skip bounced] info@magnolia-club.org
+  [skip bounced] info@saputo.law
+
+HOT_LEAD pitch due: 0  Sent: 0
+
+Revive candidates (contacted, no audit): 101
+
+Recycle candidates (pitch_sent, no payment): 21
+
+============================================================
+Due: 16  Sent: 0  delivered

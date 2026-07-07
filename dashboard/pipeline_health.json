@@ -1,0 +1,89 @@
+{
+  "timestamp": "2026-07-07T02:00:16.947118+00:00",
+  "healthy": true,
+  "passed": 14,
+  "failed": 0,
+  "total": 14,
+  "checks": [
+    {
+      "name": "File: ramp_pipeline_fill.py",
+      "passed": true,
+      "detail": "30,605 bytes"
+    },
+    {
+      "name": "File: followup_sequence.py",
+      "passed": true,
+      "detail": "30,724 bytes"
+    },
+    {
+      "name": "File: deliver_audit.py",
+      "passed": true,
+      "detail": "32,519 bytes"
+    },
+    {
+      "name": "File: agentic_server.py",
+      "passed": true,
+      "detail": "51,648 bytes"
+    },
+    {
+      "name": "SMTP connectivity",
+      "passed": true,
+      "detail": "Deprecated — REST API active"
+    },
+    {
+      "name": "Bounce detection module",
+      "passed": true,
+      "detail": "online"
+    },
+    {
+      "name": "Hard bounces",
+      "passed": true,
+      "detail": "29 total bounces (all managed)"
+    },
+    {
+      "name": "Soft bounces",
+      "passed": true,
+      "detail": "0 soft bounce(s), 117 total events"
+    },
+    {
+      "name": "Cron: followup_sequence",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Cron: hermes tunnel watchdog",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Pipeline lock",
+      "passed": true,
+      "detail": "Running"
+    },
+    {
+      "name": "Pipeline ramp recent run",
+      "passed": true,
+      "detail": "113m ago"
+    },
+    {
+      "name": "Dead letter queue",
+      "passed": true,
+      "detail": "Empty — no permanently stalled prospects"
+    },
+    {
+      "name": "Stuck leads",
+      "passed": true,
+      "detail": "No leads stalled >4h"
+    }
+  ],
+  "stuck_leads": [],
+  "lead_stages": {
+    "audit_delivered": 8,
+    "pitch_sent": 21,
+    "paid": 0,
+    "bounced": 29,
+    "contacted": 75,
+    "unknown": 0
+  },
+  "total_leads": 133
+}

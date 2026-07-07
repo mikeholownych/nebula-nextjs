@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-06T21:15:05.547177+00:00",
+  "timestamp": "2026-07-07T03:15:36.362450+00:00",
   "healthy": true,
   "passed": 14,
   "failed": 0,
@@ -13,17 +13,17 @@
     {
       "name": "File: followup_sequence.py",
       "passed": true,
-      "detail": "26,465 bytes"
+      "detail": "30,724 bytes"
     },
     {
       "name": "File: deliver_audit.py",
       "passed": true,
-      "detail": "24,731 bytes"
+      "detail": "33,436 bytes"
     },
     {
       "name": "File: agentic_server.py",
       "passed": true,
-      "detail": "37,548 bytes"
+      "detail": "62,082 bytes"
     },
     {
       "name": "SMTP connectivity",
@@ -38,7 +38,7 @@
     {
       "name": "Hard bounces",
       "passed": true,
-      "detail": "29 total bounces (all managed)"
+      "detail": "30 total bounces (all managed)"
     },
     {
       "name": "Soft bounces",
@@ -63,7 +63,7 @@
     {
       "name": "Pipeline ramp recent run",
       "passed": true,
-      "detail": "66m ago"
+      "detail": "39m ago"
     },
     {
       "name": "Dead letter queue",
@@ -78,12 +78,12 @@
   ],
   "stuck_leads": [],
   "lead_stages": {
-    "audit_delivered": 8,
-    "pitch_sent": 21,
+    "audit_delivered": 13,
+    "pitch_sent": 20,
     "paid": 0,
-    "bounced": 29,
+    "bounced": 30,
     "contacted": 75,
     "unknown": 0
   },
-  "total_leads": 133
+  "total_leads": 138
 }

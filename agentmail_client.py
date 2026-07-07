@@ -88,19 +88,24 @@ class AgentMailClient:
         """Threads with real human inbound replies (not bounces, not our own sends)."""
         threads = self.list_threads(limit=100)
         human = []
+        inbox_lower = self.inbox.lower()
         for t in threads:
             labels = t.get("labels", [])
             senders = t.get("senders", [])
             # Has received label and at least one non-us, non-daemon sender
             if "received" not in labels:
                 continue
-            real_humans = [
-                s for s in senders
-                if "agentmail.to" not in s
-                and "mailer-daemon" not in s.lower()
-                and "amazonses.com" not in s.lower()
-                and "postmaster" not in s.lower()
-            ]
+            real_humans = []
+            for s in senders:
+                if "<" in s and ">" in s:
+                    addr = s.split("<")[1].split(">")[0].strip().lower()
+                else:
+                    addr = s.strip().lower()
+                if any(skip in addr for skip in
+                       ["agentmail.to", "mailer-daemon", "amazonses.com",
+                        "postmaster", inbox_lower, "launchcrate.io"]):
+                    continue
+                real_humans.append(addr)
             if real_humans:
                 human.append(t)
         return human

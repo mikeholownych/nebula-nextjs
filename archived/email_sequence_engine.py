@@ -110,7 +110,7 @@ SEQUENCES = {
             {
                 "id": "value_add",
                 "day": 1,
-                "subject": "Why the top 1% of landing pages don't describe what they do",
+                "subject": "Stop describing your product. Do this instead.",
                 "type": "text",
                 "body": (
                     "I audited 100+ landing pages last month. The ones converting over 5% all had one thing in common:\n\n"

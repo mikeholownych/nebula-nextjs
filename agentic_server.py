@@ -2,7 +2,7 @@
 """Custom HTTP server with agentic SEO/AEO headers + well-known endpoints.
 Replaces the basic http.server for a given site directory and port."""
 
-import os, sys, json, hashlib, socketserver, http.server, urllib.parse, html
+import os, sys, json, hashlib, datetime, socketserver, http.server, urllib.parse, html
 
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8765
 DIR = sys.argv[2] if len(sys.argv) > 2 else os.getcwd()
@@ -24,6 +24,7 @@ SITE_CONFIGS = {
             {"loc": "/generator.html", "priority": "0.8", "changefreq": "weekly"},
             {"loc": "/pricing-generator.html", "priority": "0.8", "changefreq": "weekly"},
             {"loc": "/checkout.html", "priority": "0.7", "changefreq": "monthly"},
+            {"loc": "/7-systems.html", "priority": "0.8", "changefreq": "weekly"},
         ]
     },
     "launchcrate.io": {
@@ -54,6 +55,10 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header("Link", '</.well-known/agent-skills/index.json>; rel="agent-skills"')
         self.send_header("Link", '</llms.txt>; rel="describedby"; type="text/markdown"')
         self.send_header("Link", '</auth.md>; rel="describedby"; type="text/markdown"')
+        self.send_header("Link", '</openapi.json>; rel="service-desc"; type="application/json"')
+        self.send_header("Link", '</.well-known/ucp>; rel="https://ucp.dev/rel/discovery"')
+        self.send_header("Link", '</.well-known/acp.json>; rel="https://agenticcommerce.dev/rel/discovery"')
+        self.send_header("Link", '</agent/register>; rel="registration"; type="application/json"')
         
         # CORS + agent headers
         self.send_header("X-Robots-Tag", "all")
@@ -124,6 +129,33 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps(result).encode())
             return
 
+        # Email open tracking pixel
+        if path.startswith("/track/open"):
+            email = urllib.parse.unquote(parsed.query.split("email=")[-1].split("&")[0]) if "email=" in parsed.query else ""
+            if email:
+                log_entry = {
+                    "type": "open",
+                    "email": email,
+                    "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                    "ip": self.client_address[0],
+                    "ua": self.headers.get("User-Agent", ""),
+                }
+                track_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ledgers")
+                os.makedirs(track_dir, exist_ok=True)
+                with open(os.path.join(track_dir, "tracking_log.jsonl"), "a") as f:
+                    f.write(json.dumps(log_entry) + "\n")
+            # 1x1 transparent GIF
+            gif = b"GIF89a\x01\x00\x01\x00\x80\x00\x00\xff\xff\xff\x00\x00\x00!\xf9\x04\x00\x00\x00\x00\x00,\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02D\x01\x00;"
+            self.send_response(200)
+            self.send_header("Content-Type", "image/gif")
+            self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+            self.send_header("Pragma", "no-cache")
+            self.send_header("Expires", "0")
+            self.send_header("Cross-Origin-Resource-Policy", "cross-origin")
+            self.end_headers()
+            self.wfile.write(gif)
+            return
+
         # llms.txt
         if path == "/llms.txt":
             self.send_response(200)
@@ -172,6 +204,65 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps(self._generate_skills_index(), indent=2).encode())
             return
 
+        # .well-known/ucp — Universal Commerce Protocol
+        if path == "/.well-known/ucp":
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(json.dumps(self._generate_ucp(), indent=2).encode())
+            return
+
+        # .well-known/acp.json — Agentic Commerce Protocol discovery
+        if path == "/.well-known/acp.json":
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(json.dumps(self._generate_acp(), indent=2).encode())
+            return
+
+        # /openapi.json — OpenAPI document with MPP payment extensions
+        if path == "/openapi.json":
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(json.dumps(self._generate_openapi(), indent=2).encode())
+            return
+
+        # /agent/register — agent registration endpoint (auth.md register_uri)
+        if path == "/agent/register":
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(json.dumps({
+                "service": f"{cfg['name']} Agent Registration",
+                "version": "1.0",
+                "register_uri": f"https://{SITE}/agent/register",
+                "methods": [
+                    {
+                        "type": "oauth2_client_credentials",
+                        "description": "OAuth 2.0 Client Credentials grant for automated agents",
+                        "endpoint": f"https://{SITE}/.well-known/oauth-authorization-server",
+                        "documentation": f"https://{SITE}/auth.md"
+                    },
+                    {
+                        "type": "identity_assertion",
+                        "description": "ID-JAG signed identity tokens for agent-to-agent auth",
+                        "endpoint": f"https://{SITE}/claim",
+                        "revocation_uri": f"https://{SITE}/revoke",
+                        "assertion_types": ["urn:ietf:params:oauth:token-type:id-jag", "verified_email"],
+                        "credential_types": ["urn:ietf:params:oauth:credential:jwt"]
+                    },
+                    {
+                        "type": "anonymous",
+                        "description": "Unauthenticated agent access with rate limits",
+                        "endpoint": f"https://{SITE}/claim",
+                        "credential_types": ["urn:ietf:params:oauth:credential:anonymous"]
+                    }
+                ],
+                "contact": {"email": "ops@launchcrate.io", "uri": f"https://{SITE}/"}
+            }, indent=2).encode())
+            return
+
         # CRM API endpoints
         if path.startswith("/api/crm"):
             return self._handle_crm_api()
@@ -217,6 +308,22 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps(result).encode())
             return
+
+        # Notion Custom Agent webhook
+        if path == "/notion/audit":
+            content_len = int(self.headers.get("Content-Length", 0))
+            payload = self.rfile.read(content_len).decode()
+            import sys
+            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+            from notion_agent_link import hook_handler
+            body = json.loads(payload) if payload else {}
+            result = hook_handler(path, body)
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(json.dumps(result).encode())
+            return
         
         if path.startswith("/api/crm"):
             # For POST requests, read body before passing to handler
@@ -228,6 +335,9 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
         if path == "/api/book-demo":
             return self._handle_booking()
         
+        if path == "/api/free-kit":
+            return self._handle_free_kit()
+
         if path == "/api/audit":
             try:
                 return self._handle_audit()
@@ -332,30 +442,64 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
         return xml
 
     def _generate_auth_md(self):
+        s = SITE
         return f"""# auth.md — {cfg["name"]}
 
 This service provides authentication for AI agents accessing {cfg["name"]}.
 
 ## Registration
 
-Contact ops@launchcrate.io to request API access.
+AI agents can self-register via:
+- **OAuth 2.0 Dynamic Client Registration**: https://{s}/.well-known/oauth-authorization-server
+- **Agent Registration Endpoint**: https://{s}/agent/register
+- **Email-based**: ops@launchcrate.io
 
-## Authentication Methods
+## Agent Authentication Methods
 
-- **Email-based**: Send a request to ops@launchcrate.io with your use case
-- **OAuth 2.0**: Authorization Server at https://{SITE}/.well-known/oauth-authorization-server
-- **Protected Resource**: https://{SITE}/.well-known/oauth-protected-resource
+| Method | Description | Endpoint |
+|--------|-------------|----------|
+| OAuth 2.0 Client Credentials | Machine-to-machine auth for automated agents | https://{s}/.well-known/oauth-authorization-server |
+| Bearer Token (JWT) | Signed identity assertions for authenticated requests | https://{s}/.well-known/oauth-protected-resource |
+| Anonymous | Unauthenticated agents with limited access and rate limits | https://{s}/.well-known/oauth-protected-resource |
 
 ## Scopes
 
 - `read`: Access public product information and documentation
-- `purchase`: Initiate purchase flows
+- `purchase`: Initiate purchase flows (requires identity assertion)
 - `admin`: Administrative access (by approval only)
 
-## Endpoints
+## Agent Discovery Endpoints
 
-- API Catalog: https://{SITE}/.well-known/api-catalog
-- MCP Server Card: https://{SITE}/.well-known/mcp/server-card.json
+- API Catalog: https://{s}/.well-known/api-catalog
+- MCP Server Card: https://{s}/.well-known/mcp/server-card.json
+- Agent Skills Index: https://{s}/.well-known/agent-skills/index.json
+- UCP Profile: https://{s}/.well-known/ucp
+- ACP Discovery: https://{s}/.well-known/acp.json
+
+## Registration Methods
+
+### Agent Registration Endpoint
+
+Agent registration is available at **https://{s}/agent/register**.
+This endpoint accepts GET requests and returns a JSON document with supported registration methods,
+credential types, and endpoints for automated agent onboarding.
+
+### OAuth 2.0 Registration
+
+The OAuth Authorization Server metadata at https://{s}/.well-known/oauth-authorization-server
+documents supported grant types (client_credentials, authorization_code) and token endpoints.
+Agents can use the register_uri from the agent_auth block to discover registration methods programmatically.
+
+### Revocation
+
+Credential revocation is available at https://{s}/revoke
+Events: revocation
+
+## Identity Types Supported
+
+- **Identity Assertion (ID-JAG)**: Signed JWT identity tokens for agent-to-agent authentication
+- **Verified Email**: Email-verified identity for lightweight agent auth
+- **Anonymous**: Unauthenticated access with usage limits
 """
 
     def _generate_llms_txt(self):
@@ -373,6 +517,7 @@ Contact ops@launchcrate.io to request API access.
 
 - Agent Skills: https://{SITE}/.well-known/agent-skills/index.json
 - Auth.md: https://{SITE}/auth.md
+- Registration: https://{SITE}/agent/register
 - OAuth AS: https://{SITE}/.well-known/oauth-authorization-server
 - OAuth PR: https://{SITE}/.well-known/oauth-protected-resource
 """
@@ -406,13 +551,17 @@ Contact ops@launchcrate.io to request API access.
             "scopes_supported": ["read", "purchase", "admin"],
             "agent_auth": {
                 "skill": "https://isitagentready.com/.well-known/agent-skills/auth-md/SKILL.md",
-                "register_uri": f"mailto:ops@launchcrate.io?subject=Agent Registration",
-                "identity_types_supported": ["identity_assertion"],
+                "register_uri": f"https://{SITE}/agent/register",
+                "identity_types_supported": ["identity_assertion", "verified_email", "anonymous"],
                 "identity_assertion": {
                     "assertion_types_supported": ["urn:ietf:params:oauth:token-type:id-jag", "verified_email"],
                     "credential_types_supported": ["urn:ietf:params:oauth:credential:jwt"],
                     "claim_uri": f"https://{SITE}/claim",
                     "revocation_uri": f"https://{SITE}/revoke"
+                },
+                "anonymous": {
+                    "credential_types_supported": ["urn:ietf:params:oauth:credential:anonymous"],
+                    "claim_uri": f"https://{SITE}/claim"
                 }
             }
         }
@@ -465,8 +614,236 @@ Contact ops@launchcrate.io to request API access.
                     "description": "MCP Server Card for agent discovery",
                     "url": "https://isitagentready.com/.well-known/agent-skills/mcp-server-card/SKILL.md",
                     "digest": f"sha256:{digest}"
+                },
+                {
+                    "name": "auth-md",
+                    "type": "skill-md",
+                    "description": "Agent registration and authentication metadata",
+                    "url": "https://isitagentready.com/.well-known/agent-skills/auth-md/SKILL.md",
+                    "digest": f"sha256:{digest}"
+                },
+                {
+                    "name": "oauth-protected-resource",
+                    "type": "skill-md",
+                    "description": "OAuth Protected Resource metadata for agent auth",
+                    "url": "https://isitagentready.com/.well-known/agent-skills/oauth-protected-resource/SKILL.md",
+                    "digest": f"sha256:{digest}"
+                },
+                {
+                    "name": "webmcp",
+                    "type": "skill-md",
+                    "description": "WebMCP browser-based agent tool exposure",
+                    "url": "https://isitagentready.com/.well-known/agent-skills/webmcp/SKILL.md",
+                    "digest": f"sha256:{digest}"
+                },
+                {
+                    "name": "x402",
+                    "type": "skill-md",
+                    "description": "x402 agent-native HTTP payment protocol",
+                    "url": "https://isitagentready.com/.well-known/agent-skills/x402/SKILL.md",
+                    "digest": f"sha256:{digest}"
+                },
+                {
+                    "name": "mpp",
+                    "type": "skill-md",
+                    "description": "Machine Payment Protocol discovery via OpenAPI",
+                    "url": "https://isitagentready.com/.well-known/agent-skills/mpp/SKILL.md",
+                    "digest": f"sha256:{digest}"
+                },
+                {
+                    "name": "ucp",
+                    "type": "skill-md",
+                    "description": "Universal Commerce Protocol for agent payments",
+                    "url": "https://isitagentready.com/.well-known/agent-skills/ucp/SKILL.md",
+                    "digest": f"sha256:{digest}"
+                },
+                {
+                    "name": "acp",
+                    "type": "skill-md",
+                    "description": "Agentic Commerce Protocol discovery document",
+                    "url": "https://isitagentready.com/.well-known/agent-skills/acp/SKILL.md",
+                    "digest": f"sha256:{digest}"
                 }
             ]
+        }
+
+    def _generate_ucp(self):
+        """Universal Commerce Protocol discovery document.
+        Per UCP spec: https://ucp.dev/specification/overview/#profile-structure"""
+        d = "shop.nebulacomponents"
+        ver = "2026-07-07"
+        return {
+            "ucp": {
+                "version": ver,
+                "services": {
+                    f"{d}.audit": [
+                        {
+                            "version": ver,
+                            "spec": "https://ucp.dev/specification/overview/",
+                            "transport": "rest",
+                            "endpoint": f"https://{SITE}/api",
+                            "schema": f"https://{SITE}/openapi.json"
+                        }
+                    ],
+                    f"{d}.common": [
+                        {
+                            "version": ver,
+                            "spec": "https://ucp.dev/specification/overview/",
+                            "transport": "rest",
+                            "endpoint": f"https://{SITE}/api",
+                            "schema": f"https://{SITE}/openapi.json"
+                        }
+                    ]
+                },
+                "capabilities": {
+                    f"{d}.audit.free": [
+                        {
+                            "version": ver,
+                            "spec": f"https://{SITE}/docs/audit",
+                            "schema": f"https://{SITE}/openapi.json"
+                        }
+                    ],
+                    f"{d}.checkout.fix_pack": [
+                        {
+                            "version": ver,
+                            "spec": f"https://{SITE}/checkout.html",
+                            "schema": f"https://{SITE}/openapi.json"
+                        }
+                    ],
+                    f"{d}.common.sdr": [
+                        {
+                            "version": ver,
+                            "spec": f"https://{SITE}/sdr-service",
+                            "schema": f"https://{SITE}/openapi.json"
+                        }
+                    ]
+                }
+            },
+            "signing_keys": []
+        }
+
+    def _generate_acp(self):
+        """Agentic Commerce Protocol discovery document."""
+        return {
+            "protocol": {
+                "name": "acp",
+                "version": "1.0.0"
+            },
+            "api_base_url": f"https://{SITE}/",
+            "transports": ["http", "rest"],
+            "capabilities": {
+                "services": ["audit", "checkout", "payment"],
+                "payment_methods": ["stripe"],
+                "agent_discovery": True
+            },
+            "spec_url": "https://agenticcommerce.dev"
+        }
+
+    def _generate_openapi(self):
+        """OpenAPI 3.0 document with MPP x-payment-info extensions and x402 payment support."""
+        return {
+            "openapi": "3.0.0",
+            "info": {
+                "title": f"{cfg['name']} API",
+                "version": "1.0.0",
+                "description": f"AI agent-friendly API for {cfg['name']}. Supports MPP payment discovery, x402 protocol, and agent-native HTTP payments."
+            },
+            "servers": [
+                {"url": f"https://{SITE}/", "description": "Production"}
+            ],
+            "x-service-info": {
+                "categories": ["audit", "conversion_optimization", "landing_page"],
+                "agent_payments": True
+            },
+            "paths": {
+                "/api/audit": {
+                    "post": {
+                        "summary": "Run a landing page audit",
+                        "description": "Submit a URL for a free conversion audit. Returns scored results with issues and fixes.",
+                        "operationId": "runAudit",
+                        "x-payment-info": {
+                            "intent": "session",
+                            "method": "stripe",
+                            "amount": 0,
+                            "currency": "USD",
+                            "description": "Free — no payment required for audit"
+                        },
+                        "requestBody": {
+                            "required": True,
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "object",
+                                        "required": ["url"],
+                                        "properties": {
+                                            "url": {"type": "string", "format": "uri", "description": "Landing page URL to audit"},
+                                            "email": {"type": "string", "format": "email", "description": "Email to receive audit results"}
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "responses": {
+                            "200": {"description": "Audit results"},
+                            "402": {
+                                "description": "Payment required (x402) — agent should fulfill payment requirement",
+                                "headers": {
+                                    "X-Payment-Required": {"schema": {"type": "string"}},
+                                    "X-Payment-Facilitator": {"schema": {"type": "string"}}
+                                }
+                            }
+                        }
+                    }
+                },
+                "/checkout.html": {
+                    "get": {
+                        "summary": "Purchase Fix Pack ($97)",
+                        "description": "Initiate purchase of the Fix Pack implementation service.",
+                        "operationId": "purchaseFixPack",
+                        "x-payment-info": {
+                            "intent": "charge",
+                            "method": "stripe",
+                            "amount": 97,
+                            "currency": "USD",
+                            "description": "Fix Pack — implementation-ready copy and fixes"
+                        },
+                        "responses": {
+                            "200": {"description": "Checkout page"},
+                            "402": {
+                                "description": "Payment required (x402) — agent should redirect to Stripe Checkout",
+                                "headers": {
+                                    "X-Payment-Required": {"schema": {"type": "string"}},
+                                    "X-Payment-Facilitator": {"schema": {"type": "string"}}
+                                }
+                            }
+                        }
+                    }
+                },
+                "/sdr-service": {
+                    "get": {
+                        "summary": "SDR Service ($1,500+)",
+                        "description": "Book the SDR-as-a-Service package for automated outbound sales.",
+                        "operationId": "purchaseSdrService",
+                        "x-payment-info": {
+                            "intent": "session",
+                            "method": "stripe",
+                            "amount": 1500,
+                            "currency": "USD",
+                            "description": "SDR Service — automated outbound sales agent"
+                        },
+                        "responses": {
+                            "200": {"description": "SDR service page"},
+                            "402": {
+                                "description": "Payment required (x402)",
+                                "headers": {
+                                    "X-Payment-Required": {"schema": {"type": "string"}},
+                                    "X-Payment-Facilitator": {"schema": {"type": "string"}}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
     def _handle_crm_api(self):
@@ -571,7 +948,7 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
                 "labels": ["booking"]
             }
             req = urllib.request.Request(
-                "https://api.agentmail.to/inboxes/ops@launchcrate.io/messages/send",
+                "https://api.agentmail.to/inboxes/nebulashop@agentmail.to/messages/send",
                 data=json.dumps(msg_data).encode(), headers=headers, method="POST"
             )
             urllib.request.urlopen(req, timeout=15)
@@ -627,11 +1004,100 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
 
         return self._send_json(200, {"status": "captured", "next": "/audit.html"})
 
+    def _handle_free_kit(self):
+        """Handle POST /api/free-kit — email the free fix kit."""
+        content_len = int(self.headers.get("Content-Length", 0))
+        raw = self.rfile.read(content_len) if content_len else b"{}"
+        try:
+            body = json.loads(raw.decode())
+        except Exception:
+            return self._send_json(400, {"error": "Invalid JSON"})
+
+        email = (body.get("email") or "").strip()
+        if not email or "@" not in email:
+            return self._send_json(400, {"error": "Valid email required"})
+
+        try:
+            key = open("/home/mike/.hermes/secrets/agentmail.key").read().strip()
+            payload = {
+                "to": [email],
+                "subject": "Your Free Landing Page Fix Kit",
+                "text": (
+                    "Here's your free landing page fix kit.\n\n"
+                    "1. Run your audit: https://nebulacomponents.shop\n"
+                    "2. Review the top issues — each comes with evidence, why it matters, and the fix.\n"
+                    "3. Apply the fixes yourself using the 5-step checklist, or let us do it ($97).\n\n"
+                    "─" * 40 + "\n\n"
+                    "That leak is real, and it won't fix itself.\n"
+                    "Pages decay. Campaigns change. Content drifts.\n"
+                    "The fix you apply today needs monitoring, or you redo this audit in 12 months.\n\n"
+                    "AI Ops Retainer — $1,497/mo:\n"
+                    "• Monthly audit refresh — catch drift before it costs you\n"
+                    "• Up to 4 fixes per month — no per-ticket negotiation\n"
+                    "• AI governance — know which models touch your data, where, and why\n"
+                    "• Priority support — direct line, <30 min response, 24/7\n\n"
+                    "3-month pilot. No long-term contract. Cancel anytime.\n"
+                    "Full details: https://nebulacomponents.shop/ai-ops-retainer.html\n\n"
+                    "Your data, your model, your rules:\n"
+                    "Your audit runs on Claude, OpenAI, Gemini, or Mistral. No vendor lock-in.\n"
+                    "Every inference call logged, tamper-evident.\n"
+                    "SOC 2 · GDPR-ready · HIPAA-ready · EU AI Act 2026 · DORA audit rights\n\n"
+                    "─" * 40 + "\n\n"
+                    "Get the $97 Conversion Fix Pack: https://nebulacomponents.shop/checkout.html\n\n"
+                    "Agency partners: resell white-label audits starting at $497/mo\n"
+                    "https://nebulacomponents.shop/agency-partner.html\n\n"
+                    "– Nebula Components"
+                ),
+                "html": (
+                    "<h2>Your Free Landing Page Fix Kit</h2>"
+                    "<ol>"
+                    "<li><a href='https://nebulacomponents.shop'>Run your audit</a></li>"
+                    "<li>Review the top issues — each comes with evidence, why it matters, and the fix</li>"
+                    "<li>Apply the fixes yourself using the 5-step checklist, or let us do it</li>"
+                    "</ol>"
+                    "<hr style='border:none;border-top:1px solid #e5e7eb;margin:16px 0;'>"
+                    "<p style='font-size:14px;color:#374151;'><strong>That leak is real, and it won't fix itself.</strong><br>"
+                    "Pages decay. Campaigns change. Content drifts.<br>"
+                    "The fix you apply today needs monitoring, or you redo this audit in 12 months.</p>"
+                    "<p style='font-size:14px;color:#059669;font-weight:700;'>AI Ops Retainer — $1,497/mo</p>"
+                    "<ul style='font-size:13px;color:#4b5563;'>"
+                    "<li>Monthly audit refresh — catch drift before it costs you</li>"
+                    "<li>Up to 4 fixes per month — no per-ticket negotiation</li>"
+                    "<li>AI governance — know which models touch your data, where, and why</li>"
+                    "<li>Priority support — direct line, &lt;30 min response, 24/7</li>"
+                    "</ul>"
+                    "<p style='font-size:13px;color:#6b7280;'>3-month pilot. Cancel anytime.<br>"
+                    "<a href='https://nebulacomponents.shop/ai-ops-retainer.html' style='color:#059669;'>Full details →</a></p>"
+                    "<hr style='border:none;border-top:1px solid #e5e7eb;margin:16px 0;'>"
+                    "<p style='font-size:13px;color:#6b7280;'><strong>Your data, your model, your rules</strong><br>"
+                    "Runs on Claude, OpenAI, Gemini, or Mistral. No vendor lock-in.<br>"
+                    "Every inference call logged, tamper-evident.<br>"
+                    "<span style='color:#065f46;'>SOC 2 · GDPR-ready · HIPAA-ready · EU AI Act 2026 · DORA audit rights</span></p>"
+                    "<hr style='border:none;border-top:1px solid #e5e7eb;margin:16px 0;'>"
+                    "<p style='text-align:center;'><a href='https://nebulacomponents.shop/checkout.html' style='display:inline-block;padding:12px 24px;background:#059669;color:#fff;text-decoration:none;border-radius:6px;font-weight:700;'>Get the $97 Conversion Fix Pack →</a></p>"
+                    "<p style='text-align:center;font-size:12px;color:#9ca3af;'>Agency partners: <a href='https://nebulacomponents.shop/agency-partner.html' style='color:#2563eb;'>resell white-label audits from $497/mo →</a></p>"
+                    "<p style='color:#6b7280;font-size:12px;'>– Nebula Components</p>"
+                ),
+            }
+            import urllib.request, urllib.error
+            req = urllib.request.Request(
+                "https://api.agentmail.to/inboxes/nebulashop@agentmail.to/messages/send",
+                data=json.dumps(payload).encode(),
+                headers={
+                    "Authorization": f"Bearer {key}",
+                    "Content-Type": "application/json",
+                },
+                method="POST",
+            )
+            resp = urllib.request.urlopen(req, timeout=15)
+            resp.read()
+            return self._send_json(200, {"sent": True, "email": email})
+        except Exception as e:
+            return self._send_json(500, {"error": f"Failed to send: {e}"})
+
     def _handle_audit(self):
         """Handle POST /api/audit — run landing page audit and optionally send email."""
-        import sys, json, smtplib, ssl, datetime
-        from email.mime.multipart import MIMEMultipart
-        from email.mime.text import MIMEText
+        import sys, json, datetime
 
         content_len = int(self.headers.get("Content-Length", 0))
         raw = self.rfile.read(content_len) if content_len else b"{}"
@@ -738,21 +1204,28 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
         # ── Send email if address provided ───────────────────────────
         if email:
             try:
-                smtp_pass = open("/home/mike/.hermes/secrets/agentmail.key").read().strip()
+                key = open("/home/mike/.hermes/secrets/agentmail.key").read().strip()
                 email_data = compose_audit_email(page, audit, email)
 
-                msg = MIMEMultipart("alternative")
-                msg["Subject"] = email_data["subject"]
-                msg["From"]    = "Nebula Audit <ops@launchcrate.io>"
-                msg["To"]      = email
-                msg.attach(MIMEText(email_data["text"], "plain"))
-                msg.attach(MIMEText(email_data["html"], "html"))
-
-                ctx = ssl.create_default_context()
-                with smtplib.SMTP_SSL("smtp.agentmail.to", 465, context=ctx) as srv:
-                    srv.login("ops@launchcrate.io", smtp_pass)
-                    srv.sendmail("ops@launchcrate.io", [email], msg.as_string())
-
+                # Use AgentMail REST API — SMTP is blocked
+                import urllib.request, urllib.error
+                payload = {
+                    "to": [email],
+                    "subject": email_data["subject"],
+                    "text": email_data.get("text", ""),
+                    "html": email_data.get("html", ""),
+                }
+                req = urllib.request.Request(
+                    "https://api.agentmail.to/inboxes/nebulashop@agentmail.to/messages/send",
+                    data=json.dumps(payload).encode(),
+                    headers={
+                        "Authorization": f"Bearer {key}",
+                        "Content-Type": "application/json",
+                    },
+                    method="POST",
+                )
+                resp = urllib.request.urlopen(req, timeout=15)
+                resp.read()  # consume response
                 result["email_sent"] = True
             except Exception as e:
                 result["email_sent"] = False

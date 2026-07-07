@@ -108,6 +108,7 @@ def _dim_label(key):
         "social_proof": "Social Proof",
         "speed": "Page Speed",
         "mobile": "Mobile Readiness",
+        "seo_foundations": "SEO Foundations",
     }
     return labels.get(key, key.replace("_", " ").title())
 
@@ -130,6 +131,7 @@ def _classify_effort(dimension):
         "social_proof": "medium",
         "speed": "medium",
         "mobile": "low",
+        "seo_foundations": "low",
     }
     return effort_map.get(dimension, "medium")
 

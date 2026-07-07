@@ -1,0 +1,19 @@
+{
+  "revenue": 0,
+  "emails_sent": 155,
+  "replies": 3,
+  "open_convos": 1,
+  "uptime": 99,
+  "challenge_day": 0,
+  "updated": "2026-07-05T02:57:31Z",
+  "warm_leads": 1,
+  "audits_delivered": 34,
+  "real_revenue": 0,
+  "real_payments": 0,
+  "test_revenue_excluded": true,
+  "test_payments_excluded": 1,
+  "trigger_based_sends": 66,
+  "trigger_warm_replies": 0,
+  "trigger_reply_rate": 0.0,
+  "hot_lead_pitches_sent": 7
+}

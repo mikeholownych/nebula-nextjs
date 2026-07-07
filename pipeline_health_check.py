@@ -242,7 +242,7 @@ def main():
             total_events = bs.get("total_bounce_events", 0)
             check("Bounce detection module", True, f"online")
             # Hard bounces are expected/managed — only alert on NEW ones (>baseline)
-            BOUNCE_BASELINE = 29  # updated 2026-07-06T11:31 — 2 new hard bounces acknowledged (all 550 5.7.1)
+            BOUNCE_BASELINE = 30  # updated 2026-07-07T02:45 — 1 new hard bounce acknowledged (all 550 5.7.1 suppressed)
             new_bounces = max(0, hard - BOUNCE_BASELINE)
             check("Hard bounces", new_bounces == 0, f"{new_bounces} NEW hard bounce(s) since baseline ({hard} total)" if new_bounces else f"{hard} total bounces (all managed)")
             check(f"Soft bounces", True, f"{soft} soft bounce(s), {total_events} total events")
