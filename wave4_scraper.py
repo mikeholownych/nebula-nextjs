@@ -190,6 +190,192 @@ def scrape_ih():
     print(f"  IH: {len(leads)} leads with emails")
     return leads
 
+
+# ─── TRIGGER 4: Job Board — CRO/Landing Page roles ───────────────
+# Logic: company posting for CRO, conversion, or landing page role
+# = explicit admission they have a conversion problem.
+# Signal priority: HIGHEST (pain is operationalised as a hire)
+
+JOB_BOARD_CRO_KEYWORDS = [
+    'conversion rate optimization', 'cro specialist', 'landing page',
+    'growth marketer', 'paid acquisition', 'performance marketing',
+    'growth hacking', 'a/b testing', 'funnel optimization',
+    'conversion optimization', 'ppc specialist', 'google ads specialist',
+]
+
+def scrape_job_boards():
+    """Scrape HN Who's Hiring + Remotive for CRO/landing page job postings.
+
+    Trigger: company posting for CRO role = explicit conversion problem.
+    Returns leads with company name, job title, posting URL.
+    """
+    leads = []
+    seven_days_ago = int(time.time()) - (14 * 86400)  # 14d window for jobs
+
+    # HN Who's Hiring (monthly thread)
+    params = urlencode({
+        'query': 'conversion rate landing page CRO growth',
+        'tags': 'comment,story',
+        'numericFilters': f'created_at_i>{seven_days_ago}',
+        'hitsPerPage': 50,
+    })
+    url = f'https://hn.algolia.com/api/v1/search?{params}'
+    raw = fetch(url)
+    if raw:
+        try:
+            data = json.loads(raw)
+            for hit in data.get('hits', []):
+                text = (hit.get('title', '') + ' ' + (hit.get('comment_text') or '')).lower()
+                matched_kw = [kw for kw in JOB_BOARD_CRO_KEYWORDS if kw in text]
+                if not matched_kw:
+                    continue
+                # HN job posts often contain emails
+                email_match = re.search(r'[\w.+-]+@[\w-]+\.[a-z]{2,}', hit.get('comment_text') or '')
+                email = email_match.group(0) if email_match else ''
+                score = len(matched_kw) * 2 + (2 if email else 0)
+                leads.append({
+                    'source': 'hn_jobs',
+                    'title': (hit.get('title') or hit.get('comment_text') or '')[:100],
+                    'url': f"https://news.ycombinator.com/item?id={hit.get('objectID','')}",
+                    'score': score,
+                    'matched': matched_kw[:3],
+                    'email': email,
+                    'trigger_type': 'job_board_cro',
+                })
+        except Exception as e:
+            print(f"  [job_boards hn err] {e}")
+
+    # Remotive RSS (remote job board, heavy on growth/CRO roles)
+    remotive_url = 'https://remotive.com/api/remote-jobs?category=marketing&limit=50'
+    raw2 = fetch(remotive_url)
+    if raw2:
+        try:
+            data2 = json.loads(raw2)
+            for job in data2.get('jobs', []):
+                title = job.get('title', '').lower()
+                desc = job.get('description', '').lower()
+                matched_kw = [kw for kw in JOB_BOARD_CRO_KEYWORDS if kw in title or kw in desc[:300]]
+                if not matched_kw:
+                    continue
+                company_url = job.get('company_url', '')
+                job_url = job.get('url', '')
+                score = len(matched_kw) * 2
+                leads.append({
+                    'source': 'remotive',
+                    'title': job.get('title', ''),
+                    'url': job_url,
+                    'company': job.get('company_name', ''),
+                    'company_url': company_url,
+                    'score': score,
+                    'matched': matched_kw[:3],
+                    'email': '',  # no direct email; company_url for lookup
+                    'trigger_type': 'job_board_cro',
+                })
+        except Exception as e:
+            print(f"  [job_boards remotive err] {e}")
+
+    with_email = [l for l in leads if l.get('email')]
+    print(f"  Job boards: {len(leads)} leads ({len(with_email)} with email)")
+    return leads
+
+
+# ─── TRIGGER 5: New Product Launch — Show HN + PH ────────────────
+# Logic: just launched a product = running ads to a brand-new page
+# that almost certainly hasn't been conversion-optimised yet.
+# Signal priority: HIGH (timing — first 72h after launch = max spend, zero data)
+
+LAUNCH_KEYWORDS = [
+    'show hn', 'launch', 'just launched', 'we launched', 'launched today',
+    'product hunt', 'built and launched', 'just shipped', 'we shipped',
+    'beta launch', 'soft launch', 'going live', 'live now',
+    'feedback on my', 'roast my', 'just went live',
+]
+
+def scrape_new_launches():
+    """Scrape Show HN for recent product launches needing conversion help.
+
+    Trigger: new launch = new landing page = no CRO yet = immediate pain.
+    """
+    leads = []
+    three_days_ago = int(time.time()) - (3 * 86400)  # 72h window — hottest signal
+
+    params = urlencode({
+        'query': 'launch landing page feedback startup',
+        'tags': 'show_hn,story',
+        'numericFilters': f'created_at_i>{three_days_ago}',
+        'hitsPerPage': 50,
+    })
+    url = f'https://hn.algolia.com/api/v1/search?{params}'
+    raw = fetch(url)
+    if raw:
+        try:
+            data = json.loads(raw)
+            for hit in data.get('hits', []):
+                title = (hit.get('title') or '').lower()
+                matched_kw = [kw for kw in LAUNCH_KEYWORDS if kw in title]
+                # Show HN = implicit product launch signal even without keyword match
+                if hit.get('_tags') and 'show_hn' in hit.get('_tags', []):
+                    matched_kw.append('show_hn')
+                if not matched_kw:
+                    continue
+                # Extract URL from post (the product being launched)
+                product_url = hit.get('url', '')
+                score = len(matched_kw) * 2 + (2 if product_url else 0)
+                # Extract email from text if present
+                story_text = hit.get('story_text') or ''
+                email_match = re.search(r'[\w.+-]+@[\w-]+\.[a-z]{2,}', story_text)
+                email = email_match.group(0) if email_match else ''
+                leads.append({
+                    'source': 'hn_launches',
+                    'title': hit.get('title', ''),
+                    'url': f"https://news.ycombinator.com/item?id={hit.get('objectID','')}",
+                    'product_url': product_url,
+                    'score': score,
+                    'matched': matched_kw[:3],
+                    'email': email,
+                    'trigger_type': 'new_product_launch',
+                })
+        except Exception as e:
+            print(f"  [launches hn err] {e}")
+
+    # Reddit r/SideProject + r/startups new launches
+    launch_subreddits = ['SideProject', 'startups', 'entrepreneur']
+    for sub in launch_subreddits:
+        rss_url = f'https://www.reddit.com/r/{sub}/new.rss?limit=25'
+        raw2 = fetch(rss_url)
+        if not raw2:
+            time.sleep(2)
+            continue
+        try:
+            root = ET.fromstring(raw2)
+            ns = {'atom': 'http://www.w3.org/2005/Atom'}
+            for entry in root.findall('atom:entry', ns)[:15]:
+                title_el = entry.find('atom:title', ns)
+                title = title_el.text or '' if title_el is not None else ''
+                link_el = entry.find('atom:link', ns)
+                link = link_el.get('href', '') if link_el is not None else ''
+                text = title.lower()
+                matched_kw = [kw for kw in LAUNCH_KEYWORDS if kw in text]
+                if not matched_kw:
+                    continue
+                score = len(matched_kw) * 2
+                leads.append({
+                    'source': f'reddit_{sub}',
+                    'title': title,
+                    'url': link,
+                    'score': score,
+                    'matched': matched_kw[:3],
+                    'email': '',
+                    'trigger_type': 'new_product_launch',
+                })
+        except Exception as e:
+            print(f"  [launches reddit/{sub} err] {e}")
+        time.sleep(2)
+
+    with_email = [l for l in leads if l.get('email')]
+    print(f"  New launches: {len(leads)} leads ({len(with_email)} with email)")
+    return leads
+
 # ─── EMAIL SENDING ────────────────────────────────────────────────
 def build_email(lead):
     """Build a PPQ-format outreach email (Problem / Proof / Question, ≤80 words).
@@ -280,7 +466,13 @@ def main():
     print("\n[3] IndieHackers...")
     ih_leads = scrape_ih()
 
-    all_leads = hn_leads + reddit_leads + ih_leads
+    print("\n[4] Job Boards (CRO/Landing Page roles)...")
+    job_leads = scrape_job_boards()
+
+    print("\n[5] New Product Launches (Show HN + Reddit)...")
+    launch_leads = scrape_new_launches()
+
+    all_leads = hn_leads + reddit_leads + ih_leads + job_leads + launch_leads
     # Sort by score descending
     all_leads.sort(key=lambda x: x['score'], reverse=True)
 
