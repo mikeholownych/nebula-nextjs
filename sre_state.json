@@ -1,9 +1,9 @@
 {
   "failures": {
     "Pipeline ramp recent run": 6,
-    "Stuck leads detected": 7
+    "Stuck leads detected": 8
   },
-  "last_run": "2026-07-07T12:00:10.111297+00:00",
+  "last_run": "2026-07-07T12:15:13.220602+00:00",
   "last_actions": [],
   "hard_bounce_ack": {
     "acked_at": "2026-07-06T11:31:00Z",

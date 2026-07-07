@@ -4,209 +4,269 @@
     "job": "Educational",
     "hook": "Your ads are not broken by default. Your landing page is leaking the money.",
     "angle": "Ad-burn conversion leak #1",
-    "cta": "Paste the URL. Get the free teardown."
+    "cta": "Paste the URL. Get the free teardown.",
+    "format": "how_to_guide",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 2,
     "job": "Testimonial",
     "hook": "A founder with clicks and no conversions needs a leak map, not more opinions.",
-    "angle": "Ad-burn conversion leak #2",
-    "cta": "Use the $97 fix pack when the leak is obvious."
+    "angle": "Real founder with real ad spend, zero conversions #1",
+    "cta": "Use the $97 fix pack when the leak is obvious.",
+    "format": "case_study",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 3,
     "job": "Personal story",
     "hook": "I am building Nebula as an autonomous revenue machine in public.",
-    "angle": "Ad-burn conversion leak #3",
-    "cta": "Follow the build: agents, offers, revenue proof."
+    "angle": "Building Nebula in public #1",
+    "cta": "Follow the build: agents, offers, revenue proof.",
+    "format": "build_in_public",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 4,
-    "job": "Educational",
-    "hook": "Your ads are not broken by default. Your landing page is leaking the money.",
-    "angle": "Ad-burn conversion leak #4",
-    "cta": "Paste the URL. Get the free teardown."
+    "job": "Listicle",
+    "hook": "5 landing page audit tools compared: self-serve speed vs sales-led depth.",
+    "angle": "Tool comparison series #1",
+    "cta": "Full comparison published: 5 tools, 5 dimensions, 1 winner.",
+    "format": "listicle",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 5,
-    "job": "Testimonial",
-    "hook": "A founder with clicks and no conversions needs a leak map, not more opinions.",
-    "angle": "Ad-burn conversion leak #5",
-    "cta": "Use the $97 fix pack when the leak is obvious."
+    "job": "Comparison",
+    "hook": "Nebula vs Zamp vs Oxygen: which landing page audit tool actually finds the leak?",
+    "angle": "Self-serve vs sales-led audit #1",
+    "cta": "See how they stack up on speed, depth, price, and AI readiness.",
+    "format": "comparison_matrix",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 6,
-    "job": "Personal story",
-    "hook": "I am building Nebula as an autonomous revenue machine in public.",
-    "angle": "Ad-burn conversion leak #6",
-    "cta": "Follow the build: agents, offers, revenue proof."
+    "job": "Educational",
+    "hook": "Your ads are not broken by default. Your landing page is leaking the money.",
+    "angle": "Ad-burn conversion leak #2",
+    "cta": "Paste the URL. Get the free teardown.",
+    "format": "how_to_guide",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 7,
-    "job": "Educational",
-    "hook": "Your ads are not broken by default. Your landing page is leaking the money.",
-    "angle": "Ad-burn conversion leak #7",
-    "cta": "Paste the URL. Get the free teardown."
+    "job": "Testimonial",
+    "hook": "A founder with clicks and no conversions needs a leak map, not more opinions.",
+    "angle": "Real founder with real ad spend, zero conversions #2",
+    "cta": "Use the $97 fix pack when the leak is obvious.",
+    "format": "case_study",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 8,
-    "job": "Testimonial",
-    "hook": "A founder with clicks and no conversions needs a leak map, not more opinions.",
-    "angle": "Ad-burn conversion leak #8",
-    "cta": "Use the $97 fix pack when the leak is obvious."
+    "job": "Personal story",
+    "hook": "I am building Nebula as an autonomous revenue machine in public.",
+    "angle": "Building Nebula in public #2",
+    "cta": "Follow the build: agents, offers, revenue proof.",
+    "format": "build_in_public",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 9,
-    "job": "Personal story",
-    "hook": "I am building Nebula as an autonomous revenue machine in public.",
-    "angle": "Ad-burn conversion leak #9",
-    "cta": "Follow the build: agents, offers, revenue proof."
+    "job": "Listicle",
+    "hook": "5 landing page audit tools compared: self-serve speed vs sales-led depth.",
+    "angle": "Tool comparison series #2",
+    "cta": "Full comparison published: 5 tools, 5 dimensions, 1 winner.",
+    "format": "listicle",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 10,
-    "job": "Educational",
-    "hook": "Your ads are not broken by default. Your landing page is leaking the money.",
-    "angle": "Ad-burn conversion leak #10",
-    "cta": "Paste the URL. Get the free teardown."
+    "job": "Comparison",
+    "hook": "Nebula vs Zamp vs Oxygen: which landing page audit tool actually finds the leak?",
+    "angle": "Self-serve vs sales-led audit #2",
+    "cta": "See how they stack up on speed, depth, price, and AI readiness.",
+    "format": "comparison_matrix",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 11,
-    "job": "Testimonial",
-    "hook": "A founder with clicks and no conversions needs a leak map, not more opinions.",
-    "angle": "Ad-burn conversion leak #1",
-    "cta": "Use the $97 fix pack when the leak is obvious."
-  },
-  {
-    "day": 12,
-    "job": "Personal story",
-    "hook": "I am building Nebula as an autonomous revenue machine in public.",
-    "angle": "Ad-burn conversion leak #2",
-    "cta": "Follow the build: agents, offers, revenue proof."
-  },
-  {
-    "day": 13,
     "job": "Educational",
     "hook": "Your ads are not broken by default. Your landing page is leaking the money.",
     "angle": "Ad-burn conversion leak #3",
-    "cta": "Paste the URL. Get the free teardown."
+    "cta": "Paste the URL. Get the free teardown.",
+    "format": "how_to_guide",
+    "freshness_signal": "As of July 2026"
+  },
+  {
+    "day": 12,
+    "job": "Testimonial",
+    "hook": "A founder with clicks and no conversions needs a leak map, not more opinions.",
+    "angle": "Real founder with real ad spend, zero conversions #3",
+    "cta": "Use the $97 fix pack when the leak is obvious.",
+    "format": "case_study",
+    "freshness_signal": "As of July 2026"
+  },
+  {
+    "day": 13,
+    "job": "Personal story",
+    "hook": "I am building Nebula as an autonomous revenue machine in public.",
+    "angle": "Building Nebula in public #3",
+    "cta": "Follow the build: agents, offers, revenue proof.",
+    "format": "build_in_public",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 14,
-    "job": "Testimonial",
-    "hook": "A founder with clicks and no conversions needs a leak map, not more opinions.",
-    "angle": "Ad-burn conversion leak #4",
-    "cta": "Use the $97 fix pack when the leak is obvious."
+    "job": "Listicle",
+    "hook": "5 landing page audit tools compared: self-serve speed vs sales-led depth.",
+    "angle": "Tool comparison series #3",
+    "cta": "Full comparison published: 5 tools, 5 dimensions, 1 winner.",
+    "format": "listicle",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 15,
-    "job": "Personal story",
-    "hook": "I am building Nebula as an autonomous revenue machine in public.",
-    "angle": "Ad-burn conversion leak #5",
-    "cta": "Follow the build: agents, offers, revenue proof."
+    "job": "Comparison",
+    "hook": "Nebula vs Zamp vs Oxygen: which landing page audit tool actually finds the leak?",
+    "angle": "Self-serve vs sales-led audit #3",
+    "cta": "See how they stack up on speed, depth, price, and AI readiness.",
+    "format": "comparison_matrix",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 16,
     "job": "Educational",
     "hook": "Your ads are not broken by default. Your landing page is leaking the money.",
-    "angle": "Ad-burn conversion leak #6",
-    "cta": "Paste the URL. Get the free teardown."
+    "angle": "Ad-burn conversion leak #4",
+    "cta": "Paste the URL. Get the free teardown.",
+    "format": "how_to_guide",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 17,
     "job": "Testimonial",
     "hook": "A founder with clicks and no conversions needs a leak map, not more opinions.",
-    "angle": "Ad-burn conversion leak #7",
-    "cta": "Use the $97 fix pack when the leak is obvious."
+    "angle": "Real founder with real ad spend, zero conversions #4",
+    "cta": "Use the $97 fix pack when the leak is obvious.",
+    "format": "case_study",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 18,
     "job": "Personal story",
     "hook": "I am building Nebula as an autonomous revenue machine in public.",
-    "angle": "Ad-burn conversion leak #8",
-    "cta": "Follow the build: agents, offers, revenue proof."
+    "angle": "Building Nebula in public #4",
+    "cta": "Follow the build: agents, offers, revenue proof.",
+    "format": "build_in_public",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 19,
-    "job": "Educational",
-    "hook": "Your ads are not broken by default. Your landing page is leaking the money.",
-    "angle": "Ad-burn conversion leak #9",
-    "cta": "Paste the URL. Get the free teardown."
+    "job": "Listicle",
+    "hook": "5 landing page audit tools compared: self-serve speed vs sales-led depth.",
+    "angle": "Tool comparison series #4",
+    "cta": "Full comparison published: 5 tools, 5 dimensions, 1 winner.",
+    "format": "listicle",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 20,
-    "job": "Testimonial",
-    "hook": "A founder with clicks and no conversions needs a leak map, not more opinions.",
-    "angle": "Ad-burn conversion leak #10",
-    "cta": "Use the $97 fix pack when the leak is obvious."
+    "job": "Comparison",
+    "hook": "Nebula vs Zamp vs Oxygen: which landing page audit tool actually finds the leak?",
+    "angle": "Self-serve vs sales-led audit #4",
+    "cta": "See how they stack up on speed, depth, price, and AI readiness.",
+    "format": "comparison_matrix",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 21,
-    "job": "Personal story",
-    "hook": "I am building Nebula as an autonomous revenue machine in public.",
-    "angle": "Ad-burn conversion leak #1",
-    "cta": "Follow the build: agents, offers, revenue proof."
-  },
-  {
-    "day": 22,
-    "job": "Educational",
-    "hook": "Your ads are not broken by default. Your landing page is leaking the money.",
-    "angle": "Ad-burn conversion leak #2",
-    "cta": "Paste the URL. Get the free teardown."
-  },
-  {
-    "day": 23,
-    "job": "Testimonial",
-    "hook": "A founder with clicks and no conversions needs a leak map, not more opinions.",
-    "angle": "Ad-burn conversion leak #3",
-    "cta": "Use the $97 fix pack when the leak is obvious."
-  },
-  {
-    "day": 24,
-    "job": "Personal story",
-    "hook": "I am building Nebula as an autonomous revenue machine in public.",
-    "angle": "Ad-burn conversion leak #4",
-    "cta": "Follow the build: agents, offers, revenue proof."
-  },
-  {
-    "day": 25,
     "job": "Educational",
     "hook": "Your ads are not broken by default. Your landing page is leaking the money.",
     "angle": "Ad-burn conversion leak #5",
-    "cta": "Paste the URL. Get the free teardown."
+    "cta": "Paste the URL. Get the free teardown.",
+    "format": "how_to_guide",
+    "freshness_signal": "As of July 2026"
+  },
+  {
+    "day": 22,
+    "job": "Testimonial",
+    "hook": "A founder with clicks and no conversions needs a leak map, not more opinions.",
+    "angle": "Real founder with real ad spend, zero conversions #5",
+    "cta": "Use the $97 fix pack when the leak is obvious.",
+    "format": "case_study",
+    "freshness_signal": "As of July 2026"
+  },
+  {
+    "day": 23,
+    "job": "Personal story",
+    "hook": "I am building Nebula as an autonomous revenue machine in public.",
+    "angle": "Building Nebula in public #5",
+    "cta": "Follow the build: agents, offers, revenue proof.",
+    "format": "build_in_public",
+    "freshness_signal": "As of July 2026"
+  },
+  {
+    "day": 24,
+    "job": "Listicle",
+    "hook": "5 landing page audit tools compared: self-serve speed vs sales-led depth.",
+    "angle": "Tool comparison series #5",
+    "cta": "Full comparison published: 5 tools, 5 dimensions, 1 winner.",
+    "format": "listicle",
+    "freshness_signal": "As of July 2026"
+  },
+  {
+    "day": 25,
+    "job": "Comparison",
+    "hook": "Nebula vs Zamp vs Oxygen: which landing page audit tool actually finds the leak?",
+    "angle": "Self-serve vs sales-led audit #5",
+    "cta": "See how they stack up on speed, depth, price, and AI readiness.",
+    "format": "comparison_matrix",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 26,
-    "job": "Testimonial",
-    "hook": "A founder with clicks and no conversions needs a leak map, not more opinions.",
+    "job": "Educational",
+    "hook": "Your ads are not broken by default. Your landing page is leaking the money.",
     "angle": "Ad-burn conversion leak #6",
-    "cta": "Use the $97 fix pack when the leak is obvious."
+    "cta": "Paste the URL. Get the free teardown.",
+    "format": "how_to_guide",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 27,
-    "job": "Personal story",
-    "hook": "I am building Nebula as an autonomous revenue machine in public.",
-    "angle": "Ad-burn conversion leak #7",
-    "cta": "Follow the build: agents, offers, revenue proof."
+    "job": "Testimonial",
+    "hook": "A founder with clicks and no conversions needs a leak map, not more opinions.",
+    "angle": "Real founder with real ad spend, zero conversions #6",
+    "cta": "Use the $97 fix pack when the leak is obvious.",
+    "format": "case_study",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 28,
-    "job": "Educational",
-    "hook": "Your ads are not broken by default. Your landing page is leaking the money.",
-    "angle": "Ad-burn conversion leak #8",
-    "cta": "Paste the URL. Get the free teardown."
+    "job": "Personal story",
+    "hook": "I am building Nebula as an autonomous revenue machine in public.",
+    "angle": "Building Nebula in public #6",
+    "cta": "Follow the build: agents, offers, revenue proof.",
+    "format": "build_in_public",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 29,
-    "job": "Testimonial",
-    "hook": "A founder with clicks and no conversions needs a leak map, not more opinions.",
-    "angle": "Ad-burn conversion leak #9",
-    "cta": "Use the $97 fix pack when the leak is obvious."
+    "job": "Listicle",
+    "hook": "5 landing page audit tools compared: self-serve speed vs sales-led depth.",
+    "angle": "Tool comparison series #6",
+    "cta": "Full comparison published: 5 tools, 5 dimensions, 1 winner.",
+    "format": "listicle",
+    "freshness_signal": "As of July 2026"
   },
   {
     "day": 30,
-    "job": "Personal story",
-    "hook": "I am building Nebula as an autonomous revenue machine in public.",
-    "angle": "Ad-burn conversion leak #10",
-    "cta": "Follow the build: agents, offers, revenue proof."
+    "job": "Comparison",
+    "hook": "Nebula vs Zamp vs Oxygen: which landing page audit tool actually finds the leak?",
+    "angle": "Self-serve vs sales-led audit #6",
+    "cta": "See how they stack up on speed, depth, price, and AI readiness.",
+    "format": "comparison_matrix",
+    "freshness_signal": "As of July 2026"
   }
 ]

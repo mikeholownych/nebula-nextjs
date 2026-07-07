@@ -366,3 +366,75 @@ Recycle candidates (pitch_sent, no payment): 21
 
 ============================================================
 Due: 4  Sent: 1  delivered
+followup_sequence.py (LIVE) — 2026-07-07 12:17 UTC
+============================================================
+
+Audit leads: 19
+  [email1_direct] patriciasfnunes@gmail.com (www.patricianunes.pt)
+  [AM FAILED] patriciasfnunes@gmail.com: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: patriciasfnunes@gmail.com (Unsubscribe
+  [SUPPRESSED->DEAD] patriciasfnunes@gmail.com
+
+Cold-only leads: 101
+  [day8_cold_breakup] hello@theogeo.ai
+  [AM FAILED] hello@theogeo.ai: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@theogeo.ai (bounced)"}
+  [SUPPRESSED->DEAD] hello@theogeo.ai
+  [day8_cold_breakup] hello@postclaw.io
+  [AM FAILED] hello@postclaw.io: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@postclaw.io (bounced)"}
+  [SUPPRESSED->DEAD] hello@postclaw.io
+  [day8_cold_breakup] info@cuneiform.chat
+  [AM FAILED] info@cuneiform.chat: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: info@cuneiform.chat (complained)"}
+  [SUPPRESSED->DEAD] info@cuneiform.chat
+  [day8_cold_breakup] contact@qlp.jp
+  [AM FAILED] contact@qlp.jp: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: contact@qlp.jp (bounced)"}
+  [SUPPRESSED->DEAD] contact@qlp.jp
+  [day8_cold_breakup] hello@edkit.ca
+  [AM FAILED] hello@edkit.ca: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@edkit.ca (bounced)"}
+  [SUPPRESSED->DEAD] hello@edkit.ca
+  [day8_cold_breakup] hello@3minuteanimal.com
+  [AM FAILED] hello@3minuteanimal.com: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@3minuteanimal.com (bounced)"}
+  [SUPPRESSED->DEAD] hello@3minuteanimal.com
+  [day8_cold_breakup] hello@skillsips.com
+  [AM FAILED] hello@skillsips.com: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@skillsips.com (bounced)"}
+  [SUPPRESSED->DEAD] hello@skillsips.com
+  [day8_cold_breakup] hello@listendock.com
+  [AM FAILED] hello@listendock.com: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@listendock.com (bounced)"}
+  [SUPPRESSED->DEAD] hello@listendock.com
+  [day8_cold_breakup] hello@voiceinvoice.net
+  [AM FAILED] hello@voiceinvoice.net: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@voiceinvoice.net (bounced)"}
+  [SUPPRESSED->DEAD] hello@voiceinvoice.net
+  [day8_cold_breakup] hello@tryreleaselog.com
+  [AM FAILED] hello@tryreleaselog.com: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@tryreleaselog.com (bounced)"}
+  [SUPPRESSED->DEAD] hello@tryreleaselog.com
+  [day8_cold_breakup] hello@goldenweeks.com
+  [AM FAILED] hello@goldenweeks.com: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@goldenweeks.com (bounced)"}
+  [SUPPRESSED->DEAD] hello@goldenweeks.com
+  [day8_cold_breakup] sales@thehiveryiq.com
+  [AM FAILED] sales@thehiveryiq.com: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: sales@thehiveryiq.com (bounced)"}
+  [SUPPRESSED->DEAD] sales@thehiveryiq.com
+  [day8_cold_breakup] hello@nvsn.ai
+  [AM FAILED] hello@nvsn.ai: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@nvsn.ai (bounced)"}
+  [SUPPRESSED->DEAD] hello@nvsn.ai
+  [day8_cold_breakup] support@fenly.me
+  [AM FAILED] support@fenly.me: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: support@fenly.me (bounced)"}
+  [SUPPRESSED->DEAD] support@fenly.me
+  [day8_cold_breakup] hello@bunzee.ai
+  [AM FAILED] hello@bunzee.ai: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@bunzee.ai (bounced)"}
+  [SUPPRESSED->DEAD] hello@bunzee.ai
+  [day8_cold_breakup] hello@truthscore.online
+  [AM FAILED] hello@truthscore.online: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: hello@truthscore.online (bounced)"}
+  [SUPPRESSED->DEAD] hello@truthscore.online
+  [day8_cold_breakup] contact@reddbot.ai
+  [AM FAILED] contact@reddbot.ai: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: contact@reddbot.ai (Unsubscribed via L
+  [SUPPRESSED->DEAD] contact@reddbot.ai
+  [skip bounced] info@brookerlaw.com
+  [skip bounced] info@magnolia-club.org
+  [skip bounced] info@saputo.law
+
+HOT_LEAD pitch due: 0  Sent: 0
+
+Revive candidates (contacted, no audit): 101
+
+Recycle candidates (pitch_sent, no payment): 22
+
+============================================================
+Due: 18  Sent: 0  delivered

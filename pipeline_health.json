@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-07-07T12:00:04.820852+00:00",
+  "timestamp": "2026-07-07T12:15:08.569108+00:00",
   "healthy": false,
-  "passed": 13,
-  "failed": 2,
+  "passed": 14,
+  "failed": 1,
   "total": 15,
   "checks": [
     {
@@ -58,12 +58,12 @@
     {
       "name": "Pipeline lock",
       "passed": true,
-      "detail": "Running"
+      "detail": "No lock file — pipeline not currently running"
     },
     {
       "name": "Pipeline ramp recent run",
-      "passed": false,
-      "detail": "233m ago — stale"
+      "passed": true,
+      "detail": "7m ago"
     },
     {
       "name": "Dead letter queue",
@@ -85,49 +85,49 @@
     {
       "email": "support@invoicingapi.com",
       "stage": "pitch_sent",
-      "hours_stuck": 73.6,
+      "hours_stuck": 73.9,
       "url": "https://invoicingapi.com"
     },
     {
       "email": "hello@adsby.co",
       "stage": "pitch_sent",
-      "hours_stuck": 73.6,
+      "hours_stuck": 73.9,
       "url": "https://usemagnetiq.com"
     },
     {
       "email": "ask@timetechnologiesllc.com",
       "stage": "pitch_sent",
-      "hours_stuck": 73.6,
+      "hours_stuck": 73.9,
       "url": "https://www.timetechnologiesllc.com/"
     },
     {
       "email": "contact@funghiclear.com",
       "stage": "pitch_sent",
-      "hours_stuck": 73.6,
+      "hours_stuck": 73.9,
       "url": "https://funghiclear.com/products/funghiclear-nail-spray-with-manuka-oil"
     },
     {
       "email": "info@magnoliamedspaandwellness.com",
       "stage": "pitch_sent",
-      "hours_stuck": 73.6,
+      "hours_stuck": 73.9,
       "url": "https://lowtdfw.com/offer"
     },
     {
       "email": "contact@calisim.com",
       "stage": "pitch_sent",
-      "hours_stuck": 73.6,
+      "hours_stuck": 73.9,
       "url": "https://www.calisim.com/plans"
     },
     {
       "email": "info@sarojhospital.com",
       "stage": "pitch_sent",
-      "hours_stuck": 73.6,
+      "hours_stuck": 73.9,
       "url": "https://www.sarojhospital.com/gastro-care"
     }
   ],
   "lead_stages": {
-    "audit_delivered": 15,
-    "pitch_sent": 20,
+    "audit_delivered": 14,
+    "pitch_sent": 21,
     "paid": 0,
     "bounced": 30,
     "contacted": 75,

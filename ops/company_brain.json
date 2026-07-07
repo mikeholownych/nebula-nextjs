@@ -17,7 +17,7 @@
     "trigger_warm_replies": 0,
     "warm_leads": 1
   },
-  "generated_at": "2026-07-07T11:29:57Z",
+  "generated_at": "2026-07-07T12:03:20Z",
   "kill_criteria": {
     "audit": "3 audits delivered and 0 payments",
     "checkout": "buyer cannot pay self-serve",
@@ -25,12 +25,10 @@
   },
   "offer": "Free landing page audit -> $97 implementation",
   "pipeline": {
-    "hot_leads_pending": 12,
-    "overdue_emails": [
-      "contact@curbcaddie.com"
-    ],
-    "pitch_overdue": 1,
-    "pitch_sent": 21,
+    "hot_leads_pending": 11,
+    "overdue_emails": [],
+    "pitch_overdue": 0,
+    "pitch_sent": 22,
     "total": 38
   },
   "revenue": {

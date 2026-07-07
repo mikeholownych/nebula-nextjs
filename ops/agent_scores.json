@@ -1,12 +1,11 @@
 {
   "ceo": {
     "risks": [
-      "1 pitch-due hot leads still pending",
       "66 trigger sends with 0 warm replies",
       "real revenue remains $0",
       "trigger scoring not producing warm replies"
     ],
-    "score": 52,
+    "score": 55,
     "signals": {
       "bottleneck": "audit_to_payment_conversion"
     }
@@ -43,14 +42,12 @@
     }
   },
   "support": {
-    "risks": [
-      "1 pitch-due hot leads still pending"
-    ],
-    "score": 63,
+    "risks": [],
+    "score": 75,
     "signals": {
       "hot_lead_pitches_sent": 7,
-      "hot_leads_pending": 12,
-      "pitch_overdue": 1
+      "hot_leads_pending": 11,
+      "pitch_overdue": 0
     }
   }
 }

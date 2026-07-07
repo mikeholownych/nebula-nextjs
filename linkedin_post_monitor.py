@@ -24,6 +24,7 @@ MONITOR_STATE = GS / "linkedin_monitor_state.json"
 MONITORED_POSTS = [
     "https://www.linkedin.com/feed/update/urn:li:share:7479391233749131264",
     "https://www.linkedin.com/feed/update/urn:li:activity:7478763831968768000/",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7480227128299479048/",
 ]
 
 # Content angle classification for each monitored post.
@@ -31,6 +32,7 @@ MONITORED_POSTS = [
 POST_ANGLES = {
     "https://www.linkedin.com/feed/update/urn:li:share:7479391233749131264": "teach",
     "https://www.linkedin.com/feed/update/urn:li:activity:7478763831968768000/": "hook",
+    "https://www.linkedin.com/feed/update/urn:li:activity:7480227128299479048/": "teach",
 }
 
 # Accounts to suppress (own account / noise)

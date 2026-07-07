@@ -1,24 +1,14 @@
 {
   "bottleneck": "audit_to_payment_conversion",
-  "generated_at": "2026-07-07T11:29:57Z",
+  "generated_at": "2026-07-07T12:03:20Z",
   "queues": [
-    {
-      "acceptance": "audit/pitch/payment event is written to customer ledger and HOT_LEAD state is advanced",
-      "agent": "support",
-      "handoff_to": "ops-finance",
-      "priority": 100,
-      "required_artifact": "pitch sent or incident row explaining why it could not be sent",
-      "score": 63,
-      "stage": "closer_delivery",
-      "trigger": "hot lead pitch_due_at passed"
-    },
     {
       "acceptance": "audit/pitch/payment event is written to customer ledger and HOT_LEAD state is advanced",
       "agent": "support",
       "handoff_to": "ops-finance",
       "priority": 95,
       "required_artifact": "checkout-safe audit-to-$97 pitch flow verified by dry run/test and ledger row",
-      "score": 63,
+      "score": 75,
       "stage": "closer_delivery",
       "trigger": "audits delivered but paid conversion is weak"
     },
@@ -68,7 +58,7 @@
       "handoff_to": null,
       "priority": 60,
       "required_artifact": "one bottleneck, one kill/scale decision, and next 3 agent orders in latest_ceo_directive",
-      "score": 52,
+      "score": 55,
       "stage": "mission_control_decision",
       "trigger": "daily mission control synthesis"
     }
