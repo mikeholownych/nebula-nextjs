@@ -594,7 +594,7 @@ def detect_stack(html_text):
     return ", ".join(signals[:5])  # cap at 5 to keep opener tight
 
 
-def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=None, stated_goal=None, stated_role=None):
+def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=None, stated_goal=None, stated_role=None, stated_visitor=None, stated_tone=None):
     """Compose structured audit email — free-consulting frame, not report delivery."""
     DIM_LABELS = {
         "headline": "Headline",
@@ -664,6 +664,28 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
     else:
         personalized_q = ""  # no role = no personalized Q; keep email tight
 
+    # Context-sharpened fix language (specificity principle: name what we saw)
+    _visitor_ctx = f"Your audience ({stated_visitor}) " if stated_visitor else ""
+    _tone_ctx = f" The page's intended tone is {stated_tone}." if stated_tone else ""
+    # These are used to make above-fold and headline issue text surgical
+    _fold_issue_override = None
+    _headline_issue_override = None
+    if stated_visitor and "above_fold" in audit.get("dimensions", {}):
+        dim = audit["dimensions"]["above_fold"]
+        if dim["score"] < 7:
+            _fold_issue_override = (
+                f"{_visitor_ctx}lands on a page with no clear first-screen CTA. "
+                f"They should see a headline that names their problem + one action button. "
+                f"Currently: {dim['issue']}{_tone_ctx}"
+            )
+    if stated_visitor and "headline" in audit.get("dimensions", {}):
+        dim = audit["dimensions"].get("headline", {})
+        if dim and dim.get("score", 10) < 7:
+            _headline_issue_override = (
+                f"Headline isn't calibrated for {stated_visitor}. "
+                f"It should address their specific pain, not a generic claim.{_tone_ctx}"
+            )
+
     # Advisor framing: point at specific dollars, not vague "conversion issues" (CAIOS lesson: advisor sentences name amounts)
     if score < 4:
         monthly_leak = "~$1,600–$4,000/mo"
@@ -673,7 +695,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
             f"{_stack}I ran {domain} through our conversion analyzer. The {worst_label.lower()} alone is likely killing every visitor who lands on your page. "
             f"Pages scoring {score}/10 waste {waste_pct} of paid clicks — at {spend_label} that's {monthly_leak} evaporating before a single conversion."
         )
-        pitch_line = "The diagnosis is above. The $97 is the prescription — we ship every fix in 24h, no call required."
+        pitch_line = None  # computed below from matrix
     elif score < 6.5:
         monthly_leak = "~$800–$1,800/mo"
         waste_pct = "40–50%"
@@ -682,7 +704,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
             f"{_stack}I ran your landing page through our conversion analyzer — your {worst_label.lower()} is the leak. "
             f"Pages at {score}/10 lose {waste_pct} of ad clicks to friction. At {spend_label} in traffic that's {monthly_leak} in recoverable waste."
         )
-        pitch_line = "The diagnosis is above. The $97 is the prescription — plug these leaks in 24h and your ad spend starts working."
+        pitch_line = None  # computed below from matrix
     elif score < 8:
         monthly_leak = "~$250–$700/mo"
         waste_pct = "15–20%"
@@ -691,7 +713,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
             f"{_stack}Checked {domain} — you're closer than most ({score}/10). "
             f"One or two friction points are likely costing {waste_pct} of conversions — {monthly_leak} at {spend_label}, more at scale."
         )
-        pitch_line = "The diagnosis is above. The $97 is the prescription — surgical fixes, not a rebuild, shipped in 24h."
+        pitch_line = None  # computed below from matrix
     else:
         monthly_leak = "~$100–$300/mo"
         waste_pct = "5–10%"
@@ -700,7 +722,30 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
             f"{_stack}Ran {domain} through our analyzer — it's structurally solid ({score}/10). "
             f"Found a nuance that may account for {waste_pct} of unconverted clicks — {monthly_leak} at {spend_label}."
         )
-        pitch_line = "The $97 implements the fix in 24h. Might be the highest-ROI move you make this week. No call required."
+        pitch_line = None  # computed below from matrix
+
+    # ── Surgical pitch_line: names exactly what gets built (specificity principle) ──
+    _matrix = audit.get("opp_matrix", [])
+    _dim_labels_lookup = {
+        "headline": "Headline Copy", "cta": "CTA Friction", "social_proof": "Social Proof",
+        "load_speed": "Load Speed", "mobile": "Mobile Readiness", "seo_foundations": "SEO Foundations",
+        "ad_signals": "Ad Tracking", "above_fold": "Above-Fold Clarity",
+    }
+    _qw_labels = [_dim_labels_lookup.get(o["key"], o["label"]) for o in _matrix if o["quadrant"] == "quick_win"]
+    if _qw_labels:
+        _qw_str = " + ".join(_qw_labels[:2])
+        if score < 6.5:
+            pitch_line = (
+                f"Implements the fix: {_qw_str} — shipped in 24h, no call, "
+                f"full refund if you're not satisfied. "
+                f"At {spend_label} this pays for itself in under a week."
+            )
+        else:
+            pitch_line = (
+                f"Implements: {_qw_str} — built and live in 24h. No call required."
+            )
+    else:
+        pitch_line = "Implements the fix in 24h. No call required. Full refund if not satisfied."
 
     # ── Retainer seed (transition beats before $97 pitch) ──
     retainer_lines = [
@@ -731,7 +776,12 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         lines.append("What's costing you conversions:")
         for key, item in broken_only:
             label = DIM_LABELS.get(key, key.replace("_", " ").title())
-            lines.append(f"- {label}: {item['issue']} Fix: {item['fix']}")
+            _issue_text = item['issue']
+            if key == "above_fold" and _fold_issue_override:
+                _issue_text = _fold_issue_override
+            elif key == "headline" and _headline_issue_override:
+                _issue_text = _headline_issue_override
+            lines.append(f"- {label}: {_issue_text} Fix: {item['fix']}")
     else:
         lines.append(body_opener)
         lines.append("")

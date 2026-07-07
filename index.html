@@ -299,20 +299,28 @@
   <!-- ── AUDIT FORM ── -->
   <section class="card" id="audit-form-card">
     <h2>Run the free teardown. See what is leaking.</h2>
-    <p>Paste your landing page URL. The audit checks 5 dimensions — clarity, CTA friction, trust proof, offer specificity, and implementation difficulty — and delivers a prioritized fix list to your inbox.</p>
+    <p>The more context you give, the more surgical the audit. Two required fields. Everything else sharpens the diagnosis.</p>
     <form id="audit-form">
-      <label for="url">Your landing page URL</label>
+      <label for="url">Landing page URL <span style="color:#6b7280;font-weight:400;">(the exact page taking ad traffic)</span></label>
       <input id="url" name="url" type="url" placeholder="https://your-landing-page.com" required>
-      <label for="email">Email for delivery</label>
+      <label for="email">Email for delivery <span style="color:#6b7280;font-weight:400;">(audit arrives in &lt;60 seconds)</span></label>
       <input id="email" name="email" type="email" placeholder="you@example.com" required>
-      <label for="goal">Primary conversion goal</label>
+
+      <label for="goal" style="margin-top:12px;">What is this page supposed to do?</label>
       <select id="goal" name="goal">
-        <option value="sales">Sales</option>
-        <option value="leads">Leads</option>
-        <option value="signups">Signups</option>
-        <option value="bookings">Bookings</option>
+        <option value="sales">Get a sale — visitor should pay on this page</option>
+        <option value="leads">Capture a lead — visitor should leave an email or number</option>
+        <option value="bookings">Book a call — visitor should schedule time</option>
+        <option value="signups">Drive a signup — visitor should create an account</option>
       </select>
-      <label for="role" style="margin-top:10px;">Your role (optional — tailors the fix recommendations)</label>
+
+      <label for="visitor" style="margin-top:12px;">Who lands here? <span style="color:#6b7280;font-weight:400;">(optional — sharpens the headline and CTA analysis)</span></label>
+      <input id="visitor" name="visitor" type="text" placeholder="e.g. overwhelmed founders running paid ads, $5K+/mo spend">
+
+      <label for="tone" style="margin-top:12px;">What feeling should the page give? <span style="color:#6b7280;font-weight:400;">(optional)</span></label>
+      <input id="tone" name="tone" type="text" placeholder="e.g. calm and premium, or urgent and direct, or technical and trusted">
+
+      <label for="role" style="margin-top:12px;">Your role <span style="color:#6b7280;font-weight:400;">(optional — changes the follow-up question)</span></label>
       <select id="role" name="role">
         <option value="">Prefer not to say</option>
         <option value="founder">Founder / CEO / Owner</option>
@@ -320,9 +328,10 @@
         <option value="agency">Agency / Freelancer / Consultant</option>
         <option value="developer">Developer / Engineer</option>
       </select>
-      <label for="monthly_spend" style="margin-top:10px;">Monthly ad spend (optional — helps size the waste estimate)</label>
+
+      <label for="monthly_spend" style="margin-top:12px;">Monthly ad spend <span style="color:#6b7280;font-weight:400;">(optional — sizes the waste estimate)</span></label>
       <select id="monthly_spend" name="monthly_spend">
-        <option value="">I prefer not to say</option>
+        <option value="">Prefer not to say</option>
         <option value="500">Under $500/mo</option>
         <option value="1000">$500–$1K/mo</option>
         <option value="2500">$1K–$5K/mo</option>
@@ -640,6 +649,8 @@
       url: form.url.value.trim(),
       email: form.email.value.trim(),
       goal: form.goal.value,
+      visitor: form.visitor ? form.visitor.value.trim() || null : null,
+      tone: form.tone ? form.tone.value.trim() || null : null,
       role: form.role ? form.role.value || null : null,
       monthly_spend: form.monthly_spend ? Number(form.monthly_spend.value) || null : null,
       source_type: 'homepage_audit_form',
