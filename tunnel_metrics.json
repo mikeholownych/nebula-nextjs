@@ -1,10 +1,10 @@
 {
-  "checks_total": 3159,
-  "tunnel_up": 3150,
+  "checks_total": 3161,
+  "tunnel_up": 3152,
   "tunnel_down": 9,
-  "local_up": 3129,
+  "local_up": 3131,
   "local_down": 30,
-  "sync": 3150,
+  "sync": 3152,
   "out_of_sync": 9,
   "alerts": [
     "[2026-07-04T11:45:01.465795Z] CRITICAL: Tunnel DOWN while local endpoint is UP",
@@ -12,7 +12,7 @@
     "[2026-07-05T14:25:01.699087Z] CRITICAL: Tunnel DOWN while local endpoint is UP",
     "[2026-07-05T14:30:01.629953Z] CRITICAL: Tunnel DOWN while local endpoint is UP"
   ],
-  "last_check": "2026-07-07T07:45:02.007556Z",
+  "last_check": "2026-07-07T07:55:02.077937Z",
   "uptime_pct": 99.72,
   "last_status": "OK"
 }
