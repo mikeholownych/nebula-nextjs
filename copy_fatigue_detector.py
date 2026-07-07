@@ -20,10 +20,11 @@ from datetime import datetime, timezone
 
 # ── Metric thresholds (from 100-Day Scorecard) ────────────────────
 THRESHOLDS = {
-    "reply_rate": {"green": 3.0, "yellow": 1.0},    # % positive replies
-    "bounce_rate": {"red": 2.5, "yellow": 1.5},     # % bounced
-    "spam_rate":   {"red": 0.3,  "yellow": 0.1},    # % spam complaints
-    "warmup_score":{"green": 70, "yellow": 60},      # warmup health 0–100
+    "reply_rate":  {"green": 3.0, "yellow": 1.0},   # % positive replies
+    "open_rate":   {"green": 40.0, "yellow": 25.0},  # % opens — Illingworth: <40% = something wrong
+    "bounce_rate": {"red": 2.5,  "yellow": 1.5},     # % bounced
+    "spam_rate":   {"red": 0.3,  "yellow": 0.1},     # % spam complaints
+    "warmup_score":{"green": 70, "yellow": 60},       # warmup health 0–100
 }
 
 # ── Tension pattern taxonomy (for hook bank logging) ──────────────
@@ -64,6 +65,7 @@ def diagnose_fatigue(
     spam_rate: float,
     warmup_score: float,
     drop_is_gradual: bool = True,
+    open_rate: float | None = None,
 ) -> dict:
     """
     Run the 5-question fatigue diagnosis from the Copy Fatigue Protocol.
@@ -75,6 +77,7 @@ def diagnose_fatigue(
         spam_rate           : current spam complaint rate (%)
         warmup_score        : current warmup health score (0–100)
         drop_is_gradual     : True if drop occurred over 2–6 weeks; False if within days
+        open_rate           : current open rate (%) — Illingworth: <40% = something wrong
 
     Returns dict with:
         diagnosis     : 'copy_fatigue' | 'infrastructure_breakdown' | 'healthy'
@@ -91,6 +94,8 @@ def diagnose_fatigue(
         "spam_rate":    zone("spam_rate",    spam_rate),
         "warmup_score": zone("warmup_score", warmup_score),
     }
+    if open_rate is not None:
+        zones["open_rate"] = zone("open_rate", open_rate)
 
     infra_red = sum(1 for k in ("bounce_rate", "spam_rate", "warmup_score")
                     if zones[k] == "red")

@@ -63,6 +63,21 @@ def validate_subject(subject: str) -> tuple[bool, str]:
         return False, f"ALL CAPS words in subject: {caps_words}"
     return True, "ok"
 
+def count_links_images(body: str) -> tuple[int, int]:
+    """Return (link_count, image_count) in an email body."""
+    links = len(re.findall(r'https?://', body))
+    images = len(re.findall(r'<img\b|!\[.*?\]\(', body))  # HTML or markdown images
+    return links, images
+
+def validate_body_structure(body: str) -> tuple[bool, str]:
+    """Illingworth Step 6: no images; max 1 link in plain-text outreach."""
+    links, images = count_links_images(body)
+    if images > 0:
+        return False, f"body contains {images} image(s) — remove for cold email"
+    if links > 2:
+        return False, f"body has {links} links — keep ≤2 for deliverability"
+    return True, "ok"
+
 HEADERS = {'User-Agent': 'Mozilla/5.0 (compatible; research-bot/1.0)'}
 
 def fetch(url, timeout=15):
@@ -421,10 +436,41 @@ def scrape_new_launches():
     return leads
 
 # ─── EMAIL SENDING ────────────────────────────────────────────────
+import hashlib
+
+# 3 PPQ variants — same structure, different wording
+# Illingworth: "Don't send the same email to thousands" — slight variation avoids dupe detection
+_PPQ_VARIANTS = [
+    {
+        "subject_tpl": "Your {kw} — found something",
+        "opening": "Saw your post: \"{snip}\"",
+        "problem": "Problem I keep seeing: ad spend stays flat while conversions drop — usually the landing page is bleeding the budget, not the ads.",
+        "proof": "Proof: ran 100+ audits last month. Most pages lose 60–70% of clicks on the hero alone.",
+        "question": "Quick question: want me to run a free audit on your page? I send findings same day — just reply with your URL.",
+    },
+    {
+        "subject_tpl": "Quick question about {kw}",
+        "opening": "Found your post: \"{snip}\"",
+        "problem": "Most founders I talk to have the same issue: the ads are fine, but the page loses 60%+ of visitors before they ever see the offer.",
+        "proof": "I've audited 100+ landing pages. The hero section is almost always where the budget bleeds.",
+        "question": "Worth me taking a look? Free audit, I'll send findings same day — just drop your URL.",
+    },
+    {
+        "subject_tpl": "noticed something re: {kw}",
+        "opening": "Came across your post: \"{snip}\"",
+        "problem": "Something I see constantly: paid traffic looks healthy in the dashboard but the page is quietly killing conversions at the hero.",
+        "proof": "100+ audits in — the pattern holds. 60–70% drop-off before anyone reaches the CTA.",
+        "question": "Want me to check yours? Takes me a day — just reply with the URL.",
+    },
+]
+
 def build_email(lead):
     """Build a PPQ-format outreach email (Problem / Proof / Question, ≤80 words).
 
-    PPQ framework (Hormozi Rule of 100, Day 2 baseline format):
+    3 variants rotated by lead URL hash — same structure, different wording.
+    Illingworth: slight variation per send avoids bulk-duplicate spam detection.
+
+    PPQ framework (Hormozi Rule of 100):
       Problem  — specific pain this ICP is feeling right now (trigger-matched)
       Proof    — one quantified result or credential
       Question — soft CTA, easy yes
@@ -432,18 +478,16 @@ def build_email(lead):
     title_snip = lead['title'][:80]
     matched_kw = lead.get('matched', ['conversion issues'])[0] if lead.get('matched') else 'conversion issues'
 
-    # Subject: curiosity_gap + problem_callout archetype (highest open rate for trigger leads)
-    subject = f"Your {matched_kw} — found something"
+    # Deterministic variant selection via URL hash — same lead always gets same variant
+    url_hash = int(hashlib.md5(lead.get('url', title_snip).encode()).hexdigest(), 16)
+    v = _PPQ_VARIANTS[url_hash % len(_PPQ_VARIANTS)]
 
-    # PPQ body: ≤80 words, no pitch, no link, question close
+    subject = v["subject_tpl"].format(kw=matched_kw, snip=title_snip[:40])
     body = (
-        f"Saw your post: \"{title_snip}\"\n\n"
-        "Problem I keep seeing: ad spend stays flat while conversions drop — "
-        "usually the landing page is bleeding the budget, not the ads.\n\n"
-        "Proof: ran 100+ audits last month. "
-        "Most pages lose 60–70% of clicks on the hero alone.\n\n"
-        "Quick question: want me to run a free audit on your page? "
-        "I send findings same day — just reply with your URL."
+        f"{v['opening'].format(snip=title_snip)}\n\n"
+        f"{v['problem']}\n\n"
+        f"{v['proof']}\n\n"
+        f"{v['question']}"
     )
 
     return subject, body
@@ -483,6 +527,12 @@ def send_wave4(leads, contacted):
         body_triggers = check_spam_triggers(body)
         if body_triggers:
             print(f"  BODY SPAM TRIGGERS {body_triggers} — skipping")
+            continue
+
+        # Step 6: no images, ≤2 links in body
+        body_ok, body_reason = validate_body_structure(body)
+        if not body_ok:
+            print(f"  BODY STRUCTURE FAIL [{body_reason}] — skipping")
             continue
         try:
             result = am.send(
