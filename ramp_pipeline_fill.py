@@ -698,6 +698,10 @@ def main():
             email,
             '--trigger-context',
             f"Saw your public post: {c['trigger']}",
+            '--content-firewall-score',
+            str(rec.get('firewall_score', 100)),
+            '--source-url',
+            c.get('url', ''),
         ]
         # Inject AGENTMAIL_API_KEY into subprocess env — cron doesn't have it
         sub_env = {**os.environ, 'AGENTMAIL_API_KEY': api_key}

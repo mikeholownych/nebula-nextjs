@@ -20,6 +20,13 @@ BASE = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE))
 import lead_manager
 
+# Content Firewall — synthetic content filter
+try:
+    from growth_system.content_firewall import filter_lead
+    HAS_FIREWALL = True
+except ImportError:
+    HAS_FIREWALL = False
+
 DRY_RUN = "--dry-run" in sys.argv
 SMOKE = "--smoke" in sys.argv
 
@@ -200,6 +207,14 @@ def monitor():
         post_url = r.get("postUrl", "") or ""
 
         if not has_buying_trigger(f"{title} {body}"):
+            continue
+
+        # Content Firewall — skip synthetic/vendor-camouflage content
+        fw_result = filter_lead(f"{title} {body}", url=post_url, min_score=40) if HAS_FIREWALL else {"passed": True, "score": 100, "verdict": "human"}
+        post_firewall_score = fw_result.get("score", 100)
+        post_firewall_verdict = fw_result.get("verdict", "human")
+        if not fw_result.get("passed", True):
+            print(f"  [FIREWALL-BLOCKED] score={post_firewall_score}/100 [{post_firewall_verdict}] — {title[:80]}")
             continue
 
         score = score_post(title, body, community, upvotes, comments)

@@ -1043,6 +1043,8 @@ def main():
     parser.add_argument("--lead-id", help="Growth handoff lead id for attribution")
     parser.add_argument("--trigger-type", help="Growth trigger type for attribution")
     parser.add_argument("--contact-route", help="Verified contact route used for attribution")
+    parser.add_argument("--content-firewall-score", type=int, default=None, help="Content Firewall quality score (0-100)")
+    parser.add_argument("--icp-score", type=int, default=None, help="ICP scoring matrix score (0-100)")
     args = parser.parse_args()
 
     contacted = load_contacted()
@@ -1066,6 +1068,8 @@ def main():
         "trigger_type": args.trigger_type,
         "trigger_context": args.trigger_context,
         "contact_route": args.contact_route,
+        "content_firewall_score": args.content_firewall_score,
+        "icp_score": args.icp_score,
         "offer_variant": "audit_first_97_checkout" if args.source_url or args.lead_id else None,
     }
     attribution = {k: v for k, v in attribution.items() if v not in (None, "")}
