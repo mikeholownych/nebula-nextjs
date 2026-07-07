@@ -255,6 +255,36 @@
     @media(prefers-reduced-motion:no-preference) {
       header { will-change:transform; }
     }
+
+    /* ── MOBILE FIXES (Prompt 9 pass) ──────────────────── */
+    @media (max-width: 480px) {
+      /* Nav: tighter on small screens */
+      nav { gap:8px; font-size:12px; }
+      nav a:not([href*="ops@"]) { display:inline-block; padding:2px 0; }
+
+      /* Sticky bar: stack on mobile */
+      #sticky-bar { flex-direction:column; gap:8px; padding:12px 16px; text-align:center; }
+      #sticky-bar .sbar-dismiss { position:absolute; top:8px; right:12px; }
+
+      /* Slide nudge: full width bottom sheet on mobile */
+      #slide-nudge { left:12px; right:12px; bottom:90px; max-width:none; transform:translateY(140px); }
+      #slide-nudge.show { transform:translateY(0); }
+
+      /* Numbers band: 2-col grid on mobile */
+      .numbers-inner { flex-wrap:wrap; }
+      .stat-item { flex:0 0 50%; min-width:0; box-sizing:border-box; }
+      .stat-divider { display:none; }
+
+      /* H1 — already clamp(34px,5.5vw,64px), fine */
+
+      /* Pricing grid: single col */
+      #pricing .grid { grid-template-columns:1fr !important; }
+
+      /* Persona/how-it-works: already handled */
+
+      /* Hero subtext font */
+      header p { font-size:15px; }
+    }
   </style>
 </head>
 <body>
