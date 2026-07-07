@@ -201,27 +201,33 @@ Free audit link if you want to re-check: https://nebulacomponents.shop/audit.htm
 
 — Nebula"""),
 
-    (6, "day6_cold_urgency",
-     "last few slots this week",
+    # Illingworth SOP Step 4: content/reminder — not a pitch.
+    # Rule: "Step 4 = Content link or reminder" (urgency pitches kill deliverability at step 4)
+    (6, "day6_cold_content",
+     "re: {domain} — one thing worth knowing",
      """Hi,
 
-Running a few implementations this week — {issue1} fixes on landing pages for paid traffic.
+Whether you move forward or not — this is worth knowing.
 
-If {domain} is one you'd like done, this is the window. $97, 24h turnaround, full refund if no measurable lift.
+Most paid-traffic pages convert at 1–2%. The ones that hit 4–5% without touching the ads do one thing differently: they match the message on the page to the specific intent of the ad.
 
-Self-serve checkout: {stripe}
+The {issue1} issue on {domain} is exactly that gap.
+
+Free audit if you want to verify: https://nebulacomponents.shop/audit.html?url=https://{domain}
 
 — Nebula"""),
 
+    # Illingworth break-up template: close the loop + referral ask
+    # "Or is there anyone else in {{companyName}} to reach out to?"
     (8, "day8_cold_breakup",
      "should I close your file?",
      """Hi,
 
-Haven't heard back, so I'll assume the timing isn't right for {domain}.
+Don't want to keep pinging — happy to close the loop if now's not the right time for {domain}.
 
-I'll stop following up — no hard feelings. If things change (new campaign, different traffic source, or the conversion numbers shift), feel free to reach out. The audit data will still be here.
+But if you're curious, just reply.
 
-Good luck with {domain}.
+Or is there anyone else at {domain} who handles this kind of thing?
 
 — Nebula"""),
 ]

@@ -15,6 +15,7 @@ Usage:
 """
 
 import json
+import os
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -225,11 +226,178 @@ def load_hook_bank(path: str = "/home/mike/nebula/hook_bank.jsonl") -> list:
     return entries
 
 
-def save_hook_entry(entry: dict, path: str = "/home/mike/nebula/hook_bank.jsonl"):
-    """Append a hook bank entry to disk."""
+def save_hook_entry(entry: dict, path: str = "/home/mike/nebula/hook_bank.jsonl") -> None:
+    """Append a hook bank entry to the JSONL file."""
     with open(path, "a") as f:
         f.write(json.dumps(entry) + "\n")
-    print(f"  ✅ Hook entry saved: week={entry['week']}, pattern={entry['tension_pattern']}")
+
+
+# ══════════════════════════════════════════════════════════════════
+# A/B Variation Registry
+# Source: Illingworth SOPs — "A/B test 2 variations for every step"
+#   Track: subject line, CTA phrasing, tone (casual vs structured)
+#   Log per step, per week, with opens/replies/positives/booked
+# ══════════════════════════════════════════════════════════════════
+
+AB_REGISTRY_PATH = "/home/mike/nebula/ab_registry.jsonl"
+
+
+def log_ab_send(
+    campaign: str,
+    step: int,
+    variation: str,            # e.g. "A", "B", or label like "casual"
+    subject: str,
+    cta: str,
+    tone: str,                 # "casual" | "structured"
+    email: str,
+    week: int | None = None,
+    path: str = AB_REGISTRY_PATH,
+) -> dict:
+    """
+    Log one email send to the A/B registry.
+    Call this at send time for every outbound email.
+
+    Returns the entry dict for chaining.
+    """
+    entry = {
+        "ts": datetime.now(timezone.utc).isoformat(),
+        "week": week or _iso_week(),
+        "campaign": campaign,
+        "step": step,
+        "variation": variation,
+        "subject": subject,
+        "cta": cta,
+        "tone": tone,
+        "email": email,
+        # outcomes filled in later via log_ab_outcome()
+        "opened": False,
+        "replied": False,
+        "positive": False,
+        "booked": False,
+    }
+    with open(path, "a") as f:
+        f.write(json.dumps(entry) + "\n")
+    return entry
+
+
+def log_ab_outcome(
+    email: str,
+    campaign: str,
+    step: int,
+    outcome: str,              # "opened" | "replied" | "positive" | "booked"
+    path: str = AB_REGISTRY_PATH,
+) -> int:
+    """
+    Mark an outcome for a previously logged send.
+    Rewrites matching lines in the JSONL.
+    Returns count of entries updated.
+    """
+    if not os.path.exists(path):
+        return 0
+    updated = 0
+    lines = []
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            entry = json.loads(line)
+            if entry.get("email") == email and entry.get("campaign") == campaign and entry.get("step") == step:
+                entry[outcome] = True
+                updated += 1
+            lines.append(json.dumps(entry))
+    with open(path, "w") as f:
+        f.write("\n".join(lines) + "\n")
+    return updated
+
+
+def _iso_week() -> int:
+    import datetime
+    return datetime.date.today().isocalendar()[1]
+
+
+def weekly_performance_sheet(
+    week: int | None = None,
+    path: str = AB_REGISTRY_PATH,
+) -> list[dict]:
+    """
+    Return per-step × per-variation performance rows for a given ISO week.
+    If week is None, returns all weeks.
+
+    Row schema:
+        campaign, step, variation, tone, sent, opens, open_rate,
+        replies, reply_rate, positives, booked, top_subject
+    """
+    if not os.path.exists(path):
+        return []
+
+    from collections import defaultdict
+
+    buckets: dict = defaultdict(lambda: {
+        "sent": 0, "opens": 0, "replies": 0, "positives": 0, "booked": 0,
+        "subjects": []
+    })
+
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            e = json.loads(line)
+            if week is not None and e.get("week") != week:
+                continue
+            key = (e.get("campaign", ""), e.get("step", 0), e.get("variation", "A"), e.get("tone", ""))
+            b = buckets[key]
+            b["sent"] += 1
+            if e.get("opened"):  b["opens"] += 1
+            if e.get("replied"): b["replies"] += 1
+            if e.get("positive"): b["positives"] += 1
+            if e.get("booked"):  b["booked"] += 1
+            subj = e.get("subject", "")
+            if subj and subj not in b["subjects"]:
+                b["subjects"].append(subj)
+
+    rows = []
+    for (campaign, step, variation, tone), b in sorted(buckets.items()):
+        sent = b["sent"]
+        rows.append({
+            "campaign":   campaign,
+            "step":       step,
+            "variation":  variation,
+            "tone":       tone,
+            "sent":       sent,
+            "opens":      b["opens"],
+            "open_rate":  round(b["opens"] / sent * 100, 1) if sent else 0.0,
+            "replies":    b["replies"],
+            "reply_rate": round(b["replies"] / sent * 100, 1) if sent else 0.0,
+            "positives":  b["positives"],
+            "booked":     b["booked"],
+            "top_subject": b["subjects"][0] if b["subjects"] else "",
+        })
+    return rows
+
+
+def print_weekly_sheet(week: int | None = None, path: str = AB_REGISTRY_PATH) -> None:
+    """Print the weekly A/B performance table to stdout."""
+    rows = weekly_performance_sheet(week=week, path=path)
+    if not rows:
+        label = f"week {week}" if week else "all weeks"
+        print(f"No A/B data for {label}.")
+        return
+
+    label = f"Week {week}" if week else "All Weeks"
+    header = f"{'Campaign':<14} {'Step':>4} {'Var':>4} {'Tone':<12} {'Sent':>5} {'Opens':>6} {'OR%':>5} {'Replies':>8} {'RR%':>5} {'Pos':>4} {'Booked':>7}  Subject"
+    print(f"\n=== A/B Performance — {label} ===")
+    print(header)
+    print("─" * len(header))
+    for r in rows:
+        print(
+            f"{r['campaign']:<14} {r['step']:>4} {r['variation']:>4} {r['tone']:<12} "
+            f"{r['sent']:>5} {r['opens']:>6} {r['open_rate']:>5} {r['replies']:>8} "
+            f"{r['reply_rate']:>5} {r['positives']:>4} {r['booked']:>7}  {r['top_subject'][:45]}"
+        )
+
+
 
 
 # ── CLI ──────────────────────────────────────────────────────────
@@ -237,7 +405,6 @@ if __name__ == "__main__":
     import sys
 
     if "--bank" in sys.argv:
-        # Show hook bank
         bank = load_hook_bank()
         print(f"\nHook Bank: {len(bank)} entries")
         for e in bank[-10:]:
@@ -245,6 +412,23 @@ if __name__ == "__main__":
             print(f"  W{e['week']:02d} {tested} [{e['tension_pattern']}] {e['chosen_line'][:60]}")
         total = sum(e.get("lines_written", 0) for e in bank)
         print(f"\n  Total lines logged: {total} (target: 130+ by week 14)")
+        sys.exit(0)
+
+    if "--ab" in sys.argv:
+        # Smoke test: log 4 synthetic sends, mark outcomes, print sheet
+        import tempfile, os
+        tmp = tempfile.mktemp(suffix=".jsonl")
+        log_ab_send("cold", 1, "A", "Your ads are leaking", "Want me to check?", "casual",  "a@x.com", week=1, path=tmp)
+        log_ab_send("cold", 1, "B", "Found something on {domain}", "Worth a look?",    "structured", "b@x.com", week=1, path=tmp)
+        log_ab_send("cold", 1, "A", "Your ads are leaking", "Want me to check?", "casual",  "c@x.com", week=1, path=tmp)
+        log_ab_send("cold", 2, "A", "re: the fix for {issue1}", "Should I send it?",   "casual",  "d@x.com", week=1, path=tmp)
+        log_ab_outcome("a@x.com", "cold", 1, "opened", path=tmp)
+        log_ab_outcome("a@x.com", "cold", 1, "replied", path=tmp)
+        log_ab_outcome("a@x.com", "cold", 1, "positive", path=tmp)
+        log_ab_outcome("c@x.com", "cold", 1, "opened", path=tmp)
+        log_ab_outcome("b@x.com", "cold", 1, "opened", path=tmp)
+        print_weekly_sheet(week=1, path=tmp)
+        os.unlink(tmp)
         sys.exit(0)
 
     # Demo diagnosis

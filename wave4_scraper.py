@@ -522,7 +522,7 @@ def build_email(lead):
     try:
         from email_linter import gate
         first_name = lead.get("first_name", lead.get("author", ""))
-        lint = gate(subject, body, first_name=first_name)
+        lint = gate(subject, body, first_name=first_name, lead=lead)
         if not lint.passed:
             print(f"  [LINT FAIL] {lead.get('email','?')}")
             for e in lint.errors:

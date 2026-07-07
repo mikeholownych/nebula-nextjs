@@ -3,14 +3,15 @@
 email_linter.py — Pre-send email quality gate.
 
 Source: Illingworth "The Cold Email Formula My Best Clients Use Without Realizing"
-  237-campaign analysis → 5 structural rules enforced at send time.
+        Illingworth "ALL Cold Email SOPs to scale to $100k/mo"
 
 Rules (all MUST pass for email to send):
   1. Word count: 60–180 words (first-touch sweet spot ~74; structured max 180)
   2. Specific number: ≥1 digit sequence in body (3 issues, 26%, $97, 12h…)
-  3. CTA = direct question ending in "?" — no calendar/book-a-call links
+  3. CTA = direct question (? anywhere in body); no calendar/book-a-call links
   4. Subject line: 3–9 words (5–7 ideal), no fake urgency phrases
   5. Personalization: {{firstName}} OR a known first_name token in subject or opening line
+  6. Token validation: every {placeholder} in subject + body has a matching non-empty value in lead data
 
 Severity levels:
   ERROR   — blocks send
@@ -167,14 +168,58 @@ def lint_email(subject: str, body: str, first_name: str = "") -> LintResult:
     return r
 
 
+# ── Rule 6: Token validator (merge field pre-send QA) ─────────────
+# Source: Illingworth SOPs — "Are all personalisation tokens working?"
+
+_TOKEN_RE = re.compile(r"\{(\w+)\}")  # matches {domain}, {issue1}, etc. (single-brace .format style)
+_DBLTOKEN_RE = re.compile(r"\{\{(\w+)\}\}")  # matches {{firstName}} (double-brace template style)
+
+
+def validate_tokens(subject: str, body: str, lead: dict) -> LintResult:
+    """
+    Check every {placeholder} in subject + body has a non-empty value in `lead`.
+    Double-brace {{tokens}} are template placeholders (not yet substituted) — warn only.
+    Single-brace {tokens} should already be filled — error if missing/empty.
+    """
+    r = LintResult()
+    combined = subject + "\n" + body
+
+    # Single-brace: should be substituted by now
+    for token in sorted(set(_TOKEN_RE.findall(combined))):
+        val = lead.get(token)
+        if val is None:
+            r.fail(f"Missing token '{{{token}}}' — not in lead data. Add to lead dict before send.")
+        elif str(val).strip() == "":
+            r.fail(f"Empty token '{{{token}}}' — value is blank. Lead data incomplete.")
+
+    # Double-brace: template tokens — warn if still present (means substitution didn't run)
+    for token in sorted(set(_DBLTOKEN_RE.findall(combined))):
+        r.warn(f"Unsubstituted template token '{{{{{token}}}}}' still in email — run string substitution before send.")
+
+    return r
+
+
 # ── Convenience gate (used in build_email) ────────────────────────
 
-def gate(subject: str, body: str, first_name: str = "", raise_on_error: bool = False) -> LintResult:
+def gate(subject: str, body: str, first_name: str = "", lead: dict | None = None, raise_on_error: bool = False) -> LintResult:
     """
-    Run lint_email and optionally raise ValueError on hard failures.
-    Use raise_on_error=True in send path to block bad emails.
+    Run lint_email (rules 1–5) + optional token validation (rule 6).
+    Use raise_on_error=True in send path to hard-block bad emails.
+
+    Args:
+        subject       : email subject line
+        body          : email body (pre opt-out footer)
+        first_name    : lead first name for rule 5 check
+        lead          : full lead dict — enables token validation (rule 6)
+        raise_on_error: if True, raises ValueError on any ERROR-level failure
     """
     result = lint_email(subject, body, first_name)
+    if lead is not None:
+        token_result = validate_tokens(subject, body, lead)
+        result.errors.extend(token_result.errors)
+        result.warnings.extend(token_result.warnings)
+        if token_result.errors:
+            result.passed = False
     if not result.passed and raise_on_error:
         raise ValueError(f"Email failed lint:\n{result.summary()}")
     return result
