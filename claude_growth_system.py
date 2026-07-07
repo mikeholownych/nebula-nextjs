@@ -277,29 +277,61 @@ def load_strategy(base: Path = DEFAULT_BASE) -> dict:
 
 
 def build_content_calendar(days: int = 30) -> list[dict]:
-    """Map 30 days of content before writing any single post."""
-    jobs = ["Educational", "Testimonial", "Personal story"]
+    """Map 30 days of content before writing any single post.
+    
+    Includes AI-citation-optimized formats based on Meltwater 9.5M citation study:
+    - Listicles (54% of most cited content)
+    - Comparisons (high citation rate for B2B queries)
+    - Decision frameworks (AI extracts structured comparison data)
+    """
+    jobs = ["Educational", "Testimonial", "Personal story", "Listicle", "Comparison"]
     calendar = []
     hooks = {
         "Educational": "Your ads are not broken by default. Your landing page is leaking the money.",
         "Testimonial": "A founder with clicks and no conversions needs a leak map, not more opinions.",
         "Personal story": "I am building Nebula as an autonomous revenue machine in public.",
+        "Listicle": "5 landing page audit tools compared: self-serve speed vs sales-led depth.",
+        "Comparison": "Nebula vs Zamp vs Oxygen: which landing page audit tool actually finds the leak?",
     }
     ctas = {
         "Educational": "Paste the URL. Get the free teardown.",
         "Testimonial": "Use the $97 fix pack when the leak is obvious.",
         "Personal story": "Follow the build: agents, offers, revenue proof.",
+        "Listicle": "Full comparison published: 5 tools, 5 dimensions, 1 winner.",
+        "Comparison": "See how they stack up on speed, depth, price, and AI readiness.",
+    }
+    angles = {
+        "Educational": "Ad-burn conversion leak",
+        "Testimonial": "Real founder with real ad spend, zero conversions",
+        "Personal story": "Building Nebula in public",
+        "Listicle": "Tool comparison series",
+        "Comparison": "Self-serve vs sales-led audit",
     }
     for idx in range(days):
         job = jobs[idx % len(jobs)]
+        angle_num = (idx // len(jobs)) + 1
         calendar.append({
             "day": idx + 1,
             "job": job,
             "hook": hooks[job],
-            "angle": f"Ad-burn conversion leak #{(idx % 10) + 1}",
+            "angle": f"{angles[job]} #{angle_num}",
             "cta": ctas[job],
+            "format": _citation_format_for_job(job),
+            "freshness_signal": "As of July 2026",
         })
     return calendar
+
+
+def _citation_format_for_job(job: str) -> str:
+    """Return the AI-optimized content format for each job type."""
+    formats = {
+        "Educational": "how_to_guide",
+        "Testimonial": "case_study",
+        "Personal story": "build_in_public",
+        "Listicle": "listicle",
+        "Comparison": "comparison_matrix",
+    }
+    return formats.get(job, "article")
 
 
 def _load_json_records(source: Path) -> list[dict]:

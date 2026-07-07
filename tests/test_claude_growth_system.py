@@ -47,8 +47,13 @@ class ClaudeGrowthSystemTests(unittest.TestCase):
         calendar = build_content_calendar()
         self.assertEqual(len(calendar), 30)
         jobs = {item["job"] for item in calendar}
-        self.assertEqual(jobs, {"Educational", "Testimonial", "Personal story"})
+        self.assertEqual(jobs, {"Educational", "Testimonial", "Personal story", "Listicle", "Comparison"})
         self.assertTrue(all("hook" in item and "cta" in item for item in calendar))
+        self.assertTrue(all("format" in item for item in calendar))
+        self.assertTrue(all("freshness_signal" in item for item in calendar))
+        # Verify listicle and comparison formats are AI-optimized
+        listicle_formats = {item["format"] for item in calendar if item["job"] == "Listicle"}
+        self.assertEqual(listicle_formats, {"listicle"})
 
     def test_normalizes_apify_linkedin_engager_actor_output(self):
         raw = {

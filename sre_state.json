@@ -1,17 +1,10 @@
 {
   "failures": {
-    "Pipeline ramp recent run": 0,
-    "Stuck leads detected": 1
+    "Pipeline ramp recent run": 6,
+    "Stuck leads detected": 7
   },
-  "last_run": "2026-07-07T10:30:47.415810+00:00",
-  "last_actions": [
-    {
-      "ts": "2026-07-07T10:32:18.302678+00:00",
-      "action": "manual_ramp_triggered",
-      "result": "0 new leads \u2014 scrapers returning 403 (quota exhausted)",
-      "triggered_by": "sre_responder manual remediation"
-    }
-  ],
+  "last_run": "2026-07-07T12:00:10.111297+00:00",
+  "last_actions": [],
   "hard_bounce_ack": {
     "acked_at": "2026-07-06T11:31:00Z",
     "addresses": [

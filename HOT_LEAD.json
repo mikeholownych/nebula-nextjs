@@ -354,9 +354,9 @@
     "score": 8.0,
     "audit_score": 8.0,
     "audit_grade": "A",
-    "stage": "audit_delivered",
-    "status": "pending",
-    "action": "send_97_pitch",
+    "stage": "pitch_sent",
+    "status": "pitched",
+    "action": "monitor_payment_or_reply",
     "thread_id": null,
     "trigger_context": "Web developer launched Curb Caddie, spent $1,000 on Google Ads over two weeks, said they are \u201cburning money,\u201d and got only one non-paying form fill after testing checkout and multi-step forms.",
     "source_url": "https://www.reddit.com/r/PPC/comments/1ju0tsg/help_my_landing_page_1000_in_ads_no_conversions/",
@@ -364,7 +364,8 @@
     "trigger_type": "google_ads_dollar_bleed_low_conversion",
     "contact_route": "website_manual_contact:contact@curbcaddie.com",
     "audit_delivered_at": "2026-07-05T08:14:36Z",
-    "pitch_due_at": "2026-07-07T08:16:17Z"
+    "pitch_due_at": "2026-07-07T08:16:17Z",
+    "pitch_sent_at": "2026-07-07T12:00:33.418917+00:00"
   },
   {
     "email": "hello@hacktron.ai",
