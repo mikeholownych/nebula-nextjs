@@ -36,7 +36,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:59.317024Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -82,7 +84,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:59.410889Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -128,7 +132,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:59.501740Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -174,7 +180,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:59.607227Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -220,7 +228,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:59.691887Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -266,7 +276,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:59.821874Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -401,7 +413,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:59.923880Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -447,7 +461,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:00.018858Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -493,7 +509,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:00.116186Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -539,7 +557,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:00.220341Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -614,7 +634,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:00.308932Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -689,7 +711,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:00.410528Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -735,7 +759,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:00.506910Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -781,7 +807,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:00.609120Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -858,7 +886,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:00.711616Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -904,7 +934,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:00.812571Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -950,7 +982,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:00.911308Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -996,7 +1030,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:01.001545Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -1042,7 +1078,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:01.101437Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -1146,7 +1184,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:01.200861Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -1221,7 +1261,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:01.304401Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -1267,7 +1309,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:01.403809Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -1342,7 +1386,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:01.525356Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -1388,7 +1434,9 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:01.639601Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
@@ -1434,12 +1482,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:01.737615Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:54.090730Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -1509,12 +1561,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:01.837762Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:54.187985Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -1553,12 +1609,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:01.932353Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:54.288351Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -1597,12 +1657,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:02.039008Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:54.378245Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -1641,12 +1705,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:02.134692Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:54.468596Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -1685,12 +1753,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:02.228310Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:54.579241Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -1758,12 +1830,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:02.351362Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:54.688257Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -1802,12 +1878,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:02.450639Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:54.780086Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -1875,12 +1955,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:02.540930Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:54.867017Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -1919,12 +2003,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:02.657679Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:54.963129Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -1963,12 +2051,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:02.754171Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:55.052972Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -2007,12 +2099,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:02.864165Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:55.159252Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -2080,12 +2176,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:02.954048Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:55.259593Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -2124,12 +2224,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:03.073663Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:55.351360Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -2255,12 +2359,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:03.161468Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:55.442475Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -2328,12 +2436,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:03.248832Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:55.532532Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -2372,12 +2484,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:03.340113Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:55.630742Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -2416,12 +2532,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:03.794935Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:55.722660Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -2460,12 +2580,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:03.887959Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:55.814779Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -2533,12 +2657,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:03.976028Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:55.911316Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -2606,12 +2734,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:04.083478Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:56.010572Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -2650,12 +2782,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:04.190935Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:56.100123Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -2694,12 +2830,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:04.285283Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:56.186228Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -2738,12 +2878,16 @@
       "objection_handling": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:17:04.386790Z",
-        "sent_steps": []
+        "sent_steps": [
+          "objection_price"
+        ]
       },
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:56.278870Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -2787,7 +2931,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:56.369320Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -2831,7 +2977,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:56.467688Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -2875,7 +3023,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:56.585114Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3040,7 +3190,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:56.678577Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3084,7 +3236,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:56.814340Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3128,7 +3282,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:56.920287Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3172,7 +3328,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:57.057829Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3232,6 +3390,14 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "notion-4013321777527623636@import.nebula": {
+    "created_at": "2026-07-07T01:39:50.311589Z",
+    "email": "notion-4013321777527623636@import.nebula",
+    "notion_db_id": "abc123",
+    "source": "notion",
+    "stage": "audit_triggered",
+    "url": "https://example.com/page"
+  },
   "quietpulse.social@gmail.com": {
     "content_posts": [],
     "current_stage": "lead_warm",
@@ -3245,7 +3411,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:57.168253Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3289,7 +3457,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:57.255909Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3333,7 +3503,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:57.375236Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3377,7 +3549,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:57.468983Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3421,7 +3595,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:57.559524Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3494,7 +3670,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:57.650919Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3538,7 +3716,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:57.755713Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3582,7 +3762,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:57.869295Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3626,7 +3808,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:57.961105Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3670,7 +3854,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:58.049536Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3714,7 +3900,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:58.146506Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3787,7 +3975,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:58.298221Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3831,7 +4021,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:58.393147Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3875,7 +4067,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:58.533133Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3919,7 +4113,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:58.670797Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -3963,7 +4159,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:58.760549Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -4065,7 +4263,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:58.857706Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -4109,7 +4309,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:58.948850Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -4153,7 +4355,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:59.040410Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -4197,7 +4401,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:59.129762Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -4241,7 +4447,9 @@
       "offer_sequence": {
         "completed": false,
         "enrolled_at": "2026-07-07T01:16:59.216841Z",
-        "sent_steps": []
+        "sent_steps": [
+          "offer_intro"
+        ]
       },
       "post_audit": {
         "completed": true,
@@ -4271,13 +4479,5 @@
     "tags": [],
     "total_spent_cents": 0,
     "url": ""
-  },
-  "notion-4013321777527623636@import.nebula": {
-    "email": "notion-4013321777527623636@import.nebula",
-    "url": "https://example.com/page",
-    "stage": "audit_triggered",
-    "source": "notion",
-    "notion_db_id": "abc123",
-    "created_at": "2026-07-07T01:39:50.311589Z"
   }
 }

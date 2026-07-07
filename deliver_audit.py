@@ -154,7 +154,29 @@ def score_audit(page):
 
     headline_score = 8 if 12 <= len(h1) <= 90 else (5 if h1 else 2)
     cta_score = 8 if any(any(word in cta.lower() for word in ["get", "start", "run", "buy", "book", "try"]) for cta in ctas) else (5 if ctas else 2)
-    proof_score = 8 if any(word in lower for word in ["testimonial", "review", "customer", "trusted", "case study", "proof"]) else 3
+    # Say vs. show: claims trust words but has no concrete proof element?
+    trust_words = ["testimonial", "review", "customer", "trusted", "case study", "proof", "guarantee", "results"]
+    trust_claimed = [w for w in trust_words if w in lower]
+    # Concrete proof = named source, star rating, quote attr, or review count
+    _trust_re = (
+        r'(\d+\s*(stars?|reviews?|customers?|clients?|companies|users?))'
+        r'|(trustpilot|g2\.com|capterra|clutch|google reviews)'
+        r'|(\u201c|\u2018|said|says|—\s*[A-Z])'
+    )
+    trust_shown = bool(re.search(_trust_re, lower, re.IGNORECASE))
+    if trust_claimed and trust_shown:
+        proof_score = 8
+        proof_issue = f"Trust signals present and evidenced ({len(trust_claimed)} trust terms + concrete proof markers)."
+    elif trust_claimed and not trust_shown:
+        # SAY VS. SHOW CONTRADICTION — this is the finding
+        proof_score = 4
+        proof_issue = (
+            f"Page claims trust ({'/ '.join(trust_claimed[:3])}) but shows no concrete evidence: "
+            f"no named testimonials, no star ratings, no review counts. Visitors read this as a claim, not proof."
+        )
+    else:
+        proof_score = 3
+        proof_issue = "No trust signals found — no testimonials, reviews, or social proof anywhere on the page."
     speed_score = 8 if len(html_text) < 120000 else 5
     mobile_score = 8 if "viewport" in lower else 4
 
@@ -207,6 +229,9 @@ def score_audit(page):
     ga4 = bool(re.search(r'gtag\(|["\']G-[A-Z0-9]+["\']', html_text))
     utm_links = bool(re.search(r'\?utm_', html_text))
     thankyou = bool(re.search(r'thank[-_]you|/success', html_text, re.IGNORECASE))
+    # Process archaeology: detect checkout present but no confirmation loop
+    has_checkout = bool(re.search(r'stripe|checkout|buy now|add to cart|place order', lower))
+    broken_funnel = has_checkout and not thankyou  # residue contradiction = finding
     signals_found = sum([fb_pixel, ga4, utm_links, thankyou])
     ad_signals_score = min(2 + 2 * signals_found, 10)
     found_list = [name for flag, name in [
@@ -217,6 +242,8 @@ def score_audit(page):
     ] if not flag]
     if found_list and missing_list:
         ad_signals_issue = f"Found: {', '.join(found_list)}. Missing: {', '.join(missing_list)}."
+        if broken_funnel:
+            ad_signals_issue += " Checkout detected but no thank-you/success page — every paid conversion fires with no confirmation signal (broken attribution loop)."
     elif found_list:
         ad_signals_issue = f"All key signals present: {', '.join(found_list)}."
     else:
@@ -239,26 +266,26 @@ def score_audit(page):
 
     # Title tag
     if not title_tag:
-        seo_issues.append("Missing <title> tag")
+        seo_issues.append("No <title> tag found in <head> — SERP will auto-generate one, usually wrong")
         seo_score -= 2
     elif len(title_tag) < 15:
-        seo_issues.append(f"Title tag too short ({len(title_tag)} chars)")
+        seo_issues.append(f"<title> tag is only {len(title_tag)} chars — too short to signal topic relevance")
         seo_score -= 1
     elif len(title_tag) > 70:
-        seo_issues.append(f"Title tag may truncate in SERP ({len(title_tag)} chars)")
+        seo_issues.append(f"<title> tag is {len(title_tag)} chars — SERP truncates at 60. Currently reads: \"{title_tag[:60]}…\"")
         seo_score -= 1
     else:
         seo_score += 1  # good length
 
     # Meta description
     if not meta_desc:
-        seo_issues.append("Missing meta description")
+        seo_issues.append("No meta[name=description] found — Google writes its own, usually pulled from body text mid-paragraph")
         seo_score -= 1
     elif len(meta_desc) < 80:
-        seo_issues.append(f"Meta description too short ({len(meta_desc)} chars)")
+        seo_issues.append(f"meta[name=description] is {len(meta_desc)} chars — below the 120-char minimum that fills a full SERP snippet")
         seo_score -= 1
     elif len(meta_desc) > 170:
-        seo_issues.append(f"Meta description may truncate in SERP ({len(meta_desc)} chars)")
+        seo_issues.append(f"meta[name=description] is {len(meta_desc)} chars — SERP shows ~155. Truncates at: \"{meta_desc[:155]}…\"")
         seo_score -= 0.5
     else:
         seo_score += 1  # good length
@@ -323,7 +350,7 @@ def score_audit(page):
         "social_proof": {
             "score": proof_score,
             "weight": "high",
-            "issue": "Trust proof is visible." if proof_score >= 7 else "Trust proof appears weak or missing before the conversion ask.",
+            "issue": proof_issue,
             "fix": "Add proof near the first CTA: sample output, customer quote, metric, guarantee, or process evidence."
         },
         "speed": {
