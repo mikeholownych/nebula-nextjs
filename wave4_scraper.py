@@ -521,7 +521,7 @@ def build_email(lead):
     # ── Illingworth formula gate ───────────────────────────────────
     try:
         from email_linter import gate
-        first_name = lead.get("first_name", lead.get("author", ""))
+        first_name = lead.get("first_name") or lead.get("author") or "there"
         lint = gate(subject, body, first_name=first_name, lead=lead)
         if not lint.passed:
             print(f"  [LINT FAIL] {lead.get('email','?')}")
@@ -539,11 +539,56 @@ def send_wave4(leads, contacted):
     from agentmail_client import AgentMailClient
     am = AgentMailClient()
 
+    # ── G7: domain rotation registry ─────────────────────────────────
+    try:
+        from domain_registry import DomainRegistry
+        _dreg = DomainRegistry()
+    except Exception:
+        _dreg = None
+
+    # ── G9: warmup score check ────────────────────────────────────────
+    _warmup_ok = True
+    try:
+        from warmup import load_state as _ws_load
+        _ws = _ws_load()
+        _warmup_day = _ws.get("day", 1)
+        _warmup_total = _ws.get("total_sends", 0)
+        # Require at least 3 days of warmup (≥15 total sends) before live outreach
+        WARMUP_MIN_DAYS  = 3
+        WARMUP_MIN_SENDS = 15
+        if _warmup_day < WARMUP_MIN_DAYS or _warmup_total < WARMUP_MIN_SENDS:
+            print(f"  [G9 WARMUP BLOCK] day={_warmup_day} total_sends={_warmup_total} "
+                  f"— need ≥{WARMUP_MIN_DAYS}d / {WARMUP_MIN_SENDS} sends before outreach")
+            _warmup_ok = False
+    except Exception as _we:
+        pass  # warmup module unavailable — don't block
+
+    if not _warmup_ok:
+        return 0
+
+    # ── G11: track sends + bounces for spike detection ───────────────
+    _batch_sent    = 0
+    _batch_bounced = 0
+
     sent = 0
     for lead in leads:
         if sent >= MAX_SENDS:
             print(f"  Daily cap ({MAX_SENDS}) reached — stopping")
             break
+
+        # ── G11: mid-batch bounce spike check ────────────────────────
+        if _batch_sent >= 5:  # only check after ≥5 sends (avoid division by zero noise)
+            _bounce_rate = _batch_bounced / _batch_sent
+            if _bounce_rate > BOUNCE_THRESHOLD:
+                msg = (f"Bounce spike {_bounce_rate:.1%} > {BOUNCE_THRESHOLD:.1%} "
+                       f"({_batch_bounced}/{_batch_sent}) — pausing outreach")
+                print(f"  [G11 BOUNCE PAUSE] {msg}")
+                try:
+                    from domain_registry import DomainRegistry as _DR
+                    _DR().pause(am.inbox if hasattr(am, 'inbox') else "ops@launchcrate.io", reason=msg)
+                except Exception:
+                    pass
+                break
 
         email = lead.get('email')
         if not email:
@@ -557,6 +602,19 @@ def send_wave4(leads, contacted):
         if email in contacted:
             print(f"  DEDUP skip: {email}")
             continue
+
+        # ── G7: check domain registry capacity ───────────────────────
+        if _dreg:
+            inbox = _dreg.pick_inbox()
+            if not inbox:
+                print("  [G7] All inboxes exhausted for today — stopping")
+                break
+        else:
+            inbox = None
+
+        # ── G10: firstName fallback ───────────────────────────────────
+        if not lead.get("first_name"):
+            lead = {**lead, "first_name": lead.get("author", "") or "there"}
 
         subject, body = build_email(lead)
 
@@ -577,12 +635,26 @@ def send_wave4(leads, contacted):
         if not body_ok:
             print(f"  BODY STRUCTURE FAIL [{body_reason}] — skipping")
             continue
+
+        # ── G8: build HTML mirror of plain-text body ─────────────────
+        html_body = "<br>\n".join(
+            f"<p>{line}</p>" if line.strip() else ""
+            for line in body.splitlines()
+        )
+
         try:
             result = am.send(
                 to=[email],
                 subject=subject,
                 text=body,
+                html=html_body,   # G8: plain-text + HTML parity
             )
+            _batch_sent += 1
+            if isinstance(result, dict) and result.get("_error"):
+                _batch_bounced += 1
+                print(f"  ❌ AM ERROR → {email}: {result['_error']}")
+                continue
+
             thread_id = result.get('thread_id', '') if isinstance(result, dict) else ''
             ts = time.strftime('%Y-%m-%dT%H:%M:%SZ')
             contacted[email] = {
@@ -600,6 +672,30 @@ def send_wave4(leads, contacted):
             })
             print(f"  ✅ SENT → {email} | score={lead['score']} | {subject[:50]}")
             sent += 1
+
+            # ── G7: record send against domain ramp ──────────────────
+            if _dreg and inbox:
+                _dreg.record_send(inbox)
+
+            # ── G2: log A/B registry entry at send time ───────────────
+            try:
+                import hashlib as _hl
+                from copy_fatigue_detector import log_ab_send as _lab
+                _url_hash = int(_hl.md5(lead.get('url', email).encode()).hexdigest(), 16)
+                _var = chr(ord('A') + (_url_hash % 3))  # A / B / C variant
+                _cta_line = body.strip().splitlines()[-1] if body.strip() else ""
+                _lab(
+                    campaign="wave4",
+                    step=1,
+                    variation=_var,
+                    subject=subject,
+                    cta=_cta_line[:100],
+                    tone="casual",
+                    email=email,
+                )
+            except Exception:
+                pass  # never let logging kill a send
+
             delay = random.uniform(SEND_DELAY, SEND_DELAY_MAX)
             time.sleep(delay)
         except Exception as e:
@@ -609,6 +705,12 @@ def send_wave4(leads, contacted):
 
 def main():
     print("=== Wave 4 Lead Scraper ===")
+    # ── G3: enforce Tue-Thu 07-09 send window ────────────────────────
+    try:
+        from send_window import assert_send_window_or_exit
+        assert_send_window_or_exit(script_name="wave4_scraper")
+    except ImportError:
+        pass  # module missing — allow through, don't block sends
     contacted = load_contacted()
     print(f"Already contacted: {len(contacted)} leads")
 

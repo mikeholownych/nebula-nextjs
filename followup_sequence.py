@@ -581,6 +581,14 @@ def send_email(to, subject, body, dry_run):
                         print(f"  [BOUNCE LOG ERROR] {be}")
             return False
         print(f"  [SENT] {to}: {subject[:60]}")
+        # ── G2: A/B registry log ─────────────────────────────────────────
+        try:
+            from copy_fatigue_detector import log_ab_send as _lab
+            _cta = body.strip().splitlines()[-1][:100] if body.strip() else ""
+            _lab(campaign="followup", step=1, variation="A",
+                 subject=subject, cta=_cta, tone="casual", email=to)
+        except Exception:
+            pass
         return True
     except Exception as e:
         print(f"  [AM ERROR] {to}: {e}")
@@ -624,6 +632,12 @@ def domain(url):
 
 # ── Main ──────────────────────────────────────────────────────────
 def main():
+    # ── G3: enforce Tue-Thu 07-09 send window ────────────────────────
+    try:
+        from send_window import assert_send_window_or_exit
+        assert_send_window_or_exit(script_name="followup_sequence")
+    except ImportError:
+        pass
     now   = datetime.now(timezone.utc)
     paid  = load_paid_emails()
     replied = load_replied_emails()

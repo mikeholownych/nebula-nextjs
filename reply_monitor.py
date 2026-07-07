@@ -118,10 +118,123 @@ def main():
         if classification == "unsubscribe":
             mark_bounced(email, latest_body[:120] if latest_body else "unsubscribe signal")
 
-        # Cold replies get one chance — mark in replied state but don't bounce
-        # Warm replies get flagged; triage will handle escalation
+        # ── G1 + G4: Warm reply → advance stage + trigger audit delivery ──
+        elif classification == "warm":
+            handle_warm_reply(email, latest_body, thread_id, dry_run)
+
+        # ── G5: Referral mention → create new lead ───────────────────────
+        elif classification == "cold":
+            handle_referral_mention(email, latest_body, dry_run)
 
     print(f"\nDone. {len(new_threads)} new replies classified.")
+
+
+def handle_warm_reply(email: str, body: str, thread_id: str, dry_run: bool) -> None:
+    """
+    G1 + G4: Warm reply → advance LeadStore stage to 'warm', pause cold
+    sequence, run audit if URL known, send $97 pitch with Stripe link.
+    """
+    print(f"  [WARM] {email} — advancing stage + triggering audit/pitch")
+
+    # 1. Advance stage in LeadStore
+    try:
+        from lead_store import LeadStore
+        db = LeadStore()
+        lead = db.get_lead(email)
+        note = f"warm_reply: {body[:200]}"
+        if lead:
+            db.advance_stage(email, "warm", notes=note)
+        else:
+            db.upsert_lead(email=email, stage="warm", source="reply_monitor",
+                           notes=note)
+    except Exception as e:
+        print(f"  [WARM STAGE ERROR] {e}")
+        lead = None
+
+    if dry_run:
+        print(f"  [DRY-RUN] would deliver audit + $97 pitch to {email}")
+        return
+
+    # 2. Attempt audit + $97 pitch
+    try:
+        from followup_sequence import NEBULA, get_audit_data, send_email, DRY_RUN
+        from stripe_links import get_97_checkout_url
+
+        url = (lead or {}).get("url", "")
+        domain = url.replace("https://", "").replace("http://", "").split("/")[0] if url else ""
+
+        if url:
+            audit = get_audit_data(url)
+            score = float(audit.get("score") or 5)
+            grade = audit.get("grade", "C")
+            issue = audit.get("top_issue", "conversion gap")
+            fix   = audit.get("top_fix", "Add a clear CTA above the fold.")
+        else:
+            score, grade, issue, fix = 5.0, "C", "conversion gap", "Add a clear CTA above the fold."
+            domain = email.split("@")[-1] if "@" in email else ""
+
+        stripe_url = get_97_checkout_url(email=email, lead_url=url or f"https://{domain}",
+                                         audit_score=score, domain=domain)
+
+        subject = f"re: {domain} — here's what I found" if domain else "re: your site audit"
+        body_out = (
+            f"Hey — thanks for getting back.\n\n"
+            f"Ran the audit on {domain or 'your site'}. Score: {score}/10 ({grade}).\n\n"
+            f"Main issue: {issue}\n\n"
+            f"Fix: {fix}\n\n"
+            f"We implement it in 24h for $97. Full refund if it doesn't move your numbers.\n\n"
+            f"→ {stripe_url}\n\n"
+            f"—\nReply STOP to opt out."
+        )
+        ok = send_email(email, subject, body_out, DRY_RUN)
+        if ok:
+            try:
+                from lead_store import LeadStore as _LS
+                _LS().advance_stage(email, "pitch_sent",
+                                    notes=f"stripe_url: {stripe_url} | subject: {subject}")
+            except Exception:
+                pass
+            print(f"  [WARM PITCH SENT] {email}")
+        else:
+            print(f"  [WARM PITCH FAILED] {email}")
+    except Exception as e:
+        print(f"  [WARM PITCH ERROR] {email}: {e}")
+
+
+def handle_referral_mention(email: str, body: str, dry_run: bool) -> None:
+    """
+    G5: If a cold reply contains a name/email referral, extract and enqueue
+    as a new lead with source='referral' and parent_email set.
+    Looks for patterns like: 'talk to John / john@company.com / our head of marketing'.
+    """
+    import re
+    # Detect embedded email address in reply body
+    email_re = re.compile(r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}")
+    found = [m for m in email_re.findall(body) if m.lower() != email.lower()]
+    if not found:
+        return
+
+    for ref_email in found[:2]:  # cap at 2 per reply
+        print(f"  [REFERRAL] {email} mentioned {ref_email}")
+        if dry_run:
+            print(f"  [DRY-RUN] would enqueue referral lead {ref_email}")
+            continue
+        try:
+            from lead_store import LeadStore
+            db = LeadStore()
+            existing = db.get_lead(ref_email)
+            if existing:
+                print(f"  [REFERRAL SKIP] {ref_email} already in system")
+                continue
+            db.upsert_lead(
+                email=ref_email,
+                stage="free_kit",
+                source="referral",
+                notes=f"referral_from:{email} context:{body[:200]}",
+            )
+            print(f"  [REFERRAL ENQUEUED] {ref_email} ← {email}")
+        except Exception as e:
+            print(f"  [REFERRAL ERROR] {ref_email}: {e}")
 
 
 if __name__ == "__main__":
