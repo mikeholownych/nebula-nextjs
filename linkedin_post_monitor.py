@@ -28,11 +28,22 @@ MONITORED_POSTS = [
 ]
 
 # Content angle classification for each monitored post.
-# Angles: teach | case_study | hook | story | flex
+# Angles: teach | case_study | hook | story | flex | gtm_framework
 POST_ANGLES = {
     "https://www.linkedin.com/feed/update/urn:li:share:7479391233749131264": "teach",
     "https://www.linkedin.com/feed/update/urn:li:activity:7478763831968768000/": "hook",
     "https://www.linkedin.com/feed/update/urn:li:activity:7480227128299479048/": "teach",
+}
+
+# GTM-based content scoring — assess how well a post drives GTM goals.
+# Each angle maps to a GTM intent: validation, inbound, outbound, positioning.
+GTM_ANGLE_INTENTS = {
+    "gtm_framework": "positioning_validation",   # Tests ICP/offer hypothesis
+    "teach": "inbound_authority",                 # Builds familiarity for future outbound
+    "hook": "reach_amplification",               # Broad reach, top-of-funnel
+    "case_study": "proof_building",              # Social proof for conversion
+    "story": "personal_trust",                   # Builds founder credibility
+    "flex": "social_proof",                      # Results proof
 }
 
 # Accounts to suppress (own account / noise)
@@ -380,8 +391,9 @@ def check_for_new_engagers():
         print(f"{'='*60}")
 
         for e in high_value:
+            intent = GTM_ANGLE_INTENTS.get(e.get("content_angle", "teach"), "unknown")
             print(f"\n  ⭐ {e['name']} ({e.get('headline','')[:60]})")
-            print(f"     Score: {e['score']}/10 | {e['profile_url']}")
+            print(f"     Score: {e['score']}/10 | GTM intent: {intent} | {e['profile_url']}")
             if e.get("comment"):
                 print(f"     Comment: {e['comment'][:200]}")
 

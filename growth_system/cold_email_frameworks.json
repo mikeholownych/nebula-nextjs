@@ -55,6 +55,14 @@
       "nebula_adaptation": "{{first_name}}, you're in {{industry}}, right? We audited 100 landing pages in that space last month. Only 6 had a clear CTA above the fold. That's a $0 fix that doubles conversion rate. Curious where yours lands: {{audit_url}}",
       "cta": "curiosity-driven audit",
       "when_to_use": "Industry-specific outreach — show you understand their vertical"
+    },
+    {
+      "id": "linkedin_post_cta",
+      "name": "Give this post somewhere to go (GTM framework)",
+      "original": "LinkedIn GTM CTA — audit link, not 'what do you think'",
+      "nebula_adaptation": "{{first_name}}, saw your post on {{topic}}. Most people stop at engagement metrics — but the real signal is who replies. I built a free landing page audit that diagnoses exactly what's costing conversions. Curious if it finds the same leak on your page: {{audit_url}}",
+      "cta": "value-first audit link in reply to their post engagement",
+      "when_to_use": "After engaging with their LinkedIn post — value first, link second"
     }
   ],
   "icp_memo_subject_lines": {
