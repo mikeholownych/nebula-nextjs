@@ -17,7 +17,51 @@ CONTACTED_FILE = '/home/mike/nebula/contacted.json'
 OUTREACH_LOG   = '/home/mike/nebula/outreach_log.txt'
 LEADS_FILE     = '/home/mike/nebula/wave4_leads.json'
 MAX_SENDS      = 10  # daily cap per AgentMail policy
-SEND_DELAY     = 8   # seconds between sends
+SEND_DELAY     = 120  # 2-min interval between sends (Illingworth Step 4: 2-3 min spacing)
+
+# ─── DELIVERABILITY CONSTANTS (Illingworth Primary Inbox protocol) ───────────
+# Step 4: Never exceed 20/day/inbox; ramp: wk1=10, wk3=15, wk4=20
+BOUNCE_THRESHOLD   = 0.02   # Step 7: alert if bounce rate > 2%
+SPAM_THRESHOLD     = 0.001  # Step 7: alert if spam complaint rate > 0.1%
+SUBJECT_MAX_CHARS  = 60     # Step 6: subject lines under 60 characters
+
+# Step 6: spam trigger words — pre-send copy filter
+SPAM_TRIGGER_WORDS = [
+    # 'free' excluded — Nebula's core offer is a free audit; "free" in plain-text context is fine
+    'guarantee', 'guaranteed', 'urgent', 'act now', 'limited time',
+    'click here', 'winner', 'congratulations', 'no obligation', 'risk-free',
+    'make money', 'earn money', 'extra income', 'work from home',
+    'unsubscribe', 'opt out', '!!!', '???',
+]
+
+# Step 5: role-based email prefixes — skip, low deliverability + no decision-maker
+ROLE_EMAIL_PREFIXES = (
+    'info@', 'sales@', 'admin@', 'support@', 'hello@', 'contact@',
+    'team@', 'hi@', 'help@', 'noreply@', 'no-reply@', 'billing@',
+    'accounts@', 'enquiries@', 'enquiry@', 'mail@', 'office@',
+)
+
+def is_role_email(email: str) -> bool:
+    """Return True if email is a role address (low value for cold outreach)."""
+    e = email.lower()
+    return any(e.startswith(p) for p in ROLE_EMAIL_PREFIXES)
+
+def check_spam_triggers(text: str) -> list:
+    """Return list of spam trigger words found in subject or body."""
+    t = text.lower()
+    return [w for w in SPAM_TRIGGER_WORDS if w in t]
+
+def validate_subject(subject: str) -> tuple[bool, str]:
+    """Validate subject line: ≤60 chars, no spam triggers, no ALL CAPS words."""
+    if len(subject) > SUBJECT_MAX_CHARS:
+        return False, f"subject too long ({len(subject)} chars, max {SUBJECT_MAX_CHARS})"
+    triggers = check_spam_triggers(subject)
+    if triggers:
+        return False, f"spam triggers in subject: {triggers}"
+    caps_words = [w for w in subject.split() if len(w) > 2 and w.isupper()]
+    if caps_words:
+        return False, f"ALL CAPS words in subject: {caps_words}"
+    return True, "ok"
 
 HEADERS = {'User-Agent': 'Mozilla/5.0 (compatible; research-bot/1.0)'}
 
@@ -418,11 +462,28 @@ def send_wave4(leads, contacted):
         if not email:
             continue  # Reddit/HN leads have no email — skip for now
 
+        # Step 5: skip role-based addresses (no decision-maker, poor deliverability)
+        if is_role_email(email):
+            print(f"  ROLE skip: {email}")
+            continue
+
         if email in contacted:
             print(f"  DEDUP skip: {email}")
             continue
 
         subject, body = build_email(lead)
+
+        # Step 6: pre-send subject validation (≤60 chars, no spam triggers, no ALL CAPS)
+        valid, reason = validate_subject(subject)
+        if not valid:
+            print(f"  SUBJECT FAIL [{reason}] — skipping: {subject[:60]}")
+            continue
+
+        # Step 6: pre-send body spam check
+        body_triggers = check_spam_triggers(body)
+        if body_triggers:
+            print(f"  BODY SPAM TRIGGERS {body_triggers} — skipping")
+            continue
         try:
             result = am.send(
                 to=[email],
