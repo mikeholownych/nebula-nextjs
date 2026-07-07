@@ -35,6 +35,29 @@ POST_ANGLES = {
     "https://www.linkedin.com/feed/update/urn:li:activity:7480227128299479048/": "teach",
 }
 
+# ─── CREATOR POST MONITORING (AI Outbound Stack Method 2) ──────────
+# Scrape commenters from creator posts in the CRO/landing page space.
+# These are HIGHEST intent — commenters are publicly raising their hand.
+# Reference: The AI Outbound Stack, meadow-leader-47c.notion.site
+CREATOR_POSTS = [
+    # Priority: find posts about landing page CRO, ad conversions, or
+    # paid traffic from these creator profiles. Add specific post URLs below.
+    # "https://www.linkedin.com/feed/update/urn:li:activity:<ID>/",
+]
+
+# Creator profiles to check for new posts (populate with actual URLs)
+# Format: {"creator_name": "linkedin_profile_url"}
+CREATOR_PROFILES = {
+    # "Joanna Wiebe (Copyhackers)": "https://www.linkedin.com/in/joannawiebe/",
+    # "Peep Laja (CXL)": "https://www.linkedin.com/in/peeplaja/",
+    # "Talia Wolf": "https://www.linkedin.com/in/taliawolf/",
+}
+
+# Source type determines lead scoring and outreach approach.
+# own_post: commenter on Nebula's content (medium intent)
+# creator_post: commenter on a CRO/lp creator's post (HIGHEST intent)
+LEAD_SOURCE_TYPE = "own_post"  # "own_post" | "creator_post"
+
 # GTM-based content scoring — assess how well a post drives GTM goals.
 # Each angle maps to a GTM intent: validation, inbound, outbound, positioning.
 GTM_ANGLE_INTENTS = {
@@ -188,6 +211,19 @@ def normalize_engager(row):
     }
 
 
+def get_source_type(post_link):
+    """Determine whether a post link is Nebula-owned or from a creator.
+
+    Returns "own_post" for Nebula's monitored posts, "creator_post" for
+    CRO/landing page creator posts (AI Outbound Stack Method 2).
+    """
+    if not post_link:
+        return "own_post"
+    if post_link in CREATOR_POSTS:
+        return "creator_post"
+    return "own_post"
+
+
 def run_apify_actor(actor, input_file):
     """Run an Apify actor and return the dataset results."""
     cmd = ["apify", "actors", "call", actor, "--input-file", str(input_file), "--json"]
@@ -282,12 +318,15 @@ def check_for_new_engagers():
                 continue
             seen.add(key)
 
-            score = score_engager(eng)
-            is_actionable = bool(eng["comment"].strip())
-
             # Determine content attribution
             post_link = eng.get("post_link", "")
             content_angle = POST_ANGLES.get(post_link, "teach")
+
+            score = score_engager(eng)
+            source_type = get_source_type(post_link)
+            if source_type == "creator_post":
+                score += 2  # Creator-post commenters are HIGHEST intent
+            is_actionable = bool(eng["comment"].strip())
 
             new_engagers.append({
                 **eng,
@@ -295,14 +334,16 @@ def check_for_new_engagers():
                 "actionable": is_actionable,
                 "discovered_at": state["last_run"],
                 "content_angle": content_angle,
+                "source_type": source_type,
             })
 
             # Log to lead_manager with attribution
+            source_tag = "linkedin_creator_comment" if source_type == "creator_post" else "linkedin_post_comment"
             if eng["profile_url"]:
                 lead_manager.upsert_lead(
                     email=f"linkedin_{eng['profile_url'].split('/in/')[-1].split('/')[0]}@placeholder.nebula",
                     stage="lead_warm" if score >= 7 else "lead_free_kit",
-                    source="linkedin_post_comment",
+                    source=source_tag,
                     name=name,
                     content_post_url=post_link or None,
                     content_angle=content_angle,
@@ -346,6 +387,9 @@ def check_for_new_engagers():
             # Determine content attribution
             post_link = eng.get("post_link", "")
             content_angle = POST_ANGLES.get(post_link, "teach")
+            source_type = get_source_type(post_link)
+            if source_type == "creator_post":
+                score += 2
 
             new_engagers.append({
                 **eng,
@@ -353,14 +397,16 @@ def check_for_new_engagers():
                 "actionable": False,
                 "discovered_at": state["last_run"],
                 "content_angle": content_angle,
+                "source_type": source_type,
             })
 
             # Likers = cooler, score at lead_free_kit unless hot
+            source_tag = "linkedin_creator_like" if source_type == "creator_post" else "linkedin_post_like"
             if score >= 8:
                 lead_manager.upsert_lead(
                     email=f"linkedin_{eng['profile_url'].split('/in/')[-1].split('/')[0]}@placeholder.nebula",
                     stage="lead_warm",
-                    source="linkedin_post_like",
+                    source=source_tag,
                     name=name,
                     content_post_url=post_link or None,
                     content_angle=content_angle,
@@ -369,7 +415,7 @@ def check_for_new_engagers():
                 lead_manager.upsert_lead(
                     email=f"linkedin_{eng['profile_url'].split('/in/')[-1].split('/')[0]}@placeholder.nebula",
                     stage="lead_free_kit",
-                    source="linkedin_post_like",
+                    source=source_tag,
                     name=name,
                     content_post_url=post_link or None,
                     content_angle=content_angle,
@@ -392,8 +438,9 @@ def check_for_new_engagers():
 
         for e in high_value:
             intent = GTM_ANGLE_INTENTS.get(e.get("content_angle", "teach"), "unknown")
+            st = e.get("source_type", "own_post")
             print(f"\n  ⭐ {e['name']} ({e.get('headline','')[:60]})")
-            print(f"     Score: {e['score']}/10 | GTM intent: {intent} | {e['profile_url']}")
+            print(f"     Score: {e['score']}/10 | {st} | GTM intent: {intent} | {e['profile_url']}")
             if e.get("comment"):
                 print(f"     Comment: {e['comment'][:200]}")
 

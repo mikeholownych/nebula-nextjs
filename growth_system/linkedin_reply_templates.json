@@ -42,6 +42,12 @@
       "tone": "evidence-backed",
       "cta": "social proof"
     },
+    "creator_comment_outreach": {
+      "trigger": "High-value commenter on CRO creator's post — see also cold_email_frameworks 'linkedin_comment_outreach'",
+      "template": "Saw your comment on {{creator}}'s post about {{topic}}. {{one_sentence_showing_you_read_and_have_relevant_take}}. Curious what you're running into — happy to run your landing page through the free audit if you want. No pitch.",
+      "tone": "conversational + value-first",
+      "cta": "implicit — audit offer, no pressure"
+    },
     "sharing_pain": {
       "trigger": "I have this exact problem / spending on ads with no conversions",
       "template": "That's exactly who this is for. Run the audit — it's 30 seconds and tells you exactly which leaks are costing you. If you want me to look at the results with you, DM me after. No pitch, just practical next steps.",
@@ -61,6 +67,7 @@
     "never_link_directly_in_linkedin": "LinkedIn flags external links in comments. Say 'link in my profile' or 'free tool, Google Nebula Components'",
     "dm_high_value": "High-value engagers (score >= 7 + comment) → DM them directly after replying publicly",
     "dm_template": "Hey {{name}}, saw your comment on my post about landing page leaks. Happy to run your page through the audit personally if you want — just send the URL. No pitch, no follow-up pressure.",
+    "dm_creator_template": "Hey {{name}}, saw your comment on {{creator}}'s post about {{topic}}. Landed here because I built a tool that finds conversion leaks on landing pages. Happy to run yours through it for free — just send the URL. No pitch.",
     "tag_team": "If someone asks a question you can't answer well, pause → Mike should answer that one"
   }
 }

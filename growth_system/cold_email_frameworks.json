@@ -63,6 +63,14 @@
       "nebula_adaptation": "{{first_name}}, saw your post on {{topic}}. Most people stop at engagement metrics — but the real signal is who replies. I built a free landing page audit that diagnoses exactly what's costing conversions. Curious if it finds the same leak on your page: {{audit_url}}",
       "cta": "value-first audit link in reply to their post engagement",
       "when_to_use": "After engaging with their LinkedIn post — value first, link second"
+    },
+    {
+      "id": "linkedin_comment_outreach",
+      "name": "Creator comment outreach (AI Outbound Stack Method 2)",
+      "original": "Comment-based outreach — highest intent signal",
+      "nebula_adaptation": "{{first_name}}, saw your comment on {{creator}}'s post about {{topic}}. Most people miss that the landing page is the bottleneck — not the ads. I built a free tool that diagnoses exactly which conversion leak is killing your page. {{audit_url}}",
+      "cta": "audit link referencing their comment context",
+      "when_to_use": "After scraping commenters from CRO/landing page creator posts — highest intent signal available"
     }
   ],
   "icp_memo_subject_lines": {
