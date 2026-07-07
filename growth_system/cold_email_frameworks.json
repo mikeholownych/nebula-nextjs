@@ -57,6 +57,40 @@
       "when_to_use": "Industry-specific outreach — show you understand their vertical"
     }
   ],
+  "icp_memo_subject_lines": {
+    "note": "From ICP_MEMO forensic research. Use verbatim bleeding-neck language — do not polish.",
+    "money_hook": {
+      "formula": "Your landing page is leaking ~$[X]/month. Here's the audit.",
+      "variants": [
+        "Your page is leaking ~${{monthly_leak}} in ad spend. Free audit: {{audit_url}}",
+        "${{ad_spend}}/mo going in, $0 conversions. Your audit: {{audit_url}}",
+        "Saw your ad. Your landing page has 3 leaks costing you ~${{monthly_leak}}."
+      ],
+      "when": "Use when you know their approximate ad spend from the trigger signal"
+    },
+    "time_hook": {
+      "formula": "Paid traffic audit done in under 60 minutes, delivered before your next ad set goes live.",
+      "variants": [
+        "Landing page audit in 30 seconds. See exactly what's costing conversions.",
+        "60-minute fix for the conversion leak killing your {{vertical}} ads.",
+        "Your next ad set goes live when? Audit done before you press launch."
+      ],
+      "when": "Use when speed is the objection — founder just posted about another failed campaign"
+    },
+    "exclusivity_hook": {
+      "formula": "I audited 40+ pages this month and found 1 pattern killing 90% of them. Yours matches it.",
+      "variants": [
+        "We audited 40 {{vertical}} pages this month. 36 had the same leak above the fold.",
+        "One pattern killed 9 of the last 10 ad campaigns I audited. Your page has it.",
+        "Scanned your page. Same above-fold gap that killed ${{common_lost_amount}} for {{similar_company}}."
+      ],
+      "when": "Use for warm leads or re-engagement — implies you already looked at their page"
+    },
+    "silent_objection_pre_empt": {
+      "note": "Address 'I've been burned before' before they think it. Use on Day 3 follow-up.",
+      "template": "{{first_name}}, I get it — last agency charged for a 'testing phase' and delivered nothing. This isn't that. 30 seconds, no call, no contract. Just your page score and what to fix. {{audit_url}}"
+    }
+  },
   "implementation_notes": [
     "Never use these as-is. Rewrite in your own voice.",
     "Remove {{placeholder}} tokens — fill with real data before sending.",
