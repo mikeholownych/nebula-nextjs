@@ -224,6 +224,34 @@
     </div>
   </section>
 
+  <!-- ── HOW IT WORKS ── -->
+  <section class="card" style="padding:28px 24px;">
+    <h2 style="text-align:center;margin-bottom:6px;">How it works</h2>
+    <p style="text-align:center;color:var(--muted);font-size:14px;margin-bottom:24px;">Three steps. Under 5 minutes total.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+      <div style="text-align:center;padding:20px 16px;background:#f8fafc;border-radius:12px;border:1px solid #e5e7eb;">
+        <div style="width:40px;height:40px;background:#111827;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;margin:0 auto 12px;">1</div>
+        <p style="font-weight:700;font-size:15px;margin-bottom:6px;">Paste your URL</p>
+        <p style="font-size:13px;color:var(--muted);line-height:1.5;">Drop your landing page URL + email below. Takes 30 seconds.</p>
+      </div>
+      <div style="text-align:center;padding:20px 16px;background:#f0fdf4;border-radius:12px;border:1px solid #bbf7d0;">
+        <div style="width:40px;height:40px;background:#059669;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;margin:0 auto 12px;">2</div>
+        <p style="font-weight:700;font-size:15px;margin-bottom:6px;">Get your scored audit</p>
+        <p style="font-size:13px;color:var(--muted);line-height:1.5;">5 dimensions scored. Top leaks ranked. Free fix kit in your inbox in 60 seconds.</p>
+      </div>
+      <div style="text-align:center;padding:20px 16px;background:#f8fafc;border-radius:12px;border:1px solid #e5e7eb;">
+        <div style="width:40px;height:40px;background:#111827;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;margin:0 auto 12px;">3</div>
+        <p style="font-weight:700;font-size:15px;margin-bottom:6px;">Fix it or hand it off</p>
+        <p style="font-size:13px;color:var(--muted);line-height:1.5;">Use the free kit yourself — or get the $97 Fix Pack: rewritten copy, delivered in 72h.</p>
+      </div>
+    </div>
+    <style>
+      @media (max-width: 600px) {
+        .howstep-grid { grid-template-columns: 1fr !important; }
+      }
+    </style>
+  </section>
+
   <!-- ── AUDIT FORM ── -->
   <section class="card" id="audit-form-card">
     <h2>Run the free teardown. See what is leaking.</h2>
@@ -407,7 +435,21 @@
       </div>
       <p class="micro">No production changes without your go-ahead. Safe fallback artifact if direct implementation is unsupported. One reasonable revision included.</p>
       <a class="btn btn-dark" href="https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02" style="width:100%;text-align:center;">Get the Conversion Fix Pack →</a>
-      <p class="micro" style="margin-top:8px;text-align:center;"><strong>Unconditional guarantee:</strong> If you don't see a leak worth fixing within 30 minutes of receiving your audit, email us and we'll refund every cent — no reason needed. <a href="#guarantee" style="color:var(--blue);">Details below.</a></p>
+      <!-- payment trust logos -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px;flex-wrap:wrap;">
+        <svg height="20" viewBox="0 0 50 16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Visa"><rect width="50" height="16" rx="3" fill="#1a1f71"/><text x="4" y="12" font-family="Arial" font-size="10" font-weight="900" fill="white" letter-spacing="1">VISA</text></svg>
+        <svg height="20" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mastercard"><rect width="38" height="24" rx="4" fill="#252525"/><circle cx="15" cy="12" r="7" fill="#eb001b"/><circle cx="23" cy="12" r="7" fill="#f79e1b"/><path d="M19 6.8a7 7 0 0 1 0 10.4A7 7 0 0 1 19 6.8z" fill="#ff5f00"/></svg>
+        <svg height="20" viewBox="0 0 50 16" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stripe"><rect width="50" height="16" rx="3" fill="#635bff"/><text x="5" y="12" font-family="Arial" font-size="9" font-weight="700" fill="white">stripe</text></svg>
+        <span style="font-size:11px;color:#9ca3af;display:flex;align-items:center;gap:4px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          256-bit SSL
+        </span>
+      </div>
+      <!-- guarantee badge -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:8px 12px;">
+        <span style="font-size:18px;">&#x1f6e1;</span>
+        <span style="font-size:12px;color:#92400e;font-weight:600;">30-min or 30-day refund. No reason. No questions. <a href="#guarantee" style="color:#b45309;text-decoration:underline;">Full policy &#x2193;</a></span>
+      </div>
     </div>
 
   </section>
@@ -443,7 +485,13 @@
 
   <!-- ── GUARANTEE ── -->
   <section id="guarantee" class="guarantee">
-    <span class="badge" style="background:#f59e0b;color:white;font-size:14px;">&#x1f6e1; Your money back. No reason. No delay.</span>
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:4px;flex-wrap:wrap;">
+      <div style="width:64px;height:64px;background:#f59e0b;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;">&#x1f6e1;</div>
+      <div style="text-align:left;">
+        <span class="badge" style="background:#f59e0b;color:white;font-size:14px;display:inline-block;">Your money back. No reason. No delay.</span>
+        <p style="font-size:12px;color:#92400e;margin-top:4px;">Avg response time: &lt;60 min · 24/7 · 365 days</p>
+      </div>
+    </div>
     <h2 style="margin-top:12px;">"30 Minutes or 30 Days" Unconditional Guarantee</h2>
     <p>Sign up for the $97 Conversion Fix Pack. Run your audit. Read the output.</p>
     <p>If you do not see a conversion leak worth fixing — <strong>in the first 30 minutes or on day 29</strong> — email <strong>ops@launchcrate.io</strong> and say "refund please."</p>
