@@ -116,7 +116,7 @@
     * { box-sizing: border-box; margin:0; padding:0; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background:var(--bg); color:var(--ink); line-height:1.6; }
     header { background:#111827; color:white; padding:56px 20px 48px; text-align:center; position:relative; overflow:hidden; }
-    header h1 { max-width:820px; margin:0 auto 16px; font-size:clamp(28px,5vw,52px); line-height:1.05; letter-spacing:-0.02em; }
+    header h1 { max-width:820px; margin:0 auto 20px; font-size:clamp(34px,5.5vw,64px); font-weight:800; line-height:1.02; letter-spacing:-0.025em; }
     header h1 em { color:#6ee7b7; font-style:normal; }
     header .sub { max-width:680px; margin:0 auto 20px; font-size:18px; color:#9ca3af; line-height:1.5; }
     .trust-row { display:flex; gap:8px 16px; flex-wrap:wrap; justify-content:center; margin:0 auto 18px; }
@@ -124,7 +124,22 @@
     nav { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:6px; font-size:14px; }
     nav a { color:#fbbf24; text-decoration:none; font-weight:600; }
     nav a:hover { color:#fde68a; }
+    /* ── Squiggle underline (draws once, stays put) ── */
+    .squiggle { position:relative; display:inline-block; }
+    .squig { position:absolute; bottom:-8px; left:0; width:100%; height:14px; overflow:visible; pointer-events:none; }
+    .squig-path { stroke-dasharray:200; stroke-dashoffset:200; animation:draw-squig 0.65s cubic-bezier(0.4,0,0.2,1) 0.35s forwards; }
+    @keyframes draw-squig { to { stroke-dashoffset:0; } }
     .container { max-width:980px; margin:0 auto; padding:0 18px 48px; }
+    /* ── By the numbers band ── */
+    .numbers-band { background:#111827; border-top:1px solid rgba(255,255,255,0.07); border-bottom:1px solid rgba(255,255,255,0.07); padding:32px 20px; }
+    .numbers-inner { max-width:820px; margin:0 auto; display:flex; align-items:center; justify-content:center; gap:0; flex-wrap:wrap; }
+    .stat-item { display:flex; flex-direction:column; align-items:center; text-align:center; padding:8px 32px; }
+    .stat-num { font-size:clamp(36px,5vw,52px); font-weight:800; letter-spacing:-0.03em; color:#f9fafb; line-height:1; font-variant-numeric:tabular-nums; }
+    .stat-plus { font-size:0.6em; font-weight:700; color:#fbbf24; vertical-align:super; }
+    .stat-unit { font-size:0.45em; font-weight:600; color:#9ca3af; vertical-align:middle; margin-left:2px; }
+    .stat-label { font-size:12px; color:#6b7280; margin-top:6px; line-height:1.4; text-transform:uppercase; letter-spacing:0.06em; }
+    .stat-divider { width:1px; height:48px; background:rgba(255,255,255,0.1); flex-shrink:0; }
+    @media(max-width:520px) { .stat-divider{display:none;} .stat-item{padding:10px 20px;} .numbers-inner{gap:4px;} }
     .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:28px 24px; margin:20px 0; box-shadow:0 10px 30px rgba(15,23,42,.06); }
     .card h2 { font-size:22px; margin-bottom:12px; }
     .card h3 { font-size:17px; margin:16px 0 8px; }
@@ -190,7 +205,7 @@
 <body>
 
 <header>
-  <h1>Traffic isn't the leak. <em>Your page</em> is.</h1>
+  <h1>Traffic isn&#8217;t the leak. <span class="squiggle"><em>Your page</em><svg class="squig" viewBox="0 0 180 12" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path class="squig-path" d="M2,8 C30,2 60,12 90,6 C120,0 150,10 178,6" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"/></svg></span> is.</h1>
   <p class="sub">For founders running paid traffic with zero conversions. Most consultants hear "we need more traffic" and prescribe more ads. The right move is the exam first: paste your URL, get a scored teardown of exactly which leaks are burning your budget — clarity, CTA, trust proof, offer, friction. The audit is the exam. The $97 Fix Pack is the prescription. No sales call.</p>
   <div style="text-align:center;margin:0 auto 14px;font-size:14px;color:#6ee7b7;font-weight:600;">
     97% of ad clicks don't convert. <span style="color:#9ca3af;font-weight:400;">Most vendors sell you more traffic. We tell you the specific dollar amount burning on your page — then fix it.</span>
@@ -216,6 +231,31 @@
     <a href="mailto:ops@launchcrate.io" style="color:#9ca3af;">⚡ ops@launchcrate.io</a>
   </nav>
 </header>
+
+<!-- ── BY THE NUMBERS band ── -->
+<section class="numbers-band">
+  <div class="numbers-inner">
+    <div class="stat-item">
+      <span class="stat-num">40<span class="stat-plus">+</span></span>
+      <span class="stat-label">pages scored</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">3.1</span>
+      <span class="stat-label">avg leak categories<br>found per audit</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">&lt;60<span class="stat-unit">min</span></span>
+      <span class="stat-label">avg response, 24/7</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">$97</span>
+      <span class="stat-label">full implementation,<br>no call required</span>
+    </div>
+  </div>
+</section>
 
 <main class="container">
 
