@@ -5,7 +5,7 @@ Sources: HN Algolia API, Reddit RSS (spaced with delays), IndieHackers
 Deduplicates against contacted.json before any send.
 Outputs leads to wave4_leads.json and sends emails via AgentMailClient.
 """
-import json, time, re, os, sys
+import json, time, re, os, sys, random
 from urllib.request import urlopen, Request
 from urllib.error import URLError, HTTPError
 from urllib.parse import urlencode
@@ -17,7 +17,8 @@ CONTACTED_FILE = '/home/mike/nebula/contacted.json'
 OUTREACH_LOG   = '/home/mike/nebula/outreach_log.txt'
 LEADS_FILE     = '/home/mike/nebula/wave4_leads.json'
 MAX_SENDS      = 10  # daily cap per AgentMail policy
-SEND_DELAY     = 120  # 2-min interval between sends (Illingworth Step 4: 2-3 min spacing)
+SEND_DELAY     = 120  # 2-min base interval between sends (Illingworth Step 4)
+SEND_DELAY_MAX = 180  # randomise within 2–3 min (Automation Rules: spread send times)
 
 # ─── DELIVERABILITY CONSTANTS (Illingworth Primary Inbox protocol) ───────────
 # Step 4: Never exceed 20/day/inbox; ramp: wk1=10, wk3=15, wk4=20
@@ -487,7 +488,9 @@ def build_email(lead):
         f"{v['opening'].format(snip=title_snip)}\n\n"
         f"{v['problem']}\n\n"
         f"{v['proof']}\n\n"
-        f"{v['question']}"
+        f"{v['question']}\n\n"
+        "—\n"
+        "Reply STOP to opt out."
     )
 
     return subject, body
@@ -557,7 +560,8 @@ def send_wave4(leads, contacted):
             })
             print(f"  ✅ SENT → {email} | score={lead['score']} | {subject[:50]}")
             sent += 1
-            time.sleep(SEND_DELAY)
+            delay = random.uniform(SEND_DELAY, SEND_DELAY_MAX)
+            time.sleep(delay)
         except Exception as e:
             print(f"  ❌ SEND FAIL → {email}: {e}")
 

@@ -666,6 +666,7 @@ def main():
             d    = domain(url)
             subj = subj_tmpl.format(domain=d, **audit_data)
             body = body_tmpl.format(domain=d, stripe=STRIPE, stripe_7=STRIPE_7, **audit_data)
+            body += "\n\n—\nReply STOP to opt out."
             print(f"  [{label}] {email} ({d})")
             ok = send_email(email, subj, body, DRY_RUN)
             if ok:
@@ -714,6 +715,7 @@ def main():
             d    = domain(url) if url else email.split("@")[-1]
             subj = subj_tmpl.format(domain=d, **ad)
             body = body_tmpl.format(domain=d, stripe=STRIPE, stripe_7=STRIPE_7, **ad)
+            body += "\n\n—\nReply STOP to opt out."
             print(f"  [{label}] {email}")
             ok = send_email(email, subj, body, DRY_RUN)
             if ok:
@@ -762,6 +764,7 @@ def main():
             ad   = get_audit_data(url) if url else {}
             subj = subj_tmpl.format(domain=d, **ad)
             body = body_tmpl.format(domain=d, stripe=STRIPE, stripe_7=STRIPE_7, **ad)
+            body += "\n\n—\nReply STOP to opt out."
             print(f"  [revive] {email} ({d}) age={age_days:.1f}d")
             ok = send_email(email, subj, body, DRY_RUN)
             if ok:
@@ -809,6 +812,7 @@ def main():
                 domain=d,
             )
             body = body_tmpl.format(domain=d, stripe=stripe_url, stripe_7=STRIPE_7)
+            body += "\n\n—\nReply STOP to opt out."
             print(f"  [recycle] {email} ({d}) age={age_days:.1f}d")
             ok = send_email(email, subj, body, DRY_RUN)
             if ok:
