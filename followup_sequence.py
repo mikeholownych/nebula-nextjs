@@ -175,19 +175,15 @@ https://nebulacomponents.shop/audit.html?url=https://{domain}
 
 — Nebula"""),
 
-    (3, "day3_cold_framework",
-     "two useful fixes for {domain}",
+    (3, "day3_cold_feedback",
+     "did I miss the mark?",
      """Hey,
 
-Sending the useful part — the two visible leaks I found on {domain}:
+Wanted to make sure my notes on {domain} weren't off-target.
 
-1. {issue1}
-2. {issue2}
+If the {issue1} issue isn't relevant right now — wrong timing, already sorted, or just not a priority — just let me know. Happy to adjust or leave you alone.
 
-If you want to sanity-check it, the self-serve audit is here:
-https://nebulacomponents.shop/audit.html?url=https://{domain}
-
-No call. No calendar. Keep the fixes either way.
+Either way, the audit findings are yours to keep.
 
 — Nebula"""),
 
@@ -205,23 +201,31 @@ Free audit link if you want to re-check: https://nebulacomponents.shop/audit.htm
 
 — Nebula"""),
 
-    (7, "day7_cold_close",
-     "closing the {domain} file",
+    (6, "day6_cold_urgency",
+     "last few slots this week",
      """Hi,
 
-Last note on the {domain} audit.
+Running a few implementations this week — {issue1} fixes on landing pages for paid traffic.
 
-The findings won't change. {issue1} and {issue2} are still the two leaks to fix if you're running paid traffic to this page.
+If {domain} is one you'd like done, this is the window. $97, 24h turnaround, full refund if no measurable lift.
 
-Three ways to use it:
-1. We implement the fix — $97, 24h, full refund if no lift: {stripe}
-2. DIY checklist — $7: {stripe_7}
-3. Re-run the free audit anytime: https://nebulacomponents.shop/audit.html
+Self-serve checkout: {stripe}
 
-Won't follow up again. Good luck with {domain}.
+— Nebula"""),
+
+    (8, "day8_cold_breakup",
+     "should I close your file?",
+     """Hi,
+
+Haven't heard back, so I'll assume the timing isn't right for {domain}.
+
+I'll stop following up — no hard feelings. If things change (new campaign, different traffic source, or the conversion numbers shift), feel free to reach out. The audit data will still be here.
+
+Good luck with {domain}.
 
 — Nebula"""),
 ]
+
 
 # ── Inactive Lead Reviver — contacted >7d, never requested audit ──
 # Trigger: lead in contacted.json, age >7d, no entry in audit_leads, no prior send
