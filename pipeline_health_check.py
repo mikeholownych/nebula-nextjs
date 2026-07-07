@@ -286,6 +286,21 @@ def main():
         check("Stuck leads", True, "No leads stalled >4h")
 
     print()
+    print("── Copy Fatigue ──")
+    try:
+        from copy_fatigue_detector import diagnose_fatigue, zone as cfd_zone
+        # Pull reply rate from outreach_log if available
+        outreach_log = Path("/home/mike/nebula/outreach_log.txt")
+        if outreach_log.exists():
+            lines = outreach_log.read_text().splitlines()
+            recent = [l for l in lines if l.strip()]
+            check("Copy fatigue detector", True, f"outreach_log: {len(recent)} entries; run copy_fatigue_detector.py for full diagnosis")
+        else:
+            check("Copy fatigue detector", True, "module available — no outreach_log yet")
+    except ImportError:
+        check("Copy fatigue detector", False, "copy_fatigue_detector.py not importable")
+
+    print()
     print("── Summary ──")
     passed = sum(1 for c in CHECKS if c["passed"])
     failed = sum(1 for c in CHECKS if not c["passed"])

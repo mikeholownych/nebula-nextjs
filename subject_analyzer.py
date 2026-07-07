@@ -153,6 +153,66 @@ def score_subject(subject):
     }
 
 
+# ── Tension Pattern → Hook Archetype mapping ─────────────────────
+# Bridges copy_fatigue_detector.TENSION_PATTERNS to email archetypes.
+# Lets you pick a tension pattern on Monday and instantly know which
+# subject line archetype to build around.
+TENSION_TO_ARCHETYPE = {
+    "authority":      ["bold_claim", "specific_promise", "social_proof"],
+    "contrarian":     ["pattern_interrupt", "bold_claim", "curiosity_gap"],
+    "personal_story": ["personal", "curiosity_gap", "problem_callout"],
+    "dream_selling":  ["problem_callout", "curiosity_gap", "specific_promise"],
+    "future_pacing":  ["bold_claim", "urgency", "curiosity_gap"],
+}
+
+TENSION_DESCRIPTIONS = {
+    "authority":      "We've run [volume/credential] across [segment], noticed [contrarian pattern]",
+    "contrarian":     "Everyone in [niche] does [X]. We do the opposite and get [result]",
+    "personal_story": "[Specific failure]. That's when I realised [insight]",
+    "dream_selling":  "If you're [target state], you're probably also [hidden pain]",
+    "future_pacing":  "By [timeframe], [prediction]. Here's how we're preparing",
+}
+
+
+def suggest_subjects_for_tension(tension_pattern: str, n: int = 3) -> list:
+    """Given a tension pattern name, return suggested subject line archetypes + examples."""
+    archetypes = TENSION_TO_ARCHETYPE.get(tension_pattern, [])
+    results = []
+    for arch_name in archetypes[:n]:
+        arch = ARCHETYPES.get(arch_name, {})
+        results.append({
+            "archetype": arch_name,
+            "description": arch.get("description", ""),
+            "examples": arch.get("examples", []),
+            "template": TENSION_DESCRIPTIONS.get(tension_pattern, ""),
+        })
+    return results
+
+
+def score_with_tension(subject: str, tension_pattern: str | None = None) -> dict:
+    """Score a subject line and optionally validate against a chosen tension pattern.
+
+    If tension_pattern is provided, adds a tension_fit score indicating how well
+    the subject line aligns with the intended pattern for the week's hook bank.
+    """
+    base = score_subject(subject)
+    if not tension_pattern:
+        return base
+
+    expected_archetypes = TENSION_TO_ARCHETYPE.get(tension_pattern, [])
+    matched_archetypes = [s["archetype"] for s in base.get("archetypes", [])]
+    tension_overlap = [a for a in expected_archetypes if a in matched_archetypes]
+    tension_fit = "strong" if len(tension_overlap) >= 2 else "partial" if tension_overlap else "weak"
+
+    base["tension_pattern"] = tension_pattern
+    base["tension_fit"] = tension_fit
+    base["tension_match_note"] = (
+        f"Pattern '{tension_pattern}' expects archetypes {expected_archetypes}. "
+        f"Subject hits: {tension_overlap or 'none'}."
+    )
+    return base
+
+
 def analyze_subject_batch(subjects):
     """Score multiple subject lines and return comparison."""
     results = []
