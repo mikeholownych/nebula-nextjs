@@ -312,6 +312,16 @@
         <option value="signups">Signups</option>
         <option value="bookings">Bookings</option>
       </select>
+      <label for="monthly_spend" style="margin-top:10px;">Monthly ad spend (optional — helps size the waste estimate)</label>
+      <select id="monthly_spend" name="monthly_spend">
+        <option value="">I prefer not to say</option>
+        <option value="500">Under $500/mo</option>
+        <option value="1000">$500–$1K/mo</option>
+        <option value="2500">$1K–$5K/mo</option>
+        <option value="7500">$5K–$10K/mo</option>
+        <option value="15000">$10K–$20K/mo</option>
+        <option value="30000">$20K+/mo</option>
+      </select>
       <p class="micro" style="margin-top:8px;">Your URL and email are used to generate, email, and log the audit. No resale. No spam.</p>
       <button type="submit">Run my free teardown →</button>
     </form>
@@ -622,6 +632,7 @@
       url: form.url.value.trim(),
       email: form.email.value.trim(),
       goal: form.goal.value,
+      monthly_spend: form.monthly_spend ? Number(form.monthly_spend.value) || null : null,
       source_type: 'homepage_audit_form',
       trigger_type: 'self_serve_url_submit',
       offer_variant: 'audit_first_free_kit'

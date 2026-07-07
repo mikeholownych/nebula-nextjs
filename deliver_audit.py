@@ -383,7 +383,71 @@ def normalize_trigger_context(trigger_context):
     return f"Saw the public conversion trigger: {text}."
 
 
-def compose_audit_email(page, audit, email, trigger_context=None):
+
+def detect_stack(html_text):
+    """Detect CMS, analytics, ad pixels, and key SaaS from page HTML.
+    Returns a short plain-English string for the audit email opener.
+    Web intelligence move (CAIOS Module 2): walk in already half-done.
+    """
+    h = html_text.lower()
+    signals = []
+
+    # CMS
+    if "wp-content/" in h or "wordpress" in h:
+        signals.append("WordPress")
+    elif "shopify" in h or "cdn.shopify.com" in h:
+        signals.append("Shopify")
+    elif "squarespace" in h:
+        signals.append("Squarespace")
+    elif "webflow.io" in h or "webflow" in h:
+        signals.append("Webflow")
+    elif "wix.com" in h or "_wix_" in h:
+        signals.append("Wix")
+    elif "framer.com" in h or "framerusercontent" in h:
+        signals.append("Framer")
+    elif "bubble.io" in h:
+        signals.append("Bubble")
+
+    # Email/CRM
+    if "klaviyo" in h:
+        signals.append("Klaviyo")
+    if "mailchimp" in h:
+        signals.append("Mailchimp")
+    if "activecampaign" in h:
+        signals.append("ActiveCampaign")
+    if "hubspot" in h:
+        signals.append("HubSpot")
+    if "go.crisp.chat" in h or "crisp.chat" in h:
+        signals.append("Crisp")
+    if "intercom" in h:
+        signals.append("Intercom")
+    if "gorgias" in h:
+        signals.append("Gorgias")
+
+    # Ad / analytics
+    if "fbq(" in html_text or "facebook.net/en_US/fbevents" in h:
+        signals.append("Meta Pixel")
+    if "gtag(" in html_text or re.search(r'["\']G-[A-Z0-9]+["\']', html_text):
+        signals.append("GA4")
+    if "tiktok" in h and "pixel" in h:
+        signals.append("TikTok Pixel")
+    if "ads.twitter" in h or "twq(" in h:
+        signals.append("X Ads")
+
+    # Checkout
+    if "stripe.com" in h:
+        signals.append("Stripe")
+    if "gumroad" in h:
+        signals.append("Gumroad")
+    if "paypal" in h:
+        signals.append("PayPal")
+
+    if not signals:
+        return ""
+    return ", ".join(signals[:5])  # cap at 5 to keep opener tight
+
+
+def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=None):
     """Compose structured audit email — free-consulting frame, not report delivery."""
     DIM_LABELS = {
         "headline": "Headline",
@@ -413,37 +477,54 @@ def compose_audit_email(page, audit, email, trigger_context=None):
 
     score = audit["overall"]
 
+    # Tech stack prefill (CAIOS Module 2: walk in already half-done)
+    detected_stack = detect_stack(page.get("html", ""))
+    if detected_stack:
+        stack_line = f"I can see you're running {detected_stack}."
+    else:
+        stack_line = ""
+
+    # Real spend override — use actual budget if provided, else conservative $2K estimate
+    if monthly_spend and monthly_spend > 0:
+        spend_label = f"${monthly_spend:,.0f}/mo"
+    else:
+        spend_label = "$2K/mo"
+
     # Advisor framing: point at specific dollars, not vague "conversion issues" (CAIOS lesson: advisor sentences name amounts)
     if score < 4:
         monthly_leak = "~$1,600–$4,000/mo"
         waste_pct = "70–80%"
+        _stack = (stack_line + " ") if stack_line else ""
         body_opener = (
-            f"I ran {domain} through our conversion analyzer. The {worst_label.lower()} alone is likely killing every visitor who lands on your page. "
-            f"Pages scoring {score}/10 waste {waste_pct} of paid clicks — at a $2K/mo ad budget that's {monthly_leak} evaporating before a single conversion."
+            f"{_stack}I ran {domain} through our conversion analyzer. The {worst_label.lower()} alone is likely killing every visitor who lands on your page. "
+            f"Pages scoring {score}/10 waste {waste_pct} of paid clicks — at {spend_label} that's {monthly_leak} evaporating before a single conversion."
         )
         pitch_line = "The diagnosis is above. The $97 is the prescription — we ship every fix in 24h, no call required."
     elif score < 6.5:
         monthly_leak = "~$800–$1,800/mo"
         waste_pct = "40–50%"
+        _stack = (stack_line + " ") if stack_line else ""
         body_opener = (
-            f"I ran your landing page through our conversion analyzer — your {worst_label.lower()} is the leak. "
-            f"Pages at {score}/10 lose {waste_pct} of ad clicks to friction. At $2K/mo in traffic that's {monthly_leak} in recoverable waste."
+            f"{_stack}I ran your landing page through our conversion analyzer — your {worst_label.lower()} is the leak. "
+            f"Pages at {score}/10 lose {waste_pct} of ad clicks to friction. At {spend_label} in traffic that's {monthly_leak} in recoverable waste."
         )
         pitch_line = "The diagnosis is above. The $97 is the prescription — plug these leaks in 24h and your ad spend starts working."
     elif score < 8:
         monthly_leak = "~$250–$700/mo"
         waste_pct = "15–20%"
+        _stack = (stack_line + " ") if stack_line else ""
         body_opener = (
-            f"Checked {domain} — you're closer than most ({score}/10). "
-            f"One or two friction points are likely costing {waste_pct} of conversions — {monthly_leak} at a $2K ad budget, more at scale."
+            f"{_stack}Checked {domain} — you're closer than most ({score}/10). "
+            f"One or two friction points are likely costing {waste_pct} of conversions — {monthly_leak} at {spend_label}, more at scale."
         )
         pitch_line = "The diagnosis is above. The $97 is the prescription — surgical fixes, not a rebuild, shipped in 24h."
     else:
         monthly_leak = "~$100–$300/mo"
         waste_pct = "5–10%"
+        _stack = (stack_line + " ") if stack_line else ""
         body_opener = (
-            f"Ran {domain} through our analyzer — it's structurally solid ({score}/10). "
-            f"Found a nuance that may account for {waste_pct} of unconverted clicks — {monthly_leak} at typical spend levels."
+            f"{_stack}Ran {domain} through our analyzer — it's structurally solid ({score}/10). "
+            f"Found a nuance that may account for {waste_pct} of unconverted clicks — {monthly_leak} at {spend_label}."
         )
         pitch_line = "The $97 implements the fix in 24h. Might be the highest-ROI move you make this week. No call required."
 

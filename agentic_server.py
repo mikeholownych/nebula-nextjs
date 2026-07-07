@@ -968,7 +968,12 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
             return self._send_json(400, {"error": "Invalid JSON"})
 
         url = (body.get("url") or "").strip()
-        email = (body.get("email") or "").strip().lower()
+        email = (body.get("email") or "").strip()
+        _spend_raw = body.get("monthly_spend", "")
+        try:
+            monthly_spend = float(_spend_raw) if _spend_raw else None
+        except (ValueError, TypeError):
+            monthly_spend = None.lower()
         signal = (body.get("signal") or "").strip()
 
         if not url:
@@ -1205,7 +1210,7 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
         if email:
             try:
                 key = open("/home/mike/.hermes/secrets/agentmail.key").read().strip()
-                email_data = compose_audit_email(page, audit, email)
+                email_data = compose_audit_email(page, audit, email, monthly_spend=monthly_spend)
 
                 # Use AgentMail REST API — SMTP is blocked
                 import urllib.request, urllib.error
