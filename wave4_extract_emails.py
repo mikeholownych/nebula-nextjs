@@ -3,6 +3,12 @@
 Wave 4 email extractor.
 Fetches Reddit posts as JSON, extracts site URLs from post bodies,
 then scrapes each site for a contact email.
+
+Fallback chain (Illingworth "How to Find Anyone's Email Address"):
+  1. Scrape /contact and /about pages for mailto links
+  2. Permutation guess (first.last@domain, flast@domain, first@domain…)
+     — only if domain passes MX check
+  3. LinkedIn DM queue (log_linkedin_fallback) for zero-email leads
 """
 import json, time, re, sys
 from urllib.request import urlopen, Request
@@ -14,6 +20,8 @@ HEADERS = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0',
     'Accept': 'application/json',
 }
+
+from email_permutator import permute, mx_exists, permute_role, log_linkedin_fallback
 
 HIGH_SIGNAL_POSTS = [
     ('https://www.reddit.com/r/smallbusiness/comments/1tywgcz/spending_3kmonth_on_google_ads_with_barely_any/.json', '$3k/mo Google Ads no ROI'),
@@ -151,7 +159,33 @@ def main():
                 time.sleep(1)
 
             if not found_email:
-                print(f"  — no email found")
+                # Fallback 2: email permutation from author name + domain
+                # Illingworth: first.last@domain, flast@domain, first@domain...
+                for su in site_urls[:2]:
+                    domain = re.sub(r'^https?://', '', su).split('/')[0].lstrip('www.')
+                    if not mx_exists(domain):
+                        print(f"  — {domain}: no MX, skip permutation")
+                        continue
+                    candidates = permute(author, "", domain) if author else []
+                    if not candidates:
+                        candidates = permute_role(domain)
+                    # Use top candidate (first.last or info@ etc.)
+                    found_email = candidates[0]
+                    found_site  = su
+                    print(f"  📬 permutation fallback: {found_email}")
+                    break
+
+            if not found_email:
+                # Fallback 3: log for LinkedIn DM
+                # Illingworth: "If you can't find an email, connect on LinkedIn first"
+                log_linkedin_fallback({
+                    "author":    author,
+                    "post_url":  post_url.replace(".json", ""),
+                    "domain":    site_urls[0] if site_urls else "",
+                    "site_urls": site_urls[:3],
+                    "title":     title,
+                })
+                print(f"  → LinkedIn DM queue: u/{author}")
 
             results.append({
                 'label':     label,

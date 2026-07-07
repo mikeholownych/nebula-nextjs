@@ -1,0 +1,12 @@
+[
+  {
+    "name": "testuser",
+    "post_url": "https://reddit.com/r/test/1",
+    "domain": "acme.com",
+    "site_urls": [],
+    "title": "test post",
+    "queued_at": "2026-07-07T05:47:53Z",
+    "channel": "linkedin_dm",
+    "status": "pending"
+  }
+]
