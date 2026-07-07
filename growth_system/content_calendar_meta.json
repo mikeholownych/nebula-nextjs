@@ -1,0 +1,40 @@
+{
+  "version": "2026-07-07",
+  "target_frequency": "5-7 posts/week (7 preferred)",
+  "source": "Vasilije Simic Undecagon playbook — consistent 5-7x/week minimum for inbound funnel momentum",
+  "job_types": {
+    "Educational": "How-to guides, leak explanations, conversion principles",
+    "Testimonial": "Before/after case studies, real founder results",
+    "Personal story": "Build-in-public, founder journey, lessons learned",
+    "Listicle": "Tool comparisons, ranked lists, resource roundups",
+    "Comparison": "Nebula vs competitors, self-serve vs sales-led, etc."
+  },
+  "weekly_cadence": {
+    "monday": "Educational (heavy — start week with value)",
+    "tuesday": "Testimonial (social proof midweek)",
+    "wednesday": "Personal story (build-in-public midweek)",
+    "thursday": "Listicle (comparison/resource day)",
+    "friday": "Comparison (weekend prep — founders planning)",
+    "saturday": "Hook/teach (lighter — weekend scroll mode)",
+    "sunday": "Case study or testimonial (weekend reflection)"
+  },
+  "weekend_additions": [
+    {
+      "job": "Hook",
+      "hook": "Spent $5K on Meta ads, got 0 conversions. Here's the one thing I changed.",
+      "angle": "Personal failure → lesson learned",
+      "cta": "Run the free audit on your own page: nebulacomponents.shop/audit",
+      "format": "mini_case_study",
+      "freshness_signal": "As of July 2026"
+    },
+    {
+      "job": "Teaser",
+      "hook": "This week I audited 12 landing pages. 10 had the same CTA problem.",
+      "angle": "Weekly audit roundup",
+      "cta": "Might be on yours too. Run the audit: nebulacomponents.shop/audit",
+      "format": "data_drop",
+      "freshness_signal": "As of July 2026"
+    }
+  ],
+  "note": "The 30-day calendar entries cycle through 5 job types. For 7x/week, use Saturday for Hook and Sunday for Teaser/data-drop posts. These are lighter formats suited for weekend mobile scrolling."
+}

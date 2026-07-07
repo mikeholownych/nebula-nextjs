@@ -68,6 +68,27 @@
     "dm_high_value": "High-value engagers (score >= 7 + comment) → DM them directly after replying publicly",
     "dm_template": "Hey {{name}}, saw your comment on my post about landing page leaks. Happy to run your page through the audit personally if you want — just send the URL. No pitch, no follow-up pressure.",
     "dm_creator_template": "Hey {{name}}, saw your comment on {{creator}}'s post about {{topic}}. Landed here because I built a tool that finds conversion leaks on landing pages. Happy to run yours through it for free — just send the URL. No pitch.",
-    "tag_team": "If someone asks a question you can't answer well, pause → Mike should answer that one"
+    "tag_team": "If someone asks a question you can't answer well, pause → Mike should answer that one",
+    "warm_dm_sequence": {
+      "description": "3-touch DM flow for warm engagers (comment on own post or creator post). Each touch is 2-3 days apart. Stop after reply or call booked.",
+      "touch_1": {
+        "timing": "Within 24h of their comment/engagement",
+        "trigger": "Anyone who left a meaningful comment on a CRO post or Nebula post",
+        "template": "Hey {{name}}, saw your comment on {{post_topic}}. Built a free tool that diagnoses conversion leaks on landing pages — found 3 on mine first week. Happy to run yours through it: nebulacomponents.shop/audit. No pitch, just useful.",
+        "objective": "Warm intro + value-first audit link"
+      },
+      "touch_2": {
+        "timing": "3-5 days after Touch 1 (if no reply)",
+        "trigger": "No response to Touch 1",
+        "template": "Hey {{name}}, sent you the audit link the other day. Most SaaS founders I've run it for find at least 2 leaks they didn't know existed above the fold. Curious what it finds on yours.",
+        "objective": "Gentle re-engagement focused on curiosity"
+      },
+      "touch_3": {
+        "timing": "7-10 days after Touch 2 (if no reply)",
+        "trigger": "No response to Touch 1 or 2",
+        "template": "Hey {{name}}, last message from me on this. The audit checks 5 things: headline clarity, CTA actionability, trust signals, load speed, mobile layout. 75% of pages fail on headline alone. Yours might be fine — only one way to know. Up to you: nebulacomponents.shop/audit",
+        "objective": "Final value summary + soft close, no pressure"
+      }
+    }
   }
 }
