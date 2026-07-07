@@ -809,6 +809,10 @@
         + '<br style="margin-top:8px;display:block;content:'';">'
         + '<a class="btn btn-outline" href="/ai-ops-retainer.html" style="margin-top:8px;display:inline-block;font-size:13px;">Or protect it monthly → $1,497 AI Ops Retainer</a>'
         + '</p>';
+      // GA4 conversion event
+      if (typeof gtag === 'function') {
+        gtag('event', 'audit_submit', { event_category: 'lead', event_label: (data.grade || ''), value: 1 });
+      }
     } catch (error) {
       result.innerHTML = '<h2>Audit could not run automatically</h2>'
         + '<p>' + escapeHtml(error.message) + '</p>'
