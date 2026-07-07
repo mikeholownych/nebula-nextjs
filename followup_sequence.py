@@ -248,35 +248,28 @@ Free audit if you'd like to check {domain}: https://nebulacomponents.shop/audit.
 
 — Nebula"""),
 
-    (14, "revive_week2",
-     "still relevant: the {domain} audit",
+    (14, "revive_week2_yesno",
+     "quick yes or no — {domain}",
      """Hi,
 
-Two weeks ago I sent the {domain} audit. Still accurate if you ever come back to it.
+One question — would a free audit of {domain} be relevant for you right now?
 
-Quick summary of what it found:
-. {issue1}
-. {issue2}
+Yes / No — either works.
 
-No pressure on timing. The audit link is live whenever you want it:
-
-https://nebulacomponents.shop/audit.html?url=https://{domain}
+If yes, I'll run it and send findings same day.
+If no, I'll close the file and leave you alone.
 
 — Nebula"""),
 
-    (21, "revive_week3_final",
-     "final check on {domain}",
+    (21, "revive_week3_did_i_miss",
+     "did I get this wrong?",
      """Hi,
 
-Last follow-up on the {domain} audit from a few weeks back.
+I've sent a few notes about {domain}. Haven't heard back, so I'll assume the timing is off — or I missed the mark entirely.
 
-The core finding hasn't changed: {issue1} is the most likely reason paid traffic isn't converting on this page.
+If I got that wrong and this is still relevant, just reply with your URL and I'll send the audit findings same day.
 
-If you ever want to revisit:
-. Free audit: https://nebulacomponents.shop/audit.html
-. $97 implementation (24h, refund if no lift): {stripe}
-
-Won't follow up again after this. Best of luck with {domain}.
+Otherwise I'll stop here. No hard feelings.
 
 — Nebula"""),
 ]
@@ -302,17 +295,15 @@ https://nebulacomponents.shop/audit.html
 
 — Nebula"""),
 
-    (60, "nurture_60",
-     "checking in — still running ads to {domain}?",
+    (60, "nurture_60_close",
+     "should I close your file?",
      """Hi,
 
-Circling back. If you're still running paid traffic to {domain}, the audit findings from earlier still apply — they don't age out.
+It's been 60 days since the {domain} audit. Haven't heard back, so I'll assume it's not a priority.
 
-If you've made changes since then, re-running the audit would catch anything new:
+If I got that wrong — still running paid traffic to that page and the numbers aren't there — just reply and I'll re-run the audit with fresh eyes.
 
-https://nebulacomponents.shop/audit.html?url=https://{domain}
-
-No follow-up after this. Door's open if you need it.
+Otherwise I'll close the file. No hard feelings.
 
 — Nebula"""),
 ]
