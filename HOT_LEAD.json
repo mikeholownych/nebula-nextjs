@@ -545,5 +545,23 @@
     "trigger_type": null,
     "contact_route": null,
     "pitch_due_at": "2026-07-09T02:36:24Z"
+  },
+  {
+    "email": "support@curiouscats.ai",
+    "url": "https://curiouscats.ai",
+    "score": 6.5,
+    "audit_score": 6.5,
+    "audit_grade": "B",
+    "stage": "audit_delivered",
+    "status": "pending",
+    "action": "send_97_pitch",
+    "thread_id": null,
+    "message_id": "<0100019f3b9d5035-d5d7ee86-1899-4d13-889f-fd7cb56aa7e3-000000@email.amazonses.com>",
+    "trigger_context": "Saw your public post: i wanted a news app that doesn\u2019t turn into a feed, so we built one around timelines",
+    "source_url": null,
+    "lead_id": null,
+    "trigger_type": null,
+    "contact_route": null,
+    "pitch_due_at": "2026-07-09T08:06:33Z"
   }
 ]

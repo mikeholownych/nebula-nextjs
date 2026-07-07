@@ -2,13 +2,13 @@
   "company": "Nebula Components",
   "current_bottleneck": "audit_to_payment_conversion",
   "customer_events": {
-    "audit_delivered": 40,
+    "audit_delivered": 41,
     "checkout_attempts": 18,
     "payments": 2,
     "warm_replies": 0
   },
   "funnel": {
-    "audits_delivered": 37,
+    "audits_delivered": 38,
     "emails_sent": 155,
     "hot_lead_pitches_sent": 7,
     "replies": 3,
@@ -17,7 +17,7 @@
     "trigger_warm_replies": 0,
     "warm_leads": 1
   },
-  "generated_at": "2026-07-07T07:28:28Z",
+  "generated_at": "2026-07-07T08:59:20Z",
   "kill_criteria": {
     "audit": "3 audits delivered and 0 payments",
     "checkout": "buyer cannot pay self-serve",
@@ -25,11 +25,13 @@
   },
   "offer": "Free landing page audit -> $97 implementation",
   "pipeline": {
-    "hot_leads_pending": 11,
-    "overdue_emails": [],
-    "pitch_overdue": 0,
+    "hot_leads_pending": 12,
+    "overdue_emails": [
+      "contact@curbcaddie.com"
+    ],
+    "pitch_overdue": 1,
     "pitch_sent": 21,
-    "total": 37
+    "total": 38
   },
   "revenue": {
     "real_payments": 0,

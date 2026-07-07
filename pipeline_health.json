@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-07T07:45:32.236760+00:00",
+  "timestamp": "2026-07-07T09:15:24.444277+00:00",
   "healthy": true,
   "passed": 15,
   "failed": 0,
@@ -63,7 +63,7 @@
     {
       "name": "Pipeline ramp recent run",
       "passed": true,
-      "detail": "98m ago"
+      "detail": "68m ago"
     },
     {
       "name": "Dead letter queue",
@@ -83,12 +83,12 @@
   ],
   "stuck_leads": [],
   "lead_stages": {
-    "audit_delivered": 14,
+    "audit_delivered": 15,
     "pitch_sent": 20,
     "paid": 0,
     "bounced": 30,
     "contacted": 75,
     "unknown": 0
   },
-  "total_leads": 139
+  "total_leads": 140
 }

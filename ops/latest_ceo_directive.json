@@ -3,7 +3,7 @@
     "growth": "Stop generic volume; source 10 trigger-proof leads with public ad/conversion pain evidence.",
     "market": "Rank lead sources by public pain signal strength; kill weak channels after 30 sends and 0 warm replies.",
     "ops-finance": "Verify real revenue, checkout path, and ledger integrity; exclude test payments.",
-    "support": "Monitor inbox and route replies to self-serve audit or checkout within 15 minutes."
+    "support": "Pitch all overdue hot leads now; log each pitch and outcome."
   },
   "bottleneck": "audit_to_payment_conversion",
   "directive": "Convert delivered audits into paid $97 implementation before adding more volume.",
@@ -11,18 +11,19 @@
     "alerts": [
       "OUTREACH_KILL_CRITERIA_MET",
       "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET",
+      "HOT_LEAD_PITCH_OVERDUE",
       "ZERO_REVENUE"
     ],
-    "audits_delivered": 37,
-    "pitch_overdue": 0,
+    "audits_delivered": 38,
+    "pitch_overdue": 1,
     "real_payments": 0,
     "real_revenue": 0,
     "scores": {
-      "ceo": 55,
+      "ceo": 52,
       "growth": 40,
       "market": 45,
       "ops-finance": 60,
-      "support": 75
+      "support": 63
     }
   },
   "handoff_queue": [
@@ -30,9 +31,19 @@
       "acceptance": "audit/pitch/payment event is written to customer ledger and HOT_LEAD state is advanced",
       "agent": "support",
       "handoff_to": "ops-finance",
+      "priority": 100,
+      "required_artifact": "pitch sent or incident row explaining why it could not be sent",
+      "score": 63,
+      "stage": "closer_delivery",
+      "trigger": "hot lead pitch_due_at passed"
+    },
+    {
+      "acceptance": "audit/pitch/payment event is written to customer ledger and HOT_LEAD state is advanced",
+      "agent": "support",
+      "handoff_to": "ops-finance",
       "priority": 95,
       "required_artifact": "checkout-safe audit-to-$97 pitch flow verified by dry run/test and ledger row",
-      "score": 75,
+      "score": 63,
       "stage": "closer_delivery",
       "trigger": "audits delivered but paid conversion is weak"
     },
@@ -82,7 +93,7 @@
       "handoff_to": null,
       "priority": 60,
       "required_artifact": "one bottleneck, one kill/scale decision, and next 3 agent orders in latest_ceo_directive",
-      "score": 55,
+      "score": 52,
       "stage": "mission_control_decision",
       "trigger": "daily mission control synthesis"
     }
@@ -136,5 +147,5 @@
       "ceo"
     ]
   },
-  "timestamp": "2026-07-07T07:28:28Z"
+  "timestamp": "2026-07-07T08:59:20Z"
 }
