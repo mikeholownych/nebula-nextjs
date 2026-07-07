@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-07-07T10:00:35.052417+00:00",
-  "healthy": true,
-  "passed": 15,
-  "failed": 0,
+  "timestamp": "2026-07-07T10:15:39.517397+00:00",
+  "healthy": false,
+  "passed": 14,
+  "failed": 1,
   "total": 15,
   "checks": [
     {
       "name": "File: ramp_pipeline_fill.py",
       "passed": true,
-      "detail": "30,605 bytes"
+      "detail": "32,302 bytes"
     },
     {
       "name": "File: followup_sequence.py",
@@ -18,7 +18,7 @@
     {
       "name": "File: deliver_audit.py",
       "passed": true,
-      "detail": "49,319 bytes"
+      "detail": "49,646 bytes"
     },
     {
       "name": "File: agentic_server.py",
@@ -58,12 +58,12 @@
     {
       "name": "Pipeline lock",
       "passed": true,
-      "detail": "Running"
+      "detail": "No lock file — pipeline not currently running"
     },
     {
       "name": "Pipeline ramp recent run",
-      "passed": true,
-      "detail": "113m ago"
+      "passed": false,
+      "detail": "129m ago — stale"
     },
     {
       "name": "Dead letter queue",
