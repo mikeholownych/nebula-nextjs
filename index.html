@@ -466,7 +466,7 @@
       </select>
       <p class="micro" style="margin-top:8px;">Your URL and email are used to generate, email, and log the audit. No resale. No spam.</p>
       <p class="micro" style="text-align:center;margin:8px 0;color:#6ee7b7;font-weight:600;">✓ 40+ audits delivered &nbsp;·&nbsp; avg score back in 60s &nbsp;·&nbsp; 30-min-or-30-day guarantee</p>
-      <button type="submit">Run my free audit →</button>
+      <button type="submit" id="audit-submit-btn">Run my free audit →</button>
     </form>
     <div id="audit-result" class="card result"></div>
   </section>
@@ -771,6 +771,8 @@
   }
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+    // Bot check: honeypot must be empty
+    if (document.getElementById('website_confirm') && document.getElementById('website_confirm').value) return;
     const payload = {
       url: form.url.value.trim(),
       email: form.email.value.trim(),
@@ -783,6 +785,8 @@
       trigger_type: 'self_serve_url_submit',
       offer_variant: 'audit_first_free_kit'
     };
+    const submitBtn = document.getElementById('audit-submit-btn');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Running…'; }
     result.className = 'card result show';
     result.innerHTML = '<h2>Your audit is running…</h2><p>Checking clarity, CTA friction, trust proof, offer specificity, and implementation difficulty.</p>';
     try {
@@ -806,11 +810,13 @@
         + '<a class="btn" href="#" onclick="document.getElementById(\'free-kit-email\').value=\'' + escapeHtml(form.email.value.trim()) + '\';document.getElementById(\'free-kit-form\').dispatchEvent(new Event(\'submit\',{bubbles:true}));return false;">🎁 Free — email me the fix kit</a> '
         + '<a class="btn btn-dark" href="https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02" style="margin-left:6px;">Get the $97 Fix Pack →</a>'
         + '</p>';
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Run my free audit →'; }
       // GA4 conversion event
       if (typeof gtag === 'function') {
         gtag('event', 'audit_submit', { event_category: 'lead', event_label: (data.grade || ''), value: 1 });
       }
     } catch (error) {
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Run my free audit →'; }
       result.innerHTML = '<h2>Audit could not run automatically</h2>'
         + '<p>' + escapeHtml(error.message) + '</p>'
         + '<p>Email ops@launchcrate.io with your URL and we will route it through the audit queue.</p>'
