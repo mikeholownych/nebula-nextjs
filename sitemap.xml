@@ -15,6 +15,13 @@
   <url><loc>https://nebulacomponents.shop/ai-sdr-vs-audit.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://nebulacomponents.shop/7-systems.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 
+
+  <!-- Category pages -->
+  <url><loc>https://nebulacomponents.shop/headline-optimization.html</loc><lastmod>2026-07-07</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://nebulacomponents.shop/cta-optimization.html</loc><lastmod>2026-07-07</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://nebulacomponents.shop/social-proof-landing-page.html</loc><lastmod>2026-07-07</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://nebulacomponents.shop/page-speed-conversion.html</loc><lastmod>2026-07-07</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://nebulacomponents.shop/mobile-landing-page-optimization.html</loc><lastmod>2026-07-07</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <!-- Tools / lead gen -->
   <url><loc>https://nebulacomponents.shop/ad-burn-leaderboard.html</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
   <url><loc>https://nebulacomponents.shop/generator.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
