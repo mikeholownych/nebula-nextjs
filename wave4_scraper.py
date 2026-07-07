@@ -444,15 +444,17 @@ import hashlib
 # Variant selection: deterministic by URL hash so same lead always gets same copy
 _PPQ_VARIANTS = [
     {
+        # Illingworth: "{{CompanyName}} [offer]?" format — outcome-based, human
         "subject_tpl": "Your {kw} — found something",
         "opening": "Saw your post: \"{snip}\"",
         "problem": "Problem I keep seeing: ad spend stays flat while conversions drop — usually the landing page is bleeding the budget, not the ads.",
         "proof": "Proof: ran 100+ audits last month. Most pages lose 60–70% of clicks on the hero alone.",
-        "question": "Quick question: want me to run a free audit on your page? I send findings same day — just reply with your URL.",
+        "question": "Just reply with your URL — want me to send findings same day?",
         "ps": "P.S. I know this is cold — but if the page is leaking, it's leaking right now. ☕",
     },
     {
-        "subject_tpl": "Quick question about {kw}",
+        # Illingworth: conversational subject, no "Quick question" — flagged as overused
+        "subject_tpl": "{kw} — worth a look?",
         "opening": "Found your post: \"{snip}\"",
         "problem": "Most founders I talk to have the same issue: the ads are fine, but the page loses 60%+ of visitors before they ever see the offer.",
         "proof": "I've audited 100+ landing pages. The hero section is almost always where the budget bleeds.",
@@ -488,6 +490,12 @@ def build_email(lead):
       Problem  — specific pain this ICP is feeling right now (trigger-matched)
       Proof    — one quantified result or credential
       Question — soft CTA, easy yes
+
+    Illingworth 237-campaign rules enforced post-build via email_linter:
+      - Word count 60–180
+      - ≥1 specific number in body
+      - CTA ends with "?"
+      - Subject 3–9 words, no fake urgency
     """
     title_snip = lead['title'][:80]
     matched_kw = lead.get('matched', ['conversion issues'])[0] if lead.get('matched') else 'conversion issues'
@@ -509,6 +517,21 @@ def build_email(lead):
         "—\n"
         "Reply STOP to opt out."
     )
+
+    # ── Illingworth formula gate ───────────────────────────────────
+    try:
+        from email_linter import gate
+        first_name = lead.get("first_name", lead.get("author", ""))
+        lint = gate(subject, body, first_name=first_name)
+        if not lint.passed:
+            print(f"  [LINT FAIL] {lead.get('email','?')}")
+            for e in lint.errors:
+                print(f"    ✗ {e[:100]}")
+        elif lint.warnings:
+            for w in lint.warnings:
+                print(f"  [LINT WARN] {w[:100]}")
+    except ImportError:
+        pass  # linter not available — allow through
 
     return subject, body
 
