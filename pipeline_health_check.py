@@ -125,6 +125,12 @@ def count_lead_stages():
             buckets["unknown"] += 1
     return stages, buckets
 
+TEST_EMAILS = frozenset([
+    "mike.holownych@aisyndicate.io", "mike.holownych@gmail.com",
+    "test@example.com", "restart-test@example.com", "stripe@example.com",
+    "founder@testco.com", "nebulashop@agentmail.to",
+])
+
 def detect_stuck_leads(stages):
     """Leads stuck in a stage beyond stage-specific thresholds without advancement."""
     # Thresholds per stage
@@ -135,6 +141,9 @@ def detect_stuck_leads(stages):
     stuck = []
     for email, entry in stages.items():
         if entry["stage"] not in ("audit_delivered",):
+            continue
+        # Exclude test emails from stuck reporting — they inflate the failure count
+        if email.lower() in TEST_EMAILS:
             continue
         ts = entry.get("ts", "")
         if not ts:

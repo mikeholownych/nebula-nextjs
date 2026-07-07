@@ -15,6 +15,83 @@ REDDIT_DEDUP = BASE / 'reddit_scraped_ids.jsonl'
 FIREWALL_LOG = BASE / 'firewall_blocked.jsonl'
 FIREWALL_MIN_SCORE = 50  # posts below this get blocked from outreach
 
+# ── ICP Quality Gate ────────────────────────────────────────────────────────
+# Only send full audits to leads expressing the BUYING TRIGGER, not just any
+# landing page feedback. Self-serve link is in the email body regardless.
+ICP_GATE_ENABLED = True
+
+ICP_TRIGGER_PATTERNS = {
+    "ad_bleed": [
+        r"\bgoogle ads?\b", r"\bfacebook ads?\b", r"\bmeta ads?\b", r"\bpaid traffic\b",
+        r"\bad spend\b", r"\bspend(?:ing)?\s+\$?\d+", r"\bbudget\b", r"\bcpc\b", r"\bppc\b",
+        r"\$\s?\d{3,}", r"\brunning ads?\b", r"\bgoogle adwords?\b", r"\bsearch ads?\b",
+    ],
+    "zero_conversions": [
+        r"\bzero conversions?\b", r"\b0 conversions?\b", r"\bno conversions?\b",
+        r"\bnot converting\b", r"\bno signups?\b", r"\b0 sales\b", r"\bno sales\b",
+        r"\bno customers?\b", r"\bclicks? no (sales|conversions|buys?)\b",
+        r"\bburning money\b", r"\bthrowing money\b", r"\bwasting money\b",
+        r"\bno bookings?\b", r"\bno leads?\b", r"\bzero signups\b",
+    ],
+    "landing_page_feedback": [
+        r"\broast my landing page\b", r"\blanding page feedback\b", r"\bfeedback on my (landing page|site)\b",
+        r"\bhomepage feedback\b", r"\bconversion rate(?!\s+optimization)\b", r"\broast my site\b",
+    ],
+    "founder_signal": [
+        r"\bfounder\b", r"\bsolo founder\b", r"\bbootstrapped\b", r"\bindie hacker\b",
+        r"\bmy startup\b", r"\bmy saas\b", r"\bjust launched\b",
+    ],
+}
+
+# Test/sandbox emails that should never receive outreach
+TEST_EMAILS = frozenset([
+    "mike.holownych@aisyndicate.io",
+    "mike.holownych@gmail.com",
+    "test@example.com",
+    "restart-test@example.com",
+    "stripe@example.com",
+    "founder@testco.com",
+    "nebulashop@agentmail.to",
+])
+
+
+def check_icp_fit(post_text: str, trigger_source: str) -> tuple[bool, str]:
+    """Check if a lead expresses the buying trigger (ad_bleed + zero_conversions).
+    
+    Returns (True, reason) for ICP-fit leads, (False, reason) for non-ICP.
+    The self-serve link is always available in outreach — this only gates
+    the full automated audit delivery.
+    """
+    low = post_text.lower()
+    triggers_found = []
+    score = 0
+    
+    for trigger, patterns in ICP_TRIGGER_PATTERNS.items():
+        if any(re.search(p, low) for p in patterns):
+            triggers_found.append(trigger)
+            scores = {"ad_bleed": 5, "zero_conversions": 5, "landing_page_feedback": 2, "founder_signal": 2}
+            score += scores.get(trigger, 0)
+    
+    # Bonus for the buying trigger combo
+    has_ad_bleed = "ad_bleed" in triggers_found
+    has_zero_conv = "zero_conversions" in triggers_found
+    has_founder = "founder_signal" in triggers_found
+    
+    if has_ad_bleed and has_zero_conv:
+        score += 3
+        return True, f"buying_trigger (ad_bleed+zero_conversions, score={score})"
+    
+    if (has_ad_bleed or has_zero_conv) and has_founder:
+        return True, f"founder_with_pain (triggers={triggers_found}, score={score})"
+    
+    if has_ad_bleed:
+        return True, f"ad_bleed_present (triggers={triggers_found}, score={score})"
+    
+    if trigger_source in ("reddit_ads_pain", "reddit_zero_sales", "reddit_ads_no_conv"):
+        return True, f"high_yield_source ({trigger_source})"
+    
+    return False, f"no_buying_trigger (triggers={triggers_found}, score={score})"
+
 sys.path.insert(0, str(BASE))
 
 # Content Firewall — synthetic content filter
@@ -690,6 +767,29 @@ def main():
             append_jsonl(FIREWALL_LOG, {'timestamp':datetime.now(timezone.utc).isoformat(),'url':c.get('url',''),'site':site,'email':email,'score':fw_result['score'],'verdict':fw_result['verdict'],'violations':[v['type'] for v in fw_result.get('violations', [])],'trigger':c.get('trigger','')[:80],'source':'ramp_pipeline_fill'})
             print(f"  FIREWALL-BLOCKED {rec.get('email','?')} ({rec.get('site','?')}) — score={fw_result['score']}/100, verdict={fw_result['verdict']}")
             continue
+
+        # ICP Quality Gate — skip non-buying-trigger leads
+        if ICP_GATE_ENABLED:
+            # Skip test emails — they inflate stuck-lead detection
+            email_lower = (email or '').lower()
+            if email_lower in TEST_EMAILS:
+                rec['status'] = 'icp_filtered'
+                rec['reason'] = 'Test/sandbox email — excluded from outreach'
+                queued.append(rec)
+                print(f"  ICP-FILTERED {email} ({site}) — test email excluded")
+                continue
+
+            # Score the post content for buying trigger signals
+            icp_passed, icp_reason = check_icp_fit(post_text, c.get('source', ''))
+            rec['icp_result'] = icp_reason
+            if not icp_passed:
+                rec['status'] = 'icp_filtered'
+                rec['reason'] = f"ICP gate: {icp_reason}"
+                rec['icp_passed'] = False
+                queued.append(rec)
+                print(f"  ICP-FILTERED {email} ({site}) — {icp_reason}")
+                continue
+            rec['icp_passed'] = True
 
         cmd=[
             '/home/mike/nebula/venv/bin/python3',
