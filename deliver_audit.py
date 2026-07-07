@@ -177,7 +177,9 @@ def score_audit(page):
     else:
         proof_score = 3
         proof_issue = "No trust signals found — no testimonials, reviews, or social proof anywhere on the page."
-    speed_score = 8 if len(html_text) < 120000 else 5
+    # HTML-size heuristic (fallback if PageSpeed API unavailable)
+    html_size_score = 8 if len(html_text) < 120000 else 5
+    html_size_issue = "Page HTML is within normal bounds." if html_size_score >= 7 else f"HTML is {len(html_text)//1000}KB — large pages slow first paint."
     mobile_score = 8 if "viewport" in lower else 4
 
     # --- PageSpeed dimension ---
@@ -200,9 +202,21 @@ def score_audit(page):
         )
         if perf_score is not None:
             pagespeed_score = round(float(perf_score) * 10)
-            pagespeed_issue = f"Performance score: {round(float(perf_score) * 100)}/100"
+            pagespeed_issue = f"Lighthouse performance: {round(float(perf_score) * 100)}/100"
     except Exception:
         pass  # fallback score/issue already set
+
+    # Merge: prefer real Lighthouse data; fall back to HTML-size heuristic (MECE: one bucket)
+    if pagespeed_score != 5:
+        load_speed_score = pagespeed_score
+        load_speed_issue = pagespeed_issue
+    else:
+        load_speed_score = html_size_score
+        load_speed_issue = html_size_issue
+    load_speed_fix = (
+        "Compress images, remove render-blocking scripts, enable caching. "
+        "Target Lighthouse performance >= 70 on mobile."
+    )
 
     # --- Above-fold dimension ---
     fold_html = html_text[:3000]
@@ -355,23 +369,18 @@ def score_audit(page):
             "issue": proof_issue,
             "fix": "Add proof near the first CTA: sample output, customer quote, metric, guarantee, or process evidence."
         },
-        "speed": {
-            "score": speed_score,
-            "weight": "medium",
-            "issue": "Page weight appears reasonable from HTML size." if speed_score >= 7 else "Page may be heavy enough to create load friction.",
-            "fix": "Compress images, defer non-essential scripts, and keep the first screen lightweight."
-        },
+
         "mobile": {
             "score": mobile_score,
             "weight": "medium",
             "issue": "Viewport tag is present." if mobile_score >= 7 else "Mobile viewport metadata may be missing.",
             "fix": "Ensure responsive viewport and test the hero/form on mobile width.",
         },
-        "pagespeed": {
-            "score": pagespeed_score,
+        "load_speed": {
+            "score": load_speed_score,
             "weight": "high",
-            "issue": pagespeed_issue,
-            "fix": "Compress images, remove render-blocking scripts, enable caching",
+            "issue": load_speed_issue,
+            "fix": load_speed_fix,
         },
         "above_fold": {
             "score": above_fold_score,
@@ -394,7 +403,57 @@ def score_audit(page):
     }
     overall = round(sum(v["score"] for v in dimensions.values()) / len(dimensions), 1)
     grade = "A" if overall >= 8 else "B" if overall >= 6.5 else "C" if overall >= 5 else "D"
-    return {"overall": overall, "overall_grade": grade, "dimensions": dimensions}
+    # ── Opportunity Matrix (CAIOS M6) ──────────────────────────────────────────
+    # Impact: revenue_unlock + risk_removal + time_to_value
+    # Effort: integration_complexity + people_process_change (70% rule)
+    # Scores pulled from audit evidence, not opinion.
+    opp_matrix = []
+    for key, dim in dimensions.items():
+        score_val = dim["score"]
+        if score_val >= 7:
+            continue  # not a problem worth surfacing
+
+        # Impact: inverse of score (lower score = bigger opportunity)
+        base_impact = round((10 - score_val) / 2, 1)
+
+        # Effort weights per dimension (70% rule: change burden, not just tech)
+        effort_weights = {
+            "headline":     2,   # copy edit — 10 min, no system touch
+            "cta":          2,   # copy edit — 10 min
+            "above_fold":   3,   # layout/copy — CMS edit, possible dev
+            "social_proof": 3,   # content sourcing + placement
+            "load_speed":   7,   # infra + build pipeline + 70% ops change
+            "mobile":       3,   # CSS/viewport — usually one line
+            "ad_signals":   8,   # pixel install + GA4 events + tag manager + 70% team workflow change
+            "seo_foundations": 4, # title/meta edits — low tech, some content work
+        }
+        effort = effort_weights.get(key, 5)
+
+        # Quadrant
+        if base_impact >= 2.0 and effort <= 4:
+            quadrant = "quick_win"
+        elif base_impact >= 2.0 and effort > 4:
+            quadrant = "major_project"
+        elif base_impact < 2.0 and effort <= 4:
+            quadrant = "fill_in"
+        else:
+            quadrant = "avoid"
+
+        opp_matrix.append({
+            "key": key,
+            "label": key.replace("_", " ").title(),
+            "impact": base_impact,
+            "effort": effort,
+            "quadrant": quadrant,
+            "issue": dim["issue"],
+            "fix": dim["fix"],
+        })
+
+    # Sort: quick_wins first (by impact desc), then major, fill_in, avoid
+    _order = {"quick_win": 0, "major_project": 1, "fill_in": 2, "avoid": 3}
+    opp_matrix.sort(key=lambda x: (_order[x["quadrant"]], -x["impact"]))
+
+    return {"overall": overall, "overall_grade": grade, "dimensions": dimensions, "opp_matrix": opp_matrix}
 
 
 
@@ -541,11 +600,10 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         "headline": "Headline",
         "cta": "CTA",
         "social_proof": "Social Proof",
-        "speed": "Speed",
+        "load_speed": "Load Speed",
         "mobile": "Mobile",
         "seo_foundations": "SEO Foundations",
         "ad_signals": "Ad Tracking",
-        "pagespeed": "Page Speed",
         "above_fold": "Above Fold",
     }
     issues = sorted(audit["dimensions"].items(), key=lambda x: x[1]["score"])
@@ -692,6 +750,28 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
     if personalized_q:
         lines.append("")
         lines.append(personalized_q)
+
+    # ── Opportunity Matrix block (ranked, evidence-backed) ──
+    opp_matrix = audit.get("opp_matrix", [])
+    qw  = [o for o in opp_matrix if o["quadrant"] == "quick_win"]
+    maj = [o for o in opp_matrix if o["quadrant"] == "major_project"]
+    av  = [o for o in opp_matrix if o["quadrant"] == "avoid"]
+
+    if qw or maj:
+        lines.append("")
+        lines.append("Priority matrix (impact vs. effort — scored from your audit):")
+        if qw:
+            lines.append("  Quick wins (high impact, low effort — do first):")
+            for o in qw:
+                lines.append(f"    → {o['label']}: {o['fix']}")
+        if maj:
+            lines.append("  Major projects (high impact, needs planning):")
+            for o in maj[:2]:  # cap at 2 to keep email tight
+                lines.append(f"    → {o['label']}: {o['fix']}")
+        if av:
+            lines.append("  Skip for now (high effort, low return):")
+            for o in av[:1]:
+                lines.append(f"    ✗ {o['label']}")
 
     lines.extend(retainer_lines)
 
