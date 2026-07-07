@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Primary money pages -->
+  <url><loc>https://nebulacomponents.shop/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://nebulacomponents.shop/audit.html</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>https://nebulacomponents.shop/growth-launch.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://nebulacomponents.shop/pricing-generator.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nebulacomponents.shop/checkout.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- SEO content / blog -->
+  <url><loc>https://nebulacomponents.shop/what-is-landing-page-audit.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://nebulacomponents.shop/why-landing-pages-dont-convert.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://nebulacomponents.shop/blog-trigger-aware-outreach.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nebulacomponents.shop/ai-sdr-vs-audit.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nebulacomponents.shop/7-systems.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <!-- Tools / lead gen -->
+  <url><loc>https://nebulacomponents.shop/ad-burn-leaderboard.html</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>https://nebulacomponents.shop/generator.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nebulacomponents.shop/demo.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nebulacomponents.shop/primer.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+
+  <!-- Supporting pages -->
+  <url><loc>https://nebulacomponents.shop/audit-lander.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nebulacomponents.shop/beta-tester.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://nebulacomponents.shop/growth-launch-confirmation.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://nebulacomponents.shop/accessible-nebula.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://nebulacomponents.shop/marketing-ops.html</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://nebulacomponents.shop/lead-dashboard.html</loc><changefreq>daily</changefreq><priority>0.6</priority></url>
+
+
+  <!-- Case study pages -->
+  <url><loc>https://nebulacomponents.shop/public/case-studies/ecommerce-example-com-1.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/ecommerce-example-com-2.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/ecommerce-example-com-3.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/ecommerce-example-com-4.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/ecommerce-example-com-5.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/ecommerce-example-com.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/ecommerce-nebulacomponents-shop-1.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/ecommerce-nebulacomponents-shop-2.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/ecommerce-nebulacomponents-shop.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/ecommerce-patricianunes-pt-1.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/ecommerce-patricianunes-pt-2.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/ecommerce-patricianunes-pt-3.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/ecommerce-patricianunes-pt.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/ecommerce-repairandsquare-com-1.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/ecommerce-repairandsquare-com.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-2getherwesave-com-1.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-2getherwesave-com.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-curbcaddie-com-1.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-curbcaddie-com-2.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-curbcaddie-com-3.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-curbcaddie-com-4.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-curbcaddie-com-5.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-curbcaddie-com-6.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-curbcaddie-com-7.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-curbcaddie-com.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-hacktron-ai-1.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-hacktron-ai-2.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-hacktron-ai.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-nypost-com-1.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-nypost-com.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-usemagnetiq-com-1.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-usemagnetiq-com-2.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-usemagnetiq-com-3.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-usemagnetiq-com-4.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-usemagnetiq-com-5.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-usemagnetiq-com-6.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-usemagnetiq-com-7.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-usemagnetiq-com.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-xpertstart-com-au-1.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-xpertstart-com-au.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/general-ziplead-ai.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/saas-invoicingapi-com-1.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/saas-invoicingapi-com-2.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/saas-invoicingapi-com-3.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/saas-invoicingapi-com-4.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/saas-invoicingapi-com-5.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/saas-invoicingapi-com-6.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/saas-invoicingapi-com-7.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/saas-invoicingapi-com.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/saas-play-google-com-1.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/saas-play-google-com-2.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://nebulacomponents.shop/public/case-studies/saas-play-google-com.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+</urlset>

@@ -1,0 +1,31 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'>
+  <defs>
+    <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#111827'/>
+      <stop offset='100%' stop-color='#1f2937'/>
+    </linearGradient>
+  </defs>
+  <rect width='1200' height='630' fill='url(#bg)'/>
+  <!-- accent line -->
+  <rect x='80' y='60' width='4' height='510' fill='#6ee7b7' rx='2'/>
+  <!-- eyebrow -->
+  <text x='112' y='108' font-family="-apple-system,Arial,sans-serif" font-size='20' font-weight='600' fill='#6ee7b7' letter-spacing='3'>FREE · 60 SECONDS · NO SALES CALL</text>
+  <!-- headline line 1 -->
+  <text x='112' y='208' font-family="-apple-system,Arial,sans-serif" font-size='64' font-weight='700' fill='white' letter-spacing='-1'>Your landing page is</text>
+  <!-- headline line 2 green -->
+  <text x='112' y='286' font-family="-apple-system,Arial,sans-serif" font-size='64' font-weight='700' fill='#6ee7b7' letter-spacing='-1'>leaking buyers.</text>
+  <!-- sub -->
+  <text x='112' y='355' font-family="-apple-system,Arial,sans-serif" font-size='24' fill='#9ca3af'>Scored audit: clarity · CTA friction · trust gap · offer specificity</text>
+  <text x='112' y='389' font-family="-apple-system,Arial,sans-serif" font-size='24' fill='#9ca3af'>Free audit — or 7 Fix Pack turns it into implementation-ready copy.</text>
+  <!-- pills row -->
+  <rect x='112' y='442' width='156' height='44' rx='22' fill='#1f2937' stroke='#374151' stroke-width='1'/>
+  <text x='190' y='469' font-family="-apple-system,Arial,sans-serif" font-size='16' fill='#d1d5db' text-anchor='middle'>🎯 Clarity</text>
+  <rect x='282' y='442' width='182' height='44' rx='22' fill='#1f2937' stroke='#374151' stroke-width='1'/>
+  <text x='373' y='469' font-family="-apple-system,Arial,sans-serif" font-size='16' fill='#d1d5db' text-anchor='middle'>🖱️ CTA friction</text>
+  <rect x='478' y='442' width='164' height='44' rx='22' fill='#1f2937' stroke='#374151' stroke-width='1'/>
+  <text x='560' y='469' font-family="-apple-system,Arial,sans-serif" font-size='16' fill='#d1d5db' text-anchor='middle'>🤝 Trust gap</text>
+  <rect x='656' y='442' width='196' height='44' rx='22' fill='#1f2937' stroke='#374151' stroke-width='1'/>
+  <text x='754' y='469' font-family="-apple-system,Arial,sans-serif" font-size='16' fill='#d1d5db' text-anchor='middle'>📦 Offer specificity</text>
+  <!-- domain -->
+  <text x='1120' y='590' font-family="-apple-system,Arial,sans-serif" font-size='18' fill='#4b5563' text-anchor='end'>nebulacomponents.shop</text>
+</svg>

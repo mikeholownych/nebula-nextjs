@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /lead-dashboard.html
+Disallow: /ledgers/
+Disallow: /growth_system/
+
+Sitemap: https://nebulacomponents.shop/sitemap.xml
