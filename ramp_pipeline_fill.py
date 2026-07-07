@@ -12,9 +12,18 @@ KEY_FILE = Path.home() / ".hermes/secrets/agentmail_org.key"
 APIFY_KEY_FILE = Path.home() / ".hermes/secrets/apify.key"
 DEAD_LETTER = BASE / 'dead_letter_queue.jsonl'
 REDDIT_DEDUP = BASE / 'reddit_scraped_ids.jsonl'
+FIREWALL_LOG = BASE / 'firewall_blocked.jsonl'
+FIREWALL_MIN_SCORE = 50  # posts below this get blocked from outreach
 
-# Bounce detection
 sys.path.insert(0, str(BASE))
+
+# Content Firewall — synthetic content filter
+try:
+    from growth_system.content_firewall import filter_lead, firewall_score
+    HAS_FIREWALL = True
+except ImportError:
+    HAS_FIREWALL = False
+
 try:
     from lead_store import LeadStore
     HAS_BOUNCE_DB = True
@@ -667,6 +676,19 @@ def main():
             # Dead letter: prospect permanently stalled
             append_jsonl(DEAD_LETTER, {'timestamp':datetime.now(timezone.utc).isoformat(),'site':site,'email':email,'reason':rec['reason'],'retry_count':retry_count,'source':'ramp_pipeline_fill'})
             print(f"  MAX_RETRIES {email} ({site}) — {retry_count} failures, skipping")
+            continue
+
+        # Content Firewall — block synthetic / vendor-camouflage content
+        post_text = f"{c.get('title', '')} {c.get('body', '')} {c.get('selftext', '')}"
+        fw_result = filter_lead(post_text, url=c.get('url', ''), min_score=FIREWALL_MIN_SCORE) if HAS_FIREWALL else {'passed': True, 'score': 100}
+        rec['firewall_score'] = fw_result.get('score', 100)
+        rec['firewall_verdict'] = fw_result.get('verdict', 'human')
+        if not fw_result.get('passed', True):
+            rec['status'] = 'firewall_blocked'
+            rec['reason'] = f"Content firewall blocked — score={fw_result['score']}/100 ({fw_result['verdict']}), violations: {[v['type'] for v in fw_result.get('violations', [])]}"
+            queued.append(rec)
+            append_jsonl(FIREWALL_LOG, {'timestamp':datetime.now(timezone.utc).isoformat(),'url':c.get('url',''),'site':site,'email':email,'score':fw_result['score'],'verdict':fw_result['verdict'],'violations':[v['type'] for v in fw_result.get('violations', [])],'trigger':c.get('trigger','')[:80],'source':'ramp_pipeline_fill'})
+            print(f"  FIREWALL-BLOCKED {rec.get('email','?')} ({rec.get('site','?')}) — score={fw_result['score']}/100, verdict={fw_result['verdict']}")
             continue
 
         cmd=[

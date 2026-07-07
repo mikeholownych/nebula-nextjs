@@ -139,3 +139,10 @@ sitemap.xml
 # ── Mystery artifacts ────────────────────────────
 3
 .git_rm_list.txt
+
+# ── AI-DLC session artifacts (audit trails, state) ─
+aidlc-docs/audit.md
+aidlc-docs/aidlc-state.md
+aidlc-docs/inception/
+aidlc-docs/construction/
+aidlc-docs/operations/

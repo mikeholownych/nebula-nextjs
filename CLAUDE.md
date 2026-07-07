@@ -1,38 +1,49 @@
-# CLAUDE.md — Nebula Components
+# CLAUDE.md — Nebula Components (AI-DLC Workflow)
 
-## Knowledge Base
-This project has a second brain at ~/nebula/vault.
+## PRIORITY: This workflow OVERRIDES workspace defaults
+When responding to software or pipeline requests, follow the AI-DLC phase-gated workflow.
 
-Before starting any task:
-1. Read vault/INDEX.md to see what exists.
-2. Follow links to the relevant entity and concept pages.
-3. Do not sweep the whole folder. Open only what the trail points to.
-4. Ground every claim about the business, ICP, or pipeline in a vault page.
-5. If a claim has no vault page, say so instead of guessing.
+## AI-DLC Rules Location
+Rules are installed at `.aidlc/aidlc-rules/` — the base rules directory per AI-DLC spec:
+- `.aidlc/aidlc-rules/aws-aidlc-rules/core-workflow.md` — the 539-line process playbook
+- `.aidlc/aidlc-rules/aws-aidlc-rule-details/` — stage-specific rules (loaded on demand)
 
-## Vault Writing Rules
-1. One lesson per file, with a one-line summary at the top.
-2. Update the existing page instead of creating a duplicate.
-3. Delete notes that turn out to be wrong.
-4. Never edit /raw. Keep sources and compiled pages separate.
-5. Every compiled page links back to a source in /raw.
+**CRITICAL:** Always load `common/session-continuity.md` at workflow start for session resumption.
+Reference aidlc-docs/audit.md for the full interaction history.
 
-## Voice
-Read vault/concepts/voice-profile.md before writing any copy, email, or landing page content.
+## Nebula-Specific Extensions (opt-in at requirements analysis)
+Load these on demand:
+- `extensions/nebula/audit-pipeline/audit-pipeline.opt-in.md` → audit delivery rules
+- `extensions/nebula/lead-pipeline/lead-pipeline.opt-in.md` → lead state machine + dedup
+- `extensions/nebula/compliance-sovereignty/compliance-sovereignty.opt-in.md` → regulated client rules
 
-## Offer
-Read vault/concepts/offer-ladder.md before pricing, framing, or building any CTA.
-
-## ICP
-Read vault/concepts/icp.md before writing outreach, scoring leads, or targeting.
-
-## Pipeline
-Read vault/concepts/audit-pipeline.md before touching deliver_audit.py or agentic_server.py.
-
-## Key Facts (always-paid tax — kept minimal)
+## Key Operational Facts
 - Domain: nebulacomponents.shop
 - Server: localhost:8765 (venv: /home/mike/nebula/venv/bin/python3)
 - Git: github.com:Nebula-Components/nebula-components.git
+- AgentMail inbox: nebulashop@agentmail.to (REST only — NO SMTP)
 - Stripe $97: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+- Stripe $1,497 retainer: https://buy.stripe.com/3cs9Dp2NV5Oa6Sk28a
+- Stripe $497 agency partner: https://buy.stripe.com/5kAcPJcxJ2HM7tS7sw
 - GA4: G-KJ9S3450LH
-- Email ops: ops@launchcrate.io
+
+## Lead Stage Flow (Check before any send)
+discovered → site_found → contacted → audit_delivered → pitch_sent → paid
+Terminal: dead, bounced, max_retries_exceeded
+
+## Things I Get Wrong Without Reminders
+- **Bounce check placement:** `LeadStore.is_bounced(email)` in BOTH `process_hot_lead_pitches()` AND `ramp_pipeline_fill.py`
+- **Lock file cleanup:** ALL `flock` scripts MUST have `trap 'rm -f "$LOCK"' EXIT`
+- **Atomic writes:** HOT_LEAD.json → write `.tmp` then `os.rename()`
+- **Stripe session.url:** use attribute access (`session.url`), NOT dict method (`session.get("url")`)
+- **Score gate:** NEVER gate HOT_LEAD.json entry on `score >= 7`
+- **Venv:** always `venv/bin/python3`, never system python3
+- **Audit logging in aidlc-docs/audit.md:** append-only, capture COMPLETE raw user input, NEVER overwrite
+- **Duplicate send prevention:** set in-memory status BEFORE `UpdateLeadStatus()` write
+- **Claude Code sessions:** Starting `claude` inside nebula/ activates AI-DLC. Always use `Using AI-DLC,` prefix to trigger structured workflow.
+
+## What NOT to Do
+- Never edit aidlc-docs/audit.md with write_file — always append using terminal (echo >>)
+- Never send email without checking LeadStore.is_bounced()
+- Never claim SOC 2/GDPR/HIPAA certification — use "-ready" or "practices" language
+- Never disable `flock` trap — stale lock files cause false health warnings every cycle
