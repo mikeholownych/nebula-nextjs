@@ -33,7 +33,7 @@ ARCHETYPES = {
         "weakness": "Must deliver on the exact promise inside the email."
     },
     "problem_callout": {
-        "triggers": ["leaking", "losing", "costing", "broken", "wasting", "stuck", "failing", "wrong", "mistake"],
+        "triggers": ["leaking", "losing", "costing", "broken", "wasting", "stuck", "failing", "wrong", "mistake", "struggling", "problem", "issue"],
         "weight": 0.80,
         "description": "Names a painful problem the reader knows they have",
         "examples": ["Your landing page is leaking buyers", "The CTA mistake 90% of founders make"],

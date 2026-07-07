@@ -439,8 +439,9 @@ def scrape_new_launches():
 # ─── EMAIL SENDING ────────────────────────────────────────────────
 import hashlib
 
-# 3 PPQ variants — same structure, different wording
+# 4 PPQ variants — same structure, different wording
 # Illingworth: "Don't send the same email to thousands" — slight variation avoids dupe detection
+# Variant selection: deterministic by URL hash so same lead always gets same copy
 _PPQ_VARIANTS = [
     {
         "subject_tpl": "Your {kw} — found something",
@@ -448,6 +449,7 @@ _PPQ_VARIANTS = [
         "problem": "Problem I keep seeing: ad spend stays flat while conversions drop — usually the landing page is bleeding the budget, not the ads.",
         "proof": "Proof: ran 100+ audits last month. Most pages lose 60–70% of clicks on the hero alone.",
         "question": "Quick question: want me to run a free audit on your page? I send findings same day — just reply with your URL.",
+        "ps": "P.S. I know this is cold — but if the page is leaking, it's leaking right now. ☕",
     },
     {
         "subject_tpl": "Quick question about {kw}",
@@ -455,6 +457,7 @@ _PPQ_VARIANTS = [
         "problem": "Most founders I talk to have the same issue: the ads are fine, but the page loses 60%+ of visitors before they ever see the offer.",
         "proof": "I've audited 100+ landing pages. The hero section is almost always where the budget bleeds.",
         "question": "Worth me taking a look? Free audit, I'll send findings same day — just drop your URL.",
+        "ps": None,
     },
     {
         "subject_tpl": "noticed something re: {kw}",
@@ -462,6 +465,16 @@ _PPQ_VARIANTS = [
         "problem": "Something I see constantly: paid traffic looks healthy in the dashboard but the page is quietly killing conversions at the hero.",
         "proof": "100+ audits in — the pattern holds. 60–70% drop-off before anyone reaches the CTA.",
         "question": "Want me to check yours? Takes me a day — just reply with the URL.",
+        "ps": None,
+    },
+    {
+        # Interrogative subject: Illingworth "Struggling with [pain point]?" archetype
+        "subject_tpl": "Struggling with {kw}?",
+        "opening": "Noticed your post: \"{snip}\"",
+        "problem": "Landing pages bleeding ad spend is one of those problems that's invisible until you look for it — the traffic numbers look fine but the conversions never show up.",
+        "proof": "I run free audits and flag the exact drop-off point. 100+ pages reviewed, same pattern every time.",
+        "question": "Interested? Reply with your URL — I'll send findings same day.",
+        "ps": "P.S. Worst case you get a free audit. Best case you stop the leak. 🔍",
     },
 ]
 
@@ -489,6 +502,10 @@ def build_email(lead):
         f"{v['problem']}\n\n"
         f"{v['proof']}\n\n"
         f"{v['question']}\n\n"
+    )
+    if v.get("ps"):
+        body += f"{v['ps']}\n\n"
+    body += (
         "—\n"
         "Reply STOP to opt out."
     )
