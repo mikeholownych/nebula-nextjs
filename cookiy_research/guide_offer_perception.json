@@ -1,0 +1,520 @@
+{
+    "revision": "rev_1108c51aa49ff97d",
+    "study_detail_webpage_url": "https://s.cookiy.ai/console/study/019f3ce4-4a98-719d-8f12-d2ed9470734a?tab=study",
+    "discussion_guide": {
+        "research_overview": {
+            "project_name": "Free Landing Page Audit Offer: Trust, Value, and Conversion Drivers",
+            "research_objective": "Understand how founders currently experience landing page conversion problems, how they evaluate and trust a free landing page audit offer, and what would make them pay $700 for a 24-hour fix implementation\u2014capturing objections, decision criteria, and their own language for the 'money leaking' problem.",
+            "interview_duration": 15,
+            "interview_methodology": "one_on_one",
+            "sample_size": 12,
+            "mode_of_interview": "video",
+            "target_group": "Founders who spend $1k\u2013$10k per month on Facebook/Google/LinkedIn ads and have experienced strong click volume but weak landing page conversions, in the past 6 months.",
+            "external_knowledge": "Key terms and concepts for this study:\n- Landing page conversion rate (CVR): % of visitors who complete the desired action (purchase, book a call, sign up).\n- CAC (Customer Acquisition Cost): total acquisition spend divided by number of customers acquired.\n- ROAS (Return on Ad Spend): revenue attributed to ads divided by ad spend.\n- Funnel steps: ad click -> landing page -> key action (purchase/lead) -> follow-up -> sale.\n- CRO (Conversion Rate Optimization): practices aimed at increasing conversion on-site.\n- Common trust signals: clear offer, social proof, case studies, testimonials, transparent pricing, credible guarantees, verifiable identity.\n- Audit offer: a diagnostic review of a landing page with findings and recommendations; may raise concerns about quality, intent (upsell), and data privacy.\n- Implementation offer: executing fixes (copy, layout, tracking, page speed, forms, analytics) within a defined timeframe (24 hours) and scope.\n- Typical founder objections: skepticism about \u201cfree\u201d, fear of bait-and-switch, lack of differentiation, past bad agency experiences, unclear deliverables, time cost, data access risk, misfit with their niche.",
+            "moderator_instruction": ""
+        },
+        "core_research_questions": [
+            {
+                "text": "How do founders describe and diagnose landing page conversion problems when they are getting clicks but not sales?"
+            },
+            {
+                "text": "What builds or erodes trust in a free landing page audit offer, and what proof do founders need to believe it is valuable?"
+            },
+            {
+                "text": "What objections, risks, and switching costs prevent founders from accepting a free audit or sharing access/data?"
+            },
+            {
+                "text": "What decision criteria and value thresholds would make founders pay $700 for a 24-hour implementation of fixes?"
+            },
+            {
+                "text": "What language do founders use to describe wasted ad spend and the impact on their business decisions and emotions?"
+            }
+        ],
+        "participant_screening_criteria": {
+            "screening_questions": [
+                {
+                    "screener_question": "What best describes your role in your company's marketing decisions?",
+                    "type": "single_answer",
+                    "options": [
+                        {
+                            "description": "Founder/co-founder; I own final decisions on marketing spend",
+                            "correct": true
+                        },
+                        {
+                            "description": "Founder/co-founder; I share decisions with others",
+                            "correct": true
+                        },
+                        {
+                            "description": "Employee/contractor; I influence but do not own final decisions",
+                            "correct": false
+                        },
+                        {
+                            "description": "I am not involved in marketing decisions",
+                            "correct": false
+                        }
+                    ],
+                    "description": "Ensure participants are founders with decision authority for ads and landing page changes.",
+                    "media": []
+                },
+                {
+                    "screener_question": "About how much do you spend per month on paid ads (Meta, Google, LinkedIn) right now?",
+                    "type": "single_answer",
+                    "options": [
+                        {
+                            "description": "Less than $1,000",
+                            "correct": false
+                        },
+                        {
+                            "description": "$1,000\u2013$2,999",
+                            "correct": true
+                        },
+                        {
+                            "description": "$3,000\u2013$5,999",
+                            "correct": true
+                        },
+                        {
+                            "description": "$6,000\u2013$10,000",
+                            "correct": true
+                        },
+                        {
+                            "description": "More than $10,000",
+                            "correct": false
+                        }
+                    ],
+                    "description": "Confirm participants match the target spend band for the offer context.",
+                    "media": []
+                },
+                {
+                    "screener_question": "In the last 60 days, which best describes your paid traffic results?",
+                    "type": "single_answer",
+                    "options": [
+                        {
+                            "description": "We get clicks/visitors, but conversions are lower than expected",
+                            "correct": true
+                        },
+                        {
+                            "description": "We get enough conversions; performance is acceptable",
+                            "correct": false
+                        },
+                        {
+                            "description": "We are not running paid traffic right now",
+                            "correct": false
+                        }
+                    ],
+                    "description": "Ensure participants feel the specific pain of clicks without sales.",
+                    "media": []
+                },
+                {
+                    "screener_question": "Do you currently work for a landing page design, CRO, or marketing agency/consultancy?",
+                    "type": "single_answer",
+                    "options": [
+                        {
+                            "description": "Yes",
+                            "correct": false
+                        },
+                        {
+                            "description": "No",
+                            "correct": true
+                        }
+                    ],
+                    "description": "Avoid participants whose professional background may bias reactions to audit/implementation offers.",
+                    "media": []
+                }
+            ]
+        },
+        "interview_flow": {
+            "sections": [
+                {
+                    "script": "Thanks for joining. I\u2019m going to ask about your recent paid traffic and landing page experience. There are no right or wrong answers\u2014I'm interested in what happened and how you decide. Please avoid sharing passwords or sensitive data.",
+                    "question_list": [
+                        {
+                            "question": "Can you tell me about your business and what you sell, in your own words?",
+                            "type": "free_response",
+                            "question_depth": "light",
+                            "followup_guidelines": "Choose 1\u20132 followups to understand context, then move on.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "Who is the ideal customer, and what problem are you solving for them?"
+                                },
+                                {
+                                    "text": "What is the main action you want people to take on your site?"
+                                }
+                            ],
+                            "media": []
+                        },
+                        {
+                            "question": "Walk me through the last time you looked at ad results and felt concerned.",
+                            "type": "free_response",
+                            "question_depth": "deep",
+                            "followup_guidelines": "Only consider answered if they describe one specific moment. Use followups to get observable metrics and impact.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "What numbers or signals made you think something was off?"
+                                },
+                                {
+                                    "text": "What did you do next in the next hour or day?"
+                                },
+                                {
+                                    "text": "How did this affect your confidence in ads or the offer?"
+                                }
+                            ],
+                            "media": []
+                        },
+                        {
+                            "question": "When you say your landing page 'doesn't convert', what do you actually see happening?",
+                            "type": "free_response",
+                            "question_depth": "deep",
+                            "followup_guidelines": "Clarify symptoms first, then ask what 'fixed' looks like in their words.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "Where do people drop off, and how do you know?"
+                                },
+                                {
+                                    "text": "What would be different if it were working well?"
+                                },
+                                {
+                                    "text": "Compared to what you expected, what\u2019s missing?"
+                                }
+                            ],
+                            "media": []
+                        },
+                        {
+                            "question": "What explanations have you considered for why clicks aren't turning into customers?",
+                            "type": "free_response",
+                            "question_depth": "standard",
+                            "followup_guidelines": "After 2\u20133 hypotheses, ask which feels most likely and why.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "What makes you believe that explanation?"
+                                },
+                                {
+                                    "text": "What evidence would change your mind?"
+                                }
+                            ],
+                            "media": []
+                        },
+                        {
+                            "question": "What have you already tried to improve landing page conversions?",
+                            "type": "free_response",
+                            "question_depth": "deep",
+                            "followup_guidelines": "Aim for a chronological list of attempts; probe one concrete example in detail.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "Pick one change\u2014what did you change, and what happened after?"
+                                },
+                                {
+                                    "text": "What was surprisingly hard or time-consuming?"
+                                },
+                                {
+                                    "text": "What did you try that you now think was a waste?"
+                                }
+                            ],
+                            "media": []
+                        }
+                    ],
+                    "description": "Current situation and lived pain: clicks without sales, symptoms, and attempted fixes"
+                },
+                {
+                    "script": "Now I\u2019ll share a concept and get your honest reaction. I\u2019m not asking you to be polite\u2014tell me what you\u2019d actually do.",
+                    "question_list": [
+                        {
+                            "question": "If you saw a 'free landing page audit' offer today, what would you assume it is?",
+                            "type": "free_response",
+                            "question_depth": "deep",
+                            "followup_guidelines": "Ask for first assumptions and prior experiences before discussing ideal version.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "What past experiences shape that assumption?"
+                                },
+                                {
+                                    "text": "What would make you think it\u2019s legit versus a sales pitch?"
+                                }
+                            ],
+                            "media": []
+                        },
+                        {
+                            "question": "What would you need to see to trust a free audit is high quality?",
+                            "type": "free_response",
+                            "question_depth": "deep",
+                            "followup_guidelines": "Probe for proof, credentials, specificity, and verification. Avoid suggesting examples unless they struggle.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "What would be a clear sign it was customized to your business?"
+                                },
+                                {
+                                    "text": "What would make you distrust it immediately?"
+                                },
+                                {
+                                    "text": "Who or what source would you trust to recommend it?"
+                                }
+                            ],
+                            "media": []
+                        },
+                        {
+                            "question": "What feels risky about accepting a free audit, if anything?",
+                            "type": "free_response",
+                            "question_depth": "standard",
+                            "followup_guidelines": "Cover practical and emotional risks; move on once they name their top 2 risks.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "What access or data would you worry they might ask for?"
+                                },
+                                {
+                                    "text": "What would be an acceptable level of risk for you?"
+                                }
+                            ],
+                            "media": []
+                        },
+                        {
+                            "question": "What would you expect to receive at the end of a free audit?",
+                            "type": "free_response",
+                            "question_depth": "standard",
+                            "followup_guidelines": "Get concrete deliverables and success criteria; ask for what makes it 'useful'.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "What would make it actionable versus generic?"
+                                },
+                                {
+                                    "text": "How would you judge if the audit was correct?"
+                                }
+                            ],
+                            "media": []
+                        },
+                        {
+                            "question": "How do you decide whether to act on advice about your landing page?",
+                            "type": "free_response",
+                            "question_depth": "deep",
+                            "followup_guidelines": "Capture decision mechanics: who decides, what evidence, and the moment of commitment.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "Who else weighs in, and what do they care about?"
+                                },
+                                {
+                                    "text": "What is the smallest proof you need to try a change?"
+                                },
+                                {
+                                    "text": "Tell me about a time you ignored advice\u2014what drove that choice?"
+                                }
+                            ],
+                            "media": []
+                        }
+                    ],
+                    "description": "Concept reaction: trust and perceived value of a free landing page audit"
+                },
+                {
+                    "script": "Next I\u2019ll ask about a paid option: a 24-hour implementation of fixes for $700. Think about what you\u2019d do in real life.",
+                    "question_list": [
+                        {
+                            "question": "What would you assume a '24-hour fix implementation' includes?",
+                            "type": "free_response",
+                            "question_depth": "standard",
+                            "followup_guidelines": "Let them define scope first; then clarify boundaries and what 'implementation' means to them.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "What would you hope gets done versus what seems unrealistic?"
+                                },
+                                {
+                                    "text": "What would make it feel like real work, not just suggestions?"
+                                }
+                            ],
+                            "media": []
+                        },
+                        {
+                            "question": "How would you evaluate whether $700 is worth it for that 24-hour fix?",
+                            "type": "free_response",
+                            "question_depth": "deep",
+                            "followup_guidelines": "Use a gentle ladder: value first, then thresholds and comparisons. Avoid pressuring for a single number if they resist.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "Compared to hiring or doing it yourself, what\u2019s the trade-off?"
+                                },
+                                {
+                                    "text": "What result would make you feel it paid for itself?"
+                                },
+                                {
+                                    "text": "At what price would it feel like a no-brainer? At what price would it feel too risky?"
+                                }
+                            ],
+                            "media": []
+                        },
+                        {
+                            "question": "What objections or hesitations would you have about paying for this after a free audit?",
+                            "type": "free_response",
+                            "question_depth": "deep",
+                            "followup_guidelines": "Get their top objections; then ask what would resolve each one.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "What would you need to see to overcome that hesitation?"
+                                },
+                                {
+                                    "text": "What would make you walk away immediately?"
+                                },
+                                {
+                                    "text": "Help me understand how urgency and skepticism both could be true here."
+                                }
+                            ],
+                            "media": []
+                        },
+                        {
+                            "question": "What would you need to feel safe giving someone what they need to implement fixes?",
+                            "type": "free_response",
+                            "question_depth": "standard",
+                            "followup_guidelines": "Focus on operational requirements and boundaries: access, process, communication, reversibility.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "What access is acceptable, and what is not acceptable?"
+                                },
+                                {
+                                    "text": "What process updates would you expect in those 24 hours?"
+                                }
+                            ],
+                            "media": []
+                        },
+                        {
+                            "question": "What words do you use to describe the feeling of spending on ads without results?",
+                            "type": "free_response",
+                            "question_depth": "deep",
+                            "followup_guidelines": "Encourage their natural phrases; ask for a direct quote they might say to a cofounder.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "If you had to explain it in one sentence, what would you say?"
+                                },
+                                {
+                                    "text": "What do you call the problem internally\u2014how do you label it?"
+                                },
+                                {
+                                    "text": "What does 'money leaking' mean to you in practical terms?"
+                                }
+                            ],
+                            "media": []
+                        },
+                        {
+                            "question": "Earlier you mentioned your biggest conversion pain\u2014how should an audit offer talk about that to feel relevant?",
+                            "type": "free_response",
+                            "question_depth": "standard",
+                            "followup_guidelines": "Bridge to earlier pain; ask for preferred phrasing and what to avoid.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "What wording would feel accurate versus salesy?"
+                                },
+                                {
+                                    "text": "What claim would feel like an exaggeration?"
+                                }
+                            ],
+                            "media": []
+                        }
+                    ],
+                    "description": "Paid offer evaluation: $700 for 24-hour implementation, objections, and pricing logic"
+                },
+                {
+                    "script": "Last few questions: this helps us summarize what matters most to you and what would change your mind.",
+                    "question_list": [
+                        {
+                            "question": "If you could change one thing about your landing page performance this month, what would it be?",
+                            "type": "free_response",
+                            "question_depth": "standard",
+                            "followup_guidelines": "Get one priority outcome and why; then stop to avoid brainstorming too broadly.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "Why that one\u2014what would it unlock for your business?"
+                                },
+                                {
+                                    "text": "How would you measure whether it improved?"
+                                }
+                            ],
+                            "media": []
+                        },
+                        {
+                            "question": "What would be a fair next step after a free audit that would feel respectful of your time?",
+                            "type": "free_response",
+                            "question_depth": "light",
+                            "followup_guidelines": "Choose ONE followup to capture preferred cadence and format, then wrap up.",
+                            "required_screen_share": false,
+                            "required_in_home_visit": false,
+                            "required_text_input": false,
+                            "options": [],
+                            "followups": [
+                                {
+                                    "text": "How do you prefer to receive findings\u2014written, video, or live call?"
+                                },
+                                {
+                                    "text": "What timeline would feel reasonable to decide on next steps?"
+                                }
+                            ],
+                            "media": []
+                        }
+                    ],
+                    "description": "Wrap-up: success definition and preferred next steps"
+                }
+            ]
+        }
+    }
+}
