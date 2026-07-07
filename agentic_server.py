@@ -1245,6 +1245,42 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
                 result["email_sent"] = False
                 result["email_error"] = str(e)
 
+        # ── Ops notification to Mike ────────────────────────────────
+        if email:
+            try:
+                key = open("/home/mike/.hermes/secrets/agentmail.key").read().strip()
+                ops_subject = f"🔔 New audit lead: {email} | Score {overall}/{10} ({grade})"
+                ops_text = (
+                    f"New inbound audit submission\n\n"
+                    f"Email:  {email}\n"
+                    f"URL:    {url}\n"
+                    f"Score:  {overall}/10 ({grade})\n"
+                    f"Goal:   {stated_goal}\n"
+                    f"Role:   {stated_role or 'not provided'}\n"
+                    f"Spend:  {_spend_raw or 'not provided'}\n\n"
+                    f"Top issue: {top_issues[0]['dim']} — {top_issues[0]['issue']}\n\n"
+                    f"Verdict: {result['overall_verdict']}\n\n"
+                    f"→ Dashboard: https://nebulacomponents.shop/dashboard"
+                )
+                import urllib.request
+                ops_payload = {
+                    "to": ["ops@launchcrate.io"],
+                    "subject": ops_subject,
+                    "text": ops_text,
+                }
+                ops_req = urllib.request.Request(
+                    "https://api.agentmail.to/inboxes/nebulashop@agentmail.to/messages/send",
+                    data=__import__("json").dumps(ops_payload).encode(),
+                    headers={
+                        "Authorization": f"Bearer {key}",
+                        "Content-Type": "application/json",
+                    },
+                    method="POST",
+                )
+                urllib.request.urlopen(ops_req, timeout=10).read()
+            except Exception as _ops_err:
+                pass  # never block audit result for ops notify failure
+
         return self._send_json(200, result)
 
     def log_message(self, format, *args):
