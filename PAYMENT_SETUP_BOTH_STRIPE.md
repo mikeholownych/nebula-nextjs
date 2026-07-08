@@ -2,7 +2,7 @@
 
 ## CRITICAL: You need to create TWO Stripe products
 
-The $7 and $97 offers should BOTH go through Stripe (not Gumroad).
+The $7 and $147 offers should BOTH go through Stripe (not Gumroad).
 
 ---
 
@@ -33,7 +33,7 @@ echo "https://checkout.stripe.com/pay/cs_YOUR_7_LINK_HERE" > ~/.nebula/stripe_7_
 
 ---
 
-## TASK 2: Create Stripe $97 Product (5 minutes)
+## TASK 2: Create Stripe $147 Product (5 minutes)
 
 ### Step 1: Go to Stripe Dashboard (same window)
 
@@ -42,7 +42,7 @@ echo "https://checkout.stripe.com/pay/cs_YOUR_7_LINK_HERE" > ~/.nebula/stripe_7_
 2. Fill in:
    - **Name:** "Landing Page Audit - Founder Edition"
    - **Description:** "AI-powered audit of your landing page copy, design, and conversion potential"
-   - **Price:** $97.00 USD (one-time payment)
+   - **Price:** $147.00 USD (one-time payment)
    - **Billing period:** One-time
 
 ### Step 3: Create Checkout Link
@@ -66,7 +66,7 @@ echo "https://checkout.stripe.com/pay/cs_YOUR_97_LINK_HERE" > ~/.nebula/stripe_9
 - ✅ Easier A/B testing (both links side-by-side)
 - ✅ Better for automatio analytics (all in one place)
 
-**No Gumroad needed** — Use Stripe for both $7 and $97 offers.
+**No Gumroad needed** — Use Stripe for both $7 and $147 offers.
 
 ---
 
@@ -76,7 +76,7 @@ echo "https://checkout.stripe.com/pay/cs_YOUR_97_LINK_HERE" > ~/.nebula/stripe_9
 |------|------|----------|
 | NOW | Read this doc | 2 min |
 | 17:15 | Create Stripe $7 product | 5 min |
-| 17:20 | Create Stripe $97 product | 5 min |
+| 17:20 | Create Stripe $147 product | 5 min |
 | 17:30 | Test both checkout links | 5 min |
 | 17:35 | Save both links to config files | 2 min |
 | 17:40 | Update Wave 2 email copy | 5 min |
@@ -92,7 +92,7 @@ echo "https://checkout.stripe.com/pay/cs_YOUR_97_LINK_HERE" > ~/.nebula/stripe_9
 
 After completing:
 - ✅ Stripe $7 product created with checkout link
-- ✅ Stripe $97 product created with checkout link
+- ✅ Stripe $147 product created with checkout link
 - ✅ Both links saved to config files
 - ✅ Wave 2 email includes both Stripe links
 - ✅ Pre-campaign validation passes

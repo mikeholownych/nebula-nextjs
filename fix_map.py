@@ -194,12 +194,12 @@ def _render_html(audit, fix_path, overall, grade, projected, projected_grade, di
   </table>
 
   <div style="border-top:1px solid #e5e7eb;margin-top:16px;padding:16px 0;text-align:center;">
-    <a href="https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02" style="display:inline-block;padding:12px 32px;background:#059669;color:#fff;text-decoration:none;border-radius:6px;font-size:15px;font-weight:600;">Implement These Fixes — $97 →</a>
+    <a href="https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02" style="display:inline-block;padding:12px 32px;background:#059669;color:#fff;text-decoration:none;border-radius:6px;font-size:15px;font-weight:600;">Implement These Fixes — $147 →</a>
     <div style="font-size:12px;color:#9ca3af;margin-top:8px;">30-day money back if conversion doesn't improve</div>
   </div>
 
   <div style="text-align:center;font-size:11px;color:#9ca3af;padding-top:8px;">
-    Nebula Components · Free audit → $97 fix → Delivered in 24h · No call required
+    Nebula Components · Free audit → $147 fix → Delivered in 24h · No call required
   </div>
 </div>"""
 

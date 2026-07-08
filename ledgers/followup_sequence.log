@@ -438,3 +438,45 @@ Recycle candidates (pitch_sent, no payment): 22
 
 ============================================================
 Due: 18  Sent: 0  delivered
+[followup_sequence] Outside send window (Tue-Thu 07-09 local). Next open in ~17h 42m — exiting.
+[followup_sequence] Outside send window (Tue-Thu 07-09 local). Next open in ~11h 42m — exiting.
+[followup_sequence] Outside send window (Tue-Thu 07-09 local). Next open in ~5h 42m — exiting.
+followup_sequence.py (LIVE) — 2026-07-08 12:17 UTC
+============================================================
+
+Audit leads: 20
+  [email2_methodology] patriciasfnunes@gmail.com (www.patricianunes.pt)
+  [AM FAILED] patriciasfnunes@gmail.com: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: patriciasfnunes@gmail.com (Unsubscribe
+  [SUPPRESSED->DEAD] patriciasfnunes@gmail.com
+  [email2_methodology] help@nypost.com (nypost.com)
+  [SENT] help@nypost.com: why nypost.com's page is losing money before the pitch
+  [email2_methodology] info@xpertstart.com.au (www.xpertstart.com.au)
+  [SENT] info@xpertstart.com.au: why www.xpertstart.com.au's page is losing money before the 
+  [email2_methodology] info@2getherewesave.com (2getherwesave.com)
+  [SENT] info@2getherewesave.com: why 2getherwesave.com's page is losing money before the pitc
+  [email1_direct] support@curiouscats.ai (curiouscats.ai)
+  [AM FAILED] support@curiouscats.ai: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: support@curiouscats.ai (bounced)"}
+  [SUPPRESSED->DEAD] support@curiouscats.ai
+
+Cold-only leads: 101
+  [skip bounced] info@brookerlaw.com
+  [skip bounced] info@magnolia-club.org
+  [skip bounced] info@saputo.law
+  [hot_lead_97_pitch] help@nypost.com (nypost.com)
+  [SENT] help@nypost.com: re: nypost.com audit
+  [hot_lead_97_pitch] info@xpertstart.com.au (www.xpertstart.com.au)
+  [SENT] info@xpertstart.com.au: re: www.xpertstart.com.au — the conversion leak
+  [skip bounced] info@2getherewesave.com
+  [skip bounced] support@routinereps.com
+  [skip bounced] alumni@wgu.edu
+  [skip bounced] support@curiouscats.ai
+
+HOT_LEAD pitch due: 2  Sent: 2
+
+Revive candidates (contacted, no audit): 100
+
+Recycle candidates (pitch_sent, no payment): 23
+
+============================================================
+Due: 7  Sent: 5  delivered
+[followup_sequence] Outside send window (Tue-Thu 07-09 local). Next open in ~17h 42m — exiting.

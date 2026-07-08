@@ -13,7 +13,7 @@
 
 ### 2. **autonomous-business-execution**
 - ✅ Multi-channel distribution (email primary, Reddit/Twitter backups)
-- ✅ Dual funnel strategy ($7 + $97 parallel offers)
+- ✅ Dual funnel strategy ($7 + $147 parallel offers)
 - ✅ Automated accountability checkpoints (6h, 12h, 24h, 48h, 72h)
 - ✅ Forced pivot decisions at milestones
 - ✅ Theater prevention (real execution logs, not promises)

@@ -29,7 +29,7 @@ WHAT'S BROKEN (❌)
 ================================================================================
 
 CRITICAL - Blocks Revenue:
-  ❌ Stripe $97 product NOT CREATED
+  ❌ Stripe $147 product NOT CREATED
      Status: PENDING - create in Stripe Dashboard
      Impact: Cannot charge for audits
      Fix time: 5 minutes
@@ -86,7 +86,7 @@ ACTION REQUIRED
 READ: /home/mike/nebula/PAYMENT_SETUP_INSTRUCTIONS.md
 
 This has exact step-by-step instructions for:
-  1. Creating Stripe $97 product (5 min)
+  1. Creating Stripe $147 product (5 min)
   2. Creating Gumroad $7 product (10 min)
   3. Testing both payment links (5 min)
   4. Running validation (2 min)

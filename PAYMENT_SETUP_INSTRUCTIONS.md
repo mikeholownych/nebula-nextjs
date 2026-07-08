@@ -1,6 +1,6 @@
 # PAYMENT SETUP — CONCRETE STEPS
 
-## TASK 1: Create Stripe $97 Checkout (5 minutes)
+## TASK 1: Create Stripe $147 Checkout (5 minutes)
 
 ### Step 1: Go to Stripe Dashboard
 - URL: https://dashboard.stripe.com
@@ -12,7 +12,7 @@
 3. Fill in:
    - **Name:** "Landing Page Audit - Founder Edition"
    - **Description:** "AI-powered audit of your landing page copy, design, and conversion potential"
-   - **Price:** $97.00 USD (one-time payment)
+   - **Price:** $147.00 USD (one-time payment)
    - **Billing period:** One-time
 
 ### Step 3: Create Checkout Link
@@ -27,7 +27,7 @@
 echo "https://checkout.stripe.com/pay/cs_YOUR_LINK_HERE" > ~/.nebula/stripe_97_checkout_link.txt
 ```
 
-**Result:** When you're done, you'll have a URL you can share in emails that customers can click to pay $97.
+**Result:** When you're done, you'll have a URL you can share in emails that customers can click to pay $147.
 
 ---
 
@@ -82,16 +82,16 @@ Subject: How to launch a landing page in 2 hours ($7 templates)
 Body:
 ...
 👉 Get the template pack now ($7): [INSERT GUMROAD LINK HERE]
-Already ready to go all-in? Book a $97 audit: [INSERT STRIPE LINK HERE]
+Already ready to go all-in? Book a $147 audit: [INSERT STRIPE LINK HERE]
 ```
 
-**For $97 Audit Focus:**
+**For $147 Audit Focus:**
 ```
-Subject: Your landing page audit: $97 (or grab templates for $7)
+Subject: Your landing page audit: $147 (or grab templates for $7)
 
 Body:
 ...
-👉 Get a full audit ($97): [INSERT STRIPE LINK HERE]
+👉 Get a full audit ($147): [INSERT STRIPE LINK HERE]
 Want to DIY first? Grab the templates ($7): [INSERT GUMROAD LINK HERE]
 ```
 
@@ -105,7 +105,7 @@ Want to DIY first? Grab the templates ($7): [INSERT GUMROAD LINK HERE]
 1. Copy Stripe checkout link
 2. Paste into browser, verify it loads
 3. DO NOT enter real payment info (uses test key)
-4. Verify you can see: Product name, $97 price, payment form
+4. Verify you can see: Product name, $147 price, payment form
 
 ### Test Gumroad Purchase
 1. Copy Gumroad product link

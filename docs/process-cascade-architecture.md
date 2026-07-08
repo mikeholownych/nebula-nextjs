@@ -86,7 +86,7 @@ Audit requested
 4. **Page Speed (0-10)** — Load time > 3s = penalty
 5. **Mobile Responsiveness (0-10)** — Works on mobile viewport?
 
-Each dimension maps to a specific fix in the $97 Fix Pack.
+Each dimension maps to a specific fix in the $147 Fix Pack.
 
 ---
 
@@ -158,7 +158,7 @@ User completes Stripe payment
 
 | Trigger | Product | Delivery |
 |---------|---------|----------|
-| $97 Fix Pack purchase | Fix Pack | Build hero + CTA + trust + FAQ sections |
+| $147 Fix Pack purchase | Fix Pack | Build hero + CTA + trust + FAQ sections |
 | $997 Growth Launch purchase | Growth Launch | Fix Pack + 200 triggered prospects + outreach |
 | $197/mo pipeline subscription | Pipeline | Monthly triggered prospect delivery |
 
@@ -246,7 +246,7 @@ Cron checks list_recircle_candidates(min_age_days=30)
                │                       │
                ▼                       ▼
         ┌──────────────┐     ┌────────────────┐
-        │  $97 Fix     │     │  Objection     │
+        │  $147 Fix     │     │  Objection     │
         │  Pack        │     │  Handling Seq  │
         └───────┬──────┘     └────────┬───────┘
                 │                     │

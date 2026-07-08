@@ -7,7 +7,7 @@ REVENUE: $0 real revenue (cumulative: $0)
 COSTS: unverified; /home/mike/nebula/ledgers/revenue-cost-ledger.jsonl had 0 rows before this handoff verification row
 P&L: $0 verified revenue minus unverified costs; cannot calculate true P&L without vendor/bank/Stripe cost evidence
 CASH POSITION: unknown/unverified; no bank/Stripe balance export was provided or found in the inspected files
-ACTIVE OFFER: Free landing page audit -> $97 implementation; checkout.html exposes live Stripe links for $7 and $97 offers
+ACTIVE OFFER: Free landing page audit -> $147 implementation; checkout.html exposes live Stripe links for $7 and $147 offers
 EMAILS SENT: 155 in stats.json; trigger-based sends = 66
 REPLY RATE: trigger reply rate = 0.0% (0 warm replies / 66 trigger sends); stats.json replies=3 remains insufficiently tied to current trigger revenue
 AUDITS DELIVERED: 26 in stats.json/company_brain; normalized ledger_metrics hot-lead count = 24; customer-ledger now has 28 audit_delivered event matches because of duplicate/new audit rows
@@ -18,9 +18,9 @@ RISKS: kill criteria met for outreach and audit-to-payment conversion; activity 
 AGENT NOTES: I regenerated ops/company_brain.json with ops_company_os.py at 2026-07-04T23:04:35Z; current_bottleneck remains audit_to_payment_conversion.
 
 CEO DECISION SNAPSHOT
-- Real revenue: $0. Do not count any $7/$97/$497 payment-like rows as revenue unless livemode Stripe/bank evidence exists.
+- Real revenue: $0. Do not count any $7/$147/$497 payment-like rows as revenue unless livemode Stripe/bank evidence exists.
 - Test revenue excluded: yes. stats.json and company_brain both report real_revenue=0, real_payments=0, test_revenue_excluded=true.
-- Checkout/payment state: checkout.html contains self-serve Stripe payment links for $7 and $97; webhook_server.py records checkout.session.completed events to payments.log and customer-ledger, updates HOT_LEAD to paid, and recomputes public revenue from non-test ledger rows. This proves the code path exists, not that a real customer paid.
+- Checkout/payment state: checkout.html contains self-serve Stripe payment links for $7 and $147; webhook_server.py records checkout.session.completed events to payments.log and customer-ledger, updates HOT_LEAD to paid, and recomputes public revenue from non-test ledger rows. This proves the code path exists, not that a real customer paid.
 - Kill criteria: OUTREACH_KILL_CRITERIA_MET (66 trigger sends, 0 warm replies), AUDIT_TO_PAYMENT_KILL_CRITERIA_MET (26 audits, 0 real payments), ZERO_REVENUE.
 - Bottleneck: audit_to_payment_conversion.
 
@@ -41,7 +41,7 @@ SOURCE OUTPUTS VERIFIED
 
 KILL / SCALE RECOMMENDATION TO CEO
 - Kill/rewrite: current trigger targeting or first-line offer angle; 66 sends with 0 warm replies exceeds the 30-send kill threshold.
-- Kill/rewrite: current audit-to-$97 payment conversion; 26 audits and 7 $97 pitches with 0 real payments exceeds the 3-audit kill threshold.
+- Kill/rewrite: current audit-to-$147 payment conversion; 26 audits and 7 $147 pitches with 0 real payments exceeds the 3-audit kill threshold.
 - Do not scale additional send volume until a smaller controlled test defines success/failure and every send has provider delivery evidence.
 - Keep checkout live, but treat it as unproven until a livemode payment event appears in customer-ledger/revenue-cost-ledger with fulfillment status.
 

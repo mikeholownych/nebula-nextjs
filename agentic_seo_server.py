@@ -189,14 +189,14 @@ hello@{SITE}
 We help SaaS founders ship high-converting landing pages. Our offering:
 
 - **$7 Landing Page Component Pack** — Hero, pricing, social proof, CTA sections. Ready to customize and deploy.
-- **$97 Landing Page Audit** — We review your landing page copy, design, and targeting. Send 10 test cold emails. Report on reply rate.
+- **$147** Landing Page Audit — We review your landing page copy, design, and targeting. Send 10 test cold emails. Report on reply rate.
 
 ## How to Access
 
 1. Visit https://{SITE}/
 2. Choose your offer:
    - $7 template pack for immediate components
-   - $97 audit for a deep-dive analysis + personalized execution
+   - $147 audit for a deep-dive analysis + personalized execution
 
 ## Contact
 

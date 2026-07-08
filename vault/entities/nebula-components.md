@@ -3,7 +3,7 @@
 
 ## Offer Ladder
 - **$0** — Free audit (AI-scored teardown, emailed in <60s)
-- **$97** — Fix Pack (top 2 issues fixed, implementation)
+- **$147** — Fix Pack (top 2 issues fixed, implementation)
 - **$997** — Growth Launch (60-day full rebuild)
 - **$197/mo** — Retainer (ongoing monitoring + fixes)
 
@@ -24,7 +24,7 @@
 - Audit pipeline: `deliver_audit.py` — scrape_page() → score_audit() → compose_audit_email()
 - DB: `lead_state.db` (access via lead_store.py only)
 - Email: AgentMail REST API
-- Payments: Stripe ($97 Fix Pack link)
+- Payments: Stripe ($147 Fix Pack link)
 - Analytics: GA4 G-KJ9S3450LH
 
 ## Revenue

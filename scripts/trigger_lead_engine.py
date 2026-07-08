@@ -285,12 +285,12 @@ class TriggerLeadEngine:
     def _select_template(self, trigger_type):
         """Select appropriate outreach template based on trigger type"""
         templates = {
-            "ad_bleed": "Subject: Saw your ads aren't converting → quick fix\n\nHey {name},\n\nNoticed you're spending on ads but not getting conversions. We've helped SaaS founders like you fix this in 48 hours with our $97 audit.\n\nHere's your free audit: {audit_url}\n\nNo calls, no calendars. Just the fix.",
-            "zero_conversions": "Subject: Your landing page is leaking money\n\nHey {name},\n\nZero conversions from ads? We've seen this 147 times. Fix it in 48 hours with our $97 audit.\n\nHere's your free audit: {audit_url}",
-            "landing_page_feedback": "Subject: Got feedback for your landing page?\n\nHi {name},\n\nSaw you're looking for landing page feedback. We've helped 147+ founders fix their conversions with our $97 audit.\n\nHere's your free audit: {audit_url}",
+            "ad_bleed": "Subject: Saw your ads aren't converting → quick fix\n\nHey {name},\n\nNoticed you're spending on ads but not getting conversions. We've helped SaaS founders like you fix this in 48 hours with our $147 audit.\n\nHere's your free audit: {audit_url}\n\nNo calls, no calendars. Just the fix.",
+            "zero_conversions": "Subject: Your landing page is leaking money\n\nHey {name},\n\nZero conversions from ads? We've seen this 147 times. Fix it in 48 hours with our $147 audit.\n\nHere's your free audit: {audit_url}",
+            "landing_page_feedback": "Subject: Got feedback for your landing page?\n\nHi {name},\n\nSaw you're looking for landing page feedback. We've helped 147+ founders fix their conversions with our $147 audit.\n\nHere's your free audit: {audit_url}",
             "founder_signal": "Subject: Building something awesome? Let's fix your funnel\n\nHi {name},\n\nSaw you're building {product}. Congrats! Most founders bleed money on ads before fixing their landing page.\n\nFree audit to find your leaks: {audit_url}",
-            "hiring_scaling": "Subject: Scaling? Don't let your landing page hold you back\n\nHey {name},\n\nAs you scale, your landing page needs to convert better. We've helped SaaS founders like you fix this in 48 hours with our $97 audit.\n\nHere's your free audit: {audit_url}",
-            "general_conversion_pain": "Subject: Your landing page is leaking money\n\nHey {name},\n\nNoticed you're having conversion issues. We've helped 147+ founders fix their landing pages with our $97 audit.\n\nHere's your free audit: {audit_url}"        }
+            "hiring_scaling": "Subject: Scaling? Don't let your landing page hold you back\n\nHey {name},\n\nAs you scale, your landing page needs to convert better. We've helped SaaS founders like you fix this in 48 hours with our $147 audit.\n\nHere's your free audit: {audit_url}",
+            "general_conversion_pain": "Subject: Your landing page is leaking money\n\nHey {name},\n\nNoticed you're having conversion issues. We've helped 147+ founders fix their landing pages with our $147 audit.\n\nHere's your free audit: {audit_url}"        }
         
         return templates.get(trigger_type, templates["general_conversion_pain"])
     

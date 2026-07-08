@@ -325,7 +325,7 @@ Sent the {domain} audit yesterday. One finding I didn't want to bury in the repo
 
 Your headline and ad are making different promises. Visitors arrive expecting one thing, see another, and leave. That gap is the most common reason paid traffic doesn't convert — and it's mechanical, not a budget problem.
 
-The fix is a headline rewrite and one CTA adjustment. We implement it in 24h for $97. If it doesn't move your numbers, full refund.
+The fix is a headline rewrite and one CTA adjustment. We implement it in 24h for $147. If it doesn't move your numbers, full refund.
 
 → {stripe}
 
@@ -342,7 +342,7 @@ A SaaS founder had the same issue: headline written for people who already knew 
 
 Sharing in case it's a useful data point, not to pressure you.
 
-If you want the implementation: $97, done in 24h, full refund if it doesn't help. → {stripe}
+If you want the implementation: $147, done in 24h, full refund if it doesn't help. → {stripe}
 
 If you'd rather handle it yourself, the $7 DIY kit has the exact checklist: {stripe_7}
 
@@ -356,7 +356,7 @@ Last note from me on the {domain} audit.
 The findings don't expire. If you come back to this later, the audit is still accurate and the fix is the same.
 
 Three ways to use it:
-1. We implement it — $97, 24h, full refund if no lift: {stripe}
+1. We implement it — $147, 24h, full refund if no lift: {stripe}
 2. DIY checklist — $7: {stripe_7}
 3. Re-run the free audit anytime: https://nebulacomponents.shop/audit.html
 
@@ -468,7 +468,7 @@ def hot_lead_pitch_body(url, audit_score, audit_grade, checkout_url=None):
 
 {cta_line}
 
-$97 — self-serve checkout, no call needed:
+$147 — self-serve checkout, no call needed:
 {pay_url}
 
 Or the $7 DIY checklist if you'd rather handle it yourself:
@@ -477,7 +477,7 @@ Or the $7 DIY checklist if you'd rather handle it yourself:
 — Nebula"""
 
 def process_hot_lead_pitches(now, paid, sent):
-    """Advance HOT_LEAD audit_delivered -> $97 pitch sent when pitch_due_at has arrived."""
+    """Advance HOT_LEAD audit_delivered -> $147 pitch sent when pitch_due_at has arrived."""
     leads, was_list = load_hot_leads()
     if not leads:
         return 0, 0

@@ -14,4 +14,4 @@ https://nebulacomponents.shop/ad-burn-leaderboard.html
 
 If you are running paid traffic and conversions are weak, drop your URL. I will find the first visible leak free.
 
-If you want it implemented, the fix starts directly at $97. No call, no calendar, no agency dance.
+If you want it implemented, the fix starts directly at $147. No call, no calendar, no agency dance.

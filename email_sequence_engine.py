@@ -125,7 +125,7 @@ SEQUENCES = {
                     "Over the next few days I'll show you exactly how to fix each one.\n\n"
                     "First step: review your scores. Then decide if you want the fixes done for you.\n\n"
                     "→ Fix them yourself: the free Fix Kit (templates + checklist) is waiting\n"
-                    "→ Get them done in 24h: the $97 Conversion Fix Pack ships your new page sections\n\n"
+                    "→ Get them done in 24h: the $147 Conversion Fix Pack ships your new page sections\n\n"
                     "Link: https://nebulacomponents.shop/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=audit_delivery\n"
                 ),
             },
@@ -145,7 +145,7 @@ SEQUENCES = {
                     "Your audit score for Headline Clarity tells you if you have this issue.\n"
                     "If it's under 7, rewriting your headline is the highest-leverage 15 minutes "
                     "you'll spend this week.\n\n"
-                    "Want it done for you? The $97 Fix Pack includes a rewritten hero section "
+                    "Want it done for you? The $147 Fix Pack includes a rewritten hero section "
                     "tailored to your ICP: https://nebulacomponents.shop/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=value_add\n"
                 ),
             },
@@ -172,7 +172,7 @@ SEQUENCES = {
                     "That's why we built the Conversion Fix Pack:\n"
                     "  → We implement all 3 fixes on your page\n"
                     "  → Delivered in 24 hours\n"
-                    "  → $97, one checkout, done\n\n"
+                    "  → $147, one checkout, done\n\n"
                     "No agency retainer. No sales call. Just a fixed price for a fixed outcome.\n\n"
                     "https://nebulacomponents.shop/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=offer_sequence&amp;utm_content=offer_intro\n"
                 ),
@@ -180,7 +180,7 @@ SEQUENCES = {
             {
                 "id": "social_proof",
                 "day": 2,
-                "subject": "This founder saved $3k/mo in ad spend with a $97 fix",
+                "subject": "This founder saved $3k/mo in ad spend with a $147 fix",
                 "type": "text",
                 "body": (
                     "A founder came to us running $5k/mo in Google Ads. Getting 0.8% conversion.\n\n"
@@ -189,7 +189,7 @@ SEQUENCES = {
                     "We changed it to \"Stop guessing which campaigns drive revenue.\"\n\n"
                     "Same product. Same ads. Same traffic.\n"
                     "Conversion went from 0.8% to 2.4% in 5 days.\n\n"
-                    "That's 3x more leads from the same ad spend. On a $97 fix.\n\n"
+                    "That's 3x more leads from the same ad spend. On a $147 fix.\n\n"
                     "Your audit already showed you where your leaks are. The question is: "
                     "do you want to fix them yourself, or have them done in 24h?\n\n"
                     "https://nebulacomponents.shop/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=offer_sequence&amp;utm_content=social_proof\n"
@@ -207,18 +207,18 @@ SEQUENCES = {
             {
                 "id": "objection_price",
                 "day": 0,
-                "subject": "The $97 fix that saved $3k/mo in ads — what you get",
+                "subject": "The $147 fix that saved $3k/mo in ads — what you get",
                 "type": "text",
                 "body": (
                     "Saw you checked out the Fix Pack. Let me answer the question everyone asks:\n\n"
-                    "What exactly do I get for $97?\n\n"
+                    "What exactly do I get for $147?\n\n"
                     "- Hero section rewrite (headline + subheadline) — tailored to your ICP\n"
                     "- CTA button redesign — action-driven, not label-driven\n"
                     "- Trust proof placement — social proof positioned above the fold\n"
                     "- FAQ / objection section — addresses doubts before they arise\n"
                     "- Mobile-first formatting — your page will work on phone\n\n"
                     "Delivered as HTML you can paste directly into your page. Or we can implement it.\n\n"
-                    "The reason it's $97 and not $997: it's a fixed scope. Every Fix Pack is the same "
+                    "The reason it's $147 and not $997: it's a fixed scope. Every Fix Pack is the same "
                     "5 sections, tailored to your audit results. No scope creep, no meetings, no fuss.\n\n"
                     "If your page needs more than these 5 fixes, you'd know because all 5 of your audit "
                     "scores would be above 8. If any are under 7, this pack covers it.\n\n"
@@ -241,7 +241,7 @@ SEQUENCES = {
                     "  - Ecommerce store: 40% more add-to-cart after trust proof repositioning\n\n"
                     "The Fix Pack adapts to your audit results. If your low score is Headline, we fix the headline. "
                     "If it's Trust, we fix the trust proof. It's not a template — it's a tailored implementation.\n\n"
-                    "$97. 24h delivery. No meetings.\n\n"
+                    "$147. 24h delivery. No meetings.\n\n"
                     "https://nebulacomponents.shop/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=objection_handling&amp;utm_content=objection_scope\n"
                 ),
             },
@@ -267,7 +267,7 @@ SEQUENCES = {
                     "Simple as that.\n\n"
                     "Here's what one founder said after getting theirs:\n"
                     "  \"Went from 0.8% to 2.4% in 5 days. The headline rewrite alone paid for itself 30x.\"\n\n"
-                    "Your audit results are waiting. The fix is $97. If it doesn't improve your conversion "
+                    "Your audit results are waiting. The fix is $147. If it doesn't improve your conversion "
                     "within 30 days, I'll refund it. No questions.\n\n"
                     "https://nebulacomponents.shop/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=abandoned_checkout&amp;utm_content=ac_nudge\n"
                 ),
@@ -280,7 +280,7 @@ SEQUENCES = {
                 "body": (
                     "I noticed you haven't picked up the Fix Pack yet.\n\n"
                     "That's fine — not everyone needs it. But I want to be clear about what happens next:\n\n"
-                    "Your audit results don't expire, but the Fix Pack is priced at $97 because it's a "
+                    "Your audit results don't expire, but the Fix Pack is priced at $147 because it's a "
                     "fixed scope. If we end up building a more complex fix down the road, it'll cost more.\n\n"
                     "The cheapest time to fix your page is right now, when the audit already told you "
                     "exactly what's wrong.\n\n"
@@ -550,7 +550,7 @@ def process_sequences(dry_run=True):
             print(f"\n  ── Pipeline ──")
             print(f"  Total leads:   {total}")
             print(f"  Audited:       {w_audit}")
-            print(f"  Paid ($97):    {w_97}")
+            print(f"  Paid ($147):    {w_97}")
             print(f"  Inbound:       {inbound}")
             print(f"  Outbound:      {outbound}")
     except Exception:

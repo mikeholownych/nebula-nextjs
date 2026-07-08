@@ -55,7 +55,7 @@ Prospect applies at /beta-tester.html
 | Audit run | STRONG | Completed audit with scores |
 | Reply to outreach | MODERATE | Engaged with value-first message |
 | Case study completed | STRONG | Written case study + permission to share |
-| $97 purchase | STRONGEST | Actual payment |
+| $147 purchase | STRONGEST | Actual payment |
 
 ---
 

@@ -104,12 +104,12 @@ if stripe_config_file.exists():
         config = json.load(f)
         status = config.get("status", "UNKNOWN")
         if "PENDING" in status or "not created" in status.lower():
-            check("Stripe $97 Product Created", False)
+            check("Stripe $147 Product Created", False)
             print(f"       Status: {status}")
         else:
-            check("Stripe $97 Product Created", True)
+            check("Stripe $147 Product Created", True)
 else:
-    check("Stripe $97 Product Created", False)
+    check("Stripe $147 Product Created", False)
     print(f"       Config file not found")
 
 # Check if Stripe checkout link exists
@@ -285,10 +285,10 @@ if real_transactions == 0:
 section("9. IMMEDIATE ACTION ITEMS")
 
 if "PENDING" in stripe_status or not stripe_link_file.exists():
-    print("  1. CREATE STRIPE $97 PRODUCT")
+    print("  1. CREATE STRIPE $147 PRODUCT")
     print("     - Go to Stripe Dashboard")
     print("     - Create product: 'Landing Page Audit'")
-    print("     - Set price: $97 USD")
+    print("     - Set price: $147 USD")
     print("     - Create checkout link")
     print("     - Save checkout URL to: /home/mike/nebula/stripe_97_checkout_link.txt")
 

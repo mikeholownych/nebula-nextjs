@@ -43,7 +43,7 @@ POSITIONING_TEXT = """# Positioning
 
 Nebula Components is the autonomous conversion leak detector for founders burning ad budget.
 
-Promise: paste the landing page, get the top conversion leaks, then buy the $97 implementation-ready fix pack without calls, calendars, or manual review.
+Promise: paste the landing page, get the top conversion leaks, then buy the $147 implementation-ready fix pack without calls, calendars, or manual review.
 
 Core angle: your ads may not be broken; your landing page is leaking the money.
 """
@@ -74,7 +74,7 @@ Nebula Components is the autonomous conversion leak detector for founders burnin
 - Concrete nouns. Specific numbers. No abstractions.
 - Use: leak, bleed, burn, fix, ship, score, trigger, gap, friction, proof
 - Avoid: optimize (use fix or improve), empower, leverage, best-in-class, holistic, robust, seamless, cutting-edge
-- Dollar amounts always: "$97 fix pack" not "premium service tier"
+- Dollar amounts always: "$147 fix pack" not "premium service tier"
 - Never "book a call," "jump on a call," "schedule a meeting," "let me know"
 
 ## Hook Patterns
@@ -95,7 +95,7 @@ Nebula Components is the autonomous conversion leak detector for founders burnin
 - Ends at the URL: every CTA points to nebulacomponents.shop or the audit tool.
 
 ## Voice Examples
-- "Paste the URL. Get the scored teardown. Buy the $97 fix pack. No sales call."
+- "Paste the URL. Get the scored teardown. Buy the $147 fix pack. No sales call."
 - "Your ads might be fine. The page is where money goes to die. We can show you exactly where in 60 seconds."
 - "Spent $10k on ads and got barely any orders? The leak isn't in the targeting. It's in the page."
 
@@ -141,7 +141,7 @@ From an audit result, produce implementation-ready fixes:
 - For each dimension scoring < 6: specific code change, copy edit, or config update
 - Priority-ordered by impact/effort quadrant
 - Plain language — the prospect can hand it to a developer or implement themselves
-- Gated behind $97 fix pack purchase
+- Gated behind $147 fix pack purchase
 """
 
 COMPOSE_SKILL = """# /compose — Write Outbound Message
@@ -219,7 +219,7 @@ TOOLS_MAP = """# Tools Map — Auto vs Manual
 |------|-------------|-----------------|
 | Apify (balm_snowflake) | Scrapes LinkedIn engagers from post comments/likes | √ |
 | AgentMail (nebulashop@agentmail.to) | Sends audit emails, deliverability, open tracking | √ |
-| Stripe | Checkout for $97 fix pack, $1,497 retainer | √ (via buy.stripe.com) |
+| Stripe | Checkout for $147 fix pack, $1,497 retainer | √ (via buy.stripe.com) |
 
 ## CONNECTS MANUALLY (needs user action)
 | Tool | What's missing | To automate |
@@ -295,7 +295,7 @@ def build_content_calendar(days: int = 30) -> list[dict]:
     }
     ctas = {
         "Educational": "Paste the URL. Get the free teardown.",
-        "Testimonial": "Use the $97 fix pack when the leak is obvious.",
+        "Testimonial": "Use the $147 fix pack when the leak is obvious.",
         "Personal story": "Follow the build: agents, offers, revenue proof.",
         "Listicle": "Full comparison published: 5 tools, 5 dimensions, 1 winner.",
         "Comparison": "See how they stack up on speed, depth, price, and AI readiness.",

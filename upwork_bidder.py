@@ -301,13 +301,13 @@ def generate_proposal(job: dict, score: int) -> str:
         if nums:
             b = max(int(n) for n in nums)
             if b < 97:
-                budget_response = f"My fixed rate for this scope is $97 — covers the full audit + implementation-ready fix pack."
+                budget_response = f"My fixed rate for this scope is $147 — covers the full audit + implementation-ready fix pack."
             else:
-                budget_response = f"Happy to work within your budget. My standard rate for a full audit + fix pack is $97–$197 depending on page complexity."
+                budget_response = f"Happy to work within your budget. My standard rate for a full audit + fix pack is $147–$197 depending on page complexity."
         else:
-            budget_response = "My rate for a full audit + implementation fix pack starts at $97."
+            budget_response = "My rate for a full audit + implementation fix pack starts at $147."
     else:
-        budget_response = "I work fixed-price on this type of project — $97 for a full audit + implementation fix pack, delivered in 24h."
+        budget_response = "I work fixed-price on this type of project — $147 for a full audit + implementation fix pack, delivered in 24h."
 
     # Summarize title
     title_summary = title.lower().replace("landing page", "the landing page").strip()

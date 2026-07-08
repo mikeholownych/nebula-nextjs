@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create $97 Stripe checkout link"""
+"""Create $147 Stripe checkout link"""
 import os
 import json
 
@@ -8,7 +8,7 @@ import json
 
 STRIPE_PUBLISHABLE_KEY = "pk_live_51TlN5HEINR1kU9chG6RJnJLsmGyHwalL707oip3vt5MKwXVcrFSMmzUWyBjfqz3CIlKRM9eshCSCq2jJQYqaNRdY00vOglUjtK"
 
-# The $97 offer would normally be created via Stripe Dashboard or API
+# The $147 offer would normally be created via Stripe Dashboard or API
 # For now, document what needs to happen:
 
 offer_config = {
@@ -22,11 +22,11 @@ offer_config = {
     "status": "PENDING - create in Stripe Dashboard"
 }
 
-print("[STRIPE] $97 Offer Configuration:")
+print("[STRIPE] $147 Offer Configuration:")
 print(json.dumps(offer_config, indent=2))
 print("\n[ACTION] Next steps:")
 print("1. Go to https://dashboard.stripe.com/")
-print("2. Create new product: 'Managed Outreach Audit - $97'")
+print("2. Create new product: 'Managed Outreach Audit - $147'")
 print("3. Create payment link")
 print("4. Copy link and update reddit_posts.md")
 

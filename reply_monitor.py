@@ -132,7 +132,7 @@ def main():
 def handle_warm_reply(email: str, body: str, thread_id: str, dry_run: bool) -> None:
     """
     G1 + G4: Warm reply → advance LeadStore stage to 'warm', pause cold
-    sequence, run audit if URL known, send $97 pitch with Stripe link.
+    sequence, run audit if URL known, send $147 pitch with Stripe link.
     """
     print(f"  [WARM] {email} — advancing stage + triggering audit/pitch")
 
@@ -152,10 +152,10 @@ def handle_warm_reply(email: str, body: str, thread_id: str, dry_run: bool) -> N
         lead = None
 
     if dry_run:
-        print(f"  [DRY-RUN] would deliver audit + $97 pitch to {email}")
+        print(f"  [DRY-RUN] would deliver audit + $147 pitch to {email}")
         return
 
-    # 2. Attempt audit + $97 pitch
+    # 2. Attempt audit + $147 pitch
     try:
         from followup_sequence import NEBULA, get_audit_data, send_email, DRY_RUN
         from stripe_links import get_97_checkout_url
@@ -182,7 +182,7 @@ def handle_warm_reply(email: str, body: str, thread_id: str, dry_run: bool) -> N
             f"Ran the audit on {domain or 'your site'}. Score: {score}/10 ({grade}).\n\n"
             f"Main issue: {issue}\n\n"
             f"Fix: {fix}\n\n"
-            f"We implement it in 24h for $97. Full refund if it doesn't move your numbers.\n\n"
+            f"We implement it in 24h for $147. Full refund if it doesn't move your numbers.\n\n"
             f"→ {stripe_url}\n\n"
             f"—\nReply STOP to opt out."
         )

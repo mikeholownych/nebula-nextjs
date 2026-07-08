@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Send manual personalized $97 pitch to Danny — our highest-signal lead."""
+"""Send manual personalized $147 pitch to Danny — our highest-signal lead."""
 import sys, os, json
 from pathlib import Path
 sys.path.insert(0, '/home/mike/nebula')
@@ -20,7 +20,7 @@ Your page has zero CTA or headline above the fold. Someone clicks your ad, lands
 
 You also don't have Facebook Pixel or proper conversion tracking — so Google Ads is the only thing measuring success. If that goes down (and it will in 2026 with everything changing), you're flying blind.
 
-The $97 Fix Pack addresses both in one shot:
+The $147 Fix Pack addresses both in one shot:
 
 1. Rebuild the above-fold section with a headline, sub-headline + primary CTA
 2. Install FB Pixel + conversion tracking so you see the real picture

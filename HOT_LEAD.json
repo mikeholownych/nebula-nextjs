@@ -1,5 +1,29 @@
 [
   {
+    "timestamp": "2026-07-08T00:30:44Z",
+    "sender": "Justina (Obakura) <contact@support.obakura.com>",
+    "subject": "re: obakura.com \u2014 here's what I found",
+    "thread_id": "3f393ea0-13a1-4d6e-8bf8-38175ed5c146",
+    "preview": "Hi there,\n\nThanks for reaching out!\n\nPlease note this inbox is managed by the <a href=\"https://obakura.com\">Obakura clothing | Comfy clothes, original designs</a> site's support team, and we can only ",
+    "stage": "awaiting_url_or_schedule",
+    "action": "deliver_audit",
+    "status": "awaiting_url_or_schedule",
+    "classification": "other",
+    "updated_at": "2026-07-08T00:35:01.804876+00:00"
+  },
+  {
+    "timestamp": "2026-07-08T00:15:40Z",
+    "sender": "Justina (Obakura) <contact@support.obakura.com>",
+    "subject": "re: obakura.com audit \u2014 one thing",
+    "thread_id": "f8cbe685-e7b9-41a8-a7c2-08b08b286ccb",
+    "preview": "Hi there,\n\nThanks for reaching out!\n\nPlease note this inbox is managed by the <a href=\"https://obakura.com\">Obakura clothing | Comfy clothes, original designs</a> site's support team, and we can only ",
+    "stage": "awaiting_url_or_schedule",
+    "action": "deliver_audit",
+    "status": "awaiting_url_or_schedule",
+    "classification": "other",
+    "updated_at": "2026-07-08T00:20:01.863674+00:00"
+  },
+  {
     "timestamp": "2026-07-07T12:30:13Z",
     "sender": "Ligia Peres <peresligia@gmail.com>",
     "subject": "re: play.google.com audit \u2014 did that make sense?",
@@ -62,7 +86,9 @@
     "status": "pitched",
     "holiday_timing_adjusted": true,
     "holiday_timing_note": "Moved to early AM ET July 4; hourly monitor handles replies into evening.",
-    "pitch_sent_at": "2026-07-04T10:22:07.987586+00:00"
+    "pitch_sent_at": "2026-07-04T10:22:07.987586+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://funghiclear.com/products/funghiclear-nail-spray-with-manuka-oil",
@@ -77,7 +103,9 @@
     "status": "pitched",
     "holiday_timing_adjusted": true,
     "holiday_timing_note": "Moved to early AM ET July 4; hourly monitor handles replies into evening.",
-    "pitch_sent_at": "2026-07-04T10:22:08.770896+00:00"
+    "pitch_sent_at": "2026-07-04T10:22:08.770896+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://lowtdfw.com/offer",
@@ -92,7 +120,9 @@
     "status": "pitched",
     "holiday_timing_adjusted": true,
     "holiday_timing_note": "Moved to early AM ET July 4; hourly monitor handles replies into evening.",
-    "pitch_sent_at": "2026-07-04T10:22:09.520169+00:00"
+    "pitch_sent_at": "2026-07-04T10:22:09.520169+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://invoicingapi.com",
@@ -107,7 +137,9 @@
     "status": "pitched",
     "holiday_timing_adjusted": true,
     "holiday_timing_note": "Moved to early AM ET July 4; hourly monitor handles replies into evening.",
-    "pitch_sent_at": "2026-07-04T10:22:10.323603+00:00"
+    "pitch_sent_at": "2026-07-04T10:22:10.323603+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://usemagnetiq.com",
@@ -117,12 +149,14 @@
     "audit_grade": "C",
     "audit_delivered_at": "2026-07-02T12:05:22.923992+00:00",
     "pitch_due_at": "2026-07-04T10:00:00+00:00",
-    "stage": "pitch_sent",
+    "stage": "bounced",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "holiday_timing_adjusted": true,
     "holiday_timing_note": "Moved to early AM ET July 4; hourly monitor handles replies into evening.",
-    "pitch_sent_at": "2026-07-04T10:22:11.084007+00:00"
+    "pitch_sent_at": "2026-07-04T10:22:11.084007+00:00",
+    "bounced_at": "2026-07-07T23:57:40.333946+00:00",
+    "bounce_reason": "unsubscribe_stop_request"
   },
   {
     "url": "https://www.calisim.com/plans",
@@ -137,7 +171,9 @@
     "status": "pitched",
     "holiday_timing_adjusted": true,
     "holiday_timing_note": "Moved to early AM ET July 4; hourly monitor handles replies into evening.",
-    "pitch_sent_at": "2026-07-04T10:22:11.885871+00:00"
+    "pitch_sent_at": "2026-07-04T10:22:11.885871+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://www.sarojhospital.com/gastro-care",
@@ -152,7 +188,9 @@
     "status": "pitched",
     "holiday_timing_adjusted": true,
     "holiday_timing_note": "Moved to early AM ET July 4; hourly monitor handles replies into evening.",
-    "pitch_sent_at": "2026-07-04T10:22:12.673668+00:00"
+    "pitch_sent_at": "2026-07-04T10:22:12.673668+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://spsroof.com",
@@ -165,7 +203,9 @@
     "stage": "pitch_sent",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
-    "pitch_sent_at": "2026-07-05T09:21:33.680772+00:00"
+    "pitch_sent_at": "2026-07-05T09:21:33.680772+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://salisroofing.com",
@@ -178,7 +218,9 @@
     "stage": "pitch_sent",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
-    "pitch_sent_at": "2026-07-05T09:21:34.578819+00:00"
+    "pitch_sent_at": "2026-07-05T09:21:34.578819+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://www.brookerlaw.com",
@@ -203,7 +245,9 @@
     "stage": "pitch_sent",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
-    "pitch_sent_at": "2026-07-05T10:01:27.963913+00:00"
+    "pitch_sent_at": "2026-07-05T10:01:27.963913+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://greensustainabilitysolutions.com",
@@ -216,7 +260,9 @@
     "stage": "pitch_sent",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
-    "pitch_sent_at": "2026-07-05T10:01:28.782380+00:00"
+    "pitch_sent_at": "2026-07-05T10:01:28.782380+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://www.shaadisouk.com",
@@ -229,7 +275,9 @@
     "stage": "pitch_sent",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
-    "pitch_sent_at": "2026-07-05T10:01:29.582363+00:00"
+    "pitch_sent_at": "2026-07-05T10:01:29.582363+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://yourpapersource.com/collections/",
@@ -242,7 +290,9 @@
     "stage": "pitch_sent",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
-    "pitch_sent_at": "2026-07-05T10:25:48.584737+00:00"
+    "pitch_sent_at": "2026-07-05T10:25:48.584737+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://foundcall.org",
@@ -255,7 +305,9 @@
     "stage": "pitch_sent",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
-    "pitch_sent_at": "2026-07-05T10:25:49.358622+00:00"
+    "pitch_sent_at": "2026-07-05T10:25:49.358622+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://magnolia-club.org",
@@ -280,7 +332,9 @@
     "stage": "pitch_sent",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
-    "pitch_sent_at": "2026-07-05T10:26:51.929366+00:00"
+    "pitch_sent_at": "2026-07-05T10:26:51.929366+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://www.meadowsgaragedoors.com/service-areas/north-dallas-tx",
@@ -293,7 +347,9 @@
     "stage": "pitch_sent",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
-    "pitch_sent_at": "2026-07-05T11:31:05.959186+00:00"
+    "pitch_sent_at": "2026-07-05T11:31:05.959186+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://saputo.law",
@@ -318,7 +374,9 @@
     "stage": "pitch_sent",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
-    "pitch_sent_at": "2026-07-05T11:32:08.354167+00:00"
+    "pitch_sent_at": "2026-07-05T11:32:08.354167+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://ratnerpt.com",
@@ -331,7 +389,9 @@
     "stage": "pitch_sent",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
-    "pitch_sent_at": "2026-07-05T11:32:09.127464+00:00"
+    "pitch_sent_at": "2026-07-05T11:32:09.127464+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://whitehorseflowers.com.au/collections/sympathy-flowers",
@@ -344,7 +404,9 @@
     "stage": "pitch_sent",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
-    "pitch_sent_at": "2026-07-05T11:32:09.978082+00:00"
+    "pitch_sent_at": "2026-07-05T11:32:09.978082+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "url": "https://www.gepettosguild.com/custom-quote/",
@@ -357,7 +419,9 @@
     "stage": "pitch_sent",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
-    "pitch_sent_at": "2026-07-05T11:32:10.740185+00:00"
+    "pitch_sent_at": "2026-07-05T11:32:10.740185+00:00",
+    "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
+    "day3_framework": "silent_objection_pre_empt"
   },
   {
     "email": "patriciasfnunes@gmail.com",
@@ -397,9 +461,9 @@
     "score": 6.6,
     "audit_score": 6.6,
     "audit_grade": "B",
-    "stage": "audit_delivered",
-    "status": "pending",
-    "action": "send_97_pitch",
+    "stage": "pitch_sent",
+    "status": "pitched",
+    "action": "monitor_payment_or_reply",
     "thread_id": null,
     "message_id": "<0100019f370d4b8d-2a569b90-31d5-4e66-b9f4-ef2e180db091-000000@email.amazonses.com>",
     "trigger_context": "Saw your public post: Claude made my landing page beautiful",
@@ -407,7 +471,8 @@
     "lead_id": null,
     "trigger_type": null,
     "contact_route": null,
-    "pitch_due_at": "2026-07-08T10:50:46Z"
+    "pitch_due_at": "2026-07-08T10:50:46Z",
+    "pitch_sent_at": "2026-07-08T12:00:29.594384+00:00"
   },
   {
     "email": "hello@aijournal.store",
@@ -415,7 +480,7 @@
     "score": 6.0,
     "audit_score": 6.0,
     "audit_grade": "C",
-    "stage": "audit_delivered",
+    "stage": "bounced",
     "status": "pending",
     "action": "send_97_pitch",
     "thread_id": null,
@@ -425,7 +490,9 @@
     "lead_id": null,
     "trigger_type": null,
     "contact_route": null,
-    "pitch_due_at": "2026-07-08T11:46:18Z"
+    "pitch_due_at": "2026-07-08T11:46:18Z",
+    "bounced_at": "2026-07-07T23:57:40.333993+00:00",
+    "bounce_reason": "unsubscribe_stop_request"
   },
   {
     "email": "help@nypost.com",
@@ -433,9 +500,9 @@
     "score": 5.9,
     "audit_score": 5.9,
     "audit_grade": "C",
-    "stage": "audit_delivered",
-    "status": "pending",
-    "action": "send_97_pitch",
+    "stage": "pitch_sent",
+    "status": "pitched",
+    "action": "monitor_payment_or_reply",
     "thread_id": null,
     "message_id": "<0100019f37511485-938820e7-998f-498d-bde4-793b6f897e51-000000@email.amazonses.com>",
     "trigger_context": "Saw your public post: Patriotic Californians explode at HOA\u2019s \u2018crazy anti-American\u2019 demand ahead of Fourth of July",
@@ -443,7 +510,8 @@
     "lead_id": null,
     "trigger_type": null,
     "contact_route": null,
-    "pitch_due_at": "2026-07-08T12:04:48Z"
+    "pitch_due_at": "2026-07-08T12:04:48Z",
+    "pitch_sent_at": "2026-07-08T12:17:13.552002+00:00"
   },
   {
     "email": "info@xpertstart.com.au",
@@ -451,9 +519,9 @@
     "score": 6.2,
     "audit_score": 6.2,
     "audit_grade": "C",
-    "stage": "audit_delivered",
-    "status": "pending",
-    "action": "send_97_pitch",
+    "stage": "pitch_sent",
+    "status": "pitched",
+    "action": "monitor_payment_or_reply",
     "thread_id": null,
     "message_id": "<0100019f3751438b-f552b2fc-9dbc-4d17-9cf0-d9fa112cae0c-000000@email.amazonses.com>",
     "trigger_context": "Saw your public post: Hi everyone! I'd love your feedback on my website",
@@ -461,7 +529,8 @@
     "lead_id": null,
     "trigger_type": null,
     "contact_route": null,
-    "pitch_due_at": "2026-07-08T12:05:00Z"
+    "pitch_due_at": "2026-07-08T12:05:00Z",
+    "pitch_sent_at": "2026-07-08T12:17:14.317064+00:00"
   },
   {
     "email": "info@2getherewesave.com",
@@ -588,5 +657,58 @@
     "trigger_type": null,
     "contact_route": null,
     "pitch_due_at": "2026-07-09T08:06:33Z"
+  },
+  {
+    "email": "support@godlike.host",
+    "url": "https://godlike.host/gaf-play-minecraft",
+    "score": 5.4,
+    "audit_score": 5.4,
+    "audit_grade": "C",
+    "stage": "audit_delivered",
+    "status": "pending",
+    "action": "send_97_pitch",
+    "thread_id": null,
+    "message_id": "<0100019f3d8c976b-f60c1005-5730-456b-b13b-9d9912da5da6-000000@email.amazonses.com>",
+    "trigger_context": "Saw your public post: /u/AutoModerator on This Vanilla Java server for adults could be your forever world!",
+    "source_url": "https://www.reddit.com/r/MinecraftServer/comments/1uq10ei/this_vanilla_java_server_for_adults_could_be_your/ow49jhm/",
+    "lead_id": null,
+    "trigger_type": null,
+    "contact_route": null,
+    "pitch_due_at": "2026-07-09T17:07:32Z"
+  },
+  {
+    "email": "hello@ozigi.app",
+    "url": "https://ozigi.app",
+    "stage": "pitch_sent",
+    "reply_text": "What services do you offer?",
+    "reply_classification": "positive_inquiry",
+    "replied_at": "2026-07-07T17:30:07Z",
+    "our_response_sent_at": "2026-07-07T23:59:10.828954+00:00",
+    "response_message_id": "<0100019f3f050030-df838470-98a9-4b85-bcbf-5e64433f9128-000000@email.amazonses.com>",
+    "source": "cold_breakup_email",
+    "threaded_reply_sent_at": "2026-07-08T08:05:00Z",
+    "status": "pitched",
+    "action": "monitor_payment_or_reply"
+  },
+  {
+    "email": "kanzariyamihir@gmail.com",
+    "url": "https://referralful.com",
+    "stage": "warm_replied",
+    "reply_text": "Hey",
+    "reply_classification": "soft_interest",
+    "replied_at": "2026-07-07T12:01:14Z",
+    "our_response_sent_at": "2026-07-07T23:59:10.828954+00:00",
+    "response_message_id": "<0100019f3f051e19-4694b7cc-8baa-4336-9a94-c60d3f2be035-000000@email.amazonses.com>",
+    "source": "cold_breakup_email"
+  },
+  {
+    "email": "support@retryfix.com",
+    "url": "https://retryfix.com",
+    "stage": "recircle_60d",
+    "reply_text": "not the right time thanks",
+    "reply_classification": "timing_objection",
+    "replied_at": "2026-07-07T12:10:56Z",
+    "recircle_due_at": "2026-09-05T23:59:10.828954+00:00",
+    "source": "cold_breakup_email"
   }
 ]

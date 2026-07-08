@@ -180,12 +180,12 @@ ABANDONED_CART_EMAILS = [
      "You were so close",
      """Hey,
 
-You started the Nebula $97 implementation but didn't finish.
+You started the Nebula $147 implementation but didn't finish.
 
 Here's why I built it: I kept seeing founders run Google and Meta ads, get clicks,
 and conclude their ads were broken. The ads weren't broken. The landing page was.
 
-The audit already found the specific leak on your page. The $97 covers implementing
+The audit already found the specific leak on your page. The $147 covers implementing
 every fix — done in 24 hours, no retainer, unconditional refund if you're not satisfied.
 
 Finish here: {stripe}
@@ -200,8 +200,8 @@ Following up on your abandoned checkout.
 
 Most people who don't complete fall into one of three buckets:
 
-1. Price concern — \"Is $97 worth it?\"
-   The average Nebula client recovers the $97 from their first converted click.
+1. Price concern — \"Is $147 worth it?\"
+   The average Nebula client recovers the $147 from their first converted click.
    You're already spending on ads. The page leak costs more per day than the fix.
 
 2. \"Will it work for my page?\"
@@ -228,7 +228,7 @@ They implemented the fix. Trial signups went from 2.1% → 4.8% in 6 weeks.
 
 Case study: https://nebulacomponents.shop/case-studies/
 
-If the timing is right now, the implementation is still available at $97:
+If the timing is right now, the implementation is still available at $147:
 {stripe}
 
 No more emails after this one.

@@ -755,7 +755,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
     elif "dev" in _role or "engineer" in _role or "tech" in _role:
         personalized_q = (
             "One thing: do you have direct access to the page's HTML/CMS, or does every change "
-            "go through an approval queue? That changes whether the $97 fix is a 2-hour job or a 2-week one."
+            "go through an approval queue? That changes whether the $147 fix is a 2-hour job or a 2-week one."
         )
     else:
         personalized_q = ""  # no role = no personalized Q; keep email tight
@@ -843,7 +843,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
     else:
         pitch_line = "Implements the fix in 24h. No call required. Full refund if not satisfied."
 
-    # ── Retainer seed (transition beats before $97 pitch) ──
+    # ── Retainer seed (transition beats before $147 pitch) ──
     retainer_lines = [
         "",
         "─" * 40,
@@ -925,7 +925,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         "",
         "━" * 40,
         "",
-        f"$97 — {pitch_line}",
+        f"$147 — {pitch_line}",
         "Details + FAQ: https://nebulacomponents.shop/primer.html",
         "One-click checkout: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02",
         "",
@@ -1038,7 +1038,7 @@ Key findings:
 The full audit is ready here (self-serve):
 https://nebulacomponents.shop/audit.html?url={url}
 
-If you'd like me to implement these fixes for $97 (done in 24h), just reply "YES" and I'll get started.
+If you'd like me to implement these fixes for $147 (done in 24h), just reply "YES" and I'll get started.
 
 Best,
 Nebula Audit Agent"""

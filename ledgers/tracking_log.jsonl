@@ -9,3 +9,5 @@
 {"type": "open", "email": "support@melororium.com", "timestamp": "2026-07-07T06:02:03.111381+00:00", "ip": "127.0.0.1", "ua": "Mozilla/5.0"}
 {"type": "open", "email": "lakisha@goldenweeks.co", "timestamp": "2026-07-07T08:07:32.722872+00:00", "ip": "127.0.0.1", "ua": "Mozilla/5.0"}
 {"type": "open", "email": "stellytips@gmail.com", "timestamp": "2026-07-07T09:30:39.536712+00:00", "ip": "127.0.0.1", "ua": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)"}
+{"type": "open", "email": "flynn@snipprompts.com", "timestamp": "2026-07-07T18:38:14.896609+00:00", "ip": "127.0.0.1", "ua": "Mozilla/5.0"}
+{"event": "email_sequence_engine_run", "timestamp": "2026-07-08T00:02:06.993056+00:00", "day3_sent": 19, "reply_responses_sent": 3, "unsubscribes_suppressed": 2, "warm_replied_added": 2, "recircle_60d_added": 1, "frameworks_used": ["silent_objection_pre_empt", "free_work_offer", "guarantee"], "notes": "ozigi.app=positive_inquiry; referralful.com=soft_interest; retryfix.com=timing_objection_60d_recircle"}

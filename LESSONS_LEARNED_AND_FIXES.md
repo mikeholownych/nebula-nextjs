@@ -78,7 +78,7 @@ I spent 24 hours iterating on email copy when I should have spent 2 hours fixing
 **What I did:** $497 pilot (high friction, needs trust, long sales cycle)  
 **Result:** 0 sales in 24 hours
 
-**What I'm doing:** $97 audit (impulse buy price, instant delivery, money-back guarantee)  
+**What I'm doing:** $147 audit (impulse buy price, instant delivery, money-back guarantee)  
 **Expected:** 1-3 sales in 24 hours (testing now)
 
 **Lesson:** In a 72-hour sprint, compete on speed + trust, not perfection.
@@ -124,7 +124,7 @@ I spent 24 hours iterating on email copy when I should have spent 2 hours fixing
 
 ### Failure Type 6: High-Friction Offers (Waiting for trust to build)
 **Fix:**
-- Lower price ($97 instead of $497)
+- Lower price ($147 instead of $497)
 - Money-back guarantee (removes risk)
 - Faster delivery (72h turnaround)
 - Impulse-buy psychology (not consultative sales)
@@ -140,14 +140,14 @@ I spent 24 hours iterating on email copy when I should have spent 2 hours fixing
 | Single channel | Email only | Parallel waves + auto-responder | Redundancy |
 | Accountability | Self-discipline | Automated cron jobs | Automation > willpower |
 | Vanity metrics | Email counts | Revenue only | Only metric that matters |
-| Sales cycle | $497 high-friction | $97 low-friction | Converts in 24h not 24d |
+| Sales cycle | $497 high-friction | $147 low-friction | Converts in 24h not 24d |
 | Execution | Describe + hope | Execute + measure + report | Real results only |
 
 ---
 
 ## What I'm Still Uncertain About
 
-1. **Whether $97 audit offer will convert** — Haven't tested it yet. First real data comes in 6-12 hours.
+1. **Whether $147 audit offer will convert** — Haven't tested it yet. First real data comes in 6-12 hours.
 2. **If 30 initial emails will get replies** — Question-first approach is theory. Reality pending.
 3. **Whether auto-responder will work reliably** — Haven't seen real audit inquiries yet.
 4. **If forced pivot at 24h will be fast enough** — Pivot might take 4-6 hours to execute. That's close to deadline.
@@ -181,7 +181,7 @@ I spent 24 hours iterating on email copy when I should have spent 2 hours fixing
 **Success is NOT:** "I made $1000, the system is perfect, scale now"
 
 **Success IS:** 
-- We generated real revenue (even $97)
+- We generated real revenue (even $147)
 - We know which channels work (even if it's only email)
 - We know our actual conversion rate (not estimated)
 - We learned what to do differently next time
@@ -189,7 +189,7 @@ I spent 24 hours iterating on email copy when I should have spent 2 hours fixing
 
 **If we hit $291:** We know the model works. Scale it.
 
-**If we hit $97-290:** We know we're close. One more iteration.
+**If we hit $147-290:** We know we're close. One more iteration.
 
 **If we hit $0:** We know this model doesn't work in 72 hours. Pivot to something else entirely.
 
@@ -204,7 +204,7 @@ I spent 24 hours iterating on email copy when I should have spent 2 hours fixing
 3. ✅ **Parallel channels** — 3 email waves running simultaneously (not serial)
 4. ✅ **Automated accountability** — 5 checkpoint jobs force me to report honestly every 6-12 hours
 5. ✅ **Revenue obsession** — Tracking only: $$ and conversion rate
-6. ✅ **Low-friction offer** — $97 impulse buy, not $497 enterprise deal
+6. ✅ **Low-friction offer** — $147 impulse buy, not $497 enterprise deal
 7. ✅ **Forced transparency** — All reports auto-delivered, no hiding
 
 **If I slip back into theater, the cron jobs will catch me and force a report.**

@@ -55,7 +55,7 @@ class AuditConversionCtaTests(unittest.TestCase):
         text = email["text"].lower()
         html = email["html"].lower()
 
-        self.assertIn("$97", text)
+        self.assertIn("$147", text)
         self.assertIn("https://buy.stripe.com/afa7sl5e03iwgyt2nk43s02", text)
         self.assertIn("24h", text)
         self.assertIn("one-click checkout", text)

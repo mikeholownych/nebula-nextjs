@@ -1,5 +1,5 @@
 import random
-messages = ["Interested in $7 template", "Interested in $97 audit", "Interested in both", "Not interested"]
+messages = ["Interested in $7 template", "Interested in $147 audit", "Interested in both", "Not interested"]
 reply_count = 0
 repliers = []
 sales_detected = False

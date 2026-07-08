@@ -44,15 +44,15 @@
 ### 2B: Email sequence rewrite
 - [ ] Email 1 (cold): specific observation about THEIR landing page, NO pitch, NO link, ends with question
 - [ ] Email 2 (after reply): "I did a quick audit — attaching findings, no strings" + audit PDF
-- [ ] Email 3 (after audit delivered, 48h later): "If you want us to implement these, it's $97 flat — one week turnaround"
+- [ ] Email 3 (after audit delivered, 48h later): "If you want us to implement these, it's $147 flat — one week turnaround"
 - [ ] Email 4 (follow-up, 5 days later): "Still available if timing changed"
 - [ ] All from nebulashop@agentmail.to
 
 ### 2C: Nebula site update
-- [ ] Landing page headline: "We audit your landing page free. Pay $97 only if you want us to fix it."
+- [ ] Landing page headline: "We audit your landing page free. Pay $147 only if you want us to fix it."
 - [ ] Remove the $7 kit as the primary CTA — move to secondary offer below the fold
 - [ ] Add: "156 emails sent. 2 replies. 0 sales. Here's what we're changing." — social proof via honest numbers
-- [ ] Stripe link for $97 audit implementation service wired to new checkout
+- [ ] Stripe link for $147 audit implementation service wired to new checkout
 
 ---
 
@@ -129,7 +129,7 @@
 
 ### 6B: Challenge brief document
 - [ ] Write `/home/mike/nebula/docs/challenge-july4-brief.md`:
-  - Target: 1 paying customer ($97) within 7 days
+  - Target: 1 paying customer ($147) within 7 days
   - Daily cadence: 8 AM scrape, 9 AM send, check inbox every 15 min
   - Success criteria: Stripe payment + delivered implementation
   - Escalation: anything requiring spend > $20 → notify user
@@ -159,7 +159,7 @@ Infrastructure is bulletproof when:
 - The inbox is checked every 15 minutes and warm replies are acted on within 60 minutes
 
 Offers are bulletproof when:
-- The funnel sequence is: observation email → free audit → $97 ask
+- The funnel sequence is: observation email → free audit → $147 ask
 - Every step is automated — no human execution required
 - Reply-to-audit latency < 60 minutes
 - Lead source refreshes daily with new intent signals

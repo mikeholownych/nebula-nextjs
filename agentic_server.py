@@ -797,7 +797,7 @@ Events: revocation
                 },
                 "/checkout.html": {
                     "get": {
-                        "summary": "Purchase Fix Pack ($97)",
+                        "summary": "Purchase Fix Pack ($147)",
                         "description": "Initiate purchase of the Fix Pack implementation service.",
                         "operationId": "purchaseFixPack",
                         "x-payment-info": {
@@ -1031,7 +1031,7 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
                     "Here's your free landing page fix kit.\n\n"
                     "1. Run your audit: https://nebulacomponents.shop\n"
                     "2. Review the top issues — each comes with evidence, why it matters, and the fix.\n"
-                    "3. Apply the fixes yourself using the 5-step checklist, or let us do it ($97).\n\n"
+                    "3. Apply the fixes yourself using the 5-step checklist, or let us do it ($147).\n\n"
                     "─" * 40 + "\n\n"
                     "That leak is real, and it won't fix itself.\n"
                     "Pages decay. Campaigns change. Content drifts.\n"
@@ -1048,7 +1048,7 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
                     "Every inference call logged, tamper-evident.\n"
                     "SOC 2 · GDPR-ready · HIPAA-ready · EU AI Act 2026 · DORA audit rights\n\n"
                     "─" * 40 + "\n\n"
-                    "Get the $97 Conversion Fix Pack: https://nebulacomponents.shop/checkout.html\n\n"
+                    "Get the $147 Conversion Fix Pack: https://nebulacomponents.shop/checkout.html\n\n"
                     "Agency partners: resell white-label audits starting at $497/mo\n"
                     "https://nebulacomponents.shop/agency-partner.html\n\n"
                     "– Nebula Components"
@@ -1079,7 +1079,7 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
                     "Every inference call logged, tamper-evident.<br>"
                     "<span style='color:#065f46;'>SOC 2 · GDPR-ready · HIPAA-ready · EU AI Act 2026 · DORA audit rights</span></p>"
                     "<hr style='border:none;border-top:1px solid #e5e7eb;margin:16px 0;'>"
-                    "<p style='text-align:center;'><a href='https://nebulacomponents.shop/checkout.html' style='display:inline-block;padding:12px 24px;background:#059669;color:#fff;text-decoration:none;border-radius:6px;font-weight:700;'>Get the $97 Conversion Fix Pack →</a></p>"
+                    "<p style='text-align:center;'><a href='https://nebulacomponents.shop/checkout.html' style='display:inline-block;padding:12px 24px;background:#059669;color:#fff;text-decoration:none;border-radius:6px;font-weight:700;'>Get the $147 Conversion Fix Pack →</a></p>"
                     "<p style='text-align:center;font-size:12px;color:#9ca3af;'>Agency partners: <a href='https://nebulacomponents.shop/agency-partner.html' style='color:#2563eb;'>resell white-label audits from $497/mo →</a></p>"
                     "<p style='color:#6b7280;font-size:12px;'>– Nebula Components</p>"
                 ),

@@ -26,7 +26,7 @@ Good: "Your page is leaking money. The audit shows you where. 60 seconds."
 `[Action verb] + [specific outcome] + [time/effort cost]`
 → "Run my free audit →"
 → "See your leak in 60 seconds"
-→ "Fix the top issue — $97"
+→ "Fix the top issue — $147"
 
 ## Source
 raw/brand-voice-notes.md

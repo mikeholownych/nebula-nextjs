@@ -40,11 +40,11 @@ def check_inbox_and_respond(inbox_email, inbox_type):
             
             # Route response based on the content of the message
             if "Interested in $7 template" in subject or "Interested in $7 template" in body:
-                response_body = "Thanks for your interest in the template pack!\n\nHere's what's included:\n- Hero section (high-converting hooks)\n- Pricing comparison layouts\n- Social proof sections\n- CTA variants\n\nDownload link: [TEMPLATE_LINK]\n\nWant help executing cold email to drive traffic? I offer a $97 audit where I review your prospect list, email copy, and send 10 test emails on your behalf.\n\nEither way, money-back guarantee.\n\n-\nMike"
-            elif "Interested in $97 audit" in subject or "Interested in $97 audit" in body:
+                response_body = "Thanks for your interest in the template pack!\n\nHere's what's included:\n- Hero section (high-converting hooks)\n- Pricing comparison layouts\n- Social proof sections\n- CTA variants\n\nDownload link: [TEMPLATE_LINK]\n\nWant help executing cold email to drive traffic? I offer a $147 audit where I review your prospect list, email copy, and send 10 test emails on your behalf.\n\nEither way, money-back guarantee.\n\n-\nMike"
+            elif "Interested in $147 audit" in subject or "Interested in $147 audit" in body:
                 response_body = "Great! You're interested in the audit.\n\nHere's what you'll get:\n- Review your prospect list for targeting quality\n- Feedback on your email subject line + body copy\n- 10 test emails sent on your behalf\n- Analysis of replies + next steps\n\n$97, money-back guarantee.\n\nWant to start with the $7 template pack first to see the quality of my work? That's an option too.\n\nReady to move forward?\n\n-\nMike"
             else:
-                response_body = "Hi, thanks for reaching out!\n\nI offer a $7 template pack or a $97 audit service.\n\nLet me know which you're interested in, and I'll send you the details.\n\n-\nMike"
+                response_body = "Hi, thanks for reaching out!\n\nI offer a $7 template pack or a $147 audit service.\n\nLet me know which you're interested in, and I'll send you the details.\n\n-\nMike"
             
             send_response(inbox_email, from_addr, response_body)
             

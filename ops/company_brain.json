@@ -2,13 +2,13 @@
   "company": "Nebula Components",
   "current_bottleneck": "audit_to_payment_conversion",
   "customer_events": {
-    "audit_delivered": 41,
-    "checkout_attempts": 18,
+    "audit_delivered": 42,
+    "checkout_attempts": 19,
     "payments": 2,
     "warm_replies": 0
   },
   "funnel": {
-    "audits_delivered": 38,
+    "audits_delivered": 39,
     "emails_sent": 155,
     "hot_lead_pitches_sent": 7,
     "replies": 3,
@@ -17,19 +17,23 @@
     "trigger_warm_replies": 0,
     "warm_leads": 1
   },
-  "generated_at": "2026-07-07T12:34:13Z",
+  "generated_at": "2026-07-08T19:35:44Z",
   "kill_criteria": {
     "audit": "3 audits delivered and 0 payments",
     "checkout": "buyer cannot pay self-serve",
     "outreach": "30 sends and 0 warm replies"
   },
-  "offer": "Free landing page audit -> $97 implementation",
+  "offer": "Free landing page audit -> $147 implementation",
   "pipeline": {
-    "hot_leads_pending": 11,
-    "overdue_emails": [],
-    "pitch_overdue": 0,
-    "pitch_sent": 22,
-    "total": 40
+    "hot_leads_pending": 9,
+    "overdue_emails": [
+      "hello@aijournal.store",
+      "info@2getherewesave.com",
+      "danny@repairandsquare.com"
+    ],
+    "pitch_overdue": 3,
+    "pitch_sent": 25,
+    "total": 46
   },
   "revenue": {
     "real_payments": 0,
@@ -38,7 +42,7 @@
   },
   "trust_ladder": [
     "$7 impulse",
-    "$97 audit/implementation",
+    "$147 audit/implementation",
     "$1.5k-$5k SDR service"
   ]
 }

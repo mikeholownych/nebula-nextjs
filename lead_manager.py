@@ -6,7 +6,7 @@ Stages (ordered by funnel progression):
   lead_free_kit    → downloaded free Fix Kit (email capture)
   lead_audit       → ran an audit with email
   lead_warm        → engaged but not yet paid
-  customer_97      → bought $97 Conversion Fix Pack
+  customer_97      → bought $147 Conversion Fix Pack
   customer_997     → bought $997 Growth Launch
   subscriber_197   → active $197/mo Trigger Pipeline subscriber
   customer_sdr     → enterprise SDR client
@@ -69,7 +69,7 @@ STAGE_LABELS = {
     "lead_audit": "Audit Run",
     "lead_warm": "Warm Lead",
     "beta_tester": "Beta Tester — case study pending",
-    "customer_97": "$97 Customer",
+    "customer_97": "$147 Customer",
     "customer_997": "$997 Customer",
     "subscriber_197": "$197/mo Subscriber",
     "customer_sdr": "SDR Client",
@@ -82,7 +82,7 @@ SEGMENTS = {
     "lead_audit": "Ran Audit — ready for upsell",
     "lead_warm": "Warm — high intent",
     "beta_tester": "Beta Testers — case study pending",
-    "customer_97": "$97 Customers — upsell to $997",
+    "customer_97": "$147 Customers — upsell to $997",
     "customer_997": "$997 Customers — upsell to pipeline",
     "subscriber_197": "$197/mo Subscribers",
     "non_customer": "Leads who haven't paid yet (free_kit + audit + warm + beta_tester)",
@@ -755,7 +755,7 @@ def generate_angles(count=5, offer=None, audience=None):
             "title": "The Objection Killer",
             "pattern": "objection",
             "hook": "\"I don't have time to fix my landing page\" — here's why that's costing you more.",
-            "message": "The $97 Fix Pack takes 24h. Losing 60% of your traffic takes forever.",
+            "message": "The $147 Fix Pack takes 24h. Losing 60% of your traffic takes forever.",
             "target_segment": "busy_founders",
             "test_priority": 7,
         },
@@ -933,7 +933,7 @@ def messaging_gap_finder():
         "self_serve_audit": "$0 audit in 60 seconds, no sales call, no calendar",
         "product_led": "Self-serve checkout, automated delivery, no human touch",
         "concrete_fix": "Implementable changes, not strategic advice",
-        "price_transparency": "$97 for a fix, not a monthly subscription",
+        "price_transparency": "$147 for a fix, not a monthly subscription",
         "founder_friendly": "Built for founders by someone who sells to founders",
         "no_domain_farm": "One inbox, AgentMail handles deliverability — no 75-domain fleet needed",
         "trigger_aware": "Outreach only when someone is actively buying",

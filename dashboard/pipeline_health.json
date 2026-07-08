@@ -1,29 +1,29 @@
 {
-  "timestamp": "2026-07-07T02:00:16.947118+00:00",
+  "timestamp": "2026-07-08T02:00:52.994916+00:00",
   "healthy": true,
-  "passed": 14,
+  "passed": 15,
   "failed": 0,
-  "total": 14,
+  "total": 15,
   "checks": [
     {
       "name": "File: ramp_pipeline_fill.py",
       "passed": true,
-      "detail": "30,605 bytes"
+      "detail": "36,790 bytes"
     },
     {
       "name": "File: followup_sequence.py",
       "passed": true,
-      "detail": "30,724 bytes"
+      "detail": "32,118 bytes"
     },
     {
       "name": "File: deliver_audit.py",
       "passed": true,
-      "detail": "32,519 bytes"
+      "detail": "50,310 bytes"
     },
     {
       "name": "File: agentic_server.py",
       "passed": true,
-      "detail": "51,648 bytes"
+      "detail": "65,217 bytes"
     },
     {
       "name": "SMTP connectivity",
@@ -38,12 +38,12 @@
     {
       "name": "Hard bounces",
       "passed": true,
-      "detail": "29 total bounces (all managed)"
+      "detail": "30 total bounces (all managed)"
     },
     {
       "name": "Soft bounces",
       "passed": true,
-      "detail": "0 soft bounce(s), 117 total events"
+      "detail": "0 soft bounce(s), 119 total events"
     },
     {
       "name": "Cron: followup_sequence",
@@ -63,7 +63,7 @@
     {
       "name": "Pipeline ramp recent run",
       "passed": true,
-      "detail": "113m ago"
+      "detail": "8m ago"
     },
     {
       "name": "Dead letter queue",
@@ -74,16 +74,23 @@
       "name": "Stuck leads",
       "passed": true,
       "detail": "No leads stalled >4h"
+    },
+    {
+      "name": "Copy fatigue detector",
+      "passed": true,
+      "detail": "outreach_log: 190 entries; run copy_fatigue_detector.py for full diagnosis"
     }
   ],
   "stuck_leads": [],
   "lead_stages": {
-    "audit_delivered": 8,
-    "pitch_sent": 21,
+    "audit_delivered": 14,
+    "pitch_sent": 20,
     "paid": 0,
-    "bounced": 29,
-    "contacted": 75,
-    "unknown": 0
+    "bounced": 32,
+    "contacted": 74,
+    "unknown": 0,
+    "warm_replied": 2,
+    "recircle_60d": 1
   },
-  "total_leads": 133
+  "total_leads": 143
 }

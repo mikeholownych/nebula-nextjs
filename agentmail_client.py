@@ -17,6 +17,7 @@ Usage:
 
 import json
 import os
+import urllib.parse
 import urllib.request
 import urllib.error
 from datetime import datetime, timezone
@@ -130,7 +131,8 @@ class AgentMailClient:
 
     def get_message(self, message_id: str) -> dict:
         """Get a single message with full body."""
-        return self._req("GET", f"/inboxes/{self.inbox}/messages/{message_id}")
+        safe_id = urllib.parse.quote(message_id, safe='')
+        return self._req("GET", f"/inboxes/{self.inbox}/messages/{safe_id}")
 
     def send(self, to: list, subject: str, text: str = None, html: str = None,
              client_id: str = None) -> dict:
@@ -168,7 +170,8 @@ class AgentMailClient:
         data = {}
         if text: data["text"] = text
         if html: data["html"] = html
-        return self._req("POST", f"/inboxes/{self.inbox}/messages/{message_id}/reply", data)
+        safe_id = urllib.parse.quote(message_id, safe='')
+        return self._req("POST", f"/inboxes/{self.inbox}/messages/{safe_id}/reply", data)
 
     # ─── Webhooks ─────────────────────────────────────────────────────────────
 

@@ -43,7 +43,7 @@ def main() -> None:
     real_payments = int(m['real_payments'])
     if pitches >= 7 and real_payments == 0 and not state.get('audit_depth_alerted'):
         alerts.append(
-            'AUDIT QUALITY REVIEW TRIGGERED: 7+ $97 pitches sent and 0 real payments. Investigate audit depth/urgency before more pitches.'
+            'AUDIT QUALITY REVIEW TRIGGERED: 7+ $147 pitches sent and 0 real payments. Investigate audit depth/urgency before more pitches.'
         )
         state['audit_depth_alerted'] = datetime.now(timezone.utc).isoformat()
         try:

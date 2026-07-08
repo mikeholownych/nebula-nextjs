@@ -1,29 +1,29 @@
 {
-  "timestamp": "2026-07-07T12:49:35.210937+00:00",
-  "healthy": true,
-  "passed": 15,
-  "failed": 0,
+  "timestamp": "2026-07-08T20:00:52.223460+00:00",
+  "healthy": false,
+  "passed": 13,
+  "failed": 2,
   "total": 15,
   "checks": [
     {
       "name": "File: ramp_pipeline_fill.py",
       "passed": true,
-      "detail": "32,302 bytes"
+      "detail": "36,790 bytes"
     },
     {
       "name": "File: followup_sequence.py",
       "passed": true,
-      "detail": "32,118 bytes"
+      "detail": "32,123 bytes"
     },
     {
       "name": "File: deliver_audit.py",
       "passed": true,
-      "detail": "49,646 bytes"
+      "detail": "55,240 bytes"
     },
     {
       "name": "File: agentic_server.py",
       "passed": true,
-      "detail": "65,217 bytes"
+      "detail": "65,417 bytes"
     },
     {
       "name": "SMTP connectivity",
@@ -37,13 +37,13 @@
     },
     {
       "name": "Hard bounces",
-      "passed": true,
-      "detail": "30 total bounces (all managed)"
+      "passed": false,
+      "detail": "5 NEW hard bounce(s) since baseline (35 total)"
     },
     {
       "name": "Soft bounces",
       "passed": true,
-      "detail": "0 soft bounce(s), 117 total events"
+      "detail": "0 soft bounce(s), 267 total events"
     },
     {
       "name": "Cron: followup_sequence",
@@ -58,12 +58,12 @@
     {
       "name": "Pipeline lock",
       "passed": true,
-      "detail": "No lock file — pipeline not currently running"
+      "detail": "Running"
     },
     {
       "name": "Pipeline ramp recent run",
-      "passed": true,
-      "detail": "41m ago"
+      "passed": false,
+      "detail": "1062m ago — stale"
     },
     {
       "name": "Dead letter queue",
@@ -83,12 +83,14 @@
   ],
   "stuck_leads": [],
   "lead_stages": {
-    "audit_delivered": 14,
-    "pitch_sent": 21,
+    "audit_delivered": 7,
+    "pitch_sent": 23,
     "paid": 0,
-    "bounced": 30,
-    "contacted": 75,
-    "unknown": 0
+    "bounced": 37,
+    "contacted": 74,
+    "unknown": 0,
+    "warm_replied": 1,
+    "recircle_60d": 1
   },
-  "total_leads": 140
+  "total_leads": 143
 }

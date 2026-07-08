@@ -4,3 +4,7 @@
 {"email": "support@retryfix.com", "classification": "cold", "thread_id": "4effa254-535b-49eb-9bad-e2377615a9b7", "detected_at": "2026-07-07T12:21:13.161036+00:00"}
 {"email": "berkay@adsby.co", "classification": "cold", "thread_id": "db09f2e5-2b92-42d5-8b61-a74801a0edcc", "detected_at": "2026-07-07T12:37:17.637916+00:00"}
 {"email": "peresligia@gmail.com", "classification": "warm", "thread_id": "a353ec63-e777-482c-936e-3da5a6d0d84e", "detected_at": "2026-07-07T12:37:17.760378+00:00"}
+{"email": "hello@ozigi.app", "classification": "cold", "thread_id": "ad818929-b165-4101-9238-b4c9b8e60cf9", "detected_at": "2026-07-07T17:41:37.346829+00:00"}
+{"email": "contact@support.obakura.com", "classification": "warm", "thread_id": "f8cbe685-e7b9-41a8-a7c2-08b08b286ccb", "detected_at": "2026-07-08T00:18:43.769426+00:00"}
+{"email": "contact@support.obakura.com", "classification": "cold", "thread_id": "3f393ea0-13a1-4d6e-8bf8-38175ed5c146", "detected_at": "2026-07-08T00:34:47.408088+00:00"}
+{"email": "zayne@hacktron.ai", "classification": "cold", "thread_id": "bcd7d41a-e287-4f83-aef1-09ca068d9191", "detected_at": "2026-07-08T12:09:13.877716+00:00"}

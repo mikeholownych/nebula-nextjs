@@ -1,5 +1,5 @@
 # Offer Ladder
-> Free → $97 → $997 → $197/mo. Each step earns the next.
+> Free → $147 → $997 → $197/mo. Each step earns the next.
 
 ## Rung 1: Free Audit ($0)
 - What: AI-scored teardown of landing page (7 dimensions, letter grade)
@@ -7,7 +7,7 @@
 - Value: shows the leak, ranks fixes by impact
 - Conversion trigger: score below 7.0 → offer Fix Pack
 
-## Rung 2: Fix Pack ($97)
+## Rung 2: Fix Pack ($147)
 - What: Top 2 leaks fixed (copy + code)
 - Stripe: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
 - Delivery: implemented within 24h
@@ -24,9 +24,9 @@
 - Conversion: automatic upsell from Growth Launch
 
 ## Pricing Anchors
-- $97 framed against monthly ad waste (e.g., $3k/mo spend × 1% CVR gap = $X lost)
+- $147 framed against monthly ad waste (e.g., $3k/mo spend × 1% CVR gap = $X lost)
 - ROI calculator on page does this math live
-- Guarantee removes all risk at $97
+- Guarantee removes all risk at $147
 
 ## Lead Stage Map
 free_kit → audit → warm → beta_tester → 97 → 997 → 197_mo → sdr
