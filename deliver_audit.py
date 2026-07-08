@@ -350,6 +350,94 @@ def score_audit(page):
         seo_issue_text = "Critical SEO gaps: " + "; ".join(seo_issues[:3])
         seo_fix_text = "Add a <title> tag and <meta name=\"description\"> immediately. Create a single H1 that contains your primary keyword and matches your title intent."
 
+    # ── AI Citation Readiness dimension ─────────────────────────────────
+    # Scores how well the page signals entity identity to AI search engines.
+    ai_score = 5  # baseline
+    ai_findings = []
+
+    # JSON-LD structured data
+    has_jsonld = bool(re.search(r'<script[^>]*type="application/ld\+json"[^>]*>', html_text))
+    if has_jsonld:
+        ai_score += 1
+        ai_findings.append("JSON-LD structured data found")
+        if re.search(r'"@type"\s*:\s*"Organization"', html_text):
+            ai_score += 1
+            ai_findings.append("Organization entity defined")
+        if re.search(r'"@type"\s*:\s*"(WebSite|WebApplication)"', html_text):
+            ai_score += 1
+            ai_findings.append("Site type schema defined")
+        if re.search(r'"@type"\s*:\s*"(Article|NewsArticle)"', html_text):
+            ai_score += 1
+            ai_findings.append("Content article schema found")
+    else:
+        ai_findings.append("No JSON-LD structured data")
+
+    # OpenGraph completeness
+    og_tags = {
+        "og:title": bool(re.search(r'<meta[^>]*property="og:title"[^>]*>', html_text)),
+        "og:description": bool(re.search(r'<meta[^>]*property="og:description"[^>]*>', html_text)),
+        "og:image": bool(re.search(r'<meta[^>]*property="og:image"[^>]*>', html_text)),
+        "og:type": bool(re.search(r'<meta[^>]*property="og:type"[^>]*>', html_text)),
+        "og:url": bool(re.search(r'<meta[^>]*property="og:url"[^>]*>', html_text)),
+    }
+    og_complete = sum(1 for v in og_tags.values() if v)
+    if og_complete >= 4:
+        ai_score += 1
+        ai_findings.append(f"OpenGraph {og_complete}/5 complete")
+        og_note = f"OpenGraph tags {og_complete}/5 present"
+    elif og_complete >= 2:
+        ai_score += 0.5
+        ai_findings.append(f"OpenGraph partial ({og_complete}/5)")
+        og_note = f"OpenGraph tags {og_complete}/5 present — add missing: og:image, og:type"
+    else:
+        ai_findings.append(f"OpenGraph sparse ({og_complete}/5)")
+        og_note = "OpenGraph nearly missing"
+
+    # Twitter card
+    has_twitter = bool(re.search(r'<meta[^>]*name="twitter:card"[^>]*>', html_text))
+    if has_twitter:
+        ai_score += 0.5
+        ai_findings.append("Twitter card present")
+
+    # Canonical URL
+    has_canonical = bool(re.search(r'<link[^>]*rel="canonical"[^>]*>', html_text))
+    if has_canonical:
+        ai_score += 0.5
+        ai_findings.append("Canonical URL set")
+    else:
+        ai_findings.append("No canonical URL")
+
+    # Factual density
+    text_words = text.split()
+    if len(text_words) > 50:
+        sample = " ".join(text_words[:200])
+        dates = len(re.findall(r'\b(20\d{2}|Q[1-4]\s*\d{4}|\d{1,2}/\d{1,2}/\d{2,4})\b', sample))
+        named_ents = len(re.findall(r'\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\b', sample))
+        numbers = len(re.findall(r'\$\d[\d,]*|[\d,.]+%|\d+\s*(users|customers|clients|companies|reviews|sales)', sample))
+        factual = dates + (named_ents // 3) + numbers
+        if factual >= 8:
+            ai_score += 1
+            ai_findings.append("High factual density")
+        elif factual >= 4:
+            ai_score += 0.5
+            ai_findings.append("Moderate factual density")
+        else:
+            ai_findings.append("Low factual density")
+
+    ai_score = max(1, min(10, round(ai_score)))
+
+    if ai_score >= 8:
+        ai_issue_text = f"AI citation ready — entity signals strong. {ai_findings[0] if ai_findings else ''}"
+        ai_fix_text = "Your page is well-structured for AI citation. To improve further: publish original research, earn editorial placements in LLM-weighted publications (Reuters, Forbes, TIME, Axios)."
+    elif ai_score >= 5:
+        ai_issue_text = f"AI citation needs structured data: {ai_findings[0] if ai_findings else 'add JSON-LD'}"
+        ai_fix_text = "Add JSON-LD Organization schema, complete all 5 OpenGraph tags, set canonical URL, and include concrete facts (dates, named entities, numbers) in your copy. See our AI Citation Source Map (growth_system/ai_citation_source_map.md) for LLM-specific targets."
+    else:
+        ai_issue_text = f"Poor AI citation readiness: {ai_findings[0] if ai_findings else 'critical gaps'}"
+        ai_fix_text = "Critical: Add JSON-LD with Organization entity, complete OpenGraph + Twitter cards, set canonical URL. Without these, AI engines cannot reliably identify or cite your brand."
+
+    # ── end AI citation dimension ──────────────────────────────────────
+
     dimensions = {
         "headline": {
             "score": headline_score,
@@ -400,6 +488,12 @@ def score_audit(page):
             "issue": seo_issue_text,
             "fix": seo_fix_text,
         },
+        "ai_readiness": {
+            "score": ai_score,
+            "weight": "medium",
+            "issue": ai_issue_text,
+            "fix": ai_fix_text,
+        },
     }
     overall = round(sum(v["score"] for v in dimensions.values()) / len(dimensions), 1)
     grade = "A" if overall >= 8 else "B" if overall >= 6.5 else "C" if overall >= 5 else "D"
@@ -426,6 +520,7 @@ def score_audit(page):
             "mobile":       3,   # CSS/viewport — usually one line
             "ad_signals":   8,   # pixel install + GA4 events + tag manager + 70% team workflow change
             "seo_foundations": 4, # title/meta edits — low tech, some content work
+            "ai_readiness": 5,   # JSON-LD + OG tags — dev task, one-time setup, moderate effort
         }
         effort = effort_weights.get(key, 5)
 
@@ -605,6 +700,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         "seo_foundations": "SEO Foundations",
         "ad_signals": "Ad Tracking",
         "above_fold": "Above Fold",
+        "ai_readiness": "AI Citation Readiness",
     }
     issues = sorted(audit["dimensions"].items(), key=lambda x: x[1]["score"])
     broken_only = [(k, v) for k, v in issues if v["score"] < 7]

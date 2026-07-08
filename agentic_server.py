@@ -1150,6 +1150,10 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
             "social_proof": "Social Proof",
             "speed":        "Load Speed",
             "mobile":       "Mobile Readiness",
+            "above_fold":   "Above-Fold Content",
+            "ad_signals":   "Ad Tracking",
+            "seo_foundations": "SEO Foundations",
+            "ai_readiness": "AI Citation Readiness",
         }
         sorted_dims = sorted(dims.items(), key=lambda x: x[1]["score"])
         top_issues = [
