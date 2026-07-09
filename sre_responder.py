@@ -358,10 +358,12 @@ def main():
     unstuck = fix_stuck_leads()
     if unstuck:
         actions_taken.append(f'Unstuck {unstuck} leads → pitch_queued')
+        clear_failure(state, 'Stuck leads detected')
 
     # 5. Trigger ramp if pipeline starved
     if trigger_ramp_if_starved():
         actions_taken.append('Triggered ramp (pipeline starved >6h)')
+        clear_failure(state, 'Pipeline ramp recent run')
 
     # 6. Probe suppression sync
     newly_suppressed = check_bounce_suppression_sync()
