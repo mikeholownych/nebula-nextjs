@@ -1,0 +1,14 @@
+{
+  "source": "TRIBE weekly email \u2014 Matthew",
+  "traffic": "Split top-of-funnel and bottom-of-funnel; warm intros are higher-value traffic than random visits.",
+  "revenue": "Give qualified buyers the thing they are willing to buy; add consulting bridge when full service is too much risk.",
+  "inbound": "Ask existing customers/audit relationships for one intro to someone as good as them.",
+  "brand": "Do cool work, then publish proof from that work repeatedly.",
+  "email": "Abandoned checkout recovery is a one-time setup that can become automated revenue.",
+  "queues": {
+    "warm_intro_referral": "/home/mike/nebula/growth_system/warm_intro_referral_queue.jsonl",
+    "flexible_consulting_offer": "/home/mike/nebula/growth_system/flexible_consulting_offer_queue.jsonl",
+    "abandoned_checkout_recovery": "/home/mike/nebula/growth_system/abandoned_checkout_recovery_queue.jsonl",
+    "brand_proof": "/home/mike/nebula/growth_system/brand_proof_queue.jsonl"
+  }
+}

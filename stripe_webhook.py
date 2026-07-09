@@ -177,61 +177,51 @@ def _handle_abandoned_cart(session):
 
 ABANDONED_CART_EMAILS = [
     ("cart_email1",
-     "You were so close",
+     "want the lower-risk path?",
      """Hey,
 
-You started the Nebula $147 implementation but didn't finish.
+Saw you started checkout and didn't finish.
 
-Here's why I built it: I kept seeing founders run Google and Meta ads, get clicks,
-and conclude their ads were broken. The ads weren't broken. The landing page was.
+No pressure. Usually that means one of three things:
+1. timing is off
+2. you want to DIY first
+3. you need a lower-risk bridge before implementation
 
-The audit already found the specific leak on your page. The $147 covers implementing
-every fix — done in 24 hours, no retainer, unconditional refund if you're not satisfied.
-
-Finish here: {stripe}
+If it's #2, use the $7 DIY kit: {stripe_7}
+If it's #3, reply "bridge" and I'll send the lighter consulting option.
 
 — Nebula Components"""),
 
     ("cart_email2",
-     "What's holding you back?",
+     "the leak still exists",
      """Hey,
 
-Following up on your abandoned checkout.
+Quick context on the checkout you left open.
 
-Most people who don't complete fall into one of three buckets:
+The page leak doesn't become cheaper with time. If traffic is still running, the same weak CTA/proof/message path keeps taxing every click.
 
-1. Price concern — \"Is $147 worth it?\"
-   The average Nebula client recovers the $147 from their first converted click.
-   You're already spending on ads. The page leak costs more per day than the fix.
+You have three paths:
+1. DIY: {stripe_7}
+2. Done-for-you implementation: {stripe}
+3. Reply "bridge" for a lighter consulting pass first
 
-2. \"Will it work for my page?\"
-   The audit is specific to your page, not generic advice. Every fix is exact:
-   the precise headline rewrite, the CTA placement change, the trust signal to add.
-
-3. Timing — \"I'll do it later\"
-   Every day the page runs with the leak, ad spend converts at the broken rate.
-   There's no cheaper time to fix it than today.
-
-Implementation checkout: {stripe}
-Or grab the $7 DIY kit if you'd rather do it yourself: {stripe_7}
+Pick the path that matches your risk tolerance.
 
 — Nebula Components"""),
 
     ("cart_email3",
-     "Last note on this",
+     "closing the loop",
      """Hey,
 
-Last follow-up on your abandoned Nebula checkout.
+Last note on this.
 
-A founder ran the same audit last month — their page scored 4.2/10 on CTA friction.
-They implemented the fix. Trial signups went from 2.1% → 4.8% in 6 weeks.
+If the full implementation felt like too much right now, that's fine. The smarter move is not forcing the big offer — it's choosing the thing you will actually use.
 
-Case study: https://nebulacomponents.shop/case-studies/
+DIY kit: {stripe_7}
+Implementation: {stripe}
+Lighter consulting bridge: reply "bridge"
 
-If the timing is right now, the implementation is still available at $147:
-{stripe}
-
-No more emails after this one.
+No more cart emails after this.
 
 — Nebula Components"""),
 ]
