@@ -2,46 +2,60 @@
 """
 nurture_engine.py — Segment-aware email sequences (TrustOS Layer 2 steal).
 
-Uses lead_score from LeadStore to divide leads into cold/warm/hot segments
-and sends different content cadences based on engagement level.
+Two modes:
+  --send      (deprecated) Batch-sends to all leads in segment. Hit AM 429.
+  --trickle   (recommended) Sends 1-2 emails per run. Run every 5 min via cron.
 
 TrustOS mapping:
-  Cold  (0-7):   1 email/week — educational (audit intro, value drops)
+  Cold  (0-7):   1 email/week — educational
   Warm  (8-20):  3 emails/week — case studies, social proof
   Hot   (21+):   Immediate pitch + self-serve checkout CTA
 
-Hot leads trigger the $147 pitch directly (no delay — these are ready to buy).
+Hot leads are handled separately by the pitching pipeline (hot_lead_watcher.py).
+This engine handles cold and warm nurture cadences.
 
-Run:  python3 nurture_engine.py [--dry-run] [--send]
-Cron: every 4h — python3 /home/mike/nebula/nurture_engine.py --send
+Run:  python3 nurture_engine.py --trickle
+Cron: every 5m — python3 /home/mike/nebula/nurture_engine.py --trickle
 """
 import json
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
+from collections import defaultdict
 
 BASE = Path("/home/mike/nebula")
 sys.path.insert(0, str(BASE))
 
 DRY_RUN = "--dry-run" in sys.argv
-FORCE_SEND = "--send" in sys.argv
+TRICKLE = "--trickle" in sys.argv
+FORCE_SEND = "--send" in sys.argv  # legacy batch mode
 
-# ── Config ──────────────────────────────────────────────────────────
-MAX_PER_SEGMENT = {
-    "cold": 10,    # 1/week, cap at 10/day to avoid overwhelming
-    "warm": 10,    # 3/week ≈ 12/mo, cap at 10/day
-    "hot":  20,    # Hot leads get pitched immediately — no cap
+# ── Trickle config ──────────────────────────────────────────────────
+# AgentMail rate limit: ~"Five minute send limit" observed at 2+ rapid sends.
+# We send max 2 per 5-min cycle to stay under the window.
+MAX_PER_TRICKLE = 2
+
+# Min interval between nurture sends to the SAME lead (prevents spam)
+MIN_DAYS_BETWEEN = {
+    "cold": 6,     # ~1/week
+    "warm": 2,     # ~3/week
+    "hot":  0,     # immediate
 }
 
 # AgentMail config
 INBOX = "nebulashop@agentmail.to"
 API_BASE = "https://api.agentmail.to"
 
+NURTURE_LOG = BASE / "ledgers" / "nurture_log.jsonl"
+SEGMENT_ORDER = ["cold", "warm", "hot"]  # low-segment first (cold is highest volume, lowest priority)
+
+
 def _get_auth():
     secret = Path.home() / ".hermes" / "secrets" / "agentmail.key"
     token = secret.read_text().strip() if secret.exists() else ""
     return {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+
 
 def send_email(to_email, subject, text_body):
     """Send via AgentMail API. Returns (success_bool, message)."""
@@ -72,6 +86,10 @@ def send_email(to_email, subject, text_body):
         if e.code == 403:
             print(f"  [403 SUPPRESSED] {to_email}")
             return False, "403_suppressed"
+        # Log 429 distinctly so we can detect window saturation
+        if e.code == 429:
+            print(f"  [AM 429 ⏳] {to_email}: {err_body}")
+            return False, "429_rate_limit"
         print(f"  [AM {e.code}] {to_email}: {err_body}")
         return False, f"{e.code}: {err_body}"
     except Exception as e:
@@ -80,7 +98,6 @@ def send_email(to_email, subject, text_body):
 
 
 # ── Content templates by segment ───────────────────────────────────
-# TrustOS: cold gets educational, warm gets proof, hot gets pitch
 
 COLD_TEMPLATES = [
     {
@@ -227,32 +244,42 @@ P.S. — Think you can fix this yourself? Most of these issues take a dev 8-12 h
     },
 ]
 
+SEGMENT_TEMPLATES = {
+    "cold": COLD_TEMPLATES,
+    "warm": WARM_TEMPLATES,
+    "hot": HOT_TEMPLATES,
+}
 
-def load_nurture_log():
-    """Track which emails we've sent per lead to avoid duplicates."""
-    log_path = BASE / "ledgers" / "nurture_log.jsonl"
-    sent = {}  # email.lower() → set of subject_fingerprints
-    if log_path.exists():
-        for line in log_path.read_text().splitlines():
-            if line.strip():
-                try:
-                    entry = json.loads(line)
-                    email = entry.get("email", "").lower()
-                    subj = entry.get("subject", "")[:60]
-                    if email:
-                        if email not in sent:
-                            sent[email] = set()
-                        sent[email].add(subj)
-                except json.JSONDecodeError:
-                    pass
-    return sent, log_path
+
+# ── Nurture log ─────────────────────────────────────────────────────
+
+def load_nurture_log() -> dict:
+    """Return {email_lower: [(timestamp, subject_fingerprint, segment), ...]} sorted oldest-first."""
+    log = defaultdict(list)  # email → list of (ts_utc_str, subj_fp, segment)
+    if NURTURE_LOG.exists():
+        for line in NURTURE_LOG.read_text().splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                entry = json.loads(line)
+                email = entry.get("email", "").lower()
+                if not email:
+                    continue
+                log[email].append((
+                    entry.get("timestamp", ""),
+                    entry.get("subject", "")[:60],
+                    entry.get("segment", "unknown"),
+                ))
+            except json.JSONDecodeError:
+                continue
+    return dict(log)
 
 
 def log_sent(email, subject, segment, message_id):
     """Persist a nurture send to the log."""
-    log_path = BASE / "ledgers" / "nurture_log.jsonl"
-    log_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(log_path, "a") as f:
+    NURTURE_LOG.parent.mkdir(parents=True, exist_ok=True)
+    with open(NURTURE_LOG, "a") as f:
         f.write(json.dumps({
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "email": email.lower(),
@@ -262,8 +289,9 @@ def log_sent(email, subject, segment, message_id):
         }) + "\n")
 
 
+# ── Lead selection for trickle ──────────────────────────────────────
+
 def get_audit_summary(lead):
-    """Generate a short audit summary from the lead's data, or a generic one."""
     score = lead.get("audit_score")
     grade = lead.get("audit_grade", "")
     if score and grade:
@@ -271,21 +299,165 @@ def get_audit_summary(lead):
     return "We found several conversion-blocking issues — fixes are actionable and measurable."
 
 
-def run_nurture_cycle():
-    """Main nurture loop: load leads by segment, send appropriate emails."""
+def pick_leads_for_nurture(db, send_log, max_count=MAX_PER_TRICKLE) -> list:
+    """Pick leads due for nurture email, oldest-waiting-first across segments.
+
+    Selection rules:
+    1. Lead must be in cold or warm segment (hot handled by pitch pipeline)
+    2. Lead must not be bounced/dead
+    3. Lead must have an unsent template in its segment
+    4. Lead must have waited MIN_DAYS_BETWEEN since last nurture send
+    5. Returns up to max_count, rebalancing across segments
+    """
+    candidates = []
+
+    for segment_name in SEGMENT_ORDER:
+        if segment_name == "hot":
+            continue  # hot leads handled by pitch pipeline
+        templates = SEGMENT_TEMPLATES.get(segment_name, [])
+        leads = db.get_leads_by_segment(segment_name)
+        min_days = MIN_DAYS_BETWEEN.get(segment_name, 2)
+
+        for lead in leads:
+            email = lead.get("email", "").lower()
+            if not email or db.is_bounced(email):
+                continue
+
+            # Check which templates have been sent
+            lead_history = send_log.get(email, [])
+            sent_subjects = {s[1] for s in lead_history}
+
+            # Find first unsent template for this segment
+            next_tmpl = None
+            for tmpl in templates:
+                fp = tmpl["subject"][:60]
+                if fp not in sent_subjects:
+                    next_tmpl = tmpl
+                    break
+
+            if not next_tmpl:
+                continue  # all templates exhausted
+
+            # Check time since last send to this lead (any segment)
+            if lead_history:
+                # lead_history is (ts_utc, subj_fp, segment) — oldest first
+                # Get the most recent timestamp
+                recent_ts = max(h[0] for h in lead_history if h[0])
+                try:
+                    last_send = datetime.fromisoformat(recent_ts)
+                    now = datetime.now(timezone.utc)
+                    if now - last_send < timedelta(days=min_days):
+                        continue  # too soon
+                except (ValueError, TypeError):
+                    pass  # bad timestamp, proceed anyway
+
+            candidates.append({
+                "email": email,
+                "segment": segment_name,
+                "lead": lead,
+                "template": next_tmpl,
+                "sent_count": len(lead_history),
+                "template_index": templates.index(next_tmpl),
+            })
+
+    # Sort: segment priority (cold first → lower volume caught quickly),
+    # then by template index (earlier in sequence first), then by sent count (least nurtured first)
+    candidates.sort(key=lambda c: (
+        SEGMENT_ORDER.index(c["segment"]),
+        c["template_index"],
+        c["sent_count"],
+    ))
+
+    return candidates[:max_count]
+
+
+# ── Trickle cycle ───────────────────────────────────────────────────
+
+def run_trickle():
+    """Send 1-2 nurture emails to the leads most due for contact."""
     from lead_store import LeadStore
 
     db = LeadStore()
-    sent_log, _ = load_nurture_log()
+    send_log = load_nurture_log()
+
+    candidates = pick_leads_for_nurture(db, send_log,
+                                         max_count=MAX_PER_TRICKLE)
+
+    if not candidates:
+        print("[trickle] No leads due for nurture")
+        return {"sent": 0, "skipped": 0, "errors": 0, "candidates": 0}
+
+    print(f"[trickle] {len(candidates)} lead(s) due for nurture")
+    sent = 0
+    errors = 0
+    skipped = 0
+
+    for c in candidates:
+        email = c["email"]
+        segment = c["segment"]
+        lead = c["lead"]
+        tmpl = c["template"]
+
+        domain = lead.get("url", "").replace("https://", "").replace("http://", "").split("/")[0] or email.split("@")[1] if "@" in email else "yoursite.com"
+        site = lead.get("url", "") or f"https://{domain}"
+        audit_summary = get_audit_summary(lead)
+        checkout_url = f"https://nebulacomponents.shop/checkout?email={email}&url={site}"
+
+        try:
+            subject = tmpl["subject"].format(
+                domain=domain[:30],
+                domain_example=domain[:20],
+            )
+            body = tmpl["body"].format(
+                site=site,
+                domain=domain[:30],
+                email=email,
+                audit_summary=audit_summary,
+                checkout_url=checkout_url,
+            )
+        except KeyError as e:
+            print(f"  [TEMPLATE ERROR] {email}: missing key {e}")
+            errors += 1
+            continue
+
+        ok, msg_id = send_email(email, subject, body)
+        if ok:
+            log_sent(email, subject, segment, msg_id)
+            sent += 1
+            print(f"  ✓ {email} [{segment}]: {subject[:50]}")
+        else:
+            if msg_id == "429_rate_limit":
+                # Hit the rate limit — stop immediately, don't burn more sends
+                print(f"  → Rate limit hit after {sent} sent. Remaining {len(candidates)-sent-1} deferred.")
+                errors += 1
+                break
+            errors += 1
+
+        # Small delay between sends to be friendly to rate window
+        if sent < len(candidates):
+            time.sleep(3)
+
+    print(f"\n[trickle] Sent: {sent}  Errors: {errors}  Deferred: {len(candidates)-sent-errors}")
+    return {"sent": sent, "errors": errors, "candidates": len(candidates)}
+
+
+# ── Legacy batch mode (deprecated) ──────────────────────────────────
+
+def run_nurture_cycle():
+    """DEPRECATED batch-send mode. Use --trickle instead."""
+    from lead_store import LeadStore
+
+    db = LeadStore()
+    send_log, _ = load_nurture_log()
 
     total_sent = 0
     total_skipped = 0
     total_errors = 0
 
     segments = [
-        ("cold", COLD_TEMPLATES, MAX_PER_SEGMENT["cold"]),
-        ("warm", WARM_TEMPLATES, MAX_PER_SEGMENT["warm"]),
-        ("hot",  HOT_TEMPLATES,  MAX_PER_SEGMENT["hot"]),
+        ("cold", COLD_TEMPLATES, 10),
+        ("warm", WARM_TEMPLATES, 10),
+        ("hot",  HOT_TEMPLATES,  20),
     ]
 
     for segment_name, templates, max_send in segments:
@@ -301,24 +473,19 @@ def run_nurture_cycle():
             if not email or db.is_bounced(email):
                 continue
 
-            # Build context
             domain = lead.get("url", "").replace("https://", "").replace("http://", "").split("/")[0] or email.split("@")[1] if "@" in email else "yoursite.com"
             site = lead.get("url", "") or f"https://{domain}"
             audit_summary = get_audit_summary(lead)
-
-            # Build checkout URL
             checkout_url = f"https://nebulacomponents.shop/checkout?email={email}&url={site}"
 
-            sent_for_lead = sent_log.get(email, set())
+            sent_for_lead = send_log.get(email, set())
             sent_any = False
 
             for tmpl in templates:
-                # Skip if this subject was already sent to this lead
                 subj_fingerprint = tmpl["subject"][:60]
                 if subj_fingerprint in sent_for_lead:
                     continue
 
-                # Fill template
                 try:
                     subject = tmpl["subject"].format(
                         domain=domain[:30],
@@ -344,16 +511,12 @@ def run_nurture_cycle():
                     print(f"  ✓ {email} [{segment_name}]: {subject[:50]}")
                 else:
                     total_errors += 1
-
-                # One email per lead per cycle (don't blast them all at once)
                 break
 
             if not sent_any:
-                # All templates already used — lead is fully nurtured
                 if sent_for_lead:
                     total_skipped += 1
                 else:
-                    # First cycle, template error
                     total_errors += 1
 
         print(f"  → sent {sent_in_segment} in {segment_name}")
@@ -365,10 +528,15 @@ def run_nurture_cycle():
     return {"sent": total_sent, "skipped": total_skipped, "errors": total_errors}
 
 
+# ── CLI ────────────────────────────────────────────────────────────
+
 if __name__ == "__main__":
-    if DRY_RUN or FORCE_SEND:
+    if TRICKLE:
+        run_trickle()
+    elif DRY_RUN or FORCE_SEND:
         run_nurture_cycle()
     else:
-        print("Usage: python3 nurture_engine.py [--dry-run] [--send]")
+        print("Usage: python3 nurture_engine.py [--trickle | --send | --dry-run]")
+        print("  --trickle  Send 1-2 emails per run (recommended, run every 5m)")
+        print("  --send     Batch send (deprecated, hits AM 429)")
         print("  --dry-run  Simulate without sending")
-        print("  --send     Send live emails")
