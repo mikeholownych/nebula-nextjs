@@ -1,0 +1,30 @@
+{
+  "source_of_truth": "social-native actions, not bought Apollo/Clay lists",
+  "sources": [
+    "competitor engagement",
+    "top influencers and their audience",
+    "owned account engagers",
+    "Reddit/HN public buying-trigger posts"
+  ],
+  "tiers": {
+    "1": "score >=8; LinkedIn + email; enrich with Prospeo first",
+    "2": "score 5-7; email only after public/contact-page enrichment",
+    "3": "score 3-4; email only / low-frequency nurture"
+  },
+  "enrichment_waterfall": [
+    "prospeo",
+    "linkedin_profile",
+    "company_site_contact_pages",
+    "privacy_terms_imprint"
+  ],
+  "message_rules": [
+    "under 80 words",
+    "one clear CTA",
+    "value first",
+    "never lead with main paid offer"
+  ],
+  "benchmarks": {
+    "best_reply_rate": "11.4%",
+    "floor_reply_rate": "3%"
+  }
+}

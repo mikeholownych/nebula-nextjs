@@ -109,6 +109,7 @@ what-is-landing-page-audit.html
 
 # ── Growth system data ──────────────────────────
 growth_system/__pycache__/
+growth_system/evergreen_*_queue.jsonl
 
 # ── Lead data (not source) ──────────────────────
 audit_leads.jsonl
