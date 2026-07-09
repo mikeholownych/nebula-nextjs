@@ -108,30 +108,106 @@ except ImportError:
     HAS_BOUNCE_DB = False
 
 # ── Reddit search queries — trigger-aware ICP signals ───────────────────────
-REDDIT_QUERIES = [
-    # Founders with broken landing pages + paid traffic bleeding money
-    {'q': 'roast my landing page', 'subreddits': ['SaaS', 'startups', 'Entrepreneur', 'RoastMyWebsite'], 'source': 'reddit_roast'},
-    {'q': 'landing page not converting', 'subreddits': ['PPC', 'Entrepreneur', 'SaaS'], 'source': 'reddit_ads_pain'},
-    {'q': 'ads no sales', 'subreddits': ['PPC', 'Entrepreneur', 'smallbusiness'], 'source': 'reddit_zero_sales'},
+# Rotated each run: pipeline picks N random queries from this pool per run.
+REDDIT_QUERY_POOL = [
+    # Core buying-trigger queries (always included)
+    {'q': 'roast my landing page', 'subreddits': ['SaaS', 'startups', 'Entrepreneur', 'RoastMyWebsite'], 'source': 'reddit_roast', 'weight': 3},
+    {'q': 'landing page not converting', 'subreddits': ['PPC', 'Entrepreneur', 'SaaS'], 'source': 'reddit_ads_pain', 'weight': 3},
+    {'q': 'ads no sales', 'subreddits': ['PPC', 'Entrepreneur', 'smallbusiness'], 'source': 'reddit_zero_sales', 'weight': 3},
+    # Extended buying-trigger queries
+    {'q': 'ad spend no conversions', 'subreddits': ['PPC', 'Entrepreneur', 'smallbusiness', 'FacebookAds'], 'source': 'reddit_ad_spend_waste', 'weight': 2},
+    {'q': 'spent money on ads nothing', 'subreddits': ['PPC', 'startups', 'Entrepreneur'], 'source': 'reddit_ads_wasted', 'weight': 2},
+    {'q': 'Facebook ads zero sales', 'subreddits': ['PPC', 'FacebookAds', 'Entrepreneur', 'smallbusiness'], 'source': 'reddit_fb_ads_zero', 'weight': 2},
+    {'q': 'Google ads no conversions', 'subreddits': ['PPC', 'Entrepreneur', 'startups'], 'source': 'reddit_google_ads_zero', 'weight': 2},
+    {'q': 'landing page feedback', 'subreddits': ['SaaS', 'startups', 'SideProject', 'indiehackers'], 'source': 'reddit_lp_feedback', 'weight': 2},
+    {'q': 'review my landing page', 'subreddits': ['smallbusiness', 'Entrepreneur', 'RoastMyWebsite'], 'source': 'reddit_review_lp', 'weight': 2},
+    {'q': 'roast my startup', 'subreddits': ['roastmystartup', 'startups', 'SaaS'], 'source': 'reddit_roast_startup', 'weight': 2},
+    {'q': 'my site not converting', 'subreddits': ['SaaS', 'startups', 'smallbusiness', 'Entrepreneur'], 'source': 'reddit_site_not_conv', 'weight': 2},
+    {'q': 'paid traffic no results', 'subreddits': ['PPC', 'Entrepreneur', 'smallbusiness'], 'source': 'reddit_traffic_no_results', 'weight': 2},
+    {'q': 'getting clicks no sales', 'subreddits': ['PPC', 'Entrepreneur', 'SaaS', 'smallbusiness'], 'source': 'reddit_clicks_no_sales', 'weight': 2},
+    # Lower volume but high-signal queries
+    {'q': 'burning money on ads', 'subreddits': ['PPC', 'Entrepreneur', 'smallbusiness'], 'source': 'reddit_burning_money', 'weight': 1},
+    {'q': 'conversion rate sucks', 'subreddits': ['PPC', 'Entrepreneur', 'SaaS'], 'source': 'reddit_cvr_sucks', 'weight': 1},
+    {'q': 'wasting money on facebook ads', 'subreddits': ['PPC', 'FacebookAds', 'smallbusiness'], 'source': 'reddit_wasting_money_fb', 'weight': 1},
+    {'q': 'ad account no conversions', 'subreddits': ['PPC', 'FacebookAds', 'Entrepreneur'], 'source': 'reddit_ad_account_zero', 'weight': 1},
+    {'q': 'help my landing page', 'subreddits': ['SaaS', 'startups', 'Entrepreneur', 'indiehackers'], 'source': 'reddit_help_lp', 'weight': 1},
+    {'q': 'traffic but no signups', 'subreddits': ['SaaS', 'startups', 'Entrepreneur', 'indiehackers'], 'source': 'reddit_traffic_no_signups', 'weight': 1},
+    {'q': 'spent 1000 on ads nothing', 'subreddits': ['PPC', 'Entrepreneur', 'smallbusiness'], 'source': 'reddit_spent_1000', 'weight': 1},
+    {'q': '0 sales after ads', 'subreddits': ['PPC', 'Entrepreneur', 'smallbusiness', 'SaaS'], 'source': 'reddit_zero_after_ads', 'weight': 1},
 ]
+# Queries used per run: weight=3 always, weight=2 pick 2, weight=1 pick 2
+REDDIT_QUERIES = None  # built at runtime by pick_reddit_queries()
 APIFY_ACTOR = 'trudax~reddit-scraper-lite'  # ~ separator required in REST API URLs
 APIFY_POLL_INTERVAL = 5
-APIFY_MAX_WAIT = 30   # ~30s per query — if actor isn't done, skip and next pipeline will catch up
-MAX_POLL_SECONDS = 75  # hard ceiling — abort Reddit scrape after 75s total
+APIFY_MAX_WAIT = 15   # ~15s per query — fast-fail: if actor isn't done, next pipeline cycle catches it
+MAX_POLL_SECONDS = 60  # hard ceiling — abort entire Reddit scrape after 60s total
 
-GOOGLE_ICP_QUERIES = [
-    # High-yield: subreddits that REQUIRE URL in post body
-    'site:reddit.com/r/RoastMyWebsite "landing page" "ads"',
-    'site:reddit.com/r/roastmystartup "not converting" OR "no sales" OR "ads"',
-    'site:reddit.com/r/SideProject "landing page" "not converting" OR "ads"',
-    'site:reddit.com/r/Entrepreneur "my landing page" "ads" "not converting"',
-    # Pain signal posts (username → bio enrichment)
-    'site:reddit.com/r/PPC "landing page not converting" 2024 OR 2025',
-    'site:reddit.com/r/FacebookAds "landing page" "no conversions" 2024 OR 2025',
-    'site:reddit.com/r/GrowthHacking "landing page" "fix" "ads"',
+# Google ICP query pool — rotated each run
+GOOGLE_QUERY_POOL = [
+    # Tier 1: Highest yield — cold audience, explicit URL (always included)
+    'site:reddit.com/r/RoastMyWebsite "landing page"',
+    'site:reddit.com/r/roastmystartup',
+    'site:reddit.com/r/SideProject "not converting" OR "ads"',
+    'site:reddit.com/r/PPC "landing page" "conversions"',
+    # Tier 2: Good yield — pain signals with ads (included 3-4 per run)
+    'site:reddit.com/r/Entrepreneur "my landing page" "ads"',
+    'site:reddit.com/r/FacebookAds "landing page" "no conversions"',
+    'site:reddit.com/r/GrowthHacking "landing page" "fix"',
+    'site:reddit.com/r/SaaS "landing page" "not converting"',
+    'site:reddit.com/r/startups "landing page" "ads"',
+    'site:reddit.com/r/smallbusiness "website" "not converting"',
+    'site:reddit.com/r/juststart "landing page" "conversions"',
+    'site:reddit.com/r/indiehackers "landing page" "ads" "conversion"',
+    'site:reddit.com/r/digital_marketing "landing page" "conversion rate"',
+    'site:reddit.com/r/webdev "landing page" "feedback"',
+    # Tier 3: Longer tail — still relevant but lower volume
+    'site:reddit.com/r/AskMarketing "landing page" "improve"',
+    'site:reddit.com/r/EntrepreneurRideAlong "landing page"',
+    'site:reddit.com/r/marketing "landing page" "optimization"',
+    'site:reddit.com/r/advertising "landing page" "conversion"',
+    'site:reddit.com/r/SaaS "bounce rate" "high"',
+    'site:reddit.com/r/sales "landing page" "not closing"',
+    'site:reddit.com/r/dropshipping "landing page" "no sales"',
+    'site:reddit.com/r/ecommerce "landing page" "conversion"',
+    'site:reddit.com/r/shopify "landing page" "not converting"',
+    'site:reddit.com/r/agency "landing page" "design"',
 ]
+# Subset chosen per run: tier1 always (4), tier2=4, tier3=2
+GOOGLE_ICP_QUERIES = None
 GOOGLE_ACTOR = 'apify~google-search-scraper'
 GOOGLE_DEDUP = BASE / 'google_scraped_urls.jsonl'
+
+
+def pick_reddit_queries():
+    """Pick a rotating subset of Reddit queries for this run."""
+    import random
+    always = [q for q in REDDIT_QUERY_POOL if q['weight'] == 3]
+    weighted2 = [q for q in REDDIT_QUERY_POOL if q['weight'] == 2]
+    weighted1 = [q for q in REDDIT_QUERY_POOL if q['weight'] == 1]
+    
+    # Pick 2 from weight=2 (or all if fewer)
+    pick2 = random.sample(weighted2, min(2, len(weighted2)))
+    # Pick 1 from weight=1 (or all if fewer)
+    pick1 = random.sample(weighted1, min(1, len(weighted1)))
+    
+    result = always + pick2 + pick1
+    random.shuffle(result)
+    return result
+
+
+def pick_google_queries():
+    """Pick rotating subset of Google queries for this run.
+    Tier 1 always runs. Tier 2 and 3 are sampled."""
+    import random
+    # First 4 are tier 1 (always)
+    tier1 = GOOGLE_QUERY_POOL[:4]
+    tier2 = GOOGLE_QUERY_POOL[4:14]
+    tier3 = GOOGLE_QUERY_POOL[14:]
+    
+    pick2 = random.sample(tier2, min(4, len(tier2)))
+    pick3 = random.sample(tier3, min(2, len(tier3)))
+    
+    return tier1 + pick2 + pick3
 
 
 def load_apify_token():
@@ -350,13 +426,16 @@ def mark_google_seen(url: str):
 
 def scrape_icp_via_google(token: str) -> list:
     """Use Google Search to find Reddit ICP posts, then scrape each for username."""
+    # Rotate queries for this run
+    queries = pick_google_queries()
+    print(f'  [google] {len(queries)} queries (rotated from pool of {len(GOOGLE_QUERY_POOL)})')
     api = 'https://api.apify.com/v2'
     headers = {'Authorization': f'Bearer {token}', 'Content-Type': 'application/json'}
     seen_urls = load_google_seen()
     reddit_urls = []
 
     # Step 1: Google Search → Reddit post URLs
-    queries_str = '\n'.join(GOOGLE_ICP_QUERIES)
+    queries_str = '\n'.join(queries)
     try:
         r = requests.post(
             f'{api}/acts/{GOOGLE_ACTOR}/runs?waitForFinish=60',
@@ -472,13 +551,15 @@ def scrape_icp_via_google(token: str) -> list:
 def scrape_reddit_live(token: str) -> list:
     """Run Apify reddit scraper for each query, return flat list of posts."""
     import time as _time
+    queries = pick_reddit_queries()
+    print(f'  [reddit] {len(queries)} queries (rotated from pool of {len(REDDIT_QUERY_POOL)})')
     api = 'https://api.apify.com/v2'
     headers = {'Authorization': f'Bearer {token}', 'Content-Type': 'application/json'}
     seen_ids = load_scraped_ids()
     posts = []
     scraper_failures = 0  # circuit breaker counter
 
-    for q_config in REDDIT_QUERIES:
+    for q_config in queries:
         query = q_config['q']
         source = q_config['source']
         subreddits = q_config['subreddits']
@@ -505,14 +586,14 @@ def scrape_reddit_live(token: str) -> list:
             if _time.time() - _run_start > MAX_POLL_SECONDS:
                 print(f'  [apify] {query}: exceeded MAX_POLL_SECONDS={MAX_POLL_SECONDS}, skipping')
                 scraper_failures += 1
-                if scraper_failures >= len(REDDIT_QUERIES):
+                if scraper_failures >= len(queries):
                     print('  [circuit-breaker] All scrapers failed — aborting scrape_reddit_live')
                     break
                 continue
             if not r.ok:
                 print(f'  [apify] {query}: HTTP {r.status_code}')
                 scraper_failures += 1
-                if scraper_failures >= len(REDDIT_QUERIES):
+                if scraper_failures >= len(queries):
                     print('  [circuit-breaker] All scrapers failed — aborting scrape_reddit_live')
                     break
                 continue
