@@ -841,4 +841,26 @@ def main():
     for x in queued[:20]: print('QUEUE',x.get('status'),x.get('site'),x.get('email'))
     for x in skipped[:5]: print('SKIP',x.get('status'),x.get('email'))
 
+    # ── Competitor probe ─────────────────────────────────────────────────────
+    _run_competitor_probe()
+
+
+def _run_competitor_probe():
+    """Scan pipeline output for competitor mentions and log them."""
+    try:
+        from competitor_probe import scan_lead_file, append_outreach_log
+        trigger_file = BASE / 'trigger_leads.jsonl'
+        if trigger_file.exists():
+            matches = scan_lead_file(trigger_file)
+            if matches:
+                append_outreach_log(matches)
+                print(f'  [competitor-probe] {len(matches)} post(s) with competitor mentions logged')
+            else:
+                print('  [competitor-probe] No competitor mentions in this cycle')
+    except ImportError:
+        print('  [competitor-probe] Skipped (competitor_probe.py not found)')
+    except Exception as e:
+        print(f'  [competitor-probe] Error: {e}')
+
+
 if __name__=='__main__': main()
