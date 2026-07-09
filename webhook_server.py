@@ -213,6 +213,16 @@ def handle_agentmail_event(event: dict):
         log_to_ledger(entry)
         update_stats("replies")
 
+        # Score: +3 for reply (TrustOS: email_replied)
+        try:
+            _score_email = sender.split("<")[-1].split(">")[0].strip() if "<" in sender else sender.strip()
+            if _score_email and "@" in _score_email:
+                from lead_store import LeadStore as _ScoreDB
+                _sdb = _ScoreDB()
+                _sdb.add_score(_score_email, 3, reason="email_replied")
+        except Exception:
+            pass
+
         # Trigger async classification + label via AgentMail REST API
         threading.Thread(
             target=_process_inbound_reply,
@@ -239,6 +249,18 @@ def handle_agentmail_event(event: dict):
             "sender": sender,
             "raw": str(event)[:300]
         })
+        # Score: -10 for spam complaint (TrustOS: complaint = severe penalty)
+        try:
+            _c_email = sender.split("<")[-1].split(">")[0].strip() if "<" in sender else sender.strip()
+            if _c_email and "@" in _c_email:
+                from lead_store import LeadStore as _CScoreDB
+                _cdb = _CScoreDB()
+                _cdb.add_score(_c_email, -10, reason="spam_complaint")
+                # Also mark as bounced — this address is dead
+                _cdb.mark_bounced(_c_email, bounce_type="hard",
+                                  bounce_detail="Spam complaint — suppressed by AgentMail")
+        except Exception:
+            pass
         # Complaints must be handled immediately — log prominently
         with open("/home/mike/nebula/ESCALATE_COMPLAINT.log", "a") as f:
             f.write(f"{ts} COMPLAINT from {sender}\n{json.dumps(event)}\n\n")

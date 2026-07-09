@@ -1244,6 +1244,8 @@ def main():
                 audit_score=float(score) if score else None,
                 audit_grade=audit.get("overall_grade", ""),
             )
+            # Score: +3 for audit consumption (TrustOS: resource visit = high engagement)
+            _db.add_score(args.email, 3, reason="audit_delivered")
         except Exception as _dbe:
             print(f"[WARN] lead_store upsert failed: {_dbe}")
 

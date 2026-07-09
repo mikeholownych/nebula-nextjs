@@ -72,6 +72,10 @@ class LeadStore:
                     bounce_type       TEXT NOT NULL DEFAULT '',
                     bounce_detail     TEXT NOT NULL DEFAULT '',
 
+                    -- Lead scoring (TrustOS-inspired)
+                    lead_score        INTEGER NOT NULL DEFAULT 0,
+                    score_updated_at  TEXT,
+
                     -- Metadata
                     updated_at TEXT NOT NULL DEFAULT (datetime('now')),
                     notes      TEXT NOT NULL DEFAULT ''
@@ -86,6 +90,8 @@ class LeadStore:
                 "bounced_at TEXT",
                 "bounce_type TEXT NOT NULL DEFAULT ''",
                 "bounce_detail TEXT NOT NULL DEFAULT ''",
+                "lead_score INTEGER NOT NULL DEFAULT 0",
+                "score_updated_at TEXT",
             ]:
                 col_name = col_def.split()[0]
                 try:
@@ -93,11 +99,15 @@ class LeadStore:
                 except sqlite3.OperationalError:
                     pass  # Column already exists
 
-            # Create bounce index after migration (column may not have existed before)
+            # Create indexes (AFTER migration — columns must exist first)
             try:
                 c.execute("CREATE INDEX IF NOT EXISTS idx_leads_bounced ON leads(bounce_type) WHERE bounce_type != ''")
             except sqlite3.OperationalError:
-                pass  # May fail on older SQLite without partial index support
+                pass
+            try:
+                c.execute("CREATE INDEX IF NOT EXISTS idx_leads_score ON leads(lead_score)")
+            except sqlite3.OperationalError:
+                pass
 
     def _ts(self) -> str:
         return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -107,6 +117,231 @@ class LeadStore:
         return f"{stage}_at"
 
     TERMINAL_STAGES = frozenset({"bounced", "dead"})
+
+    # ── Scoring constants (TrustOS-inspired) ──────────────────────────
+    # Thresholds
+    SEGMENT_COLD_CUTOFF = 8    # <8 = cold
+    SEGMENT_HOT_CUTOFF = 21    # 21+ = hot; 8-20 = warm
+    DECAY_HOURS = 720          # 30 days
+
+    # Point values for engagement events
+    SCORE_EVENTS = {
+        "email_opened":     1,    # TrustOS: open = +1
+        "email_clicked":    2,    # TrustOS: click = +2
+        "email_replied":    3,    # TrustOS: reply = +3
+        "audit_delivered":  3,    # Resource consumed (TrustOS: resource_visit = +1, bumped for depth)
+        "audit_requested":  5,    # High intent — self-serve audit request
+        "pitch_sent":       1,    # Email sent to them
+        "site_found":       1,    # URL extracted
+        "bounced":         -5,    # TrustOS: bounce = -5
+        "complained":     -10,    # Spam complaint — severe
+        "silent_30d":      -2,    # Decay tick for 30-day silence
+    }
+
+    # ── Scoring methods ──────────────────────────────────────────────
+
+    def add_score(self, email: str, points: int, reason: str = "") -> bool:
+        """Add (or subtract) engagement points for a lead.
+
+        Uses TrustOS-inspired scoring:
+          email_opened=+1, email_clicked=+2, email_replied=+3,
+          audit_delivered=+3, audit_requested=+5, bounce=-5, complaint=-10
+
+        Creates the lead if missing. Returns True if new, False if updated.
+        """
+        email = email.strip().lower()
+        if not email:
+            return False
+        now = self._ts()
+
+        with self._conn() as c:
+            existing = c.execute(
+                "SELECT email, lead_score FROM leads WHERE email = ?", (email,)
+            ).fetchone()
+
+            if existing:
+                new_score = existing["lead_score"] + points
+                note = f"score{points:+d}: {reason[:100]}" if reason else f"score{points:+d}"
+                c.execute("""
+                    UPDATE leads SET
+                        lead_score = ?,
+                        score_updated_at = ?,
+                        updated_at = ?,
+                        notes = CASE WHEN ? != '' THEN
+                            CASE WHEN notes = '' THEN ? ELSE notes || '\n' || ? END
+                        ELSE notes END
+                    WHERE email = ?
+                """, (new_score, now, now, note, note, note, email))
+                return False
+            else:
+                # Create lead with initial score
+                new_score = max(0, points)  # Don't let new leads start negative
+                cols = ["email", "url", "stage", "lead_score", "score_updated_at",
+                        "updated_at", "notes"]
+                vals = [email, "", "discovered", new_score, now, now,
+                        f"score{points:+d}: {reason[:100]}" if reason else f"score{points:+d}"]
+                c.execute(
+                    f"INSERT INTO leads ({','.join(cols)}) VALUES ({','.join('?' for _ in cols)})",
+                    vals,
+                )
+                return True
+
+    def get_segment(self, email: str) -> str:
+        """Return the engagement segment for a lead: 'cold', 'warm', 'hot', or 'terminal'.
+
+        TrustOS mapping:
+          Cold:   0–7 points (under 8)
+          Warm:   8–20 points
+          Hot:    21+ points
+          Terminal: bounced or dead
+        """
+        email = email.strip().lower()
+        lead = self.get_lead(email)
+        if not lead:
+            return "cold"
+        if lead.get("stage") in ("bounced", "dead"):
+            return "terminal"
+        score = lead.get("lead_score", 0) or 0
+        if score >= self.SEGMENT_HOT_CUTOFF:
+            return "hot"
+        if score >= self.SEGMENT_COLD_CUTOFF:
+            return "warm"
+        return "cold"
+
+    def get_leads_by_segment(self, segment: str) -> list[dict]:
+        """Return all leads in a given engagement segment.
+
+        Segments: 'cold' (score 0-7), 'warm' (8-20), 'hot' (21+), 'terminal' (bounced/dead).
+        """
+        segment = segment.lower()
+        with self._conn() as c:
+            if segment == "terminal":
+                rows = c.execute(
+                    "SELECT * FROM leads WHERE stage IN ('bounced', 'dead') ORDER BY updated_at DESC"
+                ).fetchall()
+            elif segment == "cold":
+                rows = c.execute(
+                    "SELECT * FROM leads WHERE stage NOT IN ('bounced', 'dead') AND (lead_score IS NULL OR lead_score < ?) ORDER BY lead_score DESC",
+                    (self.SEGMENT_COLD_CUTOFF,),
+                ).fetchall()
+            elif segment == "warm":
+                rows = c.execute(
+                    "SELECT * FROM leads WHERE stage NOT IN ('bounced', 'dead') AND lead_score >= ? AND lead_score < ? ORDER BY lead_score DESC",
+                    (self.SEGMENT_COLD_CUTOFF, self.SEGMENT_HOT_CUTOFF),
+                ).fetchall()
+            elif segment == "hot":
+                rows = c.execute(
+                    "SELECT * FROM leads WHERE stage NOT IN ('bounced', 'dead') AND lead_score >= ? ORDER BY lead_score DESC",
+                    (self.SEGMENT_HOT_CUTOFF,),
+                ).fetchall()
+            else:
+                return []
+            return [dict(r) for r in rows]
+
+    def get_segment_counts(self) -> dict:
+        """Return count of leads in each engagement segment (cold/warm/hot/terminal)."""
+        with self._conn() as c:
+            rows = c.execute(
+                """SELECT
+                    COUNT(*) as total,
+                    SUM(CASE WHEN stage IN ('bounced', 'dead') THEN 1 ELSE 0 END) as terminal,
+                    SUM(CASE WHEN stage NOT IN ('bounced', 'dead') AND (lead_score IS NULL OR lead_score < ?) THEN 1 ELSE 0 END) as cold,
+                    SUM(CASE WHEN stage NOT IN ('bounced', 'dead') AND lead_score >= ? AND lead_score < ? THEN 1 ELSE 0 END) as warm,
+                    SUM(CASE WHEN stage NOT IN ('bounced', 'dead') AND lead_score >= ? THEN 1 ELSE 0 END) as hot
+                FROM leads""",
+                (self.SEGMENT_COLD_CUTOFF, self.SEGMENT_COLD_CUTOFF, self.SEGMENT_HOT_CUTOFF, self.SEGMENT_HOT_CUTOFF),
+            ).fetchone()
+            return dict(rows) if rows else {"total": 0, "terminal": 0, "cold": 0, "warm": 0, "hot": 0}
+
+    def apply_decay(self, hours: Optional[int] = None) -> int:
+        """Apply score decay for leads that have been silent > decay window.
+
+        TrustOS: score decays if no engagement for 30 days.
+        Scans all non-terminal leads whose score_updated_at is older than
+        `hours` (default 720 = 30 days). Each eligible lead loses 2 points
+        per decay cycle (trust curve: slow fade, not instant drop).
+
+        Returns number of leads decayed.
+        """
+        hours = hours or self.DECAY_HOURS
+        now = datetime.now(timezone.utc)
+        decayed = 0
+
+        leads = self.get_leads_by_stage("discovered") + \
+                self.get_leads_by_stage("site_found") + \
+                self.get_leads_by_stage("contacted") + \
+                self.get_leads_by_stage("audit_delivered") + \
+                self.get_leads_by_stage("pitch_sent")
+
+        cutoff_ts = now.isoformat()
+
+        for lead in leads:
+            score = lead.get("lead_score", 0) or 0
+            if score <= 0:
+                continue
+
+            # Check when they last engaged
+            last_active = lead.get("score_updated_at") or lead.get("updated_at", "")
+            if not last_active:
+                continue
+
+            try:
+                last = datetime.fromisoformat(last_active.rstrip("Z")).replace(tzinfo=timezone.utc)
+                elapsed = (now - last).total_seconds() / 3600
+            except Exception:
+                continue
+
+            if elapsed < hours:
+                continue  # Still within decay window
+
+            # Apply decay: -2 per cycle, floor at 0
+            new_score = max(0, score - 2)
+            email = lead["email"]
+            now_str = self._ts()
+            with self._conn() as c:
+                c.execute(
+                    "UPDATE leads SET lead_score = ?, score_updated_at = ?, updated_at = ?, notes = CASE WHEN notes = '' THEN ? ELSE notes || '\n' || ? END WHERE email = ?",
+                    (new_score, now_str, now_str,
+                     f"decay-2: silent >{hours}h" if new_score != score else "",
+                     f"decay-2: silent >{hours}h" if new_score != score else "",
+                     email),
+                )
+            if new_score != score:
+                decayed += 1
+
+        return decayed
+
+    def seed_scores_from_stage(self) -> dict:
+        """One-time migration: seed lead_score from existing stage progression.
+
+        Assigns baseline scores based on how far a lead progressed:
+          discovered=1, site_found=2, contacted=3, audit_delivered=8,
+          pitch_sent=12, paid=50, bounced=0, dead=0
+
+        Returns counts of seeded leads.
+        """
+        stage_scores = {
+            "discovered": 1, "site_found": 2, "contacted": 3,
+            "audit_delivered": 8, "pitch_sent": 12, "paid": 50,
+            "bounced": 0, "dead": 0,
+        }
+        seeded = {"updated": 0, "skipped": 0}
+        with self._conn() as c:
+            rows = c.execute("SELECT email, stage, lead_score FROM leads").fetchall()
+            for row in rows:
+                if row["lead_score"] and row["lead_score"] > 0:
+                    seeded["skipped"] += 1
+                    continue  # Already has a score, skip
+                base = stage_scores.get(row["stage"], 0)
+                now = self._ts()
+                c.execute(
+                    "UPDATE leads SET lead_score = ?, score_updated_at = ?, updated_at = ? WHERE email = ?",
+                    (base, now, now, row["email"]),
+                )
+                seeded["updated"] += 1
+        return seeded
+
+    # ── Original methods ─────────────────────────────────────────────
 
     def upsert_lead(
         self,
@@ -130,6 +365,8 @@ class LeadStore:
         a bounced/dead lead back to an earlier stage. Pass stage="bounced"
         or stage="dead" again to update metadata fields (bounce_type,
         bounce_detail, notes) without losing the terminal status.
+
+        Auto-awards baseline score for new leads based on stage.
         """
         email = email.strip().lower()
         if not email:
@@ -150,7 +387,7 @@ class LeadStore:
 
         with self._conn() as c:
             existing = c.execute(
-                "SELECT email, stage FROM leads WHERE email = ?", (email,)
+                "SELECT email, stage, lead_score FROM leads WHERE email = ?", (email,)
             ).fetchone()
 
             if existing:
@@ -160,11 +397,8 @@ class LeadStore:
 
                 # ── Stage protection: don't regress from terminal stages ──
                 if old_is_terminal and not new_is_terminal:
-                    # Trying to move bounced/dead → something else: reject
-                    # but still allow metadata update on the existing stage
                     effective_stage = old_stage
                 elif old_is_terminal and new_is_terminal:
-                    # bounced → bounced or dead → dead: preserve, allow updates
                     effective_stage = old_stage
                 else:
                     effective_stage = stage
@@ -218,12 +452,21 @@ class LeadStore:
                 c.execute(sql, params)
                 return False
             else:
+                # Auto-score new leads based on entry stage
+                stage_scores = {
+                    "discovered": 1, "site_found": 2, "contacted": 3,
+                    "audit_delivered": 8, "pitch_sent": 12, "paid": 50,
+                }
+                entry_score = stage_scores.get(stage, 1)
+
                 cols = ["email", "url", "stage", "source", "trigger_context",
                         "vertical", "audit_score", "audit_grade", "retry_count",
-                        "error_info", "updated_at", "notes"]
+                        "error_info", "updated_at", "notes",
+                        "lead_score", "score_updated_at"]
                 vals = [email, url, stage, source, trigger_context,
                         vertical, audit_score, audit_grade, retry_count,
-                        error_info, now, notes]
+                        error_info, now, notes,
+                        entry_score, now]
                 if bounce_type:
                     cols.append("bounce_type")
                     vals.append(bounce_type)
@@ -280,7 +523,6 @@ class LeadStore:
             stage = lead["stage"]
             if stage in ("paid", "dead", "bounced"):
                 continue
-            # Figure out which timestamp represents entry into current stage
             ts_col = f"{stage}_at"
             ts_str = lead.get(ts_col) or lead.get("updated_at", "")
             if not ts_str:
@@ -405,6 +647,8 @@ class LeadStore:
         Creates the lead if it doesn't exist yet (covers NDRs for addresses
         that were never persisted to LeadStore). Populates bounce_type and
         bounce_detail columns in addition to error_info/notes.
+
+        Also applies -5 score penalty for hard bounce (TrustOS: bounce = -5).
         """
         email = email.strip().lower()
         lead = self.get_lead(email)
@@ -421,8 +665,8 @@ class LeadStore:
                 bounce_detail=detail_trimmed,
             )
 
-        # Hard bounce (or soft bounce on a non-existent lead that needs creation)
-        # — terminal stage. Uses upsert_lead which auto-creates if missing.
+        # Hard bounce — terminal stage, apply -5 score
+        ok = self.add_score(email, -5, reason=f"hard_bounce: {detail_trimmed[:100]}")
         return self.upsert_lead(
             email=email,
             stage="bounced",
