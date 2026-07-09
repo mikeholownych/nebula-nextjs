@@ -78,6 +78,13 @@ ih_post_state.json
 tunnel_*.log
 watchdog*.log
 monitor*.log
+tunnel_*.json
+pipeline_*.json
+sre_*.json
+stats.json
+upwork_*.json
+*.db
+ops/
 inbox_check.log
 check_inbox.log
 auto_responder*.log
