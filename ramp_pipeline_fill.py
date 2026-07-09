@@ -110,16 +110,14 @@ except ImportError:
 # ── Reddit search queries — trigger-aware ICP signals ───────────────────────
 REDDIT_QUERIES = [
     # Founders with broken landing pages + paid traffic bleeding money
-    {'q': 'roast my landing page', 'subreddits': ['SaaS', 'startups', 'Entrepreneur'], 'source': 'reddit_roast'},
-    {'q': 'landing page not converting ads', 'subreddits': ['PPC', 'digital_marketing', 'Entrepreneur'], 'source': 'reddit_ads_pain'},
-    {'q': 'running ads zero sales', 'subreddits': ['Entrepreneur', 'SaaS', 'smallbusiness'], 'source': 'reddit_zero_sales'},
-    {'q': 'landing page feedback just launched', 'subreddits': ['SaaS', 'startups', 'indiehackers'], 'source': 'reddit_just_launched'},
-    {'q': 'spending money on google ads no conversions', 'subreddits': ['PPC', 'Entrepreneur', 'digital_marketing'], 'source': 'reddit_ads_no_conv'},
+    {'q': 'roast my landing page', 'subreddits': ['SaaS', 'startups', 'Entrepreneur', 'RoastMyWebsite'], 'source': 'reddit_roast'},
+    {'q': 'landing page not converting', 'subreddits': ['PPC', 'Entrepreneur', 'SaaS'], 'source': 'reddit_ads_pain'},
+    {'q': 'ads no sales', 'subreddits': ['PPC', 'Entrepreneur', 'smallbusiness'], 'source': 'reddit_zero_sales'},
 ]
 APIFY_ACTOR = 'trudax~reddit-scraper-lite'  # ~ separator required in REST API URLs
 APIFY_POLL_INTERVAL = 5
-APIFY_MAX_WAIT = 120
-MAX_POLL_SECONDS = 300  # hard ceiling — abort entire scraper if one run exceeds this
+APIFY_MAX_WAIT = 30   # ~30s per query — if actor isn't done, skip and next pipeline will catch up
+MAX_POLL_SECONDS = 75  # hard ceiling — abort Reddit scrape after 75s total
 
 GOOGLE_ICP_QUERIES = [
     # High-yield: subreddits that REQUIRE URL in post body
@@ -495,7 +493,7 @@ def scrape_reddit_live(token: str) -> list:
 
         payload = {
             'startUrls': start_urls,
-            'maxItems': 20,
+            'maxItems': 5,  # small batch — speed over volume, pipeline runs every 2h
         }
 
         try:
@@ -676,25 +674,25 @@ def main():
         print('FATAL: Cannot run without AgentMail API key')
         sys.exit(1)
 
-    # ── Source 1: Reddit posts via Apify ─────────────────────────────────────
     apify_token = load_apify_token()
     if not apify_token:
-        print('FATAL: No Apify token')
+        print('FATAL: No Apify token, aborting all sources')
         sys.exit(1)
 
-    print('── Source 1: Reddit posts ──')
+    # ── Source 1: Google Search → Reddit ICP posts (highest yield, run first) ─
+    print('── Source 1: Google → Reddit ICP ──')
+    google_posts = scrape_icp_via_google(apify_token)
+    if google_posts:
+        google_posts = enrich_reddit_profiles(google_posts)
+
+    # ── Source 2: Reddit posts via Apify (supplemental) ───────────────────────
+    print('── Source 2: Reddit posts ──')
     reddit_posts = scrape_reddit_live(apify_token)
     if reddit_posts:
         reddit_posts = enrich_reddit_profiles(reddit_posts)
 
-    # ── Source 2: PullPush.io — high-yield site_hint from RoastMyWebsite etc ──
+    # ── Source 3: PullPush.io — high-yield site_hint from RoastMyWebsite etc ──
     pullpush_posts = scrape_pullpush()
-
-    # ── Source 3: Google Search → Reddit ICP posts ───────────────────────────
-    print('── Source 3: Google → Reddit ICP ──')
-    google_posts = scrape_icp_via_google(apify_token)
-    if google_posts:
-        google_posts = enrich_reddit_profiles(google_posts)
 
     all_posts = (reddit_posts or []) + (pullpush_posts or []) + (google_posts or [])
 
