@@ -562,7 +562,9 @@ def send_email(to, subject, body, dry_run):
                     try:
                         db = LeadStore()
                         db.upsert_lead(email=to, stage="bounced",
-                                       error_info=f"suppressed: {err_body[:200]}")
+                                       error_info=f"suppressed: {err_body[:200]}",
+                                       bounce_type="hard",
+                                       bounce_detail=f"AgentMail 403 suppressed: {err_body[:200]}")
                         print(f"  [SUPPRESSED->DEAD] {to}")
                     except Exception as se:
                         print(f"  [SUPPRESS LOG ERROR] {se}")
@@ -575,7 +577,9 @@ def send_email(to, subject, body, dry_run):
                     try:
                         db = LeadStore()
                         db.upsert_lead(email=to, stage="bounced",
-                                       error_info=f"hard_bounce: {reason[:200]}")
+                                       error_info=f"hard_bounce: {reason[:200]}",
+                                       bounce_type=bounce_type,
+                                       bounce_detail=reason[:500])
                         print(f"  [BOUNCE] {to} classified as {bounce_type}")
                     except Exception as be:
                         print(f"  [BOUNCE LOG ERROR] {be}")

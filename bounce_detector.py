@@ -137,41 +137,66 @@ def is_ndr_message(subject: str, sender: str) -> bool:
 
 
 def scan_inbox_for_bounces(am_client, max_messages: int = 50) -> list[dict]:
-    """Scan AgentMail inbox for bounce/NDR messages. Returns list of bounce events."""
+    """Scan AgentMail inbox for bounce/NDR messages. Returns list of bounce events.
+
+    Deduplicates by message_id so the same NDR is never processed twice.
+    Relies on LeadStore's bounce detection (is_bounced) plus an in-memory
+    seen set keyed on message_id.
+    """
     from lead_store import LeadStore
-    
+
     bounces_found = []
     db = LeadStore()
-    
+
     try:
         messages = am_client.list_messages(limit=max_messages)
     except Exception as e:
         print(f"  [BOUNCE] Cannot list messages: {e}")
         return bounces_found
-    
+
+    # Load previously-seen message_ids from the bounce ledger
+    ledger_path = NEBULA / "ledgers" / "bounce_ledger.jsonl"
+    seen_ids = set()
+    if ledger_path.exists():
+        for line in ledger_path.read_text().splitlines():
+            if line.strip():
+                try:
+                    entry = json.loads(line)
+                    mid = entry.get("message_id", "")
+                    if mid:
+                        seen_ids.add(mid)
+                except json.JSONDecodeError:
+                    pass
+
     for msg in messages:
         mid = msg.get("message_id") or msg.get("id", "")
+        if not mid or mid in seen_ids:
+            continue  # Already logged
+
         subject = (msg.get("subject") or "")
         sender = (msg.get("from") or msg.get("sender") or "")
-        
+
         if not is_ndr_message(subject, sender):
             continue
-        
+
         # Fetch full message body
         try:
             full = am_client.get_message(mid)
             body = full.get("text", "") or full.get("body", "") or ""
         except Exception:
             body = ""
-        
+
         target_email = extract_bounced_email_from_ndr(body, subject)
         if not target_email:
             continue
-        
-        # Check if this address is in our DB
-        if db.is_bounced(target_email):
-            continue  # Already flagged
-        
+
+        # Mark hard bounce in LeadStore (creates record if missing)
+        ok = db.mark_bounced(target_email, bounce_type="hard",
+                             bounce_detail=f"NDR via {mid[:40]}: {subject[:100]}")
+        if not ok:
+            print(f"  [BOUNCE WARN] mark_bounced returned False for {target_email}")
+            continue  # Don't log if we couldn't persist
+
         bounce_event = {
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "message_id": mid,
@@ -180,12 +205,11 @@ def scan_inbox_for_bounces(am_client, max_messages: int = 50) -> list[dict]:
             "target_email": target_email,
             "source": "inbox_ndr",
         }
-        
-        # Mark hard bounce
-        db.mark_bounced(target_email, bounce_type="hard", bounce_detail=f"NDR: {subject[:100]}")
+
+        seen_ids.add(mid)
         bounces_found.append(bounce_event)
         print(f"  [BOUNCE] {target_email} — NDR detected: {subject[:60]}")
-    
+
     return bounces_found
 
 

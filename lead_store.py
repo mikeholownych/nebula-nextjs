@@ -106,6 +106,8 @@ class LeadStore:
         """Return the column name for a stage's timestamp."""
         return f"{stage}_at"
 
+    TERMINAL_STAGES = frozenset({"bounced", "dead"})
+
     def upsert_lead(
         self,
         email: str,
@@ -119,8 +121,16 @@ class LeadStore:
         retry_count: int = 0,
         error_info: str = "",
         notes: str = "",
+        bounce_type: str = "",
+        bounce_detail: str = "",
     ) -> bool:
-        """Insert or update a lead. Returns True if new, False if updated."""
+        """Insert or update a lead. Returns True if new, False if updated.
+
+        Terminal stages (bounced, dead) are protected — you cannot regress
+        a bounced/dead lead back to an earlier stage. Pass stage="bounced"
+        or stage="dead" again to update metadata fields (bounce_type,
+        bounce_detail, notes) without losing the terminal status.
+        """
         email = email.strip().lower()
         if not email:
             return False
@@ -145,12 +155,37 @@ class LeadStore:
 
             if existing:
                 old_stage = existing["stage"]
-                # Only set stage timestamp if advancing (not regressing)
-                set_timestamp = ""
-                if stage_col and stage != old_stage:
-                    set_timestamp = f", {stage_col} = COALESCE({stage_col}, ?)"
+                old_is_terminal = old_stage in self.TERMINAL_STAGES
+                new_is_terminal = stage in self.TERMINAL_STAGES
+
+                # ── Stage protection: don't regress from terminal stages ──
+                if old_is_terminal and not new_is_terminal:
+                    # Trying to move bounced/dead → something else: reject
+                    # but still allow metadata update on the existing stage
+                    effective_stage = old_stage
+                elif old_is_terminal and new_is_terminal:
+                    # bounced → bounced or dead → dead: preserve, allow updates
+                    effective_stage = old_stage
                 else:
-                    set_timestamp = ""
+                    effective_stage = stage
+
+                # Timestamp: only set if stage actually changed
+                set_timestamp = ""
+                if stage_col and effective_stage != old_stage:
+                    set_timestamp = f", {stage_col} = COALESCE({stage_col}, ?)"
+
+                bounce_sql = ""
+                bounce_params = []
+                if bounce_type or bounce_detail:
+                    bounce_fields = []
+                    if bounce_type:
+                        bounce_fields.append("bounce_type = COALESCE(NULLIF(?, ''), bounce_type)")
+                        bounce_params.append(bounce_type)
+                    if bounce_detail:
+                        bounce_fields.append("bounce_detail = COALESCE(NULLIF(?, ''), bounce_detail)")
+                        bounce_params.append(bounce_detail)
+                    if bounce_fields:
+                        bounce_sql = ", " + ", ".join(bounce_fields)
 
                 sql = f"""
                     UPDATE leads SET
@@ -167,14 +202,16 @@ class LeadStore:
                             CASE WHEN notes = '' THEN ? ELSE notes || '\n' || ? END
                         ELSE notes END,
                         updated_at = ?
+                        {bounce_sql}
                         {set_timestamp}
                     WHERE email = ?
                 """
                 params = [
-                    url, stage, source, trigger_context, vertical,
+                    url, effective_stage, source, trigger_context, vertical,
                     audit_score, audit_grade, retry_count, error_info,
                     notes, notes, notes, now,
                 ]
+                params.extend(bounce_params)
                 if set_timestamp:
                     params.append(now)
                 params.append(email)
@@ -187,6 +224,12 @@ class LeadStore:
                 vals = [email, url, stage, source, trigger_context,
                         vertical, audit_score, audit_grade, retry_count,
                         error_info, now, notes]
+                if bounce_type:
+                    cols.append("bounce_type")
+                    vals.append(bounce_type)
+                if bounce_detail:
+                    cols.append("bounce_detail")
+                    vals.append(bounce_detail)
                 if stage_col:
                     cols.append(stage_col)
                     vals.append(now)
@@ -357,25 +400,36 @@ class LeadStore:
 
     def mark_bounced(self, email: str, bounce_type: str = "hard", bounce_detail: str = "") -> bool:
         """Mark a lead as bounced. bounce_type: 'hard' (permanent) or 'soft' (temporary).
-        Hard bounces advance stage to 'bounced'. Soft bounces increment retry_count."""
+        Hard bounces advance stage to 'bounced'. Soft bounces increment retry_count.
+
+        Creates the lead if it doesn't exist yet (covers NDRs for addresses
+        that were never persisted to LeadStore). Populates bounce_type and
+        bounce_detail columns in addition to error_info/notes.
+        """
         email = email.strip().lower()
         lead = self.get_lead(email)
-        if not lead:
-            return False
-        if bounce_type == "soft":
+        detail_trimmed = bounce_detail[:500] if bounce_detail else ""
+
+        if bounce_type == "soft" and lead:
             # Soft bounce — increment retry, don't mark terminal
             return self.upsert_lead(
                 email=email,
                 retry_count=lead.get("retry_count", 0) + 1,
-                error_info=f"soft_bounce: {bounce_detail[:200]}",
-                notes=f"Soft bounce at {self._ts()}: {bounce_detail[:200]}",
+                error_info=f"soft_bounce: {detail_trimmed}",
+                notes=f"Soft bounce at {self._ts()}: {detail_trimmed}",
+                bounce_type=bounce_type,
+                bounce_detail=detail_trimmed,
             )
-        # Hard bounce — terminal stage
+
+        # Hard bounce (or soft bounce on a non-existent lead that needs creation)
+        # — terminal stage. Uses upsert_lead which auto-creates if missing.
         return self.upsert_lead(
             email=email,
             stage="bounced",
-            error_info=f"hard_bounce: {bounce_detail[:200]}",
-            notes=f"Hard bounce at {self._ts()}: {bounce_detail[:200]}",
+            error_info=f"hard_bounce: {detail_trimmed}",
+            notes=f"Hard bounce at {self._ts()}: {detail_trimmed}",
+            bounce_type="hard",
+            bounce_detail=detail_trimmed,
         )
 
     def get_bounced_leads(self) -> list[dict]:
