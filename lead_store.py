@@ -513,7 +513,19 @@ class LeadStore:
         return self.upsert_lead(email=email, stage=new_stage, **extra)
 
     def get_stuck_leads(self, max_hours: int = 4) -> list[dict]:
-        """Leads in a stage without advancement for >max_hours (non-human stages only)."""
+        """Leads stuck in a stage without advancement for >max_hours.
+
+        Excludes terminal stages (paid/dead/bounced) and async pipeline
+        stages handled by their own async processes:
+        - discovered / site_found: ramp pipeline populates these asynchronously
+        - pitch_sent: followup_sequence recycler manages cadence
+        - pitch_queued: hot-lead pitch engine advances within 30min
+        """
+        ASYNC_STAGES = frozenset({
+            "paid", "dead", "bounced",
+            "discovered", "site_found",
+            "pitch_sent", "pitch_queued",
+        })
         now = datetime.now(timezone.utc)
         stuck = []
         with self._conn() as c:
@@ -521,7 +533,7 @@ class LeadStore:
         for row in rows:
             lead = dict(row)
             stage = lead["stage"]
-            if stage in ("paid", "dead", "bounced"):
+            if stage in ASYNC_STAGES:
                 continue
             ts_col = f"{stage}_at"
             ts_str = lead.get(ts_col) or lead.get("updated_at", "")

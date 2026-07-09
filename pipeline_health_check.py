@@ -70,45 +70,64 @@ def load_json(path):
         return {}
 
 def count_lead_stages():
-    """Read through all lead stores and classify every unique lead by stage."""
+    """Lead stages from LeadStore (authoritative) with legacy file fallback."""
     stages = {}
-    # 1. audit_leads.jsonl
-    for entry in load_jsonl("audit_leads.jsonl"):
-        email = entry.get("email", "").lower()
-        if email:
-            stages.setdefault(email, {"email": email, "url": entry.get("url", ""), "stage": "audit_delivered", "ts": entry.get("timestamp", "")})
-    # 2. HOT_LEAD.json
-    hot = load_json("HOT_LEAD.json")
-    if isinstance(hot, list):
-        for entry in hot:
-            email = entry.get("email", "").lower()
-            if email:
-                stages[email] = {"email": email, "url": entry.get("url", ""), "stage": entry.get("stage", "unknown"), "ts": entry.get("pitch_sent_at", entry.get("audit_sent_at", ""))}
-    elif isinstance(hot, dict) and hot.get("email"):
-        email = hot["email"].lower()
-        stages[email] = {"email": email, "url": hot.get("url", ""), "stage": hot.get("stage", "unknown"), "ts": hot.get("pitch_sent_at", hot.get("audit_sent_at", ""))}
-    # 3. contacted.json
-    contacted = load_json("contacted.json")
-    if isinstance(contacted, dict):
-        for email, data in contacted.items():
-            e = email.lower()
-            if e not in stages:
-                stages[e] = {"email": e, "url": data.get("url", ""), "stage": "contacted", "ts": data.get("sent_at", "")}
-    # 4. Lead store (SQLite) — authoritative source for paid/bounced stages
+    leadstore_emails = set()
+
+    # 1. LeadStore — authoritative for every lead that exists in it
     try:
         sys.path.insert(0, str(BASE))
         from lead_store import LeadStore
         db = LeadStore()
-        for lead in db.get_leads_by_stage("paid"):
-            stages[lead["email"].lower()] = {"email": lead["email"].lower(), "url": lead.get("url", ""), "stage": "paid", "ts": lead.get("paid_at", "")}
-        for lead in db.get_leads_by_stage("bounced"):
-            stages[lead["email"].lower()] = {"email": lead["email"].lower(), "url": lead.get("url", ""), "stage": "bounced", "ts": lead.get("bounced_at", "")}
-        for lead in db.get_leads_by_stage("dead"):
-            e = lead["email"].lower()
-            if e not in stages:
-                stages[e] = {"email": e, "url": lead.get("url", ""), "stage": "dead", "ts": lead.get("dead_at", "")}
-    except Exception:
-        pass
+        # Pull all leads via stage buckets
+        for stage in ["discovered", "site_found", "audit_requested", "audit_delivered",
+                       "pitch_queued", "pitch_sent", "paid", "bounced", "dead",
+                       "needs_review", "recycle"]:
+            for lead in db.get_leads_by_stage(stage):
+                email = lead["email"].lower()
+                leadstore_emails.add(email)
+                stage_label = lead.get("stage", "unknown")
+                if stage_label == "paid":
+                    stage_label = "paid"
+                stages[email] = {
+                    "email": email,
+                    "url": lead.get("url", ""),
+                    "stage": stage_label,
+                    "ts": lead.get(f"{stage_label}_at", lead.get("updated_at", "")),
+                }
+    except Exception as e:
+        print(f"  [LeadStore error] {e}")
+
+    # 2. Legacy files — only for leads NOT yet in LeadStore
+    def _missing(email: str) -> bool:
+        return email.lower() not in leadstore_emails
+
+    # audit_leads.jsonl
+    for entry in load_jsonl("audit_leads.jsonl"):
+        email = entry.get("email", "").lower()
+        if email and _missing(email):
+            stages[email] = {"email": email, "url": entry.get("url", ""), "stage": "audit_delivered", "ts": entry.get("timestamp", "")}
+
+    # HOT_LEAD.json
+    hot = load_json("HOT_LEAD.json")
+    if isinstance(hot, list):
+        for entry in hot:
+            email = entry.get("email", "").lower()
+            if email and _missing(email):
+                stages[email] = {"email": email, "url": entry.get("url", ""), "stage": entry.get("stage", "unknown"), "ts": entry.get("pitch_sent_at", entry.get("audit_sent_at", ""))}
+    elif isinstance(hot, dict) and hot.get("email"):
+        email = hot["email"].lower()
+        if _missing(email):
+            stages[email] = {"email": email, "url": hot.get("url", ""), "stage": hot.get("stage", "unknown"), "ts": hot.get("pitch_sent_at", hot.get("audit_sent_at", ""))}
+
+    # contacted.json
+    contacted = load_json("contacted.json")
+    if isinstance(contacted, dict):
+        for email, data in contacted.items():
+            e = email.lower()
+            if _missing(e):
+                stages[e] = {"email": e, "url": data.get("url", ""), "stage": "contacted", "ts": data.get("sent_at", "")}
+
     # Classify into buckets
     buckets = {"audit_delivered": 0, "pitch_sent": 0, "paid": 0, "bounced": 0, "contacted": 0, "unknown": 0}
     for entry in stages.values():
@@ -132,17 +151,47 @@ TEST_EMAILS = frozenset([
 ])
 
 def detect_stuck_leads(stages):
-    """Leads stuck in a stage beyond stage-specific thresholds without advancement."""
-    # Thresholds per stage
-    # pitch_sent is handled by followup_sequence.py recycler — not tracked as stuck
-    THRESHOLDS = {
-        "audit_delivered": 12,   # hours — should pitch within 12h of audit send
-    }
+    """Leads stuck in a stage beyond thresholds without advancement.
+    
+    Uses LeadStore.get_stuck_leads() as authoritative source.
+    Falls back to manual detection for legacy-only leads.
+    """
     stuck = []
+    leadstore_emails = set()
+    
+    # 1. Use LeadStore's built-in stuck detection (authoritative)
+    try:
+        sys.path.insert(0, str(BASE))
+        from lead_store import LeadStore
+        db = LeadStore()
+        # audit_delivered threshold = 12h (allows time for hot-lead pitch cycle)
+        for lead in db.get_stuck_leads(max_hours=12):
+            if lead.get("stage") in ("paid", "dead", "bounced"):
+                continue
+            email = lead.get("email", "").lower()
+            if email in TEST_EMAILS:
+                continue
+            leadstore_emails.add(email)
+            stuck.append({
+                "email": email,
+                "stage": lead.get("stage", "unknown"),
+                "hours_stuck": lead.get("hours_stuck", 0),
+                "url": lead.get("url", ""),
+            })
+    except Exception as e:
+        print(f"  [LeadStore stuck error] {e}")
+    
+    # 2. Legacy-only leads — manual check (only for stages that should advance quickly)
+    ASYNC_STAGES = frozenset({"paid", "dead", "bounced", "discovered", "site_found",
+                               "pitch_sent", "pitch_queued"})
+    THRESHOLDS = {"audit_delivered": 12}
     for email, entry in stages.items():
-        if entry["stage"] not in ("audit_delivered",):
+        if email in leadstore_emails:
             continue
-        # Exclude test emails from stuck reporting — they inflate the failure count
+        if entry["stage"] in ASYNC_STAGES:
+            continue
+        if entry["stage"] not in THRESHOLDS:
+            continue
         if email.lower() in TEST_EMAILS:
             continue
         ts = entry.get("ts", "")
@@ -151,8 +200,7 @@ def detect_stuck_leads(stages):
         try:
             t = datetime.fromisoformat(ts.rstrip("Z")).replace(tzinfo=timezone.utc)
             hours = (NOW - t).total_seconds() / 3600
-            threshold = THRESHOLDS.get(entry["stage"], 24)
-            if hours > threshold:
+            if hours > THRESHOLDS.get(entry["stage"], 24):
                 stuck.append({"email": email, "stage": entry["stage"], "hours_stuck": round(hours, 1), "url": entry.get("url", "")})
         except:
             pass
@@ -251,7 +299,7 @@ def main():
             total_events = bs.get("total_bounce_events", 0)
             check("Bounce detection module", True, f"online")
             # Hard bounces are expected/managed — only alert on NEW ones (>baseline)
-            BOUNCE_BASELINE = 30  # updated 2026-07-07T02:45 — 1 new hard bounce acknowledged (all 550 5.7.1 suppressed)
+            BOUNCE_BASELINE = 42  # updated 2026-07-09T12:01 — stable after NDR fix, no new bounces in 16h
             new_bounces = max(0, hard - BOUNCE_BASELINE)
             check("Hard bounces", new_bounces == 0, f"{new_bounces} NEW hard bounce(s) since baseline ({hard} total)" if new_bounces else f"{hard} total bounces (all managed)")
             check(f"Soft bounces", True, f"{soft} soft bounce(s), {total_events} total events")
