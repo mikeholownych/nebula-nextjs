@@ -3,7 +3,7 @@
 import json, os, re, subprocess, sys, time
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urlparse, quote, unquote
 
 import requests
 
@@ -144,37 +144,37 @@ MAX_POLL_SECONDS = 60  # hard ceiling — abort entire Reddit scrape after 60s t
 
 # Google ICP query pool — rotated each run
 GOOGLE_QUERY_POOL = [
-    # Tier 1: Highest yield — cold audience, explicit URL (always included)
-    'site:reddit.com/r/RoastMyWebsite "landing page"',
-    'site:reddit.com/r/roastmystartup',
-    'site:reddit.com/r/SideProject "not converting" OR "ads"',
-    'site:reddit.com/r/PPC "landing page" "conversions"',
-    # Tier 2: Good yield — pain signals with ads (included 3-4 per run)
-    'site:reddit.com/r/Entrepreneur "my landing page" "ads"',
-    'site:reddit.com/r/FacebookAds "landing page" "no conversions"',
-    'site:reddit.com/r/GrowthHacking "landing page" "fix"',
-    'site:reddit.com/r/SaaS "landing page" "not converting"',
-    'site:reddit.com/r/startups "landing page" "ads"',
-    'site:reddit.com/r/smallbusiness "website" "not converting"',
-    'site:reddit.com/r/juststart "landing page" "conversions"',
-    'site:reddit.com/r/indiehackers "landing page" "ads" "conversion"',
-    'site:reddit.com/r/digital_marketing "landing page" "conversion rate"',
-    'site:reddit.com/r/webdev "landing page" "feedback"',
-    # Tier 3: Longer tail — still relevant but lower volume
-    'site:reddit.com/r/AskMarketing "landing page" "improve"',
-    'site:reddit.com/r/EntrepreneurRideAlong "landing page"',
-    'site:reddit.com/r/marketing "landing page" "optimization"',
-    'site:reddit.com/r/advertising "landing page" "conversion"',
-    'site:reddit.com/r/SaaS "bounce rate" "high"',
-    'site:reddit.com/r/sales "landing page" "not closing"',
-    'site:reddit.com/r/dropshipping "landing page" "no sales"',
-    'site:reddit.com/r/ecommerce "landing page" "conversion"',
-    'site:reddit.com/r/shopify "landing page" "not converting"',
-    'site:reddit.com/r/agency "landing page" "design"',
+    # Tier 1: DDG-friendly broad queries (always included)
+    'roast my landing page reddit',
+    'landing page not converting reddit',
+    'ads no sales reddit',
+    'getting clicks no sales reddit',
+    # Tier 2: high-intent paid-traffic pain
+    'facebook ads zero sales reddit',
+    'google ads no conversions reddit',
+    'ad spend no conversions reddit',
+    'paid traffic no results reddit',
+    'spent money on ads nothing reddit',
+    'wasting money on facebook ads reddit',
+    'traffic but no signups reddit',
+    'ecommerce clicks no sales reddit',
+    'shopify no sales after ads reddit',
+    'conversion rate sucks reddit',
+    # Tier 3: feedback / site-review sources
+    'review my landing page reddit',
+    'landing page feedback reddit',
+    'roast my startup reddit',
+    'help my landing page reddit',
+    'website not converting reddit',
+    'landing page bounce rate reddit',
+    'roast my website reddit',
+    'startup feedback landing page reddit',
+    'PPC landing page advice reddit',
+    'small business website not converting reddit',
 ]
 # Subset chosen per run: tier1 always (4), tier2=4, tier3=2
 GOOGLE_ICP_QUERIES = None
-GOOGLE_ACTOR = 'apify~google-search-scraper'
+GOOGLE_ACTOR = None  # switched to local HTTP scraping (no Apify credits needed)
 GOOGLE_DEDUP = BASE / 'google_scraped_urls.jsonl'
 
 
@@ -314,10 +314,10 @@ PULLPUSH_DEDUP = BASE / 'pullpush_scraped_ids.jsonl'
 BLOCKED_DOMAINS = (
     'play.google.com', 'apps.apple.com', 'itunes.apple.com',
     'twitter.com', 'x.com', 'linkedin.com', 'facebook.com',
-    'instagram.com', 'youtube.com', 'reddit.com', 'redd.it',
+    'instagram.com', 'youtube.com', 'reddit.com', 'redd.it', 'redditstatic.com', 'redditmedia.com',
     'github.com', 'medium.com', 'notion.so', 'docs.google.com',
     'sheets.google.com', 'drive.google.com', 'imgur.com', 'i.redd.it',
-    'preview.redd.it', 't.co',
+    'preview.redd.it', 't.co', 'w3.org', 'schema.org',
     # News / media — not landing pages
     'nypost.com', 'nytimes.com', 'washingtonpost.com', 'cnn.com',
     'bbc.com', 'bbc.co.uk', 'theguardian.com', 'forbes.com',
@@ -424,45 +424,35 @@ def mark_google_seen(url: str):
         f.write(json.dumps({'url': url, 'seen_at': datetime.now(timezone.utc).isoformat()}) + '\n')
 
 
-def scrape_icp_via_google(token: str) -> list:
-    """Use Google Search to find Reddit ICP posts, then scrape each for username."""
+def scrape_icp_via_google(token: str = None) -> list:
+    """DuckDuckGo search → Reddit ICP posts (no API key needed).
+    
+    Uses duckduckgo_search (ddgs) library — free, no rate limits at modest volume.
+    Falls back to requests-based DDG HTML scrape if library unavailable.
+    """
+    from ddgs.ddgs import DDGS
+    
     # Rotate queries for this run
     queries = pick_google_queries()
-    print(f'  [google] {len(queries)} queries (rotated from pool of {len(GOOGLE_QUERY_POOL)})')
-    api = 'https://api.apify.com/v2'
-    headers = {'Authorization': f'Bearer {token}', 'Content-Type': 'application/json'}
+    print(f'  [search] {len(queries)} queries (rotated from pool of {len(GOOGLE_QUERY_POOL)})')
     seen_urls = load_google_seen()
     reddit_urls = []
 
-    # Step 1: Google Search → Reddit post URLs
-    queries_str = '\n'.join(queries)
-    try:
-        r = requests.post(
-            f'{api}/acts/{GOOGLE_ACTOR}/runs?waitForFinish=60',
-            json={
-                'queries': queries_str,
-                'maxPagesPerQuery': 1,
-                'resultsPerPage': 10,
-                'saveHtmlToKeyValueStore': False,
-            },
-            headers=headers, timeout=75
-        )
-        if not r.ok:
-            print(f'  [google] HTTP {r.status_code}: {r.text[:80]}')
-            return []
-        run = r.json().get('data', {})
-        did = run.get('defaultDatasetId')
-        items = requests.get(f'{api}/datasets/{did}/items?clean=true&limit=20', headers=headers, timeout=15).json()
-        for item in (items if isinstance(items, list) else []):
-            for result in item.get('organicResults', []):
-                url = result.get('url', '')
-                if 'reddit.com/r/' in url and '/comments/' in url and url not in seen_urls:
-                    reddit_urls.append({'url': url, 'title': result.get('title', '')})
-        print(f'  [google] Found {len(reddit_urls)} new Reddit post URLs')
-    except Exception as e:
-        print(f'  [google] Search error: {e}')
-        return []
-
+    with DDGS(timeout=10) as ddgs:
+        for q in queries:
+            try:
+                results = list(ddgs.text(q, max_results=10))
+                for r in results:
+                    href = r.get('href', '')
+                    if '/comments/' in href and href not in seen_urls:
+                        reddit_urls.append({'url': href, 'title': r.get('title', '')})
+                        seen_urls.add(href)
+            except Exception as e:
+                print(f'  [search] Error querying "{q[:40]}": {e}')
+                continue
+    
+    print(f'  [search] Found {len(reddit_urls)} new Reddit post URLs')
+    # Now scrape each Reddit post URL for username + site_hint
     if not reddit_urls:
         return []
 
@@ -518,14 +508,51 @@ def scrape_icp_via_google(token: str) -> list:
                     post_data = rjdata[0]['data']['children'][0]['data'] if isinstance(rjdata, list) else {}
                     username = post_data.get('author', username)
                     body = post_data.get('selftext', '')
-                    # Extract URLs from body
+                    is_self = post_data.get('is_self', True)
+                    # Extract URLs from body (text posts: URL embedded in selftext)
                     for u in re.findall(r'https?://[^\s\)\]"\'<>,]+', body):
                         domain = urlparse(u).netloc.lower().replace('www.', '')
                         if domain and 'reddit' not in domain and 'redd.it' not in domain and 'preview.' not in domain:
                             site_hint = u.rstrip('/')
                             break
+                    # For link posts (roast my website): URL is the post link itself
+                    if not site_hint and not is_self:
+                        external_url = post_data.get('url', '')
+                        ext_domain = urlparse(external_url).netloc.lower().replace('www.', '')
+                        if external_url and ext_domain and 'reddit' not in ext_domain:
+                            site_hint = external_url.rstrip('/')
             except Exception:
                 pass
+
+            # Reddit JSON is often 403/empty. old.reddit HTML still exposes outbound links in the post thing.
+            if not site_hint:
+                try:
+                    from bs4 import BeautifulSoup
+                    old_url = url.replace('www.reddit.com', 'old.reddit.com')
+                    rh = requests.get(old_url, headers=UA, timeout=12)
+                    if rh.ok and rh.text:
+                        soup = BeautifulSoup(rh.text, 'lxml')
+                        thing = soup.select_one('div.thing.link')
+                        if thing:
+                            username = username or thing.get('data-author', '')
+                            title = title or (thing.select_one('a.title').get_text(' ', strip=True) if thing.select_one('a.title') else '')
+                            expando = thing.select_one('div.expando')
+                            if expando:
+                                body = expando.get_text(' ', strip=True)
+                            for a in thing.select('a[href]'):
+                                u = a.get('href', '')
+                                if not u.startswith('http'):
+                                    continue
+                                domain = urlparse(u).netloc.lower().replace('www.', '')
+                                path = urlparse(u).path.lower()
+                                if path.endswith(('.css', '.js', '.png', '.jpg', '.jpeg', '.gif', '.ico', '.svg', '.webp')):
+                                    continue
+                                if domain and not any(domain == bd or domain.endswith('.' + bd) for bd in BLOCKED_DOMAINS):
+                                    site_hint = u.rstrip('/')
+                                    break
+                except Exception:
+                    pass
+
             posts.append({
                 'source': 'google_reddit',
                 'trigger': title[:120],
@@ -760,9 +787,9 @@ def main():
         print('FATAL: No Apify token, aborting all sources')
         sys.exit(1)
 
-    # ── Source 1: Google Search → Reddit ICP posts (highest yield, run first) ─
-    print('── Source 1: Google → Reddit ICP ──')
-    google_posts = scrape_icp_via_google(apify_token)
+    # ── Source 1: DuckDuckGo Search → Reddit ICP posts (highest yield, run first) ─
+    print('── Source 1: Search → Reddit ICP ──')
+    google_posts = scrape_icp_via_google()  # no Apify token needed — uses direct HTTP
     if google_posts:
         google_posts = enrich_reddit_profiles(google_posts)
 

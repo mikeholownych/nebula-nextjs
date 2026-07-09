@@ -79,6 +79,30 @@
       "nebula_adaptation": "{{first_name}}, we audited 40 {{vertical}} landing pages last month. 36 had the same above-fold CTA gap. Free audit shows where yours lands: {{audit_url}}",
       "cta": "fact → no editorializing → audit URL",
       "when_to_use": "When you have a specific, surprising data point relevant to their situation. No pitch. Just fact + link."
+    },
+    {
+      "id": "leaking_leads_methodology",
+      "name": "PGA steal: teach the leak before the ask",
+      "original": "Premium Ghostwriting Academy pre-call strategy brief educates buyer before enrollment call",
+      "nebula_adaptation": "{{first_name}}, most founders do not have an ad problem first. They have a destination problem. Your paid clicks hit a page that leaks trust before the CTA. Free audit shows the leak zone: {{audit_url}}",
+      "cta": "methodology-first audit link",
+      "when_to_use": "Day 2/3 nurture before pitching the $147 fix pack; no checkout link in first touch"
+    },
+    {
+      "id": "one_recovered_customer_math",
+      "name": "PGA steal: one-client math",
+      "original": "One $5k ghostwriting client can double monthly earnings",
+      "nebula_adaptation": "One recovered checkout, booked demo, or order can pay for the $147 fix pack. Do not scale traffic into an unscored page. Run the leak audit first: {{audit_url}}",
+      "cta": "audit-first ROI framing",
+      "when_to_use": "Warm nurture and checkout objection handling"
+    },
+    {
+      "id": "free_consulting_diagnosis",
+      "name": "PGA steal: Free Consulting approach",
+      "original": "Give a useful diagnosis before selling the program",
+      "nebula_adaptation": "{{first_name}}, I found one likely leak: {{specific_leak}}. If that is accurate, fix it before adding budget. The full scored teardown is here: {{audit_url}}",
+      "cta": "specific diagnosis → audit",
+      "when_to_use": "Any triggered lead where we have URL/page evidence"
     }
   ],
   "icp_memo_subject_lines": {
@@ -120,6 +144,9 @@
     "Remove {{placeholder}} tokens — fill with real data before sending.",
     "Audit URL should be a unique tracking link per lead (pass email as query param for auto-fill).",
     "Follow-up sequence: Day 0 audit email → Day 3 'did you run it?' → Day 7 'here's a similar page's results' → Day 14 last touch. No more than 4 touches per cycle.",
-    "Recircle cadence: same ICP every 30-60 days with new audit findings / new content."
+    "Recircle cadence: same ICP every 30-60 days with new audit findings / new content.",
+    "PGA steal: sell methodology before product. Day 2 should explain the leak mechanics, not pitch checkout.",
+    "Use leaking-leads/wrong-destination language when prospect mentions paid traffic with weak conversions.",
+    "Never make income/revenue guarantees unless the operational guarantee is true and tracked."
   ]
 }

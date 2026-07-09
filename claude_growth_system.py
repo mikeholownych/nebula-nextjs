@@ -213,7 +213,6 @@ Only compose after at least 2 of (1) URL, (2) pain signal, (3) industry context 
 # ── Tools Connectivity Map ─────────────────────────────────────────
 
 TOOLS_MAP = """# Tools Map — Auto vs Manual
-
 ## CONNECTS AUTOMATICALLY
 | Tool | What it does | Connected since |
 |------|-------------|-----------------|
@@ -233,6 +232,70 @@ TOOLS_MAP = """# Tools Map — Auto vs Manual
 ## RULE
 If a tool icon has a red X in the infographic, Claude can write/create but not publish.
 Always write in Claude. Publish via the manual bridge tool.
+"""
+
+MARKETING_DEPARTMENT_STACK = """# Claude Marketing Department — Nebula Adaptation
+
+Source steal: UGC Ninja's department architecture: 50 agents, 150 prompts, 30 practical skills.
+Nebula adaptation: keep the same operating map, but collapse it to the conversion-audit business.
+
+## Department Map
+
+### 1. Market Research
+- Market Sizer: estimate how many prospects actively post about ad bleed + conversion failure.
+- Trend Scanner: detect rising trigger phrases in Reddit/LinkedIn/HN.
+- Demand Mapper: connect each trigger phrase to Nebula's audit/fix offer.
+- Opportunity Ranker: sort channels by proof of active pain, not audience size.
+- Market Brief Builder: produce the daily CEO acquisition brief.
+
+### 2. Competitor Research
+- Competitor Teardown: inspect audit/CRO/AI SDR offers for price, speed, and friction gaps.
+- Positioning Mapper: name what they claim vs what Nebula can prove.
+- Messaging Gap Finder: identify missing trigger-aware language.
+- Pricing Benchmarker: compare self-serve $147 vs demo-gated retainers.
+- Share of Voice Tracker: log competitor mentions from Reddit threads.
+
+### 3. Customer Research
+- ICP Builder: define by buying trigger, not demographics.
+- Voice of Customer Miner: extract exact phrases like "clicks but no sales".
+- Pain and Desire Mapper: map ad waste → page leak → fast fix.
+- Objection Catalogue: agency trauma, DIY doubt, AI skepticism, price fear.
+- Review Insight Extractor: turn testimonials/replies into proof snippets.
+
+### 4. Marketing Strategy
+- Positioning Builder: sharpen "your ads aren't broken; your page is leaking money".
+- Offer Architect: package free audit → $147 fix pack → $1,497 retainer.
+- Funnel Mapper: ensure every asset routes to audit, checkout, or reply handling.
+- Channel Strategist: select source mix from actual reply/payment data.
+- Campaign Planner: generate daily experiments with kill criteria.
+
+### 5. Creative Strategy
+- Hook Writer: pain-first hooks with numbers.
+- Angle Generator: 10 angles per trigger class.
+- Short Form Script Writer: build-in-public and case-study clips.
+- Creative Brief Builder: page-specific creative direction from audit output.
+- Content Calendar Builder: schedule proof assets, not generic tips.
+
+## Execution Rule
+Every agent output must end in one of: patch, send, queued lead, published asset, or ledger entry.
+No research-only work.
+"""
+
+PGA_STRATEGY_STEALS = """# Premium Ghostwriting Academy — Nebula Steals
+
+## Useful Patterns
+1. Rename the category upward: freelancer → Premium Ghostwriter. Nebula equivalent: CRO freelancer/agency → Autonomous Conversion Leak Detector.
+2. Sell education before implementation: Premium Ghostwriting = content that educates. Nebula equivalent: free audit + 5-day leak course educates before $147 ask.
+3. Name the enemy: businesses are "leaking leads" by sending paid traffic to weak destinations. This maps exactly to Nebula's landing-page leak thesis.
+4. Use proof ladder: founder story → revenue proof → student testimonials → outlier caveat → realistic guarantee. Nebula should use audit logs → before/after fixes → testimonials → no fake income claims.
+5. Free Consulting approach: give a specific diagnosis before selling the package.
+6. One-client math: one $5k client doubles income. Nebula equivalent: one recovered checkout/demo can pay for the $147 fix pack instantly.
+
+## Nebula Implementation
+- Reframe lead magnet from generic conversion tips to "Stop Leaking Paid Traffic".
+- Add methodology-first emails before asking for payment.
+- Keep claims ethical: no guaranteed revenue unless the guarantee is operationally true.
+- Use "leaking leads" / "wrong destination" language in content and outbound.
 """
 
 
@@ -266,12 +329,14 @@ def load_strategy(base: Path = DEFAULT_BASE) -> dict:
     write_if_missing(gs / "Nebula_Followup_Skill.md", FOLLOWUP_SKILL)
     write_if_missing(gs / "Ask_User_Questions.md", ASK_USER_QUESTIONS)
     write_if_missing(gs / "Tools_Map.md", TOOLS_MAP)
+    write_if_missing(gs / "Claude_Marketing_Department.md", MARKETING_DEPARTMENT_STACK)
+    write_if_missing(gs / "PGA_Strategy_Steals.md", PGA_STRATEGY_STEALS)
     return {
         "icp": (gs / "ICP.md").read_text(),
         "positioning": (gs / "Positioning.md").read_text(),
         "banned_words": [line.strip() for line in (gs / "Banned_Words.txt").read_text().splitlines() if line.strip()],
         "voice_dna": (gs / "Nebula_Voice_DNA.md").read_text(),
-        "skills": ["audit", "fix", "compose", "score", "followup", "repurpose"],
+        "skills": ["audit", "fix", "compose", "score", "followup", "repurpose", "marketing_department", "pga_strategy"],
         "ask_user_questions": (gs / "Ask_User_Questions.md").read_text(),
     }
 
