@@ -1,0 +1,24 @@
+{
+  "source_pattern": "The One-Person Marketing Team / Creator",
+  "nebula_adaptation": "Founder second brain for audit proof, sales content, nurture, and lead magnets",
+  "flow": [
+    "ingest",
+    "extract",
+    "generate",
+    "review",
+    "publish"
+  ],
+  "policy": {
+    "draft_first": true,
+    "human_approval_required": true,
+    "never_auto_publish": true,
+    "never_auto_send": true,
+    "source_of_truth": "founder transcripts, audit logs, customer ledgers, proof assets"
+  },
+  "outputs": {
+    "linkedin_posts_per_asset": 12,
+    "email_sequence": 5,
+    "lead_magnet_draft": 1,
+    "video_script_draft": 1
+  }
+}
