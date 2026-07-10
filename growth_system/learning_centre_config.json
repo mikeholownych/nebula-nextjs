@@ -9,9 +9,18 @@
   ],
   "categories": [
     "Audit Systems",
+    "Budget Leaks",
     "Content Systems",
     "Conversion Copy",
-    "Distribution"
+    "Distribution",
+    "Form Leaks",
+    "Google Ads Leaks",
+    "Landing Page Leaks",
+    "Message Match",
+    "Meta Ads Leaks",
+    "Mobile Leaks",
+    "Paid Traffic Economics",
+    "Trust Leaks"
   ],
   "resources": [
     {
@@ -47,7 +56,7 @@
       "category": "Distribution",
       "promise": "Draft-first LinkedIn content, warming, and outreach workflow with a 20/day cap.",
       "cta": "Use the operating pattern",
-      "path": "/learning-centre/linkedin-skill-engine.html",
+      "path": "/learning-centre/linkedin-skill-engine",
       "featured": false
     },
     {
@@ -56,8 +65,180 @@
       "category": "Content Systems",
       "promise": "Turn founder expertise into posts, emails, lead magnets, and scripts with approval gates.",
       "cta": "Use the operating pattern",
-      "path": "/learning-centre/founder-second-brain.html",
+      "path": "/learning-centre/founder-second-brain",
       "featured": false
+    }
+  ],
+  "problem_pages": [
+    {
+      "slug": "google-ads-clicks-no-sales",
+      "keyword": "google ads clicks no sales",
+      "title": "Google Ads Clicks But No Sales: Check The Page Before Budget",
+      "category": "Google Ads Leaks",
+      "diagnosis": "If Google Ads is producing clicks but no sales, the campaign may be doing its job: creating arrival. The leak usually happens when the first screen does not match the search intent, prove credibility, or make one next step obvious.",
+      "checklist": [
+        "Does the hero repeat the exact search/ad promise?",
+        "Is proof visible before the primary CTA?",
+        "Is there one next step, not three?",
+        "Does mobile load and scroll cleanly?",
+        "Are objections answered before price or checkout?"
+      ],
+      "example": "A visitor searches for a fast fix, clicks the ad, then lands on a generic homepage. The click was valid. The page broke the chain.",
+      "cta": "Run the free audit",
+      "path": "/learning-centre/google-ads-clicks-no-sales"
+    },
+    {
+      "slug": "facebook-ads-no-leads",
+      "keyword": "facebook ads no leads",
+      "title": "Facebook Ads Getting Clicks But No Leads",
+      "category": "Meta Ads Leaks",
+      "diagnosis": "Facebook traffic is colder and more interruption-driven. The page must reconnect the hook immediately. If the landing page starts with company context instead of the ad promise, visitors bounce before the offer makes sense.",
+      "checklist": [
+        "Does the first headline echo the ad hook?",
+        "Is the offer clear without reading the full page?",
+        "Is the form asking too much too early?",
+        "Does the page show visual proof quickly?",
+        "Can a mobile visitor complete the action in under 30 seconds?"
+      ],
+      "example": "A Reel promises a specific outcome. The landing page opens with 'Welcome to our company.' That mismatch kills the lead.",
+      "cta": "Run the free audit",
+      "path": "/learning-centre/facebook-ads-no-leads"
+    },
+    {
+      "slug": "landing-page-not-converting",
+      "keyword": "landing page not converting",
+      "title": "Landing Page Not Converting? Diagnose These 5 Leaks First",
+      "category": "Landing Page Leaks",
+      "diagnosis": "A non-converting landing page is usually not one problem. It is a sequence break: unclear promise, weak proof, CTA friction, mobile drag, or unanswered objections.",
+      "checklist": [
+        "Can a stranger explain the offer in 5 seconds?",
+        "Is the page built for one audience?",
+        "Does the CTA match buyer readiness?",
+        "Is the strongest proof above the fold?",
+        "Are objections handled before the final ask?"
+      ],
+      "example": "Changing button color will not fix a page where nobody knows what is being sold or why it matters now.",
+      "cta": "Run the free audit",
+      "path": "/learning-centre/landing-page-not-converting"
+    },
+    {
+      "slug": "high-cpc-low-conversion",
+      "keyword": "high cpc low conversion",
+      "title": "High CPC, Low Conversion: Stop Optimizing The Wrong Layer",
+      "category": "Paid Traffic Economics",
+      "diagnosis": "High CPC hurts. Low conversion makes it fatal. Before changing bidding, inspect whether the page turns expensive intent into action.",
+      "checklist": [
+        "Does every paid keyword have a matching landing page angle?",
+        "Is the CTA proportionate to intent?",
+        "Does the page explain why now?",
+        "Is there enough proof to justify the click cost?",
+        "Do analytics show form starts or only pageviews?"
+      ],
+      "example": "A $12 click can work if the page converts. A $2 click fails if the page never earns trust.",
+      "cta": "Run the free audit",
+      "path": "/learning-centre/high-cpc-low-conversion"
+    },
+    {
+      "slug": "traffic-but-no-form-fills",
+      "keyword": "traffic but no form fills",
+      "title": "Traffic But No Form Fills: The Form Is Usually Not The First Leak",
+      "category": "Form Leaks",
+      "diagnosis": "When traffic arrives but forms stay empty, the form is often the final symptom. The page may not have created enough intent, trust, or clarity before asking for information.",
+      "checklist": [
+        "Is the form asking only for essential fields?",
+        "Is there proof beside or before the form?",
+        "Does the visitor know what happens after submission?",
+        "Is the CTA written as a benefit, not an action?",
+        "Does mobile keyboard/form UX work cleanly?"
+      ],
+      "example": "'Submit' is not a reason to act. 'Get the leak map' is closer to what the buyer wants.",
+      "cta": "Run the free audit",
+      "path": "/learning-centre/traffic-but-no-form-fills"
+    },
+    {
+      "slug": "cta-not-working",
+      "keyword": "cta not working",
+      "title": "CTA Not Working? Fix Commitment, Clarity, And Timing",
+      "category": "Conversion Copy",
+      "diagnosis": "A CTA fails when it asks for more commitment than the page has earned. The fix is rarely louder buttons. It is better timing, clearer payoff, and less perceived risk.",
+      "checklist": [
+        "Does the CTA describe the outcome?",
+        "Is it visible after proof?",
+        "Is there only one primary CTA?",
+        "Does the CTA reduce risk?",
+        "Is the same CTA language repeated consistently?"
+      ],
+      "example": "'Book a call' asks for time and social risk. 'Get the leak map' gives value first.",
+      "cta": "Run the free audit",
+      "path": "/learning-centre/cta-not-working"
+    },
+    {
+      "slug": "message-match-checklist",
+      "keyword": "message match checklist",
+      "title": "Message Match Checklist For Paid Traffic Landing Pages",
+      "category": "Message Match",
+      "diagnosis": "Message match is the chain between what made someone click and what they see next. Break that chain and even qualified traffic feels misled.",
+      "checklist": [
+        "Ad hook appears in hero headline",
+        "Audience named in first screen",
+        "Offer matches the ad promise",
+        "Proof supports the exact claim",
+        "CTA continues the same promise"
+      ],
+      "example": "If the ad says 'fix wasted Google Ads spend,' the page should not open with 'full-service digital solutions.'",
+      "cta": "Run the free audit",
+      "path": "/learning-centre/message-match-checklist"
+    },
+    {
+      "slug": "proof-before-cta",
+      "keyword": "proof before cta",
+      "title": "Proof Before CTA: The Simple Fix Most Landing Pages Miss",
+      "category": "Trust Leaks",
+      "diagnosis": "Most pages ask before they prove. If the visitor has not seen evidence, the CTA feels like risk. Put proof before the ask.",
+      "checklist": [
+        "Is the proof specific, not generic?",
+        "Is there one relevant example above the first major CTA?",
+        "Does proof match the buyer's problem?",
+        "Are claims backed by visible artifacts?",
+        "Can the proof be understood in 10 seconds?"
+      ],
+      "example": "A screenshot, before/after, or exact leak map beats a vague testimonial about being 'great to work with.'",
+      "cta": "Run the free audit",
+      "path": "/learning-centre/proof-before-cta"
+    },
+    {
+      "slug": "mobile-landing-page-leaks",
+      "keyword": "mobile landing page leaks",
+      "title": "Mobile Landing Page Leaks That Kill Paid Traffic",
+      "category": "Mobile Leaks",
+      "diagnosis": "Paid social traffic is often mobile-first. A desktop-perfect page can still leak if the mobile hero, proof, CTA, or form is buried or slow.",
+      "checklist": [
+        "Is the headline visible without pinching or scrolling?",
+        "Does the first CTA appear after enough context?",
+        "Are images compressed?",
+        "Is the form keyboard-friendly?",
+        "Can the page be understood on a small screen?"
+      ],
+      "example": "If proof appears only after six mobile scrolls, most paid visitors never see it.",
+      "cta": "Run the free audit",
+      "path": "/learning-centre/mobile-landing-page-leaks"
+    },
+    {
+      "slug": "before-you-raise-ad-budget",
+      "keyword": "before you raise ad budget",
+      "title": "Before You Raise Ad Budget, Run This Leak Check",
+      "category": "Budget Leaks",
+      "diagnosis": "Raising budget before fixing conversion leaks scales waste. The smarter move is to prove the page can convert before increasing spend.",
+      "checklist": [
+        "Do current clicks reach the promised page section?",
+        "Does the page convert any warm traffic?",
+        "Are top objections answered?",
+        "Is the offer specific enough?",
+        "Is the fix cheaper than another week of wasted spend?"
+      ],
+      "example": "If $500 produced visits and zero intent signals, another $500 usually buys a clearer diagnosis of the same leak.",
+      "cta": "Run the free audit",
+      "path": "/learning-centre/before-you-raise-ad-budget"
     }
   ],
   "primary_cta": {
@@ -72,6 +253,7 @@
     "free_for_life_entry": true,
     "resources_point_to_audit_or_draft_assets": true,
     "no_fake_metrics": true,
-    "competitor_claims_not_reused_as_nebula_proof": true
+    "competitor_claims_not_reused_as_nebula_proof": true,
+    "problem_pages_route_to_audit": true
   }
 }

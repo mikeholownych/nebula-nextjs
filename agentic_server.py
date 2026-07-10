@@ -309,9 +309,11 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
                     self.wfile.write(f.read())
                 return
         if path.startswith("/learning-centre/"):
-            rel = path.removeprefix("/learning-centre/")
+            rel = path.removeprefix("/learning-centre/").rstrip("/")
             if rel and ".." not in rel and "/" not in rel:
                 public_file = os.path.join(DIR, "public", "learning-centre", rel)
+                if not os.path.isfile(public_file) and "." not in rel:
+                    public_file = os.path.join(DIR, "public", "learning-centre", f"{rel}.html")
                 if os.path.isfile(public_file):
                     self.send_response(200)
                     ctype = "application/json" if rel.endswith(".json") else "text/html; charset=utf-8"
