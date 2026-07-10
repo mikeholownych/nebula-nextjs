@@ -114,6 +114,7 @@ growth_system/warm_intro_referral_queue.jsonl
 growth_system/flexible_consulting_offer_queue.jsonl
 growth_system/abandoned_checkout_recovery_queue.jsonl
 growth_system/brand_proof_queue.jsonl
+growth_system/lead_magnet_offer_queue.jsonl
 
 # ── Lead data (not source) ──────────────────────
 audit_leads.jsonl

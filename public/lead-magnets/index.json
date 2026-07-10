@@ -1,0 +1,35 @@
+[
+  {
+    "id": "mistake_revealer",
+    "format": "reveals_what_they_are_doing_wrong",
+    "title": "The Paid-Traffic Leak Checklist",
+    "promise": "Find the 7 mistakes making paid clicks die before they become leads.",
+    "buyer_state": "Founder has traffic but does not know which page mistake is killing conversion.",
+    "cta": "Run the free audit, then buy the $147 Fix Pack if you want the leaks implemented.",
+    "file": "/home/mike/nebula/lead_magnets/paid_traffic_leak_checklist.md",
+    "public_path": "/home/mike/nebula/public/lead-magnets/paid-traffic-leak-checklist.html",
+    "url_path": "/lead-magnets/paid-traffic-leak-checklist.html"
+  },
+  {
+    "id": "result_taster",
+    "format": "taste_of_actual_result",
+    "title": "Free Leak Map Preview",
+    "promise": "See the exact kind of output Nebula gives before buying implementation.",
+    "buyer_state": "Lead wants proof that the audit/fix path is concrete, not generic advice.",
+    "cta": "Generate your own free audit and see the first fix path.",
+    "file": "/home/mike/nebula/lead_magnets/free_leak_map_preview.md",
+    "public_path": "/home/mike/nebula/public/lead-magnets/free-leak-map-preview.html",
+    "url_path": "/lead-magnets/free-leak-map-preview.html"
+  },
+  {
+    "id": "offer_unbundle",
+    "format": "unbundled_piece_of_paid_offer",
+    "title": "CTA Rewrite Swipe Kit",
+    "promise": "Get one unbundled piece of the Fix Pack: conversion-focused CTA rewrites.",
+    "buyer_state": "Lead wants a useful implementation artifact, but not the whole service yet.",
+    "cta": "Use the swipe, then buy the Fix Pack when they want the rest implemented.",
+    "file": "/home/mike/nebula/lead_magnets/cta_rewrite_swipe_kit.md",
+    "public_path": "/home/mike/nebula/public/lead-magnets/cta-rewrite-swipe-kit.html",
+    "url_path": "/lead-magnets/cta-rewrite-swipe-kit.html"
+  }
+]
