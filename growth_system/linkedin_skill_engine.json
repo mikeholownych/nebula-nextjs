@@ -1,0 +1,193 @@
+{
+  "source": "29 LinkedIn Skills image",
+  "engine": "Content -> Warming -> Outreach",
+  "policy": {
+    "draft_first": true,
+    "human_approval_required": true,
+    "daily_outreach_cap": 20,
+    "never_auto_send": true,
+    "external_links_in_comments": "avoid; point to profile or DM unless approved"
+  },
+  "skills": [
+    {
+      "idx": 1,
+      "name": "linkedin-post-writer",
+      "section": "content",
+      "job": "Viral-ready post, 10 hook formulas, drafted not posted"
+    },
+    {
+      "idx": 2,
+      "name": "linkedin-humanizer",
+      "section": "content",
+      "job": "Strips em-dashes, AI vocab, rule-of-three, fake openers"
+    },
+    {
+      "idx": 3,
+      "name": "linkedin-hook-lab",
+      "section": "content",
+      "job": "Ten scored hook variants for a topic, picks the best two"
+    },
+    {
+      "idx": 4,
+      "name": "linkedin-carousel-writer",
+      "section": "content",
+      "job": "Turns a post into saveable carousel slides"
+    },
+    {
+      "idx": 5,
+      "name": "linkedin-content-calendar",
+      "section": "content",
+      "job": "A week of 5 posts across the 5 revenue lanes"
+    },
+    {
+      "idx": 6,
+      "name": "linkedin-voice-profiler",
+      "section": "content",
+      "job": "Reads past posts and DMs, builds voice profile"
+    },
+    {
+      "idx": 7,
+      "name": "linkedin-comment-engine",
+      "section": "content",
+      "job": "Authority comments to leave on other people's posts"
+    },
+    {
+      "idx": 8,
+      "name": "linkedin-repurposer",
+      "section": "content",
+      "job": "One asset into a full week of content"
+    },
+    {
+      "idx": 9,
+      "name": "linkedin-story-miner",
+      "section": "content",
+      "job": "Mines work for anonymized, post-worthy proof"
+    },
+    {
+      "idx": 10,
+      "name": "linkedin-post-autopsy",
+      "section": "content",
+      "job": "Why a post over/under-performed, and the one fix"
+    },
+    {
+      "idx": 11,
+      "name": "linkedin-engager-analytics",
+      "section": "warming",
+      "job": "ICP match rate + top 10 ICP profiles from a post"
+    },
+    {
+      "idx": 12,
+      "name": "linkedin-warm-list-builder",
+      "section": "warming",
+      "job": "A prioritized warming list from ICP + signals"
+    },
+    {
+      "idx": 13,
+      "name": "linkedin-signal-stack",
+      "section": "warming",
+      "job": "5+ signals per target so a message reads like homework"
+    },
+    {
+      "idx": 14,
+      "name": "linkedin-engage-plan",
+      "section": "warming",
+      "job": "A multi-touch warming sequence per target before any pitch"
+    },
+    {
+      "idx": 15,
+      "name": "linkedin-comment-warmer",
+      "section": "warming",
+      "job": "Value-add comments on target posts to warm them"
+    },
+    {
+      "idx": 16,
+      "name": "linkedin-profile-auditor",
+      "section": "warming",
+      "job": "Audits own profile as conversion asset"
+    },
+    {
+      "idx": 17,
+      "name": "linkedin-icp-definer",
+      "section": "warming",
+      "job": "Defines and locks ICP and disqualifiers"
+    },
+    {
+      "idx": 18,
+      "name": "linkedin-warm-tracker",
+      "section": "warming",
+      "job": "One row per person, next action and due date"
+    },
+    {
+      "idx": 19,
+      "name": "linkedin-outreach",
+      "section": "outreach",
+      "job": "Finds decision-makers, drafts <200-char notes, sends 20/day"
+    },
+    {
+      "idx": 20,
+      "name": "linkedin-sell-by-chat",
+      "section": "outreach",
+      "job": "The 6-message framework from warm to booked"
+    },
+    {
+      "idx": 21,
+      "name": "linkedin-connection-note",
+      "section": "outreach",
+      "job": "Two <200-char notes, each on a real specific hook"
+    },
+    {
+      "idx": 22,
+      "name": "linkedin-first-dm",
+      "section": "outreach",
+      "job": "Two <150-char first DMs for the moment they accept"
+    },
+    {
+      "idx": 23,
+      "name": "linkedin-reply-triager",
+      "section": "outreach",
+      "job": "Classifies every reply and routes it to next move"
+    },
+    {
+      "idx": 24,
+      "name": "linkedin-objection-handler",
+      "section": "outreach",
+      "job": "Answer-first reframe that advances to a call"
+    },
+    {
+      "idx": 25,
+      "name": "linkedin-followup-adapter",
+      "section": "outreach",
+      "job": "The next message from conversation state, not a timer"
+    },
+    {
+      "idx": 26,
+      "name": "linkedin-cold-reviver",
+      "section": "outreach",
+      "job": "A new-angle value bomb before a going-cold lead dies"
+    },
+    {
+      "idx": 27,
+      "name": "linkedin-booking-closer",
+      "section": "outreach",
+      "job": "Once they say yes, stop selling and book"
+    },
+    {
+      "idx": 28,
+      "name": "linkedin-onboard",
+      "section": "conductors",
+      "job": "Builds whole brief in one pass: ICP + voice + offer + pains"
+    },
+    {
+      "idx": 29,
+      "name": "linkedin-strategist",
+      "section": "conductors",
+      "job": "Virtual Head of LinkedIn: names constraint, sequences skills"
+    }
+  ],
+  "sections": {
+    "content": 10,
+    "warming": 8,
+    "outreach": 9,
+    "conductors": 2
+  }
+}
