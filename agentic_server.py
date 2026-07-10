@@ -298,6 +298,29 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
                         self.wfile.write(f.read())
                     return
 
+        # Learning centre — free resource hub
+        if path == "/learning-centre" or path == "/learning-centre/":
+            public_file = os.path.join(DIR, "public", "learning-centre", "index.html")
+            if os.path.isfile(public_file):
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.end_headers()
+                with open(public_file, "rb") as f:
+                    self.wfile.write(f.read())
+                return
+        if path.startswith("/learning-centre/"):
+            rel = path.removeprefix("/learning-centre/")
+            if rel and ".." not in rel and "/" not in rel:
+                public_file = os.path.join(DIR, "public", "learning-centre", rel)
+                if os.path.isfile(public_file):
+                    self.send_response(200)
+                    ctype = "application/json" if rel.endswith(".json") else "text/html; charset=utf-8"
+                    self.send_header("Content-Type", ctype)
+                    self.end_headers()
+                    with open(public_file, "rb") as f:
+                        self.wfile.write(f.read())
+                    return
+
         # Health endpoint — also proxy to webhook server
         if path == "/api/health" or path == "/health":
             return self._proxy_to(9000)

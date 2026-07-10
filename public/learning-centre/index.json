@@ -1,0 +1,78 @@
+{
+  "generated_at": "2026-07-10T21:04:30.343930+00:00",
+  "source_pattern": "EfficusAI Learning Centre",
+  "nebula_adaptation": "Free-for-life resource hub for founders bleeding paid traffic after the click",
+  "headline": "Founder resources for fixing paid-traffic leaks before buying more clicks.",
+  "proof_bar": [
+    "Free for life",
+    "Built from Nebula operating systems",
+    "Draft-first, audit-first, no generic agency fluff"
+  ],
+  "categories": [
+    "Audit Systems",
+    "Content Systems",
+    "Conversion Copy",
+    "Distribution"
+  ],
+  "resources": [
+    {
+      "slug": "paid-traffic-leak-map",
+      "title": "Paid-Traffic Leak Map",
+      "category": "Audit Systems",
+      "promise": "Find the first five leaks before spending another dollar on ads.",
+      "cta": "Run the free audit",
+      "path": "/lead-magnets/paid-traffic-leak-checklist.html",
+      "featured": true
+    },
+    {
+      "slug": "cta-rewrite-swipe-kit",
+      "title": "CTA Rewrite Swipe Kit",
+      "category": "Conversion Copy",
+      "promise": "Rewrite the action step so visitors know exactly what to do next.",
+      "cta": "Open the swipe kit",
+      "path": "/lead-magnets/cta-rewrite-swipe-kit.html",
+      "featured": true
+    },
+    {
+      "slug": "free-leak-map-preview",
+      "title": "Free Leak Map Preview",
+      "category": "Audit Systems",
+      "promise": "See what a Nebula diagnosis looks like before buying a Fix Pack.",
+      "cta": "View preview",
+      "path": "/lead-magnets/free-leak-map-preview.html",
+      "featured": true
+    },
+    {
+      "slug": "linkedin-skill-engine",
+      "title": "LinkedIn Skill Engine",
+      "category": "Distribution",
+      "promise": "Draft-first LinkedIn content, warming, and outreach workflow with a 20/day cap.",
+      "cta": "Use the operating pattern",
+      "path": "/learning-centre/linkedin-skill-engine.html",
+      "featured": false
+    },
+    {
+      "slug": "founder-second-brain",
+      "title": "Founder Second-Brain Campaign Factory",
+      "category": "Content Systems",
+      "promise": "Turn founder expertise into posts, emails, lead magnets, and scripts with approval gates.",
+      "cta": "Use the operating pattern",
+      "path": "/learning-centre/founder-second-brain.html",
+      "featured": false
+    }
+  ],
+  "primary_cta": {
+    "label": "Run the free audit",
+    "href": "/audit"
+  },
+  "secondary_cta": {
+    "label": "Buy the $147 Fix Pack",
+    "href": "https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02"
+  },
+  "policy": {
+    "free_for_life_entry": true,
+    "resources_point_to_audit_or_draft_assets": true,
+    "no_fake_metrics": true,
+    "competitor_claims_not_reused_as_nebula_proof": true
+  }
+}
