@@ -299,7 +299,8 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
                     return
 
         # Learning centre — free resource hub
-        if path == "/learning-centre" or path == "/learning-centre/":
+        # Accept both UK (/learning-centre) and US (/learning-center) spellings.
+        if path in ("/learning-centre", "/learning-centre/", "/learning-center", "/learning-center/"):
             public_file = os.path.join(DIR, "public", "learning-centre", "index.html")
             if os.path.isfile(public_file):
                 self.send_response(200)
@@ -308,8 +309,12 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
                 with open(public_file, "rb") as f:
                     self.wfile.write(f.read())
                 return
-        if path.startswith("/learning-centre/"):
-            rel = path.removeprefix("/learning-centre/").rstrip("/")
+        if path.startswith("/learning-centre/") or path.startswith("/learning-center/"):
+            rel = (
+                path.removeprefix("/learning-centre/")
+                if path.startswith("/learning-centre/")
+                else path.removeprefix("/learning-center/")
+            ).rstrip("/")
             if rel and ".." not in rel and "/" not in rel:
                 public_file = os.path.join(DIR, "public", "learning-centre", rel)
                 if not os.path.isfile(public_file) and "." not in rel:
