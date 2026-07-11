@@ -18,7 +18,9 @@ venv/
 env/
 .env/
 
-# ── Secrets & credentials ───────────────────────
+# ── Secrets / credentials ────────────────────────
+.stripe_links
+stripe_links*
 *secret*
 *key*.pem
 *key*.key
