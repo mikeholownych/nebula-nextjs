@@ -8,6 +8,7 @@
     "Draft-first, audit-first, no generic agency fluff"
   ],
   "categories": [
+    "AI Ops Systems",
     "Audit Systems",
     "Budget Leaks",
     "Content Systems",
@@ -67,6 +68,15 @@
       "cta": "Use the operating pattern",
       "path": "/learning-center/founder-second-brain",
       "featured": false
+    },
+    {
+      "slug": "specialist-ai-agent-library",
+      "title": "Specialist AI Agent Library",
+      "category": "AI Ops Systems",
+      "promise": "Stop asking one AI to do 50 jobs. Deploy focused specialists with role, trigger, prompt, handoff, and review gates.",
+      "cta": "Open the agent library",
+      "path": "/learning-center/specialist-ai-agent-library",
+      "featured": true
     }
   ],
   "problem_pages": [
@@ -241,6 +251,114 @@
       "path": "/learning-center/before-you-raise-ad-budget"
     }
   ],
+  "specialist_agent_library": {
+    "source": "NipPro AI 50 AI Agent Setup Guides for B2B Teams",
+    "stolen_pattern": "one specialist agent per role, deployed by domain, with a repeatable 7-element card",
+    "nebula_adaptation": "publish a practical specialist-agent library for founders and reuse the pattern internally for Nebula's CEO/growth/market/support/ops agents",
+    "anti_patterns": [
+      "one generalist AI for every task",
+      "prompt library not stored",
+      "missing trigger condition",
+      "output with no handoff",
+      "automation without review",
+      "no performance tracking"
+    ],
+    "setup_elements": [
+      {
+        "name": "Role",
+        "definition": "One named function. No generalist scope."
+      },
+      {
+        "name": "Mission",
+        "definition": "One sentence defining the output this agent owns."
+      },
+      {
+        "name": "Trigger",
+        "definition": "The event that activates the agent."
+      },
+      {
+        "name": "Tools",
+        "definition": "The exact systems/data sources the agent can use."
+      },
+      {
+        "name": "Prompt library",
+        "definition": "Reusable prompts for the agent's core tasks."
+      },
+      {
+        "name": "Workflow logic",
+        "definition": "Upstream inputs and downstream handoff target."
+      },
+      {
+        "name": "Review gate",
+        "definition": "Human approval, score, or quality check before shipping."
+      }
+    ],
+    "domains": [
+      {
+        "name": "Research",
+        "agents": [
+          "Signal Detector",
+          "Competitor Scout",
+          "Market Mapper"
+        ],
+        "nebula_use": "Feeds lead scoring and positioning."
+      },
+      {
+        "name": "LeadGen",
+        "agents": [
+          "Prospect Finder",
+          "Account Scorer",
+          "Outreach Sequencer"
+        ],
+        "nebula_use": "Turns social/buying signals into ranked pipeline."
+      },
+      {
+        "name": "Sales",
+        "agents": [
+          "Follow-Up Drafter",
+          "Objection Handler",
+          "Pipeline Reviewer"
+        ],
+        "nebula_use": "Moves warm leads without generic follow-up."
+      },
+      {
+        "name": "Marketing",
+        "agents": [
+          "Campaign Builder",
+          "Ad Copywriter",
+          "Funnel Analyst"
+        ],
+        "nebula_use": "Turns proof and audits into campaigns."
+      },
+      {
+        "name": "Content",
+        "agents": [
+          "SEO Writer",
+          "Repurposer",
+          "Editorial Editor"
+        ],
+        "nebula_use": "Turns operator knowledge into distribution assets."
+      },
+      {
+        "name": "Support",
+        "agents": [
+          "Reply Triager",
+          "Response Drafter",
+          "Escalation Handler"
+        ],
+        "nebula_use": "Protects speed and quality on inbound replies."
+      },
+      {
+        "name": "Operations",
+        "agents": [
+          "SOP Builder",
+          "Status Reporter",
+          "Risk Analyst"
+        ],
+        "nebula_use": "Keeps handoffs, health checks, and delivery reliable."
+      }
+    ]
+  },
   "primary_cta": {
     "label": "Run the free audit",
     "href": "/audit"

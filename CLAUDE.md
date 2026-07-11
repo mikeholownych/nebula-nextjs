@@ -22,7 +22,8 @@ Load these on demand:
 - Server: localhost:8765 (venv: /home/mike/nebula/venv/bin/python3)
 - Git: github.com:Nebula-Components/nebula-components.git
 - AgentMail inbox: nebulashop@agentmail.to (REST only — NO SMTP)
-- Stripe $147: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+- Stripe $97 Fix Pack: https://buy.stripe.com/3cs9Dp2NV5Oa6Sk28a
+- Stripe $147 (legacy; current offer is $97)
 - Stripe $1,497 retainer: https://buy.stripe.com/3cs9Dp2NV5Oa6Sk28a
 - Stripe $497 agency partner: https://buy.stripe.com/5kAcPJcxJ2HM7tS7sw
 - GA4: G-KJ9S3450LH

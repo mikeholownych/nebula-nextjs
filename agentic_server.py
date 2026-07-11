@@ -66,6 +66,20 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
         
         super().end_headers()
 
+    def do_HEAD(self):
+        """Override HEAD to handle dynamic endpoints without body writes."""
+        # Simple flag-based approach: call do_GET but skip body writes
+        self._head_request = True
+        try:
+            self.do_GET()
+        finally:
+            self._head_request = False
+
+    def _safe_write(self, data):
+        """Write body data, skipping for HEAD requests."""
+        if not getattr(self, '_head_request', False):
+            self.wfile.write(data)
+
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path
@@ -85,7 +99,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
                 self.send_header("x-markdown-tokens", str(os.path.getsize(md_file.lstrip("/")) // 4))
                 self.end_headers()
                 with open(md_file.lstrip("/"), "rb") as f:
-                    self.wfile.write(f.read())
+                    self._safe_write(f.read())
                 return
 
         # sitemap.xml
@@ -94,7 +108,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header("Content-Type", "application/xml; charset=utf-8")
             self.end_headers()
             xml = self._generate_sitemap()
-            self.wfile.write(xml.encode())
+            self._safe_write(xml.encode())
             return
 
         # robots.txt
@@ -102,7 +116,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "text/plain; charset=utf-8")
             self.end_headers()
-            self.wfile.write(f"User-agent: *\nAllow: /\nSitemap: https://{SITE}/sitemap.xml\n".encode())
+            self._safe_write(f"User-agent: *\nAllow: /\nSitemap: https://{SITE}/sitemap.xml\n".encode())
             return
 
         # auth.md
@@ -111,7 +125,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header("Content-Type", "text/markdown; charset=utf-8")
             self.send_header("x-markdown-tokens", "150")
             self.end_headers()
-            self.wfile.write(self._generate_auth_md().encode())
+            self._safe_write(self._generate_auth_md().encode())
             return
 
         # Stripe webhook endpoint (POST only)
@@ -126,7 +140,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
-            self.wfile.write(json.dumps(result).encode())
+            self._safe_write(json.dumps(result).encode())
             return
 
         # Email open tracking pixel
@@ -153,7 +167,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header("Expires", "0")
             self.send_header("Cross-Origin-Resource-Policy", "cross-origin")
             self.end_headers()
-            self.wfile.write(gif)
+            self._safe_write(gif)
             return
 
         # llms.txt
@@ -161,7 +175,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "text/markdown; charset=utf-8")
             self.end_headers()
-            self.wfile.write(self._generate_llms_txt().encode())
+            self._safe_write(self._generate_llms_txt().encode())
             return
 
         # .well-known/api-catalog
@@ -169,7 +183,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "application/linkset+json; charset=utf-8")
             self.end_headers()
-            self.wfile.write(json.dumps(self._generate_api_catalog(), indent=2).encode())
+            self._safe_write(json.dumps(self._generate_api_catalog(), indent=2).encode())
             return
 
         # .well-known/oauth-authorization-server
@@ -177,7 +191,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.end_headers()
-            self.wfile.write(json.dumps(self._generate_oauth_as(), indent=2).encode())
+            self._safe_write(json.dumps(self._generate_oauth_as(), indent=2).encode())
             return
 
         # .well-known/oauth-protected-resource
@@ -185,7 +199,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.end_headers()
-            self.wfile.write(json.dumps(self._generate_oauth_pr(), indent=2).encode())
+            self._safe_write(json.dumps(self._generate_oauth_pr(), indent=2).encode())
             return
 
         # .well-known/mcp/server-card.json
@@ -193,7 +207,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.end_headers()
-            self.wfile.write(json.dumps(self._generate_mcp_card(), indent=2).encode())
+            self._safe_write(json.dumps(self._generate_mcp_card(), indent=2).encode())
             return
 
         # .well-known/agent-skills/index.json
@@ -201,7 +215,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.end_headers()
-            self.wfile.write(json.dumps(self._generate_skills_index(), indent=2).encode())
+            self._safe_write(json.dumps(self._generate_skills_index(), indent=2).encode())
             return
 
         # .well-known/ucp — Universal Commerce Protocol
@@ -209,7 +223,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.end_headers()
-            self.wfile.write(json.dumps(self._generate_ucp(), indent=2).encode())
+            self._safe_write(json.dumps(self._generate_ucp(), indent=2).encode())
             return
 
         # .well-known/acp.json — Agentic Commerce Protocol discovery
@@ -217,7 +231,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.end_headers()
-            self.wfile.write(json.dumps(self._generate_acp(), indent=2).encode())
+            self._safe_write(json.dumps(self._generate_acp(), indent=2).encode())
             return
 
         # /openapi.json — OpenAPI document with MPP payment extensions
@@ -225,7 +239,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.end_headers()
-            self.wfile.write(json.dumps(self._generate_openapi(), indent=2).encode())
+            self._safe_write(json.dumps(self._generate_openapi(), indent=2).encode())
             return
 
         # /agent/register — agent registration endpoint (auth.md register_uri)
@@ -233,7 +247,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.end_headers()
-            self.wfile.write(json.dumps({
+            self._safe_write(json.dumps({
                 "service": f"{cfg['name']} Agent Registration",
                 "version": "1.0",
                 "register_uri": f"https://{SITE}/agent/register",
@@ -281,7 +295,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.end_headers()
             with open(os.path.join(DIR, "audit-lander.html"), "rb") as f:
-                self.wfile.write(f.read())
+                self._safe_write(f.read())
             return
 
         # Public lead magnets — clean URLs for outreach/nurture
@@ -295,7 +309,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
                     self.send_header("Content-Type", ctype)
                     self.end_headers()
                     with open(public_file, "rb") as f:
-                        self.wfile.write(f.read())
+                        self._safe_write(f.read())
                     return
 
         # Case studies — prevent raw directory listing and serve the generated public index.
@@ -306,7 +320,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
                 self.send_header("Content-Type", "text/html; charset=utf-8")
                 self.end_headers()
                 with open(public_file, "rb") as f:
-                    self.wfile.write(f.read())
+                    self._safe_write(f.read())
                 return
         if path.startswith("/case-studies/"):
             rel = path.removeprefix("/case-studies/").rstrip("/")
@@ -319,7 +333,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
                     self.send_header("Content-Type", "text/html; charset=utf-8")
                     self.end_headers()
                     with open(public_file, "rb") as f:
-                        self.wfile.write(f.read())
+                        self._safe_write(f.read())
                     return
 
         # Learning centre — free resource hub
@@ -331,7 +345,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
                 self.send_header("Content-Type", "text/html; charset=utf-8")
                 self.end_headers()
                 with open(public_file, "rb") as f:
-                    self.wfile.write(f.read())
+                    self._safe_write(f.read())
                 return
         if path.startswith("/learning-centre/") or path.startswith("/learning-center/"):
             rel = (
@@ -349,7 +363,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
                     self.send_header("Content-Type", ctype)
                     self.end_headers()
                     with open(public_file, "rb") as f:
-                        self.wfile.write(f.read())
+                        self._safe_write(f.read())
                     return
 
         # Health endpoint — also proxy to webhook server
@@ -374,7 +388,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
-            self.wfile.write(json.dumps(result).encode())
+            self._safe_write(json.dumps(result).encode())
             return
 
         # Notion Custom Agent webhook
@@ -390,7 +404,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header("Content-Type", "application/json")
             self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
-            self.wfile.write(json.dumps(result).encode())
+            self._safe_write(json.dumps(result).encode())
             return
         
         if path.startswith("/api/crm"):
@@ -453,7 +467,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json")
                 self.end_headers()
-                self.wfile.write(json.dumps({"status": "received"}).encode())
+                self._safe_write(json.dumps({"status": "received"}).encode())
                 return
             except Exception as e:
                 print(f"RB2B webhook error: {e}")
@@ -488,7 +502,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
                 if k.lower() in ("content-type", "access-control-allow-origin"):
                     self.send_header(k, v)
             self.end_headers()
-            self.wfile.write(body)
+            self._safe_write(body)
         except Exception as e:
             self._send_json(502, {"error": f"proxy error: {e}"})
 
@@ -498,7 +512,7 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header("Content-Type", "application/json")
         self.send_header("Access-Control-Allow-Origin", "*")
         self.end_headers()
-        self.wfile.write(body)
+        self._safe_write(body)
 
     def _generate_sitemap(self):
         """Generate sitemap XML."""
@@ -1007,7 +1021,7 @@ Events: revocation
         except Exception as e:
             result = {"error": str(e)}
         
-        self.wfile.write(json.dumps(result, default=str).encode())
+        self._safe_write(json.dumps(result, default=str).encode())
         return
 
     def _handle_booking(self):
@@ -1051,9 +1065,9 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
             )
             urllib.request.urlopen(req, timeout=15)
             
-            self.wfile.write(json.dumps({"status": "ok", "message": "Booked"}).encode())
+            self._safe_write(json.dumps({"status": "ok", "message": "Booked"}).encode())
         except Exception as e:
-            self.wfile.write(json.dumps({"status": "error", "message": str(e)}).encode())
+            self._safe_write(json.dumps({"status": "error", "message": str(e)}).encode())
 
     def _handle_leaderboard_submit(self):
         """Capture Ad Burn Leak Board submissions for public proof and follow-up."""

@@ -8,3 +8,5 @@
 {"email": "contact@support.obakura.com", "classification": "warm", "thread_id": "f8cbe685-e7b9-41a8-a7c2-08b08b286ccb", "detected_at": "2026-07-08T00:18:43.769426+00:00"}
 {"email": "contact@support.obakura.com", "classification": "cold", "thread_id": "3f393ea0-13a1-4d6e-8bf8-38175ed5c146", "detected_at": "2026-07-08T00:34:47.408088+00:00"}
 {"email": "zayne@hacktron.ai", "classification": "cold", "thread_id": "bcd7d41a-e287-4f83-aef1-09ca068d9191", "detected_at": "2026-07-08T12:09:13.877716+00:00"}
+{"email": "zayne@hacktron.ai", "classification": "warm", "thread_id": "b68f71c9-4735-490e-b4a5-9bd3879281d9", "detected_at": "2026-07-11T12:35:01.696080+00:00"}
+{"email": "peresligia@gmail.com", "classification": "cold", "thread_id": "ed7a64c4-73c3-40ff-853b-072ed7462d9b", "detected_at": "2026-07-11T12:35:03.542774+00:00"}

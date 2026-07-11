@@ -162,7 +162,8 @@ yt_channel/logs/
 yt_channel/videos/*.mp4
 yt_channel/thumbnails/*.png
 
-# ── Mystery artifacts ────────────────────────────
+# ── Stale / deprecated artifacts ────────────────
+.deprecated/
 3
 .git_rm_list.txt
 

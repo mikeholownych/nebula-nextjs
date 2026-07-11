@@ -2,13 +2,13 @@
   "company": "Nebula Components",
   "current_bottleneck": "audit_to_payment_conversion",
   "customer_events": {
-    "audit_delivered": 43,
-    "checkout_attempts": 20,
+    "audit_delivered": 42,
+    "checkout_attempts": 19,
     "payments": 2,
     "warm_replies": 0
   },
   "funnel": {
-    "audits_delivered": 40,
+    "audits_delivered": 39,
     "emails_sent": 155,
     "hot_lead_pitches_sent": 7,
     "replies": 3,
@@ -17,7 +17,7 @@
     "trigger_warm_replies": 0,
     "warm_leads": 1
   },
-  "generated_at": "2026-07-11T12:05:43Z",
+  "generated_at": "2026-07-11T12:59:19Z",
   "kill_criteria": {
     "audit": "3 audits delivered and 0 payments",
     "checkout": "buyer cannot pay self-serve",
@@ -25,19 +25,21 @@
   },
   "offer": "Free landing page audit -> $97 implementation",
   "pipeline": {
-    "hot_leads_pending": 8,
+    "hot_leads_pending": 9,
     "overdue_emails": [
       "hello@aijournal.store",
       "info@2getherewesave.com",
+      "danny@repairandsquare.com",
       "hello@ziplead.ai",
       "support@routinereps.com",
       "alumni@wgu.edu",
+      "office@facetwoface.at",
       "support@curiouscats.ai",
       "support@godlike.host"
     ],
-    "pitch_overdue": 7,
-    "pitch_sent": 27,
-    "total": 48
+    "pitch_overdue": 9,
+    "pitch_sent": 25,
+    "total": 46
   },
   "revenue": {
     "real_payments": 0,

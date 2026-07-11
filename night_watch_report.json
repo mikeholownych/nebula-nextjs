@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-07-08T02:01:00.539961+00:00",
+  "timestamp": "2026-07-11T13:22:26.011550+00:00",
   "summary": {
-    "total_contacted": 116,
+    "total_contacted": 119,
     "scanned": 5,
     "sites_down": 0,
     "sites_changed": 3
@@ -20,11 +20,7 @@
       "url": "https://goldenweeks.co",
       "current_title": "Accountability Retreat in Zanzibar for Founders, Makers & Nomads | goldenweeks Retreats",
       "changes": {
-        "content_changed": true,
-        "title_changed": {
-          "from": "Digital Nomad Retreat in Zanzibar | goldenweeks Retreats",
-          "to": "Accountability Retreat in Zanzibar for Founders, Makers & Nomads | goldenweeks Retreats"
-        }
+        "content_changed": true
       }
     },
     {
