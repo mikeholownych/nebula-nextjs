@@ -1,5 +1,57 @@
 [
   {
+    "timestamp": "2026-07-11T14:00:55Z",
+    "sender": "Ligia Peres <peresligia@gmail.com>",
+    "subject": "re: play.google.com audit \u2014 did that make sense?",
+    "thread_id": "a353ec63-e777-482c-936e-3da5a6d0d84e",
+    "preview": "STOP\n\nNebula Components <ops@launchcrate.io> escreveu em ter., 7/07/2026 \u00e0s 13:00\n:\n\n> Hey,\n>\n> Quick check \u2014 the play.google.com audit flagged above_fold. I wrote Place\n> H1 headline, primary CTA but",
+    "stage": "closed",
+    "action": "deliver_audit",
+    "status": "stop_reply",
+    "classification": "other",
+    "updated_at": "2026-07-11T14:05:01.775992+00:00",
+    "resolved_at": "2026-07-11T14:35:00+00:00",
+    "notes": "Replied STOP \u2014 unsubscribed"
+  },
+  {
+    "timestamp": "2026-07-11T14:00:55Z",
+    "sender": "Berkay Yavuz <berkay@adsby.co>",
+    "subject": "re: usemagnetiq.com \u2014 similar case, if useful",
+    "thread_id": "db09f2e5-2b92-42d5-8b61-a74801a0edcc",
+    "preview": "STOP\n\nOn Tue, Jul 7, 2026 at 3:00\u202fPM 'Nebula Components' via Hello Adsby <\nhello@adsby.co> wrote:\n\n> Hi,\n>\n> Following up on the usemagnetiq.com audit.\n>\n> A SaaS founder had the same issue: headline ",
+    "stage": "closed",
+    "action": "deliver_audit",
+    "status": "stop_reply",
+    "classification": "other",
+    "updated_at": "2026-07-11T14:05:01.776127+00:00",
+    "resolved_at": "2026-07-11T14:35:00+00:00",
+    "notes": "Replied STOP \u2014 unsubscribed"
+  },
+  {
+    "timestamp": "2026-07-11T14:00:55Z",
+    "sender": "Justina (Obakura) <contact@support.obakura.com>",
+    "subject": "re: obakura.com audit \u2014 one thing",
+    "thread_id": "f8cbe685-e7b9-41a8-a7c2-08b08b286ccb",
+    "preview": "Hi there,\n\nThanks for reaching out!\n\nPlease note this inbox is managed by the <a href=\"https://obakura.com\">Obakura clothing | Comfy clothes, original designs</a> site's support team, and we can only ",
+    "stage": "awaiting_url_or_schedule",
+    "action": "deliver_audit",
+    "status": "awaiting_url_or_schedule",
+    "classification": "other",
+    "updated_at": "2026-07-11T14:05:01.776266+00:00"
+  },
+  {
+    "timestamp": "2026-07-11T14:00:55Z",
+    "sender": "Zayne Zhang <zayne@hacktron.ai>",
+    "subject": "re: hacktron.ai audit \u2014 one thing worth knowing",
+    "thread_id": "b68f71c9-4735-490e-b4a5-9bd3879281d9",
+    "preview": "I already replied STOP\n\n*Zayne Zhang* <https://www.linkedin.com/in/zhang-zeyu/>\nCo-Founder & CEO, Hacktron AI <https://hacktron.ai>\nWant to chat? Book a time here <https://cal.com/zaynez/quick-chat?>.",
+    "stage": "awaiting_url_or_schedule",
+    "action": "deliver_audit",
+    "status": "awaiting_url_or_schedule",
+    "classification": "testimonial",
+    "updated_at": "2026-07-11T14:05:01.776376+00:00"
+  },
+  {
     "timestamp": "2026-07-08T00:30:44Z",
     "sender": "Justina (Obakura) <contact@support.obakura.com>",
     "subject": "re: obakura.com \u2014 here's what I found",
@@ -12,52 +64,18 @@
     "updated_at": "2026-07-08T00:35:01.804876+00:00"
   },
   {
-    "timestamp": "2026-07-08T00:15:40Z",
-    "sender": "Justina (Obakura) <contact@support.obakura.com>",
-    "subject": "re: obakura.com audit \u2014 one thing",
-    "thread_id": "f8cbe685-e7b9-41a8-a7c2-08b08b286ccb",
-    "preview": "Hi there,\n\nThanks for reaching out!\n\nPlease note this inbox is managed by the <a href=\"https://obakura.com\">Obakura clothing | Comfy clothes, original designs</a> site's support team, and we can only ",
-    "stage": "awaiting_url_or_schedule",
-    "action": "deliver_audit",
-    "status": "awaiting_url_or_schedule",
-    "classification": "other",
-    "updated_at": "2026-07-08T00:20:01.863674+00:00"
-  },
-  {
-    "timestamp": "2026-07-07T12:30:13Z",
-    "sender": "Ligia Peres <peresligia@gmail.com>",
-    "subject": "re: play.google.com audit \u2014 did that make sense?",
-    "thread_id": "a353ec63-e777-482c-936e-3da5a6d0d84e",
-    "preview": "STOP\n\nNebula Components <ops@launchcrate.io> escreveu em ter., 7/07/2026 \u00e0s 13:00\n:\n\n> Hey,\n>\n> Quick check \u2014 the play.google.com audit flagged above_fold. I wrote Place\n> H1 headline, primary CTA but",
-    "stage": "awaiting_url_or_schedule",
-    "action": "deliver_audit",
-    "status": "awaiting_url_or_schedule",
-    "classification": "other",
-    "updated_at": "2026-07-07T12:35:02.061334+00:00"
-  },
-  {
-    "timestamp": "2026-07-07T12:30:13Z",
-    "sender": "Berkay Yavuz <berkay@adsby.co>",
-    "subject": "re: usemagnetiq.com \u2014 similar case, if useful",
-    "thread_id": "db09f2e5-2b92-42d5-8b61-a74801a0edcc",
-    "preview": "STOP\n\nOn Tue, Jul 7, 2026 at 3:00\u202fPM 'Nebula Components' via Hello Adsby <\nhello@adsby.co> wrote:\n\n> Hi,\n>\n> Following up on the usemagnetiq.com audit.\n>\n> A SaaS founder had the same issue: headline ",
-    "stage": "awaiting_url_or_schedule",
-    "action": "deliver_audit",
-    "status": "awaiting_url_or_schedule",
-    "classification": "other",
-    "updated_at": "2026-07-07T12:35:02.061457+00:00"
-  },
-  {
     "timestamp": "2026-07-06T18:00:21Z",
     "sender": "Mike Holownych <mike.holownych@aisyndicate.io>",
     "subject": "Quick check-in",
     "thread_id": "94fd47ed-4abc-4fb3-a125-0ec056a7d0a7",
     "preview": "Got this and it landed correctly\n\nSent from my Bell Samsung device over Canada\u2019s largest network.\n________________________________\nFrom: Nebula Components <ops@launchcrate.io>\nSent: Monday, 06 July 20",
-    "stage": "awaiting_url_or_schedule",
+    "stage": "closed",
     "action": "deliver_audit",
-    "status": "awaiting_url_or_schedule",
+    "status": "test_email",
     "classification": "other",
-    "updated_at": "2026-07-06T18:05:01.448092+00:00"
+    "updated_at": "2026-07-06T18:05:01.448092+00:00",
+    "resolved_at": "2026-07-11T14:35:00+00:00",
+    "notes": "Test email \u2014 closed"
   },
   {
     "timestamp": "2026-07-02T02:30:03Z",
@@ -710,5 +728,23 @@
     "replied_at": "2026-07-07T12:10:56Z",
     "recircle_due_at": "2026-09-05T23:59:10.828954+00:00",
     "source": "cold_breakup_email"
+  },
+  {
+    "email": "test@example.com",
+    "url": "https://nebulacomponents.shop/audit.html",
+    "score": 7.0,
+    "audit_score": 7.0,
+    "audit_grade": "B",
+    "stage": "audit_delivered",
+    "status": "pending",
+    "action": "send_97_pitch",
+    "thread_id": null,
+    "message_id": "<0100019f51a81b9a-800f526c-355b-4e2c-bb14-2df858c0f20e-000000@email.amazonses.com>",
+    "trigger_context": "Saw your public post: 000 in ads, no conversions",
+    "source_url": null,
+    "lead_id": null,
+    "trigger_type": null,
+    "contact_route": null,
+    "pitch_due_at": "2026-07-13T14:49:59Z"
   }
 ]

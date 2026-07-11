@@ -5,6 +5,18 @@
 
 ---
 
+## THE OLD WAY → NEW WAY FRAMEWORK (Use in all templates)
+
+| Old Way (Pain) | New Way (Nebula) |
+|----------------|-------------------|
+| Spent $10k on ads, zero conversions | Exact diagnosis of what's blocking orders |
+| Agency 3-month "testing" delivered nothing | $97 self-serve fix pack, live in 24h |
+| Invisible in ChatGPT/Claude/Perplexity | AI-optimized pages that get cited |
+
+**Price Shock:** Agencies $3-8k/mo (3 months) vs Nebula $97 once (24h)
+
+---
+
 ## Template 1: Soft Value-First (Best for < 3-month-old posts)
 
 ```

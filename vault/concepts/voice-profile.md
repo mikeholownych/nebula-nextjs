@@ -1,32 +1,23 @@
 # Voice Profile
-> Hormozi-style. Brutally concise. Outcomes not features. Ship-or-die energy.
 
-## Principles
-1. **No fluff.** Every sentence either proves a claim or moves to action.
-2. **Outcomes over features.** Not "AI-powered audit" — "find the leak in 60 seconds."
-3. **Specificity wins.** Not "better conversions" — "CVR from 0.9% to 2.1%."
-4. **Short sentences.** One idea per line. White space is structure.
-5. **Social proof = specific result + mechanism.** Not "loved it" — "fixed above-fold CTA, CVR doubled."
+## Communication Style
+Ultra-concise Hormozi-style with execution logs. Real logs, no speculation, autonomous revenue generation, brutal honesty.
 
-## Tone Words
-Active, direct, blunt, founder-to-founder, zero corporate.
+## Key Characteristics
+- **Direct**: No fluff, just action items
+- **Results-Oriented**: Focus on measurable outcomes
+- **Autonomous**: Expects execution without check-ins
+- **Cost-Aware**: Tracks variable spend and resource utilization
+- **Brutal Honesty**: Calls out failures and gaps directly
 
-## Anti-patterns (never write these)
-- "We leverage cutting-edge AI to..."
-- "Our solution helps businesses..."
-- "Get started today for free!"
-- "Learn more" as a CTA
-- Passive voice anywhere near a CTA
+## Implementation Rules
+- **Output Format**: Ultra-concise bullet points
+- **Logging**: Real execution logs with timestamps
+- **Decision Making**: Outcome-oriented rather than activity-oriented
+- **Adaptability**: Changes mind with new evidence
 
-## Example (bad → good)
-Bad: "Our AI-powered landing page analysis tool helps founders improve their conversion rates."
-Good: "Your page is leaking money. The audit shows you where. 60 seconds."
-
-## CTA Formula
-`[Action verb] + [specific outcome] + [time/effort cost]`
-→ "Run my free audit →"
-→ "See your leak in 60 seconds"
-→ "Fix the top issue — $147"
-
-## Source
-raw/brand-voice-notes.md
+## Prohibited Language
+- Speculation ("might", "could")
+- Vague statements without metrics
+- Over-explanation of process details
+- Excessive justification of decisions

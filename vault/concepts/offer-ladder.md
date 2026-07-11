@@ -1,35 +1,25 @@
-# Offer Ladder
-> Free → $147 → $997 → $197/mo. Each step earns the next.
+# Offer Ladder Strategy
 
-## Rung 1: Free Audit ($0)
-- What: AI-scored teardown of landing page (7 dimensions, letter grade)
-- Delivery: <60s via email
-- Value: shows the leak, ranks fixes by impact
-- Conversion trigger: score below 7.0 → offer Fix Pack
+## Core Structure
+1. **$7 Fix Pack**: Single-issue solution for immediate pain relief
+2. **$97 Audit & Implementation**: Comprehensive landing page overhaul
+3. **$1,497 AI Ops Retainer**: Ongoing optimization and monitoring
+4. **$497 Agency Partner**: White-label solution for agencies
 
-## Rung 2: Fix Pack ($147)
-- What: Top 2 leaks fixed (copy + code)
-- Stripe: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
-- Delivery: implemented within 24h
-- Guarantee: 30-min fix or 30-day money back
-- Conversion trigger: after fix, offer Growth Launch
+## Implementation Rules
+- **Progressive Value**: Each tier builds on the previous one
+- **Self-Serve Options**: Lower tiers should be available without sales calls
+- **Upsell Pathways**: Clear upgrade paths between tiers
+- **Value Stacking**: Bundle deliverables that solve multiple pain points
 
-## Rung 3: Growth Launch ($997)
-- What: 60-day full rebuild (page + tracking + split test setup)
-- Delivery: kickoff call → 2-week sprint → 4-week optimization
-- Conversion trigger: after proof of lift, offer retainer
+## Pricing Psychology
+- **Anchoring**: Show original price before discount
+- **Scarcity**: Limited-time offers and exclusive access
+- **Risk Reversal**: Strong guarantees at each tier
+- **Time Delay**: Quick wins at lower tiers to build trust
 
-## Rung 4: Retainer ($197/mo)
-- What: ongoing monitoring, monthly audit, priority fix queue
-- Conversion: automatic upsell from Growth Launch
-
-## Pricing Anchors
-- $147 framed against monthly ad waste (e.g., $3k/mo spend × 1% CVR gap = $X lost)
-- ROI calculator on page does this math live
-- Guarantee removes all risk at $147
-
-## Lead Stage Map
-free_kit → audit → warm → beta_tester → 97 → 997 → 197_mo → sdr
-
-## Source
-raw/offer-architecture.md
+## Conversion Funnel
+1. **Cold Outreach** → $7 Fix Pack
+2. **Audit Delivery** → $97 Implementation
+3. **Implementation Results** → $1,497 Retainer
+4. **Agency Partnership** → $497 White-label Solution

@@ -1,0 +1,1410 @@
+{
+  "name": "Gamma Monthly Earning Report",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Financial Information",
+        "formDescription": "Share your business financial data to generate monthly reports.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Company Name"
+            },
+            {
+              "fieldLabel": "Business Context",
+              "placeholder": "Detailed about your market, competitive landscape, product portfolio and seasonality details."
+            },
+            {
+              "fieldLabel": "Financial Data (Current Month)",
+              "fieldType": "file",
+              "multipleFiles": false
+            },
+            {
+              "fieldLabel": "Finance Data Predicted",
+              "fieldType": "file",
+              "multipleFiles": false
+            },
+            {
+              "fieldLabel": "New Initiatives (If any)"
+            }
+          ]
+        },
+        "options": {
+          "buttonLabel": "Generate Report",
+          "customCss": ":root {\n\t--font-family: 'Open Sans', sans-serif;\n\t--font-weight-normal: 400;\n\t--font-weight-bold: 600;\n\t--font-size-body: 12px;\n\t--font-size-label: 14px;\n\t--font-size-test-notice: 12px;\n\t--font-size-input: 14px;\n\t--font-size-header: 20px;\n\t--font-size-paragraph: 14px;\n\t--font-size-link: 12px;\n\t--font-size-error: 12px;\n\t--font-size-html-h1: 28px;\n\t--font-size-html-h2: 20px;\n\t--font-size-html-h3: 16px;\n\t--font-size-html-h4: 14px;\n\t--font-size-html-h5: 12px;\n\t--font-size-html-h6: 10px;\n\t--font-size-subheader: 14px;\n\t/* Colors - Black & Gold Theme */\n\t--color-background: #faf8f3;\n\t--color-test-notice-text: #d4af37;\n\t--color-test-notice-bg: #fffef9;\n\t--color-test-notice-border: #e8d7a1;\n\t--color-card-bg: #ffffff;\n\t--color-card-border: #d4af37;\n\t--color-card-shadow: rgba(212, 175, 55, 0.15);\n\t--color-link: #c5a146;\n\t--color-header: #1a1a1a;\n\t--color-label: #2d2d2d;\n\t--color-input-border: #d4d4d4;\n\t--color-input-text: #3d3d3d;\n\t--color-focus-border: #d4af37;\n\t--color-submit-btn-bg: #d4af37;\n\t--color-submit-btn-text: #1a1a1a;\n\t--color-error: #c9302c;\n\t--color-required: #d4af37;\n\t--color-clear-button-bg: #6b6b6b;\n\t--color-html-text: #2d2d2d;\n\t--color-html-link: #c5a146;\n\t--color-header-subtext: #6b6b6b;\n\t/* Border Radii */\n\t--border-radius-card: 8px;\n\t--border-radius-input: 6px;\n\t--border-radius-clear-btn: 50%;\n\t--card-border-radius: 8px;\n\t/* Spacing */\n\t--padding-container-top: 24px;\n\t--padding-card: 24px;\n\t--padding-test-notice-vertical: 12px;\n\t--padding-test-notice-horizontal: 24px;\n\t--margin-bottom-card: 16px;\n\t--padding-form-input: 12px;\n\t--card-padding: 24px;\n\t--card-margin-bottom: 16px;\n\t/* Dimensions */\n\t--container-width: 448px;\n\t--submit-btn-height: 48px;\n\t--checkbox-size: 18px;\n\t/* Others */\n\t--box-shadow-card: 0px 4px 16px 0px var(--color-card-shadow);\n\t--opacity-placeholder: 0.5;\n}"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        -128,
+        272
+      ],
+      "id": "a89e514f-09ec-49cf-94d9-d53f2b674559",
+      "name": "Collect Data from Form",
+      "webhookId": "2d69c40f-dcc1-4ee7-b0d2-3f51afd2e278"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-20250514",
+          "cachedResultName": "Claude 4 Sonnet"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        928,
+        400
+      ],
+      "id": "60eb42fb-896a-4963-bb5d-f6719c994eb3",
+      "name": "Anthropic Chat Model3",
+      "credentials": {
+        "anthropicApi": {
+          "id": "RKaoPe6knYYkp49N",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Now create the business context json profile on the basis of following data. Output only json data without any explanation or details.\n\nCompany Name: {{ $('Collect Data from Form').item.json['Company Name'] }}\nCompany Description: {{ $json[\"Business Context\"] }}\nNew Initiatives: {{ $json[\"New Initiatives (If any)\"] }}\n",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a world-class context profile generator. Your sole job is to produce a complete, deeply structured JSON object that captures everything a downstream AI needs to understand and operate a business context. You must output valid JSON only (no commentary, no markdown), conforming exactly to the schema below.\n\n## OUTPUT JSON:\n\n{\n  \"company_profile\": {\n    \"company_name\": \"\",\n    \"industry\": \"\",\n    \"company_stage\": \"\",\n    \"employee_count\": 0,\n    \"target_market_segment\": \"\",\n    \"market_growth_rate_percent\": 0\n  },\n  \"competitive_landscape\": {\n    \"market_position\": \"\",\n    \"top_3_competitors\": [\"\", \"\", \"\"],\n    \"primary_competitive_advantage\": \"\",\n    \"win_rate_vs_main_competitor_percent\": 0\n  },\n  \"product_portfolio\": {\n    \"core_product_name\": \"\",\n    \"pricing_model\": \"\",\n    \"starter_tier_monthly_price\": 0,\n    \"mid_tier_monthly_price\": 0,\n    \"enterprise_tier_monthly_price\": 0,\n    \"professional_services_revenue_percent\": 0\n  },\n  \"value_proposition\": {\n    \"primary_differentiator\": \"\",\n    \"target_buyer_persona\": \"\",\n    \"main_customer_pain_point_solved\": \"\"\n  },\n  \"business_patterns\": {\n    \"avg_sales_cycle_days\": 0,\n    \"typical_contract_length_months\": 12,\n    \"highest_revenue_quarter\": \"\",\n    \"highest_churn_month\": \"\",\n    \"q1_seasonality_index\": 100,\n    \"q2_seasonality_index\": 100,\n    \"q3_seasonality_index\": 100,\n    \"q4_seasonality_index\": 100\n  },\n  \"strategic_initiatives\": {\n    \"current_initiative_1\": {\n      \"name\": \"\",\n      \"start_date\": \"\",\n      \"monthly_incremental_spend\": 0,\n      \"expected_revenue_impact\": 0,\n      \"status\": \"\"\n    },\n    \"current_initiative_2\": {\n      \"name\": \"\",\n      \"start_date\": \"\",\n      \"monthly_incremental_spend\": 0,\n      \"expected_revenue_impact\": 0,\n      \"status\": \"\"\n    },\n    \"recent_product_launch\": {\n      \"feature_name\": \"\",\n      \"launch_date\": \"\",\n      \"expected_impact\": \"\"\n    }\n  },\n  \"market_conditions\": {\n    \"overall_macro_sentiment\": \"\",\n    \"customer_budget_environment\": \"\",\n    \"industry_positive_trend\": \"\",\n    \"industry_negative_trend\": \"\",\n    \"recent_competitor_action\": \"\",\n    \"recent_competitor_action_date\": \"\",\n    \"expected_competitive_impact\": \"\"\n  }\n}\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        16,
+        272
+      ],
+      "id": "841a03e5-15bc-4a3a-a097-6fb1cc98d64a",
+      "name": "Business Context Generator"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-20250514",
+          "cachedResultName": "Claude 4 Sonnet"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        112,
+        400
+      ],
+      "id": "ef6f7312-891c-43a2-8b5e-8562b0357e4b",
+      "name": "Anthropic Chat Model",
+      "credentials": {
+        "anthropicApi": {
+          "id": "RKaoPe6knYYkp49N",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "binaryPropertyName": "=Financial_Data__Current_Month_",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        272,
+        192
+      ],
+      "id": "3c829826-588f-4be9-801e-9c7ab954b57c",
+      "name": "Current Data"
+    },
+    {
+      "parameters": {
+        "binaryPropertyName": "=Finance_Data_Predicted",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        272,
+        368
+      ],
+      "id": "6217d8e2-1dfe-4a46-b024-b51f0deadd12",
+      "name": "Predicted Financial"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        624,
+        256
+      ],
+      "id": "fe5f1c26-8659-40bc-9fb9-d8d69e90d56d",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "current",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        448,
+        192
+      ],
+      "id": "419f5bf6-cadc-400c-b1bb-a7c87ad1f17e",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "predicted",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        432,
+        368
+      ],
+      "id": "f7382af4-421e-4b98-8ee4-3541d532df9f",
+      "name": "Aggregated"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a CFO-level financial analyst conducting a month-over-month variance analysis. Analyze the provided financial data with the rigor of a Big 4 audit.\n\nHere is the company profile:\n{{ $json.data[1].output }}",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=You are an elite FP&A analyst, operations strategist, and financial storyteller.\n\nYour job is to perform expert-grade variance analysis and provide intelligent, actionable commentary that a CFO or CEO would consider insightful and decision-ready.\n\nWhen given actual and budget/forecast data (any format), you will:\n\n1. STRUCTURE THE ANALYSIS\n\nBreak your response into the following sections:\n\nA. Executive Summary\n\n4–6 sentences max\n\nClear, leadership-grade overview\n\nHighlight the 3–5 most important variances and their business implications\n\nMention whether results show emerging risks or opportunities\n\nB. Quantitative Variance Analysis\n\nFor each key metric (Revenue, Volume, Price, COGS, Gross Profit, Opex, EBITDA, etc.):\n\nShow both the variance amount and variance %\n\nMark each variance as Favorable (F) or Unfavorable (U)\n\nDecompose revenue and cost variances into volume, price, mix, rate, efficiency, or spend variances where applicable\n\nUse neat tables for clarity\n\nC. Intelligent Commentary (Root-Cause Explanation)\n\nFor each material variance:\n\nState the most likely operational driver\n\nConsider demand, process efficiency, staffing, supply chain, pricing, competitive pressures, seasonality, or one-off events\n\nTie quantitative drivers to real-world business behavior\n\nAvoid generic explanations — make it diagnostic\n\nD. Strategic Implications\n\nTranslate variances into high-level insights:\n\nWhat trends are emerging?\n\nWhat risks are forming?\n\nWhere are opportunities for improvement or investment?\n\nWhich assumptions were wrong, and why?\n\nE. Recommended Actions\n\nProvide concrete, prioritized, and measurable recommendations:\n\nOperational, financial, and strategic\n\nShort-term fixes\n\nLong-term structural improvements\n\nEach action should state expected impact and required owner/team\n\n2. TONE & STYLE REQUIREMENTS\n\nPrecise, sharp, and executive-ready\n\nNo fluff\n\nUse professional FP&A language\n\nUse strong verbs (diagnose, optimize, reduce, accelerate, mitigate, leverage, refine, etc.)\n\nInsights must sound like they come from someone with 20+ years of experience in finance and operations\n\n3. OPTIONAL (If Data Is Messy)\n\nIf data is unclear, inconsistent, or incomplete:\n\nClean it\n\nNormalize periods\n\nInfer missing standard cost or volume relationships\n\nIdentify anomalies\n\nCall out data quality issues explicitly\n\n4. WHAT TO ASK BACK\n\nIf needed, ask only high-leverage clarifying questions, such as:\n\n“Do you want commentary targeted at executives or analysts?”\n\n“Should the focus be financial, operational, or blended?”\n\n“Do you prefer conservative or aggressive interpretation?”\n\n5. FINAL INSTRUCTIONS\n\nAlways think like a CFO\n\nAlways provide narrative insight, not just numbers\n\nAlways tie numbers → causes → strategic impact → actions\n\nAlways aim for clarity, depth, and practical value\n\n## Real Data:\n{{ $json.data[0].current.toJsonString() }}\n\n## Predicted Data\n{{ $json.data[2].predicted.toJsonString() }}"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        928,
+        256
+      ],
+      "id": "fe572e2e-ed85-46db-9c35-a8d40182c0e9",
+      "name": "MoM Variance Analysis"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        768,
+        272
+      ],
+      "id": "aff33753-74e4-44c3-85f5-05834effdb70",
+      "name": "Aggregate1"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "claude-sonnet-4-20250514",
+          "mode": "list",
+          "cachedResultName": "claude-sonnet-4-20250514"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are an elite FP&A visualization strategist.\n\nYour task is to analyze the performance data I provide and generate 3 presentation-ready chart concepts with the exact numbers filled into each chart idea.\n\n# Follow these rules:\n\n## 1. What to Output for Each Chart\n\nFor every chart idea (3 total), include:\n\nA. Chart Name: Clear, concise, executive-friendly.\n\nB. Chart Type: Choose one: line, bar, combo, waterfall, variance bridge, area, pie/donut (only if logically necessary), scatter.\n\nC. Exact Numbers to Plot :Extract directly from my data, Format as a clean, ready-to-copy table, Use the exact values with no rounding unless specified\n\n\n## 2. Additional Rules\n\nDo not invent numbers. Use only the numbers I provide.\n\nIf needed, reorganize or clean the data before charting.\n\nEnsure the 3 charts do not overlap — each must highlight a different insight.\n\nTogether, the 3 charts should create a coherent story for a monthly business review deck.\n\n3. Output Chart Ideas on Strict JSON\n- No extra explanation and brief. Direct json response.\n\n{\nchart_list:[\n{\nchart_name:\"\",\nchart_brief_with_numbers:\"\",\nchart_type:\"\",\n},\n{\nchart_name:\"\",\nchart_brief_with_numbers:\"\",\nchart_type:\"\",\n}\n\n]\n}",
+              "role": "assistant"
+            },
+            {
+              "content": "=Now read this analysis and generate me chart ideas and give output in strict json format.\n\n{{ $('MoM Variance Analysis').item.json.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.anthropic",
+      "typeVersion": 1,
+      "position": [
+        -96,
+        800
+      ],
+      "id": "243e3d1d-b457-4b4b-aafc-80cf73b41e76",
+      "name": "Presentation Brain",
+      "credentials": {
+        "anthropicApi": {
+          "id": "RKaoPe6knYYkp49N",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the raw LLM response text from previous node\n// e.g. previous node output: { \"response\": \"Here are your 5 CFO-grade charts:\\n\\n```json\\n{ ... }```\" }\nconst raw = $input.first().json.content[0].text;\n\n// Helper: extract JSON block inside ```json ... ```\nfunction extractJsonBlock(text) {\n  // Try to find fenced ```json code block first\n  const fenceStart = text.indexOf('```json');\n  if (fenceStart !== -1) {\n    const afterFence = text.slice(fenceStart + '```json'.length);\n    const fenceEnd = afterFence.indexOf('```');\n    const jsonSnippet = fenceEnd !== -1 ? afterFence.slice(0, fenceEnd) : afterFence;\n    return jsonSnippet.trim();\n  }\n\n  // Fallback: grab from first \"{\" to last \"}\"\n  const firstBrace = text.indexOf('{');\n  const lastBrace = text.lastIndexOf('}');\n  if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {\n    return text.slice(firstBrace, lastBrace + 1).trim();\n  }\n\n  throw new Error('No JSON block found in text.');\n}\n\nlet parsed;\ntry {\n  const jsonString = extractJsonBlock(raw);\n  parsed = JSON.parse(jsonString);\n} catch (error) {\n  throw new Error('Failed to parse JSON from response: ' + error.message);\n}\n\n// Ensure we have chart_list\nif (!parsed.chart_list || !Array.isArray(parsed.chart_list)) {\n  throw new Error('Parsed JSON does not contain a valid \"chart_list\" array.');\n}\n\n// Create one n8n item per chart\nconst outputItems = parsed.chart_list.map(chart => {\n  return {\n    json: {\n      chart_name: chart.chart_name,\n      chart_brief_with_numbers: chart.chart_brief_with_numbers,\n      chart_type: chart.chart_type,\n    },\n  };\n});\n\nreturn outputItems;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        176,
+        800
+      ],
+      "id": "d2bbff4e-042f-4918-b6ab-44eed1e382fc",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://queue.fal.run/fal-ai/nano-banana-pro",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Key {{ $('API Key Storage').item.json.fal_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.message.content.toJsonString() }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        800,
+        816
+      ],
+      "id": "c0c2587d-c5c0-45aa-97be-b7632eee31d0",
+      "name": "Image Generation"
+    },
+    {
+      "parameters": {
+        "amount": 15
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1328,
+        800
+      ],
+      "id": "b34083ff-3da9-467f-b1e1-973175d8845f",
+      "name": "Wait 15 sec",
+      "webhookId": "3784a101-68f6-4536-8231-441e39b8de80"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e1b88c45-8a24-4727-babe-4dd69cacf239",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "COMPLETED",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1152,
+        816
+      ],
+      "id": "f17504ef-c684-4dae-ab9c-15c0a94dbbe0",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        336,
+        800
+      ],
+      "id": "e5b640a1-ad8f-4284-b5d3-9a289957f25b",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=On the basis of given input, create a clean minimalist image generation prompt for presenting data/numbers with exact numbers as in input. Charts should always use Orange and Baby Pink color.\n\n\n## Now Proceed with \nchart name: {{ $('Loop Over Items1').item.json.chart_name }}\ndata: {{ $('Loop Over Items1').item.json.chart_brief_with_numbers }}\nchart type: {{ $('Loop Over Items1').item.json.chart_type }}\nOutput format\n{\n  \"prompt\": \"Image of person eating food.\"\n}  "
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        512,
+        816
+      ],
+      "id": "43dd9bdf-7ecf-41ad-beac-aa6dc958cfe6",
+      "name": "Chart Generation Prompt",
+      "credentials": {
+        "openAiApi": {
+          "id": "Z5PIhrTeITrtaJSn",
+          "name": "Zoro OpenAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://queue.fal.run/fal-ai/nano-banana/requests/{{ $json.request_id }}/status",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Key {{ $('API Key Storage').item.json.fal_key }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        992,
+        816
+      ],
+      "id": "bf3b0754-4a94-4449-91a5-6429388fb2fb",
+      "name": "Image Gen Status"
+    },
+    {
+      "parameters": {
+        "url": "=https://queue.fal.run/fal-ai/nano-banana-pro/requests/{{ $json.request_id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Key {{ $('API Key Storage').item.json.fal_key }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1312,
+        592
+      ],
+      "id": "7849bb77-b1ad-4fb3-90d9-4dad0df675c1",
+      "name": "Get Image Link"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -112,
+        1280
+      ],
+      "id": "6ae0b908-3a00-4a1a-9504-d798ab1b3048",
+      "name": "Aggregate2"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "claude-sonnet-4-20250514",
+          "mode": "list",
+          "cachedResultName": "claude-sonnet-4-20250514"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are a world-class financial communications architect who has crafted high-clarity financial decks for public-company CFOs, FP&A leaders, and investor relations teams.\nYour task is to generate a presentation-ready monthly financial report, optimized for executive review and designed for clarity, insight, and decision-making.\n\nPrimary Objective\n\nGenerate a 12–15 slide monthly financial performance deck, formatted specifically for the Gamma Generations API.\nYour output must use:\n\n--- between slides\n\nFounder/CFO-level narrative tone\n\nThe output should read as if it were prepared by a top-tier FP&A leader for board-level review.\n\nSlide Structure & Flow\nMonthly Overview - A top-level snapshot of financial performance.\nRevenue Summary - Highlight revenue, ARR/MRR, growth rates.\nRevenue vs Forecast - Show variances and drivers.\nExpense Overview - Opex, COGS, variances, and cost structure.\nGross Margin & Profitability - GM%, EBITDA, NP, and month-over-month trends.\nCash Flow Summary - Cash in/out, burn, runway analysis.\nBalance Sheet Snapshot - Assets, liabilities, working capital notes.\nKPI Dashboard - LTV, CAC, payback, retention, churn.\nCustomer & Segment Metrics - Breakdown by cohorts, regions, or segments.\nVariance Deep Dive - Identify root causes of major deviations.\nStrategic Insights - Risks, opportunities, executive observations.\nForecast Update - Updated outlook, assumptions, sensitivities.\nNext Steps - key initiatives, priorities, corrective actions.\n\nUse 12–15 slides depending on data richness. If image then make it a single slide.\n\nStyle & Tone Guidelines\nTone\n\nExecutive-ready\n\nClear, confident, data-driven\n\nNo jargon, no filler\n\nNarrative Style\n\nFocus on clarity and actionable insight\n\nPresent deltas, drivers, and risks prominently\n\nData Priority\n\nAlways include units (%, $, users, bps)\n\nHighlight MoM, QoQ, and YoY when possible\n\nPrioritize exact numbers over estimates\n\nFormatting Rules\n\nHeadlines: ≤ 80 characters\n\nBullets: 3–5 bullet points\n\nNarrative text: ≤ 80 words\n\nSlides separated with ---\n\nNo markdown fences\n\nNo JSON except final structure\n\nSelf-Check Before Output\n\n12–15 slides total\n\nEach starts with: # Slide N — Title\n\nFinal output only in JSON format below\n\nDON’T\n\nDon’t fabricate numbers — use generic placeholders if no numbers provided\n\nDon’t include explanations outside JSON\n\nOutput Requirements\n\nYour final answer must be valid JSON only, no extra text:\n\n```json{\n  \"pitch_deck\": \"\",\n  \"no_of_deck\": \"\"\n}```\n\n\nWhere:\n\n\"pitch_deck\" = the full deck content (slides separated by ---)\n\n\"no_of_deck\" = number of slides generated",
+              "role": "assistant"
+            },
+            {
+              "content": "=Now create earnings report for this.\n{{ $('MoM Variance Analysis').item.json.text }}\n\n## Images\n\nAdd all these reference images in a last deck as appendix.\n\n#1 \nLink: {{ $json.data[0].data[0].images[0].url }}\n\n#2\nLink: {{ $json.data[0].data[1].images[0].url }}\n\n#3\nLink: {{ $json.data[0].data[2].images[0].url }}"
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 4096
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.anthropic",
+      "typeVersion": 1,
+      "position": [
+        352,
+        1280
+      ],
+      "id": "8146c8c2-933b-47ee-a236-cab3e49ba144",
+      "name": "Presentation Ideation",
+      "retryOnFail": true,
+      "credentials": {
+        "anthropicApi": {
+          "id": "RKaoPe6knYYkp49N",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        32,
+        1296
+      ],
+      "id": "fa424da9-631c-40c1-9ea3-5a68aeb896d4",
+      "name": "Merge2"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        208,
+        1280
+      ],
+      "id": "469250ec-c68f-464a-a918-b1311c1ea5c5",
+      "name": "Aggregate3"
+    },
+    {
+      "parameters": {
+        "content": "# 1. Business Intelligence + Financial Analysis Engine\n## *CFO-grade month-over-month performance analysis with predictive intelligence*\n1. Collects foundational business inputs via form (company name, market context, financial files, strategic initiatives)\n2. Aggregates multi-source financial datasets into unified analysis-ready format\n3. Executes deep variance analysis comparing actuals vs. predictions across all revenue streams\n4. Identifies significant deviations, trend anomalies, and performance drivers using structured output parsing\n5. Generates executive-level financial insights with root cause analysis and strategic recommendation",
+        "height": 544,
+        "width": 1664,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -176,
+        -16
+      ],
+      "typeVersion": 1,
+      "id": "f602731f-bba7-4128-8638-bcf6a10e50e7",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# 2. Asynchronous Chart Visualization Engine\n## *Batch-processed AI image generation with polling-based completion verification*\n1. Initiates batch processing loop for sequential chart generation from structured financial data inputs\n2. Transforms chart specifications (name, data points, type) into optimized image generation prompts via GPT-4.1-mini\n3. Submits prompt to fal.ai nano-banana-pro API with authenticated request queuing\n4. Implements status polling mechanism to monitor async image generation progress until completion\n5. Retrieves finalized chart image URLs, merges with source data, and loops to next batch item until all visualizations are generated",
+        "height": 448,
+        "width": 1664,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -176,
+        544
+      ],
+      "typeVersion": 1,
+      "id": "4a97a293-7f0c-4fa5-8ba7-0c87e7d03b84",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "# 3. Executive Presentation Synthesis & Delivery Pipeline\n## *Board-ready financial deck generation with automated Gamma API orchestration*\n\n1. Aggregates variance analysis narratives with generated chart metadata (descriptions + image URLs) into unified presentation dataset\n2. Deploys Claude Sonnet 4 as financial communications architect to generate 12-15 slide executive deck following strict CFO-level formatting guidelines\n3. Parses structured JSON output containing complete slide content (pitch_deck) and slide count (no_of_deck) from AI-generated markdown\n4. Submits formatted presentation to Gamma API with predefined theme, export preferences, and text preservation settings\n5. Implements polling loop with 10-second intervals to monitor generation status until completion, then returns shareable presentation link",
+        "height": 480,
+        "width": 1664,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -176,
+        1008
+      ],
+      "typeVersion": 1,
+      "id": "eafd9c95-fb72-48f1-9360-1ded23be06c9",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all().map(item => {\n\n  // Get the raw JSON string inside the text field\n  let raw = item.json.content[0].text;\n\n  // Remove ```json and ``` if present\n  raw = raw.replace(/^```json\\s*/, '').replace(/```$/, '');\n\n  // Parse it\n  let parsed;\n  try {\n    parsed = JSON.parse(raw);\n  } catch (e) {\n    item.json.error = \"Invalid JSON in content[0].text\";\n    item.json.errorMessage = e.message;\n    return item;\n  }\n\n  // Attach extracted values\n  item.json.pitch_deck = parsed.pitch_deck;\n  item.json.no_of_deck = parsed.no_of_deck;\n\n  // Optionally remove original content\n  delete item.json.content;\n\n  return item;\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        624,
+        1280
+      ],
+      "id": "b7c7f0ee-d855-4fcd-be1d-f254f58a4a75",
+      "name": "JSON String -> JSON"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://public-api.gamma.app/v0.2/generations",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-KEY",
+              "value": "={{ $('API Key Storage').item.json.gamma_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"inputText\":\"{{ $json.pitch_deck.replace(/\\n/g, ' ') }}\",\n  \"textMode\": \"preserve\",\n  \"format\": \"presentation\",\n  \"themeName\": \"Atacama\",\n  \"numCards\": {{ $json.no_of_deck.toNumber() + 1 }},\n  \"cardSplit\": \"auto\",\n  \"additionalInstructions\": \"Use bullet, lists, graphs and charts for numbers. Group the last 3 images into a gallery to showcase them together in appendix slide.\",\n  \"exportAs\": \"pdf\",\n  \"textOptions\": {\n    \"tone\": \"professional, inspiring\",\n    \"language\": \"en\"\n  },\n  \"imageOptions\": {\n    \"source\": \"noImages\"\n  },\n  \"cardOptions\": {\n    \"dimensions\": \"fluid\"\n  },\n  \"sharingOptions\": {\n    \"workspaceAccess\": \"view\",\n    \"externalAccess\": \"noAccess\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        784,
+        1280
+      ],
+      "id": "8f38b13e-61d5-4b09-8282-0e51138e4492",
+      "name": "Generate Presentation"
+    },
+    {
+      "parameters": {
+        "url": "=https://public-api.gamma.app/v0.2/generations/{{ $json.generationId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "X-API-KEY",
+              "value": "={{ $('API Key Storage').item.json.gamma_key }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        944,
+        1280
+      ],
+      "id": "fd8caace-df8c-4383-a11b-2bf893ef7e8c",
+      "name": "Get Presentation from Gamma"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1312,
+        1136
+      ],
+      "id": "52431912-fff1-4d47-ab55-f847f8fdccef",
+      "name": "Get Presentation Link"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "65e5b886-d623-48cc-83f9-e5339dad11e1",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "completed",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1120,
+        1280
+      ],
+      "id": "323bbd6f-50e6-41e5-b942-68a48ff3a229",
+      "name": "Is the presentation Complete?"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1312,
+        1296
+      ],
+      "id": "5b45260a-09a8-43b0-84db-60f241dd4641",
+      "name": "Wait 10s",
+      "webhookId": "4a351037-e33c-4c84-86d0-695da0e6902f"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5ff6c60d-3d90-4344-8f49-bad5e66d38ef",
+              "name": "fal_key",
+              "value": "fal.ai_key",
+              "type": "string"
+            },
+            {
+              "id": "1346f0ac-857d-495b-91e9-afe544458ec2",
+              "name": "gamma_key",
+              "value": "gamma_key",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1280,
+        256
+      ],
+      "id": "a72dfd0b-99cc-440c-91b6-ba14a4aebf5d",
+      "name": "API Key Storage"
+    },
+    {
+      "parameters": {
+        "content": "### Update You API Keys here",
+        "height": 240,
+        "width": 208
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1232,
+        176
+      ],
+      "typeVersion": 1,
+      "id": "b9243ef3-87da-4a0b-bdc7-50aadb16b6c4",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {
+    "Current Data": [
+      {
+        "json": {
+          "metric_name": "Total Revenue",
+          "value": "2450000",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Gross Profit",
+          "value": "1960000",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Total Operating Expenses",
+          "value": "1820000",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Net Income",
+          "value": "94500",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "EBITDA",
+          "value": "140000",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Cash Balance",
+          "value": "3200000",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Operating Cash Flow",
+          "value": "277500",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Monthly Recurring Revenue (MRR)",
+          "value": "760000",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Annual Recurring Revenue (ARR)",
+          "value": "9120000",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Total Customers",
+          "value": "847",
+          "unit": "count"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "New Customers Added",
+          "value": "58",
+          "unit": "count"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Churned Customers",
+          "value": "15",
+          "unit": "count"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Gross Margin",
+          "value": "80.0",
+          "unit": "percentage"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Net Margin",
+          "value": "3.86",
+          "unit": "percentage"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Customer Acquisition Cost (CAC)",
+          "value": "16897",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Lifetime Value (LTV)",
+          "value": "44850",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Average Revenue Per Account (ARPA)",
+          "value": "897",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "MRR Churn Rate",
+          "value": "1.12",
+          "unit": "percentage"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Deferred Revenue",
+          "value": "4200000",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Monthly Burn Rate",
+          "value": "207500",
+          "unit": "USD"
+        }
+      }
+    ],
+    "Predicted Financial": [
+      {
+        "json": {
+          "metric_name": "Total Revenue",
+          "value": "2680000",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Gross Profit",
+          "value": "2144000",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Total Operating Expenses",
+          "value": "1890000",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Net Income",
+          "value": "215500",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "EBITDA",
+          "value": "254000",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Cash Balance",
+          "value": "3648500",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Operating Cash Flow",
+          "value": "523500",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Monthly Recurring Revenue (MRR)",
+          "value": "840000",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Annual Recurring Revenue (ARR)",
+          "value": "10080000",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Total Customers",
+          "value": "892",
+          "unit": "count"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "New Customers Added",
+          "value": "68",
+          "unit": "count"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Churned Customers",
+          "value": "23",
+          "unit": "count"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Gross Margin",
+          "value": "80.0",
+          "unit": "percentage"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Net Margin",
+          "value": "8.04",
+          "unit": "percentage"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Customer Acquisition Cost (CAC)",
+          "value": "14926",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Lifetime Value (LTV)",
+          "value": "47100",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Average Revenue Per Account (ARPA)",
+          "value": "942",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "MRR Churn Rate",
+          "value": "1.19",
+          "unit": "percentage"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Deferred Revenue",
+          "value": "4550000",
+          "unit": "USD"
+        }
+      },
+      {
+        "json": {
+          "metric_name": "Monthly Burn Rate",
+          "value": "448500",
+          "unit": "USD"
+        }
+      }
+    ],
+    "Business Context Generator": [
+      {
+        "json": {
+          "output": "```json\n{\n  \"company_profile\": {\n    \"company_name\": \"Zoro SaaS\",\n    \"industry\": \"Marketing Automation Software\",\n    \"company_stage\": \"Growth\",\n    \"employee_count\": 250,\n    \"target_market_segment\": \"Mid-market B2B (100-1000 employees)\",\n    \"market_growth_rate_percent\": 22\n  },\n  \"competitive_landscape\": {\n    \"market_position\": \"#4 player in marketing automation\",\n    \"top_3_competitors\": [\"HubSpot\", \"Marketo\", \"Salesforce Pardot\"],\n    \"primary_competitive_advantage\": \"Ease-of-use and native integrations\",\n    \"win_rate_vs_main_competitor_percent\": 38\n  },\n  \"product_portfolio\": {\n    \"core_product_name\": \"Marketing Cloud Platform\",\n    \"pricing_model\": \"Tiered SaaS subscription\",\n    \"starter_tier_monthly_price\": 499,\n    \"mid_tier_monthly_price\": 1299,\n    \"enterprise_tier_monthly_price\": 3999,\n    \"professional_services_revenue_percent\": 12\n  },\n  \"value_proposition\": {\n    \"primary_differentiator\": \"Superior ease-of-use with native integrations\",\n    \"target_buyer_persona\": \"Mid-market B2B marketing directors\",\n    \"main_customer_pain_point_solved\": \"Complex marketing automation with poor integration capabilities\"\n  },\n  \"business_patterns\": {\n    \"avg_sales_cycle_days\": 67,\n    \"typical_contract_length_months\": 12,\n    \"highest_revenue_quarter\": \"Q4\",\n    \"highest_churn_month\": \"January\",\n    \"q1_seasonality_index\": 80,\n    \"q2_seasonality_index\": 100,\n    \"q3_seasonality_index\": 100,\n    \"q4_seasonality_index\": 125\n  },\n  \"strategic_initiatives\": {\n    \"current_initiative_1\": {\n      \"name\": \"Influencer Marketing Campaign\",\n      \"start_date\": \"2024-12-01\",\n      \"monthly_incremental_spend\": 25000,\n      \"expected_revenue_impact\": 150000,\n      \"status\": \"Active\"\n    },\n    \"current_initiative_2\": {\n      \"name\": \"HubSpot Competitive Displacement Program\",\n      \"start_date\": \"2024-11-01\",\n      \"monthly_incremental_spend\": 15000,\n      \"expected_revenue_impact\": 200000,\n      \"status\": \"Active\"\n    },\n    \"recent_product_launch\": {\n      \"feature_name\": \"AI Lead Scoring\",\n      \"launch_date\": \"2024-10-01\",\n      \"expected_impact\": \"$75-150 ARPA expansion\"\n    }\n  },\n  \"market_conditions\": {\n    \"overall_macro_sentiment\": \"Improving\",\n    \"customer_budget_environment\": \"Budget scrutiny easing\",\n    \"industry_positive_trend\": \"AI features driving purchase urgency\",\n    \"industry_negative_trend\": \"Continued brand recognition challenges vs incumbents\",\n    \"recent_competitor_action\": \"HubSpot raised prices 20%\",\n    \"recent_competitor_action_date\": \"2024-11-01\",\n    \"expected_competitive_impact\": \"Customer churn opportunity from HubSpot price increase\"\n  }\n}\n```"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Collect Data from Form": {
+      "main": [
+        [
+          {
+            "node": "Business Context Generator",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Current Data",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Predicted Financial",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "MoM Variance Analysis",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Business Context Generator": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Business Context Generator",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Current Data": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Predicted Financial": {
+      "main": [
+        [
+          {
+            "node": "Aggregated",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregated": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MoM Variance Analysis": {
+      "main": [
+        [
+          {
+            "node": "API Key Storage",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "MoM Variance Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Presentation Brain": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Image Generation": {
+      "main": [
+        [
+          {
+            "node": "Image Gen Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 15 sec": {
+      "main": [
+        [
+          {
+            "node": "Image Gen Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Get Image Link",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait 15 sec",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Chart Generation Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chart Generation Prompt": {
+      "main": [
+        [
+          {
+            "node": "Image Generation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Image Gen Status": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Image Link": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate2": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Presentation Ideation": {
+      "main": [
+        [
+          {
+            "node": "JSON String -> JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "Aggregate3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate3": {
+      "main": [
+        [
+          {
+            "node": "Presentation Ideation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "JSON String -> JSON": {
+      "main": [
+        [
+          {
+            "node": "Generate Presentation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Presentation": {
+      "main": [
+        [
+          {
+            "node": "Get Presentation from Gamma",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Presentation from Gamma": {
+      "main": [
+        [
+          {
+            "node": "Is the presentation Complete?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is the presentation Complete?": {
+      "main": [
+        [
+          {
+            "node": "Get Presentation Link",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait 10s",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 10s": {
+      "main": [
+        [
+          {
+            "node": "Get Presentation from Gamma",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "API Key Storage": {
+      "main": [
+        [
+          {
+            "node": "Presentation Brain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "82335660-2942-4f48-b1a7-ea93718acf2f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b96603ffd7699a799086415885d509efe15a86df056cd5084425de73b34e1551"
+  },
+  "id": "L6acTBmyUiV8kfYM",
+  "tags": []
+}

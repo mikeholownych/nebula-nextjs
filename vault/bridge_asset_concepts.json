@@ -1,0 +1,41 @@
+{
+  "generated_at": "2026-07-11",
+  "concepts": [
+    {
+      "title": "The Landing Page Leak Calculator: Find Your Exact $/Month Ad Waste",
+      "target_symptom": "3. Competitor complaint map: per-competitor complaints that passed the firewall, with source type",
+      "methodology_taught": "\n1. Message Match Audit - How to check if your traffic matches your promise\n2. ROAS Cliff Detection - Finding the exact point where visitors drop off\n3. CTA Friction Score - Measuring how many steps between interest and action\n4. Trust Gap Calculation - Quantifying the moment visitors decide not to buy\n        ",
+      "bridge_to_offer": "\nThe calculator shows the leak, our Fix Pack plugs it. Once you see the exact dollar amount, $97 is trivial math vs continuing to bleed cash.\n        ",
+      "length_words": 3500,
+      "production_complexity": 3,
+      "format": "Interactive calculator + diagnostic guide"
+    },
+    {
+      "title": "The Agency Testing Phase Survival Guide: How to Spot (and Avoid) Fake 'Strategy' Charges",
+      "target_symptom": "The last person I paid said it was a testing phase for 3 months. I ended up with nothing and a lighter bank account.",
+      "methodology_taught": "\n1. Testing Phase vs Real Work - The 3 signals that separate strategy from stalling\n2. Dollar-in, Dollar-out Accountability - How to demand proof before paying\n3. Fast-Fix vs Slow-Discovery - Recognizing who will actually help vs who will bill hourly\n4. Self-Serve vs Hand-Holding - When to pay for done-for-you vs when to DIY\n        ",
+      "bridge_to_offer": "\nOur $97 Fix Pack is the anti-agency solution: specific diagnosis + same-day fix + dollar leak proof. No testing phase, no stalling, no bullshit.\n        ",
+      "length_words": 4200,
+      "production_complexity": 4,
+      "format": "Checklist + case studies + red flag detector"
+    },
+    {
+      "title": "ROAS Cliff Repair: Plug the 4 Holes Killing Your Paid Traffic (Before You Spend Another $1k)",
+      "target_symptom": "clicks but no sales, I have no idea what's broken",
+      "methodology_taught": "\n1. Hook-to-LP Gap Diagnosis - Why visitors click but don't convert\n2. Above-Fold Conversion Surgery - Fixing the 5-second test failure\n3. Offer Clarity Score - Making your promise impossible to misunderstand\n4. CPM Creep Relief - Lowering your cost per click with better message match\n        ",
+      "bridge_to_offer": "\nOur implementation service fixes all 4 holes in 2 hours, guaranteed. The manual shows you what's broken, we fix it while you focus on your business.\n        ",
+      "length_words": 2800,
+      "production_complexity": 2,
+      "format": "Step-by-step repair checklist with examples"
+    }
+  ],
+  "selected_concept": {
+    "title": "The Landing Page Leak Calculator: Find Your Exact $/Month Ad Waste",
+    "target_symptom": "3. Competitor complaint map: per-competitor complaints that passed the firewall, with source type",
+    "methodology_taught": "\n1. Message Match Audit - How to check if your traffic matches your promise\n2. ROAS Cliff Detection - Finding the exact point where visitors drop off\n3. CTA Friction Score - Measuring how many steps between interest and action\n4. Trust Gap Calculation - Quantifying the moment visitors decide not to buy\n        ",
+    "bridge_to_offer": "\nThe calculator shows the leak, our Fix Pack plugs it. Once you see the exact dollar amount, $97 is trivial math vs continuing to bleed cash.\n        ",
+    "length_words": 3500,
+    "production_complexity": 3,
+    "format": "Interactive calculator + diagnostic guide"
+  }
+}

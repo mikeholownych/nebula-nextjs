@@ -988,11 +988,12 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
     
     if fix_map_html:
         # Show the map instead of raw HTML tags
+        page_url = page.get("url", "")
         html_body = fix_map_html
         html_body += f"""
 <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:560px;margin:16px auto 0;padding-top:16px;border-top:1px solid #e5e7eb;text-align:center;">
   <div style="font-size:13px;color:#6b7280;">
-    <a href="https://nebulacomponents.shop/checkout.html?email={email}" style="color:#059669;text-decoration:underline;">View DIY fix kit →</a>
+    <a href="https://nebulacomponents.shop/checkout.html?email={email}&url={page_url}" style="color:#059669;text-decoration:underline;">View DIY fix kit →</a>
   </div>
 </div>"""
     else:

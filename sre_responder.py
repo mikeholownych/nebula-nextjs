@@ -20,6 +20,10 @@ SRE_STATE = BASE / 'sre_state.json'
 REMEDIATION_LOG = BASE / 'sre_remediation.log'
 VENV_PYTHON = str(BASE / 'venv/bin/python3')
 NOW = datetime.now(timezone.utc)
+SRE_LOCK = BASE / 'sre_responder.lock'
+RAMP_REPORT = BASE / 'ramp_pipeline_report.json'
+RAMP_COOLDOWN_MINUTES = 120  # don't re-trigger ramp if last run had 0 sends within this window
+STUCK_LEAD_FREEZE_FILE = BASE / 'sre_stuck_freezes.json'
 
 # ── Telegram alert via hermes ──────────────────────────────────────────────
 def telegram_alert(msg: str, level: str = 'warn'):
@@ -176,7 +180,28 @@ def fix_dead_letter():
     return len(retried)
 
 def fix_stuck_leads():
-    """Advance leads stuck >4h in intermediate stages."""
+    """Advance leads stuck >4h in intermediate stages.
+    
+    Includes freeze tracking: if a lead gets unstuck 3+ times in 24h,
+    it's moved to dead to prevent re-stuck loops.
+    """
+    # Load freeze tracker
+    freezes = {}
+    if STUCK_LEAD_FREEZE_FILE.exists():
+        try:
+            freezes = json.loads(STUCK_LEAD_FREEZE_FILE.read_text())
+        except Exception:
+            freezes = {}
+
+    # Clean old freeze entries (>24h)
+    now_ts = NOW.timestamp()
+    for email in list(freezes.keys()):
+        entries = [e for e in freezes.get(email, []) if now_ts - e['ts'] < 86400]
+        if not entries:
+            del freezes[email]
+        else:
+            freezes[email] = entries
+
     health_data = {}
     if HEALTH_FILE.exists():
         try:
@@ -217,16 +242,82 @@ def fix_stuck_leads():
         hours = s.get('hours_stuck', 0)
         action = STAGE_ACTIONS.get(stage)
         if action and email:
+            # Check freeze count: if this lead has been unstuck 3+ times, freeze
+            freeze_count = len(freezes.get(email, []))
+            if freeze_count >= 3:
+                db.upsert_lead(email=email, stage='dead',
+                               notes=f'sre_freeze: unstuck {freeze_count}x, re-stuck loop')
+                log(f'[auto-fix] FROZE {email} from {stage} ({freeze_count}x unstuck) → dead')
+                actioned += 1
+                continue
+
             action(email, hours)
             log(f'[auto-fix] Unstuck {email} from {stage} ({hours}h) → pitch_queued')
+            # Record the unstuck event
+            freezes.setdefault(email, []).append({
+                'ts': now_ts,
+                'stage': stage,
+                'hours_stuck': hours,
+            })
             actioned += 1
 
+    # Save freeze tracker
+    STUCK_LEAD_FREEZE_FILE.write_text(json.dumps(freezes, indent=2, default=str))
     return actioned
 
+def _last_ramp_had_zero_sends() -> bool:
+    """Check if the most recent ramp run produced 0 sent leads."""
+    if not RAMP_REPORT.exists():
+        return False
+    try:
+        report = json.loads(RAMP_REPORT.read_text())
+        sent_count = report.get('counts', {}).get('sent', 0)
+        if sent_count == 0:
+            # Also check how recent — if report is old, it's not relevant
+            ts_str = report.get('timestamp', '')
+            if ts_str:
+                try:
+                    ts = datetime.fromisoformat(ts_str.replace('Z', '+00:00'))
+                    age_min = (NOW - ts).total_seconds() / 60
+                    if age_min > RAMP_COOLDOWN_MINUTES:
+                        return False  # report too old, ignore
+                except Exception:
+                    pass
+            return True
+    except Exception:
+        pass
+    return False
+
+
+def _all_sources_broken() -> bool:
+    """Check sre_state.json known_issues for critical source failures."""
+    state = load_sre_state()
+    issues = state.get('known_issues', {})
+    broken = [k for k, v in issues.items() if 'blocked' in v.lower() or 'down' in v.lower() or 'unavailable' in v.lower() or 'rate-limited' in v.lower() or 'exhausted' in v.lower()]
+    if len(broken) >= 2:
+        log(f'[sources] {len(broken)} known source failures — will use extended cooldown')
+        return True
+    return False
+
+
 def trigger_ramp_if_starved():
-    """If no new leads added in >6h and no ramp running, kick off ramp."""
+    """If no new leads added in >6h and no ramp running, kick off ramp.
+
+    Includes cooldown: if last ramp report had 0 sends and sources are broken,
+    don't re-trigger for RAMP_COOLDOWN_MINUTES.
+    """
     lock = BASE / 'pipeline_ramp.lock'
     if lock.exists():
+        return False
+
+    # Cooldown: if last ramp report had 0 sends and it's recent, skip
+    if _last_ramp_had_zero_sends():
+        log(f'[ramp-cooldown] Last ramp run produced 0 sends — waiting {RAMP_COOLDOWN_MINUTES}m before retry')
+        return False
+
+    # Extended cooldown if multiple sources are known-broken
+    if _all_sources_broken() and _last_ramp_had_zero_sends():
+        log(f'[ramp-cooldown] Multiple sources broken + last ramp 0 sends — suppressing ramp trigger')
         return False
 
     contacted = BASE / 'contacted.json'
@@ -338,6 +429,18 @@ def main():
 
     log('── SRE Responder tick ──')
 
+    # ── Lock: prevent concurrent SRE runs ────────────────────────────────
+    LOCK_AGE_MAX = 600  # 10 min
+    if SRE_LOCK.exists():
+        age_sec = (NOW.timestamp() - SRE_LOCK.stat().st_mtime)
+        if age_sec < LOCK_AGE_MAX:
+            log(f'[lock] Another SRE run in progress (age={age_sec:.0f}s) — skipping')
+            return
+        else:
+            log(f'[lock] Stale lock removed (age={age_sec:.0f}s)')
+            SRE_LOCK.unlink()
+    SRE_LOCK.write_text(json.dumps({'pid': os.getpid(), 'ts': NOW.isoformat()}))
+
     # 1. Ensure all wrappers exist (silent fix, no alert needed)
     fixed_scripts = fix_missing_scripts()
 
@@ -437,6 +540,13 @@ def main():
     # Only print if actions taken or escalations (triggers delivery)
     if actions_taken or escalations:
         print('\n'.join(actions_taken + escalations))
+
+    # Cleanup SRE lock
+    try:
+        if SRE_LOCK.exists():
+            SRE_LOCK.unlink()
+    except Exception:
+        pass
 
 if __name__ == '__main__':
     main()
