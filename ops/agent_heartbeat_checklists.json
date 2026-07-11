@@ -7,35 +7,40 @@
   },
   "checklists": {
     "ceo": [
+      "stay inside CEO role: bottleneck, decision, assignment, escalation only",
       "one bottleneck named",
       "one kill/scale decision made",
       "next orders assigned by agent",
       "escalate only spend > $50, legal risk, strategic pivot, new agent, or unrecoverable credentials"
     ],
     "growth": [
+      "stay inside growth role: artifact/outreach production only after market evidence",
       "no generic volume without trigger proof",
       "each outreach row has trigger_context and source_url",
       "value-first artifact exists before paid ask",
       "CTA is self-serve audit/tool/checkout, never call/calendar/reply-yes"
     ],
     "market": [
+      "stay inside market role: signal detection and market mapping only",
       "strong_trigger_count >= 10 or explain blocker",
       "weak/self-owned/no-trigger leads suppressed",
       "every lead has public evidence URL/excerpt",
       "channel kill criteria updated from reply/payment evidence"
     ],
     "ops-finance": [
+      "stay inside ops-finance role: evidence integrity, revenue truth, and kill criteria",
       "real revenue separated from test revenue",
       "customer ledger and stats agree",
       "incidents logged for broken buyer path or checkout",
       "kill criteria evaluated from ledgers, not vibes"
     ],
     "support": [
+      "stay inside support role: classify, route, deliver, and ledger state changes",
       "inbox checked within SLA",
       "warm replies routed to audit delivery or checkout",
       "HOT_LEAD pitch_due_at honored",
       "payments create fulfillment handoff; no manual review gate"
     ]
   },
-  "generated_at": "2026-07-08T19:35:44Z"
+  "generated_at": "2026-07-11T12:05:43Z"
 }

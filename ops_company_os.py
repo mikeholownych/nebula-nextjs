@@ -47,32 +47,109 @@ STAGE_AGENTS: dict[str, dict[str, Any]] = {
     },
 }
 
+# Stolen from NipPro AI's public "50 AI Agent Setup Guides" playbook:
+# every operating agent needs one role, one mission, clear triggers, tools,
+# prompts, workflow handoff, and concrete use cases. Nebula has 5 agents today,
+# so we harden those 5 instead of adding theatrical headcount.
+SPECIALIST_AGENT_SETUP: dict[str, dict[str, Any]] = {
+    "market": {
+        "role": "Signal Detector + Market Mapper",
+        "mission": "Find public buying-trigger evidence and map why now is the right outreach window.",
+        "tools": ["Reddit/Google scraping", "competitor_probe.py", "trigger_leads.jsonl", "lead_state.db"],
+        "trigger": "before each outreach wave or when reply rate hits kill criteria",
+        "prompts": [
+            "Scan this account for last-30-day conversion pain signals; return evidence URL, excerpt, trigger type, and urgency score.",
+            "Reject or approve this lead using only public trigger evidence; no demographic-fit approvals.",
+            "Map this market segment by trigger intensity, contactability, and self-serve audit fit.",
+        ],
+        "workflow": "Market -> Growth: sends only ranked trigger-proof leads with source_url and trigger_excerpt.",
+        "use_cases": ["lead source triage", "account timing score", "weak-signal suppression"],
+    },
+    "growth": {
+        "role": "Outreach Sequencer + Value-First Artifact Writer",
+        "mission": "Turn trigger evidence into useful audit artifacts and self-serve offers that do not require a call.",
+        "tools": ["deliver_audit.py", "AgentMail REST", "HOT_LEAD.json", "Stripe checkout links"],
+        "trigger": "market hands off signal_strength >= 6 lead or audit-to-payment conversion weakens",
+        "prompts": [
+            "Write a 90-word value-first outreach note using this exact trigger excerpt and one useful diagnosis.",
+            "Rewrite this audit ending into a $97 implementation-ready fix pack with no calendar CTA.",
+            "Create one follow-up that adds proof, not pressure, and advances to checkout or free audit.",
+        ],
+        "workflow": "Growth -> Support: hands off contacted lead, audit artifact, CTA, and due follow-up timestamp.",
+        "use_cases": ["trigger-personalized first email", "audit artifact rewrite", "checkout CTA follow-up"],
+    },
+    "support": {
+        "role": "Reply Triager + Closer Delivery Agent",
+        "mission": "Convert replies and delivered audits into audit delivery, checkout handoff, and fulfillment state changes.",
+        "tools": ["AgentMail inbox", "HOT_LEAD.json", "customer-ledger.jsonl", "lead_state.db"],
+        "trigger": "inbox reply, audit delivered, pitch_due_at reached, checkout/payment event",
+        "prompts": [
+            "Classify this reply as audit request, objection, payment intent, unsubscribe, or irrelevant; name next state.",
+            "Draft the shortest useful response that routes to free audit or checkout without asking for a call.",
+            "Summarize this paid customer handoff for fulfillment with URL, promised fix, and ledger evidence.",
+        ],
+        "workflow": "Support -> Ops-Finance: writes ledger-backed events for pitch, payment, fulfillment, or incident.",
+        "use_cases": ["inbox triage", "overdue pitch execution", "payment fulfillment handoff"],
+    },
+    "ops-finance": {
+        "role": "KPI Tracker + Evidence Integrity Agent",
+        "mission": "Keep revenue truth, cost truth, and kill/scale evidence clean enough for CEO decisions.",
+        "tools": ["stats.json", "customer-ledger.jsonl", "revenue-cost-ledger.jsonl", "Stripe evidence"],
+        "trigger": "daily CEO memo, payment event, spend change, or broken buyer-path incident",
+        "prompts": [
+            "Reconcile customer ledger against stats; separate real revenue from tests and name mismatches.",
+            "Evaluate kill criteria from actual sends, replies, audits, payments, and costs; no vibes.",
+            "Create a one-screen revenue evidence snapshot with blocker, source file, and next verification.",
+        ],
+        "workflow": "Ops-Finance -> CEO: sends evidence snapshot, risk flags, and scale/kill recommendation.",
+        "use_cases": ["revenue reconciliation", "cost drift detection", "experiment kill criteria"],
+    },
+    "ceo": {
+        "role": "Mission Control Decision Agent",
+        "mission": "Name the bottleneck, choose kill/scale/fix, and assign one measurable order per agent.",
+        "tools": ["ops/company_brain.json", "ops/agent_scores.json", "ops/handoff_queues.json", "cron reports"],
+        "trigger": "daily decision memo or any HIGH deadlock alert",
+        "prompts": [
+            "Given this evidence snapshot, name the single bottleneck and the next irreversible/non-irreversible action.",
+            "Assign next orders to Market, Growth, Support, and Ops-Finance with acceptance criteria.",
+            "Kill, scale, or fix this initiative using 3-iteration evidence and revenue impact.",
+        ],
+        "workflow": "CEO -> all agents: publishes directive; agents return artifact-backed reports, not status theater.",
+        "use_cases": ["daily bottleneck decision", "deadlock escalation", "agent priority reset"],
+    },
+}
+
 HEARTBEAT_CHECKLISTS: dict[str, list[str]] = {
     "market": [
+        "stay inside market role: signal detection and market mapping only",
         "strong_trigger_count >= 10 or explain blocker",
         "weak/self-owned/no-trigger leads suppressed",
         "every lead has public evidence URL/excerpt",
         "channel kill criteria updated from reply/payment evidence",
     ],
     "growth": [
+        "stay inside growth role: artifact/outreach production only after market evidence",
         "no generic volume without trigger proof",
         "each outreach row has trigger_context and source_url",
         "value-first artifact exists before paid ask",
         "CTA is self-serve audit/tool/checkout, never call/calendar/reply-yes",
     ],
     "support": [
+        "stay inside support role: classify, route, deliver, and ledger state changes",
         "inbox checked within SLA",
         "warm replies routed to audit delivery or checkout",
         "HOT_LEAD pitch_due_at honored",
         "payments create fulfillment handoff; no manual review gate",
     ],
     "ops-finance": [
+        "stay inside ops-finance role: evidence integrity, revenue truth, and kill criteria",
         "real revenue separated from test revenue",
         "customer ledger and stats agree",
         "incidents logged for broken buyer path or checkout",
         "kill criteria evaluated from ledgers, not vibes",
     ],
     "ceo": [
+        "stay inside CEO role: bottleneck, decision, assignment, escalation only",
         "one bottleneck named",
         "one kill/scale decision made",
         "next orders assigned by agent",
@@ -255,6 +332,27 @@ def build_company_brain(base: Path = BASE, now: datetime | None = None) -> dict[
             "outreach": "30 sends and 0 warm replies",
             "audit": "3 audits delivered and 0 payments",
             "checkout": "buyer cannot pay self-serve",
+        },
+        "specialist_agent_architecture": {
+            "source_reviewed": "NipPro AI 50 AI Agent Setup Guides — specialist principle + 7-element setup guide",
+            "principle": "one agent, one role, one mission, one trigger; handoffs beat generalist context switching",
+            "seven_elements": [
+                "role",
+                "mission",
+                "setup/tool instructions",
+                "recommended tools",
+                "ready prompts",
+                "workflow logic",
+                "practical use cases",
+            ],
+            "anti_patterns_blocked": [
+                "generalist trap",
+                "missing trigger",
+                "no handoff protocol",
+                "prompt anarchy",
+                "output without review/evidence",
+            ],
+            "agents": SPECIALIST_AGENT_SETUP,
         },
     }
     brain["current_bottleneck"] = determine_bottleneck(stats, pipeline, customer_events)
@@ -505,7 +603,9 @@ def generate_ceo_directive(
             "stage_order": ["market", "growth", "support", "ops-finance", "ceo"],
             "forbidden_gates": ["calendar", "book a call", "manual review", "reply yes"],
             "default_path": "trigger -> automated audit/tool -> self-serve checkout -> automated delivery/ledger",
+            "specialist_rule": "one agent owns one mission; trigger + handoff + acceptance required before work counts",
         },
+        "specialist_agent_setup": SPECIALIST_AGENT_SETUP,
         "handoff_queue": handoffs["queues"],
         "heartbeat_checklists": HEARTBEAT_CHECKLISTS,
         "evidence": {

@@ -80,6 +80,9 @@ def test_build_company_brain_extracts_revenue_funnel_and_bottleneck(tmp_path):
     assert brain["pipeline"]["hot_leads_pending"] == 1
     assert brain["current_bottleneck"] == "audit_to_payment_conversion"
     assert brain["kill_criteria"]["outreach"] == "30 sends and 0 warm replies"
+    assert brain["specialist_agent_architecture"]["principle"].startswith("one agent, one role")
+    assert set(brain["specialist_agent_architecture"]["agents"]) == {"market", "growth", "support", "ops-finance", "ceo"}
+    assert brain["specialist_agent_architecture"]["agents"]["market"]["role"] == "Signal Detector + Market Mapper"
 
 
 def test_score_agents_rewards_outcomes_not_activity(tmp_path):
@@ -123,6 +126,9 @@ def test_generate_ceo_directive_prioritizes_revenue_path(tmp_path):
     assert directive["evidence"]["real_revenue"] == 0
     assert directive["operating_model"]["stage_order"] == ["market", "growth", "support", "ops-finance", "ceo"]
     assert "manual review" in directive["operating_model"]["forbidden_gates"]
+    assert directive["operating_model"]["specialist_rule"].startswith("one agent owns one mission")
+    assert directive["specialist_agent_setup"]["growth"]["trigger"]
+    assert len(directive["specialist_agent_setup"]["support"]["prompts"]) == 3
     assert any(row["agent"] == "support" and row["handoff_to"] == "ops-finance" for row in directive["handoff_queue"])
 
 
@@ -148,6 +154,7 @@ def test_build_heartbeat_checklists_encodes_no_theater_checks(tmp_path):
     heartbeats = build_heartbeat_checklists(brain)
 
     assert "support" in heartbeats["checklists"]
+    assert any("stay inside" in item for item in heartbeats["checklists"]["ceo"])
     assert any("self-serve" in item for item in heartbeats["checklists"]["growth"])
     assert any("real revenue" in item for item in heartbeats["checklists"]["ops-finance"])
 

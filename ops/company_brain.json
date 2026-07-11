@@ -2,13 +2,13 @@
   "company": "Nebula Components",
   "current_bottleneck": "audit_to_payment_conversion",
   "customer_events": {
-    "audit_delivered": 42,
-    "checkout_attempts": 19,
+    "audit_delivered": 43,
+    "checkout_attempts": 20,
     "payments": 2,
     "warm_replies": 0
   },
   "funnel": {
-    "audits_delivered": 39,
+    "audits_delivered": 40,
     "emails_sent": 155,
     "hot_lead_pitches_sent": 7,
     "replies": 3,
@@ -17,32 +17,168 @@
     "trigger_warm_replies": 0,
     "warm_leads": 1
   },
-  "generated_at": "2026-07-08T19:35:44Z",
+  "generated_at": "2026-07-11T12:05:43Z",
   "kill_criteria": {
     "audit": "3 audits delivered and 0 payments",
     "checkout": "buyer cannot pay self-serve",
     "outreach": "30 sends and 0 warm replies"
   },
-  "offer": "Free landing page audit -> $147 implementation",
+  "offer": "Free landing page audit -> $97 implementation",
   "pipeline": {
-    "hot_leads_pending": 9,
+    "hot_leads_pending": 8,
     "overdue_emails": [
       "hello@aijournal.store",
       "info@2getherewesave.com",
-      "danny@repairandsquare.com"
+      "hello@ziplead.ai",
+      "support@routinereps.com",
+      "alumni@wgu.edu",
+      "support@curiouscats.ai",
+      "support@godlike.host"
     ],
-    "pitch_overdue": 3,
-    "pitch_sent": 25,
-    "total": 46
+    "pitch_overdue": 7,
+    "pitch_sent": 27,
+    "total": 48
   },
   "revenue": {
     "real_payments": 0,
     "real_revenue": 0,
     "test_revenue_excluded": true
   },
+  "specialist_agent_architecture": {
+    "agents": {
+      "ceo": {
+        "mission": "Name the bottleneck, choose kill/scale/fix, and assign one measurable order per agent.",
+        "prompts": [
+          "Given this evidence snapshot, name the single bottleneck and the next irreversible/non-irreversible action.",
+          "Assign next orders to Market, Growth, Support, and Ops-Finance with acceptance criteria.",
+          "Kill, scale, or fix this initiative using 3-iteration evidence and revenue impact."
+        ],
+        "role": "Mission Control Decision Agent",
+        "tools": [
+          "ops/company_brain.json",
+          "ops/agent_scores.json",
+          "ops/handoff_queues.json",
+          "cron reports"
+        ],
+        "trigger": "daily decision memo or any HIGH deadlock alert",
+        "use_cases": [
+          "daily bottleneck decision",
+          "deadlock escalation",
+          "agent priority reset"
+        ],
+        "workflow": "CEO -> all agents: publishes directive; agents return artifact-backed reports, not status theater."
+      },
+      "growth": {
+        "mission": "Turn trigger evidence into useful audit artifacts and self-serve offers that do not require a call.",
+        "prompts": [
+          "Write a 90-word value-first outreach note using this exact trigger excerpt and one useful diagnosis.",
+          "Rewrite this audit ending into a $97 implementation-ready fix pack with no calendar CTA.",
+          "Create one follow-up that adds proof, not pressure, and advances to checkout or free audit."
+        ],
+        "role": "Outreach Sequencer + Value-First Artifact Writer",
+        "tools": [
+          "deliver_audit.py",
+          "AgentMail REST",
+          "HOT_LEAD.json",
+          "Stripe checkout links"
+        ],
+        "trigger": "market hands off signal_strength >= 6 lead or audit-to-payment conversion weakens",
+        "use_cases": [
+          "trigger-personalized first email",
+          "audit artifact rewrite",
+          "checkout CTA follow-up"
+        ],
+        "workflow": "Growth -> Support: hands off contacted lead, audit artifact, CTA, and due follow-up timestamp."
+      },
+      "market": {
+        "mission": "Find public buying-trigger evidence and map why now is the right outreach window.",
+        "prompts": [
+          "Scan this account for last-30-day conversion pain signals; return evidence URL, excerpt, trigger type, and urgency score.",
+          "Reject or approve this lead using only public trigger evidence; no demographic-fit approvals.",
+          "Map this market segment by trigger intensity, contactability, and self-serve audit fit."
+        ],
+        "role": "Signal Detector + Market Mapper",
+        "tools": [
+          "Reddit/Google scraping",
+          "competitor_probe.py",
+          "trigger_leads.jsonl",
+          "lead_state.db"
+        ],
+        "trigger": "before each outreach wave or when reply rate hits kill criteria",
+        "use_cases": [
+          "lead source triage",
+          "account timing score",
+          "weak-signal suppression"
+        ],
+        "workflow": "Market -> Growth: sends only ranked trigger-proof leads with source_url and trigger_excerpt."
+      },
+      "ops-finance": {
+        "mission": "Keep revenue truth, cost truth, and kill/scale evidence clean enough for CEO decisions.",
+        "prompts": [
+          "Reconcile customer ledger against stats; separate real revenue from tests and name mismatches.",
+          "Evaluate kill criteria from actual sends, replies, audits, payments, and costs; no vibes.",
+          "Create a one-screen revenue evidence snapshot with blocker, source file, and next verification."
+        ],
+        "role": "KPI Tracker + Evidence Integrity Agent",
+        "tools": [
+          "stats.json",
+          "customer-ledger.jsonl",
+          "revenue-cost-ledger.jsonl",
+          "Stripe evidence"
+        ],
+        "trigger": "daily CEO memo, payment event, spend change, or broken buyer-path incident",
+        "use_cases": [
+          "revenue reconciliation",
+          "cost drift detection",
+          "experiment kill criteria"
+        ],
+        "workflow": "Ops-Finance -> CEO: sends evidence snapshot, risk flags, and scale/kill recommendation."
+      },
+      "support": {
+        "mission": "Convert replies and delivered audits into audit delivery, checkout handoff, and fulfillment state changes.",
+        "prompts": [
+          "Classify this reply as audit request, objection, payment intent, unsubscribe, or irrelevant; name next state.",
+          "Draft the shortest useful response that routes to free audit or checkout without asking for a call.",
+          "Summarize this paid customer handoff for fulfillment with URL, promised fix, and ledger evidence."
+        ],
+        "role": "Reply Triager + Closer Delivery Agent",
+        "tools": [
+          "AgentMail inbox",
+          "HOT_LEAD.json",
+          "customer-ledger.jsonl",
+          "lead_state.db"
+        ],
+        "trigger": "inbox reply, audit delivered, pitch_due_at reached, checkout/payment event",
+        "use_cases": [
+          "inbox triage",
+          "overdue pitch execution",
+          "payment fulfillment handoff"
+        ],
+        "workflow": "Support -> Ops-Finance: writes ledger-backed events for pitch, payment, fulfillment, or incident."
+      }
+    },
+    "anti_patterns_blocked": [
+      "generalist trap",
+      "missing trigger",
+      "no handoff protocol",
+      "prompt anarchy",
+      "output without review/evidence"
+    ],
+    "principle": "one agent, one role, one mission, one trigger; handoffs beat generalist context switching",
+    "seven_elements": [
+      "role",
+      "mission",
+      "setup/tool instructions",
+      "recommended tools",
+      "ready prompts",
+      "workflow logic",
+      "practical use cases"
+    ],
+    "source_reviewed": "NipPro AI 50 AI Agent Setup Guides \u2014 specialist principle + 7-element setup guide"
+  },
   "trust_ladder": [
     "$7 impulse",
-    "$147 audit/implementation",
+    "$97 audit/implementation",
     "$1.5k-$5k SDR service"
   ]
 }
