@@ -29,7 +29,7 @@ class ClaudeGrowthSystemTests(unittest.TestCase):
             self.assertIn("autonomous", strategy["positioning"].lower())
             self.assertIn("book a call", strategy["banned_words"])
             self.assertIn("conversion leak", strategy["voice_dna"].lower())
-            self.assertEqual(strategy["skills"], ["audit", "fix", "compose", "score", "followup", "repurpose"])
+            self.assertEqual(strategy["skills"], ["audit", "fix", "compose", "score", "followup", "repurpose", "marketing_department", "pga_strategy"])
             self.assertIn("AskUserQuestion", strategy["ask_user_questions"])
             expected_files = [
                 "ICP.md", "Positioning.md", "Banned_Words.txt",

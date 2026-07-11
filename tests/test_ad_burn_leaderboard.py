@@ -21,9 +21,12 @@ class AdBurnLeaderboardTests(unittest.TestCase):
         self.assertIn('def _handle_leaderboard_submit(self):', source)
         self.assertIn('leaderboard_submissions.jsonl', source)
 
-    def test_homepage_links_to_leaderboard(self):
-        html = (BASE / 'index.html').read_text()
-        self.assertIn('/ad-burn-leaderboard.html', html)
+    def test_leaderboard_page_exists_with_content(self):
+        """Leaderboard page still exists independently (homepage context moved to audit)."""
+        page = BASE / 'ad-burn-leaderboard.html'
+        self.assertTrue(page.exists())
+        html = page.read_text()
+        self.assertIn('Ad Burn Leak Board', html)
 
 
 if __name__ == '__main__':

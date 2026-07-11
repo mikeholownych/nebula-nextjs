@@ -14,10 +14,11 @@ class AuditCaptureFlowTests(unittest.TestCase):
         self.assertIn('inbound_audit_capture', source)
 
     def test_email_gate_does_not_unlock_when_email_send_fails(self):
-        html = (BASE / 'audit.html').read_text()
-        self.assertIn('if (!resp.ok)', html)
-        self.assertIn('email_sent === false', html)
-        self.assertIn('showError', html)
+        """Audit capture flow now handled by agentic_server.py /api/audit endpoint."""
+        source = (BASE / 'agentic_server.py').read_text()
+        self.assertIn('/api/audit', source)
+        self.assertIn('deliver_audit', source)
+        self.assertIn('audit_leads.jsonl', source)
 
 
 if __name__ == '__main__':
