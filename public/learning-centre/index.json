@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T21:38:07.496189+00:00",
+  "generated_at": "2026-07-11T11:43:13.644324+00:00",
   "source_pattern": "EfficusAI Learning Centre",
   "nebula_adaptation": "Free-for-life resource hub for founders bleeding paid traffic after the click",
   "headline": "Founder resources for fixing paid-traffic leaks before buying more clicks.",
@@ -57,7 +57,7 @@
       "category": "Distribution",
       "promise": "Draft-first LinkedIn content, warming, and outreach workflow with a 20/day cap.",
       "cta": "Use the operating pattern",
-      "path": "/learning-centre/linkedin-skill-engine",
+      "path": "/learning-center/linkedin-skill-engine",
       "featured": false
     },
     {
@@ -66,7 +66,7 @@
       "category": "Content Systems",
       "promise": "Turn founder expertise into posts, emails, lead magnets, and scripts with approval gates.",
       "cta": "Use the operating pattern",
-      "path": "/learning-centre/founder-second-brain",
+      "path": "/learning-center/founder-second-brain",
       "featured": false
     }
   ],
@@ -86,7 +86,7 @@
       ],
       "example": "A visitor searches for a fast fix, clicks the ad, then lands on a generic homepage. The click was valid. The page broke the chain.",
       "cta": "Run the free audit",
-      "path": "/learning-centre/google-ads-clicks-no-sales"
+      "path": "/learning-center/google-ads-clicks-no-sales"
     },
     {
       "slug": "facebook-ads-no-leads",
@@ -103,7 +103,7 @@
       ],
       "example": "A Reel promises a specific outcome. The landing page opens with 'Welcome to our company.' That mismatch kills the lead.",
       "cta": "Run the free audit",
-      "path": "/learning-centre/facebook-ads-no-leads"
+      "path": "/learning-center/facebook-ads-no-leads"
     },
     {
       "slug": "landing-page-not-converting",
@@ -120,7 +120,7 @@
       ],
       "example": "Changing button color will not fix a page where nobody knows what is being sold or why it matters now.",
       "cta": "Run the free audit",
-      "path": "/learning-centre/landing-page-not-converting"
+      "path": "/learning-center/landing-page-not-converting"
     },
     {
       "slug": "high-cpc-low-conversion",
@@ -137,7 +137,7 @@
       ],
       "example": "A $12 click can work if the page converts. A $2 click fails if the page never earns trust.",
       "cta": "Run the free audit",
-      "path": "/learning-centre/high-cpc-low-conversion"
+      "path": "/learning-center/high-cpc-low-conversion"
     },
     {
       "slug": "traffic-but-no-form-fills",
@@ -154,7 +154,7 @@
       ],
       "example": "'Submit' is not a reason to act. 'Get the leak map' is closer to what the buyer wants.",
       "cta": "Run the free audit",
-      "path": "/learning-centre/traffic-but-no-form-fills"
+      "path": "/learning-center/traffic-but-no-form-fills"
     },
     {
       "slug": "cta-not-working",
@@ -171,7 +171,7 @@
       ],
       "example": "'Book a call' asks for time and social risk. 'Get the leak map' gives value first.",
       "cta": "Run the free audit",
-      "path": "/learning-centre/cta-not-working"
+      "path": "/learning-center/cta-not-working"
     },
     {
       "slug": "message-match-checklist",
@@ -188,7 +188,7 @@
       ],
       "example": "If the ad says 'fix wasted Google Ads spend,' the page should not open with 'full-service digital solutions.'",
       "cta": "Run the free audit",
-      "path": "/learning-centre/message-match-checklist"
+      "path": "/learning-center/message-match-checklist"
     },
     {
       "slug": "proof-before-cta",
@@ -205,7 +205,7 @@
       ],
       "example": "A screenshot, before/after, or exact leak map beats a vague testimonial about being 'great to work with.'",
       "cta": "Run the free audit",
-      "path": "/learning-centre/proof-before-cta"
+      "path": "/learning-center/proof-before-cta"
     },
     {
       "slug": "mobile-landing-page-leaks",
@@ -222,7 +222,7 @@
       ],
       "example": "If proof appears only after six mobile scrolls, most paid visitors never see it.",
       "cta": "Run the free audit",
-      "path": "/learning-centre/mobile-landing-page-leaks"
+      "path": "/learning-center/mobile-landing-page-leaks"
     },
     {
       "slug": "before-you-raise-ad-budget",
@@ -239,7 +239,7 @@
       ],
       "example": "If $500 produced visits and zero intent signals, another $500 usually buys a clearer diagnosis of the same leak.",
       "cta": "Run the free audit",
-      "path": "/learning-centre/before-you-raise-ad-budget"
+      "path": "/learning-center/before-you-raise-ad-budget"
     }
   ],
   "primary_cta": {

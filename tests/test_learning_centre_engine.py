@@ -30,7 +30,7 @@ def test_resource_and_problem_slugs_are_clean():
     assert len(problem_slugs) == len(set(problem_slugs))
     assert len(problem_slugs) == 10
     assert all(engine.slugify(r.title) for r in engine.RESOURCES)
-    assert all(p.path == f"/learning-centre/{p.slug}" for p in engine.PROBLEM_PAGES)
+    assert all(p.path == f"/learning-center/{p.slug}" for p in engine.PROBLEM_PAGES)
 
 
 def test_problem_page_contains_diagnosis_checklist_example_and_audit_cta():

@@ -53,7 +53,7 @@ class ProblemPage:
 
     @property
     def path(self) -> str:
-        return f"/learning-centre/{self.slug}"
+        return f"/learning-center/{self.slug}"
 
 
 RESOURCES = [
@@ -90,7 +90,7 @@ RESOURCES = [
         category="Distribution",
         promise="Draft-first LinkedIn content, warming, and outreach workflow with a 20/day cap.",
         cta="Use the operating pattern",
-        path="/learning-centre/linkedin-skill-engine",
+        path="/learning-center/linkedin-skill-engine",
     ),
     Resource(
         slug="founder-second-brain",
@@ -98,7 +98,7 @@ RESOURCES = [
         category="Content Systems",
         promise="Turn founder expertise into posts, emails, lead magnets, and scripts with approval gates.",
         cta="Use the operating pattern",
-        path="/learning-centre/founder-second-brain",
+        path="/learning-center/founder-second-brain",
     ),
 ]
 
@@ -265,7 +265,7 @@ def resource_detail_page(resource: Resource) -> str:
 </head>
 <body>
   <main class="wrap detail">
-    <a href="/learning-centre/">← Learning Centre</a>
+    <a href="/learning-center/">← Learning Centre</a>
     <p class="eyebrow">{html.escape(resource.category)}</p>
     <h1>{html.escape(resource.title)}</h1>
     <p class="lede">{html.escape(resource.promise)}</p>
@@ -298,7 +298,7 @@ def problem_page(problem: ProblemPage) -> str:
 </head>
 <body>
   <main class="wrap detail">
-    <a href="/learning-centre/">← Learning Centre</a>
+    <a href="/learning-center/">← Learning Centre</a>
     <p class="eyebrow">{html.escape(problem.category)} · {html.escape(problem.keyword)}</p>
     <h1>{html.escape(problem.title)}</h1>
     <p class="lede">{html.escape(problem.diagnosis)}</p>
@@ -319,7 +319,7 @@ def problem_page(problem: ProblemPage) -> str:
       <p>Run the free Nebula audit first. Buy the $147 Fix Pack only when the leak is obvious.</p>
       <div class="actions">
         <a class="button" href="/audit">{html.escape(problem.cta)}</a>
-        <a class="button secondary" href="/learning-centre/paid-traffic-leak-map">Open leak map</a>
+        <a class="button secondary" href="/learning-center/paid-traffic-leak-map">Open leak map</a>
       </div>
     </section>
     <section class="panel">
@@ -420,7 +420,7 @@ def run(dry_run: bool = False) -> dict[str, Any]:
         INDEX_JSON.write_text(json.dumps({"generated_at": utc_now(), **cfg}, indent=2) + "\n")
         INDEX_HTML.write_text(index_html(cfg))
         for resource in RESOURCES:
-            if resource.path.startswith("/learning-centre/"):
+            if resource.path.startswith("/learning-center/") or resource.path.startswith("/learning-centre/"):
                 (PUBLIC_DIR / f"{resource.slug}.html").write_text(resource_detail_page(resource))
         for problem in PROBLEM_PAGES:
             (PUBLIC_DIR / f"{problem.slug}.html").write_text(problem_page(problem))

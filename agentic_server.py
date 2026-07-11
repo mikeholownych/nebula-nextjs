@@ -480,10 +480,40 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
         """Generate sitemap XML."""
         xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
         xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        seen = set()
         for page in cfg["pages"]:
-            xml += f'  <url>\n    <loc>https://{SITE}{page["loc"]}</loc>\n    <priority>{page["priority"]}</priority>\n    <changefreq>{page["changefreq"]}</changefreq>\n  </url>\n'
+            loc = page["loc"]
+            seen.add(loc)
+            xml += f'  <url>\n    <loc>https://{SITE}{loc}</loc>\n    <priority>{page["priority"]}</priority>\n    <changefreq>{page["changefreq"]}</changefreq>\n  </url>\n'
+        for page in self._learning_center_sitemap_pages():
+            loc = page["loc"]
+            if loc in seen:
+                continue
+            seen.add(loc)
+            xml += f'  <url>\n    <loc>https://{SITE}{loc}</loc>\n    <priority>{page["priority"]}</priority>\n    <changefreq>{page["changefreq"]}</changefreq>\n  </url>\n'
         xml += '</urlset>'
         return xml
+
+    def _learning_center_sitemap_pages(self):
+        """Return canonical learning-center URLs from generated config."""
+        config_file = os.path.join(DIR, "growth_system", "learning_centre_config.json")
+        pages = [
+            {"loc": "/learning-center/", "priority": "0.9", "changefreq": "weekly"},
+        ]
+        try:
+            with open(config_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+        except Exception:
+            return pages
+        for resource in data.get("resources", []):
+            path = str(resource.get("path") or "")
+            if path.startswith("/learning-center/"):
+                pages.append({"loc": path, "priority": "0.78", "changefreq": "monthly"})
+        for problem in data.get("problem_pages", []):
+            path = str(problem.get("path") or "")
+            if path.startswith("/learning-center/"):
+                pages.append({"loc": path, "priority": "0.84", "changefreq": "monthly"})
+        return pages
 
     def _generate_auth_md(self):
         s = SITE
