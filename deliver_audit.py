@@ -698,7 +698,7 @@ def detect_stack(html_text):
     return ", ".join(signals[:5])  # cap at 5 to keep opener tight
 
 
-PROMPT_PACK_CHECKOUT = "https://buy.stripe.com/test_7sYeVdeaw0wk1DzfA643S01"  # $7 — AI Prompt Pack (TEST MODE — replace with live link via Stripe Dashboard → Products → AI Prompt Pack)
+PROMPT_PACK_CHECKOUT = "https://buy.stripe.com/8x2dR90jG1Aobe99bI43S0a"  # $7 — AI Prompt Pack
 
 def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=None, stated_goal=None, stated_role=None, stated_visitor=None, stated_tone=None, prompt_pack=None):
     """Compose structured audit email — free-consulting frame, not report delivery."""
