@@ -298,6 +298,30 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
                         self.wfile.write(f.read())
                     return
 
+        # Case studies — prevent raw directory listing and serve the generated public index.
+        if path in ("/case-studies", "/case-studies/"):
+            public_file = os.path.join(DIR, "public", "case-studies", "index.html")
+            if os.path.isfile(public_file):
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.end_headers()
+                with open(public_file, "rb") as f:
+                    self.wfile.write(f.read())
+                return
+        if path.startswith("/case-studies/"):
+            rel = path.removeprefix("/case-studies/").rstrip("/")
+            if rel and ".." not in rel and "/" not in rel:
+                public_file = os.path.join(DIR, "public", "case-studies", rel)
+                if not os.path.isfile(public_file) and "." not in rel:
+                    public_file = os.path.join(DIR, "public", "case-studies", f"{rel}.html")
+                if os.path.isfile(public_file):
+                    self.send_response(200)
+                    self.send_header("Content-Type", "text/html; charset=utf-8")
+                    self.end_headers()
+                    with open(public_file, "rb") as f:
+                        self.wfile.write(f.read())
+                    return
+
         # Learning centre — free resource hub
         # Accept both UK (/learning-centre) and US (/learning-center) spellings.
         if path in ("/learning-centre", "/learning-centre/", "/learning-center", "/learning-center/"):
