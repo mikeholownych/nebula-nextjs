@@ -16,7 +16,8 @@ def test_config_preserves_efficus_patterns_without_fake_metrics():
     assert cfg["policy"]["no_fake_metrics"] is True
     assert cfg["policy"]["problem_pages_route_to_audit"] is True
     assert cfg["primary_cta"]["href"] == "/audit"
-    assert len(cfg["resources"]) >= 5
+    assert len(cfg["resources"]) >= 6
+    assert cfg["specialist_agent_library"]["stolen_pattern"].startswith("one specialist agent")
     assert len(cfg["problem_pages"]) == 10
     assert "Audit Systems" in cfg["categories"]
     assert "Google Ads Leaks" in cfg["categories"]

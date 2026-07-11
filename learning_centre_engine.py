@@ -100,7 +100,50 @@ RESOURCES = [
         cta="Use the operating pattern",
         path="/learning-center/founder-second-brain",
     ),
+    Resource(
+        slug="specialist-ai-agent-library",
+        title="Specialist AI Agent Library",
+        category="AI Ops Systems",
+        promise="Stop asking one AI to do 50 jobs. Deploy focused specialists with role, trigger, prompt, handoff, and review gates.",
+        cta="Open the agent library",
+        path="/learning-center/specialist-ai-agent-library",
+        featured=True,
+    ),
 ]
+
+AGENT_SETUP_ELEMENTS = (
+    ("Role", "One named function. No generalist scope."),
+    ("Mission", "One sentence defining the output this agent owns."),
+    ("Trigger", "The event that activates the agent."),
+    ("Tools", "The exact systems/data sources the agent can use."),
+    ("Prompt library", "Reusable prompts for the agent's core tasks."),
+    ("Workflow logic", "Upstream inputs and downstream handoff target."),
+    ("Review gate", "Human approval, score, or quality check before shipping."),
+)
+
+SPECIALIST_DOMAINS = (
+    ("Research", ("Signal Detector", "Competitor Scout", "Market Mapper"), "Feeds lead scoring and positioning."),
+    ("LeadGen", ("Prospect Finder", "Account Scorer", "Outreach Sequencer"), "Turns social/buying signals into ranked pipeline."),
+    ("Sales", ("Follow-Up Drafter", "Objection Handler", "Pipeline Reviewer"), "Moves warm leads without generic follow-up."),
+    ("Marketing", ("Campaign Builder", "Ad Copywriter", "Funnel Analyst"), "Turns proof and audits into campaigns."),
+    ("Content", ("SEO Writer", "Repurposer", "Editorial Editor"), "Turns operator knowledge into distribution assets."),
+    ("Support", ("Reply Triager", "Response Drafter", "Escalation Handler"), "Protects speed and quality on inbound replies."),
+    ("Operations", ("SOP Builder", "Status Reporter", "Risk Analyst"), "Keeps handoffs, health checks, and delivery reliable."),
+)
+
+NIPPRO_EXTRACTION = {
+    "source": "NipPro AI 50 AI Agent Setup Guides for B2B Teams",
+    "stolen_pattern": "one specialist agent per role, deployed by domain, with a repeatable 7-element card",
+    "nebula_adaptation": "publish a practical specialist-agent library for founders and reuse the pattern internally for Nebula's CEO/growth/market/support/ops agents",
+    "anti_patterns": [
+        "one generalist AI for every task",
+        "prompt library not stored",
+        "missing trigger condition",
+        "output with no handoff",
+        "automation without review",
+        "no performance tracking",
+    ],
+}
 
 PROBLEM_PAGES = [
     ProblemPage(
@@ -218,6 +261,14 @@ def config() -> dict[str, Any]:
         "categories": categories,
         "resources": [asdict(r) for r in RESOURCES],
         "problem_pages": [asdict(p) | {"path": p.path} for p in PROBLEM_PAGES],
+        "specialist_agent_library": {
+            **NIPPRO_EXTRACTION,
+            "setup_elements": [{"name": name, "definition": definition} for name, definition in AGENT_SETUP_ELEMENTS],
+            "domains": [
+                {"name": name, "agents": list(agents), "nebula_use": use}
+                for name, agents, use in SPECIALIST_DOMAINS
+            ],
+        },
         "primary_cta": {"label": "Run the free audit", "href": "/audit"},
         "secondary_cta": {"label": "Buy the $147 Fix Pack", "href": "https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02"},
         "policy": {
@@ -253,7 +304,68 @@ def problem_card(problem: ProblemPage) -> str:
     """.strip()
 
 
-def resource_detail_page(resource: Resource) -> str:
+def specialist_agent_library_page(resource: Resource) -> str:
+    elements = "\n".join(
+        f"<li><strong>{html.escape(name)}:</strong> {html.escape(definition)}</li>"
+        for name, definition in AGENT_SETUP_ELEMENTS
+    )
+    domains = "\n".join(
+        f"""
+        <article class="card">
+          <div class="eyebrow">{html.escape(name)}</div>
+          <h3>{html.escape(' → '.join(agents))}</h3>
+          <p>{html.escape(use)}</p>
+        </article>
+        """.strip()
+        for name, agents, use in SPECIALIST_DOMAINS
+    )
+    anti_patterns = "\n".join(f"<li>{html.escape(item)}</li>" for item in NIPPRO_EXTRACTION["anti_patterns"])
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{html.escape(resource.title)} | Nebula Learning Centre</title>
+  <meta name="description" content="{html.escape(resource.promise)}">
+  <style>{css()}</style>
+</head>
+<body>
+  <main class="wrap detail">
+    <a href="/learning-center/">← Learning Centre</a>
+    <p class="eyebrow">AI Ops Systems · extracted from NipPro AI</p>
+    <h1>{html.escape(resource.title)}</h1>
+    <p class="lede">{html.escape(resource.promise)}</p>
+    <section class="panel">
+      <h2>The stolen pattern</h2>
+      <p><strong>One specialist per role.</strong> Each agent gets a narrow mission, a trigger, a tool boundary, reusable prompts, handoff logic, and review gate. No one-agent-does-everything sludge.</p>
+    </section>
+    <section class="panel">
+      <h2>7-element agent card</h2>
+      <ul>{elements}</ul>
+    </section>
+    <h2>Nebula domain map</h2>
+    <section class="grid">{domains}</section>
+    <section class="panel">
+      <h2>Anti-patterns to avoid</h2>
+      <ul>{anti_patterns}</ul>
+    </section>
+    <section class="panel cta-panel">
+      <h2>Want this installed instead of documented?</h2>
+      <p>Start with the audit. If the handoff leak is obvious, the $147 Fix Pack turns it into a working operating system.</p>
+      <div class="actions">
+        <a class="button" href="/audit">Run the free audit</a>
+        <a class="button secondary" href="https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02">Buy the $147 Fix Pack</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
+"""
+
+
+def resource_detail_page(resource: Resource):
+    if resource.slug == "specialist-ai-agent-library":
+        return specialist_agent_library_page(resource)
     return f"""<!doctype html>
 <html lang="en">
 <head>
