@@ -17,6 +17,15 @@ NEBULA_DIR = Path("/home/mike/nebula")
 # Add the active venv site-packages before importing BeautifulSoup/requests.
 sys.path.insert(0, str(NEBULA_DIR / "venv" / "lib" / "python3.12" / "site-packages"))
 
+# AI Prompt Pack — generates per-finding AI prompts from audit data
+try:
+    sys.path.insert(0, str(NEBULA_DIR))
+    from audit_pipeline.prompts.generator import build_prompt_pack
+    HAS_PROMPT_PACK = True
+except ImportError:
+    HAS_PROMPT_PACK = False
+    build_prompt_pack = None
+
 from bs4 import BeautifulSoup
 import requests
 LEDGERS_DIR = NEBULA_DIR / "ledgers"
@@ -689,7 +698,9 @@ def detect_stack(html_text):
     return ", ".join(signals[:5])  # cap at 5 to keep opener tight
 
 
-def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=None, stated_goal=None, stated_role=None, stated_visitor=None, stated_tone=None):
+PROMPT_PACK_CHECKOUT = "https://buy.stripe.com/test_7sYeVdeaw0wk1DzfA643S01"  # $7 — AI Prompt Pack (TEST MODE — replace with live link via Stripe Dashboard → Products → AI Prompt Pack)
+
+def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=None, stated_goal=None, stated_role=None, stated_visitor=None, stated_tone=None, prompt_pack=None):
     """Compose structured audit email — free-consulting frame, not report delivery."""
     DIM_LABELS = {
         "headline": "Headline",
@@ -884,6 +895,25 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         for key, item in issues[:1]:
             label = DIM_LABELS.get(key, key.replace("_", " ").title())
             lines.append(f"- {label}: {item['issue']} Fix: {item['fix']}")
+
+    # ── Prompt Pack teaser (free sample) ──
+    if prompt_pack and prompt_pack.get("teaser"):
+        teaser = prompt_pack["teaser"]
+        total_count = prompt_pack.get("count", 0)
+        upsell_count = len(prompt_pack.get("full_pack", []))
+        lines.append("")
+        lines.append("─" * 40)
+        lines.append("")
+        lines.append("🧠 AI Prompt — Paste this into Claude, ChatGPT, or Gemini:")
+        lines.append("")
+        lines.extend(teaser["prompt_md"].split("\n"))
+        if upsell_count > 0:
+            lines.append("")
+            lines.append(f"▶️  Get AI prompts for the other {upsell_count} findings on your page — $7")
+            lines.append(f"   Each prompt is pre-loaded with your landing page data.")
+            lines.append(f"   {PROMPT_PACK_CHECKOUT}")
+            lines.append("")
+        lines.append("─" * 40)
 
     # ── Contradiction block (CAIOS M5: highest-value finding, named explicitly) ──
     if contradictions:
@@ -1168,7 +1198,21 @@ def main():
 
     page = scrape_page(args.url)
     audit = score_audit(page)
-    email_body = compose_audit_email(page, audit, args.email, trigger_context=args.trigger_context)
+
+    # Build AI prompt pack from audit findings
+    prompt_pack = None
+    if HAS_PROMPT_PACK:
+        try:
+            prompt_pack = build_prompt_pack(
+                audit, page,
+                email=args.email,
+                stated_visitor=args.stated_visitor if hasattr(args, 'stated_visitor') else None,
+                stated_goal=args.stated_goal if hasattr(args, 'stated_goal') else None,
+            )
+        except Exception as e:
+            print(f"[WARN] prompt pack generation failed: {e}")
+
+    email_body = compose_audit_email(page, audit, args.email, trigger_context=args.trigger_context, prompt_pack=prompt_pack)
     score = audit["overall"]
     attribution = {
         "source_type": "growth_trigger_queue" if args.source_url or args.lead_id else None,

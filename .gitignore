@@ -164,6 +164,10 @@ yt_channel/logs/
 yt_channel/videos/*.mp4
 yt_channel/thumbnails/*.png
 
+# ── Generated prompt packs (per-audit, regenerated on delivery) ──
+audit_pipeline/prompts/packs/*.json
+audit_pipeline/prompts/packs/.gitkeep
+
 # ── Stale / deprecated artifacts ────────────────
 .deprecated/
 3

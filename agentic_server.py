@@ -369,7 +369,27 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
         # Health endpoint — also proxy to webhook server
         if path == "/api/health" or path == "/health":
             return self._proxy_to(9000)
-        
+
+        # AI Prompt Pack — serve purchased packs by token
+        if path.startswith("/prompt-pack/"):
+            token = path.removeprefix("/prompt-pack/").rstrip("/")
+            if token and ".." not in token and "/" not in token:
+                pack_file = os.path.join(DIR, "audit_pipeline", "prompts", "packs", f"{token}.json")
+                if os.path.isfile(pack_file):
+                    import json as _json
+                    pack_data = _json.loads(open(pack_file).read())
+                    prompts_html = ""
+                    for i, p in enumerate(pack_data.get("prompts", [])):
+                        prompts_html += f'<div class="prompt-block" style="background:#1f2937;border-radius:8px;padding:20px;margin-bottom:20px;border-left:4px solid #10b981;"><pre style="white-space:pre-wrap;font-family:monospace;font-size:14px;line-height:1.6;color:#e5e7eb;margin:0;">{html.escape(p)}</pre></div>'
+                    page = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Your AI Prompt Pack — Nebula Components</title><style>body{{background:#0f172a;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:720px;margin:0 auto;padding:20px}}h1{{color:#f8fafc;font-size:24px}}h2{{color:#10b981;font-size:18px;margin-top:30px}}.meta{{color:#94a3b8;font-size:14px;margin-bottom:30px}}.footer{{border-top:1px solid #334155;margin-top:40px;padding-top:20px;font-size:13px;color:#64748b}}</style></head><body><h1>🧠 Your AI Prompt Pack</h1><div class="meta">Audit grade: {html.escape(str(pack_data.get("grade","")))} · {len(pack_data.get("prompts",[]))} prompts · Paste any prompt into Claude, ChatGPT, or Gemini</div>{prompts_html}<div class="footer"><p>From Nebula Components — <a href="https://nebulacomponents.shop" style="color:#10b981">nebulacomponents.shop</a></p><p>Each prompt is pre-loaded with your specific landing page data. No editing needed — just copy and paste.</p></div></body></html>"""
+                    self.send_response(200)
+                    self.send_header("Content-Type", "text/html; charset=utf-8")
+                    self.end_headers()
+                    self._safe_write(page.encode())
+                    return
+            self._send_json(404, {"error": "Prompt pack not found"})
+            return
+
         # Default: serve static files
         return super().do_GET()
 
