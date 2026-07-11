@@ -86,6 +86,28 @@ def role_match(subtitle: str) -> bool:
     low = subtitle.lower()
     return any(role in low for role in ROLE_TRIGGERS)
 
+def extract_domain_from_url(url: str) -> str | None:
+    """Extract root domain from URL."""
+    try:
+        from urllib.parse import urlparse
+        parsed = urlparse(url if "://" in url else f"https://{url}")
+        host = parsed.netloc or parsed.path
+        # Strip www.
+        if host.startswith("www."):
+            host = host[4:]
+        return host.lower() if host and "." in host else None
+    except Exception:
+        return None
+
+def try_email_from_website(website_url: str) -> str | None:
+    """Try to find email on website homepage (best-effort, no HEAD request)."""
+    # For now, construct common patterns: contact@domain, hello@domain
+    domain = extract_domain_from_url(website_url)
+    if not domain:
+        return None
+    # Common patterns (not verified)
+    return f"contact@{domain}"
+
 def compute_seed_score(entry: dict[str, Any]) -> int:
     """Compute initial TrustOS score 1–5."""
     score = 1  # Base discovery
@@ -243,6 +265,63 @@ def main() -> int:
             continue
         if profile_url and profile_url in existing_urls:
             continue
+        with LEADS_PATH.open("a") as f:
+            f.write(json.dumps(lead) + "\n")
+        leads_added += 1
+        existing_urls.add(profile_url)
+
+    # Process enrichment data (profile_enrich outputs)
+    enrich_path = APIFY_RAW / "profile_enrich_latest.json"
+    for profile in load_apify_json(enrich_path):
+        # Extract email from enrichment
+        emails = profile.get("emails", [])
+        email = emails[0] if emails else None
+        
+        # Try website-based email fallback
+        websites = profile.get("websites", [])
+        website = websites[0] if websites else None
+        if not email and website:
+            email = try_email_from_website(website)
+        
+        if not email:
+            continue
+        
+        # Create/update lead with email
+        name = normalize_name(profile.get("firstName", "") + " " + profile.get("lastName", ""))
+        profile_url = profile.get("linkedinUrl", "")
+        
+        if not profile_url or profile_url in contacted or profile_url in existing_urls:
+            continue
+        
+        subtitle = profile.get("headline", "")
+        triggers = detect_triggers(subtitle)
+        
+        score = compute_seed_score({
+            "url_profile": profile_url,
+            "subtitle": subtitle,
+        })
+
+        lead = {
+            "avoid": "human contact, calendar, call, manual gating",
+            "cta_style": "self_serve_audit",
+            "discovered_at": datetime.now(timezone.utc).isoformat(),
+            "email": email,
+            "email_copy": None,
+            "intent": "cold",
+            "lead_with": "LinkedIn profile enrichment",
+            "name": name,
+            "profile_url": profile_url,
+            "query": "apify_profile_enrichment",
+            "score": score,
+            "segment": build_segment(score),
+            "snippet": subtitle[:300],
+            "source": "apify_profile_enrich",
+            "source_url": profile_url,
+            "title": subtitle[:150],
+            "triggers": triggers,
+            "website": website,
+        }
+        
         with LEADS_PATH.open("a") as f:
             f.write(json.dumps(lead) + "\n")
         leads_added += 1
