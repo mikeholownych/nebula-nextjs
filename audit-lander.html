@@ -123,6 +123,14 @@
         <option value="signups">Signups</option>
         <option value="bookings">Bookings</option>
       </select>
+      <label for="adSpend">Monthly ad spend (helps us prioritize fixes)</label>
+      <select id="adSpend" name="adSpend">
+        <option value="">Select if applicable</option>
+        <option value="0-500">$0 - $500/mo</option>
+        <option value="500-2k">$500 - $2k/mo</option>
+        <option value="2k-10k">$2k - $10k/mo</option>
+        <option value="10k+">$10k+/mo</option>
+      </select>
       <p class="micro" style="margin-top:8px;">Your URL and email are used to generate, email, and log the audit. No resale. No spam. <a href="#data-privacy" style="color:#2563eb;">Full data policy ↓</a></p>
       <button type="submit">Run my free teardown →</button>
       <div class="guarantee-badge">🏷️ Full refund if the $97 fix doesn't improve your conversion rate</div>
@@ -244,9 +252,13 @@ form.addEventListener('submit', async (e) => {
     });
     const data = await resp.json();
     if (data.error) {
-      result.innerHTML = '<p style="color:#dc2626;">' + escapeHtml(data.error) + '</p><p class="micro">Email ops@launchcrate.io with your URL and we\'ll route it through the audit queue.</p>';
+      result.innerHTML = '<p style="color:#dc2626;">' + escapeHtml(data.error) + '</p><p class="micro">Email ops@launchcrate.io with your URL and we\\'ll route it through the audit queue.</p>';
     } else {
-      result.innerHTML = '<p style="color:#059669;font-weight:700;">✓ Audit running. Check <strong>' + escapeHtml(email) + '</strong> in ~60 seconds.</p><p class="micro">Your prioritized fix list is on its way. <a href="/audit.html" style="color:#2563eb;">See a sample audit while you wait →</a></p>';
+      result.innerHTML = '<p style="color:#059669;font-weight:700;">✓ Audit running. Check <strong>' + escapeHtml(email) + '</strong> in ~60 seconds.</p><p class="micro">Your prioritized fix list is on its way.</p>';
+      // Redirect to thank-you page after 2 seconds
+      if (data.redirect) {
+        setTimeout(() => { window.location.href = data.redirect; }, 2000);
+      }
     }
   } catch (err) {
     result.innerHTML = '<p style="color:#dc2626;">Network error. Email ops@launchcrate.io with your URL and we\'ll run it manually.</p>';

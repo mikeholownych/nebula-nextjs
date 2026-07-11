@@ -1423,6 +1423,9 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
             except Exception as _ops_err:
                 pass  # never block audit result for ops notify failure
 
+        # Return result with redirect URL for thank-you page
+        if email:
+            result["redirect"] = "/thank-you.html"
         return self._send_json(200, result)
 
     def log_message(self, format, *args):

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Your Inbox — Nebula Components</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: #0f172a;
+            color: #e2e8f0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 720px;
+            text-align: center;
+        }
+        .icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+        }
+        h1 {
+            color: #f8fafc;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        h2 {
+            color: #10b981;
+            font-size: 22px;
+            font-weight: 600;
+            margin: 32px 0 16px;
+        }
+        .subtitle {
+            color: #94a3b8;
+            font-size: 18px;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+        .highlight {
+            color: #10b981;
+            font-weight: 600;
+        }
+        .card {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 32px;
+            margin: 24px 0;
+            text-align: left;
+        }
+        .card h3 {
+            color: #f8fafc;
+            font-size: 18px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .card h3::before {
+            content: '✓';
+            color: #10b981;
+            font-size: 20px;
+        }
+        .card p {
+            color: #cbd5e1;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .card li {
+            color: #cbd5e1;
+            font-size: 15px;
+            line-height: 1.8;
+            padding-left: 24px;
+            position: relative;
+        }
+        .card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+        }
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #0891b2 100%);
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 18px 36px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 24px 0;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+        }
+        .secondary-cta {
+            display: inline-block;
+            color: #94a3b8;
+            font-size: 16px;
+            padding: 12px 24px;
+            text-decoration: none;
+            margin-left: 16px;
+        }
+        .secondary-cta:hover {
+            color: #e2e8f0;
+        }
+        .divider {
+            height: 1px;
+            background: #334155;
+            margin: 40px 0;
+        }
+        .footer {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .footer a {
+            color: #10b981;
+            text-decoration: none;
+        }
+        .guarantee {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(8, 145, 178, 0.1) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 24px 0;
+            text-align: center;
+        }
+        .guarantee p {
+            color: #10b981;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 28px; }
+            .subtitle { font-size: 16px; }
+            .card { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">📬</div>
+        
+        <h1>Check Your Inbox</h1>
+        <p class="subtitle">
+            Your free landing page audit report is on its way.<br>
+            You'll see <span class="highlight">exactly why your page isn't converting</span> — and how to fix it.
+        </p>
+
+        <div class="card">
+            <h3>What's in your audit report</h3>
+            <ul>
+                <li>Conversion-killing friction points (CTA clarity, message match, trust signals)</li>
+                <li>Specific fixes you can implement in 90 minutes</li>
+                <li>Comparison vs high-converting pages in your niche</li>
+                <li>AI prompts to accelerate implementation (1 free, $7 for full pack)</li>
+            </ul>
+        </div>
+
+        <div class="guarantee">
+            <p>⚡ If you want us to implement the fixes for you → $97 flat. No recurring. No catch.</p>
+        </div>
+
+        <h2>While you wait...</h2>
+        
+        <p style="color: #cbd5e1; font-size: 16px; margin-bottom: 24px; line-height: 1.6;">
+            Want to skip the DIY and have us implement everything?
+        </p>
+
+        <a href="https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02" class="cta-button">
+            Get the Fix Pack — $97
+        </a>
+        
+        <br>
+        <a href="https://nebulacomponents.shop" class="secondary-cta">
+            ← Back to home
+        </a>
+
+        <div class="divider"></div>
+
+        <div class="footer">
+            <p>
+                <strong>Nebula Components</strong> — We fix landing pages for founders burning cash on ads.
+            </p>
+            <p style="margin-top: 12px;">
+                Questions? Email <a href="mailto:hello@nebulacomponents.shop">hello@nebulacomponents.shop</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
