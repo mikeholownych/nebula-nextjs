@@ -57,11 +57,14 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-# ── Operational logs (keep business ledgers) ────
+# ── Operational logs (business ledgers are JSONL, not logs) ────
 *.log
-!ledgers/*.log
+ledgers/*.log
 
 # ── Runtime state / data files ──────────────────
+ledgers/hot_lead_watcher.log
+ledgers/nurture_log.jsonl
+ledgers/testimonials.jsonl
 trigger_leads.jsonl
 signal_queue.jsonl
 signal_seen.json
@@ -151,6 +154,13 @@ node_modules/
 
 # ── Generated web assets ─────────────────────────
 sitemap.xml
+public/case-studies/*.html
+
+# ── Generated media / local auth ─────────────────
+yt_channel/creds/
+yt_channel/logs/
+yt_channel/videos/*.mp4
+yt_channel/thumbnails/*.png
 
 # ── Mystery artifacts ────────────────────────────
 3
