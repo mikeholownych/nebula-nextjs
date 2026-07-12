@@ -440,14 +440,25 @@ def enrich_reddit_json(lead: dict) -> dict:
     url = lead.get("source_url", "")
     if "reddit.com" not in url or "/comments/" not in url:
         return lead
-    json_url = url.rstrip("/") + ".json?limit=1"
+    # Reddit JSON API now requires OAuth (HTTP 403). Fall back to old.reddit.com HTML.
+    post_id_match = re.search(r'/comments/([a-z0-9]+)', url)
+    if not post_id_match:
+        return lead
+    post_id = post_id_match.group(1)
+    html_url = f"https://old.reddit.com/r/all/comments/{post_id}/"
     try:
-        raw = fetch_text(json_url, timeout=10)
-        data = json.loads(raw)
-        post = data[0]["data"]["children"][0]["data"]
-        lead["author"] = post.get("author")
-        body = post.get("selftext") or ""
-        lead["body"] = body[:1000]
+        raw = fetch_text(html_url, timeout=10)
+        # Extract post body from the HTML
+        body_match = re.search(r'<div class="md"[^>]*><p>(.*?)</p>', raw, re.DOTALL)
+        body = ""
+        if body_match:
+            body = re.sub(r'<[^>]+>', ' ', body_match.group(1))
+            body = html.unescape(body)[:1000]
+        # Extract author
+        author_match = re.search(r'class="author"[^>]*>([^<]+)<', raw)
+        if author_match:
+            lead["author"] = author_match.group(1).strip()
+        lead["body"] = body
         # 1. Email directly in post body
         emails = extract_emails(body)
         if emails:

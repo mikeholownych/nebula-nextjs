@@ -252,21 +252,40 @@ def extract_reddit_username(post_url: str, username_field: str = '') -> str:
 
 
 def get_reddit_user_website(username: str) -> str | None:
-    """Fetch reddit user about.json and extract any linked website from bio."""
+    """Fetch old.reddit.com user's personal subreddit page and extract any linked website from bio.
+
+    The JSON API (about.json) now requires OAuth (HTTP 403), so we fall back to
+    scraping the HTML of old.reddit.com which still works without authentication.
+    The user's public description appears as the first markdown-rendered div (.md)
+    on their personal subreddit page (/r/u_{username}/).
+    """
     if not username or username.startswith('['):
         return None
     try:
         r = requests.get(
-            f'https://www.reddit.com/user/{username}/about.json',
+            f'https://old.reddit.com/r/u_{username}/',
             headers={'User-Agent': 'Mozilla/5.0 Nebula/1.0'},
             timeout=10
         )
         if not r.ok:
             return None
-        data = r.json().get('data', {})
-        # Description field in personal subreddit sidebar
-        desc = data.get('subreddit', {}).get('public_description', '')
-        urls = re.findall(r'https?://[^\s\)\]"\'<>,]+', desc)
+
+        # Find all markdown-rendered divs — the first one is the subreddit's
+        # public_description (user bio). Subsequent ones are post/comment bodies.
+        md_divs = re.findall(r'<div class="md">(.*?)</div>', r.text, re.DOTALL)
+        if not md_divs:
+            return None
+
+        desc_html = md_divs[0]
+
+        # Extract URLs from <a href="..."> tags (preserves link targets)
+        urls = re.findall(r'<a href="(https?://[^"]+)"', desc_html)
+        # Also find bare URLs in rendered text
+        text = re.sub(r'<[^>]+>', ' ', desc_html)
+        from html import unescape as html_unescape
+        text = html_unescape(text)
+        urls += re.findall(r'https?://[^\s\)\]"\'<>,]+', text)
+
         for u in urls:
             domain = urlparse(u).netloc.lower().replace('www.', '')
             if domain and 'reddit' not in domain and 'redd.it' not in domain:

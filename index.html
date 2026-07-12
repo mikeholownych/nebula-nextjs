@@ -27,6 +27,7 @@
   <meta name="twitter:title" content="Free Landing Page Audit — Find Your Conversion Leaks | Nebula" />
   <meta name="twitter:description" content="Paste your URL. Scored teardown in 60 seconds. Clarity, CTA, trust, offer. Free. $147 Fix Pack for implementation." />
   <meta name="twitter:image" content="https://nebulacomponents.shop/og-card.png" />
+  <link rel="icon" href="/og-card.png" type="image/png" />
   <!-- RB2B Visitor Identification - DISABLED: cdn.rb2b.com DNS no longer resolves -->
   <!-- Get new script from https://app.rb2b.com/script and replace this comment -->
   <script type="application/ld+json">
@@ -1921,10 +1922,13 @@
     // 2. Sticky bar — show after 400px scroll, hide at top
     var stickyBar = document.getElementById('sticky-bar');
     var sbarDismissed = false;
-    document.querySelector('#sticky-bar .sbar-dismiss').addEventListener('click', function() {
-      stickyBar.classList.remove('visible');
-      sbarDismissed = true;
-    });
+    var sbarDismissBtn = document.querySelector('#sticky-bar .sbar-dismiss');
+    if (sbarDismissBtn) {
+      sbarDismissBtn.addEventListener('click', function() {
+        stickyBar.classList.remove('visible');
+        sbarDismissed = true;
+      });
+    }
     function updateStickyBar() {
       if (sbarDismissed) return;
       if (window.scrollY > 400) stickyBar.classList.add('visible');
@@ -1937,11 +1941,14 @@
     var nudgeFired = false;
     var nudgeDismissed = sessionStorage.getItem('nudge_dismissed');
     if (!nudgeDismissed) {
-      document.querySelector('#slide-nudge .nudge-close').addEventListener('click', function() {
-        nudge.classList.remove('show');
-        sessionStorage.setItem('nudge_dismissed', '1');
-        nudgeDismissed = true;
-      });
+      var nudgeCloseBtn = document.querySelector('#slide-nudge .nudge-close');
+      if (nudgeCloseBtn) {
+        nudgeCloseBtn.addEventListener('click', function() {
+          nudge.classList.remove('show');
+          sessionStorage.setItem('nudge_dismissed', '1');
+          nudgeDismissed = true;
+        });
+      }
       var pricingEl = document.getElementById('pricing');
       if (pricingEl) {
         var nudgeObs = new IntersectionObserver(function(entries) {
