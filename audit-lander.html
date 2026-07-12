@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) — loaded after consent -->
+<script>
+  // Disable GA until consent is granted
+  window['ga-disable-G-KJ9S3450LH'] = true;
+  window.GA_MEASUREMENT_ID = 'G-KJ9S3450LH';
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KJ9S3450LH"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-KJ9S3450LH');
+  gtag('config', 'G-KJ9S3450LH', { 'anonymize_ip': true, 'storage': 'none' });
 </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -146,7 +151,7 @@
         <option value="2k-10k">$2k - $10k/mo</option>
         <option value="10k+">$10k+/mo</option>
       </select>
-      <p class="micro" style="margin-top:8px;">Your URL and email are used to generate, email, and log the audit. No resale. No spam. <a href="#data-privacy" style="color:#2563eb;">Full data policy ↓</a></p>
+      <p class="micro" style="margin-top:8px;">Your URL and email are used to generate, email, and log the audit. No resale. No spam. <a href="/privacy-policy" style="color:var(--accent);">Privacy Policy</a></p>
       <button type="submit">Run my free teardown →</button>
       <div class="guarantee-badge">🏷️ Full refund if the $97 fix doesn't improve your conversion rate</div>
     </form>
@@ -288,5 +293,8 @@ function escapeHtml(text) {
   return d.innerHTML;
 }
 </script>
+
+  <!-- Cookie Consent Banner (GDPR/CCPA Compliant) -->
+  <script src="/cookie-consent.js" defer></script>
 </body>
 </html>
