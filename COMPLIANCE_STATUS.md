@@ -96,13 +96,20 @@
 - ✅ Focus states visible
 
 **Visual Design:**
-- ✅ Sufficient color contrast (WCAG AA)
+- ✅ **Color contrast WCAG AA compliant** (verified 2026-07-12)
+  - Primary text: 18.73:1 (AAA)
+  - Secondary text: 12.60:1 (AAA)
+  - Muted text: 7.85:1 (AAA)
+  - White on accent: 5.38:1 (AA)
+  - White on accent hover: 7.04:1 (AAA)
+  - Disabled text: 4.92:1 (AA)
 - ✅ Text resizable
 - ✅ Responsive to 200% zoom
 
 **Motion:**
 - ✅ `prefers-reduced-motion` respected
 - ✅ Animations have `@media (prefers-reduced-motion: reduce)`
+- ✅ GSAP animations disable for reduced motion preference
 
 **Keyboard Navigation:**
 - ✅ Tab order logical
@@ -122,6 +129,30 @@
 | 3.1.1 | Language of page | ✅ |
 | 4.1.2 | Name, role, value | ✅ |
 | 2.3.3 | Animation from interactions | ✅ |
+
+### Contrast Ratio Verification (2026-07-12)
+
+**Tools:** `/contrast-check.js` — automated WCAG checker
+
+**Results:**
+- 9/10 tests pass WCAG AA (4.5:1 for normal text)
+- 6/10 tests pass WCAG AAA (7:1 for normal text)
+- 1 test acceptable: Accent color as text on dark (3.71:1) — use only for large text/icons
+
+**Color Palette (WCAG compliant):**
+```css
+--text-primary: #f7f8f8;    /* 18.73:1 on dark - AAA */
+--text-secondary: #c8ced8;  /* 12.60:1 on dark - AAA */
+--text-muted: #9ca3af;      /* 7.85:1 on dark - AAA */
+--text-disabled: #787f87;   /* 4.92:1 on dark - AA */
+--accent: #007a52;          /* 5.38:1 for white text - AA */
+--accent-hover: #006644;    /* 7.04:1 for white text - AAA */
+```
+
+**Notes:**
+- All text on dark backgrounds: ✅ AA compliant
+- Button text on accent: ✅ AA compliant
+- Accent color as text: ⚠️ Use only for large text (3:1 minimum) or decorative elements
 
 ---
 
