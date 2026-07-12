@@ -1,32 +1,16 @@
 {
-  "timestamp": "2026-07-11T13:22:26.011550+00:00",
+  "timestamp": "2026-07-12T02:01:47.443054+00:00",
   "summary": {
-    "total_contacted": 119,
+    "total_contacted": 120,
     "scanned": 5,
     "sites_down": 0,
-    "sites_changed": 3
+    "sites_changed": 1
   },
   "changes": [
     {
-      "email": "hello@theogeo.ai",
-      "url": "https://theogeo.ai",
-      "current_title": "theogeo.ai \u2014 AI Brand Visibility &amp; Intelligence Platform",
-      "changes": {
-        "content_changed": true
-      }
-    },
-    {
-      "email": "lakisha@goldenweeks.co",
-      "url": "https://goldenweeks.co",
-      "current_title": "Accountability Retreat in Zanzibar for Founders, Makers & Nomads | goldenweeks Retreats",
-      "changes": {
-        "content_changed": true
-      }
-    },
-    {
-      "email": "deepanshu11madan@gmail.com",
-      "url": "https://naxely.com",
-      "current_title": "Naxely \u2014 AI-Powered PDF Report Generator",
+      "email": "alloceraintelligence@gmail.com",
+      "url": "https://alloceraintelligence.com",
+      "current_title": "True Cost Per Lead Analytics \u2014 CDAI Engine | Allocera Intelligence",
       "changes": {
         "content_changed": true
       }

@@ -25,6 +25,13 @@ RAMP_REPORT = BASE / 'ramp_pipeline_report.json'
 RAMP_COOLDOWN_MINUTES = 120  # don't re-trigger ramp if last run had 0 sends within this window
 STUCK_LEAD_FREEZE_FILE = BASE / 'sre_stuck_freezes.json'
 
+# Test/internal emails to never auto-escalate
+TEST_EMAILS_LC = frozenset([
+    'mike.holownych@aisyndicate.io', 'mike.holownych@gmail.com',
+    'test@example.com', 'restart-test@example.com', 'stripe@example.com',
+    'founder@testco.com', 'nebulashop@agentmail.to',
+])
+
 # ── Telegram alert via hermes ──────────────────────────────────────────────
 def telegram_alert(msg: str, level: str = 'warn'):
     """Only fires on escalation or revenue events. Not on every warning."""
@@ -202,6 +209,13 @@ def fix_stuck_leads():
         else:
             freezes[email] = entries
 
+    sys.path.insert(0, str(BASE))
+    try:
+        from lead_store import LeadStore
+        db = LeadStore()
+    except ImportError:
+        return 0
+
     health_data = {}
     if HEALTH_FILE.exists():
         try:
@@ -210,15 +224,38 @@ def fix_stuck_leads():
             pass
 
     stuck = health_data.get('stuck_leads', [])
-    if not stuck:
-        return 0
+    now_utc = NOW
 
-    sys.path.insert(0, str(BASE))
+    # ── Direct LeadStore query for pitch_sent >168h ──────────────────────
+    # The health check's stuck_leads array NEVER includes pitch_sent (it's
+    # excluded as an async stage in LeadStore.get_stuck_leads). We query
+    # LeadStore directly here so the SRE's 168h escalation actually fires.
+    PITCH_SENT_STALE_HOURS = 168
     try:
-        from lead_store import LeadStore
-        db = LeadStore()
-    except ImportError:
-        return 0
+        for lead in db.get_leads_by_stage('pitch_sent'):
+            email = lead.get('email', '')
+            if not email:
+                continue
+            if email.lower() in TEST_EMAILS_LC:
+                continue
+            # Determine when pitch was sent
+            ts_str = lead.get('pitch_sent_at') or lead.get('updated_at', '')
+            if not ts_str:
+                continue
+            try:
+                t = datetime.fromisoformat(ts_str.rstrip('Z').replace('Z', '+00:00')).replace(tzinfo=timezone.utc)
+                hours = (now_utc - t).total_seconds() / 3600
+                if hours > PITCH_SENT_STALE_HOURS:
+                    stuck.append({
+                        'email': email,
+                        'stage': 'pitch_sent',
+                        'hours_stuck': round(hours, 1),
+                        'url': lead.get('url', ''),
+                    })
+            except Exception:
+                continue
+    except Exception as e:
+        log(f'[pitch_sent_stale_check] Error querying LeadStore: {e}')
 
     STAGE_ACTIONS = {
         # leads stuck in audit_delivered >4h → re-queue for pitch
@@ -234,6 +271,9 @@ def fix_stuck_leads():
             if hours > 168 else None
         ),
     }
+
+    if not stuck:
+        return 0
 
     actioned = 0
     for s in stuck:

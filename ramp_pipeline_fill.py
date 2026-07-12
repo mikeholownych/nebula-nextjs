@@ -529,7 +529,9 @@ def scrape_icp_via_google(token: str = None) -> list:
                     body = post_data.get('selftext', '')
                     is_self = post_data.get('is_self', True)
                     # Extract URLs from body (text posts: URL embedded in selftext)
-                    for u in re.findall(r'https?://[^\s\)\]"\'<>,]+', body):
+                    # Case-insensitive: Reddit JSON sometimes returns uppercase HTTPS://
+                    body_lower = body.lower()
+                    for u in re.findall(r'https?://[^\s\)\]"\'<>,]+', body_lower):
                         domain = urlparse(u).netloc.lower().replace('www.', '')
                         if domain and 'reddit' not in domain and 'redd.it' not in domain and 'preview.' not in domain:
                             site_hint = u.rstrip('/')
@@ -558,9 +560,10 @@ def scrape_icp_via_google(token: str = None) -> list:
                             expando = thing.select_one('div.expando')
                             if expando:
                                 body = expando.get_text(' ', strip=True)
+                            # Extract site URLs from <a href> tags (case-insensitive: Reddit may use HTTPS://)
                             for a in thing.select('a[href]'):
                                 u = a.get('href', '')
-                                if not u.startswith('http'):
+                                if not u.lower().startswith(('http://', 'https://')):
                                     continue
                                 domain = urlparse(u).netloc.lower().replace('www.', '')
                                 path = urlparse(u).path.lower()
@@ -569,6 +572,14 @@ def scrape_icp_via_google(token: str = None) -> list:
                                 if domain and not any(domain == bd or domain.endswith('.' + bd) for bd in BLOCKED_DOMAINS):
                                     site_hint = u.rstrip('/')
                                     break
+                            # Also scan plain text in body for URLs (catches URLs not wrapped in <a> tags)
+                            if not site_hint and body:
+                                body_text = body.lower()
+                                for u in re.findall(r'https?://[^\s\)\]"\'<>,]+', body_text):
+                                    domain = urlparse(u).netloc.lower().replace('www.', '')
+                                    if domain and 'reddit' not in domain and 'redd.it' not in domain:
+                                        site_hint = u.rstrip('/')
+                                        break
                 except Exception:
                     pass
 
@@ -715,7 +726,8 @@ MAX_RETRIES = 3
 
 def normalize_site(u):
     if not u: return None
-    if not u.startswith('http'): u='https://'+u
+    u = u.lower().rstrip('/')
+    if not u.startswith(('http://', 'https://')): u = 'https://' + u
     # Filter out non-landing-page URLs (app stores, social platforms, news, etc.)
     domain = urlparse(u).netloc.lower().replace('www.', '')
     if not domain:

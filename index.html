@@ -2235,5 +2235,155 @@ document.addEventListener('keydown', function(e){
 
   <!-- Cookie Consent Banner (GDPR/CCPA Compliant) -->
   <script src="/cookie-consent.js" defer></script>
+
+  <!-- GSAP + ScrollTrigger for premium animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" defer></script>
+  <script>
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ══════════════════════════════════════════════════════════
+    // HERO ENTRANCE ANIMATION
+    // ══════════════════════════════════════════════════════════
+    
+    // Animate hero on load
+    gsap.from("header .skeptic-disarm", {
+      opacity: 0,
+      y: -20,
+      duration: 0.6,
+      ease: "power2.out"
+    });
+
+    gsap.from("header h1", {
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      delay: 0.2,
+      ease: "power2.out"
+    });
+
+    gsap.from("header .sub", {
+      opacity: 0,
+      y: 20,
+      duration: 0.8,
+      delay: 0.4,
+      ease: "power2.out"
+    });
+
+    gsap.from("header .trust-row, header .btn", {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      delay: 0.6,
+      stagger: 0.1,
+      ease: "power2.out"
+    });
+
+    // ══════════════════════════════════════════════════════════
+    // SCROLL-TRIGGERED ANIMATIONS
+    // ══════════════════════════════════════════════════════════
+
+    // Cards fade up on scroll
+    gsap.utils.toArray(".card, section > h2, section > p").forEach(elem => {
+      gsap.from(elem, {
+        scrollTrigger: {
+          trigger: elem,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        },
+        opacity: 0,
+        y: 60,
+        duration: 0.8,
+        ease: "power2.out"
+      });
+    });
+
+    // How-it-works steps stagger
+    gsap.from(".how-step", {
+      scrollTrigger: {
+        trigger: ".how-step",
+        start: "top 80%"
+      },
+      opacity: 0,
+      y: 40,
+      duration: 0.6,
+      stagger: 0.15,
+      ease: "power2.out"
+    });
+
+    // ══════════════════════════════════════════════════════════
+    // COUNTER ANIMATION
+    // ══════════════════════════════════════════════════════════
+
+    // Animate stat numbers
+    gsap.utils.toArray(".stat-num[data-target]").forEach(num => {
+      const target = parseInt(num.getAttribute("data-target"));
+      
+      gsap.from(num, {
+        scrollTrigger: {
+          trigger: num,
+          start: "top 85%"
+        },
+        textContent: 0,
+        duration: 2,
+        ease: "power2.out",
+        snap: { textContent: 1 },
+        onUpdate: function() {
+          num.textContent = Math.floor(this.targets()[0].textContent);
+        }
+      });
+    });
+
+    // ══════════════════════════════════════════════════════════
+    // BUTTON MICRO-INTERACTIONS
+    // ══════════════════════════════════════════════════════════
+
+    // Hover effects for primary buttons
+    gsap.utils.toArray(".btn-primary, .btn").forEach(btn => {
+      btn.addEventListener("mouseenter", () => {
+        gsap.to(btn, {
+          scale: 1.05,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+
+      btn.addEventListener("mouseleave", () => {
+        gsap.to(btn, {
+          scale: 1,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+    });
+
+    // ══════════════════════════════════════════════════════════
+    // PRICING CARD ANIMATION
+    // ══════════════════════════════════════════════════════════
+
+    // Pricing cards stagger in
+    gsap.from("#pricing .card", {
+      scrollTrigger: {
+        trigger: "#pricing",
+        start: "top 70%"
+      },
+      opacity: 0,
+      y: 80,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: "power2.out"
+    });
+
+    // ══════════════════════════════════════════════════════════
+    // REDUCED MOTION SUPPORT
+    // ══════════════════════════════════════════════════════════
+
+    // Respect user preference
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.globalTimeline.clear();
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    }
+  </script>
 </body>
 </html>

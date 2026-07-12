@@ -164,8 +164,8 @@ def detect_stuck_leads(stages):
         sys.path.insert(0, str(BASE))
         from lead_store import LeadStore
         db = LeadStore()
-        # audit_delivered threshold = 12h (allows time for hot-lead pitch cycle)
-        for lead in db.get_stuck_leads(max_hours=12):
+        # audit_delivered threshold = 4h (aligns with SRE fix_stuck_leads threshold)
+        for lead in db.get_stuck_leads(max_hours=4):
             if lead.get("stage") in ("paid", "dead", "bounced"):
                 continue
             email = lead.get("email", "").lower()
