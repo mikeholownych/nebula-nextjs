@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) — loaded after consent -->
+<script>
+  // Disable GA until consent is granted
+  window['ga-disable-G-KJ9S3450LH'] = true;
+  window.GA_MEASUREMENT_ID = 'G-KJ9S3450LH';
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KJ9S3450LH"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-KJ9S3450LH');
+  gtag('config', 'G-KJ9S3450LH', { 'anonymize_ip': true, 'storage': 'none' });
 </script>
   <title>Free Landing Page Audit — Score Your Site in 60 Seconds | Nebula</title>
   <meta name="description" content="Paste your URL. Get a scored landing page audit in 60 seconds — clarity, CTA friction, trust gap, offer specificity. Free. No sales call. Fix leaks that kill conversions.">
@@ -112,3 +117,8 @@
     ]
   }
   </script>
+
+  <!-- Cookie Consent Banner (GDPR/CCPA Compliant) -->
+  <script src="/cookie-consent.js" defer></script>
+</body>
+</html>
