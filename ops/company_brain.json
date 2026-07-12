@@ -17,7 +17,7 @@
     "trigger_warm_replies": 0,
     "warm_leads": 1
   },
-  "generated_at": "2026-07-12T07:22:44Z",
+  "generated_at": "2026-07-12T08:54:06Z",
   "kill_criteria": {
     "audit": "3 audits delivered and 0 payments",
     "checkout": "buyer cannot pay self-serve",

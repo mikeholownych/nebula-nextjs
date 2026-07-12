@@ -908,3 +908,15 @@
 {"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "40 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-12T07:22:44Z"}
 {"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["hello@aijournal.store", "office@facetwoface.at", "support@godlike.host"], "message": "3 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-12T07:22:44Z"}
 {"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-12T07:22:44Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-12T07:52:52Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "40 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-12T07:52:52Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["hello@aijournal.store", "office@facetwoface.at", "support@godlike.host"], "message": "3 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-12T07:52:52Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-12T07:52:52Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-12T08:23:12Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "40 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-12T08:23:12Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["hello@aijournal.store", "office@facetwoface.at", "support@godlike.host"], "message": "3 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-12T08:23:12Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-12T08:23:12Z"}
+{"code": "OUTREACH_KILL_CRITERIA_MET", "message": "66 trigger sends produced 0 warm replies; change targeting or offer angle.", "severity": "HIGH", "timestamp": "2026-07-12T08:54:06Z"}
+{"code": "AUDIT_TO_PAYMENT_KILL_CRITERIA_MET", "message": "40 audits delivered and 0 real payments; reframe or reprice implementation offer.", "severity": "HIGH", "timestamp": "2026-07-12T08:54:06Z"}
+{"code": "HOT_LEAD_PITCH_OVERDUE", "emails": ["hello@aijournal.store", "office@facetwoface.at", "support@godlike.host"], "message": "3 hot leads are past pitch_due_at.", "severity": "MEDIUM", "timestamp": "2026-07-12T08:54:06Z"}
+{"code": "ZERO_REVENUE", "message": "Revenue is still $0; prioritize checkout-verifiable paid action.", "severity": "MEDIUM", "timestamp": "2026-07-12T08:54:06Z"}
