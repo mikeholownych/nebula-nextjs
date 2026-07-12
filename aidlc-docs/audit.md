@@ -10,3 +10,4 @@
 - Updated CLAUDE.md from 38-line style guide to AI-DLC process playbook + key facts
 - Initialized `aidlc-docs/` directory structure
 - Competitive intel captured to competitive/awslabs-aidlc.jsonl
+[2026-07-12T00:47:00Z] SRE scan: 3 stuck awaiting_url_or_schedule leads fixed (Zayne→bounced, 2x Obakura→closed). Pipeline healthy. 4 legit audit_delivered leads waiting for Tue send window.

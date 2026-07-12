@@ -1918,7 +1918,7 @@
     // 2. Sticky bar — show after 400px scroll, hide at top
     var stickyBar = document.getElementById('sticky-bar');
     var sbarDismissed = false;
-    var sbarDismissBtn = document.querySelector('#sticky-bar .sbar-dismiss');
+    var sbarDismissBtn = stickyBar ? document.querySelector('#sticky-bar .sbar-dismiss') : null;
     if (sbarDismissBtn) {
       sbarDismissBtn.addEventListener('click', function() {
         stickyBar.classList.remove('visible');
@@ -1926,7 +1926,7 @@
       });
     }
     function updateStickyBar() {
-      if (sbarDismissed) return;
+      if (sbarDismissed || !stickyBar) return;
       if (window.scrollY > 400) stickyBar.classList.add('visible');
       else stickyBar.classList.remove('visible');
     }

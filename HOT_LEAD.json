@@ -33,11 +33,13 @@
     "subject": "re: obakura.com audit \u2014 one thing",
     "thread_id": "f8cbe685-e7b9-41a8-a7c2-08b08b286ccb",
     "preview": "Hi there,\n\nThanks for reaching out!\n\nPlease note this inbox is managed by the <a href=\"https://obakura.com\">Obakura clothing | Comfy clothes, original designs</a> site's support team, and we can only ",
-    "stage": "awaiting_url_or_schedule",
-    "action": "deliver_audit",
-    "status": "awaiting_url_or_schedule",
+    "stage": "closed",
+    "action": "closed",
+    "status": "support_auto_reply",
     "classification": "other",
-    "updated_at": "2026-07-11T14:05:01.776266+00:00"
+    "updated_at": "2026-07-11T14:05:01.776266+00:00",
+    "resolved_at": "2026-07-12T00:46:00Z",
+    "notes": "Auto-reply from Obakura support desk \u2014 not a reply from founder/marketer"
   },
   {
     "timestamp": "2026-07-11T14:00:55Z",
@@ -45,11 +47,15 @@
     "subject": "re: hacktron.ai audit \u2014 one thing worth knowing",
     "thread_id": "b68f71c9-4735-490e-b4a5-9bd3879281d9",
     "preview": "I already replied STOP\n\n*Zayne Zhang* <https://www.linkedin.com/in/zhang-zeyu/>\nCo-Founder & CEO, Hacktron AI <https://hacktron.ai>\nWant to chat? Book a time here <https://cal.com/zaynez/quick-chat?>.",
-    "stage": "awaiting_url_or_schedule",
-    "action": "deliver_audit",
-    "status": "awaiting_url_or_schedule",
+    "stage": "bounced",
+    "action": "closed",
+    "status": "stop_reply",
     "classification": "testimonial",
-    "updated_at": "2026-07-11T14:05:01.776376+00:00"
+    "updated_at": "2026-07-11T14:05:01.776376+00:00",
+    "bounced_at": "2026-07-11T14:05:01.776376+00:00",
+    "bounce_reason": "unsubscribe_stop_request",
+    "resolved_at": "2026-07-12T00:46:00Z",
+    "notes": "Replied STOP \u2014 unsubscribed"
   },
   {
     "timestamp": "2026-07-08T00:30:44Z",
@@ -57,11 +63,13 @@
     "subject": "re: obakura.com \u2014 here's what I found",
     "thread_id": "3f393ea0-13a1-4d6e-8bf8-38175ed5c146",
     "preview": "Hi there,\n\nThanks for reaching out!\n\nPlease note this inbox is managed by the <a href=\"https://obakura.com\">Obakura clothing | Comfy clothes, original designs</a> site's support team, and we can only ",
-    "stage": "awaiting_url_or_schedule",
-    "action": "deliver_audit",
-    "status": "awaiting_url_or_schedule",
+    "stage": "closed",
+    "action": "closed",
+    "status": "support_auto_reply",
     "classification": "other",
-    "updated_at": "2026-07-08T00:35:01.804876+00:00"
+    "updated_at": "2026-07-08T00:35:01.804876+00:00",
+    "resolved_at": "2026-07-12T00:46:00Z",
+    "notes": "Auto-reply from Obakura support desk \u2014 not a reply from founder/marketer"
   },
   {
     "timestamp": "2026-07-06T18:00:21Z",
