@@ -1946,14 +1946,14 @@
         });
       }
       var pricingEl = document.getElementById('pricing');
-      if (pricingEl) {
+      if (pricingEl && nudge) {
         var nudgeObs = new IntersectionObserver(function(entries) {
           entries.forEach(function(e) {
             if (!e.isIntersecting && !nudgeFired && window.scrollY > 200) {
               nudgeFired = true;
-              nudge.classList.add('show');
+              if (nudge) nudge.classList.add('show');
               setTimeout(function() {
-                if (!nudgeDismissed) nudge.classList.remove('show');
+                if (!nudgeDismissed && nudge) nudge.classList.remove('show');
               }, 8000);
               nudgeObs.disconnect();
             }
