@@ -254,3 +254,13 @@
 {"agent": "ceo", "alerts": 4, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-12T01:04:10Z"}
 {"agent": "ceo", "alerts": 4, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-12T01:34:32Z"}
 {"agent": "ceo", "alerts": 4, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-12T02:14:48Z"}
+{"agent": "ceo", "alerts": 4, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-12T02:48:14Z"}
+{"agent": "ceo", "alerts": 4, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-12T03:18:43Z"}
+{"agent": "ceo", "alerts": 4, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-12T03:49:45Z"}
+{"agent": "ceo", "alerts": 4, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-12T04:19:58Z"}
+{"agent": "ceo", "alerts": 4, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-12T04:50:06Z"}
+{"agent": "ceo", "alerts": 4, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-12T05:20:13Z"}
+{"agent": "ceo", "alerts": 4, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-12T05:52:15Z"}
+{"agent": "ceo", "alerts": 4, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-12T06:22:29Z"}
+{"agent": "ceo", "alerts": 4, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-12T06:52:37Z"}
+{"agent": "ceo", "alerts": 4, "bottleneck": "audit_to_payment_conversion", "event_type": "ops_state_synced", "timestamp": "2026-07-12T07:22:44Z"}

@@ -564,9 +564,9 @@
     "score": 6.8,
     "audit_score": 6.8,
     "audit_grade": "B",
-    "stage": "audit_delivered",
-    "status": "pending",
-    "action": "send_97_pitch",
+    "stage": "bounced",
+    "status": "bounced",
+    "action": "closed",
     "thread_id": null,
     "message_id": "<0100019f3751e955-10ff5f47-7152-4f97-8792-ff9ea58766ac-000000@email.amazonses.com>",
     "trigger_context": "Saw your public post: A Revolutionary New Way to Buy and Sell",
@@ -574,7 +574,11 @@
     "lead_id": null,
     "trigger_type": null,
     "contact_route": null,
-    "pitch_due_at": "2026-07-08T12:05:43Z"
+    "pitch_due_at": "2026-07-08T12:05:43Z",
+    "notes": "Bounced \u2014 HOT_LEAD sync corrected from audit_delivered",
+    "updated_at": "2026-07-12T03:50:00+00:00",
+    "resolved_at": "2026-07-12T03:50:00+00:00",
+    "bounced_at": "2026-07-12T03:50:00+00:00"
   },
   {
     "email": "danny@repairandsquare.com",
@@ -582,9 +586,9 @@
     "score": 6.4,
     "audit_score": 6.4,
     "audit_grade": "C",
-    "stage": "audit_delivered",
-    "status": "pending",
-    "action": "send_97_pitch",
+    "stage": "pitch_sent",
+    "status": "pitched",
+    "action": "monitor_payment_or_reply",
     "thread_id": null,
     "message_id": "<0100019f37900f2c-628f7a27-d751-4237-9e34-bc30a747e859-000000@email.amazonses.com>",
     "trigger_context": "Saw your public post: Ready to bash my head against a wall \u2014 Google Ads clicks but zero conversions",
@@ -592,7 +596,9 @@
     "lead_id": null,
     "trigger_type": null,
     "contact_route": null,
-    "pitch_due_at": "2026-07-08T13:13:36Z"
+    "pitch_due_at": "2026-07-08T13:13:36Z",
+    "notes": "Pitch sent via manual_pitch_danny.py \u2014 HOT_LEAD sync corrected",
+    "updated_at": "2026-07-12T03:50:00+00:00"
   },
   {
     "email": "hello@ziplead.ai",
@@ -600,9 +606,9 @@
     "score": 6.5,
     "audit_score": 6.5,
     "audit_grade": "B",
-    "stage": "audit_delivered",
-    "status": "pending",
-    "action": "send_97_pitch",
+    "stage": "bounced",
+    "status": "bounced",
+    "action": "closed",
     "thread_id": null,
     "message_id": "<0100019f390c0504-212c7945-8d29-4893-b726-9c628d4f67b8-000000@email.amazonses.com>",
     "trigger_context": "Saw your public post: /u/PhotoInformal3266 on I cold-call 100 SMBs a day. Built the tool I wish I had, launching Wednesday. Would rather hear ",
@@ -610,7 +616,11 @@
     "lead_id": null,
     "trigger_type": null,
     "contact_route": null,
-    "pitch_due_at": "2026-07-08T20:08:37Z"
+    "pitch_due_at": "2026-07-08T20:08:37Z",
+    "notes": "Bounced \u2014 HOT_LEAD sync corrected from audit_delivered",
+    "updated_at": "2026-07-12T03:50:00+00:00",
+    "resolved_at": "2026-07-12T03:50:00+00:00",
+    "bounced_at": "2026-07-12T03:50:00+00:00"
   },
   {
     "email": "support@routinereps.com",
@@ -618,9 +628,9 @@
     "score": 6.1,
     "audit_score": 6.1,
     "audit_grade": "C",
-    "stage": "audit_delivered",
-    "status": "pending",
-    "action": "send_97_pitch",
+    "stage": "bounced",
+    "status": "bounced",
+    "action": "closed",
     "thread_id": null,
     "message_id": "<0100019f3a6ea251-e5851ac9-a49f-4acb-90de-6337d8607d45-000000@email.amazonses.com>",
     "trigger_context": "Saw your public post: Simple Routine Design and Tracking App",
@@ -628,7 +638,11 @@
     "lead_id": null,
     "trigger_type": null,
     "contact_route": null,
-    "pitch_due_at": "2026-07-09T02:35:57Z"
+    "pitch_due_at": "2026-07-09T02:35:57Z",
+    "notes": "Bounced \u2014 HOT_LEAD sync corrected from audit_delivered",
+    "updated_at": "2026-07-12T03:50:00+00:00",
+    "resolved_at": "2026-07-12T03:50:00+00:00",
+    "bounced_at": "2026-07-12T03:50:00+00:00"
   },
   {
     "email": "alumni@wgu.edu",
@@ -636,9 +650,9 @@
     "score": 5.7,
     "audit_score": 5.7,
     "audit_grade": "C",
-    "stage": "audit_delivered",
-    "status": "pending",
-    "action": "send_97_pitch",
+    "stage": "bounced",
+    "status": "bounced",
+    "action": "closed",
     "thread_id": null,
     "message_id": "<0100019f3a6edf39-e27acbde-58f5-42ad-a347-7795acf27a91-000000@email.amazonses.com>",
     "trigger_context": "Saw your public post: The WGU Enrollment Process",
@@ -646,7 +660,11 @@
     "lead_id": null,
     "trigger_type": null,
     "contact_route": null,
-    "pitch_due_at": "2026-07-09T02:36:12Z"
+    "pitch_due_at": "2026-07-09T02:36:12Z",
+    "notes": "Bounced \u2014 HOT_LEAD sync corrected from audit_delivered",
+    "updated_at": "2026-07-12T03:50:00+00:00",
+    "resolved_at": "2026-07-12T03:50:00+00:00",
+    "bounced_at": "2026-07-12T03:50:00+00:00"
   },
   {
     "email": "office@facetwoface.at",
@@ -654,7 +672,7 @@
     "score": 6.2,
     "audit_score": 6.2,
     "audit_grade": "C",
-    "stage": "audit_delivered",
+    "stage": "pitch_queued",
     "status": "pending",
     "action": "send_97_pitch",
     "thread_id": null,
@@ -664,7 +682,9 @@
     "lead_id": null,
     "trigger_type": null,
     "contact_route": null,
-    "pitch_due_at": "2026-07-09T02:36:24Z"
+    "pitch_due_at": "2026-07-12T04:49:26Z",
+    "notes": "Queued for pitch \u2014 HOT_LEAD sync corrected",
+    "updated_at": "2026-07-12T03:50:00+00:00"
   },
   {
     "email": "support@curiouscats.ai",
@@ -672,9 +692,9 @@
     "score": 6.5,
     "audit_score": 6.5,
     "audit_grade": "B",
-    "stage": "audit_delivered",
-    "status": "pending",
-    "action": "send_97_pitch",
+    "stage": "bounced",
+    "status": "bounced",
+    "action": "closed",
     "thread_id": null,
     "message_id": "<0100019f3b9d5035-d5d7ee86-1899-4d13-889f-fd7cb56aa7e3-000000@email.amazonses.com>",
     "trigger_context": "Saw your public post: i wanted a news app that doesn\u2019t turn into a feed, so we built one around timelines",
@@ -682,7 +702,11 @@
     "lead_id": null,
     "trigger_type": null,
     "contact_route": null,
-    "pitch_due_at": "2026-07-09T08:06:33Z"
+    "pitch_due_at": "2026-07-09T08:06:33Z",
+    "notes": "Bounced \u2014 HOT_LEAD sync corrected from audit_delivered",
+    "updated_at": "2026-07-12T03:50:00+00:00",
+    "resolved_at": "2026-07-12T03:50:00+00:00",
+    "bounced_at": "2026-07-12T03:50:00+00:00"
   },
   {
     "email": "support@godlike.host",
@@ -690,7 +714,7 @@
     "score": 5.4,
     "audit_score": 5.4,
     "audit_grade": "C",
-    "stage": "audit_delivered",
+    "stage": "pitch_queued",
     "status": "pending",
     "action": "send_97_pitch",
     "thread_id": null,
@@ -700,7 +724,9 @@
     "lead_id": null,
     "trigger_type": null,
     "contact_route": null,
-    "pitch_due_at": "2026-07-09T17:07:32Z"
+    "pitch_due_at": "2026-07-12T04:49:26Z",
+    "notes": "Queued for pitch \u2014 HOT_LEAD sync corrected",
+    "updated_at": "2026-07-12T03:50:00+00:00"
   },
   {
     "email": "hello@ozigi.app",
@@ -743,9 +769,9 @@
     "score": 7.0,
     "audit_score": 7.0,
     "audit_grade": "B",
-    "stage": "audit_delivered",
-    "status": "pending",
-    "action": "send_97_pitch",
+    "stage": "bounced",
+    "status": "bounced",
+    "action": "closed",
     "thread_id": null,
     "message_id": "<0100019f51a81b9a-800f526c-355b-4e2c-bb14-2df858c0f20e-000000@email.amazonses.com>",
     "trigger_context": "Saw your public post: 000 in ads, no conversions",
@@ -753,6 +779,10 @@
     "lead_id": null,
     "trigger_type": null,
     "contact_route": null,
-    "pitch_due_at": "2026-07-13T14:49:59Z"
+    "pitch_due_at": "2026-07-13T14:49:59Z",
+    "notes": "Test email bounced \u2014 HOT_LEAD sync corrected",
+    "updated_at": "2026-07-12T03:50:00+00:00",
+    "resolved_at": "2026-07-12T03:50:00+00:00",
+    "bounced_at": "2026-07-12T03:50:00+00:00"
   }
 ]

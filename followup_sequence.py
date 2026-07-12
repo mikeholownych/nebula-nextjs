@@ -502,11 +502,11 @@ def process_hot_lead_pitches(now, paid, sent):
             except Exception:
                 pass
         # Allow action=None or action="send_97_pitch" — both are valid unworked audits
-        if lead.get("stage") != "audit_delivered":
+        if lead.get("stage") not in ("audit_delivered", "pitch_queued"):
             continue
         if lead.get("action") not in ("send_97_pitch", None, ""):
             continue
-        if lead.get("status") not in ("pending", "", None):
+        if lead.get("status") not in ("pending", "queued", "", None):
             continue
         pitch_due = parse_iso(lead.get("pitch_due_at"))
         if not pitch_due or now < pitch_due:

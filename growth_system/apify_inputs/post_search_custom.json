@@ -1,0 +1,7 @@
+{
+  "keyword": "\"landing page no conversions\" OR \"ads no sales\" OR \"conversion rate zero\"",
+  "sort_type": "date_posted",
+  "date_filter": "past-week",
+  "limit": 25,
+  "total_posts": 25
+}

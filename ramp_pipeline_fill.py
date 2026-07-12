@@ -252,44 +252,100 @@ def extract_reddit_username(post_url: str, username_field: str = '') -> str:
 
 
 def get_reddit_user_website(username: str) -> str | None:
-    """Fetch old.reddit.com user's personal subreddit page and extract any linked website from bio.
+    """Fetch external website from a Reddit user's post history.
 
-    The JSON API (about.json) now requires OAuth (HTTP 403), so we fall back to
-    scraping the HTML of old.reddit.com which still works without authentication.
-    The user's public description appears as the first markdown-rendered div (.md)
-    on their personal subreddit page (/r/u_{username}/).
+    Tier 1: pullpush.io (free, no auth) — queries user's recent submissions for
+    external URLs. When pullpush is down (HTTP 502 since ~July 10), falls back to
+    scraping old.reddit.com/user/{username}/submitted/ directly.
     """
     if not username or username.startswith('['):
         return None
+
+    # Try pullpush.io first
     try:
         r = requests.get(
-            f'https://old.reddit.com/r/u_{username}/',
+            f'https://api.pullpush.io/reddit/search/submission/'
+            f'?author={username}&size=10&sort=desc&sort_type=created_utc',
             headers={'User-Agent': 'Mozilla/5.0 Nebula/1.0'},
-            timeout=10
+            timeout=12,
         )
-        if not r.ok:
+        if r.ok:
+            submissions = r.json().get('data', [])
+            seen = set()
+            url_pat = re.compile(r'https?://[^\s)\]\x22\x27<>,]+')
+            for sub in submissions:
+                body = (sub.get('selftext') or '') + ' ' + (sub.get('url') or '')
+                for u in url_pat.findall(body):
+                    u = u.rstrip('.,)')
+                    domain = urlparse(u).netloc.lower().replace('www.', '')
+                    if (
+                        domain
+                        and domain not in seen
+                        and 'reddit' not in domain
+                        and 'redd.it' not in domain
+                        and domain not in BLOCKED_DOMAINS
+                    ):
+                        seen.add(domain)
+                        return u.rstrip('/')
+    except Exception:
+        pass  # fall through to tier 2
+
+    # Tier 2: scrape old.reddit.com/user/{username}/submitted/ for external links
+    try:
+        rh = requests.get(
+            f'https://old.reddit.com/user/{username}/submitted/',
+            headers=UA,
+            timeout=15,
+        )
+        if not rh.ok or not rh.text:
             return None
 
-        # Find all markdown-rendered divs — the first one is the subreddit's
-        # public_description (user bio). Subsequent ones are post/comment bodies.
-        md_divs = re.findall(r'<div class="md">(.*?)</div>', r.text, re.DOTALL)
-        if not md_divs:
-            return None
+        from bs4 import BeautifulSoup
+        soup = BeautifulSoup(rh.text, 'lxml')
+        url_pat = re.compile(r'https?://[^\s)\]\x22\x27<>,]+')
+        seen = set()
 
-        desc_html = md_divs[0]
+        # Scan post entries for external URLs
+        for thing in soup.select('div.thing'):
+            # Skip stickied posts
+            if thing.select_one('.stickied'):
+                continue
 
-        # Extract URLs from <a href="..."> tags (preserves link targets)
-        urls = re.findall(r'<a href="(https?://[^"]+)"', desc_html)
-        # Also find bare URLs in rendered text
-        text = re.sub(r'<[^>]+>', ' ', desc_html)
-        from html import unescape as html_unescape
-        text = html_unescape(text)
-        urls += re.findall(r'https?://[^\s\)\]"\'<>,]+', text)
+            # Check link posts (has a.external or a[href^="http"])
+            for a in thing.select('a[href]'):
+                u = a.get('href', '')
+                if not u.lower().startswith(('http://', 'https://')):
+                    continue
+                domain = urlparse(u).netloc.lower().replace('www.', '')
+                if (
+                    domain
+                    and domain not in seen
+                    and 'reddit' not in domain
+                    and 'redd.it' not in domain
+                    and 'preview.' not in domain
+                    and 'redditstatic' not in domain
+                    and 'redditmedia' not in domain
+                    and domain not in BLOCKED_DOMAINS
+                    and not u.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.ico'))
+                ):
+                    seen.add(domain)
+                    return u.rstrip('/')
 
-        for u in urls:
-            domain = urlparse(u).netloc.lower().replace('www.', '')
-            if domain and 'reddit' not in domain and 'redd.it' not in domain:
-                return u.rstrip('/')
+            # Also scan selftext for URLs
+            md = thing.select_one('div.md, div.usertext-body div.md')
+            if md:
+                body_text = md.get_text(' ', strip=True).lower()
+                for u in url_pat.findall(body_text):
+                    domain = urlparse(u).netloc.lower().replace('www.', '')
+                    if (
+                        domain
+                        and domain not in seen
+                        and 'reddit' not in domain
+                        and 'redd.it' not in domain
+                        and domain not in BLOCKED_DOMAINS
+                    ):
+                        seen.add(domain)
+                        return u.rstrip('/')
         return None
     except Exception:
         return None
@@ -553,13 +609,18 @@ def scrape_icp_via_google(token: str = None) -> list:
                     rh = requests.get(old_url, headers=UA, timeout=12)
                     if rh.ok and rh.text:
                         soup = BeautifulSoup(rh.text, 'lxml')
-                        thing = soup.select_one('div.thing.link')
+                        # Match both link posts (div.thing.link) and selftext posts (div.thing.self)
+                        thing = soup.select_one('div.thing.link, div.thing.self, div.thing')
                         if thing:
                             username = username or thing.get('data-author', '')
                             title = title or (thing.select_one('a.title').get_text(' ', strip=True) if thing.select_one('a.title') else '')
+                            # Try expando first (truncated content), then usertext-body (full selftext)
                             expando = thing.select_one('div.expando')
+                            usertext = thing.select_one('div.usertext-body div.md')
                             if expando:
                                 body = expando.get_text(' ', strip=True)
+                            elif usertext:
+                                body = usertext.get_text(' ', strip=True)
                             # Extract site URLs from <a href> tags (case-insensitive: Reddit may use HTTPS://)
                             for a in thing.select('a[href]'):
                                 u = a.get('href', '')

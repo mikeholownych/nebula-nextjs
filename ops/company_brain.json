@@ -17,7 +17,7 @@
     "trigger_warm_replies": 0,
     "warm_leads": 1
   },
-  "generated_at": "2026-07-12T02:14:48Z",
+  "generated_at": "2026-07-12T07:22:44Z",
   "kill_criteria": {
     "audit": "3 audits delivered and 0 payments",
     "checkout": "buyer cannot pay self-serve",
@@ -25,20 +25,14 @@
   },
   "offer": "Free landing page audit -> $97 implementation",
   "pipeline": {
-    "hot_leads_pending": 10,
+    "hot_leads_pending": 3,
     "overdue_emails": [
       "hello@aijournal.store",
-      "info@2getherewesave.com",
-      "danny@repairandsquare.com",
-      "hello@ziplead.ai",
-      "support@routinereps.com",
-      "alumni@wgu.edu",
       "office@facetwoface.at",
-      "support@curiouscats.ai",
       "support@godlike.host"
     ],
-    "pitch_overdue": 9,
-    "pitch_sent": 25,
+    "pitch_overdue": 3,
+    "pitch_sent": 26,
     "total": 48
   },
   "revenue": {

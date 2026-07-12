@@ -209,7 +209,7 @@ def scan_lead_file(filepath: Path) -> list[dict]:
         title = record.get("title", "")
         snippet = record.get("snippet", "")
         source_url = record.get("source_url", "")
-        email_copy_body = record.get("email_copy", {}).get("body", "")
+        email_copy_body = (record.get("email_copy") or {}).get("body", "")
 
         matches = detect_competitor_mentions(
             text=snippet + " " + email_copy_body,
