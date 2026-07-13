@@ -178,6 +178,10 @@ audit_pipeline/prompts/packs/.gitkeep
 3
 .git_rm_list.txt
 
+# ── Isolated implementation worktrees ─────────────
+.worktrees/
+worktrees/
+
 # ── AI-DLC session artifacts (audit trails, state) ─
 aidlc-docs/audit.md
 aidlc-docs/aidlc-state.md
