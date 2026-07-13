@@ -2,6 +2,7 @@
 """Stripe webhook handler - auto-deliver products AND onboard SDR clients on payment."""
 import json, urllib.request, os, time, secrets
 from pathlib import Path
+import stripe
 
 LOG_FILE = "/home/mike/nebula/payments.log"
 CUSTOMER_LEDGER = "/home/mike/nebula/ledgers/customer-ledger.jsonl"
@@ -9,9 +10,62 @@ ORDERS_DIR = "/home/mike/nebula/orders"
 CLIENTS_DIR = "/home/mike/sdr-service/clients"
 TESTIMONIALS_FILE = "/home/mike/nebula/ledgers/testimonials.jsonl"
 TESTIMONIAL_QUEUE = "/home/mike/nebula/ledgers/testimonial_queue.jsonl"
+SEEN_EVENTS_FILE = "/home/mike/nebula/seen_stripe_events.json"
 
 def handle_stripe_webhook(payload, signature=None):
-    data = json.loads(payload)
+    data = None
+    
+    # Verify signature if provided
+    if signature:
+        # Load Stripe webhook secret
+        stripe_webhook_secret = None
+        stripe_secret_file = "/home/mike/nebula/.stripe_webhook_secret"
+        try:
+            with open(stripe_secret_file) as f:
+                stripe_webhook_secret = f.read().strip()
+        except Exception as e:
+            print(f"[stripe_webhook] ⚠️  Cannot load webhook secret: {e}")
+            return {"status": "error", "error": "Server configuration error"}
+        
+        if stripe_webhook_secret:
+            try:
+                event = stripe.Webhook.construct_event(
+                    payload=payload,
+                    sig_header=signature,
+                    secret=stripe_webhook_secret,
+                    tolerance=300
+                )
+                # Use the verified event data
+                data = event.to_dict()
+                print(f"[stripe_webhook] Verified event: {event.type} (id: {event.id})")
+                # Idempotency: deduplicate by event ID
+                try:
+                    import json as json_mod
+                    if os.path.exists(SEEN_EVENTS_FILE):
+                        with open(SEEN_EVENTS_FILE, "r") as f:
+                            seen = set(json_mod.load(f))
+                    else:
+                        seen = set()
+                    if event.id in seen:
+                        print(f"[stripe_webhook] 🔁 Duplicate event {event.id}, skipping")
+                        return {"status": "skipped", "info": "Event already processed"}
+                    seen.add(event.id)
+                    with open(SEEN_EVENTS_FILE, "w") as f:
+                        json_mod.dump(list(seen), f)
+                except Exception as e:
+                    print(f"[stripe_webhook] ⚠️  Dedup error (continuing): {e}")
+            except stripe.error.SignatureVerificationError as e:
+                print(f"[stripe_webhook] 🔴 Signature verification failed: {e}")
+                return {"status": "error", "error": "Invalid signature"}
+            except Exception as e:
+                print(f"[stripe_webhook] ⚠️  Verification error: {e}")
+                return {"status": "error", "error": "Signature verification failed"}
+    
+    # Signature required for all incoming webhooks
+    if data is None:
+        print(f"[stripe_webhook] 🔴 Rejected unsigned event")
+        return {"status": "error", "error": "Invalid Stripe-Signature header. This endpoint requires signed webhooks."}
+    
     event_type = data.get("type", "")
     
     if event_type == "checkout.session.completed":
