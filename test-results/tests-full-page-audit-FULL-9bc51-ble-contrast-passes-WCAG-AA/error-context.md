@@ -15,7 +15,7 @@
 Error: expect(received).toBe(expected) // Object.is equality
 
 Expected: 0
-Received: 35
+Received: 21
 ```
 
 # Page snapshot
