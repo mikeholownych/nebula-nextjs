@@ -1,0 +1,1295 @@
+{
+  "generated_at": "2026-07-13T10:30:09Z",
+  "base": "https://nebulacomponents.shop",
+  "summary": {
+    "sitemap_urls": 23,
+    "routes_checked": 36,
+    "html_pages": 29,
+    "route_failures": 2,
+    "internal_targets_checked": 11,
+    "broken_internal_links": 3,
+    "missing_titles": 0,
+    "non_single_h1": 0,
+    "pages_with_unlabeled_inputs": 4,
+    "pages_with_missing_alt": 0,
+    "pages_with_broken_fragments": 2,
+    "pages_with_unsafe_blank_links": 1,
+    "observed_stripe_slugs": [
+      "00w5kD1nK0wkaa573A43S0c",
+      "6oUfZh7M87YM5TPgEa43S0b",
+      "aFa8wPc2o7YM9613Ro43S0d"
+    ],
+    "unexpected_stripe_slugs": []
+  },
+  "failures": [
+    {
+      "url": "https://nebulacomponents.shop/api/health",
+      "final_url": "https://nebulacomponents.shop/api/health",
+      "status": 404,
+      "elapsed_ms": 611,
+      "content_type": "application/json",
+      "redirects": [],
+      "bytes": 22
+    },
+    {
+      "url": "https://nebulacomponents.shop/does-not-exist-qa-404",
+      "final_url": "https://nebulacomponents.shop/does-not-exist-qa-404",
+      "status": 404,
+      "elapsed_ms": 98,
+      "content_type": "text/html;charset=utf-8",
+      "redirects": [],
+      "bytes": 335,
+      "title": "Error response",
+      "h1_count": 1,
+      "h1s": [
+        "Error response"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": false,
+      "html_lang": "en"
+    }
+  ],
+  "broken_internal_links": [
+    {
+      "url": "https://nebulacomponents.shop/cdn-cgi/l/email-protection",
+      "final_url": "https://nebulacomponents.shop/cdn-cgi/l/email-protection",
+      "status": 404,
+      "elapsed_ms": 11,
+      "content_type": "text/html",
+      "redirects": [],
+      "bytes": 4726,
+      "title": "Email Protection | Cloudflare",
+      "h1_count": 1,
+      "h1s": [
+        "Email Protection"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en-US"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/paid-traffic-leak-map",
+      "final_url": "https://nebulacomponents.shop/learning-center/paid-traffic-leak-map",
+      "status": 404,
+      "elapsed_ms": 74,
+      "content_type": "text/html;charset=utf-8",
+      "redirects": [],
+      "bytes": 335,
+      "title": "Error response",
+      "h1_count": 1,
+      "h1s": [
+        "Error response"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": false,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/privacy-policy",
+      "final_url": "https://nebulacomponents.shop/privacy-policy",
+      "status": 404,
+      "elapsed_ms": 36,
+      "content_type": "text/html;charset=utf-8",
+      "redirects": [],
+      "bytes": 335,
+      "title": "Error response",
+      "h1_count": 1,
+      "h1s": [
+        "Error response"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": false,
+      "html_lang": "en"
+    }
+  ],
+  "missing_titles": [],
+  "non_single_h1": [],
+  "unlabeled_inputs": {
+    "https://nebulacomponents.shop/": [
+      "free-kit-email",
+      "roi-spend",
+      "roi-cvr",
+      "roi-aov",
+      "email"
+    ],
+    "https://nebulacomponents.shop/checkout.html": [
+      "free-kit-email"
+    ],
+    "https://nebulacomponents.shop/generator.html": [
+      "badge",
+      "headline",
+      "highlight",
+      "subtitle",
+      "cta1",
+      "cta2"
+    ],
+    "https://nebulacomponents.shop/pricing-generator.html": [
+      "t1name",
+      "t1price",
+      "t1curr",
+      "t1cta",
+      "t1f1c",
+      "t1f1",
+      "t1f2c",
+      "t1f2",
+      "t1f3c",
+      "t1f3",
+      "t1f4c",
+      "t1f4",
+      "t2name",
+      "t2price",
+      "t2curr",
+      "t2cta",
+      "t2f1c",
+      "t2f1",
+      "t2f2c",
+      "t2f2",
+      "t2f3c",
+      "t2f3",
+      "t2f4c",
+      "t2f4",
+      "t3name",
+      "t3price",
+      "t3curr",
+      "t3cta",
+      "t3f1c",
+      "t3f1",
+      "t3f2c",
+      "t3f2",
+      "t3f3c",
+      "t3f3",
+      "t3f4c",
+      "t3f4"
+    ]
+  },
+  "missing_alt": {},
+  "broken_fragments": {
+    "https://nebulacomponents.shop/": [
+      "#how-it-works"
+    ],
+    "https://nebulacomponents.shop/demo.html": [
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#"
+    ]
+  },
+  "unsafe_blank_links": {
+    "https://nebulacomponents.shop/generator.html": [
+      "https://news.ycombinator.com/item?id=48639668"
+    ]
+  },
+  "pages": [
+    {
+      "url": "https://nebulacomponents.shop/",
+      "final_url": "https://nebulacomponents.shop/",
+      "status": 200,
+      "elapsed_ms": 35,
+      "content_type": "text/html",
+      "redirects": [],
+      "bytes": 126631,
+      "title": "Free Landing Page Audit \u00e2\u0080\u0094 Score Your Site in 60 Seconds | Nebula",
+      "h1_count": 1,
+      "h1s": [
+        "4% CTR. 0% conversion. Here\u2019s where it breaks."
+      ],
+      "forms": 4,
+      "inputs": 12,
+      "unlabeled_inputs": [
+        "free-kit-email",
+        "roi-spend",
+        "roi-cvr",
+        "roi-aov",
+        "email"
+      ],
+      "images": 7,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/#audit-form-card",
+        "https://nebulacomponents.shop/#guarantee",
+        "https://nebulacomponents.shop/#how-it-works",
+        "https://nebulacomponents.shop/#pricing",
+        "https://nebulacomponents.shop/#testimonials",
+        "https://nebulacomponents.shop/ai-ops-retainer.html",
+        "https://nebulacomponents.shop/audit",
+        "https://nebulacomponents.shop/audit.html",
+        "https://nebulacomponents.shop/case-studies/self-audit.html",
+        "https://nebulacomponents.shop/cdn-cgi/l/email-protection",
+        "https://nebulacomponents.shop/cdn-cgi/l/email-protection#0b647b784b676a7e65686368796a7f6e25626434787e69616e687f364864667b67626a65686e2b6f646878",
+        "https://nebulacomponents.shop/cdn-cgi/l/email-protection#3f504f4c7f535e4a515c575c4d5e4b5a115650004c4a5d555a5c4b026d5a4b5e56515a4d1f56514e4a564d46",
+        "https://nebulacomponents.shop/cdn-cgi/l/email-protection#6109040d0d0e210f0403140d00020e0c110e0f040f15124f12090e115e1214030b0402155c2c1841001405081541130412140d15",
+        "https://nebulacomponents.shop/cdn-cgi/l/email-protection#d8b7a8ab98b4b9adb6bbb0bbaab9acbdf6b1b7e7abadbab2bdbbace599bfbdb6bba1f8b1b6a9adb1aaa1",
+        "https://nebulacomponents.shop/compare/landing-page-audit-tools.html",
+        "https://nebulacomponents.shop/privacy-policy"
+      ],
+      "broken_fragments": [
+        "#how-it-works"
+      ],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [
+        "6oUfZh7M87YM5TPgEa43S0b"
+      ],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/.well-known/api-catalog",
+      "final_url": "https://nebulacomponents.shop/.well-known/api-catalog",
+      "status": 200,
+      "elapsed_ms": 397,
+      "content_type": "application/linkset+json; charset=utf-8",
+      "redirects": [],
+      "bytes": 493
+    },
+    {
+      "url": "https://nebulacomponents.shop/7-systems.html",
+      "final_url": "https://nebulacomponents.shop/7-systems.html",
+      "status": 200,
+      "elapsed_ms": 383,
+      "content_type": "text/html",
+      "redirects": [],
+      "bytes": 12773,
+      "title": "7 Systems Every Ecom Brand Needs That Most Skip \u00e2\u0080\u0094 Nebula Components",
+      "h1_count": 1,
+      "h1s": [
+        "7 Systems Every Ecom Brand Needs (That Most Skip)"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/7-systems.html#free-audit",
+        "https://nebulacomponents.shop/audit.html",
+        "https://nebulacomponents.shop/checkout.html"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [
+        "6oUfZh7M87YM5TPgEa43S0b"
+      ],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/ad-burn-leaderboard.html",
+      "final_url": "https://nebulacomponents.shop/ad-burn-leaderboard.html",
+      "status": 200,
+      "elapsed_ms": 412,
+      "content_type": "text/html",
+      "redirects": [],
+      "bytes": 15335,
+      "title": "Ad Burn Leak Board | Landing Page Leaks Killing Paid Traffic",
+      "h1_count": 1,
+      "h1s": [
+        "Ad clicks are easy. Conversions are where the money leaks."
+      ],
+      "forms": 1,
+      "inputs": 3,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/",
+        "https://nebulacomponents.shop/ad-burn-leaderboard.html#board",
+        "https://nebulacomponents.shop/ad-burn-leaderboard.html#submit",
+        "https://nebulacomponents.shop/audit.html",
+        "https://nebulacomponents.shop/cdn-cgi/l/email-protection#7a150a093a161b0f14191219081b0e1f541315"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [
+        "6oUfZh7M87YM5TPgEa43S0b"
+      ],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/agency-partner.html",
+      "final_url": "https://nebulacomponents.shop/agency-partner.html",
+      "status": 200,
+      "elapsed_ms": 443,
+      "content_type": "text/html",
+      "redirects": [],
+      "bytes": 9885,
+      "title": "White-Label Landing Page Audits \u00e2\u0080\u0094 Agency Partner Program | Nebula",
+      "h1_count": 1,
+      "h1s": [
+        "Sell triggered audits under your brand."
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/",
+        "https://nebulacomponents.shop/ai-ops-retainer.html",
+        "https://nebulacomponents.shop/cdn-cgi/l/email-protection#9df2edeeddf1fce8f3fef5feeffce9f8b3f4f2",
+        "https://nebulacomponents.shop/checkout.html",
+        "https://nebulacomponents.shop/growth-launch.html"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [
+        "aFa8wPc2o7YM9613Ro43S0d"
+      ],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/ai-ops-retainer.html",
+      "final_url": "https://nebulacomponents.shop/ai-ops-retainer.html",
+      "status": 200,
+      "elapsed_ms": 525,
+      "content_type": "text/html",
+      "redirects": [],
+      "bytes": 11364,
+      "title": "AI Ops Retainer \u00e2\u0080\u0094 Keep Your Conversion Savings Running | Nebula",
+      "h1_count": 1,
+      "h1s": [
+        "Keep the savings. Don't redo discovery next year."
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/",
+        "https://nebulacomponents.shop/agency-partner.html",
+        "https://nebulacomponents.shop/cdn-cgi/l/email-protection#234c5350634f42564d404b40514257460d4a4c",
+        "https://nebulacomponents.shop/checkout.html",
+        "https://nebulacomponents.shop/growth-launch.html"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [
+        "00w5kD1nK0wkaa573A43S0c"
+      ],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/api/health",
+      "final_url": "https://nebulacomponents.shop/api/health",
+      "status": 404,
+      "elapsed_ms": 611,
+      "content_type": "application/json",
+      "redirects": [],
+      "bytes": 22
+    },
+    {
+      "url": "https://nebulacomponents.shop/api/stats",
+      "final_url": "https://nebulacomponents.shop/api/stats",
+      "status": 200,
+      "elapsed_ms": 358,
+      "content_type": "application/json",
+      "redirects": [],
+      "bytes": 384
+    },
+    {
+      "url": "https://nebulacomponents.shop/audit",
+      "final_url": "https://nebulacomponents.shop/audit",
+      "status": 200,
+      "elapsed_ms": 412,
+      "content_type": "text/html; charset=utf-8",
+      "redirects": [],
+      "bytes": 18995,
+      "title": "Free Landing Page Teardown \u2014 Nebula Components",
+      "h1_count": 1,
+      "h1s": [
+        "97% of ad clicks don't convert. Your page is the leak."
+      ],
+      "forms": 1,
+      "inputs": 4,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/audit.html",
+        "https://nebulacomponents.shop/cdn-cgi/l/email-protection#1877686b5874796d767b707b6a796c7d367177",
+        "https://nebulacomponents.shop/primer.html",
+        "https://nebulacomponents.shop/privacy-policy"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/audit.html",
+      "final_url": "https://nebulacomponents.shop/audit.html",
+      "status": 200,
+      "elapsed_ms": 504,
+      "content_type": "text/html",
+      "redirects": [],
+      "bytes": 8142,
+      "title": "Sample Landing Page Audit \u00e2\u0080\u0094 Nebula Components",
+      "h1_count": 1,
+      "h1s": [
+        "Sample Landing Page Audit"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/audit",
+        "https://nebulacomponents.shop/audit#data-privacy",
+        "https://nebulacomponents.shop/checkout.html"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/",
+      "final_url": "https://nebulacomponents.shop/case-studies/",
+      "status": 200,
+      "elapsed_ms": 528,
+      "content_type": "text/html; charset=utf-8",
+      "redirects": [],
+      "bytes": 3509,
+      "title": "Conversion Audit Case Studies | Nebula Components",
+      "h1_count": 1,
+      "h1s": [
+        "Landing Page Conversion Audit Case Studies"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/audit.html"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/checkout.html",
+      "final_url": "https://nebulacomponents.shop/checkout.html",
+      "status": 200,
+      "elapsed_ms": 607,
+      "content_type": "text/html",
+      "redirects": [],
+      "bytes": 13213,
+      "title": "Conversion Fix Pack \u00e2\u0080\u0094 Nebula Components",
+      "h1_count": 1,
+      "h1s": [
+        "Your page is built. Now make it convert."
+      ],
+      "forms": 1,
+      "inputs": 1,
+      "unlabeled_inputs": [
+        "free-kit-email"
+      ],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/primer.html"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [
+        "6oUfZh7M87YM5TPgEa43S0b"
+      ],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/demo.html",
+      "final_url": "https://nebulacomponents.shop/demo.html",
+      "status": 200,
+      "elapsed_ms": 139,
+      "content_type": "text/html",
+      "redirects": [],
+      "bytes": 27061,
+      "title": "Nebula \u00e2\u0080\u0094 Dark SaaS Component Pack Demo",
+      "h1_count": 1,
+      "h1s": [
+        "Build Faster. Ship Smarter."
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/demo.html",
+        "https://nebulacomponents.shop/demo.html#cta",
+        "https://nebulacomponents.shop/demo.html#faq",
+        "https://nebulacomponents.shop/demo.html#features",
+        "https://nebulacomponents.shop/demo.html#footer",
+        "https://nebulacomponents.shop/demo.html#hero",
+        "https://nebulacomponents.shop/demo.html#pricing",
+        "https://nebulacomponents.shop/demo.html#testimonials"
+      ],
+      "broken_fragments": [
+        "#",
+        "#",
+        "#",
+        "#",
+        "#",
+        "#",
+        "#",
+        "#",
+        "#",
+        "#",
+        "#",
+        "#",
+        "#",
+        "#",
+        "#",
+        "#",
+        "#",
+        "#",
+        "#",
+        "#",
+        "#",
+        "#"
+      ],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/does-not-exist-qa-404",
+      "final_url": "https://nebulacomponents.shop/does-not-exist-qa-404",
+      "status": 404,
+      "elapsed_ms": 98,
+      "content_type": "text/html;charset=utf-8",
+      "redirects": [],
+      "bytes": 335,
+      "title": "Error response",
+      "h1_count": 1,
+      "h1s": [
+        "Error response"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": false,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/generator.html",
+      "final_url": "https://nebulacomponents.shop/generator.html",
+      "status": 200,
+      "elapsed_ms": 128,
+      "content_type": "text/html",
+      "redirects": [],
+      "bytes": 9979,
+      "title": "SaaS Hero Generator \u00e2\u0080\u0094 Free by Nebula Components",
+      "h1_count": 1,
+      "h1s": [
+        "SaaS Hero Generator"
+      ],
+      "forms": 0,
+      "inputs": 6,
+      "unlabeled_inputs": [
+        "badge",
+        "headline",
+        "highlight",
+        "subtitle",
+        "cta1",
+        "cta2"
+      ],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [
+        "https://news.ycombinator.com/item?id=48639668"
+      ],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/",
+      "final_url": "https://nebulacomponents.shop/learning-center/",
+      "status": 200,
+      "elapsed_ms": 98,
+      "content_type": "text/html; charset=utf-8",
+      "redirects": [],
+      "bytes": 12232,
+      "title": "Nebula Learning Centre",
+      "h1_count": 1,
+      "h1s": [
+        "Founder resources for fixing paid-traffic leaks before buying more clicks."
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/audit",
+        "https://nebulacomponents.shop/lead-magnets/cta-rewrite-swipe-kit.html",
+        "https://nebulacomponents.shop/lead-magnets/free-leak-map-preview.html",
+        "https://nebulacomponents.shop/lead-magnets/paid-traffic-leak-checklist.html",
+        "https://nebulacomponents.shop/learning-center/before-you-raise-ad-budget",
+        "https://nebulacomponents.shop/learning-center/cta-not-working",
+        "https://nebulacomponents.shop/learning-center/facebook-ads-no-leads",
+        "https://nebulacomponents.shop/learning-center/founder-second-brain",
+        "https://nebulacomponents.shop/learning-center/google-ads-clicks-no-sales",
+        "https://nebulacomponents.shop/learning-center/high-cpc-low-conversion",
+        "https://nebulacomponents.shop/learning-center/landing-page-not-converting",
+        "https://nebulacomponents.shop/learning-center/linkedin-skill-engine",
+        "https://nebulacomponents.shop/learning-center/message-match-checklist",
+        "https://nebulacomponents.shop/learning-center/mobile-landing-page-leaks",
+        "https://nebulacomponents.shop/learning-center/proof-before-cta",
+        "https://nebulacomponents.shop/learning-center/specialist-ai-agent-library",
+        "https://nebulacomponents.shop/learning-center/traffic-but-no-form-fills"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [
+        "6oUfZh7M87YM5TPgEa43S0b"
+      ],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/before-you-raise-ad-budget",
+      "final_url": "https://nebulacomponents.shop/learning-center/before-you-raise-ad-budget",
+      "status": 200,
+      "elapsed_ms": 141,
+      "content_type": "text/html; charset=utf-8",
+      "redirects": [],
+      "bytes": 4656,
+      "title": "Before You Raise Ad Budget, Run This Leak Check | Nebula Learning Centre",
+      "h1_count": 1,
+      "h1s": [
+        "Before You Raise Ad Budget, Run This Leak Check"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/audit",
+        "https://nebulacomponents.shop/learning-center/",
+        "https://nebulacomponents.shop/learning-center/facebook-ads-no-leads",
+        "https://nebulacomponents.shop/learning-center/google-ads-clicks-no-sales",
+        "https://nebulacomponents.shop/learning-center/high-cpc-low-conversion",
+        "https://nebulacomponents.shop/learning-center/landing-page-not-converting",
+        "https://nebulacomponents.shop/learning-center/paid-traffic-leak-map"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/cta-not-working",
+      "final_url": "https://nebulacomponents.shop/learning-center/cta-not-working",
+      "status": 200,
+      "elapsed_ms": 166,
+      "content_type": "text/html; charset=utf-8",
+      "redirects": [],
+      "bytes": 4696,
+      "title": "CTA Not Working? Fix Commitment, Clarity, And Timing | Nebula Learning Centre",
+      "h1_count": 1,
+      "h1s": [
+        "CTA Not Working? Fix Commitment, Clarity, And Timing"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/audit",
+        "https://nebulacomponents.shop/learning-center/",
+        "https://nebulacomponents.shop/learning-center/facebook-ads-no-leads",
+        "https://nebulacomponents.shop/learning-center/google-ads-clicks-no-sales",
+        "https://nebulacomponents.shop/learning-center/high-cpc-low-conversion",
+        "https://nebulacomponents.shop/learning-center/landing-page-not-converting",
+        "https://nebulacomponents.shop/learning-center/paid-traffic-leak-map"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/facebook-ads-no-leads",
+      "final_url": "https://nebulacomponents.shop/learning-center/facebook-ads-no-leads",
+      "status": 200,
+      "elapsed_ms": 34,
+      "content_type": "text/html; charset=utf-8",
+      "redirects": [],
+      "bytes": 4914,
+      "title": "Facebook Ads Getting Clicks But No Leads | Nebula Learning Centre",
+      "h1_count": 1,
+      "h1s": [
+        "Facebook Ads Getting Clicks But No Leads"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/audit",
+        "https://nebulacomponents.shop/learning-center/",
+        "https://nebulacomponents.shop/learning-center/google-ads-clicks-no-sales",
+        "https://nebulacomponents.shop/learning-center/high-cpc-low-conversion",
+        "https://nebulacomponents.shop/learning-center/landing-page-not-converting",
+        "https://nebulacomponents.shop/learning-center/paid-traffic-leak-map",
+        "https://nebulacomponents.shop/learning-center/traffic-but-no-form-fills"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/founder-second-brain",
+      "final_url": "https://nebulacomponents.shop/learning-center/founder-second-brain",
+      "status": 200,
+      "elapsed_ms": 140,
+      "content_type": "text/html; charset=utf-8",
+      "redirects": [],
+      "bytes": 3167,
+      "title": "Founder Second-Brain Campaign Factory | Nebula Learning Centre",
+      "h1_count": 1,
+      "h1s": [
+        "Founder Second-Brain Campaign Factory"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/learning-center/",
+        "https://nebulacomponents.shop/learning-center/founder-second-brain"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/google-ads-clicks-no-sales",
+      "final_url": "https://nebulacomponents.shop/learning-center/google-ads-clicks-no-sales",
+      "status": 200,
+      "elapsed_ms": 147,
+      "content_type": "text/html; charset=utf-8",
+      "redirects": [],
+      "bytes": 4932,
+      "title": "Google Ads Clicks But No Sales: Check The Page Before Budget | Nebula Learning Centre",
+      "h1_count": 1,
+      "h1s": [
+        "Google Ads Clicks But No Sales: Check The Page Before Budget"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/audit",
+        "https://nebulacomponents.shop/learning-center/",
+        "https://nebulacomponents.shop/learning-center/facebook-ads-no-leads",
+        "https://nebulacomponents.shop/learning-center/high-cpc-low-conversion",
+        "https://nebulacomponents.shop/learning-center/landing-page-not-converting",
+        "https://nebulacomponents.shop/learning-center/paid-traffic-leak-map",
+        "https://nebulacomponents.shop/learning-center/traffic-but-no-form-fills"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/high-cpc-low-conversion",
+      "final_url": "https://nebulacomponents.shop/learning-center/high-cpc-low-conversion",
+      "status": 200,
+      "elapsed_ms": 176,
+      "content_type": "text/html; charset=utf-8",
+      "redirects": [],
+      "bytes": 4686,
+      "title": "High CPC, Low Conversion: Stop Optimizing The Wrong Layer | Nebula Learning Centre",
+      "h1_count": 1,
+      "h1s": [
+        "High CPC, Low Conversion: Stop Optimizing The Wrong Layer"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/audit",
+        "https://nebulacomponents.shop/learning-center/",
+        "https://nebulacomponents.shop/learning-center/facebook-ads-no-leads",
+        "https://nebulacomponents.shop/learning-center/google-ads-clicks-no-sales",
+        "https://nebulacomponents.shop/learning-center/landing-page-not-converting",
+        "https://nebulacomponents.shop/learning-center/paid-traffic-leak-map",
+        "https://nebulacomponents.shop/learning-center/traffic-but-no-form-fills"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/landing-page-not-converting",
+      "final_url": "https://nebulacomponents.shop/learning-center/landing-page-not-converting",
+      "status": 200,
+      "elapsed_ms": 163,
+      "content_type": "text/html; charset=utf-8",
+      "redirects": [],
+      "bytes": 4757,
+      "title": "Landing Page Not Converting? Diagnose These 5 Leaks First | Nebula Learning Centre",
+      "h1_count": 1,
+      "h1s": [
+        "Landing Page Not Converting? Diagnose These 5 Leaks First"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/audit",
+        "https://nebulacomponents.shop/learning-center/",
+        "https://nebulacomponents.shop/learning-center/facebook-ads-no-leads",
+        "https://nebulacomponents.shop/learning-center/google-ads-clicks-no-sales",
+        "https://nebulacomponents.shop/learning-center/high-cpc-low-conversion",
+        "https://nebulacomponents.shop/learning-center/paid-traffic-leak-map",
+        "https://nebulacomponents.shop/learning-center/traffic-but-no-form-fills"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/linkedin-skill-engine",
+      "final_url": "https://nebulacomponents.shop/learning-center/linkedin-skill-engine",
+      "status": 200,
+      "elapsed_ms": 33,
+      "content_type": "text/html; charset=utf-8",
+      "redirects": [],
+      "bytes": 3113,
+      "title": "LinkedIn Skill Engine | Nebula Learning Centre",
+      "h1_count": 1,
+      "h1s": [
+        "LinkedIn Skill Engine"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/learning-center/",
+        "https://nebulacomponents.shop/learning-center/linkedin-skill-engine"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/message-match-checklist",
+      "final_url": "https://nebulacomponents.shop/learning-center/message-match-checklist",
+      "status": 200,
+      "elapsed_ms": 186,
+      "content_type": "text/html; charset=utf-8",
+      "redirects": [],
+      "bytes": 4654,
+      "title": "Message Match Checklist For Paid Traffic Landing Pages | Nebula Learning Centre",
+      "h1_count": 1,
+      "h1s": [
+        "Message Match Checklist For Paid Traffic Landing Pages"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/audit",
+        "https://nebulacomponents.shop/learning-center/",
+        "https://nebulacomponents.shop/learning-center/facebook-ads-no-leads",
+        "https://nebulacomponents.shop/learning-center/google-ads-clicks-no-sales",
+        "https://nebulacomponents.shop/learning-center/high-cpc-low-conversion",
+        "https://nebulacomponents.shop/learning-center/landing-page-not-converting",
+        "https://nebulacomponents.shop/learning-center/paid-traffic-leak-map"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/mobile-landing-page-leaks",
+      "final_url": "https://nebulacomponents.shop/learning-center/mobile-landing-page-leaks",
+      "status": 200,
+      "elapsed_ms": 98,
+      "content_type": "text/html; charset=utf-8",
+      "redirects": [],
+      "bytes": 4639,
+      "title": "Mobile Landing Page Leaks That Kill Paid Traffic | Nebula Learning Centre",
+      "h1_count": 1,
+      "h1s": [
+        "Mobile Landing Page Leaks That Kill Paid Traffic"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/audit",
+        "https://nebulacomponents.shop/learning-center/",
+        "https://nebulacomponents.shop/learning-center/facebook-ads-no-leads",
+        "https://nebulacomponents.shop/learning-center/google-ads-clicks-no-sales",
+        "https://nebulacomponents.shop/learning-center/high-cpc-low-conversion",
+        "https://nebulacomponents.shop/learning-center/landing-page-not-converting",
+        "https://nebulacomponents.shop/learning-center/paid-traffic-leak-map"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/proof-before-cta",
+      "final_url": "https://nebulacomponents.shop/learning-center/proof-before-cta",
+      "status": 200,
+      "elapsed_ms": 85,
+      "content_type": "text/html; charset=utf-8",
+      "redirects": [],
+      "bytes": 4645,
+      "title": "Proof Before CTA: The Simple Fix Most Landing Pages Miss | Nebula Learning Centre",
+      "h1_count": 1,
+      "h1s": [
+        "Proof Before CTA: The Simple Fix Most Landing Pages Miss"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/audit",
+        "https://nebulacomponents.shop/learning-center/",
+        "https://nebulacomponents.shop/learning-center/facebook-ads-no-leads",
+        "https://nebulacomponents.shop/learning-center/google-ads-clicks-no-sales",
+        "https://nebulacomponents.shop/learning-center/high-cpc-low-conversion",
+        "https://nebulacomponents.shop/learning-center/landing-page-not-converting",
+        "https://nebulacomponents.shop/learning-center/paid-traffic-leak-map"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/specialist-ai-agent-library",
+      "final_url": "https://nebulacomponents.shop/learning-center/specialist-ai-agent-library",
+      "status": 200,
+      "elapsed_ms": 110,
+      "content_type": "text/html; charset=utf-8",
+      "redirects": [],
+      "bytes": 6246,
+      "title": "Specialist AI Agent Library | Nebula Learning Centre",
+      "h1_count": 1,
+      "h1s": [
+        "Specialist AI Agent Library"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/audit",
+        "https://nebulacomponents.shop/learning-center/"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [
+        "6oUfZh7M87YM5TPgEa43S0b"
+      ],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/traffic-but-no-form-fills",
+      "final_url": "https://nebulacomponents.shop/learning-center/traffic-but-no-form-fills",
+      "status": 200,
+      "elapsed_ms": 99,
+      "content_type": "text/html; charset=utf-8",
+      "redirects": [],
+      "bytes": 4810,
+      "title": "Traffic But No Form Fills: The Form Is Usually Not The First Leak | Nebula Learning Centre",
+      "h1_count": 1,
+      "h1s": [
+        "Traffic But No Form Fills: The Form Is Usually Not The First Leak"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/audit",
+        "https://nebulacomponents.shop/learning-center/",
+        "https://nebulacomponents.shop/learning-center/facebook-ads-no-leads",
+        "https://nebulacomponents.shop/learning-center/google-ads-clicks-no-sales",
+        "https://nebulacomponents.shop/learning-center/high-cpc-low-conversion",
+        "https://nebulacomponents.shop/learning-center/landing-page-not-converting",
+        "https://nebulacomponents.shop/learning-center/paid-traffic-leak-map"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/llms.txt",
+      "final_url": "https://nebulacomponents.shop/llms.txt",
+      "status": 200,
+      "elapsed_ms": 48,
+      "content_type": "text/markdown; charset=utf-8",
+      "redirects": [],
+      "bytes": 702
+    },
+    {
+      "url": "https://nebulacomponents.shop/openapi.json",
+      "final_url": "https://nebulacomponents.shop/openapi.json",
+      "status": 200,
+      "elapsed_ms": 47,
+      "content_type": "application/json; charset=utf-8",
+      "redirects": [],
+      "bytes": 4260
+    },
+    {
+      "url": "https://nebulacomponents.shop/pricing-generator.html",
+      "final_url": "https://nebulacomponents.shop/pricing-generator.html",
+      "status": 200,
+      "elapsed_ms": 115,
+      "content_type": "text/html",
+      "redirects": [],
+      "bytes": 23140,
+      "title": "Pricing Table Generator \u00e2\u0080\u0094 Free by Nebula Components",
+      "h1_count": 1,
+      "h1s": [
+        "Pricing Table Generator"
+      ],
+      "forms": 0,
+      "inputs": 37,
+      "unlabeled_inputs": [
+        "t1name",
+        "t1price",
+        "t1curr",
+        "t1cta",
+        "t1f1c",
+        "t1f1",
+        "t1f2c",
+        "t1f2",
+        "t1f3c",
+        "t1f3",
+        "t1f4c",
+        "t1f4",
+        "t2name",
+        "t2price",
+        "t2curr",
+        "t2cta",
+        "t2f1c",
+        "t2f1",
+        "t2f2c",
+        "t2f2",
+        "t2f3c",
+        "t2f3",
+        "t2f4c",
+        "t2f4",
+        "t3name",
+        "t3price",
+        "t3curr",
+        "t3cta",
+        "t3f1c",
+        "t3f1",
+        "t3f2c",
+        "t3f2",
+        "t3f3c",
+        "t3f3",
+        "t3f4c",
+        "t3f4"
+      ],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/privacy-policy.html",
+      "final_url": "https://nebulacomponents.shop/privacy-policy.html",
+      "status": 200,
+      "elapsed_ms": 90,
+      "content_type": "text/html",
+      "redirects": [],
+      "bytes": 8822,
+      "title": "Privacy Policy \u00e2\u0080\u0094 Nebula Components",
+      "h1_count": 1,
+      "h1s": [
+        "Privacy Policy"
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/cdn-cgi/l/email-protection#5020223926313329103e3532253c31333f3d203f3e353e24237e23383f20",
+        "https://nebulacomponents.shop/cdn-cgi/l/email-protection#85f5f7ecf3e4e6fcc5ebe0e7f0e9e4e6eae8f5eaebe0ebf1f6abf6edeaf5"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    },
+    {
+      "url": "https://nebulacomponents.shop/robots.txt",
+      "final_url": "https://nebulacomponents.shop/robots.txt",
+      "status": 200,
+      "elapsed_ms": 72,
+      "content_type": "text/plain; charset=utf-8",
+      "redirects": [],
+      "bytes": 1910
+    },
+    {
+      "url": "https://nebulacomponents.shop/sitemap.xml",
+      "final_url": "https://nebulacomponents.shop/sitemap.xml",
+      "status": 200,
+      "elapsed_ms": 25,
+      "content_type": "application/xml; charset=utf-8",
+      "redirects": [],
+      "bytes": 3707
+    },
+    {
+      "url": "https://nebulacomponents.shop/thank-you.html",
+      "final_url": "https://nebulacomponents.shop/thank-you.html",
+      "status": 200,
+      "elapsed_ms": 79,
+      "content_type": "text/html",
+      "redirects": [],
+      "bytes": 4153,
+      "title": "Audit on its way \u00e2\u0080\u0094 Nebula Components",
+      "h1_count": 1,
+      "h1s": [
+        "Your audit is running ."
+      ],
+      "forms": 0,
+      "inputs": 0,
+      "unlabeled_inputs": [],
+      "images": 0,
+      "images_missing_alt": 0,
+      "internal_links": [
+        "https://nebulacomponents.shop/#pricing",
+        "https://nebulacomponents.shop/audit.html"
+      ],
+      "broken_fragments": [],
+      "unsafe_blank_links": [],
+      "stripe_slugs": [],
+      "has_viewport": true,
+      "html_lang": "en"
+    }
+  ]
+}
