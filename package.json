@@ -1,5 +1,29 @@
 {
   "dependencies": {
-    "@lobsterkit/lobstermail": "^1.7.0"
-  }
+    "@lobsterkit/lobstermail": "^1.7.0",
+    "@playwright/test": "^1.61.1",
+    "playwright": "^1.61.1"
+  },
+  "name": "nebula",
+  "version": "1.0.0",
+  "description": "This repository contains the implementation of a trigger-aware lead generation pipeline for Nebula Components. The pipeline identifies buying triggers in online content and automates outreach to high-potential prospects.",
+  "main": "contrast-check.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nebula-Components/nebula-components.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nebula-Components/nebula-components/issues"
+  },
+  "homepage": "https://github.com/Nebula-Components/nebula-components#readme"
 }

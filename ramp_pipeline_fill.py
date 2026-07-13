@@ -134,6 +134,17 @@ REDDIT_QUERY_POOL = [
     {'q': 'traffic but no signups', 'subreddits': ['SaaS', 'startups', 'Entrepreneur', 'indiehackers'], 'source': 'reddit_traffic_no_signups', 'weight': 1},
     {'q': 'spent 1000 on ads nothing', 'subreddits': ['PPC', 'Entrepreneur', 'smallbusiness'], 'source': 'reddit_spent_1000', 'weight': 1},
     {'q': '0 sales after ads', 'subreddits': ['PPC', 'Entrepreneur', 'smallbusiness', 'SaaS'], 'source': 'reddit_zero_after_ads', 'weight': 1},
+    # NEW July 13 — expanded angles for non-Reddit index coverage
+    {'q': 'my ads are clicking but no one is buying', 'subreddits': ['PPC', 'ecommerce', 'Entrepreneur', 'smallbusiness'], 'source': 'reddit_clicks_no_buy', 'weight': 1},
+    {'q': 'landing page critique', 'subreddits': ['SaaS', 'startups', 'SideProject', 'webdev'], 'source': 'reddit_lp_critique', 'weight': 1},
+    {'q': 'website gets traffic no leads', 'subreddits': ['Entrepreneur', 'smallbusiness', 'SEO', 'startups'], 'source': 'reddit_traffic_no_leads', 'weight': 1},
+    {'q': 'spent 500 on ads no results', 'subreddits': ['PPC', 'Entrepreneur', 'smallbusiness', 'FacebookAds'], 'source': 'reddit_spent_500', 'weight': 1},
+    {'q': 'product page not converting', 'subreddits': ['ecommerce', 'shopify', 'Entrepreneur', 'smallbusiness'], 'source': 'reddit_product_not_conv', 'weight': 1},
+    {'q': 'google ads budget wasted', 'subreddits': ['PPC', 'smallbusiness', 'Entrepreneur', 'googleads'], 'source': 'reddit_google_wasted', 'weight': 1},
+    {'q': 'facebook ads spent money no sales', 'subreddits': ['FacebookAds', 'ecommerce', 'smallbusiness', 'Entrepreneur'], 'source': 'reddit_fb_spent_no_sales', 'weight': 1},
+    {'q': 'adwords not converting', 'subreddits': ['PPC', 'googleads', 'Entrepreneur', 'smallbusiness'], 'source': 'reddit_adwords_no_conv', 'weight': 1},
+    {'q': 'meta ads zero conversions', 'subreddits': ['FacebookAds', 'PPC', 'Entrepreneur', 'smallbusiness'], 'source': 'reddit_meta_zero', 'weight': 1},
+    {'q': 'roas dropping landing page', 'subreddits': ['PPC', 'Entrepreneur', 'FacebookAds', 'googleads'], 'source': 'reddit_roas_drop_lp', 'weight': 1},
 ]
 # Queries used per run: weight=3 always, weight=2 pick 2, weight=1 pick 2
 REDDIT_QUERIES = None  # built at runtime by pick_reddit_queries()
@@ -171,6 +182,17 @@ GOOGLE_QUERY_POOL = [
     'startup feedback landing page reddit',
     'PPC landing page advice reddit',
     'small business website not converting reddit',
+    # NEW July 13 — Non-Reddit sources
+    'site:indiehackers.com landing page not converting',
+    'site:indiehackers.com ads no sales',
+    'site:indiehackers.com roas problem',
+    'site:medium.com landing page conversion problem',
+    'site:medium.com "ads not converting" landing page',
+    'site:news.ycombinator.com landing page conversion',
+    'site:producthunt.com landing page feedback',
+    '"landing page" "not converting" site:x.com',
+    '"ad spend" "no sales" site:x.com',
+    'site:buildinpublic.com landing page feedback',
 ]
 # Subset chosen per run: tier1 always (4), tier2=4, tier3=2
 GOOGLE_ICP_QUERIES = None
