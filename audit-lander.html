@@ -200,7 +200,7 @@
         <div class="guarantee">📈 Full refund if your conversion rate doesn't improve within 14 days</div>
       </div>
     </div>
-    <p class="micro" style="text-align:center;">No call required. No retainer. No commitment beyond the fix. <a href="/primer.html" style="color:#2563eb;">Full FAQ →</a></p>
+    <p class="micro" style="text-align:center;">No call required. No retainer. No commitment beyond the fix. <a href="/primer.html" style="color:#60a5fa;">Full FAQ →</a></p>
   </div>
 
   <!-- DATA PRIVACY (research: #1 blocker — explicit "what we access / what we don't") -->
@@ -234,21 +234,21 @@
   <!-- STATS -->
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;margin:16px 0;">
     <div style="background:white;border:1px solid #e5e7eb;border-radius:10px;padding:14px;">
-      <div style="font-size:28px;font-weight:800;color:#059669;">60s</div>
-      <div class="micro">audit delivery time</div>
+      <div style="font-size:28px;font-weight:800;color:#047857;">60s</div>
+      <div class="micro" style="color:#4b5563;">audit delivery time</div>
     </div>
     <div style="background:white;border:1px solid #e5e7eb;border-radius:10px;padding:14px;">
-      <div style="font-size:28px;font-weight:800;color:#059669;">5</div>
-      <div class="micro">dimensions scored</div>
+      <div style="font-size:28px;font-weight:800;color:#047857;">5</div>
+      <div class="micro" style="color:#4b5563;">dimensions scored</div>
     </div>
     <div style="background:white;border:1px solid #e5e7eb;border-radius:10px;padding:14px;">
-      <div style="font-size:28px;font-weight:800;color:#059669;">$0</div>
-      <div class="micro">no hidden upsell</div>
+      <div style="font-size:28px;font-weight:800;color:#047857;">$0</div>
+      <div class="micro" style="color:#4b5563;">no hidden upsell</div>
     </div>
   </div>
 
   <!-- BOTTOM CTA -->
-  <p class="micro" style="text-align:center;margin:8px 0 24px;">Questions? <a href="mailto:ops@launchcrate.io" style="color:#2563eb;">ops@launchcrate.io</a></p>
+  <p class="micro" style="text-align:center;margin:8px 0 24px;">Questions? <a href="mailto:ops@launchcrate.io" style="color:#60a5fa;">ops@launchcrate.io</a></p>
 
 </div>
 
@@ -274,7 +274,7 @@ form.addEventListener('submit', async (e) => {
     if (data.error) {
       result.innerHTML = '<p style="color:#dc2626;">' + escapeHtml(data.error) + '</p><p class="micro">Email ops@launchcrate.io with your URL and we\\'ll route it through the audit queue.</p>';
     } else {
-      result.innerHTML = '<p style="color:#059669;font-weight:700;">✓ Audit running. Check <strong>' + escapeHtml(email) + '</strong> in ~60 seconds.</p><p class="micro">Your prioritized fix list is on its way.</p>';
+      result.innerHTML = '<p style="color:#047857;font-weight:700;">✓ Audit running. Check <strong>' + escapeHtml(email) + '</strong> in ~60 seconds.</p><p class="micro">Your prioritized fix list is on its way.</p>';
       // Redirect to thank-you page after 2 seconds
       if (data.redirect) {
         setTimeout(() => { window.location.href = data.redirect; }, 2000);

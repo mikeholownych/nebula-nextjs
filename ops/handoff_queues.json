@@ -1,6 +1,6 @@
 {
   "bottleneck": "audit_to_payment_conversion",
-  "generated_at": "2026-07-13T08:32:23Z",
+  "generated_at": "2026-07-13T09:40:38Z",
   "queues": [
     {
       "acceptance": "audit/pitch/payment event is written to customer ledger and HOT_LEAD state is advanced",
