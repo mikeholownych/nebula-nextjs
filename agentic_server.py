@@ -446,6 +446,28 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
         if path == "/api/free-kit":
             return self._handle_free_kit()
 
+        if path == "/api/checkout-visit":
+            try:
+                content_len = int(self.headers.get("Content-Length", 0))
+                raw = self.rfile.read(content_len) if content_len else b"{}"
+                body = json.loads(raw.decode())
+                email = (body.get("email") or "").strip().lower()
+                if email and "@" in email:
+                    log_entry = {
+                        "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
+                        "email": email,
+                        "source": "checkout_free_kit_card",
+                        "stage": "lead_free_kit",
+                    }
+                    try:
+                        with open("/home/mike/nebula/audit_leads.jsonl", "a") as f:
+                            f.write(json.dumps(log_entry) + "\n")
+                    except Exception:
+                        pass
+                return self._send_json(200, {"status": "ok"})
+            except Exception:
+                return self._send_json(200, {"status": "ok"})
+
         if path == "/api/audit":
             try:
                 return self._handle_audit()
