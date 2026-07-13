@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .from('header h1', { opacity: 0, y: 30, duration: 0.8 }, '-=0.3')
       .from('header .sub', { opacity: 0, y: 20, duration: 0.8 }, '-=0.5')
       .from('header .trust-row', { opacity: 0, y: 20, duration: 0.6, stagger: 0.1 }, '-=0.5')
-      .from('header .btn', { opacity: 0, scale: 0.9, duration: 0.6 }, '-=0.3');
+      .from('header .btn', { opacity: 1, scale: 0.9, immediateRender: false, duration: 0.6 }, '-=0.3');
   } else if (hero) {
     const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
     tl.from('.hero h1', { opacity: 0, y: 30, duration: 0.8 })

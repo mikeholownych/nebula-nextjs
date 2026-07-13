@@ -1,6 +1,6 @@
 # ECONOMICS — Nebula Components Financial Operating Context
 
-**Last updated:** 2026-07-07
+**Last updated:** 2026-07-13
 **Status:** Active
 **Owner:** ops-finance agent
 **Update cadence:** Weekly (every Monday) or on any pricing change
@@ -66,7 +66,7 @@
 | Apify LinkedIn scraping runs | ~$5-15/run | ~8-12 runs/mo | $40-80/mo |
 | Bedrock inference (cron evals) | ~$0.10-0.50/eval | ~200-400/month | $20-50/mo |
 | AgentMail sends | ~$0.01/email | ~500-1000/mo | $5-10/mo |
-| Stripe fees at $97 transaction | ~$3.11 | Per $97 sale | Scales with revenue |
+| Stripe fees at $147 transaction | ~$4.56 | Per $147 sale | Scales with revenue |
 
 ### Budget Headroom
 
@@ -88,7 +88,7 @@
 | Offer | Price | Stripe Fee | Delivery Cost | Gross Margin | Notes |
 |---|---|---|---|---|---|
 | Free Audit | $0 | $0 | ~$0.10 (API + email) | N/A | Loss leader — cost is intentional |
-| $97 Fix Pack | $97 | ~$3.11 | ~$2 (AI + email delivery) | ~95% | High margin, scales well |
+| $147 Fix Pack | $147 | ~$4.56 | ~$2 (AI + email delivery) | ~96% | High margin, scales well |
 | $997 Growth Launch | $997 | ~$29.21 | ~$50-100 (intensive AI + human review) | ~90-95% | Labor component needs monitoring |
 | $1,497/mo Retainer | $1,497 | ~$43.71 | ~$100-200 (monthly monitoring) | ~87-90% | Best margin at scale |
 | $497/mo Agency Partner | $497 | ~$14.71 | ~$50 (white-label delivery) | ~87-90% | Partner-delivered |
@@ -97,11 +97,11 @@
 
 | Metric | Target | Current | Notes |
 |---|---|---|---|
-| Gross margin | >80% | ~95% (projected) | SaaS-like margins by design |
+| Gross margin | >80% | ~96% (projected) | SaaS-like margins by design |
 | CAC (paid) | <$10 | N/A | Organic only until >$1k MRR |
-| LTV (fix pack buyer) | >$1,594 | N/A | $97 fix + 1 month retainer ($1,497) |
+| LTV (fix pack buyer) | >$1,644 | N/A | $147 fix + 1 month retainer ($1,497) |
 | LTV/CAC | >10:1 | N/A | Target for paid acquisition when started |
-| Months to recover CAC | <1 | N/A | $97 fix covers most costs immediately |
+| Months to recover CAC | <1 | N/A | $147 fix covers most costs immediately |
 
 ---
 
@@ -139,7 +139,7 @@ Significant financial decisions are logged in `governance/DECISIONS/`. Cross-ref
 ## Files Referenced
 
 - `/home/mike/nebula/stripe_checkout_links.json` — Stripe product/price IDs
-- `/home/mike/nebula/stripe_97_config.json` — $97 config
+- `/home/mike/nebula/stripe_links.py` — current checkout-link resolver and fallback URLs
 - `/home/mike/nebula/stripe_997_links.json` — $997 config
 - `/home/mike/nebula/sre_state.json` — Operational state
 - `/home/mike/nebula/pipeline_health.json` — Pipeline health checks

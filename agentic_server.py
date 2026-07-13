@@ -86,9 +86,74 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
         if not getattr(self, '_head_request', False):
             self.wfile.write(data)
 
+    def _admin_authorized(self):
+        """Require a private bearer token for administrative CRM surfaces."""
+        import hmac
+        token_file = "/home/mike/.hermes/secrets/nebula_admin_token"
+        try:
+            with open(token_file, encoding="utf-8") as handle:
+                expected = handle.read().strip()
+        except OSError:
+            return False
+        supplied = self.headers.get("Authorization", "")
+        if not supplied.startswith("Bearer "):
+            return False
+        return bool(expected) and hmac.compare_digest(supplied[7:].strip(), expected)
+
+    def _static_path_allowed(self, path):
+        """Allow browser assets without exposing source, configuration, or ledgers."""
+        decoded = urllib.parse.unquote(path)
+        if decoded == "/":
+            return True
+        if "\x00" in decoded:
+            return False
+        parts = [part for part in decoded.split("/") if part]
+        if not parts or any(part.startswith(".") or part in ("..", ".") for part in parts):
+            return False
+        blocked_dirs = {
+            ".git", "ops", "governance", "tests", "scripts", "qa-output",
+            "reports", "research", "system_setup", "repository",
+            "document_storage", "pilot", "monitoring", "node_modules", "venv",
+        }
+        if parts[0] in blocked_dirs:
+            return False
+        blocked_extensions = {
+            ".py", ".pyc", ".json", ".jsonl", ".md", ".csv", ".tsv",
+            ".db", ".sqlite", ".sqlite3", ".log", ".env", ".key", ".pem",
+            ".sh", ".bash", ".yaml", ".yml", ".toml", ".lock", ".bak",
+        }
+        extension = os.path.splitext(parts[-1])[1].lower()
+        if extension in blocked_extensions:
+            return False
+        allowed_extensions = {
+            ".html", ".htm", ".css", ".js", ".mjs", ".png", ".jpg",
+            ".jpeg", ".gif", ".webp", ".svg", ".ico", ".woff", ".woff2",
+            ".ttf", ".otf", ".pdf", ".xml", ".txt", ".webmanifest", ".mp4",
+            ".webm", ".ogg", ".mp3", ".wav",
+        }
+        return extension in allowed_extensions
+
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path
+
+        if path == "/lead-dashboard.html" and not self._admin_authorized():
+            return self._send_json(401, {"error": "unauthorized"})
+
+        # Canonical aliases retained for links already published in emails/content.
+        route_aliases = {
+            "/privacy-policy": "/privacy-policy.html",
+            "/learning-center/paid-traffic-leak-map": "/lead-magnets/paid-traffic-leak-checklist",
+            "/create_97_checkout.html": "/checkout.html",
+            "/launch_page_97.html": "/checkout.html",
+            "/checkout_v2.html": "/checkout.html",
+            "/checkout-impulse.html": "/checkout.html",
+        }
+        if path in route_aliases:
+            self.send_response(301)
+            self.send_header("Location", route_aliases[path])
+            self.end_headers()
+            return
 
         # ─── WELL-KNOWN ENDPOINTS ────────────────────────────────
         
@@ -309,6 +374,8 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             rel = path.removeprefix("/lead-magnets/")
             if rel and ".." not in rel and "/" not in rel:
                 public_file = os.path.join(DIR, "public", "lead-magnets", rel)
+                if not os.path.isfile(public_file) and "." not in rel:
+                    public_file = os.path.join(DIR, "public", "lead-magnets", f"{rel}.html")
                 if os.path.isfile(public_file):
                     self.send_response(200)
                     ctype = "application/json" if rel.endswith(".json") else "text/html; charset=utf-8"
@@ -373,7 +440,9 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
                     return
 
         # Health endpoint — also proxy to webhook server
-        if path == "/api/health" or path == "/health":
+        if path == "/api/health":
+            return self._proxy_to(9000, "/health")
+        if path == "/health":
             return self._proxy_to(9000)
 
         # AI Prompt Pack — serve purchased packs by token
@@ -396,13 +465,48 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
             self._send_json(404, {"error": "Prompt pack not found"})
             return
 
-        # Default: serve static files
+        # Default: serve only explicit browser assets. The project root also
+        # contains source and lead/customer ledgers, so deny everything else.
+        if not self._static_path_allowed(path):
+            return self.send_error(404)
         return super().do_GET()
 
     def do_POST(self):
         """Handle POST requests - currently only Stripe webhooks and CRM API"""
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path
+
+        if path == "/newsletter":
+            content_len = int(self.headers.get("Content-Length", 0))
+            raw = self.rfile.read(content_len) if content_len else b""
+            form = urllib.parse.parse_qs(raw.decode("utf-8", errors="replace"))
+            email = (form.get("email", [""])[0] or "").strip().lower()
+            if not email or "@" not in email:
+                return self._send_json(400, {"error": "valid email is required"})
+            ledger = os.path.join(DIR, "newsletter_subscribers.jsonl")
+            known = set()
+            if os.path.isfile(ledger):
+                try:
+                    with open(ledger, encoding="utf-8") as handle:
+                        for line in handle:
+                            try:
+                                known.add(json.loads(line).get("email", ""))
+                            except Exception:
+                                continue
+                except OSError:
+                    pass
+            if email not in known:
+                with open(ledger, "a", encoding="utf-8") as handle:
+                    handle.write(json.dumps({
+                        "email": email,
+                        "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                        "source": "footer_weekly_insights",
+                        "status": "subscribed",
+                    }) + "\n")
+            self.send_response(303)
+            self.send_header("Location", "/thank-you.html?source=newsletter")
+            self.end_headers()
+            return
         
         if path == "/stripe-webhook":
             content_len = int(self.headers.get("Content-Length", 0))
@@ -537,12 +641,12 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
         self.send_response(404)
         self.end_headers()
 
-    def _proxy_to(self, port: int):
+    def _proxy_to(self, port: int, upstream_path: str | None = None):
         """Proxy the current GET request to a local port and relay the response."""
         import http.client as hc
         try:
             conn = hc.HTTPConnection("127.0.0.1", port, timeout=5)
-            conn.request("GET", self.path, headers={"Host": "localhost"})
+            conn.request("GET", upstream_path or self.path, headers={"Host": "localhost"})
             resp = conn.getresponse()
             body = resp.read()
             self.send_response(resp.status)
@@ -1014,6 +1118,10 @@ Events: revocation
         
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path
+
+        client_auth_paths = {"/api/crm/login", "/api/crm/client"}
+        if path not in client_auth_paths and not self._admin_authorized():
+            return self._send_json(401, {"error": "unauthorized"})
         
         self.send_response(200)
         self.send_header("Content-Type", "application/json")
@@ -1074,48 +1182,47 @@ Events: revocation
 
     def _handle_booking(self):
         """Handle demo booking form submissions."""
-        import sys, json, urllib.request
+        import urllib.request
         content_len = int(self.headers.get("Content-Length", 0))
-        data = json.loads(self.rfile.read(content_len).decode())
-        
-        self.send_response(200)
-        self.send_header("Content-Type", "application/json")
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.end_headers()
-        
+        raw = self.rfile.read(content_len) if content_len else b"{}"
         try:
-            # Send notification email via AgentMail
-            with open("/tmp/am_key") as f:
-                am_key = f.read().strip()
-            
-            subject = f"Demo Booking: {data.get('firstName')} {data.get('lastName')} - {data.get('company','?')}"
+            data = json.loads(raw.decode("utf-8"))
+        except Exception:
+            return self._send_json(400, {"error": "invalid JSON"})
+
+        email = (data.get("email") or "").strip().lower()
+        if not email or "@" not in email:
+            return self._send_json(400, {"error": "valid email is required"})
+
+        try:
+            with open("/home/mike/.hermes/secrets/agentmail.key", encoding="utf-8") as handle:
+                am_key = handle.read().strip()
+            subject = f"Demo Booking: {data.get('firstName', '')} {data.get('lastName', '')} - {data.get('company', '?')}"
             text = f"""New Demo Booking
 
-Name: {data.get('firstName')} {data.get('lastName')}
-Email: {data.get('email')}
-Company: {data.get('company','N/A')}
-Date: {data.get('date')}
-Time: {data.get('time')}
-Notes: {data.get('notes','None')}
+Name: {data.get('firstName', '')} {data.get('lastName', '')}
+Email: {email}
+Company: {data.get('company', 'N/A')}
+Date: {data.get('date', 'N/A')}
+Time: {data.get('time', 'N/A')}
+Notes: {data.get('notes', 'None')}
 
-Action: Reply to this email to confirm. Send calendar invite to {data.get('email')}."""
-            
+Action: Reply to this email to confirm. Send calendar invite to {email}."""
             headers = {"Authorization": f"Bearer {am_key}", "Content-Type": "application/json"}
             msg_data = {
                 "to": ["ops@launchcrate.io"],
                 "subject": subject,
                 "text": text,
-                "labels": ["booking"]
+                "labels": ["booking"],
             }
             req = urllib.request.Request(
                 "https://api.agentmail.to/inboxes/nebulashop@agentmail.to/messages/send",
                 data=json.dumps(msg_data).encode(), headers=headers, method="POST"
             )
-            urllib.request.urlopen(req, timeout=15)
-            
-            self._safe_write(json.dumps({"status": "ok", "message": "Booked"}).encode())
-        except Exception as e:
-            self._safe_write(json.dumps({"status": "error", "message": str(e)}).encode())
+            urllib.request.urlopen(req, timeout=15).read()
+            return self._send_json(200, {"status": "ok", "message": "Booked"})
+        except Exception:
+            return self._send_json(502, {"error": "booking notification failed"})
 
     def _handle_leaderboard_submit(self):
         """Capture Ad Burn Leak Board submissions for public proof and follow-up."""
@@ -1133,7 +1240,7 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
         try:
             monthly_spend = float(_spend_raw) if _spend_raw else None
         except (ValueError, TypeError):
-            monthly_spend = None.lower()
+            monthly_spend = None
         signal = (body.get("signal") or "").strip()
 
         if not url:
@@ -1296,6 +1403,8 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
             from deliver_audit import scrape_page, score_audit, compose_audit_email
             page = scrape_page(url)
             audit = score_audit(page)
+        except ValueError as e:
+            return self._send_json(400, {"error": str(e)})
         except Exception as e:
             return self._send_json(500, {"error": f"Audit failed: {e}"})
 
@@ -1358,7 +1467,7 @@ Action: Reply to this email to confirm. Send calendar invite to {data.get('email
                     "source_type": body.get("source_type") or "inbound_audit_tool",
                     "trigger_type": body.get("trigger_type") or "self_serve_audit_capture",
                     "vertical": body.get("vertical") or "unknown",
-                    "offer_variant": body.get("offer_variant") or "audit_first_97_checkout",
+                    "offer_variant": body.get("offer_variant") or "audit_first_147_checkout",
                 }
                 log_entry = {
                     "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
@@ -1579,8 +1688,8 @@ def _handle_crm_client_dashboard(email, token):
 if __name__ == "__main__":
     host = "0.0.0.0"
     print(f"Agentic server for {SITE} on port {PORT}, serving {DIR}")
-    socketserver.TCPServer.allow_reuse_address = True
-    httpd = socketserver.TCPServer((host, PORT), AgenticHandler)
+    socketserver.ThreadingTCPServer.allow_reuse_address = True
+    httpd = socketserver.ThreadingTCPServer((host, PORT), AgenticHandler)
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:

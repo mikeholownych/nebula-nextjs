@@ -28,6 +28,7 @@ EXPECTED_STRIPE = {
     "00w5kD1nK0wkaa573A43S0c": "$1,497 AI Ops Retainer",
     "aFa8wPc2o7YM9613Ro43S0d": "$497 Agency Partner",
 }
+EXPECTED_STATUS = {f"{BASE}/does-not-exist-qa-404": 404}
 
 session = requests.Session()
 session.headers.update({"User-Agent": "NebulaPlatformQA/1.0"})
@@ -107,7 +108,13 @@ def main() -> int:
     with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
         pages = list(pool.map(fetch, urls))
     by_url = {p["url"]: p for p in pages}
-    failures = [p for p in pages if p.get("error") or p.get("status", 0) >= 400]
+    failures = [
+        p for p in pages
+        if p.get("error") or (
+            p.get("status", 0) >= 400
+            and p.get("status") != EXPECTED_STATUS.get(p["url"])
+        )
+    ]
     html_pages = [p for p in pages if "text/html" in p.get("content_type", "")]
     missing_titles = [p["url"] for p in html_pages if not p.get("title")]
     missing_h1 = [p["url"] for p in html_pages if p.get("h1_count") != 1]
@@ -118,7 +125,10 @@ def main() -> int:
     observed_slugs = sorted({slug for p in html_pages for slug in p.get("stripe_slugs", [])})
     unexpected_slugs = [s for s in observed_slugs if s not in EXPECTED_STRIPE]
     internal_targets = sorted({u.split("#", 1)[0] for p in html_pages for u in p.get("internal_links", [])})
-    uncrawled_internal = [u for u in internal_targets if u not in by_url]
+    uncrawled_internal = [
+        u for u in internal_targets
+        if u not in by_url and urlparse(u).path != "/cdn-cgi/l/email-protection"
+    ]
     with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
         link_checks = list(pool.map(fetch, uncrawled_internal))
     broken_internal = [p for p in link_checks if p.get("error") or p.get("status", 0) >= 400]

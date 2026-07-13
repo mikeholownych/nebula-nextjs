@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Deliver audit to lead. Scrape URL, score, compose email, send via AgentMail."""
 
-import sys, json, time, re, subprocess, os, argparse
+import sys, json, time, re, subprocess, os, argparse, ipaddress, socket
+from urllib.parse import urljoin, urlparse
 from pathlib import Path
 
 # Fix Map — visual execution roadmap (Nico's FORGE adaptation)
@@ -95,17 +96,42 @@ def get_session():
     })
     return session
 
-def fetch_page(url, session):
-    """Fetch page with fallback UA rotation."""
+def validate_public_http_url(url):
+    """Reject non-HTTP and non-public audit targets before any server-side fetch."""
+    parsed = urlparse(url)
+    if parsed.scheme not in {"http", "https"} or not parsed.hostname or parsed.username or parsed.password:
+        raise ValueError("Audit URL must be a public HTTP(S) URL")
+    hostname = parsed.hostname.lower().rstrip(".")
+    if hostname == "localhost" or hostname.endswith(".localhost"):
+        raise ValueError("Audit URL must resolve to a public address")
     try:
-        resp = session.get(url, timeout=15)
-        if resp.status_code == 403:
-            # Try with different UA
-            session.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"})
-            resp = session.get(url, timeout=15)
-        resp.raise_for_status()
-        return resp.text
-    except requests.RequestException as e:
+        addresses = {row[4][0] for row in socket.getaddrinfo(hostname, parsed.port or (443 if parsed.scheme == "https" else 80), type=socket.SOCK_STREAM)}
+    except (OSError, ValueError) as exc:
+        raise ValueError("Audit URL must resolve to a public address") from exc
+    if not addresses or any(not ipaddress.ip_address(address).is_global for address in addresses):
+        raise ValueError("Audit URL must resolve to a public address")
+    return url
+
+
+def fetch_page(url, session):
+    """Fetch a public page with validated redirects and fallback UA rotation."""
+    try:
+        current = validate_public_http_url(url)
+        for _ in range(6):
+            resp = session.get(current, timeout=15, allow_redirects=False)
+            if resp.status_code == 403:
+                session.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"})
+                resp = session.get(current, timeout=15, allow_redirects=False)
+            if resp.is_redirect or resp.is_permanent_redirect:
+                location = resp.headers.get("Location")
+                if not location:
+                    raise ValueError("Redirect missing Location header")
+                current = validate_public_http_url(urljoin(current, location))
+                continue
+            resp.raise_for_status()
+            return resp.text
+        raise ValueError("Too many redirects")
+    except (requests.RequestException, ValueError) as e:
         print(f"ERROR: Failed to fetch {url}: {e}")
         return None
 
@@ -1224,7 +1250,7 @@ def main():
         "contact_route": args.contact_route,
         "content_firewall_score": args.content_firewall_score,
         "icp_score": args.icp_score,
-        "offer_variant": "audit_first_97_checkout" if args.source_url or args.lead_id else None,
+        "offer_variant": "audit_first_147_checkout" if args.source_url or args.lead_id else None,
     }
     attribution = {k: v for k, v in attribution.items() if v not in (None, "")}
 

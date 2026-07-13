@@ -21,11 +21,11 @@
     /* Editor */
     .editor{padding:32px;overflow-y:auto;border-right:1px solid rgba(255,255,255,0.06)}
     .editor h1{font-size:1.25rem;font-weight:700;margin-bottom:4px}
-    .editor p{font-size:0.8125rem;color:#64748b;margin-bottom:24px}
+    .editor p{font-size:0.8125rem;color:#94a3b8;margin-bottom:24px}
     .field{margin-bottom:16px}
     .field label{display:block;font-size:0.75rem;font-weight:600;color:#94a3b8;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.03em}
     .field input,.field textarea{width:100%;padding:10px 14px;background:#080812;border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:#e2e8f0;font-family:inherit;font-size:0.875rem;outline:none;transition:border-color 0.2s}
-    .field input:focus,.field textarea:focus{border-color:#6366f1}
+    .field input:focus,.field textarea:focus{border-color:#a5b4fc}
     .field textarea{resize:vertical;min-height:60px}
     .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
@@ -61,32 +61,32 @@
     <p>Customize your hero section below. The preview updates in real-time. Free to use — grab the HTML when you're done.</p>
 
     <div class="field">
-      <label>Badge Text</label>
+      <label for="badge">Badge Text</label>
       <input type="text" id="badge" value="✦ Now in Public Beta" oninput="updatePreview()">
     </div>
 
     <div class="field">
-      <label>Headline</label>
+      <label for="headline">Headline</label>
       <input type="text" id="headline" value="Build Faster. Ship Smarter." oninput="updatePreview()">
     </div>
 
     <div class="field">
-      <label>Headline Highlight (gradient text)</label>
+      <label for="highlight">Headline Highlight (gradient text)</label>
       <input type="text" id="highlight" value="Ship Smarter." oninput="updatePreview()">
     </div>
 
     <div class="field">
-      <label>Subtitle</label>
+      <label for="subtitle">Subtitle</label>
       <textarea id="subtitle" oninput="updatePreview()">The developer platform that handles the boilerplate so you can focus on what matters — building products your users love.</textarea>
     </div>
 
     <div class="row">
       <div class="field">
-        <label>Primary CTA Text</label>
+        <label for="cta1">Primary CTA Text</label>
         <input type="text" id="cta1" value="Start Building Free →" oninput="updatePreview()">
       </div>
       <div class="field">
-        <label>Secondary CTA Text</label>
+        <label for="cta2">Secondary CTA Text</label>
         <input type="text" id="cta2" value="See How It Works" oninput="updatePreview()">
       </div>
     </div>
@@ -107,7 +107,7 @@
 
 <div class="upsell">
   <p>⚡ Love the hero? Get <strong>7 components</strong> (Features, Pricing, Testimonials, FAQ, CTA, Footer + Hero) for <span class="price">$7</span> — <a href="https://nebulacomponents.shop">Buy Nebula Components →</a></p>
-  <p style="font-size:0.75rem;color:#475569;margin-top:6px">Share this tool: <a href="https://news.ycombinator.com/item?id=48639668" style="color:#818cf8" target="_blank">HN</a> · <a href="https://nebulacomponents.shop" style="color:#818cf8">Nebula</a></p>
+  <p style="font-size:0.75rem;color:#94a3b8;margin-top:6px">Share this tool: <a href="https://news.ycombinator.com/item?id=48639668" style="color:#818cf8" target="_blank" rel="noopener noreferrer">HN</a> · <a href="https://nebulacomponents.shop" style="color:#818cf8">Nebula</a></p>
 </div>
 
 <script>
@@ -128,7 +128,7 @@ function generateHero(){
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#e2e8f0;min-height:100vh;display:flex;align-items:center;justify-content:center}
     .hero{text-align:center;max-width:800px;padding:80px 24px;position:relative}
-    .hero::before{content:'';position:absolute;width:500px;height:500px;background:#6366f1;filter:blur(120px);opacity:0.1;top:-200px;left:-200px;border-radius:50%}
+    .hero::before{content:'';position:absolute;width:500px;height:500px;background:#4f46e5;filter:blur(120px);opacity:0.1;top:-200px;left:-200px;border-radius:50%}
     .hero::after{content:'';position:absolute;width:300px;height:300px;background:#22d3ee;filter:blur(120px);opacity:0.08;bottom:-150px;right:-100px;border-radius:50%}
     .hero-content{position:relative;z-index:1}
     .badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;font-size:0.8125rem;font-weight:500;border:1px solid rgba(99,102,241,0.25);background:rgba(99,102,241,0.08);color:#818cf8;margin-bottom:24px}

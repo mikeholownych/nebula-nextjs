@@ -34,11 +34,11 @@
     /* Editor */
     .editor{padding:28px;overflow-y:auto;border-right:1px solid rgba(255,255,255,0.06)}
     .editor h1{font-size:1.25rem;font-weight:700;margin-bottom:4px}
-    .editor p{font-size:0.8125rem;color:#64748b;margin-bottom:20px}
+    .editor p{font-size:0.8125rem;color:#94a3b8;margin-bottom:20px}
     .field{margin-bottom:14px}
     .field label{display:block;font-size:0.6875rem;font-weight:600;color:#94a3b8;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.03em}
     .field input,.field textarea{width:100%;padding:9px 12px;background:#080812;border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:#e2e8f0;font-family:inherit;font-size:0.8125rem;outline:none;transition:border-color 0.2s}
-    .field input:focus,.field textarea:focus{border-color:#6366f1}
+    .field input:focus,.field textarea:focus{border-color:#a5b4fc}
     .field textarea{resize:vertical;min-height:50px}
     .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
@@ -54,8 +54,8 @@
     .feature-list{margin-top:8px}
     .feature-item{display:flex;align-items:center;gap:8px;margin-bottom:6px}
     .feature-item input[type="text"]{flex:1;padding:6px 10px;background:#080812;border:1px solid rgba(255,255,255,0.08);border-radius:6px;color:#e2e8f0;font-family:inherit;font-size:0.75rem;outline:none;transition:border-color 0.2s}
-    .feature-item input[type="text"]:focus{border-color:#6366f1}
-    .feature-item .f-check{width:16px;height:16px;accent-color:#6366f1;cursor:pointer;flex-shrink:0}
+    .feature-item input[type="text"]:focus{border-color:#a5b4fc}
+    .feature-item .f-check{width:16px;height:16px;accent-color:#a5b4fc;cursor:pointer;flex-shrink:0}
 
     /* Toggle switch for Most Popular */
     .toggle-wrap{display:flex;align-items:center;gap:8px}
@@ -63,7 +63,7 @@
     .toggle{position:relative;width:36px;height:20px;flex-shrink:0}
     .toggle input{opacity:0;width:0;height:0}
     .toggle .slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:#1e1e2e;border-radius:20px;transition:0.3s}
-    .toggle .slider::before{content:'';position:absolute;height:14px;width:14px;left:3px;bottom:3px;background-color:#64748b;border-radius:50%;transition:0.3s}
+    .toggle .slider::before{content:'';position:absolute;height:14px;width:14px;left:3px;bottom:3px;background-color:#94a3b8;border-radius:50%;transition:0.3s}
     .toggle input:checked + .slider{background:#f59e0b}
     .toggle input:checked + .slider::before{transform:translateX(16px);background-color:#fff}
 
@@ -280,6 +280,20 @@
 </div>
 
 <script>
+// Associate every control with a programmatic name for keyboard/screen-reader users.
+document.querySelectorAll('input[id]').forEach((input) => {
+  if (input.labels && input.labels.length) return;
+  const id = input.id;
+  const feature = id.match(/^t([123])f([1-4])(c?)$/);
+  const field = id.match(/^t([123])(name|price|curr|cta)$/);
+  const popular = id.match(/^t([123])popular$/);
+  let label = id;
+  if (feature) label = `Tier ${feature[1]} feature ${feature[2]} ${feature[3] ? 'enabled' : 'text'}`;
+  else if (field) label = `Tier ${field[1]} ${field[2] === 'curr' ? 'currency' : field[2]}`;
+  else if (popular) label = `Tier ${popular[1]} marked most popular`;
+  input.setAttribute('aria-label', label);
+});
+
 function generatePricing(){
   // Tier 1
   const t1name = document.getElementById('t1name').value || 'Starter';
@@ -336,7 +350,7 @@ function generatePricing(){
     body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#e2e8f0;min-height:100vh;display:flex;align-items:center;justify-content:center}
     .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;padding:60px 24px;position:relative}
     @media(max-width:900px){.pricing{grid-template-columns:1fr;max-width:400px}}
-    .pricing::before{content:'';position:absolute;width:600px;height:600px;background:#6366f1;filter:blur(150px);opacity:0.08;top:-300px;left:-200px;border-radius:50%;pointer-events:none}
+    .pricing::before{content:'';position:absolute;width:600px;height:600px;background:#4f46e5;filter:blur(150px);opacity:0.08;top:-300px;left:-200px;border-radius:50%;pointer-events:none}
     .pricing::after{content:'';position:absolute;width:400px;height:400px;background:#22d3ee;filter:blur(150px);opacity:0.06;bottom:-200px;right:-150px;border-radius:50%;pointer-events:none}
     .card{background:linear-gradient(180deg,rgba(255,255,255,0.04) 0%,rgba(255,255,255,0.01) 100%);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:32px 24px;position:relative;transition:transform 0.3s,box-shadow 0.3s;z-index:1;display:flex;flex-direction:column}
     .card:hover{transform:translateY(-4px);box-shadow:0 12px 48px rgba(99,102,241,0.12)}
@@ -345,12 +359,12 @@ function generatePricing(){
     .plan-name{font-size:0.8125rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:16px}
     .price{font-size:clamp(2.25rem,3.5vw,3rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:4px}
     .price .curr{font-size:0.625em;vertical-align:super;margin-right:2px}
-    .price .freq{font-size:0.375em;font-weight:500;color:#64748b;letter-spacing:0}
+    .price .freq{font-size:0.375em;font-weight:500;color:#94a3b8;letter-spacing:0}
     .divider{height:1px;background:rgba(255,255,255,0.06);margin:20px 0}
     .features{display:flex;flex-direction:column;gap:12px;flex:1}
     .feature{display:flex;align-items:center;gap:10px;font-size:0.875rem;color:#cbd5e1}
     .feature .icon{font-size:0.875rem;flex-shrink:0}
-    .feature-off{color:#475569}
+    .feature-off{color:#94a3b8}
     .btn{display:block;text-align:center;padding:12px 20px;border-radius:10px;font-size:0.875rem;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;text-decoration:none;margin-top:24px;width:100%}
     .btn-primary{background:linear-gradient(135deg,#6366f1,#4f46e5);color:#fff;box-shadow:0 4px 20px rgba(99,102,241,0.3)}
     .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(99,102,241,0.45)}

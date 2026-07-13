@@ -28,6 +28,11 @@ class AdBurnLeaderboardTests(unittest.TestCase):
         html = page.read_text()
         self.assertIn('Ad Burn Leak Board', html)
 
+    def test_invalid_monthly_spend_does_not_call_lower_on_none(self):
+        source = (BASE / 'agentic_server.py').read_text()
+        self.assertNotIn('monthly_spend = None.lower()', source)
+        self.assertIn('monthly_spend = None', source)
+
 
 if __name__ == '__main__':
     unittest.main()

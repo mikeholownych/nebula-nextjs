@@ -220,6 +220,7 @@
       border: 1px solid #1e1e2e;
       margin: 24px 0;
     }
+    .comparison-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .comparison-table th {
       background: #12121c;
       padding: 16px 20px;
@@ -413,6 +414,7 @@
   <section class="container">
     <h2 class="center">How This Compares to the Alternatives</h2>
 
+    <div class="comparison-scroll" role="region" aria-label="Service comparison" tabindex="0">
     <table class="comparison-table">
       <thead>
         <tr><th></th><th class="comp-other">AI SDR Platform</th><th class="comp-other">Hire a Freelancer</th><th class="comp-nebula">Nebula Growth Launch</th></tr>
@@ -468,6 +470,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </section>
 
   <!-- ─── GUARANTEE DETAIL ─── -->

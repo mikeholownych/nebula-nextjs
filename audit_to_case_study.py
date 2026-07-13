@@ -164,7 +164,7 @@ def generate_case_study_html(entry: dict, slug: str, vertical: str) -> str:
         * {{ box-sizing: border-box; margin: 0; padding: 0; }}
         body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1f2937; background: #fafafa; }}
         .container {{ max-width: 800px; margin: 0 auto; padding: 40px 20px; }}
-        .badge {{ display: inline-block; background: #059669; color: white; padding: 4px 12px; border-radius: 9999px; font-size: 14px; font-weight: 600; margin-bottom: 16px; }}
+        .badge {{ display: inline-block; background: #047857; color: white; padding: 4px 12px; border-radius: 9999px; font-size: 14px; font-weight: 600; margin-bottom: 16px; }}
         h1 {{ font-size: 32px; font-weight: 700; color: #111827; margin-bottom: 8px; line-height: 1.2; }}
         .meta {{ color: #6b7280; font-size: 15px; margin-bottom: 32px; }}
         .score-card {{ background: white; border: 1px solid #e5e7eb; border-radius: 12px; padding: 24px; margin-bottom: 32px; display: flex; gap: 24px; align-items: center; }}
@@ -186,7 +186,7 @@ def generate_case_study_html(entry: dict, slug: str, vertical: str) -> str:
         .cta-box {{ background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 24px; text-align: center; margin-top: 32px; }}
         .cta-box h3 {{ font-size: 18px; font-weight: 700; color: #166534; margin-bottom: 8px; }}
         .cta-box p {{ color: #166534; margin-bottom: 16px; }}
-        .btn {{ display: inline-block; background: #059669; color: white; padding: 14px 28px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: background 0.2s; }}
+        .btn {{ display: inline-block; background: #047857; color: white; padding: 14px 28px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: background 0.2s; }}
         .btn:hover {{ background: #047857; }}
         .footer-note {{ text-align: center; color: #9ca3af; font-size: 13px; margin-top: 40px; }}
         .anonymized {{ color: #6b7280; font-style: italic; font-size: 14px; }}
@@ -248,7 +248,7 @@ def generate_index_page(case_studies: list):
     """Generate index page listing all case studies."""
     CASE_STUDIES_DIR.mkdir(parents=True, exist_ok=True)
     
-    html = """<!DOCTYPE html>
+    html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -268,7 +268,7 @@ def generate_index_page(case_studies: list):
         .card {{ background: white; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }}
         .card:hover {{ transform: translateY(-4px); box-shadow: 0 12px 24px -10px rgba(0,0,0,0.1); }}
         .card-header {{ background: #f9fafb; padding: 16px 20px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; }}
-        .vertical-tag {{ background: #059669; color: white; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; }}
+        .vertical-tag {{ background: #047857; color: white; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; }}
         .score {{ font-size: 24px; font-weight: 800; }}
         .score.grade-a {{ color: #166534; }}
         .score.grade-b {{ color: #1e40af; }}
@@ -277,19 +277,19 @@ def generate_index_page(case_studies: list):
         .card-body {{ padding: 20px; }}
         .card-title {{ font-size: 18px; font-weight: 700; color: #111827; margin-bottom: 8px; }}
         .card-meta {{ color: #6b7280; font-size: 14px; margin-bottom: 16px; }}
-        .card-link {{ display: inline-block; color: #059669; font-weight: 600; text-decoration: none; }}
+        .card-link {{ display: inline-block; color: #047857; font-weight: 600; text-decoration: none; }}
         .card-link:hover {{ text-decoration: underline; }}
         .cta-banner {{ background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 32px; text-align: center; margin-top: 48px; }}
         .cta-banner h2 {{ font-size: 24px; font-weight: 700; color: #166534; margin-bottom: 12px; }}
         .cta-banner p {{ color: #166534; margin-bottom: 20px; }}
-        .btn {{ display: inline-block; background: #059669; color: white; padding: 14px 28px; border-radius: 8px; font-weight: 600; text-decoration: none; }}
+        .btn {{ display: inline-block; background: #047857; color: white; padding: 14px 28px; border-radius: 8px; font-weight: 600; text-decoration: none; }}
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Landing Page Conversion Audit Case Studies</h1>
-            <p>Real audits. Real scores. Real patterns. <a href="https://nebulacomponents.shop/audit.html" style="color: #059669;">Run your own free audit →</a></p>
+            <p>Real audits. Real scores. Real patterns. <a href="https://nebulacomponents.shop/audit.html" style="color: #047857;">Run your own free audit →</a></p>
         </div>
         
         <div class="grid">

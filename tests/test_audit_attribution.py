@@ -21,7 +21,7 @@ class AuditAttributionLoggingTests(unittest.TestCase):
                 "source_type": "reddit_explicit_pain",
                 "trigger_type": "ad_bleed_zero_conversion",
                 "vertical": "saas",
-                "offer_variant": "audit_first_97_checkout",
+                "offer_variant": "audit_first_147_checkout",
             }
 
             with patch.object(deliver_audit, "LEDGER_FILE", str(ledger)), patch.object(deliver_audit, "AUDIT_LEADS_FILE", str(audit_leads)):
@@ -33,7 +33,7 @@ class AuditAttributionLoggingTests(unittest.TestCase):
             self.assertEqual(lead["source_type"], "reddit_explicit_pain")
             self.assertEqual(lead["trigger_type"], "ad_bleed_zero_conversion")
             self.assertEqual(lead["vertical"], "saas")
-            self.assertEqual(lead["offer_variant"], "audit_first_97_checkout")
+            self.assertEqual(lead["offer_variant"], "audit_first_147_checkout")
 
 
 if __name__ == "__main__":
