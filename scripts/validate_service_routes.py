@@ -300,6 +300,34 @@ def _route_covers_contract(route: dict[str, Any], contract: RouteContract) -> bo
     return False
 
 
+def _contract_is_protected_python(contract: RouteContract) -> bool:
+    """Return True if a contract's selector/value matches the protected Python route pattern."""
+    protected_samples = (
+        "/stripe-webhook",
+        "/api/",
+        "/api/stats",
+        "/.well-known/example",
+        "/agent/example",
+        "/track/example",
+        "/rb2b-webhook",
+    )
+    if contract.selector == "path":
+        value = contract.value
+        return any(
+            value == sample
+            or value.startswith(sample)
+            or sample.startswith(value) and value not in {"/", ""}
+            for sample in protected_samples
+        )
+    if contract.selector == "path_regex":
+        try:
+            compiled = re.compile(contract.value)
+        except re.error:
+            return False
+        return any(compiled.match(sample) is not None for sample in protected_samples)
+    return False
+
+
 def validate_route_coverage(document: dict[str, Any], extraction: RouteExtraction) -> None:
     exclusions = document.get("route_contract_exclusions", [])
     documented = {
@@ -320,6 +348,12 @@ def validate_route_coverage(document: dict[str, Any], extraction: RouteExtractio
             raise ManifestValidationError(
                 f"uncovered route contract {contract.selector}={contract.value!r} "
                 f"at {contract.context}:{contract.line}"
+            )
+        # Protection: a protected Python contract cannot be covered by a route targeting "next"
+        if _contract_is_protected_python(contract) and covering.get("target_owner") == "next":
+            raise ManifestValidationError(
+                f"protected Python route contract {contract.selector}={contract.value!r} "
+                f"covered by a route targeting next: {covering.get('name')}"
             )
 
 
