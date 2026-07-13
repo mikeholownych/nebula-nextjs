@@ -18,6 +18,8 @@ STATS_FILE     = "/home/mike/nebula/stats.json"
 INBOX_LOG      = "/home/mike/nebula/ledgers/customer-ledger.jsonl"
 SEEN_THREADS_FILE = "/home/mike/nebula/seen_threads.json"
 HOT_LEAD_FILE  = "/home/mike/nebula/HOT_LEAD.json"
+OUTREACH_EVIDENCE_FILE = "/home/mike/nebula/outreach_evidence.jsonl"
+AUDIT_LEADS_FILE = "/home/mike/nebula/audit_leads.jsonl"
 CHECKOUT_97    = "https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
 CHECKOUT_997   = "https://buy.stripe.com/4gMcN5aYk92Qaa5drY43S09"
 
@@ -87,6 +89,75 @@ def _real_revenue_from_ledger():
                     amount = 0
             total += int(amount or 0)
     return total // 100, total, tests
+
+
+def _load_jsonl(path):
+    rows = []
+    if not os.path.exists(path):
+        return rows
+    with open(path, encoding="utf-8") as handle:
+        for line in handle:
+            if not line.strip():
+                continue
+            try:
+                rows.append(json.loads(line))
+            except Exception:
+                continue
+    return rows
+
+
+def refresh_stats_snapshot():
+    """Rebuild truth-first dashboard stats from the current operational ledgers."""
+    try:
+        with open(STATS_FILE, encoding="utf-8") as handle:
+            stats = json.load(handle)
+    except Exception:
+        stats = {}
+
+    outreach = _load_jsonl(OUTREACH_EVIDENCE_FILE)
+    customers = _load_jsonl(INBOX_LOG)
+    sent = [row for row in outreach if row.get("status") == "sent"]
+    replies = [
+        row for row in customers
+        if row.get("event") == "inbound_reply" or row.get("event_type") == "inbound_reply"
+        if not _is_test_payment_text(row.get("email"), row.get("sender"), row.get("subject"))
+    ]
+    warm = [row for row in replies if row.get("classification") == "warm"]
+    audits = [row for row in customers if row.get("event_type") == "audit_delivered"]
+    real_payments = [
+        row for row in customers
+        if row.get("event_type") == "payment"
+        and not _is_test_payment_text(row.get("payment_id"), row.get("email"), row.get("product"))
+    ]
+    real_dollars, _real_cents, test_count = _real_revenue_from_ledger()
+
+    stats.update({
+        "revenue": real_dollars,
+        "real_revenue": real_dollars,
+        "real_payments": len(real_payments),
+        "test_revenue_excluded": True,
+        "test_payments_excluded": test_count,
+        "emails_sent": len(sent),
+        "replies": len(replies),
+        "warm_leads": len(warm),
+        "open_convos": len(warm),
+        "audits_delivered": len(audits),
+        "trigger_based_sends": len(sent),
+        "trigger_warm_replies": len(warm),
+        "trigger_reply_rate": round((len(warm) / len(sent)) * 100, 2) if sent else 0.0,
+        "updated": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+    })
+    source_files = [OUTREACH_EVIDENCE_FILE, INBOX_LOG, AUDIT_LEADS_FILE]
+    mtimes = [os.path.getmtime(path) for path in source_files if os.path.exists(path)]
+    stats["data_updated"] = time.strftime(
+        "%Y-%m-%dT%H:%M:%SZ", time.gmtime(max(mtimes) if mtimes else time.time())
+    )
+
+    temp_path = f"{STATS_FILE}.tmp"
+    with open(temp_path, "w", encoding="utf-8") as handle:
+        json.dump(stats, handle, indent=2)
+    os.replace(temp_path, STATS_FILE)
+    return stats
 
 
 def update_stats(field, increment=1):
@@ -377,29 +448,11 @@ class WebhookHandler(BaseHTTPRequestHandler):
             self._send_json(404, {"error": "not found"})
 
     def _serve_stats(self):
-        self.send_response(200)
-        self.send_header("Content-Type", "application/json")
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.end_headers()
         try:
-            if os.path.exists(STATS_FILE):
-                with open(STATS_FILE) as f:
-                    stats = json.load(f)
-            else:
-                stats = {
-                    "revenue": 0, "emails_sent": 155, "replies": 2,
-                    "warm_leads": 0, "open_convos": 1, "uptime": 99,
-                    "challenge_day": 0,
-                    "updated": time.strftime("%Y-%m-%dT%H:%M:%SZ")
-                }
-            real_dollars, _real_cents, test_count = _real_revenue_from_ledger()
-            stats["revenue"] = real_dollars
-            stats["real_revenue"] = real_dollars
-            stats["test_revenue_excluded"] = True
-            stats["test_payments_excluded"] = test_count
-            self.wfile.write(json.dumps(stats).encode())
+            stats = refresh_stats_snapshot()
+            self._send_json(200, stats)
         except Exception as e:
-            self.wfile.write(json.dumps({"error": str(e)}).encode())
+            self._send_json(500, {"error": str(e)})
 
     def _handle_stripe(self):
         length = int(self.headers.get("Content-Length", 0))

@@ -10,6 +10,7 @@ def test_dashboard_fetches_live_platform_metrics():
     assert "setTimeout(" not in DASHBOARD
     assert 'id="data-status"' in DASHBOARD
     assert "ageHours > 24" in DASHBOARD
+    assert "data.data_updated" in DASHBOARD
     assert "Stale data" in DASHBOARD
 
 

@@ -142,7 +142,7 @@ async function fetchLiveData() {
     setText('ev-newsletter', data.real_payments ?? 0);
     setText('ev-roi-calc', `$${Number(data.real_revenue ?? 0).toLocaleString()}`);
 
-    const updatedDate = data.updated ? new Date(data.updated) : null;
+    const updatedDate = data.data_updated ? new Date(data.data_updated) : null;
     const updated = updatedDate && !Number.isNaN(updatedDate.getTime()) ? updatedDate.toLocaleString() : 'timestamp unavailable';
     const ageHours = updatedDate ? (Date.now() - updatedDate.getTime()) / 3600000 : Infinity;
     setText('audit-trend', 'Live operational ledger');

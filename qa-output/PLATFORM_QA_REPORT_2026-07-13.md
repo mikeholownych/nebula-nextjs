@@ -14,7 +14,7 @@ All critical and high-severity defects found during this review were fixed and v
 
 | Gate | Result |
 |---|---:|
-| Python regression suite | **117 passed** |
+| Python regression suite | **119 passed** |
 | Full-site Playwright visual/WCAG suite | **87 passed** |
 | Critical-flow/mobile/animation/pricing Playwright suite | **36 passed** |
 | Total Playwright checks | **123 passed** |
@@ -157,7 +157,7 @@ The index generator emitted literal doubled braces (`{{ ... }}`), causing browse
 - Added crawler handling for expected 404 probes and Cloudflare email-protection links.
 - Added offer-integrity, route-contract, SSRF, ICP-gate, source-outcome, and critical browser-flow regression coverage.
 - Moved client CRM credentials from URL query parameters to `Authorization` and `X-Client-Email` headers; legacy credential URLs now return **400**.
-- Replaced dashboard placeholders with `/api/stats` operational metrics, added a 24-hour freshness warning, and explicitly labeled GA4 behavior data as unavailable.
+- Replaced dashboard placeholders with `/api/stats` operational metrics, rebuilt every snapshot from current ledgers on read, added a 24-hour source-freshness warning, and explicitly labeled GA4 behavior data as unavailable.
 - Replaced all 22 inert `href="#"` demo links with semantic buttons or non-interactive text.
 - Added source-level label associations to all 36 pricing-generator controls; both static crawling and runtime accessibility checks now pass.
 
@@ -165,7 +165,6 @@ The index generator emitted literal doubled braces (`{{ ... }}`), causing browse
 
 | Severity | Item | Impact / recommendation |
 |---|---|---|
-| Medium | Operational `stats.json` was last refreshed on 2026-07-05 | The dashboard now marks this as **Stale data** instead of presenting it as current. Refresh the stats producer from active ledgers before using those values operationally. |
 | Medium | GA4 Data API is not connected | The dashboard now shows verified live operational metrics and does not invent traffic data. Connect GA4 Data API for page-view, visitor, scroll-depth, and bounce-rate reporting. |
 
 ## Regression commands
@@ -180,5 +179,5 @@ venv/bin/python3 scripts/qa_platform_crawl.py
 ## Launch decision
 
 **Public funnel: GO.**  
-**Internal dashboard connection: GO; underlying operational snapshot currently stale.**  
+**Internal operational dashboard: GO.**  
 **GA4 traffic/behavior analytics: NOT YET.**
