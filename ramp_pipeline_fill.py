@@ -28,7 +28,7 @@ ICP_TRIGGER_PATTERNS = {
     ],
     "zero_conversions": [
         r"\bzero conversions?\b", r"\b0 conversions?\b", r"\bno conversions?\b",
-        r"\bnot converting\b", r"\bno signups?\b", r"\b0 sales\b", r"\bno sales\b",
+        r"\bnot converting\b", r"\bno signups?\b", r"\b0 sales\b", r"\bzero sales\b", r"\bno sales\b",
         r"\bno customers?\b", r"\bclicks? no (sales|conversions|buys?)\b",
         r"\bburning money\b", r"\bthrowing money\b", r"\bwasting money\b",
         r"\bno bookings?\b", r"\bno leads?\b", r"\bzero signups\b",
@@ -81,14 +81,11 @@ def check_icp_fit(post_text: str, trigger_source: str) -> tuple[bool, str]:
         score += 3
         return True, f"buying_trigger (ad_bleed+zero_conversions, score={score})"
     
-    if (has_ad_bleed or has_zero_conv) and has_founder:
+    if has_zero_conv and has_founder:
         return True, f"founder_with_pain (triggers={triggers_found}, score={score})"
-    
-    if has_ad_bleed:
-        return True, f"ad_bleed_present (triggers={triggers_found}, score={score})"
-    
-    if trigger_source in ("reddit_ads_pain", "reddit_zero_sales", "reddit_ads_no_conv"):
-        return True, f"high_yield_source ({trigger_source})"
+
+    if "landing_page_feedback" in triggers_found and has_founder:
+        return True, f"founder_feedback_request (triggers={triggers_found}, score={score})"
     
     return False, f"no_buying_trigger (triggers={triggers_found}, score={score})"
 

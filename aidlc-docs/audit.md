@@ -47,3 +47,17 @@
 - Extracted source-outcome semantics into Nebula signal retrieval.
 - Added regression tests proving rate-limited sources are not treated as quiet markets.
 - Wrote research/last30days-skill-review.md.
+
+## 2026-07-13T10:11:56Z — last30days Production Benchmark
+
+### Raw user input
+```text
+[Mon 2026-07-13 10:11:56 UTC] continue
+```
+
+### Actions
+- Ran quick and default 30-day trigger-search benchmarks against Reddit, Hacker News, and GitHub with browser cookies disabled.
+- Measured zero strict trigger-qualified/contactable leads from 8 and 30 retrieved items.
+- Compared against Nebula July 13 baseline: four leads, four emails.
+- Rejected last30days as a production lead source.
+- Fixed Nebula ICP gate false positives exposed by the benchmark and added regression tests.
