@@ -147,6 +147,11 @@ nebula-v1.0.0.tar.gz
 himalaya/
 himalaya_env/
 himalaya-venv/
+test-results/
+playwright-report/
+
+# ── Runtime lock files ───────────────────────────
+.pipeline_ramp.lock
 
 # ── Code intelligence ───────────────────────────
 .codegraph/
