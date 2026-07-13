@@ -56,6 +56,14 @@ Caddy is active. Its `:8080` configuration proxies `/api/stats`, `/api/health`, 
 
 The machine-readable source of truth is [`config/service-route-manifest.yaml`](../../config/service-route-manifest.yaml). Its rules are ordered from specific protected/dynamic routes toward the public default.
 
+### Machine-checked route contract
+
+Run `venv/bin/python3 scripts/validate_service_routes.py --source agentic_server.py` before accepting a route-map change. The validator parses the Python source with `ast` only; it never imports or executes the server and never reads runtime tokens or environment values. It extracts constant exact, membership, `startswith`, and statically knowable regular-expression path tests with source line and function context. Every extracted contract must be owned by an exact, prefix, or regex manifest rule. The public default is not accepted as coverage for a Python route contract. A selector that cannot be resolved statically fails unless its stable diagnostic identifier has a non-empty reason in `route_contract_exclusions`.
+
+Manifest selectors are ordered. An exact route must precede a broader prefix when routing ownership, upstream, or transition gate differs, and a narrower prefix must likewise precede a broader one. Duplicate prefixes, equivalent regexes, and unsafe regex overlap fail validation. `path_regex` expressions must compile, begin with `^/`, and either end in `$`/`\\Z` or declare `regex_mode: prefix`; root catch-alls and nested quantified expressions are forbidden.
+
+Current and target owners must be declared services. Owner changes and targets whose service is `target_not_live` require a named verifiable gate; boolean, `complete`, and `deployed` gates are rejected. Protected Python route classes cannot target Next, Stripe remains an exact route gated by `verified_idempotent_stripe_processor`, and the public default remains gated by `final_public_cutover`.
+
 | Route or family | Observed current owner | Current behavior |
 | --- | --- | --- |
 | `/stripe-webhook` | `agentic_server` | Remains on the legacy handler; migration is blocked on the verified idempotent processor |

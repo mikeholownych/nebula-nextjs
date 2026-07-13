@@ -106,6 +106,98 @@
       "target_owner": "agentic_server"
     },
     {
+      "name": "lead_dashboard",
+      "path": "/lead-dashboard.html",
+      "route_class": "protected_python",
+      "current_owner": "agentic_server",
+      "target_owner": "agentic_server"
+    },
+    {
+      "name": "service_health",
+      "path": "/health",
+      "route_class": "protected_python",
+      "current_owner": "agentic_server",
+      "target_owner": "agentic_server"
+    },
+    {
+      "name": "newsletter_submission",
+      "path": "/newsletter",
+      "route_class": "protected_python",
+      "current_owner": "agentic_server",
+      "target_owner": "agentic_server"
+    },
+    {
+      "name": "notion_audit",
+      "path": "/notion/audit",
+      "route_class": "protected_python",
+      "current_owner": "agentic_server",
+      "target_owner": "agentic_server"
+    },
+    {
+      "name": "legacy_public_redirects",
+      "path_regex": "^/(?:privacy-policy|create_97_checkout\\.html|launch_page_97\\.html|checkout_v2\\.html|checkout-impulse\\.html)$",
+      "route_class": "public_page_family",
+      "current_owner": "agentic_server",
+      "target_owner": "next",
+      "transition_gate": "legacy_redirect_parity_canary"
+    },
+    {
+      "name": "public_metadata",
+      "path_regex": "^/(?:sitemap\\.xml|robots\\.txt)$",
+      "route_class": "public_page_family",
+      "current_owner": "agentic_server",
+      "target_owner": "next",
+      "transition_gate": "public_metadata_parity_canary"
+    },
+    {
+      "name": "audit_slash",
+      "path": "/audit/",
+      "route_class": "public_page_family",
+      "current_owner": "agentic_server",
+      "target_owner": "next",
+      "transition_gate": "interactive_audit_parity_canary"
+    },
+    {
+      "name": "lead_magnets",
+      "path_prefix": "/lead-magnets/",
+      "route_class": "public_page_family",
+      "current_owner": "agentic_server",
+      "target_owner": "next",
+      "transition_gate": "lead_magnets_parity_canary"
+    },
+    {
+      "name": "prompt_packs",
+      "path_prefix": "/prompt-pack/",
+      "route_class": "public_page_family",
+      "current_owner": "agentic_server",
+      "target_owner": "next",
+      "transition_gate": "prompt_pack_parity_canary"
+    },
+    {
+      "name": "case_studies_root",
+      "path": "/case-studies",
+      "route_class": "public_page_family",
+      "current_owner": "agentic_server",
+      "target_owner": "next",
+      "transition_gate": "case_studies_parity_canary"
+    },
+    {
+      "name": "learning_centre_uk_root",
+      "path": "/learning-centre",
+      "route_class": "public_page_family",
+      "current_owner": "agentic_server",
+      "target_owner": "next",
+      "transition_gate": "learning_centre_parity_canary"
+    },
+    {
+      "name": "learning_centre_us_root",
+      "path": "/learning-center",
+      "route_class": "public_page_family",
+      "current_owner": "agentic_server",
+      "target_owner": "next",
+      "transition_gate": "learning_centre_alias_parity_canary"
+    },
+    {
       "name": "case_studies",
       "path_prefix": "/case-studies/",
       "route_class": "public_page_family",
