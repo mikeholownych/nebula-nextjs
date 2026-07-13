@@ -26,6 +26,7 @@ BASE = Path('/home/mike/nebula')
 sys.path.insert(0, str(BASE))
 
 from lead_store import LeadStore
+from source_outcomes import SourceOutcome, classify_http_status, record_outcome
 
 # ── Config ────────────────────────────────────────────────────────────────────
 try:
@@ -40,6 +41,7 @@ HEADERS = {'Authorization': f'Bearer {APIFY_KEY}', 'Content-Type': 'application/
 SIGNAL_LEADS_FILE    = BASE / 'signal_leads.jsonl'
 SIGNAL_INSIGHTS_FILE = BASE / 'signal_insights.jsonl'
 DEDUP_FILE           = BASE / 'signal_dedup.jsonl'
+SOURCE_OUTCOMES_FILE = BASE / 'source_outcomes.jsonl'
 
 # Competitors to monitor
 COMPETITORS = {
@@ -108,13 +110,35 @@ def _run_actor(actor_id: str, input_data: dict, timeout_secs: int = 120) -> list
     """Run an Apify actor synchronously and return items list."""
     url = f'{APIFY_BASE}/acts/{actor_id.replace("/", "~")}/run-sync-get-dataset-items'
     params = {'timeout': timeout_secs, 'memory': 256}
+    source = f'apify:{actor_id}'
     try:
         resp = requests.post(url, headers=HEADERS, json=input_data, params=params, timeout=timeout_secs + 30)
         if resp.status_code == 200:
-            return resp.json() if isinstance(resp.json(), list) else resp.json().get('items', [])
+            payload = resp.json()
+            items = payload if isinstance(payload, list) else payload.get('items', [])
+            record_outcome(SOURCE_OUTCOMES_FILE, SourceOutcome(
+                source=source,
+                state=classify_http_status(resp.status_code, len(items)),
+                items_returned=len(items),
+            ))
+            return items
+        record_outcome(SOURCE_OUTCOMES_FILE, SourceOutcome(
+            source=source,
+            state=classify_http_status(resp.status_code),
+            detail=f'HTTP {resp.status_code}: {resp.text[:200]}',
+        ))
         print(f'  [apify] {actor_id} returned {resp.status_code}: {resp.text[:200]}')
         return []
+    except requests.Timeout as e:
+        record_outcome(SOURCE_OUTCOMES_FILE, SourceOutcome(
+            source=source, state='timeout', detail=str(e),
+        ))
+        print(f'  [apify] {actor_id} error: {e}')
+        return []
     except Exception as e:
+        record_outcome(SOURCE_OUTCOMES_FILE, SourceOutcome(
+            source=source, state='unreachable', detail=str(e),
+        ))
         print(f'  [apify] {actor_id} error: {e}')
         return []
 
