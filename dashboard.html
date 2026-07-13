@@ -30,6 +30,7 @@
   .pill { display: inline-block; background: #1e293b; color: #94a3b8; padding: 2px 8px; border-radius: 4px; font-size: 11px; }
   .status { display: inline-block; margin-left: 8px; padding: 4px 9px; border-radius: 999px; background: #1e293b; color: #cbd5e1; font-size: 12px; vertical-align: middle; }
   .status.live { background: #064e3b; color: #a7f3d0; }
+  .status.stale { background: #78350f; color: #fde68a; }
   .status.error { background: #7f1d1d; color: #fecaca; }
 </style>
 </head>
@@ -141,14 +142,17 @@ async function fetchLiveData() {
     setText('ev-newsletter', data.real_payments ?? 0);
     setText('ev-roi-calc', `$${Number(data.real_revenue ?? 0).toLocaleString()}`);
 
-    const updated = data.updated ? new Date(data.updated).toLocaleString() : 'timestamp unavailable';
+    const updatedDate = data.updated ? new Date(data.updated) : null;
+    const updated = updatedDate && !Number.isNaN(updatedDate.getTime()) ? updatedDate.toLocaleString() : 'timestamp unavailable';
+    const ageHours = updatedDate ? (Date.now() - updatedDate.getTime()) / 3600000 : Infinity;
     setText('audit-trend', 'Live operational ledger');
     setText('checkout-trend', data.test_payments_excluded ? `${data.test_payments_excluded} test payments excluded` : 'Verified payments only');
     setText('cvr-trend', 'Trigger outreach replies ÷ sends');
     setText('revenue-trend', 'Test revenue excluded');
-    status.textContent = 'Live';
-    status.className = 'status live';
-    alerts.innerHTML = `<div class="alert">✅ <strong>Operational data connected.</strong> Last ledger update: ${updated}. <span class="time">GA4 not connected</span></div>`;
+    const stale = ageHours > 24;
+    status.textContent = stale ? 'Stale data' : 'Live';
+    status.className = stale ? 'status stale' : 'status live';
+    alerts.innerHTML = `<div class="alert${stale ? ' critical' : ''}">${stale ? '⚠️' : '✅'} <strong>Operational data ${stale ? 'is stale' : 'connected'}.</strong> Last ledger update: ${updated}. <span class="time">GA4 not connected</span></div>`;
   } catch (error) {
     status.textContent = 'Data unavailable';
     status.className = 'status error';
