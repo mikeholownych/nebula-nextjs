@@ -33,3 +33,17 @@
 - Enabled the promised 14-day Agency Partner trial in Stripe.
 - Aligned AI Ops page billing language with immediate monthly Stripe billing.
 - Verified personalized $147 Checkout Session generation.
+
+## 2026-07-13T09:55:14Z — External Repository Review
+
+### Raw user input
+```text
+[Mon 2026-07-13 09:55:14 UTC] Review https://github.com/mvanhorn/last30days-skill
+```
+
+### Actions
+- Reviewed upstream at commit 4b027919c76e24ac27875c854bfd9f57c0b7cb69.
+- Ran Python, Go MCP, dependency, preflight, mock-engine, and security checks.
+- Extracted source-outcome semantics into Nebula signal retrieval.
+- Added regression tests proving rate-limited sources are not treated as quiet markets.
+- Wrote research/last30days-skill-review.md.
