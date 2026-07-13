@@ -15,7 +15,7 @@
 Error: expect(received).toBe(expected) // Object.is equality
 
 Expected: 0
-Received: 2
+Received: 35
 ```
 
 # Page snapshot
@@ -892,9 +892,9 @@ Received: 2
   94  |   console.log(`CONTRAST: checked ${contrast.length} nodes, failures=${contrastFails}`);
   95  |   console.log(`PAGE ERRORS: ${JSON.stringify(pageErrors.filter(e => !e.includes('rb2b') && !e.includes('ERR_NAME_NOT_RESOLVED')))}`);
   96  | 
-> 97  |   expect(vis.length).toBe(0);
-      |                      ^ Error: expect(received).toBe(expected) // Object.is equality
-  98  |   expect(contrastFails).toBe(0);
+  97  |   expect(vis.length).toBe(0);
+> 98  |   expect(contrastFails).toBe(0);
+      |                         ^ Error: expect(received).toBe(expected) // Object.is equality
   99  |   expect(pageErrors.filter(e => !e.includes('rb2b') && !e.includes('ERR_NAME_NOT_RESOLVED'))).toHaveLength(0);
   100 | });
   101 | 
