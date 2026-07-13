@@ -187,3 +187,23 @@ Create a complete and thorough plan to implement the above transformation
 - Placeholder scan returned zero findings.
 - All roadmap links resolve to existing plan files.
 - Self-review fixed a root-route collision between initial scaffold and homepage migration.
+
+## 2026-07-13T18:07:03Z — Asynchronous architecture review incorporated
+
+### Review evidence
+- Three independent repository reviews completed after the initial plan commit.
+- Live inventory observed 489 HTML files and a case-study count changing during review, proving generators must be paused before route-baseline capture.
+- `agentic_server.py` and `webhook_server.py` were directly verified to parse Stripe webhook JSON without validating `Stripe-Signature`.
+- `stripe_webhook.py` was directly verified to contain duplicate `customer.subscription.updated` branches, making the latter branch unreachable.
+- Existing client access was verified to depend on email plus long-lived token paths that must be retired rather than extended.
+- Python was reported bound to `0.0.0.0:8765`; Cloudflare Tunnel was reported running as root; Caddy was reported active. These require live topology capture and service hardening before routing changes.
+
+### Corrections applied
+- Amended the local AI-DLC requirements to include client accounts, PostgreSQL customer-platform state, billing, agency management, and white-label workflows.
+- Replaced the false assumption of an existing verified Stripe webhook with a blocking task to create one raw-body-verified, PostgreSQL-idempotent processor with a transactional outbox.
+- Changed target `/stripe-webhook` ownership from the existing agentic service to the platform API after security gates pass.
+- Added tracked/generated content stabilization, payer-versus-service organization modeling, user identity mappings, RLS, outbox events, safe customer reconciliation, legacy client-auth retirement, loopback binding, unprivileged Cloudflare service operation, and Caddy/topology discovery.
+
+### Validation
+- Seven planning documents now contain 1,504 lines, 36 implementation tasks, and 243 executable checkboxes.
+- Placeholder scan, task-step sequence validation, roadmap-link validation, and `git diff --check` all passed with zero findings.

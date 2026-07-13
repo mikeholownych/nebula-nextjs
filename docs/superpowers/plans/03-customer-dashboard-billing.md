@@ -85,37 +85,65 @@ export async function platformApi<T>(path: string, token: string, init?: Request
 - [ ] **Step 5: Build account/team pages with accessible status messages and confirmation for destructive actions**
 - [ ] **Step 6: Run API and browser tests; commit as `feat: add customer team administration`**
 
-### Task 3: Normalize Stripe billing state
+### Task 3: Consolidate and harden Stripe event processing
 
 **Files:**
+- Create: `platform_api/api/webhooks/stripe.py`
 - Create: `platform_api/services/billing_sync.py`
+- Create: `platform_api/services/stripe_event_processor.py`
+- Create: `platform_api/services/outbox.py`
+- Create: `platform_api/adapters/legacy_fulfillment.py`
 - Create: `platform_api/repositories/subscriptions.py`
 - Create: `platform_api/schemas/billing.py`
 - Modify: `stripe_webhook.py`
+- Modify: `agentic_server.py`
+- Modify: `webhook_server.py`
+- Test: `tests/platform_api/test_stripe_signature.py`
 - Test: `tests/platform_api/test_billing_sync.py`
+- Test: `tests/platform_api/test_stripe_outbox.py`
 - Test: `tests/test_stripe_webhook_platform_sync.py`
 
 **Interfaces:**
-- Consumes verified Stripe events from existing webhook handler.
-- Produces `sync_stripe_event(event_id: str, event_type: str, payload: Mapping[str, Any]) -> BillingSyncResult` and normalized subscriptions/entitlements.
+- Produces one target endpoint, `POST /api/platform/v1/webhooks/stripe`, which receives raw bytes, verifies `Stripe-Signature`, inserts the Stripe event ID under a unique PostgreSQL constraint, updates normalized billing state transactionally, and writes an outbox event for legacy fulfillment.
 
-- [ ] **Step 1: Write failing tests for checkout completion, subscription create/update/delete, payment failure, duplicate event, out-of-order event, unknown customer, and test/live mode mismatch**
-- [ ] **Step 2: Add a narrow adapter call from the existing verified webhook handler after signature validation**
+- [ ] **Step 1: Freeze the two unsafe current paths with failing security tests**
+
+Tests must prove that `agentic_server.py` and `webhook_server.py` currently accept unsigned Stripe-shaped JSON, that duplicate delivery can repeat mutations, and that the second `customer.subscription.updated` branch in `stripe_webhook.py` is unreachable. These tests document the defect; they must not send live fulfillment messages or write production ledgers.
+
+- [ ] **Step 2: Implement raw-body Stripe signature verification before JSON processing**
 
 ```python
-result = sync_stripe_event(
-    event_id=event["id"],
-    event_type=event["type"],
-    payload=event["data"]["object"],
-)
+try:
+    event = stripe.Webhook.construct_event(
+        payload=raw_body,
+        sig_header=stripe_signature,
+        secret=settings.stripe_webhook_secret,
+    )
+except (ValueError, stripe.error.SignatureVerificationError) as exc:
+    raise InvalidWebhookSignature() from exc
 ```
 
-The existing webhook response behavior must remain compatible even if platform synchronization records a retriable failure.
+Missing, malformed, expired, or mismatched signatures return `400` and perform zero database, ledger, email, order, or entitlement writes.
 
-- [ ] **Step 3: Map Stripe product/price IDs to explicit entitlement codes in versioned configuration**
-- [ ] **Step 4: Persist provider event before mutation and use Stripe event creation time to reject stale state regressions**
-- [ ] **Step 5: Run existing webhook tests plus platform billing tests**
-- [ ] **Step 6: Commit as `feat: synchronize Stripe billing entitlements`**
+- [ ] **Step 3: Persist and process idempotently**
+
+Insert `(provider='stripe', external_event_id=event.id)` under a unique constraint. In one transaction, apply only a newer billing state, update payer/service-account entitlements, and insert an outbox event. Duplicate delivery returns `200` without repeating any side effect.
+
+- [ ] **Step 4: Preserve existing fulfillment through one compatibility adapter**
+
+Move legacy order/ledger/email behavior behind `legacy_fulfillment.py`; invoke it only from an idempotent outbox worker. Remove the duplicate subscription-update branch and test both subscription status and dunning behavior explicitly. Keep JSONL writes temporarily as append-only evidence, not billing truth.
+
+- [ ] **Step 5: Cut over the public webhook atomically**
+
+After replaying signed fixtures in staging, change Cloudflare `/stripe-webhook` ownership from `agentic_server` to `platform_api`. Disable the old Stripe handlers only after the new endpoint, outbox, and rollback route pass. Preserve a route-level emergency rollback that does not permit unsigned processing.
+
+- [ ] **Step 6: Map Stripe product/price IDs to versioned entitlement codes and test checkout, subscription, invoice, refund, dispute, duplicate, out-of-order, unknown-customer, and test/live-mode cases**
+
+- [ ] **Step 7: Run existing payment tests plus `venv/bin/python3 -m pytest tests/platform_api/test_stripe_signature.py tests/platform_api/test_billing_sync.py tests/platform_api/test_stripe_outbox.py tests/test_stripe_webhook_platform_sync.py -q`**
+
+Expected: unsigned/replayed events cannot mutate state; every valid event produces at most one billing mutation and one fulfillment outbox action.
+
+- [ ] **Step 8: Commit as `security: consolidate verified idempotent Stripe webhooks`**
 
 ### Task 4: Add billing dashboard and Customer Portal
 
@@ -131,7 +159,7 @@ The existing webhook response behavior must remain compatible even if platform s
 **Interfaces:**
 - Produces: `GET /api/platform/v1/billing`; `POST /api/platform/v1/billing/portal-session -> {url, expiresAt}`.
 
-- [ ] **Step 1: Write failing authorization tests proving only authorized organization members can create a portal session for that organization's Stripe customer**
+- [ ] **Step 1: Write failing authorization tests proving only a user with billing permission on the payer organization can create a portal session for that payer's Stripe customer; a client administrator cannot view agency invoices merely because the agency pays for the client's service entitlement**
 - [ ] **Step 2: Implement server-side portal-session creation with an allowlisted return URL**
 - [ ] **Step 3: Render plan, renewal/cancellation state, invoice link availability, entitlement freshness timestamp, and a stale-data warning**
 - [ ] **Step 4: Make portal opening a POST action with duplicate-click protection; never embed card forms**

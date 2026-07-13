@@ -10,7 +10,9 @@
 
 ## Global Constraints
 
-- `/stripe-webhook` must reach the existing signature-verifying Python handler without body transformation.
+- Run each bounded service as an unprivileged dedicated user and bind Next.js, Python, PostgreSQL, and internal APIs to loopback or a private socket unless a documented network boundary requires otherwise.
+- Inventory the currently active Caddy and Cloudflare services before changing routing; do not introduce an undocumented extra proxy layer.
+- `/stripe-webhook` must move to the verified, idempotent platform processor before customer-account provisioning; rollback must never restore unsigned webhook processing.
 - Agent discovery, tracking, CRM/admin, stats, and existing API routes stay on their current service until explicitly migrated.
 - Health indicates process availability; readiness indicates dependency availability; data freshness is a separate metric.
 - No production cutover without an exercised staging rollback.
@@ -27,15 +29,17 @@
 - Create: `docs/architecture/request-routing.md`
 
 **Interfaces:**
-- Produces ordered route ownership: `next`, `platform_api`, `agentic_server`, or `webhook_server`.
+- Produces ordered route ownership by release stage: `next`, `platform_api`, `agentic_server`, or `webhook_server`. The manifest records current and target ownership for routes whose security boundary changes.
 
-- [ ] **Step 1: Write failing tests for overlap, uncovered protected endpoints, invalid regex, and accidental Stripe routing**
+- [ ] **Step 1: Write failing tests for overlap, uncovered protected endpoints, invalid regex, accidental unsigned Stripe routing, and an impossible current-to-target transition**
 
-Required existing-route owners include:
+Required route ownership includes:
 
 ```yaml
 - path: /stripe-webhook
-  owner: agentic_server
+  current_owner: agentic_server
+  target_owner: platform_api
+  transition_gate: verified_idempotent_stripe_processor
 - path_prefix: /api/platform/
   owner: platform_api
 - path_prefix: /api/crm
@@ -47,6 +51,8 @@ Required existing-route owners include:
 - default: true
   owner: next
 ```
+
+The current Stripe route remains documented as unsafe until the target gate passes; no rollback may restore unsigned processing.
 
 - [ ] **Step 2: Parse `agentic_server.py` route contracts and require every dynamic route to appear explicitly or under an explicit prefix**
 - [ ] **Step 3: Fail validation when two rules can own the same path before the intended higher-priority rule**
@@ -79,18 +85,22 @@ Required existing-route owners include:
 - Create: `deploy/systemd/nebula-platform-api.service`
 - Create: `deploy/systemd/nebula-agentic.service`
 - Create: `deploy/systemd/nebula-webhook.service`
+- Create: `deploy/systemd/cloudflared-tunnel.service`
 - Create: `scripts/verify_services.py`
+- Create: `scripts/capture_runtime_topology.py`
 - Create: `docs/runbooks/service-lifecycle.md`
 
 **Interfaces:**
 - Produces bounded services with health checks and restart limits.
 
-- [ ] **Step 1: Write service-file validation tests for non-root user, absolute working directory, environment file permissions, restart policy, and hardening directives**
-- [ ] **Step 2: Configure Next to run `.next/standalone/server.js` on `127.0.0.1:3000` and platform API through Uvicorn on `127.0.0.1:8770`**
-- [ ] **Step 3: Preserve current Python ports 8765 and 9000; do not start duplicate processes**
-- [ ] **Step 4: Add `NoNewPrivileges`, private temporary directories, read-only system paths, bounded open files, and explicit writable runtime directories**
-- [ ] **Step 5: Run `systemd-analyze verify deploy/systemd/*.service` and the service verification script**
-- [ ] **Step 6: Commit as `ops: supervise Nebula platform services`**
+- [ ] **Step 1: Capture the live process, port, Caddy, Cloudflare, and systemd topology before changing units; record which component currently owns each public route and ensure the plan does not create a hidden proxy loop**
+- [ ] **Step 2: Write service-file validation tests for non-root user, absolute working directory, environment file permissions, restart policy, loopback binding, and hardening directives**
+- [ ] **Step 3: Configure Next to run `.next/standalone/server.js` on `127.0.0.1:3000` and platform API through Uvicorn on `127.0.0.1:8770`**
+- [ ] **Step 4: Preserve Python ports 8765 and 9000 but change any `0.0.0.0` binding to `127.0.0.1`; verify no duplicate processes start**
+- [ ] **Step 5: Run Cloudflare Tunnel as a dedicated unprivileged service account and preserve access only to its required credentials/configuration**
+- [ ] **Step 6: Add `NoNewPrivileges`, private temporary directories, read-only system paths, bounded open files, and explicit writable runtime directories**
+- [ ] **Step 7: Run `systemd-analyze verify deploy/systemd/*.service` and the service verification script**
+- [ ] **Step 8: Commit as `ops: supervise Nebula platform services`**
 
 ### Task 4: Build CI quality gates
 

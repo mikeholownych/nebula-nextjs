@@ -4,7 +4,7 @@
 
 **Goal:** Replace Nebula's standalone HTML estate with Next.js 16.2.10 and deliver an authenticated, tenant-safe customer and agency platform without regressing the existing Python revenue pipeline.
 
-**Architecture:** Next.js owns public pages and the customer-facing application. Existing Python services retain audit, payment-webhook, CRM, lead, and delivery responsibilities; a new bounded Python platform API owns PostgreSQL-backed tenant state. Cloudflare routes each request to the correct service.
+**Architecture:** Next.js owns public pages and the customer-facing application. Existing Python services retain audit, CRM, lead, and delivery responsibilities; a new bounded Python platform API owns PostgreSQL-backed tenant state and becomes the single verified/idempotent Stripe webhook processor before billing launch. Cloudflare routes each request to the correct service.
 
 **Tech Stack:** Next.js 16.2.10, React 19, TypeScript strict mode, CSS custom properties, Vitest, Playwright, FastAPI, SQLAlchemy 2, Alembic, PostgreSQL, OIDC/JWKS, Stripe Customer Portal, pytest, Cloudflare Tunnel.
 
@@ -14,6 +14,7 @@
 - Do not change existing Python API, Stripe webhook, SSRF, lead-state, bounce, or admin-auth behavior during frontend migration.
 - Do not expose secrets, ledgers, lead data, or private audit artifacts to Next.js build output.
 - Keep Stripe as billing source of truth; never collect or store card data.
+- Treat the current unsigned, non-idempotent Stripe paths as a release blocker: no customer-account provisioning or billing entitlement rollout occurs until one verified/idempotent platform webhook owns `/stripe-webhook`.
 - Derive tenant scope from verified identity and memberships; never trust browser-supplied tenant IDs.
 - Maintain WCAG 2.1 AA, metadata, JSON-LD, analytics-event, and Stripe-link parity.
 - Use expand/contract database migrations and reversible route-level rollout.

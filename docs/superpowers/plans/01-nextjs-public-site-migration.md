@@ -27,9 +27,11 @@
 - Modify: `tests/platform-critical-flows.spec.ts`
 
 **Interfaces:**
-- Produces: `PublicRoute { path, status, canonical, title, description, h1, analyticsEvents, stripeLinks }` records used by every migration task.
+- Produces: `PublicRoute { path, status, redirectTarget, canonical, title, description, robots, h1, jsonLdTypes, openGraph, twitter, internalLinks, assets, analyticsEvents, stripeLinks }` records used by every migration task. The manifest includes tracked and ignored/generated production pages; Git-tracked files alone are not the source of truth.
 
-- [ ] **Step 1: Write the failing manifest contract test**
+- [ ] **Step 1: Pause case-study and learning-centre generators, record the responsible process/job, and require two inventory captures with identical route and source-record counts before writing the baseline**
+
+- [ ] **Step 2: Write the failing manifest contract test**
 
 ```python
 def test_manifest_has_unique_paths():
@@ -40,29 +42,34 @@ def test_manifest_has_unique_paths():
     assert all(path.startswith("/") for path in paths)
 ```
 
-- [ ] **Step 2: Run the test and verify failure**
+- [ ] **Step 3: Run the test and verify failure**
 
 Run: `venv/bin/python3 -m pytest tests/test_public_route_manifest.py -q`
 Expected: FAIL because the manifest does not exist.
 
-- [ ] **Step 3: Implement baseline capture**
+- [ ] **Step 4: Implement baseline capture**
 
-The script must enumerate tracked and generated HTML, normalize root/public aliases, fetch the running origin, parse metadata and JSON-LD, and write deterministic sorted JSON. It must exclude admin-protected pages unless an authorization header is supplied from the environment.
+The script must enumerate tracked and generated HTML, normalize root/public aliases, fetch the running origin, parse redirect targets, canonical/robots/Open Graph/Twitter metadata, JSON-LD types, links, assets, analytics events, and Stripe links, then write deterministic sorted JSON. It must exclude admin-protected pages unless an authorization header is supplied from the environment.
 
 ```python
 @dataclass(frozen=True)
 class PublicRoute:
     path: str
     status: int
+    redirect_target: str | None
     canonical: str
     title: str
     description: str
-    h1: str
+    robots: str
+    h1: tuple[str, ...]
+    json_ld_types: tuple[str, ...]
+    internal_links: tuple[str, ...]
+    assets: tuple[str, ...]
     analytics_events: tuple[str, ...]
     stripe_links: tuple[str, ...]
 ```
 
-- [ ] **Step 4: Capture and verify the baseline**
+- [ ] **Step 5: Capture and verify the baseline**
 
 Run:
 
@@ -71,9 +78,9 @@ venv/bin/python3 scripts/capture_public_baseline.py --origin http://127.0.0.1:87
 venv/bin/python3 -m pytest tests/test_public_route_manifest.py -q
 ```
 
-Expected: manifest generated; test PASS; route count is non-zero and all paths unique.
+Expected: manifest generated; test PASS; two consecutive captures have identical route/source counts and all paths are unique.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
 git add config/public-route-manifest.json scripts/capture_public_baseline.py tests/test_public_route_manifest.py tests/platform-critical-flows.spec.ts

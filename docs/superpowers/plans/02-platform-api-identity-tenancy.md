@@ -100,9 +100,10 @@ git commit -m "feat: define provider-neutral OIDC authentication"
 - Create: `migrations/env.py`
 - Create: `migrations/versions/0001_platform_core.py`
 - Test: `tests/platform_api/test_migrations.py`
+- Test: `tests/platform_api/test_row_level_security.py`
 
 **Interfaces:**
-- Produces tables: `users`, `organizations`, `memberships`, `agency_clients`, `subscriptions`, `entitlements`, `brand_profiles`, `domain_claims`, `audit_events`, `webhook_events`.
+- Produces tables: `users`, `user_identities`, `organizations`, `memberships`, `agency_clients`, `subscriptions`, `entitlements`, `brand_profiles`, `brand_assignments`, `domain_claims`, `audit_events`, `webhook_events`, `outbox_events`.
 
 - [ ] **Step 1: Write failing migration round-trip test**
 
@@ -116,10 +117,10 @@ def test_migrations_upgrade_and_downgrade(database_url):
 
 - [ ] **Step 2: Define UUID primary keys, UTC timestamps, uniqueness, and tenant-first indexes**
 
-Every tenant-owned table has non-null `organization_id`. `memberships` is unique on `(user_id, organization_id)`. `webhook_events` is unique on `(provider, external_event_id)`.
+Every tenant-owned table has non-null `organization_id`. `user_identities` is unique on `(issuer, subject)` and email is never the identity key. `memberships` is unique on `(user_id, organization_id)`. `subscriptions` separates payer and service organizations. `webhook_events` is unique on `(provider, external_event_id)`. Add PostgreSQL row-level-security policies using request-local user/organization settings; runtime roles cannot bypass RLS, while workers use separate narrowly scoped credentials.
 
-- [ ] **Step 3: Implement Alembic migration and downgrade**
-- [ ] **Step 4: Run migration test against an isolated PostgreSQL database**
+- [ ] **Step 3: Implement Alembic migration, downgrade, and RLS policies**
+- [ ] **Step 4: Run migration round-trip and RLS tests as the restricted runtime role; prove tenant A cannot select, update, or delete tenant B rows even when repository scoping is intentionally omitted in the test**
 - [ ] **Step 5: Commit as `feat: add platform tenant database schema`**
 
 ### Task 4: Implement memberships and authorization
@@ -189,11 +190,33 @@ def test_role_permission_matrix(role, permission, allowed):
 - [ ] **Step 5: Run tests and a fixture reconciliation**
 - [ ] **Step 6: Commit as `feat: synchronize identity lifecycle safely`**
 
-### Task 7: Security and database release gate
+### Task 7: Reconcile existing customers without implicit account claims
 
 **Files:**
+- Create: `scripts/import_customer_accounts.py`
+- Create: `platform_api/services/customer_import.py`
+- Create: `migrations/versions/0002_customer_import_staging.py`
+- Create: `tests/platform_api/test_customer_import.py`
+- Create: `docs/runbooks/customer-account-migration.md`
+
+**Interfaces:**
+- Consumes read-only snapshots from `ledgers/customer-ledger.jsonl`, `orders/*.json`, and an explicitly approved client-record export.
+- Produces a dry-run reconciliation report, quarantined conflicts, Stripe-customer mappings, and explicit invitations/operator-approved claims. Matching an email address alone never grants account access.
+
+- [ ] **Step 1: Write failing tests for duplicate emails, missing Stripe customers, test/live-mode records, conflicting products, repeated orders, malformed rows, and an email match without an approved identity claim**
+- [ ] **Step 2: Import into staging tables only; normalize but retain source references and checksums for evidence**
+- [ ] **Step 3: Reconcile Stripe customer/subscription IDs and payer/service organizations; quarantine ambiguity instead of guessing**
+- [ ] **Step 4: Produce explicit invitations or an operator-reviewed claim file; never auto-link a provider identity solely by email**
+- [ ] **Step 5: Run dry-run twice and require identical counts/checksums before `--apply` is available**
+- [ ] **Step 6: Commit as `feat: add evidence-safe customer account migration`**
+
+### Task 8: Security and database release gate
+
+**Files:**
+- Modify: `agentic_server.py`
 - Create: `tests/platform_api/test_idor_matrix.py`
 - Create: `tests/platform_api/test_rate_limits.py`
+- Create: `tests/platform_api/test_legacy_client_auth_retirement.py`
 - Create: `scripts/verify_platform_backup_restore.sh`
 - Create: `docs/runbooks/platform-database.md`
 
@@ -202,6 +225,7 @@ def test_role_permission_matrix(role, permission, allowed):
 
 - [ ] **Step 1: Generate two agencies, two clients each, and every role in isolated test fixtures**
 - [ ] **Step 2: Attempt every read/mutation against own and foreign tenant IDs; assert foreign access never returns data**
-- [ ] **Step 3: Test PostgreSQL backup, restore into an empty database, migration upgrade, and row-count/checksum parity**
-- [ ] **Step 4: Run `venv/bin/python3 -m pytest tests/platform_api -q`**
-- [ ] **Step 5: Commit as `test: gate platform API on tenant isolation`**
+- [ ] **Step 3: After OIDC dashboard cutover, retire `/api/crm/login` and the email-plus-long-lived-token `/api/crm/client` path rather than extending them. Verify old credentials no longer create a session or return customer data; preserve operator CRM routes behind existing administrator authorization.**
+- [ ] **Step 4: Test PostgreSQL backup, restore into an empty database, migration upgrade, and row-count/checksum parity**
+- [ ] **Step 5: Run `venv/bin/python3 -m pytest tests/platform_api -q`**
+- [ ] **Step 6: Commit as `test: gate platform API on tenant isolation`**

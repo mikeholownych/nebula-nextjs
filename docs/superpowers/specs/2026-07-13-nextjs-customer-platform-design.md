@@ -2,7 +2,7 @@
 
 **Status:** Approved direction, implementation planning complete
 
-**Decision:** Use Next.js 16.2.10 as Nebula's single primary frontend framework for the public marketing site and authenticated customer/agency application. Keep the existing Python audit, Stripe webhook, CRM, lead, and delivery systems as separate backend services. Add a bounded Python platform API and PostgreSQL for identity-linked tenant data.
+**Decision:** Use Next.js 16.2.10 as Nebula's single primary frontend framework for the public marketing site and authenticated customer/agency application. Keep the existing Python audit, CRM, lead, and delivery systems as separate backend services. Add a bounded Python platform API and PostgreSQL for identity-linked tenant data; consolidate Stripe webhook ownership into that API before customer-account provisioning.
 
 ## Objectives
 
@@ -15,10 +15,9 @@
 
 ## Current-state evidence
 
-- 461 HTML files totaling 68,631 lines and 3,980,798 bytes.
-- 391 generated case studies, representing 84.8% of HTML pages.
-- 452 pages with inline CSS and 1,336,984 inline CSS characters.
-- 408 pages with JSON-LD; only 10 pages use `fetch()` and 8 contain forms.
+- The initial inventory captured 461 HTML files and 391 generated case studies. A later live review observed 489 HTML files and a case-study family changing from 419 to 420 files while the review ran. The migration manifest must therefore be captured only after pausing generators and obtaining two stable counts.
+- The initial inventory recorded 68,631 HTML lines, 1,336,984 inline CSS characters, and 408 JSON-LD pages; the later live review found 480 inline-style pages and 436 JSON-LD pages.
+- Only 8 pages contain forms, so public pages remain Server Components by default and only interactive controls become Client Components.
 - Python `agentic_server.py` on port 8765 owns public files, audits, CRM/admin routes, agent discovery, and Stripe webhook handling.
 - `webhook_server.py` on port 9000 owns stats aggregation.
 - Cloudflare Tunnel exposes the current origin.
@@ -39,7 +38,7 @@
 ### Existing Python services
 
 - Audit engine and SSRF controls.
-- Stripe webhook verification and existing product/checkout behavior.
+- Existing product/checkout and fulfillment behavior, retained temporarily behind a verified platform-webhook compatibility adapter.
 - CRM/admin routes.
 - Lead lifecycle, bounce suppression, and delivery automation.
 - Agent discovery and commerce protocol endpoints.
@@ -64,9 +63,10 @@
 ```text
 Cloudflare Tunnel
   |-- Public/Next routes ----------------------> Next.js :3000
-  |-- /api/platform/* -------------------------> Platform API :8770
-  |-- Existing /api/*, /stripe-webhook,
-  |   discovery and tracking routes ----------> Agentic Python :8765
+  |-- /api/platform/* and gated /stripe-webhook
+  |                                            -> Platform API :8770
+  |-- Existing operational API, discovery,
+  |   CRM and tracking routes ----------------> Agentic Python :8765
   `-- /api/stats ------------------------------> Existing proxy -> :9000
 
 PostgreSQL :5432
@@ -127,23 +127,27 @@ Roles:
 
 ## Core tenant model
 
-- `users`: external identity mapping and profile.
+- `users`: internal user profiles; email is contact data, not the identity key.
+- `user_identities`: unique `(issuer, subject)` mappings to users; provider organization claims are never authorization truth.
 - `organizations`: `nebula`, `agency`, or `client` tenant.
 - `memberships`: user-to-organization role mapping.
 - `agency_clients`: agency-to-client relationship with status and service tier.
-- `subscriptions`: Stripe customer/subscription references and normalized entitlement state.
-- `entitlements`: feature flags derived from paid products and operator grants.
+- `subscriptions`: separates `payer_organization_id` from `service_organization_id`, allowing an agency to pay without exposing agency invoices to client administrators.
+- `entitlements`: feature flags derived from paid products and operator grants for the service organization.
 - `brand_profiles`: logo, colors, support identity, and email display settings.
+- `brand_assignments`: explicit brand-to-client assignment; no implicit inheritance from hostname alone.
 - `domain_claims`: hostname, verification token hash, status, and certificate state.
 - `audit_events`: append-only actor/action/target records.
 - `webhook_events`: Stripe/provider webhook idempotency records.
+- `outbox_events`: transactional handoff to legacy ledgers, fulfillment, email, and domain workers.
 
 Every tenant-owned row carries `organization_id`. Composite indexes begin with `organization_id`. Service methods require an `AuthorizationContext`; repositories do not expose unscoped list methods.
 
 ## Billing design
 
 - Stripe remains the billing source of truth.
-- Existing signed webhook processing remains authoritative.
+- The current webhook paths are not safe enough to provision customer accounts: `agentic_server.py` and `webhook_server.py` parse JSON without verifying `Stripe-Signature`, no durable Stripe event-ID idempotency exists, and `stripe_webhook.py` contains duplicate subscription-update handling. Billing release is blocked until one platform endpoint verifies Stripe's signature against the raw body, inserts the event ID under a unique PostgreSQL constraint, and processes side effects through a transactional outbox.
+- During transition, existing fulfillment behavior remains available behind a compatibility adapter, but only the verified/idempotent processor may invoke it. Cloudflare moves `/stripe-webhook` to the new platform endpoint only after replay, duplicate, ordering, and rollback tests pass.
 - The platform database stores Stripe identifiers and a normalized read model.
 - Customers manage cards and invoices through Stripe Customer Portal; Nebula never handles card data.
 - Portal-session creation occurs only after backend authorization confirms the requesting user belongs to the Stripe customer organization.
@@ -171,15 +175,16 @@ Brand settings are schema validated. CSS values are emitted as a fixed allowlist
 ## Security invariants
 
 1. Browser role checks are presentational; Python authorization is authoritative.
-2. Every tenant query is scoped by verified membership.
-3. Cross-tenant object identifiers return 404 rather than disclose existence.
-4. CSRF protection is required for cookie-authenticated mutations.
-5. Session cookies are `HttpOnly`, `Secure`, and `SameSite=Lax` or stricter.
-6. CSP prohibits arbitrary inline scripts after migration; temporary hashes/nonces are documented per route.
-7. Stripe and identity webhooks require signature verification and idempotency.
-8. Uploaded assets are never executed and are served from a separate asset origin.
-9. Sensitive operational ledgers are excluded from Next build context and public artifacts.
-10. Authorization and tenant-isolation tests block deployment.
+2. Every tenant query is scoped by verified membership; PostgreSQL row-level security is added as defense in depth, and the application role cannot use `BYPASSRLS`.
+3. Provider organization claims, email addresses, host headers, Stripe metadata, and route identifiers are not authorization truth.
+4. Cross-tenant object identifiers return 404 rather than disclose existence.
+5. CSRF protection is required for cookie-authenticated mutations.
+6. Session cookies are `HttpOnly`, `Secure`, and `SameSite=Lax` or stricter.
+7. CSP prohibits arbitrary inline scripts after migration; temporary hashes/nonces are documented per route.
+8. Stripe and identity webhooks require signature verification and idempotency.
+9. Uploaded assets are never executed and are served from a separate asset origin.
+10. Sensitive operational ledgers are excluded from Next build context and public artifacts.
+11. Authorization and tenant-isolation tests block deployment.
 
 ## Rollout and rollback
 
