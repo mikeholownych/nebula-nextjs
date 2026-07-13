@@ -12,6 +12,8 @@ const PAGES = [
   '/ai-ops-retainer.html',
   '/agency-partner.html',
   '/marketing-ops.html',
+  '/accessible-nebula.html',
+  '/growth-launch.html',
 ];
 
 function parseRGB(s: string): [number, number, number] {
