@@ -1122,6 +1122,19 @@ Events: revocation
         client_auth_paths = {"/api/crm/login", "/api/crm/client"}
         if path not in client_auth_paths and not self._admin_authorized():
             return self._send_json(401, {"error": "unauthorized"})
+
+        if path == "/api/crm/client" and self.command == "GET":
+            query = urllib.parse.parse_qs(parsed.query)
+            if "email" in query or "token" in query:
+                return self._send_json(400, {"error": "credentials must not be sent in the URL"})
+            email = self.headers.get("X-Client-Email", "").strip().lower()
+            authorization = self.headers.get("Authorization", "")
+            token = authorization[7:].strip() if authorization.startswith("Bearer ") else ""
+            if not email or not token:
+                return self._send_json(401, {"error": "client credentials required"})
+            result = _handle_crm_client_dashboard(email, token)
+            status = 200 if result.get("status") == "ok" else 401
+            return self._send_json(status, result)
         
         self.send_response(200)
         self.send_header("Content-Type", "application/json")
@@ -1167,11 +1180,6 @@ Events: revocation
                 email = self._crm_post_body.get("email", "").lower()
                 token = self._crm_post_body.get("token", "")
                 result = _handle_crm_login(email, token)
-            elif path.startswith("/api/crm/client") and self.command == "GET":
-                parsed_qs = urllib.parse.parse_qs(parsed.query)
-                email = parsed_qs.get("email", [""])[0].lower()
-                token = parsed_qs.get("token", [""])[0]
-                result = _handle_crm_client_dashboard(email, token)
             else:
                 result = {"error": "unknown endpoint"}
         except Exception as e:

@@ -63,6 +63,15 @@ test('administrative CRM and lead dashboard are private', async ({ request }) =>
   }
 });
 
+test('client CRM credentials are rejected in URLs', async ({ request }) => {
+  const legacy = await request.get(BASE_URL + '/api/crm/client?email=test%40example.com&token=secret');
+  expect(legacy.status()).toBe(400);
+  const headerAuth = await request.get(BASE_URL + '/api/crm/client', {
+    headers: { 'X-Client-Email': 'missing@example.com', Authorization: 'Bearer invalid' },
+  });
+  expect(headerAuth.status()).toBe(401);
+});
+
 test('canonical routes and checkout variants redirect correctly', async ({ request }) => {
   const aliases: Record<string, string> = {
     '/privacy-policy': '/privacy-policy.html',
@@ -74,6 +83,14 @@ test('canonical routes and checkout variants redirect correctly', async ({ reque
     const response = await request.get(BASE_URL + source, { maxRedirects: 0 });
     expect(response.status(), source).toBe(301);
     expect(response.headers().location, source).toBe(target);
+  }
+});
+
+test('dashboard renders live operational metrics without placeholders', async ({ page }) => {
+  await page.goto(BASE_URL + '/dashboard.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('#data-status')).toHaveText('Live');
+  for (const id of ['total-audits', 'total-checkouts', 'conversion-rate', 'total-revenue', 'page-views']) {
+    await expect(page.locator(`#${id}`), id).not.toHaveText('—');
   }
 });
 

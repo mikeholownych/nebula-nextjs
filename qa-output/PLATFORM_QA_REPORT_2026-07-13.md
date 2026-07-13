@@ -14,13 +14,14 @@ All critical and high-severity defects found during this review were fixed and v
 
 | Gate | Result |
 |---|---:|
-| Python regression suite | **111 passed** |
+| Python regression suite | **116 passed** |
 | Full-site Playwright visual/WCAG suite | **87 passed** |
-| Critical-flow/mobile/animation/pricing Playwright suite | **34 passed** |
-| Total Playwright checks | **121 passed** |
+| Critical-flow/mobile/animation/pricing Playwright suite | **36 passed** |
+| Total Playwright checks | **123 passed** |
 | Routes crawled | **36** |
 | Route failures | **0** |
 | Broken internal links | **0** |
+| Broken fragment links | **0** |
 | Missing titles | **0** |
 | Pages without exactly one H1 | **0** |
 | Missing image alt attributes | **0** |
@@ -154,14 +155,15 @@ The index generator emitted literal doubled braces (`{{ ... }}`), causing browse
 - Moved an import-time n8n probe out of pytest discovery and made it use `N8N_API_KEY` explicitly.
 - Added crawler handling for expected 404 probes and Cloudflare email-protection links.
 - Added offer-integrity, route-contract, SSRF, ICP-gate, source-outcome, and critical browser-flow regression coverage.
+- Moved client CRM credentials from URL query parameters to `Authorization` and `X-Client-Email` headers; legacy credential URLs now return **400**.
+- Replaced dashboard placeholders with live `/api/stats` operational metrics while explicitly labeling GA4 behavior data as unavailable.
+- Replaced all 22 inert `href="#"` demo links with semantic buttons or non-interactive text.
 
 ## Remaining non-blocking items
 
 | Severity | Item | Impact / recommendation |
 |---|---|---|
-| Medium | `dashboard.html` still displays placeholder GA4 values | Internal observability only. Connect GA4 Data API before treating it as a source of truth. |
-| Medium | Client CRM access tokens are accepted through query parameters | Admin surfaces are protected, but client auth should move to an `Authorization` header or secure cookie before external client rollout. |
-| Low | `demo.html` contains 22 intentional `href="#"` component-preview controls | No buyer-flow impact. Convert previews to semantic buttons in a future cleanup. |
+| Medium | GA4 Data API is not connected | The dashboard now shows verified live operational metrics and does not invent traffic data. Connect GA4 Data API for page-view, visitor, scroll-depth, and bounce-rate reporting. |
 | Informational | Static crawler still reports pricing-generator inputs as unlabeled | Runtime JavaScript assigns accessible names; Playwright confirms zero unnamed controls. Static source can be further annotated to silence the parser-only warning. |
 
 ## Regression commands
@@ -176,4 +178,5 @@ venv/bin/python3 scripts/qa_platform_crawl.py
 ## Launch decision
 
 **Public funnel: GO.**  
-**Internal analytics dashboard as source of truth: NOT YET.**
+**Internal operational dashboard: GO.**  
+**GA4 traffic/behavior analytics: NOT YET.**

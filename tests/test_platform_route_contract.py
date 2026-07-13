@@ -65,3 +65,12 @@ def test_static_fallback_denies_source_code_ledgers_and_internal_directories():
     for token in ('".py"', '".json"', '".jsonl"', '".md"', '".git"', '"ops"', '"governance"', '"tests"'):
         assert token in SERVER
     assert 'return self.send_error(404)' in SERVER
+
+
+def test_client_crm_credentials_are_never_read_from_query_parameters():
+    client_branch = SERVER.split('if path == "/api/crm/client" and self.command == "GET":', 1)[1].split("self.send_response(200)", 1)[0]
+    assert 'query.get("email"' not in client_branch
+    assert 'query.get("token"' not in client_branch
+    assert 'self.headers.get("X-Client-Email"' in client_branch
+    assert 'self.headers.get("Authorization"' in client_branch
+    assert 'return self._send_json(400, {"error": "credentials must not be sent in the URL"})' in client_branch
