@@ -6,8 +6,8 @@
 
 # Test info
 
-- Name: tests/pricing-contrast.spec.ts >> pricing text contrast passes WCAG AA
-- Location: tests/pricing-contrast.spec.ts:27:5
+- Name: tests/pricing-contrast.spec.ts >> pricing text contrast passes WCAG AA (composited)
+- Location: tests/pricing-contrast.spec.ts:29:5
 
 # Error details
 
@@ -15,7 +15,7 @@
 Error: expect(received).toBe(expected) // Object.is equality
 
 Expected: 0
-Received: 26
+Received: 9
 ```
 
 # Page snapshot
@@ -800,45 +800,45 @@ Received: 26
   2  | 
   3  | const BASE_URL = process.env.BASE_URL || 'https://nebulacomponents.shop';
   4  | 
-  5  | function lum(r: number, g: number, b: number): number {
-  6  |   const a = [r, g, b].map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
-  7  |   return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
+  5  | function parseRGB(s: string): [number, number, number] {
+  6  |   const m = s.match(/\d+/g)!.map(Number);
+  7  |   return [m[0], m[1], m[2]];
   8  | }
-  9  | function ratio(fg: string, bg: string): number {
-  10 |   const fp = fg.match(/\d+/g)!.map(Number);
-  11 |   const bp = bg.match(/\d+/g)!.map(Number);
-  12 |   const l1 = lum(fp[0], fp[1], fp[2]);
-  13 |   const l2 = lum(bp[0], bp[1], bp[2]);
-  14 |   return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
-  15 | }
-  16 | // Walk up to find the nearest non-transparent bg
-  17 | function effectiveBg(el: Element): string {
-  18 |   let node: any = el;
-  19 |   while (node) {
-  20 |     const bg = getComputedStyle(node).backgroundColor;
-  21 |     if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') return bg;
-  22 |     node = node.parentElement;
-  23 |   }
-  24 |   return 'rgb(8, 9, 10)'; // page default dark
-  25 | }
-  26 | 
-  27 | test('pricing text contrast passes WCAG AA', async ({ page }) => {
-  28 |   await page.goto(BASE_URL, { waitUntil: 'networkidle' });
-  29 |   await page.waitForTimeout(4500);
-  30 |   await page.locator('#pricing').scrollIntoViewIfNeeded();
-  31 |   await page.waitForTimeout(500);
-  32 | 
-  33 |   const data = await page.evaluate(() => {
-  34 |     const out: any[] = [];
-  35 |     const root = document.querySelector('#pricing')!;
-  36 |     root.querySelectorAll('*').forEach((el: any) => {
-  37 |       const txt = el.textContent?.trim();
-  38 |       if (!txt || el.children.length > 0) return; // leaf text nodes only
-  39 |       const cs = getComputedStyle(el);
-  40 |       if (cs.visibility === 'hidden' || cs.display === 'none') return;
-  41 |       // find effective bg by walking up
-  42 |       let node: any = el;
-  43 |       let bg = 'rgb(8, 9, 10)';
+  9  | function lum(r: number, g: number, b: number): number {
+  10 |   const a = [r, g, b].map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+  11 |   return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
+  12 | }
+  13 | function ratio(fg: string, bg: string): number {
+  14 |   const [fr, fg2, fb] = parseRGB(fg);
+  15 |   const [br, bg2, bb] = parseRGB(bg);
+  16 |   return (Math.max(lum(fr, fg2, fb), lum(br, bg2, bb)) + 0.05) / (Math.min(lum(fr, fg2, fb), lum(br, bg2, bb)) + 0.05);
+  17 | }
+  18 | // Composite bg over page bg rgb(8,9,10)
+  19 | function composite(bg: string): string {
+  20 |   if (bg.startsWith('rgba')) {
+  21 |     const m = bg.match(/[\d.]+/g)!.map(Number);
+  22 |     const [r, g, b, a] = m;
+  23 |     const pr = 8, pg = 9, pb = 10;
+  24 |     return `rgb(${Math.round(r * a + pr * (1 - a))}, ${Math.round(g * a + pg * (1 - a))}, ${Math.round(b * a + pb * (1 - a))})`;
+  25 |   }
+  26 |   return bg;
+  27 | }
+  28 | 
+  29 | test('pricing text contrast passes WCAG AA (composited)', async ({ page }) => {
+  30 |   await page.goto(BASE_URL + '?v=' + Date.now(), { waitUntil: 'networkidle' });
+  31 |   await page.waitForTimeout(4500);
+  32 |   await page.locator('#pricing').scrollIntoViewIfNeeded();
+  33 |   await page.waitForTimeout(500);
+  34 | 
+  35 |   const data = await page.evaluate(() => {
+  36 |     const out: any[] = [];
+  37 |     const root = document.querySelector('#pricing')!;
+  38 |     root.querySelectorAll('*').forEach((el: any) => {
+  39 |       const txt = el.textContent?.trim();
+  40 |       if (!txt || el.children.length > 0) return;
+  41 |       const cs = getComputedStyle(el);
+  42 |       if (cs.visibility === 'hidden' || cs.display === 'none') return;
+  43 |       let node: any = el, bg = 'rgb(8, 9, 10)';
   44 |       while (node) {
   45 |         const b = getComputedStyle(node).backgroundColor;
   46 |         if (b && b !== 'rgba(0, 0, 0, 0)' && b !== 'transparent') { bg = b; break; }
@@ -851,11 +851,11 @@ Received: 26
   53 | 
   54 |   let failures = 0;
   55 |   data.forEach((d) => {
-  56 |     const rat = ratio(d.fg, d.bg);
-  57 |     const pass = rat >= 4.5;
-  58 |     if (!pass) { failures++; console.log(`FAIL ${d.tag} "${d.text}": ${rat.toFixed(2)}:1 fg=${d.fg} bg=${d.bg}`); }
+  56 |     const realBg = composite(d.bg);
+  57 |     const rat = ratio(d.fg, realBg);
+  58 |     if (rat < 4.5) { failures++; console.log(`FAIL ${d.tag} "${d.text}": ${rat.toFixed(2)}:1 fg=${d.fg} bg=${realBg}`); }
   59 |   });
-  60 |   console.log(`Checked ${data.length} leaf text nodes in #pricing — failures: ${failures}`);
+  60 |   console.log(`Checked ${data.length} nodes — failures: ${failures}`);
 > 61 |   expect(failures).toBe(0);
      |                    ^ Error: expect(received).toBe(expected) // Object.is equality
   62 | });
