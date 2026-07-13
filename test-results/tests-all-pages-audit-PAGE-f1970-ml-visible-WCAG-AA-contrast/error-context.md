@@ -6,27 +6,25 @@
 
 # Test info
 
-- Name: tests/all-pages-audit.spec.ts >> PAGE /part_after.html: visible + WCAG AA contrast
+- Name: tests/all-pages-audit.spec.ts >> PAGE /ai-ops-retainer.html: visible + WCAG AA contrast
 - Location: tests/all-pages-audit.spec.ts:41:7
 
 # Error details
 
 ```
-Error: /part_after.html contrast failures
+Error: page.goto: net::ERR_ADDRESS_UNREACHABLE at https://nebulacomponents.shop/ai-ops-retainer.html?audit=1783935810104
+Call log:
+  - navigating to "https://nebulacomponents.shop/ai-ops-retainer.html?audit=1783935810104", waiting until "networkidle"
 
-expect(received).toBe(expected) // Object.is equality
-
-Expected: 0
-Received: 171
-```
-
-```
-Error: write EPIPE
 ```
 
 # Test source
 
 ```ts
+  1   | import { test, expect } from '@playwright/test';
+  2   | 
+  3   | const BASE_URL = process.env.BASE_URL || 'https://nebulacomponents.shop';
+  4   | 
   5   | // All revenue + funnel pages served by the tunnel
   6   | const PAGES = [
   7   |   '/',
@@ -67,7 +65,8 @@ Error: write EPIPE
   42  |     const pageErrors: string[] = [];
   43  |     page.on('pageerror', (e) => pageErrors.push(e.message));
   44  | 
-  45  |     await page.goto(BASE_URL + pagePath + '?audit=' + Date.now(), { waitUntil: 'networkidle' });
+> 45  |     await page.goto(BASE_URL + pagePath + '?audit=' + Date.now(), { waitUntil: 'networkidle' });
+      |                ^ Error: page.goto: net::ERR_ADDRESS_UNREACHABLE at https://nebulacomponents.shop/ai-ops-retainer.html?audit=1783935810104
   46  |     await page.waitForTimeout(4500);
   47  | 
   48  |     const height = await page.evaluate(() => document.body.scrollHeight);
@@ -127,8 +126,7 @@ Error: write EPIPE
   102 |     if (vis.length) console.log(`[${pagePath}] HIDDEN: ` + vis.slice(0, 10).map((v: any) => `${v.tag}@${v.op} "${v.text}"`).join(' | '));
   103 | 
   104 |     expect(vis.length, `${pagePath} has hidden elements`).toBe(0);
-> 105 |     expect(contrastFails, `${pagePath} contrast failures`).toBe(0);
-      |                                                            ^ Error: write EPIPE
+  105 |     expect(contrastFails, `${pagePath} contrast failures`).toBe(0);
   106 |     expect(pageErrors.filter(e => !e.includes('rb2b') && !e.includes('ERR_NAME_NOT_RESOLVED')), `${pagePath} page errors`).toHaveLength(0);
   107 |   });
   108 | }

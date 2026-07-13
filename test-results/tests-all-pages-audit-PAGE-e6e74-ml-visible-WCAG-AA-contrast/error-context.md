@@ -17,7 +17,7 @@ Error: /marketing-ops.html contrast failures
 expect(received).toBe(expected) // Object.is equality
 
 Expected: 0
-Received: 47
+Received: 4
 ```
 
 # Page snapshot

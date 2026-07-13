@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 const BASE_URL = process.env.BASE_URL || 'https://nebulacomponents.shop';
 
-// All revenue + funnel pages served by the tunnel
+// All revenue + funnel pages served by the tunnel (excludes deprecated drafts part_before/part_after)
 const PAGES = [
   '/',
   '/checkout.html',
@@ -11,7 +11,6 @@ const PAGES = [
   '/ai-ops-retainer.html',
   '/agency-partner.html',
   '/marketing-ops.html',
-  '/part_after.html',
 ];
 
 function parseRGB(s: string): [number, number, number] {

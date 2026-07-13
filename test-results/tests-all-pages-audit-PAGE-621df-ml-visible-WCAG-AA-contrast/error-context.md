@@ -12,12 +12,13 @@
 # Error details
 
 ```
-Error: /audit-lander.html contrast failures
+Error: /audit-lander.html page errors
 
-expect(received).toBe(expected) // Object.is equality
+expect(received).toHaveLength(expected)
 
-Expected: 0
-Received: 8
+Expected length: 0
+Received length: 1
+Received array:  ["Unexpected identifier 'll'"]
 ```
 
 # Page snapshot
@@ -176,7 +177,6 @@ Received: 8
 # Test source
 
 ```ts
-  5   | // All revenue + funnel pages served by the tunnel
   6   | const PAGES = [
   7   |   '/',
   8   |   '/checkout.html',
@@ -276,9 +276,9 @@ Received: 8
   102 |     if (vis.length) console.log(`[${pagePath}] HIDDEN: ` + vis.slice(0, 10).map((v: any) => `${v.tag}@${v.op} "${v.text}"`).join(' | '));
   103 | 
   104 |     expect(vis.length, `${pagePath} has hidden elements`).toBe(0);
-> 105 |     expect(contrastFails, `${pagePath} contrast failures`).toBe(0);
-      |                                                            ^ Error: /audit-lander.html contrast failures
-  106 |     expect(pageErrors.filter(e => !e.includes('rb2b') && !e.includes('ERR_NAME_NOT_RESOLVED')), `${pagePath} page errors`).toHaveLength(0);
+  105 |     expect(contrastFails, `${pagePath} contrast failures`).toBe(0);
+> 106 |     expect(pageErrors.filter(e => !e.includes('rb2b') && !e.includes('ERR_NAME_NOT_RESOLVED')), `${pagePath} page errors`).toHaveLength(0);
+      |                                                                                                                            ^ Error: /audit-lander.html page errors
   107 |   });
   108 | }
   109 | 

@@ -6,22 +6,71 @@
 
 # Test info
 
-- Name: tests/all-pages-audit.spec.ts >> PAGE /part_after.html: visible + WCAG AA contrast
+- Name: tests/all-pages-audit.spec.ts >> PAGE /agency-partner.html: visible + WCAG AA contrast
 - Location: tests/all-pages-audit.spec.ts:41:7
 
 # Error details
 
 ```
-Error: /part_after.html contrast failures
+Error: /agency-partner.html contrast failures
 
 expect(received).toBe(expected) // Object.is equality
 
 Expected: 0
-Received: 171
+Received: 18
 ```
 
-```
-Error: write EPIPE
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - heading "Bad gateway Error code 502" [level=1] [ref=e5]:
+      - generic [ref=e6]: Bad gateway
+      - text: Error code 502
+    - generic [ref=e7]:
+      - text: Visit
+      - link "cloudflare.com" [ref=e8] [cursor=pointer]:
+        - /url: https://www.cloudflare.com/5xx-error-landing?utm_source=errorcode_502&utm_campaign=nebulacomponents.shop
+      - text: for more information.
+    - generic [ref=e9]: 2026-07-13 09:43:59 UTC
+  - generic [ref=e12]:
+    - generic [ref=e13]:
+      - text: You
+      - heading "Browser" [level=3] [ref=e17]
+      - text: Working
+    - generic [ref=e18]:
+      - link [ref=e20] [cursor=pointer]:
+        - /url: https://www.cloudflare.com/5xx-error-landing?utm_source=errorcode_502&utm_campaign=nebulacomponents.shop
+      - text: Toronto
+      - heading "Cloudflare" [level=3] [ref=e23]:
+        - link "Cloudflare" [ref=e24] [cursor=pointer]:
+          - /url: https://www.cloudflare.com/5xx-error-landing?utm_source=errorcode_502&utm_campaign=nebulacomponents.shop
+      - text: Working
+    - generic [ref=e25]:
+      - text: nebulacomponents.shop
+      - heading "Host" [level=3] [ref=e29]
+      - text: Error
+  - generic [ref=e31]:
+    - generic [ref=e32]:
+      - heading "What happened?" [level=2] [ref=e33]
+      - paragraph [ref=e34]: The web server reported a bad gateway error.
+    - generic [ref=e35]:
+      - heading "What can I do?" [level=2] [ref=e36]
+      - paragraph [ref=e37]: Please try again in a few minutes.
+  - paragraph [ref=e39]:
+    - generic [ref=e40]:
+      - text: "Cloudflare Ray ID:"
+      - strong [ref=e41]: a1a758b698204c9b
+    - text: •
+    - generic [ref=e42]:
+      - text: "Your IP:"
+      - button "Click to reveal" [ref=e43] [cursor=pointer]
+      - text: •
+    - generic [ref=e44]:
+      - text: Performance & security by
+      - link "Cloudflare" [ref=e45] [cursor=pointer]:
+        - /url: https://www.cloudflare.com/5xx-error-landing?utm_source=errorcode_502&utm_campaign=nebulacomponents.shop
 ```
 
 # Test source
@@ -128,7 +177,7 @@ Error: write EPIPE
   103 | 
   104 |     expect(vis.length, `${pagePath} has hidden elements`).toBe(0);
 > 105 |     expect(contrastFails, `${pagePath} contrast failures`).toBe(0);
-      |                                                            ^ Error: write EPIPE
+      |                                                            ^ Error: /agency-partner.html contrast failures
   106 |     expect(pageErrors.filter(e => !e.includes('rb2b') && !e.includes('ERR_NAME_NOT_RESOLVED')), `${pagePath} page errors`).toHaveLength(0);
   107 |   });
   108 | }
