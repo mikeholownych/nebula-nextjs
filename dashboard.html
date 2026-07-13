@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nebula Components — Performance Dashboard</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0f; color: #e2e8f0; padding: 24px; }
+  h1 { font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #f1f5f9; }
+  h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .card { background: #13131a; border: 1px solid #1e1e2a; border-radius: 12px; padding: 20px; }
+  .card .value { font-size: 32px; font-weight: 700; color: #6ee7b7; margin: 8px 0 4px; }
+  .card .label { font-size: 13px; color: #64748b; }
+  .card .change { font-size: 13px; margin-top: 4px; }
+  .up { color: #6ee7b7; } .down { color: #f87171; }
+  .chart-box { background: #13131a; border: 1px solid #1e1e2a; border-radius: 12px; padding: 20px; margin-bottom: 16px; min-height: 200px; }
+  .bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 160px; margin-top: 12px; }
+  .bar { flex: 1; background: linear-gradient(180deg, #6366f1, #4f46e5); border-radius: 4px 4px 0 0; min-height: 4px; transition: height 0.3s; position: relative; }
+  .bar-label { position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-size: 11px; color: #64748b; white-space: nowrap; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+  .event-list { list-style: none; }
+  .event-list li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #1e1e2a; font-size: 14px; }
+  .event-list .count { color: #6ee7b7; font-weight: 600; }
+  .alert { background: #1a1a2e; border-left: 3px solid #fbbf24; padding: 12px 16px; border-radius: 8px; margin-bottom: 8px; font-size: 13px; }
+  .alert.critical { border-left-color: #f87171; }
+  .alert .time { color: #64748b; font-size: 12px; }
+  footer { margin-top: 48px; text-align: center; color: #475569; font-size: 12px; }
+  .pill { display: inline-block; background: #1e293b; color: #94a3b8; padding: 2px 8px; border-radius: 4px; font-size: 11px; }
+</style>
+</head>
+<body>
+<h1>📊 Nebula Components · Performance Dashboard</h1>
+
+<div class="grid">
+  <div class="card">
+    <div class="label">Audit Submissions (30d)</div>
+    <div class="value" id="total-audits">—</div>
+    <div class="change up" id="audit-trend">↗ loading...</div>
+  </div>
+  <div class="card">
+    <div class="label">Fix Pack Checkouts (30d)</div>
+    <div class="value" id="total-checkouts">—</div>
+    <div class="change up" id="checkout-trend">↗ loading...</div>
+  </div>
+  <div class="card">
+    <div class="label">Conversion Rate (audit → checkout)</div>
+    <div class="value" id="conversion-rate">—</div>
+    <div class="change" id="cvr-trend">⚡ loading...</div>
+  </div>
+  <div class="card">
+    <div class="label">Revenue (30d)</div>
+    <div class="value" id="total-revenue">—</div>
+    <div class="change up" id="revenue-trend">↗ loading...</div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <div class="label">Page Views (7d)</div>
+    <div class="value" id="page-views">—</div>
+  </div>
+  <div class="card">
+    <div class="label">Unique Visitors (7d)</div>
+    <div class="value" id="unique-visitors">—</div>
+  </div>
+  <div class="card">
+    <div class="label">Avg Scroll Depth</div>
+    <div class="value" id="avg-scroll">—</div>
+  </div>
+  <div class="card">
+    <div class="label">Bounce Rate</div>
+    <div class="value" id="bounce-rate">—</div>
+  </div>
+</div>
+
+<div class="row">
+  <div>
+    <h2>Conversion Events (Today)</h2>
+    <div class="chart-box">
+      <ul class="event-list" id="events-today">
+        <li><span>Page views</span><span class="count" id="ev-page-view">—</span></li>
+        <li><span>CTA clicks</span><span class="count" id="ev-cta-click">—</span></li>
+        <li><span>Audit submits</span><span class="count" id="ev-audit-submit">—</span></li>
+        <li><span>Free kit downloads</span><span class="count" id="ev-free-kit">—</span></li>
+        <li><span>Newsletter signups</span><span class="count" id="ev-newsletter">—</span></li>
+        <li><span>ROI calculations</span><span class="count" id="ev-roi-calc">—</span></li>
+      </ul>
+    </div>
+  </div>
+  <div>
+    <h2>Scroll Depth Distribution</h2>
+    <div class="chart-box">
+      <div class="bar-chart" id="scroll-chart">
+        <div class="bar" style="height: 80%" title="25%"><span class="bar-label">25%</span></div>
+        <div class="bar" style="height: 60%" title="50%"><span class="bar-label">50%</span></div>
+        <div class="bar" style="height: 35%" title="75%"><span class="bar-label">75%</span></div>
+        <div class="bar" style="height: 15%" title="100%"><span class="bar-label">100%</span></div>
+      </div>
+      <p style="color:#64748b; font-size:12px; margin-top:28px;">% of visitors reaching each depth</p>
+    </div>
+  </div>
+</div>
+
+<h2>Alerts &amp; Anomalies</h2>
+<div id="alerts">
+  <div class="alert">🔍 No data yet — connect GA4 or start scraping to see alerts here.</div>
+</div>
+
+<script>
+// Dashboard pulls from GA4 Reporting API
+// For MVP: hard-coded sample data shown, replace with live GA4 API calls
+
+const GA4_PROPERTY_ID = 'G-KJ9S3450LH';
+
+// Placeholder fetch — replace with GA4 Data API v1beta when ready
+async function fetchGAData() {
+  // Simulate loading
+  setTimeout(() => {
+    document.getElementById('total-audits').textContent = '0';
+    document.getElementById('total-checkouts').textContent = '0';
+    document.getElementById('conversion-rate').textContent = '0%';
+    document.getElementById('total-revenue').textContent = '$0';
+    document.getElementById('page-views').textContent = '—';
+    document.getElementById('unique-visitors').textContent = '—';
+    document.getElementById('avg-scroll').textContent = '—';
+    document.getElementById('bounce-rate').textContent = '—';
+    
+    document.getElementById('ev-page-view').textContent = '0';
+    document.getElementById('ev-cta-click').textContent = '0';
+    document.getElementById('ev-audit-submit').textContent = '0';
+    document.getElementById('ev-free-kit').textContent = '0';
+    document.getElementById('ev-newsletter').textContent = '0';
+    document.getElementById('ev-roi-calc').textContent = '0';
+    
+    document.getElementById('audit-trend').textContent = '⏳ awaiting first data point';
+    document.getElementById('checkout-trend').textContent = '⏳ awaiting first data point';
+    document.getElementById('cvr-trend').textContent = '⏳ awaiting first data point';
+    document.getElementById('revenue-trend').textContent = '⏳ awaiting first data point';
+    
+    const alertsDiv = document.getElementById('alerts');
+    alertsDiv.innerHTML = '';
+    const alert = document.createElement('div');
+    alert.className = 'alert';
+    alert.innerHTML = '⏳ <strong>Warming up</strong> — No conversion data yet. Dashboard populates as GA4 events fire. <span class="time">Now</span>';
+    alertsDiv.appendChild(alert);
+  }, 500);
+}
+
+fetchGAData();
+</script>
+<footer>
+  Nebula Components · GA4 Property: G-KJ9S3450LH · Built Jul 13, 2026<br>
+  <span class="pill">MVP</span> Replace placeholder data with GA4 Data API v1beta for live metrics
+</footer>
+</body>
+</html>
