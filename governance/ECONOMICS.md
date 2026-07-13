@@ -34,7 +34,7 @@
 
 | Milestone | MRR | Path | Timeline |
 |---|---|---|---|
-|| First paying customer | $147 | Trigger-aware outreach → free audit → $147 fix | July 14+ |
+| First paying customer | $147 | Trigger-aware outreach → free audit → $147 fix | July 14+ |
 | 5 customers | ~$500 | Same funnel + retargeting | August 2026 |
 | 25 customers | ~$2,500 | Multiple channels + retainer upsells | Q4 2026 |
 | Target steady state | $50k/mo | Reliable acquisition + retainer base | TBD |

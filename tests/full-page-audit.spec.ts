@@ -1,0 +1,100 @@
+import { test, expect } from '@playwright/test';
+
+const BASE_URL = process.env.BASE_URL || 'https://nebulacomponents.shop';
+
+function parseRGB(s: string): [number, number, number] {
+  const m = s.match(/\d+/g)!.map(Number);
+  return [m[0], m[1], m[2]];
+}
+function lum(r: number, g: number, b: number): number {
+  const a = [r, g, b].map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+  return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
+}
+function ratio(fg: string, bg: string): number {
+  const [fr, fg2, fb] = parseRGB(fg);
+  const [br, bg2, bb] = parseRGB(bg);
+  return (Math.max(lum(fr, fg2, fb), lum(br, bg2, bb)) + 0.05) / (Math.min(lum(fr, fg2, fb), lum(br, bg2, bb)) + 0.05);
+}
+// Composite a possibly-transparent bg over the page bg rgb(8,9,10)
+function composite(bg: string): string {
+  if (bg.startsWith('rgba')) {
+    const m = bg.match(/[\d.]+/g)!.map(Number);
+    const [r, g, b, a] = m;
+    return `rgb(${Math.round(r * a + 8 * (1 - a))}, ${Math.round(g * a + 9 * (1 - a))}, ${Math.round(b * a + 10 * (1 - a))})`;
+  }
+  return bg;
+}
+
+test('FULL PAGE: all animated sections visible + contrast passes WCAG AA', async ({ page }) => {
+  const pageErrors: string[] = [];
+  page.on('pageerror', (e) => pageErrors.push(e.message));
+
+  await page.goto(BASE_URL + '?full=' + Date.now(), { waitUntil: 'networkidle' });
+  await page.waitForTimeout(4500); // safety net window
+
+  // Sweep: scroll through entire page in steps so every ScrollTrigger fires
+  const height = await page.evaluate(() => document.body.scrollHeight);
+  const vh = await page.evaluate(() => window.innerHeight);
+  for (let y = 0; y < height; y += vh) {
+    await page.evaluate((yy) => window.scrollTo(0, yy), y);
+    await page.waitForTimeout(200);
+  }
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(500);
+
+  // 1) VISIBILITY: every card / section / how-step / heading / paragraph visible
+  const vis = await page.evaluate(() => {
+    const sels = '.card, section, .how-step, h1, h2, h3, p, li, .pill, .badge, .btn, button, input, a';
+    const bad: any[] = [];
+    document.querySelectorAll(sels).forEach((el: any) => {
+      const cs = getComputedStyle(el);
+      if (cs.display === 'none' || cs.visibility === 'hidden') return;
+      const op = parseFloat(cs.opacity);
+      // Only flag elements that have visible content/尺寸
+      const r = el.getBoundingClientRect();
+      if (r.width < 2 || r.height < 2) return;
+      if (op < 0.95) {
+        bad.push({ sel: el.tagName + (el.className ? '.' + String(el.className).split(' ')[0] : ''), op, text: (el.textContent || '').trim().slice(0, 30) });
+      }
+    });
+    return bad;
+  });
+
+  // 2) CONTRAST: every leaf text node
+  const contrast = await page.evaluate(() => {
+    const out: any[] = [];
+    document.querySelectorAll('*').forEach((el: any) => {
+      const txt = el.textContent?.trim();
+      if (!txt || el.children.length > 0) return;
+      const cs = getComputedStyle(el);
+      if (cs.visibility === 'hidden' || cs.display === 'none') return;
+      let node: any = el, bg = 'rgb(8, 9, 10)';
+      while (node) {
+        const b = getComputedStyle(node).backgroundColor;
+        if (b && b !== 'rgba(0, 0, 0, 0)' && b !== 'transparent') { bg = b; break; }
+        node = node.parentElement;
+      }
+      out.push({ tag: el.tagName, text: txt.slice(0, 26), fg: cs.color, bg });
+    });
+    return out;
+  });
+
+  let contrastFails = 0;
+  contrast.forEach((d) => {
+    const realBg = composite(d.bg);
+    const rat = ratio(d.fg, realBg);
+    if (rat < 4.5) {
+      contrastFails++;
+      console.log(`CONTRAST FAIL ${d.tag} "${d.text}": ${rat.toFixed(2)}:1 fg=${d.fg} bg=${realBg}`);
+    }
+  });
+
+  console.log(`VISIBILITY: ${vis.length} hidden/animated elements below 0.95 opacity`);
+  vis.slice(0, 20).forEach((v: any) => console.log(`  HIDDEN ${v.sel} op=${v.op} "${v.text}"`));
+  console.log(`CONTRAST: checked ${contrast.length} nodes, failures=${contrastFails}`);
+  console.log(`PAGE ERRORS: ${JSON.stringify(pageErrors.filter(e => !e.includes('rb2b') && !e.includes('ERR_NAME_NOT_RESOLVED')))}`);
+
+  expect(vis.length).toBe(0);
+  expect(contrastFails).toBe(0);
+  expect(pageErrors.filter(e => !e.includes('rb2b') && !e.includes('ERR_NAME_NOT_RESOLVED'))).toHaveLength(0);
+});

@@ -107,18 +107,19 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(refresh, 200); });
 
   // ── SAFETY NET: at 4s, force every animated element to its resting
-  //     (visible) state by killing tweens and clearing inline transforms.
-  //     Because content is opacity:1 by default, clearing transforms can
-  //     never hide anything — it only stops a stuck slide mid-flight. ──
+  // ── SAFETY NET: at 4s, KILL all scroll tweens and force every animated
+  //     element fully visible. This guarantees content is never left hidden
+  //     by a miscalculated ScrollTrigger or a paused tween. Hero CTAs
+  //     (opacity:0 from the entrance timeline) are forced visible too. ──
   setTimeout(() => {
     try {
       ScrollTrigger.getAll().forEach((st) => st.kill());
-      gsap.utils.toArray('.card, section > h2, section > p, .how-step, .stat-num')
+      gsap.utils.toArray('.card, section > h2, section > p, .how-step, .stat-num, .btn, a, button')
         .forEach((el) => {
           gsap.killTweensOf(el);
-          gsap.set(el, { clearProps: 'transform' });
+          gsap.set(el, { opacity: 1, clearProps: 'transform' });
         });
-      console.log('[anim] Safety net: reset transforms to resting state');
+      console.log('[anim] Safety net: forced all elements visible');
     } catch (e) {
       console.warn('[anim] Safety net error:', e);
     }
