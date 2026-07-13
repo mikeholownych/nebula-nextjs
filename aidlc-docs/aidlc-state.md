@@ -2,7 +2,7 @@
 
 ## Workflow Status
 - Phase: INCEPTION — COMPLETE
-- Current Stage: Implementation Planning — complete; execution choice pending
+- Current Stage: Execution Planning — complete; implementation approval pending
 - Initiative: Next.js customer platform transformation
 - Project Type: Brownfield
 - Workspace Root: `/home/mike/nebula`
@@ -44,6 +44,7 @@
 | CLAUDE.md | `CLAUDE.md` | Setup |
 | Next.js customer platform design | `docs/superpowers/specs/2026-07-13-nextjs-customer-platform-design.md` | Application Design |
 | Transformation roadmap | `docs/superpowers/plans/2026-07-13-nextjs-customer-platform-roadmap.md` | Implementation Planning |
+| Detailed transformation action plan | `docs/superpowers/plans/2026-07-13-nextjs-customer-platform-action-plan.md` | Execution Planning |
 | Public-site migration plan | `docs/superpowers/plans/01-nextjs-public-site-migration.md` | Implementation Planning |
 | Identity and tenancy plan | `docs/superpowers/plans/02-platform-api-identity-tenancy.md` | Implementation Planning |
 | Customer dashboard and billing plan | `docs/superpowers/plans/03-customer-dashboard-billing.md` | Implementation Planning |

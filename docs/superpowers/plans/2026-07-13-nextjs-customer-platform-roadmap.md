@@ -25,6 +25,7 @@
 
 ## Plan set
 
+0. [`2026-07-13-nextjs-customer-platform-action-plan.md`](2026-07-13-nextjs-customer-platform-action-plan.md) — execution controller with owners, work packages, dependencies, stage gates, evidence, stop conditions, and critical path.
 1. [`01-nextjs-public-site-migration.md`](01-nextjs-public-site-migration.md) — framework foundation, route compatibility, content migration, and public-site parity.
 2. [`02-platform-api-identity-tenancy.md`](02-platform-api-identity-tenancy.md) — OIDC boundary, PostgreSQL, tenant model, RBAC, and platform APIs.
 3. [`03-customer-dashboard-billing.md`](03-customer-dashboard-billing.md) — dashboard shell, account administration, Stripe portal, entitlements, and audit visibility.

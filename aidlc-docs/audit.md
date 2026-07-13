@@ -207,3 +207,28 @@ Create a complete and thorough plan to implement the above transformation
 ### Validation
 - Seven planning documents now contain 1,504 lines, 36 implementation tasks, and 243 executable checkboxes.
 - Placeholder scan, task-step sequence validation, roadmap-link validation, and `git diff --check` all passed with zero findings.
+
+## 2026-07-13T18:33:49Z — Detailed implementation action plan
+
+### Raw user input
+```text
+Create a detailed action plan for implementation of the above transformation plan
+```
+
+### Artifact
+- Created `docs/superpowers/plans/2026-07-13-nextjs-customer-platform-action-plan.md`.
+- Added it as the execution controller in the transformation roadmap and AI-DLC artifact index.
+
+### Action-plan scope
+- Execution authority and ephemeral worker/reviewer model.
+- Ten non-negotiable rules and eight stop-the-line conditions.
+- Six execution waves and a risk-adjusted 34–53 working-day critical path.
+- Thirty-six uniquely identified work packages across Stripe security, baseline capture, Next.js, identity, PostgreSQL/RLS, dashboard, billing, agency management, white-labeling, CI, observability, cutover, rollback, and retirement.
+- Per-package owner, dependencies, actions, evidence, and exit gate.
+- Package execution protocol, evidence-record schema, daily cadence, first seven actions, and complete definition of done.
+
+### Validation
+- 484 lines and 29,572 bytes.
+- 36 unique work-package IDs; no duplicate IDs.
+- All linked implementation-plan files exist.
+- Placeholder scan and `git diff --check` returned zero findings.
