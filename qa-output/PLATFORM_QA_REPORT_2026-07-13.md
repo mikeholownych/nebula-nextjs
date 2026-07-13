@@ -14,7 +14,7 @@ All critical and high-severity defects found during this review were fixed and v
 
 | Gate | Result |
 |---|---:|
-| Python regression suite | **116 passed** |
+| Python regression suite | **117 passed** |
 | Full-site Playwright visual/WCAG suite | **87 passed** |
 | Critical-flow/mobile/animation/pricing Playwright suite | **36 passed** |
 | Total Playwright checks | **123 passed** |
@@ -25,6 +25,7 @@ All critical and high-severity defects found during this review were fixed and v
 | Missing titles | **0** |
 | Pages without exactly one H1 | **0** |
 | Missing image alt attributes | **0** |
+| Pages with unlabeled controls | **0** |
 | Unsafe `target="_blank"` links | **0** |
 | Unexpected Stripe checkout slugs | **0** |
 | Sensitive static paths tested | **6/6 return 404** |
@@ -158,13 +159,13 @@ The index generator emitted literal doubled braces (`{{ ... }}`), causing browse
 - Moved client CRM credentials from URL query parameters to `Authorization` and `X-Client-Email` headers; legacy credential URLs now return **400**.
 - Replaced dashboard placeholders with live `/api/stats` operational metrics while explicitly labeling GA4 behavior data as unavailable.
 - Replaced all 22 inert `href="#"` demo links with semantic buttons or non-interactive text.
+- Added source-level label associations to all 36 pricing-generator controls; both static crawling and runtime accessibility checks now pass.
 
 ## Remaining non-blocking items
 
 | Severity | Item | Impact / recommendation |
 |---|---|---|
 | Medium | GA4 Data API is not connected | The dashboard now shows verified live operational metrics and does not invent traffic data. Connect GA4 Data API for page-view, visitor, scroll-depth, and bounce-rate reporting. |
-| Informational | Static crawler still reports pricing-generator inputs as unlabeled | Runtime JavaScript assigns accessible names; Playwright confirms zero unnamed controls. Static source can be further annotated to silence the parser-only warning. |
 
 ## Regression commands
 
