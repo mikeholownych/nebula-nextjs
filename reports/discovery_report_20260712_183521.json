@@ -1,0 +1,52 @@
+{
+  "metadata": {
+    "created_at": "2026-07-12T18:35:21.477730",
+    "modified_at": null,
+    "version": "1.0.0"
+  },
+  "business_model": {
+    "primary_business_model": "SaaS for landing page audits",
+    "main_customers": "Founders running paid traffic",
+    "problem_solved": "Identifying conversion leaks in landing pages",
+    "revenue_model": "Free audit + $97 fix pack",
+    "annual_revenue": "$120,000",
+    "cac": "$50",
+    "ltv": "$200",
+    "current_marketing_channels": [
+      "LinkedIn",
+      "Reddit",
+      "Twitter"
+    ],
+    "conversion_rates": {
+      "landing_page": "4%",
+      "sales": "0%"
+    }
+  },
+  "marketing_funnel": {},
+  "technical_stack": {},
+  "pain_points": {},
+  "competitor_analysis": {},
+  "stakeholder_interviews": [
+    {
+      "timestamp": "2026-07-12T18:35:21.477783",
+      "interviewer": "Alex",
+      "interviewee": "Mike",
+      "role": "CEO",
+      "summary": "Discussion about current marketing challenges and technical constraints",
+      "key_insights": [
+        "Current funnel has 4% CTR but 0% conversion",
+        "Main bottleneck is landing page effectiveness",
+        "Technical team can implement basic tracking but lacks resources for complex integrations"
+      ],
+      "action_items": [
+        "Implement basic conversion tracking immediately",
+        "Prioritize landing page optimization over new channel acquisition",
+        "Allocate budget for essential tracking tools"
+      ]
+    }
+  ],
+  "data_collection_plan": {
+    "immediate_actions": [],
+    "timeline": {}
+  }
+}

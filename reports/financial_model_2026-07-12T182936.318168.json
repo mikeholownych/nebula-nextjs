@@ -1,0 +1,67 @@
+{
+  "metadata": {
+    "created_at": "2026-07-12T18:29:36.318168",
+    "modified_at": null,
+    "version": "1.0.0"
+  },
+  "initiative": {
+    "name": "Conversion Rate Optimization",
+    "description": "Improve landing page conversion through UX enhancements and trust signals",
+    "category": "Quick Win",
+    "implementation_timeline": "1-2 months"
+  },
+  "costs": {
+    "implementation": {
+      "design": 15000,
+      "development": 25000,
+      "testing": 5000,
+      "total": 45000
+    },
+    "operational": {
+      "maintenance": 2000,
+      "monitoring": 1000,
+      "total": 3000
+    },
+    "training": {},
+    "infrastructure": {}
+  },
+  "benefits": {
+    "revenue_increase": {
+      "monthly_revenue": 25000,
+      "annual_revenue": 300000,
+      "total": 300000
+    },
+    "cost_savings": {
+      "reduced_support_costs": 5000,
+      "reduced_acquisition_costs": 10000,
+      "total": 15000
+    },
+    "efficiency_gains": {},
+    "indirect_benefits": {}
+  },
+  "roi_analysis": {
+    "payback_period": "Within implementation timeline",
+    "roi_percentage": 556.25,
+    "net_present_value": 267000,
+    "internal_rate_of_return": 556.25
+  },
+  "risk_assessment": {
+    "implementation_risk": {
+      "score": 2
+    },
+    "market_risk": {
+      "score": 1
+    },
+    "technical_risk": {
+      "score": 2
+    },
+    "organizational_risk": {
+      "score": 1
+    },
+    "overall_risk_score": {
+      "score": 24,
+      "max_score": 20,
+      "risk_level": "Very High"
+    }
+  }
+}

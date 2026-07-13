@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Acme Corp",
+    "industry": "B2B Software",
+    "spend": 125000,
+    "conversions": 420
+  },
+  {
+    "name": "GlobalWidgets",
+    "industry": "E-commerce",
+    "spend": 87000,
+    "conversions": 310
+  },
+  {
+    "name": "TechSolutions",
+    "industry": "SaaS",
+    "spend": 210000,
+    "conversions": 780
+  },
+  {
+    "name": "DataInsights",
+    "industry": "Data Analytics",
+    "spend": 95000,
+    "conversions": 290
+  },
+  {
+    "name": "CloudServices",
+    "industry": "Cloud Infrastructure",
+    "spend": 175000,
+    "conversions": 520
+  }
+]

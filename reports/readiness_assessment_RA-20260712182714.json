@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "created_at": "2026-07-12T18:27:14.838485",
+    "modified_at": null,
+    "version": "1.0.0",
+    "client": "Acme Corp",
+    "assessment_id": "RA-20260712182714"
+  },
+  "technical_readiness": {
+    "infrastructure": 3.5,
+    "data_quality": 2.6666666666666665,
+    "integration": {},
+    "development_resources": {}
+  },
+  "organizational_readiness": {
+    "decision_making": 3.6666666666666665,
+    "resource_allocation": {},
+    "change_management": {},
+    "cultural_fit": {}
+  },
+  "data_readiness": {
+    "tracking_quality": {},
+    "data_accessibility": {},
+    "historical_data": {},
+    "measurement_framework": {}
+  },
+  "marketing_maturity": {
+    "channel_strategy": {},
+    "content_quality": {},
+    "audience_understanding": {},
+    "testing_culture": {}
+  },
+  "overall_assessment": {
+    "readiness_score": 1.8416666666666663,
+    "feasibility_matrix": {
+      "feasibility_rating": "Very Low - Major overhaul required",
+      "preparation_needed": [
+        "Complete infrastructure rebuild",
+        "Data governance implementation",
+        "Cultural transformation program"
+      ]
+    },
+    "preparation_roadmap": [
+      {
+        "phase": "Foundation",
+        "duration": "2-3 months",
+        "activities": [
+          "Complete infrastructure rebuild",
+          "Data governance implementation",
+          "Cultural transformation program"
+        ]
+      },
+      {
+        "phase": "Pilot",
+        "duration": "1-2 months",
+        "activities": [
+          "Small-scale implementation",
+          "Validation of approach",
+          "Initial results measurement"
+        ]
+      },
+      {
+        "phase": "Implementation",
+        "duration": "3-4 months",
+        "activities": [
+          "Full implementation",
+          "Advanced optimization",
+          "Organizational integration"
+        ]
+      },
+      {
+        "phase": "Scale",
+        "duration": "3-6 months",
+        "activities": [
+          "Full funnel implementation",
+          "Organizational scaling",
+          "Long-term strategy development"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+Score matrix saved to pilot_client_scores.json
+
+=== Pilot Client Score Matrix ===
+| Client         | Industry        | Spend   | Conversions | Total Score | CR | PC | BA | SF | IR |
+|-----------------|-----------------|---------|-------------|-------------|----|----|----|----|----|
+| Acme Corp         | B2B Software    | $ 125000 |         420 |        7.95 |  8  |  9  |  7  |  8  |  7  |
+| GlobalWidgets     | E-commerce      | $  87000 |         310 |        7.95 |  8  |  9  |  7  |  8  |  7  |
+| TechSolutions     | SaaS            | $ 210000 |         780 |        7.95 |  8  |  9  |  7  |  8  |  7  |
+| DataInsights      | Data Analytics  | $  95000 |         290 |        7.95 |  8  |  9  |  7  |  8  |  7  |
+| CloudServices     | Cloud Infrastructure | $ 175000 |         520 |        7.95 |  8  |  9  |  7  |  8  |  7  |
+
+=== Top 5 Candidate Clients ===
+1. Acme Corp (B2B Software) - Total Score: 7.95
+2. GlobalWidgets (E-commerce) - Total Score: 7.95
+3. TechSolutions (SaaS) - Total Score: 7.95
+4. DataInsights (Data Analytics) - Total Score: 7.95
+5. CloudServices (Cloud Infrastructure) - Total Score: 7.95

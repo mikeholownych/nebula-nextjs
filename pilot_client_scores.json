@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Acme Corp",
+    "industry": "B2B Software",
+    "spend": 125000,
+    "conversions": 420,
+    "total_score": 7.95,
+    "current_relationship": 8,
+    "problem_complexity": 9,
+    "budget_availability": 7,
+    "strategic_fit": 8,
+    "implementation_readiness": 7
+  },
+  {
+    "name": "GlobalWidgets",
+    "industry": "E-commerce",
+    "spend": 87000,
+    "conversions": 310,
+    "total_score": 7.95,
+    "current_relationship": 8,
+    "problem_complexity": 9,
+    "budget_availability": 7,
+    "strategic_fit": 8,
+    "implementation_readiness": 7
+  },
+  {
+    "name": "TechSolutions",
+    "industry": "SaaS",
+    "spend": 210000,
+    "conversions": 780,
+    "total_score": 7.95,
+    "current_relationship": 8,
+    "problem_complexity": 9,
+    "budget_availability": 7,
+    "strategic_fit": 8,
+    "implementation_readiness": 7
+  },
+  {
+    "name": "DataInsights",
+    "industry": "Data Analytics",
+    "spend": 95000,
+    "conversions": 290,
+    "total_score": 7.95,
+    "current_relationship": 8,
+    "problem_complexity": 9,
+    "budget_availability": 7,
+    "strategic_fit": 8,
+    "implementation_readiness": 7
+  },
+  {
+    "name": "CloudServices",
+    "industry": "Cloud Infrastructure",
+    "spend": 175000,
+    "conversions": 520,
+    "total_score": 7.95,
+    "current_relationship": 8,
+    "problem_complexity": 9,
+    "budget_availability": 7,
+    "strategic_fit": 8,
+    "implementation_readiness": 7
+  }
+]
