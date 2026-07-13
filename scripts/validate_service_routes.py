@@ -395,6 +395,17 @@ def _validate_rule_order(routes: list[dict[str, Any]]) -> None:
                     raise ManifestValidationError(
                         f"broader rule {earlier['name']} appears before specific rule {later['name']}"
                     )
+                if "path_regex" in later:
+                    later_expression = re.compile(later["path_regex"])
+                    literal_prefix = _regex_literal_prefix(later["path_regex"])
+                    if (
+                        literal_prefix is not None
+                        and literal_prefix.startswith(prefix)
+                        or _regex_overlaps_route(later_expression, earlier)
+                    ):
+                        raise ManifestValidationError(
+                            f"broader rule {earlier['name']} appears before specific rule {later['name']}"
+                        )
             if "path_regex" in earlier:
                 expression = re.compile(earlier["path_regex"])
                 if _regex_overlaps_route(expression, later):

@@ -325,6 +325,26 @@ def test_validator_rejects_regex_before_overlapping_specific_exact():
     assert_invalid(document, "regex rule api_regex overlaps later rule stats")
 
 
+def test_validator_rejects_broad_prefix_before_specific_regex():
+    document = manifest()
+    broad_index = document["routes"].index(route_by_name(document, "current_public_api"))
+    document["routes"].insert(
+        broad_index + 1,
+        {
+            "name": "api_items_regex",
+            "path_regex": r"^/api/items/[0-9]+$",
+            "current_owner": "agentic_server",
+            "target_owner": "platform_api",
+            "transition_gate": "api_items_canary",
+        },
+    )
+
+    assert_invalid(
+        document,
+        "broader rule current_public_api.*before specific rule api_items_regex",
+    )
+
+
 def test_validator_rejects_owner_change_without_transition_gate():
     document = manifest()
     route_by_name(document, "platform_api").pop("transition_gate")
