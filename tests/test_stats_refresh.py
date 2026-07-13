@@ -29,6 +29,7 @@ def test_refresh_stats_rebuilds_snapshot_from_live_ledgers(tmp_path, monkeypatch
     write_jsonl(customers, [
         {"event": "inbound_reply", "classification": "warm", "email": "buyer@company.com"},
         {"event_type": "audit_delivered", "email": "buyer@company.com"},
+        {"event_type": "audit_delivered", "email": "test@example.com", "url": "https://example.com"},
         {"event_type": "payment", "email": "buyer@company.com", "amount_cents": 14700, "payment_id": "pi_live"},
         {"event_type": "payment", "email": "test@example.com", "amount_cents": 14700, "payment_id": "cs_test_1"},
     ])

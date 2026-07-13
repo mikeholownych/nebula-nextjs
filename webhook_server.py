@@ -123,7 +123,11 @@ def refresh_stats_snapshot():
         if not _is_test_payment_text(row.get("email"), row.get("sender"), row.get("subject"))
     ]
     warm = [row for row in replies if row.get("classification") == "warm"]
-    audits = [row for row in customers if row.get("event_type") == "audit_delivered"]
+    audits = [
+        row for row in customers
+        if row.get("event_type") == "audit_delivered"
+        and not _is_test_payment_text(row.get("email"), row.get("url"), row.get("thread_id"), row.get("message_id"))
+    ]
     real_payments = [
         row for row in customers
         if row.get("event_type") == "payment"
