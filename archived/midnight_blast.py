@@ -52,7 +52,7 @@ for t in targets:
         f"{LC}\n\n"
         f"Also have a DIY option (7 component sections, $7): {SITE}\n\n"
         f"'Ship or It's Free' guarantee on both.\n\n"
-        f"Run the self-serve audit here: https://nebulacomponents.shop/audit.html\nImplementation checkout: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02\n\n"
+        f"Run the self-serve audit here: https://nebulacomponents.shop/audit.html\nImplementation checkout: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b\n\n"
         f"Best,\nLaunchCrate"
     )
     html = (

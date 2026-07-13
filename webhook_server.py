@@ -18,7 +18,7 @@ STATS_FILE     = "/home/mike/nebula/stats.json"
 INBOX_LOG      = "/home/mike/nebula/ledgers/customer-ledger.jsonl"
 SEEN_THREADS_FILE = "/home/mike/nebula/seen_threads.json"
 HOT_LEAD_FILE  = "/home/mike/nebula/HOT_LEAD.json"
-CHECKOUT_97    = "https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02"
+CHECKOUT_97    = "https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
 CHECKOUT_997   = "https://buy.stripe.com/4gMcN5aYk92Qaa5drY43S09"
 
 # In-memory + persisted dedup set — prevents same thread firing duplicate actions

@@ -43,7 +43,7 @@ CTA: Check if your page shows proof early enough → https://nebulacomponents.sh
 - The fastest ROI is often stopping leakage before increasing traffic.
 - Rule: do not scale ads into an unscored page.
 
-CTA: Get the implementation-ready fix pack → https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+CTA: Get the implementation-ready fix pack → https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 ## Bottom CTA
 

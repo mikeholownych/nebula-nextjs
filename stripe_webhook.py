@@ -278,7 +278,7 @@ def process_abandoned_carts():
                 continue
             _, subject, body = tmpl
             body_fmt = body.format(
-                stripe="https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02",
+                stripe="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b",
                 stripe_7="https://buy.stripe.com/4gMdR9aYkenafup3Ro43S00",
             )
             ok = _send_email(email, subject, body_fmt, None)

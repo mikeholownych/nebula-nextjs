@@ -12,8 +12,8 @@ import os
 import sys
 from pathlib import Path
 
-STATIC_97_URL = "https://buy.stripe.com/4gMdR9aYkenafup3Ro43S00"
-PRICE_97_ID   = "price_1TlZlbEINR1kU9chWMfqc1jc"
+STATIC_147_URL = "https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
+PRICE_147_ID   = "price_1TsYoeEINR1kU9chokWZFetZ"
 SUCCESS_URL   = "https://nebulacomponents.shop/checkout.html?success=true"
 CANCEL_URL    = "https://nebulacomponents.shop/audit.html"
 
@@ -41,14 +41,14 @@ def _load_stripe_key() -> str | None:
     return None
 
 
-def get_97_checkout_url(
+def get_147_checkout_url(
     email: str,
     lead_url: str,
     audit_score,
     domain: str,
 ) -> str:
     """
-    Create a personalised Stripe Checkout Session for the $97 fix pack.
+    Create a personalised Stripe Checkout Session for the $147 Conversion Fix Pack.
 
     Parameters
     ----------
@@ -63,7 +63,7 @@ def get_97_checkout_url(
     """
     secret_key = _load_stripe_key()
     if not secret_key:
-        return STATIC_97_URL
+        return STATIC_147_URL
 
     try:
         # Add venv site-packages to path so 'stripe' SDK is importable
@@ -79,7 +79,7 @@ def get_97_checkout_url(
 
         session = stripe.checkout.Session.create(
             mode="payment",
-            line_items=[{"price": PRICE_97_ID, "quantity": 1}],
+            line_items=[{"price": PRICE_147_ID, "quantity": 1}],
             customer_email=email or None,
             success_url=SUCCESS_URL,
             cancel_url=CANCEL_URL,
@@ -98,12 +98,12 @@ def get_97_checkout_url(
         # Never block email send — log and fall back
         print(f"  [stripe_links] checkout session failed ({exc}); using static URL")
 
-    return STATIC_97_URL
+    return STATIC_147_URL
 
 
 if __name__ == "__main__":
     # Quick smoke test (prints static URL if no key is configured)
-    test_url = get_97_checkout_url(
+    test_url = get_147_checkout_url(
         email="test@example.com",
         lead_url="https://example.com",
         audit_score="4.2",

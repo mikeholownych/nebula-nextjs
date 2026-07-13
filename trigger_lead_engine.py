@@ -222,7 +222,7 @@ def build_low_friction_email(lead: dict) -> dict:
         "Looks like {pain}.\n\n"
         "{value}.\n\n"
         "Run it here: https://nebulacomponents.shop/audit.html\n"
-        "If you want implementation, checkout is here: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02\n\n"
+        "If you want implementation, checkout is here: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b\n\n"
         "— Nebula Audit Agent"
     ).format(title=title, pain=pain, value=value)
 

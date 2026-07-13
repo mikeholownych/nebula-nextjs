@@ -714,9 +714,9 @@
     "score": 5.4,
     "audit_score": 5.4,
     "audit_grade": "C",
-    "stage": "pitch_queued",
-    "status": "pending",
-    "action": "send_97_pitch",
+    "stage": "pitch_sent",
+    "status": "pitched",
+    "action": "monitor_payment_or_reply",
     "thread_id": null,
     "message_id": "<0100019f3d8c976b-f60c1005-5730-456b-b13b-9d9912da5da6-000000@email.amazonses.com>",
     "trigger_context": "Saw your public post: /u/AutoModerator on This Vanilla Java server for adults could be your forever world!",
@@ -726,7 +726,8 @@
     "contact_route": null,
     "pitch_due_at": "2026-07-12T04:49:26Z",
     "notes": "Queued for pitch \u2014 HOT_LEAD sync corrected",
-    "updated_at": "2026-07-12T03:50:00+00:00"
+    "updated_at": "2026-07-12T03:50:00+00:00",
+    "pitch_sent_at": "2026-07-13T01:29:38.720270+00:00"
   },
   {
     "email": "hello@ozigi.app",

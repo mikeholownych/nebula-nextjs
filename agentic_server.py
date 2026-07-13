@@ -64,6 +64,12 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header("X-Robots-Tag", "all")
         self.send_header("Access-Control-Allow-Origin", "*")
         
+        # Prevent Cloudflare Tunnel / browser edge caching of static assets.
+        # Without this, edited files (JS/CSS/HTML) serve stale cached versions.
+        self.send_header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
+        self.send_header("Pragma", "no-cache")
+        self.send_header("Expires", "0")
+        
         super().end_headers()
 
     def do_HEAD(self):

@@ -30,7 +30,7 @@ No call. No calendar. No "reply to schedule." You pay, I implement, you see the 
 
 https://buy.stripe.com/4gMdR9aYkenafup3Ro43S00
 
-If you want to try the $7 self-serve kit first: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+If you want to try the $7 self-serve kit first: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 — Alex
 Nebula Components"""

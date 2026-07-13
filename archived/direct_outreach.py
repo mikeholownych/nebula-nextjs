@@ -47,7 +47,7 @@ Guarantee: I'll get you at least 3 customer conversations within 7 days, or I re
 No contract. No monthly fee. Just one focused week to get you momentum.
 
 Run the self-serve audit here: https://nebulacomponents.shop/audit.html
-Implementation checkout: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+Implementation checkout: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 Best,
 Nebula / LaunchCrate""")

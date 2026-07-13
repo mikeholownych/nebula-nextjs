@@ -25,4 +25,4 @@ Put the first CTA after:
 ## Next step
 This is one piece of the Fix Pack. The full Fix Pack also handles proof order, headline rewrite, mobile friction, objection handling, and technical trust fixes.
 
-Get implementation: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+Get implementation: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b

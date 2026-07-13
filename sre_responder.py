@@ -257,6 +257,38 @@ def fix_stuck_leads():
     except Exception as e:
         log(f'[pitch_sent_stale_check] Error querying LeadStore: {e}')
 
+    # ── Direct LeadStore query for needs_review >24h ────────────────────
+    # The health check's stuck_leads array also excludes needs_review (it's
+    # classified as a "human-review holding stage" in get_stuck_leads). The
+    # SRE's STAGE_ACTIONS handler for needs_review >24h -> dead never fires
+    # without this direct query.
+    NEEDS_REVIEW_STALE_HOURS = 24
+    try:
+        for lead in db.get_leads_by_stage('needs_review'):
+            email = lead.get('email', '')
+            if not email:
+                continue
+            if email.lower() in TEST_EMAILS_LC:
+                continue
+            # Determine when lead entered needs_review
+            ts_str = lead.get('needs_review_at') or lead.get('updated_at', '')
+            if not ts_str:
+                continue
+            try:
+                t = datetime.fromisoformat(ts_str.rstrip('Z').replace('Z', '+00:00')).replace(tzinfo=timezone.utc)
+                hours = (now_utc - t).total_seconds() / 3600
+                if hours > NEEDS_REVIEW_STALE_HOURS:
+                    stuck.append({
+                        'email': email,
+                        'stage': 'needs_review',
+                        'hours_stuck': round(hours, 1),
+                        'url': lead.get('url', ''),
+                    })
+            except Exception:
+                continue
+    except Exception as e:
+        log(f'[needs_review_stale_check] Error querying LeadStore: {e}')
+
     STAGE_ACTIONS = {
         # leads stuck in audit_delivered >4h → re-queue for pitch
         'audit_delivered': lambda email, hours: (
@@ -269,6 +301,12 @@ def fix_stuck_leads():
             db.upsert_lead(email=email, stage='needs_review',
                            notes=f'sre_escalate: pitch_sent {hours}h, recycler exhausted')
             if hours > 168 else None
+        ),
+        # needs_review >24h without human action → auto-close to dead
+        'needs_review': lambda email, hours: (
+            db.upsert_lead(email=email, stage='dead',
+                           notes=f'sre_freeze: needs_review {hours}h, no human review')
+            if hours > 24 else None
         ),
     }
 
@@ -356,9 +394,25 @@ def trigger_ramp_if_starved():
         return False
 
     # Extended cooldown if multiple sources are known-broken
-    if _all_sources_broken() and _last_ramp_had_zero_sends():
-        log(f'[ramp-cooldown] Multiple sources broken + last ramp 0 sends — suppressing ramp trigger')
-        return False
+    # Check this BEFORE the per-report cooldown so source failures suppress
+    # ramp re-triggers even if the last report is too old to count
+    if _all_sources_broken():
+        # Also check if there's any recent zero-send evidence (even if slightly stale)
+        any_zero_recent = _last_ramp_had_zero_sends()
+        if not any_zero_recent and RAMP_REPORT.exists():
+            # Fallback: check if the MOST recent non-empty report had 0 sends
+            try:
+                report = json.loads(RAMP_REPORT.read_text())
+                sent_count = report.get('counts', {}).get('sent', 0)
+                any_zero_recent = sent_count == 0
+            except Exception:
+                pass
+        if any_zero_recent:
+            log(f'[ramp-cooldown] Multiple sources broken + last ramp 0 sends — suppressing ramp trigger')
+            return False
+        else:
+            log(f'[ramp-cooldown] Multiple sources broken — suppressing ramp trigger despite no zero-send evidence')
+            return False
 
     contacted = BASE / 'contacted.json'
     if not contacted.exists():
@@ -443,6 +497,7 @@ NOISE_CHECKS = {
     # check_name: (min_alert_interval_minutes, description)
     'smtp_check': (0, 'SMTP is now retired — always passes'),
     'ramp_lock_stale': (30, 'Stale lock every ramp run — acceptable'),
+    'Pipeline ramp recent run': (120, 'Stale during source outages — SRE suppresses ramp trigger when sources are broken'),
 }
 
 def evaluate_snr():

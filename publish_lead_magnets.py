@@ -68,7 +68,7 @@ a{{color:#8ee6ff}} h1{{font-size:clamp(2.2rem,7vw,4.5rem);line-height:.95;letter
 p{{font-size:1.05rem;color:#d8d2c3}} strong{{color:#fff}} table{{width:100%;border-collapse:collapse;margin:18px 0;background:#111318;border:1px solid #2b2f36}}td{{border:1px solid #2b2f36;padding:12px;vertical-align:top}}.num,.bullet{{background:#101217;border-left:3px solid #f8d57e;padding:10px 14px}}.cta{{margin-top:44px;padding:22px;border:1px solid #f8d57e;background:#15130b}}.cta a{{display:inline-block;margin-top:10px;background:#f8d57e;color:#08090b;text-decoration:none;font-weight:800;padding:12px 16px;border-radius:8px}}
 </style>
 </head>
-<body><main>{body_html}<div class='cta'><strong>Want the full fix shipped?</strong><br><a href='https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02'>Get the $147 Fix Pack</a></div></main></body>
+<body><main>{body_html}<div class='cta'><strong>Want the full fix shipped?</strong><br><a href='https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b'>Get the $147 Fix Pack</a></div></main></body>
 </html>
 """
 

@@ -11,7 +11,7 @@ Run the self-serve audit here:
 https://nebulacomponents.shop/audit.html
 
 If the fixes look right, $97 implementation starts here:
-https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 No call needed.
 

@@ -24,7 +24,7 @@ Nebula / LaunchCrate"""
     html = """<p><strong>Quick question: trying to get your first customers?</strong></p>
 <p>I'll help you get a <strong>genuine customer conversation within 7 days</strong>. Landing page + outreach sequence + setup. $97.</p>
 <p><strong style="color:#34d399">Guaranteed: conversation or full refund.</strong></p>
-<p>Run the self-serve audit: https://nebulacomponents.shop/audit.html</p><p>Implementation checkout: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02</p>"""
+<p>Run the self-serve audit: https://nebulacomponents.shop/audit.html</p><p>Implementation checkout: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b</p>"""
     
     data = {"to": [to_email], "subject": "Customer conversations, not landing pages", "text": text, "html": html, "labels": ["final-blast"]}
     req = urllib.request.Request(f"https://api.agentmail.to/inboxes/{INBOX}/messages/send", data=json.dumps(data).encode(), headers=HEADERS, method="POST")

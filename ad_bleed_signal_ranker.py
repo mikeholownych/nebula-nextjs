@@ -16,7 +16,7 @@ from typing import Iterable
 DEFAULT_BASE = Path('/home/mike/nebula')
 BOARD_URL = 'https://nebulacomponents.shop/ad-burn-leaderboard.html'
 AUDIT_URL = 'https://nebulacomponents.shop/audit.html'
-CHECKOUT_URL = 'https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02'
+CHECKOUT_URL = 'https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b'
 
 AD_TERMS = (
     'ad', 'ads', 'ppc', 'google ads', 'facebook ads', 'meta ads',

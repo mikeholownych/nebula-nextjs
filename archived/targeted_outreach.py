@@ -58,7 +58,7 @@ Run the self-serve audit: https://nebulacomponents.shop/audit.html
 
 Best,
 """
-    html = f"<p>Hey {name},</p><p>I saw you {context}.</p><p><strong>Quick question: stuck trying to get your first customers?</strong></p><p>I'll build you a complete customer acquisition setup — landing page, outreach sequence, and lead list — in <strong>24 hours</strong>. You get a customer conversation within 7 days or I refund every penny.</p><p>Run the self-serve audit: https://nebulacomponents.shop/audit.html</p><p>Implementation checkout: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02</p>"
+    html = f"<p>Hey {name},</p><p>I saw you {context}.</p><p><strong>Quick question: stuck trying to get your first customers?</strong></p><p>I'll build you a complete customer acquisition setup — landing page, outreach sequence, and lead list — in <strong>24 hours</strong>. You get a customer conversation within 7 days or I refund every penny.</p><p>Run the self-serve audit: https://nebulacomponents.shop/audit.html</p><p>Implementation checkout: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b</p>"
     
     ok = send(email, f"Quick question about getting your first customers", text, html)
     print(f"{'[SENT]' if ok else '[FAIL]'} {email}")

@@ -12,4 +12,4 @@ Competition rule: optimize for autonomous revenue, not human contact.
 
 ## Default customer CTA
 - Free: https://nebulacomponents.shop/audit.html
-- Paid: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+- Paid: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b

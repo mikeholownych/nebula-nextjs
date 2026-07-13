@@ -6,22 +6,16 @@
 
 # Test info
 
-- Name: tests/color-contrast.spec.ts >> Color Contrast & Visual Inspection >> screenshot full page for visual inspection
-- Location: tests/color-contrast.spec.ts:22:7
+- Name: tests/pricing-animation.spec.ts >> Pricing Animation Validation >> pricing cards are visible (not stuck opacity:0)
+- Location: tests/pricing-animation.spec.ts:6:7
 
 # Error details
 
 ```
-Test timeout of 30000ms exceeded.
-```
+Error: expect(received).toBeGreaterThan(expected)
 
-```
-Error: page.screenshot: Test timeout of 30000ms exceeded.
-Call log:
-  - taking page screenshot
-  - waiting for fonts to load...
-  - fonts loaded
-
+Expected: > 0.9
+Received:   0
 ```
 
 # Page snapshot
@@ -83,10 +77,10 @@ Call log:
         - /url: "#audit-form-card"
   - generic [ref=e41]:
     - generic [ref=e42]:
-      - generic [ref=e44]: "0"
+      - generic [ref=e44]: "40"
       - generic [ref=e45]: pages scored
     - generic [ref=e47]:
-      - generic [ref=e49]: "0"
+      - generic [ref=e49]: "3"
       - generic [ref=e50]:
         - text: avg leak categories
         - text: found per audit
@@ -333,7 +327,7 @@ Call log:
           - generic [ref=e263]: → Then you buy and your fix is in your inbox within 72h
         - paragraph [ref=e264]: No production changes without your go-ahead. Safe fallback artifact if direct implementation is unsupported. One reasonable revision included.
         - link "Get the Conversion Fix Pack →" [ref=e265] [cursor=pointer]:
-          - /url: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+          - /url: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
         - generic [ref=e266]:
           - img "Visa" [ref=e267]:
             - generic [ref=e269]: VISA
@@ -452,7 +446,7 @@ Call log:
       - paragraph [ref=e377]: Between me and the support team, average response time is under 60 minutes over a 24/7, 365-day period.
       - paragraph [ref=e378]:
         - link "Get the $147 Fix Pack →" [ref=e379] [cursor=pointer]:
-          - /url: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+          - /url: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
       - paragraph [ref=e380]:
         - text: Or
         - link "run the free audit first" [ref=e381] [cursor=pointer]:
@@ -800,129 +794,50 @@ Call log:
 # Test source
 
 ```ts
-  1   | import { test, expect } from '@playwright/test';
-  2   | 
-  3   | /**
-  4   |  * Visual color contrast and usage inspection for Nebula Components landing page
-  5   |  * 
-  6   |  * This test suite validates:
-  7   |  * 1. WCAG color contrast ratios for text
-  8   |  * 2. Consistent color palette usage
-  9   |  * 3. Link/button visibility against backgrounds
-  10  |  * 4. No broken background/foreground combinations
-  11  |  */
-  12  | 
-  13  | const BASE_URL = process.env.BASE_URL || 'https://nebulacomponents.shop';
-  14  | 
-  15  | test.describe('Color Contrast & Visual Inspection', () => {
-  16  |   test.beforeEach(async ({ page }) => {
-  17  |     await page.goto(BASE_URL);
-  18  |     // Wait for page to fully load
-  19  |     await page.waitForLoadState('networkidle');
-  20  |   });
-  21  | 
-  22  |   test('screenshot full page for visual inspection', async ({ page }) => {
-  23  |     // Take full page screenshot
-> 24  |     await page.screenshot({
-      |                ^ Error: page.screenshot: Test timeout of 30000ms exceeded.
-  25  |       path: 'test-results/full-page.png',
-  26  |       fullPage: true
-  27  |     });
-  28  |     
-  29  |     // Also capture viewport snapshot
-  30  |     await page.screenshot({
-  31  |       path: 'test-results/viewport.png',
-  32  |       fullPage: false
-  33  |     });
-  34  |   });
-  35  | 
-  36  |   test('extract color palette from CSS variables', async ({ page }) => {
-  37  |     const colors = await page.evaluate(() => {
-  38  |       const root = getComputedStyle(document.documentElement);
-  39  |       const colorVars = [
-  40  |         '--blue', '--green', '--amber', '--red',
-  41  |         '--bg', '--text', '--muted', '--border'
-  42  |       ];
-  43  |       
-  44  |       const palette: Record<string, string> = {};
-  45  |       for (const v of colorVars) {
-  46  |         palette[v] = root.getPropertyValue(v).trim();
-  47  |       }
-  48  |       
-  49  |       // Also get computed background and text colors
-  50  |       const body = document.body;
-  51  |       const bodyStyle = getComputedStyle(body);
-  52  |       palette['body-bg'] = bodyStyle.backgroundColor;
-  53  |       palette['body-text'] = bodyStyle.color;
-  54  |       
-  55  |       return palette;
-  56  |     });
-  57  |     
-  58  |     console.log('Color palette:', JSON.stringify(colors, null, 2));
-  59  |     
-  60  |     // Save palette for reference
-  61  |     require('fs').writeFileSync(
-  62  |       'test-results/color-palette.json',
-  63  |       JSON.stringify(colors, null, 2)
-  64  |     );
-  65  |   });
-  66  | 
-  67  |   test('inspect button colors and contrast', async ({ page }) => {
-  68  |     const buttons = await page.locator('button, .btn, .btn-green, .btn-dark, a[class*="btn"]').all();
-  69  |     
-  70  |     const buttonColors = [];
-  71  |     
-  72  |     for (const btn of buttons) {
-  73  |       const styles = await btn.evaluate((el) => {
-  74  |         const s = getComputedStyle(el);
-  75  |         return {
-  76  |           text: s.color,
-  77  |           background: s.backgroundColor,
-  78  |           borderColor: s.borderColor,
-  79  |           fontSize: s.fontSize,
-  80  |           fontWeight: s.fontWeight,
-  81  |           textContent: el.textContent?.substring(0, 50)
-  82  |         };
-  83  |       });
-  84  |       buttonColors.push(styles);
-  85  |     }
-  86  |     
-  87  |     console.log(`Found ${buttonColors.length} buttons/CTAs`);
-  88  |     console.log('Button colors:', JSON.stringify(buttonColors.slice(0, 10), null, 2));
-  89  |     
-  90  |     require('fs').writeFileSync(
-  91  |       'test-results/button-colors.json',
-  92  |       JSON.stringify(buttonColors, null, 2)
-  93  |     );
-  94  |   });
-  95  | 
-  96  |   test('inspect link colors', async ({ page }) => {
-  97  |     const links = await page.locator('a').all();
-  98  |     
-  99  |     const linkColors = [];
-  100 |     
-  101 |     for (const link of links.slice(0, 20)) { // Sample first 20
-  102 |       const styles = await link.evaluate((el) => {
-  103 |         const s = getComputedStyle(el);
-  104 |         return {
-  105 |           text: s.color,
-  106 |           background: s.backgroundColor,
-  107 |           textDecoration: s.textDecoration,
-  108 |           href: el.href,
-  109 |           textContent: el.textContent?.substring(0, 30)
-  110 |         };
-  111 |       });
-  112 |       linkColors.push(styles);
-  113 |     }
-  114 |     
-  115 |     console.log('Link colors:', JSON.stringify(linkColors, null, 2));
-  116 |     
-  117 |     require('fs').writeFileSync(
-  118 |       'test-results/link-colors.json',
-  119 |       JSON.stringify(linkColors, null, 2)
-  120 |     );
-  121 |   });
-  122 | 
-  123 |   test('check hero section colors', async ({ page }) => {
-  124 |     const hero = page.locator('header, .hero, [class*="hero"]').first();
+  1  | import { test, expect } from '@playwright/test';
+  2  | 
+  3  | const BASE_URL = process.env.BASE_URL || 'https://nebulacomponents.shop';
+  4  | 
+  5  | test.describe('Pricing Animation Validation', () => {
+  6  |   test('pricing cards are visible (not stuck opacity:0)', async ({ page }) => {
+  7  |     await page.goto(BASE_URL, { waitUntil: 'networkidle' });
+  8  | 
+  9  |     // Scroll to pricing section
+  10 |     await page.evaluate(() => {
+  11 |       document.querySelector('#pricing')?.scrollIntoView({ behavior: 'instant', block: 'center' });
+  12 |     });
+  13 | 
+  14 |     // Wait for GSAP + 3s safety net to settle
+  15 |     await page.waitForTimeout(3500);
+  16 | 
+  17 |     const cards = page.locator('#pricing .card');
+  18 |     const count = await cards.count();
+  19 |     expect(count).toBeGreaterThan(0);
+  20 | 
+  21 |     for (let i = 0; i < count; i++) {
+  22 |       const opacity = await cards.nth(i).evaluate((el) => parseFloat(getComputedStyle(el).opacity));
+  23 |       console.log(`Card ${i} opacity: ${opacity}`);
+> 24 |       expect(opacity).toBeGreaterThan(0.9);
+     |                       ^ Error: expect(received).toBeGreaterThan(expected)
+  25 |     }
+  26 |   });
+  27 | 
+  28 |   test('pricing cards visible even with JS disabled (default state)', async ({ page }) => {
+  29 |     // Block gsap scripts to simulate JS failure
+  30 |     await page.route('**/gsap*.js', (route) => route.abort());
+  31 |     await page.route('**/gsap-animations.js', (route) => route.abort());
+  32 | 
+  33 |     await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
+  34 |     await page.waitForTimeout(1000);
+  35 | 
+  36 |     const cards = page.locator('#pricing .card');
+  37 |     const count = await cards.count();
+  38 | 
+  39 |     for (let i = 0; i < count; i++) {
+  40 |       const opacity = await cards.nth(i).evaluate((el) => parseFloat(getComputedStyle(el).opacity));
+  41 |       expect(opacity).toBeGreaterThan(0.9);
+  42 |     }
+  43 |   });
+  44 | });
+  45 | 
 ```

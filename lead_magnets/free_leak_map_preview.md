@@ -24,4 +24,4 @@ Give the lead a taste of the actual result before the paid offer.
 ## Next step
 Run your own free leak map: https://nebulacomponents.shop/audit.html
 
-If the result is obvious and you want it shipped, use the Fix Pack: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+If the result is obvious and you want it shipped, use the Fix Pack: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b

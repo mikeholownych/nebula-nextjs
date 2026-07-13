@@ -6,7 +6,7 @@
     "page_size_kb": 48.8,
     "cta_count": 0,
     "content_hash": "7c3f04a73dbab897ed52870fd5f105d3",
-    "scraped_at": "2026-07-12T02:01:45.200778+00:00"
+    "scraped_at": "2026-07-13T02:15:55.222115+00:00"
   },
   "hello@theogeo.ai": {
     "url": "https://theogeo.ai",
@@ -15,16 +15,16 @@
     "page_size_kb": 48.8,
     "cta_count": 0,
     "content_hash": "d1b0bc40021188a796ad83ff87d100d1",
-    "scraped_at": "2026-07-12T02:01:45.446730+00:00"
+    "scraped_at": "2026-07-13T02:15:55.437124+00:00"
   },
   "lakisha@goldenweeks.co": {
     "url": "https://goldenweeks.co",
     "title": "Accountability Retreat in Zanzibar for Founders, Makers & Nomads | goldenweeks Retreats",
     "status": "ok",
-    "page_size_kb": 27.7,
+    "page_size_kb": 29.0,
     "cta_count": 0,
-    "content_hash": "b8485dd4c062155fd48c31a59e5710b1",
-    "scraped_at": "2026-07-12T02:01:46.315626+00:00"
+    "content_hash": "f8693fc998ff679dba10332cd356cae5",
+    "scraped_at": "2026-07-13T02:15:56.224045+00:00"
   },
   "alloceraintelligence@gmail.com": {
     "url": "https://alloceraintelligence.com",
@@ -33,7 +33,7 @@
     "page_size_kb": 48.8,
     "cta_count": 0,
     "content_hash": "cee3498417b476661c08286b80229c35",
-    "scraped_at": "2026-07-12T02:01:46.758520+00:00"
+    "scraped_at": "2026-07-13T02:15:57.366067+00:00"
   },
   "deepanshu11madan@gmail.com": {
     "url": "https://naxely.com",
@@ -42,6 +42,6 @@
     "page_size_kb": 48.8,
     "cta_count": 0,
     "content_hash": "a93cc9d8d19efddaeb923d47928accdd",
-    "scraped_at": "2026-07-12T02:01:47.142720+00:00"
+    "scraped_at": "2026-07-13T02:15:57.516105+00:00"
   }
 }

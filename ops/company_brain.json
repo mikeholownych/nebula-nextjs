@@ -17,7 +17,7 @@
     "trigger_warm_replies": 0,
     "warm_leads": 1
   },
-  "generated_at": "2026-07-13T00:58:57Z",
+  "generated_at": "2026-07-13T07:32:08Z",
   "kill_criteria": {
     "audit": "3 audits delivered and 0 payments",
     "checkout": "buyer cannot pay self-serve",
@@ -25,14 +25,13 @@
   },
   "offer": "Free landing page audit -> $97 implementation",
   "pipeline": {
-    "hot_leads_pending": 3,
+    "hot_leads_pending": 2,
     "overdue_emails": [
       "hello@aijournal.store",
-      "office@facetwoface.at",
-      "support@godlike.host"
+      "office@facetwoface.at"
     ],
-    "pitch_overdue": 3,
-    "pitch_sent": 26,
+    "pitch_overdue": 2,
+    "pitch_sent": 27,
     "total": 48
   },
   "revenue": {

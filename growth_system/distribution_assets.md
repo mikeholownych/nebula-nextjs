@@ -101,7 +101,7 @@ The full breakdown of why this happens (and how to find where it's breaking on y
 Have a good one,
 Mike
 
-P.S. If you want us to run the diagnosis on your page and write the fix, the $97 Fix Pack does that: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+P.S. If you want us to run the diagnosis on your page and write the fix, the $97 Fix Pack does that: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 ---
 
@@ -126,7 +126,7 @@ The distinction between "ad problem" and "page problem" is the difference betwee
 
 Mike
 
-P.S. The $97 Fix Pack scores your page and delivers the copy fix, usually same day: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+P.S. The $97 Fix Pack scores your page and delivers the copy fix, usually same day: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 ---
 
@@ -176,7 +176,7 @@ Most pages fix layer 1 and wonder why conversion barely moved. The full guide co
 
 Mike
 
-P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 ---
 
@@ -228,7 +228,7 @@ The full guide covers CTA specificity as one of the five audit dimensions: https
 
 Mike
 
-P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 ---
 
@@ -278,7 +278,7 @@ The guide covers this as Dimension 4 in the scoring system: https://nebulacompon
 
 Mike
 
-P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 ---
 
@@ -333,7 +333,7 @@ https://nebulacomponents.shop/roas-cliff.html
 
 Mike
 
-P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 ---
 
@@ -358,7 +358,7 @@ https://nebulacomponents.shop/audit.html
 
 Mike
 
-P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 ---
 
@@ -383,7 +383,7 @@ This is Fix 1 in the guide. The other two are covered in the same document: http
 
 Mike
 
-P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 ---
 
@@ -408,7 +408,7 @@ Full breakdown in the guide: https://nebulacomponents.shop/roas-cliff.html
 
 Mike
 
-P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 ---
 
@@ -433,7 +433,7 @@ Guide covers all three fixes in the final section: https://nebulacomponents.shop
 
 Mike
 
-P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 ---
 
@@ -458,7 +458,7 @@ Guide here: https://nebulacomponents.shop/roas-cliff.html
 
 Mike
 
-P.S. No testing phase, no retainer. $97. Same day: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+P.S. No testing phase, no retainer. $97. Same day: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 ---
 
@@ -535,7 +535,7 @@ https://nebulacomponents.shop/audit.html
 
 Mike
 
-P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 ---
 
@@ -587,7 +587,7 @@ https://nebulacomponents.shop/roas-cliff.html
 
 Mike
 
-P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+P.S. If you want us to score your page and write the copy fix, it's $97 and usually same day: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 ---
 *End of 20-email sequence. Load into email platform, 1/week cadence. After email 20, loop to email 1.*

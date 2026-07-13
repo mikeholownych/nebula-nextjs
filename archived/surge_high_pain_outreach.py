@@ -15,7 +15,7 @@ KEY_FILE = Path.home() / ".hermes/secrets/agentmail.key"
 PY='/home/mike/nebula/venv/bin/python3'
 UA={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36'}
 AUDIT='https://nebulacomponents.shop/audit.html'
-CHECKOUT='https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02'
+CHECKOUT='https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b'
 FROM_EMAIL='nebulashop@agentmail.to'
 BAD=('example','schema','sentry','w3.org','google','twitter','noreply','user@','test@','email@','your@','placeholder','yourname','john@company','company@','hello@example','email@domain','name@','owner@','webmaster@','png','jpg','jpeg','svg','ico','wordpress','sentry')
 

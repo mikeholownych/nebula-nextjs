@@ -25,7 +25,7 @@ Self-serve CTA used on every row:
 Run the free audit/tool without a call or reply gate: https://nebulacomponents.shop/audit.html
 
 Post-audit implementation checkout for support after value has been delivered:
-https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02
+https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 Rows staged:
 1. Curb Caddie — $1,000 Google Ads, one non-paying conversion — https://curbcaddie.com

@@ -957,7 +957,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         "",
         f"$147 — {pitch_line}",
         "Details + FAQ: https://nebulacomponents.shop/primer.html",
-        "One-click checkout: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02",
+        "One-click checkout: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b",
         "",
         "🏷️ Full refund if your conversion rate doesn't improve within 14 days.",
         "📋 We duplicate your page for testing — zero risk to your live campaigns.",

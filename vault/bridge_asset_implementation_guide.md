@@ -14,7 +14,7 @@
 URL: https://nebulacomponents.shop/checkout?email=mike.holownych@aisyndicate.io&url=https://aisyndicate.io
 
 ✅ Parameters extracted: email, url
-✅ Stripe checkout link: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02?customer_email=mike.holownych%40aisyndicate.io
+✅ Stripe checkout link: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b?customer_email=mike.holownych%40aisyndicate.io
 ✅ Error handling for missing parameters
 ✅ Client-side validation
 ```

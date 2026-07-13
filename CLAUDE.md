@@ -23,9 +23,9 @@ Load these on demand:
 - Git: github.com:Nebula-Components/nebula-components.git
 - AgentMail inbox: nebulashop@agentmail.to (REST only — NO SMTP)
 - Stripe $97 Fix Pack: https://buy.stripe.com/3cs9Dp2NV5Oa6Sk28a
-- Stripe $147 (legacy; current offer is $97)
-- Stripe $1,497 retainer: https://buy.stripe.com/3cs9Dp2NV5Oa6Sk28a
-- Stripe $497 agency partner: https://buy.stripe.com/5kAcPJcxJ2HM7tS7sw
+- Stripe $147 Fix Pack: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
+- Stripe $1,497 retainer: https://buy.stripe.com/00w5kD1nK0wkaa573A43S0c
+- Stripe $497 agency partner: https://buy.stripe.com/aFa8wPc2o7YM9613Ro43S0d
 - GA4: G-KJ9S3450LH
 
 ## Lead Stage Flow (Check before any send)

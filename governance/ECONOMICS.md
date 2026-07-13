@@ -14,11 +14,11 @@
 | Tier | Name | Price | Stripe Link | Status |
 |---|---|---|---|---|
 | 1 | Free Landing Page Audit | $0 | N/A (self-serve) | Live — nebulacomponents.shop/audit |
-| 2 | Conversion Fix Pack | $97 | [buy.stripe.com/...](https://buy.stripe.com/3cs9Dp2NV5Oa6Sk28a) | Live |
+| 2 | Conversion Fix Pack | $147 | [buy.stripe.com/...](https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b) | Live |
 | 2b | Legacy Component Pack (not promoted) | $7 | Stripe product prod_UlPk8Awd2ekztb | Live — no longer marketed |
 | 3 | Growth Launch (First Customer Guarantee) | $997 | [buy.stripe.com/4gMcN5aYk92Qaa5drY43S09](https://buy.stripe.com/4gMcN5aYk92Qaa5drY43S09) | Live |
-| 4 | AI Ops Retainer (monthly) | $1,497/mo | [buy.stripe.com/3cs9Dp2NV5Oa6Sk28a](https://buy.stripe.com/3cs9Dp2NV5Oa6Sk28a) | Live |
-| 5 | Agency Partner (monthly) | $497/mo | [buy.stripe.com/5kAcPJcxJ2HM7tS7sw](https://buy.stripe.com/5kAcPJcxJ2HM7tS7sw) | Live |
+| 4 | AI Ops Retainer (monthly) | $1,497/mo | [buy.stripe.com/...](https://buy.stripe.com/00w5kD1nK0wkaa573A43S0c) | Live |
+| 5 | Agency Partner (monthly) | $497/mo | [buy.stripe.com/...](https://buy.stripe.com/aFa8wPc2o7YM9613Ro43S0d) | Live |
 
 ### Revenue to Date
 
@@ -34,7 +34,7 @@
 
 | Milestone | MRR | Path | Timeline |
 |---|---|---|---|
-| First paying customer | $97 | Trigger-aware outreach → free audit → $97 fix | July 7-14 |
+|| First paying customer | $147 | Trigger-aware outreach → free audit → $147 fix | July 14+ |
 | 5 customers | ~$500 | Same funnel + retargeting | August 2026 |
 | 25 customers | ~$2,500 | Multiple channels + retainer upsells | Q4 2026 |
 | Target steady state | $50k/mo | Reliable acquisition + retainer base | TBD |

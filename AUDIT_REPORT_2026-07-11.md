@@ -87,7 +87,7 @@
 ---
 
 ### GAP 5: CLAUDE.md Price Mismatch ❌ FIXED
-**Discovery:** CLAUDE.md referenced "Stripe $147: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02" but ECONOMICS.md says the current offer is $97 Fix Pack. The $147 was legacy pricing.
+**Discovery:** CLAUDE.md referenced "Stripe $147: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b" but ECONOMICS.md says the current offer is $97 Fix Pack. The $147 was legacy pricing.
 
 **Fix applied:** Updated to show current $97 Fix Pack link with legacy note.
 

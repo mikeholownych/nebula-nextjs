@@ -15,15 +15,15 @@
       "ZERO_REVENUE"
     ],
     "audits_delivered": 40,
-    "pitch_overdue": 3,
+    "pitch_overdue": 2,
     "real_payments": 0,
     "real_revenue": 0,
     "scores": {
-      "ceo": 46,
+      "ceo": 49,
       "growth": 40,
       "market": 45,
       "ops-finance": 60,
-      "support": 39
+      "support": 51
     }
   },
   "handoff_queue": [
@@ -33,7 +33,7 @@
       "handoff_to": "ops-finance",
       "priority": 100,
       "required_artifact": "pitch sent or incident row explaining why it could not be sent",
-      "score": 39,
+      "score": 51,
       "stage": "closer_delivery",
       "trigger": "hot lead pitch_due_at passed"
     },
@@ -43,7 +43,7 @@
       "handoff_to": "ops-finance",
       "priority": 95,
       "required_artifact": "checkout-safe audit-to-$97 pitch flow verified by dry run/test and ledger row",
-      "score": 39,
+      "score": 51,
       "stage": "closer_delivery",
       "trigger": "audits delivered but paid conversion is weak"
     },
@@ -93,7 +93,7 @@
       "handoff_to": null,
       "priority": 60,
       "required_artifact": "one bottleneck, one kill/scale decision, and next 3 agent orders in latest_ceo_directive",
-      "score": 46,
+      "score": 49,
       "stage": "mission_control_decision",
       "trigger": "daily mission control synthesis"
     }
@@ -265,5 +265,5 @@
       "workflow": "Support -> Ops-Finance: writes ledger-backed events for pitch, payment, fulfillment, or incident."
     }
   },
-  "timestamp": "2026-07-13T00:58:57Z"
+  "timestamp": "2026-07-13T07:32:08Z"
 }

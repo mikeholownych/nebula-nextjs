@@ -67,6 +67,7 @@ class LeadStore:
                     paid_at           TEXT,
                     bounced_at        TEXT,
                     dead_at           TEXT,
+                    needs_review_at   TEXT,
 
                     -- Bounce tracking
                     bounce_type       TEXT NOT NULL DEFAULT '',
@@ -382,6 +383,7 @@ class LeadStore:
             "paid": "paid_at",
             "bounced": "bounced_at",
             "dead": "dead_at",
+            "needs_review": "needs_review_at",
         }
         stage_col = col_map.get(stage, "")
 
@@ -525,6 +527,7 @@ class LeadStore:
             "paid", "dead", "bounced",
             "discovered", "site_found",
             "pitch_sent", "pitch_queued",
+            "needs_review",  # human-review holding stage — not a pipeline failure
         })
         now = datetime.now(timezone.utc)
         stuck = []

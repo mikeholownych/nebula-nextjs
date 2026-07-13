@@ -13,7 +13,7 @@ class AdBurnLeaderboardTests(unittest.TestCase):
         self.assertIn('Founder URL', html)
         self.assertIn('/api/leaderboard-submit', html)
         self.assertIn('https://nebulacomponents.shop/audit.html', html)
-        self.assertIn('https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02', html)
+        self.assertIn('https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b', html)
 
     def test_agentic_server_has_leaderboard_submit_endpoint(self):
         source = (BASE / 'agentic_server.py').read_text()
