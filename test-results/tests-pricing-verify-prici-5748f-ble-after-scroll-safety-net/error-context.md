@@ -6,8 +6,8 @@
 
 # Test info
 
-- Name: tests/pricing-animation.spec.ts >> Pricing Animation Validation >> pricing cards are visible (not stuck opacity:0)
-- Location: tests/pricing-animation.spec.ts:6:7
+- Name: tests/pricing-verify.spec.ts >> pricing cards become fully visible after scroll + safety net
+- Location: tests/pricing-verify.spec.ts:5:5
 
 # Error details
 
@@ -15,7 +15,7 @@
 Error: expect(received).toBeGreaterThan(expected)
 
 Expected: > 0.9
-Received:   0
+Received:   0.3317
 ```
 
 # Page snapshot
@@ -798,46 +798,39 @@ Received:   0
   2  | 
   3  | const BASE_URL = process.env.BASE_URL || 'https://nebulacomponents.shop';
   4  | 
-  5  | test.describe('Pricing Animation Validation', () => {
-  6  |   test('pricing cards are visible (not stuck opacity:0)', async ({ page }) => {
-  7  |     await page.goto(BASE_URL, { waitUntil: 'networkidle' });
-  8  | 
-  9  |     // Scroll to pricing section
-  10 |     await page.evaluate(() => {
-  11 |       document.querySelector('#pricing')?.scrollIntoView({ behavior: 'instant', block: 'center' });
-  12 |     });
-  13 | 
-  14 |     // Wait for GSAP + 3s safety net to settle
-  15 |     await page.waitForTimeout(3500);
-  16 | 
-  17 |     const cards = page.locator('#pricing .card');
-  18 |     const count = await cards.count();
-  19 |     expect(count).toBeGreaterThan(0);
-  20 | 
-  21 |     for (let i = 0; i < count; i++) {
-  22 |       const opacity = await cards.nth(i).evaluate((el) => parseFloat(getComputedStyle(el).opacity));
-  23 |       console.log(`Card ${i} opacity: ${opacity}`);
-> 24 |       expect(opacity).toBeGreaterThan(0.9);
-     |                       ^ Error: expect(received).toBeGreaterThan(expected)
-  25 |     }
-  26 |   });
-  27 | 
-  28 |   test('pricing cards visible even with JS disabled (default state)', async ({ page }) => {
-  29 |     // Block gsap scripts to simulate JS failure
-  30 |     await page.route('**/gsap*.js', (route) => route.abort());
-  31 |     await page.route('**/gsap-animations.js', (route) => route.abort());
-  32 | 
-  33 |     await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
-  34 |     await page.waitForTimeout(1000);
-  35 | 
-  36 |     const cards = page.locator('#pricing .card');
-  37 |     const count = await cards.count();
+  5  | test('pricing cards become fully visible after scroll + safety net', async ({ page }) => {
+  6  |   const errors: string[] = [];
+  7  |   page.on('console', (msg) => { if (msg.type() === 'error') errors.push(msg.text()); });
+  8  |   page.on('pageerror', (e) => errors.push(e.message));
+  9  | 
+  10 |   await page.goto(BASE_URL, { waitUntil: 'networkidle' });
+  11 | 
+  12 |   // Scroll pricing into view
+  13 |   await page.evaluate(() => document.querySelector('#pricing')?.scrollIntoView({ block: 'center' }));
+  14 |   await page.waitForTimeout(4000); // allow anim + 3s safety net
+  15 | 
+  16 |   const cards = page.locator('#pricing .card');
+  17 |   const count = await cards.count();
+  18 |   console.log('CARD COUNT:', count);
+  19 | 
+  20 |   for (let i = 0; i < count; i++) {
+  21 |     const opacity = await cards.nth(i).evaluate((el) => parseFloat(getComputedStyle(el).opacity));
+  22 |     const transform = await cards.nth(i).evaluate((el) => el.style.transform || getComputedStyle(el).transform);
+  23 |     console.log(`CARD ${i}: opacity=${opacity.toFixed(3)} transform=${transform}`);
+> 24 |     expect(opacity).toBeGreaterThan(0.9);
+     |                     ^ Error: expect(received).toBeGreaterThan(expected)
+  25 |   }
+  26 | 
+  27 |   console.log('JS ERRORS:', JSON.stringify(errors));
+  28 | });
+  29 | 
+  30 | test('no JS errors on load', async ({ page }) => {
+  31 |   const errors: string[] = [];
+  32 |   page.on('pageerror', (e) => errors.push(e.message));
+  33 |   await page.goto(BASE_URL, { waitUntil: 'networkidle' });
+  34 |   await page.waitForTimeout(2000);
+  35 |   console.log('PAGE ERRORS:', JSON.stringify(errors));
+  36 |   expect(errors.filter(e => !e.includes('rb2b') && !e.includes('ERR_NAME_NOT_RESOLVED'))).toHaveLength(0);
+  37 | });
   38 | 
-  39 |     for (let i = 0; i < count; i++) {
-  40 |       const opacity = await cards.nth(i).evaluate((el) => parseFloat(getComputedStyle(el).opacity));
-  41 |       expect(opacity).toBeGreaterThan(0.9);
-  42 |     }
-  43 |   });
-  44 | });
-  45 | 
 ```

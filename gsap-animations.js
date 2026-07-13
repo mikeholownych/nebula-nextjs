@@ -2,9 +2,11 @@
  * GSAP Animations for Nebula Components
  * Premium scroll-triggered animations matching Linear/Vercel aesthetic
  *
- * FAIL-SAFE DESIGN: Content is visible by default. Animations are purely
- * additive — if GSAP fails to load, ScrollTrigger miscalculates, or JS
- * errors, all content remains fully visible. No element is ever left hidden.
+ * FAIL-SAFE DESIGN: Content is visible by default (opacity:1 in CSS).
+ * Scroll reveals animate TRANSFORM ONLY (y / translate), never opacity.
+ * This guarantees no revenue-critical section can ever be "empty" or
+ * stuck hidden — if GSAP fails, ScrollTrigger miscalculates, or JS errors,
+ * all content remains fully visible. Animations are purely additive.
  */
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -23,21 +25,20 @@ document.addEventListener('DOMContentLoaded', function () {
     return;
   }
 
-  // Helper: animate a set of elements FROM hidden TO visible, but guarantee
-  // they end visible and never get stuck hidden. Uses immediateRender:false so
-  // GSAP does NOT pre-set opacity:0 before the trigger fires.
+  // Helper: slide elements UP into view on scroll. Animates transform ONLY,
+  // so content is never hidden. immediateRender:false prevents a pre-jump.
   function revealOnScroll(selector, vars) {
     const els = gsap.utils.toArray(selector);
     els.forEach((el) => {
       gsap.from(el, Object.assign({
         scrollTrigger: {
           trigger: el,
-          start: 'top 88%',
+          start: 'top 90%',
           once: true,            // play a single time, then kill — never reverse
         },
-        immediateRender: false,  // do NOT hide before trigger fires
-        opacity: 0,
+        immediateRender: false,  // do NOT pre-set transform before trigger fires
         y: 50,
+        opacity: 1,             // EXPLICIT: never animate opacity away from 1
         duration: 0.7,
         ease: 'power2.out',
       }, vars || {}));
@@ -62,30 +63,19 @@ document.addEventListener('DOMContentLoaded', function () {
       .from('.hero .stat, .hero .trust-row', { opacity: 0, y: 20, duration: 0.6, stagger: 0.1 }, '-=0.4');
   }
 
-  // ── SCROLL REVEALS (fail-safe) ──
+  // ── SCROLL REVEALS (transform-only, content always visible) ──
   revealOnScroll('.card');
   revealOnScroll('section > h2, section > p');
   revealOnScroll('.how-step', { y: 40, stagger: 0.15 });
 
-  // ── PRICING CARDS (the previously-broken section) ──
-  const pricing = document.querySelector('#pricing');
-  if (pricing) {
-    gsap.from('#pricing .card', {
-      scrollTrigger: { trigger: '#pricing', start: 'top 80%', once: true },
-      immediateRender: false,
-      opacity: 0,
-      y: 80,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: 'power2.out',
-    });
-  }
+  // Pricing cards are covered by the '.card' selector above — no separate
+  // (duplicate) tween, which previously caused competing from-states.
 
   // ── COUNT-UP STATS ──
   gsap.utils.toArray('.stat-num[data-target]').forEach((num) => {
     const target = parseInt(num.getAttribute('data-target'), 10);
     gsap.from(num, {
-      scrollTrigger: { trigger: num, start: 'top 88%', once: true },
+      scrollTrigger: { trigger: num, start: 'top 90%', once: true },
       immediateRender: false,
       textContent: 0,
       duration: 2,
@@ -113,20 +103,26 @@ document.addEventListener('DOMContentLoaded', function () {
   function refresh() { ScrollTrigger.refresh(); }
   window.addEventListener('load', refresh);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
-  // Also refresh on resize (debounced).
   let rt;
   window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(refresh, 200); });
 
-  // ── SAFETY NET: if anything is still hidden after 3s, force visible ──
+  // ── SAFETY NET: at 4s, force every animated element to its resting
+  //     (visible) state by killing tweens and clearing inline transforms.
+  //     Because content is opacity:1 by default, clearing transforms can
+  //     never hide anything — it only stops a stuck slide mid-flight. ──
   setTimeout(() => {
-    gsap.utils.toArray('.card, section > h2, section > p, .how-step, #pricing .card')
-      .forEach((el) => {
-        const s = getComputedStyle(el);
-        if (s.opacity === '0' || el.style.opacity === '0') {
-          gsap.set(el, { opacity: 1, y: 0, clearProps: 'transform' });
-        }
-      });
-  }, 3000);
+    try {
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+      gsap.utils.toArray('.card, section > h2, section > p, .how-step, .stat-num')
+        .forEach((el) => {
+          gsap.killTweensOf(el);
+          gsap.set(el, { clearProps: 'transform' });
+        });
+      console.log('[anim] Safety net: reset transforms to resting state');
+    } catch (e) {
+      console.warn('[anim] Safety net error:', e);
+    }
+  }, 4000);
 
   console.log('[anim] GSAP animations initialized (fail-safe mode)');
 });
