@@ -98,8 +98,7 @@ class _RouteContractVisitor(ast.NodeVisitor):
             return tuple(values)
         return None
 
-    @staticmethod
-    def _compiled_pattern(node: ast.AST) -> str | None:
+    def _compiled_pattern(self, node: ast.AST) -> str | None:
         if not isinstance(node, ast.Call) or not node.args:
             return None
         function = node.func
@@ -111,7 +110,13 @@ class _RouteContractVisitor(ast.NodeVisitor):
         ):
             return None
         pattern = node.args[0]
-        return pattern.value if isinstance(pattern, ast.Constant) and isinstance(pattern.value, str) else None
+        # Handle both direct string constants and named constants
+        if isinstance(pattern, ast.Constant) and isinstance(pattern.value, str):
+            return pattern.value
+        elif isinstance(pattern, ast.Name):
+            values = self._values(pattern)
+            return values[0] if values and len(values) == 1 else None
+        return None
 
     @staticmethod
     def _is_path(node: ast.AST) -> bool:
