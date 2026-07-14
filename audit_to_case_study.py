@@ -329,6 +329,14 @@ def generate_index_page(case_studies: list):
     print(f"  Generated index.html with {len(case_studies)} case studies")
 
 def main():
+    # Check for generator freeze (Wave 0 route baseline)
+    freeze_file = NEBULA / ".generator-freeze"
+    if freeze_file.exists():
+        print("⛔ Generator FROZEN — route baseline capture in progress")
+        print(f"   Freeze file: {freeze_file}")
+        print("   To thaw: Remove .generator-freeze or set FROZED=false")
+        return
+    
     latest_only = "--latest" in sys.argv
     state = load_state()
     

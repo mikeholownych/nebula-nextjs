@@ -1,0 +1,8 @@
+# Generator Freeze — Wave 0 Stabilization
+# Created: 2026-07-14
+# Status: FROZEN
+# Reason: Route baseline capture for Next.js migration
+# Thaw: Remove this file or set FROZEN=false
+FROZEN=true
+FREEZE_REASON="Wave 0 route baseline capture"
+FREEZE_DATE="2026-07-14"
