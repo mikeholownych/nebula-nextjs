@@ -1,0 +1,40 @@
+/* Component Showcase Page Styles */
+.showcase-section {
+  margin: 60px 0;
+  padding: 40px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.showcase-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--accent);
+}
+
+.showcase-description {
+  color: var(--fg-muted);
+  margin-bottom: 32px;
+}
+
+.component-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 24px 0;
+  align-items: center;
+}
+
+.code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--fg-muted);
+  overflow-x: auto;
+}
