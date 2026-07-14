@@ -1,0 +1,347 @@
+/* =====================================================
+   NEBULA COMPONENT LIBRARY
+   Extracted from 41 pages - DRY principles
+   ===================================================== */
+
+/* Import base design system */
+@import url('./nebula-design-system.css');
+
+/* =====================================================
+   BASE COMPONENTS (Used across multiple pages)
+   ===================================================== */
+
+/* Container System */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.container-sm { max-width: 720px; margin: 0 auto; padding: 20px; }
+.container-lg { max-width: 1400px; margin: 0 auto; padding: 0 32px; }
+
+/* Navigation */
+.nav {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.nav a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav a:hover {
+  color: #34d399;
+}
+
+/* Cards */
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.card-elevated {
+  background: var(--bg-elevated);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-accent {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--accent);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.badge-blue {
+  background: rgba(37, 99, 235, 0.1);
+  color: #3b82f6;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.badge-warning {
+  background: rgba(251, 191, 36, 0.1);
+  color: #f59e0b;
+  border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+/* Lists */
+.ul-feature {
+  list-style: none;
+  padding: 0;
+}
+
+.ul-feature li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 15px;
+  display: flex;
+  gap: 8px;
+}
+
+.ul-feature li:last-child {
+  border-bottom: 0;
+}
+
+.ul-feature li::before {
+  content: "→";
+  color: var(--accent);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Grid System */
+.grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.grid-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Pricing */
+.price {
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--fg);
+}
+
+.price small {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--fg-muted);
+}
+
+.price-monthly::after {
+  content: "/mo";
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--fg-muted);
+  margin-left: 4px;
+}
+
+/* =====================================================
+   HERO SECTIONS (Standardized)
+   ===================================================== */
+
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 24px;
+}
+
+.hero-title {
+  font-size: 68px;
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0 0 24px;
+}
+
+.hero-subtitle {
+  font-size: 24px;
+  line-height: 1.5;
+  color: var(--fg-muted);
+  margin: 0 0 40px;
+  max-width: 720px;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* =====================================================
+   FORMS
+   ===================================================== */
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--fg);
+  margin-bottom: 8px;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--fg);
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.form-input::placeholder {
+  color: var(--fg-muted);
+}
+
+/* =====================================================
+   UTILITY CLASSES
+   ===================================================== */
+
+/* Spacing */
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mt-3 { margin-top: 24px; }
+.mt-4 { margin-top: 32px; }
+.mt-5 { margin-top: 48px; }
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 8px; }
+.mb-2 { margin-bottom: 16px; }
+.mb-3 { margin-bottom: 24px; }
+.mb-4 { margin-bottom: 32px; }
+.mb-5 { margin-bottom: 48px; }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+/* Colors */
+.text-accent { color: var(--accent); }
+.text-muted { color: var(--fg-muted); }
+.text-white { color: var(--fg); }
+
+/* Display */
+.hidden { display: none; }
+.block { display: block; }
+.inline { display: inline; }
+.inline-block { display: inline-block; }
+
+/* Flexbox */
+.flex { display: flex; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: 8px; }
+.gap-2 { gap: 16px; }
+.gap-3 { gap: 24px; }
+
+/* =====================================================
+   RESPONSIVE UTILITIES
+   ===================================================== */
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 48px;
+  }
+
+  .hero-subtitle {
+    font-size: 20px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .price {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 36px;
+  }
+
+  .hero {
+    padding: 60px 16px;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+}
+
+/* =====================================================
+   COMPLIANCE BADGES (Used on agency-partner.html)
+   ===================================================== */
+
+.compliance-grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+
+.compliance-grid span {
+  background: rgba(240, 253, 244, 0.05);
+  border: 1px solid rgba(187, 247, 208, 0.2);
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #34d399;
+}
+
+/* =====================================================
+   FOOTER (Consistent across pages)
+   ===================================================== */
+
+.footer {
+  margin-top: 80px;
+  padding: 40px 24px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--fg-muted);
+  font-size: 14px;
+}
+
+.footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
