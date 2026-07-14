@@ -17,15 +17,17 @@ from uuid import uuid4
 
 from sqlalchemy import (
     Boolean,
+    CheckConstraint,
     DateTime,
     ForeignKey,
     Index,
+    Integer,
     String,
     Text,
     UniqueConstraint,
     text,
 )
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import Base, utcnow
@@ -47,6 +49,7 @@ class User(Base):
     # Relationships
     identities: Mapped[list["UserIdentity"]] = relationship(back_populates="user", cascade="all, delete-orphan")
     memberships: Mapped[list["Membership"]] = relationship(back_populates="user", cascade="all, delete-orphan")
+    audits: Mapped[list["Audit"]] = relationship(back_populates="user", cascade="all, delete-orphan")
 
     def __repr__(self) -> str:
         return f"<User {self.id}>"
@@ -93,6 +96,8 @@ class Organization(Base):
     # Relationships
     memberships: Mapped[list["Membership"]] = relationship(back_populates="organization", cascade="all, delete-orphan")
     subscriptions: Mapped[list["Subscription"]] = relationship(back_populates="organization", cascade="all, delete-orphan")
+    audits: Mapped[list["Audit"]] = relationship(back_populates="organization", cascade="all, delete-orphan")
+    invoices: Mapped[list["Invoice"]] = relationship(back_populates="organization", cascade="all, delete-orphan")
 
     def __repr__(self) -> str:
         return f"<Organization {self.slug}>"
@@ -174,3 +179,57 @@ class AuditEvent(Base):
 
     def __repr__(self) -> str:
         return f"<AuditEvent {self.event_type} @{self.created_at}>"
+
+
+class Audit(Base):
+    """Audit record for organization websites."""
+
+    __tablename__ = "audits"
+    __table_args__ = (
+        CheckConstraint("status IN ('pending', 'processing', 'completed', 'failed')", name="check_audit_status"),
+        CheckConstraint("score >= 0 AND score <= 100", name="check_audit_score"),
+        Index("ix_audits_org_id", "org_id"),
+        Index("ix_audits_user_id", "user_id"),
+        Index("ix_audits_status", "status"),
+    )
+
+    id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    org_id: Mapped[UUID] = mapped_column(ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False)
+    user_id: Mapped[UUID] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    site_url: Mapped[str] = mapped_column(Text, nullable=False)
+    status: Mapped[str] = mapped_column(String(20), default="pending", nullable=False)
+    score: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    completed_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    metadata: Mapped[dict] = mapped_column(JSONB, default=dict)
+
+    # Relationships
+    organization: Mapped["Organization"] = relationship(back_populates="audits")
+    user: Mapped["User"] = relationship(back_populates="audits")
+
+    def __repr__(self) -> str:
+        return f"<Audit {self.id} ({self.status})>"
+
+
+class Invoice(Base):
+    """Invoice record from Stripe."""
+
+    __tablename__ = "invoices"
+    __table_args__ = (
+        CheckConstraint("status IN ('draft', 'open', 'paid', 'void', 'uncollectible')", name="check_invoice_status"),
+        Index("ix_invoices_org_id", "org_id"),
+        Index("ix_invoices_status", "status"),
+    )
+
+    id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    org_id: Mapped[UUID] = mapped_column(ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False)
+    stripe_invoice_id: Mapped[Optional[str]] = mapped_column(String(255), unique=True, nullable=True)
+    amount_cents: Mapped[int] = mapped_column(Integer, nullable=False)
+    status: Mapped[str] = mapped_column(String(20), default="draft", nullable=False)
+    paid_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, default=utcnow)
+
+    # Relationships
+    organization: Mapped["Organization"] = relationship(back_populates="invoices")
+
+    def __repr__(self) -> str:
+        return f"<Invoice {self.id} ({self.status})>"
