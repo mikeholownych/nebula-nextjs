@@ -159,6 +159,11 @@ playwright-report/
 # ── Node.js ──────────────────────────────────────
 node_modules/
 
+# ── Next.js build cache ───────────────────────────
+.next/
+out/
+build/
+
 # ── Generated web assets ─────────────────────────
 sitemap.xml
 public/case-studies/*.html
