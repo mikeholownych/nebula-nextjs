@@ -17,9 +17,9 @@ from uuid import UUID, uuid4
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel, EmailStr
 
-from ..config import settings
-from ..db import Organization, User, UserIdentity, get_session
-from ..redis_client import get_redis
+from platform_api.config import settings
+from platform_api.db import Organization, User, UserIdentity, get_session
+from platform_api.redis_client import get_redis
 from .google import GoogleOAuthError, verify_google_token
 from .jwt import (
     JWTError,

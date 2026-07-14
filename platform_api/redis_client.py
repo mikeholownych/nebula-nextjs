@@ -7,7 +7,7 @@ from redis.asyncio import ConnectionPool, Redis
 from redis.asyncio.client import Pipeline
 from redis.exceptions import RedisError
 
-from ..config import settings
+from platform_api.config import settings
 
 
 class RedisClient:

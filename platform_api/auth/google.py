@@ -20,7 +20,7 @@ import httpx
 from authlib.jose import JsonWebKey, jwt
 from authlib.jose.errors import JoseError
 
-from ..config import settings
+from platform_api.config import settings
 
 
 # Google OIDC configuration

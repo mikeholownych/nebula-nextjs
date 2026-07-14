@@ -20,8 +20,8 @@ from typing import Any, Dict, Optional
 
 from authlib.jose import JoseError, jwt
 
-from ..config import settings
-from ..redis_client import RedisClient
+from platform_api.config import settings
+from platform_api.redis_client import RedisClient
 
 
 class JWTError(Exception):
