@@ -139,11 +139,15 @@ def fix_stale_followup_lock():
 
 def fix_dead_letter():
     """Retry leads in dead letter queue that are still deliverable."""
-    dlq = BASE / 'dead_letter.json'
+    dlq = BASE / 'dead_letter_queue.jsonl'
     if not dlq.exists():
         return 0
     try:
-        items = json.loads(dlq.read_text())
+        items = []
+        for line in dlq.read_text().splitlines():
+            line = line.strip()
+            if line:
+                items.append(json.loads(line))
         if not items:
             return 0
     except Exception:
@@ -181,7 +185,7 @@ def fix_dead_letter():
         else:
             remaining.append(item)
 
-    dlq.write_text(json.dumps(remaining, indent=2))
+    dlq.write_text('\n'.join(json.dumps(r, ensure_ascii=False) for r in remaining) + ('\n' if remaining else ''))
     if retried:
         log(f'[auto-fix] DLQ: retried {len(retried)}, remaining {len(remaining)}')
     return len(retried)
@@ -636,12 +640,123 @@ def main():
     if actions_taken or escalations:
         print('\n'.join(actions_taken + escalations))
 
+    # 11. Check for stuck needs_site_extraction leads in ramp report
+    try:
+        _fix_ramp_needs_site_extraction()
+    except Exception as e:
+        log(f'[needs_site_extraction] Error: {e}')
+
+    # 12. Track known source issues for cooldown logic
+    _track_source_issues()
+
     # Cleanup SRE lock
     try:
         if SRE_LOCK.exists():
             SRE_LOCK.unlink()
     except Exception:
         pass
+
+def _fix_ramp_needs_site_extraction():
+    """Detect and remediate leads stuck in needs_site_extraction in ramp report."""
+    if not RAMP_REPORT.exists():
+        return
+    try:
+        report = json.loads(RAMP_REPORT.read_text())
+    except Exception:
+        return
+
+    extraction_stuck = [r for r in report.get('queued', []) if r.get('status') == 'needs_site_extraction']
+    if not extraction_stuck:
+        return
+
+    log(f'[needs_site_extraction] Found {len(extraction_stuck)} lead(s) stuck without site URLs')
+
+    # Check age: only act on leads checked >2h ago (give pipeline time to retry naturally)
+    now_ts = NOW.timestamp()
+    old_enough = []
+    for rec in extraction_stuck:
+        checked_str = rec.get('checked_at', '')
+        if not checked_str:
+            old_enough.append(rec)
+            continue
+        try:
+            checked_ts = datetime.fromisoformat(checked_str.replace('Z', '+00:00')).timestamp()
+            if now_ts - checked_ts > 7200:  # 2h
+                old_enough.append(rec)
+        except Exception:
+            old_enough.append(rec)
+
+    if not old_enough:
+        return
+
+    # Move old extraction-stuck leads to dead letter
+    dlq = BASE / 'dead_letter_queue.jsonl'
+    moved = 0
+    for rec in old_enough:
+        dlq_entry = {
+            'timestamp': datetime.now(timezone.utc).isoformat(),
+            'site': rec.get('site'),
+            'email': rec.get('email'),
+            'trigger': rec.get('trigger', '')[:120],
+            'url': rec.get('url', ''),
+            'source': rec.get('source', ''),
+            'reason': 'needs_site_extraction — stale >2h, no site URL extractable',
+            'retry_count': 3,
+            'source_script': 'sre_responder'
+        }
+        with dlq.open('a') as f:
+            f.write(json.dumps(dlq_entry, ensure_ascii=False) + '\n')
+        moved += 1
+
+    # Remove from report queue
+    stuck_urls = {r.get('url') for r in old_enough}
+    report['queued'] = [r for r in report.get('queued', []) if r.get('url') not in stuck_urls]
+    report['counts']['queued'] = len(report['queued'])
+    RAMP_REPORT.write_text(json.dumps(report, indent=2, ensure_ascii=False))
+
+    if moved:
+        log(f'[auto-fix] Moved {moved} stale needs_site_extraction lead(s) to dead letter')
+
+
+def _track_source_issues():
+    """Scan ramp log for known source failures and log them in sre_state."""
+    state = load_sre_state()
+    if 'known_issues' not in state:
+        state['known_issues'] = {}
+
+    # Check Apify availability by looking at the trigger log
+    log_path = BASE / 'ramp_auto_trigger.log'
+    if log_path.exists():
+        try:
+            lines = log_path.read_text().splitlines()
+            # Look at last 50 lines for Apify errors
+            recent = lines[-50:]
+            apify_403 = any('HTTP 403' in l and 'apify' in l for l in recent)
+            apify_timeout = any('timed out' in l and 'apify' in l for l in recent)
+            apify_circuit = any('circuit-breaker' in l and 'apify' in l for l in recent)
+
+            if apify_403:
+                state['known_issues']['apify_scraper'] = 'HTTP 403 — Too many outstanding invoices (billing issue)'
+            elif apify_timeout:
+                state['known_issues']['apify_scraper'] = 'Request timeout — actor may be slow'
+            elif apify_circuit:
+                state['known_issues']['apify_scraper'] = 'Circuit breaker tripped — all scrapers failed'
+            elif 'apify_scraper' in state.get('known_issues', {}):
+                # Check if there's a more recent run without Apify errors
+                if any('apify' in l and not l.endswith('403') and 'HTTP 403' not in l for l in lines[-100:]):
+                    # If Apify appears in recent log without errors, it recovered
+                    pass
+                elif not any('apify' in l for l in lines[-20:]):
+                    # No Apify activity in last 20 lines — stale issue, not active
+                    pass
+                else:
+                    # Still seeing the issue
+                    pass
+        except Exception:
+            pass
+
+    save_sre_state(state)
+
 
 if __name__ == '__main__':
     main()

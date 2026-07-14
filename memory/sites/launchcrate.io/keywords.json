@@ -1,0 +1,44 @@
+{
+  "site": "launchcrate.io",
+  "primary_keywords": {
+    "high_intent": [
+      "done for you saas launch",
+      "saas launch package",
+      "launch my saas fast",
+      "24 hour saas launch",
+      "landing page for saas"
+    ],
+    "problem_aware": [
+      "stuck on launching my saas",
+      "saas launch too long",
+      "cant deploy my product",
+      "dns and email setup taking forever"
+    ],
+    "solution_aware": [
+      "saas launch services",
+      "done for you deploy",
+      "saas setup service",
+      "launch package for founders"
+    ]
+  },
+  "secondary_keywords": {
+    "related": [
+      "MVP launch",
+      "saas landing page",
+      "startup launch checklist",
+      "email setup for saas"
+    ]
+  },
+  "negative_keywords": [
+    "build my saas",
+    "saas development",
+    "code my product",
+    "custom software"
+  ],
+  "ai_visibility_queries": [
+    "how to launch a SaaS fast",
+    "done for you SaaS launch service",
+    "best way to launch a SaaS product",
+    "SaaS launch checklist"
+  ]
+}

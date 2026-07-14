@@ -487,3 +487,35 @@ Due: 7  Sent: 5  delivered
 [followup_sequence] Outside send window (Tue-Thu 07-09 local). Next open in ~41h 42m — exiting.
 [followup_sequence] Outside send window (Tue-Thu 07-09 local). Next open in ~35h 42m — exiting.
 [followup_sequence] Outside send window (Tue-Thu 07-09 local). Next open in ~29h 42m — exiting.
+[followup_sequence] Outside send window (Tue-Thu 07-09 local). Next open in ~23h 42m — exiting.
+[followup_sequence] Outside send window (Tue-Thu 07-09 local). Next open in ~17h 42m — exiting.
+[followup_sequence] Outside send window (Tue-Thu 07-09 local). Next open in ~11h 42m — exiting.
+[followup_sequence] Outside send window (Mon-Fri 06-10 local). Next open in ~4h 42m — exiting.
+followup_sequence.py (LIVE) — 2026-07-14 12:17 UTC
+============================================================
+
+Audit leads: 32
+  [email5_permission_close] support@curiouscats.ai (curiouscats.ai)
+  [AM FAILED] support@curiouscats.ai: 403 {"name":"MessageRejectedError","message":"Message rejected: Recipient(s) blocked: support@curiouscats.ai (bounced)"}
+  [SUPPRESSED->DEAD] support@curiouscats.ai
+
+Cold-only leads: 101
+  [skip bounced] info@brookerlaw.com
+  [skip bounced] info@magnolia-club.org
+  [skip bounced] info@saputo.law
+  [skip bounced] hello@aijournal.store
+  [skip bounced] info@2getherewesave.com
+  [skip bounced] hello@ziplead.ai
+  [skip bounced] support@routinereps.com
+  [skip bounced] alumni@wgu.edu
+  [skip bounced] support@curiouscats.ai
+  [skip bounced] test@example.com
+
+HOT_LEAD pitch due: 0  Sent: 0
+
+Revive candidates (contacted, no audit): 100
+
+Recycle candidates (pitch_sent, no payment): 25
+
+============================================================
+Due: 1  Sent: 0  delivered

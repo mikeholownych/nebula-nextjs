@@ -1,0 +1,15 @@
+name: content-refresh
+description: "Score decay, prioritize refresh work for top decaying pages"
+icon: "\U0001F504"
+steps:
+  - id: decay_scoring
+    skill: content-refresher
+    args:
+      site: "{site}"
+  - id: metadata
+    skill: meta-tags-optimizer
+    args:
+      site: "{site}"
+output:
+  template: "content-refresh"
+  merge: true

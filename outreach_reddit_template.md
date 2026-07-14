@@ -10,10 +10,10 @@
 | Old Way (Pain) | New Way (Nebula) |
 |----------------|-------------------|
 | Spent $10k on ads, zero conversions | Exact diagnosis of what's blocking orders |
-| Agency 3-month "testing" delivered nothing | $97 self-serve fix pack, live in 24h |
+| Agency 3-month "testing" delivered nothing | $147 self-serve fix pack, live in 24h |
 | Invisible in ChatGPT/Claude/Perplexity | AI-optimized pages that get cited |
 
-**Price Shock:** Agencies $3-8k/mo (3 months) vs Nebula $97 once (24h)
+**Price Shock:** Agencies $3-8k/mo (3 months) vs Nebula $147 once (24h)
 
 ---
 
@@ -83,7 +83,7 @@ If you want a human eye, drop your URL and I'll personally review it — no cost
 - ✅ Link to your landing page (not sales page)
 
 ### Don't:
-- ❌ Pitch $97 or any pricing in first reply
+- ❌ Pitch $147 or any pricing in first reply
 - ❌ Use generic "hire an agency" advice
 - ❌ Reply to posts > 1 year old (archived, can't reply)
 - ❌ Spam identical comments (Reddit will ban)
@@ -94,7 +94,7 @@ If you want a human eye, drop your URL and I'll personally review it — no cost
 
 **If they reply:**
 
-1. DM them on Reddit: "Sent you an audit link. If you want the Fix Pack (DIY implementation), it's $97. If you want us to do it, $1,497/mo. Your call."
+1. DM them on Reddit: "Sent you an audit link. If you want the Fix Pack (DIY implementation), it's $147. If you want us to do it, $1,497/mo. Your call."
 2. Wait 48h
 3. If no response — move to next lead
 
@@ -109,6 +109,6 @@ If you want a human eye, drop your URL and I'll personally review it — no cost
 
 - Replies sent: [manually count]
 - Audit requests received: [check server logs `/audit-requests`]
-- Conversion to $97: [track via Stripe]
+- Conversion to $147: [track via Stripe]
 
-Goal: 10 replies/week → 2 audit requests → 1 $97 sale
+Goal: 10 replies/week → 2 audit requests → 1 $147 sale

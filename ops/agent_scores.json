@@ -1,23 +1,23 @@
 {
   "ceo": {
     "risks": [
-      "2 pitch-due hot leads still pending",
-      "66 trigger sends with 0 warm replies",
+      "1 pitch-due hot leads still pending",
+      "80 trigger sends with 0 warm replies",
       "real revenue remains $0",
       "trigger scoring not producing warm replies"
     ],
-    "score": 49,
+    "score": 52,
     "signals": {
       "bottleneck": "audit_to_payment_conversion"
     }
   },
   "growth": {
     "risks": [
-      "66 trigger sends with 0 warm replies"
+      "80 trigger sends with 0 warm replies"
     ],
     "score": 40,
     "signals": {
-      "trigger_based_sends": 66,
+      "trigger_based_sends": 80,
       "trigger_reply_rate": 0.0,
       "trigger_warm_replies": 0
     }
@@ -44,13 +44,13 @@
   },
   "support": {
     "risks": [
-      "2 pitch-due hot leads still pending"
+      "1 pitch-due hot leads still pending"
     ],
-    "score": 51,
+    "score": 63,
     "signals": {
       "hot_lead_pitches_sent": 7,
-      "hot_leads_pending": 2,
-      "pitch_overdue": 2
+      "hot_leads_pending": 1,
+      "pitch_overdue": 1
     }
   }
 }

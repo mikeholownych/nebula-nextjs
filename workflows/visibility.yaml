@@ -1,0 +1,17 @@
+name: ai-visibility
+description: "AI citation audit — does ChatGPT/Perplexity/Gemini cite you?"
+icon: "\U0001F4A1"
+steps:
+  - id: ai_citation
+    skill: geo-content-optimizer
+    args:
+      url: "{target_url}"
+      site: "{site}"
+  - id: gap_analysis
+    skill: content-gap-analysis
+    args:
+      site: "{site}"
+      competitors_from_site_config: true
+output:
+  template: "ai-visibility"
+  merge: true

@@ -3,6 +3,8 @@
 
 <div id="scroll-prog" aria-hidden="true"></div>
 <header>
+    <link rel="stylesheet" href="/styles/nebula-design-system.css">
+
   <div class="skeptic-disarm" style="max-width:680px;margin:0 auto 24px;padding:20px 24px;background:rgba(110,231,183,0.04);border-radius:12px;border:1px solid rgba(110,231,183,0.12);">
     <p style="font-size:13px;color:#6b7280;text-align:center;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.06em;">You're probably thinking</p>
     <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
@@ -204,6 +206,10 @@
         <option value="15000">$10K–$20K/mo</option>
         <option value="30000">$20K+/mo</option>
       </select>
+
+      <label for="pain_point" style="margin-top:12px;">What's your biggest frustration right now? <span style="color:#6b7280;font-weight:400;">(optional — helps us personalize the audit)</span></label>
+      <textarea id="pain_point" name="pain_point" rows="4" style="min-height:100px;resize:vertical;" placeholder="e.g. 'Getting traffic but zero conversions', 'Visitors bounce in under 10 seconds', 'CVR dropped after changes', 'Ads cost $ but no sales'"></textarea>
+
       <p class="micro" style="margin-top:8px;">Your URL and email are used to generate, email, and log the audit. No resale. No spam.</p>
       <p class="micro" style="text-align:center;margin:8px 0;color:#6ee7b7;font-weight:600;">✓ 40+ audits delivered &nbsp;·&nbsp; avg score back in 60s &nbsp;·&nbsp; full refund if CVR doesn't improve</p>
       <p class="micro" style="text-align:center;margin:4px 0 0;"><a href="/audit.html" style="color:#6ee7b7;">📋 See a real audit report before you submit →</a></p>
@@ -669,6 +675,7 @@
       tone: form.tone ? form.tone.value.trim() || null : null,
       role: form.role ? form.role.value || null : null,
       monthly_spend: form.monthly_spend ? Number(form.monthly_spend.value) || null : null,
+      pain_point: form.pain_point ? form.pain_point.value.trim() || null : null,
       source_type: 'homepage_audit_form',
       trigger_type: 'self_serve_url_submit',
       offer_variant: 'audit_first_free_kit'

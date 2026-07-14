@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""
-send_window.py — Illingworth send-time enforcement.
+"""send_window.py — Illingworth send-time enforcement.
 
 Rules:
-  - Only send Tue/Wed/Thu (weekday 1/2/3 in Python)
-  - Only send 07:00–09:00 in the recipient's estimated local time
+  - Only send Mon-Fri (weekday 0-4 in Python)
+  - Only send 06:00–10:00 in the recipient's estimated local time
   - Falls back to US/Eastern if timezone unknown (most ICP is US)
 
 Usage:
@@ -25,9 +24,9 @@ from datetime import datetime, timezone, timedelta
 
 
 # ── Configuration ─────────────────────────────────────────────────────────────
-SEND_DAYS   = {1, 2, 3}      # Mon=0 … Sun=6; Tue=1, Wed=2, Thu=3
-WINDOW_OPEN = 7               # 07:00 local
-WINDOW_CLOSE = 9              # 09:00 local  (exclusive)
+SEND_DAYS   = {0, 1, 2, 3, 4}  # Mon=0 … Sun=6; Mon-Fri
+WINDOW_OPEN = 6               # 06:00 local
+WINDOW_CLOSE = 10             # 10:00 local  (exclusive)
 
 # TZ offset guesses by common US-centric B2B SaaS/startup email domains.
 # Default = Eastern (-5 / -4 DST).  Extend as needed.
@@ -101,7 +100,7 @@ def assert_send_window_or_exit(recipient_email: str = "", script_name: str = "")
     if not in_send_window(recipient_email):
         wait = seconds_until_window(recipient_email)
         tag = f"[{script_name}] " if script_name else ""
-        print(f"{tag}Outside send window (Tue-Thu 07-09 local). "
+        print(f"{tag}Outside send window (Mon-Fri 06-10 local). "
               f"Next open in ~{wait // 3600}h {(wait % 3600) // 60}m — exiting.")
         sys.exit(0)
 

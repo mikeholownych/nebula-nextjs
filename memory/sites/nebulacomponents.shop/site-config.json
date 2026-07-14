@@ -1,0 +1,11 @@
+{
+  "site": "nebulacomponents.shop",
+  "brand_name": "Nebula Components",
+  "brand_short": "Nebula",
+  "competitors": ["Unbounce", "Instapage", "Leadpages", "Hotjar"],
+  "primary_cta": "Get Your Free Audit",
+  "offer_price": 147,
+  "icp_trigger": "spent money on ads with zero conversions",
+  "description": "Premium landing page audit service. Free 60-second teardown, $147 fix pack.",
+  "industry": "SaaS / CRO"
+}

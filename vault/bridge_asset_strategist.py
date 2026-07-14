@@ -81,7 +81,7 @@ def generate_bridge_concepts(icp_memo: str, offer_memo: str) -> List[Dict[str, A
 4. Trust Gap Calculation - Quantifying the moment visitors decide not to buy
         """,
         "bridge_to_offer": """
-The calculator shows the leak, our Fix Pack plugs it. Once you see the exact dollar amount, $97 is trivial math vs continuing to bleed cash.
+The calculator shows the leak, our Fix Pack plugs it. Once you see the exact dollar amount, $147 is trivial math vs continuing to bleed cash.
         """,
         "length_words": 3500,
         "production_complexity": 3,

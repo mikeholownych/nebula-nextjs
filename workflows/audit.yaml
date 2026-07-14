@@ -1,0 +1,22 @@
+name: full-audit
+description: "On-page SEO + content quality + technical health — full site audit"
+icon: "\U0001F50D"
+steps:
+  - id: on_page
+    skill: on-page-seo-auditor
+    args:
+      url: "{target_url}"
+      site: "{site}"
+  - id: content
+    skill: content-quality-auditor
+    args:
+      url: "{target_url}"
+      site: "{site}"
+  - id: technical
+    skill: technical-seo-checker
+    args:
+      url: "{target_url}"
+      site: "{site}"
+output:
+  template: "seo-audit"
+  merge: true

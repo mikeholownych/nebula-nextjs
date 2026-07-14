@@ -9,6 +9,7 @@ Handles:
 """
 import json, os, time, threading, hmac, hashlib, sys
 from http.server import HTTPServer, BaseHTTPRequestHandler
+import stripe
 
 sys.path.insert(0, "/home/mike/nebula")
 
@@ -49,6 +50,8 @@ def _is_thread_seen(thread_id: str) -> bool:
         return thread_id in _seen_threads
 KEY_FILE       = os.path.expanduser("~/.hermes/secrets/agentmail_org.key")
 WH_SECRET_FILE = os.path.expanduser("~/.hermes/secrets/agentmail_webhook_secret.key")
+STRIPE_WEBHOOK_SECRET_FILE = "/home/mike/nebula/.stripe_webhook_secret"
+STRIPE_SECRET_FILE = os.path.expanduser("~/.hermes/.env")
 
 
 def load_key(path):
@@ -461,22 +464,50 @@ class WebhookHandler(BaseHTTPRequestHandler):
     def _handle_stripe(self):
         length = int(self.headers.get("Content-Length", 0))
         body = self.rfile.read(length)
+        
+        # Verify Stripe signature
+        stripe_signature = self.headers.get("Stripe-Signature", "")
+        if not stripe_signature:
+            print("[stripe] ⚠️  No Stripe-Signature header - rejecting")
+            self._send_json(400, {"error": "Missing Stripe-Signature header"})
+            return
+            
+        # Load Stripe webhook secret
+        stripe_webhook_secret = load_key(STRIPE_WEBHOOK_SECRET_FILE)
+        if not stripe_webhook_secret:
+            print("[stripe] ⚠️  No Stripe webhook secret configured")
+            self._send_json(500, {"error": "Server configuration error"})
+            return
+        
         try:
-            event = json.loads(body)
-            etype = event.get("type", "")
-
+            # Verify signature using Stripe library
+            event = stripe.Webhook.construct_event(
+                payload=body,
+                sig_header=stripe_signature,
+                secret=stripe_webhook_secret,
+                tolerance=300  # 5-minute tolerance
+            )
+            etype = event.type
+            
+            # Log for debugging
+            print(f"[stripe] Verified event: {etype} (id: {event.id})")
+            
+            # TODO: Add event ID deduplication here
+            
+            # Event type switching
             if etype == "checkout.session.completed":
-                session = event["data"]["object"]
-                customer_email = session.get("customer_details", {}).get("email", "unknown")
-                amount_cents   = session.get("amount_total", 0)
+                session = event.data.object
+                customer_email = session.customer_details.email if hasattr(session.customer_details, 'email') else "unknown"
+                amount_cents   = session.amount_total
                 amount_str     = f"${amount_cents/100:.2f}"
-                product        = session.get("metadata", {}).get("product", "unknown")
+                product        = session.metadata.get('product', 'unknown') if hasattr(session.metadata, 'get') else "unknown"
 
                 entry = {
                     "time": time.strftime("%Y-%m-%d %H:%M:%S"),
                     "product": product, "amount": amount_str,
                     "email": customer_email,
-                    "session_id": session.get("id", "")
+                    "session_id": session.id,
+                    "stripe_event_id": event.id
                 }
                 try:
                     os.makedirs(os.path.dirname(PAYMENTS_LOG), exist_ok=True)
@@ -488,12 +519,13 @@ class WebhookHandler(BaseHTTPRequestHandler):
                 log_to_ledger({
                     "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
                     "event_type": "payment",
+                    "stripe_event_id": event.id,
                     "email": customer_email,
                     "amount_cents": amount_cents,
                     "amount": amount_str,
                     "product": product,
-                    "payment_id": session.get("payment_intent") or session.get("id", ""),
-                    "checkout_session_id": session.get("id", ""),
+                    "payment_id": session.payment_intent if hasattr(session, 'payment_intent') else session.id,
+                    "checkout_session_id": session.id,
                 })
                 _upsert_hot_lead({
                     "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -503,12 +535,36 @@ class WebhookHandler(BaseHTTPRequestHandler):
                     "action": "fulfill_implementation",
                     "paid_at": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
                     "amount_cents": amount_cents,
-                    "checkout_session_id": session.get("id", ""),
+                    "checkout_session_id": session.id,
+                    "stripe_event_id": event.id
                 })
                 update_stats("revenue", amount_cents // 100)
-                print(f"[SALE] {amount_str} — {product} — {customer_email}")
+                print(f"[SALE] {amount_str} — {product} — {customer_email} (event: {event.id})")
+            elif etype == "invoice.payment_succeeded":
+                invoice = event.data.object
+                print(f"[stripe] invoice.payment_succeeded: ${invoice.amount_paid/100:.2f}")
+            elif etype == "invoice.payment_failed":
+                invoice = event.data.object
+                print(f"[stripe] invoice.payment_failed: ${invoice.amount_due/100:.2f}")
+            elif etype == "customer.subscription.updated":
+                sub = event.data.object
+                print(f"[stripe] customer.subscription.updated: {sub.status}")
+            elif etype == "customer.subscription.deleted":
+                sub = event.data.object
+                print(f"[stripe] customer.subscription.deleted")
+            elif etype == "checkout.session.expired":
+                session = event.data.object
+                print(f"[stripe] checkout.session.expired")
+            else:
+                print(f"[stripe] Unhandled event type: {etype}")
 
-            self._send_json(200, {"received": True})
+            self._send_json(200, {"received": True, "event_id": event.id})
+        except stripe.error.SignatureVerificationError as e:
+            print(f"[stripe] 🔴 Signature verification failed: {e}")
+            self._send_json(400, {"error": "Invalid signature"})
+        except ValueError as e:  # JSON decode error
+            print(f"[stripe] 🔴 Invalid payload: {e}")
+            self._send_json(400, {"error": "Invalid payload"})
         except Exception as e:
             print(f"[stripe] error: {e}")
             self._send_json(400, {"error": str(e)})

@@ -8,16 +8,16 @@
     "warm_replies": 0
   },
   "funnel": {
-    "audits_delivered": 40,
-    "emails_sent": 155,
+    "audits_delivered": 39,
+    "emails_sent": 80,
     "hot_lead_pitches_sent": 7,
-    "replies": 3,
-    "trigger_based_sends": 66,
+    "replies": 0,
+    "trigger_based_sends": 80,
     "trigger_reply_rate": 0.0,
     "trigger_warm_replies": 0,
-    "warm_leads": 1
+    "warm_leads": 0
   },
-  "generated_at": "2026-07-13T11:42:03Z",
+  "generated_at": "2026-07-14T15:13:20Z",
   "kill_criteria": {
     "audit": "3 audits delivered and 0 payments",
     "checkout": "buyer cannot pay self-serve",
@@ -25,12 +25,11 @@
   },
   "offer": "Free landing page audit -> $97 implementation",
   "pipeline": {
-    "hot_leads_pending": 2,
+    "hot_leads_pending": 1,
     "overdue_emails": [
-      "hello@aijournal.store",
-      "office@facetwoface.at"
+      "hello@aijournal.store"
     ],
-    "pitch_overdue": 2,
+    "pitch_overdue": 1,
     "pitch_sent": 27,
     "total": 48
   },

@@ -1,20 +1,11 @@
 {
-  "timestamp": "2026-07-13T02:15:57.816406+00:00",
+  "timestamp": "2026-07-14T02:16:33.889604+00:00",
   "summary": {
     "total_contacted": 120,
-    "scanned": 5,
+    "scanned": 24,
     "sites_down": 0,
-    "sites_changed": 1
+    "sites_changed": 0
   },
-  "changes": [
-    {
-      "email": "lakisha@goldenweeks.co",
-      "url": "https://goldenweeks.co",
-      "current_title": "Accountability Retreat in Zanzibar for Founders, Makers & Nomads | goldenweeks Retreats",
-      "changes": {
-        "content_changed": true
-      }
-    }
-  ],
+  "changes": [],
   "state_saved": true
 }

@@ -1,0 +1,52 @@
+{
+  "site": "nebulacomponents.shop",
+  "primary_keywords": {
+    "high_intent": [
+      "landing page audit",
+      "landing page analysis",
+      "conversion leak",
+      "why my landing page not converting",
+      "landing page optimization"
+    ],
+    "problem_aware": [
+      "spending on ads no sales",
+      "clicks but no conversions",
+      "landing page not working",
+      "ad spend waste",
+      "conversion rate low"
+    ],
+    "solution_aware": [
+      "landing page fix",
+      "conversion optimization service",
+      "landing page redesign",
+      "free landing page audit"
+    ]
+  },
+  "secondary_keywords": {
+    "related": [
+      "CRO agency",
+      "conversion rate optimization",
+      "landing page best practices",
+      "SaaS landing page",
+      "ad landing page"
+    ],
+    "competitor_alternatives": [
+      "unbounce alternative",
+      "instapage audit",
+      "landing page testing tool"
+    ]
+  },
+  "negative_keywords": [
+    "free landing page template",
+    "landing page builder",
+    "website design",
+    "SEO agency"
+  ],
+  "ai_visibility_queries": [
+    "what is the best landing page audit tool",
+    "how to fix landing page conversion rate",
+    "why is my landing page not converting",
+    "landing page optimization for SaaS",
+    "free landing page analysis tool"
+  ]
+}

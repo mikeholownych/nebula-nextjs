@@ -40,7 +40,7 @@ ALERT_LOG_PATH = NEBULA / "night_watch_alerts.jsonl"
 
 USER_AGENT = "Mozilla/5.0 (compatible; NebulaNightWatch/1.0; +https://nebulacomponents.shop)"
 FETCH_TIMEOUT = 15  # seconds per URL — fast, lightweight
-MAX_LEADS_PER_RUN = 50
+MAX_LEADS_PER_RUN = 200
 REPORT_THRESHOLD_CHANGE = 0.15  # 15% hash difference = "changed"
 
 
@@ -180,7 +180,7 @@ def main():
 
     contacted = json.loads(CONTACTED_PATH.read_text())
     previous = {} if args.quick else load_previous_state()
-    state = {}
+    state = dict(previous)  # preserve entries from prior batches
     changes = []
     total = 0
     scanned = 0

@@ -1,0 +1,16 @@
+name: content-gap
+description: "Competitor-relative coverage map of missing topics"
+icon: "\U0001F5E3"
+steps:
+  - id: gap_analysis
+    skill: content-gap-analysis
+    args:
+      competitors_from_site_config: true
+      site: "{site}"
+  - id: competitors
+    skill: competitor-analysis
+    args:
+      site: "{site}"
+output:
+  template: "content-gap"
+  merge: false

@@ -6,7 +6,7 @@
     "page_size_kb": 48.8,
     "cta_count": 0,
     "content_hash": "7c3f04a73dbab897ed52870fd5f105d3",
-    "scraped_at": "2026-07-13T02:15:55.222115+00:00"
+    "scraped_at": "2026-07-14T02:16:12.068239+00:00"
   },
   "hello@theogeo.ai": {
     "url": "https://theogeo.ai",
@@ -15,16 +15,16 @@
     "page_size_kb": 48.8,
     "cta_count": 0,
     "content_hash": "d1b0bc40021188a796ad83ff87d100d1",
-    "scraped_at": "2026-07-13T02:15:55.437124+00:00"
+    "scraped_at": "2026-07-14T02:16:12.223584+00:00"
   },
   "lakisha@goldenweeks.co": {
     "url": "https://goldenweeks.co",
     "title": "Accountability Retreat in Zanzibar for Founders, Makers & Nomads | goldenweeks Retreats",
     "status": "ok",
-    "page_size_kb": 29.0,
+    "page_size_kb": 29.6,
     "cta_count": 0,
-    "content_hash": "f8693fc998ff679dba10332cd356cae5",
-    "scraped_at": "2026-07-13T02:15:56.224045+00:00"
+    "content_hash": "a49f30b9ce35ffc328c528c46395610b",
+    "scraped_at": "2026-07-14T02:16:12.331719+00:00"
   },
   "alloceraintelligence@gmail.com": {
     "url": "https://alloceraintelligence.com",
@@ -33,7 +33,7 @@
     "page_size_kb": 48.8,
     "cta_count": 0,
     "content_hash": "cee3498417b476661c08286b80229c35",
-    "scraped_at": "2026-07-13T02:15:57.366067+00:00"
+    "scraped_at": "2026-07-14T02:16:13.793245+00:00"
   },
   "deepanshu11madan@gmail.com": {
     "url": "https://naxely.com",
@@ -41,7 +41,178 @@
     "status": "ok",
     "page_size_kb": 48.8,
     "cta_count": 0,
-    "content_hash": "a93cc9d8d19efddaeb923d47928accdd",
-    "scraped_at": "2026-07-13T02:15:57.516105+00:00"
+    "content_hash": "0296f178525998362ebfca5bdfe3febf",
+    "scraped_at": "2026-07-14T02:16:13.905888+00:00"
+  },
+  "support@invoicingapi.com": {
+    "url": "https://invoicingapi.com",
+    "title": "InvoicingAPI | Invoice creation and payment for any business",
+    "status": "ok",
+    "page_size_kb": 37.8,
+    "cta_count": 3,
+    "content_hash": "d1757438b4e568db62efadf046afa7ee",
+    "scraped_at": "2026-07-14T02:16:14.807881+00:00"
+  },
+  "hello@adsby.co": {
+    "url": "https://usemagnetiq.com",
+    "title": "Adsby - Optimize Every Click with AI for Google Ads",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 0,
+    "content_hash": "9a265926016355d118011a07a0754659",
+    "scraped_at": "2026-07-14T02:16:15.184558+00:00"
+  },
+  "contact@curbcaddie.com": {
+    "url": "https://curbcaddie.com",
+    "title": "Never Take The Trash Out Again | Curb Caddie",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 0,
+    "content_hash": "74c798d42cb617b2bb23dc9dc2506ee2",
+    "scraped_at": "2026-07-14T02:16:15.382675+00:00"
+  },
+  "hello@hacktron.ai": {
+    "url": "https://hacktron.ai",
+    "title": "AI Code Review &amp; Security Vulnerability Detection | Hacktron AI",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 0,
+    "content_hash": "c7047a54c00409fe1fe855565b922f2a",
+    "scraped_at": "2026-07-14T02:16:15.790460+00:00"
+  },
+  "hello@aijournal.store": {
+    "url": "https://play.google.com/store/apps/details?id=com.calmjournal.calm_journal_template",
+    "title": "",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 0,
+    "content_hash": "dc0ac9f285b60e5d2cbc5c97c37bead6",
+    "scraped_at": "2026-07-14T02:16:16.012096+00:00"
+  },
+  "help@nypost.com": {
+    "url": "https://nypost.com/2026/06/28/us-news/patriotic-californians-explode-at-hoas-crazy-anti-american-demand-ahead-of-fourth-of-july",
+    "title": "Exclusive | Patriotic Californians explode at HOA's 'crazy anti-American' demand ahead of Fourth of July",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 0,
+    "content_hash": "33e8eca284d298cf12be6a0056f19bb6",
+    "scraped_at": "2026-07-14T02:16:17.582924+00:00"
+  },
+  "info@xpertstart.com.au": {
+    "url": "https://www.xpertstart.com.au",
+    "title": "Web Design, SEO &amp; Branding Australia | Xpert Start",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 4,
+    "content_hash": "db1ff2325e269ef1ac6b48a563920736",
+    "scraped_at": "2026-07-14T02:16:18.078328+00:00"
+  },
+  "info@2getherewesave.com": {
+    "url": "https://2getherwesave.com",
+    "title": "Buy 2gether! Save 2gether! Group Buying Power of 2getherwesave",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 3,
+    "content_hash": "9273071442df551619e9fd744eab97df",
+    "scraped_at": "2026-07-14T02:16:20.499066+00:00"
+  },
+  "danny@repairandsquare.com": {
+    "url": "https://repairandsquare.com/washing-machine-repairs/",
+    "title": "Washing Machine Repairs | Repair and Square",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 19,
+    "content_hash": "fca6e0543d98ae5a07ad887710e8aa4c",
+    "scraped_at": "2026-07-14T02:16:23.183290+00:00"
+  },
+  "hello@ziplead.ai": {
+    "url": "https://ziplead.ai",
+    "title": "Every Local Business, Scored &amp; Ready \u00b7 ZipLead",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 10,
+    "content_hash": "ecd7bdd837c423a714040b2ef5326628",
+    "scraped_at": "2026-07-14T02:16:25.285126+00:00"
+  },
+  "support@routinereps.com": {
+    "url": "https://www.routinereps.com",
+    "title": "Routine Reps \u2014 Every rep is moving you up.",
+    "status": "ok",
+    "page_size_kb": 13.0,
+    "cta_count": 9,
+    "content_hash": "bcec804bde07d60e5e051fe81b69b8dd",
+    "scraped_at": "2026-07-14T02:16:25.645827+00:00"
+  },
+  "alumni@wgu.edu": {
+    "url": "https://wgu.edu",
+    "title": "Western Governors University \u2013 Online College",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 24,
+    "content_hash": "56e86dfcfc1d79e05a0627c361643976",
+    "scraped_at": "2026-07-14T02:16:25.868207+00:00"
+  },
+  "office@facetwoface.at": {
+    "url": "https://www.facetwoface.at",
+    "title": "Face II Face - Ihr exklusiver DJ Service in \u00d6sterreich",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 0,
+    "content_hash": "f2faa22e329e2823a0f1a872d87f57df",
+    "scraped_at": "2026-07-14T02:16:27.380883+00:00"
+  },
+  "support@curiouscats.ai": {
+    "url": "https://curiouscats.ai",
+    "title": "CuriousCats: Personal AI Agents \u2014 Be the person who knows",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 5,
+    "content_hash": "52d80c817adccf0f5b159f1bcc0e1420",
+    "scraped_at": "2026-07-14T02:16:30.000288+00:00"
+  },
+  "support@godlike.host": {
+    "url": "https://godlike.host/gaf-play-minecraft",
+    "title": "Minecraft Hosting $1/GB RAM - Godlike",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 0,
+    "content_hash": "3b7ba9c820ec9417ab0c7034a02b9374",
+    "scraped_at": "2026-07-14T02:16:31.948531+00:00"
+  },
+  "support@goldnest.cc": {
+    "url": "https://goldnest.cc",
+    "title": "GoldNest \u2014 Track spending, cut forgotten subscriptions",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 0,
+    "content_hash": "7b0502fe0656fe4989c33f58a2f3ab37",
+    "scraped_at": "2026-07-14T02:16:32.488192+00:00"
+  },
+  "support@savepointfinance.com": {
+    "url": "https://savepointfinance.com/help#encryption",
+    "title": "Complete User Manual - SavePoint Personal Finance Software",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 5,
+    "content_hash": "3b3bdf9ac7e7a7de5b77720bf7bb7df9",
+    "scraped_at": "2026-07-14T02:16:33.156174+00:00"
+  },
+  "u003eguidelines@patreon.com": {
+    "url": "https://www.patreon.com/cw/KinkWolfStories",
+    "title": "Kink Wolf Stories \u2014 I write sexy, bisexual, femboy and crossdressing stories | Patreon",
+    "status": "ok",
+    "page_size_kb": 48.8,
+    "cta_count": 8,
+    "content_hash": "65d61cbd3e2b7c7a499bd6c2ed814f32",
+    "scraped_at": "2026-07-14T02:16:33.837626+00:00"
+  },
+  "test@example.com": {
+    "url": "https://nebulacomponents.shop/audit.html",
+    "title": "Sample Landing Page Audit \u2014 Nebula Components",
+    "status": "ok",
+    "page_size_kb": 8.4,
+    "cta_count": 2,
+    "content_hash": "f5d4454d328d272f75a7499d15a5d9a0",
+    "scraped_at": "2026-07-14T02:16:33.889512+00:00"
   }
 }

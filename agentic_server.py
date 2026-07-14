@@ -369,6 +369,18 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
                 self._safe_write(f.read())
             return
 
+        # Audit dashboard — password-protected audit delivery
+        if path.startswith("/audit/"):
+            audit_id = path.split("/")[-1]
+            dashboard_file = os.path.join(DIR, "audit_dashboard.html")
+            if os.path.isfile(dashboard_file):
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.end_headers()
+                with open(dashboard_file, "rb") as f:
+                    self._safe_write(f.read())
+                return
+
         # Public lead magnets — clean URLs for outreach/nurture
         if path.startswith("/lead-magnets/"):
             rel = path.removeprefix("/lead-magnets/")
@@ -511,10 +523,12 @@ class AgenticHandler(http.server.SimpleHTTPRequestHandler):
         if path == "/stripe-webhook":
             content_len = int(self.headers.get("Content-Length", 0))
             payload = self.rfile.read(content_len).decode()
+            # Get Stripe signature for verification
+            stripe_signature = self.headers.get("Stripe-Signature", "")
             import sys
             sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
             from stripe_webhook import handle_stripe_webhook
-            result = handle_stripe_webhook(payload)
+            result = handle_stripe_webhook(payload, stripe_signature)
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
@@ -1392,6 +1406,7 @@ Action: Reply to this email to confirm. Send calendar invite to {email}."""
         stated_role = (body.get("role") or "").strip()
         stated_visitor = (body.get("visitor") or "").strip()
         stated_tone = (body.get("tone") or "").strip()
+        pain_point = (body.get("pain_point") or "").strip()
         _spend_raw = body.get("monthly_spend", "")
         try:
             monthly_spend = float(_spend_raw) if _spend_raw else None
@@ -1483,6 +1498,9 @@ Action: Reply to this email to confirm. Send calendar invite to {email}."""
                     "email":     email,
                     "score":     overall,
                     "grade":     grade,
+                    "pain_point": pain_point if pain_point else None,
+                    "role": stated_role if stated_role else None,
+                    "monthly_spend": monthly_spend,
                 }
                 log_entry.update(attribution)
                 with open("/home/mike/nebula/audit_leads.jsonl", "a") as f:

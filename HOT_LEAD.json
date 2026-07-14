@@ -487,8 +487,8 @@
     "score": 6.6,
     "audit_score": 6.6,
     "audit_grade": "B",
-    "stage": "pitch_sent",
-    "status": "pitched",
+    "stage": "bounced",
+    "status": "stop_reply",
     "action": "monitor_payment_or_reply",
     "thread_id": null,
     "message_id": "<0100019f370d4b8d-2a569b90-31d5-4e66-b9f4-ef2e180db091-000000@email.amazonses.com>",
@@ -498,7 +498,10 @@
     "trigger_type": null,
     "contact_route": null,
     "pitch_due_at": "2026-07-08T10:50:46Z",
-    "pitch_sent_at": "2026-07-08T12:00:29.594384+00:00"
+    "pitch_sent_at": "2026-07-08T12:00:29.594384+00:00",
+    "bounce_reason": "unsubscribe_stop_request",
+    "bounced_at": "2026-07-14T03:15:37.682376+00:00",
+    "notes": "Replied STOP \u2014 unsubscribed"
   },
   {
     "email": "hello@aijournal.store",
@@ -672,9 +675,9 @@
     "score": 6.2,
     "audit_score": 6.2,
     "audit_grade": "C",
-    "stage": "pitch_queued",
-    "status": "pending",
-    "action": "send_97_pitch",
+    "stage": "pitch_sent",
+    "status": "pitched",
+    "action": "monitor_payment_or_reply",
     "thread_id": null,
     "message_id": "<0100019f3a6f0e6e-6a64b1f1-1e40-4030-959c-05909db49e94-000000@email.amazonses.com>",
     "trigger_context": "Saw your public post: Vienna brides- avoid this DJ company at all cost!!!!!!",
@@ -683,8 +686,9 @@
     "trigger_type": null,
     "contact_route": null,
     "pitch_due_at": "2026-07-12T04:49:26Z",
-    "notes": "Queued for pitch \u2014 HOT_LEAD sync corrected",
-    "updated_at": "2026-07-12T03:50:00+00:00"
+    "notes": "Pitch sent 2026-07-09; SRE corrected stale HOT_LEAD state",
+    "updated_at": "2026-07-14T09:46:00Z",
+    "pitch_sent_at": "2026-07-09T12:00:58.501213+00:00"
   },
   {
     "email": "support@curiouscats.ai",

@@ -105,31 +105,35 @@ class AuditHandoffFlowTests(unittest.TestCase):
         self.assertFalse(webhook_server._is_payment_intent("yes", "Please audit https://example.com"))
 
     def test_stripe_checkout_completion_writes_payment_ledger_and_hot_lead(self):
+        import unittest.mock as mock_module
         with tempfile.TemporaryDirectory() as td:
             base = Path(td)
             payment_log = base / "payments.log"
             customer_ledger = base / "customer-ledger.jsonl"
             stats = base / "stats.json"
             hot_file = base / "HOT_LEAD.json"
-            event = {
-                "type": "checkout.session.completed",
-                "data": {"object": {
-                    "id": "cs_live_123",
-                    "payment_intent": "pi_live_123",
-                    "customer_details": {"email": "buyer@example.com"},
-                    "amount_total": 9700,
-                    "metadata": {"product": "launchcrate_97"},
-                }},
-            }
-            body = json.dumps(event).encode()
+            # Build a mock Stripe event object matching stripe library structure
+            mock_session = mock_module.MagicMock()
+            mock_session.id = "cs_live_123"
+            mock_session.payment_intent = "pi_live_123"
+            mock_session.amount_total = 9700
+            mock_session.customer_details.email = "buyer@example.com"
+            mock_session.metadata.get = lambda k, d="": {"product": "launchcrate_97"}.get(k, d)
+            mock_event = mock_module.MagicMock()
+            mock_event.type = "checkout.session.completed"
+            mock_event.id = "evt_test_123"
+            mock_event.data.object = mock_session
+            body = b"{}"  # body doesn't matter — construct_event is mocked
             handler = object.__new__(webhook_server.WebhookHandler)
-            handler.headers = {"Content-Length": str(len(body))}
+            handler.headers = {"Content-Length": str(len(body)), "Stripe-Signature": "t=1,v1=abc"}
             handler.rfile = BytesIO(body)
             with patch.object(webhook_server, "PAYMENTS_LOG", str(payment_log)), \
                  patch.object(webhook_server, "INBOX_LOG", str(customer_ledger)), \
                  patch.object(webhook_server, "STATS_FILE", str(stats)), \
                  patch.object(webhook_server, "HOT_LEAD_FILE", str(hot_file)), \
-                 patch.object(handler, "_send_json", return_value=None):
+                 patch.object(handler, "_send_json", return_value=None), \
+                 patch("stripe.Webhook.construct_event", return_value=mock_event), \
+                 patch("webhook_server.load_key", return_value="whsec_test"):
                 handler._handle_stripe()
 
             ledger_row = json.loads(customer_ledger.read_text().splitlines()[0])

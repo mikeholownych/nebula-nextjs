@@ -1,0 +1,16 @@
+name: technical-health
+description: "Crawlability, indexing, CWV, robots, sitemaps, canonicals"
+icon: "\U0001F6F0"
+steps:
+  - id: technical
+    skill: technical-seo-checker
+    args:
+      url: "{target_url}"
+      site: "{site}"
+  - id: schema
+    skill: schema-markup-generator
+    args:
+      site: "{site}"
+output:
+  template: "technical-health"
+  merge: true

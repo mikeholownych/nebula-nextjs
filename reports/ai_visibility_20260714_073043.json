@@ -1,0 +1,43 @@
+{
+  "site": "nebulacomponents.shop",
+  "scan_date": "2026-07-14T07:30:43.540326",
+  "queries": [
+    {
+      "query": "what is the best landing page audit tool",
+      "cited_brands": [],
+      "nebula_cited": false
+    },
+    {
+      "query": "how to fix landing page conversion rate",
+      "cited_brands": [],
+      "nebula_cited": false
+    },
+    {
+      "query": "why is my landing page not converting",
+      "cited_brands": [],
+      "nebula_cited": false
+    },
+    {
+      "query": "landing page optimization for SaaS",
+      "cited_brands": [],
+      "nebula_cited": false
+    },
+    {
+      "query": "free landing page analysis tool",
+      "cited_brands": [],
+      "nebula_cited": false
+    }
+  ],
+  "summary": {
+    "total_queries": 5,
+    "nebula_cited_count": 0,
+    "nebula_citation_rate": "0/5",
+    "gap_queries": [
+      "what is the best landing page audit tool",
+      "how to fix landing page conversion rate",
+      "why is my landing page not converting",
+      "landing page optimization for SaaS",
+      "free landing page analysis tool"
+    ]
+  }
+}

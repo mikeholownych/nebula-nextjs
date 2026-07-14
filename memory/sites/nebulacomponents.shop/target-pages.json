@@ -1,0 +1,58 @@
+{
+  "site": "nebulacomponents.shop",
+  "target_pages": [
+    {
+      "path": "/",
+      "priority": 10,
+      "intent": "convert",
+      "keywords": ["landing page audit", "conversion leak", "free audit"],
+      "funnel_stage": "bottom",
+      "description": "Primary landing page for free audit conversion"
+    },
+    {
+      "path": "/audit.html",
+      "priority": 9,
+      "intent": "convert",
+      "keywords": ["landing page analysis", "page teardown"],
+      "funnel_stage": "middle",
+      "description": "Detailed audit request page"
+    },
+    {
+      "path": "/checkout.html",
+      "priority": 8,
+      "intent": "purchase",
+      "keywords": ["fix pack", "conversion fix"],
+      "funnel_stage": "bottom",
+      "description": "$147 Fix Pack checkout"
+    },
+    {
+      "path": "/ai-ops-retainer.html",
+      "priority": 7,
+      "intent": "upsell",
+      "keywords": ["ongoing optimization", "ai ops"],
+      "funnel_stage": "expansion",
+      "description": "$1,497/mo AI Ops Retainer"
+    },
+    {
+      "path": "/agency-partner.html",
+      "priority": 6,
+      "intent": "b2b",
+      "keywords": ["white label audit", "agency partner"],
+      "funnel_stage": "expansion",
+      "description": "$497/mo Agency Partner"
+    },
+    {
+      "path": "/ad-burn-leaderboard.html",
+      "priority": 5,
+      "intent": "awareness",
+      "keywords": ["ad spend waste", "burn rate leaderboard"],
+      "funnel_stage": "top",
+      "description": "Viral awareness page showing ad waste data"
+    }
+  ],
+  "excluded_paths": [
+    "/admin",
+    "/internal",
+    "/.well-known"
+  ]
+}

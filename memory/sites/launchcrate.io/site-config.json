@@ -1,0 +1,11 @@
+{
+  "site": "launchcrate.io",
+  "brand_name": "LaunchCrate",
+  "brand_short": "LaunchCrate",
+  "competitors": ["Shopify", "Squarespace", "Webflow", "Carrd"],
+  "primary_cta": "Get Your Launch Package",
+  "offer_price": 497,
+  "icp_trigger": "need to launch a SaaS but don't have time to build",
+  "description": "Done-for-you SaaS launch package. Landing page, deployment, email setup, outreach sequences — delivered in 24 hours.",
+  "industry": "SaaS Launch / DevOps"
+}

@@ -1,0 +1,29 @@
+{
+  "site": "launchcrate.io",
+  "target_pages": [
+    {
+      "path": "/",
+      "priority": 10,
+      "intent": "convert",
+      "keywords": ["saas launch package", "done for you saas launch", "launch my saas"],
+      "funnel_stage": "bottom",
+      "description": "Primary landing page"
+    },
+    {
+      "path": "/checkout.html",
+      "priority": 8,
+      "intent": "purchase",
+      "keywords": ["$497 launch package"],
+      "funnel_stage": "bottom",
+      "description": "Checkout"
+    },
+    {
+      "path": "/demo.html",
+      "priority": 6,
+      "intent": "consideration",
+      "keywords": ["saas launch example", "24 hour launch"],
+      "funnel_stage": "middle",
+      "description": "Demo / past launches"
+    }
+  ]
+}
