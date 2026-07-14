@@ -61,8 +61,8 @@ class Settings(BaseSettings):
             return v
         
         parsed = urlparse(v)
-        if parsed.scheme not in ("postgresql", "postgres"):
-            raise ValueError("DATABASE_URL must use postgresql:// scheme")
+        if parsed.scheme not in ("postgresql", "postgres", "postgresql+psycopg"):
+            raise ValueError("DATABASE_URL must use postgresql:// or postgresql+psycopg:// scheme")
         
         return v
     
