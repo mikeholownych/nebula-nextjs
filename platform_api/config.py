@@ -14,10 +14,30 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: Optional[str] = None
     
+    # Redis
+    REDIS_URL: str = "redis://localhost:6379/0"
+    
     # OIDC Authentication
     OIDC_ISSUER: Optional[str] = None
     OIDC_AUDIENCE: Optional[str] = None
     OIDC_JWKS_URL: Optional[str] = None
+    
+    # Google OAuth
+    GOOGLE_CLIENT_ID: Optional[str] = None
+    GOOGLE_CLIENT_SECRET: Optional[str] = None
+    
+    # JWT
+    SECRET_KEY: Optional[str] = None
+    JWT_ALGORITHM: str = "HS256"
+    JWT_EXPIRATION_DAYS: int = 7
+    
+    # Stripe
+    STRIPE_SECRET_KEY: Optional[str] = None
+    STRIPE_WEBHOOK_SECRET: Optional[str] = None
+    
+    # SendGrid
+    SENDGRID_API_KEY: Optional[str] = None
+    SENDGRID_FROM_EMAIL: str = "noreply@nebulacomponents.shop"
     
     # CORS
     ALLOWED_ORIGINS: List[str] = []
