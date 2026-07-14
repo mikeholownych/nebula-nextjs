@@ -1,0 +1,2637 @@
+{
+  "timestamp": "2026-07-14T04:55:58.641660+00:00",
+  "total_routes": 442,
+  "sitemap_routes": 23,
+  "case_study_routes": 419,
+  "routes": [
+    {
+      "url": "https://nebulacomponents.shop/",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/demo.html",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/ad-burn-leaderboard.html",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/audit",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/audit.html",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/generator.html",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/pricing-generator.html",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/checkout.html",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/7-systems.html",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/linkedin-skill-engine",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/founder-second-brain",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/specialist-ai-agent-library",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/google-ads-clicks-no-sales",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/facebook-ads-no-leads",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/landing-page-not-converting",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/high-cpc-low-conversion",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/traffic-but-no-form-fills",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/cta-not-working",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/message-match-checklist",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/proof-before-cta",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/mobile-landing-page-leaks",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/learning-center/before-you-raise-ad-budget",
+      "type": "sitemap",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-wgu-edu-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-wgu-edu-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-20.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-20.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-wgu-edu-15.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-wgu-edu-15.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-facetwoface-at-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-facetwoface-at-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-gofaultline-dev-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-gofaultline-dev-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-ziplead-ai-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-ziplead-ai-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-15.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-15.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-nebulacomponents-shop-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-nebulacomponents-shop-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-ziplead-ai-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-ziplead-ai-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-ziplead-ai.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-ziplead-ai.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-savepointfinance-com-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-savepointfinance-com-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-18.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-18.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-routinereps-com-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-routinereps-com-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-routinereps-com-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-routinereps-com-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-17.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-17.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-22.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-22.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-facetwoface-at-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-facetwoface-at-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-routinereps-com-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-routinereps-com-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-godlike-host-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-godlike-host-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-16.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-16.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-ziplead-ai-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-ziplead-ai-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-21.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-21.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-goldnest-cc-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-goldnest-cc-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curiouscats-ai-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curiouscats-ai-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-31.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-31.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-routinereps-com-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-routinereps-com-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-wgu-edu-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-wgu-edu-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-gofaultline-dev-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-gofaultline-dev-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-nebulacomponents-shop-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-nebulacomponents-shop-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-facetwoface-at-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-facetwoface-at-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-godlike-host-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-godlike-host-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-29.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-29.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patreon-com-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patreon-com-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-facetwoface-at-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-facetwoface-at-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-23.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-23.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-godlike-host-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-godlike-host-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-19.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-19.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-17.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-17.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-ziplead-ai-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-ziplead-ai-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curiouscats-ai-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curiouscats-ai-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-savepointfinance-com-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-savepointfinance-com-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general--4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general--4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-facetwoface-at-15.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-facetwoface-at-15.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-stripe-com.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-stripe-com.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-21.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-21.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com-17.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com-17.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-routinereps-com-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-routinereps-com-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-facetwoface-at-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-facetwoface-at-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-routinereps-com-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-routinereps-com-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patreon-com-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patreon-com-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-21.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-21.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com-16.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com-16.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-20.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-20.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-facetwoface-at.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-facetwoface-at.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-23.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-23.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-goldnest-cc.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-goldnest-cc.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-19.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-19.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-18.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-18.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-gofaultline-dev-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-gofaultline-dev-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-wgu-edu.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-wgu-edu.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-stripe-com-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-stripe-com-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-goldnest-cc-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-goldnest-cc-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-savepointfinance-com-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-savepointfinance-com-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-godlike-host-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-godlike-host-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-nebulacomponents-shop-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-nebulacomponents-shop-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-18.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-18.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-gofaultline-dev-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-gofaultline-dev-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-18.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-18.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-godlike-host-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-godlike-host-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general--3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general--3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-gofaultline-dev-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-gofaultline-dev-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-nebulacomponents-shop-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-nebulacomponents-shop-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-facetwoface-at-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-facetwoface-at-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-16.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-16.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-16.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-16.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-gofaultline-dev-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-gofaultline-dev-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-ziplead-ai-15.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-ziplead-ai-15.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general--1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general--1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-26.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-26.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-20.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-20.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-16.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-16.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curiouscats-ai-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curiouscats-ai-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au-17.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au-17.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com-16.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com-16.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-wgu-edu-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-wgu-edu-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-godlike-host-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-godlike-host-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-godlike-host-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-godlike-host-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-23.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-23.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-ziplead-ai-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-ziplead-ai-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-gofaultline-dev-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-gofaultline-dev-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-godlike-host-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-godlike-host-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-17.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-17.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-ziplead-ai-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-ziplead-ai-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-savepointfinance-com-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-savepointfinance-com-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-stripe-com-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-stripe-com-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-22.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-22.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-gofaultline-dev-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-gofaultline-dev-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-wgu-edu-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-wgu-edu-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-17.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-17.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-stripe-com-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-stripe-com-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-30.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-30.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curiouscats-ai-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curiouscats-ai-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patreon-com-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patreon-com-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general--5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general--5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-wgu-edu-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-wgu-edu-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patreon-com-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patreon-com-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-wgu-edu-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-wgu-edu-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-16.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-16.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curiouscats-ai-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curiouscats-ai-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-routinereps-com-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-routinereps-com-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-routinereps-com-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-routinereps-com-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-ziplead-ai-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-ziplead-ai-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-23.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-23.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-ziplead-ai-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-ziplead-ai-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-17.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-17.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-16.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-16.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-gofaultline-dev-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-gofaultline-dev-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-savepointfinance-com.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-savepointfinance-com.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-22.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-22.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-wgu-edu-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-wgu-edu-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-ziplead-ai-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-ziplead-ai-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-21.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-21.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-godlike-host-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-godlike-host-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-25.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-25.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-19.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-19.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-facetwoface-at-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-facetwoface-at-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-nebulacomponents-shop-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-nebulacomponents-shop-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curiouscats-ai-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curiouscats-ai-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curiouscats-ai-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curiouscats-ai-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-15.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-15.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-15.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-15.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-ziplead-ai-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-ziplead-ai-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-routinereps-com-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-routinereps-com-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-wgu-edu-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-wgu-edu-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com-15.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com-15.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-routinereps-com-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-routinereps-com-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-wgu-edu-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-wgu-edu-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-ziplead-ai-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-ziplead-ai-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-facetwoface-at-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-facetwoface-at-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-savepointfinance-com-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-savepointfinance-com-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-routinereps-com-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-routinereps-com-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-gofaultline-dev-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-gofaultline-dev-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-nebulacomponents-shop-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-nebulacomponents-shop-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-23.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-23.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-wgu-edu-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-wgu-edu-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-27.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-27.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-wgu-edu-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-wgu-edu-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-facetwoface-at-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-facetwoface-at-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-15.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-15.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-22.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-22.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patreon-com-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patreon-com-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-facetwoface-at-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-facetwoface-at-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-20.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-20.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-airbnb-com.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-airbnb-com.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curiouscats-ai-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curiouscats-ai-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-17.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-17.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-routinereps-com-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-routinereps-com-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-ziplead-ai-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-ziplead-ai-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-goldnest-cc-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-goldnest-cc-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-savepointfinance-com-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-savepointfinance-com-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au-16.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au-16.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-ziplead-ai-16.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-ziplead-ai-16.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-facetwoface-at-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-facetwoface-at-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curiouscats-ai.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curiouscats-ai.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-22.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-22.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-18.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-18.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-gofaultline-dev.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-gofaultline-dev.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-nebulacomponents-shop-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-nebulacomponents-shop-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-ziplead-ai-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-ziplead-ai-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-nebulacomponents-shop-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-nebulacomponents-shop-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-wgu-edu-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-wgu-edu-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com-17.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com-17.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-15.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-15.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-nebulacomponents-shop-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-nebulacomponents-shop-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-goldnest-cc-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-goldnest-cc-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-18.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-18.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curiouscats-ai-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curiouscats-ai-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-18.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-18.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-routinereps-com.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-routinereps-com.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-19.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-19.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-15.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-15.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-15.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-15.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-facetwoface-at-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-facetwoface-at-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-24.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-24.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-16.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-16.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-airbnb-com-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-airbnb-com-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-20.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-20.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-godlike-host-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-godlike-host-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com-15.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com-15.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-21.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-21.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general--2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general--2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patreon-com.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patreon-com.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-15.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-15.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-facetwoface-at-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-facetwoface-at-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-gofaultline-dev-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-gofaultline-dev-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-gofaultline-dev-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-gofaultline-dev-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curiouscats-ai-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curiouscats-ai-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curiouscats-ai-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curiouscats-ai-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-18.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-18.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-savepointfinance-com-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-savepointfinance-com-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com-15.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com-15.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-godlike-host.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-godlike-host.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-wgu-edu-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-wgu-edu-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-savepointfinance-com-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-savepointfinance-com-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-goldnest-cc-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-goldnest-cc-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-godlike-host-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-godlike-host-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patreon-com-1.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patreon-com-1.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-nebulacomponents-shop-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-nebulacomponents-shop-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-19.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-19.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patreon-com-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patreon-com-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-gofaultline-dev-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-gofaultline-dev-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-goldnest-cc-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-goldnest-cc-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-example-com-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-example-com-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com-16.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com-16.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/index.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/index.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-nypost-com-9.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-nypost-com-9.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-nebulacomponents-shop.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-nebulacomponents-shop.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-routinereps-com-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-routinereps-com-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-11.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-11.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-nebulacomponents-shop-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-nebulacomponents-shop-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-goldnest-cc-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-goldnest-cc-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-ziplead-ai-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-ziplead-ai-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-godlike-host-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-godlike-host-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curiouscats-ai-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curiouscats-ai-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-usemagnetiq-com-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-usemagnetiq-com-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au-15.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au-15.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-godlike-host-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-godlike-host-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-facetwoface-at-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-facetwoface-at-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-16.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-16.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-invoicingapi-com-17.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-invoicingapi-com-17.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-19.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-19.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-wgu-edu-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-wgu-edu-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patreon-com-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patreon-com-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-goldnest-cc-6.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-goldnest-cc-6.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-aisyndicate-io-28.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-aisyndicate-io-28.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-routinereps-com-15.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-routinereps-com-15.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com-5.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com-5.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com-17.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com-17.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-hacktron-ai-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-hacktron-ai-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-17.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-17.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-2getherwesave-com-3.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-2getherwesave-com-3.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/real_estate-gofaultline-dev-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/real_estate-gofaultline-dev-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-patricianunes-pt-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-patricianunes-pt-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/saas-play-google-com-10.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/saas-play-google-com-10.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-14.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-14.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-xpertstart-com-au-8.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-xpertstart-com-au-8.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/ecommerce-repairandsquare-com-13.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/ecommerce-repairandsquare-com-13.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curiouscats-ai-2.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curiouscats-ai-2.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curbcaddie-com-4.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curbcaddie-com-4.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-curiouscats-ai-12.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-curiouscats-ai-12.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    },
+    {
+      "url": "https://nebulacomponents.shop/case-studies/general-routinereps-com-7.html",
+      "type": "case-study",
+      "file": "/home/mike/nebula/public/case-studies/general-routinereps-com-7.html",
+      "captured_at": "2026-07-14T04:55:58.641660+00:00"
+    }
+  ]
+}
