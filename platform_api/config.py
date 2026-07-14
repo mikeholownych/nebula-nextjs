@@ -17,6 +17,9 @@ class Settings(BaseSettings):
     # Redis
     REDIS_URL: str = "redis://localhost:6379/0"
     
+    # Server
+    PORT: int = 8769  # Changed from 8766 (Apache) and 8767 (conflict)
+    
     # OIDC Authentication
     OIDC_ISSUER: Optional[str] = None
     OIDC_AUDIENCE: Optional[str] = None
