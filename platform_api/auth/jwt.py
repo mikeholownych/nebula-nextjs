@@ -65,6 +65,10 @@ def create_jwt(
         key=settings.SECRET_KEY
     )
     
+    # Decode bytes to string
+    if isinstance(token, bytes):
+        token = token.decode('utf-8')
+    
     return token
 
 
