@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles/nebula-design-system.css">
+
+<!-- Google tag (gtag.js) — loaded after consent -->
+<script>
+  // Disable GA until consent is granted
+  window['ga-disable-G-KJ9S3450LH'] = true;
+  window.GA_MEASUREMENT_ID = 'G-KJ9S3450LH';
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KJ9S3450LH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KJ9S3450LH', { 'anonymize_ip': true, 'storage': 'none' });
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The ROAS Cliff — Why Your CTR Looks Fine and Your Page Converts Nobody</title>
+<meta name="description" content="A self-diagnostic guide for founders running paid traffic with zero or weak conversions. Score your landing page in 10 minutes. Find the monthly leak.">
+<link rel="canonical" href="https://nebulacomponents.shop/roas-cliff.html" />
+<meta property="og:title" content="The ROAS Cliff — Why Your CTR Looks Fine and Your Page Converts Nobody">
+<meta property="og:description" content="Score your landing page across 5 dimensions. See your monthly leak estimate. Three fixes that actually move the number.">
+<meta property="og:url" content="https://nebulacomponents.shop/roas-cliff.html">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The ROAS Cliff: Why your CTR looks fine and your page converts nobody",
+  "description": "A self-diagnostic guide for founders running paid traffic with zero or weak conversions. Score your landing page across 5 dimensions and calculate your monthly leak.",
+  "author": { "@type": "Person", "name": "Mike H" },
+  "publisher": { "@type": "Organization", "name": "Nebula Components", "url": "https://nebulacomponents.shop" },
+  "url": "https://nebulacomponents.shop/roas-cliff.html",
+  "datePublished": "2026-07-07",
+  "keywords": ["landing page conversion", "ROAS optimization", "message match", "paid traffic", "landing page audit"]
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0a0a;
+  --surface: #111111;
+  --border: #1f1f1f;
+  --text: #e8e8e8;
+  --muted: #888;
+  --accent: #10b981;
+  --accent-dim: rgba(16,185,129,0.12);
+  --red: #ef4444;
+  --red-dim: rgba(239,68,68,0.1);
+  --yellow: #f59e0b;
+}
+body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; }
+.container { max-width: 740px; margin: 0 auto; padding: 60px 24px 120px; }
+h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
+h2 { font-size: 1.25rem; font-weight: 600; margin: 48px 0 16px; color: #fff; }
+h3 { font-size: 1rem; font-weight: 600; margin: 32px 0 10px; color: var(--accent); }
+p { margin-bottom: 20px; color: #ccc; }
+strong { color: var(--text); }
+.meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 48px; }
+.callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); padding: 20px 24px; border-radius: 6px; margin: 32px 0; }
+.callout p { margin: 0; color: var(--text); }
+.score-block { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin: 16px 0; }
+.score-block p { margin-bottom: 10px; }
+.score-block .tier { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); align-items: baseline; }
+.score-block .tier:last-child { border-bottom: none; }
+.score-block .tier .range { color: var(--muted); font-size: 0.8rem; white-space: nowrap; min-width: 70px; }
+.score-block .tier .desc { color: #ccc; font-size: 0.9rem; }
+.math-block { background: var(--red-dim); border: 1px solid rgba(239,68,68,0.2); border-radius: 8px; padding: 24px; margin: 32px 0; }
+.math-block p { margin-bottom: 10px; }
+.math-block .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(239,68,68,0.1); }
+.math-block .row:last-child { border-bottom: none; font-weight: 600; color: var(--text); }
+.cta-block { background: var(--accent-dim); border: 1px solid rgba(16,185,129,0.2); border-radius: 10px; padding: 32px; margin: 48px 0; text-align: center; }
+.cta-block h3 { color: var(--accent); margin-bottom: 8px; font-size: 1.1rem; }
+.cta-block p { color: #aaa; margin-bottom: 24px; font-size: 0.95rem; }
+.btn-primary { display: inline-block; background: var(--accent); color: #000; font-weight: 700; padding: 14px 32px; border-radius: 6px; text-decoration: none; font-size: 1rem; transition: opacity 0.15s; }
+.btn-primary:hover { opacity: 0.88; }
+.btn-secondary { display: inline-block; border: 1px solid var(--border); color: var(--text); font-weight: 500; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-size: 0.95rem; margin-top: 12px; transition: border-color 0.15s; }
+.btn-secondary:hover { border-color: var(--accent); }
+hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+ul { margin: 0 0 20px 20px; color: #ccc; }
+ul li { margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<p class="meta">Nebula Components · Self-diagnostic guide · 15 min read</p>
+<h1>The ROAS Cliff: Why your CTR looks fine and your page converts nobody</h1>
+<p style="color:var(--muted); margin-bottom:48px;">A self-diagnostic guide for founders running paid traffic with zero or weak conversions.</p>
+
+<h2>The screenshot that started it</h2>
+<p>Monday morning. You open your ad account. CTR is 4.1%. Spend is up from last week. You check Shopify, or your CRM, or whatever you use to count sales. The number is wrong. Not a rounding error — it's just not there.</p>
+<p>You go back to the ad manager. The click volume is real. The impressions are fine. You screenshot it and post somewhere — Reddit, a Slack group, a DM to someone you trust — and you write: "Is Meta getting worse or is it me?"</p>
+<p>That question is wrong. Not in a judgmental way. Just technically wrong. Meta is moving your traffic. Your landing page is failing the conversation.</p>
+<p>The distinction matters because they have different fixes. If the problem were the ad, you'd fix it by changing the ad: new creative, different targeting, adjusted bidding. Founders spend weeks doing exactly that. They get a better CTR. They get a lower CPM. Conversions stay flat. Then they blame the algorithm again, which is where the loop restarts.</p>
+<p>The traffic is not the problem. It is very rarely the problem. When you're seeing 3–5% CTR and spending enough to get 200+ clicks per day with minimal conversions, the ad has done its job. Something between the click and the checkout is failing. Almost always that's the landing page.</p>
+<p>More specifically: a specific part of the landing page. Not "the design." Not "the CTA." A gap between what the ad promised and what the page delivered in the first 3 seconds.</p>
+
+<div class="callout">
+  <p>This guide gives you the framework to find that gap yourself, measure what it's costing you, and know which fix to make first.</p>
+</div>
+
+<hr>
+
+<h2>Message match — the gap nobody talks about</h2>
+<p>You have probably changed your headline at least twice. Maybe four times. You've read about benefit-led copy vs. problem-led copy. You've looked at competitors. You've asked the designer.</p>
+<p>The conversion rate barely moved.</p>
+<p>Here's why: headline quality is not the bottleneck. Headline continuity is.</p>
+<p>Your ad started a conversation. It made a specific claim, created a specific expectation, and pointed someone at your page because of that expectation. When the visitor lands, they have a 3-second window where their brain is asking one question: "Is this what I was promised?"</p>
+<p>If the answer is no — even partially — they leave. Not because your page is bad. Because the contract was broken.</p>
+<p>Message match is the most common conversion killer in paid traffic landing pages. Not because founders don't know about it. Because it's easy to think you've solved it when you haven't.</p>
+<p>Example: an ad hook that says "stop overpaying for [product category]" lands on a page that opens with "Welcome to [Company] — trusted by 200 teams." The visitor came to understand why they were overpaying. The page starts with a trust signal. That's not a subtle mismatch. It's a full stop on the conversation.</p>
+<p>Now multiply that by every visitor who clicked. At 200 clicks per day, a bounce rate driven by message mismatch is the most expensive problem a paid traffic campaign can have — and it never shows up in your ad reporting.</p>
+
+<h3>Three layers of message match</h3>
+<p><strong>Headline-to-headline.</strong> Does the first thing they read on your page directly continue the claim in the ad? Not echo it. Continue it. If the ad says "finally, a scheduling tool that doesn't require a 2-hour setup," the page headline should not say "The scheduling tool for growing teams." It should say something like "Setup in 11 minutes. Your entire calendar migrated, no IT required." Specific. Continuous. Same conversation.</p>
+<p><strong>Emotional state match.</strong> What state is the visitor in when they click? An ad targeting frustrated founders who've burned money on failed campaigns is reaching someone who is skeptical, impatient, and loss-averse. A page that opens with optimistic benefit language — "Build the business you've always dreamed of" — is talking to a different emotional state. The visitor feels like they wandered into the wrong room.</p>
+<p><strong>Specificity match.</strong> If the ad named a specific problem, the page needs to name the same specific problem. Vague pages kill specific ads.</p>
+<p>Most landing pages fail on at least two of these. The founder fixes the headline, solves layer 1, and wonders why it didn't move the number. Layers 2 and 3 are still broken.</p>
+
+<hr>
+
+<h2>The 5-dimension self-audit</h2>
+<p>This is the same scoring system used on every audit. Score yourself 1–10 on each dimension. Being generous to your own page is how you stay stuck.</p>
+
+<div class="score-block">
+  <h3 style="margin-top:0">Dimension 1: Message match</h3>
+  <p>If a stranger read only your ad copy and only your above-fold landing page copy in sequence — does the page feel like the next sentence of the same conversation?</p>
+  <div class="tier"><span class="range">1–3</span><span class="desc">The ad and page are clearly talking about different things.</span></div>
+  <div class="tier"><span class="range">4–6</span><span class="desc">There's thematic overlap but the visitor has to do mental work to connect them.</span></div>
+  <div class="tier"><span class="range">7–9</span><span class="desc">The page directly continues the claim or promise from the ad.</span></div>
+  <div class="tier"><span class="range">10</span><span class="desc">Laser-precise. The page headline is essentially the ad headline with more specificity.</span></div>
+</div>
+
+<p style="color:var(--muted); font-size:0.9rem; margin-top:-8px;">Most pages score a 4–5 here. That's why their CTR looks fine and their conversions don't.</p>
+
+<div class="score-block">
+  <h3 style="margin-top:0">Dimension 2: Above-fold clarity</h3>
+  <p>Does a stranger know, within 3 seconds, exactly what you're selling and who it's for?</p>
+  <div class="tier"><span class="range">1–3</span><span class="desc">Company name, logo, vague tagline. No offer visible.</span></div>
+  <div class="tier"><span class="range">4–6</span><span class="desc">Product category is clear but the specific outcome or customer isn't.</span></div>
+  <div class="tier"><span class="range">7–9</span><span class="desc">Clear offer, clear audience, clear outcome in the first viewport.</span></div>
+  <div class="tier"><span class="range">10</span><span class="desc">Sub-2-second comprehension. Visitor understands the value without scrolling.</span></div>
+</div>
+
+<div class="score-block">
+  <h3 style="margin-top:0">Dimension 3: CTA specificity</h3>
+  <p>Is the call-to-action specific enough to reduce decision friction?</p>
+  <div class="tier"><span class="range">1–3</span><span class="desc">"Get started." "Learn more." "Contact us."</span></div>
+  <div class="tier"><span class="range">4–6</span><span class="desc">"Start your free trial." Better but still abstract.</span></div>
+  <div class="tier"><span class="range">7–9</span><span class="desc">"Get my free landing page audit → 60-second result" — action-oriented, outcome-specific, time-bounded.</span></div>
+  <div class="tier"><span class="range">10</span><span class="desc">The CTA makes the next step feel trivially easy and the outcome completely clear.</span></div>
+</div>
+
+<div class="score-block">
+  <h3 style="margin-top:0">Dimension 4: Trust signal placement</h3>
+  <p>Is the most credible proof on your page visible before the first CTA?</p>
+  <div class="tier"><span class="range">1–3</span><span class="desc">Testimonials buried in section 4 or 5. Nothing above the fold.</span></div>
+  <div class="tier"><span class="range">4–6</span><span class="desc">A generic metric above the fold ("trusted by 200 teams") but not tied to the specific outcome you're promising.</span></div>
+  <div class="tier"><span class="range">7–9</span><span class="desc">A specific, identity-matched proof point near the top — same vertical, same problem, measurable result.</span></div>
+  <div class="tier"><span class="range">10</span><span class="desc">The proof directly addresses the silent objection the visitor has before they've consciously thought it.</span></div>
+</div>
+
+<div class="score-block">
+  <h3 style="margin-top:0">Dimension 5: Offer clarity</h3>
+  <p>Does the visitor know exactly what they're buying, what they get, and what it costs?</p>
+  <div class="tier"><span class="range">1–3</span><span class="desc">Pricing requires clicking through to another page or booking a call.</span></div>
+  <div class="tier"><span class="range">4–6</span><span class="desc">Pricing is visible but the specific deliverables aren't clear.</span></div>
+  <div class="tier"><span class="range">7–9</span><span class="desc">Price, deliverables, and timeline are all explicit on the page, above the fold or one scroll down.</span></div>
+  <div class="tier"><span class="range">10</span><span class="desc">A stranger could explain the offer to someone else in 10 seconds without re-reading.</span></div>
+</div>
+
+<h3>Scoring</h3>
+<div class="score-block">
+  <div class="tier"><span class="range">35–50</span><span class="desc">Solid foundation. You're likely leaking in one or two specific spots. The fixes are targeted.</span></div>
+  <div class="tier"><span class="range">20–34</span><span class="desc">Multiple conversion blockers. This is where most pages scoring 0.5–1.5% conversion rates live.</span></div>
+  <div class="tier"><span class="range">Under 20</span><span class="desc">The page is working against the ad. Spending more money on traffic makes the problem proportionally worse.</span></div>
+</div>
+
+<hr>
+
+<h2>The leak math</h2>
+<p>A 1.5% conversion rate and a 0.4% conversion rate do not feel different. They're both "low." In dollar terms they're not close.</p>
+<p>At $5,000/month in ad spend and a $97 average order value, assuming 2,000 clicks:</p>
+
+<div class="math-block">
+  <div class="row"><span>0.4% conversion rate</span><span>8 sales — $776 revenue — $4,224 net loss</span></div>
+  <div class="row"><span>1.5% conversion rate</span><span>30 sales — $2,910 revenue — $2,090 net loss</span></div>
+  <div class="row"><span>Monthly difference</span><span>$2,134 from the same ad spend</span></div>
+</div>
+
+<p>Now look at your own numbers. Take your monthly ad spend, divide by average CPC to get your click volume. Multiply click volume by your current conversion rate. Now multiply that same click volume by 1.5% and see what the number becomes.</p>
+<p>The gap between those two numbers is your monthly leak estimate. At most ad spends in the $3k–$15k/month range, this gap is between $800 and $4,000/month. Some are higher.</p>
+<p>The reason the $147 fix exists is that the math makes it obvious. A founder losing $1,400/month to a hook-to-LP gap does not need a business case for spending $147 to fix it. They need to see the number first. Once they see it, the decision is already made.</p>
+
+<hr>
+
+<h2>The 3 fixes that actually move the needle</h2>
+<p>After scoring 40+ landing pages, the same 3 issues account for the majority of conversion gaps. Not 40 issues. Not a 17-point framework. Three.</p>
+
+<h3>Fix 1: Rewrite the above-fold so the first sentence continues the ad</h3>
+<p>Take the primary claim from your highest-traffic ad. Make the H1 on your landing page the next sentence of that claim. Not a rephrasing — a continuation. If the ad says "your landing page is leaking money," the page H1 should not say "Landing page optimization for growing businesses." It should say something like "Here's exactly where yours is leaking — and what it costs."</p>
+<p>This is one rewrite. One hour of your own time. It moves message match from a 4 to an 8. This single fix is responsible for most of the 0.4% to 1.5% jumps.</p>
+
+<h3>Fix 2: Move your best proof to the first viewport</h3>
+<p>You almost certainly have evidence that your offer works — a customer result, a specific metric, a before/after. It's probably in a testimonials section halfway down the page.</p>
+<p>Move it up. The silent objection in your visitor's head — "I've been burned before, this probably won't work for me either" — activates within the first scroll. If your proof doesn't appear before the first CTA, you're asking for trust before you've earned it.</p>
+<p>The proof format matters too. "Trusted by 200 teams" is a count. "E-commerce founder, $8k/month Meta spend, fixed message match gap, CTR-to-conversion went from 0.4% to 1.9% in 10 days" is identity-matched evidence. Same vertical, same budget, same problem, measurable result.</p>
+
+<h3>Fix 3: Make the CTA specific about the next 60 seconds</h3>
+<p>"Get started" creates a decision point. "Get my free landing page audit → 60-second result" creates a next step. The visitor isn't deciding whether to buy something. They're deciding whether to spend 60 seconds to see their score.</p>
+<p>Specificity reduces anxiety. "60-second result" removes the fear of starting something that takes time. The CTA should describe the next 90 seconds of the visitor's experience, not the long-term outcome of using your product.</p>
+
+<hr>
+
+<h2>What to do with your score</h2>
+<p>If you scored under 30 and you're running paid traffic, you're funding a leak. The math above shows what that number is.</p>
+<p>The three fixes above apply to most pages. One of them is almost certainly your highest-leverage move. Your lowest-scoring dimension is the answer.</p>
+
+<div class="cta-block">
+  <h3>Run the free audit on your specific page</h3>
+  <p>Scored across all 5 dimensions. Monthly leak calculated. Specific fix written out. 60 seconds. No call required.</p>
+  <a href="https://nebulacomponents.shop/audit.html" class="btn-primary">Run my free audit →</a>
+  <br>
+  <a href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b" class="btn-secondary">Skip ahead — $147 Fix Pack</a>
+  <p style="margin-top:16px; font-size:0.8rem; color:var(--muted);">No discovery call. No testing phase. Full refund if we don't find a problem worth fixing.</p>
+</div>
+
+</div>
+  <!-- Cookie Consent Banner (GDPR/CCPA Compliant) -->
+  <script src="/cookie-consent.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) — loaded after consent -->
+<script>
+  // Disable GA until consent is granted
+  window['ga-disable-G-KJ9S3450LH'] = true;
+  window.GA_MEASUREMENT_ID = 'G-KJ9S3450LH';
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KJ9S3450LH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KJ9S3450LH', { 'anonymize_ip': true, 'storage': 'none' });
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unsubscribe — Nebula Components</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0a0a0f;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      font-size: 17px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: #12121c;
+      border: 1px solid #1e1e2e;
+      border-radius: 16px;
+      padding: 48px 40px;
+      max-width: 520px;
+      width: 90%;
+      text-align: center;
+    }
+    .icon { font-size: 3rem; margin-bottom: 16px; }
+    h1 { font-size: 1.6rem; font-weight: 700; color: #f8fafc; margin-bottom: 12px; }
+    p { color: #94a3b8; margin-bottom: 24px; }
+    .btn {
+      display: inline-block;
+      background: #4f46e5;
+      color: #fff;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: 10px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #5254cc; }
+    .btn:disabled { opacity: 0.5; cursor: default; }
+    .status { margin-top: 16px; font-weight: 600; display: none; }
+    .status.done { display: block; color: #22c55e; }
+    .status.error { display: block; color: #ef4444; }
+    .micro { color: #94a3b8; font-size: 13px; margin-top: 24px; }
+    .micro a { color: #818cf8; text-decoration: none; }
+    .micro a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="card" id="card">
+    <div class="icon">&#x2709;&#xFE0F;</div>
+    <h1>Unsubscribe from Nebula Components</h1>
+    <p id="description">Click the button below to unsubscribe from future email communications. You'll still have access to any past purchases and resources.</p>
+    <button class="btn" id="unsub-btn" onclick="handleUnsub()">Unsubscribe</button>
+    <div id="status" class="status"></div>
+    <p class="micro" id="fine-print">
+      Changed your mind? <a href="/">Run a free audit</a> at any time.<br>
+      If you believe this was sent in error, <a href="mailto:ops@launchcrate.io">contact us</a>.
+    </p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get('email') || '';
+
+    // If email is in the URL, auto-process and show result
+    if (email && email.includes('@')) {
+      document.getElementById('description').textContent = 'Processing your unsubscribe request for ' + email + '...';
+      document.getElementById('unsub-btn').style.display = 'none';
+      document.getElementById('status').className = 'status';
+      document.getElementById('status').textContent = 'Processing...';
+
+      fetch('/api/unsubscribe', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email: email})
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.status === 'unsubscribed') {
+          document.querySelector('.icon').textContent = '\u2705';
+          document.getElementById('description').textContent = 'You have been successfully unsubscribed from Nebula Components email communications.';
+          document.getElementById('status').className = 'status done';
+          document.getElementById('status').textContent = 'Unsubscribed: ' + email;
+          document.getElementById('fine-print').innerHTML = 'If this was a mistake, you can <a href="/">run another free audit</a> at any time \u2014 we\u2019ll only send what you request.';
+        } else {
+          throw new Error('Unexpected response');
+        }
+      })
+      .catch(err => {
+        document.querySelector('.icon').textContent = '\u274C';
+        document.getElementById('description').textContent = 'There was an error processing your request. Please try again or email us directly.';
+        document.getElementById('status').className = 'status error';
+        document.getElementById('status').textContent = 'Error: ' + err.message;
+        document.getElementById('unsub-btn').style.display = 'inline-block';
+        document.getElementById('unsub-btn').textContent = 'Try Again';
+        document.getElementById('fine-print').innerHTML = 'Email us at <a href="mailto:ops@launchcrate.io">ops@launchcrate.io</a> to unsubscribe.';
+      });
+    } else {
+      // No email in URL - show manual form
+      document.getElementById('description').textContent = 'Enter the email address you want to unsubscribe.';
+      document.getElementById('unsub-btn').textContent = 'Submit';
+    }
+
+    function handleUnsub() {
+      const emailInput = prompt('Enter your email address:');
+      if (!emailInput || !emailInput.includes('@')) return;
+      document.getElementById('unsub-btn').disabled = true;
+      document.getElementById('unsub-btn').textContent = 'Processing...';
+
+      fetch('/api/unsubscribe', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email: emailInput.trim()})
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.status === 'unsubscribed') {
+          document.querySelector('.icon').textContent = '\u2705';
+          document.getElementById('description').textContent = 'You have been successfully unsubscribed.';
+          document.getElementById('status').className = 'status done';
+          document.getElementById('status').textContent = 'Unsubscribed: ' + emailInput.trim();
+          document.getElementById('unsub-btn').style.display = 'none';
+        } else {
+          throw new Error('Unexpected response');
+        }
+      })
+      .catch(err => {
+        document.getElementById('status').className = 'status error';
+        document.getElementById('status').textContent = 'Error: ' + err.message;
+        document.getElementById('unsub-btn').disabled = false;
+        document.getElementById('unsub-btn').textContent = 'Try Again';
+      });
+    }
+  </script>
+  <!-- Cookie Consent Banner (GDPR/CCPA Compliant) -->
+  <script src="/cookie-consent.js" defer></script>
+</body>
+</html>

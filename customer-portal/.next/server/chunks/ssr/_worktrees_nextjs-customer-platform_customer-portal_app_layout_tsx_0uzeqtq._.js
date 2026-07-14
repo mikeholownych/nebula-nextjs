@@ -1,0 +1,3 @@
+module.exports=[20152,a=>{"use strict";var b=a.i(97107);a.s(["default",0,function({children:a}){return(0,b.jsx)("html",{lang:"en",children:(0,b.jsx)("body",{children:a})})},"metadata",0,{title:"Nebula Customer Portal",description:"Manage your Nebula subscription"}])},75776,a=>{a.n(a.i(20152))}];
+
+//# sourceMappingURL=_worktrees_nextjs-customer-platform_customer-portal_app_layout_tsx_0uzeqtq._.js.map

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) — loaded after consent -->
+<script>
+  // Disable GA until consent is granted
+  window['ga-disable-G-KJ9S3450LH'] = true;
+  window.GA_MEASUREMENT_ID = 'G-KJ9S3450LH';
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KJ9S3450LH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KJ9S3450LH', { 'anonymize_ip': true, 'storage': 'none' });
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Landing Page Teardown — Nebula Components</title>
+  <meta name="description" content="You paid for the click. Now watch it bounce. Free audit shows priority-ranked fixes with specific code changes. 60 seconds. No sales call. You own the data forever.">
+  <link rel="canonical" href="https://nebulacomponents.shop/audit" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;510;590;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    /* Audit-lander specific styles extend the shared design system */
+
+    /* ══════════════════════════════════════════════════════════
+       PREMIUM DESIGN SYSTEM INHERIT
+    ══════════════════════════════════════════════════════════ */
+
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-canvas);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    .center { max-width:640px; margin:0 auto; padding:32px 18px 64px; }
+    .hero { background: var(--bg-panel); color:var(--text-primary); text-align:center; padding:48px 20px 36px; }
+    .hero h1 { font-size:clamp(26px,4vw,40px); line-height:1.05; letter-spacing:-0.02em; margin-bottom:10px; }
+    .hero h1 em { color:var(--accent-light); font-style:normal; }
+    .hero .sub { font-size:16px; color:var(--text-muted); max-width:520px; margin:0 auto; }
+    .hero .stat { margin:12px auto 0; font-size:14px; color:var(--accent-light); font-weight:600; }
+    .hero .stat span { color:var(--text-muted); font-weight:400; }
+    .trust-row { display:flex; gap:8px 14px; flex-wrap:wrap; justify-content:center; margin:16px 0 0; }
+    .pill { background:rgba(255,255,255,0.06); color:var(--text-secondary); border:1px solid rgba(255,255,255,0.1); padding:5px 10px; border-radius:999px; font-size:12px; }
+    .pill.highlight { background:rgba(16,185,129,0.12); color:var(--accent-light); border-color:var(--accent); }
+    .card { background:var(--bg-panel); border:1px solid rgba(255,255,255,0.06); border-radius:14px; padding:28px 24px; margin:20px 0; box-shadow:0 10px 30px rgba(0,0,0,0.3); }
+    .card h2 { font-size:18px; margin-bottom:10px; color: var(--text-primary); }
+    .card h2 .badge { display:inline-block; font-size:11px; font-weight:600; padding:2px 8px; border-radius:999px; margin-left:8px; vertical-align:middle; }
+    .badge.green { background:#d1fae5; color:#065f46; }
+    .badge.blue { background:#dbeafe; color:#1e40af; }
+    .badge.amber { background:#fef3c7; color:#92400e; }
+    label { display:block; font-weight:600; margin:14px 0 6px; font-size:15px; color: var(--text-primary); }
+    input, select { width:100%; padding:13px 14px; background: var(--bg-surface); border:1px solid rgba(255,255,255,0.1); border-radius:10px; font-size:16px; color: var(--text-primary); }
+    input:focus, select:focus { outline:2px solid var(--accent); outline-offset:-1px; border-color:transparent; }
+    button { display:inline-block; width:100%; padding:14px 22px; background:var(--accent); color:#000; border:0; border-radius:10px; font-weight:700; font-size:16px; cursor:pointer; transition:background 0.15s, transform 0.2s, box-shadow 0.2s; margin-top:14px; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3); }
+    button:hover { background:var(--accent-hover); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4); }
+    .guarantee-badge { display:flex; align-items:center; gap:6px; justify-content:center; margin-top:10px; color:var(--accent); font-size:13px; font-weight:500; }
+    .micro { color:var(--text-muted); font-size:13px; line-height:1.5; }
+    .how { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:10px; margin:20px 0; }
+    .how-step { text-align:center; padding:14px 8px; background:var(--bg-surface); border-radius:10px; }
+    .how-step .num { font-size:28px; font-weight:800; color:var(--accent); display:block; }
+    .how-step p { font-size:13px; color:var(--text-secondary); margin-top:4px; }
+    .testimonial { background:var(--bg-surface); border-radius:10px; padding:16px; margin:16px 0; text-align:center; }
+    .testimonial .quote { font-style:italic; color:var(--text-secondary); font-size:14px; }
+    .testimonial .name { font-weight:700; margin-top:6px; color:var(--text-primary); font-size:13px; }
+    .scope-list { list-style:none; padding:0; margin:0; }
+    .scope-list li { padding:10px 12px; border-left:3px solid var(--accent); margin-bottom:6px; background:var(--bg-surface); border-radius:0 8px 8px 0; font-size:14px; color: var(--text-primary); }
+    .scope-list li strong { color:var(--text-primary); }
+    .sample-link { display:block; background:rgba(16,185,129,0.1); border:1px solid var(--accent); border-radius:10px; padding:16px; text-align:center; margin:16px 0; text-decoration:none; color:var(--accent-light); font-weight:600; font-size:15px; transition:background 0.15s; }
+    .sample-link:hover { background:rgba(16,185,129,0.15); }
+    .privacy-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .privacy-col { padding:12px; border-radius:8px; font-size:13px; }
+    .privacy-col.yes { background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); }
+    .privacy-col.no { background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); }
+    .privacy-col h3 { font-size:14px; margin-bottom:6px; }
+    .privacy-col.yes h3 { color:var(--accent-light); }
+    .privacy-col.no h3 { color:#ef4444; }
+    .privacy-col ul { list-style:none; padding:0; margin:0; }
+    .privacy-col li { padding:3px 0; color:var(--text-secondary); }
+    .privacy-col li:before { margin-right:6px; }
+    .privacy-col.yes li:before { content:"✓"; color:var(--accent); }
+    .privacy-col.no li:before { content:"✗"; color:#ef4444; }
+    .offer-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:16px 0; }
+    .offer-card { background:var(--bg-surface); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:16px; text-align:center; }
+    .offer-card .price { font-size:28px; font-weight:800; color:var(--text-primary); }
+    .offer-card .price small { font-size:16px; font-weight:400; color:var(--text-muted); }
+    .offer-card .label { font-size:13px; color:var(--text-secondary); margin-top:4px; }
+    .offer-card .guarantee { font-size:11px; color:var(--accent); margin-top:6px; font-weight:600; }
+    @media (max-width:480px) { .how { grid-template-columns:1fr 1fr; } .privacy-grid, .offer-grid { grid-template-columns:1fr; } .hero { padding:32px 16px 24px; } .card { padding:20px 16px; } }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Ads send traffic. <em>Your landing page</em> kills it.</h1>
+  <p class="sub">You paid for the click. Now watch it bounce. Paste your URL — in 60 seconds you get a priority-ranked fix list with specific code changes for each leak.</p>
+  <div class="stat">97% of ad clicks don't convert. <span>Most founders buy more traffic. Smart ones fix the page first.</span></div>
+  <div class="trust-row">
+    <span class="pill">No sales call</span>
+    <span class="pill">Priority-ranked fixes</span>
+    <span class="pill">Private link in 60s</span>
+    <span class="pill">See a real audit ↓</span>
+    <span class="pill highlight">You own the data forever</span>
+  </div>
+</div>
+
+<div class="center">
+
+  <!-- SEE A REAL AUDIT FIRST (research: bait-and-switch fear → show before CTA) -->
+  <a href="/audit.html" class="sample-link">📋 See a real audit report before you submit →</a>
+
+  <!-- AUDIT SYLLABUS (research: upfront scope transparency builds trust) -->
+  <div class="card">
+    <h2>What's included in your free audit <span class="badge green">full scope</span></h2>
+    <p class="micro" style="margin-bottom:12px;">No guesswork. Every audit scores these 5 dimensions and delivers a prioritized fix list tailored to your page:</p>
+    <ul class="scope-list">
+      <li><strong>1. Headline Clarity</strong> — Does your headline name the visitor's problem or just describe your product? We score specificity, emotional resonance, and promise clarity.</li>
+      <li><strong>2. CTA Friction</strong> — Is your call-to-action buried, vague, or competing with too many options? We measure actionability and visual prominence.</li>
+      <li><strong>3. Trust Proof</strong> — Testimonials, case studies, logos, guarantees. We check if proof exists where the visitor needs it (before the decision, not after).</li>
+      <li><strong>4. Offer Specificity</strong> — Does your page say exactly what happens when they click? Vague offers kill conversions. We flag generic language.</li>
+      <li><strong>5. Implementation Difficulty</strong> — Can the fixes be done in 24h or do they need a redesign? We prioritize quick wins first.</li>
+    </ul>
+    <p class="micro" style="margin-top:8px;">Plus: page speed score, mobile responsiveness check, ad-to-page alignment audit, and a prioritized opportunity matrix ranked by impact vs. effort.</p>
+  </div>
+
+  <!-- AUDIT FORM -->
+  <div class="card" id="audit-form-card">
+    <h2 style="font-size:20px;margin-bottom:6px;">See exactly what is leaking</h2>
+    <p class="micro" style="margin-bottom:10px;">The audit checks 5 dimensions and delivers a priority-ranked fix list to your inbox. Each fix comes with specific code + effort estimate. No login. No sales call. No follow-up spam.</p>
+    <form id="audit-form">
+      <label for="url">Your landing page URL</label>
+      <input id="url" name="url" type="url" placeholder="https://your-landing-page.com" required>
+      <label for="email">Email for delivery</label>
+      <input id="email" name="email" type="email" placeholder="you@example.com" required>
+      <label for="goal">Primary conversion goal</label>
+      <select id="goal" name="goal">
+        <option value="sales">Sales</option>
+        <option value="leads">Leads</option>
+        <option value="signups">Signups</option>
+        <option value="bookings">Bookings</option>
+      </select>
+      <label for="adSpend">Monthly ad spend (helps us prioritize fixes)</label>
+      <select id="adSpend" name="adSpend">
+        <option value="">Select if applicable</option>
+        <option value="0-500">$0 - $500/mo</option>
+        <option value="500-2k">$500 - $2k/mo</option>
+        <option value="2k-10k">$2k - $10k/mo</option>
+        <option value="10k+">$10k+/mo</option>
+      </select>
+      <p class="micro" style="margin-top:8px;">Your URL and email are used to generate, email, and log the audit. No resale. No spam. <a href="/privacy-policy" style="color:var(--accent);">Privacy Policy</a></p>
+      <button type="submit">Run my free teardown →</button>
+      <div class="guarantee-badge">🏷️ Full refund if the $147 fix doesn't improve your conversion rate</div>
+    </form>
+    <div id="audit-result" style="display:none;"></div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="how">
+    <div class="how-step">
+      <span class="num">01</span>
+      <p>Paste your URL. No login, no extension, no account.</p>
+    </div>
+    <div class="how-step">
+      <span class="num">02</span>
+      <p>AI scores 5 dimensions against a fixed conversion rubric.</p>
+    </div>
+    <div class="how-step">
+      <span class="num">03</span>
+      <p>Private fix list + opportunity matrix lands in your inbox. 60 seconds total.</p>
+    </div>
+    <div class="how-step">
+      <span class="num">04</span>
+      <p>Optional: $147 ships the top fixes in 24h. Full refund if CVR doesn't improve.</p>
+    </div>
+  </div>
+
+  <!-- TESTIMONIAL -->
+  <div class="testimonial">
+    <div class="quote">"The audit nailed exactly why my Google Ads weren't converting. Fixed the headline in 20 minutes. First conversion by end of week."</div>
+    <div class="name">— Danny R., Founder, Repair &amp; Square</div>
+  </div>
+
+  <!-- $147 FIX OFFER WITH GUARANTEES (research: rollback + outcome guarantee needed) -->
+  <div class="card">
+    <h2>$147 fix pack — zero risk, full refund <span class="badge green">guaranteed</span></h2>
+    <p style="font-size:14px;margin-bottom:12px;">After your free audit, you can buy the fix implementation. Here's exactly what that includes — and how we protect you:</p>
+    <div class="offer-grid">
+      <div class="offer-card">
+        <div class="price">$147 <small>one-time</small></div>
+        <div class="label">24-hour implementation</div>
+        <div class="guarantee">📋 We duplicate your page — zero risk to live campaigns</div>
+      </div>
+      <div class="offer-card">
+        <div class="price">$0 <small>if it doesn't work</small></div>
+        <div class="label">Full refund guarantee</div>
+        <div class="guarantee">📈 Full refund if your conversion rate doesn't improve within 14 days</div>
+      </div>
+    </div>
+    <p class="micro" style="text-align:center;">No call required. No retainer. No commitment beyond the fix. <a href="/primer.html" style="color:#60a5fa;">Full FAQ →</a></p>
+  </div>
+
+  <!-- DATA PRIVACY (research: #1 blocker — explicit "what we access / what we don't") -->
+  <div class="card" id="data-privacy">
+    <h2>Data privacy — exactly what we access <span class="badge blue">transparent</span></h2>
+    <p class="micro" style="margin-bottom:12px;">This is the #1 question founders ask. Here's the honest answer — no fine print:</p>
+    <div class="privacy-grid">
+      <div class="privacy-col yes">
+        <h3>✓ What we access</h3>
+        <ul>
+          <li>Your landing page URL (public content only — same as visiting it in a browser)</li>
+          <li>Page HTML, meta tags, and inline content (what any visitor sees)</li>
+          <li>Your email address (for delivery — stored securely, never shared)</li>
+          <li>Conversion goal you select (to tailor the fix priority)</li>
+        </ul>
+      </div>
+      <div class="privacy-col no">
+        <h3>✗ What we NEVER access</h3>
+        <ul>
+          <li>Your analytics dashboard or login credentials</li>
+          <li>Customer data, PII, or payment info</li>
+          <li>Your ad accounts (Google, Meta, LinkedIn)</li>
+          <li>Your CMS, backend, or server access</li>
+          <li>Cookies, sessions, or tracking data</li>
+        </ul>
+      </div>
+    </div>
+    <p class="micro" style="margin-top:8px;">The audit is a public-page analysis — the same data any visitor sees, scored against a conversion rubric. If you later buy the $147 fix and choose to share access for implementation, we sign a data processing agreement and provide a documented rollback plan before any work begins.</p>
+  </div>
+
+  <!-- STATS -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;margin:16px 0;">
+    <div style="background:white;border:1px solid #e5e7eb;border-radius:10px;padding:14px;">
+      <div style="font-size:28px;font-weight:800;color:#047857;">60s</div>
+      <div class="micro" style="color:#4b5563;">audit delivery time</div>
+    </div>
+    <div style="background:white;border:1px solid #e5e7eb;border-radius:10px;padding:14px;">
+      <div style="font-size:28px;font-weight:800;color:#047857;">5</div>
+      <div class="micro" style="color:#4b5563;">dimensions scored</div>
+    </div>
+    <div style="background:white;border:1px solid #e5e7eb;border-radius:10px;padding:14px;">
+      <div style="font-size:28px;font-weight:800;color:#047857;">$0</div>
+      <div class="micro" style="color:#4b5563;">no hidden upsell</div>
+    </div>
+  </div>
+
+  <!-- WHO THIS ISN'T FOR (CDE-style filtering -->
+  <div class="card" style="border-left:4px solid #f59e0b;">
+    <h2>Who this isn't for <span class="badge amber">save us both the time</span></h2>
+    <p class="micro" style="margin-bottom:12px;">This audit is built for founders actively losing money on ads. If any of these apply, you'd be better served elsewhere:</p>
+    <ul class="scope-list" style="border-left-color:#f59e0b;">
+      <li><strong>No ad spend yet</strong> — If you haven't run paid traffic, there's nothing to fix. Go run ads first, then come back.</li>
+      <li><strong>No live landing page</strong> — The audit needs a public URL. If your page isn't live, we can't score it.</li>
+      <li><strong>Want brand strategy</strong> — This is a conversion fix, not a rebrand. If you need visual identity work, hire a brand agency.</li>
+      <li><strong>No budget to implement</strong> — The audit is free. The fix is $147. If you can't spend $147 within 30 days, the data just gets stale.</li>
+    </ul>
+    <p class="micro" style="margin-top:8px;color:#f59e0b;"><strong>Still here?</strong> You're in the right place. Paste your URL above.</p>
+  </div>
+
+  <!-- YOUR AUDIT IS YOURS FOREVER -->
+  <div class="card" style="background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(16,185,129,0.02));">
+    <h2>Your audit is yours forever <span class="badge green">you own it</span></h2>
+    <p class="micro" style="margin-bottom:12px;">Most audit tools lock you into a subscription or hide the data. Not here:</p>
+    <ul class="scope-list">
+      <li><strong>Download the full report</strong> — JSON + HTML. Yours to keep, share, or archive.</li>
+      <li><strong>Share with your team</strong> — Private link. No login required. Forward it to your dev, your designer, your agency.</li>
+      <li><strong>Re-run anytime</strong> — The $1,497 retainer includes weekly re-scans. Track improvements over time.</li>
+      <li><strong>No vendor lock-in</strong> — If you cancel, you keep every audit you ever received. We can't revoke access.</li>
+    </ul>
+    <p class="micro" style="margin-top:8px;">Your data. Your fixes. Your conversion rate.</p>
+  </div>
+
+  <!-- HYBRID TRIGGER: AI SEARCH -->
+  <div class="card" style="background:var(--bg-surface);border:1px solid rgba(99,102,241,0.3);">
+    <h2 style="color:#818cf8;">Google's AI answers are eating your clicks</h2>
+    <p class="micro" style="margin-bottom:12px;">Your SEO playbook was built for blue links. But search changed:</p>
+    <ul class="scope-list" style="border-left-color:#818cf8;">
+      <li><strong>Traffic is up, conversions are flat</strong> — AI Overviews answer questions without sending clicks. Your ranking doesn't matter if nobody visits.</li>
+      <li><strong>Named, you show up. Described, you disappear</strong> — AI assistants mention brands they know. Category questions ("best X for Y") are where money moves — and where most brands are invisible.</li>
+      <li><strong>Your landing page is the new front door</strong> — When AI does send a click, your page has seconds to prove value. We measure those seconds.</li>
+    </ul>
+    <p class="micro" style="margin-top:8px;color:#818cf8;"><strong>Fix the page first.</strong> Then worry about AI visibility. Audit above ↑</p>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <p class="micro" style="text-align:center;margin:8px 0 24px;">Questions? <a href="mailto:ops@launchcrate.io" style="color:#60a5fa;">ops@launchcrate.io</a></p>
+
+</div>
+
+<script>
+const form = document.getElementById('audit-form');
+const result = document.getElementById('audit-result');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const url = document.getElementById('url').value;
+  const email = document.getElementById('email').value;
+  const goal = document.getElementById('goal').value;
+  const btn = form.querySelector('button');
+  btn.disabled = true;
+  btn.textContent = 'Running audit...';
+  result.style.display = 'none';
+  try {
+    const resp = await fetch('/api/audit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url, email, goal })
+    });
+    const data = await resp.json();
+    if (data.error) {
+      result.innerHTML = '<p style="color:#dc2626;">' + escapeHtml(data.error) + '</p><p class="micro">Email ops@launchcrate.io with your URL and we\'ll route it through the audit queue.</p>';
+    } else {
+      result.innerHTML = '<p style="color:#047857;font-weight:700;">✓ Audit running. Check <strong>' + escapeHtml(email) + '</strong> in ~60 seconds.</p><p class="micro">Your prioritized fix list is on its way.</p>';
+      // Redirect to thank-you page after 2 seconds
+      if (data.redirect) {
+        setTimeout(() => { window.location.href = data.redirect; }, 2000);
+      }
+    }
+  } catch (err) {
+    result.innerHTML = '<p style="color:#dc2626;">Network error. Email ops@launchcrate.io with your URL and we\'ll run it manually.</p>';
+  }
+  result.style.display = 'block';
+  btn.disabled = false;
+  btn.textContent = 'Run my free teardown →';
+});
+function escapeHtml(text) {
+  const d = document.createElement('div');
+  d.textContent = text;
+  return d.innerHTML;
+}
+</script>
+
+  <!-- Cookie Consent Banner (GDPR/CCPA Compliant) -->
+  <script src="/cookie-consent.js" defer></script>
+
+  <!-- GSAP + ScrollTrigger for premium animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+  <script src="/gsap-animations.js" defer></script>
+</body>
+</html>
