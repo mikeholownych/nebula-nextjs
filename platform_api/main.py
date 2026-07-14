@@ -32,6 +32,11 @@ setup_middleware(app, max_body_size=settings.MAX_JSON_BODY_BYTES)
 setup_cors(app, settings.ALLOWED_ORIGINS)
 
 
+# Import and include routers
+from platform_api.auth.routes import router as auth_router
+app.include_router(auth_router, prefix="/api")
+
+
 # Exception handlers - order matters
 app.add_exception_handler(APIError, http_exception_handler)
 app.add_exception_handler(RequestValidationError, validation_exception_handler)
@@ -96,6 +101,23 @@ async def readiness_check(request: Request) -> dict:
             if hasattr(request.state, "request_id")
             else None,
         )
+
+
+# Startup and shutdown events
+@app.on_event("startup")
+async def startup_event():
+    """Initialize Redis connection on startup."""
+    from platform_api.redis_client import redis_client
+    await redis_client.connect()
+    print("✅ Redis connected")
+
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Close Redis connection on shutdown."""
+    from platform_api.redis_client import redis_client
+    await redis_client.disconnect()
+    print("✅ Redis disconnected")
 
 
 # Add a test endpoint to verify the service works
