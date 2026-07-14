@@ -1,5 +1,0 @@
-1:"$Sreact.fragment"
-2:I[35380,["/_next/static/chunks/3h-42e6003nw1.js","/_next/static/chunks/1qymn01el0wbp.js"],"ViewportBoundary"]
-3:I[35380,["/_next/static/chunks/3h-42e6003nw1.js","/_next/static/chunks/1qymn01el0wbp.js"],"MetadataBoundary"]
-4:"$Sreact.suspense"
-0:{"rsc":["$","$1","h",{"children":[null,["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Nebula Components"}],["$","meta","1",{"name":"description","content":"AI-powered landing page optimization and conversion services"}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"fTD0_xu1e9U0lVrTWEnu2"}
