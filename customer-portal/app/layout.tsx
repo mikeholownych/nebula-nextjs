@@ -7,6 +7,7 @@ import { organizationSchema, websiteSchema, speakableSchema, auditServiceSchema,
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://nebulacomponents.shop'),
   title: 'Nebula Components',
   description: 'AI-powered landing page optimization and conversion services',
   alternates: {
@@ -17,14 +18,6 @@ export const metadata: Metadata = {
     description: 'Landing-page audit scoring is paused while the evidence-backed engine is rebuilt.',
     url: 'https://nebulacomponents.shop',
     siteName: 'Nebula Components',
-    images: [
-      {
-        url: 'https://nebulacomponents.shop/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Nebula Components — Stop Burning Cash on Broken Landing Pages',
-      },
-    ],
     locale: 'en_US',
     type: 'website',
   },
@@ -32,7 +25,6 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Nebula Components — Free Landing Page Audit',
     description: 'Landing-page audit scoring is paused while the evidence-backed engine is rebuilt.',
-    images: ['https://nebulacomponents.shop/og-image.png'],
     creator: '@nebulacomponents',
   },
 }
