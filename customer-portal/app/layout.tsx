@@ -45,13 +45,32 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-KJ9S3450LH" />
+        {/* GA4 with Consent Mode v2 */}
         <script
           dangerouslySetInnerHTML={{
-            __html:
-              "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-KJ9S3450LH')"
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments)};
+              
+              // Default consent to denied (GDPR/CCPA compliant)
+              gtag('consent', 'default', {
+                'analytics_storage': 'denied',
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'functionality_storage': 'granted',
+                'security_storage': 'granted',
+                'wait_for_update': 500
+              });
+              
+              gtag('js', new Date());
+              gtag('config', 'G-KJ9S3450LH', {
+                'send_page_view': false
+              });
+            `
           }}
         />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-KJ9S3450LH" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

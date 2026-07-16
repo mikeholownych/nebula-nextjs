@@ -33,6 +33,12 @@ export default function EmailGate({ auditId, onUnlock }: EmailGateProps) {
       }
 
       setSubmitted(true)
+      
+      // Track email capture
+      import('../app/lib/analytics').then(({ trackEmailCaptured }) => {
+        trackEmailCaptured('audit_gate', auditId)
+      })
+      
       // Unlock results after brief delay
       setTimeout(() => onUnlock(), 500)
     } catch (err) {

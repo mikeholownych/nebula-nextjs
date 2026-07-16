@@ -1,19 +1,36 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Button, Input } from '@/components/ui'
 import Footer from '@/components/Footer'
+import { useCTATracking } from './hooks/useAnalytics'
+import { trackAuditSubmission, trackAuditCompletion, trackFormError } from './lib/analytics'
 
 export default function Home() {
   const router = useRouter()
   const [url, setUrl] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+  
+  // Initialize analytics (wrapped in Suspense boundary by parent)
+  const trackCTA = useCTATracking()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Validate URL
+    if (!url) {
+      trackFormError('url', 'URL is required')
+      setError('Please enter a URL')
+      return
+    }
+    
+    // Track submission
+    trackAuditSubmission(url)
+    trackCTA('find_money_leak', 'hero_form')
+    
     setIsLoading(true)
     setError('')
 
@@ -27,9 +44,13 @@ export default function Home() {
       const data = await response.json()
 
       if (!response.ok) {
+        trackFormError('audit_form', data.error || 'Audit failed')
         throw new Error(data.error || 'Audit failed')
       }
 
+      // Track completion
+      trackAuditCompletion(url, data.overallScore, data.grade)
+      
       // Navigate to results page with audit ID
       router.push(`/audit/results?id=${data.auditId}`)
     } catch (err) {

@@ -29,7 +29,9 @@ export type GAEventName =
   | "form_submission"
   | "audit_started"
   | "session_start"
-  | "first_visit";
+  | "first_visit"
+  | "engagement_milestone"
+  | "intent_signal";
 
 export interface GAEventParams {
   [key: string]: string | number | boolean | undefined;
@@ -237,4 +239,59 @@ export function initTimeTracking(): () => void {
   const intervalId = setInterval(checkTime, 5000); // Check every 5s
   
   return () => clearInterval(intervalId);
+}
+
+/**
+ * Track email capture (important conversion micro-action)
+ */
+export function trackEmailCaptured(source: string, auditId?: string): void {
+  trackEvent("email_signup", {
+    signup_source: source,
+    audit_id: auditId,
+  });
+}
+
+/**
+ * Track engagement milestone
+ */
+export function trackEngagement(milestone: string): void {
+  trackEvent("engagement_milestone", {
+    milestone_name: milestone,
+  });
+}
+
+/**
+ * Track revenue (for purchase events)
+ */
+export function trackRevenue(productId: string, value: number, currency: string = "USD"): void {
+  trackEvent("purchase_completed", {
+    currency,
+    value,
+    transaction_id: productId,
+    item_id: productId,
+    item_name: productId,
+    price: value,
+    quantity: 1,
+  });
+}
+
+/**
+ * Track abandoned checkout
+ */
+export function trackCheckoutAbandoned(step: string, value: number): void {
+  trackEvent("checkout_abandoned", {
+    checkout_step: step,
+    value: value,
+    currency: "USD",
+  });
+}
+
+/**
+ * Track user intent signals
+ */
+export function trackIntentSignal(signal: "high" | "medium" | "low", indicator: string): void {
+  trackEvent("intent_signal", {
+    intent_level: signal,
+    intent_indicator: indicator,
+  });
 }
