@@ -27,7 +27,7 @@ export default function WhatIsLandingPageAudit() {
                 name: "How long does a landing page audit take?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "An automated tool like Nebula's free audit takes about 30 seconds. You paste your URL, and the system scores all 5 dimensions and generates a prioritized fix list instantly.",
+                  text: "Automated tools can score a page quickly, but Nebula's automated scoring is paused until the rebuilt engine can provide verifiable evidence and prioritized fixes.",
                 },
               },
               {
@@ -61,7 +61,7 @@ export default function WhatIsLandingPageAudit() {
             What Is a Landing Page Audit? The Complete Guide for Founders
           </h1>
           <p className="text-gray-400 text-lg">
-            A systematic audit scores 5 dimensions and shows you exactly what to fix — in 30 seconds.
+            A systematic audit evaluates five dimensions and should show evidence for every recommended fix.
           </p>
           <p className="text-gray-500 text-sm mt-4">
             Updated July 5, 2026 · 8 min read
@@ -118,7 +118,7 @@ export default function WhatIsLandingPageAudit() {
             Ad platforms optimize for <strong className="text-white">clicks, not conversions</strong>. It's common to spend $2,000–$5,000 on ads and see zero sales because the landing page leaks the traffic.
           </p>
           <p className="text-gray-300 mb-4">
-            An audit finds those leaks in 30 seconds — before you spend another dollar on ad traffic.
+            A verified audit should identify those leaks before you spend another dollar on ad traffic.
           </p>
           <div className="bg-red-900/20 border border-red-800/50 rounded-lg p-6 my-6">
             <p className="text-red-400 font-semibold mb-2">⚠️ Warning Sign</p>
@@ -201,7 +201,7 @@ export default function WhatIsLandingPageAudit() {
             Ready to Audit Your Landing Page?
           </h3>
           <p className="text-gray-300 mb-6">
-            Get your free 5-dimension audit in 30 seconds. No email required.
+            Automated scoring is paused while the evidence-backed audit engine is rebuilt.
           </p>
           <Link
             href="/audit"

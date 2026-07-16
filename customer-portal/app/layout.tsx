@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Nebula Components — Free Landing Page Audit',
-    description: 'Find the leak in your landing page in 60 seconds. Free audit, no signup required.',
+    description: 'Landing-page audit scoring is paused while the evidence-backed engine is rebuilt.',
     url: 'https://nebulacomponents.shop',
     siteName: 'Nebula Components',
     images: [
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Nebula Components — Free Landing Page Audit',
-    description: 'Find the leak in your landing page in 60 seconds. Free audit, no signup required.',
+    description: 'Landing-page audit scoring is paused while the evidence-backed engine is rebuilt.',
     images: ['https://nebulacomponents.shop/og-image.png'],
     creator: '@nebulacomponents',
   },

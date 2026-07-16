@@ -30,6 +30,11 @@ import CheckoutImpulsePage from '@/app/checkout-impulse/page'
 import CheckoutV2Page from '@/app/checkout-v2/page'
 import Create97CheckoutPage from '@/app/create-97-checkout/page'
 import LaunchPage97Page from '@/app/launch-page-97/page'
+import PartAfterPage from '@/app/part-after/page'
+import PartBeforePage from '@/app/part-before/page'
+import AdBurnLeaderboardPage from '@/app/ad-burn-leaderboard/page'
+import AuditResultsPage from '@/app/audit/results/page'
+import AuditSamplePage from '@/app/audit/sample/page'
 import { proxy } from '@/proxy'
 
 const processEmailQueue = jest.mocked(emailService.processEmailQueue)
@@ -48,6 +53,15 @@ function listPublicHtml(relativeDir = 'public'): string[] {
     const relative = path.join(relativeDir, entry.name)
     if (entry.isDirectory()) return listPublicHtml(relative)
     return entry.isFile() && entry.name.toLowerCase().endsWith('.html') ? [relative] : []
+  })
+}
+
+function listAppPages(relativeDir = 'app'): string[] {
+  const absoluteDir = path.join(process.cwd(), relativeDir)
+  return readdirSync(absoluteDir, { withFileTypes: true }).flatMap((entry) => {
+    const relative = path.join(relativeDir, entry.name)
+    if (entry.isDirectory()) return listAppPages(relative)
+    return entry.isFile() && entry.name === 'page.tsx' ? [relative] : []
   })
 }
 
@@ -227,6 +241,29 @@ describe('production safety containment', () => {
     }
   })
 
+  it('keeps global error surfaces free of email capture and audit submission', () => {
+    for (const relative of ['app/error.tsx', 'app/not-found.tsx']) {
+      const source = readFileSync(path.join(process.cwd(), relative), 'utf8').toLowerCase()
+      expect(source).not.toContain('<form')
+      expect(source).not.toContain('type="email"')
+      expect(source).not.toContain('/api/lead')
+      expect(source).not.toContain('email_capture')
+    }
+  })
+
+  it('removes active audit endpoints, quarantined links, and timed audit promises from every App Router page', () => {
+    for (const relative of listAppPages()) {
+      const source = readFileSync(path.join(process.cwd(), relative), 'utf8').toLowerCase()
+      const compact = source.replace(/\s+/g, ' ')
+      expect(source).not.toMatch(/\/api\/audit(?:[?'"`]|$)/)
+      expect(source).not.toContain('/api/leaderboard-submit')
+      expect(source).not.toContain('/audit.html')
+      expect(source).not.toContain('/checkout.html')
+      expect(compact).not.toMatch(/audit.{0,140}\b(?:10|30|60)[- ]?seconds?\b/)
+      expect(compact).not.toMatch(/\b(?:10|30|60)[- ]?seconds?\b.{0,140}audit/)
+    }
+  })
+
   it('removes live instant-audit forms and 60-second promises from public entry pages', () => {
     for (const relative of [
       'app/page.tsx',
@@ -249,6 +286,11 @@ describe('production safety containment', () => {
     ['checkout-v2', CheckoutV2Page],
     ['create-97-checkout', Create97CheckoutPage],
     ['launch-page-97', LaunchPage97Page],
+    ['part-after', PartAfterPage],
+    ['part-before', PartBeforePage],
+    ['ad-burn-leaderboard', AdBurnLeaderboardPage],
+    ['audit/results', AuditResultsPage],
+    ['audit/sample', AuditSamplePage],
   ])('returns not found for the unsupported %s route', (_route, Page) => {
     expect(() => Page()).toThrow('NEXT_NOT_FOUND')
   })

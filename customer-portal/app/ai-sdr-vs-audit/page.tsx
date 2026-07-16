@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: "You Don't Need an AI SDR — Fix Your Landing Page First | Nebula Components",
-  description: "Before you spend $25k on an AI SDR platform, run a free landing page audit. Here's why the order matters — and how most founders skip the step that actually converts.",
+  description: "Before you spend $25k on an AI SDR platform, verify that your landing page converts. Automated Nebula audit scoring is currently paused.",
 }
 
 export default function AiSdrVsAuditPage() {
@@ -31,7 +31,7 @@ export default function AiSdrVsAuditPage() {
           </blockquote>
 
           <div className="flex flex-wrap justify-center gap-3">
-            {['No sales call', 'No demo required', '30-second audit', 'Free audit'].map((pill) => (
+            {['No sales call', 'No demo required', 'Evidence required', 'Scoring paused'].map((pill) => (
               <span key={pill} className="bg-[#1e1e2e] text-[#94a3b8] border border-[#2d2d4e] px-4 py-1.5 rounded-full text-sm">
                 {pill}
               </span>
@@ -89,11 +89,11 @@ export default function AiSdrVsAuditPage() {
             <tbody>
               {[
                 { label: 'Entry cost', zamp: '$25k–$75k pilot', nebula: 'Free (or $147 fix pack)' },
-                { label: 'Time to value', zamp: '4–10 weeks', nebula: '30 seconds to audit, hours to fix' },
-                { label: 'Purchase motion', zamp: 'Book a demo → sales cycle → legal review', nebula: 'Paste URL → see results → buy with Stripe' },
+                { label: 'Time to value', zamp: '4–10 weeks', nebula: 'Audit scoring paused pending evidence-backed rebuild' },
+                { label: 'Purchase motion', zamp: 'Book a demo → sales cycle → legal review', nebula: 'Audit submission paused pending verified engine' },
                 { label: 'What it fixes', zamp: 'Outbound volume (sends more emails)', nebula: 'The page itself (fixes what converts)' },
                 { label: 'Self-serve', zamp: 'No. Demo-gated.', nebula: 'Yes. Full self-serve pipeline.' },
-                { label: 'Risk for you', zamp: '$25k+ commitment + 10 weeks before you know', nebula: 'Free. You know in seconds.' },
+                { label: 'Risk for you', zamp: '$25k+ commitment + 10 weeks before you know', nebula: 'No automated score is issued without evidence.' },
               ].map((row, idx) => (
                 <tr key={idx} className="border-b border-[#1a1a2a] last:border-b-0">
                   <td className="p-4 text-[#f1f5f9] font-semibold">{row.label}</td>
@@ -138,7 +138,7 @@ export default function AiSdrVsAuditPage() {
         </h2>
         <p className="mb-4">The smartest path to revenue right now — whether you're pre-revenue or scaling — is:</p>
         <ol className="list-decimal list-inside mb-6 space-y-2">
-          <li><strong>Run the free audit.</strong> Paste your URL. Find out why your page doesn't convert. 30 seconds. Free.</li>
+          <li><strong>Check audit status.</strong> Automated URL submission and scoring are paused during the evidence-backed rebuild.</li>
           <li><strong>Fix what's broken.</strong> Free kit shows you exactly what to change. $147 pack implements it for you.</li>
           <li><strong>Get a page that converts at 3-6%.</strong> Now every dollar of traffic or outreach actually produces leads.</li>
           <li><strong>Then — and only then — consider an AI SDR.</strong> Because now the math works. Each outbound email lands on a page that converts.</li>
@@ -173,14 +173,14 @@ export default function AiSdrVsAuditPage() {
         {/* CTA Section */}
         <div className="bg-gradient-to-br from-[#1a1a2e] to-[#16162a] border border-[#2d2d4e] rounded-2xl py-12 px-10 text-center">
           <h3 className="text-2xl font-bold text-[#f8fafc] mb-3">
-            Test your landing page in 30 seconds
+            Audit scoring rebuild in progress
           </h3>
           <p className="text-[#94a3b8] max-w-[500px] mx-auto mb-6">
-            Free audit shows you the top 5 conversion leaks. No email required to see results. If you want implementation — free Fix Kit, $147 Fix Pack, or $997 Growth Launch, self-serve, no sales call.
+            Automated scoring and URL submission are paused until each finding can be backed by verifiable evidence.
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-4">
-            <a href="/" className="inline-flex items-center gap-2 bg-[#4f46e5] hover:bg-[#5254cc] text-white font-bold py-4 px-9 rounded-lg transition-colors">
-              Run the free audit →
+            <a href="/audit" className="inline-flex items-center gap-2 bg-[#4f46e5] hover:bg-[#5254cc] text-white font-bold py-4 px-9 rounded-lg transition-colors">
+              View audit status →
             </a>
             <a href="/why-landing-pages-dont-convert" className="inline-flex items-center gap-2 bg-transparent border border-[#2d2d4e] hover:border-[#a5b4fc] text-[#94a3b8] hover:text-[#e2e8f0] font-semibold py-4 px-6 rounded-lg transition-colors">
               Read the full guide

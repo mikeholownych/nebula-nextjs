@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 const faqItems = [
   {
     question: "What is the best CTA text for a landing page?",
-    answer: "Action verb + specific outcome. 'Get My Free Audit in 60 Seconds' outperforms 'Submit' because it tells the visitor exactly what they get and how fast. The verb should match the commitment level — 'Get' for free offers, 'Start' for trials, 'Buy' only when trust is already established.",
+    answer: "Action verb + specific outcome. 'View the Evidence-Backed Audit Status' outperforms 'Submit' because it tells the visitor exactly what they get and how fast. The verb should match the commitment level — 'Get' for free offers, 'Start' for trials, 'Buy' only when trust is already established.",
   },
   {
     question: "How many CTAs should a landing page have?",
@@ -37,8 +37,8 @@ export default function CtaOptimizationPage() {
         <a href="/" className="text-[#a5b4fc] text-sm font-bold tracking-widest uppercase hover:text-[#818cf8] transition-colors">
           ● Nebula Components
         </a>
-        <a href="/#audit-form-card" className="bg-[#047857] text-white text-sm font-semibold px-4 py-2 rounded-md hover:bg-[#059669] transition-colors">
-          Run my free audit →
+        <a href="/audit" className="bg-[#047857] text-white text-sm font-semibold px-4 py-2 rounded-md hover:bg-[#059669] transition-colors">
+          View audit status →
         </a>
       </header>
 
@@ -54,7 +54,7 @@ export default function CtaOptimizationPage() {
         {/* Quick Answer Blockquote */}
         <blockquote className="border-l-4 border-[#6366f1] bg-[#12121c] py-4 px-5 rounded-r-lg my-6">
           <p className="mb-0">
-            <strong className="text-[#f8fafc]">Quick Answer:</strong> Replace vague CTAs ('Submit', 'Learn More') with action + outcome: 'Get My Free Audit in 60 Seconds'. Place it above the fold and repeat it verbatim at the bottom of the page. One consistent CTA phrase across the entire page outperforms multiple competing options.
+            <strong className="text-[#f8fafc]">Quick Answer:</strong> Replace vague CTAs ('Submit', 'Learn More') with action + outcome: 'View the Evidence-Backed Audit Status'. Place it above the fold and repeat it verbatim at the bottom of the page. One consistent CTA phrase across the entire page outperforms multiple competing options.
           </p>
         </blockquote>
 
@@ -103,16 +103,16 @@ export default function CtaOptimizationPage() {
             See exactly where your page leaks.
           </h2>
           <p className="text-[#94a3b8] mb-6 max-w-md mx-auto">
-            Paste your URL. Get a scored teardown across all 5 dimensions — headline, CTA, trust proof, load speed, and mobile — in 60 seconds. Free.
+            Automated audit scoring is paused while the evidence-backed engine is rebuilt.
           </p>
           <a
-            href="/#audit-form-card"
+            href="/audit"
             className="inline-block bg-[#047857] text-white font-bold text-base py-4 px-8 rounded-lg hover:bg-[#059669] transition-colors"
           >
-            Run my free audit →
+            View audit status →
           </a>
           <p className="text-xs text-[#6b7280] mt-4">
-            Free · 60 seconds · no account required
+            Scoring paused · no submission collected
           </p>
         </div>
 

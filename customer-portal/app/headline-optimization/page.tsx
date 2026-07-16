@@ -12,7 +12,7 @@ const faqItems = [
   },
   {
     question: "How do I test if my headline is weak?",
-    answer: "Cover your logo and product name. Read only the headline. Would a cold visitor know what they get, who it's for, and why it matters? If the answer is no to any of these, the headline is weak. Nebula's free audit scores your headline in 30 seconds.",
+    answer: "Cover your logo and product name. Read only the headline. Would a cold visitor know what they get, who it's for, and why it matters? If the answer is no to any of these, the headline is weak. Automated Nebula audit scoring is currently paused while the evidence-backed engine is rebuilt.",
   },
   {
     question: "What is the money angle for a headline?",
@@ -37,8 +37,8 @@ export default function HeadlineOptimizationPage() {
         <a href="/" className="text-[#a5b4fc] text-sm font-bold tracking-widest uppercase hover:text-[#818cf8] transition-colors">
           ● Nebula Components
         </a>
-        <a href="/#audit-form-card" className="bg-[#047857] text-white text-sm font-semibold px-4 py-2 rounded-md hover:bg-[#059669] transition-colors">
-          Run my free audit →
+        <a href="/audit" className="bg-[#047857] text-white text-sm font-semibold px-4 py-2 rounded-md hover:bg-[#059669] transition-colors">
+          View audit status →
         </a>
       </header>
 
@@ -103,16 +103,16 @@ export default function HeadlineOptimizationPage() {
             See exactly where your page leaks.
           </h2>
           <p className="text-[#94a3b8] mb-6 max-w-md mx-auto">
-            Paste your URL. Get a scored teardown across all 5 dimensions — headline, CTA, trust proof, load speed, and mobile — in 60 seconds. Free.
+            Automated audit scoring is paused while the evidence-backed engine is rebuilt.
           </p>
           <a
-            href="/#audit-form-card"
+            href="/audit"
             className="inline-block bg-[#047857] text-white font-bold text-base py-4 px-8 rounded-lg hover:bg-[#059669] transition-colors"
           >
-            Run my free audit →
+            View audit status →
           </a>
           <p className="text-xs text-[#6b7280] mt-4">
-            Free · 60 seconds · no account required
+            Scoring paused · no submission collected
           </p>
         </div>
 

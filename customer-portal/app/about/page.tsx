@@ -20,7 +20,7 @@ export default function AboutPage() {
               Nebula Components diagnoses landing page conversion leaks. We don't sell optimization packages or monthly retainers. We find the leak, show you the dollar amount it's costing, and offer a $147 fix if you want it implemented.
             </p>
             <p className="text-[#9aa7bd] leading-relaxed">
-              Our free audit delivers in 60 seconds. No calls. No email gates. Just paste your URL and see the diagnosis.
+              Automated audit scoring is paused while we rebuild the engine around verifiable evidence. The status page does not collect a URL or email.
             </p>
           </section>
           

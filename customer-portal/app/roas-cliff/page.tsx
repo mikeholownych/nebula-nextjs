@@ -154,7 +154,7 @@ export default function RoasCliffPage() {
             </div>
             <div className="flex gap-3 items-baseline border-b border-[#1f1f1f] pb-3">
               <span className="text-gray-500 text-xs w-20">7–9</span>
-              <span className="text-gray-400 text-sm">&quot;Get my free landing page audit → 60-second result&quot;</span>
+              <span className="text-gray-400 text-sm">&quot;View the current audit status and evidence policy&quot;</span>
             </div>
             <div className="flex gap-3 items-baseline">
               <span className="text-gray-500 text-xs w-20">10</span>
@@ -219,11 +219,11 @@ export default function RoasCliffPage() {
         </p>
 
         <h3 className="text-base font-semibold mt-8 mb-3 text-emerald-500">
-          Fix 3: Make the CTA specific about the next 60 seconds
+          Fix 3: Make the CTA specific about the next step
         </h3>
         
         <p className="mb-5 text-gray-400">
-          &quot;Get started&quot; creates a decision point. &quot;Get my free landing page audit → 60-second result&quot; creates a next step. The visitor isn&apos;t deciding whether to buy something. They&apos;re deciding whether to spend 60 seconds to see their score.
+          A specific, evidence-backed next step reduces decision friction. Until Nebula&apos;s scoring engine is rebuilt, the audit status page clearly reports that submissions are paused.
         </p>
 
         <div className="border-t border-[#1f1f1f] my-12" />
@@ -238,16 +238,16 @@ export default function RoasCliffPage() {
 
         <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-8 my-12 text-center">
           <h3 className="text-emerald-500 font-semibold text-lg mb-2">
-            Run the free audit on your specific page
+            Automated audit scoring is paused
           </h3>
           <p className="text-gray-400 mb-6">
-            Scored across all 5 dimensions. Monthly leak calculated. Specific fix written out. 60 seconds. No call required.
+            The rebuilt engine will require evidence for each score, leak calculation, and recommended fix.
           </p>
           <Link 
             href="/audit" 
             className="inline-block bg-emerald-500 text-black font-bold px-8 py-3 rounded-md hover:opacity-90 transition-opacity"
           >
-            Run my free audit →
+            View audit status →
           </Link>
           <br />
           <Link 

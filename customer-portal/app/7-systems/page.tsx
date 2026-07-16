@@ -1,6 +1,6 @@
 export const metadata = {
   title: '7 Systems Every Ecom Brand Needs That Most Skip — Nebula Components',
-  description: 'A conversion engineer\'s checklist of the 7 systems every ecom brand needs to stop leaking conversions — plus a free instant audit.',
+  description: 'A conversion engineer\'s checklist of the 7 systems every ecommerce brand needs to stop leaking conversions.',
 };
 
 const systems = [
@@ -222,13 +222,13 @@ export default function SevenSystemsPage() {
               How Does Your Page Score?
             </h3>
             <p className="text-slate-400 mb-6">
-              Get an instant audit — scored across all 7 systems (and more). Takes 10 seconds.
+              Automated audit scoring is paused while the evidence-backed engine is rebuilt.
             </p>
             <a
-              href="https://nebulacomponents.shop/audit.html"
+              href="/audit"
               className="inline-block bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-8 py-4 rounded-lg transition text-lg"
             >
-              Run Your Free Audit →
+              View Audit Status →
             </a>
             <p className="mt-4 text-sm text-slate-500">
               No call. No credit card. Just a Fix Map with specific steps.
@@ -248,7 +248,7 @@ export default function SevenSystemsPage() {
                 Get the Fix Pack →
               </a>
               <a
-                href="https://nebulacomponents.shop/checkout.html"
+                href="/checkout"
                 className="border-2 border-emerald-600 text-emerald-400 hover:bg-emerald-600 hover:text-white font-semibold px-8 py-4 rounded-lg transition"
               >
                 DIY Fix Kit (Free)

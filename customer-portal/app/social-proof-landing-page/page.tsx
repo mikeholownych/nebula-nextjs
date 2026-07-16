@@ -90,10 +90,10 @@ export default function SocialProofLandingPage() {
             ● Nebula Components
           </Link>
           <Link
-            href="/#audit-form-card"
+            href="/audit"
             className="bg-[#047857] text-white text-xs font-semibold px-4 py-2 rounded-md hover:bg-[#059669] transition-colors"
           >
-            Run my free audit →
+            View audit status →
           </Link>
         </header>
 
@@ -113,8 +113,8 @@ export default function SocialProofLandingPage() {
         <blockquote className="border-l-4 border-[#6366f1] bg-[#12121c] p-5 rounded-r-lg my-6">
           <p className="text-[#cbd5e1]">
             <strong>Quick Answer:</strong> You need at least one specific proof
-            element visible before your first CTA. A number ('40+ audits
-            delivered'), a result-oriented quote, or a recognisable logo. Generic
+            element visible before your first CTA. A verified customer count,
+            a result-oriented quote, or a recognisable logo. Generic
             praise doesn't work — specificity creates credibility. 'Great
             service!' is useless. '3.8% conversion rate after fixing our
             headline' converts.
@@ -147,7 +147,7 @@ export default function SocialProofLandingPage() {
             <p className="text-[#94a3b8] text-[0.95rem] m-0">
               Immediately adjacent to your primary CTA — ideally directly above
               the submit button. Also in the hero section (social proof line like
-              '40+ audits delivered · avg score back in 60s'). The worst place
+              a verified customer result). The worst place
               is below the fold where skeptics never reach it.
             </p>
           </div>
@@ -202,18 +202,16 @@ export default function SocialProofLandingPage() {
             See exactly where your page leaks.
           </h2>
           <p className="text-[#94a3b8] mb-6">
-            Paste your URL. Get a scored teardown across all 5 dimensions —
-            headline, CTA, trust proof, load speed, and mobile — in 60 seconds.
-            Free.
+            Automated audit scoring is paused while the evidence-backed engine is rebuilt.
           </p>
           <Link
-            href="/#audit-form-card"
+            href="/audit"
             className="inline-block bg-[#047857] text-white font-bold text-base px-8 py-3.5 rounded-lg hover:bg-[#059669] transition-colors"
           >
-            Run my free audit →
+            View audit status →
           </Link>
           <p className="text-[13px] text-[#6b7280] mt-4">
-            Free · 60 seconds · no account required
+            Scoring paused · no submission collected
           </p>
         </div>
 

@@ -26,7 +26,7 @@ export default function AboutPage() {
           <h2 className="text-2xl font-semibold mb-4 text-emerald-400">Mission</h2>
           <p className="text-gray-300 text-lg leading-relaxed">
             Stop the bleed. Founders waste billions on ads that convert at 2-3%. We find the leak
-            in 60 seconds and fix it for $147 — no calls, no retainers, no agency nonsense.
+            with evidence-backed analysis and offer a bounded implementation path — no calls, no retainers, no agency ambiguity.
           </p>
         </section>
         
@@ -35,7 +35,7 @@ export default function AboutPage() {
           <ul className="text-gray-300 space-y-3">
             <li className="flex items-start gap-3">
               <span className="text-emerald-400">▸</span>
-              <span><strong>Free Audit:</strong> Paste your URL. Get specific diagnosis in 60 seconds.</span>
+              <span><strong>Audit status:</strong> Automated URL submission and scoring are paused during the evidence-backed rebuild.</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="text-emerald-400">▸</span>

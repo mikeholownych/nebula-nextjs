@@ -372,7 +372,7 @@ export default function AccessibleNebulaPage() {
             </p>
 
             <a
-              href="https://nebulacomponents.shop/checkout.html"
+              href="/checkout"
               className="btn btn-primary"
             >
               🛒 Buy Nebula for $7 Now →

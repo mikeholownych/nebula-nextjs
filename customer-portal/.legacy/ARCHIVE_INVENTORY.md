@@ -68,5 +68,12 @@ All remaining legacy `public/**/*.html` files are quarantined at the HTTP bounda
 |---|---|---|
 | `/audit-lander` | `.legacy/app/audit-lander/page.tsx` | Redirect to transparent `/audit` maintenance page |
 | `/index-old` | `.legacy/app/index-old/page.tsx` | Redirect to transparent `/audit` maintenance page |
+| `/part-before` | `.legacy/app/part-before/page.tsx` | 404; stale audit metadata/claims removed |
+| `/part-after` | `.legacy/app/part-after/page.tsx` | 404; inert PII form and unsupported scoring/delivery flow removed |
+| `/ad-burn-leaderboard` | `.legacy/app/ad-burn-leaderboard/page.tsx` | 404; absent submission endpoint and query-string email flow removed |
+| `/audit/results` | `.legacy/app/audit/results/` | 404; stale score renderer and email gate removed |
+| `/audit/sample` | `.legacy/app/audit/sample/page.tsx` | 404; unsupported sample scores and findings removed |
+| Global 404 UI | `.legacy/app/not-found.tsx` | Safe not-found page with no PII collection or fabricated proof |
+| Global error UI | `.legacy/app/error.tsx` | Safe retry page with no PII collection or audit promise |
 
 The home and pricing pages were replaced in place with bounded maintenance messaging. Their prior versions remain recoverable from Git history at commit `60e77635`.
