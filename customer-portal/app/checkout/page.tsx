@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Button, Card } from '@/components/ui'
+import { Card } from '@/components/ui'
 
 const STRIPE_FIX_PACK_LINK = 'https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b'
 
@@ -23,10 +23,11 @@ export default function CheckoutPage() {
           </div>
         </Card>
 
-        <a href={STRIPE_FIX_PACK_LINK} className="block">
-          <Button size="lg" className="w-full">
-            Continue to Secure Stripe Checkout
-          </Button>
+        <a
+          href={STRIPE_FIX_PACK_LINK}
+          className="block w-full rounded-2xl bg-accent px-8 py-4 text-center text-lg font-semibold text-bg transition-colors hover:bg-accent-light"
+        >
+          Continue to Secure Stripe Checkout
         </a>
 
         <p className="mt-6 text-center text-sm text-fg-muted">

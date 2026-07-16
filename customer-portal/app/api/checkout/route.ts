@@ -42,6 +42,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ code: 'CHECKOUT_NOT_CONFIGURED' }, { status: 503 })
     }
 
+    const configuredBaseUrl = process.env.NEXT_PUBLIC_URL
+    let baseUrl: URL
+    try {
+      baseUrl = new URL(configuredBaseUrl || '')
+      if (baseUrl.protocol !== 'https:') throw new Error('HTTPS required')
+    } catch {
+      return NextResponse.json({ code: 'CHECKOUT_RETURN_URL_NOT_CONFIGURED' }, { status: 503 })
+    }
+
     const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',
       headers: {
@@ -53,8 +62,8 @@ export async function POST(request: NextRequest) {
         'line_items[0][quantity]': '1',
         customer_email: email,
         mode: 'payment',
-        success_url: `${process.env.NEXT_PUBLIC_URL || 'http://localhost:3000'}/thank-you?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${process.env.NEXT_PUBLIC_URL || 'http://localhost:3000'}/checkout`,
+        success_url: new URL('/thank-you?session_id={CHECKOUT_SESSION_ID}', baseUrl).toString(),
+        cancel_url: new URL('/checkout', baseUrl).toString(),
         'metadata[offer_key]': offerKey,
       }),
     })

@@ -1,4 +1,6 @@
 import React from 'react'
+import { existsSync, readFileSync } from 'fs'
+import * as path from 'path'
 import { render, screen } from '@testing-library/react'
 import { NextRequest } from 'next/server'
 
@@ -17,6 +19,7 @@ jest.mock('next/navigation', () => ({
 
 import * as emailService from '@/app/lib/email-service'
 import { POST as auditPost } from '@/app/api/audit/route'
+import { POST as auditEmailPost } from '@/app/api/audit/email/route'
 import { POST as checkoutPost } from '@/app/api/checkout/route'
 import { GET as emailGet, POST as emailPost } from '@/app/api/email/process/route'
 import { POST as rb2bPost } from '@/app/api/webhooks/rb2b/route'
@@ -82,6 +85,13 @@ describe('production safety containment', () => {
     randomSpy.mockRestore()
   })
 
+  it('disables public audit email capture while the audit is unavailable', async () => {
+    const response = await auditEmailPost()
+
+    expect(response.status).toBe(503)
+    await expect(response.json()).resolves.toEqual({ code: 'AUDIT_EMAIL_CAPTURE_REBUILD_IN_PROGRESS' })
+  })
+
   it('rejects arbitrary client-supplied checkout prices without contacting Stripe', async () => {
     process.env.STRIPE_SECRET_KEY = 'sk_test_configured'
 
@@ -106,6 +116,20 @@ describe('production safety containment', () => {
     expect(global.fetch).not.toHaveBeenCalled()
   })
 
+  it('fails checkout closed without a validated HTTPS production base URL', async () => {
+    process.env.STRIPE_SECRET_KEY = '«redacted:sk_test_…»'
+    process.env.STRIPE_FIX_PACK_PRICE_ID = 'price_fix_pack'
+    delete process.env.NEXT_PUBLIC_URL
+
+    const response = await checkoutPost(jsonRequest('http://localhost/api/checkout', {
+      email: 'buyer@example.com',
+      offerKey: 'fix-pack',
+    }))
+
+    expect(response.status).toBe(503)
+    expect(global.fetch).not.toHaveBeenCalled()
+  })
+
   it('does not process email from GET requests', async () => {
     const response = await emailGet()
 
@@ -113,6 +137,7 @@ describe('production safety containment', () => {
     expect(response.headers.get('allow')).toBe('POST')
 
     expect(queueLeadForOutreach).not.toHaveBeenCalled()
+    expect(processEmailQueue).not.toHaveBeenCalled()
   })
 
   it('rejects unauthenticated email queue requests', async () => {
@@ -137,13 +162,14 @@ describe('production safety containment', () => {
   })
 
   it('uses only the verified canonical Stripe Payment Link on the checkout page', () => {
-    render(React.createElement(CheckoutPage))
+    const { container } = render(React.createElement(CheckoutPage))
 
     expect(screen.getByRole('link', { name: /continue to secure stripe checkout/i })).toHaveAttribute(
       'href',
       'https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b',
     )
     expect(screen.queryByText(/^card details$/i)).not.toBeInTheDocument()
+    expect(container.querySelector('a button')).toBeNull()
   })
 
   it('shows an honest audit maintenance page without an audit submission form', () => {
@@ -158,6 +184,31 @@ describe('production safety containment', () => {
 
     expect(screen.queryByText(/purchase complete/i)).not.toBeInTheDocument()
     expect(screen.getByText(/payment status/i)).toBeInTheDocument()
+  })
+
+  it('archives every static checkout alias outside public', () => {
+    const aliases = ['checkout-impulse.html', 'checkout_v2.html', 'create_97_checkout.html']
+    for (const alias of aliases) {
+      expect(existsSync(path.join(process.cwd(), 'public', alias))).toBe(false)
+      expect(existsSync(path.join(process.cwd(), '.legacy', 'public', alias))).toBe(true)
+    }
+  })
+
+  it('removes live instant-audit forms and 60-second promises from public entry pages', () => {
+    for (const relative of [
+      'app/page.tsx',
+      'app/pricing/page.tsx',
+      'app/audit-lander/page.tsx',
+      'app/index-old/page.tsx',
+      'components/Footer.tsx',
+      'components/ui/PageShell.tsx',
+    ]) {
+      const source = readFileSync(path.join(process.cwd(), relative), 'utf8').toLowerCase()
+      expect(source).not.toContain("fetch('/api/audit'")
+      expect(source).not.toContain('results in 60s')
+      expect(source).not.toContain('private link in 60 seconds')
+      expect(source).not.toContain('free audit in 60 seconds')
+    }
   })
 
   it.each([

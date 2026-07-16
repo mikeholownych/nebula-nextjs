@@ -35,7 +35,7 @@ export function PageShell({ children, title, description }: PageShellProps) {
               href="/audit"
               className="px-4 py-2 bg-accent text-bg text-sm font-medium rounded-lg hover:bg-accent-light transition-colors"
             >
-              Get Audit
+              Audit Status
             </Link>
           </div>
         </nav>
@@ -61,13 +61,13 @@ export function PageShell({ children, title, description }: PageShellProps) {
             <div>
               <p className="text-fg font-semibold">Nebula Components</p>
               <p className="mt-2 text-sm text-fg-muted">
-                Landing page audits that find your money leaks.
+                Evidence-backed landing-page audits. Automated scoring is temporarily paused.
               </p>
             </div>
             <div>
               <p className="text-fg-muted text-sm font-medium mb-4">Product</p>
               <ul className="space-y-2">
-                <li><Link href="/audit" className="text-sm text-fg-muted hover:text-fg">Free Audit</Link></li>
+                <li><Link href="/audit" className="text-sm text-fg-muted hover:text-fg">Audit Status</Link></li>
                 <li><Link href="/pricing" className="text-sm text-fg-muted hover:text-fg">Pricing</Link></li>
                 <li><Link href="/learning-centre" className="text-sm text-fg-muted hover:text-fg">Learning Centre</Link></li>
               </ul>
