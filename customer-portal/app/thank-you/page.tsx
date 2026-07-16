@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Button, Card } from '@/components/ui'
+import { Card } from '@/components/ui'
 
 export default function ThankYouPage() {
   return (
@@ -10,8 +10,11 @@ export default function ThankYouPage() {
           This page cannot verify a purchase. Use the receipt from Stripe as your payment confirmation.
           We will contact verified customers at the email used during checkout.
         </p>
-        <Link href="/">
-          <Button variant="outline">Back to Home</Button>
+        <Link
+          href="/"
+          className="inline-flex items-center justify-center rounded-xl border border-border px-5 py-3 font-semibold text-fg transition-colors hover:border-accent"
+        >
+          Back to Home
         </Link>
       </Card>
     </main>

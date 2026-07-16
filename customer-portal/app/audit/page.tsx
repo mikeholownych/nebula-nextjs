@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Button, Card } from '@/components/ui'
+import { Card } from '@/components/ui'
 
 export const dynamic = 'force-dynamic'
 
@@ -15,8 +15,11 @@ export default function AuditPage() {
           We have paused automated audits while we replace the prototype scoring system with verified analysis.
           We will not show you guessed scores or fabricated findings.
         </p>
-        <Link href="/">
-          <Button variant="outline">Back to Home</Button>
+        <Link
+          href="/"
+          className="inline-flex items-center justify-center rounded-xl border border-border px-5 py-3 font-semibold text-fg transition-colors hover:border-accent"
+        >
+          Back to Home
         </Link>
       </Card>
     </main>

@@ -54,6 +54,13 @@ The original source is retained under `.legacy/app/` for audit history. Public r
 | `/checkout-impulse.html` | `.legacy/public/checkout-impulse.html` | Static duplicate of raw card-entry prototype | Removed from `public/`; `/checkout` is the only supported checkout |
 | `/checkout_v2.html` | `.legacy/public/checkout_v2.html` | Static duplicate that persisted query-string PII in local storage | Removed from `public/` |
 | `/create_97_checkout.html` | `.legacy/public/create_97_checkout.html` | Static price/product-mismatched checkout | Removed from `public/` |
+| `/audit-lander.html` | `.legacy/public/audit-lander.html` | Public PII form, stale audit submission, and unsupported delivery claims | Removed from `public/` |
+| `/index-old.html` | `.legacy/public/index-old.html` | Legacy audit/results/purchase flow with unsupported proof | Removed from `public/` |
+| `/part_before.html` | `.legacy/public/part_before.html` | Orphaned legacy audit-page fragment with unsupported audit claims | Removed from `public/` |
+| `/part_after.html` | `.legacy/public/part_after.html` | Orphaned live audit form/results fragment | Removed from `public/` |
+| `/thank-you.html` | `.legacy/public/thank-you.html` | Direct-visit page falsely emitted audit completion and delivery messaging | Removed from `public/` |
+
+All remaining legacy `public/**/*.html` files are quarantined at the HTTP boundary by root `proxy.ts`: requests return 404 with `X-Robots-Tag: noindex, nofollow`. This fail-closed control remains until Task 11 verifies claims and Task 14 completes the full App Router migration.
 
 ## Stale public audit entry pages (archived 2026-07-16)
 

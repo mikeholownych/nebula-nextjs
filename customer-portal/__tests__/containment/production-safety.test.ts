@@ -1,5 +1,5 @@
 import React from 'react'
-import { existsSync, readFileSync } from 'fs'
+import { existsSync, readFileSync, readdirSync } from 'fs'
 import * as path from 'path'
 import { render, screen } from '@testing-library/react'
 import { NextRequest } from 'next/server'
@@ -29,7 +29,8 @@ import ThankYouPage from '@/app/thank-you/page'
 import CheckoutImpulsePage from '@/app/checkout-impulse/page'
 import CheckoutV2Page from '@/app/checkout-v2/page'
 import Create97CheckoutPage from '@/app/create-97-checkout/page'
-import LaunchPage97 from '@/app/launch-page-97/page'
+import LaunchPage97Page from '@/app/launch-page-97/page'
+import { proxy } from '@/proxy'
 
 const processEmailQueue = jest.mocked(emailService.processEmailQueue)
 const queueLeadForOutreach = jest.mocked(emailService.queueLeadForOutreach)
@@ -40,6 +41,15 @@ const jsonRequest = (url: string, body: unknown, headers?: HeadersInit) =>
     headers: { 'content-type': 'application/json', ...headers },
     body: JSON.stringify(body),
   })
+
+function listPublicHtml(relativeDir = 'public'): string[] {
+  const absoluteDir = path.join(process.cwd(), relativeDir)
+  return readdirSync(absoluteDir, { withFileTypes: true }).flatMap((entry) => {
+    const relative = path.join(relativeDir, entry.name)
+    if (entry.isDirectory()) return listPublicHtml(relative)
+    return entry.isFile() && entry.name.toLowerCase().endsWith('.html') ? [relative] : []
+  })
+}
 
 const rb2bPayload = {
   event: 'visitor_identified',
@@ -173,24 +183,47 @@ describe('production safety containment', () => {
   })
 
   it('shows an honest audit maintenance page without an audit submission form', () => {
-    render(React.createElement(AuditPage))
+    const { container } = render(React.createElement(AuditPage))
 
     expect(screen.getByRole('heading', { name: /audit is being rebuilt/i })).toBeInTheDocument()
-    expect(screen.queryByRole('textbox', { name: /landing page url/i })).not.toBeInTheDocument()
+    expect(screen.queryByRole('textbox')).not.toBeInTheDocument()
+    expect(container.querySelector('a button')).toBeNull()
   })
 
   it('does not claim a direct thank-you visit is paid', () => {
-    render(React.createElement(ThankYouPage))
+    const { container } = render(React.createElement(ThankYouPage))
 
     expect(screen.queryByText(/purchase complete/i)).not.toBeInTheDocument()
     expect(screen.getByText(/payment status/i)).toBeInTheDocument()
+    expect(container.querySelector('a button')).toBeNull()
   })
 
   it('archives every static checkout alias outside public', () => {
-    const aliases = ['checkout-impulse.html', 'checkout_v2.html', 'create_97_checkout.html']
+    const aliases = [
+      'checkout-impulse.html',
+      'checkout_v2.html',
+      'create_97_checkout.html',
+      'audit-lander.html',
+      'index-old.html',
+      'part_before.html',
+      'part_after.html',
+      'thank-you.html',
+    ]
     for (const alias of aliases) {
       expect(existsSync(path.join(process.cwd(), 'public', alias))).toBe(false)
       expect(existsSync(path.join(process.cwd(), '.legacy', 'public', alias))).toBe(true)
+    }
+  })
+
+  it('blocks every legacy public HTML file at the HTTP boundary', () => {
+    const htmlFiles = listPublicHtml()
+    expect(htmlFiles.length).toBeGreaterThan(0)
+
+    for (const relative of htmlFiles) {
+      const urlPath = `/${relative.replace(/^public[\\/]/, '').split(path.sep).join('/')}`
+      const response = proxy(new NextRequest(`https://nebula.example${urlPath}`))
+      expect(response.status).toBe(404)
+      expect(response.headers.get('x-robots-tag')).toBe('noindex, nofollow')
     }
   })
 
@@ -215,7 +248,7 @@ describe('production safety containment', () => {
     ['checkout-impulse', CheckoutImpulsePage],
     ['checkout-v2', CheckoutV2Page],
     ['create-97-checkout', Create97CheckoutPage],
-    ['launch-page-97', LaunchPage97],
+    ['launch-page-97', LaunchPage97Page],
   ])('returns not found for the unsupported %s route', (_route, Page) => {
     expect(() => Page()).toThrow('NEXT_NOT_FOUND')
   })
