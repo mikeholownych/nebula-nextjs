@@ -9,19 +9,17 @@ const nextConfig: NextConfig = {
         source: '/',
         destination: '/index.html',
       },
-      // Rewrite all HTML pages
+      // Rewrite HTML pages with 3+ word paths
       {
         source: '/:path(\\w+-\\w+-\\w+)',
         destination: '/:path.html',
       },
+      // Rewrite HTML pages with 2 word paths
       {
         source: '/:path(\\w+-\\w+)',
         destination: '/:path.html',
       },
-      {
-        source: '/:path(\\w+)',
-        destination: '/:path.html',
-      },
+      // DO NOT rewrite single-word paths - let static files and app routes handle them
     ]
   },
   // Allow serving static HTML
@@ -33,6 +31,15 @@ const nextConfig: NextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=3600, must-revalidate',
+          },
+        ],
+      },
+      {
+        source: '/favicon.ico',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },

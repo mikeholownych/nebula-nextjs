@@ -1,6 +1,6 @@
 'use client'
 
-import '@/public/styles/nebula-design-system.css'
+import '@/app/globals.css'
 import { useState } from 'react'
 
 export default function PartAfterPage() {

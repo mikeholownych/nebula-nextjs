@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import './styles.css'
+import '@/app/globals.css'
 
 // FAQ Item Component with accessibility features
 function FAQItem({

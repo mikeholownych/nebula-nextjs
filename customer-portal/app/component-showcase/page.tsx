@@ -1,6 +1,4 @@
-import './component-showcase.css'
-import '@/public/styles/nebula-design-system.css'
-import '@/public/styles/nebula-components.css'
+import '@/app/globals.css'
 
 export const metadata = {
   title: 'Nebula Component Library — Design System Showcase',

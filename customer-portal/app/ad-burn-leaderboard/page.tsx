@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import './ad-burn-leaderboard.css';
+
 
 export default function AdBurnLeaderboardPage() {
   const [formData, setFormData] = useState({

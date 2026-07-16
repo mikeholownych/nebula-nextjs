@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import './index-old.css';
+
 
 export default function IndexOldPage() {
   useEffect(() => {

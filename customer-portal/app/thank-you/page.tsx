@@ -1,190 +1,168 @@
-"use client";
+'use client'
 
-import { useEffect, Suspense } from "react";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
+import Link from 'next/link'
+import { Button, Card } from '@/components/ui'
 
 function ThankYouContent() {
-  const searchParams = useSearchParams();
-  const sessionId = searchParams.get("session_id");
-  const productId = searchParams.get("product");
+  const searchParams = useSearchParams()
+  const sessionId = searchParams.get('session')
+  const showOTO = searchParams.get('oto') !== 'retainer'
+  const [timeLeft, setTimeLeft] = useState(15 * 60) // 15 minutes
+  const [otoAccepted, setOTOAccepted] = useState(false)
+  const [otoDeclined, setOTODeclined] = useState(false)
 
-  // Track conversion event on mount
+  // Countdown timer for OTO
   useEffect(() => {
-    // Track audit completion conversion
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "audit_complete", {
-        event_category: "funnel",
-        event_label: productId || "purchase_completed",
-      });
-    }
-  }, [productId]);
+    if (!showOTO || otoAccepted || otoDeclined) return
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => Math.max(0, prev - 1))
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [showOTO, otoAccepted, otoDeclined])
 
-  const getProductInfo = () => {
-    switch (productId) {
-      case "fix-pack":
-        return {
-          name: "Fix Pack",
-          price: "$147",
-          description: "Your detailed landing page fix recommendations",
-        };
-      case "retainer":
-        return {
-          name: "Monthly Retainer",
-          price: "$1,497/mo",
-          description: "Ongoing optimization support",
-        };
-      case "agency-partner":
-        return {
-          name: "Agency Partner",
-          price: "$497",
-          description: "Partner program access",
-        };
-      default:
-        return {
-          name: "Purchase",
-          price: "",
-          description: "Your order is confirmed",
-        };
-    }
-  };
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60)
+    const secs = seconds % 60
+    return `${mins}:${secs.toString().padStart(2, '0')}`
+  }
 
-  const productInfo = getProductInfo();
+  const handleOTOAccept = () => {
+    // In production, this would add the subscription
+    setOTOAccepted(true)
+  }
+
+  if (otoAccepted) {
+    return (
+      <div className="min-h-screen bg-bg py-12 px-6 flex items-center justify-center">
+        <Card variant="elevated" className="max-w-md text-center">
+          <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-6">
+            <span className="text-3xl">✓</span>
+          </div>
+          <h1 className="text-2xl font-bold text-fg mb-2">You&apos;re All Set!</h1>
+          <p className="text-fg-muted mb-6">
+            Monthly optimization added to your order. We&apos;ll reach out within 24 hours.
+          </p>
+          <Link href="/">
+            <Button variant="outline">Back to Home</Button>
+          </Link>
+        </Card>
+      </div>
+    )
+  }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="max-w-xl w-full">
-        {/* Success Badge */}
-        <div className="flex justify-center mb-6">
-          <div className="w-16 h-16 rounded-full bg-emerald-100 border border-emerald-500 flex items-center justify-center">
-            <svg
-              className="w-8 h-8 text-emerald-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
+    <div className="min-h-screen bg-bg py-12 px-6">
+      <div className="max-w-2xl mx-auto">
+        {/* Success Message */}
+        <div className="text-center mb-8">
+          <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-6">
+            <span className="text-3xl text-accent">✓</span>
           </div>
+          <h1 className="text-3xl font-bold text-fg mb-2">Purchase Complete!</h1>
+          <p className="text-fg-muted mb-4">
+            Your Fix Pack will be delivered within 24 hours. Check your email for confirmation.
+          </p>
+          <p className="text-fg-dim text-sm">
+            Order ID: {sessionId || 'pending'}
+          </p>
         </div>
 
-        {/* Main Heading */}
-        <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-3">
-          Your {productInfo.name} is{" "}
-          <span className="text-emerald-600">confirmed</span>.
-        </h1>
-
-        {/* Subheading */}
-        <p className="text-gray-600 text-center text-lg mb-8">
-          {productInfo.description}. Check your inbox in about 60 seconds for
-          your detailed breakdown.
-        </p>
-
-        {/* Next Steps Card */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
-            What happens next
-          </h2>
-          <ul className="space-y-4">
+        {/* What Happens Next */}
+        <Card variant="bordered" className="mb-8">
+          <h2 className="font-semibold text-fg mb-4">What Happens Next</h2>
+          <ol className="space-y-3 text-sm">
             <li className="flex gap-3">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold">
-                1
-              </span>
-              <div>
-                <p className="font-medium text-gray-900">Confirmation email</p>
-                <p className="text-sm text-gray-500">
-                  Check your inbox for your receipt and next steps.
-                </p>
-              </div>
+              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center text-xs font-bold">1</span>
+              <span>We review your audit results and landing page</span>
             </li>
             <li className="flex gap-3">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold">
-                2
-              </span>
-              <div>
-                <p className="font-medium text-gray-900">Audit processing</p>
-                <p className="text-sm text-gray-500">
-                  Your landing page analysis is running right now.
-                </p>
-              </div>
+              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center text-xs font-bold">2</span>
+              <span>Our team rewrites your headline, CTA, and adds trust signals</span>
             </li>
             <li className="flex gap-3">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold">
-                3
-              </span>
-              <div>
-                <p className="font-medium text-gray-900">Results delivered</p>
-                <p className="text-sm text-gray-500">
-                  Scored fixes ranked by dollar impact, delivered to your inbox.
-                </p>
-              </div>
+              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center text-xs font-bold">3</span>
+              <span>You receive the complete Fix Pack within 24 hours</span>
             </li>
-          </ul>
-        </div>
+            <li className="flex gap-3">
+              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center text-xs font-bold">4</span>
+              <span>Implement and watch conversions improve — or we refund</span>
+            </li>
+          </ol>
+        </Card>
 
-        {/* Session Info (if available) */}
-        {sessionId && (
-          <div className="bg-gray-100 rounded-lg p-4 mb-6">
-            <p className="text-sm text-gray-600">
-              <span className="font-medium">Order Reference:</span>{" "}
-              <span className="font-mono text-xs">{sessionId.slice(-8).toUpperCase()}</span>
-            </p>
-          </div>
+        {/* OTO: Monthly Retainer (20% off) */}
+        {showOTO && !otoDeclined && (
+          <Card className="bg-accent/5 border-accent">
+            <div className="text-center">
+              {/* Urgency */}
+              <div className="inline-flex items-center gap-2 bg-danger/20 text-danger px-3 py-1 rounded-full text-sm font-medium mb-4">
+                <span className="animate-pulse">⏱</span>
+                One-Time Offer expires in: <strong>{formatTime(timeLeft)}</strong>
+              </div>
+
+              <h2 className="text-2xl font-bold text-fg mb-2">
+                Keep Your Page Optimized — 20% Off
+              </h2>
+              <p className="text-fg-muted mb-6 max-w-md mx-auto">
+                Join our monthly optimization program. Each month we audited your page, 
+                identify new leaks, and provide priority fixes. Lock in <strong className="text-accent">$79/mo</strong> (normally $99).
+              </p>
+
+              <div className="grid md:grid-cols-3 gap-4 mb-6">
+                <div className="bg-bg-elevated rounded-lg p-4">
+                  <div className="text-2xl mb-2">🔍</div>
+                  <h3 className="font-medium text-fg">Monthly Audit</h3>
+                  <p className="text-fg-dim text-sm">Fresh analysis every month</p>
+                </div>
+                <div className="bg-bg-elevated rounded-lg p-4">
+                  <div className="text-2xl mb-2">⚡</div>
+                  <h3 className="font-medium text-fg">Priority Fixes</h3>
+                  <p className="text-fg-dim text-sm">Skip the queue on all requests</p>
+                </div>
+                <div className="bg-bg-elevated rounded-lg p-4">
+                  <div className="text-2xl mb-2">📉</div>
+                  <h3 className="font-medium text-fg">Trend Tracking</h3>
+                  <p className="text-fg-dim text-sm">Watch your scores improve</p>
+                </div>
+              </div>
+
+              <div className="flex flex-col md:flex-row gap-4 justify-center">
+                <Button size="lg" onClick={handleOTOAccept}>
+                  Add Monthly Retainer — $79/mo
+                </Button>
+                <Button variant="ghost" size="lg" onClick={() => setOTODeclined(true)}>
+                  No thanks, just the Fix Pack
+                </Button>
+              </div>
+
+              <p className="text-fg-dim text-xs mt-6">
+                Cancel anytime. 30-day money-back guarantee still applies.
+              </p>
+            </div>
+          </Card>
         )}
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
-          <Link
-            href="/dashboard"
-            className="inline-flex items-center justify-center bg-emerald-700 hover:bg-emerald-800 text-white font-semibold px-6 py-3 rounded-lg shadow-sm transition-colors"
-          >
-            Go to Dashboard →
-          </Link>
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center text-gray-600 hover:text-gray-800 font-medium px-6 py-3"
-          >
-            Return to Home
-          </Link>
-        </div>
-
-        {/* Guarantee */}
-        <p className="text-center text-sm text-gray-500">
-          30-day money-back guarantee. No sales call required.
-        </p>
-
-        {/* Support Contact */}
-        <div className="mt-8 pt-6 border-t border-gray-200 text-center">
-          <p className="text-sm text-gray-600 mb-2">
-            Need help or have questions?
-          </p>
-          <a
-            href="mailto:support@nebulacomponents.shop"
-            className="text-emerald-700 hover:text-emerald-800 font-medium"
-          >
-            Contact Support →
-          </a>
-        </div>
+        {/* Bottom CTA */}
+        {otoDeclined && (
+          <div className="text-center">
+            <p className="text-fg-muted text-sm mb-4">
+              This offer won&apos;t appear again. Want weekly optimization insights instead?
+            </p>
+            <Link href="/learning-centre">
+              <Button variant="outline">Join Learning Centre (Free)</Button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
-  );
+  )
 }
 
 export default function ThankYouPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-          <div className="text-xl text-gray-600">Loading...</div>
-        </div>
-      }
-    >
-      <ThankYouContent />
-    </Suspense>
-  );
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  if (!mounted) return <div className="min-h-screen bg-bg flex items-center justify-center"><p className="text-fg-muted">Loading...</p></div>
+  return <ThankYouContent />
 }

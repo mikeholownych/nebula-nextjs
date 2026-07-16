@@ -1,0 +1,110 @@
+'use client';
+
+export default function LearningCentrePage() {
+  
+  return (
+    <>
+      <style>{`
+:root { color-scheme: dark; --bg:#080a0f; --panel:#111723; --text:#f5f7fb; --muted:#9aa7bd; --line:#253044; --hot:#79f2c0; --gold:#ffd166; }
+* { box-sizing: border-box; }
+body { margin:0; background: radial-gradient(circle at top left,#152033,#080a0f 42%); color:var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif; }
+a { color: var(--hot); text-decoration: none; }
+.wrap { width:min(1120px,92vw); margin:0 auto; padding:56px 0; }
+.hero { display:grid; gap:22px; padding:42px; border:1px solid var(--line); border-radius:28px; background:linear-gradient(135deg,rgba(17,23,35,.92),rgba(8,10,15,.78)); box-shadow:0 24px 80px rgba(0,0,0,.35); }
+.eyebrow { color:var(--gold); text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:800; }
+h1 { font-size:clamp(38px,7vw,76px); line-height:.94; margin:0; letter-spacing:-.06em; }
+h2 { font-size:32px; margin:48px 0 18px; letter-spacing:-.03em; }
+h3 { font-size:22px; margin:10px 0; }
+.lede { color:var(--muted); font-size:20px; max-width:760px; line-height:1.45; }
+.proof { display:flex; flex-wrap:wrap; gap:10px; padding:0; margin:8px 0 0; list-style:none; }
+.proof li,.badge { border:1px solid var(--line); border-radius:999px; padding:8px 12px; color:var(--muted); background:#0c111a; }
+.actions { display:flex; flex-wrap:wrap; gap:14px; }
+.button { display:inline-flex; align-items:center; justify-content:center; border-radius:999px; padding:13px 18px; background:var(--hot); color:#02100a; font-weight:900; }
+.button.secondary { background:transparent; color:var(--text); border:1px solid var(--line); }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(245px,1fr)); gap:16px; }
+.card,.panel { background:rgba(17,23,35,.88); border:1px solid var(--line); border-radius:22px; padding:22px; margin:16px 0; }
+.card p,.panel li,.panel p { color:var(--muted); line-height:1.55; }
+.resource-link { font-weight:900; }
+.detail { max-width:860px; }
+.related { display:grid; gap:10px; }
+.related a { padding:10px 0; border-bottom:1px solid var(--line); }
+.cta-panel { border-color:rgba(121,242,192,.45); }
+      `}</style>
+      <div dangerouslySetInnerHTML={{ __html: `<body>
+<main class="wrap detail">
+<a href="/learning-center/">← Learning Centre</a>
+<p class="eyebrow">AI Ops Systems · extracted from NipPro AI</p>
+<h1>Specialist AI Agent Library</h1>
+<p class="lede">Stop asking one AI to do 50 jobs. Deploy focused specialists with role, trigger, prompt, handoff, and review gates.</p>
+<section class="panel">
+<h2>The stolen pattern</h2>
+<p><strong>One specialist per role.</strong> Each agent gets a narrow mission, a trigger, a tool boundary, reusable prompts, handoff logic, and review gate. No one-agent-does-everything sludge.</p>
+</section>
+<section class="panel">
+<h2>7-element agent card</h2>
+<ul><li><strong>Role:</strong> One named function. No generalist scope.</li>
+<li><strong>Mission:</strong> One sentence defining the output this agent owns.</li>
+<li><strong>Trigger:</strong> The event that activates the agent.</li>
+<li><strong>Tools:</strong> The exact systems/data sources the agent can use.</li>
+<li><strong>Prompt library:</strong> Reusable prompts for the agent's core tasks.</li>
+<li><strong>Workflow logic:</strong> Upstream inputs and downstream handoff target.</li>
+<li><strong>Review gate:</strong> Human approval, score, or quality check before shipping.</li></ul>
+</section>
+<h2>Nebula domain map</h2>
+<section class="grid"><article class="card">
+<div class="eyebrow">Research</div>
+<h3>Signal Detector → Competitor Scout → Market Mapper</h3>
+<p>Feeds lead scoring and positioning.</p>
+</article>
+<article class="card">
+<div class="eyebrow">LeadGen</div>
+<h3>Prospect Finder → Account Scorer → Outreach Sequencer</h3>
+<p>Turns social/buying signals into ranked pipeline.</p>
+</article>
+<article class="card">
+<div class="eyebrow">Sales</div>
+<h3>Follow-Up Drafter → Objection Handler → Pipeline Reviewer</h3>
+<p>Moves warm leads without generic follow-up.</p>
+</article>
+<article class="card">
+<div class="eyebrow">Marketing</div>
+<h3>Campaign Builder → Ad Copywriter → Funnel Analyst</h3>
+<p>Turns proof and audits into campaigns.</p>
+</article>
+<article class="card">
+<div class="eyebrow">Content</div>
+<h3>SEO Writer → Repurposer → Editorial Editor</h3>
+<p>Turns operator knowledge into distribution assets.</p>
+</article>
+<article class="card">
+<div class="eyebrow">Support</div>
+<h3>Reply Triager → Response Drafter → Escalation Handler</h3>
+<p>Protects speed and quality on inbound replies.</p>
+</article>
+<article class="card">
+<div class="eyebrow">Operations</div>
+<h3>SOP Builder → Status Reporter → Risk Analyst</h3>
+<p>Keeps handoffs, health checks, and delivery reliable.</p>
+</article></section>
+<section class="panel">
+<h2>Anti-patterns to avoid</h2>
+<ul><li>one generalist AI for every task</li>
+<li>prompt library not stored</li>
+<li>missing trigger condition</li>
+<li>output with no handoff</li>
+<li>automation without review</li>
+<li>no performance tracking</li></ul>
+</section>
+<section class="panel cta-panel">
+<h2>Want this installed instead of documented?</h2>
+<p>Start with the audit. If the handoff leak is obvious, the $147 Fix Pack turns it into a working operating system.</p>
+<div class="actions">
+<a class="button" href="/audit">Run the free audit</a>
+<a class="button secondary" href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b">Buy the $147 Fix Pack</a>
+</div>
+</section>
+</main>
+</body>` }} />
+    </>
+  );
+}

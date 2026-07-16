@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import './marketing-ops.css';
+
 
 export const metadata: Metadata = {
   title: 'AI Marketing Ops — Nebula Components',

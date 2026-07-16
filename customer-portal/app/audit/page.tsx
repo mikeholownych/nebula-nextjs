@@ -1,244 +1,209 @@
-"use client";
-
 import Link from "next/link";
+
+// Force dynamic rendering to bypass Cloudflare cache
+export const dynamic = 'force-dynamic';
 
 export default function AuditPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-gray-100">
-      {/* Hero Header */}
-      <header className="bg-gray-900 border-b-4 border-blue-600 py-16 px-6 text-center">
-        <h1 className="text-4xl font-bold mb-3">Free Landing Page Audit</h1>
-        <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-          Get your page scored on 5 conversion dimensions in 60 seconds. No account required.
-        </p>
+    <>
+      {/* Ambient glow orbs */}
+      <div className="glow-orb glow-orb-1" aria-hidden="true" />
+      <div className="glow-orb glow-orb-2" aria-hidden="true" />
+
+      {/* Header */}
+      <header>
+        <Link href="/" className="logo">Nebula</Link>
+        <nav>
+          <Link href="/">Home</Link>
+          <Link href="#what">What You Get</Link>
+          <Link href="#sample">Sample Audit</Link>
+        </nav>
       </header>
 
-      <main className="max-w-4xl mx-auto px-6 py-12">
-        {/* What You Get Section */}
-        <section className="bg-gray-900 rounded-xl p-8 mb-8 border border-gray-800">
-          <h2 className="text-2xl font-bold mb-6">What You Get</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <h3 className="text-lg font-semibold text-blue-400 mb-2">Dimension Scores</h3>
-              <ul className="space-y-2 text-gray-300">
-                <li className="flex items-start gap-2">
-                  <span className="text-green-500">✓</span>
-                  Headline Clarity — speaks to buyer problems
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-500">✓</span>
-                  CTA Actionability — outcome-driven buttons
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-500">✓</span>
-                  Trust Proof — credibility before the ask
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-500">✓</span>
-                  Page Speed — Core Web Vitals
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-500">✓</span>
-                  Mobile Responsiveness
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-blue-400 mb-2">Actionable Output</h3>
-              <ul className="space-y-2 text-gray-300">
-                <li className="flex items-start gap-2">
-                  <span className="text-yellow-500">→</span>
-                  Overall conversion score (0-10)
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-yellow-500">→</span>
-                  Dollar-figured waste estimate
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-yellow-500">→</span>
-                  Top 5 prioritized fixes ranked by impact
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-yellow-500">→</span>
-                  Quick wins implementable in 24 hours
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-yellow-500">→</span>
-                  Industry-calibrated benchmarks
-                </li>
-              </ul>
-            </div>
+      {/* Hero */}
+      <section className="hero">
+        <div className="hero-content">
+          <div className="hero-badge">
+            <span className="pulse-dot" /> Free. 60 Seconds. No Signup.
           </div>
-        </section>
-
-        {/* Benefits Section */}
-        <section className="bg-gray-900 rounded-xl p-8 mb-8 border border-gray-800">
-          <h2 className="text-2xl font-bold mb-6">Why Get an Audit?</h2>
-          <div className="space-y-4">
-            <div className="flex items-start gap-4">
-              <div className="bg-blue-600 rounded-lg p-3 mt-1">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold">Stop Leaking Ad Spend</h3>
-                <p className="text-gray-400">
-                  Most landing pages waste 20-40% of ad budget on fixable conversion issues. Find out where yours is bleeding.
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex items-start gap-4">
-              <div className="bg-green-600 rounded-lg p-3 mt-1">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold">60-Second Results</h3>
-                <p className="text-gray-400">
-                  Enter your URL, get your score. No signup, no credit card, no demo call. Instant actionable insights.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="bg-purple-600 rounded-lg p-3 mt-1">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold">Zero Data Risk</h3>
-                <p className="text-gray-400">
-                  We analyze only public HTML content. Never access your analytics, ad accounts, CMS, or customer data.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Sample Result Teaser */}
-        <section className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-8 mb-8 border border-gray-700">
-          <h2 className="text-2xl font-bold mb-4">What the Audit Looks Like</h2>
-          <div className="bg-gray-950 rounded-lg p-6 border border-gray-700">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-gray-400">Overall Score</span>
-              <div className="flex items-center gap-3">
-                <span className="text-3xl font-bold text-yellow-500">6.8</span>
-                <span className="text-gray-500">/10</span>
-                <span className="bg-yellow-900 text-yellow-300 px-2 py-1 rounded text-sm">Grade: C</span>
-              </div>
-            </div>
-            <p className="text-gray-300 text-sm">
-              Sample page has 2 significant conversion leaks. At $5K/mo ad spend, the headline and CTA alone are costing an estimated <strong className="text-red-400">$850-$1,700/mo</strong>.
-            </p>
-            <div className="mt-4 pt-4 border-t border-gray-800">
-              <Link href="/audit/sample" className="text-blue-400 hover:text-blue-300 text-sm">
-                View full sample audit →
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="bg-gray-900 rounded-xl p-8 mb-8 border border-gray-800">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold mb-3">Ready to Score Your Page?</h2>
-            <p className="text-gray-400 mb-6">
-              Enter your landing page URL and get your free audit in 60 seconds.
-            </p>
-            
-            <form className="max-w-xl mx-auto">
-              <div className="flex gap-3">
-                <input
-                  type="url"
-                  placeholder="https://your-landing-page.com"
-                  className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors whitespace-nowrap"
-                >
-                  Run Free Audit
-                </button>
-              </div>
-            </form>
-
-            <p className="text-sm text-gray-500 mt-4">
-              No signup required • Results in 60 seconds • 100% free
-            </p>
-          </div>
-        </section>
-
-        {/* Fix Pack Upsell */}
-        <section className="bg-gray-900 rounded-xl p-8 border border-gray-800">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold">$147 Fix Implementation</h2>
-            <span className="bg-green-900 text-green-300 px-3 py-1 rounded-full text-sm">Risk-Free</span>
-          </div>
-          <p className="text-gray-400 mb-4">
-            After your free audit, upgrade to professional fix implementation.
+          <h1 className="hero-title">
+            Your Landing Page Has a Leak.<br />
+            <span className="text-gradient">Find It Before Your Next $1k in Ads.</span>
+          </h1>
+          <p className="hero-sub">
+            Paste your URL. Get a scored teardown ranking your <strong>top 3 conversion leaks</strong>.
+            Know exactly what to fix — and how much money it's costing you.
           </p>
-          <ul className="space-y-2 text-gray-300 mb-6">
-            <li className="flex items-center gap-2">
-              <span className="text-green-500">✓</span>
-              Page duplicated for testing — zero risk to live campaigns
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-green-500">✓</span>
-              Full refund if conversion rate doesn&apos;t improve in 14 days
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-green-500">✓</span>
-              No call required — everything ships via email
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-green-500">✓</span>
-              Documented rollback — one-click revert
-            </li>
-          </ul>
-          <div className="bg-yellow-900/30 border border-yellow-700 rounded-lg p-4 text-center mb-6">
-            <p className="text-yellow-300 font-medium">
-              🏷️ Full refund if your conversion rate doesn&apos;t improve. No questions asked.
+          <form className="hero-form" action="/api/audit" method="POST">
+            <input
+              type="url"
+              placeholder="your-landing-page.com"
+              required
+              name="url"
+              aria-label="Your landing page URL"
+            />
+            <button type="submit" className="btn btn-primary">
+              Find My Money Leak →
+            </button>
+          </form>
+          <p className="hero-trust">
+            <span className="check">✓</span> No signup
+            <span className="check">✓</span> No credit card
+            <span className="check">✓</span> Results in 60s
+          </p>
+        </div>
+      </section>
+
+      {/* What You Get */}
+      <section className="proof-section" id="what">
+        <h2 className="section-title">What You Get — Free</h2>
+        <p className="section-sub">5 dimensions. 3 top leaks. Exact fix priorities.</p>
+
+        <div className="how-grid">
+          <div className="step">
+            <div className="step-num">⚡</div>
+            <h3>Dimension Scores</h3>
+            <p>
+              Headline Clarity. CTA Actionability. Trust Signals. Page Speed. Mobile Layout.
+              Each scored 0-10 with benchmarks.
             </p>
           </div>
-          <div className="flex gap-3 flex-wrap">
-            <Link
-              href="#audit-form"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
-            >
-              Run Free Audit First
-            </Link>
-            <a
-              href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
-            >
-              Buy Fix Pack — $147
-            </a>
+          <div className="step">
+            <div className="step-num">💰</div>
+            <h3>Dollar Waste Estimate</h3>
+            <p>
+              Based on your ad spend, see exactly how much each leak is costing you monthly.
+              Real numbers. Real urgency.
+            </p>
           </div>
-        </section>
+          <div className="step">
+            <div className="step-num">🎯</div>
+            <h3>Prioritized Fixes</h3>
+            <p>
+              Top 3 leaks ranked by impact. Clear fix instructions. Implement today yourself
+              or hand off for $147.
+            </p>
+          </div>
+        </div>
+      </section>
 
-        {/* Data Privacy Section */}
-        <section className="mt-8 text-center text-sm text-gray-500">
-          <p>
-            <strong className="text-gray-400">Data Privacy:</strong> Your audit analyzes only public HTML content — 
-            the same data any visitor sees. We never access analytics, ad accounts, CMS, or customer data.
-          </p>
-          <Link href="/privacy" className="text-blue-400 hover:text-blue-300 mt-2 inline-block">
-            Full data policy →
-          </Link>
-        </section>
-      </main>
+      {/* Why It Matters */}
+      <section className="shift-section" id="why">
+        <h2 className="section-title">Stop Guessing. Start Fixing.</h2>
+        <div className="shift-grid">
+          <div className="shift-card old">
+            <div className="shift-label">Without Audit</div>
+            <p>You spend $5K/month on ads. Landing page converts at 1.2%. You don't know why.</p>
+            <p>Your agency says "give it time."</p>
+            <p className="sad-result">You pause the campaign. Wasted budget. Same leak for your next product.</p>
+          </div>
+          <div className="shift-card new">
+            <div className="shift-label">With Nebula Audit</div>
+            <p>Paste your URL. 60 seconds later: "Headline vague. CTA same color as header. Trust below fold."</p>
+            <p>Headline vague? <span className="tag-fix">Fix: $0</span></p>
+            <p className="happy-result">You see the exact leak. You fix it. Conversion rate climbs to 3.4%.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Sample Audit */}
+      <section className="proof-section" id="sample">
+        <h2 className="section-title">See What an Audit Looks Like</h2>
+        <p className="section-sub">Real teardown. Real numbers.</p>
+
+        <div className="sample-card">
+          <div className="sample-header">
+            <span className="sample-label">SAMPLE AUDIT</span>
+            <div className="sample-score">
+              <span className="score-num">6.8</span>
+              <span className="score-divider">/</span>
+              <span className="score-total">10</span>
+              <span className="score-grade">Grade: C</span>
+            </div>
+          </div>
+          <div className="sample-content">
+            <p className="sample-summary">
+              This page has <strong>3 significant conversion leaks</strong>. At $5k/mo ad spend,
+              the headline and CTA alone are costing an estimated <strong className="highlight-red">$850-$1,700/mo</strong>.
+            </p>
+            <div className="sample-leaks">
+              <div className="leak-item">
+                <span className="leak-rank">#1</span>
+                <span className="leak-name">Headline vague</span>
+                <span className="leak-impact">— wastes $400-$800/mo</span>
+              </div>
+              <div className="leak-item">
+                <span className="leak-rank">#2</span>
+                <span className="leak-name">CTA invisible</span>
+                <span className="leak-impact">— wastes $300-$600/mo</span>
+              </div>
+              <div className="leak-item">
+                <span className="leak-rank">#3</span>
+                <span className="leak-name">Trust below fold</span>
+                <span className="leak-impact">— wastes $150-$300/mo</span>
+              </div>
+            </div>
+            <p className="sample-cta">
+              Fix all 3 yourself for <strong>$0</strong>, or we'll rewrite everything for <strong>$147</strong>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Zero Risk Section */}
+      <section className="proof-section" id="risk">
+        <h2 className="section-title">Zero Risk. Zero Access Required.</h2>
+        <div className="risk-grid">
+          <div className="risk-card">
+            <h3>🔒 Public HTML Only</h3>
+            <p>We analyze only what any visitor can see. No analytics. No ad accounts. No CMS access. Ever.</p>
+          </div>
+          <div className="risk-card">
+            <h3>⚡ Instant Results</h3>
+            <p>60 seconds from URL paste to full teardown. No signup. No credit card. No demo call.</p>
+          </div>
+          <div className="risk-card">
+            <h3>✅ Fix Pack Guarantee</h3>
+            <p>Upgrade to $147 Fix Pack? Full refund if your conversion rate doesn't improve in 14 days.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="cta-section" id="audit">
+        <h2 className="section-title">Your Next Ad Dollar Shouldn't Be a Guess.</h2>
+        <p className="cta-sub">Find the leak. Fix it. Stop burning cash.</p>
+        <form className="hero-form" action="/api/audit" method="POST">
+          <input
+            type="url"
+            placeholder="your-landing-page.com"
+            required
+            name="url"
+            aria-label="Your landing page URL"
+          />
+          <button type="submit" className="btn btn-primary">
+            Find My Money Leak →
+          </button>
+        </form>
+        <p className="cta-risk">
+          <span className="check">✓</span> Free forever
+          <span className="check">✓</span> No signup required
+          <span className="check">✓</span> 60-second delivery
+        </p>
+      </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 border-t border-gray-800 py-8 px-6 mt-12">
-        <div className="max-w-4xl mx-auto text-center text-gray-500 text-sm">
-          <p>© 2024 Nebula Components. Landing page optimization for growth teams.</p>
+      <footer>
+        <div className="footer-inner">
+          <div className="footer-links">
+            <Link href="/learning-centre">Learning Centre</Link>
+            <Link href="/case-studies">Case Studies</Link>
+            <Link href="/privacy-policy">Privacy Policy</Link>
+            <Link href="/terms">Terms of Service</Link>
+          </div>
+          <p className="footer-copy">© 2026 Nebula Components. Founded to stop conversion leaks.</p>
         </div>
       </footer>
-    </div>
+    </>
   );
 }
