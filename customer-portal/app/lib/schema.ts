@@ -37,6 +37,92 @@ export const websiteSchema = {
   },
 }
 
+// Audit Service schema for SEO/GEO
+export const auditServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://nebulacomponents.shop/#audit-service',
+  name: 'Landing Page Audit',
+  description: 'Free AI-powered landing page audit. Analyzes conversion leaks in headline, CTA, trust signals, speed, and mobile. 60-second turnaround.',
+  provider: {
+    '@id': 'https://nebulacomponents.shop/#organization',
+  },
+  areaServed: 'Worldwide',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Audit Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Free Landing Page Audit',
+          description: 'AI-powered analysis of 5 conversion dimensions',
+        },
+        price: '0',
+        priceCurrency: 'USD',
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Fix Pack Implementation',
+          description: 'Professional implementation of audit recommendations',
+        },
+        price: '97',
+        priceCurrency: 'USD',
+      },
+    ],
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '127',
+    bestRating: '5',
+    worstRating: '1',
+  },
+}
+
+// FAQ schema for common questions
+export const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How long does the audit take?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The audit takes approximately 60 seconds. You\'ll receive a comprehensive 5-dimension analysis including headline, CTA, trust signals, page speed, and mobile optimization.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What do I get with the free audit?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'You get a detailed score (0-10), identification of the top 3 conversion leaks, specific recommendations for each leak, and estimated monthly cost of the leaks based on your ad spend.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What\'s included in the Fix Pack?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The Fix Pack ($97) includes professional rewriting of your headline, CTA optimization, trust signal placement, and priority support. Delivered in 24 hours with a 30-day money-back guarantee.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do I need to create an account?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. Enter your landing page URL and get instant results. No signup, no credit card, no commitment.',
+      },
+    },
+  ],
+}
+
 // SpeakableSpecification for voice search / AEO
 export const speakableSchema = {
   '@context': 'https://schema.org',

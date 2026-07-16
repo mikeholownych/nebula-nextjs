@@ -39,7 +39,7 @@ export default function Home() {
   }
 
   return (
-    <>
+    <main id="main-content" role="main" className="min-h-screen">
       {/* Ambient glow orbs */}
       <div className="glow-orb glow-orb-1" aria-hidden="true" />
       <div className="glow-orb glow-orb-2" aria-hidden="true" />
@@ -214,6 +214,6 @@ export default function Home() {
 
       {/* Footer */}
       <Footer />
-    </>
+    </main>
   )
 }

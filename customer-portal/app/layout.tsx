@@ -1,13 +1,17 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import CookieConsent from './components/CookieConsent'
 import './globals.css'
-import { organizationSchema, websiteSchema, speakableSchema } from './lib/schema'
+import { organizationSchema, websiteSchema, speakableSchema, auditServiceSchema, faqSchema } from './lib/schema'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Nebula Components',
   description: 'AI-powered landing page optimization and conversion services',
+  alternates: {
+    canonical: 'https://nebulacomponents.shop',
+  },
   openGraph: {
     title: 'Nebula Components — Free Landing Page Audit',
     description: 'Find the leak in your landing page in 60 seconds. Free audit, no signup required.',
@@ -60,8 +64,22 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(auditServiceSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <a href="#main-content" className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-emerald-500 focus:text-black focus:rounded">
+          Skip to main content
+        </a>
+        {children}
+        <CookieConsent />
+      </body>
     </html>
   )
 }
