@@ -1,69 +1,77 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-// In production, use environment variables for Stripe secret key
-const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder'
+const OFFERS = {
+  'fix-pack': {
+    name: 'Nebula Conversion Fix Pack',
+    stripePriceId: process.env.STRIPE_FIX_PACK_PRICE_ID,
+  },
+} as const
+
+type OfferKey = keyof typeof OFFERS
+
+const isOfferKey = (value: unknown): value is OfferKey =>
+  typeof value === 'string' && Object.prototype.hasOwnProperty.call(OFFERS, value)
 
 export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json()
-    const { email, items } = body
+  if (!process.env.STRIPE_SECRET_KEY) {
+    return NextResponse.json({ code: 'CHECKOUT_NOT_CONFIGURED' }, { status: 503 })
+  }
 
+  try {
+    const body: unknown = await request.json()
+
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+      return NextResponse.json({ code: 'INVALID_CHECKOUT_REQUEST' }, { status: 400 })
+    }
+
+    const payload = body as Record<string, unknown>
+
+    // Prices, amounts, and cart line items must never come from the browser.
+    if ('items' in payload || 'price' in payload || 'amount' in payload || !isOfferKey(payload.offerKey)) {
+      return NextResponse.json({ code: 'UNSUPPORTED_CHECKOUT_OFFER' }, { status: 400 })
+    }
+
+    const offerKey = payload.offerKey
+    const email = typeof payload.email === 'string' ? payload.email.trim() : ''
     if (!email) {
       return NextResponse.json({ error: 'Email required' }, { status: 400 })
     }
 
-    if (!items || items.length === 0) {
-      return NextResponse.json({ error: 'No items in cart' }, { status: 400 })
+    const offer = OFFERS[offerKey]
+    if (!offer.stripePriceId) {
+      return NextResponse.json({ code: 'CHECKOUT_NOT_CONFIGURED' }, { status: 503 })
     }
 
-    const totalAmount = items.reduce((sum: number, item: { price: number }) => sum + item.price, 0)
-
-    // Create Stripe checkout session
     const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${STRIPE_SECRET_KEY}`,
+        Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        'payment_method_types[]': 'card',
-        'customer_email': email,
-        'line_items[0][price_data][currency]': 'usd',
-        'line_items[0][price_data][unit_amount]': totalAmount.toString(),
-        'line_items[0][price_data][product_data][name]': items.map((i: { type: string }) => i.type).join(' + '),
+        'line_items[0][price]': offer.stripePriceId,
         'line_items[0][quantity]': '1',
-        'mode': 'payment',
-        'success_url': `${process.env.NEXT_PUBLIC_URL || 'http://localhost:3000'}/thank-you?session_id={CHECKOUT_SESSION_ID}`,
-        'cancel_url': `${process.env.NEXT_PUBLIC_URL || 'http://localhost:3000'}/checkout`,
-        'metadata[purchase_type]': items[0].type,
+        customer_email: email,
+        mode: 'payment',
+        success_url: `${process.env.NEXT_PUBLIC_URL || 'http://localhost:3000'}/thank-you?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${process.env.NEXT_PUBLIC_URL || 'http://localhost:3000'}/checkout`,
+        'metadata[offer_key]': offerKey,
       }),
     })
 
     if (!response.ok) {
-      const error = await response.json()
-      console.error('[Checkout API] Stripe error:', error)
-      
-      // For demo without Stripe, simulate successful session
-      if (STRIPE_SECRET_KEY === 'sk_test_placeholder') {
-        console.log('[Checkout API] Demo mode — simulating checkout')
-        return NextResponse.json({
-          success: true,
-          sessionId: `demo_session_${Date.now()}`,
-          url: `/thank-you?session=demo&total=${totalAmount}`,
-        })
-      }
-
-      return NextResponse.json({ error: 'Checkout failed' }, { status: 500 })
+      console.error('[Checkout API] Stripe session creation failed')
+      return NextResponse.json({ code: 'CHECKOUT_PROVIDER_ERROR' }, { status: 502 })
     }
 
     const session = await response.json()
-    return NextResponse.json({
-      success: true,
-      sessionId: session.id,
-      url: session.url,
-    })
+    if (typeof session.url !== 'string') {
+      return NextResponse.json({ code: 'CHECKOUT_PROVIDER_ERROR' }, { status: 502 })
+    }
+
+    return NextResponse.json({ url: session.url })
   } catch (error) {
-    console.error('[Checkout API] Error:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    console.error('[Checkout API] Invalid request:', error)
+    return NextResponse.json({ code: 'INVALID_CHECKOUT_REQUEST' }, { status: 400 })
   }
 }
