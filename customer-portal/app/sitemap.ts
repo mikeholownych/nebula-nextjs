@@ -63,24 +63,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   })
  
-  // Note: Case studies (450+) are lower priority and may cause sitemap bloat
-  // Consider adding only top 50 case studies or using a separate sitemap index
-  // For now, we'll add a curated selection of case studies (first 20 as examples)
-  const curatedCaseStudies = [
-    'ecommerce-airbnb-com',
-    'ecommerce-example-com',
-    'ecommerce-shopify-com',
-    'saas-play-google-com',
-  ]
- 
-  curatedCaseStudies.forEach(slug => {
-    sitemapEntries.push({
-      url: `${baseUrl}/case-studies/${slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.5,
-    })
-  })
- 
   return sitemapEntries
 }

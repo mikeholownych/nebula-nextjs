@@ -65,6 +65,27 @@ function listAppPages(relativeDir = 'app'): string[] {
   })
 }
 
+const unsupportedPublicAppRoutes = [
+  'accessible-nebula',
+  'agency-partner',
+  'ai-ops-retainer',
+  'audit-dashboard',
+  'audits',
+  'beta-tester',
+  'component-showcase',
+  'dashboard',
+  'demo',
+  'generator',
+  'growth-launch',
+  'growth-launch-confirmation',
+  'lead-dashboard',
+  'marketing-ops',
+  'organization',
+  'subscription',
+] as const
+
+const notFoundStubPattern = /export\s+default\s+function\s+\w+\s*\([^)]*\)\s*\{[\s\S]*?notFound\(\)[\s\S]*?\}/
+
 const rb2bPayload = {
   event: 'visitor_identified',
   visitor: {
@@ -279,6 +300,60 @@ describe('production safety containment', () => {
       expect(source).not.toContain('private link in 60 seconds')
       expect(source).not.toContain('free audit in 60 seconds')
     }
+  })
+
+  it('quarantines every unsupported prototype, unverified purchase, and unauthenticated dashboard route', () => {
+    for (const route of unsupportedPublicAppRoutes) {
+      const source = readFileSync(path.join(process.cwd(), 'app', route, 'page.tsx'), 'utf8')
+      expect(source).toMatch(notFoundStubPattern)
+      expect(source).toMatch(/robots:\s*\{\s*index:\s*false,\s*follow:\s*false\s*\}/)
+      expect(source).not.toContain('<form')
+      expect(source).not.toContain('buy.stripe.com')
+      expect(source).not.toMatch(/fetch\s*\(/)
+    }
+  })
+
+  it('does not link public pages or shared navigation to quarantined App Router routes', () => {
+    const blockedPathPattern = new RegExp(`(?:href|to)=["']/(?:${unsupportedPublicAppRoutes.join('|')})(?:[/?#"'])`)
+    for (const relative of [...listAppPages(), 'components/Footer.tsx']) {
+      const source = readFileSync(path.join(process.cwd(), relative), 'utf8')
+      expect(source).not.toMatch(blockedPathPattern)
+    }
+  })
+
+  it('quarantines fabricated case studies and removes them from discovery', () => {
+    const caseStudySource = readFileSync(path.join(process.cwd(), 'app/case-studies/[slug]/page.tsx'), 'utf8')
+    const sitemapSource = readFileSync(path.join(process.cwd(), 'app/sitemap.ts'), 'utf8')
+
+    expect(caseStudySource).toMatch(/notFound\(\)/)
+    expect(caseStudySource).not.toContain('score:')
+    expect(caseStudySource).not.toContain("'@type': 'CaseStudy'")
+    expect(sitemapSource).not.toContain('/case-studies/')
+  })
+
+  it('keeps company and founder pages free of unsupported proof and paused offers', () => {
+    const files = ['app/about/page.tsx', 'app/about/team/page.tsx', 'app/company/about/page.tsx', 'app/company/team/page.tsx']
+    const source = files.map((relative) => readFileSync(path.join(process.cwd(), relative), 'utf8')).join('\n').toLowerCase()
+
+    for (const unsupported of ['$2.3m', '200+ landing pages', '50+ landing pages', '94% of pages', 'conversions in 24 hours', 'ai ops retainer']) {
+      expect(source).not.toContain(unsupported)
+    }
+  })
+
+  it('keeps global metadata and schema free of disabled audit offers and unsupported proof', () => {
+    const layoutSource = readFileSync(path.join(process.cwd(), 'app/layout.tsx'), 'utf8')
+    const schemaSource = readFileSync(path.join(process.cwd(), 'app/lib/schema.ts'), 'utf8')
+    const combined = `${layoutSource}\n${schemaSource}`.toLowerCase()
+
+    expect(layoutSource).not.toContain('auditServiceSchema')
+    expect(layoutSource).not.toContain('faqSchema')
+    expect(layoutSource).not.toContain('speakableSchema')
+    expect(combined).not.toContain('60 seconds')
+    expect(combined).not.toContain('instant results')
+    expect(combined).not.toContain('aggregaterating')
+    expect(combined).not.toContain('reviewcount')
+    expect(combined).not.toContain("price: '97'")
+    expect(combined).not.toContain('free landing page audit')
   })
 
   it.each([

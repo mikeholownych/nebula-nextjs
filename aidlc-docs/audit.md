@@ -232,3 +232,27 @@ Create a detailed action plan for implementation of the above transformation pla
 - 36 unique work-package IDs; no duplicate IDs.
 - All linked implementation-plan files exist.
 - Placeholder scan and `git diff --check` returned zero findings.
+
+## 2026-07-16T23:06:43Z — Task 1 containment completion request
+
+### Raw user input
+```text
+[Thu 2026-07-16 23:06:43 UTC] Complete task 1
+```
+
+### Containment actions
+- Added failing regression tests for unsupported App Router prototypes, unverified dashboards, stale PII forms, fabricated case studies, unsupported proof, blocked-route links, and misleading global schema.
+- Archived 21 unsafe or unsupported route implementations under `.legacy/app/` with inventory entries.
+- Replaced 16 public prototype/product/dashboard routes and the dynamic case-study route with noindex 404 stubs.
+- Replaced unsupported founder/company proof with bounded factual pages and canonical redirects.
+- Removed fabricated audit/service/FAQ/rating/product schema from the global layout; retained only minimal Organization and WebSite schema.
+- Removed blocked-route links and remaining Growth Launch guarantee copy from active pages.
+- Removed fabricated case-study URLs from the sitemap.
+
+### Local verification before independent review
+- Containment suite: 30/30 passed.
+- Full Jest suite: 48/48 passed.
+- TypeScript: passed.
+- Production build: passed; 85 generated routes.
+- Built-server HTTP matrix: 27 blocked routes returned 404 with noindex; root emitted two bounded JSON-LD objects; audit API remained fail-closed.
+- Rendered browser check: maintenance home rendered; `/audit-dashboard` rendered the neutral 404 with no forms and `robots=noindex,nofollow`.

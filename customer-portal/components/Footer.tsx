@@ -57,11 +57,6 @@ export default function Footer() {
                   Pricing
                 </Link>
               </li>
-              <li>
-                <Link href="/agency-partner" className="text-sm text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">
-                  Agency Partner
-                </Link>
-              </li>
             </ul>
           </div>
 

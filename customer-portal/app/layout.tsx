@@ -2,19 +2,19 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import CookieConsent from './components/CookieConsent'
 import './globals.css'
-import { organizationSchema, websiteSchema, speakableSchema, auditServiceSchema, faqSchema } from './lib/schema'
+import { organizationSchema, websiteSchema } from './lib/schema'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://nebulacomponents.shop'),
   title: 'Nebula Components',
-  description: 'AI-powered landing page optimization and conversion services',
+  description: 'Evidence-backed landing-page conversion guidance and implementation services',
   alternates: {
     canonical: 'https://nebulacomponents.shop',
   },
   openGraph: {
-    title: 'Nebula Components — Free Landing Page Audit',
+    title: 'Nebula Components — Audit Engine Rebuild',
     description: 'Landing-page audit scoring is paused while the evidence-backed engine is rebuilt.',
     url: 'https://nebulacomponents.shop',
     siteName: 'Nebula Components',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nebula Components — Free Landing Page Audit',
+    title: 'Nebula Components — Audit Engine Rebuild',
     description: 'Landing-page audit scoring is paused while the evidence-backed engine is rebuilt.',
     creator: '@nebulacomponents',
   },
@@ -70,18 +70,6 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(auditServiceSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       </head>
       <body className={inter.className}>

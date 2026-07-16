@@ -77,3 +77,31 @@ All remaining legacy `public/**/*.html` files are quarantined at the HTTP bounda
 | Global error UI | `.legacy/app/error.tsx` | Safe retry page with no PII collection or audit promise |
 
 The home and pricing pages were replaced in place with bounded maintenance messaging. Their prior versions remain recoverable from Git history at commit `60e77635`.
+
+## Unsupported App Router prototypes and unverified product surfaces (archived 2026-07-16)
+
+The original route implementations are retained under `.legacy/app/`. Every active route below now returns 404 with noindex metadata. They may only be restored after their authentication, API, fulfillment, pricing, evidence, and legal contracts are implemented and independently verified.
+
+| Original route | Archived source | Containment reason |
+|---|---|---|
+| `/accessible-nebula` | `.legacy/app/accessible-nebula/page.tsx` | Expired $7 offer, artificial countdown, unsupported guarantee, and stale checkout links |
+| `/agency-partner` | `.legacy/app/agency-partner/page.tsx` | Unverified white-label, compliance, trial, and fulfillment claims |
+| `/ai-ops-retainer` | `.legacy/app/ai-ops-retainer/page.tsx` | Paused audit dependencies and unsupported monitoring, savings, response-time, and compliance claims |
+| `/audit-dashboard` | `.legacy/app/audit-dashboard/page.tsx` | Hard-coded audit scores and automatic password bypass |
+| `/audits` | `.legacy/app/audits/page.tsx` | Unauthenticated customer UI against an unverified platform API |
+| `/beta-tester` | `.legacy/app/beta-tester/page.tsx` | PII collection against a missing API plus unsupported fulfillment promise |
+| `/component-showcase` | `.legacy/app/component-showcase/page.tsx` | Public product prototype with misleading input controls |
+| `/dashboard` | `.legacy/app/dashboard/page.tsx` | Unauthenticated mock account state and false active-subscription status |
+| `/demo` | `.legacy/app/demo/page.tsx` | Fabricated customer logos, testimonials, product metrics, pricing, and SLA |
+| `/generator` | `.legacy/app/generator/page.tsx` | Stale $7 product upsell and retired offer links |
+| `/growth-launch` | `.legacy/app/growth-launch/page.tsx` | Unsupported $997 purchase, fulfillment, outreach, and guarantee claims |
+| `/growth-launch-confirmation` | `.legacy/app/growth-launch-confirmation/page.tsx` | Direct-visit payment confirmation, stale PII intake, and false active guarantee |
+| `/lead-dashboard` | `.legacy/app/lead-dashboard/page.tsx` | Public operational controls against missing lead APIs |
+| `/marketing-ops` | `.legacy/app/marketing-ops/page.tsx` | Claims the paused audit and unverified autonomous fulfillment pipeline are operational |
+| `/organization` | `.legacy/app/organization/page.tsx` | Unauthenticated mock member-management UI and stale PII form |
+| `/subscription` | `.legacy/app/subscription/page.tsx` | Prototype checkout plans, incorrect Payment Link, and unsupported refund/subscription claims |
+| `/case-studies/[slug]` | `.legacy/app/case-studies/[slug]/page.tsx` | Fabricated scored case study and unsupported `CaseStudy` structured data |
+| `/about` | `.legacy/app/about/page-task1.tsx` | Unsupported spend, audit-count, and pattern-frequency proof claims removed from replacement |
+| `/about/team` | `.legacy/app/about/team/page-task1.tsx` | Unsupported spend, audit-count, pattern-frequency, and social-profile claims removed from replacement |
+| `/company/about` | `.legacy/app/company/about/page-task1.tsx` | Duplicate company page with unsupported fulfillment and paused-retainer claims; now redirects to `/about` |
+| `/company/team` | `.legacy/app/company/team/page-task1.tsx` | Duplicate team page with unsupported portfolio-count claim; now redirects to `/about/team` |

@@ -92,7 +92,7 @@ export default function AiSdrVsAuditPage() {
                 { label: 'Time to value', zamp: '4–10 weeks', nebula: 'Audit scoring paused pending evidence-backed rebuild' },
                 { label: 'Purchase motion', zamp: 'Book a demo → sales cycle → legal review', nebula: 'Audit submission paused pending verified engine' },
                 { label: 'What it fixes', zamp: 'Outbound volume (sends more emails)', nebula: 'The page itself (fixes what converts)' },
-                { label: 'Self-serve', zamp: 'No. Demo-gated.', nebula: 'Yes. Full self-serve pipeline.' },
+                { label: 'Self-serve', zamp: 'No. Demo-gated.', nebula: 'Audit submission paused pending verified engine.' },
                 { label: 'Risk for you', zamp: '$25k+ commitment + 10 weeks before you know', nebula: 'No automated score is issued without evidence.' },
               ].map((row, idx) => (
                 <tr key={idx} className="border-b border-[#1a1a2a] last:border-b-0">
@@ -151,14 +151,14 @@ export default function AiSdrVsAuditPage() {
           </p>
         </div>
 
-        {/* Full Solution Callout */}
+        {/* Bounded availability notice */}
         <div className="bg-[#0a1a0f] border border-[#1a3a1a] border-l-4 border-l-[#22c55e] rounded-xl p-6 mb-8">
           <div className="text-xs font-bold tracking-widest uppercase text-[#22c55e] mb-2">
-            🔥 The full solution — no AI SDR needed
+            Audit and managed outreach are paused
           </div>
           <p className="mb-0">
-            We'll do the whole thing for $997: landing page audit + rewrite, 200 triggered prospects, done-for-you outreach, 14-day reply management. <strong>You get a paying customer in 60 days or we work free until you do.</strong> That's the guarantee.{' '}
-            <a href="/growth-launch" className="text-[#22c55e] font-bold hover:underline">See the Growth Launch →</a>
+            Nebula is rebuilding the audit engine and fulfillment controls before reopening automated scoring or managed outreach.{' '}
+            <a href="/audit" className="text-[#22c55e] font-bold hover:underline">View the current audit status →</a>
           </p>
         </div>
 
