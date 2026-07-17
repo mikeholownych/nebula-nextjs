@@ -27,7 +27,7 @@
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
     "@vitest/ui": "^3",
-    "eslint": "^8.57.1",
+    "eslint": "^9.31.0",
     "eslint-config-next": "16.2.10",
     "jsdom": "^25",
     "tailwindcss": "^4",
