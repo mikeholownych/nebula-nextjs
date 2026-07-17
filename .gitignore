@@ -48,6 +48,17 @@ debug/
 result
 result-*
 **/*.rs.bk
+
+# ── Archived legacy content ─────────────────────
+.legacy/
+
+# ── Next.js build ───────────────────────────────
+.next/
+node_modules/
+
+# ── Backup files ────────────────────────────────
+*.backup-*
+*.test-backup
 /.envrc
 /.direnv
 .metadata/
