@@ -104,4 +104,37 @@ The original route implementations are retained under `.legacy/app/`. Every acti
 | `/about` | `.legacy/app/about/page-task1.tsx` | Unsupported spend, audit-count, and pattern-frequency proof claims removed from replacement |
 | `/about/team` | `.legacy/app/about/team/page-task1.tsx` | Unsupported spend, audit-count, pattern-frequency, and social-profile claims removed from replacement |
 | `/company/about` | `.legacy/app/company/about/page-task1.tsx` | Duplicate company page with unsupported fulfillment and paused-retainer claims; now redirects to `/about` |
-| `/company/team` | `.legacy/app/company/team/page-task1.tsx` | Duplicate team page with unsupported portfolio-count claim; now redirects to `/about/team` |
+|| `/company/team` | `.legacy/app/company/team/page-task1.tsx` | Duplicate team page with unsupported portfolio-count claim; now redirects to `/about/team` |
+
+---
+
+## Task 1 Completion Record (2026-07-17)
+
+**Commit:** e5f3f7eec2a56e36f845611c342bc92ea0e681dd
+**Date:** 2026-07-17T00:08:33Z
+**Status:** PASS
+
+**Static review:**
+- 50+ files changed in quarantine commit
+- 16 App Router routes quarantined with `notFound()` + `robots: { index: false, follow: false }`
+- 9 additional routes quarantined (checkout variants, audit subpaths, HTML files)
+- Rewritten `/about` and `/about/team`: no fabricated proof claims
+- Canonical `/checkout`: verified Stripe Payment Link only
+- API routes: audit/email return 503 `AUDIT_REBUILD_IN_PROGRESS`
+- Global schema: Organization + WebSite only (no audit/review/price claims)
+- Sitemap: excludes case-studies and blocked routes
+- Jest: 48/48 PASS, TypeScript: PASS, Build: PASS
+- No forms, email inputs, or links to quarantined routes in active pages
+
+**Live review:**
+- 25 quarantined routes: all return HTTP 404
+- 404 pages: neutral UI, noindex/nofollow, no forms/checkout/fabricated content
+- Root: maintenance notice rendered, no email capture
+- Footer: no blocked links
+- JSON-LD: clean Organization/WebSite (no 60-second/rating/review/$97)
+- Sitemap: excludes case-studies and blocked routes
+- `/about` and `/about/team`: no `$2.3M`/`200+ landing pages` metrics
+- API: POST `/api/audit` → 503, POST `/api/audit/email` → 503
+- HTML files: all 404
+
+**Decision:** Task 1 complete. Production fails closed across all routes, APIs, schemas, sitemap, and rendered surfaces.
