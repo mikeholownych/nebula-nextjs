@@ -1202,6 +1202,7 @@ def main():
     parser.add_argument("url", help="URL to audit")
     parser.add_argument("email", help="Lead email address")
     parser.add_argument("--dry-run", action="store_true", help="Don't send, just print")
+    parser.add_argument("--json", action="store_true", help="Output as JSON (for API integration)")
     parser.add_argument("--thread-id", help="AgentMail thread ID for reply")
     parser.add_argument("--message-id", help="AgentMail message ID to reply to")
     parser.add_argument("--trigger-context", help="Public buying trigger that explains why this audit is relevant")
@@ -1254,11 +1255,31 @@ def main():
     }
     attribution = {k: v for k, v in attribution.items() if v not in (None, "")}
 
-    if args.dry_run:
+    if args.dry_run and not getattr(args, 'json', False):
         print("=== DRY RUN ===")
         print(f"To: {args.email}")
         print(f"Subject: {email_body['subject']}")
         print(email_body["text"])
+        return
+
+    if getattr(args, 'json', False):
+        # Output JSON for API integration (n8n workflow)
+        import json
+        result = {
+            "url": args.url,
+            "email": args.email,
+            "name": args.name if hasattr(args, 'name') else None,
+            "score": score,
+            "grade": audit.get("overall_grade", ""),
+            "findings": audit.get("opp_matrix", []),
+            "dimensions": audit.get("dimensions", {}),
+            "tech_stack": audit.get("tech_stack", {}),
+            "email_subject": email_body["subject"],
+            "email_body_text": email_body["text"],
+            "email_body_html": email_body.get("html", ""),
+            "dry_run": args.dry_run,
+        }
+        print(json.dumps(result))
         return
 
     sent = send_via_agentmail(
