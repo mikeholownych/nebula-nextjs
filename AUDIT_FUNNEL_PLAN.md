@@ -542,21 +542,18 @@ Before proceeding:
 - [x] Add `--json` flag to deliver_audit.py for API integration
 - [x] Set up n8n workflows via n8n-build MCP:
   - [x] `J4AQX7eHhht8XRga` — Audit Processing (Resilient) ✅ ACTIVE
-  - [x] `jhxYkE0wppyIGP0F` — Email Delivery Queue ✅ (inactive)
-  - [x] `cAPeE9LrlIM9dSsN` — Follow-up Sequence ✅ (inactive)
-- [x] Configure PostgreSQL credentials in n8n (`4A8XEDkH12OxT7IO`)
+  - [x] `jhxYkE0wppyIGP0F` — Email Delivery Queue ✅ (inactive — needs password)
+  - [x] `cAPeE9LrlIM9dSsN` — Follow-up Sequence ✅ (inactive — needs password)
+- [x] Configure PostgreSQL credentials in n8n (`4A8XEDkH12OxT7IO` — needs password update in UI)
 - [x] Create AgentMail API credential (`mPASqxXTDa6UsyRE`)
 - [x] Create FastAPI audit endpoint (`/audit/run` on port 8001)
-- [x] Platform API running (port 8001)
-- [ ] Configure n8n to reach local API (Cloudflare Tunnel or public URL)
-- [ ] Test end-to-end webhook flow
-- [ ] Activate email delivery and follow-up workflows
-  - [x] `jhxYkE0wppyIGP0F` — Email Delivery Queue ✅
-  - [x] `cAPeE9LrlIM9dSsN` — Follow-up Sequence ✅
-- [ ] Configure PostgreSQL credentials in n8n
-- [ ] Configure email/SMTP credentials in n8n
-- [ ] Test webhook endpoints
-- [ ] Test deliver_audit.py integration
+- [x] Platform API running (port 8001, background process `proc_52d3e79047bf`)
+- [x] Create Next.js API proxy at `/api/audit/run` → `localhost:8001`
+- [x] **End-to-end audit API working** ✅ (POST test returned score=6.8, grade=B)
+- [ ] Update PostgreSQL password in n8n credential UI
+- [ ] Activate email delivery workflow
+- [ ] Activate follow-up sequence workflow
+- [ ] Test webhook → database write verification
 
 **Phase 2: Frontend (Day 2)**
 - [ ] Build `/audit` landing page (URL input)
