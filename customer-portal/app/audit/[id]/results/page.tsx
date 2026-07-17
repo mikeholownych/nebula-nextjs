@@ -40,6 +40,9 @@ export default function ResultsPage() {
   const [loading, setLoading] = useState(true)
   const [results, setResults] = useState<AuditResult | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [emailForm, setEmailForm] = useState({ email: '', name: '' })
+  const [sendingEmail, setSendingEmail] = useState(false)
+  const [emailSent, setEmailSent] = useState(false)
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -70,6 +73,35 @@ export default function ResultsPage() {
 
     fetchResults()
   }, [auditId])
+
+  const sendEmail = async () => {
+    if (!emailForm.email || !results) return
+    
+    setSendingEmail(true)
+    try {
+      const response = await fetch('/api/audit/email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...emailForm,
+          url: results.url,
+          score: results.score,
+          grade: results.grade,
+          findings: results.findings,
+        }),
+      })
+      
+      const data = await response.json()
+      if (data.status === 'sent') {
+        setEmailSent(true)
+        window.location.href = `${window.location.pathname}?unlocked=true`
+      }
+    } catch (err) {
+      console.error('Email send error:', err)
+    } finally {
+      setSendingEmail(false)
+    }
+  }
 
   if (loading) {
     return (
@@ -240,20 +272,47 @@ export default function ResultsPage() {
         </div>
 
         {/* CTA */}
-        {!unlocked && (
-          <Card variant="elevated" className="mt-8 text-center">
-            <h3 className="mb-2 text-lg font-bold text-fg">
+        {!unlocked && !emailSent && (
+          <Card variant="elevated" className="mt-8">
+            <h3 className="mb-2 text-center text-lg font-bold text-fg">
               Want the Full Report?
             </h3>
-            <p className="mb-4 text-fg-muted">
-              Share your email for detailed fixes and implementation guidance
+            <p className="mb-4 text-center text-fg-muted">
+              Enter your email to receive the complete audit with all {results?.findings.length || 0} findings
             </p>
-            <button
-              onClick={() => window.location.href = `/audit/${params.id}/processing`}
-              className="rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light"
-            >
-              Get Full Report
-            </button>
+            
+            <div className="space-y-3">
+              <input
+                type="email"
+                placeholder="Your email address"
+                value={emailForm.email}
+                onChange={(e) => setEmailForm({ ...emailForm, email: e.target.value })}
+                className="w-full rounded-lg border border-fg-muted/30 bg-bg px-4 py-2 text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none"
+              />
+              <input
+                type="text"
+                placeholder="Your name (optional)"
+                value={emailForm.name}
+                onChange={(e) => setEmailForm({ ...emailForm, name: e.target.value })}
+                className="w-full rounded-lg border border-fg-muted/30 bg-bg px-4 py-2 text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none"
+              />
+              <button
+                onClick={sendEmail}
+                disabled={!emailForm.email || sendingEmail}
+                className="w-full rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light disabled:opacity-50"
+              >
+                {sendingEmail ? 'Sending...' : 'Send Full Report'}
+              </button>
+            </div>
+          </Card>
+        )}
+
+        {emailSent && (
+          <Card variant="elevated" className="mt-8 text-center">
+            <h3 className="mb-2 text-lg font-bold text-green-500">✓ Email Sent!</h3>
+            <p className="text-fg-muted">
+              Check your inbox for the full audit report
+            </p>
           </Card>
         )}
 

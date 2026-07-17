@@ -11,6 +11,8 @@ import json
 import sys
 import os
 
+from platform_api.services.email_service import email_service, AuditEmailData
+
 router = APIRouter(prefix="/audit", tags=["audit"])
 
 # Path to deliver_audit.py
@@ -119,3 +121,45 @@ async def run_audit(request: AuditRequest):
 async def health_check():
     """Health check endpoint"""
     return {"status": "ok", "service": "audit-api"}
+
+
+class EmailRequest(BaseModel):
+    url: str
+    email: str
+    name: Optional[str] = None
+    score: float
+    grade: str
+    findings: list
+
+
+class EmailResponse(BaseModel):
+    status: str
+    message_id: Optional[str] = None
+    error: Optional[str] = None
+
+
+@router.post("/email", response_model=EmailResponse)
+async def send_audit_email(request: EmailRequest):
+    """Send audit results via email"""
+    try:
+        result = await email_service.send_audit_results(
+            AuditEmailData(
+                url=request.url,
+                email=request.email,
+                name=request.name,
+                score=request.score,
+                grade=request.grade,
+                findings=request.findings,
+            )
+        )
+        
+        return EmailResponse(
+            status=result.get("status", "unknown"),
+            message_id=result.get("message_id"),
+            error=result.get("error"),
+        )
+    except Exception as e:
+        return EmailResponse(
+            status="error",
+            error=str(e),
+        )
