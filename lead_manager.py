@@ -129,7 +129,8 @@ def get_lead(email):
 
 def upsert_lead(email, stage=None, source=None, name=None, url=None,
                 offer=None, product_stage=None, total_spent_cents=None,
-                content_post_url=None, content_angle=None):
+                content_post_url=None, content_angle=None,
+                nurture_track=None, audit_id=None):
     """
     Create or update a lead record.
 
@@ -139,6 +140,8 @@ def upsert_lead(email, stage=None, source=None, name=None, url=None,
     - Appends to the journal on every change.
     - content_post_url: LinkedIn post URL that generated this lead.
     - content_angle: classification of the content that drove them ('teach', 'flex', 'case_study', 'hook', 'story').
+    - nurture_track: problem-specific track assignment (headline-clarity, message-match, cta-friction, social-proof).
+    - audit_id: ID of the audit that triggered track assignment.
     """
     email = email.strip().lower()
     if not email or "@" not in email:
@@ -187,6 +190,15 @@ def upsert_lead(email, stage=None, source=None, name=None, url=None,
             if content_post_url not in existing_urls:
                 content_posts.append(post_entry)
 
+        # Nurture track assignment
+        if nurture_track:
+            # New track assignment resets position
+            existing["nurture_track"] = nurture_track
+            existing["track_started_at"] = now
+            existing["track_position_days"] = 0
+            if audit_id:
+                existing["track_audit_id"] = audit_id
+
         existing["last_seen"] = now
         db[email] = existing
     else:
@@ -208,6 +220,11 @@ def upsert_lead(email, stage=None, source=None, name=None, url=None,
             "tags": [],
             "notes": "",
             "content_posts": [{"url": content_post_url, "angle": content_angle or "", "first_seen": now}] if content_post_url else [],
+            # Nurture track fields
+            "nurture_track": nurture_track or "",
+            "track_started_at": now if nurture_track else None,
+            "track_position_days": 0,
+            "track_audit_id": audit_id or "",
         }
         db[email] = entry
 
@@ -222,6 +239,8 @@ def upsert_lead(email, stage=None, source=None, name=None, url=None,
         "source": source,
         "name": name,
     }
+    if nurture_track:
+        journal_entry["nurture_track"] = nurture_track
     _journal(journal_entry)
 
     return db[email]

@@ -12,6 +12,8 @@ import sys
 import os
 
 from platform_api.services.email_service import email_service, AuditEmailData
+from platform_api.services.audit_db import audit_db
+from platform_api.services.analytics import analytics
 
 router = APIRouter(prefix="/audit", tags=["audit"])
 
@@ -39,11 +41,21 @@ class AuditResponse(BaseModel):
 
 @router.post("/run", response_model=AuditResponse)
 async def run_audit(request: AuditRequest):
-    """
-    Run deliver_audit.py and return JSON results.
-    Called by n8n workflow after audit record is created.
-    """
+    """Run deliver_audit.py and return JSON results. Persist to DB."""
     try:
+        # Create audit record in DB
+        audit_id = await audit_db.create_audit(
+            url=request.url,
+            email=request.email or 'anonymous@example.com',
+            name=request.name
+        )
+        
+        # Track audit started
+        await analytics.track_audit_started(
+            url=request.url,
+            email=request.email or 'anonymous'
+        )
+        
         # Build command
         cmd = [
             "bash", "-c",
@@ -55,13 +67,13 @@ async def run_audit(request: AuditRequest):
             cmd,
             capture_output=True,
             text=True,
-            timeout=120,  # 2 minute timeout
+            timeout=120,
             cwd="/home/mike/nebula"
         )
         
         if result.returncode != 0:
             return AuditResponse(
-                audit_id=request.audit_id,
+                audit_id=str(audit_id),
                 url=request.url,
                 status="error",
                 error=f"Script failed: {result.stderr[:500]}"
@@ -77,7 +89,7 @@ async def run_audit(request: AuditRequest):
         
         if not json_line:
             return AuditResponse(
-                audit_id=request.audit_id,
+                audit_id=str(audit_id),
                 url=request.url,
                 status="error",
                 error="No JSON output found"
@@ -85,8 +97,24 @@ async def run_audit(request: AuditRequest):
         
         data = json.loads(json_line)
         
+        # Update database
+        await audit_db.update_audit(
+            audit_id=audit_id,
+            score=data.get('score', 0),
+            grade=data.get('grade', 'N/A'),
+            findings=data.get('findings', []),
+            status='completed'
+        )
+        
+        # Track audit completed
+        await analytics.track_audit_completed(
+            email=request.email or 'anonymous',
+            score=data.get('score', 0),
+            grade=data.get('grade', 'N/A')
+        )
+        
         return AuditResponse(
-            audit_id=request.audit_id,
+            audit_id=str(audit_id),
             url=request.url,
             status="completed",
             score=data.get("score"),
@@ -140,7 +168,7 @@ class EmailResponse(BaseModel):
 
 @router.post("/email", response_model=EmailResponse)
 async def send_audit_email(request: EmailRequest):
-    """Send audit results via email"""
+    """Send audit results via email and mark as sent in DB"""
     try:
         result = await email_service.send_audit_results(
             AuditEmailData(
@@ -152,6 +180,16 @@ async def send_audit_email(request: EmailRequest):
                 findings=request.findings,
             )
         )
+        
+        # Mark email as sent in DB
+        audits = await audit_db.get_audits_by_email(request.email, limit=1)
+        if audits:
+            await audit_db.mark_email_sent(audits[0]['id'])
+            # Track email sent
+            await analytics.track_email_sent(
+                email=request.email,
+                audit_id=str(audits[0]['id'])
+            )
         
         return EmailResponse(
             status=result.get("status", "unknown"),

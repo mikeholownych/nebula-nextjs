@@ -1,0 +1,352 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-07-17",
+  "problems": {
+    "headline-clarity": {
+      "id": "PROB-HEADLINE-001",
+      "name": "Headline Clarity",
+      "description": "Headline describes product category but not buyer's problem",
+      "consequence": "Visitors must infer relevance before continuing",
+      "severity": "high",
+      "diagnostic_id": "DIAG-HEADLINE-001",
+      "audiences": ["saas_founder", "paid_media_lead", "growth_lead"],
+      "related_findings": ["NF-HEADLINE-001", "NF-HEADLINE-002"],
+      "nurture_track": "headline-clarity"
+    },
+    "message-match": {
+      "id": "PROB-MESSAGE-MATCH-001",
+      "name": "Ad-to-Page Message Match",
+      "description": "Ad promises one outcome, landing page introduces different idea",
+      "consequence": "Visitor must reconcile mismatch, increasing cognitive load",
+      "severity": "high",
+      "diagnostic_id": "DIAG-MESSAGE-MATCH-001",
+      "audiences": ["saas_founder", "paid_media_lead", "demand_gen"],
+      "related_findings": ["NF-MESSAGE-MATCH-001"],
+      "nurture_track": "message-match"
+    },
+    "cta-friction": {
+      "id": "PROB-CTA-001",
+      "name": "CTA Decision Friction",
+      "description": "CTA visible but next step undefined or ambiguous",
+      "consequence": "Visitor doesn't know what click commits them to",
+      "severity": "medium",
+      "diagnostic_id": "DIAG-CTA-001",
+      "audiences": ["saas_founder", "paid_media_lead", "product_lead"],
+      "related_findings": ["NF-CTA-001", "NF-CTA-002"],
+      "nurture_track": "cta-friction"
+    },
+    "social-proof-credibility": {
+      "id": "PROB-SOCIAL-PROOF-001",
+      "name": "Social Proof Credibility Gap",
+      "description": "Weak or missing proof near decision points",
+      "consequence": "Visitor lacks evidence to trust claims",
+      "severity": "medium",
+      "diagnostic_id": "DIAG-SOCIAL-PROOF-001",
+      "audiences": ["saas_founder", "ecommerce_founder", "agency_founder"],
+      "related_findings": ["NF-SOCIAL-PROOF-001"],
+      "nurture_track": "social-proof"
+    }
+  },
+  "diagnostics": {
+    "DIAG-HEADLINE-001": {
+      "id": "DIAG-HEADLINE-001",
+      "name": "Headline Clarity Checker",
+      "url_slug": "headline-checker",
+      "description": "Evaluate headline against 5 clarity dimensions",
+      "tier": 1,
+      "completion_time_estimate": "5 min",
+      "required_inputs": ["headline_text", "target_audience", "traffic_source"],
+      "outputs": ["clarity_score", "specificity_score", "problem_alignment"],
+      "lead_capture": "optional_email_for_results"
+    },
+    "DIAG-MESSAGE-MATCH-001": {
+      "id": "DIAG-MESSAGE-MATCH-001",
+      "name": "Ad-to-Page Message Match Checker",
+      "url_slug": "message-match-checker",
+      "description": "Compare ad promise against page headline",
+      "tier": 1,
+      "completion_time_estimate": "3 min",
+      "required_inputs": ["ad_text", "page_headline"],
+      "outputs": ["match_score", "gap_analysis", "recommendation"],
+      "lead_capture": "optional_email_for_worksheet"
+    },
+    "DIAG-CTA-001": {
+      "id": "DIAG-CTA-001",
+      "name": "CTA Decision Clarity Checker",
+      "url_slug": "cta-checker",
+      "description": "Evaluate CTA for commitment clarity",
+      "tier": 1,
+      "completion_time_estimate": "2 min",
+      "required_inputs": ["cta_text", "landing_page_url"],
+      "outputs": ["clarity_score", "missing_answers", "recommended_fixes"],
+      "lead_capture": "optional_email_for_worksheet"
+    },
+    "DIAG-SOCIAL-PROOF-001": {
+      "id": "DIAG-SOCIAL-PROOF-001",
+      "name": "Social Proof Credibility Evaluator",
+      "url_slug": "social-proof-checker",
+      "description": "Assess proof strength and placement",
+      "tier": 1,
+      "completion_time_estimate": "5 min",
+      "required_inputs": ["landing_page_url"],
+      "outputs": ["proof_inventory", "credibility_score", "placement_recommendations"],
+      "lead_capture": "optional_email_for_examples"
+    }
+  },
+  "findings": {
+    "NF-HEADLINE-001": {
+      "id": "NF-HEADLINE-001",
+      "category": "headline",
+      "observation": "Headline describes product category but not buyer's problem",
+      "consequence": "Visitors must infer relevance before continuing",
+      "severity": "high",
+      "evidence_required": ["page_snapshot", "headline_text", "target_audience"],
+      "remediation_steps": ["identify_pain", "align_with_ad_promise", "retain_offer_specificity"],
+      "related_resource": "RES-HEADLINE-001",
+      "related_service": "landing-page-audit"
+    },
+    "NF-HEADLINE-002": {
+      "id": "NF-HEADLINE-002",
+      "category": "headline",
+      "observation": "Headline uses jargon visitor must interpret",
+      "consequence": "Cognitive load before value proposition is understood",
+      "severity": "medium",
+      "evidence_required": ["page_snapshot", "headline_text"],
+      "remediation_steps": ["use_visitor_language", "test_with_stranger"],
+      "related_resource": "RES-HEADLINE-002",
+      "related_service": "landing-page-audit"
+    },
+    "NF-MESSAGE-MATCH-001": {
+      "id": "NF-MESSAGE-MATCH-001",
+      "category": "message_match",
+      "observation": "Ad promise different from page headline focus",
+      "consequence": "Visitor reconciles mismatch instead of evaluating offer",
+      "severity": "high",
+      "evidence_required": ["ad_screenshot", "page_snapshot"],
+      "remediation_steps": ["align_promise", "single_thread", "variant_specific_pages"],
+      "related_resource": "RES-MESSAGE-MATCH-001",
+      "related_service": "landing-page-audit"
+    },
+    "NF-CTA-001": {
+      "id": "NF-CTA-001",
+      "category": "cta",
+      "observation": "CTA button text doesn't define next step",
+      "consequence": "Visitor doesn't know commitment level",
+      "severity": "medium",
+      "evidence_required": ["cta_screenshot", "cta_text"],
+      "remediation_steps": ["define_next_step", "clarify_commitment", "add_context"],
+      "related_resource": "RES-CTA-001",
+      "related_service": "cta-audit"
+    },
+    "NF-CTA-002": {
+      "id": "NF-CTA-002",
+      "category": "cta",
+      "observation": "CTA placement below fold or after weak proof",
+      "consequence": "Visitor reaches decision point without evidence",
+      "severity": "medium",
+      "evidence_required": ["page_snapshot", "cta_location"],
+      "remediation_steps": ["reposition_near_proof", "ensure_visibility"],
+      "related_resource": "RES-CTA-002",
+      "related_service": "cta-audit"
+    },
+    "NF-SOCIAL-PROOF-001": {
+      "id": "NF-SOCIAL-PROOF-001",
+      "category": "social_proof",
+      "observation": "Testimonials lack specificity or verifiability",
+      "consequence": "Visitor dismisses claims as marketing speak",
+      "severity": "medium",
+      "evidence_required": ["testimonial_text", "testimonial_location"],
+      "remediation_steps": ["add_specific_outcome", "add_name_photo", "link_to_source"],
+      "related_resource": "RES-SOCIAL-PROOF-001",
+      "related_service": "landing-page-audit"
+    }
+  },
+  "resources": {
+    "RES-HEADLINE-001": {
+      "id": "RES-HEADLINE-001",
+      "name": "Headline Rewrite Worksheet",
+      "type": "fix_asset",
+      "tier": 2,
+      "url_slug": "headline-worksheet",
+      "format": "interactive_worksheet",
+      "completes_in": "10 min",
+      "problem_ids": ["PROB-HEADLINE-001"],
+      "finding_ids": ["NF-HEADLINE-001", "NF-HEADLINE-002"],
+      "usage_gate": "email_optional",
+      "generates_leads": true
+    },
+    "RES-MESSAGE-MATCH-001": {
+      "id": "RES-MESSAGE-MATCH-001",
+      "name": "Ad/Page Comparison Worksheet",
+      "type": "fix_asset",
+      "tier": 2,
+      "url_slug": "message-match-worksheet",
+      "format": "comparison_template",
+      "completes_in": "5 min",
+      "problem_ids": ["PROB-MESSAGE-MATCH-001"],
+      "finding_ids": ["NF-MESSAGE-MATCH-001"],
+      "usage_gate": "email_optional",
+      "generates_leads": true
+    },
+    "RES-CTA-001": {
+      "id": "RES-CTA-001",
+      "name": "CTA Specificity Worksheet",
+      "type": "fix_asset",
+      "tier": 2,
+      "url_slug": "cta-specificity-worksheet",
+      "format": "checklist_worksheet",
+      "completes_in": "8 min",
+      "problem_ids": ["PROB-CTA-001"],
+      "finding_ids": ["NF-CTA-001"],
+      "usage_gate": "email_optional",
+      "generates_leads": true
+    },
+    "RES-SOCIAL-PROOF-001": {
+      "id": "RES-SOCIAL-PROOF-001",
+      "name": "Social Proof Placement Guide",
+      "type": "fix_asset",
+      "tier": 2,
+      "url_slug": "social-proof-guide",
+      "format": "visual_guide",
+      "completes_in": "7 min",
+      "problem_ids": ["PROB-SOCIAL-PROOF-001"],
+      "finding_ids": ["NF-SOCIAL-PROOF-001"],
+      "usage_gate": "email_optional",
+      "generates_leads": true
+    }
+  },
+  "audiences": {
+    "saas_founder": {
+      "id": "AUD-001",
+      "name": "SaaS Founder",
+      "description": "Founding team member with decision authority",
+      "buying_triggers": ["spent_10k_no_orders", "active_paid_traffic", "self_funded"],
+      "channels": ["linkedin", "hn", "reddit"],
+      "exclusion_criteria": ["pre-revenue_no_traffic", "agency"]
+    },
+    "paid_media_lead": {
+      "id": "AUD-002",
+      "name": "Paid Media Lead",
+      "description": "Owns ad spend, measured on conversion",
+      "buying_triggers": ["roas_declining", "cpa_rising", "landing_page_mismatch"],
+      "channels": ["linkedin", "twitter"],
+      "exclusion_criteria": ["pure_brand_awareness"]
+    },
+    "growth_lead": {
+      "id": "AUD-003",
+      "name": "Growth Lead",
+      "description": "Responsible for funnel metrics",
+      "buying_triggers": ["conversion_drop", "new_traffic_source", "a/b_test_plateau"],
+      "channels": ["linkedin", "twitter", "slack_communities"],
+      "exclusion_criteria": ["pure_organic_focus"]
+    },
+    "demand_gen": {
+      "id": "AUD-004",
+      "name": "Demand Generation",
+      "description": "Manages pipeline, evaluated on MQL volume",
+      "buying_triggers": ["quality_drop", "disqualification_rate_rising"],
+      "channels": ["linkedin"],
+      "exclusion_criteria": ["brand_focused"]
+    },
+    "ecommerce_founder": {
+      "id": "AUD-005",
+      "name": "Ecommerce Founder",
+      "description": "Direct-to-consumer store owner",
+      "buying_triggers": ["facebook_ads_no_sales", "high_cart_abandonment"],
+      "channels": ["facebook_groups", "reddit", "twitter"],
+      "exclusion_criteria": ["marketplace_only"]
+    },
+    "agency_founder": {
+      "id": "AUD-006",
+      "name": "Agency Founder",
+      "description": "Runs client accounts, needs CRO capability",
+      "buying_triggers": [" client_retention_risk", "capability_gap"],
+      "channels": ["linkedin", "agency_communities"],
+      "exclusion_criteria": ["pure_seo_agency"]
+    }
+  },
+  "post_families": {
+    "diagnostic": {
+      "weight": 0.30,
+      "purpose": "Creates problem recognition",
+      "example_angles": ["symptom", "misdiagnosis", "mechanism"]
+    },
+    "teardown": {
+      "weight": 0.20,
+      "purpose": "Demonstrates applied judgment",
+      "example_angles": ["before_after", "what_changed", "why_it_worked"]
+    },
+    "corrective": {
+      "weight": 0.15,
+      "purpose": "Provides immediate utility",
+      "example_angles": ["fix_checklist", "one_thing_to_change", "quick_win"]
+    },
+    "evidence": {
+      "weight": 0.10,
+      "purpose": "Establishes credibility",
+      "example_angles": ["data_point", "pattern_frequency", "benchmark"]
+    },
+    "contrarian": {
+      "weight": 0.10,
+      "purpose": "Displaces weak assumptions",
+      "example_angles": ["myth_bust", "counter_intuitive", "why_x_fails"]
+    },
+    "resource": {
+      "weight": 0.10,
+      "purpose": "Captures declared interest",
+      "example_angles": ["tool_announce", "worksheet_release", "diagnostic_launch"]
+    },
+    "commercial": {
+      "weight": 0.05,
+      "purpose": "Direct commercial invitation",
+      "example_angles": ["case_study", "offer_announce", "limited_availability"]
+    }
+  },
+  "nurture_tracks": {
+    "headline-clarity": {
+      "track_id": "NURTURE-HEADLINE-001",
+      "problem_id": "PROB-HEADLINE-001",
+      "sequence": [
+        {"day": 0, "type": "audit_finding", "purpose": "Explain what was detected"},
+        {"day": 2, "type": "diagnostic", "purpose": "Headline clarity checker invite"},
+        {"day": 5, "type": "rewrite_framework", "purpose": "Provide implementation resource"},
+        {"day": 9, "type": "teardown", "purpose": "Before/after example"},
+        {"day": 14, "type": "rescan_invite", "purpose": "Check remediation progress"},
+        {"day": 18, "type": "review_invite", "purpose": "Expert review escalation"}
+      ]
+    },
+    "message-match": {
+      "track_id": "NURTURE-MESSAGE-MATCH-001",
+      "problem_id": "PROB-MESSAGE-MATCH-001",
+      "sequence": [
+        {"day": 0, "type": "audit_finding", "purpose": "Explain mismatch detected"},
+        {"day": 2, "type": "worksheet", "purpose": "Ad/page comparison tool"},
+        {"day": 6, "type": "campaign_examples", "purpose": "Multi-audience failure mode"},
+        {"day": 10, "type": "teardown", "purpose": "Fixed example"},
+        {"day": 14, "type": "rescan_or_review", "purpose": "Check progress or escalate"}
+      ]
+    },
+    "cta-friction": {
+      "track_id": "NURTURE-CTA-001",
+      "problem_id": "PROB-CTA-001",
+      "sequence": [
+        {"day": 0, "type": "audit_finding", "purpose": "Explain commitment ambiguity"},
+        {"day": 2, "type": "specificity_worksheet", "purpose": "Define next step"},
+        {"day": 5, "type": "form_friction", "purpose": "Next-step friction check"},
+        {"day": 9, "type": "cta_teardown", "purpose": "Improved example"},
+        {"day": 12, "type": "rescan", "purpose": "Verify fix"}
+      ]
+    },
+    "social-proof": {
+      "track_id": "NURTURE-SOCIAL-PROOF-001",
+      "problem_id": "PROB-SOCIAL-PROOF-001",
+      "sequence": [
+        {"day": 0, "type": "audit_finding", "purpose": "Explain credibility gap"},
+        {"day": 3, "type": "evidence_hierarchy", "purpose": "Proof types ranked"},
+        {"day": 7, "type": "strong_weak_examples", "purpose": "Comparison examples"},
+        {"day": 11, "type": "placement_teardown", "purpose": "Where proof belongs"},
+        {"day": 15, "type": "review_invite", "purpose": "Expert review"}
+      ]
+    }
+  }
+}
