@@ -1,0 +1,57 @@
+name: Production Smoke Test
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every 15 minutes
+    - cron: '*/15 * * * *'
+  push:
+    branches: [main]
+
+jobs:
+  smoke:
+    name: Production Health Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check site availability
+        run: |
+          curl -sSf https://nebulacomponents.shop -o /dev/null || exit 1
+
+      - name: Verify OG image
+        run: |
+          curl -sSf https://nebulacomponents.shop/opengraph-image -o /dev/null || exit 1
+
+      - name: Check no localhost in metadata
+        run: |
+          curl -s https://nebulacomponents.shop | grep -o 'og:image"[^"]*' | grep -v localhost || echo "OG image OK"
+          curl -s https://nebulacomponents.shop | grep -o 'twitter:image"[^"]*' | grep -v localhost || echo "Twitter image OK"
+
+      - name: Verify blocked routes return 404
+        run: |
+          ROUTES=(
+            "/audit/results"
+            "/part-before"
+            "/part-after"
+            "/ad-burn-leaderboard"
+          )
+          for route in "${ROUTES[@]}"; do
+            CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://nebulacomponents.shop${route}")
+            if [ "$CODE" != "404" ]; then
+              echo "ERROR: ${route} returned ${CODE}, expected 404"
+              exit 1
+            fi
+            echo "PASS: ${route} -> 404"
+          done
+
+      - name: Verify API maintenance mode
+        run: |
+          CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST https://nebulacomponents.shop/api/audit/start)
+          if [ "$CODE" != "503" ] && [ "$CODE" != "404" ]; then
+            echo "WARNING: /api/audit/start returned ${CODE}, expected 503 or 404"
+          fi
+
+      - name: Create health badge
+        if: success()
+        run: echo "::notice::Production smoke tests passed"

@@ -1,11 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import dynamic from 'next/dynamic';
-
-const Breadcrumb = dynamic(() => import('@/app/components/Breadcrumb'), { ssr: false });
-
-export default function BreadcrumbLayout({
+export default function RootBreadcrumbLayout({
   children,
 }: {
   children: React.ReactNode;

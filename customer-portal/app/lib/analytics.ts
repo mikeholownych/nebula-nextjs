@@ -115,7 +115,7 @@ export function trackCheckoutStarted(product: string, value: number): void {
 /**
  * Track purchase completion
  */
-export function trackPurchaseCompleted(productId: string, value: number, email?: string): void {
+export function trackPurchaseCompleted(productId: string, value: number, _email?: string): void {
   trackEvent("purchase_completed", {
     currency: "USD",
     value: value,

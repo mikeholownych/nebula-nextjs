@@ -18,8 +18,8 @@ const AGENTMAIL_KEY = process.env.AGENTMAIL_KEY || '';
 const AGENTMAIL_INBOX = 'nebulashop@agentmail.to';
 const AGENTMAIL_API = 'https://api.agentmail.to/v0';
 
-const FROM_EMAIL = 'nebulashop@agentmail.to';
-const FROM_NAME = 'Mike H from Nebula';
+// Sender identity used in AgentMail API calls
+// Reserved for future use: FROM_EMAIL, FROM_NAME
 
 export interface EmailPayload {
   to_email: string;

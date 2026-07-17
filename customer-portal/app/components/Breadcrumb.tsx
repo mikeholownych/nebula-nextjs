@@ -42,7 +42,7 @@ export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
     const segments = pathname.split('/').filter(Boolean);
     let currentPath = '';
     
-    breadcrumbItems = segments.map((segment, index) => {
+    breadcrumbItems = segments.map((segment, _index) => {
       currentPath += `/${segment}`;
       return {
         name: slugToLabel(segment),

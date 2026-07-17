@@ -14,12 +14,10 @@ export default function UnsubscribePage() {
     `Changed your mind? <a href="/" className="text-indigo-400 hover:underline">Run a free audit</a> at any time.<br/>
      If you believe this was sent in error, <a href="mailto:ops@launchcrate.io" className="text-indigo-400 hover:underline">contact us</a>.`
   )
-  const [emailFromUrl, setEmailFromUrl] = useState('')
-
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     const email = params.get('email') || ''
-    setEmailFromUrl(email)
+    // Note: email state variable removed (unused)
 
     if (email && email.includes('@')) {
       // Auto-process when email is in URL
