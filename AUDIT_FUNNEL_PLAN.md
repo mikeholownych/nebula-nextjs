@@ -540,7 +540,13 @@ Before proceeding:
 **Phase 1: Database + Backend (Day 1)**
 - [x] Create PostgreSQL tables (customers, audits, purchases, monitors)
 - [x] Add `--json` flag to deliver_audit.py for API integration
-- [ ] Set up n8n workflows via n8n-build MCP
+- [x] Set up n8n workflows via n8n-build MCP:
+  - [x] `q843DIBctuj4EWjG` — Audit Processing (original, basic)
+  - [x] `J4AQX7eHhht8XRga` — Audit Processing (Resilient) ✅
+  - [x] `jhxYkE0wppyIGP0F` — Email Delivery Queue ✅
+  - [x] `cAPeE9LrlIM9dSsN` — Follow-up Sequence ✅
+- [ ] Configure PostgreSQL credentials in n8n
+- [ ] Configure email/SMTP credentials in n8n
 - [ ] Test webhook endpoints
 - [ ] Test deliver_audit.py integration
 

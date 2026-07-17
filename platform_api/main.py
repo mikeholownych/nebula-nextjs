@@ -36,10 +36,12 @@ setup_cors(app, settings.ALLOWED_ORIGINS)
 from platform_api.auth.routes import router as auth_router
 from platform_api.routes.audits import router as audits_router
 from platform_api.routes.organizations import router as orgs_router
+from platform_api.routes.audit_api import router as audit_api_router
 
 app.include_router(auth_router, prefix="/api")
 app.include_router(orgs_router)
 app.include_router(audits_router)
+app.include_router(audit_api_router)
 
 
 # Exception handlers - order matters
