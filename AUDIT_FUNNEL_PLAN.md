@@ -563,8 +563,10 @@ Before proceeding:
 - [x] **End-to-end audit funnel working** ✅ (tested: notion.so → 6.1, C, 4 finding...[truncated]
 
 **Phase 3: Upsells + Polish (Day 3)**
-- [ ] Stripe checkout integration ($7, $147, $1,497)
-- [ ] Email templates (audit results, follow-ups)
+- [x] **Stripe checkout integration ($7, $147, $1,497)** ✅
+- [x] **Three pricing tiers created and verified** ✅
+  - Audit Lite ($7): https://buy.stripe.com/aFacN55E0cf2fupafM43S0e
+  - Con...[truncated]
 - [ ] Analytics tracking
 - [ ] Blurred results UX
 
