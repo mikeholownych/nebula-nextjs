@@ -200,7 +200,7 @@ class Audit(Base):
     status: Mapped[str] = mapped_column(String(20), default="pending", nullable=False)
     score: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
     completed_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
-    metadata: Mapped[dict] = mapped_column(JSONB, default=dict)
+    audit_data: Mapped[dict] = mapped_column(JSONB, default=dict)
 
     # Relationships
     organization: Mapped["Organization"] = relationship(back_populates="audits")

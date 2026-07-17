@@ -10,8 +10,8 @@ from sqlalchemy import select, desc
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..db.models import Audit, Membership, Organization, User
-from ..db.session import get_db
-from .auth.routes import get_current_user
+from ..db.session import get_session as get_db
+from ..auth.routes import get_current_user
 
 
 router = APIRouter(prefix="/api/audits", tags=["audits"])
