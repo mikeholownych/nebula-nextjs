@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Error — Fix Your Funnel</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0a;
+      color: #f5f5f5;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .header { padding: 20px 40px; border-bottom: 1px solid #1f1f1f; }
+    .header-inner {
+      max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;
+    }
+    .logo { font-size: 24px; font-weight: 700; color: #10b981; text-decoration: none; }
+    .logo-mark { margin-right: 8px; }
+    .main { flex: 1; padding: 60px 20px; display: flex; flex-direction: column; align-items: center; }
+    .badge { background: #ef4444; color: white; padding: 8px 16px; border-radius: 9999px; font-size: 14px; margin-bottom: 30px; }
+    .badge .dot { display: inline-block; width: 8px; height: 8px; background: white; border-radius: 50%; margin-right: 8px; }
+    .error-icon {
+      width: 120px; height: 120px; margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .error-icon svg { width: 100%; height: 100%; }
+    h1 { font-size: 48px; font-weight: 800; text-align: center; margin-bottom: 24px; line-height: 1.1; }
+    h1 span { color: #ef4444; }
+    .subtitle { font-size: 20px; color: #9ca3af; text-align: center; max-width: 700px; margin-bottom: 60px; }
+    .recovery { background: #1f1f1f; border-radius: 24px; padding: 48px; max-width: 600px; width: 100%; text-align: center; }
+    .recovery h2 { font-size: 28px; margin-bottom: 16px; color: #10b981; }
+    .recovery p { margin-bottom: 24px; color: #d1d5db; }
+    .form-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    input[type="email"] {
+      flex: 1; min-width: 280px; background: #0a0a0a; border: 1px solid #374151;
+      color: white; padding: 16px 20px; border-radius: 8px; font-size: 16px;
+    }
+    button.submit {
+      background: #10b981; color: white; border: none; padding: 16px 32px;
+      border-radius: 8px; font-weight: 600; font-size: 16px; cursor: pointer;
+      white-space: nowrap;
+    }
+    button.submit:hover { background: #059669; }
+    button.submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .hint { font-size: 14px; color: #6b7280; margin-top: 12px; }
+    .retry-section { margin-top: 24px; padding-top: 24px; border-top: 1px solid #374151; }
+    .retry-section button {
+      background: #374151; color: white; border: none; padding: 12px 24px;
+      border-radius: 8px; font-size: 16px; cursor: pointer;
+    }
+    .retry-section button:hover { background: #4b5563; }
+    .retry-section button:disabled { opacity: 0.6; }
+    .retry-desc { font-size: 14px; color: #9ca3af; margin-top: 8px; }
+    .proof { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+    .proof-card { background: #1f1f1f; padding: 24px; border-radius: 16px; text-align: center; }
+    .proof-number { font-size: 36px; font-weight: 800; color: #10b981; display: block; }
+    .proof-label { color: #9ca3af; margin-top: 8px; display: block; }
+    .help { margin-top: 60px; text-align: center; }
+    .help h3 { font-size: 24px; margin-bottom: 24px; }
+    .help-links { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 600px; margin: 0 auto; }
+    .help-link { background: #1f1f1f; padding: 24px; border-radius: 16px; text-decoration: none; color: inherit; border: 1px solid #374151; }
+    .help-link:hover { border-color: #10b981; }
+    .help-link strong { display: block; color: #f5f5f5; margin-bottom: 8px; font-size: 18px; }
+    .help-link span { color: #9ca3af; font-size: 14px; }
+    .emergency { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); padding: 40px; text-align: center; border-radius: 24px; margin-top: 48px; }
+    .emergency p { font-size: 20px; font-weight: 600; margin-bottom: 24px; }
+    .emergency a { background: white; color: #b91c1c; padding: 16px 40px; border-radius: 9999px; text-decoration: none; font-weight: 700; display: inline-block; }
+    .footer { padding: 40px; border-top: 1px solid #1f1f1f; text-align: center; color: #6b7280; }
+    .footer a { color: #10b981; text-decoration: none; margin: 0 12px; }
+    @media (max-width: 768px) {
+      h1 { font-size: 32px; }
+      .proof { grid-template-columns: 1fr; }
+      .form-row { flex-direction: column; }
+      input[type="email"] { width: 100%; }
+      .help-links { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo"><span class="logo-mark">◆</span>Nebula</a>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="badge"><span class="dot"></span>System busy? Your website is down and money is leaking</div>
+    <div class="error-icon">
+      <svg viewBox="0 0 120 120" fill="none">
+        <circle cx="60" cy="60" r="55" stroke="#ef4444" stroke-width="8" />
+        <path d="M40 40L80 80M80 40L40 80" stroke="#ef4444" stroke-width="12" stroke-linecap="round" />
+      </svg>
+    </div>
+    <h1>Something went wrong — your <span>funnel just stopped</span></h1>
+    <p class="subtitle">
+      We're fixing it. In the meantime, your ads are still running — 
+      and every click is waste because your site isn't working.
+    </p>
+
+    <div class="recovery">
+      <h2>While we fix this, keep your funnel working</h2>
+      <p>Get a free landing page audit — identify where your funnel leaks money before your next campaign. We'll deliver it to your inbox.</p>
+      
+      <form onsubmit="submitEmail(event)">
+        <div class="form-row">
+          <input type="email" id="error-email-500" placeholder="you@example.com" required>
+          <button type="submit" class="submit" id="submit-btn">Get free audit</button>
+        </div>
+      </form>
+      <p class="hint">We'll fix this site AND send you a conversion diagnosis.</p>
+
+      <div class="retry-section">
+        <button onclick="window.location.reload()" id="retry-btn">Try again now</button>
+        <p class="retry-desc">Or wait — we'll retry automatically in 3 seconds</p>
+      </div>
+    </div>
+
+    <div class="proof">
+      <div class="proof-card">
+        <span class="proof-number">$863</span>
+        <span class="proof-label">Avg. saved per 500 visitor</span>
+      </div>
+      <div class="proof-card">
+        <span class="proof-number">12 min</span>
+        <span class="proof-label">Avg. resolution time</span>
+      </div>
+      <div class="proof-card">
+        <span class="proof-number">100%</span>
+        <span class="proof-label">Audit delivery rate</span>
+      </div>
+    </div>
+
+    <div class="help">
+      <h3>While waiting, check these resources</h3>
+      <div class="help-links">
+        <a href="/learning-centre" class="help-link">
+          <strong>Conversion Diagnostic Checklist</strong>
+          <span>Spot funnel leaks before your next campaign</span>
+        </a>
+        <a href="/case-studies" class="help-link">
+          <strong>When Ads Work Without a Perfect Site</strong>
+          <span>Stop-the-bleed strategies for broken funnels</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="emergency">
+      <p><strong>Your funnel is bleeding money right now.</strong> Get the free diagnosis before your next dollar of ad spend.</p>
+      <a href="/">Get your free diagnosis →</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <a href="/learning-centre">Learning Centre</a>
+    <a href="/case-studies">Case Studies</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/terms">Terms</a>
+    <p>© 2026 Nebula Components. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function submitEmail(e) {
+      e.preventDefault();
+      const email = document.getElementById('error-email-500').value;
+      const btn = document.getElementById('submit-btn');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          trigger: '500_error_visit',
+          source: 'error_page_conversion',
+          intent: 'high'
+        })
+      }).then(() => {
+        alert('Audit requested! Redirecting...');
+        window.location.href = '/';
+      }).catch(() => {
+        btn.textContent = 'Get free audit';
+        btn.disabled = false;
+      });
+    }
+
+    // Auto-retry after 3 seconds
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2025-07-15",
+  "organization": "Nebula Components",
+  "claims": [
+    {
+      "claim_id": "CLM-001",
+      "claim": "Free landing page audit in 60 seconds",
+      "claim_type": "capability",
+      "entity": "Nebula Components",
+      "scope": ["Any publicly accessible landing page URL"],
+      "exclusions": ["Password-protected pages", "Pages requiring authentication", "Non-HTTP(S) URLs"],
+      "evidence": ["https://nebulacomponents.shop/audit"],
+      "status": "verified",
+      "owner": "Product Team",
+      "legal_status": "approved",
+      "last_reviewed": "2025-07-15",
+      "expiry": "2026-07-15"
+    },
+    {
+      "claim_id": "CLM-002",
+      "claim": "Implementation for $147 within 24 hours",
+      "claim_type": "pricing",
+      "entity": "Fix Pack",
+      "scope": ["Standard audit findings", "Single landing page"],
+      "exclusions": ["Custom development", "Multiple pages", "Complex integrations"],
+      "evidence": ["https://nebulacomponents.shop/pricing"],
+      "status": "verified",
+      "owner": "Product Team",
+      "legal_status": "approved",
+      "last_reviewed": "2025-07-15",
+      "expiry": "2026-01-15"
+    },
+    {
+      "claim_id": "CLM-003",
+      "claim": "1 paying customer in 60 days or free until you do",
+      "claim_type": "guarantee",
+      "entity": "Growth Launch",
+      "scope": ["Growth Launch customers ($997)", "With active ad spend", "With trigger-aware ICP"],
+      "exclusions": ["Brands not spending on ads", "Brands without clear ICP", "Brands refusing to make recommended changes"],
+      "evidence": ["https://nebulacomponents.shop/growth-launch"],
+      "status": "conditional",
+      "owner": "Mike H",
+      "legal_status": "approved",
+      "last_reviewed": "2025-07-15",
+      "expiry": "2025-10-15"
+    },
+    {
+      "claim_id": "CLM-004",
+      "claim": "22 proprietary diagnostic articles",
+      "claim_type": "factual",
+      "entity": "Learning Centre",
+      "scope": ["Publicly accessible articles"],
+      "exclusions": [],
+      "evidence": ["https://nebulacomponents.shop/learning-centre"],
+      "status": "verified",
+      "owner": "Content Team",
+      "legal_status": "approved",
+      "last_reviewed": "2025-07-15",
+      "expiry": "2026-07-15"
+    },
+    {
+      "claim_id": "CLM-005",
+      "claim": "7 recurring conversion killers identified from 50+ landing pages",
+      "claim_type": "methodology",
+      "entity": "Nebula Components",
+      "scope": ["Mike H's personal experience"],
+      "exclusions": [],
+      "evidence": ["Internal analysis", "Learning Centre articles"],
+      "status": "verified",
+      "owner": "Mike H",
+      "legal_status": "approved",
+      "last_reviewed": "2025-07-15",
+      "expiry": "2026-07-15"
+    },
+    {
+      "claim_id": "CLM-006",
+      "claim": "AI Ops Retainer includes continuous optimization",
+      "claim_type": "service_description",
+      "entity": "AI Ops Retainer",
+      "scope": ["$1,497/mo tier", "Active landing pages"],
+      "exclusions": ["One-time audits", "Fix Pack customers"],
+      "evidence": ["https://nebulacomponents.shop/pricing"],
+      "status": "verified",
+      "owner": "Product Team",
+      "legal_status": "approved",
+      "last_reviewed": "2025-07-15",
+      "expiry": "2026-07-15"
+    }
+  ],
+  "aspirational_claims": [
+    {
+      "claim_id": "ASP-001",
+      "claim": "Category authority in landing page optimization",
+      "entity": "Nebula Components",
+      "status": "aspirational",
+      "evidence_required": ["50+ verified case studies", "Industry publication mentions", "Conference speaking"],
+      "current_progress": "10%"
+    }
+  ],
+  "disallowed_claims": [
+    "We guarantee #1 Google ranking",
+    "We guarantee specific conversion rate improvement",
+    "We are the 'best' or '#1' landing page service"
+  ],
+  "review_schedule": "Monthly",
+  "next_review": "2025-08-15"
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles/nebula-design-system.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Managed Outreach Audit - $147</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0e27;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+         background: var(--bg); color: var(--fg);}
+        .container {
+            max-width: 500px;
+            background: #1a1f3a;
+            border: 1px solid #2a2f4a;
+            border-radius: 12px;
+            padding: 40px;
+        }
+        h1 { font-size: 28px; margin-bottom: 10px; }
+        .subtitle { color: #888; font-size: 14px; margin-bottom: 30px; }
+        .price {
+            font-size: 48px;
+            font-weight: 700;
+            color: #4ade80;
+            margin: 30px 0;
+        }
+        .price span { font-size: 24px; color: #888; }
+        ul {
+            list-style: none;
+            margin: 30px 0;
+        }
+        li {
+            padding: 10px 0;
+            border-bottom: 1px solid #2a2f4a;
+            font-size: 14px;
+        }
+        li:before {
+            content: "✓ ";
+            color: #4ade80;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: #4ade80;
+            color: #0a0e27;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 30px;
+            transition: background 0.3s;
+        }
+        .cta-button:hover {
+            background: #22c55e;
+        }
+        .guarantee {
+            margin-top: 20px;
+            padding: 15px;
+            background: #2a2f4a;
+            border-left: 3px solid #4ade80;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Managed Outreach Audit</h1>
+        <p class="subtitle">Get results in 72 hours. Or get your money back.</p>
+        
+        <div class="price">$<span>147</span></div>
+        
+        <ul>
+            <li>Prospect list review (ICP quality check)</li>
+            <li>Email template optimization</li>
+            <li>10 test emails sent on your behalf</li>
+            <li>Reply analysis + conversion report</li>
+            <li>Next 100 email recommendations</li>
+        </ul>
+        
+        <button class="cta-button" onclick="checkout()">Buy Now - $147</button>
+        
+        <div class="guarantee">
+            <strong>30-day refund guarantee:</strong> If we don't generate any replies from your list, full refund. No questions.
+        </div>
+    </div>
+    
+    <script>
+        function checkout() {
+            // Redirect to Stripe checkout
+            window.location.href = 'https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b';
+        }
+    </script>
+</body>
+</html>

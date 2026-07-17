@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles/nebula-design-system.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audit Dashboard — Nebula Components</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0f; color: #e2e8f0; padding: 24px;  background: var(--bg); color: var(--fg);}
+.container { max-width: 1200px; margin: 0 auto; }
+h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; color: #f1f5f9; }
+.subtitle { font-size: 14px; color: #94a3b8; margin-bottom: 32px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 32px; }
+.card { background: #13131a; border: 1px solid #1e1e2a; border-radius: 12px; padding: 24px; }
+.card .label { font-size: 12px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+.card .value { font-size: 48px; font-weight: 700; color: #6ee7b7; }
+.card.grade .value { font-size: 64px; }
+.card .meta { font-size: 13px; color: #64748b; margin-top: 8px; }
+.fix-list { background: #13131a; border: 1px solid #1e1e2a; border-radius: 12px; padding: 24px; margin-bottom: 32px; }
+.fix-item { display: grid; grid-template-columns: 80px 1fr auto auto; gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid #1e1e2a; }
+.fix-item:last-child { border-bottom: none; }
+.score-bar { height: 8px; background: #1e293b; border-radius: 4px; overflow: hidden; }
+.score-bar-fill { height: 100%; transition: width 0.3s; }
+.score-critical { background: #ef4444; }
+.score-low { background: #f59e0b; }
+.score-medium { background: #3b82f6; }
+.score-high { background: #6ee7b7; }
+.impact { font-size: 12px; padding: 4px 12px; border-radius: 999px; font-weight: 600; }
+.impact.critical { background: #7f1d1d; color: #fecaca; }
+.impact.high { background: #78350f; color: #fde68a; }
+.impact.medium { background: #1e3a5f; color: #bfdbfe; }
+.impact.low { background: #064e3b; color: #a7f3d0; }
+.effort { font-size: 12px; color: #94a3b8; }
+.dimension { font-weight: 600; color: #e2e8f0; }
+.issue { font-size: 13px; color: #94a3b8; margin-top: 4px; }
+.cta-box { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; border-radius: 12px; padding: 32px; text-align: center; margin-top: 32px; }
+.cta-box h3 { font-size: 20px; margin-bottom: 8px; }
+.cta-box p { font-size: 14px; color: #94a3b8; margin-bottom: 24px; }
+.btn { display: inline-block; background: #6ee7b7; color: #0a0a0f; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; transition: transform 0.1s; }
+.btn:hover { transform: translateY(-2px); }
+.locked { opacity: 0.5; pointer-events: none; }
+.password-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(10, 10, 15, 0.95); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+.password-box { background: #13131a; border: 1px solid #1e1e2a; border-radius: 12px; padding: 32px; max-width: 400px; width: 90%; }
+.password-box h2 { font-size: 20px; margin-bottom: 8px; }
+.password-box p { font-size: 13px; color: #94a3b8; margin-bottom: 24px; }
+input { width: 100%; background: #0a0a0f; border: 1px solid #1e293b; color: #e2e8f0; padding: 12px 16px; border-radius: 8px; font-size: 14px; margin-bottom: 16px; }
+input:focus { outline: none; border-color: #6ee7b7; }
+button { width: 100%; background: #6ee7b7; color: #0a0a0f; border: none; padding: 12px 16px; border-radius: 8px; font-weight: 600; font-size: 15px; cursor: pointer; }
+button:hover { opacity: 0.9; }
+.error { color: #f87171; font-size: 13px; margin-top: 12px; display: none; }
+footer { margin-top: 48px; text-align: center; color: #64748b; font-size: 12px; }
+footer a { color: #94a3b8; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="password-overlay" id="password-lock">
+  <div class="password-box">
+    <h2>🔒 Password Required</h2>
+    <p>Enter the audit password sent to your email.</p>
+    <input type="password" id="password-input" placeholder="Enter password">
+    <button onclick="unlockDashboard()">View Dashboard</button>
+    <div class="error" id="error-msg">Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<div class="container">
+  <h1 id="page-title">Landing Page Audit Report</h1>
+  <p class="subtitle" id="subtitle">Prepared for <span id="url-display">example.com</span> · <span id="audit-date">July 14, 2026</span></p>
+
+  <div class="grid">
+    <div class="card grade">
+      <div class="label">Overall Grade</div>
+      <div class="value" id="overall-grade">C</div>
+      <div class="meta" id="score-text">Score: 5.2/10</div>
+    </div>
+    <div class="card">
+      <div class="label">Critical Issues</div>
+      <div class="value" id="critical-count">2</div>
+      <div class="meta">Must fix first</div>
+    </div>
+    <div class="card">
+      <div class="label">Projected Score</div>
+      <div class="value" id="projected-score">8.5</div>
+      <div class="meta">After fixes</div>
+    </div>
+    <div class="card">
+      <div class="label">Implementation Time</div>
+      <div class="value" id="total-time">4h</div>
+      <div class="meta">Estimated effort</div>
+    </div>
+  </div>
+
+  <div class="fix-list">
+    <h2 style="font-size: 18px; margin-bottom: 24px;">Fix Priority Stack</h2>
+    <div id="fix-items"></div>
+  </div>
+
+  <div class="cta-box">
+    <h3>Ready to implement?</h3>
+    <p>Get the Conversion Fix Pack with step-by-step implementation guides.</p>
+    <a href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b" class="btn">Get Fix Pack — $147</a>
+  </div>
+</div>
+
+<footer>
+  <p>Generated by <a href="https://nebulacomponents.shop">Nebula Components</a> · Trigger-aware landing page audits</p>
+</footer>
+
+<script>
+// Sample audit data (will be replaced by server-side injection)
+const auditData = {
+  url: "https://example.com",
+  overall: 5.2,
+  overall_grade: "C",
+  dimensions: {
+    headline: { score: 4, issue: "Headline does not state the buyer outcome clearly", fix: "Lead with the concrete buyer result in first sentence" },
+    cta: { score: 6, issue: "CTA language is vague", fix: "Use action + outcome: 'Run my free teardown'" },
+    social_proof: { score: 3, issue: "Trust proof missing before conversion ask", fix: "Add testimonial or metric near first CTA" },
+    speed: { score: 8, issue: "Page weight reasonable", fix: "No fix needed" },
+    mobile: { score: 5, issue: "Mobile viewport may be missing", fix: "Ensure responsive viewport testing" }
+  }
+};
+
+function classifyImpact(score) {
+  if (score <= 3) return 'critical';
+  if (score <= 5) return 'high';
+  if (score <= 7) return 'medium';
+  return 'low';
+}
+
+function classifyEffort(dimension) {
+  const highEffort = ['social_proof', 'headline', 'mobile'];
+  return highEffort.includes(dimension) ? 'medium' : 'low';
+}
+
+function renderDashboard() {
+  document.getElementById('url-display').textContent = auditData.url;
+  document.getElementById('overall-grade').textContent = auditData.overall_grade;
+  document.getElementById('score-text').textContent = `Score: ${auditData.overall}/10`;
+  
+  const dims = Object.entries(auditData.dimensions);
+  const criticalCount = dims.filter(([k, v]) => v.score <= 3).length;
+  document.getElementById('critical-count').textContent = criticalCount;
+  
+  let projected = auditData.overall;
+  dims.forEach(([k, v]) => {
+    const gain = Math.min(10, v.score + 4) - v.score;
+    projected += gain / dims.length;
+  });
+  document.getElementById('projected-score').textContent = projected.toFixed(1);
+  
+  const fixItems = document.getElementById('fix-items');
+  const sorted = dims.sort((a, b) => a[1].score - b[1].score);
+  
+  sorted.forEach(([dim, data]) => {
+    const impact = classifyImpact(data.score);
+    const effort = classifyEffort(dim);
+    const pct = (data.score / 10) * 100;
+    
+    const div = document.createElement('div');
+    div.className = 'fix-item';
+    div.innerHTML = `
+      <div>
+        <div class="score-bar"><div class="score-bar-fill score-${impact}" style="width: ${pct}%"></div></div>
+        <div style="font-size: 12px; color: #64748b; margin-top: 4px">${data.score}/10</div>
+      </div>
+      <div>
+        <div class="dimension">${dim.replace(/_/g, ' ')}</div>
+        <div class="issue">${data.issue}</div>
+      </div>
+      <span class="impact ${impact}">${impact}</span>
+      <span class="effort">${effort} effort</span>
+    `;
+    fixItems.appendChild(div);
+  });
+}
+
+function unlockDashboard() {
+  const input = document.getElementById('password-input');
+  const error = document.getElementById('error-msg');
+  
+  // Simple password check (in real implementation, validate against server)
+  const validPasswords = ['audit2026', 'nebula147', 'test123'];
+  
+  if (validPasswords.includes(input.value)) {
+    document.getElementById('password-lock').style.display = 'none';
+    renderDashboard();
+  } else {
+    error.style.display = 'block';
+    input.value = '';
+  }
+}
+
+// Auto-unlock for demo
+setTimeout(() => {
+  document.getElementById('password-input').value = 'audit2026';
+  unlockDashboard();
+}, 500);
+</script>
+</body>
+</html>

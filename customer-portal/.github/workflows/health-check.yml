@@ -1,0 +1,39 @@
+name: Health Check
+
+on:
+  schedule:
+    # Every 15 minutes
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check homepage
+        run: |
+          curl -f -s -o /dev/null -w "%{http_code}" https://nebulacomponents.shop/ | grep -q "200"
+
+      - name: Check audit page
+        run: |
+          curl -f -s -o /dev/null -w "%{http_code}" https://nebulacomponents.shop/audit/ | grep -q "200"
+
+      - name: Check pricing
+        run: |
+          curl -f -s -o /dev/null -w "%{http_code}" https://nebulacomponents.shop/pricing/ | grep -q "200"
+
+      - name: Check API health
+        run: |
+          curl -f -s https://nebulacomponents.shop/api/webhooks/rb2b | grep -q "ok"
+
+  alert:
+    needs: health
+    if: failure()
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send alert
+        run: |
+          echo "Health check failed - implement Telegram/Slack alert here"
+          # Example: curl -X POST $WEBHOOK_URL -d '{"text":"🚨 Nebula health check failed"}'

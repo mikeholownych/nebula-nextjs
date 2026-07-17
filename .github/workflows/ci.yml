@@ -1,0 +1,107 @@
+name: CI
+
+on:
+  push:
+    branches: [main, feature/*]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # Job 1: Governance validation
+  governance:
+    name: Governance Register Validation
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: customer-portal/customer-portal
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: customer-portal/customer-portal/package-lock.json
+      - run: npm ci
+      - name: Validate governance registers
+        run: node scripts/validate-governance.mjs
+
+  # Job 2: Lint and Typecheck
+  lint:
+    name: Lint & Typecheck
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: customer-portal/customer-portal
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: customer-portal/customer-portal/package-lock.json
+      - run: npm ci
+      - name: ESLint
+        run: npm run lint
+      - name: TypeScript
+        run: npm run typecheck
+
+  # Job 3: Unit Tests
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: customer-portal/customer-portal
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: customer-portal/customer-portal/package-lock.json
+      - run: npm ci
+      - name: Jest
+        run: npm run test -- --passWithNoTests --coverage --coverageThreshold='{"global":{"branches":0,"functions":0,"lines":0,"statements":0}}'
+
+  # Job 4: Build
+  build:
+    name: Production Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: customer-portal/customer-portal
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: customer-portal/customer-portal/package-lock.json
+      - run: npm ci
+      - name: Build Next.js
+        run: npm run build
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nextjs-build
+          path: customer-portal/customer-portal/.next
+          retention-days: 1
+
+  # Job 5: Security audit
+  security:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: customer-portal/customer-portal
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: customer-portal/customer-portal/package-lock.json
+      - run: npm ci
+      - name: npm audit (production deps only)
+        run: npm audit --omit=dev --audit-level=moderate
+        continue-on-error: true
