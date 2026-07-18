@@ -15,6 +15,12 @@ from platform_api.services.email_service import email_service, AuditEmailData
 from platform_api.services.audit_db import audit_db
 from platform_api.services.analytics import analytics
 
+# Import track assignment trigger
+import sys
+from pathlib import Path
+sys.path.insert(0, "/home/mike/nebula")
+from audit_track_trigger import trigger_track_assignment
+
 router = APIRouter(prefix="/audit", tags=["audit"])
 
 # Path to deliver_audit.py
@@ -113,6 +119,21 @@ async def run_audit(request: AuditRequest):
             grade=data.get('grade', 'N/A')
         )
         
+        # Assign nurture track based on findings
+        if request.email and data.get('findings'):
+            try:
+                track_id = trigger_track_assignment(
+                    email=request.email,
+                    audit_id=str(audit_id),
+                    findings=data.get('findings', []),
+                    url=request.url
+                )
+                # Add track_id to response
+                data['nurture_track'] = track_id
+            except Exception as e:
+                # Don't fail audit on track assignment error
+                print(f"[audit_api] Track assignment failed: {e}")
+        
         return AuditResponse(
             audit_id=str(audit_id),
             url=request.url,
@@ -149,6 +170,28 @@ async def run_audit(request: AuditRequest):
 async def health_check():
     """Health check endpoint"""
     return {"status": "ok", "service": "audit-api"}
+
+
+@router.get("/{audit_id}")
+async def get_audit(audit_id: str):
+    """Fetch audit by ID from database"""
+    try:
+        from uuid import UUID
+        audit_uuid = UUID(audit_id)
+        
+        audit = await audit_db.get_audit(audit_uuid)
+        
+        if not audit:
+            raise HTTPException(status_code=404, detail="Audit not found")
+        
+        return audit
+        
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid audit ID format")
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to fetch audit: {str(e)}")
 
 
 class EmailRequest(BaseModel):

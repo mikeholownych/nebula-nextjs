@@ -47,23 +47,35 @@ export default function ResultsPage() {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        // If auditId is a real ID, fetch from API
-        // For now, we'll use the direct API endpoint
-        const response = await fetch(`/api/audit/run`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            url: decodeURIComponent(auditId),
-            email: 'results@example.com'
+        // Check if auditId is a UUID (real audit) or a URL (legacy)
+        const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(auditId)
+        
+        if (isUuid) {
+          // Fetch existing audit from database
+          const response = await fetch(`/api/audit/${auditId}`)
+          if (!response.ok) {
+            throw new Error('Failed to fetch audit')
+          }
+          const data = await response.json()
+          setResults(data)
+        } else {
+          // Legacy: run new audit from URL
+          const response = await fetch(`/api/audit/run`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              url: decodeURIComponent(auditId),
+              email: 'results@example.com'
+            })
           })
-        })
 
-        if (!response.ok) {
-          throw new Error('Failed to fetch results')
+          if (!response.ok) {
+            throw new Error('Failed to fetch results')
+          }
+
+          const data = await response.json()
+          setResults(data)
         }
-
-        const data = await response.json()
-        setResults(data)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error')
       } finally {

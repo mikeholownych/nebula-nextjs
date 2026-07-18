@@ -4296,6 +4296,110 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "test-empty-findings@example.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "test-empty-findings@example.com",
+    "first_seen": "2026-07-18T00:01:56.741744Z",
+    "last_seen": "2026-07-18T00:02:14.735817Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "test-audit-empty",
+    "track_position_days": 0,
+    "track_started_at": "2026-07-18T00:02:14.735817Z",
+    "url": "https://example.com"
+  },
+  "test-error@example.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "test-error@example.com",
+    "first_seen": "2026-07-18T00:01:29.172590Z",
+    "last_seen": "2026-07-18T00:01:29.172590Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "test-audit-123",
+    "track_position_days": 0,
+    "track_started_at": "2026-07-18T00:01:29.172590Z",
+    "url": "https://example.com"
+  },
+  "test-founder@example.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "test-founder@example.com",
+    "first_seen": "2026-07-17T23:56:10.283627Z",
+    "last_seen": "2026-07-17T23:56:10.283627Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "AUDIT-TEST-001",
+    "track_position_days": 0,
+    "track_started_at": "2026-07-17T23:56:10.283627Z",
+    "url": "https://example.com"
+  },
+  "test-track-api@example.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "test-track-api@example.com",
+    "first_seen": "2026-07-18T00:01:29.157565Z",
+    "last_seen": "2026-07-18T00:02:14.721738Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "dda20127-3cf0-4aa9-9b38-5bee37fa281a",
+    "track_position_days": 0,
+    "track_started_at": "2026-07-18T00:02:14.721738Z",
+    "url": "https://example.com"
+  },
   "thimas@sby.com": {
     "content_posts": [],
     "current_stage": "lead_warm",

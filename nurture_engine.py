@@ -27,6 +27,10 @@ from collections import defaultdict
 BASE = Path("/home/mike/nebula")
 sys.path.insert(0, str(BASE))
 
+# Import track-aware rendering
+from track_assignment import assign_track_from_audit
+from template_renderer import render_template
+
 DRY_RUN = "--dry-run" in sys.argv
 TRICKLE = "--trickle" in sys.argv
 FORCE_SEND = "--send" in sys.argv  # legacy batch mode
@@ -276,17 +280,23 @@ def load_nurture_log() -> dict:
     return dict(log)
 
 
-def log_sent(email, subject, segment, message_id):
+def log_sent(email, subject, segment, message_id, track_id=None, track_position_days=None):
     """Persist a nurture send to the log."""
     NURTURE_LOG.parent.mkdir(parents=True, exist_ok=True)
+    entry = {
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "email": email.lower(),
+        "subject": subject[:60],
+        "segment": segment,
+        "message_id": message_id,
+    }
+    if track_id:
+        entry["track_id"] = track_id
+    if track_position_days is not None:
+        entry["track_position_days"] = track_position_days
+    
     with open(NURTURE_LOG, "a") as f:
-        f.write(json.dumps({
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-            "email": email.lower(),
-            "subject": subject[:60],
-            "segment": segment,
-            "message_id": message_id,
-        }) + "\n")
+        f.write(json.dumps(entry) + "\n")
 
 
 # ── Lead selection for trickle ──────────────────────────────────────
@@ -397,7 +407,65 @@ def run_trickle():
         segment = c["segment"]
         lead = c["lead"]
         tmpl = c["template"]
-
+        
+        # Get track info if available
+        track_id = lead.get("nurture_track", "")
+        track_position = lead.get("track_position_days", 0)
+        
+        # Try track-aware rendering if track assigned
+        if track_id and track_id != "":
+            # Determine template ID based on segment + track + position
+            track_topic = track_id.split("-")[0]  # headline-clarity → headline
+            
+            # Map position to template variant
+            # Position 0-7 = first template, 8-14 = second template, etc.
+            position_variant = min(track_position // 7 + 1, 3)  # Cap at 3
+            
+            if segment == "hot":
+                # Hot leads always get pitch template
+                template_id = f"hot_{track_topic}_pitch_1"
+            elif segment == "cold":
+                # Cold: diagnosis or intro templates
+                template_id = f"cold_{track_topic}_{'diagnosis' if position_variant == 1 else 'intro'}_{position_variant}"
+            elif segment == "warm":
+                # Warm: teardown or checklist templates
+                template_id = f"warm_{track_topic}_{'teardown' if position_variant == 1 else 'checklist'}_{position_variant}"
+            else:
+                # Fallback
+                template_id = f"{segment}_{track_topic}_1"
+            
+            # Render using template_renderer
+            rendered = render_template(
+                template_id=template_id,
+                lead=lead,
+                audit=None,  # Audit data would come from audit store
+                extra_vars={
+                    "checkout_url": f"https://nebulacomponents.shop/checkout?email={email}"
+                }
+            )
+            
+            if rendered:
+                subject = rendered["subject"]
+                body = rendered["body"]
+                
+                # Send email
+                ok, msg_id = send_email(email, subject, body)
+                if ok:
+                    log_sent(email, subject, segment, msg_id, track_id=track_id, track_position_days=track_position)
+                    sent += 1
+                    print(f"  ✓ {email} [{segment}/{track_id}]: {subject[:50]}")
+                else:
+                    if msg_id == "429_rate_limit":
+                        print(f"  → Rate limit hit after {sent} sent. Remaining {len(candidates)-sent-1} deferred.")
+                        errors += 1
+                        break
+                    errors += 1
+                
+                if sent < len(candidates):
+                    time.sleep(3)
+                continue
+        
+        # Fall back to legacy template if no track or rendering failed
         domain = lead.get("url", "").replace("https://", "").replace("http://", "").split("/")[0] or email.split("@")[1] if "@" in email else "yoursite.com"
         site = lead.get("url", "") or f"https://{domain}"
         audit_summary = get_audit_summary(lead)

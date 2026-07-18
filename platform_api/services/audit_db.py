@@ -108,7 +108,18 @@ class AuditDB:
                 audit_id
             )
             if row:
-                return dict(row)
+                data = dict(row)
+                # Parse findings JSON string to list
+                if data.get('findings') and isinstance(data['findings'], str):
+                    data['findings'] = json.loads(data['findings'])
+                # Convert score back to float (stored as int * 10)
+                if data.get('score') is not None:
+                    data['score'] = data['score'] / 10.0
+                # Convert UUIDs to strings for JSON serialization
+                data['audit_id'] = str(data.pop('id'))
+                if data.get('customer_id'):
+                    data['customer_id'] = str(data['customer_id'])
+                return data
             return None
     
     async def get_audits_by_email(self, email: str, limit: int = 10) -> List[dict]:
