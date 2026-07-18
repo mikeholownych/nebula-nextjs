@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-18T00:00:00Z",
+  "title": "Design System: Nebula Components",
+  "extensions": {
+    "colorMeta": {
+      "signal-emerald": {
+        "role": "primary",
+        "displayName": "Signal Emerald",
+        "canonical": "oklch(69.7% 0.131 162.4)",
+        "tonalRamp": [
+          "#032e1f",
+          "#045a3a",
+          "#058755",
+          "#0bb476",
+          "#10b981",
+          "#34d399",
+          "#5eeab5",
+          "#98f5d0"
+        ]
+      },
+      "near-black": {
+        "role": "neutral",
+        "displayName": "Near Black",
+        "canonical": "oklch(10% 0 0)",
+        "tonalRamp": [
+          "#000000",
+          "#030303",
+          "#050505",
+          "#080808",
+          "#0a0a0a",
+          "#111111",
+          "#1a1a1a",
+          "#262626"
+        ]
+      },
+      "danger": {
+        "role": "semantic",
+        "displayName": "Danger Red",
+        "canonical": "oklch(62.8% 0.257 25.3)",
+        "tonalRamp": [
+          "#450a0a",
+          "#7f1d1d",
+          "#b91c1c",
+          "#ef4444",
+          "#f87171",
+          "#fca5a5",
+          "#fecaca",
+          "#fee2e2"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headlines only. The largest type on any page. Assertive presence."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles. Used sparingly to mark major page divisions."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Primary prose. Capped at 65–75ch for readability."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Badges, eyebrows, step numbers. Wide tracking creates small-caps appearance."
+      }
+    },
+    "shadows": [
+      {
+        "name": "button-glow",
+        "value": "0 0 16px rgba(16, 185, 129, 0.25)",
+        "purpose": "Primary button hover state. Responsive glow, not ambient."
+      },
+      {
+        "name": "card-glow",
+        "value": "0 0 40px rgba(16, 185, 129, 0.15)",
+        "purpose": "Featured/pricing cards. Elevated surface indication."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Default easing for state transitions."
+      },
+      {
+        "name": "duration-fast",
+        "value": "0.15s",
+        "purpose": "Quick feedback transitions."
+      },
+      {
+        "name": "duration-normal",
+        "value": "0.2s",
+        "purpose": "Standard state changes."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "480px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main CTA button. Used for 'Audit My Landing Page', 'Get Started', and primary form submits.",
+      "html": "<button class=\"ds-btn-primary\">Audit My Landing Page</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: 16px 32px; background: #10b981; color: #050505; font-family: Karla, -apple-system, system-ui, sans-serif; font-weight: 600; font-size: 16px; border-radius: 12px; border: none; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-primary:hover { background: #34d399; transform: translateY(-1px); box-shadow: 0 0 16px rgba(16, 185, 129, 0.25); } .ds-btn-primary:active { transform: translateY(0); box-shadow: 0 0 8px rgba(16, 185, 129, 0.2); } .ds-btn-primary:focus-visible { outline: 2px solid #10b981; outline-offset: 4px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Secondary action button. 'View Sample Audit', 'Learn More'.",
+      "html": "<button class=\"ds-btn-secondary\">View Sample Audit</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; background: transparent; color: #10b981; font-family: Karla, -apple-system, system-ui, sans-serif; font-weight: 600; font-size: 16px; border: 2px solid #10b981; border-radius: 12px; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-secondary:hover { background: rgba(16, 185, 129, 0.1); } .ds-btn-secondary:focus-visible { outline: 2px solid #10b981; outline-offset: 4px; }"
+    },
+    {
+      "name": "Card Default",
+      "kind": "card",
+      "refersTo": "card-default",
+      "description": "Standard container for content sections. Tonal separation from background.",
+      "html": "<div class=\"ds-card\"><h3>Card Title</h3><p>Card content goes here with supporting description text.</p></div>",
+      "css": ".ds-card { background: #111111; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 12px; padding: 32px; } .ds-card h3 { font-family: Karla, -apple-system, system-ui, sans-serif; font-size: 1.5rem; font-weight: 600; color: #ffffff; margin-bottom: 12px; } .ds-card p { font-family: Karla, -apple-system, system-ui, sans-serif; font-size: 17px; color: #737373; line-height: 1.65; }"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Text input for forms. Near-black background with subtle border.",
+      "html": "<input type=\"email\" class=\"ds-input\" placeholder=\"Enter your email\" />",
+      "css": ".ds-input { width: 100%; padding: 14px 16px; background: #050505; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 12px; color: #ffffff; font-family: Karla, -apple-system, system-ui, sans-serif; font-size: 16px; outline: none; transition: border 0.2s, box-shadow 0.2s; } .ds-input::placeholder { color: #737373; } .ds-input:focus { border-color: #10b981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); }"
+    },
+    {
+      "name": "Badge Label",
+      "kind": "chip",
+      "refersTo": "badge-label",
+      "description": "Uppercase tracked labels for status, eyebrows, and step numbers.",
+      "html": "<span class=\"ds-badge\">BEFORE</span>",
+      "css": ".ds-badge { display: inline-block; padding: 4px 12px; background: rgba(16, 185, 129, 0.1); color: #10b981; font-family: Karla, -apple-system, system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 4px; }"
+    },
+    {
+      "name": "Navigation Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Header navigation links. Muted at rest, emerald on hover.",
+      "html": "<a href=\"#\" class=\"ds-nav-link\">Pricing</a>",
+      "css": ".ds-nav-link { color: #737373; font-family: Karla, -apple-system, system-ui, sans-serif; font-size: 14px; font-weight: 600; text-decoration: none; padding: 12px 0; transition: color 0.2s; } .ds-nav-link:hover { color: #10b981; } .ds-nav-link:focus-visible { outline: 2px solid #10b981; outline-offset: 4px; border-radius: 4px; } @media (pointer: coarse) { .ds-nav-link { min-height: 44px; padding: 16px 12px; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Conversion Lab",
+    "overview": "Assertive authority meets clinical precision. The system projects confidence through density and sharpness — not friendliness, not warmth, not restraint. This is diagnostic equipment, not a lifestyle brand. Karla replaced Inter specifically to exit the reflex-default monoculture. Near-black foundation eliminates visual competition. Signal Emerald marks actionable elements with authority.\n\nDepth emerges from ambient glow orbs that create atmospheric layering, not lift. The interface feels like surfaces emerging from atmosphere, not sitting on top of it. Every visual choice serves the belief ladder — the visitor must believe Nebula finds real, specific defects on their page.",
+    "keyCharacteristics": [
+      "Near-black canvas eliminates everything but diagnostic content",
+      "Signal Emerald authority on actions — used sparingly (≤10% surface)",
+      "Karla grotesque: geometric, weight-capable, assertively non-default",
+      "Ambient depth via layered glow, never drop shadows",
+      "Tight tracking (-0.03em) on display for condensed authority",
+      "Evidence-first: annotated defects trump marketing claims"
+    ],
+    "rules": [
+      {
+        "name": "The One Signal Rule",
+        "body": "Signal Emerald is reserved for actionable elements and positive signal. It appears on ≤10% of any screen surface. Its rarity is the point.",
+        "section": "colors"
+      },
+      {
+        "name": "The No-Warm-Neutral Rule",
+        "body": "Backgrounds live on the cool near-black axis. No cream, sand, paper, parchment. Warmth is carried by emerald accent and imagery.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tracking Floor",
+        "body": "Display letter-spacing never goes below -0.03em. Tighter risks letter collision at 4rem scale.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Drop-Shadow Rule",
+        "body": "No traditional drop shadows with offset. Use centered glow (0 offset, high blur) or tonal layering instead.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Ambient-Not-Lifted Rule",
+        "body": "Glow orbs set atmosphere; state changes set interaction. No static glow on interactive elements at rest.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use Signal Emerald exclusively for actionable elements and positive signal.",
+      "Do maintain Near Black as body background everywhere.",
+      "Do use ambient glow orbs for atmospheric depth instead of drop shadows.",
+      "Do set display headlines with tight tracking (-0.03em).",
+      "Do cap body prose at 65–75ch line length.",
+      "Do show evidence — annotated screenshots and specific defects.",
+      "Do include skip-link for keyboard navigation."
+    ],
+    "donts": [
+      "Don't use gradient text. Solid Signal Emerald or nothing.",
+      "Don't apply side-stripe borders as visual decoration.",
+      "Don't use identical card grids repeated endlessly.",
+      "Don't add tiny uppercase tracked eyebrows above every section.",
+      "Don't use drop shadows with large blur (≥16px).",
+      "Don't use border-radius >24px on cards.",
+      "Don't fabricate testimonials or conversion claims.",
+      "Don't animate images on hover.",
+      "Don't default to Inter, DM Sans, or reflex-reject fonts."
+    ]
+  }
+}

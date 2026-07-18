@@ -9,8 +9,8 @@ export default function Home() {
         <nav aria-label="Primary" className="mx-auto flex max-w-6xl items-center justify-between">
           <Link href="/" className="text-xl font-semibold text-fg">Nebula</Link>
           <div className="flex items-center gap-5">
-            <Link href="/learning-centre" className="text-sm text-fg-muted hover:text-fg">Learning</Link>
-            <Link href="/pricing" className="text-sm text-fg-muted hover:text-fg">Pricing</Link>
+            <Link href="/learning-centre" className="text-sm text-fg-muted hover:text-fg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded">Learning</Link>
+            <Link href="/pricing" className="text-sm text-fg-muted hover:text-fg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded">Pricing</Link>
           </div>
         </nav>
       </header>
@@ -32,7 +32,7 @@ export default function Home() {
         <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
           <Link 
             href="/audit" 
-            className="rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors text-lg"
+            className="rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-lg"
           >
             Run Free Audit →
           </Link>
@@ -140,7 +140,7 @@ export default function Home() {
           </p>
           <Link 
             href="/audit" 
-            className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors text-lg"
+            className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-lg"
           >
             Run Free Audit →
           </Link>

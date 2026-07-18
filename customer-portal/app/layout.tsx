@@ -1,10 +1,20 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import { Karla } from 'next/font/google'
 import CookieConsent from './components/CookieConsent'
 import './globals.css'
 import { organizationSchema, websiteSchema } from './lib/schema'
 
-const inter = Inter({ subsets: ['latin'] })
+const karla = Karla({
+  subsets: ['latin'],
+  weight: ['400', '600', '800'],
+  display: 'swap',
+})
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://nebulacomponents.shop'),
@@ -72,7 +82,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body className={inter.className}>
+      <body className={karla.className}>
         <a href="#main-content" className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-emerald-500 focus:text-black focus:rounded">
           Skip to main content
         </a>

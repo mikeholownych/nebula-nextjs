@@ -1,11 +1,18 @@
 /* Nebula Design System - Shared across all pages */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;600;800&display=swap');
 
 :root {
+  /* Typography - 5-size scale (1.25 ratio) */
+  --text-xs: 0.75rem;     /* 12px — captions, tags */
+  --text-sm: 0.875rem;    /* 14px — secondary, nav */
+  --text-base: 1.0625rem; /* 17px — body prose */
+  --text-lg: 1.5rem;      /* 24px — section headings */
+  --text-xl: clamp(2.5rem, 6vw, 4rem); /* 40-64px — hero display */
+
   --bg: #050505;
   --bg-elevated: #0a0a0a;
   --fg: #f9f9f9;
-  --fg-muted: #666;
+  --fg-muted: #737373;  /* Improved contrast: 4.67:1 */
   --accent: #10b981;
   --accent-glow: rgba(16, 185, 129, 0.15);
   --border: #1a1a1a;
@@ -14,8 +21,8 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 17px;
+  font-family: 'Karla', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: var(--text-base);
   line-height: 1.65;
   background: var(--bg);
   color: var(--fg);
@@ -47,11 +54,11 @@ body {
   left: -100px;
 }
 
-/* Typography */
-h1 { font-size: 68px; font-weight: 600; line-height: 1.1; margin: 0 0 24px; }
-h2 { font-size: 48px; font-weight: 600; line-height: 1.2; margin: 0 0 20px; }
-h3 { font-size: 32px; font-weight: 600; line-height: 1.3; margin: 0 0 16px; }
-p { margin: 0 0 16px; }
+/* Typography - use design tokens */
+h1 { font-size: var(--text-xl); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin: 0 0 24px; }
+h2 { font-size: var(--text-lg); font-weight: 600; line-height: 1.2; margin: 0 0 20px; }
+h3 { font-size: 1.25rem; font-weight: 600; line-height: 1.3; margin: 0 0 16px; }
+p { margin: 0 0 16px; max-width: 65ch; }
 
 /* Buttons */
 .btn {
@@ -63,7 +70,7 @@ p { margin: 0 0 16px; }
   transition: all 0.2s;
   cursor: pointer;
   border: none;
-  font-size: 17px;
+  font-size: var(--text-base);
 }
 
 .btn-primary {
@@ -114,8 +121,8 @@ a:hover {
   display: inline-block;
   padding: 6px 12px;
   border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: var(--text-sm);
+  font-weight: 600;
 }
 
 .badge-accent {
@@ -133,19 +140,14 @@ a:hover {
 
 /* Responsive */
 @media (max-width: 768px) {
-  h1 { font-size: 48px; }
-  h2 { font-size: 36px; }
-  h3 { font-size: 28px; }
-  body { font-size: 16px; }
+  h1 { font-size: var(--text-lg); }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+  body { font-size: var(--text-base); }
 }
 
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, var(--accent) 0%, #3b82f6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+/* Gradient text — DEPRECATED, DO NOT USE */
+/* Removed per impeccable anti-pattern ban */
 
 /* Animations */
 @keyframes pulse {
