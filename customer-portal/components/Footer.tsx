@@ -15,7 +15,7 @@ export default function Footer() {
               <span className="text-xl font-semibold text-[var(--text-primary)]">Nebula</span>
             </Link>
             <p className="text-[var(--text-muted)] text-sm mb-4 max-w-md">
-              Landing-page audit scoring is paused while the evidence-backed engine is rebuilt.
+              Free landing page audits. Find out why your ads aren't converting.
             </p>
             <div className="flex gap-4">
               <a
@@ -49,7 +49,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link href="/audit" className="text-sm text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">
-                  Audit Status
+                  Free Audit
                 </Link>
               </li>
               <li>
