@@ -3417,7 +3417,7 @@
     "current_stage": "lead_audit",
     "email": "pending@example.com",
     "first_seen": "2026-07-18T01:26:23.082723Z",
-    "last_seen": "2026-07-18T01:26:23.082723Z",
+    "last_seen": "2026-07-18T02:42:36.074628Z",
     "name": "",
     "notes": "",
     "nurture_track": "headline-clarity",
@@ -3433,10 +3433,10 @@
     ],
     "tags": [],
     "total_spent_cents": 0,
-    "track_audit_id": "0ad8e954-2be6-4f58-9818-5bd6a8092225",
+    "track_audit_id": "330e75c6-5bd7-475b-8ba7-bdcddbdbe6d2",
     "track_position_days": 0,
-    "track_started_at": "2026-07-18T01:26:23.082723Z",
-    "url": "https://klaym.ai"
+    "track_started_at": "2026-07-18T02:42:36.074628Z",
+    "url": "https://syndicateclaw.ca/"
   },
   "quietpulse.social@gmail.com": {
     "content_posts": [],
