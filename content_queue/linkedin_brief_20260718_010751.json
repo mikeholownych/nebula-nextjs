@@ -1,0 +1,29 @@
+{
+  "platform": "linkedin",
+  "finding": "Your headline says what it is. They're looking for what it does for them.",
+  "track": "headline-clarity",
+  "created_at": "2026-07-18T01:07:51.466986+00:00",
+  "brief": {
+    "hook_variants": [
+      "Your [X] is visible. Most founders don't know it's their biggest leak.",
+      "I audited [N] pages. [X]% had the same problem.",
+      "You spent [amount] on ads. Your [X] is costing you half."
+    ],
+    "hook_checklist": [
+      "Under 10 words",
+      "Specific insight promised",
+      "Not clickbait",
+      "Connects to track",
+      "Not repetitive with last 5 hooks"
+    ],
+    "structure": {
+      "hook": "[First line \u2014 stop scroll]",
+      "setup": "2-3 sentences why this matters",
+      "insight": "3-5 sentences what audit data shows",
+      "proof": "1 specific example or data point",
+      "cta": "Comment AUDIT for free teardown"
+    },
+    "cta_type": "comment",
+    "cta_text": "Comment 'AUDIT' and I'll send you a free landing page teardown."
+  }
+}

@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 interface BreadcrumbItem {
   name: string;
   url: string;
+  isUuid?: boolean;
 }
 
 interface BreadcrumbProps {
@@ -26,10 +27,18 @@ const ROUTE_LABELS: Record<string, string> = {
 };
 
 function slugToLabel(slug: string): string {
+  // If it looks like a UUID, truncate it for display
+  if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slug)) {
+    return slug.split('-')[0].toUpperCase();
+  }
   return ROUTE_LABELS[slug] || slug
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
+}
+
+function isUuid(slug: string): boolean {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slug);
 }
 
 export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
@@ -47,6 +56,7 @@ export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
       return {
         name: slugToLabel(segment),
         url: currentPath,
+        isUuid: isUuid(segment),
       };
     });
   }
@@ -71,8 +81,8 @@ export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
                 {index > 0 && (
                   <span className="mx-2 text-[#374151]" aria-hidden="true">/</span>
                 )}
-                {isLast ? (
-                  <span className="text-[#f5f7fb] font-medium" aria-current="page">
+                {isLast || item.isUuid ? (
+                  <span className="text-[#f5f7fb] font-medium" aria-current={isLast ? 'page' : undefined}>
                     {item.name}
                   </span>
                 ) : (
