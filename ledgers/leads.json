@@ -3412,6 +3412,32 @@
     "stage": "audit_triggered",
     "url": "https://example.com/page"
   },
+  "pending@example.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "pending@example.com",
+    "first_seen": "2026-07-18T01:26:23.082723Z",
+    "last_seen": "2026-07-18T01:26:23.082723Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "0ad8e954-2be6-4f58-9818-5bd6a8092225",
+    "track_position_days": 0,
+    "track_started_at": "2026-07-18T01:26:23.082723Z",
+    "url": "https://klaym.ai"
+  },
   "quietpulse.social@gmail.com": {
     "content_posts": [],
     "current_stage": "lead_warm",

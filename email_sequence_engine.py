@@ -104,53 +104,169 @@ def send_email(to_email, subject, text_body, html_body=None, labels=None):
 
 SEQUENCES = {
     "post_audit": {
-        "label": "Post-Audit Nurture (Daniel's Pre-Launch → Launch adaptation)",
+        "label": "5-Day Educational Email Course (Daniel's Conversion Newsletter model)",
         "trigger_stage": "lead_audit",
         "steps": [
+            # Day 1: The Leak Map — pure education, no pitch
             {
-                "id": "audit_delivery",
+                "id": "day1_leak_map",
                 "day": 0,
-                "subject": "Why your landing page is leaking buyers (audit inside)",
+                "subject": "Day 1: The 5 places your landing page leaks buyers",
                 "type": "text",
                 "body": (
-                    "You ran a landing page audit. Here's what it checked:\n\n"
-                    "1. Headline Clarity — does it describe the problem or the product?\n"
-                    "2. CTA Actionability — is it a decision or a label?\n"
-                    "3. Trust Proof — is social proof above the fold?\n"
-                    "4. Page Speed — how fast does it load?\n"
-                    "5. Mobile Responsiveness — does it work on phone?\n\n"
-                    "If any of these scored under 7, that's a leak.\n\n"
-                    "The good news: each leak has a fix. The headline alone accounts "
-                    "for 40% of conversion variance — and it's a 15-minute change.\n\n"
-                    "Over the next few days I'll show you exactly how to fix each one.\n\n"
-                    "First step: review your scores. Then decide if you want the fixes done for you.\n\n"
-                    "→ Fix them yourself: the free Fix Kit (templates + checklist) is waiting\n"
-                    "→ Get them done in 24h: the $147 Conversion Fix Pack ships your new page sections\n\n"
-                    "Link: https://nebulacomponents.shop/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=audit_delivery\n"
+                    "You ran the audit. Now let's decode what it means.\n\n"
+                    "Most founders think they have an ad problem. Usually, they have a destination problem.\n\n"
+                    "Paid clicks are being pushed into a page that fails to capture trust, intent, or action.\n"
+                    "That's lead leakage. The fix isn't \"more traffic\" — it's finding the leak before the next dollar goes into ads.\n\n"
+                    "THET 5 LEAK ZONES:\n\n"
+                    "1. HEADLINE — Does it describe the problem or the product?\n"
+                    "   If visitors don't see their pain in the first 3 seconds, they scroll.\n\n"
+                    "2. CTA — Is it a decision or a label?\n"
+                    "   \"Get my first client\" converts. \"Submit\" doesn't.\n\n"
+                    "3. PROOF — Is social proof above the fold?\n"
+                    "   Cold traffic doesn't trust claims. They trust evidence.\n\n"
+                    "4. SPEED — How fast does it load?\n"
+                    "   Every 1-second delay = 7% fewer conversions.\n\n"
+                    "5. MOBILE — Does it work on phone?\n"
+                    "   60% of your traffic is mobile. If it's broken, you're bleeding.\n\n"
+                    "SELF-CHECK: Open your audit results. Which zone scored lowest?\n"
+                    "That's your first fix. Tomorrow I'll show you the Message Match test.\n\n"
+                    "No pitch today. Just the leak map.\n\n"
+                    "--\n"
+                    "Mike from Nebula Components\n"
+                    "P.S. If you want all 5 leaks fixed in 24h without touching your page, "
+                    "the $147 Fix Pack is here: https://nebulacomponents.shop/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day1_signature\n"
                 ),
             },
+            # Day 2: Message Match — soft CTA
             {
-                "id": "value_add",
+                "id": "day2_message_match",
                 "day": 1,
-                "subject": "Stop describing your product. Do this instead.",
+                "subject": "Day 2: The promise in your ad must match the page",
                 "type": "text",
                 "body": (
-                    "I audited 100+ landing pages last month. The ones converting over 5% all had one thing in common:\n\n"
-                    "They don't describe what they do. They describe the problem you already feel.\n\n"
-                    "Example:\n"
-                    "  Before: \"AI-powered lead generation platform\"\n"
-                    "  After:  \"Stop losing deals to slow follow-ups\"\n\n"
-                    "Same product. Different framing. The second one doubles conversion because "
-                    "the visitor thinks \"that's my problem\" before they even scroll.\n\n"
+                    "Yesterday we mapped the 5 leak zones.\n\n"
+                    "Today: the most common (and easiest) fix — Message Match.\n\n"
+                    "THE PROBLEM:\n"
+                    "Your ad says \"Stop losing deals to slow follow-ups.\"\n"
+                    "Your headline says \"AI-powered lead generation platform.\"\n\n"
+                    "That's a message mismatch.\n\n"
+                    "The visitor clicked because they felt a pain. When the page opens with a generic product description, "
+                    "trust drops instantly. They think: \"This isn't for me.\" Then they leave.\n\n"
+                    "THE FIX:\n"
+                    "Rewrite your H1 to mirror the visitor's buying trigger. Use the exact words from their internal monologue.\n\n"
+                    "BEFORE → AFTER examples:\n"
+                    "  \"Save 10 hours/week on content\" → \"Stop spending Monday mornings writing LinkedIn posts\"\n"
+                    "  \"Grow your email list\" → \"Get 500 subscribers without running ads\"\n"
+                    "  \"Better team collaboration\" → \"Stop wasting 2 hours/day on status meetings\"\n\n"
                     "Your audit score for Headline Clarity tells you if you have this issue.\n"
-                    "If it's under 7, rewriting your headline is the highest-leverage 15 minutes "
-                    "you'll spend this week.\n\n"
-                    "Want it done for you? The $147 Fix Pack includes a rewritten hero section "
-                    "tailored to your ICP: https://nebulacomponents.shop/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=value_add\n"
+                    "If it's under 7, this is your highest-leverage 15 minutes this week.\n\n"
+                    "Tomorrow: the One-Action Page.\n\n"
+                    "--\n"
+                    "Mike\n"
+                    "P.S. Want your headline rewritten to match your ICP's buying trigger? "
+                    "The $147 Fix Pack includes a full hero section rewrite: "
+                    "https://nebulacomponents.shop/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day2_ps\n"
+                ),
+            },
+            # Day 3: One-Action Page — soft CTA
+            {
+                "id": "day3_one_action",
+                "day": 2,
+                "subject": "Day 3: Your page is asking for too many things",
+                "type": "text",
+                "body": (
+                    "Most landing pages leak because they ask for too many actions.\n\n"
+                    "Watch me scroll:\n"
+                    "  \"Learn More\" button\n"
+                    "  \"Watch Demo\" link\n"
+                    "  \"Talk to Sales\" form\n"
+                    "  \"Subscribe to Newsletter\" popup\n"
+                    "  \"Download Free Guide\" exit-intent\n\n"
+                    "One visitor. Five possible paths. Zero conversions.\n\n"
+                    "THE RULE:\n"
+                    "One visitor. One intent. One next step.\n\n"
+                    "If your page has multiple CTAs, the visitor has to think. Thinking kills conversion.\n"
+                    "Remove the friction. Keep only the action that matches the visitor's intent.\n\n"
+                    "QUICK FIXES:\n"
+                    "  - Replace \"Learn More\" with \"Get my free audit\" (decision, not exploration)\n"
+                    "  - Replace \"Submit\" with \"Get my fix pack\" (action, not label)\n"
+                    "  - Remove secondary CTAs entirely or move them to the footer\n\n"
+                    "Your audit score for CTA Actionability tells you if you have this issue.\n\n"
+                    "Tomorrow: Proof Before Pitch.\n\n"
+                    "--\n"
+                    "Mike\n"
+                    "P.S. Want your CTA rewritten as a decision-driving button? Fixed in the $147 pack: "
+                    "https://nebulacomponents.shop/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day3_ps\n"
+                ),
+            },
+            # Day 4: Proof Before Pitch — soft CTA
+            {
+                "id": "day4_proof",
+                "day": 3,
+                "subject": "Day 4: Cold visitors don't trust claims. They trust evidence.",
+                "type": "text",
+                "body": (
+                    "You know that section with 3 logos and \"Trusted by 500+ companies\"?\n\n"
+                    "Nobody believes it.\n\n"
+                    "Cold traffic doesn't trust claims. They trust evidence they can verify.\n\n"
+                    "THE PROOF LADDER (lowest to highest trust):\n"
+                    "  1. Logos (weak) — anyone can put a logo on a page\n"
+                    "  2. Testimonials (better) — but still claim-based\n"
+                    "  3. Screenshots (strong) — visible evidence\n"
+                    "  4. Named outcomes (stronger) — \"Sarah at Acme increased leads 3x\"\n"
+                    "  5. Guarantees (strongest) — \"Don't pay if it doesn't work\"\n\n"
+                    "THE FIX:\n"
+                    "Move proof above the first paid ask. Before the CTA. Before the price.\n"
+                    "If your proof is below the fold, most visitors never see it.\n\n"
+                    "QUICK CHECK:\n"
+                    "Open your page. Scroll until you see the first trust element (logo, testimonial, review).\n"
+                    "Is it before the CTA? If not, move it.\n\n"
+                    "Your audit score for Trust Proof tells you if this is a leak.\n\n"
+                    "Tomorrow: Fix Before More Spend — the pitch.\n\n"
+                    "--\n"
+                    "Mike\n"
+                    "P.S. Want your trust proof repositioned + a dedicated social proof section? "
+                    "Included in the $147 Fix Pack: "
+                    "https://nebulacomponents.shop/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day4_ps\n"
+                ),
+            },
+            # Day 5: Fix Before More Spend — direct pitch
+            {
+                "id": "day5_fix_before_spend",
+                "day": 4,
+                "subject": "Day 5: The cheapest time to fix your page is right now",
+                "type": "text",
+                "body": (
+                    "5 days. 5 leak zones. 5 fixes.\n\n"
+                    "Here's what most founders do:\n"
+                    "  1. Run ads → no conversions\n"
+                    "  2. Blame the ads\n"
+                    "  3. Spend more on \"better targeting\"\n"
+                    "  4. Still no conversions\n"
+                    "  5. Hire an agency for $3k/mo\n"
+                    "  6. Agency says \"your page is the problem\"\n\n"
+                    "Don't be that founder.\n\n"
+                    "THE RULE:\n"
+                    "Do not scale ads into an unscored page.\n\n"
+                    "One recovered sale, booked demo, or checkout can pay for the fix 10x over.\n"
+                    "The fastest ROI is stopping leakage before increasing traffic.\n\n"
+                    "YOUR OPTIONS:\n\n"
+                    "→ Fix it yourself (free): Use the leak map from Day 1 + the quick fixes\n\n"
+                    "→ Get it done for you ($147): I'll rewrite your hero, CTA, proof, FAQ, and mobile sections in 24h\n\n"
+                    "→ Do nothing ($0): Keep running ads into a leaking page\n\n"
+                    "If you want the $147 Fix Pack, it's here:\n"
+                    "https://nebulacomponents.shop/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day5_cta\n\n"
+                    "No calls. No calendar. No agency retainers. Just a fixed page.\n\n"
+                    "Thanks for going through the course.\n\n"
+                    "--\n"
+                    "Mike from Nebula Components\n"
+                    "P.S. If you reply \"FIX IT\" I'll send you a $7 Audit Lite option — "
+                    "top 3 fixes only, self-service.\n"
                 ),
             },
         ],
-        "completes_at": "lead_warm",  # stage to promote to after Part 1
+        "completes_at": "lead_warm",
     },
 
     "offer_sequence": {

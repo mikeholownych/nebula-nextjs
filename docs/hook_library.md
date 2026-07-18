@@ -248,6 +248,70 @@
 
 ---
 
+## Category 9: Octoscale Viral Hooks (Kristijonas)
+
+*Uses: Lead magnet posts, maximum engagement, stop-the-scroll*
+
+### R.I.P. Formula
+81. "R.I.P. [old method]. This [new thing] [result]."
+   - Example: "R.I.P. manual outreach. This AI agent books me 2 calls/day."
+
+82. "R.I.P. [old belief]. [new truth]."
+   - Example: "R.I.P. 'paid ads are required'. Organic LinkedIn added $50K/mo."
+
+### NEVER Formula
+83. "Never [old/new problem]. [solution/outcome]."
+   - Example: "Never worry about paid ads again. Organic LinkedIn added $50K/mo to my agency."
+
+84. "Never [action] again. [better alternative]."
+   - Example: "Never guess why your page leaks again. This audit shows you in 30 seconds."
+
+### STEAL Formula
+85. "I [built/did] [X]. (Steal my playbook for $0)"
+   - Example: "I built a system that booked me 37 calls from LinkedIn. (Steal my playbook for $0)"
+
+86. "[Result]. (Steal how → [link/CTA])"
+   - Example: "3x conversion rate from one headline change. (Steal the template → comment 'HEADLINE')"
+
+### BEFORE → AFTER Formula
+87. "Month 1: [bad state]. Month 3: [good state]. The fix took [time]."
+   - Example: "Month 1: 0 inbound leads. Month 3: 10,000+. The fix took 7 days."
+
+88. "Before: [struggle]. After: [win]. The difference: [one thing]."
+   - Example: "Before: $5k/mo on ads. After: $0 on ads. The difference: message match."
+
+### EQUATION Formula
+89. "[X] = [result]. (Most [audience] do it wrong)"
+   - Example: "LinkedIn = easiest extra $20K/mo in 2026. (Most agencies do it wrong)"
+
+90. "[Asset] = [result]. Here's the formula."
+   - Example: "Your headline = 60% of conversions. Here's the fix formula."
+
+---
+
+## Lead Magnet Post Structure (Octoscale)
+
+**60/40 Rule:**
+- Hook = 60% of whether they stop scrolling
+- Visual = 40% of whether they engage
+
+**Post Structure for Lead Magnets:**
+1. Hook (2-4 lines) — stop the scroll
+2. Pain — list 3-5 specific pains your ICP feels
+3. Bridge — "Here's how I solved it / what I built"
+4. What's inside — outcome-focused bullets (NOT features)
+5. CTA — Connect + comment keyword + I'll send
+
+**Key Rule:** Never a wall of ChatGPT text. Break it. Whitespace. Arrows. Flow.
+
+**Qualified Lead Test:**
+- ❌ Free tools and tips → tons of comments, zero clients (tire-kickers)
+- ✅ Full playbooks → fewer comments, real qualified leads
+
+If your lead magnet feels like it should cost $500, you'll pull buyers. If it feels like a freebie, you'll pull freebie hunters.
+
+---
+
 ## How to Use This Library
 
 **Monday:** Pull 3 audit findings  

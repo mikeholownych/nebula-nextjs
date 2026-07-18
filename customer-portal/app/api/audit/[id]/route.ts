@@ -35,10 +35,10 @@ export async function GET(
     const data = await response.json()
     
     return NextResponse.json({
-      audit_id: data.id,
+      audit_id: data.audit_id,
       url: data.url,
       status: data.status,
-      score: data.score ? data.score / 10 : null, // Convert from integer
+      score: data.score, // Already converted to float by FastAPI
       grade: data.grade,
       findings: data.findings || [],
       email: data.email,
