@@ -117,11 +117,11 @@ export default async function CitablePage() {
 .citable-page { background: var(--bg); color:var(--text); min-height: 100vh; }
 .citable-page a { color: var(--hot); text-decoration: none; }
 .citable-page a:hover { text-decoration: underline; }
-.citable-page .wrap { width:min(1120px,92vw); margin:0 auto; padding:56px 0 96px; }
-.citable-page .hero { display:grid; gap:22px; padding:48px; border:1px solid var(--line); border-radius:24px; background:var(--panel); min-height:auto; align-items:normal; justify-content:normal; }
+.citable-page .wrap { width:min(1120px,92vw); margin:0 auto; padding:48px 0 64px; }
+.citable-page .hero { display:grid; gap:24px; padding:48px; border:1px solid var(--line); border-radius:24px; background:var(--panel); min-height:auto; align-items:normal; justify-content:normal; }
 .citable-page .eyebrow { color:var(--gold); text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:800; }
 .citable-page h1.citable-h1 { font-size:clamp(36px,5.5vw,64px); line-height:.94; margin:0; letter-spacing:-.05em; }
-.citable-page h2.citable-h2 { font-size:26px; margin:48px 0 14px; letter-spacing:-.03em; }
+.citable-page h2.citable-h2 { font-size:26px; margin:48px 0 16px; letter-spacing:-.03em; }
 .citable-page h3.citable-h3 { font-size:17px; margin:10px 0 6px; letter-spacing:-.02em; }
 .citable-page .lede { color:var(--muted); font-size:19px; max-width:780px; line-height:1.5; }
 .citable-page .tagline { font-size:22px; font-weight:800; color:var(--hot); letter-spacing:-.02em; margin:0; }
@@ -137,11 +137,11 @@ export default async function CitablePage() {
 .citable-page .grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px; margin:16px 0; }
 .citable-page .card { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:24px; }
 .citable-page .card p { color:var(--muted); line-height:1.55; font-size:15px; margin:6px 0 0; }
-.citable-page .panel { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:28px 32px; margin:16px 0; }
+.citable-page .panel { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:32px; margin:16px 0; }
 .citable-page .panel p,.citable-page .panel li { color:var(--muted); line-height:1.6; font-size:15px; }
 .citable-page .panel ul { padding-left:20px; margin:10px 0; }
 .citable-page .panel li { margin-bottom:6px; }
-.citable-page blockquote { border-left:3px solid var(--hot); margin:20px 0; padding:14px 22px; background:rgba(16,185,129,.04); border-radius:0 14px 14px 0; }
+.citable-page blockquote { border:1px solid rgba(16,185,129,.3); margin:24px 0; padding:16px 24px; background:rgba(16,185,129,.04); border-radius:16px; }
 .citable-page blockquote p { color:var(--text); font-size:17px; line-height:1.55; margin:0; font-style:italic; }
 .citable-page .table-wrap { overflow-x:auto; margin:16px 0; }
 .citable-page table { width:100%; border-collapse:collapse; font-size:14px; }
@@ -153,7 +153,7 @@ export default async function CitablePage() {
 .citable-page .assess-weak { color:var(--muted); }
 .citable-page .assess-low { color:var(--red); font-weight:600; }
 .citable-page code { font-family:monospace; background:rgba(16,185,129,.08); border:1px solid rgba(16,185,129,.15); border-radius:6px; padding:2px 7px; font-size:13px; color:var(--hot); }
-.citable-page pre { background:#0a0a0a; border:1px solid var(--line); border-radius:14px; padding:20px 24px; overflow-x:auto; font-size:13px; line-height:1.6; color:var(--muted); }
+.citable-page pre { background:#0a0a0a; border:1px solid var(--line); border-radius:14px; padding:24px; overflow-x:auto; font-size:13px; line-height:1.6; color:var(--muted); }
 .citable-page pre code { background:none; border:none; padding:0; font-size:13px; color:var(--muted); }
 .citable-page .version-pill { display:inline-flex; align-items:center; gap:6px; background:rgba(16,185,129,.08); border:1px solid rgba(16,185,129,.25); border-radius:999px; padding:4px 12px; font-size:12px; color:var(--hot); font-weight:700; letter-spacing:.04em; }
 .citable-page .back { display:inline-flex; align-items:center; gap:6px; color:var(--muted); font-size:14px; margin-bottom:32px; }
@@ -169,7 +169,7 @@ export default async function CitablePage() {
 .citable-page .caution-panel strong { color:var(--amber); }
 .citable-page .section-divider { border:none; border-top:1px solid var(--line); margin:48px 0; }
 .citable-page .changelog { display:grid; gap:12px; }
-.citable-page .release { border:1px solid var(--line); border-radius:12px; padding:16px 20px; background:var(--panel); }
+.citable-page .release { border:1px solid var(--line); border-radius:12px; padding:16px 24px; background:var(--panel); }
 .citable-page .release.latest { border-color:rgba(16,185,129,.35); background:rgba(16,185,129,.03); }
 .citable-page .release-version { color:var(--text); font-weight:800; font-size:15px; }
 .citable-page .release-date { color:var(--muted); font-size:13px; margin-left:10px; }
@@ -177,12 +177,12 @@ export default async function CitablePage() {
 .citable-page .release li { color:var(--muted); font-size:14px; line-height:1.55; }
 .citable-page .first-audit { border:1px solid rgba(16,185,129,.3); border-radius:16px; padding:32px; margin:24px 0; background:rgba(16,185,129,.03); }
 .citable-page .step-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin:16px 0; }
-.citable-page .step { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:20px; text-align:center; }
+.citable-page .step { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:24px; text-align:center; }
 .citable-page .step-num { width:48px; height:48px; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; background:var(--hot); color:var(--bg); font-weight:900; font-size:22px; border-radius:50%; }
 .citable-page .step h4 { color:var(--text); font-size:15px; margin:0 0 6px; }
 .citable-page .step p { color:var(--muted); font-size:14px; line-height:1.5; margin:0; }
 .citable-page .commissioned-note { font-size:12px; color:var(--muted); border:1px solid var(--line); border-radius:8px; padding:8px 14px; margin-top:12px; display:inline-block; }
-@media(max-width:640px){ .citable-page .hero{padding:28px;} .citable-page .citable-h1{font-size:36px;} .citable-page .panel{padding:20px;} }
+@media(max-width:640px){ .citable-page .hero{padding:32px;} .citable-page .citable-h1{font-size:36px;} .citable-page .panel{padding:24px;} }
 
 /* ============================================================
    MOTION — KEYFRAMES
@@ -544,6 +544,7 @@ npx @nebulacomponents/citable@latest apply --input .citable/remediations/remedia
           </div>
 
           {/* WHAT IT DOES NOT PROVE */}
+          <hr className="section-divider" />
           <h2 className="citable-h2">What Citable does not prove</h2>
           <div className="panel caution-panel">
             <p>The following capability gaps are documented honestly. Citable's architecture aligns with the reality of what is provable — it does not overstate.</p>
@@ -563,19 +564,24 @@ npx @nebulacomponents/citable@latest apply --input .citable/remediations/remedia
           <h2 className="citable-h2">Full capability surface</h2>
           <p style={{color:'var(--muted)',fontSize:'15px',maxWidth:'780px',lineHeight:'1.6',marginBottom:'16px'}}>Commands verified against <code>@nebulacomponents/citable@1.12.0</code>.</p>
 
-          <div className="grid">
-            <div className="card"><h3 className="citable-h3"><code>audit</code></h3><p>Full site audit across selected scopes. Writes immutable evidence package to <code>.citable/runs/</code>. Scopes: technical, seo, aeo, geo, architecture, entity, claims, evidence, schema, lifecycle, corroboration, agent.</p></div>
-            <div className="card"><h3 className="citable-h3"><code>observe render</code></h3><p>Independent desktop, mobile, and JS-disabled Chromium render profiles with raw/rendered parity artifacts. Pass <code>--interactions</code> for bounded discovery of disclosure controls, unselected tabs, <code>aria-expanded=false</code> elements, and load-more triggers. Pass <code>--resume-run</code> to reuse successful immutable profiles.</p></div>
-            <div className="card"><h3 className="citable-h3"><code>observe performance</code></h3><p>Local, repeated Lighthouse execution with pinned runtime metadata, per-run artifacts, lab/field separation, and median metric summaries. Pass <code>--lighthouse</code>.</p></div>
-            <div className="card"><h3 className="citable-h3"><code>action-plan</code></h3><p>Converts audit findings into ordered remediation artifacts with owners, blockers, unsafe shortcut warnings, semantic review gates, and detector-specific verification commands.</p></div>
-            <div className="card"><h3 className="citable-h3"><code>apply</code></h3><p>Apply a reviewed, hash-locked remediation spec. Dry-run by default. Operations bound to source run; stale or ambiguous operations fail closed.</p></div>
-            <div className="card"><h3 className="citable-h3"><code>monitor</code></h3><p>Compare observation runs and emit regression alerts for observation-state, index, canonical, and citation regressions across immutable runs.</p></div>
-            <div className="card"><h3 className="citable-h3"><code>governance validate/evaluate</code></h3><p>Validate reviewer, policy, and exception controls. Produce immutable enforcement dispositions without changing findings. Accepted exceptions preserve <code>technical_state: failed</code>.</p></div>
-            <div className="card"><h3 className="citable-h3"><code>reviews queue/prioritize/plan/sample/evaluate</code></h3><p>Materiality-ranked semantic review queues with explicit missing-input states, reviewer assignment, hash-bound decisions, reproducible sampling plans, and independent adjudication.</p></div>
-            <div className="card"><h3 className="citable-h3"><code>connect status/configure/sync</code></h3><p>Optional read-only connectors for Google Search Console and GA4. Collect declared metrics into immutable observations without storing access tokens. Non-secret connection state only.</p></div>
-            <div className="card"><h3 className="citable-h3"><code>objectives init/validate/evaluate</code></h3><p>Metric-referenced objective contracts with baseline/evaluation window comparison and explicit inconclusive outcomes.</p></div>
-            <div className="card"><h3 className="citable-h3"><code>schedules run</code></h3><p>Execute an active version-pinned audit schedule by ID. Schedules are defined in the schedules registry — not created ad-hoc via CLI flags.</p></div>
-            <div className="card"><h3 className="citable-h3"><code>project github</code></h3><p>Render non-authoritative GitHub annotations from a completed run. Hash-bound to immutable artifacts. GitHub never becomes a parallel state authority.</p></div>
+          <div className="table-wrap">
+            <table>
+              <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+              <tbody>
+                <tr><td><code className="assess-strong">audit</code></td><td>Full site audit across selected scopes. Writes immutable evidence package to <code>.citable/runs/</code>. Scopes: technical, seo, aeo, geo, architecture, entity, claims, evidence, schema, lifecycle, corroboration, agent.</td></tr>
+                <tr><td><code>observe render</code></td><td>Independent desktop, mobile, and JS-disabled Chromium render profiles with raw/rendered parity artifacts. Pass <code>--interactions</code> for bounded discovery of disclosure controls, unselected tabs, <code>aria-expanded=false</code> elements, and load-more triggers. Pass <code>--resume-run</code> to reuse successful immutable profiles.</td></tr>
+                <tr><td><code>observe performance</code></td><td>Local, repeated Lighthouse execution with pinned runtime metadata, per-run artifacts, lab/field separation, and median metric summaries. Pass <code>--lighthouse</code>.</td></tr>
+                <tr><td><code>action-plan</code></td><td>Converts audit findings into ordered remediation artifacts with owners, blockers, unsafe shortcut warnings, semantic review gates, and detector-specific verification commands.</td></tr>
+                <tr><td><code>apply</code></td><td>Apply a reviewed, hash-locked remediation spec. Dry-run by default. Operations bound to source run; stale or ambiguous operations fail closed.</td></tr>
+                <tr><td><code>monitor</code></td><td>Compare observation runs and emit regression alerts for observation-state, index, canonical, and citation regressions across immutable runs.</td></tr>
+                <tr><td><code>governance validate/evaluate</code></td><td>Validate reviewer, policy, and exception controls. Produce immutable enforcement dispositions without changing findings. Accepted exceptions preserve <code>technical_state: failed</code>.</td></tr>
+                <tr><td><code>reviews queue/prioritize/plan/sample/evaluate</code></td><td>Materiality-ranked semantic review queues with explicit missing-input states, reviewer assignment, hash-bound decisions, reproducible sampling plans, and independent adjudication.</td></tr>
+                <tr><td><code>connect status/configure/sync</code></td><td>Optional read-only connectors for Google Search Console and GA4. Collect declared metrics into immutable observations without storing access tokens. Non-secret connection state only.</td></tr>
+                <tr><td><code>objectives init/validate/evaluate</code></td><td>Metric-referenced objective contracts with baseline/evaluation window comparison and explicit inconclusive outcomes.</td></tr>
+                <tr><td><code>schedules run</code></td><td>Execute an active version-pinned audit schedule by ID. Schedules are defined in the schedules registry — not created ad-hoc via CLI flags.</td></tr>
+                <tr><td><code>project github</code></td><td>Render non-authoritative GitHub annotations from a completed run. Hash-bound to immutable artifacts. GitHub never becomes a parallel state authority.</td></tr>
+              </tbody>
+            </table>
           </div>
 
           {/* THREE DISCIPLINES */}
@@ -628,6 +634,7 @@ npx @nebulacomponents/citable@latest apply --input .citable/remediations/remedia
           </div>
 
           {/* REGISTRIES */}
+          <hr className="section-divider" />
           <h2 className="citable-h2">Registries — 19 schema-validated YAML files</h2>
           <div className="panel">
             <p><code>.citable/</code> holds 19 registries — schema-validated on save, with declared cross-registry relationships checked during registry validation. The full list, derived from the published package:</p>
