@@ -238,16 +238,16 @@ export default function RoasCliffPage() {
 
         <div className="bg-accent-dim border border-accent/20 rounded-xl p-8 my-12 text-center">
           <h3 className="text-accent font-semibold text-lg mb-2">
-            Automated audit scoring is paused
+            Automated audit scoring is live
           </h3>
           <p className="text-fg-muted mb-6">
-            The rebuilt engine will require evidence for each score, leak calculation, and recommended fix.
+            Every score, leak calculation, and recommended fix is backed by evidence.
           </p>
           <Link
             href="/audit"
             className="inline-block bg-accent text-bg font-bold px-8 py-3 rounded-md hover:bg-accent-light transition-colors"
           >
-            View audit status →
+            Run free audit →
           </Link>
           <br />
           <Link

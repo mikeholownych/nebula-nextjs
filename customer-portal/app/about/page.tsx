@@ -52,10 +52,10 @@ export default function AboutPage() {
         <section className="mb-10 rounded-2xl border border-border bg-bg-panel p-6">
           <h2 className="mb-3 text-2xl font-bold text-accent">Current audit status</h2>
           <p className="text-fg-muted">
-            Automated URL submission and scoring are paused while the audit engine is rebuilt and independently verified. No automated score is issued during this period.
+            Automated URL submission and scoring are live. Drop in a URL and get a scored, evidence-backed diagnosis — no signup required.
           </p>
           <Link href="/audit" className="mt-4 inline-block font-semibold text-accent hover:underline">
-            View audit status →
+            Run a free audit →
           </Link>
         </section>
 

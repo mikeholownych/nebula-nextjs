@@ -102,11 +102,11 @@ export default function PricingPage() {
 
         <div className="grid gap-8 md:grid-cols-2">
           <Card variant="bordered">
-            <p className="mb-3 text-sm font-medium text-fg-muted">Temporarily paused</p>
+            <p className="mb-3 text-sm font-medium text-fg-muted">Free, instant</p>
             <h2 className="text-2xl font-semibold text-fg">Automated Audit</h2>
             <p className="mt-2 text-3xl font-bold text-fg">Free</p>
             <p className="mt-4 text-fg-muted">
-              Automated URL submission and scoring are paused while the audit engine is rebuilt and independently verified. No automated score is issued during this maintenance period.
+              Drop in a URL and get a scored, evidence-backed diagnosis in seconds — no signup required.
             </p>
             <ul className="mt-6 space-y-2 text-sm text-fg-muted">
               {[
@@ -123,7 +123,7 @@ export default function PricingPage() {
               ))}
             </ul>
             <Link href="/audit" className="mt-8 inline-flex rounded-xl border border-border px-5 py-3 font-semibold text-fg hover:border-accent transition-colors">
-              View audit status
+              Run free audit
             </Link>
           </Card>
 

@@ -38,7 +38,7 @@ export default function CtaOptimizationPage() {
           ● Nebula Components
         </a>
         <a href="/audit" className="bg-accent-dark text-bg text-sm font-semibold px-4 py-2 rounded-md hover:bg-accent transition-colors">
-          View audit status →
+          Run free audit →
         </a>
       </header>
 
@@ -103,13 +103,13 @@ export default function CtaOptimizationPage() {
             See exactly where your page leaks.
           </h2>
           <p className="text-fg-muted mb-6 max-w-md mx-auto">
-            Automated audit scoring is paused while the evidence-backed engine is rebuilt.
+            Automated audit scoring is live and evidence-backed — no signup required.
           </p>
           <a
             href="/audit"
             className="inline-block bg-accent-dark text-bg font-bold text-base py-4 px-8 rounded-lg hover:bg-accent transition-colors"
           >
-            View audit status →
+            Run free audit →
           </a>
           <p className="text-xs text-fg-dim mt-4">
             Scoring paused · no submission collected

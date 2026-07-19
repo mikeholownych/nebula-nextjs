@@ -222,7 +222,7 @@ export default function SevenSystemsPage() {
               How Does Your Page Score?
             </h3>
             <p className="text-slate-400 mb-6">
-              Automated audit scoring is paused while the evidence-backed engine is rebuilt.
+              Automated audit scoring is live and evidence-backed — no signup required.
             </p>
             <a
               href="/audit"

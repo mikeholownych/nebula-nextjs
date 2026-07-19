@@ -27,7 +27,7 @@ export default function WhatIsLandingPageAudit() {
                 name: "How long does a landing page audit take?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Automated tools can score a page quickly, but Nebula's automated scoring is paused until the rebuilt engine can provide verifiable evidence and prioritized fixes.",
+                  text: "Nebula's automated audit scores a page in seconds and returns evidence-backed findings with a prioritized fix list.",
                 },
               },
               {
@@ -201,7 +201,7 @@ export default function WhatIsLandingPageAudit() {
             Ready to Audit Your Landing Page?
           </h3>
           <p className="text-gray-300 mb-6">
-            Automated scoring is paused while the evidence-backed audit engine is rebuilt.
+            Automated, evidence-backed scoring is live — drop in a URL and see your results in seconds.
           </p>
           <Link
             href="/audit"

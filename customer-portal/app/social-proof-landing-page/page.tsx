@@ -93,7 +93,7 @@ export default function SocialProofLandingPage() {
             href="/audit"
             className="bg-accent text-bg text-xs font-semibold px-4 py-2 rounded-md hover:bg-accent-light transition-colors"
           >
-            View audit status →
+            Run free audit →
           </Link>
         </header>
 
@@ -202,13 +202,13 @@ export default function SocialProofLandingPage() {
             See exactly where your page leaks.
           </h2>
           <p className="text-fg-muted mb-6">
-            Automated audit scoring is paused while the evidence-backed engine is rebuilt.
+            Automated audit scoring is live and evidence-backed — no signup required.
           </p>
           <Link
             href="/audit"
             className="inline-block bg-accent text-bg font-bold text-base px-8 py-3.5 rounded-lg hover:bg-accent-light transition-colors"
           >
-            View audit status →
+            Run free audit →
           </Link>
           <p className="text-[13px] text-fg-muted mt-4">
             Scoring paused · no submission collected

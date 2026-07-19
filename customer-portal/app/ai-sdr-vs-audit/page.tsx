@@ -138,7 +138,7 @@ export default function AiSdrVsAuditPage() {
         </h2>
         <p className="mb-4">The smartest path to revenue right now — whether you're pre-revenue or scaling — is:</p>
         <ol className="list-decimal list-inside mb-6 space-y-2">
-          <li><strong>Check audit status.</strong> Automated URL submission and scoring are paused during the evidence-backed rebuild.</li>
+          <li><strong>Run a free audit.</strong> Automated URL submission and evidence-backed scoring are live — no signup required.</li>
           <li><strong>Fix what's broken.</strong> Free kit shows you exactly what to change. $147 pack implements it for you.</li>
           <li><strong>Get a page that converts at 3-6%.</strong> Now every dollar of traffic or outreach actually produces leads.</li>
           <li><strong>Then — and only then — consider an AI SDR.</strong> Because now the math works. Each outbound email lands on a page that converts.</li>
@@ -180,7 +180,7 @@ export default function AiSdrVsAuditPage() {
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-4">
             <a href="/audit" className="inline-flex items-center gap-2 bg-accent hover:bg-accent-light text-bg font-bold py-4 px-9 rounded-lg transition-colors">
-              View audit status →
+              Run free audit →
             </a>
             <a href="/why-landing-pages-dont-convert" className="inline-flex items-center gap-2 bg-transparent border border-border hover:border-accent-light text-fg-muted hover:text-fg font-semibold py-4 px-6 rounded-lg transition-colors">
               Read the full guide

@@ -14,7 +14,7 @@ export default function NotFoundPage() {
             Back to home
           </Link>
           <Link className="rounded-xl border border-border px-5 py-3 font-semibold" href="/audit">
-            View audit status
+            Run free audit
           </Link>
         </div>
       </div>

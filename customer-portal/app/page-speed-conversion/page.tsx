@@ -64,7 +64,7 @@ export default function PageSpeedConversion() {
       <div className="max-w-[720px] mx-auto px-6 py-12 pb-20">
         <header className="border-b border-border pb-6 mb-12 flex justify-between items-center">
           <a className="text-fg font-bold text-sm tracking-wider uppercase no-underline hover:text-accent transition-colors" href="/">● Nebula Components</a>
-          <a className="bg-accent text-bg text-[13px] font-semibold px-4 py-2 rounded-md no-underline hover:bg-accent-light transition-colors" href="/audit">View audit status →</a>
+          <a className="bg-accent text-bg text-[13px] font-semibold px-4 py-2 rounded-md no-underline hover:bg-accent-light transition-colors" href="/audit">Run free audit →</a>
         </header>
 
         <h1 className="text-[clamp(1.8rem,4vw,2.4rem)] font-extrabold leading-tight text-fg my-8 mb-4">Page Speed and Conversion Rate</h1>
@@ -101,8 +101,8 @@ export default function PageSpeedConversion() {
 
         <div className="bg-bg-panel border border-border rounded-xl py-10 px-8 text-center mt-14">
           <h2 className="border-none p-0 m-0 mb-3 text-[1.5rem] text-fg font-bold">See exactly where your page leaks.</h2>
-          <p className="text-fg-muted mb-6">Automated audit scoring is paused while the evidence-backed engine is rebuilt.</p>
-          <a className="inline-block bg-accent text-bg font-bold text-base py-3.5 px-8 rounded-lg no-underline hover:bg-accent-light transition-colors" href="/audit">View audit status →</a>
+          <p className="text-fg-muted mb-6">Automated audit scoring is live and evidence-backed — no signup required.</p>
+          <a className="inline-block bg-accent text-bg font-bold text-base py-3.5 px-8 rounded-lg no-underline hover:bg-accent-light transition-colors" href="/audit">Run free audit →</a>
           <p className="text-[13px] text-fg-muted mt-2.5">Scoring paused · no submission collected</p>
         </div>
 
