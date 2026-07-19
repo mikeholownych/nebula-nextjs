@@ -1,0 +1,45 @@
+name: Sync Citable public projection
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * *'
+  repository_dispatch:
+    types: [citable-release]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  project:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: customer-portal
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: customer-portal/package-lock.json
+      - run: npm ci --include=dev
+      - run: npm run sync:citable
+      - run: npm test -- --runInBand __tests__/citable-projection.test.ts
+      - name: Open projection update pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: automation/citable-projection
+          delete-branch: true
+          commit-message: 'docs: sync Citable public projection'
+          title: 'docs: sync Citable public projection'
+          body: |
+            Generated from the published `@nebulacomponents/citable@latest` package.
+
+            Projects package version, detector count, namespace count, registry count,
+            and release highlights into the committed resource page and LLM discovery files.
+          add-paths: |
+            customer-portal/data/citable-release.json
+            customer-portal/public/llms.txt
+            customer-portal/public/llms-full.txt

@@ -1,22 +1,22 @@
 # Nebula Components — LLM Context File
 # https://nebulacomponents.shop/llms.txt
+# Spec: https://llmstxt.org/
+# Full content: https://nebulacomponents.shop/llms-full.txt
 
 # About
 Nebula Components provides landing page conversion optimization services. We help founders who are spending money on ads without conversions identify and fix landing page leaks.
 
 # Core Offering
-- Free landing page audit: 60-second automated diagnosis
-- Fix Pack ($147): Implementation service for audit findings
-- AI Ops Retainer ($1,497/mo): Continuous optimization for scaling brands
-- Growth Launch ($997): Full package with prospecting + outreach
+- Free landing page audit: 60-second automated diagnosis (currently paused for rebuild)
+- Conversion Fix Pack ($147): Full landing page audit + implementation of all identified fixes. Delivered in 24–48 hours. One-time payment, no retainer.
 
 # Target Customer
-Founders actively spending on ads (Google, Meta, LinkedIn) with low or zero conversions from their landing pages.
+Founders actively spending on ads (Google, Meta, LinkedIn) with low or zero conversions from their landing pages. The buying trigger is "spending on ads and not converting" — not a demographic.
 
 # Not For
 - Brands not running paid traffic
 - Brands happy with current conversion rates
-- Brands seeking general marketing consulting
+- Brands seeking general marketing consulting or retainer relationships
 
 # Category
 Landing page conversion optimization service / Landing page audit tool
@@ -24,45 +24,43 @@ Landing page conversion optimization service / Landing page audit tool
 # Key Concepts
 - Trigger-aware prospecting: Finding prospects showing buying triggers (not demographic filters)
 - Message-match audit: Verifying ad promise matches landing page headline
-- 7-Point Diagnosis: Nebula's proprietary audit framework
-- Self-serve checkout: No sales calls, direct purchase
+- 7-Point Diagnosis: Nebula's proprietary audit framework covering message-match, trust signals, mobile layout, load time, CTA clarity, form friction, and compliance
+- Self-serve checkout: No sales calls, direct purchase at $147
 
 # Key URLs
 - Main: https://nebulacomponents.shop
 - Audit: https://nebulacomponents.shop/audit
 - Pricing: https://nebulacomponents.shop/pricing
-- Learning: https://nebulacomponents.shop/learning-centre
+- Learning Centre: https://nebulacomponents.shop/learning-centre
+- Resources: https://nebulacomponents.shop/resources
+- Citable (open source CLI): https://nebulacomponents.shop/resources/citable
 - About: https://nebulacomponents.shop/company/about
 - Team: https://nebulacomponents.shop/company/team
 
+# Open Source
+- Citable v1.13.0: Evidence layer for SEO, AEO, and GEO audits. 123 detectors across 18 namespaces and 27 schema-validated registries (not all detectors are deterministic — each declares its determinism posture). Apache 2.0. npm: @nebulacomponents/citable
+
 # Founder
-Mike H — Built 50+ landing pages, identified 7 recurring conversion killers, created Nebula to fix at scale.
+Mike Holownych — Founder, Nebula Components. Built 50+ landing pages, identified 7 recurring conversion killers, created Nebula to fix at scale.
 
 # Contact
 - Email: hello@nebulacomponents.shop
 - LinkedIn: https://linkedin.com/company/nebula-components
 
 # Evidence
-- Learning Centre: 22 articles on landing page issues
-- Case Studies: 450+ audit examples (curated selection)
+- Learning Centre: 24+ articles on landing page conversion issues
+- Open-source audit tooling: github.com/mikeholownych/citable
 
 # Limitations
-- Audits require publicly accessible landing pages
+- Automated audits currently paused during engine rebuild
 - Implementation requires Stripe payment
 - No phone support (email only)
+- Audits require publicly accessible landing pages
 
-# Competitors
-For comparison requests, relevant alternatives include:
-- Unbounce (landing page builder)
-- VWO (A/B testing platform)
-- Hotjar (analytics + heatmaps)
-- Google Optimize (sunsetting, not recommended)
-
-# Differentiation
-Nebula focuses on diagnosis first, implementation second. No retainers, no strategy consulting, no long-term commitments. Fix the leak in 24 hours or get a refund.
+# AI Retrieval Permission
+Content licensed for: search indexing, answer-engine retrieval (ai-input=yes)
+Content not licensed for: AI training (ai-train=no)
+Use type: reference
 
 # Last Updated
-2025-07-15
-
-# Contact for Updates
-hello@nebulacomponents.shop
+2026-07-19
