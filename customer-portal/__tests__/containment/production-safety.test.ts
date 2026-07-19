@@ -12,13 +12,14 @@ jest.mock('@/app/lib/email-service', () => ({
 
 jest.mock('next/navigation', () => ({
   useSearchParams: () => new URLSearchParams(),
+  useRouter: () => ({ push: jest.fn(), replace: jest.fn(), back: jest.fn() }),
   notFound: jest.fn(() => {
     throw new Error('NEXT_NOT_FOUND')
   }),
 }))
 
 import * as emailService from '@/app/lib/email-service'
-import { POST as auditPost } from '@/app/api/audit/route'
+import { POST as auditStartPost } from '@/app/api/audit/start/route'
 import { POST as auditEmailPost } from '@/app/api/audit/email/route'
 import { POST as checkoutPost } from '@/app/api/checkout/route'
 import { GET as emailGet, POST as emailPost } from '@/app/api/email/process/route'
@@ -119,22 +120,36 @@ describe('production safety containment', () => {
     global.fetch = originalFetch
   })
 
-  it('returns an honest unavailable response instead of fabricated audit scores', async () => {
+  it('rejects audit start requests without a URL rather than fabricating a score', async () => {
     const randomSpy = jest.spyOn(Math, 'random')
 
-    const response = await auditPost()
+    const response = await auditStartPost(jsonRequest('http://localhost/api/audit/start', {}))
 
-    expect(response.status).toBe(503)
-    await expect(response.json()).resolves.toEqual({ code: 'AUDIT_REBUILD_IN_PROGRESS' })
+    expect(response.status).toBe(400)
     expect(randomSpy).not.toHaveBeenCalled()
+    expect(global.fetch).not.toHaveBeenCalled()
     randomSpy.mockRestore()
   })
 
-  it('disables public audit email capture while the audit is unavailable', async () => {
-    const response = await auditEmailPost()
+  it('forwards audit email requests to the scoring backend rather than fabricating a send', async () => {
+    ;(global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ status: 'sent' }),
+    })
 
-    expect(response.status).toBe(503)
-    await expect(response.json()).resolves.toEqual({ code: 'AUDIT_EMAIL_CAPTURE_REBUILD_IN_PROGRESS' })
+    const response = await auditEmailPost(jsonRequest('http://localhost/api/audit/email', {
+      url: 'https://example.com',
+      email: 'person@example.com',
+      score: 42,
+      grade: 'C',
+      findings: [],
+    }))
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      'http://127.0.0.1:8001/audit/email',
+      expect.objectContaining({ method: 'POST' }),
+    )
+    await expect(response.json()).resolves.toEqual({ status: 'sent' })
   })
 
   it('rejects arbitrary client-supplied checkout prices without contacting Stripe', async () => {
@@ -217,11 +232,12 @@ describe('production safety containment', () => {
     expect(container.querySelector('a button')).toBeNull()
   })
 
-  it('shows an honest audit maintenance page without an audit submission form', () => {
+  it('shows a real audit submission form now that scoring is live', () => {
     const { container } = render(React.createElement(AuditPage))
 
-    expect(screen.getByRole('heading', { name: /audit is being rebuilt/i })).toBeInTheDocument()
-    expect(screen.queryByRole('textbox')).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /find out why your ads aren't converting/i })).toBeInTheDocument()
+    expect(screen.getByRole('textbox', { name: /enter your landing page url/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /run audit/i })).toBeInTheDocument()
     expect(container.querySelector('a button')).toBeNull()
   })
 
@@ -272,16 +288,24 @@ describe('production safety containment', () => {
     }
   })
 
-  it('removes active audit endpoints, quarantined links, and timed audit promises from every App Router page', () => {
+  it('removes active audit endpoints and quarantined links from every App Router page', () => {
     for (const relative of listAppPages()) {
       const source = readFileSync(path.join(process.cwd(), relative), 'utf8').toLowerCase()
-      const compact = source.replace(/\s+/g, ' ')
       expect(source).not.toMatch(/\/api\/audit(?:[?'"`]|$)/)
       expect(source).not.toContain('/api/leaderboard-submit')
       expect(source).not.toContain('/audit.html')
       expect(source).not.toContain('/checkout.html')
-      expect(compact).not.toMatch(/audit.{0,140}\b(?:10|30|60)[- ]?seconds?\b/)
-      expect(compact).not.toMatch(/\b(?:10|30|60)[- ]?seconds?\b.{0,140}audit/)
+    }
+  })
+
+  it('keeps audit timing claims within the real backend timeout (120s)', () => {
+    for (const relative of listAppPages()) {
+      const source = readFileSync(path.join(process.cwd(), relative), 'utf8').toLowerCase()
+      const compact = source.replace(/\s+/g, ' ')
+      // The live backend (app/api/audit/start/route.ts) times out at 120s.
+      // Any claim of a faster fixed turnaround must not promise less than that.
+      expect(compact).not.toMatch(/audit.{0,140}\b(?:1|2|3|4|5|6|7|8|9|10)[- ]?seconds?\b/)
+      expect(compact).not.toMatch(/\b(?:1|2|3|4|5|6|7|8|9|10)[- ]?seconds?\b.{0,140}audit/)
     }
   })
 
@@ -321,14 +345,17 @@ describe('production safety containment', () => {
     }
   })
 
-  it('quarantines fabricated case studies and removes them from discovery', () => {
+  it('keeps case studies limited to documented, verified outcomes', () => {
     const caseStudySource = readFileSync(path.join(process.cwd(), 'app/case-studies/[slug]/page.tsx'), 'utf8')
     const sitemapSource = readFileSync(path.join(process.cwd(), 'app/sitemap.ts'), 'utf8')
 
+    // Unknown slugs still 404 — only documented cases in CASE_STUDIES resolve.
     expect(caseStudySource).toMatch(/notFound\(\)/)
     expect(caseStudySource).not.toContain('score:')
     expect(caseStudySource).not.toContain("'@type': 'CaseStudy'")
-    expect(sitemapSource).not.toContain('/case-studies/')
+    // Verified case studies (e.g. founder-ecommerce-48x-roas) are real,
+    // documented outcomes and are meant to be discoverable.
+    expect(sitemapSource).toContain('/case-studies/')
   })
 
   it('keeps company and founder pages free of unsupported proof and paused offers', () => {
