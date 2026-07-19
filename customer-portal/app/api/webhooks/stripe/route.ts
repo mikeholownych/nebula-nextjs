@@ -9,11 +9,15 @@ import Stripe from 'stripe'
  * - checkout.session.completed: Mark purchase as complete
  */
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2026-06-24.dahlia',
-})
-
-const WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET!
+// Constructed lazily inside the handler, not at module scope — a top-level
+// `new Stripe(...)` throws at import time whenever STRIPE_SECRET_KEY is
+// unset, which breaks Next.js's build-time page-data collection in any
+// environment without production secrets (e.g. CI).
+function getStripeClient(): Stripe {
+  return new Stripe(process.env.STRIPE_SECRET_KEY!, {
+    apiVersion: '2026-06-24.dahlia',
+  })
+}
 
 export async function POST(request: NextRequest) {
   const body = await request.text()
@@ -29,10 +33,10 @@ export async function POST(request: NextRequest) {
   let event: Stripe.Event
 
   try {
-    event = stripe.webhooks.constructEvent(
+    event = getStripeClient().webhooks.constructEvent(
       body,
       signature,
-      WEBHOOK_SECRET
+      process.env.STRIPE_WEBHOOK_SECRET!
     )
   } catch (err) {
     console.error('Webhook signature verification failed:', err)
