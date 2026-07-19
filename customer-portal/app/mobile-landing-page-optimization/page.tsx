@@ -42,35 +42,35 @@ const relatedArticles = [
 
 export default function MobileLandingPageOptimization() {
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-[#e2e8f0] font-sans">
+    <div className="min-h-screen bg-bg text-fg-muted font-sans">
       {/* Header */}
-      <header className="max-w-[720px] mx-auto px-6 pt-8 pb-6 flex justify-between items-center border-b border-[#1e1e2e]">
-        <a href="/" className="text-[#a5b4fc] text-sm font-bold tracking-widest uppercase hover:text-[#818cf8] transition-colors">
+      <header className="max-w-[720px] mx-auto px-6 pt-8 pb-6 flex justify-between items-center border-b border-border">
+        <a href="/" className="text-fg text-sm font-bold tracking-widest uppercase hover:text-accent transition-colors">
           ● Nebula Components
         </a>
-        <a href="/audit" className="bg-[#047857] text-white text-sm font-semibold px-4 py-2 rounded-md hover:bg-[#059669] transition-colors">
+        <a href="/audit" className="bg-accent text-bg text-sm font-semibold px-4 py-2 rounded-md hover:bg-accent-light transition-colors">
           View audit status →
         </a>
       </header>
 
       {/* Main Content */}
       <main className="max-w-[720px] mx-auto px-6 py-12">
-        <h1 className="text-[clamp(1.8rem,4vw,2.4rem)] font-extrabold leading-tight text-[#f8fafc] mt-8 mb-4">
+        <h1 className="text-[clamp(1.8rem,4vw,2.4rem)] font-extrabold leading-tight text-fg mt-8 mb-4">
           Mobile Landing Page Optimization
         </h1>
-        <p className="text-[#94a3b8] text-lg mb-6">
+        <p className="text-fg-muted text-lg mb-6">
           60–70% of B2B landing page traffic arrives on a mobile device. 'Responsive' doesn't mean 'converts on mobile' — it means the layout doesn't break. A page that works on desktop but has tiny tap targets, a buried CTA, and a form requiring desktop-level typing loses most of its mobile visitors before they convert.
         </p>
 
         {/* Quick Answer Blockquote */}
-        <blockquote className="border-l-4 border-[#6366f1] bg-[#12121c] py-4 px-5 rounded-r-lg my-6">
+        <blockquote className="border border-border bg-bg-panel py-4 px-5 rounded-xl my-6">
           <p className="mb-0">
-            <strong className="text-[#f8fafc]">Quick Answer:</strong> Check three things first on mobile: (1) Is the CTA visible without scrolling on a 390px-wide screen? (2) Are all tap targets at least 44×44px? (3) Does the form work with one thumb? If any answer is no, you have a mobile conversion leak. Test with Chrome DevTools in device mode before spending another dollar on ads.
+            <strong className="text-fg">Quick Answer:</strong> Check three things first on mobile: (1) Is the CTA visible without scrolling on a 390px-wide screen? (2) Are all tap targets at least 44×44px? (3) Does the form work with one thumb? If any answer is no, you have a mobile conversion leak. Test with Chrome DevTools in device mode before spending another dollar on ads.
           </p>
         </blockquote>
 
         {/* FAQ Section */}
-        <h2 className="text-2xl font-bold text-[#f1f5f9] mt-12 mb-6 pl-4 border-l-4 border-[#6366f1]">
+        <h2 className="text-2xl font-bold text-fg mt-12 mb-6">
           Frequently Asked Questions
         </h2>
 
@@ -78,12 +78,12 @@ export default function MobileLandingPageOptimization() {
           {faqItems.map((item, idx) => (
             <div
               key={idx}
-              className="bg-[#12121c] border border-[#1e1e2e] rounded-xl p-5"
+              className="bg-bg-panel border border-border rounded-xl p-5"
             >
-              <h3 className="text-base font-semibold text-[#f1f5f9] mb-2">
+              <h3 className="text-base font-semibold text-fg mb-2">
                 {item.question}
               </h3>
-              <p className="text-[#94a3b8] text-sm mb-0">
+              <p className="text-fg-muted text-sm mb-0">
                 {item.answer}
               </p>
             </div>
@@ -91,8 +91,8 @@ export default function MobileLandingPageOptimization() {
         </div>
 
         {/* Related Articles */}
-        <section className="bg-[#0f172a] border border-[#1e1e2e] rounded-xl p-5 mt-12">
-          <h3 className="text-sm font-semibold text-[#94a3b8] uppercase tracking-wide mb-3">
+        <section className="bg-bg-panel border border-border rounded-xl p-5 mt-12">
+          <h3 className="text-sm font-semibold text-fg-muted uppercase tracking-wide mb-3">
             Related Articles
           </h3>
           <div className="space-y-2">
@@ -100,7 +100,7 @@ export default function MobileLandingPageOptimization() {
               <a
                 key={article.href}
                 href={article.href}
-                className="block text-[#818cf8] hover:text-[#a5b4fc] text-sm transition-colors"
+                className="block text-accent hover:text-accent-light text-sm transition-colors"
               >
                 {article.title}
               </a>
@@ -109,33 +109,33 @@ export default function MobileLandingPageOptimization() {
         </section>
 
         {/* CTA Box */}
-        <div className="bg-gradient-to-br from-[#0f172a] to-[#1a2744] border border-[#1e3a5f] rounded-xl py-10 px-8 text-center mt-12">
-          <h2 className="text-2xl font-bold text-white mb-3">
+        <div className="bg-bg-panel border border-border rounded-xl py-10 px-8 text-center mt-12">
+          <h2 className="text-2xl font-bold text-fg mb-3">
             See exactly where your page leaks.
           </h2>
-          <p className="text-[#94a3b8] mb-6 max-w-md mx-auto">
+          <p className="text-fg-muted mb-6 max-w-md mx-auto">
             Automated audit scoring is paused while the evidence-backed engine is rebuilt.
           </p>
           <a
             href="/audit"
-            className="inline-block bg-[#047857] text-white font-bold text-base py-4 px-8 rounded-lg hover:bg-[#059669] transition-colors"
+            className="inline-block bg-accent text-bg font-bold text-base py-4 px-8 rounded-lg hover:bg-accent-light transition-colors"
           >
             View audit status →
           </a>
-          <p className="text-xs text-[#6b7280] mt-4">
+          <p className="text-xs text-fg-muted mt-4">
             Scoring paused · no submission collected
           </p>
         </div>
 
         {/* Footer */}
-        <footer className="border-t border-[#1e1e2e] mt-16 pt-6 text-center text-sm text-[#94a3b8]">
+        <footer className="border-t border-border mt-16 pt-6 text-center text-sm text-fg-muted">
           <p>
-            © 2025 <a href="/" className="text-[#a5b4fc] hover:text-[#818cf8] transition-colors">Nebula Components</a> ·{' '}
-            <a href="/what-is-landing-page-audit" className="text-[#a5b4fc] hover:text-[#818cf8] transition-colors">
+            © 2025 <a href="/" className="text-accent hover:text-accent-light transition-colors">Nebula Components</a> ·{' '}
+            <a href="/what-is-landing-page-audit" className="text-accent hover:text-accent-light transition-colors">
               What is a landing page audit?
             </a>{' '}
             ·{' '}
-            <a href="/why-landing-pages-dont-convert" className="text-[#a5b4fc] hover:text-[#818cf8] transition-colors">
+            <a href="/why-landing-pages-dont-convert" className="text-accent hover:text-accent-light transition-colors">
               Why pages don't convert
             </a>
           </p>

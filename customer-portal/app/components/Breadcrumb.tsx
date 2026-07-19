@@ -73,22 +73,22 @@ export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
       <nav aria-label="Breadcrumb" className={`text-sm py-3 ${className}`}>
-        <ol className="flex items-center flex-wrap gap-1.5 text-[#9aa7bd]">
+        <ol className="flex items-center flex-wrap gap-1.5 text-fg-muted">
           {breadcrumbItems.map((item, index) => {
             const isLast = index === breadcrumbItems.length - 1;
             return (
               <li key={item.url} className="flex items-center">
                 {index > 0 && (
-                  <span className="mx-2 text-[#374151]" aria-hidden="true">/</span>
+                  <span className="mx-2 text-fg-dim" aria-hidden="true">/</span>
                 )}
                 {isLast || item.isUuid ? (
-                  <span className="text-[#f5f7fb] font-medium" aria-current={isLast ? 'page' : undefined}>
+                  <span className="text-fg font-medium" aria-current={isLast ? 'page' : undefined}>
                     {item.name}
                   </span>
                 ) : (
                   <Link
                     href={item.url}
-                    className="hover:text-[#79f2c0] transition-colors duration-150"
+                    className="hover:text-accent transition-colors duration-150"
                   >
                     {item.name}
                   </Link>

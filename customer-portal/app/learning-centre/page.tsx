@@ -30,22 +30,24 @@ export default function LearningCentreIndex() {
     { slug: 'specialist-ai-agent-library', title: 'Specialist AI Agent Library', category: 'AI Ops Systems', description: 'Stop asking one AI to do 50 jobs. Deploy focused specialists with role, trigger, prompt, handoff, and review gates.' },
   ];
 
-  // Group articles by category
-  const categories: Record<string, { color: string; articles: typeof articles }> = {
-    'Google Ads Leaks': { color: '#4285f4', articles: [] },
-    'Meta Ads Leaks': { color: '#1877f2', articles: [] },
-    'Landing Page Leaks': { color: '#79f2c0', articles: [] },
-    'Paid Traffic Economics': { color: '#ffd166', articles: [] },
-    'Form Leaks': { color: '#f472b6', articles: [] },
-    'Conversion Copy': { color: '#a78bfa', articles: [] },
-    'Message Match': { color: '#fb923c', articles: [] },
-    'Trust Leaks': { color: '#34d399', articles: [] },
-    'Mobile Leaks': { color: '#60a5fa', articles: [] },
-    'Budget Leaks': { color: '#f87171', articles: [] },
-    'Industry Specific': { color: '#06b6d4', articles: [] },
-    'Content Systems': { color: '#c084fc', articles: [] },
-    'Distribution': { color: '#22d3ee', articles: [] },
-    'AI Ops Systems': { color: '#fbbf24', articles: [] },
+  // Group articles by category. Every category shares the single brand accent
+  // (Signal Emerald) rather than a rainbow per-category hue — see DESIGN.md's
+  // One Signal Rule; the label + count carry the categorization, not color.
+  const categories: Record<string, { articles: typeof articles }> = {
+    'Google Ads Leaks': { articles: [] },
+    'Meta Ads Leaks': { articles: [] },
+    'Landing Page Leaks': { articles: [] },
+    'Paid Traffic Economics': { articles: [] },
+    'Form Leaks': { articles: [] },
+    'Conversion Copy': { articles: [] },
+    'Message Match': { articles: [] },
+    'Trust Leaks': { articles: [] },
+    'Mobile Leaks': { articles: [] },
+    'Budget Leaks': { articles: [] },
+    'Industry Specific': { articles: [] },
+    'Content Systems': { articles: [] },
+    'Distribution': { articles: [] },
+    'AI Ops Systems': { articles: [] },
   };
 
   articles.forEach(a => {
@@ -75,8 +77,8 @@ export default function LearningCentreIndex() {
   return (
     <div className="learning-centre-page">
       <header className="learning-header">
-        <a href="/" className="logo" style={{ color: '#f5f7fb', textDecoration: 'none' }}>
-          <span style={{ color: '#79f2c0' }}>◆</span>
+        <a href="/" className="logo">
+          <span style={{ color: '#10b981' }}>◆</span>
           <span> Nebula</span>
         </a>
       </header>
@@ -102,8 +104,8 @@ export default function LearningCentreIndex() {
           <h2>Learning categories</h2>
           <div className="category-list">
             {categoryOrder.map(cat => (
-              <a href={`#${cat.toLowerCase().replace(/\s+/g, '-')}`} key={cat} className="category-pill" style={{ borderColor: categories[cat]?.color || '#253044' }}>
-                <span className="category-dot" style={{ background: categories[cat]?.color || '#79f2c0' }}></span>
+              <a href={`#${cat.toLowerCase().replace(/\s+/g, '-')}`} key={cat} className="category-pill">
+                <span className="category-dot"></span>
                 {cat}
                 <span className="category-count">{categories[cat]?.articles.length || 0}</span>
               </a>
@@ -123,7 +125,7 @@ export default function LearningCentreIndex() {
             return (
               <div key={cat} id={cat.toLowerCase().replace(/\s+/g, '-')} className="category-section">
                 <div className="category-header">
-                  <span className="category-indicator" style={{ background: catData.color }}></span>
+                  <span className="category-indicator"></span>
                   <h3>{cat}</h3>
                   <span className="article-count">{catData.articles.length} {catData.articles.length === 1 ? 'article' : 'articles'}</span>
                 </div>

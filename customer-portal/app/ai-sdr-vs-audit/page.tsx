@@ -7,32 +7,32 @@ export const metadata: Metadata = {
 
 export default function AiSdrVsAuditPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-[#e2e8f0] font-sans">
+    <div className="min-h-screen bg-bg text-fg font-sans">
       {/* Header */}
       <header className="max-w-[780px] mx-auto px-6 pt-10">
-        <a href="/" className="text-[#a5b4fc] text-sm font-bold tracking-widest uppercase hover:text-[#818cf8] transition-colors">
+        <a href="/" className="text-accent-light text-sm font-bold tracking-widest uppercase hover:text-accent transition-colors">
           Nebula Components
         </a>
       </header>
 
       {/* Hero */}
-      <section className="bg-gradient-to-b from-[#0a0a0f] via-[#12121c] to-[#0a0a0f] border-b border-[#1e1e2e] py-20 px-6">
+      <section className="bg-bg border-b border-border py-20 px-6">
         <div className="max-w-[720px] mx-auto text-center">
-          <h1 className="text-[clamp(2rem,5vw,3.2rem)] font-black leading-tight text-[#f8fafc] mb-5">
+          <h1 className="text-[clamp(2rem,5vw,3.2rem)] font-black leading-tight text-fg mb-5">
             You Don't Need an AI SDR.<br />
-            You Need a <span className="text-[#a5b4fc]">Landing Page That Converts.</span>
+            You Need a <span className="text-accent-light">Landing Page That Converts.</span>
           </h1>
-          <p className="text-lg text-[#94a3b8] max-w-[600px] mx-auto mb-8">
+          <p className="text-lg text-fg-muted max-w-[600px] mx-auto mb-8">
             Every vendor wants you to believe their $25k AI SDR platform will fix your pipeline. It won't — not if your landing page leaks 98% of the traffic you already paid for.
           </p>
-          
-          <blockquote className="border-l-4 border-[#6366f1] bg-[#0f172a] py-4 px-5 rounded-r-lg text-left mb-8">
+
+          <blockquote className="border border-border bg-bg-panel py-4 px-5 rounded-r-lg text-left mb-8">
             <strong>Quick Answer:</strong> Before buying an AI SDR ($15k–$25k/year), audit your landing page first ($0–$147). An SDR drives more traffic to a page that already can't convert — multiplying your waste, not your revenue.
           </blockquote>
 
           <div className="flex flex-wrap justify-center gap-3">
             {['No sales call', 'No demo required', 'Evidence required', 'Scoring paused'].map((pill) => (
-              <span key={pill} className="bg-[#1e1e2e] text-[#94a3b8] border border-[#2d2d4e] px-4 py-1.5 rounded-full text-sm">
+              <span key={pill} className="bg-bg-panel text-fg-muted border border-border px-4 py-1.5 rounded-full text-sm">
                 {pill}
               </span>
             ))}
@@ -45,12 +45,12 @@ export default function AiSdrVsAuditPage() {
         <p className="mb-4">Let's be direct.</p>
         <p className="mb-4">You have traffic. You have ad spend. You're getting zero conversions — or close to it. And now someone told you that you need an "AI SDR" or "AI BDR" to fix it.</p>
         <p className="mb-8">
-          Zamp.ai just published their <a href="https://www.zamp.ai/blogs/ai-sdr-bdr-what-they-do-and-how-to-deploy-one" className="text-[#818cf8] hover:underline">AI SDR guide</a> (July 3, 2026). Good content. But here's what it doesn't tell you:
+          Zamp.ai just published their <a href="https://www.zamp.ai/blogs/ai-sdr-bdr-what-they-do-and-how-to-deploy-one" className="text-accent hover:underline">AI SDR guide</a> (July 3, 2026). Good content. But here's what it doesn't tell you:
         </p>
 
         {/* Zamp Callout */}
-        <div className="bg-[#1c1010] border border-[#3a1a1a] border-l-4 border-l-[#ef4444] rounded-xl p-6 mb-8">
-          <div className="text-xs font-bold tracking-widest uppercase text-[#ef4444] mb-2">
+        <div className="bg-danger-dim border border-danger/30 rounded-xl p-6 mb-8">
+          <div className="text-xs font-bold tracking-widest uppercase text-danger mb-2">
             What Zamp doesn't say
           </div>
           <p className="mb-0">
@@ -61,7 +61,7 @@ export default function AiSdrVsAuditPage() {
         <p className="mb-6">That's like buying a fleet of trucks before you pave the driveway. The vehicle isn't the bottleneck. The road is.</p>
 
         {/* Section: Order of Operations */}
-        <h2 className="text-2xl font-bold text-[#f1f5f9] mt-12 mb-4 pl-4 border-l-4 border-[#6366f1]">
+        <h2 className="text-2xl font-bold text-fg mt-12 mb-4">
           The Order of Operations Matters
         </h2>
         <p className="mb-4">There are exactly three things that drive revenue from outbound:</p>
@@ -73,17 +73,17 @@ export default function AiSdrVsAuditPage() {
         <p className="mb-6">An AI SDR platform only addresses #3. It assumes #1 and #2 are already solved. If your landing page is weak, an AI SDR is just accelerating the rate at which you waste money on leads that won't convert.</p>
 
         {/* Section: Comparison Table */}
-        <h2 className="text-2xl font-bold text-[#f1f5f9] mt-12 mb-4 text-center">
+        <h2 className="text-2xl font-bold text-fg mt-12 mb-4 text-center">
           The $25k vs Free Comparison
         </h2>
-        
+
         <div className="overflow-x-auto mb-8">
-          <table className="w-full border-collapse border border-[#1e1e2e] rounded-xl overflow-hidden">
+          <table className="w-full border-collapse border border-border rounded-xl overflow-hidden">
             <thead>
               <tr>
-                <th className="bg-[#12121c] text-[#94a3b8] text-xs font-bold uppercase tracking-wide text-left p-4 border-b border-[#1e1e2e] w-2/5">Feature</th>
-                <th className="bg-[#12121c] text-[#ef4444] text-xs font-bold uppercase tracking-wide text-left p-4 border-b border-[#1e1e2e]">AI SDR Platform (Zamp)</th>
-                <th className="bg-[#12121c] text-[#22c55e] text-xs font-bold uppercase tracking-wide text-left p-4 border-b border-[#1e1e2e]">Nebula Audit + Fix</th>
+                <th className="bg-bg-panel text-fg-muted text-xs font-bold uppercase tracking-wide text-left p-4 border-b border-border w-2/5">Feature</th>
+                <th className="bg-bg-panel text-danger text-xs font-bold uppercase tracking-wide text-left p-4 border-b border-border">AI SDR Platform (Zamp)</th>
+                <th className="bg-bg-panel text-accent text-xs font-bold uppercase tracking-wide text-left p-4 border-b border-border">Nebula Audit + Fix</th>
               </tr>
             </thead>
             <tbody>
@@ -95,31 +95,31 @@ export default function AiSdrVsAuditPage() {
                 { label: 'Self-serve', zamp: 'No. Demo-gated.', nebula: 'Audit submission paused pending verified engine.' },
                 { label: 'Risk for you', zamp: '$25k+ commitment + 10 weeks before you know', nebula: 'No automated score is issued without evidence.' },
               ].map((row, idx) => (
-                <tr key={idx} className="border-b border-[#1a1a2a] last:border-b-0">
-                  <td className="p-4 text-[#f1f5f9] font-semibold">{row.label}</td>
-                  <td className="p-4 bg-[#12121c] text-[#ef4445]">{row.zamp}</td>
-                  <td className="p-4 bg-[#0d1117] text-[#22c55e]">{row.nebula}</td>
+                <tr key={idx} className="border-b border-border last:border-b-0">
+                  <td className="p-4 text-fg font-semibold">{row.label}</td>
+                  <td className="p-4 bg-bg-panel text-danger">{row.zamp}</td>
+                  <td className="p-4 bg-bg text-accent">{row.nebula}</td>
                 </tr>
               ))}
-              <tr className="border-t-2 border-[#2d2d4e]">
-                <td className="p-4 text-[#f8fafc] font-extrabold">Should you buy it?</td>
-                <td className="p-4 bg-[#12121c] text-[#ef4445] font-semibold">Only after your page converts at 3%+</td>
-                <td className="p-4 bg-[#0d1117] text-[#22c55e] font-semibold">Do this first. Always.</td>
+              <tr className="border-t-2 border-border">
+                <td className="p-4 text-fg font-extrabold">Should you buy it?</td>
+                <td className="p-4 bg-bg-panel text-danger font-semibold">Only after your page converts at 3%+</td>
+                <td className="p-4 bg-bg text-accent font-semibold">Do this first. Always.</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         {/* Section: Trigger Problem */}
-        <h2 className="text-2xl font-bold text-[#f1f5f9] mt-12 mb-4 pl-4 border-l-4 border-[#6366f1]">
+        <h2 className="text-2xl font-bold text-fg mt-12 mb-4">
           The Trigger Problem Zamp Misses
         </h2>
         <p className="mb-4">Zamp's blog says an AI SDR "pulls target accounts from your ICP criteria" and "cross-references intent data." That's demographic-filter targeting with a fresh coat of paint. It's still spray-and-pray — just faster spray.</p>
         <p className="mb-6">Here's what actually works: <strong>trigger-aware targeting</strong>. You don't optimize for who the person is. You optimize for <em>what just happened to them</em>.</p>
 
         {/* Nebula Callout */}
-        <div className="bg-[#0a1a0f] border border-[#1a3a1a] border-l-4 border-l-[#22c55e] rounded-xl p-6 mb-6">
-          <div className="text-xs font-bold tracking-widest uppercase text-[#22c55e] mb-2">
+        <div className="bg-accent-dim border border-accent/30 rounded-xl p-6 mb-6">
+          <div className="text-xs font-bold tracking-widest uppercase text-accent mb-2">
             Nebula approach
           </div>
           <p className="mb-0">
@@ -133,7 +133,7 @@ export default function AiSdrVsAuditPage() {
         </p>
 
         {/* Section: Real Funnel */}
-        <h2 className="text-2xl font-bold text-[#f1f5f9] mt-12 mb-4 pl-4 border-l-4 border-[#6366f1]">
+        <h2 className="text-2xl font-bold text-fg mt-12 mb-4">
           The Real Funnel
         </h2>
         <p className="mb-4">The smartest path to revenue right now — whether you're pre-revenue or scaling — is:</p>
@@ -145,25 +145,25 @@ export default function AiSdrVsAuditPage() {
         </ol>
 
         {/* Warning Callout */}
-        <div className="bg-gradient-to-br from-[#1a1a2e] to-[#12121c] border border-[#2d2d4e] border-l-4 border-l-[#6366f1] rounded-xl p-7 mb-8">
-          <p className="mb-0 text-[#cbd5e1]">
-            <strong className="text-[#f8fafc]">⚠️ Warning:</strong> AI SDR vendors will tell you their platform works regardless of your landing page. Check their case studies. Every single one assumes the landing page is already converting. They're selling you a hose when your pipe is clogged.
+        <div className="bg-bg-panel border border-border rounded-xl p-7 mb-8">
+          <p className="mb-0 text-fg-muted">
+            <strong className="text-fg">⚠️ Warning:</strong> AI SDR vendors will tell you their platform works regardless of your landing page. Check their case studies. Every single one assumes the landing page is already converting. They're selling you a hose when your pipe is clogged.
           </p>
         </div>
 
         {/* Bounded availability notice */}
-        <div className="bg-[#0a1a0f] border border-[#1a3a1a] border-l-4 border-l-[#22c55e] rounded-xl p-6 mb-8">
-          <div className="text-xs font-bold tracking-widest uppercase text-[#22c55e] mb-2">
+        <div className="bg-accent-dim border border-accent/30 rounded-xl p-6 mb-8">
+          <div className="text-xs font-bold tracking-widest uppercase text-accent mb-2">
             Audit and managed outreach are paused
           </div>
           <p className="mb-0">
             Nebula is rebuilding the audit engine and fulfillment controls before reopening automated scoring or managed outreach.{' '}
-            <a href="/audit" className="text-[#22c55e] font-bold hover:underline">View the current audit status →</a>
+            <a href="/audit" className="text-accent font-bold hover:underline">View the current audit status →</a>
           </p>
         </div>
 
         {/* Section: Honest Path */}
-        <h2 className="text-2xl font-bold text-[#f1f5f9] mt-12 mb-4 pl-4 border-l-4 border-[#6366f1]">
+        <h2 className="text-2xl font-bold text-fg mt-12 mb-4">
           The Honest Path
         </h2>
         <p className="mb-4">I'm not saying AI SDRs are useless. They're not. Zamp builds a solid product, and for teams that already have a converting landing page and a mature outbound motion, an AI SDR multiplies output.</p>
@@ -171,34 +171,34 @@ export default function AiSdrVsAuditPage() {
         <p className="mb-8"><strong>Start with the landing page.</strong> It's the highest-leverage thing you can fix, the cheapest to test, and the fastest to deploy. Everything else builds on top of it.</p>
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-br from-[#1a1a2e] to-[#16162a] border border-[#2d2d4e] rounded-2xl py-12 px-10 text-center">
-          <h3 className="text-2xl font-bold text-[#f8fafc] mb-3">
+        <div className="bg-bg-panel shadow-glow border border-border rounded-2xl py-12 px-10 text-center">
+          <h3 className="text-2xl font-bold text-fg mb-3">
             Audit scoring rebuild in progress
           </h3>
-          <p className="text-[#94a3b8] max-w-[500px] mx-auto mb-6">
+          <p className="text-fg-muted max-w-[500px] mx-auto mb-6">
             Automated scoring and URL submission are paused until each finding can be backed by verifiable evidence.
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-4">
-            <a href="/audit" className="inline-flex items-center gap-2 bg-[#4f46e5] hover:bg-[#5254cc] text-white font-bold py-4 px-9 rounded-lg transition-colors">
+            <a href="/audit" className="inline-flex items-center gap-2 bg-accent hover:bg-accent-light text-bg font-bold py-4 px-9 rounded-lg transition-colors">
               View audit status →
             </a>
-            <a href="/why-landing-pages-dont-convert" className="inline-flex items-center gap-2 bg-transparent border border-[#2d2d4e] hover:border-[#a5b4fc] text-[#94a3b8] hover:text-[#e2e8f0] font-semibold py-4 px-6 rounded-lg transition-colors">
+            <a href="/why-landing-pages-dont-convert" className="inline-flex items-center gap-2 bg-transparent border border-border hover:border-accent-light text-fg-muted hover:text-fg font-semibold py-4 px-6 rounded-lg transition-colors">
               Read the full guide
             </a>
           </div>
-          <p className="text-[#94a3b8] text-sm">
+          <p className="text-fg-muted text-sm">
             Your URL is used only for the audit. No resale. No spam. No required follow-up call.
           </p>
         </div>
 
         {/* Footer attribution */}
-        <p className="text-xs text-[#94a3b8] text-center mt-12 pt-6 border-t border-[#1e1e2e]">
+        <p className="text-xs text-fg-muted text-center mt-12 pt-6 border-t border-border">
           Competitive analysis based on{' '}
-          <a href="https://www.zamp.ai/blogs/ai-sdr-bdr-what-they-do-and-how-to-deploy-one" className="hover:text-[#e2e8f0]">
+          <a href="https://www.zamp.ai/blogs/ai-sdr-bdr-what-they-do-and-how-to-deploy-one" className="hover:text-fg">
             Zamp's AI SDR blog post
           </a>{' '}
           (July 3, 2026) and their{' '}
-          <a href="https://www.zamp.ai/blogs/hire-an-ai-agent-deployment-and-pricing-guide" className="hover:text-[#e2e8f0]">
+          <a href="https://www.zamp.ai/blogs/hire-an-ai-agent-deployment-and-pricing-guide" className="hover:text-fg">
             pricing guide
           </a>{' '}
           (June 17, 2026).

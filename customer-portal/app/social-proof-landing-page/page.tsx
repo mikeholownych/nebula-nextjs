@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function SocialProofLandingPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-[#e2e8f0] font-[Inter,system-ui,sans-serif] leading-relaxed text-[17px]">
+    <div className="min-h-screen bg-bg text-fg-muted leading-relaxed text-[17px]">
       {/* Google Analytics - loaded after consent */}
       <script
         dangerouslySetInnerHTML={{
@@ -82,27 +82,27 @@ export default function SocialProofLandingPage() {
       {/* Container */}
       <div className="max-w-[720px] mx-auto px-6 py-12 pb-20">
         {/* Header */}
-        <header className="border-b border-[#1e1e2e] pb-6 mb-12 flex justify-between items-center">
+        <header className="border-b border-border pb-6 mb-12 flex justify-between items-center">
           <Link
             href="/"
-            className="text-[#a5b4fc] font-bold text-sm tracking-wider uppercase hover:opacity-80 transition-opacity"
+            className="text-fg font-bold text-sm tracking-wider uppercase hover:text-accent transition-colors"
           >
             ● Nebula Components
           </Link>
           <Link
             href="/audit"
-            className="bg-[#047857] text-white text-xs font-semibold px-4 py-2 rounded-md hover:bg-[#059669] transition-colors"
+            className="bg-accent text-bg text-xs font-semibold px-4 py-2 rounded-md hover:bg-accent-light transition-colors"
           >
             View audit status →
           </Link>
         </header>
 
         {/* Main Content */}
-        <h1 className="text-2xl sm:text-3xl md:text-[2.4rem] font-extrabold leading-tight text-[#f8fafc] mt-8 mb-4">
+        <h1 className="text-2xl sm:text-3xl md:text-[2.4rem] font-extrabold leading-tight text-fg mt-8 mb-4">
           Social Proof on Landing Pages
         </h1>
 
-        <p className="text-[#94a3b8] text-lg mb-8">
+        <p className="text-fg-muted text-lg mb-8">
           Every cold visitor has one unspoken question: 'Why should I trust you?'
           If your page doesn't answer it before asking for anything, conversion
           drops. Social proof — testimonials, numbers, logos, guarantees —
@@ -110,9 +110,9 @@ export default function SocialProofLandingPage() {
         </p>
 
         {/* Quick Answer Blockquote */}
-        <blockquote className="border-l-4 border-[#6366f1] bg-[#12121c] p-5 rounded-r-lg my-6">
-          <p className="text-[#cbd5e1]">
-            <strong>Quick Answer:</strong> You need at least one specific proof
+        <blockquote className="border border-border bg-bg-panel p-5 rounded-xl my-6">
+          <p className="text-fg-muted">
+            <strong className="text-fg">Quick Answer:</strong> You need at least one specific proof
             element visible before your first CTA. A verified customer count,
             a result-oriented quote, or a recognisable logo. Generic
             praise doesn't work — specificity creates credibility. 'Great
@@ -122,17 +122,17 @@ export default function SocialProofLandingPage() {
         </blockquote>
 
         {/* FAQ Section */}
-        <h2 className="text-xl sm:text-[1.4rem] font-bold text-[#f1f5f9] mt-12 mb-4 pl-4 border-l-[3px] border-[#6366f1]">
+        <h2 className="text-xl sm:text-[1.4rem] font-bold text-fg mt-12 mb-4">
           Frequently Asked Questions
         </h2>
 
         {/* FAQ Items */}
         <div className="space-y-4">
-          <div className="bg-[#12121c] border border-[#1e1e2e] rounded-lg p-5 sm:p-6">
-            <h3 className="font-bold text-[#f1f5f9] mb-2">
+          <div className="bg-bg-panel border border-border rounded-lg p-5 sm:p-6">
+            <h3 className="font-bold text-fg mb-2">
               What counts as social proof on a landing page?
             </h3>
-            <p className="text-[#94a3b8] text-[0.95rem] m-0">
+            <p className="text-fg-muted text-[0.95rem] m-0">
               Numbers (clients served, pages audited, average improvement),
               outcome-specific testimonials, recognisable company logos, media
               mentions, guarantees, and case study results. Each one answers
@@ -140,11 +140,11 @@ export default function SocialProofLandingPage() {
             </p>
           </div>
 
-          <div className="bg-[#12121c] border border-[#1e1e2e] rounded-lg p-5 sm:p-6">
-            <h3 className="font-bold text-[#f1f5f9] mb-2">
+          <div className="bg-bg-panel border border-border rounded-lg p-5 sm:p-6">
+            <h3 className="font-bold text-fg mb-2">
               Where should social proof go on a landing page?
             </h3>
-            <p className="text-[#94a3b8] text-[0.95rem] m-0">
+            <p className="text-fg-muted text-[0.95rem] m-0">
               Immediately adjacent to your primary CTA — ideally directly above
               the submit button. Also in the hero section (social proof line like
               a verified customer result). The worst place
@@ -152,11 +152,11 @@ export default function SocialProofLandingPage() {
             </p>
           </div>
 
-          <div className="bg-[#12121c] border border-[#1e1e2e] rounded-lg p-5 sm:p-6">
-            <h3 className="font-bold text-[#f1f5f9] mb-2">
+          <div className="bg-bg-panel border border-border rounded-lg p-5 sm:p-6">
+            <h3 className="font-bold text-fg mb-2">
               Why don't generic testimonials convert?
             </h3>
-            <p className="text-[#94a3b8] text-[0.95rem] m-0">
+            <p className="text-fg-muted text-[0.95rem] m-0">
               Because visitors can't verify them and they don't address the
               specific concern. 'Amazing tool, highly recommend!' is
               meaningless. 'Conversion rate went from 1.3% to 3.8% after fixing
@@ -164,11 +164,11 @@ export default function SocialProofLandingPage() {
             </p>
           </div>
 
-          <div className="bg-[#12121c] border border-[#1e1e2e] rounded-lg p-5 sm:p-6">
-            <h3 className="font-bold text-[#f1f5f9] mb-2">
+          <div className="bg-bg-panel border border-border rounded-lg p-5 sm:p-6">
+            <h3 className="font-bold text-fg mb-2">
               What if I don't have testimonials yet?
             </h3>
-            <p className="text-[#94a3b8] text-[0.95rem] m-0">
+            <p className="text-fg-muted text-[0.95rem] m-0">
               Use numbers: audit count, response time, guarantee terms. Add a
               'no-risk' signal ('30-day money back, no questions'). Show the
               process outcome in advance (sample audit result). Any specific,
@@ -178,61 +178,61 @@ export default function SocialProofLandingPage() {
         </div>
 
         {/* Related Articles */}
-        <section className="bg-[#0f172a] border border-[#1e1e2e] rounded-lg p-5 sm:p-6 mt-12">
-          <h3 className="text-[#94a3b8] uppercase tracking-wide text-sm mb-3">
+        <section className="bg-bg-panel border border-border rounded-lg p-5 sm:p-6 mt-12">
+          <h3 className="text-fg-muted uppercase tracking-wide text-sm mb-3">
             Related Articles
           </h3>
           <Link
             href="/why-landing-pages-dont-convert"
-            className="block text-[#818cf8] hover:text-[#a5b4fc] text-[0.95rem] mb-2 transition-colors"
+            className="block text-accent hover:text-accent-light text-[0.95rem] mb-2 transition-colors"
           >
             Why Your Landing Page Isn't Converting
           </Link>
           <Link
             href="/what-is-landing-page-audit"
-            className="block text-[#818cf8] hover:text-[#a5b4fc] text-[0.95rem] transition-colors"
+            className="block text-accent hover:text-accent-light text-[0.95rem] transition-colors"
           >
             What Is a Landing Page Audit?
           </Link>
         </section>
 
         {/* CTA Box */}
-        <div className="bg-gradient-to-br from-[#0f172a] to-[#1a2744] border border-[#1e3a5f] rounded-xl p-8 sm:p-10 text-center mt-14">
-          <h2 className="!text-2xl !font-bold text-white !m-0 !p-0 !border-none mb-3">
+        <div className="bg-bg-panel border border-border rounded-xl p-8 sm:p-10 text-center mt-14">
+          <h2 className="!text-2xl !font-bold text-fg !m-0 !p-0 !border-none mb-3">
             See exactly where your page leaks.
           </h2>
-          <p className="text-[#94a3b8] mb-6">
+          <p className="text-fg-muted mb-6">
             Automated audit scoring is paused while the evidence-backed engine is rebuilt.
           </p>
           <Link
             href="/audit"
-            className="inline-block bg-[#047857] text-white font-bold text-base px-8 py-3.5 rounded-lg hover:bg-[#059669] transition-colors"
+            className="inline-block bg-accent text-bg font-bold text-base px-8 py-3.5 rounded-lg hover:bg-accent-light transition-colors"
           >
             View audit status →
           </Link>
-          <p className="text-[13px] text-[#6b7280] mt-4">
+          <p className="text-[13px] text-fg-muted mt-4">
             Scoring paused · no submission collected
           </p>
         </div>
 
         {/* Footer */}
-        <footer className="border-t border-[#1e1e2e] mt-20 pt-6 text-center text-sm text-[#94a3b8]">
+        <footer className="border-t border-border mt-20 pt-6 text-center text-sm text-fg-muted">
           <p>
             © 2025{" "}
-            <Link href="/" className="text-[#a5b4fc] hover:opacity-80">
+            <Link href="/" className="text-accent hover:text-accent-light transition-colors">
               Nebula Components
             </Link>{" "}
             ·{" "}
             <Link
               href="/what-is-landing-page-audit"
-              className="text-[#a5b4fc] hover:opacity-80"
+              className="text-accent hover:text-accent-light transition-colors"
             >
               What is a landing page audit?
             </Link>{" "}
             ·{" "}
             <Link
               href="/why-landing-pages-dont-convert"
-              className="text-[#a5b4fc] hover:opacity-80"
+              className="text-accent hover:text-accent-light transition-colors"
             >
               Why pages don't convert
             </Link>

@@ -11,8 +11,8 @@ export default function UnsubscribePage() {
   const [statusText, setStatusText] = useState('')
   const [statusClass, setStatusClass] = useState('')
   const [finePrintHtml, setFinePrintHtml] = useState(
-    `Changed your mind? <a href="/" className="text-indigo-400 hover:underline">Run a free audit</a> at any time.<br/>
-     If you believe this was sent in error, <a href="mailto:ops@launchcrate.io" className="text-indigo-400 hover:underline">contact us</a>.`
+    `Changed your mind? <a href="/" className="text-accent hover:underline">Run a free audit</a> at any time.<br/>
+     If you believe this was sent in error, <span className="text-accent">ops{'\u0040'}launchcrate.io</span>.`
   )
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -39,7 +39,7 @@ export default function UnsubscribePage() {
             setStatusClass('status-done')
             setStatusText(`Unsubscribed: ${email}`)
             setFinePrintHtml(
-              `If this was a mistake, you can <a href="/" className="text-indigo-400 hover:underline">run another free audit</a> at any time — we'll only send what you request.`
+              `If this was a mistake, you can <a href="/" className="text-accent hover:underline">run another free audit</a> at any time — we'll only send what you request.`
             )
           } else {
             throw new Error('Unexpected response')
@@ -53,7 +53,7 @@ export default function UnsubscribePage() {
           setButtonVisible(true)
           setButtonText('Try Again')
           setFinePrintHtml(
-            `Email us at <a href="mailto:ops@launchcrate.io" className="text-indigo-400 hover:underline">ops@launchcrate.io</a> to unsubscribe.`
+            `Email us at <span className="text-accent">ops{'\u0040'}launchcrate.io</span> to unsubscribe.`
           )
         })
     } else {
@@ -96,19 +96,19 @@ export default function UnsubscribePage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0a0a0f]">
-      <div className="bg-[#12121c] border border-[#1e1e2e] rounded-2xl p-12 max-w-xl w-[90%] text-center">
+    <div className="min-h-screen flex items-center justify-center bg-bg">
+      <div className="bg-bg-panel border border-border rounded-2xl p-12 max-w-xl w-[90%] text-center">
         <div className="text-5xl mb-4">{icon}</div>
-        <h1 className="text-2xl font-bold text-[#f8fafc] mb-3">
+        <h1 className="text-2xl font-bold text-fg mb-3">
           Unsubscribe from Nebula Components
         </h1>
-        <p className="text-[#94a3b8] mb-6">{description}</p>
+        <p className="text-fg-muted mb-6">{description}</p>
 
         {buttonVisible && (
           <button
             onClick={handleUnsub}
             disabled={buttonDisabled}
-            className="inline-block bg-[#4f46e5] text-white font-semibold py-3.5 px-8 rounded-xl border-none cursor-pointer text-base transition-all hover:bg-[#5254cc] disabled:opacity-50 disabled:cursor-default"
+            className="inline-block bg-accent text-bg font-semibold py-3.5 px-8 rounded-xl border-none cursor-pointer text-base transition-all hover:bg-accent-light disabled:opacity-50 disabled:cursor-default"
           >
             {buttonText}
           </button>
@@ -118,10 +118,10 @@ export default function UnsubscribePage() {
           <div
             className={`mt-4 font-semibold ${
               statusClass === 'status-done'
-                ? 'text-green-500'
+                ? 'text-accent'
                 : statusClass === 'status-error'
-                ? 'text-red-500'
-                : 'text-[#94a3b8]'
+                ? 'text-danger'
+                : 'text-fg-muted'
             }`}
           >
             {statusText}
@@ -129,7 +129,7 @@ export default function UnsubscribePage() {
         )}
 
         <p
-          className="text-[#94a3b8] text-sm mt-6"
+          className="text-fg-muted text-sm mt-6"
           dangerouslySetInnerHTML={{ __html: finePrintHtml }}
         />
       </div>
