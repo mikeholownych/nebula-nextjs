@@ -17,7 +17,7 @@ const config: Config = {
         // Foreground colors
         fg: {
           DEFAULT: '#ffffff',
-          muted: '#888888',
+          muted: '#9e9e9e',
           dim: '#666666',
         },
         // Accent colors (emerald)
@@ -29,7 +29,7 @@ const config: Config = {
         },
         // Semantic colors
         danger: {
-          DEFAULT: '#ef4444',
+          DEFAULT: '#f37979',
           dim: 'rgba(239, 68, 68, 0.15)',
         },
         warning: '#f59e0b',

@@ -10,9 +10,9 @@ colors:
   emerald-dark: "#059669"
   emerald-dim: "rgba(16, 185, 129, 0.1)"
   fg: "#ffffff"
-  fg-muted: "#888888"
+  fg-muted: "#9e9e9e"
   fg-dim: "#666666"
-  danger: "#ef4444"
+  danger: "#f37979"
   danger-dim: "rgba(239, 68, 68, 0.15)"
   info: "#3b82f6"
   warning: "#f59e0b"
@@ -126,13 +126,13 @@ Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmo
 - **BG Elevated** (#0a0a0a): Secondary background for sections requiring subtle separation.
 - **BG Panel** (#111111): Card backgrounds, input backgrounds, containers.
 - **FG** (#ffffff): Primary text on dark backgrounds. Maximum contrast (21:1).
-- **FG Muted** (#888888): Secondary text, descriptions, supporting context. Canonical across the codebase: `tailwind.config.ts`'s `fg.muted` and `globals.css`'s `--fg-muted` both resolve to this value now (the CSS custom property previously drifted to `#737373`; fixed).
+- **FG Muted** (#9e9e9e): Secondary text, descriptions, supporting context. Canonical across the codebase: `tailwind.config.ts`'s `fg.muted` and `globals.css`'s `--fg-muted` both resolve to this value. Bumped from #888888 (~5.7:1, AA-only) to clear WCAG 2.2 AAA (~7.05:1 on BG Panel, ~7.6:1 on Near Black) — see the resolved AAA Gap note below.
 - **FG Dim** (#666666): Tertiary text, disabled states.
 - **Border** (rgba(255, 255, 255, 0.06)): Subtle dividers. Near-invisible until needed.
 
 ### Semantic
 
-- **Danger** (#ef4444): Error states, "before" tags, negative signal, unfixed defects.
+- **Danger** (#f37979): Error states, "before" tags, negative signal, unfixed defects. Bumped from #ef4444 (~5.0-5.4:1, AA-only) to clear WCAG 2.2 AAA (~7.0:1 on BG Panel, ~7.6:1 on Near Black) — same hue, lightened. Danger Dim is unaffected (a background tint, not text, so AAA text-contrast rules don't apply to it).
 - **Danger Dim** (rgba(239, 68, 68, 0.15)): Background tint for danger badges.
 - **Info** (#3b82f6): Secondary glow orb, rarely used in UI.
 - **Warning** (#f59e0b): Scoring highlights, attention markers in audit output. Canonical across the codebase: `tailwind.config.ts`'s `warning` and `globals.css`'s new `--warning` custom property both resolve to this value (`.sample-score` previously hardcoded `#fbbf24` directly; fixed to reference `var(--warning)` / `var(--warning-dim)`).
@@ -145,7 +145,7 @@ Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmo
 
 **The Authority-Not-Friendliness Rule.** Signal Emerald is not "friendly green." It marks signal, not inclusion. No pastel tints, no soft gradients. Sharp, saturated, assertive.
 
-**The AAA Gap (open issue).** PRODUCT.md now targets WCAG 2.2 AAA (7:1 for body text). FG Muted at #888888 on #050505 measures ~5.7:1 — AA-level, not AAA. The token-drift duplication that used to leave a *second*, even-worse value (#737373, ~4.3:1) floating around is fixed, but the color itself still doesn't clear 7:1. Don't document this as compliant. Treat "bump FG Muted to clear 7:1" as a tracked follow-up (a contrast-focused `/impeccable audit` pass), not a solved problem.
+**The AAA Gap (resolved).** PRODUCT.md targets WCAG 2.2 AAA (7:1 for body text, 4.5:1 for large text). FG Muted (#888888 → #9e9e9e) and Danger (#ef4444 → #f37979) both used to fall short (~5.0-5.75:1, AA-only). Both were bumped, same hue, to clear 7:1 against both Near Black and BG Panel. Signal Emerald, Warning, and body text on any documented background already cleared AAA before this fix.
 
 ---
 

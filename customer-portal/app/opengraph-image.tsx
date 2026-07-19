@@ -81,7 +81,7 @@ export default function OpenGraphImage() {
               Your landing page has&nbsp;<span style={{ color: '#34d399' }}>a leak.</span>
             </div>
           </div>
-          <div style={{ display: 'flex', marginTop: 24, color: '#888888', fontSize: 25 }}>
+          <div style={{ display: 'flex', marginTop: 24, color: '#9e9e9e', fontSize: 25 }}>
             Find the failure before it burns another dollar.
           </div>
         </div>
@@ -93,7 +93,7 @@ export default function OpenGraphImage() {
             alignItems: 'center',
             paddingTop: 22,
             borderTop: '1px solid rgba(255,255,255,0.08)',
-            color: '#888888',
+            color: '#9e9e9e',
             fontSize: 18,
           }}
         >

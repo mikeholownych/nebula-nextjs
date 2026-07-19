@@ -33,7 +33,7 @@ export default function LandingPageBounceRateHigh() {
         ← Learning Centre
       </a>
 
-      <p style={{ color: '#888888', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>
+      <p style={{ color: '#9e9e9e', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>
         Landing Page Leaks · Bounce Rate
       </p>
 
@@ -41,7 +41,7 @@ export default function LandingPageBounceRateHigh() {
         Landing Page Bounce Rate High? It's Usually 3 Things
       </h1>
 
-      <p style={{ fontSize: '18px', color: '#888888', lineHeight: 1.7, marginBottom: '32px' }}>
+      <p style={{ fontSize: '18px', color: '#9e9e9e', lineHeight: 1.7, marginBottom: '32px' }}>
         If your landing page bounce rate is above 70%, the page isn't matching what visitors expected when they clicked. Bounce is a symptom. The cause is usually one of three things: wrong offer, slow load, or wrong audience.
       </p>
 
@@ -49,7 +49,7 @@ export default function LandingPageBounceRateHigh() {
         <h2 style={{ fontSize: '24px', fontWeight: 600, marginBottom: '16px', color: '#ffffff' }}>
           Bounce vs Exit: What's the Difference
         </h2>
-        <p style={{ color: '#888888', lineHeight: 1.7 }}>
+        <p style={{ color: '#9e9e9e', lineHeight: 1.7 }}>
           <strong style={{ color: '#ffffff' }}>Bounce</strong> means someone landed on your page and left without clicking anything. They didn't explore. They didn't convert. They just... left.
           <br /><br />
           <strong style={{ color: '#ffffff' }}>Exit</strong> means they visited multiple pages and this was their last stop. Exit rate on a landing page is actually normal—if they clicked around and then left, your page did its job.
@@ -64,19 +64,19 @@ export default function LandingPageBounceRateHigh() {
         </h2>
         <div style={{ background: 'rgba(16, 185, 129, 0.05)', border: '1px solid rgba(16, 185, 129, 0.2)', borderRadius: '8px', padding: '24px', marginBottom: '16px' }}>
           <h3 style={{ color: '#10b981', fontSize: '18px', marginBottom: '8px' }}>1. Offer Mismatch</h3>
-          <p style={{ color: '#888888', lineHeight: 1.6, margin: 0 }}>
+          <p style={{ color: '#9e9e9e', lineHeight: 1.6, margin: 0 }}>
             The ad or link promised one thing. The page delivers another. Maybe the headline is generic. Maybe the CTA is buried. Maybe the value proposition is unclear. If they don't see what they came for in 3 seconds, they leave.
           </p>
         </div>
         <div style={{ background: 'rgba(16, 185, 129, 0.05)', border: '1px solid rgba(16, 185, 129, 0.2)', borderRadius: '8px', padding: '24px', marginBottom: '16px' }}>
           <h3 style={{ color: '#10b981', fontSize: '18px', marginBottom: '8px' }}>2. Slow Load Time (Especially Mobile)</h3>
-          <p style={{ color: '#888888', lineHeight: 1.6, margin: 0 }}>
+          <p style={{ color: '#9e9e9e', lineHeight: 1.6, margin: 0 }}>
             53% of mobile users abandon pages that take longer than 3 seconds to load. If your page is heavy on scripts, images, or third-party tools, visitors bounce before they even see your offer. Speed is free conversion.
           </p>
         </div>
         <div style={{ background: 'rgba(16, 185, 129, 0.05)', border: '1px solid rgba(16, 185, 129, 0.2)', borderRadius: '8px', padding: '24px', marginBottom: '16px' }}>
           <h3 style={{ color: '#10b981', fontSize: '18px', marginBottom: '8px' }}>3. Wrong Audience</h3>
-          <p style={{ color: '#888888', lineHeight: 1.6, margin: 0 }}>
+          <p style={{ color: '#9e9e9e', lineHeight: 1.6, margin: 0 }}>
             If your traffic source is sending the wrong people, no page will convert them. Broad targeting, irrelevant keywords, or clickbait ads bring people who were never going to buy. The leak isn't the page—it's the targeting.
           </p>
         </div>
@@ -86,10 +86,10 @@ export default function LandingPageBounceRateHigh() {
         <h2 style={{ fontSize: '24px', fontWeight: 600, marginBottom: '16px', color: '#ffffff' }}>
           Quick Diagnosis
         </h2>
-        <p style={{ color: '#888888', lineHeight: 1.7, marginBottom: '16px' }}>
+        <p style={{ color: '#9e9e9e', lineHeight: 1.7, marginBottom: '16px' }}>
           Segment your analytics by source, device, and traffic type to find which segment is bouncing:
         </p>
-        <ul style={{ color: '#888888', lineHeight: 2, paddingLeft: '24px' }}>
+        <ul style={{ color: '#9e9e9e', lineHeight: 2, paddingLeft: '24px' }}>
           <li><strong style={{ color: '#ffffff' }}>By source:</strong> Google Ads vs Meta Ads vs Organic. One may be misconfigured.</li>
           <li><strong style={{ color: '#ffffff' }}>By device:</strong> Mobile bounce &gt;80% means your mobile layout is the problem.</li>
           <li><strong style={{ color: '#ffffff' }}>By traffic type:</strong> Cold traffic bounces more.Warm traffic converts more. Adjust expectations accordingly.</li>

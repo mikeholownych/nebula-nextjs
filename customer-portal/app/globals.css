@@ -26,12 +26,12 @@
   --bg-elevated: #0a0a0a;
   --bg-panel: #111111;
   --fg: #ffffff;
-  --fg-muted: #888888;   /* Canonical per tailwind.config.ts; ~5.7:1 on #050505 */
+  --fg-muted: #9e9e9e;   /* Canonical per tailwind.config.ts; ~7.05:1 on --panel, AAA */
   --accent: #10b981;
   --accent-light: #34d399;
   --accent-dim: rgba(16, 185, 129, 0.1);
   --border: rgba(255, 255, 255, 0.06);
-  --red: #ef4444;
+  --red: #f37979;   /* Canonical per tailwind.config.ts; ~7.03:1 on --panel, AAA */
   --red-dim: rgba(239, 68, 68, 0.15);
   --warning: #f59e0b;    /* Canonical per tailwind.config.ts */
   --warning-dim: rgba(245, 158, 11, 0.15);

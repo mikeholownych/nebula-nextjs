@@ -102,7 +102,7 @@ export default async function CitablePage() {
   ])
 
   const statusColor = (s: WorkflowStatus) =>
-    s === 'passing' ? '#10b981' : s === 'failing' ? '#ef4444' : '#888888'
+    s === 'passing' ? '#10b981' : s === 'failing' ? '#f37979' : '#9e9e9e'
   const statusLabel = (s: WorkflowStatus) =>
     s === 'passing' ? 'passing' : s === 'failing' ? 'failing' : 'unknown'
   return (
@@ -112,7 +112,7 @@ export default async function CitablePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(citableSchema) }}
       />
       <style>{`
-.citable-page { color-scheme: dark; --bg:#050505; --panel:#111111; --text:#ffffff; --muted:#888888; --line:rgba(255,255,255,0.06); --hot:#10b981; --gold:#10b981; --red:#ef4444; --amber:#f59e0b; --ease-out-quart:cubic-bezier(0.25,1,0.5,1); --ease-out-quint:cubic-bezier(0.22,1,0.36,1); --ease-out-expo:cubic-bezier(0.16,1,0.3,1); }
+.citable-page { color-scheme: dark; --bg:#050505; --panel:#111111; --text:#ffffff; --muted:#9e9e9e; --line:rgba(255,255,255,0.06); --hot:#10b981; --gold:#10b981; --red:#f37979; --amber:#f59e0b; --ease-out-quart:cubic-bezier(0.25,1,0.5,1); --ease-out-quint:cubic-bezier(0.22,1,0.36,1); --ease-out-expo:cubic-bezier(0.16,1,0.3,1); }
 .citable-page * { box-sizing: border-box; }
 .citable-page { background: var(--bg); color:var(--text); min-height: 100vh; }
 .citable-page a { color: var(--hot); text-decoration: none; }
