@@ -1,7 +1,3 @@
-'use client';
-
-
-
 export default function LearningCentreIndex() {
   // Articles with clean categories
   const articles = [
