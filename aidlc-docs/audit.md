@@ -256,3 +256,51 @@ Create a detailed action plan for implementation of the above transformation pla
 - Production build: passed; 85 generated routes.
 - Built-server HTTP matrix: 27 blocked routes returned 404 with noindex; root emitted two bounded JSON-LD objects; audit API remained fail-closed.
 - Rendered browser check: maintenance home rendered; `/audit-dashboard` rendered the neutral 404 with no forms and `robots=noindex,nofollow`.
+
+## 2026-07-19T09:27:00Z — Audit delivery monitor review
+
+### Raw user input
+Review audit-delivery-monitor job and scripts. Ensure that it's accurate and up to date
+
+### Result
+Replaced stale inline agent prompt with deterministic script-only monitor; added current stage/ledger/availability checks, tests, and verified cron execution.
+
+## 2026-07-19T15:19:38Z — Platform API DB auth fix (systemd unit)
+
+### Raw user input
+```text
+commit the systemd unit backup/fix note to aidlc-docs
+```
+
+### Context
+User reported the live `/audit` URL-submission flow was showing "Audit completed. Full
+integration coming soon." instead of running a real audit.
+
+### Root cause
+`nebula-platform-api.service`'s `Environment=DATABASE_URL` forced a TCP connection
+(`postgresql://postgres@localhost:5433/nebula_audit`) with no password. `pg_hba.conf`
+requires `md5` auth for `host` (TCP) connections but `trust` for local Unix-socket
+connections, so every audit run failed at the DB-write step with
+`password authentication failed for user "postgres"`. The broad `except Exception`
+in `platform_api/routes/audit_api.py::run_audit` swallowed the error silently (no
+log line), and the Next.js `/api/audit/start` proxy route dropped the `error` field
+before it reached the UI, surfacing only the generic fallback message.
+
+### Fix
+- Backed up `/etc/systemd/system/nebula-platform-api.service` to
+  `/etc/systemd/system/nebula-platform-api.service.bak-1784470903` before editing.
+- Changed `DATABASE_URL` to the Unix-socket form
+  (`postgresql://postgres@/nebula_audit?host=/var/run/postgresql&port=5433`),
+  matching the app's own working default (`audit_db.py`'s fallback) and Postgres's
+  trusted local auth.
+- `sudo systemctl daemon-reload && sudo systemctl restart nebula-platform-api.service`.
+
+### Validation
+- Reproduced the failure first via a transient `systemd-run` unit mirroring the
+  service's sandboxing (PrivateTmp, matching PATH/env), confirming the TCP/password
+  error before touching the live unit file.
+- Post-fix: `curl -X POST https://nebulacomponents.shop/api/audit/start` returned a
+  real `audit_id`, `status: "completed"`, score, grade, and findings.
+- Playwright end-to-end: submitted a URL on the live `/audit` page, confirmed
+  navigation to `/audit/<real-uuid>/processing` with no page errors.
+- No application code changes required — infra/systemd config only.
