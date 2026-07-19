@@ -50,10 +50,10 @@ export default function DataRightsPage() {
             <p className="text-[var(--text-secondary)]">
               <strong>Email:</strong>{' '}
               <a
-                href="mailto:privacy@nebulacomponents.shop"
+                href="/about"
                 className="text-[var(--accent)] font-semibold hover:underline"
               >
-                privacy@nebulacomponents.shop
+                privacy{'\u0040'}nebulacomponents.shop
               </a>
             </p>
             <p className="text-[var(--text-secondary)] mt-2">

@@ -1,20 +1,59 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
-import Footer from '@/components/Footer'
+
+export const metadata: Metadata = {
+  title: 'Free Landing Page Audit — Stop Burning Ad Budget | Nebula Components',
+  description: 'Evidence-backed landing page conversion diagnosis and implementation for founders spending on paid ads with low or zero conversions.',
+  alternates: { canonical: 'https://nebulacomponents.shop' },
+  openGraph: {
+    title: 'Free Landing Page Audit — Stop Burning Ad Budget | Nebula Components',
+    description: 'Evidence-backed landing page conversion diagnosis and implementation for founders spending on paid ads with low or zero conversions.',
+    url: 'https://nebulacomponents.shop',
+    siteName: 'Nebula Components',
+    locale: 'en_US',
+    type: 'website',
+  },
+}
+
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to get a free landing page audit from Nebula Components',
+  description: 'Get an evidence-backed diagnosis of your landing page in three steps.',
+  totalTime: 'PT1M',
+  step: [
+    {
+      '@type': 'HowToStep',
+      position: 1,
+      name: 'Enter Your URL',
+      text: 'Drop in any landing page URL — no account needed.',
+      url: 'https://nebulacomponents.shop/audit',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 2,
+      name: 'Get Your Score',
+      text: 'We analyze above-fold content, SEO foundations, ad signals, and speed.',
+      url: 'https://nebulacomponents.shop/audit',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 3,
+      name: 'See Your Fixes',
+      text: 'Get prioritized recommendations with impact and effort scores.',
+      url: 'https://nebulacomponents.shop/audit',
+    },
+  ],
+}
 
 export default function Home() {
   return (
-    <main id="main-content" role="main" className="min-h-screen bg-bg">
-      {/* Header */}
-      <header className="border-b border-border px-6 py-4">
-        <nav aria-label="Primary" className="mx-auto flex max-w-6xl items-center justify-between">
-          <Link href="/" className="text-xl font-semibold text-fg">Nebula</Link>
-          <div className="flex items-center gap-5">
-            <Link href="/learning-centre" className="text-sm text-fg-muted hover:text-fg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded">Learning</Link>
-            <Link href="/pricing" className="text-sm text-fg-muted hover:text-fg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded">Pricing</Link>
-          </div>
-        </nav>
-      </header>
-
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
+      <main id="main-content" role="main" className="min-h-screen bg-bg pt-[72px]">
       {/* Hero Section */}
       <section className="mx-auto flex min-h-[70vh] max-w-4xl flex-col justify-center px-6 py-24 text-center">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
@@ -23,9 +62,13 @@ export default function Home() {
         <h1 className="text-4xl font-bold tracking-tight text-fg md:text-6xl">
           Find Out Why Your Ads Aren't Converting
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
-          Get an evidence-backed diagnosis of your landing page in 60 seconds.
-          No signup required to start — just enter your URL.
+        <p className="mx-auto mt-4 max-w-2xl text-xl font-medium text-fg">
+          Nebula Components is a landing page audit tool for founders running paid ads.
+          Enter your URL and get a prioritized list of conversion fixes in 60 seconds — no signup needed.
+        </p>
+        <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-fg-muted">
+          We scan your page against 7 conversion signals — message-match, trust, mobile layout,
+          load time, CTA clarity, form friction, and proof — then tell you exactly what to fix first.
         </p>
         
         {/* CTA Button */}
@@ -147,7 +190,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Footer />
     </main>
+    </>
   )
 }

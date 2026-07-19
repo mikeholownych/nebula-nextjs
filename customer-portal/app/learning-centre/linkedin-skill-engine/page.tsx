@@ -1,52 +1,125 @@
-'use client';
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import Footer from '@/components/Footer'
+import { createArticleSchema } from '../../lib/schema'
 
-export default function LearningCentrePage() {
-  
+export const metadata: Metadata = {
+  title: 'LinkedIn Skill Engine: Build Authority With Your Own Experience | Nebula Components',
+  description: 'How to extract your real professional skills and frameworks into LinkedIn content that builds authority without manufactured noise.',
+  alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/linkedin-skill-engine' },
+}
+
+const articleSchema = createArticleSchema({
+  headline: 'LinkedIn Skill Engine: Build Authority With Your Own Experience',
+  description: 'How to extract your real professional skills and frameworks into LinkedIn content that builds authority without manufactured noise.',
+  url: 'https://nebulacomponents.shop/learning-centre/linkedin-skill-engine',
+  publishedDate: '2025-07-15',
+  modifiedDate: '2026-07-19',
+})
+
+export default function LinkedInSkillEnginePage() {
   return (
-    <>
-      <style>{`
-:root { color-scheme: dark; --bg:#080a0f; --panel:#111723; --text:#f5f7fb; --muted:#9aa7bd; --line:#253044; --hot:#79f2c0; --gold:#ffd166; }
-* { box-sizing: border-box; }
-body { margin:0; background: radial-gradient(circle at top left,#152033,#080a0f 42%); color:var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif; }
-a { color: var(--hot); text-decoration: none; }
-.wrap { width:min(1120px,92vw); margin:0 auto; padding:56px 0; }
-.hero { display:grid; gap:22px; padding:42px; border:1px solid var(--line); border-radius:28px; background:linear-gradient(135deg,rgba(17,23,35,.92),rgba(8,10,15,.78)); box-shadow:0 24px 80px rgba(0,0,0,.35); }
-.eyebrow { color:var(--gold); text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:800; }
-h1 { font-size:clamp(38px,7vw,76px); line-height:.94; margin:0; letter-spacing:-.06em; }
-h2 { font-size:32px; margin:48px 0 18px; letter-spacing:-.03em; }
-h3 { font-size:22px; margin:10px 0; }
-.lede { color:var(--muted); font-size:20px; max-width:760px; line-height:1.45; }
-.proof { display:flex; flex-wrap:wrap; gap:10px; padding:0; margin:8px 0 0; list-style:none; }
-.proof li,.badge { border:1px solid var(--line); border-radius:999px; padding:8px 12px; color:var(--muted); background:#0c111a; }
-.actions { display:flex; flex-wrap:wrap; gap:14px; }
-.button { display:inline-flex; align-items:center; justify-content:center; border-radius:999px; padding:13px 18px; background:var(--hot); color:#02100a; font-weight:900; }
-.button.secondary { background:transparent; color:var(--text); border:1px solid var(--line); }
-.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(245px,1fr)); gap:16px; }
-.card,.panel { background:rgba(17,23,35,.88); border:1px solid var(--line); border-radius:22px; padding:22px; margin:16px 0; }
-.card p,.panel li,.panel p { color:var(--muted); line-height:1.55; }
-.resource-link { font-weight:900; }
-.detail { max-width:860px; }
-.related { display:grid; gap:10px; }
-.related a { padding:10px 0; border-bottom:1px solid var(--line); }
-.cta-panel { border-color:rgba(121,242,192,.45); }
-      `}</style>
-      <div dangerouslySetInnerHTML={{ __html: `<body>
-<main class="wrap detail">
-<a href="/learning-center/">← Learning Centre</a>
-<p class="eyebrow">Distribution</p>
-<h1>LinkedIn Skill Engine</h1>
-<p class="lede">Draft-first LinkedIn content, warming, and outreach workflow with a 20/day cap.</p>
-<section class="panel">
-<h2>How to use this</h2>
-<ol>
-<li>Open the resource.</li>
-<li>Apply it to one page or one offer.</li>
-<li>Run the free audit before changing ad spend.</li>
-</ol>
-<a class="button" href="/learning-center/linkedin-skill-engine">Use the operating pattern</a>
-</section>
-</main>
-</body>` }} />
-    </>
-  );
+    <main id="main-content" role="main" className="min-h-screen bg-bg">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <header className="border-b border-border px-6 py-4">
+        <nav aria-label="Primary" className="mx-auto flex max-w-6xl items-center justify-between">
+          <Link href="/" className="text-xl font-semibold text-fg">Nebula</Link>
+          <div className="flex items-center gap-5">
+            <Link href="/learning-centre" className="text-sm text-fg-muted hover:text-fg rounded">Learning</Link>
+            <Link href="/audit" className="rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-bg hover:bg-accent-light transition-colors">Free Audit</Link>
+          </div>
+        </nav>
+      </header>
+
+      <nav aria-label="Breadcrumb" className="mx-auto max-w-4xl px-6 pt-6">
+        <ol className="flex items-center gap-2 text-sm text-fg-muted">
+          <li><Link href="/" className="hover:text-fg">Home</Link></li>
+          <li aria-hidden="true">/</li>
+          <li><Link href="/learning-centre" className="hover:text-fg">Learning Centre</Link></li>
+          <li aria-hidden="true">/</li>
+          <li className="text-fg" aria-current="page">LinkedIn Skill Engine</li>
+        </ol>
+      </nav>
+
+      <article className="mx-auto max-w-4xl px-6 py-12">
+        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Content Systems</p>
+        <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
+          LinkedIn Skill Engine: Post From What You Actually Know
+        </h1>
+        <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
+          Most B2B LinkedIn content fails because it is manufactured: rephrased advice, hollow hooks, ideas borrowed from other creators. The LinkedIn Skill Engine inverts this — it starts from what you have actually done and converts it into posts that read as authority because they are authority.
+        </p>
+
+        <section className="mt-12">
+          <h2 className="mb-4 text-2xl font-bold text-fg">Why Generic LinkedIn Content Fails</h2>
+          <p className="text-fg-muted leading-relaxed">
+            Buyers on LinkedIn are trained to ignore content that sounds the same as everything else. The reason most professional content sounds the same is that most creators are starting from a blank page and filling it with what they think they should say. The audience can tell. Specificity is the signal. Specific numbers, specific client situations, specific mistakes — these are what stop the scroll and build the kind of trust that converts at a later date.
+          </p>
+        </section>
+
+        <section className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold text-fg">How the Skill Engine Works</h2>
+          <ol className="space-y-4">
+            {[
+              { step: '1', title: 'Skill inventory', desc: 'Map every repeatable skill you use with clients — not job titles, but actual techniques, frameworks, and diagnostic approaches.' },
+              { step: '2', title: 'Evidence extraction', desc: 'For each skill, pull 2–3 real cases where applying it produced a measurable outcome. Outcome + starting condition + fix applied.' },
+              { step: '3', title: 'Post templates by intent', desc: 'Each evidence unit gets mapped to a post format: diagnostic post, outcome post, objection post, or how-to post.' },
+              { step: '4', title: 'Cadence without depletion', desc: 'One evidence unit generates 4–6 posts. A founder with 10 documented skills has 40–60 posts before needing any new material.' },
+            ].map(({ step, title, desc }) => (
+              <li key={step} className="flex items-start gap-4 rounded-xl border border-border bg-bg-muted/30 p-4">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent text-xs font-bold text-bg">{step}</span>
+                <div>
+                  <p className="font-semibold text-fg">{title}</p>
+                  <p className="mt-1 text-sm text-fg-muted">{desc}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold text-fg">Post Types the Engine Produces</h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              { type: 'Diagnostic post', example: '"Most founders think X is the problem. It is almost always Y. Here is how to tell the difference."' },
+              { type: 'Outcome post', example: '"Client was spending $8k/mo on ads with no leads. We changed one thing. Here is what it was."' },
+              { type: 'Objection post', example: '"Common pushback I hear: [objection]. Here is what actually happens when you test it."' },
+              { type: 'How-to post', example: '"The 3-step process I use every time a landing page is not converting paid traffic."' },
+            ].map(({ type, example }) => (
+              <div key={type} className="rounded-xl border border-border bg-bg-muted/30 p-4">
+                <p className="font-semibold text-fg">{type}</p>
+                <p className="mt-2 text-sm text-fg-muted italic">{example}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold text-fg">What This Has to Do With Conversion</h2>
+          <p className="text-fg-muted leading-relaxed">
+            LinkedIn authority content works as a top-of-funnel trust signal. When someone who has seen your posts finally lands on your landing page, they are already pre-sold on your credibility. This reduces the work the landing page has to do and raises conversion rates on paid traffic. The funnel is: post → trust → audit → purchase. The skill engine feeds the first stage.
+          </p>
+        </section>
+
+        <section className="mt-16 rounded-xl border border-accent/30 bg-accent/5 p-8 text-center">
+          <h2 className="text-2xl font-bold text-fg">Fix the Landing Page First</h2>
+          <p className="mt-4 max-w-xl mx-auto text-fg-muted">
+            Before optimising your LinkedIn presence, ensure the page your traffic lands on is ready to convert. Run the free audit.
+          </p>
+          <Link
+            href="/audit"
+            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors"
+          >
+            Run Free Audit →
+          </Link>
+        </section>
+
+        <div className="mt-8">
+          <Link href="/learning-centre" className="text-sm text-fg-muted hover:text-fg">← Learning Centre</Link>
+        </div>
+      </article>
+
+      <Footer />
+    </main>
+  )
 }

@@ -79,7 +79,7 @@ export default function TermsPage() {
             <h2>7. Contact</h2>
             <p>
               For questions about these terms, contact us at{' '}
-              <a href="mailto:hello@nebulacomponents.shop">hello@nebulacomponents.shop</a>.
+              <a href="/about">hello{'\u0040'}nebulacomponents.shop</a>.
             </p>
           </section>
         </div>

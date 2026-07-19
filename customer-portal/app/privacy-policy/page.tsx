@@ -163,10 +163,10 @@ export default function PrivacyPolicy() {
         <p className="text-[var(--text-secondary)] mt-6">
           To exercise these rights, contact us at{' '}
           <a
-            href="mailto:privacy@nebulacomponents.shop"
+            href="/about"
             className="text-[var(--accent)] font-semibold hover:underline"
           >
-            privacy@nebulacomponents.shop
+            privacy{'\u0040'}nebulacomponents.shop
           </a>. We respond within 30 days.
         </p>
       </section>
@@ -226,10 +226,10 @@ export default function PrivacyPolicy() {
         <p className="text-[var(--text-secondary)] mb-2">
           <strong>Email:</strong>{' '}
           <a
-            href="mailto:privacy@nebulacomponents.shop"
+            href="/about"
             className="text-[var(--accent)] font-semibold hover:underline"
           >
-            privacy@nebulacomponents.shop
+            privacy{'\u0040'}nebulacomponents.shop
           </a>
         </p>
         <p className="text-[var(--text-secondary)]">

@@ -1,52 +1,135 @@
-'use client';
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import Footer from '@/components/Footer'
+import { createArticleSchema } from '../../lib/schema'
 
-export default function LearningCentrePage() {
-  
+export const metadata: Metadata = {
+  title: 'Founder Second Brain: Capture and Reuse Your Best Thinking | Nebula Components',
+  description: 'How founders can build an AI-assisted second brain to capture decisions, frameworks, and content that compounds over time.',
+  alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/founder-second-brain' },
+}
+
+const articleSchema = createArticleSchema({
+  headline: 'Founder Second Brain: Capture and Reuse Your Best Thinking',
+  description: 'How founders can build an AI-assisted second brain to capture decisions, frameworks, and content that compounds over time.',
+  url: 'https://nebulacomponents.shop/learning-centre/founder-second-brain',
+  publishedDate: '2025-07-15',
+  modifiedDate: '2026-07-19',
+})
+
+export default function FounderSecondBrainPage() {
   return (
-    <>
-      <style>{`
-:root { color-scheme: dark; --bg:#080a0f; --panel:#111723; --text:#f5f7fb; --muted:#9aa7bd; --line:#253044; --hot:#79f2c0; --gold:#ffd166; }
-* { box-sizing: border-box; }
-body { margin:0; background: radial-gradient(circle at top left,#152033,#080a0f 42%); color:var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif; }
-a { color: var(--hot); text-decoration: none; }
-.wrap { width:min(1120px,92vw); margin:0 auto; padding:56px 0; }
-.hero { display:grid; gap:22px; padding:42px; border:1px solid var(--line); border-radius:28px; background:linear-gradient(135deg,rgba(17,23,35,.92),rgba(8,10,15,.78)); box-shadow:0 24px 80px rgba(0,0,0,.35); }
-.eyebrow { color:var(--gold); text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:800; }
-h1 { font-size:clamp(38px,7vw,76px); line-height:.94; margin:0; letter-spacing:-.06em; }
-h2 { font-size:32px; margin:48px 0 18px; letter-spacing:-.03em; }
-h3 { font-size:22px; margin:10px 0; }
-.lede { color:var(--muted); font-size:20px; max-width:760px; line-height:1.45; }
-.proof { display:flex; flex-wrap:wrap; gap:10px; padding:0; margin:8px 0 0; list-style:none; }
-.proof li,.badge { border:1px solid var(--line); border-radius:999px; padding:8px 12px; color:var(--muted); background:#0c111a; }
-.actions { display:flex; flex-wrap:wrap; gap:14px; }
-.button { display:inline-flex; align-items:center; justify-content:center; border-radius:999px; padding:13px 18px; background:var(--hot); color:#02100a; font-weight:900; }
-.button.secondary { background:transparent; color:var(--text); border:1px solid var(--line); }
-.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(245px,1fr)); gap:16px; }
-.card,.panel { background:rgba(17,23,35,.88); border:1px solid var(--line); border-radius:22px; padding:22px; margin:16px 0; }
-.card p,.panel li,.panel p { color:var(--muted); line-height:1.55; }
-.resource-link { font-weight:900; }
-.detail { max-width:860px; }
-.related { display:grid; gap:10px; }
-.related a { padding:10px 0; border-bottom:1px solid var(--line); }
-.cta-panel { border-color:rgba(121,242,192,.45); }
-      `}</style>
-      <div dangerouslySetInnerHTML={{ __html: `<body>
-<main class="wrap detail">
-<a href="/learning-center/">← Learning Centre</a>
-<p class="eyebrow">Content Systems</p>
-<h1>Founder Second-Brain Campaign Factory</h1>
-<p class="lede">Turn founder expertise into posts, emails, lead magnets, and scripts with approval gates.</p>
-<section class="panel">
-<h2>How to use this</h2>
-<ol>
-<li>Open the resource.</li>
-<li>Apply it to one page or one offer.</li>
-<li>Run the free audit before changing ad spend.</li>
-</ol>
-<a class="button" href="/learning-center/founder-second-brain">Use the operating pattern</a>
-</section>
-</main>
-</body>` }} />
-    </>
-  );
+    <main id="main-content" role="main" className="min-h-screen bg-bg">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <header className="border-b border-border px-6 py-4">
+        <nav aria-label="Primary" className="mx-auto flex max-w-6xl items-center justify-between">
+          <Link href="/" className="text-xl font-semibold text-fg">Nebula</Link>
+          <div className="flex items-center gap-5">
+            <Link href="/learning-centre" className="text-sm text-fg-muted hover:text-fg rounded">Learning</Link>
+            <Link href="/audit" className="rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-bg hover:bg-accent-light transition-colors">Free Audit</Link>
+          </div>
+        </nav>
+      </header>
+
+      <nav aria-label="Breadcrumb" className="mx-auto max-w-4xl px-6 pt-6">
+        <ol className="flex items-center gap-2 text-sm text-fg-muted">
+          <li><Link href="/" className="hover:text-fg">Home</Link></li>
+          <li aria-hidden="true">/</li>
+          <li><Link href="/learning-centre" className="hover:text-fg">Learning Centre</Link></li>
+          <li aria-hidden="true">/</li>
+          <li className="text-fg" aria-current="page">Founder Second Brain</li>
+        </ol>
+      </nav>
+
+      <article className="mx-auto max-w-4xl px-6 py-12">
+        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Content Systems</p>
+        <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
+          Founder Second Brain: Turn Your Expertise Into Compounding Output
+        </h1>
+        <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
+          Most founders hold a decade of hard-won insight in their head that never gets used outside a Zoom call. The Founder Second Brain is a system for extracting that expertise and converting it into content, offers, and decision frameworks that work for you continuously.
+        </p>
+
+        <section className="mt-12">
+          <h2 className="mb-4 text-2xl font-bold text-fg">The Problem: Expertise That Does Not Compound</h2>
+          <p className="text-fg-muted leading-relaxed">
+            Every founder has specific, earned knowledge that their audience needs. But without a capture system, that expertise sits dormant — delivered once in a sales call, lost after a client engagement, or buried in an email no one will find again. The result is that marketing becomes a chore: starting from scratch each week, producing content that sounds generic because it is not grounded in real experience.
+          </p>
+        </section>
+
+        <section className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold text-fg">What the Second Brain Does</h2>
+          <ul className="space-y-4">
+            {[
+              { label: 'Capture', desc: 'Every insight, client story, objection handled, and decision made gets added to a structured vault with context and date.' },
+              { label: 'Tag and connect', desc: 'Entries are tagged by topic, audience, and outcome so related ideas surface together.' },
+              { label: 'Generate', desc: 'The vault feeds an AI that drafts LinkedIn posts, emails, lead magnets, and landing page copy from your actual voice and your actual results.' },
+              { label: 'Approve', desc: 'Every output goes through a one-touch approval gate before publishing — you review, not rewrite.' },
+            ].map(({ label, desc }) => (
+              <li key={label} className="flex items-start gap-4 rounded-xl border border-border bg-bg-muted/30 p-4">
+                <span className="mt-0.5 rounded-full bg-accent/20 px-2 py-0.5 text-xs font-bold text-accent">{label}</span>
+                <p className="text-fg-muted">{desc}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold text-fg">What Goes Into the Vault</h2>
+          <p className="mb-4 text-fg-muted">The raw material is anything that helped a real person solve a real problem:</p>
+          <ul className="space-y-2 text-fg-muted">
+            {[
+              'Client wins: outcome, starting condition, fix applied',
+              'Objections you handled and what actually worked',
+              'Frameworks you use repeatedly that you have never written down',
+              'Mistakes that cost you time or money and what you learned',
+              'Positions you hold that most people in your industry get wrong',
+            ].map((item, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="mt-10">
+          <h2 className="mb-4 text-2xl font-bold text-fg">The Output Format</h2>
+          <p className="mb-4 text-fg-muted">One vault entry gets processed into multiple formats:</p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              { format: 'LinkedIn post', note: 'Hook from the outcome, story from the diagnosis, CTA to the audit' },
+              { format: 'Email nurture', note: 'Problem-first, experience-backed, low-pressure' },
+              { format: 'Landing page copy', note: 'Claims grounded in documented case stories' },
+              { format: 'FAQ content', note: 'Objections answered in the founder\'s real voice' },
+            ].map(({ format, note }) => (
+              <div key={format} className="rounded-xl border border-border bg-bg-muted/30 p-4">
+                <p className="font-semibold text-fg">{format}</p>
+                <p className="mt-1 text-sm text-fg-muted">{note}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-16 rounded-xl border border-accent/30 bg-accent/5 p-8 text-center">
+          <h2 className="text-2xl font-bold text-fg">Start With the Audit</h2>
+          <p className="mt-4 max-w-xl mx-auto text-fg-muted">
+            Before building content systems, understand what is leaking on your landing page. Fix the conversion floor first so new content has somewhere to land.
+          </p>
+          <Link
+            href="/audit"
+            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors"
+          >
+            Run Free Audit →
+          </Link>
+        </section>
+
+        <div className="mt-8">
+          <Link href="/learning-centre" className="text-sm text-fg-muted hover:text-fg">← Learning Centre</Link>
+        </div>
+      </article>
+
+      <Footer />
+    </main>
+  )
 }
