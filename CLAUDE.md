@@ -47,3 +47,6 @@ Terminal: dead, bounced, max_retries_exceeded
 - Never send email without checking LeadStore.is_bounced()
 - Never claim SOC 2/GDPR/HIPAA certification — use "-ready" or "practices" language
 - Never disable `flock` trap — stale lock files cause false health warnings every cycle
+
+## Design Context (customer-portal)
+Full strategic brief lives in `customer-portal/PRODUCT.md` (visual system in `customer-portal/DESIGN.md`). Summary: brand-register marketing site for founders/operators burning ad spend on underperforming landing pages (ecommerce, B2B SaaS, coaches/consultants), plus agencies as a secondary audience via the $497 partner offer. Positioning: "the problem was never the ad, it was the page" — evidence-first, one-time Fix Pack over any retainer framing. Personality: assertive, clinical, evidence-first — diagnostic equipment, not a lifestyle brand. Anti-references: generic AI-SaaS cream, CRO-agency theatrics, black-box-AI styling, SEO-audit-tool genericism. Accessibility target: WCAG 2.2 AAA (note: DESIGN.md still says AA — needs reconciling on next `/impeccable document` pass).

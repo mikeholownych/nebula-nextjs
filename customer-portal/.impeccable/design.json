@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-07-18T00:00:00Z",
+  "generatedAt": "2026-07-19T00:00:00Z",
   "title": "Design System: Nebula Components",
   "extensions": {
     "colorMeta": {
@@ -34,6 +34,22 @@
           "#262626"
         ]
       },
+      "fg-muted": {
+        "role": "neutral",
+        "displayName": "FG Muted",
+        "canonical": "oklch(59% 0 0)",
+        "tonalRamp": [
+          "#1a1a1a",
+          "#333333",
+          "#4d4d4d",
+          "#666666",
+          "#808080",
+          "#888888",
+          "#b3b3b3",
+          "#cccccc"
+        ],
+        "note": "Canonical value per tailwind.config.ts; globals.css's --fg-muted custom property was fixed to match (previously drifted to #737373). Still doesn't clear the WCAG 2.2 AAA 7:1 bar PRODUCT.md now targets (~5.7:1) — flagged as an open issue, see DESIGN.md's 'AAA Gap' rule."
+      },
       "danger": {
         "role": "semantic",
         "displayName": "Danger Red",
@@ -48,6 +64,22 @@
           "#fecaca",
           "#fee2e2"
         ]
+      },
+      "warning": {
+        "role": "semantic",
+        "displayName": "Warning Amber",
+        "canonical": "oklch(76.9% 0.188 70.08)",
+        "tonalRamp": [
+          "#451a03",
+          "#78350f",
+          "#92400e",
+          "#b45309",
+          "#d97706",
+          "#f59e0b",
+          "#fbbf24",
+          "#fde68a"
+        ],
+        "note": "Canonical value per tailwind.config.ts; globals.css's .sample-score rules were fixed to reference the new --warning / --warning-dim custom properties instead of hardcoding #fbbf24."
       }
     },
     "typographyMeta": {
@@ -59,9 +91,13 @@
         "displayName": "Headline",
         "purpose": "Section titles. Used sparingly to mark major page divisions."
       },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card titles, step headings, secondary labels."
+      },
       "body": {
         "displayName": "Body",
-        "purpose": "Primary prose. Capped at 65–75ch for readability."
+        "purpose": "Primary prose. Capped at 65–75ch for readability. Set via globals.css's --text-base (17px)."
       },
       "label": {
         "displayName": "Label",
@@ -77,7 +113,7 @@
       {
         "name": "card-glow",
         "value": "0 0 40px rgba(16, 185, 129, 0.15)",
-        "purpose": "Featured/pricing cards. Elevated surface indication."
+        "purpose": "Featured/pricing cards (tailwind.config.ts `shadow-glow`). Elevated surface indication."
       }
     ],
     "motion": [
@@ -109,41 +145,57 @@
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Main CTA button. Used for 'Audit My Landing Page', 'Get Started', and primary form submits.",
-      "html": "<button class=\"ds-btn-primary\">Audit My Landing Page</button>",
-      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: 16px 32px; background: #10b981; color: #050505; font-family: Karla, -apple-system, system-ui, sans-serif; font-weight: 600; font-size: 16px; border-radius: 12px; border: none; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-primary:hover { background: #34d399; transform: translateY(-1px); box-shadow: 0 0 16px rgba(16, 185, 129, 0.25); } .ds-btn-primary:active { transform: translateY(0); box-shadow: 0 0 8px rgba(16, 185, 129, 0.2); } .ds-btn-primary:focus-visible { outline: 2px solid #10b981; outline-offset: 4px; }"
+      "description": "Main CTA button (components/ui/Button.tsx, size=\"md\", the default). Used for 'Run Free Audit', 'Review checkout', primary form submits.",
+      "html": "<button class=\"ds-btn-primary\">Run Free Audit</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; background: #10b981; color: #050505; font-family: Karla, -apple-system, system-ui, sans-serif; font-weight: 600; font-size: 16px; border-radius: 12px; border: none; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-primary:hover { background: #34d399; transform: translateY(-1px); box-shadow: 0 0 16px rgba(16, 185, 129, 0.25); } .ds-btn-primary:active { transform: translateY(0); box-shadow: 0 0 8px rgba(16, 185, 129, 0.2); } .ds-btn-primary:focus-visible { outline: 2px solid #10b981; outline-offset: 4px; }"
+    },
+    {
+      "name": "Primary Button (Large / Hero)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "size=\"lg\" variant for hero CTAs. Today the homepage hero hand-rolls this padding/radius on a raw <Link> instead of using the Button component at this size — that's drift to fix, not a second intended pattern.",
+      "html": "<button class=\"ds-btn-primary-lg\">Run Free Audit →</button>",
+      "css": ".ds-btn-primary-lg { display: inline-flex; align-items: center; justify-content: center; padding: 16px 32px; background: #10b981; color: #050505; font-family: Karla, -apple-system, system-ui, sans-serif; font-weight: 600; font-size: 18px; border-radius: 16px; border: none; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-primary-lg:hover { background: #34d399; transform: translateY(-1px); box-shadow: 0 0 16px rgba(16, 185, 129, 0.25); } .ds-btn-primary-lg:focus-visible { outline: 2px solid #10b981; outline-offset: 4px; }"
     },
     {
       "name": "Secondary Button",
       "kind": "button",
       "refersTo": "button-secondary",
-      "description": "Secondary action button. 'View Sample Audit', 'Learn More'.",
-      "html": "<button class=\"ds-btn-secondary\">View Sample Audit</button>",
-      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; background: transparent; color: #10b981; font-family: Karla, -apple-system, system-ui, sans-serif; font-weight: 600; font-size: 16px; border: 2px solid #10b981; border-radius: 12px; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-secondary:hover { background: rgba(16, 185, 129, 0.1); } .ds-btn-secondary:focus-visible { outline: 2px solid #10b981; outline-offset: 4px; }"
+      "description": "Outline variant, size=\"md\". 'View audit status', 'Review checkout' in outline contexts.",
+      "html": "<button class=\"ds-btn-secondary\">View audit status</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; background: transparent; color: #10b981; font-family: Karla, -apple-system, system-ui, sans-serif; font-weight: 600; font-size: 16px; border: 1px solid #10b981; border-radius: 12px; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-secondary:hover { background: rgba(16, 185, 129, 0.1); } .ds-btn-secondary:focus-visible { outline: 2px solid #10b981; outline-offset: 4px; }"
     },
     {
       "name": "Card Default",
       "kind": "card",
       "refersTo": "card-default",
-      "description": "Standard container for content sections. Tonal separation from background.",
+      "description": "Standard container for content sections (components/ui/Card.tsx). Tonal separation from background.",
       "html": "<div class=\"ds-card\"><h3>Card Title</h3><p>Card content goes here with supporting description text.</p></div>",
-      "css": ".ds-card { background: #111111; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 12px; padding: 32px; } .ds-card h3 { font-family: Karla, -apple-system, system-ui, sans-serif; font-size: 1.5rem; font-weight: 600; color: #ffffff; margin-bottom: 12px; } .ds-card p { font-family: Karla, -apple-system, system-ui, sans-serif; font-size: 17px; color: #737373; line-height: 1.65; }"
+      "css": ".ds-card { background: #111111; border-radius: 16px; padding: 24px; } .ds-card h3 { font-family: Karla, -apple-system, system-ui, sans-serif; font-size: 1.5rem; font-weight: 600; color: #ffffff; margin-bottom: 12px; } .ds-card p { font-family: Karla, -apple-system, system-ui, sans-serif; font-size: 17px; color: #888888; line-height: 1.65; }"
     },
     {
       "name": "Input Field",
       "kind": "input",
       "refersTo": "input-field",
-      "description": "Text input for forms. Near-black background with subtle border.",
+      "description": "Text input for forms (components/ui/Input.tsx). Near-black background with subtle border.",
       "html": "<input type=\"email\" class=\"ds-input\" placeholder=\"Enter your email\" />",
-      "css": ".ds-input { width: 100%; padding: 14px 16px; background: #050505; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 12px; color: #ffffff; font-family: Karla, -apple-system, system-ui, sans-serif; font-size: 16px; outline: none; transition: border 0.2s, box-shadow 0.2s; } .ds-input::placeholder { color: #737373; } .ds-input:focus { border-color: #10b981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); }"
+      "css": ".ds-input { width: 100%; padding: 12px 16px; background: #111111; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 12px; color: #ffffff; font-family: Karla, -apple-system, system-ui, sans-serif; font-size: 16px; outline: none; transition: border 0.2s, box-shadow 0.2s; } .ds-input::placeholder { color: #888888; } .ds-input:focus { border-color: #10b981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); }"
     },
     {
       "name": "Badge Label",
       "kind": "chip",
       "refersTo": "badge-label",
       "description": "Uppercase tracked labels for status, eyebrows, and step numbers.",
-      "html": "<span class=\"ds-badge\">BEFORE</span>",
-      "css": ".ds-badge { display: inline-block; padding: 4px 12px; background: rgba(16, 185, 129, 0.1); color: #10b981; font-family: Karla, -apple-system, system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 4px; }"
+      "html": "<span class=\"ds-badge\">STEP 1</span>",
+      "css": ".ds-badge { display: inline-block; padding: 4px 12px; background: rgba(16, 185, 129, 0.1); color: #10b981; font-family: Karla, -apple-system, system-ui, sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 4px; }"
+    },
+    {
+      "name": "Before/After Tag",
+      "kind": "chip",
+      "refersTo": "tag-before-after",
+      "description": "Case-study proof pattern (DESIGN.md 'Proof Section Components'). Pairs a danger-tinted 'before' tag with an emerald-tinted 'after' tag to show the fix.",
+      "html": "<span class=\"ds-tag-before\">Before</span> <span class=\"ds-tag-after\">After</span>",
+      "css": ".ds-tag-before { display: inline-block; padding: 4px 12px; background: rgba(239, 68, 68, 0.15); color: #ef4444; font-family: Karla, -apple-system, system-ui, sans-serif; font-size: 13px; font-weight: 600; border-radius: 4px; } .ds-tag-after { display: inline-block; padding: 4px 12px; background: rgba(16, 185, 129, 0.1); color: #10b981; font-family: Karla, -apple-system, system-ui, sans-serif; font-size: 13px; font-weight: 600; border-radius: 4px; }"
     },
     {
       "name": "Navigation Link",
@@ -151,12 +203,12 @@
       "refersTo": "nav-link",
       "description": "Header navigation links. Muted at rest, emerald on hover.",
       "html": "<a href=\"#\" class=\"ds-nav-link\">Pricing</a>",
-      "css": ".ds-nav-link { color: #737373; font-family: Karla, -apple-system, system-ui, sans-serif; font-size: 14px; font-weight: 600; text-decoration: none; padding: 12px 0; transition: color 0.2s; } .ds-nav-link:hover { color: #10b981; } .ds-nav-link:focus-visible { outline: 2px solid #10b981; outline-offset: 4px; border-radius: 4px; } @media (pointer: coarse) { .ds-nav-link { min-height: 44px; padding: 16px 12px; } }"
+      "css": ".ds-nav-link { color: #888888; font-family: Karla, -apple-system, system-ui, sans-serif; font-size: 14px; font-weight: 600; text-decoration: none; padding: 12px 0; transition: color 0.2s; } .ds-nav-link:hover { color: #10b981; } .ds-nav-link:focus-visible { outline: 2px solid #10b981; outline-offset: 4px; border-radius: 4px; } @media (pointer: coarse) { .ds-nav-link { min-height: 44px; padding: 16px 12px; } }"
     }
   ],
   "narrative": {
     "northStar": "The Conversion Lab",
-    "overview": "Assertive authority meets clinical precision. The system projects confidence through density and sharpness — not friendliness, not warmth, not restraint. This is diagnostic equipment, not a lifestyle brand. Karla replaced Inter specifically to exit the reflex-default monoculture. Near-black foundation eliminates visual competition. Signal Emerald marks actionable elements with authority.\n\nDepth emerges from ambient glow orbs that create atmospheric layering, not lift. The interface feels like surfaces emerging from atmosphere, not sitting on top of it. Every visual choice serves the belief ladder — the visitor must believe Nebula finds real, specific defects on their page.",
+    "overview": "Assertive authority meets clinical precision. The system projects confidence through density and sharpness — not friendliness, not warmth, not restraint. This is diagnostic equipment, not a lifestyle brand. Karla replaced Inter specifically to exit the reflex-default monoculture. Near-black foundation eliminates visual competition. Signal Emerald marks actionable elements with authority.\n\nDepth emerges from ambient glow orbs that create atmospheric layering, not lift. The interface feels like surfaces emerging from atmosphere, not sitting on top of it. Every visual choice serves the belief ladder — the visitor must believe Nebula finds real, specific defects on their page.\n\nResolved drift: the indigo/mint palette and dangerouslySetInnerHTML/nested-body anti-pattern that used to span about/** and most of learning-centre/** has been migrated onto these tokens as plain JSX.",
     "keyCharacteristics": [
       "Near-black canvas eliminates everything but diagnostic content",
       "Signal Emerald authority on actions — used sparingly (≤10% surface)",
@@ -174,6 +226,11 @@
       {
         "name": "The No-Warm-Neutral Rule",
         "body": "Backgrounds live on the cool near-black axis. No cream, sand, paper, parchment. Warmth is carried by emerald accent and imagery.",
+        "section": "colors"
+      },
+      {
+        "name": "The AAA Gap",
+        "body": "PRODUCT.md targets WCAG 2.2 AAA (7:1). FG Muted at #888888 measures ~5.7:1 against near-black, and the legacy #737373 measures ~4.3:1 — both AA-level at best. Open issue, not solved: don't treat current muted text as AAA-compliant.",
         "section": "colors"
       },
       {
@@ -199,7 +256,8 @@
       "Do set display headlines with tight tracking (-0.03em).",
       "Do cap body prose at 65–75ch line length.",
       "Do show evidence — annotated screenshots and specific defects.",
-      "Do include skip-link for keyboard navigation."
+      "Do include skip-link for keyboard navigation. Target WCAG 2.2 AAA.",
+      "Do use the shared Button/Card/Input components from components/ui/ instead of re-implementing their styles inline."
     ],
     "donts": [
       "Don't use gradient text. Solid Signal Emerald or nothing.",
@@ -210,7 +268,9 @@
       "Don't use border-radius >24px on cards.",
       "Don't fabricate testimonials or conversion claims.",
       "Don't animate images on hover.",
-      "Don't default to Inter, DM Sans, or reflex-reject fonts."
+      "Don't default to Inter, DM Sans, or reflex-reject fonts.",
+      "Don't reintroduce the old indigo/mint palette (#6366f1, #a5b4fc, #79f2c0) — it was migrated off every page.",
+      "Don't hardcode a token value directly (a hex, an rgba) when a shared color or utility class already names it — globals.css's fg-muted/warning duplicates were exactly this mistake; both now reference var(--fg-muted)/var(--warning)."
     ]
   }
 }

@@ -10,28 +10,15 @@ colors:
   emerald-dark: "#059669"
   emerald-dim: "rgba(16, 185, 129, 0.1)"
   fg: "#ffffff"
-  fg-muted: "#737373"
+  fg-muted: "#888888"
   fg-dim: "#666666"
   danger: "#ef4444"
   danger-dim: "rgba(239, 68, 68, 0.15)"
   info: "#3b82f6"
-  warning: "#fbbf24"
-  warning-dim: "rgba(251, 191, 36, 0.15)"
+  warning: "#f59e0b"
+  warning-dim: "rgba(245, 158, 11, 0.15)"
   border: "rgba(255, 255, 255, 0.06)"
 typography:
-  fontFamily: "Karla, -apple-system, system-ui, sans-serif"
-  scale:
-    xs: "11px"
-    sm: "12px"
-    base: "14px"
-    md: "15px"
-    lg: "16px"
-    xl: "1rem"
-    "2xl": "1.125rem"
-    "3xl": "1.25rem"
-    "4xl": "1.5rem"
-    "5xl": "2.5rem"
-    "6xl": "3rem"
   display:
     fontFamily: "Karla, -apple-system, system-ui, sans-serif"
     fontSize: "clamp(2.5rem, 6vw, 4rem)"
@@ -91,12 +78,12 @@ components:
     padding: "14px 28px"
   card-default:
     backgroundColor: "{colors.bg-panel}"
-    rounded: "{rounded.lg}"
+    rounded: "{rounded.xl}"
     padding: "{spacing.lg}"
   card-bordered:
     backgroundColor: "{colors.bg-panel}"
     textColor: "{colors.fg}"
-    rounded: "{rounded.lg}"
+    rounded: "{rounded.xl}"
 ---
 
 # Design System: Nebula Components
@@ -119,6 +106,8 @@ Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmo
 - Tight tracking (-0.03em) on display for condensed authority
 - Evidence-first: annotated defects trump marketing claims
 
+**Resolved drift:** the indigo/mint palette (`#6366f1`, `#a5b4fc`, `#79f2c0` on `#080a0f`/`#111723`) that used to appear across `app/about/**` and most of `app/learning-centre/**` has been migrated onto the tokens documented here. The ~20 pages that used a raw `dangerouslySetInnerHTML` HTML-injection anti-pattern (nested `<body>` tag, unscoped global `<style>` overriding `:root`/`body`/`a`/`h1`-`h3` and forcing Inter over Karla) were rewritten as real JSX. The two bespoke pages (`resources/citable`, `resources`) kept their custom `<style>` blocks but had them scoped under a page-level class and recolored. No page should reintroduce this palette or the raw-HTML-injection pattern.
+
 ---
 
 ## 2. Colors
@@ -137,7 +126,7 @@ Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmo
 - **BG Elevated** (#0a0a0a): Secondary background for sections requiring subtle separation.
 - **BG Panel** (#111111): Card backgrounds, input backgrounds, containers.
 - **FG** (#ffffff): Primary text on dark backgrounds. Maximum contrast (21:1).
-- **FG Muted** (#737373): Secondary text, descriptions, supporting context. Contrast 4.67:1 on #050505.
+- **FG Muted** (#888888): Secondary text, descriptions, supporting context. Canonical across the codebase: `tailwind.config.ts`'s `fg.muted` and `globals.css`'s `--fg-muted` both resolve to this value now (the CSS custom property previously drifted to `#737373`; fixed).
 - **FG Dim** (#666666): Tertiary text, disabled states.
 - **Border** (rgba(255, 255, 255, 0.06)): Subtle dividers. Near-invisible until needed.
 
@@ -146,7 +135,7 @@ Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmo
 - **Danger** (#ef4444): Error states, "before" tags, negative signal, unfixed defects.
 - **Danger Dim** (rgba(239, 68, 68, 0.15)): Background tint for danger badges.
 - **Info** (#3b82f6): Secondary glow orb, rarely used in UI.
-- **Warning** (#fbbf24): Scoring highlights, attention markers in audit output.
+- **Warning** (#f59e0b): Scoring highlights, attention markers in audit output. Canonical across the codebase: `tailwind.config.ts`'s `warning` and `globals.css`'s new `--warning` custom property both resolve to this value (`.sample-score` previously hardcoded `#fbbf24` directly; fixed to reference `var(--warning)` / `var(--warning-dim)`).
 
 ### Named Rules
 
@@ -155,6 +144,8 @@ Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmo
 **The No-Warm-Neutral Rule.** Backgrounds live on the cool near-black axis. No cream, sand, paper, parchment, or warm-tinted neutrals. Warmth is carried by the emerald accent and imagery — never the canvas.
 
 **The Authority-Not-Friendliness Rule.** Signal Emerald is not "friendly green." It marks signal, not inclusion. No pastel tints, no soft gradients. Sharp, saturated, assertive.
+
+**The AAA Gap (open issue).** PRODUCT.md now targets WCAG 2.2 AAA (7:1 for body text). FG Muted at #888888 on #050505 measures ~5.7:1 — AA-level, not AAA. The token-drift duplication that used to leave a *second*, even-worse value (#737373, ~4.3:1) floating around is fixed, but the color itself still doesn't clear 7:1. Don't document this as compliant. Treat "bump FG Muted to clear 7:1" as a tracked follow-up (a contrast-focused `/impeccable audit` pass), not a solved problem.
 
 ---
 
@@ -171,8 +162,10 @@ Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmo
 - **Display** (700, clamp(2.5rem, 6vw, 4rem), 1.1, -0.03em): Hero headlines. The largest type on any page. Assertive presence, condensed tracking for density. Never below the fold.
 - **Headline** (700, clamp(2rem, 4vw, 2.5rem), 1.2): Section titles. Used for major page divisions.
 - **Title** (600, 1.5rem, 1.3): Card titles, step headings, secondary labels.
-- **Body** (400, 17px, 1.65): Primary prose. Capped at 65–75ch line length for readability. Good contrast against near-black.
+- **Body** (400, 17px, 1.65): Primary prose, set via `globals.css`'s `--text-base`. Capped at 65–75ch line length for readability. Good contrast against near-black.
 - **Label** (600, 13px, 0.1em tracking, uppercase): Badges, eyebrows, step numbers. Wide tracking creates small-caps appearance.
+
+Tailwind's own `text-xs`…`text-6xl` utility scale (defined in `tailwind.config.ts`, independent of the five roles above) is used ad hoc inside component library code for one-off sizing — e.g. Button's `size` variants pull `text-sm`/`text-base`/`text-lg` directly. It runs about 1px off `--text-base` (16px vs. the body's 17px) at the `base` step; not a defect, just two adjacent scales worth knowing are both live.
 
 ### Named Rules
 
@@ -195,7 +188,7 @@ The system rejects conventional drop shadows (offset + blur + spread) entirely. 
 - **Ambient Emerald** (120px blur, 600×600px, radial-gradient emerald @ 0.15 opacity): Fixed-position orb, top-right quadrant. Creates ambient glow from within the atmosphere.
 - **Ambient Blue** (120px blur, 600×600px, radial-gradient blue @ 0.12 opacity): Fixed-position orb, bottom-left. Cooler counterpoint.
 - **Button Glow** (0 0 16px rgba(16, 185, 129, 0.25)): Primary button hover state. Responsive, not ambient.
-- **Card Glow** (0 0 40px rgba(16, 185, 129, 0.15)): Featured/pricing cards.
+- **Card Glow** (0 0 40px rgba(16, 185, 129, 0.15)): Featured/pricing cards — `shadow-glow` in `tailwind.config.ts`.
 
 ### Named Rules
 
@@ -211,33 +204,35 @@ The system rejects conventional drop shadows (offset + blur + spread) entirely. 
 
 ### Buttons
 
-**Shape:** Rounded-lg (12px) standard, rounded-xl (16px) for hero emphasis. Never full-pill on action buttons.
+**Shape:** Actual rendered radii by size (`components/ui/Button.tsx`): 8px (`sm`), 12px (`md`, the default and most common size), 16px (`lg`, hero emphasis). Never full-pill.
 
-- **Primary** (Signal Emerald bg, Near Black text, 16px 32px padding, fontWeight 600): Main CTAs — "Audit My Landing Page", "Get Started", form submits.
-  - Hover: BG shifts to Emerald Light, translateY(-1px), Button Glow appears (16px @ 0.25).
+- **Primary** (Signal Emerald bg, Near Black text, fontWeight 600): Main CTAs — "Run Free Audit", "Review checkout", form submits.
+  - Hover: BG shifts to Emerald Light, Button Glow appears (16px @ 0.25).
   - Active: No lift, reduced glow.
   - Touch devices: No hover lift; active uses scale(0.98) instead.
-
-- **Secondary / Outline** (transparent bg, 2px Signal Emerald border, Signal Emerald text, 14px 28px padding): Secondary actions — "View Sample Audit", "Learn More".
+- **Secondary / Outline** (transparent bg, 1–2px Signal Emerald border, Signal Emerald text): Secondary actions — "View audit status", "Review checkout →" on outline contexts.
   - Hover: BG shifts to Emerald Dim, border stays.
-
 - **Ghost** (transparent bg, FG Muted text): Tertiary nav, cancel actions.
   - Hover: Text shifts to FG.
 
+**Don't** hand-roll hero CTAs as raw `<Link className="...">` markup with one-off Tailwind classes (the homepage's "Run Free Audit" button does this). Use the `Button` component at `size="lg"` so radius, glow, and disabled/loading states stay centralized instead of drifting per page.
+
 ### Cards
 
-**Corner Style:** Rounded-lg (12px) for utility cards, rounded-xl (16px) for content. Never >24px.
+**Corner Style:** 16px (`rounded-2xl`) uniformly — `components/ui/Card.tsx` doesn't vary radius by variant. Never >24px.
 
-- **Default** (BG Panel background, 1px Border): Standard container.
-- **Elevated** (BG Panel, Card Glow): Featured/pricing cards.
-- **Internal Padding:** 32px default, range 16px–48px.
+- **Default** (BG Panel background): Standard container.
+- **Bordered** (BG Panel, 1px Border): Standard container with a visible edge — used for pricing/plan comparisons.
+- **Elevated** (BG Panel, `shadow-glow`): Featured/pricing cards.
+- **Internal Padding:** `none` (0) / `sm` (16px) / `md` (24px, default) / `lg` (32px).
 
 ### Inputs / Fields
 
-**Style:** Near Black background, 1px Border, rounded-lg (12px), padding 14px–16px.
+**Style:** Near Black background, 1px Border, rounded-xl (12px), padding 12–16px (`px-4 py-3`).
 
-- **Focus:** Border shifts to Signal Emerald, focus ring (0 0 0 3px Emerald Dim).
-- **Error:** Border shifts to Danger, background tints to Danger Dim.
+- **Focus:** Border shifts to Signal Emerald, focus ring (`ring-2 ring-accent/20`).
+- **Error:** Border shifts to Danger; error text below in Danger, `role="alert"`.
+- **Helper text:** FG Dim, shown only when no error is present.
 
 ### Navigation
 
@@ -264,8 +259,9 @@ The system rejects conventional drop shadows (offset + blur + spread) entirely. 
 - **Do** set display headlines with tight tracking (-0.03em) but never below that floor.
 - **Do** cap body prose at 65–75ch line length.
 - **Do** show evidence — annotated screenshots and specific defects — instead of generic claims.
-- **Do** include skip-link for keyboard navigation. Target WCAG 2.2 AA minimum.
+- **Do** include skip-link for keyboard navigation. Target WCAG 2.2 AAA (raised from AA; see the AAA Gap note in Colors — FG Muted doesn't clear this yet).
 - **Do** assert: Karla was chosen specifically to exit the Inter/DM Sans reflex-default monoculture.
+- **Do** use the shared `Button`/`Card`/`Input` components from `components/ui/` instead of re-implementing their styles inline.
 
 ### Don't:
 
@@ -275,7 +271,10 @@ The system rejects conventional drop shadows (offset + blur + spread) entirely. 
 - **Don't** add a tiny uppercase tracked eyebrow above every section. One named kicker is deliberate; eyebrows as section grammar is AI scaffolding.
 - **Don't** use drop shadows with large blur (≥16px) on cards or buttons. Use centered glow or tonal layering.
 - **Don't** use border-radius greater than 24px on cards.
-- **Don't** fabricate testimonials, case studies, or conversion claims.
-- **Don't** look like a "generic AI SaaS", "CRO agency", "website-design studio", "cheap audit generator", "digital-marketing guru funnel", "space-themed novelty brand", "cybersecurity product", "enterprise analytics platform", "SEO audit tool", or "black-box 'AI says so' product" — all explicitly rejected in positioning.
+- **Don't** fabricate testimonials, case studies, or conversion claims — every claim traces to one of the two documented case studies (48x ROAS ecommerce, −50% CPC B2B SaaS) until more are added.
+- **Don't** look like a "generic AI SaaS", "CRO agency", "website-design studio", "cheap audit generator", "digital-marketing guru funnel", "space-themed novelty brand", "cybersecurity product", "enterprise analytics platform", "SEO audit tool", or "black-box 'AI says so' product" — all explicitly rejected in PRODUCT.md's positioning.
 - **Don't** animate images on hover. If a card needs hover feedback, animate background, border, or shadow — never the image.
 - **Don't** default to Inter, DM Sans, Fraunces, or any font on the reflex-reject list. Karla is the committed brand font.
+- **Don't** reintroduce the old indigo/mint palette (#6366f1, #a5b4fc, #79f2c0 on #080a0f/#111723) — it was migrated off every page. If it resurfaces anywhere, that's regression, not a second intentional aesthetic.
+- **Don't** re-add `dangerouslySetInnerHTML`-based page templates with their own `<body>` tag and unscoped `<style>` block. Every learning-centre article is now plain JSX on shared tokens; new articles should follow that pattern.
+- **Don't** hardcode a token value directly (a hex, an rgba) when a shared color/utility class already names it. `globals.css` used to duplicate `fg-muted` and `warning` at different values than their Tailwind equivalents (`#737373`/`#fbbf24`); both now reference `var(--fg-muted)` / `var(--warning)` at the canonical values — don't reintroduce a hardcoded one-off.
