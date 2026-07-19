@@ -1,10 +1,11 @@
-import { type ReactNode } from 'react'
+import { type CSSProperties, type ReactNode } from 'react'
 
 interface CardProps {
   children: ReactNode
   className?: string
   variant?: 'default' | 'elevated' | 'bordered'
   padding?: 'none' | 'sm' | 'md' | 'lg'
+  style?: CSSProperties
 }
 
 const variantStyles = {
@@ -25,6 +26,7 @@ export function Card({
   className = '',
   variant = 'default',
   padding = 'md',
+  style,
 }: CardProps) {
   return (
     <div
@@ -34,6 +36,7 @@ export function Card({
         ${paddingStyles[padding]}
         ${className}
       `.trim()}
+      style={style}
     >
       {children}
     </div>

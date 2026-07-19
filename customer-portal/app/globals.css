@@ -1051,6 +1051,30 @@ footer {
   }
 }
 
+/* ─── AUDIT FLOW: shared-element transition + findings reveal ─── */
+/* The processing "ready" card and the results header/score card share this
+   view-transition-name so the browser morphs the box between routes instead
+   of hard-cutting. Only one element with this name may be on-screen at once,
+   which holds here since processing and results never render simultaneously. */
+.vt-audit-card {
+  view-transition-name: audit-card;
+}
+
+@keyframes finding-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.finding-reveal {
+  animation: finding-reveal 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 /* ─── REDUCED MOTION ───────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -1060,6 +1084,12 @@ footer {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }
 

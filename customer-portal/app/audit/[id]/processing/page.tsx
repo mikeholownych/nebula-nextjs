@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { Card } from '@/components/ui'
+import { pushWithViewTransition } from '../../_lib/view-transition'
 
 const STATUS_MESSAGES = [
   { message: 'Scanning page structure...', duration: 2000 },
@@ -58,9 +59,9 @@ export default function ProcessingPage() {
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email) return
-    
+
     // TODO: Call API to update audit with email and trigger full results email
-    router.push(`/audit/${auditId}/results?unlocked=true`)
+    pushWithViewTransition(router, `/audit/${auditId}/results?unlocked=true`)
   }
 
   return (
@@ -93,7 +94,7 @@ export default function ProcessingPage() {
         )}
 
         {status === 'ready' && (
-          <Card variant="elevated" className="text-center">
+          <Card variant="elevated" className="vt-audit-card text-center">
             <div className="mb-4 text-5xl">✓</div>
             <h1 className="mb-2 text-2xl font-bold text-fg">
               Your Audit Is Ready
@@ -142,7 +143,7 @@ export default function ProcessingPage() {
             </form>
 
             <button
-              onClick={() => router.push(`/audit/${auditId}/results`)}
+              onClick={() => pushWithViewTransition(router, `/audit/${auditId}/results`)}
               className="mt-4 text-sm text-accent hover:underline"
             >
               View preview now →

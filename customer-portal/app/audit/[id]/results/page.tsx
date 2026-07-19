@@ -24,11 +24,15 @@ interface AuditResult {
   error?: string
 }
 
-const QUADRANT_LABELS: Record<string, { label: string; color: string }> = {
-  quick_win: { label: 'Quick Win', color: 'bg-green-500' },
-  major_project: { label: 'Major Project', color: 'bg-blue-500' },
-  strategic: { label: 'Strategic', color: 'bg-purple-500' },
-  fill_in: { label: 'Fill-In', color: 'bg-gray-400' },
+// Quick Win is the one positive/actionable signal and gets Signal Emerald;
+// the other three quadrants are informational, not "good" or "bad", so they
+// share one neutral tone and differentiate by label only — not a second
+// competing accent color per finding quadrant.
+const QUADRANT_LABELS: Record<string, { label: string; tone: 'accent' | 'neutral' }> = {
+  quick_win: { label: 'Quick Win', tone: 'accent' },
+  major_project: { label: 'Major Project', tone: 'neutral' },
+  strategic: { label: 'Strategic', tone: 'neutral' },
+  fill_in: { label: 'Fill-In', tone: 'neutral' },
 }
 
 export default function ResultsPage() {
@@ -152,7 +156,7 @@ export default function ResultsPage() {
         </div>
 
         {/* Score Card */}
-        <Card variant="elevated" className="mb-8 text-center">
+        <Card variant="elevated" className="vt-audit-card mb-8 text-center">
           <div className="mb-4">
             <span className="text-6xl font-bold text-accent">
               {results.score.toFixed(1)}
@@ -161,10 +165,9 @@ export default function ResultsPage() {
           </div>
           <div className="mb-4">
             <span className={`inline-block rounded-full px-4 py-1 text-lg font-semibold ${
-              results.grade === 'A' ? 'bg-green-500 text-white' :
-              results.grade === 'B' ? 'bg-blue-500 text-white' :
-              results.grade === 'C' ? 'bg-yellow-500 text-black' :
-              'bg-red-500 text-white'
+              results.grade === 'A' || results.grade === 'B' ? 'bg-accent text-bg' :
+              results.grade === 'C' ? 'bg-warning text-bg' :
+              'bg-danger text-bg'
             }`}>
               Grade: {results.grade}
             </span>
@@ -179,15 +182,21 @@ export default function ResultsPage() {
           <h2 className="text-xl font-bold text-fg">Key Findings</h2>
           
           {results.findings.map((finding, index) => (
-            <Card key={finding.key} variant="bordered" className="relative overflow-hidden">
-              {/* Quadrant indicator */}
-              <div className={`absolute left-0 top-0 h-full w-1 ${QUADRANT_LABELS[finding.quadrant]?.color || 'bg-gray-400'}`} />
-              
-              <div className="pl-4">
+            <Card
+              key={finding.key}
+              variant="bordered"
+              className="finding-reveal relative overflow-hidden"
+              style={{ animationDelay: `${Math.min(index, 8) * 70}ms` }}
+            >
+              <div>
                 <div className="mb-2 flex items-start justify-between gap-4">
                   <div>
                     <h3 className="font-semibold text-fg">{finding.label}</h3>
-                    <span className="text-xs text-fg-muted">
+                    <span className={`mt-1 inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+                      QUADRANT_LABELS[finding.quadrant]?.tone === 'accent'
+                        ? 'bg-accent/10 text-accent'
+                        : 'bg-fg-muted/10 text-fg-muted'
+                    }`}>
                       {QUADRANT_LABELS[finding.quadrant]?.label || finding.quadrant}
                     </span>
                   </div>
@@ -321,7 +330,7 @@ export default function ResultsPage() {
 
         {emailSent && (
           <Card variant="elevated" className="mt-8 text-center">
-            <h3 className="mb-2 text-lg font-bold text-green-500">✓ Email Sent!</h3>
+            <h3 className="mb-2 text-lg font-bold text-accent">✓ Email Sent!</h3>
             <p className="text-fg-muted">
               Check your inbox for the full audit report
             </p>
@@ -336,7 +345,7 @@ export default function ResultsPage() {
           <div className="flex flex-wrap justify-center gap-4">
             {Object.entries(QUADRANT_LABELS).map(([key, value]) => (
               <div key={key} className="flex items-center gap-2">
-                <div className={`h-3 w-3 rounded ${value.color}`} />
+                <div className={`h-3 w-3 rounded-full ${value.tone === 'accent' ? 'bg-accent' : 'bg-fg-muted'}`} />
                 <span className="text-sm text-fg-muted">{value.label}</span>
               </div>
             ))}
