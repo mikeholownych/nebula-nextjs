@@ -1,0 +1,255 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Nebula Components API",
+    "version": "1.1.0",
+    "description": "Landing page conversion optimization — free audit entry point, x402-paid agent audits, and Stripe-hosted implementation checkout.",
+    "x-guidance": "For autonomous paid audits, use GET /api/v1 with the required url query parameter or POST /api/audit/run with a JSON body containing url. Both return an x402 v2 Payment-Required challenge before processing and cost $0.10 USDC on Base mainnet. Use POST /api/audit/start for the free human-facing audit flow. POST /api/checkout creates a Stripe Checkout session and is not an x402 endpoint.",
+    "contact": {
+      "email": "hello@nebulacomponents.shop",
+      "url": "https://nebulacomponents.shop"
+    }
+  },
+  "x-service-info": {
+    "categories": ["conversion-optimization", "landing-page", "digital-marketing"],
+    "provider": "Nebula Components",
+    "url": "https://nebulacomponents.shop"
+  },
+  "servers": [
+    { "url": "https://nebulacomponents.shop" }
+  ],
+  "paths": {
+    "/api/v1": {
+      "get": {
+        "operationId": "runPaidAuditGet",
+        "summary": "Run a landing page conversion audit through discoverable x402 GET",
+        "description": "Agent-discoverable x402 endpoint. Pass the target landing-page URL in the required url query parameter. Requests without payment receive HTTP 402 with a Payment-Required header.",
+        "x-payment-info": {
+          "price": {
+            "mode": "fixed",
+            "currency": "USD",
+            "amount": "0.10"
+          },
+          "protocols": [
+            { "x402": {} }
+          ],
+          "network": "eip155:8453",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "payTo": "0x03ce3d56E497ECCFE7Fe1a7f666b9e2307541202",
+          "facilitator": "https://facilitator.payai.network"
+        },
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uri",
+              "minLength": 8,
+              "example": "https://example.com"
+            },
+            "description": "Public HTTP or HTTPS landing-page URL to audit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Audit findings with scored conversion leaks and prioritised fixes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "audit_id": { "type": "string" },
+                    "url": { "type": "string", "format": "uri" },
+                    "status": { "type": "string" },
+                    "score": { "type": "number", "minimum": 0, "maximum": 100 },
+                    "grade": { "type": "string" },
+                    "findings": {
+                      "type": "array",
+                      "items": { "type": "object", "additionalProperties": true }
+                    }
+                  },
+                  "required": ["score", "findings"],
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": { "description": "Missing or invalid target URL" },
+          "402": { "description": "Payment Required" }
+        }
+      }
+    },
+    "/api/audit/run": {
+      "post": {
+        "operationId": "runAudit",
+        "summary": "Run a landing page conversion audit (x402 protected)",
+        "description": "Direct x402-paid audit endpoint. Requests without payment receive the challenge before the JSON body is processed.",
+        "x-payment-info": {
+          "price": {
+            "mode": "fixed",
+            "currency": "USD",
+            "amount": "0.10"
+          },
+          "protocols": [
+            { "x402": {} }
+          ],
+          "network": "eip155:8453",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "payTo": "0x03ce3d56E497ECCFE7Fe1a7f666b9e2307541202",
+          "facilitator": "https://facilitator.payai.network"
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "minLength": 8,
+                    "description": "Public HTTP or HTTPS landing-page URL to audit"
+                  }
+                },
+                "required": ["url"],
+                "additionalProperties": false
+              },
+              "example": {
+                "url": "https://example.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Audit findings with scored conversion leaks and prioritised fix list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "audit_id": { "type": "string" },
+                    "url": { "type": "string", "format": "uri" },
+                    "status": { "type": "string" },
+                    "score": { "type": "number", "minimum": 0, "maximum": 100 },
+                    "grade": { "type": "string" },
+                    "findings": {
+                      "type": "array",
+                      "items": { "type": "object", "additionalProperties": true }
+                    }
+                  },
+                  "required": ["score", "findings"],
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "402": { "description": "Payment Required" }
+        }
+      }
+    },
+    "/api/audit/start": {
+      "post": {
+        "operationId": "submitAudit",
+        "summary": "Submit a landing page URL for a free conversion audit",
+        "description": "Free human-facing audit flow. This operation is not protected by x402.",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": { "type": "string", "format": "uri", "description": "The landing page URL to audit" },
+                  "email": { "type": "string", "format": "email", "description": "Optional email to receive the report" },
+                  "name": { "type": "string", "description": "Optional contact name" }
+                },
+                "required": ["url"],
+                "additionalProperties": false
+              },
+              "example": {
+                "url": "https://example.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Audit report with scored findings and prioritised fix list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "audit_id": { "type": "string" },
+                    "url": { "type": "string", "format": "uri" },
+                    "status": { "type": "string" },
+                    "score": { "type": "number" },
+                    "grade": { "type": "string" },
+                    "findings": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+                    "message": { "type": "string" }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": { "description": "Missing or invalid target URL" },
+          "503": { "description": "Audit service unavailable" }
+        }
+      }
+    },
+    "/api/checkout": {
+      "post": {
+        "operationId": "purchaseFixPack",
+        "summary": "Create a Stripe Checkout session for the Conversion Fix Pack",
+        "description": "Creates a Stripe-hosted checkout session for the server-priced Conversion Fix Pack. This operation is not protected by x402.",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "offerKey": { "type": "string", "const": "fix-pack", "description": "Server-priced offer identifier" },
+                  "email": { "type": "string", "format": "email", "description": "Delivery email for audit report and implementation notes" }
+                },
+                "required": ["offerKey", "email"],
+                "additionalProperties": false
+              },
+              "example": {
+                "offerKey": "fix-pack",
+                "email": "buyer@example.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Stripe hosted checkout URL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": { "type": "string", "format": "uri" }
+                  },
+                  "required": ["url"],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": { "description": "Invalid request or unsupported offer" },
+          "502": { "description": "Checkout provider error" },
+          "503": { "description": "Checkout configuration unavailable" }
+        }
+      }
+    }
+  }
+}

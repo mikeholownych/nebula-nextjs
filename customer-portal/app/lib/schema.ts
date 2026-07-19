@@ -9,6 +9,29 @@ export const organizationSchema = {
   url: 'https://nebulacomponents.shop',
   logo: 'https://nebulacomponents.shop/logo-dark.png',
   description: 'Evidence-backed landing-page conversion guidance and implementation services.',
+  foundingDate: '2024',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer support',
+    email: 'hello@nebulacomponents.shop',
+    availableLanguage: 'English',
+  },
+  sameAs: [
+    'https://www.linkedin.com/company/nebula-components',
+    'https://github.com/mikeholownych',
+  ],
+  founder: {
+    '@type': 'Person',
+    '@id': 'https://nebulacomponents.shop/#founder',
+    name: 'Mike Holownych',
+    jobTitle: 'Founder',
+    url: 'https://nebulacomponents.shop/company/team',
+    sameAs: [
+      'https://www.linkedin.com/in/mikeholownych',
+      'https://github.com/mikeholownych',
+    ],
+    worksFor: { '@id': 'https://nebulacomponents.shop/#organization' },
+  },
 }
 
 export const websiteSchema = {

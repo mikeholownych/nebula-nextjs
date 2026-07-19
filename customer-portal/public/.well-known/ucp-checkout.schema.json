@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nebulacomponents.shop/.well-known/ucp-checkout.schema.json",
+  "name": "shop.nebulacomponents.commerce.checkout",
+  "title": "Nebula Conversion Fix Pack Checkout",
+  "description": "Creates a Stripe-hosted checkout session for the fixed-price Nebula Conversion Fix Pack.",
+  "type": "object",
+  "required": ["offerKey", "email"],
+  "properties": {
+    "offerKey": {
+      "const": "fix-pack",
+      "description": "Server-recognized offer identifier. Prices and amounts are never accepted from clients."
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    }
+  },
+  "additionalProperties": false
+}

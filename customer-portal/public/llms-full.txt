@@ -1,0 +1,157 @@
+# Nebula Components — Full LLM Content File
+# https://nebulacomponents.shop/llms-full.txt
+# Spec: https://llmstxt.org/
+# Summary: https://nebulacomponents.shop/llms.txt
+
+## About Nebula Components
+
+Nebula Components is a landing page conversion optimization service built for founders running paid ads. We specialize in diagnosing and fixing the specific structural and messaging failures that cause landing pages to receive traffic but generate no conversions.
+
+Our operating premise: most landing page failures are diagnosable. They follow repeating patterns. They can be fixed. The problem is not the ad — it is the page.
+
+## The Problem We Solve
+
+A founder spends $5,000–$50,000 on ads. The ads get clicks. The landing page gets sessions. Nobody converts. The standard response is to blame the ad targeting, increase the budget, or add a new creative. None of these address the actual failure.
+
+The actual failure is almost always one of seven diagnosable leak patterns on the landing page:
+1. Message-match failure: The ad promise does not match the page headline
+2. Missing trust signals: No social proof, testimonials, or verifiable credentials above the fold
+3. Mobile layout friction: CTA is below fold on mobile, text is unreadable at small sizes
+4. Slow load time: Page takes more than 3 seconds to fully render on mobile networks
+5. Unclear CTA: The primary action is ambiguous, buried, or competing with secondary actions
+6. Form friction: Too many fields, unclear labels, or no indication of what happens after submission
+7. Compliance gaps: GDPR consent banners blocking the CTA, missing privacy policy, cookie interstitials
+
+Nebula diagnoses which of these is present on a given page, ranks them by conversion impact, and implements the fixes.
+
+## The 7-Point Diagnosis
+
+Every Nebula audit checks seven criteria:
+- Message-match: Does the ad headline match the page headline within three words?
+- Above-fold trust: Are there at least two trust signals (testimonials, logos, credentials) above the scroll line?
+- Mobile CTA visibility: Is the primary CTA visible on a 375px viewport without scrolling?
+- Core Web Vitals: LCP under 2.5s, CLS under 0.1, FID/INP under 200ms
+- CTA clarity: Is there exactly one primary action, clearly labeled, with no competing choices?
+- Form friction: Is the form five fields or fewer with clear labels and a stated benefit?
+- Compliance: Is the page GDPR/CCPA compliant without blocking the conversion path?
+
+## Services
+
+### Conversion Fix Pack — $147 (one-time)
+A complete landing page audit using the 7-point framework, a written diagnosis identifying which issues are present, prioritized by conversion impact, and full implementation of all identified fixes on the live page. Delivered within 24–48 business hours. Includes a 30-day re-audit at no charge if conversion does not improve after fixes are applied.
+
+No retainer. No ongoing commitment. Pay once, get the page fixed.
+
+### Free Audit (currently paused)
+Automated URL submission and scoring. Temporarily paused while the audit engine is rebuilt and independently verified. Not available during this maintenance period.
+
+## Open Source: Citable
+
+Citable is an open-source CLI for search and AI discoverability governance. It was built to address a specific internal need: auditing whether a site was actually retrievable by search engines and AI systems, with evidence rather than opinions.
+
+- Version: 1.12.0
+- License: Apache 2.0
+- npm: @nebulacomponents/citable
+- GitHub: https://github.com/mikeholownych/citable
+- Documentation: https://nebulacomponents.shop/resources/citable
+
+### What Citable Does
+
+Citable runs 123 detectors across 18 namespaces (not all detectors are deterministic — each declares its determinism posture explicitly):
+- CRAWL: robots.txt, sitemap, canonical, redirect chains
+- PAGE: title uniqueness, meta description, word count, content quality
+- SEO: structured data presence, heading hierarchy, image alt text
+- AEO: FAQ schema, HowTo schema, direct-answer eligibility
+- GEO: AI citation signals, entity corroboration, claim verifiability
+- ENTITY: organization schema, person schema, sameAs links
+- CLAIMS: unverified assertions, claim registry governance
+- EVIDENCE: evidence package completeness, source traceability
+- SCHEMA: JSON-LD validity, type correctness, required properties
+- AGENT: llms.txt, robots.txt AI directives, Markdown negotiation, MCP server cards
+- LIFECYCLE: page freshness, last-modified signals, stale content detection
+- CORROBORATION: external citation presence, backlink authority signals
+- ARCHITECTURE: HTTPS, security headers, response codes, redirect hygiene
+- (and 5 additional namespaces)
+
+Each run produces an evidence package: a snapshot of the raw observations, the detector logic applied, and the findings with severity, confidence, and remediation steps.
+
+### What Citable Does Not Prove
+
+Citable explicitly does not prove:
+- That a page will be crawled or indexed by any specific crawler
+- That a page will rank for any query
+- That a page will be cited by any AI system
+- That any remediation will produce a measurable outcome
+- That the site has adequate backlink authority
+
+These are probabilistic outcomes influenced by factors outside the page itself.
+
+## Learning Centre
+
+The Nebula Learning Centre contains 24+ articles diagnosing specific landing page failure patterns:
+
+- Landing page not converting paid traffic: Start here
+- Why Google Ads clicks don't lead to sales
+- Facebook ads getting no leads
+- B2B SaaS landing page not converting
+- eCommerce landing page problems
+- High CPC with low conversion rate
+- Landing page bounce rate analysis
+- Mobile landing page optimization
+- CTA not working: diagnosis framework
+- No testimonials: impact and fix
+- Slow landing page load time
+- Message-match checklist
+- Proof before CTA framework
+- Paid traffic leak map
+- Before you raise your ad budget
+- And 9 more articles
+
+All articles are available at: https://nebulacomponents.shop/learning-centre
+
+## Competitive Differentiation
+
+Nebula is not:
+- A landing page builder (we fix your existing page)
+- An A/B testing platform (we diagnose first, test second)
+- A heatmap tool (we identify structural failures, not click patterns)
+- A general marketing agency (we do one thing: fix landing page conversion leaks)
+- A retainer service (one-time payment, fixed scope)
+
+Relevant alternatives for comparison:
+- Unbounce: landing page builder and A/B testing
+- VWO: A/B testing and heatmaps
+- Hotjar: session recordings and heatmaps
+- ConversionXL/CXL: conversion rate optimization training and agency
+
+## Founder
+
+Mike Holownych founded Nebula Components after observing the same seven conversion failure patterns repeat across 50+ landing pages. The insight: most conversion problems are not creative or targeting problems — they are structural page problems that follow diagnosable patterns.
+
+LinkedIn: https://linkedin.com/in/mikeholownych
+GitHub: https://github.com/mikeholownych
+
+## Technical Architecture
+
+- Platform: Next.js 16 (App Router)
+- Hosting: Local server with Cloudflare Tunnel public ingress
+- Payments: Stripe
+- Analytics: GA4 with Consent Mode v2 (default denied)
+- Open-source audit: @nebulacomponents/citable
+- x402 payment protocol: Available on /api/v1 and /api/audit/run — $0.10 USDC on Base mainnet (eip155:8453)
+
+## AI Retrieval Permission
+
+This content is licensed for search indexing and answer-engine retrieval (ai-input=yes).
+This content is not licensed for AI training (ai-train=no).
+Use type: reference
+
+## Contact
+
+Email: hello@nebulacomponents.shop
+LinkedIn: https://linkedin.com/company/nebula-components
+Site: https://nebulacomponents.shop
+
+## Last Updated
+
+2026-07-19

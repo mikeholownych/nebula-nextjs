@@ -1,0 +1,29 @@
+{
+  "serverInfo": {
+    "name": "Nebula Components MCP",
+    "version": "1.0.0",
+    "description": "Landing page conversion optimization tools and audit capabilities"
+  },
+  "transport": {
+    "type": "http",
+    "endpoint": "https://nebulacomponents.shop/mcp"
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": false,
+    "prompts": false
+  },
+  "tools": [
+    {
+      "name": "audit_landing_page",
+      "description": "Run a free conversion audit on a landing page URL",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": { "type": "string", "description": "The landing page URL to audit" }
+        },
+        "required": ["url"]
+      }
+    }
+  ]
+}

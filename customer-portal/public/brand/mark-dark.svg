@@ -1,0 +1,6 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Nebula Components">
+  <rect x="9"  y="9"  width="3" height="30" fill="#F5F5F5"/>
+  <polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/>
+  <rect x="36" y="9"  width="3" height="30" fill="#F5F5F5"/>
+  <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+</svg>

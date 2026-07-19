@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nebula Components — Logo System v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:    #050505;
+  --g900:     #111111;
+  --g800:     #1C1C1C;
+  --g700:     #2A2A2A;
+  --g500:     #6B7280;
+  --g200:     #D1D5DB;
+  --white:    #F5F5F5;
+  --em:       #10B981;
+  --em-deep:  #059669;
+  --sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --mono: "DM Mono", "JetBrains Mono", ui-monospace, monospace;
+}
+
+html, body {
+  background: #0C0C0C;
+  color: var(--white);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ──────────────────────────────────── */
+.s { padding: 72px 64px; border-bottom: 1px solid #161616; }
+.label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--g500);
+  margin-bottom: 48px;
+}
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+.g4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+.col { display: flex; flex-direction: column; gap: 32px; }
+.row { display: flex; align-items: center; gap: 16px; }
+
+/* ── Cell ────────────────────────────────────── */
+.cell {
+  background: #111;
+  border: 1px solid #1E1E1E;
+  border-radius: 3px;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.cell.on-light  { background: #F5F5F5; }
+.cell.on-paper  { background: #EBEBEB; }
+.cell.on-em     { background: var(--em); }
+.cell.on-white  { background: #FFFFFF; }
+.cell.on-black  { background: #000000; }
+.cell.on-g8     { background: var(--g800); }
+
+.cap {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--g500);
+  text-align: center;
+}
+.cell.on-light .cap,
+.cell.on-paper .cap,
+.cell.on-em    .cap,
+.cell.on-white .cap { color: rgba(0,0,0,.35); }
+</style>
+</head>
+<body>
+
+
+<!-- ══ HERO ═══════════════════════════════════════════ -->
+<div class="s" style="background:#050505; padding:112px 64px 96px; border-bottom:1px solid #0F0F0F;">
+  <div style="max-width:880px; margin:0 auto;">
+
+    <!-- Primary lockup at presentation scale -->
+    <div style="display:flex; align-items:center; gap:18px; margin-bottom:72px;">
+
+      <!-- MARK — refined: 3px strokes on 48×48 -->
+      <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="9"  y="9"  width="3" height="30" fill="#F5F5F5"/>
+        <polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/>
+        <rect x="36" y="9"  width="3" height="30" fill="#F5F5F5"/>
+        <!-- emerald signal: thin precision tab, right pillar top -->
+        <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+      </svg>
+
+      <!-- Wordmark -->
+      <div style="display:flex; flex-direction:column; gap:4px; line-height:1;">
+        <span style="font-family:'DM Sans',sans-serif; font-weight:500; font-size:19px; letter-spacing:-0.03em; color:#F5F5F5;">Nebula Components</span>
+        <span style="font-family:'DM Mono',monospace; font-weight:400; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#6B7280;">Conversion Diagnostics</span>
+      </div>
+
+    </div>
+
+    <p style="font-family:'DM Mono',monospace; font-size:10px; color:#2A2A2A; letter-spacing:0.12em; text-transform:uppercase;">Primary horizontal lockup — dark background</p>
+  </div>
+</div>
+
+
+<!-- ══ 01 MARK VARIANTS ═══════════════════════════════ -->
+<div class="s">
+  <div class="label">01 — Mark variants</div>
+  <div class="g4">
+
+    <div class="cell" style="background:#0A0A0A;">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect x="9"  y="9"  width="3" height="30" fill="#F5F5F5"/>
+        <polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/>
+        <rect x="36" y="9"  width="3" height="30" fill="#F5F5F5"/>
+        <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+      </svg>
+      <span class="cap">Standard</span>
+    </div>
+
+    <div class="cell on-light">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect x="9"  y="9"  width="3" height="30" fill="#111"/>
+        <polygon points="12,9 15,9 36,39 33,39" fill="#111"/>
+        <rect x="36" y="9"  width="3" height="30" fill="#111"/>
+        <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+      </svg>
+      <span class="cap">On light</span>
+    </div>
+
+    <div class="cell" style="background:#0A0A0A;">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect x="9"  y="9"  width="3" height="30" fill="#10B981"/>
+        <polygon points="12,9 15,9 36,39 33,39" fill="#10B981"/>
+        <rect x="36" y="9"  width="3" height="30" fill="#10B981"/>
+        <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+      </svg>
+      <span class="cap">Emerald mono</span>
+    </div>
+
+    <div class="cell on-em">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect x="9"  y="9"  width="3" height="30" fill="#050505"/>
+        <polygon points="12,9 15,9 36,39 33,39" fill="#050505"/>
+        <rect x="36" y="9"  width="3" height="30" fill="#050505"/>
+        <rect x="34" y="6" width="7" height="2.5" fill="#050505"/>
+      </svg>
+      <span class="cap">On emerald</span>
+    </div>
+
+  </div>
+
+  <!-- Size row -->
+  <div style="margin-top:32px; display:flex; align-items:flex-end; gap:24px;">
+    <div class="cell" style="background:#0A0A0A; padding:24px 20px; gap:12px;">
+      <svg width="16" height="16" viewBox="0 0 48 48" fill="none">
+        <rect x="9" y="9" width="3" height="30" fill="#F5F5F5"/>
+        <polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/>
+        <rect x="36" y="9" width="3" height="30" fill="#F5F5F5"/>
+        <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+      </svg>
+      <span class="cap">16px</span>
+    </div>
+    <div class="cell" style="background:#0A0A0A; padding:24px 20px; gap:12px;">
+      <svg width="24" height="24" viewBox="0 0 48 48" fill="none">
+        <rect x="9" y="9" width="3" height="30" fill="#F5F5F5"/>
+        <polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/>
+        <rect x="36" y="9" width="3" height="30" fill="#F5F5F5"/>
+        <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+      </svg>
+      <span class="cap">24px</span>
+    </div>
+    <div class="cell" style="background:#0A0A0A; padding:28px; gap:14px;">
+      <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
+        <rect x="9" y="9" width="3" height="30" fill="#F5F5F5"/>
+        <polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/>
+        <rect x="36" y="9" width="3" height="30" fill="#F5F5F5"/>
+        <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+      </svg>
+      <span class="cap">32px</span>
+    </div>
+    <div class="cell" style="background:#0A0A0A; padding:32px; gap:16px; flex:1; align-items:flex-start;">
+      <svg width="96" height="96" viewBox="0 0 48 48" fill="none">
+        <rect x="9" y="9" width="3" height="30" fill="#F5F5F5"/>
+        <polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/>
+        <rect x="36" y="9" width="3" height="30" fill="#F5F5F5"/>
+        <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+      </svg>
+      <span class="cap">96px — app icon</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ 02 LOCKUPS ═════════════════════════════════════ -->
+<div class="s">
+  <div class="label">02 — Lockups</div>
+  <div class="col">
+
+    <!-- A: Primary horizontal -->
+    <div class="cell" style="background:#070707; padding:48px 56px; align-items:flex-start; gap:0;">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <svg width="30" height="30" viewBox="0 0 48 48" fill="none">
+          <rect x="9"  y="9"  width="3" height="30" fill="#F5F5F5"/>
+          <polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/>
+          <rect x="36" y="9"  width="3" height="30" fill="#F5F5F5"/>
+          <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+        </svg>
+        <div style="display:flex; flex-direction:column; gap:4px; line-height:1;">
+          <span style="font-family:'DM Sans',sans-serif; font-weight:500; font-size:17px; letter-spacing:-0.03em; color:#F5F5F5;">Nebula Components</span>
+          <span style="font-family:'DM Mono',monospace; font-weight:400; font-size:9.5px; letter-spacing:0.14em; text-transform:uppercase; color:#6B7280;">Conversion Diagnostics</span>
+        </div>
+      </div>
+      <div style="margin-top:20px; font-family:'DM Mono',monospace; font-size:10px; color:#2A2A2A; letter-spacing:0.1em; text-transform:uppercase;">Primary horizontal</div>
+    </div>
+
+    <!-- B: Compact nav -->
+    <div class="cell" style="background:#070707; padding:32px 48px; align-items:flex-start; gap:0;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <svg width="22" height="22" viewBox="0 0 48 48" fill="none">
+          <rect x="9"  y="9"  width="3" height="30" fill="#F5F5F5"/>
+          <polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/>
+          <rect x="36" y="9"  width="3" height="30" fill="#F5F5F5"/>
+          <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+        </svg>
+        <span style="font-family:'DM Sans',sans-serif; font-weight:500; font-size:14px; letter-spacing:-0.025em; color:#F5F5F5;">Nebula <span style="font-weight:300; color:#6B7280; letter-spacing:0;">Components</span></span>
+      </div>
+      <div style="margin-top:16px; font-family:'DM Mono',monospace; font-size:10px; color:#2A2A2A; letter-spacing:0.1em; text-transform:uppercase;">Compact nav / header</div>
+    </div>
+
+    <!-- C: Stacked -->
+    <div class="cell" style="background:#070707; padding:56px; align-items:center; gap:0;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+        <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
+          <rect x="9"  y="9"  width="3" height="30" fill="#F5F5F5"/>
+          <polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/>
+          <rect x="36" y="9"  width="3" height="30" fill="#F5F5F5"/>
+          <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+        </svg>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:3px; line-height:1;">
+          <span style="font-family:'DM Sans',sans-serif; font-weight:500; font-size:15px; letter-spacing:-0.02em; color:#F5F5F5;">Nebula Components</span>
+          <span style="font-family:'DM Mono',monospace; font-weight:400; font-size:9px; letter-spacing:0.18em; text-transform:uppercase; color:#6B7280;">Conversion Diagnostics</span>
+        </div>
+      </div>
+      <div style="margin-top:24px; font-family:'DM Mono',monospace; font-size:10px; color:#2A2A2A; letter-spacing:0.1em; text-transform:uppercase;">Stacked — social / app store</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══ 03 LIGHT ════════════════════════════════════════ -->
+<div class="s" style="background:#F0F0F0;">
+  <div class="label" style="color:#BBB;">03 — Light backgrounds</div>
+  <div class="g2">
+
+    <div class="cell on-paper" style="padding:56px; align-items:flex-start; border-color:#D8D8D8;">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <svg width="30" height="30" viewBox="0 0 48 48" fill="none">
+          <rect x="9"  y="9"  width="3" height="30" fill="#111"/>
+          <polygon points="12,9 15,9 36,39 33,39" fill="#111"/>
+          <rect x="36" y="9"  width="3" height="30" fill="#111"/>
+          <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+        </svg>
+        <div style="display:flex; flex-direction:column; gap:4px; line-height:1;">
+          <span style="font-family:'DM Sans',sans-serif; font-weight:500; font-size:17px; letter-spacing:-0.03em; color:#111;">Nebula Components</span>
+          <span style="font-family:'DM Mono',monospace; font-weight:400; font-size:9.5px; letter-spacing:0.14em; text-transform:uppercase; color:#999;">Conversion Diagnostics</span>
+        </div>
+      </div>
+      <span style="margin-top:20px; font-family:'DM Mono',monospace; font-size:10px; color:#BBB; letter-spacing:0.1em; text-transform:uppercase;">Standard on light</span>
+    </div>
+
+    <div class="cell on-white" style="padding:56px; align-items:flex-start; border-color:#D8D8D8;">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <svg width="30" height="30" viewBox="0 0 48 48" fill="none">
+          <rect x="9"  y="9"  width="3" height="30" fill="#111"/>
+          <polygon points="12,9 15,9 36,39 33,39" fill="#111"/>
+          <rect x="36" y="9"  width="3" height="30" fill="#111"/>
+          <!-- monochrome: cap is also black -->
+          <rect x="34" y="6" width="7" height="2.5" fill="#111"/>
+        </svg>
+        <div style="display:flex; flex-direction:column; gap:4px; line-height:1;">
+          <span style="font-family:'DM Sans',sans-serif; font-weight:500; font-size:17px; letter-spacing:-0.03em; color:#111;">Nebula Components</span>
+          <span style="font-family:'DM Mono',monospace; font-weight:400; font-size:9.5px; letter-spacing:0.14em; text-transform:uppercase; color:#999;">Conversion Diagnostics</span>
+        </div>
+      </div>
+      <span style="margin-top:20px; font-family:'DM Mono',monospace; font-size:10px; color:#BBB; letter-spacing:0.1em; text-transform:uppercase;">Black mono — print</span>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══ 04 MONOCHROME ══════════════════════════════════ -->
+<div class="s">
+  <div class="label">04 — Monochrome &amp; reversed</div>
+  <div class="g4">
+
+    <div class="cell on-black" style="border-color:#1A1A1A;">
+      <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
+        <rect x="9" y="9" width="3" height="30" fill="#FFF"/>
+        <polygon points="12,9 15,9 36,39 33,39" fill="#FFF"/>
+        <rect x="36" y="9" width="3" height="30" fill="#FFF"/>
+        <rect x="34" y="6" width="7" height="2.5" fill="#FFF"/>
+      </svg>
+      <span class="cap">White on black</span>
+    </div>
+
+    <div class="cell on-white" style="border-color:#DDD;">
+      <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
+        <rect x="9" y="9" width="3" height="30" fill="#000"/>
+        <polygon points="12,9 15,9 36,39 33,39" fill="#000"/>
+        <rect x="36" y="9" width="3" height="30" fill="#000"/>
+        <rect x="34" y="6" width="7" height="2.5" fill="#000"/>
+      </svg>
+      <span class="cap" style="color:#AAA;">Black on white</span>
+    </div>
+
+    <div class="cell on-em">
+      <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
+        <rect x="9" y="9" width="3" height="30" fill="#050505"/>
+        <polygon points="12,9 15,9 36,39 33,39" fill="#050505"/>
+        <rect x="36" y="9" width="3" height="30" fill="#050505"/>
+        <rect x="34" y="6" width="7" height="2.5" fill="#050505"/>
+      </svg>
+      <span class="cap">Dark on emerald</span>
+    </div>
+
+    <div class="cell on-g8">
+      <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
+        <rect x="9" y="9" width="3" height="30" fill="#F5F5F5"/>
+        <polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/>
+        <rect x="36" y="9" width="3" height="30" fill="#F5F5F5"/>
+        <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+      </svg>
+      <span class="cap">Standard on graphite</span>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══ 05 COLOUR ══════════════════════════════════════ -->
+<div class="s">
+  <div class="label">05 — Colour system</div>
+  <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end;">
+
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div style="width:52px; height:52px; background:#050505; border:1px solid #222; border-radius:2px;"></div>
+      <span style="font-family:var(--mono); font-size:9px; color:var(--g500); letter-spacing:.04em;">#050505</span>
+      <span style="font-family:var(--mono); font-size:9px; color:#333;">Near Black</span>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div style="width:52px; height:52px; background:#1C1C1C; border-radius:2px;"></div>
+      <span style="font-family:var(--mono); font-size:9px; color:var(--g500); letter-spacing:.04em;">#1C1C1C</span>
+      <span style="font-family:var(--mono); font-size:9px; color:#333;">Graphite</span>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div style="width:52px; height:52px; background:#2A2A2A; border-radius:2px;"></div>
+      <span style="font-family:var(--mono); font-size:9px; color:var(--g500); letter-spacing:.04em;">#2A2A2A</span>
+      <span style="font-family:var(--mono); font-size:9px; color:#333;">Graphite Mid</span>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div style="width:52px; height:52px; background:#6B7280; border-radius:2px;"></div>
+      <span style="font-family:var(--mono); font-size:9px; color:var(--g500); letter-spacing:.04em;">#6B7280</span>
+      <span style="font-family:var(--mono); font-size:9px; color:#333;">Slate</span>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div style="width:52px; height:52px; background:#F5F5F5; border-radius:2px;"></div>
+      <span style="font-family:var(--mono); font-size:9px; color:var(--g500); letter-spacing:.04em;">#F5F5F5</span>
+      <span style="font-family:var(--mono); font-size:9px; color:#333;">Off White</span>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px; margin-left:20px;">
+      <div style="width:52px; height:52px; background:#10B981; border-radius:2px;"></div>
+      <span style="font-family:var(--mono); font-size:9px; color:#10B981; letter-spacing:.04em;">#10B981</span>
+      <span style="font-family:var(--mono); font-size:9px; color:#10B981;">Emerald</span>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div style="width:52px; height:52px; background:#059669; border-radius:2px;"></div>
+      <span style="font-family:var(--mono); font-size:9px; color:#059669; letter-spacing:.04em;">#059669</span>
+      <span style="font-family:var(--mono); font-size:9px; color:#059669;">Emerald Deep</span>
+    </div>
+
+  </div>
+
+  <p style="font-family:var(--mono); font-size:11px; color:var(--g500); margin-top:36px; max-width:600px; line-height:1.9; letter-spacing:.02em;">
+    Emerald = diagnostic signal only. Active state, confirmation, correction output. Never decorative. At most two appearances per screen.
+  </p>
+</div>
+
+
+<!-- ══ 06 TYPOGRAPHY ══════════════════════════════════ -->
+<div class="s">
+  <div class="label">06 — Typography</div>
+  <div style="max-width:680px; display:flex; flex-direction:column; gap:28px;">
+
+    <div style="padding-bottom:24px; border-bottom:1px solid #161616;">
+      <div style="font-family:var(--mono); font-size:9px; color:var(--g500); letter-spacing:.14em; text-transform:uppercase; margin-bottom:10px;">Display · DM Sans 500 · −3% tracking</div>
+      <div style="font-family:'DM Sans',sans-serif; font-weight:500; font-size:34px; letter-spacing:-0.03em; color:var(--white); line-height:1.1;">Landing Page Audit</div>
+    </div>
+
+    <div style="padding-bottom:24px; border-bottom:1px solid #161616;">
+      <div style="font-family:var(--mono); font-size:9px; color:var(--g500); letter-spacing:.14em; text-transform:uppercase; margin-bottom:10px;">Heading · DM Sans 500 · −2% tracking</div>
+      <div style="font-family:'DM Sans',sans-serif; font-weight:500; font-size:21px; letter-spacing:-0.02em; color:var(--white); line-height:1.3;">Conversion Diagnostics System</div>
+    </div>
+
+    <div style="padding-bottom:24px; border-bottom:1px solid #161616;">
+      <div style="font-family:var(--mono); font-size:9px; color:var(--g500); letter-spacing:.14em; text-transform:uppercase; margin-bottom:10px;">Body · DM Sans 400 · −1% tracking</div>
+      <div style="font-family:'DM Sans',sans-serif; font-weight:400; font-size:15px; letter-spacing:-0.01em; color:#9CA3AF; line-height:1.75; max-width:440px;">Nebula Components inspects landing pages, identifies structural and messaging failures, preserves evidence, and recommends precise corrective action.</div>
+    </div>
+
+    <div>
+      <div style="font-family:var(--mono); font-size:9px; color:var(--g500); letter-spacing:.14em; text-transform:uppercase; margin-bottom:10px;">Data · DM Mono 400</div>
+      <div style="font-family:'DM Mono',monospace; font-weight:400; font-size:12px; letter-spacing:.02em; color:#10B981; line-height:2;">
+        audit.score: 34/100<br>
+        critical_issues: 7<br>
+        estimated_revenue_impact: $2,400/mo<br>
+        status: DIAGNOSIS_COMPLETE
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══ 07 ANNOTATION ══════════════════════════════════ -->
+<div class="s">
+  <div class="label">07 — Mark anatomy</div>
+  <div class="g2">
+
+    <div>
+      <svg width="220" height="220" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; background:#0A0A0A; border:1px solid #1A1A1A; border-radius:3px;">
+        <!-- subtle grid -->
+        <line x1="0" y1="9"  x2="48" y2="9"  stroke="#161616" stroke-width=".5"/>
+        <line x1="0" y1="39" x2="48" y2="39" stroke="#161616" stroke-width=".5"/>
+        <line x1="9"  y1="0" x2="9"  y2="48" stroke="#161616" stroke-width=".5"/>
+        <line x1="39" y1="0" x2="39" y2="48" stroke="#161616" stroke-width=".5"/>
+        <!-- mark -->
+        <rect x="9"  y="9"  width="3" height="30" fill="#F5F5F5"/>
+        <polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/>
+        <rect x="36" y="9"  width="3" height="30" fill="#F5F5F5"/>
+        <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+      </svg>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:18px; padding-top:4px;">
+      <div>
+        <div style="font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--g500); margin-bottom:6px;">Left pillar</div>
+        <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:#9CA3AF; line-height:1.65;">Input — the landing page under examination. Raw, unprocessed.</div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--g500); margin-bottom:6px;">Diagonal</div>
+        <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:#9CA3AF; line-height:1.65;">The scan path — diagnostic analysis reducing complexity to a clear finding.</div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--g500); margin-bottom:6px;">Right pillar</div>
+        <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:#9CA3AF; line-height:1.65;">Output — the corrected page. The recommendation delivered.</div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:#10B981; margin-bottom:6px;">Emerald tab</div>
+        <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:#9CA3AF; line-height:1.65;">Diagnosis complete. Correction identified. One signal per composition.</div>
+      </div>
+      <div style="padding-top:14px; border-top:1px solid #161616;">
+        <div style="font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--g500); margin-bottom:6px;">Also reads as</div>
+        <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:#9CA3AF; line-height:1.7;">Abstract N · precision reticle · components converging to system · structured path from problem to solution</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══ 08 CONTEXT ═════════════════════════════════════ -->
+<div class="s">
+  <div class="label">08 — In context</div>
+  <div class="g3">
+
+    <!-- Audit badge -->
+    <div>
+      <div style="font-family:var(--mono); font-size:9px; color:var(--g500); letter-spacing:.12em; text-transform:uppercase; margin-bottom:14px;">Audit badge</div>
+      <div style="background:#0A140E; border:1px solid rgba(16,185,129,.2); border-radius:2px; padding:10px 16px; display:inline-flex; align-items:center; gap:9px;">
+        <svg width="14" height="14" viewBox="0 0 48 48" fill="none">
+          <rect x="9" y="9" width="3" height="30" fill="#F5F5F5"/>
+          <polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/>
+          <rect x="36" y="9" width="3" height="30" fill="#F5F5F5"/>
+          <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+        </svg>
+        <span style="font-family:var(--mono); font-size:10px; letter-spacing:.1em; color:#10B981; text-transform:uppercase;">Audit Complete</span>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <div>
+      <div style="font-family:var(--mono); font-size:9px; color:var(--g500); letter-spacing:.12em; text-transform:uppercase; margin-bottom:14px;">Navigation</div>
+      <div style="background:#070707; border-bottom:1px solid #161616; padding:13px 20px; display:flex; align-items:center; justify-content:space-between; border-radius:2px;">
+        <div style="display:flex; align-items:center; gap:9px;">
+          <svg width="18" height="18" viewBox="0 0 48 48" fill="none">
+            <rect x="9" y="9" width="3" height="30" fill="#F5F5F5"/>
+            <polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/>
+            <rect x="36" y="9" width="3" height="30" fill="#F5F5F5"/>
+            <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+          </svg>
+          <span style="font-family:'DM Sans',sans-serif; font-weight:500; font-size:13px; letter-spacing:-0.02em; color:#F5F5F5;">Nebula</span>
+        </div>
+        <span style="font-family:var(--mono); font-size:9px; color:var(--g500); letter-spacing:.08em;">Run Audit →</span>
+      </div>
+    </div>
+
+    <!-- Report card -->
+    <div>
+      <div style="font-family:var(--mono); font-size:9px; color:var(--g500); letter-spacing:.12em; text-transform:uppercase; margin-bottom:14px;">Report header</div>
+      <div style="background:#0D0D0D; border:1px solid #1A1A1A; border-radius:2px; padding:18px 20px;">
+        <div style="display:flex; align-items:center; gap:7px; margin-bottom:10px;">
+          <svg width="12" height="12" viewBox="0 0 48 48" fill="none">
+            <rect x="9" y="9" width="3" height="30" fill="#F5F5F5"/>
+            <polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/>
+            <rect x="36" y="9" width="3" height="30" fill="#F5F5F5"/>
+            <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+          </svg>
+          <span style="font-family:var(--mono); font-size:9px; letter-spacing:.12em; color:var(--g500); text-transform:uppercase;">Nebula Audit Report</span>
+        </div>
+        <div style="font-family:'DM Sans',sans-serif; font-weight:500; font-size:14px; letter-spacing:-0.01em; color:#F5F5F5; margin-bottom:3px;">acme.co/pricing</div>
+        <div style="font-family:var(--mono); font-size:10px; color:#10B981;">Score: 41/100 · 9 issues found</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══ 09 MINIMUM SIZE ════════════════════════════════ -->
+<div class="s">
+  <div class="label">09 — Clear space &amp; minimum size</div>
+  <div style="display:flex; gap:64px; align-items:flex-start;">
+
+    <div>
+      <div style="font-family:var(--mono); font-size:9px; color:var(--g500); letter-spacing:.12em; text-transform:uppercase; margin-bottom:16px;">Clear space = 1× mark width</div>
+      <div style="position:relative; padding:32px; display:inline-block; border:1px dashed #222; border-radius:2px;">
+        <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
+          <rect x="9" y="9" width="3" height="30" fill="#F5F5F5"/>
+          <polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/>
+          <rect x="36" y="9" width="3" height="30" fill="#F5F5F5"/>
+          <rect x="34" y="6" width="7" height="2.5" fill="#10B981"/>
+        </svg>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-family:var(--mono); font-size:9px; color:var(--g500); letter-spacing:.12em; text-transform:uppercase; margin-bottom:16px;">Minimum sizes</div>
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <svg width="16" height="16" viewBox="0 0 48 48" fill="none"><rect x="9" y="9" width="3" height="30" fill="#F5F5F5"/><polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/><rect x="36" y="9" width="3" height="30" fill="#F5F5F5"/><rect x="34" y="6" width="7" height="2.5" fill="#10B981"/></svg>
+          <span style="font-family:var(--mono); font-size:10px; color:var(--g500);">16px — favicon minimum</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:14px;">
+          <svg width="20" height="20" viewBox="0 0 48 48" fill="none"><rect x="9" y="9" width="3" height="30" fill="#F5F5F5"/><polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/><rect x="36" y="9" width="3" height="30" fill="#F5F5F5"/><rect x="34" y="6" width="7" height="2.5" fill="#10B981"/></svg>
+          <span style="font-family:var(--mono); font-size:10px; color:var(--g500);">20px — nav with wordmark</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:14px;">
+          <svg width="32" height="32" viewBox="0 0 48 48" fill="none"><rect x="9" y="9" width="3" height="30" fill="#F5F5F5"/><polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/><rect x="36" y="9" width="3" height="30" fill="#F5F5F5"/><rect x="34" y="6" width="7" height="2.5" fill="#10B981"/></svg>
+          <span style="font-family:var(--mono); font-size:10px; color:var(--g500);">32px — badge / avatar</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:14px;">
+          <svg width="40" height="40" viewBox="0 0 48 48" fill="none"><rect x="9" y="9" width="3" height="30" fill="#F5F5F5"/><polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/><rect x="36" y="9" width="3" height="30" fill="#F5F5F5"/><rect x="34" y="6" width="7" height="2.5" fill="#10B981"/></svg>
+          <span style="font-family:var(--mono); font-size:10px; color:var(--g500);">40px — standard header</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ 10 SVG SOURCE ══════════════════════════════════ -->
+<div class="s" style="background:#050505;">
+  <div class="label">10 — SVG source</div>
+  <pre style="font-family:var(--mono); font-size:11.5px; color:#6B7280; line-height:2; max-width:800px; overflow-x:auto;"><code>&lt;!-- Nebula Components mark — standard (dark bg) --&gt;
+&lt;svg width="48" height="48" viewBox="0 0 48 48" fill="none"&gt;
+  &lt;rect x="9"  y="9"  width="3" height="30" fill="#F5F5F5"/&gt;
+  &lt;polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/&gt;
+  &lt;rect x="36" y="9"  width="3" height="30" fill="#F5F5F5"/&gt;
+  &lt;rect x="34" y="6" width="7" height="2.5" fill="#10B981"/&gt;
+&lt;/svg&gt;
+
+<span style="color:#2A2A2A;">&lt;!-- Light bg: swap #F5F5F5 → #111111 (emerald stays)
+     Mono black: all → #000000
+     Mono white: all → #FFFFFF
+     currentColor: all fills → "currentColor"  --&gt;</span></code></pre>
+</div>
+
+
+</body>
+</html>

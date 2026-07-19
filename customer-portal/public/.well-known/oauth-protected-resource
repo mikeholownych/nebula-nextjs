@@ -1,0 +1,7 @@
+{
+  "resource": "https://nebulacomponents.shop",
+  "authorization_servers": ["https://nebulacomponents.shop"],
+  "scopes_supported": ["read", "write"],
+  "bearer_methods_supported": ["header"],
+  "resource_signing_alg_values_supported": ["RS256"]
+}

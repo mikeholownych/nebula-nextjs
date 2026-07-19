@@ -1,0 +1,75 @@
+{
+  "$schema": "https://agentskills.io/schema/v0.2.0/index.schema.json",
+  "skills": [
+    {
+      "name": "link-headers",
+      "type": "http-headers",
+      "description": "RFC 8288 Link response headers for agent discovery — api-catalog, service-doc, and agent-skills relations",
+      "url": "https://nebulacomponents.shop/.well-known/agent-skills/link-headers/SKILL.md",
+      "sha256": ""
+    },
+    {
+      "name": "api-catalog",
+      "type": "well-known",
+      "description": "RFC 9727 API catalog at /.well-known/api-catalog (application/linkset+json)",
+      "url": "https://nebulacomponents.shop/.well-known/api-catalog",
+      "sha256": ""
+    },
+    {
+      "name": "mcp-server-card",
+      "type": "well-known",
+      "description": "MCP Server Card at /.well-known/mcp/server-card.json for Model Context Protocol auto-discovery",
+      "url": "https://nebulacomponents.shop/.well-known/mcp/server-card.json",
+      "sha256": ""
+    },
+    {
+      "name": "a2a-agent-card",
+      "type": "well-known",
+      "description": "A2A Agent Card at /.well-known/agent.json for agent-to-agent discovery",
+      "url": "https://nebulacomponents.shop/.well-known/agent.json",
+      "sha256": ""
+    },
+    {
+      "name": "oauth-discovery",
+      "type": "well-known",
+      "description": "OpenID Connect discovery at /.well-known/openid-configuration",
+      "url": "https://nebulacomponents.shop/.well-known/openid-configuration",
+      "sha256": ""
+    },
+    {
+      "name": "oauth-protected-resource",
+      "type": "well-known",
+      "description": "OAuth Protected Resource Metadata at /.well-known/oauth-protected-resource (RFC 9728)",
+      "url": "https://nebulacomponents.shop/.well-known/oauth-protected-resource",
+      "sha256": ""
+    },
+    {
+      "name": "acp-discovery",
+      "type": "well-known",
+      "description": "Agentic Commerce Protocol discovery at /.well-known/acp.json",
+      "url": "https://nebulacomponents.shop/.well-known/acp.json",
+      "sha256": ""
+    },
+    {
+      "name": "ucp-discovery",
+      "type": "well-known",
+      "description": "Universal Commerce Protocol at /.well-known/ucp",
+      "url": "https://nebulacomponents.shop/.well-known/ucp",
+      "sha256": ""
+    },
+    {
+      "name": "openapi",
+      "type": "openapi",
+      "description": "OpenAPI 3.1 spec at /openapi.json with MPP x-payment-info extensions on payable operations",
+      "url": "https://nebulacomponents.shop/openapi.json",
+      "sha256": ""
+    },
+    {
+      "name": "web-bot-auth",
+      "type": "well-known",
+      "description": "Web Bot Auth JWKS at /.well-known/http-message-signatures-directory for verifying signed bot requests",
+      "url": "https://nebulacomponents.shop/.well-known/http-message-signatures-directory",
+      "sha256": ""
+    }
+  ]
+}

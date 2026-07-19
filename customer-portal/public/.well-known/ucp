@@ -1,0 +1,26 @@
+{
+  "ucp": {
+    "version": "2026-04-08",
+    "services": {
+      "shop.nebulacomponents.commerce": [
+        {
+          "version": "2026-04-08",
+          "spec": "https://nebulacomponents.shop/ucp.md",
+          "transport": "rest",
+          "endpoint": "https://nebulacomponents.shop/api",
+          "schema": "https://nebulacomponents.shop/openapi.json"
+        }
+      ]
+    },
+    "capabilities": {
+      "shop.nebulacomponents.commerce.checkout": [
+        {
+          "version": "2026-04-08",
+          "spec": "https://nebulacomponents.shop/ucp.md",
+          "schema": "https://nebulacomponents.shop/.well-known/ucp-checkout.schema.json"
+        }
+      ]
+    },
+    "payment_handlers": {}
+  }
+}

@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from 'next'
 import { Karla } from 'next/font/google'
 import CookieConsent from './components/CookieConsent'
+import SiteNav from '@/components/SiteNav'
+import Footer from '@/components/Footer'
+import WebMCP from '@/components/WebMCP'
 import './globals.css'
 import { organizationSchema, websiteSchema } from './lib/schema'
 
@@ -18,14 +21,17 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://nebulacomponents.shop'),
-  title: 'Nebula Components',
-  description: 'Evidence-backed landing-page conversion guidance and implementation services',
+  title: {
+    default: 'Nebula Components — Landing Page Conversion Optimization',
+    template: '%s',
+  },
+  description: 'Evidence-backed landing page conversion diagnosis and implementation for founders spending on paid ads with low or zero conversions.',
   alternates: {
     canonical: 'https://nebulacomponents.shop',
   },
   openGraph: {
-    title: 'Nebula Components — Audit Engine Rebuild',
-    description: 'Landing-page audit scoring is paused while the evidence-backed engine is rebuilt.',
+    title: 'Nebula Components — Landing Page Conversion Optimization',
+    description: 'Evidence-backed landing page conversion diagnosis and implementation for founders spending on paid ads with low or zero conversions.',
     url: 'https://nebulacomponents.shop',
     siteName: 'Nebula Components',
     locale: 'en_US',
@@ -33,9 +39,18 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nebula Components — Audit Engine Rebuild',
-    description: 'Landing-page audit scoring is paused while the evidence-backed engine is rebuilt.',
+    title: 'Nebula Components — Landing Page Conversion Optimization',
+    description: 'Evidence-backed landing page conversion diagnosis and implementation for founders spending on paid ads with low or zero conversions.',
     creator: '@nebulacomponents',
+  },
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    shortcut: '/favicon.svg',
+    apple: '/favicon.png',
   },
 }
 
@@ -47,6 +62,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Agent discovery: llms.txt link tag for crawlers that don't read response headers */}
+        <link rel="describedby" href="/llms.txt" type="text/plain" />
         {/* GA4 with Consent Mode v2 */}
         <script
           dangerouslySetInnerHTML={{
@@ -86,8 +103,11 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-emerald-500 focus:text-black focus:rounded">
           Skip to main content
         </a>
+        <SiteNav />
         {children}
+        <Footer />
         <CookieConsent />
+        <WebMCP />
       </body>
     </html>
   )

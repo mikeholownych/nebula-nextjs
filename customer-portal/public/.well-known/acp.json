@@ -1,0 +1,15 @@
+{
+  "protocol": {
+    "name": "acp",
+    "version": "2026-01-30",
+    "supported_versions": ["2026-01-30"],
+    "documentation_url": "https://nebulacomponents.shop/acp.md"
+  },
+  "api_base_url": "https://nebulacomponents.shop/api",
+  "transports": ["rest"],
+  "capabilities": {
+    "services": ["checkout"],
+    "supported_currencies": ["usd"],
+    "supported_locales": ["en-US"]
+  }
+}

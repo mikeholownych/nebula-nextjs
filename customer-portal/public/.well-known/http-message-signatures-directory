@@ -1,0 +1,13 @@
+{
+  "keys": [
+    {
+      "kty": "EC",
+      "crv": "P-256",
+      "use": "sig",
+      "alg": "ES256",
+      "kid": "nebula-bot-2026",
+      "x": "6BeYtgnAVboLrBJQgi4wUdXM0Wi0aT3-Z7pGzkHA51I",
+      "y": "2fYz3sBgEAv-2nzemxOBHilHOEpkqRS-hxAyoB3q4Bc"
+    }
+  ]
+}

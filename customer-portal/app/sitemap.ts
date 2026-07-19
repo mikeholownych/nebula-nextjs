@@ -8,10 +8,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '',
     '/pricing',
     '/audit',
-    '/audit-lander',
     '/privacy-policy',
     '/data-rights',
     '/learning-centre',
+    '/case-studies',
+    '/resources',
+    '/resources/citable',
   ]
  
   // Learning centre articles (22 articles)
@@ -62,6 +64,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     })
   })
- 
+
+  // Case study slugs
+  const caseStudySlugs = [
+    'founder-ecommerce-48x-roas',
+    'b2b-saas-cut-cpc-in-half',
+    'agency-client-compliance-recovery',
+    'coaching-business-form-fills-from-zero',
+  ]
+
+  caseStudySlugs.forEach(slug => {
+    sitemapEntries.push({
+      url: `${baseUrl}/case-studies/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.8,
+    })
+  })
+
+  // paid-traffic-leak-map learning article (new)
+  sitemapEntries.push({
+    url: `${baseUrl}/learning-centre/paid-traffic-leak-map`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  })
+
   return sitemapEntries
 }

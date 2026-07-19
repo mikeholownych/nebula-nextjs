@@ -1,0 +1,20 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://nebulacomponents.shop/",
+      "service-doc": [
+        { "href": "https://nebulacomponents.shop/llms.txt", "type": "text/plain" },
+        { "href": "https://nebulacomponents.shop/openapi.json", "type": "application/json" }
+      ],
+      "describedby": [
+        { "href": "https://nebulacomponents.shop/.well-known/agent-skills/index.json", "type": "application/json" }
+      ],
+      "https://agenticcommerce.dev/rel/discovery": [
+        { "href": "https://nebulacomponents.shop/.well-known/acp.json", "type": "application/json" }
+      ],
+      "https://ucp.dev/rel/discovery": [
+        { "href": "https://nebulacomponents.shop/.well-known/ucp", "type": "application/json" }
+      ]
+    }
+  ]
+}

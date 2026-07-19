@@ -1,0 +1,31 @@
+{
+  "name": "Nebula Components",
+  "version": "1.0.0",
+  "description": "AI agent for landing page conversion optimization — audits, diagnoses, and fixes pages that aren't converting paid traffic.",
+  "url": "https://nebulacomponents.shop",
+  "supportedInterfaces": [
+    {
+      "type": "http",
+      "url": "https://nebulacomponents.shop/a2a",
+      "serviceUrl": "https://nebulacomponents.shop/a2a",
+      "transport": "https"
+    }
+  ],
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "skills": [
+    {
+      "id": "landing-page-audit",
+      "name": "Landing Page Audit",
+      "description": "Analyzes a landing page for conversion leaks: CRO, copy, trust signals, load speed, mobile UX, and ad-to-page message match."
+    },
+    {
+      "id": "conversion-fix",
+      "name": "Conversion Fix Implementation",
+      "description": "Implements audit findings — rewrites copy, fixes layout, improves CTAs, and delivers a production-ready page."
+    }
+  ]
+}
