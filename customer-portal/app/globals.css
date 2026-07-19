@@ -26,13 +26,15 @@
   --bg-elevated: #0a0a0a;
   --bg-panel: #111111;
   --fg: #ffffff;
-  --fg-muted: #737373;   /* Improved contrast: 4.67:1 on #050505 */
+  --fg-muted: #888888;   /* Canonical per tailwind.config.ts; ~5.7:1 on #050505 */
   --accent: #10b981;
   --accent-light: #34d399;
   --accent-dim: rgba(16, 185, 129, 0.1);
   --border: rgba(255, 255, 255, 0.06);
   --red: #ef4444;
   --red-dim: rgba(239, 68, 68, 0.15);
+  --warning: #f59e0b;    /* Canonical per tailwind.config.ts */
+  --warning-dim: rgba(245, 158, 11, 0.15);
   --radius: 12px;
 }
 
@@ -712,7 +714,7 @@ footer {
 .sample-score .score-num {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #fbbf24;
+  color: var(--warning);
 }
 .sample-score .score-divider {
   color: var(--fg-muted);
@@ -723,8 +725,8 @@ footer {
   color: var(--fg-muted);
 }
 .sample-score .score-grade {
-  background: rgba(251, 191, 36, 0.15);
-  color: #fbbf24;
+  background: var(--warning-dim);
+  color: var(--warning);
   padding: 4px 12px;
   border-radius: 100px;
   font-size: 13px;
@@ -938,6 +940,7 @@ footer {
   width: 8px;
   height: 8px;
   border-radius: 50%;
+  background: var(--accent);
 }
 
 .category-count {
@@ -971,9 +974,10 @@ footer {
 }
 
 .category-indicator {
-  width: 4px;
-  height: 24px;
-  border-radius: 2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
 }
 
 .category-header h3 {
