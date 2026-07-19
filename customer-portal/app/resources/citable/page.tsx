@@ -118,7 +118,7 @@ export default async function CitablePage() {
 .citable-page a { color: var(--hot); text-decoration: none; }
 .citable-page a:hover { text-decoration: underline; }
 .citable-page .wrap { width:min(1120px,92vw); margin:0 auto; padding:56px 0 96px; }
-.citable-page .hero { display:grid; gap:22px; padding:48px; border:1px solid var(--line); border-radius:24px; background:var(--panel); }
+.citable-page .hero { display:grid; gap:22px; padding:48px; border:1px solid var(--line); border-radius:24px; background:var(--panel); min-height:auto; align-items:normal; justify-content:normal; }
 .citable-page .eyebrow { color:var(--gold); text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:800; }
 .citable-page h1.citable-h1 { font-size:clamp(36px,5.5vw,64px); line-height:.94; margin:0; letter-spacing:-.05em; }
 .citable-page h2.citable-h2 { font-size:26px; margin:48px 0 14px; letter-spacing:-.03em; }
@@ -177,8 +177,8 @@ export default async function CitablePage() {
 .citable-page .release li { color:var(--muted); font-size:14px; line-height:1.55; }
 .citable-page .first-audit { border:1px solid rgba(16,185,129,.3); border-radius:16px; padding:32px; margin:24px 0; background:rgba(16,185,129,.03); }
 .citable-page .step-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin:16px 0; }
-.citable-page .step { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:20px; }
-.citable-page .step-num { color:var(--hot); font-weight:900; font-size:22px; margin-bottom:8px; }
+.citable-page .step { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:20px; text-align:center; }
+.citable-page .step-num { width:48px; height:48px; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; background:var(--hot); color:var(--bg); font-weight:900; font-size:22px; border-radius:50%; }
 .citable-page .step h4 { color:var(--text); font-size:15px; margin:0 0 6px; }
 .citable-page .step p { color:var(--muted); font-size:14px; line-height:1.5; margin:0; }
 .citable-page .commissioned-note { font-size:12px; color:var(--muted); border:1px solid var(--line); border-radius:8px; padding:8px 14px; margin-top:12px; display:inline-block; }
