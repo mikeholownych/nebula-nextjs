@@ -270,6 +270,7 @@ export default async function CitablePage() {
 .citable-page .badges > *:nth-child(8)  { animation-delay: 765ms; }
 .citable-page .badges > *:nth-child(9)  { animation-delay: 800ms; }
 .citable-page .badges > *:nth-child(10) { animation-delay: 835ms; }
+.citable-page .badges > *:nth-child(11) { animation-delay: 870ms; }
 
 /* ============================================================
    MICRO-INTERACTIONS
@@ -415,6 +416,15 @@ export default async function CitablePage() {
                 >
                   <span className="badge" style={{borderColor:`${statusColor(publishStatus)}55`,color:statusColor(publishStatus)}}>
                     publish {statusLabel(publishStatus)}
+                  </span>
+                </a>
+                <a
+                  href="https://github.com/mikeholownych/citable/actions/workflows/release-gates.yml"
+                  target="_blank" rel="noopener noreferrer"
+                  style={{textDecoration:'none'}}
+                >
+                  <span className="badge" style={{borderColor:`${statusColor(releaseGatesStatus)}55`,color:statusColor(releaseGatesStatus)}}>
+                    release-gates {statusLabel(releaseGatesStatus)}
                   </span>
                 </a>
                 <a

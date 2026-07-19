@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
     // TODO: Insert into analytics_events table
 
     return NextResponse.json({ success: true, events_received: events.length });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Analytics error:", error);
     return NextResponse.json(
       { error: "Failed to track events" },

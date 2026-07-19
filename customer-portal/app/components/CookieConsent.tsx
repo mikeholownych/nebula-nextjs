@@ -47,8 +47,8 @@ export default function CookieConsent() {
     setShowBanner(false);
     
     // Initialize GA4 if consented
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("consent", "update", {
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("consent", "update", {
         analytics_storage: "granted",
         ad_storage: "denied", // We don't run ads
         functionality_storage: "granted",
@@ -71,8 +71,8 @@ export default function CookieConsent() {
     setShowBanner(false);
     
     // Keep analytics disabled
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("consent", "update", {
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("consent", "update", {
         analytics_storage: "denied",
         ad_storage: "denied",
         functionality_storage: "granted",

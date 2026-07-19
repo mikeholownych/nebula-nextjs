@@ -1,8 +1,14 @@
 /**
  * GA4 Analytics Utilities with Consent-First Tracking
- * 
+ *
  * All events respect cookie consent before firing.
  */
+
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
 
 // Event types for type-safe tracking
 export type GAEventName =
@@ -56,8 +62,8 @@ function hasConsent(): boolean {
 function safeGtag(command: string, eventName: string, params?: GAEventParams): void {
   if (!hasConsent()) return;
   
-  if (typeof window !== "undefined" && (window as any).gtag) {
-    (window as any).gtag(command, eventName, params);
+  if (typeof window !== "undefined" && window.gtag) {
+    window.gtag(command, eventName, params);
   }
 }
 

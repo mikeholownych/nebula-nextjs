@@ -38,7 +38,6 @@ export default function ProcessingPage() {
     }, totalDuration / 50)
 
     // Cycle through messages
-    let currentMessage = 0
     const messageTimeouts: NodeJS.Timeout[] = []
     
     STATUS_MESSAGES.forEach((_, index) => {
