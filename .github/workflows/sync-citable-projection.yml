@@ -27,7 +27,16 @@ jobs:
       - run: npm ci --include=dev
       - run: npm run sync:citable
       - run: npm test -- --runInBand __tests__/citable-projection.test.ts
+      - name: Detect projection drift
+        id: projection-diff
+        run: |
+          if [[ -n "$(git status --porcelain -- data/citable-release.json public/llms.txt public/llms-full.txt)" ]]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: Open projection update pull request
+        if: steps.projection-diff.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v8
         with:
           branch: automation/citable-projection
