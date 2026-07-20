@@ -25,8 +25,12 @@ export default function ProcessingPage() {
   const [name, setName] = useState('')
 
   useEffect(() => {
-    // Simulate progress animation
+    // Simulate progress animation. Stepped coarsely (10 ticks, not 50) and
+    // driven by `transform: scaleX()` rather than `width` in the JSX below —
+    // width changes force a layout recalc on every tick; transform is
+    // compositor-only, so this scales to slow/low-end mobile without jank.
     const totalDuration = STATUS_MESSAGES.reduce((sum, m) => sum + m.duration, 0)
+    const steps = 10
     const progressInterval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
@@ -34,9 +38,9 @@ export default function ProcessingPage() {
           setStatus('ready')
           return 100
         }
-        return prev + 2
+        return prev + 100 / steps
       })
-    }, totalDuration / 50)
+    }, totalDuration / steps)
 
     // Cycle through messages
     const messageTimeouts: NodeJS.Timeout[] = []
@@ -76,12 +80,12 @@ export default function ProcessingPage() {
             {/* Progress Bar */}
             <div className="mb-6">
               <div className="h-3 w-full overflow-hidden rounded-full bg-border">
-                <div 
-                  className="h-full rounded-full bg-accent transition-all duration-300"
-                  style={{ width: `${progress}%` }}
+                <div
+                  className="h-full w-full origin-left rounded-full bg-accent transition-transform duration-1000 ease-linear"
+                  style={{ transform: `scaleX(${progress / 100})` }}
                 />
               </div>
-              <p className="mt-2 text-sm text-fg-muted">{progress}% complete</p>
+              <p className="mt-2 text-sm text-fg-muted">{Math.round(progress)}% complete</p>
             </div>
 
             {/* Status Message */}
