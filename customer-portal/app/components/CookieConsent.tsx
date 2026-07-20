@@ -14,26 +14,27 @@ interface ConsentState {
 }
 
 export default function CookieConsent() {
-  const [showBanner, setShowBanner] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  // Default true (not gated behind a mount effect): this renders in the
+  // initial server HTML so first-time visitors see it with no hydration
+  // delay — that delay was previously making this the page's LCP element
+  // (Lighthouse flagged elementRenderDelay ~350-440ms sitewide). Returning
+  // visitors who already consented get it hidden instantly by the
+  // synchronous head script + CSS pair in layout.tsx/globals.css, which run
+  // before hydration; this effect only unmounts it for them afterward so no
+  // hidden dialog lingers in the DOM.
+  const [showBanner, setShowBanner] = useState(true);
 
   useEffect(() => {
-    setMounted(true);
-    
-    // Check existing consent
     const stored = localStorage.getItem(CONSENT_KEY);
     if (stored) {
       try {
         const state: ConsentState = JSON.parse(stored);
-        // Re-show banner if consent version is outdated
-        if (state.version < CONSENT_VERSION) {
-          setShowBanner(true);
+        if (state.version >= CONSENT_VERSION) {
+          setShowBanner(false);
         }
       } catch {
-        setShowBanner(true);
+        // Malformed entry — fall through, banner stays shown.
       }
-    } else {
-      setShowBanner(true);
     }
   }, []);
 
@@ -84,10 +85,11 @@ export default function CookieConsent() {
     window.dispatchEvent(new CustomEvent("cookie-consent-update", { detail: state }));
   };
 
-  if (!mounted || !showBanner) return null;
+  if (!showBanner) return null;
 
   return (
     <div
+      id="cookie-consent-banner"
       role="dialog"
       aria-labelledby="cookie-banner-title"
       aria-describedby="cookie-banner-description"

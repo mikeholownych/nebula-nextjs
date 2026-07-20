@@ -6,6 +6,14 @@
    NEBULA 2026 - ICP-OPTIMIZED DESIGN SYSTEM
 ═══════════════════════════════════════════════════════════ */
 
+/* Hides the cookie-consent banner instantly for returning visitors, before
+   hydration — html[data-cookie-consent] is set by a synchronous script in
+   layout.tsx's <head>, which runs before <body> paints. New visitors (no
+   attribute) see the banner immediately with no hydration delay. */
+html[data-cookie-consent="given"] #cookie-consent-banner {
+  display: none;
+}
+
 /* Safe area insets for notched devices */
 :root {
   --safe-top: env(safe-area-inset-top, 0px);

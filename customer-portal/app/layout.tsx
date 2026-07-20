@@ -65,6 +65,29 @@ export default function RootLayout({
       <head>
         {/* Agent discovery: llms.txt link tag for crawlers that don't read response headers */}
         <link rel="describedby" href="/llms.txt" type="text/plain" />
+        {/*
+          Runs before <body> paints so returning visitors who already
+          consented (localStorage) never see the cookie banner flash in —
+          globals.css hides #cookie-consent-banner on this attribute.
+          CONSENT_VERSION (1) must stay in sync with
+          app/components/CookieConsent.tsx's CONSENT_VERSION constant.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var raw = localStorage.getItem('nebula-cookie-consent');
+                  if (!raw) return;
+                  var state = JSON.parse(raw);
+                  if (state && state.version >= 1) {
+                    document.documentElement.setAttribute('data-cookie-consent', 'given');
+                  }
+                } catch (e) {}
+              })();
+            `
+          }}
+        />
         {/* GA4 with Consent Mode v2 */}
         <script
           dangerouslySetInnerHTML={{
