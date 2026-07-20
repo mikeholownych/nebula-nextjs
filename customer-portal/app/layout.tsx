@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Karla } from 'next/font/google'
+import Script from 'next/script'
 import CookieConsent from './components/CookieConsent'
 import SiteNav from '@/components/SiteNav'
 import Footer from '@/components/Footer'
@@ -89,7 +90,17 @@ export default function RootLayout({
             `
           }}
         />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-KJ9S3450LH" />
+        {/*
+          lazyOnload: GTM's 166KB payload competes with hydration for main-thread
+          time (measured ~440ms scripting via Lighthouse) for no benefit, since
+          consent is denied by default until CookieConsent resolves — dataLayer.push
+          queues calls fine until this arrives on browser idle.
+        */}
+        <Script
+          id="gtag-src"
+          src="https://www.googletagmanager.com/gtag/js?id=G-KJ9S3450LH"
+          strategy="lazyOnload"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
