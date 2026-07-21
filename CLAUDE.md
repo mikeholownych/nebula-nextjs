@@ -42,6 +42,37 @@ Terminal: dead, bounced, max_retries_exceeded
 - **Duplicate send prevention:** set in-memory status BEFORE `UpdateLeadStatus()` write
 - **Claude Code sessions:** Starting `claude` inside nebula/ activates AI-DLC. Always use `Using AI-DLC,` prefix to trigger structured workflow.
 
+## Completion Contracts
+When delegating any task where proof of completion matters, structure the prompt as:
+
+```
+for/g: <goal — what must be true when done>
+verify: <how to confirm it happened — log line, file, DB record, API response>
+constraints: <what NOT to do / explicit boundaries>
+```
+
+The agent must return the verification artifact, not just claim completion.
+Combine with the Graduation Gate for scheduled jobs: supervised proof = run with a completion contract and inspect the verify output before scheduling.
+
+Example:
+```
+for/g: Deliver audit to warm-reply contact and advance their stage
+verify: Confirm send receipt in Zapier execution log + HOT_LEAD.json stage = "audit_delivered"
+constraints: Use only the existing warm-reply record; do not create new contacts; do not pitch
+```
+
+## Agent Job Graduation Gate
+Before turning any demonstrated task into a skill or scheduled job, graduate it through every gate:
+1. **Context** — name the authoritative business files, allowed claims, privacy boundaries, offer version, and excluded actions. Broad memory is orientation, not evidence.
+2. **Outcome contract** — define the goal, measurable done condition, required artifact, evidence record, timeout, and failure behavior. Do not specify only activity.
+3. **Supervised proof** — run at least one representative case and one failure case with human/reviewer inspection. Buyer-facing drafts remain drafts until the live path is independently approved.
+4. **Reusable skill** — save only the corrected, verified procedure. Include exact inputs, verification, rollback, and known pitfalls; never preserve a merely plausible first attempt.
+5. **Least privilege** — grant only the tools and accounts needed for that job. Never connect broad email/calendar/document write scopes simply for convenience.
+6. **Schedule last** — add cron only after supervised proof. Deterministic checks use `no_agent`; all jobs must be idempotent, bounded, source-traceable, and silent when healthy.
+7. **Production verification** — force-run once, inspect the real artifact/delivery log, and verify restart survival. A scheduled job without proven output is theater.
+
+For autonomous work, give agents outcome contracts rather than micromanaged steps, but retain approval gates for outbound messages, payments, production changes, and confidential data until the specific workflow has earned broader authority.
+
 ## What NOT to Do
 - Never edit aidlc-docs/audit.md with write_file — always append using terminal (echo >>)
 - Never send email without checking LeadStore.is_bounced()
