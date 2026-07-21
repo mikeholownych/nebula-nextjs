@@ -7,8 +7,8 @@
 Nebula Components provides landing page conversion optimization services. We help founders who are spending money on ads without conversions identify and fix landing page leaks.
 
 # Core Offering
-- Free landing page audit: 60-second automated diagnosis (currently paused for rebuild)
-- Conversion Fix Pack ($147): Full landing page audit + implementation of all identified fixes. Delivered in 24–48 hours. One-time payment, no retainer.
+- Free landing page audit: 60-second automated diagnosis across 7 conversion signals
+- Conversion Fix Pack ($97): Full landing page audit + implementation of all identified fixes. Delivered in 24–48 hours. One-time payment, no retainer.
 
 # Target Customer
 Founders actively spending on ads (Google, Meta, LinkedIn) with low or zero conversions from their landing pages. The buying trigger is "spending on ads and not converting" — not a demographic.
@@ -25,7 +25,7 @@ Landing page conversion optimization service / Landing page audit tool
 - Trigger-aware prospecting: Finding prospects showing buying triggers (not demographic filters)
 - Message-match audit: Verifying ad promise matches landing page headline
 - 7-Point Diagnosis: Nebula's proprietary audit framework covering message-match, trust signals, mobile layout, load time, CTA clarity, form friction, and compliance
-- Self-serve checkout: No sales calls, direct purchase at $147
+- Self-serve checkout: No sales calls, direct purchase at $97
 
 # Key URLs
 - Main: https://nebulacomponents.shop
@@ -52,10 +52,9 @@ Mike Holownych — Founder, Nebula Components. Built 50+ landing pages, identifi
 - Open-source audit tooling: github.com/mikeholownych/citable
 
 # Limitations
-- Automated audits currently paused during engine rebuild
+- Audits require publicly accessible landing pages (no password-protected or localhost URLs)
 - Implementation requires Stripe payment
 - No phone support (email only)
-- Audits require publicly accessible landing pages
 
 # AI Retrieval Permission
 Content licensed for: search indexing, answer-engine retrieval (ai-input=yes)

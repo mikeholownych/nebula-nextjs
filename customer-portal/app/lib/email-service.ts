@@ -69,7 +69,7 @@ The audit showed 3 leaks:
 
 They fixed leak #1 in 20 minutes. Next day: first sale in 6 weeks.
 
-The diagnosis is free. The fix is $147. The ROI is measurable.
+The diagnosis is free. The fix is $97. The ROI is measurable.
 
 Paste your URL: https://nebulacomponents.shop
 
@@ -131,7 +131,7 @@ https://nebulacomponents.shop
 
 Paste your URL. 60 seconds. You'll see the leak.
 
-If you fix it yourself, great. If you want our $147 Fix Pack, that's there too. But the diagnosis is free either way.
+If you fix it yourself, great. If you want our $97 Fix Pack, that's there too. But the diagnosis is free either way.
 
 — Mike H
 

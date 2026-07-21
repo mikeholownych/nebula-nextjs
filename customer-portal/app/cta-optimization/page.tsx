@@ -112,7 +112,7 @@ export default function CtaOptimizationPage() {
             Run free audit →
           </a>
           <p className="text-xs text-fg-dim mt-4">
-            Scoring paused · no submission collected
+            Free audit live · results in 60 seconds
           </p>
         </div>
 

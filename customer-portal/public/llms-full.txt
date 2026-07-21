@@ -37,13 +37,13 @@ Every Nebula audit checks seven criteria:
 
 ## Services
 
-### Conversion Fix Pack — $147 (one-time)
+### Conversion Fix Pack — $97 (one-time)
 A complete landing page audit using the 7-point framework, a written diagnosis identifying which issues are present, prioritized by conversion impact, and full implementation of all identified fixes on the live page. Delivered within 24–48 business hours. Includes a 30-day re-audit at no charge if conversion does not improve after fixes are applied.
 
 No retainer. No ongoing commitment. Pay once, get the page fixed.
 
-### Free Audit (currently paused)
-Automated URL submission and scoring. Temporarily paused while the audit engine is rebuilt and independently verified. Not available during this maintenance period.
+### Free Audit
+Automated URL submission and scoring across 7 conversion signals. Results delivered in under 60 seconds. No email required to see results.
 
 ## Open Source: Citable
 

@@ -23,7 +23,7 @@ const serviceSchema = {
   url: 'https://nebulacomponents.shop/pricing',
   offers: {
     '@type': 'Offer',
-    price: '147',
+    price: '97',
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
     url: 'https://nebulacomponents.shop/checkout',

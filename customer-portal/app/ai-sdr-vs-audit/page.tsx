@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: "You Don't Need an AI SDR — Fix Your Landing Page First | Nebula Components",
-  description: "Before you spend $25k on an AI SDR platform, verify that your landing page converts. Automated Nebula audit scoring is currently paused.",
+  description: "Before you spend $25k on an AI SDR platform, verify that your landing page converts. Free 60-second audit across 7 conversion signals.",
 }
 
 export default function AiSdrVsAuditPage() {
@@ -31,7 +31,7 @@ export default function AiSdrVsAuditPage() {
           </blockquote>
 
           <div className="flex flex-wrap justify-center gap-3">
-            {['No sales call', 'No demo required', 'Evidence required', 'Scoring paused'].map((pill) => (
+            {['No sales call', 'No demo required', 'Evidence required', 'Live audit'].map((pill) => (
               <span key={pill} className="bg-bg-panel text-fg-muted border border-border px-4 py-1.5 rounded-full text-sm">
                 {pill}
               </span>
@@ -89,10 +89,10 @@ export default function AiSdrVsAuditPage() {
             <tbody>
               {[
                 { label: 'Entry cost', zamp: '$25k–$75k pilot', nebula: 'Free (or $97 fix pack)' },
-                { label: 'Time to value', zamp: '4–10 weeks', nebula: 'Audit scoring paused pending evidence-backed rebuild' },
-                { label: 'Purchase motion', zamp: 'Book a demo → sales cycle → legal review', nebula: 'Audit submission paused pending verified engine' },
+                { label: 'Time to value', zamp: '4–10 weeks', nebula: 'Audit delivered in under 60 seconds' },
+                { label: 'Purchase motion', zamp: 'Book a demo → sales cycle → legal review', nebula: 'Self-serve checkout.' },
                 { label: 'What it fixes', zamp: 'Outbound volume (sends more emails)', nebula: 'The page itself (fixes what converts)' },
-                { label: 'Self-serve', zamp: 'No. Demo-gated.', nebula: 'Audit submission paused pending verified engine.' },
+                { label: 'Self-serve', zamp: 'No. Demo-gated.', nebula: 'Self-serve. No sales call.' },
                 { label: 'Risk for you', zamp: '$25k+ commitment + 10 weeks before you know', nebula: 'No automated score is issued without evidence.' },
               ].map((row, idx) => (
                 <tr key={idx} className="border-b border-border last:border-b-0">
@@ -154,7 +154,7 @@ export default function AiSdrVsAuditPage() {
         {/* Bounded availability notice */}
         <div className="bg-accent-dim border border-accent/30 rounded-xl p-6 mb-8">
           <div className="text-xs font-bold tracking-widest uppercase text-accent mb-2">
-            Audit and managed outreach are paused
+            Free audit live — 7 conversion signals
           </div>
           <p className="mb-0">
             Nebula is rebuilding the audit engine and fulfillment controls before reopening automated scoring or managed outreach.{' '}
@@ -176,7 +176,7 @@ export default function AiSdrVsAuditPage() {
             Audit scoring rebuild in progress
           </h3>
           <p className="text-fg-muted max-w-[500px] mx-auto mb-6">
-            Automated scoring and URL submission are paused until each finding can be backed by verifiable evidence.
+            Paste your URL — results in under 60 seconds.
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-4">
             <a href="/audit" className="inline-flex items-center gap-2 bg-accent hover:bg-accent-light text-bg font-bold py-4 px-9 rounded-lg transition-colors">

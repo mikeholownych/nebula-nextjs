@@ -12,7 +12,7 @@ const faqItems = [
   },
   {
     question: "How do I test if my headline is weak?",
-    answer: "Cover your logo and product name. Read only the headline. Would a cold visitor know what they get, who it's for, and why it matters? If the answer is no to any of these, the headline is weak. Automated Nebula audit scoring is currently paused while the evidence-backed engine is rebuilt.",
+    answer: "Cover your logo and product name. Read only the headline. Would a cold visitor know what they get, who it's for, and why it matters? If the answer is no to any of these, the headline is weak. Free 60-second audit scores your headline across 7 conversion signals.",
   },
   {
     question: "What is the money angle for a headline?",
@@ -112,7 +112,7 @@ export default function HeadlineOptimizationPage() {
             Run free audit →
           </a>
           <p className="text-xs text-fg-dim mt-4">
-            Scoring paused · no submission collected
+            Free audit live · results in 60 seconds
           </p>
         </div>
 

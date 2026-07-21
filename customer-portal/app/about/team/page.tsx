@@ -12,7 +12,7 @@ export default function TeamPage() {
         <h1 className="mb-2 text-4xl font-bold">Mike H</h1>
         <p className="mb-6 font-medium text-accent">Founder, Nebula Components</p>
         <p className="mb-8 text-lg leading-relaxed text-fg-muted">
-          Nebula Components publishes evidence-backed landing-page conversion guidance and implementation services. Automated audit scoring is currently paused pending independent verification.
+          Nebula Components publishes evidence-backed landing-page conversion guidance and implementation services. Automated audit scoring runs across 7 conversion signals.
         </p>
         <span className="text-accent">mike{'\u0040'}nebulacomponents.shop</span>
       </div>
