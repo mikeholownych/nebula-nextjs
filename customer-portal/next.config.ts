@@ -29,6 +29,7 @@ const nextConfig: NextConfig = {
       { source: '/7-systems.html',                      destination: '/learning-centre',      permanent: true },
       { source: '/audit.html',                          destination: '/audit',               permanent: true },
       { source: '/self-audit.html',                     destination: '/audit',               permanent: true },
+      { source: '/case-studies/self-audit.html',         destination: '/case-studies',         permanent: true },
       { source: '/audit_dashboard.html',                destination: '/audit',               permanent: true },
       { source: '/agency-partner.html',                 destination: '/pricing',             permanent: true },
       { source: '/ai-ops-retainer.html',                destination: '/pricing',             permanent: true },
