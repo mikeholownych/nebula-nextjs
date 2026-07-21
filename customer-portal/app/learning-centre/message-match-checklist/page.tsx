@@ -12,6 +12,53 @@ export const metadata: Metadata = {
   },
 }
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is message match in advertising?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Message match is the degree of continuity between the specific words and offer in an ad and the specific words and offer on the landing page that ad points to. It is not a vague concept about 'alignment' — it is a direct comparison: does the headline, offer, and tone of the landing page fulfil exactly what the ad promised? Poor message match is the most common cause of high bounce rates on paid traffic campaigns. It also raises effective CPC through lower Quality Score, making it simultaneously a conversion problem and a cost problem.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I check message match on my landing page?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Open your top-spending ad in one browser tab and the destination URL in another. Make three comparisons: (1) Does the core noun phrase from the ad headline appear in the page H1 — exactly or semantically? (2) Does the offer in the ad (free audit, discount, demo) match the primary above-fold CTA on the page? (3) Does the emotional tone of the ad (problem-aware, solution-aware, brand-aware) match the hero section of the page? Any failure on these three checks is a confirmed message-match break. Fix the page before spending another dollar on the ad.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does message match affect Google Ads Quality Score?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Yes. Landing Page Experience is one of the three components of Quality Score, and message match is a direct signal within that component. Google evaluates whether the landing page content is relevant to the ad's keywords and headline. Poor message match produces a 'Below Average' Landing Page Experience rating, which raises your effective CPC in the ad auction. Strong message match can reduce CPC and improve ad rank. Fixing a message-match break on a landing page that receives significant paid traffic is therefore both a conversion improvement and a direct cost reduction.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What are the most common types of message match failure?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "There are three distinct failure modes. (1) Keyword mismatch: the ad targets a specific keyword but the page headline uses a broad category term — the visitor searched for something precise and the page offers something generic. (2) Offer mismatch: the ad promotes a bounded, low-commitment offer (free audit, free trial) but the page leads with a high-commitment ask (book a call, request a quote). (3) Tone mismatch: the ad is problem-aware ('Still losing money on Google Ads?') but the page hero is brand-aspirational ('We help ambitious brands unlock their digital potential'). Each failure has a different fix.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Should every ad group have its own landing page?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'It depends on budget and volume. The ideal is one landing page per distinct keyword intent — the ad targeting "free landing page audit" should point to a page whose H1 echoes that exact phrase, and the ad targeting "landing page optimisation service" should point to a separate page. In practice, most accounts cannot justify building dedicated pages for every ad group. A workable approach is to create dedicated pages for your top 3-5 ad groups by spend, and use dynamic keyword insertion or swappable headline components to cover the rest. The minimum viable fix is ensuring your generic homepage or services page is not the destination for any high-intent, specific-keyword ad group.',
+      },
+    },
+  ],
+}
+
 const articleSchema = createArticleSchema({
   headline: 'Message Match Checklist for Paid Traffic Landing Pages',
   description:
@@ -27,6 +74,10 @@ export default function MessageMatchChecklistPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       <div className="mx-auto max-w-3xl px-6 py-14">

@@ -8,6 +8,45 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/coach-consultant-landing-page' },
 }
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Why is my coaching or consulting landing page not converting?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "The most common causes in order: (1) Leading with the discovery call as the primary CTA — a 30–60 minute commitment from a stranger is a high-friction ask that most cold-traffic visitors will not accept without more evidence of value first. (2) Bio before transformation — most coach pages structure as hero → long bio → credentials → CTA, but visitors arrived because they have a problem, not to read about you. (3) Vague transformation language — phrases like 'unlock your potential' or 'aligned success' do not describe a result anyone can picture, so visitors cannot self-identify as the right fit. (4) Generic or missing testimonials — 'Working with X changed my life' is not proof; a specific before/after result with timeframe is. (5) Hidden pricing — forcing every inquiry through a discovery call to discuss price filters out qualified leads and wastes time on unqualified ones.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What should the CTA be on a coach or consultant landing page?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "The CTA should be the smallest commitment that meaningfully advances the relationship — not the ultimate ask. For most coaches and consultants, this means leading with a free resource (guide, quiz, assessment), a short-form opt-in, or a clearly framed 15-minute 'clarity call' positioned as low-stakes rather than a sales call. The discovery call itself is not removed from the page — it becomes the second step. The page sells the next smallest action that earns trust and filters serious prospects. Every additional friction point (form fields, scheduling complexity, ambiguous outcome) in that first CTA reduces completion rate.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Should I show pricing on my coaching or consulting landing page?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "For most coaches and consultants, showing at least a price range or anchor is more effective than hiding it. Hiding pricing to 'encourage the discovery call' creates two problems: (1) unqualified prospects book calls they were never a fit for, wasting everyone's time; (2) qualified prospects who can afford you but need to self-qualify leave because there is nothing to calibrate against. You do not need an exact price — 'Investment starts at $X/month' or 'Typical engagement: 3 months' gives visitors enough context to determine fit before the call. This filters the funnel and raises the quality of discovery calls that do book.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How should testimonials be structured on a coaching landing page?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Specific testimonials convert; generic ones do not. The format that works: (1) who the client was before (their specific situation or problem), (2) what specifically changed, (3) the measurable result, (4) the timeframe. Example: 'I had been stuck at $4k months for a year. Three months in, I hit $11k and hired my first assistant.' That is a proof asset. Compare to: 'Working with [Name] changed my life.' The second example provides no signal to a visitor evaluating whether the coach can solve their specific problem. Place the strongest testimonial above the primary CTA — not in a carousel at the bottom that most visitors will not reach.",
+      },
+    },
+  ],
+}
+
 const articleSchema = createArticleSchema({
   headline: 'Coach Or Consultant Landing Page Not Converting? The Discovery Call Ask Is The Leak',
   description: 'Coaches and consultants lose clients on the landing page before the sales call. Here\'s why the discovery call ask is the leak — and what to fix first.',
@@ -20,6 +59,7 @@ export default function CoachConsultantLandingPagePage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-[72px]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <div className="mx-auto max-w-3xl px-6 py-14">
         <Link href="/learning-centre" className="text-sm font-semibold text-accent hover:text-accent-light transition-colors">
           ← Learning Centre
