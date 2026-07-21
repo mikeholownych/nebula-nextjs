@@ -18,12 +18,55 @@ const articleSchema = createArticleSchema({
   modifiedDate: '2026-07-21',
 })
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Why does proof placement affect conversion rate?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Proof placement affects conversion because it determines what the visitor's brain has processed before encountering the commitment ask. Cold traffic — visitors arriving from paid ads with no prior relationship with the brand — defaults to risk-aversion when asked to take an action. A CTA that appears before any credibility evidence forces the visitor to decide with no supporting data. Proof placed before the CTA creates micro-commitments: the visitor nods at a result, recognises a client name, or processes a stat. These micro-commitments lower the psychological cost of clicking the button that follows.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What types of social proof increase conversion rate the most?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Ranked by conversion impact: (1) Outcome statistics with context — a number tied to a specific intervention ('ROAS increased from 1.8× to 4.1× across 23 accounts after fixing the hero section') is hard to dismiss. (2) Case study snippets — a two-sentence before/after with the problem, fix, and result. (3) Named testimonials with role and company — the role signals that the reviewer has relevant authority to assess the claim. (4) Recognisable logos — borrowed credibility, but only when the relationship is genuine. Generic 5-star claims without specifics carry almost no weight. The test for any proof element: can a visitor understand the claim and its relevance in under 10 seconds?",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Where exactly should proof be placed on a landing page?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "At least one proof element must be visible before the first meaningful CTA — any button asking for contact details, a purchase, a demo, or a free trial. 'Meaningful' excludes navigation links and 'learn more' anchors. For short pages: headline → one outcome stat or logo strip → CTA. For mid-length pages: headline → problem statement → named testimonial or case snippet → CTA → supporting proof → second CTA. The most common error is placing proof at the bottom of the page where visitors who already bounced cannot see it. Proof earns its value only when it appears at the moment of hesitation, which is almost always just before the first ask.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I add proof to a landing page without a redesign?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Three implementations that require no redesign: (1) Insert a single stat above the hero CTA — one line of text with your strongest outcome number placed directly above the primary button. (2) Pull one testimonial into the hero section — move the shortest, most specific testimonial from wherever it currently sits to directly beneath your subheadline, with name, role, and company. (3) Add an outcome-anchored subheadline — if you have no ready testimonials, rewrite the subheadline to include a verifiable result claim, then immediately follow it with the supporting data. Each of these can be live within an hour.",
+      },
+    },
+  ],
+}
+
 export default function ProofBeforeCTAPage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-[72px]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       <div className="mx-auto max-w-3xl px-6 py-14">

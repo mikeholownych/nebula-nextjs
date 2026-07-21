@@ -8,6 +8,45 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/b2b-saas-landing-page-not-converting' },
 }
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Why does a B2B SaaS landing page not convert?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "The most common cause is asking for high-commitment action (demo, trial, sales call) before providing evidence that the product solves the visitor's specific problem. Enterprise B2B buyers are typically 57% through the purchase decision before engaging with a vendor — they are evaluating multiple options simultaneously and need to self-qualify before investing time in a call. When the page leads with the demo CTA before proof, case studies, or a clear value proposition, visitors bounce because the ask arrived before the value was established. The fix is to resequence: hero → problem statement → case studies with outcome numbers → ROI or self-assessment tool → demo CTA.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What do enterprise B2B buyers need to see on a landing page before they will book a demo?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Enterprise buyers need four things before they will invest time in a demo: (1) Case studies from companies in their industry, with specific measurable outcomes — not logos, actual numbers. (2) ROI calculator or business case tool that lets them model the value internally without a sales call. (3) Technical specifications — architecture, security certifications, integration capabilities — so technical evaluators can shortlist without escalating to procurement. (4) Competitive differentiation — substantive comparison showing where the product fits and where it does not, written for someone who has already evaluated three other tools. Pages that skip these steps and lead with the demo button are asking for commitment before earning it.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Should a B2B SaaS landing page have a free trial or a demo CTA?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "It depends on product complexity and sales motion. For product-led growth (PLG) SaaS where the product is self-explanatory and onboarding is guided, a free trial or freemium CTA typically outperforms a demo request because it requires less commitment from the visitor. For complex enterprise SaaS with significant setup requirements, long sales cycles, or compliance considerations, a demo is appropriate — but only after the page has provided sufficient proof that the product is worth 30 minutes of a senior buyer's time. A secondary CTA ('See how it works' linking to an interactive tour or video walkthrough) is an effective middle-ground that converts visitors who are not yet ready for the demo ask.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the correct page structure for a B2B SaaS landing page?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Value-first structure: (1) Hero — specific value proposition with one trust signal (G2 badge, logo, outcome stat). (2) Problem statement — show understanding of the specific pain, not a generic industry problem. (3) Solution overview — how you solve it differently, not a feature list. (4) Case studies — real outcomes with numbers from companies similar to the visitor. (5) Interactive value — ROI calculator or self-assessment that lets the visitor model their own case. (6) Demo CTA — by this point, you have earned it. The demo button can also appear in the hero as a secondary option for high-intent visitors who arrive pre-qualified, but the primary page structure should build evidence before the ask.",
+      },
+    },
+  ],
+}
+
 const articleSchema = createArticleSchema({
   headline: 'B2B SaaS Landing Page Not Converting: Fix Message-Match First',
   description: 'When a B2B SaaS landing page is not converting paid traffic, message-match is the first thing to audit. Learn the 3-step fix.',
@@ -20,6 +59,7 @@ export default function B2BSaaSLandingPageNotConverting() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <main id="main-content" role="main" className="min-h-screen bg-bg pt-[72px]">
 
         <nav aria-label="Breadcrumb" className="mx-auto max-w-4xl px-6 pt-6">
