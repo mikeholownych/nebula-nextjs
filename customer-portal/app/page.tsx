@@ -60,11 +60,11 @@ export default function Home() {
           Free Landing Page Audit
         </p>
         <h1 className="text-4xl font-bold tracking-tight text-fg md:text-6xl">
-          Find Out Why Your Ads Aren't Converting
+          The Ad Wasn't the Problem.<br className="hidden sm:block" /> The Page Was.
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-xl font-medium text-fg">
-          Nebula Components is a landing page audit tool for founders running paid ads.
-          Enter your URL and get a prioritized list of conversion fixes in 60 seconds — no signup needed.
+          Agencies charge $5,000 to tell you what Nebula shows you in 60 seconds.
+          Enter your URL and get a prioritized list of conversion fixes — no signup needed.
         </p>
         <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-fg-muted">
           We scan your page against 7 conversion signals — message-match, trust, mobile layout,
