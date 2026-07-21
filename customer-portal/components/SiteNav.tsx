@@ -46,6 +46,9 @@ export default function SiteNav() {
           <Link href="/pricing" className={LINK_CLASSES}>
             Pricing
           </Link>
+          <Link href="/case-studies" className={LINK_CLASSES}>
+            Case Studies
+          </Link>
           <Link href="/learning-centre" className={LINK_CLASSES}>
             Learning
           </Link>
@@ -82,6 +85,9 @@ export default function SiteNav() {
         >
           <Link href="/pricing" className={`${LINK_CLASSES} py-3`} onClick={() => setMobileOpen(false)}>
             Pricing
+          </Link>
+          <Link href="/case-studies" className={`${LINK_CLASSES} py-3`} onClick={() => setMobileOpen(false)}>
+            Case Studies
           </Link>
           <Link href="/learning-centre" className={`${LINK_CLASSES} py-3`} onClick={() => setMobileOpen(false)}>
             Learning

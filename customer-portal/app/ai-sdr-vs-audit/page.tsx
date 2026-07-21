@@ -27,7 +27,7 @@ export default function AiSdrVsAuditPage() {
           </p>
 
           <blockquote className="border border-border bg-bg-panel py-4 px-5 rounded-r-lg text-left mb-8">
-            <strong>Quick Answer:</strong> Before buying an AI SDR ($15k–$25k/year), audit your landing page first ($0–$147). An SDR drives more traffic to a page that already can't convert — multiplying your waste, not your revenue.
+            <strong>Quick Answer:</strong> Before buying an AI SDR ($15k–$25k/year), audit your landing page first ($0–$97). An SDR drives more traffic to a page that already can't convert — multiplying your waste, not your revenue.
           </blockquote>
 
           <div className="flex flex-wrap justify-center gap-3">
@@ -88,7 +88,7 @@ export default function AiSdrVsAuditPage() {
             </thead>
             <tbody>
               {[
-                { label: 'Entry cost', zamp: '$25k–$75k pilot', nebula: 'Free (or $147 fix pack)' },
+                { label: 'Entry cost', zamp: '$25k–$75k pilot', nebula: 'Free (or $97 fix pack)' },
                 { label: 'Time to value', zamp: '4–10 weeks', nebula: 'Audit scoring paused pending evidence-backed rebuild' },
                 { label: 'Purchase motion', zamp: 'Book a demo → sales cycle → legal review', nebula: 'Audit submission paused pending verified engine' },
                 { label: 'What it fixes', zamp: 'Outbound volume (sends more emails)', nebula: 'The page itself (fixes what converts)' },
@@ -139,7 +139,7 @@ export default function AiSdrVsAuditPage() {
         <p className="mb-4">The smartest path to revenue right now — whether you're pre-revenue or scaling — is:</p>
         <ol className="list-decimal list-inside mb-6 space-y-2">
           <li><strong>Run a free audit.</strong> Automated URL submission and evidence-backed scoring are live — no signup required.</li>
-          <li><strong>Fix what's broken.</strong> Free kit shows you exactly what to change. $147 pack implements it for you.</li>
+          <li><strong>Fix what's broken.</strong> Free kit shows you exactly what to change. $97 pack implements it for you.</li>
           <li><strong>Get a page that converts at 3-6%.</strong> Now every dollar of traffic or outreach actually produces leads.</li>
           <li><strong>Then — and only then — consider an AI SDR.</strong> Because now the math works. Each outbound email lands on a page that converts.</li>
         </ol>

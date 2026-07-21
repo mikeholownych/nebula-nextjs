@@ -1,0 +1,6 @@
+{
+  "slug": "traffic-but-no-form-fills",
+  "title": "Traffic But No Form Fills: The Form Is Usually Not The First Leak",
+  "category": "Form Leaks",
+  "description": "When traffic arrives but forms stay empty, the form is often the final symptom. The page may not have created enough intent, trust, or clarity before asking."
+}

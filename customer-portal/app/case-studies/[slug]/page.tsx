@@ -24,7 +24,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
     title: 'Ecommerce: 48x ROAS From Landing Page Fixes',
     eyebrow: 'Ecommerce',
     description:
-      'Founder spent $12k on Meta ads with zero sales. A landing page audit revealed 5 conversion leaks. After fixing: $147 ad spend produced $7,100 revenue — 48x ROAS.',
+      'Founder spent $12k on Meta ads with zero sales. A landing page audit revealed 5 conversion leaks. After fixing: $97 ad spend produced $7,100 revenue — 48x ROAS.',
     outcome: '48x ROAS',
     outcomeLabel: 'Return on Ad Spend',
     situation:
@@ -39,7 +39,7 @@ const CASE_STUDIES: Record<string, CaseStudy> = {
       'Eliminated two blocking third-party scripts',
     ],
     result:
-      'Next Meta campaign: $147 spend → $7,100 revenue. 48x ROAS. The landing page, not the ad creative, had been the bottleneck the entire time.',
+      'Next Meta campaign: $97 spend → $7,100 revenue. 48x ROAS. The landing page, not the ad creative, had been the bottleneck the entire time.',
     publishedDate: '2025-09-01',
     modifiedDate: '2026-07-18',
   },

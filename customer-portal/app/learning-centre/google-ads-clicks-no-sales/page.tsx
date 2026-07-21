@@ -103,7 +103,7 @@ export default function GoogleAdsClicksNoSales() {
           <section className="bg-bg-panel border border-accent/40 rounded-2xl p-6 mb-6">
             <h2 className="text-2xl font-bold mb-3">Find the leak on your page</h2>
             <p className="text-fg-muted mb-4">
-              Run the free Nebula audit first. Buy the $147 Fix Pack only when the leak is obvious.
+              Run the free Nebula audit first. Buy the $97 Fix Pack only when the leak is obvious.
             </p>
             <div className="flex flex-wrap gap-3">
               <a

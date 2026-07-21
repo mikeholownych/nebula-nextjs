@@ -127,7 +127,7 @@ export default function LearningCentrePage() {
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Find the violation before Google does</h2>
           <p className="mb-6 leading-relaxed text-fg-muted">
-            Run the free Nebula audit to surface landing page issues that trigger disapprovals. Fix the $147 pack includes policy compliance flags.
+            Run the free Nebula audit to surface landing page issues that trigger disapprovals. Fix the $97 pack includes policy compliance flags.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/audit" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">

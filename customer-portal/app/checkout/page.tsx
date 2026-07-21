@@ -5,7 +5,7 @@ import { Card } from '@/components/ui'
 export const metadata: Metadata = {
   title: 'Checkout — Nebula Conversion Fix Pack | Nebula Components',
   description:
-    'Purchase the Nebula Conversion Fix Pack for $147. One-time payment via Stripe. Landing page audit and implementation delivered in 24–48 hours.',
+    'Purchase the Nebula Conversion Fix Pack for $97. One-time payment via Stripe. Landing page audit and implementation delivered in 24–48 hours.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/checkout',
   },
@@ -43,7 +43,7 @@ export default function CheckoutPage() {
           </ul>
           <div className="flex justify-between border-t border-border pt-4 font-bold">
             <span className="text-fg">One-time total</span>
-            <span className="text-accent">$147</span>
+            <span className="text-accent">$97</span>
           </div>
         </Card>
 

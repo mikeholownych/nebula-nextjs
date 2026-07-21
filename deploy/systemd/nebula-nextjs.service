@@ -1,0 +1,33 @@
+[Unit]
+Description=Nebula Components Next.js Production Server
+Documentation=https://nebulacomponents.shop
+After=network.target network-online.target
+Wants=network-online.target
+StartLimitBurst=5
+StartLimitIntervalSec=60
+
+[Service]
+Type=simple
+User=mike
+Group=mike
+WorkingDirectory=/home/mike/nebula/customer-portal
+Environment=NODE_ENV=production
+Environment=PORT=3000
+Environment=NODE_OPTIONS=--max-old-space-size=4096
+Environment=PATH=/home/mike/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ExecStart=/home/mike/.local/bin/npm run start
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=10
+TimeoutStartSec=60
+TimeoutStopSec=30
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/mike/nebula/customer-portal
+CapabilityBoundingSet=
+AmbientCapabilities=
+
+[Install]
+WantedBy=multi-user.target

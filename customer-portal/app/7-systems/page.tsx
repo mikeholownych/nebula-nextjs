@@ -238,7 +238,7 @@ export default function SevenSystemsPage() {
           {/* Audit CTA */}
           <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-8 text-center">
             <p className="text-lg text-slate-300 mb-6">
-              <strong className="text-white">Want us to ship the fixes?</strong> $147 — we implement in 24 hours. No calls, no surprises.
+              <strong className="text-white">Want us to ship the fixes?</strong> $97 — we implement in 24 hours. No calls, no surprises.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

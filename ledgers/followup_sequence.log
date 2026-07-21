@@ -522,3 +522,22 @@ Due: 1  Sent: 0  delivered
 [followup_sequence] Outside send window (Mon-Fri 06-10 local). Next open in ~64h 42m — exiting.
 [followup_sequence] Outside send window (Mon-Fri 06-10 local). Next open in ~58h 42m — exiting.
 [followup_sequence] Outside send window (Mon-Fri 06-10 local). Next open in ~52h 42m — exiting.
+[followup_sequence] Outside send window (Mon-Fri 06-10 local). Next open in ~4h 42m — exiting.
+followup_sequence.py (LIVE) — 2026-07-21 12:17 UTC
+============================================================
+
+Audit leads: 0
+
+Cold-only leads: 0
+  [skip bounced] info@magnoliamedspaandwellness.com
+  [skip bounced] test@example.com
+
+HOT_LEAD pitch due: 0  Sent: 0
+
+Revive candidates (contacted, no audit): 0
+
+Recycle candidates (pitch_sent, no payment): 25
+
+============================================================
+Due: 0  Sent: 0  delivered
+[followup_sequence] Outside send window (Mon-Fri 06-10 local). Next open in ~16h 42m — exiting.

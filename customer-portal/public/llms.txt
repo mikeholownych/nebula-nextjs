@@ -34,8 +34,8 @@ Landing page conversion optimization service / Landing page audit tool
 - Learning Centre: https://nebulacomponents.shop/learning-centre
 - Resources: https://nebulacomponents.shop/resources
 - Citable (open source CLI): https://nebulacomponents.shop/resources/citable
-- About: https://nebulacomponents.shop/company/about
-- Team: https://nebulacomponents.shop/company/team
+- About: https://nebulacomponents.shop/about
+- Team: https://nebulacomponents.shop/about/team
 
 # Open Source
 - Citable v1.12.0: Evidence layer for SEO, AEO, and GEO audits. 123 detectors across 18 namespaces (not all detectors are deterministic — each declares its determinism posture). Apache 2.0. npm: @nebulacomponents/citable

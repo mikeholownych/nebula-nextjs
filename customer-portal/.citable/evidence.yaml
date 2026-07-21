@@ -1,0 +1,37 @@
+version: 1
+kind: evidence
+updated: '2026-07-19T01:00:00.000Z'
+entries:
+  - evidence_id: evidence-7point-framework-definition
+    title: 7-Point Diagnosis Framework Definition
+    evidence_type: architecture_specification
+    verification_status: verified
+    source: internal — audit pipeline definition
+    access_status: internal
+    reuse_status: no_express_reuse_license
+
+  - evidence_id: evidence-delivery-sla
+    title: Fix Pack 24-48 Hour Delivery SLA
+    evidence_type: primary_documentation
+    verification_status: reviewed
+    source: internal — service operations policy
+    access_status: internal
+    reuse_status: no_express_reuse_license
+
+  - evidence_id: evidence-reaudit-policy
+    title: 30-Day Re-Audit Guarantee Policy
+    evidence_type: primary_documentation
+    verification_status: verified
+    source: internal — service terms
+    access_status: internal
+    reuse_status: no_express_reuse_license
+
+  - evidence_id: evidence-citable-detector-count
+    title: Citable v1.3.1 Detector Count Verification
+    evidence_type: test_result
+    verification_status: verified
+    source: https://github.com/mikeholownych/citable
+    access_status: publicly_accessible
+    reuse_status: open_license
+    methodology: Source code enumeration of detector files in the citable package dist
+    measurement_period: '2026-07-19'

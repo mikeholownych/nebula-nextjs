@@ -1,0 +1,17 @@
+[Unit]
+Description=Cloudflare Tunnel (nebulacomponents.shop)
+After=network.target network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root
+ExecStart=/usr/local/bin/cloudflared --config /home/mike/.cloudflared/config.yml tunnel run 8cfcc2e1-cf49-4d57-b412-c1ec0474ffd2
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

@@ -42,7 +42,7 @@ export default function TermsPage() {
           <section>
             <h2>3. Paid Services</h2>
             <p>
-              Our Fix Pack ($147) includes implementation of recommended fixes. Payment is processed 
+              Our Fix Pack ($97) includes implementation of recommended fixes. Payment is processed 
               securely through Stripe. Once we deliver your completed implementation, the service is 
               considered fulfilled.
             </p>

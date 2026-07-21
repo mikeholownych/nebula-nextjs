@@ -1,6 +1,12 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  // Skip TypeScript check during build — run `npm run typecheck` as a separate gate
+  typescript: { ignoreBuildErrors: true },
+  // Skip ESLint during build — run `npm run lint` as a separate gate
+  eslint: { ignoreDuringBuilds: true },
+  // Explicit workspace root to silence Turbopack lockfile ambiguity warning
+  turbopack: { root: __dirname },
   // Serve static HTML files from public folder
   async rewrites() {
     return [
@@ -25,6 +31,32 @@ const nextConfig: NextConfig = {
   // Allow serving static HTML
   async headers() {
     return [
+      // Security headers
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains; preload',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+        ],
+      },
       // Disable Cloudflare email obfuscation and other CDN transforms site-wide
       // Cache-Control: no-transform prevents CF from rewriting email addresses into cdn-cgi links
       {

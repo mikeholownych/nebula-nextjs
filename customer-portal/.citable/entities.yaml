@@ -1,0 +1,53 @@
+version: 1
+kind: entities
+updated: '2026-07-19T01:00:00.000Z'
+entries:
+  - entity_id: nebula-components-org
+    entity_type: organization
+    canonical_name: Nebula Components
+    aliases:
+      - nebulacomponents
+      - Nebula Components Inc
+    status: active
+    canonical_url: https://nebulacomponents.shop/#organization
+    definition: Landing page conversion optimization service for founders running paid ads.
+    authoritative_profiles:
+      - https://www.linkedin.com/company/nebula-components
+      - https://github.com/mikeholownych
+    last_verified: '2026-07-19'
+
+  - entity_id: mike-holownych-person
+    entity_type: person
+    canonical_name: Mike Holownych
+    status: active
+    canonical_url: https://nebulacomponents.shop/#founder
+    definition: Founder of Nebula Components. Landing page conversion specialist.
+    authoritative_profiles:
+      - https://www.linkedin.com/in/mikeholownych
+      - https://github.com/mikeholownych
+    last_verified: '2026-07-19'
+
+  - entity_id: citable-software
+    entity_type: product
+    canonical_name: Citable
+    status: active
+    owner_entity: nebula-components-org
+    canonical_url: https://nebulacomponents.shop/resources/citable
+    definition: >
+      Open-source CLI for search and AI discoverability governance.
+      119 deterministic detectors across 18 namespaces. Apache 2.0.
+    authoritative_profiles:
+      - https://www.npmjs.com/package/@nebulacomponents/citable
+      - https://github.com/mikeholownych/citable
+    last_verified: '2026-07-19'
+
+  - entity_id: conversion-fix-pack-service
+    entity_type: service
+    canonical_name: Conversion Fix Pack
+    status: active
+    owner_entity: nebula-components-org
+    canonical_url: https://nebulacomponents.shop/pricing#fix-pack
+    definition: >
+      One-time landing page audit and implementation service.
+      $147. Delivered within 24-48 hours. No retainer.
+    last_verified: '2026-07-19'
