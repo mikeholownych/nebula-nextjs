@@ -40,14 +40,14 @@ const QUADRANT_LABELS: Record<string, { label: string; tone: 'accent' | 'neutral
  * The magic-link offer is soft — there's no paywall attached and skipping
  * has zero friction.
  */
-function UnlockConfirmation({ emailSent, email }: { emailSent: boolean; email: string }) {
+function UnlockConfirmation({ emailSent, email, auditId }: { emailSent: boolean; email: string; auditId: string }) {
   const [magicLinkState, setMagicLinkState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
   const requestMagicLink = async () => {
     if (!email || magicLinkState !== 'idle') return
     setMagicLinkState('sending')
     try {
-      const res = await fetch('http://127.0.0.1:8001/api/auth/magic-link', {
+      const res = await fetch('/api/auth/magic-link', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -95,17 +95,79 @@ function UnlockConfirmation({ emailSent, email }: { emailSent: boolean; email: s
           </p>
         </div>
       )}
+
+      {/* Share link — always shown after unlock */}
+      <div className="border-t border-border pt-5 flex items-center justify-between gap-4">
+        <p className="text-sm text-fg-muted">
+          Send this report to your developer or agency
+        </p>
+        <ShareButton auditId={auditId} />
+      </div>
     </Card>
   )
 }
 
-interface Props {
-  auditId: string
-  /** Determined server-side from httpOnly cookie — not forgeable via URL */
-  unlocked: boolean
+function UnlockConfirmationWrapper({ emailSent, email, auditId }: { emailSent: boolean; email: string; auditId: string }) {
+  return <UnlockConfirmation emailSent={emailSent} email={email} auditId={auditId} />
 }
 
-export default function ResultsClient({ auditId, unlocked: initialUnlocked }: Props) {
+interface Props {
+  auditId: string
+  unlocked: boolean
+  sharedView?: boolean
+}
+
+/**
+ * Fetches the share token from the Next.js proxy route and copies the
+ * share URL to the clipboard. Shows progressive states: idle → loading →
+ * copied → error. The share URL gives anyone with it read-only access to
+ * all findings — no email gate. This is the viral distribution mechanism.
+ */
+function ShareButton({ auditId }: { auditId: string }) {
+  const [state, setState] = useState<'idle' | 'loading' | 'copied' | 'error'>('idle')
+  const [shareUrl, setShareUrl] = useState<string | null>(null)
+
+  const handleShare = async () => {
+    if (state === 'loading') return
+
+    // If we already have the URL, just copy again
+    if (shareUrl) {
+      await navigator.clipboard.writeText(shareUrl).catch(() => {})
+      setState('copied')
+      setTimeout(() => setState('idle'), 2500)
+      return
+    }
+
+    setState('loading')
+    try {
+      const res = await fetch(`/api/audit/${auditId}/share-token`)
+      if (!res.ok) throw new Error('fetch failed')
+      const { share_url } = await res.json()
+      setShareUrl(share_url)
+      await navigator.clipboard.writeText(share_url).catch(() => {})
+      setState('copied')
+      setTimeout(() => setState('idle'), 2500)
+    } catch {
+      setState('error')
+      setTimeout(() => setState('idle'), 3000)
+    }
+  }
+
+  return (
+    <button
+      onClick={handleShare}
+      disabled={state === 'loading'}
+      className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-medium text-fg-muted transition-colors hover:border-accent hover:text-accent disabled:opacity-50"
+    >
+      {state === 'idle'    && <><span>↗</span> Share this report</>}
+      {state === 'loading' && <><span className="animate-spin">⋯</span> Getting link…</>}
+      {state === 'copied'  && <><span>✓</span> Link copied</>}
+      {state === 'error'   && <><span>✗</span> Try again</>}
+    </button>
+  )
+}
+
+export default function ResultsClient({ auditId, unlocked: initialUnlocked, sharedView = false }: Props) {
   const [loading, setLoading] = useState(true)
   const [results, setResults] = useState<AuditResult | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -335,7 +397,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked }: Pr
         )}
 
         {(emailSent || unlocked) && (
-          <UnlockConfirmation emailSent={emailSent} email={emailForm.email} />
+          <UnlockConfirmation emailSent={emailSent} email={emailForm.email} auditId={auditId} />
         )}
 
         {/* Upsells */}
@@ -366,16 +428,16 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked }: Pr
                 POPULAR
               </div>
               <div className="p-4">
-                <h3 className="mb-1 font-bold text-fg">Conversion Fix Pack</h3>
+                <h3 className="mb-1 font-bold text-fg">Implementation Session</h3>
                 <p className="mb-2 text-2xl font-bold text-accent">$147</p>
-                <p className="mb-4 text-sm text-fg-muted">Full audit + rewritten copy + implementation guide</p>
+                <p className="mb-4 text-sm text-fg-muted">We fix every finding from this audit — rewritten copy, rebuilt sections, live in 48 hours</p>
                 <a
                   href="https://buy.stripe.com/14A14nc2o7YM4PL3Ro43S0f"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full rounded-lg bg-accent px-4 py-2 text-center font-semibold text-bg transition-colors hover:bg-accent-light"
                 >
-                  Get Started
+                  Fix My Page — $147
                 </a>
               </div>
             </Card>
