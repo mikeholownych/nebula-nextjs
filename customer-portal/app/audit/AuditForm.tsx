@@ -1,32 +1,36 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { Card } from '@/components/ui'
 
 export default function AuditForm() {
   const [url, setUrl] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [referrer, setReferrer] = useState<string | null>(null)
   const router = useRouter()
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    const from = searchParams.get('from')
+    if (from) setReferrer(decodeURIComponent(from))
+  }, [searchParams])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
 
-    // Basic URL validation
     let processedUrl = url.trim()
     if (!processedUrl) {
       setError('Please enter a URL')
       return
     }
 
-    // Add https:// if no protocol
     if (!processedUrl.match(/^https?:\/\//i)) {
       processedUrl = 'https://' + processedUrl
     }
 
-    // Validate URL format
     try {
       new URL(processedUrl)
     } catch {
@@ -40,7 +44,7 @@ export default function AuditForm() {
       const response = await fetch('/api/audit/start', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: processedUrl })
+        body: JSON.stringify({ url: processedUrl, referrer: referrer || undefined }),
       })
 
       if (!response.ok) {
@@ -52,7 +56,6 @@ export default function AuditForm() {
       if (data.audit_id) {
         router.push(`/audit/${data.audit_id}/processing`)
       } else {
-        // Direct response (current behavior) - show inline
         setError('Audit completed. Full integration coming soon.')
       }
     } catch (err) {
@@ -64,30 +67,44 @@ export default function AuditForm() {
 
   return (
     <Card variant="elevated" className="mb-8">
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="url" className="mb-2 block text-sm font-medium text-fg">
-          Enter your landing page URL
-        </label>
-        <div className="flex gap-3">
+      {/* Referral welcome banner — only shown when ?from= is present */}
+      {referrer && (
+        <div className="mb-6 rounded-lg bg-accent/10 border border-accent/30 px-4 py-3 text-sm">
+          <p className="font-semibold text-accent">
+            {referrer} sent you here.
+          </p>
+          <p className="mt-0.5 text-fg-muted">
+            Your free audit will name the exact leaks on your page — same report they got.
+          </p>
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="url" className="mb-2 block text-sm font-semibold text-fg">
+            Your landing page URL
+          </label>
           <input
             id="url"
-            type="text"
+            type="url"
+            placeholder="https://yoursite.com/landing-page"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            placeholder="example.com or https://example.com"
-            className="flex-1 rounded-xl border border-border bg-bg px-4 py-3 text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
             disabled={loading}
+            className="w-full rounded-lg border border-fg-muted/30 bg-bg px-4 py-3 text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none disabled:opacity-50"
           />
-          <button
-            type="submit"
-            disabled={loading}
-            className="rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {loading ? 'Analyzing...' : 'Run Audit'}
-          </button>
         </div>
+
+        <button
+          type="submit"
+          disabled={!url || loading}
+          className="w-full rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light disabled:opacity-50"
+        >
+          {loading ? 'Starting audit…' : 'Audit My Page — Free'}
+        </button>
+
         {error && (
-          <p className="mt-3 text-sm text-danger" role="alert">{error}</p>
+          <p className="text-sm text-danger text-center" role="alert">{error}</p>
         )}
       </form>
     </Card>
