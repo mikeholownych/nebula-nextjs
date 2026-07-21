@@ -42,6 +42,25 @@ Terminal: dead, bounced, max_retries_exceeded
 - **Duplicate send prevention:** set in-memory status BEFORE `UpdateLeadStatus()` write
 - **Claude Code sessions:** Starting `claude` inside nebula/ activates AI-DLC. Always use `Using AI-DLC,` prefix to trigger structured workflow.
 
+## Completion Contracts
+When delegating any task where proof of completion matters, structure the prompt as:
+
+```
+for/g: <goal — what must be true when done>
+verify: <how to confirm it happened — log line, file, DB record, API response>
+constraints: <what NOT to do / explicit boundaries>
+```
+
+The agent must return the verification artifact, not just claim completion.
+Combine with the Graduation Gate for scheduled jobs: supervised proof = run with a completion contract and inspect the verify output before scheduling.
+
+Example:
+```
+for/g: Deliver audit to warm-reply contact and advance their stage
+verify: Confirm send receipt in Zapier execution log + HOT_LEAD.json stage = "audit_delivered"
+constraints: Use only the existing warm-reply record; do not create new contacts; do not pitch
+```
+
 ## Agent Job Graduation Gate
 Before turning any demonstrated task into a skill or scheduled job, graduate it through every gate:
 1. **Context** — name the authoritative business files, allowed claims, privacy boundaries, offer version, and excluded actions. Broad memory is orientation, not evidence.
