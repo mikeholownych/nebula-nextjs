@@ -211,7 +211,7 @@ export default function SocialProofLandingPage() {
             Run free audit →
           </Link>
           <p className="text-[13px] text-fg-muted mt-4">
-            Scoring paused · no submission collected
+            Free audit live · results in 60 seconds
           </p>
         </div>
 

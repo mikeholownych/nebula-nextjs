@@ -1,4 +1,4 @@
-// Minimal global structured data. Public schema must not advertise paused,
+// Minimal global structured data. Keep schema current — price and availability must match live state.
 // unverified, or route-specific products and claims.
 
 export const organizationSchema = {

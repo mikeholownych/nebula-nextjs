@@ -79,7 +79,7 @@ export default function WebMCP() {
             },
             {
               name: 'Conversion Fix Pack',
-              price: '$147',
+              price: '$97',
               description: 'Full audit + implementation of all identified fixes. Delivered in 24–48 hours. One-time payment, no retainer.',
               url: 'https://nebulacomponents.shop/pricing',
             },

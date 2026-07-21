@@ -81,7 +81,7 @@ export const AEO_PROMPT_CORPUS = {
     'Is a landing page audit worth it?',
     'Is a free landing page audit accurate?',
     'Is Nebula Components a scam?',
-    'Is a $147 landing page fix worth it?',
+    'Is a $97 landing page fix worth it?',
     'Is Nebula trusted?',
     'Is a landing page audit necessary?',
     'Is hiring a CRO agency worth it?',

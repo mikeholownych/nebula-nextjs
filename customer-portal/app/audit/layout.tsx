@@ -17,7 +17,7 @@ export default function AuditLayout({ children }: { children: React.ReactNode })
       <section className="mx-auto max-w-2xl px-4 pb-16 pt-8 text-sm text-fg-muted">
         <h2 className="mb-3 text-base font-semibold text-fg">What the audit checks</h2>
         <p className="mb-3">
-          The Nebula landing page audit runs automated checks across six conversion-critical dimensions:
+          The Nebula landing page audit runs automated checks across 7 conversion signals:
           headline message-match, trust signal placement, mobile layout integrity, form friction score,
           page load time impact, and compliance signals. Each check is evidence-backed — based on
           patterns observed across real ad campaigns, not generic best-practice checklists.
@@ -36,7 +36,7 @@ export default function AuditLayout({ children }: { children: React.ReactNode })
         <h2 className="mb-3 mt-6 text-base font-semibold text-fg">How it works</h2>
         <ol className="list-decimal space-y-1 pl-5">
           <li>Enter your landing page URL in the field above</li>
-          <li>The audit engine fetches and scores your page across all six dimensions</li>
+          <li>The audit engine fetches and scores your page across all 7 signals</li>
           <li>You receive a structured report with specific, actionable findings</li>
           <li>Each finding includes a severity rating and a recommended fix</li>
         </ol>

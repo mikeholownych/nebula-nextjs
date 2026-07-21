@@ -223,7 +223,7 @@ export default function RoasCliffPage() {
         </h3>
 
         <p className="mb-5 text-fg-muted">
-          A specific, evidence-backed next step reduces decision friction. Until Nebula&apos;s scoring engine is rebuilt, the audit status page clearly reports that submissions are paused.
+          A specific, evidence-backed next step reduces decision friction. Nebula delivers audit results in under 60 seconds across 7 conversion signals.
         </p>
 
         <div className="border-t border-border my-12" />

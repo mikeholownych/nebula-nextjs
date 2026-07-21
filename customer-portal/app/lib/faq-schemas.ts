@@ -25,7 +25,7 @@ export const homeFAQSchema = createFAQPageSchema([
     answer: "About 60 seconds. Paste your URL and get a full 5-dimension score with specific fixes.",
   },
   {
-    question: "What's included in the $147 Fix Pack?",
+    question: "What's included in the $97 Fix Pack?",
     answer: "Rewritten headline, optimized CTA placement, trust block recommendations, mobile check, and ready-to-publish HTML/CSS delivered in 24 hours.",
   },
   {

@@ -432,7 +432,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                 <p className="mb-2 text-2xl font-bold text-accent">$97</p>
                 <p className="mb-4 text-sm text-fg-muted">We fix every finding from this audit — rewritten copy, rebuilt sections, live in 48 hours</p>
                 <a
-                  href="https://buy.stripe.com/14A14nc2o7YM4PL3Ro43S0f"
+                  href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full rounded-lg bg-accent px-4 py-2 text-center font-semibold text-bg transition-colors hover:bg-accent-light"

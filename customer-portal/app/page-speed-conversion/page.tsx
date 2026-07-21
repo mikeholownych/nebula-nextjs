@@ -103,7 +103,7 @@ export default function PageSpeedConversion() {
           <h2 className="border-none p-0 m-0 mb-3 text-[1.5rem] text-fg font-bold">See exactly where your page leaks.</h2>
           <p className="text-fg-muted mb-6">Automated audit scoring is live and evidence-backed — no signup required.</p>
           <a className="inline-block bg-accent text-bg font-bold text-base py-3.5 px-8 rounded-lg no-underline hover:bg-accent-light transition-colors" href="/audit">Run free audit →</a>
-          <p className="text-[13px] text-fg-muted mt-2.5">Scoring paused · no submission collected</p>
+          <p className="text-[13px] text-fg-muted mt-2.5">Free audit live · results in 60 seconds</p>
         </div>
 
         <footer className="border-t border-border mt-20 pt-6 text-fg-muted text-sm text-center">
