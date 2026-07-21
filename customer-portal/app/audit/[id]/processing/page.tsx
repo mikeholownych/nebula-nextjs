@@ -60,12 +60,35 @@ export default function ProcessingPage() {
     }
   }, [])
 
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
+
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!email) return
+    if (!email || submitting) return
 
-    // TODO: Call API to update audit with email and trigger full results email
-    pushWithViewTransition(router, `/audit/${auditId}/results?unlocked=true`)
+    setSubmitting(true)
+    setSubmitError(null)
+
+    try {
+      const res = await fetch('/api/audit/unlock', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ audit_id: auditId, email, name: name || undefined }),
+      })
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error ?? 'Could not unlock results')
+      }
+
+      // Cookie is now set — redirect to results page (no ?unlocked query param needed)
+      pushWithViewTransition(router, `/audit/${auditId}/results`)
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -139,11 +162,14 @@ export default function ProcessingPage() {
 
               <button
                 type="submit"
-                disabled={!email}
+                disabled={!email || submitting}
                 className="w-full rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Full Results
+                {submitting ? 'Sending...' : 'Send Full Results'}
               </button>
+              {submitError && (
+                <p className="text-sm text-danger text-center" role="alert">{submitError}</p>
+              )}
             </form>
 
             <button
