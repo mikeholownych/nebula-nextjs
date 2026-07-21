@@ -460,6 +460,28 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
           </div>
         </div>
 
+        {/* Pass it forward — referral moment #1 */}
+        {(emailSent || unlocked) && (
+          <Card variant="bordered" className="mt-8 border-accent/30">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="font-semibold text-fg">Know another founder with the same problem?</p>
+                <p className="mt-1 text-sm text-fg-muted">
+                  Forward their site for a free audit — takes 60 seconds. The report names the exact leaks, same as yours.
+                </p>
+              </div>
+              <a
+                href="/audit"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 rounded-lg border border-accent px-5 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent/10"
+              >
+                Send them an audit ↗
+              </a>
+            </div>
+          </Card>
+        )}
+
         {/* Priority Matrix Legend */}
         <div className="mt-8 text-center">
           <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-fg-muted">

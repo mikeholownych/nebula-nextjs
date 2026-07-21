@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import { Card } from '@/components/ui'
 import AuditForm from './AuditForm'
@@ -26,7 +27,9 @@ export default function AuditPage() {
         </div>
 
         {/* URL Input Card — only interactive piece on this page */}
-        <AuditForm />
+        <Suspense fallback={<div className="h-40 animate-pulse rounded-xl bg-surface" />}>
+          <AuditForm />
+        </Suspense>
 
         {/* Trust Signals */}
         <div className="space-y-6">
