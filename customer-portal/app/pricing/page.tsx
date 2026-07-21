@@ -5,7 +5,7 @@ import { Card, PageShell } from '@/components/ui'
 export const metadata: Metadata = {
   title: 'Pricing — Nebula Components Landing Page Audit & Fix Pack',
   description:
-    'One-time $147 Conversion Fix Pack: landing page audit diagnosis plus implementation. No retainer, no ongoing commitment. Pay once, get your leaks fixed.',
+    'One-time $97 Conversion Fix Pack: landing page audit diagnosis plus implementation. No retainer, no ongoing commitment. Pay once, get your leaks fixed.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/pricing',
   },
@@ -130,7 +130,7 @@ export default function PricingPage() {
           <Card variant="bordered">
             <p className="mb-3 text-sm font-medium text-fg-muted">One-time payment</p>
             <h2 className="text-2xl font-semibold text-fg">Conversion Fix Pack</h2>
-            <p className="mt-2 text-4xl font-bold text-fg">$147</p>
+            <p className="mt-2 text-4xl font-bold text-fg">$97</p>
             <p className="mt-4 text-fg-muted">
               A structured landing page audit and implementation of the findings. We identify the specific leaks on your page and fix them. Delivered within 24–48 hours.
             </p>

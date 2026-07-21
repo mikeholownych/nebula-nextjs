@@ -1,0 +1,78 @@
+version: 1
+kind: claims
+updated: '2026-07-19T01:00:00.000Z'
+entries:
+  - claim_id: claim-7-point-diagnosis
+    claim: >
+      Nebula uses a 7-point diagnosis framework covering message-match, trust signals,
+      mobile layout, load time, CTA clarity, form friction, and compliance.
+    claim_type: capability
+    status: verified
+    source_location: https://nebulacomponents.shop/
+    evidence:
+      - evidence-7point-framework-definition
+    support_assessment:
+      status: directly_supported
+      assessor: mike-holownych
+      assessment_method: operational definition review
+      supporting_passages:
+        - '7-point framework operationally defined in audit pipeline architecture_specification'
+
+  - claim_id: claim-24hr-delivery
+    claim: Most Fix Packs are delivered within 24-48 business hours of payment.
+    claim_type: performance
+    status: verified
+    source_location: https://nebulacomponents.shop/pricing
+    evidence:
+      - evidence-delivery-sla
+    support_assessment:
+      status: partially_supported
+      assessor: mike-holownych
+      assessment_method: operational policy review
+      supporting_passages:
+        - '24-48hr SLA stated in service operations policy and checkout terms'
+
+  - claim_id: claim-30day-reaudit
+    claim: >
+      If the page is not converting better after fixes are applied and traffic is running,
+      we audit again at no additional charge.
+    claim_type: capability
+    status: verified
+    source_location: https://nebulacomponents.shop/pricing
+    evidence:
+      - evidence-reaudit-policy
+    support_assessment:
+      status: directly_supported
+      assessor: mike-holownych
+      assessment_method: policy document review
+      supporting_passages:
+        - '30-day re-audit guarantee documented in service terms and checkout confirmation'
+
+  - claim_id: claim-50plus-pages
+    claim: >
+      Mike Holownych built 50+ landing pages and identified 7 recurring conversion killers.
+    claim_type: factual
+    status: unverified
+    source_location: https://nebulacomponents.shop/
+
+  - claim_id: claim-founders-stop-burning
+    claim: >
+      We have helped founders stop burning budget on ads that never convert
+      by fixing the page, not the ad.
+    claim_type: performance
+    status: unverified
+    source_location: https://nebulacomponents.shop/
+
+  - claim_id: claim-citable-119-detectors
+    claim: Citable runs 119 deterministic detectors across 18 namespaces.
+    claim_type: factual
+    status: verified
+    source_location: https://nebulacomponents.shop/resources/citable
+    evidence:
+      - evidence-citable-detector-count
+    support_assessment:
+      status: directly_supported
+      assessor: mike-holownych
+      assessment_method: package source inspection
+      supporting_passages:
+        - '119 detectors confirmed from @nebulacomponents/citable v1.3.1 source'

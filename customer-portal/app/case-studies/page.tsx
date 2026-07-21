@@ -15,7 +15,7 @@ export default function CaseStudiesIndex() {
       slug: 'founder-ecommerce-48x-roas',
       title: 'Ecommerce: 48x ROAS From Landing Page Fixes',
       eyebrow: 'Ecommerce',
-      summary: 'Founder spent $12k on Meta ads with zero sales. Audit revealed 5 landing page leaks. Fixed leaks → $147 spend, $7,100 revenue.',
+      summary: 'Founder spent $12k on Meta ads with zero sales. Audit revealed 5 landing page leaks. Fixed leaks → $97 spend, $7,100 revenue.',
       outcome: '48x ROAS'
     },
     {

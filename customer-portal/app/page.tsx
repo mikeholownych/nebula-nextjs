@@ -82,6 +82,105 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Villain Section — The $14,000 Page Problem */}
+      <section className="border-t border-border px-6 py-16">
+        <div className="mx-auto max-w-4xl">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
+            The uncomfortable math
+          </p>
+          <h2 className="mb-6 text-3xl font-bold tracking-tight text-fg md:text-4xl">
+            The $14,000 page problem.
+          </h2>
+          <p className="mb-8 max-w-2xl text-lg text-fg-muted leading-7">
+            The average founder we audit has spent <strong className="text-fg">$14,000 on paid ads</strong> before asking
+            whether the page was the problem. The ads delivered clicks.
+            The page stole the sale.
+          </p>
+
+          {/* The three friction patterns */}
+          <div className="mb-10 grid gap-4 md:grid-cols-3">
+            <div className="rounded-xl border border-border bg-bg-muted/40 p-5">
+              <p className="mb-1 text-sm font-semibold uppercase tracking-wider text-accent">Pattern 1</p>
+              <p className="font-semibold text-fg">Pricing behind the email gate</p>
+              <p className="mt-2 text-sm text-fg-muted">
+                Asking for a commitment before delivering the value. Visitors leave before they trust you.
+              </p>
+            </div>
+            <div className="rounded-xl border border-border bg-bg-muted/40 p-5">
+              <p className="mb-1 text-sm font-semibold uppercase tracking-wider text-accent">Pattern 2</p>
+              <p className="font-semibold text-fg">CTA you can't see</p>
+              <p className="mt-2 text-sm text-fg-muted">
+                Green button on green background. 0.02% click-through rate.
+                Not a traffic problem. A visibility problem.
+              </p>
+            </div>
+            <div className="rounded-xl border border-border bg-bg-muted/40 p-5">
+              <p className="mb-1 text-sm font-semibold uppercase tracking-wider text-accent">Pattern 3</p>
+              <p className="font-semibold text-fg">No proof above the fold</p>
+              <p className="mt-2 text-sm text-fg-muted">
+                Strangers don't trust strangers. Without social proof in the first scroll,
+                the bounce is silent and final.
+              </p>
+            </div>
+          </div>
+
+          <p className="max-w-2xl text-base text-fg-muted leading-7">
+            Agencies A/B test these patterns for 90 days. That's not optimization —
+            that's billing you to confirm the page is broken.{' '}
+            <strong className="text-fg">Fix the page first. Then test.</strong>
+          </p>
+        </div>
+      </section>
+
+      {/* Objection Section — We've seen "free audit" before */}
+      <section className="border-t border-border bg-bg-muted/30 px-6 py-16">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="mb-4 text-2xl font-bold text-fg">
+            You've seen "free audit" before.
+          </h2>
+          <p className="mb-8 max-w-2xl text-lg text-fg-muted leading-7">
+            It was a PDF with 8 generic recommendations, three "opportunities," and a sales call at the end.
+            This isn't that.
+          </p>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div>
+              <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-fg-muted">Other audits</p>
+              <ul className="space-y-2 text-sm text-fg-muted">
+                {[
+                  'Generic report generated in seconds',
+                  'Same 8 recommendations for every site',
+                  'No implementation — just a list',
+                  'Gated behind a sales call',
+                  '3-month engagement to see results',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <span className="mt-0.5 text-red-400">✕</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent">Nebula audit</p>
+              <ul className="space-y-2 text-sm text-fg-muted">
+                {[
+                  'Real scrape of your actual page',
+                  'Scored against 7 conversion signals',
+                  'Prioritized fixes with impact/effort scores',
+                  'No signup to see your results',
+                  '$97 Fix Pack implements the top fixes in 7 days',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <span className="mt-0.5 text-accent">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* What You'll Get Section */}
       <section className="border-t border-border bg-bg-muted/30 px-6 py-16">
         <div className="mx-auto max-w-4xl">
@@ -168,6 +267,62 @@ export default function Home() {
           <p className="mx-auto max-w-2xl text-fg-muted">
             Nebula Components specializes in one thing: diagnosing landing pages that leak ad spend.
             We've helped founders stop burning budget on ads that never convert by fixing the page — not the ad.
+          </p>
+        </div>
+      </section>
+
+      {/* Receipts Section — Named proof */}
+      <section className="border-t border-border px-6 py-16">
+        <div className="mx-auto max-w-4xl">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
+            Receipts
+          </p>
+          <h2 className="mb-10 text-2xl font-bold text-fg">
+            Real pages. Real numbers. No stock photos.
+          </h2>
+          <div className="grid gap-6 md:grid-cols-2">
+            {/* Danny */}
+            <div className="rounded-xl border border-border bg-bg-muted/40 p-6">
+              <p className="mb-4 text-sm text-fg-muted leading-6 italic">
+                "Spent $14,200 on Shopify ads. Page had no social proof visible above the fold.
+                Added a 30-second Loom explainer — no voiceover, just the product.
+                Day 1 orders tripled."
+              </p>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-semibold text-fg">Danny</p>
+                  <p className="text-sm text-fg-muted">Ecommerce founder · Shopify</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-2xl font-bold text-accent">3×</p>
+                  <p className="text-xs text-fg-muted">day-1 orders</p>
+                </div>
+              </div>
+            </div>
+
+            {/* The green button */}
+            <div className="rounded-xl border border-border bg-bg-muted/40 p-6">
+              <p className="mb-4 text-sm text-fg-muted leading-6 italic">
+                "Agency A/B tested our CTA button for 90 days. Budget: $22k.
+                Result: +0.2% lift. Nebula fixed the contrast and visibility in 2 hours.
+                Result: +14.3× conversion."
+              </p>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-semibold text-fg">B2B SaaS founder</p>
+                  <p className="text-sm text-fg-muted">Lead gen · Name withheld</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-2xl font-bold text-accent">14.3×</p>
+                  <p className="text-xs text-fg-muted">conversion lift</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p className="mt-6 text-sm text-fg-muted">
+            Both pages scored under 5/10 on initial audit.
+            Both fixed in under 7 days. $97.
           </p>
         </div>
       </section>

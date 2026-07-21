@@ -100,7 +100,7 @@ export default function LearningCentrePage() {
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Fix your pricing page</h2>
           <p className="mb-6 leading-relaxed text-fg-muted">
-            Run the free Nebula audit to spot tier structure issues. Buy the $147 Fix Pack when you know what to change.
+            Run the free Nebula audit to spot tier structure issues. Buy the $97 Fix Pack when you know what to change.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/audit" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">

@@ -282,8 +282,7 @@ def main():
     check_file_exists("ramp_pipeline_fill.py", "ramp_pipeline_fill.py")
     check_file_exists("followup_sequence.py", "followup_sequence.py")
     check_file_exists("deliver_audit.py", "deliver_audit.py")
-    # surge_high_pain_outreach.py was archived (merged into ramp_pipeline_fill.py)
-    check_file_exists("agentic_server.py", "agentic_server.py")
+    # agentic_server.py archived to .legacy/ 2026-07-21 — replaced by platform_api (FastAPI)
 
     print()
     print("── SMTP ──")

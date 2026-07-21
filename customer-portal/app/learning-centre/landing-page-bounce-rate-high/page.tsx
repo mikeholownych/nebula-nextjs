@@ -1,139 +1,161 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'High Landing Page Bounce Rate From Paid Traffic: 6 Causes | Nebula Components',
+  title: "Landing Page Bounce Rate High? It's Usually 3 Things | Nebula Components",
   description: 'A high bounce rate on paid traffic means visitors are deciding to leave immediately. These are the 6 most common causes.',
   alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/landing-page-bounce-rate-high' },
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'High Landing Page Bounce Rate From Paid Traffic: 6 Causes',
+  headline: "Landing Page Bounce Rate High? It's Usually 3 Things",
   description: 'A high bounce rate on paid traffic means visitors are deciding to leave immediately. These are the 6 most common causes.',
   url: 'https://nebulacomponents.shop/learning-centre/landing-page-bounce-rate-high',
   publishedDate: '2025-07-15',
   modifiedDate: '2026-07-19',
 })
 
-
 export default function LandingPageBounceRateHigh() {
-  
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <div className="article-page" style={{
-      minHeight: '100vh',
-      background: '#050505',
-      color: '#ffffff',
-      padding: '40px 24px',
-      maxWidth: '900px',
-      margin: '0 auto',
-    }}>
-      <a href="/learning-centre" style={{ color: '#10b981', textDecoration: 'none', marginBottom: '24px', display: 'inline-block' }}>
-        ← Learning Centre
-      </a>
+      <main id="main-content" role="main" className="min-h-screen bg-bg pt-[72px]">
 
-      <p style={{ color: '#9e9e9e', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>
-        Landing Page Leaks · Bounce Rate
-      </p>
-
-      <h1 style={{ fontSize: '36px', fontWeight: 700, lineHeight: 1.2, marginBottom: '24px', color: '#ffffff' }}>
-        Landing Page Bounce Rate High? It's Usually 3 Things
-      </h1>
-
-      <p style={{ fontSize: '18px', color: '#9e9e9e', lineHeight: 1.7, marginBottom: '32px' }}>
-        If your landing page bounce rate is above 70%, the page isn't matching what visitors expected when they clicked. Bounce is a symptom. The cause is usually one of three things: wrong offer, slow load, or wrong audience.
-      </p>
-
-      <section style={{ marginBottom: '40px' }}>
-        <h2 style={{ fontSize: '24px', fontWeight: 600, marginBottom: '16px', color: '#ffffff' }}>
-          Bounce vs Exit: What's the Difference
-        </h2>
-        <p style={{ color: '#9e9e9e', lineHeight: 1.7 }}>
-          <strong style={{ color: '#ffffff' }}>Bounce</strong> means someone landed on your page and left without clicking anything. They didn't explore. They didn't convert. They just... left.
-          <br /><br />
-          <strong style={{ color: '#ffffff' }}>Exit</strong> means they visited multiple pages and this was their last stop. Exit rate on a landing page is actually normal—if they clicked around and then left, your page did its job.
-          <br /><br />
-          High bounce on a landing page is the problem. It means the first screen didn't deliver on the promise that brought them there.
-        </p>
-      </section>
-
-      <section style={{ marginBottom: '40px' }}>
-        <h2 style={{ fontSize: '24px', fontWeight: 600, marginBottom: '16px', color: '#ffffff' }}>
-          The 3 Culprits
-        </h2>
-        <div style={{ background: 'rgba(16, 185, 129, 0.05)', border: '1px solid rgba(16, 185, 129, 0.2)', borderRadius: '8px', padding: '24px', marginBottom: '16px' }}>
-          <h3 style={{ color: '#10b981', fontSize: '18px', marginBottom: '8px' }}>1. Offer Mismatch</h3>
-          <p style={{ color: '#9e9e9e', lineHeight: 1.6, margin: 0 }}>
-            The ad or link promised one thing. The page delivers another. Maybe the headline is generic. Maybe the CTA is buried. Maybe the value proposition is unclear. If they don't see what they came for in 3 seconds, they leave.
-          </p>
-        </div>
-        <div style={{ background: 'rgba(16, 185, 129, 0.05)', border: '1px solid rgba(16, 185, 129, 0.2)', borderRadius: '8px', padding: '24px', marginBottom: '16px' }}>
-          <h3 style={{ color: '#10b981', fontSize: '18px', marginBottom: '8px' }}>2. Slow Load Time (Especially Mobile)</h3>
-          <p style={{ color: '#9e9e9e', lineHeight: 1.6, margin: 0 }}>
-            53% of mobile users abandon pages that take longer than 3 seconds to load. If your page is heavy on scripts, images, or third-party tools, visitors bounce before they even see your offer. Speed is free conversion.
-          </p>
-        </div>
-        <div style={{ background: 'rgba(16, 185, 129, 0.05)', border: '1px solid rgba(16, 185, 129, 0.2)', borderRadius: '8px', padding: '24px', marginBottom: '16px' }}>
-          <h3 style={{ color: '#10b981', fontSize: '18px', marginBottom: '8px' }}>3. Wrong Audience</h3>
-          <p style={{ color: '#9e9e9e', lineHeight: 1.6, margin: 0 }}>
-            If your traffic source is sending the wrong people, no page will convert them. Broad targeting, irrelevant keywords, or clickbait ads bring people who were never going to buy. The leak isn't the page—it's the targeting.
-          </p>
-        </div>
-      </section>
-
-      <section style={{ marginBottom: '40px' }}>
-        <h2 style={{ fontSize: '24px', fontWeight: 600, marginBottom: '16px', color: '#ffffff' }}>
-          Quick Diagnosis
-        </h2>
-        <p style={{ color: '#9e9e9e', lineHeight: 1.7, marginBottom: '16px' }}>
-          Segment your analytics by source, device, and traffic type to find which segment is bouncing:
-        </p>
-        <ul style={{ color: '#9e9e9e', lineHeight: 2, paddingLeft: '24px' }}>
-          <li><strong style={{ color: '#ffffff' }}>By source:</strong> Google Ads vs Meta Ads vs Organic. One may be misconfigured.</li>
-          <li><strong style={{ color: '#ffffff' }}>By device:</strong> Mobile bounce &gt;80% means your mobile layout is the problem.</li>
-          <li><strong style={{ color: '#ffffff' }}>By traffic type:</strong> Cold traffic bounces more.Warm traffic converts more. Adjust expectations accordingly.</li>
-        </ul>
-      </section>
-
-      <section style={{ marginBottom: '40px' }}>
-        <h2 style={{ fontSize: '24px', fontWeight: 600, marginBottom: '16px', color: '#ffffff' }}>
-          The 60-Second Fix
-        </h2>
-        <div style={{ background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05))', border: '1px solid #10b981', borderRadius: '8px', padding: '24px' }}>
-          <ol style={{ color: '#ffffff', lineHeight: 2, paddingLeft: '24px', margin: 0 }}>
-            <li><strong>Match headline to source.</strong> If the ad says "Fix your landing page," the headline should say "Fix your landing page"—not "Welcome to Our Platform."</li>
-            <li><strong>Cut load time.</strong> Compress images, lazy load below-fold content, remove unused scripts. Test with PageSpeed Insights.</li>
-            <li><strong>Put the CTA above the fold.</strong> If they have to scroll to see what to do next, they'll scroll with their back button instead.</li>
+        <nav aria-label="Breadcrumb" className="mx-auto max-w-4xl px-6 pt-6">
+          <ol className="flex items-center gap-2 text-sm text-fg-muted">
+            <li><Link href="/" className="hover:text-fg">Home</Link></li>
+            <li aria-hidden="true">/</li>
+            <li><Link href="/learning-centre" className="hover:text-fg">Learning Centre</Link></li>
+            <li aria-hidden="true">/</li>
+            <li className="text-fg" aria-current="page">Bounce Rate High</li>
           </ol>
-        </div>
-      </section>
+        </nav>
 
-      <section style={{ marginBottom: '40px' }}>
-        <h2 style={{ fontSize: '24px', fontWeight: 600, marginBottom: '16px', color: '#ffffff' }}>
-          Find the Leak on Your Page
-        </h2>
-        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-          <a href="/audit" style={{ background: '#10b981', color: '#050505', padding: '16px 32px', borderRadius: '8px', textDecoration: 'none', fontWeight: 600, display: 'inline-block' }}>
-            Run the free audit →
-          </a>
-          <a href="/learning-centre/landing-page-not-converting" style={{ color: '#10b981', textDecoration: 'none', padding: '16px 32px', display: 'inline-block' }}>
-            View leak map →
-          </a>
-        </div>
-      </section>
+        <article className="mx-auto max-w-4xl px-6 py-12">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-accent">Landing Page Leaks</p>
+          <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
+            Landing Page Bounce Rate High? It&apos;s Usually 3 Things
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-fg-muted">
+            A bounce rate above 70% on paid traffic means the first screen isn&apos;t delivering on the promise that brought visitors there. Bounce is a symptom. The cause is almost always offer mismatch, slow load, or wrong audience.
+          </p>
 
-      <section style={{ marginTop: '60px', paddingTop: '40px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: '#ffffff' }}>
-          Related Leak Checks
-        </h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <a href="/learning-centre/landing-page-not-converting" style={{ color: '#10b981', textDecoration: 'none' }}>→ Landing Page Not Converting? Diagnose These 5 Leaks First</a>
-          <a href="/learning-centre/message-match-checklist" style={{ color: '#10b981', textDecoration: 'none' }}>→ Message Match Checklist For Paid Traffic Landing Pages</a>
-          <a href="/learning-centre/mobile-landing-page-leaks" style={{ color: '#10b981', textDecoration: 'none' }}>→ Mobile Landing Page Leaks That Kill Paid Traffic</a>
-        </div>
-      </section>
-    </div>
+          {/* Bounce vs Exit */}
+          <section className="mt-12">
+            <h2 className="text-2xl font-bold text-fg">Bounce vs Exit: What&apos;s the Difference</h2>
+            <p className="mt-4 leading-relaxed text-fg-muted">
+              <strong className="text-fg">Bounce</strong> means someone landed on your page and left without clicking anything. They didn&apos;t explore. They didn&apos;t convert. They arrived, decided the page wasn&apos;t what they expected, and left.
+            </p>
+            <p className="mt-4 leading-relaxed text-fg-muted">
+              <strong className="text-fg">Exit</strong> means they visited multiple pages and this was their last stop. High exit rate on a landing page is normal — if they explored and then left, the page did its job.
+            </p>
+            <p className="mt-4 leading-relaxed text-fg-muted">
+              High <em>bounce</em> on a paid traffic landing page is the problem. The first screen failed to match what the ad promised.
+            </p>
+          </section>
+
+          {/* The 3 culprits */}
+          <section className="mt-14">
+            <h2 className="text-2xl font-bold text-fg">The 3 Culprits</h2>
+            <div className="mt-6 space-y-4">
+              {[
+                {
+                  label: '1. Offer Mismatch',
+                  body: 'The ad promised one thing. The page delivered another. If visitors don\'t see what they came for within 3 seconds, they leave. Generic headline, buried CTA, unclear value prop — any of these break the chain.',
+                },
+                {
+                  label: '2. Slow Load Time',
+                  body: '53% of mobile users abandon pages that take longer than 3 seconds to load. Heavy scripts, unoptimised images, and third-party tools cause visitors to bounce before they see your offer. Speed is free conversion.',
+                },
+                {
+                  label: '3. Wrong Audience',
+                  body: 'Broad targeting, irrelevant keywords, or clickbait ads bring people who were never going to convert. When that\'s the cause, the fix isn\'t the page — it\'s the targeting. Segment analytics by source to confirm.',
+                },
+              ].map((item) => (
+                <div key={item.label} className="rounded-2xl border border-accent/20 bg-accent/5 p-6">
+                  <h3 className="text-lg font-bold text-accent">{item.label}</h3>
+                  <p className="mt-2 leading-relaxed text-fg-muted">{item.body}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Quick diagnosis */}
+          <section className="mt-14">
+            <h2 className="text-2xl font-bold text-fg">Quick Diagnosis</h2>
+            <p className="mt-4 leading-relaxed text-fg-muted">Segment your analytics by source, device, and traffic type to find which segment is bouncing:</p>
+            <ul className="mt-6 space-y-3">
+              {[
+                { label: 'By source', detail: 'Google Ads vs Meta Ads vs Organic. One may be misconfigured or attracting the wrong audience.' },
+                { label: 'By device', detail: 'Mobile bounce above 80% = your mobile layout is the problem, not the ad.' },
+                { label: 'By traffic type', detail: 'Cold traffic bounces more than warm. Adjust expectations — and landing pages — accordingly.' },
+              ].map((item) => (
+                <li key={item.label} className="flex items-baseline gap-3 text-sm text-fg-muted">
+                  <span className="shrink-0 font-semibold text-fg">{item.label}:</span>
+                  {item.detail}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* 60-second fix */}
+          <section className="mt-14">
+            <h2 className="text-2xl font-bold text-fg">The 60-Second Fix</h2>
+            <ol className="mt-6 space-y-4">
+              {[
+                { step: 'Match headline to source', detail: 'If the ad says "Fix your landing page," the H1 should say "Fix your landing page" — not "Welcome to Our Platform."' },
+                { step: 'Cut load time', detail: 'Compress images, lazy-load below-fold content, remove unused scripts. Test with PageSpeed Insights. Aim under 2 seconds on mobile.' },
+                { step: 'Put the CTA above fold', detail: 'If visitors have to scroll to see what to do next, they\'ll use the back button instead.' },
+              ].map((item, i) => (
+                <li key={i} className="flex gap-4 rounded-xl border border-border bg-bg-muted/20 p-5">
+                  <span className="shrink-0 font-bold text-accent">{i + 1}.</span>
+                  <div>
+                    <p className="font-semibold text-fg">{item.step}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-fg-muted">{item.detail}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          {/* CTA */}
+          <section className="mt-16 rounded-2xl border border-accent/30 bg-accent/5 p-8 text-center">
+            <h2 className="text-xl font-bold text-fg">Find the Leak on Your Page</h2>
+            <p className="mt-3 text-fg-muted">
+              The free audit checks your landing page URL and returns the specific cause of your bounce problem.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-4">
+              <Link href="/audit" className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg transition-colors hover:bg-accent-light">
+                Run the free audit →
+              </Link>
+              <Link href="/learning-centre/landing-page-not-converting" className="inline-block rounded-xl border border-accent px-8 py-4 font-semibold text-accent transition-colors hover:bg-accent/5">
+                View leak map →
+              </Link>
+            </div>
+          </section>
+
+          {/* Related */}
+          <section className="mt-12 border-t border-border pt-10">
+            <h3 className="mb-4 text-sm font-semibold text-fg">Related leak checks</h3>
+            <div className="flex flex-col gap-3">
+              {[
+                { slug: 'landing-page-not-converting', title: 'Landing Page Not Converting? Diagnose These 5 Leaks First' },
+                { slug: 'message-match-checklist', title: 'Message Match Checklist For Paid Traffic Landing Pages' },
+                { slug: 'mobile-landing-page-leaks', title: 'Mobile Landing Page Leaks That Kill Paid Traffic' },
+              ].map((a) => (
+                <Link key={a.slug} href={`/learning-centre/${a.slug}`} className="text-sm text-accent hover:underline">
+                  → {a.title}
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          <div className="mt-10">
+            <Link href="/learning-centre" className="text-sm text-fg-muted hover:text-fg">← Learning Centre</Link>
+          </div>
+        </article>
+      </main>
     </>
-  );
+  )
 }

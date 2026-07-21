@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Footer from '@/components/Footer'
+
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
@@ -19,17 +19,8 @@ const articleSchema = createArticleSchema({
 
 export default function LinkedInSkillEnginePage() {
   return (
-    <main id="main-content" role="main" className="min-h-screen bg-bg">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <header className="border-b border-border px-6 py-4">
-        <nav aria-label="Primary" className="mx-auto flex max-w-6xl items-center justify-between">
-          <Link href="/" className="text-xl font-semibold text-fg">Nebula</Link>
-          <div className="flex items-center gap-5">
-            <Link href="/learning-centre" className="text-sm text-fg-muted hover:text-fg rounded">Learning</Link>
-            <Link href="/audit" className="rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-bg hover:bg-accent-light transition-colors">Free Audit</Link>
-          </div>
-        </nav>
-      </header>
+    <main id="main-content" role="main" className="min-h-screen bg-bg pt-[72px]">
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
 
       <nav aria-label="Breadcrumb" className="mx-auto max-w-4xl px-6 pt-6">
         <ol className="flex items-center gap-2 text-sm text-fg-muted">
@@ -119,7 +110,7 @@ export default function LinkedInSkillEnginePage() {
         </div>
       </article>
 
-      <Footer />
+
     </main>
   )
 }

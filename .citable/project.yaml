@@ -1,0 +1,634 @@
+version: 1
+initialized_at: '2026-07-18T17:51:26.040Z'
+repository_root: /home/mike/nebula
+detected:
+  framework: null
+  rendering_model: null
+  package_manager: npm
+  build_commands: []
+  test_commands:
+    - npm test
+  robots_files:
+    - .worktrees/nextjs-customer-platform/customer-portal/customer-portal/public/robots.txt
+    - .worktrees/nextjs-customer-platform/customer-portal/robots.txt
+    - robots.txt
+  sitemap_sources:
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.next/server/app/sitemap.xml/route.js
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.next/server/app/sitemap.xml/route_client-reference-manifest.js
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.next/server/chunks/0mgf_customer-portal__next-internal_server_app_sitemap_xml_route_actions_1855v70.js
+    - .worktrees/nextjs-customer-platform/customer-portal/customer-portal/app/sitemap.ts
+    - .worktrees/nextjs-customer-platform/customer-portal/sitemap.xml
+    - customer-portal/.next/server/app/sitemap.xml/route.js
+    - customer-portal/.next/server/app/sitemap.xml/route_client-reference-manifest.js
+    - >-
+      customer-portal/.next/server/chunks/1-m2_customer-portal__next-internal_server_app_sitemap_xml_route_actions_1l3h8we.js
+    - customer-portal/app/sitemap.ts
+    - sitemap.xml
+  schema_sources:
+    - .legacy/html-site/ad-burn-leaderboard.html
+    - .legacy/html-site/ai-sdr-vs-audit.html
+    - .legacy/html-site/audit.html
+    - .legacy/html-site/beta-tester.html
+    - .legacy/html-site/blog-trigger-aware-outreach.html
+    - .legacy/html-site/checkout.html
+    - .legacy/html-site/cta-optimization.html
+    - .legacy/html-site/growth-launch.html
+    - .legacy/html-site/headline-optimization.html
+    - .legacy/html-site/index-old.html
+    - .legacy/html-site/mobile-landing-page-optimization.html
+    - .legacy/html-site/page-speed-conversion.html
+    - .legacy/html-site/part_before.html
+    - .legacy/html-site/roas-cliff.html
+    - .legacy/html-site/social-proof-landing-page.html
+    - .legacy/html-site/what-is-landing-page-audit.html
+    - .legacy/html-site/why-landing-pages-dont-convert.html
+    - .worktrees/nextjs-customer-platform/customer-portal/ad-burn-leaderboard.html
+    - .worktrees/nextjs-customer-platform/customer-portal/ai-sdr-vs-audit.html
+    - .worktrees/nextjs-customer-platform/customer-portal/audit.html
+    - .worktrees/nextjs-customer-platform/customer-portal/beta-tester.html
+    - .worktrees/nextjs-customer-platform/customer-portal/blog-trigger-aware-outreach.html
+    - .worktrees/nextjs-customer-platform/customer-portal/checkout.html
+    - .worktrees/nextjs-customer-platform/customer-portal/compare/landing-page-audit-tools.html
+    - .worktrees/nextjs-customer-platform/customer-portal/cta-optimization.html
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/app/about/team/page-task1.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/app/case-studies/[slug]/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/app/company/about/page-task1.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/app/company/team/page-task1.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/app/part-before/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-airbnb-com/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-airbnb-com-1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-10/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-11/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-12/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-13/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-14/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-15/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-16/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-17/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-18/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-19/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-2/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-20/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-21/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-22/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-23/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-3/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-4/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-5/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-6/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-7/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-8/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-example-com-9/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-godlike-host/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-godlike-host-1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-godlike-host-10/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-godlike-host-11/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-godlike-host-12/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-godlike-host-13/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-godlike-host-2/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-godlike-host-3/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-godlike-host-4/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-godlike-host-5/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-godlike-host-6/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-godlike-host-7/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-godlike-host-8/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-godlike-host-9/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-goldnest-cc/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-goldnest-cc-1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-goldnest-cc-2/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-goldnest-cc-3/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-goldnest-cc-4/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-goldnest-cc-5/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-goldnest-cc-6/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-goldnest-cc-7/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-goldnest-cc-8/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-nebulacomponents-shop/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-nebulacomponents-shop-1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-nebulacomponents-shop-10/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-nebulacomponents-shop-11/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-nebulacomponents-shop-2/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-nebulacomponents-shop-3/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-nebulacomponents-shop-4/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-nebulacomponents-shop-5/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-nebulacomponents-shop-6/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-nebulacomponents-shop-7/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-nebulacomponents-shop-8/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-nebulacomponents-shop-9/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patreon-com/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patreon-com-1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patreon-com-2/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patreon-com-3/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patreon-com-4/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patreon-com-5/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patreon-com-6/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patreon-com-7/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patreon-com-8/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-10/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-11/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-12/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-13/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-14/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-15/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-16/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-17/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-18/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-19/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-2/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-3/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-4/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-5/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-6/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-7/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-8/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-patricianunes-pt-9/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-repairandsquare-com-1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-repairandsquare-com-10/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-repairandsquare-com-11/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-repairandsquare-com-12/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-repairandsquare-com-13/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-repairandsquare-com-14/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-repairandsquare-com-15/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-repairandsquare-com-16/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-repairandsquare-com-17/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/ecommerce-repairandsquare-com-2/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general--1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general--2/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general--3/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general--4/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general--5/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com-1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com-10/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com-11/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com-12/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com-13/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com-14/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com-15/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com-16/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com-17/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com-2/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com-3/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com-4/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com-5/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com-6/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com-7/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com-8/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-2getherwesave-com-9/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-10/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-11/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-12/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-13/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-14/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-15/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-16/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-17/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-18/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-19/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-2/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-20/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-21/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-22/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-23/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-3/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-4/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-5/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-6/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-7/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-8/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curbcaddie-com-9/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curiouscats-ai/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curiouscats-ai-1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curiouscats-ai-10/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curiouscats-ai-11/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curiouscats-ai-12/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curiouscats-ai-13/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curiouscats-ai-14/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curiouscats-ai-2/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curiouscats-ai-3/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curiouscats-ai-4/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curiouscats-ai-5/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curiouscats-ai-6/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curiouscats-ai-7/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curiouscats-ai-8/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-curiouscats-ai-9/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-facetwoface-at/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-facetwoface-at-1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-facetwoface-at-10/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-facetwoface-at-11/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-facetwoface-at-12/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-facetwoface-at-13/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-facetwoface-at-14/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-facetwoface-at-15/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-facetwoface-at-2/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-facetwoface-at-3/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-facetwoface-at-4/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-facetwoface-at-5/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-facetwoface-at-6/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-facetwoface-at-7/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-facetwoface-at-8/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-facetwoface-at-9/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-10/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-11/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-12/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-13/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-14/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-15/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-16/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-17/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-18/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-2/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-3/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-4/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-5/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-6/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-7/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-8/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-hacktron-ai-9/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com-1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com-10/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com-11/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com-12/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com-13/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com-14/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com-15/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com-16/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com-17/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com-2/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com-3/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com-4/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com-5/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com-6/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com-7/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com-8/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-nypost-com-9/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-routinereps-com/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-routinereps-com-1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-routinereps-com-10/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-routinereps-com-11/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-routinereps-com-12/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-routinereps-com-13/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-routinereps-com-14/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-routinereps-com-15/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-routinereps-com-2/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-routinereps-com-3/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-routinereps-com-4/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-routinereps-com-5/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-routinereps-com-6/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-routinereps-com-7/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-routinereps-com-8/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-routinereps-com-9/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-10/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-11/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-12/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-13/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-14/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-15/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-16/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-17/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-18/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-19/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-2/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-20/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-21/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-22/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-23/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-3/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-4/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-5/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-6/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-7/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-8/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-usemagnetiq-com-9/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-wgu-edu/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-wgu-edu-1/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-wgu-edu-10/page.tsx
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/case-studies/general-wgu-edu-11/page.tsx
+  metadata_systems: []
+  analytics:
+    - .legacy/html-site/7-systems.html
+    - .legacy/html-site/ad-burn-leaderboard.html
+    - .legacy/html-site/agency-partner.html
+    - .legacy/html-site/ai-ops-retainer.html
+    - .legacy/html-site/ai-sdr-vs-audit.html
+    - .legacy/html-site/audit-lander.html
+    - .legacy/html-site/audit.html
+    - .legacy/html-site/beta-tester.html
+    - .legacy/html-site/blog-trigger-aware-outreach.html
+    - .legacy/html-site/checkout.html
+    - .legacy/html-site/checkout_v2.html
+    - .legacy/html-site/cta-optimization.html
+    - .legacy/html-site/demo.html
+    - .legacy/html-site/growth-launch-confirmation.html
+    - .legacy/html-site/growth-launch.html
+    - .legacy/html-site/headline-optimization.html
+    - .legacy/html-site/index-old.html
+    - .legacy/html-site/launch_page_97.html
+    - .legacy/html-site/mobile-landing-page-optimization.html
+    - .legacy/html-site/page-speed-conversion.html
+    - .legacy/html-site/part_after.html
+    - .legacy/html-site/part_before.html
+    - .legacy/html-site/pricing-generator.html
+    - .legacy/html-site/primer.html
+    - .legacy/html-site/roas-cliff.html
+    - .legacy/html-site/social-proof-landing-page.html
+    - .legacy/html-site/thank-you.html
+    - .legacy/html-site/unsubscribe.html
+    - .legacy/html-site/what-is-landing-page-audit.html
+    - .legacy/html-site/why-landing-pages-dont-convert.html
+    - .worktrees/nextjs-customer-platform/customer-portal/7-systems.html
+    - .worktrees/nextjs-customer-platform/customer-portal/ad-burn-leaderboard.html
+    - .worktrees/nextjs-customer-platform/customer-portal/agency-partner.html
+    - .worktrees/nextjs-customer-platform/customer-portal/ai-ops-retainer.html
+    - .worktrees/nextjs-customer-platform/customer-portal/ai-sdr-vs-audit.html
+    - .worktrees/nextjs-customer-platform/customer-portal/audit-lander.html
+    - .worktrees/nextjs-customer-platform/customer-portal/audit.html
+    - .worktrees/nextjs-customer-platform/customer-portal/beta-tester.html
+    - .worktrees/nextjs-customer-platform/customer-portal/blog-trigger-aware-outreach.html
+    - .worktrees/nextjs-customer-platform/customer-portal/checkout.html
+    - .worktrees/nextjs-customer-platform/customer-portal/checkout_v2.html
+    - .worktrees/nextjs-customer-platform/customer-portal/cta-optimization.html
+    - >-
+      .worktrees/nextjs-customer-platform/customer-portal/customer-portal/.legacy/app/index-old/page.tsx
+  content_collections: []
+unresolved_assumptions:
+  - Rendering model could not be determined from manifests.

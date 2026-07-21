@@ -131,14 +131,14 @@ export default function LearningCentrePage() {
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Want this installed instead of documented?</h2>
           <p className="mb-6 leading-relaxed text-fg-muted">
-            Start with the audit. If the handoff leak is obvious, the $147 Fix Pack turns it into a working operating system.
+            Start with the audit. If the handoff leak is obvious, the $97 Fix Pack turns it into a working operating system.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/audit" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">
               Run the free audit
             </Link>
             <a href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
-              Buy the $147 Fix Pack
+              Buy the $97 Fix Pack
             </a>
           </div>
         </section>

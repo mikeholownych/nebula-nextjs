@@ -1,0 +1,17 @@
+{
+  "package": "@nebulacomponents/citable",
+  "version": "1.13.0",
+  "releasedAt": "2026-07-19",
+  "detectorCount": 123,
+  "namespaceCount": 18,
+  "registryCount": 27,
+  "nodeRequirement": ">=24.0.0",
+  "license": "Apache-2.0",
+  "source": "npm:@nebulacomponents/citable@1.13.0",
+  "highlights": [
+    "Canonical release manifests that bind executable detector, namespace, registry, provider, distribution, documentation, and generated publisher projections to the release commit with fail-closed checksum validation.",
+    "Two-phase release governance with `published_unfinalized`, immutable finalization, bounded dwell, terminal withdrawal or supersession, and owner-controlled deployment receipts that cannot be mistaken for independent attestation.",
+    "Direct and cache-busted representation-drift observations with longitudinal divergence and convergence evidence that remains `external_unverified` and cannot satisfy release gates.",
+    "Acceptance-corpus contracts and bounded accuracy metrics covering detector confusion matrices, incomplete evidence, reviewer agreement, execution cost, reproducibility, and remediation verification."
+  ]
+}

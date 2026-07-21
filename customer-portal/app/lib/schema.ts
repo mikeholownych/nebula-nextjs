@@ -25,7 +25,7 @@ export const organizationSchema = {
     '@id': 'https://nebulacomponents.shop/#founder',
     name: 'Mike Holownych',
     jobTitle: 'Founder',
-    url: 'https://nebulacomponents.shop/company/team',
+    url: 'https://nebulacomponents.shop/about/team',
     sameAs: [
       'https://www.linkedin.com/in/mikeholownych',
       'https://github.com/mikeholownych',

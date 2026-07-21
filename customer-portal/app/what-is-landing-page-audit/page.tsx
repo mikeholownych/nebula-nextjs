@@ -43,7 +43,7 @@ export default function WhatIsLandingPageAudit() {
                 name: "Should I fix my landing page myself or pay someone?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "If the audit shows low-difficulty issues, DIY is fine. For technical issues or multiple fixes, the $147 Conversion Fix Pack includes implementation-ready instructions.",
+                  text: "If the audit shows low-difficulty issues, DIY is fine. For technical issues or multiple fixes, the $97 Conversion Fix Pack includes implementation-ready instructions.",
                 },
               },
             ],
@@ -181,7 +181,7 @@ export default function WhatIsLandingPageAudit() {
               <p className="text-gray-500 text-xs mt-4">Use the free Fix Kit →</p>
             </div>
             <div className="bg-[#161b22] border border-emerald-900/50 rounded-lg p-6">
-              <p className="text-emerald-400 font-semibold mb-3">⚡ Professional ($147)</p>
+              <p className="text-emerald-400 font-semibold mb-3">⚡ Professional ($97)</p>
               <ul className="space-y-2 text-gray-300 text-sm">
                 <li>• Page speed optimization</li>
                 <li>• Mobile layout fixes</li>
