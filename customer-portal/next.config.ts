@@ -7,6 +7,39 @@ const nextConfig: NextConfig = {
   eslint: { ignoreDuringBuilds: true },
   // Explicit workspace root to silence Turbopack lockfile ambiguity warning
   turbopack: { root: __dirname },
+  // 301/410 map for legacy static .html URLs indexed by Google (GSC 2026-07-21)
+  // Frees crawl budget from dead URLs; preserves any query association on equity-bearing pages.
+  // Rule: content pages → nearest current equivalent (301); true orphans → /gone (410).
+  async redirects() {
+    return [
+      // www → apex (duplicate host, both returning 200 — kills authority split)
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.nebulacomponents.shop' }],
+        destination: 'https://nebulacomponents.shop/:path*',
+        permanent: true,
+      },
+      // Legacy .html → current app routes (301)
+      { source: '/blog-trigger-aware-outreach.html',    destination: '/learning-centre', permanent: true },
+      { source: '/why-landing-pages-dont-convert.html', destination: '/learning-centre/landing-page-not-converting', permanent: true },
+      { source: '/cta-optimization.html',               destination: '/cta-optimization',   permanent: true },
+      { source: '/roas-cliff.html',                     destination: '/roas-cliff',          permanent: true },
+      { source: '/ai-sdr-vs-audit.html',                destination: '/ai-sdr-vs-audit',     permanent: true },
+      { source: '/primer.html',                         destination: '/learning-centre',      permanent: true },
+      { source: '/7-systems.html',                      destination: '/learning-centre',      permanent: true },
+      { source: '/audit.html',                          destination: '/audit',               permanent: true },
+      { source: '/self-audit.html',                     destination: '/audit',               permanent: true },
+      { source: '/audit_dashboard.html',                destination: '/audit',               permanent: true },
+      { source: '/agency-partner.html',                 destination: '/pricing',             permanent: true },
+      { source: '/ai-ops-retainer.html',                destination: '/pricing',             permanent: true },
+      { source: '/beta-tester.html',                    destination: '/pricing',             permanent: true },
+      // True orphans → 410 Gone (no equity to preserve, no equivalent page)
+      { source: '/ad-burn-leaderboard.html',            destination: '/gone',                permanent: true },
+      { source: '/og-card-source.html',                 destination: '/gone',                permanent: true },
+      { source: '/component-showcase.html',             destination: '/gone',                permanent: true },
+    ]
+  },
+
   // Serve static HTML files from public folder
   async rewrites() {
     return [
