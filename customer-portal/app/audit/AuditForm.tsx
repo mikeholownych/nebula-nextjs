@@ -82,7 +82,7 @@ export default function AuditForm() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="url" className="mb-2 block text-sm font-semibold text-fg">
-            Your landing page URL
+            Enter your landing page URL
           </label>
           <input
             id="url"
