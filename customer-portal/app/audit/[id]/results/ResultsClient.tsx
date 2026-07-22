@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useParams } from 'next/navigation'
 import { Card } from '@/components/ui'
 
 interface Finding {
@@ -107,7 +106,8 @@ function UnlockConfirmation({ emailSent, email, auditId }: { emailSent: boolean;
   )
 }
 
-function UnlockConfirmationWrapper({ emailSent, email, auditId }: { emailSent: boolean; email: string; auditId: string }) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function _UnlockConfirmationWrapper({ emailSent, email, auditId }: { emailSent: boolean; email: string; auditId: string }) {
   return <UnlockConfirmation emailSent={emailSent} email={email} auditId={auditId} />
 }
 
@@ -167,7 +167,7 @@ function ShareButton({ auditId }: { auditId: string }) {
   )
 }
 
-export default function ResultsClient({ auditId, unlocked: initialUnlocked, sharedView = false }: Props) {
+export default function ResultsClient({ auditId, unlocked: initialUnlocked, sharedView: _sharedView = false }: Props) {
   const [loading, setLoading] = useState(true)
   const [results, setResults] = useState<AuditResult | null>(null)
   const [error, setError] = useState<string | null>(null)
