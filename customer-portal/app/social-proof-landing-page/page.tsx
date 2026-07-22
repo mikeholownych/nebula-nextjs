@@ -81,22 +81,6 @@ export default function SocialProofLandingPage() {
 
       {/* Container */}
       <div className="max-w-[720px] mx-auto px-6 py-12 pb-20">
-        {/* Header */}
-        <header className="border-b border-border pb-6 mb-12 flex justify-between items-center">
-          <Link
-            href="/"
-            className="text-fg font-bold text-sm tracking-wider uppercase hover:text-accent transition-colors"
-          >
-            ● Nebula Components
-          </Link>
-          <Link
-            href="/audit"
-            className="bg-accent text-bg text-xs font-semibold px-4 py-2 rounded-md hover:bg-accent-light transition-colors"
-          >
-            Run free audit →
-          </Link>
-        </header>
-
         {/* Main Content */}
         <h1 className="text-2xl sm:text-3xl md:text-[2.4rem] font-extrabold leading-tight text-fg mt-8 mb-4">
           Social Proof on Landing Pages
@@ -215,29 +199,6 @@ export default function SocialProofLandingPage() {
           </p>
         </div>
 
-        {/* Footer */}
-        <footer className="border-t border-border mt-20 pt-6 text-center text-sm text-fg-muted">
-          <p>
-            © 2025{" "}
-            <Link href="/" className="text-accent hover:text-accent-light transition-colors">
-              Nebula Components
-            </Link>{" "}
-            ·{" "}
-            <Link
-              href="/what-is-landing-page-audit"
-              className="text-accent hover:text-accent-light transition-colors"
-            >
-              What is a landing page audit?
-            </Link>{" "}
-            ·{" "}
-            <Link
-              href="/why-landing-pages-dont-convert"
-              className="text-accent hover:text-accent-light transition-colors"
-            >
-              Why pages don't convert
-            </Link>
-          </p>
-        </footer>
       </div>
 
       {/* Cookie Consent Script */}

@@ -43,16 +43,6 @@ const relatedArticles = [
 export default function MobileLandingPageOptimization() {
   return (
     <div className="min-h-screen bg-bg text-fg-muted font-sans">
-      {/* Header */}
-      <header className="max-w-[720px] mx-auto px-6 pt-8 pb-6 flex justify-between items-center border-b border-border">
-        <a href="/" className="text-fg text-sm font-bold tracking-widest uppercase hover:text-accent transition-colors">
-          ● Nebula Components
-        </a>
-        <a href="/audit" className="bg-accent text-bg text-sm font-semibold px-4 py-2 rounded-md hover:bg-accent-light transition-colors">
-          Run free audit →
-        </a>
-      </header>
-
       {/* Main Content */}
       <main className="max-w-[720px] mx-auto px-6 py-12">
         <h1 className="text-[clamp(1.8rem,4vw,2.4rem)] font-extrabold leading-tight text-fg mt-8 mb-4">
@@ -127,19 +117,6 @@ export default function MobileLandingPageOptimization() {
           </p>
         </div>
 
-        {/* Footer */}
-        <footer className="border-t border-border mt-16 pt-6 text-center text-sm text-fg-muted">
-          <p>
-            © 2025 <a href="/" className="text-accent hover:text-accent-light transition-colors">Nebula Components</a> ·{' '}
-            <a href="/what-is-landing-page-audit" className="text-accent hover:text-accent-light transition-colors">
-              What is a landing page audit?
-            </a>{' '}
-            ·{' '}
-            <a href="/why-landing-pages-dont-convert" className="text-accent hover:text-accent-light transition-colors">
-              Why pages don't convert
-            </a>
-          </p>
-        </footer>
       </main>
     </div>
   )

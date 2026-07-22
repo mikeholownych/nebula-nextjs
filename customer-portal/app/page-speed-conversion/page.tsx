@@ -106,9 +106,6 @@ export default function PageSpeedConversion() {
           <p className="text-[13px] text-fg-muted mt-2.5">Free audit live · results in 60 seconds</p>
         </div>
 
-        <footer className="border-t border-border mt-20 pt-6 text-fg-muted text-sm text-center">
-          <p>© 2025 <a className="text-accent no-underline hover:text-accent-light transition-colors" href="/">Nebula Components</a> · <a className="text-accent no-underline hover:text-accent-light transition-colors" href="/what-is-landing-page-audit">What is a landing page audit?</a> · <a className="text-accent no-underline hover:text-accent-light transition-colors" href="/why-landing-pages-dont-convert">Why pages don&apos;t convert</a></p>
-        </footer>
       </div>
     </>
   )
