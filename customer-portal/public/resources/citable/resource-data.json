@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "product": "Citable",
-  "version": "1.13.0",
-  "commit": "5d482ac0d1196c6a5d7a7d2d5ef55fafd4d3bd29",
+  "version": "1.13.1",
+  "commit": "064bc52ae77b23c230b8c33fb542e0fb9a41646c",
   "facts": {
     "detectors": 123,
     "namespaces": 18,
