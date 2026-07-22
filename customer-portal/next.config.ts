@@ -1,4 +1,21 @@
 import type { NextConfig } from 'next'
+import { createHash } from 'node:crypto'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+
+// Citable release governance: /resources/citable must answer with the sha256
+// of the vendored resource-data.json release projection so publisher-controlled
+// deployment receipts can verify the deployed surface against the release
+// manifest. The vendored files under public/resources/citable/ are byte-exact
+// copies of the citable GitHub release assets for the deployed version.
+function citableProjectionHash(): string | null {
+  try {
+    const file = join(process.cwd(), 'public/resources/citable/resource-data.json')
+    return createHash('sha256').update(readFileSync(file)).digest('hex')
+  } catch {
+    return null
+  }
+}
 
 const nextConfig: NextConfig = {
   // Serve static HTML files from public folder
@@ -24,7 +41,32 @@ const nextConfig: NextConfig = {
   },
   // Allow serving static HTML
   async headers() {
+    const projectionHash = citableProjectionHash()
     return [
+      ...(projectionHash
+        ? [
+            {
+              source: '/resources/citable',
+              headers: [
+                {
+                  key: 'x-citable-projection-sha256',
+                  value: projectionHash,
+                },
+              ],
+            },
+          ]
+        : []),
+      {
+        // Receipt probes hash the exact body; keep intermediary caching short
+        // so a redeploy propagates within one probe interval.
+        source: '/resources/citable/:file(llms\\.txt|resource-data\\.json)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=60, must-revalidate, no-transform',
+          },
+        ],
+      },
       {
         source: '/:path*.html',
         headers: [
