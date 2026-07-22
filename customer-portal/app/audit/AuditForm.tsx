@@ -100,7 +100,7 @@ export default function AuditForm() {
           disabled={!url || loading}
           className="w-full rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light disabled:opacity-50"
         >
-          {loading ? 'Starting audit…' : 'Audit My Page — Free'}
+          {loading ? 'Starting audit…' : 'Run Audit — Free'}
         </button>
 
         {error && (

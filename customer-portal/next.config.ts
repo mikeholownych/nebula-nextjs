@@ -21,6 +21,7 @@ const nextConfig: NextConfig = {
   // Skip TypeScript check during build — run `npm run typecheck` as a separate gate
   typescript: { ignoreBuildErrors: true },
   // Skip ESLint during build — run `npm run lint` as a separate gate
+  // @ts-expect-error eslint key removed from NextConfig type in Next 16 but still works at runtime
   eslint: { ignoreDuringBuilds: true },
   // Explicit workspace root to silence Turbopack lockfile ambiguity warning
   turbopack: { root: __dirname },
