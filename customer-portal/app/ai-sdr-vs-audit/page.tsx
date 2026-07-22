@@ -8,13 +8,6 @@ export const metadata: Metadata = {
 export default function AiSdrVsAuditPage() {
   return (
     <div className="min-h-screen bg-bg text-fg font-sans">
-      {/* Header */}
-      <header className="max-w-[780px] mx-auto px-6 pt-10">
-        <a href="/" className="text-accent-light text-sm font-bold tracking-widest uppercase hover:text-accent transition-colors">
-          Nebula Components
-        </a>
-      </header>
-
       {/* Hero */}
       <section className="bg-bg border-b border-border py-20 px-6">
         <div className="max-w-[720px] mx-auto text-center">
@@ -157,8 +150,8 @@ export default function AiSdrVsAuditPage() {
             Free audit live — 7 conversion signals
           </div>
           <p className="mb-0">
-            Nebula is rebuilding the audit engine and fulfillment controls before reopening automated scoring or managed outreach.{' '}
-            <a href="/audit" className="text-accent font-bold hover:underline">View the current audit status →</a>
+            Run a free 60-second audit across 7 conversion signals — no signup required.{' '}
+            <a href="/audit" className="text-accent font-bold hover:underline">Run your free audit →</a>
           </p>
         </div>
 
@@ -173,7 +166,7 @@ export default function AiSdrVsAuditPage() {
         {/* CTA Section */}
         <div className="bg-bg-panel shadow-glow border border-border rounded-2xl py-12 px-10 text-center">
           <h3 className="text-2xl font-bold text-fg mb-3">
-            Audit scoring rebuild in progress
+            Run your free landing page audit
           </h3>
           <p className="text-fg-muted max-w-[500px] mx-auto mb-6">
             Paste your URL — results in under 60 seconds.

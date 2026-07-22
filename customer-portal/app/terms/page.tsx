@@ -8,15 +8,6 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <div className="page">
-      <header className="header" role="banner">
-        <div className="header-inner">
-          <a href="/" className="logo" aria-label="Nebula Components home">
-            <span className="logo-mark" aria-hidden="true">◆</span>
-            <span className="logo-text">Nebula</span>
-          </a>
-        </div>
-      </header>
-
       <main className="legal-page" role="main">
         <div className="legal-content">
           <h1>Terms of Service</h1>
@@ -85,18 +76,6 @@ export default function TermsPage() {
         </div>
       </main>
 
-      <footer className="footer" role="contentinfo">
-        <div className="footer-content">
-          <nav aria-label="Footer navigation">
-            <a href="/learning-centre">Learning Centre</a>
-            <a href="/case-studies">Case Studies</a>
-            <a href="/pricing">Pricing</a>
-            <a href="/privacy-policy">Privacy Policy</a>
-            <a href="/terms">Terms</a>
-          </nav>
-          <p className="footer-copy">© 2026 Nebula Components. All rights reserved.</p>
-        </div>
-      </footer>
     </div>
   )
 }
