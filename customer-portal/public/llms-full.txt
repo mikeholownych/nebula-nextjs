@@ -43,13 +43,13 @@ A complete landing page audit using the 7-point framework, a written diagnosis i
 No retainer. No ongoing commitment. Pay once, get the page fixed.
 
 ### Free Audit
-Automated URL submission and scoring across 7 conversion signals. Results delivered in under 60 seconds. No email required to see results.
+Automated URL submission and 7-point scoring across message-match, trust signals, mobile layout, load time, CTA clarity, form friction, and compliance.
 
 ## Open Source: Citable
 
 Citable is an open-source CLI for search and AI discoverability governance. It was built to address a specific internal need: auditing whether a site was actually retrievable by search engines and AI systems, with evidence rather than opinions.
 
-- Version: 1.12.0
+- Version: 1.13.0
 - License: Apache 2.0
 - npm: @nebulacomponents/citable
 - GitHub: https://github.com/mikeholownych/citable
@@ -57,7 +57,7 @@ Citable is an open-source CLI for search and AI discoverability governance. It w
 
 ### What Citable Does
 
-Citable runs 123 detectors across 18 namespaces (not all detectors are deterministic — each declares its determinism posture explicitly):
+Citable runs 123 detectors across 18 namespaces and 27 schema-validated registries (not all detectors are deterministic — each declares its determinism posture explicitly):
 - CRAWL: robots.txt, sitemap, canonical, redirect chains
 - PAGE: title uniqueness, meta description, word count, content quality
 - SEO: structured data presence, heading hierarchy, image alt text

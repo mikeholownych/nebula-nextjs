@@ -10,7 +10,9 @@
     "typecheck": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
-    "ci": "npm run typecheck && npm run lint && npm run build && npm run test"
+    "sync:citable": "node scripts/sync-citable-projection.mjs",
+    "check:citable-projection": "node scripts/sync-citable-projection.mjs --check",
+    "ci": "npm run typecheck && npm run lint && npm run check:citable-projection && npm run build && npm run test"
   },
   "dependencies": {
     "@react-oauth/google": "^0.13.5",

@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Footer from '@/components/Footer'
 
 export const metadata = {
   title: 'Case Studies | Nebula Components',
@@ -43,15 +42,6 @@ export default function CaseStudiesIndex() {
 
   return (
     <main id="main-content" role="main" className="min-h-screen bg-bg">
-      <header className="border-b border-border px-6 py-4">
-        <nav aria-label="Primary" className="mx-auto flex max-w-6xl items-center justify-between">
-          <Link href="/" className="text-xl font-semibold text-fg">Nebula</Link>
-          <div className="flex items-center gap-5">
-            <Link href="/learning-centre" className="text-sm text-fg-muted hover:text-fg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded">Learning</Link>
-            <Link href="/pricing" className="text-sm text-fg-muted hover:text-fg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded">Pricing</Link>
-          </div>
-        </nav>
-      </header>
 
       <section className="mx-auto max-w-4xl px-6 py-16">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Case Studies</p>
@@ -93,7 +83,6 @@ export default function CaseStudiesIndex() {
         </Link>
       </section>
 
-      <Footer />
     </main>
   )
 }

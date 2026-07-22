@@ -36,4 +36,19 @@ describe('Citable public projection', () => {
     expect(read('public/llms.txt')).toContain('Citable v1.13.0')
     expect(read('public/llms-full.txt')).toContain('- Version: 1.13.0')
   })
+
+  test('serves the vendored release governance projections as controlled surfaces', () => {
+    // Byte-exact copies of the citable GitHub release assets. The deployed
+    // /resources/citable header and /resources/citable/llms.txt body are
+    // verified against the release manifest by deployment receipts.
+    const resourceData = JSON.parse(read('public/resources/citable/resource-data.json'))
+    expect(resourceData.product).toBe('Citable')
+    expect(resourceData.version).toMatch(/^\d+\.\d+\.\d+$/)
+    expect(resourceData.commit).toMatch(/^[0-9a-f]{40}$/)
+
+    const llms = read('public/resources/citable/llms.txt')
+    expect(llms.startsWith('# Citable\n')).toBe(true)
+    expect(llms).toContain(`- Version: ${resourceData.version}`)
+    expect(llms).toContain(`- Release commit: ${resourceData.commit}`)
+  })
 })

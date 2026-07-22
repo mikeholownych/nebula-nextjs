@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import citableRelease from '../../data/citable-release.json'
 
 export const metadata: Metadata = {
   title: 'Resources — Tools & Open Source | Nebula Components',
@@ -26,7 +27,7 @@ const resourceSchema = {
       operatingSystem: 'Node.js',
       url: 'https://nebulacomponents.shop/resources/citable',
       downloadUrl: 'https://www.npmjs.com/package/@nebulacomponents/citable',
-      softwareVersion: '1.12.0',
+      softwareVersion: citableRelease.version,
       license: 'https://www.apache.org/licenses/LICENSE-2.0',
       description:
         'The evidence layer for defensible SEO, AEO, and GEO audits. 123 detectors across 18 namespaces. Evidence packages on every run.',
@@ -67,7 +68,7 @@ export default function ResourcesPage() {
               </p>
               <div className="mt-1 flex items-center justify-between">
                 <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full border border-accent/30 px-3 py-1 text-xs text-accent">v1.12.0</span>
+                  <span className="rounded-full border border-accent/30 px-3 py-1 text-xs text-accent">v{citableRelease.version}</span>
                   <span className="rounded-full border border-border px-3 py-1 text-xs text-fg-muted">Apache 2.0</span>
                   <span className="rounded-full border border-border px-3 py-1 text-xs text-fg-muted">npm</span>
                   <span className="rounded-full border border-border px-3 py-1 text-xs text-fg-muted">Node.js</span>

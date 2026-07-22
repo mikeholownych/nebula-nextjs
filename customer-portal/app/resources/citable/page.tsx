@@ -1,4 +1,8 @@
 import type { Metadata } from 'next'
+import citableRelease from '../../../data/citable-release.json'
+
+const citableVersion = citableRelease.version
+const citableTag = `v${citableVersion}`
 
 // ---------------------------------------------------------------------------
 // Build-time GitHub signals — fetched once at static render, not client-side
@@ -26,22 +30,22 @@ async function getLastRelease(): Promise<{ tag: string; date: string }> {
       'https://api.github.com/repos/mikeholownych/citable/releases/latest',
       { next: { revalidate: 3600 }, headers: { Accept: 'application/vnd.github+json' } }
     )
-    if (!res.ok) return { tag: 'v1.12.0', date: '2026-07-19' }
+    if (!res.ok) return { tag: citableTag, date: citableRelease.releasedAt }
     const data = await res.json()
     const date = data.published_at ? data.published_at.slice(0, 10) : '2026-07-19'
-    return { tag: data.tag_name ?? 'v1.12.0', date }
-  } catch { return { tag: 'v1.12.0', date: '2026-07-19' } }
+    return { tag: data.tag_name ?? citableTag, date }
+  } catch { return { tag: citableTag, date: citableRelease.releasedAt } }
 }
 
 export const metadata: Metadata = {
-  title: 'Citable v1.12.0 — Evidence Layer for Defensible SEO, AEO, and GEO Audits | Nebula Components',
+  title: `Citable ${citableTag} — Evidence Layer for Defensible SEO, AEO, and GEO Audits | Nebula Components`,
   description:
     'Citable audits what a site makes retrievable, extractable, supportable, and observable — then preserves the artifacts required to defend every finding and verify every change. 123 detectors across 18 namespaces. Apache 2.0 licensed.',
   alternates: { canonical: 'https://nebulacomponents.shop/resources/citable' },
   openGraph: {
     title: 'Citable — The Evidence Layer for Defensible SEO, AEO, and GEO Audits',
     description:
-      'Not another AI visibility score. Citable manages evidence, eligibility, provenance, remediation, and validation. 123 detectors. 19 schema-validated registries. Apache 2.0.',
+      `Not another AI visibility score. Citable manages evidence, eligibility, provenance, remediation, and validation. ${citableRelease.detectorCount} detectors. ${citableRelease.registryCount} schema-validated registries. Apache 2.0.`,
     url: 'https://nebulacomponents.shop/resources/citable',
     siteName: 'Nebula Components',
     type: 'website',
@@ -85,7 +89,7 @@ const citableSchema = {
         operatingSystem: 'Node.js >=24',
         url: 'https://nebulacomponents.shop/resources/citable',
         downloadUrl: 'https://www.npmjs.com/package/@nebulacomponents/citable',
-        softwareVersion: '1.12.0',
+        softwareVersion: citableVersion,
         license: 'https://www.apache.org/licenses/LICENSE-2.0',
         author: { '@id': 'https://nebulacomponents.shop/#organization' },
       },
@@ -387,14 +391,14 @@ export default async function CitablePage() {
               <p className="eyebrow hero-animate-eyebrow">Nebula Components Open Source</p>
               <div className="hero-animate-title" style={{display:'flex',alignItems:'center',gap:'14px',flexWrap:'wrap',marginBottom:'14px'}}>
                 <h1 className="citable-h1">Citable</h1>
-                <span className="version-pill">v1.12.0</span>
+                <span className="version-pill">{citableTag}</span>
               </div>
               <p className="tagline hero-animate-tagline">The evidence layer for defensible SEO, AEO, and GEO audits.</p>
               <p className="lede hero-animate-lede" style={{marginTop:'14px'}}>Audits what a site makes retrievable, extractable, supportable, and observable — then preserves the artifacts required to defend every finding and verify every change.</p>
               <div className="badges" style={{marginTop:'16px'}}>
-                <span className="badge green">123 detectors</span>
-                <span className="badge green">18 namespaces</span>
-                <span className="badge green">19 registries</span>
+                <span className="badge green">{citableRelease.detectorCount} detectors</span>
+                <span className="badge green">{citableRelease.namespaceCount} namespaces</span>
+                <span className="badge green">{citableRelease.registryCount} registries</span>
                 <span className="badge green">SEO · AEO · GEO</span>
                 <span className="badge green">Agent-readiness</span>
                 <span className="badge">Apache 2.0</span>
@@ -460,7 +464,7 @@ export default async function CitablePage() {
               <div className="step">
                 <div className="step-num">2</div>
                 <h4>Init</h4>
-                <p>Initialise 19 schema-validated registries and a project profile in your repo root.</p>
+                <p>Initialise {citableRelease.registryCount} schema-validated registries and a project profile in your repo root.</p>
               </div>
               <div className="step">
                 <div className="step-num">3</div>
@@ -562,7 +566,7 @@ npx @nebulacomponents/citable@latest apply --input .citable/remediations/remedia
           {/* CAPABILITY SURFACE */}
           <hr className="section-divider" />
           <h2 className="citable-h2">Full capability surface</h2>
-          <p style={{color:'var(--muted)',fontSize:'15px',maxWidth:'780px',lineHeight:'1.6',marginBottom:'16px'}}>Commands verified against <code>@nebulacomponents/citable@1.12.0</code>.</p>
+          <p style={{color:'var(--muted)',fontSize:'15px',maxWidth:'780px',lineHeight:'1.6',marginBottom:'16px'}}>Commands verified against <code>@nebulacomponents/citable@{citableVersion}</code>.</p>
 
           <div className="table-wrap">
             <table>
@@ -580,6 +584,12 @@ npx @nebulacomponents/citable@latest apply --input .citable/remediations/remedia
                 <tr><td><code>objectives init/validate/evaluate</code></td><td>Metric-referenced objective contracts with baseline/evaluation window comparison and explicit inconclusive outcomes.</td></tr>
                 <tr><td><code>schedules run</code></td><td>Execute an active version-pinned audit schedule by ID. Schedules are defined in the schedules registry — not created ad-hoc via CLI flags.</td></tr>
                 <tr><td><code>project github</code></td><td>Render non-authoritative GitHub annotations from a completed run. Hash-bound to immutable artifacts. GitHub never becomes a parallel state authority.</td></tr>
+                <tr><td><code>artifacts export/verify/import</code></td><td>Export one sealed run as a portable interchange directory, independently verify its package hash, and import it without changing canonical run bytes.</td></tr>
+                <tr><td><code>kpi / variance / outcomes / risk</code></td><td>Govern executive metrics, target-vs-actual variance, validated customer outcomes, and residual risk using schema-validated registries.</td></tr>
+                <tr><td><code>executive-review / board-report</code></td><td>Produce monthly operating reviews and quarterly board packs from governed statements only. Missing evidence creates refused sections rather than invented narrative.</td></tr>
+                <tr><td><code>decision-memo / assumption-audit / scenario</code></td><td>Record bounded decisions, test strategic assumptions, and model compound risk states with explicit evidence, owners, triggers, and reopen conditions.</td></tr>
+                <tr><td><code>prioritize / competitive-intel</code></td><td>Rank initiatives with transparent evidence-weighted scoring and preserve source-controlled competitive observations.</td></tr>
+                <tr><td><code>executive</code></td><td>Chief-of-staff router for the reporting suite. Routing depth is capped at one and decisions are logged.</td></tr>
               </tbody>
             </table>
           </div>
@@ -605,8 +615,8 @@ npx @nebulacomponents/citable@latest apply --input .citable/remediations/remedia
 
           {/* NAMESPACES */}
           <hr className="section-divider" />
-          <h2 className="citable-h2">Namespaces — 123 detectors across 18 areas</h2>
-          <p style={{color:'var(--muted)',fontSize:'13px',marginBottom:'12px'}}>Counts derived from published package <code>@nebulacomponents/citable@1.12.0</code>. Not all detectors are deterministic — each declares its determinism posture explicitly.</p>
+          <h2 className="citable-h2">Namespaces — {citableRelease.detectorCount} detectors across {citableRelease.namespaceCount} areas</h2>
+          <p style={{color:'var(--muted)',fontSize:'13px',marginBottom:'12px'}}>Counts derived from published package <code>@nebulacomponents/citable@{citableVersion}</code>. Not all detectors are deterministic — each declares its determinism posture explicitly.</p>
           <div className="table-wrap">
             <table>
               <thead><tr><th>Namespace</th><th>Count</th><th>Coverage</th></tr></thead>
@@ -635,9 +645,9 @@ npx @nebulacomponents/citable@latest apply --input .citable/remediations/remedia
 
           {/* REGISTRIES */}
           <hr className="section-divider" />
-          <h2 className="citable-h2">Registries — 19 schema-validated YAML files</h2>
+          <h2 className="citable-h2">Registries — {citableRelease.registryCount} schema-validated YAML files</h2>
           <div className="panel">
-            <p><code>.citable/</code> holds 19 registries — schema-validated on save, with declared cross-registry relationships checked during registry validation. The full list, derived from the published package:</p>
+            <p><code>.citable/</code> holds {citableRelease.registryCount} registries — schema-validated on save, with declared cross-registry relationships checked during registry validation. The full list, derived from the published package:</p>
             <div className="grid-2" style={{marginTop:'14px'}}>
               <ul>
                 <li><strong>queries</strong> — target search queries and intent mapping</li>
@@ -661,6 +671,14 @@ npx @nebulacomponents/citable@latest apply --input .citable/remediations/remedia
                 <li><strong>review-items</strong> — semantic review work queue</li>
                 <li><strong>sampling-plans</strong> — reproducible census and seeded random plans</li>
                 <li><strong>schedules</strong> — version-pinned audit schedules</li>
+                <li><strong>kpis</strong> — governed executive metric definitions</li>
+                <li><strong>variances</strong> — plan, actual, cause, and management response</li>
+                <li><strong>customer-outcomes</strong> — validated outcome progression</li>
+                <li><strong>risks</strong> — residual exposure and trigger thresholds</li>
+                <li><strong>decisions</strong> — bounded decision records and reopen conditions</li>
+                <li><strong>assumptions</strong> — evidence-backed validity tracking</li>
+                <li><strong>scenarios</strong> — compound risk states and warning triggers</li>
+                <li><strong>initiatives</strong> — transparent evidence-weighted prioritization</li>
               </ul>
             </div>
             <p style={{marginTop:'14px'}}>Automation only <em>downgrades</em> claim status. A claim cannot reach <code>verified</code> without existing evidence plus human semantic review. Accepted exceptions do not alter technical finding state — <code>technical_state: failed</code> is preserved. Fail-closed.</p>
@@ -739,7 +757,13 @@ npx @nebulacomponents/citable@latest apply --input .citable/remediations/remedia
           <p style={{color:'var(--muted)',fontSize:'13px',marginBottom:'16px'}}>Source: <code>CHANGELOG.md</code> from published npm package. <a href="https://github.com/mikeholownych/citable/releases" target="_blank" rel="noopener noreferrer">All releases on GitHub →</a></p>
           <div className="changelog">
             <div className="release latest">
-              <div><span className="release-version">v1.12.0</span><span className="release-date">2026-07-19 · latest</span></div>
+              <div><span className="release-version">{citableTag}</span><span className="release-date">{citableRelease.releasedAt} · latest</span></div>
+              <ul>
+                {citableRelease.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
+              </ul>
+            </div>
+            <div className="release">
+              <div><span className="release-version">v1.12.0</span><span className="release-date">2026-07-19</span></div>
               <ul>
                 <li>Independent desktop, mobile, and JavaScript-disabled Chromium render profiles with raw/rendered parity artifacts and bounded interaction discovery (<code>--interactions</code>)</li>
                 <li>Partial-failure evidence and <code>--resume-run</code> recovery that reuses only successful profiles from an immutable source run</li>
