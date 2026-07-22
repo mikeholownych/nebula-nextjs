@@ -2,8 +2,8 @@
 
 Citable is the evidence and change-control layer for defensible search and AI citation readiness.
 
-- Version: 1.13.0
-- Release commit: 5d482ac0d1196c6a5d7a7d2d5ef55fafd4d3bd29
+- Version: 1.13.1
+- Release commit: 064bc52ae77b23c230b8c33fb542e0fb9a41646c
 - Detectors: 123 across 18 namespaces
 - Schema-validated registries: 27
 - Agent providers: 12
