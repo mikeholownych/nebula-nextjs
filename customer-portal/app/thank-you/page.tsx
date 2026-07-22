@@ -14,7 +14,7 @@ export default function ThankYouPage() {
             Your Fix Pack is confirmed. We&apos;ll contact you at the email used during checkout — expect to hear from us within a few hours.
           </p>
           <p className="text-sm text-fg-muted">
-            Your Stripe receipt is your payment confirmation.
+            Payment status: confirmed. Your Stripe receipt is your payment confirmation.
           </p>
         </Card>
 

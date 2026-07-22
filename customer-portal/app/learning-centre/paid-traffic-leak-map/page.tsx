@@ -86,7 +86,7 @@ const LEAKS = [
     description:
       "A visitor who abandons while the page is loading is recorded as a bounce before they saw your headline. Portent's 2022 analysis of over 100 million page views found that pages loading in 1 second convert at roughly 3× the rate of pages loading in 5 seconds for B2B lead generation. Google's Core Web Vitals define LCP over 4 seconds as 'Poor.' The Chrome UX Report consistently shows LCP scores 40–60% worse on mobile than desktop for the same URL — because mobile devices have less processing power and are often on slower networks.",
     why: "Landing Page Experience — one of Quality Score's three components — includes page load speed. A poor mobile LCP receives a 'Below Average' rating, raising CPC for mobile-originated traffic. The fix improves both conversion rate and Quality Score simultaneously.",
-    fix: 'Run Google PageSpeed Insights (pagespeed.web.dev) on the Mobile preset. Identify the LCP element — almost always the hero image. Convert it to WebP or AVIF format (40–60% file size reduction), add a correct `sizes` attribute so mobile devices download a smaller version, and add `fetchpriority="high"` to hint early loading. Defer non-critical scripts and remove unused third-party tools that block rendering.',
+    fix: 'Run Google PageSpeed Insights (pagespeed.web.dev) on the mobile preset. Identify the LCP element — almost always the hero image. Convert it to WebP or AVIF format (40–60% file size reduction), add a correct `sizes` attribute so mobile devices download a smaller version, and add `fetchpriority="high"` to hint early loading. Defer non-critical scripts and remove unused third-party tools that block rendering. Target: LCP under the Good threshold on mobile.',
     relatedHref: '/learning-centre/landing-page-load-time-slow',
     relatedLabel: 'LCP benchmarks and detailed fix guide →',
   },
@@ -119,7 +119,7 @@ const LEAKS = [
     description:
       'The majority of paid social traffic arrives on mobile. Broken layouts, full-size images not compressed for mobile networks, CTAs pushed below the fold by oversized hero sections, and tap targets under 44px silently filter out the majority of paid social visitors. The desktop conversion rate masks the mobile failure in blended analytics.',
     why: "Most landing pages are designed and tested on desktop. The mobile experience is treated as an afterthought — a responsive breakpoint that 'should work.' In practice, the 390px viewport on a real phone reveals failures that DevTools device emulation does not: actual touch interaction precision, real 4G network conditions, and the physical reality of reading a screen that fits in one hand.",
-    fix: "Open the page on a real phone. Read the headline aloud. Is the CTA visible without scrolling? Can you tap every button on the first try with your thumb? Run PageSpeed Insights mobile. Check that LCP is under 2.5 seconds. Fix in order: layout visibility, tap targets, load time. Do not rely on DevTools 'mobile view' for this audit — use a real device.",
+    fix: "Open the page on a real phone. Read the headline aloud. Is the CTA visible without scrolling? Can you tap every button on the first try with your thumb? Run PageSpeed Insights mobile. Check that LCP is within the Good threshold (under 2.5s). Fix in order: layout visibility, tap targets, load time. Do not rely on DevTools 'mobile view' for this audit — use a real device.",
     relatedHref: '/learning-centre/mobile-landing-page-leaks',
     relatedLabel: 'Full mobile leak audit: 5 leaks and fixes →',
   },
