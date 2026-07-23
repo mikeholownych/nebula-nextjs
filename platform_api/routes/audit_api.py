@@ -28,7 +28,6 @@ router = APIRouter(prefix="/audit", tags=["audit"])
 
 # Path to deliver_audit.py
 AUDIT_SCRIPT = "/home/mike/nebula/deliver_audit.py"
-VENV_ACTIVATE = "/home/mike/nebula/venv/bin/activate"
 
 
 class AuditRequest(BaseModel):
@@ -73,8 +72,12 @@ async def run_audit(request: AuditRequest):
         
         # Build command
         cmd = [
-            "bash", "-c",
-            f"source {VENV_ACTIVATE} && python {AUDIT_SCRIPT} \"{request.url}\" \"{request.email or 'placeholder@example.com'}\" --json --dry-run"
+            "/home/mike/nebula/venv/bin/python3",
+            AUDIT_SCRIPT,
+            request.url,
+            request.email or "placeholder@example.com",
+            "--json",
+            "--dry-run",
         ]
         
         # Execute
@@ -265,9 +268,9 @@ async def send_audit_email(request: EmailRequest):
             )
         )
         
-        # Mark email as sent in DB
+        # Advance delivery state only after confirmed provider success.
         audits = await audit_db.get_audits_by_email(request.email, limit=1)
-        if audits:
+        if result.get("status") == "sent" and audits:
             await audit_db.mark_email_sent(audits[0]['id'])
             # Track email sent
             await analytics.track_email_sent(
