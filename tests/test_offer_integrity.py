@@ -48,3 +48,13 @@ def test_active_runtime_has_no_retired_fix_pack_payment_link():
             if retired.lower() in path.read_text(errors="ignore").lower():
                 failures.append(str(path.relative_to(BASE)))
     assert not failures, f"Retired Stripe link remains in: {failures}"
+
+
+def test_audit_results_page_has_only_the_canonical_fix_pack_offer():
+    page = BASE / "customer-portal" / "app" / "audit" / "[id]" / "results" / "ResultsClient.tsx"
+    text = page.read_text()
+    assert "Audit Lite" not in text
+    assert "$7" not in text
+    assert "$1,497" not in text
+    assert "$97 Fix Pack" in text
+    assert "https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b" in text

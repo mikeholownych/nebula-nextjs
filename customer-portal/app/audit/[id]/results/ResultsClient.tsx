@@ -448,64 +448,32 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
           <UnlockConfirmation emailSent={emailSent} email={emailForm.email} auditId={auditId} />
         )}
 
-        {/* Upsells */}
+        {/* Canonical offer: free audit → $97 Fix Pack */}
         <div className="mt-12 space-y-6">
           <h2 className="text-center text-xl font-bold text-fg">
-            Want Help Implementing These Fixes?
+            Want Us to Implement These Fixes?
           </h2>
 
-          <div className="grid gap-4 sm:grid-cols-3">
-            <Card variant="bordered" className="relative overflow-hidden">
-              <div className="p-4">
-                <h3 className="mb-1 font-bold text-fg">Audit Lite</h3>
-                <p className="mb-2 text-2xl font-bold text-accent">$7</p>
-                <p className="mb-4 text-sm text-fg-muted">Top 3 prioritized fixes you can do today</p>
-                <a
-                  href="https://buy.stripe.com/aFacN55E0cf2fupafM43S0e"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full rounded-lg bg-accent px-4 py-2 text-center font-semibold text-bg transition-colors hover:bg-accent-light"
-                >
-                  Get Started
-                </a>
-              </div>
-            </Card>
-
-            <Card variant="bordered" className="relative overflow-hidden border-accent">
-              <div className="absolute right-2 top-2 rounded bg-accent px-2 py-0.5 text-xs font-semibold text-bg">
-                POPULAR
-              </div>
-              <div className="p-4">
-                <h3 className="mb-1 font-bold text-fg">Implementation Session</h3>
-                <p className="mb-2 text-2xl font-bold text-accent">$97</p>
-                <p className="mb-4 text-sm text-fg-muted">We fix every finding from this audit — rewritten copy, rebuilt sections, live in 48 hours</p>
-                <a
-                  href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full rounded-lg bg-accent px-4 py-2 text-center font-semibold text-bg transition-colors hover:bg-accent-light"
-                >
-                  Fix My Page — $97
-                </a>
-              </div>
-            </Card>
-
-            <Card variant="bordered" className="relative overflow-hidden">
-              <div className="p-4">
-                <h3 className="mb-1 font-bold text-fg">Done-For-You</h3>
-                <p className="mb-2 text-2xl font-bold text-accent">$1,497</p>
-                <p className="mb-4 text-sm text-fg-muted">Complete rebuild + 30-day monitoring + guarantee</p>
-                <a
-                  href="https://buy.stripe.com/7sY28r8Qcfregytew243S0g"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full rounded-lg bg-accent px-4 py-2 text-center font-semibold text-bg transition-colors hover:bg-accent-light"
-                >
-                  Get Started
-                </a>
-              </div>
-            </Card>
-          </div>
+          <Card variant="bordered" className="relative mx-auto max-w-md overflow-hidden border-accent">
+            <div className="absolute right-2 top-2 rounded bg-accent px-2 py-0.5 text-xs font-semibold text-bg">
+              FIX PACK
+            </div>
+            <div className="p-4">
+              <h3 className="mb-1 font-bold text-fg">$97 Fix Pack</h3>
+              <p className="mb-2 text-2xl font-bold text-accent">$97</p>
+              <p className="mb-4 text-sm text-fg-muted">
+                We implement the prioritized conversion fixes from this audit — copy, CTA, proof, and page structure.
+              </p>
+              <a
+                href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full rounded-lg bg-accent px-4 py-2 text-center font-semibold text-bg transition-colors hover:bg-accent-light"
+              >
+                Fix My Page — $97
+              </a>
+            </div>
+          </Card>
         </div>
 
         {/* Pass it forward — referral moment #1 */}
