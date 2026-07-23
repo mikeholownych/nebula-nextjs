@@ -15,13 +15,57 @@ Called by score_audit() after the opp_matrix is built.
 Adds no new network calls — operates on the already-fetched soup + audit data.
 """
 
+import json
+import logging
 import re
 from datetime import datetime, timezone
+from urllib.parse import urlparse
 from bs4 import BeautifulSoup
+
+LOGGER = logging.getLogger(__name__)
+MAX_EVIDENCE_FIELD = 500
+VALID_CONFIDENCE = {"definitive", "high", "contextual", "unavailable"}
 
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _bounded(value, limit: int = MAX_EVIDENCE_FIELD) -> str:
+    text = re.sub(r"\s+", " ", str(value or "")).strip()
+    return text if len(text) <= limit else text[: limit - 1] + "…"
+
+
+def _selector(element) -> str:
+    """Return a bounded DOM path without interpolating attacker-controlled attributes."""
+    if not element or not getattr(element, "name", None):
+        return "N/A"
+    parts = []
+    current = element
+    while current and getattr(current, "name", None) and len(parts) < 8:
+        siblings = current.parent.find_all(current.name, recursive=False) if current.parent else []
+        index = siblings.index(current) + 1 if current in siblings and len(siblings) > 1 else None
+        parts.append(f"{current.name}:nth-of-type({index})" if index else current.name)
+        current = current.parent
+        if getattr(current, "name", None) == "[document]":
+            break
+    return _bounded(" > ".join(reversed(parts)), 240)
+
+
+def _sanitize_evidence(evidence: dict) -> dict:
+    confidence = str(evidence.get("confidence") or "unavailable").lower()
+    if confidence not in VALID_CONFIDENCE:
+        confidence = "unavailable"
+    if confidence == "definitive":
+        confidence = "contextual"
+    return {
+        "measured": _bounded(evidence.get("measured")),
+        "required": _bounded(evidence.get("required")),
+        "delta": _bounded(evidence.get("delta")),
+        "selector": _bounded(evidence.get("selector") or "N/A", 240),
+        "confidence": confidence,
+        "timestamp": _bounded(evidence.get("timestamp") or _now_iso(), 32),
+    }
 
 
 # ── Colour contrast helpers ────────────────────────────────────────────────────
@@ -87,7 +131,7 @@ def _evidence_headline(soup: BeautifulSoup, dim: dict) -> dict:
         }
     txt = h1.get_text(strip=True)
     length = len(txt)
-    selector = f"h1:first-of-type"
+    selector = _selector(h1)
     if length < 12:
         return {
             "measured":   f'<h1> text: "{txt}" ({length} chars)',
@@ -118,86 +162,80 @@ def _evidence_headline(soup: BeautifulSoup, dim: dict) -> dict:
 
 def _evidence_cta(soup: BeautifulSoup, dim: dict) -> dict:
     ts = _now_iso()
-    # Find all primary CTA candidates
-    cta_elements = soup.find_all("button") + soup.find_all(
-        "a", href=lambda h: h and any(
-            x in h.lower() for x in ["buy", "get", "start", "checkout", "order", "signup", "sign-up"]
-        )
-    )
+    action_terms = ("buy", "get", "start", "checkout", "order", "signup", "sign-up", "book", "try", "run")
+    all_ctas = [el for el in soup.find_all(["a", "button"]) if el.get_text(" ", strip=True)]
+    candidates = [
+        el for el in all_ctas
+        if el.name == "button"
+        or any(term in str(el.get("href") or "").lower() for term in action_terms)
+        or any(term in el.get_text(" ", strip=True).lower() for term in action_terms)
+    ]
+    if not all_ctas:
+        return {
+            "measured": "No button or link text found in fetched source HTML",
+            "required": "At least one action-oriented CTA in the rendered primary journey",
+            "delta": "No source-level CTA candidate; client-rendered controls remain unverified",
+            "selector": "N/A",
+            "confidence": "contextual",
+            "timestamp": ts,
+        }
+
+    el = (candidates or all_ctas)[0]
+    text = _bounded(el.get_text(" ", strip=True), 120)
     weak_verbs = {"learn more", "click here", "submit", "go", "next", "continue", "ok"}
-
-    if not cta_elements:
-        # Fallback: any <a> or <button>
-        all_ctas = [(el.get_text(strip=True), el) for el in
-                    soup.find_all(["a", "button"]) if el.get_text(strip=True)]
-        if not all_ctas:
-            return {
-                "measured":   "No <button> or <a> elements found",
-                "required":   "At least one action-oriented CTA above the fold",
-                "delta":      "No clickable CTA present",
-                "selector":   "button, a",
-                "confidence": "definitive",
-                "timestamp":  ts,
-            }
-        # Check weak verbs
-        weak = [(t, el) for t, el in all_ctas if t.lower() in weak_verbs]
-        if weak:
-            text, el = weak[0]
-            fg, bg = _extract_inline_colors(el)
-            contrast_note = ""
-            if fg and bg:
-                l1 = _hex_to_relative_luminance(fg)
-                l2 = _hex_to_relative_luminance(bg)
-                if l1 is not None and l2 is not None:
-                    ratio = _contrast_ratio(l1, l2)
-                    contrast_note = f" Contrast ratio: {ratio:.2f}:1 (WCAG AA requires 4.5:1)."
-            return {
-                "measured":   f'Primary CTA text: "{text}"{contrast_note}',
-                "required":   "Action-specific verb (Get, Fix, Start, Book, Run) — not generic direction",
-                "delta":      f'"{text}" signals no destination — visitors cannot predict what happens next',
-                "selector":   el.name + (f'[href*="{el.get("href","")[:30]}"]' if el.get("href") else ""),
-                "confidence": "high",
-                "timestamp":  ts,
-            }
-        # A link/button exists but its href did not identify it as a primary CTA.
-        # Preserve contextual evidence instead of indexing an empty candidate list.
-        cta_elements = [all_ctas[0][1]]
-
-    # CTA exists — check contrast if inline colours available
-    el = cta_elements[0]
-    text = el.get_text(strip=True)
     fg, bg = _extract_inline_colors(el)
     if fg and bg:
         l1 = _hex_to_relative_luminance(fg)
         l2 = _hex_to_relative_luminance(bg)
         if l1 is not None and l2 is not None:
             ratio = _contrast_ratio(l1, l2)
-            if ratio < 4.5:
-                return {
-                    "measured":   f'CTA "{text}" — fg: {fg}, bg: {bg}, contrast: {ratio:.2f}:1',
-                    "required":   "WCAG AA: 4.5:1 minimum contrast ratio for normal text",
-                    "delta":      f"{4.5 - ratio:.2f} below WCAG AA minimum — low visibility on mobile",
-                    "selector":   el.name + (f'[style*="color"]' if "color" in el.get("style","") else ""),
-                    "confidence": "definitive",
-                    "timestamp":  ts,
-                }
+            declarations = {}
+            for declaration in str(el.get("style") or "").split(";"):
+                name, separator, value = declaration.partition(":")
+                if separator:
+                    declarations[name.strip().lower()] = value.strip().lower()
+            size_match = re.search(r"([\d.]+)px", declarations.get("font-size", ""))
+            size_px = float(size_match.group(1)) if size_match else 0.0
+            weight_text = declarations.get("font-weight", "")
+            weight = int(weight_text) if weight_text.isdigit() else (700 if weight_text in {"bold", "bolder"} else 400)
+            is_large = size_px >= 24 or (size_px >= 18.66 and weight >= 700)
+            threshold = 3.0 if is_large else 4.5
+            passes = ratio >= threshold
+            return {
+                "measured": f'CTA "{text}" — inline fg: {fg}, bg: {bg}, contrast: {ratio:.2f}:1',
+                "required": f"Source-level inline styles: {threshold:.1f}:1 minimum for {'large' if is_large else 'normal'} text; computed-style browser audit required",
+                "delta": (
+                    f"Passes source-level threshold by {ratio - threshold:.2f}; rendered/computed contrast remains unverified"
+                    if passes else
+                    f"Source-level contrast is {threshold - ratio:.2f} below threshold; confirm with computed-style browser audit"
+                ),
+                "selector": _selector(el),
+                "confidence": "high",
+                "timestamp": ts,
+            }
 
+    weak = text.lower() in weak_verbs
     return {
-        "measured":   f'CTA present: "{text[:60]}"',
-        "required":   "Action-specific text, ≥4.5:1 contrast, visible above fold",
-        "delta":      "Text acceptable — issue is likely placement or contrast (inline colours not available for full check)",
-        "selector":   el.name,
+        "measured": f'CTA source text: "{text}"; no complete inline foreground/background pair',
+        "required": "Action-specific text plus computed-style contrast and rendered placement inspection",
+        "delta": (
+            "Generic CTA wording detected; rendered contrast and placement remain unverified"
+            if weak else
+            "Source text is action-oriented; rendered contrast and placement remain unverified"
+        ),
+        "selector": _selector(el),
         "confidence": "contextual",
-        "timestamp":  ts,
+        "timestamp": ts,
     }
 
 
 def _evidence_above_fold(soup: BeautifulSoup, dim: dict, html_text: str) -> dict:
     ts = _now_iso()
     first_3k = html_text[:3000]
-    has_h1 = bool(soup.find("h1"))
-    has_cta = bool(re.search(r'<button|href.*get|href.*start|href.*buy', first_3k, re.IGNORECASE))
-    has_price = bool(re.search(r'\$[\d,]+|from \$|pricing', first_3k, re.IGNORECASE))
+    early_soup = BeautifulSoup(first_3k, "html.parser")
+    has_h1 = bool(early_soup.find("h1"))
+    has_cta = bool(early_soup.find(["button", "a"]))
+    has_price = bool(re.search(r'\$[\d,]+|from \$|pricing', early_soup.get_text(" "), re.IGNORECASE))
 
     missing = []
     if not has_h1:
@@ -212,7 +250,7 @@ def _evidence_above_fold(soup: BeautifulSoup, dim: dict, html_text: str) -> dict
             "measured":   "Early HTML proxy: H1, CTA, and price signal present in first 3,000 source chars",
             "required":   "Rendered viewport inspection is required; source order is not a rendered viewport measurement",
             "delta":      "No source-order gap detected — visual hierarchy remains unverified",
-            "selector":   "body > :first-child",
+            "selector":   "N/A",
             "confidence": "contextual",
             "timestamp":  ts,
         }
@@ -220,7 +258,7 @@ def _evidence_above_fold(soup: BeautifulSoup, dim: dict, html_text: str) -> dict
         "measured":   f"Early HTML proxy missing: {', '.join(missing)} in first 3,000 source chars",
         "required":   "Rendered viewport inspection is required; source order is not a rendered viewport measurement",
         "delta":      f"Source order suggests missing {' or '.join(missing)}; rendered position remains unverified",
-        "selector":   "body",
+        "selector":   "N/A",
         "confidence": "contextual",
         "timestamp":  ts,
     }
@@ -228,40 +266,22 @@ def _evidence_above_fold(soup: BeautifulSoup, dim: dict, html_text: str) -> dict
 
 def _evidence_social_proof(soup: BeautifulSoup, dim: dict, lower: str) -> dict:
     ts = _now_iso()
-    trust_words = ["testimonial", "review", "customer", "trusted", "case study", "guarantee", "results"]
-    claimed = [w for w in trust_words if w in lower]
-    _proof_re = (
-        r'(\d+\s*(stars?|reviews?|customers?|clients?|companies|users?))'
-        r'|(trustpilot|g2\.com|capterra|clutch|google reviews)'
-        r'|(\u201c|\u2018|said|says|\u2014\s*[A-Z])'
-    )
-    shown = bool(re.search(_proof_re, lower, re.IGNORECASE))
-
-    if claimed and not shown:
-        return {
-            "measured":   f"Trust language present ({', '.join(claimed[:3])}) — no concrete proof element found",
-            "required":   "Named testimonial, star rating, review count, or third-party badge",
-            "delta":      "Page asserts credibility without evidence — visitors treat this as a claim, not proof",
-            "selector":   "[class*=testimonial], [class*=review], [class*=trust]",
-            "confidence": "definitive",
-            "timestamp":  ts,
-        }
-    if not claimed and not shown:
-        return {
-            "measured":   "No trust signals found anywhere on page",
-            "required":   "At least one named testimonial, review count, or social proof element before the primary CTA",
-            "delta":      "Visitors asked to buy from a stranger with no validation — conversion impact: high",
-            "selector":   "body",
-            "confidence": "definitive",
-            "timestamp":  ts,
-        }
+    trust_terms = ["testimonial", "review", "customer", "trusted", "case study", "guarantee", "results"]
+    claimed = [term for term in trust_terms if term in lower]
+    marker_patterns = {
+        "review count": r"\b\d+\s+(?:reviews?|customers?|clients?|users?)\b",
+        "rating": r"\b\d(?:\.\d)?\s*(?:/\s*5|stars?)\b",
+        "third-party platform": r"\b(?:trustpilot|g2\.com|capterra|clutch|google reviews)\b",
+        "testimonial markup": r"(?:testimonial|review)[-_ ](?:card|quote|author)",
+    }
+    markers = [name for name, pattern in marker_patterns.items() if re.search(pattern, lower, re.IGNORECASE)]
     return {
-        "measured":   "Concrete proof elements present",
-        "required":   "Proof before primary CTA",
-        "delta":      "Proof exists — check placement relative to CTA position",
-        "selector":   "[class*=testimonial], [class*=review]",
+        "measured": f"Fetched source trust terms: {', '.join(claimed[:5]) or 'none'}; recognized proof markers: {', '.join(markers) or 'none'}",
+        "required": "Rendered proof presence, placement, identity, and authenticity require browser/content review",
+        "delta": "Static source markers only; no visitor-impact or authenticity conclusion is made",
+        "selector": "N/A",
         "confidence": "contextual",
-        "timestamp":  ts,
+        "timestamp": ts,
     }
 
 
@@ -302,26 +322,26 @@ def _evidence_mobile(soup: BeautifulSoup, dim: dict, lower: str) -> dict:
 
 def _evidence_load_speed(dim: dict, html_text: str) -> dict:
     ts = _now_iso()
-    html_kb = len(html_text) // 1024
+    html_kib = len(html_text.encode("utf-8")) / 1024
     # Try to extract PageSpeed score from issue text
     ps_match = re.search(r'Lighthouse performance:\s*(\d+)/100', dim.get("issue", ""))
     fcp_match = re.search(r'FCP[:\s]+([\d.]+)\s*s', dim.get("issue", ""))
 
     if ps_match:
         score_val = int(ps_match.group(1))
-        threshold = 90
+        threshold = 70
         return {
             "measured":   f"Lighthouse mobile performance: {score_val}/100" + (f", FCP: {fcp_match.group(1)}s" if fcp_match else ""),
-            "required":   "≥90/100 Lighthouse performance (Google 'Good' threshold)",
-            "delta":      f"{threshold - score_val} points below 'Good' — affects Core Web Vitals ranking signal",
+            "required":   "Target ≥70/100 Lighthouse mobile performance; Core Web Vitals require separate metrics",
+            "delta":      (f"{threshold - score_val} points below target" if score_val < threshold else f"{score_val - threshold} points above target"),
             "selector":   "N/A — page-level metric",
             "confidence": "definitive",
             "timestamp":  ts,
         }
     return {
-        "measured":   f"HTML payload: {html_kb}KB (PageSpeed API unavailable for live score)",
-        "required":   "HTML ≤120KB; Lighthouse mobile ≥90",
-        "delta":      "Live speed score unavailable — HTML size within bounds" if html_kb < 120 else f"HTML {html_kb}KB exceeds 120KB threshold",
+        "measured":   f"Fetched HTML payload: {html_kib:.1f} KiB; no PageSpeed score present in finding",
+        "required":   "HTML-size heuristic ≤120 KiB; target Lighthouse mobile ≥70 when measured",
+        "delta":      "Performance unavailable; payload heuristic within range" if html_kib < 120 else f"Payload heuristic exceeds 120 KiB by {html_kib - 120:.1f} KiB",
         "selector":   "N/A",
         "confidence": "contextual",
         "timestamp":  ts,
@@ -331,30 +351,20 @@ def _evidence_load_speed(dim: dict, html_text: str) -> dict:
 def _evidence_ad_signals(soup: BeautifulSoup, dim: dict, lower: str) -> dict:
     ts = _now_iso()
     checks = {
-        "Facebook Pixel":    bool(re.search(r'fbq\(|facebook\.net/tr|connect\.facebook\.net', lower)),
-        "GA4":               bool(re.search(r'gtag\(|g-[a-z0-9]{6,}|google-analytics', lower)),
-        "UTM parameters":    bool(re.search(r'utm_source|utm_medium|utm_campaign', lower)),
-        "Thank-you page":    bool(re.search(r'thank.?you|order.?confirm|success|receipt', lower)),
-        "Conversion event":  bool(re.search(r'purchase|completeregistration|lead|fbq\(.track', lower)),
+        "Facebook Pixel initializer": bool(re.search(r"\bfbq\s*\(|connect\.facebook\.net/.+fbevents", lower)),
+        "GA4 initializer or measurement ID": bool(re.search(r"\bgtag\s*\(|['\"]g-[a-z0-9]{6,}['\"]", lower)),
+        "UTM-bearing link": bool(soup.find("a", href=re.compile(r"[?&]utm_(?:source|medium|campaign)=", re.IGNORECASE))),
+        "explicit conversion call": bool(re.search(r"(?:fbq|gtag)\s*\([^\n]{0,120}(?:purchase|generate_lead|conversion|completeregistration)", lower)),
     }
-    missing = [k for k, v in checks.items() if not v]
-    present = [k for k, v in checks.items() if v]
-    if not missing:
-        return {
-            "measured":   f"All tracking signals detected: {', '.join(present)}",
-            "required":   "Pixel, GA4, UTM, thank-you page, conversion event",
-            "delta":      "None — tracking complete",
-            "selector":   "script[src*=facebook], script[src*=google]",
-            "confidence": "high",
-            "timestamp":  ts,
-        }
+    present = [name for name, detected in checks.items() if detected]
+    absent = [name for name, detected in checks.items() if not detected]
     return {
-        "measured":   f"Present: {', '.join(present) or 'none'}. Missing: {', '.join(missing)}",
-        "required":   "Facebook Pixel + GA4 + conversion event on thank-you page for accurate ROAS",
-        "delta":      f"Missing {len(missing)}/5 signals — ad platform cannot optimise toward conversions",
-        "selector":   "head > script",
-        "confidence": "definitive",
-        "timestamp":  ts,
+        "measured": f"Fetched source artifacts present: {', '.join(present) or 'none'}; not observed: {', '.join(absent) or 'none'}",
+        "required": "Runtime tag firing, consent behavior, event payloads, server-side tracking, and confirmation routes require live protocol inspection",
+        "delta": f"{len(absent)}/4 source artifacts not observed; absence from static HTML is not proof of missing tracking",
+        "selector": "N/A",
+        "confidence": "contextual",
+        "timestamp": ts,
     }
 
 
@@ -378,6 +388,8 @@ def _evidence_seo(soup: BeautifulSoup, dim: dict) -> dict:
         issues.append("No meta description")
     elif len(meta_desc) < 120:
         issues.append(f"Meta description only {len(meta_desc)} chars (min 120)")
+    elif len(meta_desc) > 155:
+        issues.append(f"Meta description {len(meta_desc)} chars (heuristic max 155)")
 
     if h1_count == 0:
         issues.append("No <h1>")
@@ -395,10 +407,10 @@ def _evidence_seo(soup: BeautifulSoup, dim: dict) -> dict:
 
     return {
         "measured":   " | ".join(measured_parts) if measured_parts else "No SEO tags found",
-        "required":   "<title> 30–60 chars; meta description 120–155 chars; exactly one <h1>",
-        "delta":      "; ".join(issues) if issues else "Within spec",
+        "required":   "Editorial heuristics: title 30–60 chars, description 120–155 chars; rendered heading structure requires accessibility inspection",
+        "delta":      "; ".join(issues) if issues else "Within source-level heuristic ranges",
         "selector":   "head > title, head > meta[name='description'], h1",
-        "confidence": "definitive" if issues else "contextual",
+        "confidence": "contextual",
         "timestamp":  ts,
     }
 
@@ -406,29 +418,33 @@ def _evidence_seo(soup: BeautifulSoup, dim: dict) -> dict:
 def _evidence_ai_readiness(soup: BeautifulSoup, dim: dict) -> dict:
     ts = _now_iso()
     scripts = soup.find_all("script", type="application/ld+json")
-    has_jsonld = bool(scripts)
-    og_props = ["og:title", "og:description", "og:image", "og:url", "og:type"]
-    og_found = [p for p in og_props if soup.find("meta", property=p)]
-    canonical = soup.find("link", rel="canonical")
+    valid_jsonld = 0
+    for script in scripts:
+        try:
+            parsed = json.loads(script.string or script.get_text() or "")
+            if isinstance(parsed, (dict, list)):
+                valid_jsonld += 1
+        except (json.JSONDecodeError, TypeError):
+            continue
 
+    og_props = ["og:title", "og:description", "og:image", "og:url", "og:type"]
+    og_found = []
+    for prop in og_props:
+        tag = soup.find("meta", property=prop)
+        if tag and str(tag.get("content") or "").strip():
+            og_found.append(prop)
+
+    canonical_tag = soup.find("link", rel=lambda value: value and "canonical" in value)
+    canonical_href = str(canonical_tag.get("href") or "").strip() if canonical_tag else ""
+    parsed_canonical = urlparse(canonical_href)
+    canonical_valid = parsed_canonical.scheme in {"http", "https"} and bool(parsed_canonical.netloc)
     return {
-        "measured":   (
-            f"JSON-LD: {'present (' + str(len(scripts)) + ' block(s))' if has_jsonld else 'absent'} | "
-            f"OpenGraph: {len(og_found)}/5 tags | "
-            f"Canonical: {'present' if canonical else 'absent'}"
-        ),
-        "required":   "JSON-LD structured data + 5/5 OpenGraph tags + canonical URL for AI engine citation",
-        "delta":      (
-            f"Missing: "
-            + (", ".join(filter(None, [
-                "JSON-LD" if not has_jsonld else "",
-                f"{5 - len(og_found)} OG tags" if len(og_found) < 5 else "",
-                "canonical" if not canonical else "",
-            ])) or "None")
-        ),
-        "selector":   "script[type='application/ld+json'], meta[property^='og:'], link[rel='canonical']",
-        "confidence": "definitive",
-        "timestamp":  ts,
+        "measured": f"valid JSON-LD: {valid_jsonld}/{len(scripts)} block(s) | OpenGraph: {len(og_found)}/5 non-empty tags | Canonical: {'present' if canonical_valid else 'absent'}",
+        "required": "Parseable JSON-LD, non-empty OpenGraph values, and an absolute HTTP(S) canonical; citation eligibility still requires external validation",
+        "delta": "Static metadata validation only; search-engine ingestion and AI citation are not inferred",
+        "selector": "N/A",
+        "confidence": "contextual",
+        "timestamp": ts,
     }
 
 
@@ -448,33 +464,67 @@ EVIDENCE_BUILDERS = {
 
 
 def enrich_findings_with_evidence(opp_matrix: list, html_text: str) -> list:
-    """
-    Takes the opp_matrix from score_audit() and enriches each finding
-    with a structured 'evidence' block. Returns the enriched list.
-    """
-    if not html_text or not opp_matrix:
-        return opp_matrix
+    """Attach bounded source evidence and create an independent CTA contrast finding."""
+    source_findings = [dict(item) for item in (opp_matrix or []) if isinstance(item, dict)]
+    analysis_html = str(html_text or "")[:2_000_000]
+    if not analysis_html:
+        return [
+            {
+                **finding,
+                "evidence": _sanitize_evidence({
+                    "measured": "Evidence unavailable for this finding",
+                    "required": "Fetched source HTML is required",
+                    "delta": "No evidence claim emitted",
+                    "selector": "N/A",
+                    "confidence": "unavailable",
+                    "timestamp": _now_iso(),
+                }),
+            }
+            for finding in source_findings
+        ]
 
-    soup = BeautifulSoup(html_text, "html.parser")
-    lower = html_text.lower()
+    soup = BeautifulSoup(analysis_html, "html.parser")
+    lower = analysis_html.lower()
+
+    if not any(finding.get("key") == "cta" for finding in source_findings):
+        cta_evidence = _sanitize_evidence(_evidence_cta(soup, {}))
+        if cta_evidence["delta"].lower().startswith("source-level contrast is"):
+            source_findings.append({
+                "key": "cta",
+                "label": "CTA Contrast",
+                "impact": 8,
+                "effort": 2,
+                "quadrant": "quick_win",
+                "score": 4,
+                "issue": "CTA source-level contrast is below the applicable inline-style threshold.",
+                "fix": "Change CTA foreground/background colors, then verify computed contrast in a rendered browser audit.",
+                "evidence": cta_evidence,
+            })
+
     enriched = []
-
-    for finding in opp_matrix:
-        key = finding.get("key", "")
-        builder = EVIDENCE_BUILDERS.get(key)
-        if builder:
+    for original in source_findings:
+        finding = {
+            key: (_bounded(value, 1_000) if isinstance(value, str) else value)
+            for key, value in original.items()
+        }
+        builder = EVIDENCE_BUILDERS.get(str(finding.get("key") or ""))
+        raw_evidence = finding.get("evidence")
+        if builder and not isinstance(raw_evidence, dict):
             try:
-                finding = dict(finding)
-                finding["evidence"] = builder(soup, finding, html_text, lower)
-            except Exception as exc:
-                finding["evidence"] = {
-                    "measured":   f"Evidence extraction failed: {exc}",
-                    "required":   "N/A",
-                    "delta":      "N/A",
-                    "selector":   "N/A",
-                    "confidence": "error",
-                    "timestamp":  _now_iso(),
-                }
+                finding["evidence"] = _sanitize_evidence(
+                    builder(soup, finding, analysis_html, lower)
+                )
+            except Exception:
+                LOGGER.exception("Evidence builder failed for key=%s", finding.get("key"))
+                finding["evidence"] = _sanitize_evidence({
+                    "measured": "Evidence unavailable for this finding",
+                    "required": "Evidence extraction must complete before a measurement claim is shown",
+                    "delta": "No evidence claim emitted",
+                    "selector": "N/A",
+                    "confidence": "unavailable",
+                    "timestamp": _now_iso(),
+                })
+        elif isinstance(raw_evidence, dict):
+            finding["evidence"] = _sanitize_evidence(raw_evidence)
         enriched.append(finding)
-
     return enriched

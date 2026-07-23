@@ -98,7 +98,7 @@ async def run_audit(request: AuditRequest):
                 audit_id=str(audit_id),
                 url=request.url,
                 status="error",
-                error=f"Script failed: {result.stderr[:500]}"
+                error="Audit processing failed"
             )
         
         # Parse JSON output
@@ -188,7 +188,7 @@ async def run_audit(request: AuditRequest):
             status="error",
             error="Audit timed out (120s limit)"
         )
-    except json.JSONDecodeError as e:
+    except json.JSONDecodeError:
         ph = get_posthog()
         if ph:
             distinct_id = request.email or str(request.audit_id or "unknown")
@@ -199,14 +199,14 @@ async def run_audit(request: AuditRequest):
             audit_id=request.audit_id,
             url=request.url,
             status="error",
-            error=f"JSON parse error: {str(e)}"
+            error="Audit response was invalid"
         )
-    except Exception as e:
+    except Exception:
         return AuditResponse(
             audit_id=request.audit_id,
             url=request.url,
             status="error",
-            error=f"Unexpected error: {str(e)}"
+            error="Audit processing unavailable"
         )
 
 
@@ -234,8 +234,8 @@ async def get_audit(audit_id: str):
         raise HTTPException(status_code=400, detail="Invalid audit ID format")
     except HTTPException:
         raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to fetch audit: {str(e)}")
+    except Exception:
+        raise HTTPException(status_code=500, detail="Audit lookup unavailable")
 
 
 class EmailRequest(BaseModel):
@@ -293,10 +293,10 @@ async def send_audit_email(request: EmailRequest):
         return EmailResponse(
             status=result.get("status", "unknown"),
             message_id=result.get("message_id"),
-            error=result.get("error"),
+            error=None if result.get("status") == "sent" else "Email delivery failed",
         )
-    except Exception as e:
+    except Exception:
         return EmailResponse(
             status="error",
-            error=str(e),
+            error="Email delivery unavailable",
         )

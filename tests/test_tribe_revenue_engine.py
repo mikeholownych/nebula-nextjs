@@ -69,17 +69,19 @@ def test_cli_writes_all_queues(tmp_path, monkeypatch, capsys):
     ledgers.mkdir(parents=True)
     gs.mkdir(parents=True)
     customer_ledger = ledgers / "customer-ledger.jsonl"
-    replied = base / "replied_emails.jsonl"
+
     carts = ledgers / "abandoned_carts.jsonl"
     customer_ledger.write_text(json.dumps({"event_type": "payment", "email": "founder@acme.com", "url": "https://acme.com"}) + "\n")
-    replied.write_text(json.dumps({"sender": "warm@beta.com", "classification": "warm"}) + "\n")
+
     carts.write_text(json.dumps({"email": "cart@gamma.com", "url": "https://gamma.com"}) + "\n")
 
     monkeypatch.setattr(tribe, "BASE", base)
     monkeypatch.setattr(tribe, "LEDGERS", ledgers)
     monkeypatch.setattr(tribe, "GS", gs)
     monkeypatch.setattr(tribe, "CUSTOMER_LEDGER", customer_ledger)
-    monkeypatch.setattr(tribe, "REPLIED_EMAILS", replied)
+    monkeypatch.setattr(tribe, "load_reply_rows", lambda: [
+        {"sender": "warm@beta.com", "classification": "warm"}
+    ])
     monkeypatch.setattr(tribe, "ABANDONED_CARTS", carts)
     monkeypatch.setattr(tribe, "REFERRAL_QUEUE", gs / "warm_intro_referral_queue.jsonl")
     monkeypatch.setattr(tribe, "CONSULTING_QUEUE", gs / "flexible_consulting_offer_queue.jsonl")

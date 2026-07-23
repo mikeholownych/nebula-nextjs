@@ -5,7 +5,6 @@ import { render, screen } from '@testing-library/react'
 import { NextRequest } from 'next/server'
 
 jest.mock('@/app/lib/email-service', () => ({
-  processEmailQueue: jest.fn(),
   getQueueStats: jest.fn(),
   queueLeadForOutreach: jest.fn(),
 }))
@@ -38,7 +37,6 @@ import AuditResultsPage from '@/app/audit/results/page'
 import AuditSamplePage from '@/app/audit/sample/page'
 import { proxy } from '@/proxy'
 
-const processEmailQueue = jest.mocked(emailService.processEmailQueue)
 const queueLeadForOutreach = jest.mocked(emailService.queueLeadForOutreach)
 
 const jsonRequest = (url: string, body: unknown, headers?: HeadersInit) =>
@@ -197,7 +195,7 @@ describe('production safety containment', () => {
     expect(response.headers.get('allow')).toBe('POST')
 
     expect(queueLeadForOutreach).not.toHaveBeenCalled()
-    expect(processEmailQueue).not.toHaveBeenCalled()
+
   })
 
   it('rejects unauthenticated email queue requests', async () => {

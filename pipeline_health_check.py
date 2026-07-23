@@ -4,7 +4,7 @@ pipeline_health_check.py — Pipeline health monitor + stuck-lead detector.
 Runs every 15m via cron. Outputs JSON summary with pass/fail for each check.
 Exit code: 0 (all healthy), 1 (warnings), 2 (critical failures).
 """
-import json, os, subprocess, ssl, smtplib, sys, time
+import json, os, subprocess, sys, time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 

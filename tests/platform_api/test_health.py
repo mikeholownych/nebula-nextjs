@@ -2,8 +2,10 @@
 
 import pytest
 from httpx import AsyncClient, ASGITransport
+from unittest.mock import MagicMock
 
 from platform_api.main import app
+import platform_api.main as main_module
 
 
 @pytest.fixture
@@ -26,9 +28,12 @@ async def test_health_endpoint_works_without_settings(client):
 
 
 @pytest.mark.asyncio
-@pytest.mark.skip(reason="Ready check requires production settings validation - Wave 2")
-async def test_readyz_with_incomplete_settings(client):
+async def test_readyz_with_incomplete_settings(client, monkeypatch):
     """Readiness endpoint should return 503 with missing required settings."""
+    incomplete = MagicMock()
+    incomplete.ready.return_value = False
+    incomplete.missing_required_settings.return_value = ["DATABASE_URL", "SECRET_KEY"]
+    monkeypatch.setattr(main_module, "settings", incomplete)
     response = await client.get("/readyz")
     assert response.status_code == 503
     data = response.json()
@@ -36,19 +41,20 @@ async def test_readyz_with_incomplete_settings(client):
     assert "message" in data
     assert "request_id" in data
     # Should contain missing key names but not values
-    assert "missing_keys" in data["message"]
-    # Should not contain actual setting values in error response
+    assert "DATABASE_URL" in data["message"]
+    assert "SECRET_KEY" in data["message"]
+    assert "postgresql://" not in data["message"]
 
 
 @pytest.mark.asyncio
-@pytest.mark.skip(reason="Ready check requires production settings validation - Wave 2")
-async def test_readyz_with_complete_test_settings(client):
+async def test_readyz_with_complete_test_settings(client, monkeypatch):
     """Readiness endpoint should return 200 with complete test settings."""
-    # This test will fail initially - we need to configure test settings
-    # Set up test settings in environment or config
+    complete = MagicMock()
+    complete.ready.return_value = True
+    monkeypatch.setattr(main_module, "settings", complete)
     response = await client.get("/readyz")
-    # Should be 503 until we implement test settings injection
-    assert response.status_code == 503
+    assert response.status_code == 200
+    assert response.json() == {"status": "ready"}
 
 
 @pytest.mark.asyncio

@@ -5,7 +5,7 @@ from typing import List, Optional
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from pydantic import BaseModel, EmailStr, HttpUrl
+from pydantic import BaseModel, ConfigDict, EmailStr, HttpUrl
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -22,15 +22,13 @@ router = APIRouter(prefix="/api/organizations", tags=["organizations"])
 
 # Request/Response models
 class OrganizationResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: UUID
     name: str
     slug: str
     is_agency: bool
     created_at: datetime
-
-    class Config:
-        from_attributes = True
-
 
 class OrganizationUpdate(BaseModel):
     name: Optional[str] = None
@@ -38,14 +36,12 @@ class OrganizationUpdate(BaseModel):
 
 
 class MemberResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: UUID
     user_id: UUID
     role: str
     created_at: datetime
-
-    class Config:
-        from_attributes = True
-
 
 class MemberInvite(BaseModel):
     email: EmailStr

@@ -44,9 +44,11 @@ def test_trigger_track_assignment_signature():
     assert "url" in params, "Missing 'url' parameter"
 
 
-def test_track_assignment_with_mock_audit():
+def test_track_assignment_with_mock_audit(monkeypatch):
     """Test track assignment with mock audit findings."""
-    from audit_track_trigger import trigger_track_assignment
+    import audit_track_trigger
+    monkeypatch.setattr(audit_track_trigger, "upsert_lead", lambda **_: None)
+    trigger_track_assignment = audit_track_trigger.trigger_track_assignment
     import uuid
     
     # Mock audit data
@@ -86,9 +88,11 @@ def test_audit_response_includes_nurture_track():
     assert True, "Design note: AuditResponse should include nurture_track field"
 
 
-def test_track_assignment_error_handling():
+def test_track_assignment_error_handling(monkeypatch):
     """Verify track assignment with empty/invalid findings."""
-    from audit_track_trigger import trigger_track_assignment
+    import audit_track_trigger
+    monkeypatch.setattr(audit_track_trigger, "upsert_lead", lambda **_: None)
+    trigger_track_assignment = audit_track_trigger.trigger_track_assignment
     
     # Test with empty findings
     track_id = trigger_track_assignment(

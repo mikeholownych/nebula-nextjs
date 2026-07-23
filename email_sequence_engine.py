@@ -604,23 +604,19 @@ def process_sequences(dry_run=True):
     print(f"  Skipped:    {total_skipped}")
     print(f"  Mode:       {'DRY RUN' if dry_run else 'LIVE'}")
 
-    # Read reply & pipeline metrics
-    replied_path = BASE / "replied_emails.jsonl"
-    if replied_path.exists():
+    # Read reply & pipeline metrics from the canonical transactional store.
+    try:
+        from outbound_release_gate import OutboundReleaseGate
+        replied_entries = OutboundReleaseGate().reply_records()
+    except Exception:
         replied_entries = []
-        try:
-            with open(replied_path) as f:
-                for line in f:
-                    if line.strip():
-                        replied_entries.append(json.loads(line))
-        except (json.JSONDecodeError, Exception):
-            replied_entries = []
 
-        total_replied = len(replied_entries)
-        interested = sum(1 for r in replied_entries if r.get("classification") == "interested")
-        questions = sum(1 for r in replied_entries if r.get("classification") == "question")
-        unsub = sum(1 for r in replied_entries if r.get("classification") == "unsubscribe")
+    total_replied = len(replied_entries)
+    interested = sum(1 for r in replied_entries if r.get("classification") in {"interested", "warm"})
+    questions = sum(1 for r in replied_entries if r.get("classification") == "question")
+    unsub = sum(1 for r in replied_entries if r.get("classification") in {"unsubscribe", "unsubscribed"})
 
+    if replied_entries:
         print(f"\n  ── Reply Metrics ──")
         print(f"  Total replies:  {total_replied}")
         print(f"  Interested:     {interested}")

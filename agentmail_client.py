@@ -22,7 +22,7 @@ import urllib.request
 import urllib.error
 import hashlib
 from datetime import datetime, timezone
-from typing import Callable, Optional
+from typing import Any, Callable, Optional
 
 from outbound_release_gate import DeliveryPurpose, OutboundReleaseGate
 
@@ -48,7 +48,7 @@ class AgentMailClient:
         *,
         key: Optional[str] = None,
         gate: Optional[OutboundReleaseGate] = None,
-        transport: Optional[Callable[[str, str, Optional[dict]], dict]] = None,
+        transport: Optional[Callable[[str, str, Optional[dict]], Any]] = None,
     ):
         self.inbox = inbox
         key = key or os.environ.get("AGENTMAIL_API_KEY") or os.environ.get("AM_KEY")
@@ -75,6 +75,48 @@ class AgentMailClient:
         return method.upper() == "POST" and (
             path.endswith("/messages/send") or path.endswith("/reply")
         )
+
+    @staticmethod
+    def _confirmed_delivery(result: object) -> bool:
+        """Require a concrete provider receipt before recording delivery."""
+        if not isinstance(result, dict):
+            return False
+        return not result.get("_error") and any(
+            isinstance(result.get(key), str) and bool(result[key].strip())
+            for key in ("message_id", "id")
+        )
+
+    def _complete_delivery(self, client_id: str, result: object) -> dict:
+        if not isinstance(result, dict):
+            result = {}
+        if not self._confirmed_delivery(result) and not result.get("_error"):
+            result["_error"] = "provider_unconfirmed"
+            result["_reason"] = "provider_unconfirmed"
+        error = result.get("_error")
+        receipt = ""
+        if not error:
+            receipt = str(result.get("message_id") or result.get("id") or "").strip()
+        self.gate.complete(
+            client_id,
+            sent=not bool(error),
+            reason=str(error or ""),
+            provider_message_id=receipt,
+        )
+        result.setdefault("client_id", client_id)
+        return result
+
+    def _reconciled_delivery(self, client_id: str, reason: str) -> dict | None:
+        """Return a durable prior receipt without repeating provider I/O."""
+        if reason != "already_sent":
+            return None
+        receipt = self.gate.sent_receipt(client_id)
+        if not receipt:
+            return None
+        return {
+            "message_id": receipt,
+            "client_id": client_id,
+            "_idempotent_replay": True,
+        }
 
     def _req(self, method: str, path: str, data: dict = None) -> dict:
         """Generic read/control request; direct delivery endpoints are forbidden."""
@@ -187,6 +229,9 @@ class AgentMailClient:
 
         decision = self.gate.reserve(recipient, client_id, purpose=purpose)
         if not decision.allowed:
+            reconciled = self._reconciled_delivery(client_id, decision.reason)
+            if reconciled:
+                return reconciled
             return {
                 "_error": "release_blocked",
                 "_reason": decision.reason,
@@ -208,10 +253,7 @@ class AgentMailClient:
         if labels:
             data["labels"] = labels
         result = self.__transport("POST", f"/inboxes/{self.inbox}/messages/send", data)
-        error = result.get("_error")
-        self.gate.complete(client_id, sent=not bool(error), reason=str(error or ""))
-        result.setdefault("client_id", client_id)
-        return result
+        return self._complete_delivery(client_id, result)
 
     def send(
         self,
@@ -269,6 +311,9 @@ class AgentMailClient:
             recipient, client_id, purpose=DeliveryPurpose.CONVERSATION_REPLY
         )
         if not decision.allowed:
+            reconciled = self._reconciled_delivery(client_id, decision.reason)
+            if reconciled:
+                return reconciled
             return {
                 "_error": "release_blocked",
                 "_reason": decision.reason,
@@ -281,7 +326,7 @@ class AgentMailClient:
                 "_reason": validation.reason,
                 "client_id": client_id,
             }
-        data = {}
+        data = {"client_id": client_id}
         if text:
             data["text"] = text
         if html:
@@ -290,10 +335,7 @@ class AgentMailClient:
         result = self.__transport(
             "POST", f"/inboxes/{self.inbox}/messages/{safe_id}/reply", data
         )
-        error = result.get("_error")
-        self.gate.complete(client_id, sent=not bool(error), reason=str(error or ""))
-        result.setdefault("client_id", client_id)
-        return result
+        return self._complete_delivery(client_id, result)
 
     # ─── Webhooks ─────────────────────────────────────────────────────────────
 

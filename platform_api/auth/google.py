@@ -17,8 +17,10 @@ import time
 from typing import Dict, Optional
 
 import httpx
-from authlib.jose import JsonWebKey, jwt
-from authlib.jose.errors import JoseError
+from joserfc import jwt
+from joserfc.errors import JoseError
+from joserfc.jwk import KeySet
+from joserfc.jwt import JWTClaimsRegistry
 
 from platform_api.config import settings
 
@@ -102,14 +104,18 @@ class GoogleOIDCVerifier:
             jwks = await self._fetch_jwks()
             
             # Decode and verify JWT
-            claims = jwt.decode(
+            token = jwt.decode(
                 id_token,
-                key=jwks,
-                claims_options={
-                    "iss": {"values": [GOOGLE_ISSUER]},
-                    "aud": {"values": [self.client_id]},
-                }
+                key=KeySet.import_key_set(jwks),
+                algorithms=["RS256"],
             )
+            claims = token.claims
+            JWTClaimsRegistry(
+                iss={"essential": True, "value": GOOGLE_ISSUER},
+                aud={"essential": True, "value": self.client_id},
+                sub={"essential": True},
+                exp={"essential": True},
+            ).validate(claims)
             
             # Extract standard claims
             return {

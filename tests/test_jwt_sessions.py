@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, timezone
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
-from authlib.jose import JoseError
+
 
 from platform_api.auth.jwt import (
     JWTError,
@@ -142,6 +142,8 @@ def test_decode_jwt_wrong_secret_key(secret_key):
 async def test_create_session_success(mock_redis):
     """Create session in Redis."""
     with patch("platform_api.auth.jwt.settings") as mock_settings:
+        mock_settings.SECRET_KEY = "test-secret-key-for-session-tests"
+        mock_settings.JWT_ALGORITHM = "HS256"
         mock_settings.JWT_EXPIRATION_DAYS = 7
 
         token = await create_session(
@@ -166,6 +168,8 @@ async def test_create_session_success(mock_redis):
 async def test_create_session_with_metadata(mock_redis):
     """Create session with IP and user agent."""
     with patch("platform_api.auth.jwt.settings") as mock_settings:
+        mock_settings.SECRET_KEY = "test-secret-key-for-session-tests"
+        mock_settings.JWT_ALGORITHM = "HS256"
         mock_settings.JWT_EXPIRATION_DAYS = 7
 
         session_data = {

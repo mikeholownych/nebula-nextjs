@@ -24,6 +24,8 @@ def test_gap1_named_constant_regex():
 PATTERN = r'^/api/[a-z]+$'
 import re
 regex = re.compile(PATTERN)
+if regex.match(path):
+    pass
 """
     tree = ast.parse(code)
     visitor = _RouteContractVisitor(tree)
@@ -45,17 +47,23 @@ def func1():
     PATTERN = r'^/api/v1/[a-z]+$'
     import re
     regex = re.compile(PATTERN)
+    if regex.match(path):
+        pass
 
 def func2():
     PATTERN = r'^/api/v2/[a-z]+$'  # Same name, different scope
     import re
     regex = re.compile(PATTERN)
+    if regex.match(path):
+        pass
 
 class MyClass:
     PATTERN = r'^/static/.*$'  # Class-level constant
     def method(self):
         import re
         regex = re.compile(self.PATTERN)
+        if regex.match(path):
+            pass
 """
     tree = ast.parse(code)
     visitor = _RouteContractVisitor(tree)

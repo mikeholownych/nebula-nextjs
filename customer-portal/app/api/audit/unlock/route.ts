@@ -40,10 +40,11 @@ export async function POST(request: NextRequest) {
 
     const audit = await auditRes.json()
 
-    // 2. Send the full report email (best-effort — don't fail the unlock if
-    //    email delivery is temporarily down)
+    // 2. Send the full report email. Unlock remains available if delivery is
+    //    down, but the response must never claim an unconfirmed send.
+    let emailSent = false
     try {
-      await fetch('http://127.0.0.1:8001/audit/email', {
+      const deliveryRes = await fetch('http://127.0.0.1:8001/audit/email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -56,8 +57,15 @@ export async function POST(request: NextRequest) {
         }),
         signal: AbortSignal.timeout(15_000),
       })
+      if (deliveryRes.ok) {
+        const delivery = await deliveryRes.json().catch(() => null)
+        const receipt = delivery?.message_id
+        emailSent = delivery?.status === 'sent'
+          && typeof receipt === 'string'
+          && receipt.trim().length > 0
+      }
     } catch {
-      // Non-fatal — the user still gets unlocked results in-browser
+      emailSent = false
     }
 
     const clientDistinctId = request.headers.get('X-POSTHOG-DISTINCT-ID') ?? email
@@ -89,6 +97,7 @@ export async function POST(request: NextRequest) {
     const response = NextResponse.json({
       status: 'unlocked',
       audit_id,
+      email_sent: emailSent,
     })
 
     response.cookies.set(`audit_unlock_${audit_id}`, token, {

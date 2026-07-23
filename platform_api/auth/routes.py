@@ -139,6 +139,8 @@ async def google_auth(
         
         if not google_user.get("email"):
             raise HTTPException(status_code=400, detail="Email required")
+        if google_user.get("email_verified") is not True:
+            raise HTTPException(status_code=401, detail="Verified email required")
         
         # Check if identity exists
         identity = db.query(UserIdentity).filter_by(

@@ -5,7 +5,7 @@ from typing import List, Optional
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel, ConfigDict, HttpUrl
 from sqlalchemy import select, desc
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -27,6 +27,8 @@ class AuditCreate(BaseModel):
 
 
 class AuditResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: UUID
     org_id: UUID
     user_id: UUID
@@ -35,10 +37,6 @@ class AuditResponse(BaseModel):
     score: Optional[int]
     created_at: datetime
     completed_at: Optional[datetime]
-
-    class Config:
-        from_attributes = True
-
 
 class AuditDetailResponse(AuditResponse):
     metadata: dict

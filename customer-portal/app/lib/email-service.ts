@@ -1,6 +1,6 @@
 /**
  * Email Service for Nebula Components
- * Handles email queueing and sending via AgentMail REST API
+ * Handles data-only email queueing. Delivery is owned by the Python release gate.
  */
 
 import { Pool } from 'pg';
@@ -13,22 +13,6 @@ export const pool = new Pool({
   max: 10,
 });
 
-// AgentMail configuration
-const AGENTMAIL_KEY = process.env.AGENTMAIL_KEY || '';
-const AGENTMAIL_INBOX = 'nebulashop@agentmail.to';
-const AGENTMAIL_API = 'https://api.agentmail.to/v0';
-
-// Sender identity used in AgentMail API calls
-// Reserved for future use: FROM_EMAIL, FROM_NAME
-
-export interface EmailPayload {
-  to_email: string;
-  to_name?: string;
-  company?: string;
-  email_number: number;
-  subject: string;
-  body: string;
-}
 
 /**
  * Get email template by sequence number
@@ -204,98 +188,6 @@ export async function queueLeadForOutreach(
   }
 }
 
-/**
- * Process queued emails (cron job)
- */
-export async function processEmailQueue(): Promise<{ sent: number; failed: number }> {
-  const client = await pool.connect();
-  let sent = 0;
-  let failed = 0;
-
-  try {
-    // Get emails ready to send
-    const result = await client.query(
-      `SELECT eq.id, eq.lead_id, eq.to_email, eq.to_name, eq.email_number
-       FROM email_queue eq
-       WHERE eq.status = 'queued'
-         AND eq.scheduled_for <= NOW()
-       ORDER BY eq.scheduled_for
-       LIMIT 100`
-    );
-
-    console.log('[Email Service] Processing', result.rows.length, 'emails');
-
-    for (const row of result.rows) {
-      try {
-        const template = getEmailTemplate(row.email_number, row.to_name?.split(' ')[0] || 'there');
-
-        // Send via AgentMail
-        await sendEmail({
-          to_email: row.to_email,
-          to_name: row.to_name,
-          email_number: row.email_number,
-          subject: template.subject,
-          body: template.body,
-        });
-
-        // Mark as sent
-        await client.query(
-          `UPDATE email_queue SET status = 'sent', sent_at = NOW() WHERE id = $1`,
-          [row.id]
-        );
-
-        sent++;
-
-      } catch (error) {
-        console.error('[Email Service] Failed to send:', row.to_email, error);
-
-        await client.query(
-          `UPDATE email_queue SET status = 'failed', error_message = $1 WHERE id = $2`,
-          [String(error), row.id]
-        );
-
-        failed++;
-      }
-    }
-
-    return { sent, failed };
-
-  } finally {
-    client.release();
-  }
-}
-
-/**
- * Send email via AgentMail REST API
- */
-async function sendEmail(payload: EmailPayload): Promise<void> {
-  if (!AGENTMAIL_KEY) {
-    console.log('[Email Service] Mock send (no API key):', payload.to_email, payload.subject);
-    return;
-  }
-
-  const response = await fetch(
-    `${AGENTMAIL_API}/inboxes/${AGENTMAIL_INBOX}/messages/send`,
-    {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${AGENTMAIL_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        to: payload.to_email,
-        subject: payload.subject,
-        text: payload.body,
-        html: `<pre style="font-family: system-ui, sans-serif; white-space: pre-wrap;">${payload.body}</pre>`,
-      }),
-    }
-  );
-
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`AgentMail error: ${error}`);
-  }
-}
 
 /**
  * Get queue stats

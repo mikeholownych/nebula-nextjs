@@ -85,7 +85,7 @@
 
 - `scripts/` at root — may contain utility scripts still in use
 - `adapters/` — check if used by Next.js app
-- `archived/` — already archived content
+- `.legacy/outreach-wave-archive-2026-07-23/` — preserved historical outreach-wave scripts
 - `auto-responder/` — may still be active
 - `docs/` — documentation, review relevance
 - Various `.md` files — review and update

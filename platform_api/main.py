@@ -1,5 +1,7 @@
 """FastAPI application entry point."""
 
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
@@ -14,6 +16,36 @@ from platform_api.errors import (
 from platform_api.middleware import setup_cors, setup_middleware
 
 
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    """Initialize and close shared runtime integrations."""
+    from platform_api.redis_client import redis_client
+    from platform_api.posthog_client import (
+        init_posthog,
+        shutdown_posthog,
+        warn_missing_token,
+    )
+
+    await redis_client.connect()
+    print("✅ Redis connected")
+    if settings.POSTHOG_PROJECT_TOKEN:
+        init_posthog(
+            settings.POSTHOG_PROJECT_TOKEN,
+            settings.POSTHOG_HOST,
+            debug=settings.is_development,
+        )
+        print("✅ PostHog initialized")
+    elif settings.is_development:
+        warn_missing_token("POSTHOG_PROJECT_TOKEN")
+
+    try:
+        yield
+    finally:
+        await redis_client.disconnect()
+        print("✅ Redis disconnected")
+        shutdown_posthog()
+
+
 # Create FastAPI application
 app = FastAPI(
     title="Platform API",
@@ -22,6 +54,7 @@ app = FastAPI(
     docs_url="/docs" if settings.is_development else None,
     redoc_url="/redoc" if settings.is_development else None,
     openapi_url="/openapi.json" if settings.is_development else None,
+    lifespan=lifespan,
     # Request size limit
     max_request_size=settings.MAX_JSON_BODY_BYTES,
 )
@@ -108,37 +141,6 @@ async def readiness_check(request: Request) -> dict:
             if hasattr(request.state, "request_id")
             else None,
         )
-
-
-# Startup and shutdown events
-@app.on_event("startup")
-async def startup_event():
-    """Initialize Redis and PostHog on startup."""
-    from platform_api.redis_client import redis_client
-    await redis_client.connect()
-    print("✅ Redis connected")
-
-    from platform_api.posthog_client import init_posthog, warn_missing_token
-    if settings.POSTHOG_PROJECT_TOKEN:
-        init_posthog(
-            settings.POSTHOG_PROJECT_TOKEN,
-            settings.POSTHOG_HOST,
-            debug=settings.is_development,
-        )
-        print("✅ PostHog initialized")
-    elif settings.is_development:
-        warn_missing_token("POSTHOG_PROJECT_TOKEN")
-
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    """Close Redis and flush PostHog on shutdown."""
-    from platform_api.redis_client import redis_client
-    await redis_client.disconnect()
-    print("✅ Redis disconnected")
-
-    from platform_api.posthog_client import shutdown_posthog
-    shutdown_posthog()
 
 
 # Add a test endpoint to verify the service works

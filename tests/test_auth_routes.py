@@ -5,19 +5,28 @@ from uuid import uuid4
 
 import pytest
 from fastapi import FastAPI
-from fastapi.testclient import TestClient
-from httpx import AsyncClient
+from httpx import ASGITransport, AsyncClient
 
-from platform_api.auth.routes import router as auth_router
+from platform_api.auth.routes import get_current_user, router as auth_router
+from platform_api.db import get_session
 from platform_api.db.models import User, UserIdentity, Organization
+from platform_api.redis_client import get_redis
 
 
 @pytest.fixture
-def app():
+def app(mock_db, mock_redis):
     """Create test FastAPI app."""
     app = FastAPI()
     app.include_router(auth_router)
+    app.dependency_overrides[get_session] = lambda: mock_db
+    app.dependency_overrides[get_redis] = lambda: mock_redis
     return app
+
+
+@pytest.fixture
+async def client(app):
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
+        yield client
 
 
 @pytest.fixture
@@ -54,10 +63,9 @@ def mock_user():
     )
 
 
-def test_google_auth_new_user(app, mock_db, mock_redis, mock_user):
+@pytest.mark.asyncio
+async def test_google_auth_new_user(app, client, mock_db, mock_redis, mock_user):
     """Test Google OAuth with new user."""
-    client = TestClient(app)
-
     # Mock dependencies
     with patch("platform_api.auth.routes.get_redis", return_value=mock_redis):
         with patch("platform_api.auth.routes.get_session", return_value=mock_db):
@@ -66,6 +74,7 @@ def test_google_auth_new_user(app, mock_db, mock_redis, mock_user):
                 mock_verify.return_value = {
                     "subject": "google-user-123",
                     "email": "test@example.com",
+                    "email_verified": True,
                 }
 
                 # Mock JWT token creation
@@ -75,7 +84,7 @@ def test_google_auth_new_user(app, mock_db, mock_redis, mock_user):
                     # Mock database query (no existing identity)
                     mock_db.query.return_value.filter_by.return_value.first.return_value = None
 
-                    response = client.post(
+                    response = await client.post(
                         "/auth/google",
                         json={"id_token": "test-google-token"}
                     )
@@ -89,10 +98,9 @@ def test_google_auth_new_user(app, mock_db, mock_redis, mock_user):
                     assert data["access_token"] == "test-jwt-token"
 
 
-def test_google_auth_existing_user(app, mock_db, mock_redis, mock_user):
+@pytest.mark.asyncio
+async def test_google_auth_existing_user(app, client, mock_db, mock_redis, mock_user):
     """Test Google OAuth with existing user."""
-    client = TestClient(app)
-
     # Create mock identity
     mock_identity = MagicMock()
     mock_identity.user = mock_user
@@ -104,6 +112,7 @@ def test_google_auth_existing_user(app, mock_db, mock_redis, mock_user):
                 mock_verify.return_value = {
                     "subject": "google-user-123",
                     "email": "test@example.com",
+                    "email_verified": True,
                 }
 
                 with patch("platform_api.auth.routes.create_session") as mock_create:
@@ -112,7 +121,7 @@ def test_google_auth_existing_user(app, mock_db, mock_redis, mock_user):
                     # Mock database query (existing identity)
                     mock_db.query.return_value.filter_by.return_value.first.return_value = mock_identity
 
-                    response = client.post(
+                    response = await client.post(
                         "/auth/google",
                         json={"id_token": "test-google-token"}
                     )
@@ -123,10 +132,9 @@ def test_google_auth_existing_user(app, mock_db, mock_redis, mock_user):
                     assert response.status_code == 200
 
 
-def test_google_auth_invalid_token(app, mock_db, mock_redis):
+@pytest.mark.asyncio
+async def test_google_auth_invalid_token(app, client, mock_db, mock_redis):
     """Test Google OAuth with invalid token."""
-    client = TestClient(app)
-
     from platform_api.auth.google import GoogleOAuthError
 
     with patch("platform_api.auth.routes.get_redis", return_value=mock_redis):
@@ -134,7 +142,7 @@ def test_google_auth_invalid_token(app, mock_db, mock_redis):
             with patch("platform_api.auth.routes.verify_google_token") as mock_verify:
                 mock_verify.side_effect = GoogleOAuthError("Invalid token")
 
-                response = client.post(
+                response = await client.post(
                     "/auth/google",
                     json={"id_token": "invalid-token"}
                 )
@@ -142,10 +150,28 @@ def test_google_auth_invalid_token(app, mock_db, mock_redis):
                 assert response.status_code == 401
 
 
-def test_logout_success(app, mock_redis):
-    """Test successful logout."""
-    client = TestClient(app)
+@pytest.mark.asyncio
+async def test_google_auth_rejects_unverified_email(client, mock_db):
+    with patch("platform_api.auth.routes.verify_google_token") as mock_verify:
+        mock_verify.return_value = {
+            "subject": "google-user-123",
+            "email": "unverified@example.com",
+            "email_verified": False,
+        }
 
+        response = await client.post(
+            "/auth/google",
+            json={"id_token": "test-google-token"},
+        )
+
+    assert response.status_code == 401
+    assert response.json()["detail"] == "Verified email required"
+    mock_db.add.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_logout_success(app, client, mock_redis):
+    """Test successful logout."""
     mock_user = MagicMock()
     mock_user.id = uuid4()
 
@@ -158,7 +184,8 @@ def test_logout_success(app, mock_redis):
 
     with patch("platform_api.auth.routes.get_redis", return_value=mock_redis):
         with patch("platform_api.auth.routes.get_current_user", return_value=mock_current_user):
-            response = client.post("/auth/logout")
+            app.dependency_overrides[get_current_user] = lambda: mock_current_user
+            response = await client.post("/auth/logout")
 
             assert response.status_code == 200
             assert "message" in response.json()
@@ -168,10 +195,9 @@ def test_logout_success(app, mock_redis):
             mock_redis.hdel.assert_called_once()  # Deleting
 
 
-def test_list_sessions_success(app, mock_redis):
+@pytest.mark.asyncio
+async def test_list_sessions_success(app, client, mock_redis):
     """Test list sessions."""
-    client = TestClient(app)
-
     mock_user = MagicMock()
     mock_user.id = uuid4()
 
@@ -192,7 +218,8 @@ def test_list_sessions_success(app, mock_redis):
 
     with patch("platform_api.auth.routes.get_redis", return_value=mock_redis):
         with patch("platform_api.auth.routes.get_current_user", return_value=mock_current_user):
-            response = client.get("/auth/sessions")
+            app.dependency_overrides[get_current_user] = lambda: mock_current_user
+            response = await client.get("/auth/sessions")
 
             assert response.status_code == 200
             data = response.json()
@@ -201,10 +228,9 @@ def test_list_sessions_success(app, mock_redis):
             assert data[0]["session_id"] == "session-1"
 
 
-def test_get_me_success(app):
+@pytest.mark.asyncio
+async def test_get_me_success(app, client):
     """Test get current user info."""
-    client = TestClient(app)
-
     from datetime import datetime, timezone
 
     mock_user = MagicMock()
@@ -220,7 +246,8 @@ def test_get_me_success(app):
     }
 
     with patch("platform_api.auth.routes.get_current_user", return_value=mock_current_user):
-        response = client.get(
+        app.dependency_overrides[get_current_user] = lambda: mock_current_user
+        response = await client.get(
             "/auth/me",
             headers={"Authorization": "Bearer test-token"}
         )
@@ -230,11 +257,10 @@ def test_get_me_success(app):
         assert data["email"] == "test@example.com"
 
 
-def test_get_me_unauthorized(app):
+@pytest.mark.asyncio
+async def test_get_me_unauthorized(app, client):
     """Test get current user without auth."""
-    client = TestClient(app)
-
-    response = client.get("/auth/me")
+    response = await client.get("/auth/me")
 
     assert response.status_code == 401
     assert "Missing authorization token" in response.json()["detail"]

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Deliver audit to lead. Scrape URL, score, compose email, send via AgentMail."""
 
-import sys, json, time, re, subprocess, os, argparse, ipaddress, socket
+import sys, json, time, re, subprocess, os, argparse, ipaddress, socket, logging
+from datetime import datetime, timezone
 from urllib.parse import urljoin, urlparse
 from pathlib import Path
 
@@ -36,6 +37,10 @@ STATS_PATH = NEBULA_DIR / "stats.json"
 AUDIT_LOG_PATH = LEDGERS_DIR / "audit-delivery.log"
 LEDGER_FILE = str(LEDGERS_DIR / "customer-ledger.jsonl")
 AUDIT_LEADS_FILE = str(NEBULA_DIR / "audit_leads.jsonl")
+MAX_AUDIT_HTML_BYTES = 2 * 1024 * 1024
+MAX_EXTRACTED_TEXT = 50_000
+MAX_CTA_COUNT = 100
+MAX_CTA_TEXT = 200
 
 # Ensure directories exist
 LEDGERS_DIR.mkdir(parents=True, exist_ok=True)
@@ -118,18 +123,34 @@ def fetch_page(url, session):
     try:
         current = validate_public_http_url(url)
         for _ in range(6):
-            resp = session.get(current, timeout=15, allow_redirects=False)
+            resp = session.get(current, timeout=15, allow_redirects=False, stream=True)
             if resp.status_code == 403:
+                resp.close()
                 session.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"})
-                resp = session.get(current, timeout=15, allow_redirects=False)
+                resp = session.get(current, timeout=15, allow_redirects=False, stream=True)
             if resp.is_redirect or resp.is_permanent_redirect:
                 location = resp.headers.get("Location")
+                resp.close()
                 if not location:
                     raise ValueError("Redirect missing Location header")
                 current = validate_public_http_url(urljoin(current, location))
                 continue
             resp.raise_for_status()
-            return resp.text
+            content_length = int(resp.headers.get("Content-Length") or 0)
+            if content_length > MAX_AUDIT_HTML_BYTES:
+                resp.close()
+                raise ValueError("Audit page exceeds maximum response size")
+            payload = bytearray()
+            for chunk in resp.iter_content(chunk_size=64 * 1024):
+                if not chunk:
+                    continue
+                payload.extend(chunk)
+                if len(payload) > MAX_AUDIT_HTML_BYTES:
+                    resp.close()
+                    raise ValueError("Audit page exceeds maximum response size")
+            encoding = resp.encoding or "utf-8"
+            resp.close()
+            return bytes(payload).decode(encoding, errors="replace")
         raise ValueError("Too many redirects")
     except (requests.RequestException, ValueError) as e:
         print(f"ERROR: Failed to fetch {url}: {e}")
@@ -171,10 +192,14 @@ def scrape_page(url):
     if not html_text:
         raise ValueError(f"Could not fetch {url}")
     soup = BeautifulSoup(html_text, "html.parser")
-    title = (soup.title.get_text(" ", strip=True) if soup.title else "")
-    h1 = (soup.find("h1").get_text(" ", strip=True) if soup.find("h1") else "")
-    text = soup.get_text(" ", strip=True)
-    ctas = [el.get_text(" ", strip=True) for el in soup.find_all(["a", "button"]) if el.get_text(" ", strip=True)]
+    title = (soup.title.get_text(" ", strip=True) if soup.title else "")[:500]
+    h1 = (soup.find("h1").get_text(" ", strip=True) if soup.find("h1") else "")[:500]
+    text = soup.get_text(" ", strip=True)[:MAX_EXTRACTED_TEXT]
+    ctas = [
+        el.get_text(" ", strip=True)[:MAX_CTA_TEXT]
+        for el in soup.find_all(["a", "button"], limit=MAX_CTA_COUNT)
+        if el.get_text(" ", strip=True)
+    ]
     return {"url": url, "html": html_text, "title": title, "h1": h1, "text": text, "ctas": ctas}
 
 
@@ -262,44 +287,40 @@ def score_audit(page):
     fold_signals = sum([has_fold_cta, has_fold_price])
     if has_h1 and fold_signals >= 2:
         above_fold_score = 8
-        above_fold_issue = "Hero section has headline, CTA, and offer/price signal."
-        above_fold_fix = "Strong above-fold setup — consider A/B testing urgency triggers."
+        above_fold_issue = "Early source segment contains headline, clickable control, and offer/price terms."
+        above_fold_fix = "Verify actual mobile/desktop placement in a rendered browser before changing hierarchy."
     elif has_h1 and fold_signals == 1:
         above_fold_score = 5
-        above_fold_issue = "Hero has a headline but is missing " + ("a CTA" if not has_fold_cta else "a price/offer signal") + " in the first viewport."
-        above_fold_fix = "Add a visible CTA button and a price or value signal above the fold to reduce decision friction."
+        above_fold_issue = "Early source proxy has a headline but no " + ("clickable control" if not has_fold_cta else "offer/price term") + "."
+        above_fold_fix = "Inspect the rendered viewport; add the missing element only if the visual hierarchy confirms the gap."
     else:
         above_fold_score = 2
-        above_fold_issue = "Above-fold content is weak: missing headline, CTA, or offer signal in first 3000 chars."
-        above_fold_fix = "Place H1 headline, primary CTA button, and price/offer context all within the first viewport."
+        above_fold_issue = "Early source proxy lacks a headline, clickable control, or offer term in its first 3,000 characters."
+        above_fold_fix = "Run rendered viewport inspection before treating source order as visual placement."
 
-    # --- Ad signals dimension ---
-    fb_pixel = bool(re.search(r'fbq\(|facebook\.net/en_US/fbevents', html_text))
-    ga4 = bool(re.search(r'gtag\(|["\']G-[A-Z0-9]+["\']', html_text))
-    utm_links = bool(re.search(r'\?utm_', html_text))
-    thankyou = bool(re.search(r'thank[-_]you|/success', html_text, re.IGNORECASE))
-    # Process archaeology: detect checkout present but no confirmation loop
-    has_checkout = bool(re.search(r'stripe|checkout|buy now|add to cart|place order', lower))
-    broken_funnel = has_checkout and not thankyou  # residue contradiction = finding
-
-
-    signals_found = sum([fb_pixel, ga4, utm_links, thankyou])
+    # --- Ad-source artifact dimension ---
+    tracking_soup = BeautifulSoup(html_text, "html.parser")
+    fb_pixel = bool(re.search(r'\bfbq\s*\(|connect\.facebook\.net/.+fbevents', lower))
+    ga4 = bool(re.search(r'\bgtag\s*\(|["\']g-[a-z0-9]{6,}["\']', lower))
+    utm_links = bool(tracking_soup.find("a", href=re.compile(r"[?&]utm_(?:source|medium|campaign)=", re.IGNORECASE)))
+    conversion_call = bool(re.search(r"(?:fbq|gtag)\s*\([^\n]{0,120}(?:purchase|generate_lead|conversion|completeregistration)", lower))
+    signals_found = sum([fb_pixel, ga4, utm_links, conversion_call])
     ad_signals_score = min(2 + 2 * signals_found, 10)
-    found_list = [name for flag, name in [
-        (fb_pixel, "Facebook Pixel"), (ga4, "GA4"), (utm_links, "UTM params"), (thankyou, "Thank-you page signal")
-    ] if flag]
-    missing_list = [name for flag, name in [
-        (fb_pixel, "Facebook Pixel"), (ga4, "GA4"), (utm_links, "UTM params"), (thankyou, "Thank-you page signal")
-    ] if not flag]
+    source_checks = [
+        (fb_pixel, "Facebook Pixel initializer"),
+        (ga4, "GA4 initializer/ID"),
+        (utm_links, "UTM-bearing link"),
+        (conversion_call, "explicit conversion call"),
+    ]
+    found_list = [name for flag, name in source_checks if flag]
+    missing_list = [name for flag, name in source_checks if not flag]
     if found_list and missing_list:
-        ad_signals_issue = f"Found: {', '.join(found_list)}. Missing: {', '.join(missing_list)}."
-        if broken_funnel:
-            ad_signals_issue += " Checkout detected but no thank-you/success page — every paid conversion fires with no confirmation signal (broken attribution loop)."
+        ad_signals_issue = f"Static source artifacts found: {', '.join(found_list)}. Not observed: {', '.join(missing_list)}. Runtime firing remains unverified."
     elif found_list:
-        ad_signals_issue = f"All key signals present: {', '.join(found_list)}."
+        ad_signals_issue = f"Four static source artifacts observed: {', '.join(found_list)}. Runtime firing remains unverified."
     else:
-        ad_signals_issue = "No ad tracking signals detected (Facebook Pixel, GA4, UTM, thank-you page)."
-    ad_signals_fix = "Install Facebook Pixel + GA4 conversion events on thank-you page to measure true ROAS"
+        ad_signals_issue = "No recognized ad-tracking artifact observed in fetched source HTML; runtime/server-side tracking remains unverified."
+    ad_signals_fix = "Run consent-aware browser/network validation; add only tracking artifacts proven absent."
 
     # --- SEO Foundations dimension (naming conventions) ---
     _soup = BeautifulSoup(html_text, "html.parser") if html_text else None
@@ -589,9 +610,23 @@ def score_audit(page):
     try:
         from audit_evidence import enrich_findings_with_evidence
         opp_matrix = enrich_findings_with_evidence(opp_matrix, html_text)
-    except Exception as _ev_err:
-        # Evidence enrichment is additive — never fail the audit if it errors
-        pass
+    except Exception:
+        logging.exception("Audit evidence enrichment failed")
+        evidence_ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        opp_matrix = [
+            {
+                **finding,
+                "evidence": {
+                    "measured": "Evidence unavailable for this finding",
+                    "required": "Evidence extraction must complete before a measurement claim is shown",
+                    "delta": "No evidence claim emitted",
+                    "selector": "N/A",
+                    "confidence": "unavailable",
+                    "timestamp": evidence_ts,
+                },
+            }
+            for finding in opp_matrix
+        ]
 
     return {"overall": overall, "overall_grade": grade, "dimensions": dimensions, "opp_matrix": opp_matrix}
 
@@ -734,8 +769,6 @@ def detect_stack(html_text):
     return ", ".join(signals[:5])  # cap at 5 to keep opener tight
 
 
-PROMPT_PACK_CHECKOUT = "https://buy.stripe.com/8x2dR90jG1Aobe99bI43S0a"  # $7 — AI Prompt Pack
-
 def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=None, stated_goal=None, stated_role=None, stated_visitor=None, stated_tone=None, prompt_pack=None):
     """Compose structured audit email — free-consulting frame, not report delivery."""
     DIM_LABELS = {
@@ -802,7 +835,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
     elif "dev" in _role or "engineer" in _role or "tech" in _role:
         personalized_q = (
             "One thing: do you have direct access to the page's HTML/CMS, or does every change "
-            "go through an approval queue? That changes whether the $147 fix is a 2-hour job or a 2-week one."
+            "go through an approval queue? That changes whether the $97 fix is a 2-hour job or a 2-week one."
         )
     else:
         personalized_q = ""  # no role = no personalized Q; keep email tight
@@ -890,26 +923,6 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
     else:
         pitch_line = "Implements the fix in 24h. No call required. Full refund if not satisfied."
 
-    # ── Retainer seed (transition beats before $147 pitch) ──
-    retainer_lines = [
-        "",
-        "─" * 40,
-        "",
-        "That leak is real, and it won't fix itself.",
-        "Pages decay. Campaigns change. Content drifts.",
-        "The fix you apply today needs monitoring, or you redo this audit in 12 months.",
-        "",
-        "AI Ops Retainer — $1,497/mo:",
-        "• Monthly audit refresh — catch drift before it costs you",
-        "• Up to 4 fixes per month — no per-ticket negotiation",
-        "• AI governance — know which models touch your data, where, and why",
-        "• Priority support — direct line, <30 min response, 24/7",
-        "",
-        "3-month pilot. No long-term contract. Cancel anytime.",
-        "Full details: https://nebulacomponents.shop/ai-ops-retainer.html",
-        "",
-        "─" * 40,
-    ]
 
     if broken_only:
         lines.append(body_opener)
@@ -935,20 +948,12 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
     # ── Prompt Pack teaser (free sample) ──
     if prompt_pack and prompt_pack.get("teaser"):
         teaser = prompt_pack["teaser"]
-        total_count = prompt_pack.get("count", 0)
-        upsell_count = len(prompt_pack.get("full_pack", []))
         lines.append("")
         lines.append("─" * 40)
         lines.append("")
         lines.append("🧠 AI Prompt — Paste this into Claude, ChatGPT, or Gemini:")
         lines.append("")
         lines.extend(teaser["prompt_md"].split("\n"))
-        if upsell_count > 0:
-            lines.append("")
-            lines.append(f"▶️  Get AI prompts for the other {upsell_count} findings on your page — $7")
-            lines.append(f"   Each prompt is pre-loaded with your landing page data.")
-            lines.append(f"   {PROMPT_PACK_CHECKOUT}")
-            lines.append("")
         lines.append("─" * 40)
 
     # ── Contradiction block (CAIOS M5: highest-value finding, named explicitly) ──
@@ -985,13 +990,11 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
             for o in av[:1]:
                 lines.append(f"    ✗ {o['label']}")
 
-    lines.extend(retainer_lines)
-
     lines.extend([
         "",
         "━" * 40,
         "",
-        f"$147 — {pitch_line}",
+        f"$97 Fix Pack — {pitch_line}",
         "Details + FAQ: https://nebulacomponents.shop/primer.html",
         "One-click checkout: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b",
         "",
@@ -1001,9 +1004,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         "",
         "━" * 40,
         "",
-        "DIY kit (free): https://nebulacomponents.shop/checkout.html",
-        "Full breakdown: https://nebulacomponents.shop/7-systems.html (the 7 systems every page needs)",
-        "",
+
         "📊 Data privacy — this audit analyzed your page's public HTML only.",
         "   We never accessed: your analytics, ad accounts, CMS, customer data, or server.",
         "   Your email is used only for delivery and never shared.",
@@ -1029,7 +1030,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         html_body += f"""
 <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:560px;margin:16px auto 0;padding-top:16px;border-top:1px solid #e5e7eb;text-align:center;">
   <div style="font-size:13px;color:#6b7280;">
-    <a href="https://nebulacomponents.shop/checkout.html?email={email}&url={page_url}" style="color:#059669;text-decoration:underline;">View DIY fix kit →</a>
+    <a href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b" style="color:#059669;text-decoration:underline;">Implement these findings — $97 Fix Pack →</a>
   </div>
 </div>"""
     else:
@@ -1105,7 +1106,7 @@ Key findings:
 The full audit is ready here (self-serve):
 https://nebulacomponents.shop/audit.html?url={url}
 
-If you'd like me to implement these fixes for $147 (done in 24h), just reply "YES" and I'll get started.
+If you'd like me to implement these fixes with the $97 Fix Pack (done in 24h), just reply "YES" and I'll get started.
 
 Best,
 Nebula Audit Agent"""

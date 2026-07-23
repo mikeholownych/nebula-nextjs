@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { withX402 } from '@x402/next'
+import { withX402FromHTTPServer, x402HTTPResourceServer, type RouteConfig } from '@x402/next'
 import { x402Server, WALLET_ADDRESS, NETWORK } from '@/lib/x402'
 import { auditBodyDiscovery } from '@/lib/x402-discovery'
 
@@ -48,9 +48,7 @@ const handler = async (request: NextRequest) => {
   }
 }
 
-const x402Handler = withX402(
-  handler,
-  {
+const routeConfig: RouteConfig = {
     accepts: [
       {
         scheme: 'exact',
@@ -62,9 +60,11 @@ const x402Handler = withX402(
     description: 'Landing page conversion audit — scores headline, trust signals, CTA, mobile, form friction, load time, and message-match.',
     mimeType: 'application/json',
     extensions: auditBodyDiscovery,
-  },
-  x402Server,
-)
+  }
+const x402HttpServer = new x402HTTPResourceServer(x402Server, {
+  '/api/audit/run': routeConfig,
+})
+const x402Handler = withX402FromHTTPServer(handler, x402HttpServer)
 
 export async function POST(request: NextRequest) {
   // withX402 reads req.url / req.nextUrl — which is localhost:3000 behind the CF tunnel.

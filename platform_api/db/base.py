@@ -1,7 +1,6 @@
 """Database base configuration and types."""
 
 from datetime import datetime, timezone
-from typing import Any
 from uuid import uuid4
 
 from sqlalchemy import MetaData
@@ -23,9 +22,6 @@ metadata = MetaData(naming_convention=convention)
 class Base(DeclarativeBase):
     """Base class for all models."""
     metadata = metadata
-
-    def __init__(self, **kwargs: Any) -> None:
-        super().__init__(**kwargs)
 
 
 class TimestampMixin:

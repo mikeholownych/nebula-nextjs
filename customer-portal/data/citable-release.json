@@ -1,17 +1,15 @@
 {
   "package": "@nebulacomponents/citable",
-  "version": "1.13.0",
-  "releasedAt": "2026-07-19",
+  "version": "1.13.1",
+  "releasedAt": "2026-07-23",
   "detectorCount": 123,
   "namespaceCount": 18,
   "registryCount": 27,
   "nodeRequirement": ">=24.0.0",
   "license": "Apache-2.0",
-  "source": "npm:@nebulacomponents/citable@1.13.0",
+  "source": "npm:@nebulacomponents/citable@1.13.1",
   "highlights": [
-    "Canonical release manifests that bind executable detector, namespace, registry, provider, distribution, documentation, and generated publisher projections to the release commit with fail-closed checksum validation.",
-    "Two-phase release governance with `published_unfinalized`, immutable finalization, bounded dwell, terminal withdrawal or supersession, and owner-controlled deployment receipts that cannot be mistaken for independent attestation.",
-    "Direct and cache-busted representation-drift observations with longitudinal divergence and convergence evidence that remains `external_unverified` and cannot satisfy release gates.",
-    "Acceptance-corpus contracts and bounded accuracy metrics covering detector confusion matrices, incomplete evidence, reviewer agreement, execution cost, reproducibility, and remediation verification."
+    "`scripts/collect-deployment-receipts.js` probes every controlled surface in a release manifest, writes one schema-valid `deployment-receipt-*.json` per surface (including failed probes — a failed observation is evidence), and exits non-zero unless every finalization-required surface verifies. This is the missing operational step between `ship-release` and `finalize-release`; v1.13.0 had no tool that could produce the receipts its finalize workflow downloads.",
+    "The `nebula-llms-txt` controlled surface now targets `https://nebulacomponents.shop/resources/citable/llms.txt` instead of the site root `/llms.txt`. The root file is the publisher's own site-wide LLM discovery document and can never byte-match the Citable `llms-txt` projection, so the v1.13.0 surface declaration was unsatisfiable as written and no valid deployment receipt could ever have been collected for it. v1.13.0 therefore exceeded its finalization dwell window and is resolved as superseded under the two-phase release governance introduced in 1.13.0."
   ]
 }

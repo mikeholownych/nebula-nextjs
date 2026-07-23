@@ -114,8 +114,8 @@
 ### GAP 8: AWS Bedrock Credentials
 The root cause of the cron collapse. No `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, or region set. If you want to use Bedrock again, these need to be configured. Currently migrated to opencode/big-pickle which works.
 
-### GAP 9: 41 Archived Legacy Scripts
-`archived/` directory has 41 outreach scripts from previous waves. Most are dead code. Recommended to purge or consolidate.
+### GAP 9: 40 Archived Legacy Scripts
+The 40 tracked outreach-wave scripts were preserved under `.legacy/outreach-wave-archive-2026-07-23/` with an inventory record; they are excluded from active delivery authority.
 
 ### GAP 10: No CI/CD Pipeline
 No `.github/workflows/` directory. Tests exist (20+ in `tests/`) but none run automatically. No test runner configured.

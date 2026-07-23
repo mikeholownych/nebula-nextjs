@@ -43,7 +43,7 @@ def test_active_runtime_has_no_retired_fix_pack_payment_link():
     failures = []
     for suffix in ("*.py", "*.html"):
         for path in BASE.rglob(suffix):
-            if any(part in {"archived", "node_modules", ".git", "tests"} for part in path.parts):
+            if any(part in {".legacy", "node_modules", ".git", "tests"} for part in path.parts):
                 continue
             if retired.lower() in path.read_text(errors="ignore").lower():
                 failures.append(str(path.relative_to(BASE)))
@@ -58,3 +58,18 @@ def test_audit_results_page_has_only_the_canonical_fix_pack_offer():
     assert "$1,497" not in text
     assert "$97 Fix Pack" in text
     assert "https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b" in text
+
+
+def test_active_audit_emails_have_only_the_canonical_fix_pack_offer():
+    delivery_surfaces = (
+        BASE / "deliver_audit.py",
+        BASE / "platform_api" / "services" / "email_service.py",
+        BASE / "platform_api" / "services" / "followup_emails.py",
+    )
+    for path in delivery_surfaces:
+        text = path.read_text()
+        assert not re.search(r"\$147\b", text), path
+        assert not re.search(r"\$7\b", text), path
+        assert not re.search(r"\$1,?497\b", text), path
+        assert "$97 Fix Pack" in text, path
+        assert "https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b" in text, path

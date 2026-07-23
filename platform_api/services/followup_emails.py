@@ -143,10 +143,7 @@ Quick question: Did you implement any fixes from your landing page audit?
 
 This fix alone could improve your conversion rate by 10-20%.
 
-If you're stuck, I can help:
-- Audit Lite ($7): Top 3 fixes + implementation guide
-- Conversion Fix Pack ($147): All fixes + priority support
-- Done-For-You ($1,497): I implement everything
+If you want implementation, the $97 Fix Pack covers the highest-impact fixes with no call required.
 
 https://nebulacomponents.shop/audit
 
@@ -164,10 +161,8 @@ Your audit score was {audit['score']/10}/10 - that's a {100 - audit['score']*10}
 
 Most founders I talk to are leaving 5-10x revenue on the table because their landing pages don't convert.
 
-I can help fix that. Book a call:
-https://nebulacomponents.shop/audit
-
-Or reply "FIX IT" and I'll send you the $7 Audit Lite package.
+I can help fix that with the $97 Fix Pack. No call required:
+https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 
 Best,
 Mike from Nebula Components

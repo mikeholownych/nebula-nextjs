@@ -78,4 +78,12 @@ check("Non-existent site returns empty keywords",
 print(f"\n{'=' * 60}")
 print(f"Results: {tests_passed}/{tests_run} passed")
 print(f"{'=' * 60}")
-sys.exit(0 if tests_passed == tests_run else 1)
+
+
+def test_multi_tenancy_script_checks_pass():
+    assert tests_run > 0
+    assert tests_passed == tests_run
+
+
+if __name__ == "__main__":
+    sys.exit(0 if tests_passed == tests_run else 1)

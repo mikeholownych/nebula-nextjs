@@ -4,6 +4,7 @@ import json
 import sqlite3
 from typing import cast
 
+from agentmail_client import AgentMailClient
 from outbound_release_gate import DeliveryPurpose, OutboundReleaseGate
 
 
@@ -51,8 +52,12 @@ def test_global_disable_marker_blocks_all_delivery(tmp_path: Path):
 
 
 def test_missing_reply_ledger_fails_closed(tmp_path: Path):
-    gate = _gate(tmp_path)
-    gate.replied_path.unlink()
+    gate = OutboundReleaseGate(
+        state_db=tmp_path / "outbound.db",
+        lead_db=_lead_db(tmp_path / "leads.db", email="lead@example.com"),
+        replied_path=tmp_path / "missing-replied.jsonl",
+        disable_marker=tmp_path / "OUTREACH_DISABLED",
+    )
     decision = gate.reserve(
         "lead@example.com", "campaign:lead:step1", purpose=DeliveryPurpose.MARKETING
     )
@@ -61,7 +66,7 @@ def test_missing_reply_ledger_fails_closed(tmp_path: Path):
 
 def test_human_reply_blocks_marketing(tmp_path: Path):
     gate = _gate(tmp_path)
-    gate.replied_path.write_text(json.dumps({"email": "lead@example.com", "classification": "warm"}) + "\n")
+    gate.record_reply(email="lead@example.com", classification="warm", thread_id="thread-warm")
     decision = gate.reserve(
         "lead@example.com", "campaign:lead:step1", purpose=DeliveryPurpose.MARKETING
     )
@@ -85,8 +90,10 @@ def test_unsubscribe_variants_block_requested_audit(tmp_path: Path):
         case = tmp_path / classification
         case.mkdir()
         gate = _gate(case)
-        gate.replied_path.write_text(
-            json.dumps({"email": "lead@example.com", "classification": classification}) + "\n"
+        gate.record_reply(
+            email="lead@example.com",
+            classification=classification,
+            thread_id=f"thread-{classification}",
         )
         decision = gate.reserve(
             "lead@example.com", "audit:lead:delivery", purpose=DeliveryPurpose.AUDIT_DELIVERY
@@ -128,6 +135,23 @@ def test_duplicate_client_id_is_blocked(tmp_path: Path):
     second = gate.reserve("lead@example.com", "campaign:lead:step1", purpose=DeliveryPurpose.MARKETING)
     assert first.allowed is True
     assert second.reason == "duplicate_client_id"
+
+
+def test_sent_client_id_reconciles_to_durable_provider_receipt(tmp_path: Path):
+    gate = _gate(tmp_path)
+    client_id = "conversation:thread-warm:pitch"
+    first = gate.reserve(
+        "lead@example.com", client_id, purpose=DeliveryPurpose.CONVERSATION_REPLY
+    )
+    assert first.allowed is True
+    gate.complete(client_id, sent=True, provider_message_id="provider-msg-1")
+
+    replay = gate.reserve(
+        "lead@example.com", client_id, purpose=DeliveryPurpose.CONVERSATION_REPLY
+    )
+    assert replay.allowed is False
+    assert replay.reason == "already_sent"
+    assert gate.sent_receipt(client_id) == "provider-msg-1"
 
 
 def test_mailbox_cooldown_blocks_second_distinct_send(tmp_path: Path):
@@ -197,6 +221,67 @@ def test_simultaneous_first_time_initialization_is_safe(tmp_path: Path):
     assert len(gates) == 4
 
 
+def test_repeated_simultaneous_first_time_initialization_is_safe(tmp_path: Path):
+    lead_db = _lead_db(tmp_path / "leads.db", email="lead@example.com")
+    replied = tmp_path / "replied.jsonl"
+    replied.touch()
+
+    for iteration in range(20):
+        state_db = tmp_path / f"outbound-{iteration}.db"
+
+        def build_gate(_):
+            return OutboundReleaseGate(
+                state_db=state_db,
+                lead_db=lead_db,
+                replied_path=replied,
+                disable_marker=tmp_path / "OUTREACH_DISABLED",
+            )
+
+        with ThreadPoolExecutor(max_workers=8) as pool:
+            gates = list(pool.map(build_gate, range(8)))
+        assert len(gates) == 8
+
+
+def test_reply_ledger_migrates_once_and_live_reply_revalidation_uses_sqlite(tmp_path: Path):
+    replied = tmp_path / "replied.jsonl"
+    replied.write_text(json.dumps({
+        "email": "lead@example.com",
+        "classification": "warm",
+        "thread_id": "thread-old",
+        "detected_at": "2026-01-01T00:00:00Z",
+    }) + "\n")
+    gate = OutboundReleaseGate(
+        state_db=tmp_path / "outbound.db",
+        lead_db=_lead_db(tmp_path / "leads.db", email="lead@example.com"),
+        replied_path=replied,
+        disable_marker=tmp_path / "OUTREACH_DISABLED",
+    )
+    assert "thread-old" in gate.processed_thread_ids()
+    assert gate.reserve(
+        "lead@example.com", "campaign:lead:step1", purpose=DeliveryPurpose.MARKETING
+    ).reason == "lead_replied"
+
+    gate.record_reply(email="lead@example.com", classification="unsubscribe", thread_id="thread-new")
+    assert "thread-new" in gate.processed_thread_ids()
+    assert gate.reserve(
+        "lead@example.com", "audit:lead:delivery", purpose=DeliveryPurpose.AUDIT_DELIVERY
+    ).reason == "lead_unsubscribed"
+
+
+def test_corrupt_reply_ledger_fails_closed_without_exposing_content(tmp_path: Path):
+    replied = tmp_path / "replied.jsonl"
+    replied.write_text("not-json\n")
+    gate = OutboundReleaseGate(
+        state_db=tmp_path / "outbound.db",
+        lead_db=_lead_db(tmp_path / "leads.db", email="lead@example.com"),
+        replied_path=replied,
+        disable_marker=tmp_path / "OUTREACH_DISABLED",
+    )
+    assert gate.reserve(
+        "lead@example.com", "campaign:lead:step1", purpose=DeliveryPurpose.MARKETING
+    ).reason == "reply_store_invalid"
+
+
 def test_stale_crashed_reservation_can_retry_same_id(tmp_path: Path):
     now = [1_000.0]
     gate = _gate(tmp_path, clock=lambda: now[0])
@@ -219,7 +304,7 @@ def test_preflight_revalidation_revokes_new_disable_or_reply(tmp_path: Path):
     replied = _gate(reply_case)
     client_id = "campaign:lead:step1"
     assert replied.reserve("lead@example.com", client_id, purpose=DeliveryPurpose.MARKETING).allowed
-    replied.replied_path.write_text(json.dumps({"email": "lead@example.com", "classification": "warm"}) + "\n")
+    replied.record_reply(email="lead@example.com", classification="warm", thread_id="thread-new")
     assert replied.validate(client_id).reason == "lead_replied"
 
 
@@ -231,3 +316,141 @@ def test_blocked_decisions_are_written_to_event_ledger(tmp_path: Path):
             "SELECT allowed, reason FROM delivery_events WHERE client_id = ?", ("campaign:1",)
         ).fetchone()
     assert event == (0, "lead_bounced")
+
+
+def test_record_reply_never_claims_migration_completion(tmp_path: Path):
+    gate = OutboundReleaseGate(
+        state_db=tmp_path / "outbound.db",
+        lead_db=_lead_db(tmp_path / "leads.db", email="lead@example.com"),
+        replied_path=tmp_path / "missing.jsonl",
+        disable_marker=tmp_path / "OUTREACH_DISABLED",
+    )
+    assert gate.record_reply(
+        email="lead@example.com", classification="warm", thread_id="thread-new"
+    )
+    with sqlite3.connect(gate.state_db) as conn:
+        marker = conn.execute(
+            "SELECT value FROM gate_state WHERE key='reply_ledger_migration_v2'"
+        ).fetchone()
+    assert marker is None
+
+
+def test_v2_migration_accepts_legacy_aliases_and_writes_manifest(tmp_path: Path):
+    replied = tmp_path / "replied.jsonl"
+    replied.write_text(json.dumps({
+        "from": "Alias@Example.com",
+        "status": "warm",
+        "thread_id": "thread-alias",
+        "timestamp": "2026-01-01T00:00:00Z",
+    }) + "\n")
+    gate = OutboundReleaseGate(
+        state_db=tmp_path / "outbound.db",
+        lead_db=_lead_db(tmp_path / "leads.db", email="alias@example.com"),
+        replied_path=replied,
+        disable_marker=tmp_path / "OUTREACH_DISABLED",
+    )
+    assert gate.reply_records()[0]["email"] == "alias@example.com"
+    with sqlite3.connect(gate.state_db) as conn:
+        manifest = json.loads(conn.execute(
+            "SELECT value FROM gate_state WHERE key='reply_ledger_migration_v2'"
+        ).fetchone()[0])
+    assert manifest["version"] == 2
+    assert manifest["rows"] == manifest["threads"] == manifest["recipients"] == 1
+    assert len(manifest["sha256"]) == 64
+
+
+def test_v2_migration_conflicting_thread_rolls_back_and_fails_closed(tmp_path: Path):
+    replied = tmp_path / "replied.jsonl"
+    rows = [
+        {"email": "one@example.com", "classification": "warm", "thread_id": "same", "detected_at": "2026-01-01T00:00:00Z"},
+        {"email": "two@example.com", "classification": "unsubscribe", "thread_id": "same", "detected_at": "2026-01-02T00:00:00Z"},
+    ]
+    replied.write_text("\n".join(json.dumps(row) for row in rows) + "\n")
+    gate = OutboundReleaseGate(
+        state_db=tmp_path / "outbound.db",
+        lead_db=_lead_db(tmp_path / "leads.db", email="one@example.com"),
+        replied_path=replied,
+        disable_marker=tmp_path / "OUTREACH_DISABLED",
+    )
+    assert gate.reply_records() == []
+    decision = gate.reserve(
+        "one@example.com", "campaign:one", purpose=DeliveryPurpose.MARKETING
+    )
+    assert decision.reason == "reply_store_invalid"
+
+
+def test_recipient_stop_suppression_cannot_be_weakened(tmp_path: Path):
+    gate = _gate(tmp_path)
+    gate.record_reply(email="lead@example.com", classification="unsubscribe", thread_id="stop")
+    gate.record_reply(email="lead@example.com", classification="warm", thread_id="later-warm")
+    decision = gate.reserve(
+        "lead@example.com", "audit:lead:delivery", purpose=DeliveryPurpose.AUDIT_DELIVERY
+    )
+    assert decision.reason == "lead_unsubscribed"
+
+
+def test_concurrent_reply_record_and_action_claim_have_one_owner(tmp_path: Path):
+    gate = _gate(tmp_path)
+
+    def record(_):
+        return gate.record_reply(
+            email="lead@example.com", classification="warm", thread_id="thread-race"
+        )
+
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        inserted = list(pool.map(record, range(8)))
+    assert inserted.count(True) == 1
+
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        claims = list(pool.map(lambda _: gate.claim_reply_action("thread-race"), range(8)))
+    assert sum(claim is not None for claim in claims) == 1
+
+
+def test_failed_reply_action_is_retriable_without_rewriting_suppression(tmp_path: Path):
+    gate = _gate(tmp_path)
+    gate.record_reply(email="lead@example.com", classification="warm", thread_id="thread-retry")
+    first = gate.claim_reply_action("thread-retry")
+    assert first is not None
+    gate.complete_reply_action("thread-retry", success=False, error="bounded_failure")
+    assert gate.actionable_reply_thread_ids() == ["thread-retry"]
+    second = gate.claim_reply_action("thread-retry")
+    assert second is not None
+    gate.complete_reply_action("thread-retry", success=True)
+    assert gate.actionable_reply_thread_ids() == []
+
+
+def test_crash_after_provider_success_reconciles_action_without_resend(tmp_path: Path):
+    now = [1_000.0]
+    gate = _gate(tmp_path, clock=lambda: now[0])
+    thread_id = "thread-provider-crash"
+    client_id = "conversation:thread-provider-crash:pitch"
+    gate.record_reply(
+        email="lead@example.com", classification="warm", thread_id=thread_id
+    )
+    assert gate.claim_reply_action(thread_id, stale_after_seconds=900) is not None
+
+    assert gate.reserve(
+        "lead@example.com", client_id, purpose=DeliveryPurpose.CONVERSATION_REPLY
+    ).allowed
+    gate.complete(client_id, sent=True, provider_message_id="provider-msg-crash")
+    # Simulate process death before complete_reply_action().
+    now[0] += 901
+    assert gate.claim_reply_action(thread_id, stale_after_seconds=900) is not None
+
+    provider_calls = []
+
+    def provider(*args):
+        provider_calls.append(args)
+        raise AssertionError("provider must not be called during receipt reconciliation")
+
+    result = AgentMailClient(key="test", gate=gate, transport=provider).send_conversation(
+        to=["lead@example.com"],
+        subject="Reply",
+        text="Body",
+        client_id=client_id,
+    )
+    assert result["message_id"] == "provider-msg-crash"
+    assert result["_idempotent_replay"] is True
+    assert provider_calls == []
+    gate.complete_reply_action(thread_id, success=True)
+    assert gate.actionable_reply_thread_ids(stale_after_seconds=900) == []

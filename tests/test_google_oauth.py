@@ -5,7 +5,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import httpx
 import pytest
-from authlib.jose import JoseError, jwt
+from joserfc.errors import JoseError
 
 from platform_api.auth.google import (
     GOOGLE_JWKS_URL,
@@ -91,6 +91,9 @@ async def test_verify_google_token_success(verifier):
     # Mock JWT decode
     mock_claims = {
         "sub": "google-user-123",
+        "iss": "https://accounts.google.com",
+        "aud": "test-client-id",
+        "exp": int(time.time()) + 300,
         "email": "user@example.com",
         "email_verified": True,
         "name": "Test User",
@@ -100,10 +103,11 @@ async def test_verify_google_token_success(verifier):
     with patch.object(httpx.AsyncClient, "get", new_callable=AsyncMock) as mock_get:
         mock_get.return_value = mock_response
 
-        with patch("platform_api.auth.google.jwt.decode") as mock_decode:
-            mock_decode.return_value = mock_claims
+        with patch("platform_api.auth.google.KeySet.import_key_set", return_value=MagicMock()):
+            with patch("platform_api.auth.google.jwt.decode") as mock_decode:
+                mock_decode.return_value = MagicMock(claims=mock_claims)
 
-            result = await verifier.verify_token("test-token")
+                result = await verifier.verify_token("test-token")
 
             assert result["subject"] == "google-user-123"
             assert result["email"] == "user@example.com"
@@ -121,13 +125,14 @@ async def test_verify_google_token_invalid_signature(verifier):
     with patch.object(httpx.AsyncClient, "get", new_callable=AsyncMock) as mock_get:
         mock_get.return_value = mock_response
 
-        with patch("platform_api.auth.google.jwt.decode") as mock_decode:
-            mock_decode.side_effect = JoseError("Invalid signature")
+        with patch("platform_api.auth.google.KeySet.import_key_set", return_value=MagicMock()):
+            with patch("platform_api.auth.google.jwt.decode") as mock_decode:
+                mock_decode.side_effect = JoseError("Invalid signature")
 
-            with pytest.raises(GoogleOAuthError) as exc_info:
-                await verifier.verify_token("invalid-token")
+                with pytest.raises(GoogleOAuthError) as exc_info:
+                    await verifier.verify_token("invalid-token")
 
-            assert "Token verification failed" in str(exc_info.value)
+                assert "Token verification failed" in str(exc_info.value)
 
 
 @pytest.mark.asyncio
@@ -169,9 +174,10 @@ def test_get_verifier_singleton():
     import platform_api.auth.google as google_module
     google_module._verifier = None
 
-    # Create first instance
-    v1 = get_verifier()
-    v2 = get_verifier()
+    # Create first instance with deterministic test configuration.
+    with patch.object(google_module.settings, "GOOGLE_CLIENT_ID", "test-client-id"):
+        v1 = get_verifier()
+        v2 = get_verifier()
 
     assert v1 is v2
 

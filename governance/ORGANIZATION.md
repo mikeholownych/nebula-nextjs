@@ -254,7 +254,7 @@ Nebula operates as 13 departments managed by the Hermes CEO Agent with delegated
 
 **KPIs:** Server uptime, tunnel uptime, recovery time from failure
 **Targets:** 99.9% uptime, recovery in < 5 min for common failures
-**Living docs:** `governance/SOPs/`, `tunnel_alert.py`
+**Living docs:** `governance/SOPs/`, `pipeline_health_check.py`
 
 ---
 

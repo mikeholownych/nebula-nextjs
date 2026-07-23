@@ -5,7 +5,7 @@ const auditInputSchema = {
   properties: {
     url: {
       type: 'string',
-      format: 'uri',
+      pattern: '^https?://',
       minLength: 8,
       description: 'Public HTTP or HTTPS landing-page URL to audit',
     },
@@ -18,7 +18,7 @@ const auditOutputSchema = {
   type: 'object',
   properties: {
     audit_id: { type: 'string' },
-    url: { type: 'string', format: 'uri' },
+    url: { type: 'string', pattern: '^https?://' },
     status: { type: 'string' },
     score: { type: 'number', minimum: 0, maximum: 100 },
     grade: { type: 'string' },

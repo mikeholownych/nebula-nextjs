@@ -67,7 +67,7 @@ class RequestSizeMiddleware(BaseHTTPMiddleware):
                     
                     from fastapi.responses import JSONResponse
                     response = JSONResponse(
-                        status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+                        status_code=status.HTTP_413_CONTENT_TOO_LARGE,
                         content=envelope,
                         headers={"X-Request-ID": request_id},
                     )

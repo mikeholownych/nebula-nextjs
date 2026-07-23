@@ -51,8 +51,8 @@ class _RouteContractVisitor(ast.NodeVisitor):
     """Extract statically knowable path tests without importing the source."""
 
     def __init__(self, tree: ast.AST) -> None:
-        self.constants: dict[str, tuple[str, ...]] = {}
-        self.regexes: dict[str, str] = {}
+        self.constant_scopes: list[dict[str, tuple[str, ...]]] = [{}]
+        self.regex_scopes: list[dict[str, str]] = [{}]
         self.parents: dict[ast.AST, ast.AST] = {}
         for parent in ast.walk(tree):
             for child in ast.iter_child_nodes(parent):
@@ -60,23 +60,34 @@ class _RouteContractVisitor(ast.NodeVisitor):
         self.context: list[str] = []
         self.contracts: list[RouteContract] = []
         self.diagnostics: list[RouteDiagnostic] = []
-        self._collect_bindings(tree)
+        # Flattened snapshots retained for diagnostics/backward compatibility;
+        # route extraction itself uses ordered lexical scopes below.
+        self.constants: dict[str, tuple[str, ...]] = {}
+        self.regexes: dict[str, str] = {}
+        self._collect_debug_bindings(tree)
 
-    def _collect_bindings(self, tree: ast.AST) -> None:
+    def _collect_debug_bindings(self, tree: ast.AST) -> None:
         for node in ast.walk(tree):
-            if not isinstance(node, (ast.Assign, ast.AnnAssign)):
+            if not isinstance(node, (ast.Assign, ast.AnnAssign)) or node.value is None:
                 continue
-            value = node.value
             targets = node.targets if isinstance(node, ast.Assign) else [node.target]
+            strings = self._literal_strings(node.value)
+            pattern: str | None = None
+            if isinstance(node.value, ast.Call) and node.value.args:
+                candidate = node.value.args[0]
+                if isinstance(candidate, ast.Constant) and isinstance(candidate.value, str):
+                    pattern = candidate.value
+                elif isinstance(candidate, ast.Name):
+                    values = self.constants.get(candidate.id)
+                    pattern = values[0] if values and len(values) == 1 else None
             for target in targets:
-                if not isinstance(target, ast.Name) or value is None:
+                if not isinstance(target, ast.Name):
                     continue
-                strings = self._literal_strings(value)
                 if strings is not None:
                     self.constants[target.id] = strings
-                pattern = self._compiled_pattern(value)
                 if pattern is not None:
                     self.regexes[target.id] = pattern
+
 
     @staticmethod
     def _literal_strings(node: ast.AST) -> tuple[str, ...] | None:
@@ -113,7 +124,7 @@ class _RouteContractVisitor(ast.NodeVisitor):
         # Handle both direct string constants and named constants
         if isinstance(pattern, ast.Constant) and isinstance(pattern.value, str):
             return pattern.value
-        elif isinstance(pattern, ast.Name):
+        elif isinstance(pattern, (ast.Name, ast.Attribute)):
             values = self._values(pattern)
             return values[0] if values and len(values) == 1 else None
         return None
@@ -131,7 +142,17 @@ class _RouteContractVisitor(ast.NodeVisitor):
         if literal is not None:
             return literal
         if isinstance(node, ast.Name):
-            return self.constants.get(node.id)
+            for scope in reversed(self.constant_scopes):
+                if node.id in scope:
+                    return scope[node.id]
+        if (
+            isinstance(node, ast.Attribute)
+            and isinstance(node.value, ast.Name)
+            and node.value.id in {"self", "cls"}
+        ):
+            for scope in reversed(self.constant_scopes):
+                if node.attr in scope:
+                    return scope[node.attr]
         return None
 
     def _current_context(self) -> str:
@@ -153,18 +174,50 @@ class _RouteContractVisitor(ast.NodeVisitor):
 
     def visit_ClassDef(self, node: ast.ClassDef) -> None:
         self.context.append(node.name)
+        self.constant_scopes.append({})
+        self.regex_scopes.append({})
         self.generic_visit(node)
+        self.regex_scopes.pop()
+        self.constant_scopes.pop()
         self.context.pop()
 
     def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
         self.context.append(node.name)
+        self.constant_scopes.append({})
+        self.regex_scopes.append({})
         self.generic_visit(node)
+        self.regex_scopes.pop()
+        self.constant_scopes.pop()
         self.context.pop()
 
     def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
         self.context.append(node.name)
+        self.constant_scopes.append({})
+        self.regex_scopes.append({})
         self.generic_visit(node)
+        self.regex_scopes.pop()
+        self.constant_scopes.pop()
         self.context.pop()
+
+    def _bind_assignment(self, targets: list[ast.AST], value: ast.AST | None) -> None:
+        if value is None:
+            return
+        strings = self._literal_strings(value)
+        pattern = self._compiled_pattern(value)
+        for target in targets:
+            if isinstance(target, ast.Name):
+                if strings is not None:
+                    self.constant_scopes[-1][target.id] = strings
+                if pattern is not None:
+                    self.regex_scopes[-1][target.id] = pattern
+
+    def visit_Assign(self, node: ast.Assign) -> None:
+        self._bind_assignment(list(node.targets), node.value)
+        self.generic_visit(node)
+
+    def visit_AnnAssign(self, node: ast.AnnAssign) -> None:
+        self._bind_assignment([node.target], node.value)
+        self.generic_visit(node)
 
     def visit_Compare(self, node: ast.Compare) -> None:
         if len(node.ops) == 1 and len(node.comparators) == 1:
@@ -216,7 +269,10 @@ class _RouteContractVisitor(ast.NodeVisitor):
             ):
                 path_argument = node.args[0]
                 if isinstance(function.value, ast.Name):
-                    pattern = self.regexes.get(function.value.id)
+                    for scope in reversed(self.regex_scopes):
+                        if function.value.id in scope:
+                            pattern = scope[function.value.id]
+                            break
                 else:
                     pattern = self._compiled_pattern(function.value)
             elif (

@@ -56,5 +56,45 @@ Policy: buyer-facing delivery now has one authority: `agentmail_client.py` backe
 | `warmup.py` | `.legacy/outbound-bypasses-2026-07-23/warmup.py` | Obsolete LaunchCrate warmup using raw REST and artificial traffic |
 | `adapters/agentmail.py` | `.legacy/outbound-bypasses-2026-07-23/adapters-agentmail.py` | Unreferenced generic raw-HTTP adapter loading credentials from `/tmp`; canonical client supersedes it |
 | `send_pushy_email.py` | `.legacy/outbound-bypasses-2026-07-23/send_pushy_email.py` | One-off sender that marked release-gate blocks as successful delivery |
+| `resend_client.py` | `.legacy/outbound-bypasses-2026-07-23/resend_client.py` | Direct Resend fallback bypass; AgentMail REST is the exclusive provider |
+| `auto_responder.sh` | `.legacy/outbound-bypasses-2026-07-23/auto_responder.sh` | Malformed Gmail IMAP/SMTP prototype with stale offer copy |
+| `cron_jobs` | `.legacy/outbound-bypasses-2026-07-23/cron_jobs` | Obsolete scheduler fragment that invoked the SMTP prototype |
+| `send_alert.py` | `.legacy/outbound-bypasses-2026-07-23/send_alert.py` | Placeholder localhost SMTP alert bypass |
+| `tunnel_alert.py` | `.legacy/outbound-bypasses-2026-07-23/tunnel_alert.py` | Placeholder Gmail SMTP alert with dummy credentials |
+| `check_inbox_and_respond.py` | `.legacy/outbound-bypasses-2026-07-23/check_inbox_and_respond.py` | Empty infinite-loop SMTP prototype superseded by `reply_monitor.py` |
 
-No active Hermes cron job referenced these seven files at archive time. `full_system_audit.py` and `validate_before_campaign.py` now validate the canonical gated REST path instead.
+No active Hermes cron job referenced the original seven files at archive time. The later six-file cleanup removed one tracked obsolete cron fragment; live scheduling is governed separately. `full_system_audit.py` and `validate_before_campaign.py` now validate the canonical gated REST path instead.
+
+### Historical outreach-wave directory cutover — 2026-07-23 UTC
+
+The 40 tracked scripts formerly under `archived/` were moved intact to
+`.legacy/outreach-wave-archive-2026-07-23/`. They are historical campaign,
+SMTP, IMAP, and wave-execution artifacts, have no active code references, and
+must not be interpreted as permitted provider paths. Git history plus this
+move provide the rollback trail; no file was deleted.
+
+## Reply ledger cutover — 2026-07-23 UTC
+
+| Original path | Canonical replacement | Preservation / rollback |
+| --- | --- | --- |
+| `replied_emails.jsonl` | `outbound_delivery.db` v2 tables `reply_threads`, `reply_suppressions`, and versioned `gate_state` manifest | Migrated under a cross-process cutover lock with source SHA-256/count parity; retained locally as an ignored migration artifact; WAL-safe pre-v2 backup and frozen source are stored permission-restricted under `.legacy/runtime-reply-cutover/` (ignored runtime archive) |
+
+All active writers, suppression checks, follow-up prefilters, processed-thread deduplication, sequence metrics, and TRIBE queue reads use `OutboundReleaseGate`. V2 separates immutable thread facts from monotonic recipient suppression and leased downstream-action state. A corrupt or conflicting legacy ledger records `reply_ledger_corrupt` and blocks delivery; missing uninitialized state blocks delivery rather than assuming an empty suppression history.
+
+## Test-suite cutover — 2026-07-23 UTC
+
+| Original path | Archived path | Reason |
+| --- | --- | --- |
+| `tests/test_dashboard_live_data.py` | `.legacy/tests-pre-cutover-2026-07-23/test_dashboard_live_data.py` | Targeted retired root `dashboard.html`; the live dashboard is now Next.js |
+| `tests/test_demo_semantics.py` | `.legacy/tests-pre-cutover-2026-07-23/test_demo_semantics.py` | Targeted retired root `demo.html`; the live demo is now Next.js |
+| `tests/test_platform_route_contract.py` | `.legacy/tests-pre-cutover-2026-07-23/test_platform_route_contract.py` | Targeted retired `agentic_server.py`; route ownership now uses the checked manifest and FastAPI/Next.js tests |
+| `tests/test_stripe_security_vulnerabilities.py` | `.legacy/tests-pre-cutover-2026-07-23/test_stripe_security_vulnerabilities.py` | Asserted that fixed Stripe vulnerabilities must remain present and referenced retired server code |
+| `tests/test_stripe_webhook_security.py` | `.legacy/tests-pre-cutover-2026-07-23/test_stripe_webhook_security.py` | Broken vulnerability-presence test for retired server code; superseded by `test_stripe_webhook_fixed.py` |
+| `tests/platform_api/test_health2.py` | `.legacy/tests-pre-cutover-2026-07-23/test_health2.py` | Duplicate health tests using the removed `AsyncClient(app=...)` API; canonical ASGI transport coverage remains in `test_health.py` |
+| `tests/test_ad_burn_leaderboard.py` | `.legacy/tests-pre-cutover-2026-07-23/test_ad_burn_leaderboard.py` | Targeted retired `agentic_server.py` and root static HTML |
+| `tests/test_audit_capture_flow.py` | `.legacy/tests-pre-cutover-2026-07-23/test_audit_capture_flow.py` | Targeted retired `agentic_server.py`; live audit email state is covered through FastAPI service tests |
+| `tests/test_static_form_labels.py` | `.legacy/tests-pre-cutover-2026-07-23/test_static_form_labels.py` | Targeted retired root `pricing-generator.html`; live forms are Next.js components |
+| `tests/test_stripe_webhook_fixed.py` | `.legacy/tests-pre-cutover-2026-07-23/test_stripe_webhook_fixed.py` | Targeted retired `stripe_webhook.py` and `setup_webhook.py`; live Stripe coverage is in the Next.js route suite |
+| `test_ga4_tracking.py` | `.legacy/scripts-pre-cutover-2026-07-23/test_ga4_tracking.py` | Broken ad-hoc root script for the retired static site; not a pytest contract |
+
+These files remain in Git history and in `.legacy/`; no test was deleted without a paper trail.

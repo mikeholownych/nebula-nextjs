@@ -9,7 +9,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def tracked_files(pattern: str) -> list[Path]:
     output = subprocess.check_output(["git", "ls-files", pattern], cwd=ROOT, text=True)
-    return [ROOT / line for line in output.splitlines() if line.strip()]
+    return [
+        ROOT / line
+        for line in output.splitlines()
+        if line.strip() and not line.startswith(".legacy/")
+    ]
 
 
 def test_tracked_python_files_are_syntactically_valid():

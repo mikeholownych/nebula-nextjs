@@ -25,7 +25,7 @@ LEDGERS = BASE / "ledgers"
 GS = BASE / "growth_system"
 CUSTOMER_LEDGER = LEDGERS / "customer-ledger.jsonl"
 ABANDONED_CARTS = LEDGERS / "abandoned_carts.jsonl"
-REPLIED_EMAILS = BASE / "replied_emails.jsonl"
+
 REFERRAL_QUEUE = GS / "warm_intro_referral_queue.jsonl"
 CONSULTING_QUEUE = GS / "flexible_consulting_offer_queue.jsonl"
 BRAND_PROOF_QUEUE = GS / "brand_proof_queue.jsonl"
@@ -66,6 +66,11 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
         except json.JSONDecodeError:
             continue
     return rows
+
+
+def load_reply_rows() -> list[dict[str, Any]]:
+    from outbound_release_gate import OutboundReleaseGate
+    return OutboundReleaseGate().reply_records()
 
 
 def write_jsonl(path: Path, rows: Iterable[dict[str, Any]]) -> None:
@@ -246,7 +251,7 @@ def main() -> None:
     args = parser.parse_args()
 
     customer_rows = read_jsonl(CUSTOMER_LEDGER)
-    reply_rows = read_jsonl(REPLIED_EMAILS)
+    reply_rows = load_reply_rows()
     cart_rows = read_jsonl(ABANDONED_CARTS)
 
     referrals = build_referral_queue(customer_rows)

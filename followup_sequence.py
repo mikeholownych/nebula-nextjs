@@ -11,6 +11,7 @@ Usage:
 import sys, json, os, re, time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
+from outbound_release_gate import OutboundReleaseGate
 
 # ── Stripe personalised checkout links ────────────────────────────
 sys.path.insert(0, str(Path("/home/mike/nebula")))
@@ -43,7 +44,7 @@ CONTACTED     = NEBULA / "contacted.json"
 HOT_LEAD      = NEBULA / "HOT_LEAD.json"
 LEDGER        = NEBULA / "ledgers/customer-ledger.jsonl"
 FOLLOWUP_ST   = NEBULA / "followup_state.jsonl"
-REPLIED_FILE  = NEBULA / "replied_emails.jsonl"
+
 STRIPE    = "https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
 
 # ── Sequence definitions ──────────────────────────────────────────
@@ -368,12 +369,7 @@ def load_paid_emails():
 
 def load_replied_emails():
     """Emails that have sent a human reply (unsubscribe, warm, cold, etc.). Skip all followups."""
-    replied = set()
-    for entry in load_jsonl(REPLIED_FILE):
-        e = entry.get("email", "").lower().strip()
-        if e:
-            replied.add(e)
-    return replied
+    return OutboundReleaseGate().replied_emails()
 
 def load_sent():
     """Returns set of (email, day_label), including legacy label aliases."""

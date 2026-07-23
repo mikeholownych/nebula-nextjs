@@ -18,7 +18,10 @@ import secrets
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, Optional
 
-from authlib.jose import JoseError, jwt
+from joserfc import jwt
+from joserfc.errors import JoseError
+from joserfc.jwk import OctKey
+from joserfc.jwt import JWTClaimsRegistry
 
 from platform_api.config import settings
 from platform_api.redis_client import RedisClient
@@ -27,6 +30,17 @@ from platform_api.redis_client import RedisClient
 class JWTError(Exception):
     """JWT session error."""
     pass
+
+
+SUPPORTED_JWT_ALGORITHMS = {"HS256", "HS384", "HS512"}
+
+
+def _jwt_key() -> OctKey:
+    if not settings.SECRET_KEY:
+        raise ValueError("SECRET_KEY not configured")
+    if settings.JWT_ALGORITHM not in SUPPORTED_JWT_ALGORITHMS:
+        raise ValueError("JWT_ALGORITHM must be an approved HMAC algorithm")
+    return OctKey.import_key(settings.SECRET_KEY)
 
 
 def create_jwt(
@@ -42,8 +56,7 @@ def create_jwt(
     Returns:
         Encoded JWT string
     """
-    if not settings.SECRET_KEY:
-        raise ValueError("SECRET_KEY not configured")
+    key = _jwt_key()
     
     # Default expiration
     if expires_days is None:
@@ -62,7 +75,8 @@ def create_jwt(
     token = jwt.encode(
         {"alg": settings.JWT_ALGORITHM},
         claims,
-        key=settings.SECRET_KEY
+        key=key,
+        algorithms=[settings.JWT_ALGORITHM],
     )
     
     # Decode bytes to string
@@ -84,17 +98,20 @@ def decode_jwt(token: str) -> Dict[str, Any]:
     Raises:
         JWTError: If token is invalid or expired
     """
-    if not settings.SECRET_KEY:
-        raise ValueError("SECRET_KEY not configured")
+    key = _jwt_key()
     
     try:
-        claims = jwt.decode(
+        token_data = jwt.decode(
             token,
-            key=settings.SECRET_KEY,
-            claims_options={
-                "alg": {"values": [settings.JWT_ALGORITHM]}
-            }
+            key=key,
+            algorithms=[settings.JWT_ALGORITHM],
         )
+        claims = token_data.claims
+        JWTClaimsRegistry(
+            exp={"essential": True},
+            iat={"essential": True},
+            jti={"essential": True},
+        ).validate(claims)
         return claims
     except JoseError as e:
         raise JWTError(f"Invalid token: {e}")

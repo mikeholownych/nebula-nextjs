@@ -82,6 +82,9 @@ trigger_leads.jsonl
 signal_queue.jsonl
 signal_seen.json
 followup_state.jsonl
+/replied_emails.jsonl
+/OUTREACH_DISABLED
+/outbound_delivery.db.cutover.lock
 dm_queue.jsonl
 contacted.json
 outreach_evidence.jsonl

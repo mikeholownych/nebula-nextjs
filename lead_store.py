@@ -118,6 +118,16 @@ class LeadStore:
         return f"{stage}_at"
 
     TERMINAL_STAGES = frozenset({"bounced", "dead"})
+    STAGE_RANK = {
+        "discovered": 0,
+        "site_found": 1,
+        "needs_review": 1,
+        "contacted": 2,
+        "audit_delivered": 3,
+        "pitch_sent": 4,
+        "replied": 5,
+        "paid": 6,
+    }
 
     # ── Scoring constants (TrustOS-inspired) ──────────────────────────
     # Thresholds
@@ -362,10 +372,8 @@ class LeadStore:
     ) -> bool:
         """Insert or update a lead. Returns True if new, False if updated.
 
-        Terminal stages (bounced, dead) are protected — you cannot regress
-        a bounced/dead lead back to an earlier stage. Pass stage="bounced"
-        or stage="dead" again to update metadata fields (bounce_type,
-        bounce_detail, notes) without losing the terminal status.
+        Lifecycle stages are forward-only, and terminal stages (bounced, dead)
+        are protected. Metadata can still be updated without demoting a lead.
 
         Auto-awards baseline score for new leads based on stage.
         """
@@ -401,6 +409,12 @@ class LeadStore:
                 if old_is_terminal and not new_is_terminal:
                     effective_stage = old_stage
                 elif old_is_terminal and new_is_terminal:
+                    effective_stage = old_stage
+                elif (
+                    old_stage in self.STAGE_RANK
+                    and stage in self.STAGE_RANK
+                    and self.STAGE_RANK[stage] < self.STAGE_RANK[old_stage]
+                ):
                     effective_stage = old_stage
                 else:
                     effective_stage = stage

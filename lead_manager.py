@@ -6,7 +6,7 @@ Stages (ordered by funnel progression):
   lead_free_kit    → downloaded free Fix Kit (email capture)
   lead_audit       → ran an audit with email
   lead_warm        → engaged but not yet paid
-  customer_97      → bought $147 Conversion Fix Pack
+  customer_97      → bought $97 Conversion Fix Pack
   customer_997     → bought $997 Growth Launch
   subscriber_197   → active $197/mo Trigger Pipeline subscriber
   customer_sdr     → enterprise SDR client

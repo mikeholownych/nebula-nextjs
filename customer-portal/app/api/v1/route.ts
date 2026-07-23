@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { withX402 } from '@x402/next'
+import { withX402FromHTTPServer, x402HTTPResourceServer, type RouteConfig } from '@x402/next'
 import { x402Server, WALLET_ADDRESS, NETWORK } from '@/lib/x402'
 import { auditQueryDiscovery } from '@/lib/x402-discovery'
 
@@ -58,9 +58,7 @@ const handler = async (request: NextRequest) => {
   }
 }
 
-const x402Handler = withX402(
-  handler,
-  {
+const routeConfig: RouteConfig = {
     accepts: [
       {
         scheme: 'exact',
@@ -72,9 +70,11 @@ const x402Handler = withX402(
     description: 'Landing page conversion audit — submit a URL and receive scored conversion findings.',
     mimeType: 'application/json',
     extensions: auditQueryDiscovery,
-  },
-  x402Server,
-)
+  }
+const x402HttpServer = new x402HTTPResourceServer(x402Server, {
+  '/api/v1': routeConfig,
+})
+const x402Handler = withX402FromHTTPServer(handler, x402HttpServer)
 
 export async function GET(request: NextRequest) {
   // Next.js sees localhost behind the Cloudflare tunnel. x402 uses request.url

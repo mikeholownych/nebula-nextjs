@@ -50,12 +50,13 @@ class AuditConversionCtaTests(unittest.TestCase):
         self.assertEqual(first_line, "Saw the public conversion trigger: Google ads, 191 clicks, no conversions.")
         self.assertIn("6.6/10", email["text"])
 
-    def test_audit_email_has_one_click_147_implementation_with_24h_turnaround(self):
+    def test_audit_email_has_one_click_97_implementation_with_24h_turnaround(self):
         email = self.sample_email()
         text = email["text"].lower()
         html = email["html"].lower()
 
-        self.assertIn("$147", text)
+        self.assertIn("$97 fix pack", text)
+        self.assertNotIn("$147", text)
         self.assertIn("https://buy.stripe.com/6oufzh7m87ym5tpgea43s0b", text)
         self.assertIn("24h", text)
         self.assertIn("one-click checkout", text)
@@ -66,7 +67,8 @@ class AuditConversionCtaTests(unittest.TestCase):
         email = self.sample_email()
         text = email["text"].lower()
 
-        self.assertIn("$147", text)
+        self.assertIn("$97 fix pack", text)
+        self.assertNotIn("$147", text)
         self.assertIn("24h", text)
         self.assertIn("no call", text)
         self.assertIn("full refund", text)

@@ -3,34 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Card } from '@/components/ui'
 import posthog from 'posthog-js'
-
-interface Finding {
-  key: string
-  label: string
-  impact: number
-  effort: number
-  quadrant: string
-  issue: string
-  fix: string
-  evidence?: {
-    measured: string
-    required: string
-    delta: string
-    selector: string
-    confidence: 'definitive' | 'high' | 'contextual' | 'error'
-    timestamp: string
-  }
-}
-
-interface AuditResult {
-  audit_id: string | null
-  url: string
-  status: string
-  score: number
-  grade: string
-  findings: Finding[]
-  error?: string
-}
+import { parseAuditResult, type AuditResult } from './auditResultSchema'
 
 // Quick Win is the one positive/actionable signal and gets Signal Emerald;
 // the other three quadrants are informational, not "good" or "bad", so they
@@ -199,7 +172,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
         if (isUuid) {
           const response = await fetch(`/api/audit/${auditId}`)
           if (!response.ok) throw new Error('Failed to fetch audit')
-          setResults(await response.json())
+          setResults(parseAuditResult(await response.json()))
         } else {
           // Legacy: run new audit from URL in path
           const response = await fetch('/api/audit/run', {
@@ -211,7 +184,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
             }),
           })
           if (!response.ok) throw new Error('Failed to fetch results')
-          setResults(await response.json())
+          setResults(parseAuditResult(await response.json()))
         }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error')
@@ -247,12 +220,13 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
         }),
       })
 
+      const data = await response.json().catch(() => ({}))
       if (!response.ok) {
-        const data = await response.json().catch(() => ({}))
-        throw new Error(data.error ?? 'Could not unlock results')
+        const message = typeof data.error === 'string' ? data.error.slice(0, 300) : 'Could not unlock results'
+        throw new Error(message)
       }
 
-      setEmailSent(true)
+      setEmailSent(data.email_sent === true)
       setUnlocked(true)
     } catch (err) {
       setEmailError(err instanceof Error ? err.message : 'Something went wrong')

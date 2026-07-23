@@ -87,44 +87,26 @@ def test_track_assignment_multiple_findings():
     assert track_id == "cta-friction", f"Expected cta-friction (high severity), got {track_id}"
 
 
-def test_upsert_lead_with_nurture_track():
-    """upsert_lead should store nurture_track field."""
-    from lead_manager import upsert_lead, get_lead, _load, _save
-    import tempfile
-    import os
-    
-    # Use temp DB
-    original_db = None
-    try:
-        from lead_manager import LEADS_DB
-        if os.path.exists(LEADS_DB):
-            original_db = Path(LEADS_DB).read_text()
-        
-        # Create lead with track
-        email = "test-track@example.com"
-        lead = upsert_lead(
-            email=email,
-            stage="lead_audit",
-            source="test",
-            nurture_track="headline-clarity",
-            audit_id="AUD-TEST-001"
-        )
-        
-        # Retrieve and verify
-        retrieved = get_lead(email)
-        assert retrieved is not None, "Lead not found"
-        assert retrieved.get("nurture_track") == "headline-clarity", f"Track not stored: {retrieved}"
-        assert retrieved.get("track_position_days") == 0, f"Position should be 0: {retrieved}"
-    finally:
-        # Restore original DB
-        from lead_manager import LEADS_DB
-        if original_db:
-            Path(LEADS_DB).write_text(original_db)
-        elif os.path.exists(LEADS_DB):
-            db = _load()
-            if "test-track@example.com" in db:
-                del db["test-track@example.com"]
-                _save(db)
+def test_upsert_lead_with_nurture_track(tmp_path, monkeypatch):
+    """upsert_lead should store nurture_track field without touching runtime ledgers."""
+    import lead_manager
+
+    monkeypatch.setattr(lead_manager, "LEADS_DB", str(tmp_path / "leads.json"))
+    monkeypatch.setattr(lead_manager, "LEADS_JOURNAL", str(tmp_path / "leads-journal.jsonl"))
+
+    email = "test-track@example.com"
+    lead_manager.upsert_lead(
+        email=email,
+        stage="lead_audit",
+        source="test",
+        nurture_track="headline-clarity",
+        audit_id="AUD-TEST-001"
+    )
+
+    retrieved = lead_manager.get_lead(email)
+    assert retrieved is not None, "Lead not found"
+    assert retrieved.get("nurture_track") == "headline-clarity", f"Track not stored: {retrieved}"
+    assert retrieved.get("track_position_days") == 0, f"Position should be 0: {retrieved}"
 
 
 def test_template_renderer_loads_cold_headline():
