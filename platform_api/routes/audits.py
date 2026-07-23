@@ -9,9 +9,12 @@ from pydantic import BaseModel, HttpUrl
 from sqlalchemy import select, desc
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from posthog import identify_context, new_context
+
 from ..db.models import Audit, Membership, Organization, User
 from ..db.session import get_session as get_db
 from ..auth.routes import get_current_user
+from ..posthog_client import get_posthog
 
 
 router = APIRouter(prefix="/api/audits", tags=["audits"])
@@ -73,6 +76,12 @@ async def create_audit(
     db.add(audit)
     await db.commit()
     await db.refresh(audit)
+
+    ph = get_posthog()
+    if ph:
+        with new_context(client=ph):
+            identify_context(str(audit.user_id))
+            ph.capture("audit_created", properties={"status": "pending"})
 
     return audit
 

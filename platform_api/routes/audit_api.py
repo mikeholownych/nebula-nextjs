@@ -11,6 +11,9 @@ import json
 import sys
 import os
 
+from posthog import identify_context, new_context
+
+from platform_api.posthog_client import get_posthog
 from platform_api.services.email_service import email_service, AuditEmailData
 from platform_api.services.audit_db import audit_db
 from platform_api.services.analytics import analytics
@@ -61,6 +64,12 @@ async def run_audit(request: AuditRequest):
             url=request.url,
             email=request.email or 'anonymous'
         )
+        ph = get_posthog()
+        distinct_id = request.email or str(audit_id)
+        if ph:
+            with new_context(client=ph):
+                identify_context(distinct_id)
+                ph.capture("audit_started", properties={"audit_id": str(audit_id)})
         
         # Build command
         cmd = [
@@ -78,6 +87,10 @@ async def run_audit(request: AuditRequest):
         )
         
         if result.returncode != 0:
+            if ph:
+                with new_context(client=ph):
+                    identify_context(distinct_id)
+                    ph.capture("audit_failed", properties={"audit_id": str(audit_id), "reason": "script_error"})
             return AuditResponse(
                 audit_id=str(audit_id),
                 url=request.url,
@@ -94,6 +107,10 @@ async def run_audit(request: AuditRequest):
                 break
         
         if not json_line:
+            if ph:
+                with new_context(client=ph):
+                    identify_context(distinct_id)
+                    ph.capture("audit_failed", properties={"audit_id": str(audit_id), "reason": "no_json_output"})
             return AuditResponse(
                 audit_id=str(audit_id),
                 url=request.url,
@@ -118,6 +135,18 @@ async def run_audit(request: AuditRequest):
             score=data.get('score', 0),
             grade=data.get('grade', 'N/A')
         )
+        if ph:
+            with new_context(client=ph):
+                identify_context(distinct_id)
+                ph.capture(
+                    "audit_completed",
+                    properties={
+                        "audit_id": str(audit_id),
+                        "score": data.get("score"),
+                        "grade": data.get("grade"),
+                        "findings_count": len(data.get("findings", [])),
+                    },
+                )
         
         # Assign nurture track based on findings
         if request.email and data.get('findings'):
@@ -144,6 +173,12 @@ async def run_audit(request: AuditRequest):
         )
         
     except subprocess.TimeoutExpired:
+        ph = get_posthog()
+        if ph:
+            distinct_id = request.email or str(request.audit_id or "unknown")
+            with new_context(client=ph):
+                identify_context(distinct_id)
+                ph.capture("audit_failed", properties={"reason": "timeout"})
         return AuditResponse(
             audit_id=request.audit_id,
             url=request.url,
@@ -151,6 +186,12 @@ async def run_audit(request: AuditRequest):
             error="Audit timed out (120s limit)"
         )
     except json.JSONDecodeError as e:
+        ph = get_posthog()
+        if ph:
+            distinct_id = request.email or str(request.audit_id or "unknown")
+            with new_context(client=ph):
+                identify_context(distinct_id)
+                ph.capture("audit_failed", properties={"reason": "json_parse_error"})
         return AuditResponse(
             audit_id=request.audit_id,
             url=request.url,
@@ -233,6 +274,18 @@ async def send_audit_email(request: EmailRequest):
                 email=request.email,
                 audit_id=str(audits[0]['id'])
             )
+            ph = get_posthog()
+            if ph:
+                with new_context(client=ph):
+                    identify_context(request.email)
+                    ph.capture(
+                        "audit_email_sent",
+                        properties={
+                            "audit_id": str(audits[0]['id']),
+                            "grade": request.grade,
+                            "score": request.score,
+                        },
+                    )
         
         return EmailResponse(
             status=result.get("status", "unknown"),

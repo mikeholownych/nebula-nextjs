@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
+import { getPostHogClient } from '@/app/lib/posthog-server'
 
 /**
  * Stripe webhook handler
@@ -51,7 +52,7 @@ export async function POST(request: NextRequest) {
   // Handle checkout.session.completed
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session
-    
+
     console.log('Checkout completed:', {
       id: session.id,
       customer_email: session.customer_email,
@@ -61,6 +62,27 @@ export async function POST(request: NextRequest) {
 
     // TODO: Write to PostgreSQL purchases table
     // For now, just log it
+
+    if (session.customer_email) {
+      try {
+        const ph = getPostHogClient()
+        ph.identify({ distinctId: session.customer_email, properties: {} })
+        ph.capture({
+          distinctId: session.customer_email,
+          event: 'purchase_completed',
+          properties: {
+            stripe_session_id: session.id,
+            offer_key: session.metadata?.offer_key ?? undefined,
+            amount_total: session.amount_total,
+            currency: session.currency,
+            payment_status: session.payment_status,
+          },
+        })
+        await ph.flush()
+      } catch {
+        // Non-fatal
+      }
+    }
   }
 
   // Handle invoice.payment_succeeded (for subscriptions)
@@ -71,6 +93,24 @@ export async function POST(request: NextRequest) {
       customer_email: invoice.customer_email,
       amount_paid: invoice.amount_paid,
     })
+
+    if (invoice.customer_email) {
+      try {
+        const ph = getPostHogClient()
+        ph.capture({
+          distinctId: invoice.customer_email,
+          event: 'invoice_payment_succeeded',
+          properties: {
+            invoice_id: invoice.id,
+            amount_paid: invoice.amount_paid,
+            currency: invoice.currency,
+          },
+        })
+        await ph.flush()
+      } catch {
+        // Non-fatal
+      }
+    }
   }
 
   return NextResponse.json({ received: true })

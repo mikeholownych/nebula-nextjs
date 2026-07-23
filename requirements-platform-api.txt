@@ -77,3 +77,5 @@ watchfiles==1.2.0
     # via uvicorn
 websockets==16.1
     # via uvicorn
+posthog>=3.0.0
+    # via -r requirements-platform-api.in

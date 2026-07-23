@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getPostHogClient } from '@/app/lib/posthog-server'
 
 const OFFERS = {
   'fix-pack': {
@@ -76,6 +77,23 @@ export async function POST(request: NextRequest) {
     const session = await response.json()
     if (typeof session.url !== 'string') {
       return NextResponse.json({ code: 'CHECKOUT_PROVIDER_ERROR' }, { status: 502 })
+    }
+
+    try {
+      const ph = getPostHogClient()
+      ph.identify({ distinctId: email, properties: {} })
+      ph.capture({
+        distinctId: email,
+        event: 'checkout_session_created',
+        properties: {
+          offer_key: offerKey,
+          offer_name: offer.name,
+          stripe_session_id: typeof session.id === 'string' ? session.id : undefined,
+        },
+      })
+      await ph.flush()
+    } catch {
+      // Non-fatal
     }
 
     return NextResponse.json({ url: session.url })

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Card } from '@/components/ui'
+import CheckoutCTAButton from './CheckoutCTAButton'
 
 export const metadata: Metadata = {
   title: 'Checkout — Nebula Conversion Fix Pack | Nebula Components',
@@ -47,12 +48,7 @@ export default function CheckoutPage() {
           </div>
         </Card>
 
-        <a
-          href={STRIPE_FIX_PACK_LINK}
-          className="block w-full rounded-2xl bg-accent px-8 py-4 text-center text-lg font-semibold text-bg transition-colors hover:bg-accent-light"
-        >
-          Continue to Secure Stripe Checkout
-        </a>
+        <CheckoutCTAButton href={STRIPE_FIX_PACK_LINK} />
 
         <p className="mt-6 text-center text-sm text-fg-muted">
           Card details are entered only on Stripe. Nebula does not collect or store payment information.

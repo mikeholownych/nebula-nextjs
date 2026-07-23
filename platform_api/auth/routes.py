@@ -17,8 +17,11 @@ from uuid import UUID, uuid4
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel, EmailStr
 
+from posthog import identify_context, new_context
+
 from platform_api.config import settings
 from platform_api.db import Organization, User, UserIdentity, get_session
+from platform_api.posthog_client import get_posthog
 from platform_api.redis_client import get_redis
 from .google import GoogleOAuthError, verify_google_token
 from .jwt import (
@@ -142,7 +145,8 @@ async def google_auth(
             issuer="google",
             subject=google_user["subject"]
         ).first()
-        
+        is_new_user = identity is None
+
         if identity:
             # Existing user
             user = identity.user
@@ -201,12 +205,19 @@ async def google_auth(
             session_data
         )
         
+        ph = get_posthog()
+        if ph:
+            event_name = "user_signed_up" if is_new_user else "user_logged_in"
+            with new_context(client=ph):
+                identify_context(str(user.id))
+                ph.capture(event_name, properties={"auth_method": "google"})
+
         return TokenResponse(
             access_token=token,
             user_id=str(user.id),
             email=user.email
         )
-    
+
     except GoogleOAuthError as e:
         raise HTTPException(status_code=401, detail=str(e))
 
@@ -247,9 +258,15 @@ async def logout(
     """
     user_id = current_user["user_id"]
     session_id = current_user["session_id"]
-    
+
     await revoke_session(redis, user_id, session_id)
-    
+
+    ph = get_posthog()
+    if ph:
+        with new_context(client=ph):
+            identify_context(user_id)
+            ph.capture("user_logged_out")
+
     return {"message": "Logged out successfully"}
 
 

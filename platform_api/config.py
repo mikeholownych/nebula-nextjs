@@ -42,6 +42,10 @@ class Settings(BaseSettings):
     SENDGRID_API_KEY: Optional[str] = None
     SENDGRID_FROM_EMAIL: str = "noreply@nebulacomponents.shop"
     
+    # PostHog
+    POSTHOG_PROJECT_TOKEN: Optional[str] = None
+    POSTHOG_HOST: str = "https://us.i.posthog.com"
+
     # CORS
     ALLOWED_ORIGINS: List[str] = []
     

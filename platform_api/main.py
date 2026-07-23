@@ -113,18 +113,32 @@ async def readiness_check(request: Request) -> dict:
 # Startup and shutdown events
 @app.on_event("startup")
 async def startup_event():
-    """Initialize Redis connection on startup."""
+    """Initialize Redis and PostHog on startup."""
     from platform_api.redis_client import redis_client
     await redis_client.connect()
     print("✅ Redis connected")
 
+    from platform_api.posthog_client import init_posthog, warn_missing_token
+    if settings.POSTHOG_PROJECT_TOKEN:
+        init_posthog(
+            settings.POSTHOG_PROJECT_TOKEN,
+            settings.POSTHOG_HOST,
+            debug=settings.is_development,
+        )
+        print("✅ PostHog initialized")
+    elif settings.is_development:
+        warn_missing_token("POSTHOG_PROJECT_TOKEN")
+
 
 @app.on_event("shutdown")
 async def shutdown_event():
-    """Close Redis connection on shutdown."""
+    """Close Redis and flush PostHog on shutdown."""
     from platform_api.redis_client import redis_client
     await redis_client.disconnect()
     print("✅ Redis disconnected")
+
+    from platform_api.posthog_client import shutdown_posthog
+    shutdown_posthog()
 
 
 # Add a test endpoint to verify the service works

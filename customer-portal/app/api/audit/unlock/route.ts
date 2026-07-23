@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getPostHogClient } from '@/app/lib/posthog-server'
 
 /**
  * Unlock audit results by providing an email address.
@@ -57,6 +58,26 @@ export async function POST(request: NextRequest) {
       })
     } catch {
       // Non-fatal — the user still gets unlocked results in-browser
+    }
+
+    const clientDistinctId = request.headers.get('X-POSTHOG-DISTINCT-ID') ?? email
+    try {
+      const ph = getPostHogClient()
+      ph.identify({ distinctId: email, properties: { name: name ?? undefined } })
+      ph.capture({
+        distinctId: clientDistinctId,
+        event: 'audit_results_unlocked',
+        properties: {
+          audit_id,
+          page_url: audit.url,
+          score: audit.score,
+          grade: audit.grade,
+          $set: { name: name ?? undefined },
+        },
+      })
+      await ph.flush()
+    } catch {
+      // Non-fatal
     }
 
     // 3. Set a signed unlock cookie scoped to this audit_id.

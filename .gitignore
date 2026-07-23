@@ -207,3 +207,4 @@ aidlc-docs/operations/
 *.backup-*
 *.test-backup
 .env
+.env.example

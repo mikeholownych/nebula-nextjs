@@ -9,9 +9,12 @@ from pydantic import BaseModel, EmailStr, HttpUrl
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from posthog import identify_context, new_context
+
 from ..db.models import Audit, Membership, Organization, User
 from ..db.session import get_session as get_db
 from ..auth.routes import get_current_user
+from ..posthog_client import get_posthog
 
 
 router = APIRouter(prefix="/api/organizations", tags=["organizations"])
@@ -124,6 +127,21 @@ async def update_organization(
     await db.commit()
     await db.refresh(org)
 
+    ph = get_posthog()
+    if ph:
+        with new_context(client=ph):
+            identify_context(str(user["user_id"]))
+            ph.capture(
+                "organization_updated",
+                properties={
+                    "org_id": str(org_id),
+                    "fields_changed": [
+                        k for k, v in {"name": update_data.name, "is_agency": update_data.is_agency}.items()
+                        if v is not None
+                    ],
+                },
+            )
+
     return org
 
 
@@ -217,5 +235,17 @@ async def invite_member(
     db.add(new_membership)
     await db.commit()
     await db.refresh(new_membership)
+
+    ph = get_posthog()
+    if ph:
+        with new_context(client=ph):
+            identify_context(str(user["user_id"]))
+            ph.capture(
+                "member_invited",
+                properties={
+                    "org_id": str(org_id),
+                    "role": invite.role,
+                },
+            )
 
     return new_membership

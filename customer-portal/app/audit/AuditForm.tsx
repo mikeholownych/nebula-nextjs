@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Card } from '@/components/ui'
+import posthog from 'posthog-js'
 
 export default function AuditForm() {
   const [url, setUrl] = useState('')
@@ -40,6 +41,12 @@ export default function AuditForm() {
 
     setLoading(true)
 
+    posthog.capture('audit_submitted', {
+      page_url: processedUrl,
+      page_domain: new URL(processedUrl).hostname,
+      referrer: referrer ?? null,
+    })
+
     try {
       const response = await fetch('/api/audit/start', {
         method: 'POST',
@@ -59,7 +66,9 @@ export default function AuditForm() {
         setError('Audit completed. Full integration coming soon.')
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong')
+      const error = err instanceof Error ? err : new Error(String(err))
+      posthog.captureException(error)
+      setError(error.message)
     } finally {
       setLoading(false)
     }

@@ -25,6 +25,8 @@ const nextConfig: NextConfig = {
   eslint: { ignoreDuringBuilds: true },
   // Explicit workspace root to silence Turbopack lockfile ambiguity warning
   turbopack: { root: __dirname },
+  // Required to support PostHog trailing-slash API requests through the /ingest proxy
+  skipTrailingSlashRedirect: true,
   // 301/410 map for legacy static .html URLs indexed by Google (GSC 2026-07-21)
   // Frees crawl budget from dead URLs; preserves any query association on equity-bearing pages.
   // Rule: content pages → nearest current equivalent (301); true orphans → /gone (410).
@@ -62,6 +64,19 @@ const nextConfig: NextConfig = {
   // Serve static HTML files from public folder
   async rewrites() {
     return [
+      // PostHog reverse proxy — routes ingest through Next.js to avoid ad blockers
+      {
+        source: '/ingest/static/:path*',
+        destination: 'https://us-assets.i.posthog.com/static/:path*',
+      },
+      {
+        source: '/ingest/array/:path*',
+        destination: 'https://us-assets.i.posthog.com/array/:path*',
+      },
+      {
+        source: '/ingest/:path*',
+        destination: 'https://us.i.posthog.com/:path*',
+      },
       // Rewrite root to index.html
       {
         source: '/',

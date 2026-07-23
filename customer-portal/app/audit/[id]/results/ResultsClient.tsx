@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { Card } from '@/components/ui'
+import posthog from 'posthog-js'
 
 interface Finding {
   key: string
@@ -45,6 +46,7 @@ function UnlockConfirmation({ emailSent, email, auditId }: { emailSent: boolean;
   const requestMagicLink = async () => {
     if (!email || magicLinkState !== 'idle') return
     setMagicLinkState('sending')
+    posthog.capture('magic_link_requested', { audit_id: auditId })
     try {
       const res = await fetch('/api/auth/magic-link', {
         method: 'POST',
@@ -219,10 +221,17 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
     setSendingEmail(true)
     setEmailError(null)
 
+    posthog.identify(emailForm.email, { name: emailForm.name || undefined })
+    posthog.capture('audit_email_submitted', { audit_id: auditId, source: 'results_page', has_name: Boolean(emailForm.name) })
+
     try {
       const response = await fetch('/api/audit/unlock', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'X-POSTHOG-DISTINCT-ID': posthog.get_distinct_id() ?? '',
+          'X-POSTHOG-SESSION-ID': posthog.get_session_id() ?? '',
+        },
         body: JSON.stringify({
           audit_id: auditId,
           email: emailForm.email,

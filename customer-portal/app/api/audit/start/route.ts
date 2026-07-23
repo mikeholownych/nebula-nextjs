@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getPostHogClient } from '@/app/lib/posthog-server'
 
 /**
  * Start an audit by calling FastAPI directly
@@ -63,6 +64,26 @@ export async function POST(request: NextRequest) {
     }
     
     const data = await apiResponse.json()
+
+    const distinctId = request.headers.get('X-POSTHOG-DISTINCT-ID') ?? `anon_audit_${data.audit_id}`
+    try {
+      const ph = getPostHogClient()
+      ph.capture({
+        distinctId,
+        event: 'audit_started',
+        properties: {
+          audit_id: data.audit_id,
+          page_url: processedUrl,
+          page_domain: parsedUrl.hostname,
+          score: data.score,
+          grade: data.grade,
+        },
+      })
+      await ph.flush()
+    } catch {
+      // Non-fatal — never let analytics block the response
+    }
+
     return NextResponse.json({
       audit_id: data.audit_id,
       url: data.url,

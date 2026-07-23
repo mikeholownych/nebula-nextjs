@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { Card } from '@/components/ui'
 import { pushWithViewTransition } from '../../_lib/view-transition'
+import posthog from 'posthog-js'
 
 const STATUS_MESSAGES = [
   { message: 'Scanning page structure...', duration: 2000 },
@@ -70,10 +71,17 @@ export default function ProcessingPage() {
     setSubmitting(true)
     setSubmitError(null)
 
+    posthog.identify(email, { name: name || undefined })
+    posthog.capture('audit_email_submitted', { audit_id: auditId, has_name: Boolean(name) })
+
     try {
       const res = await fetch('/api/audit/unlock', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'X-POSTHOG-DISTINCT-ID': posthog.get_distinct_id() ?? '',
+          'X-POSTHOG-SESSION-ID': posthog.get_session_id() ?? '',
+        },
         body: JSON.stringify({ audit_id: auditId, email, name: name || undefined }),
       })
 
@@ -85,7 +93,9 @@ export default function ProcessingPage() {
       // Cookie is now set — redirect to results page (no ?unlocked query param needed)
       pushWithViewTransition(router, `/audit/${auditId}/results`)
     } catch (err) {
-      setSubmitError(err instanceof Error ? err.message : 'Something went wrong')
+      const error = err instanceof Error ? err : new Error(String(err))
+      posthog.captureException(error)
+      setSubmitError(error.message)
     } finally {
       setSubmitting(false)
     }
