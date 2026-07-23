@@ -49,6 +49,14 @@ Before committing any `.tsx`/`.mdx` content file:
 - **Duplicate send prevention:** set in-memory status BEFORE `UpdateLeadStatus()` write
 - **Claude Code sessions:** Starting `claude` inside nebula/ activates AI-DLC. Always use `Using AI-DLC,` prefix to trigger structured workflow.
 
+## Parallel Outreach Rule
+
+For lead-pipeline work with independent source lanes, use the source-parallel pattern in `growth_system/PARALLEL_OUTREACH_PROTOCOL.md`:
+- Run Google/Reddit pain signals, LinkedIn engagers, and job-board/product-launch discovery as isolated parallel lanes.
+- Lane workers may produce bounded artifacts only; they must not send outreach or write canonical lead ledgers.
+- The parent alone merges/dedupes, applies trigger/firewall/ICP/bounce/opt-out gates, and routes final delivery through the serial AgentMail trickle path.
+- Every delegated lane must use the `for/g`, `verify`, `constraints` completion contract.
+
 ## Completion Contracts
 When delegating any task where proof of completion matters, structure the prompt as:
 

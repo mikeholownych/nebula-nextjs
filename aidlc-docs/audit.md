@@ -304,3 +304,22 @@ before it reached the UI, surfacing only the generic fallback message.
 - Playwright end-to-end: submitted a URL on the live `/audit` page, confirmed
   navigation to `/audit/<real-uuid>/processing` with no page errors.
 - No application code changes required — infra/systemd config only.
+
+## 2026-07-23T15:15:06Z — Session-start Honcho + parallel outreach directive
+
+### Raw user input
+
+> Yes
+
+### Continuation inputs
+
+> Continue
+
+> Continue
+
+### Actions
+
+- Added a first-turn Honcho priority-reasoning protocol to `~/.hermes/SOUL.md`.
+- Added `growth_system/PARALLEL_OUTREACH_PROTOCOL.md` and wired it into `CLAUDE.md`.
+- Updated the reusable `trigger-aware-lead-gen-pipeline` skill with source-lane boundaries.
+- Dispatched a supervised read-only three-agent parallel proof; no sends or canonical-ledger writes allowed.
