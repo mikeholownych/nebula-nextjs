@@ -100,6 +100,10 @@ sre_*.json
 stats.json
 upwork_*.json
 *.db
+*.db-shm
+*.db-wal
+*.db-journal
+metrics_pull_log.jsonl
 ops/
 inbox_check.log
 check_inbox.log

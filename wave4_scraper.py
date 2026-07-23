@@ -561,7 +561,8 @@ def send_wave4(leads, contacted):
                   f"— need ≥{WARMUP_MIN_DAYS}d / {WARMUP_MIN_SENDS} sends before outreach")
             _warmup_ok = False
     except Exception as _we:
-        pass  # warmup module unavailable — don't block
+        print(f"  [G9 WARMUP BLOCK] warmup state unavailable: {_we}")
+        _warmup_ok = False
 
     if not _warmup_ok:
         return 0
@@ -649,12 +650,13 @@ def send_wave4(leads, contacted):
                 text=body,
                 html=html_body,   # G8: plain-text + HTML parity
             )
-            _batch_sent += 1
             if isinstance(result, dict) and result.get("_error"):
-                _batch_bounced += 1
-                print(f"  ❌ AM ERROR → {email}: {result['_error']}")
+                if result.get("_error") == 403:
+                    _batch_bounced += 1
+                print(f"  ❌ AM BLOCKED/ERROR → {email}: {result.get('_reason') or result['_error']}")
                 continue
 
+            _batch_sent += 1
             thread_id = result.get('thread_id', '') if isinstance(result, dict) else ''
             ts = time.strftime('%Y-%m-%dT%H:%M:%SZ')
             contacted[email] = {

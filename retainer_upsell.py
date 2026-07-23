@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Retainer Upsell Sender — Nebula Components
-Sends $197/mo pitch to leads who received an audit 24-72h ago and haven't paid.
+Sends the canonical $1,497/mo AI Ops Retainer offer to qualified audit recipients.
 
 Run via cron every 6h. Each eligible lead gets ONE upsell, then marked done.
 
@@ -16,15 +16,13 @@ Eligibility:
 import json
 import sqlite3
 import logging
-import requests
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 DB_PATH   = Path("/home/mike/nebula/lead_state.db")
 LOG_FILE  = Path("/home/mike/nebula/logs/retainer_upsell.log")
-FROM_EMAIL = "ops@launchcrate.io"
-AGENTMAIL_KEY_FILE = Path.home() / ".hermes/secrets/agentmail_org.key"
-STRIPE_RETAINER_URL = "https://buy.stripe.com/4gMdR9aYkenafup3Ro43S00"  # $197/mo — update when live
+INBOX = "nebulashop@agentmail.to"
+STRIPE_RETAINER_URL = "https://buy.stripe.com/00w5kD1nK0wkaa573A43S0c"
 
 logging.basicConfig(
     level=logging.INFO,
@@ -45,7 +43,7 @@ Quick follow-up: most founders I work with hit the same wall after the fix pack 
 they make the changes, see an initial lift, then conversion starts drifting again \
 because new traffic brings new friction points.
 
-That's why I built a retainer option: $197/month, I run your landing page through \
+That's why I built the AI Ops Retainer: $1,497/month, I run your landing page through \
 the full 5-dimension audit every month, push an updated fix pack, and flag any \
 new drop-off before it costs you real money.
 
@@ -88,20 +86,28 @@ def get_eligible_leads(conn) -> list[dict]:
     return [{"email": r[0], "url": r[1], "audit_delivered_at": r[2]} for r in rows]
 
 
-def send_upsell(api_key: str, to: str, domain: str) -> bool:
+def send_upsell(to: str, domain: str) -> bool:
     subject = SUBJECT.format(domain=domain)
     body    = BODY.format(domain=domain, retainer_url=STRIPE_RETAINER_URL)
 
     try:
         import sys
         sys.path.insert(0, str(Path(__file__).parent))
-        from resend_client import send as resend_send
-        result = resend_send(to=[to], subject=subject, text=body)
-        if "message_id" in result:
-            log.info(f"Upsell sent via Resend → {to} ({domain})")
+        from agentmail_client import AgentMailClient
+        result = AgentMailClient(inbox=INBOX).send(
+            to=[to],
+            subject=subject,
+            text=body,
+            client_id=f"retainer:{to.lower()}:initial",
+        )
+        if not result.get("_error"):
+            log.info(f"Upsell sent via gated AgentMail → {to} ({domain})")
             return True
         else:
-            log.warning(f"Upsell send failed {to}: {result}")
+            log.warning(
+                f"Upsell blocked/failed {to}: "
+                f"{result.get('_reason') or result.get('_error')}"
+            )
             return False
     except Exception as e:
         log.error(f"Send failed {to}: {e}")
@@ -109,11 +115,6 @@ def send_upsell(api_key: str, to: str, domain: str) -> bool:
 
 
 def main():
-    if not AGENTMAIL_KEY_FILE.exists():
-        log.error("AgentMail key not found")
-        return
-
-    api_key = AGENTMAIL_KEY_FILE.read_text().strip()
     LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
 
     conn = sqlite3.connect(DB_PATH)
@@ -127,7 +128,7 @@ def main():
         email  = lead["email"]
         domain = (lead["url"] or "").replace("https://","").replace("http://","").split("/")[0] or "your page"
 
-        ok = send_upsell(api_key, email, domain)
+        ok = send_upsell(email, domain)
         now_iso = datetime.now(timezone.utc).isoformat()
 
         if ok:

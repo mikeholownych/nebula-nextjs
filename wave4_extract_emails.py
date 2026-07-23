@@ -241,6 +241,9 @@ def main():
         subject, body = build_outreach_email(r)
         try:
             result = am.send(to=[email], subject=subject, text=body)
+            if result.get("_error"):
+                print(f"  ⛔ BLOCKED → {email}: {result.get('_reason') or result.get('_error')}")
+                continue
             thread_id = result.get('thread_id', '') if isinstance(result, dict) else ''
             ts = __import__('datetime').datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
             contacted[email] = {

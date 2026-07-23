@@ -82,16 +82,14 @@ else:
     check("AgentMail API Key Stored", False, critical=True)
     print(f"       File not found: {cred_file}")
 
-# SMTP connectivity
+# AgentMail REST connectivity
 try:
-    import smtplib, ssl
-    ctx = ssl.create_default_context()
-    with smtplib.SMTP_SSL("smtp.agentmail.to", 465, context=ctx, timeout=5) as s:
-        key = cred_file.read_text().strip()
-        s.login("templates@agentmail.to", key)
-        check("SMTP Connectivity (templates@)", True, critical=True)
+    from agentmail_client import AgentMailClient
+    client = AgentMailClient(inbox="nebulashop@agentmail.to")
+    result = client._req("GET", "/inboxes/nebulashop@agentmail.to/threads?limit=1")
+    check("AgentMail REST Connectivity", not bool(result.get("_error")), critical=True)
 except Exception as e:
-    check("SMTP Connectivity (templates@)", False, critical=True)
+    check("AgentMail REST Connectivity", False, critical=True)
     print(f"       Error: {e}")
 
 # ====== 3. PAYMENT INFRASTRUCTURE ======
@@ -194,9 +192,10 @@ else:
 wave2_script = Path("/home/mike/nebula/wave2_dual_sender.py")
 check("Wave 2 Script Ready", wave2_script.exists())
 
-# Auto-responder script
-auto_responder = Path("/home/mike/nebula/auto_responder_dual_inbox.py")
-check("Auto-Responder Script Ready", auto_responder.exists())
+# Canonical outbound boundary
+outbound_client = Path("/home/mike/nebula/agentmail_client.py")
+release_gate = Path("/home/mike/nebula/outbound_release_gate.py")
+check("Gated AgentMail Client Ready", outbound_client.exists() and release_gate.exists())
 
 # ====== 5. CRON JOBS ======
 section("5. CRON JOBS & AUTOMATION")

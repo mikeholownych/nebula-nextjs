@@ -188,10 +188,14 @@ nebulacomponents.shop
 
     resp = client.reply(
         message_id=msg_id,
+        recipient=LEAD_EMAIL,
         text=text,
         html=html,
     )
     print(f"  AgentMail reply response: {resp}")
+    if resp.get("_error"):
+        print(f"[FATAL] Delivery blocked: {resp.get('_reason') or resp.get('_error')}")
+        sys.exit(3)
 
     # Log to ledger
     print("[4/4] Logging to ledger...")

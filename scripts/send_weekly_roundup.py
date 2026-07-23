@@ -19,20 +19,10 @@ from typing import Optional
 BASE = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE))
 
-import httpx
-
 # ─── CONFIG ──────────────────────────────────────────────
 
 INBOX = "nebulashop@agentmail.to"
-API_BASE = "https://api.agentmail.to"
 CONTENT_QUEUE = BASE / "content_queue"
-
-# ─── AUTH ────────────────────────────────────────────────
-
-def get_auth_header() -> dict:
-    secret = Path.home() / ".hermes" / "secrets" / "agentmail.key"
-    token = secret.read_text().strip() if secret.exists() else ""
-    return {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
 
 # ─── EMAIL CONTENT ───────────────────────────────────────
 
@@ -65,7 +55,7 @@ Quick roundup of this week's conversion insights:
 
 {bullets_text.replace('**', '').replace('[Read →](', '').replace(')', '')}
 
-Want these delivered to your page? The Fix Pack is $147:
+Want these delivered to your page? The Fix Pack is $97:
 https://nebulacomponents.shop/checkout.html?utm_source=weekly_roundup&utm_medium=email&utm_campaign=conversion_newsletter
 
 Best,
@@ -96,7 +86,7 @@ Unsubscribe: Reply UNSUBSCRIBE
     html_body += f"""</ul>
 
 <p style="margin-top: 1.5rem;">
-Want these delivered to your page? The Fix Pack is $147:<br>
+Want these delivered to your page? The Fix Pack is $97:<br>
 <a href="https://nebulacomponents.shop/checkout.html?utm_source=weekly_roundup&utm_medium=email&utm_campaign=conversion_newsletter" style="color:#667eea;">Get the Fix Pack →</a>
 </p>
 
@@ -122,19 +112,21 @@ You're receiving this because you ran a landing page audit.<br>
 # ─── SEND ─────────────────────────────────────────────────
 
 async def send_email(email_data: dict) -> tuple[bool, str]:
-    """Send via AgentMail API."""
-    async with httpx.AsyncClient() as client:
-        response = await client.post(
-            f"{API_BASE}/inboxes/{INBOX}/messages/send",
-            headers=get_auth_header(),
-            json=email_data,
-            timeout=30.0,
-        )
-        
-        if response.status_code == 200:
-            return True, response.json().get("id", "sent")
-        else:
-            return False, f"{response.status_code}: {response.text[:200]}"
+    """Send through the centralized AgentMail release gate."""
+    from agentmail_client import AgentMailClient
+
+    iso_year, iso_week, _ = datetime.now(timezone.utc).isocalendar()
+    recipient = email_data["to"]
+    result = AgentMailClient(inbox=INBOX).send(
+        to=[recipient],
+        subject=email_data["subject"],
+        text=email_data.get("text"),
+        html=email_data.get("html"),
+        client_id=f"roundup:{iso_year}-W{iso_week}:{recipient.lower()}",
+    )
+    if result.get("_error"):
+        return False, result.get("_reason") or str(result.get("_error"))
+    return True, result.get("message_id") or result.get("id") or "sent"
 
 # ─── RECIPIENTS ───────────────────────────────────────────
 

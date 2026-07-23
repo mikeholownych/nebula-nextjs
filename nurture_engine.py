@@ -49,56 +49,29 @@ MIN_DAYS_BETWEEN = {
 
 # AgentMail config
 INBOX = "nebulashop@agentmail.to"
-API_BASE = "https://api.agentmail.to"
 
 NURTURE_LOG = BASE / "ledgers" / "nurture_log.jsonl"
 SEGMENT_ORDER = ["cold", "warm", "hot"]  # low-segment first (cold is highest volume, lowest priority)
 
 
-def _get_auth():
-    secret = Path.home() / ".hermes" / "secrets" / "agentmail.key"
-    token = secret.read_text().strip() if secret.exists() else ""
-    return {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
-
-
 def send_email(to_email, subject, text_body):
-    """Send via AgentMail API. Returns (success_bool, message)."""
+    """Send through the centralized AgentMail release gate."""
     if DRY_RUN:
         print(f"  [DRY-RUN] WOULD SEND → {to_email}: {subject[:60]}")
         return True, "DRY_RUN"
 
-    import urllib.request, urllib.error
-    headers = _get_auth()
-    payload = json.dumps({
-        "to": [to_email],
-        "subject": subject,
-        "text": text_body,
-    }).encode()
+    from agentmail_client import AgentMailClient
 
-    try:
-        req = urllib.request.Request(
-            f"{API_BASE}/inboxes/{INBOX}/messages/send",
-            data=payload, headers=headers, method="POST",
-        )
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            body = resp.read().decode()
-            result = json.loads(body) if body else {}
-            msg = result.get("message_id", "sent")
-            return True, msg
-    except urllib.error.HTTPError as e:
-        err_body = e.read().decode()[:200] if e.fp else str(e)
-        if e.code == 403:
-            print(f"  [403 SUPPRESSED] {to_email}")
-            return False, "403_suppressed"
-        # Log 429 distinctly so we can detect window saturation
-        if e.code == 429:
-            print(f"  [AM 429 ⏳] {to_email}: {err_body}")
-            return False, "429_rate_limit"
-        print(f"  [AM {e.code}] {to_email}: {err_body}")
-        return False, f"{e.code}: {err_body}"
-    except Exception as e:
-        print(f"  [AM ERROR] {to_email}: {e}")
-        return False, str(e)
+    result = AgentMailClient(inbox=INBOX).send(
+        to=[to_email],
+        subject=subject,
+        text=text_body,
+    )
+    if result.get("_error"):
+        reason = result.get("_reason") or str(result.get("_error"))
+        print(f"  [DELIVERY BLOCKED] {to_email}: {reason}")
+        return False, reason
+    return True, result.get("message_id") or result.get("id") or "sent"
 
 
 # ── Content templates by segment ───────────────────────────────────

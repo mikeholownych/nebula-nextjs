@@ -28,13 +28,13 @@ from pathlib import Path
 
 # ─── CONFIG ───────────────────────────────────────────────────────────────────
 APIFY_TOKEN_FILE = Path.home() / ".hermes/secrets/apify.key"
-AGENTMAIL_API_KEY_FILE = Path.home() / ".hermes/secrets/agentmail_org.key"
+
 QUEUE_FILE   = Path("/home/mike/nebula/upwork_proposals_queue.json")
 SEEN_FILE    = Path("/home/mike/nebula/upwork_seen_jobs.json")
 PENDING_FILE = Path("/home/mike/nebula/upwork_pending_runs.json")
 LOG_FILE     = Path("/home/mike/nebula/logs/upwork_bidder.log")
 ACTOR_ID     = "neatrat~upwork-job-scraper"
-FROM_EMAIL   = "ops@launchcrate.io"
+INBOX        = "nebulashop@agentmail.to"
 DIGEST_TO    = "mike.holownych@aisyndicate.io"
 
 MAX_ITEMS_PER_SEARCH = 15
@@ -322,10 +322,10 @@ def generate_proposal(job: dict, score: int) -> str:
 
 
 # ─── DIGEST EMAIL ─────────────────────────────────────────────────────────────
-def send_digest(api_key: str, proposals: list):
-    """Send top proposals as a review digest via Resend (inbox-deliverable)."""
+def send_digest(proposals: list) -> bool:
+    """Send top proposals through the centralized AgentMail release gate."""
     if not proposals:
-        return
+        return False
 
     top = sorted(proposals, key=lambda x: x["score"], reverse=True)[:5]
 
@@ -342,18 +342,25 @@ def send_digest(api_key: str, proposals: list):
     try:
         import sys
         sys.path.insert(0, str(Path(__file__).parent))
-        from resend_client import send as resend_send
-        result = resend_send(
+        from agentmail_client import AgentMailClient
+        digest_key = hashlib.sha256(
+            "|".join(sorted(str(p.get("job_id", "")) for p in proposals)).encode()
+        ).hexdigest()[:20]
+        result = AgentMailClient(inbox=INBOX).send_internal(
             to=[DIGEST_TO],
             subject=f"[Upwork] {len(proposals)} proposals ready — {datetime.now().strftime('%b %d')}",
             text=body,
+            client_id=f"upwork-digest:{digest_key}",
         )
-        if "message_id" in result:
-            log.info(f"Digest sent via Resend: {len(proposals)} proposals")
+        if not result.get("_error"):
+            log.info(f"Digest sent via gated AgentMail: {len(proposals)} proposals")
+            return True
         else:
-            log.warning(f"Digest send failed: {result}")
+            log.warning(f"Digest blocked/failed: {result.get('_reason') or result.get('_error')}")
+            return False
     except Exception as e:
         log.error(f"Digest error: {e}")
+        return False
 
 
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
@@ -361,10 +368,6 @@ def main():
     send_only = "--digest" in sys.argv
 
     apify_token = load_token(APIFY_TOKEN_FILE)
-    try:
-        agentmail_key = load_token(AGENTMAIL_API_KEY_FILE)
-    except Exception:
-        agentmail_key = None
 
     seen = load_seen()
     queue = load_queue()
@@ -372,10 +375,11 @@ def main():
     if send_only:
         # Just send digest of queued items not yet sent
         unsent = [p for p in queue if not p.get("digest_sent")]
-        send_digest(agentmail_key, unsent)
-        for p in queue:
-            if not p.get("digest_sent"):
-                p["digest_sent"] = True
+        delivered = send_digest(unsent)
+        if delivered:
+            for p in queue:
+                if not p.get("digest_sent"):
+                    p["digest_sent"] = True
         save_queue(queue)
         log.info("Digest-only run complete.")
         return
@@ -443,8 +447,7 @@ def main():
     save_queue(queue)
 
     # Always send digest if new proposals found
-    if new_proposals and agentmail_key:
-        send_digest(agentmail_key, new_proposals)  # type: ignore[arg-type]
+    if new_proposals and send_digest(new_proposals):
         for p in queue:
             if not p.get("digest_sent") and p["job_id"] in {n["job_id"] for n in new_proposals}:
                 p["digest_sent"] = True

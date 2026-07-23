@@ -8,11 +8,9 @@ Usage:
   python3 followup_sequence.py --dry-run # print what WOULD be sent
 """
 
-import sys, json, os, smtplib, ssl, re, time
+import sys, json, os, re, time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 
 # ── Stripe personalised checkout links ────────────────────────────
 sys.path.insert(0, str(Path("/home/mike/nebula")))
@@ -46,15 +44,7 @@ HOT_LEAD      = NEBULA / "HOT_LEAD.json"
 LEDGER        = NEBULA / "ledgers/customer-ledger.jsonl"
 FOLLOWUP_ST   = NEBULA / "followup_state.jsonl"
 REPLIED_FILE  = NEBULA / "replied_emails.jsonl"
-AGENTMAIL_KEY = Path.home() / ".hermes/secrets/agentmail_org.key"
-
-# ── SMTP ──────────────────────────────────────────────────────────
-SMTP_HOST = "smtp.agentmail.to"
-SMTP_PORT = 465
-SMTP_USER = "ops@launchcrate.io"
-FROM_NAME = "Nebula Audit Agent <ops@launchcrate.io>"
 STRIPE    = "https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
-STRIPE_7  = "https://buy.stripe.com/4gMdR9aYkenafup3Ro43S00"
 
 # ── Sequence definitions ──────────────────────────────────────────
 # Hardened 10-touch pipeline per the followup-hardening skill:
@@ -70,8 +60,7 @@ Quick check — the {domain} audit flagged {top_issue_short}. I wrote {top_fix}
 
 Did that match what you were seeing, or is there a different piece you'd want addressed first?
 
-Either way, the implementation path is here whenever: {stripe}
-Or the $7 self-serve kit: {stripe_7}
+Either way, the $97 implementation path is here whenever: {stripe}
 
 — Nebula Audit Agent"""),
 
@@ -103,8 +92,7 @@ Quick example — pages with the same {top_issue_short} problem usually leak int
 
 When the fix is sequenced right, the page stops asking people to think and starts showing one obvious next step.
 
-The next step is self-serve: run the audit page again after changes, or start implementation here: {stripe}
-Or grab the $7 DIY kit: {stripe_7}
+The next step is self-serve: run the audit page again after changes, or start the $97 implementation here: {stripe}
 
 — Nebula Audit Agent"""),
 
@@ -119,8 +107,7 @@ Use this order:
 2. Add one proof point near the first CTA
 3. Remove any secondary CTA above the fold
 
-No call required. No scheduling. If you want the implementation, start here: {stripe}
-Or the $7 self-serve kit: {stripe_7}
+No call required. No scheduling. If you want the $97 implementation, start here: {stripe}
 
 — Nebula Audit Agent"""),
 
@@ -135,7 +122,6 @@ The audit on {domain} won't expire. If you come back to this later, the fix is t
 {top_fix}
 
 Implementation: {stripe}
-DIY checklist: {stripe_7}
 
 Won't follow up again on this round. If something changes, the audit link is always live:
 
@@ -325,7 +311,7 @@ Sent the {domain} audit yesterday. One finding I didn't want to bury in the repo
 
 Your headline and ad are making different promises. Visitors arrive expecting one thing, see another, and leave. That gap is the most common reason paid traffic doesn't convert — and it's mechanical, not a budget problem.
 
-The fix is a headline rewrite and one CTA adjustment. We implement it in 24h for $147. If it doesn't move your numbers, full refund.
+The fix is a headline rewrite and one CTA adjustment. We implement it in 24h for $97. If it doesn't move your numbers, full refund.
 
 → {stripe}
 
@@ -342,9 +328,7 @@ A SaaS founder had the same issue: headline written for people who already knew 
 
 Sharing in case it's a useful data point, not to pressure you.
 
-If you want the implementation: $147, done in 24h, full refund if it doesn't help. → {stripe}
-
-If you'd rather handle it yourself, the $7 DIY kit has the exact checklist: {stripe_7}
+If you want the implementation: $97, done in 24h. → {stripe}
 
 — Nebula"""),
     (7, "recycle_final",
@@ -355,10 +339,9 @@ Last note from me on the {domain} audit.
 
 The findings don't expire. If you come back to this later, the audit is still accurate and the fix is the same.
 
-Three ways to use it:
-1. We implement it — $147, 24h, full refund if no lift: {stripe}
-2. DIY checklist — $7: {stripe_7}
-3. Re-run the free audit anytime: https://nebulacomponents.shop/audit.html
+Two ways to use it:
+1. We implement it — $97, 24h: {stripe}
+2. Re-run the free audit anytime: https://nebulacomponents.shop/audit.html
 
 Won't follow up again. Thanks for the time.
 
@@ -468,16 +451,13 @@ def hot_lead_pitch_body(url, audit_score, audit_grade, checkout_url=None):
 
 {cta_line}
 
-$147 — self-serve checkout, no call needed:
+$97 — self-serve checkout, no call needed:
 {pay_url}
-
-Or the $7 DIY checklist if you'd rather handle it yourself:
-{STRIPE_7}
 
 — Nebula"""
 
 def process_hot_lead_pitches(now, paid, sent):
-    """Advance HOT_LEAD audit_delivered -> $147 pitch sent when pitch_due_at has arrived."""
+    """Advance HOT_LEAD audit_delivered -> $97 pitch sent when pitch_due_at has arrived."""
     leads, was_list = load_hot_leads()
     if not leads:
         return 0, 0
@@ -541,7 +521,7 @@ def process_hot_lead_pitches(now, paid, sent):
         save_hot_leads(leads, was_list, DRY_RUN)
     return due, delivered
 
-def send_email(to, subject, body, dry_run):
+def send_email(to, subject, body, dry_run, *, conversation=False):
     if dry_run:
         print(f"  [DRY-RUN] WOULD SEND → {to}: {subject}")
         return True
@@ -550,11 +530,13 @@ def send_email(to, subject, body, dry_run):
         sys.path.insert(0, str(NEBULA))
         from agentmail_client import AgentMailClient
         am = AgentMailClient()
-        result = am.send(to=[to], subject=subject, text=body)
+        sender = am.send_conversation if conversation else am.send
+        result = sender(to=[to], subject=subject, text=body)
         if result.get("_error"):
             err_code = result["_error"]
             err_body = result.get("_body", "")
-            print(f"  [AM FAILED] {to}: {err_code} {err_body[:120]}")
+            err_reason = result.get("_reason", "")
+            print(f"  [AM FAILED] {to}: {err_code} {err_reason or err_body[:120]}")
             # AgentMail 403 = suppressed (complained / unsubscribed) — mark dead, never retry
             if err_code == 403 and HAS_BOUNCE_DETECTION:
                 suppression_signals = ("complained", "unsubscribed", "blocked", "MessageRejectedError")
@@ -680,7 +662,7 @@ def main():
                 audit_data = get_audit_data(url)
             d    = domain(url)
             subj = subj_tmpl.format(domain=d, **audit_data)
-            body = body_tmpl.format(domain=d, stripe=STRIPE, stripe_7=STRIPE_7, **audit_data)
+            body = body_tmpl.format(domain=d, stripe=STRIPE, **audit_data)
             body += "\n\n—\nReply STOP to opt out."
             print(f"  [{label}] {email} ({d})")
             ok = send_email(email, subj, body, DRY_RUN)
@@ -729,7 +711,7 @@ def main():
             }
             d    = domain(url) if url else email.split("@")[-1]
             subj = subj_tmpl.format(domain=d, **ad)
-            body = body_tmpl.format(domain=d, stripe=STRIPE, stripe_7=STRIPE_7, **ad)
+            body = body_tmpl.format(domain=d, stripe=STRIPE, **ad)
             body += "\n\n—\nReply STOP to opt out."
             print(f"  [{label}] {email}")
             ok = send_email(email, subj, body, DRY_RUN)
@@ -778,7 +760,7 @@ def main():
             d    = domain(url) if url else email.split("@")[-1]
             ad   = get_audit_data(url) if url else {}
             subj = subj_tmpl.format(domain=d, **ad)
-            body = body_tmpl.format(domain=d, stripe=STRIPE, stripe_7=STRIPE_7, **ad)
+            body = body_tmpl.format(domain=d, stripe=STRIPE, **ad)
             body += "\n\n—\nReply STOP to opt out."
             print(f"  [revive] {email} ({d}) age={age_days:.1f}d")
             ok = send_email(email, subj, body, DRY_RUN)
@@ -826,7 +808,7 @@ def main():
                 audit_score=lead.get("audit_score"),
                 domain=d,
             )
-            body = body_tmpl.format(domain=d, stripe=stripe_url, stripe_7=STRIPE_7)
+            body = body_tmpl.format(domain=d, stripe=stripe_url)
             body += "\n\n—\nReply STOP to opt out."
             print(f"  [recycle] {email} ({d}) age={age_days:.1f}d")
             ok = send_email(email, subj, body, DRY_RUN)

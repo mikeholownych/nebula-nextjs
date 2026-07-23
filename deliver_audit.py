@@ -583,6 +583,16 @@ def score_audit(page):
     _order = {"quick_win": 0, "major_project": 1, "fill_in": 2, "avoid": 3}
     opp_matrix.sort(key=lambda x: (_order[x["quadrant"]], -x["impact"]))
 
+    # ── Evidence enrichment ────────────────────────────────────────────────────
+    # Adds measured/required/delta/selector/confidence/timestamp to every finding.
+    # Operates on already-fetched HTML — no new network calls.
+    try:
+        from audit_evidence import enrich_findings_with_evidence
+        opp_matrix = enrich_findings_with_evidence(opp_matrix, html_text)
+    except Exception as _ev_err:
+        # Evidence enrichment is additive — never fail the audit if it errors
+        pass
+
     return {"overall": overall, "overall_grade": grade, "dimensions": dimensions, "opp_matrix": opp_matrix}
 
 
@@ -1116,67 +1126,49 @@ def _latest_inbound_message_id(am, thread_id):
 
 
 def send_via_agentmail(to, subject, body, html=None, thread_id=None, message_id=None):
-    """Send or reply via the repo AgentMail REST client with 3-attempt retry + Resend fallback.
-
-    Attempt 1: AgentMail (auto-fails to Resend on 5xx in the client).
-    Attempts 2-3: AgentMail-only (Resend already tried).
-    403 (suppressed) is NOT retried.
-    Logs failures to incident ledger after 3 failed attempts.
-    """
+    """Make one gated provider attempt; retries are requeued after the 300s cooldown."""
     from agentmail_client import AgentMailClient
+
     am = AgentMailClient()
     reply_to = message_id or _latest_inbound_message_id(am, thread_id)
+    try:
+        if reply_to:
+            data = am.reply(
+                reply_to,
+                recipient=to,
+                text=body,
+                html=html,
+            )
+        else:
+            data = am.send_audit(
+                to=[to],
+                subject=subject,
+                text=body,
+                html=html,
+            )
 
-    last_error = None
-    for attempt in range(1, 4):
-        if attempt > 1:
-            import time
-            delay = attempt * 15  # 30s, 45s backoff
-            print(f"[retry {attempt}/3] waiting {delay}s before retry...")
-            time.sleep(delay)
+        if data.get("_error"):
+            err = data["_error"]
+            status = "suppressed" if err == 403 else "deferred"
+            print(f"❌ AgentMail {status}: {to}: {data.get('_reason') or err}")
+            _log_delivery_crash(to, subject, data, 1)
+            return {
+                "ok": False,
+                "status": status,
+                "error": str(data.get("_reason") or err),
+                "raw": data,
+            }
 
-        try:
-            if reply_to:
-                data = am.reply(reply_to, text=body, html=html)
-            else:
-                data = am.send(to=[to], subject=subject, text=body, html=html)
-
-            if data.get("_error"):
-                err = data["_error"]
-                # 403 = suppressed — do NOT retry
-                if err == 403:
-                    print(f"❌ AgentMail 403 (suppressed): {to}")
-                    return {"ok": False, "status": "suppressed", "error": "403 suppressed"}
-                # 5xx or network — will retry unless it's attempt 3
-                if attempt < 3 and isinstance(err, int) and err >= 500:
-                    print(f"⚠️  AgentMail {err} on attempt {attempt}/3 for {to}")
-                    last_error = data
-                    continue
-                # Other errors — log and move on
-                print(f"❌ AgentMail error: {data.get('_error')} {data.get('_body', '')}")
-                if attempt == 3:
-                    _log_delivery_crash(to, subject, data, attempt)
-                return {"ok": False, "status": "error", "error": str(err), "raw": data}
-
-            data.setdefault("status", "sent")
-            data["ok"] = True
-            if thread_id:
-                data.setdefault("thread_id", thread_id)
-            via = data.get("_via", "agentmail")
-            print(f"✅ Sent to {to} via {via}{' in-thread' if reply_to else ''}")
-            if attempt > 1:
-                print(f"  (succeeded on retry {attempt})")
-            return data
-
-        except Exception as e:
-            last_error = str(e)
-            print(f"❌ Send exception (attempt {attempt}/3): {e}")
-            if attempt == 3:
-                _log_delivery_crash(to, subject, {"error": str(e)}, attempt)
-
-    # All 3 attempts failed
-    print(f"❌❌ All 3 attempts failed for {to}")
-    return {"ok": False, "status": "failed", "error": str(last_error)}
+        data.setdefault("status", "sent")
+        data["ok"] = True
+        if thread_id:
+            data.setdefault("thread_id", thread_id)
+        print(f"✅ Sent to {to} via agentmail{' in-thread' if reply_to else ''}")
+        return data
+    except Exception as exc:
+        print(f"❌ Send exception: {exc}")
+        _log_delivery_crash(to, subject, {"error": str(exc)}, 1)
+        return {"ok": False, "status": "deferred", "error": str(exc)}
 
 
 def _log_delivery_crash(to, subject, data, attempt):

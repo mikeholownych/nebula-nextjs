@@ -4,14 +4,14 @@ AgentMail REST API Client — v0
 Replaces all IMAP polling. Single source of truth for email ops.
 
 API base: https://api.agentmail.to/v0
-Inbox:    ops@launchcrate.io
+Inbox:    nebulashop@agentmail.to
 Key:      ~/.hermes/secrets/agentmail_org.key
 
 Usage:
     from agentmail_client import AgentMailClient
     am = AgentMailClient()
     threads = am.list_threads(labels=["received"])
-    am.reply(message_id, text="...")
+    am.reply(message_id, recipient="lead@example.com", text="...")
     am.label_thread(thread_id, add=["warm"])
 """
 
@@ -20,10 +20,13 @@ import os
 import urllib.parse
 import urllib.request
 import urllib.error
+import hashlib
 from datetime import datetime, timezone
-from typing import Optional
+from typing import Callable, Optional
 
-INBOX = "ops@launchcrate.io"
+from outbound_release_gate import DeliveryPurpose, OutboundReleaseGate
+
+INBOX = "nebulashop@agentmail.to"
 BASE  = "https://api.agentmail.to/v0"
 
 # Nebula state labels (custom — system labels like sent/received are read-only)
@@ -38,9 +41,17 @@ LABEL_OUTREACH   = "targeted-outreach"
 
 
 class AgentMailClient:
-    def __init__(self, inbox: str = INBOX, key_path: str = "~/.hermes/secrets/agentmail_org.key"):
+    def __init__(
+        self,
+        inbox: str = INBOX,
+        key_path: str = "~/.hermes/secrets/agentmail_org.key",
+        *,
+        key: Optional[str] = None,
+        gate: Optional[OutboundReleaseGate] = None,
+        transport: Optional[Callable[[str, str, Optional[dict]], dict]] = None,
+    ):
         self.inbox = inbox
-        key = os.environ.get("AGENTMAIL_API_KEY") or os.environ.get("AM_KEY")
+        key = key or os.environ.get("AGENTMAIL_API_KEY") or os.environ.get("AM_KEY")
         if not key:
             expanded = os.path.expanduser(key_path)
             candidates = [expanded]
@@ -54,10 +65,24 @@ class AgentMailClient:
             if not key:
                 raise FileNotFoundError(f"AgentMail key not found in: {', '.join(candidates)}")
         self.key = key
+        self.gate = gate or OutboundReleaseGate()
+        self.__transport = transport or self.__http_transport
 
     # ─── Core HTTP ────────────────────────────────────────────────────────────
 
+    @staticmethod
+    def _is_delivery_endpoint(method: str, path: str) -> bool:
+        return method.upper() == "POST" and (
+            path.endswith("/messages/send") or path.endswith("/reply")
+        )
+
     def _req(self, method: str, path: str, data: dict = None) -> dict:
+        """Generic read/control request; direct delivery endpoints are forbidden."""
+        if self._is_delivery_endpoint(method, path):
+            return {"_error": "release_blocked", "_reason": "direct_delivery_forbidden"}
+        return self.__transport(method, path, data)
+
+    def __http_transport(self, method: str, path: str, data: Optional[dict] = None) -> dict:
         url = f"{BASE}{path}"
         payload = json.dumps(data).encode() if data else None
         req = urllib.request.Request(
@@ -134,44 +159,141 @@ class AgentMailClient:
         safe_id = urllib.parse.quote(message_id, safe='')
         return self._req("GET", f"/inboxes/{self.inbox}/messages/{safe_id}")
 
-    def send(self, to: list, subject: str, text: str = None, html: str = None,
-             client_id: str = None) -> dict:
-        """Send a new email. to = list of email strings.
-        Auto-falls back to Resend if AgentMail returns 5xx or network error.
-        403 (recipient suppressed) is NOT retried via backup — it means blocked.
-        """
-        data = {"to": to, "subject": subject}
-        if text: data["text"] = text
-        if html: data["html"] = html
-        if client_id: data["client_id"] = client_id  # idempotency key
-        result = self._req("POST", f"/inboxes/{self.inbox}/messages/send", data)
+    def __send_scoped(
+        self,
+        to: list,
+        subject: str,
+        *,
+        purpose: DeliveryPurpose,
+        text: Optional[str] = None,
+        html: Optional[str] = None,
+        client_id: Optional[str] = None,
+        labels: Optional[list] = None,
+    ) -> dict:
+        if len(to) != 1 or not isinstance(to[0], str):
+            return {"_error": "release_blocked", "_reason": "single_recipient_required"}
+        recipient = to[0].strip().lower()
+        if not client_id:
+            digest = hashlib.sha256(
+                f"{recipient}\0{subject}\0{text or ''}\0{html or ''}".encode()
+            ).hexdigest()[:24]
+            prefix = {
+                DeliveryPurpose.MARKETING: "auto",
+                DeliveryPurpose.AUDIT_DELIVERY: "audit",
+                DeliveryPurpose.CONVERSATION_REPLY: "conversation",
+                DeliveryPurpose.INTERNAL: "internal",
+            }[purpose]
+            client_id = f"{prefix}:{digest}"
 
-        # 403 = recipient suppressed — do not retry via backup
-        if result.get("_error") == 403:
-            return result
+        decision = self.gate.reserve(recipient, client_id, purpose=purpose)
+        if not decision.allowed:
+            return {
+                "_error": "release_blocked",
+                "_reason": decision.reason,
+                "client_id": client_id,
+            }
+        validation = self.gate.validate(client_id)
+        if not validation.allowed:
+            return {
+                "_error": "release_blocked",
+                "_reason": validation.reason,
+                "client_id": client_id,
+            }
 
-        # 5xx or network error — failover to Resend
-        err = result.get("_error")
-        if err and isinstance(err, int) and err >= 500:
-            try:
-                import resend_client as _resend
-                body = text or ""
-                backup = _resend.send(to=to, subject=subject, text=body)
-                if backup.get("message_id"):
-                    backup["_via"] = "resend_backup"
-                    return backup
-            except Exception as fe:
-                result["_failover_error"] = str(fe)
-
+        data = {"to": [recipient], "subject": subject, "client_id": client_id}
+        if text:
+            data["text"] = text
+        if html:
+            data["html"] = html
+        if labels:
+            data["labels"] = labels
+        result = self.__transport("POST", f"/inboxes/{self.inbox}/messages/send", data)
+        error = result.get("_error")
+        self.gate.complete(client_id, sent=not bool(error), reason=str(error or ""))
+        result.setdefault("client_id", client_id)
         return result
 
-    def reply(self, message_id: str, text: str = None, html: str = None) -> dict:
-        """Reply to a specific message (preserves thread/In-Reply-To headers)."""
+    def send(
+        self,
+        to: list,
+        subject: str,
+        text: Optional[str] = None,
+        html: Optional[str] = None,
+        client_id: Optional[str] = None,
+        labels: Optional[list] = None,
+    ) -> dict:
+        """Send marketing email through the centralized release gate."""
+        return self.__send_scoped(
+            to,
+            subject,
+            text=text,
+            html=html,
+            client_id=client_id,
+            labels=labels,
+            purpose=DeliveryPurpose.MARKETING,
+        )
+
+    def send_audit(self, to: list, subject: str, **kwargs) -> dict:
+        """Deliver a requested audit to a known lead."""
+        return self.__send_scoped(
+            to, subject, purpose=DeliveryPurpose.AUDIT_DELIVERY, **kwargs
+        )
+
+    def send_conversation(self, to: list, subject: str, **kwargs) -> dict:
+        """Send a direct response to a known inbound conversation."""
+        return self.__send_scoped(
+            to, subject, purpose=DeliveryPurpose.CONVERSATION_REPLY, **kwargs
+        )
+
+    def send_internal(self, to: list, subject: str, **kwargs) -> dict:
+        """Send only to a configured internal recipient."""
+        return self.__send_scoped(
+            to, subject, purpose=DeliveryPurpose.INTERNAL, **kwargs
+        )
+
+    def reply(
+        self,
+        message_id: str,
+        *,
+        recipient: Optional[str] = None,
+        text: Optional[str] = None,
+        html: Optional[str] = None,
+        client_id: Optional[str] = None,
+    ) -> dict:
+        """Reply in-thread through the centralized release gate."""
+        if not recipient:
+            return {"_error": "release_blocked", "_reason": "recipient_required"}
+        recipient = recipient.strip().lower()
+        client_id = client_id or f"reply:{hashlib.sha256(message_id.encode()).hexdigest()[:24]}"
+        decision = self.gate.reserve(
+            recipient, client_id, purpose=DeliveryPurpose.CONVERSATION_REPLY
+        )
+        if not decision.allowed:
+            return {
+                "_error": "release_blocked",
+                "_reason": decision.reason,
+                "client_id": client_id,
+            }
+        validation = self.gate.validate(client_id)
+        if not validation.allowed:
+            return {
+                "_error": "release_blocked",
+                "_reason": validation.reason,
+                "client_id": client_id,
+            }
         data = {}
-        if text: data["text"] = text
-        if html: data["html"] = html
+        if text:
+            data["text"] = text
+        if html:
+            data["html"] = html
         safe_id = urllib.parse.quote(message_id, safe='')
-        return self._req("POST", f"/inboxes/{self.inbox}/messages/{safe_id}/reply", data)
+        result = self.__transport(
+            "POST", f"/inboxes/{self.inbox}/messages/{safe_id}/reply", data
+        )
+        error = result.get("_error")
+        self.gate.complete(client_id, sent=not bool(error), reason=str(error or ""))
+        result.setdefault("client_id", client_id)
+        return result
 
     # ─── Webhooks ─────────────────────────────────────────────────────────────
 

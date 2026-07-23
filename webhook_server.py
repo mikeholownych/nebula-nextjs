@@ -382,7 +382,17 @@ def _process_inbound_reply(thread_id, message_id, sender, subject, preview, clas
             lead_url = _extract_url(subject, preview)
 
             if _is_payment_intent(subject, preview):
-                am.reply(message_id, text=f"You can start the $147 implementation here: {CHECKOUT_97}")
+                reply_result = am.reply(
+                    message_id,
+                    recipient=email,
+                    text=f"You can start the $97 implementation here: {CHECKOUT_97}",
+                )
+                if reply_result.get("_error"):
+                    print(
+                        f"[agentmail] payment-intent reply blocked for {sender}: "
+                        f"{reply_result.get('_reason') or reply_result.get('_error')}"
+                    )
+                    return
                 am.label_thread(thread_id, add=["pitched"])
                 _upsert_hot_lead({
                     "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -398,7 +408,7 @@ def _process_inbound_reply(thread_id, message_id, sender, subject, preview, clas
                     "action": "monitor_payment_or_reply",
                     "pitch_sent_at": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
                 })
-                print(f"[agentmail] $147 payment-intent reply sent to {sender}")
+                print(f"[agentmail] $97 payment-intent reply sent to {sender}")
                 return
 
             # Write a hot-lead signal file for the watcher to deliver or request URL.

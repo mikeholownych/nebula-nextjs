@@ -3,8 +3,7 @@ AgentMail Email Service
 Sends audit results and follow-up emails
 """
 
-import os
-import httpx
+import asyncio
 from typing import Optional, List
 from pydantic import BaseModel
 
@@ -22,9 +21,7 @@ class EmailService:
     """AgentMail email sending service"""
     
     def __init__(self):
-        self.api_key = os.popen("cat ~/.hermes/secrets/agentmail.key").read().strip()
-        self.inbox_id = os.getenv("AGENTMAIL_INBOX_ID", "nebulashop@agentmail.to")
-        self.base_url = "https://api.agentmail.to/v0"
+        self.inbox_id = "nebulashop@agentmail.to"
     
     async def send_audit_results(self, data: AuditEmailData) -> dict:
         """Send audit results email"""
@@ -60,11 +57,7 @@ class EmailService:
             
             <div style="background: #f5f5f5; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
                 <h3 style="margin-top: 0;">Ready to fix these issues?</h3>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin: 0.5rem 0;">✅ <strong>$7</strong> — Top 3 fixes you can do today</li>
-                    <li style="margin: 0.5rem 0;">✅ <strong>$147</strong> — Full audit + rewritten copy + guide</li>
-                    <li style="margin: 0.5rem 0;">✅ <strong>$1,497</strong> — Complete rebuild + 30-day monitoring</li>
-                </ul>
+                <p><strong>$97 Fix Pack</strong> — implementation of the highest-impact conversion fixes.</p>
                 <p style="margin-bottom: 0;">
                     <a href="https://nebulacomponents.shop/audit" style="color: #667eea;">Get started →</a>
                 </p>
@@ -94,9 +87,7 @@ Top Prioritized Fixes:
 {chr(10).join([f"- {f.get('label', f.get('key'))}: {f.get('issue', '')}" for f in data.findings[:3]])}
 
 Ready to fix these?
-- $7 — Top 3 fixes you can do today
-- $147 — Full audit + rewritten copy + guide  
-- $1,497 — Complete rebuild + 30-day monitoring
+- $97 Fix Pack — implementation of the highest-impact conversion fixes
 
 Get started: https://nebulacomponents.shop/audit
 
@@ -104,28 +95,41 @@ Get started: https://nebulacomponents.shop/audit
 Nebula Components — Conversion optimization for founders
         """.strip()
         
-        # Send via AgentMail API
-        async with httpx.AsyncClient() as client:
-            response = await client.post(
-                f"{self.base_url}/inboxes/{self.inbox_id}/messages/send",
-                headers={
-                    "Authorization": f"Bearer {self.api_key}",
-                    "Content-Type": "application/json",
-                },
-                json={
-                    "to": data.email,
-                    "subject": f"Your Audit Results: {data.url} scored {data.score:.1f}/10",
-                    "text": text_body,
-                    "html": html_body,
-                },
-                timeout=30.0,
+        # Register the inbound audit request before the fail-closed gate checks identity.
+        from agentmail_client import AgentMailClient
+        from lead_store import LeadStore
+
+        store = LeadStore()
+        await asyncio.to_thread(
+            store.upsert_lead,
+            email=data.email,
+            url=data.url,
+            stage="discovered",
+            source="audit_request",
+            trigger_context="requested_platform_audit",
+        )
+        result = await asyncio.to_thread(
+            AgentMailClient(inbox=self.inbox_id).send_audit,
+            to=[data.email],
+            subject=f"Your Audit Results: {data.url} scored {data.score:.1f}/10",
+            text=text_body,
+            html=html_body,
+        )
+        if not result.get("_error"):
+            await asyncio.to_thread(
+                store.upsert_lead,
+                email=data.email,
+                url=data.url,
+                stage="audit_delivered",
+                source="audit_request",
+                audit_score=data.score,
+                audit_grade=data.grade,
             )
-            
-            return {
-                "status": "sent" if response.status_code == 200 else "failed",
-                "message_id": response.json().get("message_id") if response.status_code == 200 else None,
-                "error": response.text if response.status_code != 200 else None,
-            }
+        return {
+            "status": "failed" if result.get("_error") else "sent",
+            "message_id": result.get("message_id") or result.get("id"),
+            "error": result.get("_reason") or result.get("_error"),
+        }
 
 
 # Singleton instance

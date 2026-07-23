@@ -270,7 +270,7 @@ def config() -> dict[str, Any]:
             ],
         },
         "primary_cta": {"label": "Run the free audit", "href": "/audit"},
-        "secondary_cta": {"label": "Buy the $147 Fix Pack", "href": "https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"},
+        "secondary_cta": {"label": "Buy the $97 Fix Pack", "href": "https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"},
         "policy": {
             "free_for_life_entry": True,
             "resources_point_to_audit_or_draft_assets": True,
@@ -351,10 +351,10 @@ def specialist_agent_library_page(resource: Resource) -> str:
     </section>
     <section class="panel cta-panel">
       <h2>Want this installed instead of documented?</h2>
-      <p>Start with the audit. If the handoff leak is obvious, the $147 Fix Pack turns it into a working operating system.</p>
+      <p>Start with the audit. If the handoff leak is obvious, the $97 Fix Pack turns it into a working operating system.</p>
       <div class="actions">
         <a class="button" href="/audit">Run the free audit</a>
-        <a class="button secondary" href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b">Buy the $147 Fix Pack</a>
+        <a class="button secondary" href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b">Buy the $97 Fix Pack</a>
       </div>
     </section>
   </main>
@@ -428,7 +428,7 @@ def problem_page(problem: ProblemPage) -> str:
     </section>
     <section class="panel cta-panel">
       <h2>Find the leak on your page</h2>
-      <p>Run the free Nebula audit first. Buy the $147 Fix Pack only when the leak is obvious.</p>
+      <p>Run the free Nebula audit first. Buy the $97 Fix Pack only when the leak is obvious.</p>
       <div class="actions">
         <a class="button" href="/audit">{html.escape(problem.cta)}</a>
         <a class="button secondary" href="/learning-center/paid-traffic-leak-map">Open leak map</a>

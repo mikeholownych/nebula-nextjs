@@ -32,25 +32,23 @@ def test_tunnel_endpoint():
     except:
         return False
 
-def test_smtp_credentials():
-    """Check SMTP credentials file"""
-    cred_file = Path("/home/mike/.hermes/secrets/agentmail.key")
-    if not cred_file.exists():
-        return False
-    content = cred_file.read_text().strip()
-    return content.startswith("am_us_") and len(content) >= 60
-
-def test_smtp_connectivity():
-    """Check SMTP connectivity"""
+def test_agentmail_credentials():
+    """Check AgentMail REST credentials can initialize the canonical client."""
     try:
-        import smtplib, ssl
-        cred_file = Path("/home/mike/.hermes/secrets/agentmail.key")
-        key = cred_file.read_text().strip()
-        ctx = ssl.create_default_context()
-        with smtplib.SMTP_SSL("smtp.agentmail.to", 465, context=ctx) as s:
-            s.login("templates@agentmail.to", key)
-            return True
-    except Exception as e:
+        from agentmail_client import AgentMailClient
+        AgentMailClient(inbox="nebulashop@agentmail.to")
+        return True
+    except Exception:
+        return False
+
+def test_agentmail_connectivity():
+    """Check AgentMail REST connectivity without sending."""
+    try:
+        from agentmail_client import AgentMailClient
+        client = AgentMailClient(inbox="nebulashop@agentmail.to")
+        result = client._req("GET", "/inboxes/nebulashop@agentmail.to/threads?limit=1")
+        return not bool(result.get("_error"))
+    except Exception:
         return False
 
 def test_wave1_results():
@@ -64,9 +62,11 @@ def test_wave2_script():
     return script.exists()
 
 def test_auto_responder():
-    """Check auto-responder script exists"""
-    script = Path("/home/mike/nebula/auto_responder_dual_inbox.py")
-    return script.exists()
+    """Check centralized release gate exists."""
+    return (
+        Path("/home/mike/nebula/agentmail_client.py").exists()
+        and Path("/home/mike/nebula/outbound_release_gate.py").exists()
+    )
 
 def test_cron_jobs():
     """Check cron jobs deployed"""
@@ -92,11 +92,11 @@ def run_all_checks():
     checks = [
         ("Local Endpoint (8765)", test_local_endpoint),
         ("Cloudflare Tunnel", test_tunnel_endpoint),
-        ("SMTP Credentials File", test_smtp_credentials),
-        ("SMTP Connectivity", test_smtp_connectivity),
+        ("AgentMail REST Credentials", test_agentmail_credentials),
+        ("AgentMail REST Connectivity", test_agentmail_connectivity),
         ("Wave 1 Results", test_wave1_results),
         ("Wave 2 Script Ready", test_wave2_script),
-        ("Auto-Responder Script", test_auto_responder),
+        ("Central Outbound Release Gate", test_auto_responder),
         ("Cron Jobs Deployed", test_cron_jobs),
         ("Tracking Log Ready", test_tracking_log),
         ("Tunnel Metrics Ready", test_tunnel_metrics),

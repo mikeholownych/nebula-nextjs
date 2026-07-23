@@ -12,6 +12,14 @@ interface Finding {
   quadrant: string
   issue: string
   fix: string
+  evidence?: {
+    measured: string
+    required: string
+    delta: string
+    selector: string
+    confidence: 'definitive' | 'high' | 'contextual' | 'error'
+    timestamp: string
+  }
 }
 
 interface AuditResult {
@@ -352,6 +360,37 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                     <p className="text-fg">
                       <strong>Fix:</strong> {finding.fix}
                     </p>
+
+                    {/* Evidence block — shown when audit engine provides measurement data */}
+                    {finding.evidence && (
+                      <details className="mt-3 group">
+                        <summary className="flex cursor-pointer items-center gap-2 text-xs font-semibold uppercase tracking-wider text-fg-muted hover:text-fg">
+                          <span className={`inline-block h-1.5 w-1.5 rounded-full ${
+                            finding.evidence.confidence === 'definitive' ? 'bg-danger' :
+                            finding.evidence.confidence === 'high'       ? 'bg-warning' :
+                            finding.evidence.confidence === 'contextual' ? 'bg-accent' :
+                            'bg-fg-muted'
+                          }`} />
+                          Evidence
+                          <span className={`ml-auto rounded px-1.5 py-0.5 text-[10px] font-medium ${
+                            finding.evidence.confidence === 'definitive' ? 'bg-danger/10 text-danger' :
+                            finding.evidence.confidence === 'high'       ? 'bg-warning/10 text-warning' :
+                            'bg-accent/10 text-accent'
+                          }`}>
+                            {finding.evidence.confidence}
+                          </span>
+                        </summary>
+                        <div className="mt-2 rounded-lg border border-border bg-bg p-3 font-mono text-[11px] leading-relaxed text-fg-muted space-y-1.5">
+                          <div><span className="text-fg-muted/60">measured  </span><span className="text-fg">{finding.evidence.measured}</span></div>
+                          <div><span className="text-fg-muted/60">required  </span><span className="text-fg">{finding.evidence.required}</span></div>
+                          <div><span className="text-fg-muted/60">delta     </span><span className="text-accent">{finding.evidence.delta}</span></div>
+                          {finding.evidence.selector !== 'N/A' && (
+                            <div><span className="text-fg-muted/60">selector  </span><code className="text-fg-muted">{finding.evidence.selector}</code></div>
+                          )}
+                          <div className="pt-1 border-t border-border/50 text-fg-muted/50 text-[10px]">{finding.evidence.timestamp}</div>
+                        </div>
+                      </details>
+                    )}
                   </div>
                 ) : (
                   <div className="flex items-center justify-between">
