@@ -263,7 +263,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-bg px-6 py-12">
+      <main id="main-content" className="min-h-screen bg-bg px-6 py-12">
         <div className="mx-auto max-w-2xl text-center">
           <div className="animate-pulse text-2xl text-fg-muted">Loading results...</div>
         </div>
@@ -273,7 +273,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
 
   if (error || !results) {
     return (
-      <main className="min-h-screen bg-bg px-6 py-12">
+      <main id="main-content" className="min-h-screen bg-bg px-6 py-12">
         <div className="mx-auto max-w-2xl text-center">
           <Card variant="elevated">
             <h1 className="mb-4 text-2xl font-bold text-fg">Error Loading Results</h1>
@@ -285,7 +285,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
   }
 
   return (
-    <main className="min-h-screen bg-bg px-6 py-12">
+    <main id="main-content" className="min-h-screen bg-bg px-6 py-12">
       <div className="mx-auto max-w-2xl">
         {/* Header */}
         <div className="mb-8 text-center">
@@ -381,13 +381,13 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                           </span>
                         </summary>
                         <div className="mt-2 rounded-lg border border-border bg-bg p-3 font-mono text-[11px] leading-relaxed text-fg-muted space-y-1.5">
-                          <div><span className="text-fg-muted/60">measured  </span><span className="text-fg">{finding.evidence.measured}</span></div>
-                          <div><span className="text-fg-muted/60">required  </span><span className="text-fg">{finding.evidence.required}</span></div>
-                          <div><span className="text-fg-muted/60">delta     </span><span className="text-accent">{finding.evidence.delta}</span></div>
+                          <div><span className="text-fg-muted">measured  </span><span className="text-fg">{finding.evidence.measured}</span></div>
+                          <div><span className="text-fg-muted">required  </span><span className="text-fg">{finding.evidence.required}</span></div>
+                          <div><span className="text-fg-muted">delta     </span><span className="text-accent">{finding.evidence.delta}</span></div>
                           {finding.evidence.selector !== 'N/A' && (
-                            <div><span className="text-fg-muted/60">selector  </span><code className="text-fg-muted">{finding.evidence.selector}</code></div>
+                            <div><span className="text-fg-muted">selector  </span><code className="text-fg-muted">{finding.evidence.selector}</code></div>
                           )}
-                          <div className="pt-1 border-t border-border/50 text-fg-muted/50 text-[10px]">{finding.evidence.timestamp}</div>
+                          <div className="pt-1 border-t border-border/50 text-fg-muted text-[10px]">{finding.evidence.timestamp}</div>
                         </div>
                       </details>
                     )}

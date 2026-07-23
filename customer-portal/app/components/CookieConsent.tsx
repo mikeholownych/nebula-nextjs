@@ -113,7 +113,7 @@ export default function CookieConsent() {
               You can accept all cookies or only essential ones.{" "}
               <a
                 href="/privacy-policy"
-                className="text-emerald-400 hover:underline focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
+                className="text-emerald-400 underline underline-offset-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
               >
                 Privacy Policy
               </a>

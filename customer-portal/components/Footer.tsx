@@ -46,7 +46,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-fg-dim">
+          <p className="text-xs text-fg-muted">
             © {new Date().getFullYear()} Nebula Components. All rights reserved.
           </p>
           <div className="flex gap-5">
