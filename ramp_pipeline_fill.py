@@ -524,7 +524,7 @@ def scrape_icp_via_google(token: str = None) -> list:
     Uses duckduckgo_search (ddgs) library — free, no rate limits at modest volume.
     Falls back to requests-based DDG HTML scrape if library unavailable.
     """
-    from ddgs.ddgs import DDGS
+    from duckduckgo_search import DDGS
     
     # Rotate queries for this run
     queries = pick_google_queries()

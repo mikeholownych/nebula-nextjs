@@ -32,6 +32,12 @@ Load these on demand:
 discovered → site_found → contacted → audit_delivered → pitch_sent → paid
 Terminal: dead, bounced, max_retries_exceeded
 
+## Pre-commit Content Checks
+Before committing any `.tsx`/`.mdx` content file:
+- `grep -nP '[\x{2580}-\x{259F}\x{FFFD}\x{25A0}-\x{25FF}]' <file>` — block/corruption chars (must return 0 lines)
+- `grep -nP '[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]' <file>` — control chars (must return 0 lines)
+- Drift surfaces: `$97`, `48 hours`, `7 conversion signals` — verify against canonical before commit
+
 ## Things I Get Wrong Without Reminders
 - **Bounce check placement:** `LeadStore.is_bounced(email)` in BOTH `process_hot_lead_pitches()` AND `ramp_pipeline_fill.py`
 - **Lock file cleanup:** ALL `flock` scripts MUST have `trap 'rm -f "$LOCK"' EXIT`

@@ -3417,7 +3417,7 @@
     "current_stage": "lead_audit",
     "email": "pending@example.com",
     "first_seen": "2026-07-18T01:26:23.082723Z",
-    "last_seen": "2026-07-18T03:54:38.154283Z",
+    "last_seen": "2026-07-22T23:55:43.728722Z",
     "name": "",
     "notes": "",
     "nurture_track": "headline-clarity",
@@ -3433,10 +3433,10 @@
     ],
     "tags": [],
     "total_spent_cents": 0,
-    "track_audit_id": "88bc815b-d894-484e-88d7-4013f1e36a77",
+    "track_audit_id": "258e21a6-d7c7-4da5-9c71-f6bc7eb97e1b",
     "track_position_days": 0,
-    "track_started_at": "2026-07-18T03:54:38.154283Z",
-    "url": "https://gofaultline.dev"
+    "track_started_at": "2026-07-22T23:55:43.728722Z",
+    "url": "https://example.com"
   },
   "quietpulse.social@gmail.com": {
     "content_posts": [],
