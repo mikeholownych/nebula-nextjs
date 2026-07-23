@@ -55,9 +55,21 @@ def _extract_inline_colors(element) -> tuple[str | None, str | None]:
     Returns (fg_hex, bg_hex) — either may be None.
     """
     style = element.get("style", "") if element else ""
-    fg = re.search(r'color\s*:\s*(#[0-9a-fA-F]{3,6})', style)
-    bg = re.search(r'background(?:-color)?\s*:\s*(#[0-9a-fA-F]{3,6})', style)
-    return (fg.group(1) if fg else None, bg.group(1) if bg else None)
+    declarations = {}
+    for declaration in style.split(";"):
+        name, separator, value = declaration.partition(":")
+        if separator:
+            declarations[name.strip().lower()] = value.strip()
+
+    def _hex_value(value: str) -> str | None:
+        match = re.search(r"#[0-9a-fA-F]{3}(?:[0-9a-fA-F]{3})?\b", value)
+        return match.group(0) if match else None
+
+    foreground = _hex_value(declarations.get("color", ""))
+    background = _hex_value(
+        declarations.get("background-color", declarations.get("background", ""))
+    )
+    return foreground, background
 
 
 # ── Per-dimension evidence builders ───────────────────────────────────────────
@@ -109,7 +121,7 @@ def _evidence_cta(soup: BeautifulSoup, dim: dict) -> dict:
     # Find all primary CTA candidates
     cta_elements = soup.find_all("button") + soup.find_all(
         "a", href=lambda h: h and any(
-            x in h for x in ["buy", "get", "start", "checkout", "order", "signup", "sign-up"]
+            x in h.lower() for x in ["buy", "get", "start", "checkout", "order", "signup", "sign-up"]
         )
     )
     weak_verbs = {"learn more", "click here", "submit", "go", "next", "continue", "ok"}
@@ -147,6 +159,9 @@ def _evidence_cta(soup: BeautifulSoup, dim: dict) -> dict:
                 "confidence": "high",
                 "timestamp":  ts,
             }
+        # A link/button exists but its href did not identify it as a primary CTA.
+        # Preserve contextual evidence instead of indexing an empty candidate list.
+        cta_elements = [all_ctas[0][1]]
 
     # CTA exists — check contrast if inline colours available
     el = cta_elements[0]
@@ -194,19 +209,19 @@ def _evidence_above_fold(soup: BeautifulSoup, dim: dict, html_text: str) -> dict
 
     if not missing:
         return {
-            "measured":   "H1, CTA, and price signal all present in first 3,000 chars of HTML",
-            "required":   "All three above the fold (≤3,000 chars / first viewport)",
-            "delta":      "No structural gap detected — issue may be visual hierarchy",
+            "measured":   "Early HTML proxy: H1, CTA, and price signal present in first 3,000 source chars",
+            "required":   "Rendered viewport inspection is required; source order is not a rendered viewport measurement",
+            "delta":      "No source-order gap detected — visual hierarchy remains unverified",
             "selector":   "body > :first-child",
             "confidence": "contextual",
             "timestamp":  ts,
         }
     return {
-        "measured":   f"First 3,000 chars of HTML missing: {', '.join(missing)}",
-        "required":   "H1 + primary CTA + price/offer signal all within first viewport",
-        "delta":      f"Visitor sees content without {' or '.join(missing)} — exits before scrolling",
+        "measured":   f"Early HTML proxy missing: {', '.join(missing)} in first 3,000 source chars",
+        "required":   "Rendered viewport inspection is required; source order is not a rendered viewport measurement",
+        "delta":      f"Source order suggests missing {' or '.join(missing)}; rendered position remains unverified",
         "selector":   "body",
-        "confidence": "high",
+        "confidence": "contextual",
         "timestamp":  ts,
     }
 
@@ -317,10 +332,10 @@ def _evidence_ad_signals(soup: BeautifulSoup, dim: dict, lower: str) -> dict:
     ts = _now_iso()
     checks = {
         "Facebook Pixel":    bool(re.search(r'fbq\(|facebook\.net/tr|connect\.facebook\.net', lower)),
-        "GA4":               bool(re.search(r'gtag\(|G-[A-Z0-9]{6,}|google-analytics', lower)),
+        "GA4":               bool(re.search(r'gtag\(|g-[a-z0-9]{6,}|google-analytics', lower)),
         "UTM parameters":    bool(re.search(r'utm_source|utm_medium|utm_campaign', lower)),
         "Thank-you page":    bool(re.search(r'thank.?you|order.?confirm|success|receipt', lower)),
-        "Conversion event":  bool(re.search(r'Purchase|CompleteRegistration|Lead|fbq\(.track', lower)),
+        "Conversion event":  bool(re.search(r'purchase|completeregistration|lead|fbq\(.track', lower)),
     }
     missing = [k for k, v in checks.items() if not v]
     present = [k for k, v in checks.items() if v]
