@@ -1,0 +1,21 @@
+[Unit]
+Description=Nebula MCP Server
+After=network.target nebula-platform-api.service
+Wants=nebula-platform-api.service
+
+[Service]
+Type=simple
+User=mike
+Group=mike
+WorkingDirectory=/home/mike/nebula
+ExecStart=/home/mike/nebula/venv/bin/python3 /home/mike/nebula/mcp_server.py --http --host 127.0.0.1 --port 8002
+Restart=always
+RestartSec=5
+TimeoutStartSec=30
+TimeoutStopSec=10
+
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
