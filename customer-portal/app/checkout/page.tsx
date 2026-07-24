@@ -6,7 +6,7 @@ import CheckoutCTAButton from './CheckoutCTAButton'
 export const metadata: Metadata = {
   title: 'Checkout — Nebula Conversion Fix Pack | Nebula Components',
   description:
-    'Purchase the Nebula Conversion Fix Pack for $97. One-time payment via Stripe. Landing page audit and implementation delivered in 24–48 hours.',
+    'Purchase the Nebula Conversion Fix Pack for $97. One-time payment via Stripe. Landing page audit and a full AI prompt pack delivered by email within minutes.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/checkout',
   },
@@ -32,9 +32,8 @@ export default function CheckoutPage() {
             {[
               'Full 7-point landing page audit',
               'Written diagnosis with prioritised fix list',
-              'Implementation of all identified conversion fixes',
-              'Before/after comparison delivered via email',
-              '30-day re-audit if conversion does not improve',
+              'A tailored AI prompt for every finding, built from your actual page',
+              '30-day free re-audit to see what changed',
             ].map((item) => (
               <li key={item} className="flex items-start gap-2">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
@@ -67,15 +66,14 @@ export default function CheckoutPage() {
         <section className="mt-12 border-t border-border pt-8 text-sm text-fg-muted">
           <h2 className="mb-3 text-base font-semibold text-fg">What happens after you pay</h2>
           <p className="mb-3">
-            After completing checkout you will receive a confirmation email with next steps. The audit
-            and implementation process takes 24–48 hours from the moment you submit your landing page
-            URL. You will receive a written diagnosis, a prioritised fix list, and a before/after
-            comparison showing every change made.
+            Within minutes of payment, you&apos;ll get an email with the full audit findings and a
+            complete AI prompt pack — one prompt per issue found, pre-filled with the specifics of
+            your actual page. Paste them into Claude, ChatGPT, or hand them to your own developer.
           </p>
           <p className="mb-3">
-            The Fix Pack includes implementation — not just a report. Every identified conversion leak
-            is fixed directly on your page. If your conversion rate does not improve within 30 days,
-            we run a second audit at no additional cost.
+            We never ask for access to your site, CMS, or hosting — you stay in control of what
+            gets changed and when. You can request one free re-audit within 30 days to see what
+            changed and what&apos;s still open.
           </p>
           <h2 className="mb-3 mt-6 text-base font-semibold text-fg">Payment and security</h2>
           <p>

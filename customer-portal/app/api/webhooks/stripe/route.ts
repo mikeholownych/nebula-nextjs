@@ -21,6 +21,24 @@ async function sendSaleAlert(message: string): Promise<void> {
   }
 }
 
+// Fulfillment: the Fix Pack offer is the audit + a full AI prompt pack, not
+// bespoke implementation — see scripts/deliver_prompt_pack.py for why and
+// how. Runs in the background (not awaited) so the webhook response to
+// Stripe isn't held up by a live re-scrape + email send; the script is
+// idempotent (checks the customer ledger before sending) so a Stripe
+// webhook retry can't cause a duplicate delivery.
+async function deliverPromptPack(email: string): Promise<void> {
+  try {
+    await execFileAsync(
+      '/home/mike/nebula/venv/bin/python3',
+      ['/home/mike/nebula/scripts/deliver_prompt_pack.py', '--email', email],
+      { timeout: 120_000 }
+    )
+  } catch (err) {
+    console.error('Prompt pack fulfillment failed:', err)
+  }
+}
+
 /**
  * Stripe webhook handler
  * POST /api/webhooks/stripe
@@ -110,6 +128,18 @@ export async function POST(request: NextRequest) {
         `💰 *SALE* — ${amount} — ${session.metadata?.offer_key ?? 'unknown offer'} — ${session.customer_email ?? 'no email'}\n` +
         `session: ${session.id}`
       )
+
+      // Not gated on metadata.offer_key: the live checkout page
+      // (app/checkout/page.tsx) links straight to a Stripe-hosted Payment
+      // Link, not through /api/checkout, so whether that link's dashboard
+      // config actually sets offer_key can't be verified from this repo.
+      // This is the only paid product on the entire site (every
+      // customer-facing page links the same Stripe URL) — safe to trigger
+      // fulfillment on any real purchase with an email rather than risk
+      // silently skipping it over unverifiable metadata.
+      if (session.customer_email) {
+        void deliverPromptPack(session.customer_email)
+      }
     }
 
     if (session.customer_email) {

@@ -545,7 +545,7 @@ class WebhookHandler(BaseHTTPRequestHandler):
                     "email": (customer_email or "").lower(),
                     "stage": "paid",
                     "status": "paid",
-                    "action": "fulfill_implementation",
+                    "action": "deliver_prompt_pack",
                     "paid_at": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
                     "amount_cents": amount_cents,
                     "checkout_session_id": session.id,

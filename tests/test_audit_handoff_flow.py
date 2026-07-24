@@ -143,7 +143,7 @@ class AuditHandoffFlowTests(unittest.TestCase):
             self.assertEqual(ledger_row["payment_id"], "pi_live_123")
             hot = json.loads(hot_file.read_text())[0]
             self.assertEqual(hot["stage"], "paid")
-            self.assertEqual(hot["action"], "fulfill_implementation")
+            self.assertEqual(hot["action"], "deliver_prompt_pack")
 
 
 if __name__ == "__main__":

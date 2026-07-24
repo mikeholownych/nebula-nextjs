@@ -3,11 +3,11 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Free Landing Page Audit — Stop Burning Ad Budget | Nebula Components',
-  description: 'Evidence-backed landing page conversion diagnosis and implementation for founders spending on paid ads with low or zero conversions.',
+  description: 'Evidence-backed landing page conversion diagnosis and an AI prompt pack to fix it yourself — for founders spending on paid ads with low or zero conversions.',
   alternates: { canonical: 'https://nebulacomponents.shop' },
   openGraph: {
     title: 'Free Landing Page Audit — Stop Burning Ad Budget | Nebula Components',
-    description: 'Evidence-backed landing page conversion diagnosis and implementation for founders spending on paid ads with low or zero conversions.',
+    description: 'Evidence-backed landing page conversion diagnosis and an AI prompt pack to fix it yourself — for founders spending on paid ads with low or zero conversions.',
     url: 'https://nebulacomponents.shop',
     siteName: 'Nebula Components',
     locale: 'en_US',
@@ -149,7 +149,7 @@ export default function Home() {
                 {[
                   'Generic report generated in seconds',
                   'Same 8 recommendations for every site',
-                  'No implementation — just a list',
+                  'Vague advice — you have to figure out how to apply it',
                   'Gated behind a sales call',
                   '3-month engagement to see results',
                 ].map((item) => (
@@ -168,7 +168,7 @@ export default function Home() {
                   'Scored against 7 conversion signals',
                   'Prioritized fixes with impact/effort scores',
                   'No signup to see your results',
-                  '$97 Fix Pack implements the top fixes in 7 days',
+                  '$97 Fix Pack: exact AI prompts to fix every issue, in minutes',
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2">
                     <span className="mt-0.5 text-accent">✓</span>

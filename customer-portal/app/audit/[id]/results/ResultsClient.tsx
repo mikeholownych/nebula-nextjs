@@ -425,7 +425,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
         {/* Canonical offer: free audit → $97 Fix Pack */}
         <div className="mt-12 space-y-6">
           <h2 className="text-center text-xl font-bold text-fg">
-            Want Us to Implement These Fixes?
+            Want the Prompts to Fix These Yourself?
           </h2>
 
           <Card variant="bordered" className="relative mx-auto max-w-md overflow-hidden border-accent">
@@ -436,7 +436,8 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
               <h3 className="mb-1 font-bold text-fg">$97 Fix Pack</h3>
               <p className="mb-2 text-2xl font-bold text-accent">$97</p>
               <p className="mb-4 text-sm text-fg-muted">
-                We implement the prioritized conversion fixes from this audit — copy, CTA, proof, and page structure.
+                A tailored AI prompt for every finding in this audit — copy, CTA, proof, and page
+                structure — to paste into Claude, ChatGPT, or hand to your developer. No site access needed.
               </p>
               <a
                 href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
@@ -457,7 +458,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
               <div>
                 <p className="font-semibold text-fg">Know another founder with the same problem?</p>
                 <p className="mt-1 text-sm text-fg-muted">
-                  Forward their site for a free audit — takes 60 seconds. The report names the exact leaks, same as yours.
+                  Forward their site for a free audit — takes a couple of minutes. The report names the exact leaks, same as yours.
                 </p>
               </div>
               <a

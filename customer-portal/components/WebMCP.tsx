@@ -80,7 +80,7 @@ export default function WebMCP() {
             {
               name: 'Conversion Fix Pack',
               price: '$97',
-              description: 'Full audit + implementation of all identified fixes. Delivered in 24–48 hours. One-time payment, no retainer.',
+              description: 'Full audit + a tailored AI prompt pack (one prompt per finding) to resolve every issue yourself via Claude, ChatGPT, or your own developer. Delivered by email within minutes. One-time payment, no retainer, no site access required.',
               url: 'https://nebulacomponents.shop/pricing',
             },
             {
