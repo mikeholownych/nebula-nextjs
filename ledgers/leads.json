@@ -3375,6 +3375,32 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "nav-bug-check@nebulacomponents.shop": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "nav-bug-check@nebulacomponents.shop",
+    "first_seen": "2026-07-24T03:03:10.602856Z",
+    "last_seen": "2026-07-24T03:03:10.602856Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "6e27dfc3-c460-4786-a717-6fb7a1fda131",
+    "track_position_days": 0,
+    "track_started_at": "2026-07-24T03:03:10.602856Z",
+    "url": "https://nebulacomponents.shop"
+  },
   "nedco80@gmail.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -3417,7 +3443,7 @@
     "current_stage": "lead_audit",
     "email": "pending@example.com",
     "first_seen": "2026-07-18T01:26:23.082723Z",
-    "last_seen": "2026-07-24T00:37:22.083414Z",
+    "last_seen": "2026-07-24T02:57:51.543850Z",
     "name": "",
     "notes": "",
     "nurture_track": "headline-clarity",
@@ -3433,10 +3459,10 @@
     ],
     "tags": [],
     "total_spent_cents": 0,
-    "track_audit_id": "536c61ae-eab2-4f4c-8bed-c199e7bc4812",
+    "track_audit_id": "cb25889d-a305-4017-a303-034043d0d98c",
     "track_position_days": 0,
-    "track_started_at": "2026-07-24T00:37:22.083414Z",
-    "url": "https://syndicateclaw.ca/"
+    "track_started_at": "2026-07-24T02:57:51.543850Z",
+    "url": "https://gofaultline.dev"
   },
   "quietpulse.social@gmail.com": {
     "content_posts": [],

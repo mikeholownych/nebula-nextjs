@@ -24,14 +24,14 @@ export default function AuditLayout({ children }: { children: React.ReactNode })
         </p>
         <p className="mb-3">
           Most founders spending on Google or Meta ads assume low conversion rates are an ad problem.
-          In the majority of cases the bottleneck is on the landing page: a headline that does not
+          Very often the bottleneck is on the landing page: a headline that does not
           match the ad copy, a form that appears before any trust has been established, or a mobile
           layout where the primary CTA is obscured on the first scroll.
         </p>
         <p>
           The audit takes under two minutes. No account required. Enter your landing page URL, receive
           a scored report identifying the highest-impact leaks, and decide whether to fix them yourself
-          or use the Nebula Fix Pack for same-day implementation.
+          or use the Nebula Fix Pack — a tailored AI prompt for each finding, delivered by email within minutes.
         </p>
         <h2 className="mb-3 mt-6 text-base font-semibold text-fg">How it works</h2>
         <ol className="list-decimal space-y-1 pl-5">

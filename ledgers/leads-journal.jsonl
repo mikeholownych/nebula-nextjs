@@ -135,3 +135,5 @@
 {"timestamp": "2026-07-22T15:43:21.597647Z", "email": "pending@example.com", "action": "upsert", "stage": "lead_audit", "stages": ["lead_audit"], "source": "audit_completion", "name": null, "nurture_track": "headline-clarity"}
 {"timestamp": "2026-07-22T23:55:43.728722Z", "email": "pending@example.com", "action": "upsert", "stage": "lead_audit", "stages": ["lead_audit"], "source": "audit_completion", "name": null, "nurture_track": "headline-clarity"}
 {"timestamp": "2026-07-24T00:37:22.083414Z", "email": "pending@example.com", "action": "upsert", "stage": "lead_audit", "stages": ["lead_audit"], "source": "audit_completion", "name": null, "nurture_track": "headline-clarity"}
+{"timestamp": "2026-07-24T02:57:51.543850Z", "email": "pending@example.com", "action": "upsert", "stage": "lead_audit", "stages": ["lead_audit"], "source": "audit_completion", "name": null, "nurture_track": "headline-clarity"}
+{"timestamp": "2026-07-24T03:03:10.602856Z", "email": "nav-bug-check@nebulacomponents.shop", "action": "upsert", "stage": "lead_audit", "stages": ["lead_audit"], "source": "audit_completion", "name": null, "nurture_track": "headline-clarity"}
