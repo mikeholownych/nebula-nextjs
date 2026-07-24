@@ -106,6 +106,8 @@ backups/
 backup_databases.lock
 production_health_state.json
 notify_production_health.lock
+health_check_alert_state.json
+customer-portal/route_health_alert_state.json
 tunnel_*.log
 watchdog*.log
 monitor*.log
