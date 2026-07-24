@@ -10,9 +10,10 @@
     "typecheck": "tsc --noEmit",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "test:watch": "jest --watch",
+    "test:e2e": "playwright test",
     "sync:citable": "node scripts/sync-citable-projection.mjs",
     "check:citable-projection": "node scripts/sync-citable-projection.mjs --check",
-    "ci": "npm run typecheck && npm run lint && npm run check:citable-projection && npm run build && npm run test"
+    "ci": "npm run typecheck && npm run lint && npm run check:citable-projection && npm run build && npm run test && npm run test:e2e"
   },
   "dependencies": {
     "@react-oauth/google": "^0.13.5",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.6",
+    "@playwright/test": "^1.61.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@types/jest": "^30.0.0",

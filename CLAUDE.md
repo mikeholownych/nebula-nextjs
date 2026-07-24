@@ -20,7 +20,8 @@ Load these on demand:
 ## Key Operational Facts
 - Domain: nebulacomponents.shop
 - Server: localhost:8765 (venv: /home/mike/nebula/venv/bin/python3)
-- Git: github.com:Nebula-Components/nebula-components.git
+- Git: github.com:Nebula-Components/nebula-components.git — remote alias `nebula-origin`. **This is the only remote to push to.** A second remote, `origin` (mikeholownych/nebula-nextjs.git), also exists in this checkout and has diverged with unrelated content work — do not push there; if `git push` targets `origin` by default, use `git push nebula-origin main` explicitly.
+- Stripe live secret key (full write access, for Stripe CLI `--api-key` flag or direct API calls): `~/.hermes/.env`, var `STRIPE_SECRET_KEY`. NOT in this repo's own `.env`/`.env.local` files — those only carry restricted/publishable keys. `~/.config/stripe/config.toml`'s default CLI auth is a read-only `rk_live_` key; it will fail on writes (prices, webhooks, payment links) with a permissions error — that's the signal to use the `.hermes` key instead.
 - AgentMail inbox: nebulashop@agentmail.to (REST only — NO SMTP)
 - Stripe $97 Fix Pack (locked through 2026-12-31): https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
 - Price increases to $147 on 2027-01-01
