@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   },
 }
 
-const STRIPE_FIX_PACK_LINK = 'https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b'
+const STRIPE_FIX_PACK_LINK = 'https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h'
 
 export default function CheckoutPage() {
   return (

@@ -222,9 +222,15 @@ describe('production safety containment', () => {
   it('uses only the verified canonical Stripe Payment Link on the checkout page', () => {
     const { container } = render(React.createElement(CheckoutPage))
 
+    // 2026-07-24: rotated off plink_1TsYoeEINR1kU9chNMFuKhDu — that link's
+    // only price was $147 (price_1TsYoeEINR1kU9chokWZFetZ), not the $97
+    // advertised everywhere on the site (confirmed live via `stripe
+    // payment_links retrieve` / `stripe prices list`). That link is now
+    // deactivated in Stripe. This is the replacement, charging the correct
+    // $97 (price_1TwYwlEINR1kU9chLpOPfOJD) on the same underlying product.
     expect(screen.getByRole('link', { name: /continue to secure stripe checkout/i })).toHaveAttribute(
       'href',
-      'https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b',
+      'https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h',
     )
     expect(screen.queryByText(/^card details$/i)).not.toBeInTheDocument()
     expect(container.querySelector('a button')).toBeNull()

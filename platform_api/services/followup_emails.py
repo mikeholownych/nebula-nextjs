@@ -162,7 +162,7 @@ Your audit score was {audit['score']/10}/10 - that's a {100 - audit['score']*10}
 Most founders I talk to are leaving 5-10x revenue on the table because their landing pages don't convert.
 
 I can help fix that with the $97 Fix Pack. No call required:
-https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
+https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
 
 Best,
 Mike from Nebula Components

@@ -176,7 +176,7 @@ def handle_warm_reply(email: str, body: str, thread_id: str, dry_run: bool) -> b
     # 2. Attempt audit + $97 pitch
     try:
         from followup_sequence import get_audit_data, send_email
-        from stripe_links import get_147_checkout_url
+        from stripe_links import get_97_checkout_url
 
         url = (lead or {}).get("url", "")
         domain = url.replace("https://", "").replace("http://", "").split("/")[0] if url else ""
@@ -191,7 +191,7 @@ def handle_warm_reply(email: str, body: str, thread_id: str, dry_run: bool) -> b
             score, grade, issue, fix = 5.0, "C", "conversion gap", "Add a clear CTA above the fold."
             domain = email.split("@")[-1] if "@" in email else ""
 
-        stripe_url = get_147_checkout_url(email=email, lead_url=url or f"https://{domain}",
+        stripe_url = get_97_checkout_url(email=email, lead_url=url or f"https://{domain}",
                                          audit_score=score, domain=domain)
 
         subject = f"re: {domain} — here's what I found" if domain else "re: your site audit"

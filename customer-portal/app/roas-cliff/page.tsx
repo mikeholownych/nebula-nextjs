@@ -251,7 +251,7 @@ export default function RoasCliffPage() {
           </Link>
           <br />
           <Link
-            href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
+            href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
             className="inline-block border border-border text-fg-muted font-medium px-7 py-3 rounded-md mt-3 hover:border-accent transition-colors"
           >
             Skip ahead — 47 Fix Pack

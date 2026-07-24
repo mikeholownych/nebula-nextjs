@@ -36,7 +36,7 @@ def test_checkout_url():
     
     # Test Stripe link generation
     print(f"\n🔗 Stripe Checkout Link Generation:")
-    stripe_base = "https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
+    stripe_base = "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
     checkout_url = f"{stripe_base}?customer_email={urllib.parse.quote(email)}"
     print(f"  {checkout_url}")
     

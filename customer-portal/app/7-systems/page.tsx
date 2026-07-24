@@ -242,7 +242,7 @@ export default function SevenSystemsPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
+                href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
                 className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-8 py-4 rounded-lg transition"
               >
                 Get the Fix Pack →

@@ -113,7 +113,7 @@ test('interactive controls have accessible names', async ({ page }) => {
 
 test('buyer pages expose only the active Stripe checkout links', async ({ page }) => {
   const expected = new Set([
-    'https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b',
+    'https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h',
     'https://buy.stripe.com/00w5kD1nK0wkaa573A43S0c',
     'https://buy.stripe.com/aFa8wPc2o7YM9613Ro43S0d',
   ]);

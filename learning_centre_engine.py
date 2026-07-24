@@ -270,7 +270,7 @@ def config() -> dict[str, Any]:
             ],
         },
         "primary_cta": {"label": "Run the free audit", "href": "/audit"},
-        "secondary_cta": {"label": "Buy the $97 Fix Pack", "href": "https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"},
+        "secondary_cta": {"label": "Buy the $97 Fix Pack", "href": "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"},
         "policy": {
             "free_for_life_entry": True,
             "resources_point_to_audit_or_draft_assets": True,
@@ -354,7 +354,7 @@ def specialist_agent_library_page(resource: Resource) -> str:
       <p>Start with the audit. If the handoff leak is obvious, the $97 Fix Pack turns it into a working operating system.</p>
       <div class="actions">
         <a class="button" href="/audit">Run the free audit</a>
-        <a class="button secondary" href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b">Buy the $97 Fix Pack</a>
+        <a class="button secondary" href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h">Buy the $97 Fix Pack</a>
       </div>
     </section>
   </main>

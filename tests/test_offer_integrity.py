@@ -57,7 +57,16 @@ def test_audit_results_page_has_only_the_canonical_fix_pack_offer():
     assert "$7" not in text
     assert "$1,497" not in text
     assert "$97 Fix Pack" in text
-    assert "https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b" in text
+    # 2026-07-24: rotated off plink_1TsYoeEINR1kU9chNMFuKhDu after discovering
+    # (via `stripe payment_links retrieve` against the live account) that its
+    # only price was actually $147 (price_1TsYoeEINR1kU9chokWZFetZ), not the
+    # $97 every LEGACY_OFFER_PATTERNS check above assumed the code enforced.
+    # That link is now deactivated in Stripe. This class of bug is invisible
+    # to this file by construction — it checks what the copy says, not what
+    # Stripe actually charges. See scripts/deliver_prompt_pack.py's sibling
+    # note; a periodic live-price check against the Stripe API, not another
+    # copy regex, is what would actually catch a repeat of this.
+    assert "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h" in text
 
 
 def test_active_audit_emails_have_only_the_canonical_fix_pack_offer():
@@ -72,4 +81,13 @@ def test_active_audit_emails_have_only_the_canonical_fix_pack_offer():
         assert not re.search(r"\$7\b", text), path
         assert not re.search(r"\$1,?497\b", text), path
         assert "$97 Fix Pack" in text, path
-        assert "https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b" in text, path
+        # 2026-07-24: rotated off plink_1TsYoeEINR1kU9chNMFuKhDu after discovering
+    # (via `stripe payment_links retrieve` against the live account) that its
+    # only price was actually $147 (price_1TsYoeEINR1kU9chokWZFetZ), not the
+    # $97 every LEGACY_OFFER_PATTERNS check above assumed the code enforced.
+    # That link is now deactivated in Stripe. This class of bug is invisible
+    # to this file by construction — it checks what the copy says, not what
+    # Stripe actually charges. See scripts/deliver_prompt_pack.py's sibling
+    # note; a periodic live-price check against the Stripe API, not another
+    # copy regex, is what would actually catch a repeat of this.
+    assert "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h" in text, path

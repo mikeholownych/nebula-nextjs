@@ -16,12 +16,12 @@ from outbound_release_gate import OutboundReleaseGate
 # ── Stripe personalised checkout links ────────────────────────────
 sys.path.insert(0, str(Path("/home/mike/nebula")))
 try:
-    from stripe_links import get_147_checkout_url
+    from stripe_links import get_97_checkout_url
     HAS_STRIPE_LINKS = True
 except ImportError:
     HAS_STRIPE_LINKS = False
-    def get_147_checkout_url(email, lead_url, audit_score, domain):  # type: ignore
-        return "https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
+    def get_97_checkout_url(email, lead_url, audit_score, domain):  # type: ignore
+        return "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
 
 DRY_RUN = "--dry-run" in sys.argv
 
@@ -45,7 +45,7 @@ HOT_LEAD      = NEBULA / "HOT_LEAD.json"
 LEDGER        = NEBULA / "ledgers/customer-ledger.jsonl"
 FOLLOWUP_ST   = NEBULA / "followup_state.jsonl"
 
-STRIPE    = "https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
+STRIPE    = "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
 
 # ── Sequence definitions ──────────────────────────────────────────
 # Hardened 10-touch pipeline per the followup-hardening skill:
@@ -499,7 +499,7 @@ def process_hot_lead_pitches(now, paid, sent):
             subject = f"re: {d} — the conversion leak"
         else:
             subject = f"re: {d} — one gap worth fixing"
-        checkout_url = get_147_checkout_url(
+        checkout_url = get_97_checkout_url(
             email=email,
             lead_url=url,
             audit_score=score,
@@ -801,7 +801,7 @@ def main():
             total_due += 1
             d    = domain(url) if url else email.split("@")[-1]
             subj = subj_tmpl.format(domain=d)
-            stripe_url = get_147_checkout_url(
+            stripe_url = get_97_checkout_url(
                 email=email,
                 lead_url=url,
                 audit_score=lead.get("audit_score"),

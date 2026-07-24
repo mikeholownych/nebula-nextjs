@@ -59,7 +59,7 @@ class EmailService:
                 <h3 style="margin-top: 0;">Ready to fix these issues?</h3>
                 <p><strong>$97 Fix Pack</strong> — implementation of the highest-impact conversion fixes.</p>
                 <p style="margin-bottom: 0;">
-                    <a href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b" style="color: #667eea;">Get the $97 Fix Pack →</a>
+                    <a href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h" style="color: #667eea;">Get the $97 Fix Pack →</a>
                 </p>
             </div>
             
@@ -89,7 +89,7 @@ Top Prioritized Fixes:
 Ready to fix these?
 - $97 Fix Pack — implementation of the highest-impact conversion fixes
 
-Get started: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
+Get started: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
 
 --
 Nebula Components — Conversion optimization for founders

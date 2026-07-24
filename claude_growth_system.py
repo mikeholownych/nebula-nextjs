@@ -22,7 +22,7 @@ from typing import Iterable
 DEFAULT_BASE = Path("/home/mike/nebula")
 SYSTEM_DIR = "growth_system"
 AUDIT_URL = "https://nebulacomponents.shop/"
-CHECKOUT_URL = "https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
+CHECKOUT_URL = "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
 
 ICP_TEXT = """# ICP
 

@@ -998,7 +998,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         "",
         f"$97 Fix Pack — {pitch_line}",
         "Details + FAQ: https://nebulacomponents.shop/primer.html",
-        "One-click checkout: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b",
+        "One-click checkout: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h",
         "",
         "🏷️ Full refund if your conversion rate doesn't improve within 14 days.",
         "📋 We duplicate your page for testing — zero risk to your live campaigns.",
@@ -1032,7 +1032,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         html_body += f"""
 <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:560px;margin:16px auto 0;padding-top:16px;border-top:1px solid #e5e7eb;text-align:center;">
   <div style="font-size:13px;color:#6b7280;">
-    <a href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b" style="color:#059669;text-decoration:underline;">Implement these findings — $97 Fix Pack →</a>
+    <a href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h" style="color:#059669;text-decoration:underline;">Implement these findings — $97 Fix Pack →</a>
   </div>
 </div>"""
     else:

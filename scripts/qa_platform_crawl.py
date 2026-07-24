@@ -24,7 +24,13 @@ CRITICAL = [
     "/api/stats", "/does-not-exist-qa-404",
 ]
 EXPECTED_STRIPE = {
-    "6oUfZh7M87YM5TPgEa43S0b": "$147 Conversion Fix Pack",
+    # 2026-07-24: was "6oUfZh7M87YM5TPgEa43S0b": "$147 Conversion Fix Pack" —
+    # this allowlist itself had the wrong price baked in as "expected".
+    # Confirmed live via `stripe payment_links retrieve` that link's only
+    # price was $147, contradicting every other price surface on the site
+    # and CLAUDE.md's documented $97-until-2026-12-31 lock. That link is now
+    # deactivated; this is its $97 replacement.
+    "5kQbJ1eawdj6eql1Jg43S0h": "$97 Conversion Fix Pack",
     "00w5kD1nK0wkaa573A43S0c": "$1,497 AI Ops Retainer",
     "aFa8wPc2o7YM9613Ro43S0d": "$497 Agency Partner",
 }

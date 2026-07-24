@@ -440,7 +440,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                 structure — to paste into Claude, ChatGPT, or hand to your developer. No site access needed.
               </p>
               <a
-                href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
+                href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full rounded-lg bg-accent px-4 py-2 text-center font-semibold text-bg transition-colors hover:bg-accent-light"

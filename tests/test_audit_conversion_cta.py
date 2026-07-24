@@ -57,7 +57,7 @@ class AuditConversionCtaTests(unittest.TestCase):
 
         self.assertIn("$97 fix pack", text)
         self.assertNotIn("$147", text)
-        self.assertIn("https://buy.stripe.com/6oufzh7m87ym5tpgea43s0b", text)
+        self.assertIn("https://buy.stripe.com/5kqbj1eawdj6eql1jg43s0h", text)
         self.assertIn("24h", text)
         self.assertIn("one-click checkout", text)
         self.assertNotIn("delivered in 48h", text)

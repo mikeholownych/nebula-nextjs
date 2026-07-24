@@ -137,7 +137,7 @@ export default function LearningCentrePage() {
             <Link href="/audit" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">
               Run the free audit
             </Link>
-            <a href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
+            <a href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
               Buy the $97 Fix Pack
             </a>
           </div>
