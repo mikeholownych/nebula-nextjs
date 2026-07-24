@@ -17,8 +17,17 @@ from datetime import datetime, timezone, timedelta
 from collections import Counter, defaultdict
 
 BASE = Path("/home/mike/nebula")
-LEADS_FILE = BASE / "ledgers" / "leads.jsonl"
+LEADS_FILE = BASE / "ledgers" / "leads-journal.jsonl"  # was "leads.jsonl", which doesn't exist — always read 0 leads
 NURTURE_LOG = BASE / "ledgers" / "nurture_log.jsonl"
+
+# Same test-record convention as ledger_metrics.py's TEST_MARKERS — without
+# this, this report double-counts internal test sends as real nurture volume.
+TEST_EMAIL_MARKERS = ("test", "example.com", "nebulashop@agentmail.to")
+
+
+def is_test_email(email: str) -> bool:
+    email = (email or "").lower()
+    return any(marker in email for marker in TEST_EMAIL_MARKERS)
 
 
 def load_jsonl(file_path: Path) -> list:
@@ -36,7 +45,7 @@ def analyze_leads_by_track():
     latest_by_email = {}
     for lead in leads:
         email = lead.get("email", "").lower()
-        if email:
+        if email and not is_test_email(email):
             latest_by_email[email] = lead
     
     # Count by track
@@ -56,7 +65,7 @@ def analyze_track_positions():
     latest_by_email = {}
     for lead in leads:
         email = lead.get("email", "").lower()
-        if email:
+        if email and not is_test_email(email):
             latest_by_email[email] = lead
     
     # Group by track + position
@@ -79,6 +88,8 @@ def analyze_nurture_sends(days=7):
     cutoff = datetime.now(timezone.utc) - timedelta(days=days)
     recent_sends = []
     for entry in nurture_log:
+        if is_test_email(entry.get("email", "")):
+            continue
         try:
             ts = datetime.fromisoformat(entry.get("timestamp", ""))
             if ts >= cutoff:
@@ -103,6 +114,8 @@ def analyze_template_usage(days=7):
     cutoff = datetime.now(timezone.utc) - timedelta(days=days)
     recent_sends = []
     for entry in nurture_log:
+        if is_test_email(entry.get("email", "")):
+            continue
         try:
             ts = datetime.fromisoformat(entry.get("timestamp", ""))
             if ts >= cutoff:

@@ -14,6 +14,8 @@ import time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
+import ledger_metrics
+
 BASE = Path('/home/mike/nebula')
 HEALTH_FILE = BASE / 'pipeline_health.json'
 SRE_STATE = BASE / 'sre_state.json'
@@ -604,22 +606,29 @@ def main():
     # 8. SNR evaluation
     evaluate_snr()
 
-    # 9. Check for revenue (Stripe webhook hits)
-    revenue_file = BASE / 'ops/revenue.json'
-    if revenue_file.exists():
-        try:
-            rev = json.loads(revenue_file.read_text())
-            total = rev.get('total_revenue_usd', 0)
-            last_notified = state.get('last_revenue_notified', 0)
-            if total > last_notified:
-                telegram_alert(
-                    f'Payment received! Revenue: ${total:.2f}\nNew: +${total - last_notified:.2f}',
-                    level='revenue'
-                )
-                state['last_revenue_notified'] = total
-                actions_taken.append(f'Revenue alert fired: ${total:.2f}')
-        except Exception as e:
-            log(f'[revenue-check] Error: {e}')
+    # 9. Check for revenue (real Stripe payments only — test sessions always excluded).
+    # This is a 15-min-cadence backstop; webhook_server.py also alerts in real time
+    # the instant a checkout.session.completed event lands.
+    #
+    # Previously read ops/revenue.json, a file nothing in this codebase ever wrote —
+    # this check has never fired since it was added. Now reads the same
+    # ledger_metrics source of truth used by ledger_metrics.summary() elsewhere.
+    try:
+        real_payments = ledger_metrics.real_payment_rows()
+        last_count = state.get('last_revenue_payment_count', 0)
+        if len(real_payments) > last_count:
+            new_payments = real_payments[last_count:]
+            real_total = ledger_metrics.real_revenue_dollars()
+            lines = [f'💰 *{len(new_payments)} new payment(s)!* Total real revenue: ${real_total}']
+            for p in new_payments:
+                email = p.get('email', 'unknown')
+                amount = p.get('amount') or f"${ledger_metrics.amount_cents(p) / 100:.2f}"
+                lines.append(f'• {email}: {amount}')
+            telegram_alert('\n'.join(lines), level='revenue')
+            state['last_revenue_payment_count'] = len(real_payments)
+            actions_taken.append(f'Revenue alert fired: {len(new_payments)} new payment(s), ${real_total} total')
+    except Exception as e:
+        log(f'[revenue-check] Error: {e}')
 
     # 10. Escalate only when needed
     if escalations:

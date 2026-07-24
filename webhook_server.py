@@ -7,7 +7,7 @@ Handles:
   - Live stats for blog         GET  /api/stats
   - Health check                GET  /health
 """
-import json, os, time, threading, hmac, hashlib, sys
+import json, os, time, threading, hmac, hashlib, sys, subprocess
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import stripe
 
@@ -552,6 +552,21 @@ class WebhookHandler(BaseHTTPRequestHandler):
                     "stripe_event_id": event.id
                 })
                 update_stats("revenue", amount_cents // 100)
+
+                # Real-time Telegram alert — event.livemode is Stripe's own signal for
+                # real vs. test-mode, more reliable than string-matching the email/id.
+                # sre_responder.py also alerts on this within 15 min as a backstop in
+                # case this process crashes before the alert goes out.
+                if getattr(event, "livemode", False):
+                    try:
+                        subprocess.run(
+                            ["hermes", "send", "--to", "telegram:5920497760",
+                             f"💰 *SALE* — {amount_str} — {product} — {customer_email}\n"
+                             f"session: {session.id}"],
+                            capture_output=True, timeout=15
+                        )
+                    except Exception as e:
+                        print(f"[stripe] revenue alert failed: {e}")
                 print(f"[SALE] {amount_str} — {product} — {customer_email} (event: {event.id})")
             elif etype == "invoice.payment_succeeded":
                 invoice = event.data.object

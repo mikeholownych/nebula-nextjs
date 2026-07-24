@@ -1,7 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
+import { execFile } from 'child_process'
+import { promisify } from 'util'
 import { getPostHogClient } from '@/app/lib/posthog-server'
 import { pool } from '@/app/lib/db'
+
+const execFileAsync = promisify(execFile)
+
+// Real-time Telegram alert on a real (non-test-mode) sale. Uses the same
+// `hermes send` mechanism as the Python side (sre_responder.py,
+// notify_production_health.py) — this repo has no Telegram bot token
+// configured, `hermes send` is the only working delivery path.
+// sre_responder.py also checks for new payments every 15 min as a backstop
+// in case this call fails silently (network blip, hermes gateway down, etc).
+async function sendSaleAlert(message: string): Promise<void> {
+  try {
+    await execFileAsync('hermes', ['send', '--to', 'telegram:5920497760', message], { timeout: 15_000 })
+  } catch (err) {
+    console.error('Sale alert failed to send:', err)
+  }
+}
 
 /**
  * Stripe webhook handler
@@ -82,6 +100,16 @@ export async function POST(request: NextRequest) {
     } catch (err) {
       console.error('Failed to persist purchase — will let Stripe retry:', err)
       return NextResponse.json({ error: 'Failed to record purchase' }, { status: 500 })
+    }
+
+    if (event.livemode) {
+      const amount = session.amount_total != null
+        ? `$${(session.amount_total / 100).toFixed(2)}`
+        : 'unknown amount'
+      void sendSaleAlert(
+        `💰 *SALE* — ${amount} — ${session.metadata?.offer_key ?? 'unknown offer'} — ${session.customer_email ?? 'no email'}\n` +
+        `session: ${session.id}`
+      )
     }
 
     if (session.customer_email) {

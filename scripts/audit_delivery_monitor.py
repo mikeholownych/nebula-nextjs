@@ -26,7 +26,7 @@ from typing import Any
 BASE_DEFAULT = Path("/home/mike/nebula")
 PUBLIC_URL_DEFAULT = "https://nebulacomponents.shop"
 LOCAL_URL_DEFAULT = "http://127.0.0.1:3000"
-SERVICE_DEFAULT = "nebula-site"
+SERVICE_DEFAULT = "nebula-nextjs"  # was "nebula-site" — the obsolete alias unit; see INC-0004/INC-0005
 
 TERMINAL_STAGES = frozenset({"paid", "closed", "dead", "bounced", "max_retries_exceeded", "recircle_60d"})
 TERMINAL_STATUSES = frozenset({"completed", "closed", "bounced", "stop_reply", "test_email", "max_retries_exceeded"})
@@ -44,6 +44,16 @@ TEST_EMAILS = frozenset({
 
 class MonitorDataError(RuntimeError):
     """Required monitoring evidence is missing or malformed."""
+
+
+def _format_refs(refs: list[str], limit: int = 5) -> str:
+    """Turn a list of lead identifiers into a message-ready string, so an
+    alert says which lead(s) need action instead of just a bare count."""
+    if not refs:
+        return "none"
+    shown = ", ".join(refs[:limit])
+    remaining = len(refs) - limit
+    return f"{shown} (+{remaining} more)" if remaining > 0 else shown
 
 
 def parse_timestamp(value: Any) -> datetime | None:
@@ -106,9 +116,9 @@ def collect_pipeline_state(base: Path, now: datetime) -> dict[str, Any]:
     ledger_rows = [row for row in ledger_rows_all if not is_test_record(row)]
     stage_counts = Counter(str(row.get("stage") or "unknown") for row in hot_rows)
 
-    pending_audit_requests = 0
-    unrouted_warm_replies = 0
-    overdue_pitches = 0
+    pending_audit_requests: list[str] = []
+    unrouted_warm_replies: list[str] = []
+    overdue_pitches: list[str] = []
     missing_action_timestamps = 0
 
     for row in hot_rows:
@@ -117,20 +127,21 @@ def collect_pipeline_state(base: Path, now: datetime) -> dict[str, Any]:
         stage = str(row.get("stage", "")).lower()
         action = str(row.get("action", "")).lower()
         status = str(row.get("status", "")).lower()
+        ref = str(row.get("email") or row.get("thread_id") or "unknown")
 
         if action == "deliver_audit":
-            pending_audit_requests += 1
+            pending_audit_requests.append(ref)
             if not parse_timestamp(row.get("updated_at") or row.get("created_at")):
                 missing_action_timestamps += 1
         elif stage in WARM_STAGES and not action and status not in TERMINAL_STATUSES:
-            unrouted_warm_replies += 1
+            unrouted_warm_replies.append(ref)
 
         if action == "send_97_pitch" and stage in {"audit_delivered", "pitch_queued"} and status in {"", "pending", "queued"}:
             due = parse_timestamp(row.get("pitch_due_at"))
             if due is None:
                 missing_action_timestamps += 1
             elif due <= now:
-                overdue_pitches += 1
+                overdue_pitches.append(ref)
 
     delivery_events = [row for row in ledger_rows if row.get("event_type") == "audit_delivered"]
     payment_events = [row for row in ledger_rows if row.get("event_type") == "payment"]
@@ -142,9 +153,12 @@ def collect_pipeline_state(base: Path, now: datetime) -> dict[str, Any]:
         "hot_leads_total": len(hot_rows),
         "test_hot_leads_excluded": len(hot_rows_all) - len(hot_rows),
         "stage_counts": dict(sorted(stage_counts.items())),
-        "pending_audit_requests": pending_audit_requests,
-        "unrouted_warm_replies": unrouted_warm_replies,
-        "overdue_pitches": overdue_pitches,
+        "pending_audit_requests": len(pending_audit_requests),
+        "pending_audit_requests_refs": pending_audit_requests,
+        "unrouted_warm_replies": len(unrouted_warm_replies),
+        "unrouted_warm_replies_refs": unrouted_warm_replies,
+        "overdue_pitches": len(overdue_pitches),
+        "overdue_pitches_refs": overdue_pitches,
         "missing_action_timestamps": missing_action_timestamps,
         "delivery_events_total": len(delivery_events),
         "delivery_events_24h": recent_24h,
@@ -199,7 +213,7 @@ def build_report(base: Path, now: datetime, public_url: str, local_url: str, ser
     dependencies = {
         "deliver_audit_script": {"ok": (base / "deliver_audit.py").is_file()},
         "agentmail_key": {"ok": (Path.home() / ".hermes" / "secrets" / "agentmail.key").is_file()},
-        "nebula_site_service": check_service(service),
+        "nebula_nextjs_service": check_service(service),
         "local_origin": check_http(local_url),
         "public_site": check_http(public_url),
     }
@@ -209,11 +223,14 @@ def build_report(base: Path, now: datetime, public_url: str, local_url: str, ser
 
     if pipeline:
         if pipeline["pending_audit_requests"]:
-            issues.append({"severity": "critical", "code": "pending_audit_requests", "detail": f"{pipeline['pending_audit_requests']} non-terminal lead(s) awaiting audit delivery"})
+            refs = _format_refs(pipeline["pending_audit_requests_refs"])
+            issues.append({"severity": "critical", "code": "pending_audit_requests", "detail": f"{pipeline['pending_audit_requests']} non-terminal lead(s) awaiting audit delivery: {refs}"})
         if pipeline["unrouted_warm_replies"]:
-            issues.append({"severity": "critical", "code": "unrouted_warm_replies", "detail": f"{pipeline['unrouted_warm_replies']} warm reply/replies have no next action"})
+            refs = _format_refs(pipeline["unrouted_warm_replies_refs"])
+            issues.append({"severity": "critical", "code": "unrouted_warm_replies", "detail": f"{pipeline['unrouted_warm_replies']} warm reply/replies have no next action: {refs}"})
         if pipeline["overdue_pitches"]:
-            issues.append({"severity": "warning", "code": "overdue_pitches", "detail": f"{pipeline['overdue_pitches']} delivered audit(s) passed pitch_due_at"})
+            refs = _format_refs(pipeline["overdue_pitches_refs"])
+            issues.append({"severity": "warning", "code": "overdue_pitches", "detail": f"{pipeline['overdue_pitches']} delivered audit(s) passed pitch_due_at: {refs}"})
         if pipeline["missing_action_timestamps"]:
             issues.append({"severity": "warning", "code": "missing_action_timestamps", "detail": f"{pipeline['missing_action_timestamps']} actionable record(s) lack required timestamps"})
 
@@ -252,7 +269,7 @@ def format_report(report: dict[str, Any]) -> str:
     lines.extend([
         "",
         "Availability:",
-        f"- nebula-site: {deps['nebula_site_service'].get('state', 'unknown')}",
+        f"- nebula-nextjs: {deps['nebula_nextjs_service'].get('state', 'unknown')}",
         f"- Local origin: {deps['local_origin'].get('status') or deps['local_origin'].get('error')}",
         f"- Public site: {deps['public_site'].get('status') or deps['public_site'].get('error')}",
         f"- Delivery script: {'present' if deps['deliver_audit_script']['ok'] else 'missing'}",
