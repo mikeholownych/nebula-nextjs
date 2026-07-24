@@ -334,6 +334,27 @@ if __name__ == "__main__":
         # FastMCP reads host/port from its settings object
         mcp.settings.host = args.host
         mcp.settings.port = args.port
+        # Allow requests coming through the Cloudflare Tunnel public hostname.
+        # FastMCP's transport_security blocks any Host header not in allowed_hosts.
+        from mcp.server.transport_security import TransportSecuritySettings
+        mcp.settings.transport_security = TransportSecuritySettings(
+            enable_dns_rebinding_protection=True,
+            allowed_hosts=[
+                "127.0.0.1",
+                "127.0.0.1:*",
+                "localhost",
+                "localhost:*",
+                "[::1]:*",
+                "mcp.nebulacomponents.shop",
+                "mcp.nebulacomponents.shop:443",
+            ],
+            allowed_origins=[
+                "http://127.0.0.1:*",
+                "http://localhost:*",
+                "http://[::1]:*",
+                "https://mcp.nebulacomponents.shop",
+            ],
+        )
         # streamable-http uses POST /mcp — compatible with Hermes mcp add --url
         mcp.run(transport="streamable-http")
     else:
