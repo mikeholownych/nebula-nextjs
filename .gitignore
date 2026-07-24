@@ -102,6 +102,8 @@ audit_blast_results.json
 competitor_mentions.jsonl
 ab_registry.jsonl
 growth_system/linkedin_monitor_state.json
+backups/
+backup_databases.lock
 tunnel_*.log
 watchdog*.log
 monitor*.log
