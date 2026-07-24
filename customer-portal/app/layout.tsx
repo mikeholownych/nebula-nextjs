@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Nebula Components — Landing Page Conversion Optimization',
     description: 'Evidence-backed landing page conversion diagnosis and implementation for founders spending on paid ads with low or zero conversions.',
-    creator: '@nebulacomponents',
+    creator: '@NebulaCRO',
   },
   icons: {
     icon: [
