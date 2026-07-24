@@ -4,12 +4,17 @@ IH Authority Post Scheduler
 ────────────────────────────
 Two jobs:
   1. First run  — queue the pre-written ih_authority_post.md for posting
-  2. Every 7 d  — generate a fresh post from audit_leads.jsonl audit data
+  2. Every 7 d  — generate a fresh post from customer-ledger.jsonl audit data
                   and queue it for the ih_bot.py publish_post() runner
 
 DM job:
   Read signal_queue.jsonl; for each entry where contacted=false and
   signal_score >= 7, generate a personalised DM and write to dm_queue.jsonl.
+
+  NOTE: dm_queue.jsonl is a staging file only. No active sender exists in
+  ih_bot.py — DMs require manual review and dispatch via ih_bot post_reply()
+  or an equivalent future sender. DO NOT add an automated sender without
+  governance sign-off.
 
 State file: ih_post_state.json
   {
@@ -24,18 +29,27 @@ import os
 import sys
 import argparse
 from datetime import datetime, timezone
+from pathlib import Path
 from urllib.parse import urlparse
 
 # ── paths ──────────────────────────────────────────────────────────────────────
 BASE_DIR          = "/home/mike/nebula"
 STATE_FILE        = os.path.join(BASE_DIR, "ih_post_state.json")
 AUTHORITY_POST_MD = os.path.join(BASE_DIR, "ih_authority_post.md")
-AUDIT_LEADS_FILE  = os.path.join(BASE_DIR, "audit_leads.jsonl")
+# Audit evidence lives in customer-ledger.jsonl (audit_leads.jsonl is obsolete)
+AUDIT_LEADS_FILE  = os.path.join(BASE_DIR, "ledgers", "customer-ledger.jsonl")
 SIGNAL_QUEUE_FILE = os.path.join(BASE_DIR, "signal_queue.jsonl")
 DM_QUEUE_FILE     = os.path.join(BASE_DIR, "dm_queue.jsonl")
+OUTREACH_DISABLED = os.path.join(BASE_DIR, "OUTREACH_DISABLED")
 
 POST_INTERVAL_DAYS = 7
 IH_GROUP           = "landing-page-feedback"
+
+# Maximum DMs staged per scheduler run — prevents accidental bulk queuing
+DM_DAILY_CAP = 10
+
+# Minimum signal score for DM eligibility (inclusive)
+DM_MIN_SCORE = 7
 
 # ── anonymisation helpers ──────────────────────────────────────────────────────
 
@@ -94,7 +108,11 @@ def save_state(state: dict, dry_run: bool = False):
 # ── audit data helpers ─────────────────────────────────────────────────────────
 
 def load_audit_leads() -> list[dict]:
-    """Load & deduplicate audit leads (keep highest score per domain)."""
+    """Load & deduplicate audit delivery events from customer-ledger.jsonl.
+
+    Reads only `audit_delivered` events; deduplicates by domain keeping the
+    entry with the highest score so the weekly post represents real audit data.
+    """
     if not os.path.exists(AUDIT_LEADS_FILE):
         return []
     best: dict[str, dict] = {}
@@ -105,12 +123,25 @@ def load_audit_leads() -> list[dict]:
                 continue
             try:
                 entry = json.loads(line)
-                url   = entry.get("url", "")
+                # Only use audit_delivered events with real URLs
+                if entry.get("event_type") != "audit_delivered":
+                    continue
+                url = entry.get("url", "")
                 domain = urlparse(url).netloc.lstrip("www.")
                 if not domain:
                     continue
-                if domain not in best or entry.get("score", 0) > best[domain].get("score", 0):
-                    best[domain] = entry
+                # Skip test/internal domains
+                if any(t in domain for t in ("example.com", "nebulacomponents", "agentmail")):
+                    continue
+                score = entry.get("overall", entry.get("score", 0))
+                entry_norm = {
+                    "url": url,
+                    "score": score,
+                    "grade": entry.get("overall_grade", entry.get("grade", "?")),
+                    "timestamp": entry.get("timestamp", ""),
+                }
+                if domain not in best or score > best[domain].get("score", 0):
+                    best[domain] = entry_norm
             except json.JSONDecodeError:
                 pass
     return list(best.values())
@@ -310,9 +341,16 @@ def _guess_main_issue(signal: dict) -> str:
 
 def generate_dm(signal: dict) -> dict:
     """Build a personalised IH DM entry for a high-signal lead."""
-    author  = signal.get("author", "there")
-    # Friendly first name — IH usernames are often display names
-    name    = author.split()[0] if " " in author else author
+    author  = signal.get("author", "there") or "there"
+
+    # Safe first name: use only clean alphabetic words.
+    # Handles display names ("Jane Smith" → "Jane"), handles-only ("founder-2025" → "there"),
+    # and usernames with no readable given name.
+    name = "there"
+    for part in author.split():
+        if part.isalpha() and len(part) >= 2:
+            name = part
+            break
 
     trigger = _extract_trigger_topic(signal)
     domain  = _extract_product_domain(signal)
@@ -334,21 +372,41 @@ def generate_dm(signal: dict) -> dict:
 
 
 def process_dm_queue(dry_run: bool = False) -> list[dict]:
-    """Process signal_queue and write qualifying DMs to dm_queue.jsonl."""
+    """Process signal_queue and write qualifying DMs to dm_queue.jsonl.
+
+    Compliance gates (fail-closed):
+    1. OUTREACH_DISABLED kill switch — refuses to queue any DMs when present.
+    2. Score gate — only signals with signal_score >= DM_MIN_SCORE (7) qualify.
+    3. Already-contacted gate — skips signals where contacted=True.
+    4. Dedup gate — skips signals already in dm_queue.jsonl.
+    5. Daily cap — stages at most DM_DAILY_CAP DMs per run.
+
+    dm_queue.jsonl is a STAGING file. No automated sender exists. DMs must
+    be manually reviewed and dispatched.
+    """
+    # ── Kill switch ───────────────────────────────────────────────────────────
+    if os.path.exists(OUTREACH_DISABLED):
+        print(f"[DM] OUTREACH_DISABLED marker present — skipping DM queue processing.")
+        return []
+
     signals    = load_signal_queue()
     already_dm = load_existing_dm_queue()
 
     new_dms = []
-    skipped_score  = 0
+    skipped_score     = 0
     skipped_contacted = 0
-    skipped_dup    = 0
+    skipped_dup       = 0
 
     for sig in signals:
+        if len(new_dms) >= DM_DAILY_CAP:
+            print(f"[DM] Daily cap ({DM_DAILY_CAP}) reached — deferring remaining signals.")
+            break
+
         score     = sig.get("signal_score", 0)
         contacted = sig.get("contacted", False)
         sig_url   = sig.get("url", "")
 
-        if score < 6:
+        if score < DM_MIN_SCORE:
             skipped_score += 1
             continue
         if contacted:
@@ -362,7 +420,7 @@ def process_dm_queue(dry_run: bool = False) -> list[dict]:
         new_dms.append(dm)
 
     print(f"\n[DM] signal_queue: {len(signals)} entries")
-    print(f"     → skipped (score < 7):  {skipped_score}")
+    print(f"     → skipped (score < {DM_MIN_SCORE}): {skipped_score}")
     print(f"     → skipped (contacted):  {skipped_contacted}")
     print(f"     → skipped (duplicate):  {skipped_dup}")
     print(f"     → new DMs to queue:     {len(new_dms)}")
@@ -377,6 +435,7 @@ def process_dm_queue(dry_run: bool = False) -> list[dict]:
                 for dm in new_dms:
                     f.write(json.dumps(dm) + "\n")
             print(f"[DM] Wrote {len(new_dms)} DMs → {DM_QUEUE_FILE}")
+            print(f"[DM] ⚠️  Manual review required before sending — no automated sender active.")
     else:
         print("[DM] Nothing to write.")
 
