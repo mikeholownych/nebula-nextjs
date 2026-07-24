@@ -18,7 +18,7 @@ const config: Config = {
         fg: {
           DEFAULT: '#ffffff',
           muted: '#9e9e9e',
-          dim: '#666666',
+          dim: '#7c7c7c',
         },
         // Accent colors (emerald)
         accent: {
