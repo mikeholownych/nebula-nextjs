@@ -21,6 +21,14 @@ async function sendSaleAlert(message: string): Promise<void> {
   }
 }
 
+// The exact Fix Pack price, in cents. Several other live Stripe payment
+// links exist at other price points (an "Audit Lite" offer, the $1,497
+// retainer, etc.) that this codebase has no dedicated fulfillment for —
+// gating on the precise amount, not just "any purchase with an email",
+// stops those from silently receiving (or being charged for, then never
+// receiving) the Fix Pack's prompt pack. See scripts/deliver_prompt_pack.py.
+const FIX_PACK_AMOUNT_CENTS = 9700
+
 // Fulfillment: the Fix Pack offer is the audit + a full AI prompt pack, not
 // bespoke implementation — see scripts/deliver_prompt_pack.py for why and
 // how. Runs in the background (not awaited) so the webhook response to
@@ -129,15 +137,17 @@ export async function POST(request: NextRequest) {
         `session: ${session.id}`
       )
 
-      // Not gated on metadata.offer_key: the live checkout page
-      // (app/checkout/page.tsx) links straight to a Stripe-hosted Payment
-      // Link, not through /api/checkout, so whether that link's dashboard
-      // config actually sets offer_key can't be verified from this repo.
-      // This is the only paid product on the entire site (every
-      // customer-facing page links the same Stripe URL) — safe to trigger
-      // fulfillment on any real purchase with an email rather than risk
-      // silently skipping it over unverifiable metadata.
-      if (session.customer_email) {
+      // Gated on the exact Fix Pack price, not metadata.offer_key: the live
+      // checkout page (app/checkout/page.tsx) links straight to a
+      // Stripe-hosted Payment Link, not through /api/checkout, so whether
+      // that link's dashboard config actually sets offer_key can't be
+      // verified from this repo — but the amount charged is always accurate
+      // (it's what Stripe actually collected). Other live price points
+      // (Audit Lite, the $1,497 retainer, etc.) have no fulfillment script
+      // of their own; the sale alert above still fires for those so a human
+      // sees it, but this avoids silently sending the $97 prompt pack for a
+      // $7 purchase or silently failing to deliver anything for a $1,497 one.
+      if (session.customer_email && session.amount_total === FIX_PACK_AMOUNT_CENTS) {
         void deliverPromptPack(session.customer_email)
       }
     }
