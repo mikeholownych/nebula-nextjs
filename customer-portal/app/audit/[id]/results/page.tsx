@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers'
 import { notFound } from 'next/navigation'
 import ResultsClient from './ResultsClient'
+import { verifyAuditUnlock } from '@/app/lib/audit-unlock-token'
 
 interface Props {
   params: Promise<{ id: string }>
@@ -32,7 +33,7 @@ export default async function ResultsPage({ params, searchParams }: Props) {
 
   // --- Cookie unlock (own device) ---
   const cookieStore = await cookies()
-  const cookieUnlocked = cookieStore.get(`audit_unlock_${id}`) !== undefined
+  const cookieUnlocked = verifyAuditUnlock(id, cookieStore.get(`audit_unlock_${id}`)?.value)
 
   // --- Share-token unlock (third-party link) ---
   let sharedView = false

@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd /home/mike/nebula
-exec python3 sre_responder.py "$@"
+exec venv/bin/python3 sre_responder.py "$@"

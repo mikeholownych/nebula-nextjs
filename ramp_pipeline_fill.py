@@ -930,18 +930,24 @@ def main():
             rec['status']='needs_site_extraction'; queued.append(rec); continue
         if not email:
             rec['status']='site_found_no_email'; queued.append(rec); continue
-        # Skip hard-bounced emails
+        # Skip hard-bounced emails — fail closed: a bounce-check error means
+        # we don't know the email is safe, so treat it as unsendable.
         if HAS_BOUNCE_DB:
             try:
                 db = LeadStore()
-                if db.is_bounced(email):
-                    rec['status'] = 'skipped_bounced'
-                    rec['reason'] = 'Email hard-bounced in lead store'
-                    skipped.append(rec)
-                    print(f"  BOUNCED {email} ({site}) — skipped")
-                    continue
+                bounced = db.is_bounced(email)
             except Exception as be:
-                print(f"  [BOUNCE CHECK ERROR] {be}")
+                print(f"  [BOUNCE CHECK ERROR] {email} ({site}): {be} — skipping")
+                rec['status'] = 'skipped_bounce_check_error'
+                rec['reason'] = f'Bounce check failed: {be}'
+                skipped.append(rec)
+                continue
+            if bounced:
+                rec['status'] = 'skipped_bounced'
+                rec['reason'] = 'Email hard-bounced in lead store'
+                skipped.append(rec)
+                print(f"  BOUNCED {email} ({site}) — skipped")
+                continue
         if email in contacted or already_audited(email):
             rec['status']='skipped_duplicate'; skipped.append(rec); continue
 

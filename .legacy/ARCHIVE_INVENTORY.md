@@ -98,3 +98,28 @@ All active writers, suppression checks, follow-up prefilters, processed-thread d
 | `test_ga4_tracking.py` | `.legacy/scripts-pre-cutover-2026-07-23/test_ga4_tracking.py` | Broken ad-hoc root script for the retired static site; not a pytest contract |
 
 These files remain in Git history and in `.legacy/`; no test was deleted without a paper trail.
+
+## Dead automation scripts archive — 2026-07-23 UTC
+
+Repo review found overlapping tunnel-monitoring and inbox-check scripts. Cross-checked each against the live crontab (`crontab -l`), `deploy/systemd/`, and repo-wide grep for any script/service still invoking it; only files with zero live references were moved.
+
+| Original path | Archived path | Reason |
+| --- | --- | --- |
+| `tunnel_manager.py` | `.legacy/dead-scripts-2026-07-23/tunnel_manager.py` | Only invoked by `tunnel_monitor.sh`, itself unreferenced; live tunnel monitoring is `tunnel_liveliness_check.py` (in the live crontab) |
+| `tunnel_monitor.sh` | `.legacy/dead-scripts-2026-07-23/tunnel_monitor.sh` | Not referenced by cron, systemd, or any other script |
+| `tunnel_monitor_daemon.py` | `.legacy/dead-scripts-2026-07-23/tunnel_monitor_daemon.py` | Zero references anywhere in the repo |
+| `monitor_tunnel.py` | `.legacy/dead-scripts-2026-07-23/monitor_tunnel.py` | Zero references anywhere in the repo |
+| `check_inbox_function.py` | `.legacy/dead-scripts-2026-07-23/check_inbox_function.py` | Zero references anywhere in the repo |
+| `check_email.py` | `.legacy/dead-scripts-2026-07-23/check_email.py` | Zero references anywhere in the repo |
+| `inbox_check.py` | `.legacy/dead-scripts-2026-07-23/inbox_check.py` | Zero references anywhere in the repo |
+| `dual_funnel_auto_responder.py.DISABLED` | `.legacy/dead-scripts-2026-07-23/dual_funnel_auto_responder.py.DISABLED` | Already disabled; zero references |
+| `check_inbox.py.DISABLED` | `.legacy/dead-scripts-2026-07-23/check_inbox.py.DISABLED` | Already disabled; zero references |
+| `run_inbox_check.py.DISABLED` | `.legacy/dead-scripts-2026-07-23/run_inbox_check.py.DISABLED` | Already disabled; zero references |
+
+Not moved despite overlapping names, because each still has a live dependent: `check_emails.py` (opened by `run_nano.sh`), `inbox_monitor.py` (existence-checked by `sre_responder.py`'s health check and referenced in `hot_lead_watcher.py`'s docstring), `check_agentmail_inbox.py` (used by `tests/test_outbound_single_authority.py`). These are still duplicative and worth a follow-up consolidation pass, but archiving them now risked breaking a live health check or test without a deeper investigation than this pass covered.
+
+## Restoration — `ledger_metrics.py` — 2026-07-24 UTC
+
+| Archived path | Restored path | Reason |
+| --- | --- | --- |
+| `.legacy/outreach-wave-archive-2026-07-23/ledger_metrics.py` | `ledger_metrics.py` | Wrongly swept into the bulk "40 tracked scripts formerly under `archived/`" move (outreach-wave-archive-2026-07-23 entry above), which was a wholesale directory move, not a per-file deprecation review. `challenge_risk_monitor.py`, `audit_quality_review.py`, and `normalize_public_stats.py` all `from ledger_metrics import ...` at module level and were left broken (`ModuleNotFoundError`) from 2026-07-23 until this fix. The module is self-contained (stdlib only, hardcoded `BASE = Path('/home/mike/nebula')`) — restoring it does not reintroduce any of the SMTP/REST outbound-bypass risk the rest of that archive batch was about. Verified: `import ledger_metrics` succeeds, `ledger_metrics.summary()` runs, and all three importing scripts execute cleanly at module level. The file remains present in `.legacy/outreach-wave-archive-2026-07-23/` as well via git history.

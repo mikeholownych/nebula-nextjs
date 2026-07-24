@@ -61,8 +61,9 @@ def load_contacted():
         return {}
 
 def save_contacted(contacted):
-    with open(CONTACTED_PATH, "w") as f:
-        json.dump(contacted, f, indent=2)
+    tmp = CONTACTED_PATH.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(contacted, indent=2))
+    tmp.rename(CONTACTED_PATH)  # atomic on same filesystem
 
 def load_hot_lead():
     try:
@@ -72,8 +73,9 @@ def load_hot_lead():
         return []
 
 def save_hot_lead(hot_lead):
-    with open(HOT_LEAD_PATH, "w") as f:
-        json.dump(hot_lead, f, indent=2)
+    tmp = HOT_LEAD_PATH.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(hot_lead, indent=2))
+    tmp.rename(HOT_LEAD_PATH)  # atomic on same filesystem
 
 def load_stats():
     try:

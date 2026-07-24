@@ -239,8 +239,11 @@ def _upsert_hot_lead(record: dict):
                 break
         if not replaced:
             leads.append(record)
-        with open(HOT_LEAD_FILE, "w") as f:
-            json.dump(leads if isinstance(raw, list) else leads[-1], f, indent=2)
+        data = leads if isinstance(raw, list) else leads[-1]
+        tmp_path = HOT_LEAD_FILE + ".tmp"
+        with open(tmp_path, "w") as f:
+            json.dump(data, f, indent=2)
+        os.rename(tmp_path, HOT_LEAD_FILE)  # atomic on same filesystem
     except Exception as e:
         print(f"[hot-lead] write error: {e}")
 
@@ -588,14 +591,17 @@ class WebhookHandler(BaseHTTPRequestHandler):
         if secret:
             sig_header = self.headers.get("X-AgentMail-Signature", "") or \
                          self.headers.get("X-Webhook-Signature", "")
-            if sig_header:
-                expected = hmac.new(secret.encode(), body, hashlib.sha256).hexdigest()
-                # Strip "sha256=" prefix if present
-                received = sig_header.replace("sha256=", "")
-                if not hmac.compare_digest(expected, received):
-                    print("[agentmail] ⚠️  Webhook signature mismatch — ignoring")
-                    self._send_json(401, {"error": "invalid signature"})
-                    return
+            if not sig_header:
+                print("[agentmail] ⚠️  No signature header - rejecting")
+                self._send_json(401, {"error": "missing signature"})
+                return
+            expected = hmac.new(secret.encode(), body, hashlib.sha256).hexdigest()
+            # Strip "sha256=" prefix if present
+            received = sig_header.replace("sha256=", "")
+            if not hmac.compare_digest(expected, received):
+                print("[agentmail] ⚠️  Webhook signature mismatch — ignoring")
+                self._send_json(401, {"error": "invalid signature"})
+                return
 
         try:
             event = json.loads(body)

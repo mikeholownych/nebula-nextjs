@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getPostHogClient } from '@/app/lib/posthog-server'
+import { assertPublicHttpUrl } from '@/app/lib/ssrf-guard'
 
 /**
  * Start an audit by calling FastAPI directly
@@ -40,6 +41,16 @@ export async function POST(request: NextRequest) {
     if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
       return NextResponse.json(
         { error: 'URL must be HTTP or HTTPS' },
+        { status: 400 }
+      )
+    }
+
+    // Block loopback/link-local/private/cloud-metadata targets (SSRF guard)
+    try {
+      await assertPublicHttpUrl(parsedUrl)
+    } catch {
+      return NextResponse.json(
+        { error: 'URL is not a public address' },
         { status: 400 }
       )
     }
@@ -96,7 +107,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Audit start error:', error)
     return NextResponse.json(
-      { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
+      { error: 'Internal server error' },
       { status: 500 }
     )
   }

@@ -94,6 +94,14 @@ hot_lead_watcher_state.json
 warmup_state.json
 inbox_monitor_state.json
 ih_post_state.json
+night_watch_state.json
+night_watch_report.json
+dead_letter_queue.jsonl
+ad_burn_public_reply_seen.json
+audit_blast_results.json
+competitor_mentions.jsonl
+ab_registry.jsonl
+growth_system/linkedin_monitor_state.json
 tunnel_*.log
 watchdog*.log
 monitor*.log

@@ -129,8 +129,11 @@ def main():
             changed = True
 
     if changed:
-        with open(HOT_LEAD_FILE, "w") as f:
-            json.dump(leads if isinstance(raw, list) else leads[0], f, indent=2)
+        data = leads if isinstance(raw, list) else leads[0]
+        tmp_path = HOT_LEAD_FILE + ".tmp"
+        with open(tmp_path, "w") as f:
+            json.dump(data, f, indent=2)
+        os.rename(tmp_path, HOT_LEAD_FILE)  # atomic on same filesystem
 
     log(f"hot_lead_watcher: done; actionable={actionable}; changed={changed}")
 

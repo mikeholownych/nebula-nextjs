@@ -225,7 +225,21 @@ nebulacomponents.shop
         "next_followup": (datetime.datetime.now(datetime.UTC) + datetime.timedelta(hours=48)).isoformat(),
         "pitch": "call_or_fix_list_97",
     }
-    Path(HOT_LEAD_FILE).write_text(json.dumps(hot, indent=2))
+    hot_lead_path = Path(HOT_LEAD_FILE)
+    try:
+        existing = json.loads(hot_lead_path.read_text()) if hot_lead_path.exists() else []
+    except json.JSONDecodeError:
+        existing = []
+    leads = existing if isinstance(existing, list) else [existing]
+    for lead in leads:
+        if isinstance(lead, dict) and lead.get("thread_id") == THREAD_ID:
+            lead.update(hot)
+            break
+    else:
+        leads.append(hot)
+    tmp_path = hot_lead_path.with_suffix(".json.tmp")
+    tmp_path.write_text(json.dumps(leads, indent=2))
+    tmp_path.rename(hot_lead_path)  # atomic on same filesystem
     print("  HOT_LEAD.json updated → status: delivered")
     print(f"\n✅ Audit delivered to {LEAD_EMAIL} (thread {THREAD_ID[:8]}...)")
     print(f"   Pitch: 20-min call (free) OR fix priority list ($97)")

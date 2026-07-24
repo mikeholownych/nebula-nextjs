@@ -259,7 +259,7 @@ The system rejects conventional drop shadows (offset + blur + spread) entirely. 
 - **Do** set display headlines with tight tracking (-0.03em) but never below that floor.
 - **Do** cap body prose at 65–75ch line length.
 - **Do** show evidence — annotated screenshots and specific defects — instead of generic claims.
-- **Do** include skip-link for keyboard navigation. Target WCAG 2.2 AAA (raised from AA; see the AAA Gap note in Colors — FG Muted doesn't clear this yet).
+- **Do** include skip-link for keyboard navigation. Target WCAG 2.2 AAA (raised from AA; see the resolved AAA Gap note in Colors — FG Muted now clears this).
 - **Do** assert: Karla was chosen specifically to exit the Inter/DM Sans reflex-default monoculture.
 - **Do** use the shared `Button`/`Card`/`Input` components from `components/ui/` instead of re-implementing their styles inline.
 

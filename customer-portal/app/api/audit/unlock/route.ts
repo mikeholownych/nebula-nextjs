@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getPostHogClient } from '@/app/lib/posthog-server'
+import { signAuditUnlock } from '@/app/lib/audit-unlock-token'
 
 /**
  * Unlock audit results by providing an email address.
@@ -88,11 +89,10 @@ export async function POST(request: NextRequest) {
       // Non-fatal
     }
 
-    // 3. Set a signed unlock cookie scoped to this audit_id.
-    //    We keep it simple: a base64 of audit_id:email so the results page
-    //    can verify the correct email unlocked the correct audit.
-    //    This is anti-forgery, not full auth — the user's email is the secret.
-    const token = Buffer.from(`${audit_id}:${email}`).toString('base64url')
+    // 3. Set an HMAC-signed unlock cookie scoped to this audit_id. The results
+    //    page verifies the signature server-side, so a visitor can't unlock
+    //    gated results just by setting the cookie themselves.
+    const token = signAuditUnlock(audit_id, email)
 
     const response = NextResponse.json({
       status: 'unlocked',

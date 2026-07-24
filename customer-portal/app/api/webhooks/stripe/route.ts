@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { getPostHogClient } from '@/app/lib/posthog-server'
+import { pool } from '@/app/lib/db'
 
 /**
  * Stripe webhook handler
@@ -60,8 +61,28 @@ export async function POST(request: NextRequest) {
       payment_status: session.payment_status,
     })
 
-    // TODO: Write to PostgreSQL purchases table
-    // For now, just log it
+    try {
+      // ON CONFLICT DO NOTHING makes this safe against Stripe's at-least-once
+      // webhook delivery (retries would otherwise insert duplicate purchases).
+      await pool.query(
+        `INSERT INTO purchases
+          (stripe_session_id, stripe_event_id, customer_email, offer_key, amount_total, currency, payment_status)
+         VALUES ($1, $2, $3, $4, $5, $6, $7)
+         ON CONFLICT (stripe_session_id) DO NOTHING`,
+        [
+          session.id,
+          event.id,
+          session.customer_email,
+          session.metadata?.offer_key ?? null,
+          session.amount_total,
+          session.currency,
+          session.payment_status,
+        ]
+      )
+    } catch (err) {
+      console.error('Failed to persist purchase — will let Stripe retry:', err)
+      return NextResponse.json({ error: 'Failed to record purchase' }, { status: 500 })
+    }
 
     if (session.customer_email) {
       try {

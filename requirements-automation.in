@@ -1,0 +1,30 @@
+# Dependencies for the standalone root-level automation scripts (lead
+# pipeline, AgentMail outreach, Stripe links, signal scrapers, content/YT
+# tooling) — everything outside platform_api/ and the test/dev tooling
+# already covered by requirements-platform-api.in and requirements-dev.in.
+#
+# Derived by scanning root-level *.py for third-party imports not already
+# declared elsewhere. Not yet compiled to a pinned lockfile — pip-tools
+# isn't installed in venv/; run `pip-compile requirements-automation.in`
+# once it is, or install directly with `pip install -r requirements-automation.in`.
+#
+# Excluded on purpose: `agentmail` (check_agentmail_inbox.py is a dead stub —
+# the live AgentMail integration is agentmail_client.py, which talks to the
+# REST API directly and needs no SDK), and `hermes` (list_audit_emails.py is
+# a non-functional one-line placeholder).
+
+PyYAML>=6.0.0        # config/YAML parsing (e.g. agentmail_config.yaml)
+beautifulsoup4>=4.12.0  # already in requirements-dev.in; scraping (audit_evidence.py etc.) needs it outside dev/test too
+requests>=2.31.0     # already in requirements-dev.in; needed at runtime by many root scripts, not just tests
+stripe>=10.0.0        # already in requirements-dev.in; needed at runtime by stripe_links.py, webhook_server.py
+
+# Reddit signal scraping/reply automation (reddit_auto_post.py, reddit_reply_bot.py, signal_scrapers.py)
+praw>=7.7.0
+duckduckgo-search>=6.0.0  # imported as duckduckgo_search in ramp_pipeline_fill.py
+
+# Browser automation for IndieHackers/Reddit posting bots (ih_bot.py, reddit_reply_bot.py)
+# Requires a matching `playwright install chromium` after pip install.
+playwright>=1.40.0
+
+# Optional: only used if vault/scripts/nightly_compile.py's LLM compile step runs
+anthropic>=0.40.0

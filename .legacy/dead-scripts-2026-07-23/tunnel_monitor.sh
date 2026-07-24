@@ -5,7 +5,7 @@
 COUNT=0
 
 while true; do
-    if! python3 /home/mike/nebula/tunnel_manager.py check_tunnel_status; then
+    if ! /home/mike/nebula/venv/bin/python3 /home/mike/nebula/tunnel_manager.py check_tunnel_status; then
         COUNT=$((COUNT+1))
         if [ $COUNT -ge 3 ]; then
             echo "Tunnel down for 15 minutes. Sending alert." >> /home/mike/nebula/tunnel_manager.log

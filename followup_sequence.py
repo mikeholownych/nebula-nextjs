@@ -468,15 +468,18 @@ def process_hot_lead_pitches(now, paid, sent):
         label = "hot_lead_97_pitch"
         if not email or not url or email in paid or (email, label) in sent:
             continue
-        # Skip bounced leads
+        # Skip bounced leads — fail closed: if the bounce check itself errors,
+        # treat the lead as unsendable rather than letting the send proceed.
         if HAS_BOUNCE_DETECTION:
             try:
                 store = LeadStore()
-                if store.is_bounced(email):
-                    print(f"  [skip bounced] {email}")
-                    continue
-            except Exception:
-                pass
+                bounced = store.is_bounced(email)
+            except Exception as e:
+                print(f"  [skip bounce-check-error] {email}: {e}")
+                continue
+            if bounced:
+                print(f"  [skip bounced] {email}")
+                continue
         # Allow action=None or action="send_97_pitch" — both are valid unworked audits
         if lead.get("stage") not in ("audit_delivered", "pitch_queued"):
             continue

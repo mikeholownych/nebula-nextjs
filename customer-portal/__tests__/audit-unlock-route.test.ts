@@ -35,6 +35,7 @@ function request() {
 describe('POST /api/audit/unlock delivery truthfulness', () => {
   beforeEach(() => {
     jest.restoreAllMocks()
+    process.env.AUDIT_UNLOCK_SECRET = 'test-secret'
   })
 
   it('unlocks but reports email_sent=false when delivery is unconfirmed', async () => {
