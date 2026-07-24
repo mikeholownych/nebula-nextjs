@@ -130,7 +130,7 @@ def get_lead(email):
 def upsert_lead(email, stage=None, source=None, name=None, url=None,
                 offer=None, product_stage=None, total_spent_cents=None,
                 content_post_url=None, content_angle=None,
-                nurture_track=None, audit_id=None):
+                nurture_track=None, audit_id=None, trigger_text=None):
     """
     Create or update a lead record.
 
@@ -142,6 +142,9 @@ def upsert_lead(email, stage=None, source=None, name=None, url=None,
     - content_angle: classification of the content that drove them ('teach', 'flex', 'case_study', 'hook', 'story').
     - nurture_track: problem-specific track assignment (headline-clarity, message-match, cta-friction, social-proof).
     - audit_id: ID of the audit that triggered track assignment.
+    - trigger_text: The raw buying signal text (Reddit post title, IH comment excerpt, etc.)
+      that first identified this lead. Persisted so nurture emails can open with the specific
+      signal rather than a generic line.
     """
     email = email.strip().lower()
     if not email or "@" not in email:
@@ -199,6 +202,10 @@ def upsert_lead(email, stage=None, source=None, name=None, url=None,
             if audit_id:
                 existing["track_audit_id"] = audit_id
 
+        # Persist trigger text on first write only — don't overwrite with a weaker signal
+        if trigger_text and not existing.get("trigger_text"):
+            existing["trigger_text"] = str(trigger_text)[:200]
+
         existing["last_seen"] = now
         db[email] = existing
     else:
@@ -225,6 +232,8 @@ def upsert_lead(email, stage=None, source=None, name=None, url=None,
             "track_started_at": now if nurture_track else None,
             "track_position_days": 0,
             "track_audit_id": audit_id or "",
+            # Buying signal that first surfaced this lead — used by nurture as personalized opener
+            "trigger_text": str(trigger_text)[:200] if trigger_text else "",
         }
         db[email] = entry
 

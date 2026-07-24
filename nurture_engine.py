@@ -444,6 +444,15 @@ def run_trickle():
         audit_summary = get_audit_summary(lead)
         checkout_url = f"https://nebulacomponents.shop/checkout?email={email}&url={site}"
 
+        # Signal-based personalization: use the originating buying trigger as the opener
+        # Only applies to the first cold template (position 0 in the sequence)
+        trigger_text = (lead.get("trigger_text") or "").strip()
+        signal_opener = ""
+        if trigger_text and c["template_index"] == 0 and segment == "cold":
+            # Truncate to a clean, readable length
+            opener = trigger_text[:120].rstrip(".,;")
+            signal_opener = f"Came across your post about \"{opener}\" — ran a quick audit on your page.\n\n"
+
         try:
             subject = tmpl["subject"].format(
                 domain=domain[:30],
@@ -456,6 +465,9 @@ def run_trickle():
                 audit_summary=audit_summary,
                 checkout_url=checkout_url,
             )
+            # Inject signal opener before the generic body when available
+            if signal_opener:
+                body = signal_opener + body
         except KeyError as e:
             print(f"  [TEMPLATE ERROR] {email}: missing key {e}")
             errors += 1
