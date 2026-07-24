@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function AuditPage() {
   return (
-    <main className="min-h-screen bg-bg px-6 py-12 pt-[72px]">
+    <main className="min-h-screen bg-bg px-6 py-12 pt-24">
       <div className="mx-auto max-w-2xl">
         {/* Header */}
         <div className="mb-12 text-center">

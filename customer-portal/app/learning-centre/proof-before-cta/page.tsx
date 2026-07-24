@@ -59,7 +59,7 @@ const faqSchema = {
 
 export default function ProofBeforeCTAPage() {
   return (
-    <main id="main-content" className="min-h-screen bg-bg pt-[72px]">
+    <main id="main-content" className="min-h-screen bg-bg pt-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}

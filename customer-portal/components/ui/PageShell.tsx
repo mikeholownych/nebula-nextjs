@@ -8,7 +8,7 @@ interface PageShellProps {
 
 export function PageShell({ children, title, description }: PageShellProps) {
   return (
-    <div className="min-h-screen bg-bg pt-[72px]">
+    <div className="min-h-screen bg-bg pt-24">
       <main id="main-content">
         {title && (
           <div className="max-w-7xl mx-auto px-6 py-12">

@@ -18,7 +18,7 @@ const articleSchema = createArticleSchema({
 
 export default function CtaNotWorkingPage() {
   return (
-    <main id="main-content" className="min-h-screen bg-bg pt-[72px]">
+    <main id="main-content" className="min-h-screen bg-bg pt-24">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div className="mx-auto max-w-3xl px-6 py-14">
         <Link href="/learning-centre" className="text-sm font-semibold text-accent hover:text-accent-light transition-colors">

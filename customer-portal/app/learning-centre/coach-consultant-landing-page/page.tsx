@@ -57,7 +57,7 @@ const articleSchema = createArticleSchema({
 
 export default function CoachConsultantLandingPagePage() {
   return (
-    <main id="main-content" className="min-h-screen bg-bg pt-[72px]">
+    <main id="main-content" className="min-h-screen bg-bg pt-24">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <div className="mx-auto max-w-3xl px-6 py-14">

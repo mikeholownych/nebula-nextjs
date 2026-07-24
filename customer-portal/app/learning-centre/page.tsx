@@ -32,7 +32,7 @@ export default function LearningCentreIndex() {
   articles.forEach(a => { if (categories[a.category]) categories[a.category].push(a) })
 
   return (
-    <main id="main-content" className="min-h-screen bg-bg pt-[72px]">
+    <main id="main-content" className="min-h-screen bg-bg pt-24">
       {/* Hero */}
       <section className="border-b border-border px-6 py-16">
         <div className="mx-auto max-w-5xl">

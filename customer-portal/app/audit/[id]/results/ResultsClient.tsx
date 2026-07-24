@@ -237,7 +237,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
 
   if (loading) {
     return (
-      <main id="main-content" className="min-h-screen bg-bg px-6 py-12 pt-[72px]">
+      <main id="main-content" className="min-h-screen bg-bg px-6 py-12 pt-24">
         <div className="mx-auto max-w-2xl text-center">
           <div className="animate-pulse text-2xl text-fg-muted">Loading results...</div>
         </div>
@@ -247,7 +247,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
 
   if (error || !results) {
     return (
-      <main id="main-content" className="min-h-screen bg-bg px-6 py-12 pt-[72px]">
+      <main id="main-content" className="min-h-screen bg-bg px-6 py-12 pt-24">
         <div className="mx-auto max-w-2xl text-center">
           <Card variant="elevated">
             <h1 className="mb-4 text-2xl font-bold text-fg">Error Loading Results</h1>
@@ -259,7 +259,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
   }
 
   return (
-    <main id="main-content" className="min-h-screen bg-bg px-6 py-12 pt-[72px]">
+    <main id="main-content" className="min-h-screen bg-bg px-6 py-12 pt-24">
       <div className="mx-auto max-w-2xl">
         {/* Header */}
         <div className="mb-8 text-center">

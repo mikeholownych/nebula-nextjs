@@ -147,7 +147,7 @@ export default function PaidTrafficLeakMapPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <main id="main-content" role="main" className="min-h-screen bg-bg pt-[72px]">
+      <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
         <nav aria-label="Breadcrumb" className="mx-auto max-w-3xl px-6 pt-6">
           <ol className="flex items-center gap-2 text-sm text-fg-muted">
             <li><Link href="/" className="hover:text-fg">Home</Link></li>

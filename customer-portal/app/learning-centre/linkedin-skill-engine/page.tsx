@@ -19,7 +19,7 @@ const articleSchema = createArticleSchema({
 
 export default function LinkedInSkillEnginePage() {
   return (
-    <main id="main-content" role="main" className="min-h-screen bg-bg pt-[72px]">
+    <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
 
       <nav aria-label="Breadcrumb" className="mx-auto max-w-4xl px-6 pt-6">

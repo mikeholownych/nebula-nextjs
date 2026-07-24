@@ -70,7 +70,7 @@ const articleSchema = createArticleSchema({
 
 export default function MessageMatchChecklistPage() {
   return (
-    <main id="main-content" className="min-h-screen bg-bg pt-[72px]">
+    <main id="main-content" className="min-h-screen bg-bg pt-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}

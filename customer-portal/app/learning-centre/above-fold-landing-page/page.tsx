@@ -78,7 +78,7 @@ export default function AboveFoldLandingPagePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <main id="main-content" className="min-h-screen bg-bg pt-[72px]">
+      <main id="main-content" className="min-h-screen bg-bg pt-24">
         <div className="mx-auto max-w-3xl px-6 py-14">
           <Link
             href="/learning-centre"

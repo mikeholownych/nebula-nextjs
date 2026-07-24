@@ -43,7 +43,7 @@ export default function ResourcesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(resourceSchema) }}
       />
-      <main id="main-content" className="min-h-screen bg-bg pt-[72px]">
+      <main id="main-content" className="min-h-screen bg-bg pt-24">
         <div className="mx-auto max-w-5xl px-6 py-14">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Nebula Components

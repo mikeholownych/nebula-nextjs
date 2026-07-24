@@ -102,7 +102,7 @@ export default function ProcessingPage() {
   }
 
   return (
-    <main className="min-h-screen bg-bg px-6 py-12 pt-[72px]">
+    <main className="min-h-screen bg-bg px-6 py-12 pt-24">
       <div className="mx-auto max-w-xl">
         {status === 'processing' && (
           <Card variant="elevated" className="text-center">

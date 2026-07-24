@@ -53,7 +53,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
       />
-      <main id="main-content" role="main" className="min-h-screen bg-bg pt-[72px]">
+      <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
       {/* Hero Section */}
       <section className="mx-auto flex min-h-[70vh] max-w-4xl flex-col justify-center px-6 py-24 text-center">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
