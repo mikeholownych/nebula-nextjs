@@ -565,7 +565,7 @@ Before proceeding:
 **Phase 3: Upsells + Polish (Day 3)**
 - [x] **Stripe checkout integration ($7, $147, $1,497)** ✅
 - [x] **Three pricing tiers created and verified** ✅
-  - Audit Lite ($7): https://buy.stripe.com/aFacN55E0cf2fupafM43S0e
+  - Audit Lite ($7): https://buy.stripe.com/aFacN55E0cf2fupafM43S0e — **retired 2026-07-24, deactivated in Stripe.** Never had dedicated fulfillment (would've silently used the $97 Fix Pack's prompt-pack script, or delivered nothing at all — see fix f661f3e1); only the $97 Conversion Fix Pack is a live offer now.
   - Con...[truncated]
 - [ ] Analytics tracking
 - [ ] Blurred results UX
