@@ -304,7 +304,10 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     report = build_report(args.base, parse_as_of(args.as_of), args.public_url, args.local_url, args.service)
-    print(json.dumps(report, indent=2, sort_keys=True) if args.json else format_report(report))
+    # Silent when healthy — only emit output (= Telegram notification) on warning/critical.
+    # This prevents daily noise when the pipeline is operating normally.
+    if report["status"] != "healthy" or args.strict_exit or args.json:
+        print(json.dumps(report, indent=2, sort_keys=True) if args.json else format_report(report))
     if args.strict_exit:
         return {"healthy": 0, "warning": 1, "critical": 2}[report["status"]]
     return 0

@@ -175,15 +175,14 @@ def main():
 
     raw_files = get_raw_files()
     if not raw_files:
-        print("vault/raw/ is empty — nothing to compile.")
-        print("Drop source files into vault/raw/ to feed the brain.")
+        # Silent — no vault/raw/ files means nothing to report
         return
 
     watermark = load_watermark()
     changed   = find_changed(raw_files, watermark)
 
     if not changed:
-        print(f"No changes in vault/raw/ since last compile. ({len(raw_files)} files checked)")
+        # Silent — no output means no Telegram notification
         return
 
     print(f"Changed files: {len(changed)}")
