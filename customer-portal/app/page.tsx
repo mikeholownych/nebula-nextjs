@@ -20,7 +20,7 @@ const howToSchema = {
   '@type': 'HowTo',
   name: 'How to get a free landing page audit from Nebula Components',
   description: 'Get an evidence-backed diagnosis of your landing page in three steps.',
-  totalTime: 'PT1M',
+  totalTime: 'PT2M', // matches the real backend timeout (app/api/audit/start/route.ts) — do not understate this
   step: [
     {
       '@type': 'HowToStep',
@@ -63,7 +63,7 @@ export default function Home() {
           The Ad Wasn't the Problem.<br className="hidden sm:block" /> The Page Was.
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-xl font-medium text-fg">
-          Agencies charge $5,000 to tell you what Nebula shows you in 60 seconds.
+          Agencies charge $5,000 to tell you what Nebula shows you for free, in minutes.
           Enter your URL and get a prioritized list of conversion fixes — no signup needed.
         </p>
         <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-fg-muted">
@@ -82,19 +82,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Villain Section — The $14,000 Page Problem */}
+      {/* Villain Section — The Ad Spend Problem */}
       <section className="border-t border-border px-6 py-16">
         <div className="mx-auto max-w-4xl">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
             The uncomfortable math
           </p>
           <h2 className="mb-6 text-3xl font-bold tracking-tight text-fg md:text-4xl">
-            The $14,000 page problem.
+            The page problem, not the ad problem.
           </h2>
           <p className="mb-8 max-w-2xl text-lg text-fg-muted leading-7">
-            The average founder we audit has spent <strong className="text-fg">$14,000 on paid ads</strong> before asking
-            whether the page was the problem. The ads delivered clicks.
-            The page stole the sale.
+            Most founders who come to us have already spent real money on paid ads
+            <strong className="text-fg"> before</strong> asking whether the page was the problem.
+            The ads delivered clicks. The page stole the sale.
           </p>
 
           {/* The three friction patterns */}
@@ -110,8 +110,8 @@ export default function Home() {
               <p className="mb-1 text-sm font-semibold uppercase tracking-wider text-accent">Pattern 2</p>
               <p className="font-semibold text-fg">CTA you can't see</p>
               <p className="mt-2 text-sm text-fg-muted">
-                Green button on green background. 0.02% click-through rate.
-                Not a traffic problem. A visibility problem.
+                Green button on green background. Barely-there contrast tanks click-through
+                before traffic quality ever enters the picture. Not a traffic problem. A visibility problem.
               </p>
             </div>
             <div className="rounded-xl border border-border bg-bg-muted/40 p-5">
@@ -271,58 +271,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Receipts Section — Named proof */}
+      {/* No Fake Proof Section — honest positioning instead of fabricated testimonials */}
       <section className="border-t border-border px-6 py-16">
         <div className="mx-auto max-w-4xl">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-            Receipts
+            Why there are no case studies here yet
           </p>
-          <h2 className="mb-10 text-2xl font-bold text-fg">
-            Real pages. Real numbers. No stock photos.
+          <h2 className="mb-6 text-2xl font-bold text-fg">
+            We won't publish a before/after number we can't back up.
           </h2>
-          <div className="grid gap-6 md:grid-cols-2">
-            {/* Danny */}
-            <div className="rounded-xl border border-border bg-bg-muted/40 p-6">
-              <p className="mb-4 text-sm text-fg-muted leading-6 italic">
-                "Spent $14,200 on Shopify ads. Page had no social proof visible above the fold.
-                Added a 30-second Loom explainer — no voiceover, just the product.
-                Day 1 orders tripled."
-              </p>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-semibold text-fg">Danny</p>
-                  <p className="text-sm text-fg-muted">Ecommerce founder · Shopify</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-2xl font-bold text-accent">3×</p>
-                  <p className="text-xs text-fg-muted">day-1 orders</p>
-                </div>
-              </div>
-            </div>
-
-            {/* The green button */}
-            <div className="rounded-xl border border-border bg-bg-muted/40 p-6">
-              <p className="mb-4 text-sm text-fg-muted leading-6 italic">
-                "Agency A/B tested our CTA button for 90 days. Budget: $22k.
-                Result: +0.2% lift. Nebula fixed the contrast and visibility in 2 hours.
-                Result: +14.3× conversion."
-              </p>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-semibold text-fg">B2B SaaS founder</p>
-                  <p className="text-sm text-fg-muted">Lead gen · Name withheld</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-2xl font-bold text-accent">14.3×</p>
-                  <p className="text-xs text-fg-muted">conversion lift</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <p className="mt-6 text-sm text-fg-muted">
-            Both pages scored under 5/10 on initial audit.
-            Both fixed in under 7 days. $97.
+          <p className="max-w-2xl text-base leading-7 text-fg-muted">
+            Most landing-page tools lead with a wall of client logos and revenue charts.
+            We don't have verified results to publish yet — and we'd rather tell you that
+            than make one up. When we have a real client outcome with dates, the actual
+            metric, and a way to check it, it goes here with the underlying evidence, not before.
+          </p>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-fg-muted">
+            Until then, judge the audit on the thing you can check yourself right now:
+            run it on your own page and see if the findings hold up.
           </p>
         </div>
       </section>
@@ -334,7 +300,7 @@ export default function Home() {
             Ready to See Why Your Ads Aren't Converting?
           </h2>
           <p className="mb-8 text-fg-muted">
-            Get your free landing page audit in 60 seconds.
+            Get your free landing page audit — no signup required.
           </p>
           <Link 
             href="/audit" 

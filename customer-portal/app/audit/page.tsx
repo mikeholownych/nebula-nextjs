@@ -5,7 +5,7 @@ import AuditForm from './AuditForm'
 
 export const metadata: Metadata = {
   title: 'Free Landing Page Audit — Nebula Components',
-  description: 'Get an evidence-backed diagnosis of your landing page in 60 seconds — no signup required to start.',
+  description: 'Get an evidence-backed diagnosis of your landing page in minutes — no signup required to start.',
   alternates: { canonical: 'https://nebulacomponents.shop/audit' },
 }
 
@@ -22,7 +22,7 @@ export default function AuditPage() {
             Find Out Why Your Ads Aren't Converting
           </h1>
           <p className="text-lg text-fg-muted">
-            Get actionable insights in 60 seconds — no signup required to start
+            Get actionable insights in minutes — no signup required to start
           </p>
         </div>
 

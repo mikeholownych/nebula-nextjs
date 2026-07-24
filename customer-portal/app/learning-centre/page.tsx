@@ -90,7 +90,7 @@ export default function LearningCentreIndex() {
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-2xl font-bold text-fg">Know which leak to fix. Then fix it.</h2>
           <p className="mt-4 text-fg-muted">
-            The free audit checks your landing page URL against these leak patterns automatically. Takes 60 seconds.
+            The free audit checks your landing page URL against these leak patterns automatically. Takes a couple of minutes.
           </p>
           <Link
             href="/audit"

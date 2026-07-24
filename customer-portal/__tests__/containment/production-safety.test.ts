@@ -311,16 +311,29 @@ describe('production safety containment', () => {
     for (const relative of [
       'app/page.tsx',
       'app/pricing/page.tsx',
+      'app/audit/page.tsx',
+      'app/learning-centre/page.tsx',
       'app/audit-lander/page.tsx',
       'app/index-old/page.tsx',
       'components/Footer.tsx',
       'components/ui/PageShell.tsx',
     ]) {
-      const source = readFileSync(path.join(process.cwd(), relative), 'utf8').toLowerCase()
+      const rawSource = readFileSync(path.join(process.cwd(), relative), 'utf8').toLowerCase()
+      // "Generic report generated in seconds" on the homepage describes a
+      // *competitor's* shallow audit, contrasted against Nebula's — not a
+      // claim about Nebula's own turnaround. Strip it before checking.
+      const source = rawSource.replace('generic report generated in seconds', '')
       expect(source).not.toContain("fetch('/api/audit'")
-      expect(source).not.toContain('results in 60s')
-      expect(source).not.toContain('private link in 60 seconds')
-      expect(source).not.toContain('free audit in 60 seconds')
+      // Broad pattern, not exact phrases — the real bug (2026-07-24) was that
+      // exact-phrase checks ('free audit in 60 seconds' etc.) missed sibling
+      // wordings like "shows you in 60 seconds" and "takes 60 seconds" that
+      // made the same false promise against the real 120s backend timeout
+      // (app/api/audit/start/route.ts). Also blocks bare "instant"/"in
+      // seconds" claims for the same reason: don't claim faster than the
+      // system can actually deliver.
+      expect(source).not.toMatch(/\b60[\s-]?seconds?\b/)
+      expect(source).not.toMatch(/\bin seconds\b/)
+      expect(source).not.toMatch(/\binstant\b/)
     }
   })
 
@@ -345,15 +358,30 @@ describe('production safety containment', () => {
 
   it('keeps case studies limited to documented, verified outcomes', () => {
     const caseStudySource = readFileSync(path.join(process.cwd(), 'app/case-studies/[slug]/page.tsx'), 'utf8')
+    const indexSource = readFileSync(path.join(process.cwd(), 'app/case-studies/page.tsx'), 'utf8')
     const sitemapSource = readFileSync(path.join(process.cwd(), 'app/sitemap.ts'), 'utf8')
 
     // Unknown slugs still 404 — only documented cases in CASE_STUDIES resolve.
     expect(caseStudySource).toMatch(/notFound\(\)/)
     expect(caseStudySource).not.toContain('score:')
     expect(caseStudySource).not.toContain("'@type': 'CaseStudy'")
-    // Verified case studies (e.g. founder-ecommerce-48x-roas) are real,
-    // documented outcomes and are meant to be discoverable.
-    expect(sitemapSource).toContain('/case-studies/')
+
+    // As of 2026-07-24 there are zero real, evidenced case studies (the
+    // previous 4 entries were invented — this business has no completed
+    // paid engagements on record). CASE_STUDIES and the sitemap's
+    // caseStudySlugs must stay in lockstep and both empty until a case
+    // study with real dates, a real metric, and inspectable evidence is
+    // added to CASE_STUDIES — at which point this test should be updated
+    // to assert that specific slug is present in both places again.
+    expect(caseStudySource).toMatch(/CASE_STUDIES:\s*Record<string,\s*CaseStudy>\s*=\s*\{\}/)
+    expect(sitemapSource).toMatch(/caseStudySlugs:\s*string\[\]\s*=\s*\[\]/)
+
+    // The index page must not claim real/verified results while
+    // CASE_STUDIES is empty — this is exactly the gap that let 4
+    // fabricated case studies read as genuine before.
+    const indexLower = indexSource.toLowerCase()
+    expect(indexLower).not.toMatch(/real results from/)
+    expect(indexLower).not.toMatch(/founders who (stopped|ran the audit)/)
   })
 
   it('keeps company and founder pages free of unsupported proof and paused offers', () => {

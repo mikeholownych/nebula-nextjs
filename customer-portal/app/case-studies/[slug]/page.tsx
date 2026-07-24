@@ -17,104 +17,14 @@ type CaseStudy = {
   modifiedDate: string
 }
 
-const CASE_STUDIES: Record<string, CaseStudy> = {
-  'founder-ecommerce-48x-roas': {
-    slug: 'founder-ecommerce-48x-roas',
-    title: 'Ecommerce: 48x ROAS From Landing Page Fixes',
-    eyebrow: 'Ecommerce',
-    description:
-      'Founder spent $12k on Meta ads with zero sales. A landing page audit revealed 5 conversion leaks. After fixing: $97 ad spend produced $7,100 revenue — 48x ROAS.',
-    outcome: '48x ROAS',
-    outcomeLabel: 'Return on Ad Spend',
-    situation:
-      'A DTC ecommerce founder had been running Meta ads for four months, spending approximately $12,000, with zero completed purchases. Click-through rates looked healthy. The problem was on the landing page.',
-    diagnosis:
-      'The audit identified five leaks: no above-fold social proof, a CTA that appeared before any product explanation, mobile layout breaking product images, checkout link pointing to a third-party domain with no trust signals, and page load over 4.8 seconds.',
-    fixes: [
-      'Added customer photo testimonials above the fold',
-      'Moved CTA below the product benefit block',
-      'Fixed mobile image overflow and compressed hero image from 1.4MB to 68KB',
-      'Added SSL badge and money-back guarantee near checkout link',
-      'Eliminated two blocking third-party scripts',
-    ],
-    result:
-      'Next Meta campaign: $97 spend → $7,100 revenue. 48x ROAS. The landing page, not the ad creative, had been the bottleneck the entire time.',
-    publishedDate: '2025-09-01',
-    modifiedDate: '2026-07-18',
-  },
-  'b2b-saas-cut-cpc-in-half': {
-    slug: 'b2b-saas-cut-cpc-in-half',
-    title: 'B2B SaaS: Cut CPC In Half By Fixing Quality Score',
-    eyebrow: 'B2B SaaS',
-    description:
-      'Google Quality Score was 3/10. Audit revealed message-match breaks between ad copy and landing page. Fixing alignment raised Quality Score to 8/10 and cut CPC by 50%.',
-    outcome: '−50% CPC',
-    outcomeLabel: 'Cost Per Click Reduction',
-    situation:
-      'A B2B SaaS company running Google Search ads had a Quality Score of 3/10 on their primary keywords. They were paying a CPC premium every single auction.',
-    diagnosis:
-      'The audit found critical message-match breaks: the ad promised "free 14-day trial — no credit card" but the landing page required a credit card upfront. The headline on the page did not repeat the keyword phrase from the ad group. Load time was 5.2 seconds.',
-    fixes: [
-      'Rewrote landing page headline to echo the exact search keyword',
-      'Removed credit card requirement from the trial sign-up form',
-      'Added keyword-matched subheading reinforcing the ad promise',
-      'Reduced page weight by deferring analytics scripts',
-      'Added FAQ addressing trial-to-paid conversion concern',
-    ],
-    result:
-      'Quality Score rose from 3/10 to 8/10 within two weeks. CPC dropped 50%. Monthly ad budget stretched twice as far without increasing spend.',
-    publishedDate: '2025-10-15',
-    modifiedDate: '2026-07-18',
-  },
-  'agency-client-compliance-recovery': {
-    slug: 'agency-client-compliance-recovery',
-    title: 'Agency: Recovered Disapproved Ads Account',
-    eyebrow: 'Agency',
-    description:
-      'Google Ads account suspended for policy violations. Audit identified landing page trust-signal and compliance gaps. After fixes: ads reinstated, client retained.',
-    outcome: 'Account Restored',
-    outcomeLabel: 'Ads Account Reinstated',
-    situation:
-      'A digital agency managing a client\'s Google Ads account received a suspension notice. The disapproval cited "untrustworthy promotions" policy. The account had been running for two years without issue.',
-    diagnosis:
-      'The audit flagged the landing page as the trigger: missing physical address, no clear refund/cancellation policy, a countdown timer with no stated basis, earnings claims with no disclaimers, and a phone number that went to voicemail without a callback option.',
-    fixes: [
-      'Added registered business address and contact email to the footer',
-      'Published a clear refund and cancellation policy page, linked from the landing page',
-      'Removed countdown timer entirely (no verifiable scarcity basis)',
-      'Added FTC-compliant earnings disclaimer below all outcome claims',
-      'Added a contact form as a fallback to the phone number',
-    ],
-    result:
-      'Appeals submitted post-fix. Account reinstated within 6 business days. Client retained. No repeat suspension in the following 90 days.',
-    publishedDate: '2025-11-01',
-    modifiedDate: '2026-07-18',
-  },
-  'coaching-business-form-fills-from-zero': {
-    slug: 'coaching-business-form-fills-from-zero',
-    title: 'Coaching: First Form Fills From Paid Traffic',
-    eyebrow: 'Coaching',
-    description:
-      'Business coach spent $5k on Meta ads with 0 form fills. Audit found CTA above proof and mobile friction. After fixes: 23 form fills at $12.40 each.',
-    outcome: '23 Leads',
-    outcomeLabel: 'Form Fills at $12.40 Each',
-    situation:
-      'A business coach ran a $5,000 Meta campaign over six weeks targeting founders. Zero form fills. The creative had good engagement — links were being clicked — but nobody completed the form.',
-    diagnosis:
-      'The audit found three conversion killers: the booking form appeared above any credibility content; on mobile the form was partially obscured by a sticky cookie banner; and the form asked for phone number (high friction) before establishing any trust.',
-    fixes: [
-      'Moved the form below a social proof section with three testimonials and a client logo row',
-      'Fixed cookie banner z-index and reduced its mobile footprint',
-      'Removed phone number field; made it optional in a second step',
-      'Added a "What happens next" explanation adjacent to the form CTA',
-      'Compressed hero image and eliminated a render-blocking font load',
-    ],
-    result:
-      '23 form fills in the next 30-day campaign. Cost per lead: $12.40. The audience was qualified the entire time — the page had been filtering them out.',
-    publishedDate: '2025-12-01',
-    modifiedDate: '2026-07-18',
-  },
-}
+// No entries yet. These were previously populated with fabricated
+// scenarios (invented customer names, dollar figures, and outcomes that
+// never happened — this business has zero completed paid engagements on
+// record). Removed 2026-07-24 rather than relabeled, since a hyper-specific
+// fake number doesn't become honest by adding an "illustrative" caveat.
+// Add a real entry here only once it has dates, the actual metric, and
+// underlying evidence that can be shown, per app/case-studies/page.tsx.
+const CASE_STUDIES: Record<string, CaseStudy> = {}
 
 type Props = { params: Promise<{ slug: string }> }
 

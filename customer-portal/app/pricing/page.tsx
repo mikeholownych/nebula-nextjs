@@ -102,11 +102,11 @@ export default function PricingPage() {
 
         <div className="grid gap-8 md:grid-cols-2">
           <Card variant="bordered">
-            <p className="mb-3 text-sm font-medium text-fg-muted">Free, instant</p>
+            <p className="mb-3 text-sm font-medium text-fg-muted">Free</p>
             <h2 className="text-2xl font-semibold text-fg">Automated Audit</h2>
             <p className="mt-2 text-3xl font-bold text-fg">Free</p>
             <p className="mt-4 text-fg-muted">
-              Drop in a URL and get a scored, evidence-backed diagnosis in seconds — no signup required.
+              Drop in a URL and get a scored, evidence-backed diagnosis in minutes — no signup required.
             </p>
             <ul className="mt-6 space-y-2 text-sm text-fg-muted">
               {[

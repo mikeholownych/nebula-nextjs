@@ -65,13 +65,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   })
 
-  // Case study slugs
-  const caseStudySlugs = [
-    'founder-ecommerce-48x-roas',
-    'b2b-saas-cut-cpc-in-half',
-    'agency-client-compliance-recovery',
-    'coaching-business-form-fills-from-zero',
-  ]
+  // Case study slugs — none yet. Previously listed 4 fabricated case
+  // studies here; removed 2026-07-24 along with the fabricated content
+  // itself (see app/case-studies/[slug]/page.tsx). Add a slug here only
+  // once a real, evidenced case study exists at that route.
+  const caseStudySlugs: string[] = []
 
   caseStudySlugs.forEach(slug => {
     sitemapEntries.push({

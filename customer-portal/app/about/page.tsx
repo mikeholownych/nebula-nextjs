@@ -25,14 +25,16 @@ export default function AboutPage() {
             We run a structured audit against your landing page — checking message-match, trust signals, mobile layout, form friction, load time, and compliance — and deliver a prioritised fix list with specific instructions. If you want implementation, we do that too, at a flat rate, with no retainer required.
           </p>
           <p className="text-fg-muted">
-            Everything we publish starts from a documented case. If a claim appears on this site, there is a recorded outcome behind it.
+            When we publish a specific outcome claim, it comes with a recorded case behind it —
+            not just a number in a box. We don&apos;t have a verified case study to publish yet;
+            see <a href="/case-studies" className="underline hover:text-fg">why</a>.
           </p>
         </section>
 
         <section className="mb-10 rounded-2xl border border-border bg-bg-panel p-6">
           <h2 className="mb-3 text-2xl font-bold text-accent">Who we work with</h2>
           <p className="mb-4 text-fg-muted">
-            Founders and operators who are actively spending on paid ads — Google, Meta, LinkedIn — and not seeing the conversions the click-through rate should produce. The problem is almost always on the landing page, not the ad.
+            Founders and operators who are actively spending on paid ads — Google, Meta, LinkedIn — and not seeing the conversions the click-through rate should produce. In our audits, the landing page is very often part of the problem — but we won&apos;t tell you it&apos;s the only variable. Traffic quality, offer, and price matter too; the audit tells you specifically what we can see on the page itself.
           </p>
           <ul className="space-y-2 text-fg-muted">
             {[
