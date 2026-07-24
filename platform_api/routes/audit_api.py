@@ -3,7 +3,7 @@ Nebula Audit API
 FastAPI routes for audit processing (called by n8n workflows)
 """
 
-from fastapi import APIRouter, BackgroundTasks, HTTPException
+from fastapi import APIRouter, BackgroundTasks, HTTPException, Query
 from pydantic import BaseModel, HttpUrl
 from typing import Optional
 import subprocess
@@ -217,25 +217,62 @@ async def health_check():
 
 
 @router.get("/{audit_id}")
-async def get_audit(audit_id: str):
-    """Fetch audit by ID from database"""
+async def get_audit(audit_id: str, share: Optional[str] = Query(default=None)):
+    """Fetch audit by ID from database.
+
+    If `share` is provided, it must be that audit's actual share_token —
+    this is the third-party share-link path (customer-portal's results
+    page.tsx passes ?share=<token> when a visitor isn't the original
+    requester and doesn't have the unlock cookie). A share token that
+    doesn't match returns 404, same as a nonexistent audit, so this can't
+    be used to probe which tokens are valid.
+    """
     try:
         from uuid import UUID
         audit_uuid = UUID(audit_id)
-        
+
+        if share is not None:
+            audit = await audit_db.get_audit_by_share_token(share)
+            if not audit or audit.get("audit_id") != audit_id:
+                raise HTTPException(status_code=404, detail="Audit not found")
+            return audit
+
         audit = await audit_db.get_audit(audit_uuid)
-        
+
         if not audit:
             raise HTTPException(status_code=404, detail="Audit not found")
-        
+
         return audit
-        
+
     except ValueError:
         raise HTTPException(status_code=400, detail="Invalid audit ID format")
     except HTTPException:
         raise
     except Exception:
         raise HTTPException(status_code=500, detail="Audit lookup unavailable")
+
+
+@router.get("/{audit_id}/share-token")
+async def get_share_token(audit_id: str):
+    """Return this audit's share token, generating one on first request.
+    Used by the results page's "Share this report" button."""
+    try:
+        from uuid import UUID
+        audit_uuid = UUID(audit_id)
+
+        share_token = await audit_db.get_or_create_share_token(audit_uuid)
+
+        if share_token is None:
+            raise HTTPException(status_code=404, detail="Audit not found")
+
+        return {"share_token": share_token}
+
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid audit ID format")
+    except HTTPException:
+        raise
+    except Exception:
+        raise HTTPException(status_code=500, detail="Share token unavailable")
 
 
 class EmailRequest(BaseModel):

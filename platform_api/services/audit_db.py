@@ -4,6 +4,7 @@ Database service for audit persistence
 
 import os
 import asyncpg
+import secrets
 from datetime import datetime
 from typing import Optional, List
 from uuid import UUID
@@ -85,14 +86,66 @@ class AuditDB:
     async def mark_email_sent(self, audit_id: UUID) -> bool:
         """Mark audit email as sent"""
         await self.connect()
-        
+
         async with self.pool.acquire() as conn:
             result = await conn.execute(
                 "UPDATE audits SET email_sent_at = NOW() WHERE id = $1",
                 audit_id
             )
             return result == 'UPDATE 1'
-    
+
+    async def get_or_create_share_token(self, audit_id: UUID) -> Optional[str]:
+        """Return the audit's share token, generating and persisting one on
+        first request. share_token has a UNIQUE constraint in the schema;
+        16 bytes of entropy makes a collision practically impossible, so no
+        retry-on-conflict loop."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                "SELECT share_token FROM audits WHERE id = $1",
+                audit_id
+            )
+            if row is None:
+                return None
+            if row['share_token']:
+                return row['share_token']
+
+            token = secrets.token_urlsafe(16)
+            await conn.execute(
+                "UPDATE audits SET share_token = $2 WHERE id = $1",
+                audit_id, token
+            )
+            return token
+
+    async def get_audit_by_share_token(self, share_token: str) -> Optional[dict]:
+        """Look up an audit by its share token — used to validate a share
+        link before returning full results to a visitor who isn't the
+        original requester and doesn't have the unlock cookie."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                SELECT id, customer_id, url, email, name, status,
+                       score, grade, findings, created_at, completed_at,
+                       email_sent_at, paid_at, paid_product
+                FROM audits WHERE share_token = $1
+                """,
+                share_token
+            )
+            if row is None:
+                return None
+            data = dict(row)
+            if data.get('findings') and isinstance(data['findings'], str):
+                data['findings'] = json.loads(data['findings'])
+            if data.get('score') is not None:
+                data['score'] = data['score'] / 10.0
+            data['audit_id'] = str(data.pop('id'))
+            if data.get('customer_id'):
+                data['customer_id'] = str(data['customer_id'])
+            return data
+
     async def get_audit(self, audit_id: UUID) -> Optional[dict]:
         """Get audit by ID"""
         await self.connect()
