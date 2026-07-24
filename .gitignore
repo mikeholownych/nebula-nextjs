@@ -104,6 +104,8 @@ ab_registry.jsonl
 growth_system/linkedin_monitor_state.json
 backups/
 backup_databases.lock
+production_health_state.json
+notify_production_health.lock
 tunnel_*.log
 watchdog*.log
 monitor*.log

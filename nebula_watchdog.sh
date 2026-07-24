@@ -1,7 +1,22 @@
 #!/usr/bin/env bash
 # Nebula watchdog — runs every 5 min via cron
-# Checks: port 8765, port 8766 (WP), cloudflared, webhook server (9000)
+# Checks: port 8766 (WP), cloudflared, webhook server (9000)
 # Restarts anything dead. Logs to /home/mike/nebula/watchdog.log
+#
+# Removed 2026-07-24 (INC-0004/INC-0005): this used to also check port 8765
+# and `systemctl restart nebula-site` on failure. Port 8765 was the retired
+# pre-Next.js Python server (see .legacy/python-web-server/) and has had
+# nothing listening on it for a long time, so that check always "failed" and
+# this watchdog was unconditionally restarting nebula-site every time it ran
+# — nebula-site is the OBSOLETE alias unit that deploy/systemd/README.md
+# says must stay disabled/inactive, because it conflicts with the canonical
+# nebula-nextjs.service for port 3000. This is what caused nebula-nextjs.service
+# to be down for 14+ hours while nebula-site silently served stale, pre-fix
+# code — see governance/INCIDENTS/INC-0004 and INC-0005. Production health
+# (including drift like this) is now monitored by
+# scripts/notify_production_health.py, which alerts on Telegram instead of
+# blindly restarting a service — a bad restart target here doesn't get a
+# second chance to cause a multi-hour outage.
 set -euo pipefail
 
 LOG="/home/mike/nebula/watchdog.log"
@@ -13,13 +28,6 @@ check_port() {
 }
 
 log() { echo "[$(ts)] $*" >> "$LOG"; }
-
-# --- 8765 nebula-site ---
-code=$(check_port 8765)
-if [[ "$code" != "200" && "$code" != "301" && "$code" != "302" ]]; then
-  log "RESTART nebula-site (got HTTP $code)"
-  systemctl restart nebula-site 2>>"$LOG" || true
-fi
 
 # --- 8766 WordPress ---
 code=$(check_port 8766)

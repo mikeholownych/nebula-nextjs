@@ -38,10 +38,12 @@ def telegram_alert(msg: str, level: str = 'warn'):
     icon = {'info': 'ℹ️', 'warn': '⚠️', 'critical': '🚨', 'revenue': '💰'}.get(level, '⚠️')
     full = f"{icon} *SRE [{level.upper()}]*\n{msg}"
     try:
-        subprocess.run(
-            ['hermes', 'send', '--chat', '5920497760', full],
-            capture_output=True, timeout=15
+        result = subprocess.run(
+            ['hermes', 'send', '--to', 'telegram:5920497760', full],
+            capture_output=True, timeout=15, text=True
         )
+        if result.returncode != 0:
+            log(f'telegram_alert failed: rc={result.returncode} stderr={result.stderr.strip()}')
     except Exception as e:
         log(f'telegram_alert failed: {e}')
 
