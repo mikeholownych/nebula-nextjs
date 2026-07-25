@@ -914,13 +914,12 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         _qw_str = " + ".join(_qw_labels[:2])
         if score < 6.5:
             pitch_line = (
-                f"Implements the fix: {_qw_str} — shipped in 24h, no call, "
-                f"full refund if you're not satisfied. "
-                f"At {spend_label} this pays for itself in under a week."
+                f"AI prompts for: {_qw_str} — delivered by email within minutes, no call. "
+                f"At {spend_label} this pays for itself fast once you apply them."
             )
         else:
             pitch_line = (
-                f"Implements: {_qw_str} — built and live in 24h. No call required."
+                f"AI prompts for: {_qw_str} — delivered by email within minutes. No call required."
             )
     else:
         pitch_line = "Implements the fix in 24h. No call required. Full refund if not satisfied."
@@ -997,12 +996,12 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         "━" * 40,
         "",
         f"$97 Fix Pack — {pitch_line}",
-        "Details + FAQ: https://nebulacomponents.shop/primer.html",
+        "Details + FAQ: https://nebulacomponents.shop/primer",
         "One-click checkout: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h",
         "",
-        "🏷️ Full refund if your conversion rate doesn't improve within 14 days.",
-        "📋 We duplicate your page for testing — zero risk to your live campaigns.",
-        "↩️ Documented one-click rollback if you don't like the changes.",
+        "📩 Delivered by email within minutes — no 24-hour wait, no call.",
+        "🔒 We never ask for access to your site, CMS, or hosting — you apply the prompts yourself.",
+        "🔁 One free re-audit within 30 days to see what changed.",
         "",
         "━" * 40,
         "",

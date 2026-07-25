@@ -42,7 +42,14 @@ const nextConfig: NextConfig = {
       { source: '/cta-optimization.html',               destination: '/cta-optimization',   permanent: true },
       { source: '/roas-cliff.html',                     destination: '/roas-cliff',          permanent: true },
       { source: '/ai-sdr-vs-audit.html',                destination: '/ai-sdr-vs-audit',     permanent: true },
-      { source: '/primer.html',                         destination: '/learning-centre',      permanent: true },
+      // NOT a legacy orphan — this is the live "Details + FAQ" link embedded
+      // in every free audit email (deliver_audit.py), served from
+      // public/primer.html. A previous pass in this same redirect map
+      // mistook it for a dead pre-migration URL and 301'd it to
+      // /learning-centre for ~3 days, sending every real lead who clicked
+      // "Details + FAQ" mid-purchase-decision somewhere unrelated. Canonical
+      // URL is now the clean /primer (see the matching rewrite below).
+      { source: '/primer.html',                         destination: '/primer',              permanent: true },
       { source: '/7-systems.html',                      destination: '/learning-centre',      permanent: true },
       { source: '/audit.html',                          destination: '/audit',               permanent: true },
       { source: '/self-audit.html',                     destination: '/audit',               permanent: true },
@@ -90,6 +97,16 @@ const nextConfig: NextConfig = {
         destination: '/:path.html',
       },
       // DO NOT rewrite single-word paths - let static files and app routes handle them
+      // (the assumption above turned out false for direct-hit .html requests —
+      // Next doesn't fall through to public/ for an exact single-word `.html`
+      // path here, so single-word public/*.html files need an explicit rewrite
+      // like the one below, same as the hyphenated ones get automatically.
+      // /primer is the one link that actually matters — it's the "Details +
+      // FAQ" URL embedded in every free audit email.)
+      {
+        source: '/primer',
+        destination: '/primer.html',
+      },
     ]
   },
   // Allow serving static HTML
