@@ -263,6 +263,30 @@ async def get_audit(audit_id: str, share: Optional[str] = Query(default=None)):
         raise HTTPException(status_code=500, detail="Audit lookup unavailable")
 
 
+@router.get("/badge/{badge_id}")
+async def get_badge(badge_id: str):
+    """Real before/after data for the embeddable badge SVG. Domain-locking
+    and image rendering happen in the Next.js proxy (which can read the
+    incoming Referer header) — this route is pure data."""
+    try:
+        from uuid import UUID
+        badge_uuid = UUID(badge_id)
+
+        badge = await audit_db.get_badge(badge_uuid)
+
+        if badge is None:
+            raise HTTPException(status_code=404, detail="Badge not found")
+
+        return badge
+
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid badge ID format")
+    except HTTPException:
+        raise
+    except Exception:
+        raise HTTPException(status_code=500, detail="Badge lookup unavailable")
+
+
 @router.get("/{audit_id}/share-token")
 async def get_share_token(audit_id: str):
     """Return this audit's share token, generating one on first request.

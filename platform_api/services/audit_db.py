@@ -66,22 +66,74 @@ class AuditDB:
             )
             return row['id']
     
-    async def update_audit(self, audit_id: UUID, score: float, grade: str, 
+    async def update_audit(self, audit_id: UUID, score: float, grade: str,
                           findings: List[dict], status: str = 'completed') -> bool:
         """Update audit with results"""
         await self.connect()
-        
+
         async with self.pool.acquire() as conn:
             result = await conn.execute(
                 """
                 UPDATE audits
-                SET score = $2, grade = $3, findings = $4, 
+                SET score = $2, grade = $3, findings = $4,
                     status = $5, completed_at = NOW()
                 WHERE id = $1
                 """,
                 audit_id, int(score * 10), grade, json.dumps(findings), status
             )
-            return result == 'UPDATE 1'
+            updated = result == 'UPDATE 1'
+            if updated and status == 'completed':
+                # Best-effort: the audit UPDATE above already succeeded, so a
+                # badge-check failure (transient DB hiccup, etc.) must never
+                # surface as an audit-completion failure to the caller.
+                try:
+                    await self.check_and_award_badge(conn, audit_id)
+                except Exception:
+                    pass
+            return updated
+
+    async def check_and_award_badge(self, conn, audit_id: UUID) -> Optional[dict]:
+        """A badge documents one real, specific event: this customer's score
+        on this URL genuinely improved between their first audit and a later
+        one — not a fixed pass bar, any real delta. Runs inside the same
+        connection/transaction as the completing update_audit call.
+        Idempotent via badges' UNIQUE(customer_id, url) — a badge, once
+        earned, is never reissued or overwritten even if the page improves
+        further or regresses later."""
+        row = await conn.fetchrow(
+            "SELECT customer_id, url FROM audits WHERE id = $1", audit_id
+        )
+        if row is None or row['customer_id'] is None:
+            return None
+
+        history = await conn.fetch(
+            """
+            SELECT id, score, created_at FROM audits
+            WHERE customer_id = $1 AND url = $2 AND status = 'completed'
+            ORDER BY created_at ASC
+            """,
+            row['customer_id'], row['url']
+        )
+        if len(history) < 2:
+            return None
+
+        earliest, latest = history[0], history[-1]
+        if latest['score'] <= earliest['score']:
+            return None
+
+        badge = await conn.fetchrow(
+            """
+            INSERT INTO badges
+                (customer_id, url, before_audit_id, after_audit_id,
+                 before_score, after_score, earned_year)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            ON CONFLICT (customer_id, url) DO NOTHING
+            RETURNING id, serial_number
+            """,
+            row['customer_id'], row['url'], earliest['id'], latest['id'],
+            earliest['score'], latest['score'], latest['created_at'].year
+        )
+        return dict(badge) if badge else None
     
     async def mark_email_sent(self, audit_id: UUID) -> bool:
         """Mark audit email as sent"""
@@ -144,6 +196,28 @@ class AuditDB:
             data['audit_id'] = str(data.pop('id'))
             if data.get('customer_id'):
                 data['customer_id'] = str(data['customer_id'])
+            return data
+
+    async def get_badge(self, badge_id: UUID) -> Optional[dict]:
+        """Real before/after data for the embeddable badge endpoint. Scores
+        are stored as int*10; converted back to a 0-10 float here so callers
+        never touch the storage representation."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                SELECT id, url, serial_number, before_score, after_score, earned_year
+                FROM badges WHERE id = $1
+                """,
+                badge_id
+            )
+            if row is None:
+                return None
+            data = dict(row)
+            data['badge_id'] = str(data.pop('id'))
+            data['before_score'] = data['before_score'] / 10.0
+            data['after_score'] = data['after_score'] / 10.0
             return data
 
     async def get_audit(self, audit_id: UUID) -> Optional[dict]:
