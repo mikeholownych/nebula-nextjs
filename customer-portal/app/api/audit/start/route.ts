@@ -9,7 +9,15 @@ import { assertPublicHttpUrl } from '@/app/lib/ssrf-guard'
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json()
+    let body: { url?: string; email?: string; name?: string }
+    try {
+      body = await request.json()
+    } catch {
+      return NextResponse.json(
+        { error: 'Invalid request body' },
+        { status: 400 }
+      )
+    }
     const { url, email, name } = body
 
     // Validate URL
@@ -73,8 +81,17 @@ export async function POST(request: NextRequest) {
         { status: 503 }
       )
     }
-    
-    const data = await apiResponse.json()
+
+    let data: { audit_id?: string; url?: string; status?: string; score?: number; grade?: string; findings?: unknown }
+    try {
+      data = await apiResponse.json()
+    } catch {
+      console.error('Audit start error: FastAPI returned a 2xx with a non-JSON/empty body')
+      return NextResponse.json(
+        { error: 'Audit service returned an invalid response' },
+        { status: 502 }
+      )
+    }
 
     const distinctId = request.headers.get('X-POSTHOG-DISTINCT-ID') ?? `anon_audit_${data.audit_id}`
     try {
