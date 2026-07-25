@@ -448,6 +448,39 @@ def _evidence_ai_readiness(soup: BeautifulSoup, dim: dict) -> dict:
     }
 
 
+# ── Local Business GBP Products ────────────────────────────────────────────
+
+def _evidence_local_gbp(html_text: str, lower: str) -> dict:
+    """Evidence for local business GBP product gap detection."""
+    ts = _now_iso()
+
+    # Detect which local signals fired
+    signals_found = []
+    if re.search(r'\d{1,5}\s+[\w\s]+(?:st|ave|blvd|rd|dr|way|ln|ct|pl|ste|unit)\b', lower):
+        signals_found.append("physical address")
+    if re.search(r'tel:|call\s+us|\(\d{3}\)\s*\d{3}[-.\s]?\d{4}|\d{3}[-.\s]\d{3}[-.\s]\d{4}', lower):
+        signals_found.append("phone number")
+    if re.search(r'maps\.google\.com|google\.com/maps|goo\.gl/maps|iframe.*maps', lower):
+        signals_found.append("Google Maps embed")
+    business_types = r'\b(salon|spa\b|clinic|dental|lawyer|attorney|restaurant|caf[ée]|gym|plumb(?:er|ing)|roofer|roofing|hvac|electrician|car repair|pet groomer|veterinarian|photographer|wedding|florist|bakery|landscaping|cleaning service|painting contractor|flooring|tile installer|furniture store)\b'
+    location_words = r'\b(toronto|vancouver|calgary|ottawa|montreal|dallas|fort worth|houston|austin|chicago|new york|los angeles|miami|seattle|denver|atlanta|boston|phoenix|san diego|near\s+me|nearby|our\s+location|visit\s+us|directions)\b'
+    if re.search(business_types, lower) and re.search(location_words, lower):
+        signals_found.append("location + business type match")
+
+    # Check for existing GBP/schema presence
+    has_schema = bool(re.search(r'"@type"\s*:\s*"(LocalBusiness|Store|Restaurant|HealthAndBeautyBusiness)"', html_text))
+    has_product_schema = bool(re.search(r'"@type"\s*:\s*"Product"|AggregateOffer', html_text))
+
+    return {
+        "measured": f"Local signals detected: {', '.join(signals_found) or 'none'} | Schema LocalBusiness: {'present' if has_schema else 'absent'} | Product schema: {'present' if has_product_schema else 'absent'}",
+        "required": "Local businesses should list top services/products in Google Business Profile dashboard to surface pricing in SERPs",
+        "delta": f"{len(signals_found)} local signals confirmed; GBP product listings not detected in source HTML or schema",
+        "selector": "N/A",
+        "confidence": "contextual",
+        "timestamp": ts,
+    }
+
+
 # ── Public interface ───────────────────────────────────────────────────────────
 
 EVIDENCE_BUILDERS = {
@@ -460,6 +493,7 @@ EVIDENCE_BUILDERS = {
     "ad_signals":      lambda soup, dim, html, lower: _evidence_ad_signals(soup, dim, lower),
     "seo_foundations": lambda soup, dim, html, lower: _evidence_seo(soup, dim),
     "ai_readiness":    lambda soup, dim, html, lower: _evidence_ai_readiness(soup, dim),
+    "local_gbp":       lambda soup, dim, html, lower: _evidence_local_gbp(html, lower),
 }
 
 

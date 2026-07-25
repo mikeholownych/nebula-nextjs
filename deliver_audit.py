@@ -205,6 +205,89 @@ def scrape_page(url):
     return {"url": url, "html": html_text, "title": title, "h1": h1, "text": text, "ctas": ctas}
 
 
+def _local_gbp_dimension(html_text: str, lower: str) -> dict | None:
+    """Detect local business signals and recommend GBP products when missing.
+
+    Returns a dimension dict if the site is a local business, else None.
+    A site is "local" if it shows ≥2 of: physical address, phone number,
+    Google Maps embed, or location-specific content (city/region names
+    near business-type keywords).
+
+    GBP products are recommended when the site lacks:
+    - schema.org LocalBusiness/Product structured data
+    - GBP product listing indicators (product carousel, "products" section)
+    """
+    # ── Local business signal detection ──────────────────────────────────
+    signals = 0
+    # 1. Physical address patterns (US/CA/international) — require address-adjacent context
+    _addr_re = r'(?:address|located|visit|directions|office|suite|floor)\s*[:\-]?\s*\d{1,5}\s+[\w\s]+(?:st|ave|blvd|rd|dr|way|ln|ct|pl|ste|unit)\b'
+    if re.search(_addr_re, lower):
+        signals += 1
+    # Postal code — only near address context (not CSS/JS numbers)
+    _postal_re = r'(?:address|street|ave|blvd|road|drive|lane|court|place)\w{0,20}\d{5}(?:-\d{4})?'
+    if re.search(_postal_re, lower):
+        signals += 1
+
+    # 2. Phone number
+    if re.search(r'tel:|call\s+us|\(\d{3}\)\s*\d{3}[-.\s]?\d{4}|\d{3}[-.\s]\d{3}[-.\s]\d{4}', lower):
+        signals += 1
+
+    # 3. Google Maps embed
+    if re.search(r'maps\.google\.com|google\.com/maps|goo\.gl/maps|iframe.*maps', lower):
+        signals += 1
+
+    # 4. Location-specific content near business keywords (counts as 2 — strong local signal)
+    # Service businesses only — exclude generic retail terms (store/shop/retail match domain names)
+    # Use word boundaries to avoid matching "auto" in "automated", "spa" in CSS classes, etc.
+    # Some terms are standalone (wedding, salon), others need context (plumbing, roofing)
+    business_types = r'\b(salon|spa\b|clinic|dental|lawyer|attorney|restaurant|caf[ée]|gym|plumb(?:er|ing)|roofer|roofing|hvac|electrician|car repair|pet groomer|veterinarian|photographer|wedding|florist|bakery|landscaping|cleaning service|painting contractor|flooring|tile installer|furniture store)\b'
+    location_words = r'\b(toronto|vancouver|calgary|ottawa|montreal|dallas|fort worth|houston|austin|chicago|new york|los angeles|miami|seattle|denver|atlanta|boston|phoenix|san diego|near\s+me|nearby|our\s+location|visit\s+us|directions)\b'
+    if re.search(business_types, lower):
+        signals += 1
+    if re.search(location_words, lower):
+        signals += 1
+
+    if signals < 2:
+        return None  # Not a local business — skip this finding
+
+    # ── GBP product gap detection ────────────────────────────────────────
+    has_gbp = False
+
+    # Check for schema.org LocalBusiness with product/service offerings
+    if re.search(r'"@type"\s*:\s*"(LocalBusiness|Store|Restaurant|HealthAndBeautyBusiness)"', html_text):
+        # Has LocalBusiness schema — check if products are listed
+        if re.search(r'"@type"\s*:\s*"Product"|offers|price|AggregateOffer', html_text):
+            has_gbp = True
+
+    # Check for GBP product indicators
+    if re.search(r'google\s+business\s+profile|gbp\s+product|google\s+product|product\s+listing', lower):
+        has_gbp = True
+
+    # Check for product carousel/section with pricing
+    if re.search(r'product.*carousel|our\s+products|product\s+catalog|shop\s+our', lower):
+        has_gbp = True
+
+    if has_gbp:
+        return None  # Already has GBP product presence — no gap
+
+    # ── Build the finding ────────────────────────────────────────────────
+    return {
+        "score": 6,
+        "weight": "medium",
+        "issue": (
+            "Local business detected but no Google Business Profile product listings found. "
+            "GBP products surface your services/pricing directly in Google Search and Maps — "
+            "before the visitor even clicks through. This is free and takes 15 minutes to set up."
+        ),
+        "fix": (
+            "Add your top 3-5 services or packages as GBP products in the Google Business Profile dashboard. "
+            "Include: product name, price range, description (up to 1,000 chars), photo, and link to your "
+            "booking page. This puts pricing in the SERP itself, which directly addresses the "
+            "\"pricing invisible until scroll\" conversion leak."
+        ),
+    }
+
+
 def score_audit(page):
     """Return the structured audit shape expected by agentic_server._handle_audit."""
     html_text = page.get("html", "")
@@ -552,6 +635,10 @@ def score_audit(page):
             "issue": ai_issue_text,
             "fix": ai_fix_text,
         },
+        # ── Local Business GBP Products (conditional) ──────────────────────
+        # Only surfaces when the site shows local business signals (address,
+        # phone, maps embed) but lacks GBP product listings or schema.
+        **({"local_gbp": _local_gbp_dimension(html_text, lower)} if _local_gbp_dimension(html_text, lower) else {}),
     }
     overall = round(sum(v["score"] for v in dimensions.values()) / len(dimensions), 1)
     grade = "A" if overall >= 8 else "B" if overall >= 6.5 else "C" if overall >= 5 else "D"
