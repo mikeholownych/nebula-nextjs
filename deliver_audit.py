@@ -1246,7 +1246,7 @@ def main():
         "contact_route": args.contact_route,
         "content_firewall_score": args.content_firewall_score,
         "icp_score": args.icp_score,
-        "offer_variant": "audit_first_147_checkout" if args.source_url or args.lead_id else None,
+        "offer_variant": "audit_first_checkout" if args.source_url or args.lead_id else None,
     }
     attribution = {k: v for k, v in attribution.items() if v not in (None, "")}
 
