@@ -15,6 +15,23 @@ const QUADRANT_LABELS: Record<string, { label: string; tone: 'accent' | 'neutral
   fill_in: { label: 'Fill-In', tone: 'neutral' },
 }
 
+// The only place amber (`signal-fail`) appears anywhere on the site.
+// Every finding rendered here already represents a dimension that scored
+// below the passing threshold — that's why it's in this list — so this
+// marks a fact, not a computed guess. Color alone never carries the
+// meaning: the label and aria-label always say it in words too.
+function FailSignal() {
+  return (
+    <span
+      className="inline-flex shrink-0 items-center gap-1.5 text-[10px] font-mono font-semibold uppercase tracking-wider text-signal-fail"
+      aria-label="This conversion signal failed its threshold"
+    >
+      <span className="h-1.5 w-1.5 rounded-full bg-signal-fail" aria-hidden="true" />
+      Signal fail
+    </span>
+  )
+}
+
 /**
  * Shown after email gate is cleared. Confirms unlock and offers a one-click
  * magic-link so the user can save/revisit their audit from any device.
@@ -282,7 +299,6 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
           <div className="mb-4">
             <span className={`inline-block rounded-full px-4 py-1 text-lg font-semibold ${
               results.grade === 'A' || results.grade === 'B' ? 'bg-accent text-bg' :
-              results.grade === 'C' ? 'bg-warning text-bg' :
               'bg-danger text-bg'
             }`}>
               Grade: {results.grade}
@@ -308,13 +324,16 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                 <div className="mb-2 flex items-start justify-between gap-4">
                   <div>
                     <h3 className="font-semibold text-fg">{finding.label}</h3>
-                    <span className={`mt-1 inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-                      QUADRANT_LABELS[finding.quadrant]?.tone === 'accent'
-                        ? 'bg-accent/10 text-accent'
-                        : 'bg-fg-muted/10 text-fg-muted'
-                    }`}>
-                      {QUADRANT_LABELS[finding.quadrant]?.label || finding.quadrant}
-                    </span>
+                    <div className="mt-1 flex flex-wrap items-center gap-2">
+                      <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+                        QUADRANT_LABELS[finding.quadrant]?.tone === 'accent'
+                          ? 'bg-accent/10 text-accent'
+                          : 'bg-fg-muted/10 text-fg-muted'
+                      }`}>
+                        {QUADRANT_LABELS[finding.quadrant]?.label || finding.quadrant}
+                      </span>
+                      <FailSignal />
+                    </div>
                   </div>
                   <div className="flex gap-2 text-xs">
                     <span className="rounded bg-accent/10 px-2 py-1 text-accent">
@@ -339,17 +358,20 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                     {finding.evidence && (
                       <details className="mt-3 group">
                         <summary className="flex cursor-pointer items-center gap-2 text-xs font-semibold uppercase tracking-wider text-fg-muted hover:text-fg">
+                          {/* Confidence is a neutral fact about the evidence, not a good/bad
+                              signal — deliberately grayscale so it never competes with the
+                              one reserved amber marker (FailSignal) for the visitor's attention. */}
                           <span className={`inline-block h-1.5 w-1.5 rounded-full ${
-                            finding.evidence.confidence === 'definitive' ? 'bg-danger' :
-                            finding.evidence.confidence === 'high'       ? 'bg-warning' :
-                            finding.evidence.confidence === 'contextual' ? 'bg-accent' :
-                            'bg-fg-muted'
+                            finding.evidence.confidence === 'definitive' ? 'bg-fg' :
+                            finding.evidence.confidence === 'high'       ? 'bg-fg-muted' :
+                            finding.evidence.confidence === 'contextual' ? 'bg-fg-dim' :
+                            'bg-fg-muted/40'
                           }`} />
                           Evidence
                           <span className={`ml-auto rounded px-1.5 py-0.5 text-[10px] font-medium ${
-                            finding.evidence.confidence === 'definitive' ? 'bg-danger/10 text-danger' :
-                            finding.evidence.confidence === 'high'       ? 'bg-warning/10 text-warning' :
-                            'bg-accent/10 text-accent'
+                            finding.evidence.confidence === 'definitive' ? 'bg-fg/10 text-fg' :
+                            finding.evidence.confidence === 'high'       ? 'bg-fg-muted/10 text-fg-muted' :
+                            'bg-fg-dim/10 text-fg-dim'
                           }`}>
                             {finding.evidence.confidence}
                           </span>

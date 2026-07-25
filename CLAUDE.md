@@ -38,6 +38,7 @@ Before committing any `.tsx`/`.mdx` content file:
 - `grep -nP '[\x{2580}-\x{259F}\x{FFFD}\x{25A0}-\x{25FF}]' <file>` — block/corruption chars (must return 0 lines)
 - `grep -nP '[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]' <file>` — control chars (must return 0 lines)
 - Drift surfaces: `$97`, `48 hours`, `7 conversion signals` — verify against canonical before commit
+- `grep -n "text-warning\|bg-warning\|border-warning" <file>` (customer-portal) — must return 0 lines. `warning` was removed from tailwind.config.ts on purpose; amber (`signal-fail` / `#f59e0b`) is reserved exclusively for a failed conversion signal on the audit results page (see `FailSignal` in `ResultsClient.tsx`) — it must never mean anything else anywhere on the site
 
 ## Things I Get Wrong Without Reminders
 - **Bounce check placement:** `LeadStore.is_bounced(email)` in BOTH `process_hot_lead_pitches()` AND `ramp_pipeline_fill.py`

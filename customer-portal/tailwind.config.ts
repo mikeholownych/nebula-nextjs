@@ -32,8 +32,17 @@ const config: Config = {
           DEFAULT: '#f37979',
           dim: 'rgba(239, 68, 68, 0.15)',
         },
-        warning: '#f59e0b',
         info: '#3b82f6',
+        // Reserved exclusively for "this conversion signal failed its
+        // threshold" — see FailSignal in ResultsClient.tsx. Do not use for
+        // grade tiers, evidence confidence, or any other UI state; its
+        // whole value is that seeing this color anywhere means one specific
+        // thing. (Old bare `warning` token removed on purpose — any stray
+        // `bg-warning`/`text-warning` usage now resolves to nothing rather
+        // than silently drifting back into a general-purpose caution color.)
+        signal: {
+          fail: '#f59e0b',
+        },
         // Border
         border: 'rgba(255, 255, 255, 0.06)',
       },
