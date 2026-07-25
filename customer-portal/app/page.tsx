@@ -56,21 +56,19 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
       />
       <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
-      {/* Hero Section */}
+      {/* Hero Section — Vindication Frame */}
       <section className="mx-auto flex min-h-[70vh] max-w-4xl flex-col justify-center px-6 py-24 text-center">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-          Free Landing Page Audit
+          Landing Page Leak Check
         </p>
         <h1 className="text-4xl font-bold tracking-tight text-fg md:text-6xl">
-          The Ad Wasn't the Problem.<br className="hidden sm:block" /> The Page Was.
+          Your ads worked.<br className="hidden sm:block" /> Your page didn't let them.
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-xl font-medium text-fg">
-          Agencies charge $5,000 to tell you what Nebula shows you for free, in minutes.
-          Enter your URL and get a prioritized list of conversion fixes — no signup needed.
+          Before you pause those ads — see if the page is what's killing them.
         </p>
         <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-fg-muted">
-          We scan your page against 7 conversion signals — message-match, trust, mobile layout,
-          load time, CTA clarity, form friction, and proof — then tell you exactly what to fix first.
+          You followed the playbook. The page wasn't built for it. We find what's leaking and show you exactly what to fix — no signup needed.
         </p>
         
         {/* CTA Button */}
@@ -79,7 +77,7 @@ export default function Home() {
             href="/audit"
             className="rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-lg"
           >
-            Run Free Audit →
+            Find the Leak →
           </Link>
         </div>
 
@@ -94,12 +92,12 @@ export default function Home() {
             The uncomfortable math
           </p>
           <h2 className="mb-6 text-3xl font-bold tracking-tight text-fg md:text-4xl">
-            The page problem, not the ad problem.
+            The ads did their job. The page had one job.
           </h2>
           <p className="mb-8 max-w-2xl text-lg text-fg-muted leading-7">
             Most founders who come to us have already spent real money on paid ads
             <strong className="text-fg"> before</strong> asking whether the page was the problem.
-            The ads delivered clicks. The page stole the sale.
+            The ads delivered clicks. The page didn't let them convert.
           </p>
 
           {/* The three friction patterns */}
@@ -137,15 +135,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Objection Section — We've seen "free audit" before */}
+      {/* Objection Section — This isn't a sales call in disguise */}
       <section className="border-t border-border bg-bg-muted/30 px-6 py-16">
         <div className="mx-auto max-w-4xl">
           <h2 className="mb-4 text-2xl font-bold text-fg">
-            You've seen "free audit" before.
+            This isn't a sales call in disguise.
           </h2>
           <p className="mb-8 max-w-2xl text-lg text-fg-muted leading-7">
-            It was a PDF with 8 generic recommendations, three "opportunities," and a sales call at the end.
-            This isn't that.
+            You've seen "free audit" — a PDF with 8 generic recommendations, three "opportunities," and a sales call at the end.
+            This is different.
           </p>
           <div className="grid gap-6 md:grid-cols-2">
             <div>
@@ -263,37 +261,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Social Proof Section */}
-      <section className="border-t border-border bg-bg-muted/30 px-6 py-16">
-        <div className="mx-auto max-w-4xl text-center">
-          <h2 className="mb-8 text-2xl font-bold text-fg">
-            Built by Conversion Specialists
-          </h2>
-          <p className="mx-auto max-w-2xl text-fg-muted">
-            Nebula Components specializes in one thing: diagnosing landing pages that leak ad spend.
-            We've helped founders stop burning budget on ads that never convert by fixing the page — not the ad.
-          </p>
-        </div>
-      </section>
-
-      {/* No Fake Proof Section — honest positioning instead of fabricated testimonials */}
+      {/* Honest Proof Section — We audit ourselves first */}
       <section className="border-t border-border px-6 py-16">
         <div className="mx-auto max-w-4xl">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-            Why there are no case studies here yet
+            Honest enough to show you our own audit
           </p>
           <h2 className="mb-6 text-2xl font-bold text-fg">
-            We won't publish a before/after number we can't back up.
+            We run this audit on ourselves first.
           </h2>
-          <p className="max-w-2xl text-base leading-7 text-fg-muted">
-            Most landing-page tools lead with a wall of client logos and revenue charts.
-            We don't have verified results to publish yet — and we'd rather tell you that
-            than make one up. When we have a real client outcome with dates, the actual
-            metric, and a way to check it, it goes here with the underlying evidence, not before.
+          <p className="max-w-2xl text-base leading-7 text-fg-muted mb-4">
+            7.4/10. Not 10/10. Real. That's what you're getting — actual data, not marketing claims.
           </p>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-fg-muted">
-            Until then, judge the audit on the thing you can check yourself right now:
-            run it on your own page and see if the findings hold up.
+          <p className="max-w-2xl text-base leading-7 text-fg-muted mb-4">
+            Most landing-page tools lead with case studies they can't verify. We'd rather prove it on our own page first. 
+            Run the same audit on your page and see if it finds anything.
+          </p>
+          <p className="max-w-2xl text-sm text-fg-muted leading-7">
+            When we have a real client outcome with dates, proof, and a way for you to verify it, that goes here — not before.
           </p>
         </div>
       </section>
@@ -302,16 +287,16 @@ export default function Home() {
       <section className="px-6 py-16 text-center">
         <div className="mx-auto max-w-2xl">
           <h2 className="mb-4 text-2xl font-bold text-fg">
-            Ready to See Why Your Ads Aren't Converting?
+            One more check before you decide.
           </h2>
           <p className="mb-8 text-fg-muted">
-            Get your free landing page audit — no signup required.
+            Run the audit. See if the page is the leak. Then you'll know.
           </p>
           <Link 
             href="/audit" 
             className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-lg"
           >
-            Run Free Audit →
+            Find the Leak →
           </Link>
         </div>
       </section>

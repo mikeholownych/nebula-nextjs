@@ -1,11 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Card } from '@/components/ui'
 import posthog from 'posthog-js'
 
-export default function AuditForm() {
+function AuditFormContent() {
   const [url, setUrl] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -91,7 +91,7 @@ export default function AuditForm() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="url" className="mb-2 block text-sm font-semibold text-fg">
-            Enter your landing page URL
+            Drop your landing page URL — see what's leaking
           </label>
           <input
             id="url"
@@ -109,7 +109,7 @@ export default function AuditForm() {
           disabled={!url || loading}
           className="w-full rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light disabled:opacity-50"
         >
-          {loading ? 'Starting audit…' : 'Run Audit — Free'}
+          {loading ? 'Starting audit…' : 'Find the Leak'}
         </button>
 
         {error && (
@@ -117,5 +117,13 @@ export default function AuditForm() {
         )}
       </form>
     </Card>
+  )
+}
+
+export default function AuditForm() {
+  return (
+    <Suspense fallback={<div className="mb-8 h-48 animate-pulse rounded-lg bg-bg-muted/40" />}>
+      <AuditFormContent />
+    </Suspense>
   )
 }
