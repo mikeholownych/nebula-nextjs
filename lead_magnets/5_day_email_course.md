@@ -39,14 +39,14 @@ CTA: Find your CTA leak → https://nebulacomponents.shop/
 CTA: Check if your page shows proof early enough → https://nebulacomponents.shop/
 
 ## Day 5: Fix Before More Spend
-- One recovered sale, booked demo, or checkout can pay for the $147 fix pack.
+- One recovered sale, booked demo, or checkout can pay for the $97 fix pack.
 - The fastest ROI is often stopping leakage before increasing traffic.
 - Rule: do not scale ads into an unscored page.
 
-CTA: Get the implementation-ready fix pack → https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
+CTA: Get the implementation-ready fix pack → https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
 
 ## Bottom CTA
 
-Free audit first. If the leaks are obvious, buy the $147 implementation-ready fix pack.
+Free audit first. If the leaks are obvious, buy the $97 implementation-ready fix pack.
 
 No calls. No calendar. No guessing.

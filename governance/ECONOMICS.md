@@ -14,7 +14,9 @@
 | Tier | Name | Price | Stripe Link | Status |
 |---|---|---|---|---|
 | 1 | Free Landing Page Audit | $0 | N/A (self-serve) | Live — nebulacomponents.shop/audit |
-| 2 | Conversion Fix Pack | $147 | [buy.stripe.com/...](https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b) | Live |
+| 2 | Conversion Fix Pack | $97 | [buy.stripe.com/...](https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h) | Live |
+
+> **2026-07-25: price corrected from $147 to the real $97 (locked through 2026-12-31 per CLAUDE.md; see commit a12c8ff0 earlier this session).** Only the dead link and this row are fixed here. The margin/fee/LTV figures further down this doc (Stripe fees "at $147 transaction", "~96%" margin, LTV ">$1,644", "months to recover CAC") were all computed against $147 and have not been recalculated against $97 — flagging rather than guess-substituting, since Stripe's fee is not a flat ratio (2.9% + $0.30) and margin/LTV need a real recalculation, not a text find-replace.
 | 2b | Legacy Component Pack (not promoted) | $7 | Stripe product prod_UlPk8Awd2ekztb | Live — no longer marketed |
 | 3 | Growth Launch (First Customer Guarantee) | $997 | [buy.stripe.com/4gMcN5aYk92Qaa5drY43S09](https://buy.stripe.com/4gMcN5aYk92Qaa5drY43S09) | Live |
 | 4 | AI Ops Retainer (monthly) | $1,497/mo | [buy.stripe.com/...](https://buy.stripe.com/00w5kD1nK0wkaa573A43S0c) | Live |

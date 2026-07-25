@@ -26,4 +26,4 @@ Score each 0/1.
 ## Next step
 Run the free leak map: https://nebulacomponents.shop/audit.html
 
-If you want implementation instead of diagnosis, use the Fix Pack: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
+If you want implementation instead of diagnosis, use the Fix Pack: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h

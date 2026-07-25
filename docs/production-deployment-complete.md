@@ -166,8 +166,8 @@ curl https://nebulacomponents.shop/dashboard
 
 | Product | Price | Stripe Link | Status |
 |---------|-------|-------------|--------|
-| Fix Pack | $147 | /6oUfZh7M87YM5TPgEa43S0b | ✅ ACTIVE |
-| AI Prompt Pack | $7 | /4gMdR9aYkenafup3Ro43S00 | ✅ ACTIVE |
+| Fix Pack | $97 | /5kQbJ1eawdj6eql1Jg43S0h | ✅ ACTIVE |
+| AI Prompt Pack (Audit Lite) | $7 | /4gMdR9aYkenafup3Ro43S00 | ❌ RETIRED 2026-07-24 — never had dedicated fulfillment |
 | Agency Partner | $497/mo | (checkout.html) | ✅ ACTIVE |
 | AI Ops Retainer | $1,497/mo | (ai-ops-retainer.html) | ✅ ACTIVE |
 
