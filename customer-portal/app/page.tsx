@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import SelfScan from './components/SelfScan'
+import AggregateProof from './components/AggregateProof'
 
 export const metadata: Metadata = {
   title: 'Free Landing Page Audit — Stop Burning Ad Budget | Nebula Components',
@@ -83,6 +84,7 @@ export default function Home() {
         </div>
 
         <SelfScan />
+        <AggregateProof />
       </section>
 
       {/* Villain Section — The Ad Spend Problem */}

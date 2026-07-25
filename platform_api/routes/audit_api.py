@@ -216,6 +216,17 @@ async def health_check():
     return {"status": "ok", "service": "audit-api"}
 
 
+@router.get("/stats/aggregate")
+async def get_aggregate_stats():
+    """Real, unfabricated audit volume + average score for the homepage's
+    aggregate-proof strip. Must be defined before /{audit_id} — otherwise
+    that catch-all route would try (and fail) to parse "stats" as a UUID."""
+    try:
+        return await audit_db.get_aggregate_stats()
+    except Exception:
+        raise HTTPException(status_code=503, detail="Stats unavailable")
+
+
 @router.get("/{audit_id}")
 async def get_audit(audit_id: str, share: Optional[str] = Query(default=None)):
     """Fetch audit by ID from database.

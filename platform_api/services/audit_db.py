@@ -192,6 +192,24 @@ class AuditDB:
             )
             return [dict(r) for r in rows]
     
+    async def get_aggregate_stats(self) -> dict:
+        """Real counts for the homepage's aggregate-proof strip. No fabricated
+        numbers — if volume is genuinely small, that's what gets shown."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                SELECT
+                    count(*) FILTER (WHERE status = 'completed') AS completed_audits,
+                    avg(score) FILTER (WHERE status = 'completed' AND score IS NOT NULL) AS avg_score_raw
+                FROM audits
+                """
+            )
+            completed = row['completed_audits'] or 0
+            avg_score = round(float(row['avg_score_raw']) / 10.0, 1) if row['avg_score_raw'] is not None else None
+            return {"completed_audits": completed, "avg_score": avg_score}
+
     async def create_purchase(self, customer_id: UUID, audit_id: Optional[UUID],
                              product: str, amount_cents: int,
                              stripe_payment_intent_id: Optional[str] = None) -> UUID:
