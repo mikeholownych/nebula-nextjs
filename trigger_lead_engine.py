@@ -65,11 +65,11 @@ SEARCH_QUERIES = [
 ]
 
 REDDIT_SEARCH_QUERIES = [
-    'landing page not converting',
-    'google ads no conversions',
-    'zero conversions ads',
-    'roast my landing page',
-    'paid traffic no sales',
+    '"landing page not converting"',
+    '"google ads" "no conversions"',
+    '"zero conversions" ads',
+    '"roast my landing page"',
+    '"paid traffic" "no sales"',
 ]
 
 
@@ -293,9 +293,22 @@ def parse_duckduckgo_results(page: str, query: str) -> list[dict]:
 
 
 def parse_old_reddit_results(page: str, query: str) -> list[dict]:
-    """Parse old.reddit.com/search HTML; works without JS and avoids Reddit JSON 403."""
+    """Parse old.reddit.com/search HTML; works without JS and avoids Reddit JSON 403.
+
+    Block boundaries anchor specifically on "search-result-link" /
+    "search-result-subreddit" (the two real per-item classes) — NOT a bare
+    "search-result" prefix, which also matches wrapper divs
+    (search-result-group, -header, -meta, -footer) that carry no post
+    content. Matching the bare prefix produced near-empty blocks whose loose
+    title regex picked up unrelated content elsewhere on the page, silently
+    reducing every real result to score=0 (confirmed live: 22 raw items,
+    0 survived scoring, for weeks — see git history for this fix).
+    """
     results: list[dict] = []
-    blocks = re.findall(r'<div class="\s*search-result[^>]*>.*?(?=<div class="\s*search-result|</div></div></div></div>)', page, flags=re.S)
+    starts = [m.start() for m in re.finditer(r'<div class="\s*search-result search-result-(?:link|subreddit)', page)]
+    blocks = [page[starts[i]:starts[i + 1]] for i in range(len(starts) - 1)]
+    if starts:
+        blocks.append(page[starts[-1]:starts[-1] + 3000])
     if not blocks:
         blocks = [m.group(0) for m in re.finditer(r'<a [^>]*class="search-title[^"]*"[^>]*>.*?</a>', page, flags=re.S)]
 
