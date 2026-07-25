@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import SelfScan from './components/SelfScan'
 
 export const metadata: Metadata = {
   title: 'Free Landing Page Audit — Stop Burning Ad Budget | Nebula Components',
@@ -73,13 +74,15 @@ export default function Home() {
         
         {/* CTA Button */}
         <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-          <Link 
-            href="/audit" 
+          <Link
+            href="/audit"
             className="rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-lg"
           >
             Run Free Audit →
           </Link>
         </div>
+
+        <SelfScan />
       </section>
 
       {/* Villain Section — The Ad Spend Problem */}
