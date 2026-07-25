@@ -579,6 +579,8 @@ def score_audit(page):
 
     # ── end AI citation dimension ──────────────────────────────────────
 
+    local_gbp = _local_gbp_dimension(html_text, lower)
+
     dimensions = {
         "headline": {
             "score": headline_score,
@@ -638,7 +640,7 @@ def score_audit(page):
         # ── Local Business GBP Products (conditional) ──────────────────────
         # Only surfaces when the site shows local business signals (address,
         # phone, maps embed) but lacks GBP product listings or schema.
-        **({"local_gbp": _local_gbp_dimension(html_text, lower)} if _local_gbp_dimension(html_text, lower) else {}),
+        **({"local_gbp": local_gbp} if local_gbp else {}),
     }
     overall = round(sum(v["score"] for v in dimensions.values()) / len(dimensions), 1)
     grade = "A" if overall >= 8 else "B" if overall >= 6.5 else "C" if overall >= 5 else "D"
