@@ -5,8 +5,11 @@ anywhere else — if this machine's disk fails, this is the only copy.
 
 Backs up: lead_state.db, nebula.db, outbound_delivery.db (SQLite, via the
 online backup API so a concurrent writer can't produce a torn snapshot),
-the nebula_platform Postgres database (pg_dump), and HOT_LEAD.json plus
-ledgers/ (the append-only business ledgers).
+the nebula_platform AND nebula_audit Postgres databases (pg_dump each —
+nebula_audit holds every real customer, audit, and badge record; it was
+missing from this script entirely until 2026-07-25, meaning it had zero
+backup coverage), and HOT_LEAD.json plus ledgers/ (the append-only
+business ledgers).
 
 Writes timestamped snapshots under backups/, prunes anything older than
 RETENTION_DAYS. Local-disk only — this protects against corruption,
@@ -38,9 +41,9 @@ LEDGERS_DIR = "ledgers"
 PG_ENV = {
     "PGHOST": os.environ.get("PGHOST", "/var/run/postgresql"),
     "PGPORT": os.environ.get("PGPORT", "5433"),
-    "PGDATABASE": os.environ.get("PGDATABASE", "nebula_platform"),
     "PGUSER": os.environ.get("PGUSER", "postgres"),
 }
+POSTGRES_DBS = ["nebula_platform", "nebula_audit"]
 
 
 def log(msg):
@@ -68,28 +71,28 @@ def backup_sqlite(name: str, dest_dir: Path) -> bool:
         return False
 
 
-def backup_postgres(dest_dir: Path) -> bool:
-    dest_path = dest_dir / f"{PG_ENV['PGDATABASE']}.sql.gz"
+def backup_postgres(db_name: str, dest_dir: Path) -> bool:
+    dest_path = dest_dir / f"{db_name}.sql.gz"
     env = {**os.environ, **PG_ENV}
     try:
         result = subprocess.run(
-            ["pg_dump", "--no-owner", "--no-privileges", PG_ENV["PGDATABASE"]],
+            ["pg_dump", "--no-owner", "--no-privileges", db_name],
             env=env,
             capture_output=True,
             timeout=300,
         )
         if result.returncode != 0:
-            log(f"FAIL postgres pg_dump: {result.stderr.decode(errors='replace')[:500]}")
+            log(f"FAIL postgres {db_name} pg_dump: {result.stderr.decode(errors='replace')[:500]}")
             return False
         with gzip.open(dest_path, "wb") as f:
             f.write(result.stdout)
-        log(f"OK postgres {PG_ENV['PGDATABASE']} -> {dest_path} ({dest_path.stat().st_size} bytes)")
+        log(f"OK postgres {db_name} -> {dest_path} ({dest_path.stat().st_size} bytes)")
         return True
     except FileNotFoundError:
         log("FAIL postgres: pg_dump not found on PATH")
         return False
     except Exception as e:
-        log(f"FAIL postgres: {e}")
+        log(f"FAIL postgres {db_name}: {e}")
         return False
 
 
@@ -141,14 +144,15 @@ def main() -> int:
     results = []
     for name in SQLITE_DBS:
         results.append(backup_sqlite(name, dest_dir))
-    results.append(backup_postgres(dest_dir))
+    for db_name in POSTGRES_DBS:
+        results.append(backup_postgres(db_name, dest_dir))
     results.append(backup_json_state(dest_dir))
 
     manifest = {
         "timestamp": stamp,
         "all_ok": all(results),
         "sqlite_dbs": SQLITE_DBS,
-        "postgres_db": PG_ENV["PGDATABASE"],
+        "postgres_dbs": POSTGRES_DBS,
     }
     (dest_dir / "manifest.json").write_text(json.dumps(manifest, indent=2))
 
