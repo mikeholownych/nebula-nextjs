@@ -239,9 +239,9 @@ describe('production safety containment', () => {
   it('shows a real audit submission form now that scoring is live', () => {
     const { container } = render(React.createElement(AuditPage))
 
-    expect(screen.getByRole('heading', { name: /find out why your ads aren't converting/i })).toBeInTheDocument()
-    expect(screen.getByRole('textbox', { name: /enter your landing page url/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /run audit/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /see if the page is what's killing your ads/i })).toBeInTheDocument()
+    expect(screen.getByRole('textbox', { name: /drop your landing page url/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /find the leak/i })).toBeInTheDocument()
     expect(container.querySelector('a button')).toBeNull()
   })
 
