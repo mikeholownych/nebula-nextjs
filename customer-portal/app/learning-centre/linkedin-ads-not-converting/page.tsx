@@ -4,13 +4,13 @@ import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
   title: 'LinkedIn Ads Getting Clicks But No Conversions: Fix The Page First | Nebula Components',
-  description: 'LinkedIn CPCs run $8–15. Every page leak is expensive. If your LinkedIn ads are clicking but not converting, the fix is almost always on the landing page — not the targeting.',
+  description: 'If LinkedIn ads get clicks but no conversions, separate campaign delivery from post-click behaviour before changing targeting or the landing page.',
   alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/linkedin-ads-not-converting' },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'LinkedIn Ads Getting Clicks But No Conversions: The Page Is Usually Why',
-  description: 'LinkedIn CPCs run $8–15. Every page leak is expensive. If your LinkedIn ads are clicking but not converting, the fix is almost always on the landing page — not the targeting.',
+  description: 'If LinkedIn ads get clicks but no conversions, separate campaign delivery from post-click behaviour before changing targeting or the landing page.',
   url: 'https://nebulacomponents.shop/learning-centre/linkedin-ads-not-converting',
   publishedDate: '2026-07-21',
   modifiedDate: '2026-07-21',
@@ -34,21 +34,74 @@ export default function LinkedinAdsNotConvertingPage() {
             LinkedIn Ads Getting Clicks But No Conversions: The Page Is Usually Why
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
-            LinkedIn is the most expensive paid channel most B2B companies run. At $8–15 per click, a leaking landing page doesn't just cost you conversions — it compounds losses at a rate no other channel matches. Before you adjust your targeting or creative, audit the page the traffic is landing on.
+            LinkedIn clicks can be expensive, which makes diagnosis before
+            iteration important. Before adjusting targeting or creative, verify
+            tracking and inspect how each campaign&apos;s visitors behave on
+            the page they actually receive.
           </p>
         </div>
+
+        {/* Direct answer */}
+        <section
+          data-editorial="answer-first"
+          className="mt-6 rounded-2xl border border-border bg-bg-panel p-8"
+        >
+          <h2 className="mb-4 text-2xl font-bold text-fg">
+            Direct answer: test the post-click journey, not an assumption
+          </h2>
+          <p className="leading-relaxed text-fg-muted">
+            Segment LinkedIn traffic by campaign, audience, device, and landing
+            page. Confirm conversion events, then check whether the first
+            viewport continues the ad&apos;s audience and promise, offers
+            relevant proof, and asks for a proportionate next step. Use those
+            observations to select one hypothesis and measure it against the
+            current baseline.
+          </p>
+          <aside
+            role="note"
+            aria-label="Evidence boundary"
+            className="mt-5 rounded-xl border border-border px-5 py-4 text-sm leading-relaxed text-fg-muted"
+          >
+            <strong className="text-fg">Evidence boundary:</strong> high CPC,
+            clicks, and low conversion can prioritise a page-side hypothesis,
+            but they do not prove causality or exclude targeting, offer,
+            attribution, and sales-process effects. No page change guarantees a
+            conversion or cost outcome.
+          </aside>
+          <div className="mt-5 flex flex-col gap-2 text-sm">
+            <Link
+              href="/learning-centre/linkedin-authority-gap"
+              className="font-semibold text-accent hover:text-accent-light"
+            >
+              Inspect the LinkedIn authority gap
+            </Link>
+            <Link
+              href="/learning-centre/b2b-saas-landing-page-not-converting"
+              className="font-semibold text-accent hover:text-accent-light"
+            >
+              Diagnose a B2B SaaS landing page
+            </Link>
+          </div>
+        </section>
 
         {/* Section 1 */}
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Cost of Every Page Leak Is Amplified on LinkedIn</h2>
           <p className="leading-relaxed text-fg-muted">
-            At a $10 average CPC, a page converting at 2% instead of 5% costs you $333 in wasted ad spend for every 100 clicks. Most LinkedIn advertisers accept that performance as a targeting or ICP problem, run more tests, and spend more money reaching the same conclusion. The page was the problem the whole time.
+            Use your own CPC and observed conversion rate to model the
+            post-click cost. For illustration, 100 clicks at a $10 CPC cost
+            $1,000: two recorded conversions imply $500 of media spend per
+            conversion, while five imply $200. This is arithmetic, not a
+            LinkedIn benchmark or forecast.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
             Run this calculation before anything else: what is your current cost-per-lead from LinkedIn? Now divide that by your close rate. That's your cost-per-acquisition. If that number is unsustainable, the first place to look is your landing page conversion rate — not your bid strategy, not your audience segments.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            A 1% improvement in landing page conversion rate on a $5,000/month LinkedIn budget can reduce cost-per-lead by 30–50%. No targeting change delivers that return at that speed.
+            Model several conversion-rate scenarios with your actual spend,
+            then validate any observed change against the same conversion
+            definition and a comparable traffic period. Do not present a
+            modelled saving as a measured result.
           </p>
         </section>
 
@@ -59,10 +112,13 @@ export default function LinkedinAdsNotConvertingPage() {
             The professional scrolling LinkedIn is not evaluating your product emotionally — they're evaluating risk. A VP of Marketing who clicks your ad is asking: "Will this embarrass me if I recommend it? Will it actually do what it claims? Has anyone like me used it and gotten results?"
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            Most B2B landing pages answer none of those questions. They lead with features, describe the product in technical detail, and bury any proof behind a generic "customers love us" section with consumer-style star ratings. That's the wrong format for this audience.
+            A feature-led page may leave those questions unanswered when proof
+            is generic or detached from the audience named in the ad. Inspect
+            whether each proof point identifies the customer context and the
+            source of any claimed result.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            The social proof that converts LinkedIn traffic:
+            Evidence formats to evaluate for LinkedIn traffic:
           </p>
           <ul className="mt-3 space-y-2 text-fg-muted">
             <li className="flex gap-2"><span className="text-accent font-bold shrink-0">—</span><span>Named testimonials with job title, company size, and specific outcome ("reduced churn 22% in Q1")</span></li>
@@ -76,14 +132,19 @@ export default function LinkedinAdsNotConvertingPage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Demo Request Is Too High-Commitment for Cold Traffic</h2>
           <p className="leading-relaxed text-fg-muted">
-            The default LinkedIn ad funnel: run an awareness ad, send traffic to a "Book a Demo" page, wonder why conversion rates are below 1%. The demo CTA made sense when it was a re-engagement touchpoint. For cold LinkedIn traffic seeing your brand for the first time, it's asking for a marriage proposal on a first impression.
+            A common LinkedIn ad funnel sends awareness traffic directly to a
+            &ldquo;Book a Demo&rdquo; page. That CTA may fit a re-engagement
+            touchpoint, but it can be a high-commitment first step for visitors
+            seeing the brand for the first time.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            A B2B decision maker who clicks your ad at 10am during a busy workday is not ready to commit 30 minutes to a sales call. They are ready to consume something useful without risk. That means your CTA architecture matters:
+            A B2B decision maker clicking during the workday may not be ready to
+            commit to a sales call. That makes CTA architecture a variable to
+            test:
           </p>
           <ul className="mt-3 space-y-2 text-fg-muted">
-            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">—</span><span>Gated content (a specific, actionable guide) consistently outperforms demo requests for cold LinkedIn traffic</span></li>
-            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">—</span><span>Free tools or assessments outperform static content because they deliver immediate perceived value</span></li>
+            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">—</span><span>Compare a specific guide with the current demo request for the same traffic segment</span></li>
+            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">—</span><span>Test whether a relevant tool or assessment better matches the ad&apos;s promised next step</span></li>
             <li className="flex gap-2"><span className="text-accent font-bold shrink-0">—</span><span>If you must ask for a demo, the page needs to do significant proof-of-value work before that ask lands</span></li>
           </ul>
           <p className="mt-4 leading-relaxed text-fg-muted">

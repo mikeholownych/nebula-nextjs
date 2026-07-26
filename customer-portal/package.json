@@ -11,6 +11,7 @@
     "test": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest",
     "test:watch": "NODE_ENV=test jest --watch",
     "test:e2e": "playwright test",
+    "test:performance": "lhci autorun",
     "check:sitemap-routes": "node scripts/check-sitemap-routes.mjs",
     "sync:citable": "node scripts/sync-citable-projection.mjs",
     "check:citable-projection": "node scripts/sync-citable-projection.mjs --check",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.6",
+    "@lhci/cli": "0.15.1",
     "@playwright/test": "^1.61.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",

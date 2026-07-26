@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 const CONSENT_KEY = "nebula-cookie-consent";
 const CONSENT_VERSION = 1;
+const GA_MEASUREMENT_ID = "G-KJ9S3450LH";
 
 type ConsentLevel = "all" | "necessary" | null;
 
@@ -11,6 +12,39 @@ interface ConsentState {
   level: ConsentLevel;
   version: number;
   timestamp: string;
+}
+
+type AnalyticsWindow = Window & {
+  dataLayer?: unknown[][];
+  gtag?: (...args: unknown[]) => void;
+};
+
+function loadGoogleAnalytics() {
+  if (document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) return;
+
+  const analyticsWindow = window as AnalyticsWindow;
+  analyticsWindow.dataLayer = analyticsWindow.dataLayer ?? [];
+  analyticsWindow.gtag = analyticsWindow.gtag ?? ((...args: unknown[]) => {
+    analyticsWindow.dataLayer!.push(args);
+  });
+  analyticsWindow.gtag("consent", "default", {
+    analytics_storage: "granted",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    functionality_storage: "granted",
+    security_storage: "granted",
+  });
+  analyticsWindow.gtag("js", new Date());
+  analyticsWindow.gtag("config", GA_MEASUREMENT_ID, {
+    send_page_view: false,
+  });
+
+  const script = document.createElement("script");
+  script.id = "gtag-src";
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+  document.head.appendChild(script);
 }
 
 export default function CookieConsent() {
@@ -31,6 +65,7 @@ export default function CookieConsent() {
         const state: ConsentState = JSON.parse(stored);
         if (state.version >= CONSENT_VERSION) {
           setShowBanner(false);
+          if (state.level === "all") loadGoogleAnalytics();
         }
       } catch {
         // Malformed entry — fall through, banner stays shown.
@@ -46,6 +81,7 @@ export default function CookieConsent() {
     };
     localStorage.setItem(CONSENT_KEY, JSON.stringify(state));
     setShowBanner(false);
+    loadGoogleAnalytics();
     
     // Initialize GA4 if consented
     if (typeof window !== "undefined" && window.gtag) {

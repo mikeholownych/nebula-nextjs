@@ -42,7 +42,11 @@ export function CitablePageShell({
           )}
         </nav>
 
-        <header className="max-w-4xl border-b border-border pb-12">
+        {/*
+          Pin layout properties that the legacy unscoped `header` rule in
+          globals.css otherwise overrides on Citable pages.
+        */}
+        <header className="static block max-w-4xl border-b border-border bg-transparent p-0 pb-12 backdrop-blur-none">
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             {route.eyebrow}
           </p>

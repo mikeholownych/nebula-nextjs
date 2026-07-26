@@ -102,6 +102,7 @@ export default function CitablePage() {
               <Link
                 key={supportingRoute.path}
                 href={supportingRoute.path}
+                prefetch={false}
                 className="group rounded-2xl border border-border bg-bg-panel p-6 transition-colors hover:border-accent/30"
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">
@@ -157,12 +158,14 @@ export default function CitablePage() {
         <section className="mt-12 flex flex-wrap gap-3 border-t border-border pt-10">
           <Link
             href="/resources/citable/quick-start"
+            prefetch={false}
             className="rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light"
           >
             Run the quick start
           </Link>
           <Link
             href="https://www.npmjs.com/package/@nebulacomponents/citable"
+            prefetch={false}
             className="rounded-xl border border-border px-6 py-3 font-semibold text-fg transition-colors hover:border-accent/30"
           >
             Read package documentation
