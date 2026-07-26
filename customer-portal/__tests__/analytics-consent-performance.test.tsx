@@ -49,7 +49,7 @@ describe('consent-gated analytics loading', () => {
     ).toBeNull()
   })
 
-  it('keeps PostHog out of the initial bundle and initializes it only through a consent path', () => {
+  it('keeps the shared instrumentation entrypoint from loading PostHog before consent', () => {
     const instrumentation = read('instrumentation-client.ts')
 
     expect(instrumentation).not.toMatch(
@@ -58,5 +58,19 @@ describe('consent-gated analytics loading', () => {
     expect(instrumentation).toContain("import('posthog-js')")
     expect(instrumentation).toContain('nebula-cookie-consent')
     expect(instrumentation).toContain('cookie-consent-update')
+  })
+
+  it('does not statically import PostHog from the shared audited-route shell', () => {
+    for (const sharedModule of [
+      'app/layout.tsx',
+      'app/components/CookieConsent.tsx',
+      'components/SiteNav.tsx',
+      'components/Footer.tsx',
+      'components/citable/CitablePageShell.tsx',
+    ]) {
+      expect(read(sharedModule)).not.toMatch(
+        /import\s+(?:\w+|\{[^}]+\})\s+from\s+['"]posthog-js['"]/,
+      )
+    }
   })
 })
