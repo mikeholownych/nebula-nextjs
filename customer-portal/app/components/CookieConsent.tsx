@@ -1,193 +1,143 @@
-"use client";
+export const CONSENT_RUNTIME = String.raw`
+  (function () {
+    var key = 'nebula-cookie-consent';
+    var version = 1;
+    var measurementId = 'G-KJ9S3450LH';
+    var posthogKey = ${JSON.stringify(process.env.NEXT_PUBLIC_POSTHOG_KEY || '')};
+    var banner = document.getElementById('cookie-consent-banner');
+    if (!banner) return;
 
-import { useState, useEffect } from "react";
+    function loadGoogleAnalytics() {
+      if (document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) return;
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+      window.gtag('consent', 'default', {
+        analytics_storage: 'granted',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted'
+      });
+      window.gtag('js', new Date());
+      window.gtag('config', measurementId, { send_page_view: false });
+      var script = document.createElement('script');
+      script.id = 'gtag-src';
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
+      document.head.appendChild(script);
+    }
 
-const CONSENT_KEY = "nebula-cookie-consent";
-const CONSENT_VERSION = 1;
-const GA_MEASUREMENT_ID = "G-KJ9S3450LH";
+    function loadPostHog() {
+      if (!posthogKey || document.querySelector('script[data-nebula-posthog]')) return;
+      var script = document.createElement('script');
+      script.async = true;
+      script.dataset.nebulaPosthog = 'true';
+      script.src = '/ingest/static/array.js';
+      script.addEventListener('load', function () {
+        if (!window.posthog) return;
+        window.posthog.init(posthogKey, {
+          api_host: '/ingest',
+          ui_host: 'https://us.posthog.com',
+          defaults: '2026-01-30',
+          capture_exceptions: true
+        });
+      }, { once: true });
+      document.head.appendChild(script);
+    }
 
-type ConsentLevel = "all" | "necessary" | null;
+    function loadAnalytics() {
+      loadGoogleAnalytics();
+      loadPostHog();
+    }
 
-interface ConsentState {
-  level: ConsentLevel;
-  version: number;
-  timestamp: string;
-}
+    function save(level) {
+      var state = {
+        level: level,
+        version: version,
+        timestamp: new Date().toISOString()
+      };
+      localStorage.setItem(key, JSON.stringify(state));
+      banner.hidden = true;
+      if (level === 'all') loadAnalytics();
+      if (window.gtag && level === 'necessary') {
+        window.gtag('consent', 'update', {
+          analytics_storage: 'denied',
+          ad_storage: 'denied',
+          functionality_storage: 'granted',
+          personalization_storage: 'denied',
+          security_storage: 'granted'
+        });
+      }
+      window.dispatchEvent(new CustomEvent('cookie-consent-update', { detail: state }));
+    }
 
-type AnalyticsWindow = Window & {
-  dataLayer?: unknown[][];
-  gtag?: (...args: unknown[]) => void;
-};
+    document.getElementById('cookie-consent-essential').addEventListener(
+      'click',
+      function () { save('necessary'); }
+    );
+    document.getElementById('cookie-consent-all').addEventListener(
+      'click',
+      function () { save('all'); }
+    );
 
-function loadGoogleAnalytics() {
-  if (document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) return;
-
-  const analyticsWindow = window as AnalyticsWindow;
-  analyticsWindow.dataLayer = analyticsWindow.dataLayer ?? [];
-  analyticsWindow.gtag = analyticsWindow.gtag ?? ((...args: unknown[]) => {
-    analyticsWindow.dataLayer!.push(args);
-  });
-  analyticsWindow.gtag("consent", "default", {
-    analytics_storage: "granted",
-    ad_storage: "denied",
-    ad_user_data: "denied",
-    ad_personalization: "denied",
-    functionality_storage: "granted",
-    security_storage: "granted",
-  });
-  analyticsWindow.gtag("js", new Date());
-  analyticsWindow.gtag("config", GA_MEASUREMENT_ID, {
-    send_page_view: false,
-  });
-
-  const script = document.createElement("script");
-  script.id = "gtag-src";
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-  document.head.appendChild(script);
-}
+    try {
+      var stored = JSON.parse(localStorage.getItem(key) || 'null');
+      if (stored && stored.version >= version) {
+        banner.hidden = true;
+        if (stored.level === 'all') loadAnalytics();
+      }
+    } catch (error) {}
+  })();
+`
 
 export default function CookieConsent() {
-  // Default true (not gated behind a mount effect): this renders in the
-  // initial server HTML so first-time visitors see it with no hydration
-  // delay — that delay was previously making this the page's LCP element
-  // (Lighthouse flagged elementRenderDelay ~350-440ms sitewide). Returning
-  // visitors who already consented get it hidden instantly by the
-  // synchronous head script + CSS pair in layout.tsx/globals.css, which run
-  // before hydration; this effect only unmounts it for them afterward so no
-  // hidden dialog lingers in the DOM.
-  const [showBanner, setShowBanner] = useState(true);
-
-  useEffect(() => {
-    const stored = localStorage.getItem(CONSENT_KEY);
-    if (stored) {
-      try {
-        const state: ConsentState = JSON.parse(stored);
-        if (state.version >= CONSENT_VERSION) {
-          setShowBanner(false);
-          if (state.level === "all") loadGoogleAnalytics();
-        }
-      } catch {
-        // Malformed entry — fall through, banner stays shown.
-      }
-    }
-  }, []);
-
-  const handleAcceptAll = () => {
-    const state: ConsentState = {
-      level: "all",
-      version: CONSENT_VERSION,
-      timestamp: new Date().toISOString(),
-    };
-    localStorage.setItem(CONSENT_KEY, JSON.stringify(state));
-    setShowBanner(false);
-    loadGoogleAnalytics();
-    
-    // Initialize GA4 if consented
-    if (typeof window !== "undefined" && window.gtag) {
-      window.gtag("consent", "update", {
-        analytics_storage: "granted",
-        ad_storage: "denied", // We don't run ads
-        functionality_storage: "granted",
-        personalization_storage: "denied",
-        security_storage: "granted",
-      });
-    }
-    
-    // Dispatch event for other components
-    window.dispatchEvent(new CustomEvent("cookie-consent-update", { detail: state }));
-  };
-
-  const handleAcceptNecessary = () => {
-    const state: ConsentState = {
-      level: "necessary",
-      version: CONSENT_VERSION,
-      timestamp: new Date().toISOString(),
-    };
-    localStorage.setItem(CONSENT_KEY, JSON.stringify(state));
-    setShowBanner(false);
-    
-    // Keep analytics disabled
-    if (typeof window !== "undefined" && window.gtag) {
-      window.gtag("consent", "update", {
-        analytics_storage: "denied",
-        ad_storage: "denied",
-        functionality_storage: "granted",
-        personalization_storage: "denied",
-        security_storage: "granted",
-      });
-    }
-    
-    window.dispatchEvent(new CustomEvent("cookie-consent-update", { detail: state }));
-  };
-
-  if (!showBanner) return null;
-
   return (
-    <div
-      id="cookie-consent-banner"
-      role="dialog"
-      aria-labelledby="cookie-banner-title"
-      aria-describedby="cookie-banner-description"
-      className="fixed bottom-0 left-0 right-0 z-50 bg-[#0a0a0a] border-t border-emerald-500/20 p-4 md:p-6"
-    >
-      <div className="max-w-5xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
-          {/* Content */}
-          <div className="flex-1">
-            <h2
-              id="cookie-banner-title"
-              className="text-base font-semibold text-white mb-1"
-            >
-              We use cookies
-            </h2>
-            <p
-              id="cookie-banner-description"
-              className="text-sm text-gray-400 leading-relaxed"
-            >
-              We use cookies for analytics to improve our site. Essential cookies keep your session active.
-              You can accept all cookies or only essential ones.{" "}
-              <a
-                href="/privacy-policy"
-                className="text-emerald-400 underline underline-offset-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
+    <>
+      <div
+        id="cookie-consent-banner"
+        role="dialog"
+        aria-labelledby="cookie-banner-title"
+        aria-describedby="cookie-banner-description"
+        className="fixed bottom-0 left-0 right-0 z-50 border-t border-emerald-500/20 bg-[#0a0a0a] p-4 md:p-6"
+      >
+        <div className="mx-auto max-w-5xl">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-8">
+            <div className="flex-1">
+              <h2 id="cookie-banner-title" className="mb-1 text-base font-semibold text-white">
+                We use cookies
+              </h2>
+              <p id="cookie-banner-description" className="text-sm leading-relaxed text-gray-400">
+                We use cookies for analytics to improve our site. Essential cookies keep your
+                session active. You can accept all cookies or only essential ones.{' '}
+                <a
+                  href="/privacy-policy"
+                  className="text-emerald-400 underline underline-offset-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
+                >
+                  Privacy Policy
+                </a>
+              </p>
+            </div>
+            <div className="flex flex-col gap-2 sm:flex-row sm:gap-3">
+              <button
+                id="cookie-consent-essential"
+                type="button"
+                className="rounded-lg border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-medium text-gray-300 transition-colors hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
               >
-                Privacy Policy
-              </a>
-            </p>
-          </div>
-
-          {/* Actions */}
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-            <button
-              onClick={handleAcceptNecessary}
-              className="px-5 py-2.5 text-sm font-medium text-gray-300 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
-            >
-              Essential only
-            </button>
-            <button
-              onClick={handleAcceptAll}
-              className="px-5 py-2.5 text-sm font-semibold text-black bg-emerald-500 hover:bg-emerald-400 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
-            >
-              Accept all
-            </button>
+                Essential only
+              </button>
+              <button
+                id="cookie-consent-all"
+                type="button"
+                className="rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-black transition-colors hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
+              >
+                Accept all
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-// Helper to check consent
-export function hasAnalyticsConsent(): boolean {
-  if (typeof window === "undefined") return false;
-  
-  const stored = localStorage.getItem(CONSENT_KEY);
-  if (!stored) return false;
-  
-  try {
-    const state: ConsentState = JSON.parse(stored);
-    return state.level === "all" && state.version >= CONSENT_VERSION;
-  } catch {
-    return false;
-  }
+      <script dangerouslySetInnerHTML={{ __html: CONSENT_RUNTIME }} />
+    </>
+  )
 }

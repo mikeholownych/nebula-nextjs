@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
+import { cookies } from 'next/headers'
 import Link from 'next/link'
 import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
+import { readAuditUnlock } from '@/app/lib/audit-unlock-token'
 import { Card } from '@/components/ui'
 import CheckoutCTAButton from './CheckoutCTAButton'
 
@@ -20,9 +22,23 @@ export function generateMetadata(): Metadata {
   }
 }
 
-export default function CheckoutPage() {
+interface Props {
+  searchParams: Promise<{ audit_id?: string }>
+}
+
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
+export default async function CheckoutPage({ searchParams }: Props) {
   const fixPack = getActiveFixPack()
   const fixPackPrice = fixPack ? formatUsd(fixPack.priceCents) : undefined
+  const auditId = (await searchParams).audit_id
+  const cookieStore = await cookies()
+  const auditIdentity = auditId && UUID_RE.test(auditId)
+    ? readAuditUnlock(
+      auditId,
+      cookieStore.get(`audit_unlock_${auditId}`)?.value,
+    )
+    : null
 
   return (
     <main className="min-h-screen bg-bg px-6 py-12">
@@ -64,12 +80,27 @@ export default function CheckoutPage() {
           </Card>
         )}
 
-        {fixPack && (
+        {fixPack && auditIdentity && auditId ? (
           <CheckoutCTAButton
+            auditId={auditId}
             endpoint={fixPack.checkout.sessionEndpoint}
             offerKey={fixPack.checkout.offerKey}
           />
-        )}
+        ) : fixPack ? (
+          <Card variant="bordered" className="mb-6">
+            <h2 className="mb-3 font-semibold text-fg">Select an audited page before payment</h2>
+            <p className="mb-4 text-sm text-fg-muted">
+              The Fix Pack is tailored to one completed, unlocked audit. Run or open that audit
+              first so checkout can bind delivery to the correct page before Stripe charges you.
+            </p>
+            <Link
+              href="/audit"
+              className="inline-flex rounded-xl bg-accent px-5 py-3 font-semibold text-bg hover:bg-accent-light"
+            >
+              Run the free audit
+            </Link>
+          </Card>
+        ) : null}
 
         <p className="mt-6 text-center text-sm text-fg-muted">
           Card details are entered only on Stripe. Nebula does not collect or store payment information.

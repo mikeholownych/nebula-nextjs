@@ -30,8 +30,9 @@ import { POST as checkoutPost } from '@/app/api/checkout/route'
 import { GET as emailGet, POST as emailPost } from '@/app/api/email/process/route'
 import { POST as rb2bPost } from '@/app/api/webhooks/rb2b/route'
 import { getPublishedCaseStudies, publicFacts } from '@/app/lib/public-facts'
+import { signAuditUnlock } from '@/app/lib/audit-unlock-token'
 import AuditPage from '@/app/audit/page'
-import CheckoutPage from '@/app/checkout/page'
+import CheckoutCTAButton from '@/app/checkout/CheckoutCTAButton'
 import ThankYouPage from '@/app/thank-you/page'
 import CheckoutImpulsePage from '@/app/checkout-impulse/page'
 import CheckoutV2Page from '@/app/checkout-v2/page'
@@ -52,6 +53,23 @@ const jsonRequest = (url: string, body: unknown, headers?: HeadersInit) =>
     headers: { 'content-type': 'application/json', ...headers },
     body: JSON.stringify(body),
   })
+
+const checkoutAuditId = '123e4567-e89b-12d3-a456-426614174000'
+const completedAudit = {
+  audit_id: checkoutAuditId,
+  email: 'buyer@example.com',
+  status: 'completed',
+  url: 'https://example.com/landing',
+}
+
+const checkoutRequest = () => {
+  const token = signAuditUnlock(checkoutAuditId, 'buyer@example.com')
+  return jsonRequest(
+    'http://localhost/api/checkout',
+    { auditId: checkoutAuditId, offerKey: 'fix-pack' },
+    { cookie: `audit_unlock_${checkoutAuditId}=${token}` },
+  )
+}
 
 function listPublicHtml(relativeDir = 'public'): string[] {
   const absoluteDir = path.join(process.cwd(), relativeDir)
@@ -117,6 +135,7 @@ describe('production safety containment', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     process.env = { ...originalEnv }
+    process.env.AUDIT_UNLOCK_SECRET = 'containment-test-secret'
     global.fetch = jest.fn()
   })
 
@@ -185,51 +204,49 @@ describe('production safety containment', () => {
     process.env.STRIPE_SECRET_KEY = 'sk_test_configured'
     delete process.env.STRIPE_FIX_PACK_PRICE_ID
     process.env.NEXT_PUBLIC_URL = 'https://nebulacomponents.shop'
-    ;(global.fetch as jest.Mock).mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({
+    ;(global.fetch as jest.Mock)
+      .mockResolvedValueOnce(Response.json(completedAudit))
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
         id: 'cs_test_registry_price',
         url: 'https://checkout.stripe.com/c/pay/cs_test_registry_price',
       }),
     })
 
-    const response = await checkoutPost(jsonRequest('http://localhost/api/checkout', {
-      offerKey: 'fix-pack',
-    }))
+    const response = await checkoutPost(checkoutRequest())
 
     expect(response.status).toBe(200)
-    expect(global.fetch).toHaveBeenCalledTimes(1)
+    expect(global.fetch).toHaveBeenCalledTimes(2)
   })
 
   it('fails checkout closed without a validated HTTPS production base URL', async () => {
     process.env.STRIPE_SECRET_KEY = '«redacted:sk_test_…»'
     delete process.env.NEXT_PUBLIC_URL
 
-    const response = await checkoutPost(jsonRequest('http://localhost/api/checkout', {
-      offerKey: 'fix-pack',
-    }))
+    const response = await checkoutPost(checkoutRequest())
 
     expect(response.status).toBe(503)
-    expect(global.fetch).not.toHaveBeenCalled()
+    expect(global.fetch).toHaveBeenCalledTimes(1)
   })
 
   it('creates a server-side Stripe Checkout Session with canonical offer metadata', async () => {
     process.env.STRIPE_SECRET_KEY = 'sk_test_configured'
     process.env.NEXT_PUBLIC_URL = 'https://nebulacomponents.shop'
-    ;(global.fetch as jest.Mock).mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({
+    ;(global.fetch as jest.Mock)
+      .mockResolvedValueOnce(Response.json(completedAudit))
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
         id: 'cs_test_created',
         url: 'https://checkout.stripe.com/c/pay/cs_test_created',
       }),
     })
 
-    const response = await checkoutPost(jsonRequest('http://localhost/api/checkout', {
-      offerKey: 'fix-pack',
-    }))
+    const response = await checkoutPost(checkoutRequest())
 
     expect(response.status).toBe(200)
-    const init = (global.fetch as jest.Mock).mock.calls[0][1] as RequestInit
+    const init = (global.fetch as jest.Mock).mock.calls[1][1] as RequestInit
     const body = new URLSearchParams(String(init.body))
     expect(body.get('line_items[0][price]')).toBeNull()
     expect(body.get('line_items[0][price_data][currency]')).toBe('usd')
@@ -239,7 +256,8 @@ describe('production safety containment', () => {
     )
     expect(body.get('payment_method_types[0]')).toBe('card')
     expect(body.get('metadata[offer_key]')).toBe('fix-pack')
-    expect(body.has('customer_email')).toBe(false)
+    expect(body.get('metadata[audit_id]')).toBe(checkoutAuditId)
+    expect(body.get('customer_email')).toBe('buyer@example.com')
     await expect(response.json()).resolves.toEqual({
       url: 'https://checkout.stripe.com/c/pay/cs_test_created',
     })
@@ -254,11 +272,11 @@ describe('production safety containment', () => {
   ])('maps Stripe provider %s to 502', async (_label, providerResult) => {
     process.env.STRIPE_SECRET_KEY = 'sk_test_configured'
     process.env.NEXT_PUBLIC_URL = 'https://nebulacomponents.shop'
-    ;(global.fetch as jest.Mock).mockImplementationOnce(providerResult)
+    ;(global.fetch as jest.Mock)
+      .mockResolvedValueOnce(Response.json(completedAudit))
+      .mockImplementationOnce(providerResult)
 
-    const response = await checkoutPost(jsonRequest('http://localhost/api/checkout', {
-      offerKey: 'fix-pack',
-    }))
+    const response = await checkoutPost(checkoutRequest())
 
     expect(response.status).toBe(502)
   })
@@ -294,8 +312,12 @@ describe('production safety containment', () => {
     expect(global.fetch).not.toHaveBeenCalled()
   })
 
-  it('starts server-created Stripe Checkout from the canonical checkout page', () => {
-    const { container } = render(React.createElement(CheckoutPage))
+  it('starts server-created Stripe Checkout only with a selected audit identity', () => {
+    const { container } = render(React.createElement(CheckoutCTAButton, {
+      auditId: checkoutAuditId,
+      endpoint: '/api/checkout',
+      offerKey: 'fix-pack',
+    }))
 
     expect(screen.getByRole('button', { name: /continue to secure stripe checkout/i })).toBeInTheDocument()
     expect(container.innerHTML).not.toContain('buy.stripe.com')
@@ -311,7 +333,11 @@ describe('production safety containment', () => {
       ok: false,
       json: async () => ({ code: 'CHECKOUT_PROVIDER_ERROR' }),
     })
-    render(React.createElement(CheckoutPage))
+    render(React.createElement(CheckoutCTAButton, {
+      auditId: checkoutAuditId,
+      endpoint: '/api/checkout',
+      offerKey: 'fix-pack',
+    }))
 
     fireEvent.click(screen.getByRole('button', {
       name: /continue to secure stripe checkout/i,

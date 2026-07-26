@@ -16,22 +16,25 @@ function getSecret(): string {
 }
 
 export function signAuditUnlock(auditId: string, email: string): string {
-  const payload = `${auditId}:${email}`
+  const payload = `${auditId}:${email.trim().toLowerCase()}`
   const payloadB64 = Buffer.from(payload).toString('base64url')
   const sig = createHmac('sha256', getSecret()).update(payload).digest('base64url')
   return `${payloadB64}.${sig}`
 }
 
-export function verifyAuditUnlock(auditId: string, token: string | undefined): boolean {
-  if (!token) return false
+export function readAuditUnlock(
+  auditId: string,
+  token: string | undefined,
+): { email: string } | null {
+  if (!token) return null
   const [payloadB64, sig] = token.split('.')
-  if (!payloadB64 || !sig) return false
+  if (!payloadB64 || !sig) return null
 
   let secret: string
   try {
     secret = getSecret()
   } catch {
-    return false
+    return null
   }
 
   const payload = Buffer.from(payloadB64, 'base64url').toString('utf8')
@@ -40,9 +43,24 @@ export function verifyAuditUnlock(auditId: string, token: string | undefined): b
   const sigBuf = Buffer.from(sig)
   const expectedBuf = Buffer.from(expectedSig)
   if (sigBuf.length !== expectedBuf.length || !timingSafeEqual(sigBuf, expectedBuf)) {
-    return false
+    return null
   }
 
-  const [tokenAuditId] = payload.split(':')
-  return tokenAuditId === auditId
+  const separator = payload.indexOf(':')
+  if (separator === -1) return null
+  const tokenAuditId = payload.slice(0, separator)
+  const email = payload.slice(separator + 1)
+  if (
+    tokenAuditId !== auditId ||
+    email.length < 3 ||
+    email.length > 254 ||
+    !email.includes('@')
+  ) {
+    return null
+  }
+  return { email }
+}
+
+export function verifyAuditUnlock(auditId: string, token: string | undefined): boolean {
+  return readAuditUnlock(auditId, token) !== null
 }

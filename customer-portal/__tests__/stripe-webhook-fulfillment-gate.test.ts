@@ -57,7 +57,10 @@ function makeSession(overrides: Record<string, unknown> = {}) {
     amount_total: 9700,
     currency: 'usd',
     payment_status: 'paid',
-    metadata: { offer_key: 'fix-pack' },
+    metadata: {
+      offer_key: 'fix-pack',
+      audit_id: '123e4567-e89b-12d3-a456-426614174000',
+    },
     ...overrides,
   }
 }
@@ -169,6 +172,8 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
         'buyer@example.com',
         '--stripe-session-id',
         'cs_live_test',
+        '--audit-id',
+        '123e4567-e89b-12d3-a456-426614174000',
       ])
     )
     expect(clientQueryMock.mock.calls.some((call) =>
@@ -219,6 +224,7 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     ['missing offer identity', { metadata: {} }],
     ['missing metadata', { metadata: undefined }],
     ['wrong offer identity', { metadata: { offer_key: 'other-offer' } }],
+    ['missing audit identity', { metadata: { offer_key: 'fix-pack' } }],
   ])('fails automatic delivery closed for %s while retaining persistence and review alerting', async (
     _label,
     overrides,

@@ -4,11 +4,12 @@ import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import React from 'react'
 import { cleanup, render, screen } from '@testing-library/react'
-import * as caseStudiesPage from '../../app/case-studies/page'
+import CaseStudiesContent from '../../app/case-studies/CaseStudiesContent'
 import {
   getActiveFixPack,
   getPublishedCaseStudies,
   publicFacts,
+  type PublishedCaseStudy,
 } from '../../app/lib/public-facts'
 
 const read = (relative: string) =>
@@ -121,6 +122,7 @@ describe('offer and proof consistency', () => {
     const checkoutButton = read('app/checkout/CheckoutCTAButton.tsx')
     const checkoutApi = read('app/api/checkout/route.ts')
     const webhook = read('app/api/webhooks/stripe/route.ts')
+    const auditResults = read('app/audit/[id]/results/ResultsClient.tsx')
 
     expect(pricing).toContain("from '@/app/lib/public-facts'")
     expect(pricing).not.toMatch(/price:\s*['"]97['"]/)
@@ -131,8 +133,11 @@ describe('offer and proof consistency', () => {
     expect(checkoutButton).toContain("fetch(endpoint")
     expect(checkoutButton).not.toContain('buy.stripe.com')
     expect(checkoutApi).toContain("'metadata[offer_key]'")
+    expect(checkoutApi).toContain("'metadata[audit_id]'")
     expect(checkoutApi).toContain("'line_items[0][price_data][unit_amount]'")
     expect(checkoutApi).not.toContain('STRIPE_FIX_PACK_PRICE_ID')
+    expect(auditResults).not.toContain('buy.stripe.com')
+    expect(auditResults).toContain('/checkout?audit_id=')
 
     expect(webhook).toContain("from '@/app/lib/public-facts'")
     expect(webhook).not.toMatch(/FIX_PACK_AMOUNT_CENTS\s*=\s*9700/)
@@ -165,14 +170,8 @@ describe('offer and proof consistency', () => {
   })
 
   test('case-study index renders both the honest empty state and evidence-gated entries', () => {
-    const module = caseStudiesPage as unknown as {
-      CaseStudiesContent?: React.ComponentType<{ studies: any[] }>
-    }
-    expect(module.CaseStudiesContent).toBeDefined()
-    if (!module.CaseStudiesContent) return
-
     const { rerender } = render(
-      React.createElement(module.CaseStudiesContent, { studies: [] }),
+      React.createElement(CaseStudiesContent, { studies: [] }),
     )
     expect(screen.getByRole('heading', { name: /we don't have one yet/i })).toBeInTheDocument()
 
@@ -194,7 +193,9 @@ describe('offer and proof consistency', () => {
       publishedAt: '2026-07-15',
       modifiedAt: '2026-07-15',
     }
-    rerender(React.createElement(module.CaseStudiesContent, { studies: [study] }))
+    rerender(React.createElement(CaseStudiesContent, {
+      studies: [study as PublishedCaseStudy],
+    }))
 
     expect(screen.getByRole('heading', { name: /published, evidence-backed case studies/i })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Supported example' })).toHaveAttribute(

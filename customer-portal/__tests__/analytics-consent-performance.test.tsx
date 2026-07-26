@@ -1,7 +1,9 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
-import CookieConsent from '@/app/components/CookieConsent'
+import CookieConsent, {
+  CONSENT_RUNTIME,
+} from '@/app/components/CookieConsent'
 
 const read = (relative: string) =>
   readFileSync(path.join(process.cwd(), relative), 'utf8')
@@ -27,6 +29,7 @@ describe('consent-gated analytics loading', () => {
 
   it('loads Google Analytics only after the visitor accepts analytics cookies', () => {
     render(<CookieConsent />)
+    window.eval(CONSENT_RUNTIME)
 
     expect(
       document.head.querySelector('script[src*="googletagmanager.com/gtag/js"]'),
@@ -41,6 +44,7 @@ describe('consent-gated analytics loading', () => {
 
   it('does not load Google Analytics when the visitor accepts essential cookies only', () => {
     render(<CookieConsent />)
+    window.eval(CONSENT_RUNTIME)
 
     fireEvent.click(screen.getByRole('button', { name: /essential only/i }))
 
@@ -49,15 +53,16 @@ describe('consent-gated analytics loading', () => {
     ).toBeNull()
   })
 
-  it('keeps the shared instrumentation entrypoint from loading PostHog before consent', () => {
-    const instrumentation = read('instrumentation-client.ts')
+  it('loads PostHog from the consent runtime instead of a global client entrypoint', () => {
+    expect(
+      existsSync(path.join(process.cwd(), 'instrumentation-client.ts')),
+    ).toBe(false)
 
-    expect(instrumentation).not.toMatch(
-      /^import\s+posthog\s+from\s+['"]posthog-js['"]/m,
-    )
-    expect(instrumentation).toContain("import('posthog-js')")
-    expect(instrumentation).toContain('nebula-cookie-consent')
-    expect(instrumentation).toContain('cookie-consent-update')
+    const consent = read('app/components/CookieConsent.tsx')
+    expect(consent).not.toContain("from 'posthog-js'")
+    expect(consent).not.toContain("import('posthog-js')")
+    expect(consent).toContain("script.src = '/ingest/static/array.js'")
+    expect(consent).toContain('NEXT_PUBLIC_POSTHOG_KEY')
   })
 
   it('does not statically import PostHog from the shared audited-route shell', () => {
@@ -71,6 +76,37 @@ describe('consent-gated analytics loading', () => {
       expect(read(sharedModule)).not.toMatch(
         /import\s+(?:\w+|\{[^}]+\})\s+from\s+['"]posthog-js['"]/,
       )
+    }
+  })
+
+  it('renders consent controls without a shared React client boundary', () => {
+    const source = read('app/components/CookieConsent.tsx')
+
+    expect(source).not.toContain('"use client"')
+    expect(source).not.toContain('useState')
+    expect(source).not.toContain('useEffect')
+    expect(source).toContain('CONSENT_RUNTIME')
+  })
+
+  it('registers WebMCP tools without a shared React client boundary', () => {
+    const source = read('components/WebMCP.tsx')
+
+    expect(source).not.toContain("'use client'")
+    expect(source).not.toContain('useEffect')
+    expect(source).toContain('WEB_MCP_RUNTIME')
+    expect(source).toContain('request_audit')
+    expect(source).toContain('get_pricing')
+    expect(source).toContain('search_learning')
+  })
+
+  it('keeps the audited static-route shell free of Next Link client boundaries', () => {
+    for (const sharedModule of [
+      'components/SiteNav.tsx',
+      'components/Footer.tsx',
+      'app/learning-centre/page.tsx',
+      'app/learning-centre/CategoryAccordion.tsx',
+    ]) {
+      expect(read(sharedModule)).not.toMatch(/from ['"]next\/link['"]/)
     }
   })
 })

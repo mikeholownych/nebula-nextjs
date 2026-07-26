@@ -29,7 +29,7 @@ const faqSchema = {
       name: 'Why does Google Ads produce clicks but no conversions?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'The most common causes are: (1) the landing page headline does not match the search intent or ad promise — the visitor arrived and immediately decided they were in the wrong place; (2) no proof is visible before the CTA — the page asks for action before it earns trust; (3) the page loads slowly on mobile — a visitor who abandons during load is recorded as a bounce before they see anything. A healthy click-through rate on the ad with a high bounce rate on the page is the clearest diagnostic signal: the ad worked, the page did not.',
+        text: 'Common hypotheses include: (1) the landing page headline does not match the search intent or ad promise; (2) no proof is visible before the CTA; and (3) the page loads slowly on mobile. Healthy ad click-through with high post-click bounce is a reason to investigate message match and page experience, but it does not by itself prove which component caused the outcome.',
       },
     },
     {
@@ -37,7 +37,7 @@ const faqSchema = {
       name: 'How do I know if my Google Ads problem is the ad or the landing page?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Check CTR first. If search CTR is below 3-5% on high-intent keywords, the ad is not getting clicked and the page is not yet the issue. If CTR is healthy (above 5%) but conversion rate is below 2%, the ad delivered — the page failed. Confirm with bounce rate by source: if paid search bounces at 80%+ but email or direct traffic converts on the same page, the problem is message-match between the ad and the first screen.',
+        text: 'Check CTR, conversion tracking, bounce rate by source, device, query, and landing-page variant together. Thresholds such as 3-5% CTR or 2% conversion rate are comparison points, not causal diagnoses. Healthy CTR with weak post-click behaviour prioritises a page-side hypothesis; it does not exclude ad targeting, offer fit, attribution, or traffic quality.',
       },
     },
     {
@@ -61,7 +61,7 @@ const faqSchema = {
       name: 'How do I fix a high bounce rate from Google Ads?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Fix in this order: (1) confirm the headline mirrors the ad keyword and promise exactly; (2) check mobile load time — run Google PageSpeed Insights on mobile preset and aim for LCP under 2.5 seconds; (3) ensure proof (a result, a number, a named customer) appears before the CTA in the first viewport; (4) reduce the CTA to one action with a label describing the outcome, not the mechanics. Most high-bounce patterns from paid search are caused by the first two — message mismatch and slow mobile load.',
+        text: 'Test in this order: (1) compare the headline with the ad keyword and promise; (2) check mobile load time with Google PageSpeed Insights and use LCP under 2.5 seconds as a performance target; (3) inspect whether relevant proof appears before the CTA; and (4) test one clearly labelled CTA. Change one variable at a time and compare it with the current baseline before attributing an outcome.',
       },
     },
   ],
@@ -176,7 +176,7 @@ export default function GoogleAdsClicksNoSales() {
                   n: '3',
                   cause: 'Slow mobile load',
                   detail:
-                    "A visitor who abandons while the page is loading is recorded as a bounce before they have seen your headline. Portent's 2022 analysis of over 100 million page views found that B2B lead-gen pages loading in 1 second convert at roughly 3x the rate of pages loading in 5 seconds. Check LCP with Google PageSpeed Insights on the mobile preset — not desktop. If LCP is above 4 seconds, this is the primary cause of your zero-conversion pattern.",
+                    "A visitor who abandons while the page is loading is recorded as a bounce before they have seen your headline. Portent's 2022 analysis of over 100 million page views found that B2B lead-gen pages loading in 1 second convert at roughly 3x the rate of pages loading in 5 seconds. Check LCP with Google PageSpeed Insights on the mobile preset — not desktop. If LCP is above 4 seconds, treat load performance as a high-priority hypothesis and test it against other campaign and page signals.",
                 },
                 {
                   n: '4',
@@ -228,7 +228,7 @@ export default function GoogleAdsClicksNoSales() {
                 {
                   pattern: 'Low CTR (under 2-3%) on search',
                   diagnosis:
-                    'Ad is the problem, not the page. Fix ad copy or keyword match types before touching the landing page.',
+                    'Prioritise an ad-copy or keyword-match hypothesis, then compare it against page and traffic-quality evidence before changing the landing page.',
                 },
                 {
                   pattern: 'Mobile bounce 20+ points above desktop',

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'LinkedIn Ads Getting Clicks But No Conversions: The Page Is Usually Why',
+  headline: 'LinkedIn Ads Getting Clicks But No Conversions: Isolate the Post-Click Leak',
   description: 'If LinkedIn ads get clicks but no conversions, separate campaign delivery from post-click behaviour before changing targeting or the landing page.',
   url: 'https://nebulacomponents.shop/learning-centre/linkedin-ads-not-converting',
   publishedDate: '2026-07-21',
@@ -31,7 +31,7 @@ export default function LinkedinAdsNotConvertingPage() {
             LinkedIn Ads Leaks · linkedin ad to landing page conversion
           </p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
-            LinkedIn Ads Getting Clicks But No Conversions: The Page Is Usually Why
+            LinkedIn Ads Getting Clicks But No Conversions: Isolate the Post-Click Leak
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
             LinkedIn clicks can be expensive, which makes diagnosis before
@@ -148,7 +148,9 @@ export default function LinkedinAdsNotConvertingPage() {
             <li className="flex gap-2"><span className="text-accent font-bold shrink-0">—</span><span>If you must ask for a demo, the page needs to do significant proof-of-value work before that ask lands</span></li>
           </ul>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            If your LinkedIn ads are going to a "Book a Demo" page with no prior warm-up content on that same page, you have a conversion architecture problem, not a targeting problem.
+            If your LinkedIn ads go to a "Book a Demo" page with no prior warm-up content on that
+            page, test conversion architecture as one hypothesis. Campaign targeting, offer fit,
+            and post-click experience still need separate evidence.
           </p>
         </section>
 

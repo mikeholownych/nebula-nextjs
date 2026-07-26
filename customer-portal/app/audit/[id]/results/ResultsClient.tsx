@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { Card } from '@/components/ui'
-import posthog from 'posthog-js'
+import posthog from '@/app/lib/posthog-browser'
 import { parseAuditResult, type AuditResult, type Finding } from './auditResultSchema'
 import { getDisease, diseaseTierClass, complexityBadge, extractSerpData } from './diseases'
 import {
@@ -133,13 +133,11 @@ function FixPreview({ finding, unlocked }: { finding: Finding; unlocked: boolean
           </p>
           <div className="absolute inset-0 flex items-center justify-center">
             <a
-              href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#unlock"
               onClick={() => posthog.capture('fix_preview_unlock_clicked', { finding_key: finding.key })}
               className="rounded-lg bg-accent px-4 py-2 text-xs font-semibold text-bg shadow-sm transition-colors hover:bg-accent-light"
             >
-              Unlock full prompt — $97
+              Unlock this audit first
             </a>
           </div>
         </div>
@@ -532,7 +530,7 @@ function EvidenceMethod({ findings }: { findings: Finding[] }) {
   )
 }
 
-export default function ResultsClient({ auditId, unlocked: initialUnlocked, sharedView: _sharedView = false }: Props) {
+export default function ResultsClient({ auditId, unlocked: initialUnlocked, sharedView = false }: Props) {
   const [loading, setLoading] = useState(true)
   const [results, setResults] = useState<AuditResult | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -868,12 +866,16 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                 structure — to paste into Claude, ChatGPT, or hand to your developer. No site access needed.
               </p>
               <a
-                href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={
+                  unlocked && !sharedView
+                    ? `/checkout?audit_id=${encodeURIComponent(auditId)}`
+                    : '#unlock'
+                }
                 className="block w-full rounded-lg bg-accent px-4 py-2 text-center font-semibold text-bg transition-colors hover:bg-accent-light"
               >
-                Get the tailored Fix Pack — $97
+                {unlocked && !sharedView
+                  ? 'Review the tailored Fix Pack — $97'
+                  : 'Unlock this audit to select its Fix Pack'}
               </a>
             </div>
           </Card>

@@ -1,9 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import posthog from 'posthog-js'
+import posthog from '@/app/lib/posthog-browser'
 
 interface Props {
+  auditId: string
   endpoint: '/api/checkout'
   offerKey: string
 }
@@ -24,7 +25,7 @@ const isStripeCheckoutUrl = (value: unknown): value is string => {
   }
 }
 
-export default function CheckoutCTAButton({ endpoint, offerKey }: Props) {
+export default function CheckoutCTAButton({ auditId, endpoint, offerKey }: Props) {
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string>()
 
@@ -45,7 +46,7 @@ export default function CheckoutCTAButton({ endpoint, offerKey }: Props) {
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ offerKey }),
+        body: JSON.stringify({ auditId, offerKey }),
       })
       const result: unknown = await response.json()
       const url = (

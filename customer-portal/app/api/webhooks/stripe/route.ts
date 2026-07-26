@@ -25,6 +25,7 @@ async function sendCheckoutAlert(message: string): Promise<void> {
 // script provides the second idempotency boundary, keyed by Stripe session ID,
 // for recovery after a successful send but before the DB can record delivered.
 async function deliverPromptPack(
+  auditId: string,
   email: string,
   stripeSessionId: string,
 ): Promise<void> {
@@ -36,6 +37,8 @@ async function deliverPromptPack(
       email,
       '--stripe-session-id',
       stripeSessionId,
+      '--audit-id',
+      auditId,
     ],
     { timeout: 120_000 },
   )
@@ -100,7 +103,11 @@ export async function POST(request: NextRequest) {
       amount_total: session.amount_total,
       metadata: session.metadata,
     })
-    const canFulfill = canonicalReceipt && customerEmail !== null
+    const auditId = session.metadata?.audit_id
+    const canFulfill = canonicalReceipt
+      && customerEmail !== null
+      && typeof auditId === 'string'
+      && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(auditId)
 
     console.log('Checkout completed:', {
       id: session.id,
@@ -205,7 +212,7 @@ export async function POST(request: NextRequest) {
       }
 
       try {
-        await deliverPromptPack(customerEmail, session.id)
+        await deliverPromptPack(auditId, customerEmail, session.id)
       } catch (err) {
         console.error('Prompt pack fulfillment failed:', err)
         await restoreFailedFulfillment(client, session.id)

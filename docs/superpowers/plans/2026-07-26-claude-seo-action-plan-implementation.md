@@ -250,7 +250,7 @@
    npm run check:evidence-atoms
    npm run check:public-proof
    npm run test:e2e
-   npm run lighthouse:ci
+   npm run test:performance
    ```
 
 2. Run the sitemap checker against the configured public base URL three consecutive times and retain per-pass receipts.
@@ -259,3 +259,9 @@
 5. Stop before production deployment and present the tested branch for approval.
 
 **Done when:** all repository checks are green, the live-readiness gates are repeatable, no unsupported public proof exists, and the branch is ready for explicit deployment approval.
+
+## Accepted verification deviations
+
+- The repository has no `governance:check` npm script. Task 9 runs the workflow's actual validator directly with `node scripts/validate-governance.mjs`.
+- Lighthouse remains a lab gate, not a production claim. Application-level hydration and prefetch sources were removed from the audited shell without weakening the fixed budgets; the remaining Next.js App Router runtime still exceeds the 200 ms TBT budget on the current verification host.
+- The required production sitemap-route receipts cannot be certified while the public origin returns HTTP 502. No deployment or infrastructure mutation is authorized by this plan.

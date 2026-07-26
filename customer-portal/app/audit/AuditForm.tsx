@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Card } from '@/components/ui'
-import posthog from 'posthog-js'
+import posthog from '@/app/lib/posthog-browser'
 
 function AuditFormContent() {
   const [url, setUrl] = useState('')

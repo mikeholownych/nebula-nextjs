@@ -26,7 +26,7 @@
 | 6. Comparison/releases | /root/implement_citable_compare_release | /root/implement_citable_compare_release/review_citable_compare_release | approved | Category/workflow states, synchronized current release, controlled assets, and explicit unavailable workflow/deployment proof |
 | 7. Editorial/performance | /root/finish_editorial_performance + /root | /root/review_editorial_performance | approved | Four answer-first articles; fixed Lighthouse lab gates; consent, header, FAQ-schema, and prefetch performance fixes |
 | 8. Proof scaffolding | /root/implement_public_proof | /root/implement_public_proof/review_public_proof | approved | Generated single-authority cases/benchmarks; actual-clock expiry, dynamic proof surfaces, deterministic diagnostics/drift gate; current counts remain zero |
-| 9. Final verification | — | — | pending | No deployment |
+| 9. Final verification | /root | /root/final_branch_review | blocked | Code review approved with no findings and repository CI green; Lighthouse TBT and live-origin 502 gates remain blocked; no deployment |
 
 ## Decisions
 
@@ -47,3 +47,16 @@
 - AgentMail receives `fix-pack:<stripe_session_id>` as its provider idempotency key, and receipt replay detection runs before bounce-store access.
 - Public case and benchmark proof is authored only in `data/public-proof-surfaces.json`, compiled against governed claims/evidence, and consumed only through `data/public-proof.generated.json`.
 - Public-proof expiry uses the actual UTC date at compile/check time and a projected `validUntil` at request time; proof-bearing case, Citable, and sitemap routes are dynamic to prevent stale expired proof.
+- Checkout requires the exact completed audit ID and its signed unlock cookie before Stripe session creation; fulfillment accepts only that immutable audit ID from Stripe metadata and never guesses by email.
+- Consent-gated Google Analytics and PostHog loading, WebMCP registration, navigation, Learning Centre accordions, and footer links use server-rendered/native controls on audited static routes to minimize hydration work.
+
+## Task 9 verification receipts
+
+- `npm run ci`: passed — typecheck, lint, evidence/public-proof/Citable/intelligence projections, production build, 33 Jest suites / 301 tests, and 44 Playwright tests.
+- `node scripts/validate-governance.mjs`: passed — 31 checks, 2 existing warnings, 0 failures.
+- `/home/mike/nebula/venv/bin/python3 -m unittest tests.test_deliver_prompt_pack`: passed — 9 tests.
+- `git diff --check`: passed.
+- Independent final code review: approved — no Critical, Important, or Minor findings.
+- Lighthouse CI (three lab runs per route): failed only the fixed TBT ≤ 200 ms budget. Medians were 289 ms (`/learning-centre`), 296.7 ms (representative article), 307 ms (`/resources/citable`), and 256.5 ms (representative Citable job). Other configured assertions passed.
+- Production sitemap-route checker: three consecutive runs against `https://nebulacomponents.shop` each failed at sitemap fetch with HTTP 502, so route-level 200 receipts could not be collected.
+- Deployment: not performed.

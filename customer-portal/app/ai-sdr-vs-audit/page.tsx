@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: "You Don't Need an AI SDR — Fix Your Landing Page First | Nebula Components",
-  description: "Before you spend $25k on an AI SDR platform, verify that your landing page converts. Free 60-second audit across 7 conversion signals.",
+  description: "Before you spend $25k on an AI SDR platform, establish an evidence-backed landing-page baseline across 7 conversion signals.",
   alternates: { canonical: 'https://nebulacomponents.shop/ai-sdr-vs-audit' },
 }
 
@@ -20,7 +20,7 @@ export default function AiSdrVsAuditPage() {
         <div className="max-w-[720px] mx-auto text-center">
           <h1 className="text-[clamp(2rem,5vw,3.2rem)] font-black leading-tight text-fg mb-5">
             You Don't Need an AI SDR.<br />
-            You Need a <span className="text-accent-light">Landing Page That Converts.</span>
+            You Need a <span className="text-accent-light">Measured Landing-Page Baseline.</span>
           </h1>
           <p className="text-lg text-fg-muted max-w-[600px] mx-auto mb-8">
             More outbound volume cannot establish whether the landing page receiving that traffic
@@ -92,7 +92,7 @@ export default function AiSdrVsAuditPage() {
             <tbody>
               {[
                 { label: 'Entry cost', zamp: '$25k–$75k pilot', nebula: fixPackPrice ? `Free (or ${fixPackPrice} Fix Pack)` : 'Free audit; paid offer unavailable' },
-                { label: 'Time to value', zamp: '4–10 weeks', nebula: 'Audit delivered in under 60 seconds' },
+                { label: 'Time to value', zamp: '4–10 weeks', nebula: 'Self-serve audit; completion time varies by page and service load' },
                 { label: 'Purchase motion', zamp: 'Book a demo → sales cycle → legal review', nebula: 'Self-serve checkout.' },
                 { label: 'What it evaluates', zamp: 'Outbound volume and sequencing', nebula: 'Landing-page conversion signals' },
                 { label: 'Self-serve', zamp: 'No. Demo-gated.', nebula: 'Self-serve. No sales call.' },
@@ -150,7 +150,7 @@ export default function AiSdrVsAuditPage() {
             {fixPackPrice && ` The ${fixPackPrice} Fix Pack delivers a tailored AI prompt pack by email within minutes; you or your developer implements the changes, with no Nebula access to your site, CMS, or hosting.`}
           </li>
           <li><strong>Measure the result.</strong> Re-audit the page and compare evidence before deciding whether to add more traffic.</li>
-          <li><strong>Then — and only then — consider an AI SDR.</strong> Because now the math works. Each outbound email lands on a page that converts.</li>
+          <li><strong>Then consider an AI SDR.</strong> Use the measured baseline to decide whether additional outbound traffic is justified; an audit cannot guarantee conversion.</li>
         </ol>
 
         {/* Warning Callout */}
@@ -169,7 +169,8 @@ export default function AiSdrVsAuditPage() {
             Free audit live — 7 conversion signals
           </div>
           <p className="mb-0">
-            Run a free 60-second audit across 7 conversion signals — no signup required.{' '}
+            Run a free audit across 7 conversion signals — no signup required. Completion time
+            varies by page and service load.{' '}
             <a href="/audit" className="text-accent font-bold hover:underline">Run your free audit →</a>
           </p>
         </div>
@@ -188,7 +189,8 @@ export default function AiSdrVsAuditPage() {
             Run your free landing page audit
           </h3>
           <p className="text-fg-muted max-w-[500px] mx-auto mb-6">
-            Paste your URL — results in under 60 seconds.
+            Paste your URL to generate an evidence-backed baseline. Completion time varies by page
+            and service load.
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-4">
             <a href="/audit" className="inline-flex items-center gap-2 bg-accent hover:bg-accent-light text-bg font-bold py-4 px-9 rounded-lg transition-colors">

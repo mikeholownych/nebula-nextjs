@@ -164,4 +164,44 @@ describe('Lighthouse CI lab performance budgets', () => {
     expect(overviewSource.match(/prefetch=\{false\}/g)?.length ?? 0)
       .toBeGreaterThanOrEqual(3)
   })
+
+  it('keeps the Learning Centre accordion server-rendered without hydration work', () => {
+    const source = readFileSync(
+      path.join(process.cwd(), 'app/learning-centre/CategoryAccordion.tsx'),
+      'utf8',
+    )
+
+    expect(source).not.toContain("'use client'")
+    expect(source).not.toContain('useState')
+    expect(source).toContain('<details')
+    expect(source).toContain('<summary')
+  })
+
+  it('keeps the Learning Centre directory free of client Link hydration and prefetch', () => {
+    const hub = readFileSync(
+      path.join(process.cwd(), 'app/learning-centre/page.tsx'),
+      'utf8',
+    )
+    const directory = readFileSync(
+      path.join(process.cwd(), 'app/learning-centre/CategoryAccordion.tsx'),
+      'utf8',
+    )
+
+    expect(hub).not.toContain("from 'next/link'")
+    expect(directory).not.toContain("from 'next/link'")
+    expect(hub).not.toContain('<Link')
+    expect(directory).not.toContain('<Link')
+  })
+
+  it('keeps responsive site navigation native instead of hydrating a toggle', () => {
+    const source = readFileSync(
+      path.join(process.cwd(), 'components/SiteNav.tsx'),
+      'utf8',
+    )
+
+    expect(source).not.toContain("'use client'")
+    expect(source).not.toContain('useState')
+    expect(source).toContain('<details')
+    expect(source).toContain('<summary')
+  })
 })

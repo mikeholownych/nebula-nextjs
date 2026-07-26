@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getPostHogClient } from '@/app/lib/posthog-server'
 import { getActiveFixPack } from '@/app/lib/public-facts'
+import { readAuditUnlock } from '@/app/lib/audit-unlock-token'
+
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null && !Array.isArray(value)
@@ -44,11 +47,48 @@ export async function POST(request: NextRequest) {
 
   const keys = Object.keys(body)
   if (
-    keys.length !== 1 ||
-    keys[0] !== 'offerKey' ||
-    body.offerKey !== fixPack.checkout.offerKey
+    keys.length !== 2 ||
+    !keys.includes('offerKey') ||
+    !keys.includes('auditId') ||
+    body.offerKey !== fixPack.checkout.offerKey ||
+    typeof body.auditId !== 'string' ||
+    !UUID_RE.test(body.auditId)
   ) {
     return NextResponse.json({ code: 'UNSUPPORTED_CHECKOUT_OFFER' }, { status: 400 })
+  }
+  const auditId = body.auditId
+  const auditIdentity = readAuditUnlock(
+    auditId,
+    request.cookies.get(`audit_unlock_${auditId}`)?.value,
+  )
+  if (!auditIdentity) {
+    return NextResponse.json({ code: 'CHECKOUT_AUDIT_NOT_UNLOCKED' }, { status: 403 })
+  }
+
+  const platformApiUrl = (process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001')
+    .replace(/\/$/, '')
+  try {
+    const auditResponse = await fetch(`${platformApiUrl}/audit/${auditId}`, {
+      signal: AbortSignal.timeout(10_000),
+    })
+    if (!auditResponse.ok) {
+      return NextResponse.json({ code: 'CHECKOUT_AUDIT_NOT_FOUND' }, { status: 404 })
+    }
+    const audit: unknown = await auditResponse.json()
+    if (
+      !isRecord(audit) ||
+      audit.audit_id !== auditId ||
+      audit.status !== 'completed' ||
+      typeof audit.url !== 'string'
+    ) {
+      return NextResponse.json({ code: 'CHECKOUT_AUDIT_NOT_ELIGIBLE' }, { status: 409 })
+    }
+    const auditedUrl = new URL(audit.url)
+    if (!['http:', 'https:'].includes(auditedUrl.protocol)) {
+      return NextResponse.json({ code: 'CHECKOUT_AUDIT_NOT_ELIGIBLE' }, { status: 409 })
+    }
+  } catch {
+    return NextResponse.json({ code: 'CHECKOUT_AUDIT_LOOKUP_FAILED' }, { status: 503 })
   }
 
   let baseUrl: URL
@@ -87,7 +127,12 @@ export async function POST(request: NextRequest) {
           '/thank-you?session_id={CHECKOUT_SESSION_ID}',
           baseUrl,
         ).toString(),
-        cancel_url: new URL(fixPack.checkout.pagePath, baseUrl).toString(),
+        cancel_url: new URL(
+          `${fixPack.checkout.pagePath}?audit_id=${encodeURIComponent(auditId)}`,
+          baseUrl,
+        ).toString(),
+        customer_email: auditIdentity.email,
+        'metadata[audit_id]': auditId,
         'metadata[offer_key]': fixPack.checkout.offerKey,
       }),
     })
@@ -115,6 +160,7 @@ export async function POST(request: NextRequest) {
         event: 'checkout_session_created',
         properties: {
           offer_key: fixPack.checkout.offerKey,
+          audit_id: auditId,
           stripe_session_id: session.id,
         },
       })

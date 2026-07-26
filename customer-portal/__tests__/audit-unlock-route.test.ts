@@ -62,4 +62,17 @@ describe('POST /api/audit/unlock delivery truthfulness', () => {
     expect(response.status).toBe(200)
     expect(body.email_sent).toBe(true)
   })
+
+  it('makes the signed audit identity available to checkout', async () => {
+    jest.spyOn(global, 'fetch')
+      .mockResolvedValueOnce(Response.json(audit))
+      .mockResolvedValueOnce(Response.json({ status: 'sent', message_id: 'msg-123' }))
+
+    const response = await POST(request())
+    const cookie = response.cookies.get('audit_unlock_audit-123')
+
+    expect(cookie?.httpOnly).toBe(true)
+    expect(cookie?.path).toBe('/')
+    expect(cookie?.value).toBeTruthy()
+  })
 })
