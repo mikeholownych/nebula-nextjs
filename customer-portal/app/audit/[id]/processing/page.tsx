@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { Card } from '@/components/ui'
 import { pushWithViewTransition } from '../../_lib/view-transition'
-import posthog from 'posthog-js'
+import posthog from '@/app/lib/posthog-browser'
 
 const STATUS_MESSAGES = [
   { message: 'Scanning page structure...', duration: 2000 },

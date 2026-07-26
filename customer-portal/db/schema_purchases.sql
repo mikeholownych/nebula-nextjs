@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS purchases (
   amount_total INTEGER,
   currency VARCHAR(10),
   payment_status VARCHAR(50),
-  fulfillment_status VARCHAR(20) DEFAULT 'pending', -- pending, contacted, delivered
+  fulfillment_status VARCHAR(20) DEFAULT 'pending', -- pending, processing, failed, delivered, review
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 

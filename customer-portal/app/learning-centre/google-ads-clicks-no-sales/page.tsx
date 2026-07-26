@@ -5,7 +5,7 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Google Ads Clicks But No Sales: Fix The Page | Nebula',
   description:
-    'If Google Ads produces clicks but no sales, the campaign may be doing its job. The conversion leak usually happens on the landing page, not in the ad.',
+    'If Google Ads produces clicks but no sales, separate ad delivery from post-click behaviour before changing bids, creative, or the landing page.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/learning-centre/google-ads-clicks-no-sales',
   },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const articleSchema = createArticleSchema({
   headline: 'Google Ads Clicks But No Sales: Check The Page Before Budget',
   description:
-    'If Google Ads produces clicks but no sales, the campaign may be doing its job. The conversion leak usually happens on the landing page, not in the ad.',
+    'If Google Ads produces clicks but no sales, separate ad delivery from post-click behaviour before changing bids, creative, or the landing page.',
   url: 'https://nebulacomponents.shop/learning-centre/google-ads-clicks-no-sales',
   publishedDate: '2026-07-16',
   modifiedDate: '2026-07-21',
@@ -29,7 +29,7 @@ const faqSchema = {
       name: 'Why does Google Ads produce clicks but no conversions?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'The most common causes are: (1) the landing page headline does not match the search intent or ad promise — the visitor arrived and immediately decided they were in the wrong place; (2) no proof is visible before the CTA — the page asks for action before it earns trust; (3) the page loads slowly on mobile — a visitor who abandons during load is recorded as a bounce before they see anything. A healthy click-through rate on the ad with a high bounce rate on the page is the clearest diagnostic signal: the ad worked, the page did not.',
+        text: 'Common hypotheses include: (1) the landing page headline does not match the search intent or ad promise; (2) no proof is visible before the CTA; and (3) the page loads slowly on mobile. Healthy ad click-through with high post-click bounce is a reason to investigate message match and page experience, but it does not by itself prove which component caused the outcome.',
       },
     },
     {
@@ -37,7 +37,7 @@ const faqSchema = {
       name: 'How do I know if my Google Ads problem is the ad or the landing page?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Check CTR first. If search CTR is below 3-5% on high-intent keywords, the ad is not getting clicked and the page is not yet the issue. If CTR is healthy (above 5%) but conversion rate is below 2%, the ad delivered — the page failed. Confirm with bounce rate by source: if paid search bounces at 80%+ but email or direct traffic converts on the same page, the problem is message-match between the ad and the first screen.',
+        text: 'Check CTR, conversion tracking, bounce rate by source, device, query, and landing-page variant together. Thresholds such as 3-5% CTR or 2% conversion rate are comparison points, not causal diagnoses. Healthy CTR with weak post-click behaviour prioritises a page-side hypothesis; it does not exclude ad targeting, offer fit, attribution, or traffic quality.',
       },
     },
     {
@@ -53,7 +53,7 @@ const faqSchema = {
       name: 'Does sending Google Ads traffic to a homepage hurt conversion?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Almost always yes, for high-intent searches. A homepage is designed to route multiple audience types — it carries navigation, multiple offers, and no single conversion goal. A high-intent search ad visitor arrived because of one specific promise. A homepage breaks that promise immediately by presenting ten options instead of one. Dedicated landing pages that mirror the ad promise convert more consistently than homepage traffic for paid search.',
+        text: 'It can when the homepage presents several audiences, offers, and conversion paths instead of continuing the ad’s specific promise. Compare homepage and dedicated-page performance for the same intent and traffic conditions before attributing the difference to page type.',
       },
     },
     {
@@ -61,7 +61,7 @@ const faqSchema = {
       name: 'How do I fix a high bounce rate from Google Ads?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Fix in this order: (1) confirm the headline mirrors the ad keyword and promise exactly; (2) check mobile load time — run Google PageSpeed Insights on mobile preset and aim for LCP under 2.5 seconds; (3) ensure proof (a result, a number, a named customer) appears before the CTA in the first viewport; (4) reduce the CTA to one action with a label describing the outcome, not the mechanics. Most high-bounce patterns from paid search are caused by the first two — message mismatch and slow mobile load.',
+        text: 'Test in this order: (1) compare the headline with the ad keyword and promise; (2) check mobile load time with Google PageSpeed Insights and use LCP under 2.5 seconds as a performance target; (3) inspect whether relevant proof appears before the CTA; and (4) test one clearly labelled CTA. Change one variable at a time and compare it with the current baseline before attributing an outcome.',
       },
     },
   ],
@@ -104,30 +104,53 @@ export default function GoogleAdsClicksNoSales() {
             </p>
           </div>
 
-          {/* The chain */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          {/* Direct answer */}
+          <section
+            data-editorial="answer-first"
+            className="mt-6 rounded-2xl border border-border bg-bg-panel p-8"
+          >
             <h2 className="mb-4 text-2xl font-bold text-fg">
-              The click is not the sale — the page closes it
+              Direct answer: isolate the post-click leak before changing budget
             </h2>
             <p className="leading-relaxed text-fg-muted">
               A Google Ads click represents a visitor who searched for something
-              specific and decided your ad was relevant enough to click. That is
-              the campaign&apos;s job. The page&apos;s job is to confirm that
-              the decision was right, build enough trust to justify action, and
-              make that action obvious.
+              specific and decided your ad was relevant enough to click. First
+              verify the search term, ad promise, and conversion tracking. Then
+              compare page behaviour by campaign, device, and landing page. A
+              click with no sale narrows the investigation; it does not identify
+              the cause by itself.
             </p>
             <p className="mt-4 leading-relaxed text-fg-muted">
-              When the page fails that job — when the headline does not match
-              the search, when proof is buried below the fold, when the CTA
-              competes with navigation and three other options — the visitor
-              leaves. The click was valid. The page broke the chain.
+              If relevant clicks reach a correctly tracked page but visitors
+              disengage before the offer or form, investigate message match,
+              mobile load, proof, and CTA friction before buying more traffic.
+              Change one suspected cause and measure it against the baseline.
             </p>
-            <p className="mt-4 leading-relaxed text-fg-muted">
-              The diagnostic signal is a healthy CTR on the ad combined with a
-              high bounce rate on the page. CTR above 5% on a high-intent
-              keyword means the ad is working. Bounce rate above 70% on the
-              same traffic means the page is not.
-            </p>
+            <aside
+              role="note"
+              aria-label="Evidence boundary"
+              className="mt-5 rounded-xl border border-border px-5 py-4 text-sm leading-relaxed text-fg-muted"
+            >
+              <strong className="text-fg">Evidence boundary:</strong> CTR,
+              bounce, and conversion events can support a page-side hypothesis,
+              but they do not prove causality or exclude targeting, offer,
+              tracking, and auction effects. No diagnosis or page change
+              guarantees a sales outcome.
+            </aside>
+            <div className="mt-5 flex flex-col gap-2 text-sm">
+              <Link
+                href="/learning-centre/message-match-checklist"
+                className="font-semibold text-accent hover:text-accent-light"
+              >
+                Compare search intent with page messaging
+              </Link>
+              <Link
+                href="/learning-centre/landing-page-not-converting"
+                className="font-semibold text-accent hover:text-accent-light"
+              >
+                Diagnose five common landing-page leaks
+              </Link>
+            </div>
           </section>
 
           {/* 5 page-side causes */}
@@ -153,13 +176,13 @@ export default function GoogleAdsClicksNoSales() {
                   n: '3',
                   cause: 'Slow mobile load',
                   detail:
-                    "A visitor who abandons while the page is loading is recorded as a bounce before they have seen your headline. Portent's 2022 analysis of over 100 million page views found that B2B lead-gen pages loading in 1 second convert at roughly 3x the rate of pages loading in 5 seconds. Check LCP with Google PageSpeed Insights on the mobile preset — not desktop. If LCP is above 4 seconds, this is the primary cause of your zero-conversion pattern.",
+                    "A visitor who abandons while the page is loading is recorded as a bounce before they have seen your headline. Portent's 2022 analysis of over 100 million page views found that B2B lead-gen pages loading in 1 second convert at roughly 3x the rate of pages loading in 5 seconds. Check LCP with Google PageSpeed Insights on the mobile preset — not desktop. If LCP is above 4 seconds, treat load performance as a high-priority hypothesis and test it against other campaign and page signals.",
                 },
                 {
                   n: '4',
                   cause: 'Traffic sent to the homepage',
                   detail:
-                    'A homepage is built to route multiple audience types across multiple offers. A paid search visitor arrived because of one specific promise. A homepage breaks that promise by presenting navigation, multiple services, and no single conversion path. High-intent search traffic consistently converts better on a dedicated landing page that mirrors the ad promise than on a homepage that dilutes it.',
+                    'A homepage is built to route multiple audience types across multiple offers. A paid search visitor arrived because of one specific promise. A homepage can dilute that promise by presenting navigation, multiple services, and no single conversion path. Compare it with a dedicated page under equivalent traffic conditions rather than assuming page type caused the result.',
                 },
                 {
                   n: '5',
@@ -205,7 +228,7 @@ export default function GoogleAdsClicksNoSales() {
                 {
                   pattern: 'Low CTR (under 2-3%) on search',
                   diagnosis:
-                    'Ad is the problem, not the page. Fix ad copy or keyword match types before touching the landing page.',
+                    'Prioritise an ad-copy or keyword-match hypothesis, then compare it against page and traffic-quality evidence before changing the landing page.',
                 },
                 {
                   pattern: 'Mobile bounce 20+ points above desktop',

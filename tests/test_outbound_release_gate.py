@@ -137,6 +137,36 @@ def test_duplicate_client_id_is_blocked(tmp_path: Path):
     assert second.reason == "duplicate_client_id"
 
 
+def test_fix_pack_receipts_are_scoped_and_independent(tmp_path: Path):
+    now = [1_000.0]
+    gate = _gate(tmp_path, clock=lambda: now[0])
+    first = gate.reserve(
+        "lead@example.com",
+        "fix-pack:cs_live_first",
+        purpose=DeliveryPurpose.AUDIT_DELIVERY,
+    )
+    assert first.allowed is True
+    gate.complete(
+        "fix-pack:cs_live_first",
+        sent=True,
+        provider_message_id="provider-msg-first",
+    )
+    replay = gate.reserve(
+        "lead@example.com",
+        "fix-pack:cs_live_first",
+        purpose=DeliveryPurpose.AUDIT_DELIVERY,
+    )
+    assert replay.reason == "already_sent"
+
+    now[0] = 1_301.0
+    later_purchase = gate.reserve(
+        "lead@example.com",
+        "fix-pack:cs_live_second",
+        purpose=DeliveryPurpose.AUDIT_DELIVERY,
+    )
+    assert later_purchase.allowed is True
+
+
 def test_sent_client_id_reconciles_to_durable_provider_receipt(tmp_path: Path):
     gate = _gate(tmp_path)
     client_id = "conversation:thread-warm:pitch"

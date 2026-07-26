@@ -1,8 +1,14 @@
 import React from 'react'
 import { existsSync, readFileSync, readdirSync } from 'fs'
 import * as path from 'path'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { NextRequest } from 'next/server'
+import posthog from 'posthog-js'
+
+jest.mock('posthog-js', () => ({
+  __esModule: true,
+  default: { capture: jest.fn() },
+}))
 
 jest.mock('@/app/lib/email-service', () => ({
   getQueueStats: jest.fn(),
@@ -23,8 +29,10 @@ import { POST as auditEmailPost } from '@/app/api/audit/email/route'
 import { POST as checkoutPost } from '@/app/api/checkout/route'
 import { GET as emailGet, POST as emailPost } from '@/app/api/email/process/route'
 import { POST as rb2bPost } from '@/app/api/webhooks/rb2b/route'
+import { getPublishedCaseStudies, publicFacts } from '@/app/lib/public-facts'
+import { signAuditUnlock } from '@/app/lib/audit-unlock-token'
 import AuditPage from '@/app/audit/page'
-import CheckoutPage from '@/app/checkout/page'
+import CheckoutCTAButton from '@/app/checkout/CheckoutCTAButton'
 import ThankYouPage from '@/app/thank-you/page'
 import CheckoutImpulsePage from '@/app/checkout-impulse/page'
 import CheckoutV2Page from '@/app/checkout-v2/page'
@@ -45,6 +53,23 @@ const jsonRequest = (url: string, body: unknown, headers?: HeadersInit) =>
     headers: { 'content-type': 'application/json', ...headers },
     body: JSON.stringify(body),
   })
+
+const checkoutAuditId = '123e4567-e89b-12d3-a456-426614174000'
+const completedAudit = {
+  audit_id: checkoutAuditId,
+  email: 'buyer@example.com',
+  status: 'completed',
+  url: 'https://example.com/landing',
+}
+
+const checkoutRequest = () => {
+  const token = signAuditUnlock(checkoutAuditId, 'buyer@example.com')
+  return jsonRequest(
+    'http://localhost/api/checkout',
+    { auditId: checkoutAuditId, offerKey: 'fix-pack' },
+    { cookie: `audit_unlock_${checkoutAuditId}=${token}` },
+  )
+}
 
 function listPublicHtml(relativeDir = 'public'): string[] {
   const absoluteDir = path.join(process.cwd(), relativeDir)
@@ -110,6 +135,7 @@ describe('production safety containment', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     process.env = { ...originalEnv }
+    process.env.AUDIT_UNLOCK_SECRET = 'containment-test-secret'
     global.fetch = jest.fn()
   })
 
@@ -174,18 +200,85 @@ describe('production safety containment', () => {
     expect(global.fetch).not.toHaveBeenCalled()
   })
 
+  it('does not depend on an opaque configured Stripe Price ID', async () => {
+    process.env.STRIPE_SECRET_KEY = 'sk_test_configured'
+    delete process.env.STRIPE_FIX_PACK_PRICE_ID
+    process.env.NEXT_PUBLIC_URL = 'https://nebulacomponents.shop'
+    ;(global.fetch as jest.Mock)
+      .mockResolvedValueOnce(Response.json(completedAudit))
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+        id: 'cs_test_registry_price',
+        url: 'https://checkout.stripe.com/c/pay/cs_test_registry_price',
+      }),
+    })
+
+    const response = await checkoutPost(checkoutRequest())
+
+    expect(response.status).toBe(200)
+    expect(global.fetch).toHaveBeenCalledTimes(2)
+  })
+
   it('fails checkout closed without a validated HTTPS production base URL', async () => {
     process.env.STRIPE_SECRET_KEY = '«redacted:sk_test_…»'
-    process.env.STRIPE_FIX_PACK_PRICE_ID = 'price_fix_pack'
     delete process.env.NEXT_PUBLIC_URL
 
-    const response = await checkoutPost(jsonRequest('http://localhost/api/checkout', {
-      email: 'buyer@example.com',
-      offerKey: 'fix-pack',
-    }))
+    const response = await checkoutPost(checkoutRequest())
 
     expect(response.status).toBe(503)
-    expect(global.fetch).not.toHaveBeenCalled()
+    expect(global.fetch).toHaveBeenCalledTimes(1)
+  })
+
+  it('creates a server-side Stripe Checkout Session with canonical offer metadata', async () => {
+    process.env.STRIPE_SECRET_KEY = 'sk_test_configured'
+    process.env.NEXT_PUBLIC_URL = 'https://nebulacomponents.shop'
+    ;(global.fetch as jest.Mock)
+      .mockResolvedValueOnce(Response.json(completedAudit))
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+        id: 'cs_test_created',
+        url: 'https://checkout.stripe.com/c/pay/cs_test_created',
+      }),
+    })
+
+    const response = await checkoutPost(checkoutRequest())
+
+    expect(response.status).toBe(200)
+    const init = (global.fetch as jest.Mock).mock.calls[1][1] as RequestInit
+    const body = new URLSearchParams(String(init.body))
+    expect(body.get('line_items[0][price]')).toBeNull()
+    expect(body.get('line_items[0][price_data][currency]')).toBe('usd')
+    expect(body.get('line_items[0][price_data][unit_amount]')).toBe('9700')
+    expect(body.get('line_items[0][price_data][product_data][name]')).toBe(
+      'Nebula Conversion Fix Pack',
+    )
+    expect(body.get('payment_method_types[0]')).toBe('card')
+    expect(body.get('metadata[offer_key]')).toBe('fix-pack')
+    expect(body.get('metadata[audit_id]')).toBe(checkoutAuditId)
+    expect(body.get('customer_email')).toBe('buyer@example.com')
+    await expect(response.json()).resolves.toEqual({
+      url: 'https://checkout.stripe.com/c/pay/cs_test_created',
+    })
+  })
+
+  it.each([
+    ['network rejection', () => Promise.reject(new Error('network down'))],
+    ['invalid JSON', () => Promise.resolve({
+      ok: true,
+      json: async () => { throw new SyntaxError('invalid JSON') },
+    })],
+  ])('maps Stripe provider %s to 502', async (_label, providerResult) => {
+    process.env.STRIPE_SECRET_KEY = 'sk_test_configured'
+    process.env.NEXT_PUBLIC_URL = 'https://nebulacomponents.shop'
+    ;(global.fetch as jest.Mock)
+      .mockResolvedValueOnce(Response.json(completedAudit))
+      .mockImplementationOnce(providerResult)
+
+    const response = await checkoutPost(checkoutRequest())
+
+    expect(response.status).toBe(502)
   })
 
   it('does not process email from GET requests', async () => {
@@ -219,21 +312,43 @@ describe('production safety containment', () => {
     expect(global.fetch).not.toHaveBeenCalled()
   })
 
-  it('uses only the verified canonical Stripe Payment Link on the checkout page', () => {
-    const { container } = render(React.createElement(CheckoutPage))
+  it('starts server-created Stripe Checkout only with a selected audit identity', () => {
+    const { container } = render(React.createElement(CheckoutCTAButton, {
+      auditId: checkoutAuditId,
+      endpoint: '/api/checkout',
+      offerKey: 'fix-pack',
+    }))
 
-    // 2026-07-24: rotated off plink_1TsYoeEINR1kU9chNMFuKhDu — that link's
-    // only price was $147 (price_1TsYoeEINR1kU9chokWZFetZ), not the $97
-    // advertised everywhere on the site (confirmed live via `stripe
-    // payment_links retrieve` / `stripe prices list`). That link is now
-    // deactivated in Stripe. This is the replacement, charging the correct
-    // $97 (price_1TwYwlEINR1kU9chLpOPfOJD) on the same underlying product.
-    expect(screen.getByRole('link', { name: /continue to secure stripe checkout/i })).toHaveAttribute(
-      'href',
-      'https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h',
-    )
+    expect(screen.getByRole('button', { name: /continue to secure stripe checkout/i })).toBeInTheDocument()
+    expect(container.innerHTML).not.toContain('buy.stripe.com')
     expect(screen.queryByText(/^card details$/i)).not.toBeInTheDocument()
     expect(container.querySelector('a button')).toBeNull()
+  })
+
+  it('still starts API checkout when client analytics throws synchronously', async () => {
+    jest.mocked(posthog.capture).mockImplementationOnce(() => {
+      throw new Error('analytics unavailable')
+    })
+    ;(global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: false,
+      json: async () => ({ code: 'CHECKOUT_PROVIDER_ERROR' }),
+    })
+    render(React.createElement(CheckoutCTAButton, {
+      auditId: checkoutAuditId,
+      endpoint: '/api/checkout',
+      offerKey: 'fix-pack',
+    }))
+
+    fireEvent.click(screen.getByRole('button', {
+      name: /continue to secure stripe checkout/i,
+    }))
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(
+        '/api/checkout',
+        expect.objectContaining({ method: 'POST' }),
+      )
+    })
   })
 
   it('shows a real audit submission form now that scoring is live', () => {
@@ -366,21 +481,23 @@ describe('production safety containment', () => {
     const caseStudySource = readFileSync(path.join(process.cwd(), 'app/case-studies/[slug]/page.tsx'), 'utf8')
     const indexSource = readFileSync(path.join(process.cwd(), 'app/case-studies/page.tsx'), 'utf8')
     const sitemapSource = readFileSync(path.join(process.cwd(), 'app/sitemap.ts'), 'utf8')
+    const publicFactsSource = readFileSync(path.join(process.cwd(), 'app/lib/public-facts.ts'), 'utf8')
 
-    // Unknown slugs still 404 — only documented cases in CASE_STUDIES resolve.
+    // Unknown slugs still 404 — only evidence-gated registry entries resolve.
     expect(caseStudySource).toMatch(/notFound\(\)/)
     expect(caseStudySource).not.toContain('score:')
     expect(caseStudySource).not.toContain("'@type': 'CaseStudy'")
 
     // As of 2026-07-24 there are zero real, evidenced case studies (the
     // previous 4 entries were invented — this business has no completed
-    // paid engagements on record). CASE_STUDIES and the sitemap's
-    // caseStudySlugs must stay in lockstep and both empty until a case
-    // study with real dates, a real metric, and inspectable evidence is
-    // added to CASE_STUDIES — at which point this test should be updated
-    // to assert that specific slug is present in both places again.
-    expect(caseStudySource).toMatch(/CASE_STUDIES:\s*Record<string,\s*CaseStudy>\s*=\s*\{\}/)
-    expect(sitemapSource).toMatch(/caseStudySlugs:\s*string\[\]\s*=\s*\[\]/)
+    // paid engagements on record). Detail routes and sitemap entries must
+    // derive from the same fail-closed public-facts accessor.
+    expect(publicFacts.caseStudies.status).toBe('none_published')
+    expect(getPublishedCaseStudies()).toEqual([])
+    expect(publicFactsSource).toContain('public-proof.generated.json')
+    expect(publicFactsSource).not.toMatch(/caseStudies:\s*\{[\s\S]*?entries:\s*\[\]/)
+    expect(caseStudySource).toContain('getPublishedCaseStudies()')
+    expect(sitemapSource).toContain('getPublishedCaseStudies()')
 
     // The index page must not claim real/verified results while
     // CASE_STUDIES is empty — this is exactly the gap that let 4

@@ -4,11 +4,11 @@
 # Full content: https://nebulacomponents.shop/llms-full.txt
 
 # About
-Nebula Components provides landing page conversion optimization services. We help founders who are spending money on ads without conversions identify and fix landing page leaks.
+Nebula Components provides landing page conversion optimization services. We help founders who are spending money on ads without conversions identify landing page leaks and give them tailored prompts to implement fixes themselves or with their developer.
 
 # Core Offering
 - Free landing page audit: 60-second automated diagnosis across 7 conversion signals
-- Conversion Fix Pack ($97): Full landing page audit + a tailored AI prompt for every identified fix, built from the customer's actual page. Delivered by email within minutes of payment. One-time payment, no retainer. The customer (or their developer) implements the fixes using the prompts — Nebula does not require or take access to the customer's site.
+- Conversion Fix Pack ($97; price valid through 2026-12-31): Full landing page audit + a tailored AI prompt for every identified fix, built from the customer's actual page. Delivered by email within minutes of payment. One-time payment, no retainer. The customer (or their developer) implements the fixes using the prompts — Nebula does not require or take access to the customer's site. Offer facts current as of 2026-07-26.
 
 # Target Customer
 Founders actively spending on ads (Google, Meta, LinkedIn) with low or zero conversions from their landing pages. The buying trigger is "spending on ads and not converting" — not a demographic.
@@ -25,7 +25,7 @@ Landing page conversion optimization service / Landing page audit tool
 - Trigger-aware prospecting: Finding prospects showing buying triggers (not demographic filters)
 - Message-match audit: Verifying ad promise matches landing page headline
 - 7-Point Diagnosis: Nebula's proprietary audit framework covering message-match, trust signals, mobile layout, load time, CTA clarity, form friction, and compliance
-- Self-serve checkout: No sales calls, direct purchase at $97
+- Self-serve checkout: No sales calls; the checkout page shows the active, date-bounded Fix Pack offer when one is available
 
 # Key URLs
 - Main: https://nebulacomponents.shop
@@ -41,20 +41,21 @@ Landing page conversion optimization service / Landing page audit tool
 - Citable v1.14.0: Evidence layer for SEO, AEO, and GEO audits. 123 detectors across 18 namespaces and 27 schema-validated registries (not all detectors are deterministic — each declares its determinism posture). Apache 2.0. npm: @nebulacomponents/citable
 
 # Founder
-Mike Holownych — Founder, Nebula Components. Built 50+ landing pages, identified 7 recurring conversion killers, created Nebula to fix at scale.
+Mike Holownych — Founder, Nebula Components.
 
 # Contact
 - Email: hello@nebulacomponents.shop
 - LinkedIn: https://linkedin.com/company/nebula-components
 
 # Evidence
-- Learning Centre: 24+ articles on landing page conversion issues
+- Published case studies: none. Nebula does not publish a case until it has inspectable evidence, a measurement window, publication permission, disclosure, and publication metadata.
+- Learning Centre: 45 articles on landing page conversion issues
 - Open-source audit tooling: github.com/mikeholownych/citable
 - Verified customer case studies: none published yet; publication requires a real before/after metric, measurement window, and inspectable evidence
 
 # Limitations
 - Audits require publicly accessible landing pages
-- The paid Fix Pack is purchased through Stripe; the customer or their developer implements the delivered prompts
+- The paid Fix Pack is purchased through Stripe; implementation remains with the customer or their developer using the delivered prompts
 - No phone support (email only)
 
 # AI Retrieval Permission

@@ -1,6 +1,10 @@
 /** @jest-environment node */
 
-import { signAuditUnlock, verifyAuditUnlock } from '@/app/lib/audit-unlock-token'
+import {
+  readAuditUnlock,
+  signAuditUnlock,
+  verifyAuditUnlock,
+} from '@/app/lib/audit-unlock-token'
 
 describe('audit unlock token signing', () => {
   beforeEach(() => {
@@ -10,6 +14,9 @@ describe('audit unlock token signing', () => {
   it('verifies a token signed for the same audit_id', () => {
     const token = signAuditUnlock('audit-123', 'lead@example.com')
     expect(verifyAuditUnlock('audit-123', token)).toBe(true)
+    expect(readAuditUnlock('audit-123', token)).toEqual({
+      email: 'lead@example.com',
+    })
   })
 
   it('rejects a token presented for a different audit_id', () => {
@@ -30,5 +37,6 @@ describe('audit unlock token signing', () => {
 
   it('rejects missing tokens', () => {
     expect(verifyAuditUnlock('audit-123', undefined)).toBe(false)
+    expect(readAuditUnlock('audit-123', undefined)).toBeNull()
   })
 })

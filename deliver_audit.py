@@ -14,7 +14,7 @@ except ImportError:
     HAS_FIX_MAP = False
 
 # Configuration
-NEBULA_DIR = Path("/home/mike/nebula")
+NEBULA_DIR = Path(__file__).resolve().parent
 # The live server runs under system Python but dependencies live in the repo venv.
 # Add the active venv site-packages before importing BeautifulSoup/requests.
 sys.path.insert(0, str(NEBULA_DIR / "venv" / "lib" / "python3.12" / "site-packages"))
@@ -1216,7 +1216,7 @@ def _latest_inbound_message_id(am, thread_id):
     return None
 
 
-def send_via_agentmail(to, subject, body, html=None, thread_id=None, message_id=None):
+def send_via_agentmail(to, subject, body, html=None, thread_id=None, message_id=None, client_id=None):
     """Make one gated provider attempt; retries are requeued after the 300s cooldown."""
     from agentmail_client import AgentMailClient
 
@@ -1229,6 +1229,7 @@ def send_via_agentmail(to, subject, body, html=None, thread_id=None, message_id=
                 recipient=to,
                 text=body,
                 html=html,
+                client_id=client_id,
             )
         else:
             data = am.send_audit(
@@ -1236,6 +1237,7 @@ def send_via_agentmail(to, subject, body, html=None, thread_id=None, message_id=
                 subject=subject,
                 text=body,
                 html=html,
+                client_id=client_id,
             )
 
         if data.get("_error"):

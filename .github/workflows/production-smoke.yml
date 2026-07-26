@@ -15,6 +15,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: customer-portal/package-lock.json
+
+      - name: Install sitemap checker dependencies
+        working-directory: customer-portal
+        run: npm ci --omit=dev --ignore-scripts
+
       - name: Check site availability
         run: |
           curl -sSf https://nebulacomponents.shop -o /dev/null || exit 1
@@ -51,6 +61,11 @@ jobs:
           if [ "$CODE" != "503" ] && [ "$CODE" != "404" ]; then
             echo "WARNING: /api/audit/start returned ${CODE}, expected 503 or 404"
           fi
+
+      - name: Verify sitemap routes are healthy
+        if: github.event_name == 'schedule' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+        working-directory: customer-portal
+        run: npm run check:sitemap-routes -- --base-url https://nebulacomponents.shop
 
       - name: Create health badge
         if: success()

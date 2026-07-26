@@ -61,7 +61,7 @@ class OutboundReleaseGate:
             "wave4:",
             "sre:",
         ),
-        DeliveryPurpose.AUDIT_DELIVERY: ("audit:", "platform-audit:"),
+        DeliveryPurpose.AUDIT_DELIVERY: ("audit:", "platform-audit:", "fix-pack:"),
         DeliveryPurpose.CONVERSATION_REPLY: ("reply:", "conversation:"),
         DeliveryPurpose.INTERNAL: ("internal:", "upwork-digest:"),
     }

@@ -26,6 +26,8 @@ jobs:
         run: node scripts/validate-governance.mjs || echo "No governance script"
       - name: Verify evidence atom projection
         run: npm run check:evidence-atoms
+      - name: Verify public proof projection
+        run: npm run check:public-proof
       - name: Verify intelligence stack projection
         run: npm run check:intelligence-stack
 
@@ -91,7 +93,35 @@ jobs:
           path: customer-portal/.next
           retention-days: 1
 
-  # Job 5: Security audit
+  # Job 5: Route-level Lighthouse lab performance budgets
+  lighthouse:
+    name: Lighthouse CI Lab Performance Budgets
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: customer-portal
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: customer-portal/package-lock.json
+      - run: npm ci
+      - name: Build production application
+        run: npm run build
+      - name: Run Lighthouse CI lab measurements
+        run: npm run test:performance
+      - name: Retain Lighthouse lab reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-lab-reports
+          path: customer-portal/lhci-results
+          retention-days: 7
+          if-no-files-found: warn
+
+  # Job 6: Security audit
   security:
     name: Security Audit
     runs-on: ubuntu-latest

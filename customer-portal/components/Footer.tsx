@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 export default function Footer() {
   return (
     <footer className="border-t border-border bg-bg-elevated mt-20">
@@ -7,7 +5,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
-            <Link href="/" className="inline-flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity" aria-label="Nebula Components home">
+            <a href="/" className="inline-flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity" aria-label="Nebula Components home">
               <svg width="18" height="18" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <rect x="9"  y="9"  width="3" height="30" fill="#F5F5F5"/>
                 <polygon points="12,9 15,9 36,39 33,39" fill="#F5F5F5"/>
@@ -17,7 +15,7 @@ export default function Footer() {
               <span className="text-sm font-medium text-fg tracking-tight">
                 Nebula <span className="font-light text-fg-muted">Components</span>
               </span>
-            </Link>
+            </a>
             <p className="text-sm text-fg-muted max-w-xs">
               Evidence-backed landing page audits for founders spending on ads with zero conversions.
             </p>
@@ -27,10 +25,10 @@ export default function Footer() {
           <div>
             <p className="text-xs font-medium text-fg-muted uppercase tracking-widest mb-4">Product</p>
             <ul className="space-y-3">
-              <li><Link href="/audit" className="text-sm text-fg-muted hover:text-fg transition-colors">Free Audit</Link></li>
-              <li><Link href="/pricing" className="text-sm text-fg-muted hover:text-fg transition-colors">Pricing</Link></li>
-              <li><Link href="/learning-centre" className="text-sm text-fg-muted hover:text-fg transition-colors">Learning Centre</Link></li>
-              <li><Link href="/resources/citable" className="text-sm text-fg-muted hover:text-fg transition-colors">Citable</Link></li>
+              <li><a href="/audit" className="text-sm text-fg-muted hover:text-fg transition-colors">Free Audit</a></li>
+              <li><a href="/pricing" className="text-sm text-fg-muted hover:text-fg transition-colors">Pricing</a></li>
+              <li><a href="/learning-centre" className="text-sm text-fg-muted hover:text-fg transition-colors">Learning Centre</a></li>
+              <li><a href="/resources/citable" className="text-sm text-fg-muted hover:text-fg transition-colors">Citable</a></li>
             </ul>
           </div>
 
@@ -38,9 +36,9 @@ export default function Footer() {
           <div>
             <p className="text-xs font-medium text-fg-muted uppercase tracking-widest mb-4">Legal</p>
             <ul className="space-y-3">
-              <li><Link href="/privacy-policy" className="text-sm text-fg-muted hover:text-fg transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="text-sm text-fg-muted hover:text-fg transition-colors">Terms of Service</Link></li>
-              <li><Link href="/data-rights" className="text-sm text-fg-muted hover:text-fg transition-colors">Data Rights</Link></li>
+              <li><a href="/privacy-policy" className="text-sm text-fg-muted hover:text-fg transition-colors">Privacy Policy</a></li>
+              <li><a href="/terms" className="text-sm text-fg-muted hover:text-fg transition-colors">Terms of Service</a></li>
+              <li><a href="/data-rights" className="text-sm text-fg-muted hover:text-fg transition-colors">Data Rights</a></li>
             </ul>
           </div>
         </div>

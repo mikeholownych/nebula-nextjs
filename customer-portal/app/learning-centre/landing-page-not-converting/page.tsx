@@ -21,52 +21,28 @@ const articleSchema = createArticleSchema({
   modifiedDate: '2026-07-21',
 })
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
+const faqItems = [
     {
-      '@type': 'Question',
-      name: 'What is the most common reason a landing page does not convert?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "A broken promise between the ad and the page headline. When the ad says '50% off running shoes' and the page headline says 'Shop Our Collection,' the visitor has no confirmation they are in the right place and leaves. This is what the message-match signal in Nebula's 7-signal audit framework measures.",
-      },
+      question: 'What is the most common reason a landing page does not convert?',
+      answer: "A broken promise between the ad and the page headline. When the ad says '50% off running shoes' and the page headline says 'Shop Our Collection,' the visitor has no confirmation they are in the right place and leaves. This is what the message-match signal in Nebula's 7-signal audit framework measures.",
     },
     {
-      '@type': 'Question',
-      name: 'How do I know if my landing page conversion rate is actually low?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "WordStream's 2026 Google Ads Benchmarks report — analysing over 13,000 search advertising campaigns from April 2025 to March 2026 — found an all-industries average conversion rate of 8.18%, ranging from 2.64% in Finance and Insurance to 16.22% in Animals and Pets. These are search-campaign averages, not single-page rates, but they give a realistic floor for your vertical. If you are consistently below your vertical's lower bound with meaningful traffic (500+ sessions), that strongly indicates at least one of the five leak patterns is active.",
-      },
+      question: 'How do I know if my landing page conversion rate is actually low?',
+      answer: "WordStream's 2026 Google Ads Benchmarks report — analysing over 13,000 search advertising campaigns from April 2025 to March 2026 — found an all-industries average conversion rate of 8.18%, ranging from 2.64% in Finance and Insurance to 16.22% in Animals and Pets. These are search-campaign averages, not single-page rates, but they give a realistic floor for your vertical. If you are consistently below your vertical's lower bound with meaningful traffic (500+ sessions), that strongly indicates at least one of the five leak patterns is active.",
     },
     {
-      '@type': 'Question',
-      name: 'Should I A/B test my landing page before diagnosing the problem?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'No. A/B testing is a measurement tool, not a diagnostic tool. Testing two versions of a page with a broken promise doubles your spend on the wrong problem. Diagnose the leak first — identify which of the five patterns is active — then test the fix against the control.',
-      },
+      question: 'Should I A/B test my landing page before diagnosing the problem?',
+      answer: 'No. A/B testing is a measurement tool, not a diagnostic tool. Testing two versions of a page with a broken promise doubles your spend on the wrong problem. Diagnose the leak first — identify which of the five patterns is active — then test the fix against the control.',
     },
     {
-      '@type': 'Question',
-      name: 'What is message match and why does it matter?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Message match is the degree to which your landing page headline repeats or reinforces the specific promise in the ad that brought the visitor there. A visitor who clicked 'Free 30-day trial for SaaS teams' expects to see those words, or close equivalents, immediately on the page. When they do not, they assume they clicked the wrong link and leave. High message match reduces the first decision a visitor has to make: am I in the right place?",
-      },
+      question: 'What is message match and why does it matter?',
+      answer: "Message match is the degree to which your landing page headline repeats or reinforces the specific promise in the ad that brought the visitor there. A visitor who clicked 'Free 30-day trial for SaaS teams' expects to see those words, or close equivalents, immediately on the page. When they do not, they assume they clicked the wrong link and leave. High message match reduces the first decision a visitor has to make: am I in the right place?",
     },
     {
-      '@type': 'Question',
-      name: 'How long does it take to fix a non-converting landing page?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Depends on which leak is active. A message-match fix (rewriting the headline and hero copy) takes 2-4 hours with a clear brief. A proof restructure (repositioning testimonials, adding specificity) takes a day. A full CTA and form-friction overhaul is 1-2 days. Nebula's $97 Fix Pack gives you a tailored AI prompt for every finding from the audit, delivered within minutes — you (or your developer) implement.",
-      },
+      question: 'How long does it take to fix a non-converting landing page?',
+      answer: "Depends on which leak is active. A message-match fix (rewriting the headline and hero copy) takes 2-4 hours with a clear brief. A proof restructure (repositioning testimonials, adding specificity) takes a day. A full CTA and form-friction overhaul is 1-2 days. Nebula's $97 Fix Pack gives you a tailored AI prompt for every finding from the audit, delivered within minutes — you (or your developer) implement.",
     },
-  ],
-}
+]
 
 export default function LandingPageNotConvertingPage() {
   return (
@@ -74,10 +50,6 @@ export default function LandingPageNotConvertingPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <main id="main-content" className="min-h-screen bg-bg pt-24">
         <div className="mx-auto max-w-3xl px-6 py-14">
@@ -104,17 +76,20 @@ export default function LandingPageNotConvertingPage() {
             </p>
           </div>
 
-          {/* Quick diagnosis — AEO extraction target */}
-          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          {/* Direct answer — AEO extraction target */}
+          <section
+            data-editorial="answer-first"
+            className="mt-6 rounded-2xl border border-border bg-bg-panel p-8"
+          >
             <h2 className="mb-4 text-2xl font-bold text-fg">
-              Quick diagnosis: which leak is it?
+              Direct answer: diagnose the sequence before changing the page
             </h2>
             <p className="leading-relaxed text-fg-muted">
-              A non-converting landing page is usually not one problem. It is a
-              sequence break: unclear promise, weak proof, CTA friction, mobile
-              drag, or unanswered objections. Each leak is diagnosable in under
-              ten minutes without touching the page. The five checks below run
-              in order — the first one that fails is the first one to fix.
+              Start by separating acquisition from page behaviour. Check the
+              page in this order: promise, proof, CTA, mobile layout, then
+              objections. The first failed check is the next hypothesis to
+              investigate, not a confirmed cause. Record the current page and
+              traffic baseline before changing one variable.
             </p>
             <ul className="mt-5 space-y-3 text-fg-muted">
               {[
@@ -144,9 +119,34 @@ export default function LandingPageNotConvertingPage() {
               2025 to March 2026 — found an all-industries average conversion
               rate of 8.18%, ranging from 2.64% in Finance and Insurance to
               16.22% in Animals and Pets. These are search-campaign averages,
-              not single-page rates. If you are consistently below the floor for
-              your vertical, at least one of the five leaks below is active.
+              not single-page rates. Use them only as context; they do not
+              establish what an individual page should achieve.
             </p>
+            <aside
+              role="note"
+              aria-label="Evidence boundary"
+              className="mt-5 rounded-xl border border-border px-5 py-4 text-sm leading-relaxed text-fg-muted"
+            >
+              <strong className="text-fg">Evidence boundary:</strong> analytics
+              patterns can prioritise a hypothesis, but they do not prove
+              causality. Confirm a suspected leak with page-level evidence and
+              a measured test. No diagnosis or copy change guarantees a
+              conversion outcome.
+            </aside>
+            <div className="mt-5 flex flex-col gap-2 text-sm">
+              <Link
+                href="/learning-centre/message-match-checklist"
+                className="font-semibold text-accent hover:text-accent-light"
+              >
+                Check ad-to-page promise alignment
+              </Link>
+              <Link
+                href="/learning-centre/landing-page-conversion-rate-benchmark"
+                className="font-semibold text-accent hover:text-accent-light"
+              >
+                Interpret landing-page conversion benchmarks carefully
+              </Link>
+            </div>
           </section>
 
           {/* Leak 1 — Message match / Trust */}
@@ -246,7 +246,8 @@ export default function LandingPageNotConvertingPage() {
               weeks&rdquo; is proof. &ldquo;Game-changer&rdquo; is decoration.
               If you do not have specific testimonials yet, use a before/after
               case note with enough detail to be falsifiable. One real proof
-              point outperforms five vague ones.
+              point is more useful to a reader than five vague ones because it
+              can be checked.
             </p>
           </section>
 
@@ -282,9 +283,9 @@ export default function LandingPageNotConvertingPage() {
               or what they have to do? &ldquo;Book Now&rdquo; describes what
               they do. &ldquo;See How It Works&rdquo; or &ldquo;Get Your
               Diagnosis&rdquo; describes what they get. For high-consideration
-              purchases, the CTA that converts cold traffic is almost always the
-              one that offers the next step in the decision process, not the
-              final commitment.
+              purchases, a CTA that offers the next step in the decision
+              process is a useful alternative to test against a final-commitment
+              ask.
             </p>
             <h3 className="mb-2 mt-5 text-lg font-semibold text-fg">Fix</h3>
             <p className="leading-relaxed text-fg-muted">
@@ -499,20 +500,20 @@ export default function LandingPageNotConvertingPage() {
             </ol>
           </section>
 
-          {/* FAQ — rendered on-page; schema above mirrors this content */}
+          {/* FAQ — visible answers without duplicated FAQPage structured data */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-6 text-2xl font-bold text-fg">
               Frequently asked questions
             </h2>
             <div className="space-y-6">
-              {faqSchema.mainEntity.map((item, i) => (
+              {faqItems.map((item) => (
                 <div
-                  key={i}
+                  key={item.question}
                   className="border-b border-border pb-6 last:border-0 last:pb-0"
                 >
-                  <h3 className="mb-2 font-semibold text-fg">{item.name}</h3>
+                  <h3 className="mb-2 font-semibold text-fg">{item.question}</h3>
                   <p className="leading-relaxed text-fg-muted">
-                    {item.acceptedAnswer.text}
+                    {item.answer}
                   </p>
                 </div>
               ))}

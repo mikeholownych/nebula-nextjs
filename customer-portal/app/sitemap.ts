@@ -1,5 +1,9 @@
 import { MetadataRoute } from 'next'
+import { getPublishedCaseStudies } from '@/app/lib/public-facts'
+import { getPublishedCitableRoutes } from '@/app/resources/citable/content'
 import { getArticles } from './learning-centre/lib/getArticles'
+
+export const dynamic = 'force-dynamic'
 
 const BASE_URL = 'https://nebulacomponents.shop'
 
@@ -9,7 +13,7 @@ const BASE_URL = 'https://nebulacomponents.shop'
 // stale/flat value misrepresents the site to anyone who does read it).
 const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }> = [
   { paths: ['/pricing', '/audit'], priority: 0.9 },
-  { paths: ['/learning-centre', '/resources', '/resources/citable', '/case-studies'], priority: 0.8 },
+  { paths: ['/learning-centre', '/resources', '/case-studies'], priority: 0.8 },
   {
     paths: [
       '/7-systems',
@@ -53,16 +57,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     }))
 
-  // No evidenced case studies exist yet. Keep this explicit guard in lockstep
-  // with app/case-studies/[slug]/page.tsx and the production-safety test.
-  const caseStudySlugs: string[] = []
-  const caseStudyEntries: MetadataRoute.Sitemap = caseStudySlugs.map((slug) => ({
+  const caseStudyEntries: MetadataRoute.Sitemap = getPublishedCaseStudies().map(({ slug }) => ({
     url: `${BASE_URL}/case-studies/${slug}`,
     changeFrequency: 'yearly',
     priority: 0.8,
   }))
 
+  const citableEntries: MetadataRoute.Sitemap = getPublishedCitableRoutes({
+    includeOverview: true,
+  }).map((route) => ({
+    url: `${BASE_URL}${route.path}`,
+    changeFrequency: 'monthly',
+    priority: route.kind === 'overview' ? 0.8 : 0.7,
+  }))
+
   // lastModified is intentionally omitted until each content object has a
   // truthful, durable publication/update timestamp. Build time is not freshness.
-  return [homeEntry, ...coreEntries, ...articleEntries, ...caseStudyEntries]
+  return [homeEntry, ...coreEntries, ...articleEntries, ...caseStudyEntries, ...citableEntries]
 }

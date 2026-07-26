@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import posthog from 'posthog-js'
+import posthog from '@/app/lib/posthog-browser'
 
 export default function PurchaseTracker() {
   useEffect(() => {

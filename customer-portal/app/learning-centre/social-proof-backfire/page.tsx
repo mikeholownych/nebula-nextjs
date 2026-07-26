@@ -233,7 +233,7 @@ export default function SocialProofBackfirePage() {
             </li>
             <li>
               <Link
-                href="/learning-centre/trust-signals-landing-page"
+                href="/social-proof-landing-page"
                 className="text-sm text-fg-muted underline underline-offset-4 hover:text-fg transition-colors"
               >
                 Trust Signals on Landing Pages: What Works, What's Noise, and What Actively Hurts

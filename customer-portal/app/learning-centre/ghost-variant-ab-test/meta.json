@@ -1,0 +1,6 @@
+{
+  "slug": "ghost-variant-ab-test",
+  "title": "Ghost Variant: When A/B Test Winners Are False Positives",
+  "description": "A ghost variant is when your control quietly breaks mid-test — a missing pixel, a truncated H1, a 404ing social proof block — and the \"winning\" variant wins by default. Here is how to detect it before you ship.",
+  "category": "Conversion Systems"
+}

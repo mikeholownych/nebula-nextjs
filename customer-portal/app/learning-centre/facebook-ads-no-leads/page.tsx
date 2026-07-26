@@ -4,13 +4,13 @@ import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
   title: 'Facebook Ads Clicks But No Leads: Fix The Page | Nebula',
-  description: 'High CTR, zero conversions? The ad isn\'t the problem — your landing page broke the chain. Learn how Meta\'s context switch kills cold traffic and how to fix it.',
+  description: 'High CTR, zero leads? Separate Meta ad delivery from post-click behaviour, then test message match, proof, friction, and tracking.',
   alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/facebook-ads-no-leads' },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'Facebook Ads Getting Clicks But No Leads: The Page Broke The Chain',
-  description: 'High CTR, zero conversions? The ad isn\'t the problem — your landing page broke the chain. Learn how Meta\'s context switch kills cold traffic and how to fix it.',
+  description: 'High CTR, zero leads? Separate Meta ad delivery from post-click behaviour, then test message match, proof, friction, and tracking.',
   url: 'https://nebulacomponents.shop/learning-centre/facebook-ads-no-leads',
   publishedDate: '2026-07-21',
   modifiedDate: '2026-07-21',
@@ -31,9 +31,54 @@ export default function FacebookAdsNoLeadsPage() {
             Facebook Ads Getting Clicks But No Leads: The Page Broke The Chain
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
-            If your Meta ads are generating clicks but the leads never materialise, the ad almost certainly isn't the problem. The landing page is where the chain breaks — and it breaks in a predictable set of ways.
+            If your Meta ads generate clicks but leads do not materialise, trace
+            the handoff from ad to page before changing either layer. Message
+            mismatch, tracking gaps, offer fit, load time, and form friction can
+            produce similar symptoms.
           </p>
         </div>
+
+        {/* Direct answer */}
+        <section
+          data-editorial="answer-first"
+          className="mt-6 rounded-2xl border border-border bg-bg-panel p-8"
+        >
+          <h2 className="mb-4 text-2xl font-bold text-fg">
+            Direct answer: inspect the ad-to-page handoff
+          </h2>
+          <p className="leading-relaxed text-fg-muted">
+            Confirm the click and lead events first. Then compare the ad&apos;s
+            promise and creative with the first mobile viewport, check whether
+            proof appears before the form, and review form starts versus
+            completions. Those observations tell you which hypothesis to test;
+            they do not make the page the cause by default.
+          </p>
+          <aside
+            role="note"
+            aria-label="Evidence boundary"
+            className="mt-5 rounded-xl border border-border px-5 py-4 text-sm leading-relaxed text-fg-muted"
+          >
+            <strong className="text-fg">Evidence boundary:</strong> channel and
+            page analytics can locate a break in the journey, but they do not
+            prove causality or rule out audience, offer, attribution, and
+            follow-up effects. No audit or page change guarantees a lead
+            outcome.
+          </aside>
+          <div className="mt-5 flex flex-col gap-2 text-sm">
+            <Link
+              href="/learning-centre/message-match-checklist"
+              className="font-semibold text-accent hover:text-accent-light"
+            >
+              Audit Meta ad-to-page message match
+            </Link>
+            <Link
+              href="/learning-centre/traffic-but-no-form-fills"
+              className="font-semibold text-accent hover:text-accent-light"
+            >
+              Diagnose traffic with no form fills
+            </Link>
+          </div>
+        </section>
 
         {/* Section 1 */}
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
@@ -70,7 +115,11 @@ export default function FacebookAdsNoLeadsPage() {
             There's a fundamental difference between Google search traffic and Meta traffic that most advertisers underestimate. Google visitors have declared intent — they typed a query that tells you exactly what they're looking for. Meta visitors have done no such thing. They were living their lives and your ad interrupted them. They have no prior relationship with your brand and no expressed need.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            This means Meta landing pages need more proof than most pages, not less. Visitors from Facebook and Instagram require more convincing than a warm lead or a high-intent search visitor. If your landing page was built for warm traffic — light on testimonials, assumes some brand familiarity, leads with features rather than outcomes — it will consistently underperform on cold Meta traffic.
+            This means a page designed for warm or high-intent traffic may need
+            a different proof sequence for Meta visitors. If the page assumes
+            brand familiarity, compare engagement before and after specific,
+            attributable proof rather than assuming that proof volume alone
+            determines the result.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
             The minimum proof floor for a Meta landing page is: at least one or two testimonials visible above the fold, a real face or person in the first screen (anonymised corporate stock photography actively reduces trust), and recognisable logos or credentials if your market responds to authority signals. These elements don't need to be elaborate — a name, a photo, and a specific result is enough — but they need to be present before the visitor reaches any form or CTA.
@@ -84,13 +133,24 @@ export default function FacebookAdsNoLeadsPage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Lead Forms vs Landing Pages: Choosing the Right Friction</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Meta's native Lead Ads — where the form lives inside Facebook rather than on a separate landing page — are worth understanding before assuming your landing page is always the right tool. Lead Forms reduce friction by pre-filling the visitor's data from their Facebook profile. They convert at higher volume. The trade-off is quality: leads who fill in a form without leaving Facebook often have lower intent and lower qualification rates.
+            Meta&apos;s native Lead Ads — where the form lives inside Facebook
+            rather than on a separate landing page — are worth understanding
+            before assuming your landing page is the right tool. Lead Forms
+            reduce interaction steps by pre-filling profile data. Compare both
+            lead volume and downstream qualification in your own funnel; the
+            form location alone does not establish quality.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            A dedicated landing page adds friction — the visitor has to click through, wait for a page to load, and read before they decide to act. That friction filters for intent. Visitors who convert through a landing page are typically warmer and more serious than those who hit a pre-filled Lead Form. They've demonstrated a willingness to invest attention.
+            A dedicated landing page adds steps — the visitor has to click
+            through, wait for a page to load, and read before acting. Those
+            steps may filter intent or may simply add abandonment. Use
+            qualified-lead and downstream sales data to distinguish the two.
           </p>
           <p className="leading-relaxed text-fg-muted">
-            Neither approach is universally correct. The question is what your follow-up process can handle. If you have a high-volume, low-touch nurture sequence (email automation, SMS follow-up), Lead Forms may serve you better on volume. If your follow-up involves human outreach — sales calls, personalised demos — a landing page that qualifies through friction will give you better conversations. Match the friction level to the quality of lead your process requires.
+            Neither approach is universally correct. The question is what your
+            follow-up process can handle. Compare the two paths on the same
+            definitions for qualified lead, response, and sale, then choose the
+            friction level your process can support.
           </p>
         </section>
 
@@ -124,7 +184,7 @@ export default function FacebookAdsNoLeadsPage() {
             <li className="flex gap-3 leading-relaxed"><span className="mt-1 text-accent font-bold">→</span><span><span className="font-semibold text-fg">Repeat the exact ad headline on the page.</span> Don't make the visitor re-orient. The first thing they read should echo the reason they clicked.</span></li>
             <li className="flex gap-3 leading-relaxed"><span className="mt-1 text-accent font-bold">→</span><span><span className="font-semibold text-fg">Add proof before the form.</span> A minimum of one testimonial with a name, photo, and specific result should appear above or immediately adjacent to the form. Generic five-star ratings without context don't count.</span></li>
             <li className="flex gap-3 leading-relaxed"><span className="mt-1 text-accent font-bold">→</span><span><span className="font-semibold text-fg">Reduce form fields.</span> Every additional field reduces conversion rate. For cold Meta traffic, ask for the minimum: name and email. Qualify further via follow-up, not the form itself.</span></li>
-            <li className="flex gap-3 leading-relaxed"><span className="mt-1 text-accent font-bold">→</span><span><span className="font-semibold text-fg">Rewrite the button copy.</span> 'Submit' or 'Sign up' say nothing. 'Get my free report', 'See my conversion score', 'Send me the guide' — outcome-specific copy converts consistently better on cold traffic.</span></li>
+            <li className="flex gap-3 leading-relaxed"><span className="mt-1 text-accent font-bold">→</span><span><span className="font-semibold text-fg">Rewrite the button copy.</span> &apos;Submit&apos; or &apos;Sign up&apos; does not explain the next step. Test a specific label such as &apos;Send me the guide&apos; against the current control.</span></li>
           </ul>
         </section>
 

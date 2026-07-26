@@ -11,7 +11,9 @@ claim true rather than just copy — it re-scrapes the real page, regenerates
 the full pack (audit_pipeline.prompts.generator.build_prompt_pack — the same
 generator that already produces the free teaser prompt), and emails it.
 
-Usage: venv/bin/python3 scripts/deliver_prompt_pack.py --email buyer@example.com
+Usage: venv/bin/python3 scripts/deliver_prompt_pack.py \
+  --email buyer@example.com --stripe-session-id cs_live_... \
+  --audit-id 123e4567-e89b-12d3-a456-426614174000
 """
 import argparse
 import json
@@ -20,7 +22,7 @@ import sys
 import time
 from pathlib import Path
 
-NEBULA_DIR = Path("/home/mike/nebula")
+NEBULA_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(NEBULA_DIR))
 
 from deliver_audit import scrape_page, score_audit, send_via_agentmail, HOT_LEAD_PATH  # noqa: E402
@@ -56,24 +58,46 @@ def load_ledger_rows():
     return rows
 
 
-def already_delivered(email, rows):
+def already_delivered(stripe_session_id, rows):
     return any(
-        r.get("event_type") == "prompt_pack_delivered" and (r.get("email") or "").lower() == email.lower()
+        r.get("event_type") == "prompt_pack_delivered"
+        and r.get("stripe_session_id") == stripe_session_id
         for r in rows
     )
 
 
-def find_audited_url(email, rows):
-    """Most recent audit_delivered ledger row for this email — that's the
-    page the customer actually asked us to look at."""
+def delivery_client_id(stripe_session_id):
+    return f"fix-pack:{stripe_session_id}"
+
+
+def find_audited_url(audit_id, email, rows):
+    """Return only the URL bound to this exact audit and customer."""
     matches = [
         r for r in rows
-        if r.get("event_type") == "audit_delivered" and (r.get("email") or "").lower() == email.lower()
+        if r.get("event_type") == "audit_delivered"
+        and r.get("audit_id") == audit_id
+        and (r.get("email") or "").lower() == email.lower()
     ]
-    if not matches:
+    return matches[0].get("url") if len(matches) == 1 else None
+
+
+def fetch_audited_url(audit_id, _email):
+    """Resolve the exact completed audit from the platform authority."""
+    import os
+    import requests
+
+    base_url = os.environ.get("PLATFORM_API_URL", "http://127.0.0.1:8001").rstrip("/")
+    response = requests.get(f"{base_url}/audit/{audit_id}", timeout=10)
+    if response.status_code != 200:
         return None
-    matches.sort(key=lambda r: r.get("timestamp") or "")
-    return matches[-1].get("url")
+    audit = response.json()
+    if (
+        audit.get("audit_id") != audit_id
+        or audit.get("status") != "completed"
+    ):
+        return None
+    url = audit.get("url")
+    return url if isinstance(url, str) and url.startswith(("http://", "https://")) else None
 
 
 def append_ledger(entry):
@@ -125,8 +149,20 @@ def compose_email(url, pack, audit):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--email", required=True)
+    parser.add_argument("--stripe-session-id", required=True)
+    parser.add_argument("--audit-id", required=True)
     args = parser.parse_args()
     email = args.email.strip().lower()
+    stripe_session_id = args.stripe_session_id.strip()
+    audit_id = args.audit_id.strip()
+    if not stripe_session_id:
+        log("stripe session ID is required for idempotent delivery")
+        return 1
+
+    rows = load_ledger_rows()
+    if already_delivered(stripe_session_id, rows):
+        log(f"{stripe_session_id} already has a prompt_pack_delivered record — skipping (idempotent)")
+        return 0
 
     try:
         from lead_store import LeadStore
@@ -140,17 +176,16 @@ def main():
         telegram_notify(f"⚠️ Prompt pack purchase from {email}, but that address is on the bounce list. Needs manual follow-up.")
         return 1
 
-    rows = load_ledger_rows()
-    if already_delivered(email, rows):
-        log(f"{email} already has a prompt_pack_delivered record — skipping (idempotent)")
-        return 0
-
-    url = find_audited_url(email, rows)
+    try:
+        url = fetch_audited_url(audit_id, email)
+    except Exception as e:
+        log(f"exact audit lookup failed for {audit_id}: {e}")
+        url = None
     if not url:
-        log(f"no prior audit_delivered record found for {email} — cannot determine which page to build the pack for")
+        log(f"exact completed audit {audit_id} could not be resolved for {email}")
         telegram_notify(
-            f"⚠️ Prompt pack purchase from {email}, but no prior free-audit record exists for that "
-            f"email — can't tell which page to build it for. Needs manual follow-up."
+            f"⚠️ Prompt pack purchase from {email}, but exact audit {audit_id} could not be "
+            f"resolved — refusing to guess a page. Needs manual follow-up."
         )
         return 1
 
@@ -175,7 +210,12 @@ def main():
         return 1
 
     subject, body = compose_email(url, pack, audit)
-    sent = send_via_agentmail(to=email, subject=subject, body=body)
+    sent = send_via_agentmail(
+        to=email,
+        subject=subject,
+        body=body,
+        client_id=delivery_client_id(stripe_session_id),
+    )
     if not sent.get("ok"):
         log(f"send failed: {sent}")
         telegram_notify(f"⚠️ Prompt pack purchase from {email} ({url}) — send failed: {sent.get('error')}. Needs manual follow-up.")
@@ -184,6 +224,8 @@ def main():
     append_ledger({
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "event_type": "prompt_pack_delivered",
+        "stripe_session_id": stripe_session_id,
+        "audit_id": audit_id,
         "email": email,
         "url": url,
         "prompt_count": pack["count"],

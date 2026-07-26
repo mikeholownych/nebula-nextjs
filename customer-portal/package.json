@@ -11,13 +11,17 @@
     "test": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest",
     "test:watch": "NODE_ENV=test jest --watch",
     "test:e2e": "playwright test",
+    "test:performance": "lhci autorun",
+    "check:sitemap-routes": "node scripts/check-sitemap-routes.mjs",
     "sync:citable": "node scripts/sync-citable-projection.mjs",
     "check:citable-projection": "node scripts/sync-citable-projection.mjs --check",
     "compile:evidence-atoms": "node scripts/compile-evidence-atoms.mjs",
     "check:evidence-atoms": "node scripts/compile-evidence-atoms.mjs --check",
+    "compile:public-proof": "node scripts/compile-public-proof.mjs",
+    "check:public-proof": "node scripts/compile-public-proof.mjs --check",
     "package:intelligence-stack": "node scripts/package-landing-page-intelligence-stack.mjs",
     "check:intelligence-stack": "node scripts/package-landing-page-intelligence-stack.mjs --check",
-    "ci": "npm run typecheck && npm run lint && npm run check:evidence-atoms && npm run check:citable-projection && npm run check:intelligence-stack && npm run build && npm run test && npm run test:e2e"
+    "ci": "npm run typecheck && npm run lint && npm run check:evidence-atoms && npm run check:public-proof && npm run check:citable-projection && npm run check:intelligence-stack && npm run build && npm run test && npm run test:e2e"
   },
   "dependencies": {
     "@react-oauth/google": "^0.13.5",
@@ -25,6 +29,7 @@
     "@x402/evm": "^2.19.0",
     "@x402/extensions": "^2.19.0",
     "@x402/next": "^2.19.0",
+    "fast-xml-parser": "5.10.1",
     "next": "16.2.11",
     "pg": "^8.22.0",
     "posthog-js": "^1.407.1",
@@ -35,6 +40,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.6",
+    "@lhci/cli": "0.15.1",
     "@playwright/test": "^1.61.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",

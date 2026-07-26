@@ -1,17 +1,29 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import {
+  formatUsd,
+  getActiveFixPack,
+  type FixPackPublicFact,
+} from '@/app/lib/public-facts'
 import { Card, PageShell } from '@/components/ui'
 
-export const metadata: Metadata = {
-  title: 'Pricing — Nebula Components Landing Page Audit & Fix Pack',
-  description:
-    'One-time $97 Conversion Fix Pack: landing page audit diagnosis plus a full AI prompt pack to resolve every finding yourself. No retainer, no access to your site required.',
-  alternates: {
-    canonical: 'https://nebulacomponents.shop/pricing',
-  },
+export const dynamic = 'force-dynamic'
+
+export function generateMetadata(): Metadata {
+  const fixPack = getActiveFixPack()
+  return {
+    title: 'Pricing — Nebula Components Landing Page Audit & Fix Pack',
+    description: fixPack
+      ? `One-time ${formatUsd(fixPack.priceCents)} Conversion Fix Pack: landing page audit diagnosis plus a full AI prompt pack to resolve every finding yourself. No retainer, no access to your site required.`
+      : 'Current Nebula Components landing page audit pricing. Only verified, available offers are shown.',
+    alternates: {
+      canonical: 'https://nebulacomponents.shop/pricing',
+    },
+  }
 }
 
-const serviceSchema = {
+function buildServiceSchema(fixPack: FixPackPublicFact) {
+  return {
   '@context': 'https://schema.org',
   '@type': 'Service',
   '@id': 'https://nebulacomponents.shop/pricing#fix-pack',
@@ -23,11 +35,11 @@ const serviceSchema = {
   url: 'https://nebulacomponents.shop/pricing',
   offers: {
     '@type': 'Offer',
-    price: '97',
-    priceCurrency: 'USD',
+    price: String(fixPack.priceCents / 100),
+    priceCurrency: fixPack.currency,
     availability: 'https://schema.org/InStock',
-    url: 'https://nebulacomponents.shop/checkout',
-    priceValidUntil: '2026-12-31',
+    url: `https://nebulacomponents.shop${fixPack.checkout.pagePath}`,
+    priceValidUntil: fixPack.priceValidUntil,
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
@@ -39,6 +51,7 @@ const serviceSchema = {
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: '30-day free re-audit to see what changed' } },
     ],
   },
+  }
 }
 
 const faqSchema = {
@@ -89,16 +102,24 @@ const faqSchema = {
 }
 
 export default function PricingPage() {
+  const fixPack = getActiveFixPack()
+  const fixPackPrice = fixPack ? formatUsd(fixPack.priceCents) : undefined
+  const serviceSchema = fixPack ? buildServiceSchema(fixPack) : null
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      {serviceSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+        />
+      )}
+      {fixPack && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <PageShell title="Pricing" description="Only verified, currently available offers are shown.">
       <div className="mx-auto max-w-4xl px-6 py-20">
         <div className="mb-16 text-center">
@@ -134,10 +155,11 @@ export default function PricingPage() {
             </Link>
           </Card>
 
-          <Card variant="bordered">
+          {fixPack ? (
+            <Card variant="bordered">
             <p className="mb-3 text-sm font-medium text-fg-muted">One-time payment</p>
             <h2 className="text-2xl font-semibold text-fg">Conversion Fix Pack</h2>
-            <p className="mt-2 text-4xl font-bold text-fg">$97</p>
+            <p className="mt-2 text-4xl font-bold text-fg">{fixPackPrice}</p>
             <p className="mt-4 text-fg-muted">
               A structured landing page audit plus a complete AI prompt pack — one prompt per
               finding, built from your actual page — for you to run through Claude, ChatGPT, or
@@ -160,10 +182,20 @@ export default function PricingPage() {
             <Link href="/checkout" className="mt-8 inline-flex rounded-xl bg-accent px-5 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">
               Review checkout →
             </Link>
-          </Card>
+            </Card>
+          ) : (
+            <Card variant="bordered">
+              <p className="mb-3 text-sm font-medium text-fg-muted">Paid offer unavailable</p>
+              <h2 className="text-2xl font-semibold text-fg">Conversion Fix Pack</h2>
+              <p className="mt-4 text-fg-muted">
+                No verified Fix Pack offer is currently available. Run the free audit while pricing
+                and checkout details are updated.
+              </p>
+            </Card>
+          )}
         </div>
 
-        <section className="mt-16 rounded-2xl border border-border bg-bg-muted/20 p-8">
+        {fixPack && <section className="mt-16 rounded-2xl border border-border bg-bg-muted/20 p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Frequently asked questions</h2>
           <dl className="space-y-6">
             {[
@@ -194,7 +226,7 @@ export default function PricingPage() {
               </div>
             ))}
           </dl>
-        </section>
+        </section>}
       </div>
     </PageShell>
     </>

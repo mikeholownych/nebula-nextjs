@@ -1,129 +1,107 @@
-'use client'
-
-import { useEffect } from 'react'
+import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
 
 /**
- * WebMCP — exposes Nebula Components site tools to AI agents via the browser.
- * Spec: https://webmachinelearning.github.io/webmcp/
- * Chrome blog: https://developer.chrome.com/blog/webmcp-epp
+ * WebMCP — exposes Nebula Components site tools to supporting browsers without
+ * introducing a React client boundary into every route.
  *
  * Tools registered:
  *   - request_audit      Request a free landing page audit
  *   - get_pricing        Return current pricing and offer details
  *   - search_learning    Search the Learning Centre
  */
-export default function WebMCP() {
-  useEffect(() => {
-    const nav = navigator as Navigator & {
-      modelContext?: {
-        registerTool: (tool: {
-          name: string
-          description: string
-          inputSchema: object
-          execute: (input: unknown) => unknown
-        }) => { unregister: () => void }
-      }
-    }
+export function WEB_MCP_RUNTIME(
+  fixPack: ReturnType<typeof getActiveFixPack>,
+) {
+  const offers = [
+    {
+      name: 'Free Audit',
+      price: '$0',
+      description:
+        'Automated landing page diagnosis — message match, trust signals, mobile, speed, CTA, form friction, compliance.',
+      url: 'https://nebulacomponents.shop/audit',
+    },
+    ...(fixPack
+      ? [
+          {
+            name: 'Conversion Fix Pack',
+            price: formatUsd(fixPack.priceCents),
+            description:
+              'Full audit + a tailored AI prompt pack (one prompt per finding) for the customer or their developer to use. Delivered by automated email within minutes. One-time payment, no retainer, and no Nebula access to the customer site, CMS, or hosting.',
+            url: 'https://nebulacomponents.shop/pricing',
+          },
+        ]
+      : []),
+  ]
 
-    if (!nav.modelContext?.registerTool) return
+  return String.raw`
+    (function () {
+      var context = navigator.modelContext;
+      if (!context || typeof context.registerTool !== 'function') return;
 
-    const controller = new AbortController()
-    const handles: Array<{ unregister: () => void }> = []
-
-    handles.push(
-      nav.modelContext.registerTool({
+      context.registerTool({
         name: 'request_audit',
-        description:
-          'Request a free landing page conversion audit from Nebula Components. ' +
-          'Provide the landing page URL. Returns audit submission confirmation.',
+        description: 'Request a free landing page conversion audit from Nebula Components. Provide the landing page URL. Returns audit submission confirmation.',
         inputSchema: {
           type: 'object',
           properties: {
             url: {
               type: 'string',
-              description: 'The landing page URL to audit (must be publicly accessible)',
+              description: 'The landing page URL to audit (must be publicly accessible)'
             },
             email: {
               type: 'string',
-              description: 'Email address to receive the audit report (optional)',
-            },
+              description: 'Email address to receive the audit report (optional)'
+            }
           },
-          required: ['url'],
+          required: ['url']
         },
-        execute: (input: unknown) => {
-          const { url, email } = input as { url: string; email?: string }
-          const params = new URLSearchParams({ url })
-          if (email) params.set('email', email)
-          window.location.href = `/audit?${params}`
-          return { status: 'redirecting', url: `/audit?${params}` }
-        },
-      })
-    )
+        execute: function (input) {
+          var params = new URLSearchParams({ url: input.url });
+          if (input.email) params.set('email', input.email);
+          var target = '/audit?' + params.toString();
+          window.location.href = target;
+          return { status: 'redirecting', url: target };
+        }
+      });
 
-    handles.push(
-      nav.modelContext.registerTool({
+      context.registerTool({
         name: 'get_pricing',
-        description:
-          'Return current Nebula Components service pricing, offer details, and what is included.',
-        inputSchema: {
-          type: 'object',
-          properties: {},
-        },
-        execute: () => ({
-          offers: [
-            {
-              name: 'Free Audit',
-              price: '$0',
-              description: 'Automated landing page diagnosis — message match, trust signals, mobile, speed, CTA, form friction, compliance.',
-              url: 'https://nebulacomponents.shop/audit',
-            },
-            {
-              name: 'Conversion Fix Pack',
-              price: '$97',
-              description: 'Full audit + a tailored AI prompt pack (one prompt per finding) to resolve every issue yourself via Claude, ChatGPT, or your own developer. Delivered by email within minutes. One-time payment, no retainer, no site access required.',
-              url: 'https://nebulacomponents.shop/pricing',
-            },
-            {
-              name: 'Growth Launch',
-              price: '$997',
-              description: 'End-to-end landing page build and optimisation for founders launching with paid traffic.',
-              url: 'https://nebulacomponents.shop/pricing',
-            },
-          ],
-        }),
-      })
-    )
+        description: 'Return current Nebula Components service pricing, offer details, and what is included.',
+        inputSchema: { type: 'object', properties: {} },
+        execute: function () {
+          return { offers: ${JSON.stringify(offers)} };
+        }
+      });
 
-    handles.push(
-      nav.modelContext.registerTool({
+      context.registerTool({
         name: 'search_learning',
-        description:
-          'Search the Nebula Components Learning Centre for articles on landing page conversion, CRO, and ad performance.',
+        description: 'Search the Nebula Components Learning Centre for articles on landing page conversion, CRO, and ad performance.',
         inputSchema: {
           type: 'object',
           properties: {
             query: {
               type: 'string',
-              description: 'Search query — e.g. "message match", "trust signals", "mobile conversion"',
-            },
+              description: 'Search query — e.g. "message match", "trust signals", "mobile conversion"'
+            }
           },
-          required: ['query'],
+          required: ['query']
         },
-        execute: (input: unknown) => {
-          const { query } = input as { query: string }
-          const url = `/learning-centre?q=${encodeURIComponent(query)}`
-          window.location.href = url
-          return { status: 'redirecting', url }
-        },
-      })
-    )
+        execute: function (input) {
+          var target = '/learning-centre?q=' + encodeURIComponent(input.query);
+          window.location.href = target;
+          return { status: 'redirecting', url: target };
+        }
+      });
+    })();
+  `
+}
 
-    controller.signal.addEventListener('abort', () => {
-      handles.forEach((h) => h.unregister())
-    })
+export default function WebMCP() {
+  const fixPack = getActiveFixPack()
 
-    return () => controller.abort()
-  }, [])
-
-  return null
+  return (
+    <script
+      dangerouslySetInnerHTML={{ __html: WEB_MCP_RUNTIME(fixPack) }}
+    />
+  )
 }

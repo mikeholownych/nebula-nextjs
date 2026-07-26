@@ -1,71 +1,139 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getPostHogClient } from '@/app/lib/posthog-server'
+import { getActiveFixPack } from '@/app/lib/public-facts'
+import { readAuditUnlock } from '@/app/lib/audit-unlock-token'
 
-const OFFERS = {
-  'fix-pack': {
-    name: 'Nebula Conversion Fix Pack',
-    stripePriceId: process.env.STRIPE_FIX_PACK_PRICE_ID,
-  },
-} as const
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
-type OfferKey = keyof typeof OFFERS
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === 'object' && value !== null && !Array.isArray(value)
 
-const isOfferKey = (value: unknown): value is OfferKey =>
-  typeof value === 'string' && Object.prototype.hasOwnProperty.call(OFFERS, value)
+const isStripeCheckoutUrl = (value: unknown): value is string => {
+  if (typeof value !== 'string') return false
+  try {
+    const url = new URL(value)
+    return (
+      url.protocol === 'https:' &&
+      url.hostname === 'checkout.stripe.com' &&
+      url.port === '' &&
+      url.username === '' &&
+      url.password === ''
+    )
+  } catch {
+    return false
+  }
+}
 
 export async function POST(request: NextRequest) {
-  if (!process.env.STRIPE_SECRET_KEY) {
+  const stripeSecretKey = process.env.STRIPE_SECRET_KEY
+  if (!stripeSecretKey) {
     return NextResponse.json({ code: 'CHECKOUT_NOT_CONFIGURED' }, { status: 503 })
   }
 
+  const fixPack = getActiveFixPack()
+  if (!fixPack) {
+    return NextResponse.json({ code: 'CHECKOUT_OFFER_UNAVAILABLE' }, { status: 503 })
+  }
+
+  let body: unknown
   try {
-    const body: unknown = await request.json()
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ code: 'INVALID_CHECKOUT_REQUEST' }, { status: 400 })
+  }
+  if (!isRecord(body)) {
+    return NextResponse.json({ code: 'INVALID_CHECKOUT_REQUEST' }, { status: 400 })
+  }
 
-    if (!body || typeof body !== 'object' || Array.isArray(body)) {
-      return NextResponse.json({ code: 'INVALID_CHECKOUT_REQUEST' }, { status: 400 })
+  const keys = Object.keys(body)
+  if (
+    keys.length !== 2 ||
+    !keys.includes('offerKey') ||
+    !keys.includes('auditId') ||
+    body.offerKey !== fixPack.checkout.offerKey ||
+    typeof body.auditId !== 'string' ||
+    !UUID_RE.test(body.auditId)
+  ) {
+    return NextResponse.json({ code: 'UNSUPPORTED_CHECKOUT_OFFER' }, { status: 400 })
+  }
+  const auditId = body.auditId
+  const auditIdentity = readAuditUnlock(
+    auditId,
+    request.cookies.get(`audit_unlock_${auditId}`)?.value,
+  )
+  if (!auditIdentity) {
+    return NextResponse.json({ code: 'CHECKOUT_AUDIT_NOT_UNLOCKED' }, { status: 403 })
+  }
+
+  const platformApiUrl = (process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001')
+    .replace(/\/$/, '')
+  try {
+    const auditResponse = await fetch(`${platformApiUrl}/audit/${auditId}`, {
+      signal: AbortSignal.timeout(10_000),
+    })
+    if (!auditResponse.ok) {
+      return NextResponse.json({ code: 'CHECKOUT_AUDIT_NOT_FOUND' }, { status: 404 })
     }
-
-    const payload = body as Record<string, unknown>
-
-    // Prices, amounts, and cart line items must never come from the browser.
-    if ('items' in payload || 'price' in payload || 'amount' in payload || !isOfferKey(payload.offerKey)) {
-      return NextResponse.json({ code: 'UNSUPPORTED_CHECKOUT_OFFER' }, { status: 400 })
+    const audit: unknown = await auditResponse.json()
+    if (
+      !isRecord(audit) ||
+      audit.audit_id !== auditId ||
+      audit.status !== 'completed' ||
+      typeof audit.url !== 'string'
+    ) {
+      return NextResponse.json({ code: 'CHECKOUT_AUDIT_NOT_ELIGIBLE' }, { status: 409 })
     }
-
-    const offerKey = payload.offerKey
-    const email = typeof payload.email === 'string' ? payload.email.trim() : ''
-    if (!email) {
-      return NextResponse.json({ error: 'Email required' }, { status: 400 })
+    const auditedUrl = new URL(audit.url)
+    if (!['http:', 'https:'].includes(auditedUrl.protocol)) {
+      return NextResponse.json({ code: 'CHECKOUT_AUDIT_NOT_ELIGIBLE' }, { status: 409 })
     }
+  } catch {
+    return NextResponse.json({ code: 'CHECKOUT_AUDIT_LOOKUP_FAILED' }, { status: 503 })
+  }
 
-    const offer = OFFERS[offerKey]
-    if (!offer.stripePriceId) {
-      return NextResponse.json({ code: 'CHECKOUT_NOT_CONFIGURED' }, { status: 503 })
+  let baseUrl: URL
+  try {
+    baseUrl = new URL(process.env.NEXT_PUBLIC_URL || '')
+    if (
+      baseUrl.protocol !== 'https:' ||
+      baseUrl.username !== '' ||
+      baseUrl.password !== ''
+    ) {
+      throw new Error('HTTPS URL without credentials required')
     }
+  } catch {
+    return NextResponse.json(
+      { code: 'CHECKOUT_RETURN_URL_NOT_CONFIGURED' },
+      { status: 503 },
+    )
+  }
 
-    const configuredBaseUrl = process.env.NEXT_PUBLIC_URL
-    let baseUrl: URL
-    try {
-      baseUrl = new URL(configuredBaseUrl || '')
-      if (baseUrl.protocol !== 'https:') throw new Error('HTTPS required')
-    } catch {
-      return NextResponse.json({ code: 'CHECKOUT_RETURN_URL_NOT_CONFIGURED' }, { status: 503 })
-    }
-
+  let session: unknown
+  try {
     const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`,
+        Authorization: `Bearer ${stripeSecretKey}`,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        'line_items[0][price]': offer.stripePriceId,
+        'line_items[0][price_data][currency]': fixPack.currency.toLowerCase(),
+        'line_items[0][price_data][unit_amount]': String(fixPack.priceCents),
+        'line_items[0][price_data][product_data][name]': 'Nebula Conversion Fix Pack',
         'line_items[0][quantity]': '1',
-        customer_email: email,
+        'payment_method_types[0]': 'card',
         mode: 'payment',
-        success_url: new URL('/thank-you?session_id={CHECKOUT_SESSION_ID}', baseUrl).toString(),
-        cancel_url: new URL('/checkout', baseUrl).toString(),
-        'metadata[offer_key]': offerKey,
+        success_url: new URL(
+          '/thank-you?session_id={CHECKOUT_SESSION_ID}',
+          baseUrl,
+        ).toString(),
+        cancel_url: new URL(
+          `${fixPack.checkout.pagePath}?audit_id=${encodeURIComponent(auditId)}`,
+          baseUrl,
+        ).toString(),
+        customer_email: auditIdentity.email,
+        'metadata[audit_id]': auditId,
+        'metadata[offer_key]': fixPack.checkout.offerKey,
       }),
     })
 
@@ -74,31 +142,33 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ code: 'CHECKOUT_PROVIDER_ERROR' }, { status: 502 })
     }
 
-    const session = await response.json()
-    if (typeof session.url !== 'string') {
-      return NextResponse.json({ code: 'CHECKOUT_PROVIDER_ERROR' }, { status: 502 })
-    }
+    session = await response.json()
+  } catch (error) {
+    console.error('[Checkout API] Stripe provider request failed:', error)
+    return NextResponse.json({ code: 'CHECKOUT_PROVIDER_ERROR' }, { status: 502 })
+  }
 
+  if (!isRecord(session) || !isStripeCheckoutUrl(session.url)) {
+    return NextResponse.json({ code: 'CHECKOUT_PROVIDER_ERROR' }, { status: 502 })
+  }
+
+  if (typeof session.id === 'string') {
     try {
       const ph = getPostHogClient()
-      ph.identify({ distinctId: email, properties: {} })
       ph.capture({
-        distinctId: email,
+        distinctId: session.id,
         event: 'checkout_session_created',
         properties: {
-          offer_key: offerKey,
-          offer_name: offer.name,
-          stripe_session_id: typeof session.id === 'string' ? session.id : undefined,
+          offer_key: fixPack.checkout.offerKey,
+          audit_id: auditId,
+          stripe_session_id: session.id,
         },
       })
-      await ph.flush()
+      void ph.flush().catch(() => undefined)
     } catch {
-      // Non-fatal
+      // Checkout must not depend on analytics client construction or delivery.
     }
-
-    return NextResponse.json({ url: session.url })
-  } catch (error) {
-    console.error('[Checkout API] Invalid request:', error)
-    return NextResponse.json({ code: 'INVALID_CHECKOUT_REQUEST' }, { status: 400 })
   }
+
+  return NextResponse.json({ url: session.url })
 }

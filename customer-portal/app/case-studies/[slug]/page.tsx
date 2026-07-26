@@ -1,36 +1,18 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { getPublishedCaseStudies } from '@/app/lib/public-facts'
 
-type CaseStudy = {
-  slug: string
-  title: string
-  eyebrow: string
-  description: string
-  outcome: string
-  outcomeLabel: string
-  situation: string
-  diagnosis: string
-  fixes: string[]
-  result: string
-  publishedDate: string
-  modifiedDate: string
-}
+export const dynamic = 'force-dynamic'
 
-// No entries yet. These were previously populated with fabricated
-// scenarios (invented customer names, dollar figures, and outcomes that
-// never happened — this business has zero completed paid engagements on
-// record). Removed 2026-07-24 rather than relabeled, since a hyper-specific
-// fake number doesn't become honest by adding an "illustrative" caveat.
-// Add a real entry here only once it has dates, the actual metric, and
-// underlying evidence that can be shown, per app/case-studies/page.tsx.
-const CASE_STUDIES: Record<string, CaseStudy> = {}
+const getPublishedCaseStudy = (slug: string) =>
+  getPublishedCaseStudies().find((study) => study.slug === slug)
 
 type Props = { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const study = CASE_STUDIES[slug]
+  const study = getPublishedCaseStudy(slug)
   if (!study) return { title: 'Not Found' }
   return {
     title: `${study.title} | Nebula Components Case Study`,
@@ -47,12 +29,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export function generateStaticParams() {
-  return Object.keys(CASE_STUDIES).map((slug) => ({ slug }))
+  return getPublishedCaseStudies().map(({ slug }) => ({ slug }))
 }
 
 export default async function CaseStudyPage({ params }: Props) {
   const { slug } = await params
-  const study = CASE_STUDIES[slug]
+  const study = getPublishedCaseStudy(slug)
   if (!study) notFound()
 
   return (

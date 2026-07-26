@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import CategoryAccordion from './CategoryAccordion'
 import { getArticles } from './lib/getArticles'
 
@@ -48,36 +47,18 @@ export default function LearningCentreIndex() {
             Free conversion guides for founders getting clicks but no sales. Start with the leak map. Implement only when the leak is obvious.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <Link
+            <a
               href="/audit"
               className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors"
             >
               Run the free audit
-            </Link>
-            <Link
+            </a>
+            <a
               href="/learning-centre/paid-traffic-leak-map"
               className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent/5 transition-colors"
             >
               Open leak map
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Category nav */}
-      <section className="border-b border-border px-6 py-6">
-        <div className="mx-auto max-w-5xl">
-          <div className="flex flex-wrap gap-2">
-            {categoryOrder.map(cat => (
-              <a
-                key={cat}
-                href={`#${cat.toLowerCase().replace(/\s+/g, '-')}`}
-                className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-xs font-semibold text-fg-muted transition-colors hover:border-accent hover:text-accent"
-              >
-                {cat}
-                <span className="text-accent">{categories[cat]?.length ?? 0}</span>
-              </a>
-            ))}
+            </a>
           </div>
         </div>
       </section>
@@ -94,12 +75,12 @@ export default function LearningCentreIndex() {
           <p className="mt-4 text-fg-muted">
             The free audit checks your landing page URL against these leak patterns automatically. Takes a couple of minutes.
           </p>
-          <Link
+          <a
             href="/audit"
             className="mt-8 inline-flex rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors"
           >
             Run the free audit →
-          </Link>
+          </a>
         </div>
       </section>
     </main>
