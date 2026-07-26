@@ -1,5 +1,9 @@
 import type { Metadata } from 'next'
 import citableRelease from '../../../data/citable-release.json'
+import {
+  getPublishedBenchmarks,
+  getPublishedCaseStudies,
+} from '@/app/lib/public-facts'
 
 export const CITABLE_ORIGIN = 'https://nebulacomponents.shop'
 export const CITABLE_OVERVIEW_PATH = '/resources/citable'
@@ -92,38 +96,47 @@ export interface CitableProofRecord {
   detail: string
 }
 
-export const citableProofRecords: readonly CitableProofRecord[] = [
-  {
-    key: 'package',
-    label: 'Published package',
-    status: 'documented',
-    detail: `Version ${citableReleaseFacts.version}, package counts, runtime requirement, and license come from the synchronized ${citableReleaseFacts.source} projection.`,
-  },
-  {
-    key: 'workflow',
-    label: 'Workflow state',
-    status: 'unknown',
-    detail: 'Workflow verification remains unavailable because no fresh committed workflow receipt is projected here.',
-  },
-  {
-    key: 'deployment',
-    label: 'Deployment state',
-    status: 'unknown',
-    detail: 'Deployment verification remains unavailable because no fresh committed receipt proves the current live surfaces.',
-  },
-  {
-    key: 'customer',
-    label: 'Customer cases',
-    status: 'not_published',
-    detail: 'Customer cases are not published because the governed public projection is empty.',
-  },
-  {
-    key: 'benchmark',
-    label: 'Benchmark outcomes',
-    status: 'not_published',
-    detail: 'Benchmark outcomes are not published because no governed methodology and result projection is available.',
-  },
-] as const
+export function getCitableProofRecords(): readonly CitableProofRecord[] {
+  const publishedCases = getPublishedCaseStudies()
+  const publishedBenchmarks = getPublishedBenchmarks()
+
+  return [
+    {
+      key: 'package',
+      label: 'Published package',
+      status: 'documented',
+      detail: `Version ${citableReleaseFacts.version}, package counts, runtime requirement, and license come from the synchronized ${citableReleaseFacts.source} projection.`,
+    },
+    {
+      key: 'workflow',
+      label: 'Workflow state',
+      status: 'unknown',
+      detail: 'Workflow verification remains unavailable because no fresh committed workflow receipt is projected here.',
+    },
+    {
+      key: 'deployment',
+      label: 'Deployment state',
+      status: 'unknown',
+      detail: 'Deployment verification remains unavailable because no fresh committed receipt proves the current live surfaces.',
+    },
+    {
+      key: 'customer',
+      label: 'Customer cases',
+      status: publishedCases.length > 0 ? 'documented' : 'not_published',
+      detail: publishedCases.length > 0
+        ? 'Published customer cases come only from the governed public-proof projection.'
+        : 'Customer cases are not published because the governed public projection is empty.',
+    },
+    {
+      key: 'benchmark',
+      label: 'Benchmark outcomes',
+      status: publishedBenchmarks.length > 0 ? 'documented' : 'not_published',
+      detail: publishedBenchmarks.length > 0
+        ? 'Published benchmark outcomes come only from the governed public-proof projection.'
+        : 'Benchmark outcomes are not published because no governed methodology and result projection is available.',
+    },
+  ]
+}
 
 const quickStartPath = `${CITABLE_OVERVIEW_PATH}/quick-start`
 const technicalPath = `${CITABLE_OVERVIEW_PATH}/jobs/technical-retrieval-audit`

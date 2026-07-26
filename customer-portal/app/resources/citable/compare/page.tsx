@@ -10,6 +10,8 @@ import {
   getCitableRouteByPath,
 } from '../content'
 
+export const dynamic = 'force-dynamic'
+
 const registeredRoute = getCitableRouteByPath('/resources/citable/compare')
 
 if (!registeredRoute || registeredRoute.kind !== 'compare' || registeredRoute.status !== 'published') {

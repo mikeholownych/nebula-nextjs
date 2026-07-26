@@ -12,6 +12,8 @@ import {
   getCitableRouteByPath,
 } from '../content'
 
+export const dynamic = 'force-dynamic'
+
 const registeredRoute = getCitableRouteByPath('/resources/citable/releases')
 
 if (!registeredRoute || registeredRoute.kind !== 'release' || registeredRoute.status !== 'published') {

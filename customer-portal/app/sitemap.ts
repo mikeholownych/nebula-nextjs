@@ -3,6 +3,8 @@ import { getPublishedCaseStudies } from '@/app/lib/public-facts'
 import { getPublishedCitableRoutes } from '@/app/resources/citable/content'
 import { getArticles } from './learning-centre/lib/getArticles'
 
+export const dynamic = 'force-dynamic'
+
 const BASE_URL = 'https://nebulacomponents.shop'
 
 // Priority reflects actual page importance, not a uniform default — legal/

@@ -13,6 +13,8 @@ import {
   getPublishedCitableRoutes,
 } from './content'
 
+export const dynamic = 'force-dynamic'
+
 const registeredRoute = getCitableRouteByPath(CITABLE_OVERVIEW_PATH)
 
 if (!registeredRoute || registeredRoute.kind !== 'overview' || registeredRoute.status !== 'published') {

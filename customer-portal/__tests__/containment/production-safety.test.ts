@@ -455,6 +455,7 @@ describe('production safety containment', () => {
     const caseStudySource = readFileSync(path.join(process.cwd(), 'app/case-studies/[slug]/page.tsx'), 'utf8')
     const indexSource = readFileSync(path.join(process.cwd(), 'app/case-studies/page.tsx'), 'utf8')
     const sitemapSource = readFileSync(path.join(process.cwd(), 'app/sitemap.ts'), 'utf8')
+    const publicFactsSource = readFileSync(path.join(process.cwd(), 'app/lib/public-facts.ts'), 'utf8')
 
     // Unknown slugs still 404 — only evidence-gated registry entries resolve.
     expect(caseStudySource).toMatch(/notFound\(\)/)
@@ -467,6 +468,8 @@ describe('production safety containment', () => {
     // derive from the same fail-closed public-facts accessor.
     expect(publicFacts.caseStudies.status).toBe('none_published')
     expect(getPublishedCaseStudies()).toEqual([])
+    expect(publicFactsSource).toContain('public-proof.generated.json')
+    expect(publicFactsSource).not.toMatch(/caseStudies:\s*\{[\s\S]*?entries:\s*\[\]/)
     expect(caseStudySource).toContain('getPublishedCaseStudies()')
     expect(sitemapSource).toContain('getPublishedCaseStudies()')
 

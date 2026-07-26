@@ -3,14 +3,16 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPublishedCaseStudies } from '@/app/lib/public-facts'
 
-const caseStudies = getPublishedCaseStudies()
-const caseStudiesBySlug = new Map(caseStudies.map((study) => [study.slug, study]))
+export const dynamic = 'force-dynamic'
+
+const getPublishedCaseStudy = (slug: string) =>
+  getPublishedCaseStudies().find((study) => study.slug === slug)
 
 type Props = { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const study = caseStudiesBySlug.get(slug)
+  const study = getPublishedCaseStudy(slug)
   if (!study) return { title: 'Not Found' }
   return {
     title: `${study.title} | Nebula Components Case Study`,
@@ -27,12 +29,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export function generateStaticParams() {
-  return caseStudies.map(({ slug }) => ({ slug }))
+  return getPublishedCaseStudies().map(({ slug }) => ({ slug }))
 }
 
 export default async function CaseStudyPage({ params }: Props) {
   const { slug } = await params
-  const study = caseStudiesBySlug.get(slug)
+  const study = getPublishedCaseStudy(slug)
   if (!study) notFound()
 
   return (

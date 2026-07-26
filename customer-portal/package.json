@@ -17,9 +17,11 @@
     "check:citable-projection": "node scripts/sync-citable-projection.mjs --check",
     "compile:evidence-atoms": "node scripts/compile-evidence-atoms.mjs",
     "check:evidence-atoms": "node scripts/compile-evidence-atoms.mjs --check",
+    "compile:public-proof": "node scripts/compile-public-proof.mjs",
+    "check:public-proof": "node scripts/compile-public-proof.mjs --check",
     "package:intelligence-stack": "node scripts/package-landing-page-intelligence-stack.mjs",
     "check:intelligence-stack": "node scripts/package-landing-page-intelligence-stack.mjs --check",
-    "ci": "npm run typecheck && npm run lint && npm run check:evidence-atoms && npm run check:citable-projection && npm run check:intelligence-stack && npm run build && npm run test && npm run test:e2e"
+    "ci": "npm run typecheck && npm run lint && npm run check:evidence-atoms && npm run check:public-proof && npm run check:citable-projection && npm run check:intelligence-stack && npm run build && npm run test && npm run test:e2e"
   },
   "dependencies": {
     "@react-oauth/google": "^0.13.5",

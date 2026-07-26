@@ -26,6 +26,8 @@ jobs:
         run: node scripts/validate-governance.mjs || echo "No governance script"
       - name: Verify evidence atom projection
         run: npm run check:evidence-atoms
+      - name: Verify public proof projection
+        run: npm run check:public-proof
       - name: Verify intelligence stack projection
         run: npm run check:intelligence-stack
 

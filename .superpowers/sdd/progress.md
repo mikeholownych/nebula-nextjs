@@ -25,7 +25,7 @@
 | 5. Citable quick start/jobs | /root/implement_citable_ia_jobs | /root/implement_citable_ia_jobs/review_citable_ia_jobs | approved | Quick start and five job pages; compare/releases remain planned for Task 6 |
 | 6. Comparison/releases | /root/implement_citable_compare_release | /root/implement_citable_compare_release/review_citable_compare_release | approved | Category/workflow states, synchronized current release, controlled assets, and explicit unavailable workflow/deployment proof |
 | 7. Editorial/performance | /root/finish_editorial_performance + /root | /root/review_editorial_performance | approved | Four answer-first articles; fixed Lighthouse lab gates; consent, header, FAQ-schema, and prefetch performance fixes |
-| 8. Proof scaffolding | — | — | pending | Empty until evidenced |
+| 8. Proof scaffolding | /root/implement_public_proof | /root/implement_public_proof/review_public_proof | approved | Generated single-authority cases/benchmarks; actual-clock expiry, dynamic proof surfaces, deterministic diagnostics/drift gate; current counts remain zero |
 | 9. Final verification | — | — | pending | No deployment |
 
 ## Decisions
@@ -45,3 +45,5 @@
 - Prompt-pack delivery idempotency is keyed by Stripe session ID, not customer email.
 - Canonical webhook delivery is serialized by a same-connection PostgreSQL advisory lock; a crashed worker releases the lock with its connection, and a retry may safely resume any non-delivered row.
 - AgentMail receives `fix-pack:<stripe_session_id>` as its provider idempotency key, and receipt replay detection runs before bounce-store access.
+- Public case and benchmark proof is authored only in `data/public-proof-surfaces.json`, compiled against governed claims/evidence, and consumed only through `data/public-proof.generated.json`.
+- Public-proof expiry uses the actual UTC date at compile/check time and a projected `validUntil` at request time; proof-bearing case, Citable, and sitemap routes are dynamic to prevent stale expired proof.

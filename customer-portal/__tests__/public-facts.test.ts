@@ -78,6 +78,8 @@ describe('canonical public facts', () => {
   test('omits incomplete case-study records instead of filling evidence gaps', () => {
     const complete = {
       slug: 'supported-example',
+      claimId: 'claim-supported-example',
+      evidenceIds: ['evidence-supported-example'],
       title: 'Supported example',
       eyebrow: 'Evidence-backed case',
       description: 'A fully evidenced result.',
@@ -87,6 +89,7 @@ describe('canonical public facts', () => {
       diagnosis: 'The evidenced finding.',
       fixes: ['The documented remediation.'],
       result: 'The observed result, without a causal guarantee.',
+      methodology: 'Compared the declared metric over the stated window.',
       evidenceUrl: 'https://nebulacomponents.shop/evidence/supported-example',
       measurementWindow: {
         startedAt: '2026-06-01',
@@ -96,15 +99,19 @@ describe('canonical public facts', () => {
         granted: true,
         grantedAt: '2026-07-01',
       },
+      review: {
+        status: 'approved',
+        reviewedAt: '2026-07-02',
+        expiresAt: '2026-12-31',
+      },
+      validUntil: '2026-12-31',
       disclosure: 'Nebula performed the audit; the customer implemented the change.',
       publishedAt: '2026-07-15',
       modifiedAt: '2026-07-15',
     }
 
-    const facts = cloneFacts() as any
-    facts.caseStudies = {
-      status: 'published',
-      entries: [
+    const projection = {
+      cases: [
         complete,
         { ...complete, slug: 'missing-evidence', evidenceUrl: '' },
         { ...complete, slug: 'missing-window', measurementWindow: undefined },
@@ -116,14 +123,54 @@ describe('canonical public facts', () => {
         { ...complete, slug: 'missing-disclosure', disclosure: '' },
         { ...complete, slug: 'missing-publication-date', publishedAt: '' },
       ],
+      benchmarks: [],
     }
 
-    expect(getPublishedCaseStudies(facts).map((study) => study.slug)).toEqual([
+    expect(getPublishedCaseStudies(projection).map((study) => study.slug)).toEqual([
       'supported-example',
     ])
 
-    facts.caseStudies.status = 'none_published'
-    expect(getPublishedCaseStudies(facts)).toEqual([])
+    const manualFacts = cloneFacts() as any
+    manualFacts.caseStudies = { status: 'published', entries: [complete] }
+    expect(getPublishedCaseStudies(manualFacts)).toEqual([])
+  })
+
+  test('fails a generated case projection closed after its governed validity window', () => {
+    const generated = {
+      cases: [{
+        slug: 'expired-example',
+        claimId: 'claim-expired-example',
+        evidenceIds: ['evidence-expired-example'],
+        title: 'Expired example',
+        eyebrow: 'Evidence-backed case',
+        description: 'Previously governed proof.',
+        outcome: 'Observed change',
+        outcomeLabel: 'Measured during the stated window',
+        situation: 'Starting state.',
+        diagnosis: 'Finding.',
+        fixes: ['Remediation.'],
+        result: 'Observed result.',
+        methodology: 'Declared method.',
+        evidenceUrl: 'https://nebulacomponents.shop/evidence/expired-example',
+        measurementWindow: { startedAt: '2026-06-01', endedAt: '2026-06-30' },
+        publicationPermission: { granted: true, grantedAt: '2026-07-01' },
+        review: {
+          status: 'approved',
+          reviewedAt: '2026-07-02',
+          expiresAt: '2026-07-25',
+        },
+        validUntil: '2026-07-25',
+        disclosure: 'Bounded disclosure.',
+        publishedAt: '2026-07-15',
+        modifiedAt: '2026-07-15',
+      }],
+      benchmarks: [],
+    }
+
+    expect(getPublishedCaseStudies(
+      generated,
+      new Date('2026-07-26T00:00:00.000Z'),
+    )).toEqual([])
   })
 
   test('derives Citable release facts from the committed projection and keeps checks unknown', () => {

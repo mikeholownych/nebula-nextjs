@@ -9,6 +9,8 @@ import {
   getCitableMetadata,
 } from '../../content'
 
+export const dynamic = 'force-dynamic'
+
 interface CitableJobPageProps {
   params: Promise<{ slug: string }>
 }

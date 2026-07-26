@@ -57,6 +57,8 @@ for (const route of routes) {
     )
     await expect(page.getByText(/Customer cases and benchmark outcomes are not published/i)).toBeVisible()
     await expect(page.getByText(/Workflow and deployment verification remain unavailable/i)).toBeVisible()
+    await expect(page.getByText(/\b0 customer cases\b/i)).toHaveCount(0)
+    await expect(page.getByText(/\b0 benchmark outcomes\b/i)).toHaveCount(0)
 
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
@@ -98,4 +100,19 @@ test('comparison and release pages preserve their explicit evidence boundaries',
 test('unknown Citable job slugs return 404', async ({ request }) => {
   const response = await request.get('/resources/citable/jobs/not-a-job')
   expect(response.status()).toBe(404)
+})
+
+test('case-study routes reflect the empty governed projection', async ({ page, request }) => {
+  const response = await page.goto('/case-studies')
+
+  expect(response?.status()).toBe(200)
+  await expect(page.getByRole('heading', {
+    level: 1,
+    name: /we don't have one yet/i,
+  })).toBeVisible()
+  await expect(page.locator('a[href^="/case-studies/"]')).toHaveCount(0)
+  await expect(page.getByText(/\b0 case studies\b/i)).toHaveCount(0)
+
+  const unknownCase = await request.get('/case-studies/not-in-the-projection')
+  expect(unknownCase.status()).toBe(404)
 })

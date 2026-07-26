@@ -14,10 +14,10 @@ import CitableReleasesPage from '@/app/resources/citable/releases/page'
 import {
   citableJobRoutes,
   citableLicenseFacts,
-  citableProofRecords,
   citableQuickStartSteps,
   citableReleaseFacts,
   citableRoutes,
+  getCitableProofRecords,
   getCitableMetadata,
   getPublishedCitableRoutes,
 } from '@/app/resources/citable/content'
@@ -77,7 +77,7 @@ describe('Citable information architecture', () => {
   })
 
   test('fails closed for every non-package proof category', () => {
-    expect(citableProofRecords.map(({ key, status }) => [key, status])).toEqual([
+    expect(getCitableProofRecords().map(({ key, status }) => [key, status])).toEqual([
       ['package', 'documented'],
       ['workflow', 'unknown'],
       ['deployment', 'unknown'],
@@ -139,6 +139,8 @@ describe('Citable information architecture', () => {
       .toBeInTheDocument()
     expect(screen.getByText(/Workflow and deployment verification remain unavailable/i))
       .toBeInTheDocument()
+    expect(screen.queryByText(/\b0 customer cases\b/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/\b0 benchmark outcomes\b/i)).not.toBeInTheDocument()
     expect(document.body.textContent).not.toContain('@latest')
 
     const schemaTypes = [...document.querySelectorAll('script[type="application/ld+json"]')]

@@ -1,4 +1,5 @@
 import citableRelease from '../../data/citable-release.json'
+import publicProofProjection from '../../data/public-proof.generated.json'
 
 export type FixPackPublicFact = {
   status: 'active'
@@ -43,6 +44,8 @@ export type FixPackFulfillmentFacts = {
 
 export type PublishedCaseStudy = {
   slug: string
+  claimId: string
+  evidenceIds: string[]
   title: string
   eyebrow: string
   description: string
@@ -52,6 +55,7 @@ export type PublishedCaseStudy = {
   diagnosis: string
   fixes: string[]
   result: string
+  methodology: string
   evidenceUrl: string
   measurementWindow: {
     startedAt: string
@@ -61,6 +65,41 @@ export type PublishedCaseStudy = {
     granted: true
     grantedAt: string
   }
+  review: {
+    status: 'approved'
+    reviewedAt: string
+    expiresAt: string
+  }
+  validUntil: string
+  disclosure: string
+  publishedAt: string
+  modifiedAt: string
+}
+
+export type PublishedBenchmark = {
+  slug: string
+  claimId: string
+  evidenceIds: string[]
+  title: string
+  description: string
+  outcome: string
+  outcomeLabel: string
+  methodology: string
+  evidenceUrl: string
+  measurementWindow: {
+    startedAt: string
+    endedAt: string
+  }
+  publicationPermission: {
+    granted: true
+    grantedAt: string
+  }
+  review: {
+    status: 'approved'
+    reviewedAt: string
+    expiresAt: string
+  }
+  validUntil: string
   disclosure: string
   publishedAt: string
   modifiedAt: string
@@ -128,8 +167,20 @@ export const publicFacts = {
     },
   },
   caseStudies: {
-    status: 'none_published',
-    entries: [],
+    get status() {
+      return getPublishedCaseStudies().length > 0 ? 'published' : 'none_published'
+    },
+    get entries() {
+      return getPublishedCaseStudies()
+    },
+  },
+  benchmarks: {
+    get status() {
+      return getPublishedBenchmarks().length > 0 ? 'published' : 'none_published'
+    },
+    get entries() {
+      return getPublishedBenchmarks()
+    },
   },
   citable: {
     release: citableRelease,
@@ -288,11 +339,18 @@ export function isCanonicalFixPackReceipt(
   return false
 }
 
-function isPublishedCaseStudy(value: unknown): value is PublishedCaseStudy {
+function isPublishedCaseStudy(
+  value: unknown,
+  evaluationDate: string,
+): value is PublishedCaseStudy {
   if (!isRecord(value)) return false
   if (
     !isNonEmptyString(value.slug) ||
     !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.slug) ||
+    !isNonEmptyString(value.claimId) ||
+    !Array.isArray(value.evidenceIds) ||
+    value.evidenceIds.length === 0 ||
+    !value.evidenceIds.every(isNonEmptyString) ||
     !isNonEmptyString(value.title) ||
     !isNonEmptyString(value.eyebrow) ||
     !isNonEmptyString(value.description) ||
@@ -304,14 +362,18 @@ function isPublishedCaseStudy(value: unknown): value is PublishedCaseStudy {
     value.fixes.length === 0 ||
     !value.fixes.every(isNonEmptyString) ||
     !isNonEmptyString(value.result) ||
+    !isNonEmptyString(value.methodology) ||
     !isNonEmptyString(value.evidenceUrl) ||
     !isNonEmptyString(value.disclosure) ||
+    !isIsoDate(value.validUntil) ||
+    value.validUntil < evaluationDate ||
     !isIsoDate(value.publishedAt) ||
     !isIsoDate(value.modifiedAt)
   ) return false
 
   const measurementWindow = value.measurementWindow
   const publicationPermission = value.publicationPermission
+  const review = value.review
   if (
     !isRecord(measurementWindow) ||
     !isIsoDate(measurementWindow.startedAt) ||
@@ -319,7 +381,11 @@ function isPublishedCaseStudy(value: unknown): value is PublishedCaseStudy {
     measurementWindow.startedAt > measurementWindow.endedAt ||
     !isRecord(publicationPermission) ||
     publicationPermission.granted !== true ||
-    !isIsoDate(publicationPermission.grantedAt)
+    !isIsoDate(publicationPermission.grantedAt) ||
+    !isRecord(review) ||
+    review.status !== 'approved' ||
+    !isIsoDate(review.reviewedAt) ||
+    !isIsoDate(review.expiresAt)
   ) return false
 
   try {
@@ -330,14 +396,78 @@ function isPublishedCaseStudy(value: unknown): value is PublishedCaseStudy {
 }
 
 export function getPublishedCaseStudies(
-  source: unknown = publicFacts,
+  source: unknown = publicProofProjection,
+  at: Date = new Date(),
 ): PublishedCaseStudy[] {
-  if (!isRecord(source) || !isRecord(source.caseStudies)) return []
+  if (!isRecord(source) || !Array.isArray(source.cases)) return []
+  if (Number.isNaN(at.getTime())) return []
+  const evaluationDate = at.toISOString().slice(0, 10)
+  return source.cases.filter(
+    (value): value is PublishedCaseStudy =>
+      isPublishedCaseStudy(value, evaluationDate),
+  )
+}
+
+function isPublishedBenchmark(
+  value: unknown,
+  evaluationDate: string,
+): value is PublishedBenchmark {
+  if (!isRecord(value)) return false
   if (
-    source.caseStudies.status !== 'published' ||
-    !Array.isArray(source.caseStudies.entries)
-  ) return []
-  return source.caseStudies.entries.filter(isPublishedCaseStudy)
+    !isNonEmptyString(value.slug) ||
+    !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.slug) ||
+    !isNonEmptyString(value.claimId) ||
+    !Array.isArray(value.evidenceIds) ||
+    value.evidenceIds.length === 0 ||
+    !value.evidenceIds.every(isNonEmptyString) ||
+    !isNonEmptyString(value.title) ||
+    !isNonEmptyString(value.description) ||
+    !isNonEmptyString(value.outcome) ||
+    !isNonEmptyString(value.outcomeLabel) ||
+    !isNonEmptyString(value.methodology) ||
+    !isNonEmptyString(value.evidenceUrl) ||
+    !isNonEmptyString(value.disclosure) ||
+    !isIsoDate(value.validUntil) ||
+    value.validUntil < evaluationDate ||
+    !isIsoDate(value.publishedAt) ||
+    !isIsoDate(value.modifiedAt)
+  ) return false
+
+  const measurementWindow = value.measurementWindow
+  const publicationPermission = value.publicationPermission
+  const review = value.review
+  if (
+    !isRecord(measurementWindow) ||
+    !isIsoDate(measurementWindow.startedAt) ||
+    !isIsoDate(measurementWindow.endedAt) ||
+    measurementWindow.startedAt > measurementWindow.endedAt ||
+    !isRecord(publicationPermission) ||
+    publicationPermission.granted !== true ||
+    !isIsoDate(publicationPermission.grantedAt) ||
+    !isRecord(review) ||
+    review.status !== 'approved' ||
+    !isIsoDate(review.reviewedAt) ||
+    !isIsoDate(review.expiresAt)
+  ) return false
+
+  try {
+    return new URL(value.evidenceUrl).protocol === 'https:'
+  } catch {
+    return false
+  }
+}
+
+export function getPublishedBenchmarks(
+  source: unknown = publicProofProjection,
+  at: Date = new Date(),
+): PublishedBenchmark[] {
+  if (!isRecord(source) || !Array.isArray(source.benchmarks)) return []
+  if (Number.isNaN(at.getTime())) return []
+  const evaluationDate = at.toISOString().slice(0, 10)
+  return source.benchmarks.filter(
+    (value): value is PublishedBenchmark =>
+      isPublishedBenchmark(value, evaluationDate),
+  )
 }
 
 export function getCitablePublicFacts(

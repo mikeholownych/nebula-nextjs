@@ -10,6 +10,8 @@ import {
   getCitableRouteByPath,
 } from '../content'
 
+export const dynamic = 'force-dynamic'
+
 const registeredRoute = getCitableRouteByPath('/resources/citable/quick-start')
 
 if (!registeredRoute || registeredRoute.status !== 'published') {
