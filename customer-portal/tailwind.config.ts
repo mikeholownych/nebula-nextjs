@@ -47,7 +47,7 @@ const config: Config = {
         border: 'rgba(255, 255, 255, 0.06)',
       },
       fontFamily: {
-        sans: ['Karla', '-apple-system', 'system-ui', 'sans-serif'],
+        sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       fontSize: {

@@ -57,7 +57,7 @@
 - `/home/mike/nebula/venv/bin/python3 -m pytest tests/test_deliver_prompt_pack.py tests/test_agentmail_release_gate.py tests/test_outbound_release_gate.py -q`: passed — 51 tests.
 - `git diff --check`: passed.
 - Independent final code review: approved — no Critical, Important, or Minor findings.
-- Lighthouse CI (three lab runs per route, isolated branch server): the Learning Centre hub missed LCP by 9.61 ms and TBT by 117 ms; the representative article, Citable hub, and Citable job passed their median budgets. A webpack control build also exceeded TBT on the representative article, identifying the current host/shared Next.js runtime as the remaining lab deviation without weakening the fixed limits.
+- Lighthouse CI (three lab runs per route, isolated branch server): removing the route-wide webfont made every LCP median pass the fixed 2.5-second budget. The current host still exceeds the fixed 200 ms TBT budget on the Learning Centre hub (305 ms), representative article (263 ms), and Citable hub (249 ms); the representative Citable job passes. A webpack control build also exceeded TBT on the representative article, identifying the current host/shared Next.js runtime as the remaining lab deviation without weakening the fixed limits.
 - Production sitemap-route checker: three consecutive runs against `https://nebulacomponents.shop/sitemap.xml` passed — 68/68 routes returned HTTP 200 with nonempty bodies on every pass.
 - Production Learning Centre direct-route check: passed — all 45 article routes returned HTTP 200.
 - Homepage messaging integrity: `customer-portal/app/page.tsx` is unchanged from `main` and retains “Your ads worked. Your page didn't let them.”

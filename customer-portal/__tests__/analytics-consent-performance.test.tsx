@@ -109,4 +109,10 @@ describe('consent-gated analytics loading', () => {
       expect(read(sharedModule)).not.toMatch(/from ['"]next\/link['"]/)
     }
   })
+
+  it('keeps route-wide text paint independent of a downloaded webfont', () => {
+    expect(read('app/layout.tsx')).not.toMatch(/from ['"]next\/font\//)
+    expect(read('app/globals.css')).not.toContain("'Karla'")
+    expect(read('tailwind.config.ts')).not.toContain("'Karla'")
+  })
 })

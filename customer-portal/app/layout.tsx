@@ -1,17 +1,10 @@
 import type { Metadata, Viewport } from 'next'
-import { Karla } from 'next/font/google'
 import CookieConsent from './components/CookieConsent'
 import SiteNav from '@/components/SiteNav'
 import Footer from '@/components/Footer'
 import WebMCP from '@/components/WebMCP'
 import './globals.css'
 import { organizationSchema, websiteSchema } from './lib/schema'
-
-const karla = Karla({
-  subsets: ['latin'],
-  weight: ['400', '600', '800'],
-  display: 'swap',
-})
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -96,7 +89,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body className={karla.className}>
+      <body>
         <a href="#main-content" className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-emerald-500 focus:text-black focus:rounded">
           Skip to main content
         </a>

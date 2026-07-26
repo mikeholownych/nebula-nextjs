@@ -62,7 +62,7 @@ export default function CitableReleasesPage() {
             </div>
             <p className="mt-4 max-w-3xl text-base leading-relaxed text-fg-muted">
               Released {citableReleaseFacts.releasedAt} from{' '}
-              <code className="text-fg">{citableReleaseFacts.source}</code>. This page is a current
+              <code className="break-all text-fg">{citableReleaseFacts.source}</code>. This page is a current
               projection, not a manually maintained release history.
             </p>
 
@@ -80,7 +80,7 @@ export default function CitableReleasesPage() {
               ))}
             </dl>
             <p className="mt-4 text-sm leading-relaxed text-fg-muted">
-              Runtime requirement: <code className="text-fg">Node.js {citableReleaseFacts.nodeRequirement}</code>.
+              Runtime requirement: <code className="break-all text-fg">Node.js {citableReleaseFacts.nodeRequirement}</code>.
             </p>
           </section>
 
