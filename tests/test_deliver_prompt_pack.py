@@ -24,15 +24,19 @@ class DeliverPromptPackTests(unittest.TestCase):
         rows = [{"event_type": "audit_delivered", "email": "someone@example.com", "url": "https://x.example"}]
         self.assertIsNone(dpp.find_audited_url("nobody@example.com", rows))
 
-    def test_already_delivered_is_case_insensitive(self):
-        rows = [{"event_type": "prompt_pack_delivered", "email": "Buyer@Example.com"}]
-        self.assertTrue(dpp.already_delivered("buyer@example.com", rows))
-        self.assertFalse(dpp.already_delivered("someone-else@example.com", rows))
+    def test_already_delivered_keys_on_stripe_session_not_email(self):
+        rows = [{
+            "event_type": "prompt_pack_delivered",
+            "email": "Buyer@Example.com",
+            "stripe_session_id": "cs_first",
+        }]
+        self.assertTrue(dpp.already_delivered("cs_first", rows))
+        self.assertFalse(dpp.already_delivered("cs_second", rows))
 
     def test_main_refuses_to_send_when_bounce_check_errors(self):
         with patch("lead_store.LeadStore") as MockStore:
             MockStore.return_value.is_bounced.side_effect = RuntimeError("db locked")
-            with patch.object(sys, "argv", ["deliver_prompt_pack.py", "--email", "buyer@example.com"]), \
+            with patch.object(sys, "argv", ["deliver_prompt_pack.py", "--email", "buyer@example.com", "--stripe-session-id", "cs_test"]), \
                  patch.object(dpp, "telegram_notify") as mock_notify, \
                  patch.object(dpp, "load_ledger_rows") as mock_rows:
                 rc = dpp.main()
@@ -44,17 +48,21 @@ class DeliverPromptPackTests(unittest.TestCase):
     def test_main_refuses_to_send_when_bounced(self):
         with patch("lead_store.LeadStore") as MockStore:
             MockStore.return_value.is_bounced.return_value = True
-            with patch.object(sys, "argv", ["deliver_prompt_pack.py", "--email", "buyer@example.com"]), \
+            with patch.object(sys, "argv", ["deliver_prompt_pack.py", "--email", "buyer@example.com", "--stripe-session-id", "cs_test"]), \
                  patch.object(dpp, "telegram_notify") as mock_notify:
                 rc = dpp.main()
         self.assertEqual(rc, 1)
         self.assertIn("bounce list", mock_notify.call_args[0][0])
 
     def test_main_is_idempotent_on_repeat_delivery(self):
-        rows = [{"event_type": "prompt_pack_delivered", "email": "buyer@example.com"}]
+        rows = [{
+            "event_type": "prompt_pack_delivered",
+            "email": "different@example.com",
+            "stripe_session_id": "cs_test",
+        }]
         with patch("lead_store.LeadStore") as MockStore:
             MockStore.return_value.is_bounced.return_value = False
-            with patch.object(sys, "argv", ["deliver_prompt_pack.py", "--email", "buyer@example.com"]), \
+            with patch.object(sys, "argv", ["deliver_prompt_pack.py", "--email", "buyer@example.com", "--stripe-session-id", "cs_test"]), \
                  patch.object(dpp, "load_ledger_rows", return_value=rows), \
                  patch.object(dpp, "find_audited_url") as mock_find_url:
                 rc = dpp.main()
@@ -64,7 +72,7 @@ class DeliverPromptPackTests(unittest.TestCase):
     def test_main_escalates_when_no_prior_audit_found(self):
         with patch("lead_store.LeadStore") as MockStore:
             MockStore.return_value.is_bounced.return_value = False
-            with patch.object(sys, "argv", ["deliver_prompt_pack.py", "--email", "buyer@example.com"]), \
+            with patch.object(sys, "argv", ["deliver_prompt_pack.py", "--email", "buyer@example.com", "--stripe-session-id", "cs_test"]), \
                  patch.object(dpp, "load_ledger_rows", return_value=[]), \
                  patch.object(dpp, "telegram_notify") as mock_notify:
                 rc = dpp.main()
@@ -85,7 +93,7 @@ class DeliverPromptPackTests(unittest.TestCase):
 
             with patch("lead_store.LeadStore") as MockStore:
                 MockStore.return_value.is_bounced.return_value = False
-                with patch.object(sys, "argv", ["deliver_prompt_pack.py", "--email", "buyer@example.com"]), \
+                with patch.object(sys, "argv", ["deliver_prompt_pack.py", "--email", "buyer@example.com", "--stripe-session-id", "cs_test"]), \
                      patch.object(dpp, "LEDGER_FILE", ledger_path), \
                      patch.object(dpp, "HOT_LEAD_PATH", hot_lead_path), \
                      patch.object(dpp, "load_ledger_rows", return_value=rows), \
@@ -99,6 +107,7 @@ class DeliverPromptPackTests(unittest.TestCase):
             self.assertEqual(rc, 0)
             ledger_row = json.loads(ledger_path.read_text().splitlines()[-1])
             self.assertEqual(ledger_row["event_type"], "prompt_pack_delivered")
+            self.assertEqual(ledger_row["stripe_session_id"], "cs_test")
             self.assertEqual(ledger_row["prompt_count"], 2)
             self.assertEqual(ledger_row["message_id"], "msg_123")
 

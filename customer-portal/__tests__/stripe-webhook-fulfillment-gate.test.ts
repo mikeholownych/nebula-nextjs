@@ -11,10 +11,12 @@
 
 import { NextRequest } from 'next/server'
 
-const execFileMock = jest.fn((..._args: unknown[]) => {
+const successfulExecFile = (..._args: unknown[]) => {
   const cb = _args[_args.length - 1] as (err: unknown, res: { stdout: string; stderr: string }) => void
   cb(null, { stdout: '', stderr: '' })
-})
+}
+
+const execFileMock = jest.fn(successfulExecFile)
 
 const hermesMessage = (call: readonly unknown[]): string => {
   const args = call[1]
@@ -80,10 +82,22 @@ async function postWebhook() {
 describe('POST /api/webhooks/stripe fulfillment gating', () => {
   beforeEach(() => {
     jest.resetModules()
-    execFileMock.mockClear()
-    queryMock.mockReset().mockResolvedValue({
-      rowCount: 1,
-      rows: [{ stripe_session_id: 'cs_live_test' }],
+    execFileMock.mockReset().mockImplementation(successfulExecFile)
+    queryMock.mockReset().mockImplementation(async (sql: unknown) => {
+      const statement = String(sql)
+      if (statement.includes('INSERT INTO purchases')) {
+        return { rowCount: 1, rows: [{ stripe_session_id: 'cs_live_test' }] }
+      }
+      if (statement.includes("fulfillment_status = 'processing'")) {
+        return { rowCount: 1, rows: [{ stripe_session_id: 'cs_live_test' }] }
+      }
+      if (
+        statement.includes("fulfillment_status = 'delivered'") ||
+        statement.includes("fulfillment_status = 'failed'")
+      ) {
+        return { rowCount: 1, rows: [] }
+      }
+      throw new Error(`Unexpected query: ${statement}`)
     })
     identifyMock.mockClear()
     captureMock.mockClear()
@@ -106,8 +120,16 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     )
     expect(pythonCalls).toHaveLength(1)
     expect(pythonCalls[0][1]).toEqual(
-      expect.arrayContaining(['--email', 'buyer@example.com'])
+      expect.arrayContaining([
+        '--email',
+        'buyer@example.com',
+        '--stripe-session-id',
+        'cs_live_test',
+      ])
     )
+    expect(queryMock.mock.calls.some((call) =>
+      String(call[0]).includes("fulfillment_status = 'delivered'")
+    )).toBe(true)
     const hermesCall = execFileMock.mock.calls.find((call) => call[0] === 'hermes')
     expect(hermesCall ? hermesMessage(hermesCall) : '').toContain('*SALE*')
     expect(captureMock).toHaveBeenCalledWith(
@@ -225,6 +247,12 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
         rowCount: 1,
         rows: [{ stripe_session_id: 'cs_live_test' }],
       })
+      .mockResolvedValueOnce({
+        rowCount: 1,
+        rows: [{ stripe_session_id: 'cs_live_test' }],
+      })
+      .mockResolvedValueOnce({ rowCount: 1, rows: [] })
+      .mockResolvedValueOnce({ rowCount: 0, rows: [] })
       .mockResolvedValueOnce({ rowCount: 0, rows: [] })
     mockConstructEvent(makeSession())
 
@@ -233,7 +261,7 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
 
     expect(first.status).toBe(200)
     expect(second.status).toBe(200)
-    expect(queryMock).toHaveBeenCalledTimes(2)
+    expect(queryMock).toHaveBeenCalledTimes(5)
     expect(execFileMock.mock.calls.filter((call) =>
       String(call[0]).includes('venv/bin/python3')
     )).toHaveLength(1)
@@ -241,6 +269,56 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     expect(captureMock.mock.calls.filter((call) =>
       call[0]?.event === 'purchase_completed'
     )).toHaveLength(1)
+  })
+
+  it('restores failed fulfillment and retries the same receipt safely', async () => {
+    execFileMock
+      .mockImplementationOnce((...args: unknown[]) => {
+        const callback = args[args.length - 1] as (error: Error) => void
+        callback(new Error('delivery command failed'))
+      })
+      .mockImplementation(successfulExecFile)
+    queryMock
+      .mockResolvedValueOnce({ rowCount: 1, rows: [{ stripe_session_id: 'cs_live_test' }] })
+      .mockResolvedValueOnce({ rowCount: 1, rows: [{ stripe_session_id: 'cs_live_test' }] })
+      .mockResolvedValueOnce({ rowCount: 1, rows: [] })
+      .mockResolvedValueOnce({ rowCount: 0, rows: [] })
+      .mockResolvedValueOnce({ rowCount: 1, rows: [{ stripe_session_id: 'cs_live_test' }] })
+      .mockResolvedValueOnce({ rowCount: 1, rows: [] })
+    mockConstructEvent(makeSession())
+
+    const failed = await postWebhook()
+    const retried = await postWebhook()
+
+    expect(failed.status).toBe(500)
+    expect(retried.status).toBe(200)
+    const pythonCalls = execFileMock.mock.calls.filter((call) =>
+      String(call[0]).includes('venv/bin/python3')
+    )
+    expect(pythonCalls).toHaveLength(2)
+    expect(queryMock.mock.calls.some((call) =>
+      String(call[0]).includes("fulfillment_status = 'failed'")
+    )).toBe(true)
+    expect(queryMock.mock.calls.some((call) =>
+      String(call[0]).includes("fulfillment_status = 'delivered'")
+    )).toBe(true)
+    expect(captureMock.mock.calls.filter((call) =>
+      call[0]?.event === 'purchase_completed'
+    )).toHaveLength(1)
+  })
+
+  it('does not dispatch when another event already holds the processing claim', async () => {
+    queryMock
+      .mockResolvedValueOnce({ rowCount: 0, rows: [] })
+      .mockResolvedValueOnce({ rowCount: 0, rows: [] })
+    mockConstructEvent(makeSession())
+
+    const response = await postWebhook()
+
+    expect(response.status).toBe(200)
+    expect(queryMock).toHaveBeenCalledTimes(2)
+    expect(execFileMock).not.toHaveBeenCalled()
+    expect(captureMock).not.toHaveBeenCalled()
   })
 
   it('returns 500 before side effects when persistence fails so Stripe can retry safely', async () => {

@@ -23,8 +23,7 @@ const isStripeCheckoutUrl = (value: unknown): value is string => {
 
 export async function POST(request: NextRequest) {
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY
-  const stripePriceId = process.env.STRIPE_FIX_PACK_PRICE_ID
-  if (!stripeSecretKey || !stripePriceId) {
+  if (!stripeSecretKey) {
     return NextResponse.json({ code: 'CHECKOUT_NOT_CONFIGURED' }, { status: 503 })
   }
 
@@ -33,38 +32,44 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ code: 'CHECKOUT_OFFER_UNAVAILABLE' }, { status: 503 })
   }
 
+  let body: unknown
   try {
-    const body: unknown = await request.json()
-    if (!isRecord(body)) {
-      return NextResponse.json({ code: 'INVALID_CHECKOUT_REQUEST' }, { status: 400 })
-    }
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ code: 'INVALID_CHECKOUT_REQUEST' }, { status: 400 })
+  }
+  if (!isRecord(body)) {
+    return NextResponse.json({ code: 'INVALID_CHECKOUT_REQUEST' }, { status: 400 })
+  }
 
-    const keys = Object.keys(body)
+  const keys = Object.keys(body)
+  if (
+    keys.length !== 1 ||
+    keys[0] !== 'offerKey' ||
+    body.offerKey !== fixPack.checkout.offerKey
+  ) {
+    return NextResponse.json({ code: 'UNSUPPORTED_CHECKOUT_OFFER' }, { status: 400 })
+  }
+
+  let baseUrl: URL
+  try {
+    baseUrl = new URL(process.env.NEXT_PUBLIC_URL || '')
     if (
-      keys.length !== 1 ||
-      keys[0] !== 'offerKey' ||
-      body.offerKey !== fixPack.checkout.offerKey
+      baseUrl.protocol !== 'https:' ||
+      baseUrl.username !== '' ||
+      baseUrl.password !== ''
     ) {
-      return NextResponse.json({ code: 'UNSUPPORTED_CHECKOUT_OFFER' }, { status: 400 })
+      throw new Error('HTTPS URL without credentials required')
     }
+  } catch {
+    return NextResponse.json(
+      { code: 'CHECKOUT_RETURN_URL_NOT_CONFIGURED' },
+      { status: 503 },
+    )
+  }
 
-    let baseUrl: URL
-    try {
-      baseUrl = new URL(process.env.NEXT_PUBLIC_URL || '')
-      if (
-        baseUrl.protocol !== 'https:' ||
-        baseUrl.username !== '' ||
-        baseUrl.password !== ''
-      ) {
-        throw new Error('HTTPS URL without credentials required')
-      }
-    } catch {
-      return NextResponse.json(
-        { code: 'CHECKOUT_RETURN_URL_NOT_CONFIGURED' },
-        { status: 503 },
-      )
-    }
-
+  let session: unknown
+  try {
     const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',
       headers: {
@@ -72,8 +77,11 @@ export async function POST(request: NextRequest) {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        'line_items[0][price]': stripePriceId,
+        'line_items[0][price_data][currency]': fixPack.currency.toLowerCase(),
+        'line_items[0][price_data][unit_amount]': String(fixPack.priceCents),
+        'line_items[0][price_data][product_data][name]': 'Nebula Conversion Fix Pack',
         'line_items[0][quantity]': '1',
+        'payment_method_types[0]': 'card',
         mode: 'payment',
         success_url: new URL(
           '/thank-you?session_id={CHECKOUT_SESSION_ID}',
@@ -89,31 +97,32 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ code: 'CHECKOUT_PROVIDER_ERROR' }, { status: 502 })
     }
 
-    const session: unknown = await response.json()
-    if (!isRecord(session) || !isStripeCheckoutUrl(session.url)) {
-      return NextResponse.json({ code: 'CHECKOUT_PROVIDER_ERROR' }, { status: 502 })
-    }
-
-    if (typeof session.id === 'string') {
-      try {
-        const ph = getPostHogClient()
-        ph.capture({
-          distinctId: session.id,
-          event: 'checkout_session_created',
-          properties: {
-            offer_key: fixPack.checkout.offerKey,
-            stripe_session_id: session.id,
-          },
-        })
-        await ph.flush()
-      } catch {
-        // Checkout must not depend on analytics.
-      }
-    }
-
-    return NextResponse.json({ url: session.url })
+    session = await response.json()
   } catch (error) {
-    console.error('[Checkout API] Invalid request:', error)
-    return NextResponse.json({ code: 'INVALID_CHECKOUT_REQUEST' }, { status: 400 })
+    console.error('[Checkout API] Stripe provider request failed:', error)
+    return NextResponse.json({ code: 'CHECKOUT_PROVIDER_ERROR' }, { status: 502 })
   }
+
+  if (!isRecord(session) || !isStripeCheckoutUrl(session.url)) {
+    return NextResponse.json({ code: 'CHECKOUT_PROVIDER_ERROR' }, { status: 502 })
+  }
+
+  if (typeof session.id === 'string') {
+    try {
+      const ph = getPostHogClient()
+      ph.capture({
+        distinctId: session.id,
+        event: 'checkout_session_created',
+        properties: {
+          offer_key: fixPack.checkout.offerKey,
+          stripe_session_id: session.id,
+        },
+      })
+      void ph.flush().catch(() => undefined)
+    } catch {
+      // Checkout must not depend on analytics client construction or delivery.
+    }
+  }
+
+  return NextResponse.json({ url: session.url })
 }

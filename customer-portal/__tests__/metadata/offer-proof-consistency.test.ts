@@ -131,7 +131,8 @@ describe('offer and proof consistency', () => {
     expect(checkoutButton).toContain("fetch(endpoint")
     expect(checkoutButton).not.toContain('buy.stripe.com')
     expect(checkoutApi).toContain("'metadata[offer_key]'")
-    expect(checkoutApi).toContain('STRIPE_FIX_PACK_PRICE_ID')
+    expect(checkoutApi).toContain("'line_items[0][price_data][unit_amount]'")
+    expect(checkoutApi).not.toContain('STRIPE_FIX_PACK_PRICE_ID')
 
     expect(webhook).toContain("from '@/app/lib/public-facts'")
     expect(webhook).not.toMatch(/FIX_PACK_AMOUNT_CENTS\s*=\s*9700/)

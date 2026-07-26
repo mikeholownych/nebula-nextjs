@@ -153,7 +153,6 @@ describe('production safety containment', () => {
 
   it('rejects arbitrary client-supplied checkout prices without contacting Stripe', async () => {
     process.env.STRIPE_SECRET_KEY = 'sk_test_configured'
-    process.env.STRIPE_FIX_PACK_PRICE_ID = 'price_fix_pack'
 
     const response = await checkoutPost(jsonRequest('http://localhost/api/checkout', {
       email: 'buyer@example.com',
@@ -176,21 +175,28 @@ describe('production safety containment', () => {
     expect(global.fetch).not.toHaveBeenCalled()
   })
 
-  it('fails checkout closed when the server-side Fix Pack price ID is absent', async () => {
+  it('does not depend on an opaque configured Stripe Price ID', async () => {
     process.env.STRIPE_SECRET_KEY = 'sk_test_configured'
     delete process.env.STRIPE_FIX_PACK_PRICE_ID
+    process.env.NEXT_PUBLIC_URL = 'https://nebulacomponents.shop'
+    ;(global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({
+        id: 'cs_test_registry_price',
+        url: 'https://checkout.stripe.com/c/pay/cs_test_registry_price',
+      }),
+    })
 
     const response = await checkoutPost(jsonRequest('http://localhost/api/checkout', {
       offerKey: 'fix-pack',
     }))
 
-    expect(response.status).toBe(503)
-    expect(global.fetch).not.toHaveBeenCalled()
+    expect(response.status).toBe(200)
+    expect(global.fetch).toHaveBeenCalledTimes(1)
   })
 
   it('fails checkout closed without a validated HTTPS production base URL', async () => {
     process.env.STRIPE_SECRET_KEY = '«redacted:sk_test_…»'
-    process.env.STRIPE_FIX_PACK_PRICE_ID = 'price_fix_pack'
     delete process.env.NEXT_PUBLIC_URL
 
     const response = await checkoutPost(jsonRequest('http://localhost/api/checkout', {
@@ -203,7 +209,6 @@ describe('production safety containment', () => {
 
   it('creates a server-side Stripe Checkout Session with canonical offer metadata', async () => {
     process.env.STRIPE_SECRET_KEY = 'sk_test_configured'
-    process.env.STRIPE_FIX_PACK_PRICE_ID = 'price_fix_pack'
     process.env.NEXT_PUBLIC_URL = 'https://nebulacomponents.shop'
     ;(global.fetch as jest.Mock).mockResolvedValueOnce({
       ok: true,
@@ -220,12 +225,36 @@ describe('production safety containment', () => {
     expect(response.status).toBe(200)
     const init = (global.fetch as jest.Mock).mock.calls[0][1] as RequestInit
     const body = new URLSearchParams(String(init.body))
-    expect(body.get('line_items[0][price]')).toBe('price_fix_pack')
+    expect(body.get('line_items[0][price]')).toBeNull()
+    expect(body.get('line_items[0][price_data][currency]')).toBe('usd')
+    expect(body.get('line_items[0][price_data][unit_amount]')).toBe('9700')
+    expect(body.get('line_items[0][price_data][product_data][name]')).toBe(
+      'Nebula Conversion Fix Pack',
+    )
+    expect(body.get('payment_method_types[0]')).toBe('card')
     expect(body.get('metadata[offer_key]')).toBe('fix-pack')
     expect(body.has('customer_email')).toBe(false)
     await expect(response.json()).resolves.toEqual({
       url: 'https://checkout.stripe.com/c/pay/cs_test_created',
     })
+  })
+
+  it.each([
+    ['network rejection', () => Promise.reject(new Error('network down'))],
+    ['invalid JSON', () => Promise.resolve({
+      ok: true,
+      json: async () => { throw new SyntaxError('invalid JSON') },
+    })],
+  ])('maps Stripe provider %s to 502', async (_label, providerResult) => {
+    process.env.STRIPE_SECRET_KEY = 'sk_test_configured'
+    process.env.NEXT_PUBLIC_URL = 'https://nebulacomponents.shop'
+    ;(global.fetch as jest.Mock).mockImplementationOnce(providerResult)
+
+    const response = await checkoutPost(jsonRequest('http://localhost/api/checkout', {
+      offerKey: 'fix-pack',
+    }))
+
+    expect(response.status).toBe(502)
   })
 
   it('does not process email from GET requests', async () => {

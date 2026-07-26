@@ -100,7 +100,7 @@ export default function CheckoutPage() {
           <h2 className="mb-3 mt-6 text-base font-semibold text-fg">Payment and security</h2>
           <p>
             Payment is processed by Stripe. Nebula Components does not handle, store, or transmit card
-            details. You can pay by card or any payment method Stripe supports in your region.
+            details. This checkout accepts card payments through Stripe.
             After payment, the fix pack is delivered within minutes — no account creation
             required.
           </p>

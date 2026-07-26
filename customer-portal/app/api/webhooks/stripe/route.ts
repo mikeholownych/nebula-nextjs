@@ -8,56 +8,52 @@ import { isCanonicalFixPackReceipt } from '@/app/lib/public-facts'
 
 const execFileAsync = promisify(execFile)
 
-// Real-time Telegram alert on a real (non-test-mode) checkout. Uses the same
-// `hermes send` mechanism as the Python side (sre_responder.py,
-// notify_production_health.py) — this repo has no Telegram bot token
-// configured, `hermes send` is the only working delivery path.
-// sre_responder.py also checks for new payments every 15 min as a backstop
-// in case this call fails silently (network blip, hermes gateway down, etc).
-async function sendSaleAlert(message: string): Promise<void> {
-  try {
-    await execFileAsync('hermes', ['send', '--to', 'telegram:5920497760', message], { timeout: 15_000 })
-  } catch (err) {
-    console.error('Sale alert failed to send:', err)
-  }
-}
-
-// Several other live Stripe payment links exist at other price points (an
-// "Audit Lite" offer, the $1,497 retainer, etc.) that this codebase has no
-// dedicated fulfillment for. Automatic delivery therefore requires the full
-// immutable canonical receipt: livemode, paid, USD, exact amount, and the
-// registry's offer identity. See scripts/deliver_prompt_pack.py.
-// Fulfillment: the Fix Pack offer is the audit + a full AI prompt pack, not
-// bespoke implementation — see scripts/deliver_prompt_pack.py for why and
-// how. Runs in the background (not awaited) so the webhook response to
-// Stripe isn't held up by a live re-scrape + email send; the script is
-// idempotent (checks the customer ledger before sending). The purchases insert
-// below is the primary one-time claim, so a duplicate Stripe session never
-// reaches delivery even if multiple webhook events are sent for it.
-async function deliverPromptPack(email: string): Promise<void> {
+async function sendCheckoutAlert(message: string): Promise<void> {
   try {
     await execFileAsync(
-      '/home/mike/nebula/venv/bin/python3',
-      ['/home/mike/nebula/scripts/deliver_prompt_pack.py', '--email', email],
-      { timeout: 120_000 }
+      'hermes',
+      ['send', '--to', 'telegram:5920497760', message],
+      { timeout: 15_000 },
     )
   } catch (err) {
-    console.error('Prompt pack fulfillment failed:', err)
+    console.error('Checkout alert failed to send:', err)
   }
 }
 
-/**
- * Stripe webhook handler
- * POST /api/webhooks/stripe
- * 
- * Handles:
- * - checkout.session.completed: Mark purchase as complete
- */
+// The database processing claim prevents concurrent dispatch. The delivery
+// script provides the second idempotency boundary, keyed by Stripe session ID,
+// for recovery after a successful send but before the DB can record delivered.
+async function deliverPromptPack(
+  email: string,
+  stripeSessionId: string,
+): Promise<void> {
+  await execFileAsync(
+    '/home/mike/nebula/venv/bin/python3',
+    [
+      '/home/mike/nebula/scripts/deliver_prompt_pack.py',
+      '--email',
+      email,
+      '--stripe-session-id',
+      stripeSessionId,
+    ],
+    { timeout: 120_000 },
+  )
+}
 
-// Constructed lazily inside the handler, not at module scope — a top-level
-// `new Stripe(...)` throws at import time whenever STRIPE_SECRET_KEY is
-// unset, which breaks Next.js's build-time page-data collection in any
-// environment without production secrets (e.g. CI).
+async function restoreFailedFulfillment(stripeSessionId: string): Promise<void> {
+  try {
+    await pool.query(
+      `UPDATE purchases
+       SET fulfillment_status = 'failed'
+       WHERE stripe_session_id = $1
+         AND fulfillment_status = 'processing'`,
+      [stripeSessionId],
+    )
+  } catch (statusError) {
+    console.error('Failed to restore retryable fulfillment state:', statusError)
+  }
+}
+
 function getStripeClient(): Stripe {
   return new Stripe(process.env.STRIPE_SECRET_KEY!, {
     apiVersion: '2026-06-24.dahlia',
@@ -71,33 +67,37 @@ export async function POST(request: NextRequest) {
   if (!signature) {
     return NextResponse.json(
       { error: 'Missing stripe-signature header' },
-      { status: 400 }
+      { status: 400 },
     )
   }
 
   let event: Stripe.Event
-
   try {
     event = getStripeClient().webhooks.constructEvent(
       body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET!
+      process.env.STRIPE_WEBHOOK_SECRET!,
     )
   } catch (err) {
     console.error('Webhook signature verification failed:', err)
-    return NextResponse.json(
-      { error: 'Invalid signature' },
-      { status: 400 }
-    )
+    return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
   }
 
   console.log(`Received Stripe event: ${event.type}`)
 
-  // Handle checkout.session.completed
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session
     const customerEmail =
       session.customer_email ?? session.customer_details?.email ?? null
+    const canonicalReceipt = isCanonicalFixPackReceipt({
+      livemode: event.livemode,
+      payment_status: session.payment_status,
+      currency: session.currency,
+      amount_total: session.amount_total,
+      metadata: session.metadata,
+    })
+    const canFulfill = canonicalReceipt && customerEmail !== null
+    const initialStatus = canFulfill ? 'pending' : 'review'
 
     console.log('Checkout completed:', {
       id: session.id,
@@ -106,16 +106,12 @@ export async function POST(request: NextRequest) {
       payment_status: session.payment_status,
     })
 
+    let inserted = false
     try {
-      // The returned row is the idempotency claim. A duplicate session returns
-      // no row and must not repeat alerts, analytics, or fulfillment. If the
-      // insert itself fails, returning 500 lets Stripe retry. Once persisted,
-      // the row remains `pending`, providing an explicit recovery queue if the
-      // background delivery command fails after this response.
       const insertResult = await pool.query(
         `INSERT INTO purchases
-          (stripe_session_id, stripe_event_id, customer_email, offer_key, amount_total, currency, payment_status)
-         VALUES ($1, $2, $3, $4, $5, $6, $7)
+          (stripe_session_id, stripe_event_id, customer_email, offer_key, amount_total, currency, payment_status, fulfillment_status)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
          ON CONFLICT (stripe_session_id) DO NOTHING
          RETURNING stripe_session_id`,
         [
@@ -126,72 +122,117 @@ export async function POST(request: NextRequest) {
           session.amount_total,
           session.currency,
           session.payment_status,
-        ]
+          initialStatus,
+        ],
       )
-      if (insertResult.rowCount !== 1) {
-        return NextResponse.json({ received: true, duplicate: true })
-      }
+      inserted = insertResult.rowCount === 1
     } catch (err) {
       console.error('Failed to persist purchase — will let Stripe retry:', err)
-      return NextResponse.json({ error: 'Failed to record purchase' }, { status: 500 })
+      return NextResponse.json(
+        { error: 'Failed to record purchase' },
+        { status: 500 },
+      )
     }
 
-    const canonicalReceipt = isCanonicalFixPackReceipt({
-      livemode: event.livemode,
-      payment_status: session.payment_status,
-      currency: session.currency,
-      amount_total: session.amount_total,
-      metadata: session.metadata,
-    })
-
-    if (event.livemode) {
-      const amount = session.amount_total != null
-        ? `$${(session.amount_total / 100).toFixed(2)}`
-        : 'unknown amount'
-      if (canonicalReceipt) {
-        void sendSaleAlert(
-          `💰 *SALE* — ${amount} — ${session.metadata?.offer_key ?? 'unknown offer'} — ${customerEmail ?? 'no email'}\n` +
-          `session: ${session.id}`
-        )
-      } else {
-        void sendSaleAlert(
+    if (!canFulfill) {
+      if (inserted && event.livemode) {
+        const amount = session.amount_total != null
+          ? `$${(session.amount_total / 100).toFixed(2)}`
+          : 'unknown amount'
+        void sendCheckoutAlert(
           `⚠️ *CHECKOUT REVIEW* — ${amount} — ${session.metadata?.offer_key ?? 'unknown offer'} — ${customerEmail ?? 'no email'}\n` +
-          `session: ${session.id}`
+          `session: ${session.id}`,
         )
       }
-
-      // A missing or unknown offer identity fails automatic delivery closed,
-      // but persistence and a clearly non-success review alert still happen.
-      // Public price expiry is deliberately not part of this predicate: a
-      // delayed receipt matching any versioned canonical tuple must fulfill.
-      if (customerEmail && canonicalReceipt) {
-        void deliverPromptPack(customerEmail)
-      }
+      return NextResponse.json({ received: true, review: true })
     }
 
-    if (customerEmail && canonicalReceipt) {
-      try {
-        const ph = getPostHogClient()
-        ph.identify({ distinctId: customerEmail, properties: {} })
-        ph.capture({
-          distinctId: customerEmail,
-          event: 'purchase_completed',
-          properties: {
-            stripe_session_id: session.id,
-            offer_key: session.metadata?.offer_key ?? undefined,
-            amount_total: session.amount_total,
-            currency: session.currency,
-            payment_status: session.payment_status,
-          },
-        })
-        await ph.flush()
-      } catch {
-        // Non-fatal
+    let claimed = false
+    try {
+      const claimResult = await pool.query(
+        `UPDATE purchases
+         SET fulfillment_status = 'processing'
+         WHERE stripe_session_id = $1
+           AND fulfillment_status IN ('pending', 'failed')
+         RETURNING stripe_session_id`,
+        [session.id],
+      )
+      claimed = claimResult.rowCount === 1
+    } catch (err) {
+      console.error('Failed to claim fulfillment — will let Stripe retry:', err)
+      return NextResponse.json(
+        { error: 'Failed to claim fulfillment' },
+        { status: 500 },
+      )
+    }
+
+    if (!claimed) {
+      return NextResponse.json({ received: true, duplicate: true })
+    }
+
+    try {
+      await deliverPromptPack(customerEmail, session.id)
+    } catch (err) {
+      console.error('Prompt pack fulfillment failed:', err)
+      await restoreFailedFulfillment(session.id)
+      return NextResponse.json(
+        { error: 'Fulfillment failed' },
+        { status: 500 },
+      )
+    }
+
+    try {
+      const deliveredResult = await pool.query(
+        `UPDATE purchases
+         SET fulfillment_status = 'delivered'
+         WHERE stripe_session_id = $1
+           AND fulfillment_status = 'processing'
+         RETURNING stripe_session_id`,
+        [session.id],
+      )
+      if (deliveredResult.rowCount !== 1) {
+        throw new Error('Fulfillment claim was lost before completion')
       }
+    } catch (err) {
+      console.error('Failed to record delivered fulfillment:', err)
+      // The delivery script's receipt-ID ledger makes this retry safe: on the
+      // next claim it exits successfully without sending the same receipt
+      // twice, allowing the DB state to advance to delivered.
+      await restoreFailedFulfillment(session.id)
+      return NextResponse.json(
+        { error: 'Failed to finalize fulfillment' },
+        { status: 500 },
+      )
+    }
+
+    const amount = session.amount_total != null
+      ? `$${(session.amount_total / 100).toFixed(2)}`
+      : 'unknown amount'
+    void sendCheckoutAlert(
+      `💰 *SALE* — ${amount} — ${session.metadata?.offer_key ?? 'unknown offer'} — ${customerEmail}\n` +
+      `session: ${session.id}`,
+    )
+
+    try {
+      const ph = getPostHogClient()
+      ph.identify({ distinctId: customerEmail, properties: {} })
+      ph.capture({
+        distinctId: customerEmail,
+        event: 'purchase_completed',
+        properties: {
+          stripe_session_id: session.id,
+          offer_key: session.metadata?.offer_key ?? undefined,
+          amount_total: session.amount_total,
+          currency: session.currency,
+          payment_status: session.payment_status,
+        },
+      })
+      await ph.flush()
+    } catch {
+      // Fulfillment must not depend on analytics.
     }
   }
 
-  // Handle invoice.payment_succeeded (for subscriptions)
   if (event.type === 'invoice.payment_succeeded') {
     const invoice = event.data.object as Stripe.Invoice
     console.log('Invoice payment succeeded:', {

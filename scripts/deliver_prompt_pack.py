@@ -11,7 +11,8 @@ claim true rather than just copy — it re-scrapes the real page, regenerates
 the full pack (audit_pipeline.prompts.generator.build_prompt_pack — the same
 generator that already produces the free teaser prompt), and emails it.
 
-Usage: venv/bin/python3 scripts/deliver_prompt_pack.py --email buyer@example.com
+Usage: venv/bin/python3 scripts/deliver_prompt_pack.py \
+  --email buyer@example.com --stripe-session-id cs_live_...
 """
 import argparse
 import json
@@ -56,9 +57,10 @@ def load_ledger_rows():
     return rows
 
 
-def already_delivered(email, rows):
+def already_delivered(stripe_session_id, rows):
     return any(
-        r.get("event_type") == "prompt_pack_delivered" and (r.get("email") or "").lower() == email.lower()
+        r.get("event_type") == "prompt_pack_delivered"
+        and r.get("stripe_session_id") == stripe_session_id
         for r in rows
     )
 
@@ -125,8 +127,13 @@ def compose_email(url, pack, audit):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--email", required=True)
+    parser.add_argument("--stripe-session-id", required=True)
     args = parser.parse_args()
     email = args.email.strip().lower()
+    stripe_session_id = args.stripe_session_id.strip()
+    if not stripe_session_id:
+        log("stripe session ID is required for idempotent delivery")
+        return 1
 
     try:
         from lead_store import LeadStore
@@ -141,8 +148,8 @@ def main():
         return 1
 
     rows = load_ledger_rows()
-    if already_delivered(email, rows):
-        log(f"{email} already has a prompt_pack_delivered record — skipping (idempotent)")
+    if already_delivered(stripe_session_id, rows):
+        log(f"{stripe_session_id} already has a prompt_pack_delivered record — skipping (idempotent)")
         return 0
 
     url = find_audited_url(email, rows)
@@ -184,6 +191,7 @@ def main():
     append_ledger({
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "event_type": "prompt_pack_delivered",
+        "stripe_session_id": stripe_session_id,
         "email": email,
         "url": url,
         "prompt_count": pack["count"],
