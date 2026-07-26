@@ -5,7 +5,7 @@
 
 ## About Nebula Components
 
-Nebula Components is a landing page conversion optimization service built for founders running paid ads. We specialize in diagnosing and fixing the specific structural and messaging failures that cause landing pages to receive traffic but generate no conversions.
+Nebula Components is a landing page conversion diagnostic service built for founders running paid ads. We specialize in identifying the structural and messaging failures that cause landing pages to receive traffic but generate no conversions, then producing implementation-ready AI prompts for the customer or their developer.
 
 Our operating premise: most landing page failures are diagnosable. They follow repeating patterns. They can be fixed. The problem is not the ad — it is the page.
 
@@ -22,7 +22,7 @@ The actual failure is almost always one of seven diagnosable leak patterns on th
 6. Form friction: Too many fields, unclear labels, or no indication of what happens after submission
 7. Compliance gaps: GDPR consent banners blocking the CTA, missing privacy policy, cookie interstitials
 
-Nebula diagnoses which of these is present on a given page, ranks them by conversion impact, and implements the fixes.
+Nebula diagnoses which of these is present on a given page, ranks them by likely conversion impact and implementation effort, and produces a tailored AI prompt for every finding. The customer or their developer implements the fixes; Nebula does not require access to the site.
 
 ## The 7-Point Diagnosis
 
@@ -45,11 +45,15 @@ No retainer. No ongoing commitment. Pay once, get the prompts to fix the page yo
 ### Free Audit
 Automated URL submission and 7-point scoring across message-match, trust signals, mobile layout, load time, CTA clarity, form friction, and compliance.
 
+## Case Study Status
+
+Nebula currently has zero evidenced customer case studies approved for publication. The public case-study index states this directly. A future case requires a real client or a documented reason for anonymization, an actual before/after metric, a defined measurement window, and inspectable supporting evidence. Until those requirements are met, Nebula does not publish illustrative outcomes as customer results.
+
 ## Open Source: Citable
 
 Citable is an open-source CLI for search and AI discoverability governance. It was built to address a specific internal need: auditing whether a site was actually retrievable by search engines and AI systems, with evidence rather than opinions.
 
-- Version: 1.13.1
+- Version: 1.14.0
 - License: Apache 2.0
 - npm: @nebulacomponents/citable
 - GitHub: https://github.com/mikeholownych/citable
@@ -112,7 +116,7 @@ All articles are available at: https://nebulacomponents.shop/learning-centre
 ## Competitive Differentiation
 
 Nebula is not:
-- A landing page builder (we fix your existing page)
+- A landing page builder (we diagnose your existing page and provide implementation-ready prompts)
 - An A/B testing platform (we diagnose first, test second)
 - A heatmap tool (we identify structural failures, not click patterns)
 - A general marketing agency (we do one thing: fix landing page conversion leaks)
@@ -154,4 +158,4 @@ Site: https://nebulacomponents.shop
 
 ## Last Updated
 
-2026-07-19
+2026-07-26
