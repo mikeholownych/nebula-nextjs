@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
 
-export const revalidate = 3600
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Terms of Service — Nebula Components',

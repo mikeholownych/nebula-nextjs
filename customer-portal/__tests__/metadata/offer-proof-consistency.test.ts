@@ -102,7 +102,8 @@ describe('offer and proof consistency', () => {
     ]) {
       const source = read(relative)
       expect(source).not.toMatch(/^const fixPack\s*=\s*getActiveFixPack\(\)/m)
-      expect(source).toMatch(/export const revalidate\s*=/)
+      expect(source).toMatch(/export const dynamic\s*=\s*['"]force-dynamic['"]/)
+      expect(source).not.toMatch(/export const revalidate\s*=/)
     }
   })
 
@@ -117,6 +118,8 @@ describe('offer and proof consistency', () => {
   test('transactional validation and structured offer data derive from the registry', () => {
     const pricing = read('app/pricing/page.tsx')
     const checkout = read('app/checkout/page.tsx')
+    const checkoutButton = read('app/checkout/CheckoutCTAButton.tsx')
+    const checkoutApi = read('app/api/checkout/route.ts')
     const webhook = read('app/api/webhooks/stripe/route.ts')
 
     expect(pricing).toContain("from '@/app/lib/public-facts'")
@@ -125,6 +128,10 @@ describe('offer and proof consistency', () => {
 
     expect(checkout).toContain("from '@/app/lib/public-facts'")
     expect(checkout).not.toMatch(/const STRIPE_FIX_PACK_LINK\s*=\s*['"]/)
+    expect(checkoutButton).toContain("fetch(endpoint")
+    expect(checkoutButton).not.toContain('buy.stripe.com')
+    expect(checkoutApi).toContain("'metadata[offer_key]'")
+    expect(checkoutApi).toContain('STRIPE_FIX_PACK_PRICE_ID')
 
     expect(webhook).toContain("from '@/app/lib/public-facts'")
     expect(webhook).not.toMatch(/FIX_PACK_AMOUNT_CENTS\s*=\s*9700/)

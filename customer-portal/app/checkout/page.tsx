@@ -4,7 +4,7 @@ import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
 import { Card } from '@/components/ui'
 import CheckoutCTAButton from './CheckoutCTAButton'
 
-export const revalidate = 3600
+export const dynamic = 'force-dynamic'
 
 export function generateMetadata(): Metadata {
   const fixPack = getActiveFixPack()
@@ -64,7 +64,12 @@ export default function CheckoutPage() {
           </Card>
         )}
 
-        {fixPack && <CheckoutCTAButton href={fixPack.checkout.url} />}
+        {fixPack && (
+          <CheckoutCTAButton
+            endpoint={fixPack.checkout.sessionEndpoint}
+            offerKey={fixPack.checkout.offerKey}
+          />
+        )}
 
         <p className="mt-6 text-center text-sm text-fg-muted">
           Card details are entered only on Stripe. Nebula does not collect or store payment information.
@@ -96,8 +101,8 @@ export default function CheckoutPage() {
           <p>
             Payment is processed by Stripe. Nebula Components does not handle, store, or transmit card
             details. You can pay by card or any payment method Stripe supports in your region.
-            After payment, access to the fix pack is immediate — no
-            account creation required.
+            After payment, the fix pack is delivered within minutes — no account creation
+            required.
           </p>
         </section>}
       </div>

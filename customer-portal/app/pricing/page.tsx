@@ -7,7 +7,7 @@ import {
 } from '@/app/lib/public-facts'
 import { Card, PageShell } from '@/components/ui'
 
-export const revalidate = 3600
+export const dynamic = 'force-dynamic'
 
 export function generateMetadata(): Metadata {
   const fixPack = getActiveFixPack()
@@ -38,7 +38,7 @@ function buildServiceSchema(fixPack: FixPackPublicFact) {
     price: String(fixPack.priceCents / 100),
     priceCurrency: fixPack.currency,
     availability: 'https://schema.org/InStock',
-    url: fixPack.checkout.url,
+    url: `https://nebulacomponents.shop${fixPack.checkout.pagePath}`,
     priceValidUntil: fixPack.priceValidUntil,
   },
   hasOfferCatalog: {

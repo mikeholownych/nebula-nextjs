@@ -5,10 +5,13 @@ export type FixPackPublicFact = {
   priceCents: number
   currency: 'USD'
   priceValidUntil: string
+  fulfillmentReceiptId: string
   checkout: {
     provider: 'stripe'
-    offerKey: 'fix-pack'
-    url: string
+    mode: 'checkout_session'
+    offerKey: string
+    pagePath: '/checkout'
+    sessionEndpoint: '/api/checkout'
   }
   delivery: {
     artifact: 'tailored_prompt_pack'
@@ -25,11 +28,17 @@ export type FixPackPublicFact = {
   }
 }
 
-export type FixPackFulfillmentFacts = {
+export type FixPackReceiptFact = {
+  id: string
   provider: 'stripe'
   amountCents: number
   currency: 'usd'
-  offerKey: 'fix-pack'
+  offerKey: string
+}
+
+export type FixPackFulfillmentFacts = {
+  currentReceiptId: string
+  receipts: readonly FixPackReceiptFact[]
 }
 
 export type PublishedCaseStudy = {
@@ -71,11 +80,19 @@ export type CitablePublicFacts = {
   deploymentCheck: 'unknown'
 }
 
-const fixPackFulfillment = {
+const currentFixPackReceipt = {
+  id: 'fix-pack-usd-97-2026',
   provider: 'stripe',
   amountCents: 9700,
   currency: 'usd',
   offerKey: 'fix-pack',
+} as const satisfies FixPackReceiptFact
+
+const fixPackFulfillment = {
+  currentReceiptId: currentFixPackReceipt.id,
+  // Append-only receipt history. Replacing the public offer must not make a
+  // delayed or retried payment for a retired offer impossible to fulfill.
+  receipts: [currentFixPackReceipt],
 } as const satisfies FixPackFulfillmentFacts
 
 export const publicFacts = {
@@ -85,13 +102,16 @@ export const publicFacts = {
   fixPackFulfillment,
   fixPack: {
     status: 'active',
-    priceCents: fixPackFulfillment.amountCents,
+    priceCents: currentFixPackReceipt.amountCents,
     currency: 'USD',
     priceValidUntil: '2026-12-31',
+    fulfillmentReceiptId: currentFixPackReceipt.id,
     checkout: {
-      provider: fixPackFulfillment.provider,
-      offerKey: fixPackFulfillment.offerKey,
-      url: 'https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h',
+      provider: currentFixPackReceipt.provider,
+      mode: 'checkout_session',
+      offerKey: currentFixPackReceipt.offerKey,
+      pagePath: '/checkout',
+      sessionEndpoint: '/api/checkout',
     },
     delivery: {
       artifact: 'tailored_prompt_pack',
@@ -146,13 +166,19 @@ const isIsoDate = (value: unknown): value is string => {
   )
 }
 
-function isValidFixPack(value: unknown, at: Date): value is FixPackPublicFact {
+function isValidFixPack(
+  value: unknown,
+  currentReceipt: FixPackReceiptFact,
+  at: Date,
+): value is FixPackPublicFact {
   if (!isRecord(value)) return false
   if (
     value.status !== 'active' ||
     !isPositiveInteger(value.priceCents) ||
     value.currency !== 'USD' ||
-    !isIsoDate(value.priceValidUntil)
+    !isIsoDate(value.priceValidUntil) ||
+    value.fulfillmentReceiptId !== currentReceipt.id ||
+    value.priceCents !== currentReceipt.amountCents
   ) return false
 
   const validUntil = new Date(`${value.priceValidUntil}T23:59:59.999Z`)
@@ -165,22 +191,11 @@ function isValidFixPack(value: unknown, at: Date): value is FixPackPublicFact {
   if (
     !isRecord(checkout) ||
     checkout.provider !== 'stripe' ||
-    checkout.offerKey !== 'fix-pack' ||
-    !isNonEmptyString(checkout.url)
+    checkout.mode !== 'checkout_session' ||
+    checkout.offerKey !== currentReceipt.offerKey ||
+    checkout.pagePath !== '/checkout' ||
+    checkout.sessionEndpoint !== '/api/checkout'
   ) return false
-
-  try {
-    const checkoutUrl = new URL(checkout.url)
-    if (
-      checkoutUrl.protocol !== 'https:' ||
-      checkoutUrl.hostname !== 'buy.stripe.com' ||
-      checkoutUrl.port !== '' ||
-      checkoutUrl.username !== '' ||
-      checkoutUrl.password !== ''
-    ) return false
-  } catch {
-    return false
-  }
 
   return (
     isRecord(delivery) &&
@@ -201,8 +216,15 @@ export function getActiveFixPack(
   at: Date = new Date(),
 ): FixPackPublicFact | undefined {
   if (!isRecord(source)) return undefined
-  if (!getFixPackFulfillmentFacts(source)) return undefined
-  return isValidFixPack(source.fixPack, at) ? source.fixPack : undefined
+  const fulfillment = getFixPackFulfillmentFacts(source)
+  if (!fulfillment) return undefined
+  const currentReceipt = fulfillment.receipts.find(
+    (receipt) => receipt.id === fulfillment.currentReceiptId,
+  )
+  if (!currentReceipt) return undefined
+  return isValidFixPack(source.fixPack, currentReceipt, at)
+    ? source.fixPack
+    : undefined
 }
 
 function getFixPackFulfillmentFacts(
@@ -210,27 +232,37 @@ function getFixPackFulfillmentFacts(
 ): FixPackFulfillmentFacts | undefined {
   if (
     !isRecord(source) ||
-    !isRecord(source.fixPackFulfillment) ||
-    !isRecord(source.fixPack)
+    !isRecord(source.fixPackFulfillment)
   ) return undefined
 
   const fulfillment = source.fixPackFulfillment
-  const fixPack = source.fixPack
-  const checkout = fixPack.checkout
-  if (!isRecord(checkout)) return undefined
-
   if (
-    fulfillment.provider !== 'stripe' ||
-    !isPositiveInteger(fulfillment.amountCents) ||
-    fulfillment.currency !== 'usd' ||
-    fulfillment.offerKey !== 'fix-pack' ||
-    fixPack.priceCents !== fulfillment.amountCents ||
-    fixPack.currency !== 'USD' ||
-    checkout.provider !== fulfillment.provider ||
-    checkout.offerKey !== fulfillment.offerKey
+    !isNonEmptyString(fulfillment.currentReceiptId) ||
+    !Array.isArray(fulfillment.receipts) ||
+    fulfillment.receipts.length === 0
   ) return undefined
 
-  return fulfillment as FixPackFulfillmentFacts
+  const ids = new Set<string>()
+  const receipts: FixPackReceiptFact[] = []
+  for (const value of fulfillment.receipts) {
+    if (
+      !isRecord(value) ||
+      !isNonEmptyString(value.id) ||
+      value.provider !== 'stripe' ||
+      !isPositiveInteger(value.amountCents) ||
+      value.currency !== 'usd' ||
+      !isNonEmptyString(value.offerKey) ||
+      ids.has(value.id)
+    ) return undefined
+    ids.add(value.id)
+    receipts.push(value as FixPackReceiptFact)
+  }
+  if (!ids.has(fulfillment.currentReceiptId)) return undefined
+
+  return {
+    currentReceiptId: fulfillment.currentReceiptId,
+    receipts,
+  }
 }
 
 export function isCanonicalFixPackReceipt(
@@ -239,14 +271,21 @@ export function isCanonicalFixPackReceipt(
 ): boolean {
   const fulfillment = getFixPackFulfillmentFacts(source)
   if (!fulfillment || !isRecord(receipt) || !isRecord(receipt.metadata)) return false
-
-  return (
+  const metadata = receipt.metadata
+  if (
     receipt.livemode === true &&
     receipt.payment_status === 'paid' &&
-    receipt.currency === fulfillment.currency &&
-    receipt.amount_total === fulfillment.amountCents &&
-    receipt.metadata.offer_key === fulfillment.offerKey
-  )
+    typeof receipt.currency === 'string' &&
+    typeof receipt.amount_total === 'number' &&
+    typeof metadata.offer_key === 'string'
+  ) {
+    return fulfillment.receipts.some((fact) => (
+      receipt.currency === fact.currency &&
+      receipt.amount_total === fact.amountCents &&
+      metadata.offer_key === fact.offerKey
+    ))
+  }
+  return false
 }
 
 function isPublishedCaseStudy(value: unknown): value is PublishedCaseStudy {

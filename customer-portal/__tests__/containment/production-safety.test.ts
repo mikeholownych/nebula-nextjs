@@ -153,6 +153,7 @@ describe('production safety containment', () => {
 
   it('rejects arbitrary client-supplied checkout prices without contacting Stripe', async () => {
     process.env.STRIPE_SECRET_KEY = 'sk_test_configured'
+    process.env.STRIPE_FIX_PACK_PRICE_ID = 'price_fix_pack'
 
     const response = await checkoutPost(jsonRequest('http://localhost/api/checkout', {
       email: 'buyer@example.com',
@@ -175,18 +176,56 @@ describe('production safety containment', () => {
     expect(global.fetch).not.toHaveBeenCalled()
   })
 
+  it('fails checkout closed when the server-side Fix Pack price ID is absent', async () => {
+    process.env.STRIPE_SECRET_KEY = 'sk_test_configured'
+    delete process.env.STRIPE_FIX_PACK_PRICE_ID
+
+    const response = await checkoutPost(jsonRequest('http://localhost/api/checkout', {
+      offerKey: 'fix-pack',
+    }))
+
+    expect(response.status).toBe(503)
+    expect(global.fetch).not.toHaveBeenCalled()
+  })
+
   it('fails checkout closed without a validated HTTPS production base URL', async () => {
     process.env.STRIPE_SECRET_KEY = '«redacted:sk_test_…»'
     process.env.STRIPE_FIX_PACK_PRICE_ID = 'price_fix_pack'
     delete process.env.NEXT_PUBLIC_URL
 
     const response = await checkoutPost(jsonRequest('http://localhost/api/checkout', {
-      email: 'buyer@example.com',
       offerKey: 'fix-pack',
     }))
 
     expect(response.status).toBe(503)
     expect(global.fetch).not.toHaveBeenCalled()
+  })
+
+  it('creates a server-side Stripe Checkout Session with canonical offer metadata', async () => {
+    process.env.STRIPE_SECRET_KEY = 'sk_test_configured'
+    process.env.STRIPE_FIX_PACK_PRICE_ID = 'price_fix_pack'
+    process.env.NEXT_PUBLIC_URL = 'https://nebulacomponents.shop'
+    ;(global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({
+        id: 'cs_test_created',
+        url: 'https://checkout.stripe.com/c/pay/cs_test_created',
+      }),
+    })
+
+    const response = await checkoutPost(jsonRequest('http://localhost/api/checkout', {
+      offerKey: 'fix-pack',
+    }))
+
+    expect(response.status).toBe(200)
+    const init = (global.fetch as jest.Mock).mock.calls[0][1] as RequestInit
+    const body = new URLSearchParams(String(init.body))
+    expect(body.get('line_items[0][price]')).toBe('price_fix_pack')
+    expect(body.get('metadata[offer_key]')).toBe('fix-pack')
+    expect(body.has('customer_email')).toBe(false)
+    await expect(response.json()).resolves.toEqual({
+      url: 'https://checkout.stripe.com/c/pay/cs_test_created',
+    })
   })
 
   it('does not process email from GET requests', async () => {
@@ -220,19 +259,11 @@ describe('production safety containment', () => {
     expect(global.fetch).not.toHaveBeenCalled()
   })
 
-  it('uses only the verified canonical Stripe Payment Link on the checkout page', () => {
+  it('starts server-created Stripe Checkout from the canonical checkout page', () => {
     const { container } = render(React.createElement(CheckoutPage))
 
-    // 2026-07-24: rotated off plink_1TsYoeEINR1kU9chNMFuKhDu — that link's
-    // only price was $147 (price_1TsYoeEINR1kU9chokWZFetZ), not the $97
-    // advertised everywhere on the site (confirmed live via `stripe
-    // payment_links retrieve` / `stripe prices list`). That link is now
-    // deactivated in Stripe. This is the replacement, charging the correct
-    // $97 (price_1TwYwlEINR1kU9chLpOPfOJD) on the same underlying product.
-    expect(screen.getByRole('link', { name: /continue to secure stripe checkout/i })).toHaveAttribute(
-      'href',
-      'https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h',
-    )
+    expect(screen.getByRole('button', { name: /continue to secure stripe checkout/i })).toBeInTheDocument()
+    expect(container.innerHTML).not.toContain('buy.stripe.com')
     expect(screen.queryByText(/^card details$/i)).not.toBeInTheDocument()
     expect(container.querySelector('a button')).toBeNull()
   })

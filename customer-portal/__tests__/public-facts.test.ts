@@ -20,10 +20,13 @@ describe('canonical public facts', () => {
       priceCents: 9700,
       currency: 'USD',
       priceValidUntil: '2026-12-31',
+      fulfillmentReceiptId: 'fix-pack-usd-97-2026',
       checkout: {
         provider: 'stripe',
+        mode: 'checkout_session',
         offerKey: 'fix-pack',
-        url: 'https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h',
+        pagePath: '/checkout',
+        sessionEndpoint: '/api/checkout',
       },
       delivery: {
         artifact: 'tailored_prompt_pack',
@@ -49,9 +52,10 @@ describe('canonical public facts', () => {
     ['unsupported manual delivery', (facts: any) => { facts.fixPack.delivery.method = 'manual' }],
     ['bespoke implementation', (facts: any) => { facts.fixPack.implementation.owner = 'nebula' }],
     ['missing checkout identity', (facts: any) => { delete facts.fixPack.checkout.offerKey }],
-    ['non-HTTPS checkout', (facts: any) => { facts.fixPack.checkout.url = 'http://example.com/pay' }],
-    ['non-Stripe HTTPS checkout', (facts: any) => { facts.fixPack.checkout.url = 'https://example.com/pay' }],
-    ['spoofed Stripe checkout host', (facts: any) => { facts.fixPack.checkout.url = 'https://buy.stripe.com.example.com/pay' }],
+    ['external checkout endpoint', (facts: any) => { facts.fixPack.checkout.sessionEndpoint = 'https://example.com/pay' }],
+    ['wrong checkout endpoint', (facts: any) => { facts.fixPack.checkout.sessionEndpoint = '/api/other' }],
+    ['wrong checkout mode', (facts: any) => { facts.fixPack.checkout.mode = 'payment_link' }],
+    ['missing fulfillment receipt', (facts: any) => { facts.fixPack.fulfillmentReceiptId = 'unknown' }],
     ['unknown re-audit status', (facts: any) => { facts.fixPack.reAudit.status = 'unknown' }],
   ])('omits an %s Fix Pack fact', (_label, mutate) => {
     const facts = cloneFacts() as any
@@ -197,5 +201,41 @@ describe('canonical public facts', () => {
       amount_total: publicFacts.fixPack.priceCents,
       metadata: { offer_key: publicFacts.fixPack.checkout.offerKey },
     })).toBe(true)
+  })
+
+  test('preserves retired receipt tuples when a successor offer becomes current', () => {
+    const facts = cloneFacts() as any
+    facts.fixPackFulfillment.currentReceiptId = 'fix-pack-usd-147-2027'
+    facts.fixPackFulfillment.receipts.push({
+      id: 'fix-pack-usd-147-2027',
+      provider: 'stripe',
+      amountCents: 14700,
+      currency: 'usd',
+      offerKey: 'fix-pack-2027',
+    })
+    facts.fixPack.priceCents = 14700
+    facts.fixPack.priceValidUntil = '2027-12-31'
+    facts.fixPack.fulfillmentReceiptId = 'fix-pack-usd-147-2027'
+    facts.fixPack.checkout.offerKey = 'fix-pack-2027'
+
+    expect(getActiveFixPack(facts, new Date('2027-06-01T00:00:00.000Z'))).toMatchObject({
+      priceCents: 14700,
+      fulfillmentReceiptId: 'fix-pack-usd-147-2027',
+      checkout: { offerKey: 'fix-pack-2027' },
+    })
+    expect(publicFactsModule.isCanonicalFixPackReceipt({
+      livemode: true,
+      payment_status: 'paid',
+      currency: 'usd',
+      amount_total: 9700,
+      metadata: { offer_key: 'fix-pack' },
+    }, facts)).toBe(true)
+    expect(publicFactsModule.isCanonicalFixPackReceipt({
+      livemode: true,
+      payment_status: 'paid',
+      currency: 'usd',
+      amount_total: 14700,
+      metadata: { offer_key: 'fix-pack-2027' },
+    }, facts)).toBe(true)
   })
 })

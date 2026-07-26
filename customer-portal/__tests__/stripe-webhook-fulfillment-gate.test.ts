@@ -16,20 +16,27 @@ const execFileMock = jest.fn((..._args: unknown[]) => {
   cb(null, { stdout: '', stderr: '' })
 })
 
+const hermesMessage = (call: readonly unknown[]): string => {
+  const args = call[1]
+  return Array.isArray(args) ? String(args[3]) : ''
+}
+
 jest.mock('child_process', () => ({
   execFile: (...args: unknown[]) => execFileMock(...args),
 }))
 
-const queryMock = jest.fn().mockResolvedValue({ rows: [] })
+const queryMock = jest.fn()
 jest.mock('@/app/lib/db', () => ({
   pool: { query: (...args: unknown[]) => queryMock(...args) },
 }))
 
 const flush = jest.fn().mockResolvedValue(undefined)
+const identifyMock = jest.fn()
+const captureMock = jest.fn()
 jest.mock('@/app/lib/posthog-server', () => ({
   getPostHogClient: () => ({
-    identify: jest.fn(),
-    capture: jest.fn(),
+    identify: identifyMock,
+    capture: captureMock,
     flush,
   }),
 }))
@@ -74,7 +81,13 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
   beforeEach(() => {
     jest.resetModules()
     execFileMock.mockClear()
-    queryMock.mockClear()
+    queryMock.mockReset().mockResolvedValue({
+      rowCount: 1,
+      rows: [{ stripe_session_id: 'cs_live_test' }],
+    })
+    identifyMock.mockClear()
+    captureMock.mockClear()
+    flush.mockClear()
     process.env.STRIPE_SECRET_KEY = 'sk_test_x'
     process.env.STRIPE_WEBHOOK_SECRET = 'whsec_x'
   })
@@ -94,6 +107,11 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     expect(pythonCalls).toHaveLength(1)
     expect(pythonCalls[0][1]).toEqual(
       expect.arrayContaining(['--email', 'buyer@example.com'])
+    )
+    const hermesCall = execFileMock.mock.calls.find((call) => call[0] === 'hermes')
+    expect(hermesCall ? hermesMessage(hermesCall) : '').toContain('*SALE*')
+    expect(captureMock).toHaveBeenCalledWith(
+      expect.objectContaining({ event: 'purchase_completed' }),
     )
   })
 
@@ -127,7 +145,7 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     ['missing offer identity', { metadata: {} }],
     ['missing metadata', { metadata: undefined }],
     ['wrong offer identity', { metadata: { offer_key: 'other-offer' } }],
-  ])('fails automatic delivery closed for %s while retaining persistence and alerting', async (
+  ])('fails automatic delivery closed for %s while retaining persistence and review alerting', async (
     _label,
     overrides,
   ) => {
@@ -141,6 +159,11 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     const hermesCalls = execFileMock.mock.calls.filter((c) => c[0] === 'hermes')
     expect(pythonCalls).toHaveLength(0)
     expect(hermesCalls).toHaveLength(1)
+    expect(hermesMessage(hermesCalls[0])).toContain('*CHECKOUT REVIEW*')
+    expect(hermesMessage(hermesCalls[0])).not.toContain('*SALE*')
+    expect(captureMock).not.toHaveBeenCalledWith(
+      expect.objectContaining({ event: 'purchase_completed' }),
+    )
     expect(queryMock).toHaveBeenCalledTimes(1)
   })
 
@@ -158,7 +181,7 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     expect(pythonCalls).toHaveLength(1)
   })
 
-  it('still sends the sale alert for a non-$97 purchase so a human sees it', async () => {
+  it('sends a review alert for a non-$97 purchase so a human sees it without a false sale label', async () => {
     mockConstructEvent(makeSession({ amount_total: 149700 }))
     await postWebhook()
 
@@ -167,6 +190,8 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     expect(hermesCalls[0][1]).toEqual(
       expect.arrayContaining(['send', '--to', 'telegram:5920497760'])
     )
+    expect(hermesMessage(hermesCalls[0])).toContain('*CHECKOUT REVIEW*')
+    expect(hermesMessage(hermesCalls[0])).not.toContain('*SALE*')
   })
 
   it('does not fulfill or alert for test-mode ($97-equivalent) events', async () => {
@@ -174,5 +199,58 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     await postWebhook()
 
     expect(execFileMock).not.toHaveBeenCalled()
+  })
+
+  it('uses customer_details.email when customer_email is absent', async () => {
+    mockConstructEvent(makeSession({
+      customer_email: null,
+      customer_details: { email: 'details@example.com' },
+    }))
+
+    await postWebhook()
+
+    const pythonCalls = execFileMock.mock.calls.filter((call) =>
+      String(call[0]).includes('venv/bin/python3')
+    )
+    expect(pythonCalls).toHaveLength(1)
+    expect(pythonCalls[0][1]).toEqual(
+      expect.arrayContaining(['--email', 'details@example.com']),
+    )
+    expect(queryMock.mock.calls[0][1][2]).toBe('details@example.com')
+  })
+
+  it('does not deliver, alert, or capture a purchase twice for a duplicate Stripe session', async () => {
+    queryMock
+      .mockResolvedValueOnce({
+        rowCount: 1,
+        rows: [{ stripe_session_id: 'cs_live_test' }],
+      })
+      .mockResolvedValueOnce({ rowCount: 0, rows: [] })
+    mockConstructEvent(makeSession())
+
+    const first = await postWebhook()
+    const second = await postWebhook()
+
+    expect(first.status).toBe(200)
+    expect(second.status).toBe(200)
+    expect(queryMock).toHaveBeenCalledTimes(2)
+    expect(execFileMock.mock.calls.filter((call) =>
+      String(call[0]).includes('venv/bin/python3')
+    )).toHaveLength(1)
+    expect(execFileMock.mock.calls.filter((call) => call[0] === 'hermes')).toHaveLength(1)
+    expect(captureMock.mock.calls.filter((call) =>
+      call[0]?.event === 'purchase_completed'
+    )).toHaveLength(1)
+  })
+
+  it('returns 500 before side effects when persistence fails so Stripe can retry safely', async () => {
+    queryMock.mockRejectedValueOnce(new Error('database unavailable'))
+    mockConstructEvent(makeSession())
+
+    const response = await postWebhook()
+
+    expect(response.status).toBe(500)
+    expect(execFileMock).not.toHaveBeenCalled()
+    expect(captureMock).not.toHaveBeenCalled()
   })
 })

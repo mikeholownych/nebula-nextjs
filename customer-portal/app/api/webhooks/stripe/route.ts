@@ -8,7 +8,7 @@ import { isCanonicalFixPackReceipt } from '@/app/lib/public-facts'
 
 const execFileAsync = promisify(execFile)
 
-// Real-time Telegram alert on a real (non-test-mode) sale. Uses the same
+// Real-time Telegram alert on a real (non-test-mode) checkout. Uses the same
 // `hermes send` mechanism as the Python side (sre_responder.py,
 // notify_production_health.py) — this repo has no Telegram bot token
 // configured, `hermes send` is the only working delivery path.
@@ -31,8 +31,9 @@ async function sendSaleAlert(message: string): Promise<void> {
 // bespoke implementation — see scripts/deliver_prompt_pack.py for why and
 // how. Runs in the background (not awaited) so the webhook response to
 // Stripe isn't held up by a live re-scrape + email send; the script is
-// idempotent (checks the customer ledger before sending) so a Stripe
-// webhook retry can't cause a duplicate delivery.
+// idempotent (checks the customer ledger before sending). The purchases insert
+// below is the primary one-time claim, so a duplicate Stripe session never
+// reaches delivery even if multiple webhook events are sent for it.
 async function deliverPromptPack(email: string): Promise<void> {
   try {
     await execFileAsync(
@@ -95,68 +96,85 @@ export async function POST(request: NextRequest) {
   // Handle checkout.session.completed
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session
+    const customerEmail =
+      session.customer_email ?? session.customer_details?.email ?? null
 
     console.log('Checkout completed:', {
       id: session.id,
-      customer_email: session.customer_email,
+      customer_email: customerEmail,
       amount_total: session.amount_total,
       payment_status: session.payment_status,
     })
 
     try {
-      // ON CONFLICT DO NOTHING makes this safe against Stripe's at-least-once
-      // webhook delivery (retries would otherwise insert duplicate purchases).
-      await pool.query(
+      // The returned row is the idempotency claim. A duplicate session returns
+      // no row and must not repeat alerts, analytics, or fulfillment. If the
+      // insert itself fails, returning 500 lets Stripe retry. Once persisted,
+      // the row remains `pending`, providing an explicit recovery queue if the
+      // background delivery command fails after this response.
+      const insertResult = await pool.query(
         `INSERT INTO purchases
           (stripe_session_id, stripe_event_id, customer_email, offer_key, amount_total, currency, payment_status)
          VALUES ($1, $2, $3, $4, $5, $6, $7)
-         ON CONFLICT (stripe_session_id) DO NOTHING`,
+         ON CONFLICT (stripe_session_id) DO NOTHING
+         RETURNING stripe_session_id`,
         [
           session.id,
           event.id,
-          session.customer_email,
+          customerEmail,
           session.metadata?.offer_key ?? null,
           session.amount_total,
           session.currency,
           session.payment_status,
         ]
       )
+      if (insertResult.rowCount !== 1) {
+        return NextResponse.json({ received: true, duplicate: true })
+      }
     } catch (err) {
       console.error('Failed to persist purchase — will let Stripe retry:', err)
       return NextResponse.json({ error: 'Failed to record purchase' }, { status: 500 })
     }
 
+    const canonicalReceipt = isCanonicalFixPackReceipt({
+      livemode: event.livemode,
+      payment_status: session.payment_status,
+      currency: session.currency,
+      amount_total: session.amount_total,
+      metadata: session.metadata,
+    })
+
     if (event.livemode) {
       const amount = session.amount_total != null
         ? `$${(session.amount_total / 100).toFixed(2)}`
         : 'unknown amount'
-      void sendSaleAlert(
-        `💰 *SALE* — ${amount} — ${session.metadata?.offer_key ?? 'unknown offer'} — ${session.customer_email ?? 'no email'}\n` +
-        `session: ${session.id}`
-      )
+      if (canonicalReceipt) {
+        void sendSaleAlert(
+          `💰 *SALE* — ${amount} — ${session.metadata?.offer_key ?? 'unknown offer'} — ${customerEmail ?? 'no email'}\n` +
+          `session: ${session.id}`
+        )
+      } else {
+        void sendSaleAlert(
+          `⚠️ *CHECKOUT REVIEW* — ${amount} — ${session.metadata?.offer_key ?? 'unknown offer'} — ${customerEmail ?? 'no email'}\n` +
+          `session: ${session.id}`
+        )
+      }
 
       // A missing or unknown offer identity fails automatic delivery closed,
-      // but persistence and the sale alert above still happen so the receipt
-      // can be investigated manually. Public price expiry is deliberately not
-      // part of this predicate: a delayed receipt that was already paid and
-      // matches every immutable canonical fact must fulfill deterministically.
-      if (session.customer_email && isCanonicalFixPackReceipt({
-        livemode: event.livemode,
-        payment_status: session.payment_status,
-        currency: session.currency,
-        amount_total: session.amount_total,
-        metadata: session.metadata,
-      })) {
-        void deliverPromptPack(session.customer_email)
+      // but persistence and a clearly non-success review alert still happen.
+      // Public price expiry is deliberately not part of this predicate: a
+      // delayed receipt matching any versioned canonical tuple must fulfill.
+      if (customerEmail && canonicalReceipt) {
+        void deliverPromptPack(customerEmail)
       }
     }
 
-    if (session.customer_email) {
+    if (customerEmail && canonicalReceipt) {
       try {
         const ph = getPostHogClient()
-        ph.identify({ distinctId: session.customer_email, properties: {} })
+        ph.identify({ distinctId: customerEmail, properties: {} })
         ph.capture({
-          distinctId: session.customer_email,
+          distinctId: customerEmail,
           event: 'purchase_completed',
           properties: {
             stripe_session_id: session.id,
