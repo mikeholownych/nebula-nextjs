@@ -272,7 +272,7 @@ git commit -m "feat: package landing page intelligence stack"
 - Consumes: static ZIP path from Task 1, `createArticleSchema`, shared Tailwind tokens, and `/audit`.
 - Produces: canonical route `/learning-centre/landing-page-intelligence-stack`, stable test IDs `intelligence-stack-download-link` and `intelligence-stack-audit-link`.
 
-- [ ] **Step 1: Add failing public-surface tests**
+- [x] **Step 1: Add failing public-surface tests**
 
 Extend the targeted Jest file to read `page.tsx` and `meta.json`, then assert:
 
@@ -295,11 +295,11 @@ Add the new page path to the evidence-integrity combined files and superlative c
 
 Run the targeted test and expect FAIL because the route does not exist.
 
-- [ ] **Step 2: Create a centralized link-button primitive**
+- [x] **Step 2: Create a centralized link-button primitive**
 
 Create `components/ui/LinkButton.tsx` using `AnchorHTMLAttributes<HTMLAnchorElement>` with variants `primary`, `secondary`, `outline`, `ghost` and sizes `sm`, `md`, `lg`. Render an `<a>` directly, accept `href: string`, preserve `download`, and use the same variant/size class strings as `Button.tsx`. Add `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg` and stable caller-supplied `data-testid` support through native anchor props.
 
-- [ ] **Step 3: Create metadata and the complete public page**
+- [x] **Step 3: Create metadata and the complete public page**
 
 Create the exact `meta.json` asserted in Step 1.
 
@@ -323,7 +323,7 @@ Create `page.tsx` as a server component with:
 
 Use `main#main-content`, `pt-24`, `max-w-5xl`, semantic `section` elements, one deliberate hero kicker only, and shared `Card` or matching existing shared component APIs. Do not add FAQ schema because no shared visible FAQ projection is needed.
 
-- [ ] **Step 4: Run targeted tests and commit Task 2**
+- [x] **Step 4: Run targeted tests and commit Task 2**
 
 Run:
 

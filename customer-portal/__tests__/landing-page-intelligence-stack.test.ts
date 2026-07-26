@@ -72,6 +72,25 @@ function updateManifest(sourceDir: string, mutate: (manifest: Record<string, unk
 }
 
 describe('landing page intelligence stack', () => {
+  it('publishes the approved article metadata and direct-download surface', () => {
+    const articleDir = path.join(ROOT, 'app', 'learning-centre', 'landing-page-intelligence-stack')
+    const meta = JSON.parse(readFileSync(path.join(articleDir, 'meta.json'), 'utf8'))
+    const pageSource = readFileSync(path.join(articleDir, 'page.tsx'), 'utf8')
+
+    expect(meta).toEqual({
+      slug: 'landing-page-intelligence-stack',
+      title: 'Landing Page Intelligence Stack: 6 Evidence-Grade Workflows',
+      category: 'Conversion Systems',
+      description: 'Download six inspectable workflows for message match, trust, mobile layout, CTA friction, prioritization, and fix verification.',
+    })
+    expect(pageSource.match(/<h1/g)).toHaveLength(1)
+    expect(pageSource).toContain('/downloads/nebula-landing-page-intelligence-stack-v1.zip')
+    expect(pageSource).toContain('data-testid="intelligence-stack-download-link"')
+    expect(pageSource).toContain('href="/audit"')
+    expect(pageSource).toContain('data-testid="intelligence-stack-audit-link"')
+    expect(pageSource).not.toMatch(/<input|type="email"|guarantee|replaces paid|conversion lift/i)
+  })
+
   it('exposes deterministic package and check commands', () => {
     const packageJson = JSON.parse(readFileSync(path.join(ROOT, 'package.json'), 'utf8'))
     expect(packageJson.devDependencies.fflate).toBe('^0.8.3')
