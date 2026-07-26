@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { getPublicClaim } from '@/app/lib/evidence-atoms'
+import { auditPageFAQSchema } from '@/app/lib/faq-schemas'
 import AuditForm from './AuditForm'
 
 export const metadata: Metadata = {
@@ -16,8 +18,18 @@ export const metadata: Metadata = {
 }
 
 export default function AuditPage() {
+  const auditMethodClaim = getPublicClaim('claim-7-point-diagnosis', {
+    route: '/audit',
+    slot: 'audit-method-summary',
+  })
+
   return (
-    <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(auditPageFAQSchema) }}
+      />
+      <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
       {/* Hero Section */}
       <section className="mx-auto flex min-h-[60vh] max-w-3xl flex-col justify-center px-6 py-16 text-center">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
@@ -117,12 +129,15 @@ export default function AuditPage() {
           <h2 className="mb-6 text-lg font-bold text-fg">
             What the audit checks
           </h2>
-          <p className="mb-4 text-sm text-fg-muted leading-7">
-            The Nebula landing page audit runs automated checks across 7 conversion signals: 
-            headline message-match, trust signal placement, mobile layout integrity, form friction score, 
-            page load time impact, CTA clarity, and compliance signals. Each check is evidence-backed — 
-            based on patterns observed across real ad campaigns, not generic best-practice checklists.
-          </p>
+          {auditMethodClaim ? (
+            <p
+              className="mb-4 text-sm text-fg-muted leading-7"
+              data-claim-id={auditMethodClaim.claimId}
+              data-evidence-ids={auditMethodClaim.evidenceIds.join(',')}
+            >
+              {auditMethodClaim.text}
+            </p>
+          ) : null}
           <p className="text-sm text-fg-muted leading-7">
             Most founders spending on Google or Meta ads assume low conversion rates are an ad problem. 
             Very often the bottleneck is on the landing page: a headline that doesn't match the ad copy, 
@@ -132,5 +147,6 @@ export default function AuditPage() {
         </div>
       </section>
     </main>
+    </>
   )
 }

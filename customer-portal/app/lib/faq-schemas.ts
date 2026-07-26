@@ -3,33 +3,60 @@ import { createFAQPageSchema } from '@/app/lib/schema';
 export const pricingFAQSchema = createFAQPageSchema([
   {
     question: "What's in the free audit?",
-    answer: "A full 5-dimension teardown: Clarity, CTA Friction, Trust Gap, Offer Specificity, and Implementation Difficulty. Each dimension gets a score, specific issues, and prioritized fixes with code suggestions.",
+    answer: "A 7-point diagnosis scoring message-match, trust signals, mobile layout, load time, CTA clarity, form friction, and compliance. Each point gets a pass/fail with specific findings and prioritized fixes ranked by conversion impact.",
   },
   {
-    question: "How is the Fix Pack delivered?",
-    answer: "Within 24 hours via email. You get rewritten headline copy, optimized CTA placement, trust block recommendations, and ready-to-publish HTML/CSS.",
+    question: "How is the $97 Fix Pack delivered?",
+    answer: "Within 24–48 hours. You get a written diagnosis of which of the 7 conversion signals are failing on your page, ranked by impact, with full implementation of all identified fixes on your live page.",
   },
   {
-    question: "Do I need to share access?",
+    question: "Do I need to share access to my site?",
     answer: "No. Just paste your URL. We audit the public page. No login, no dashboard access, no code repository needed.",
   },
   {
-    question: "What if it doesn't help?",
-    answer: "Request a refund within 30 days. We process it in 30 minutes. No questions asked.",
+    question: "What if my conversion rate doesn't improve?",
+    answer: "We include a 30-day re-audit at no charge if conversion does not improve after fixes are applied. If you want a full refund instead, request it within 30 days.",
+  },
+  {
+    question: "What landing page problems does Nebula diagnose?",
+    answer: "Seven recurring failure patterns: message-match failure (ad promise doesn't match page headline), missing trust signals above the fold, mobile layout friction hiding the CTA, slow load time over 3 seconds, unclear or competing CTAs, form friction with too many fields, and compliance gaps blocking the conversion path.",
   },
 ]);
 
 export const homeFAQSchema = createFAQPageSchema([
   {
-    question: "How long does the free audit take?",
-    answer: "About 60 seconds. Paste your URL and get a full 5-dimension score with specific fixes.",
+    question: "How long does the free landing page audit take?",
+    answer: "Under 2 minutes. Paste your URL and get a scored 7-point diagnosis — message-match, trust signals, mobile layout, load time, CTA clarity, form friction, and compliance — with findings ranked by conversion impact.",
   },
   {
     question: "What's included in the $97 Fix Pack?",
-    answer: "Rewritten headline, optimized CTA placement, trust block recommendations, mobile check, and ready-to-publish HTML/CSS delivered in 24 hours.",
+    answer: "A complete 7-point landing page audit, a written diagnosis identifying which conversion signals are failing and why, and full implementation of all fixes on your live page. Delivered within 24–48 hours. One-time payment, no retainer.",
   },
   {
-    question: "Do you need access to my site?",
-    answer: "No. We audit the public page. No login, no dashboard access, no code repository needed.",
+    question: "Why do landing pages fail to convert paid traffic?",
+    answer: "Most landing page failures follow seven diagnosable patterns: the ad promise doesn't match the page headline (message-match failure), no social proof appears above the fold, the CTA is invisible on mobile, the page loads too slowly, the primary action competes with secondary links, forms ask for too much before delivering value, or a GDPR consent banner blocks the conversion path.",
+  },
+  {
+    question: "Do you need access to my website to run the audit?",
+    answer: "No. We audit the public page. Just paste your URL — no login, no dashboard access, no code repository needed.",
+  },
+]);
+
+export const auditPageFAQSchema = createFAQPageSchema([
+  {
+    question: "What does the free landing page audit check?",
+    answer: "Seven conversion signals: message-match (does the ad headline match the page headline), above-fold trust signals, mobile CTA visibility on a 375px viewport, Core Web Vitals (LCP under 2.5s, CLS under 0.1, INP under 200ms), CTA clarity, form friction (five fields or fewer), and GDPR/CCPA compliance without blocking the conversion path.",
+  },
+  {
+    question: "How long does the landing page audit take?",
+    answer: "Under 2 minutes. Paste your URL and results appear automatically — no email required to see your score and findings.",
+  },
+  {
+    question: "What happens after the free audit?",
+    answer: "You see your 7-point score with specific findings. If the page has fixable issues, the $97 Fix Pack implements all identified fixes on your live page within 24–48 hours.",
+  },
+  {
+    question: "Does the audit require any account or login?",
+    answer: "No. Paste your URL and results appear immediately. You only share your email if you want the full written report.",
   },
 ]);

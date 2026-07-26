@@ -3,6 +3,7 @@ import Link from 'next/link'
 import SelfScan from './components/SelfScan'
 import AggregateProof from './components/AggregateProof'
 import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE, PAID_TRAFFIC_DIAGNOSTIC } from './lib/homepageContent'
+import { homeFAQSchema } from './lib/faq-schemas'
 
 export const metadata: Metadata = {
   title: HOMEPAGE_SEO_TITLE,
@@ -55,6 +56,10 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFAQSchema) }}
       />
       <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
       {/* Hero Section — Vindication Frame */}
