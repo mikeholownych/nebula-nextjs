@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: "Landing Page Headline Optimization | Nebula Components",
   description: "Why your headline is the #1 conversion lever — and how to score, rewrite, and test it.",
+  alternates: { canonical: 'https://nebulacomponents.shop/headline-optimization' },
 }
 
 const faqItems = [

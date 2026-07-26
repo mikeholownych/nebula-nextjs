@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Editorial Standards — Nebula Components',
   description: 'Nebula Components editorial standards for content accuracy, provenance, and correction policy.',
+  alternates: { canonical: 'https://nebulacomponents.shop/editorial-standards' },
 }
 
 export default function EditorialStandardsPage() {

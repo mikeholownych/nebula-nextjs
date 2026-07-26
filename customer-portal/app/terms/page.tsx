@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Terms of Service — Nebula Components',
   description: 'Terms of service for Nebula Components landing page audit and optimization services.',
+  alternates: { canonical: 'https://nebulacomponents.shop/terms' },
 }
 
 export default function TermsPage() {

@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: "You Don't Need an AI SDR — Fix Your Landing Page First | Nebula Components",
   description: "Before you spend $25k on an AI SDR platform, verify that your landing page converts. Free 60-second audit across 7 conversion signals.",
+  alternates: { canonical: 'https://nebulacomponents.shop/ai-sdr-vs-audit' },
 }
 
 export default function AiSdrVsAuditPage() {

@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://nebulacomponents.shop/checkout',
   },
+  robots: { index: false, follow: false },
 }
 
 const STRIPE_FIX_PACK_LINK = 'https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h'

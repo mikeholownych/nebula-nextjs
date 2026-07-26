@@ -1,6 +1,7 @@
 export const metadata = {
   title: '7 Systems Every Ecom Brand Needs That Most Skip — Nebula Components',
   description: 'A conversion engineer\'s checklist of the 7 systems every ecommerce brand needs to stop leaking conversions.',
+  alternates: { canonical: 'https://nebulacomponents.shop/7-systems' },
 };
 
 const systems = [
