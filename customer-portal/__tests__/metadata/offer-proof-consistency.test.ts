@@ -1,7 +1,10 @@
-/** @jest-environment node */
+/** @jest-environment jsdom */
 
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
+import React from 'react'
+import { cleanup, render, screen } from '@testing-library/react'
+import * as caseStudiesPage from '../../app/case-studies/page'
 import {
   getActiveFixPack,
   getPublishedCaseStudies,
@@ -23,6 +26,8 @@ const activeOfferSurfaces = [
 ] as const
 
 describe('offer and proof consistency', () => {
+  afterEach(cleanup)
+
   test('active offer surfaces reject retired price and delivery-window drift', () => {
     const combined = activeOfferSurfaces.map(read).join('\n').toLowerCase()
 
@@ -70,6 +75,45 @@ describe('offer and proof consistency', () => {
     }
   })
 
+  test('rejects known unsupported claims on Task 2 surfaces', () => {
+    const combined = activeOfferSurfaces.map(read).join('\n').toLowerCase().replace(/\s+/g, ' ')
+
+    for (const unsupported of [
+      'leaks 98%',
+      'bleeds 98 out of every 100',
+      "if it's below 2%",
+      'works in hours',
+      'stuck at 0.8% conversion',
+      '10x solution to a 1x problem',
+      'built 50+ landing pages',
+      'across 50+ landing pages',
+      'pci-compliant by design',
+    ]) {
+      expect(combined).not.toContain(unsupported)
+    }
+  })
+
+  test('evaluates expiring offer availability during metadata/render instead of module load', () => {
+    for (const relative of [
+      'app/pricing/page.tsx',
+      'app/checkout/page.tsx',
+      'app/terms/page.tsx',
+      'app/ai-sdr-vs-audit/page.tsx',
+    ]) {
+      const source = read(relative)
+      expect(source).not.toMatch(/^const fixPack\s*=\s*getActiveFixPack\(\)/m)
+      expect(source).toMatch(/export const revalidate\s*=/)
+    }
+  })
+
+  test('static LLM files bound the expiring price to its validity date', () => {
+    for (const relative of ['public/llms.txt', 'public/llms-full.txt']) {
+      const source = read(relative)
+      expect(source).toContain('$97')
+      expect(source).toContain('2026-12-31')
+    }
+  })
+
   test('transactional validation and structured offer data derive from the registry', () => {
     const pricing = read('app/pricing/page.tsx')
     const checkout = read('app/checkout/page.tsx')
@@ -110,5 +154,46 @@ describe('offer and proof consistency', () => {
     expect(combined).not.toMatch(/\b48x roas\b/)
     expect(combined).not.toMatch(/\b50% cpc\b/)
     expect(combined).not.toMatch(/\btwo documented case studies\b/)
+  })
+
+  test('case-study index renders both the honest empty state and evidence-gated entries', () => {
+    const module = caseStudiesPage as unknown as {
+      CaseStudiesContent?: React.ComponentType<{ studies: any[] }>
+    }
+    expect(module.CaseStudiesContent).toBeDefined()
+    if (!module.CaseStudiesContent) return
+
+    const { rerender } = render(
+      React.createElement(module.CaseStudiesContent, { studies: [] }),
+    )
+    expect(screen.getByRole('heading', { name: /we don't have one yet/i })).toBeInTheDocument()
+
+    const study = {
+      slug: 'supported-example',
+      title: 'Supported example',
+      eyebrow: 'Evidence-backed case',
+      description: 'A fully evidenced result.',
+      outcome: 'Observed change',
+      outcomeLabel: 'Measured during the stated window',
+      situation: 'The starting state.',
+      diagnosis: 'The evidenced finding.',
+      fixes: ['The documented remediation.'],
+      result: 'The observed result, without a causal guarantee.',
+      evidenceUrl: 'https://nebulacomponents.shop/evidence/supported-example',
+      measurementWindow: { startedAt: '2026-06-01', endedAt: '2026-06-30' },
+      publicationPermission: { granted: true, grantedAt: '2026-07-01' },
+      disclosure: 'Nebula audited the page; the customer implemented the change.',
+      publishedAt: '2026-07-15',
+      modifiedAt: '2026-07-15',
+    }
+    rerender(React.createElement(module.CaseStudiesContent, { studies: [study] }))
+
+    expect(screen.getByRole('heading', { name: /published, evidence-backed case studies/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Supported example' })).toHaveAttribute(
+      'href',
+      '/case-studies/supported-example',
+    )
+    expect(screen.getByText('Observed change')).toBeInTheDocument()
+    expect(screen.queryByText(/we don't have one yet/i)).not.toBeInTheDocument()
   })
 })

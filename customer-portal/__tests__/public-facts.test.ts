@@ -1,6 +1,7 @@
 /** @jest-environment node */
 
 import citableRelease from '../data/citable-release.json'
+import * as publicFactsModule from '../app/lib/public-facts'
 import {
   getActiveFixPack,
   getCitablePublicFacts,
@@ -49,6 +50,8 @@ describe('canonical public facts', () => {
     ['bespoke implementation', (facts: any) => { facts.fixPack.implementation.owner = 'nebula' }],
     ['missing checkout identity', (facts: any) => { delete facts.fixPack.checkout.offerKey }],
     ['non-HTTPS checkout', (facts: any) => { facts.fixPack.checkout.url = 'http://example.com/pay' }],
+    ['non-Stripe HTTPS checkout', (facts: any) => { facts.fixPack.checkout.url = 'https://example.com/pay' }],
+    ['spoofed Stripe checkout host', (facts: any) => { facts.fixPack.checkout.url = 'https://buy.stripe.com.example.com/pay' }],
     ['unknown re-audit status', (facts: any) => { facts.fixPack.reAudit.status = 'unknown' }],
   ])('omits an %s Fix Pack fact', (_label, mutate) => {
     const facts = cloneFacts() as any
@@ -143,5 +146,56 @@ describe('canonical public facts', () => {
     const unsupported = cloneFacts() as any
     unsupported.citable.workflowCheck = 'passing'
     expect(getCitablePublicFacts(unsupported)).toBeUndefined()
+  })
+
+  test('accepts automatic fulfillment only for the immutable canonical paid receipt', () => {
+    const module = publicFactsModule as unknown as {
+      isCanonicalFixPackReceipt?: (receipt: unknown, source?: unknown) => boolean
+    }
+    expect(typeof module.isCanonicalFixPackReceipt).toBe('function')
+    if (!module.isCanonicalFixPackReceipt) return
+
+    const receipt = {
+      livemode: true,
+      payment_status: 'paid',
+      currency: 'usd',
+      amount_total: 9700,
+      metadata: { offer_key: publicFacts.fixPack.checkout.offerKey },
+    }
+
+    expect(module.isCanonicalFixPackReceipt(receipt)).toBe(true)
+    for (const invalid of [
+      { ...receipt, livemode: false },
+      { ...receipt, payment_status: 'unpaid' },
+      { ...receipt, payment_status: undefined },
+      { ...receipt, currency: 'eur' },
+      { ...receipt, currency: undefined },
+      { ...receipt, amount_total: 9699 },
+      { ...receipt, amount_total: undefined },
+      { ...receipt, metadata: {} },
+      { ...receipt, metadata: undefined },
+      { ...receipt, metadata: { offer_key: 'unknown-offer' } },
+    ]) {
+      expect(module.isCanonicalFixPackReceipt(invalid)).toBe(false)
+    }
+  })
+
+  test('keeps valid paid-receipt fulfillment independent of public offer expiry', () => {
+    const module = publicFactsModule as unknown as {
+      isCanonicalFixPackReceipt?: (receipt: unknown, source?: unknown) => boolean
+    }
+    expect(typeof module.isCanonicalFixPackReceipt).toBe('function')
+    if (!module.isCanonicalFixPackReceipt) return
+
+    expect(
+      getActiveFixPack(publicFacts, new Date('2027-01-01T00:00:00.000Z')),
+    ).toBeUndefined()
+    expect(module.isCanonicalFixPackReceipt({
+      livemode: true,
+      payment_status: 'paid',
+      currency: 'usd',
+      amount_total: publicFacts.fixPack.priceCents,
+      metadata: { offer_key: publicFacts.fixPack.checkout.offerKey },
+    })).toBe(true)
   })
 })

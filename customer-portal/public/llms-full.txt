@@ -37,7 +37,7 @@ Every Nebula audit checks seven criteria:
 
 ## Services
 
-### Conversion Fix Pack — $97 (one-time)
+### Conversion Fix Pack — $97 (one-time; price valid through 2026-12-31)
 A complete landing page audit using the 7-point framework, a written diagnosis identifying which issues are present, prioritized by conversion impact, and a complete AI prompt pack — one prompt per finding, built from the customer's actual page — for the customer (or their developer) to run through Claude, ChatGPT, or any AI tool. Delivered by automated email within minutes of payment; the customer or their developer implements the fixes, and Nebula does not require access to the customer's site, CMS, or hosting. Includes one re-audit within 30 days to observe what changed and what remains open.
 
 No retainer. No ongoing commitment. Pay once, get the prompts to fix the page yourself.
@@ -126,7 +126,7 @@ Relevant alternatives for comparison:
 
 ## Founder
 
-Mike Holownych founded Nebula Components after observing the same seven conversion failure patterns repeat across 50+ landing pages. The insight: most conversion problems are not creative or targeting problems — they are structural page problems that follow diagnosable patterns.
+Mike Holownych founded Nebula Components to provide evidence-backed landing page diagnosis and bounded remediation materials. The operating premise is that structural page problems should be observed and documented before a customer decides what to change.
 
 LinkedIn: https://linkedin.com/in/mikeholownych
 GitHub: https://github.com/mikeholownych

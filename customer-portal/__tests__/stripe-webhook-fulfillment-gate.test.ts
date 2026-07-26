@@ -41,7 +41,7 @@ function makeSession(overrides: Record<string, unknown> = {}) {
     amount_total: 9700,
     currency: 'usd',
     payment_status: 'paid',
-    metadata: {},
+    metadata: { offer_key: 'fix-pack' },
     ...overrides,
   }
 }
@@ -79,6 +79,10 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     process.env.STRIPE_WEBHOOK_SECRET = 'whsec_x'
   })
 
+  afterEach(() => {
+    jest.useRealTimers()
+  })
+
   it('runs deliver_prompt_pack.py for an exact $97 livemode purchase', async () => {
     mockConstructEvent(makeSession({ amount_total: 9700 }))
     const response = await postWebhook()
@@ -113,6 +117,45 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
       String(c[0]).includes('venv/bin/python3')
     )
     expect(pythonCalls).toHaveLength(0)
+  })
+
+  it.each([
+    ['unpaid receipt', { payment_status: 'unpaid' }],
+    ['missing payment status', { payment_status: undefined }],
+    ['non-USD currency', { currency: 'eur' }],
+    ['missing currency', { currency: undefined }],
+    ['missing offer identity', { metadata: {} }],
+    ['missing metadata', { metadata: undefined }],
+    ['wrong offer identity', { metadata: { offer_key: 'other-offer' } }],
+  ])('fails automatic delivery closed for %s while retaining persistence and alerting', async (
+    _label,
+    overrides,
+  ) => {
+    mockConstructEvent(makeSession(overrides))
+    const response = await postWebhook()
+
+    expect(response.status).toBe(200)
+    const pythonCalls = execFileMock.mock.calls.filter((c) =>
+      String(c[0]).includes('venv/bin/python3')
+    )
+    const hermesCalls = execFileMock.mock.calls.filter((c) => c[0] === 'hermes')
+    expect(pythonCalls).toHaveLength(0)
+    expect(hermesCalls).toHaveLength(1)
+    expect(queryMock).toHaveBeenCalledTimes(1)
+  })
+
+  it('fulfills a delayed canonical paid receipt after public price expiry', async () => {
+    jest.useFakeTimers()
+    jest.setSystemTime(new Date('2027-01-01T00:00:00.000Z'))
+    mockConstructEvent(makeSession())
+
+    const response = await postWebhook()
+
+    expect(response.status).toBe(200)
+    const pythonCalls = execFileMock.mock.calls.filter((c) =>
+      String(c[0]).includes('venv/bin/python3')
+    )
+    expect(pythonCalls).toHaveLength(1)
   })
 
   it('still sends the sale alert for a non-$97 purchase so a human sees it', async () => {

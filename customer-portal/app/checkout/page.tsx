@@ -4,21 +4,26 @@ import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
 import { Card } from '@/components/ui'
 import CheckoutCTAButton from './CheckoutCTAButton'
 
-const fixPack = getActiveFixPack()
-const fixPackPrice = fixPack ? formatUsd(fixPack.priceCents) : undefined
+export const revalidate = 3600
 
-export const metadata: Metadata = {
-  title: 'Checkout — Nebula Conversion Fix Pack | Nebula Components',
-  description: fixPack
-    ? `Purchase the Nebula Conversion Fix Pack for ${fixPackPrice}. One-time payment via Stripe. Landing page audit and a full AI prompt pack delivered by email within minutes.`
-    : 'Nebula Conversion Fix Pack checkout. No paid offer is currently available.',
-  alternates: {
-    canonical: 'https://nebulacomponents.shop/checkout',
-  },
-  robots: { index: false, follow: false },
+export function generateMetadata(): Metadata {
+  const fixPack = getActiveFixPack()
+  return {
+    title: 'Checkout — Nebula Conversion Fix Pack | Nebula Components',
+    description: fixPack
+      ? `Purchase the Nebula Conversion Fix Pack for ${formatUsd(fixPack.priceCents)}. One-time payment via Stripe. Landing page audit and a full AI prompt pack delivered by email within minutes.`
+      : 'Nebula Conversion Fix Pack checkout. No paid offer is currently available.',
+    alternates: {
+      canonical: 'https://nebulacomponents.shop/checkout',
+    },
+    robots: { index: false, follow: false },
+  }
 }
 
 export default function CheckoutPage() {
+  const fixPack = getActiveFixPack()
+  const fixPackPrice = fixPack ? formatUsd(fixPack.priceCents) : undefined
+
   return (
     <main className="min-h-screen bg-bg px-6 py-12">
       <div className="mx-auto max-w-lg">
@@ -90,8 +95,8 @@ export default function CheckoutPage() {
           <h2 className="mb-3 mt-6 text-base font-semibold text-fg">Payment and security</h2>
           <p>
             Payment is processed by Stripe. Nebula Components does not handle, store, or transmit card
-            details. The checkout is PCI-compliant by design. You can pay by card or any payment method
-            Stripe supports in your region. After payment, access to the fix pack is immediate — no
+            details. You can pay by card or any payment method Stripe supports in your region.
+            After payment, access to the fix pack is immediate — no
             account creation required.
           </p>
         </section>}

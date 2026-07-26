@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
 
-const fixPack = getActiveFixPack()
-const fixPackPrice = fixPack ? formatUsd(fixPack.priceCents) : undefined
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "You Don't Need an AI SDR — Fix Your Landing Page First | Nebula Components",
@@ -11,6 +10,9 @@ export const metadata: Metadata = {
 }
 
 export default function AiSdrVsAuditPage() {
+  const fixPack = getActiveFixPack()
+  const fixPackPrice = fixPack ? formatUsd(fixPack.priceCents) : undefined
+
   return (
     <div className="min-h-screen bg-bg text-fg font-sans">
       {/* Hero */}
@@ -21,11 +23,12 @@ export default function AiSdrVsAuditPage() {
             You Need a <span className="text-accent-light">Landing Page That Converts.</span>
           </h1>
           <p className="text-lg text-fg-muted max-w-[600px] mx-auto mb-8">
-            Every vendor wants you to believe their $25k AI SDR platform will fix your pipeline. It won't — not if your landing page leaks 98% of the traffic you already paid for.
+            More outbound volume cannot establish whether the landing page receiving that traffic
+            is ready to convert it. Verify the page before adding another acquisition system.
           </p>
 
           <blockquote className="border border-border bg-bg-panel py-4 px-5 rounded-r-lg text-left mb-8">
-            <strong>Quick Answer:</strong> Before buying an AI SDR ($15k–$25k/year), audit your landing page first ({fixPackPrice ? `$0–${fixPackPrice}` : '$0; no paid offer is currently verified'}). An SDR drives more traffic to a page that already can&apos;t convert — multiplying your waste, not your revenue.
+            <strong>Quick Answer:</strong> Before buying an AI SDR ($15k–$25k/year), audit your landing page first ({fixPackPrice ? `$0–${fixPackPrice}` : '$0; no paid offer is currently verified'}). More outbound volume cannot resolve an unverified landing-page baseline.
           </blockquote>
 
           <div className="flex flex-wrap justify-center gap-3">
@@ -52,7 +55,9 @@ export default function AiSdrVsAuditPage() {
             What Zamp doesn't say
           </div>
           <p className="mb-0">
-            Their AI SDR starts at $25k for a pilot and takes 4-10 weeks to deploy. And it will be sending traffic to the landing page that isn't converting today. The page that bleeds 98 out of every 100 visitors. The page you haven't audited.
+            Their published guide describes a $25k pilot and a 4–10 week deployment. That system
+            will still send prospects to the existing landing page, so the page is a prerequisite
+            worth auditing before the additional traffic begins.
           </p>
         </div>
 
@@ -62,9 +67,9 @@ export default function AiSdrVsAuditPage() {
         <h2 className="text-2xl font-bold text-fg mt-12 mb-4">
           The Order of Operations Matters
         </h2>
-        <p className="mb-4">There are exactly three things that drive revenue from outbound:</p>
+        <p className="mb-4">Examine these three prerequisites before adding outbound volume:</p>
         <ol className="list-decimal list-inside mb-6 space-y-2">
-          <li><strong>A landing page that converts</strong> — if it's below 2%, fix this first. Nothing else matters until this works.</li>
+          <li><strong>A landing page with a verified baseline</strong> — identify evidenced page defects before adding more traffic.</li>
           <li><strong>Trigger-aware outreach</strong> — who you contact and when (not demographic filters, but actual buying signals).</li>
           <li><strong>Volume and sequencing</strong> — the cadence, the follow-ups, the qualification.</li>
         </ol>
@@ -89,7 +94,7 @@ export default function AiSdrVsAuditPage() {
                 { label: 'Entry cost', zamp: '$25k–$75k pilot', nebula: fixPackPrice ? `Free (or ${fixPackPrice} Fix Pack)` : 'Free audit; paid offer unavailable' },
                 { label: 'Time to value', zamp: '4–10 weeks', nebula: 'Audit delivered in under 60 seconds' },
                 { label: 'Purchase motion', zamp: 'Book a demo → sales cycle → legal review', nebula: 'Self-serve checkout.' },
-                { label: 'What it fixes', zamp: 'Outbound volume (sends more emails)', nebula: 'The page itself (fixes what converts)' },
+                { label: 'What it evaluates', zamp: 'Outbound volume and sequencing', nebula: 'Landing-page conversion signals' },
                 { label: 'Self-serve', zamp: 'No. Demo-gated.', nebula: 'Self-serve. No sales call.' },
                 { label: 'Risk for you', zamp: '$25k+ commitment + 10 weeks before you know', nebula: 'No automated score is issued without evidence.' },
               ].map((row, idx) => (
@@ -102,7 +107,7 @@ export default function AiSdrVsAuditPage() {
               <tr className="border-t-2 border-border">
                 <td className="p-4 text-fg font-extrabold">Should you buy it?</td>
                 <td className="p-4 bg-bg-panel text-danger font-semibold">Only after your page has a verified conversion baseline</td>
-                <td className="p-4 bg-bg text-accent font-semibold">Do this first. Always.</td>
+                <td className="p-4 bg-bg text-accent font-semibold">Verify this prerequisite first.</td>
               </tr>
             </tbody>
           </table>
@@ -121,13 +126,16 @@ export default function AiSdrVsAuditPage() {
             Nebula approach
           </div>
           <p className="mb-0">
-            We identify founders who are actively bleeding money on ads with zero conversions. That's a buying trigger, not a demographic filter. The person who just spent $2,000 on Meta ads and got zero leads is ready to buy a fix right now. The person with the "right ICP" title who isn't in pain? They'll ignore your outreach for months.
+            A recent paid-traffic run with no recorded conversions is an observable trigger. It is
+            more specific than a job title, but it still requires evidence from the actual campaign
+            and page before drawing a conclusion.
           </p>
         </div>
 
         <p className="mb-8">
           Zamp's model: find the right <em>person</em>, then convince them they have a problem.<br />
-          Nebula's model: find people <em>already in pain</em>, then give them a fix that works in hours, not weeks.
+          Nebula&apos;s model: start from an observed paid-traffic problem, diagnose the page, and
+          give the customer a bounded prompt pack to implement.
         </p>
 
         {/* Section: Real Funnel */}
@@ -148,7 +156,10 @@ export default function AiSdrVsAuditPage() {
         {/* Warning Callout */}
         <div className="bg-bg-panel border border-border rounded-xl p-7 mb-8">
           <p className="mb-0 text-fg-muted">
-            <strong className="text-fg">⚠️ Warning:</strong> AI SDR vendors will tell you their platform works regardless of your landing page. Check their case studies. Every single one assumes the landing page is already converting. They're selling you a hose when your pipe is clogged.
+            <strong className="text-fg">Check the preconditions:</strong> Before relying on an AI
+            SDR case study, inspect whether it states the landing page&apos;s starting conversion
+            baseline. If it does not, the case cannot establish how the same traffic would perform
+            on your page.
           </p>
         </div>
 
@@ -167,9 +178,9 @@ export default function AiSdrVsAuditPage() {
         <h2 className="text-2xl font-bold text-fg mt-12 mb-4">
           The Honest Path
         </h2>
-        <p className="mb-4">I'm not saying AI SDRs are useless. They're not. Zamp builds a solid product, and for teams that already have a converting landing page and a mature outbound motion, an AI SDR multiplies output.</p>
-        <p className="mb-4">But for the founder who's pre-revenue, pre-product-market-fit, or stuck at 0.8% conversion — the one Zamp is targeting with this content — the AI SDR is the wrong purchase. It's the 10x solution to a 1x problem.</p>
-        <p className="mb-8"><strong>Start with the landing page.</strong> It's the highest-leverage thing you can fix, the cheapest to test, and the fastest to deploy. Everything else builds on top of it.</p>
+        <p className="mb-4">AI SDRs are designed to automate outbound volume. That can be relevant for a team with a measured landing-page baseline and an established outbound process.</p>
+        <p className="mb-4">But when a founder does not yet have a verified landing-page baseline, buying more outbound volume puts the steps in the wrong order. Diagnose the receiving page before deciding whether additional traffic is justified.</p>
+        <p className="mb-8"><strong>Start with the landing page.</strong> It is an inspectable prerequisite for the traffic an AI SDR would generate.</p>
 
         {/* CTA Section */}
         <div className="bg-bg-panel shadow-glow border border-border rounded-2xl py-12 px-10 text-center">

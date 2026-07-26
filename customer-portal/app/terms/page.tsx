@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
 
-const fixPack = getActiveFixPack()
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Terms of Service — Nebula Components',
@@ -10,6 +10,8 @@ export const metadata: Metadata = {
 }
 
 export default function TermsPage() {
+  const fixPack = getActiveFixPack()
+
   return (
     <div className="page">
       <main className="legal-page" role="main">

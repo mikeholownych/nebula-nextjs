@@ -25,6 +25,13 @@ export type FixPackPublicFact = {
   }
 }
 
+export type FixPackFulfillmentFacts = {
+  provider: 'stripe'
+  amountCents: number
+  currency: 'usd'
+  offerKey: 'fix-pack'
+}
+
 export type PublishedCaseStudy = {
   slug: string
   title: string
@@ -64,15 +71,26 @@ export type CitablePublicFacts = {
   deploymentCheck: 'unknown'
 }
 
+const fixPackFulfillment = {
+  provider: 'stripe',
+  amountCents: 9700,
+  currency: 'usd',
+  offerKey: 'fix-pack',
+} as const satisfies FixPackFulfillmentFacts
+
 export const publicFacts = {
+  // Immutable receipt-matching facts are independent of whether this price
+  // may still be advertised. A delayed, already-paid canonical receipt must
+  // fulfill deterministically after the public availability window closes.
+  fixPackFulfillment,
   fixPack: {
     status: 'active',
-    priceCents: 9700,
+    priceCents: fixPackFulfillment.amountCents,
     currency: 'USD',
     priceValidUntil: '2026-12-31',
     checkout: {
-      provider: 'stripe',
-      offerKey: 'fix-pack',
+      provider: fixPackFulfillment.provider,
+      offerKey: fixPackFulfillment.offerKey,
       url: 'https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h',
     },
     delivery: {
@@ -152,7 +170,14 @@ function isValidFixPack(value: unknown, at: Date): value is FixPackPublicFact {
   ) return false
 
   try {
-    if (new URL(checkout.url).protocol !== 'https:') return false
+    const checkoutUrl = new URL(checkout.url)
+    if (
+      checkoutUrl.protocol !== 'https:' ||
+      checkoutUrl.hostname !== 'buy.stripe.com' ||
+      checkoutUrl.port !== '' ||
+      checkoutUrl.username !== '' ||
+      checkoutUrl.password !== ''
+    ) return false
   } catch {
     return false
   }
@@ -176,7 +201,52 @@ export function getActiveFixPack(
   at: Date = new Date(),
 ): FixPackPublicFact | undefined {
   if (!isRecord(source)) return undefined
+  if (!getFixPackFulfillmentFacts(source)) return undefined
   return isValidFixPack(source.fixPack, at) ? source.fixPack : undefined
+}
+
+function getFixPackFulfillmentFacts(
+  source: unknown,
+): FixPackFulfillmentFacts | undefined {
+  if (
+    !isRecord(source) ||
+    !isRecord(source.fixPackFulfillment) ||
+    !isRecord(source.fixPack)
+  ) return undefined
+
+  const fulfillment = source.fixPackFulfillment
+  const fixPack = source.fixPack
+  const checkout = fixPack.checkout
+  if (!isRecord(checkout)) return undefined
+
+  if (
+    fulfillment.provider !== 'stripe' ||
+    !isPositiveInteger(fulfillment.amountCents) ||
+    fulfillment.currency !== 'usd' ||
+    fulfillment.offerKey !== 'fix-pack' ||
+    fixPack.priceCents !== fulfillment.amountCents ||
+    fixPack.currency !== 'USD' ||
+    checkout.provider !== fulfillment.provider ||
+    checkout.offerKey !== fulfillment.offerKey
+  ) return undefined
+
+  return fulfillment as FixPackFulfillmentFacts
+}
+
+export function isCanonicalFixPackReceipt(
+  receipt: unknown,
+  source: unknown = publicFacts,
+): boolean {
+  const fulfillment = getFixPackFulfillmentFacts(source)
+  if (!fulfillment || !isRecord(receipt) || !isRecord(receipt.metadata)) return false
+
+  return (
+    receipt.livemode === true &&
+    receipt.payment_status === 'paid' &&
+    receipt.currency === fulfillment.currency &&
+    receipt.amount_total === fulfillment.amountCents &&
+    receipt.metadata.offer_key === fulfillment.offerKey
+  )
 }
 
 function isPublishedCaseStudy(value: unknown): value is PublishedCaseStudy {

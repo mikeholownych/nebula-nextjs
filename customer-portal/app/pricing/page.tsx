@@ -1,22 +1,29 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
+import {
+  formatUsd,
+  getActiveFixPack,
+  type FixPackPublicFact,
+} from '@/app/lib/public-facts'
 import { Card, PageShell } from '@/components/ui'
 
-const fixPack = getActiveFixPack()
-const fixPackPrice = fixPack ? formatUsd(fixPack.priceCents) : undefined
+export const revalidate = 3600
 
-export const metadata: Metadata = {
-  title: 'Pricing — Nebula Components Landing Page Audit & Fix Pack',
-  description: fixPack
-    ? `One-time ${fixPackPrice} Conversion Fix Pack: landing page audit diagnosis plus a full AI prompt pack to resolve every finding yourself. No retainer, no access to your site required.`
-    : 'Current Nebula Components landing page audit pricing. Only verified, available offers are shown.',
-  alternates: {
-    canonical: 'https://nebulacomponents.shop/pricing',
-  },
+export function generateMetadata(): Metadata {
+  const fixPack = getActiveFixPack()
+  return {
+    title: 'Pricing — Nebula Components Landing Page Audit & Fix Pack',
+    description: fixPack
+      ? `One-time ${formatUsd(fixPack.priceCents)} Conversion Fix Pack: landing page audit diagnosis plus a full AI prompt pack to resolve every finding yourself. No retainer, no access to your site required.`
+      : 'Current Nebula Components landing page audit pricing. Only verified, available offers are shown.',
+    alternates: {
+      canonical: 'https://nebulacomponents.shop/pricing',
+    },
+  }
 }
 
-const serviceSchema = fixPack ? {
+function buildServiceSchema(fixPack: FixPackPublicFact) {
+  return {
   '@context': 'https://schema.org',
   '@type': 'Service',
   '@id': 'https://nebulacomponents.shop/pricing#fix-pack',
@@ -44,7 +51,8 @@ const serviceSchema = fixPack ? {
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: '30-day free re-audit to see what changed' } },
     ],
   },
-} : null
+  }
+}
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -94,6 +102,10 @@ const faqSchema = {
 }
 
 export default function PricingPage() {
+  const fixPack = getActiveFixPack()
+  const fixPackPrice = fixPack ? formatUsd(fixPack.priceCents) : undefined
+  const serviceSchema = fixPack ? buildServiceSchema(fixPack) : null
+
   return (
     <>
       {serviceSchema && (
