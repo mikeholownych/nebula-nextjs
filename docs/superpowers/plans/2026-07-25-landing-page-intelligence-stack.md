@@ -420,7 +420,7 @@ git commit -m "ci: enforce intelligence stack projection"
 - Consumes: completed Tasks 1–3.
 - Produces: verified live route/download, exact release proof, and independent PASS or a reopened task.
 
-- [ ] **Step 1: Run the complete local release matrix**
+- [x] **Step 1: Run the complete local release matrix**
 
 Run from `customer-portal`:
 
@@ -441,7 +441,7 @@ cd .. && git diff --check
 
 Expected: every command exits zero. Do not report counts until read from actual output.
 
-- [ ] **Step 2: Restart and verify the live deployment**
+- [x] **Step 2: Restart and verify the live deployment**
 
 Run:
 
@@ -453,7 +453,7 @@ systemctl show nebula-nextjs -p MainPID -p ActiveEnterTimestamp
 
 Then use a rendered browser against `https://nebulacomponents.shop/learning-centre/landing-page-intelligence-stack` to verify one H1, six workflows, no email input, direct download, audit navigation, desktop/mobile layout, and clean browser console. Fetch the live ZIP and compare its SHA-256 with the committed sidecar.
 
-- [ ] **Step 3: Run production Citable regression**
+- [x] **Step 3: Run production Citable regression**
 
 Audit the live origin with technical, page, architecture, schema, AEO, and GEO scopes. Record total and high-severity findings from the real command output; any new high-severity finding blocks release.
 
@@ -470,7 +470,7 @@ Require the reviewer to:
 
 A FAIL reopens the applicable task. Completion requires independent PASS.
 
-- [ ] **Step 5: Commit governance records and report proof boundaries**
+- [x] **Step 5: Commit governance records and report proof boundaries**
 
 Update all completed checkboxes immediately, append the exact user interactions and results to `aidlc-docs/audit.md`, and update `aidlc-docs/aidlc-state.md` without overwriting prior initiative state.
 
