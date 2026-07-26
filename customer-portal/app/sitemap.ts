@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { getPublishedCaseStudies } from '@/app/lib/public-facts'
 import { getArticles } from './learning-centre/lib/getArticles'
 
 const BASE_URL = 'https://nebulacomponents.shop'
@@ -53,10 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     }))
 
-  // No evidenced case studies exist yet. Keep this explicit guard in lockstep
-  // with app/case-studies/[slug]/page.tsx and the production-safety test.
-  const caseStudySlugs: string[] = []
-  const caseStudyEntries: MetadataRoute.Sitemap = caseStudySlugs.map((slug) => ({
+  const caseStudyEntries: MetadataRoute.Sitemap = getPublishedCaseStudies().map(({ slug }) => ({
     url: `${BASE_URL}/case-studies/${slug}`,
     changeFrequency: 'yearly',
     priority: 0.8,

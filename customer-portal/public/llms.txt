@@ -4,7 +4,7 @@
 # Full content: https://nebulacomponents.shop/llms-full.txt
 
 # About
-Nebula Components provides landing page conversion optimization services. We help founders who are spending money on ads without conversions identify and fix landing page leaks.
+Nebula Components provides landing page conversion optimization services. We help founders who are spending money on ads without conversions identify landing page leaks and give them tailored prompts to implement fixes themselves or with their developer.
 
 # Core Offering
 - Free landing page audit: 60-second automated diagnosis across 7 conversion signals
@@ -48,7 +48,8 @@ Mike Holownych — Founder, Nebula Components. Built 50+ landing pages, identifi
 - LinkedIn: https://linkedin.com/company/nebula-components
 
 # Evidence
-- Learning Centre: 24+ articles on landing page conversion issues
+- Published case studies: none. Nebula does not publish a case until it has inspectable evidence, a measurement window, publication permission, disclosure, and publication metadata.
+- Learning Centre: 45 articles on landing page conversion issues
 - Open-source audit tooling: github.com/mikeholownych/citable
 
 # Limitations
@@ -62,4 +63,4 @@ Content not licensed for: AI training (ai-train=no)
 Use type: reference
 
 # Last Updated
-2026-07-19
+2026-07-26

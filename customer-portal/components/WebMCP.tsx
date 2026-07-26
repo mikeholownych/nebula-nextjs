@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
 
 /**
  * WebMCP — exposes Nebula Components site tools to AI agents via the browser.
@@ -14,6 +15,7 @@ import { useEffect } from 'react'
  */
 export default function WebMCP() {
   useEffect(() => {
+    const fixPack = getActiveFixPack()
     const nav = navigator as Navigator & {
       modelContext?: {
         registerTool: (tool: {
@@ -77,18 +79,12 @@ export default function WebMCP() {
               description: 'Automated landing page diagnosis — message match, trust signals, mobile, speed, CTA, form friction, compliance.',
               url: 'https://nebulacomponents.shop/audit',
             },
-            {
+            ...(fixPack ? [{
               name: 'Conversion Fix Pack',
-              price: '$97',
-              description: 'Full audit + a tailored AI prompt pack (one prompt per finding) to resolve every issue yourself via Claude, ChatGPT, or your own developer. Delivered by email within minutes. One-time payment, no retainer, no site access required.',
+              price: formatUsd(fixPack.priceCents),
+              description: 'Full audit + a tailored AI prompt pack (one prompt per finding) for the customer or their developer to use. Delivered by automated email within minutes. One-time payment, no retainer, and no Nebula access to the customer site, CMS, or hosting.',
               url: 'https://nebulacomponents.shop/pricing',
-            },
-            {
-              name: 'Growth Launch',
-              price: '$997',
-              description: 'End-to-end landing page build and optimisation for founders launching with paid traffic.',
-              url: 'https://nebulacomponents.shop/pricing',
-            },
+            }] : []),
           ],
         }),
       })

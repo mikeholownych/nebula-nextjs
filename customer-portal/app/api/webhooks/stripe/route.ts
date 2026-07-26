@@ -4,6 +4,7 @@ import { execFile } from 'child_process'
 import { promisify } from 'util'
 import { getPostHogClient } from '@/app/lib/posthog-server'
 import { pool } from '@/app/lib/db'
+import { getActiveFixPack } from '@/app/lib/public-facts'
 
 const execFileAsync = promisify(execFile)
 
@@ -27,7 +28,7 @@ async function sendSaleAlert(message: string): Promise<void> {
 // gating on the precise amount, not just "any purchase with an email",
 // stops those from silently receiving (or being charged for, then never
 // receiving) the Fix Pack's prompt pack. See scripts/deliver_prompt_pack.py.
-const FIX_PACK_AMOUNT_CENTS = 9700
+const FIX_PACK_AMOUNT_CENTS = getActiveFixPack()?.priceCents
 
 // Fulfillment: the Fix Pack offer is the audit + a full AI prompt pack, not
 // bespoke implementation — see scripts/deliver_prompt_pack.py for why and

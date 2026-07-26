@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { getPublishedCaseStudies } from '@/app/lib/public-facts'
 
 export const metadata = {
   title: 'Case Studies | Nebula Components',
@@ -9,13 +10,17 @@ export const metadata = {
 }
 
 export default function CaseStudiesIndex() {
+  const publishedCaseStudies = getPublishedCaseStudies()
+
   return (
     <main id="main-content" role="main" className="min-h-screen bg-bg">
 
       <section className="mx-auto max-w-4xl px-6 py-16">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Case Studies</p>
         <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
-          We don&apos;t have one yet — on purpose.
+          {publishedCaseStudies.length === 0
+            ? 'We don\u2019t have one yet — on purpose.'
+            : 'Published, evidence-backed case studies'}
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
           A case study means a real client, a real before-and-after number, and dates you could

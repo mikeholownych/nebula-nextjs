@@ -1,4 +1,7 @@
 import { Metadata } from 'next'
+import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
+
+const fixPack = getActiveFixPack()
 
 export const metadata: Metadata = {
   title: 'Terms of Service — Nebula Components',
@@ -12,13 +15,14 @@ export default function TermsPage() {
       <main className="legal-page" role="main">
         <div className="legal-content">
           <h1>Terms of Service</h1>
-          <p className="legal-updated">Last updated: July 15, 2026</p>
+          <p className="legal-updated">Last updated: July 26, 2026</p>
 
           <section>
             <h2>1. Services</h2>
             <p>
-              Nebula Components provides landing page conversion audits and optimization services. 
-              Our services include free diagnostic audits and paid implementation packages.
+              Nebula Components provides landing page conversion audits and, when a verified paid
+              offer is active, diagnostic materials that customers can use to make their own
+              changes. We do not take access to a customer&apos;s site, CMS, or hosting.
             </p>
           </section>
 
@@ -33,24 +37,26 @@ export default function TermsPage() {
 
           <section>
             <h2>3. Paid Services</h2>
-            <p>
-              Our Fix Pack ($97) includes implementation of recommended fixes. Payment is processed 
-              securely through Stripe. Once we deliver your completed implementation, the service is 
-              considered fulfilled.
-            </p>
+            {fixPack ? (
+              <p>
+                The current Fix Pack ({formatUsd(fixPack.priceCents)}) is an automated, tailored AI
+                prompt pack delivered by email within minutes of payment. The customer or their
+                developer implements the fixes; Nebula does not require access to the
+                customer&apos;s site, CMS, or hosting. Payment is processed securely through
+                Stripe, and the service is fulfilled when the prompt pack is delivered. One
+                re-audit may be requested within {fixPack.reAudit.windowDays} days to observe what
+                changed and what remains open.
+              </p>
+            ) : (
+              <p>
+                No verified paid Fix Pack offer is currently available. Any future paid service
+                will be described at checkout before payment is accepted.
+              </p>
+            )}
           </section>
 
           <section>
-            <h2>4. Refund Policy</h2>
-            <p>
-              We offer a 30-day refund policy for the Fix Pack. If you request a refund within 
-              30 days of purchase and before we begin implementation, we will refund your payment in full. 
-              Once implementation has begun, refunds are offered at our discretion based on work completed.
-            </p>
-          </section>
-
-          <section>
-            <h2>5. Intellectual Property</h2>
+            <h2>4. Intellectual Property</h2>
             <p>
               Our audit methodology and recommendations are proprietary. You retain ownership of your 
               landing page content. We grant you a license to use our recommendations for your own 
@@ -59,7 +65,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2>6. Limitation of Liability</h2>
+            <h2>5. Limitation of Liability</h2>
             <p>
               Nebula Components provides analysis and recommendations based on best practices. We cannot 
               guarantee specific conversion results. Our liability is limited to the amount paid for 
@@ -68,7 +74,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2>7. Contact</h2>
+            <h2>6. Contact</h2>
             <p>
               For questions about these terms, contact us at{' '}
               <a href="/about">hello{'\u0040'}nebulacomponents.shop</a>.

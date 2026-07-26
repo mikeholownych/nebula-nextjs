@@ -23,6 +23,7 @@ import { POST as auditEmailPost } from '@/app/api/audit/email/route'
 import { POST as checkoutPost } from '@/app/api/checkout/route'
 import { GET as emailGet, POST as emailPost } from '@/app/api/email/process/route'
 import { POST as rb2bPost } from '@/app/api/webhooks/rb2b/route'
+import { getPublishedCaseStudies, publicFacts } from '@/app/lib/public-facts'
 import AuditPage from '@/app/audit/page'
 import CheckoutPage from '@/app/checkout/page'
 import ThankYouPage from '@/app/thank-you/page'
@@ -367,20 +368,19 @@ describe('production safety containment', () => {
     const indexSource = readFileSync(path.join(process.cwd(), 'app/case-studies/page.tsx'), 'utf8')
     const sitemapSource = readFileSync(path.join(process.cwd(), 'app/sitemap.ts'), 'utf8')
 
-    // Unknown slugs still 404 — only documented cases in CASE_STUDIES resolve.
+    // Unknown slugs still 404 — only evidence-gated registry entries resolve.
     expect(caseStudySource).toMatch(/notFound\(\)/)
     expect(caseStudySource).not.toContain('score:')
     expect(caseStudySource).not.toContain("'@type': 'CaseStudy'")
 
     // As of 2026-07-24 there are zero real, evidenced case studies (the
     // previous 4 entries were invented — this business has no completed
-    // paid engagements on record). CASE_STUDIES and the sitemap's
-    // caseStudySlugs must stay in lockstep and both empty until a case
-    // study with real dates, a real metric, and inspectable evidence is
-    // added to CASE_STUDIES — at which point this test should be updated
-    // to assert that specific slug is present in both places again.
-    expect(caseStudySource).toMatch(/CASE_STUDIES:\s*Record<string,\s*CaseStudy>\s*=\s*\{\}/)
-    expect(sitemapSource).toMatch(/caseStudySlugs:\s*string\[\]\s*=\s*\[\]/)
+    // paid engagements on record). Detail routes and sitemap entries must
+    // derive from the same fail-closed public-facts accessor.
+    expect(publicFacts.caseStudies.status).toBe('none_published')
+    expect(getPublishedCaseStudies()).toEqual([])
+    expect(caseStudySource).toContain('getPublishedCaseStudies()')
+    expect(sitemapSource).toContain('getPublishedCaseStudies()')
 
     // The index page must not claim real/verified results while
     // CASE_STUDIES is empty — this is exactly the gap that let 4

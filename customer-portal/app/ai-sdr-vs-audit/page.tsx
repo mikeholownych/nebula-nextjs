@@ -1,4 +1,8 @@
 import type { Metadata } from 'next'
+import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
+
+const fixPack = getActiveFixPack()
+const fixPackPrice = fixPack ? formatUsd(fixPack.priceCents) : undefined
 
 export const metadata: Metadata = {
   title: "You Don't Need an AI SDR — Fix Your Landing Page First | Nebula Components",
@@ -21,7 +25,7 @@ export default function AiSdrVsAuditPage() {
           </p>
 
           <blockquote className="border border-border bg-bg-panel py-4 px-5 rounded-r-lg text-left mb-8">
-            <strong>Quick Answer:</strong> Before buying an AI SDR ($15k–$25k/year), audit your landing page first ($0–$97). An SDR drives more traffic to a page that already can't convert — multiplying your waste, not your revenue.
+            <strong>Quick Answer:</strong> Before buying an AI SDR ($15k–$25k/year), audit your landing page first ({fixPackPrice ? `$0–${fixPackPrice}` : '$0; no paid offer is currently verified'}). An SDR drives more traffic to a page that already can&apos;t convert — multiplying your waste, not your revenue.
           </blockquote>
 
           <div className="flex flex-wrap justify-center gap-3">
@@ -82,7 +86,7 @@ export default function AiSdrVsAuditPage() {
             </thead>
             <tbody>
               {[
-                { label: 'Entry cost', zamp: '$25k–$75k pilot', nebula: 'Free (or $97 fix pack)' },
+                { label: 'Entry cost', zamp: '$25k–$75k pilot', nebula: fixPackPrice ? `Free (or ${fixPackPrice} Fix Pack)` : 'Free audit; paid offer unavailable' },
                 { label: 'Time to value', zamp: '4–10 weeks', nebula: 'Audit delivered in under 60 seconds' },
                 { label: 'Purchase motion', zamp: 'Book a demo → sales cycle → legal review', nebula: 'Self-serve checkout.' },
                 { label: 'What it fixes', zamp: 'Outbound volume (sends more emails)', nebula: 'The page itself (fixes what converts)' },
@@ -97,7 +101,7 @@ export default function AiSdrVsAuditPage() {
               ))}
               <tr className="border-t-2 border-border">
                 <td className="p-4 text-fg font-extrabold">Should you buy it?</td>
-                <td className="p-4 bg-bg-panel text-danger font-semibold">Only after your page converts at 3%+</td>
+                <td className="p-4 bg-bg-panel text-danger font-semibold">Only after your page has a verified conversion baseline</td>
                 <td className="p-4 bg-bg text-accent font-semibold">Do this first. Always.</td>
               </tr>
             </tbody>
@@ -133,8 +137,11 @@ export default function AiSdrVsAuditPage() {
         <p className="mb-4">The smartest path to revenue right now — whether you're pre-revenue or scaling — is:</p>
         <ol className="list-decimal list-inside mb-6 space-y-2">
           <li><strong>Run a free audit.</strong> Automated URL submission and evidence-backed scoring are live — no signup required.</li>
-          <li><strong>Fix what's broken.</strong> Free kit shows you exactly what to change. $97 pack implements it for you.</li>
-          <li><strong>Get a page that converts at 3-6%.</strong> Now every dollar of traffic or outreach actually produces leads.</li>
+          <li>
+            <strong>Fix what&apos;s broken.</strong> The free kit shows you what to change.
+            {fixPackPrice && ` The ${fixPackPrice} Fix Pack delivers a tailored AI prompt pack by email within minutes; you or your developer implements the changes, with no Nebula access to your site, CMS, or hosting.`}
+          </li>
+          <li><strong>Measure the result.</strong> Re-audit the page and compare evidence before deciding whether to add more traffic.</li>
           <li><strong>Then — and only then — consider an AI SDR.</strong> Because now the math works. Each outbound email lands on a page that converts.</li>
         </ol>
 
