@@ -1,5 +1,7 @@
 # Trust-Gap Detector
 
+Workflow ID: `trust-gap-detector`
+
 ## Purpose
 
 Inventory visible proof and identify claims whose support is absent, unclear, stale, or difficult to inspect.

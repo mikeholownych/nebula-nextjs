@@ -152,12 +152,17 @@ describe('landing page intelligence stack', () => {
       '`status`',
     ]
 
+    const workflowIds: string[] = []
     for (const relative of EXPECTED_ENTRIES.filter((entry) => entry.startsWith('workflows/'))) {
       const markdown = decoder.decode(entries[relative])
+      const workflowIdMatches = [...markdown.matchAll(/^Workflow ID: `([a-z0-9]+(?:-[a-z0-9]+)*)`$/gm)]
+      expect(workflowIdMatches).toHaveLength(1)
+      workflowIds.push(workflowIdMatches[0][1])
       for (const heading of requiredHeadings) expect(markdown).toContain(heading)
       for (const field of requiredFields) expect(markdown).toContain(field)
       expect(markdown).toContain('../evidence-record.schema.json')
     }
+    expect(new Set(workflowIds).size).toBe(workflowIds.length)
 
     const allText = Object.entries(entries)
       .filter(([relative]) => relative.endsWith('.md'))
@@ -238,6 +243,29 @@ describe('landing page intelligence stack', () => {
     })],
   ] as Array<[string, (sourceDir: string) => void]>)('rejects malformed manifest: %s', (_label, mutate) => {
     expectFixtureRejected(mutate)
+  })
+
+  it('rejects duplicate workflow IDs before emitting artifacts', () => {
+    withFixture((sourceDir) => {
+      const files = [
+        path.join(sourceDir, 'workflows', '01-message-match-checker.md'),
+        path.join(sourceDir, 'workflows', '02-trust-gap-detector.md'),
+      ]
+      for (const file of files) {
+        const markdown = readFileSync(file, 'utf8')
+        const withDuplicateId = /^Workflow ID:/m.test(markdown)
+          ? markdown.replace(/^Workflow ID: `[^`]+`$/m, 'Workflow ID: `duplicate-workflow`')
+          : markdown.replace(/^(# .+)$/m, '$1\n\nWorkflow ID: `duplicate-workflow`')
+        writeFileSync(file, withDuplicateId)
+      }
+    }, (sourceDir, outputDir) => {
+      expect(() => runPackager([], {
+        STACK_SOURCE_DIR: sourceDir,
+        STACK_OUTPUT_DIR: outputDir,
+      })).toThrow(/duplicate workflow ID/i)
+      expect(existsSync(path.join(outputDir, 'nebula-landing-page-intelligence-stack-v1.zip'))).toBe(false)
+      expect(existsSync(path.join(outputDir, 'nebula-landing-page-intelligence-stack-v1.zip.sha256'))).toBe(false)
+    })
   })
 
   it('rejects malformed manifest JSON', () => {

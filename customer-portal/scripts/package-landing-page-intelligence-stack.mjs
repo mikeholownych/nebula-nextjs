@@ -67,6 +67,33 @@ function validateManifest(manifest) {
   assertEqualArrays(manifest.files, EXPECTED_FILES, 'Manifest files')
 }
 
+async function validateWorkflowIds() {
+  const declarations = []
+  const workflowFiles = EXPECTED_FILES.filter((relative) => relative.startsWith('workflows/'))
+
+  for (const relative of workflowFiles) {
+    const markdown = await readFile(path.join(SOURCE_DIR, relative), 'utf8')
+    const matches = [...markdown.matchAll(/^Workflow ID: `([a-z0-9]+(?:-[a-z0-9]+)*)`$/gm)]
+    if (matches.length !== 1) {
+      throw new Error(`Workflow must declare exactly one valid workflow ID: ${relative}`)
+    }
+    declarations.push({ relative, workflowId: matches[0][1] })
+  }
+
+  const seen = new Set()
+  for (const { workflowId } of declarations) {
+    if (seen.has(workflowId)) throw new Error(`Duplicate workflow ID: ${workflowId}`)
+    seen.add(workflowId)
+  }
+
+  for (const { relative, workflowId } of declarations) {
+    const expectedId = path.posix.basename(relative, '.md').replace(/^\d+-/, '')
+    if (workflowId !== expectedId) {
+      throw new Error(`Workflow ID must match its canonical filename: ${relative}`)
+    }
+  }
+}
+
 async function listSourceFiles(directory, prefix = '') {
   const files = []
   const entries = await readdir(directory, { withFileTypes: true })
@@ -94,6 +121,7 @@ async function listSourceFiles(directory, prefix = '') {
 async function main() {
   const manifest = JSON.parse(await readFile(path.join(SOURCE_DIR, 'manifest.json'), 'utf8'))
   validateManifest(manifest)
+  await validateWorkflowIds()
   const sourceFiles = await listSourceFiles(SOURCE_DIR)
   assertEqualArrays(sourceFiles, manifest.files, 'Source files')
 
