@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: "Mobile Landing Page Optimization | Nebula Components",
   description: "60–70% of landing page traffic is mobile. Here's how to audit and fix your mobile conversion experience.",
+  alternates: { canonical: 'https://nebulacomponents.shop/mobile-landing-page-optimization' },
   openGraph: {
     title: "Mobile Landing Page Optimization",
     description: "60–70% of landing page traffic is mobile. Here's how to audit and fix your mobile conversion experience.",

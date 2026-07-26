@@ -12,53 +12,6 @@ export const metadata: Metadata = {
   },
 }
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'What is message match in advertising?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Message match is the degree of continuity between the specific words and offer in an ad and the specific words and offer on the landing page that ad points to. It is not a vague concept about 'alignment' — it is a direct comparison: does the headline, offer, and tone of the landing page fulfil exactly what the ad promised? Poor message match is the most common cause of high bounce rates on paid traffic campaigns. It also raises effective CPC through lower Quality Score, making it simultaneously a conversion problem and a cost problem.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'How do I check message match on my landing page?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Open your top-spending ad in one browser tab and the destination URL in another. Make three comparisons: (1) Does the core noun phrase from the ad headline appear in the page H1 — exactly or semantically? (2) Does the offer in the ad (free audit, discount, demo) match the primary above-fold CTA on the page? (3) Does the emotional tone of the ad (problem-aware, solution-aware, brand-aware) match the hero section of the page? Any failure on these three checks is a confirmed message-match break. Fix the page before spending another dollar on the ad.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Does message match affect Google Ads Quality Score?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Yes. Landing Page Experience is one of the three components of Quality Score, and message match is a direct signal within that component. Google evaluates whether the landing page content is relevant to the ad's keywords and headline. Poor message match produces a 'Below Average' Landing Page Experience rating, which raises your effective CPC in the ad auction. Strong message match can reduce CPC and improve ad rank. Fixing a message-match break on a landing page that receives significant paid traffic is therefore both a conversion improvement and a direct cost reduction.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What are the most common types of message match failure?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "There are three distinct failure modes. (1) Keyword mismatch: the ad targets a specific keyword but the page headline uses a broad category term — the visitor searched for something precise and the page offers something generic. (2) Offer mismatch: the ad promotes a bounded, low-commitment offer (free audit, free trial) but the page leads with a high-commitment ask (book a call, request a quote). (3) Tone mismatch: the ad is problem-aware ('Still losing money on Google Ads?') but the page hero is brand-aspirational ('We help ambitious brands unlock their digital potential'). Each failure has a different fix.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Should every ad group have its own landing page?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'It depends on budget and volume. The ideal is one landing page per distinct keyword intent — the ad targeting "free landing page audit" should point to a page whose H1 echoes that exact phrase, and the ad targeting "landing page optimisation service" should point to a separate page. In practice, most accounts cannot justify building dedicated pages for every ad group. A workable approach is to create dedicated pages for your top 3-5 ad groups by spend, and use dynamic keyword insertion or swappable headline components to cover the rest. The minimum viable fix is ensuring your generic homepage or services page is not the destination for any high-intent, specific-keyword ad group.',
-      },
-    },
-  ],
-}
-
 const articleSchema = createArticleSchema({
   headline: 'Message Match Checklist for Paid Traffic Landing Pages',
   description:
@@ -74,10 +27,6 @@ export default function MessageMatchChecklistPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       <div className="mx-auto max-w-3xl px-6 py-14">
@@ -121,19 +70,19 @@ export default function MessageMatchChecklistPage() {
               <span className="font-medium text-fg">"free website audit for ecommerce"</span> arrives with
               one expectation locked in. If your hero headline reads{' '}
               <span className="font-medium text-fg">"Grow Your Business Online"</span>, that expectation is
-              unmet inside the first 200 milliseconds. The visitor's brain registers the mismatch before
-              they consciously process any other element on the page. They leave.
+              unmet in the first screenful. The visitor sees a different promise from the one they
+              clicked, creating a clear reason to reconsider the page.
             </p>
             <p className="mt-4 leading-relaxed text-fg-muted">
-              Google's Quality Score algorithm uses message match as a direct signal. Poor match raises your
-              effective CPC. Strong match lowers it. Message match is simultaneously a conversion problem
-              and a cost problem — which makes it the highest-leverage fix available on most paid accounts.
+              Google describes landing-page experience as one component of Quality Score. A page that does
+              not reflect the ad's topic and offer can create both relevance and conversion problems.
+              Measure the effect in your own account rather than assuming a universal CPC change.
             </p>
           </section>
 
           {/* Section 2: Why it breaks */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
-            <h2 className="mb-4 text-2xl font-bold text-fg">Why It Breaks: The 3 Most Common Failures</h2>
+            <h2 className="mb-4 text-2xl font-bold text-fg">Three Message-Match Failure Shapes</h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               Message match breaks in three distinct ways. Each has a different root cause and a different fix.
             </p>
@@ -146,8 +95,7 @@ export default function MessageMatchChecklistPage() {
                 <p className="leading-relaxed text-fg-muted">
                   The ad targets a specific keyword — <em>"landing page audit"</em> — but the page headline
                   uses a category term like <em>"conversion optimisation services."</em> The visitor searched
-                  for a precise thing. The page offers a broad category. Scent is broken. This is the most
-                  common failure on accounts running broad-match or phrase-match keywords that point to a
+                  for a precise thing. The page offers a broad category. Scent is broken. This can occur when broad-match or phrase-match keywords point to a
                   single generic page.
                 </p>
               </div>
@@ -160,8 +108,7 @@ export default function MessageMatchChecklistPage() {
                   The ad promotes a specific, bounded offer — <em>"Free 10-point landing page audit"</em> —
                   but the page leads with a monthly retainer or a vague "get in touch" CTA. The visitor
                   expected a free, low-commitment entry point. Instead they face a high-commitment ask.
-                  Cognitive friction spikes. This failure is endemic in agencies that run lead-gen ads but
-                  point all traffic to a generic services page.
+                  The page asks for more commitment than the ad prepared the visitor to make.
                 </p>
               </div>
 
@@ -259,8 +206,8 @@ export default function MessageMatchChecklistPage() {
             <p className="mb-6 leading-relaxed text-fg-muted">
               Run the Nebula audit to get a scored breakdown of your landing page&apos;s message match,
               offer clarity, and conversion structure. If the audit surfaces a confirmed break, the{' '}
-              <span className="font-medium text-fg">$97 Fix Pack</span> delivers a rewritten hero and CTA
-              within 48 hours — no retainer, no scope creep.
+              <span className="font-medium text-fg">$97 Fix Pack</span> gives you an AI prompt for a
+              rewritten hero and CTA, delivered within minutes — no retainer, no scope creep.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

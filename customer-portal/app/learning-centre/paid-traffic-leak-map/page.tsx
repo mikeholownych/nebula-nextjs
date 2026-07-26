@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Paid Traffic Leak Map: Where Your Ad Budget Disappears | Nebula Components',
+  title: 'Paid Traffic Leak Map: Find Where Budget Leaks | Nebula',
   description:
     'A diagnostic map of every stage where paid traffic leaks before converting. Identify which leak is bleeding your ad budget, then get the fix.',
   alternates: {
@@ -53,7 +53,7 @@ const faqSchema = {
       name: 'How long does it take to fix a paid traffic conversion leak?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Depends on the leak. Message-match fixes — rewriting the headline to mirror the ad — can be live in under an hour. Mobile LCP fixes — converting the hero image to WebP and adding correct sizing attributes — typically take 2–4 hours including testing. Form friction fixes — removing optional fields — take under an hour. Layout fixes for mobile — implementing a sticky CTA bar or restructuring the above-fold section — typically take 4–8 hours of development time. The most time-consuming fix is trust signal work — gathering, formatting, and placing new testimonials or case study content. The Nebula Fix Pack addresses all confirmed leaks within 48 hours.',
+        text: 'Depends on the leak. Message-match fixes — rewriting the headline to mirror the ad — can be live in under an hour. Mobile LCP fixes — converting the hero image to WebP and adding correct sizing attributes — typically take 2–4 hours including testing. Form friction fixes — removing optional fields — take under an hour. Layout fixes for mobile — implementing a sticky CTA bar or restructuring the above-fold section — typically take 4–8 hours of development time. The most time-consuming fix is trust signal work — gathering, formatting, and placing new testimonials or case study content. The Nebula Fix Pack gives you a tailored AI prompt for every confirmed leak, delivered within minutes, so you can start on whichever fix is fastest first.',
       },
     },
     {

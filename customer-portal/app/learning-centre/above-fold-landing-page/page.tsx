@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Above The Fold Landing Page: What Paid Traffic Decides Before Scrolling | Nebula Components',
+  title: 'Above The Fold: What Paid Traffic Decides First | Nebula',
   description:
     'Most paid social traffic never scrolls past the first screen. If your above-fold section does not close the case before they scroll, it never gets closed.',
   alternates: {
@@ -349,9 +349,9 @@ export default function AboveFoldLandingPagePage() {
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 7 signals and returns a
-              prioritised list of what to fix first. The $97 Fix Pack implements
-              every finding — rewritten copy, rebuilt sections, deployed within
-              48 hours.
+              prioritised list of what to fix first. The $97 Fix Pack gives you
+              a tailored AI prompt for every finding — rewritten copy, rebuilt
+              sections — ready to run within minutes.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

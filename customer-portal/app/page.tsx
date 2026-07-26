@@ -2,14 +2,15 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SelfScan from './components/SelfScan'
 import AggregateProof from './components/AggregateProof'
+import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE, PAID_TRAFFIC_DIAGNOSTIC } from './lib/homepageContent'
 
 export const metadata: Metadata = {
-  title: 'Free Landing Page Audit — Stop Burning Ad Budget | Nebula Components',
-  description: 'Evidence-backed landing page conversion diagnosis and an AI prompt pack to fix it yourself — for founders spending on paid ads with low or zero conversions.',
+  title: HOMEPAGE_SEO_TITLE,
+  description: HOMEPAGE_DESCRIPTION,
   alternates: { canonical: 'https://nebulacomponents.shop' },
   openGraph: {
-    title: 'Free Landing Page Audit — Stop Burning Ad Budget | Nebula Components',
-    description: 'Evidence-backed landing page conversion diagnosis and an AI prompt pack to fix it yourself — for founders spending on paid ads with low or zero conversions.',
+    title: HOMEPAGE_SEO_TITLE,
+    description: HOMEPAGE_DESCRIPTION,
     url: 'https://nebulacomponents.shop',
     siteName: 'Nebula Components',
     locale: 'en_US',
@@ -17,44 +18,9 @@ export const metadata: Metadata = {
   },
 }
 
-const howToSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'HowTo',
-  name: 'How to get a free landing page audit from Nebula Components',
-  description: 'Get an evidence-backed diagnosis of your landing page in three steps.',
-  totalTime: 'PT2M', // matches the real backend timeout (app/api/audit/start/route.ts) — do not understate this
-  step: [
-    {
-      '@type': 'HowToStep',
-      position: 1,
-      name: 'Enter Your URL',
-      text: 'Drop in any landing page URL — no account needed.',
-      url: 'https://nebulacomponents.shop/audit',
-    },
-    {
-      '@type': 'HowToStep',
-      position: 2,
-      name: 'Get Your Score',
-      text: 'We analyze above-fold content, SEO foundations, ad signals, and speed.',
-      url: 'https://nebulacomponents.shop/audit',
-    },
-    {
-      '@type': 'HowToStep',
-      position: 3,
-      name: 'See Your Fixes',
-      text: 'Get prioritized recommendations with impact and effort scores.',
-      url: 'https://nebulacomponents.shop/audit',
-    },
-  ],
-}
-
 export default function Home() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
-      />
       <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
       {/* Hero Section — Vindication Frame */}
       <section className="mx-auto flex min-h-[70vh] max-w-4xl flex-col justify-center px-6 py-24 text-center">
@@ -257,6 +223,28 @@ export default function Home() {
                 Get prioritized recommendations with impact/effort scores.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Buyer education — substantive diagnostic context, not scanner filler */}
+      <section className="border-t border-border px-6 py-20">
+        <div className="mx-auto max-w-4xl">
+          <div className="max-w-2xl">
+            <h2 className="text-2xl font-extrabold text-fg md:text-4xl md:tracking-[-0.03em]">
+              Know what the click proved — and what it didn't.
+            </h2>
+            <p className="mt-4 text-base leading-7 text-fg-muted">
+              Paid traffic creates evidence. The page determines whether that evidence becomes a decision.
+            </p>
+          </div>
+          <div className="mt-12 divide-y divide-border border-y border-border">
+            {PAID_TRAFFIC_DIAGNOSTIC.map((section) => (
+              <article key={section.heading} className="grid gap-4 py-8 md:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] md:gap-12">
+                <h3 className="text-2xl font-extrabold text-fg">{section.heading}</h3>
+                <p className="max-w-[65ch] text-base leading-8 text-fg-muted">{section.body}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>

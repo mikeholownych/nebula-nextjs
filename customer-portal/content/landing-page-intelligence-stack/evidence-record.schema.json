@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nebulacomponents.shop/schemas/landing-page-evidence-record-v1.json",
+  "title": "Landing Page Evidence Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "workflow_id",
+    "page_url",
+    "observed_at",
+    "selector",
+    "observation",
+    "interpretation",
+    "confidence",
+    "status"
+  ],
+  "properties": {
+    "workflow_id": { "type": "string", "minLength": 1 },
+    "page_url": { "type": "string", "format": "uri", "pattern": "^https?://" },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "selector": { "type": "string", "minLength": 1 },
+    "observation": { "type": "string", "minLength": 1 },
+    "interpretation": { "type": "string" },
+    "confidence": { "enum": ["low", "medium", "high"] },
+    "status": { "enum": ["observed", "not_observed", "not_testable"] }
+  }
+}

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Google Ads Clicks But No Sales: Check The Page Before Budget | Nebula Components',
+  title: 'Google Ads Clicks But No Sales: Fix The Page | Nebula',
   description:
     'If Google Ads produces clicks but no sales, the campaign may be doing its job. The conversion leak usually happens on the landing page, not in the ad.',
   alternates: {
@@ -280,7 +280,8 @@ export default function GoogleAdsClicksNoSales() {
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 7 signals and identifies where
               the page is breaking the conversion chain. The $97 Fix Pack
-              implements every finding within 48 hours.
+              gives you a tailored AI prompt for every finding, delivered
+              within minutes.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

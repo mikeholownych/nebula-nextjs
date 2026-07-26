@@ -58,7 +58,7 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'What is the fastest way to audit a landing page on mobile?',
+      name: 'What is a practical way to audit a landing page on mobile?',
       acceptedAnswer: {
         '@type': 'Answer',
         text: "Five steps, under 5 minutes: (1) Open the page on a real phone in Chrome (iOS or Android — not desktop browser DevTools 'mobile view'). (2) Read the headline aloud without zooming. If you hesitate, text is too small. (3) Screenshot the first viewport — is the CTA visible without scrolling? (4) Tap every button with your thumb. Any mis-tap is a target under 44px. (5) Run Google PageSpeed Insights on mobile and check your LCP score and the element causing it. These five steps expose the majority of mobile conversion leaks in under five minutes.",
@@ -284,7 +284,7 @@ export default function MobileLandingPageLeaks() {
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 7 signals — including mobile layout, LCP,
               and CTA visibility — against your actual landing page URL. The $97 Fix Pack
-              implements every finding within 48 hours.
+              gives you a tailored AI prompt for every finding, delivered within minutes.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

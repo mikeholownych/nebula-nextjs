@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: "Landing Page CTA Optimization | Nebula Components",
   description: "How to write, place, and test calls-to-action that convert cold traffic into leads and buyers.",
+  alternates: { canonical: 'https://nebulacomponents.shop/cta-optimization' },
 }
 
 const faqItems = [

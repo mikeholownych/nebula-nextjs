@@ -3,59 +3,20 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Proof Before CTA: Why Social Proof Placement Determines Conversion | Nebula Components',
+  title: 'Proof Before CTA: Social Proof Placement Guide | Nebula',
   description:
-    'Where you place social proof relative to your CTA has a measurable impact on conversion. The data consistently favors proof first. Here is the exact order that works.',
+    'What visitors see before a CTA can change how they evaluate the ask. Use these proof-placement sequences as hypotheses to test on your own traffic.',
   alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/proof-before-cta' },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'Proof Before CTA: Why Social Proof Placement Determines Conversion',
   description:
-    'Where you place social proof relative to your CTA has a measurable impact on conversion. The data consistently favors proof first.',
+    'What visitors see before a CTA can change how they evaluate the ask. These proof-placement sequences are testable hypotheses, not universal laws.',
   url: 'https://nebulacomponents.shop/learning-centre/proof-before-cta',
   publishedDate: '2025-07-15',
   modifiedDate: '2026-07-21',
 })
-
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'Why does proof placement affect conversion rate?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Proof placement affects conversion because it determines what the visitor's brain has processed before encountering the commitment ask. Cold traffic — visitors arriving from paid ads with no prior relationship with the brand — defaults to risk-aversion when asked to take an action. A CTA that appears before any credibility evidence forces the visitor to decide with no supporting data. Proof placed before the CTA creates micro-commitments: the visitor nods at a result, recognises a client name, or processes a stat. These micro-commitments lower the psychological cost of clicking the button that follows.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What types of social proof increase conversion rate the most?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Ranked by conversion impact: (1) Outcome statistics with context — a number tied to a specific intervention ('ROAS increased from 1.8× to 4.1× across 23 accounts after fixing the hero section') is hard to dismiss. (2) Case study snippets — a two-sentence before/after with the problem, fix, and result. (3) Named testimonials with role and company — the role signals that the reviewer has relevant authority to assess the claim. (4) Recognisable logos — borrowed credibility, but only when the relationship is genuine. Generic 5-star claims without specifics carry almost no weight. The test for any proof element: can a visitor understand the claim and its relevance in under 10 seconds?",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Where exactly should proof be placed on a landing page?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "At least one proof element must be visible before the first meaningful CTA — any button asking for contact details, a purchase, a demo, or a free trial. 'Meaningful' excludes navigation links and 'learn more' anchors. For short pages: headline → one outcome stat or logo strip → CTA. For mid-length pages: headline → problem statement → named testimonial or case snippet → CTA → supporting proof → second CTA. The most common error is placing proof at the bottom of the page where visitors who already bounced cannot see it. Proof earns its value only when it appears at the moment of hesitation, which is almost always just before the first ask.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'How do I add proof to a landing page without a redesign?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Three implementations that require no redesign: (1) Insert a single stat above the hero CTA — one line of text with your strongest outcome number placed directly above the primary button. (2) Pull one testimonial into the hero section — move the shortest, most specific testimonial from wherever it currently sits to directly beneath your subheadline, with name, role, and company. (3) Add an outcome-anchored subheadline — if you have no ready testimonials, rewrite the subheadline to include a verifiable result claim, then immediately follow it with the supporting data. Each of these can be live within an hour.",
-      },
-    },
-  ],
-}
 
 export default function ProofBeforeCTAPage() {
   return (
@@ -63,10 +24,6 @@ export default function ProofBeforeCTAPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       <div className="mx-auto max-w-3xl px-6 py-14">
@@ -89,9 +46,9 @@ export default function ProofBeforeCTAPage() {
             Proof Before CTA: The Simple Fix Most Landing Pages Miss
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
-            Sequencing is a conversion lever. When a page asks for commitment before it has
-            established credibility, the visitor&apos;s default answer is no. The fix is not more
-            persuasive copy — it is reordering what the visitor sees first.
+            Sequencing is a testable conversion lever. When a page asks for commitment before it has
+            established credibility, some visitors may hesitate. Test whether moving relevant,
+            verifiable proof before the ask improves the behavior that matters.
           </p>
         </div>
 
@@ -101,10 +58,9 @@ export default function ProofBeforeCTAPage() {
             Why Asking Before Proving Fails
           </h2>
           <p className="leading-relaxed text-fg-muted">
-            Commitment psychology is well-documented: people are more willing to take an action
-            after they have already formed a positive belief about the entity asking. A CTA that
-            appears before any evidence forces the visitor to make a judgment with no data. In the
-            absence of data, the brain defaults to risk-aversion. The visitor bounces not because
+            A practical hypothesis is that visitors evaluate an ask using the information they have already
+            seen. A CTA that appears before any relevant evidence gives them less context for that
+            judgment. The visitor bounces not because
             the offer is wrong — but because the page gave them no reason to trust it before
             demanding a decision.
           </p>
@@ -131,15 +87,15 @@ export default function ProofBeforeCTAPage() {
           <p className="mb-5 leading-relaxed text-fg-muted">
             Not every social proof element carries equal weight. Generic testimonials
             (&quot;Amazing team!&quot;) are nearly worthless. Proof earns trust in proportion to its
-            specificity and verifiability. Ranked by conversion impact:
+            specificity and verifiability. Useful proof formats to test include:
           </p>
           <ul className="space-y-4 text-fg-muted">
             <li className="flex items-start gap-3">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
               <div>
                 <span className="font-semibold text-fg">Outcome statistics with context.</span>{' '}
-                &quot;Average ROAS increased from 1.8× to 4.1× across 23 accounts after fixing the
-                hero section.&quot; A number tied to a specific intervention is hard to dismiss.
+                &quot;A documented before-and-after result tied to a specific intervention.&quot; The
+                claim is useful only when the source, period, and method are inspectable.
               </div>
             </li>
             <li className="flex items-start gap-3">
@@ -155,8 +111,8 @@ export default function ProofBeforeCTAPage() {
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
               <div>
                 <span className="font-semibold text-fg">Named testimonials with role and company.</span>{' '}
-                &quot;Sarah L., Performance Marketing Manager, [Company]&quot; outperforms
-                &quot;Sarah L.&quot; by a measurable margin. The role signals that the reviewer has
+                &quot;Sarah L., Performance Marketing Manager, [Company]&quot; gives the visitor
+                more context than &quot;Sarah L.&quot; alone. The role signals that the reviewer has
                 relevant authority to assess the claim.
               </div>
             </li>
@@ -183,9 +139,9 @@ export default function ProofBeforeCTAPage() {
             Where to Place Proof Relative to the CTA
           </h2>
           <p className="mb-5 leading-relaxed text-fg-muted">
-            The rule is absolute: at least one proof element must be visible before the first
+            A useful experiment is to place one relevant proof element before the first
             meaningful CTA. &quot;Meaningful&quot; means any button asking for contact details,
-            a purchase, a demo, or a free trial. Here is the hierarchy that works:
+            a purchase, a demo, or a free trial. Here are three sequence patterns to test:
           </p>
 
           {/* Visual hierarchy examples */}
@@ -224,10 +180,9 @@ export default function ProofBeforeCTAPage() {
           </div>
 
           <p className="mt-5 leading-relaxed text-fg-muted">
-            The common mistake is treating proof as decoration — dropping a logo strip
+            A common mistake is treating proof as decoration — dropping a logo strip
             at the very bottom where no one who already bounced will see it. Proof earns
-            its value only when it appears at the moment of hesitation, which is almost
-            always just before the first ask.
+            its value only when it appears at the moment of hesitation, where the visitor is deciding whether the ask is credible.
           </p>
         </section>
 
@@ -238,7 +193,7 @@ export default function ProofBeforeCTAPage() {
           </h2>
           <p className="mb-5 leading-relaxed text-fg-muted">
             None of these require touching your ad creative, rebuilding the page, or waiting for a
-            development sprint. Each can be live within an hour.
+            development sprint. Each is a bounded edit that can be tested without rebuilding the page.
           </p>
           <div className="space-y-5">
             <div>
@@ -247,9 +202,9 @@ export default function ProofBeforeCTAPage() {
                 Take your strongest outcome number — a percentage lift, a revenue figure, a client
                 count — and place it in a small badge or inline text directly above the primary
                 button. One line is sufficient. The stat does not need a headline of its own.
-                Example: <em>&quot;Used by 340+ operators to identify the exact section killing
-                their conversions.&quot;</em> That sentence, above the button, costs nothing and
-                anchors credibility before the ask.
+                Example: <em>&quot;See the issue, the evidence, and the next fix.&quot;</em> If you use
+                an outcome or customer count instead, publish it only when the underlying record is
+                current and inspectable.
               </p>
             </div>
             <div>
@@ -266,11 +221,9 @@ export default function ProofBeforeCTAPage() {
               <h3 className="mb-1 text-lg font-semibold text-fg">3. Add an outcome-anchored subheadline</h3>
               <p className="leading-relaxed text-fg-muted">
                 If you have no testimonials ready to use, rewrite the subheadline to contain a
-                verifiable result. Replace a benefit statement (&quot;Turn more clicks into
-                customers&quot;) with an outcome claim (&quot;Pages audited with this method
-                convert at 2.1× the category average.&quot;). A claim is not proof on its own, but
-                it signals that evidence exists and primes the visitor to expect it. Follow it
-                immediately with the supporting data point or testimonial.
+                verifiable result. Replace a generic benefit statement with a specific outcome claim only when you can
+                substantiate it. A claim is not proof on its own; place the supporting method,
+                source, and limitations close enough for the visitor to inspect.
               </p>
             </div>
           </div>
@@ -280,7 +233,7 @@ export default function ProofBeforeCTAPage() {
         <section className="mt-6 rounded-2xl border border-accent/30 bg-accent/5 p-8">
           <h2 className="mb-3 text-2xl font-bold text-fg">Find the proof leak on your page</h2>
           <p className="mb-6 leading-relaxed text-fg-muted">
-            The free Nebula audit identifies exactly where your page loses credibility before the
+            The free Nebula audit reports where the page may lose credibility before the
             CTA — missing proof, weak proof, misplaced proof. If the audit flags a proof leak,
             the $97 Fix Pack delivers a prioritised fix plan you can implement the same day.
           </p>

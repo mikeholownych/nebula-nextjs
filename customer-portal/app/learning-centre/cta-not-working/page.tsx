@@ -42,7 +42,7 @@ export default function CtaNotWorkingPage() {
             Every CTA is a request. You're asking a stranger — someone who arrived at your page seconds ago — to hand over their email, their time, or their money. Whether they comply depends almost entirely on one thing: whether the page has built enough trust to justify what you're asking.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Most landing pages get this wrong in the same direction. They ask for a demo call before showing a single proof point. They ask for a $297 purchase before the visitor has read one testimonial. They display a 'Buy Now' button at the top of the page, before the visitor knows what the product even does. The button itself is fine. The sequence is broken.
+            Most landing pages get this wrong in the same direction. They ask for a demo call before showing a single proof point. They ask for a $297 purchase before the visitor has read one testimonial. They display a 'Buy Now' button near the beginning of the page, before the visitor knows what the product even does. The button itself is fine. The sequence is broken.
           </p>
           <p className="leading-relaxed text-fg-muted">
             Commitment mismatch is the root cause behind most CTA failures. Before you change button colours or A/B test copy, you need to audit whether your page has actually earned the ask you're making.

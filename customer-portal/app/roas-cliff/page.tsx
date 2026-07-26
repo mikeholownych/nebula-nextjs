@@ -5,9 +5,10 @@ import '../globals.css'
 export const metadata: Metadata = {
   title: 'The ROAS Cliff — Why Your CTR Looks Fine and Your Page Converts Nobody | Nebula Components',
   description: 'A self-diagnostic guide for founders running paid traffic with zero or weak conversions. Score your landing page in 10 minutes. Find the monthly leak.',
+  alternates: { canonical: 'https://nebulacomponents.shop/roas-cliff' },
   openGraph: {
     title: 'The ROAS Cliff — Why Your CTR Looks Fine and Your Page Converts Nobody | Nebula Components',
-    description: 'Score your landing page across 5 dimensions. See your monthly leak estimate. Three fixes that actually move the number.',
+    description: 'Score your landing page across 7 conversion signals. See your monthly leak estimate. Three fixes that actually move the number.',
     type: 'article',
     url: 'https://nebulacomponents.shop/roas-cliff',
   },
@@ -81,11 +82,11 @@ export default function RoasCliffPage() {
         <div className="border-t border-border my-12" />
 
         <h2 className="text-xl font-semibold mt-12 mb-4 text-fg">
-          The 5-dimension self-audit
+          The 3-dimension self-audit
         </h2>
 
         <p className="mb-5 text-fg-muted">
-          This is the same scoring system used on every audit. Score yourself 1–10 on each dimension. Being generous to your own page is how you stay stuck.
+          This is a preview of the scoring system used in every audit. Score yourself 1–10 on each dimension. Being generous to your own page is how you stay stuck.
         </p>
 
         <div className="bg-bg-panel border border-border rounded-lg p-6 my-4">
@@ -174,21 +175,21 @@ export default function RoasCliffPage() {
         </p>
 
         <p className="mb-5 text-fg-muted">
-          At ,000/month in ad spend and a 7 average order value, assuming 2,000 clicks:
+          At $5,000/month in ad spend and a $150 average order value, assuming 2,000 clicks:
         </p>
 
         <div className="bg-danger/10 border border-danger/20 rounded-lg p-6 my-8">
           <div className="flex justify-between border-b border-danger/10 pb-3 mb-3 text-sm">
             <span className="text-fg-muted">0.4% conversion rate</span>
-            <span className="text-fg font-semibold">8 sales — 76 revenue — ,224 net loss</span>
+            <span className="text-fg font-semibold">8 sales — $1,200 revenue — $3,800 net loss</span>
           </div>
           <div className="flex justify-between border-b border-danger/10 pb-3 mb-3 text-sm">
             <span className="text-fg-muted">1.5% conversion rate</span>
-            <span className="text-fg font-semibold">30 sales — ,910 revenue — ,090 net loss</span>
+            <span className="text-fg font-semibold">30 sales — $4,500 revenue — $500 net loss</span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-fg-muted">Monthly difference</span>
-            <span className="text-fg font-bold">,134 from the same ad spend</span>
+            <span className="text-fg font-bold">$3,300 from the same ad spend</span>
           </div>
         </div>
 
@@ -254,7 +255,7 @@ export default function RoasCliffPage() {
             href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
             className="inline-block border border-border text-fg-muted font-medium px-7 py-3 rounded-md mt-3 hover:border-accent transition-colors"
           >
-            Skip ahead — 47 Fix Pack
+            Skip ahead — $97 Fix Pack
           </Link>
           <p className="text-xs text-fg-muted mt-4">
             No discovery call. No testing phase. Full refund if we don&apos;t find a problem worth fixing.

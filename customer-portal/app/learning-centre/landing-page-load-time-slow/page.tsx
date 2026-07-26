@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Landing Page Load Time Slow: Signal 4 Diagnosis and Fix | Nebula Components',
+  title: 'Landing Page Load Time Slow: Diagnose and Fix | Nebula',
   description:
     'Slow landing page load time bleeds conversions before the page is seen. Here is how to diagnose it, what the data says about the speed-conversion relationship, and where to start fixing.',
   alternates: {
@@ -358,8 +358,9 @@ export default function LandingPageLoadTimeSlow() {
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 7 signals including load time.
-              The $97 Fix Pack implements every finding — rebuilt sections,
-              speed fixes, deployed within 48 hours.
+              The $97 Fix Pack gives you a tailored AI prompt for every
+              finding — rebuilt sections, speed fixes — ready to run within
+              minutes.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

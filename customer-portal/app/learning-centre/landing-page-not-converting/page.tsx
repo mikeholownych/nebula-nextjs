@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Landing Page Not Converting Paid Traffic: 5 Diagnosable Leaks | Nebula Components',
+  title: 'Landing Page Not Converting: Fix These 5 Leaks | Nebula',
   description:
     'A landing page that does not convert paid traffic has at least one of five diagnosable leak patterns. Diagnose the right one before you change anything.',
   alternates: {
@@ -62,7 +62,7 @@ const faqSchema = {
       name: 'How long does it take to fix a non-converting landing page?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Depends on which leak is active. A message-match fix (rewriting the headline and hero copy) takes 2-4 hours with a clear brief. A proof restructure (repositioning testimonials, adding specificity) takes a day. A full CTA and form-friction overhaul is 1-2 days. Nebula's $97 Fix Pack implements all identified fixes from the audit within 48 hours.",
+        text: "Depends on which leak is active. A message-match fix (rewriting the headline and hero copy) takes 2-4 hours with a clear brief. A proof restructure (repositioning testimonials, adding specificity) takes a day. A full CTA and form-friction overhaul is 1-2 days. Nebula's $97 Fix Pack gives you a tailored AI prompt for every finding from the audit, delivered within minutes — you (or your developer) implement.",
       },
     },
   ],
@@ -122,7 +122,7 @@ export default function LandingPageNotConvertingPage() {
                 'Does the page show specific, dated proof that people like the visitor have succeeded?',
                 'Does the CTA name what happens next — not just "Submit" or "Get Started"?',
                 'Does the page pass a one-thumb scroll test on a 390px screen without loss of message?',
-                'Are the top three objections answered before the final CTA?',
+                'Are the three main objections answered before the final CTA?',
               ].map((q, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
@@ -389,7 +389,7 @@ export default function LandingPageNotConvertingPage() {
               Self-check
             </h3>
             <p className="leading-relaxed text-fg-muted">
-              List the top three reasons a qualified buyer would not convert on
+              List the three main reasons a qualified buyer would not convert on
               your page. Now check whether each reason is addressed — not in
               your FAQ, but on the page, above or adjacent to the final CTA. If
               the answers are buried or absent, the objection is a live
@@ -526,9 +526,9 @@ export default function LandingPageNotConvertingPage() {
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 7 signals and returns a
-              prioritised list of what to fix first. The $97 Fix Pack implements
-              every finding — rewritten copy, rebuilt sections, deployed to your
-              live page within 48 hours.
+              prioritised list of what to fix first. The $97 Fix Pack gives you
+              a tailored AI prompt for every finding — rewritten copy, rebuilt
+              sections — ready to run within minutes.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

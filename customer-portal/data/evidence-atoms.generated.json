@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "asOf": "2026-07-25",
+  "entries": [
+    {
+      "claimId": "claim-7-point-diagnosis",
+      "text": "Nebula uses a 7-point diagnosis framework covering message-match, trust signals, mobile layout, load time, CTA clarity, form friction, and compliance.",
+      "route": "/audit",
+      "slot": "audit-method-summary",
+      "projectionType": "visible_text",
+      "evidenceIds": [
+        "evidence-7point-framework-definition"
+      ],
+      "supportStatus": "directly_supported"
+    }
+  ],
+  "omissions": []
+}

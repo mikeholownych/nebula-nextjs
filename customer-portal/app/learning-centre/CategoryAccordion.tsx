@@ -49,23 +49,26 @@ export default function CategoryAccordion({ categoryOrder, categories }: Props) 
               </svg>
             </button>
 
-            {isOpen && (
-              <div id={`${id}-panel`} className="border-t border-border px-6 pb-6 pt-4">
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {list.map((a) => (
-                    <Link
-                      key={a.slug}
-                      href={`/learning-centre/${a.slug}`}
-                      className="flex flex-col gap-2 rounded-xl border border-border bg-bg-panel p-5 transition-colors hover:border-accent/40"
-                    >
-                      <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">{cat}</p>
-                      <h3 className="text-sm font-bold leading-snug text-fg">{a.title}</h3>
-                      <p className="mt-auto text-xs leading-relaxed text-fg-muted">{a.description}</p>
-                    </Link>
-                  ))}
-                </div>
+            {/* Always rendered in the DOM — collapsed via CSS, not conditional
+                mounting, so every article link is present in the raw server-rendered
+                HTML for crawlers regardless of accordion state (see Cluster audit
+                Finding #1: 21 of 26 articles were previously undiscoverable because
+                this panel only mounted its <Link> children after a client-side click). */}
+            <div id={`${id}-panel`} className={`border-t border-border px-6 pb-6 pt-4 ${isOpen ? '' : 'hidden'}`}>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {list.map((a) => (
+                  <Link
+                    key={a.slug}
+                    href={`/learning-centre/${a.slug}`}
+                    className="flex flex-col gap-2 rounded-xl border border-border bg-bg-panel p-5 transition-colors hover:border-accent/40"
+                  >
+                    <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">{cat}</p>
+                    <h3 className="text-sm font-bold leading-snug text-fg">{a.title}</h3>
+                    <p className="mt-auto text-xs leading-relaxed text-fg-muted">{a.description}</p>
+                  </Link>
+                ))}
               </div>
-            )}
+            </div>
           </div>
         )
       })}

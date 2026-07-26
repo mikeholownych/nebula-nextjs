@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Facebook Ads Getting Clicks But No Leads: The Page Broke The Chain | Nebula',
+  title: 'Facebook Ads Clicks But No Leads: Fix The Page | Nebula',
   description: 'High CTR, zero conversions? The ad isn\'t the problem — your landing page broke the chain. Learn how Meta\'s context switch kills cold traffic and how to fix it.',
   alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/facebook-ads-no-leads' },
 }

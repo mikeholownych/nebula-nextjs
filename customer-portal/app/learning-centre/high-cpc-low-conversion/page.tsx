@@ -293,7 +293,8 @@ export default function HighCpcLowConversion() {
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 7 signals and identifies the
               specific page-side causes of high CPC and low conversion. The $97
-              Fix Pack implements every finding within 48 hours.
+              Fix Pack gives you a tailored AI prompt for every finding,
+              delivered within minutes.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

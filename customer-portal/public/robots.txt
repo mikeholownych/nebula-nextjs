@@ -1,0 +1,54 @@
+# nebulacomponents.shop — robots.txt
+# Policy: search indexing and answer-engine retrieval are welcome.
+# Model-training crawlers listed below are explicitly disallowed.
+#
+# ANY RESTRICTIONS EXPRESSED VIA CONTENT SIGNALS ARE EXPRESS RESERVATIONS OF RIGHTS
+# UNDER ARTICLE 4 OF THE EUROPEAN UNION DIRECTIVE 2019/790 ON COPYRIGHT AND RELATED
+# RIGHTS IN THE DIGITAL SINGLE MARKET.
+
+# AI model training — disallowed
+User-Agent: GPTBot
+Disallow: /
+
+User-Agent: ClaudeBot
+Disallow: /
+
+User-Agent: Google-Extended
+Disallow: /
+
+User-Agent: CCBot
+Disallow: /
+
+User-Agent: omgili
+Disallow: /
+
+# AI answer-engine input and retrieval — allowed
+User-Agent: ChatGPT-User
+Allow: /
+
+User-Agent: OAI-SearchBot
+Allow: /
+
+User-Agent: anthropic-ai
+Allow: /
+
+User-Agent: PerplexityBot
+Allow: /
+
+User-Agent: Perplexity-User
+Allow: /
+
+User-Agent: GoogleOther
+Allow: /
+
+User-Agent: cohere-ai
+Allow: /
+
+User-Agent: meta-externalagent
+Allow: /
+
+# Standard search indexing — allowed
+User-Agent: *
+Allow: /
+
+Sitemap: https://nebulacomponents.shop/sitemap.xml

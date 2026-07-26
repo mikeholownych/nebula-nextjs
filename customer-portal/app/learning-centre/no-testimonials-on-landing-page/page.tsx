@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'No Testimonials on Landing Page: How Proof Placement Changes Conversion | Nebula Components',
+  title: 'No Testimonials on Landing Page: Fix Proof Placement | Nebula',
   description: 'Missing or misplaced testimonials are one of the most common reasons landing pages do not convert paid traffic.',
   alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/no-testimonials-on-landing-page' },
 }

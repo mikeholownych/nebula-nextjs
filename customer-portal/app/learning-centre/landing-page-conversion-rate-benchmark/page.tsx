@@ -54,7 +54,7 @@ const faqSchema = {
       name: 'What conversion rate should I aim for on a landing page?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Aim to be in the top quartile for your vertical and traffic source — not just at the average. For paid search, the top-performing pages in most verticals convert at 2–3x the average rate. The gap between average and top-quartile performance is almost never about the ad — it is about which of the 7 conversion signals is broken on the page. Fixing the right signal is more reliable than optimising toward a number.",
+        text: "Compare your page with a documented benchmark segmented by vertical, traffic source, offer, and conversion action. Treat the benchmark as context, not a diagnosis: performance differences can come from the ad, audience, offer, measurement, or page. Use the page signals to form testable hypotheses rather than treating one benchmark number as the cause.",
       },
     },
     {
@@ -287,7 +287,8 @@ export default function LandingPageConversionRateBenchmark() {
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 7 signals and identifies which
               one is below the threshold for your offer type. The $97 Fix Pack
-              implements the fix within 48 hours.
+              gives you a tailored AI prompt for the fix, delivered within
+              minutes.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Landing Page Bounce Rate High: 3 Diagnosable Causes | Nebula Components',
+  title: 'Landing Page Bounce Rate High: 3 Causes | Nebula',
   description:
     'A high bounce rate on paid traffic means the first screen is not delivering on the promise that brought visitors there. Bounce is a symptom — these are the causes.',
   alternates: {
@@ -280,8 +280,9 @@ export default function LandingPageBounceRateHigh() {
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 7 signals and identifies which
-              one is producing your bounce. The $97 Fix Pack implements the fix
-              — rewritten copy, rebuilt sections, deployed within 48 hours.
+              one is producing your bounce. The $97 Fix Pack gives you an AI
+              prompt for the fix — rewritten copy, rebuilt sections — ready to
+              run within minutes.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
