@@ -62,7 +62,7 @@ const faqSchema = {
       name: 'How long does it take to fix a non-converting landing page?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Depends on which leak is active. A message-match fix (rewriting the headline and hero copy) takes 2-4 hours with a clear brief. A proof restructure (repositioning testimonials, adding specificity) takes a day. A full CTA and form-friction overhaul is 1-2 days. Nebula's $97 Fix Pack implements all identified fixes from the audit within 48 hours.",
+        text: "Depends on which leak is active. A message-match fix (rewriting the headline and hero copy) takes 2-4 hours with a clear brief. A proof restructure (repositioning testimonials, adding specificity) takes a day. A full CTA and form-friction overhaul is 1-2 days. Nebula's $97 Fix Pack gives you a tailored AI prompt for every finding from the audit, delivered within minutes — you (or your developer) implement.",
       },
     },
   ],
@@ -526,9 +526,9 @@ export default function LandingPageNotConvertingPage() {
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 7 signals and returns a
-              prioritised list of what to fix first. The $97 Fix Pack implements
-              every finding — rewritten copy, rebuilt sections, deployed to your
-              live page within 48 hours.
+              prioritised list of what to fix first. The $97 Fix Pack gives you
+              a tailored AI prompt for every finding — rewritten copy, rebuilt
+              sections — ready to run within minutes.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

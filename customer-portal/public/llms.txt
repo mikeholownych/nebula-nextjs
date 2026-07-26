@@ -8,7 +8,7 @@ Nebula Components provides landing page conversion optimization services. We hel
 
 # Core Offering
 - Free landing page audit: 60-second automated diagnosis across 7 conversion signals
-- Conversion Fix Pack ($97): Full landing page audit + implementation of all identified fixes. Delivered in 24–48 hours. One-time payment, no retainer.
+- Conversion Fix Pack ($97): Full landing page audit + a tailored AI prompt for every identified fix, built from the customer's actual page. Delivered by email within minutes of payment. One-time payment, no retainer. The customer (or their developer) implements the fixes using the prompts — Nebula does not require or take access to the customer's site.
 
 # Target Customer
 Founders actively spending on ads (Google, Meta, LinkedIn) with low or zero conversions from their landing pages. The buying trigger is "spending on ads and not converting" — not a demographic.

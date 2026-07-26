@@ -358,8 +358,9 @@ export default function LandingPageLoadTimeSlow() {
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 7 signals including load time.
-              The $97 Fix Pack implements every finding — rebuilt sections,
-              speed fixes, deployed within 48 hours.
+              The $97 Fix Pack gives you a tailored AI prompt for every
+              finding — rebuilt sections, speed fixes — ready to run within
+              minutes.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

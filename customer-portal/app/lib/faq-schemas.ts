@@ -7,7 +7,7 @@ export const pricingFAQSchema = createFAQPageSchema([
   },
   {
     question: "How is the $97 Fix Pack delivered?",
-    answer: "Within 24–48 hours. You get a written diagnosis of which of the 7 conversion signals are failing on your page, ranked by impact, with full implementation of all identified fixes on your live page.",
+    answer: "Within minutes of payment. You get a written diagnosis of which of the 7 conversion signals are failing on your page, ranked by impact, plus a tailored AI prompt for every finding — you or your developer implement the fixes.",
   },
   {
     question: "Do I need to share access to my site?",
@@ -30,7 +30,7 @@ export const homeFAQSchema = createFAQPageSchema([
   },
   {
     question: "What's included in the $97 Fix Pack?",
-    answer: "A complete 7-point landing page audit, a written diagnosis identifying which conversion signals are failing and why, and full implementation of all fixes on your live page. Delivered within 24–48 hours. One-time payment, no retainer.",
+    answer: "A complete 7-point landing page audit, a written diagnosis identifying which conversion signals are failing and why, and a tailored AI prompt for every finding, built from your actual page. Delivered by email within minutes of payment. One-time payment, no retainer.",
   },
   {
     question: "Why do landing pages fail to convert paid traffic?",
@@ -53,7 +53,7 @@ export const auditPageFAQSchema = createFAQPageSchema([
   },
   {
     question: "What happens after the free audit?",
-    answer: "You see your 7-point score with specific findings. If the page has fixable issues, the $97 Fix Pack implements all identified fixes on your live page within 24–48 hours.",
+    answer: "You see your 7-point score with specific findings. If the page has fixable issues, the $97 Fix Pack gives you a tailored AI prompt for every finding, delivered by email within minutes of payment.",
   },
   {
     question: "Does the audit require any account or login?",

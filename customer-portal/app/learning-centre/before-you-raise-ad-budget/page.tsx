@@ -314,8 +314,9 @@ export default function BeforeYouRaiseAdBudget() {
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 7 signals and returns a
-              prioritised fix list. The $97 Fix Pack implements every finding
-              within 48 hours — before you spend another dollar on traffic.
+              prioritised fix list. The $97 Fix Pack gives you a tailored AI
+              prompt for every finding, delivered within minutes — before you
+              spend another dollar on traffic.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

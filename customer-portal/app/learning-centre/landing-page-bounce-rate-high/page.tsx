@@ -280,8 +280,9 @@ export default function LandingPageBounceRateHigh() {
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 7 signals and identifies which
-              one is producing your bounce. The $97 Fix Pack implements the fix
-              — rewritten copy, rebuilt sections, deployed within 48 hours.
+              one is producing your bounce. The $97 Fix Pack gives you an AI
+              prompt for the fix — rewritten copy, rebuilt sections — ready to
+              run within minutes.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

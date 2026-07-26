@@ -206,8 +206,8 @@ export default function MessageMatchChecklistPage() {
             <p className="mb-6 leading-relaxed text-fg-muted">
               Run the Nebula audit to get a scored breakdown of your landing page&apos;s message match,
               offer clarity, and conversion structure. If the audit surfaces a confirmed break, the{' '}
-              <span className="font-medium text-fg">$97 Fix Pack</span> delivers a rewritten hero and CTA
-              within 48 hours — no retainer, no scope creep.
+              <span className="font-medium text-fg">$97 Fix Pack</span> gives you an AI prompt for a
+              rewritten hero and CTA, delivered within minutes — no retainer, no scope creep.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

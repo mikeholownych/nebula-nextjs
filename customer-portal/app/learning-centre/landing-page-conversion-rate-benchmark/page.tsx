@@ -287,7 +287,8 @@ export default function LandingPageConversionRateBenchmark() {
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 7 signals and identifies which
               one is below the threshold for your offer type. The $97 Fix Pack
-              implements the fix within 48 hours.
+              gives you a tailored AI prompt for the fix, delivered within
+              minutes.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
