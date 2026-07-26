@@ -52,6 +52,11 @@ jobs:
             echo "WARNING: /api/audit/start returned ${CODE}, expected 503 or 404"
           fi
 
+      - name: Verify sitemap routes are healthy
+        if: github.event_name == 'schedule' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+        working-directory: customer-portal
+        run: npm run check:sitemap-routes -- --base-url https://nebulacomponents.shop
+
       - name: Create health badge
         if: success()
         run: echo "::notice::Production smoke tests passed"
