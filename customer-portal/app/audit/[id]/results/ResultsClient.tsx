@@ -92,8 +92,8 @@ function SlackSnippet({ findings }: { findings: Finding[] }) {
 // Every finding rendered here already represents a dimension that scored
 
 /**
- * FixPreview — shows sentence 1 of the AI fix prompt, blurs the rest.
- * Eye path: problem → partial solution → wall → $97 unlock.
+ * FixPreview — shows sentence 1 of the recommended repair, blurs the rest.
+ * Eye path: problem → partial solution → implementation offer.
  * The fix field already exists in every finding — no backend change needed.
  */
 function FixPreview({ finding, unlocked }: { finding: Finding; unlocked: boolean }) {
@@ -110,7 +110,7 @@ function FixPreview({ finding, unlocked }: { finding: Finding; unlocked: boolean
     // Unlocked: show everything + what the prompt delivers
     return (
       <div className="mt-4 rounded-lg border border-accent/20 bg-accent/5 p-4">
-        <p className="mb-1 text-xs font-semibold uppercase tracking-[0.1em] text-accent">Fix Pack Prompt</p>
+        <p className="mb-1 text-xs font-semibold uppercase tracking-[0.1em] text-accent">Repair Recommendation</p>
         <p className="text-base leading-7 text-fg">{fixText}</p>
         {disease?.promptDelivers && (
           <p className="mt-2 text-xs text-fg-muted">
@@ -124,7 +124,7 @@ function FixPreview({ finding, unlocked }: { finding: Finding; unlocked: boolean
   // Locked: show preview + blur
   return (
     <div className="mt-4 rounded-lg border border-border bg-bg/50 p-4">
-      <p className="mb-1 text-xs font-semibold uppercase tracking-[0.1em] text-fg-muted">Fix Pack Prompt</p>
+      <p className="mb-1 text-xs font-semibold uppercase tracking-[0.1em] text-fg-muted">Repair Recommendation</p>
       <p className="text-base leading-7 text-fg">{preview}</p>
       {remainder && (
         <div className="relative mt-1 min-w-0 overflow-hidden">
@@ -133,11 +133,11 @@ function FixPreview({ finding, unlocked }: { finding: Finding; unlocked: boolean
           </p>
           <div className="absolute inset-0 flex items-center justify-center">
             <a
-              href="#unlock"
-              onClick={() => posthog.capture('fix_preview_unlock_clicked', { finding_key: finding.key })}
+              href="/checkout"
+              onClick={() => posthog.capture('fix_preview_implementation_clicked', { finding_key: finding.key })}
               className="rounded-lg bg-accent px-4 py-2 text-xs font-semibold text-bg shadow-sm transition-colors hover:bg-accent-light"
             >
-              Unlock this audit first
+              Have Nebula implement one repair — $97
             </a>
           </div>
         </div>
@@ -199,7 +199,7 @@ function SerpSnippet({ finding, url }: { finding: Finding; url: string }) {
         </div>
       </div>
       <p className="mt-2 text-sm leading-6 text-fg-muted">
-        This is what searchers see before clicking. The Fix Pack prompt rewrites your title and meta description.
+        This is what searchers see before clicking. A repaired title and meta description would need to be implemented and verified on the live page.
       </p>
     </div>
   )
@@ -847,35 +847,29 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
           <UnlockConfirmation emailSent={emailSent} email={emailForm.email} auditId={auditId} />
         )}
 
-        {/* Canonical offer: free audit → $97 Fix Pack */}
+        {/* Canonical offer: free audit → $97 One-Leak Repair Sprint */}
         <section id="remediation" className="scroll-mt-40 border-t border-border pt-16">
           <div className="space-y-6">
           <h2 className="text-center text-2xl font-extrabold text-fg">
-            Turn the findings into a bounded repair plan.
+            Turn the findings into one bounded live repair.
           </h2>
 
           <Card variant="bordered" className="relative mx-auto max-w-md overflow-hidden border-accent">
             <div className="absolute right-2 top-2 rounded bg-accent px-2 py-1 text-xs font-semibold text-bg">
-              FIX PACK
+              ONE REPAIR
             </div>
             <div>
-              <h3 className="mb-1 text-2xl font-extrabold text-fg">$97 Fix Pack</h3>
+              <h3 className="mb-1 text-2xl font-extrabold text-fg">One-Leak Repair Sprint</h3>
               <p className="mb-2 text-2xl font-extrabold tabular-nums text-accent">$97</p>
               <p className="mb-4 max-w-[65ch] text-base leading-7 text-fg-muted">
-                A tailored AI prompt for every finding in this audit — copy, CTA, proof, and page
-                structure — to paste into Claude, ChatGPT, or hand to your developer. No site access needed.
+                Nebula selects one high-confidence page-level repair from this audit, confirms the
+                scope with you, implements it, verifies production, and records the same-scope re-audit.
               </p>
               <a
-                href={
-                  unlocked && !sharedView
-                    ? `/checkout?audit_id=${encodeURIComponent(auditId)}`
-                    : '#unlock'
-                }
+                href="/checkout"
                 className="block w-full rounded-lg bg-accent px-4 py-2 text-center font-semibold text-bg transition-colors hover:bg-accent-light"
               >
-                {unlocked && !sharedView
-                  ? 'Review the tailored Fix Pack — $97'
-                  : 'Unlock this audit to select its Fix Pack'}
+                Review the One-Leak Repair Sprint — $97
               </a>
             </div>
           </Card>

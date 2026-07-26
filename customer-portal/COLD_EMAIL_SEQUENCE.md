@@ -2,7 +2,7 @@
 
 **Target ICP:** Founders who spent $10k+ on ads with zero conversions  
 **Buying Trigger:** Active bleeding → Desperate for diagnosis  
-**Offer:** Free landing page audit → $147 Fix Pack
+**Offer:** Free landing page audit → $97 One-Leak Repair Sprint
 
 ---
 
@@ -175,7 +175,7 @@ nebulacomponents.shop
 
 Paste your URL. 60 seconds. You'll see the leak.
 
-If you fix it yourself, great. If you want our $147 Fix Pack, that's there too. But the diagnosis is free either way.
+If you fix it yourself, great. If you want our $97 One-Leak Repair Sprint, that's there too. But the diagnosis is free either way.
 
 — Mike H
 
@@ -221,7 +221,7 @@ NOT "Nebula Components" — human names outperform company names.
 | Open Rate | 20–30% | 35%+ |
 | Reply Rate | 1–3% | 5%+ |
 | URL Submission Rate | 0.5% | 2% |
-| Fix Pack Purchase | 10% of audits | 15%+ |
+| Repair Sprint Purchase | 10% of audits | 15%+ |
 
 ---
 

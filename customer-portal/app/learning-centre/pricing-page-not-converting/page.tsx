@@ -99,9 +99,11 @@ export default function LearningCentrePage() {
 
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Fix your pricing page</h2>
-          <p className="mb-6 leading-relaxed text-fg-muted">
-            Run the free Nebula audit to spot tier structure issues. Buy the $97 Fix Pack when you know what to change.
-          </p>
+            <p className="mb-6 leading-relaxed text-fg-muted">
+              The free Nebula audit identifies likely page-side leaks. The $97 One-Leak Repair Sprint
+              selects one high-confidence page-level repair, confirms the scope with you, implements it,
+              and verifies the live change. It does not promise conversion lift.
+            </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/audit" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">
               Run the free audit

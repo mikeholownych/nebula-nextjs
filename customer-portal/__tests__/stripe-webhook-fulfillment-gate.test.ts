@@ -1,13 +1,10 @@
 /** @jest-environment node */
 
-// Verifies the fix for a real bug: the webhook used to trigger the $97
-// prompt-pack fulfillment on ANY livemode purchase with an email, on the
-// (disproven) assumption that the Fix Pack was the only paid product on
-// the site. Live Stripe data showed several other active price points
-// (Audit Lite $7, the $1,497 retainer, etc.) with no fulfillment of their
-// own — a $7 buyer with a prior free audit would've silently received the
-// full $97 pack, and a $1,497 buyer would've gotten nothing but a Telegram
-// alert. Fulfillment must only fire for the exact $97 charge.
+// The $97 offer is a manual-first One-Leak Repair Sprint. A completed live
+// purchase must persist normally and alert Mike to begin the scoped kickoff,
+// but it must never trigger the retired prompt-pack fulfillment subprocess.
+// Other live prices still receive the generic sale alert without entering the
+// repair-sprint workflow.
 
 import { NextRequest } from 'next/server'
 
@@ -153,11 +150,7 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     process.env.STRIPE_WEBHOOK_SECRET = 'whsec_x'
   })
 
-  afterEach(() => {
-    jest.useRealTimers()
-  })
-
-  it('runs deliver_prompt_pack.py for an exact $97 livemode purchase', async () => {
+  it('alerts for a manual repair-sprint kickoff without running prompt fulfillment', async () => {
     mockConstructEvent(makeSession({ amount_total: 9700 }))
     const response = await postWebhook()
 
@@ -165,33 +158,18 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     const pythonCalls = execFileMock.mock.calls.filter((c) =>
       String(c[0]).includes('venv/bin/python3')
     )
-    expect(pythonCalls).toHaveLength(1)
-    expect(pythonCalls[0][1]).toEqual(
-      expect.arrayContaining([
-        '--email',
-        'buyer@example.com',
-        '--stripe-session-id',
-        'cs_live_test',
-        '--audit-id',
-        '123e4567-e89b-12d3-a456-426614174000',
-      ])
+    expect(pythonCalls).toHaveLength(0)
+
+    const hermesCalls = execFileMock.mock.calls.filter((c) => c[0] === 'hermes')
+    expect(hermesCalls).toHaveLength(1)
+    expect(hermesCalls[0][1]).toEqual(
+      expect.arrayContaining(['send', '--to', 'telegram:5920497760'])
     )
-    expect(clientQueryMock.mock.calls.some((call) =>
-      String(call[0]).includes("fulfillment_status = 'delivered'")
-    )).toBe(true)
-    expect(clientQueryMock.mock.calls.some((call) =>
-      String(call[0]).includes('pg_advisory_lock')
-    )).toBe(true)
-    expect(clientQueryMock.mock.calls.some((call) =>
-      String(call[0]).includes('pg_advisory_unlock')
-    )).toBe(true)
-    expect(connectMock).toHaveBeenCalledTimes(1)
-    expect(releaseMock).toHaveBeenCalledTimes(1)
-    const hermesCall = execFileMock.mock.calls.find((call) => call[0] === 'hermes')
-    expect(hermesCall ? hermesMessage(hermesCall) : '').toContain('*SALE*')
-    expect(captureMock).toHaveBeenCalledWith(
-      expect.objectContaining({ event: 'purchase_completed' }),
-    )
+    const alertText = String((hermesCalls[0][1] as string[]).at(-1))
+    expect(alertText).toContain('REPAIR SPRINT KICKOFF REQUIRED')
+    expect(alertText).toContain('$97.00')
+    expect(alertText).toContain('buyer@example.com')
+    expect(alertText).toContain('cs_live_test')
   })
 
   it('does NOT run deliver_prompt_pack.py for a $7 Audit Lite purchase', async () => {

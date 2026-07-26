@@ -104,7 +104,7 @@
 ```
 Organization: Nebula Components (@id: /#organization)
   ├─ Person: Mike H (@id: /company/team#mike-h)
-  ├─ Product: Fix Pack (@id: /products/fix-pack#product)
+  ├─ Product: One-Leak Repair Sprint (@id: /products/one-leak-repair-sprint#product)
   ├─ Product: AI Ops Retainer (@id: /products/ai-ops-retainer#product)
   ├─ Service: Free Audit (@id: /audit#service)
   ├─ Concept: Trigger-Aware Prospecting (@id: /concepts#trigger-aware-prospecting)

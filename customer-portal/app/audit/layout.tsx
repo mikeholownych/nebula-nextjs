@@ -31,7 +31,7 @@ export default function AuditLayout({ children }: { children: React.ReactNode })
         <p>
           The audit takes under two minutes. No account required. Enter your landing page URL, receive
           a scored report identifying the highest-impact leaks, and decide whether to fix them yourself
-          or use the Nebula Fix Pack — a tailored AI prompt for each finding, delivered by email within minutes.
+          or use the One-Leak Repair Sprint for one buyer-approved page-level repair, implemented and verified by Nebula.
         </p>
         <h2 className="mb-3 mt-6 text-base font-semibold text-fg">How it works</h2>
         <ol className="list-decimal space-y-1 pl-5">

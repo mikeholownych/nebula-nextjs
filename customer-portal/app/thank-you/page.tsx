@@ -13,7 +13,7 @@ export default function ThankYouPage() {
           <div className="mb-4 text-4xl">✓</div>
           <h1 className="mb-3 text-3xl font-bold text-fg">You&apos;re in.</h1>
           <p className="mb-2 text-fg-muted">
-            Your Fix Pack is confirmed. We&apos;ll contact you at the email used during checkout — expect to hear from us within a few hours.
+            Your One-Leak Repair Sprint is confirmed. We&apos;ll contact the email used during checkout within one business day to confirm the page, bounded repair scope, and safe access path.
           </p>
           <p className="text-sm text-fg-muted">
             Payment status: confirmed. Your Stripe receipt is your payment confirmation.

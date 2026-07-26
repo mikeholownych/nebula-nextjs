@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://nebulacomponents.shop/.well-known/ucp-checkout.schema.json",
   "name": "shop.nebulacomponents.commerce.checkout",
-  "title": "Nebula Conversion Fix Pack Checkout",
-  "description": "Creates a Stripe-hosted checkout session for the fixed-price Nebula Conversion Fix Pack.",
+  "title": "Nebula One-Leak Repair Sprint Checkout",
+  "description": "Creates a Stripe-hosted checkout session for the fixed-price Nebula One-Leak Repair Sprint.",
   "type": "object",
   "required": ["offerKey", "email"],
   "properties": {

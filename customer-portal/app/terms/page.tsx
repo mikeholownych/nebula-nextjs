@@ -39,26 +39,30 @@ export default function TermsPage() {
 
           <section>
             <h2>3. Paid Services</h2>
-            {fixPack ? (
-              <p>
-                The current Fix Pack ({formatUsd(fixPack.priceCents)}) is an automated, tailored AI
-                prompt pack delivered by email within minutes of payment. The customer or their
-                developer implements the fixes; Nebula does not require access to the
-                customer&apos;s site, CMS, or hosting. Payment is processed securely through
-                Stripe, and the service is fulfilled when the prompt pack is delivered. One
-                re-audit may be requested within {fixPack.reAudit.windowDays} days to observe what
-                changed and what remains open.
-              </p>
-            ) : (
-              <p>
-                No verified paid Fix Pack offer is currently available. Any future paid service
-                will be described at checkout before payment is accepted.
-              </p>
-            )}
+            <p>
+              The One-Leak Repair Sprint ($97) covers one landing page and one high-confidence,
+              buyer-approved page-level repair selected from the audit. It includes baseline evidence,
+              bounded implementation, production verification, a same-scope re-audit, and one additional
+              same-scope evidence check within 30 days.
+            </p>
+            <p>
+              The service excludes full redesigns, multiple pages, backend application logic, analytics
+              migrations, and paid third-party tools. You must approve the scope before implementation and
+              provide temporary collaborator access or approve a patch handoff. Never send passwords by email.
+            </p>
           </section>
 
           <section>
-            <h2>4. Intellectual Property</h2>
+            <h2>4. Refund Policy</h2>
+            <p>
+              We offer a full refund before work begins if we cannot safely implement a bounded repair on
+              your page or if you request cancellation before implementation starts. Once implementation
+              has begun, refunds are offered at our discretion based on work completed.
+            </p>
+          </section>
+
+          <section>
+            <h2>5. Intellectual Property</h2>
             <p>
               Our audit methodology and recommendations are proprietary. You retain ownership of your 
               landing page content. We grant you a license to use our recommendations for your own 

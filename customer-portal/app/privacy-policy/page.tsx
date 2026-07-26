@@ -36,7 +36,7 @@ export default function PrivacyPolicy() {
         <ul className="list-disc pl-6 text-[var(--text-secondary)] space-y-2 mb-6">
           <li>Submit a landing page URL for audit</li>
           <li>Provide your email address for audit delivery</li>
-          <li>Purchase a Fix Pack or other services</li>
+          <li>Purchase a One-Leak Repair Sprint or other services</li>
           <li>Contact us via email or web form</li>
           <li>Subscribe to our newsletter or updates</li>
         </ul>
@@ -76,7 +76,7 @@ export default function PrivacyPolicy() {
         </p>
         <ul className="list-disc pl-6 text-[var(--text-secondary)] space-y-2">
           <li>Deliver your free landing page audit to your email</li>
-          <li>Process payments for Fix Packs and services</li>
+          <li>Process payments for One-Leak Repair Sprints and services</li>
           <li>Send transactional emails (audit delivery, purchase confirmation)</li>
           <li>Respond to your inquiries and support requests</li>
           <li>Improve our website and services through analytics</li>

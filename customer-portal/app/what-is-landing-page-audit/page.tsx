@@ -43,7 +43,7 @@ export default function WhatIsLandingPageAudit() {
                 name: "Should I fix my landing page myself or pay someone?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "If the audit shows low-difficulty issues, DIY is fine. For technical issues or multiple fixes, the $97 Conversion Fix Pack includes implementation-ready instructions.",
+                  text: "If the audit shows a low-difficulty issue, DIY may be sufficient. The $97 One-Leak Repair Sprint is for one high-confidence page-level repair that Nebula scopes, implements, and verifies.",
                 },
               },
             ],
@@ -183,13 +183,13 @@ export default function WhatIsLandingPageAudit() {
             <div className="bg-[#161b22] border border-emerald-900/50 rounded-lg p-6">
               <p className="text-emerald-400 font-semibold mb-3">⚡ Professional ($97)</p>
               <ul className="space-y-2 text-gray-300 text-sm">
-                <li>• Page speed optimization</li>
-                <li>• Mobile layout fixes</li>
-                <li>• Multiple medium/high difficulty</li>
-                <li>• Implementation-ready instructions</li>
+                <li>• One high-confidence page-level repair</li>
+                <li>• Buyer-approved bounded scope</li>
+                <li>• Live implementation verification</li>
+                <li>• Same-scope re-audit evidence</li>
               </ul>
               <Link href="/checkout" className="text-emerald-400 text-xs mt-4 inline-block hover:underline">
-                Get Conversion Fix Pack →
+                Review One-Leak Repair Sprint →
               </Link>
             </div>
           </div>

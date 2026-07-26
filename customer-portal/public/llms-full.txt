@@ -22,7 +22,7 @@ The actual failure is almost always one of seven diagnosable leak patterns on th
 6. Form friction: Too many fields, unclear labels, or no indication of what happens after submission
 7. Compliance gaps: GDPR consent banners blocking the CTA, missing privacy policy, cookie interstitials
 
-Nebula diagnoses which of these is present on a given page, ranks them by likely conversion impact and implementation effort, and produces a tailored AI prompt for every finding. The customer or their developer implements the fixes; Nebula does not require access to the site.
+Nebula diagnoses which of these is present on a given page, ranks the findings by likely conversion impact, and can implement one bounded page-level repair through the paid Repair Sprint.
 
 ## The 7-Point Diagnosis
 
@@ -37,10 +37,12 @@ Every Nebula audit checks seven criteria:
 
 ## Services
 
-### Conversion Fix Pack — $97 (one-time; price valid through 2026-12-31)
-A complete landing page audit using the 7-point framework, a written diagnosis identifying which issues are present, prioritized by conversion impact, and a complete AI prompt pack — one prompt per finding, built from the customer's actual page — for the customer (or their developer) to run through Claude, ChatGPT, or any AI tool. Delivered by automated email within minutes of payment; the customer or their developer implements the fixes, and Nebula does not require access to the customer's site, CMS, or hosting. Includes one re-audit within 30 days to observe what changed and what remains open.
+### One-Leak Repair Sprint — $97 (one-time)
+One landing page and one high-confidence page-level repair selected from the audit. Nebula records the baseline, confirms the bounded scope with the buyer, implements the approved repair through temporary collaborator access or a buyer-controlled patch handoff, verifies production, and runs a same-scope re-audit. One additional same-scope evidence check is included within 30 days.
 
-No retainer. No ongoing commitment. Pay once, get the prompts to fix the page yourself.
+The Sprint excludes full redesigns, multiple pages, backend application logic, analytics migrations, and paid third-party tools. If Nebula cannot safely implement a bounded repair, the buyer receives a full refund before work begins. The evidence verifies the page condition and implementation; it does not by itself prove or guarantee conversion lift.
+
+No retainer. No ongoing commitment. Pay once for one bounded repair.
 
 ### Free Audit
 Automated URL submission and 7-point scoring across message-match, trust signals, mobile layout, load time, CTA clarity, form friction, and compliance.

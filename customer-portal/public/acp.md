@@ -1,6 +1,6 @@
 # Nebula Components ACP Discovery
 
-Nebula Components publishes Agentic Commerce Protocol discovery metadata at `/.well-known/acp.json` for its REST-based Conversion Fix Pack checkout.
+Nebula Components publishes Agentic Commerce Protocol discovery metadata at `/.well-known/acp.json` for its REST-based One-Leak Repair Sprint checkout.
 
 ## Discovery
 

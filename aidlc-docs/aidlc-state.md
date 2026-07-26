@@ -1,11 +1,11 @@
 # AI-DLC State
 
 ## Workflow Status
-- Phase: INCEPTION — COMPLETE
-- Current Stage: Execution Planning — complete; implementation approval pending
-- Initiative: Next.js customer platform transformation
+- Phase: VERIFICATION — IN PROGRESS
+- Current Stage: Legacy-surface cleanup + final verification
+- Initiative: One-Leak Repair Sprint offer cutover
 - Project Type: Brownfield
-- Workspace Root: `/home/mike/nebula`
+- Workspace Root: `/home/mike/nebula/.worktrees/one-leak-repair-sprint`
 
 ## Stage Progress
 ### INCEPTION
@@ -51,18 +51,15 @@
 | Agency white-label plan | `docs/superpowers/plans/04-agency-whitelabel-management.md` | Implementation Planning |
 | Deployment and cutover plan | `docs/superpowers/plans/05-deployment-cutover-operations.md` | Implementation Planning |
 
-## Active Initiative — Landing Page Intelligence Stack (2026-07-26)
-- Phase: CONSTRUCTION — release verification
-- Approval: design approved; inline implementation approved
-- Tasks 1–3: complete and committed
-- Feature commits: `39e1ea98`, `5e358d00`, `e45bb646`, `cf89a047`, `0c9d8d9a`, `3adafd10`, `05233e68`
-- Reviewer-found remediations: `0c9d8d9a` enforces canonical unique workflow IDs; `3adafd10` closes exact-HEAD Evidence Atom dependencies and adds `feat/*` CI coverage
-- Dirty-worktree release matrix: PASS — 22/22 Jest suites, 143/143 tests, 118/118 static pages, 14/14 Playwright, 0 production vulnerabilities
-- Exact-HEAD clean-export matrix (`05233e68`): PASS — projections, typecheck, lint, 20/20 Jest suites 140/140 tests, 118/118 static pages, 0 production vulnerabilities
-- Deployment: active at `https://nebulacomponents.shop/learning-centre/landing-page-intelligence-stack`
-- Live artifact SHA-256: `5a33a2e5103c4e03ff9c22d6218971f5c7ae421d3c2be84c4309b235904d99b5` (live matches committed sidecar; 9 entries, all mode 0644, all mtime 1980-01-01, no executables)
-- Production Citable rerun: 31 findings, 0 high, 25 medium, 6 low (`20260726T061834-audit---scope-exu3`)
-- Independent adversarial review: **PASS** (`deleg_240868b6`, HEAD `05233e68`, 50 tool calls)
-  - 13/13 review tasks completed; summarization-client error at iteration 50 did not affect results
-  - All adversarial cases confirmed rejected; all gates confirmed PASS; no repository mutation; live ZIP matched committed sidecar
-- Completion remains blocked until governance-record commit
+## 2026-07-26T10:02:56.117333+00:00 — Offer cutover commit
+
+Shipped/merged: committed offer cutover to `feat/one-leak-repair-sprint-2026-07-26`.
+Branch: feat/one-leak-repair-sprint-2026-07-26
+Latest commit: feat: cut over offer from DIY Fix Pack to One-Leak Repair Sprint
+Files changed: 36 files, 191 insertions(+), 155 deletions(-)
+Bounded behavior: renamed live $97 offer from DIY prompt-pack to implementation-controlled One-Leak Repair Sprint across app, components, public metadata, FAQ, terms, email, and checkout surfaces; added offer-integrity test; rerouted Stripe sales alert to manual kickoff.
+Exact verification: npm test -- --runInBand => 20 suites, 133 tests passed.
+Success/failure: success.
+Proof boundaries: verification covers customer-portal test suite and git commit metadata; does not cover rendered browser validation or live deployment.
+Clean worktree state: dirty tracked files committed; worktree present at `.worktrees/one-leak-repair-sprint`.
+Next bounded phase: static/public HTML legacy sweep + rendered-browser verification.

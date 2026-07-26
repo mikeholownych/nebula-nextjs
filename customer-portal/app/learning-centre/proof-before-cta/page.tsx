@@ -232,11 +232,11 @@ export default function ProofBeforeCTAPage() {
         {/* CTA block */}
         <section className="mt-6 rounded-2xl border border-accent/30 bg-accent/5 p-8">
           <h2 className="mb-3 text-2xl font-bold text-fg">Find the proof leak on your page</h2>
-          <p className="mb-6 leading-relaxed text-fg-muted">
-            The free Nebula audit reports where the page may lose credibility before the
-            CTA — missing proof, weak proof, misplaced proof. If the audit flags a proof leak,
-            the $97 Fix Pack delivers a prioritised fix plan you can implement the same day.
-          </p>
+            <p className="mb-6 leading-relaxed text-fg-muted">
+              The free Nebula audit identifies likely page-side leaks. The $97 One-Leak Repair Sprint
+              selects one high-confidence page-level repair, confirms the scope with you, implements it,
+              and verifies the live change. It does not promise conversion lift.
+            </p>
           <div className="flex flex-wrap gap-4">
             <Link
               href="/audit"

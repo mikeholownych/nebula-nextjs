@@ -381,27 +381,8 @@ before it reached the UI, surfacing only the generic fallback message.
 
 ---
 
-## Landing Page Intelligence Stack — Release Verification
-**Timestamp**: 2026-07-26T06:19:53Z
-**User Input**: "proceed"
-**Actions**:
-- Completed and committed deterministic bundle, public article surface, GitHub Actions enforcement, and desktop/mobile E2E coverage.
-- Ran the complete local matrix before the schema blocker fix, then reran all final-code gates after `cf89a047`: projection checks and registries PASS; typecheck/lint PASS; 22/22 Jest suites and 142/142 tests PASS; 118/118 pages built; 14/14 Playwright tests PASS; npm production audit reported 0 vulnerabilities; `git diff --check` PASS.
-- Restarted `nebula-nextjs`; live artifact ZIP and sidecar matched committed bytes and SHA-256 `747c467002ba88cb21bf175a83057a91c75e890be51acb20599cca2169bfce24`.
-- Rendered production verification passed at desktop and 375×812: one H1, six workflow headings, no email input, zero horizontal overflow, direct download, `/audit` navigation, and zero console errors.
-- Initial Citable audit `20260726T061440-audit---scope-0p7k` blocked release with 3 new high `SCHEMA-007` findings from unsupported homepage/audit FAQ schema projections.
-- Added a failing regression test, removed only the unsupported schema emitters, committed `cf89a047`, rebuilt, redeployed, and reran Citable.
-- Citable rerun `20260726T061834-audit---scope-exu3`: 31 findings — 0 high, 25 medium, 6 low.
-- Dispatched initial read-only independent adversarial review `deleg_f7b30b02`; its duplicate-workflow-ID probe reproduced a requirements violation because packaging accepted duplicate identity.
-- Added failing missing-ID and duplicate-ID regressions, declared canonical IDs in all six workflow documents, added fail-closed ID parsing/uniqueness/filename binding, and committed `0c9d8d9a`.
-- Regenerated and redeployed the deterministic ZIP; new live and committed SHA-256 is `5a33a2e5103c4e03ff9c22d6218971f5c7ae421d3c2be84c4309b235904d99b5` with byte-identical live artifact.
-- Reran final gates: 22/22 Jest suites and 143/143 tests PASS; 118/118 pages built; 14/14 Playwright tests PASS; 0 production vulnerabilities.
-- The initial formal review also found exact committed HEAD imported an untracked Evidence Atom runtime and that `feat/*` pushes did not trigger CI.
-- Committed the coherent Evidence Atom compiler/runtime/generated projection/registry/tests/package-lock closure, production dependency security updates, actual CI Evidence Atom gate, and `feat/*` trigger as `3adafd10`.
-- Exported exact `3adafd10` with `git archive` into `/tmp`, clean-installed dependencies, and independently ran both projection checks, Citable projection, typecheck, lint, 20/20 committed Jest suites and 140/140 tests, 118/118 build pages, and production npm audit with 0 vulnerabilities.
-- Subsequent commit `05233e68` applied SEO FAQ→WebApplication schema swap on `/audit`.
-- Final adversarial review `deleg_240868b6` against HEAD `05233e68`: **PASS** — 13/13 review tasks completed before iteration limit; all adversarial fixtures rejected; all gates PASS; no repository mutation; live ZIP byte-identical to committed sidecar.
-**Status**: Independent review PASS — awaiting governance-record commit to close
-**Proof boundary**: Branch-only and not merged. Dirty working tree contains unrelated pre-existing work that was preserved and excluded from scoped feature commits.
+## 2026-07-26T06:03:32.765229+00:00 — One-Leak Repair Sprint
 
----
+**Raw user input:** `proceed`
+
+**Context:** User approved execution after the ADHD product-strategy gap analysis recommended a permissioned, one-leak, implementation-controlled repair sprint. Created an isolated worktree and authored the approved design and implementation plan.

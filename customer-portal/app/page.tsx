@@ -137,7 +137,7 @@ export default function Home() {
                   'Scored against 7 conversion signals',
                   'Prioritized fixes with impact/effort scores',
                   'No signup to see your results',
-                  '$97 Fix Pack: exact AI prompts to fix every issue, in minutes',
+                  '$97 One-Leak Repair Sprint: one high-confidence page repair, implemented and verified',
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2">
                     <span className="mt-0.5 text-accent">✓</span>
@@ -259,7 +259,7 @@ export default function Home() {
             We run this audit on ourselves first.
           </h2>
           <p className="max-w-2xl text-base leading-7 text-fg-muted mb-4">
-            7.4/10. Not 10/10. Real. That's what you're getting — actual data, not marketing claims.
+            Not a perfect score. The current result is shown above by the same live audit endpoint your page uses — actual data, not a frozen marketing claim.
           </p>
           <p className="max-w-2xl text-base leading-7 text-fg-muted mb-4">
             Most landing-page tools lead with case studies they can't verify. We'd rather prove it on our own page first. 

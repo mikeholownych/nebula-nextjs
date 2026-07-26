@@ -14,7 +14,7 @@ Primary: founders and solo operators actively spending on paid ads — Google, M
 
 ## Product Purpose
 
-Nebula Components diagnoses why a landing page is leaking ad spend and gives the customer the materials to fix it. The audit checks seven conversion signals — message-match, trust, mobile layout, load time, CTA clarity, form friction, and proof — and returns a prioritized, evidence-backed fix list rather than generic opinions. The current $97 Conversion Fix Pack is a tailored AI prompt pack delivered by automated email within minutes. The customer or their developer implements the changes; Nebula does not require access to the customer's site, CMS, or hosting, and there is no retainer waiting behind the offer.
+Nebula Components diagnoses why a landing page is leaking ad spend and, if the visitor wants it, fixes it. The audit checks seven conversion signals — message-match, trust, mobile layout, load time, CTA clarity, form friction, and proof — and returns a prioritized, evidence-backed fix list rather than generic opinions. Success is a visitor purchasing the $97 One-Leak Repair Sprint: the audit is the diagnosis, the Repair Sprint is the cure, and there's no retainer waiting behind either one.
 
 ## Positioning
 
@@ -22,7 +22,7 @@ The problem was never the ad. It was the page. Nebula tests this premise with a 
 
 ## Conversion & proof
 
-- Primary CTA: purchase the $97 Conversion Fix Pack (diagnosis plus an automated, tailored AI prompt pack delivered by email within minutes; the customer or their developer implements it, with no Nebula access to the site, CMS, or hosting). Secondary fallback, for visitors not ready to pay: run the free audit or check audit status, to start the funnel without commitment.
+- Primary CTA: purchase the $97 One-Leak Repair Sprint (diagnosis plus implementation, delivered in 24–48 hours). Secondary fallback, for visitors not ready to pay: run the free audit or check audit status, to start the funnel without commitment.
 - The line a visitor remembers after 10 seconds: "The problem was never the ad — it was the page."
 - Belief ladder: (1) the ad performance problem may be a landing-page problem rather than an ad-creative or targeting problem; (2) Nebula identifies specific, evidenced defects rather than offering opinions; (3) the customer can implement prioritized changes and re-audit what changed; (4) it is a one-time offer — no retainer, no ongoing commitment.
 - Proof on hand: zero published case studies. `/case-studies` stays empty until a record has inspectable evidence, a measurement window, publication permission, disclosure, and publication metadata.

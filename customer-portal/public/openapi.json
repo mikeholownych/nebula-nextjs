@@ -206,8 +206,8 @@
     "/api/checkout": {
       "post": {
         "operationId": "purchaseFixPack",
-        "summary": "Create a Stripe Checkout session for the Conversion Fix Pack",
-        "description": "Creates a Stripe-hosted checkout session for the server-priced Conversion Fix Pack. This operation is not protected by x402.",
+        "summary": "Create a Stripe Checkout session for the One-Leak Repair Sprint",
+        "description": "Creates a Stripe-hosted checkout session for the server-priced One-Leak Repair Sprint. This operation is not protected by x402.",
         "security": [],
         "requestBody": {
           "required": true,

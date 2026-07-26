@@ -1,45 +1,20 @@
 import type { Metadata } from 'next'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
-import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
-import { readAuditUnlock } from '@/app/lib/audit-unlock-token'
+import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
 import { Card } from '@/components/ui'
 import CheckoutCTAButton from './CheckoutCTAButton'
 
-export const dynamic = 'force-dynamic'
-
-export function generateMetadata(): Metadata {
-  const fixPack = getActiveFixPack()
-  return {
-    title: 'Checkout — Nebula Conversion Fix Pack | Nebula Components',
-    description: fixPack
-      ? `Purchase the Nebula Conversion Fix Pack for ${formatUsd(fixPack.priceCents)}. One-time payment via Stripe. Landing page audit and a full AI prompt pack delivered by email within minutes.`
-      : 'Nebula Conversion Fix Pack checkout. No paid offer is currently available.',
-    alternates: {
-      canonical: 'https://nebulacomponents.shop/checkout',
-    },
-    robots: { index: false, follow: false },
-  }
+export const metadata: Metadata = {
+  title: 'Checkout — One-Leak Repair Sprint | Nebula Components',
+  description:
+    'Purchase the One-Leak Repair Sprint for $97. One landing page, one approved repair, implemented and verified by Nebula.',
+  alternates: {
+    canonical: 'https://nebulacomponents.shop/checkout',
+  },
 }
 
-interface Props {
-  searchParams: Promise<{ audit_id?: string }>
-}
-
-const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
-
-export default async function CheckoutPage({ searchParams }: Props) {
-  const fixPack = getActiveFixPack()
-  const fixPackPrice = fixPack ? formatUsd(fixPack.priceCents) : undefined
-  const auditId = (await searchParams).audit_id
-  const cookieStore = await cookies()
-  const auditIdentity = auditId && UUID_RE.test(auditId)
-    ? readAuditUnlock(
-      auditId,
-      cookieStore.get(`audit_unlock_${auditId}`)?.value,
-    )
-    : null
-
+export default function CheckoutPage() {
   return (
     <main className="min-h-screen bg-bg px-6 py-12">
       <div className="mx-auto max-w-lg">
@@ -47,19 +22,19 @@ export default async function CheckoutPage({ searchParams }: Props) {
           <Link href="/" className="text-xl font-semibold text-fg">
             Nebula
           </Link>
-          <h1 className="mt-6 mb-2 text-3xl font-bold text-fg">Secure Checkout</h1>
-          <p className="text-fg-muted">Payment is completed on Stripe&apos;s hosted checkout. Your card details are never seen or stored by Nebula.</p>
+          <h1 className="mb-2 mt-6 text-3xl font-bold text-fg">Secure Checkout</h1>
+          <p className="text-fg-muted">
+            Payment is completed on Stripe&apos;s hosted checkout. Your card details are never seen or stored by Nebula.
+          </p>
         </div>
 
-        {fixPack ? <Card variant="bordered" className="mb-6">
-          <h2 className="mb-4 font-semibold text-fg">Nebula Conversion Fix Pack</h2>
+        <Card variant="bordered" className="mb-6">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+            One page · one repair · verified
+          </p>
+          <h2 className="mb-4 text-xl font-semibold text-fg">{REPAIR_SPRINT_OFFER.name}</h2>
           <ul className="mb-4 space-y-2 text-sm text-fg-muted">
-            {[
-              'Full 7-point landing page audit',
-              'Written diagnosis with prioritised fix list',
-              'A tailored AI prompt for every finding, built from your actual page',
-              '30-day free re-audit to see what changed',
-            ].map((item) => (
+            {REPAIR_SPRINT_OFFER.includes.map((item) => (
               <li key={item} className="flex items-start gap-2">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                 {item}
@@ -68,7 +43,7 @@ export default async function CheckoutPage({ searchParams }: Props) {
           </ul>
           <div className="flex justify-between border-t border-border pt-4 font-bold">
             <span className="text-fg">One-time total</span>
-            <span className="text-accent">{fixPackPrice}</span>
+            <span className="text-accent">${REPAIR_SPRINT_OFFER.priceUsd}</span>
           </div>
         </Card> : (
           <Card variant="bordered" className="mb-6">
@@ -80,27 +55,7 @@ export default async function CheckoutPage({ searchParams }: Props) {
           </Card>
         )}
 
-        {fixPack && auditIdentity && auditId ? (
-          <CheckoutCTAButton
-            auditId={auditId}
-            endpoint={fixPack.checkout.sessionEndpoint}
-            offerKey={fixPack.checkout.offerKey}
-          />
-        ) : fixPack ? (
-          <Card variant="bordered" className="mb-6">
-            <h2 className="mb-3 font-semibold text-fg">Select an audited page before payment</h2>
-            <p className="mb-4 text-sm text-fg-muted">
-              The Fix Pack is tailored to one completed, unlocked audit. Run or open that audit
-              first so checkout can bind delivery to the correct page before Stripe charges you.
-            </p>
-            <Link
-              href="/audit"
-              className="inline-flex rounded-xl bg-accent px-5 py-3 font-semibold text-bg hover:bg-accent-light"
-            >
-              Run the free audit
-            </Link>
-          </Card>
-        ) : null}
+        <CheckoutCTAButton href={REPAIR_SPRINT_OFFER.checkoutUrl} />
 
         <p className="mt-6 text-center text-sm text-fg-muted">
           Card details are entered only on Stripe. Nebula does not collect or store payment information.
@@ -116,24 +71,30 @@ export default async function CheckoutPage({ searchParams }: Props) {
           </Link>
         </div>
 
-        {fixPack && <section className="mt-12 border-t border-border pt-8 text-sm text-fg-muted">
+        <section className="mt-12 border-t border-border pt-8 text-sm leading-6 text-fg-muted">
           <h2 className="mb-3 text-base font-semibold text-fg">What happens after you pay</h2>
-          <p className="mb-3">
-            Within minutes of payment, you&apos;ll get an email with the full audit findings and a
-            complete AI prompt pack — one prompt per issue found, pre-filled with the specifics of
-            your actual page. Paste them into Claude, ChatGPT, or hand them to your own developer.
+          <ol className="space-y-3">
+            <li>1. Stripe confirms your purchase immediately.</li>
+            <li>2. Within one business day, we confirm the audited URL and propose one bounded repair.</li>
+            <li>3. You approve the scope and grant temporary collaborator access or approve a buyer-approved patch handoff.</li>
+            <li>4. We implement the repair, verify production, and deliver the before/after evidence packet.</li>
+          </ol>
+          <p className="mt-4">
+            Never send passwords by email. Use your platform&apos;s collaborator role or keep deployment under your control through the approved patch path.
           </p>
-          <p className="mb-3">
-            We never ask for access to your site, CMS, or hosting — you stay in control of what
-            gets changed and when. You can request one free re-audit within 30 days to see what
-            changed and what&apos;s still open.
-          </p>
-          <h2 className="mb-3 mt-6 text-base font-semibold text-fg">Payment and security</h2>
+
+          <h2 className="mb-3 mt-6 text-base font-semibold text-fg">Bounded scope</h2>
           <p>
-            Payment is processed by Stripe. Nebula Components does not handle, store, or transmit card
-            details. This checkout accepts card payments through Stripe.
-            After payment, the fix pack is delivered within minutes — no account creation
-            required.
+            This purchase covers one page-level repair. It excludes full redesigns, multiple pages,
+            backend application logic, analytics migrations, and paid third-party tools. If we cannot
+            safely implement a bounded repair on your page, you receive a full refund before work begins.
+          </p>
+
+          <h2 className="mb-3 mt-6 text-base font-semibold text-fg">Evidence, not a lift guarantee</h2>
+          <p>
+            We verify what page condition was observed, what was changed, and whether that condition
+            changed on re-audit. Traffic quality, offer strength, campaign changes, and measurement
+            windows remain outside this repair, so the service does not guarantee conversion lift.
           </p>
         </section>}
       </div>
