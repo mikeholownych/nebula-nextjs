@@ -70,6 +70,17 @@ describe('check-sitemap-routes', () => {
     })
   })
 
+  test('decodes XML entities in sitemap route locations', async () => {
+    await withFixtureServer({
+      '/sitemap.xml': (baseUrl) => ({
+        body: `<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${baseUrl}/healthy?source=a&amp;campaign=b</loc></url></urlset>`,
+      }),
+      '/healthy?source=a&campaign=b': { body: '<html>healthy</html>' },
+    }, async (baseUrl) => {
+      await expect(runChecker(baseUrl)).resolves.toBeDefined()
+    })
+  })
+
   test('retries a transient 500 route and accepts its eventual 200 response', async () => {
     let attempts = 0
     await withFixtureServer({
@@ -126,6 +137,29 @@ describe('check-sitemap-routes', () => {
   test('fails when the sitemap XML is malformed', async () => {
     await withFixtureServer({
       '/sitemap.xml': { body: '<urlset><url><loc>https://example.test/broken</loc></urlset>' },
+    }, async (baseUrl) => {
+      await expect(runChecker(baseUrl)).rejects.toMatchObject({ code: 1 })
+    })
+  })
+
+  test('fails when valid route entries are followed by malformed XML structure', async () => {
+    await withFixtureServer({
+      '/sitemap.xml': (baseUrl) => ({
+        body: `<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${baseUrl}/healthy</loc></url><trailing></urlset>`,
+      }),
+      '/healthy': { body: '<html>healthy</html>' },
+    }, async (baseUrl) => {
+      await expect(runChecker(baseUrl)).rejects.toMatchObject({ code: 1 })
+    })
+  })
+
+  test('fails when a sitemap url entry contains multiple loc elements', async () => {
+    await withFixtureServer({
+      '/sitemap.xml': (baseUrl) => ({
+        body: `<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${baseUrl}/healthy</loc><loc>${baseUrl}/also-healthy</loc></url></urlset>`,
+      }),
+      '/healthy': { body: '<html>healthy</html>' },
+      '/also-healthy': { body: '<html>also healthy</html>' },
     }, async (baseUrl) => {
       await expect(runChecker(baseUrl)).rejects.toMatchObject({ code: 1 })
     })

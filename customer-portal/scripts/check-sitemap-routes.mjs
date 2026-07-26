@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import { XMLParser, XMLValidator } from 'fast-xml-parser'
+
 const DEFAULT_BASE_URL = 'https://nebulacomponents.shop'
 const DEFAULT_CONCURRENCY = 5
 const DEFAULT_RETRIES = 2
@@ -33,32 +35,40 @@ export function parseOptions(args = process.argv.slice(2)) {
   }
 }
 
-function decodeXml(value) {
-  return value
-    .replaceAll('&amp;', '&')
-    .replaceAll('&lt;', '<')
-    .replaceAll('&gt;', '>')
-    .replaceAll('&quot;', '"')
-    .replaceAll('&apos;', "'")
-}
-
 export function extractSitemapLocations(xml) {
-  const source = xml.trim().replace(/^<\?xml[^>]*\?>\s*/i, '')
-  const root = source.match(/^<urlset\b[^>]*>([\s\S]*)<\/urlset>$/i)
-  if (!root) throw new Error('Malformed sitemap XML: expected a complete <urlset> document')
+  const validation = XMLValidator.validate(xml)
+  if (validation !== true) throw new Error(`Malformed sitemap XML: ${validation.err.msg}`)
 
-  const urlEntries = [...root[1].matchAll(/<url\b[^>]*>([\s\S]*?)<\/url>/gi)]
-  if (urlEntries.length === 0) throw new Error('Malformed sitemap XML: expected at least one <url><loc> entry')
+  const parsed = new XMLParser({
+    ignoreAttributes: false,
+    processEntities: true,
+    removeNSPrefix: true,
+    trimValues: true,
+  }).parse(xml)
+  const rootNames = Object.keys(parsed).filter((name) => !name.startsWith('@_') && name !== '?xml')
+  if (rootNames.length !== 1 || rootNames[0] !== 'urlset') {
+    throw new Error('Malformed sitemap XML: expected exactly one <urlset> root')
+  }
+
+  const urlset = parsed.urlset
+  if (!urlset || typeof urlset !== 'object' || Array.isArray(urlset)) {
+    throw new Error('Malformed sitemap XML: expected a <urlset> element')
+  }
+  const urlEntries = Array.isArray(urlset.url) ? urlset.url : [urlset.url]
+  if (urlEntries.length === 0 || urlEntries.some((entry) => !entry || typeof entry !== 'object' || Array.isArray(entry))) {
+    throw new Error('Malformed sitemap XML: expected at least one <url><loc> entry')
+  }
 
   return urlEntries.map((entry, index) => {
-    const loc = entry[1].match(/<loc\b[^>]*>([\s\S]*?)<\/loc>/i)?.[1]?.trim()
-    if (!loc) throw new Error(`Malformed sitemap XML: entry ${index + 1} has no <loc>`)
+    const loc = entry.loc
+    if (typeof loc !== 'string' || loc.length === 0) {
+      throw new Error(`Malformed sitemap XML: entry ${index + 1} must contain exactly one nonempty <loc>`)
+    }
 
-    const location = decodeXml(loc)
     try {
-      const parsed = new URL(location)
-      if (!['http:', 'https:'].includes(parsed.protocol)) throw new Error('unsupported protocol')
-      return parsed.href
+      const url = new URL(loc)
+      if (!['http:', 'https:'].includes(url.protocol)) throw new Error('unsupported protocol')
+      return url.href
     } catch {
       throw new Error(`Malformed sitemap XML: entry ${index + 1} has an invalid URL`)
     }
