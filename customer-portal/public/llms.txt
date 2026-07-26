@@ -38,7 +38,7 @@ Landing page conversion optimization service / Landing page audit tool
 - Team: https://nebulacomponents.shop/company/team
 
 # Open Source
-- Citable v1.13.1: Evidence layer for SEO, AEO, and GEO audits. 123 detectors across 18 namespaces and 27 schema-validated registries (not all detectors are deterministic — each declares its determinism posture). Apache 2.0. npm: @nebulacomponents/citable
+- Citable v1.14.0: Evidence layer for SEO, AEO, and GEO audits. 123 detectors across 18 namespaces and 27 schema-validated registries (not all detectors are deterministic — each declares its determinism posture). Apache 2.0. npm: @nebulacomponents/citable
 
 # Founder
 Mike Holownych — Founder, Nebula Components.

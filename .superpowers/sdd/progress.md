@@ -1,0 +1,47 @@
+# Subagent-driven development progress
+
+## Workspace
+
+- Branch: `feat/claude-seo-action-plan`
+- Worktree: `/home/mike/nebula/.worktrees/claude-seo-action-plan`
+- Source plan: `/home/mike/nebula/competitor-analysis/claude-seo-full-site-review-2026-07-26.md`
+- Implementation plan: `docs/superpowers/plans/2026-07-26-claude-seo-action-plan-implementation.md`
+
+## Baseline
+
+- Full Jest: 21 suites passed, 1 suite failed; 143 tests passed, 1 failed.
+- Known pre-existing failure: 15 Learning Centre article directories lack `meta.json`, excluding them from the hub and sitemap.
+- `npm run check:citable-projection`: passed.
+- `npm run check:evidence-atoms`: passed.
+
+## Task ledger
+
+| Task | Implementer | Review | Status | Notes |
+|---|---|---|---|---|
+| 1. Learning Centre inventory | /root/implement_lc_inventory | /root/review_lc_inventory | approved | Commits d5d36502, e3402ab4; 45/45 article sidecars valid; malformed-metadata fixture isolated |
+| 2. Canonical public facts | /root/implement_public_facts | /root/review_public_facts_final | approved | Commits f176a744, ef47513c, 9573855a, fa39ebe9, fbb904f0; registry `price_data`, advisory-lock recovery, provider receipt idempotency, canonical success labels, and hard request-time expiry |
+| 3. Crawl and reliability gates | /root/implement_crawl_reliability | /root/review_crawl_reliability | approved | Raw hub HTML, contextual target validation, strict XML sitemap-route smoke gate, and self-contained smoke dependencies |
+| 4. Citable route registry/shell | /root/implement_citable_ia_jobs | /root/implement_citable_ia_jobs/review_citable_ia_jobs | approved | Atomic registry, shared shell/proof units, concise hub, and registry-derived sitemap |
+| 5. Citable quick start/jobs | /root/implement_citable_ia_jobs | /root/implement_citable_ia_jobs/review_citable_ia_jobs | approved | Quick start and five job pages; compare/releases remain planned for Task 6 |
+| 6. Comparison/releases | — | — | pending | Evidence bounded |
+| 7. Editorial/performance | — | — | pending | Lab budgets |
+| 8. Proof scaffolding | — | — | pending | Empty until evidenced |
+| 9. Final verification | — | — | pending | No deployment |
+
+## Decisions
+
+- The current accordion already emits eligible article anchors in server HTML. Missing metadata, not client-only mounting, is the current discovery blocker.
+- Citable release facts remain sourced from `data/citable-release.json`.
+- Production workflow status is unknown without a committed fresh receipt.
+- Public case studies and benchmarks remain unpublished until the evidence compiler accepts them.
+- The active Fix Pack is `$97` through 2026-12-31: automated tailored prompt-pack delivery within minutes; the customer or developer implements without Nebula site access.
+- Missing, expired, incomplete, or unsupported offer/proof facts are omitted rather than replaced with fallback claims.
+- Automatic fulfillment uses immutable canonical receipt facts and does not depend on the date-sensitive public availability window.
+- Fulfillment receipt history is append-only: changing the current offer must preserve retired tuples for delayed/retried paid receipts.
+- The purchases insert outcome is the webhook side-effect claim; duplicate Stripe sessions do not repeat delivery, alerting, or purchase analytics.
+- The public CTA creates Stripe Checkout Sessions through `/api/checkout`; Stripe collects email and the server supplies canonical offer metadata and registry-derived price data.
+- Fix Pack Checkout Sessions use registry-derived `price_data` and card payments only; no opaque Stripe Price ID controls the canonical amount.
+- Canonical webhook fulfillment uses `pending/failed → processing → delivered`; failures return to `failed` for Stripe retry, while concurrent events cannot claim twice.
+- Prompt-pack delivery idempotency is keyed by Stripe session ID, not customer email.
+- Canonical webhook delivery is serialized by a same-connection PostgreSQL advisory lock; a crashed worker releases the lock with its connection, and a retry may safely resume any non-delivered row.
+- AgentMail receives `fix-pack:<stripe_session_id>` as its provider idempotency key, and receipt replay detection runs before bounce-store access.

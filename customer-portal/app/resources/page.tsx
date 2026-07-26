@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import citableRelease from '../../data/citable-release.json'
+import { citableLicenseFacts, citableReleaseFacts } from './citable/content'
 
 export const metadata: Metadata = {
   title: 'Resources — Tools & Open Source | Nebula Components',
@@ -27,10 +27,10 @@ const resourceSchema = {
       operatingSystem: 'Node.js',
       url: 'https://nebulacomponents.shop/resources/citable',
       downloadUrl: 'https://www.npmjs.com/package/@nebulacomponents/citable',
-      softwareVersion: citableRelease.version,
-      license: 'https://www.apache.org/licenses/LICENSE-2.0',
+      softwareVersion: citableReleaseFacts.version,
+      license: citableLicenseFacts.url,
       description:
-        'The evidence layer for defensible SEO, AEO, and GEO audits. 123 detectors across 18 namespaces. Evidence packages on every run.',
+        `The evidence layer for defensible SEO, AEO, and GEO audits. ${citableReleaseFacts.detectorCount} detectors across ${citableReleaseFacts.namespaceCount} namespaces. Evidence packages on every run.`,
       author: { '@id': 'https://nebulacomponents.shop/#organization' },
     },
   ],
@@ -61,15 +61,16 @@ export default function ResourcesPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">Open Source CLI</p>
               <h2 className="text-xl font-semibold tracking-tight text-fg">Citable</h2>
               <p className="flex-1 text-sm leading-relaxed text-fg-muted">
-                The evidence layer for defensible SEO, AEO, and GEO audits. 123
-                detectors across 18 namespaces — technical retrieval, entity identity, claim
-                governance, agent-readiness, and more. Evidence packages on every run.
-                Apache 2.0.
+                The evidence layer for defensible SEO, AEO, and GEO audits.{' '}
+                {citableReleaseFacts.detectorCount} detectors across{' '}
+                {citableReleaseFacts.namespaceCount} namespaces — technical retrieval, entity
+                identity, claim governance, agent-readiness, and more. Evidence packages on every
+                run. {citableLicenseFacts.label}.
               </p>
               <div className="mt-1 flex items-center justify-between">
                 <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full border border-accent/30 px-3 py-1 text-xs text-accent">v{citableRelease.version}</span>
-                  <span className="rounded-full border border-border px-3 py-1 text-xs text-fg-muted">Apache 2.0</span>
+                  <span className="rounded-full border border-accent/30 px-3 py-1 text-xs text-accent">v{citableReleaseFacts.version}</span>
+                  <span className="rounded-full border border-border px-3 py-1 text-xs text-fg-muted">{citableLicenseFacts.label}</span>
                   <span className="rounded-full border border-border px-3 py-1 text-xs text-fg-muted">npm</span>
                   <span className="rounded-full border border-border px-3 py-1 text-xs text-fg-muted">Node.js</span>
                 </div>

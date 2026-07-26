@@ -1,15 +1,17 @@
 {
   "package": "@nebulacomponents/citable",
-  "version": "1.13.1",
-  "releasedAt": "2026-07-23",
+  "version": "1.14.0",
+  "releasedAt": "2026-07-26",
   "detectorCount": 123,
   "namespaceCount": 18,
   "registryCount": 27,
   "nodeRequirement": ">=24.0.0",
   "license": "Apache-2.0",
-  "source": "npm:@nebulacomponents/citable@1.13.1",
+  "source": "npm:@nebulacomponents/citable@1.14.0",
   "highlights": [
-    "`scripts/collect-deployment-receipts.js` probes every controlled surface in a release manifest, writes one schema-valid `deployment-receipt-*.json` per surface (including failed probes — a failed observation is evidence), and exits non-zero unless every finalization-required surface verifies. This is the missing operational step between `ship-release` and `finalize-release`; v1.13.0 had no tool that could produce the receipts its finalize workflow downloads.",
-    "The `nebula-llms-txt` controlled surface now targets `https://nebulacomponents.shop/resources/citable/llms.txt` instead of the site root `/llms.txt`. The root file is the publisher's own site-wide LLM discovery document and can never byte-match the Citable `llms-txt` projection, so the v1.13.0 surface declaration was unsatisfiable as written and no valid deployment receipt could ever have been collected for it. v1.13.0 therefore exceeded its finalization dwell window and is resolved as superseded under the two-phase release governance introduced in 1.13.0."
+    "Added canonical `citable-auditor` and `citable-semantic-reviewer` profiles. The auditor may run guarded Citable collection commands but cannot edit the target; the reviewer is read-only and cannot collect evidence, approve publication, or upgrade claims.",
+    "Claude Code installs generate and manage the profiles under its recursively discovered agent directory with a separate hash manifest. Dry-run, check, collision refusal, idempotent update, and uninstall preserve the profile boundary independently from the skill.",
+    "Other agent hosts continue to receive the canonical skill but report native profiles as unsupported until their discovery and permission contracts are verified.",
+    "Added task-oriented command, integration, troubleshooting, and migration guides with a documentation index."
   ]
 }
