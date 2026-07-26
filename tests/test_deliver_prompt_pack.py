@@ -32,6 +32,9 @@ class DeliverPromptPackTests(unittest.TestCase):
         }]
         self.assertTrue(dpp.already_delivered("cs_first", rows))
         self.assertFalse(dpp.already_delivered("cs_second", rows))
+        self.assertEqual(dpp.delivery_client_id("cs_first"), "fix-pack:cs_first")
+        self.assertEqual(dpp.delivery_client_id("cs_first"), dpp.delivery_client_id("cs_first"))
+        self.assertNotEqual(dpp.delivery_client_id("cs_first"), dpp.delivery_client_id("cs_second"))
 
     def test_main_refuses_to_send_when_bounce_check_errors(self):
         with patch("lead_store.LeadStore") as MockStore:
@@ -41,7 +44,7 @@ class DeliverPromptPackTests(unittest.TestCase):
                  patch.object(dpp, "load_ledger_rows") as mock_rows:
                 rc = dpp.main()
         self.assertEqual(rc, 1)
-        mock_rows.assert_not_called()  # never got past the bounce check
+        mock_rows.assert_called_once()
         mock_notify.assert_called_once()
         self.assertIn("bounce check failed", mock_notify.call_args[0][0])
 
@@ -67,6 +70,7 @@ class DeliverPromptPackTests(unittest.TestCase):
                  patch.object(dpp, "find_audited_url") as mock_find_url:
                 rc = dpp.main()
         self.assertEqual(rc, 0)
+        MockStore.assert_not_called()
         mock_find_url.assert_not_called()  # short-circuited before needing the URL
 
     def test_main_escalates_when_no_prior_audit_found(self):
@@ -100,7 +104,7 @@ class DeliverPromptPackTests(unittest.TestCase):
                      patch.object(dpp, "scrape_page", return_value={"url": "https://lead.example"}), \
                      patch.object(dpp, "score_audit", return_value={"overall": 7.0, "overall_grade": "B", "dimensions": {}}), \
                      patch.object(dpp, "build_prompt_pack", return_value=fake_pack), \
-                     patch.object(dpp, "send_via_agentmail", return_value={"ok": True, "message_id": "msg_123"}), \
+                     patch.object(dpp, "send_via_agentmail", return_value={"ok": True, "message_id": "msg_123"}) as mock_send, \
                      patch.object(dpp, "telegram_notify") as mock_notify:
                     rc = dpp.main()
 
@@ -110,6 +114,12 @@ class DeliverPromptPackTests(unittest.TestCase):
             self.assertEqual(ledger_row["stripe_session_id"], "cs_test")
             self.assertEqual(ledger_row["prompt_count"], 2)
             self.assertEqual(ledger_row["message_id"], "msg_123")
+            mock_send.assert_called_once_with(
+                to="buyer@example.com",
+                subject=unittest.mock.ANY,
+                body=unittest.mock.ANY,
+                client_id="fix-pack:cs_test",
+            )
 
             hot_leads = json.loads(hot_lead_path.read_text())
             self.assertEqual(hot_leads[0]["stage"], "prompt_pack_delivered")

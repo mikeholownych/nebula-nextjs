@@ -1,6 +1,8 @@
 import pytest
+from unittest.mock import Mock, patch
 
 from agentmail_client import AgentMailClient
+from deliver_audit import send_via_agentmail
 from outbound_release_gate import DeliveryPurpose, GateDecision
 
 
@@ -209,3 +211,24 @@ def test_already_sent_receipt_reconciles_without_provider_call():
         "_idempotent_replay": True,
     }
     assert client.provider_calls == []
+
+
+def test_send_via_agentmail_passes_explicit_client_id_to_provider_client():
+    client = Mock()
+    client.send_audit.return_value = {"message_id": "msg-fix-pack"}
+    with patch("agentmail_client.AgentMailClient", return_value=client):
+        result = send_via_agentmail(
+            "buyer@example.com",
+            "Prompt pack",
+            "Body",
+            client_id="fix-pack:cs_live_123",
+        )
+
+    assert result["ok"] is True
+    client.send_audit.assert_called_once_with(
+        to=["buyer@example.com"],
+        subject="Prompt pack",
+        text="Body",
+        html=None,
+        client_id="fix-pack:cs_live_123",
+    )

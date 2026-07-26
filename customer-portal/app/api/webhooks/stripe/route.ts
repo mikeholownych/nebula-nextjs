@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { execFile } from 'child_process'
 import { promisify } from 'util'
+import type { PoolClient } from 'pg'
 import { getPostHogClient } from '@/app/lib/posthog-server'
 import { pool } from '@/app/lib/db'
 import { isCanonicalFixPackReceipt } from '@/app/lib/public-facts'
@@ -40,9 +41,12 @@ async function deliverPromptPack(
   )
 }
 
-async function restoreFailedFulfillment(stripeSessionId: string): Promise<void> {
+async function restoreFailedFulfillment(
+  client: PoolClient,
+  stripeSessionId: string,
+): Promise<void> {
   try {
-    await pool.query(
+    await client.query(
       `UPDATE purchases
        SET fulfillment_status = 'failed'
        WHERE stripe_session_id = $1
@@ -97,7 +101,6 @@ export async function POST(request: NextRequest) {
       metadata: session.metadata,
     })
     const canFulfill = canonicalReceipt && customerEmail !== null
-    const initialStatus = canFulfill ? 'pending' : 'review'
 
     console.log('Checkout completed:', {
       id: session.id,
@@ -106,35 +109,34 @@ export async function POST(request: NextRequest) {
       payment_status: session.payment_status,
     })
 
-    let inserted = false
-    try {
-      const insertResult = await pool.query(
-        `INSERT INTO purchases
-          (stripe_session_id, stripe_event_id, customer_email, offer_key, amount_total, currency, payment_status, fulfillment_status)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-         ON CONFLICT (stripe_session_id) DO NOTHING
-         RETURNING stripe_session_id`,
-        [
-          session.id,
-          event.id,
-          customerEmail,
-          session.metadata?.offer_key ?? null,
-          session.amount_total,
-          session.currency,
-          session.payment_status,
-          initialStatus,
-        ],
-      )
-      inserted = insertResult.rowCount === 1
-    } catch (err) {
-      console.error('Failed to persist purchase — will let Stripe retry:', err)
-      return NextResponse.json(
-        { error: 'Failed to record purchase' },
-        { status: 500 },
-      )
-    }
-
     if (!canFulfill) {
+      let inserted = false
+      try {
+        const insertResult = await pool.query(
+          `INSERT INTO purchases
+            (stripe_session_id, stripe_event_id, customer_email, offer_key, amount_total, currency, payment_status, fulfillment_status)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, 'review')
+           ON CONFLICT (stripe_session_id) DO NOTHING
+           RETURNING stripe_session_id`,
+          [
+            session.id,
+            event.id,
+            customerEmail,
+            session.metadata?.offer_key ?? null,
+            session.amount_total,
+            session.currency,
+            session.payment_status,
+          ],
+        )
+        inserted = insertResult.rowCount === 1
+      } catch (err) {
+        console.error('Failed to persist review purchase:', err)
+        return NextResponse.json(
+          { error: 'Failed to record purchase' },
+          { status: 500 },
+        )
+      }
+
       if (inserted && event.livemode) {
         const amount = session.amount_total != null
           ? `$${(session.amount_total / 100).toFixed(2)}`
@@ -147,42 +149,73 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ received: true, review: true })
     }
 
-    let claimed = false
+    let client: PoolClient | undefined
+    let locked = false
     try {
-      const claimResult = await pool.query(
+      client = await pool.connect()
+      await client.query(
+        'SELECT pg_advisory_lock(hashtextextended($1, 0))',
+        [session.id],
+      )
+      locked = true
+
+      await client.query(
+        `INSERT INTO purchases
+          (stripe_session_id, stripe_event_id, customer_email, offer_key, amount_total, currency, payment_status, fulfillment_status)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, 'pending')
+         ON CONFLICT (stripe_session_id) DO NOTHING
+         RETURNING stripe_session_id`,
+        [
+          session.id,
+          event.id,
+          customerEmail,
+          session.metadata?.offer_key ?? null,
+          session.amount_total,
+          session.currency,
+          session.payment_status,
+        ],
+      )
+
+      const statusResult = await client.query<{ fulfillment_status: string }>(
+        `SELECT fulfillment_status
+         FROM purchases
+         WHERE stripe_session_id = $1`,
+        [session.id],
+      )
+      const status = statusResult.rows[0]?.fulfillment_status
+      if (!status) {
+        throw new Error('Persisted purchase could not be read')
+      }
+      if (status === 'delivered') {
+        return NextResponse.json({ received: true, duplicate: true })
+      }
+
+      // The advisory lock is the exclusive claim. A row left as `processing`
+      // by a crashed worker is safe to retry because PostgreSQL releases the
+      // session lock when that worker's connection disappears.
+      const processingResult = await client.query(
         `UPDATE purchases
          SET fulfillment_status = 'processing'
          WHERE stripe_session_id = $1
-           AND fulfillment_status IN ('pending', 'failed')
          RETURNING stripe_session_id`,
         [session.id],
       )
-      claimed = claimResult.rowCount === 1
-    } catch (err) {
-      console.error('Failed to claim fulfillment — will let Stripe retry:', err)
-      return NextResponse.json(
-        { error: 'Failed to claim fulfillment' },
-        { status: 500 },
-      )
-    }
+      if (processingResult.rowCount !== 1) {
+        throw new Error('Persisted purchase could not be claimed')
+      }
 
-    if (!claimed) {
-      return NextResponse.json({ received: true, duplicate: true })
-    }
+      try {
+        await deliverPromptPack(customerEmail, session.id)
+      } catch (err) {
+        console.error('Prompt pack fulfillment failed:', err)
+        await restoreFailedFulfillment(client, session.id)
+        return NextResponse.json(
+          { error: 'Fulfillment failed' },
+          { status: 500 },
+        )
+      }
 
-    try {
-      await deliverPromptPack(customerEmail, session.id)
-    } catch (err) {
-      console.error('Prompt pack fulfillment failed:', err)
-      await restoreFailedFulfillment(session.id)
-      return NextResponse.json(
-        { error: 'Fulfillment failed' },
-        { status: 500 },
-      )
-    }
-
-    try {
-      const deliveredResult = await pool.query(
+      const deliveredResult = await client.query(
         `UPDATE purchases
          SET fulfillment_status = 'delivered'
          WHERE stripe_session_id = $1
@@ -191,18 +224,31 @@ export async function POST(request: NextRequest) {
         [session.id],
       )
       if (deliveredResult.rowCount !== 1) {
-        throw new Error('Fulfillment claim was lost before completion')
+        throw new Error('Fulfillment could not be marked delivered')
       }
     } catch (err) {
-      console.error('Failed to record delivered fulfillment:', err)
-      // The delivery script's receipt-ID ledger makes this retry safe: on the
-      // next claim it exits successfully without sending the same receipt
-      // twice, allowing the DB state to advance to delivered.
-      await restoreFailedFulfillment(session.id)
+      console.error('Failed to process fulfillment — will let Stripe retry:', err)
+      if (client && locked) {
+        await restoreFailedFulfillment(client, session.id)
+      }
       return NextResponse.json(
-        { error: 'Failed to finalize fulfillment' },
+        { error: 'Fulfillment processing failed' },
         { status: 500 },
       )
+    } finally {
+      if (client) {
+        if (locked) {
+          try {
+            await client.query(
+              'SELECT pg_advisory_unlock(hashtextextended($1, 0))',
+              [session.id],
+            )
+          } catch (unlockError) {
+            console.error('Failed to release fulfillment advisory lock:', unlockError)
+          }
+        }
+        client.release()
+      }
     }
 
     const amount = session.amount_total != null

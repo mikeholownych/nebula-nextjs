@@ -32,10 +32,14 @@ export default function CheckoutCTAButton({ endpoint, offerKey }: Props) {
     if (submitting) return
     setSubmitting(true)
     setError(undefined)
-    posthog.capture('checkout_initiated', {
-      offer: offerKey,
-      destination: endpoint,
-    })
+    try {
+      posthog.capture('checkout_initiated', {
+        offer: offerKey,
+        destination: endpoint,
+      })
+    } catch {
+      // Checkout must not depend on client analytics.
+    }
 
     try {
       const response = await fetch(endpoint, {

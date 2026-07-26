@@ -1,8 +1,14 @@
 import React from 'react'
 import { existsSync, readFileSync, readdirSync } from 'fs'
 import * as path from 'path'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { NextRequest } from 'next/server'
+import posthog from 'posthog-js'
+
+jest.mock('posthog-js', () => ({
+  __esModule: true,
+  default: { capture: jest.fn() },
+}))
 
 jest.mock('@/app/lib/email-service', () => ({
   getQueueStats: jest.fn(),
@@ -295,6 +301,28 @@ describe('production safety containment', () => {
     expect(container.innerHTML).not.toContain('buy.stripe.com')
     expect(screen.queryByText(/^card details$/i)).not.toBeInTheDocument()
     expect(container.querySelector('a button')).toBeNull()
+  })
+
+  it('still starts API checkout when client analytics throws synchronously', async () => {
+    jest.mocked(posthog.capture).mockImplementationOnce(() => {
+      throw new Error('analytics unavailable')
+    })
+    ;(global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: false,
+      json: async () => ({ code: 'CHECKOUT_PROVIDER_ERROR' }),
+    })
+    render(React.createElement(CheckoutPage))
+
+    fireEvent.click(screen.getByRole('button', {
+      name: /continue to secure stripe checkout/i,
+    }))
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(
+        '/api/checkout',
+        expect.objectContaining({ method: 'POST' }),
+      )
+    })
   })
 
   it('shows a real audit submission form now that scoring is live', () => {

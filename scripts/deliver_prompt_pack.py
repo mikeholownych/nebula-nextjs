@@ -21,7 +21,7 @@ import sys
 import time
 from pathlib import Path
 
-NEBULA_DIR = Path("/home/mike/nebula")
+NEBULA_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(NEBULA_DIR))
 
 from deliver_audit import scrape_page, score_audit, send_via_agentmail, HOT_LEAD_PATH  # noqa: E402
@@ -63,6 +63,10 @@ def already_delivered(stripe_session_id, rows):
         and r.get("stripe_session_id") == stripe_session_id
         for r in rows
     )
+
+
+def delivery_client_id(stripe_session_id):
+    return f"fix-pack:{stripe_session_id}"
 
 
 def find_audited_url(email, rows):
@@ -135,6 +139,11 @@ def main():
         log("stripe session ID is required for idempotent delivery")
         return 1
 
+    rows = load_ledger_rows()
+    if already_delivered(stripe_session_id, rows):
+        log(f"{stripe_session_id} already has a prompt_pack_delivered record — skipping (idempotent)")
+        return 0
+
     try:
         from lead_store import LeadStore
         bounced = LeadStore().is_bounced(email)
@@ -146,11 +155,6 @@ def main():
         log(f"{email} is bounced — refusing to send")
         telegram_notify(f"⚠️ Prompt pack purchase from {email}, but that address is on the bounce list. Needs manual follow-up.")
         return 1
-
-    rows = load_ledger_rows()
-    if already_delivered(stripe_session_id, rows):
-        log(f"{stripe_session_id} already has a prompt_pack_delivered record — skipping (idempotent)")
-        return 0
 
     url = find_audited_url(email, rows)
     if not url:
@@ -182,7 +186,12 @@ def main():
         return 1
 
     subject, body = compose_email(url, pack, audit)
-    sent = send_via_agentmail(to=email, subject=subject, body=body)
+    sent = send_via_agentmail(
+        to=email,
+        subject=subject,
+        body=body,
+        client_id=delivery_client_id(stripe_session_id),
+    )
     if not sent.get("ok"):
         log(f"send failed: {sent}")
         telegram_notify(f"⚠️ Prompt pack purchase from {email} ({url}) — send failed: {sent.get('error')}. Needs manual follow-up.")
