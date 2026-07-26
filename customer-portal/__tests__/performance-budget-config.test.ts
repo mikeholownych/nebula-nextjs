@@ -15,6 +15,9 @@ type LighthouseAssertion = [
 type LighthouseConfig = {
   ci: {
     collect: {
+      settings: {
+        chromeFlags: string
+      }
       numberOfRuns: number
       startServerCommand: string
       startServerReadyPattern: string
@@ -40,10 +43,10 @@ function loadLighthouseConfig(): LighthouseConfig {
 
 describe('Lighthouse CI lab performance budgets', () => {
   const expectedUrls = [
-    'http://localhost:3000/learning-centre',
-    'http://localhost:3000/learning-centre/landing-page-not-converting',
-    'http://localhost:3000/resources/citable',
-    'http://localhost:3000/resources/citable/jobs/technical-retrieval-audit',
+    'http://localhost:3102/learning-centre',
+    'http://localhost:3102/learning-centre/landing-page-not-converting',
+    'http://localhost:3102/resources/citable',
+    'http://localhost:3102/resources/citable/jobs/technical-retrieval-audit',
   ]
 
   it('audits the four representative routes against explicit median lab gates', () => {
@@ -51,12 +54,13 @@ describe('Lighthouse CI lab performance budgets', () => {
 
     expect(config.ci.collect.url).toEqual(expectedUrls)
     expect(config.ci.collect.numberOfRuns).toBeGreaterThanOrEqual(3)
-    expect(config.ci.collect.startServerCommand).toBe('npm run start')
+    expect(config.ci.collect.startServerCommand).toBe('npm run start -- --port 3102')
     expect(new RegExp(config.ci.collect.startServerReadyPattern, 'i').test('✓ Ready in 250ms'))
       .toBe(true)
     expect(new RegExp(config.ci.collect.startServerReadyPattern, 'i').test('EADDRINUSE: address already in use'))
       .toBe(false)
     expect(config.ci.collect.startServerReadyTimeout).toBeGreaterThanOrEqual(60_000)
+    expect(config.ci.collect.settings.chromeFlags.split(/\s+/)).toContain('--no-sandbox')
     expect(config.ci.assert.assertions).toMatchObject({
       'categories:performance': [
         'error',

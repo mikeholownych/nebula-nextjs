@@ -263,5 +263,6 @@
 ## Accepted verification deviations
 
 - The repository has no `governance:check` npm script. Task 9 runs the workflow's actual validator directly with `node scripts/validate-governance.mjs`.
-- Lighthouse remains a lab gate, not a production claim. Application-level hydration and prefetch sources were removed from the audited shell without weakening the fixed budgets; the remaining Next.js App Router runtime still exceeds the 200 ms TBT budget on the current verification host.
-- The required production sitemap-route receipts cannot be certified while the public origin returns HTTP 502. No deployment or infrastructure mutation is authorized by this plan.
+- Lighthouse remains a lab gate, not a production claim. Application-level hydration and prefetch sources were removed from the audited shell without weakening the fixed budgets; the remaining Next.js App Router runtime still exceeds the 200 ms TBT budget on the current verification host. A webpack control build reproduced the excess on the representative article, confirming that it is not isolated to the Learning Centre directory implementation.
+- Local Lighthouse collection uses isolated port `3102` so an existing production server on the conventional port cannot be mistaken for the branch build. Container verification also supplies Lighthouse with Playwright's Chromium binary; `--no-sandbox` is required by this verification host's disabled user namespaces.
+- The production origin recovered before final closure. Three consecutive sitemap checks each returned 68/68 HTTP 200 responses with nonempty bodies, and a separate direct check returned HTTP 200 for all 45 Learning Centre article routes.

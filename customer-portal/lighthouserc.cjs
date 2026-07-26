@@ -2,16 +2,17 @@ module.exports = {
   ci: {
     collect: {
       url: [
-        'http://localhost:3000/learning-centre',
-        'http://localhost:3000/learning-centre/landing-page-not-converting',
-        'http://localhost:3000/resources/citable',
-        'http://localhost:3000/resources/citable/jobs/technical-retrieval-audit',
+        'http://localhost:3102/learning-centre',
+        'http://localhost:3102/learning-centre/landing-page-not-converting',
+        'http://localhost:3102/resources/citable',
+        'http://localhost:3102/resources/citable/jobs/technical-retrieval-audit',
       ],
       numberOfRuns: 3,
-      startServerCommand: 'npm run start',
+      startServerCommand: 'npm run start -- --port 3102',
       startServerReadyPattern: '(?:^|\\s)Ready in \\d',
       startServerReadyTimeout: 120_000,
       settings: {
+        chromeFlags: '--no-sandbox',
         onlyCategories: ['performance'],
       },
     },

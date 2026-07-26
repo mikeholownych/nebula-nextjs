@@ -26,7 +26,7 @@
 | 6. Comparison/releases | /root/implement_citable_compare_release | /root/implement_citable_compare_release/review_citable_compare_release | approved | Category/workflow states, synchronized current release, controlled assets, and explicit unavailable workflow/deployment proof |
 | 7. Editorial/performance | /root/finish_editorial_performance + /root | /root/review_editorial_performance | approved | Four answer-first articles; fixed Lighthouse lab gates; consent, header, FAQ-schema, and prefetch performance fixes |
 | 8. Proof scaffolding | /root/implement_public_proof | /root/implement_public_proof/review_public_proof | approved | Generated single-authority cases/benchmarks; actual-clock expiry, dynamic proof surfaces, deterministic diagnostics/drift gate; current counts remain zero |
-| 9. Final verification | /root | /root/final_branch_review | blocked | Code review approved with no findings and repository CI green; Lighthouse TBT and live-origin 502 gates remain blocked; no deployment |
+| 9. Final verification | /root | /root/final_branch_review | approval-ready with accepted lab deviation | Code review approved with no findings; deterministic repository, browser, Python, projection, and live-origin gates pass; fixed Lighthouse TBT remains above budget on this host; no deployment |
 
 ## Decisions
 
@@ -54,9 +54,11 @@
 
 - `npm run ci`: passed — typecheck, lint, evidence/public-proof/Citable/intelligence projections, production build, 33 Jest suites / 301 tests, and 44 Playwright tests.
 - `node scripts/validate-governance.mjs`: passed — 31 checks, 2 existing warnings, 0 failures.
-- `/home/mike/nebula/venv/bin/python3 -m unittest tests.test_deliver_prompt_pack`: passed — 9 tests.
+- `/home/mike/nebula/venv/bin/python3 -m pytest tests/test_deliver_prompt_pack.py tests/test_agentmail_release_gate.py tests/test_outbound_release_gate.py -q`: passed — 51 tests.
 - `git diff --check`: passed.
 - Independent final code review: approved — no Critical, Important, or Minor findings.
-- Lighthouse CI (three lab runs per route): failed only the fixed TBT ≤ 200 ms budget. Medians were 289 ms (`/learning-centre`), 296.7 ms (representative article), 307 ms (`/resources/citable`), and 256.5 ms (representative Citable job). Other configured assertions passed.
-- Production sitemap-route checker: three consecutive runs against `https://nebulacomponents.shop` each failed at sitemap fetch with HTTP 502, so route-level 200 receipts could not be collected.
+- Lighthouse CI (three lab runs per route, isolated branch server): the Learning Centre hub missed LCP by 9.61 ms and TBT by 117 ms; the representative article, Citable hub, and Citable job passed their median budgets. A webpack control build also exceeded TBT on the representative article, identifying the current host/shared Next.js runtime as the remaining lab deviation without weakening the fixed limits.
+- Production sitemap-route checker: three consecutive runs against `https://nebulacomponents.shop/sitemap.xml` passed — 68/68 routes returned HTTP 200 with nonempty bodies on every pass.
+- Production Learning Centre direct-route check: passed — all 45 article routes returned HTTP 200.
+- Homepage messaging integrity: `customer-portal/app/page.tsx` is unchanged from `main` and retains “Your ads worked. Your page didn't let them.”
 - Deployment: not performed.

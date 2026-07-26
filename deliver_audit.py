@@ -14,7 +14,7 @@ except ImportError:
     HAS_FIX_MAP = False
 
 # Configuration
-NEBULA_DIR = Path("/home/mike/nebula")
+NEBULA_DIR = Path(__file__).resolve().parent
 # The live server runs under system Python but dependencies live in the repo venv.
 # Add the active venv site-packages before importing BeautifulSoup/requests.
 sys.path.insert(0, str(NEBULA_DIR / "venv" / "lib" / "python3.12" / "site-packages"))
