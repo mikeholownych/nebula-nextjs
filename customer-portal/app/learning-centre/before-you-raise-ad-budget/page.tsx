@@ -58,7 +58,7 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'What is the fastest way to check for landing page leaks before raising budget?',
+      name: 'What is a practical way to check for landing page leaks before raising budget?',
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'Run the 7-signal check in order: (1) does the headline match the ad promise? (2) is proof visible before the CTA? (3) does the page load and display correctly on mobile at 390px? (4) is LCP under 2.5 seconds? (5) is there one clear CTA — not three options? (6) does the form ask for the minimum required information? (7) is there specific social proof — a result, a number, a named customer? The first signal that fails is the first fix. Earlier signals gate later ones.',

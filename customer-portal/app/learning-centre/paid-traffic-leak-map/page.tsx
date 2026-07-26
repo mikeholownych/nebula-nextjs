@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Paid Traffic Leak Map: Where Your Ad Budget Disappears | Nebula Components',
+  title: 'Paid Traffic Leak Map: Find Where Budget Leaks | Nebula',
   description:
     'A diagnostic map of every stage where paid traffic leaks before converting. Identify which leak is bleeding your ad budget, then get the fix.',
   alternates: {

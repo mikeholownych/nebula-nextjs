@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Landing Page Load Time Slow: Signal 4 Diagnosis and Fix | Nebula Components',
+  title: 'Landing Page Load Time Slow: Diagnose and Fix | Nebula',
   description:
     'Slow landing page load time bleeds conversions before the page is seen. Here is how to diagnose it, what the data says about the speed-conversion relationship, and where to start fixing.',
   alternates: {

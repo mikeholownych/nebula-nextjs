@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Landing Page Bounce Rate High: 3 Diagnosable Causes | Nebula Components',
+  title: 'Landing Page Bounce Rate High: 3 Causes | Nebula',
   description:
     'A high bounce rate on paid traffic means the first screen is not delivering on the promise that brought visitors there. Bounce is a symptom — these are the causes.',
   alternates: {

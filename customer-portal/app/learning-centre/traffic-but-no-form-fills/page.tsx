@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Traffic But No Form Fills: Fix The Real Leak Before The Form | Nebula Components',
+  title: 'Traffic But No Form Fills: Fix The Leak | Nebula',
   description: 'Getting traffic but no form fills? The form is almost never the first problem. Here\'s how to diagnose where trust broke down before visitors ever reached the form.',
   alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/traffic-but-no-form-fills' },
 }

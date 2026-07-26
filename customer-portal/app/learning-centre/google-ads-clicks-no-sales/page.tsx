@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Google Ads Clicks But No Sales: Check The Page Before Budget | Nebula Components',
+  title: 'Google Ads Clicks But No Sales: Fix The Page | Nebula',
   description:
     'If Google Ads produces clicks but no sales, the campaign may be doing its job. The conversion leak usually happens on the landing page, not in the ad.',
   alternates: {

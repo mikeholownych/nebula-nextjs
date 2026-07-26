@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Above The Fold Landing Page: What Paid Traffic Decides Before Scrolling | Nebula Components',
+  title: 'Above The Fold: What Paid Traffic Decides First | Nebula',
   description:
     'Most paid social traffic never scrolls past the first screen. If your above-fold section does not close the case before they scroll, it never gets closed.',
   alternates: {

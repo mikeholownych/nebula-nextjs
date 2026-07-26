@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Google Ads Quality Score Low: Fix The Landing Page, Not The Ad | Nebula Components',
+  title: 'Google Ads Quality Score Low: Fix The Page | Nebula',
   description: 'Low Quality Score is a landing page problem, not an ad problem. Learn what Google is measuring and how to fix it.',
   alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/google-ads-quality-score-low' },
 }

@@ -38,7 +38,7 @@ async function getLastRelease(): Promise<{ tag: string; date: string }> {
 }
 
 export const metadata: Metadata = {
-  title: `Citable ${citableTag} — Evidence Layer for Defensible SEO, AEO, and GEO Audits | Nebula Components`,
+  title: `Citable ${citableTag} — SEO, AEO & GEO Audit Evidence Layer`,
   description:
     'Citable audits what a site makes retrievable, extractable, supportable, and observable — then preserves the artifacts required to defend every finding and verify every change. 123 detectors across 18 namespaces. Apache 2.0 licensed.',
   alternates: { canonical: 'https://nebulacomponents.shop/resources/citable' },
