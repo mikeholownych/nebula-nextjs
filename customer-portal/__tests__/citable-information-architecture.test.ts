@@ -5,10 +5,12 @@ import { cleanup, render, screen } from '@testing-library/react'
 import sitemap from '@/app/sitemap'
 import CitableOverviewPage from '@/app/resources/citable/page'
 import CitableQuickStartPage from '@/app/resources/citable/quick-start/page'
+import CitableComparisonPage from '@/app/resources/citable/compare/page'
 import CitableJobPage, {
   generateMetadata as generateJobMetadata,
   generateStaticParams,
 } from '@/app/resources/citable/jobs/[slug]/page'
+import CitableReleasesPage from '@/app/resources/citable/releases/page'
 import {
   citableJobRoutes,
   citableLicenseFacts,
@@ -31,9 +33,6 @@ const publishedPaths = [
   '/resources/citable/jobs/answer-extractability-audit',
   '/resources/citable/jobs/entity-narrative-audit',
   '/resources/citable/jobs/release-deployment-verification',
-] as const
-
-const plannedPaths = [
   '/resources/citable/compare',
   '/resources/citable/releases',
 ] as const
@@ -45,13 +44,9 @@ function read(relativePath: string) {
 describe('Citable information architecture', () => {
   afterEach(cleanup)
 
-  test('defines the exact bounded route map with compare and releases held unpublished', () => {
-    expect(citableRoutes.map(({ path }) => path)).toEqual([
-      ...publishedPaths,
-      ...plannedPaths,
-    ])
-    expect(citableRoutes.filter(({ status }) => status === 'planned').map(({ path }) => path))
-      .toEqual(plannedPaths)
+  test('defines the exact bounded route map with compare and releases published atomically', () => {
+    expect(citableRoutes.map(({ path }) => path)).toEqual(publishedPaths)
+    expect(citableRoutes.filter(({ status }) => status === 'planned')).toEqual([])
     expect(getPublishedCitableRoutes({ includeOverview: true }).map(({ path }) => path))
       .toEqual(publishedPaths)
   })
@@ -118,7 +113,7 @@ describe('Citable information architecture', () => {
     }
   })
 
-  test('overview renders one H1 and links every published child but no planned child', () => {
+  test('overview renders one H1 and links every published child', () => {
     render(React.createElement(CitableOverviewPage))
 
     expect(screen.getByRole('heading', { level: 1, name: 'Citable' })).toBeInTheDocument()
@@ -126,10 +121,6 @@ describe('Citable information architecture', () => {
       expect(screen.getAllByRole('link', { name: new RegExp(route.h1, 'i') }).length)
         .toBeGreaterThan(0)
     }
-    for (const path of plannedPaths) {
-      expect(document.querySelector(`a[href="${path}"]`)).not.toBeInTheDocument()
-    }
-
     const softwareSchema = [...document.querySelectorAll('script[type="application/ld+json"]')]
       .map((script) => JSON.parse(script.textContent ?? '{}'))
       .find((schema) => schema['@type'] === 'SoftwareApplication')
@@ -202,16 +193,12 @@ describe('Citable information architecture', () => {
     }
   })
 
-  test('sitemaps every implemented route and no planned route', () => {
+  test('sitemaps every published route', () => {
     const urls = sitemap().map(({ url }) => url)
 
     for (const routePath of publishedPaths) {
       expect(urls).toContain(`${ORIGIN}${routePath}`)
     }
-    for (const routePath of plannedPaths) {
-      expect(urls).not.toContain(`${ORIGIN}${routePath}`)
-    }
-
     expect(read('app/sitemap.ts')).toContain('getPublishedCitableRoutes')
   })
 
@@ -229,6 +216,8 @@ describe('Citable information architecture', () => {
     for (const relativePath of [
       'app/resources/citable/quick-start/page.tsx',
       'app/resources/citable/jobs/[slug]/page.tsx',
+      'app/resources/citable/compare/page.tsx',
+      'app/resources/citable/releases/page.tsx',
     ]) {
       const source = read(relativePath)
       expect(source).toContain('createArticleSchema')
@@ -240,6 +229,7 @@ describe('Citable information architecture', () => {
     for (const relativePath of [
       'app/resources/page.tsx',
       'app/resources/citable/page.tsx',
+      'app/resources/citable/releases/page.tsx',
     ]) {
       const source = read(relativePath)
       expect(source).not.toMatch(/\b123 detectors\b/)
@@ -248,5 +238,45 @@ describe('Citable information architecture', () => {
       expect(source).not.toContain('Apache 2.0')
       expect(source).not.toContain('www.apache.org/licenses/LICENSE-2.0')
     }
+  })
+
+  test('renders a category and workflow comparison with explicit bounded evidence states', () => {
+    render(React.createElement(CitableComparisonPage))
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Choose the right verification layer' }))
+      .toBeInTheDocument()
+    for (const state of ['Documented', 'Not assessed', 'Requires external source']) {
+      expect(screen.getAllByText(state, { exact: true }).length).toBeGreaterThan(0)
+    }
+    expect(screen.getByText(/crawler is still required/i)).toBeInTheDocument()
+    expect(screen.getByText(/rank tracker is still required/i)).toBeInTheDocument()
+    expect(screen.getByText(/AI-visibility monitoring platform is still required/i)).toBeInTheDocument()
+    expect(document.body.textContent).not.toMatch(/Profound|Scrunch|Ahrefs|Semrush/)
+
+    const schemaTypes = [...document.querySelectorAll('script[type="application/ld+json"]')]
+      .map((script) => JSON.parse(script.textContent ?? '{}')['@type'])
+    expect(schemaTypes).toEqual(expect.arrayContaining(['Article', 'BreadcrumbList']))
+  })
+
+  test('renders the current release from the projection with controlled-surface links and unavailable proof disclosure', () => {
+    render(React.createElement(CitableReleasesPage))
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Inspect the synchronized Citable release' }))
+      .toBeInTheDocument()
+    expect(screen.getByText(`v${citableReleaseFacts.version}`)).toBeInTheDocument()
+    expect(screen.getByText(citableReleaseFacts.source)).toBeInTheDocument()
+    for (const href of [
+      '/resources/citable/resource-data.json',
+      '/resources/citable/llms.txt',
+      '/resources/citable/README.md',
+    ]) {
+      expect(document.querySelector(`a[href="${href}"]`)).toBeInTheDocument()
+    }
+    expect(screen.getAllByText(/deployment verification remains unavailable/i).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/workflow verification remains unavailable/i).length).toBeGreaterThan(0)
+
+    const schemaTypes = [...document.querySelectorAll('script[type="application/ld+json"]')]
+      .map((script) => JSON.parse(script.textContent ?? '{}')['@type'])
+    expect(schemaTypes).toEqual(expect.arrayContaining(['Article', 'BreadcrumbList']))
   })
 })

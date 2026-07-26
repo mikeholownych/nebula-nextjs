@@ -43,6 +43,7 @@ export interface CitableReleaseFacts {
   nodeRequirement: string
   license: string
   source: string
+  highlights: readonly string[]
 }
 
 export const citableReleaseFacts: CitableReleaseFacts = {
@@ -55,6 +56,7 @@ export const citableReleaseFacts: CitableReleaseFacts = {
   nodeRequirement: citableRelease.nodeRequirement,
   license: citableRelease.license,
   source: citableRelease.source,
+  highlights: citableRelease.highlights,
 }
 
 export const citableLicenseFacts = {
@@ -62,6 +64,24 @@ export const citableLicenseFacts = {
   label: citableReleaseFacts.license.replace('-', ' '),
   url: `https://spdx.org/licenses/${encodeURIComponent(citableReleaseFacts.license)}.html`,
 } as const
+
+export const citableControlledAssets = [
+  {
+    label: 'Release projection data',
+    href: '/resources/citable/resource-data.json',
+    detail: 'Byte-exact controlled resource-data projection served by this site.',
+  },
+  {
+    label: 'Machine-readable release summary',
+    href: '/resources/citable/llms.txt',
+    detail: 'Byte-exact controlled llms.txt release asset served by this site.',
+  },
+  {
+    label: 'Controlled-surface governance notes',
+    href: '/resources/citable/README.md',
+    detail: 'The receipt and finalization requirements for the controlled surfaces.',
+  },
+] as const
 
 export type CitableProofStatus = 'documented' | 'unknown' | 'not_published'
 
@@ -113,6 +133,65 @@ const entitiesPath = `${CITABLE_OVERVIEW_PATH}/jobs/entity-narrative-audit`
 const releasesPath = `${CITABLE_OVERVIEW_PATH}/jobs/release-deployment-verification`
 const comparePath = `${CITABLE_OVERVIEW_PATH}/compare`
 const releaseNotesPath = `${CITABLE_OVERVIEW_PATH}/releases`
+
+export type CitableComparisonStatus = 'documented' | 'not_assessed' | 'requires_external_source'
+
+export interface CitableComparisonRow {
+  category: string
+  workflow: string
+  status: CitableComparisonStatus
+  boundary: string
+  operationalNeed: string
+}
+
+export const citableComparisonStatusLabels: Record<CitableComparisonStatus, string> = {
+  documented: 'Documented',
+  not_assessed: 'Not assessed',
+  requires_external_source: 'Requires external source',
+}
+
+export const citableComparisonRows: readonly CitableComparisonRow[] = [
+  {
+    category: 'Evidence and claim governance',
+    workflow: 'Record bounded observations, validate registries, and retain evidence for review.',
+    status: 'documented',
+    boundary:
+      'The synchronized package documentation describes this evidence-governance workflow; it does not establish a customer outcome.',
+    operationalNeed: 'Use Citable when the decision needs inspectable inputs, limits, and a preserved evidence package.',
+  },
+  {
+    category: 'Category or vendor feature parity',
+    workflow: 'Compare named products, commercial plans, or unverified feature availability.',
+    status: 'not_assessed',
+    boundary:
+      'No named-vendor feature, pricing, coverage, or quality comparison is assessed on this page.',
+    operationalNeed: 'Collect dated primary-source material and have the responsible owner evaluate a bounded comparison separately.',
+  },
+  {
+    category: 'Live crawling and index coverage',
+    workflow: 'Monitor how external crawlers fetch, index, and revisit a changing live estate.',
+    status: 'requires_external_source',
+    boundary:
+      'A bounded Citable fetch can document its own collection; it cannot establish ongoing crawler behavior or index coverage.',
+    operationalNeed: 'A crawler is still required when external crawl, index, or log observations are the decision input.',
+  },
+  {
+    category: 'Search-rank monitoring',
+    workflow: 'Measure query positions, market variation, and rank movement over time.',
+    status: 'requires_external_source',
+    boundary:
+      'Citable does not collect or infer search ranking positions from an evidence package.',
+    operationalNeed: 'A rank tracker is still required when query, locale, device, or time-series rank evidence is needed.',
+  },
+  {
+    category: 'AI-visibility monitoring',
+    workflow: 'Observe provider responses, mentions, citations, and recommendation behavior over time.',
+    status: 'requires_external_source',
+    boundary:
+      'Readable source content and controlled extraction do not prove downstream provider retrieval, citation, or recommendation.',
+    operationalNeed: 'An AI-visibility monitoring platform is still required for controlled external-provider observations.',
+  },
+] as const
 
 const jobRoutes: readonly CitableJobRoute[] = [
   {
@@ -322,28 +401,32 @@ export const citableRoutes: readonly CitableRoute[] = [
   {
     key: 'compare',
     kind: 'compare',
-    status: 'planned',
+    status: 'published',
     path: comparePath,
     title: 'When to Use Citable',
     h1: 'Choose the right verification layer',
     eyebrow: 'Category comparison',
-    description: 'A bounded category comparison reserved for the next implementation task.',
+    description:
+      'Choose Citable for bounded evidence and governance work, while retaining separate crawler, rank-tracking, and AI-visibility observations where they are required.',
     primaryQuestion: 'When is Citable a verification layer rather than a monitoring replacement?',
-    directAnswer: 'This route is registered but not published.',
-    relatedPaths: [],
+    directAnswer:
+      'Citable is appropriate when the work needs bounded technical, claim, entity, or answer-support evidence that can be inspected and preserved. It is not a substitute for external crawler, ranking, or AI-visibility monitoring when those observations are the decision input.',
+    relatedPaths: [quickStartPath, technicalPath, answersPath, releaseNotesPath],
   },
   {
     key: 'releases',
     kind: 'release',
-    status: 'planned',
+    status: 'published',
     path: releaseNotesPath,
     title: 'Citable Release Evidence',
     h1: 'Inspect the synchronized Citable release',
     eyebrow: 'Current release',
-    description: 'A data-driven release page reserved for the next implementation task.',
+    description:
+      'Inspect package facts and release highlights from the synchronized Citable projection without treating them as workflow or deployment proof.',
     primaryQuestion: 'What changed in the synchronized published release?',
-    directAnswer: 'This route is registered but not published.',
-    relatedPaths: [],
+    directAnswer:
+      'This page projects the current published package facts and highlights from the synchronized release record. It does not publish manual release history or establish workflow execution or live deployment without a fresh committed receipt.',
+    relatedPaths: [quickStartPath, releasesPath, comparePath],
   },
 ] as const
 

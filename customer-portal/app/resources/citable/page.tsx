@@ -93,8 +93,8 @@ export default function CitablePage() {
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-fg-muted">
             Each guide owns one operational question and keeps package observations separate from
-            downstream outcomes. Comparison and release-history pages remain unpublished until their
-            evidence-bounded implementations ship.
+            downstream outcomes. The category guide and release page keep adjacent decision work
+            equally evidence-bounded.
           </p>
 
           <div className="mt-7 grid gap-4 md:grid-cols-2">

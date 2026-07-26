@@ -23,7 +23,7 @@
 | 3. Crawl and reliability gates | /root/implement_crawl_reliability | /root/review_crawl_reliability | approved | Raw hub HTML, contextual target validation, strict XML sitemap-route smoke gate, and self-contained smoke dependencies |
 | 4. Citable route registry/shell | /root/implement_citable_ia_jobs | /root/implement_citable_ia_jobs/review_citable_ia_jobs | approved | Atomic registry, shared shell/proof units, concise hub, and registry-derived sitemap |
 | 5. Citable quick start/jobs | /root/implement_citable_ia_jobs | /root/implement_citable_ia_jobs/review_citable_ia_jobs | approved | Quick start and five job pages; compare/releases remain planned for Task 6 |
-| 6. Comparison/releases | — | — | pending | Evidence bounded |
+| 6. Comparison/releases | /root/implement_citable_compare_release | /root/implement_citable_compare_release/review_citable_compare_release | approved | Category/workflow states, synchronized current release, controlled assets, and explicit unavailable workflow/deployment proof |
 | 7. Editorial/performance | — | — | pending | Lab budgets |
 | 8. Proof scaffolding | — | — | pending | Empty until evidenced |
 | 9. Final verification | — | — | pending | No deployment |
