@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { getPublicClaim } from '@/app/lib/evidence-atoms'
-import { auditPageFAQSchema } from '@/app/lib/faq-schemas'
 import AuditForm from './AuditForm'
 
 export const metadata: Metadata = {
@@ -25,10 +24,6 @@ export default function AuditPage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(auditPageFAQSchema) }}
-      />
       <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
       {/* Hero Section */}
       <section className="mx-auto flex min-h-[60vh] max-w-3xl flex-col justify-center px-6 py-16 text-center">

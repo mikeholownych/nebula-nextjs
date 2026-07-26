@@ -72,6 +72,13 @@ function updateManifest(sourceDir: string, mutate: (manifest: Record<string, unk
 }
 
 describe('landing page intelligence stack', () => {
+  it('does not emit FAQ schema without matching visible FAQ projections', () => {
+    const home = readFileSync(path.join(ROOT, 'app', 'page.tsx'), 'utf8')
+    const audit = readFileSync(path.join(ROOT, 'app', 'audit', 'page.tsx'), 'utf8')
+    expect(home).not.toContain('homeFAQSchema')
+    expect(audit).not.toContain('auditPageFAQSchema')
+  })
+
   it('is enforced by the actual GitHub Actions workflow', () => {
     const workflow = readFileSync(path.join(ROOT, '..', '.github', 'workflows', 'ci.yml'), 'utf8')
     expect(workflow).toContain('- name: Verify intelligence stack projection')
