@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main, feature/*]
+    branches: [main, feature/*, feat/*]
   pull_request:
     branches: [main]
 
@@ -24,6 +24,8 @@ jobs:
       - run: npm ci
       - name: Validate governance registers
         run: node scripts/validate-governance.mjs || echo "No governance script"
+      - name: Verify evidence atom projection
+        run: npm run check:evidence-atoms
       - name: Verify intelligence stack projection
         run: npm run check:intelligence-stack
 

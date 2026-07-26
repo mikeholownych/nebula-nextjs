@@ -81,6 +81,7 @@ describe('landing page intelligence stack', () => {
 
   it('is enforced by the actual GitHub Actions workflow', () => {
     const workflow = readFileSync(path.join(ROOT, '..', '.github', 'workflows', 'ci.yml'), 'utf8')
+    expect(workflow).toContain('branches: [main, feature/*, feat/*]')
     expect(workflow).toContain('- name: Verify intelligence stack projection')
     expect(workflow).toContain('run: npm run check:intelligence-stack')
   })

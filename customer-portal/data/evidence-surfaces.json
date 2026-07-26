@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "asOf": "2026-07-25",
+  "entries": [
+    {
+      "claimId": "claim-7-point-diagnosis",
+      "route": "/audit",
+      "slot": "audit-method-summary",
+      "projectionType": "visible_text",
+      "failClosedAction": "omit"
+    }
+  ]
+}

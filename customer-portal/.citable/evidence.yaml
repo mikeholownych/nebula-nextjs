@@ -29,7 +29,7 @@ entries:
   - evidence_id: evidence-citable-detector-count
     title: Citable v1.3.1 Detector Count Verification
     evidence_type: test_result
-    verification_status: verified
+    verification_status: stale
     source: https://github.com/mikeholownych/citable
     access_status: publicly_accessible
     reuse_status: open_license
