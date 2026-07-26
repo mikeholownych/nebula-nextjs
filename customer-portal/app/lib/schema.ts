@@ -92,6 +92,22 @@ export function createArticleSchema(article: {
   }
 }
 
+export const auditWebApplicationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  '@id': 'https://nebulacomponents.shop/audit#app',
+  name: 'Nebula Landing Page Audit',
+  url: 'https://nebulacomponents.shop/audit',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Any (browser-based)',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  provider: { '@id': 'https://nebulacomponents.shop/#organization' },
+}
+
 export function createFAQPageSchema(faqItems: Array<{ question: string; answer: string }>) {
   return {
     '@context': 'https://schema.org',

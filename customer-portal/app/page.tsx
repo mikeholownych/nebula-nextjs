@@ -18,44 +18,9 @@ export const metadata: Metadata = {
   },
 }
 
-const howToSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'HowTo',
-  name: 'How to get a free landing page audit from Nebula Components',
-  description: 'Get an evidence-backed diagnosis of your landing page in three steps.',
-  totalTime: 'PT2M', // matches the real backend timeout (app/api/audit/start/route.ts) — do not understate this
-  step: [
-    {
-      '@type': 'HowToStep',
-      position: 1,
-      name: 'Enter Your URL',
-      text: 'Drop in any landing page URL — no account needed.',
-      url: 'https://nebulacomponents.shop/audit',
-    },
-    {
-      '@type': 'HowToStep',
-      position: 2,
-      name: 'Get Your Score',
-      text: 'We analyze above-fold content, SEO foundations, ad signals, and speed.',
-      url: 'https://nebulacomponents.shop/audit',
-    },
-    {
-      '@type': 'HowToStep',
-      position: 3,
-      name: 'See Your Fixes',
-      text: 'Get prioritized recommendations with impact and effort scores.',
-      url: 'https://nebulacomponents.shop/audit',
-    },
-  ],
-}
-
 export default function Home() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
-      />
       <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
       {/* Hero Section — Vindication Frame */}
       <section className="mx-auto flex min-h-[70vh] max-w-4xl flex-col justify-center px-6 py-24 text-center">
