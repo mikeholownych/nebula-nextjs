@@ -45,20 +45,27 @@ describe('sitemap canonical inventory', () => {
   it('throws malformed metadata errors in test mode but keeps production rendering fail-safe', () => {
     const slug = 'above-fold-landing-page'
     const metaPath = path.join(LC_DIR, slug, 'meta.json')
-    const originalMeta = fs.readFileSync(metaPath, 'utf8')
     const originalNodeEnv = process.env.NODE_ENV
     const mutableEnv = process.env as Record<string, string | undefined>
+    const originalReadFileSync = fs.readFileSync
+    const writeFileSyncSpy = jest.spyOn(fs, 'writeFileSync')
+    const readFileSyncSpy = jest.spyOn(fs, 'readFileSync').mockImplementation(
+      ((file: fs.PathOrFileDescriptor, options?: Parameters<typeof fs.readFileSync>[1]) => {
+        if (file === metaPath) return '{'
+        return originalReadFileSync(file, options)
+      }) as typeof fs.readFileSync
+    )
 
     try {
-      fs.writeFileSync(metaPath, '{')
-
       expect(() => getArticles()).toThrow(`Invalid Learning Centre metadata for "${slug}"`)
 
       mutableEnv.NODE_ENV = 'production'
       expect(getArticles().some((article) => article.slug === slug)).toBe(false)
+      expect(writeFileSyncSpy).not.toHaveBeenCalled()
     } finally {
-      fs.writeFileSync(metaPath, originalMeta)
       mutableEnv.NODE_ENV = originalNodeEnv
+      readFileSyncSpy.mockRestore()
+      writeFileSyncSpy.mockRestore()
     }
   })
 
