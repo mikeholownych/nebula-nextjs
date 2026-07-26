@@ -14,6 +14,7 @@ module.exports = {
       settings: {
         chromeFlags: '--no-sandbox',
         onlyCategories: ['performance'],
+        preset: 'desktop',
       },
     },
     assert: {

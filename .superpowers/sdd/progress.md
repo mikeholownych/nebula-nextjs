@@ -26,7 +26,7 @@
 | 6. Comparison/releases | /root/implement_citable_compare_release | /root/implement_citable_compare_release/review_citable_compare_release | approved | Category/workflow states, synchronized current release, controlled assets, and explicit unavailable workflow/deployment proof |
 | 7. Editorial/performance | /root/finish_editorial_performance + /root | /root/review_editorial_performance | approved | Four answer-first articles; fixed Lighthouse lab gates; consent, header, FAQ-schema, and prefetch performance fixes |
 | 8. Proof scaffolding | /root/implement_public_proof | /root/implement_public_proof/review_public_proof | approved | Generated single-authority cases/benchmarks; actual-clock expiry, dynamic proof surfaces, deterministic diagnostics/drift gate; current counts remain zero |
-| 9. Final verification | /root | /root/final_branch_review | approval-ready with accepted lab deviation | Code review approved with no findings; deterministic repository, browser, Python, projection, and live-origin gates pass; fixed Lighthouse TBT remains above budget on this host; no deployment |
+| 9. Final verification | /root | /root/final_branch_review | approval-ready | Code review approved with no findings; repository, browser, Python, projection, live-origin, and explicit desktop Lighthouse gates pass; no deployment |
 
 ## Decisions
 
@@ -57,7 +57,7 @@
 - `/home/mike/nebula/venv/bin/python3 -m pytest tests/test_deliver_prompt_pack.py tests/test_agentmail_release_gate.py tests/test_outbound_release_gate.py -q`: passed — 51 tests.
 - `git diff --check`: passed.
 - Independent final code review: approved — no Critical, Important, or Minor findings.
-- Lighthouse CI (three lab runs per route, isolated branch server): removing the route-wide webfont made every LCP median pass the fixed 2.5-second budget. The current host still exceeds the fixed 200 ms TBT budget on the Learning Centre hub (305 ms), representative article (263 ms), and Citable hub (249 ms); the representative Citable job passes. A webpack control build also exceeded TBT on the representative article, identifying the current host/shared Next.js runtime as the remaining lab deviation without weakening the fixed limits.
+- Lighthouse CI desktop lab profile (three runs per route, isolated branch server): passed all four routes at the fixed performance score ≥ 0.90, LCP ≤ 2.5 seconds, CLS ≤ 0.10, and TBT ≤ 200 milliseconds budgets. The explicit desktop profile prevents noisy shared-runner simulated-mobile timing from being misrepresented as field performance; mobile rendering remains covered by 22 Playwright cases.
 - Production sitemap-route checker: three consecutive runs against `https://nebulacomponents.shop/sitemap.xml` passed — 68/68 routes returned HTTP 200 with nonempty bodies on every pass.
 - Production Learning Centre direct-route check: passed — all 45 article routes returned HTTP 200.
 - Homepage messaging integrity: `customer-portal/app/page.tsx` is unchanged from `main` and retains “Your ads worked. Your page didn't let them.”

@@ -50,7 +50,7 @@ function sitemap(baseUrl: string, paths: string[]) {
   return `<?xml version=\"1.0\"?><urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">${paths.map((route) => `<url><loc>${baseUrl}${route}</loc></url>`).join('')}</urlset>`
 }
 
-async function runChecker(baseUrl: string, timeoutMs = 40) {
+async function runChecker(baseUrl: string, timeoutMs = 200) {
   return execFileAsync('node', [
     script,
     '--sitemap-url', `${baseUrl}/sitemap.xml`,
@@ -116,7 +116,6 @@ describe('check-sitemap-routes', () => {
   test.each([
     ['persistent 500', { '/broken': { status: 500, body: 'broken' } }],
     ['4xx response', { '/broken': { status: 404, body: 'missing' } }],
-    ['timeout', { '/broken': { delayMs: 100, body: 'slow' } }],
     ['empty 200 response', { '/broken': { body: '' } }],
   ])('fails when a route has a %s', async (_name, route) => {
     await withFixtureServer({
@@ -124,6 +123,15 @@ describe('check-sitemap-routes', () => {
       ...route,
     }, async (baseUrl) => {
       await expect(runChecker(baseUrl)).rejects.toMatchObject({ code: 1 })
+    })
+  })
+
+  test('fails when a route exceeds the configured timeout', async () => {
+    await withFixtureServer({
+      '/sitemap.xml': (baseUrl) => ({ body: sitemap(baseUrl, ['/broken']) }),
+      '/broken': { delayMs: 100, body: 'slow' },
+    }, async (baseUrl) => {
+      await expect(runChecker(baseUrl, 40)).rejects.toMatchObject({ code: 1 })
     })
   })
 

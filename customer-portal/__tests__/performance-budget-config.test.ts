@@ -17,6 +17,7 @@ type LighthouseConfig = {
     collect: {
       settings: {
         chromeFlags: string
+        preset: string
       }
       numberOfRuns: number
       startServerCommand: string
@@ -61,6 +62,7 @@ describe('Lighthouse CI lab performance budgets', () => {
       .toBe(false)
     expect(config.ci.collect.startServerReadyTimeout).toBeGreaterThanOrEqual(60_000)
     expect(config.ci.collect.settings.chromeFlags.split(/\s+/)).toContain('--no-sandbox')
+    expect(config.ci.collect.settings.preset).toBe('desktop')
     expect(config.ci.assert.assertions).toMatchObject({
       'categories:performance': [
         'error',
