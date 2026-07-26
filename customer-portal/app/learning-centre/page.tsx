@@ -26,6 +26,8 @@ export default function LearningCentreIndex() {
     'Form Leaks',
     'Mobile Leaks',
     'Industry Specific',
+    'Conversion Systems',
+    'AI Ops Systems',
   ]
 
   const categories: Record<string, typeof articles> = Object.fromEntries(categoryOrder.map(c => [c, []]))
