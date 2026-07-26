@@ -24,7 +24,7 @@
 | 4. Citable route registry/shell | /root/implement_citable_ia_jobs | /root/implement_citable_ia_jobs/review_citable_ia_jobs | approved | Atomic registry, shared shell/proof units, concise hub, and registry-derived sitemap |
 | 5. Citable quick start/jobs | /root/implement_citable_ia_jobs | /root/implement_citable_ia_jobs/review_citable_ia_jobs | approved | Quick start and five job pages; compare/releases remain planned for Task 6 |
 | 6. Comparison/releases | /root/implement_citable_compare_release | /root/implement_citable_compare_release/review_citable_compare_release | approved | Category/workflow states, synchronized current release, controlled assets, and explicit unavailable workflow/deployment proof |
-| 7. Editorial/performance | /root/finish_editorial_performance + /root | — | implemented; review pending | Four answer-first articles; fixed Lighthouse lab gates; consent, header, FAQ-schema, and prefetch performance fixes |
+| 7. Editorial/performance | /root/finish_editorial_performance + /root | /root/review_editorial_performance | approved | Four answer-first articles; fixed Lighthouse lab gates; consent, header, FAQ-schema, and prefetch performance fixes |
 | 8. Proof scaffolding | — | — | pending | Empty until evidenced |
 | 9. Final verification | — | — | pending | No deployment |
 
