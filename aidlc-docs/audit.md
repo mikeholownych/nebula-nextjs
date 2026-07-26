@@ -371,3 +371,12 @@ before it reached the UI, surfacing only the generic fallback message.
 **Context**: Code-generation Part 1 complete; no application code generated.
 
 ---
+
+## Landing Page Intelligence Stack — Implementation Approval
+**Timestamp**: 2026-07-26T05:25:39Z
+**User Input**: "A"
+**AI Response**: "Recorded inline-execution approval and verified the clean test baseline."
+**Status**: Code generation authorized
+**Context**: Dedicated feature branch; normal checkout retained because the approved plan depends on current uncommitted SEO/evidence state. Baseline Jest: 114/114 passed.
+
+---

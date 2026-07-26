@@ -77,7 +77,7 @@ As a founder who wants the workflows applied to a page, I can move from the reso
 - Consumes: source root from `STACK_SOURCE_DIR` or the canonical content directory; output root from `STACK_OUTPUT_DIR` or `public/downloads`.
 - Produces: `npm run package:intelligence-stack`, `npm run check:intelligence-stack`, ZIP path `/downloads/nebula-landing-page-intelligence-stack-v1.zip`, and sidecar path with `.sha256` suffix.
 
-- [ ] **Step 1: Install the direct archive dependency**
+- [x] **Step 1: Install the direct archive dependency**
 
 Run:
 
@@ -88,7 +88,7 @@ npm install --save-dev fflate@0.8.3
 
 Expected: `package.json` includes `"fflate": "^0.8.3"` directly and the lockfile changes without adding a runtime dependency.
 
-- [ ] **Step 2: Write the failing archive contract test**
+- [x] **Step 2: Write the failing archive contract test**
 
 Create `customer-portal/__tests__/landing-page-intelligence-stack.test.ts` with imports for `execFileSync`, `createHash`, `mkdtempSync`, `readFileSync`, `writeFileSync`, `mkdirSync`, `cpSync`, `rmSync`, `tmpdir`, `join`, and `unzipSync` from `fflate`.
 
@@ -127,7 +127,7 @@ npm test -- --runInBand __tests__/landing-page-intelligence-stack.test.ts
 
 Expected: FAIL because the source and packager do not exist.
 
-- [ ] **Step 3: Create the exact source manifest and evidence schema**
+- [x] **Step 3: Create the exact source manifest and evidence schema**
 
 Create `manifest.json`:
 
@@ -152,7 +152,7 @@ Create `manifest.json`:
 
 Create `evidence-record.schema.json` as JSON Schema draft 2020-12. Require `workflow_id`, `page_url`, `observed_at`, `selector`, `observation`, `interpretation`, `confidence`, and `status`; disallow unknown fields. `page_url` must be an HTTP(S) URI, `observed_at` an ISO date-time, `confidence` one of `low`, `medium`, `high`, and `status` one of `observed`, `not_observed`, `not_testable`.
 
-- [ ] **Step 4: Create the README and six bounded workflow files**
+- [x] **Step 4: Create the README and six bounded workflow files**
 
 `README.md` must state:
 
@@ -189,7 +189,7 @@ Use these workflow-specific contracts:
 
 Procedures must be executable manually, separate observation from interpretation, and avoid numerical benchmarks not supplied by the user's own data.
 
-- [ ] **Step 5: Implement the fail-closed deterministic packager**
+- [x] **Step 5: Implement the fail-closed deterministic packager**
 
 Create `scripts/package-landing-page-intelligence-stack.mjs` with:
 
@@ -232,7 +232,7 @@ Add package scripts:
 
 Insert `npm run check:intelligence-stack` into `ci` before `npm run build`.
 
-- [ ] **Step 6: Generate, test, and commit Task 1**
+- [x] **Step 6: Generate, test, and commit Task 1**
 
 Run:
 

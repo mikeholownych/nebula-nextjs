@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "bundleId": "nebula-landing-page-intelligence-stack",
+  "release": "v1",
+  "files": [
+    "README.md",
+    "evidence-record.schema.json",
+    "manifest.json",
+    "workflows/01-message-match-checker.md",
+    "workflows/02-trust-gap-detector.md",
+    "workflows/03-mobile-first-scroll-analyzer.md",
+    "workflows/04-cta-form-friction-analyzer.md",
+    "workflows/05-paid-traffic-leak-prioritizer.md",
+    "workflows/06-fix-verification-workflow.md"
+  ]
+}
