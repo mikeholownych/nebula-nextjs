@@ -1,6 +1,7 @@
 import { execFile } from 'node:child_process'
 import { createServer } from 'node:http'
 import { once } from 'node:events'
+import { readFileSync } from 'node:fs'
 import { promisify } from 'node:util'
 import path from 'node:path'
 
@@ -163,5 +164,21 @@ describe('check-sitemap-routes', () => {
     }, async (baseUrl) => {
       await expect(runChecker(baseUrl)).rejects.toMatchObject({ code: 1 })
     })
+  })
+
+  test('installs the checker production dependency before the production sitemap check', () => {
+    const workflow = readFileSync(path.join(process.cwd(), '..', '.github', 'workflows', 'production-smoke.yml'), 'utf8')
+    const packageManifest = JSON.parse(readFileSync(path.join(process.cwd(), 'package.json'), 'utf8')) as {
+      dependencies: Record<string, string>
+    }
+
+    expect(packageManifest.dependencies['fast-xml-parser']).toBe('5.10.1')
+    expect(workflow).toContain('uses: actions/setup-node@v4')
+    expect(workflow).toContain("node-version: '22'")
+    expect(workflow).toContain("cache: 'npm'")
+    expect(workflow).toContain('cache-dependency-path: customer-portal/package-lock.json')
+    expect(workflow).toContain('run: npm ci --omit=dev --ignore-scripts')
+    expect(workflow.indexOf('uses: actions/setup-node@v4')).toBeLessThan(workflow.indexOf('run: npm ci --omit=dev --ignore-scripts'))
+    expect(workflow.indexOf('run: npm ci --omit=dev --ignore-scripts')).toBeLessThan(workflow.indexOf('npm run check:sitemap-routes'))
   })
 })
