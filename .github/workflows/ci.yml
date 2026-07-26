@@ -24,6 +24,8 @@ jobs:
       - run: npm ci
       - name: Validate governance registers
         run: node scripts/validate-governance.mjs || echo "No governance script"
+      - name: Verify intelligence stack projection
+        run: npm run check:intelligence-stack
 
   # Job 2: Lint and Typecheck
   lint:

@@ -72,6 +72,12 @@ function updateManifest(sourceDir: string, mutate: (manifest: Record<string, unk
 }
 
 describe('landing page intelligence stack', () => {
+  it('is enforced by the actual GitHub Actions workflow', () => {
+    const workflow = readFileSync(path.join(ROOT, '..', '.github', 'workflows', 'ci.yml'), 'utf8')
+    expect(workflow).toContain('- name: Verify intelligence stack projection')
+    expect(workflow).toContain('run: npm run check:intelligence-stack')
+  })
+
   it('publishes the approved article metadata and direct-download surface', () => {
     const articleDir = path.join(ROOT, 'app', 'learning-centre', 'landing-page-intelligence-stack')
     const meta = JSON.parse(readFileSync(path.join(articleDir, 'meta.json'), 'utf8'))

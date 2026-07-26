@@ -358,7 +358,7 @@ git commit -m "feat: publish landing page intelligence stack"
 - Consumes: Task 1 scripts and Task 2 test IDs.
 - Produces: direct GitHub Actions enforcement and desktop/mobile browser proof.
 
-- [ ] **Step 1: Add failing actual-workflow and E2E tests**
+- [x] **Step 1: Add failing actual-workflow and E2E tests**
 
 Add a Jest assertion that reads `../.github/workflows/ci.yml` and matches both a named `Verify intelligence stack projection` step and `run: npm run check:intelligence-stack`.
 
@@ -375,7 +375,7 @@ Create Playwright tests that, on both configured projects:
 
 Run targeted Jest before workflow modification and expect FAIL.
 
-- [ ] **Step 2: Wire the actual workflow**
+- [x] **Step 2: Wire the actual workflow**
 
 In `.github/workflows/ci.yml`, add to the governance job after evidence projection checking:
 
@@ -386,7 +386,7 @@ In `.github/workflows/ci.yml`, add to the governance job after evidence projecti
 
 The package-level `ci` command already contains the check from Task 1; both layers are required.
 
-- [ ] **Step 3: Build and execute rendered verification**
+- [x] **Step 3: Build and execute rendered verification**
 
 Run:
 
