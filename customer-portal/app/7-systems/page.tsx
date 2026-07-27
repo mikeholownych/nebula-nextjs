@@ -188,7 +188,7 @@ export default function SevenSystemsPage() {
           ))}
 
           {/* Order Matters */}
-          <section className="mb-16 pt-8 border-t border-slate-800">
+          <section className="mb-16 pt-24 border-t border-slate-800">
             <h2 className="text-2xl md:text-3xl font-bold mb-6">
               The Order Matters
             </h2>

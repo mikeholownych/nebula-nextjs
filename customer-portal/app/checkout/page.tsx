@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic'
 export function generateMetadata(): Metadata {
   const fixPack = getActiveFixPack()
   return {
-    title: 'Checkout — Nebula Conversion Fix Pack | Nebula Components',
+    title: 'Checkout - Nebula Conversion Fix Pack | Nebula Components',
     description: fixPack
       ? `Purchase the Nebula Conversion Fix Pack for ${formatUsd(fixPack.priceCents)}. One-time payment via Stripe. Landing page audit and a full AI prompt pack delivered by email within minutes.`
       : 'Nebula Conversion Fix Pack checkout. No paid offer is currently available.',
@@ -66,7 +66,7 @@ export default async function CheckoutPage({ searchParams }: Props) {
               </li>
             ))}
           </ul>
-          <div className="flex justify-between border-t border-border pt-4 font-bold">
+          <div className="flex justify-between border-t border-border pt-24 font-bold">
             <span className="text-fg">One-time total</span>
             <span className="text-accent">{fixPackPrice}</span>
           </div>
@@ -120,11 +120,11 @@ export default async function CheckoutPage({ searchParams }: Props) {
           <h2 className="mb-3 text-base font-semibold text-fg">What happens after you pay</h2>
           <p className="mb-3">
             Within minutes of payment, you&apos;ll get an email with the full audit findings and a
-            complete AI prompt pack — one prompt per issue found, pre-filled with the specifics of
+            complete AI prompt pack - one prompt per issue found, pre-filled with the specifics of
             your actual page. Paste them into Claude, ChatGPT, or hand them to your own developer.
           </p>
           <p className="mb-3">
-            We never ask for access to your site, CMS, or hosting — you stay in control of what
+            We never ask for access to your site, CMS, or hosting - you stay in control of what
             gets changed and when. You can request one free re-audit within 30 days to see what
             changed and what&apos;s still open.
           </p>
@@ -132,7 +132,7 @@ export default async function CheckoutPage({ searchParams }: Props) {
           <p>
             Payment is processed by Stripe. Nebula Components does not handle, store, or transmit card
             details. This checkout accepts card payments through Stripe.
-            After payment, the fix pack is delivered within minutes — no account creation
+            After payment, the fix pack is delivered within minutes - no account creation
             required.
           </p>
         </section>}

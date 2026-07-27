@@ -206,7 +206,7 @@ export default function AiSdrVsAuditPage() {
         </div>
 
         {/* Footer attribution */}
-        <p className="text-xs text-fg-muted text-center mt-12 pt-6 border-t border-border">
+        <p className="text-xs text-fg-muted text-center mt-12 pt-24 border-t border-border">
           Competitive analysis based on{' '}
           <a href="https://www.zamp.ai/blogs/ai-sdr-bdr-what-they-do-and-how-to-deploy-one" className="hover:text-fg">
             Zamp's AI SDR blog post

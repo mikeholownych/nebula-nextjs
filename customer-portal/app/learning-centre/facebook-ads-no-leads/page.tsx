@@ -84,13 +84,13 @@ export default function FacebookAdsNoLeadsPage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Facebook-to-Landing-Page Transition Shock</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Facebook and Instagram are passive scroll environments. People are not there to evaluate products. They're looking at photos of people they know, watching short videos, or following a news thread. When your ad interrupts that experience, you've created a pattern-break — and if it's compelling enough, they click.
+            Facebook and Instagram are passive scroll environments. People are not there to evaluate products. They're looking at photos of people they know, watching short videos, or following a news thread. When your ad interrupts that experience, you've created a pattern-break - and if it's compelling enough, they click.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
             That click is a sudden context switch from entertainment to evaluation. The visitor goes from a warm, familiar social feed to a completely unfamiliar landing page. They're now in a different mental mode. They're asking: what is this, can I trust it, is this worth my time? You have approximately three seconds to answer those questions before they hit the back button and return to the scroll.
           </p>
           <p className="leading-relaxed text-fg-muted">
-            Most landing pages fail this test not because they're badly designed in isolation, but because they don't account for the emotional state the visitor arrived in. The page must catch that state and sustain it — not reset it. The gap between where the ad left the visitor and where the page picks them up is where most Meta ad spend goes to die.
+            Most landing pages fail this test not because they're badly designed in isolation, but because they don't account for the emotional state the visitor arrived in. The page must catch that state and sustain it - not reset it. The gap between where the ad left the visitor and where the page picks them up is where most Meta ad spend goes to die.
           </p>
         </section>
 
@@ -98,13 +98,13 @@ export default function FacebookAdsNoLeadsPage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Message Match Problem on Meta</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Meta ads work by pattern-breaking the feed. A strong ad creates a specific tone, makes a specific promise, and shows a specific visual style. The visitor clicked because something in that combination resonated. When they arrive on the landing page, they're looking — consciously or not — for confirmation that they're in the right place.
+            Meta ads work by pattern-breaking the feed. A strong ad creates a specific tone, makes a specific promise, and shows a specific visual style. The visitor clicked because something in that combination resonated. When they arrive on the landing page, they're looking - consciously or not - for confirmation that they're in the right place.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Message match is the degree of continuity between the ad and the landing page. It's not just about repeating the same headline — it's about maintaining the same tone, visual energy, and implied promise. A warm, conversational video ad that lands on a cold, corporate-looking page creates immediate dissonance. The visitor's subconscious registers a mismatch and the trust that the ad had built evaporates.
+            Message match is the degree of continuity between the ad and the landing page. It's not just about repeating the same headline - it's about maintaining the same tone, visual energy, and implied promise. A warm, conversational video ad that lands on a cold, corporate-looking page creates immediate dissonance. The visitor's subconscious registers a mismatch and the trust that the ad had built evaporates.
           </p>
           <p className="leading-relaxed text-fg-muted">
-            The practical fix is to design your landing page and your ad as a single unit. Use the same imagery style. Echo the ad's headline in the page's H1. If the ad is casual and direct, the page must be casual and direct. If the ad showed a specific outcome ('Stop losing leads to your landing page'), the page should lead with that same outcome — not a generic brand statement. Continuity is trust.
+            The practical fix is to design your landing page and your ad as a single unit. Use the same imagery style. Echo the ad's headline in the page's H1. If the ad is casual and direct, the page must be casual and direct. If the ad showed a specific outcome ('Stop losing leads to your landing page'), the page should lead with that same outcome - not a generic brand statement. Continuity is trust.
           </p>
         </section>
 
@@ -112,7 +112,7 @@ export default function FacebookAdsNoLeadsPage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Trust Gap: Meta Traffic Is Cold</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            There's a fundamental difference between Google search traffic and Meta traffic that most advertisers underestimate. Google visitors have declared intent — they typed a query that tells you exactly what they're looking for. Meta visitors have done no such thing. They were living their lives and your ad interrupted them. They have no prior relationship with your brand and no expressed need.
+            There's a fundamental difference between Google search traffic and Meta traffic that most advertisers underestimate. Google visitors have declared intent - they typed a query that tells you exactly what they're looking for. Meta visitors have done no such thing. They were living their lives and your ad interrupted them. They have no prior relationship with your brand and no expressed need.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
             This means a page designed for warm or high-intent traffic may need
@@ -122,7 +122,7 @@ export default function FacebookAdsNoLeadsPage() {
             determines the result.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            The minimum proof floor for a Meta landing page is: at least one or two testimonials visible above the fold, a real face or person in the first screen (anonymised corporate stock photography actively reduces trust), and recognisable logos or credentials if your market responds to authority signals. These elements don't need to be elaborate — a name, a photo, and a specific result is enough — but they need to be present before the visitor reaches any form or CTA.
+            The minimum proof floor for a Meta landing page is: at least one or two testimonials visible above the fold, a real face or person in the first screen (anonymised corporate stock photography actively reduces trust), and recognisable logos or credentials if your market responds to authority signals. These elements don't need to be elaborate - a name, a photo, and a specific result is enough - but they need to be present before the visitor reaches any form or CTA.
           </p>
           <p className="leading-relaxed text-fg-muted">
             The goal is to compress the trust-building timeline. In a normal sales process, trust develops over multiple touchpoints. On a landing page, you have one shot. Front-load the evidence.
@@ -133,15 +133,15 @@ export default function FacebookAdsNoLeadsPage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Lead Forms vs Landing Pages: Choosing the Right Friction</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Meta&apos;s native Lead Ads — where the form lives inside Facebook
-            rather than on a separate landing page — are worth understanding
+            Meta&apos;s native Lead Ads - where the form lives inside Facebook
+            rather than on a separate landing page - are worth understanding
             before assuming your landing page is the right tool. Lead Forms
             reduce interaction steps by pre-filling profile data. Compare both
             lead volume and downstream qualification in your own funnel; the
             form location alone does not establish quality.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            A dedicated landing page adds steps — the visitor has to click
+            A dedicated landing page adds steps - the visitor has to click
             through, wait for a page to load, and read before acting. Those
             steps may filter intent or may simply add abandonment. Use
             qualified-lead and downstream sales data to distinguish the two.
@@ -164,8 +164,8 @@ export default function FacebookAdsNoLeadsPage() {
             The diagnostic split is straightforward. Click-through rate (CTR) measures whether the ad is compelling enough to interrupt the scroll. Conversion rate (CVR) measures whether the landing page converts the interest the ad created. These are separate problems with separate fixes.
           </p>
           <ul className="space-y-3 text-fg-muted">
-            <li className="flex gap-3 leading-relaxed"><span className="mt-1 text-accent font-bold">→</span><span><span className="font-semibold text-fg">CTR above 1%, CVR below 1%:</span> The ad is working. People are interested enough to click. The landing page is the leak — it's failing to maintain the state the ad created.</span></li>
-            <li className="flex gap-3 leading-relaxed"><span className="mt-1 text-accent font-bold">→</span><span><span className="font-semibold text-fg">CTR below 0.5%:</span> The ad creative needs attention before the landing page. Low CTR means the interruption isn't compelling enough — wrong audience, weak hook, or poor creative.</span></li>
+            <li className="flex gap-3 leading-relaxed"><span className="mt-1 text-accent font-bold">→</span><span><span className="font-semibold text-fg">CTR above 1%, CVR below 1%:</span> The ad is working. People are interested enough to click. The landing page is the leak - it's failing to maintain the state the ad created.</span></li>
+            <li className="flex gap-3 leading-relaxed"><span className="mt-1 text-accent font-bold">→</span><span><span className="font-semibold text-fg">CTR below 0.5%:</span> The ad creative needs attention before the landing page. Low CTR means the interruption isn't compelling enough - wrong audience, weak hook, or poor creative.</span></li>
             <li className="flex gap-3 leading-relaxed"><span className="mt-1 text-accent font-bold">→</span><span><span className="font-semibold text-fg">High bounce rate (above 70%) within 3 seconds:</span> Message mismatch. Visitors are landing and immediately registering that they're in the wrong place.</span></li>
           </ul>
           <p className="mt-4 leading-relaxed text-fg-muted">
@@ -177,10 +177,10 @@ export default function FacebookAdsNoLeadsPage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Quick Fixes for Meta Landing Pages</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Once you've confirmed the page is the leak, these are the highest-impact changes to implement first — roughly ordered by effort-to-impact ratio.
+            Once you've confirmed the page is the leak, these are the highest-impact changes to implement first - roughly ordered by effort-to-impact ratio.
           </p>
           <ul className="space-y-3 text-fg-muted">
-            <li className="flex gap-3 leading-relaxed"><span className="mt-1 text-accent font-bold">→</span><span><span className="font-semibold text-fg">Match the hero image style to the ad creative.</span> If the ad showed a real person in a casual setting, the landing page should open with the same visual register — not a polished studio product shot.</span></li>
+            <li className="flex gap-3 leading-relaxed"><span className="mt-1 text-accent font-bold">→</span><span><span className="font-semibold text-fg">Match the hero image style to the ad creative.</span> If the ad showed a real person in a casual setting, the landing page should open with the same visual register - not a polished studio product shot.</span></li>
             <li className="flex gap-3 leading-relaxed"><span className="mt-1 text-accent font-bold">→</span><span><span className="font-semibold text-fg">Repeat the exact ad headline on the page.</span> Don't make the visitor re-orient. The first thing they read should echo the reason they clicked.</span></li>
             <li className="flex gap-3 leading-relaxed"><span className="mt-1 text-accent font-bold">→</span><span><span className="font-semibold text-fg">Add proof before the form.</span> A minimum of one testimonial with a name, photo, and specific result should appear above or immediately adjacent to the form. Generic five-star ratings without context don't count.</span></li>
             <li className="flex gap-3 leading-relaxed"><span className="mt-1 text-accent font-bold">→</span><span><span className="font-semibold text-fg">Reduce form fields.</span> Every additional field reduces conversion rate. For cold Meta traffic, ask for the minimum: name and email. Qualify further via follow-up, not the form itself.</span></li>

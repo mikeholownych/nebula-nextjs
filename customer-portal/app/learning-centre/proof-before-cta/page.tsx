@@ -61,7 +61,7 @@ export default function ProofBeforeCTAPage() {
             A practical hypothesis is that visitors evaluate an ask using the information they have already
             seen. A CTA that appears before any relevant evidence gives them less context for that
             judgment. The visitor bounces not because
-            the offer is wrong — but because the page gave them no reason to trust it before
+            the offer is wrong - but because the page gave them no reason to trust it before
             demanding a decision.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
@@ -72,7 +72,7 @@ export default function ProofBeforeCTAPage() {
             cost of clicking.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            The common counter-argument — &quot;our audience is impatient, get to the button fast&quot; —
+            The common counter-argument - &quot;our audience is impatient, get to the button fast&quot; -
             confuses speed with sequence. You can keep the page short. The proof can be a single
             stat or one line from a client. What matters is that it appears <em>before</em> the ask,
             not that it takes three scrolls to find.
@@ -180,7 +180,7 @@ export default function ProofBeforeCTAPage() {
           </div>
 
           <p className="mt-5 leading-relaxed text-fg-muted">
-            A common mistake is treating proof as decoration — dropping a logo strip
+            A common mistake is treating proof as decoration - dropping a logo strip
             at the very bottom where no one who already bounced will see it. Proof earns
             its value only when it appears at the moment of hesitation, where the visitor is deciding whether the ask is credible.
           </p>
@@ -199,8 +199,8 @@ export default function ProofBeforeCTAPage() {
             <div>
               <h3 className="mb-1 text-lg font-semibold text-fg">1. Insert a single stat above the hero CTA</h3>
               <p className="leading-relaxed text-fg-muted">
-                Take your strongest outcome number — a percentage lift, a revenue figure, a client
-                count — and place it in a small badge or inline text directly above the primary
+                Take your strongest outcome number - a percentage lift, a revenue figure, a client
+                count - and place it in a small badge or inline text directly above the primary
                 button. One line is sufficient. The stat does not need a headline of its own.
                 Example: <em>&quot;See the issue, the evidence, and the next fix.&quot;</em> If you use
                 an outcome or customer count instead, publish it only when the underlying record is
@@ -234,7 +234,7 @@ export default function ProofBeforeCTAPage() {
           <h2 className="mb-3 text-2xl font-bold text-fg">Find the proof leak on your page</h2>
           <p className="mb-6 leading-relaxed text-fg-muted">
             The free Nebula audit reports where the page may lose credibility before the
-            CTA — missing proof, weak proof, misplaced proof. If the audit flags a proof leak,
+            CTA - missing proof, weak proof, misplaced proof. If the audit flags a proof leak,
             the $97 Fix Pack delivers a prioritised fix plan you can implement the same day.
           </p>
           <div className="flex flex-wrap gap-4">

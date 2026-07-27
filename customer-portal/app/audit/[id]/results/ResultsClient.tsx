@@ -43,7 +43,7 @@ function getWorstOffenderSnippet(findings: Finding[]): string | null {
     ? ` (measured: ${measured.slice(0, 70)}${measured.length > 70 ? '…' : ''})`
     : ''
 
-  return `[${displayName}]${measured50}${selector} — Fix: ${worst.fix.slice(0, 120)}${worst.fix.length > 120 ? '…' : ''}`
+  return `[${displayName}]${measured50}${selector} - Fix: ${worst.fix.slice(0, 120)}${worst.fix.length > 120 ? '...' : ''}`
 }
 
 /**
@@ -166,8 +166,8 @@ function SerpSnippet({ finding, url }: { finding: Finding; url: string }) {
   const hostname = (() => { try { return new URL(url).hostname } catch { return url } })()
   const isTruncated = serpData.metaDescChars > 155 || serpData.metaDescChars < 70
   const descBar = serpData.metaDescChars < 70
-    ? '░░░░░░░░░░░░░░░░░░░░ (description too short — Google fills in random text)'
-    : `(${serpData.metaDescChars} chars — truncated at ~155 in search results)`
+    ? '░░░░░░░░░░░░░░░░░░░░ (description too short - Google fills in random text)'
+    : `(${serpData.metaDescChars} chars - truncated at ~155 in search results)`
 
   return (
     <div className="mt-4 rounded-lg border border-border bg-bg p-4">
@@ -190,7 +190,7 @@ function SerpSnippet({ finding, url }: { finding: Finding; url: string }) {
           <div className="rounded border border-accent/20 bg-accent/5 p-4 font-sans text-sm">
             <p className="text-xs text-fg-muted">{hostname}</p>
             <p className="font-semibold text-blue-400">
-              {serpData.title.length > 50 ? serpData.title.slice(0, 50) + '…' : serpData.title} | Brand
+              {serpData.title.length > 50 ? serpData.title.slice(0, 50) + '...' : serpData.title} | Brand
             </p>
             <p className="mt-1 text-sm leading-6 text-fg-muted">
               [Your value proposition — who it helps, what it does, one outcome. 120–155 chars fills the full preview and earns the click.]
@@ -245,7 +245,6 @@ function UnlockConfirmation({ emailSent, email, auditId }: { emailSent: boolean;
   return (
     <Card variant="elevated" className="mt-8">
       <div className="text-center">
-        <div className="mb-2 text-3xl">✓</div>
         <h3 className="mb-1 text-2xl font-extrabold text-accent">Full Report Unlocked</h3>
         <p className="mb-5 text-sm text-fg-muted">
           {emailSent
@@ -265,7 +264,7 @@ function UnlockConfirmation({ emailSent, email, auditId }: { emailSent: boolean;
             disabled={magicLinkState === 'sending'}
             className="rounded-lg border border-accent px-6 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent/10 disabled:opacity-50"
           >
-            {magicLinkState === 'sending' ? 'Sending…' :
+            {magicLinkState === 'sending' ? 'Sending...' :
              magicLinkState === 'error'   ? 'Try again' :
              'Email me a login link'}
           </button>
@@ -275,7 +274,7 @@ function UnlockConfirmation({ emailSent, email, auditId }: { emailSent: boolean;
       {magicLinkState === 'sent' && (
         <div className="border-t border-border pt-6 text-center">
           <p className="text-sm text-fg-muted">
-            Login link sent to <strong className="text-fg">{email}</strong> — check your inbox.
+            Login link sent to <strong className="text-fg">{email}</strong> - check your inbox.
           </p>
         </div>
       )}
@@ -618,8 +617,28 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
   if (loading) {
     return (
       <main id="main-content" className="min-h-screen bg-bg px-6 py-12 pt-24">
-        <div className="mx-auto max-w-2xl text-center">
-          <div className="animate-pulse text-2xl text-fg-muted">Loading results...</div>
+        <div className="mx-auto max-w-5xl">
+          {/* Skeleton nav */}
+          <div className="sticky top-20 z-20 -mx-6 mb-12 border-y border-border bg-bg/95 px-6 py-4">
+            <div className="flex gap-2">
+              {[80, 96, 72, 88, 104].map((w) => (
+                <div key={w} className="h-9 animate-pulse rounded-lg bg-bg-muted/40" style={{ width: w }} />
+              ))}
+            </div>
+          </div>
+          {/* Skeleton score card */}
+          <div className="mb-12 grid gap-8 lg:grid-cols-2">
+            <div className="space-y-3">
+              <div className="h-4 w-24 animate-pulse rounded bg-bg-muted/40" />
+              <div className="h-10 w-48 animate-pulse rounded bg-bg-muted/40" />
+              <div className="h-4 w-32 animate-pulse rounded bg-bg-muted/40" />
+            </div>
+            <div className="h-36 animate-pulse rounded-xl bg-bg-muted/40" />
+          </div>
+          {/* Skeleton finding rows */}
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="mb-4 h-24 animate-pulse rounded-xl bg-bg-muted/40" />
+          ))}
         </div>
       </main>
     )
@@ -855,9 +874,6 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
           </h2>
 
           <Card variant="bordered" className="relative mx-auto max-w-md overflow-hidden border-accent">
-            <div className="absolute right-2 top-2 rounded bg-accent px-2 py-1 text-xs font-semibold text-bg">
-              FIX PACK
-            </div>
             <div>
               <h3 className="mb-1 text-2xl font-extrabold text-fg">$97 Fix Pack</h3>
               <p className="mb-2 text-2xl font-extrabold tabular-nums text-accent">$97</p>
@@ -874,7 +890,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                 className="block w-full rounded-lg bg-accent px-4 py-2 text-center font-semibold text-bg transition-colors hover:bg-accent-light"
               >
                 {unlocked && !sharedView
-                  ? 'Review the tailored Fix Pack — $97'
+                  ? 'Review the tailored Fix Pack - $97'
                   : 'Unlock this audit to select its Fix Pack'}
               </a>
             </div>
@@ -905,18 +921,14 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
         )}
 
         {/* Priority Matrix Legend */}
-        <div className="mt-8 text-center">
-          <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.1em] text-fg-muted">
-            Priority Matrix
-          </h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            {Object.entries(QUADRANT_LABELS).map(([key, value]) => (
-              <div key={key} className="flex items-center gap-2">
-                <div className={`h-4 w-4 rounded-full ${value.tone === 'accent' ? 'bg-accent' : 'bg-fg-muted'}`} />
-                <span className="text-sm text-fg-muted">{value.label}</span>
-              </div>
-            ))}
-          </div>
+        <div className="mt-8 flex flex-wrap items-center gap-4">
+          <span className="text-xs text-fg-muted">Priority quadrants:</span>
+          {Object.entries(QUADRANT_LABELS).map(([key, value]) => (
+            <div key={key} className="flex items-center gap-1.5">
+              <div className={`h-2 w-2 rounded-full ${value.tone === 'accent' ? 'bg-accent' : 'bg-fg-muted/40'}`} />
+              <span className="text-xs text-fg-muted">{value.label}</span>
+            </div>
+          ))}
         </div>
       </div>
     </main>

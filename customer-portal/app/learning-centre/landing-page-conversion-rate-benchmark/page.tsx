@@ -30,7 +30,7 @@ const faqSchema = {
       name: 'What is a good landing page conversion rate?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "It depends on traffic source, offer type, and vertical. For paid search (Google Ads), WordStream's 2026 benchmarks across 13,000+ campaigns found an all-industries average of 8.18%. For Business Services — the most relevant vertical for B2B lead gen — the average is 4.85%. A rate below your vertical's average with meaningful traffic (500+ sessions) is a diagnostic signal, not a verdict. The right question is not 'is my rate good' but 'which of the 7 conversion signals is pulling it down.'",
+        text: "It depends on traffic source, offer type, and vertical. For paid search (Google Ads), WordStream's 2026 benchmarks across 13,000+ campaigns found an all-industries average of 8.18%. For Business Services - the most relevant vertical for B2B lead gen - the average is 4.85%. A rate below your vertical's average with meaningful traffic (500+ sessions) is a diagnostic signal, not a verdict. The right question is not 'is my rate good' but 'which of the 7 conversion signals is pulling it down.'",
       },
     },
     {
@@ -38,7 +38,7 @@ const faqSchema = {
       name: 'Are conversion rate benchmarks comparable across industries?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "No, and comparing across verticals is one of the most common benchmarking mistakes. WordStream's 2026 Google Ads data shows conversion rates ranging from 2.64% in Finance and Insurance to 16.22% in Animals and Pets — a 6x gap. A 3% conversion rate is below average for an Automotive Repair shop but above average for a Finance lead generation page. Always compare against your own vertical's benchmark, not an all-industries figure.",
+        text: "No, and comparing across verticals is one of the most common benchmarking mistakes. WordStream's 2026 Google Ads data shows conversion rates ranging from 2.64% in Finance and Insurance to 16.22% in Animals and Pets - a 6x gap. A 3% conversion rate is below average for an Automotive Repair shop but above average for a Finance lead generation page. Always compare against your own vertical's benchmark, not an all-industries figure.",
       },
     },
     {
@@ -46,7 +46,7 @@ const faqSchema = {
       name: 'Does traffic source affect conversion rate?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Yes, significantly. Paid search traffic (Google Ads) arrives with higher intent than paid social traffic (Meta, TikTok) — the visitor was actively searching for a solution, not interrupted while scrolling. Email list traffic is warmer than either. This means the same page can show 1% from cold paid social, 5% from paid search, and 12% from a warm email list. Benchmarking your page's overall rate against paid-search averages when your traffic mix is primarily cold social will make your page look worse than it is.",
+        text: "Yes, significantly. Paid search traffic (Google Ads) arrives with higher intent than paid social traffic (Meta, TikTok) - the visitor was actively searching for a solution, not interrupted while scrolling. Email list traffic is warmer than either. This means the same page can show 1% from cold paid social, 5% from paid search, and 12% from a warm email list. Benchmarking your page's overall rate against paid-search averages when your traffic mix is primarily cold social will make your page look worse than it is.",
       },
     },
     {
@@ -62,7 +62,7 @@ const faqSchema = {
       name: 'How many sessions do I need before my conversion rate is meaningful?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'At least 500 paid traffic sessions to a single landing page before drawing diagnostic conclusions. Below that, variance is too high — a single week with unusual traffic composition can shift a 3% rate to 8% and back without the page changing at all. If you are below 500 sessions, focus on ensuring the 7 signals are in place structurally rather than optimising toward a number.',
+        text: 'At least 500 paid traffic sessions to a single landing page before drawing diagnostic conclusions. Below that, variance is too high - a single week with unusual traffic composition can shift a 3% rate to 8% and back without the page changing at all. If you are below 500 sessions, focus on ensuring the 7 signals are in place structurally rather than optimising toward a number.',
       },
     },
   ],
@@ -122,7 +122,7 @@ export default function LandingPageConversionRateBenchmark() {
                 WordStream&apos;s 2026 Google Ads Benchmarks report
               </a>
               , analysing over 13,000 search advertising campaigns from April
-              2025 to March 2026. These are search-campaign averages — not
+              2025 to March 2026. These are search-campaign averages - not
               single-page rates, not account-level figures.
             </p>
             <div className="mt-6 overflow-x-auto">
@@ -136,7 +136,7 @@ export default function LandingPageConversionRateBenchmark() {
                 <tbody className="divide-y divide-border">
                   {[
                     { vertical: 'Animals & Pets', cvr: '16.22%' },
-                    { vertical: 'Automotive — Repair', cvr: '15.51%' },
+                    { vertical: 'Automotive - Repair', cvr: '15.51%' },
                     { vertical: 'Education & Instruction', cvr: '13.14%' },
                     { vertical: 'Personal Services', cvr: '12.34%' },
                     { vertical: 'Physicians & Surgeons', cvr: '12.43%' },
@@ -157,7 +157,7 @@ export default function LandingPageConversionRateBenchmark() {
               </table>
             </div>
             <p className="mt-4 text-sm text-fg-muted">
-              Source: WordStream 2026 Google Ads Benchmarks — 13,000+ search
+              Source: WordStream 2026 Google Ads Benchmarks - 13,000+ search
               campaigns, April 2025 to March 2026. Unit: search-campaign
               conversion rate averages, not single-page rates.
             </p>
@@ -173,11 +173,11 @@ export default function LandingPageConversionRateBenchmark() {
               page conversion rate.&rdquo; It originates from a 2012 Unbounce
               dataset reproduced in a 2014 blog post. Using a 12-year-old
               figure as a current benchmark for paid search performance is not
-              informative — the traffic landscape, mobile adoption rates, and
+              informative - the traffic landscape, mobile adoption rates, and
               advertising platform sophistication have all changed substantially.
             </p>
             <p className="mt-4 leading-relaxed text-fg-muted">
-              More importantly, the 2.35% figure was an all-traffic median —
+              More importantly, the 2.35% figure was an all-traffic median -
               mixing organic, direct, email, and paid together. Paid search
               conversion rates are structurally higher than that figure because
               paid search visitors arrive with explicit purchase intent. The
@@ -204,7 +204,7 @@ export default function LandingPageConversionRateBenchmark() {
                 },
                 {
                   source: 'Paid social (Meta, TikTok, LinkedIn)',
-                  note: 'Interruption traffic — the visitor was not searching for your offer. Conversion rates are structurally lower. Comparing paid social rates against the WordStream paid search benchmark will always make your page look underperforming.',
+                  note: 'Interruption traffic - the visitor was not searching for your offer. Conversion rates are structurally lower. Comparing paid social rates against the WordStream paid search benchmark will always make your page look underperforming.',
                 },
                 {
                   source: 'Email (owned list)',
@@ -212,7 +212,7 @@ export default function LandingPageConversionRateBenchmark() {
                 },
                 {
                   source: 'Retargeting',
-                  note: 'Visitor has already seen your brand or page. Higher conversion rate than cold traffic from the same channel by design — this is the expected retargeting premium, not a page quality signal.',
+                  note: 'Visitor has already seen your brand or page. Higher conversion rate than cold traffic from the same channel by design - this is the expected retargeting premium, not a page quality signal.',
                 },
               ].map(({ source, note }) => (
                 <li
@@ -233,16 +233,16 @@ export default function LandingPageConversionRateBenchmark() {
             </h2>
             <p className="leading-relaxed text-fg-muted">
               A conversion rate below the vertical benchmark is a signal that
-              something is broken — not a conclusion about which thing is broken
+              something is broken - not a conclusion about which thing is broken
               or how bad it is. The right response to a low rate is to run a
               signal-level diagnosis:
             </p>
             <ol className="mt-5 space-y-3">
               {[
-                'Segment by source and device — confirm the low rate is present on the channel you are optimising for, not an artefact of a high-bounce source dragging the overall number down.',
-                'Check load time — if LCP is above 4 seconds on mobile, fix that before anything else. You cannot diagnose copy or layout problems if visitors are bouncing before the page renders.',
-                'Run the 7-signal check — message-match, trust, mobile layout, load time, CTA clarity, form friction, proof. The first broken signal is the first fix. Earlier signals gate later ones.',
-                'Compare against the right benchmark — your vertical, your traffic source, your offer type. A B2B SaaS lead-gen page at 4% compared against an e-commerce transaction benchmark is a category error.',
+                'Segment by source and device - confirm the low rate is present on the channel you are optimising for, not an artefact of a high-bounce source dragging the overall number down.',
+                'Check load time - if LCP is above 4 seconds on mobile, fix that before anything else. You cannot diagnose copy or layout problems if visitors are bouncing before the page renders.',
+                'Run the 7-signal check - message-match, trust, mobile layout, load time, CTA clarity, form friction, proof. The first broken signal is the first fix. Earlier signals gate later ones.',
+                'Compare against the right benchmark - your vertical, your traffic source, your offer type. A B2B SaaS lead-gen page at 4% compared against an e-commerce transaction benchmark is a category error.',
               ].map((step, i) => (
                 <li key={i} className="flex items-start gap-3 text-fg-muted">
                   <span className="shrink-0 font-bold text-accent">{i + 1}.</span>

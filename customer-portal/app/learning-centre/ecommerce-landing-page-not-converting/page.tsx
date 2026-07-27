@@ -29,7 +29,7 @@ const faqSchema = {
       name: 'What is a good conversion rate for an ecommerce landing page?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "There is no single benchmark — conversion rate varies significantly by traffic source, product category, price point, and whether the visitor is cold or warm. WordStream's 2026 analysis places the all-industries average Google Ads conversion rate at 8.18%, but ecommerce product pages receiving paid social traffic typically convert lower because the audience is colder and the product requires more consideration. A more useful benchmark is your own historical rate by traffic source and device. If paid social traffic to a product page converts at under 1% with significant volume, the page has a structural problem worth diagnosing before adding more budget.",
+        text: "There is no single benchmark - conversion rate varies significantly by traffic source, product category, price point, and whether the visitor is cold or warm. WordStream's 2026 analysis places the all-industries average Google Ads conversion rate at 8.18%, but ecommerce product pages receiving paid social traffic typically convert lower because the audience is colder and the product requires more consideration. A more useful benchmark is your own historical rate by traffic source and device. If paid social traffic to a product page converts at under 1% with significant volume, the page has a structural problem worth diagnosing before adding more budget.",
       },
     },
     {
@@ -37,7 +37,7 @@ const faqSchema = {
       name: 'Why do ecommerce ads get clicks but no purchases?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "The most common causes: (1) the landing page does not match the ad promise — the visitor expected a specific product or offer and landed on a generic category or homepage; (2) no social proof is visible before the add-to-cart CTA — no reviews, no star rating, no indication that others have purchased; (3) shipping cost is hidden until checkout, creating a price surprise that causes abandonment; (4) mobile layout is broken — the add-to-cart button is not visible above the fold on a phone, or images are cut off; (5) page load is slow — Portent's 2022 analysis of 100+ million page views found conversion rate drops significantly as page load time increases beyond 1 second. Start with mobile layout and load time — both affect the majority of paid social traffic.",
+        text: "The most common causes: (1) the landing page does not match the ad promise - the visitor expected a specific product or offer and landed on a generic category or homepage; (2) no social proof is visible before the add-to-cart CTA - no reviews, no star rating, no indication that others have purchased; (3) shipping cost is hidden until checkout, creating a price surprise that causes abandonment; (4) mobile layout is broken - the add-to-cart button is not visible above the fold on a phone, or images are cut off; (5) page load is slow - Portent's 2022 analysis of 100+ million page views found conversion rate drops significantly as page load time increases beyond 1 second. Start with mobile layout and load time - both affect the majority of paid social traffic.",
       },
     },
     {
@@ -45,7 +45,7 @@ const faqSchema = {
       name: 'How do I reduce ecommerce cart abandonment?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Baymard Institute research consistently finds average cart abandonment rates around 70%. The most actionable causes they identify: unexpected costs at checkout (shipping, tax), being forced to create an account, overly complicated checkout process, and security concerns. The three highest-leverage fixes before checkout: (1) show shipping cost and estimated delivery date on the product page — before the visitor adds to cart; (2) display trust badges (payment icons, security seals, guarantee text) near the add-to-cart button; (3) surface your return policy clearly near the price. Visitors who know the total cost, delivery timeline, and return terms before they add to cart abandon at a meaningfully lower rate.',
+        text: 'Baymard Institute research consistently finds average cart abandonment rates around 70%. The most actionable causes they identify: unexpected costs at checkout (shipping, tax), being forced to create an account, overly complicated checkout process, and security concerns. The three highest-leverage fixes before checkout: (1) show shipping cost and estimated delivery date on the product page - before the visitor adds to cart; (2) display trust badges (payment icons, security seals, guarantee text) near the add-to-cart button; (3) surface your return policy clearly near the price. Visitors who know the total cost, delivery timeline, and return terms before they add to cart abandon at a meaningfully lower rate.',
       },
     },
     {
@@ -61,7 +61,7 @@ const faqSchema = {
       name: 'Is my ecommerce conversion problem the price or the page?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Segment your analytics before testing price. If your add-to-cart rate is low (visitors are not even reaching the cart), the problem is above the fold — product images, headline, or proof. If add-to-cart rate is healthy but purchase rate is low, the problem is at checkout — shipping cost reveal, form friction, or trust signals at payment. If both rates are low on mobile but healthy on desktop, the problem is mobile layout or mobile load time, not price. Only test price after the page structure is clean — a lower price on a broken page still fails.',
+        text: 'Segment your analytics before testing price. If your add-to-cart rate is low (visitors are not even reaching the cart), the problem is above the fold - product images, headline, or proof. If add-to-cart rate is healthy but purchase rate is low, the problem is at checkout - shipping cost reveal, form friction, or trust signals at payment. If both rates are low on mobile but healthy on desktop, the problem is mobile layout or mobile load time, not price. Only test price after the page structure is clean - a lower price on a broken page still fails.',
       },
     },
   ],
@@ -97,7 +97,7 @@ export default function EcommerceLandingPageNotConverting() {
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
               Low conversion on a product page is almost always one of five structural
-              problems — not the product, not the price, and not the ad targeting. Diagnosing
+              problems - not the product, not the price, and not the ad targeting. Diagnosing
               which leak is active tells you exactly where to spend the next hour. Running
               more ad budget before the diagnosis gives you more traffic at the same broken rate.
             </p>
@@ -106,7 +106,7 @@ export default function EcommerceLandingPageNotConverting() {
           {/* The conversion sequence */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
-              How the ecommerce conversion sequence works — and where it breaks
+              How the ecommerce conversion sequence works - and where it breaks
             </h2>
             <p className="leading-relaxed text-fg-muted">
               Every product page visit passes through the same sequence before it either
@@ -114,7 +114,7 @@ export default function EcommerceLandingPageNotConverting() {
               add-to-cart → checkout. Each stage gates the next. A visitor who does not
               trust the page does not decide. A visitor who decides but cannot find the
               CTA does not add to cart. A visitor who abandons during checkout never
-              purchased — but the page already lost them earlier.
+              purchased - but the page already lost them earlier.
             </p>
             <p className="mt-4 leading-relaxed text-fg-muted">
               The diagnostic question is: at which stage are you losing them? Analytics
@@ -163,21 +163,21 @@ export default function EcommerceLandingPageNotConverting() {
                   n: '1',
                   title: 'No social proof visible above the add-to-cart CTA',
                   detail:
-                    'Research from the Spiegel Research Center (Northwestern University, 2017) found that displaying reviews can increase conversion rate by up to 270% for lower-priced products. For ecommerce, this effect is most pronounced when the review count and star average are visible near the product price — not in a separate reviews section scrolled below.',
+                    'Research from the Spiegel Research Center (Northwestern University, 2017) found that displaying reviews can increase conversion rate by up to 270% for lower-priced products. For ecommerce, this effect is most pronounced when the review count and star average are visible near the product price - not in a separate reviews section scrolled below.',
                   fix: 'Surface your review count and star average above the fold, next to the price. If you have fewer than 10 reviews, feature the most specific one (with result detail) as a quote near the CTA. Generic "Great product!" reviews provide no signal. Specific "I\'ve had this for 6 months, the stitching held up after 40 washes" reviews reduce risk.',
                 },
                 {
                   n: '2',
                   title: 'Shipping cost hidden until checkout',
                   detail:
-                    "Baymard Institute's large-scale research on cart abandonment consistently identifies unexpected costs at checkout — primarily shipping — as the single leading cause of abandonment. Visitors who discover the true total cost at checkout feel deceived. Even when the shipping cost is reasonable, the surprise creates friction that a pre-disclosed cost would not.",
+                    "Baymard Institute's large-scale research on cart abandonment consistently identifies unexpected costs at checkout - primarily shipping - as the single leading cause of abandonment. Visitors who discover the true total cost at checkout feel deceived. Even when the shipping cost is reasonable, the surprise creates friction that a pre-disclosed cost would not.",
                   fix: 'Show shipping cost and estimated delivery date on the product page, near the price and add-to-cart button. If shipping is free above a threshold, state it explicitly: "Free shipping on orders over $X." If you offer free shipping, make it the most visible element on the page. Visitors who know the total cost before adding to cart abandon at a meaningfully lower rate.',
                 },
                 {
                   n: '3',
                   title: 'Mobile add-to-cart not visible above the fold',
                   detail:
-                    'The majority of paid social traffic arrives on mobile. On a standard 844px iPhone viewport with a 72px nav, the visible area is approximately 770px. A product image at 400px + product name + star rating + price already consumes most of that. If the add-to-cart button sits below those elements, it is off-screen — requiring a scroll that a significant portion of visitors will not make.',
+                    'The majority of paid social traffic arrives on mobile. On a standard 844px iPhone viewport with a 72px nav, the visible area is approximately 770px. A product image at 400px + product name + star rating + price already consumes most of that. If the add-to-cart button sits below those elements, it is off-screen - requiring a scroll that a significant portion of visitors will not make.',
                   fix: 'Test your product page on a real phone at 390px width. If the add-to-cart CTA is not visible without scrolling, implement a sticky add-to-cart bar that follows the user as they scroll. Alternatively, compress the above-fold layout: reduce hero image height, tighten spacing, and position the price + CTA before the reviews and description.',
                 },
                 {
@@ -185,14 +185,14 @@ export default function EcommerceLandingPageNotConverting() {
                   title: 'Slow mobile load time',
                   detail:
                     "Portent's 2022 analysis of over 100 million page views found that B2B lead-gen pages loading in 1 second convert at approximately 3× the rate of pages loading in 5 seconds. The pattern holds for ecommerce: a visitor who abandons during load is recorded as a bounce before they saw any product information. Google's Core Web Vitals defines LCP (Largest Contentful Paint) under 2.5 seconds as good and above 4 seconds as poor. Most ecommerce product pages with full-resolution hero images fail the mobile LCP threshold.",
-                  fix: 'Run your product page URL through Google PageSpeed Insights (pagespeed.web.dev) on the mobile preset. Note the LCP element — it is almost always the hero product image. Serve it as WebP or AVIF instead of JPEG/PNG, add a `sizes` attribute so mobile devices download a smaller version, and add `fetchpriority="high"` to the hero image element. This typically reduces LCP by 40–60%.',
+                  fix: 'Run your product page URL through Google PageSpeed Insights (pagespeed.web.dev) on the mobile preset. Note the LCP element - it is almost always the hero product image. Serve it as WebP or AVIF instead of JPEG/PNG, add a `sizes` attribute so mobile devices download a smaller version, and add `fetchpriority="high"` to the hero image element. This typically reduces LCP by 40–60%.',
                 },
                 {
                   n: '5',
                   title: 'No clear return policy near the purchase decision',
                   detail:
                     "For first-time buyers, purchase anxiety peaks at the add-to-cart moment. The visitor is weighing: what if this is wrong? What if it breaks? What if I need to return it? If your return policy is buried in the footer or on a separate page, this anxiety goes unanswered at the exact moment of decision. The visitor leaves rather than risk the unknown.",
-                  fix: 'Add a one-line return policy statement near the add-to-cart button. Example: "30-day returns, no questions asked." or "Free returns on all orders." This does not require a full policy — just enough to neutralise the risk concern at the moment it is highest. Add a trust badge row (payment icons, security seal, return policy icon) immediately below the CTA.',
+                  fix: 'Add a one-line return policy statement near the add-to-cart button. Example: "30-day returns, no questions asked." or "Free returns on all orders." This does not require a full policy - just enough to neutralise the risk concern at the moment it is highest. Add a trust badge row (payment icons, security seal, return policy icon) immediately below the CTA.',
                 },
               ].map(({ n, title, detail, fix }) => (
                 <div key={n} className="rounded-xl border border-border p-6">
@@ -216,7 +216,7 @@ export default function EcommerceLandingPageNotConverting() {
               How to tell if it is a price problem, not a page problem
             </h2>
             <p className="leading-relaxed text-fg-muted">
-              Price testing is expensive — it takes time to gather sufficient data and carries
+              Price testing is expensive - it takes time to gather sufficient data and carries
               risk of training visitors to wait for discounts. Run this diagnosis before
               changing price:
             </p>
@@ -224,11 +224,11 @@ export default function EcommerceLandingPageNotConverting() {
               {[
                 {
                   signal: 'Low add-to-cart rate + no reviews',
-                  diagnosis: 'Fix proof before testing price. Visitors are not converting because they do not trust the product — not because the price is wrong. A lower price on an untrusted page still fails.',
+                  diagnosis: 'Fix proof before testing price. Visitors are not converting because they do not trust the product - not because the price is wrong. A lower price on an untrusted page still fails.',
                 },
                 {
                   signal: 'Healthy add-to-cart rate + low purchase rate',
-                  diagnosis: 'This is a checkout problem, not a price problem. The visitor valued the product enough to add it. Something at checkout — shipping reveal, form friction, or payment trust — broke the chain.',
+                  diagnosis: 'This is a checkout problem, not a price problem. The visitor valued the product enough to add it. Something at checkout - shipping reveal, form friction, or payment trust - broke the chain.',
                 },
                 {
                   signal: 'High add-to-cart rate + low purchase rate + competitor prices meaningfully lower',
@@ -261,10 +261,10 @@ export default function EcommerceLandingPageNotConverting() {
             </p>
             <ol className="mt-5 space-y-3">
               {[
-                'Add review count and star average above the fold, next to the product price — not in a separate reviews tab',
+                'Add review count and star average above the fold, next to the product price - not in a separate reviews tab',
                 'Add a shipping cost line or "Free shipping on orders over $X" badge immediately above or below the add-to-cart button',
-                'Open the page on a real phone and confirm the add-to-cart button is visible without scrolling — if not, implement a sticky CTA bar',
-                'Run Google PageSpeed Insights mobile and check LCP — if above 4s, compress the hero image to WebP and add fetchpriority="high"',
+                'Open the page on a real phone and confirm the add-to-cart button is visible without scrolling - if not, implement a sticky CTA bar',
+                'Run Google PageSpeed Insights mobile and check LCP - if above 4s, compress the hero image to WebP and add fetchpriority="high"',
                 'Add a one-line return policy statement directly below the add-to-cart button: "30-day free returns" neutralises purchase anxiety at the decision point',
               ].map((step, i) => (
                 <li key={i} className="flex items-start gap-3 text-fg-muted text-sm">
@@ -301,8 +301,8 @@ export default function EcommerceLandingPageNotConverting() {
               Find which leak is on your product page
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
-              The free Nebula audit checks all 7 signals — including proof placement,
-              mobile layout, and load time — against your actual landing page URL. The
+              The free Nebula audit checks all 7 signals - including proof placement,
+              mobile layout, and load time - against your actual landing page URL. The
               $97 Fix Pack gives you a tailored AI prompt for every finding, delivered
               within minutes.
             </p>

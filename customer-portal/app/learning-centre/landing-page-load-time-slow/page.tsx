@@ -37,7 +37,7 @@ const faqSchema = {
       name: 'What is a good page load time for a landing page?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Google defines good Largest Contentful Paint (LCP) as under 2.5 seconds; 2.5–4 seconds needs improvement; above 4 seconds is poor. For paid traffic landing pages specifically, aim for LCP under 2.5 seconds on mobile — this is the device your visitors are most likely using. According to the 2024 Web Almanac (HTTP Archive), only 38% of mobile home pages currently pass all Core Web Vitals. If your page is in the 62% that fail, load time is a conversion blocker before any copy or layout issue is reached.',
+        text: 'Google defines good Largest Contentful Paint (LCP) as under 2.5 seconds; 2.5–4 seconds needs improvement; above 4 seconds is poor. For paid traffic landing pages specifically, aim for LCP under 2.5 seconds on mobile - this is the device your visitors are most likely using. According to the 2024 Web Almanac (HTTP Archive), only 38% of mobile home pages currently pass all Core Web Vitals. If your page is in the 62% that fail, load time is a conversion blocker before any copy or layout issue is reached.',
       },
     },
     {
@@ -45,7 +45,7 @@ const faqSchema = {
       name: 'How do I check my landing page load time?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Use Google PageSpeed Insights (free, pagespeed.web.dev) — enter your landing page URL and it returns your LCP, FCP, and Core Web Vitals scores for both mobile and desktop, using real Chrome user data if available. For a more detailed waterfall view, use Chrome DevTools (Network tab, throttle to Fast 3G to simulate mobile). The LCP figure is the most actionable single metric for landing pages.',
+        text: 'Use Google PageSpeed Insights (free, pagespeed.web.dev) - enter your landing page URL and it returns your LCP, FCP, and Core Web Vitals scores for both mobile and desktop, using real Chrome user data if available. For a more detailed waterfall view, use Chrome DevTools (Network tab, throttle to Fast 3G to simulate mobile). The LCP figure is the most actionable single metric for landing pages.',
       },
     },
     {
@@ -53,7 +53,7 @@ const faqSchema = {
       name: 'What causes slow LCP on a landing page?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'The four most common causes: (1) uncompressed hero image — a 2MB PNG in the first viewport will dominate LCP; (2) render-blocking scripts — third-party tools (chat widgets, analytics, ad pixels) loaded in the head block render until they resolve; (3) no CDN — serving assets from a single origin server adds round-trip latency for distant visitors; (4) server response time (TTFB) above 800ms — hosting tier or unoptimised server-side rendering. Image compression alone fixes LCP in most cases.',
+        text: 'The four most common causes: (1) uncompressed hero image - a 2MB PNG in the first viewport will dominate LCP; (2) render-blocking scripts - third-party tools (chat widgets, analytics, ad pixels) loaded in the head block render until they resolve; (3) no CDN - serving assets from a single origin server adds round-trip latency for distant visitors; (4) server response time (TTFB) above 800ms - hosting tier or unoptimised server-side rendering. Image compression alone fixes LCP in most cases.',
       },
     },
     {
@@ -116,7 +116,7 @@ export default function LandingPageLoadTimeSlow() {
             <div className="mt-5 space-y-5">
               <div className="rounded-xl border border-border bg-bg-muted/10 p-5">
                 <p className="font-semibold text-fg">
-                  Portent, 2022 — 100M+ page views across 20 B2B and B2C sites
+                  Portent, 2022 - 100M+ page views across 20 B2B and B2C sites
                 </p>
                 <p className="mt-2 leading-relaxed text-fg-muted">
                   B2B lead-generation pages loading in 1 second convert at
@@ -140,7 +140,7 @@ export default function LandingPageLoadTimeSlow() {
               </div>
               <div className="rounded-xl border border-border bg-bg-muted/10 p-5">
                 <p className="font-semibold text-fg">
-                  Deloitte/Google, 2020 — 37 retail, travel, and lead-gen brands
+                  Deloitte/Google, 2020 - 37 retail, travel, and lead-gen brands
                 </p>
                 <p className="mt-2 leading-relaxed text-fg-muted">
                   A 0.1-second improvement in mobile load time increased retail
@@ -162,7 +162,7 @@ export default function LandingPageLoadTimeSlow() {
               </div>
               <div className="rounded-xl border border-border bg-bg-muted/10 p-5">
                 <p className="font-semibold text-fg">
-                  2024 Web Almanac — HTTP Archive, real CrUX data
+                  2024 Web Almanac - HTTP Archive, real CrUX data
                 </p>
                 <p className="mt-2 leading-relaxed text-fg-muted">
                   Only{' '}
@@ -179,7 +179,7 @@ export default function LandingPageLoadTimeSlow() {
                     2024 Web Almanac (Performance chapter)
                   </a>
                   . That means more than six in ten mobile landing pages are
-                  failing Google&apos;s real-world performance thresholds —
+                  failing Google&apos;s real-world performance thresholds -
                   including many that have been &ldquo;optimised.&rdquo;
                 </p>
               </div>
@@ -193,7 +193,7 @@ export default function LandingPageLoadTimeSlow() {
             </h2>
             <p className="leading-relaxed text-fg-muted">
               Largest Contentful Paint (LCP) measures when the main content
-              element — usually the hero image or headline — becomes visible.
+              element - usually the hero image or headline - becomes visible.
               For a landing page, this is the moment the visitor can actually
               evaluate whether they are in the right place.
             </p>
@@ -241,7 +241,7 @@ export default function LandingPageLoadTimeSlow() {
                 pagespeed.web.dev
               </a>
               . Enter your landing page URL. Takes 60 seconds. Run the mobile
-              test — not just desktop.
+              test - not just desktop.
             </p>
           </section>
 
@@ -254,7 +254,7 @@ export default function LandingPageLoadTimeSlow() {
               {[
                 {
                   cause: 'Uncompressed hero image',
-                  fix: 'Convert to WebP format. Compress to 80% quality — indistinguishable from lossless at normal screen sizes. Serve responsive images (srcset) so mobile gets a smaller file than desktop. A 2MB PNG hero becomes 150–200KB WebP. This alone fixes LCP in most cases.',
+                  fix: 'Convert to WebP format. Compress to 80% quality - indistinguishable from lossless at normal screen sizes. Serve responsive images (srcset) so mobile gets a smaller file than desktop. A 2MB PNG hero becomes 150–200KB WebP. This alone fixes LCP in most cases.',
                 },
                 {
                   cause: 'Render-blocking third-party scripts',
@@ -294,7 +294,7 @@ export default function LandingPageLoadTimeSlow() {
                 'Add lazy loading to all below-fold images (loading="lazy")',
                 'Enable Cloudflare or equivalent CDN',
                 'Defer or async-load all non-critical third-party scripts',
-                'Check TTFB — if above 800ms, address server response before frontend',
+                'Check TTFB - if above 800ms, address server response before frontend',
                 'Remove redirect chains (each redirect adds a full round-trip)',
               ].map((step, i) => (
                 <li key={i} className="flex items-start gap-3 text-fg-muted">
@@ -315,8 +315,8 @@ export default function LandingPageLoadTimeSlow() {
               Load time and Google Ads Quality Score
             </h2>
             <p className="leading-relaxed text-fg-muted">
-              Google&apos;s Landing Page Experience score — one of the three
-              components of Quality Score — includes page load speed as a
+              Google&apos;s Landing Page Experience score - one of the three
+              components of Quality Score - includes page load speed as a
               factor. A slow landing page reduces Quality Score, which raises
               your cost-per-click and lowers your ad position. This means slow
               load time costs you twice: lower conversion rate on the traffic
@@ -359,7 +359,7 @@ export default function LandingPageLoadTimeSlow() {
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 7 signals including load time.
               The $97 Fix Pack gives you a tailored AI prompt for every
-              finding — rebuilt sections, speed fixes — ready to run within
+              finding - rebuilt sections, speed fixes - ready to run within
               minutes.
             </p>
             <div className="flex flex-wrap gap-4">

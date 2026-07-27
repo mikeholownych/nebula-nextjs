@@ -45,7 +45,7 @@ const faqSchema = {
       name: 'What is message match in Google Ads?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Message match means the landing page headline uses the same noun phrase and intent as the ad and keyword that brought the visitor there. If a visitor clicks an ad for "landing page audit tool" and the page headline reads "Welcome to Nebula," the match is broken. The visitor cannot confirm they are in the right place and leaves. The fix is to use the specific search intent from your highest-traffic keywords in your headline — not your brand name or a clever tagline.',
+        text: 'Message match means the landing page headline uses the same noun phrase and intent as the ad and keyword that brought the visitor there. If a visitor clicks an ad for "landing page audit tool" and the page headline reads "Welcome to Nebula," the match is broken. The visitor cannot confirm they are in the right place and leaves. The fix is to use the specific search intent from your highest-traffic keywords in your headline - not your brand name or a clever tagline.',
       },
     },
     {
@@ -170,13 +170,13 @@ export default function GoogleAdsClicksNoSales() {
                   n: '2',
                   cause: 'No proof above the fold',
                   detail:
-                    'Cold paid search traffic has no prior relationship with your brand. The page is asking for trust it has not yet earned. If the first viewport contains only a headline and a CTA with no proof signal — no customer result, no recognisable logo, no specific outcome — a significant portion of visitors will not take action. One specific, attributed proof element above the fold changes the trust calculus for a visitor who has never heard of you.',
+                    'Cold paid search traffic has no prior relationship with your brand. The page is asking for trust it has not yet earned. If the first viewport contains only a headline and a CTA with no proof signal - no customer result, no recognisable logo, no specific outcome - a significant portion of visitors will not take action. One specific, attributed proof element above the fold changes the trust calculus for a visitor who has never heard of you.',
                 },
                 {
                   n: '3',
                   cause: 'Slow mobile load',
                   detail:
-                    "A visitor who abandons while the page is loading is recorded as a bounce before they have seen your headline. Portent's 2022 analysis of over 100 million page views found that B2B lead-gen pages loading in 1 second convert at roughly 3x the rate of pages loading in 5 seconds. Check LCP with Google PageSpeed Insights on the mobile preset — not desktop. If LCP is above 4 seconds, treat load performance as a high-priority hypothesis and test it against other campaign and page signals.",
+                    "A visitor who abandons while the page is loading is recorded as a bounce before they have seen your headline. Portent's 2022 analysis of over 100 million page views found that B2B lead-gen pages loading in 1 second convert at roughly 3x the rate of pages loading in 5 seconds. Check LCP with Google PageSpeed Insights on the mobile preset - not desktop. If LCP is above 4 seconds, treat load performance as a high-priority hypothesis and test it against other campaign and page signals.",
                 },
                 {
                   n: '4',
@@ -188,7 +188,7 @@ export default function GoogleAdsClicksNoSales() {
                   n: '5',
                   cause: 'CTA asks for too much too soon',
                   detail:
-                    'If the first action available requires significant commitment — booking a call, entering payment details, or filling out a long form — on a page the visitor has never seen before, the mismatch between trust level and ask size will kill the conversion. For cold search traffic, the CTA should match the temperature of the relationship: a low-commitment first step (free audit, free trial, download) is appropriate before a high-commitment ask.',
+                    'If the first action available requires significant commitment - booking a call, entering payment details, or filling out a long form - on a page the visitor has never seen before, the mismatch between trust level and ask size will kill the conversion. For cold search traffic, the CTA should match the temperature of the relationship: a low-commitment first step (free audit, free trial, download) is appropriate before a high-commitment ask.',
                 },
               ].map(({ n, cause, detail }) => (
                 <div
@@ -211,7 +211,7 @@ export default function GoogleAdsClicksNoSales() {
               Diagnosing the specific cause from analytics
             </h2>
             <p className="leading-relaxed text-fg-muted">
-              Do not guess which cause is active — read the analytics patterns:
+              Do not guess which cause is active - read the analytics patterns:
             </p>
             <ul className="mt-5 space-y-4">
               {[
@@ -238,7 +238,7 @@ export default function GoogleAdsClicksNoSales() {
                 {
                   pattern: 'Zero form starts (not just zero submits)',
                   diagnosis:
-                    'Visitors are not engaging with the form at all. The issue is above-fold — either they are bouncing before reaching the form, or the form is positioned below where attention ends.',
+                    'Visitors are not engaging with the form at all. The issue is above-fold - either they are bouncing before reaching the form, or the form is positioned below where attention ends.',
                 },
               ].map(({ pattern, diagnosis }) => (
                 <li
@@ -259,12 +259,12 @@ export default function GoogleAdsClicksNoSales() {
             </h2>
             <ol className="space-y-3">
               {[
-                'Confirm CTR is healthy (above 3-5% for high-intent search) — if not, fix the ad before the page',
-                'Check mobile LCP with Google PageSpeed Insights — if above 4s, fix load time first',
-                'Open the page on mobile at 390px — confirm headline, proof signal, and CTA are all above the fold',
+                'Confirm CTR is healthy (above 3-5% for high-intent search) - if not, fix the ad before the page',
+                'Check mobile LCP with Google PageSpeed Insights - if above 4s, fix load time first',
+                'Open the page on mobile at 390px - confirm headline, proof signal, and CTA are all above the fold',
                 'Verify the headline uses the exact noun phrase from your top-traffic ad groups',
-                'Confirm there is one CTA — not three options competing at equal visual weight',
-                'Check form field count — remove anything not required to deliver the next step',
+                'Confirm there is one CTA - not three options competing at equal visual weight',
+                'Check form field count - remove anything not required to deliver the next step',
                 'Add or surface one specific, attributed proof element before the CTA',
               ].map((step, i) => (
                 <li key={i} className="flex items-start gap-3 text-fg-muted">

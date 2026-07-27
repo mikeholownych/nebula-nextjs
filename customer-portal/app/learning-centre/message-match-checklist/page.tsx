@@ -63,7 +63,7 @@ export default function MessageMatchChecklistPage() {
             <p className="leading-relaxed text-fg-muted">
               Message match is the measurable degree of continuity between the specific words and offer in
               your ad and the specific words and offer on the page that ad points to. It is not a vague
-              concept about "alignment" — it is a direct comparison of two pieces of copy.
+              concept about "alignment" - it is a direct comparison of two pieces of copy.
             </p>
             <p className="mt-4 leading-relaxed text-fg-muted">
               A visitor who clicked your Google Search ad for{' '}
@@ -93,7 +93,7 @@ export default function MessageMatchChecklistPage() {
                   1. Keyword Mismatch
                 </h3>
                 <p className="leading-relaxed text-fg-muted">
-                  The ad targets a specific keyword — <em>"landing page audit"</em> — but the page headline
+                  The ad targets a specific keyword - <em>"landing page audit"</em> - but the page headline
                   uses a category term like <em>"conversion optimisation services."</em> The visitor searched
                   for a precise thing. The page offers a broad category. Scent is broken. This can occur when broad-match or phrase-match keywords point to a
                   single generic page.
@@ -105,7 +105,7 @@ export default function MessageMatchChecklistPage() {
                   2. Offer Mismatch
                 </h3>
                 <p className="leading-relaxed text-fg-muted">
-                  The ad promotes a specific, bounded offer — <em>"Free 10-point landing page audit"</em> —
+                  The ad promotes a specific, bounded offer - <em>"Free 10-point landing page audit"</em> -
                   but the page leads with a monthly retainer or a vague "get in touch" CTA. The visitor
                   expected a free, low-commitment entry point. Instead they face a high-commitment ask.
                   The page asks for more commitment than the ad prepared the visitor to make.
@@ -117,7 +117,7 @@ export default function MessageMatchChecklistPage() {
                   3. Tone Mismatch
                 </h3>
                 <p className="leading-relaxed text-fg-muted">
-                  The ad copy is direct and problem-aware — <em>"Still losing money on Google Ads?"</em> —
+                  The ad copy is direct and problem-aware - <em>"Still losing money on Google Ads?"</em> -
                   but the landing page opens with brand-forward, aspirational copy:{' '}
                   <em>"We help ambitious brands unlock their digital potential."</em> The emotional register
                   is incompatible. The ad spoke to pain; the page speaks to aspiration. These are different
@@ -139,8 +139,8 @@ export default function MessageMatchChecklistPage() {
                 <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-accent/40 bg-accent/5 text-xs font-bold text-accent">1</span>
                 <div>
                   <span className="font-semibold text-fg">Headline vs H1.</span>{' '}
-                  Copy the ad headline. Paste it next to the page H1. The core noun phrase — the thing
-                  you are offering — must appear in both. Exact match is ideal. Semantic match is
+                  Copy the ad headline. Paste it next to the page H1. The core noun phrase - the thing
+                  you are offering - must appear in both. Exact match is ideal. Semantic match is
                   acceptable. Generic category language is a failure.
                 </div>
               </li>
@@ -160,7 +160,7 @@ export default function MessageMatchChecklistPage() {
                   <span className="font-semibold text-fg">Emotional register.</span>{' '}
                   Read the first two lines of ad copy. Is the tone problem-aware, solution-aware, or
                   brand-aware? Read the hero paragraph of the page. Does it match? A problem-aware ad
-                  requires a problem-aware hero — not a vision statement.
+                  requires a problem-aware hero - not a vision statement.
                 </div>
               </li>
             </ol>
@@ -185,7 +185,7 @@ export default function MessageMatchChecklistPage() {
                 'The tone register (problem-aware / solution-aware / brand-aware) is consistent between ad and hero',
                 'If the ad references a specific pain point, that pain point appears in the subheadline or first paragraph',
                 'There is no contradictory offer on the same page (e.g., free trial CTA + book-a-call CTA in the hero)',
-                'The page H1 would make sense to someone who clicked that specific ad — and only that ad',
+                'The page H1 would make sense to someone who clicked that specific ad - and only that ad',
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <span className="mt-1.5 h-4 w-4 shrink-0 rounded border border-accent/40 bg-accent/5" aria-hidden="true" />
@@ -201,13 +201,13 @@ export default function MessageMatchChecklistPage() {
               Free Diagnostic
             </p>
             <h2 className="mb-3 text-2xl font-bold text-fg">
-              Find the break on your page — free
+              Find the break on your page - free
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               Run the Nebula audit to get a scored breakdown of your landing page&apos;s message match,
               offer clarity, and conversion structure. If the audit surfaces a confirmed break, the{' '}
               <span className="font-medium text-fg">$97 Fix Pack</span> gives you an AI prompt for a
-              rewritten hero and CTA, delivered within minutes — no retainer, no scope creep.
+              rewritten hero and CTA, delivered within minutes - no retainer, no scope creep.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

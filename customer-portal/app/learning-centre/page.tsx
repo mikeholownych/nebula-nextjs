@@ -3,7 +3,7 @@ import CategoryAccordion from './CategoryAccordion'
 import { getArticles } from './lib/getArticles'
 
 export const metadata: Metadata = {
-  title: 'Learning Centre — Landing Page Conversion Leaks | Nebula',
+  title: 'Learning Centre - Landing Page Conversion Leaks | Nebula',
   description: "Free conversion guides for founders burning ad spend on pages that don't convert. Diagnose Google, Meta, TikTok, and LinkedIn ad leaks. Start with the free audit.",
   alternates: { canonical: 'https://nebulacomponents.shop/learning-centre' },
 }

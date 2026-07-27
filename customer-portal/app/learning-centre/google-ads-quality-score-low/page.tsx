@@ -30,7 +30,7 @@ export default function LearningCentrePage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">What Quality Score actually measures</h2>
           <p className="leading-relaxed text-fg-muted">
-            Quality Score is Google&apos;s prediction of how relevant your ad and landing page are to the person searching. It is not a judgment of your business—it is a signal about match quality between search intent and arrival experience.
+            Quality Score is Google&apos;s prediction of how relevant your ad and landing page are to the person searching. It is not a judgment of your business-it is a signal about match quality between search intent and arrival experience.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">The score is calculated from three components:</p>
           <ul className="mt-4 space-y-2 text-fg-muted">
@@ -48,7 +48,7 @@ export default function LearningCentrePage() {
             </li>
           </ul>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            Most advertisers obsess over the first two. But the third—the landing page—is where the real leverage lives. If the page breaks the chain, relevance and CTR will also suffer over time.
+            Most advertisers obsess over the first two. But the third-the landing page-is where the real leverage lives. If the page breaks the chain, relevance and CTR will also suffer over time.
           </p>
         </section>
 
@@ -58,7 +58,7 @@ export default function LearningCentrePage() {
           <ul className="mt-4 space-y-2 text-fg-muted">
             <li className="flex items-start gap-3">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-              <span><strong className="text-fg">Load speed:</strong> If the page takes more than 3 seconds, mobile searchers bounce before it renders. Speed is not just UX—it is eligibility.</span>
+              <span><strong className="text-fg">Load speed:</strong> If the page takes more than 3 seconds, mobile searchers bounce before it renders. Speed is not just UX-it is eligibility.</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
@@ -113,7 +113,7 @@ export default function LearningCentrePage() {
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-              Match the ad&apos;s specific offer to the page&apos;s specific page—not a generic homepage
+              Match the ad&apos;s specific offer to the page&apos;s specific page-not a generic homepage
             </li>
           </ul>
         </section>
@@ -135,7 +135,7 @@ export default function LearningCentrePage() {
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-              <span><strong className="text-fg">Sales or leads do not match search intent</strong>—e.g., searchers want information, you offer a service</span>
+              <span><strong className="text-fg">Sales or leads do not match search intent</strong>-e.g., searchers want information, you offer a service</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />

@@ -5,7 +5,7 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Landing Page Bounce Rate High: 3 Causes | Nebula',
   description:
-    'A high bounce rate on paid traffic means the first screen is not delivering on the promise that brought visitors there. Bounce is a symptom — these are the causes.',
+    'A high bounce rate on paid traffic means the first screen is not delivering on the promise that brought visitors there. Bounce is a symptom - these are the causes.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/learning-centre/landing-page-bounce-rate-high',
   },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const articleSchema = createArticleSchema({
   headline: 'Landing Page Bounce Rate High? It Is Usually 3 Diagnosable Causes',
   description:
-    'A high bounce rate on paid traffic means the first screen is not delivering on the promise that brought visitors there. Bounce is a symptom — these are the causes.',
+    'A high bounce rate on paid traffic means the first screen is not delivering on the promise that brought visitors there. Bounce is a symptom - these are the causes.',
   url: 'https://nebulacomponents.shop/learning-centre/landing-page-bounce-rate-high',
   publishedDate: '2026-07-16',
   modifiedDate: '2026-07-21',
@@ -29,7 +29,7 @@ const faqSchema = {
       name: 'What is a high bounce rate on a paid traffic landing page?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'There is no universal threshold because bounce rate varies by traffic type and offer. Cold paid traffic bounces more than warm traffic by design — a visitor who clicked an ad for the first time is less committed than someone returning from a retargeting campaign. As a working diagnostic: if your paid traffic bounce rate is above 70%, the first screen is likely not confirming the ad promise. If it is above 85%, the message-match, load time, or audience-targeting problem is severe enough to fix before any other optimisation.',
+        text: 'There is no universal threshold because bounce rate varies by traffic type and offer. Cold paid traffic bounces more than warm traffic by design - a visitor who clicked an ad for the first time is less committed than someone returning from a retargeting campaign. As a working diagnostic: if your paid traffic bounce rate is above 70%, the first screen is likely not confirming the ad promise. If it is above 85%, the message-match, load time, or audience-targeting problem is severe enough to fix before any other optimisation.',
       },
     },
     {
@@ -37,7 +37,7 @@ const faqSchema = {
       name: 'What is the difference between bounce rate and exit rate?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Bounce means a visitor landed on your page and left without clicking anything — they arrived, decided the page was not what they expected, and left immediately. Exit means they visited multiple pages and this was their last stop. High exit rate on a landing page is normal if visitors explored and then left. High bounce on a paid traffic landing page is the problem — the first screen failed to hold them.',
+        text: 'Bounce means a visitor landed on your page and left without clicking anything - they arrived, decided the page was not what they expected, and left immediately. Exit means they visited multiple pages and this was their last stop. High exit rate on a landing page is normal if visitors explored and then left. High bounce on a paid traffic landing page is the problem - the first screen failed to hold them.',
       },
     },
     {
@@ -45,7 +45,7 @@ const faqSchema = {
       name: 'How do I reduce bounce rate on a landing page?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Diagnose the cause before changing anything. The three most common paid-traffic bounce causes are: (1) message mismatch — the headline does not echo the ad promise; (2) slow load time — Portent's 2022 analysis of 100M+ page views found B2B pages loading in 1 second convert at roughly 3x the rate of pages loading in 5 seconds; (3) wrong audience — broad keywords or clickbait ads bring visitors who were never going to convert. Segment your analytics by source and device to find which cause is active, then fix that cause specifically.",
+        text: "Diagnose the cause before changing anything. The three most common paid-traffic bounce causes are: (1) message mismatch - the headline does not echo the ad promise; (2) slow load time - Portent's 2022 analysis of 100M+ page views found B2B pages loading in 1 second convert at roughly 3x the rate of pages loading in 5 seconds; (3) wrong audience - broad keywords or clickbait ads bring visitors who were never going to convert. Segment your analytics by source and device to find which cause is active, then fix that cause specifically.",
       },
     },
     {
@@ -53,7 +53,7 @@ const faqSchema = {
       name: 'Does load time affect bounce rate?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Yes, directly. A 2017 Google/SOASTA study found that 53% of mobile users abandoned pages taking longer than 3 seconds to load — and that figure is from 2017, before the shift to mobile-first consumption patterns. More recent data from Portent's 2022 research shows that B2B pages loading in 1 second have a conversion rate roughly 3x higher than pages loading in 5 seconds. Slow load time is a bounce cause, not a separate problem — a visitor who abandons during load is recorded as a bounce before they have seen your headline.",
+        text: "Yes, directly. A 2017 Google/SOASTA study found that 53% of mobile users abandoned pages taking longer than 3 seconds to load - and that figure is from 2017, before the shift to mobile-first consumption patterns. More recent data from Portent's 2022 research shows that B2B pages loading in 1 second have a conversion rate roughly 3x higher than pages loading in 5 seconds. Slow load time is a bounce cause, not a separate problem - a visitor who abandons during load is recorded as a bounce before they have seen your headline.",
       },
     },
     {
@@ -61,7 +61,7 @@ const faqSchema = {
       name: 'What is mobile bounce rate versus desktop?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'If your mobile bounce rate is significantly higher than desktop — more than 15 percentage points — the gap is almost always a layout problem, not an audience problem. Mobile visitors need the headline and CTA visible without scrolling, and they need the page to load in under 3 seconds on a mobile connection. Diagnose mobile layout (signal 3) and load time (signal 4) specifically for your mobile segment before concluding that mobile traffic is lower quality.',
+        text: 'If your mobile bounce rate is significantly higher than desktop - more than 15 percentage points - the gap is almost always a layout problem, not an audience problem. Mobile visitors need the headline and CTA visible without scrolling, and they need the page to load in under 3 seconds on a mobile connection. Diagnose mobile layout (signal 3) and load time (signal 4) specifically for your mobile segment before concluding that mobile traffic is lower quality.',
       },
     },
   ],
@@ -99,8 +99,8 @@ export default function LandingPageBounceRateHigh() {
               A bounce rate above 70% on paid traffic means the first screen is
               not delivering on the promise that brought visitors there. Bounce
               is a symptom. The cause is almost always offer mismatch, slow
-              load, or wrong audience. Treating the symptom — redesigning the
-              page — before diagnosing the cause doubles your spend on the wrong
+              load, or wrong audience. Treating the symptom - redesigning the
+              page - before diagnosing the cause doubles your spend on the wrong
               problem.
             </p>
           </div>
@@ -119,13 +119,13 @@ export default function LandingPageBounceRateHigh() {
             <p className="mt-4 leading-relaxed text-fg-muted">
               <strong className="text-fg">Exit</strong> means they visited
               multiple pages and this was their last stop. A high exit rate on a
-              landing page is normal — if they explored and then left, the page
+              landing page is normal - if they explored and then left, the page
               did its job.
             </p>
             <p className="mt-4 leading-relaxed text-fg-muted">
               High <em>bounce</em> on a paid traffic landing page is the
               diagnostic signal. It means the first screen failed to match what
-              the ad promised — and everything you paid to get that click was
+              the ad promised - and everything you paid to get that click was
               wasted before the visitor saw anything else.
             </p>
           </section>
@@ -140,17 +140,17 @@ export default function LandingPageBounceRateHigh() {
                 {
                   n: '1',
                   label: 'Offer mismatch',
-                  body: 'The ad promised one thing. The page delivered another. If visitors do not see what they came for within the first viewport, they leave. This is message-match failure — signal 1 of the 7 conversion signals. A generic headline, a buried CTA, or an unclear value proposition all produce the same bounce pattern: high CTR on the ad, high bounce on the page.',
+                  body: 'The ad promised one thing. The page delivered another. If visitors do not see what they came for within the first viewport, they leave. This is message-match failure - signal 1 of the 7 conversion signals. A generic headline, a buried CTA, or an unclear value proposition all produce the same bounce pattern: high CTR on the ad, high bounce on the page.',
                 },
                 {
                   n: '2',
                   label: 'Slow load time',
-                  body: "A 2017 Google/SOASTA study found that 53% of mobile users abandoned pages taking longer than 3 seconds to load. That figure is nearly a decade old — mobile-first consumption patterns have made patience shorter since. Portent's 2022 analysis of over 100 million page views across 20 B2B and B2C sites found that pages loading in 1 second convert at roughly 3x the rate of pages loading in 5 seconds. A visitor who abandons during load is recorded as a bounce before they have seen your headline.",
+                  body: "A 2017 Google/SOASTA study found that 53% of mobile users abandoned pages taking longer than 3 seconds to load. That figure is nearly a decade old - mobile-first consumption patterns have made patience shorter since. Portent's 2022 analysis of over 100 million page views across 20 B2B and B2C sites found that pages loading in 1 second convert at roughly 3x the rate of pages loading in 5 seconds. A visitor who abandons during load is recorded as a bounce before they have seen your headline.",
                 },
                 {
                   n: '3',
                   label: 'Wrong audience',
-                  body: 'Broad keyword targeting, irrelevant search terms, or clickbait ad creative brings visitors who were never going to convert. When this is the cause, the fix is not the page — it is the targeting. Segment your analytics by traffic source to confirm. If Google Ads bounces at 40% and a broad awareness campaign bounces at 85%, those are two separate problems requiring two separate fixes.',
+                  body: 'Broad keyword targeting, irrelevant search terms, or clickbait ad creative brings visitors who were never going to convert. When this is the cause, the fix is not the page - it is the targeting. Segment your analytics by traffic source to confirm. If Google Ads bounces at 40% and a broad awareness campaign bounces at 85%, those are two separate problems requiring two separate fixes.',
                 },
               ].map(({ n, label, body }) => (
                 <div
@@ -182,12 +182,12 @@ export default function LandingPageBounceRateHigh() {
                 {
                   label: 'By source',
                   detail:
-                    'Google Ads vs Meta Ads vs Organic vs Email. If one source bounces at 30% and another at 85%, the problem is source-specific — a targeting or message-match issue on the high-bounce channel, not a page-wide layout problem.',
+                    'Google Ads vs Meta Ads vs Organic vs Email. If one source bounces at 30% and another at 85%, the problem is source-specific - a targeting or message-match issue on the high-bounce channel, not a page-wide layout problem.',
                 },
                 {
                   label: 'By device',
                   detail:
-                    'If mobile bounce is more than 15 percentage points above desktop, your mobile layout is the primary cause — not the ad, not the audience. Check whether headline and CTA are visible without scrolling at 390px.',
+                    'If mobile bounce is more than 15 percentage points above desktop, your mobile layout is the primary cause - not the ad, not the audience. Check whether headline and CTA are visible without scrolling at 390px.',
                 },
                 {
                   label: 'By traffic temperature',
@@ -197,7 +197,7 @@ export default function LandingPageBounceRateHigh() {
                 {
                   label: 'By time on page',
                   detail:
-                    'If average time-on-page for bouncers is under 5 seconds, the cause is load time or an immediate message mismatch. If it is 15–30 seconds, the visitor read the page but was not convinced — the cause is proof or CTA failure, not the above-fold section.',
+                    'If average time-on-page for bouncers is under 5 seconds, the cause is load time or an immediate message mismatch. If it is 15–30 seconds, the visitor read the page but was not convinced - the cause is proof or CTA failure, not the above-fold section.',
                 },
               ].map(({ label, detail }) => (
                 <li
@@ -221,12 +221,12 @@ export default function LandingPageBounceRateHigh() {
                 {
                   step: 'Match the headline to the ad',
                   detail:
-                    'If the ad says "Fix your landing page," the H1 should say "Fix your landing page" — not "Welcome to Our Platform." Copy the specific noun phrase from your highest-traffic ad into the headline. Test before redesigning anything else.',
+                    'If the ad says "Fix your landing page," the H1 should say "Fix your landing page" - not "Welcome to Our Platform." Copy the specific noun phrase from your highest-traffic ad into the headline. Test before redesigning anything else.',
                 },
                 {
                   step: 'Cut load time to under 3 seconds on mobile',
                   detail:
-                    'Compress images (WebP, 80% quality), add lazy loading to below-fold content, remove unused third-party scripts. Check LCP with Google PageSpeed Insights — free, takes 60 seconds. If LCP is above 4 seconds, load time is the primary bounce cause regardless of what the headline says.',
+                    'Compress images (WebP, 80% quality), add lazy loading to below-fold content, remove unused third-party scripts. Check LCP with Google PageSpeed Insights - free, takes 60 seconds. If LCP is above 4 seconds, load time is the primary bounce cause regardless of what the headline says.',
                 },
                 {
                   step: 'Put the CTA above the fold on mobile',
@@ -281,7 +281,7 @@ export default function LandingPageBounceRateHigh() {
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 7 signals and identifies which
               one is producing your bounce. The $97 Fix Pack gives you an AI
-              prompt for the fix — rewritten copy, rebuilt sections — ready to
+              prompt for the fix - rewritten copy, rebuilt sections - ready to
               run within minutes.
             </p>
             <div className="flex flex-wrap gap-4">

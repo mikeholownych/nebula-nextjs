@@ -50,7 +50,7 @@ const workflows = [
     number: '05',
     name: 'Paid-traffic leak prioritizer',
     output: 'Ranked fix map',
-    description: 'Order supported defects by journey impact, reproducibility, and confidence—without manufacturing revenue loss.',
+    description: 'Order supported defects by journey impact, reproducibility, and confidence-without manufacturing revenue loss.',
   },
   {
     number: '06',

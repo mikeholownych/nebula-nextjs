@@ -12,7 +12,7 @@ export const dynamic = 'force-dynamic'
 export function generateMetadata(): Metadata {
   const fixPack = getActiveFixPack()
   return {
-    title: 'Pricing — Nebula Components Landing Page Audit & Fix Pack',
+    title: 'Pricing - Nebula Components Landing Page Audit & Fix Pack',
     description: fixPack
       ? `One-time ${formatUsd(fixPack.priceCents)} Conversion Fix Pack: landing page audit diagnosis plus a full AI prompt pack to resolve every finding yourself. No retainer, no access to your site required.`
       : 'Current Nebula Components landing page audit pricing. Only verified, available offers are shown.',
@@ -124,7 +124,7 @@ export default function PricingPage() {
       <div className="mx-auto max-w-4xl px-6 py-20">
         <div className="mb-16 text-center">
           <p className="mt-4 max-w-xl mx-auto text-fg-muted">
-            No retainers. No monthly commitments. Pay once for the diagnosis and fix, then we are done — until you need us again.
+            No retainers. No monthly commitments. Pay once for the diagnosis and fix, then we are done - until you need us again.
           </p>
         </div>
 
@@ -134,7 +134,7 @@ export default function PricingPage() {
             <h2 className="text-2xl font-semibold text-fg">Automated Audit</h2>
             <p className="mt-2 text-3xl font-bold text-fg">Free</p>
             <p className="mt-4 text-fg-muted">
-              Drop in a URL and get a scored, evidence-backed diagnosis in minutes — no signup required.
+              Drop in a URL and get a scored, evidence-backed diagnosis in minutes - no signup required.
             </p>
             <ul className="mt-6 space-y-2 text-sm text-fg-muted">
               {[
@@ -161,8 +161,8 @@ export default function PricingPage() {
             <h2 className="text-2xl font-semibold text-fg">Conversion Fix Pack</h2>
             <p className="mt-2 text-4xl font-bold text-fg">{fixPackPrice}</p>
             <p className="mt-4 text-fg-muted">
-              A structured landing page audit plus a complete AI prompt pack — one prompt per
-              finding, built from your actual page — for you to run through Claude, ChatGPT, or
+              A structured landing page audit plus a complete AI prompt pack - one prompt per
+              finding, built from your actual page - for you to run through Claude, ChatGPT, or
               your own developer. No access to your site required. Delivered by email within
               minutes of payment.
             </p>
@@ -170,7 +170,7 @@ export default function PricingPage() {
               {[
                 'Full 7-point page audit',
                 'Written diagnosis with prioritised fix list',
-                'A tailored AI prompt for every finding — not a generic template',
+                'A tailored AI prompt for every finding - not a generic template',
                 '30-day free re-audit to see what changed',
               ].map((item) => (
                 <li key={item} className="flex items-center gap-2">
@@ -201,15 +201,15 @@ export default function PricingPage() {
             {[
               {
                 q: 'What is included in the Fix Pack?',
-                a: 'A documented audit of your landing page against seven conversion criteria, a written diagnosis identifying which issues are present and in what order to fix them, and a complete AI prompt pack — one prompt per finding, pre-filled with the specifics of your actual page — for you to run through Claude, ChatGPT, or hand to your own developer.',
+                a: 'A documented audit of your landing page against seven conversion criteria, a written diagnosis identifying which issues are present and in what order to fix them, and a complete AI prompt pack - one prompt per finding, pre-filled with the specifics of your actual page - for you to run through Claude, ChatGPT, or hand to your own developer.',
               },
               {
                 q: 'Why prompts instead of you implementing the fixes?',
-                a: "Because it means we never need access to your site, CMS, or hosting, and you're not waiting on us or trusting a stranger to touch your live page. Each prompt is built from what we actually found — not a generic template — so it does the diagnostic work; you keep control of implementation.",
+                a: "Because it means we never need access to your site, CMS, or hosting, and you're not waiting on us or trusting a stranger to touch your live page. Each prompt is built from what we actually found - not a generic template - so it does the diagnostic work; you keep control of implementation.",
               },
               {
                 q: 'How long does it take?',
-                a: 'The prompt pack is generated and emailed within minutes of payment — it is not a manual, multi-day process.',
+                a: 'The prompt pack is generated and emailed within minutes of payment - it is not a manual, multi-day process.',
               },
               {
                 q: 'Do I need a retainer or ongoing contract?',

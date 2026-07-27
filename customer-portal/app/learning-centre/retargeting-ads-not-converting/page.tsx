@@ -23,14 +23,14 @@ export default function LearningCentrePage() {
             Retargeting Ads Not Converting? The First Page Failed Them
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
-            Retargeting fails when the first impression leaked trust. Fix the cold traffic page before blaming retargeting. If visitors didn&apos;t convert the first time, the page left a gap—and showing it again won&apos;t close it.
+            Retargeting fails when the first impression leaked trust. Fix the cold traffic page before blaming retargeting. If visitors didn&apos;t convert the first time, the page left a gap-and showing it again won&apos;t close it.
           </p>
         </div>
 
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The retargeting misconception</h2>
           <p className="leading-relaxed text-fg-muted">
-            Most teams assume retargeting ads aren&apos;t working when conversions stay low. But retargeting doesn&apos;t create demand—it reminds. If the first visit didn&apos;t move the visitor toward action, the tenth visit won&apos;t either.
+            Most teams assume retargeting ads aren&apos;t working when conversions stay low. But retargeting doesn&apos;t create demand-it reminds. If the first visit didn&apos;t move the visitor toward action, the tenth visit won&apos;t either.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
             The problem isn&apos;t the ads not working. It&apos;s the page not working. Retargeting amplifies what already exists. A broken funnel gets more traffic. A working funnel gets more conversions.
@@ -40,10 +40,10 @@ export default function LearningCentrePage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">How the first page affects retargeting</h2>
           <p className="leading-relaxed text-fg-muted">
-            <strong className="text-fg">Trust:</strong> If the first impression felt generic, manipulative, or unclear, retargeting reminds them of that feeling. You&apos;re not re-engaging—you&apos;re reinforcing distrust.
+            <strong className="text-fg">Trust:</strong> If the first impression felt generic, manipulative, or unclear, retargeting reminds them of that feeling. You&apos;re not re-engaging-you&apos;re reinforcing distrust.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            <strong className="text-fg">Memory:</strong> Visitors remember how you made them feel. Confusing navigation, too many form fields, vague headlines—these stick. Retargeting brings them back to the same experience.
+            <strong className="text-fg">Memory:</strong> Visitors remember how you made them feel. Confusing navigation, too many form fields, vague headlines-these stick. Retargeting brings them back to the same experience.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
             <strong className="text-fg">Intent:</strong> A clear first page creates clear intent. Visitors know what you offer and whether it&apos;s for them. Retargeting then serves as a nudge, not a rescue mission.

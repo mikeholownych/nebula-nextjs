@@ -5,7 +5,7 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'What a $50 CPC Actually Needs to Look Like on a Landing Page to Break Even | Nebula',
   description:
-    'Reverse-engineer your paid traffic maths. At $50 CPC and $200 AOV you need 25% CVR to break even — an impossible target. Here\'s the formula that shows you exactly what your landing page must deliver before you touch your bids.',
+    'Reverse-engineer your paid traffic maths. At $50 CPC and $200 AOV you need 25% CVR to break even - an impossible target. Here\'s the formula that shows you exactly what your landing page must deliver before you touch your bids.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/learning-centre/cpc-break-even-landing-page',
   },
@@ -15,7 +15,7 @@ const articleSchema = createArticleSchema({
   headline:
     'What a $50 CPC Actually Needs to Look Like on a Landing Page to Break Even',
   description:
-    'Reverse-engineer your paid traffic maths. At $50 CPC and $200 AOV you need 25% CVR to break even — an impossible target. Here\'s the formula that shows you exactly what your landing page must deliver before you touch your bids.',
+    'Reverse-engineer your paid traffic maths. At $50 CPC and $200 AOV you need 25% CVR to break even - an impossible target. Here\'s the formula that shows you exactly what your landing page must deliver before you touch your bids.',
   url: 'https://nebulacomponents.shop/learning-centre/cpc-break-even-landing-page',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
@@ -43,7 +43,7 @@ export default function CpcBreakEvenLandingPagePage() {
             paid traffic doesn't work. The maths was never going to allow it.
             Before you optimise a single headline or swap a button colour,
             you need to know the exact conversion rate your page must hit just
-            to stop losing money — and whether that number is even achievable
+            to stop losing money - and whether that number is even achievable
             given your price point.
           </p>
         </div>
@@ -64,7 +64,7 @@ export default function CpcBreakEvenLandingPagePage() {
             every time someone arrives on their page. They haven't asked the
             prior question: given my price and margin, how many of those arrivals
             need to buy just to cover the ad spend? Until you answer that, you're
-            not running a campaign — you're running a lottery and hoping the
+            not running a campaign - you're running a lottery and hoping the
             numbers work out.
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
@@ -85,7 +85,7 @@ export default function CpcBreakEvenLandingPagePage() {
           <p className="leading-relaxed text-fg-muted mb-4">
             The maths is straightforward: divide your CPC by your average order
             value and you get the conversion rate you need just to break even on
-            ad spend alone — before fulfilment, overheads, or any margin.
+            ad spend alone - before fulfilment, overheads, or any margin.
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
             <strong className="text-fg">Break-even CVR = CPC ÷ AOV</strong>
@@ -94,7 +94,7 @@ export default function CpcBreakEvenLandingPagePage() {
             At $50 CPC and $200 AOV: 50 ÷ 200 = 0.25, or 25%. You need one in
             four visitors to purchase just to recover your ad spend. Median
             ecommerce CVR is 1–3%. A well-optimised landing page might reach
-            5–8%. 25% is not a page optimisation problem — it is a unit
+            5–8%. 25% is not a page optimisation problem - it is a unit
             economics mismatch. The CPC is too high for the AOV.
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
@@ -113,7 +113,7 @@ export default function CpcBreakEvenLandingPagePage() {
           </h2>
           <p className="leading-relaxed text-fg-muted mb-4">
             CVR is not random. Pages that convert at 1%, 3%, and 8% are
-            structurally different — not cosmetically different. Understanding
+            structurally different - not cosmetically different. Understanding
             what separates them tells you where your own page sits.
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
@@ -126,7 +126,7 @@ export default function CpcBreakEvenLandingPagePage() {
           <p className="leading-relaxed text-fg-muted mb-4">
             <strong className="text-fg">3% CVR pages</strong> lead with a
             specific outcome for a specific person, have a clear above-fold CTA,
-            and include at least one trust signal — a testimonial, a logo bar, a
+            and include at least one trust signal - a testimonial, a logo bar, a
             guarantee. The copy addresses the primary objection. There is
             friction reduction (clear returns policy, visible pricing, no
             surprises at checkout). These pages convert the already-willing.
@@ -139,7 +139,7 @@ export default function CpcBreakEvenLandingPagePage() {
             offer → risk removal. There are multiple CTAs calibrated to
             different buying stages, urgency is contextual not manufactured, and
             the copy pre-empts the top three reasons someone might not buy.
-            These pages don't just capture intent — they create it.
+            These pages don't just capture intent - they create it.
           </p>
         </section>
 
@@ -152,20 +152,20 @@ export default function CpcBreakEvenLandingPagePage() {
             The break-even formula above assumes you only ever sell once. For
             SaaS with monthly recurring revenue, repeat ecommerce, or
             high-ticket service businesses with strong referral loops, that
-            assumption is wrong — and acting on it will make you underinvest in
+            assumption is wrong - and acting on it will make you underinvest in
             acquisition.
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
             If a customer pays $200 upfront but generates $800 in lifetime
             revenue, your real break-even CVR is 50 ÷ 800 = 6.25%, not 25%.
             That's a number a well-built page can actually hit. The constraint
-            isn't the CPC — it's whether your LTV data is reliable enough to
+            isn't the CPC - it's whether your LTV data is reliable enough to
             justify the initial loss.
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
             When the page is asking for a loss-leader action, it needs to do
             something different: it must sell the relationship, not just the
-            transaction. That means demonstrating what ongoing value looks like —
+            transaction. That means demonstrating what ongoing value looks like -
             retention proof (customer tenure, usage stats, case studies spanning
             multiple months), not just first-purchase testimonials. The page is
             recruiting a long-term customer, not closing a one-time sale, and
@@ -191,7 +191,7 @@ export default function CpcBreakEvenLandingPagePage() {
           <p className="leading-relaxed text-fg-muted mb-4">
             At 1,000 visitors per month, $200 AOV, improving CVR from 2% to 3%
             adds 10 sales: $2,000 per month, $24,000 per year. That same lift
-            simultaneously reduces your effective CPA — meaning your existing ad
+            simultaneously reduces your effective CPA - meaning your existing ad
             budget suddenly performs 50% better without spending an extra dollar
             on clicks.
           </p>
@@ -221,7 +221,7 @@ export default function CpcBreakEvenLandingPagePage() {
             These pages fail for structural reasons, not aesthetic ones. The
             headline speaks to the product rather than the visitor's problem.
             The above-fold section answers the wrong question. The trust signals
-            are there but they're the wrong type — brand logos when the visitor
+            are there but they're the wrong type - brand logos when the visitor
             needs peer testimonials, or awards when they need a guarantee. The
             CTA asks for too much too soon from a cold audience.
           </p>
@@ -242,8 +242,8 @@ export default function CpcBreakEvenLandingPagePage() {
           </h2>
           <p className="leading-relaxed text-fg-muted mb-6">
             Before optimising your bids, know what your page is currently
-            delivering. The free audit shows the structural elements — headline,
-            CTA, trust signals, above-fold structure — that most often limit CVR.
+            delivering. The free audit shows the structural elements - headline,
+            CTA, trust signals, above-fold structure - that most often limit CVR.
             You'll see exactly where your page sits on the 1% / 3% / 8%
             spectrum, and what specific changes would move it.
           </p>

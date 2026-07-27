@@ -5,7 +5,7 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Your CTA May Be Below the Fold on Smaller Phones | Nebula',
   description:
-    'Your CTA looks fine on your flagship phone — but on 375px screens it disappears below the fold before visitors ever scroll. Here\'s the layout problem, and how to fix it.',
+    'Your CTA looks fine on your flagship phone - but on 375px screens it disappears below the fold before visitors ever scroll. Here\'s the layout problem, and how to fix it.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/learning-centre/cta-below-fold-mobile',
   },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const articleSchema = createArticleSchema({
   headline: 'Your CTA May Be Below the Fold on Smaller Phones',
   description:
-    'Your CTA looks fine on your flagship phone — but on 375px screens it disappears below the fold before visitors ever scroll. Here\'s the layout problem, and how to fix it.',
+    'Your CTA looks fine on your flagship phone - but on 375px screens it disappears below the fold before visitors ever scroll. Here\'s the layout problem, and how to fix it.',
   url: 'https://nebulacomponents.shop/learning-centre/cta-below-fold-mobile',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
@@ -41,8 +41,8 @@ export default function CtaBelowFoldMobilePage() {
           <p className="text-lg leading-relaxed text-fg-muted">
             You tested it on your phone. It looked fine. You shipped it. But your phone is a
             recent flagship with a tall screen and plenty of viewport real estate. On an iPhone SE
-            or a budget Android — the devices that make up a significant slice of real-world
-            traffic — your primary CTA is invisible until the visitor scrolls. Most of them never
+            or a budget Android - the devices that make up a significant slice of real-world
+            traffic - your primary CTA is invisible until the visitor scrolls. Most of them never
             do. This is the mobile blind spot that quietly kills conversion rates that have
             already been &quot;optimised.&quot;
           </p>
@@ -56,14 +56,14 @@ export default function CtaBelowFoldMobilePage() {
           <p className="leading-relaxed text-fg-muted mb-4">
             When founders say they&apos;ve &quot;checked mobile,&quot; they almost always mean
             they opened their site on their own device. That device is typically a recent iPhone
-            Pro or a current-generation Android flagship — a screen that is taller, sharper, and
+            Pro or a current-generation Android flagship - a screen that is taller, sharper, and
             more forgiving than what a meaningful portion of their audience is actually using.
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
             The result is a form of survivorship bias baked into the QA process. The founder sees
             the CTA. The tester sees the CTA. The designer sees the CTA. But the visitor on a
             375px-wide screen with a 667px viewport height sees a hero section, a navigation bar,
-            and a lot of padding — and then bounces before they ever reach the button that was
+            and a lot of padding - and then bounces before they ever reach the button that was
             supposed to convert them.
           </p>
           <p className="leading-relaxed text-fg-muted">
@@ -81,7 +81,7 @@ export default function CtaBelowFoldMobilePage() {
           </h2>
           <p className="leading-relaxed text-fg-muted mb-4">
             375px is the CSS viewport width of the iPhone SE (all generations), the iPhone 6/7/8
-            series, and a wide range of budget Android handsets. It is not an exotic outlier — it
+            series, and a wide range of budget Android handsets. It is not an exotic outlier - it
             is one of the most common viewport widths in mobile analytics worldwide. Yet most
             desktop-first landing pages were never seriously tested at this width.
           </p>
@@ -106,14 +106,14 @@ export default function CtaBelowFoldMobilePage() {
           </h2>
           <p className="leading-relaxed text-fg-muted mb-4">
             The fold is not a pixel count. It is the point at which a visitor has to take an
-            active action — scrolling — before they can see more of your page. On mobile, that
+            active action - scrolling - before they can see more of your page. On mobile, that
             threshold matters more than on desktop because mobile scrolling behaviour is different.
             Desktop users scroll habitually. Mobile users scroll when they are already engaged.
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
             Scroll depth data from heatmap tools consistently shows that mobile bounce rates are
             highest among visitors who never scroll at all. These are not visitors who scrolled
-            and left — they are visitors who landed, saw what was immediately visible, decided
+            and left - they are visitors who landed, saw what was immediately visible, decided
             there was no obvious next step, and closed the tab. The fold is the decision boundary.
             What sits above it is your entire pitch to that visitor.
           </p>
@@ -122,7 +122,7 @@ export default function CtaBelowFoldMobilePage() {
             approximately 580–600px of usable above-fold space. That sounds like a lot until you
             account for a sticky navigation bar (50–70px), a headline (80–120px), a sub-headline
             (40–60px), and a hero image (150–200px). The CTA that you designed to sit naturally
-            below the hero is now sitting at pixel 500–560 on a good day — and at 620px on a bad
+            below the hero is now sitting at pixel 500–560 on a good day - and at 620px on a bad
             one.
           </p>
         </section>
@@ -141,21 +141,21 @@ export default function CtaBelowFoldMobilePage() {
             fixed height or a high aspect ratio pushes everything below it down the page. On
             desktop this creates visual breathing room. On a 375px screen it consumes the entire
             above-fold area before the headline has even been read. The fix is to cap hero image
-            height explicitly on small screens — <code className="text-accent">max-h-40</code> or
-            similar — or to switch to a text-only hero on mobile entirely.
+            height explicitly on small screens - <code className="text-accent">max-h-40</code> or
+            similar - or to switch to a text-only hero on mobile entirely.
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
             <strong className="text-fg">Stacked navigation.</strong> Hamburger menus that expand
             into full-height overlays, or navigation bars that wrap to a second row on small
             screens, are common culprits. Even a navigation that simply renders taller than
-            expected at 375px can push the hero section down by 20–40px — enough to move the CTA
+            expected at 375px can push the hero section down by 20–40px - enough to move the CTA
             below the fold. Navigation height should be explicitly capped and tested at the
             375px breakpoint.
           </p>
           <p className="leading-relaxed text-fg-muted">
             <strong className="text-fg">Excessive padding.</strong> Generous vertical padding on
-            the hero section — <code className="text-accent">py-20</code> or
-            <code className="text-accent">py-24</code> — is a standard desktop pattern that
+            the hero section - <code className="text-accent">py-20</code> or
+            <code className="text-accent">py-24</code> - is a standard desktop pattern that
             consumes 80–96px of mobile viewport. Stack two padded sections before the CTA and
             you have lost 160–192px of your 580px budget before a single content element has
             rendered. Mobile padding should be reduced aggressively:
@@ -181,7 +181,7 @@ export default function CtaBelowFoldMobilePage() {
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
             In the device dropdown at the top, select <strong className="text-fg">iPhone SE</strong>.
-            This renders your page at 375×667px — the exact worst-case viewport. Do not scroll.
+            This renders your page at 375×667px - the exact worst-case viewport. Do not scroll.
             Look at what is visible in that first screen. Is your CTA button visible? Is there
             any clear call to action above the fold, or just a hero image and a navigation bar?
           </p>
@@ -201,14 +201,14 @@ export default function CtaBelowFoldMobilePage() {
           <p className="leading-relaxed text-fg-muted mb-4">
             The most reliable fix is to design the mobile layout first and enforce an above-fold
             CTA constraint before touching the desktop version. On mobile, the CTA should be the
-            third element the visitor sees: headline, supporting line, button. Everything else —
-            social proof, feature lists, hero imagery — comes after.
+            third element the visitor sees: headline, supporting line, button. Everything else -
+            social proof, feature lists, hero imagery - comes after.
           </p>
           <p className="leading-relaxed text-fg-muted mb-4">
             If a complete redesign is not immediately feasible, the sticky CTA bar pattern is the
             fastest fix with the highest impact. A fixed-position bar at the bottom of the mobile
-            viewport — containing only the primary CTA button and a single line of supporting
-            text — ensures the call to action is always visible regardless of where the visitor
+            viewport - containing only the primary CTA button and a single line of supporting
+            text - ensures the call to action is always visible regardless of where the visitor
             is on the page. This pattern consistently outperforms above-fold placement in A/B
             tests because it removes scroll depth as a variable entirely.
           </p>
@@ -218,13 +218,13 @@ export default function CtaBelowFoldMobilePage() {
             <code className="text-accent">block md:hidden</code>, with enough bottom padding to
             clear iOS safe areas (<code className="text-accent">pb-safe</code> or an explicit
             <code className="text-accent">pb-6</code>). The bar should not cover content
-            permanently — include a dismiss option or auto-hide it once the visitor reaches the
+            permanently - include a dismiss option or auto-hide it once the visitor reaches the
             page&apos;s own CTA section.
           </p>
           <p className="leading-relaxed text-fg-muted">
             For new builds, apply a strict budget to the above-fold area at 375px: navigation
             ≤56px, hero section including headline and subheadline ≤320px, CTA button ≤56px.
-            That totals 432px — well within the 580px usable viewport — leaving 148px of margin
+            That totals 432px - well within the 580px usable viewport - leaving 148px of margin
             before you hit the fold. Check this budget every time you add a new element to the
             hero section, because padding and wrapping text will erode it faster than you expect.
           </p>
@@ -237,7 +237,7 @@ export default function CtaBelowFoldMobilePage() {
           </h2>
           <p className="leading-relaxed text-fg-muted mb-6">
             The audit flags above-fold structure issues from static HTML. Check your page, then
-            verify on a real 375px device. Most founders find the problem in under five minutes —
+            verify on a real 375px device. Most founders find the problem in under five minutes -
             the fix takes longer, but knowing it exists is where it starts.
           </p>
           <Link

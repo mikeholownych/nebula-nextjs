@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'About Nebula Components — Evidence-Backed Conversion Optimization',
+  title: 'About Nebula Components - Evidence-Backed Conversion Optimization',
   description:
-    'Nebula Components diagnoses landing page conversion failures for founders running paid ads. We identify message-match gaps, trust signal problems, and CTA friction — then fix them.',
+    'Nebula Components diagnoses landing page conversion failures for founders running paid ads. We identify message-match gaps, trust signal problems, and CTA friction - then fix them.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/about',
   },
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main id="main-content" className="min-h-screen bg-bg text-fg">
+    <main id="main-content" className="min-h-screen bg-bg text-fg pt-24">
       <div className="mx-auto max-w-3xl px-6 py-16">
         <h1 className="mb-6 text-4xl font-bold">About Nebula Components</h1>
         <p className="mb-6 text-lg leading-relaxed text-fg-muted">
@@ -22,10 +22,10 @@ export default function AboutPage() {
         <section className="mb-10 rounded-2xl border border-border bg-bg-panel p-6">
           <h2 className="mb-3 text-2xl font-bold text-accent">What we do</h2>
           <p className="mb-4 text-fg-muted">
-            We run a structured audit against your landing page — checking message-match, trust signals, mobile layout, form friction, load time, and compliance — and deliver a prioritised fix list with specific instructions. If you want implementation, we do that too, at a flat rate, with no retainer required.
+            We run a structured audit against your landing page - checking message-match, trust signals, mobile layout, form friction, load time, and compliance - and deliver a prioritised fix list with specific instructions. If you want implementation, we do that too, at a flat rate, with no retainer required.
           </p>
           <p className="text-fg-muted">
-            When we publish a specific outcome claim, it comes with a recorded case behind it —
+            When we publish a specific outcome claim, it comes with a recorded case behind it -
             not just a number in a box. We don&apos;t have a verified case study to publish yet;
             see <a href="/case-studies" className="underline hover:text-fg">why</a>.
           </p>
@@ -34,7 +34,7 @@ export default function AboutPage() {
         <section className="mb-10 rounded-2xl border border-border bg-bg-panel p-6">
           <h2 className="mb-3 text-2xl font-bold text-accent">Who we work with</h2>
           <p className="mb-4 text-fg-muted">
-            Founders and operators who are actively spending on paid ads — Google, Meta, LinkedIn — and not seeing the conversions the click-through rate should produce. In our audits, the landing page is very often part of the problem — but we won&apos;t tell you it&apos;s the only variable. Traffic quality, offer, and price matter too; the audit tells you specifically what we can see on the page itself.
+            Founders and operators who are actively spending on paid ads - Google, Meta, LinkedIn - and not seeing the conversions the click-through rate should produce. In our audits, the landing page is very often part of the problem - but we won&apos;t tell you it&apos;s the only variable. Traffic quality, offer, and price matter too; the audit tells you specifically what we can see on the page itself.
           </p>
           <ul className="space-y-2 text-fg-muted">
             {[
@@ -54,7 +54,7 @@ export default function AboutPage() {
         <section className="mb-10 rounded-2xl border border-border bg-bg-panel p-6">
           <h2 className="mb-3 text-2xl font-bold text-accent">Current audit status</h2>
           <p className="text-fg-muted">
-            Automated URL submission and scoring are live. Drop in a URL and get a scored, evidence-backed diagnosis — no signup required.
+            Automated URL submission and scoring are live. Drop in a URL and get a scored, evidence-backed diagnosis - no signup required.
           </p>
           <Link href="/audit" className="mt-4 inline-block font-semibold text-accent hover:underline">
             Run a free audit →

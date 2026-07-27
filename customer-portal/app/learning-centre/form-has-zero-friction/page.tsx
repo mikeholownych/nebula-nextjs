@@ -46,7 +46,7 @@ export default function FormHasZeroFrictionPage() {
           <p className="mt-5 text-lg leading-relaxed text-fg-muted">
             You&rsquo;ve already done everything right: minimal fields, a single step, no email
             verification required. And yet the form sits there, empty. The paradox most founders
-            never discover is that zero friction doesn&rsquo;t create ease — it creates doubt. When
+            never discover is that zero friction doesn&rsquo;t create ease - it creates doubt. When
             a form takes four seconds to fill out, visitors assume the response on the other end will
             take about as much effort.
           </p>
@@ -57,9 +57,9 @@ export default function FormHasZeroFrictionPage() {
           <h2 className="text-xl font-semibold text-fg">The Friction Removal Trap</h2>
           <p className="mt-4 leading-relaxed text-fg-muted">
             The advice is everywhere: fewer fields, shorter forms, remove every possible barrier.
-            It&rsquo;s not wrong advice. Anxiety-inducing friction — asking for a phone number on
+            It&rsquo;s not wrong advice. Anxiety-inducing friction - asking for a phone number on
             the first touchpoint, requiring account creation before a free trial, demanding a budget
-            before a conversation — does kill conversions. So founders remove it. All of it.
+            before a conversation - does kill conversions. So founders remove it. All of it.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
             But the optimisation stops at the form itself. Nobody audits what surrounds the form,
@@ -73,8 +73,8 @@ export default function FormHasZeroFrictionPage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-semibold text-fg">What Friction Actually Signals</h2>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            Effort signals legitimacy. A form that takes two minutes to fill out — a short
-            paragraph, a specific question about the project, a checkbox about timeline — feels like
+            Effort signals legitimacy. A form that takes two minutes to fill out - a short
+            paragraph, a specific question about the project, a checkbox about timeline - feels like
             it leads to a real, considered response. A form that takes four seconds feels like it
             routes to a CRM queue where someone might follow up in a week, or might not.
           </p>
@@ -82,7 +82,7 @@ export default function FormHasZeroFrictionPage() {
             This isn&rsquo;t about making forms longer. It&rsquo;s about understanding that the
             visitor is reading the form as evidence of how seriously the company takes inbound
             enquiries. A bare name-and-email form communicates very little. A form with a specific
-            prompt — &ldquo;What&rsquo;s the one thing your current setup can&rsquo;t do?&rdquo; —
+            prompt - &ldquo;What&rsquo;s the one thing your current setup can&rsquo;t do?&rdquo; -
             communicates that someone on the other end will actually read the answer.
           </p>
         </section>
@@ -100,14 +100,14 @@ export default function FormHasZeroFrictionPage() {
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
             <strong className="text-fg">Effort friction</strong> is neutral or negative depending on
-            context. Asking for a project description is effort friction — it slightly raises the
+            context. Asking for a project description is effort friction - it slightly raises the
             bar but also signals that the response will be tailored. On a landing page for a
             high-consideration service, this type of friction increases conversion by filtering for
             intent.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            <strong className="text-fg">Commitment friction</strong> — being asked to agree to a
-            follow-up call, select a preferred time, or choose a starting date — almost always
+            <strong className="text-fg">Commitment friction</strong> - being asked to agree to a
+            follow-up call, select a preferred time, or choose a starting date - almost always
             backfires at the form stage. It assumes readiness the visitor hasn&rsquo;t signalled.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
@@ -133,12 +133,12 @@ export default function FormHasZeroFrictionPage() {
             From the outside, this form could belong to anyone. It could route to a single founder
             checking email twice a week or an automated sequence that sends three follow-up emails
             regardless of what was typed. The visitor has no way to distinguish, so they make an
-            assumption — usually the pessimistic one.
+            assumption - usually the pessimistic one.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
             The form area is not just a data-capture mechanism. It&rsquo;s the last trust checkpoint
-            before the visitor commits. Everything around the form — who responds, how quickly, what
-            the next step looks like — needs to be answered before the visitor reaches the button.
+            before the visitor commits. Everything around the form - who responds, how quickly, what
+            the next step looks like - needs to be answered before the visitor reaches the button.
           </p>
         </section>
 
@@ -148,7 +148,7 @@ export default function FormHasZeroFrictionPage() {
           <p className="mt-4 leading-relaxed text-fg-muted">
             Assume for a moment that someone does fill out the form. What happens? If the answer is
             a generic &ldquo;Thanks, we&rsquo;ll be in touch&rdquo; message with no confirmation
-            email, no indication of response time, and no next step — the visitor has no reason to
+            email, no indication of response time, and no next step - the visitor has no reason to
             believe the submission went anywhere.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
@@ -158,8 +158,8 @@ export default function FormHasZeroFrictionPage() {
             post-submit experience is part of the conversion, not a consequence of it.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            A confirmation that sets expectations — &ldquo;You&rsquo;ll hear from us within one
-            business day&rdquo; — plus an automated email that repeats what was submitted and
+            A confirmation that sets expectations - &ldquo;You&rsquo;ll hear from us within one
+            business day&rdquo; - plus an automated email that repeats what was submitted and
             confirms receipt, makes the form feel like it worked. That feeling is the difference
             between a visitor who waits and one who doesn&rsquo;t.
           </p>
@@ -177,7 +177,7 @@ export default function FormHasZeroFrictionPage() {
           <ul className="mt-4 space-y-3 text-fg-muted">
             <li className="leading-relaxed">
               <strong className="text-fg">Who responds?</strong> A name, a face, or a specific role
-              — &ldquo;Tom from our solutions team reviews every submission&rdquo; — makes the
+              - &ldquo;Tom from our solutions team reviews every submission&rdquo; - makes the
               response feel human rather than automated.
             </li>
             <li className="leading-relaxed">
@@ -192,8 +192,8 @@ export default function FormHasZeroFrictionPage() {
             </li>
             <li className="leading-relaxed">
               <strong className="text-fg">Who else has done this?</strong> A single client name or
-              outcome placed adjacent to the submit button — not at the top of the page, but right
-              next to the action — catches the visitor at peak hesitation.
+              outcome placed adjacent to the submit button - not at the top of the page, but right
+              next to the action - catches the visitor at peak hesitation.
             </li>
           </ul>
           <p className="mt-4 leading-relaxed text-fg-muted">
@@ -207,7 +207,7 @@ export default function FormHasZeroFrictionPage() {
           <h2 className="text-xl font-semibold text-fg">See What&rsquo;s Missing Around Your Form</h2>
           <p className="mt-4 leading-relaxed text-fg-muted">
             The audit checks your page&rsquo;s above-fold structure, trust signals, and CTA
-            placement. It won&rsquo;t tell you your form fields are wrong — it&rsquo;ll tell you
+            placement. It won&rsquo;t tell you your form fields are wrong - it&rsquo;ll tell you
             what&rsquo;s missing around your form that makes visitors hesitate.
           </p>
           <Link

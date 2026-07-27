@@ -5,7 +5,7 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Agency Handoff Debt: 7 Regressions That Kill Conversions',
   description:
-    'You hired an agency, got a great landing page, then handed it to a developer for minor changes. Here are the 7 ways it quietly stopped working — and how to find them.',
+    'You hired an agency, got a great landing page, then handed it to a developer for minor changes. Here are the 7 ways it quietly stopped working - and how to find them.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/learning-centre/agency-handoff-debt',
   },
@@ -15,7 +15,7 @@ const articleSchema = createArticleSchema({
   headline:
     'Agency Handoff Debt: 7 Silent Regressions That Kill Landing Page Performance',
   description:
-    'You hired an agency, got a great landing page, then handed it to a developer for minor changes. Here are the 7 ways it quietly stopped working — and how to find them.',
+    'You hired an agency, got a great landing page, then handed it to a developer for minor changes. Here are the 7 ways it quietly stopped working - and how to find them.',
   url: 'https://nebulacomponents.shop/learning-centre/agency-handoff-debt',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
@@ -47,7 +47,7 @@ export default function AgencyHandoffDebtPage() {
           </h1>
           <p className="mt-5 text-lg text-fg-muted leading-relaxed">
             The agency delivered. You reviewed it, approved it, and it was converting. Then you
-            handed it to a developer for "a few minor tweaks" — and three months later you're
+            handed it to a developer for "a few minor tweaks" - and three months later you're
             wondering why traffic went up but leads went down. This is agency handoff debt: the
             compounding damage that accumulates when a page moves from the people who optimised it
             to the people who maintain it. It isn't malice. It isn't even carelessness. It's the
@@ -65,7 +65,7 @@ export default function AgencyHandoffDebtPage() {
             Agency copywriters write meta descriptions at 155–160 characters because that's the
             search-result cutoff. They test the phrasing, include a verb, and front-load the value
             prop. When a developer consolidates the head section or migrates to a new CMS, the
-            description often gets shortened — either truncated manually or dropped to a generic
+            description often gets shortened - either truncated manually or dropped to a generic
             fallback. Google rewrites your snippet, click-through rate drops 10–20%, and nothing in
             your analytics dashboard tells you why.
           </p>
@@ -84,7 +84,7 @@ export default function AgencyHandoffDebtPage() {
           <p className="mt-4 text-fg-muted leading-relaxed">
             Agencies place testimonials and client logos in the first scroll because research is
             unanimous: social proof above the fold converts. Developers fix mobile layout issues by
-            reordering sections — it is one practical way to stop something breaking on a 390px
+            reordering sections - it is one practical way to stop something breaking on a 390px
             screen. The testimonials move down. The layout looks fine. Nobody moves them back,
             because the problem they solved (the mobile bug) is gone.
           </p>
@@ -102,7 +102,7 @@ export default function AgencyHandoffDebtPage() {
           </h2>
           <p className="mt-4 text-fg-muted leading-relaxed">
             Agencies install tracking scripts precisely: Meta Pixel, Google Ads conversion tag,
-            LinkedIn Insight Tag — each fired on specific events. When a developer inherits the
+            LinkedIn Insight Tag - each fired on specific events. When a developer inherits the
             codebase and runs a "clean up the scripts" pass, duplicate-looking tags get removed.
             The agency's event-specific pixel fires on button click. The developer's consolidated
             tag fires on page load. They look the same in the head. They measure completely
@@ -111,7 +111,7 @@ export default function AgencyHandoffDebtPage() {
           <p className="mt-3 text-fg-muted leading-relaxed">
             If your ad platform reported a sudden drop in conversion events around the same time as
             a development sprint, this is almost certainly what happened. Reinstating the pixel
-            doesn't recover the lost attribution data — it only stops future bleeding.
+            doesn't recover the lost attribution data - it only stops future bleeding.
           </p>
         </section>
 
@@ -122,7 +122,7 @@ export default function AgencyHandoffDebtPage() {
           </h2>
           <p className="mt-4 text-fg-muted leading-relaxed">
             Agency copywriters write H1s with keyword alignment in mind. The headline may sound
-            slightly unnatural in isolation — that's intentional. It matches the language a
+            slightly unnatural in isolation - that's intentional. It matches the language a
             prospect types into Google, not the language a founder prefers on a slide deck.
             Developers (and founders reviewing their own pages) frequently edit the H1 to something
             that sounds sharper, more brand-aligned, or "less SEO-y." The ranking signal for the
@@ -151,7 +151,7 @@ export default function AgencyHandoffDebtPage() {
           <p className="mt-3 text-fg-muted leading-relaxed">
             Run a PageSpeed Insights report on the current URL. If Time to First Byte or Largest
             Contentful Paint has degraded since the agency's handoff date, the JavaScript bundle
-            has grown. Every 100ms of added latency costs roughly 1% of conversions — the math is
+            has grown. Every 100ms of added latency costs roughly 1% of conversions - the math is
             not theoretical.
           </p>
         </section>
@@ -164,7 +164,7 @@ export default function AgencyHandoffDebtPage() {
           <p className="mt-4 text-fg-muted leading-relaxed">
             Agency-built pages reference logo images from a specific asset directory. When a
             developer migrates the project to a new framework, restructures the public folder, or
-            moves to a CDN, the paths break. Broken image tags don't throw JavaScript errors —
+            moves to a CDN, the paths break. Broken image tags don't throw JavaScript errors -
             they render as empty boxes. Visitors see blank spaces where "As seen in Forbes" or
             client logos used to be. The trust signal disappears silently, and it can persist for
             months before anyone notices because internal reviewers aren't looking for it.
@@ -192,7 +192,7 @@ export default function AgencyHandoffDebtPage() {
           </p>
           <p className="mt-3 text-fg-muted leading-relaxed">
             Read your primary CTA button text aloud. If it doesn't include a verb that describes an
-            outcome — not an action the visitor takes, but a result they receive — it has been
+            outcome - not an action the visitor takes, but a result they receive - it has been
             softened past the point of effectiveness. Restore the original, or write a new version
             that follows the same pattern: verb + specific outcome.
           </p>
@@ -204,8 +204,8 @@ export default function AgencyHandoffDebtPage() {
           <p className="mt-4 text-fg-muted leading-relaxed">
             None of these seven changes would crater a page on its own. A slightly shorter meta
             description costs you a few clicks. A misplaced testimonial costs you a few conversions.
-            A softened CTA costs you a few leads. But all seven together — which is the typical
-            state of a page six months after a developer handoff — create a compounding drag where
+            A softened CTA costs you a few leads. But all seven together - which is the typical
+            state of a page six months after a developer handoff - create a compounding drag where
             every layer of the funnel is running at 80% of its original efficiency. The output is a
             page that looks like the agency's page, passes a casual review, and converts at half
             the rate.
@@ -223,7 +223,7 @@ export default function AgencyHandoffDebtPage() {
           <h2 className="text-xl font-bold text-fg">Find Your Handoff Regressions in 60 Seconds</h2>
           <p className="mt-4 text-fg-muted leading-relaxed">
             If you handed your page to someone else in the last six months, you probably have at
-            least three of these. The audit takes 60 seconds to find them — it checks your meta
+            least three of these. The audit takes 60 seconds to find them - it checks your meta
             description length, H1 keyword alignment, CTA text, social proof placement, page speed,
             and broken assets in a single pass. You'll know exactly which regressions are live on
             your page before you finish your coffee.
@@ -257,7 +257,7 @@ export default function AgencyHandoffDebtPage() {
               </Link>
               <p className="mt-1 text-sm text-fg-muted">
                 A systematic walkthrough of the most common reasons high-traffic pages produce
-                low-lead volume — starting with the opening screen and working down.
+                low-lead volume - starting with the opening screen and working down.
               </p>
             </li>
             <li>
@@ -280,7 +280,7 @@ export default function AgencyHandoffDebtPage() {
                 What should be above the fold on a landing page →
               </Link>
               <p className="mt-1 text-sm text-fg-muted">
-                The five elements that must appear before the first scroll — and the ordering that
+                The five elements that must appear before the first scroll - and the ordering that
                 converts best based on eye-tracking and heatmap data.
               </p>
             </li>

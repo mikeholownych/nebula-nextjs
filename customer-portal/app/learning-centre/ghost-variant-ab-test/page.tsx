@@ -5,7 +5,7 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Ghost Variant: When A/B Test Winners Are False Positives',
   description:
-    'A ghost variant is when your control quietly breaks mid-test — a missing pixel, a truncated H1, a 404ing social proof block — and the "winning" variant wins by default. Here is how to detect it before you ship.',
+    'A ghost variant is when your control quietly breaks mid-test - a missing pixel, a truncated H1, a 404ing social proof block - and the "winning" variant wins by default. Here is how to detect it before you ship.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/learning-centre/ghost-variant-ab-test',
   },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const articleSchema = createArticleSchema({
   headline: 'The Ghost Variant: When Your A/B Test Winner Is a False Positive',
   description:
-    'A ghost variant is when your control quietly breaks mid-test — a missing pixel, a truncated H1, a 404ing social proof block — and the "winning" variant wins by default. Here is how to detect it before you ship.',
+    'A ghost variant is when your control quietly breaks mid-test - a missing pixel, a truncated H1, a 404ing social proof block - and the "winning" variant wins by default. Here is how to detect it before you ship.',
   url: 'https://nebulacomponents.shop/learning-centre/ghost-variant-ab-test',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
@@ -46,7 +46,7 @@ export default function GhostVariantAbTestPage() {
           </h1>
           <p className="mt-4 text-lg text-fg-muted leading-relaxed">
             Your test platform declared a winner. Variant B beat the control by 14%. You ship it.
-            What you never checked: variant A — your control — stopped rendering its social proof
+            What you never checked: variant A - your control - stopped rendering its social proof
             section on mobile three days into the test. The pixel misfired on Safari. The H1
             truncated. Variant B didn't win. The control lost. That distinction matters, because
             now variant B is your new control, and you have no idea what you're actually
@@ -61,7 +61,7 @@ export default function GhostVariantAbTestPage() {
           </h2>
           <p className="mt-4 text-fg-muted leading-relaxed">
             A ghost variant is a control that has silently degraded during the test window. It is
-            not visibly broken — nobody files a bug report, no monitoring alert fires — but one or
+            not visibly broken - nobody files a bug report, no monitoring alert fires - but one or
             more elements have failed in a way that suppresses conversions specifically for that
             variant. The challenger variant, running clean, appears to win. The test platform
             reports a statistically significant uplift. You ship.
@@ -88,7 +88,7 @@ export default function GhostVariantAbTestPage() {
           </h2>
           <p className="mt-4 text-fg-muted leading-relaxed">
             <strong className="text-fg">CDN cache poisoning during the test window.</strong> You
-            update a component, purge the cache, the CDN rehydrates from origin — but only for
+            update a component, purge the cache, the CDN rehydrates from origin - but only for
             one variant. The other variant's cached version is stale. Now the control is serving
             a three-week-old JavaScript bundle that conflicts with a library you updated. The
             symptom is a silent JS error that prevents your form submit handler from firing.
@@ -98,7 +98,7 @@ export default function GhostVariantAbTestPage() {
             hero headline for a campaign. They edit the page, not the variant. The test platform
             is A/B testing URLs, not snapshots. The control's H1 now reads differently than it
             did on day one. Your test is no longer measuring what you thought it was measuring.
-            If the new headline is weaker, the control's conversion rate drops — not because your
+            If the new headline is weaker, the control's conversion rate drops - not because your
             hypothesis was wrong, but because a content editor made a change nobody logged.
           </p>
           <p className="mt-4 text-fg-muted leading-relaxed">
@@ -107,7 +107,7 @@ export default function GhostVariantAbTestPage() {
             page loads fast enough that the snippet resolves before user interaction. On mobile,
             on a congested network, the page is interactive before the snippet fires. The
             platform's conversion event never registers for those sessions. Your control's mobile
-            conversion rate looks low. It's not — it's just not being counted.
+            conversion rate looks low. It's not - it's just not being counted.
           </p>
           <p className="mt-4 text-fg-muted leading-relaxed">
             <strong className="text-fg">HTTPS migration leftovers.</strong> You migrated to HTTPS
@@ -115,7 +115,7 @@ export default function GhostVariantAbTestPage() {
             logos from a third-party CDN over HTTP. Modern browsers block mixed content.
             Desktop Chrome blocked it quietly at migration time; nobody noticed because the
             widget has a CSS fallback. But on the control variant, that blank space where five
-            customer logos used to appear is costing you conversions — and has been since you
+            customer logos used to appear is costing you conversions - and has been since you
             started the test.
           </p>
         </section>
@@ -126,8 +126,8 @@ export default function GhostVariantAbTestPage() {
             Why Standard Analytics Won't Catch It
           </h2>
           <p className="mt-4 text-fg-muted leading-relaxed">
-            Your A/B testing platform — whether it's Optimizely, VWO, Google Optimize, or a
-            homegrown split-test setup — measures one thing: did a session assigned to variant X
+            Your A/B testing platform - whether it's Optimizely, VWO, Google Optimize, or a
+            homegrown split-test setup - measures one thing: did a session assigned to variant X
             result in a conversion event? It does not audit the page state at the moment of that
             session. It does not check whether the H1 rendered, whether the trust badge loaded,
             or whether the form submit handler was reachable. It counts events.
@@ -139,14 +139,14 @@ export default function GhostVariantAbTestPage() {
             a session where it loaded perfectly. Both show a bounce. Neither tells you the cause.
           </p>
           <p className="mt-4 text-fg-muted leading-relaxed">
-            Synthetic monitoring tools like Pingdom or UptimeRobot check availability — is the
+            Synthetic monitoring tools like Pingdom or UptimeRobot check availability - is the
             URL returning a 200? They do not check whether specific elements within the page
             rendered correctly. Your page returns a 200. The tracking pixel inside it silently
             failed. Pingdom reports green. Your control is a ghost.
           </p>
           <p className="mt-4 text-fg-muted leading-relaxed">
-            The only tool that catches this is one that renders the page — both variants,
-            across multiple viewport sizes and network conditions — and checks element-level
+            The only tool that catches this is one that renders the page - both variants,
+            across multiple viewport sizes and network conditions - and checks element-level
             health signals: payload size, H1 presence, image load status, meta tag completeness,
             and script execution order. That is not a monitoring product. That is a page audit.
           </p>
@@ -159,7 +159,7 @@ export default function GhostVariantAbTestPage() {
           </h2>
           <p className="mt-4 text-fg-muted leading-relaxed">
             Shipping a false positive winner is bad. What happens next is worse. The variant you
-            shipped — variant B, the accidental winner — is now your new control. Your next test
+            shipped - variant B, the accidental winner - is now your new control. Your next test
             will measure against it. If it also has a silent defect, your next winner will be
             even more degraded relative to your actual best possible page. You are not
             optimising upward. You are optimising sideways on a declining baseline.
@@ -203,7 +203,7 @@ export default function GhostVariantAbTestPage() {
           <p className="mt-4 text-fg-muted leading-relaxed">
             <strong className="text-fg">Verify tracking pixel parity.</strong> Open both variant
             URLs in a network inspector. Count the pixel fires. If the control fires three
-            pixels and the challenger fires four — or vice versa — your conversion data is not
+            pixels and the challenger fires four - or vice versa - your conversion data is not
             measuring the same thing. You cannot declare a winner from asymmetric tracking.
           </p>
           <p className="mt-4 text-fg-muted leading-relaxed">
@@ -215,11 +215,11 @@ export default function GhostVariantAbTestPage() {
           </p>
           <p className="mt-4 text-fg-muted leading-relaxed">
             <strong className="text-fg">Check H1 uniqueness and render fidelity.</strong> An H1
-            that truncates on mobile — because a CSS update removed{' '}
+            that truncates on mobile - because a CSS update removed{' '}
             <code className="rounded bg-bg px-1 py-0.5 text-sm font-mono text-fg">
               overflow-wrap: break-word
             </code>{' '}
-            — is still technically present in the DOM. Your SEO tools report it as present.
+            - is still technically present in the DOM. Your SEO tools report it as present.
             But visually, users see a broken headline that ends mid-sentence. That is a
             rendering failure, not a content failure. Auditing the DOM alone does not catch it.
           </p>
@@ -234,21 +234,21 @@ export default function GhostVariantAbTestPage() {
             Do not ship the winner. Stop the test.
           </p>
           <p className="mt-4 text-fg-muted leading-relaxed">
-            Audit the control — the original variant A — against a known-clean version of the
+            Audit the control - the original variant A - against a known-clean version of the
             page. If you have a Git history or a CMS version history, pull up the page state
             from the day the test started and compare it to the current control. Look for
             payload differences, element-level changes, and tracking discrepancies.
           </p>
           <p className="mt-4 text-fg-muted leading-relaxed">
-            If you find a defect, fix it. Then restart the test from a clean baseline — both
+            If you find a defect, fix it. Then restart the test from a clean baseline - both
             variants freshly deployed, both audited before traffic is split. Do not attempt to
             statistically adjust for the ghost period. The contaminated data cannot be salvaged;
             it will only introduce noise into your analysis. Cut it and start clean.
           </p>
           <p className="mt-4 text-fg-muted leading-relaxed">
-            If you cannot find a specific defect but the numbers looked suspiciously clean —
+            If you cannot find a specific defect but the numbers looked suspiciously clean -
             very fast statistical significance, conversion lift concentrated on one device
-            category, or a sudden uplift spike mid-test — treat it as a ghost until proven
+            category, or a sudden uplift spike mid-test - treat it as a ghost until proven
             otherwise. A healthy skepticism about easy wins is not pessimism; it is the correct
             Bayesian prior when you know how frequently pages degrade silently.
           </p>
@@ -266,7 +266,7 @@ export default function GhostVariantAbTestPage() {
           </h2>
           <p className="mt-4 text-fg-muted leading-relaxed">
             Before you declare a winner, audit both variants. The Nebula audit catches rendering
-            failures, payload bloat, and metadata mismatches in 60 seconds — giving you the
+            failures, payload bloat, and metadata mismatches in 60 seconds - giving you the
             element-level health signals your test platform was never designed to surface.
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -297,7 +297,7 @@ export default function GhostVariantAbTestPage() {
                 Why Your Landing Page Isn't Converting →
               </Link>
               <p className="mt-1 text-sm text-fg-muted">
-                The structural and technical reasons conversion rates stall — beyond copy and
+                The structural and technical reasons conversion rates stall - beyond copy and
                 design.
               </p>
             </li>
@@ -321,7 +321,7 @@ export default function GhostVariantAbTestPage() {
                 Mobile Landing Page Leaks →
               </Link>
               <p className="mt-1 text-sm text-fg-muted">
-                The silent rendering failures that only appear on mobile — and the specific
+                The silent rendering failures that only appear on mobile - and the specific
                 elements most likely to break.
               </p>
             </li>
@@ -334,7 +334,7 @@ export default function GhostVariantAbTestPage() {
               </Link>
               <p className="mt-1 text-sm text-fg-muted">
                 When sessions are high and submissions are zero, the problem is almost always
-                technical — not persuasive.
+                technical - not persuasive.
               </p>
             </li>
           </ul>

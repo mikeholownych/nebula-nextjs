@@ -5,7 +5,7 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Social Proof Backfire: The 4 Testimonial Configurations That Hurt Conversion | Nebula',
   description:
-    'Four specific testimonial configurations that actively reduce trust below baseline — stock photos, stale dates, ICP mismatch, and generic claims. How to diagnose and fix each one.',
+    'Four specific testimonial configurations that actively reduce trust below baseline - stock photos, stale dates, ICP mismatch, and generic claims. How to diagnose and fix each one.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/learning-centre/social-proof-backfire',
   },
@@ -15,7 +15,7 @@ const articleSchema = createArticleSchema({
   headline:
     'Social Proof Backfire: The 4 Testimonial Configurations That Hurt Conversion More Than No Testimonials At All',
   description:
-    'Four specific testimonial configurations that actively reduce trust below baseline — stock photos, stale dates, ICP mismatch, and generic claims. How to diagnose and fix each one.',
+    'Four specific testimonial configurations that actively reduce trust below baseline - stock photos, stale dates, ICP mismatch, and generic claims. How to diagnose and fix each one.',
   url: 'https://nebulacomponents.shop/learning-centre/social-proof-backfire',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
@@ -48,7 +48,7 @@ export default function SocialProofBackfirePage() {
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-fg-muted">
             If your page has testimonials and still doesn't convert, the problem probably isn't
-            missing social proof — it's broken social proof. Certain testimonial configurations
+            missing social proof - it's broken social proof. Certain testimonial configurations
             don't just fail to help; they actively lower trust below the baseline of having no
             testimonials at all. Here are the four patterns, what your visitor's brain does when it
             sees each one, and the exact fix.
@@ -69,13 +69,13 @@ export default function SocialProofBackfirePage() {
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
             The visitor doesn't consciously think "that is a fake person." They just feel vaguely
-            suspicious of the whole section. The testimonial has not only failed to build trust — it
+            suspicious of the whole section. The testimonial has not only failed to build trust - it
             has planted a seed of doubt that contaminates every other claim on the page.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
             <strong className="text-fg">The fix:</strong> Use a real headshot from your customer or
-            remove the avatar entirely. A genuine, slightly imperfect photo — bad lighting, informal
-            crop — signals authenticity more powerfully than a polished one. If you don't have a
+            remove the avatar entirely. A genuine, slightly imperfect photo - bad lighting, informal
+            crop - signals authenticity more powerfully than a polished one. If you don't have a
             headshot, show a company logo instead. A logo is verifiable. A stock face is not.
           </p>
         </section>
@@ -100,7 +100,7 @@ export default function SocialProofBackfirePage() {
             <strong className="text-fg">The fix:</strong> Date every testimonial. If your most
             recent dated testimonial is more than 18 months old, prioritise collecting a fresh one
             before the next traffic campaign. In the interim, remove the date rather than display a
-            stale one — but treat this as a temporary measure, not a solution. Recency is a
+            stale one - but treat this as a temporary measure, not a solution. Recency is a
             trust signal that cannot be faked or omitted indefinitely.
           </p>
         </section>
@@ -127,7 +127,7 @@ export default function SocialProofBackfirePage() {
             <strong className="text-fg">The fix:</strong> Match the testimonial source to the
             visitor persona on each specific page. If you serve multiple segments, create
             segment-specific landing pages with segment-appropriate testimonials. The rule is
-            simple: the person in the testimonial should look like the person reading the page — in
+            simple: the person in the testimonial should look like the person reading the page - in
             role, company size, and the problem they were trying to solve.
           </p>
         </section>
@@ -140,7 +140,7 @@ export default function SocialProofBackfirePage() {
           <p className="mt-4 leading-relaxed text-fg-muted">
             "This changed my business!" is not a testimonial. It is a vague positive statement, and
             the visitor's brain reads vagueness as fabrication. When a real customer has a real
-            result, they describe it in specific terms — a number, a time frame, a named problem
+            result, they describe it in specific terms - a number, a time frame, a named problem
             that went away. The absence of specifics signals that the quote was either invented or
             too embarrassing in its modesty to include as written.
           </p>
@@ -182,7 +182,7 @@ export default function SocialProofBackfirePage() {
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">Find the Trust Leaks on Your Page</h2>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            Nebula's audit identifies social proof failures — including cases where testimonials are
+            Nebula's audit identifies social proof failures - including cases where testimonials are
             present but structurally undermined by stock photos, stale dates, ICP mismatch, or
             vague outcomes. You'll see exactly which configurations are costing you conversion and
             what to replace them with.
@@ -198,7 +198,7 @@ export default function SocialProofBackfirePage() {
               href="/learning-centre/proof-before-cta"
               className="text-sm text-fg-muted underline underline-offset-4 hover:text-fg transition-colors"
             >
-              Read: Proof Before CTA — why placement matters as much as quality
+              Read: Proof Before CTA - why placement matters as much as quality
             </Link>
           </div>
         </section>
