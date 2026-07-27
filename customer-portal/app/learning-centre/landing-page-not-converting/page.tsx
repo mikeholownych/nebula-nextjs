@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
@@ -18,7 +19,7 @@ const articleSchema = createArticleSchema({
     'A landing page that does not convert paid traffic has at least one of five diagnosable leak patterns. Diagnose the right one before you change anything.',
   url: 'https://nebulacomponents.shop/learning-centre/landing-page-not-converting',
   publishedDate: '2026-07-16',
-  modifiedDate: '2026-07-21',
+  modifiedDate: '2026-07-27',
 })
 
 const faqItems = [
@@ -517,6 +518,29 @@ export default function LandingPageNotConvertingPage() {
                   </p>
                 </div>
               ))}
+            </div>
+          </section>
+
+          {/* Real audit screenshot - not a mockup */}
+          <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
+              Not a mockup
+            </p>
+            <h2 className="mb-4 text-2xl font-bold text-fg">
+              This is a real audit, not an illustration
+            </h2>
+            <p className="mb-6 leading-relaxed text-fg-muted">
+              We ran nebulacomponents.shop through the same audit engine every visitor uses.
+              No edits, no cherry-picked run - this is the actual results screen.
+            </p>
+            <div className="overflow-hidden rounded-2xl border border-border">
+              <Image
+                src="/screenshots/audit-results-example.webp"
+                alt="Real Nebula audit results for nebulacomponents.shop showing a 7.4/10 conversion readiness score, Grade B, 0 critical issues, 0 warnings, and 2 advisory findings"
+                width={1600}
+                height={650}
+                className="h-auto w-full"
+              />
             </div>
           </section>
 

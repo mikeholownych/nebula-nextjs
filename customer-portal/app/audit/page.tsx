@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { getPublicClaim } from '@/app/lib/evidence-atoms'
 import { auditWebApplicationSchema } from '@/app/lib/schema'
 import AuditForm from './AuditForm'
@@ -83,6 +84,31 @@ export default function AuditPage() {
               <AuditForm />
             </div>
 
+          </div>
+        </section>
+
+        {/* ── 1b. Real self-audit screenshot - not a mockup ── */}
+        <section className="border-t border-border px-6 py-14">
+          <div className="mx-auto max-w-4xl">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
+              Not a mockup
+            </p>
+            <h2 className="mb-4 text-2xl font-bold tracking-tight text-fg md:text-3xl">
+              This is a real audit of our own homepage.
+            </h2>
+            <p className="mb-6 max-w-2xl text-fg-muted">
+              We ran nebulacomponents.shop through the same audit engine every visitor uses.
+              No edits, no cherry-picked run - this is the actual results screen.
+            </p>
+            <div className="overflow-hidden rounded-2xl border border-border">
+              <Image
+                src="/screenshots/audit-results-example.webp"
+                alt="Real Nebula audit results for nebulacomponents.shop showing a 7.4/10 conversion readiness score, Grade B, 0 critical issues, 0 warnings, and 2 advisory findings"
+                width={1600}
+                height={650}
+                className="h-auto w-full"
+              />
+            </div>
           </div>
         </section>
 
