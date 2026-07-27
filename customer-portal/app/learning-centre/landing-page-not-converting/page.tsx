@@ -579,6 +579,48 @@ export default function LandingPageNotConvertingPage() {
                   label:
                     'Landing Page Load Time Slow: Signal 4 Diagnosis and Fix',
                 },
+                {
+                  href: '/learning-centre/tiktok-ads-not-converting',
+                  label:
+                    'TikTok Ads Getting Views But No Sales: The Landing Page Disconnect',
+                },
+                {
+                  href: '/learning-centre/linkedin-ads-not-converting',
+                  label:
+                    'LinkedIn Ads Getting Clicks But No Conversions: The Page Is Usually Why',
+                },
+                {
+                  href: '/learning-centre/before-you-raise-ad-budget',
+                  label: 'Before You Raise Ad Budget, Run This Leak Check',
+                },
+                {
+                  href: '/learning-centre/cta-not-working',
+                  label: 'CTA Not Working? Fix Commitment, Clarity, And Timing',
+                },
+                {
+                  href: '/learning-centre/proof-before-cta',
+                  label:
+                    'Proof Before CTA: The Simple Fix Most Landing Pages Miss',
+                },
+                {
+                  href: '/learning-centre/traffic-but-no-form-fills',
+                  label:
+                    'Traffic But No Form Fills: The Form Is Usually Not The First Leak',
+                },
+                {
+                  href: '/learning-centre/mobile-landing-page-leaks',
+                  label: 'Mobile Landing Page Leaks That Kill Paid Traffic',
+                },
+                {
+                  href: '/learning-centre/ecommerce-landing-page-not-converting',
+                  label:
+                    'Ecommerce Landing Page Not Converting? The Product Page Is A Leak',
+                },
+                {
+                  href: '/learning-centre/landing-page-intelligence-stack',
+                  label:
+                    'Landing Page Intelligence Stack: 6 Evidence-Grade Workflows',
+                },
               ].map(({ href, label }) => (
                 <Link
                   key={href}
