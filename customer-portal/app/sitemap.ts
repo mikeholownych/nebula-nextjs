@@ -27,6 +27,7 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
       '/roas-cliff',
       '/social-proof-landing-page',
       '/what-is-landing-page-audit',
+      '/playbooks',
     ],
     priority: 0.7,
   },
@@ -57,6 +58,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     }))
 
+  // Relocated out of /learning-centre (2026-07-27) — founder-productivity/
+  // AI-ops content, not part of getArticles()'s conversion-diagnosis scan.
+  const playbookEntries: MetadataRoute.Sitemap = [
+    'founder-second-brain',
+    'linkedin-skill-engine',
+    'specialist-ai-agent-library',
+  ].map((slug) => ({
+    url: `${BASE_URL}/playbooks/${slug}`,
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
+
   const caseStudyEntries: MetadataRoute.Sitemap = getPublishedCaseStudies().map(({ slug }) => ({
     url: `${BASE_URL}/case-studies/${slug}`,
     changeFrequency: 'yearly',
@@ -73,5 +86,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // lastModified is intentionally omitted until each content object has a
   // truthful, durable publication/update timestamp. Build time is not freshness.
-  return [homeEntry, ...coreEntries, ...articleEntries, ...caseStudyEntries, ...citableEntries]
+  return [homeEntry, ...coreEntries, ...articleEntries, ...playbookEntries, ...caseStudyEntries, ...citableEntries]
 }

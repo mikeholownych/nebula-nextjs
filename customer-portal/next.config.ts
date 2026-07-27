@@ -58,6 +58,13 @@ const nextConfig: NextConfig = {
       { source: '/agency-partner.html',                 destination: '/pricing',             permanent: true },
       { source: '/ai-ops-retainer.html',                destination: '/pricing',             permanent: true },
       { source: '/beta-tester.html',                    destination: '/pricing',             permanent: true },
+      // Relocated out of /learning-centre (2026-07-27): founder-productivity/
+      // AI-ops content, not landing-page conversion diagnosis — topically
+      // off-hub per the Cluster audit, given its own /playbooks section
+      // instead of being pruned, since all three had live inbound traffic.
+      { source: '/learning-centre/founder-second-brain',        destination: '/playbooks/founder-second-brain',        permanent: true },
+      { source: '/learning-centre/linkedin-skill-engine',       destination: '/playbooks/linkedin-skill-engine',       permanent: true },
+      { source: '/learning-centre/specialist-ai-agent-library', destination: '/playbooks/specialist-ai-agent-library', permanent: true },
       // True orphans → 410 Gone (no equity to preserve, no equivalent page)
       { source: '/ad-burn-leaderboard.html',            destination: '/gone',                permanent: true },
       { source: '/og-card-source.html',                 destination: '/gone',                permanent: true },

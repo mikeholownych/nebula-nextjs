@@ -6,13 +6,13 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Founder Second Brain: Capture and Reuse Your Best Thinking | Nebula Components',
   description: 'How founders can build an AI-assisted second brain to capture decisions, frameworks, and content that compounds over time.',
-  alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/founder-second-brain' },
+  alternates: { canonical: 'https://nebulacomponents.shop/playbooks/founder-second-brain' },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'Founder Second Brain: Capture and Reuse Your Best Thinking',
   description: 'How founders can build an AI-assisted second brain to capture decisions, frameworks, and content that compounds over time.',
-  url: 'https://nebulacomponents.shop/learning-centre/founder-second-brain',
+  url: 'https://nebulacomponents.shop/playbooks/founder-second-brain',
   publishedDate: '2025-07-15',
   modifiedDate: '2026-07-19',
 })
@@ -26,14 +26,14 @@ export default function FounderSecondBrainPage() {
         <ol className="flex items-center gap-2 text-sm text-fg-muted">
           <li><Link href="/" className="hover:text-fg">Home</Link></li>
           <li aria-hidden="true">/</li>
-          <li><Link href="/learning-centre" className="hover:text-fg">Learning Centre</Link></li>
+          <li><Link href="/playbooks" className="hover:text-fg">Playbooks</Link></li>
           <li aria-hidden="true">/</li>
           <li className="text-fg" aria-current="page">Founder Second Brain</li>
         </ol>
       </nav>
 
       <article className="mx-auto max-w-4xl px-6 py-12">
-        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Content Systems</p>
+        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Founder Systems</p>
         <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
           Founder Second Brain: Turn Your Expertise Into Compounding Output
         </h1>
@@ -102,7 +102,15 @@ export default function FounderSecondBrainPage() {
           </div>
         </section>
 
-        <section className="mt-16 rounded-xl border border-accent/30 bg-accent/5 p-8 text-center">
+        <section className="mt-10 rounded-xl border border-border bg-bg-muted/20 p-6">
+          <h2 className="mb-3 text-lg font-semibold text-fg">Related playbooks</h2>
+          <ul className="space-y-2 text-sm">
+            <li><Link href="/playbooks/linkedin-skill-engine" className="text-accent hover:underline">LinkedIn Skill Engine: Build Authority With Your Own Experience</Link></li>
+            <li><Link href="/playbooks/specialist-ai-agent-library" className="text-accent hover:underline">Specialist AI Agent Library: Deploy Purpose-Built Agents for Growth</Link></li>
+          </ul>
+        </section>
+
+        <section className="mt-10 rounded-xl border border-accent/30 bg-accent/5 p-8 text-center">
           <h2 className="text-2xl font-bold text-fg">Start With the Audit</h2>
           <p className="mt-4 max-w-xl mx-auto text-fg-muted">
             Before building content systems, understand what is leaking on your landing page. Fix the conversion floor first so new content has somewhere to land.
@@ -116,7 +124,7 @@ export default function FounderSecondBrainPage() {
         </section>
 
         <div className="mt-8">
-          <Link href="/learning-centre" className="text-sm text-fg-muted hover:text-fg">← Learning Centre</Link>
+          <Link href="/playbooks" className="text-sm text-fg-muted hover:text-fg">← Playbooks</Link>
         </div>
       </article>
 

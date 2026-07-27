@@ -1,11 +1,21 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
+import { createArticleSchema } from '../../lib/schema'
+
 export const metadata: Metadata = {
   title: 'Specialist AI Agent Library: Deploy Purpose-Built Agents for Growth | Nebula Components',
   description: 'How to build and deploy a library of specialist AI agents that handle defined tasks in your growth and operations stack.',
-  alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/specialist-ai-agent-library' },
+  alternates: { canonical: 'https://nebulacomponents.shop/playbooks/specialist-ai-agent-library' },
 }
+
+const articleSchema = createArticleSchema({
+  headline: 'Specialist AI Agent Library: Deploy Purpose-Built Agents for Growth',
+  description: 'How to build and deploy a library of specialist AI agents that handle defined tasks in your growth and operations stack.',
+  url: 'https://nebulacomponents.shop/playbooks/specialist-ai-agent-library',
+  publishedDate: '2025-07-15',
+  modifiedDate: '2026-07-19',
+})
 
 const DOMAIN_MAP = [
   {
@@ -64,17 +74,25 @@ const ANTI_PATTERNS = [
   'no performance tracking',
 ]
 
-export default function LearningCentrePage() {
+export default function SpecialistAiAgentLibraryPage() {
   return (
-    <main id="main-content" className="min-h-screen bg-bg pt-24">
-      <div className="mx-auto max-w-3xl px-6 py-14">
-        <Link href="/learning-centre" className="text-sm font-semibold text-accent hover:text-accent-light transition-colors">
-          ← Learning Centre
-        </Link>
+    <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
 
-        <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
+      <nav aria-label="Breadcrumb" className="mx-auto max-w-3xl px-6 pt-6">
+        <ol className="flex items-center gap-2 text-sm text-fg-muted">
+          <li><Link href="/" className="hover:text-fg">Home</Link></li>
+          <li aria-hidden="true">/</li>
+          <li><Link href="/playbooks" className="hover:text-fg">Playbooks</Link></li>
+          <li aria-hidden="true">/</li>
+          <li className="text-fg" aria-current="page">Specialist AI Agent Library</li>
+        </ol>
+      </nav>
+
+      <div className="mx-auto max-w-3xl px-6 py-8">
+        <div className="rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
-            AI Ops Systems · extracted from NipPro AI
+            Founder Systems · extracted from NipPro AI
           </p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
             Specialist AI Agent Library
@@ -128,6 +146,14 @@ export default function LearningCentrePage() {
           </ul>
         </section>
 
+        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-6">
+          <h2 className="mb-3 text-lg font-semibold text-fg">Related playbooks</h2>
+          <ul className="space-y-2 text-sm">
+            <li><Link href="/playbooks/founder-second-brain" className="text-accent hover:underline">Founder Second Brain: Capture and Reuse Your Best Thinking</Link></li>
+            <li><Link href="/playbooks/linkedin-skill-engine" className="text-accent hover:underline">LinkedIn Skill Engine: Build Authority With Your Own Experience</Link></li>
+          </ul>
+        </section>
+
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Want this installed instead of documented?</h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
@@ -144,6 +170,10 @@ export default function LearningCentrePage() {
             </Link>
           </div>
         </section>
+
+        <div className="mt-8">
+          <Link href="/playbooks" className="text-sm text-fg-muted hover:text-fg">← Playbooks</Link>
+        </div>
       </div>
     </main>
   )
