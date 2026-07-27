@@ -111,6 +111,7 @@ body {
 
 .page {
   min-height: 100vh;
+  padding-top: 96px; /* nav is fixed ~64px; 96px matches pt-24 Tailwind */
 }
 
 /* ─── HEADER ─────────────────────────────────────────────── */

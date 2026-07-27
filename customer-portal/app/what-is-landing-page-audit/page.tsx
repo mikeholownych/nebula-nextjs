@@ -52,7 +52,7 @@ export default function WhatIsLandingPageAudit() {
       />
 
       {/* Article Header */}
-      <header className="bg-[#0d1117] py-16 px-6">
+      <header className="bg-[#0d1117] pt-28 pb-16 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-emerald-400 text-xs font-bold mb-4">
             Landing Page Guide

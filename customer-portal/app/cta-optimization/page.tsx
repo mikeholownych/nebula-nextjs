@@ -32,7 +32,7 @@ const relatedArticles = [
 
 export default function CtaOptimizationPage() {
   return (
-    <div className="min-h-screen bg-bg text-fg font-sans">
+    <div className="min-h-screen bg-bg text-fg font-sans pt-24">
       {/* Main Content */}
       <main className="max-w-[720px] mx-auto px-6 py-12">
         <h1 className="text-[clamp(1.8rem,4vw,2.4rem)] font-extrabold leading-tight text-fg mt-8 mb-4">

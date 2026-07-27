@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function RoasCliffPage() {
   return (
-    <div className="min-h-screen bg-bg-elevated text-fg">
+    <div className="min-h-screen bg-bg-elevated text-fg pt-24">
       <div className="max-w-[740px] mx-auto px-6 py-16 pb-32">
 
         <p className="text-fg-muted text-sm mb-12">

@@ -61,7 +61,7 @@ export default function PageSpeedConversion() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFaq) }}
       />
-      <div className="max-w-[720px] mx-auto px-6 py-12 pb-20">
+      <div className="max-w-[720px] mx-auto px-6 pt-28 pb-20">
         <header className="border-b border-border pb-6 mb-12 flex justify-between items-center">
           <a className="text-fg font-bold text-sm tracking-wider uppercase no-underline hover:text-accent transition-colors" href="/">● Nebula Components</a>
           <a className="bg-accent text-bg text-[13px] font-semibold px-4 py-2 rounded-md no-underline hover:bg-accent-light transition-colors" href="/audit">Run free audit →</a>

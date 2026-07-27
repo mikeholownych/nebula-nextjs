@@ -66,7 +66,7 @@ export default async function CheckoutPage({ searchParams }: Props) {
               </li>
             ))}
           </ul>
-          <div className="flex justify-between border-t border-border pt-4 font-bold">
+          <div className="flex justify-between border-t border-border pt-24 font-bold">
             <span className="text-fg">One-time total</span>
             <span className="text-accent">{fixPackPrice}</span>
           </div>

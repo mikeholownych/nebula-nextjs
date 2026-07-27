@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function SocialProofLandingPage() {
   return (
-    <div className="min-h-screen bg-bg text-fg-muted leading-relaxed text-[17px]">
+    <div className="min-h-screen bg-bg text-fg-muted leading-relaxed text-[17px] pt-24">
       {/* Google Analytics - loaded after consent */}
       <script
         dangerouslySetInnerHTML={{

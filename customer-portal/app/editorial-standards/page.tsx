@@ -75,7 +75,7 @@ export default function EditorialStandardsPage() {
           </div>
         </section>
 
-        <footer className="mt-12 pt-8 border-t border-border">
+        <footer className="mt-12 pt-24 border-t border-border">
           <p className="text-sm text-fg-dim">Last updated: July 15, 2026</p>
         </footer>
       </div>

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main id="main-content" className="min-h-screen bg-bg text-fg">
+    <main id="main-content" className="min-h-screen bg-bg text-fg pt-24">
       <div className="mx-auto max-w-3xl px-6 py-16">
         <h1 className="mb-6 text-4xl font-bold">About Nebula Components</h1>
         <p className="mb-6 text-lg leading-relaxed text-fg-muted">

@@ -8,7 +8,7 @@ export default function CaseStudiesContent({
 }) {
   const hasPublishedStudies = studies.length > 0
   return (
-    <main id="main-content" role="main" className="min-h-screen bg-bg">
+    <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
       <section className="mx-auto max-w-4xl px-6 py-16">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Case Studies</p>
         <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
