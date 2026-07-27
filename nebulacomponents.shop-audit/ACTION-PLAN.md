@@ -36,19 +36,19 @@ Prioritized by severity and dependency. Complete Phase 1 before anything else �
 
 ## Phase 3: Content & Authority (month 2)
 
-18. Relocate or prune the 3 topically off-hub articles (`founder-second-brain`, `linkedin-skill-engine`, `specialist-ai-agent-library`) — one explicitly discloses it was sourced from a different product.
-19. Add `Article`+`FAQPage` schema and real dates to `google-ads-quality-score-low` to match its siblings.
-20. Fix or remove the dead `/a2a` and `/mcp` endpoints (agent.json/mcp/server-card.json advertise them; both 404).
-21. Add a CSP header (start `Report-Only`, tune around Stripe/GA4/Consent Mode, then enforce).
-22. Add `poweredByHeader: false`; add a normalizing redirect for the `/pricing`/`/pricing/` trailing-slash variant.
-23. Publish one founder-narrated video (audit walkthrough) — YouTube is the strongest available brand-mention correlate with AI citation and this site currently has zero.
-24. Add `CollectionPage`/`ItemList` schema to `/learning-centre`; add `WebApplication` schema to `/audit`; add enriched `Person` schema to `/about/team`.
-25. Set up Moz + Bing Webmaster free-tier API keys for real backlink/DA-PA data on the next audit.
+18. ✅ **Relocated the 3 topically off-hub articles** (`founder-second-brain`, `linkedin-skill-engine`, `specialist-ai-agent-library`) to a new `/playbooks` section, with 301 redirects, sitemap updates, and category cleanup.
+19. ⚠️ **Partially done, rest intentionally skipped.** Added `Article` schema and real published/modified dates to `google-ads-quality-score-low` (matching its siblings). Did **not** add `FAQPage` schema — the SEO skill's current guidance is that Google retired FAQ rich results for all sites (May 2026) and explicitly advises against adding *new* FAQPage markup for SERP benefit. This is a deliberate deviation from the original recommendation, not an oversight.
+20. ✅ **Removed the dead `/a2a` and `/mcp` endpoints** — deleted `agent.json`, `agent-card.json`, and `mcp/server-card.json` (all three advertised endpoints that live-404; confirmed no real A2A/MCP server exists). Cleaned up the matching Link headers and `agent-skills/index.json` entries.
+21. ✅ **Added a CSP header in `Report-Only` mode**, scoped to GA4 (googletagmanager.com), PostHog (proxied same-origin via `/ingest`), and Stripe (plain-link checkout navigation, no script/iframe footprint needed).
+22. ✅ **Added `poweredByHeader: false`** and a `/pricing/` → `/pricing` redirect.
+23. ⛔ **Not done — needs the founder, not me.** Publishing a founder-narrated video requires real video production by a human; flagging rather than fabricating.
+24. ✅ **Added `CollectionPage`/`ItemList` schema to `/learning-centre`.** `WebApplication` schema on `/audit` and enriched `Person` schema on `/about/team` were already completed in Phase 2.
+25. ⛔ **Not done — needs your decision.** Moz and Bing Webmaster API signup requires account creation (and a card, for Moz) under your identity — not something to do unilaterally.
 
 ## Phase 4: Monitoring & Iteration (ongoing)
 
-26. Re-run this audit's Performance and Visual passes once Phase 0 ships — current numbers reflect the outage state.
-27. Capture a drift baseline (`/seo drift baseline https://nebulacomponents.shop`) now that a full audit exists, so future changes can be diffed against this state.
-28. Set up Google Search Console + PageSpeed Insights API credentials to replace lab-only estimates with real field data.
-29. Add `Applebot-Extended` to the robots.txt training-block list; update `llms.txt` to reference canonical `/about`/`/about/team` URLs instead of the redirecting `/company/*` aliases.
-30. Once a real client outcome exists, publish it as the first case study — the site's own "no fake case studies" stance makes this a genuinely linkable, citable asset when it lands.
+26. ✅ **Re-ran Performance and Visual passes.** Both initial re-runs reported false regressions caused by concurrent build/deploy activity during this same session, not real bugs — corrected in both findings files with an explicit note rather than silently overwritten. Genuine remaining findings: LCP fails "Good" on every page/device tested, mobile TBT (INP proxy) is Poor site-wide, homepage has real CLS (0.171 mobile/0.118 desktop) — see `findings/performance.md` for detail. These are real optimization backlog items, not incidents.
+27. ✅ **Captured the first drift baseline** for https://nebulacomponents.shop (`baseline_id: 1`, 2026-07-27).
+28. ⛔ **Not done — needs your Google account.** GSC + PageSpeed Insights API credentials require OAuth setup under your Google account.
+29. ✅ **Added `Applebot-Extended`** to robots.txt's training-block list; **updated `llms.txt`** to point at canonical `/about`/`/about/team` instead of the redirecting `/company/*` aliases.
+30. ⛔ **Not actionable yet.** No real client outcome exists yet to publish as a case study — this is correctly blocked on the business having one, not on any technical work.
