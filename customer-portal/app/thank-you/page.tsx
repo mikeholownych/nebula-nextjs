@@ -13,7 +13,7 @@ export default function ThankYouPage() {
           <div className="mb-4 text-4xl">✓</div>
           <h1 className="mb-3 text-3xl font-bold text-fg">You&apos;re in.</h1>
           <p className="mb-2 text-fg-muted">
-            Your Fix Pack is confirmed. We&apos;ll contact you at the email used during checkout — expect to hear from us within a few hours.
+            Your Fix Pack is confirmed. We&apos;ll contact you at the email used during checkout - expect to hear from us within a few hours.
           </p>
           <p className="text-sm text-fg-muted">
             Payment status: confirmed. Your Stripe receipt is your payment confirmation.
@@ -25,7 +25,7 @@ export default function ThankYouPage() {
           <p className="font-semibold text-fg mb-1">Know someone else bleeding ad budget?</p>
           <p className="text-sm text-fg-muted mb-4">
             A lot of founders go through this with a business partner or someone in the same position.
-            Their audit is free — takes 60 seconds and names the exact leaks.
+            Their audit is free - takes 60 seconds and names the exact leaks.
           </p>
           <a
             href="/audit"

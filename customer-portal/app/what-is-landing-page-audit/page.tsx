@@ -54,7 +54,7 @@ export default function WhatIsLandingPageAudit() {
       {/* Article Header */}
       <header className="bg-[#0d1117] py-16 px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-4">
+          <p className="text-emerald-400 text-xs font-bold mb-4">
             Landing Page Guide
           </p>
           <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-4">
@@ -80,30 +80,30 @@ export default function WhatIsLandingPageAudit() {
             A landing page audit is a <strong className="text-white">systematic evaluation</strong> of your page across 5 conversion dimensions: headline clarity, CTA effectiveness, social proof, page speed, and mobile experience.
           </p>
           <p className="text-gray-300 mb-4">
-            It scores each dimension on a 1–10 scale and produces a prioritized fix list. It is not a subjective opinion — it's a scored diagnostic that reveals exactly where you're losing money.
+            It scores each dimension on a 1–10 scale and produces a prioritized fix list. It is not a subjective opinion - it's a scored diagnostic that reveals exactly where you're losing money.
           </p>
           <div className="bg-[#161b22] border border-[#30363d] rounded-lg p-6 my-6">
             <p className="text-emerald-400 font-semibold mb-2">The 5 Dimensions:</p>
             <ul className="space-y-2 text-gray-300">
               <li className="flex items-start gap-2">
                 <span className="text-emerald-500">→</span>
-                <span><strong className="text-white">Headline Clarity</strong> — Does it pass the "clarity test"?</span>
+                <span><strong className="text-white">Headline Clarity</strong> - Does it pass the "clarity test"?</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-emerald-500">→</span>
-                <span><strong className="text-white">CTA Effectiveness</strong> — Is the button visible? Compelling?</span>
+                <span><strong className="text-white">CTA Effectiveness</strong> - Is the button visible? Compelling?</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-emerald-500">→</span>
-                <span><strong className="text-white">Social Proof</strong> — Reviews? Testimonials? Results?</span>
+                <span><strong className="text-white">Social Proof</strong> - Reviews? Testimonials? Results?</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-emerald-500">→</span>
-                <span><strong className="text-white">Page Speed</strong> — Under 3 seconds? Mobile-first?</span>
+                <span><strong className="text-white">Page Speed</strong> - Under 3 seconds? Mobile-first?</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-emerald-500">→</span>
-                <span><strong className="text-white">Mobile Experience</strong> — Thumb-friendly? Readable?</span>
+                <span><strong className="text-white">Mobile Experience</strong> - Thumb-friendly? Readable?</span>
               </li>
             </ul>
           </div>
@@ -201,7 +201,7 @@ export default function WhatIsLandingPageAudit() {
             Ready to Audit Your Landing Page?
           </h3>
           <p className="text-gray-300 mb-6">
-            Automated, evidence-backed scoring is live — drop in a URL and see your results in seconds.
+            Automated, evidence-backed scoring is live - drop in a URL and see your results in seconds.
           </p>
           <Link
             href="/audit"

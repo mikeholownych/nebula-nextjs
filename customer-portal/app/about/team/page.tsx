@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Mike H — Founder, Nebula Components',
+  title: 'Mike H - Founder, Nebula Components',
   description: 'Mike H is the founder of Nebula Components.',
   alternates: { canonical: 'https://nebulacomponents.shop/about/team' },
 }

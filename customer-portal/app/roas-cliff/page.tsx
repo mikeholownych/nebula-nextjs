@@ -3,11 +3,11 @@ import Link from 'next/link'
 import '../globals.css'
 
 export const metadata: Metadata = {
-  title: 'The ROAS Cliff — Why Your CTR Looks Fine and Your Page Converts Nobody | Nebula Components',
+  title: 'The ROAS Cliff - Why Your CTR Looks Fine and Your Page Converts Nobody | Nebula Components',
   description: 'A self-diagnostic guide for founders running paid traffic with zero or weak conversions. Score your landing page in 10 minutes. Find the monthly leak.',
   alternates: { canonical: 'https://nebulacomponents.shop/roas-cliff' },
   openGraph: {
-    title: 'The ROAS Cliff — Why Your CTR Looks Fine and Your Page Converts Nobody | Nebula Components',
+    title: 'The ROAS Cliff - Why Your CTR Looks Fine and Your Page Converts Nobody | Nebula Components',
     description: 'Score your landing page across 7 conversion signals. See your monthly leak estimate. Three fixes that actually move the number.',
     type: 'article',
     url: 'https://nebulacomponents.shop/roas-cliff',
@@ -36,11 +36,11 @@ export default function RoasCliffPage() {
         </h2>
 
         <p className="mb-5 text-fg-muted">
-          Monday morning. You open your ad account. CTR is 4.1%. Spend is up from last week. You check Shopify, or your CRM, or whatever you use to count sales. The number is wrong. Not a rounding error — it&apos;s just not there.
+          Monday morning. You open your ad account. CTR is 4.1%. Spend is up from last week. You check Shopify, or your CRM, or whatever you use to count sales. The number is wrong. Not a rounding error - it&apos;s just not there.
         </p>
 
         <p className="mb-5 text-fg-muted">
-          You go back to the ad manager. The click volume is real. The impressions are fine. You screenshot it and post somewhere — Reddit, a Slack group, a DM to someone you trust — and you write: &quot;Is Meta getting worse or is it me?&quot;
+          You go back to the ad manager. The click volume is real. The impressions are fine. You screenshot it and post somewhere - Reddit, a Slack group, a DM to someone you trust - and you write: &quot;Is Meta getting worse or is it me?&quot;
         </p>
 
         <p className="mb-5 text-fg-muted">
@@ -56,7 +56,7 @@ export default function RoasCliffPage() {
         <div className="border-t border-border my-12" />
 
         <h2 className="text-xl font-semibold mt-12 mb-4 text-fg">
-          Message match — the gap nobody talks about
+          Message match - the gap nobody talks about
         </h2>
 
         <p className="mb-5 text-fg-muted">
@@ -92,7 +92,7 @@ export default function RoasCliffPage() {
         <div className="bg-bg-panel border border-border rounded-lg p-6 my-4">
           <h3 className="text-base font-semibold mb-3 text-accent">Dimension 1: Message match</h3>
           <p className="mb-4 text-sm text-fg-muted">
-            If a stranger read only your ad copy and only your above-fold landing page copy in sequence — does the page feel like the next sentence of the same conversation?
+            If a stranger read only your ad copy and only your above-fold landing page copy in sequence - does the page feel like the next sentence of the same conversation?
           </p>
           <div className="space-y-3">
             <div className="flex gap-3 items-baseline border-b border-border pb-3">
@@ -181,11 +181,11 @@ export default function RoasCliffPage() {
         <div className="bg-danger/10 border border-danger/20 rounded-lg p-6 my-8">
           <div className="flex justify-between border-b border-danger/10 pb-3 mb-3 text-sm">
             <span className="text-fg-muted">0.4% conversion rate</span>
-            <span className="text-fg font-semibold">8 sales — $1,200 revenue — $3,800 net loss</span>
+            <span className="text-fg font-semibold">8 sales - $1,200 revenue - $3,800 net loss</span>
           </div>
           <div className="flex justify-between border-b border-danger/10 pb-3 mb-3 text-sm">
             <span className="text-fg-muted">1.5% conversion rate</span>
-            <span className="text-fg font-semibold">30 sales — $4,500 revenue — $500 net loss</span>
+            <span className="text-fg font-semibold">30 sales - $4,500 revenue - $500 net loss</span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-fg-muted">Monthly difference</span>
@@ -208,7 +208,7 @@ export default function RoasCliffPage() {
         </h3>
 
         <p className="mb-5 text-fg-muted">
-          Take the primary claim from your highest-traffic ad. Make the H1 on your landing page the next sentence of that claim. Not a rephrasing — a continuation.
+          Take the primary claim from your highest-traffic ad. Make the H1 on your landing page the next sentence of that claim. Not a rephrasing - a continuation.
         </p>
 
         <h3 className="text-base font-semibold mt-8 mb-3 text-accent">
@@ -216,7 +216,7 @@ export default function RoasCliffPage() {
         </h3>
 
         <p className="mb-5 text-fg-muted">
-          You almost certainly have evidence that your offer works — a customer result, a specific metric, a before/after. It&apos;s probably in a testimonials section halfway down the page. Move it up.
+          You almost certainly have evidence that your offer works - a customer result, a specific metric, a before/after. It&apos;s probably in a testimonials section halfway down the page. Move it up.
         </p>
 
         <h3 className="text-base font-semibold mt-8 mb-3 text-accent">
@@ -255,7 +255,7 @@ export default function RoasCliffPage() {
             href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
             className="inline-block border border-border text-fg-muted font-medium px-7 py-3 rounded-md mt-3 hover:border-accent transition-colors"
           >
-            Skip ahead — $97 Fix Pack
+            Skip ahead - $97 Fix Pack
           </Link>
           <p className="text-xs text-fg-muted mt-4">
             No discovery call. No testing phase. Full refund if we don&apos;t find a problem worth fixing.

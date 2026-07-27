@@ -89,7 +89,7 @@ export default function SocialProofLandingPage() {
         <p className="text-fg-muted text-lg mb-8">
           Every cold visitor has one unspoken question: 'Why should I trust you?'
           If your page doesn't answer it before asking for anything, conversion
-          drops. Social proof — testimonials, numbers, logos, guarantees —
+          drops. Social proof - testimonials, numbers, logos, guarantees -
           answers that question before it becomes an objection.
         </p>
 
@@ -99,7 +99,7 @@ export default function SocialProofLandingPage() {
             <strong className="text-fg">Quick Answer:</strong> You need at least one specific proof
             element visible before your first CTA. A verified customer count,
             a result-oriented quote, or a recognisable logo. Generic
-            praise doesn't work — specificity creates credibility. 'Great
+            praise doesn't work - specificity creates credibility. 'Great
             service!' is useless. '3.8% conversion rate after fixing our
             headline' converts.
           </p>
@@ -129,7 +129,7 @@ export default function SocialProofLandingPage() {
               Where should social proof go on a landing page?
             </h3>
             <p className="text-fg-muted text-[0.95rem] m-0">
-              Immediately adjacent to your primary CTA — ideally directly above
+              Immediately adjacent to your primary CTA - ideally directly above
               the submit button. Also in the hero section (social proof line like
               a verified customer result). The worst place
               is below the fold where skeptics never reach it.
@@ -144,7 +144,7 @@ export default function SocialProofLandingPage() {
               Because visitors can't verify them and they don't address the
               specific concern. 'Amazing tool, highly recommend!' is
               meaningless. 'Conversion rate went from 1.3% to 3.8% after fixing
-              the headline' is verifiable and outcome-specific — it converts.
+              the headline' is verifiable and outcome-specific - it converts.
             </p>
           </div>
 
@@ -163,7 +163,7 @@ export default function SocialProofLandingPage() {
 
         {/* Related Articles */}
         <section className="bg-bg-panel border border-border rounded-lg p-5 sm:p-6 mt-12">
-          <h3 className="text-fg-muted uppercase tracking-wide text-sm mb-3">
+          <h3 className="text-fg-muted text-sm mb-3">
             Related Articles
           </h3>
           <Link
@@ -186,7 +186,7 @@ export default function SocialProofLandingPage() {
             See exactly where your page leaks.
           </h2>
           <p className="text-fg-muted mb-6">
-            Automated audit scoring is live and evidence-backed — no signup required.
+            Automated audit scoring is live and evidence-backed - no signup required.
           </p>
           <Link
             href="/audit"
