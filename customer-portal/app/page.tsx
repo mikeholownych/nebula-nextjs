@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SelfScan from './components/SelfScan'
 import AggregateProof from './components/AggregateProof'
-import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE, PAID_TRAFFIC_DIAGNOSTIC } from './lib/homepageContent'
+import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE } from './lib/homepageContent'
+import { homeFAQSchema } from './lib/faq-schemas'
 
 export const metadata: Metadata = {
   title: HOMEPAGE_SEO_TITLE,
@@ -18,278 +19,353 @@ export const metadata: Metadata = {
   },
 }
 
+const SIGNALS = [
+  { key: 'message_match', label: 'Message match', desc: 'Ad promise matches page headline' },
+  { key: 'trust_signals', label: 'Trust signals', desc: 'Social proof visible above fold' },
+  { key: 'mobile_cta', label: 'Mobile CTA', desc: 'Primary action visible without scroll' },
+  { key: 'load_time', label: 'Load time', desc: 'LCP under 2.5s on mobile' },
+  { key: 'cta_clarity', label: 'CTA clarity', desc: 'One clear action, no competing choices' },
+  { key: 'form_friction', label: 'Form friction', desc: 'Five fields or fewer, clear labels' },
+  { key: 'compliance', label: 'Compliance', desc: 'No consent banner blocking conversion' },
+]
+
+const PATTERNS = [
+  {
+    label: 'Most common',
+    heading: 'Pricing behind the email gate',
+    body: 'Asking for a commitment before delivering value. The visitor has not decided yet. You have already lost them.',
+    dominant: true,
+  },
+  {
+    label: 'Second most common',
+    heading: 'CTA you cannot see',
+    body: 'Green button on green background. Not a traffic problem - a visibility problem that A/B testing will not find.',
+    dominant: false,
+  },
+  {
+    label: 'Third most common',
+    heading: 'No proof above the fold',
+    body: 'Strangers do not trust strangers. Without social proof in the first scroll, the bounce is silent and final.',
+    dominant: false,
+  },
+]
+
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFAQSchema) }}
+      />
       <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
-      {/* Hero Section — Vindication Frame */}
-      <section className="mx-auto flex min-h-[70vh] max-w-4xl flex-col justify-center px-6 py-24 text-center">
-        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-          Landing Page Leak Check
-        </p>
-        <h1 className="text-4xl font-bold tracking-tight text-fg md:text-6xl">
-          Your ads worked.<br className="hidden sm:block" /> Your page didn't let them.
-        </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-xl font-medium text-fg">
-          Before you pause those ads — see if the page is what's killing them.
-        </p>
-        <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-fg-muted">
-          You followed the playbook. The page wasn't built for it. We find what's leaking and show you exactly what to fix — no signup needed.
-        </p>
-        
-        {/* CTA Button */}
-        <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-          <Link
-            href="/audit"
-            className="rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-lg"
-          >
-            Find the Leak →
-          </Link>
-        </div>
 
-        <SelfScan />
-        <AggregateProof />
-      </section>
+        {/* ── 1. Hero: asymmetric split ── */}
+        <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+          <div className="grid gap-12 md:grid-cols-2 md:items-start">
 
-      {/* Villain Section — The Ad Spend Problem */}
-      <section className="border-t border-border px-6 py-16">
-        <div className="mx-auto max-w-4xl">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-            The uncomfortable math
-          </p>
-          <h2 className="mb-6 text-3xl font-bold tracking-tight text-fg md:text-4xl">
-            The ads did their job. The page had one job.
-          </h2>
-          <p className="mb-8 max-w-2xl text-lg text-fg-muted leading-7">
-            Most founders who come to us have already spent real money on paid ads
-            <strong className="text-fg"> before</strong> asking whether the page was the problem.
-            The ads delivered clicks. The page didn't let them convert.
-          </p>
-
-          {/* The three friction patterns */}
-          <div className="mb-10 grid gap-4 md:grid-cols-3">
-            <div className="rounded-xl border border-border bg-bg-muted/40 p-5">
-              <p className="mb-1 text-sm font-semibold uppercase tracking-wider text-accent">Pattern 1</p>
-              <p className="font-semibold text-fg">Pricing behind the email gate</p>
-              <p className="mt-2 text-sm text-fg-muted">
-                Asking for a commitment before delivering the value. Visitors leave before they trust you.
+            {/* Left: copy */}
+            <div className="flex flex-col justify-center">
+              <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl lg:text-6xl">
+                Your ads worked.{' '}
+                <span className="text-fg-muted">Your page did not let them.</span>
+              </h1>
+              <p className="mt-6 max-w-lg text-lg leading-7 text-fg-muted">
+                Before you pause those ads - find out if the page is what is killing them.
+                Free. No signup. Under 2 minutes.
               </p>
-            </div>
-            <div className="rounded-xl border border-border bg-bg-muted/40 p-5">
-              <p className="mb-1 text-sm font-semibold uppercase tracking-wider text-accent">Pattern 2</p>
-              <p className="font-semibold text-fg">CTA you can't see</p>
-              <p className="mt-2 text-sm text-fg-muted">
-                Green button on green background. Barely-there contrast tanks click-through
-                before traffic quality ever enters the picture. Not a traffic problem. A visibility problem.
-              </p>
-            </div>
-            <div className="rounded-xl border border-border bg-bg-muted/40 p-5">
-              <p className="mb-1 text-sm font-semibold uppercase tracking-wider text-accent">Pattern 3</p>
-              <p className="font-semibold text-fg">No proof above the fold</p>
-              <p className="mt-2 text-sm text-fg-muted">
-                Strangers don't trust strangers. Without social proof in the first scroll,
-                the bounce is silent and final.
-              </p>
-            </div>
-          </div>
-
-          <p className="max-w-2xl text-base text-fg-muted leading-7">
-            Agencies A/B test these patterns for 90 days. That's not optimization —
-            that's billing you to confirm the page is broken.{' '}
-            <strong className="text-fg">Fix the page first. Then test.</strong>
-          </p>
-        </div>
-      </section>
-
-      {/* Objection Section — This isn't a sales call in disguise */}
-      <section className="border-t border-border bg-bg-muted/30 px-6 py-16">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="mb-4 text-2xl font-bold text-fg">
-            This isn't a sales call in disguise.
-          </h2>
-          <p className="mb-8 max-w-2xl text-lg text-fg-muted leading-7">
-            You've seen "free audit" — a PDF with 8 generic recommendations, three "opportunities," and a sales call at the end.
-            This is different.
-          </p>
-          <div className="grid gap-6 md:grid-cols-2">
-            <div>
-              <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-fg-muted">Other audits</p>
-              <ul className="space-y-2 text-sm text-fg-muted">
-                {[
-                  'Generic report generated in seconds',
-                  'Same 8 recommendations for every site',
-                  'Vague advice — you have to figure out how to apply it',
-                  'Gated behind a sales call',
-                  '3-month engagement to see results',
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <span className="mt-0.5 text-red-400">✕</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-accent">Nebula audit</p>
-              <ul className="space-y-2 text-sm text-fg-muted">
-                {[
-                  'Real scrape of your actual page',
-                  'Scored against 7 conversion signals',
-                  'Prioritized fixes with impact/effort scores',
-                  'No signup to see your results',
-                  '$97 Fix Pack: exact AI prompts to fix every issue, in minutes',
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <span className="mt-0.5 text-accent">✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* What You'll Get Section */}
-      <section className="border-t border-border bg-bg-muted/30 px-6 py-16">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="mb-10 text-center text-2xl font-bold text-fg">
-            What You'll Get
-          </h2>
-          <div className="grid gap-8 md:grid-cols-4">
-            <div className="text-center">
-              <div className="mb-3 text-4xl">📊</div>
-              <h3 className="mb-2 font-semibold text-fg">Evidence-Based Score</h3>
-              <p className="text-sm text-fg-muted">
-                Not opinions — actual analysis of above-fold content, signals, and speed.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="mb-3 text-4xl">🎯</div>
-              <h3 className="mb-2 font-semibold text-fg">Prioritized Fixes</h3>
-              <p className="text-sm text-fg-muted">
-                Quick wins vs major projects, ranked by impact and effort.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="mb-3 text-4xl">💰</div>
-              <h3 className="mb-2 font-semibold text-fg">Conversion Focus</h3>
-              <p className="text-sm text-fg-muted">
-                We diagnose landing pages leaking ad spend — that's our specialty.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="mb-3 text-4xl">✓</div>
-              <h3 className="mb-2 font-semibold text-fg">No Commitment</h3>
-              <p className="text-sm text-fg-muted">
-                Start free. Share email only if you want the full report.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works Section */}
-      <section className="px-6 py-16">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="mb-10 text-center text-2xl font-bold text-fg">
-            How It Works
-          </h2>
-          <div className="grid gap-8 md:grid-cols-3">
-            <div className="text-center">
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent text-xl font-bold text-bg">
-                1
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Link
+                  href="/audit"
+                  className="rounded-xl bg-accent px-7 py-3.5 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
+                >
+                  Find the Leak
+                </Link>
+                <Link
+                  href="/pricing"
+                  className="text-sm text-fg-muted hover:text-fg transition-colors"
+                >
+                  $97 Fix Pack if it fails &rarr;
+                </Link>
               </div>
-              <h3 className="mb-2 font-semibold text-fg">Enter Your URL</h3>
-              <p className="text-sm text-fg-muted">
-                Drop in any landing page URL — no account needed.
+              <AggregateProof />
+            </div>
+
+            {/* Right: live self-scan widget */}
+            <div className="flex flex-col gap-4">
+              <div className="rounded-2xl border border-border bg-bg-muted/30 p-6">
+                <p className="mb-1 text-xs font-semibold text-accent">Live - our own audit</p>
+                <p className="mb-4 text-xs text-fg-muted">Same engine every free scan uses.</p>
+                <SelfScan />
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ── 2. Seven signals grid ── */}
+        <section className="border-t border-border px-6 py-16">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-10 grid gap-2 md:grid-cols-2 md:items-end">
+              <h2 className="text-2xl font-bold tracking-tight text-fg md:text-3xl">
+                Seven signals. Every scan.
+              </h2>
+              <p className="text-base text-fg-muted md:text-right">
+                Not opinions. Specific pass/fail checks against your actual page.
               </p>
             </div>
-            <div className="text-center">
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent text-xl font-bold text-bg">
-                2
-              </div>
-              <h3 className="mb-2 font-semibold text-fg">Get Your Score</h3>
-              <p className="text-sm text-fg-muted">
-                We analyze above-fold content, SEO foundations, ad signals, and speed.
-              </p>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {SIGNALS.slice(0, 4).map((s) => (
+                <div key={s.key} className="rounded-xl border border-border bg-bg-muted/20 p-4">
+                  <p className="mb-1 font-semibold text-fg text-sm">{s.label}</p>
+                  <p className="text-xs text-fg-muted leading-5">{s.desc}</p>
+                </div>
+              ))}
             </div>
-            <div className="text-center">
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent text-xl font-bold text-bg">
-                3
-              </div>
-              <h3 className="mb-2 font-semibold text-fg">See Your Fixes</h3>
-              <p className="text-sm text-fg-muted">
-                Get prioritized recommendations with impact/effort scores.
-              </p>
+            <div className="mt-3 grid gap-3 sm:grid-cols-3">
+              {SIGNALS.slice(4).map((s) => (
+                <div key={s.key} className="rounded-xl border border-border bg-bg-muted/20 p-4">
+                  <p className="mb-1 font-semibold text-fg text-sm">{s.label}</p>
+                  <p className="text-xs text-fg-muted leading-5">{s.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Buyer education — substantive diagnostic context, not scanner filler */}
-      <section className="border-t border-border px-6 py-20">
-        <div className="mx-auto max-w-4xl">
-          <div className="max-w-2xl">
-            <h2 className="text-2xl font-extrabold text-fg md:text-4xl md:tracking-[-0.03em]">
-              Know what the click proved — and what it didn't.
+        {/* ── 3. Patterns: dominant + 2 ── */}
+        <section className="border-t border-border px-6 py-16">
+          <div className="mx-auto max-w-6xl">
+            <h2 className="mb-2 text-2xl font-bold tracking-tight text-fg md:text-3xl">
+              The ads did their job. The page had one job.
             </h2>
-            <p className="mt-4 text-base leading-7 text-fg-muted">
-              Paid traffic creates evidence. The page determines whether that evidence becomes a decision.
+            <p className="mb-10 max-w-xl text-base text-fg-muted leading-7">
+              Most founders spend real money on ads before asking whether the page was the problem.
+              These are the three failures we find most.
+            </p>
+            <div className="grid gap-4 lg:grid-cols-[1fr_1fr]">
+
+              {/* Dominant card */}
+              <div className="rounded-2xl border border-border bg-bg-muted/30 p-8 lg:row-span-2">
+                <p className="mb-1 text-xs font-semibold text-accent">{PATTERNS[0].label}</p>
+                <h3 className="mb-4 mt-1 text-xl font-bold text-fg">{PATTERNS[0].heading}</h3>
+                <p className="text-base text-fg-muted leading-7">{PATTERNS[0].body}</p>
+                <div className="mt-8 rounded-xl border border-border bg-bg p-4 font-mono text-xs text-fg-muted">
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="text-accent">message_match</span>
+                    <span className="text-signal-fail">3/10</span>
+                  </div>
+                  <div className="h-1.5 w-full rounded-full bg-border">
+                    <div className="h-1.5 w-[30%] rounded-full bg-signal-fail" />
+                  </div>
+                  <p className="mt-2 text-fg-muted">Ad: &quot;Get $97 audit&quot; &rarr; Page: &quot;Landing page help&quot;</p>
+                </div>
+              </div>
+
+              {/* Supporting cards */}
+              {PATTERNS.slice(1).map((p) => (
+                <div key={p.label} className="rounded-2xl border border-border bg-bg-muted/20 p-6">
+                  <p className="mb-1 text-xs font-semibold text-accent">{p.label}</p>
+                  <h3 className="mb-2 mt-1 text-base font-bold text-fg">{p.heading}</h3>
+                  <p className="text-sm text-fg-muted leading-6">{p.body}</p>
+                </div>
+              ))}
+            </div>
+
+            <p className="mt-8 max-w-xl text-sm text-fg-muted">
+              Agencies A/B test these for 90 days. That is not optimization - it is billing you to confirm the page is broken.{' '}
+              <strong className="text-fg">Fix the page first. Then test.</strong>
             </p>
           </div>
-          <div className="mt-12 divide-y divide-border border-y border-border">
-            {PAID_TRAFFIC_DIAGNOSTIC.map((section) => (
-              <article key={section.heading} className="grid gap-4 py-8 md:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] md:gap-12">
-                <h3 className="text-2xl font-extrabold text-fg">{section.heading}</h3>
-                <p className="max-w-[65ch] text-base leading-8 text-fg-muted">{section.body}</p>
-              </article>
-            ))}
+        </section>
+
+        {/* ── 4. How it works ── */}
+        <section className="border-t border-border bg-bg-muted/10 px-6 py-16">
+          <div className="mx-auto max-w-6xl">
+            <h2 className="mb-10 text-2xl font-bold tracking-tight text-fg md:text-3xl">
+              From URL to fix list in under 2 minutes.
+            </h2>
+            <div className="grid gap-0 md:grid-cols-3">
+              {[
+                {
+                  n: '01',
+                  heading: 'Paste your URL',
+                  body: 'Any public landing page. No account, no signup, no integration required.',
+                },
+                {
+                  n: '02',
+                  heading: 'Get 7 signals checked',
+                  body: 'Message match, trust, mobile CTA, load time, CTA clarity, form friction, compliance - scored against your actual page.',
+                },
+                {
+                  n: '03',
+                  heading: 'See what to fix first',
+                  body: 'Every failing signal ranked by conversion impact and effort. Specific findings from your page, not generic advice.',
+                },
+              ].map((step, i) => (
+                <div key={step.n} className={`border-border p-6 ${i < 2 ? 'md:border-r' : ''}`}>
+                  <p className="mb-3 font-mono text-xs text-fg-muted">{step.n}</p>
+                  <h3 className="mb-2 font-semibold text-fg">{step.heading}</h3>
+                  <p className="text-sm text-fg-muted leading-6">{step.body}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-8">
+              <Link
+                href="/audit"
+                className="rounded-xl bg-accent px-7 py-3.5 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-sm inline-block"
+              >
+                Run the audit free &rarr;
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Honest Proof Section — We audit ourselves first */}
-      <section className="border-t border-border px-6 py-16">
-        <div className="mx-auto max-w-4xl">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-            Honest enough to show you our own audit
-          </p>
-          <h2 className="mb-6 text-2xl font-bold text-fg">
-            We run this audit on ourselves first.
-          </h2>
-          <p className="max-w-2xl text-base leading-7 text-fg-muted mb-4">
-            7.4/10. Not 10/10. Real. That's what you're getting — actual data, not marketing claims.
-          </p>
-          <p className="max-w-2xl text-base leading-7 text-fg-muted mb-4">
-            Most landing-page tools lead with case studies they can't verify. We'd rather prove it on our own page first. 
-            Run the same audit on your page and see if it finds anything.
-          </p>
-          <p className="max-w-2xl text-sm text-fg-muted leading-7">
-            When we have a real client outcome with dates, proof, and a way for you to verify it, that goes here — not before.
-          </p>
-        </div>
-      </section>
+        {/* ── 5. Comparison: not a sales call ── */}
+        <section className="border-t border-border px-6 py-16">
+          <div className="mx-auto max-w-6xl">
+            <div className="grid gap-12 md:grid-cols-2 md:items-start">
+              <div>
+                <h2 className="mb-4 text-2xl font-bold tracking-tight text-fg md:text-3xl">
+                  Not a sales call in disguise.
+                </h2>
+                <p className="mb-6 text-base text-fg-muted leading-7">
+                  You have seen &quot;free audit&quot; - a PDF with 8 generic recommendations and a discovery call at the end.
+                  This is different. No email required to see your results.
+                </p>
+                <Link
+                  href="/audit"
+                  className="rounded-xl border border-accent px-6 py-3 text-sm font-semibold text-accent hover:bg-accent hover:text-bg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors inline-block"
+                >
+                  See what you actually get &rarr;
+                </Link>
+              </div>
+              <div className="grid gap-3">
+                <div className="rounded-xl border border-border bg-bg-muted/20 p-5">
+                  <p className="mb-3 text-xs font-semibold text-fg-muted">Other audits</p>
+                  <ul className="space-y-2 text-sm text-fg-muted">
+                    {[
+                      'Generic report - same 8 recommendations for every site',
+                      'Vague advice you have to figure out how to apply',
+                      'Gated behind a sales call',
+                      '3-month engagement to see results',
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-0.5 shrink-0 text-red-400">✕</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="rounded-xl border border-accent/30 bg-accent/5 p-5">
+                  <p className="mb-3 text-xs font-semibold text-accent">Nebula audit</p>
+                  <ul className="space-y-2 text-sm text-fg-muted">
+                    {[
+                      'Real scrape - scored against 7 specific conversion signals',
+                      'Prioritized fixes with impact and effort scores',
+                      'No signup to see your results',
+                      '$97 Fix Pack implements every identified fix',
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-0.5 shrink-0 text-accent">✓</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-      {/* Final CTA */}
-      <section className="px-6 py-16 text-center">
-        <div className="mx-auto max-w-2xl">
-          <h2 className="mb-4 text-2xl font-bold text-fg">
-            One more check before you decide.
-          </h2>
-          <p className="mb-8 text-fg-muted">
-            Run the audit. See if the page is the leak. Then you'll know.
-          </p>
-          <Link 
-            href="/audit" 
-            className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-lg"
-          >
-            Find the Leak →
-          </Link>
-        </div>
-      </section>
+        {/* ── 6. What the click proved: 3 items ── */}
+        <section className="border-t border-border px-6 py-16">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-10 max-w-2xl">
+              <h2 className="text-2xl font-bold tracking-tight text-fg md:text-3xl">
+                Know what the click proved - and what it did not.
+              </h2>
+              <p className="mt-3 text-base text-fg-muted leading-7">
+                A click proves the ad worked. The page determines whether that click becomes a decision.
+              </p>
+            </div>
+            <div className="divide-y divide-border border-t border-b border-border">
+              {[
+                {
+                  heading: 'A click is not the finish line.',
+                  body: 'An ad click proves the message created enough interest to investigate. The landing page carries that interest forward - or kills it. If the page changes the promise, hides the next step, or asks for trust before earning it, the visitor leaves and the ad gets blamed.',
+                },
+                {
+                  heading: 'The audit follows the actual path.',
+                  body: 'Nebula checks what a paid visitor experiences: message match, above-fold clarity, visible action, proof, mobile usability, performance, measurement. Each failing signal is tied to evidence from your page and ranked by likely impact. The report does not estimate revenue or promise a conversion lift that has not been measured.',
+                },
+                {
+                  heading: 'Use it as a stop-or-fix decision.',
+                  body: 'If the page passes, investigate the audience or offer instead. If it fails, you have a bounded repair list before spending another dollar on acquisition. Fix the highest-impact leak first, run the audit again, compare.',
+                },
+              ].map((item) => (
+                <article
+                  key={item.heading}
+                  className="grid gap-4 py-8 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-12"
+                >
+                  <h3 className="text-lg font-bold text-fg">{item.heading}</h3>
+                  <p className="text-sm leading-7 text-fg-muted">{item.body}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
 
-    </main>
+        {/* ── 7. Honest proof ── */}
+        <section className="border-t border-border bg-bg-muted/10 px-6 py-16">
+          <div className="mx-auto max-w-6xl grid gap-8 md:grid-cols-2 md:items-start">
+            <div>
+              <h2 className="mb-4 text-2xl font-bold tracking-tight text-fg">
+                We run this audit on ourselves first.
+              </h2>
+              <p className="text-base text-fg-muted leading-7">
+                7.4/10. Not 10/10. That is what you are getting - actual data, not marketing claims.
+                Most landing-page tools lead with case studies they cannot verify. We would rather prove it on our own page first.
+              </p>
+              <p className="mt-4 text-sm text-fg-muted">
+                When we have a real client outcome with dates and a way for you to verify it, it goes here - not before.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border bg-bg-muted/30 p-6 font-mono text-sm">
+              <p className="mb-4 text-xs text-fg-muted">
+                nebulacomponents.shop - last scan
+              </p>
+              {SIGNALS.map((s) => (
+                <div key={s.key} className="mb-2 flex items-center justify-between text-xs">
+                  <span className="text-fg-muted">{s.label}</span>
+                  <span className="text-accent">pass</span>
+                </div>
+              ))}
+              <div className="mt-3 border-t border-border pt-3 text-xs text-fg-muted">
+                Overall 7.4/10 · Grade B - real engine, real page
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 8. Final CTA ── */}
+        <section className="px-6 py-20 text-center">
+          <div className="mx-auto max-w-xl">
+            <h2 className="mb-3 text-2xl font-bold text-fg">
+              Run the audit before you spend another dollar.
+            </h2>
+            <p className="mb-8 text-base text-fg-muted">
+              Free. No signup. See if the page is the leak - then you will know.
+            </p>
+            <Link
+              href="/audit"
+              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
+            >
+              Find the Leak &rarr;
+            </Link>
+          </div>
+        </section>
+
+      </main>
     </>
   )
 }
