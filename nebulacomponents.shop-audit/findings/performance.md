@@ -36,7 +36,14 @@ CWV thresholds: LCP good ≤2.5s / poor >4.0s. CLS good ≤0.1 / poor >0.25. INP
 
 ## Findings
 
-### 1. Static asset cache headers are broken in production — the "fix" commit didn't take effect (Critical)
+### 1. ~~Static asset cache headers are broken in production~~ — CORRECTED: false positive, not a real bug (was: Critical)
+
+**Correction (2026-07-27, verified independently after this finding was filed):** This finding tested a stale chunk filename (`0uyff60c-srpz.js`) from a build that had already rotated out by the time of testing — the site was redeployed twice during this audit pass. The origin genuinely 404s for that filename now (confirmed via direct origin curl, `HTTP/1.1 404 Not Found`), and Next.js correctly sends `no-cache` headers on a 404 response — that is correct behavior, not the caching bug it was mistaken for. Cloudflare's edge was separately still serving a stale-but-harmless cached 200 copy of that old immutable asset, which is expected CDN behavior and not itself a problem.
+
+Verified against a **current, real chunk** referenced by the live homepage (`2iho8jepmwwua.js`), at both the public URL and the origin directly, repeated 3x: `cache-control: public, max-age=31536000, immutable` every time, at both layers. The cache-header fix from `8aa1434a` (and the systemd-restart fix that actually resolved it earlier in this audit's Phase 0) is intact and working correctly in production. No action needed on this item.
+
+<details><summary>Original (incorrect) finding, kept for record</summary>
+
 The commit `8aa1434a fix: add cache headers for static assets` added a `Cache-Control: public, max-age=31536000, immutable` rule for `/_next/static/(.*)` in `customer-portal/next.config.ts` (lines 167-176), but it was placed **after** a pre-existing catch-all rule (lines 158-166) that sets `Cache-Control: public, max-age=0, must-revalidate, no-transform` on `/(.*)`. In production, the catch-all wins:
 
 ```
@@ -46,6 +53,8 @@ cache-control: public, max-age=0, must-revalidate, no-transform
 
 Verified this is not a Cloudflare/tunnel artifact — hitting the Next.js origin directly (`curl -sI http://localhost:3000/_next/static/chunks/0uyff60c-srpz.js`, bypassing the Cloudflare Tunnel entirely) returns the identical wrong header. The `.next` build directory timestamp (03:16, matching the commit) confirms this is the current build, not a stale deploy. Every content-hashed JS/CSS/font chunk under `/_next/static/` is therefore served with `max-age=0, must-revalidate` instead of the intended 1-year immutable cache — repeat visitors re-validate every hashed, never-changing asset on every single page load. By contrast, `/favicon.ico` (matched by the later, more specific `/:path*.ico` rule at line 224) correctly returns `public, max-age=31536000, immutable`, confirming the mechanism: whichever generic `/(.*)` rule and specific rule both match, the config order and/or Next.js's header-merge behavior in this case is letting the general rule's value stand for `_next/static` paths specifically, even though the specific rule is defined later in the array.
 **Recommendation:** Reorder `next.config.ts` so the general `no-transform` catch-all (`source: '/(.*)'`, line ~159) is the *last* Cache-Control rule evaluated, not the first — or better, scope it with a negative-lookahead source (e.g. exclude `_next/static`, `brand`, and the image extensions) so it can never collide with the specific rules. After the change, re-run the exact `curl -sI` command above against both `localhost:3000` (origin) and the public URL to confirm `immutable` actually appears before considering this closed — the previous commit message asserted this was fixed and it demonstrably was not.
+
+</details>
 
 ### 2. LCP fails "Good" on every page and device tested (High)
 Mobile LCP: 4.14s (`/`), 3.56s (`/audit`), 4.06s (`/pricing`), 4.28s (learning-centre article) — three of four pages are in the *Poor* band (>4.0s). Desktop LCP: 3.5-3.8s across all four pages — *Needs Improvement* everywhere, none reach the 2.5s "Good" bar. Since TTFB is already fast (18-49ms) and render-blocking-resource savings are modest (110-430ms), the gap between FCP (1.1-1.8s) and LCP (3.5-4.3s) — roughly 2-2.7 seconds — is being spent on resource discovery/load and render delay for the actual LCP element, not on server latency or blocking CSS.
