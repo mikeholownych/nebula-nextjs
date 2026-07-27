@@ -23,14 +23,14 @@ export default function LearningCentrePage() {
             Meta Ads High Frequency? The Page May Be Burning Budget
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
-            When ad frequency climbs, most advertisers assume the audience is exhausted. But if clicks are still coming and conversions have stalled, the leak isn&apos;t the ad — it&apos;s the landing page failing to close.
+            When ad frequency climbs, most advertisers assume the audience is exhausted. But if clicks are still coming and conversions have stalled, the leak isn&apos;t the ad - it&apos;s the landing page failing to close.
           </p>
         </div>
 
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">When frequency matters</h2>
           <p className="leading-relaxed text-fg-muted">
-            Frequency indicates how many times the average person has seen your ad. A frequency above 5 with CTR dropping signals genuine audience fatigue — the creative has worn out its welcome.
+            Frequency indicates how many times the average person has seen your ad. A frequency above 5 with CTR dropping signals genuine audience fatigue - the creative has worn out its welcome.
           </p>
           <ul className="mt-4 space-y-2 text-fg-muted">
             <li className="flex items-start gap-3">
@@ -54,7 +54,7 @@ export default function LearningCentrePage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">When the page is the problem</h2>
           <p className="leading-relaxed text-fg-muted">
-            But here&apos;s the leak most miss: frequency high, clicks still strong, but conversions flat or falling. The ad is doing its job — people are clicking. The page is where they lose interest.
+            But here&apos;s the leak most miss: frequency high, clicks still strong, but conversions flat or falling. The ad is doing its job - people are clicking. The page is where they lose interest.
           </p>
           <ul className="mt-4 space-y-2 text-fg-muted">
             <li className="flex items-start gap-3">
@@ -71,7 +71,7 @@ export default function LearningCentrePage() {
             </li>
           </ul>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            This pattern means your ad spend is working — the page is burning the budget after the click.
+            This pattern means your ad spend is working - the page is burning the budget after the click.
           </p>
         </section>
 
@@ -99,7 +99,7 @@ export default function LearningCentrePage() {
             </li>
           </ul>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            If the new page converts at a higher rate while frequency remains stable, you&apos;ve found the leak. The audience was never tired — the page just wasn&apos;t closing.
+            If the new page converts at a higher rate while frequency remains stable, you&apos;ve found the leak. The audience was never tired - the page just wasn&apos;t closing.
           </p>
         </section>
 

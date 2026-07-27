@@ -37,7 +37,7 @@ const faqSchema = {
       name: 'How do I know what is above the fold on mobile?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Open your landing page in Chrome DevTools, set the device to iPhone 12 Pro (390x844), and screenshot what is visible without scrolling. Do not use a browser emulator as a substitute for a real device test — emulators do not replicate browser chrome height, font rendering, or thumb reach. Repeat at 375px (iPhone SE) for older Android coverage.',
+        text: 'Open your landing page in Chrome DevTools, set the device to iPhone 12 Pro (390x844), and screenshot what is visible without scrolling. Do not use a browser emulator as a substitute for a real device test - emulators do not replicate browser chrome height, font rendering, or thumb reach. Repeat at 375px (iPhone SE) for older Android coverage.',
       },
     },
     {
@@ -53,7 +53,7 @@ const faqSchema = {
       name: 'Should I put the CTA above the fold?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'For cold paid traffic: yes. The CTA should be visible without scrolling. It does not have to be the dominant element — the headline and proof carry more weight — but the CTA needs to be findable in the first viewport. For warm traffic (email list, retargeting), the CTA below the fold is acceptable because those visitors are more likely to scroll. Segment your traffic type before deciding.',
+        text: 'For cold paid traffic: yes. The CTA should be visible without scrolling. It does not have to be the dominant element - the headline and proof carry more weight - but the CTA needs to be findable in the first viewport. For warm traffic (email list, retargeting), the CTA below the fold is acceptable because those visitors are more likely to scroll. Segment your traffic type before deciding.',
       },
     },
     {
@@ -96,7 +96,7 @@ export default function AboveFoldLandingPagePage() {
               Above The Fold: What Paid Traffic Decides Before Scrolling
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
-              The fold is not a design concept — it is the boundary between the
+              The fold is not a design concept - it is the boundary between the
               ad spend that worked and the ad spend that was wasted. Most paid
               social traffic never scrolls past the first screen. For cold paid
               traffic, the above-fold section is the entire page. If it does not
@@ -112,30 +112,30 @@ export default function AboveFoldLandingPagePage() {
             <p className="leading-relaxed text-fg-muted">
               Cold paid traffic arrives with no prior brand relationship and no
               patience. They need to answer five questions the moment the page
-              loads — and the page has to answer them without requiring any
+              loads - and the page has to answer them without requiring any
               action from the visitor.
             </p>
             <ol className="mt-5 space-y-5">
               {[
                 {
-                  label: 'Headline — what it is and who it is for',
-                  body: 'Not your brand tagline. Not a clever play on words. A direct statement of the outcome you deliver, for the person you deliver it to. "We help SaaS founders reduce churn" is a headline. "Grow beyond limits" is noise. The headline should use the same noun phrase the ad used — the visitor arrived because of a specific promise, and the headline either confirms they are in the right place or it does not.',
+                  label: 'Headline - what it is and who it is for',
+                  body: 'Not your brand tagline. Not a clever play on words. A direct statement of the outcome you deliver, for the person you deliver it to. "We help SaaS founders reduce churn" is a headline. "Grow beyond limits" is noise. The headline should use the same noun phrase the ad used - the visitor arrived because of a specific promise, and the headline either confirms they are in the right place or it does not.',
                 },
                 {
-                  label: 'Subheadline — the mechanism',
+                  label: 'Subheadline - the mechanism',
                   body: 'One sentence that explains how you deliver the outcome. Specificity here does the trust-building work that the headline started. Vague subheadlines ("with the power of AI") undo the credibility the headline created.',
                 },
                 {
-                  label: 'Proof signal — one specific, credible data point',
-                  body: 'A number of customers, a recognisable logo, a specific result. Not a 5-star rating with no context — that is decoration, not proof. One specific, attributable proof element above the fold changes the trust calculus for a cold visitor.',
+                  label: 'Proof signal - one specific, credible data point',
+                  body: 'A number of customers, a recognisable logo, a specific result. Not a 5-star rating with no context - that is decoration, not proof. One specific, attributable proof element above the fold changes the trust calculus for a cold visitor.',
                 },
                 {
-                  label: 'Primary CTA — visible without scrolling',
-                  body: 'One action. Label that describes the outcome of clicking, not the mechanics: "Start my free trial" not "Submit." The CTA does not have to dominate the viewport — the headline carries more weight — but it must be findable without scrolling.',
+                  label: 'Primary CTA - visible without scrolling',
+                  body: 'One action. Label that describes the outcome of clicking, not the mechanics: "Start my free trial" not "Submit." The CTA does not have to dominate the viewport - the headline carries more weight - but it must be findable without scrolling.',
                 },
                 {
-                  label: 'Risk-reducer — something that lowers the cost of action',
-                  body: '"No credit card required." "Cancel any time." A money-back guarantee. Something specific that lowers the perceived risk of taking the CTA action. "Risk-free" alone is marketing copy — it does not answer the question of what risk-free means in practice.',
+                  label: 'Risk-reducer - something that lowers the cost of action',
+                  body: '"No credit card required." "Cancel any time." A money-back guarantee. Something specific that lowers the perceived risk of taking the CTA action. "Risk-free" alone is marketing copy - it does not answer the question of what risk-free means in practice.',
                 },
               ].map(({ label, body }, i) => (
                 <li key={i} className="flex gap-4">
@@ -162,7 +162,7 @@ export default function AboveFoldLandingPagePage() {
             <p className="leading-relaxed text-fg-muted">
               These are the patterns that consistently show up as conversion
               leaks on paid traffic landing pages. They are not subtle design
-              errors — they are structural choices that make the above-fold
+              errors - they are structural choices that make the above-fold
               section do no selling work at all.
             </p>
             <ul className="mt-5 space-y-4 text-fg-muted">
@@ -177,7 +177,7 @@ export default function AboveFoldLandingPagePage() {
                 },
                 {
                   label: 'CTA below the fold',
-                  body: 'On mobile at 390px, a CTA positioned 1,200px down the page might as well not exist for cold traffic. If the visitor has to scroll to find out what to do next, a portion of them will not scroll — they will use the back button.',
+                  body: 'On mobile at 390px, a CTA positioned 1,200px down the page might as well not exist for cold traffic. If the visitor has to scroll to find out what to do next, a portion of them will not scroll - they will use the back button.',
                 },
                 {
                   label: 'No proof in the first viewport',
@@ -185,7 +185,7 @@ export default function AboveFoldLandingPagePage() {
                 },
                 {
                   label: 'Competing visual weights',
-                  body: 'Multiple large elements at the same size, multiple CTAs, or a complex navigation bar all split attention and reduce the probability that the primary CTA is what the visitor\'s eye lands on. Simplifying the above-fold section — removing elements rather than adding them — is consistently the highest-leverage intervention for pages with visual hierarchy problems.',
+                  body: 'Multiple large elements at the same size, multiple CTAs, or a complex navigation bar all split attention and reduce the probability that the primary CTA is what the visitor\'s eye lands on. Simplifying the above-fold section - removing elements rather than adding them - is consistently the highest-leverage intervention for pages with visual hierarchy problems.',
                 },
               ].map(({ label, body }) => (
                 <li key={label} className="border-b border-border pb-4 last:border-0 last:pb-0">
@@ -199,7 +199,7 @@ export default function AboveFoldLandingPagePage() {
           {/* Section 3 — fold varies by device */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
-              The fold is different on every device — test both
+              The fold is different on every device - test both
             </h2>
             <p className="leading-relaxed text-fg-muted">
               &ldquo;Above the fold&rdquo; is not a fixed pixel height. On a
@@ -225,8 +225,8 @@ export default function AboveFoldLandingPagePage() {
               ))}
             </ul>
             <p className="mt-4 leading-relaxed text-fg-muted">
-              If your paid traffic is primarily mobile — check your analytics;
-              most paid social is — optimise for 375–390px first. Desktop
+              If your paid traffic is primarily mobile - check your analytics;
+              most paid social is - optimise for 375–390px first. Desktop
               performance is secondary to the device your visitors are actually
               using.
             </p>
@@ -238,7 +238,7 @@ export default function AboveFoldLandingPagePage() {
               Visual hierarchy: the reading order is the sales sequence
             </h2>
             <p className="leading-relaxed text-fg-muted">
-              The eye does not read a landing page — it scans it. Size,
+              The eye does not read a landing page - it scans it. Size,
               contrast, and position determine reading order. That reading order
               determines whether the above-fold section makes its argument in
               the right sequence.
@@ -248,14 +248,14 @@ export default function AboveFoldLandingPagePage() {
               only the three largest elements on your above-fold section, do
               they understand what you do, who it is for, and what to do next?
               If those three elements are your logo, a decorative image, and a
-              generic tagline — your hierarchy is selling nothing.
+              generic tagline - your hierarchy is selling nothing.
             </p>
             <p className="mt-4 leading-relaxed text-fg-muted">
               The correct hierarchy for cold paid traffic is: headline &rarr;
               proof signal or subheadline &rarr; CTA. Everything else should be
               visually subordinate. When multiple elements compete at the same
               visual weight, the visitor&apos;s eye lands nowhere in particular
-              — which means it is less likely to land on the CTA.
+              - which means it is less likely to land on the CTA.
             </p>
           </section>
 
@@ -295,7 +295,7 @@ export default function AboveFoldLandingPagePage() {
               (HTTP Archive, Nov 2024), only 38% of mobile home pages passed
               all Core Web Vitals in 2024. That means more than six in ten
               mobile landing pages are failing Google&apos;s real-world
-              performance thresholds — before the above-fold content is ever
+              performance thresholds - before the above-fold content is ever
               evaluated.
             </p>
             <p className="mt-4 leading-relaxed text-fg-muted">
@@ -311,8 +311,8 @@ export default function AboveFoldLandingPagePage() {
               Not sure what is visible above the fold on your page?
             </p>
             <p className="text-fg-muted text-sm mb-4">
-              The free Nebula audit checks all 7 conversion signals — including
-              mobile layout (signal 3) — and returns a prioritised fix list.
+              The free Nebula audit checks all 7 conversion signals - including
+              mobile layout (signal 3) - and returns a prioritised fix list.
             </p>
             <Link
               href="/audit"
@@ -350,8 +350,8 @@ export default function AboveFoldLandingPagePage() {
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 7 signals and returns a
               prioritised list of what to fix first. The $97 Fix Pack gives you
-              a tailored AI prompt for every finding — rewritten copy, rebuilt
-              sections — ready to run within minutes.
+              a tailored AI prompt for every finding - rewritten copy, rebuilt
+              sections - ready to run within minutes.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

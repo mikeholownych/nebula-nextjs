@@ -28,11 +28,11 @@ const faqItems = [
     },
     {
       question: 'How do I know if my landing page conversion rate is actually low?',
-      answer: "WordStream's 2026 Google Ads Benchmarks report — analysing over 13,000 search advertising campaigns from April 2025 to March 2026 — found an all-industries average conversion rate of 8.18%, ranging from 2.64% in Finance and Insurance to 16.22% in Animals and Pets. These are search-campaign averages, not single-page rates, but they give a realistic floor for your vertical. If you are consistently below your vertical's lower bound with meaningful traffic (500+ sessions), that strongly indicates at least one of the five leak patterns is active.",
+      answer: "WordStream's 2026 Google Ads Benchmarks report - analysing over 13,000 search advertising campaigns from April 2025 to March 2026 - found an all-industries average conversion rate of 8.18%, ranging from 2.64% in Finance and Insurance to 16.22% in Animals and Pets. These are search-campaign averages, not single-page rates, but they give a realistic floor for your vertical. If you are consistently below your vertical's lower bound with meaningful traffic (500+ sessions), that strongly indicates at least one of the five leak patterns is active.",
     },
     {
       question: 'Should I A/B test my landing page before diagnosing the problem?',
-      answer: 'No. A/B testing is a measurement tool, not a diagnostic tool. Testing two versions of a page with a broken promise doubles your spend on the wrong problem. Diagnose the leak first — identify which of the five patterns is active — then test the fix against the control.',
+      answer: 'No. A/B testing is a measurement tool, not a diagnostic tool. Testing two versions of a page with a broken promise doubles your spend on the wrong problem. Diagnose the leak first - identify which of the five patterns is active - then test the fix against the control.',
     },
     {
       question: 'What is message match and why does it matter?',
@@ -40,7 +40,7 @@ const faqItems = [
     },
     {
       question: 'How long does it take to fix a non-converting landing page?',
-      answer: "Depends on which leak is active. A message-match fix (rewriting the headline and hero copy) takes 2-4 hours with a clear brief. A proof restructure (repositioning testimonials, adding specificity) takes a day. A full CTA and form-friction overhaul is 1-2 days. Nebula's $97 Fix Pack gives you a tailored AI prompt for every finding from the audit, delivered within minutes — you (or your developer) implement.",
+      answer: "Depends on which leak is active. A message-match fix (rewriting the headline and hero copy) takes 2-4 hours with a clear brief. A proof restructure (repositioning testimonials, adding specificity) takes a day. A full CTA and form-friction overhaul is 1-2 days. Nebula's $97 Fix Pack gives you a tailored AI prompt for every finding from the audit, delivered within minutes - you (or your developer) implement.",
     },
 ]
 
@@ -95,7 +95,7 @@ export default function LandingPageNotConvertingPage() {
               {[
                 'Can a cold visitor explain your offer in 5 seconds without reading past the headline?',
                 'Does the page show specific, dated proof that people like the visitor have succeeded?',
-                'Does the CTA name what happens next — not just "Submit" or "Get Started"?',
+                'Does the CTA name what happens next - not just "Submit" or "Get Started"?',
                 'Does the page pass a one-thumb scroll test on a 390px screen without loss of message?',
                 'Are the three main objections answered before the final CTA?',
               ].map((q, i) => (
@@ -115,8 +115,8 @@ export default function LandingPageNotConvertingPage() {
               >
                 2026 Google Ads Benchmarks report
               </a>{' '}
-              — analysing over 13,000 search advertising campaigns from April
-              2025 to March 2026 — found an all-industries average conversion
+              - analysing over 13,000 search advertising campaigns from April
+              2025 to March 2026 - found an all-industries average conversion
               rate of 8.18%, ranging from 2.64% in Finance and Insurance to
               16.22% in Animals and Pets. These are search-campaign averages,
               not single-page rates. Use them only as context; they do not
@@ -180,7 +180,7 @@ export default function LandingPageNotConvertingPage() {
                 doi:10.1080/01449290500330448
               </a>
               ) found that users form a visual impression of a webpage in
-              approximately 50 milliseconds — before they have read a word. The
+              approximately 50 milliseconds - before they have read a word. The
               headline is the first word they read. If it does not confirm the
               promise, the decision to leave is already forming.
             </p>
@@ -189,16 +189,16 @@ export default function LandingPageNotConvertingPage() {
             </h3>
             <p className="leading-relaxed text-fg-muted">
               Copy your ad headline. Open your landing page. Does the page
-              headline contain the same noun phrase — the same specific outcome
-              or audience — as the ad? If you have to interpret or infer the
+              headline contain the same noun phrase - the same specific outcome
+              or audience - as the ad? If you have to interpret or infer the
               connection, so does a cold visitor.
             </p>
             <h3 className="mb-2 mt-5 text-lg font-semibold text-fg">Fix</h3>
             <p className="leading-relaxed text-fg-muted">
               Rewrite the hero headline to echo the ad&apos;s specific promise.
               If the ad says &ldquo;50% off running shoes for wide feet,&rdquo;
-              the page should say &ldquo;Wide-Fit Running Shoes — 50% Off This
-              Week.&rdquo; Not a paraphrase — the same nouns. The visitor
+              the page should say &ldquo;Wide-Fit Running Shoes - 50% Off This
+              Week.&rdquo; Not a paraphrase - the same nouns. The visitor
               arrived because of a specific promise; the headline either
               confirms they are in the right place or it does not.
               Message-match is signal 1 of the 7 conversion signals the Nebula
@@ -222,11 +222,11 @@ export default function LandingPageNotConvertingPage() {
               What it looks like
             </h3>
             <p className="leading-relaxed text-fg-muted">
-              &ldquo;This product changed my business.&rdquo; — J.T., Business
+              &ldquo;This product changed my business.&rdquo; - J.T., Business
               Owner. That quote is indistinguishable from a placeholder. The
               visitor does not know if J.T. is real, if their business resembles
               theirs, or what specifically changed. Proof that cannot be
-              verified does not reduce purchase risk — it increases it, because
+              verified does not reduce purchase risk - it increases it, because
               it signals that genuine evidence may not exist.
             </p>
             <h3 className="mb-2 mt-5 text-lg font-semibold text-fg">
@@ -271,7 +271,7 @@ export default function LandingPageNotConvertingPage() {
               Now&rdquo; as the primary CTA, before any explanation of what the
               engagement involves, who it is for, or what the outcome is.
               &ldquo;Book Now&rdquo; is the right CTA for a visitor who has
-              already decided — it is the wrong CTA for a visitor who has just
+              already decided - it is the wrong CTA for a visitor who has just
               arrived. Asking for full commitment before establishing value is
               the most common pattern in pages we audit.
             </p>
@@ -326,18 +326,18 @@ export default function LandingPageNotConvertingPage() {
             <p className="leading-relaxed text-fg-muted">
               Desktop conversion rate runs higher than mobile, despite mobile
               accounting for the majority of paid traffic clicks. The gap is not
-              a device-preference issue — it is a layout problem.
+              a device-preference issue - it is a layout problem.
             </p>
             <h3 className="mb-2 mt-5 text-lg font-semibold text-fg">
               What it looks like
             </h3>
             <p className="leading-relaxed text-fg-muted">
               On desktop, the hero section shows a headline, a subheadline, a
-              proof point, and a CTA button — all above the fold. On mobile at
+              proof point, and a CTA button - all above the fold. On mobile at
               390px, the headline wraps to four lines, the subheadline
               disappears, and the CTA button is below the fold before the user
               has scrolled. The visitor sees a wall of text and a button they
-              have to hunt for. The message sequence — promise, proof, action —
+              have to hunt for. The message sequence - promise, proof, action -
               is intact on desktop and broken on mobile.
             </p>
             <h3 className="mb-2 mt-5 text-lg font-semibold text-fg">
@@ -355,7 +355,7 @@ export default function LandingPageNotConvertingPage() {
               scaled-down version of desktop. The headline should be under 10
               words to avoid wrapping to four lines. The CTA must be a
               full-width tap target visible without scrolling. Social proof can
-              move below fold on mobile — the headline and CTA cannot. Test on a
+              move below fold on mobile - the headline and CTA cannot. Test on a
               real device, not a browser emulator; emulators do not replicate
               thumb reach, font rendering, or how the browser chrome eats
               viewport height.
@@ -371,7 +371,7 @@ export default function LandingPageNotConvertingPage() {
             <p className="leading-relaxed text-fg-muted">
               Visitors scroll all the way to the bottom CTA and still do not
               convert. Scroll depth is high, time-on-page is reasonable, but the
-              final conversion rate is low. The page has their attention — it
+              final conversion rate is low. The page has their attention - it
               has not resolved their hesitation.
             </p>
             <h3 className="mb-2 mt-5 text-lg font-semibold text-fg">
@@ -383,7 +383,7 @@ export default function LandingPageNotConvertingPage() {
               required, what happens when the trial ends, or who to contact if
               something breaks. These are four questions a realistic buyer has
               before they enter their email. If the page does not answer them,
-              the visitor leaves to find the answers — and often does not come
+              the visitor leaves to find the answers - and often does not come
               back.
             </p>
             <h3 className="mb-2 mt-5 text-lg font-semibold text-fg">
@@ -391,7 +391,7 @@ export default function LandingPageNotConvertingPage() {
             </h3>
             <p className="leading-relaxed text-fg-muted">
               List the three main reasons a qualified buyer would not convert on
-              your page. Now check whether each reason is addressed — not in
+              your page. Now check whether each reason is addressed - not in
               your FAQ, but on the page, above or adjacent to the final CTA. If
               the answers are buried or absent, the objection is a live
               conversion blocker.
@@ -401,7 +401,7 @@ export default function LandingPageNotConvertingPage() {
               Add a three-item objection block directly above your final CTA.
               Format it as specific answers, not marketing copy. &ldquo;No
               credit card required&rdquo; is an objection answer.
-              &ldquo;Risk-free trial&rdquo; is marketing copy — it raises the
+              &ldquo;Risk-free trial&rdquo; is marketing copy - it raises the
               question of what &ldquo;risk-free&rdquo; means and who defined it.
             </p>
           </section>
@@ -413,7 +413,7 @@ export default function LandingPageNotConvertingPage() {
             </h2>
             <p className="mb-5 leading-relaxed text-fg-muted">
               The five leaks above are the failure modes a founder experiences;
-              the 7 conversion signals are what the Nebula audit measures — each
+              the 7 conversion signals are what the Nebula audit measures - each
               signal maps to the leak it surfaces. Fix in signal order. Earlier
               signals act as gates: if signal 1 is broken, fixing signal 6 does
               nothing.
@@ -421,33 +421,33 @@ export default function LandingPageNotConvertingPage() {
             <ol className="space-y-5">
               {[
                 {
-                  signal: 'Signal 1 — Message-match',
+                  signal: 'Signal 1 - Message-match',
                   test: 'Does the headline echo the ad promise exactly?',
                   ifNo:
                     'Fix this first. Nothing else matters until visitors know they are in the right place.',
                   surfaces: 'Leak 1',
                 },
                 {
-                  signal: 'Signal 2 — Trust',
+                  signal: 'Signal 2 - Trust',
                   test: 'Is there at least one specific, verifiable proof point above the fold?',
                   ifNo:
-                    'Add before optimising the CTA. The CTA can only convert visitors who believe the offer. Unresolved purchase objections are also a trust failure — this signal surfaces both Leak 2 and Leak 5.',
+                    'Add before optimising the CTA. The CTA can only convert visitors who believe the offer. Unresolved purchase objections are also a trust failure - this signal surfaces both Leak 2 and Leak 5.',
                   surfaces: 'Leaks 2 and 5',
                 },
                 {
-                  signal: 'Signal 3 — Mobile layout',
+                  signal: 'Signal 3 - Mobile layout',
                   test: 'Is the headline + CTA visible on a real phone without scrolling?',
                   ifNo:
                     'Fix before running mobile traffic. Desktop conversion data does not transfer to a broken mobile layout.',
                   surfaces: 'Leak 4',
                 },
                 {
-                  signal: 'Signal 4 — Load time',
+                  signal: 'Signal 4 - Load time',
                   test: 'Does the page load in under 3 seconds on a mobile connection?',
                   ifNo: (
                     <>
                       Slow load time bleeds conversions before the page is seen.
-                      Not covered by the five-leak model above — covered in
+                      Not covered by the five-leak model above - covered in
                       depth in{' '}
                       <Link
                         href="/learning-centre/landing-page-load-time-slow"
@@ -461,19 +461,19 @@ export default function LandingPageNotConvertingPage() {
                   surfaces: null,
                 },
                 {
-                  signal: 'Signal 5 — CTA clarity',
+                  signal: 'Signal 5 - CTA clarity',
                   test: 'Does the CTA describe what the visitor gets, not what they have to do?',
                   ifNo: 'Fix now. A mismatched CTA wastes all the attention the page built.',
                   surfaces: 'Leak 3',
                 },
                 {
-                  signal: 'Signal 6 — Form friction',
+                  signal: 'Signal 6 - Form friction',
                   test: 'Does the form ask for only the information required for the next step?',
                   ifNo: 'Remove every field that is not needed. Each additional field reduces completion rate.',
                   surfaces: 'Leak 3',
                 },
                 {
-                  signal: 'Signal 7 — Proof',
+                  signal: 'Signal 7 - Proof',
                   test: 'Is the strongest proof element above the fold, specific, and attributable?',
                   ifNo: 'Reposition or replace it. Anonymous, unlinked, undated proof reduces trust rather than building it.',
                   surfaces: 'Leak 2',
@@ -528,8 +528,8 @@ export default function LandingPageNotConvertingPage() {
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 7 signals and returns a
               prioritised list of what to fix first. The $97 Fix Pack gives you
-              a tailored AI prompt for every finding — rewritten copy, rebuilt
-              sections — ready to run within minutes.
+              a tailored AI prompt for every finding - rewritten copy, rebuilt
+              sections - ready to run within minutes.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

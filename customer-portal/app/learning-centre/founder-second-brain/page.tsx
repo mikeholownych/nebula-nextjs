@@ -44,7 +44,7 @@ export default function FounderSecondBrainPage() {
         <section className="mt-12">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Problem: Expertise That Does Not Compound</h2>
           <p className="text-fg-muted leading-relaxed">
-            Every founder has specific, earned knowledge that their audience needs. But without a capture system, that expertise sits dormant — delivered once in a sales call, lost after a client engagement, or buried in an email no one will find again. The result is that marketing becomes a chore: starting from scratch each week, producing content that sounds generic because it is not grounded in real experience.
+            Every founder has specific, earned knowledge that their audience needs. But without a capture system, that expertise sits dormant - delivered once in a sales call, lost after a client engagement, or buried in an email no one will find again. The result is that marketing becomes a chore: starting from scratch each week, producing content that sounds generic because it is not grounded in real experience.
           </p>
         </section>
 
@@ -55,7 +55,7 @@ export default function FounderSecondBrainPage() {
               { label: 'Capture', desc: 'Every insight, client story, objection handled, and decision made gets added to a structured vault with context and date.' },
               { label: 'Tag and connect', desc: 'Entries are tagged by topic, audience, and outcome so related ideas surface together.' },
               { label: 'Generate', desc: 'The vault feeds an AI that drafts LinkedIn posts, emails, lead magnets, and landing page copy from your actual voice and your actual results.' },
-              { label: 'Approve', desc: 'Every output goes through a one-touch approval gate before publishing — you review, not rewrite.' },
+              { label: 'Approve', desc: 'Every output goes through a one-touch approval gate before publishing - you review, not rewrite.' },
             ].map(({ label, desc }) => (
               <li key={label} className="flex items-start gap-4 rounded-xl border border-border bg-bg-muted/30 p-4">
                 <span className="mt-0.5 rounded-full bg-accent/20 px-2 py-0.5 text-xs font-bold text-accent">{label}</span>

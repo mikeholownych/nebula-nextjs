@@ -43,7 +43,7 @@ export default function AdSaysOneThingPageSaysAnotherPage() {
             Your Ad Says One Thing and Your Page Says Something Else: The Invisible Conversion Killer
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-fg-muted">
-            Your ad clicks are coming in. Your page looks polished. But conversions are flat. In most cases the culprit is not your offer, your design, or your targeting — it is a silent break in the thread between what your ad promises and what your page delivers.
+            Your ad clicks are coming in. Your page looks polished. But conversions are flat. In most cases the culprit is not your offer, your design, or your targeting - it is a silent break in the thread between what your ad promises and what your page delivers.
           </p>
         </div>
 
@@ -51,13 +51,13 @@ export default function AdSaysOneThingPageSaysAnotherPage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">What Message Match Actually Is</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Message match is not keyword repetition. It is not simply making sure the word in your ad headline appears somewhere on your landing page. That misunderstanding leads marketers to optimise the wrong thing — sprinkling copy triggers across the page while the visitor still feels a jarring discontinuity the moment they arrive.
+            Message match is not keyword repetition. It is not simply making sure the word in your ad headline appears somewhere on your landing page. That misunderstanding leads marketers to optimise the wrong thing - sprinkling copy triggers across the page while the visitor still feels a jarring discontinuity the moment they arrive.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Real message match is <strong className="text-fg">emotional and contextual continuity</strong>. When a visitor clicks your ad, they carry a mental model with them: a specific expectation of tone, an emotional state shaped by the ad, and an implicit promise about what they are about to see. Message match means your page receives that visitor where they are — not where you wish they were.
+            Real message match is <strong className="text-fg">emotional and contextual continuity</strong>. When a visitor clicks your ad, they carry a mental model with them: a specific expectation of tone, an emotional state shaped by the ad, and an implicit promise about what they are about to see. Message match means your page receives that visitor where they are - not where you wish they were.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Think of it as handing off a baton in a relay race. The ad accelerates the runner. The page needs to catch that momentum without breaking stride. A mismatch does not just slow the visitor down — it stops them completely, because the cognitive cost of reorienting is higher than the reward of continuing.
+            Think of it as handing off a baton in a relay race. The ad accelerates the runner. The page needs to catch that momentum without breaking stride. A mismatch does not just slow the visitor down - it stops them completely, because the cognitive cost of reorienting is higher than the reward of continuing.
           </p>
         </section>
 
@@ -70,17 +70,17 @@ export default function AdSaysOneThingPageSaysAnotherPage() {
 
           <h3 className="mb-2 text-base font-semibold text-fg">1. Tone Mismatch</h3>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Your ad is urgent, casual, and conversational. "Stop wasting budget on ads that do not convert — fix it today." The visitor arrives on a page that opens with: "Welcome to our comprehensive suite of conversion optimisation solutions." The emotional register has shifted from a friend giving direct advice to a vendor presenting credentials. The visitor feels the seam. Urgency collapses into formality and the momentum you bought with your ad spend evaporates.
+            Your ad is urgent, casual, and conversational. "Stop wasting budget on ads that do not convert - fix it today." The visitor arrives on a page that opens with: "Welcome to our comprehensive suite of conversion optimisation solutions." The emotional register has shifted from a friend giving direct advice to a vendor presenting credentials. The visitor feels the seam. Urgency collapses into formality and the momentum you bought with your ad spend evaporates.
           </p>
 
           <h3 className="mb-2 text-base font-semibold text-fg">2. Offer Mismatch</h3>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Your ad promotes a free landing page audit. The visitor arrives on your homepage, which leads with your agency services, your case studies, and a contact form. The audit is buried three scrolls down. The visitor expected to land on the audit — instead they landed on your brand story. The specific promise of the ad and the dominant offer of the page are different things, and the visitor has to do mental work to reconcile them. Most will not bother.
+            Your ad promotes a free landing page audit. The visitor arrives on your homepage, which leads with your agency services, your case studies, and a contact form. The audit is buried three scrolls down. The visitor expected to land on the audit - instead they landed on your brand story. The specific promise of the ad and the dominant offer of the page are different things, and the visitor has to do mental work to reconcile them. Most will not bother.
           </p>
 
           <h3 className="mb-2 text-base font-semibold text-fg">3. Audience Mismatch</h3>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Your ad targets e-commerce founders struggling with cart abandonment. Your page speaks to "businesses of all sizes looking to improve their digital presence." The ad narrowed the conversation to a specific person with a specific problem. The page widened it back out to everyone. The e-commerce founder no longer feels spoken to — they feel like one of many, and the page has signalled that it was not actually built for them.
+            Your ad targets e-commerce founders struggling with cart abandonment. Your page speaks to "businesses of all sizes looking to improve their digital presence." The ad narrowed the conversation to a specific person with a specific problem. The page widened it back out to everyone. The e-commerce founder no longer feels spoken to - they feel like one of many, and the page has signalled that it was not actually built for them.
           </p>
         </section>
 
@@ -88,10 +88,10 @@ export default function AdSaysOneThingPageSaysAnotherPage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">Why You Built This Mismatch Without Noticing</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Message match failures almost never happen through carelessness. They happen through process. Ads and landing pages are written at different stages of a campaign, often by different people, almost always in different emotional states — and no one ever sits down to read them back-to-back as the visitor will.
+            Message match failures almost never happen through carelessness. They happen through process. Ads and landing pages are written at different stages of a campaign, often by different people, almost always in different emotional states - and no one ever sits down to read them back-to-back as the visitor will.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            The ad copywriter is in performance mode: tight character limits, direct response instincts, a single audience segment in mind. The landing page copywriter — or the founder writing the page six months earlier — is in brand mode: positioning the company, covering all use cases, building trust across a broad audience. Both were doing their job correctly. The mismatch emerged from the gap between two legitimate but disconnected creative processes.
+            The ad copywriter is in performance mode: tight character limits, direct response instincts, a single audience segment in mind. The landing page copywriter - or the founder writing the page six months earlier - is in brand mode: positioning the company, covering all use cases, building trust across a broad audience. Both were doing their job correctly. The mismatch emerged from the gap between two legitimate but disconnected creative processes.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
             There is also a review problem. Ads are reviewed in the ad platform. Pages are reviewed in a CMS or design tool. Nobody reviews them together, in sequence, as a visitor experience. The gap is invisible precisely because the two assets live in different workflows, different tools, and different mental contexts for everyone building them.
@@ -105,10 +105,10 @@ export default function AdSaysOneThingPageSaysAnotherPage() {
             You do not need a heat map tool or a split-testing platform to inspect message match. You need the ad, the destination page, and a willingness to read your own work as a stranger.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Here is the test: Read your ad. Let the promise and the tone land. Now cover the page. Before you look at it, write down — or say out loud — exactly what you expect to see. What headline? What offer? What emotion? What visual register? Then uncover the page and look at what you actually see.
+            Here is the test: Read your ad. Let the promise and the tone land. Now cover the page. Before you look at it, write down - or say out loud - exactly what you expect to see. What headline? What offer? What emotion? What visual register? Then uncover the page and look at what you actually see.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Name the gap specifically. Not "it feels off" — that is not useful. Name it precisely: "The ad was urgent, the page headline is passive." "The ad promised a free audit, the page opens with a pricing section." "The ad spoke to freelancers, the page says enterprise clients." The more precisely you name the gap, the faster and cheaper the fix becomes.
+            Name the gap specifically. Not "it feels off" - that is not useful. Name it precisely: "The ad was urgent, the page headline is passive." "The ad promised a free audit, the page opens with a pricing section." "The ad spoke to freelancers, the page says enterprise clients." The more precisely you name the gap, the faster and cheaper the fix becomes.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
             Run this test on every ad-to-page pair in your account before you run any other conversion optimisation. It will surface more addressable friction in less time than any other diagnostic method.
@@ -124,22 +124,22 @@ export default function AdSaysOneThingPageSaysAnotherPage() {
 
           <h3 className="mb-2 text-base font-semibold text-fg">Google Search</h3>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            The visitor is in active intent mode. They typed a specific query; they have a specific question or need in mind. The failure mode here is <em>query intent vs page intent</em>: the ad matched the query, but the page is not oriented around answering it — it is oriented around presenting the product. The visitor searched for an answer and landed on a brochure.
+            The visitor is in active intent mode. They typed a specific query; they have a specific question or need in mind. The failure mode here is <em>query intent vs page intent</em>: the ad matched the query, but the page is not oriented around answering it - it is oriented around presenting the product. The visitor searched for an answer and landed on a brochure.
           </p>
 
           <h3 className="mb-2 text-base font-semibold text-fg">Meta (Facebook and Instagram)</h3>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            The visitor was interrupted. They were scrolling passively, and your ad pulled them out of that state with an emotional hook — a pain point, a surprising claim, a relatable frustration. The failure mode is landing them on a rational evaluation page when they arrived in an emotional state. The page needs to continue the emotional conversation before it pivots to logic.
+            The visitor was interrupted. They were scrolling passively, and your ad pulled them out of that state with an emotional hook - a pain point, a surprising claim, a relatable frustration. The failure mode is landing them on a rational evaluation page when they arrived in an emotional state. The page needs to continue the emotional conversation before it pivots to logic.
           </p>
 
           <h3 className="mb-2 text-base font-semibold text-fg">LinkedIn</h3>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            The visitor arrived from a professional context. LinkedIn ads that perform well speak in a peer register — direct, specific, credibility-forward. The failure mode is landing them on a page full of marketing speak: "world-class solutions," "transformative results," "industry-leading platform." The professional register of the ad promised a peer conversation. The page delivered a sales pitch.
+            The visitor arrived from a professional context. LinkedIn ads that perform well speak in a peer register - direct, specific, credibility-forward. The failure mode is landing them on a page full of marketing speak: "world-class solutions," "transformative results," "industry-leading platform." The professional register of the ad promised a peer conversation. The page delivered a sales pitch.
           </p>
 
           <h3 className="mb-2 text-base font-semibold text-fg">TikTok</h3>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            The visitor arrived from the most native-feeling ad format available. TikTok ads that convert feel like content — fast, direct, personality-driven, visually energetic. The failure mode is the hardest to fix: landing them on a static corporate page that feels like it belongs to a different decade. The energy collapse is so severe that the visitor may not even register the offer before leaving.
+            The visitor arrived from the most native-feeling ad format available. TikTok ads that convert feel like content - fast, direct, personality-driven, visually energetic. The failure mode is the hardest to fix: landing them on a static corporate page that feels like it belongs to a different decade. The energy collapse is so severe that the visitor may not even register the offer before leaving.
           </p>
         </section>
 
@@ -150,13 +150,13 @@ export default function AdSaysOneThingPageSaysAnotherPage() {
             You do not need to rebuild the page. You do not need a new design, a new layout, or a new offer. A practical first edit is to <strong className="text-fg">rewrite the H1 to echo the specific promise of the ad.</strong>
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Not a generic version of the promise. The specific one. If the ad said "Stop losing sales to a page that does not convert," the H1 should not say "Convert more visitors." It should say something like: "Your page is losing sales. Here is why — and the fix." The emotional register, the specificity, and the implied audience should all carry through from the ad into the first thing the visitor reads on the page.
+            Not a generic version of the promise. The specific one. If the ad said "Stop losing sales to a page that does not convert," the H1 should not say "Convert more visitors." It should say something like: "Your page is losing sales. Here is why - and the fix." The emotional register, the specificity, and the implied audience should all carry through from the ad into the first thing the visitor reads on the page.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            The H1 is the handoff point. It is where the baton changes hands. If that moment is smooth — if the visitor reads the H1 and thinks "yes, I am in the right place" — then the rest of the page has a chance to convert them. If the H1 breaks the thread, nothing else on the page will save the conversion.
+            The H1 is the handoff point. It is where the baton changes hands. If that moment is smooth - if the visitor reads the H1 and thinks "yes, I am in the right place" - then the rest of the page has a chance to convert them. If the H1 breaks the thread, nothing else on the page will save the conversion.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            After fixing the H1, apply the continuity test again. After that edit, check whether the remaining friction — usually in the subheadline or the primary CTA — is now easier to identify and fix because the continuity from the ad is established. Work sequentially from the top of the page, fixing the gaps the test reveals, until reading the ad and then reading the page feels like a single continuous experience.
+            After fixing the H1, apply the continuity test again. After that edit, check whether the remaining friction - usually in the subheadline or the primary CTA - is now easier to identify and fix because the continuity from the ad is established. Work sequentially from the top of the page, fixing the gaps the test reveals, until reading the ad and then reading the page feels like a single continuous experience.
           </p>
         </section>
 
@@ -211,7 +211,7 @@ export default function AdSaysOneThingPageSaysAnotherPage() {
               >
                 Facebook Ads Getting Clicks But No Leads
               </Link>
-              <p className="mt-0.5 text-sm text-fg-muted">Why Meta campaigns with strong CTR still fail to convert — and the post-click experience problems that cause it.</p>
+              <p className="mt-0.5 text-sm text-fg-muted">Why Meta campaigns with strong CTR still fail to convert - and the post-click experience problems that cause it.</p>
             </li>
             <li>
               <Link

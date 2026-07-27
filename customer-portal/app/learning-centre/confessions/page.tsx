@@ -5,7 +5,7 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Founder Confessions: When We Found Our Page Was Broken',
   description:
-    "Anonymous stories from founders who discovered their landing page had been silently broken — sometimes for months. How long it had been broken. How much they spent. What they were blaming instead.",
+    "Anonymous stories from founders who discovered their landing page had been silently broken - sometimes for months. How long it had been broken. How much they spent. What they were blaming instead.",
   alternates: {
     canonical: 'https://nebulacomponents.shop/learning-centre/confessions',
   },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const articleSchema = createArticleSchema({
   headline: 'Founder Confessions: The Moment We Found Out Our Page Was Broken',
   description:
-    "Anonymous stories from founders who discovered their landing page had been silently broken — sometimes for months. How long it had been broken. How much they spent. What they were blaming instead.",
+    "Anonymous stories from founders who discovered their landing page had been silently broken - sometimes for months. How long it had been broken. How much they spent. What they were blaming instead.",
   url: 'https://nebulacomponents.shop/learning-centre/confessions',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
@@ -29,7 +29,7 @@ const CONFESSIONS = [
     duration: '11 weeks',
     blamed: 'the wrong keywords',
     story:
-      "We ran Google Ads for 11 weeks. $6,200 spent. I blamed the keywords, then the bidding strategy, then the agency. Ran the audit on a Tuesday afternoon. The H1 had been truncated since a CMS update in March — it read 'The project management tool that makes your te' and then nothing. I had never looked at my own page on mobile.",
+      "We ran Google Ads for 11 weeks. $6,200 spent. I blamed the keywords, then the bidding strategy, then the agency. Ran the audit on a Tuesday afternoon. The H1 had been truncated since a CMS update in March - it read 'The project management tool that makes your te' and then nothing. I had never looked at my own page on mobile.",
   },
   {
     id: 2,
@@ -38,7 +38,7 @@ const CONFESSIONS = [
     duration: '6 weeks',
     blamed: 'Meta\'s algorithm',
     story:
-      "Six weeks of Meta ads. $3,800 gone. I told myself the algorithm was broken, CPMs were up industry-wide, the creative needed refreshing. The audit found the page was loading a 340KB HTML payload — we had a video autoplaying in the background that nobody had removed after a product shoot. The page took 8 seconds to load on 4G. I had been optimising ad creative for a page that nobody could wait for.",
+      "Six weeks of Meta ads. $3,800 gone. I told myself the algorithm was broken, CPMs were up industry-wide, the creative needed refreshing. The audit found the page was loading a 340KB HTML payload - we had a video autoplaying in the background that nobody had removed after a product shoot. The page took 8 seconds to load on 4G. I had been optimising ad creative for a page that nobody could wait for.",
   },
   {
     id: 3,
@@ -47,7 +47,7 @@ const CONFESSIONS = [
     duration: '9 weeks',
     blamed: 'the audience targeting',
     story:
-      "I spent nine weeks A/B testing audiences. $2,100 in Facebook spend. Narrow audiences, broad audiences, lookalikes, retargeting. The audit flagged that my social proof section — three testimonials I had spent two hours writing — wasn't rendering. The images had 404ed after I moved them to a new folder. The testimonials were there in the HTML. Invisible to every visitor for nine weeks.",
+      "I spent nine weeks A/B testing audiences. $2,100 in Facebook spend. Narrow audiences, broad audiences, lookalikes, retargeting. The audit flagged that my social proof section - three testimonials I had spent two hours writing - wasn't rendering. The images had 404ed after I moved them to a new folder. The testimonials were there in the HTML. Invisible to every visitor for nine weeks.",
   },
   {
     id: 4,
@@ -56,7 +56,7 @@ const CONFESSIONS = [
     duration: '4 months',
     blamed: 'the sales process',
     story:
-      "Four months. $4,500 in LinkedIn ads. I had convinced myself the problem was post-click: the sales process was too slow, leads were going cold, we needed a better CRM sequence. The audit found the meta description was 201 characters — it got truncated in every LinkedIn preview at exactly the wrong word, cutting off before we named the specific problem we solve. Every ad click arrived having read half a sentence that ended with 'for teams who struggle with'.",
+      "Four months. $4,500 in LinkedIn ads. I had convinced myself the problem was post-click: the sales process was too slow, leads were going cold, we needed a better CRM sequence. The audit found the meta description was 201 characters - it got truncated in every LinkedIn preview at exactly the wrong word, cutting off before we named the specific problem we solve. Every ad click arrived having read half a sentence that ended with 'for teams who struggle with'.",
   },
   {
     id: 5,
@@ -65,7 +65,7 @@ const CONFESSIONS = [
     duration: '7 weeks',
     blamed: 'the product photos',
     story:
-      "Seven weeks, $1,900, three different product photographers. The audit found there was no CTA button above the fold on mobile — our designer had hidden it behind a hamburger menu 'to reduce visual clutter'. On desktop it was fine. 70% of our traffic was mobile. The button that was supposed to close the sale was one tap away from invisible.",
+      "Seven weeks, $1,900, three different product photographers. The audit found there was no CTA button above the fold on mobile - our designer had hidden it behind a hamburger menu 'to reduce visual clutter'. On desktop it was fine. 70% of our traffic was mobile. The button that was supposed to close the sale was one tap away from invisible.",
   },
 ]
 
@@ -130,7 +130,7 @@ export default function ConfessionsPage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-2 text-xl font-bold text-fg">Submit yours</h2>
           <p className="mb-6 leading-relaxed text-fg-muted">
-            If you have a story — how long, how much, what you blamed — send it. All submissions are anonymous. We'll publish the ones that other founders will recognise in themselves.
+            If you have a story - how long, how much, what you blamed - send it. All submissions are anonymous. We'll publish the ones that other founders will recognise in themselves.
           </p>
           <p className="mb-4 text-sm text-fg-muted">
             Include your landing page URL and we'll run a free audit alongside it. You'll receive the findings before we publish anything.

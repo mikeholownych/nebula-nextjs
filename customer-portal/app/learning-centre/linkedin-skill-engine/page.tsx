@@ -38,13 +38,13 @@ export default function LinkedInSkillEnginePage() {
           LinkedIn Skill Engine: Post From What You Actually Know
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
-          Most B2B LinkedIn content fails because it is manufactured: rephrased advice, hollow hooks, ideas borrowed from other creators. The LinkedIn Skill Engine inverts this — it starts from what you have actually done and converts it into posts that read as authority because they are authority.
+          Most B2B LinkedIn content fails because it is manufactured: rephrased advice, hollow hooks, ideas borrowed from other creators. The LinkedIn Skill Engine inverts this - it starts from what you have actually done and converts it into posts that read as authority because they are authority.
         </p>
 
         <section className="mt-12">
           <h2 className="mb-4 text-2xl font-bold text-fg">Why Generic LinkedIn Content Fails</h2>
           <p className="text-fg-muted leading-relaxed">
-            Buyers on LinkedIn are trained to ignore content that sounds the same as everything else. The reason most professional content sounds the same is that most creators are starting from a blank page and filling it with what they think they should say. The audience can tell. Specificity is the signal. Specific numbers, specific client situations, specific mistakes — these are what stop the scroll and build the kind of trust that converts at a later date.
+            Buyers on LinkedIn are trained to ignore content that sounds the same as everything else. The reason most professional content sounds the same is that most creators are starting from a blank page and filling it with what they think they should say. The audience can tell. Specificity is the signal. Specific numbers, specific client situations, specific mistakes - these are what stop the scroll and build the kind of trust that converts at a later date.
           </p>
         </section>
 
@@ -52,7 +52,7 @@ export default function LinkedInSkillEnginePage() {
           <h2 className="mb-4 text-2xl font-bold text-fg">How the Skill Engine Works</h2>
           <ol className="space-y-4">
             {[
-              { step: '1', title: 'Skill inventory', desc: 'Map every repeatable skill you use with clients — not job titles, but actual techniques, frameworks, and diagnostic approaches.' },
+              { step: '1', title: 'Skill inventory', desc: 'Map every repeatable skill you use with clients - not job titles, but actual techniques, frameworks, and diagnostic approaches.' },
               { step: '2', title: 'Evidence extraction', desc: 'For each skill, pull 2–3 real cases where applying it produced a measurable outcome. Outcome + starting condition + fix applied.' },
               { step: '3', title: 'Post templates by intent', desc: 'Each evidence unit gets mapped to a post format: diagnostic post, outcome post, objection post, or how-to post.' },
               { step: '4', title: 'Cadence without depletion', desc: 'One evidence unit generates 4–6 posts. A founder with 10 documented skills has 40–60 posts before needing any new material.' },

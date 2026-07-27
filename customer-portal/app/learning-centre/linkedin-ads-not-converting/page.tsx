@@ -95,7 +95,7 @@ export default function LinkedinAdsNotConvertingPage() {
             LinkedIn benchmark or forecast.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            Run this calculation before anything else: what is your current cost-per-lead from LinkedIn? Now divide that by your close rate. That's your cost-per-acquisition. If that number is unsustainable, the first place to look is your landing page conversion rate — not your bid strategy, not your audience segments.
+            Run this calculation before anything else: what is your current cost-per-lead from LinkedIn? Now divide that by your close rate. That's your cost-per-acquisition. If that number is unsustainable, the first place to look is your landing page conversion rate - not your bid strategy, not your audience segments.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
             Model several conversion-rate scenarios with your actual spend,
@@ -109,7 +109,7 @@ export default function LinkedinAdsNotConvertingPage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">B2B Decision Makers Need Peer Proof, Not Feature Lists</h2>
           <p className="leading-relaxed text-fg-muted">
-            The professional scrolling LinkedIn is not evaluating your product emotionally — they're evaluating risk. A VP of Marketing who clicks your ad is asking: "Will this embarrass me if I recommend it? Will it actually do what it claims? Has anyone like me used it and gotten results?"
+            The professional scrolling LinkedIn is not evaluating your product emotionally - they're evaluating risk. A VP of Marketing who clicks your ad is asking: "Will this embarrass me if I recommend it? Will it actually do what it claims? Has anyone like me used it and gotten results?"
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
             A feature-led page may leave those questions unanswered when proof
@@ -121,10 +121,10 @@ export default function LinkedinAdsNotConvertingPage() {
             Evidence formats to evaluate for LinkedIn traffic:
           </p>
           <ul className="mt-3 space-y-2 text-fg-muted">
-            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">—</span><span>Named testimonials with job title, company size, and specific outcome ("reduced churn 22% in Q1")</span></li>
-            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">—</span><span>Logos of recognisable companies in your ICP's peer group — not just any logo wall</span></li>
-            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">—</span><span>Case study snippets with measurable results, not narrative prose</span></li>
-            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">—</span><span>Proof visible before the CTA — not after it</span></li>
+            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">-</span><span>Named testimonials with job title, company size, and specific outcome ("reduced churn 22% in Q1")</span></li>
+            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">-</span><span>Logos of recognisable companies in your ICP's peer group - not just any logo wall</span></li>
+            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">-</span><span>Case study snippets with measurable results, not narrative prose</span></li>
+            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">-</span><span>Proof visible before the CTA - not after it</span></li>
           </ul>
         </section>
 
@@ -143,9 +143,9 @@ export default function LinkedinAdsNotConvertingPage() {
             test:
           </p>
           <ul className="mt-3 space-y-2 text-fg-muted">
-            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">—</span><span>Compare a specific guide with the current demo request for the same traffic segment</span></li>
-            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">—</span><span>Test whether a relevant tool or assessment better matches the ad&apos;s promised next step</span></li>
-            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">—</span><span>If you must ask for a demo, the page needs to do significant proof-of-value work before that ask lands</span></li>
+            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">-</span><span>Compare a specific guide with the current demo request for the same traffic segment</span></li>
+            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">-</span><span>Test whether a relevant tool or assessment better matches the ad&apos;s promised next step</span></li>
+            <li className="flex gap-2"><span className="text-accent font-bold shrink-0">-</span><span>If you must ask for a demo, the page needs to do significant proof-of-value work before that ask lands</span></li>
           </ul>
           <p className="mt-4 leading-relaxed text-fg-muted">
             If your LinkedIn ads go to a "Book a Demo" page with no prior warm-up content on that
@@ -161,10 +161,10 @@ export default function LinkedinAdsNotConvertingPage() {
             LinkedIn lets you target with precision: seniority, function, company size, industry. You can show a CFO at a 200-person SaaS company a specific ad about financial reporting. That ad created a specific expectation about what the landing page would contain.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            If that CFO lands on a generic homepage or a generic product page that doesn't echo the specific language, promise, and audience framing of the ad — the implicit contract is broken. They don't see the page as relevant to them. They leave.
+            If that CFO lands on a generic homepage or a generic product page that doesn't echo the specific language, promise, and audience framing of the ad - the implicit contract is broken. They don't see the page as relevant to them. They leave.
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            Diagnose your message match by reading the headline of your ad, then reading the headline of your landing page. Ask: does the landing page headline feel like the logical continuation of the ad's promise? The specific outcome named in the ad should be reflected — not paraphrased, reflected — in the above-fold copy of the page.
+            Diagnose your message match by reading the headline of your ad, then reading the headline of your landing page. Ask: does the landing page headline feel like the logical continuation of the ad's promise? The specific outcome named in the ad should be reflected - not paraphrased, reflected - in the above-fold copy of the page.
           </p>
         </section>
 

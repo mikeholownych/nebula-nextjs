@@ -27,13 +27,13 @@ export default function TrafficButNoFormFillsPage() {
         <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">Form Leaks · Conversion Diagnosis</p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">Traffic But No Form Fills: The Form Is Usually Not The First Leak</h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">When visitors land but don't fill out the form, the reflex is to redesign the form — more fields, fewer fields, a different layout. That's solving the wrong problem. The form is the last thing a visitor reaches. By the time they get there, they've already decided whether they trust you enough to hand over their details. That decision happens well before the form.</p>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">When visitors land but don't fill out the form, the reflex is to redesign the form - more fields, fewer fields, a different layout. That's solving the wrong problem. The form is the last thing a visitor reaches. By the time they get there, they've already decided whether they trust you enough to hand over their details. That decision happens well before the form.</p>
         </div>
 
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The Form Is The Last Gate, Not The First</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">Think of the conversion path as a chain: the click brings someone with a specific intent, the hero earns the right to keep them reading, the body builds the case with proof and specifics, and the form closes the argument. If the chain breaks anywhere before the form, no amount of form optimisation will recover the conversion.</p>
-          <p className="leading-relaxed text-fg-muted">The most common form-fill failures have nothing to do with the form itself. They're failures of trust, clarity, or credibility that happened in the first 10 seconds — and the visitor who didn't fill out your form left 40 seconds before they even scrolled far enough to see it.</p>
+          <p className="leading-relaxed text-fg-muted">The most common form-fill failures have nothing to do with the form itself. They're failures of trust, clarity, or credibility that happened in the first 10 seconds - and the visitor who didn't fill out your form left 40 seconds before they even scrolled far enough to see it.</p>
         </section>
 
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
@@ -41,11 +41,11 @@ export default function TrafficButNoFormFillsPage() {
           <div className="space-y-6">
             <div>
               <h3 className="mb-2 text-lg font-semibold text-fg">1. The Page Hasn't Earned The Ask Yet</h3>
-              <p className="leading-relaxed text-fg-muted">If your form appears before there's any proof — testimonials, outcomes, specifics, credibility signals — you're asking for trust you haven't built. The visitor's internal calculation is: "I don't know if this works, I don't know if this person delivers, and they're asking me for my information." That's a no. Proof belongs above the form. Always. One specific result or a named outcome immediately before the form field lifts completion rates measurably because it answers the doubt that was stalling the click.</p>
+              <p className="leading-relaxed text-fg-muted">If your form appears before there's any proof - testimonials, outcomes, specifics, credibility signals - you're asking for trust you haven't built. The visitor's internal calculation is: "I don't know if this works, I don't know if this person delivers, and they're asking me for my information." That's a no. Proof belongs above the form. Always. One specific result or a named outcome immediately before the form field lifts completion rates measurably because it answers the doubt that was stalling the click.</p>
             </div>
             <div>
               <h3 className="mb-2 text-lg font-semibold text-fg">2. The Form Asks Too Much</h3>
-              <p className="leading-relaxed text-fg-muted">Every field you add to a form costs approximately 10% of completions. That's not a metaphor — it's the consistent pattern across form optimisation data. A form with name, email, phone, company, company size, and "tell us about your situation" is a five-decision obstacle, not a form. For most B2B lead gen, the minimum viable form is name and email. If you need a phone number, ask for it after the initial conversion — in a follow-up email or on a thank-you page. You can earn additional information once there's already a relationship.</p>
+              <p className="leading-relaxed text-fg-muted">Every field you add to a form costs approximately 10% of completions. That's not a metaphor - it's the consistent pattern across form optimisation data. A form with name, email, phone, company, company size, and "tell us about your situation" is a five-decision obstacle, not a form. For most B2B lead gen, the minimum viable form is name and email. If you need a phone number, ask for it after the initial conversion - in a follow-up email or on a thank-you page. You can earn additional information once there's already a relationship.</p>
             </div>
             <div>
               <h3 className="mb-2 text-lg font-semibold text-fg">3. Friction Language On The Button</h3>
@@ -53,7 +53,7 @@ export default function TrafficButNoFormFillsPage() {
             </div>
             <div>
               <h3 className="mb-2 text-lg font-semibold text-fg">4. No Privacy Reassurance Near The Field</h3>
-              <p className="leading-relaxed text-fg-muted">Visitors who hesitate at a form are often running a quick threat model: "If I give them my email, am I going to get spammed?" A single line directly below the email field — <span className="italic text-fg">"No spam. One email with your results."</span> — reduces that hesitation significantly. It doesn't need to be a long privacy policy link. It needs to be a plain-language promise positioned exactly where the doubt arises: right below the input field, not buried in a footer.</p>
+              <p className="leading-relaxed text-fg-muted">Visitors who hesitate at a form are often running a quick threat model: "If I give them my email, am I going to get spammed?" A single line directly below the email field - <span className="italic text-fg">"No spam. One email with your results."</span> - reduces that hesitation significantly. It doesn't need to be a long privacy policy link. It needs to be a plain-language promise positioned exactly where the doubt arises: right below the input field, not buried in a footer.</p>
             </div>
           </div>
         </section>
@@ -62,9 +62,9 @@ export default function TrafficButNoFormFillsPage() {
           <h2 className="mb-4 text-2xl font-bold text-fg">How To Diagnose Where The Real Leak Is</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">Before you touch the form, get the diagnostic data:</p>
           <ul className="space-y-3 text-fg-muted">
-            <li className="flex gap-3"><span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-accent"></span><span><span className="font-semibold text-fg">Heatmaps:</span> Where are visitors dropping off before the form? If scroll depth shows most visitors leave at the 30% mark and your form is at 70%, you have an above-the-fold trust problem — not a form problem.</span></li>
+            <li className="flex gap-3"><span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-accent"></span><span><span className="font-semibold text-fg">Heatmaps:</span> Where are visitors dropping off before the form? If scroll depth shows most visitors leave at the 30% mark and your form is at 70%, you have an above-the-fold trust problem - not a form problem.</span></li>
             <li className="flex gap-3"><span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-accent"></span><span><span className="font-semibold text-fg">Session recordings:</span> Watch 10 recordings of visitors who didn't convert. Look for rage-clicks (repeated frustrated clicking), back-navigation immediately after scroll, and hover-then-abandon on the CTA button. Each of these signals a different break in the chain.</span></li>
-            <li className="flex gap-3"><span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-accent"></span><span><span className="font-semibold text-fg">Form scroll depth:</span> Are visitors reaching the form at all? If fewer than 30% of sessions scroll to the form, the problem isn't the form — it's everything above it. If 70% reach the form but only 2% fill it, the form and its surrounding context is the issue.</span></li>
+            <li className="flex gap-3"><span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-accent"></span><span><span className="font-semibold text-fg">Form scroll depth:</span> Are visitors reaching the form at all? If fewer than 30% of sessions scroll to the form, the problem isn't the form - it's everything above it. If 70% reach the form but only 2% fill it, the form and its surrounding context is the issue.</span></li>
           </ul>
         </section>
 
@@ -78,11 +78,11 @@ export default function TrafficButNoFormFillsPage() {
             </div>
             <div className="flex items-start gap-3 rounded-xl border border-border p-4">
               <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border-2 border-accent text-accent text-xs font-bold">✓</span>
-              <span className="text-fg-muted"><span className="font-semibold text-fg">Rewrite the submit button to name the outcome.</span> "Get my free audit," "Send my leak report," "Start the diagnosis" — specific, outcome-oriented, first person.</span>
+              <span className="text-fg-muted"><span className="font-semibold text-fg">Rewrite the submit button to name the outcome.</span> "Get my free audit," "Send my leak report," "Start the diagnosis" - specific, outcome-oriented, first person.</span>
             </div>
             <div className="flex items-start gap-3 rounded-xl border border-border p-4">
               <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border-2 border-accent text-accent text-xs font-bold">✓</span>
-              <span className="text-fg-muted"><span className="font-semibold text-fg">Add a single line of proof directly above the form.</span> One specific outcome from a real user. Not a logo wall — a specific result that makes the decision feel safer.</span>
+              <span className="text-fg-muted"><span className="font-semibold text-fg">Add a single line of proof directly above the form.</span> One specific outcome from a real user. Not a logo wall - a specific result that makes the decision feel safer.</span>
             </div>
             <div className="flex items-start gap-3 rounded-xl border border-border p-4">
               <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border-2 border-accent text-accent text-xs font-bold">✓</span>

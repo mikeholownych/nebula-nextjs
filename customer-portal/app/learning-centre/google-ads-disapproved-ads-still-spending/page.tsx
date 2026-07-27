@@ -23,7 +23,7 @@ export default function LearningCentrePage() {
             Google Ads Disapproved? Your Page May Be The Hidden Reason
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
-            When Google Ads disapproves your ad, most advertisers check the ad copy. But the landing page itself can trigger policy violations that not only block the ad—but continue costing you money while the ad runs in a disabled state.
+            When Google Ads disapproves your ad, most advertisers check the ad copy. But the landing page itself can trigger policy violations that not only block the ad-but continue costing you money while the ad runs in a disabled state.
           </p>
         </div>
 
@@ -35,7 +35,7 @@ export default function LearningCentrePage() {
           <ul className="mt-4 space-y-2 text-fg-muted">
             <li className="flex items-start gap-3">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-              <span><strong className="font-semibold">Redirects:</strong> Destination URLs that redirect through multiple hops—especially if they mask the final destination—violate transparency policies. A clean path from ad click to final page is required.</span>
+              <span><strong className="font-semibold">Redirects:</strong> Destination URLs that redirect through multiple hops-especially if they mask the final destination-violate transparency policies. A clean path from ad click to final page is required.</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
@@ -71,7 +71,7 @@ export default function LearningCentrePage() {
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-              <span><strong className="font-semibold">Budget drain during review:</strong> Some disapproved ads continue accruing costs while under review or appeal—especially if the violation is borderline and being manually evaluated.</span>
+              <span><strong className="font-semibold">Budget drain during review:</strong> Some disapproved ads continue accruing costs while under review or appeal-especially if the violation is borderline and being manually evaluated.</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
@@ -79,7 +79,7 @@ export default function LearningCentrePage() {
             </li>
           </ul>
           <p className="mt-4 leading-relaxed text-fg-muted">
-            Preventing the violation before it triggers review is reliably effective — and far less disruptive than recovering after suspension.
+            Preventing the violation before it triggers review is reliably effective - and far less disruptive than recovering after suspension.
           </p>
         </section>
 
@@ -95,7 +95,7 @@ export default function LearningCentrePage() {
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-              Is the page content original and substantial—not just links to somewhere else?
+              Is the page content original and substantial-not just links to somewhere else?
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />

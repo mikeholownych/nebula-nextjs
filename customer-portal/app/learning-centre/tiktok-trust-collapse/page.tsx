@@ -35,7 +35,7 @@ export default function TiktokTrustCollapsePage() {
           The TikTok Trust Collapse: When Gen Z Buyers Hit a Page That Looks Like 2019
         </h1>
         <p className="mb-8 text-lg leading-relaxed text-fg-muted">
-          TikTok has trained an entire generation to detect inauthenticity in under two seconds. If your landing page looks like it was built in 2019, Gen Z buyers will bounce before they finish reading your headline — and your ad spend disappears with them.
+          TikTok has trained an entire generation to detect inauthenticity in under two seconds. If your landing page looks like it was built in 2019, Gen Z buyers will bounce before they finish reading your headline - and your ad spend disappears with them.
         </p>
 
         {/* Section 1 */}
@@ -44,10 +44,10 @@ export default function TiktokTrustCollapsePage() {
             Why TikTok Trains Buyers to Detect Inauthenticity
           </h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            TikTok's algorithm rewards raw, human, unpolished content. A founder filming on their phone in a cluttered office outperforms a slick studio production on that platform every single time. This is not a quirk — it is the core mechanic of how TikTok distributes reach.
+            TikTok's algorithm rewards raw, human, unpolished content. A founder filming on their phone in a cluttered office outperforms a slick studio production on that platform every single time. This is not a quirk - it is the core mechanic of how TikTok distributes reach.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            The consequence is that anyone who spends real time on TikTok becomes an expert at spotting templates. They have seen thousands of hours of authentic content. The moment they land on a page built from a generic SaaS template, something in their brain registers: "This is not real." They cannot always articulate it, but they act on it — instantly.
+            The consequence is that anyone who spends real time on TikTok becomes an expert at spotting templates. They have seen thousands of hours of authentic content. The moment they land on a page built from a generic SaaS template, something in their brain registers: "This is not real." They cannot always articulate it, but they act on it - instantly.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
             This pattern is documented across TikTok ad performance data. Click-through rates from TikTok campaigns routinely look strong. Then conversion rates collapse. The ad felt authentic. The page did not. The buyer left the moment the two worlds clashed.
@@ -63,13 +63,13 @@ export default function TiktokTrustCollapsePage() {
             What a 2019-Looking Page Actually Signals
           </h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            There is a specific aesthetic that reads as "2019 SaaS" to a TikTok-native buyer. It includes stock photos of diverse professionals in modern offices, gradient hero sections in purple-to-teal, phrases like "next-generation solutions," "end-to-end platform," and "empower your team." None of these are overtly wrong. Collectively, they signal that nobody real built this page — a design committee approved it.
+            There is a specific aesthetic that reads as "2019 SaaS" to a TikTok-native buyer. It includes stock photos of diverse professionals in modern offices, gradient hero sections in purple-to-teal, phrases like "next-generation solutions," "end-to-end platform," and "empower your team." None of these are overtly wrong. Collectively, they signal that nobody real built this page - a design committee approved it.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
             The specific trust-kill elements are: photography that is clearly licensed rather than taken by someone in the company, headlines that describe a category rather than a specific outcome, and copy that could apply to any of 500 competing products. These patterns say: "We are a company. We have a marketing budget. We are not talking to you specifically."
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            TikTok buyers — especially Gen Z — are not less sophisticated than older B2B buyers. They are more sophisticated in a specific way: they have been trained by the platform to evaluate trust signals at a glance. The signals that worked in 2019 (polished design, brand logos, award badges) are now actively counterproductive when the traffic source is TikTok.
+            TikTok buyers - especially Gen Z - are not less sophisticated than older B2B buyers. They are more sophisticated in a specific way: they have been trained by the platform to evaluate trust signals at a glance. The signals that worked in 2019 (polished design, brand logos, award badges) are now actively counterproductive when the traffic source is TikTok.
           </p>
           <p className="leading-relaxed text-fg-muted">
             This is not about making your page look cheap. It is about making your page look human. Those are different problems with different solutions.
@@ -82,13 +82,13 @@ export default function TiktokTrustCollapsePage() {
             Trust Elements TikTok Traffic Specifically Requires
           </h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            TikTok buyers need to see a real founder face — not a brand mascot, not a stock photo of a CEO type, not an illustrated avatar. An actual photograph of an actual person who built the thing. This one element changes conversion rates more than any headline test for TikTok-sourced traffic.
+            TikTok buyers need to see a real founder face - not a brand mascot, not a stock photo of a CEO type, not an illustrated avatar. An actual photograph of an actual person who built the thing. This one element changes conversion rates more than any headline test for TikTok-sourced traffic.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
             Named customers with specific outcomes outperform anonymous testimonials by a wide margin. "A mid-market SaaS company reduced churn by 34%" is invisible to a TikTok buyer. "Jamie at Fervent Software cut churn from 8.2% to 5.1% in the first 60 days" is real. The specificity signals that the story actually happened.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Human language matters. TikTok buyers have finely calibrated BS detectors for corporate language. Copy that sounds like it was approved by a legal team will feel like a wall between them and the product. Write the way the founder would explain the thing to a friend — direct, specific, slightly unpolished.
+            Human language matters. TikTok buyers have finely calibrated BS detectors for corporate language. Copy that sounds like it was approved by a legal team will feel like a wall between them and the product. Write the way the founder would explain the thing to a friend - direct, specific, slightly unpolished.
           </p>
           <p className="leading-relaxed text-fg-muted">
             Finally: dated proof. A testimonial from 2021 or a case study with no date reads as potentially outdated or cherry-picked. TikTok buyers want to know the product is working right now. Timestamps on testimonials, recent join dates on customer counts ("412 teams this quarter"), and clearly current screenshots all signal active traction.
@@ -101,7 +101,7 @@ export default function TiktokTrustCollapsePage() {
             The Price Signal Problem
           </h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            TikTok drives impulse-adjacent buying behaviour. A buyer arrives from a 30-second video with emotional momentum — they are curious, they want to know more, they are close to a decision. Hidden pricing or form-gated pricing kills that momentum dead.
+            TikTok drives impulse-adjacent buying behaviour. A buyer arrives from a 30-second video with emotional momentum - they are curious, they want to know more, they are close to a decision. Hidden pricing or form-gated pricing kills that momentum dead.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
             "Contact us for pricing" is the single most conversion-destructive phrase on a page receiving TikTok traffic. It signals to a Gen Z buyer one of two things: either the price is too high to say out loud, or the company does not respect their time. Neither interpretation drives action.
@@ -120,16 +120,16 @@ export default function TiktokTrustCollapsePage() {
             Social Proof Format Mismatch
           </h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            The format of your social proof matters as much as the content. Formal case studies — the kind with an executive headshot, a three-paragraph narrative, and a PDF download link — are not the social proof format that TikTok buyers trust. They are the social proof format that enterprise procurement teams trust. These are different audiences.
+            The format of your social proof matters as much as the content. Formal case studies - the kind with an executive headshot, a three-paragraph narrative, and a PDF download link - are not the social proof format that TikTok buyers trust. They are the social proof format that enterprise procurement teams trust. These are different audiences.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            G2 badges, Capterra awards, and analyst reports read as institutional validation. TikTok buyers are not looking for institutional validation. They are looking for peer validation — evidence that someone like them made this decision and it worked out. UGC-style proof is the format that matches the channel.
+            G2 badges, Capterra awards, and analyst reports read as institutional validation. TikTok buyers are not looking for institutional validation. They are looking for peer validation - evidence that someone like them made this decision and it worked out. UGC-style proof is the format that matches the channel.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            Practically, this means short-form video testimonials outperform written case studies. Screenshots of real Slack messages or emails outperform polished pull-quotes. A founder posting a quick video explaining one customer result outperforms a professionally produced brand video. The rough edges are features, not bugs — they signal that the proof is real.
+            Practically, this means short-form video testimonials outperform written case studies. Screenshots of real Slack messages or emails outperform polished pull-quotes. A founder posting a quick video explaining one customer result outperforms a professionally produced brand video. The rough edges are features, not bugs - they signal that the proof is real.
           </p>
           <p className="leading-relaxed text-fg-muted">
-            If you only have formal case studies, repurpose them. Extract the one specific number. Put a face and a first name on it. Write it in plain language. That is not dumbing it down — that is translating it for the channel where your ads are running.
+            If you only have formal case studies, repurpose them. Extract the one specific number. Put a face and a first name on it. Write it in plain language. That is not dumbing it down - that is translating it for the channel where your ads are running.
           </p>
         </section>
 
@@ -144,7 +144,7 @@ export default function TiktokTrustCollapsePage() {
           <ul className="mb-4 space-y-3 text-fg-muted">
             <li className="flex gap-3">
               <span className="mt-1 text-accent">→</span>
-              <span><strong className="text-fg">Is there a real founder or team face on the page?</strong> Not a logo, not a stock photo — a photograph of an actual person who built this product.</span>
+              <span><strong className="text-fg">Is there a real founder or team face on the page?</strong> Not a logo, not a stock photo - a photograph of an actual person who built this product.</span>
             </li>
             <li className="flex gap-3">
               <span className="mt-1 text-accent">→</span>
@@ -217,7 +217,7 @@ export default function TiktokTrustCollapsePage() {
             See What TikTok Buyers Actually See When They Land on Your Page
           </h2>
           <p className="mb-6 leading-relaxed text-fg-muted">
-            Nebula audits your landing page against the specific trust signals TikTok traffic requires — founder presence, pricing visibility, proof format, and language authenticity. Get a scored report before your next campaign launch.
+            Nebula audits your landing page against the specific trust signals TikTok traffic requires - founder presence, pricing visibility, proof format, and language authenticity. Get a scored report before your next campaign launch.
           </p>
           <Link
             href="/#audit"

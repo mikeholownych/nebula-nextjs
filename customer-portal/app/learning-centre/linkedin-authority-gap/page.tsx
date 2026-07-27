@@ -5,7 +5,7 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'The LinkedIn-to-Page Authority Gap | Nebula Learning Centre',
   description:
-    'Why high-credential LinkedIn audiences bounce from pages that convert Facebook traffic — and the specific checks you need before scaling LinkedIn spend.',
+    'Why high-credential LinkedIn audiences bounce from pages that convert Facebook traffic - and the specific checks you need before scaling LinkedIn spend.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/learning-centre/linkedin-authority-gap',
   },
@@ -15,7 +15,7 @@ const articleSchema = createArticleSchema({
   headline:
     'The LinkedIn-to-Page Authority Gap: Why High-Credential Audiences Bounce From Pages That Convert Facebook Traffic',
   description:
-    'Why high-credential LinkedIn audiences bounce from pages that convert Facebook traffic — and the specific checks you need before scaling LinkedIn spend.',
+    'Why high-credential LinkedIn audiences bounce from pages that convert Facebook traffic - and the specific checks you need before scaling LinkedIn spend.',
   url: 'https://nebulacomponents.shop/learning-centre/linkedin-authority-gap',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
@@ -52,7 +52,7 @@ export default function LinkedInAuthorityGapPage() {
           </h1>
           <p className="text-lg leading-relaxed text-fg-muted">
             LinkedIn CPCs are 3–5× Facebook. If your landing page was built for impulse-driven
-            audiences, you are burning budget on visitors who are actively evaluating you — and
+            audiences, you are burning budget on visitors who are actively evaluating you - and
             finding nothing convincing enough to stay.
           </p>
         </header>
@@ -77,7 +77,7 @@ export default function LinkedInAuthorityGapPage() {
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
             This is not a traffic quality problem. It is an audience-page alignment problem. The
-            LinkedIn audience is often <em>higher quality</em> — but higher quality buyers require
+            LinkedIn audience is often <em>higher quality</em> - but higher quality buyers require
             higher quality proof, and most landing pages were not built to deliver it.
           </p>
         </section>
@@ -89,7 +89,7 @@ export default function LinkedInAuthorityGapPage() {
           </h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             B2B buyers arriving from LinkedIn run a rapid credibility checklist that most pages
-            fail silently. Understanding what they are looking for — and in what order — is the
+            fail silently. Understanding what they are looking for - and in what order - is the
             first step to fixing the gap.
           </p>
           <ul className="mb-4 space-y-3 text-fg-muted">
@@ -98,7 +98,7 @@ export default function LinkedInAuthorityGapPage() {
               <span>
                 <strong className="text-fg">Founder and company credentials.</strong> Who built
                 this? What gives them the authority to solve this problem? LinkedIn users are
-                accustomed to profiles — they instinctively look for signals of domain expertise.
+                accustomed to profiles - they instinctively look for signals of domain expertise.
                 Anonymous brands with no named team score low.
               </span>
             </li>
@@ -114,7 +114,7 @@ export default function LinkedInAuthorityGapPage() {
               <span className="mt-1 text-accent">→</span>
               <span>
                 <strong className="text-fg">Professional register.</strong> Casual, consumer-grade
-                copy reads as amateurish to a senior buyer. This does not mean formal or stiff — it
+                copy reads as amateurish to a senior buyer. This does not mean formal or stiff - it
                 means precise, confident, and free of hype language.
               </span>
             </li>
@@ -128,7 +128,7 @@ export default function LinkedInAuthorityGapPage() {
             </li>
           </ul>
           <p className="leading-relaxed text-fg-muted">
-            If any of these four signals are absent or weak, the LinkedIn visitor bounces — not
+            If any of these four signals are absent or weak, the LinkedIn visitor bounces - not
             because the offer is wrong, but because the page failed the credibility audit they ran
             in the first 15 seconds.
           </p>
@@ -176,7 +176,7 @@ export default function LinkedInAuthorityGapPage() {
           <p className="mb-4 leading-relaxed text-fg-muted">
             A 4× CPC increase combined with a 4× conversion rate drop produces a 16× CPL
             difference. At that ratio, no amount of lead quality justification closes the economics
-            gap. The page is the problem — not the channel, the audience, or the offer.
+            gap. The page is the problem - not the channel, the audience, or the offer.
           </p>
           <p className="leading-relaxed text-fg-muted">
             The common mistake is attributing poor LinkedIn performance to audience intent and
@@ -190,8 +190,8 @@ export default function LinkedInAuthorityGapPage() {
           <h2 className="mb-4 text-xl font-semibold text-fg">The B2B Proof Hierarchy</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
             Not all social proof is equal to a LinkedIn audience. There is a strict hierarchy of
-            credibility signals, and most pages are heavy on the bottom tiers while the top tiers —
-            which actually move senior buyers — are absent.
+            credibility signals, and most pages are heavy on the bottom tiers while the top tiers -
+            which actually move senior buyers - are absent.
           </p>
           <ol className="mb-4 space-y-3 text-fg-muted">
             <li className="flex gap-3">
@@ -200,7 +200,7 @@ export default function LinkedInAuthorityGapPage() {
               </span>
               <span>
                 <strong className="text-fg">Named enterprise customers.</strong> "Used by teams at
-                Salesforce, HubSpot, and Workday" — with permission and logos — is the highest
+                Salesforce, HubSpot, and Workday" - with permission and logos - is the highest
                 signal. Peer companies create immediate social permission.
               </span>
             </li>
@@ -220,7 +220,7 @@ export default function LinkedInAuthorityGapPage() {
               </span>
               <span>
                 <strong className="text-fg">Analyst recognition.</strong> G2 Leader badges,
-                Gartner mentions, Forrester citations — independent third-party validation from
+                Gartner mentions, Forrester citations - independent third-party validation from
                 sources the buyer already trusts.
               </span>
             </li>
@@ -240,7 +240,7 @@ export default function LinkedInAuthorityGapPage() {
               </span>
               <span>
                 <strong className="text-fg">Logos without context.</strong> A logo strip with no
-                accompanying data or quote is weak signal — but still better than nothing.
+                accompanying data or quote is weak signal - but still better than nothing.
               </span>
             </li>
             <li className="flex gap-3">
@@ -264,13 +264,13 @@ export default function LinkedInAuthorityGapPage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-semibold text-fg">The Form Length Paradox</h2>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            The conventional wisdom — shorter forms convert better — breaks down for LinkedIn
+            The conventional wisdom - shorter forms convert better - breaks down for LinkedIn
             audiences when credibility has been established. Senior B2B buyers are accustomed to
             qualification processes. They do not object to a five-field form. They object to being
             asked for commitment before trust has been earned.
           </p>
           <p className="mb-4 leading-relaxed text-fg-muted">
-            The variable that matters is not field count — it is sequence. If a visitor reaches the
+            The variable that matters is not field count - it is sequence. If a visitor reaches the
             form having been convinced of your credibility, specificity of results, and peer-group
             relevance, they will complete a longer form without friction. If they reach the form
             unconvinced, even a single-field email capture will feel like an overstep.
@@ -382,8 +382,8 @@ export default function LinkedInAuthorityGapPage() {
               <span className="mt-0.5 text-accent">✓</span>
               <span>
                 <strong className="text-fg">Mobile parity check.</strong> A large share of LinkedIn
-                browsing is mobile. Ensure your credibility signals — logos, metrics, named
-                testimonials — are prominent and legible at mobile viewport, not buried below the
+                browsing is mobile. Ensure your credibility signals - logos, metrics, named
+                testimonials - are prominent and legible at mobile viewport, not buried below the
                 fold.
               </span>
             </li>
@@ -398,7 +398,7 @@ export default function LinkedInAuthorityGapPage() {
           <p className="mb-6 leading-relaxed text-fg-muted">
             If your LinkedIn campaigns are generating clicks but not converting, the page is almost
             certainly failing the professional credibility audit that every senior B2B buyer runs.
-            Nebula builds landing pages specifically calibrated for high-credential B2B audiences —
+            Nebula builds landing pages specifically calibrated for high-credential B2B audiences -
             structured proof hierarchies, professional copy register, and conversion sequences
             designed for evaluator-mode visitors.
           </p>

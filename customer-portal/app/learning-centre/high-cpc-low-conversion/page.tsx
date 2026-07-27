@@ -29,7 +29,7 @@ const faqSchema = {
       name: 'Why is my Google Ads CPC high?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'CPC is determined by the Google Ads auction, which accounts for your bid and your Quality Score. A low Quality Score means you pay more for the same position — or get outbid by competitors with better Quality Scores and lower bids. Quality Score has three components: Expected CTR (ad relevance to the search), Ad Relevance (how closely the ad matches the keyword), and Landing Page Experience (how well the landing page matches the search intent, loads quickly, and provides a useful path to conversion). The Landing Page Experience component is entirely within your control and is the most commonly neglected of the three.',
+        text: 'CPC is determined by the Google Ads auction, which accounts for your bid and your Quality Score. A low Quality Score means you pay more for the same position - or get outbid by competitors with better Quality Scores and lower bids. Quality Score has three components: Expected CTR (ad relevance to the search), Ad Relevance (how closely the ad matches the keyword), and Landing Page Experience (how well the landing page matches the search intent, loads quickly, and provides a useful path to conversion). The Landing Page Experience component is entirely within your control and is the most commonly neglected of the three.',
       },
     },
     {
@@ -45,7 +45,7 @@ const faqSchema = {
       name: 'Can fixing my landing page reduce my CPC?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes, directly. Improving Landing Page Experience — by matching the page headline to the keyword, loading faster on mobile, and providing a clear conversion path — improves your Quality Score. A higher Quality Score reduces your CPC in the ad auction for the same ad position. This means a better landing page does two things: improves conversion rate on the traffic you receive, and reduces the cost of each click. The two improvements compound — you pay less per click and convert more of the clicks you do receive.',
+        text: 'Yes, directly. Improving Landing Page Experience - by matching the page headline to the keyword, loading faster on mobile, and providing a clear conversion path - improves your Quality Score. A higher Quality Score reduces your CPC in the ad auction for the same ad position. This means a better landing page does two things: improves conversion rate on the traffic you receive, and reduces the cost of each click. The two improvements compound - you pay less per click and convert more of the clicks you do receive.',
       },
     },
     {
@@ -53,7 +53,7 @@ const faqSchema = {
       name: 'Is high CPC a targeting problem or a landing page problem?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Both can contribute. Check Quality Score components first: if Landing Page Experience is "Below Average," the landing page is a confirmed contributor to high CPC and should be fixed before any bid changes. If Expected CTR or Ad Relevance is "Below Average," the ad-to-keyword match is the priority. If all three components are "Average" or better and CPC is still high, the keyword is genuinely competitive — and the only lever is either a higher bid or finding less competitive keyword variants with comparable intent.',
+        text: 'Both can contribute. Check Quality Score components first: if Landing Page Experience is "Below Average," the landing page is a confirmed contributor to high CPC and should be fixed before any bid changes. If Expected CTR or Ad Relevance is "Below Average," the ad-to-keyword match is the priority. If all three components are "Average" or better and CPC is still high, the keyword is genuinely competitive - and the only lever is either a higher bid or finding less competitive keyword variants with comparable intent.',
       },
     },
     {
@@ -61,7 +61,7 @@ const faqSchema = {
       name: 'What is landing page experience in Google Ads?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Landing Page Experience is Google\'s assessment of how useful and relevant your landing page is to visitors who click your ad. Google evaluates: (1) relevance — does the page content match the keyword and ad promise; (2) transparency — is it clear what the page offers and who runs it; (3) ease of navigation — can the visitor find what they came for; (4) loading speed — does the page load quickly on mobile. A "Below Average" rating means at least one of these is failing. The rating appears in Google Ads under Keywords → Quality Score columns.',
+        text: 'Landing Page Experience is Google\'s assessment of how useful and relevant your landing page is to visitors who click your ad. Google evaluates: (1) relevance - does the page content match the keyword and ad promise; (2) transparency - is it clear what the page offers and who runs it; (3) ease of navigation - can the visitor find what they came for; (4) loading speed - does the page load quickly on mobile. A "Below Average" rating means at least one of these is failing. The rating appears in Google Ads under Keywords → Quality Score columns.',
       },
     },
   ],
@@ -99,7 +99,7 @@ export default function HighCpcLowConversion() {
               High CPC combined with low conversion is a two-layer problem, and
               the layers compound each other. You pay a premium per click to
               drive traffic to a page that does not convert it. Before adjusting
-              bids, find out which layer is actually broken — because fixing
+              bids, find out which layer is actually broken - because fixing
               the page often reduces the CPC too.
             </p>
           </div>
@@ -110,7 +110,7 @@ export default function HighCpcLowConversion() {
               Why CPC and conversion are linked through Quality Score
             </h2>
             <p className="leading-relaxed text-fg-muted">
-              Your cost-per-click in Google Ads is not just your bid — it is
+              Your cost-per-click in Google Ads is not just your bid - it is
               determined by the ad auction, which accounts for your bid and your
               Quality Score together. A low Quality Score means you pay more for
               the same ad position than a competitor with a higher score bidding
@@ -131,7 +131,7 @@ export default function HighCpcLowConversion() {
                 },
                 {
                   label: 'Landing Page Experience',
-                  detail: 'How well the landing page matches the keyword and ad promise, loads on mobile, and provides a clear path to conversion. This is the component most commonly rated "Below Average" — and the most directly controllable.',
+                  detail: 'How well the landing page matches the keyword and ad promise, loads on mobile, and provides a clear path to conversion. This is the component most commonly rated "Below Average" - and the most directly controllable.',
                 },
               ].map(({ label, detail }) => (
                 <li key={label} className="flex items-start gap-3 text-fg-muted">
@@ -220,7 +220,7 @@ export default function HighCpcLowConversion() {
                 {
                   dimension: 'Speed',
                   what: 'The page loads quickly on mobile',
-                  fix: "Check LCP with Google PageSpeed Insights on mobile preset. Target under 2.5 seconds. Portent's 2022 analysis found B2B pages loading in 1 second convert at roughly 3x the rate of pages loading in 5 seconds — so speed improvements improve both Quality Score and conversion rate simultaneously.",
+                  fix: "Check LCP with Google PageSpeed Insights on mobile preset. Target under 2.5 seconds. Portent's 2022 analysis found B2B pages loading in 1 second convert at roughly 3x the rate of pages loading in 5 seconds - so speed improvements improve both Quality Score and conversion rate simultaneously.",
                 },
                 {
                   dimension: 'Navigation',
@@ -247,7 +247,7 @@ export default function HighCpcLowConversion() {
               raises Landing Page Experience, which improves Quality Score,
               which lowers CPC in the auction. At the same time, the same
               message-match improvement means more of the visitors who do click
-              will recognise they are in the right place and stay — raising
+              will recognise they are in the right place and stay - raising
               conversion rate directly.
             </p>
             <p className="mt-4 leading-relaxed text-fg-muted">
@@ -259,7 +259,7 @@ export default function HighCpcLowConversion() {
             </p>
             <p className="mt-4 leading-relaxed text-fg-muted">
               This is why high CPC + low conversion is a page problem before it
-              is a bid problem. The bid lever is the last one to adjust — after
+              is a bid problem. The bid lever is the last one to adjust - after
               the page has been fixed and Quality Score has been given time (a
               few weeks of campaign data) to reflect the improvement.
             </p>
