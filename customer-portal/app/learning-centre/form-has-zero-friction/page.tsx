@@ -260,11 +260,11 @@ export default function FormHasZeroFrictionPage() {
             </li>
             <li>
               <Link
-                href="/learning-centre/no-testimonials-on-landing-page"
+                href="/learning-centre/proof-before-cta"
                 className="group flex flex-col gap-1"
               >
                 <span className="font-medium text-fg group-hover:text-accent transition-colors">
-                  No Testimonials on Your Landing Page
+                  Proof Before CTA
                 </span>
                 <span className="text-sm text-fg-muted">
                   The specific cost of missing social proof and exactly where to place what you have

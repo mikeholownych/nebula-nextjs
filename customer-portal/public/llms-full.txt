@@ -94,7 +94,7 @@ These are probabilistic outcomes influenced by factors outside the page itself.
 
 ## Learning Centre
 
-The Nebula Learning Centre contains 42 articles diagnosing specific landing page failure patterns:
+The Nebula Learning Centre contains 41 articles diagnosing specific landing page failure patterns:
 
 - Landing page not converting paid traffic: Start here
 - Why Google Ads clicks don't lead to sales

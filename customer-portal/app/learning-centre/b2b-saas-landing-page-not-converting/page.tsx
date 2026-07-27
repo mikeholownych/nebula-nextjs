@@ -52,7 +52,7 @@ const articleSchema = createArticleSchema({
   description: 'When a B2B SaaS landing page is not converting paid traffic, message-match is the first thing to audit. Learn the 3-step fix.',
   url: 'https://nebulacomponents.shop/learning-centre/b2b-saas-landing-page-not-converting',
   publishedDate: '2025-07-15',
-  modifiedDate: '2026-07-19',
+  modifiedDate: '2026-07-27',
 })
 
 export default function B2BSaaSLandingPageNotConverting() {
@@ -149,6 +149,36 @@ export default function B2BSaaSLandingPageNotConverting() {
                 </li>
               ))}
             </ol>
+          </section>
+
+          {/* Section 3b — demo flow specifics */}
+          <section className="mt-14">
+            <h2 className="text-2xl font-bold text-fg">3b. The Demo Flow Itself Is Often the Second Leak</h2>
+            <p className="mt-4 leading-relaxed text-fg-muted">
+              Fixing the page sequence surfaces a second, quieter leak: what happens between clicking
+              &quot;Request a Demo&quot; and an actual meeting on the calendar. Three demo-flow
+              specifics matter more for B2B SaaS than for other verticals:
+            </p>
+            <ul className="mt-6 space-y-4">
+              {[
+                { label: 'Form-to-meeting gap', detail: 'A form that routes to a sales queue instead of an embedded scheduler (Calendly, Chili Piper) adds a follow-up-email step where buyers who were 57% decided lose momentum and re-open the tab of a competitor instead.' },
+                { label: 'Qualifying questions before the calendar', detail: 'Asking company size, use case, and timeline before showing a calendar lets self-selecting low-fit visitors exit before booking - which improves show-rate and sales time far more than it reduces raw form volume.' },
+                { label: 'What the confirmation page promises', detail: 'A confirmation screen that says only "we\'ll be in touch" reintroduces the same trust gap the page just closed. State exactly who will show up, what they will cover, and how long it takes - that specificity is itself a proof element.' },
+              ].map((item) => (
+                <li key={item.label} className="flex gap-4 rounded-xl border border-border bg-bg-muted/20 p-5">
+                  <span className="mt-0.5 shrink-0 text-accent">→</span>
+                  <div>
+                    <p className="font-semibold text-fg">{item.label}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-fg-muted">{item.detail}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 leading-relaxed text-fg-muted">
+              A page that earns the demo ask but then routes it through a generic contact form
+              still loses the buyer it just convinced. The fix to message-match and the fix to the
+              demo flow are separate repairs - diagnose both before assuming one solves the other.
+            </p>
           </section>
 
           {/* Section 4 — quick wins */}

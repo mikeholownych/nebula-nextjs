@@ -65,6 +65,10 @@ const nextConfig: NextConfig = {
       { source: '/learning-centre/founder-second-brain',        destination: '/playbooks/founder-second-brain',        permanent: true },
       { source: '/learning-centre/linkedin-skill-engine',       destination: '/playbooks/linkedin-skill-engine',       permanent: true },
       { source: '/learning-centre/specialist-ai-agent-library', destination: '/playbooks/specialist-ai-agent-library', permanent: true },
+      // Consolidated into proof-before-cta (2026-07-27): near-duplicate
+      // thin article covering the same proof-before-ask argument — see
+      // the Content audit's cannibalization finding.
+      { source: '/learning-centre/no-testimonials-on-landing-page', destination: '/learning-centre/proof-before-cta', permanent: true },
       // True orphans → 410 Gone (no equity to preserve, no equivalent page)
       { source: '/ad-burn-leaderboard.html',            destination: '/gone',                permanent: true },
       { source: '/og-card-source.html',                 destination: '/gone',                permanent: true },

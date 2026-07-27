@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
   title: 'Retargeting Ads Not Converting: The Landing Page Is Still The Issue | Nebula Components',
@@ -7,9 +8,21 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/retargeting-ads-not-converting' },
 }
 
+const articleSchema = createArticleSchema({
+  headline: 'Retargeting Ads Not Converting? The First Page Failed Them',
+  description: 'Retargeting campaigns that do not convert send warm traffic to the same broken landing pages as cold campaigns.',
+  url: 'https://nebulacomponents.shop/learning-centre/retargeting-ads-not-converting',
+  publishedDate: '2026-01-01',
+  modifiedDate: '2026-07-27',
+})
+
 export default function LearningCentrePage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className="mx-auto max-w-3xl px-6 py-14">
         <Link href="/learning-centre" className="text-sm font-semibold text-accent hover:text-accent-light transition-colors">
           ← Learning Centre
@@ -17,7 +30,7 @@ export default function LearningCentrePage() {
 
         <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
-            Meta Ads Leaks · retargeting ads not converting
+            Meta Ads Leaks · Retargeting Not Converting
           </p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
             Retargeting Ads Not Converting? The First Page Failed Them
@@ -47,6 +60,34 @@ export default function LearningCentrePage() {
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
             <strong className="text-fg">Intent:</strong> A clear first page creates clear intent. Visitors know what you offer and whether it&apos;s for them. Retargeting then serves as a nudge, not a rescue mission.
+          </p>
+        </section>
+
+        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <h2 className="mb-4 text-2xl font-bold text-fg">Segment retargeting by drop-off point, not just by &quot;visited&quot;</h2>
+          <p className="leading-relaxed text-fg-muted">
+            A single &quot;all site visitors&quot; retargeting audience treats a visitor who bounced
+            in two seconds the same as one who reached checkout and abandoned. Those are different
+            problems and need different pages:
+          </p>
+          <ul className="mt-4 space-y-2 text-fg-muted">
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span><strong className="text-fg">Bounced in under 10 seconds:</strong> The message-match gap is the likely cause - retarget with the original ad&apos;s exact headline restated, not a discount.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span><strong className="text-fg">Scrolled but didn&apos;t engage the CTA:</strong> The proof or objection-handling further down the page didn&apos;t land - retarget to a page section, not the homepage.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span><strong className="text-fg">Started checkout or a form, then left:</strong> This is genuine purchase intent that stalled on friction - retarget with a direct link back into the same step, not a new landing page.</span>
+            </li>
+          </ul>
+          <p className="mt-4 leading-relaxed text-fg-muted">
+            Sending all three segments to the same generic retargeting creative and the same
+            homepage is the most common reason retargeting spend underperforms cold prospecting -
+            it treats three distinct leaks as one.
           </p>
         </section>
 
@@ -121,14 +162,14 @@ export default function LearningCentrePage() {
             <Link href="/learning-centre/facebook-ads-no-leads" className="block border-b border-border py-2.5 text-fg-muted transition-colors hover:text-accent">
               Facebook Ads Getting Clicks But No Leads
             </Link>
+            <Link href="/learning-centre/meta-ads-high-frequency-not-converting" className="block border-b border-border py-2.5 text-fg-muted transition-colors hover:text-accent">
+              Meta Ads High Frequency? The Page May Be Burning Budget
+            </Link>
             <Link href="/learning-centre/landing-page-not-converting" className="block border-b border-border py-2.5 text-fg-muted transition-colors hover:text-accent">
               Landing Page Not Converting? Diagnose These 5 Leaks First
             </Link>
             <Link href="/learning-centre/google-ads-clicks-no-sales" className="block border-b border-border py-2.5 text-fg-muted transition-colors hover:text-accent">
               Google Ads Clicks But No Sales: Check The Page Before Budget
-            </Link>
-            <Link href="/learning-centre/high-cpc-low-conversion" className="block border-b border-border py-2.5 text-fg-muted transition-colors hover:text-accent">
-              High CPC, Low Conversion: Stop Optimizing The Wrong Layer
             </Link>
           </div>
         </section>

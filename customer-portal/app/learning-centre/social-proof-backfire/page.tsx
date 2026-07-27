@@ -217,14 +217,6 @@ export default function SocialProofBackfirePage() {
             </li>
             <li>
               <Link
-                href="/learning-centre/no-testimonials-on-landing-page"
-                className="text-sm text-fg-muted underline underline-offset-4 hover:text-fg transition-colors"
-              >
-                No Testimonials on Your Landing Page? Here's What to Use Instead
-              </Link>
-            </li>
-            <li>
-              <Link
                 href="/learning-centre/landing-page-not-converting"
                 className="text-sm text-fg-muted underline underline-offset-4 hover:text-fg transition-colors"
               >

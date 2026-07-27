@@ -15,7 +15,7 @@ const articleSchema = createArticleSchema({
     'What visitors see before a CTA can change how they evaluate the ask. These proof-placement sequences are testable hypotheses, not universal laws.',
   url: 'https://nebulacomponents.shop/learning-centre/proof-before-cta',
   publishedDate: '2025-07-15',
-  modifiedDate: '2026-07-21',
+  modifiedDate: '2026-07-27',
 })
 
 export default function ProofBeforeCTAPage() {
@@ -227,6 +227,51 @@ export default function ProofBeforeCTAPage() {
               </p>
             </div>
           </div>
+        </section>
+
+        {/* Section 5 — Zero testimonials */}
+        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <h2 className="mb-4 text-2xl font-bold text-fg">
+            What to Use When You Have Zero Testimonials Yet
+          </h2>
+          <p className="mb-5 leading-relaxed text-fg-muted">
+            A new offer or a new landing page often has no reviews to show. That is not a
+            reason to skip proof entirely - it is a reason to substitute a different, still
+            verifiable, form of it until testimonials exist:
+          </p>
+          <ul className="space-y-4 text-fg-muted">
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <div>
+                <span className="font-semibold text-fg">A specific, verifiable process claim.</span>{' '}
+                &quot;Every audit runs the same 7-point diagnostic&quot; is proof of rigor even
+                without an outcome number attached - it tells the visitor the evaluation is
+                systematic, not improvised.
+              </div>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <div>
+                <span className="font-semibold text-fg">Founder or operator credibility, stated plainly.</span>{' '}
+                A short, honest line about who is behind the offer and why - not a fabricated
+                client count - can substitute for social proof when none exists yet.
+              </div>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <div>
+                <span className="font-semibold text-fg">Transparent scarcity.</span>{' '}
+                Stating plainly that you do not yet have a case study - and explaining what one
+                would require to publish - reads as more trustworthy than an invented number,
+                because it is falsifiable and specific.
+              </div>
+            </li>
+          </ul>
+          <p className="mt-5 leading-relaxed text-fg-muted">
+            What does not work: leaving the proof slot empty, or filling it with an unverifiable
+            claim. Both cost more trust than an honest &quot;here is what we can show you right
+            now&quot; statement.
+          </p>
         </section>
 
         {/* CTA block */}

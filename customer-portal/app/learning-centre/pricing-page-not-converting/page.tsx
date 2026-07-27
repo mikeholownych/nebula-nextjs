@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
   title: 'Pricing Page Not Converting: The Real Reason Visitors Do Not Buy | Nebula Components',
@@ -7,9 +8,21 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/pricing-page-not-converting' },
 }
 
+const articleSchema = createArticleSchema({
+  headline: 'Pricing Page Not Converting? The Tier Structure May Be Wrong',
+  description: 'A pricing page that does not convert usually has one of four diagnosable problems. Identify yours before changing the price.',
+  url: 'https://nebulacomponents.shop/learning-centre/pricing-page-not-converting',
+  publishedDate: '2026-01-01',
+  modifiedDate: '2026-07-27',
+})
+
 export default function LearningCentrePage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className="mx-auto max-w-3xl px-6 py-14">
         <Link href="/learning-centre" className="text-sm font-semibold text-accent hover:text-accent-light transition-colors">
           ← Learning Centre
@@ -17,7 +30,7 @@ export default function LearningCentrePage() {
 
         <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
-            Industry Specific · pricing page not converting
+            Industry Specific · Pricing Page Not Converting
           </p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
             Pricing Page Not Converting? The Tier Structure May Be Wrong
@@ -72,6 +85,34 @@ export default function LearningCentrePage() {
           </p>
           <p className="mt-4 leading-relaxed text-fg-muted">
             One tier highlighted. The middle option gets the &quot;Most Popular&quot; or &quot;Recommended&quot; badge. Most buyers will not comparison shop. They will take the suggested option.
+          </p>
+        </section>
+
+        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <h2 className="mb-4 text-2xl font-bold text-fg">Usage-based and seat-based pricing add a specific anxiety</h2>
+          <p className="leading-relaxed text-fg-muted">
+            Flat-tier pricing has a tier-selection problem. Usage-based or per-seat pricing has a
+            different, sharper one: the visitor cannot answer &quot;what will I actually pay?&quot;
+            without doing math the page didn&apos;t offer to do for them.
+          </p>
+          <ul className="mt-4 space-y-2 text-fg-muted">
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span><strong className="text-fg">No calculator, just a per-unit rate:</strong> &quot;$0.002 per API call&quot; tells a visitor nothing until they know their own volume. Without an interactive estimate, most will not do the multiplication themselves - they will assume the worst case and leave.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span><strong className="text-fg">No visible ceiling:</strong> Usage-based pricing without a stated cap or overage-alert mechanism reads as open-ended financial risk, even to a buyer who would comfortably fit in the lowest tier.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span><strong className="text-fg">Seat pricing with unclear seat definition:</strong> &quot;Per user&quot; pricing that doesn&apos;t specify whether viewers, guests, or integrations count as seats creates the same uncertainty - buyers overestimate cost to be safe, then bounce.</span>
+            </li>
+          </ul>
+          <p className="mt-4 leading-relaxed text-fg-muted">
+            The fix is rarely to hide the model - it&apos;s to make the math visible. A simple
+            slider or a &quot;typical customer at your size pays $X&quot; anchor removes the guesswork
+            that otherwise gets resolved by leaving.
           </p>
         </section>
 

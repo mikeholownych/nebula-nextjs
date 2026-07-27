@@ -49,7 +49,7 @@ Mike Holownych — Founder, Nebula Components.
 
 # Evidence
 - Published case studies: none. Nebula does not publish a case until it has inspectable evidence, a measurement window, publication permission, disclosure, and publication metadata.
-- Learning Centre: 42 articles on landing page conversion issues
+- Learning Centre: 41 articles on landing page conversion issues
 - Open-source audit tooling: github.com/mikeholownych/citable
 - Verified customer case studies: none published yet; publication requires a real before/after metric, measurement window, and inspectable evidence
 

@@ -132,8 +132,8 @@ export default function TiktokAdsNotConvertingPage() {
             <Link href="/learning-centre/message-match-checklist" className="block py-2 text-accent hover:text-accent-light transition-colors font-medium">
               → Message Match Checklist
             </Link>
-            <Link href="/learning-centre/no-testimonials-on-landing-page" className="block py-2 text-accent hover:text-accent-light transition-colors font-medium">
-              → No Testimonials on Your Landing Page
+            <Link href="/learning-centre/proof-before-cta" className="block py-2 text-accent hover:text-accent-light transition-colors font-medium">
+              → Proof Before CTA: The Simple Fix Most Landing Pages Miss
             </Link>
             <Link href="/learning-centre/landing-page-not-converting" className="block py-2 text-accent hover:text-accent-light transition-colors font-medium">
               → Landing Page Not Converting

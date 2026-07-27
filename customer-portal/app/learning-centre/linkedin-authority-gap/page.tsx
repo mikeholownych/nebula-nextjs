@@ -440,10 +440,10 @@ export default function LinkedInAuthorityGapPage() {
             </li>
             <li>
               <Link
-                href="/learning-centre/no-testimonials-on-landing-page"
+                href="/learning-centre/proof-before-cta"
                 className="text-accent hover:underline"
               >
-                No Testimonials on Your Landing Page: What It Costs You
+                Proof Before CTA: The Simple Fix Most Landing Pages Miss
               </Link>
             </li>
           </ul>

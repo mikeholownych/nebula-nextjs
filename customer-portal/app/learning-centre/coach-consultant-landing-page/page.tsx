@@ -113,7 +113,6 @@ export default function CoachConsultantLandingPagePage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
           <div className="space-y-1">
-            <Link href="/learning-centre/no-testimonials-on-landing-page" className="block text-accent hover:text-accent-light transition-colors">Why Missing Testimonials Kill Personal-Service Pages →</Link>
             <Link href="/learning-centre/proof-before-cta" className="block text-accent hover:text-accent-light transition-colors">Proof Before CTA: The Ordering Rule That Lifts Conversions →</Link>
             <Link href="/learning-centre/pricing-page-not-converting" className="block text-accent hover:text-accent-light transition-colors">Pricing Page Not Converting: What The Page Is Hiding →</Link>
             <Link href="/learning-centre/cta-not-working" className="block text-accent hover:text-accent-light transition-colors">CTA Not Working: The Five Most Common Button Leaks →</Link>

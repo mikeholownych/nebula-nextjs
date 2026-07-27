@@ -262,10 +262,10 @@ export default function AgencyHandoffDebtPage() {
             </li>
             <li>
               <Link
-                href="/learning-centre/no-testimonials-on-landing-page"
+                href="/learning-centre/proof-before-cta"
                 className="text-accent hover:text-accent-light font-medium transition-colors"
               >
-                No testimonials on your landing page →
+                Proof before CTA: the simple fix most landing pages miss →
               </Link>
               <p className="mt-1 text-sm text-fg-muted">
                 Why missing or buried social proof is the single most reliable predictor of a

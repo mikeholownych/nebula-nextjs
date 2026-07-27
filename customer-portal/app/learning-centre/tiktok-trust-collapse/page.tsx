@@ -194,10 +194,10 @@ export default function TiktokTrustCollapsePage() {
             </li>
             <li>
               <Link
-                href="/learning-centre/no-testimonials-on-landing-page"
+                href="/learning-centre/proof-before-cta"
                 className="text-accent underline-offset-4 hover:underline"
               >
-                No Testimonials on Your Landing Page: What You Are Signalling to Buyers
+                Proof Before CTA: The Simple Fix Most Landing Pages Miss
               </Link>
             </li>
             <li>

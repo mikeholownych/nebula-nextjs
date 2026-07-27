@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
   title: 'Google Ads Quality Score Low: Fix The Page | Nebula',
@@ -7,9 +8,21 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/google-ads-quality-score-low' },
 }
 
+const articleSchema = createArticleSchema({
+  headline: 'Google Ads Quality Score Low? Fix The Page Before The Account',
+  description: 'Low Quality Score is a landing page problem, not an ad problem. Learn what Google is measuring and how to fix it.',
+  url: 'https://nebulacomponents.shop/learning-centre/google-ads-quality-score-low',
+  publishedDate: '2026-01-01',
+  modifiedDate: '2026-07-27',
+})
+
 export default function LearningCentrePage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className="mx-auto max-w-3xl px-6 py-14">
         <Link href="/learning-centre" className="text-sm font-semibold text-accent hover:text-accent-light transition-colors">
           ← Learning Centre
@@ -17,7 +30,7 @@ export default function LearningCentrePage() {
 
         <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
-            Google Ads Leaks · google ads quality score low
+            Google Ads Leaks · Quality Score Low
           </p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
             Google Ads Quality Score Low? Fix The Page Before The Account
@@ -116,6 +129,35 @@ export default function LearningCentrePage() {
               Match the ad&apos;s specific offer to the page&apos;s specific page-not a generic homepage
             </li>
           </ul>
+        </section>
+
+        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <h2 className="mb-4 text-2xl font-bold text-fg">Read the component breakdown, not just the 1-10 number</h2>
+          <p className="leading-relaxed text-fg-muted">
+            The single Quality Score number is a diagnostic summary, not the diagnosis itself. Google
+            shows each of the three components rated &quot;Below average,&quot; &quot;Average,&quot;
+            or &quot;Above average&quot; when you hover the score in the keyword view. That breakdown
+            tells you which repair to make first:
+          </p>
+          <ul className="mt-4 space-y-2 text-fg-muted">
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span><strong className="text-fg">Landing page experience: Below average, others fine.</strong> This isolates the leak to the page - relevance and CTR are already working. Fix the page before touching ad copy.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span><strong className="text-fg">All three below average.</strong> This usually means the keyword itself is mismatched to the offer, not that any single element is broken - see the keyword-fit check below before spending time on page copy.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span><strong className="text-fg">Expected CTR: Below average, landing page: Average or above.</strong> The page is not the leak here - the ad copy or extensions are underselling a page that already converts. Do not change the page based on this pattern.</span>
+            </li>
+          </ul>
+          <p className="mt-4 leading-relaxed text-fg-muted">
+            Fixing a page when the landing page experience component is already &quot;Average&quot;
+            or better wastes the repair - re-check the component breakdown after any change to
+            confirm which lever actually moved.
+          </p>
         </section>
 
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">

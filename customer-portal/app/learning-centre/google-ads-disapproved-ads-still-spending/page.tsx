@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
   title: 'Google Ads Disapproved But Still Spending: What To Do | Nebula Components',
@@ -7,9 +8,21 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/google-ads-disapproved-ads-still-spending' },
 }
 
+const articleSchema = createArticleSchema({
+  headline: 'Google Ads Disapproved? Your Page May Be The Hidden Reason',
+  description: 'Google Ads can disapprove ads while still charging for impressions. Here is how to identify and stop this from happening.',
+  url: 'https://nebulacomponents.shop/learning-centre/google-ads-disapproved-ads-still-spending',
+  publishedDate: '2026-01-01',
+  modifiedDate: '2026-07-27',
+})
+
 export default function LearningCentrePage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className="mx-auto max-w-3xl px-6 py-14">
         <Link href="/learning-centre" className="text-sm font-semibold text-accent hover:text-accent-light transition-colors">
           ← Learning Centre
@@ -17,7 +30,7 @@ export default function LearningCentrePage() {
 
         <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
-            Google Ads Leaks · google ads disapproved ads still spending
+            Google Ads Leaks · Disapproved But Still Spending
           </p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
             Google Ads Disapproved? Your Page May Be The Hidden Reason
@@ -52,6 +65,33 @@ export default function LearningCentrePage() {
           </ul>
           <p className="mt-4 leading-relaxed text-fg-muted">
             The issue is that these violations are often invisible to the advertiser. The page loads. It looks fine. But Google&apos;s automated crawlers detect the underlying policy breach.
+          </p>
+        </section>
+
+        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <h2 className="mb-4 text-2xl font-bold text-fg">Why the ad can keep spending after disapproval</h2>
+          <p className="leading-relaxed text-fg-muted">
+            The specific mechanic advertisers miss: disapproval and delivery are not always the same
+            switch. A few paths let spend continue after a violation is detected:
+          </p>
+          <ul className="mt-4 space-y-2 text-fg-muted">
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span><strong className="font-semibold">Delayed re-crawl:</strong> Google&apos;s policy crawler does not re-check a live landing page on every impression. A page that passed review, then broke (expired cert, a redirect added later, a plugin update), can keep serving and accruing cost until the next crawl catches the change.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span><strong className="font-semibold">Ad group vs. ad-level scope:</strong> A violation flagged on one ad in a group does not always immediately pause sibling ads pointing to the same broken page - they can keep spending until each is individually reviewed.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span><strong className="font-semibold">&quot;Limited&quot; vs. &quot;Disapproved&quot; status:</strong> A &quot;Limited&quot; policy status still serves in some geos or contexts while under review - it is easy to read this as fully paused when it is not.</span>
+            </li>
+          </ul>
+          <p className="mt-4 leading-relaxed text-fg-muted">
+            Check the Recommendations and Policy Manager sections of the account directly rather than
+            assuming a disapproved label always means zero delivery - the gap between the two is
+            where budget quietly leaks.
           </p>
         </section>
 
@@ -127,7 +167,10 @@ export default function LearningCentrePage() {
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Find the violation before Google does</h2>
           <p className="mb-6 leading-relaxed text-fg-muted">
-            Run the free Nebula audit to surface landing page issues that trigger disapprovals. Fix the $97 pack includes policy compliance flags.
+            The free Nebula audit identifies likely page-side leaks, including policy-relevant issues
+            like redirects and expired certificates. The $97 One-Leak Repair Sprint selects one
+            high-confidence page-level repair, confirms the scope with you, implements it, and
+            verifies the live change. It does not promise conversion lift or account reinstatement.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/audit" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">
@@ -144,6 +187,9 @@ export default function LearningCentrePage() {
           <div className="space-y-1">
             <Link href="/learning-centre/google-ads-clicks-no-sales" className="block border-b border-border py-2.5 text-fg-muted transition-colors last:border-0 hover:text-accent">
               Google Ads Clicks But No Sales: Check The Page Before Budget
+            </Link>
+            <Link href="/learning-centre/google-ads-quality-score-low" className="block border-b border-border py-2.5 text-fg-muted transition-colors last:border-0 hover:text-accent">
+              Google Ads Quality Score Low? Fix The Page Before The Account
             </Link>
             <Link href="/learning-centre/landing-page-not-converting" className="block border-b border-border py-2.5 text-fg-muted transition-colors last:border-0 hover:text-accent">
               Landing Page Not Converting? Diagnose These 5 Leaks First

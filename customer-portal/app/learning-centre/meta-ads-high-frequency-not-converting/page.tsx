@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
   title: 'Meta Ads High Frequency Not Converting: The Page Is The Problem | Nebula Components',
@@ -7,9 +8,21 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/meta-ads-high-frequency-not-converting' },
 }
 
+const articleSchema = createArticleSchema({
+  headline: 'Meta Ads High Frequency? The Page May Be Burning Budget',
+  description: 'High-frequency Meta ads that are not converting are usually not an ad fatigue problem. They are a landing page problem.',
+  url: 'https://nebulacomponents.shop/learning-centre/meta-ads-high-frequency-not-converting',
+  publishedDate: '2026-01-01',
+  modifiedDate: '2026-07-27',
+})
+
 export default function LearningCentrePage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className="mx-auto max-w-3xl px-6 py-14">
         <Link href="/learning-centre" className="text-sm font-semibold text-accent hover:text-accent-light transition-colors">
           ← Learning Centre
@@ -17,7 +30,7 @@ export default function LearningCentrePage() {
 
         <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
-            Meta Ads Leaks · meta-ads-high-frequency-not-converting
+            Meta Ads Leaks · High Frequency, No Conversions
           </p>
           <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
             Meta Ads High Frequency? The Page May Be Burning Budget
@@ -52,6 +65,35 @@ export default function LearningCentrePage() {
         </section>
 
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <h2 className="mb-4 text-2xl font-bold text-fg">Why placement changes the threshold</h2>
+          <p className="leading-relaxed text-fg-muted">
+            &quot;Frequency above 5&quot; is not a single universal ceiling - it moves with where the
+            ad shows up. Feed placements accumulate frequency slowly, since each impression
+            competes with organic content for attention, so fatigue tends to show later. Stories
+            and Reels placements are consumed faster and repeat sooner in a single session, so the
+            same numeric frequency represents more real exposure to the same eyes.
+          </p>
+          <ul className="mt-4 space-y-2 text-fg-muted">
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span><strong className="text-fg">Feed:</strong> CTR erosion usually starts to show past a frequency of 6-7.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span><strong className="text-fg">Stories/Reels:</strong> The same erosion often shows up by a frequency of 3-4, because the format is skippable in under a second.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span><strong className="text-fg">Retargeting audiences:</strong> Frequency climbs fastest here because the pool is small - check this segment separately from cold prospecting.</span>
+            </li>
+          </ul>
+          <p className="mt-4 leading-relaxed text-fg-muted">
+            Break your frequency report out by placement before deciding the ad is fatigued. A
+            blended frequency of 4 can hide a Stories segment already past its real ceiling.
+          </p>
+        </section>
+
+        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">When the page is the problem</h2>
           <p className="leading-relaxed text-fg-muted">
             But here&apos;s the leak most miss: frequency high, clicks still strong, but conversions flat or falling. The ad is doing its job - people are clicking. The page is where they lose interest.
@@ -73,6 +115,25 @@ export default function LearningCentrePage() {
           <p className="mt-4 leading-relaxed text-fg-muted">
             This pattern means your ad spend is working - the page is burning the budget after the click.
           </p>
+        </section>
+
+        <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
+          <h2 className="mb-4 text-2xl font-bold text-fg">Why the page fails first at high frequency</h2>
+          <p className="leading-relaxed text-fg-muted">
+            A visitor who has seen the same ad four or five times has already formed an
+            expectation before they click. Two page-side failures show up specifically at high
+            frequency, even when they were invisible at low frequency:
+          </p>
+          <ul className="mt-4 space-y-2 text-fg-muted">
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span><strong className="text-fg">Static page, rotating creative.</strong> If you refresh ad hooks to fight fatigue but the landing page headline never changes, repeat viewers land on a page that no longer matches the specific angle that got them to click this time.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span><strong className="text-fg">No new information on repeat visits.</strong> A visitor on their fourth impression has already read the page once. If nothing on it answers a harder, more skeptical question than the first visit did, there is no reason for this exposure to convert where the last three didn&apos;t.</span>
+            </li>
+          </ul>
         </section>
 
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
@@ -126,8 +187,8 @@ export default function LearningCentrePage() {
             <Link href="/learning-centre/facebook-ads-no-leads" className="block border-b border-border py-2.5 text-fg-muted transition-colors last:border-0 hover:text-accent">
               Facebook Ads Getting Clicks But No Leads
             </Link>
-            <Link href="/learning-centre/google-ads-clicks-no-sales" className="block border-b border-border py-2.5 text-fg-muted transition-colors last:border-0 hover:text-accent">
-              Google Ads Clicks But No Sales: Check The Page Before Budget
+            <Link href="/learning-centre/retargeting-ads-not-converting" className="block border-b border-border py-2.5 text-fg-muted transition-colors last:border-0 hover:text-accent">
+              Retargeting Ads Not Converting? The First Page Failed Them
             </Link>
             <Link href="/learning-centre/landing-page-not-converting" className="block border-b border-border py-2.5 text-fg-muted transition-colors last:border-0 hover:text-accent">
               Landing Page Not Converting? Diagnose These 5 Leaks First

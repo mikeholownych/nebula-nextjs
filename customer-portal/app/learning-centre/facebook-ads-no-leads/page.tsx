@@ -211,8 +211,8 @@ export default function FacebookAdsNoLeadsPage() {
             <Link href="/learning-centre/message-match-checklist" className="block py-2 text-accent hover:text-accent-light transition-colors font-medium">
               → Message match checklist: ad to page alignment
             </Link>
-            <Link href="/learning-centre/no-testimonials-on-landing-page" className="block py-2 text-accent hover:text-accent-light transition-colors font-medium">
-              → No testimonials on your landing page: what it's costing you
+            <Link href="/learning-centre/proof-before-cta" className="block py-2 text-accent hover:text-accent-light transition-colors font-medium">
+              → Proof Before CTA: The Simple Fix Most Landing Pages Miss
             </Link>
             <Link href="/learning-centre/traffic-but-no-form-fills" className="block py-2 text-accent hover:text-accent-light transition-colors font-medium">
               → Traffic but no form fills: where the drop-off happens
