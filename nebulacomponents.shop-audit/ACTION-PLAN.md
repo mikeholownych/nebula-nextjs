@@ -32,7 +32,7 @@ Prioritized by severity and dependency. Complete Phase 1 before anything else �
 14. ✅ **Added pillar → cluster-lead links.** `landing-page-not-converting` now links to a representative article in all 13 content clusters, up from 5.
 15. ✅ **Expanded/consolidated the thin articles.** Of the original 9 sub-500-word articles, 3 were already relocated out of learning-centre (see item 18). Consolidated `no-testimonials-on-landing-page` into `proof-before-cta` (redirect + updated inbound links); expanded the remaining 5-6 with genuine trigger/vertical-specific depth. Also fixed a live templating bug (raw/partially-humanized URL slugs leaking into visible category eyebrows) and one stale "$97 pack" offer-copy reference found along the way.
 16. ✅ **Added a real content image** — ran the live `/audit` tool against nebulacomponents.shop itself and used the genuine results screenshot (not a fabricated before/after) on `/audit` and the pillar article.
-17. ⛔ **Not done — needs your account access.** GitHub profile website field (`aisyndicate.io` → `nebulacomponents.shop`) and the 404ing LinkedIn company page both require your account logins.
+17. ⚠️ **Half done.** The "404ing" LinkedIn company page was a wrong-slug testing artifact — `linkedin.com/company/nebulacomponents` (no hyphen) is valid, confirmed by the site owner 2026-07-27; fixed all internal references (schema `sameAs`, footer link, llms.txt/llms-full.txt) to the correct slug. **Still open:** GitHub profile website field (`aisyndicate.io` → `nebulacomponents.shop`) needs your account login.
 
 ## Phase 3: Content & Authority (month 2)
 
