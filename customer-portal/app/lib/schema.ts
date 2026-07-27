@@ -17,7 +17,7 @@ export const organizationSchema = {
     availableLanguage: 'English',
   },
   sameAs: [
-    'https://www.linkedin.com/company/nebula-components',
+    'https://www.linkedin.com/company/nebulacomponents',
     'https://github.com/mikeholownych',
   ],
   founder: {

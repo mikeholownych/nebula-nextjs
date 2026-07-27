@@ -155,7 +155,7 @@ Use type: reference
 ## Contact
 
 Email: hello@nebulacomponents.shop
-LinkedIn: https://linkedin.com/company/nebula-components
+LinkedIn: https://linkedin.com/company/nebulacomponents
 Site: https://nebulacomponents.shop
 
 ## Last Updated

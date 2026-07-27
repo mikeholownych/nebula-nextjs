@@ -45,7 +45,7 @@ Mike Holownych — Founder, Nebula Components.
 
 # Contact
 - Email: hello@nebulacomponents.shop
-- LinkedIn: https://linkedin.com/company/nebula-components
+- LinkedIn: https://linkedin.com/company/nebulacomponents
 
 # Evidence
 - Published case studies: none. Nebula does not publish a case until it has inspectable evidence, a measurement window, publication permission, disclosure, and publication metadata.
