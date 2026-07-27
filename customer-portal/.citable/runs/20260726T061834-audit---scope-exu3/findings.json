@@ -1,0 +1,1763 @@
+[
+  {
+    "finding_id": "F-9606991145d3",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/ad-says-one-thing-page-says-another",
+      "url": "https://nebulacomponents.shop/learning-centre/ad-says-one-thing-page-says-another",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/ad-says-one-thing-page-says-another; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-135a52221fe6",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/b2b-saas-landing-page-not-converting",
+      "url": "https://nebulacomponents.shop/learning-centre/b2b-saas-landing-page-not-converting",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/b2b-saas-landing-page-not-converting; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-8a4bf8d19db8",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/coach-consultant-landing-page",
+      "url": "https://nebulacomponents.shop/learning-centre/coach-consultant-landing-page",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/coach-consultant-landing-page; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-9f19102ea60a",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/cpc-break-even-landing-page",
+      "url": "https://nebulacomponents.shop/learning-centre/cpc-break-even-landing-page",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/cpc-break-even-landing-page; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-df201e1c91b1",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/cta-below-fold-mobile",
+      "url": "https://nebulacomponents.shop/learning-centre/cta-below-fold-mobile",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/cta-below-fold-mobile; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-a5c531a2fc60",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/form-has-zero-friction",
+      "url": "https://nebulacomponents.shop/learning-centre/form-has-zero-friction",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/form-has-zero-friction; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-e31569221140",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/google-ads-disapproved-ads-still-spending",
+      "url": "https://nebulacomponents.shop/learning-centre/google-ads-disapproved-ads-still-spending",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/google-ads-disapproved-ads-still-spending; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-920db3a9522a",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/google-ads-high-ctr-low-conversion",
+      "url": "https://nebulacomponents.shop/learning-centre/google-ads-high-ctr-low-conversion",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/google-ads-high-ctr-low-conversion; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-a7c65b224a6a",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/headline-cta-mismatch",
+      "url": "https://nebulacomponents.shop/learning-centre/headline-cta-mismatch",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/headline-cta-mismatch; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-95f7f80d87db",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/landing-page-intelligence-stack",
+      "url": "https://nebulacomponents.shop/learning-centre/landing-page-intelligence-stack",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/landing-page-intelligence-stack; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-b8f47ecc471c",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/linkedin-ad-copy-landing-page-mismatch",
+      "url": "https://nebulacomponents.shop/learning-centre/linkedin-ad-copy-landing-page-mismatch",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/linkedin-ad-copy-landing-page-mismatch; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-b948d7656a23",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/linkedin-ads-not-converting",
+      "url": "https://nebulacomponents.shop/learning-centre/linkedin-ads-not-converting",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/linkedin-ads-not-converting; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-c1cd42c5b821",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/linkedin-authority-gap",
+      "url": "https://nebulacomponents.shop/learning-centre/linkedin-authority-gap",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/linkedin-authority-gap; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-8c2e6f75389f",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/meta-ads-high-frequency-not-converting",
+      "url": "https://nebulacomponents.shop/learning-centre/meta-ads-high-frequency-not-converting",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/meta-ads-high-frequency-not-converting; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-e7c530d6a792",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/pricing-page-not-converting",
+      "url": "https://nebulacomponents.shop/learning-centre/pricing-page-not-converting",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/pricing-page-not-converting; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-2bf269c47975",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/social-proof-backfire",
+      "url": "https://nebulacomponents.shop/learning-centre/social-proof-backfire",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/social-proof-backfire; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-388f6dabf084",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/tiktok-ads-not-converting",
+      "url": "https://nebulacomponents.shop/learning-centre/tiktok-ads-not-converting",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/tiktok-ads-not-converting; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-4a3aff42f9dd",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/tiktok-landing-page-scroll-speed-gap",
+      "url": "https://nebulacomponents.shop/learning-centre/tiktok-landing-page-scroll-speed-gap",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/tiktok-landing-page-scroll-speed-gap; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-828ceb45c871",
+    "detector_id": "TECH-010",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "url",
+      "identifier": "https://nebulacomponents.shop/learning-centre/tiktok-trust-collapse",
+      "url": "https://nebulacomponents.shop/learning-centre/tiktok-trust-collapse",
+      "source_location": "https://nebulacomponents.shop/sitemap.xml"
+    },
+    "observation": {
+      "summary": "Sitemap URL not present in audited output",
+      "evidence": [
+        "sitemap https://nebulacomponents.shop/sitemap.xml lists https://nebulacomponents.shop/learning-centre/tiktok-trust-collapse; no matching page found"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "retrieval": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §2 sitemap processing; clean sitemap coverage (§15)",
+      "explanation": "A sitemap lists a URL that is missing from the built output or returns an error.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Regenerate sitemaps from live canonical URLs; remove retired URLs.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Resolve every sitemap URL against the built output or deployed site.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "TECH-010"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-8af9f6a4bcbb",
+    "detector_id": "CRAWL-002",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "geo"
+    ],
+    "subject": {
+      "type": "crawler",
+      "identifier": "Microsoft"
+    },
+    "observation": {
+      "summary": "Vendor \"Microsoft\" has search-crawler access allowed but no recorded model-training decision",
+      "evidence": [
+        "crawlers registry contains no purpose=model_training entry for vendor Microsoft"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "legal": "high",
+        "representation": "low"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "Premise 3.3: crawler access for search is not permission for model training; GEO §2 access layers must not be conflated",
+      "explanation": "A vendor has an allow decision for search discovery, but no separate recorded decision for its model-training crawler.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Record an explicit allow/block decision, owner, and legal rationale for each training-purpose crawler of vendors whose search crawlers are allowed.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Confirm a crawler registry entry with purpose model_training exists for the vendor.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "CRAWL-002"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-c397b3e759ca",
+    "detector_id": "CRAWL-002",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "geo"
+    ],
+    "subject": {
+      "type": "crawler",
+      "identifier": "Perplexity"
+    },
+    "observation": {
+      "summary": "Vendor \"Perplexity\" has search-crawler access allowed but no recorded model-training decision",
+      "evidence": [
+        "crawlers registry contains no purpose=model_training entry for vendor Perplexity"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "legal": "high",
+        "representation": "low"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "Premise 3.3: crawler access for search is not permission for model training; GEO §2 access layers must not be conflated",
+      "explanation": "A vendor has an allow decision for search discovery, but no separate recorded decision for its model-training crawler.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Record an explicit allow/block decision, owner, and legal rationale for each training-purpose crawler of vendors whose search crawlers are allowed.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Confirm a crawler registry entry with purpose model_training exists for the vendor.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "CRAWL-002"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-e4afaf7714a8",
+    "detector_id": "PAGE-002",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo"
+    ],
+    "subject": {
+      "type": "site",
+      "identifier": "title:Landing Page Audit — Find What’s Killing Your Ads | Nebula"
+    },
+    "observation": {
+      "summary": "2 pages share the title \"Landing Page Audit — Find What’s Killing Your Ads | Nebula\"",
+      "evidence": [
+        "https://nebulacomponents.shop/",
+        "https://nebulacomponents.shop/"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "ranking": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §5 title should distinguish the page from other pages; avoid boilerplate duplication",
+      "explanation": "Two or more index-target pages share an identical title.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Differentiate titles to reflect each page’s distinct intent.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Confirm title uniqueness across index targets.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "PAGE-002"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-dbacd5964c2b",
+    "detector_id": "PAGE-004",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo"
+    ],
+    "subject": {
+      "type": "site",
+      "identifier": "description:Find the conversion leaks wasting paid t"
+    },
+    "observation": {
+      "summary": "2 pages share the same meta description",
+      "evidence": [
+        "https://nebulacomponents.shop/",
+        "https://nebulacomponents.shop/"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "low",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "conversion": "low"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §5 avoid duplicated descriptions",
+      "explanation": "Multiple pages share an identical meta description.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Write distinct descriptions per page.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Confirm description uniqueness.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "PAGE-004"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-dbbc5360c44d",
+    "detector_id": "PAGE-006",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "page",
+      "identifier": "https://nebulacomponents.shop/learning-centre",
+      "url": "https://nebulacomponents.shop/learning-centre"
+    },
+    "observation": {
+      "summary": "Heading hierarchy skips from H1 to H3 (\"Above The Fold: The 3-Second Window That Determines If Paid \")",
+      "evidence": [
+        "sequence: H1 → H3"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "low",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "citation": "low"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §5 headings represent real document hierarchy",
+      "explanation": "Heading levels skip (e.g., H1 → H3), indicating headings used for visual size rather than document structure.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Restructure headings to descend one level at a time.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Walk heading sequence and confirm no level is skipped.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "PAGE-006"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-dcf6841cc57d",
+    "detector_id": "PAGE-006",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "page",
+      "identifier": "https://nebulacomponents.shop/resources/citable",
+      "url": "https://nebulacomponents.shop/resources/citable"
+    },
+    "observation": {
+      "summary": "Heading hierarchy skips from H2 to H4 (\"Install\")",
+      "evidence": [
+        "sequence: H2 → H4"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "low",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "citation": "low"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §5 headings represent real document hierarchy",
+      "explanation": "Heading levels skip (e.g., H1 → H3), indicating headings used for visual size rather than document structure.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Restructure headings to descend one level at a time.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Walk heading sequence and confirm no level is skipped.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "PAGE-006"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-8ee7e85cee7a",
+    "detector_id": "ANS-005",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "aeo",
+      "geo"
+    ],
+    "subject": {
+      "type": "page",
+      "identifier": "https://nebulacomponents.shop/learning-centre/landing-page-bounce-rate-high",
+      "url": "https://nebulacomponents.shop/learning-centre/landing-page-bounce-rate-high"
+    },
+    "observation": {
+      "summary": "Relative quantity asserted without baseline or timeframe in the same passage",
+      "evidence": [
+        "passage: \"Yes, directly. A 2017 Google/SOASTA study found that 53% of mobile users abandoned pages taking longer than 3 seconds to load — and that figure is from 2017, be\""
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "probabilistic_inference",
+      "severity": "medium",
+      "confidence": "medium",
+      "deterministic": false,
+      "impact": {
+        "citation": "medium",
+        "legal": "medium",
+        "reputational": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "AEO §4 atomic factual claims with measurement conditions; detector spec: numerical claim without unit or timeframe; anti-pattern: false precision",
+      "explanation": "Text asserts a relative numeric improvement (\"3x faster\", \"50% reduction\") without a nearby baseline, unit, or timeframe.",
+      "assumptions": [],
+      "limitations": [
+        "heuristic detection; verify manually before acting"
+      ]
+    },
+    "remediation": {
+      "preferred": "State the baseline, measurement period, and test conditions adjacent to the number, or remove the figure.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": true
+    },
+    "verification": {
+      "method": "Confirm baseline/conditions appear adjacent to each relative quantity.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "ANS-005"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-25bebb2ef87d",
+    "detector_id": "ANS-005",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "aeo",
+      "geo"
+    ],
+    "subject": {
+      "type": "page",
+      "identifier": "https://nebulacomponents.shop/learning-centre/landing-page-load-time-slow",
+      "url": "https://nebulacomponents.shop/learning-centre/landing-page-load-time-slow"
+    },
+    "observation": {
+      "summary": "Relative quantity asserted without baseline or timeframe in the same passage",
+      "evidence": [
+        "passage: \"Multiple studies show a consistent relationship. Portent's 2022 analysis of 100M+ page views found that B2B lead generation pages loading in 1 second have a con\""
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "probabilistic_inference",
+      "severity": "medium",
+      "confidence": "medium",
+      "deterministic": false,
+      "impact": {
+        "citation": "medium",
+        "legal": "medium",
+        "reputational": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "AEO §4 atomic factual claims with measurement conditions; detector spec: numerical claim without unit or timeframe; anti-pattern: false precision",
+      "explanation": "Text asserts a relative numeric improvement (\"3x faster\", \"50% reduction\") without a nearby baseline, unit, or timeframe.",
+      "assumptions": [],
+      "limitations": [
+        "heuristic detection; verify manually before acting"
+      ]
+    },
+    "remediation": {
+      "preferred": "State the baseline, measurement period, and test conditions adjacent to the number, or remove the figure.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": true
+    },
+    "verification": {
+      "method": "Confirm baseline/conditions appear adjacent to each relative quantity.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "ANS-005"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-1ed5ed33ff1d",
+    "detector_id": "SCHEMA-002",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo",
+      "aeo"
+    ],
+    "subject": {
+      "type": "schema_block",
+      "identifier": "https://nebulacomponents.shop/learning-centre/proof-before-cta#Article",
+      "url": "https://nebulacomponents.shop/learning-centre/proof-before-cta"
+    },
+    "observation": {
+      "summary": "Schema headline \"Proof Before CTA: Why Social Proof Placement Determines Conversion\" does not match visible title or H1",
+      "evidence": [
+        "schema headline: Proof Before CTA: Why Social Proof Placement Determines Conversion",
+        "visible title: Proof Before CTA: Social Proof Placement Guide | Nebula",
+        "H1: Proof Before CTA: The Simple Fix Most Landing Pages Miss"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "deterministic_observation",
+      "severity": "medium",
+      "confidence": "confirmed",
+      "deterministic": true,
+      "impact": {
+        "representation": "medium"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "Premise 3.4: structured data must match visible content; SEO §7 no invisible marked-up claims",
+      "explanation": "Article/WebPage headline in JSON-LD does not match the visible title or H1.",
+      "assumptions": [],
+      "limitations": []
+    },
+    "remediation": {
+      "preferred": "Generate the headline from the same authoritative field that renders the visible title.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": false
+    },
+    "verification": {
+      "method": "Schema headline equals visible title or H1.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "SCHEMA-002"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-123970d80597",
+    "detector_id": "LINK-004",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "seo"
+    ],
+    "subject": {
+      "type": "site",
+      "identifier": "terms of service→https://nebulacomponents.shop/terms"
+    },
+    "observation": {
+      "summary": "Exact-match anchor repeated 36 times sitewide: terms of service",
+      "evidence": [
+        "36 occurrences across 36 pages"
+      ],
+      "captured_value": null,
+      "expected_value": null
+    },
+    "classification": {
+      "finding_type": "probabilistic_inference",
+      "severity": "low",
+      "confidence": "medium",
+      "deterministic": false,
+      "impact": {
+        "ranking": "low",
+        "reputational": "low"
+      }
+    },
+    "reasoning": {
+      "applicable_requirement": "SEO §3 avoid sitewide exact-match anchors and automated keyword-matched links",
+      "explanation": "The same exact anchor text points at the same URL from a large share of pages — a pattern of mechanical link insertion.",
+      "assumptions": [],
+      "limitations": [
+        "heuristic detection; verify manually before acting"
+      ]
+    },
+    "remediation": {
+      "preferred": "Vary contextual anchors naturally; keep repeated labels to navigation chrome only.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": true
+    },
+    "verification": {
+      "method": "Re-measure anchor repetition after cleanup.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "LINK-004"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-66f6535dca2c",
+    "detector_id": "AGENT-003",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "agent-readiness",
+      "geo"
+    ],
+    "subject": {
+      "type": "file",
+      "identifier": "/llms.txt"
+    },
+    "observation": {
+      "summary": "llms.txt not discovered during crawl",
+      "evidence": [
+        "No /llms.txt found in crawl results or site metadata"
+      ],
+      "captured_value": "llms.txt absent",
+      "expected_value": "/llms.txt returning 200 with structured Markdown content"
+    },
+    "classification": {
+      "finding_type": "probabilistic_inference",
+      "severity": "low",
+      "confidence": "medium",
+      "deterministic": false,
+      "impact": {}
+    },
+    "reasoning": {
+      "applicable_requirement": "GEO §3 discoverability; isitagentready.com Content Accessibility",
+      "explanation": "llms.txt (https://llmstxt.org/) is a convention for sites to provide a structured Markdown summary of their content for LLM consumption. Its absence means language models cannot quickly orient themselves about your site.",
+      "assumptions": [],
+      "limitations": [
+        "heuristic detection; verify manually before acting"
+      ]
+    },
+    "remediation": {
+      "preferred": "Create /llms.txt at your site root with: site purpose, key pages list with descriptions, and optionally /llms-full.txt with complete content. See https://llmstxt.org/ for spec.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": true
+    },
+    "verification": {
+      "method": "Fetch /llms.txt and confirm it returns 200 with Markdown content.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "AGENT-003"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  },
+  {
+    "finding_id": "F-cf09b2ee0211",
+    "detector_id": "AGENT-006",
+    "run_id": "20260726T061834-audit---scope-exu3",
+    "timestamp": "2026-07-26T06:18:34.609Z",
+    "discipline": [
+      "agent-readiness"
+    ],
+    "subject": {
+      "type": "page",
+      "identifier": "site"
+    },
+    "observation": {
+      "summary": "No Markdown content negotiation support detected",
+      "evidence": [
+        "Content-Type does not include text/markdown",
+        "Vary header: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch (does not indicate Accept negotiation)",
+        "No .md pages found in crawl"
+      ],
+      "captured_value": "markdown negotiation absent",
+      "expected_value": "Vary: Accept header or text/markdown Content-Type support"
+    },
+    "classification": {
+      "finding_type": "probabilistic_inference",
+      "severity": "low",
+      "confidence": "medium",
+      "deterministic": false,
+      "impact": {}
+    },
+    "reasoning": {
+      "applicable_requirement": "isitagentready.com Content Accessibility; Cloudflare Markdown for Agents",
+      "explanation": "Markdown content negotiation (Accept: text/markdown) lets AI agents retrieve pages as clean Markdown rather than HTML, improving token efficiency. Cloudflare supports this natively. Without it, agents must parse raw HTML.",
+      "assumptions": [],
+      "limitations": [
+        "heuristic detection; verify manually before acting"
+      ]
+    },
+    "remediation": {
+      "preferred": "Enable via Cloudflare (automatic with Cloudflare proxying) or serve .md variants of key pages. See https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/.",
+      "alternatives": [],
+      "unsafe_shortcuts": [],
+      "owner": null,
+      "review_required": true
+    },
+    "verification": {
+      "method": "Run `curl -H \"Accept: text/markdown\" <page-url>` and confirm Markdown response.",
+      "expected_result": "detector no longer reports this subject",
+      "detector_to_rerun": "AGENT-006"
+    },
+    "status": {
+      "state": "open",
+      "first_seen": "2026-07-26T06:18:34.609Z",
+      "last_seen": "2026-07-26T06:18:34.609Z",
+      "resolved_at": null
+    }
+  }
+]

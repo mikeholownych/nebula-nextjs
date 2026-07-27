@@ -1,0 +1,64 @@
+# nebulacomponents.shop — robots.txt
+# Content Signals (https://contentsignals.org/, IETF draft-romm-aipref-contentsignals)
+# Policy: search=yes (indexing welcome), ai-input=yes (answer-engine retrieval welcome),
+#         ai-train=no (model training explicitly reserved)
+#
+# ANY RESTRICTIONS EXPRESSED VIA CONTENT SIGNALS ARE EXPRESS RESERVATIONS OF RIGHTS
+# UNDER ARTICLE 4 OF THE EUROPEAN UNION DIRECTIVE 2019/790 ON COPYRIGHT AND RELATED
+# RIGHTS IN THE DIGITAL SINGLE MARKET.
+
+# AI model training — disallowed
+User-Agent: GPTBot
+Disallow: /
+
+User-Agent: ClaudeBot
+Disallow: /
+
+User-Agent: Google-Extended
+Disallow: /
+
+User-Agent: CCBot
+Disallow: /
+
+User-Agent: omgili
+Disallow: /
+
+# AI answer-engine input and retrieval — allowed
+User-Agent: ChatGPT-User
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+Allow: /
+
+User-Agent: OAI-SearchBot
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+Allow: /
+
+User-Agent: anthropic-ai
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+Allow: /
+
+User-Agent: PerplexityBot
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+Allow: /
+
+User-Agent: Perplexity-User
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+Allow: /
+
+User-Agent: GoogleOther
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+Allow: /
+
+User-Agent: cohere-ai
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+Allow: /
+
+User-Agent: meta-externalagent
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+Allow: /
+
+# Standard search indexing — allowed
+User-Agent: *
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+Allow: /
+
+Sitemap: https://nebulacomponents.shop/sitemap.xml

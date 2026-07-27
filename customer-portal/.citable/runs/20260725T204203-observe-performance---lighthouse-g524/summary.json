@@ -1,0 +1,11 @@
+{
+  "total": 4,
+  "by_kind": {
+    "performance": 4
+  },
+  "by_state": {
+    "failed": 3,
+    "not_evidenced": 1
+  },
+  "citation_metrics": null
+}

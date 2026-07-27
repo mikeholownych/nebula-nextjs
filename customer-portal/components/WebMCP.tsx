@@ -1,4 +1,7 @@
-import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
+'use client'
+
+import { useEffect } from 'react'
+import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
 
 /**
  * WebMCP — exposes Nebula Components site tools to supporting browsers without
@@ -66,12 +69,36 @@ export function WEB_MCP_RUNTIME(
 
       context.registerTool({
         name: 'get_pricing',
-        description: 'Return current Nebula Components service pricing, offer details, and what is included.',
-        inputSchema: { type: 'object', properties: {} },
-        execute: function () {
-          return { offers: ${JSON.stringify(offers)} };
-        }
-      });
+        description:
+          'Return current Nebula Components service pricing, offer details, and what is included.',
+        inputSchema: {
+          type: 'object',
+          properties: {},
+        },
+        execute: () => ({
+          offers: [
+            {
+              name: 'Free Audit',
+              price: '$0',
+              description: 'Automated landing page diagnosis — message match, trust signals, mobile, speed, CTA, form friction, compliance.',
+              url: 'https://nebulacomponents.shop/audit',
+            },
+            {
+              name: REPAIR_SPRINT_OFFER.name,
+              price: `$${REPAIR_SPRINT_OFFER.priceUsd}`,
+              description: `${REPAIR_SPRINT_OFFER.summary} ${REPAIR_SPRINT_OFFER.evidenceBoundary}`,
+              url: 'https://nebulacomponents.shop/pricing',
+            },
+            {
+              name: 'Growth Launch',
+              price: '$997',
+              description: 'End-to-end landing page build and optimisation for founders launching with paid traffic.',
+              url: 'https://nebulacomponents.shop/pricing',
+            },
+          ],
+        }),
+      })
+    )
 
       context.registerTool({
         name: 'search_learning',

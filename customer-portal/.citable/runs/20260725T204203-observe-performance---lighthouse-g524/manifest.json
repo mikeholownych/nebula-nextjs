@@ -1,0 +1,42 @@
+{
+  "run_id": "20260725T204203-observe-performance---lighthouse-g524",
+  "command": "observe performance --lighthouse",
+  "argv": [
+    "observe",
+    "performance",
+    "--target",
+    "https://nebulacomponents.shop",
+    "--lighthouse"
+  ],
+  "tool_version": "1.13.1",
+  "skill_version": "1.13.1",
+  "repository_commit": "c43f0c7844a6ba57aea7b15d98afad5f6b47ea88",
+  "working_tree_state": "dirty",
+  "target": {
+    "kind": "url",
+    "location": "https://nebulacomponents.shop",
+    "environment": "local"
+  },
+  "timestamp": "2026-07-25T20:42:03.832Z",
+  "locale": "C.UTF-8",
+  "jurisdiction": null,
+  "configuration_hash": null,
+  "input_hashes": {},
+  "output_hashes": {
+    "observations/0001-performance.json": "067d48b9c81fe125852d3c8bb4a0db7b6d5bbbb0c467de8a455315740c158f00",
+    "observations/0002-performance.json": "fb89e5918efef7096c1b636a2a91df2307720bd0a1a78c7b2b43f6720cfee4ee",
+    "observations/0003-performance.json": "4e9dfd593165983aa646cb7e0540584145d5e4aaec21a76237b455552b7708f2",
+    "observations/0004-performance.json": "972cae35be0da34c9e7a658620922de8c0503089c2ba1c6a35a092f070615e84",
+    "summary.json": "0762a84ca5870a6c496cb487a0e68189dcd01d07b2edb9b262e969077b803c39"
+  },
+  "detectors_run": [],
+  "detectors_skipped": [],
+  "incomplete_checks": [
+    "Lighthouse run 1 failed: optional lighthouse and chrome-launcher dependencies are not installed",
+    "Lighthouse run 2 failed: optional lighthouse and chrome-launcher dependencies are not installed",
+    "Lighthouse run 3 failed: optional lighthouse and chrome-launcher dependencies are not installed"
+  ],
+  "errors": [],
+  "warnings": [],
+  "status": "incomplete"
+}

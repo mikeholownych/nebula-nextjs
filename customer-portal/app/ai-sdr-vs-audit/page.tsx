@@ -91,8 +91,8 @@ export default function AiSdrVsAuditPage() {
             </thead>
             <tbody>
               {[
-                { label: 'Entry cost', zamp: '$25k–$75k pilot', nebula: fixPackPrice ? `Free (or ${fixPackPrice} Fix Pack)` : 'Free audit; paid offer unavailable' },
-                { label: 'Time to value', zamp: '4–10 weeks', nebula: 'Self-serve audit; completion time varies by page and service load' },
+                { label: 'Entry cost', zamp: '$25k–$75k pilot', nebula: 'Free (or $97 repair sprint)' },
+                { label: 'Time to value', zamp: '4–10 weeks', nebula: 'Audit delivered in under 60 seconds' },
                 { label: 'Purchase motion', zamp: 'Book a demo → sales cycle → legal review', nebula: 'Self-serve checkout.' },
                 { label: 'What it evaluates', zamp: 'Outbound volume and sequencing', nebula: 'Landing-page conversion signals' },
                 { label: 'Self-serve', zamp: 'No. Demo-gated.', nebula: 'Self-serve. No sales call.' },

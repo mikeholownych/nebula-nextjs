@@ -115,7 +115,7 @@ https://nebulacomponents.shop
 
 Paste your URL. 60 seconds. You'll see the leak.
 
-If you fix it yourself, great. If you want our $97 Fix Pack, that's there too. But the diagnosis is free either way.
+If you fix it yourself, great. If you want our $97 One-Leak Repair Sprint, that's there too. But the diagnosis is free either way.
 
 — Mike H
 

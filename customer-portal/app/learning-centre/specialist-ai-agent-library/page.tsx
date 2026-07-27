@@ -130,16 +130,18 @@ export default function LearningCentrePage() {
 
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Want this installed instead of documented?</h2>
-          <p className="mb-6 leading-relaxed text-fg-muted">
-            Start with the audit. If the handoff leak is obvious, the $97 Fix Pack turns it into a working operating system.
-          </p>
+            <p className="mb-6 leading-relaxed text-fg-muted">
+              The free Nebula audit identifies likely page-side leaks. The $97 One-Leak Repair Sprint
+              selects one high-confidence page-level repair, confirms the scope with you, implements it,
+              and verifies the live change. It does not promise conversion lift.
+            </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/audit" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">
               Run the free audit
             </Link>
-            <a href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
-              Buy the $97 Fix Pack
-            </a>
+            <Link href="/checkout" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
+              Review the $97 One-Leak Repair Sprint
+            </Link>
           </div>
         </section>
       </div>

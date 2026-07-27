@@ -1,0 +1,45 @@
+{
+  "target": {
+    "kind": "url",
+    "location": "https://nebulacomponents.shop",
+    "environment": "local"
+  },
+  "scope": "--scope",
+  "registry_counts": {
+    "queries": 0,
+    "prompts": 0,
+    "entities": 4,
+    "claims": 6,
+    "evidence": 4,
+    "pages": 0,
+    "crawlers": 9,
+    "competitors": 0,
+    "experiments": 0,
+    "metrics": 0,
+    "objectives": 0,
+    "interventions": 0,
+    "connections": 0,
+    "reviewers": 0,
+    "review_policies": 0,
+    "exceptions": 0,
+    "review_items": 0,
+    "sampling_plans": 0,
+    "schedules": 0,
+    "kpis": 0,
+    "variances": 0,
+    "customer-outcomes": 0,
+    "risks": 0,
+    "decisions": 0,
+    "assumptions": 0,
+    "scenarios": 0,
+    "initiatives": 0
+  },
+  "pages_audited": 36,
+  "crawl_coverage": {
+    "maxPages": 50,
+    "pagesFetched": 36,
+    "truncated": false,
+    "pendingUrlCount": 0,
+    "pendingUrls": []
+  }
+}

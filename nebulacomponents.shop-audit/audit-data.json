@@ -1,0 +1,175 @@
+{
+  "summary": {
+    "health_score": 55,
+    "business_type": "Hybrid productized-service + content publisher (landing-page conversion audit/fix product, not e-commerce or local)",
+    "top_findings": [
+      "LIVE INCIDENT: site-wide CSS delivery is broken (500/404) — every page renders unstyled right now",
+      "The 8aa1434a cache-header fix did not take effect in production — a config rule-ordering bug still serves max-age=0 on all static assets",
+      "21 of 26 /learning-centre articles have no server-rendered internal links (JS-accordion-gated, not crawlable)",
+      "/pricing and a learning-centre article carry live, contradictory FAQ schema about what customers actually receive",
+      "The site's strongest experience claim ('50+ landing pages') exists only in llms.txt, invisible to human visitors",
+      "/audit, the core free-tool page, has zero indexable WebApplication schema or example output versus tool-type SERP competitors",
+      "sitemap.xml is missing 8 confirmed-live pages, including two (/about, /about/team) with no internal link anywhere"
+    ],
+    "quick_wins": [
+      "Fix GitHub profile website field (points to aisyndicate.io instead of nebulacomponents.shop)",
+      "Remove the deprecated HowTo JSON-LD block from the homepage",
+      "Add /terms, /about, /about/team, and 5 missing learning-centre articles to sitemap.xml",
+      "Fix broken self-canonicals on /terms and /about/team",
+      "Set a real Strict-Transport-Security header (currently max-age=0)"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 58,
+      "what_works": [
+        "robots.txt correctly segments AI-training vs AI-retrieval crawlers",
+        "All 33 sitemap URLs self-canonicalize correctly",
+        "Clean single-hop protocol/host redirects, no noindex leakage",
+        "Full SSR content, no CSR dependency",
+        "Entire .well-known/ agent-discovery stack resolves validly"
+      ],
+      "findings": [
+        {"title": "Site-wide CSS delivery broken in production", "severity": "Critical", "description": "Homepage/pricing/audit CSS chunk returns HTTP 500 (text/plain); learning-centre articles reference a different chunk returning 404. Stale ISR-cached HTML pointing at a purged build manifest.", "recommendation": "Force clean redeploy, revalidate all ISR-cached HTML, add a post-deploy smoke check on all linked stylesheets."},
+        {"title": "Broken self-canonical on /terms and /about/team", "severity": "High", "description": "Both pages emit <link rel=\"canonical\" href=\"https://nebulacomponents.shop\"/> instead of self-referencing, causing Google to consolidate them into the homepage.", "recommendation": "Fix metadata export to self-canonicalize; add both to sitemap.xml."},
+        {"title": "HSTS actively disabled", "severity": "High", "description": "strict-transport-security: max-age=0 on every response — instructs browsers to drop any cached HSTS policy.", "recommendation": "Set Strict-Transport-Security: max-age=31536000; includeSubDomains; preload once confirmed intentional to enforce."},
+        {"title": "No Content-Security-Policy header", "severity": "Medium", "description": "No CSP found anywhere, notable given Stripe checkout and x402/USDC payment flows on the domain.", "recommendation": "Add CSP starting Report-Only, tune, then enforce."},
+        {"title": "Trailing-slash duplicate relies solely on canonical", "severity": "Medium", "description": "/pricing and /pricing/ both return 200 with no redirect between them.", "recommendation": "Add a normalizing 308 redirect."}
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 52,
+      "what_works": [
+        "Zero content-integrity corruption found across 33 sampled pages",
+        "Honest 'no case studies yet, on purpose' framing is a genuine trust asset",
+        "9-article well-developed batch has strong AI-citation-ready passage structure",
+        "Correct technical vocabulary throughout, no factual/terminology errors found"
+      ],
+      "findings": [
+        {"title": "Weighted E-E-A-T ~41/100 (Weak band)", "severity": "High", "description": "Driven by an unsubstantiated-on-page flagship experience claim and a 45-word founder bio with no credentials or methodology.", "recommendation": "Move the '50+ landing pages' claim onto /about and /about/team with corroborating detail; expand the founder bio."},
+        {"title": "9 of 25 live articles under 500 words", "severity": "High", "description": "Thin by any informational-content standard; several read as skeletal heading lists (one heading per ~20 words).", "recommendation": "Expand to genuine depth or consolidate into the relevant pillar article."},
+        {"title": "Content batch bifurcation with a live templating bug", "severity": "Medium", "description": "Weak batch carries a fallback 2026-01-01 date and one article renders a raw URL slug in its visible category eyebrow.", "recommendation": "Fix slug-to-label humanization; set real per-page publish/modified dates."},
+        {"title": "Bounded cannibalization risk in the trust/CTA sub-theme", "severity": "Medium", "description": "cta-not-working, proof-before-cta, message-match-checklist, and no-testimonials-on-landing-page converge on the same core argument with thin differentiation.", "recommendation": "Deepen differentiation or merge the thinnest into the strongest with a redirect."},
+        {"title": "3 articles topically off-hub, one disclosed as sourced from a different product", "severity": "Medium", "description": "founder-second-brain, linkedin-skill-engine, specialist-ai-agent-library are unrelated to landing-page conversion; one explicitly says 'extracted from NipPro AI'.", "recommendation": "Relocate to a separate content vertical or prune from /learning-centre."}
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 50,
+      "what_works": [
+        "Clean heading hierarchy and URL structure across sampled pages",
+        "A real, organically-emerged pillar page exists with strong inbound link concentration"
+      ],
+      "findings": [
+        {"title": "21 of 26 learning-centre articles have no server-rendered internal links", "severity": "Critical", "description": "Article list lives only in a client-side JSON hydration payload behind an accordion toggle; Googlebot does not simulate clicks.", "recommendation": "Server-render the full article list; add a flat 'browse all guides' fallback."},
+        {"title": "Pillar page link equity flows up, not down", "severity": "High", "description": "landing-page-not-converting receives links from nearly every spoke but links back to only 5 of ~25.", "recommendation": "Add a 'diagnose your leak' dispatcher section linking to a representative article per cluster."},
+        {"title": "Confirmed cannibalization pair", "severity": "Medium", "description": "landing-page-not-converting and ecommerce-landing-page-not-converting share 4 of ~7 top SERP results.", "recommendation": "Differentiate with ecommerce-specific evidence or consolidate with a redirect."},
+        {"title": "No dedicated title/meta-description audit performed this round", "severity": "Info", "description": "This category score is a blended estimate from internal-linking and heading-structure signals only.", "recommendation": "Run a follow-up /seo page pass per key template."}
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 76,
+      "what_works": [
+        "Well-built @id-linked Organization/founder/WebSite graph reused correctly across pages",
+        "Genuinely complete Service+Offer+OfferCatalog schema on /pricing",
+        "Working Article schema across the learning-centre template",
+        "Correctly no fake Review/AggregateRating on /case-studies"
+      ],
+      "findings": [
+        {"title": "Deprecated HowTo schema live on homepage", "severity": "High", "description": "Google removed HowTo rich results in Sept 2023; block has produced zero SERP benefit for ~3 years.", "recommendation": "Remove outright, do not replace with FAQPage."},
+        {"title": "Article schema missing image property", "severity": "Medium", "description": "Blocks Top Stories/article rich-result eligibility on every article checked.", "recommendation": "Add absolute image URL to the Article template."},
+        {"title": "Author entity fragmentation", "severity": "Medium", "description": "Articles inline the founder as 'Mike H' instead of referencing the canonical #founder @id used sitewide ('Mike Holownych').", "recommendation": "Replace inline Person with an @id reference."},
+        {"title": "No BreadcrumbList anywhere on the site", "severity": "Medium", "description": "An active, non-deprecated rich result left entirely unused despite real hierarchical paths.", "recommendation": "Add to the article template, /resources/citable, and /about/team."},
+        {"title": "FAQPage on /pricing has no remaining Google SERP benefit", "severity": "Info", "description": "Google retired FAQ rich results for all sites May 7, 2026. Valid and harmless; do not remove, do not add elsewhere.", "recommendation": "No action required."}
+      ]
+    },
+    {
+      "name": "Performance (CWV)",
+      "score": 48,
+      "what_works": [
+        "TTFB excellent everywhere (18-49ms)",
+        "DOM size healthy on all pages tested",
+        "Third-party script loading and font preload strategy already correct"
+      ],
+      "findings": [
+        {"title": "Cache-header fix did not take effect in production", "severity": "Critical", "description": "next.config.ts's older catch-all rule still wins over the new immutable-cache rule for /_next/static/ assets, confirmed at both Cloudflare edge and Next.js origin directly.", "recommendation": "Reorder or scope the catch-all rule; re-verify with curl -sI before considering fixed."},
+        {"title": "LCP fails 'Good' on all 8 page/device combinations tested", "severity": "High", "description": "Mobile LCP 3.56-4.28s (3 of 4 in Poor band >4.0s); desktop 3.5-3.8s everywhere.", "recommendation": "Identify and prioritize the actual LCP element per template with fetchPriority/preload."},
+        {"title": "Mobile interactivity risk poor", "severity": "High", "description": "TBT (INP proxy) 538-894ms on mobile across all pages; ~500KB unused JS shipped on every page regardless of route.", "recommendation": "Bundle-analyze the shared chunk and code-split route-specific logic out of it."},
+        {"title": "Homepage-only CLS issue", "severity": "Medium", "description": "0.171 mobile / 0.118 desktop, both above the 0.1 Good threshold; other 3 pages measured near-zero.", "recommendation": "Trace the shifting element via DevTools Performance panel."}
+      ]
+    },
+    {
+      "name": "AI Search Readiness",
+      "score": 69,
+      "what_works": [
+        "robots.txt correctly separates AI-training crawlers (disallowed) from AI-answer-engine crawlers (allowed)",
+        "Spec-compliant, well-organized llms.txt/llms-full.txt",
+        "Mostly-functional .well-known/ agent-discovery stack with genuinely working x402 payments",
+        "Strong direct-answer/question-heading citability patterns in well-developed articles"
+      ],
+      "findings": [
+        {"title": "Advertised A2A and MCP endpoints both 404", "severity": "High", "description": "agent.json and mcp/server-card.json advertise /a2a and /mcp; both return 404 on every method, unlike the working x402 endpoints.", "recommendation": "Implement minimal handlers or remove the discovery documents until real endpoints exist."},
+        {"title": "'50+ landing pages' claim exists only in AI-facing files", "severity": "Medium", "description": "Not present on /about, /about/team, or any human-visible page or JSON-LD.", "recommendation": "Add the same claim to the visible founder bio."},
+        {"title": "/about and /about/team absent from sitemap.xml", "severity": "Medium", "description": "The pages carrying the strongest entity/authority signals on the site are unindexed via sitemap.", "recommendation": "Add both to sitemap.ts."},
+        {"title": "Multi-modal content effectively zero", "severity": "Medium", "description": "No images, video, or YouTube presence found anywhere; YouTube is the strongest brand-mention correlate with AI citation.", "recommendation": "Publish one founder-narrated video walkthrough."}
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 15,
+      "what_works": [],
+      "findings": [
+        {"title": "Zero content images sitewide", "severity": "High", "description": "No <img> tags found on homepage, /audit, /pricing, or any sampled learning-centre article — only small inline UI-icon SVGs, despite the product being a visual landing-page diagnosis service.", "recommendation": "Add annotated before/after screenshots per article and a sample /audit report output image."}
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {"name": "Phase 0: Production Incident", "timeframe": "Today", "items": [
+        "Fix site-wide CSS delivery failure via clean redeploy + ISR revalidation",
+        "Fix cache-header rule ordering in next.config.ts",
+        "Add a post-deploy smoke check for linked stylesheets"
+      ]},
+      {"name": "Phase 1: Critical Fixes", "timeframe": "This week", "items": [
+        "Server-render the full /learning-centre article list",
+        "Reconcile the pricing/deliverable FAQ contradiction",
+        "Fix broken canonicals on /terms and /about/team",
+        "Add 8 missing pages to sitemap.xml; add meta.json to 3 at-risk articles before deploying the sitemap.ts rewrite",
+        "Add WebApplication schema and example output to /audit"
+      ]},
+      {"name": "Phase 2: High-Impact Improvements", "timeframe": "Weeks 2-3", "items": [
+        "Fix HSTS header",
+        "Remove deprecated HowTo schema",
+        "Fix Article author entity fragmentation and add missing image property",
+        "Add BreadcrumbList sitewide",
+        "Substantiate '50+ landing pages' claim on human-visible pages",
+        "Add pillar-to-spoke internal links",
+        "Expand thin articles / resolve cannibalization",
+        "Add real content images",
+        "Fix GitHub/LinkedIn backlink profile links"
+      ]},
+      {"name": "Phase 3: Content & Authority", "timeframe": "Month 2", "items": [
+        "Relocate or prune 3 off-hub articles",
+        "Add Article+FAQPage schema to google-ads-quality-score-low",
+        "Fix or remove dead /a2a and /mcp endpoints",
+        "Add CSP header",
+        "Publish a founder video",
+        "Add CollectionPage/ItemList and enriched Person schema",
+        "Set up Moz/Bing API keys"
+      ]},
+      {"name": "Phase 4: Monitoring & Iteration", "timeframe": "Ongoing", "items": [
+        "Re-run Performance and Visual audits after Phase 0 ships",
+        "Capture a drift baseline",
+        "Set up GSC/PageSpeed API credentials",
+        "Publish first real case study when available"
+      ]}
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/"
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "taken_at": "2026-07-25T20:39:32.275Z",
+  "run_id": "20260725T203932-audit---scope-wqzm",
+  "pages": {
+    "https://nebulacomponents.shop/": {
+      "contentHash": "cd81a47354fc8e4294fa67d42276f82226739d342b9501c9bb844560929536dc",
+      "dateModified": null,
+      "status": 200
+    },
+    "https://nebulacomponents.shop/pricing": {
+      "contentHash": "d69ee67dec876ae2c9bae1a8f8dda00d16426d489d8a59cfa47a316329cdaa58",
+      "dateModified": null,
+      "status": 200
+    },
+    "https://nebulacomponents.shop/case-studies": {
+      "contentHash": "1ee92c9d2d1f6778464285813c4dfcf135000ffd7ca72cd0e630ccc4a3bc9a02",
+      "dateModified": null,
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre": {
+      "contentHash": "69fabed888510aa3bf91c7c02fc73057e352a710892fa96f46994cbeb58ecf61",
+      "dateModified": null,
+      "status": 200
+    },
+    "https://nebulacomponents.shop/audit": {
+      "contentHash": "676bc0cd6cfad7535b780783f8eaf7889dc9da33c90b5d4b4abe0f6f8d39859b",
+      "dateModified": null,
+      "status": 200
+    },
+    "https://nebulacomponents.shop/resources/citable": {
+      "contentHash": "48c5c197b455ad2a1b352c926a109a9acfa2fef37ec361564a4b1a4d7a31e212",
+      "dateModified": "2026-07-19",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/privacy-policy": {
+      "contentHash": "6b2cd4f7aeb0f764ea3bc7945a08ab947540ed69bdcc5700718c3a3b594bbd13",
+      "dateModified": null,
+      "status": 200
+    },
+    "https://nebulacomponents.shop/terms": {
+      "contentHash": "828c83f43efdbed1aac7f59502e8987fd56307cb0d7c61a693868e3b5b1285b2",
+      "dateModified": null,
+      "status": 200
+    },
+    "https://nebulacomponents.shop/data-rights": {
+      "contentHash": "de81d543f068ece875c823e9226065286d94c4f070e2d71f65456ed43c6e9ed9",
+      "dateModified": null,
+      "status": 200
+    },
+    "https://nebulacomponents.shop/checkout": {
+      "contentHash": "5c8560f676b77da725104bcbca6c73b920dae42076de24e73e62913358b51194",
+      "dateModified": null,
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/paid-traffic-leak-map": {
+      "contentHash": "e3bfd53620d496e40bc9ce2bcd7c5ae4aba2487c91fc37206c8517594219b2a2",
+      "dateModified": "2026-07-21",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/above-fold-landing-page": {
+      "contentHash": "a90a7a235394b12f2d6f0119284b62ab6fd48f5f81a17ad787fee4fc7b18b650",
+      "dateModified": "2026-07-21",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/agency-handoff-debt": {
+      "contentHash": "35ff2cc29fa09dc06cd1ae837faf6bae9441d47da03118e8c23d180d0027f8b6",
+      "dateModified": "2026-07-25",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/confessions": {
+      "contentHash": "1fcac57ae1593eca3ebb090944437addaaafe7cfac7059b106cb3dd05fb776d6",
+      "dateModified": "2026-07-25",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/ghost-variant-ab-test": {
+      "contentHash": "670a51e2c0dc14cd38ef3fea53e3c57e2305dc3b525e8e0d67c432bfe2a826bd",
+      "dateModified": "2026-07-25",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/landing-page-bounce-rate-high": {
+      "contentHash": "0b08c3c1bb00c5e035934bbd1dbc59b1f255883e8f1fc8e21febbb66dfb2de89",
+      "dateModified": "2026-07-21",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/landing-page-load-time-slow": {
+      "contentHash": "6d6d62d01af4ac09bf6aa2c9a98bd20491c9493070a5f9ae14effccaf2066ea3",
+      "dateModified": "2026-07-21",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/landing-page-not-converting": {
+      "contentHash": "1ee50db5c55791696acef8728e3454dfe977c08fcf1ce09423c0fee0cb8a327f",
+      "dateModified": "2026-07-21",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/the-11pm-founder-spiral": {
+      "contentHash": "d229ea8a0ec4b74f5e9eb75f68a28ca296e1bd0a8f339250612379b4da3681b3",
+      "dateModified": "2026-07-25",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/resources": {
+      "contentHash": "a68c879b767a6f07b38cc7f07a85cc8d9c4e1caebd69c3882008e92ac614684f",
+      "dateModified": null,
+      "status": 200
+    },
+    "https://nebulacomponents.shop/about": {
+      "contentHash": "639bf19911c2c6087b6bf6f7c904d7283e6dccb6d9835b28f8d3bcf104ce457f",
+      "dateModified": null,
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/message-match-checklist": {
+      "contentHash": "af3d5cfb38eedce19e4d141bff87d1653e07c9d39144fc4e43b435481f49cc33",
+      "dateModified": "2026-07-21",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/proof-before-cta": {
+      "contentHash": "6e5e49f8b23a2c50fa82a01f9a4ab0e9126b75db40a453a4ee887b381bf03e1c",
+      "dateModified": "2026-07-21",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/mobile-landing-page-leaks": {
+      "contentHash": "78a2169df88f7f89d670da4ece32a7f396bde254164de6b6ca15f7530059b058",
+      "dateModified": "2026-07-21",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/cta-not-working": {
+      "contentHash": "e5f832093f95af700fef82a6aa59be2336a9ed4f8332a19c3025b49e96dc08c3",
+      "dateModified": "2026-07-21",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/no-testimonials-on-landing-page": {
+      "contentHash": "28ecae5dec4068c59fab6524fec36e4c25dda27c3ef2102651c2654257c85f59",
+      "dateModified": null,
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/traffic-but-no-form-fills": {
+      "contentHash": "0ff30927779290bc6d10605aeee31c97a549abf46ed83a56b06ef0b203df3bf0",
+      "dateModified": "2026-07-21",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/before-you-raise-ad-budget": {
+      "contentHash": "548d7d8dd2d41dceb4632778aeb124b321fb67e33141afc8954783091bcfdd4a",
+      "dateModified": "2026-07-21",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/google-ads-quality-score-low": {
+      "contentHash": "197acaf4e50781dffac588a42feba3e0c7f63d4bb11e58537d3ef0613c8e0267",
+      "dateModified": null,
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/google-ads-clicks-no-sales": {
+      "contentHash": "d4e7c9da422e70f882f3ebf13c98c06c0bf59fe5b4e0a163093c8cdc90d64ed3",
+      "dateModified": "2026-07-21",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/facebook-ads-no-leads": {
+      "contentHash": "a7aae2caeca1039ab46016dadd378dbf319799c2cb2fd0e4e12c6b175860d1e3",
+      "dateModified": "2026-07-21",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/high-cpc-low-conversion": {
+      "contentHash": "7aace511dda979285dfcf875b40a1312d6436a8ebf53e4d12dfe1e67be5b3905",
+      "dateModified": "2026-07-21",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/ecommerce-landing-page-not-converting": {
+      "contentHash": "850be19cd05b2c93b95329c24f14162f0afefb3762fc1b3c11a58765a2d35d20",
+      "dateModified": "2026-07-21",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/landing-page-conversion-rate-benchmark": {
+      "contentHash": "76a497196ee7bea53d9d47a2f1ad08af48bec1031d1391a771218727b156fe2f",
+      "dateModified": "2026-07-21",
+      "status": 200
+    },
+    "https://nebulacomponents.shop/learning-centre/retargeting-ads-not-converting": {
+      "contentHash": "35865fd22d7874c1013c105561a5b9b7f26d822b115ffb687b2f5b35ecece2ec",
+      "dateModified": null,
+      "status": 200
+    }
+  }
+}

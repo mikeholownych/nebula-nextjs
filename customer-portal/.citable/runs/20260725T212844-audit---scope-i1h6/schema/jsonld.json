@@ -1,0 +1,3404 @@
+[
+  {
+    "url": "https://nebulacomponents.shop/",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to get a free landing page audit from Nebula Components",
+        "description": "Get an evidence-backed diagnosis of your landing page in three steps.",
+        "totalTime": "PT2M",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Enter Your URL",
+            "text": "Drop in any landing page URL — no account needed.",
+            "url": "https://nebulacomponents.shop/audit"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Get Your Score",
+            "text": "We analyze above-fold content, SEO foundations, ad signals, and speed.",
+            "url": "https://nebulacomponents.shop/audit"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "See Your Fixes",
+            "text": "Get prioritized recommendations with impact and effort scores.",
+            "url": "https://nebulacomponents.shop/audit"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to get a free landing page audit from Nebula Components",
+        "description": "Get an evidence-backed diagnosis of your landing page in three steps.",
+        "totalTime": "PT2M",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Enter Your URL",
+            "text": "Drop in any landing page URL — no account needed.",
+            "url": "https://nebulacomponents.shop/audit"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Get Your Score",
+            "text": "We analyze above-fold content, SEO foundations, ad signals, and speed.",
+            "url": "https://nebulacomponents.shop/audit"
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "See Your Fixes",
+            "text": "Get prioritized recommendations with impact and effort scores.",
+            "url": "https://nebulacomponents.shop/audit"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/pricing",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/pricing",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/pricing",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": "https://nebulacomponents.shop/pricing#fix-pack",
+        "name": "Conversion Fix Pack",
+        "description": "A structured landing page audit plus a complete set of AI prompts — one per finding, built from your actual page — for you to run through Claude, ChatGPT, or your own developer. We diagnose; you (or your AI tool of choice) implement. Delivered by email within minutes of payment.",
+        "provider": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "serviceType": "Landing Page Conversion Optimization",
+        "url": "https://nebulacomponents.shop/pricing",
+        "offers": {
+          "@type": "Offer",
+          "price": "97",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://nebulacomponents.shop/checkout",
+          "priceValidUntil": "2026-12-31"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Fix Pack deliverables",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Full 7-point page audit"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Written diagnosis with prioritised fix list"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "A tailored AI prompt for every finding, built from your actual page"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "30-day free re-audit to see what changed"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/pricing",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is included in the Fix Pack?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A documented audit of your landing page against seven conversion criteria, a written diagnosis identifying which issues are present and in what order to fix them, and a complete AI prompt pack — one prompt per finding, pre-filled with the specifics of your actual page — for you to run through Claude, ChatGPT, or hand to your own developer."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why prompts instead of you implementing the fixes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because it means we never need access to your site, CMS, or hosting, and you're not waiting on us or trusting a stranger to touch your live page. Each prompt is built from what we actually found — not a generic template — so it does the diagnostic work; you keep control of implementation."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does it take?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The prompt pack is generated and emailed within minutes of payment — it is not a manual, multi-day process."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need a retainer or ongoing contract?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The Fix Pack is a one-time payment. There is no recurring charge and no obligation after delivery."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the 30-day re-audit cover?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Whether you use the prompts yourself, hand them to a developer, or only apply some of them, you can request one free re-audit within 30 days to see exactly what changed on the page and what is still open."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/case-studies",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/case-studies",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/audit",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/audit",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/resources/citable",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/resources/citable",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/resources/citable",
+    "parseError": null,
+    "blocks": [
+      {
+        "@type": "TechArticle",
+        "@id": "https://nebulacomponents.shop/resources/citable#article",
+        "headline": "Citable — The Evidence Layer for Defensible SEO, AEO, and GEO Audits",
+        "description": "Citable audits what a site makes retrievable, extractable, supportable, and observable — then preserves the artifacts required to defend every finding and verify every change. 123 detectors across 18 namespaces. Apache 2.0 licensed.",
+        "author": {
+          "@type": "Organization",
+          "@id": "https://nebulacomponents.shop/#organization",
+          "name": "Nebula Components"
+        },
+        "datePublished": "2026-07-08",
+        "dateModified": "2026-07-19",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/resources/citable"
+        },
+        "about": {
+          "@type": "SoftwareApplication",
+          "@id": "https://nebulacomponents.shop/resources/citable#software",
+          "name": "Citable",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Node.js >=24",
+          "url": "https://nebulacomponents.shop/resources/citable",
+          "downloadUrl": "https://www.npmjs.com/package/@nebulacomponents/citable",
+          "softwareVersion": "1.13.1",
+          "license": "https://www.apache.org/licenses/LICENSE-2.0",
+          "author": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/privacy-policy",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/privacy-policy",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/terms",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/terms",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/data-rights",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/data-rights",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/checkout",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/checkout",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/paid-traffic-leak-map",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/paid-traffic-leak-map",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/paid-traffic-leak-map",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Paid Traffic Leak Map: Where Your Ad Budget Disappears",
+        "description": "A diagnostic map of every stage where paid traffic leaks before converting. Identify which leak is bleeding your ad budget, then get the fix.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-19",
+        "dateModified": "2026-07-21",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/paid-traffic-leak-map"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/paid-traffic-leak-map",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Where does most paid traffic get lost before converting?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The highest-volume leak in most paid traffic funnels is the landing page itself — specifically the first 5 seconds after arrival. If the landing page headline does not match the ad promise (message-match break), or if the page loads slowly on mobile, the visitor exits before engaging with any content. A secondary high-volume leak is the absence of proof before the CTA: the visitor reads the page but abandons because they have no evidence that the offer is credible. The first leak (arrival) is confirmed by bounce rate combined with low time-on-page. The second (trust) is confirmed by page engagement without form starts."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the most common reason paid traffic does not convert?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Message-match break between the ad and the landing page is the most common root cause. The ad creates a specific expectation — a keyword, an offer, a tone — and the page does not fulfil it. The visitor arrives, scans the first screen, does not recognise the promise they clicked on, and leaves. This is confirmed when CTR on the ad is healthy (above 3-5% for search) but bounce rate on the landing page is above 70% with under 15 seconds time-on-page. The second most common cause is mobile load time: a visitor who abandons while the page is loading is recorded as a bounce before seeing anything."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I identify which stage is leaking my paid traffic?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Work through the leak map in stage order, using analytics signals to confirm each: (1) Check ad CTR — if under 3% for high-intent search, the problem is the ad, not the page. (2) Check bounce rate and time-on-page for paid traffic — high bounce + under 15 seconds confirms message-match or load time failure. (3) Check mobile vs desktop conversion split — if mobile is 50%+ lower, the problem is mobile layout or mobile LCP. (4) Check form starts vs form submissions — if visitors are starting but not completing forms, the form is the leak. (5) Check checkout abandonment rate — if add-to-cart rate is healthy but purchase rate is low, the leak is at checkout (shipping reveal, trust, friction). The first stage that fails in sequence is the first fix."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does it take to fix a paid traffic conversion leak?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Depends on the leak. Message-match fixes — rewriting the headline to mirror the ad — can be live in under an hour. Mobile LCP fixes — converting the hero image to WebP and adding correct sizing attributes — typically take 2–4 hours including testing. Form friction fixes — removing optional fields — take under an hour. Layout fixes for mobile — implementing a sticky CTA bar or restructuring the above-fold section — typically take 4–8 hours of development time. The most time-consuming fix is trust signal work — gathering, formatting, and placing new testimonials or case study content. The Nebula Fix Pack addresses all confirmed leaks within 48 hours."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I pause my ads while fixing conversion leaks?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Generally no — unless your budget is very small and you cannot afford to continue accumulating data during the fix period. Pausing and restarting ads resets learning phases in automated bidding strategies (Google Smart Bidding, Meta Advantage+), which can cost 1–2 weeks of re-optimisation. If your daily budget is under $20 and you are confident the fix will take 48 hours or less, a pause is acceptable. For most advertisers, continuing to run at current budget while implementing fixes gives you a before/after comparison on the same audience, which is the most useful validation of whether the fix worked."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/above-fold-landing-page",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/above-fold-landing-page",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/above-fold-landing-page",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Above The Fold: What Paid Traffic Decides Before Scrolling",
+        "description": "Most paid social traffic never scrolls past the first screen. If your above-fold section does not close the case before they scroll, it never gets closed.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-21",
+        "dateModified": "2026-07-21",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/above-fold-landing-page"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/above-fold-landing-page",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What should be above the fold on a landing page?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Five elements: a headline that names the outcome and the audience, a subheadline that explains the mechanism, at least one specific proof signal, a primary CTA visible without scrolling, and a risk-reducer (guarantee, \"no credit card required\", or similar). If any of these are missing or below the fold, the above-fold section is not doing conversion work."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I know what is above the fold on mobile?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Open your landing page in Chrome DevTools, set the device to iPhone 12 Pro (390x844), and screenshot what is visible without scrolling. Do not use a browser emulator as a substitute for a real device test — emulators do not replicate browser chrome height, font rendering, or thumb reach. Repeat at 375px (iPhone SE) for older Android coverage."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does above-the-fold content affect conversion rate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, directly. For cold paid traffic with no prior brand relationship, the above-fold section is the first and often only content they evaluate before deciding to stay or leave. If the headline does not confirm the ad promise, if no proof is visible, or if the CTA requires scrolling to find, a significant portion of paid traffic exits before seeing the rest of the page."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I put the CTA above the fold?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For cold paid traffic: yes. The CTA should be visible without scrolling. It does not have to be the dominant element — the headline and proof carry more weight — but the CTA needs to be findable in the first viewport. For warm traffic (email list, retargeting), the CTA below the fold is acceptable because those visitors are more likely to scroll. Segment your traffic type before deciding."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the most common above-fold mistake on paid traffic landing pages?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Using the company name or tagline as the H1. \"Welcome to Acme Inc.\" and \"Transforming the Future of Work\" both fail the same test: a cold visitor cannot tell from either headline whether they are in the right place. The H1 is the most-read element on the page. It should state the specific outcome you deliver and who you deliver it to, in the same language the ad used to bring the visitor there."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/agency-handoff-debt",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/agency-handoff-debt",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/agency-handoff-debt",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Agency Handoff Debt: 7 Silent Regressions That Kill Landing Page Performance",
+        "description": "You hired an agency, got a great landing page, then handed it to a developer for minor changes. Here are the 7 ways it quietly stopped working — and how to find them.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-25",
+        "dateModified": "2026-07-25",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/agency-handoff-debt"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/confessions",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/confessions",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/confessions",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Founder Confessions: The Moment We Found Out Our Page Was Broken",
+        "description": "Anonymous stories from founders who discovered their landing page had been silently broken — sometimes for months. How long it had been broken. How much they spent. What they were blaming instead.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-25",
+        "dateModified": "2026-07-25",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/confessions"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/ghost-variant-ab-test",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/ghost-variant-ab-test",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/ghost-variant-ab-test",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "The Ghost Variant: When Your A/B Test Winner Is a False Positive",
+        "description": "A ghost variant is when your control quietly breaks mid-test — a missing pixel, a truncated H1, a 404ing social proof block — and the \"winning\" variant wins by default. Here is how to detect it before you ship.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-25",
+        "dateModified": "2026-07-25",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/ghost-variant-ab-test"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/landing-page-bounce-rate-high",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/landing-page-bounce-rate-high",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/landing-page-bounce-rate-high",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Landing Page Bounce Rate High? It Is Usually 3 Diagnosable Causes",
+        "description": "A high bounce rate on paid traffic means the first screen is not delivering on the promise that brought visitors there. Bounce is a symptom — these are the causes.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-16",
+        "dateModified": "2026-07-21",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/landing-page-bounce-rate-high"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/landing-page-bounce-rate-high",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a high bounce rate on a paid traffic landing page?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There is no universal threshold because bounce rate varies by traffic type and offer. Cold paid traffic bounces more than warm traffic by design — a visitor who clicked an ad for the first time is less committed than someone returning from a retargeting campaign. As a working diagnostic: if your paid traffic bounce rate is above 70%, the first screen is likely not confirming the ad promise. If it is above 85%, the message-match, load time, or audience-targeting problem is severe enough to fix before any other optimisation."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between bounce rate and exit rate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bounce means a visitor landed on your page and left without clicking anything — they arrived, decided the page was not what they expected, and left immediately. Exit means they visited multiple pages and this was their last stop. High exit rate on a landing page is normal if visitors explored and then left. High bounce on a paid traffic landing page is the problem — the first screen failed to hold them."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I reduce bounce rate on a landing page?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Diagnose the cause before changing anything. The three most common paid-traffic bounce causes are: (1) message mismatch — the headline does not echo the ad promise; (2) slow load time — Portent's 2022 analysis of 100M+ page views found B2B pages loading in 1 second convert at roughly 3x the rate of pages loading in 5 seconds; (3) wrong audience — broad keywords or clickbait ads bring visitors who were never going to convert. Segment your analytics by source and device to find which cause is active, then fix that cause specifically."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does load time affect bounce rate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, directly. A 2017 Google/SOASTA study found that 53% of mobile users abandoned pages taking longer than 3 seconds to load — and that figure is from 2017, before the shift to mobile-first consumption patterns. More recent data from Portent's 2022 research shows that B2B pages loading in 1 second have a conversion rate roughly 3x higher than pages loading in 5 seconds. Slow load time is a bounce cause, not a separate problem — a visitor who abandons during load is recorded as a bounce before they have seen your headline."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is mobile bounce rate versus desktop?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If your mobile bounce rate is significantly higher than desktop — more than 15 percentage points — the gap is almost always a layout problem, not an audience problem. Mobile visitors need the headline and CTA visible without scrolling, and they need the page to load in under 3 seconds on a mobile connection. Diagnose mobile layout (signal 3) and load time (signal 4) specifically for your mobile segment before concluding that mobile traffic is lower quality."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/landing-page-load-time-slow",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/landing-page-load-time-slow",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/landing-page-load-time-slow",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Landing Page Load Time Slow: Signal 4 Diagnosis and Fix",
+        "description": "Slow landing page load time bleeds conversions before the page is seen. Here is how to diagnose it, what the data says about the speed-conversion relationship, and where to start fixing.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-16",
+        "dateModified": "2026-07-21",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/landing-page-load-time-slow"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/landing-page-load-time-slow",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How does page load time affect conversion rate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Multiple studies show a consistent relationship. Portent's 2022 analysis of 100M+ page views found that B2B lead generation pages loading in 1 second have a conversion rate roughly 3x higher than pages loading in 5 seconds, and 5x higher than pages loading in 10 seconds. A 2020 Deloitte/Google study of 37 brands found that a 0.1-second improvement in mobile load time increased retail conversions by 8.4% and travel conversions by 10.1%. The mechanism is simple: a visitor who abandons during load is recorded as a bounce before they have seen your headline, your proof, or your CTA."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a good page load time for a landing page?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Google defines good Largest Contentful Paint (LCP) as under 2.5 seconds; 2.5–4 seconds needs improvement; above 4 seconds is poor. For paid traffic landing pages specifically, aim for LCP under 2.5 seconds on mobile — this is the device your visitors are most likely using. According to the 2024 Web Almanac (HTTP Archive), only 38% of mobile home pages currently pass all Core Web Vitals. If your page is in the 62% that fail, load time is a conversion blocker before any copy or layout issue is reached."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I check my landing page load time?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use Google PageSpeed Insights (free, pagespeed.web.dev) — enter your landing page URL and it returns your LCP, FCP, and Core Web Vitals scores for both mobile and desktop, using real Chrome user data if available. For a more detailed waterfall view, use Chrome DevTools (Network tab, throttle to Fast 3G to simulate mobile). The LCP figure is the most actionable single metric for landing pages."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What causes slow LCP on a landing page?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The four most common causes: (1) uncompressed hero image — a 2MB PNG in the first viewport will dominate LCP; (2) render-blocking scripts — third-party tools (chat widgets, analytics, ad pixels) loaded in the head block render until they resolve; (3) no CDN — serving assets from a single origin server adds round-trip latency for distant visitors; (4) server response time (TTFB) above 800ms — hosting tier or unoptimised server-side rendering. Image compression alone fixes LCP in most cases."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does page speed affect Google Ads Quality Score?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Google's Landing Page Experience component of Quality Score includes page load speed as a factor. A slow landing page can reduce Quality Score, which increases your cost-per-click and reduces your ad position. This means slow load time costs you twice: lower conversion rate on the traffic you receive, and higher CPC for that traffic. PageSpeed Insights flags this explicitly in its Quality Score impact section."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/landing-page-not-converting",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/landing-page-not-converting",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/landing-page-not-converting",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Landing Page Not Converting? Diagnose These 5 Leaks First",
+        "description": "A landing page that does not convert paid traffic has at least one of five diagnosable leak patterns. Diagnose the right one before you change anything.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-16",
+        "dateModified": "2026-07-21",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/landing-page-not-converting"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/landing-page-not-converting",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the most common reason a landing page does not convert?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A broken promise between the ad and the page headline. When the ad says '50% off running shoes' and the page headline says 'Shop Our Collection,' the visitor has no confirmation they are in the right place and leaves. This is what the message-match signal in Nebula's 7-signal audit framework measures."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I know if my landing page conversion rate is actually low?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "WordStream's 2026 Google Ads Benchmarks report — analysing over 13,000 search advertising campaigns from April 2025 to March 2026 — found an all-industries average conversion rate of 8.18%, ranging from 2.64% in Finance and Insurance to 16.22% in Animals and Pets. These are search-campaign averages, not single-page rates, but they give a realistic floor for your vertical. If you are consistently below your vertical's lower bound with meaningful traffic (500+ sessions), that strongly indicates at least one of the five leak patterns is active."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I A/B test my landing page before diagnosing the problem?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. A/B testing is a measurement tool, not a diagnostic tool. Testing two versions of a page with a broken promise doubles your spend on the wrong problem. Diagnose the leak first — identify which of the five patterns is active — then test the fix against the control."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is message match and why does it matter?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Message match is the degree to which your landing page headline repeats or reinforces the specific promise in the ad that brought the visitor there. A visitor who clicked 'Free 30-day trial for SaaS teams' expects to see those words, or close equivalents, immediately on the page. When they do not, they assume they clicked the wrong link and leave. High message match reduces the first decision a visitor has to make: am I in the right place?"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does it take to fix a non-converting landing page?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Depends on which leak is active. A message-match fix (rewriting the headline and hero copy) takes 2-4 hours with a clear brief. A proof restructure (repositioning testimonials, adding specificity) takes a day. A full CTA and form-friction overhaul is 1-2 days. Nebula's $97 Fix Pack implements all identified fixes from the audit within 48 hours."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/the-11pm-founder-spiral",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/the-11pm-founder-spiral",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/the-11pm-founder-spiral",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "The 11pm Founder Spiral",
+        "description": "It's 11:47pm and you've refreshed Ads Manager three times. You're not looking for data. You're looking for reassurance. Here's what's actually happening — and what your page is silently doing while you spiral.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-25",
+        "dateModified": "2026-07-25",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/the-11pm-founder-spiral"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/resources",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/resources",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/resources",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "@id": "https://nebulacomponents.shop/resources",
+        "name": "Resources — Nebula Components",
+        "description": "Open-source tools built from real conversion and discoverability problems on real sites.",
+        "url": "https://nebulacomponents.shop/resources",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "hasPart": [
+          {
+            "@type": "SoftwareApplication",
+            "@id": "https://nebulacomponents.shop/resources/citable",
+            "name": "Citable",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Node.js",
+            "url": "https://nebulacomponents.shop/resources/citable",
+            "downloadUrl": "https://www.npmjs.com/package/@nebulacomponents/citable",
+            "softwareVersion": "1.13.1",
+            "license": "https://www.apache.org/licenses/LICENSE-2.0",
+            "description": "The evidence layer for defensible SEO, AEO, and GEO audits. 123 detectors across 18 namespaces. Evidence packages on every run.",
+            "author": {
+              "@id": "https://nebulacomponents.shop/#organization"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/about",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/about",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/message-match-checklist",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/message-match-checklist",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/message-match-checklist",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Message Match Checklist for Paid Traffic Landing Pages",
+        "description": "Message match is the degree to which your landing page fulfills the exact promise your ad made. Use this 60-second audit checklist before your next paid traffic campaign.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2025-07-15",
+        "dateModified": "2026-07-21",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/message-match-checklist"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/proof-before-cta",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/proof-before-cta",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/proof-before-cta",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Proof Before CTA: Why Social Proof Placement Determines Conversion",
+        "description": "What visitors see before a CTA can change how they evaluate the ask. These proof-placement sequences are testable hypotheses, not universal laws.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2025-07-15",
+        "dateModified": "2026-07-21",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/proof-before-cta"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/mobile-landing-page-leaks",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/mobile-landing-page-leaks",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/mobile-landing-page-leaks",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Mobile Landing Page Leaks That Kill Paid Traffic",
+        "description": "The majority of paid social traffic arrives on mobile. These five structural leaks silently drain ad budget — and a 5-minute phone audit will expose all of them.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-16",
+        "dateModified": "2026-07-21",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/mobile-landing-page-leaks"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/mobile-landing-page-leaks",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Why does my landing page convert on desktop but not on mobile?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The most common causes: (1) mobile layout breakage — elements designed at desktop widths collapse, clip, or overflow at 390px, making the page look unprofessional or unusable; (2) mobile LCP (Largest Contentful Paint) is poor — the hero image that loads in 0.8s on desktop loads in 4+ seconds on a mid-tier Android device over 4G because it has not been sized and compressed for mobile; (3) the CTA is not visible above the fold on mobile — desktop layouts typically show headline + proof + CTA in the first viewport, but mobile layouts often push the CTA below a full-height hero image. Check all three before attributing the gap to audience quality."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the minimum tap target size for a mobile landing page?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "WCAG 2.5.5 (Level AA) specifies a minimum touch target size of 44×44 CSS pixels for all interactive elements. Apple's Human Interface Guidelines recommend 44 points as the minimum tap target, and Google's Material Design guidelines specify 48×48dp. In practice, most CTA buttons designed in rem-based padding relative to a 16px base font will render at 36–40px on mobile if the designer did not specifically test on a phone. Check every interactive element — buttons, nav links, radio buttons, and form labels — with your thumb, not your index finger, on a real device."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I check my landing page LCP on mobile?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Go to pagespeed.web.dev, paste your landing page URL, and select the Mobile tab (not Desktop — mobile LCP is typically 40–60% worse than desktop for the same URL due to device and network differences). The report identifies the LCP element by name — almost always the hero image. It shows the current LCP score in milliseconds. Google's Core Web Vitals thresholds: under 2.5 seconds is 'Good,' 2.5–4 seconds is 'Needs Improvement,' above 4 seconds is 'Poor.' If your LCP element is a JPEG or PNG over 400KB, converting it to WebP with the correct `sizes` attribute is usually sufficient to move from 'Poor' to 'Good.'"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does mobile page speed affect Google Ads Quality Score?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Landing Page Experience is one of the three components of Quality Score, and Google evaluates the page on mobile specifically for mobile-originated traffic. A page that is slow, hard to navigate, or difficult to read on mobile receives a \"Below Average\" Landing Page Experience rating for mobile ad traffic — raising your effective CPC and lowering your ad rank. Fixing mobile LCP and layout issues improves Landing Page Experience, which improves Quality Score, which lowers CPC. The fix is simultaneously a conversion improvement and a cost reduction."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a practical way to audit a landing page on mobile?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Five steps, under 5 minutes: (1) Open the page on a real phone in Chrome (iOS or Android — not desktop browser DevTools 'mobile view'). (2) Read the headline aloud without zooming. If you hesitate, text is too small. (3) Screenshot the first viewport — is the CTA visible without scrolling? (4) Tap every button with your thumb. Any mis-tap is a target under 44px. (5) Run Google PageSpeed Insights on mobile and check your LCP score and the element causing it. These five steps expose the majority of mobile conversion leaks in under five minutes."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/cta-not-working",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/cta-not-working",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/cta-not-working",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "CTA Not Working? Fix Commitment, Clarity, And Timing",
+        "description": "Your CTA fails when it asks for more than the page has earned. Learn the 4 CTA failure modes, the commitment ladder, and the copy formula that converts.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-21",
+        "dateModified": "2026-07-21",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/cta-not-working"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/no-testimonials-on-landing-page",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/no-testimonials-on-landing-page",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/traffic-but-no-form-fills",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/traffic-but-no-form-fills",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/traffic-but-no-form-fills",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Traffic But No Form Fills: The Form Is Usually Not The First Leak",
+        "description": "Getting traffic but no form fills? The form is almost never the first problem. Here's how to diagnose where trust broke down before visitors ever reached the form.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-21",
+        "dateModified": "2026-07-21",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/traffic-but-no-form-fills"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/before-you-raise-ad-budget",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/before-you-raise-ad-budget",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/before-you-raise-ad-budget",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Before You Raise Ad Budget: Fix The Leaks First",
+        "description": "Raising ad budget before fixing landing page leaks scales waste proportionally. Here is the 7-signal checklist to run before touching your daily spend.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-16",
+        "dateModified": "2026-07-21",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/before-you-raise-ad-budget"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/before-you-raise-ad-budget",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "When should I raise my ad budget?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "When your page is already converting paid traffic at or above the average rate for your vertical and traffic source — and you want more volume of the same result. If your conversion rate is below vertical average on meaningful traffic (500+ paid sessions), raising budget increases waste at the same rate your page is currently leaking it. Fix the page first, then scale."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I know if my problem is the page or the targeting?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Segment your analytics by source, device, and time-on-page. If your paid search traffic (high intent) bounces at 80%+ but your email traffic (warm) converts at 10%, the page is structurally broken — not the targeting. If all traffic sources bounce equally, and your click-through rate on the ads is healthy, the page is the problem. If CTR on ads is below 2% for search, the targeting or ad copy is the problem and the page is secondary."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the minimum conversion rate before raising ad budget?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There is no universal minimum, but a useful working threshold: if your paid search conversion rate is below 3% on 500+ sessions, you have a page problem worth fixing before increasing spend. WordStream's 2026 benchmark for Business Services (B2B lead gen) is 4.85%. If you are below that with meaningful volume, more budget produces more bounces at the same rate — not more customers."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does fixing the landing page improve Google Ads Quality Score?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Landing Page Experience is one of the three components of Quality Score (alongside Expected CTR and Ad Relevance). Improving message-match between the ad keyword and the page headline, adding above-fold proof, and reducing LCP below 2.5 seconds all directly improve Landing Page Experience. A higher Quality Score lowers your CPC in the Google Ads auction — meaning the same budget buys more clicks after the page fix."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a practical way to check for landing page leaks before raising budget?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Run the 7-signal check in order: (1) does the headline match the ad promise? (2) is proof visible before the CTA? (3) does the page load and display correctly on mobile at 390px? (4) is LCP under 2.5 seconds? (5) is there one clear CTA — not three options? (6) does the form ask for the minimum required information? (7) is there specific social proof — a result, a number, a named customer? The first signal that fails is the first fix. Earlier signals gate later ones."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/google-ads-quality-score-low",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/google-ads-quality-score-low",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/google-ads-clicks-no-sales",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/google-ads-clicks-no-sales",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/google-ads-clicks-no-sales",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Google Ads Clicks But No Sales: Check The Page Before Budget",
+        "description": "If Google Ads produces clicks but no sales, the campaign may be doing its job. The conversion leak usually happens on the landing page, not in the ad.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-16",
+        "dateModified": "2026-07-21",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/google-ads-clicks-no-sales"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/google-ads-clicks-no-sales",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Why does Google Ads produce clicks but no conversions?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The most common causes are: (1) the landing page headline does not match the search intent or ad promise — the visitor arrived and immediately decided they were in the wrong place; (2) no proof is visible before the CTA — the page asks for action before it earns trust; (3) the page loads slowly on mobile — a visitor who abandons during load is recorded as a bounce before they see anything. A healthy click-through rate on the ad with a high bounce rate on the page is the clearest diagnostic signal: the ad worked, the page did not."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I know if my Google Ads problem is the ad or the landing page?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Check CTR first. If search CTR is below 3-5% on high-intent keywords, the ad is not getting clicked and the page is not yet the issue. If CTR is healthy (above 5%) but conversion rate is below 2%, the ad delivered — the page failed. Confirm with bounce rate by source: if paid search bounces at 80%+ but email or direct traffic converts on the same page, the problem is message-match between the ad and the first screen."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is message match in Google Ads?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Message match means the landing page headline uses the same noun phrase and intent as the ad and keyword that brought the visitor there. If a visitor clicks an ad for \"landing page audit tool\" and the page headline reads \"Welcome to Nebula,\" the match is broken. The visitor cannot confirm they are in the right place and leaves. The fix is to use the specific search intent from your highest-traffic keywords in your headline — not your brand name or a clever tagline."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does sending Google Ads traffic to a homepage hurt conversion?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Almost always yes, for high-intent searches. A homepage is designed to route multiple audience types — it carries navigation, multiple offers, and no single conversion goal. A high-intent search ad visitor arrived because of one specific promise. A homepage breaks that promise immediately by presenting ten options instead of one. Dedicated landing pages that mirror the ad promise convert more consistently than homepage traffic for paid search."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I fix a high bounce rate from Google Ads?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Fix in this order: (1) confirm the headline mirrors the ad keyword and promise exactly; (2) check mobile load time — run Google PageSpeed Insights on mobile preset and aim for LCP under 2.5 seconds; (3) ensure proof (a result, a number, a named customer) appears before the CTA in the first viewport; (4) reduce the CTA to one action with a label describing the outcome, not the mechanics. Most high-bounce patterns from paid search are caused by the first two — message mismatch and slow mobile load."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/facebook-ads-no-leads",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/facebook-ads-no-leads",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/facebook-ads-no-leads",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Facebook Ads Getting Clicks But No Leads: The Page Broke The Chain",
+        "description": "High CTR, zero conversions? The ad isn't the problem — your landing page broke the chain. Learn how Meta's context switch kills cold traffic and how to fix it.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-21",
+        "dateModified": "2026-07-21",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/facebook-ads-no-leads"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/high-cpc-low-conversion",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/high-cpc-low-conversion",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/high-cpc-low-conversion",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "High CPC, Low Conversion: Which Layer Is Broken",
+        "description": "High CPC and low conversion rate together usually indicate a Quality Score problem rooted in landing page message-match. Here is how to diagnose which layer to fix first.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-16",
+        "dateModified": "2026-07-21",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/high-cpc-low-conversion"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/high-cpc-low-conversion",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Why is my Google Ads CPC high?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "CPC is determined by the Google Ads auction, which accounts for your bid and your Quality Score. A low Quality Score means you pay more for the same position — or get outbid by competitors with better Quality Scores and lower bids. Quality Score has three components: Expected CTR (ad relevance to the search), Ad Relevance (how closely the ad matches the keyword), and Landing Page Experience (how well the landing page matches the search intent, loads quickly, and provides a useful path to conversion). The Landing Page Experience component is entirely within your control and is the most commonly neglected of the three."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is Google Ads Quality Score and how does it affect CPC?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Quality Score is Google's estimate of the quality and relevance of your ads and landing pages, scored 1–10. It is used in the ad auction to determine ad rank and CPC. A higher Quality Score means you can achieve the same ad position at a lower CPC, or a better position at the same CPC. Google's public documentation confirms that Quality Score is made up of three components: Expected CTR, Ad Relevance, and Landing Page Experience. Check your Quality Score components in Google Ads under Keywords → Columns → Quality Score."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can fixing my landing page reduce my CPC?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, directly. Improving Landing Page Experience — by matching the page headline to the keyword, loading faster on mobile, and providing a clear conversion path — improves your Quality Score. A higher Quality Score reduces your CPC in the ad auction for the same ad position. This means a better landing page does two things: improves conversion rate on the traffic you receive, and reduces the cost of each click. The two improvements compound — you pay less per click and convert more of the clicks you do receive."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is high CPC a targeting problem or a landing page problem?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Both can contribute. Check Quality Score components first: if Landing Page Experience is \"Below Average,\" the landing page is a confirmed contributor to high CPC and should be fixed before any bid changes. If Expected CTR or Ad Relevance is \"Below Average,\" the ad-to-keyword match is the priority. If all three components are \"Average\" or better and CPC is still high, the keyword is genuinely competitive — and the only lever is either a higher bid or finding less competitive keyword variants with comparable intent."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is landing page experience in Google Ads?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Landing Page Experience is Google's assessment of how useful and relevant your landing page is to visitors who click your ad. Google evaluates: (1) relevance — does the page content match the keyword and ad promise; (2) transparency — is it clear what the page offers and who runs it; (3) ease of navigation — can the visitor find what they came for; (4) loading speed — does the page load quickly on mobile. A \"Below Average\" rating means at least one of these is failing. The rating appears in Google Ads under Keywords → Quality Score columns."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/ecommerce-landing-page-not-converting",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/ecommerce-landing-page-not-converting",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/ecommerce-landing-page-not-converting",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Ecommerce Landing Page Not Converting: Fix These 5 Leaks First",
+        "description": "Low conversion on an ecommerce landing page almost always comes down to 5 fixable structural issues. Diagnose which one is costing you customers before running more ads.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-16",
+        "dateModified": "2026-07-21",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/ecommerce-landing-page-not-converting"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/ecommerce-landing-page-not-converting",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a good conversion rate for an ecommerce landing page?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There is no single benchmark — conversion rate varies significantly by traffic source, product category, price point, and whether the visitor is cold or warm. WordStream's 2026 analysis places the all-industries average Google Ads conversion rate at 8.18%, but ecommerce product pages receiving paid social traffic typically convert lower because the audience is colder and the product requires more consideration. A more useful benchmark is your own historical rate by traffic source and device. If paid social traffic to a product page converts at under 1% with significant volume, the page has a structural problem worth diagnosing before adding more budget."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why do ecommerce ads get clicks but no purchases?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The most common causes: (1) the landing page does not match the ad promise — the visitor expected a specific product or offer and landed on a generic category or homepage; (2) no social proof is visible before the add-to-cart CTA — no reviews, no star rating, no indication that others have purchased; (3) shipping cost is hidden until checkout, creating a price surprise that causes abandonment; (4) mobile layout is broken — the add-to-cart button is not visible above the fold on a phone, or images are cut off; (5) page load is slow — Portent's 2022 analysis of 100+ million page views found conversion rate drops significantly as page load time increases beyond 1 second. Start with mobile layout and load time — both affect the majority of paid social traffic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I reduce ecommerce cart abandonment?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Baymard Institute research consistently finds average cart abandonment rates around 70%. The most actionable causes they identify: unexpected costs at checkout (shipping, tax), being forced to create an account, overly complicated checkout process, and security concerns. The three highest-leverage fixes before checkout: (1) show shipping cost and estimated delivery date on the product page — before the visitor adds to cart; (2) display trust badges (payment icons, security seals, guarantee text) near the add-to-cart button; (3) surface your return policy clearly near the price. Visitors who know the total cost, delivery timeline, and return terms before they add to cart abandon at a meaningfully lower rate."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do product page reviews really increase conversion rate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Research from the Spiegel Research Center (Northwestern University, 2017) found that displaying reviews can increase conversion rate by up to 270% for lower-priced products. The effect is strongest when: reviews are displayed prominently near the product price (not buried below), the review count is visible ('247 reviews' not just a star average), and recent reviews are shown (recency signals that the product is still actively purchased). For new products with few reviews, a small number of specific, detailed reviews outperforms a large number of generic ones."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my ecommerce conversion problem the price or the page?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Segment your analytics before testing price. If your add-to-cart rate is low (visitors are not even reaching the cart), the problem is above the fold — product images, headline, or proof. If add-to-cart rate is healthy but purchase rate is low, the problem is at checkout — shipping cost reveal, form friction, or trust signals at payment. If both rates are low on mobile but healthy on desktop, the problem is mobile layout or mobile load time, not price. Only test price after the page structure is clean — a lower price on a broken page still fails."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/landing-page-conversion-rate-benchmark",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/landing-page-conversion-rate-benchmark",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/landing-page-conversion-rate-benchmark",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Landing Page Conversion Rate Benchmark: What the Numbers Actually Mean",
+        "description": "What is a good landing page conversion rate? The benchmarks vary by traffic source, offer type, and vertical. Here is how to read them without drawing wrong conclusions.",
+        "author": {
+          "@type": "Person",
+          "name": "Mike H",
+          "url": "https://nebulacomponents.shop/about/team"
+        },
+        "datePublished": "2026-07-21",
+        "dateModified": "2026-07-21",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://nebulacomponents.shop/learning-centre/landing-page-conversion-rate-benchmark"
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/landing-page-conversion-rate-benchmark",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a good landing page conversion rate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It depends on traffic source, offer type, and vertical. For paid search (Google Ads), WordStream's 2026 benchmarks across 13,000+ campaigns found an all-industries average of 8.18%. For Business Services — the most relevant vertical for B2B lead gen — the average is 4.85%. A rate below your vertical's average with meaningful traffic (500+ sessions) is a diagnostic signal, not a verdict. The right question is not 'is my rate good' but 'which of the 7 conversion signals is pulling it down.'"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are conversion rate benchmarks comparable across industries?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No, and comparing across verticals is one of the most common benchmarking mistakes. WordStream's 2026 Google Ads data shows conversion rates ranging from 2.64% in Finance and Insurance to 16.22% in Animals and Pets — a 6x gap. A 3% conversion rate is below average for an Automotive Repair shop but above average for a Finance lead generation page. Always compare against your own vertical's benchmark, not an all-industries figure."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does traffic source affect conversion rate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, significantly. Paid search traffic (Google Ads) arrives with higher intent than paid social traffic (Meta, TikTok) — the visitor was actively searching for a solution, not interrupted while scrolling. Email list traffic is warmer than either. This means the same page can show 1% from cold paid social, 5% from paid search, and 12% from a warm email list. Benchmarking your page's overall rate against paid-search averages when your traffic mix is primarily cold social will make your page look worse than it is."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What conversion rate should I aim for on a landing page?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Compare your page with a documented benchmark segmented by vertical, traffic source, offer, and conversion action. Treat the benchmark as context, not a diagnosis: performance differences can come from the ad, audience, offer, measurement, or page. Use the page signals to form testable hypotheses rather than treating one benchmark number as the cause."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many sessions do I need before my conversion rate is meaningful?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "At least 500 paid traffic sessions to a single landing page before drawing diagnostic conclusions. Below that, variance is too high — a single week with unusual traffic composition can shift a 3% rate to 8% and back without the page changing at all. If you are below 500 sessions, focus on ensuring the 7 signals are in place structurally rather than optimising toward a number."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/retargeting-ads-not-converting",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://nebulacomponents.shop/#organization",
+        "name": "Nebula Components",
+        "url": "https://nebulacomponents.shop",
+        "logo": "https://nebulacomponents.shop/logo-dark.png",
+        "description": "Evidence-backed landing-page conversion guidance and implementation services.",
+        "foundingDate": "2024",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hello@nebulacomponents.shop",
+          "availableLanguage": "English"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/nebula-components",
+          "https://github.com/mikeholownych"
+        ],
+        "founder": {
+          "@type": "Person",
+          "@id": "https://nebulacomponents.shop/#founder",
+          "name": "Mike Holownych",
+          "jobTitle": "Founder",
+          "url": "https://nebulacomponents.shop/about/team",
+          "sameAs": [
+            "https://www.linkedin.com/in/mikeholownych",
+            "https://github.com/mikeholownych"
+          ],
+          "worksFor": {
+            "@id": "https://nebulacomponents.shop/#organization"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "url": "https://nebulacomponents.shop/learning-centre/retargeting-ads-not-converting",
+    "parseError": null,
+    "blocks": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://nebulacomponents.shop/#website",
+        "url": "https://nebulacomponents.shop",
+        "name": "Nebula Components",
+        "description": "Evidence-backed landing-page conversion guidance from Nebula Components.",
+        "publisher": {
+          "@id": "https://nebulacomponents.shop/#organization"
+        }
+      }
+    ]
+  }
+]

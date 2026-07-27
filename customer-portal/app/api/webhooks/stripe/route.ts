@@ -9,17 +9,26 @@ import { isCanonicalFixPackReceipt } from '@/app/lib/public-facts'
 
 const execFileAsync = promisify(execFile)
 
-async function sendCheckoutAlert(message: string): Promise<void> {
+// Real-time Telegram alert on a real (non-test-mode) sale. Uses the same
+// `hermes send` mechanism as the Python side (sre_responder.py,
+// notify_production_health.py) — this repo has no Telegram bot token
+// configured, `hermes send` is the only working delivery path.
+// sre_responder.py also checks for new payments every 15 min as a backstop
+// in case this call fails silently (network blip, hermes gateway down, etc).
+async function sendSaleAlert(message: string): Promise<void> {
   try {
-    await execFileAsync(
-      'hermes',
-      ['send', '--to', 'telegram:5920497760', message],
-      { timeout: 15_000 },
-    )
+    await execFileAsync('hermes', ['send', '--to', 'telegram:5920497760', message], { timeout: 15_000 })
   } catch (err) {
-    console.error('Checkout alert failed to send:', err)
+    console.error('Sale alert failed to send:', err)
   }
 }
+
+// The exact One-Leak Repair Sprint price, in cents. Other live Stripe prices
+// still receive a sale alert, but only this amount creates a repair-sprint
+// kickoff. The first customer loops are intentionally manual: the persisted
+// purchase and alert are the source of truth, and no automatic deliverable is
+// sent before the repair scope and access path are confirmed with the buyer.
+const REPAIR_SPRINT_AMOUNT_CENTS = 9700
 
 // The database processing claim prevents concurrent dispatch. The delivery
 // script provides the second idempotency boundary, keyed by Stripe session ID,
@@ -180,36 +189,26 @@ export async function POST(request: NextRequest) {
           session.amount_total,
           session.currency,
           session.payment_status,
-        ],
+        ]
       )
+    } catch (err) {
+      console.error('Failed to persist purchase — will let Stripe retry:', err)
+      return NextResponse.json({ error: 'Failed to record purchase' }, { status: 500 })
+    }
 
-      const statusResult = await client.query<{ fulfillment_status: string }>(
-        `SELECT fulfillment_status
-         FROM purchases
-         WHERE stripe_session_id = $1`,
-        [session.id],
-      )
-      const status = statusResult.rows[0]?.fulfillment_status
-      if (!status) {
-        throw new Error('Persisted purchase could not be read')
-      }
-      if (status === 'delivered') {
-        return NextResponse.json({ received: true, duplicate: true })
-      }
+    if (event.livemode) {
+      const amount = session.amount_total != null
+        ? `$${(session.amount_total / 100).toFixed(2)}`
+        : 'unknown amount'
+      const offerKey = session.metadata?.offer_key ?? 'unknown offer'
+      const email = session.customer_email ?? 'no email'
+      const isRepairSprint = session.amount_total === REPAIR_SPRINT_AMOUNT_CENTS
+      const message = isRepairSprint
+        ? `🛠 *REPAIR SPRINT KICKOFF REQUIRED*\n${amount} — ${email}\nsession: ${session.id}\nConfirm audited URL, one-repair scope, approval, and access path.`
+        : `💰 *SALE* — ${amount} — ${offerKey} — ${email}\nsession: ${session.id}`
 
-      // The advisory lock is the exclusive claim. A row left as `processing`
-      // by a crashed worker is safe to retry because PostgreSQL releases the
-      // session lock when that worker's connection disappears.
-      const processingResult = await client.query(
-        `UPDATE purchases
-         SET fulfillment_status = 'processing'
-         WHERE stripe_session_id = $1
-         RETURNING stripe_session_id`,
-        [session.id],
-      )
-      if (processingResult.rowCount !== 1) {
-        throw new Error('Persisted purchase could not be claimed')
-      }
+      void sendSaleAlert(message)
+    }
 
       try {
         await deliverPromptPack(auditId, customerEmail, session.id)

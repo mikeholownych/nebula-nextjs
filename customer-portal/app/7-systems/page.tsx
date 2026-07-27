@@ -236,23 +236,23 @@ export default function SevenSystemsPage() {
             </p>
           </div>
 
-          {/* Audit CTA */}
+          {/* Repair Sprint CTA */}
           <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-8 text-center">
             <p className="text-lg text-slate-300 mb-6">
-              <strong className="text-white">Want the prompts to fix it yourself?</strong> $97 — full AI prompt pack delivered in minutes. No calls, no site access needed.
+              <strong className="text-white">Want one high-confidence leak repaired?</strong> $97 — Nebula scopes, implements, and verifies one bounded page-level change. No retainer.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
+                href="/checkout"
                 className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-8 py-4 rounded-lg transition"
               >
-                Get the Fix Pack →
+                Get the One-Leak Repair Sprint →
               </a>
               <a
-                href="/checkout"
+                href="/audit"
                 className="border-2 border-emerald-600 text-emerald-400 hover:bg-emerald-600 hover:text-white font-semibold px-8 py-4 rounded-lg transition"
               >
-                DIY Fix Kit (Free)
+                Run the Free Audit
               </a>
             </div>
           </div>

@@ -169,8 +169,8 @@ Nebula has a **strong technical foundation** but lacks critical SEO infrastructu
 {
   "@context": "https://schema.org",
   "@type": "Product",
-  "name": "Fix Pack",
-  "description": "Landing page audit and implementation",
+  "name": "One-Leak Repair Sprint",
+  "description": "One landing page, one buyer-approved repair, implemented and verified",
   "offers": {
     "@type": "Offer",
     "price": "147",

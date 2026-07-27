@@ -1,0 +1,28 @@
+{
+  "status": 200,
+  "headers": {
+    "alt-svc": "h3=\":443\"; ma=86400",
+    "cache-control": "public, max-age=0, must-revalidate, no-transform",
+    "cf-cache-status": "DYNAMIC",
+    "cf-ray": "a21143f2be55ab96-YYZ",
+    "connection": "keep-alive",
+    "content-length": "63217",
+    "content-type": "text/html; charset=utf-8",
+    "date": "Sun, 26 Jul 2026 06:14:39 GMT",
+    "etag": "\"7rm22tvphb1cnv\"",
+    "link": "</llms.txt>; rel=\"describedby\"; type=\"text/plain\", </.well-known/api-catalog>; rel=\"https://www.rfc-editor.org/rfc/rfc9727#section-3\", </.well-known/mcp/server-card.json>; rel=\"service\", </.well-known/agent.json>; rel=\"https://a2a-protocol.org/rel/agent-card\", </.well-known/agent-skills/index.json>; rel=\"describedby\"; type=\"application/json\", </openapi.json>; rel=\"describedby\"; type=\"application/json\", </.well-known/acp.json>; rel=\"https://agenticcommerce.dev/rel/discovery\", </.well-known/ucp>; rel=\"https://ucp.dev/rel/discovery\", </.well-known/http-message-signatures-directory>; rel=\"https://ietf.org/rel/jwks\", </auth.md>; rel=\"https://workos.com/auth-md\"",
+    "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+    "permissions-policy": "camera=(), microphone=(), geolocation=()",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ai0IOzQVehl3bXBBRxIzX%2BmyByuEMmE1vgM7OUXpFUPYRkcB3g7Oa9i6f%2BIIoDiiuZtIsPh5QkXeTLlmYNPJUwM9p0FHMz3tcewkZWWMBDBLJ%2Fr1Udu7xlhhMFCdTDBx9uEFERfwnzE%3D\"}]}",
+    "server": "cloudflare",
+    "strict-transport-security": "max-age=0",
+    "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "SAMEORIGIN",
+    "x-nextjs-cache": "HIT",
+    "x-nextjs-prerender": "1, 1",
+    "x-nextjs-stale-time": "300",
+    "x-powered-by": "Next.js"
+  }
+}

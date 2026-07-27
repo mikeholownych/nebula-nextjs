@@ -13,7 +13,7 @@
 
 | Claim | Evidence | Source | Date | Approval | Expiry | Used In |
 |-------|----------|--------|------|----------|--------|---------|
-| "$97 Conversion Fix Pack" | Stripe Price ID: price_1TwYwlEINR1kU9chLpOPfOJD | Stripe Dashboard | 2026-07-24 | Mike (founder) | — | `/pricing`, `/checkout`, schema |
+| "$97 One-Leak Repair Sprint" | Stripe Price ID: price_1TwYwlEINR1kU9chLpOPfOJD | Stripe Dashboard | 2026-07-24 | Mike (founder) | — | `/pricing`, `/checkout`, schema |
 | "Stripe Payment Link checkout" | https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h | Stripe Dashboard | 2026-07-24 | Mike (founder) | — | `/checkout`, `/pricing` |
 | "GA4 measurement ID: G-KJ9S3450LH" | GA4 Property | Google Analytics | 2026-07-15 | Mike (founder) | — | `app/layout.tsx` |
 

@@ -58,17 +58,17 @@ Each month ends with:
 - Visible conversion risks
 - Zero-friction diagnosis
 
-### Stage 2 — One-time Fix Pack
+### Stage 2 — One-Leak Repair Sprint
 
 - Current live public price is $147.
 - One-time audit and implementation.
 - Produces evidence about access, implementation speed, technical fit, and customer responsiveness.
 
-Legacy internal references still describe a $97 Fix Pack. The monthly offer launch must reconcile the live $147 price with all internal records before public copy changes. This design does not authorize a Fix Pack price change.
+Legacy internal references still describe a $97 Repair Sprint. The monthly offer launch must reconcile the live $147 price with all internal records before public copy changes. This design does not authorize a Repair Sprint price change.
 
 ### Stage 3 — Private invitation or application
 
-A prospect may be invited after the free audit, Fix Pack, or a readiness review. A Fix Pack purchase is not mandatory when existing evidence already supports qualification.
+A prospect may be invited after the free audit, Repair Sprint, or a readiness review. A Repair Sprint purchase is not mandatory when existing evidence already supports qualification.
 
 Nebula creates a customer-specific **Stewardship Opportunity Brief** containing:
 
@@ -526,9 +526,9 @@ The monthly service must not be sold until its minimum operational and privacy c
 
 Before launch:
 
-1. Reconcile the live $147 Fix Pack with legacy $97 records.
-2. Replace the absolute public claim "No retainers. No monthly commitments" with language specific to the one-time Fix Pack.
-3. Preserve the Fix Pack as a no-recurring-obligation product.
+1. Reconcile the live $147 Repair Sprint with legacy $97 records.
+2. Replace the absolute public claim "No retainers. No monthly commitments" with language specific to the one-time Repair Sprint.
+3. Preserve the Repair Sprint as a no-recurring-obligation product.
 4. Create an invitation/application route rather than public self-serve subscription checkout.
 5. Publish explicit service boundaries and privacy terms.
 6. Implement the connector, evidence, workflow, verification, export, and deletion controls.

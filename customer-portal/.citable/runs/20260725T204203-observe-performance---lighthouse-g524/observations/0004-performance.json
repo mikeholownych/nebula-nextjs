@@ -1,0 +1,34 @@
+{
+  "observation_id": "OBS-PERFORMANCE-b1d41b9459491198",
+  "kind": "performance",
+  "state": "not_evidenced",
+  "collected_at": "2026-07-25T20:42:03.774Z",
+  "collection_method": "static_analysis",
+  "confidence": "low",
+  "source": "lighthouse/local",
+  "evidence_hash": "b1d41b9459491198980520c6cc781eba6a96fcb0215e25e982ee8524f93b0561",
+  "data": {
+    "url": "https://nebulacomponents.shop",
+    "provider": "Lighthouse",
+    "evidence_type": "lab_summary",
+    "requested_runs": 3,
+    "successful_runs": 0,
+    "median_metrics": {
+      "performance_score": null,
+      "first_contentful_paint_ms": null,
+      "largest_contentful_paint_ms": null,
+      "cumulative_layout_shift": null,
+      "total_blocking_time_ms": null,
+      "speed_index_ms": null
+    }
+  },
+  "limitations": [
+    "Medians summarize only successful controlled lab runs; failed runs remain separate evidence."
+  ],
+  "authority": {
+    "source_authority": "inferred",
+    "collection_authority": "static_analysis",
+    "authenticity_status": "checksum_protected_only",
+    "representativeness": "single_observation"
+  }
+}

@@ -28,7 +28,7 @@ Key changes made:
 | `magic_link_requested` | User requests an email login link to revisit their audit | `app/audit/[id]/results/ResultsClient.tsx` |
 | `audit_started` | Server confirms audit processing has been kicked off for a submitted URL | `app/api/audit/start/route.ts` |
 | `audit_results_unlocked` | Server captures email and sends the full audit report to the user | `app/api/audit/unlock/route.ts` |
-| `checkout_session_created` | Server confirms a Stripe checkout session was created for the Fix Pack | `app/api/checkout/route.ts` |
+| `checkout_session_created` | Server confirms a Stripe checkout session was created for the Repair Sprint | `app/api/checkout/route.ts` |
 | `purchase_completed` | Stripe webhook confirms checkout.session.completed — payment received | `app/api/webhooks/stripe/route.ts` |
 | `invoice_payment_succeeded` | Stripe webhook confirms a recurring subscription invoice was paid successfully | `app/api/webhooks/stripe/route.ts` |
 

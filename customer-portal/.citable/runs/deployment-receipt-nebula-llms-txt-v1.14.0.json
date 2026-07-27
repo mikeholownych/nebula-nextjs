@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "receipt_id": "RECEIPT-B2441731770145D91F450BF92AFCD425",
+  "release_id": "RELEASE-v1.14.0",
+  "manifest_hash": "b6e7589f4cf50da156e12f9542e00530f8f03dbd49c65267c570400438e3425b",
+  "surface_id": "nebula-llms-txt",
+  "url": "https://nebulacomponents.shop/resources/citable/llms.txt",
+  "projection_id": "llms-txt",
+  "verification_method": "exact_response_body",
+  "verification_header": null,
+  "expected_projection_hash": "2e006788bd8f1079bd1b52ba3194c37292d213bd8461f166b71edabac434fb3a",
+  "observed_projection_hash": "2e006788bd8f1079bd1b52ba3194c37292d213bd8461f166b71edabac434fb3a",
+  "response_hash": "2e006788bd8f1079bd1b52ba3194c37292d213bd8461f166b71edabac434fb3a",
+  "http": {
+    "status": 200,
+    "final_url": "https://nebulacomponents.shop/resources/citable/llms.txt",
+    "redirect_chain": [],
+    "headers": {
+      "date": "Sun, 26 Jul 2026 10:15:19 GMT",
+      "content-type": "text/plain; charset=UTF-8",
+      "content-length": "507",
+      "accept-ranges": "bytes",
+      "cache-control": "public, max-age=0, must-revalidate, no-transform",
+      "etag": "W/\"1fb-19f9de9d0f1\"",
+      "last-modified": "Sun, 26 Jul 2026 10:12:54 GMT",
+      "link": "</llms.txt>; rel=\"describedby\"; type=\"text/plain\", </.well-known/api-catalog>; rel=\"https://www.rfc-editor.org/rfc/rfc9727#section-3\", </.well-known/mcp/server-card.json>; rel=\"service\", </.well-known/agent.json>; rel=\"https://a2a-protocol.org/rel/agent-card\", </.well-known/agent-skills/index.json>; rel=\"describedby\"; type=\"application/json\", </openapi.json>; rel=\"describedby\"; type=\"application/json\", </.well-known/acp.json>; rel=\"https://agenticcommerce.dev/rel/discovery\", </.well-known/ucp>; rel=\"https://ucp.dev/rel/discovery\", </.well-known/http-message-signatures-directory>; rel=\"https://ietf.org/rel/jwks\", </auth.md>; rel=\"https://workos.com/auth-md\"",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "strict-transport-security": "max-age=0",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "cf-cache-status": "DYNAMIC",
+      "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=PmFu5p%2BA%2B6VUkMZlyytsIfzagU3Sit5b0ThnB15gPtjp0kAxckAovNnPJJ3plnj07Y%2BwkUEglnMxM2BGelQ9xldtS%2BCdKdsd9mb7SR5WvZ6dC%2BDR2uOSW1C%2Fl2mfKyxBWpc%2F9hYu1mU%3D\"}]}",
+      "server": "cloudflare",
+      "cf-ray": "a212a47ddc9cc4c7-YYZ",
+      "alt-svc": "h3=\":443\"; ma=86400"
+    }
+  },
+  "collector": {
+    "identity": "hermes-agent",
+    "version": "1.0",
+    "method": "curl_http_probe",
+    "request_identity": "publisher_agent_local",
+    "region": "local"
+  },
+  "collected_at": "2026-07-26T10:16:42.438124Z",
+  "expires_at": "2026-08-25T10:16:42.438152Z",
+  "authority": {
+    "source": "publisher_agent",
+    "collection_method": "automated_http_probe",
+    "authenticity": "collected_by_publisher",
+    "representativeness": "single_collection_point"
+  },
+  "verification_status": "verified",
+  "limitations": [
+    "Single collection point \u2014 no geographic distribution",
+    "Collected by publisher agent \u2014 not an independent third-party verifier",
+    "CDN cache state not independently confirmed"
+  ],
+  "receipt_hash": "ae2eb6d7de77538d2e4c6bc6dfe1486cbd310d1967d49309c907f3e4d6a6f12d"
+}

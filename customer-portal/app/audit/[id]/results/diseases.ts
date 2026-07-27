@@ -6,11 +6,11 @@
  * replacing it. Every name must be understandable without knowing what an H1 is.
  *
  * Rule: sounds manageable to understand, not DIY-fixable without expertise.
- * That balance keeps the $97 Fix Pack relevant after the name lands.
+ * That balance keeps the $97 One-Leak Repair Sprint relevant after the name lands.
  */
 
 /**
- * Fix complexity — how hard to fix without Nebula's prompts.
+ * Fix complexity — how hard to fix without implementation guidance.
  * This is what collapses the "I'll do it myself" objection.
  * easy   = copy edit, anyone can do it in 15 min
  * copy   = needs careful copywriting, no dev required
@@ -25,9 +25,9 @@ export interface DiseaseProfile {
   symptom: string
   /** Severity tier — shapes urgency in the UI */
   tier: 'critical' | 'moderate' | 'minor'
-  /** How hard the fix is WITHOUT the Fix Pack prompts */
+  /** How hard the fix is without implementation support */
   complexity: FixComplexity
-  /** One-line description of what the Fix Pack prompt delivers */
+  /** One-line description of what a complete repair would deliver */
   promptDelivers: string
 }
 

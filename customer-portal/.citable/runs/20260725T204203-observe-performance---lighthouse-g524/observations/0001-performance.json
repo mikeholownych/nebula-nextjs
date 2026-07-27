@@ -1,0 +1,26 @@
+{
+  "observation_id": "OBS-PERFORMANCE-0256d480b81855f8",
+  "kind": "performance",
+  "state": "failed",
+  "collected_at": "2026-07-25T20:42:03.632Z",
+  "collection_method": "browser",
+  "confidence": "confirmed",
+  "source": "lighthouse/local",
+  "evidence_hash": "0256d480b81855f840f3408c888f1e0ba625ba06c5931756381a3d7b6c4594f4",
+  "data": {
+    "url": "https://nebulacomponents.shop",
+    "provider": "Lighthouse",
+    "evidence_type": "lab",
+    "run_index": 1,
+    "runs_in_series": 3
+  },
+  "limitations": [
+    "optional lighthouse and chrome-launcher dependencies are not installed"
+  ],
+  "authority": {
+    "source_authority": "synthetic",
+    "collection_authority": "browser_capture",
+    "authenticity_status": "checksum_protected_only",
+    "representativeness": "single_observation"
+  }
+}
