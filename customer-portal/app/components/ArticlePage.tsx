@@ -25,8 +25,6 @@ export default function ArticlePage({
     description,
     url,
     publishedDate: publishedDate || new Date().toISOString(),
-    authorName: 'Mike H',
-    authorUrl: 'https://nebulacomponents.shop/about/team',
   });
 
   return (

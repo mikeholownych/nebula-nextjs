@@ -46,8 +46,6 @@ export default function SEOHead({
       url,
       publishedDate: publishedDate || new Date().toISOString().split('T')[0],
       modifiedDate: new Date().toISOString().split('T')[0],
-      authorName: 'Mike H',
-      authorUrl: 'https://nebulacomponents.shop/about/team',
     }));
   }
   

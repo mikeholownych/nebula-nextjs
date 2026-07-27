@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import BreadcrumbSchema from '@/app/components/BreadcrumbSchema'
 
 export const metadata: Metadata = {
   title: 'About Nebula Components - Evidence-Backed Conversion Optimization',
@@ -13,10 +14,12 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main id="main-content" className="min-h-screen bg-bg text-fg pt-24">
+      <BreadcrumbSchema />
       <div className="mx-auto max-w-3xl px-6 py-16">
         <h1 className="mb-6 text-4xl font-bold">About Nebula Components</h1>
         <p className="mb-6 text-lg leading-relaxed text-fg-muted">
-          Nebula Components provides evidence-backed landing page conversion diagnosis and bounded implementation work for founders running paid traffic.
+          Nebula Components provides evidence-backed landing page conversion diagnosis and bounded implementation work for founders running paid traffic. Founded by{' '}
+          <Link href="/about/team" className="underline hover:text-fg">Mike Holownych</Link>.
         </p>
 
         <section className="mb-10 rounded-2xl border border-border bg-bg-panel p-6">

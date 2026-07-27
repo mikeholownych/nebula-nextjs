@@ -65,8 +65,6 @@ export function createArticleSchema(article: {
   url: string
   publishedDate: string
   modifiedDate?: string
-  authorName?: string
-  authorUrl?: string
   image?: string
 }) {
   return {
@@ -74,11 +72,11 @@ export function createArticleSchema(article: {
     '@type': 'Article',
     headline: article.headline,
     description: article.description,
-    author: {
-      '@type': 'Person',
-      name: article.authorName || 'Mike H',
-      url: article.authorUrl || 'https://nebulacomponents.shop/about/team',
-    },
+    // References the canonical founder Person node declared once in
+    // organizationSchema — every article previously inlined a separate
+    // "Mike H" Person object here, fragmenting the entity across ~40
+    // pages instead of letting Search/AI crawlers merge them into one.
+    author: { '@id': 'https://nebulacomponents.shop/#founder' },
     datePublished: article.publishedDate,
     dateModified: article.modifiedDate || article.publishedDate,
     publisher: {
@@ -88,7 +86,11 @@ export function createArticleSchema(article: {
       '@type': 'WebPage',
       '@id': article.url,
     },
-    image: article.image,
+    // Falls back to the site's real, live-rendered OG image (same asset
+    // already used for social share cards) rather than omitting `image`
+    // entirely — no per-article photography exists yet, and Article rich
+    // results require this property to be eligible at all.
+    image: article.image || 'https://nebulacomponents.shop/opengraph-image',
   }
 }
 

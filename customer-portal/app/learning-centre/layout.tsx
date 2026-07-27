@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import BreadcrumbSchema from '@/app/components/BreadcrumbSchema'
 
 export const metadata: Metadata = {
   title: 'Learning Centre — Landing Page Conversion Guides | Nebula Components',
@@ -10,5 +11,10 @@ export const metadata: Metadata = {
 }
 
 export default function LearningCentreLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+  return (
+    <>
+      <BreadcrumbSchema />
+      {children}
+    </>
+  )
 }

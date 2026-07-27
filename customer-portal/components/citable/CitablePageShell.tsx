@@ -5,6 +5,9 @@ import {
   type CitableRoute,
   getCitableRouteByPath,
 } from '@/app/resources/citable/content'
+import { createBreadcrumbSchema } from '@/app/lib/schema'
+
+const BASE_URL = 'https://nebulacomponents.shop'
 
 interface CitablePageShellProps {
   route: CitableRoute
@@ -21,8 +24,27 @@ export function CitablePageShell({
     .map(getCitableRouteByPath)
     .filter((related): related is CitableRoute => Boolean(related && related.status === 'published'))
 
+  const breadcrumbSchema = createBreadcrumbSchema(
+    route.path === CITABLE_OVERVIEW_PATH
+      ? [
+          { name: 'Home', url: BASE_URL },
+          { name: 'Resources', url: `${BASE_URL}/resources` },
+          { name: 'Citable', url: `${BASE_URL}${route.path}` },
+        ]
+      : [
+          { name: 'Home', url: BASE_URL },
+          { name: 'Resources', url: `${BASE_URL}/resources` },
+          { name: 'Citable', url: `${BASE_URL}${CITABLE_OVERVIEW_PATH}` },
+          { name: route.h1, url: `${BASE_URL}${route.path}` },
+        ]
+  )
+
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24 text-fg">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <div className="mx-auto max-w-5xl px-6 py-12 md:py-16">
         <nav aria-label="Breadcrumb" className="mb-10 flex flex-wrap items-center gap-2 text-sm text-fg-muted">
           <Link href="/resources" className="transition-colors hover:text-fg">
