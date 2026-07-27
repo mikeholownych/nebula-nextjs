@@ -24,15 +24,15 @@ Prioritized by severity and dependency. Complete Phase 1 before anything else �
 
 ## Phase 2: High-Impact Improvements (weeks 2–3)
 
-9. Fix HSTS: replace `max-age=0` with a real `Strict-Transport-Security: max-age=31536000; includeSubDomains; preload` (confirm intentional first if this was a deliberate rollback).
+9. ✅ **Fixed HSTS.** Origin always sent the correct `max-age=31536000; includeSubDomains; preload`; the Cloudflare edge was overriding it down to `max-age=0`, then to a 6-month interim value — both were outside app/repo control. User updated the Cloudflare edge setting directly; confirmed live 2026-07-27 serving `max-age=31536000; includeSubDomains; preload`, matching the origin exactly and now eligible for HSTS preload list submission.
 10. ✅ **Removed the deprecated `HowTo` JSON-LD block from the homepage.**
-11. Fix Article schema entity fragmentation: reference the canonical `@id: #founder` node instead of re-declaring `"Mike H"` inline on every article; add the missing `image` property to the Article template.
-12. Add `BreadcrumbList` to the learning-centre article template, `/resources/citable`, and `/about/team`.
-13. Substantiate the "50+ landing pages" claim on `/about` and `/about/team` (human-visible, not just `llms.txt`); expand the founder bio past 45 words with real methodology/credentials; use "Mike Holownych" consistently instead of "Mike H".
-14. Add pillar → cluster-lead links from `landing-page-not-converting` to at least one representative article per content cluster — it currently receives links from nearly every spoke but only links back to 5.
-15. Expand the 9 sub-500-word learning-centre articles to genuine depth, or consolidate the thinnest/most overlapping ones (the `cta-not-working`/`proof-before-cta`/`message-match-checklist`/`no-testimonials-on-landing-page` cluster and the `landing-page-not-converting` vs. `ecommerce-landing-page-not-converting` cannibalization pair).
-16. Add real content images (annotated before/after screenshots, `/audit` sample output) — currently zero across the entire site.
-17. Fix the two zero-cost backlink issues: GitHub profile website field (`aisyndicate.io` → `nebulacomponents.shop`) and the 404ing LinkedIn company page.
+11. ✅ **Fixed Article schema entity fragmentation.** `createArticleSchema()` now references the canonical `@id: #founder` node instead of re-declaring a `"Mike H"` Person object per article; added an `image` fallback to the site's dynamic OG image route.
+12. ✅ **Added `BreadcrumbList`** via a new schema-only `BreadcrumbSchema` component, wired into the learning-centre template, `/resources/citable`, and `/about`/`/about/team`.
+13. ✅ **Substantiated and expanded the founder bio** on `/about/team` (methodology, background, `sameAs` links), using "Mike Holownych" consistently. Did **not** add the literal "50+ landing pages" claim as originally recommended — a concurrent evidence-governance pass had already banned that specific unsupported number from human-facing pages; corrected to qualitative language instead once that conflict was found.
+14. ✅ **Added pillar → cluster-lead links.** `landing-page-not-converting` now links to a representative article in all 13 content clusters, up from 5.
+15. ✅ **Expanded/consolidated the thin articles.** Of the original 9 sub-500-word articles, 3 were already relocated out of learning-centre (see item 18). Consolidated `no-testimonials-on-landing-page` into `proof-before-cta` (redirect + updated inbound links); expanded the remaining 5-6 with genuine trigger/vertical-specific depth. Also fixed a live templating bug (raw/partially-humanized URL slugs leaking into visible category eyebrows) and one stale "$97 pack" offer-copy reference found along the way.
+16. ✅ **Added a real content image** — ran the live `/audit` tool against nebulacomponents.shop itself and used the genuine results screenshot (not a fabricated before/after) on `/audit` and the pillar article.
+17. ⛔ **Not done — needs your account access.** GitHub profile website field (`aisyndicate.io` → `nebulacomponents.shop`) and the 404ing LinkedIn company page both require your account logins.
 
 ## Phase 3: Content & Authority (month 2)
 
