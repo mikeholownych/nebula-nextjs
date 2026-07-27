@@ -25,7 +25,7 @@ Landing page conversion optimization service / Landing page audit tool
 - Trigger-aware prospecting: Finding prospects showing buying triggers (not demographic filters)
 - Message-match audit: Verifying ad promise matches landing page headline
 - 7-Point Diagnosis: Nebula's proprietary audit framework covering message-match, trust signals, mobile layout, load time, CTA clarity, form friction, and compliance
-- Self-serve checkout: No sales calls; the checkout page shows the active, date-bounded Fix Pack offer when one is available
+- Self-serve checkout: No sales calls; the checkout page shows the active, date-bounded Repair Sprint offer when one is available
 
 # Key URLs
 - Main: https://nebulacomponents.shop
@@ -55,7 +55,7 @@ Mike Holownych — Founder, Nebula Components.
 
 # Limitations
 - Audits require publicly accessible landing pages
-- The paid Fix Pack is purchased through Stripe; implementation remains with the customer or their developer using the delivered prompts
+- The paid Repair Sprint is purchased through Stripe; Nebula implements the one approved repair through temporary access or a buyer-approved patch handoff
 - No phone support (email only)
 
 # AI Retrieval Permission

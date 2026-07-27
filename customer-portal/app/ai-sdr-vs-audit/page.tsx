@@ -92,7 +92,7 @@ export default function AiSdrVsAuditPage() {
             <tbody>
               {[
                 { label: 'Entry cost', zamp: '$25k–$75k pilot', nebula: 'Free (or $97 repair sprint)' },
-                { label: 'Time to value', zamp: '4–10 weeks', nebula: 'Audit delivered in under 60 seconds' },
+                { label: 'Time to value', zamp: '4–10 weeks', nebula: 'Audit completion time varies by page and service load' },
                 { label: 'Purchase motion', zamp: 'Book a demo → sales cycle → legal review', nebula: 'Self-serve checkout.' },
                 { label: 'What it evaluates', zamp: 'Outbound volume and sequencing', nebula: 'Landing-page conversion signals' },
                 { label: 'Self-serve', zamp: 'No. Demo-gated.', nebula: 'Self-serve. No sales call.' },
@@ -135,7 +135,7 @@ export default function AiSdrVsAuditPage() {
         <p className="mb-8">
           Zamp's model: find the right <em>person</em>, then convince them they have a problem.<br />
           Nebula&apos;s model: start from an observed paid-traffic problem, diagnose the page, and
-          give the customer a bounded prompt pack to implement.
+          implement one bounded, verified repair.
         </p>
 
         {/* Section: Real Funnel */}
@@ -147,7 +147,7 @@ export default function AiSdrVsAuditPage() {
           <li><strong>Run a free audit.</strong> Automated URL submission and evidence-backed scoring are live — no signup required.</li>
           <li>
             <strong>Fix what&apos;s broken.</strong> The free kit shows you what to change.
-            {fixPackPrice && ` The ${fixPackPrice} Fix Pack delivers a tailored AI prompt pack by email within minutes; you or your developer implements the changes, with no Nebula access to your site, CMS, or hosting.`}
+            {fixPackPrice && ` The ${fixPackPrice} One-Leak Repair Sprint selects one high-confidence page-level repair, confirms the scope with you, implements it, and verifies the live change.`}
           </li>
           <li><strong>Measure the result.</strong> Re-audit the page and compare evidence before deciding whether to add more traffic.</li>
           <li><strong>Then consider an AI SDR.</strong> Use the measured baseline to decide whether additional outbound traffic is justified; an audit cannot guarantee conversion.</li>

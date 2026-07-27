@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
+import { getActiveFixPack, type FixPackPublicFact } from '@/app/lib/public-facts'
 import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
 import { Card, PageShell } from '@/components/ui'
 
@@ -83,7 +83,6 @@ const faqSchema = {
 
 export default function PricingPage() {
   const fixPack = getActiveFixPack()
-  const fixPackPrice = fixPack ? formatUsd(fixPack.priceCents) : undefined
   const serviceSchema = fixPack ? buildServiceSchema(fixPack) : null
 
   return (

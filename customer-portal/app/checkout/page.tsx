@@ -1,9 +1,7 @@
 import type { Metadata } from 'next'
-import { cookies } from 'next/headers'
 import Link from 'next/link'
 import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
 import { Card } from '@/components/ui'
-import CheckoutCTAButton from './CheckoutCTAButton'
 
 export const metadata: Metadata = {
   title: 'Checkout — One-Leak Repair Sprint | Nebula Components',

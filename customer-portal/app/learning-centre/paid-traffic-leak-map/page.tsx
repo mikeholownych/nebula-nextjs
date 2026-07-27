@@ -53,7 +53,7 @@ const faqSchema = {
       name: 'How long does it take to fix a paid traffic conversion leak?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Depends on the leak. Message-match fixes - rewriting the headline to mirror the ad - can be live in under an hour. Mobile LCP fixes - converting the hero image to WebP and adding correct sizing attributes - typically take 2–4 hours including testing. Form friction fixes - removing optional fields - take under an hour. Layout fixes for mobile - implementing a sticky CTA bar or restructuring the above-fold section - typically take 4–8 hours of development time. The most time-consuming fix is trust signal work - gathering, formatting, and placing new testimonials or case study content. The Nebula Fix Pack gives you a tailored AI prompt for every confirmed leak, delivered within minutes, so you can start on whichever fix is fastest first.',
+        text: 'Depends on the leak. Message-match fixes - rewriting the headline to mirror the ad - can be live in under an hour. Mobile LCP fixes - converting the hero image to WebP and adding correct sizing attributes - typically take 2–4 hours including testing. Form friction fixes - removing optional fields - take under an hour. Layout fixes for mobile - implementing a sticky CTA bar or restructuring the above-fold section - typically take 4–8 hours of development time. The most time-consuming fix is trust signal work - gathering, formatting, and placing new testimonials or case study content. The $97 One-Leak Repair Sprint selects whichever confirmed leak is the highest-confidence repair, confirms the scope with you, implements it, and verifies the live change.',
       },
     },
     {
@@ -294,7 +294,7 @@ export default function PaidTrafficLeakMapPage() {
                 href="/pricing"
                 className="inline-flex rounded-xl border border-accent px-8 py-4 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
-                See the Fix Pack
+                See the One-Leak Repair Sprint
               </Link>
             </div>
           </section>

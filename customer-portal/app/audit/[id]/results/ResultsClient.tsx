@@ -5,6 +5,7 @@ import { Card } from '@/components/ui'
 import posthog from '@/app/lib/posthog-browser'
 import { parseAuditResult, type AuditResult, type Finding } from './auditResultSchema'
 import { getDisease, diseaseTierClass, complexityBadge, extractSerpData } from './diseases'
+import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
 import {
   REPORT_NAVIGATION,
   buildPriorityQueue,
@@ -110,7 +111,7 @@ function FixPreview({ finding, unlocked }: { finding: Finding; unlocked: boolean
     // Unlocked: show everything + what the prompt delivers
     return (
       <div className="mt-4 rounded-lg border border-accent/20 bg-accent/5 p-4">
-        <p className="mb-1 text-xs font-semibold uppercase tracking-[0.1em] text-accent">Fix Pack Prompt</p>
+        <p className="mb-1 text-xs font-semibold uppercase tracking-[0.1em] text-accent">Repair Note</p>
         <p className="text-base leading-7 text-fg">{fixText}</p>
         {disease?.promptDelivers && (
           <p className="mt-2 text-xs text-fg-muted">
@@ -124,7 +125,7 @@ function FixPreview({ finding, unlocked }: { finding: Finding; unlocked: boolean
   // Locked: show preview + blur
   return (
     <div className="mt-4 rounded-lg border border-border bg-bg/50 p-4">
-      <p className="mb-1 text-xs font-semibold uppercase tracking-[0.1em] text-fg-muted">Fix Pack Prompt</p>
+      <p className="mb-1 text-xs font-semibold uppercase tracking-[0.1em] text-fg-muted">Repair Note</p>
       <p className="text-base leading-7 text-fg">{preview}</p>
       {remainder && (
         <div className="relative mt-1 min-w-0 overflow-hidden">
@@ -199,7 +200,7 @@ function SerpSnippet({ finding, url }: { finding: Finding; url: string }) {
         </div>
       </div>
       <p className="mt-2 text-sm leading-6 text-fg-muted">
-        This is what searchers see before clicking. The Fix Pack prompt rewrites your title and meta description.
+        This is what searchers see before clicking. The Repair Sprint can rewrite your title and meta description if that's the selected repair.
       </p>
     </div>
   )
@@ -866,7 +867,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
           <UnlockConfirmation emailSent={emailSent} email={emailForm.email} auditId={auditId} />
         )}
 
-        {/* Canonical offer: free audit → $97 Fix Pack */}
+        {/* Canonical offer: free audit → $97 One-Leak Repair Sprint */}
         <section id="remediation" className="scroll-mt-40 border-t border-border pt-16">
           <div className="space-y-6">
           <h2 className="text-center text-2xl font-extrabold text-fg">
@@ -875,11 +876,12 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
 
           <Card variant="bordered" className="relative mx-auto max-w-md overflow-hidden border-accent">
             <div>
-              <h3 className="mb-1 text-2xl font-extrabold text-fg">$97 Fix Pack</h3>
-              <p className="mb-2 text-2xl font-extrabold tabular-nums text-accent">$97</p>
+              <h3 className="mb-1 text-2xl font-extrabold text-fg">${REPAIR_SPRINT_OFFER.priceUsd} {REPAIR_SPRINT_OFFER.name}</h3>
+              <p className="mb-2 text-2xl font-extrabold tabular-nums text-accent">${REPAIR_SPRINT_OFFER.priceUsd}</p>
               <p className="mb-4 max-w-[65ch] text-base leading-7 text-fg-muted">
-                A tailored AI prompt for every finding in this audit — copy, CTA, proof, and page
-                structure — to paste into Claude, ChatGPT, or hand to your developer. No site access needed.
+                {REPAIR_SPRINT_OFFER.summary} Nebula selects one high-confidence repair from
+                this audit's findings, confirms the scope with you, implements it, and verifies
+                the live change.
               </p>
               <a
                 href={
@@ -890,8 +892,8 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                 className="block w-full rounded-lg bg-accent px-4 py-2 text-center font-semibold text-bg transition-colors hover:bg-accent-light"
               >
                 {unlocked && !sharedView
-                  ? 'Review the tailored Fix Pack - $97'
-                  : 'Unlock this audit to select its Fix Pack'}
+                  ? `Review the ${REPAIR_SPRINT_OFFER.name} - $${REPAIR_SPRINT_OFFER.priceUsd}`
+                  : 'Unlock this audit to select its repair'}
               </a>
             </div>
           </Card>

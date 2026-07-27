@@ -3,7 +3,6 @@ import Link from 'next/link'
 import SelfScan from './components/SelfScan'
 import AggregateProof from './components/AggregateProof'
 import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE } from './lib/homepageContent'
-import { homeFAQSchema } from './lib/faq-schemas'
 
 export const metadata: Metadata = {
   title: HOMEPAGE_SEO_TITLE,
@@ -53,10 +52,6 @@ const PATTERNS = [
 export default function Home() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFAQSchema) }}
-      />
       <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
 
         {/* ── 1. Hero: asymmetric split ── */}
@@ -84,7 +79,7 @@ export default function Home() {
                   href="/pricing"
                   className="text-sm text-fg-muted hover:text-fg transition-colors"
                 >
-                  $97 Fix Pack if it fails &rarr;
+                  $97 One-Leak Repair Sprint if it fails &rarr;
                 </Link>
               </div>
               <AggregateProof />
@@ -152,7 +147,7 @@ export default function Home() {
                 <div className="mt-8 rounded-xl border border-border bg-bg p-4 font-mono text-xs text-fg-muted">
                   <div className="mb-2 flex items-center justify-between">
                     <span className="text-accent">message_match</span>
-                    <span className="text-signal-fail">3/10</span>
+                    <span className="text-signal-fail">FAIL</span>
                   </div>
                   <div className="h-1.5 w-full rounded-full bg-border">
                     <div className="h-1.5 w-[30%] rounded-full bg-signal-fail" />
@@ -263,7 +258,7 @@ export default function Home() {
                       'Real scrape - scored against 7 specific conversion signals',
                       'Prioritized fixes with impact and effort scores',
                       'No signup to see your results',
-                      '$97 Fix Pack implements every identified fix',
+                      '$97 One-Leak Repair Sprint implements your highest-confidence fix',
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-2">
                         <span className="mt-0.5 shrink-0 text-accent">✓</span>
@@ -323,11 +318,12 @@ export default function Home() {
                 We run this audit on ourselves first.
               </h2>
               <p className="text-base text-fg-muted leading-7">
-                7.4/10. Not 10/10. That is what you are getting - actual data, not marketing claims.
-                Most landing-page tools lead with case studies they cannot verify. We would rather prove it on our own page first.
+                See the live score above. Not a perfect score - that is what you are getting - actual
+                data, not marketing claims. Most landing-page tools lead with case studies they cannot
+                verify. We would rather prove it on our own page first.
               </p>
               <p className="mt-4 text-sm text-fg-muted">
-                When we have a real client outcome with dates and a way for you to verify it, it goes here - not before.
+                When we have a real client outcome with dates, proof, and a way for you to verify it, it goes here - not before.
               </p>
             </div>
             <div className="rounded-2xl border border-border bg-bg-muted/30 p-6 font-mono text-sm">
@@ -341,7 +337,7 @@ export default function Home() {
                 </div>
               ))}
               <div className="mt-3 border-t border-border pt-3 text-xs text-fg-muted">
-                Overall 7.4/10 · Grade B - real engine, real page
+                Grade B - real engine, real page
               </div>
             </div>
           </div>

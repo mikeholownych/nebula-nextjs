@@ -255,7 +255,7 @@ export default function RoasCliffPage() {
             href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
             className="inline-block border border-border text-fg-muted font-medium px-7 py-3 rounded-md mt-3 hover:border-accent transition-colors"
           >
-            Skip ahead - $97 Fix Pack
+            Skip ahead - $97 One-Leak Repair Sprint
           </Link>
           <p className="text-xs text-fg-muted mt-4">
             No discovery call. No testing phase. Full refund if we don&apos;t find a problem worth fixing.

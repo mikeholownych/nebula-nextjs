@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { getPublicClaim } from '@/app/lib/evidence-atoms'
 import { auditWebApplicationSchema } from '@/app/lib/schema'
-import { auditPageFAQSchema } from '@/app/lib/faq-schemas'
 import AuditForm from './AuditForm'
 
 export const metadata: Metadata = {
@@ -47,10 +46,6 @@ export default function AuditPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(auditWebApplicationSchema) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(auditPageFAQSchema) }}
-      />
       <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
 
         {/* ── 1. Hero: form-forward split ── */}
@@ -70,7 +65,7 @@ export default function AuditPage() {
                 {[
                   'Results in under 2 minutes',
                   'No signup, no account',
-                  '$97 Fix Pack implements every failing signal',
+                  '$97 One-Leak Repair Sprint implements your highest-confidence fix',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-fg-muted">
                     <span className="text-accent">✓</span>
@@ -159,7 +154,7 @@ export default function AuditPage() {
         <section className="border-t border-border bg-bg-muted/10 px-6 py-14">
           <div className="mx-auto max-w-6xl">
             <h2 className="mb-8 text-2xl font-bold tracking-tight text-fg md:text-3xl">
-              What gets checked
+              What the audit checks
             </h2>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {[
@@ -198,24 +193,38 @@ export default function AuditPage() {
           </div>
         </section>
 
-        {/* ── 4. After the audit: fix pack ── */}
+        {/* ── 3b. How It Works ── */}
+        <section className="border-t border-border px-6 py-14">
+          <div className="mx-auto max-w-2xl">
+            <h2 className="mb-3 text-base font-semibold text-fg">How It Works</h2>
+            <ol className="list-decimal space-y-1 pl-5 text-sm text-fg-muted">
+              <li>Enter your landing page URL in the field above</li>
+              <li>The audit engine fetches and scores your page across all 7 signals</li>
+              <li>You receive a structured report with specific, actionable findings</li>
+              <li>Each finding includes a severity rating and a recommended fix</li>
+            </ol>
+          </div>
+        </section>
+
+        {/* ── 4. After the audit: repair sprint ── */}
         <section className="border-t border-border px-6 py-14">
           <div className="mx-auto max-w-6xl grid gap-10 md:grid-cols-2 md:items-start">
             <div>
               <h2 className="mb-4 text-2xl font-bold tracking-tight text-fg md:text-3xl">
-                If it fails, the $97 Fix Pack implements every finding.
+                If it fails, the $97 One-Leak Repair Sprint fixes it.
               </h2>
               <p className="mb-6 text-base text-fg-muted leading-7">
                 The free audit shows you what is broken and in what order to fix it.
-                The Fix Pack implements all of it on your live page within 24-48 hours.
-                One payment, no retainer, no calls required.
+                The Repair Sprint selects one high-confidence page-level repair, confirms
+                the scope with you, implements it on your live page, and verifies the
+                change. One payment, no retainer, no calls required.
               </p>
               <div className="space-y-2">
                 {[
                   'Full 7-point diagnosis written up',
-                  'Every failing signal fixed on your live page',
-                  'Delivered within 24-48 hours',
-                  '30-day re-audit included if conversion does not improve',
+                  'One high-confidence repair implemented and verified on your live page',
+                  'Scope confirmed with you before any change is made',
+                  'One additional same-scope evidence check within 30 days',
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2 text-sm text-fg-muted">
                     <span className="mt-0.5 shrink-0 text-accent">✓</span>
@@ -236,7 +245,7 @@ export default function AuditPage() {
                 href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
                 className="block w-full rounded-xl bg-accent py-3.5 text-center font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-sm"
               >
-                Get the Fix Pack &rarr;
+                Get the Repair Sprint &rarr;
               </a>
               <p className="mt-3 text-center text-xs text-fg-muted">
                 Run the free audit first &rarr;

@@ -1,7 +1,3 @@
-'use client'
-
-import { useEffect } from 'react'
-import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
 import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
 
 /**
@@ -13,30 +9,7 @@ import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
  *   - get_pricing        Return current pricing and offer details
  *   - search_learning    Search the Learning Centre
  */
-export function WEB_MCP_RUNTIME(
-  fixPack: ReturnType<typeof getActiveFixPack>,
-) {
-  const offers = [
-    {
-      name: 'Free Audit',
-      price: '$0',
-      description:
-        'Automated landing page diagnosis — message match, trust signals, mobile, speed, CTA, form friction, compliance.',
-      url: 'https://nebulacomponents.shop/audit',
-    },
-    ...(fixPack
-      ? [
-          {
-            name: 'Conversion Fix Pack',
-            price: formatUsd(fixPack.priceCents),
-            description:
-              'Full audit + a tailored AI prompt pack (one prompt per finding) for the customer or their developer to use. Delivered by automated email within minutes. One-time payment, no retainer, and no Nebula access to the customer site, CMS, or hosting.',
-            url: 'https://nebulacomponents.shop/pricing',
-          },
-        ]
-      : []),
-  ]
-
+export function WEB_MCP_RUNTIME() {
   return String.raw`
     (function () {
       var context = navigator.modelContext;
@@ -85,9 +58,9 @@ export function WEB_MCP_RUNTIME(
               url: 'https://nebulacomponents.shop/audit',
             },
             {
-              name: REPAIR_SPRINT_OFFER.name,
-              price: '$' + REPAIR_SPRINT_OFFER.priceUsd,
-              description: REPAIR_SPRINT_OFFER.summary + ' ' + REPAIR_SPRINT_OFFER.evidenceBoundary,
+              name: ${JSON.stringify(REPAIR_SPRINT_OFFER.name)},
+              price: ${JSON.stringify(`$${REPAIR_SPRINT_OFFER.priceUsd}`)},
+              description: ${JSON.stringify(`${REPAIR_SPRINT_OFFER.summary} ${REPAIR_SPRINT_OFFER.evidenceBoundary}`)},
               url: 'https://nebulacomponents.shop/pricing',
             },
             {
@@ -99,7 +72,6 @@ export function WEB_MCP_RUNTIME(
           ],
         }),
       })
-    )
 
       context.registerTool({
         name: 'search_learning',
@@ -125,11 +97,9 @@ export function WEB_MCP_RUNTIME(
 }
 
 export default function WebMCP() {
-  const fixPack = getActiveFixPack()
-
   return (
     <script
-      dangerouslySetInnerHTML={{ __html: WEB_MCP_RUNTIME(fixPack) }}
+      dangerouslySetInnerHTML={{ __html: WEB_MCP_RUNTIME() }}
     />
   )
 }

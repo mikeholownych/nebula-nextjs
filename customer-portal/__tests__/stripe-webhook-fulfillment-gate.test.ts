@@ -150,6 +150,10 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     process.env.STRIPE_WEBHOOK_SECRET = 'whsec_x'
   })
 
+  afterEach(() => {
+    jest.useRealTimers()
+  })
+
   it('alerts for a manual repair-sprint kickoff without running prompt fulfillment', async () => {
     mockConstructEvent(makeSession({ amount_total: 9700 }))
     const response = await postWebhook()
@@ -261,6 +265,9 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
   })
 
   it('uses customer_details.email when customer_email is absent', async () => {
+    // Same reasoning as the duplicate-session test above.
+    jest.useFakeTimers()
+    jest.setSystemTime(new Date('2027-01-01T00:00:00.000Z'))
     mockConstructEvent(makeSession({
       customer_email: null,
       customer_details: { email: 'details@example.com' },
@@ -282,6 +289,12 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
   })
 
   it('does not deliver, alert, or capture a purchase twice for a duplicate Stripe session', async () => {
+    // Idempotency of the automatic-delivery path only exercises once the
+    // Repair Sprint offer is no longer the live managed offer (see "alerts
+    // for a manual repair-sprint kickoff" above for the in-window case,
+    // which never calls deliver_prompt_pack.py at all).
+    jest.useFakeTimers()
+    jest.setSystemTime(new Date('2027-01-01T00:00:00.000Z'))
     mockConstructEvent(makeSession())
 
     const first = await postWebhook()
@@ -301,6 +314,12 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
   })
 
   it('serializes concurrent events so only the advisory-lock holder dispatches', async () => {
+    // Same reasoning as the duplicate-session test above: this exercises the
+    // automatic-delivery lock/retry path, which only runs once the Repair
+    // Sprint offer is no longer live. Fake only Date so setImmediate-based
+    // orchestration below still yields the real event loop.
+    jest.useFakeTimers({ doNotFake: ['nextTick', 'setImmediate', 'setTimeout', 'clearTimeout'] })
+    jest.setSystemTime(new Date('2027-01-01T00:00:00.000Z'))
     let releaseSecondLock: (() => void) | undefined
     const secondLock = new Promise<void>((resolve) => {
       releaseSecondLock = resolve
@@ -358,12 +377,24 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
   })
 
   it('restores failed fulfillment and retries the same receipt safely', async () => {
-    execFileMock
-      .mockImplementationOnce((...args: unknown[]) => {
-        const callback = args[args.length - 1] as (error: Error) => void
-        callback(new Error('delivery command failed'))
-      })
-      .mockImplementation(successfulExecFile)
+    // Same reasoning as the duplicate-session test above.
+    jest.useFakeTimers()
+    jest.setSystemTime(new Date('2027-01-01T00:00:00.000Z'))
+    // Fail only the delivery subprocess, not the fire-and-forget sale alert
+    // that fires first (the alert's own execFile call must not be mistaken
+    // for the delivery call this test is actually exercising).
+    let deliveryAttempts = 0
+    execFileMock.mockImplementation((...args: unknown[]) => {
+      if (String(args[0]).includes('venv/bin/python3')) {
+        deliveryAttempts += 1
+        const callback = args[args.length - 1] as (error: Error | null, res?: { stdout: string; stderr: string }) => void
+        if (deliveryAttempts === 1) {
+          callback(new Error('delivery command failed'))
+          return
+        }
+      }
+      successfulExecFile(...args)
+    })
     mockConstructEvent(makeSession())
 
     const failed = await postWebhook()
@@ -387,6 +418,9 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
   })
 
   it('safely retries a crash-sticky processing row under the advisory lock', async () => {
+    // Same reasoning as the duplicate-session test above.
+    jest.useFakeTimers()
+    jest.setSystemTime(new Date('2027-01-01T00:00:00.000Z'))
     fulfillmentStatus = 'processing'
     mockConstructEvent(makeSession())
 

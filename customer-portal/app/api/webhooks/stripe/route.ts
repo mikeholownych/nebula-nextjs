@@ -5,7 +5,7 @@ import { promisify } from 'util'
 import type { PoolClient } from 'pg'
 import { getPostHogClient } from '@/app/lib/posthog-server'
 import { pool } from '@/app/lib/db'
-import { isCanonicalFixPackReceipt } from '@/app/lib/public-facts'
+import { isCanonicalFixPackReceipt, getActiveFixPack } from '@/app/lib/public-facts'
 
 const execFileAsync = promisify(execFile)
 
@@ -157,7 +157,7 @@ export async function POST(request: NextRequest) {
         const amount = session.amount_total != null
           ? `$${(session.amount_total / 100).toFixed(2)}`
           : 'unknown amount'
-        void sendCheckoutAlert(
+        void sendSaleAlert(
           `⚠️ *CHECKOUT REVIEW* — ${amount} — ${session.metadata?.offer_key ?? 'unknown offer'} — ${customerEmail ?? 'no email'}\n` +
           `session: ${session.id}`,
         )
@@ -167,6 +167,7 @@ export async function POST(request: NextRequest) {
 
     let client: PoolClient | undefined
     let locked = false
+    let alreadyDelivered = false
     try {
       client = await pool.connect()
       await client.query(
@@ -191,10 +192,49 @@ export async function POST(request: NextRequest) {
           session.payment_status,
         ]
       )
+
+      // Stripe redelivers webhooks, and a crashed prior attempt can leave a
+      // row stuck at 'pending'/'processing' under the same session ID (the
+      // advisory lock above serializes concurrent retries of that stuck row
+      // so only one recovers it). Only a row that already reached 'delivered'
+      // means this exact session was fully handled before — that's the one
+      // case a redelivery must not re-alert, re-run fulfillment, or
+      // re-capture analytics for.
+      const statusResult = await client.query(
+        `SELECT fulfillment_status FROM purchases WHERE stripe_session_id = $1`,
+        [session.id],
+      )
+      alreadyDelivered = statusResult.rows[0]?.fulfillment_status === 'delivered'
     } catch (err) {
       console.error('Failed to persist purchase — will let Stripe retry:', err)
       return NextResponse.json({ error: 'Failed to record purchase' }, { status: 500 })
     }
+
+    if (alreadyDelivered) {
+      if (locked) {
+        try {
+          await client.query(
+            'SELECT pg_advisory_unlock(hashtextextended($1, 0))',
+            [session.id],
+          )
+        } catch (unlockError) {
+          console.error('Failed to release fulfillment advisory lock:', unlockError)
+        }
+      }
+      client.release()
+      return NextResponse.json({ received: true, duplicate: true })
+    }
+
+    // The One-Leak Repair Sprint is manual-first: while it's the live managed
+    // offer, a matching $97 receipt gets a Telegram kickoff alert instead of
+    // the retired automatic prompt-pack subprocess — Mike confirms the
+    // audited URL, repair scope, approval, and access path by hand before
+    // any deliverable goes out. If there's no currently-active managed offer
+    // (e.g. a $97 receipt arrives after the public price window closes),
+    // there's no live kickoff workflow to alert into, so it falls back to
+    // the legacy automatic delivery rather than silently doing nothing.
+    const activeFixPack = getActiveFixPack()
+    const isRepairSprint = activeFixPack !== undefined && session.amount_total === REPAIR_SPRINT_AMOUNT_CENTS
 
     if (event.livemode) {
       const amount = session.amount_total != null
@@ -202,7 +242,6 @@ export async function POST(request: NextRequest) {
         : 'unknown amount'
       const offerKey = session.metadata?.offer_key ?? 'unknown offer'
       const email = session.customer_email ?? 'no email'
-      const isRepairSprint = session.amount_total === REPAIR_SPRINT_AMOUNT_CENTS
       const message = isRepairSprint
         ? `🛠 *REPAIR SPRINT KICKOFF REQUIRED*\n${amount} — ${email}\nsession: ${session.id}\nConfirm audited URL, one-repair scope, approval, and access path.`
         : `💰 *SALE* — ${amount} — ${offerKey} — ${email}\nsession: ${session.id}`
@@ -210,17 +249,19 @@ export async function POST(request: NextRequest) {
       void sendSaleAlert(message)
     }
 
-    try {
-      await deliverPromptPack(auditId, customerEmail, session.id)
-    } catch (err) {
-      console.error('Prompt pack fulfillment failed:', err)
-      if (client && locked) {
-        await restoreFailedFulfillment(client, session.id)
+    if (!isRepairSprint) {
+      try {
+        await deliverPromptPack(auditId, customerEmail, session.id)
+      } catch (err) {
+        console.error('Legacy delivery fulfillment failed:', err)
+        if (client && locked) {
+          await restoreFailedFulfillment(client, session.id)
+        }
+        return NextResponse.json(
+          { error: 'Fulfillment failed' },
+          { status: 500 },
+        )
       }
-      return NextResponse.json(
-        { error: 'Fulfillment failed' },
-        { status: 500 },
-      )
     }
 
     try {
@@ -259,14 +300,6 @@ export async function POST(request: NextRequest) {
         client.release()
       }
     }
-
-    const amount = session.amount_total != null
-      ? `$${(session.amount_total / 100).toFixed(2)}`
-      : 'unknown amount'
-    void sendCheckoutAlert(
-      `💰 *SALE* — ${amount} — ${session.metadata?.offer_key ?? 'unknown offer'} — ${customerEmail}\n` +
-      `session: ${session.id}`,
-    )
 
     try {
       const ph = getPostHogClient()

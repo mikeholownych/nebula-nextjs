@@ -41,18 +41,19 @@ export default function TermsPage() {
             <h2 className="mb-3 text-lg font-semibold text-fg">3. Paid Services</h2>
             {fixPack ? (
               <p className="text-base leading-7 text-fg-muted">
-                The current Fix Pack ({formatUsd(fixPack.priceCents)}) is an automated, tailored AI
-                prompt pack delivered by email within minutes of payment. The customer or their
-                developer implements the fixes; Nebula does not require access to the
-                customer&apos;s site, CMS, or hosting. Payment is processed securely through
-                Stripe, and the service is fulfilled when the prompt pack is delivered. One
-                re-audit may be requested within {fixPack.reAudit.windowDays} days to observe what
-                changed and what remains open.
+                The current One-Leak Repair Sprint ({formatUsd(fixPack.priceCents)}) covers one
+                landing page and one high-confidence, buyer-approved repair. Nebula records the
+                baseline, confirms the scope with you, implements the repair through temporary
+                collaborator access or a buyer-approved patch handoff, and verifies the live
+                change. Payment is processed securely through Stripe. One additional same-scope
+                evidence check may be requested within {fixPack.reAudit.windowDays} days to observe
+                what changed and what remains open. This service does not guarantee conversion
+                lift.
               </p>
             ) : (
               <p className="text-base leading-7 text-fg-muted">
-                No verified paid Fix Pack offer is currently available. Any future paid service
-                will be described at checkout before payment is accepted.
+                No verified paid Repair Sprint offer is currently available. Any future paid
+                service will be described at checkout before payment is accepted.
               </p>
             )}
           </section>

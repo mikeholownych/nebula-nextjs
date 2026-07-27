@@ -1,13 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getPostHogClient } from '@/app/lib/posthog-server'
+import { getActiveFixPack } from '@/app/lib/public-facts'
+import { readAuditUnlock } from '@/app/lib/audit-unlock-token'
 import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
 
-const OFFERS = {
-  'fix-pack': {
-    name: REPAIR_SPRINT_OFFER.name,
-    stripePriceId: process.env.STRIPE_FIX_PACK_PRICE_ID,
-  },
-} as const
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null && !Array.isArray(value)
@@ -123,7 +120,7 @@ export async function POST(request: NextRequest) {
       body: new URLSearchParams({
         'line_items[0][price_data][currency]': fixPack.currency.toLowerCase(),
         'line_items[0][price_data][unit_amount]': String(fixPack.priceCents),
-        'line_items[0][price_data][product_data][name]': 'Nebula Conversion Fix Pack',
+        'line_items[0][price_data][product_data][name]': REPAIR_SPRINT_OFFER.name,
         'line_items[0][quantity]': '1',
         'payment_method_types[0]': 'card',
         mode: 'payment',
