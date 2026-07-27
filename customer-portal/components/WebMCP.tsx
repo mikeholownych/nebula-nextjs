@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
 import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
 
 /**
@@ -85,8 +86,8 @@ export function WEB_MCP_RUNTIME(
             },
             {
               name: REPAIR_SPRINT_OFFER.name,
-              price: `$${REPAIR_SPRINT_OFFER.priceUsd}`,
-              description: `${REPAIR_SPRINT_OFFER.summary} ${REPAIR_SPRINT_OFFER.evidenceBoundary}`,
+              price: '$' + REPAIR_SPRINT_OFFER.priceUsd,
+              description: REPAIR_SPRINT_OFFER.summary + ' ' + REPAIR_SPRINT_OFFER.evidenceBoundary,
               url: 'https://nebulacomponents.shop/pricing',
             },
             {

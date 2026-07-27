@@ -54,6 +54,7 @@ result-*
 
 # ── Next.js build ───────────────────────────────
 .next/
+.next.rollback-*/
 node_modules/
 
 # ── Backup files ────────────────────────────────

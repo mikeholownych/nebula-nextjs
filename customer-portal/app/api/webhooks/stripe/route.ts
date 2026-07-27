@@ -210,17 +210,20 @@ export async function POST(request: NextRequest) {
       void sendSaleAlert(message)
     }
 
-      try {
-        await deliverPromptPack(auditId, customerEmail, session.id)
-      } catch (err) {
-        console.error('Prompt pack fulfillment failed:', err)
+    try {
+      await deliverPromptPack(auditId, customerEmail, session.id)
+    } catch (err) {
+      console.error('Prompt pack fulfillment failed:', err)
+      if (client && locked) {
         await restoreFailedFulfillment(client, session.id)
-        return NextResponse.json(
-          { error: 'Fulfillment failed' },
-          { status: 500 },
-        )
       }
+      return NextResponse.json(
+        { error: 'Fulfillment failed' },
+        { status: 500 },
+      )
+    }
 
+    try {
       const deliveredResult = await client.query(
         `UPDATE purchases
          SET fulfillment_status = 'delivered'
@@ -233,7 +236,7 @@ export async function POST(request: NextRequest) {
         throw new Error('Fulfillment could not be marked delivered')
       }
     } catch (err) {
-      console.error('Failed to process fulfillment — will let Stripe retry:', err)
+      console.error('Failed to process fulfillment - will let Stripe retry:', err)
       if (client && locked) {
         await restoreFailedFulfillment(client, session.id)
       }

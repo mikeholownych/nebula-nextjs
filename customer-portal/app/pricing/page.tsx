@@ -1,7 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
 import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
 import { Card, PageShell } from '@/components/ui'
+
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Pricing — One-Leak Repair Sprint | Nebula Components',

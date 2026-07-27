@@ -43,19 +43,16 @@ export default function CheckoutPage() {
           </ul>
           <div className="flex justify-between border-t border-border pt-4 font-bold">
             <span className="text-fg">One-time total</span>
-            <span className="text-accent">${REPAIR_SPRINT_OFFER.priceUsd}</span>
+            <span className="text-accent">{'$'}{REPAIR_SPRINT_OFFER.priceUsd}</span>
           </div>
-        </Card> : (
-          <Card variant="bordered" className="mb-6">
-            <h2 className="mb-4 font-semibold text-fg">Fix Pack unavailable</h2>
-            <p className="text-sm text-fg-muted">
-              No verified Fix Pack price and checkout are currently available. No payment can be
-              accepted from this page.
-            </p>
-          </Card>
-        )}
+        </Card>
 
-        <CheckoutCTAButton href={REPAIR_SPRINT_OFFER.checkoutUrl} />
+        <a
+          href={REPAIR_SPRINT_OFFER.checkoutUrl}
+          className="mt-2 block w-full rounded-xl bg-accent py-4 text-center font-semibold text-bg transition-colors hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+        >
+          Pay $97 - Secure checkout via Stripe
+        </a>
 
         <p className="mt-6 text-center text-sm text-fg-muted">
           Card details are entered only on Stripe. Nebula does not collect or store payment information.
@@ -96,7 +93,7 @@ export default function CheckoutPage() {
             changed on re-audit. Traffic quality, offer strength, campaign changes, and measurement
             windows remain outside this repair, so the service does not guarantee conversion lift.
           </p>
-        </section>}
+        </section>
       </div>
     </main>
   )

@@ -37,7 +37,7 @@ Explicitly not: generic AI-SaaS cream aesthetics, CRO-agency theatrics, "black-b
 
 ## Design Principles
 
-Evidence over opinion — every claim traces to a documented case; no fabricated testimonials, logos, or conversion numbers. The page, not the ad — always reframe the visitor's problem as a landing-page defect, never ad-creative or targeting. One-time, not recurring — pricing and copy reinforce a bounded engagement over retainer or subscription framing. Diagnostic authority, not friendliness — confidence is carried by precision, never by reassurance or warmth. Same diagnosis for founders and agencies — one audit standard serves solo operators and agencies managing client accounts alike; agencies get a partner offer, not a different pitch.
+Evidence over opinion — every factual claim traces to an approved evidence record; no fabricated testimonials, logos, case studies, or conversion numbers. The page, not the ad — always reframe the visitor's problem as a landing-page defect, never ad-creative or targeting. One-time, not recurring — pricing and copy reinforce a bounded engagement over retainer or subscription framing. Diagnostic authority, not friendliness — confidence is carried by precision, never by reassurance or warmth. Same diagnosis for founders and agencies — one audit standard serves solo operators and agencies managing client accounts alike; agencies get a partner offer, not a different pitch.
 
 ## Accessibility & Inclusion
 

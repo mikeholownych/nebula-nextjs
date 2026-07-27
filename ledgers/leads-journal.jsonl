@@ -137,3 +137,4 @@
 {"timestamp": "2026-07-24T00:37:22.083414Z", "email": "pending@example.com", "action": "upsert", "stage": "lead_audit", "stages": ["lead_audit"], "source": "audit_completion", "name": null, "nurture_track": "headline-clarity"}
 {"timestamp": "2026-07-24T02:57:51.543850Z", "email": "pending@example.com", "action": "upsert", "stage": "lead_audit", "stages": ["lead_audit"], "source": "audit_completion", "name": null, "nurture_track": "headline-clarity"}
 {"timestamp": "2026-07-24T03:03:10.602856Z", "email": "nav-bug-check@nebulacomponents.shop", "action": "upsert", "stage": "lead_audit", "stages": ["lead_audit"], "source": "audit_completion", "name": null, "nurture_track": "headline-clarity"}
+{"timestamp": "2026-07-27T06:22:45.230262Z", "email": "pending@example.com", "action": "upsert", "stage": "lead_audit", "stages": ["lead_audit"], "source": "audit_completion", "name": null, "nurture_track": "headline-clarity"}

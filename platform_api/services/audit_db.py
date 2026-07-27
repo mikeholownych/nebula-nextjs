@@ -90,7 +90,65 @@ class AuditDB:
                     await self.check_and_award_badge(conn, audit_id)
                 except Exception:
                     pass
+                # Best-effort aggregate-only cohort record — feeds percentile
+                # positioning without retaining page URLs, domains, or customer IDs.
+                try:
+                    await self.record_cohort_aggregate(conn, score, grade, findings)
+                except Exception:
+                    pass
             return updated
+
+    async def record_cohort_aggregate(
+        self, conn, score: float, grade: str, findings: List[dict]
+    ) -> None:
+        """Increment a daily score/signals cohort with no page-level identifiers."""
+        failed_keys = {
+            finding.get('key')
+            for finding in findings
+            if isinstance(finding, dict)
+        }
+        signal_passes = (
+            int('headline' not in failed_keys),
+            int('cta' not in failed_keys),
+            int('above_fold' not in failed_keys),
+            int('social_proof' not in failed_keys),
+            int('load_speed' not in failed_keys),
+            int('mobile' not in failed_keys),
+            int('seo_foundations' not in failed_keys),
+            int('ad_signals' not in failed_keys),
+            int('ai_readiness' not in failed_keys),
+        )
+        score_bucket = max(0, min(100, round(score * 10)))
+        await conn.execute(
+            """
+            INSERT INTO audit_cohort
+                (audit_date, source, industry_tag, score_bucket, grade,
+                 sample_count, finding_count_sum,
+                 h1_pass_count, cta_pass_count, above_fold_pass_count,
+                 social_proof_pass_count, load_speed_pass_count,
+                 mobile_pass_count, seo_foundations_pass_count,
+                 ad_signals_pass_count, ai_readiness_pass_count)
+            VALUES (CURRENT_DATE, 'live', 'unknown', $1, $2,
+                    1, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+            ON CONFLICT (audit_date, source, industry_tag, score_bucket, grade)
+            DO UPDATE SET
+                sample_count = audit_cohort.sample_count + 1,
+                finding_count_sum = audit_cohort.finding_count_sum + EXCLUDED.finding_count_sum,
+                h1_pass_count = audit_cohort.h1_pass_count + EXCLUDED.h1_pass_count,
+                cta_pass_count = audit_cohort.cta_pass_count + EXCLUDED.cta_pass_count,
+                above_fold_pass_count = audit_cohort.above_fold_pass_count + EXCLUDED.above_fold_pass_count,
+                social_proof_pass_count = audit_cohort.social_proof_pass_count + EXCLUDED.social_proof_pass_count,
+                load_speed_pass_count = audit_cohort.load_speed_pass_count + EXCLUDED.load_speed_pass_count,
+                mobile_pass_count = audit_cohort.mobile_pass_count + EXCLUDED.mobile_pass_count,
+                seo_foundations_pass_count = audit_cohort.seo_foundations_pass_count + EXCLUDED.seo_foundations_pass_count,
+                ad_signals_pass_count = audit_cohort.ad_signals_pass_count + EXCLUDED.ad_signals_pass_count,
+                ai_readiness_pass_count = audit_cohort.ai_readiness_pass_count + EXCLUDED.ai_readiness_pass_count
+            """,
+            score_bucket,
+            grade,
+            len(findings),
+            *signal_passes,
+        )
 
     async def check_and_award_badge(self, conn, audit_id: UUID) -> Optional[dict]:
         """A badge documents one real, specific event: this customer's score

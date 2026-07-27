@@ -123,3 +123,27 @@ Not moved despite overlapping names, because each still has a live dependent: `c
 | Archived path | Restored path | Reason |
 | --- | --- | --- |
 | `.legacy/outreach-wave-archive-2026-07-23/ledger_metrics.py` | `ledger_metrics.py` | Wrongly swept into the bulk "40 tracked scripts formerly under `archived/`" move (outreach-wave-archive-2026-07-23 entry above), which was a wholesale directory move, not a per-file deprecation review. `challenge_risk_monitor.py`, `audit_quality_review.py`, and `normalize_public_stats.py` all `from ledger_metrics import ...` at module level and were left broken (`ModuleNotFoundError`) from 2026-07-23 until this fix. The module is self-contained (stdlib only, hardcoded `BASE = Path('/home/mike/nebula')`) — restoring it does not reintroduce any of the SMTP/REST outbound-bypass risk the rest of that archive batch was about. Verified: `import ledger_metrics` succeeds, `ledger_metrics.summary()` runs, and all three importing scripts execute cleanly at module level. The file remains present in `.legacy/outreach-wave-archive-2026-07-23/` as well via git history.
+
+## Next.js deployment rollback archive — 2026-07-26 UTC
+
+| Original path | Archived path | Files | Classification |
+| --- | --- | ---: | --- |
+| `customer-portal/.next.rollback-1785028294/` | `.legacy/deployment-builds/nebula-nextjs-pre-61fe6fc9-1785028294/` | 2,956 | Exact pre-`61fe6fc9` Next.js deployment rollback build; preserved locally, excluded from Git |
+
+The active production build remains in `customer-portal/.next/`. Future
+`.next.rollback-*` directories are ignored so deployment rollback artifacts do
+not pollute source-control status.
+
+## Runtime ledger cleanup — 2026-07-26 UTC
+
+| Source | Archived copy | Classification |
+| --- | --- | --- |
+| `ledgers/leads.json` | `.legacy/runtime-ledger-cleanup-2026-07-26/leads.json` | State snapshot containing `pending@example.com` and `test@audit-demo.com` test activity |
+| `ledgers/leads-journal.jsonl` | `.legacy/runtime-ledger-cleanup-2026-07-26/leads-journal.jsonl` | Append-only test audit events |
+| `source_outcomes.jsonl` | `.legacy/runtime-ledger-cleanup-2026-07-26/source_outcomes.jsonl` | Operational evidence of Apify monthly-limit failures |
+| Three Git patches | `.legacy/runtime-ledger-cleanup-2026-07-26/*-delta.patch` | Exact deltas from commit `61fe6fc9` |
+
+`SHA256SUMS` records every archived file. The tracked runtime files were restored
+to the committed state after archiving so test contacts and recurring provider
+logs are not bundled into product source commits. The Apify failures remain
+preserved as operational evidence in the archive.
