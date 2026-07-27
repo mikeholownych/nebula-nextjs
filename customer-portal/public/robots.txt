@@ -22,6 +22,9 @@ Disallow: /
 User-Agent: omgili
 Disallow: /
 
+User-Agent: Applebot-Extended
+Disallow: /
+
 # AI answer-engine input and retrieval — allowed
 User-Agent: ChatGPT-User
 Allow: /

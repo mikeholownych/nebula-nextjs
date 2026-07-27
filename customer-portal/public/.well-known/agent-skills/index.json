@@ -16,20 +16,6 @@
       "sha256": ""
     },
     {
-      "name": "mcp-server-card",
-      "type": "well-known",
-      "description": "MCP Server Card at /.well-known/mcp/server-card.json for Model Context Protocol auto-discovery",
-      "url": "https://nebulacomponents.shop/.well-known/mcp/server-card.json",
-      "sha256": ""
-    },
-    {
-      "name": "a2a-agent-card",
-      "type": "well-known",
-      "description": "A2A Agent Card at /.well-known/agent.json for agent-to-agent discovery",
-      "url": "https://nebulacomponents.shop/.well-known/agent.json",
-      "sha256": ""
-    },
-    {
       "name": "oauth-discovery",
       "type": "well-known",
       "description": "OpenID Connect discovery at /.well-known/openid-configuration",

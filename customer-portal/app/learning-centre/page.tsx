@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import CategoryAccordion from './CategoryAccordion'
 import { getArticles } from './lib/getArticles'
+import { createCollectionPageSchema } from '@/app/lib/schema'
 
 export const metadata: Metadata = {
   title: 'Learning Centre - Landing Page Conversion Leaks | Nebula',
@@ -10,6 +11,16 @@ export const metadata: Metadata = {
 
 export default function LearningCentreIndex() {
   const articles = getArticles()
+
+  const collectionSchema = createCollectionPageSchema({
+    name: 'Learning Centre - Landing Page Conversion Leaks',
+    description: "Free conversion guides for founders burning ad spend on pages that don't convert.",
+    url: 'https://nebulacomponents.shop/learning-centre',
+    items: articles.map((a) => ({
+      name: a.title,
+      url: `https://nebulacomponents.shop/learning-centre/${a.slug}`,
+    })),
+  })
 
   const categoryOrder = [
     'Landing Page Leaks',
@@ -32,7 +43,12 @@ export default function LearningCentreIndex() {
   articles.forEach(a => { if (categories[a.category]) categories[a.category].push(a) })
 
   return (
-    <main id="main-content" className="min-h-screen bg-bg pt-24">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+      />
+      <main id="main-content" className="min-h-screen bg-bg pt-24">
       {/* Hero */}
       <section className="border-b border-border px-6 py-16">
         <div className="mx-auto max-w-5xl">
@@ -82,6 +98,7 @@ export default function LearningCentreIndex() {
           </a>
         </div>
       </section>
-    </main>
+      </main>
+    </>
   )
 }

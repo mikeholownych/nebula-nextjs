@@ -59,6 +59,31 @@ export function createBreadcrumbSchema(items: Array<{ name: string; url: string 
   }
 }
 
+export function createCollectionPageSchema(collection: {
+  name: string
+  description: string
+  url: string
+  items: Array<{ name: string; url: string }>
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: collection.name,
+    description: collection.description,
+    url: collection.url,
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: collection.items.length,
+      itemListElement: collection.items.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        url: item.url,
+      })),
+    },
+  }
+}
+
 export function createArticleSchema(article: {
   headline: string
   description: string

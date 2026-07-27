@@ -24,6 +24,8 @@ const nextConfig: NextConfig = {
   turbopack: { root: __dirname },
   // Required to support PostHog trailing-slash API requests through the /ingest proxy
   skipTrailingSlashRedirect: true,
+  // Don't advertise the framework in responses
+  poweredByHeader: false,
   // 301/410 map for legacy static .html URLs indexed by Google (GSC 2026-07-21)
   // Frees crawl budget from dead URLs; preserves any query association on equity-bearing pages.
   // Rule: content pages → nearest current equivalent (301); true orphans → /gone (410).
@@ -36,6 +38,9 @@ const nextConfig: NextConfig = {
         destination: 'https://nebulacomponents.shop/:path*',
         permanent: true,
       },
+      // Trailing-slash duplicate (skipTrailingSlashRedirect is on globally for
+      // the PostHog /ingest proxy, so this one page needs its own explicit rule)
+      { source: '/pricing/', destination: '/pricing', permanent: true },
       // Legacy .html → current app routes (301)
       { source: '/blog-trigger-aware-outreach.html',    destination: '/learning-centre', permanent: true },
       { source: '/why-landing-pages-dont-convert.html', destination: '/learning-centre/landing-page-not-converting', permanent: true },
@@ -162,6 +167,28 @@ const nextConfig: NextConfig = {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
           },
+          // Report-Only: observe real violations before enforcing. GA4 loads
+          // gtag.js from googletagmanager.com; PostHog is proxied same-origin
+          // through /ingest (see CookieConsent.tsx) so it needs no separate
+          // script-src entry, only connect-src for its API/asset hosts.
+          // Stripe checkout is a plain-link navigation to buy.stripe.com, not
+          // an embedded script/iframe, so it needs no CSP entry either.
+          {
+            key: 'Content-Security-Policy-Report-Only',
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data:",
+              "font-src 'self' data:",
+              "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://us.posthog.com https://us.i.posthog.com",
+              "frame-src 'none'",
+              "object-src 'none'",
+              "base-uri 'self'",
+              "form-action 'self' https://buy.stripe.com",
+              "frame-ancestors 'self'",
+            ].join('; '),
+          },
         ],
       },
       // Disable Cloudflare email obfuscation and other CDN transforms site-wide
@@ -249,8 +276,6 @@ const nextConfig: NextConfig = {
             value: [
               '</llms.txt>; rel="describedby"; type="text/plain"',
               '</.well-known/api-catalog>; rel="https://www.rfc-editor.org/rfc/rfc9727#section-3"',
-              '</.well-known/mcp/server-card.json>; rel="service"',
-              '</.well-known/agent.json>; rel="https://a2a-protocol.org/rel/agent-card"',
               '</.well-known/agent-skills/index.json>; rel="describedby"; type="application/json"',
               '</openapi.json>; rel="describedby"; type="application/json"',
               '</.well-known/acp.json>; rel="https://agenticcommerce.dev/rel/discovery"',
@@ -296,24 +321,6 @@ const nextConfig: NextConfig = {
       // /.well-known/oauth-protected-resource — RFC 9728
       {
         source: '/.well-known/oauth-protected-resource',
-        headers: [
-          { key: 'Content-Type', value: 'application/json' },
-          { key: 'Cache-Control', value: 'public, max-age=3600' },
-          { key: 'Access-Control-Allow-Origin', value: '*' },
-        ],
-      },
-      // /.well-known/mcp/server-card.json
-      {
-        source: '/.well-known/mcp/:path*',
-        headers: [
-          { key: 'Content-Type', value: 'application/json' },
-          { key: 'Cache-Control', value: 'public, max-age=3600' },
-          { key: 'Access-Control-Allow-Origin', value: '*' },
-        ],
-      },
-      // /.well-known/agent.json — A2A agent card
-      {
-        source: '/.well-known/agent.json',
         headers: [
           { key: 'Content-Type', value: 'application/json' },
           { key: 'Cache-Control', value: 'public, max-age=3600' },
