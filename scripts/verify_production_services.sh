@@ -73,3 +73,14 @@ for target in "$LOCAL_URL" "$PUBLIC_URL"; do
   [[ "$code" == 200 ]] || { printf 'FAIL: stylesheet %s%s returned %s (page HTML was 200 — stale build/process mismatch)\n' "$asset_url" "$css_path" "$code" >&2; exit 1; }
   printf 'PASS: %s stylesheet %s returned HTTP 200\n' "$target" "$css_path"
 done
+
+# Verify deployed build revision matches repository HEAD
+expected_sha=$(git -C /home/mike/nebula/customer-portal rev-parse HEAD 2>/dev/null || true)
+if [[ -n "$expected_sha" && "$expected_sha" =~ ^[a-f0-9]{40}$ ]]; then
+  deployed_sha=$(curl -fsS --max-time 5 http://127.0.0.1:3000/api/build-info | grep -oE '"revision":"[a-f0-9]{40}"' | cut -d'"' -f4 || true)
+  [[ "$deployed_sha" == "$expected_sha" ]] || {
+    printf 'FAIL: deployed SHA %s does not match repository HEAD %s\n' "${deployed_sha:-<none>}" "$expected_sha" >&2
+    exit 1
+  }
+  printf 'PASS: deployed SHA %s matches repository HEAD\n' "$deployed_sha"
+fi
