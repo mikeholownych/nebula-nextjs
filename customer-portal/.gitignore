@@ -8,6 +8,7 @@ node_modules/
 out/
 build/
 dist/
+app/lib/build-info.json
 
 # Environment files (keep .env.example)
 .env

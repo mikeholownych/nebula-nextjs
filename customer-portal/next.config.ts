@@ -1,8 +1,22 @@
 import type { NextConfig } from 'next'
 import { createHash } from 'node:crypto'
-import { readFileSync } from 'node:fs'
+import { readFileSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
-import buildInfo from './app/lib/build-info.json'
+
+function getBuildRevision(): string {
+  try {
+    const filePath = join(__dirname, 'app/lib/build-info.json')
+    if (existsSync(filePath)) {
+      const data = JSON.parse(readFileSync(filePath, 'utf8'))
+      if (data.revision && typeof data.revision === 'string') {
+        return data.revision
+      }
+    }
+  } catch {
+    // fallback
+  }
+  return 'development'
+}
 
 // Citable release governance: /resources/citable must answer with the sha256
 // of the vendored resource-data.json release projection so publisher-controlled
@@ -203,7 +217,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'X-Nebula-Revision',
-            value: buildInfo.revision,
+            value: getBuildRevision(),
           },
         ],
       },
