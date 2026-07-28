@@ -13,7 +13,23 @@ const BASE_URL = 'https://nebulacomponents.shop'
 // stale/flat value misrepresents the site to anyone who does read it).
 const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }> = [
   { paths: ['/pricing', '/audit'], priority: 0.9 },
-  { paths: ['/learning-centre', '/resources', '/case-studies'], priority: 0.8 },
+  {
+    paths: [
+      '/learning-centre',
+      '/resources',
+      '/case-studies',
+      '/why-is-my-landing-page-not-converting',
+      '/ads-getting-clicks-but-no-sales',
+      '/landing-page-message-match',
+      '/landing-page-trust-signals',
+      '/landing-page-cta-audit',
+      '/mobile-landing-page-audit',
+      '/saas-landing-page-audit',
+      '/ecommerce-landing-page-audit',
+      '/lead-generation-landing-page-audit',
+    ],
+    priority: 0.8,
+  },
   {
     paths: [
       '/7-systems',

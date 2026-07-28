@@ -53,5 +53,11 @@ Allow: /
 # Standard search indexing — allowed
 User-Agent: *
 Allow: /
+Disallow: /api/
+Disallow: /audit/*/results
+Disallow: /audit/*/processing
+Disallow: /dashboard/
+Disallow: /lead-dashboard/
+Disallow: /audit-dashboard/
 
 Sitemap: https://nebulacomponents.shop/sitemap.xml

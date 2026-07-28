@@ -103,7 +103,7 @@ export default function HeadlineOptimizationPage() {
             Run free audit →
           </a>
           <p className="text-xs text-fg-dim mt-4">
-            Free audit live · results in 60 seconds
+            Free audit live · results in under 2 minutes
           </p>
         </div>
 

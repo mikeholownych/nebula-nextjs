@@ -7,9 +7,9 @@ import { Card, PageShell } from '@/components/ui'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Pricing — One-Leak Repair Sprint | Nebula Components',
+  title: 'Landing Page Audit Pricing & One-Leak Repair Sprint | Nebula',
   description:
-    'One-time $97 One-Leak Repair Sprint: one landing page, one high-confidence repair, implemented and verified by Nebula.',
+    'Free landing page audit, plus the $97 One-Leak Repair Sprint: one landing page, one high-confidence repair, implemented and verified by Nebula.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/pricing',
   },

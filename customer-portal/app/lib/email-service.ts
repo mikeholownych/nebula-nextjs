@@ -31,9 +31,9 @@ Your page triggered the same pattern. I'm not asking you to buy anything — I w
 
 Paste your URL here: https://nebulacomponents.shop
 
-Takes 60 seconds. You'll see exactly what's leaking and which fix pays back fastest.
+Takes under two minutes. You'll see exactly what's leaking and which fix pays back fastest.
 
-— Mike H
+Mike H
 Founder, Nebula Components
 
 P.S. Last week: SaaS founder burned $15k on Meta with zero conversions. Audit showed the problem in 4 minutes. Fixed in 2 hours. Now at 23 sales/week.`
@@ -113,11 +113,11 @@ But if you ever want to see exactly what's broken — for free, no follow-up pre
 
 https://nebulacomponents.shop
 
-Paste your URL. 60 seconds. You'll see the leak.
+Paste your URL. Takes under two minutes. You'll see the leak.
 
 If you fix it yourself, great. If you want our $97 One-Leak Repair Sprint, that's there too. But the diagnosis is free either way.
 
-— Mike H
+Mike H
 
 Founder, Nebula Components
 

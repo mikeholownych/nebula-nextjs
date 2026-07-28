@@ -266,7 +266,7 @@ export default function GhostVariantAbTestPage() {
           </h2>
           <p className="mt-4 text-fg-muted leading-relaxed">
             Before you declare a winner, audit both variants. The Nebula audit catches rendering
-            failures, payload bloat, and metadata mismatches in 60 seconds - giving you the
+            failures, payload bloat, and metadata mismatches in under two minutes: giving you the
             element-level health signals your test platform was never designed to surface.
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">

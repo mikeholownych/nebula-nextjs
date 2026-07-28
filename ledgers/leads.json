@@ -3443,7 +3443,7 @@
     "current_stage": "lead_audit",
     "email": "pending@example.com",
     "first_seen": "2026-07-18T01:26:23.082723Z",
-    "last_seen": "2026-07-27T06:22:45.230262Z",
+    "last_seen": "2026-07-28T16:22:44.691050Z",
     "name": "",
     "notes": "",
     "nurture_track": "headline-clarity",
@@ -3459,10 +3459,10 @@
     ],
     "tags": [],
     "total_spent_cents": 0,
-    "track_audit_id": "bc9d3c8a-6d08-4d63-b7f8-eb9c23612ed7",
+    "track_audit_id": "30c4cd59-1b39-44e5-a31d-9ed776c0270d",
     "track_position_days": 0,
-    "track_started_at": "2026-07-27T06:22:45.230262Z",
-    "url": "https://aisyndicate.io"
+    "track_started_at": "2026-07-28T16:22:44.691050Z",
+    "url": "https://velesgroup.co/"
   },
   "quietpulse.social@gmail.com": {
     "content_posts": [],

@@ -5,12 +5,12 @@ import { auditWebApplicationSchema } from '@/app/lib/schema'
 import AuditForm from './AuditForm'
 
 export const metadata: Metadata = {
-  title: 'Find the Leak - Free Landing Page Diagnosis | Nebula',
-  description: "See if your page is what's killing your ads. Evidence-backed audit in under 2 minutes, no signup required.",
+  title: 'Free Landing Page Audit: Find Conversion Friction | Nebula',
+  description: 'Run a free evidence-backed landing page audit. Discover observable conversion friction across message match, trust signals, mobile layout, and page speed.',
   alternates: { canonical: 'https://nebulacomponents.shop/audit' },
   openGraph: {
-    title: 'Find the Leak - Free Landing Page Diagnosis | Nebula',
-    description: "See if your page is what's killing your ads. Evidence-backed audit in under 2 minutes, no signup required.",
+    title: 'Free Landing Page Audit: Find Conversion Friction | Nebula',
+    description: 'Run a free evidence-backed landing page audit. Discover observable conversion friction across message match, trust signals, mobile layout, and page speed.',
     url: 'https://nebulacomponents.shop/audit',
     siteName: 'Nebula Components',
     locale: 'en_US',

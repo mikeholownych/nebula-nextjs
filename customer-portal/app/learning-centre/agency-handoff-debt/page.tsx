@@ -220,10 +220,10 @@ export default function AgencyHandoffDebtPage() {
 
         {/* CTA section */}
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">
-          <h2 className="text-xl font-bold text-fg">Find Your Handoff Regressions in 60 Seconds</h2>
+          <h2 className="text-xl font-bold text-fg">Find Your Handoff Regressions in Under 2 Minutes</h2>
           <p className="mt-4 text-fg-muted leading-relaxed">
             If you handed your page to someone else in the last six months, you probably have at
-            least three of these. The audit takes 60 seconds to find them - it checks your meta
+            least three of these. The audit takes under 2 minutes to find them - it checks your meta
             description length, H1 keyword alignment, CTA text, social proof placement, page speed,
             and broken assets in a single pass. You'll know exactly which regressions are live on
             your page before you finish your coffee.

@@ -1,7 +1,7 @@
 # Performance — Core Web Vitals Audit
 
 **Site:** https://nebulacomponents.shop
-**Date:** 2026-07-26
+**Date:** 2026-07-26 (lab pass) / 2026-07-27 (CrUX field-data + supplementary PSI pass added below)
 **Tooling:** Unlighthouse 0.13.5 (local Lighthouse, Chrome for Testing 149, headless, `--no-sandbox`) against production. **PageSpeed Insights API / CrUX field data could not be used — no Google API key is configured** (`pagespeed_check.py` returned `"PSI rate limit exceeded (240 QPM / 25,000 QPD)"`, which is the tool's generic failure string for an unauthenticated/keyless request, not a real quota event). All numbers below are **lab data, single run, no throttling profile override (Lighthouse default mobile/desktop simulated throttling)** — treat as directional, not a substitute for 28-day CrUX field percentiles.
 
 Pages tested: `/`, `/audit`, `/pricing`, `/learning-centre/landing-page-not-converting` — mobile and desktop, both fully completed (8 runs total, 4 pages × 2 devices).
@@ -58,7 +58,7 @@ Verified this is not a Cloudflare/tunnel artifact — hitting the Next.js origin
 
 ### 2. LCP fails "Good" on every page and device tested (High)
 Mobile LCP: 4.14s (`/`), 3.56s (`/audit`), 4.06s (`/pricing`), 4.28s (learning-centre article) — three of four pages are in the *Poor* band (>4.0s). Desktop LCP: 3.5-3.8s across all four pages — *Needs Improvement* everywhere, none reach the 2.5s "Good" bar. Since TTFB is already fast (18-49ms) and render-blocking-resource savings are modest (110-430ms), the gap between FCP (1.1-1.8s) and LCP (3.5-4.3s) — roughly 2-2.7 seconds — is being spent on resource discovery/load and render delay for the actual LCP element, not on server latency or blocking CSS.
-**Recommendation:** Identify the actual LCP element per template (hero heading/image on `/`, form/heading on `/audit`, pricing card, article headline) and confirm it's prioritized: `fetchPriority="high"` / `priority` on any `next/image` LCP candidate, and a `<link rel="preload">` for it if it's a late-discovered background image or web font dependency. The `render-blocking-resources` audit already estimates 110-430ms of recoverable time from deferring/inlining critical CSS — start there, then re-measure LCP subparts (this tool has `lcp_subparts.py` for CrUX-based subpart breakdown once field data exists, but that needs a Google API key which isn't configured yet).
+**Recommendation:** Identify the actual LCP element per template (hero heading/image on `/`, form/heading on `/audit`, pricing card, article headline) and confirm it's prioritized: `fetchPriority="high"` / `priority` on any `next/image` LCP candidate, and a `<link rel="preload">` for it if it's a late-discovered background image or web font dependency. The `render-blocking-resources` audit already estimates 110-430ms of recoverable time from deferring/inlining critical CSS — start there, then re-measure LCP subparts (see the CrUX field-data section below — subpart breakdown needs CrUX data, which does not exist yet for this domain).
 
 ### 3. Mobile interactivity risk is poor — TBT 538-894ms (High)
 Total Blocking Time (the lab proxy for INP) is 538ms (`/audit`), 663ms (learning-centre), 828ms (`/`), and 894ms (`/pricing`) on mobile — all comfortably in "would likely fail INP" territory if real users interact during page load, since Lighthouse's `max-potential-fid`/TBT figures at this level (570-593ms) exceed the 500ms "Poor" INP threshold. Desktop is much healthier (184.5-314.5ms), with only `/audit` desktop (314.5ms) landing in "Needs Improvement". The `unused-javascript` audit shows a consistent **490-503 KB of estimated-removable JS on every single page**, regardless of route — that's a strong signal of a large shared bundle being shipped whether or not a given page needs it.
@@ -79,6 +79,55 @@ Lighthouse's `uses-text-compression` audit estimates 595-634 KB of savings on ev
 ## Scope Note
 Per the coordinator's instruction, this pass stopped after the 8 completed Unlighthouse runs (4 pages × mobile/desktop) plus the header investigation — it does not include: DevTools trace-level root-causing of the homepage's CLS culprit element (finding 4), a bundle-analyzer breakdown of the ~500KB shared JS (finding 3), or direct `Content-Encoding` verification (finding 5). These are flagged as follow-ups above rather than guessed at.
 
+---
+
+## CrUX Field Data (added 2026-07-27)
+
+**Method:** A Google API key is now configured (`google_auth.py --check` confirms Tier 2 Full: PSI v5 `[OK]`, CrUX API `[OK]`, CrUX History API `[OK]`, GSC/Indexing/GA4 also `[OK]`). Ran `crux_history.py` against the origin (`https://nebulacomponents.shop`) and each of the four URLs tested in the lab pass above (`/`, `/audit`, `/pricing`, `/learning-centre/landing-page-not-converting`), all form factors.
+
+**Result: no CrUX data exists for this domain yet, at any level tested.** Every single query — origin-level and all four URL-level — returned the same response, e.g.:
+
+```
+{
+  "target": "https://nebulacomponents.shop",
+  "form_factor": "ALL",
+  "metrics": {},
+  "collection_periods": [],
+  "trends": {},
+  "error": "No CrUX history data for this origin. Insufficient Chrome traffic volume for eligibility."
+}
+```
+
+This is the **expected, correct response for a site at this traffic level** — CrUX requires a rolling 28-day minimum volume of qualifying real-Chrome-user page loads before an origin or URL becomes eligible for reporting. It is not an API/auth failure: the same credentials that returned `[OK]` on the auth check produced a well-formed (if empty) response here, distinct from an exception or error status. **This means the real 75th-percentile field-data verdict for LCP/INP/CLS on nebulacomponents.shop cannot be produced yet — this is not something to work around, it's an honest "not enough traffic" result.** Every pass/fail judgment in this document (findings 2-4 above) remains a lab estimate only, pending CrUX eligibility.
+
+**Action:** Re-run `crux_history.py` against the origin monthly, or after any meaningful traffic milestone from the lead-gen/SEO work elsewhere in this repo, to catch the moment CrUX eligibility starts (CrUX typically requires meaningfully more sustained daily unique Chrome visitors than a pre-revenue/low-traffic marketing site like this currently has). No further field-data action is possible this pass.
+
+## Supplementary PSI Lab Run (2026-07-27, Google-hosted Lighthouse via PSI API v5)
+
+With the API key now working, this pass additionally re-ran the same four pages through Google's own hosted PSI/Lighthouse endpoint (`pagespeed_check.py`), separate from the local Unlighthouse harness used in the original 2026-07-26 pass. As expected given the CrUX result above, `field_metrics` came back empty (`{}`) on every single call, for every page and device — consistent with "no CrUX data for this origin."
+
+The **lab** numbers from this PSI run are notably better than the Unlighthouse pass from one day earlier:
+
+| Page | Device | LCP (PSI, 2026-07-27) | LCP (Unlighthouse, 2026-07-26) | CLS (PSI) | CLS (Unlighthouse) | TBT (PSI) | TBT (Unlighthouse) | Perf Score (PSI) |
+|---|---|---|---|---|---|---|---|---|
+| `/` | Mobile | 1.5–2.7 s (2 runs varied, see caveat) | 4139 ms | 0.019–0.160 (2 runs varied) | 0.171 | 10–40 ms | 828 ms | 93 |
+| `/` | Desktop | 324 ms | 3646 ms | 0.034 | 0.118 | 20 ms | 184.5 ms | 100 |
+| `/audit` | Mobile | 2.3 s | 3564 ms | 0.000 | 0.055 | 20 ms | 538.5 ms | 98 |
+| `/audit` | Desktop | 0.5 s | 3541 ms | 0.002 | 0.031 | 0 ms | 314.5 ms | 100 |
+| `/pricing` | Mobile | 1.8 s | 4061 ms | 0.000 | 0.000 | 0 ms | 893.7 ms | 99 |
+| `/pricing` | Desktop | 0.6 s | 3799 ms | 0.000 | 0.000 | 50 ms | 233.5 ms | 100 |
+| `/learning-centre/...` | Mobile | 1.8 s | 4282 ms | 0.000 | 0.000 | 0 ms | 663.1 ms | 99 |
+| `/learning-centre/...` | Desktop | 0.5 s | 3683 ms | 0.000 | 0.000 | 20 ms | 232 ms | 100 |
+
+**Important caveat — do not read this as "the LCP/TBT findings are now resolved."** Two things keep this from being a confirmed fix:
+
+1. **Run-to-run variance inside PSI itself was substantial.** Two separate live PSI calls for the homepage mobile strategy, run minutes apart within this same pass, returned LCP 2719ms / CLS 0.0188 on one call and LCP 1501ms / CLS 0.1598 on the next — a >1.2s LCP swing and an ~8x CLS swing on the identical URL/strategy. Single-run lab data (whether Unlighthouse or PSI) is inherently noisy; neither the 2026-07-26 Unlighthouse numbers nor this 2026-07-27 PSI numbers should be treated as "the" true figure in isolation.
+2. **No CrUX field data exists to arbitrate between the two lab estimates.** Real-user 75th-percentile data is the only way to resolve which lab run is closer to what actual visitors experience, and that data does not exist yet for this domain (see CrUX section above).
+
+**Recommendation:** Treat findings 2-4 in the lab-data section above (LCP failing "Good," mobile TBT/INP risk, homepage CLS) as **still open and unresolved either way** — this better-looking PSI run is not sufficient grounds to close them, but the original Unlighthouse worst-case numbers should likewise not be treated as more authoritative than this PSI run. Next step once traffic allows: pull CrUX field percentiles (`crux_history.py`) for the real 75th-percentile answer; until then, run PSI 5-10x per page/device and use the median (not a single run) as the working lab estimate, consistent with Lighthouse's own published guidance on lab-data variance.
+
+---
+
 ## Category Score: 48 / 100
 
-Rationale: LCP — the metric with the highest ranking/UX weight — fails the "Good" 2.5s bar on all 8 page/device combinations tested, with 3 of 4 mobile pages in the outright *Poor* band. TBT/INP-risk is poor on mobile across the board. Against that, TTFB is excellent, third-party/font loading strategy is already correct, DOM size is healthy, and CLS is clean on 3 of 4 pages — so this is not a worst-case score, but a real production caching regression (finding 1) plus universal LCP failure caps it well below a passing grade.
+Rationale: LCP — the metric with the highest ranking/UX weight — fails the "Good" 2.5s bar on all 8 page/device combinations tested in the original Unlighthouse pass, with 3 of 4 mobile pages in the outright *Poor* band. TBT/INP-risk is poor on mobile across the board. Against that, TTFB is excellent, third-party/font loading strategy is already correct, DOM size is healthy, and CLS is clean on 3 of 4 pages — so this is not a worst-case score, but a real production caching regression (finding 1, since corrected) plus universal LCP failure caps it well below a passing grade. **Score held at 48/100 pending real field data** — no CrUX percentiles exist yet to confirm or revise this against actual user experience (see CrUX Field Data section above), and the supplementary PSI run showed enough internal run-to-run variance that it is not treated as grounds to raise the score on its own.

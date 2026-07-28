@@ -25,7 +25,7 @@ export default function ThankYouPage() {
           <p className="font-semibold text-fg mb-1">Know someone else bleeding ad budget?</p>
           <p className="text-sm text-fg-muted mb-4">
             A lot of founders go through this with a business partner or someone in the same position.
-            Their audit is free - takes 60 seconds and names the exact leaks.
+            Their audit is free: takes under 2 minutes and names the exact leaks.
           </p>
           <a
             href="/audit"

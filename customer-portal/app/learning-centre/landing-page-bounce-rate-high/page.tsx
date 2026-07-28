@@ -226,7 +226,7 @@ export default function LandingPageBounceRateHigh() {
                 {
                   step: 'Cut load time to under 3 seconds on mobile',
                   detail:
-                    'Compress images (WebP, 80% quality), add lazy loading to below-fold content, remove unused third-party scripts. Check LCP with Google PageSpeed Insights - free, takes 60 seconds. If LCP is above 4 seconds, load time is the primary bounce cause regardless of what the headline says.',
+                    'Compress images (WebP, 80% quality), add lazy loading to below-fold content, remove unused third-party scripts. Check LCP with Google PageSpeed Insights: free, takes under two minutes. If LCP is above 4 seconds, load time is the primary bounce cause regardless of what the headline says.',
                 },
                 {
                   step: 'Put the CTA above the fold on mobile',

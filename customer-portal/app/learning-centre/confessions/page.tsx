@@ -147,7 +147,7 @@ export default function ConfessionsPage() {
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Find out what your page is doing while you sleep</h2>
           <p className="mb-6 leading-relaxed text-fg-muted">
-            Every story above started the same way: the founder didn&apos;t know. The audit takes 60 seconds and costs nothing. You&apos;ll find out.
+            Every story above started the same way: the founder didn&apos;t know. The audit takes under 2 minutes and costs nothing. You&apos;ll find out.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link

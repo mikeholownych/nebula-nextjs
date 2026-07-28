@@ -224,7 +224,7 @@ export default function RoasCliffPage() {
         </h3>
 
         <p className="mb-5 text-fg-muted">
-          A specific, evidence-backed next step reduces decision friction. Nebula delivers audit results in under 60 seconds across 7 conversion signals.
+          A specific, evidence-backed next step reduces decision friction. Nebula delivers audit results in under two minutes across 7 conversion signals.
         </p>
 
         <div className="border-t border-border my-12" />

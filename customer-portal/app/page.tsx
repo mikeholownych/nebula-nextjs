@@ -61,12 +61,10 @@ export default function Home() {
             {/* Left: copy */}
             <div className="flex flex-col justify-center">
               <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl lg:text-6xl">
-                Your ads worked.{' '}
-                <span className="text-fg-muted">Your page did not let them.</span>
+                Find Out Why Your Landing Page Is Not Converting
               </h1>
               <p className="mt-6 max-w-lg text-lg leading-7 text-fg-muted">
-                Before you pause those ads - find out if the page is what is killing them.
-                Free. No signup. Under 2 minutes.
+                Before you pause ad spend: identify observable conversion friction across 7 key page signals. Free, no signup required, results in under two minutes.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
@@ -343,14 +341,84 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 8. Final CTA ── */}
+        {/* ── 8. Diagnostic Guides & Buyer Audits ── */}
+        <section className="border-t border-border px-6 py-16">
+          <div className="mx-auto max-w-6xl">
+            <h2 className="mb-3 text-2xl font-bold tracking-tight text-fg md:text-3xl">
+              Diagnostic Guides &amp; Industry Audits
+            </h2>
+            <p className="mb-8 max-w-2xl text-base text-fg-muted">
+              Explore step-by-step diagnostic sequences for common paid traffic conversion failures and industry-specific audit benchmarks.
+            </p>
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="rounded-xl border border-border bg-bg-muted/20 p-6">
+                <h3 className="mb-3 text-lg font-semibold text-fg">Conversion Leak Diagnostics</h3>
+                <ul className="space-y-2.5 text-sm text-fg-muted">
+                  <li>
+                    <Link href="/why-is-my-landing-page-not-converting" className="hover:text-accent transition-colors">
+                      Why Is My Landing Page Not Converting? &rarr;
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/ads-getting-clicks-but-no-sales" className="hover:text-accent transition-colors">
+                      Ads Getting Clicks But No Sales &rarr;
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/landing-page-message-match" className="hover:text-accent transition-colors">
+                      Ad to Landing Page Message Match &rarr;
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/landing-page-trust-signals" className="hover:text-accent transition-colors">
+                      Landing Page Trust Signals &amp; Credibility &rarr;
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/landing-page-cta-audit" className="hover:text-accent transition-colors">
+                      Landing Page CTA Audit &amp; Friction &rarr;
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/mobile-landing-page-audit" className="hover:text-accent transition-colors">
+                      Mobile Landing Page Audit &amp; Viewport Leaks &rarr;
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="rounded-xl border border-border bg-bg-muted/20 p-6">
+                <h3 className="mb-3 text-lg font-semibold text-fg">Industry-Specific Audits</h3>
+                <ul className="space-y-2.5 text-sm text-fg-muted">
+                  <li>
+                    <Link href="/saas-landing-page-audit" className="hover:text-accent transition-colors">
+                      SaaS Landing Page Audit (ICP, Demo &amp; Trial Friction) &rarr;
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/ecommerce-landing-page-audit" className="hover:text-accent transition-colors">
+                      Ecommerce Landing Page Audit (Product &amp; Price Clarity) &rarr;
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/lead-generation-landing-page-audit" className="hover:text-accent transition-colors">
+                      Lead Generation Landing Page Audit (Form Friction) &rarr;
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 9. Final CTA ── */}
         <section className="px-6 py-20 text-center">
           <div className="mx-auto max-w-xl">
             <h2 className="mb-3 text-2xl font-bold text-fg">
               Run the audit before you spend another dollar.
             </h2>
             <p className="mb-8 text-base text-fg-muted">
-              Free. No signup. See if the page is the leak - then you will know.
+              Free, no signup required. Discover observable conversion leaks on your page.
             </p>
             <Link
               href="/audit"

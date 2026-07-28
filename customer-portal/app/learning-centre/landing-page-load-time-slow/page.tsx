@@ -240,7 +240,7 @@ export default function LandingPageLoadTimeSlow() {
               >
                 pagespeed.web.dev
               </a>
-              . Enter your landing page URL. Takes 60 seconds. Run the mobile
+              . Enter your landing page URL. Takes under two minutes. Run the mobile
               test - not just desktop.
             </p>
           </section>
