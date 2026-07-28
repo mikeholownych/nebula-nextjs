@@ -2,6 +2,7 @@ import type { NextConfig } from 'next'
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
+import buildInfo from './app/lib/build-info.json'
 
 // Citable release governance: /resources/citable must answer with the sha256
 // of the vendored resource-data.json release projection so publisher-controlled
@@ -199,6 +200,10 @@ const nextConfig: NextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=0, must-revalidate, no-transform',
+          },
+          {
+            key: 'X-Nebula-Revision',
+            value: buildInfo.revision,
           },
         ],
       },

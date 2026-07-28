@@ -6,7 +6,7 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Landing Page Not Converting: Fix These 5 Leaks | Nebula',
   description:
-    'A landing page that does not convert paid traffic has at least one of five diagnosable leak patterns. Diagnose the right one before you change anything.',
+    'A landing page that does not convert paid traffic frequently exhibits observable friction across standard page signals. Diagnose structural friction before making redesign assumptions.',
   alternates: {
     canonical:
       'https://nebulacomponents.shop/learning-centre/landing-page-not-converting',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const articleSchema = createArticleSchema({
   headline: 'Landing Page Not Converting? Diagnose These 5 Leaks First',
   description:
-    'A landing page that does not convert paid traffic has at least one of five diagnosable leak patterns. Diagnose the right one before you change anything.',
+    'A landing page that does not convert paid traffic frequently exhibits observable friction across standard page signals. Diagnose structural friction before making redesign assumptions.',
   url: 'https://nebulacomponents.shop/learning-centre/landing-page-not-converting',
   publishedDate: '2026-07-16',
   modifiedDate: '2026-07-27',
@@ -29,7 +29,7 @@ const faqItems = [
     },
     {
       question: 'How do I know if my landing page conversion rate is actually low?',
-      answer: "WordStream's 2026 Google Ads Benchmarks report - analysing over 13,000 search advertising campaigns from April 2025 to March 2026 - found an all-industries average conversion rate of 8.18%, ranging from 2.64% in Finance and Insurance to 16.22% in Animals and Pets. These are search-campaign averages, not single-page rates, but they give a realistic floor for your vertical. If you are consistently below your vertical's lower bound with meaningful traffic (500+ sessions), that strongly indicates at least one of the five leak patterns is active.",
+      answer: "WordStream's 2026 Google Ads Benchmarks report - analysing over 13,000 search advertising campaigns from April 2025 to March 2026 - found an all-industries average conversion rate of 8.18%, ranging from 2.64% in Finance and Insurance to 16.22% in Animals and Pets. These are search-campaign averages, not single-page rates, but they give a realistic floor for your vertical. If you are consistently below your vertical's lower bound with meaningful traffic (500+ sessions), that suggests evaluating structural page friction as a candidate cause.",
     },
     {
       question: 'Should I A/B test my landing page before diagnosing the problem?',
@@ -70,10 +70,10 @@ export default function LandingPageNotConvertingPage() {
               Landing Page Not Converting? Diagnose These 5 Leaks First
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-muted">
-              A non-converting landing page has at least one of five diagnosable
-              leak patterns. Changing button colour will not fix a broken
-              promise. This article shows you how to find which leak is active
-              before you change anything.
+              A non-converting landing page frequently exhibits observable
+              friction across standard page signals. Changing button colour will not fix a broken
+              promise. This article shows you how to identify candidate friction points
+              before making redesign assumptions.
             </p>
           </div>
 

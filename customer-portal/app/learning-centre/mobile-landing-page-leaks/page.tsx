@@ -3,18 +3,18 @@ import Link from 'next/link'
 import { createArticleSchema } from '../../lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Mobile Landing Page Leaks That Kill Paid Traffic | Nebula Components',
+  title: 'Mobile Landing Page Leaks: 5 Structural Friction Points | Nebula',
   description:
-    'The majority of paid social traffic arrives on mobile. These five structural leaks silently drain ad budget - and a 5-minute phone audit will expose all of them.',
+    'The majority of paid social traffic arrives on mobile. These five structural leaks can increase bounce rate on mobile viewports. Diagnose them with a 5-minute inspection.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/learning-centre/mobile-landing-page-leaks',
   },
 }
 
 const articleSchema = createArticleSchema({
-  headline: 'Mobile Landing Page Leaks That Kill Paid Traffic',
+  headline: 'Mobile Landing Page Friction: 5 Structural Leaks to Fix',
   description:
-    'The majority of paid social traffic arrives on mobile. These five structural leaks silently drain ad budget - and a 5-minute phone audit will expose all of them.',
+    'The majority of paid social traffic arrives on mobile. These five structural leaks can increase bounce rate on mobile viewports. Diagnose them with a 5-minute inspection.',
   url: 'https://nebulacomponents.shop/learning-centre/mobile-landing-page-leaks',
   publishedDate: '2026-07-16',
   modifiedDate: '2026-07-21',

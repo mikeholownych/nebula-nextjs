@@ -29,7 +29,7 @@ const faqSchema = {
       name: 'Where does most paid traffic get lost before converting?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'The highest-volume leak in most paid traffic funnels is the landing page itself - specifically the first 5 seconds after arrival. If the landing page headline does not match the ad promise (message-match break), or if the page loads slowly on mobile, the visitor exits before engaging with any content. A secondary high-volume leak is the absence of proof before the CTA: the visitor reads the page but abandons because they have no evidence that the offer is credible. The first leak (arrival) is confirmed by bounce rate combined with low time-on-page. The second (trust) is confirmed by page engagement without form starts.',
+        text: 'The highest-volume leak in most paid traffic funnels is often the landing page itself - specifically the first 5 seconds after arrival. If the landing page headline does not match the ad promise (message-match break), or if the page loads slowly on mobile, the visitor exits before engaging with any content. A secondary high-volume leak is the absence of proof before the CTA: the visitor reads the page but abandons because they have no evidence that the offer is credible. High bounce rate combined with low time-on-page suggests an arrival leak, while page engagement without form starts suggests a trust or CTA leak.',
       },
     },
     {
@@ -37,7 +37,7 @@ const faqSchema = {
       name: 'What is the most common reason paid traffic does not convert?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Message-match break between the ad and the landing page is the most common root cause. The ad creates a specific expectation - a keyword, an offer, a tone - and the page does not fulfil it. The visitor arrives, scans the first screen, does not recognise the promise they clicked on, and leaves. This is confirmed when CTR on the ad is healthy (above 3-5% for search) but bounce rate on the landing page is above 70% with under 15 seconds time-on-page. The second most common cause is mobile load time: a visitor who abandons while the page is loading is recorded as a bounce before seeing anything.',
+        text: 'Message-match break between the ad and the landing page is a primary root cause. The ad creates a specific expectation - a keyword, an offer, a tone - and the page does not fulfil it. The visitor arrives, scans the first screen, does not recognise the promise they clicked on, and leaves. This is indicated when CTR on the ad is healthy (above 3-5% for search) but bounce rate on the landing page is above 70% with under 15 seconds time-on-page. Another frequent cause is mobile load time: a visitor who abandons while the page is loading is recorded as a bounce before seeing anything.',
       },
     },
     {
@@ -45,7 +45,7 @@ const faqSchema = {
       name: 'How do I identify which stage is leaking my paid traffic?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Work through the leak map in stage order, using analytics signals to confirm each: (1) Check ad CTR - if under 3% for high-intent search, the problem is the ad, not the page. (2) Check bounce rate and time-on-page for paid traffic - high bounce + under 15 seconds confirms message-match or load time failure. (3) Check mobile vs desktop conversion split - if mobile is 50%+ lower, the problem is mobile layout or mobile LCP. (4) Check form starts vs form submissions - if visitors are starting but not completing forms, the form is the leak. (5) Check checkout abandonment rate - if add-to-cart rate is healthy but purchase rate is low, the leak is at checkout (shipping reveal, trust, friction). The first stage that fails in sequence is the first fix.',
+        text: 'Work through the leak map in stage order, using analytics signals as candidate indicators: (1) Check ad CTR - if under 3% for high-intent search, the problem is likely the ad, not the page. (2) Check bounce rate and time-on-page for paid traffic - high bounce + under 15 seconds suggests message-match or load time failure. (3) Check mobile vs desktop conversion split - if mobile is 50%+ lower, evaluate mobile layout or mobile LCP. (4) Check form starts vs form submissions - if visitors start but do not complete forms, form friction is indicated. (5) Check checkout abandonment rate - if add-to-cart rate is healthy but purchase rate is low, evaluate checkout friction. Use the earliest failing stage to prioritize testing.',
       },
     },
     {
@@ -73,11 +73,11 @@ const LEAKS = [
     title: 'Message-Match Break',
     signal: 'Healthy CTR on the ad, high bounce rate on the page (above 70%), under 15 seconds time-on-page',
     description:
-      'The ad creates a specific expectation - a keyword, an offer, a tone - and the landing page does not fulfil it. The visitor scans the first screen, does not recognise what they clicked on, and leaves before processing any content. This is the highest-volume leak in most paid funnels because it affects every ad group pointing to a generic page.',
+      'The ad creates a specific expectation - a keyword, an offer, a tone - and the landing page does not fulfil it. The visitor scans the first screen, does not recognise what they clicked on, and leaves before processing any content. This is a high-volume leak in many paid funnels because it affects every ad group pointing to a generic page.',
     why: "Google's Quality Score algorithm uses message match as a signal for Landing Page Experience. A poor match raises your effective CPC in the ad auction - meaning you pay a premium per click to drive traffic to a page that then fails immediately. The leak costs twice: once in wasted clicks, once in higher cost per click.",
     fix: 'Mirror the exact noun phrase from your top-traffic ad groups in the page H1. If the ad is targeting "landing page audit tool" and the H1 says "Transform Your Marketing," the visitor cannot confirm they are in the right place. Change the H1 to echo the keyword - exactly or semantically. Do this for every major ad group separately if volume justifies it.',
     relatedHref: '/learning-centre/message-match-checklist',
-    relatedLabel: 'Run the 60-second message-match audit →',
+    relatedLabel: 'Run the message-match audit →',
   },
   {
     stage: 'Landing Page Load',
