@@ -38,13 +38,13 @@ const PATTERNS = [
   {
     label: 'Second most common',
     heading: 'CTA you cannot see',
-    body: 'Green button on green background. Not a traffic problem - a visibility problem that A/B testing will not find.',
+    body: 'Low CTA contrast can make the primary action harder to identify when visitors arrive from paid ads.',
     dominant: false,
   },
   {
     label: 'Third most common',
     heading: 'No proof above the fold',
-    body: 'Strangers do not trust strangers. Without social proof in the first scroll, the bounce is silent and final.',
+    body: 'Missing proof before a high-commitment action can increase perceived risk for cold traffic.',
     dominant: false,
   },
 ]
@@ -165,8 +165,8 @@ export default function Home() {
             </div>
 
             <p className="mt-8 max-w-xl text-sm text-fg-muted">
-              Agencies A/B test these for 90 days. That is not optimization - it is billing you to confirm the page is broken.{' '}
-              <strong className="text-fg">Fix the page first. Then test.</strong>
+              Running multi-week traffic experiments on obvious page-level friction can waste ad budget.{' '}
+              <strong className="text-fg">Fix structural friction first. Then test.</strong>
             </p>
           </div>
         </section>

@@ -1,4 +1,4 @@
-export const HOMEPAGE_SEO_TITLE = 'Landing Page Audit: Paid Traffic Not Converting | Nebula'
+export const HOMEPAGE_SEO_TITLE = 'Landing Page Audit for Paid Traffic Not Converting | Nebula'
 
 export const HOMEPAGE_DESCRIPTION =
   'Find conversion leaks wasting paid traffic. Run a free evidence-backed landing page audit to identify friction across message match, trust, mobile, and speed.'

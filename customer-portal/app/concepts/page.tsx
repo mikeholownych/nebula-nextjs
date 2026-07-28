@@ -26,15 +26,15 @@ const concepts = [
     id: 'message-match-audit',
     name: 'Message-Match Audit',
     definition: 'Diagnostic process that verifies whether landing page headline matches the ad promise that drove the visitor.',
-    keyPrinciple: 'When ad promise ≠ landing page headline, conversion drops 40-60%.',
+    keyPrinciple: 'A mismatch between the ad promise and landing-page message introduces a plausible abandonment point. The effect must be measured against actual campaign and conversion data.',
     example: 'Ad: "Get more leads" → Landing Page: "CRM for Sales Teams" (mismatch). Should be: "Get more leads for your sales team."',
     source: 'https://nebulacomponents.shop/learning-centre/message-match-checklist',
   },
   {
     id: 'seven-point-diagnosis',
     name: '7-Point Landing Page Diagnosis',
-    definition: "Nebula's proprietary audit framework identifying the 7 most common landing page conversion killers.",
-    keyPrinciple: '90% of landing page problems fall into 7 categories: message match, CTA clarity, proof placement, mobile experience, load speed, form friction, and trust signals.',
+    definition: "Nebula's audit framework evaluating seven structural landing page condition categories.",
+    keyPrinciple: 'Nebula groups the page-level conditions it evaluates into seven diagnostic categories: message match, CTA clarity, proof placement, mobile experience, load speed, form friction, and trust signals.',
     example: 'Audit score of 6.2/10 indicates specific failures in message match (3/10) and CTA clarity (5/10).',
     points: [
       'Message Match (Ad → Landing Page alignment)',

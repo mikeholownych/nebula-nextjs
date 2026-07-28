@@ -232,6 +232,44 @@ export default function AuditPage() {
           </div>
         </section>
 
+        {/* ── 3c. Audit Privacy, Inspection & Data Handling Boundaries ── */}
+        <section className="border-t border-border bg-bg-muted/10 px-6 py-14">
+          <div className="mx-auto max-w-4xl">
+            <h2 className="mb-4 text-2xl font-bold tracking-tight text-fg md:text-3xl">
+              Audit Data Handling &amp; Inspection Boundaries
+            </h2>
+            <p className="mb-6 text-sm leading-relaxed text-fg-muted">
+              We operate under strict inspection boundaries so you know exactly how data is evaluated and processed when you submit a landing page URL:
+            </p>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="rounded-xl border border-border bg-bg-muted/20 p-5">
+                <h3 className="mb-2 font-semibold text-fg text-sm">URL Retention &amp; Result Privacy</h3>
+                <p className="text-xs text-fg-muted leading-relaxed">
+                  Submitted URLs are retained to run the audit and generate your report. Audit findings are accessible via your unique session URL; they are not listed in a public directory or sold to third parties.
+                </p>
+              </div>
+              <div className="rounded-xl border border-border bg-bg-muted/20 p-5">
+                <h3 className="mb-2 font-semibold text-fg text-sm">Page Captures &amp; Render Evaluation</h3>
+                <p className="text-xs text-fg-muted leading-relaxed">
+                  The scanner fetches public HTML/CSS assets to evaluate DOM elements and layout. Screenshots and page captures are generated transiently during analysis for layout and contrast measurement.
+                </p>
+              </div>
+              <div className="rounded-xl border border-border bg-bg-muted/20 p-5">
+                <h3 className="mb-2 font-semibold text-fg text-sm">JavaScript &amp; Mobile Heuristics</h3>
+                <p className="text-xs text-fg-muted leading-relaxed">
+                  The audit evaluates client-rendered DOM structures and simulates a 375px mobile viewport heuristic to measure element visibility, contrast, and above-fold button positioning.
+                </p>
+              </div>
+              <div className="rounded-xl border border-border bg-bg-muted/20 p-5">
+                <h3 className="mb-2 font-semibold text-fg text-sm">Form &amp; AI Provider Scope</h3>
+                <p className="text-xs text-fg-muted leading-relaxed">
+                  The audit inspects visible form fields and labels, but never submits forms, enters data, or traverses checkout flows. Extracted text signals are processed securely to generate findings without training third-party AI models.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ── 4. After the audit: repair sprint ── */}
         <section className="border-t border-border px-6 py-14">
           <div className="mx-auto max-w-6xl grid gap-10 md:grid-cols-2 md:items-start">

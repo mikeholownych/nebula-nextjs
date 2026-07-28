@@ -53,7 +53,7 @@ export default function MessageMatchChecklistPage() {
               Every paid click carries a contract: the ad made a promise, and the landing page must honour it
               word-for-word, offer-for-offer, tone-for-tone. When that chain breaks, bounce rates spike
               and conversion data becomes meaningless noise. This checklist lets you audit the chain in
-              under 60 seconds.
+              under 2 minutes.
             </p>
           </div>
 
@@ -165,7 +165,7 @@ export default function MessageMatchChecklistPage() {
               </li>
             </ol>
             <p className="mt-6 leading-relaxed text-fg-muted">
-              Total time: under 60 seconds. If you fail any comparison, you have a confirmed message match
+              Total time: under 2 minutes. If you fail any comparison, you have a confirmed message match
               break. Fix the page before spending another dollar on the ad.
             </p>
           </section>
