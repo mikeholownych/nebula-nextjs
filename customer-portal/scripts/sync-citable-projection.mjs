@@ -17,9 +17,16 @@ function read(file) {
 function npmPackageDir() {
   if (suppliedPackageDir) return { dir: suppliedPackageDir, cleanup: () => {} }
   const dir = mkdtempSync(join(tmpdir(), 'nebula-citable-projection-'))
-  const packed = JSON.parse(execFileSync('npm', [
+  const packResult = JSON.parse(execFileSync('npm', [
     'pack', '@nebulacomponents/citable@latest', '--json', '--pack-destination', dir,
-  ], { encoding: 'utf8' }))[0]
+  ], { encoding: 'utf8' }))
+  // `npm pack --json` output shape has varied across npm versions: an array
+  // of pack entries on older npm, an object keyed by package name on newer
+  // npm (observed on npm 12.0.1). Normalize both to a single entry.
+  const packed = Array.isArray(packResult) ? packResult[0] : Object.values(packResult)[0]
+  if (!packed || !packed.filename) {
+    throw new Error(`npm pack --json returned an unexpected shape: ${JSON.stringify(packResult)}`)
+  }
   execFileSync('tar', ['-xzf', join(dir, packed.filename), '-C', dir])
   return { dir: join(dir, 'package'), cleanup: () => rmSync(dir, { recursive: true, force: true }) }
 }
