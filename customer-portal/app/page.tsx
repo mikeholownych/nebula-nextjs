@@ -32,7 +32,7 @@ const PATTERNS = [
   {
     label: 'Most common',
     heading: 'Pricing behind the email gate',
-    body: 'Asking for a commitment before delivering value. The visitor has not decided yet. You have already lost them.',
+    body: 'Asking for commitment before demonstrating value. The visitor has not decided yet; requiring commitment too early can increase abandonment.',
     dominant: true,
   },
   {

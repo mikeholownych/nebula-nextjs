@@ -30,7 +30,9 @@ export async function GET() {
   const info = getBuildInfo()
   return NextResponse.json(info, {
     headers: {
-      'Cache-Control': 'public, max-age=3600',
+      'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
+      'CDN-Cache-Control': 'no-store',
+      'Cloudflare-CDN-Cache-Control': 'no-store',
       'X-Nebula-Revision': info.revision,
     },
   })

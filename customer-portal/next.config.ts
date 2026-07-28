@@ -328,6 +328,17 @@ const nextConfig: NextConfig = {
           { key: 'Access-Control-Allow-Origin', value: '*' },
         ],
       },
+      // /api/build-info — immutable deployment attestation
+      {
+        source: '/api/build-info',
+        headers: [
+          { key: 'Content-Type', value: 'application/json' },
+          { key: 'Cache-Control', value: 'no-store, no-cache, must-revalidate, max-age=0' },
+          { key: 'CDN-Cache-Control', value: 'no-store' },
+          { key: 'Cloudflare-CDN-Cache-Control', value: 'no-store' },
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+        ],
+      },
       // /.well-known/openid-configuration
       {
         source: '/.well-known/openid-configuration',

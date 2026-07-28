@@ -2,15 +2,17 @@
 
 ---
 
-**Title:** Validating a landing page audit tool by running it free for anyone running ads. Where does this break?
+**Title:** I built a landing page audit tool. Instead of gating it behind an email form, I'm testing a "preview first, unlock later" model. Where does this break?
 
 **Body:**
 
 Software developer, been building conversion optimization tools for a while. The problem I picked: founders spending money on ads without knowing if the landing page is the leak.
 
+**Full disclosure:** I built this tool. I'm not pretending to be an unbiased reviewer. What I'm actually looking for: honest feedback on whether the "preview first" model creates value or just feels like a longer sales funnel.
+
 Instead of building a gated lead-gen tool, the approach is different:
 
-**Run the audit. See the preview immediately. Email unlocks the full details.**
+**Run the audit. See the preview immediately. Email unlocks the implementation details.**
 
 - Paste any public URL
 - Get 7 signals scored against your actual page (preview loads instantly)
@@ -97,6 +99,8 @@ Not looking for validation. Looking for signal on whether this architecture is u
 
 **URL:** nebulacomponents.shop/audit (no affiliate, no tracking beyond standard analytics)
 
+**Note:** I'll post the link in a comment after posting this, to avoid Reddit's spam filters on new accounts with self-promotional links.
+
 Happy to answer questions about implementation, tech stack, or how I'm approaching the pricing model if anyone's building something similar.
 
 ---
@@ -163,6 +167,16 @@ What am I missing?
 - **Catapulting copy** — some founders will roast your copy. That's fine. Let them. Your positioning is defensible.
 
 - "Why free?" — be ready to explain: free builds trust, shows competence, earns the $97 repair sprint if it works.
+
+---
+
+## After Posting: Comment Script
+
+**First comment (post immediately after):**
+
+> Link: nebulacomponents.shop/audit
+>
+> Try it on your own landing page. If the preview shows you something useful, tell me. If it doesn't, tell me that too.
 
 ### Comment response templates (copy these):
 

@@ -6,7 +6,7 @@ export const HOMEPAGE_DESCRIPTION =
 export const PAID_TRAFFIC_DIAGNOSTIC = [
   {
     heading: 'A click is not the finish line.',
-    body: 'An ad click proves that the message, audience, and creative created enough interest for someone to investigate. The landing page must carry that interest forward. If the page changes the promise, hides the next step, loads slowly, or asks for trust before earning it, the visitor leaves and the ad gets blamed. That is why buying more traffic before checking the page can make the loss larger without revealing the cause.',
+    body: 'An ad click proves that the message, audience, and creative created enough interest for someone to investigate. The landing page either preserves that interest or introduces additional friction. If the page changes the promise, hides the next step, loads slowly, or asks for trust before earning it, visitors are more likely to abandon and the ad gets blamed. That is why buying more traffic before checking the page can make the loss larger without revealing the cause.',
   },
   {
     heading: 'The audit follows the visitor’s decision.',

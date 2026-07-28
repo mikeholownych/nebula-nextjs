@@ -55,18 +55,13 @@ for target in "$LOCAL_URL" "$PUBLIC_URL"; do
   printf 'PASS: %s returned HTTP 200\n' "$target"
 done
 
-# A 200 on the page itself does not mean its assets loaded — the 2026-07-26
-# incident (running server process serving a stale build's HTML, which still
-# referenced a since-deleted static chunk hash) had every page return 200
-# while every linked stylesheet 500'd or 404'd. Confirm the homepage's own
-# stylesheet link actually resolves, on both the local origin and the public
-# edge, so that specific failure mode can't hide behind a healthy page-level check again.
+# Verify stylesheet assets resolve on origin and edge
 for target in "$LOCAL_URL" "$PUBLIC_URL"; do
   html=$(curl -fsS --max-time 15 "$target")
   css_path=$(printf '%s' "$html" | grep -oE 'href="/_next/static/chunks/[a-zA-Z0-9._-]*\.css"' | head -1 | sed -E 's/href="(.*)"/\1/')
   [[ -n "$css_path" ]] || { printf 'FAIL: %s has no /_next/static/*.css stylesheet link in its HTML\n' "$target" >&2; exit 1; }
   origin="${target%/}"
-  asset_url="${origin%/*}"  # strip trailing path, keep scheme+host
+  asset_url="${origin%/*}"
   [[ "$target" == "$LOCAL_URL" ]] && asset_url="http://127.0.0.1:3000"
   [[ "$target" == "$PUBLIC_URL" ]] && asset_url="https://nebulacomponents.shop"
   code=$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 15 "${asset_url}${css_path}")
@@ -74,13 +69,38 @@ for target in "$LOCAL_URL" "$PUBLIC_URL"; do
   printf 'PASS: %s stylesheet %s returned HTTP 200\n' "$target" "$css_path"
 done
 
-# Verify deployed build revision matches repository HEAD
+# Verify build-info SHA assertion against repository HEAD on BOTH Origin and Edge
 expected_sha=$(git -C /home/mike/nebula/customer-portal rev-parse HEAD 2>/dev/null || true)
 if [[ -n "$expected_sha" && "$expected_sha" =~ ^[a-f0-9]{40}$ ]]; then
-  deployed_sha=$(curl -fsS --max-time 5 http://127.0.0.1:3000/api/build-info | grep -oE '"revision":"[a-f0-9]{40}"' | cut -d'"' -f4 || true)
-  [[ "$deployed_sha" == "$expected_sha" ]] || {
-    printf 'FAIL: deployed SHA %s does not match repository HEAD %s\n' "${deployed_sha:-<none>}" "$expected_sha" >&2
+  origin_sha=$(curl -fsS --max-time 5 http://127.0.0.1:3000/api/build-info | grep -oE '"revision":"[a-f0-9]{40}"' | cut -d'"' -f4 || true)
+  [[ "$origin_sha" == "$expected_sha" ]] || {
+    printf 'FAIL: origin SHA %s does not match repository HEAD %s\n' "${origin_sha:-<none>}" "$expected_sha" >&2
     exit 1
   }
-  printf 'PASS: deployed SHA %s matches repository HEAD\n' "$deployed_sha"
+  printf 'PASS: origin SHA %s matches repository HEAD\n' "$origin_sha"
+
+  # Public edge check across user agents
+  for agent in 'Mozilla/5.0' 'Googlebot' 'bingbot' 'curl/8.0'; do
+    edge_sha=$(curl -fsS -A "$agent" -H 'Cache-Control: no-cache' --max-time 10 "https://nebulacomponents.shop/api/build-info" | grep -oE '"revision":"[a-f0-9]{40}"' | cut -d'"' -f4 || true)
+    [[ "$edge_sha" == "$expected_sha" ]] || {
+      printf 'FAIL: public edge SHA %s for UA "%s" does not match expected SHA %s\n' "${edge_sha:-<none>}" "$agent" "$expected_sha" >&2
+      exit 1
+    }
+  done
+  printf 'PASS: public edge SHA %s matches repository HEAD across User-Agent profiles\n' "$expected_sha"
 fi
+
+# Verify Edge Content Marker Assertions
+concepts_html=$(curl -fsS -H 'Cache-Control: no-cache' https://nebulacomponents.shop/concepts || true)
+if grep -Eq '40.?60%|90% of landing page problems' <<< "$concepts_html"; then
+  printf 'FAIL: stale or prohibited copy detected on public /concepts\n' >&2
+  exit 1
+fi
+printf 'PASS: public /concepts verified free of prohibited claims\n'
+
+audit_html=$(curl -fsS -H 'Cache-Control: no-cache' https://nebulacomponents.shop/audit || true)
+if ! grep -Fq 'Audit Data Handling' <<< "$audit_html"; then
+  printf 'FAIL: Audit Data Handling section missing from public /audit\n' >&2
+  exit 1
+fi
+printf 'PASS: public /audit verified containing inspection boundaries disclosure\n'
