@@ -10,10 +10,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary: 'bg-accent text-bg font-semibold hover:bg-accent-light transition-colors',
-  secondary: 'bg-bg-panel text-fg border border-border hover:border-accent transition-colors',
-  outline: 'border border-accent text-accent hover:bg-accent-dim transition-colors',
-  ghost: 'text-fg-muted hover:text-fg transition-colors',
+  primary: 'bg-accent text-bg font-semibold hover:bg-accent-light',
+  secondary: 'bg-bg-panel text-fg border border-border hover:border-accent',
+  outline: 'border border-accent text-accent hover:bg-accent-dim',
+  ghost: 'text-fg-muted hover:text-fg',
 }
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -29,6 +29,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         className={`
           inline-flex items-center justify-center gap-2
+          transition-[color,background-color,border-color,transform] duration-[160ms] ease-out
+          active:scale-[0.97]
           ${variantStyles[variant]}
           ${sizeStyles[size]}
           ${disabled || isLoading ? 'opacity-50 cursor-not-allowed' : ''}

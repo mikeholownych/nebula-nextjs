@@ -107,14 +107,19 @@ function AuditFormContent() {
         <button
           type="submit"
           disabled={!url || loading}
-          className="w-full rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light disabled:opacity-50"
+          className="w-full rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-[color,background-color,transform] duration-[160ms] ease-out hover:bg-accent-light active:scale-[0.97] disabled:opacity-50"
         >
           {loading ? 'Starting audit…' : 'Find the Leak'}
         </button>
 
-        {error && (
-          <p className="text-sm text-danger text-center" role="alert">{error}</p>
-        )}
+        <div className={`grid overflow-hidden transition-[grid-template-rows] duration-200 ease-out ${error ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+          <p
+            className={`min-h-0 text-sm text-danger text-center transition-opacity duration-150 ease-out ${error ? 'opacity-100' : 'opacity-0'}`}
+            role={error ? 'alert' : undefined}
+          >
+            {error}
+          </p>
+        </div>
       </form>
     </Card>
   )

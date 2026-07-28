@@ -778,14 +778,18 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                             {finding.evidence.confidence}
                           </span>
                         </summary>
-                        <div className="mt-2 rounded-lg border border-border bg-bg p-4 font-mono text-xs leading-relaxed text-fg-muted space-y-2">
-                          <div><span className="text-fg-muted">measured  </span><span className="text-fg">{finding.evidence.measured}</span></div>
-                          <div><span className="text-fg-muted">required  </span><span className="text-fg">{finding.evidence.required}</span></div>
-                          <div><span className="text-fg-muted">delta     </span><span className="text-accent">{finding.evidence.delta}</span></div>
-                          {finding.evidence.selector !== 'N/A' && (
-                            <div><span className="text-fg-muted">selector  </span><code className="text-fg-muted">{finding.evidence.selector}</code></div>
-                          )}
-                          <div className="pt-1 border-t border-border/50 text-fg-muted text-xs">{finding.evidence.timestamp}</div>
+                        <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-200 ease-out group-open:grid-rows-[1fr]">
+                          <div className="overflow-hidden">
+                            <div className="mt-2 rounded-lg border border-border bg-bg p-4 font-mono text-xs leading-relaxed text-fg-muted space-y-2">
+                              <div><span className="text-fg-muted">measured  </span><span className="text-fg">{finding.evidence.measured}</span></div>
+                              <div><span className="text-fg-muted">required  </span><span className="text-fg">{finding.evidence.required}</span></div>
+                              <div><span className="text-fg-muted">delta     </span><span className="text-accent">{finding.evidence.delta}</span></div>
+                              {finding.evidence.selector !== 'N/A' && (
+                                <div><span className="text-fg-muted">selector  </span><code className="text-fg-muted">{finding.evidence.selector}</code></div>
+                              )}
+                              <div className="pt-1 border-t border-border/50 text-fg-muted text-xs">{finding.evidence.timestamp}</div>
+                            </div>
+                          </div>
                         </div>
                       </details>
                     )}

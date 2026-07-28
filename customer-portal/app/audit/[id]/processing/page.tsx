@@ -131,8 +131,8 @@ export default function ProcessingPage() {
         )}
 
         {status === 'ready' && (
-          <Card variant="elevated" className="vt-audit-card text-center">
-            <div className="mb-4 text-5xl">✓</div>
+          <Card variant="elevated" className="vt-audit-card finding-reveal text-center">
+            <div className="mb-4 text-5xl finding-reveal" style={{ animationDelay: '120ms' }}>✓</div>
             <h1 className="mb-2 text-2xl font-bold text-fg">
               Your Audit Is Ready
             </h1>

@@ -58,7 +58,13 @@ export const CONSENT_RUNTIME = String.raw`
         timestamp: new Date().toISOString()
       };
       localStorage.setItem(key, JSON.stringify(state));
-      banner.hidden = true;
+      banner.classList.add('consent-dismissing');
+      var hide = function () { banner.hidden = true; };
+      // transitionend gives the fast path; the timeout is a backstop so the
+      // banner can never get stuck visible-but-dismissed if the transition
+      // doesn't fire (e.g. the element is display:none for some other reason).
+      banner.addEventListener('transitionend', hide, { once: true });
+      setTimeout(hide, 350);
       if (level === 'all') loadAnalytics();
       if (window.gtag && level === 'necessary') {
         window.gtag('consent', 'update', {
@@ -99,7 +105,7 @@ export default function CookieConsent() {
         role="dialog"
         aria-labelledby="cookie-banner-title"
         aria-describedby="cookie-banner-description"
-        className="fixed bottom-0 left-0 right-0 z-50 border-t border-emerald-500/20 bg-[#0a0a0a] p-4 md:p-6"
+        className="fixed bottom-0 left-0 right-0 z-50 translate-y-0 border-t border-emerald-500/20 bg-[#0a0a0a] p-4 opacity-100 transition-[opacity,transform] duration-300 ease-out [&.consent-dismissing]:translate-y-full [&.consent-dismissing]:opacity-0 md:p-6"
       >
         <div className="mx-auto max-w-5xl">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-8">

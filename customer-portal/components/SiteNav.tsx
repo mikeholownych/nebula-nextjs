@@ -53,7 +53,7 @@ export default function SiteNav() {
               <path d="M4 7h16M4 12h16M4 17h16" />
             </svg>
           </summary>
-          <div className="absolute right-0 top-[calc(100%+1rem)] flex w-56 flex-col gap-1 rounded-xl border border-border bg-bg px-5 py-4 shadow-lg">
+          <div className="invisible absolute right-0 top-[calc(100%+1rem)] flex w-56 origin-top-right -translate-y-1 scale-95 flex-col gap-1 rounded-xl border border-border bg-bg px-5 py-4 opacity-0 shadow-lg transition-[opacity,transform,visibility] duration-200 ease-out group-open:visible group-open:translate-y-0 group-open:scale-100 group-open:opacity-100">
             <NavigationLinks mobile />
           </div>
         </details>
