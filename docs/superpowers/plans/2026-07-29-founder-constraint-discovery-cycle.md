@@ -116,6 +116,14 @@ def test_validate_case_accepts_complete_deidentified_record():
     validate_case(valid_case())
 
 
+def test_validate_case_rejects_reserved_template_id():
+    record = valid_case()
+    record["case_id"] = "fc-000"
+
+    with pytest.raises(CaseValidationError, match="reserved"):
+        validate_case(record)
+
+
 @pytest.mark.parametrize("forbidden", ["name", "email", "phone", "company_name"])
 def test_validate_case_rejects_direct_identifiers_anywhere(forbidden):
     record = valid_case()
@@ -125,12 +133,13 @@ def test_validate_case_rejects_direct_identifiers_anywhere(forbidden):
         validate_case(record)
 
 
-def test_validate_case_requires_real_decision_evidence():
+def test_validate_case_preserves_absence_of_evidence_and_alternatives():
     record = valid_case()
+    record["decision"]["alternatives_considered"] = []
     record["decision"]["evidence_used"] = []
+    record["decision"]["evidence_available_not_used"] = []
 
-    with pytest.raises(CaseValidationError, match="evidence_used"):
-        validate_case(record)
+    validate_case(record)
 
 
 def test_validate_case_restricts_confidence_to_five_point_scale():
@@ -231,10 +240,10 @@ def _require_nonempty_string(container: dict, key: str, path: str) -> None:
 
 def _require_string_list(container: dict, key: str, path: str) -> None:
     value = container.get(key)
-    if not isinstance(value, list) or not value or not all(
+    if not isinstance(value, list) or not all(
         isinstance(item, str) and item.strip() for item in value
     ):
-        raise CaseValidationError(f"{path}.{key} must be a non-empty string list")
+        raise CaseValidationError(f"{path}.{key} must be a string list")
 
 
 def validate_case(record: dict) -> None:
@@ -251,6 +260,8 @@ def validate_case(record: dict) -> None:
         raise CaseValidationError("schema_version must equal 1")
     if not CASE_ID.fullmatch(str(record.get("case_id", ""))):
         raise CaseValidationError("case_id must match fc-NNN")
+    if record["case_id"] == "fc-000":
+        raise CaseValidationError("case_id fc-000 is reserved for the template")
     if not ISO_UTC.fullmatch(str(record.get("interviewed_at", ""))):
         raise CaseValidationError("interviewed_at must be UTC YYYY-MM-DDTHH:MM:SSZ")
 
@@ -419,7 +430,7 @@ Run:
 pytest -q tests/test_constraint_research.py
 ```
 
-Expected: `8 passed`.
+Expected: `9 passed`.
 
 - [ ] **Step 7: Commit the record contract**
 
@@ -658,7 +669,7 @@ Run:
 pytest -q tests/test_constraint_research.py
 ```
 
-Expected: `10 passed`.
+Expected: `11 passed`.
 
 - [ ] **Step 6: Commit the research operations kit**
 
@@ -995,7 +1006,7 @@ Run:
 pytest -q tests/test_constraint_research.py
 ```
 
-Expected: `12 passed`.
+Expected: `13 passed`.
 
 - [ ] **Step 7: Exercise the CLI with synthetic records outside the repository**
 
@@ -1234,7 +1245,7 @@ git diff --check
 
 Expected:
 
-- `12 passed`;
+- `13 passed`;
 - between 10 and 15 cases validated;
 - the private directory is ignored; and
 - `git diff --check` produces no output.
