@@ -40,7 +40,10 @@ export const CONSENT_RUNTIME = String.raw`
           api_host: '/ingest',
           ui_host: 'https://us.posthog.com',
           defaults: '2026-01-30',
-          capture_exceptions: true
+          capture_exceptions: true,
+          capture_pageleave: true,
+          capture_dead_clicks: true,
+          person_profiles: 'identified_only'
         });
       }, { once: true });
       document.head.appendChild(script);
