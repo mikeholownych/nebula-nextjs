@@ -10,7 +10,11 @@ assert_state() {
   local unit=$1 expected_enabled=$2 expected_active=$3
   local enabled active
   enabled=$(systemctl is-enabled "$unit" 2>/dev/null || true)
-  active=$(systemctl is-active "$unit" 2>/dev/null || true)
+  for i in $(seq 1 10); do
+    active=$(systemctl is-active "$unit" 2>/dev/null || true)
+    [[ "$active" == "$expected_active" ]] && break
+    sleep 1
+  done
   [[ "$enabled" == "$expected_enabled" ]] || {
     printf 'FAIL: %s enabled=%s expected=%s\n' "$unit" "$enabled" "$expected_enabled" >&2
     exit 1
