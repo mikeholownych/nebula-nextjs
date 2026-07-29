@@ -35,6 +35,8 @@ function citableProjectionHash(): string | null {
 const nextConfig: NextConfig = {
   // Skip TypeScript check during build — run `npm run typecheck` as a separate gate
   typescript: { ignoreBuildErrors: true },
+  // Generate source maps for upload to PostHog error tracking (deleted post-upload by scripts/upload-sourcemaps.mjs)
+  productionBrowserSourceMaps: true,
   // Explicit workspace root to silence Turbopack lockfile ambiguity warning
   turbopack: { root: __dirname },
   // Required to support PostHog trailing-slash API requests through the /ingest proxy

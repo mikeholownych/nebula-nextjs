@@ -45,6 +45,7 @@ jest.mock('@/app/lib/posthog-server', () => ({
     capture: captureMock,
     flush,
   }),
+  captureServerException: jest.fn(),
 }))
 
 function makeSession(overrides: Record<string, unknown> = {}) {

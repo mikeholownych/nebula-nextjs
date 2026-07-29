@@ -3,7 +3,7 @@ import Stripe from 'stripe'
 import { execFile } from 'child_process'
 import { promisify } from 'util'
 import type { PoolClient } from 'pg'
-import { getPostHogClient } from '@/app/lib/posthog-server'
+import { getPostHogClient, captureServerException } from '@/app/lib/posthog-server'
 import { pool } from '@/app/lib/db'
 import { isCanonicalFixPackReceipt, getActiveFixPack } from '@/app/lib/public-facts'
 
@@ -207,6 +207,7 @@ export async function POST(request: NextRequest) {
       alreadyDelivered = statusResult.rows[0]?.fulfillment_status === 'delivered'
     } catch (err) {
       console.error('Failed to persist purchase — will let Stripe retry:', err)
+      captureServerException(err, { route: 'POST /api/webhooks/stripe', properties: { stripe_session_id: session.id } })
       return NextResponse.json({ error: 'Failed to record purchase' }, { status: 500 })
     }
 
@@ -254,6 +255,7 @@ export async function POST(request: NextRequest) {
         await deliverPromptPack(auditId, customerEmail, session.id)
       } catch (err) {
         console.error('Legacy delivery fulfillment failed:', err)
+        captureServerException(err, { route: 'POST /api/webhooks/stripe', properties: { stripe_session_id: session.id, phase: 'fulfillment' } })
         if (client && locked) {
           await restoreFailedFulfillment(client, session.id)
         }

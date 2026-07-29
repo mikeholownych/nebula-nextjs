@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getPostHogClient } from '@/app/lib/posthog-server'
+import { getPostHogClient, captureServerException } from '@/app/lib/posthog-server'
 import { assertPublicHttpUrl } from '@/app/lib/ssrf-guard'
 
 /**
@@ -123,6 +123,7 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Audit start error:', error)
+    captureServerException(error, { route: 'POST /api/audit/start' })
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

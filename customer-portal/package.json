@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --port 3000",
-    "build": "node scripts/generate-build-info.mjs && next build",
+    "build": "node scripts/generate-build-info.mjs && next build && node scripts/upload-sourcemaps.mjs",
     "start": "next start --port 3000",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",

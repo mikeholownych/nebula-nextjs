@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getPostHogClient } from '@/app/lib/posthog-server'
+import { getPostHogClient, captureServerException } from '@/app/lib/posthog-server'
 import { signAuditUnlock } from '@/app/lib/audit-unlock-token'
 
 /**
@@ -111,6 +111,7 @@ export async function POST(request: NextRequest) {
     return response
   } catch (error) {
     console.error('Audit unlock error:', error)
+    captureServerException(error, { route: 'POST /api/audit/unlock' })
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

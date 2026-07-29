@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getPostHogClient } from '@/app/lib/posthog-server'
+import { getPostHogClient, captureServerException } from '@/app/lib/posthog-server'
 import { getActiveFixPack } from '@/app/lib/public-facts'
 import { readAuditUnlock } from '@/app/lib/audit-unlock-token'
 import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
@@ -146,6 +146,7 @@ export async function POST(request: NextRequest) {
     session = await response.json()
   } catch (error) {
     console.error('[Checkout API] Stripe provider request failed:', error)
+    captureServerException(error, { route: 'POST /api/checkout' })
     return NextResponse.json({ code: 'CHECKOUT_PROVIDER_ERROR' }, { status: 502 })
   }
 

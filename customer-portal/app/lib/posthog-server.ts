@@ -14,3 +14,21 @@ export function getPostHogClient(): PostHog {
     flushInterval: 0,
   })
 }
+
+export function captureServerException(
+  error: unknown,
+  context?: { route?: string; distinctId?: string; properties?: Record<string, unknown> },
+): void {
+  try {
+    const ph = getPostHogClient()
+    const err = error instanceof Error ? error : new Error(String(error))
+    ph.captureException(err, context?.distinctId ?? 'server', {
+      $exception_source: 'server',
+      route: context?.route,
+      ...context?.properties,
+    })
+    void ph.flush().catch(() => undefined)
+  } catch {
+    // Never let analytics break the response path
+  }
+}

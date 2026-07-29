@@ -1,8 +1,13 @@
 'use client'
 
+import { useEffect } from 'react'
 import Link from 'next/link'
+import posthog from '@/app/lib/posthog-browser'
 
-export default function ErrorPage({ reset }: { error: Error; reset: () => void }) {
+export default function ErrorPage({ error, reset }: { error: Error; reset: () => void }) {
+  useEffect(() => {
+    posthog.captureException(error)
+  }, [error])
   return (
     <main className="min-h-screen bg-bg px-6 py-24 text-fg">
       <div className="mx-auto max-w-xl text-center">
