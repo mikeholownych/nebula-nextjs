@@ -44,6 +44,30 @@ const faqSchema = {
         text: "Value-first structure: (1) Hero - specific value proposition with one trust signal (G2 badge, logo, outcome stat). (2) Problem statement - show understanding of the specific pain, not a generic industry problem. (3) Solution overview - how you solve it differently, not a feature list. (4) Case studies - real outcomes with numbers from companies similar to the visitor. (5) Interactive value - ROI calculator or self-assessment that lets the visitor model their own case. (6) Demo CTA - by this point, you have earned it. The demo button can also appear in the hero as a secondary option for high-intent visitors who arrive pre-qualified, but the primary page structure should build evidence before the ask.",
       },
     },
+    {
+      '@type': 'Question',
+      name: 'What traffic and audience issues cause B2B SaaS landing pages to not convert?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Misaligned traffic sources are a primary culprit. Sending decision-makers to a page built for evaluators, or vice versa, creates immediate friction. PPC campaigns targeting broad keywords attract tire-kickers rather than qualified prospects. Retargeting audiences without account-based segmentation wastes budget on unqualified visitors. Audit traffic quality first: check bounce rate by source, time-on-page by visitor profile, and whether paid channels match the page\'s messaging depth and offer level.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does page load speed and UX impact B2B SaaS conversion rates?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Enterprise buyers expect fast, polished experiences. Pages taking >3 seconds to load see 40-50% higher bounce rates, especially on mobile. Broken navigation, unclear CTAs, or cluttered layouts force visitors to work to find value—they won\'t. Technical debt like unoptimized images, render-blocking scripts, or poor mobile responsiveness signals immaturity. Run page speed audits and conduct UX testing with target buyers to identify friction points before attributing low conversion to messaging alone.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What form fields and data collection strategies hurt B2B SaaS conversion?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Asking for excessive information upfront—company size, budget, timeline, use case—before providing value creates abandonment. Enterprise buyers resist early qualification questions. Progressive profiling (collecting data across multiple touchpoints) typically outperforms long forms on first landing. For high-intent pages, 3-5 fields max work best. Test whether a simple email + company name converts better than detailed forms, then progressively gather details via follow-up campaigns.',
+      },
+    },
   ],
 }
 
@@ -52,7 +76,7 @@ const articleSchema = createArticleSchema({
   description: 'When a B2B SaaS landing page is not converting paid traffic, message-match is the first thing to audit. Learn the 3-step fix.',
   url: 'https://nebulacomponents.shop/learning-centre/b2b-saas-landing-page-not-converting',
   publishedDate: '2025-07-15',
-  modifiedDate: '2026-07-27',
+  modifiedDate: '2026-07-29',
 })
 
 export default function B2BSaaSLandingPageNotConverting() {

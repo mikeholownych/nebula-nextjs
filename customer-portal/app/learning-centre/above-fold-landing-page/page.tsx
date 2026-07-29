@@ -17,7 +17,7 @@ const articleSchema = createArticleSchema({
     'Most paid social traffic never scrolls past the first screen. If your above-fold section does not close the case before they scroll, it never gets closed.',
   url: 'https://nebulacomponents.shop/learning-centre/above-fold-landing-page',
   publishedDate: '2026-07-21',
-  modifiedDate: '2026-07-21',
+  modifiedDate: '2026-07-29',
 })
 
 const faqSchema = {
@@ -62,6 +62,30 @@ const faqSchema = {
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'Using the company name or tagline as the H1. "Welcome to Acme Inc." and "Transforming the Future of Work" both fail the same test: a cold visitor cannot tell from either headline whether they are in the right place. The H1 is the most-read element on the page. It should state the specific outcome you deliver and who you deliver it to, in the same language the ad used to bring the visitor there.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What\'s the difference between above-the-fold on mobile vs. desktop?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Mobile viewports are taller (390-844px) but narrower, compressing elements vertically while allowing more content to stack. Desktop viewports (1280px+) display content side-by-side. A headline and CTA visible on desktop may require scrolling on mobile. Always test both—mobile typically drives higher paid traffic volume and lower scroll-through rates.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I test which above-the-fold elements drive conversions?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Run A/B tests isolating one element: headline text, proof signal type, CTA copy, or visual treatment. Track conversion rate by traffic segment. Use heatmaps and session recordings to observe where visitors focus first. Measure time-to-scroll and exit rate before fold—high exits indicate the above-fold section didn\'t convince them to stay.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Should above-the-fold content match my ad creative?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. If your ad shows a headline, image, or outcome promise, your above-fold section must immediately confirm it. Misalignment between ad and landing page above-fold triggers cognitive friction and increases bounce rate. Visitors should recognize they landed on the right page within the first second.',
       },
     },
   ],
