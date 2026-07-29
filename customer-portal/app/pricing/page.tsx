@@ -160,6 +160,19 @@ export default function PricingPage() {
             </Card>
           </div>
 
+          <div className="mt-12 rounded-2xl border border-accent/20 bg-accent/5 p-8 text-center">
+            <p className="text-lg font-semibold text-fg">Not sure yet?</p>
+            <p className="mt-2 text-fg-muted">
+              Run the free audit first — see exactly what's leaking before you decide.
+            </p>
+            <Link
+              href="/audit"
+              className="mt-5 inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light"
+            >
+              Run free audit →
+            </Link>
+          </div>
+
           <section className="mt-16 rounded-2xl border border-border bg-bg-muted/20 p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">Frequently asked questions</h2>
             <dl className="space-y-6">

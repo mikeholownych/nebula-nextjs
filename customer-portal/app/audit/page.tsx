@@ -53,8 +53,16 @@ export default function AuditPage() {
         <section className="mx-auto max-w-6xl px-6 py-12 md:py-20">
           <div className="grid gap-12 md:grid-cols-2 md:items-start">
 
-            {/* Left: copy */}
-            <div className="flex flex-col justify-center">
+            {/* Form first on mobile (order-1 on mobile, order-2 on md+) */}
+            <div className="order-1 rounded-2xl border border-border bg-bg-muted/30 p-6 md:order-2 md:p-8">
+              <p className="mb-4 text-sm font-semibold text-fg">
+                Paste your landing page URL
+              </p>
+              <AuditForm />
+            </div>
+
+            {/* Copy second on mobile (order-2 on mobile, order-1 on md+) */}
+            <div className="order-2 flex flex-col justify-center md:order-1">
               <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
                 See if the page is what&apos;s killing your ads.
               </h1>
@@ -74,14 +82,6 @@ export default function AuditPage() {
                   </li>
                 ))}
               </ul>
-            </div>
-
-            {/* Right: form */}
-            <div className="rounded-2xl border border-border bg-bg-muted/30 p-6 md:p-8">
-              <p className="mb-4 text-sm font-semibold text-fg">
-                Paste your landing page URL
-              </p>
-              <AuditForm />
             </div>
 
           </div>

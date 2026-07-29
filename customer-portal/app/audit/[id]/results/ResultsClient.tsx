@@ -619,27 +619,53 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
     return (
       <main id="main-content" className="min-h-screen bg-bg px-6 py-12 pt-24">
         <div className="mx-auto max-w-5xl">
-          {/* Skeleton nav */}
-          <div className="sticky top-20 z-20 -mx-6 mb-12 border-y border-border bg-bg/95 px-6 py-4">
-            <div className="flex gap-2">
-              {[80, 96, 72, 88, 104].map((w) => (
-                <div key={w} className="h-9 animate-pulse rounded-lg bg-bg-muted/40" style={{ width: w }} />
+          {/* Skeleton nav — matches ReportNavigation height */}
+          <nav aria-label="Loading" className="sticky top-20 z-20 -mx-6 mb-12 border-y border-border bg-bg/95 px-6 py-4">
+            <div className="mx-auto flex w-full max-w-5xl gap-2 sm:justify-center">
+              {['Overview', 'Fix first', 'Signals', 'Evidence', 'Repair'].map((label) => (
+                <span key={label} className="min-h-11 shrink-0 rounded-lg border border-border px-4 py-2 text-sm font-semibold text-fg-muted/30">
+                  {label}
+                </span>
               ))}
             </div>
-          </div>
-          {/* Skeleton score card */}
-          <div className="mb-12 grid gap-8 lg:grid-cols-2">
-            <div className="space-y-3">
-              <div className="h-4 w-24 animate-pulse rounded bg-bg-muted/40" />
-              <div className="h-10 w-48 animate-pulse rounded bg-bg-muted/40" />
-              <div className="h-4 w-32 animate-pulse rounded bg-bg-muted/40" />
+          </nav>
+          {/* Skeleton overview — matches ReportOverview grid */}
+          <section className="scroll-mt-40 border-b border-border pb-16">
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-end">
+              <div>
+                <p className="text-sm font-semibold text-accent">Audit overview</p>
+                <h1 className="mt-2 text-2xl font-extrabold text-fg md:text-4xl md:tracking-[-0.03em]">Landing Page Audit Results</h1>
+                <div className="mt-2 h-5 w-40 animate-pulse rounded bg-bg-muted/40" />
+                <div className="mt-5 h-16 w-full max-w-[65ch] animate-pulse rounded bg-bg-muted/40" />
+              </div>
+              <Card variant="elevated" className="vt-audit-card">
+                <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-fg-muted">Conversion readiness</p>
+                    <p className="mt-1 tabular-nums">
+                      <span className="text-6xl font-extrabold text-accent/30">—</span>
+                      <span className="text-2xl text-fg-muted">/10</span>
+                    </p>
+                    <div className="mt-2 h-4 w-44 animate-pulse rounded bg-bg-muted/40" />
+                  </div>
+                  <dl className="grid grid-cols-3 gap-6 border-t border-border pt-6 sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0">
+                    {['Critical', 'Warnings', 'Advisory'].map((label) => (
+                      <div key={label}>
+                        <dt className="text-xs text-fg-muted">{label}</dt>
+                        <dd className="mt-1 h-8 w-8 animate-pulse rounded bg-bg-muted/40" />
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              </Card>
             </div>
-            <div className="h-36 animate-pulse rounded-xl bg-bg-muted/40" />
+          </section>
+          {/* Skeleton finding rows — match Card height */}
+          <div className="py-16 space-y-4">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="h-28 animate-pulse rounded-xl border border-border bg-bg-muted/20" />
+            ))}
           </div>
-          {/* Skeleton finding rows */}
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="mb-4 h-24 animate-pulse rounded-xl bg-bg-muted/40" />
-          ))}
         </div>
       </main>
     )
