@@ -108,3 +108,18 @@ if ! grep -Fq 'Audit Data Handling' <<< "$audit_html"; then
   exit 1
 fi
 printf 'PASS: public /audit verified containing inspection boundaries disclosure\n'
+
+# Verify Learning Centre Copy Governance (prohibit legacy dogmatic phrasing)
+lc_html=$(curl -fsS -H 'Cache-Control: no-cache' https://nebulacomponents.shop/learning-centre/landing-page-not-converting || true)
+if grep -Eq 'at least one of five diagnosable leak patterns|strongly indicates' <<< "$lc_html"; then
+  printf 'FAIL: dogmatic diagnostic claims detected on public learning-centre page\n' >&2
+  exit 1
+fi
+printf 'PASS: public Learning Centre verified compliant with content governance\n'
+
+# Verify AI Search & Generative Citation Stack
+bash /home/mike/nebula/scripts/verify_ai_citation_stack.sh
+
+# Trigger IndexNow URL submission on public edge post-deploy
+python3 /home/mike/nebula/scripts/submit_indexnow.py || true
+

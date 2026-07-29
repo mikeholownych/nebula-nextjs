@@ -230,3 +230,6 @@ aidlc-docs/operations/
 *.test-backup
 .env
 .env.example
+.env.local
+gsc_programmatic_review.md
+striking_distance_action_plan.md
