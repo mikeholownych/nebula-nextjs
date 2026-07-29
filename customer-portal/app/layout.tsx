@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
   description: 'Evidence-backed landing page conversion diagnosis and implementation for founders spending on paid ads with low or zero conversions.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop',
+    canonical: 'https://nebulacomponents.shop/',
   },
   openGraph: {
     title: 'Nebula Components — Landing Page Conversion Optimization',

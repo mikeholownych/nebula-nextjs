@@ -7,7 +7,7 @@ import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE } from './lib/homepageContent'
 export const metadata: Metadata = {
   title: HOMEPAGE_SEO_TITLE,
   description: HOMEPAGE_DESCRIPTION,
-  alternates: { canonical: 'https://nebulacomponents.shop' },
+  alternates: { canonical: 'https://nebulacomponents.shop/' },
   openGraph: {
     title: HOMEPAGE_SEO_TITLE,
     description: HOMEPAGE_DESCRIPTION,
