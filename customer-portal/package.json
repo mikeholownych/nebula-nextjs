@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --port 3000",
-    "build": "node scripts/generate-build-info.mjs && next build && node scripts/upload-sourcemaps.mjs",
+    "build": "node scripts/generate-build-info.mjs && next build",
     "start": "next start --port 3000",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
@@ -24,6 +24,7 @@
     "ci": "npm run typecheck && npm run lint && npm run check:evidence-atoms && npm run check:public-proof && npm run check:citable-projection && npm run check:intelligence-stack && npm run build && npm run test && npm run test:e2e"
   },
   "dependencies": {
+    "@posthog/nextjs-config": "^1.9.68",
     "@react-oauth/google": "^0.13.5",
     "@x402/core": "^2.19.0",
     "@x402/evm": "^2.19.0",
@@ -70,5 +71,8 @@
     "next": {
       "postcss": "8.5.19"
     }
+  },
+  "allowScripts": {
+    "@posthog/cli@0.7.34": true
   }
 }
