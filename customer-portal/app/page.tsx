@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import SelfScan from './components/SelfScan'
 import AggregateProof from './components/AggregateProof'
+import RecentFinding from './components/RecentFinding'
 import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE } from './lib/homepageContent'
 
 export const metadata: Metadata = {
@@ -80,7 +81,11 @@ export default function Home() {
                   $97 One-Leak Repair Sprint if it fails &rarr;
                 </Link>
               </div>
-              <AggregateProof />
+              {/* Reserve height to prevent CLS when async components load */}
+              <div className="min-h-[180px]">
+                <AggregateProof />
+                <RecentFinding />
+              </div>
             </div>
 
             {/* Right: live self-scan widget */}

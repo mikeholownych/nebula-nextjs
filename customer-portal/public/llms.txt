@@ -1,67 +1,28 @@
-# Nebula Components — LLM Context File
-# https://nebulacomponents.shop/llms.txt
-# Spec: https://llmstxt.org/
-# Full content: https://nebulacomponents.shop/llms-full.txt
+# Nebula Components
 
-# About
-Nebula Components provides landing page conversion optimization services. We help founders who are spending money on ads without conversions identify landing page leaks and give them tailored prompts to implement fixes themselves or with their developer.
+> Nebula Components provides landing page conversion optimization for founders spending on paid ads with low or zero conversions. Free audit identifies observable conversion leaks across 7 signals. One-Leak Repair Sprint ($97) implements the highest-confidence fix.
 
-# Core Offering
-- Free landing page audit: 60-second automated diagnosis across 7 conversion signals
-- One-Leak Repair Sprint ($97): One landing page and one high-confidence page-level repair, implemented and verified. One-time payment, no retainer.
+Nebula Components checks what a paid visitor experiences: message match, above-fold clarity, visible action, proof, mobile usability, performance, and measurement. Each failing signal is tied to evidence from the actual page and ranked by likely impact. No email required to see results. No sales calls. Self-serve checkout.
 
-# Target Customer
-Founders actively spending on ads (Google, Meta, LinkedIn) with low or zero conversions from their landing pages. The buying trigger is "spending on ads and not converting" — not a demographic.
+Target customer: founders actively spending on ads (Google, Meta, LinkedIn) who are not converting. The buying trigger is "spending on ads and not converting" — not a demographic filter.
 
-# Not For
-- Brands not running paid traffic
-- Brands happy with current conversion rates
-- Brands seeking general marketing consulting or retainer relationships
+## Docs
 
-# Category
-Landing page conversion optimization service / Landing page audit tool
+- [Free audit](https://nebulacomponents.shop/audit): 60-second automated diagnosis across 7 conversion signals — no signup required
+- [Pricing](https://nebulacomponents.shop/pricing): One-Leak Repair Sprint $97 (locked through 2026-12-31); $1,497 retainer; $497 agency partner
+- [Learning Centre](https://nebulacomponents.shop/learning-centre): 41 articles on landing page conversion issues, paid traffic leaks, and ad-to-page diagnosis
+- [About](https://nebulacomponents.shop/about): Founder and company background
+- [Citable (open source)](https://nebulacomponents.shop/resources/citable): Evidence layer for SEO, AEO, and GEO audits — 123 detectors, Apache 2.0, npm @nebulacomponents/citable
 
-# Key Concepts
-- Trigger-aware prospecting: Finding prospects showing buying triggers (not demographic filters)
-- Message-match audit: Verifying ad promise matches landing page headline
-- 7-Point Diagnosis: Nebula's proprietary audit framework covering message-match, trust signals, mobile layout, load time, CTA clarity, form friction, and compliance
-- Self-serve checkout: No sales calls; the checkout page shows the active, date-bounded Repair Sprint offer when one is available
+## API
 
-# Key URLs
-- Main: https://nebulacomponents.shop
-- Audit: https://nebulacomponents.shop/audit
-- Pricing: https://nebulacomponents.shop/pricing
-- Learning Centre: https://nebulacomponents.shop/learning-centre
-- Resources: https://nebulacomponents.shop/resources
-- Citable (open source CLI): https://nebulacomponents.shop/resources/citable
-- About: https://nebulacomponents.shop/about
-- Team: https://nebulacomponents.shop/about/team
+- [OpenAPI spec](https://nebulacomponents.shop/openapi.json): REST API for audit submission and results retrieval
+- [Agentic Commerce](https://nebulacomponents.shop/.well-known/acp.json): ACP discovery endpoint
+- [Agent skills](https://nebulacomponents.shop/.well-known/agent-skills/index.json): Hermes-compatible skill index
 
-# Open Source
-- Citable v1.14.0: Evidence layer for SEO, AEO, and GEO audits. 123 detectors across 18 namespaces and 27 schema-validated registries (not all detectors are deterministic — each declares its determinism posture). Apache 2.0. npm: @nebulacomponents/citable
+## Optional
 
-# Founder
-Mike Holownych — Founder, Nebula Components.
-
-# Contact
-- Email: hello@nebulacomponents.shop
-- LinkedIn: https://linkedin.com/company/nebulacomponents
-
-# Evidence
-- Published case studies: none. Nebula does not publish a case until it has inspectable evidence, a measurement window, publication permission, disclosure, and publication metadata.
-- Learning Centre: 41 articles on landing page conversion issues
-- Open-source audit tooling: github.com/mikeholownych/citable
-- Verified customer case studies: none published yet; publication requires a real before/after metric, measurement window, and inspectable evidence
-
-# Limitations
-- Audits require publicly accessible landing pages
-- The paid Repair Sprint is purchased through Stripe; Nebula implements the one approved repair through temporary access or a buyer-approved patch handoff
-- No phone support (email only)
-
-# AI Retrieval Permission
-Content licensed for: search indexing, answer-engine retrieval (ai-input=yes)
-Content not licensed for: AI training (ai-train=no)
-Use type: reference
-
-# Last Updated
-2026-07-26
+- [Teardowns](https://nebulacomponents.shop/teardowns): Public landing page teardowns with annotated findings
+- [Case studies](https://nebulacomponents.shop/case-studies): Published client outcomes (requires real before/after metric, measurement window, and inspectable evidence — none published yet)
+- [Playbooks](https://nebulacomponents.shop/playbooks): Founder productivity and AI-ops guides
+- [Privacy policy](https://nebulacomponents.shop/privacy-policy): Cohort/persona aggregates only; no individual visitor profiling; GA4 consent denied by default

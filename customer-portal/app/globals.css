@@ -80,28 +80,16 @@ body {
 }
 
 /* ─── HEADER ─────────────────────────────────────────────── */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  padding: 16px 24px;
-  background: rgba(5, 5, 5, 0.8);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+/* NOTE: SiteNav uses Tailwind classes for positioning — bare header {} rule removed
+   to prevent position:fixed bleeding onto semantic <header> elements in page bodies */
 .logo {
   font-size: var(--text-lg);
   font-weight: 600;
   color: var(--fg);
   text-decoration: none;
 }
-nav { display: flex; gap: 24px; }
-nav a {
+header nav { display: flex; gap: 24px; }
+header nav a {
   color: var(--fg-muted);
   text-decoration: none;
   font-size: var(--text-sm);
@@ -111,8 +99,8 @@ nav a {
 }
 
 /* Touch-friendly hover and focus states */
-nav a:hover { color: var(--accent); }
-nav a:focus-visible {
+header nav a:hover { color: var(--accent); }
+header nav a:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
   border-radius: 4px;
@@ -120,7 +108,7 @@ nav a:focus-visible {
 
 /* Touch device adaptations */
 @media (pointer: coarse) {
-  nav a {
+  header nav a {
     padding: 16px 12px;
     min-height: 44px;
   }
@@ -128,12 +116,12 @@ nav a:focus-visible {
 
 /* Mobile navigation */
 @media (max-width: 768px) {
-  header { padding: 12px 16px; }
-  nav { gap: 16px; }
+  .site-header { padding: 12px 16px; }
+  header nav { gap: 16px; }
 }
 
 @media (max-width: 480px) {
-  nav {
+  header nav {
     position: absolute;
     top: 100%;
     left: 0;
@@ -144,12 +132,12 @@ nav a:focus-visible {
     gap: 0;
     border-bottom: 1px solid var(--border);
   }
-  nav a {
+  header nav a {
     padding: 16px;
     border-bottom: 1px solid var(--border);
     text-align: center;
   }
-  nav a:last-child { border-bottom: none; }
+  header nav a:last-child { border-bottom: none; }
 }
 
 /* ─── HERO ────────────────────────────────────────────────── */
@@ -648,11 +636,8 @@ nav a:focus-visible {
 }
 
 /* ─── FOOTER ──────────────────────────────────────────────── */
-footer {
-  padding: 60px 24px;
-  background: var(--bg-panel);
-  border-top: 1px solid var(--border);
-}
+/* NOTE: SiteFooter uses Tailwind — bare footer {} removed to prevent style bleed
+   onto semantic <footer> elements used in article bodies */
 .footer-inner {
   max-width: 600px;
   margin: 0 auto;
@@ -1079,6 +1064,8 @@ footer {
 
 .finding-reveal {
   animation: finding-reveal 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform, opacity;
+  contain: layout style;
 }
 
 /* ─── REDUCED MOTION ───────────────────────────────────────── */

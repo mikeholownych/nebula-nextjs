@@ -73,7 +73,7 @@ export default function SelfScan() {
   }, [visible])
 
   return (
-    <div ref={ref} className="mx-auto mt-10 max-w-lg text-left" aria-live="polite">
+    <div ref={ref} className="mx-auto mt-10 max-w-lg text-left min-h-[220px]" aria-live="polite">
       {snapshot && (
         <div className="finding-reveal rounded-xl border border-border bg-bg-muted/40 p-5 font-mono text-sm">
           <div className="mb-3 flex items-center justify-between text-xs uppercase tracking-wider text-fg-muted">
@@ -91,7 +91,7 @@ export default function SelfScan() {
                   {!signal.pass && (
                     <span
                       className="h-1.5 w-1.5 shrink-0 rounded-full bg-signal-fail"
-                      aria-label="failed"
+                      aria-hidden="true"
                     />
                   )}
                   {signal.label}
