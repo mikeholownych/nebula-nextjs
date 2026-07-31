@@ -209,15 +209,18 @@ const nextConfig: NextConfig = {
           // script-src entry, only connect-src for its API/asset hosts.
           // Stripe checkout is a plain-link navigation to buy.stripe.com, not
           // an embedded script/iframe, so it needs no CSP entry either.
+          // Cloudflare Web Analytics: beacon.min.js is injected by CF edge
+          // from static.cloudflareinsights.com — must be in script-src and
+          // connect-src or it logs a CSP violation in DevTools (Best Practices -4).
           {
             key: 'Content-Security-Policy-Report-Only',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
+              "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data:",
               "font-src 'self' data:",
-              "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://us.posthog.com https://us.i.posthog.com",
+              "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://us.posthog.com https://us.i.posthog.com https://cloudflareinsights.com",
               "frame-src 'none'",
               "object-src 'none'",
               "base-uri 'self'",
