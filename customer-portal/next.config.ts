@@ -42,6 +42,11 @@ const nextConfig: NextConfig = {
   skipTrailingSlashRedirect: true,
   // Don't advertise the framework in responses
   poweredByHeader: false,
+  // Enable gzip/brotli compression at the Next.js origin layer.
+  // Cloudflare sits in front but HTML pages have Cache-Control: no-transform
+  // (prevents CF email obfuscation), which also blocks CF-level compression.
+  // Enabling origin compression ensures HTML responses are compressed regardless.
+  compress: true,
   // 301/410 map for legacy static .html URLs indexed by Google (GSC 2026-07-21)
   // Frees crawl budget from dead URLs; preserves any query association on equity-bearing pages.
   // Rule: content pages → nearest current equivalent (301); true orphans → /gone (410).
@@ -94,6 +99,21 @@ const nextConfig: NextConfig = {
       { source: '/ad-burn-leaderboard.html',            destination: '/gone',                permanent: true },
       { source: '/og-card-source.html',                 destination: '/gone',                permanent: true },
       { source: '/component-showcase.html',             destination: '/gone',                permanent: true },
+      // Additional .html → clean URL (GSC 2026-07-30 audit)
+      { source: '/headline-optimization.html',          destination: '/headline-optimization',           permanent: true },
+      { source: '/mobile-landing-page-optimization.html', destination: '/mobile-landing-page-optimization', permanent: true },
+      { source: '/page-speed-conversion.html',          destination: '/page-speed-conversion',           permanent: true },
+      { source: '/social-proof-landing-page.html',      destination: '/social-proof-landing-page',       permanent: true },
+      { source: '/privacy-policy.html',                 destination: '/privacy-policy',                  permanent: true },
+      // Dead pages → closest equivalent or /gone
+      { source: '/pricing-generator.html',              destination: '/pricing',                permanent: true },
+      { source: '/demo.html',                           destination: '/audit',                   permanent: true },
+      { source: '/dashboard.html',                      destination: '/gone',                    permanent: true },
+      { source: '/lead-dashboard.html',                 destination: '/gone',                    permanent: true },
+      { source: '/generator.html',                      destination: '/gone',                    permanent: true },
+      { source: '/growth-launch.html',                  destination: '/gone',                    permanent: true },
+      { source: '/growth-launch-confirmation.html',     destination: '/gone',                    permanent: true },
+      { source: '/marketing-ops.html',                  destination: '/gone',                    permanent: true },
     ]
   },
 
@@ -207,14 +227,17 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // Disable Cloudflare email obfuscation and other CDN transforms site-wide
-      // Cache-Control: no-transform prevents CF from rewriting email addresses into cdn-cgi links
+      // CF email obfuscation: previously blocked via no-transform in Cache-Control,
+      // but no-transform also stops the compression middleware (RFC 7230 §5.7.2 compliance).
+      // Removed no-transform — CF compresses HTML at the edge AND Next.js compresses at origin.
+      // CF email obfuscation (cdn-cgi link rewriting) is harmless anti-spam; disable it
+      // in the CF dashboard (Scrape Shield → Email Address Obfuscation → Off) if needed.
       {
         source: '/(.*)',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=0, must-revalidate, no-transform',
+            value: 'public, max-age=0, must-revalidate',
           },
           {
             key: 'X-Nebula-Revision',
