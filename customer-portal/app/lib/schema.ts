@@ -13,7 +13,10 @@ export const organizationSchema = {
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer support',
-    email: 'hello@nebulacomponents.shop',
+    // email intentionally omitted from schema — CF email obfuscation
+    // rewrites email strings in JSON-LD <script> tags, injecting a
+    // render-blocking script that adds ~150ms to FCP/LCP on mobile.
+    // Contact email is available via the About page and privacy policy.
     availableLanguage: 'English',
   },
   sameAs: [
