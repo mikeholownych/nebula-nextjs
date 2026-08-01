@@ -775,6 +775,20 @@ async def _send_monitor_alert_email(email: str, url: str, status: str,
         pass  # Never let email failures break the monitor run
 
 
+@router.get("/by-share-token")
+async def get_audit_by_share_token_endpoint(token: str):
+    """Return full audit data for a valid share token. Used by the shareable client portal."""
+    if not token or len(token) > 200:
+        raise HTTPException(status_code=400, detail="Invalid token")
+    try:
+        data = await audit_db.get_audit_by_share_token(token)
+    except Exception:
+        raise HTTPException(status_code=503, detail="Service unavailable")
+    if data is None:
+        raise HTTPException(status_code=404, detail="Report not found")
+    return data
+
+
 @router.get("/badges")
 async def get_badges_by_email(email: str):
     """Return all earned badges for a given email address."""
