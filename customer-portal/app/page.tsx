@@ -70,10 +70,10 @@ export default function Home() {
                 Landing pages don't convert. Components do.
               </p>
               <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl lg:text-6xl">
-                We scored our own landing page 7.1/10 and published every finding. Now score yours.
+                We scored our own landing page and published every finding. Now score yours.
               </h1>
               <p className="mt-6 max-w-lg text-lg leading-7 text-fg-muted">
-                Nebula checks your landing page with a 7-component conversion framework to find
+                Nebula checks your landing page across 9 conversion signals to find
                 exactly what's preventing visitors from becoming customers. Free score, no signup,
                 results in under two minutes.
               </p>

@@ -16,7 +16,7 @@ export default function TermsPage() {
     <main id="main-content" role="main" className="min-h-screen bg-bg pt-24 pb-24">
       <div className="mx-auto max-w-2xl px-6">
         <h1 className="text-3xl font-bold tracking-tight text-fg">Terms of Service</h1>
-        <p className="mt-2 mb-12 text-sm text-fg-muted">Last updated: July 26, 2026</p>
+        <p className="mt-2 mb-12 text-sm text-fg-muted">Last updated: August 1, 2026</p>
 
         <div className="space-y-10">
           <section>

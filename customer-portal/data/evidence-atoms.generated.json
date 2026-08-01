@@ -4,7 +4,7 @@
   "entries": [
     {
       "claimId": "claim-7-point-diagnosis",
-      "text": "Nebula uses a 7-point diagnosis framework covering message-match, trust signals, mobile layout, load time, CTA clarity, form friction, and compliance.",
+      "text": "Nebula uses a 9-signal audit framework covering message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, and load speed.",
       "route": "/audit",
       "slot": "audit-method-summary",
       "projectionType": "visible_text",

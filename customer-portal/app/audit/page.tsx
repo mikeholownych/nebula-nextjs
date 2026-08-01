@@ -23,11 +23,14 @@ export const metadata: Metadata = {
 const SAMPLE_FINDINGS = [
   { key: 'message_match', label: 'Message match', score: 3, pass: false, finding: 'Ad headline "Stop wasting ad spend" does not match page headline "We help businesses grow".' },
   { key: 'trust_signals', label: 'Trust signals', score: 2, pass: false, finding: 'No testimonials or logos visible above fold. First trust signal appears after 3 scrolls.' },
-  { key: 'mobile_cta', label: 'Mobile CTA', score: 4, pass: false, finding: 'Primary CTA button is 890px from top on 375px viewport - below fold without scroll.' },
-  { key: 'load_time', label: 'Load time', score: 8, pass: true, finding: 'LCP 2.1s on mobile. Passes threshold.' },
+  { key: 'mobile_cta', label: 'Mobile CTA', score: 4, pass: false, finding: 'Primary CTA button is 890px from top on 375px viewport — below fold without scroll.' },
+  { key: 'load_speed', label: 'Load speed', score: 8, pass: true, finding: 'LCP 2.1s on mobile. Passes threshold.' },
   { key: 'cta_clarity', label: 'CTA clarity', score: 5, pass: false, finding: '3 competing CTAs in hero: "Get started", "Learn more", "Book a call". No clear primary action.' },
-  { key: 'form_friction', label: 'Form friction', score: 9, pass: true, finding: '3-field form. Clear labels. Low friction.' },
-  { key: 'compliance', label: 'Compliance', score: 7, pass: true, finding: 'GDPR banner present and does not block conversion path.' },
+  { key: 'above_fold', label: 'Above the fold', score: 3, pass: false, finding: 'Offer not clear until second viewport — headline is a company name, not a buyer outcome.' },
+  { key: 'ad_signals', label: 'Ad signals', score: 9, pass: true, finding: 'Google Ads conversion tag present in source.' },
+  { key: 'seo_foundations', label: 'SEO foundations', score: 6, pass: false, finding: 'Meta description is 197 characters — truncated in SERP at 155.' },
+  { key: 'ai_readiness', label: 'AI readiness', score: 7, pass: true, finding: 'OpenGraph tags and JSON-LD present. Page is citable.' },
+  { key: 'headline', label: 'Message match', score: 4, pass: false, finding: 'Ad headline "Cut your CAC in half" — page headline says "Grow your business." Zero word overlap.' },
 ]
 
 export default function AuditPage() {
@@ -182,12 +185,14 @@ export default function AuditPage() {
             <h2 className="mb-8 text-2xl font-bold tracking-tight text-fg md:text-3xl">
               What the audit checks
             </h2>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {[
-                { label: 'Message match', desc: 'Ad promise vs. page headline - within 3 words' },
-                { label: 'Trust signals', desc: 'Testimonials or logos above fold - minimum 2' },
+                { label: 'Message match', desc: 'Ad promise vs. page headline — within 3 words' },
+                { label: 'Trust signals', desc: 'Testimonials or logos above fold — minimum 2' },
                 { label: 'Mobile CTA', desc: 'Primary action visible on 375px without scroll' },
-                { label: 'Core Web Vitals', desc: 'LCP under 2.5s, CLS under 0.1, INP under 200ms' },
+                { label: 'Above the fold', desc: 'Offer, audience, and action clear in first viewport' },
+                { label: 'Ad signals', desc: 'Ad pixel or conversion tracking detectable in source' },
+                { label: 'SEO foundations', desc: 'Title tag, meta description, single descriptive H1' },
               ].map((item) => (
                 <div key={item.label} className="rounded-xl border border-border bg-bg-muted/20 p-4">
                   <p className="mb-1 font-semibold text-fg text-sm">{item.label}</p>
@@ -198,8 +203,8 @@ export default function AuditPage() {
             <div className="mt-3 grid gap-3 sm:grid-cols-3">
               {[
                 { label: 'CTA clarity', desc: 'One primary action, no competing choices' },
-                { label: 'Form friction', desc: '5 fields or fewer, clear labels, stated benefit' },
-                { label: 'Compliance', desc: 'GDPR/CCPA compliant without blocking conversion' },
+                { label: 'Load speed', desc: 'LCP under 2.5s, CLS under 0.1, INP under 200ms' },
+                { label: 'AI readiness', desc: 'Structured data and signals for AI citation' },
               ].map((item) => (
                 <div key={item.label} className="rounded-xl border border-border bg-bg-muted/20 p-4">
                   <p className="mb-1 font-semibold text-fg text-sm">{item.label}</p>

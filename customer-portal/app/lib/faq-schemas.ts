@@ -6,7 +6,7 @@ const repairSprintAnswer =
 export const pricingFAQSchema = createFAQPageSchema([
   {
     question: "What's in the free audit?",
-    answer: 'A 7-point diagnosis scoring message-match, trust signals, mobile layout, load time, CTA clarity, form friction, and compliance. Each point gets specific findings and prioritized repairs ranked by likely conversion impact.',
+    answer: 'A 9-signal audit scoring message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, and load speed. Each signal gets specific findings and prioritized repairs ranked by likely conversion impact.',
   },
   {
     question: 'How is the $97 One-Leak Repair Sprint delivered?',
@@ -33,7 +33,7 @@ export const pricingFAQSchema = createFAQPageSchema([
 export const homeFAQSchema = createFAQPageSchema([
   {
     question: 'How long does the free landing page audit take?',
-    answer: 'Under 2 minutes. Paste your URL and get a scored 7-point diagnosis with findings ranked by likely conversion impact.',
+    answer: 'Under 2 minutes. Paste your URL and get a scored 9-signal diagnosis with findings ranked by likely conversion impact.',
   },
   {
     question: "What's included in the $97 One-Leak Repair Sprint?",
