@@ -11,9 +11,9 @@
 ## Typography
 
 ### Font
-**Primary:** Karla (Google Fonts)
+**Primary:** System stack (`-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif`)
 - Weights: 400 (body), 600 (labels), 800 (display)
-- Fallback: `-apple-system, system-ui, sans-serif`
+- Rationale: Zero font-loading cost, no FOUT/CLS, instant render. Authority from density and weight, not letterform.
 
 ### Type Scale (1.25 ratio)
 

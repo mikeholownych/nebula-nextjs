@@ -76,7 +76,7 @@ const ANTI_PATTERNS = [
 
 export default function SpecialistAiAgentLibraryPage() {
   return (
-    <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
+    <main id="main-content" className="min-h-screen bg-bg pt-24">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
 
       <nav aria-label="Breadcrumb" className="mx-auto max-w-3xl px-6 pt-6">

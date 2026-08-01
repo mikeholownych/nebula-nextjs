@@ -128,7 +128,7 @@ export default function SevenSystemsPage() {
       </header>
 
       {/* Main Content */}
-      <main className="py-12 md:py-16">
+      <main id="main-content" className="py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-6">
           <p className="text-lg text-slate-300 mb-6">
             It&apos;s not one thing. It&apos;s almost always a missing system — not a missing button color or a better font.

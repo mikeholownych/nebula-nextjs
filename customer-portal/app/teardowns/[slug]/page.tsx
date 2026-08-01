@@ -58,7 +58,7 @@ export default async function TeardownPage({
     `${t.findings.length} Findings`
 
   return (
-    <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
+    <main id="main-content" className="min-h-screen bg-bg pt-24">
       <article className="mx-auto max-w-4xl px-6 py-12">
 
         {/* Breadcrumb */}

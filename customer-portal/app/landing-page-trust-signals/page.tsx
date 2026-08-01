@@ -54,7 +54,7 @@ export default function TrustSignalsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <main id="main-content" role="main" className="min-h-screen bg-bg pt-24 pb-16">
+      <main id="main-content" className="min-h-screen bg-bg pt-24 pb-16">
         <article className="mx-auto max-w-4xl px-6">
           <header className="mb-12">
             <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">

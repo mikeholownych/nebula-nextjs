@@ -135,7 +135,7 @@ const TEARDOWNS = [
 
 export default function TeardownsPage() {
   return (
-    <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
+    <main id="main-content" className="min-h-screen bg-bg pt-24">
       <section className="mx-auto max-w-4xl px-6 py-16">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
           Public Audit Teardowns

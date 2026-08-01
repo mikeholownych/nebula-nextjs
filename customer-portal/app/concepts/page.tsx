@@ -51,7 +51,7 @@ const concepts = [
 
 export default function ConceptsPage() {
   return (
-    <main className="min-h-screen bg-[#050505] text-white pt-24" id="main-content" role="main">
+    <main className="min-h-screen bg-[#050505] text-white pt-24" id="main-content">
       <div className="max-w-4xl mx-auto px-6 py-12">
         <h1 id="hero-title" className="text-4xl font-bold mb-4">
           Proprietary Concepts

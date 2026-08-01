@@ -180,10 +180,6 @@ header nav a:focus-visible {
   letter-spacing: -0.03em;
   margin-bottom: 20px;
 }
-/* Gradient text — DEPRECATED, DO NOT USE *//**
- * Removed per impeccable anti-pattern ban.
- * Use solid colors only. Emphasis via weight or size.
- */
 .hero-sub {
   font-size: 1.125rem;
   color: var(--fg-muted);

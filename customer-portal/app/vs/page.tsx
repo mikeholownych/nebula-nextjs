@@ -14,7 +14,7 @@ export default function VsIndexPage() {
   const comparisons = Object.values(COMPARISONS)
 
   return (
-    <main id="main-content" role="main" className="min-h-screen bg-bg pt-24 pb-24">
+    <main id="main-content" className="min-h-screen bg-bg pt-24 pb-24">
       <div className="mx-auto max-w-4xl px-6 py-12">
         <nav aria-label="Breadcrumb" className="mb-8">
           <ol className="flex items-center gap-2 text-sm text-fg-muted">

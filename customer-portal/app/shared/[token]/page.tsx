@@ -90,7 +90,7 @@ export default async function SharedPortalPage({
   const scoreColor = audit.score >= 7 ? 'text-emerald-400' : audit.score >= 5 ? 'text-amber-400' : 'text-red-400'
 
   return (
-    <main className="min-h-screen bg-[#050505] text-white py-16 px-6">
+    <main id="main-content" className="min-h-screen bg-[#050505] text-white py-16 px-6">
       <div className="mx-auto max-w-3xl">
 
         {/* Header */}

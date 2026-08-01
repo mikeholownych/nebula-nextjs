@@ -47,9 +47,9 @@ function domainOf(url: string): string {
 }
 
 function severityTone(impact: number): { label: string; cls: string } {
-  if (impact >= 8) return { label: 'Critical', cls: 'bg-red-500/15 text-red-400 border-red-700/50' }
-  if (impact >= 5) return { label: 'Warning', cls: 'bg-amber-500/15 text-amber-400 border-amber-700/50' }
-  return { label: 'Advisory', cls: 'bg-gray-500/15 text-gray-400 border-gray-700/50' }
+  if (impact >= 8) return { label: 'Critical', cls: 'bg-red-500/15 text-danger border-red-700/50' }
+  if (impact >= 5) return { label: 'Warning', cls: 'bg-signal-fail/10 text-signal-fail border-signal-fail/30' }
+  return { label: 'Advisory', cls: 'bg-bg-elevated text-fg-muted border-border/50' }
 }
 
 function quadrantLabel(q: string | null): string {
@@ -106,16 +106,16 @@ export default function RecsView({ email }: { email: string }) {
     (recs || []).filter((r) => r.status === status)
 
   if (loading && !recs) {
-    return <p className="text-sm text-gray-500">Loading recommendations…</p>
+    return <p className="text-sm text-fg-dim">Loading recommendations…</p>
   }
 
   if (error && !recs) {
     return (
-      <div className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-8 text-center">
-        <p className="text-red-400 mb-4">{error}</p>
+      <div className="bg-bg-elevated border border-border rounded-lg p-8 text-center">
+        <p className="text-danger mb-4">{error}</p>
         <button
           onClick={load}
-          className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-black"
+          className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg"
         >
           Retry
         </button>
@@ -125,15 +125,15 @@ export default function RecsView({ email }: { email: string }) {
 
   if (recs && recs.length === 0) {
     return (
-      <div className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-10 text-center">
+      <div className="bg-bg-elevated border border-border rounded-lg p-10 text-center">
         <h2 className="text-xl font-bold mb-2">No recommendations yet</h2>
-        <p className="text-gray-400 mb-6 max-w-md mx-auto">
+        <p className="text-fg-muted mb-6 max-w-md mx-auto">
           Findings from your audits become cards here. Fix them, move them to Done — and the
           next audit checks whether they actually passed.
         </p>
         <a
           href="/audit"
-          className="inline-block rounded-lg bg-emerald-500 px-6 py-2.5 text-sm font-semibold text-black hover:bg-emerald-400 transition-colors"
+          className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
         >
           Run first audit
         </a>
@@ -144,19 +144,19 @@ export default function RecsView({ email }: { email: string }) {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-400">
+        <p className="text-sm text-fg-muted">
           Findings tracked as work. Move cards, fix the page, then run a follow-up audit — anything
           it stops flagging is verified automatically.
         </p>
         <button
           onClick={load}
-          className="text-xs text-gray-400 hover:text-white transition-colors"
+          className="text-xs text-fg-muted hover:text-fg transition-colors"
         >
           ⟳ Refresh
         </button>
       </div>
 
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-danger">{error}</p>}
 
       <div className="grid md:grid-cols-3 gap-4 items-start">
         {COLUMNS.map((col) => {
@@ -165,15 +165,15 @@ export default function RecsView({ email }: { email: string }) {
             <section
               key={col.id}
               aria-label={col.label}
-              className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-4 min-h-[200px]"
+              className="bg-bg-elevated border border-border rounded-lg p-4 min-h-[200px]"
             >
               <header className="flex items-center justify-between mb-1">
-                <h3 className="text-sm font-semibold text-white">{col.label}</h3>
-                <span className="text-xs text-gray-500 border border-gray-700 rounded-full px-2 py-0.5">
+                <h3 className="text-sm font-semibold text-fg">{col.label}</h3>
+                <span className="text-xs text-fg-dim border border-border rounded-full px-2 py-0.5">
                   {cards.length}
                 </span>
               </header>
-              <p className="text-xs text-gray-600 mb-4">{col.hint}</p>
+              <p className="text-xs text-fg-dim mb-4">{col.hint}</p>
 
               <div className="space-y-3">
                 {cards.map((rec) => {
@@ -183,22 +183,22 @@ export default function RecsView({ email }: { email: string }) {
                   return (
                     <article
                       key={rec.id}
-                      className="rounded-lg border border-gray-800 bg-[#0d0d0d] p-4"
+                      className="rounded-lg border border-border bg-bg-panel p-4"
                     >
                       <div className="flex items-start justify-between gap-2 mb-2">
-                        <p className="text-sm font-medium text-white">{rec.label}</p>
+                        <p className="text-sm font-medium text-fg">{rec.label}</p>
                         <span
                           className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-medium capitalize ${tone.cls}`}
                         >
                           {tone.label}
                         </span>
                       </div>
-                      <p className="text-xs text-gray-500 mb-1">
+                      <p className="text-xs text-fg-dim mb-1">
                         {domainOf(rec.url)} · impact {rec.impact.toFixed(1)} ·{' '}
                         {quadrantLabel(rec.quadrant) || '—'}
                       </p>
                       {rec.verified_at && (
-                        <p className="text-xs text-emerald-400 mb-2">
+                        <p className="text-xs text-accent mb-2">
                           ✓ verified by follow-up audit
                         </p>
                       )}
@@ -207,7 +207,7 @@ export default function RecsView({ email }: { email: string }) {
                           onClick={() => prev && move(rec, prev)}
                           disabled={!prev || moving === rec.id}
                           aria-label="Move left"
-                          className="rounded border border-gray-700 px-2 py-1 text-xs text-gray-400 hover:text-white hover:border-gray-500 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                          className="rounded border border-border px-2 py-1 text-xs text-fg-muted hover:text-fg hover:border-border disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                         >
                           ←
                         </button>
@@ -215,13 +215,13 @@ export default function RecsView({ email }: { email: string }) {
                           onClick={() => next && move(rec, next)}
                           disabled={!next || moving === rec.id}
                           aria-label="Move right"
-                          className="rounded border border-gray-700 px-2 py-1 text-xs text-gray-400 hover:text-white hover:border-gray-500 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                          className="rounded border border-border px-2 py-1 text-xs text-fg-muted hover:text-fg hover:border-border disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                         >
                           →
                         </button>
                         <a
                           href={`/audit/${rec.audit_id}/results`}
-                          className="ml-auto text-xs text-emerald-400 hover:text-emerald-300"
+                          className="ml-auto text-xs text-accent hover:text-accent-light"
                         >
                           view audit
                         </a>
@@ -230,7 +230,7 @@ export default function RecsView({ email }: { email: string }) {
                   )
                 })}
                 {cards.length === 0 && (
-                  <p className="text-xs text-gray-600 py-4 text-center">Empty</p>
+                  <p className="text-xs text-fg-dim py-4 text-center">Empty</p>
                 )}
               </div>
             </section>

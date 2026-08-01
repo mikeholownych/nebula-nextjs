@@ -59,7 +59,7 @@ function RichCaseStudyPage({ study }: { study: CaseStudy }) {
   const isPlaceholder = study.company === '[Case study coming soon]'
 
   return (
-    <main id="main-content" role="main" className="min-h-screen bg-bg">
+    <main id="main-content" className="min-h-screen bg-bg">
       <nav aria-label="Breadcrumb" className="mx-auto max-w-4xl px-6 pt-6">
         <ol className="flex items-center gap-2 text-sm text-fg-muted">
           <li><Link href="/" className="hover:text-fg">Home</Link></li>
@@ -208,7 +208,7 @@ export default async function CaseStudyPage({ params }: Props) {
   if (!study) notFound()
 
   return (
-    <main id="main-content" role="main" className="min-h-screen bg-bg">
+    <main id="main-content" className="min-h-screen bg-bg">
       <nav aria-label="Breadcrumb" className="mx-auto max-w-4xl px-6 pt-6">
         <ol className="flex items-center gap-2 text-sm text-fg-muted">
           <li><Link href="/" className="hover:text-fg">Home</Link></li>

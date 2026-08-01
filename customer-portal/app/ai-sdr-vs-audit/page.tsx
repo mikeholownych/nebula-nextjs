@@ -42,7 +42,7 @@ export default function AiSdrVsAuditPage() {
       </section>
 
       {/* Main Content */}
-      <main className="max-w-[780px] mx-auto px-6 py-12 pb-20">
+      <main id="main-content" className="max-w-[780px] mx-auto px-6 py-12 pb-20">
         <p className="mb-4">Let's be direct.</p>
         <p className="mb-4">You have traffic. You have ad spend. You're getting zero conversions — or close to it. And now someone told you that you need an "AI SDR" or "AI BDR" to fix it.</p>
         <p className="mb-8">

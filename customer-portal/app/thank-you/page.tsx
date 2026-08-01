@@ -5,7 +5,7 @@ import PurchaseTracker from './PurchaseTracker'
 
 export default function ThankYouPage() {
   return (
-    <main className="min-h-screen bg-bg px-6 py-12 flex items-start justify-center pt-24">
+    <main id="main-content" className="min-h-screen bg-bg px-6 py-12 flex items-start justify-center pt-24">
       <Suspense fallback={null}><PurchaseTracker /></Suspense>
       <div className="mx-auto max-w-lg w-full space-y-6">
 

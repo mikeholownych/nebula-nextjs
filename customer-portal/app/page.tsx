@@ -58,7 +58,7 @@ const PATTERNS = [
 export default function Home() {
   return (
     <>
-      <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
+      <main id="main-content" className="min-h-screen bg-bg pt-24">
 
         {/* ── 1. Hero: asymmetric split ── */}
         <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
@@ -123,14 +123,14 @@ export default function Home() {
             </div>
             <p className="-mt-6 mb-8 max-w-2xl text-sm text-fg-muted">
               Every high-converting page is built from the same small set of components. These are
-              the seven we check, each with a concrete pass standard and evidence from your page.
+              the nine we check, each with a concrete pass standard and evidence from your page.
             </p>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {SIGNALS.slice(0, 4).map((s) => (
                 <div key={s.key} className="rounded-xl border border-border bg-bg-muted/20 p-4">
                   <p className="mb-1 font-semibold text-fg text-sm">{s.label}</p>
                   <p className="text-xs text-fg-muted leading-5">{s.desc}</p>
-                  <p className="mt-2 border-t border-border pt-2 text-xs text-fg-muted/70 leading-5">
+                  <p className="mt-2 border-t border-border pt-2 text-xs text-fg-dim leading-5">
                     Pass: {s.pass}
                   </p>
                 </div>
@@ -141,7 +141,7 @@ export default function Home() {
                 <div key={s.key} className="rounded-xl border border-border bg-bg-muted/20 p-4">
                   <p className="mb-1 font-semibold text-fg text-sm">{s.label}</p>
                   <p className="text-xs text-fg-muted leading-5">{s.desc}</p>
-                  <p className="mt-2 border-t border-border pt-2 text-xs text-fg-muted/70 leading-5">
+                  <p className="mt-2 border-t border-border pt-2 text-xs text-fg-dim leading-5">
                     Pass: {s.pass}
                   </p>
                 </div>
@@ -205,7 +205,7 @@ export default function Home() {
                       </p>
                     </div>
                     <p className="text-sm text-fg-muted leading-6">{t.summary}</p>
-                    <p className="mt-3 text-xs text-fg-muted/70">
+                    <p className="mt-3 text-xs text-fg-dim">
                       {t.findings.length} findings documented
                     </p>
                     <p className="mt-4 text-sm font-semibold text-accent group-hover:text-accent-light transition-colors">
@@ -336,7 +336,7 @@ export default function Home() {
                       '3-month engagement to see results',
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-2">
-                        <span className="mt-0.5 shrink-0 text-red-400">✕</span>
+                        <span className="mt-0.5 shrink-0 text-danger">✕</span>
                         {item}
                       </li>
                     ))}

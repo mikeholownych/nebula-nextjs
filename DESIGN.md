@@ -2,8 +2,8 @@
 
 ## Font Family
 
-**Primary:** `Karla` (Google Fonts)
-**Fallback:** `-apple-system, BlinkMacSystemFont, sans-serif`
+**Primary:** System stack (`-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif`)
+**Rationale:** Zero font-loading cost, no FOUT/CLS. SF Pro (macOS), Segoe UI (Windows), Roboto (Android).
 
 ---
 

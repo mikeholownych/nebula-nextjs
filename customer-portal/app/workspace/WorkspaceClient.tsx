@@ -122,18 +122,17 @@ export default function WorkspaceClient() {
   if (!email) {
     return (
       <main
-        className="min-h-screen bg-[#050505] text-white pt-24"
+        className="min-h-screen bg-bg text-fg pt-24"
         id="main-content"
-        role="main"
       >
         <div className="max-w-md mx-auto px-6 py-16">
           <h1 className="text-3xl font-bold mb-2">Your Workspace</h1>
-          <p className="text-gray-400 mb-8">
+          <p className="text-fg-muted mb-8">
             Audit history, project health, and what to work on next — tied to the email
             you used for your audits.
           </p>
-          <div className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-6">
-            <label htmlFor="ws-email" className="block text-sm text-gray-300 mb-2">
+          <div className="bg-bg-elevated border border-border rounded-lg p-6">
+            <label htmlFor="ws-email" className="block text-sm text-fg-muted mb-2">
               Email used for your audits
             </label>
             <input
@@ -143,18 +142,18 @@ export default function WorkspaceClient() {
               onChange={(e) => setEmailInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && enter()}
               placeholder="you@company.com"
-              className="w-full rounded-lg border border-gray-700 bg-[#0d0d0d] px-4 py-2.5 text-white placeholder-gray-500 focus:border-emerald-500 focus:outline-none"
+              className="w-full rounded-lg border border-border bg-bg-panel px-4 py-2.5 text-fg placeholder-fg-dim focus:border-accent focus:outline-none"
             />
-            {error && <p className="mt-2 text-sm text-red-400">{error}</p>}
+            {error && <p className="mt-2 text-sm text-danger">{error}</p>}
             <button
               onClick={enter}
-              className="mt-4 w-full rounded-lg bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-black hover:bg-emerald-400 transition-colors"
+              className="mt-4 w-full rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
             >
               Open workspace
             </button>
-            <p className="mt-4 text-xs text-gray-500">
+            <p className="mt-4 text-xs text-fg-dim">
               No audits yet? Run a{' '}
-              <a href="/audit" className="text-emerald-400 hover:underline">
+              <a href="/audit" className="text-accent-light hover:underline">
                 free audit
               </a>{' '}
               first — results appear here automatically.
@@ -168,20 +167,20 @@ export default function WorkspaceClient() {
   // ── Loading / error ─────────────────────────────────────────────────
   if (loading && !audits) {
     return (
-      <main className="min-h-screen bg-[#050505] text-white pt-24" id="main-content" role="main">
-        <div className="max-w-6xl mx-auto px-6 py-16 text-gray-400">Loading workspace…</div>
+      <main className="min-h-screen bg-bg text-fg pt-24" id="main-content">
+        <div className="max-w-6xl mx-auto px-6 py-16 text-fg-muted">Loading workspace…</div>
       </main>
     )
   }
 
   if (error && !audits) {
     return (
-      <main className="min-h-screen bg-[#050505] text-white pt-24" id="main-content" role="main">
+      <main className="min-h-screen bg-bg text-fg pt-24" id="main-content">
         <div className="max-w-6xl mx-auto px-6 py-16">
-          <p className="text-red-400 mb-4">{error}</p>
+          <p className="text-danger mb-4">{error}</p>
           <button
             onClick={() => email && load(email)}
-            className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-black"
+            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg"
           >
             Retry
           </button>
@@ -223,18 +222,18 @@ export default function WorkspaceClient() {
   ]
 
   return (
-    <main className="min-h-screen bg-[#050505] text-white pt-24" id="main-content" role="main">
+    <main className="min-h-screen bg-bg text-fg pt-24" id="main-content">
       <div className="mx-auto flex max-w-[1440px] gap-0 px-4 py-5 sm:px-6 lg:px-8">
-        <aside className="hidden w-56 shrink-0 border-r border-gray-800 pr-5 lg:block" aria-label="Workspace navigation">
+        <aside className="hidden w-56 shrink-0 border-r border-border pr-5 lg:block" aria-label="Workspace navigation">
           <div className="sticky top-28">
             <div className="mb-8 px-3">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8b8b86]">Nebula</p>
-              <p className="mt-1 text-sm font-semibold text-[#222]">Customer workspace</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-fg-dim">Nebula</p>
+              <p className="mt-1 text-sm font-semibold text-fg-dim">Customer workspace</p>
             </div>
             <div className="space-y-7">
               {navGroups.map((group) => (
                 <div key={group.label}>
-                  <p className="mb-2 px-3 text-[10px] font-bold uppercase tracking-[0.16em] text-[#a0a09a]">{group.label}</p>
+                  <p className="mb-2 px-3 text-[10px] font-bold uppercase tracking-[0.16em] text-fg-dim">{group.label}</p>
                   <div className="space-y-0.5">
                     {group.items.map((item) => (
                       <button
@@ -242,10 +241,10 @@ export default function WorkspaceClient() {
                         onClick={() => setTab(item.id)}
                         aria-current={tab === item.id ? 'page' : undefined}
                         className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-[13px] font-medium transition-colors ${
-                          tab === item.id ? 'bg-[#1a1a1a] text-white' : 'text-gray-400 hover:bg-[#111] hover:text-white'
+                          tab === item.id ? 'bg-bg-panel text-fg' : 'text-fg-muted hover:bg-bg-elevated hover:text-fg'
                         }`}
                       >
-                        <span className={`h-1.5 w-1.5 rounded-full ${tab === item.id ? 'bg-[#171717]' : 'bg-[#c7c7c1]'}`} aria-hidden="true" />
+                        <span className={`h-1.5 w-1.5 rounded-full ${tab === item.id ? 'bg-accent' : 'bg-fg-muted'}`} aria-hidden="true" />
                         {item.label}
                       </button>
                     ))}
@@ -253,27 +252,27 @@ export default function WorkspaceClient() {
                 </div>
               ))}
             </div>
-            <div className="mt-10 border-t border-gray-800 px-3 pt-4">
-              <p className="truncate text-xs text-[#8b8b86]" title={email}>{email}</p>
-              <button onClick={signOut} className="mt-2 text-xs font-medium text-gray-400 hover:text-white">Sign out</button>
+            <div className="mt-10 border-t border-border px-3 pt-4">
+              <p className="truncate text-xs text-fg-dim" title={email}>{email}</p>
+              <button onClick={signOut} className="mt-2 text-xs font-medium text-fg-muted hover:text-fg">Sign out</button>
             </div>
           </div>
         </aside>
 
         <div className="min-w-0 flex-1 lg:pl-8">
-          <header className="mb-7 flex flex-wrap items-end justify-between gap-4 border-b border-gray-800 pb-6">
+          <header className="mb-7 flex flex-wrap items-end justify-between gap-4 border-b border-border pb-6">
             <div>
-              <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#8b8b86]">{tab === 'dashboard' ? 'Overview' : 'Workspace'}</p>
-              <h1 className="text-2xl font-semibold tracking-[-0.03em] text-white">{tab === 'dashboard' ? 'Good to see you' : navGroups.flatMap((g) => g.items).find((item) => item.id === tab)?.label}</h1>
-              <p className="mt-1 max-w-xl text-sm text-gray-400">{tab === 'dashboard' ? 'See what changed, what matters, and what to fix next.' : email}</p>
+              <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-fg-dim">{tab === 'dashboard' ? 'Overview' : 'Workspace'}</p>
+              <h1 className="text-2xl font-semibold tracking-[-0.03em] text-fg">{tab === 'dashboard' ? 'Good to see you' : navGroups.flatMap((g) => g.items).find((item) => item.id === tab)?.label}</h1>
+              <p className="mt-1 max-w-xl text-sm text-fg-muted">{tab === 'dashboard' ? 'See what changed, what matters, and what to fix next.' : email}</p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="hidden text-xs text-[#999992] sm:inline">{email}</span>
-              <a href="/audit" className="rounded-lg bg-[#171717] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#333]">Run new audit</a>
+              <span className="hidden text-xs text-fg-dim sm:inline">{email}</span>
+              <a href="/audit" className="rounded-lg bg-bg-panel px-4 py-2.5 text-sm font-semibold text-fg transition-colors hover:bg-bg-elevated">Run new audit</a>
             </div>
           </header>
           {email && (
-            <div className="text-xs text-[#8b8b86] border-t border-gray-800 py-2 px-4 -mx-4 mb-4">
+            <div className="text-xs text-fg-dim border-t border-border py-2 px-4 -mx-4 mb-4">
               Your workspace is tied to your audit email. Audit findings are about public pages — no private data is stored here.
             </div>
           )}
@@ -284,7 +283,7 @@ export default function WorkspaceClient() {
               <select
                 value={tab}
                 onChange={(e) => setTab(e.target.value as TabId)}
-                className="w-full rounded-lg border border-border bg-bg-muted py-2 px-3 text-fg text-sm focus:outline-none"
+                className="w-full rounded-lg border border-border bg-bg-panel py-2 px-3 text-fg text-sm focus:outline-none"
                 aria-label="Navigate workspace"
               >
                 {navGroups.flatMap((group) => group.items).map((item) => (
@@ -293,9 +292,9 @@ export default function WorkspaceClient() {
               </select>
             </div>
             {/* Tablet (640–1023px): horizontal scrollable tab row */}
-            <div className="hidden sm:flex gap-1 overflow-x-auto border-b border-gray-800 pb-px">
+            <div className="hidden sm:flex gap-1 overflow-x-auto border-b border-border pb-px">
               {navGroups.flatMap((group) => group.items).map((item) => (
-                <button key={item.id} onClick={() => setTab(item.id)} aria-current={tab === item.id ? 'page' : undefined} className={`whitespace-nowrap px-3 py-2 text-xs font-semibold ${tab === item.id ? 'border-b-2 border-white text-white' : 'text-[#8b8b86]'}`}>{item.label}</button>
+                <button key={item.id} onClick={() => setTab(item.id)} aria-current={tab === item.id ? 'page' : undefined} className={`whitespace-nowrap px-3 py-2 text-xs font-semibold ${tab === item.id ? 'border-b-2 border-fg text-fg' : 'text-fg-dim'}`}>{item.label}</button>
               ))}
             </div>
           </nav>

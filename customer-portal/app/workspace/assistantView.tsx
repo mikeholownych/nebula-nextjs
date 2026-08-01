@@ -85,24 +85,24 @@ export default function AssistantView({ email, audits }: AssistantViewProps) {
     <div className="flex flex-col h-[calc(100vh-260px)] min-h-[500px]">
       {/* Header */}
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-white">AI Assistant</h2>
-        <p className="text-sm text-gray-400 mt-1">
+        <h2 className="text-xl font-bold text-fg">AI Assistant</h2>
+        <p className="text-sm text-fg-muted mt-1">
           Ask questions grounded in your real audit data. Every answer references your actual
           findings.
         </p>
         {recentAuditIds.length === 0 && (
-          <p className="mt-2 text-sm text-amber-400">
+          <p className="mt-2 text-sm text-signal-fail">
             No completed audits found. Run an audit first to get data-grounded answers.
           </p>
         )}
       </div>
 
       {/* Chat thread */}
-      <div className="flex-1 overflow-y-auto rounded-lg border border-gray-800 bg-[#080808] p-4 space-y-4 mb-4">
+      <div className="flex-1 overflow-y-auto rounded-lg border border-border bg-bg p-4 space-y-4 mb-4">
         {messages.length === 0 && !loading && (
           <div className="flex flex-col items-center justify-center h-full text-center py-10">
             <div className="text-3xl mb-3">&#x1F4CA;</div>
-            <p className="text-gray-400 text-sm max-w-sm">
+            <p className="text-fg-muted text-sm max-w-sm">
               Ask a question about your audits. Try one of the suggestions below, or type your own.
             </p>
           </div>
@@ -114,21 +114,21 @@ export default function AssistantView({ email, audits }: AssistantViewProps) {
             className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             {msg.role === 'assistant' && (
-              <div className="flex-shrink-0 w-7 h-7 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-xs font-bold mt-0.5">
+              <div className="flex-shrink-0 w-7 h-7 rounded-full bg-accent-dim flex items-center justify-center text-accent text-xs font-bold mt-0.5">
                 AI
               </div>
             )}
             <div
               className={`max-w-[75%] rounded-lg px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${
                 msg.role === 'user'
-                  ? 'bg-emerald-500/10 text-white border border-emerald-500/20'
-                  : 'bg-gray-800/60 text-gray-100 border border-gray-700/50'
+                  ? 'bg-accent-dim text-fg border border-accent/20'
+                  : 'bg-bg-elevated text-fg border border-border'
               }`}
             >
               {msg.content}
             </div>
             {msg.role === 'user' && (
-              <div className="flex-shrink-0 w-7 h-7 rounded-full bg-gray-700 flex items-center justify-center text-gray-300 text-xs font-bold mt-0.5">
+              <div className="flex-shrink-0 w-7 h-7 rounded-full bg-bg-panel flex items-center justify-center text-fg-muted text-xs font-bold mt-0.5">
                 You
               </div>
             )}
@@ -137,13 +137,13 @@ export default function AssistantView({ email, audits }: AssistantViewProps) {
 
         {loading && (
           <div className="flex gap-3 justify-start">
-            <div className="flex-shrink-0 w-7 h-7 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-xs font-bold mt-0.5">
+            <div className="flex-shrink-0 w-7 h-7 rounded-full bg-accent-dim flex items-center justify-center text-accent text-xs font-bold mt-0.5">
               AI
             </div>
-            <div className="bg-gray-800/60 border border-gray-700/50 rounded-lg px-4 py-3 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:-0.3s]" />
-              <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:-0.15s]" />
-              <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce" />
+            <div className="bg-bg-elevated border border-border rounded-lg px-4 py-3 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-fg-muted animate-pulse-soft [animation-delay:-0.3s]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-fg-muted animate-pulse-soft [animation-delay:-0.15s]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-fg-muted animate-pulse-soft" />
             </div>
           </div>
         )}
@@ -159,7 +159,7 @@ export default function AssistantView({ email, audits }: AssistantViewProps) {
               key={q}
               onClick={() => send(q)}
               disabled={loading || recentAuditIds.length === 0}
-              className="px-3 py-1.5 rounded-full text-xs font-medium bg-gray-800 border border-gray-700 text-gray-300 hover:border-emerald-500/50 hover:text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="px-3 py-1.5 rounded-full text-xs font-medium bg-bg-elevated border border-border text-fg-muted hover:border-accent/50 hover:text-fg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {q}
             </button>
@@ -179,12 +179,12 @@ export default function AssistantView({ email, audits }: AssistantViewProps) {
               : 'Ask about your audit data…'
           }
           disabled={loading || recentAuditIds.length === 0}
-          className="flex-1 rounded-lg border border-gray-700 bg-[#0d0d0d] px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-emerald-500 focus:outline-none disabled:opacity-50"
+          className="flex-1 rounded-lg border border-border bg-bg-panel px-4 py-2.5 text-sm text-fg placeholder-fg-dim focus:border-accent focus:outline-none disabled:opacity-50"
         />
         <button
           type="submit"
           disabled={loading || !input.trim() || recentAuditIds.length === 0}
-          className="rounded-lg bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-black hover:bg-emerald-400 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          className="rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
         >
           Send
         </button>

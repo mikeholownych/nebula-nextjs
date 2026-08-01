@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function LabPage() {
   return (
-    <main className="min-h-screen bg-bg">
+    <main id="main-content" className="min-h-screen bg-bg">
       <section className="border-b border-border px-6 py-16">
         <div className="mx-auto max-w-4xl">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">

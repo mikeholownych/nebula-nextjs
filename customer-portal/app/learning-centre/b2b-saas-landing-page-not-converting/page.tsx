@@ -84,7 +84,7 @@ export default function B2BSaaSLandingPageNotConverting() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
+      <main id="main-content" className="min-h-screen bg-bg pt-24">
 
         <nav aria-label="Breadcrumb" className="mx-auto max-w-4xl px-6 pt-6">
           <ol className="flex items-center gap-2 text-sm text-fg-muted">

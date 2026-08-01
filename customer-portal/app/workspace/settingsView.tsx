@@ -91,7 +91,7 @@ export default function SettingsView({ email }: { email: string }) {
     <div className="space-y-10 max-w-2xl">
       {/* Toast */}
       {toast && (
-        <div className="fixed bottom-6 right-6 z-50 rounded-lg bg-[#171717] px-5 py-3 text-sm font-medium text-white shadow-lg">
+        <div className="fixed bottom-6 right-6 z-50 rounded-lg bg-bg-panel px-5 py-3 text-sm font-medium text-fg shadow-lg">
           {toast}
         </div>
       )}
@@ -107,11 +107,11 @@ export default function SettingsView({ email }: { email: string }) {
               type="checkbox"
               checked={notifPrefs.regressionAlerts}
               onChange={(e) => handleNotifChange('regressionAlerts', e.target.checked)}
-              className="mt-0.5 h-4 w-4 cursor-pointer rounded border-gray-300 accent-[#171717]"
+              className="mt-0.5 h-4 w-4 cursor-pointer rounded border-border accent-[#171717]"
             />
             <div>
               <p className="text-sm font-medium text-[#171717]">Monitor regression alerts</p>
-              <p className="mt-0.5 text-xs text-[#8b8b86]">Email when a monitored page score drops below its baseline.</p>
+              <p className="mt-0.5 text-xs text-fg-dim">Email when a monitored page score drops below its baseline.</p>
             </div>
           </label>
 
@@ -121,14 +121,14 @@ export default function SettingsView({ email }: { email: string }) {
               type="checkbox"
               checked={false}
               disabled
-              className="mt-0.5 h-4 w-4 rounded border-gray-300"
+              className="mt-0.5 h-4 w-4 rounded border-border"
             />
             <div>
               <p className="text-sm font-medium text-[#171717]">
                 Weekly digest{' '}
-                <span className="ml-1 rounded-full bg-[#f0f0ec] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#8b8b86]">Coming soon</span>
+                <span className="ml-1 rounded-full bg-[#f0f0ec] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-fg-dim">Coming soon</span>
               </p>
-              <p className="mt-0.5 text-xs text-[#8b8b86]">Weekly summary of your page scores and top fixes.</p>
+              <p className="mt-0.5 text-xs text-fg-dim">Weekly summary of your page scores and top fixes.</p>
             </div>
           </label>
 
@@ -138,14 +138,14 @@ export default function SettingsView({ email }: { email: string }) {
               type="checkbox"
               checked
               disabled
-              className="mt-0.5 h-4 w-4 rounded border-gray-300 accent-[#171717]"
+              className="mt-0.5 h-4 w-4 rounded border-border accent-[#171717]"
             />
             <div>
               <p className="text-sm font-medium text-[#171717]">
                 Billing alerts{' '}
-                <span className="ml-1 rounded-full bg-[#f0f0ec] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#8b8b86]">Always on</span>
+                <span className="ml-1 rounded-full bg-[#f0f0ec] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-fg-dim">Always on</span>
               </p>
-              <p className="mt-0.5 text-xs text-[#8b8b86]">Receipts and payment failure notices — cannot be disabled.</p>
+              <p className="mt-0.5 text-xs text-fg-dim">Receipts and payment failure notices — cannot be disabled.</p>
             </div>
           </div>
         </div>
@@ -159,7 +159,7 @@ export default function SettingsView({ email }: { email: string }) {
           {/* Email */}
           <div className="flex items-center justify-between px-5 py-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-[#8b8b86]">Email</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-fg-dim">Email</p>
               <p className="mt-0.5 text-sm font-medium text-[#171717]">{email}</p>
             </div>
           </div>
@@ -168,7 +168,7 @@ export default function SettingsView({ email }: { email: string }) {
           <div className="flex items-center justify-between px-5 py-4">
             <div>
               <p className="text-sm font-medium text-[#171717]">Request account data export</p>
-              <p className="mt-0.5 text-xs text-[#8b8b86]">Download all audit data and account info.</p>
+              <p className="mt-0.5 text-xs text-fg-dim">Download all audit data and account info.</p>
             </div>
             <button
               onClick={() => showToast('Coming soon')}
@@ -182,7 +182,7 @@ export default function SettingsView({ email }: { email: string }) {
           <div className="flex items-start justify-between px-5 py-4">
             <div>
               <p className="text-sm font-medium text-red-600">Delete account</p>
-              <p className="mt-0.5 text-xs text-[#8b8b86]">Permanently remove your account and all data.</p>
+              <p className="mt-0.5 text-xs text-fg-dim">Permanently remove your account and all data.</p>
               {deleteMsg && (
                 <p className="mt-2 text-xs font-medium text-[#777771]">
                   Contact{' '}
@@ -208,7 +208,7 @@ export default function SettingsView({ email }: { email: string }) {
         <h2 className="mb-1 text-base font-semibold text-[#171717]">Timezone</h2>
         <p className="mb-4 text-sm text-[#777771]">Used for scheduling and report timestamps.</p>
         <div className="rounded-xl border border-[#e5e5e2] bg-white px-5 py-4">
-          <label htmlFor="tz-select" className="block text-xs font-semibold uppercase tracking-wide text-[#8b8b86] mb-2">
+          <label htmlFor="tz-select" className="block text-xs font-semibold uppercase tracking-wide text-fg-dim mb-2">
             Your timezone
           </label>
           <select
@@ -225,7 +225,7 @@ export default function SettingsView({ email }: { email: string }) {
               <option key={tz} value={tz}>{tz}</option>
             ))}
           </select>
-          <p className="mt-2 text-xs text-[#8b8b86]">Auto-detected from your browser. Changes save immediately.</p>
+          <p className="mt-2 text-xs text-fg-dim">Auto-detected from your browser. Changes save immediately.</p>
         </div>
       </section>
     </div>

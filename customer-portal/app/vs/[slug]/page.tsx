@@ -42,7 +42,7 @@ export default async function ComparisonPage({
   const nebulaWinCount = c.rows.filter((r) => r.nebulaWins).length
 
   return (
-    <main id="main-content" role="main" className="min-h-screen bg-bg pt-24 pb-24">
+    <main id="main-content" className="min-h-screen bg-bg pt-24 pb-24">
       <article className="mx-auto max-w-4xl px-6 py-12">
 
         {/* Breadcrumb */}
@@ -105,7 +105,7 @@ export default async function ComparisonPage({
         </section>
 
         {/* Disclosure */}
-        <div className="mt-6 rounded-xl border border-amber-400/20 bg-amber-400/5 px-5 py-4 text-sm text-fg-muted">
+        <div className="mt-6 rounded-xl border border-signal-fail/20 bg-signal-fail/5 px-5 py-4 text-sm text-fg-muted">
           <strong className="text-fg">Note: </strong>
           Competitor information is based on publicly available pricing and feature pages checked in {c.checkedAt}.
           Prices and features change — verify at{' '}

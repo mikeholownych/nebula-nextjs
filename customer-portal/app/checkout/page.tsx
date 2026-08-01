@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function CheckoutPage() {
   return (
-    <main className="min-h-screen bg-bg px-6 py-12">
+    <main id="main-content" className="min-h-screen bg-bg px-6 py-12">
       <Suspense fallback={null}><CheckoutPageTracker /></Suspense>
       <div className="mx-auto max-w-lg">
         <div className="mb-8 text-center">

@@ -32,9 +32,9 @@ function fmtDate(iso?: string | null): string {
 }
 
 function impactLabel(impact: number): { label: string; cls: string } {
-  if (impact >= 8) return { label: 'Critical', cls: 'text-red-400 bg-red-500/10 border-red-500/30' }
-  if (impact >= 5) return { label: 'Warning', cls: 'text-amber-400 bg-amber-500/10 border-amber-500/30' }
-  return { label: 'Advisory', cls: 'text-gray-400 bg-gray-500/10 border-gray-500/30' }
+  if (impact >= 8) return { label: 'Critical', cls: 'text-danger bg-danger-dim border-danger/30' }
+  if (impact >= 5) return { label: 'Warning', cls: 'text-signal-fail bg-signal-fail/10 border-signal-fail/30' }
+  return { label: 'Advisory', cls: 'text-fg-muted bg-bg-elevated border-border/30' }
 }
 
 function domainOf(url: string): string {
@@ -83,9 +83,9 @@ export default function ReportView({ audits }: { audits: WorkspaceAudit[] }) {
 
   if (audits.length === 0) {
     return (
-      <div className="py-16 text-center text-gray-400">
+      <div className="py-16 text-center text-fg-muted">
         No audits yet. Run a{' '}
-        <a href="/audit" className="text-emerald-400 hover:underline">free audit</a>{' '}
+        <a href="/audit" className="text-accent hover:underline">free audit</a>{' '}
         first — reports appear here automatically.
       </div>
     )
@@ -96,14 +96,14 @@ export default function ReportView({ audits }: { audits: WorkspaceAudit[] }) {
       {/* Controls — print:hidden */}
       <div className="flex flex-wrap items-center gap-4 print:hidden">
         <div className="flex-1 min-w-0">
-          <label htmlFor="report-select" className="block text-xs text-gray-400 mb-1">
+          <label htmlFor="report-select" className="block text-xs text-fg-muted mb-1">
             Select audit
           </label>
           <select
             id="report-select"
             value={selectedId}
             onChange={(e) => setSelectedId(e.target.value)}
-            className="w-full rounded-lg border border-gray-700 bg-[#0d0d0d] px-3 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
+            className="w-full rounded-lg border border-border bg-bg-panel px-3 py-2 text-sm text-fg focus:border-accent focus:outline-none"
           >
             {audits.map((a) => (
               <option key={a.id} value={a.id}>
@@ -116,51 +116,51 @@ export default function ReportView({ audits }: { audits: WorkspaceAudit[] }) {
         <div className="flex gap-3 pt-5">
           <button
             onClick={copyLink}
-            className="rounded-lg border border-gray-700 px-4 py-2 text-sm text-gray-300 hover:border-emerald-500 hover:text-white transition-colors"
+            className="rounded-lg border border-border px-4 py-2 text-sm text-fg-muted hover:border-accent hover:text-fg transition-colors"
           >
             {copied ? '✓ Copied' : 'Copy share link'}
           </button>
           <button
             onClick={() => window.print()}
-            className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-black hover:bg-emerald-400 transition-colors"
+            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
           >
             Print / Save as PDF
           </button>
         </div>
       </div>
 
-      {loading && <div className="py-8 text-center text-gray-400">Loading report…</div>}
-      {error && <div className="py-8 text-center text-red-400">{error}</div>}
+      {loading && <div className="py-8 text-center text-fg-muted">Loading report…</div>}
+      {error && <div className="py-8 text-center text-danger">{error}</div>}
 
       {/* Report body — shown on screen and in print */}
       {detail && !loading && (
-        <div className="rounded-2xl border border-gray-800 bg-[#0a0a0a] p-8 print:border-none print:bg-white print:text-black print:p-0">
+        <div className="rounded-2xl border border-border bg-bg-elevated p-8 print:border-none print:bg-white print:text-bg print:p-0">
 
           {/* Header */}
-          <div className="mb-8 border-b border-gray-800 pb-8 print:border-gray-200">
-            <p className="text-xs font-semibold uppercase tracking-widest text-emerald-400 print:text-emerald-700 mb-2">
+          <div className="mb-8 border-b border-border pb-8 print:border-gray-200">
+            <p className="text-xs font-semibold uppercase tracking-widest text-accent print:text-emerald-700 mb-2">
               Landing Page Audit Report · Nebula Components
             </p>
-            <h1 className="text-2xl font-bold text-white print:text-black">{detail.url}</h1>
-            <p className="mt-1 text-sm text-gray-400 print:text-gray-600">
+            <h1 className="text-2xl font-bold text-fg print:text-bg">{detail.url}</h1>
+            <p className="mt-1 text-sm text-fg-muted print:text-fg-dim">
               Audited {fmtDate(detail.completed_at ?? detail.created_at)}
             </p>
 
             <div className="mt-6 flex flex-wrap gap-6">
               <div>
-                <p className="text-xs text-gray-500 print:text-gray-500 uppercase tracking-widest">Score</p>
-                <p className="text-4xl font-bold text-white print:text-black">
+                <p className="text-xs text-fg-dim print:text-fg-dim uppercase tracking-widest">Score</p>
+                <p className="text-4xl font-bold text-fg print:text-bg">
                   {detail.composite ?? detail.score}
-                  <span className="text-xl text-gray-400 print:text-gray-500">/10</span>
+                  <span className="text-xl text-fg-muted print:text-fg-dim">/10</span>
                 </p>
               </div>
               <div>
-                <p className="text-xs text-gray-500 print:text-gray-500 uppercase tracking-widest">Grade</p>
-                <p className="text-4xl font-bold text-white print:text-black">{detail.grade}</p>
+                <p className="text-xs text-fg-dim print:text-fg-dim uppercase tracking-widest">Grade</p>
+                <p className="text-4xl font-bold text-fg print:text-bg">{detail.grade}</p>
               </div>
               <div>
-                <p className="text-xs text-gray-500 print:text-gray-500 uppercase tracking-widest">Findings</p>
-                <p className="text-4xl font-bold text-white print:text-black">{detail.findings?.length ?? 0}</p>
+                <p className="text-xs text-fg-dim print:text-fg-dim uppercase tracking-widest">Findings</p>
+                <p className="text-4xl font-bold text-fg print:text-bg">{detail.findings?.length ?? 0}</p>
               </div>
             </div>
           </div>
@@ -168,36 +168,36 @@ export default function ReportView({ audits }: { audits: WorkspaceAudit[] }) {
           {/* Findings */}
           {detail.findings && detail.findings.length > 0 ? (
             <div className="space-y-6">
-              <h2 className="text-lg font-bold text-white print:text-black">Findings</h2>
+              <h2 className="text-lg font-bold text-fg print:text-bg">Findings</h2>
               {detail.findings.map((f, i) => {
                 const tone = impactLabel(f.impact)
                 const ev = evidenceText(f.evidence)
                 return (
-                  <div key={f.key} className="rounded-xl border border-gray-800 print:border-gray-200 p-5">
+                  <div key={f.key} className="rounded-xl border border-border print:border-gray-200 p-5">
                     <div className="flex items-start justify-between gap-4 mb-3">
                       <div>
-                        <p className="text-xs text-gray-500 print:text-gray-500 uppercase tracking-widest mb-0.5">
+                        <p className="text-xs text-fg-dim print:text-fg-dim uppercase tracking-widest mb-0.5">
                           Finding {i + 1}
                         </p>
-                        <h3 className="font-bold text-white print:text-black">{f.label}</h3>
+                        <h3 className="font-bold text-fg print:text-bg">{f.label}</h3>
                       </div>
                       <span className={`shrink-0 rounded-full border px-2.5 py-0.5 text-xs font-semibold ${tone.cls}`}>
                         {tone.label} · {f.impact}/10
                       </span>
                     </div>
                     {f.issue && (
-                      <p className="text-sm text-gray-300 print:text-gray-700 mb-3">{f.issue}</p>
+                      <p className="text-sm text-fg-muted print:text-gray-700 mb-3">{f.issue}</p>
                     )}
                     {ev && (
-                      <div className="rounded-lg bg-[#111] print:bg-gray-50 border border-gray-800 print:border-gray-200 px-4 py-2.5 mb-3">
-                        <p className="text-xs text-gray-500 print:text-gray-500 uppercase tracking-widest mb-1">Evidence</p>
-                        <p className="text-xs font-mono text-gray-400 print:text-gray-600">{ev}</p>
+                      <div className="rounded-lg bg-bg-panel print:bg-gray-50 border border-border print:border-gray-200 px-4 py-2.5 mb-3">
+                        <p className="text-xs text-fg-dim print:text-fg-dim uppercase tracking-widest mb-1">Evidence</p>
+                        <p className="text-xs font-mono text-fg-muted print:text-fg-dim">{ev}</p>
                       </div>
                     )}
                     {f.fix && (
                       <div>
-                        <p className="text-xs text-gray-500 print:text-gray-500 uppercase tracking-widest mb-1">Recommended fix</p>
-                        <p className="text-sm text-gray-300 print:text-gray-700">{f.fix}</p>
+                        <p className="text-xs text-fg-dim print:text-fg-dim uppercase tracking-widest mb-1">Recommended fix</p>
+                        <p className="text-sm text-fg-muted print:text-gray-700">{f.fix}</p>
                       </div>
                     )}
                   </div>
@@ -205,11 +205,11 @@ export default function ReportView({ audits }: { audits: WorkspaceAudit[] }) {
               })}
             </div>
           ) : (
-            <p className="text-gray-400 print:text-gray-600">No findings — all signals passed.</p>
+            <p className="text-fg-muted print:text-fg-dim">No findings — all signals passed.</p>
           )}
 
           {/* Footer */}
-          <div className="mt-10 border-t border-gray-800 print:border-gray-200 pt-6 text-xs text-gray-500 print:text-gray-400 flex items-center justify-between">
+          <div className="mt-10 border-t border-border print:border-gray-200 pt-6 text-xs text-fg-dim print:text-fg-muted flex items-center justify-between">
             <span>Generated by Nebula Components · nebulacomponents.shop</span>
             <span>Audit ID: {detail.audit_id}</span>
           </div>

@@ -63,10 +63,10 @@ function movementText(before: Severity, after: Severity): { label: string; tone:
 }
 
 const STATUS_STYLES: Record<Severity, string> = {
-  clear: 'bg-emerald-500/15 text-emerald-400 border-emerald-700/50',
-  critical: 'bg-red-500/15 text-red-400 border-red-700/50',
-  warning: 'bg-amber-500/15 text-amber-400 border-amber-700/50',
-  advisory: 'bg-gray-500/15 text-gray-400 border-gray-700/50',
+  clear: 'bg-accent/15 text-accent border-accent/30',
+  critical: 'bg-red-500/15 text-danger border-red-700/50',
+  warning: 'bg-signal-fail/10 text-signal-fail border-signal-fail/30',
+  advisory: 'bg-bg-elevated text-fg-muted border-border/50',
 }
 
 function StatusChip({ status }: { status: Severity }) {
@@ -137,16 +137,16 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
 
   if (sorted.length < 2) {
     return (
-      <div className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-10 text-center">
+      <div className="bg-bg-elevated border border-border rounded-lg p-10 text-center">
         <h2 className="text-xl font-bold mb-2">Compare needs two versions</h2>
-        <p className="text-gray-400 mb-6 max-w-md mx-auto">
+        <p className="text-fg-muted mb-6 max-w-md mx-auto">
           Run a follow-up audit on the same page — the diff shows exactly what changed, like a pull
           request for your landing page.
         </p>
         {sorted[0] && (
           <a
             href={`/audit?url=${encodeURIComponent(sorted[0].url)}`}
-            className="inline-block rounded-lg bg-emerald-500 px-6 py-2.5 text-sm font-semibold text-black hover:bg-emerald-400 transition-colors"
+            className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
           >
             Run follow-up audit
           </a>
@@ -212,30 +212,30 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
       {/* Selectors */}
       <div className="grid md:grid-cols-[1fr_auto_1fr] gap-4 items-end">
         <div>
-          <label htmlFor="compare-before" className="block text-xs text-gray-500 uppercase tracking-widest mb-2">
+          <label htmlFor="compare-before" className="block text-xs text-fg-dim uppercase tracking-widest mb-2">
             Before
           </label>
           <select
             id="compare-before"
             value={beforeId || ''}
             onChange={(e) => setBeforeId(e.target.value || null)}
-            className="w-full rounded-lg border border-gray-700 bg-[#0d0d0d] px-3 py-2.5 text-sm text-white focus:border-emerald-500 focus:outline-none"
+            className="w-full rounded-lg border border-border bg-bg-panel px-3 py-2.5 text-sm text-fg focus:border-accent focus:outline-none"
           >
             {selectOptions(afterId)}
           </select>
         </div>
         <div className="hidden md:flex items-center justify-center pb-2">
-          <span className="text-2xl text-emerald-400">→</span>
+          <span className="text-2xl text-accent">→</span>
         </div>
         <div>
-          <label htmlFor="compare-after" className="block text-xs text-gray-500 uppercase tracking-widest mb-2">
+          <label htmlFor="compare-after" className="block text-xs text-fg-dim uppercase tracking-widest mb-2">
             After
           </label>
           <select
             id="compare-after"
             value={afterId || ''}
             onChange={(e) => setAfterId(e.target.value || null)}
-            className="w-full rounded-lg border border-gray-700 bg-[#0d0d0d] px-3 py-2.5 text-sm text-white focus:border-emerald-500 focus:outline-none"
+            className="w-full rounded-lg border border-border bg-bg-panel px-3 py-2.5 text-sm text-fg focus:border-accent focus:outline-none"
           >
             {selectOptions(beforeId)}
           </select>
@@ -243,15 +243,15 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
       </div>
 
       {/* Score movement */}
-      <section className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-6">
+      <section className="bg-bg-elevated border border-border rounded-lg p-6">
         <div className="flex items-center justify-between gap-4">
           <div className="flex-1">
-            <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">Before</p>
-            <p className="text-4xl font-bold text-gray-300">
+            <p className="text-xs text-fg-dim uppercase tracking-widest mb-1">Before</p>
+            <p className="text-4xl font-bold text-fg-muted">
               {Math.round(beforeScore * 10)}
-              <span className="text-base text-gray-500 font-normal">/100</span>
+              <span className="text-base text-fg-dim font-normal">/100</span>
             </p>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-fg-dim mt-1">
               {before ? fmtDate(before.completed_at || before.created_at) : '—'}
               {before?.grade ? ` · Grade ${before.grade}` : ''}
             </p>
@@ -259,49 +259,49 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
           <div className="text-center px-4">
             {delta !== null && (
               <>
-                <p className={`text-3xl font-bold ${delta > 0 ? 'text-emerald-400' : delta < 0 ? 'text-red-400' : 'text-gray-400'}`}>
+                <p className={`text-3xl font-bold ${delta > 0 ? 'text-accent' : delta < 0 ? 'text-danger' : 'text-fg-muted'}`}>
                   {delta > 0 ? '+' : ''}
                   {Number.isInteger(delta) ? delta : delta.toFixed(1)}
                 </p>
-                <p className="text-xs text-gray-500 mt-1">score movement</p>
+                <p className="text-xs text-fg-dim mt-1">score movement</p>
                 {samePage ? (
-                  <p className="text-xs text-emerald-500/80 mt-1">same page</p>
+                  <p className="text-xs text-accent/80 mt-1">same page</p>
                 ) : (
-                  <p className="text-xs text-amber-500/80 mt-1">different page</p>
+                  <p className="text-xs text-signal-fail/80 mt-1">different page</p>
                 )}
               </>
             )}
           </div>
           <div className="flex-1 text-right">
-            <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">After</p>
-            <p className="text-4xl font-bold text-emerald-400">
+            <p className="text-xs text-fg-dim uppercase tracking-widest mb-1">After</p>
+            <p className="text-4xl font-bold text-accent">
               {Math.round(afterScore * 10)}
-              <span className="text-base text-gray-500 font-normal">/100</span>
+              <span className="text-base text-fg-dim font-normal">/100</span>
             </p>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-fg-dim mt-1">
               {after ? fmtDate(after.completed_at || after.created_at) : '—'}
               {after?.grade ? ` · Grade ${after.grade}` : ''}
             </p>
           </div>
         </div>
-        {loading && <p className="text-xs text-gray-500 mt-4">Loading findings…</p>}
+        {loading && <p className="text-xs text-fg-dim mt-4">Loading findings…</p>}
       </section>
 
       {/* Visual diff — screenshots side by side if available */}
       {before?.screenshot_url && after?.screenshot_url && samePage && (
-        <section className="rounded-xl border border-gray-800 bg-[#0a0a0a] p-5">
-          <h3 className="mb-4 text-sm font-semibold text-gray-300 uppercase tracking-widest">Page snapshots</h3>
+        <section className="rounded-xl border border-border bg-bg-elevated p-5">
+          <h3 className="mb-4 text-sm font-semibold text-fg-muted uppercase tracking-widest">Page snapshots</h3>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-xs text-gray-500 mb-2">Before · {fmtDate(before.completed_at || before.created_at)}</p>
-              <div className="rounded-lg border border-gray-700 overflow-hidden">
+              <p className="text-xs text-fg-dim mb-2">Before · {fmtDate(before.completed_at || before.created_at)}</p>
+              <div className="rounded-lg border border-border overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={before.screenshot_url} alt="Before" className="w-full object-cover object-top" />
               </div>
             </div>
             <div>
-              <p className="text-xs text-gray-500 mb-2">After · {fmtDate(after.completed_at || after.created_at)}</p>
-              <div className="rounded-lg border border-gray-700 overflow-hidden">
+              <p className="text-xs text-fg-dim mb-2">After · {fmtDate(after.completed_at || after.created_at)}</p>
+              <div className="rounded-lg border border-border overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={after.screenshot_url} alt="After" className="w-full object-cover object-top" />
               </div>
@@ -311,23 +311,23 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
       )}
 
       {/* Signal group diff */}
-      <section className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-6">
-        <h3 className="text-sm font-semibold text-white mb-4">Components</h3>
+      <section className="bg-bg-elevated border border-border rounded-lg p-6">
+        <h3 className="text-sm font-semibold text-fg mb-4">Components</h3>
         <div className="space-y-3">
           {signalRows.map(({ group, bStatus, aStatus, movement }) => (
-            <div key={group.id} className="flex items-center justify-between gap-3 py-2 border-b border-gray-800/60 last:border-0">
+            <div key={group.id} className="flex items-center justify-between gap-3 py-2 border-b border-border last:border-0">
               <div className="min-w-0">
-                <p className="text-sm text-white">{group.label}</p>
-                <p className="text-xs text-gray-500 truncate">{group.description}</p>
+                <p className="text-sm text-fg">{group.label}</p>
+                <p className="text-xs text-fg-dim truncate">{group.description}</p>
               </div>
               <div className="flex items-center gap-3 shrink-0">
                 <StatusChip status={bStatus} />
-                <span className="text-gray-600 text-xs">→</span>
+                <span className="text-fg-dim text-xs">→</span>
                 <StatusChip status={aStatus} />
                 {movement && (
                   <span
                     className={`text-xs font-medium ${
-                      movement.tone === 'good' ? 'text-emerald-400' : movement.tone === 'bad' ? 'text-red-400' : 'text-gray-500'
+                      movement.tone === 'good' ? 'text-accent' : movement.tone === 'bad' ? 'text-danger' : 'text-fg-dim'
                     }`}
                   >
                     {movement.label}
@@ -340,22 +340,22 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
       </section>
 
       {/* Findings diff */}
-      <section className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-6">
-        <h3 className="text-sm font-semibold text-white mb-4">Findings</h3>
+      <section className="bg-bg-elevated border border-border rounded-lg p-6">
+        <h3 className="text-sm font-semibold text-fg mb-4">Findings</h3>
 
         {findingDiff.fixed.length > 0 && (
           <div className="mb-5">
-            <p className="text-xs font-medium text-emerald-400 uppercase tracking-widest mb-2">
+            <p className="text-xs font-medium text-accent uppercase tracking-widest mb-2">
               Fixed · {findingDiff.fixed.length}
             </p>
             <ul className="space-y-2">
               {findingDiff.fixed.map((f) => (
-                <li key={`fixed-${f.key}`} className="flex items-center justify-between rounded-lg border border-emerald-900/40 bg-emerald-500/5 px-4 py-2.5">
+                <li key={`fixed-${f.key}`} className="flex items-center justify-between rounded-lg border border-accent/20 bg-accent/5 px-4 py-2.5">
                   <div>
-                    <p className="text-sm text-white">{f.label}</p>
-                    <p className="text-xs text-gray-500">was impact {f.impact.toFixed(1)}</p>
+                    <p className="text-sm text-fg">{f.label}</p>
+                    <p className="text-xs text-fg-dim">was impact {f.impact.toFixed(1)}</p>
                   </div>
-                  <span className="text-xs text-emerald-400">✓ no longer flagged</span>
+                  <span className="text-xs text-accent">✓ no longer flagged</span>
                 </li>
               ))}
             </ul>
@@ -364,17 +364,17 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
 
         {findingDiff.fresh.length > 0 && (
           <div className="mb-5">
-            <p className="text-xs font-medium text-red-400 uppercase tracking-widest mb-2">
+            <p className="text-xs font-medium text-danger uppercase tracking-widest mb-2">
               New · {findingDiff.fresh.length}
             </p>
             <ul className="space-y-2">
               {findingDiff.fresh.map((f) => (
-                <li key={`fresh-${f.key}`} className="flex items-center justify-between rounded-lg border border-red-900/40 bg-red-500/5 px-4 py-2.5">
+                <li key={`fresh-${f.key}`} className="flex items-center justify-between rounded-lg border border-red-900/40 bg-danger-dim px-4 py-2.5">
                   <div>
-                    <p className="text-sm text-white">{f.label}</p>
-                    <p className="text-xs text-gray-500">impact {f.impact.toFixed(1)} · {f.quadrant?.replace(/_/g, ' ') || ''}</p>
+                    <p className="text-sm text-fg">{f.label}</p>
+                    <p className="text-xs text-fg-dim">impact {f.impact.toFixed(1)} · {f.quadrant?.replace(/_/g, ' ') || ''}</p>
                   </div>
-                  <span className="text-xs text-red-400">new</span>
+                  <span className="text-xs text-danger">new</span>
                 </li>
               ))}
             </ul>
@@ -383,17 +383,17 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
 
         {findingDiff.worsened.length > 0 && (
           <div className="mb-5">
-            <p className="text-xs font-medium text-amber-400 uppercase tracking-widest mb-2">
+            <p className="text-xs font-medium text-signal-fail uppercase tracking-widest mb-2">
               Worsened · {findingDiff.worsened.length}
             </p>
             <ul className="space-y-2">
               {findingDiff.worsened.map((f) => (
-                <li key={`worsened-${f.key}`} className="flex items-center justify-between rounded-lg border border-amber-900/40 bg-amber-500/5 px-4 py-2.5">
+                <li key={`worsened-${f.key}`} className="flex items-center justify-between rounded-lg border border-signal-fail/20 bg-signal-fail/5 px-4 py-2.5">
                   <div>
-                    <p className="text-sm text-white">{f.label}</p>
-                    <p className="text-xs text-gray-500">impact {f.impact.toFixed(1)} · {f.quadrant?.replace(/_/g, ' ') || ''}</p>
+                    <p className="text-sm text-fg">{f.label}</p>
+                    <p className="text-xs text-fg-dim">impact {f.impact.toFixed(1)} · {f.quadrant?.replace(/_/g, ' ') || ''}</p>
                   </div>
-                  <span className="text-xs text-amber-400">regressed</span>
+                  <span className="text-xs text-signal-fail">regressed</span>
                 </li>
               ))}
             </ul>
@@ -402,17 +402,17 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
 
         {findingDiff.improved.length > 0 && (
           <div className="mb-5">
-            <p className="text-xs font-medium text-emerald-400 uppercase tracking-widest mb-2">
+            <p className="text-xs font-medium text-accent uppercase tracking-widest mb-2">
               Improved · {findingDiff.improved.length}
             </p>
             <ul className="space-y-2">
               {findingDiff.improved.map((f) => (
-                <li key={`improved-${f.key}`} className="flex items-center justify-between rounded-lg border border-gray-800 bg-[#0d0d0d] px-4 py-2.5">
+                <li key={`improved-${f.key}`} className="flex items-center justify-between rounded-lg border border-border bg-bg-panel px-4 py-2.5">
                   <div>
-                    <p className="text-sm text-white">{f.label}</p>
-                    <p className="text-xs text-gray-500">impact {f.impact.toFixed(1)} · {f.quadrant?.replace(/_/g, ' ') || ''}</p>
+                    <p className="text-sm text-fg">{f.label}</p>
+                    <p className="text-xs text-fg-dim">impact {f.impact.toFixed(1)} · {f.quadrant?.replace(/_/g, ' ') || ''}</p>
                   </div>
-                  <span className="text-xs text-emerald-400">lower impact</span>
+                  <span className="text-xs text-accent">lower impact</span>
                 </li>
               ))}
             </ul>
@@ -421,17 +421,17 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
 
         {findingDiff.unchanged.length > 0 && (
           <div>
-            <p className="text-xs font-medium text-gray-500 uppercase tracking-widest mb-2">
+            <p className="text-xs font-medium text-fg-dim uppercase tracking-widest mb-2">
               Unchanged · {findingDiff.unchanged.length}
             </p>
             <ul className="space-y-2">
               {findingDiff.unchanged.map((f) => (
-                <li key={`unchanged-${f.key}`} className="flex items-center justify-between rounded-lg border border-gray-800/60 bg-[#0d0d0d]/60 px-4 py-2.5">
+                <li key={`unchanged-${f.key}`} className="flex items-center justify-between rounded-lg border border-border bg-bg-panel/60 px-4 py-2.5">
                   <div>
-                    <p className="text-sm text-gray-300">{f.label}</p>
-                    <p className="text-xs text-gray-600">impact {f.impact.toFixed(1)} · {f.quadrant?.replace(/_/g, ' ') || ''}</p>
+                    <p className="text-sm text-fg-muted">{f.label}</p>
+                    <p className="text-xs text-fg-dim">impact {f.impact.toFixed(1)} · {f.quadrant?.replace(/_/g, ' ') || ''}</p>
                   </div>
-                  <span className="text-xs text-gray-500">no change</span>
+                  <span className="text-xs text-fg-dim">no change</span>
                 </li>
               ))}
             </ul>
@@ -439,7 +439,7 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
         )}
 
         {!loading && beforeDetail && afterDetail && findingDiff.fixed.length === 0 && findingDiff.fresh.length === 0 && findingDiff.worsened.length === 0 && findingDiff.improved.length === 0 && (
-          <p className="text-sm text-gray-500">No change between these runs.</p>
+          <p className="text-sm text-fg-dim">No change between these runs.</p>
         )}
       </section>
     </div>

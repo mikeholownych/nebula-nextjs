@@ -46,17 +46,17 @@ function fmtScore(n: number | null | undefined): string {
 
 // ── Monitor-status colour map ─────────────────────────────────────────────────
 const MONITOR_COLORS: Record<string, string> = {
-  improved: 'text-emerald-400',
-  regressed: 'text-red-400',
-  no_change: 'text-gray-400',
-  new_fail: 'text-red-500',
+  improved: 'text-accent',
+  regressed: 'text-danger',
+  no_change: 'text-fg-muted',
+  new_fail: 'text-danger',
   error: 'text-yellow-500',
 }
 
 const REC_COLORS: Record<string, string> = {
-  to_fix: 'text-red-400',
+  to_fix: 'text-danger',
   doing: 'text-yellow-400',
-  done: 'text-emerald-400',
+  done: 'text-accent',
 }
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -64,7 +64,7 @@ const REC_COLORS: Record<string, string> = {
 function AuditDot() {
   return (
     <span
-      className="flex-shrink-0 w-3 h-3 rounded-full bg-emerald-500 mt-1.5"
+      className="flex-shrink-0 w-3 h-3 rounded-full bg-accent mt-1.5"
       aria-hidden="true"
     />
   )
@@ -73,7 +73,7 @@ function AuditDot() {
 function RecDot({ status }: { status?: string | null }) {
   const color =
     status === 'done'
-      ? 'bg-emerald-500'
+      ? 'bg-accent'
       : status === 'doing'
       ? 'bg-yellow-400'
       : 'bg-red-500'
@@ -88,12 +88,12 @@ function RecDot({ status }: { status?: string | null }) {
 function MonitorDot({ status }: { status?: string | null }) {
   const color =
     status === 'improved'
-      ? 'bg-emerald-500'
+      ? 'bg-accent'
       : status === 'regressed' || status === 'new_fail'
       ? 'bg-red-500'
       : status === 'error'
       ? 'bg-yellow-400'
-      : 'bg-gray-500'
+      : 'bg-fg-dim'
   return (
     <span
       className={`flex-shrink-0 w-3 h-3 rounded-full mt-1.5 ${color}`}
@@ -108,31 +108,31 @@ function AuditEvent({ ev }: { ev: TimelineEvent }) {
       <AuditDot />
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-semibold uppercase tracking-wide text-emerald-400">
+          <span className="text-xs font-semibold uppercase tracking-wide text-accent">
             Audit completed
           </span>
           {ev.grade && (
-            <span className="text-xs font-bold bg-emerald-900/50 text-emerald-300 px-1.5 py-0.5 rounded">
+            <span className="text-xs font-bold bg-accent-dim text-accent-light px-1.5 py-0.5 rounded">
               Grade {ev.grade}
             </span>
           )}
           {ev.score != null && (
-            <span className="text-xs text-gray-400">
+            <span className="text-xs text-fg-muted">
               Score {fmtScore(ev.score)}/10
             </span>
           )}
         </div>
         {ev.url && (
-          <p className="text-sm text-gray-300 mt-0.5 truncate">{ev.url}</p>
+          <p className="text-sm text-fg-muted mt-0.5 truncate">{ev.url}</p>
         )}
-        <p className="text-xs text-gray-500 mt-0.5">{fmtDate(ev.created_at)}</p>
+        <p className="text-xs text-fg-dim mt-0.5">{fmtDate(ev.created_at)}</p>
       </div>
     </div>
   )
 }
 
 function RecEvent({ ev }: { ev: TimelineEvent }) {
-  const statusColor = REC_COLORS[ev.status ?? ''] ?? 'text-gray-400'
+  const statusColor = REC_COLORS[ev.status ?? ''] ?? 'text-fg-muted'
   return (
     <div className="flex gap-3">
       <RecDot status={ev.status} />
@@ -148,19 +148,19 @@ function RecEvent({ ev }: { ev: TimelineEvent }) {
           )}
         </div>
         {ev.label && (
-          <p className="text-sm text-gray-300 mt-0.5">{ev.label}</p>
+          <p className="text-sm text-fg-muted mt-0.5">{ev.label}</p>
         )}
         {ev.url && (
-          <p className="text-xs text-gray-500 mt-0.5 truncate">{ev.url}</p>
+          <p className="text-xs text-fg-dim mt-0.5 truncate">{ev.url}</p>
         )}
-        <p className="text-xs text-gray-500 mt-0.5">{fmtDate(ev.created_at)}</p>
+        <p className="text-xs text-fg-dim mt-0.5">{fmtDate(ev.created_at)}</p>
       </div>
     </div>
   )
 }
 
 function MonitorEvent({ ev }: { ev: TimelineEvent }) {
-  const statusColor = MONITOR_COLORS[ev.status ?? ''] ?? 'text-gray-400'
+  const statusColor = MONITOR_COLORS[ev.status ?? ''] ?? 'text-fg-muted'
   const scoreDelta =
     ev.prev_score != null && ev.new_score != null
       ? ev.new_score - ev.prev_score
@@ -181,7 +181,7 @@ function MonitorEvent({ ev }: { ev: TimelineEvent }) {
           {scoreDelta != null && (
             <span
               className={`text-xs font-medium ${
-                scoreDelta > 0 ? 'text-emerald-400' : scoreDelta < 0 ? 'text-red-400' : 'text-gray-400'
+                scoreDelta > 0 ? 'text-accent' : scoreDelta < 0 ? 'text-danger' : 'text-fg-muted'
               }`}
             >
               {scoreDelta > 0 ? '+' : ''}
@@ -190,17 +190,17 @@ function MonitorEvent({ ev }: { ev: TimelineEvent }) {
           )}
         </div>
         {(ev.prev_score != null || ev.new_score != null) && (
-          <p className="text-xs text-gray-400 mt-0.5">
+          <p className="text-xs text-fg-muted mt-0.5">
             {fmtScore(ev.prev_score)} → {fmtScore(ev.new_score)}
           </p>
         )}
         {ev.summary && (
-          <p className="text-sm text-gray-300 mt-0.5">{ev.summary}</p>
+          <p className="text-sm text-fg-muted mt-0.5">{ev.summary}</p>
         )}
         {ev.url && (
-          <p className="text-xs text-gray-500 mt-0.5 truncate">{ev.url}</p>
+          <p className="text-xs text-fg-dim mt-0.5 truncate">{ev.url}</p>
         )}
-        <p className="text-xs text-gray-500 mt-0.5">{fmtDate(ev.created_at)}</p>
+        <p className="text-xs text-fg-dim mt-0.5">{fmtDate(ev.created_at)}</p>
       </div>
     </div>
   )
@@ -236,7 +236,7 @@ export default function TimelineView({ email }: { email: string }) {
 
   if (loading) {
     return (
-      <div className="text-gray-400 py-12 text-center text-sm">
+      <div className="text-fg-muted py-12 text-center text-sm">
         Loading timeline…
       </div>
     )
@@ -245,10 +245,10 @@ export default function TimelineView({ email }: { email: string }) {
   if (error) {
     return (
       <div className="py-8">
-        <p className="text-red-400 mb-3 text-sm">{error}</p>
+        <p className="text-danger mb-3 text-sm">{error}</p>
         <button
           onClick={load}
-          className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-black"
+          className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg"
         >
           Retry
         </button>
@@ -259,8 +259,8 @@ export default function TimelineView({ email }: { email: string }) {
   if (!data || data.events.length === 0) {
     return (
       <div className="py-16 text-center">
-        <p className="text-gray-400 text-sm">No activity recorded yet.</p>
-        <p className="text-gray-600 text-xs mt-1">
+        <p className="text-fg-muted text-sm">No activity recorded yet.</p>
+        <p className="text-fg-dim text-xs mt-1">
           Run an audit or set up monitoring to start your timeline.
         </p>
       </div>
@@ -271,7 +271,7 @@ export default function TimelineView({ email }: { email: string }) {
     <div>
       <div className="mb-6">
         <h2 className="text-xl font-bold">Activity Timeline</h2>
-        <p className="text-sm text-gray-400 mt-1">
+        <p className="text-sm text-fg-muted mt-1">
           {data.events.length} event{data.events.length !== 1 ? 's' : ''} — most recent first
         </p>
       </div>
@@ -279,7 +279,7 @@ export default function TimelineView({ email }: { email: string }) {
       <div className="relative">
         {/* Vertical line */}
         <div
-          className="absolute left-1.5 top-2 bottom-0 w-px bg-gray-800"
+          className="absolute left-1.5 top-2 bottom-0 w-px bg-bg-elevated"
           aria-hidden="true"
         />
 

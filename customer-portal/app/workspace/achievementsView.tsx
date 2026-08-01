@@ -83,11 +83,11 @@ export default function AchievementsView({ email, latestAuditId }: Props) {
   const progressPct = Math.round((passingCount / SIGNALS.length) * 100)
 
   if (loading) {
-    return <p className="text-gray-400 text-sm">Loading achievements…</p>
+    return <p className="text-fg-muted text-sm">Loading achievements…</p>
   }
 
   if (error) {
-    return <p className="text-red-400 text-sm">{error}</p>
+    return <p className="text-danger text-sm">{error}</p>
   }
 
   return (
@@ -95,12 +95,12 @@ export default function AchievementsView({ email, latestAuditId }: Props) {
       {/* ── Earned Badges ──────────────────────────────────────────── */}
       <section>
         <h2 className="text-xl font-bold mb-1">Earned Badges</h2>
-        <p className="text-sm text-gray-400 mb-5">
+        <p className="text-sm text-fg-muted mb-5">
           Pages that passed all 9 conversion signals earn a Nebula Verified badge.
         </p>
 
         {badges.length === 0 ? (
-          <div className="rounded-lg border border-gray-800 bg-[#0a0a0a] p-6 text-center text-gray-500 text-sm">
+          <div className="rounded-lg border border-border bg-bg-elevated p-6 text-center text-fg-dim text-sm">
             No badges earned yet. Fix all 9 signals on one of your pages to earn your first badge.
           </div>
         ) : (
@@ -115,33 +115,33 @@ export default function AchievementsView({ email, latestAuditId }: Props) {
               return (
                 <div
                   key={badge.id}
-                  className="rounded-xl border border-emerald-800/40 bg-[#0a0a0a] p-5 flex flex-col gap-3"
+                  className="rounded-xl border border-accent/30 bg-bg-elevated p-5 flex flex-col gap-3"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-emerald-400 tracking-widest uppercase">
+                    <span className="text-xs font-semibold text-accent tracking-widest uppercase">
                       Nebula Verified
                     </span>
-                    <span className="text-xs text-gray-500 font-mono">
+                    <span className="text-xs text-fg-dim font-mono">
                       #{badge.serial_number}
                     </span>
                   </div>
                   <p
-                    className="text-sm text-white font-medium truncate"
+                    className="text-sm text-fg font-medium truncate"
                     title={badge.url}
                   >
                     {badge.url.replace(/^https?:\/\//, '')}
                   </p>
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl font-bold text-white">
+                    <span className="text-2xl font-bold text-fg">
                       {badge.before_score}
                     </span>
-                    <span className="text-gray-500 text-lg">→</span>
-                    <span className="text-2xl font-bold text-emerald-400">
+                    <span className="text-fg-dim text-lg">→</span>
+                    <span className="text-2xl font-bold text-accent">
                       {badge.after_score}
                     </span>
-                    <span className="text-xs text-gray-500 ml-1">score</span>
+                    <span className="text-xs text-fg-dim ml-1">score</span>
                   </div>
-                  <p className="text-xs text-gray-500">Earned {displayDate}</p>
+                  <p className="text-xs text-fg-dim">Earned {displayDate}</p>
                 </div>
               )
             })}
@@ -152,31 +152,31 @@ export default function AchievementsView({ email, latestAuditId }: Props) {
       {/* ── Signal Checklist ───────────────────────────────────────── */}
       <section>
         <h2 className="text-xl font-bold mb-1">Conversion Signal Checklist</h2>
-        <p className="text-sm text-gray-400 mb-2">
+        <p className="text-sm text-fg-muted mb-2">
           Based on your most recent audit.{' '}
           {!latestAuditId && (
-            <span className="text-gray-500">Run an audit to see your signal status.</span>
+            <span className="text-fg-dim">Run an audit to see your signal status.</span>
           )}
         </p>
 
         {/* Certification progress bar */}
         <div className="mb-5">
           <div className="flex justify-between items-center mb-1.5">
-            <span className="text-sm font-medium text-gray-300">
+            <span className="text-sm font-medium text-fg-muted">
               Certification Progress
             </span>
-            <span className="text-sm font-semibold text-emerald-400">
+            <span className="text-sm font-semibold text-accent">
               {passingCount} / {SIGNALS.length} signals passing
             </span>
           </div>
-          <div className="h-2.5 w-full rounded-full bg-gray-800">
+          <div className="h-2.5 w-full rounded-full bg-bg-elevated">
             <div
-              className="h-2.5 rounded-full bg-emerald-500 transition-all"
+              className="h-2.5 rounded-full bg-accent transition-all"
               style={{ width: `${progressPct}%` }}
             />
           </div>
           {passingCount === SIGNALS.length && (
-            <p className="mt-2 text-xs text-emerald-400 font-medium">
+            <p className="mt-2 text-xs text-accent font-medium">
               All signals passing — your next completed audit will earn a badge!
             </p>
           )}
@@ -190,15 +190,15 @@ export default function AchievementsView({ email, latestAuditId }: Props) {
                 key={signal.key}
                 className={`flex items-center justify-between rounded-lg border px-4 py-3 ${
                   passing
-                    ? 'border-emerald-800/40 bg-emerald-950/20'
-                    : 'border-gray-800 bg-[#0a0a0a]'
+                    ? 'border-accent/30 bg-accent-dim'
+                    : 'border-border bg-bg-elevated'
                 }`}
               >
-                <span className="text-sm text-gray-200">{signal.label}</span>
+                <span className="text-sm text-fg">{signal.label}</span>
                 {!latestAuditId ? (
-                  <span className="text-xs text-gray-600">—</span>
+                  <span className="text-xs text-fg-dim">—</span>
                 ) : passing ? (
-                  <span className="flex items-center gap-1.5 text-xs font-semibold text-emerald-400">
+                  <span className="flex items-center gap-1.5 text-xs font-semibold text-accent">
                     <svg
                       className="w-4 h-4"
                       fill="none"
@@ -215,7 +215,7 @@ export default function AchievementsView({ email, latestAuditId }: Props) {
                     Pass
                   </span>
                 ) : (
-                  <span className="flex items-center gap-1.5 text-xs font-semibold text-red-400">
+                  <span className="flex items-center gap-1.5 text-xs font-semibold text-danger">
                     <svg
                       className="w-4 h-4"
                       fill="none"

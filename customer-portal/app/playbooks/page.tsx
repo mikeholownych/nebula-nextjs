@@ -27,7 +27,7 @@ const PLAYBOOKS = [
 
 export default function PlaybooksIndex() {
   return (
-    <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
+    <main id="main-content" className="min-h-screen bg-bg pt-24">
       <section className="border-b border-border px-6 py-16">
         <div className="mx-auto max-w-4xl">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-accent">

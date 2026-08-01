@@ -20,28 +20,28 @@ colors:
   border: "rgba(255, 255, 255, 0.06)"
 typography:
   display:
-    fontFamily: "Karla, -apple-system, system-ui, sans-serif"
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, system-ui, sans-serif"
     fontSize: "clamp(2.5rem, 6vw, 4rem)"
     fontWeight: 700
     lineHeight: 1.1
     letterSpacing: "-0.03em"
   headline:
-    fontFamily: "Karla, -apple-system, system-ui, sans-serif"
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, system-ui, sans-serif"
     fontSize: "clamp(2rem, 4vw, 2.5rem)"
     fontWeight: 700
     lineHeight: 1.2
   title:
-    fontFamily: "Karla, -apple-system, system-ui, sans-serif"
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, system-ui, sans-serif"
     fontSize: "1.5rem"
     fontWeight: 600
     lineHeight: 1.3
   body:
-    fontFamily: "Karla, -apple-system, system-ui, sans-serif"
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, system-ui, sans-serif"
     fontSize: "17px"
     fontWeight: 400
     lineHeight: 1.65
   label:
-    fontFamily: "Karla, -apple-system, system-ui, sans-serif"
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, system-ui, sans-serif"
     fontSize: "13px"
     fontWeight: 600
     letterSpacing: "0.1em"
@@ -92,7 +92,7 @@ components:
 
 **Creative North Star: "The Conversion Lab"**
 
-Assertive authority meets clinical precision. The system projects confidence through density and sharpness — not friendliness, not warmth, not restraint. This is diagnostic equipment, not a lifestyle brand. The Karla grotesque (quiet, geometric, weight-capable) replaced Inter specifically to avoid the reflex-default monoculture. The near-black foundation (#050505) eliminates visual competition. Signal Emerald (#10b981) marks actionable elements with authority, pulling the eye toward what matters.
+Assertive authority meets clinical precision. The system projects confidence through density and sharpness — not friendliness, not warmth, not restraint. This is diagnostic equipment, not a lifestyle brand. The system font stack (SF Pro, Segoe UI, Roboto) renders instantly with zero loading cost; authority comes from committed weight contrast and tight tracking, not letterform novelty. The near-black foundation (#050505) eliminates visual competition. Signal Emerald (#10b981) marks actionable elements with authority, pulling the eye toward what matters.
 
 The aesthetic explicitly rejects generic AI SaaS cream, CRO agency theatrics, and "black-box AI says so" interfaces. No conversion claims without evidence. No decorative motion. No gradient text. Every visual choice serves the belief ladder — the visitor must believe Nebula finds real, specific defects on their page.
 
@@ -101,7 +101,7 @@ Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmo
 **Key Characteristics:**
 - Near-black canvas eliminates everything but the diagnostic content
 - Signal Emerald authority on actions and positive signal — used sparingly (≤10% surface area)
-- Karla grotesque: geometric, weight-capable, assertively non-default
+- System font stack: instant render, weight-capable, zero loading cost
 - Ambient depth via layered glow, never drop shadows
 - Tight tracking (-0.03em) on display for condensed authority
 - Evidence-first: annotated defects trump marketing claims
@@ -151,11 +151,13 @@ Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmo
 
 ## 3. Typography
 
-**Display Font:** Karla (geometric grotesque, weight range 400–800)
-**Body Font:** Karla (same family, consistent voice)
-**Label Font:** Karla (600 weight, uppercase, tracked)
+**Display Font:** System stack (`-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif`)
+**Body Font:** Same system stack
+**Label Font:** Same system stack (600 weight, uppercase, tracked)
 
-**Character:** A quiet grotesque that can carry weight without shouting. Karla replaces Inter to exit the reflex-default monoculture. The geometric structure provides precision; the rounded terminals prevent clinical coldness. Pairing as a single family maintains voice consistency — weight contrast (700/400) creates hierarchy, not family switching.
+**Character:** The system font stack provides a neutral, high-performance typographic foundation. On macOS/iOS this renders as SF Pro; on Windows as Segoe UI; on Android as Roboto. This eliminates font-loading performance cost entirely — no FOUT, no CLS from font swap, instant render. Weight contrast (700/400) creates hierarchy without family switching. The choice favors performance over personality; authority comes from density, tracking, and weight, not letterform distinctiveness.
+
+**Historical note:** Karla was documented as the brand font in earlier design artifacts. The production codebase uses the system stack exclusively (see `tailwind.config.ts` and `globals.css`). A static design system CSS file at `public/styles/nebula-design-system.css` still loads Karla via Google Fonts but is not imported by the application.
 
 ### Hierarchy
 
@@ -260,7 +262,7 @@ The system rejects conventional drop shadows (offset + blur + spread) entirely. 
 - **Do** cap body prose at 65–75ch line length.
 - **Do** show evidence — annotated screenshots and specific defects — instead of generic claims.
 - **Do** include skip-link for keyboard navigation. Target WCAG 2.2 AAA (raised from AA; see the resolved AAA Gap note in Colors — FG Muted now clears this).
-- **Do** assert: Karla was chosen specifically to exit the Inter/DM Sans reflex-default monoculture.
+- **Do** use the system font stack (`-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif`) for zero-cost rendering. Authority comes from weight and tracking, not letterform.
 - **Do** use the shared `Button`/`Card`/`Input` components from `components/ui/` instead of re-implementing their styles inline.
 
 ### Don't:
@@ -274,7 +276,7 @@ The system rejects conventional drop shadows (offset + blur + spread) entirely. 
 - **Don't** fabricate testimonials, case studies, or conversion claims — every claim traces to one of the two documented case studies (48x ROAS ecommerce, −50% CPC B2B SaaS) until more are added.
 - **Don't** look like a "generic AI SaaS", "CRO agency", "website-design studio", "cheap audit generator", "digital-marketing guru funnel", "space-themed novelty brand", "cybersecurity product", "enterprise analytics platform", "SEO audit tool", or "black-box 'AI says so' product" — all explicitly rejected in PRODUCT.md's positioning.
 - **Don't** animate images on hover. If a card needs hover feedback, animate background, border, or shadow — never the image.
-- **Don't** default to Inter, DM Sans, Fraunces, or any font on the reflex-reject list. Karla is the committed brand font.
+- **Don't** default to Inter, DM Sans, Fraunces, or any font on the reflex-reject list. The system font stack is the committed production typeface.
 - **Don't** reintroduce the old indigo/mint palette (#6366f1, #a5b4fc, #79f2c0 on #080a0f/#111723) — it was migrated off every page. If it resurfaces anywhere, that's regression, not a second intentional aesthetic.
 - **Don't** re-add `dangerouslySetInnerHTML`-based page templates with their own `<body>` tag and unscoped `<style>` block. Every learning-centre article is now plain JSX on shared tokens; new articles should follow that pattern.
 - **Don't** hardcode a token value directly (a hex, an rgba) when a shared color/utility class already names it. `globals.css` used to duplicate `fg-muted` and `warning` at different values than their Tailwind equivalents (`#737373`/`#fbbf24`); both now reference `var(--fg-muted)` / `var(--warning)` at the canonical values — don't reintroduce a hardcoded one-off.

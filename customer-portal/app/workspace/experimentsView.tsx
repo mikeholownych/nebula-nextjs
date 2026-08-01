@@ -35,13 +35,13 @@ function fmtDate(iso: string): string {
 function statusMeta(status?: string): { label: string; cls: string } {
   switch (status as ComponentStatus) {
     case 'pass':
-      return { label: 'Pass', cls: 'bg-emerald-500/15 text-emerald-400 border-emerald-700/50' }
+      return { label: 'Pass', cls: 'bg-accent/15 text-accent border-accent/30' }
     case 'warning':
-      return { label: 'Warning', cls: 'bg-amber-500/15 text-amber-400 border-amber-700/50' }
+      return { label: 'Warning', cls: 'bg-signal-fail/10 text-signal-fail border-signal-fail/30' }
     case 'fail':
-      return { label: 'Fail', cls: 'bg-red-500/15 text-red-400 border-red-700/50' }
+      return { label: 'Fail', cls: 'bg-red-500/15 text-danger border-red-700/50' }
     default:
-      return { label: '—', cls: 'bg-gray-500/15 text-gray-400 border-gray-700/50' }
+      return { label: '—', cls: 'bg-bg-elevated text-fg-muted border-border/50' }
   }
 }
 
@@ -49,9 +49,9 @@ function ComponentChip({ name, comp }: { name: string; comp?: { status?: string;
   const meta = statusMeta(comp?.status)
   return (
     <span className="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs">
-      <span className="text-gray-500">{name}</span>
+      <span className="text-fg-dim">{name}</span>
       <span className={`font-medium ${meta.cls.split(' ').slice(1).join(' ')}`}>{meta.label}</span>
-      {comp?.score != null && <span className="text-gray-500">{comp.score}/10</span>}
+      {comp?.score != null && <span className="text-fg-dim">{comp.score}/10</span>}
     </span>
   )
 }
@@ -114,16 +114,16 @@ export default function ExperimentsView({ email }: { email: string }) {
   }
 
   if (loading && !exps) {
-    return <p className="text-sm text-gray-500">Loading experiments…</p>
+    return <p className="text-sm text-fg-dim">Loading experiments…</p>
   }
 
   if (error && !exps) {
     return (
-      <div className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-8 text-center">
-        <p className="text-red-400 mb-4">{error}</p>
+      <div className="bg-bg-elevated border border-border rounded-lg p-8 text-center">
+        <p className="text-danger mb-4">{error}</p>
         <button
           onClick={load}
-          className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-black"
+          className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg"
         >
           Retry
         </button>
@@ -133,15 +133,15 @@ export default function ExperimentsView({ email }: { email: string }) {
 
   if (exps && exps.length === 0) {
     return (
-      <div className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-10 text-center">
+      <div className="bg-bg-elevated border border-border rounded-lg p-10 text-center">
         <h2 className="text-xl font-bold mb-2">No experiments saved yet</h2>
-        <p className="text-gray-400 mb-6 max-w-md mx-auto">
+        <p className="text-fg-muted mb-6 max-w-md mx-auto">
           Run a Component Lab check on any landing page, then save it here. Track Headline A vs B
           vs C, and mark the winner as production.
         </p>
         <a
           href="/lab"
-          className="inline-block rounded-lg bg-emerald-500 px-6 py-2.5 text-sm font-semibold text-black hover:bg-emerald-400 transition-colors"
+          className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
         >
           Open Component Lab
         </a>
@@ -152,19 +152,19 @@ export default function ExperimentsView({ email }: { email: string }) {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-400">
+        <p className="text-sm text-fg-muted">
           Saved Component Lab runs. Every run is a snapshot — compare scores, then mark the winner
           as production.
         </p>
         <a
           href="/lab"
-          className="text-xs text-emerald-400 hover:text-emerald-300"
+          className="text-xs text-accent hover:text-accent-light"
         >
           Open Lab →
         </a>
       </div>
 
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-danger">{error}</p>}
 
       <div className="space-y-4">
         {(exps || []).map((exp) => {
@@ -175,36 +175,36 @@ export default function ExperimentsView({ email }: { email: string }) {
               key={exp.id}
               className={`rounded-lg border p-5 ${
                 exp.status === 'production'
-                  ? 'border-emerald-800/60 bg-emerald-500/5'
-                  : 'border-gray-800 bg-[#0a0a0a]'
+                  ? 'border-accent/30 bg-accent/5'
+                  : 'border-border bg-bg-elevated'
               }`}
             >
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <h3 className="text-base font-semibold text-white">{exp.label}</h3>
+                    <h3 className="text-base font-semibold text-fg">{exp.label}</h3>
                     {exp.status === 'production' && (
-                      <span className="rounded-full border border-emerald-700/50 bg-emerald-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-emerald-400">
+                      <span className="rounded-full border border-accent/30 bg-accent/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-accent">
                         Production
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-fg-dim mt-0.5">
                     {domainOf(exp.url)} · {fmtDate(exp.created_at)}
                     {exp.grade ? ` · Grade ${exp.grade}` : ''}
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className={`text-2xl font-bold ${exp.status === 'production' ? 'text-emerald-400' : 'text-white'}`}>
+                  <p className={`text-2xl font-bold ${exp.status === 'production' ? 'text-accent' : 'text-fg'}`}>
                     {score100 ?? '—'}
-                    <span className="text-sm text-gray-500 font-normal">/100</span>
+                    <span className="text-sm text-fg-dim font-normal">/100</span>
                   </p>
                 </div>
               </div>
 
               {exp.ad_copy && (
-                <p className="mt-3 text-xs text-gray-500">
-                  <span className="text-gray-400">Ad copy:</span> “{exp.ad_copy}”
+                <p className="mt-3 text-xs text-fg-dim">
+                  <span className="text-fg-muted">Ad copy:</span> “{exp.ad_copy}”
                 </p>
               )}
 
@@ -221,7 +221,7 @@ export default function ExperimentsView({ email }: { email: string }) {
                   <button
                     onClick={() => setStatus(exp, 'saved')}
                     disabled={working === exp.id}
-                    className="rounded border border-gray-700 px-3 py-1.5 text-xs text-gray-400 hover:text-white hover:border-gray-500 disabled:opacity-30 transition-colors"
+                    className="rounded border border-border px-3 py-1.5 text-xs text-fg-muted hover:text-fg hover:border-border disabled:opacity-30 transition-colors"
                   >
                     Unmark production
                   </button>
@@ -229,7 +229,7 @@ export default function ExperimentsView({ email }: { email: string }) {
                   <button
                     onClick={() => setStatus(exp, 'production')}
                     disabled={working === exp.id}
-                    className="rounded-lg bg-emerald-500 px-3 py-1.5 text-xs font-semibold text-black hover:bg-emerald-400 disabled:opacity-30 transition-colors"
+                    className="rounded-lg bg-accent px-3 py-1.5 text-xs font-semibold text-bg hover:bg-accent-light disabled:opacity-30 transition-colors"
                   >
                     Mark as production
                   </button>
@@ -237,7 +237,7 @@ export default function ExperimentsView({ email }: { email: string }) {
                 <button
                   onClick={() => remove(exp)}
                   disabled={working === exp.id}
-                  className="rounded border border-gray-800 px-3 py-1.5 text-xs text-gray-500 hover:text-red-400 hover:border-red-900 disabled:opacity-30 transition-colors"
+                  className="rounded border border-border px-3 py-1.5 text-xs text-fg-dim hover:text-danger hover:border-red-900 disabled:opacity-30 transition-colors"
                 >
                   Delete
                 </button>

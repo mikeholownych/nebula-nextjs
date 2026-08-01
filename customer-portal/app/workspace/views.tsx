@@ -105,11 +105,11 @@ export function DashboardView({ audits, latestDetail }: { audits: WorkspaceAudit
 
   if (!latest) {
     return (
-      <div className="rounded-2xl border border-gray-800 bg-[#0a0a0a] p-10 text-center shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
-        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-gray-500">Your workspace is ready</p>
-        <h2 className="text-xl font-semibold tracking-[-0.02em] text-white">Start with a real page diagnosis</h2>
-        <p className="mx-auto mb-6 mt-2 max-w-md text-sm leading-6 text-gray-400">Run a free audit to establish your first baseline. Scores, findings, and history will appear here without fabricated data.</p>
-        <a href="/audit" className="inline-flex rounded-lg bg-[#171717] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#333]">Run first audit</a>
+      <div className="rounded-2xl border border-border bg-bg-elevated p-10 text-center shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-fg-dim">Your workspace is ready</p>
+        <h2 className="text-xl font-semibold tracking-[-0.02em] text-fg">Start with a real page diagnosis</h2>
+        <p className="mx-auto mb-6 mt-2 max-w-md text-sm leading-6 text-fg-muted">Run a free audit to establish your first baseline. Scores, findings, and history will appear here without fabricated data.</p>
+        <a href="/audit" className="inline-flex rounded-lg bg-bg-panel px-5 py-2.5 text-sm font-semibold text-fg hover:bg-bg-panel">Run first audit</a>
       </div>
     )
   }
@@ -124,44 +124,44 @@ export function DashboardView({ audits, latestDetail }: { audits: WorkspaceAudit
       </div>
 
       <div className="grid gap-4 xl:grid-cols-[1.45fr_0.85fr]">
-        <section className="rounded-2xl border border-gray-800 bg-[#0a0a0a] p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+        <section className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-500">Page health</p>
-              <h2 className="mt-2 text-lg font-semibold tracking-[-0.02em] text-white">{latestUrl}</h2>
-              <p className="mt-1 text-sm text-gray-400">Latest measured score and movement for this page.</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-fg-dim">Page health</p>
+              <h2 className="mt-2 text-lg font-semibold tracking-[-0.02em] text-fg">{latestUrl}</h2>
+              <p className="mt-1 text-sm text-fg-muted">Latest measured score and movement for this page.</p>
             </div>
-            <a href={`/audit/${latest.id}/results`} className="rounded-lg border border-gray-700 px-3 py-2 text-xs font-semibold text-gray-300 hover:border-gray-500 hover:bg-[#111]">Open report ↗</a>
+            <a href={`/audit/${latest.id}/results`} className="rounded-lg border border-border px-3 py-2 text-xs font-semibold text-fg-muted hover:border-border hover:bg-bg-panel">Open report ↗</a>
           </div>
           <div className="mt-8 flex items-end gap-6">
             <div>
-              <span className="text-6xl font-semibold tracking-[-0.06em] text-white">{Math.round(scoreOf(latest) * 10)}</span><span className="ml-1 text-sm text-gray-500">/100</span>
+              <span className="text-6xl font-semibold tracking-[-0.06em] text-fg">{Math.round(scoreOf(latest) * 10)}</span><span className="ml-1 text-sm text-fg-dim">/100</span>
             </div>
             {delta !== null && <span className={`mb-2 rounded-full px-2.5 py-1 text-xs font-semibold ${delta >= 0 ? 'bg-[#e7f4eb] text-[#28733e]' : 'bg-[#fbe8e7] text-[#a43a35]'}`}>{delta >= 0 ? '↑' : '↓'} {Math.abs(delta).toFixed(1)} pts</span>}
           </div>
-          {trendPoints.length >= 2 ? <div className="mt-6"><Sparkline points={trendPoints} width={560} height={92} /><p className="mt-2 text-xs text-gray-500">Score history · {trendPoints.length} audits on this page</p></div> : <div className="mt-6 rounded-xl bg-[#050505] px-4 py-3 text-xs text-gray-400">Run another audit on this page to create a measured trend.</div>}
+          {trendPoints.length >= 2 ? <div className="mt-6"><Sparkline points={trendPoints} width={560} height={92} /><p className="mt-2 text-xs text-fg-dim">Score history · {trendPoints.length} audits on this page</p></div> : <div className="mt-6 rounded-xl bg-bg px-4 py-3 text-xs text-fg-muted">Run another audit on this page to create a measured trend.</div>}
         </section>
 
-        <section className="rounded-2xl border border-gray-800 bg-[#171717] p-6 text-white shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
+        <section className="rounded-2xl border border-border bg-bg-panel p-6 text-fg shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#a8a8a1]">Next best action</p>
           <h2 className="mt-3 text-xl font-semibold tracking-[-0.03em]">Fix the highest-impact leak.</h2>
           <p className="mt-3 text-sm leading-6 text-[#b9b9b2]">Use the latest findings to choose one bounded repair, then re-audit the same page to verify the condition changed.</p>
           <div className="mt-8 flex items-center justify-between border-t border-white/15 pt-4 text-sm"><span className="text-[#b9b9b2]">Latest status</span><span className="font-semibold">{counts.critical > 0 ? `${counts.critical} critical` : 'No critical findings'}</span></div>
-          <a href="/recommendations" className="mt-4 inline-flex w-full justify-center rounded-lg bg-[#0a0a0a] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#e9e9e5]">Open fix queue →</a>
+          <a href="/recommendations" className="mt-4 inline-flex w-full justify-center rounded-lg bg-bg-elevated px-4 py-2.5 text-sm font-semibold text-fg hover:bg-[#e9e9e5]">Open fix queue →</a>
         </section>
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <section className="rounded-2xl border border-gray-800 bg-[#0a0a0a] p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
-          <div className="flex items-center justify-between"><div><p className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-500">Recent audit</p><h2 className="mt-2 text-lg font-semibold text-white">{latestUrl}</h2></div><span className="text-xs text-gray-500">{fmtDate(latest.completed_at || latest.created_at)}</span></div>
-          <div className="mt-5 flex items-center justify-between rounded-xl bg-[#050505] px-4 py-3"><span className="text-sm text-gray-400">Grade</span><span className="text-2xl font-semibold text-white">{latest.grade || '—'}</span></div>
-          <a href={`/audit/${latest.id}/results`} className="mt-4 inline-flex text-sm font-semibold text-[#444] hover:text-white">Review findings →</a>
+        <section className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+          <div className="flex items-center justify-between"><div><p className="text-xs font-semibold uppercase tracking-[0.15em] text-fg-dim">Recent audit</p><h2 className="mt-2 text-lg font-semibold text-fg">{latestUrl}</h2></div><span className="text-xs text-fg-dim">{fmtDate(latest.completed_at || latest.created_at)}</span></div>
+          <div className="mt-5 flex items-center justify-between rounded-xl bg-bg px-4 py-3"><span className="text-sm text-fg-muted">Grade</span><span className="text-2xl font-semibold text-fg">{latest.grade || '—'}</span></div>
+          <a href={`/audit/${latest.id}/results`} className="mt-4 inline-flex text-sm font-semibold text-[#444] hover:text-fg">Review findings →</a>
         </section>
-        <section className="rounded-2xl border border-gray-800 bg-[#0a0a0a] p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
-          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-500">Keep your baseline current</p>
-          <h2 className="mt-2 text-lg font-semibold text-white">Verify the next change</h2>
-          <p className="mt-2 text-sm leading-6 text-gray-400">Run a follow-up after implementing a fix. New runs are preserved as immutable versions in your audit history.</p>
-          <a href={`/audit?url=${encodeURIComponent(latest.url)}`} className="mt-5 inline-flex rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-black hover:bg-gray-200">Run follow-up audit →</a>
+        <section className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-fg-dim">Keep your baseline current</p>
+          <h2 className="mt-2 text-lg font-semibold text-fg">Verify the next change</h2>
+          <p className="mt-2 text-sm leading-6 text-fg-muted">Run a follow-up after implementing a fix. New runs are preserved as immutable versions in your audit history.</p>
+          <a href={`/audit?url=${encodeURIComponent(latest.url)}`} className="mt-5 inline-flex rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-bg hover:bg-gray-200">Run follow-up audit →</a>
         </section>
       </div>
     </div>
@@ -169,7 +169,7 @@ export function DashboardView({ audits, latestDetail }: { audits: WorkspaceAudit
 }
 
 function MetricCard({ label, value, detail, tone }: { label: string; value: string; detail: string; tone: 'dark' | 'red' }) {
-  return <section className="rounded-2xl border border-gray-800 bg-[#0a0a0a] p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]"><p className="text-xs font-semibold uppercase tracking-[0.13em] text-gray-500">{label}</p><p className={`mt-4 text-3xl font-semibold tracking-[-0.04em] ${tone === 'red' ? 'text-[#b33d38]' : 'text-white'}`}>{value}</p><p className="mt-2 truncate text-xs text-[#888881]">{detail}</p></section>
+  return <section className="rounded-2xl border border-border bg-bg-elevated p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]"><p className="text-xs font-semibold uppercase tracking-[0.13em] text-fg-dim">{label}</p><p className={`mt-4 text-3xl font-semibold tracking-[-0.04em] ${tone === 'red' ? 'text-[#b33d38]' : 'text-fg'}`}>{value}</p><p className="mt-2 truncate text-xs text-[#888881]">{detail}</p></section>
 }
 
 // ── Audits (immutable versions) ───────────────────────────────────────
@@ -193,14 +193,14 @@ export function AuditsView({ audits }: { audits: WorkspaceAudit[] }) {
 
   if (audits.length === 0) {
     return (
-      <div className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-10 text-center">
+      <div className="bg-bg-elevated border border-border rounded-lg p-10 text-center">
         <h2 className="text-xl font-bold mb-2">No audit history yet</h2>
-        <p className="text-gray-400 mb-6">
+        <p className="text-fg-muted mb-6">
           Every audit you run is preserved forever — like Git commits for your landing page.
         </p>
         <a
           href="/audit"
-          className="inline-block rounded-lg bg-emerald-500 px-6 py-2.5 text-sm font-semibold text-black hover:bg-emerald-400 transition-colors"
+          className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
         >
           Run first audit
         </a>
@@ -210,15 +210,15 @@ export function AuditsView({ audits }: { audits: WorkspaceAudit[] }) {
 
   return (
     <div className="space-y-8">
-      <p className="text-sm text-gray-400">
+      <p className="text-sm text-fg-muted">
         Every audit is immutable — old versions are never overwritten, so you can always see
         where a page started.
       </p>
       {byPath.map(([key, versions]) => (
-        <section key={key} className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-6">
+        <section key={key} className="bg-bg-elevated border border-border rounded-lg p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-white">{displayUrl(versions[0].url)}</h2>
-            <span className="text-xs text-gray-500 border border-gray-700 rounded-full px-3 py-1">
+            <h2 className="text-lg font-semibold text-fg">{displayUrl(versions[0].url)}</h2>
+            <span className="text-xs text-fg-dim border border-border rounded-full px-3 py-1">
               {versions.length} {versions.length === 1 ? 'version' : 'versions'}
             </span>
           </div>
@@ -227,21 +227,21 @@ export function AuditsView({ audits }: { audits: WorkspaceAudit[] }) {
               <li key={v.id}>
                 <a
                   href={`/audit/${v.id}/results`}
-                  className="flex items-center justify-between rounded-lg border border-gray-800 bg-[#0d0d0d] px-4 py-3 hover:border-emerald-800 transition-colors"
+                  className="flex items-center justify-between rounded-lg border border-border bg-bg-panel px-4 py-3 hover:border-accent/50 transition-colors"
                 >
                   <div className="flex items-center gap-4">
-                    <span className="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-sm font-bold text-gray-300">
+                    <span className="w-10 h-10 rounded-lg bg-bg-elevated flex items-center justify-center text-sm font-bold text-fg-muted">
                       v{i + 1}
                     </span>
                     <div>
-                      <p className="text-sm font-medium text-white">
+                      <p className="text-sm font-medium text-fg">
                         {Math.round(scoreOf(v) * 10)}/100
-                        {v.grade ? <span className="text-gray-500 ml-2">Grade {v.grade}</span> : null}
+                        {v.grade ? <span className="text-fg-dim ml-2">Grade {v.grade}</span> : null}
                       </p>
-                      <p className="text-xs text-gray-500">{fmtDate(v.completed_at || v.created_at)}</p>
+                      <p className="text-xs text-fg-dim">{fmtDate(v.completed_at || v.created_at)}</p>
                     </div>
                   </div>
-                  <span className="text-emerald-400 text-sm">View →</span>
+                  <span className="text-accent text-sm">View →</span>
                 </a>
               </li>
             ))}
@@ -276,12 +276,12 @@ export function ProjectsView({ audits }: { audits: WorkspaceAudit[] }) {
 
   if (audits.length === 0) {
     return (
-      <div className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-10 text-center">
+      <div className="bg-bg-elevated border border-border rounded-lg p-10 text-center">
         <h2 className="text-xl font-bold mb-2">No projects yet</h2>
-        <p className="text-gray-400 mb-6">Audited pages group into projects by domain automatically.</p>
+        <p className="text-fg-muted mb-6">Audited pages group into projects by domain automatically.</p>
         <a
           href="/audit"
-          className="inline-block rounded-lg bg-emerald-500 px-6 py-2.5 text-sm font-semibold text-black hover:bg-emerald-400 transition-colors"
+          className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
         >
           Run first audit
         </a>
@@ -292,31 +292,31 @@ export function ProjectsView({ audits }: { audits: WorkspaceAudit[] }) {
   return (
     <div className="grid md:grid-cols-2 gap-4">
       {projects.map((project) => (
-        <section key={project.domain} className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-6">
+        <section key={project.domain} className="bg-bg-elevated border border-border rounded-lg p-6">
           <div className="flex items-center justify-between mb-1">
-            <h2 className="text-lg font-semibold text-white">{project.domain}</h2>
-            <span className="text-2xl font-bold text-emerald-400">
+            <h2 className="text-lg font-semibold text-fg">{project.domain}</h2>
+            <span className="text-2xl font-bold text-accent">
               {Math.round(scoreOf(project.latest) * 10)}
             </span>
           </div>
-          <p className="text-xs text-gray-500 mb-4">
+          <p className="text-xs text-fg-dim mb-4">
             {project.paths.length} {project.paths.length === 1 ? 'page' : 'pages'} ·{' '}
             {project.count} {project.count === 1 ? 'audit' : 'audits'} · last{' '}
             {fmtDate(project.latest.completed_at || project.latest.created_at)}
           </p>
           <ul className="space-y-1 mb-4">
             {project.paths.slice(0, 4).map((path) => (
-              <li key={path} className="text-sm text-gray-400 truncate">
+              <li key={path} className="text-sm text-fg-muted truncate">
                 {path}
               </li>
             ))}
             {project.paths.length > 4 && (
-              <li className="text-xs text-gray-500">+{project.paths.length - 4} more</li>
+              <li className="text-xs text-fg-dim">+{project.paths.length - 4} more</li>
             )}
           </ul>
           <a
             href={`/audit?url=${encodeURIComponent(project.latest.url)}`}
-            className="text-sm text-emerald-400 hover:text-emerald-300"
+            className="text-sm text-accent hover:text-accent-light"
           >
             Run follow-up →
           </a>

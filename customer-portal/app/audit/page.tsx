@@ -50,7 +50,7 @@ export default function AuditPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(auditWebApplicationSchema) }}
       />
-      <main id="main-content" role="main" className="min-h-screen bg-bg pt-24">
+      <main id="main-content" className="min-h-screen bg-bg pt-24">
 
         {/* ── 1. Hero: form-forward split ── */}
         <section className="mx-auto max-w-6xl px-6 py-12 md:py-20">

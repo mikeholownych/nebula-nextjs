@@ -73,7 +73,7 @@ export default function WhatIsLandingPageAudit() {
       <article className="max-w-3xl mx-auto px-6 py-12">
         {/* Section 1 */}
         <section className="mb-12">
-          <h2 className="text-xl font-bold text-white border-l-3 border-emerald-500 pl-4 mb-4">
+          <h2 className="text-xl font-bold text-white pl-0 mb-4">
             What Is a Landing Page Audit?
           </h2>
           <p className="text-gray-300 mb-4">
@@ -111,7 +111,7 @@ export default function WhatIsLandingPageAudit() {
 
         {/* Section 2 */}
         <section className="mb-12">
-          <h2 className="text-xl font-bold text-white border-l-3 border-emerald-500 pl-4 mb-4">
+          <h2 className="text-xl font-bold text-white pl-0 mb-4">
             Why Audit Before Spending More on Ads?
           </h2>
           <p className="text-gray-300 mb-4">
@@ -130,7 +130,7 @@ export default function WhatIsLandingPageAudit() {
 
         {/* Section 3 */}
         <section className="mb-12">
-          <h2 className="text-xl font-bold text-white border-l-3 border-emerald-500 pl-4 mb-4">
+          <h2 className="text-xl font-bold text-white pl-0 mb-4">
             How to Interpret Audit Scores
           </h2>
           <div className="space-y-4">
@@ -166,7 +166,7 @@ export default function WhatIsLandingPageAudit() {
 
         {/* Section 4 */}
         <section className="mb-12">
-          <h2 className="text-xl font-bold text-white border-l-3 border-emerald-500 pl-4 mb-4">
+          <h2 className="text-xl font-bold text-white pl-0 mb-4">
             DIY vs. Professional Implementation
           </h2>
           <div className="grid md:grid-cols-2 gap-4 my-6">
