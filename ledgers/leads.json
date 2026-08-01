@@ -658,7 +658,7 @@
     "current_stage": "lead_audit",
     "email": "e2e-crawler-test@example.com",
     "first_seen": "2026-08-01T03:41:01.997419Z",
-    "last_seen": "2026-08-01T14:51:10.124615Z",
+    "last_seen": "2026-08-01T15:43:26.984700Z",
     "name": "",
     "notes": "",
     "nurture_track": "headline-clarity",
@@ -674,11 +674,11 @@
     ],
     "tags": [],
     "total_spent_cents": 0,
-    "track_audit_id": "69e30344-f65b-4299-a2b9-d370c40860ca",
+    "track_audit_id": "3b41f8c5-19fd-4a96-8a82-4853bbd78e90",
     "track_position_days": 0,
-    "track_started_at": "2026-08-01T14:51:10.124615Z",
+    "track_started_at": "2026-08-01T15:43:26.984700Z",
     "trigger_text": "",
-    "url": "https://nebulacomponents.shop"
+    "url": "https://nebulacomponents.shop/monitor-qa"
   },
   "flynn@snipprompts.com": {
     "content_posts": [],

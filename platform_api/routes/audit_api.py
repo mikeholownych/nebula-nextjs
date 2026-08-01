@@ -720,11 +720,15 @@ async def run_due_monitors():
                     f"📉 Nebula Monitor — {url}\n"
                     f"{round(prev_disp)} → {round(new_score)} ({points:+.0f} pts) · {email}"
                 )
+                asyncio.create_task(_send_monitor_alert_email(
+                    email, url, status, prev_score, new_score, summary))
             elif status == "new_fail":
                 alerts.append(
                     f"🚨 Nebula Monitor — {url}\n"
                     f"New critical finding · {round(new_score)}/100 · {email}"
                 )
+                asyncio.create_task(_send_monitor_alert_email(
+                    email, url, status, prev_score, new_score, summary))
             elif status == "improved":
                 alerts.append(
                     f"📈 Nebula Monitor — {url}\n"
@@ -743,6 +747,32 @@ async def run_due_monitors():
             )
 
     return {"checked": len(due), "alerts": alerts}
+
+
+async def _send_monitor_alert_email(email: str, url: str, status: str,
+                                    prev_score: float, new_score: float, summary: str) -> None:
+    """Fire-and-forget email notification for monitor regression/new_fail events."""
+    try:
+        if status == "new_fail":
+            subject = f"Nebula alert: new critical issue on {url}"
+        else:
+            subject = f"Nebula alert: {url} score dropped"
+        body = (
+            f"Your Nebula monitor detected a change on {url}.\n\n"
+            f"{summary}\n\n"
+            f"Score: {round(prev_score)}/100 → {round(new_score)}/100\n\n"
+            f"View your workspace: https://nebulacomponents.shop/workspace\n\n"
+            f"— Nebula Components"
+        )
+        from agentmail_client import AgentMailClient
+        client = AgentMailClient()
+        client.send(
+            to=[email],
+            subject=subject,
+            text=body,
+        )
+    except Exception:
+        pass  # Never let email failures break the monitor run
 
 
 @router.get("/badges")

@@ -1,0 +1,33 @@
+/**
+ * GET /api/auth/verify?token=...
+ * Proxies to the platform API magic link verification endpoint.
+ * Returns 501 until magic link is implemented in the platform API.
+ */
+import { NextRequest, NextResponse } from 'next/server'
+
+const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
+
+export async function GET(request: NextRequest) {
+  const token = request.nextUrl.searchParams.get('token') ?? ''
+  try {
+    const upstream = await fetch(`${API_BASE}/api/auth/verify?token=${encodeURIComponent(token)}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(request.headers.get('cookie') ? { Cookie: request.headers.get('cookie')! } : {}),
+      },
+      signal: AbortSignal.timeout(10_000),
+    })
+    const data = await upstream.text()
+    const response = new NextResponse(data, {
+      status: upstream.status,
+      headers: { 'Content-Type': upstream.headers.get('Content-Type') ?? 'application/json' },
+    })
+    const setCookie = upstream.headers.get('set-cookie')
+    if (setCookie) response.headers.set('set-cookie', setCookie)
+    return response
+  } catch (err) {
+    console.error('[auth/verify proxy]', err)
+    return NextResponse.json({ error: 'Auth service unavailable' }, { status: 503 })
+  }
+}
