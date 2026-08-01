@@ -745,6 +745,36 @@ async def run_due_monitors():
     return {"checked": len(due), "alerts": alerts}
 
 
+@router.get("/badges")
+async def get_badges_by_email(email: str):
+    """Return all earned badges for a given email address."""
+    try:
+        await audit_db.connect()
+        async with audit_db.pool.acquire() as conn:
+            rows = await conn.fetch(
+                """
+                SELECT b.*, a.url
+                FROM badges b
+                JOIN audits a ON b.after_audit_id = a.id
+                WHERE a.email = $1
+                ORDER BY b.earned_at DESC
+                """,
+                email,
+            )
+
+        badges = [dict(row) for row in rows]
+        # Serialize UUIDs and datetimes
+        for badge in badges:
+            for k, v in list(badge.items()):
+                if hasattr(v, 'isoformat'):
+                    badge[k] = v.isoformat()
+                elif type(v).__name__ == 'UUID':
+                    badge[k] = str(v)
+        return {"badges": badges}
+    except Exception:
+        raise HTTPException(status_code=500, detail="Badge lookup unavailable")
+
+
 @router.get("/{audit_id}")
 async def get_audit(audit_id: str, share: Optional[str] = Query(default=None)):
     """Fetch audit by ID from database.
