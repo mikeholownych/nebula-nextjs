@@ -25,6 +25,8 @@ RATE_LIMITS = {
     "/api/auth/magic-link": (5, 900),   # 5 req/15min
     "/api/auth/logout": (10, 60),       # 10 req/min
     "/api/webhook/stripe": (1000, 60),  # 1000 req/min (webhooks)
+    "/audit/run": (5, 60),              # 5 req/min — core audit engine
+    "/audit/lab": (10, 60),             # 10 req/min — component lab
     "default_authenticated": (100, 60), # 100 req/min
     "default_anonymous": (20, 60),      # 20 req/min
 }

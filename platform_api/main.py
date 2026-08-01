@@ -14,6 +14,7 @@ from platform_api.errors import (
     validation_exception_handler,
 )
 from platform_api.middleware import setup_cors, setup_middleware
+from platform_api.middleware.rate_limit import setup_rate_limiting
 
 
 @asynccontextmanager
@@ -63,6 +64,10 @@ app = FastAPI(
 # Setup middleware
 setup_middleware(app, max_body_size=settings.MAX_JSON_BODY_BYTES)
 setup_cors(app, settings.ALLOWED_ORIGINS)
+
+# Rate limiting — uses the Redis client connected in lifespan
+from platform_api.redis_client import redis_client as _redis_client
+setup_rate_limiting(app, _redis_client)
 
 
 # Import and include routers
