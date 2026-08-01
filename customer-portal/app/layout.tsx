@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from 'next'
-import CookieConsent from './components/CookieConsent'
 import SiteNav from '@/components/SiteNav'
 import Footer from '@/components/Footer'
 import WebMCP from '@/components/WebMCP'
+import LazyCookieConsent from './components/LazyCookieConsent'
 import './globals.css'
 import { organizationSchema, websiteSchema } from './lib/schema'
 
@@ -57,6 +57,10 @@ export default function RootLayout({
       <head>
         {/* Agent discovery: llms.txt link tag for crawlers that don't read response headers */}
         <link rel="describedby" href="/llms.txt" type="text/plain" />
+        {/* DNS prefetch for Cloudflare Web Analytics beacon — CF injects beacon.min.js
+            at the edge; dns-prefetch speeds up its connection so it resolves sooner
+            and doesn't extend the critical network chain as long. */}
+        <link rel="dns-prefetch" href="//static.cloudflareinsights.com" />
         {/*
           Runs before <body> paints so returning visitors who already
           consented (localStorage) never see the cookie banner flash in —
@@ -96,7 +100,7 @@ export default function RootLayout({
         <SiteNav />
         {children}
         <Footer />
-        <CookieConsent />
+        <LazyCookieConsent />
         <WebMCP />
       </body>
     </html>
