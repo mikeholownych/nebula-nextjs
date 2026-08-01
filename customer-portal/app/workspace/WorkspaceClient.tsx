@@ -91,6 +91,28 @@ export default function WorkspaceClient() {
 
   useEffect(() => {
     setEmail(window.localStorage.getItem(EMAIL_KEY) || '')
+
+    // Handle invite token acceptance
+    const params = new URLSearchParams(window.location.search)
+    const inviteToken = params.get('invite')
+    if (inviteToken) {
+      fetch('/api/workspace/team/accept', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: inviteToken }),
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.ok && data.memberEmail) {
+            window.localStorage.setItem(EMAIL_KEY, data.memberEmail)
+            setEmail(data.memberEmail)
+          }
+          window.history.replaceState({}, '', '/workspace')
+        })
+        .catch(() => {
+          window.history.replaceState({}, '', '/workspace')
+        })
+    }
   }, [])
 
   useEffect(() => {

@@ -823,28 +823,124 @@ async def get_badges_by_email(email: str):
         raise HTTPException(status_code=500, detail="Badge lookup unavailable")
 
 
-# ── Team endpoint ────────────────────────────────────────────────────────────
+# ── AI Assistant endpoint ─────────────────────────────────────────────────────
 
 from datetime import datetime, timezone
 
 
+class AssistantRequest(BaseModel):
+    email: str
+    question: str
+    audit_context: str = ""
+    has_audits: bool = False
+
+
+@router.post("/assistant")
+async def workspace_assistant(body: AssistantRequest):
+    """Answer workspace questions grounded in the user's audit data.
+    Uses OpenRouter (Claude Sonnet) for cost-effective, fast responses."""
+    openrouter_key = os.environ.get("OPENROUTER_API_KEY", "")
+    if not openrouter_key:
+        # Fallback: read from ~/.hermes/.env
+        hermes_env = Path.home() / ".hermes" / ".env"
+        if hermes_env.exists():
+            for line in hermes_env.read_text().splitlines():
+                if line.startswith("OPENROUTER_API_KEY=") and not line.startswith("#"):
+                    openrouter_key = line.split("=", 1)[1].strip()
+                    break
+    if not openrouter_key:
+        raise HTTPException(status_code=503, detail="LLM unavailable")
+
+    system_prompt = (
+        "You are the Nebula workspace assistant. You answer questions about "
+        "landing page conversion audits. You are concise, specific, and actionable. "
+        "Every answer must reference the user's actual audit data provided below. "
+        "Never invent findings that aren't in the data. If the data doesn't contain "
+        "enough information to answer, say so clearly.\n\n"
+        "Format: Use markdown. Bold key recommendations. Keep answers under 200 words "
+        "unless the user asks for detail."
+    )
+
+    user_message = body.question
+    if body.has_audits and body.audit_context:
+        user_message = (
+            f"My audit data:\n\n{body.audit_context}\n\n"
+            f"Question: {body.question}"
+        )
+    elif not body.has_audits:
+        user_message = (
+            f"I haven't run any audits yet. Question: {body.question}\n\n"
+            "If the answer requires audit data, tell me to run an audit first."
+        )
+
+    try:
+        async with httpx.AsyncClient(timeout=12.0) as client:
+            resp = await client.post(
+                "https://openrouter.ai/api/v1/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {openrouter_key}",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": "anthropic/claude-sonnet-4-6",
+                    "messages": [
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_message},
+                    ],
+                    "max_tokens": 600,
+                    "temperature": 0.3,
+                },
+            )
+            resp.raise_for_status()
+            data = resp.json()
+            answer = data["choices"][0]["message"]["content"]
+            return {"answer": answer}
+    except httpx.TimeoutException:
+        raise HTTPException(status_code=504, detail="LLM timeout")
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"LLM error: {str(e)}")
+
+
+# ── Team endpoint ────────────────────────────────────────────────────────────
+
+
 @router.get("/team")
 async def get_team(email: str = Query(..., description="User email")):
-    """Return team members for a given email. Placeholder until JWT auth is live.
+    """Return team members for a given workspace email.
     Must be defined before /{audit_id} so the router does not parse 'team' as a UUID."""
     if not email:
         raise HTTPException(status_code=400, detail="email is required")
-    return {
-        "email": email,
-        "members": [
-            {
-                "email": email,
-                "role": "owner",
-                "joinedAt": datetime.now(timezone.utc).isoformat(),
-            }
-        ],
-        "inviteStatus": "coming_soon",
-    }
+
+    await audit_db.connect()
+    try:
+        async with audit_db.pool.acquire() as conn:
+            rows = await conn.fetch(
+                """SELECT member_email, role, invitation_status, invited_at, joined_at
+                   FROM workspace_members
+                   WHERE workspace_email = $1
+                   ORDER BY invited_at ASC""",
+                email.strip().lower(),
+            )
+    except Exception:
+        rows = []
+
+    members = [
+        {
+            "email": email,
+            "role": "owner",
+            "joinedAt": datetime.now(timezone.utc).isoformat(),
+        }
+    ]
+    for row in rows:
+        members.append({
+            "email": row["member_email"],
+            "role": row["role"],
+            "invitationStatus": row["invitation_status"],
+            "invitedAt": row["invited_at"].isoformat() if row["invited_at"] else None,
+            "joinedAt": row["joined_at"].isoformat() if row["joined_at"] else None,
+        })
+
+    return {"email": email, "members": members}
 
 
 @router.get("/{audit_id}")

@@ -37,10 +37,14 @@ class Settings(BaseSettings):
     # Stripe
     STRIPE_SECRET_KEY: Optional[str] = None
     STRIPE_WEBHOOK_SECRET: Optional[str] = None
+    STRIPE_PUBLISHABLE_KEY: Optional[str] = None
     
     # SendGrid
     SENDGRID_API_KEY: Optional[str] = None
     SENDGRID_FROM_EMAIL: str = "noreply@nebulacomponents.shop"
+
+    # OpenRouter (AI Assistant)
+    OPENROUTER_API_KEY: Optional[str] = None
     
     # PostHog
     POSTHOG_PROJECT_TOKEN: Optional[str] = None
