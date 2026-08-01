@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic'
 export const metadata: Metadata = {
   title: 'Landing Page Audit Pricing & One-Leak Repair Sprint | Nebula',
   description:
-    'Free landing page audit, plus the $97 One-Leak Repair Sprint: one landing page, one high-confidence repair, implemented and verified by Nebula.',
+    'Free landing page audit — no signup, results in under 2 minutes. Plus the $97 One-Leak Repair Sprint: targeted AI prompts for your specific failing signals.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/pricing',
   },
@@ -47,27 +47,27 @@ function buildServiceSchema(fixPack: FixPackPublicFact) {
 const faqItems = [
   {
     q: 'What is included in the One-Leak Repair Sprint?',
-    a: 'Nebula selects one high-confidence page-level repair from the audit, records the baseline, confirms the scope with you, implements the approved repair, verifies production, and runs a same-scope re-audit.',
+    a: 'After the free audit, you pay $97 and receive targeted AI prompts written for your specific failing signals — exact copy changes, code snippets, or configuration fixes. You implement them yourself, with your developer, or through your CMS. No site access required from Nebula.',
   },
   {
-    q: 'Why only one repair?',
-    a: 'A bounded change can be implemented safely and verified honestly. Changing many things at once makes it harder to determine what changed and turns a $97 repair into an undefined redesign.',
+    q: 'Why only one finding?',
+    a: 'A bounded change can be tested and measured honestly. Changing many things at once makes it impossible to know what worked. Fix the highest-impact finding first, run the re-audit, then decide what to do next.',
   },
   {
-    q: 'How does access work?',
-    a: 'After scope approval, you grant temporary collaborator access through your platform or approve a patch handoff. Never send passwords by email. If neither path is safe, we refund you before work begins.',
+    q: 'Do I need to give Nebula access to my site?',
+    a: 'No. The prompts are delivered instantly after checkout — you apply them yourself or hand them to your developer. Nebula never needs CMS, hosting, or repo access.',
   },
   {
     q: 'How long does it take?',
-    a: 'Stripe confirms the purchase immediately. We email you within one business day to confirm the audited URL, repair scope, approval, and access path before implementation begins.',
+    a: 'Stripe confirms immediately. Your prompts are delivered as soon as the checkout completes — no waiting, no emails to check. Implementation speed depends on your setup.',
   },
   {
     q: 'Does the repair guarantee more conversions?',
-    a: 'No. Nebula verifies the page condition and implementation. We do not promise conversion lift because traffic quality, offer strength, campaign changes, and measurement windows also affect outcomes.',
+    a: 'No. The prompts fix a specific page condition identified by the audit. Conversion outcomes also depend on traffic quality, offer strength, and measurement windows. The 30-day re-audit shows whether the page condition changed — not whether revenue went up.',
   },
   {
     q: 'What does the 30-day evidence check cover?',
-    a: 'One additional check of the same repaired page condition within 30 days. It documents what changed and what remains open; it does not by itself prove business impact.',
+    a: 'One additional audit run on the same page within 30 days. It documents whether the repaired condition held. It does not by itself prove business impact.',
   },
 ]
 
@@ -105,12 +105,16 @@ export default function PricingPage() {
             <p className="mx-auto mt-4 max-w-xl text-fg-muted">
               No retainer. No undefined redesign. Pay once for one bounded repair, implemented and verified.
             </p>
+            <p className="mt-3 text-sm text-fg-muted">
+              Under 2 minutes · no signup · no sales call
+            </p>
           </div>
 
           <div className="grid gap-8 md:grid-cols-2">
             <Card variant="bordered">
               <p className="mb-3 text-sm font-medium text-fg-muted">Free</p>
               <h2 className="text-2xl font-semibold text-fg">Automated Audit</h2>
+              <p className="mt-1 text-sm italic text-fg-muted">See what's leaking before you spend another dollar</p>
               <p className="mt-2 text-3xl font-bold text-fg">Free</p>
               <p className="mt-4 text-fg-muted">
                 Drop in a URL and get a scored, evidence-backed diagnosis in minutes — no signup required.
@@ -137,19 +141,24 @@ export default function PricingPage() {
             <Card variant="bordered">
               <p className="mb-3 text-sm font-medium text-fg-muted">One-time payment</p>
               <h2 className="text-2xl font-semibold text-fg">One-Leak Repair Sprint</h2>
+              <p className="mt-1 text-sm italic text-fg-muted">Fix the highest-impact leak — prompts delivered instantly</p>
               <p className="mt-2 text-4xl font-bold text-fg">${REPAIR_SPRINT_OFFER.priceUsd}</p>
               <p className="mt-4 text-fg-muted">
-                One landing page. One high-confidence repair selected from your audit, approved by you,
-                implemented by Nebula, and verified on the live page.
+                Run the free audit first — see your findings immediately, no email required.
+                Pay $97 to get targeted AI prompts that fix the highest-impact finding on your specific page.
               </p>
-              <ul className="mt-6 space-y-2 text-sm text-fg-muted">
-                {REPAIR_SPRINT_OFFER.includes.map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              <div className="mt-6 space-y-3">
+                {'howItWorks' in REPAIR_SPRINT_OFFER && Array.isArray(REPAIR_SPRINT_OFFER.howItWorks) &&
+                  (REPAIR_SPRINT_OFFER.howItWorks as string[]).map((step, i) => (
+                    <div key={i} className="flex items-start gap-3 text-sm text-fg-muted">
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/20 text-xs font-bold text-accent">
+                        {i + 1}
+                      </span>
+                      {step}
+                    </div>
+                  ))
+                }
+              </div>
               <p className="mt-6 text-sm leading-6 text-fg-muted">
                 This service does not promise conversion lift. It proves what page condition was found,
                 what changed, and whether that same condition changed on re-audit.
