@@ -5,6 +5,9 @@ import { DashboardView, AuditsView, ProjectsView } from './views'
 import CompareView from './compareView'
 import RecsView from './recsView'
 import ExperimentsView from './experimentsView'
+import BillingView from './billingView'
+import MonitoringView from './monitoringView'
+import TimelineView from './timelineView'
 
 export interface WorkspaceAudit {
   id: string
@@ -39,7 +42,7 @@ export interface AuditDetail {
   findings: AuditFinding[]
 }
 
-type TabId = 'dashboard' | 'audits' | 'projects' | 'compare' | 'recommendations' | 'experiments'
+type TabId = 'dashboard' | 'audits' | 'projects' | 'compare' | 'recommendations' | 'experiments' | 'billing' | 'monitoring' | 'timeline'
 
 const EMAIL_KEY = 'nebula_ws_email'
 
@@ -188,6 +191,9 @@ export default function WorkspaceClient() {
     { id: 'compare', label: 'Compare' },
     { id: 'recommendations', label: 'Recommendations' },
     { id: 'experiments', label: 'Experiments' },
+    { id: 'billing', label: 'Billing' },
+    { id: 'monitoring', label: 'Monitoring' },
+    { id: 'timeline', label: 'Timeline' },
   ]
 
   return (
@@ -238,6 +244,9 @@ export default function WorkspaceClient() {
         {tab === 'compare' && <CompareView audits={audits || []} />}
         {tab === 'recommendations' && <RecsView email={email} />}
         {tab === 'experiments' && <ExperimentsView email={email} />}
+        {tab === 'billing' && <BillingView email={email} />}
+        {tab === 'monitoring' && <MonitoringView email={email} />}
+        {tab === 'timeline' && <TimelineView email={email} />}
       </div>
     </main>
   )

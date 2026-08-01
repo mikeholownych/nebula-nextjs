@@ -288,6 +288,121 @@ def _local_gbp_dimension(html_text: str, lower: str) -> dict | None:
     }
 
 
+def _check_ai_crawlers(url: str) -> dict:
+    """Score AI answer-engine access via robots.txt (Ideata-style crawler check).
+
+    Distinguishes RETRIEVAL crawlers (fetch a page to cite it in an answer —
+    OAI-SearchBot, ChatGPT-User, anthropic-ai, PerplexityBot, Perplexity-User,
+    GoogleOther, Applebot) from TRAINING crawlers (ingest a page to train a
+    model — GPTBot, ClaudeBot, Google-Extended, Applebot-Extended, CCBot).
+
+    Blocking training crawlers is a defensible copyright stance and does NOT
+    block citations. Blocking retrieval crawlers is a guaranteed zero in that
+    engine's answers.
+    """
+    from urllib import robotparser as _rp
+    from urllib.parse import urlparse as _up, urlunparse as _unparse
+
+    parsed = _up(url)
+    robots_url = _unparse((parsed.scheme, parsed.netloc, "/robots.txt", "", "", ""))
+
+    RETRIEVAL = [
+        "OAI-SearchBot", "ChatGPT-User", "anthropic-ai",
+        "PerplexityBot", "Perplexity-User", "GoogleOther", "Applebot",
+    ]
+    TRAINING = [
+        "GPTBot", "ClaudeBot", "Google-Extended",
+        "Applebot-Extended", "CCBot", "omgili",
+    ]
+
+    try:
+        session = get_session()
+        resp = session.get(robots_url, timeout=12, allow_redirects=True, stream=True)
+        body = resp.text[:64 * 1024] if resp.status_code == 200 else ""
+        resp.close()
+    except Exception:
+        return {
+            "score": 5,
+            "weight": "medium",
+            "issue": "Could not retrieve robots.txt — AI crawler access is unverified",
+            "fix": "Publish a robots.txt that explicitly allows answer-engine retrieval crawlers (OAI-SearchBot, ChatGPT-User, PerplexityBot, anthropic-ai, GoogleOther).",
+            "crawlers": {},
+        }
+
+    if not body:
+        # No robots.txt → all crawlers allowed by default, but no explicit policy
+        return {
+            "score": 7,
+            "weight": "medium",
+            "issue": "No robots.txt found — answer engines assume access, but there is no explicit policy",
+            "fix": "Add robots.txt with explicit Allow rules for answer-engine retrieval crawlers (OAI-SearchBot, ChatGPT-User, PerplexityBot, anthropic-ai, GoogleOther).",
+            "crawlers": {},
+        }
+
+    rp = _rp.RobotFileParser()
+    rp.set_url(robots_url)
+    try:
+        rp.parse(body.splitlines())
+        can_fetch = rp.can_fetch
+    except Exception:
+        # Fallback: case-insensitive literal scan of User-Agent groups.
+        def can_fetch(useragent: str, url: str) -> bool:
+            group = None
+            for line in body.splitlines():
+                s = line.strip()
+                if not s or s.startswith("#"):
+                    continue
+                if ":" not in s:
+                    continue
+                k, _, v = s.partition(":")
+                k, v = k.strip().lower(), v.strip()
+                if k == "user-agent":
+                    group = v
+                elif k in ("allow", "disallow") and group:
+                    if group == "*" or group == useragent.lower() or useragent.lower().endswith(group):
+                        if k == "allow":
+                            return True
+                        if v == "/" or url.startswith(urljoin(robots_url, v)):
+                            return False
+            return True
+
+    blocked_retrieval = [ua for ua in RETRIEVAL if not can_fetch(ua, url)]
+    allowed_retrieval = [ua for ua in RETRIEVAL if can_fetch(ua, url)]
+    blocked_training = [ua for ua in TRAINING if not can_fetch(ua, url)]
+
+    score = max(1, min(10, round(10 - 2.0 * len(blocked_retrieval))))
+
+    if not blocked_retrieval:
+        issue = "Answer-engine crawlers are allowed — your page can be read for citations"
+        fix = (
+            "Keep retrieval crawlers allowed. If you also want training-crawler control, "
+            "keep GPTBot/ClaudeBot/Google-Extended blocked — a defensible copyright stance "
+            "that does not block citations."
+        )
+    else:
+        issue = (
+            f"Robots.txt blocks answer-engine crawler(s): {', '.join(blocked_retrieval)} — "
+            "these engines cannot cite you"
+        )
+        fix = (
+            "Allow retrieval crawlers (OAI-SearchBot, ChatGPT-User, PerplexityBot, "
+            "anthropic-ai, GoogleOther) in robots.txt. Blocking training crawlers "
+            "(GPTBot, ClaudeBot, Google-Extended) is fine — it does not block citations."
+        )
+
+    return {
+        "score": score,
+        "weight": "medium",
+        "issue": issue,
+        "fix": fix,
+        "crawlers": {
+            "blocked_retrieval": blocked_retrieval,
+            "allowed_retrieval": allowed_retrieval,
+            "blocked_training": blocked_training,
+        },
+    }
+
+
 def score_audit(page):
     """Return the structured audit shape expected by agentic_server._handle_audit."""
     html_text = page.get("html", "")
@@ -579,6 +694,18 @@ def score_audit(page):
 
     # ── end AI citation dimension ──────────────────────────────────────
 
+    # ── AI answer-engine crawler access (robots.txt) ─────────────────────
+    try:
+        ai_crawlers = _check_ai_crawlers(page.get("url") or "")
+    except Exception:
+        ai_crawlers = {
+            "score": 5,
+            "weight": "medium",
+            "issue": "AI crawler access check failed — treat as unverified",
+            "fix": "Re-run the audit to verify robots.txt AI crawler rules.",
+            "crawlers": {},
+        }
+
     local_gbp = _local_gbp_dimension(html_text, lower)
 
     dimensions = {
@@ -637,6 +764,7 @@ def score_audit(page):
             "issue": ai_issue_text,
             "fix": ai_fix_text,
         },
+        "ai_crawler_access": ai_crawlers,
         # ── Local Business GBP Products (conditional) ──────────────────────
         # Only surfaces when the site shows local business signals (address,
         # phone, maps embed) but lacks GBP product listings or schema.
@@ -644,6 +772,22 @@ def score_audit(page):
     }
     overall = round(sum(v["score"] for v in dimensions.values()) / len(dimensions), 1)
     grade = "A" if overall >= 8 else "B" if overall >= 6.5 else "C" if overall >= 5 else "D"
+    # ── Weighted composite (Ideata-style single anchor number) ──────────────
+    # Honors the existing high/medium/low dimension metadata instead of treating
+    # every dimension as equal. high=3, medium=2, low=1. The anchor is the
+    # component pass standard used on /benchmarks (≥7) — a fixed, published
+    # criterion, not a moving threshold.
+    _WEIGHT_MAP = {"high": 3, "medium": 2, "low": 1}
+    _weighted_sum = sum(
+        v["score"] * _WEIGHT_MAP.get(str(v.get("weight", "medium")).lower(), 2)
+        for v in dimensions.values()
+    )
+    _weight_total = sum(
+        _WEIGHT_MAP.get(str(v.get("weight", "medium")).lower(), 2)
+        for v in dimensions.values()
+    )
+    composite = round(_weighted_sum / _weight_total, 1) if _weight_total else overall
+    composite_anchor = 7.0  # matches the published component pass standard
     # ── Opportunity Matrix (CAIOS M6) ──────────────────────────────────────────
     # Impact: revenue_unlock + risk_removal + time_to_value
     # Effort: integration_complexity + people_process_change (70% rule)
@@ -668,6 +812,7 @@ def score_audit(page):
             "ad_signals":   8,   # pixel install + GA4 events + tag manager + 70% team workflow change
             "seo_foundations": 4, # title/meta edits — low tech, some content work
             "ai_readiness": 5,   # JSON-LD + OG tags — dev task, one-time setup, moderate effort
+            "ai_crawler_access": 2,  # robots.txt Allow lines — 15-min fix, no system touch
         }
         effort = effort_weights.get(key, 5)
 
@@ -719,7 +864,14 @@ def score_audit(page):
             for finding in opp_matrix
         ]
 
-    return {"overall": overall, "overall_grade": grade, "dimensions": dimensions, "opp_matrix": opp_matrix}
+    return {
+        "overall": overall,
+        "overall_grade": grade,
+        "composite": composite,
+        "composite_anchor": composite_anchor,
+        "dimensions": dimensions,
+        "opp_matrix": opp_matrix,
+    }
 
 
 
@@ -1356,9 +1508,13 @@ def main():
             "name": args.name if hasattr(args, 'name') else None,
             "score": score,
             "grade": audit.get("overall_grade", ""),
+            "composite": audit.get("composite"),
+            "composite_anchor": audit.get("composite_anchor"),
             "findings": audit.get("opp_matrix", []),
             "dimensions": audit.get("dimensions", {}),
             "tech_stack": audit.get("tech_stack", {}),
+            "page_title": page.get("title", ""),
+            "page_h1": page.get("h1", ""),
             "email_subject": email_body["subject"],
             "email_body_text": email_body["text"],
             "email_body_html": email_body.get("html", ""),

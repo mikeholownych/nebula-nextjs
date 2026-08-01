@@ -1,0 +1,4 @@
+source_post_id,url,email,source,trigger_context,icp_score,segment,status,found_at
+reddit_abc123,https://mysaas.app,ceo@mysaas.app,reddit_explicit_pain,"founder here. spent $3200 on google ads last month. zero conversions. my landing page is mysaas.app",100,hot,contacted,2026-07-30T10:00:00Z
+hn_xyz456,https://example.com,,hacker_news,"show hn: built landing page, 940 impressions, 0 sales, what am I doing wrong",45,warm,queued,2026-07-30T11:00:00Z
+inbound_001,https://readyform.app,founder@readyform.app,inbound,"submitted via audit form",30,cold,audit_completed,2026-07-30T12:00:00Z

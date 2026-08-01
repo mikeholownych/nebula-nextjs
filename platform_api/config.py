@@ -45,6 +45,7 @@ class Settings(BaseSettings):
     # PostHog
     POSTHOG_PROJECT_TOKEN: Optional[str] = None
     POSTHOG_HOST: str = "https://us.i.posthog.com"
+    POSTHOG_PERSONAL_API_KEY: Optional[str] = None
 
     # CORS
     ALLOWED_ORIGINS: List[str] = []

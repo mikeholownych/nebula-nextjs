@@ -147,3 +147,54 @@ not pollute source-control status.
 to the committed state after archiving so test contacts and recurring provider
 logs are not bundled into product source commits. The Apify failures remain
 preserved as operational evidence in the archive.
+
+---
+
+## 2026-07-31 — Apify + Reddit outreach deprecation (full cutover)
+
+Date: 2026-07-31 UTC
+Task: `t_20260731_apify_reddit_deprecation`
+Policy: full cutover, no hybrid. Archived, not deleted.
+
+### Reason
+- Reddit outreach is DEAD (2026-07-31): 6yr low-karma account, API apps denied,
+  comments auto-deleted as "AI slop", paid services rejected. Read-only monitor kept.
+- Apify broad scraping deprecated: cost escalates, low-intent data, and the
+  alternative (trigger-aware manual research lanes + teardown engine) yields
+  warmer leads at near-zero cost.
+- ramp_pipeline_fill.py v2 replaces the scrape pipeline. Lead sources are now
+  `ops/lead_lanes/*.jsonl` (human-researched trigger records).
+
+### Archived to `.legacy/2026-07-31-apify-reddit-deprecation/`
+
+| Original path | Type | Disposition |
+|---|---|---|
+| apify_trigger_feed.py, apify_linkedin_pipeline.py, test_apify_api.py, check_apify_runs.py, linkedin_ingest_monitor.py | Apify pipeline scripts | Archived |
+| growth_system/apify_actor_config.json, growth_system/apify_inputs/, growth_system/apify_linkedin_engagers.json | Apify config/data | Archived |
+| tests/test_apify_linkedin_pipeline.py, tests/test_trigger_lead_engine_reddit_parser.py, tests/test_source_outcomes.py | Apify/Reddit tests | Archived |
+| reddit_trigger_monitor.py, reddit_reply_bot.py, reddit_auto_post.py, reddit_prospect_enrich.py, post_reddit.sh, scripts/watch_reddit_triggers.py | Reddit outreach scripts | Archived |
+| trigger_lead_engine.py, ad_bleed_signal_ranker.py, signal_scrapers.py | Scrape-pipeline engines | Archived |
+| reddit-response-launch-plan.md, reddit-karma-plan.md, outreach_reddit_template.md, reddit_posts.md, reddit-entrepreneur-draft.md | Reddit strategy docs | Archived |
+| wave4_reddit_leads.json, reddit_leads.json | Stale lead data | Archived |
+| ramp_pipeline_fill.py | OLD scrape pipeline | Archived as `ramp_pipeline_fill.apify_reddit_legacy.py`; replaced by v2 at original path |
+
+### Kept (read-only)
+- `audit-system/channel1/reddit_monitor_praw.py` — READ-ONLY market-signal monitor
+  (PRAW official API). Banner added; MUST NOT send/reply/auto-post.
+
+### Wrappers updated
+- `~/.hermes/scripts/signal_scrapers.sh` — dropped APIFY_TOKEN + signal_scrapers.py;
+  now runs ramp_pipeline_fill.py (lane sweep) daily.
+- `~/.hermes/scripts/pipeline_ramp.sh` — dropped trigger_lead_engine /
+  reddit_prospect_enrich / ad_bleed_signal_ranker; now ramp v2 → followup → nurture.
+- `~/.hermes/scripts/nebula_claude_growth_system.sh` — dropped Apify ingestion steps.
+
+### n8n
+- `Nebula Free Lead Scraper` (54elBkfysuwbzk9o) — already inactive. Not reactivated.
+- `Nebula Reddit Signal Monitor` (G6azfOHMHxlBva3N) — kept ACTIVE (read-only alerts).
+
+### Pipeline re-enabled
+- `OUTREACH_DISABLED` archived to `OUTREACH_DISABLED.archived-2026-07-31`
+  (Mike ratified 2026-07-31). Nurture layer added: teardown-founder track (d2/d6/d12)
+  + post-audit track (d1/d4/d9/d16) in nurture_engine.py; audit email intake wired in
+  `/api/audit/unlock` → `audit_leads.jsonl`.

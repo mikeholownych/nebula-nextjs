@@ -38,14 +38,45 @@ Every Nebula audit checks seven criteria:
 ## Services
 
 ### One-Leak Repair Sprint — $97 (one-time)
-One landing page and one high-confidence page-level repair selected from the audit. Nebula records the baseline, confirms the bounded scope with the buyer, implements the approved repair through temporary collaborator access or a buyer-controlled patch handoff, verifies production, and runs a same-scope re-audit. One additional same-scope evidence check is included within 30 days.
+One landing page and one high-confidence page-level repair selected from the audit. Nebula records the baseline, confirms the bounded scope with the buyer, implements the approved repair through temporary collaborator access or a buyer-controlled patch handoff, verifies production, and runs a same-scope re-audit. One additional same-scope evidence check is included within 30 days. Price locked through 2026-12-31. Checkout: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
 
 The Sprint excludes full redesigns, multiple pages, backend application logic, analytics migrations, and paid third-party tools. If Nebula cannot safely implement a bounded repair, the buyer receives a full refund before work begins. The evidence verifies the page condition and implementation; it does not by itself prove or guarantee conversion lift.
 
 No retainer. No ongoing commitment. Pay once for one bounded repair.
 
 ### Free Audit
-Automated URL submission and 7-point scoring across message-match, trust signals, mobile layout, load time, CTA clarity, form friction, and compliance.
+Automated URL submission and 7-point scoring across message-match, trust signals, mobile layout, load time, CTA clarity, form friction, and compliance. No email required to see results. Self-serve at https://nebulacomponents.shop/audit
+
+## Component Lab
+Three component checks at https://nebulacomponents.shop/lab — Message Match, Headline, CTA. Paste ad copy (optional) + page URL; the same engine as the free audit returns status, evidence, and the pass standard for each component. Ad copy enables a transparent term-overlap comparison between the ad's meaningful terms and the page's actual H1/title.
+
+## Benchmarks
+Nebula publishes real landing page benchmarks computed from completed audits: how often each conversion component (above-fold clarity, ad signals, SEO foundations, CTA, load speed, social proof, AI readiness, headline) fails, average impact, and score distribution. No URLs or personal data — pure aggregates at https://nebulacomponents.shop/benchmarks
+
+## Comparisons
+Honest tool-to-tool comparisons at https://nebulacomponents.shop/compare — Nebula vs Unbounce, Instapage, PageSpeed Insights, and Leadpages. Each page states what the other tool does well, where it stops, where Nebula fits, and an explicit "use both" recommendation. Nebula is a diagnosis tool, not a builder or a performance meter; boundaries are stated plainly.
+
+## Workspace
+Email-keyed customer workspace at https://nebulacomponents.shop/workspace — enter the email used for audits to open a Dashboard (overall score, findings severity, score trend, suggested next actions), Audit History (immutable versions per URL), Projects, Compare Audits (PR-style diff between audit versions), Recommendation Kanban (To Fix / Doing / Done), Experiments (Component Lab history: saved runs, scores, production marking), Billing (plan, purchase history, Stripe customer portal, upgrade paths), and Monitoring (scheduled re-audits with Telegram alerts on score movement ≥ 4 points or new critical findings). Backed by the same PostgreSQL store as the audit engine.
+
+## Teardowns
+
+Nebula publishes public landing page teardowns as evidence-based growth content: real pages, cold paid-traffic conditions, 7-signal scoring, and annotated findings — no opinions without observable support. All teardowns are at https://nebulacomponents.shop/teardowns
+
+- [Knallhart](https://nebulacomponents.shop/teardowns/knallhart): knallhart.dev — 5.4/10, Grade C. Five specific findings including above-fold trust gaps and CTA ambiguity. Founder notified with full report.
+- [Postmint](https://nebulacomponents.shop/teardowns/postmint): postmint.de — Blade/PHP template literal leak exposed in rendered HTML; message-match and trust findings. Founder notified with full report.
+- [Basecamp](https://nebulacomponents.shop/teardowns/basecamp): basecamp.com — 5.4/10, Grade C. Snapshot of five measurable page-level conditions for cold paid traffic.
+- [Notion](https://nebulacomponents.shop/teardowns/notion): notion.so — evidence-backed findings under cold paid-traffic conditions.
+- [Calendly](https://nebulacomponents.shop/teardowns/calendly): calendly.com — 7-signal audit findings.
+- [Carrd](https://nebulacomponents.shop/teardowns/carrd): carrd.co — 7-signal audit findings.
+- [Beehiiv](https://nebulacomponents.shop/teardowns/beehiiv): beehiiv.com — 7-signal audit findings.
+- [Webflow](https://nebulacomponents.shop/teardowns/webflow): webflow.com — 7-signal audit findings.
+- [Kit](https://nebulacomponents.shop/teardowns/kit): kit.com — 7-signal audit findings.
+- [Hotjar](https://nebulacomponents.shop/teardowns/hotjar): hotjar.com — 7-signal audit findings.
+- [Unbounce](https://nebulacomponents.shop/teardowns/unbounce): unbounce.com — 7-signal audit findings.
+- [Framer](https://nebulacomponents.shop/teardowns/framer): framer.com — 7-signal audit findings.
+
+Each teardown documents the specific verifiable condition, the evidence observed, and why it matters for cold paid traffic. Scores are snapshots, not verdicts on the business.
 
 ## Case Study Status
 
@@ -111,9 +142,19 @@ The Nebula Learning Centre contains 41 articles diagnosing specific landing page
 - Proof before CTA framework
 - Paid traffic leak map
 - Before you raise your ad budget
-- And 30 more articles
 
-All articles are available at: https://nebulacomponents.shop/learning-centre
+All 41 articles are available at: https://nebulacomponents.shop/learning-centre (each also as markdown at /learning-centre/<slug>.md)
+
+## Agent Discovery
+
+Nebula exposes machine-readable agent discovery endpoints:
+- llms.txt: https://nebulacomponents.shop/llms.txt (this file's index)
+- Agent skills index: https://nebulacomponents.shop/.well-known/agent-skills/index.json
+- Agentic Commerce Protocol: https://nebulacomponents.shop/.well-known/acp.json
+- OpenAPI: https://nebulacomponents.shop/openapi.json
+- Markdown page variants: append .md to any public page path (e.g. https://nebulacomponents.shop/audit.md, https://nebulacomponents.shop/teardowns/knallhart.md)
+
+robots.txt policy: model-training crawlers (GPTBot, ClaudeBot, Google-Extended, CCBot) are disallowed; answer-engine retrieval agents (ChatGPT-User, OAI-SearchBot, PerplexityBot, anthropic-ai) are allowed.
 
 ## Competitive Differentiation
 
@@ -160,4 +201,4 @@ Site: https://nebulacomponents.shop
 
 ## Last Updated
 
-2026-07-26
+2026-08-01

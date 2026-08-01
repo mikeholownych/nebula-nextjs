@@ -119,12 +119,25 @@ const nextConfig: NextConfig = {
 
   // Serve static HTML files from public folder
   async rewrites() {
-    return [
-      // PostHog reverse proxy — routes ingest through Next.js to avoid ad blockers
-      {
-        source: '/ingest/static/:path*',
-        destination: 'https://us-assets.i.posthog.com/static/:path*',
-      },
+  return [
+  // llms.txt proposal: markdown variant of teardown pages at URL + ".md".
+  // Must precede the dynamic /teardowns/[slug] route, which would otherwise
+  // capture "knallhart.md" as a slug and 404.
+  {
+    source: '/teardowns/:slug.md',
+    destination: '/md/teardowns/:slug',
+  },
+  // llms.txt proposal: markdown variant of learning-centre articles at
+  // URL + ".md". Precedes the dynamic /learning-centre/[slug] route.
+  {
+    source: '/learning-centre/:slug.md',
+    destination: '/md/learning-centre/:slug',
+  },
+  // PostHog reverse proxy — routes ingest through Next.js to avoid ad blockers
+  {
+    source: '/ingest/static/:path*',
+    destination: 'https://us-assets.i.posthog.com/static/:path*',
+  },
       {
         source: '/ingest/array/:path*',
         destination: 'https://us-assets.i.posthog.com/array/:path*',

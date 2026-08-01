@@ -378,6 +378,23 @@ def _process_inbound_reply(thread_id, message_id, sender, subject, preview, clas
         from agentmail_client import AgentMailClient
         am = AgentMailClient()
 
+        # 48-hour diagnostic: log which sentence failed for copy improvement.
+        diag = am.diagnose_reply({"subject": subject}, preview)
+        if diag != "none":
+            print(f"[agentmail] DIAGNOSTIC: {diag} — {sender} ({classification})")
+            try:
+                with open("/home/mike/nebula/reply_diagnostics.jsonl", "a") as f:
+                    f.write(json.dumps({
+                        "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                        "diagnosis": diag,
+                        "classification": classification,
+                        "sender": sender,
+                        "subject": subject[:120],
+                        "preview": preview[:200],
+                    }) + "\n")
+            except Exception as e:
+                print(f"[agentmail] diagnostic log failed: {e}")
+
         if classification == "warm":
             am.label_thread(thread_id, add=["warm"])
             update_stats("warm_leads")

@@ -9,6 +9,7 @@ For "unsubscribe" signals, also marks the lead as bounced in LeadStore.
 """
 
 import sys
+import json
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -105,6 +106,25 @@ def main():
                 break
 
         classification = am.classify_reply(thread, latest_body)
+
+        # 48-hour diagnostic: log which sentence failed for copy improvement.
+        diag = am.diagnose_reply(thread, latest_body)
+        if diag != "none":
+            print(f"  [DIAGNOSTIC] {diag} — {email} ({classification})")
+            try:
+                with open(NEBULA / "reply_diagnostics.jsonl", "a") as f:
+                    f.write(json.dumps({
+                        "ts": datetime.now(timezone.utc).isoformat(),
+                        "diagnosis": diag,
+                        "classification": classification,
+                        "sender": email,
+                        "thread_id": thread_id,
+                        "subject": (thread.get("subject") or "")[:120],
+                        "preview": latest_body[:200],
+                    }) + "\n")
+            except Exception as e:
+                print(f"  [DIAGNOSTIC LOG ERROR] {e}")
+
         print(f"  {email} -> {classification} (thread: {thread_id[:12]}...)")
 
         if dry_run:

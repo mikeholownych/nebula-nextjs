@@ -694,6 +694,14 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
 
       setEmailSent(data.email_sent === true)
       setUnlocked(true)
+
+      // Fire-and-forget: link this email to the audit so anonymous audits
+      // are claimed the moment the visitor enters their address.
+      fetch('/api/audit/claim', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ audit_id: auditId, email: emailForm.email }),
+      }).catch(() => {/* non-fatal */})
     } catch (err) {
       setEmailError(err instanceof Error ? err.message : 'Something went wrong')
     } finally {

@@ -1,12 +1,6 @@
-'use client'
-
-// Lazy-loads CookieConsent client-side only. CookieConsent is non-critical:
-// it only appears for first-time visitors and only when consent state is unknown.
-// Moving it out of the critical bundle reduces unused JS on first paint.
-import dynamic from 'next/dynamic'
-
-const CookieConsent = dynamic(() => import('./CookieConsent'), { ssr: false })
-
-export default function LazyCookieConsent() {
-  return <CookieConsent />
-}
+// CookieConsent renders as a plain server component so the consent runtime
+// script lands in the initial HTML and always executes. It must NOT be
+// dynamic(ssr:false): client-side injection of dangerouslySetInnerHTML
+// scripts never runs, which previously left the banner permanently visible
+// and consent-gated analytics never loading.
+export { default } from './CookieConsent'

@@ -1,0 +1,7 @@
+reply-ledger-v2-cutover in progress; outbound remains fail-closed until post-deploy verification
+
+ARCHIVED 2026-07-31 — pipeline RE-ENABLED by Mike (direct instruction).
+Reason for re-enable: cold-scrape pipeline replaced by trigger-aware lanes (ramp v2) +
+nurture layer (teardown track, post-audit track). Apify/Reddit outreach scripts archived
+to .legacy/. Gate logic unchanged — lead-state, bounce, opt-out, prefix, and pacing checks
+still apply. This marker file kept for the audit trail.

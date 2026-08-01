@@ -18,6 +18,8 @@ Run:  python3 nurture_engine.py --trickle
 Cron: every 5m — python3 /home/mike/nebula/nurture_engine.py --trickle
 """
 import json
+import hashlib
+import sqlite3
 import sys
 import time
 from datetime import datetime, timezone, timedelta
@@ -50,22 +52,49 @@ MIN_DAYS_BETWEEN = {
 # AgentMail config
 INBOX = "nebulashop@agentmail.to"
 
+# Test/sandbox emails that must never receive nurture
+TEST_EMAILS = frozenset([
+    "mike.holownych@aisyndicate.io",
+    "mike.holownych@gmail.com",
+    "mike@holownych.com",
+    "test@example.com",
+    "restart-test@example.com",
+    "stripe@example.com",
+    "founder@testco.com",
+    "nebulashop@agentmail.to",
+    "lead@example.com",
+    "test@test.com",
+    "final@smoke.test",
+    "verify@nebula.test",
+    "verify2@route.live",
+])
+
 NURTURE_LOG = BASE / "ledgers" / "nurture_log.jsonl"
 SEGMENT_ORDER = ["cold", "warm", "hot"]  # low-segment first (cold is highest volume, lowest priority)
 
 
-def send_email(to_email, subject, text_body):
-    """Send through the centralized AgentMail release gate."""
+def send_email(to_email, subject, text_body, client_id=None):
+    """Send through the centralized AgentMail release gate.
+
+    Always passes an explicit idempotent client_id (nurture: prefix is whitelisted
+    by OutboundReleaseGate for MARKETING). No auto: hashed ids — they make stuck
+    retry loops invisible in delivery_events.
+    """
     if DRY_RUN:
         print(f"  [DRY-RUN] WOULD SEND → {to_email}: {subject[:60]}")
         return True, "DRY_RUN"
 
     from agentmail_client import AgentMailClient
 
+    if not client_id:
+        digest = hashlib.sha1(f"{to_email}|{subject}".encode()).hexdigest()[:12]
+        client_id = f"nurture:auto:{digest}"
+
     result = AgentMailClient(inbox=INBOX).send(
         to=[to_email],
         subject=subject,
         text=text_body,
+        client_id=client_id,
     )
     if result.get("_error"):
         reason = result.get("_reason") or str(result.get("_error"))
@@ -233,6 +262,7 @@ SEGMENT_TEMPLATES = {
 def load_nurture_log() -> dict:
     """Return {email_lower: [(timestamp, subject_fingerprint, segment), ...]} sorted oldest-first."""
     log = defaultdict(list)  # email → list of (ts_utc_str, subj_fp, segment)
+    client_ids = set()
     if NURTURE_LOG.exists():
         for line in NURTURE_LOG.read_text().splitlines():
             line = line.strip()
@@ -241,6 +271,8 @@ def load_nurture_log() -> dict:
             try:
                 entry = json.loads(line)
                 email = entry.get("email", "").lower()
+                if entry.get("client_id"):
+                    client_ids.add(entry["client_id"])
                 if not email:
                     continue
                 log[email].append((
@@ -250,10 +282,11 @@ def load_nurture_log() -> dict:
                 ))
             except json.JSONDecodeError:
                 continue
+    log["client_ids"] = client_ids
     return dict(log)
 
 
-def log_sent(email, subject, segment, message_id, track_id=None, track_position_days=None):
+def log_sent(email, subject, segment, message_id, track_id=None, track_position_days=None, client_id=None):
     """Persist a nurture send to the log."""
     NURTURE_LOG.parent.mkdir(parents=True, exist_ok=True)
     entry = {
@@ -262,6 +295,7 @@ def log_sent(email, subject, segment, message_id, track_id=None, track_position_
         "subject": subject[:60],
         "segment": segment,
         "message_id": message_id,
+        "client_id": client_id or "",
     }
     if track_id:
         entry["track_id"] = track_id
@@ -280,6 +314,27 @@ def get_audit_summary(lead):
     if score and grade:
         return f"Score: {score:.0f}/100 — Grade: {grade}"
     return "We found several conversion-blocking issues — fixes are actionable and measurable."
+
+
+def lead_state_info(email: str) -> dict:
+    """Cross-check the canonical lead_state.db (segment DB is not authoritative)."""
+    try:
+        conn = sqlite3.connect(BASE / "lead_state.db")
+        row = conn.execute(
+            "SELECT stage, source FROM leads WHERE lower(email)=lower(?)", (email,)
+        ).fetchone()
+        conn.close()
+        return {"stage": row[0], "source": row[1]} if row else {}
+    except Exception:
+        return {}
+
+
+# Stages that mean "already in a conversation/relationship — NOT a cold nurture target"
+RELATIONSHIP_STAGES = frozenset({
+    "replied", "contacted", "audit_delivered", "pitch_sent", "paid",
+    "problem_confirmed", "commercially_qualified", "fix_offered", "fix_purchased",
+    "fix_delivered", "outcome_measured", "case_study_eligible",
+})
 
 
 def pick_leads_for_nurture(db, send_log, max_count=MAX_PER_TRICKLE) -> list:
@@ -305,6 +360,13 @@ def pick_leads_for_nurture(db, send_log, max_count=MAX_PER_TRICKLE) -> list:
             email = lead.get("email", "").lower()
             if not email or db.is_bounced(email):
                 continue
+            if email in TEST_EMAILS:
+                continue
+            ls = lead_state_info(email)
+            if ls.get("stage") in RELATIONSHIP_STAGES:
+                continue  # already in conversation — cold nurture would be a mistake
+            if (ls.get("source") or "").startswith("teardown-"):
+                continue  # teardown founders get the teardown track, not generic cold
 
             # Check which templates have been sent
             lead_history = send_log.get(email, [])
@@ -354,10 +416,202 @@ def pick_leads_for_nurture(db, send_log, max_count=MAX_PER_TRICKLE) -> list:
     return candidates[:max_count]
 
 
+# ── Teardown founder track ─────────────────────────────────────────
+# Founders we already teardown-notified (source=teardown-*). Nurture the
+# relationship: value-add follow-ups on a cadence, NOT the generic cold copy.
+
+TEARDOWN_SEQ = [
+    {
+        "step": "d2", "min_days": 2,
+        "subject": "One more thing I found on {domain}",
+        "body": "Quick follow-up on the teardown I sent.\n\n"
+                "{extra}\n\n"
+                "If you fix that one, the 30-day re-audit will show the before/after. "
+                "Free — the offer is https://nebulacomponents.shop/pricing\n",
+    },
+    {
+        "step": "d6", "min_days": 6,
+        "subject": "What the fix would look like on {domain}",
+        "body": "Putting a real number on it:\n\n"
+                "The finding from your teardown costs you {cost_estimate} in lost "
+                "conversions every month if the page keeps the leak.\n\n"
+                "The $97 One-Leak Repair Sprint ships the highest-impact fix with a "
+                "30-day re-audit: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h\n",
+    },
+    {
+        "step": "d12", "min_days": 12,
+        "subject": "Closing the loop on {domain}",
+        "body": "Last note on this one — the teardown stays live at "
+                "https://nebulacomponents.shop/teardowns/{slug} whenever you need it.\n\n"
+                "If you ship the fix yourself, reply with the result and I'll re-audit it "
+                "free. If you'd rather we do it, the sprint link is above. Either way, "
+                "good luck with {domain}.\n",
+    },
+]
+
+
+def pick_teardown_followups(send_log, max_count=2) -> list:
+    """Founders we teardown-notified, due for the next follow-up step."""
+    try:
+        conn = sqlite3.connect(BASE / "lead_state.db")
+        conn.row_factory = sqlite3.Row
+        rows = conn.execute(
+            "SELECT email, url, source, trigger_context, discovered_at FROM leads "
+            "WHERE stage='discovered' AND source LIKE 'teardown-%'"
+        ).fetchall()
+        conn.close()
+    except Exception as e:
+        print(f"  [TEARDOWN TRACK ERROR] {e}")
+        return []
+
+    now = datetime.now(timezone.utc)
+    candidates = []
+    for r in rows:
+        email = r["email"].lower()
+        if email in TEST_EMAILS:
+            continue
+        try:
+            discovered = datetime.fromisoformat(r["discovered_at"])
+            if discovered.tzinfo is None:
+                discovered = discovered.replace(tzinfo=timezone.utc)
+        except (ValueError, TypeError):
+            discovered = now
+        days = (now - discovered).days
+        slug = (r["source"] or "").replace("teardown-", "")
+
+        for tmpl in TEARDOWN_SEQ:
+            cid = f"campaign:nurture-teardown-{email}-{tmpl['step']}"
+            if cid in send_log.get("client_ids", set()):
+                continue
+            if days < tmpl["min_days"]:
+                continue
+            domain = (r["url"] or "").replace("https://", "").replace("http://", "").split("/")[0] or email.split("@")[1]
+            candidates.append({
+                "email": email,
+                "segment": "teardown",
+                "client_id": cid,
+                "track_id": f"teardown-{slug}",
+                "track_position_days": days,
+                "subject": tmpl["subject"].format(domain=domain),
+                "body": tmpl["body"].format(
+                    domain=domain, slug=slug,
+                    extra=(r["trigger_context"] or "").strip()[:160],
+                    cost_estimate="a measurable share of your ad spend",
+                ),
+                "due_days": days,
+            })
+            break  # one step per founder per cycle
+    candidates.sort(key=lambda c: -c["due_days"])
+    return candidates[:max_count]
+
+
+# ── Post-audit nurture track ───────────────────────────────────────
+# People who completed a free audit and submitted an email. Warm by
+# definition — sequence: findings recap → case study → $97 sprint → re-audit.
+
+AUDIT_SEQ = [
+    {
+        "step": "d1", "min_days": 1,
+        "subject": "Your audit is ready — the one finding that matters",
+        "body": "You ran the free audit on {site}. Here's the short version:\n\n"
+                "{finding}\n\n"
+                "See the full breakdown anytime: https://nebulacomponents.shop/audit\n",
+    },
+    {
+        "step": "d4", "min_days": 4,
+        "subject": "What a fixed version of {domain} looks like",
+        "body": "Same engine, real before/after — we teardown public sites and show "
+                "exactly what's leaking: https://nebulacomponents.shop/teardowns\n\n"
+                "Every finding includes the evidence. That's the standard your fix "
+                "should meet too.\n",
+    },
+    {
+        "step": "d9", "min_days": 9,
+        "subject": "The $97 sprint — one leak, fixed, 30-day re-audit",
+        "body": "If your audit found a leak worth fixing, this is the smallest way to "
+                "ship it:\n\n"
+                "→ One-Leak Repair Sprint ($97): the highest-impact finding from your "
+                "audit, implemented, with a 30-day re-audit included.\n"
+                "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h\n\n"
+                "No retainer. No site access needed — we write the targeted fix, you "
+                "implement it in minutes.\n",
+    },
+    {
+        "step": "d16", "min_days": 16,
+        "subject": "Last one — re-audit stays free",
+        "body": "Closing the loop: your audit link stays valid, and if you ship any fix "
+                "yourself, the 30-day re-audit will show what changed.\n\n"
+                "If it's still leaking, the sprint link from my last email is the "
+                "fastest path. Either way, no more emails after this one.\n",
+    },
+]
+
+
+def pick_audit_nurture(send_log, max_count=2) -> list:
+    """Audit completers with submitted email, due for next post-audit step."""
+    audit_path = BASE / "audit_leads.jsonl"
+    if not audit_path.exists():
+        return []
+
+    leads = {}
+    for line in audit_path.read_text().splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            entry = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        email = (entry.get("email") or "").strip().lower()
+        if not email or email in TEST_EMAILS:
+            continue
+        leads.setdefault(email, entry)
+
+    from lead_store import LeadStore
+    db = LeadStore()
+    now = datetime.now(timezone.utc)
+    candidates = []
+    for email, entry in leads.items():
+        if db.is_bounced(email):
+            continue
+        try:
+            completed = datetime.fromisoformat(entry.get("timestamp", ""))
+            if completed.tzinfo is None:
+                completed = completed.replace(tzinfo=timezone.utc)
+        except (ValueError, TypeError):
+            completed = now
+        days = (now - completed).days
+
+        for tmpl in AUDIT_SEQ:
+            cid = f"campaign:nurture-audit-{email}-{tmpl['step']}"
+            if cid in send_log.get("client_ids", set()):
+                continue
+            if days < tmpl["min_days"]:
+                continue
+            domain = (entry.get("url") or "").replace("https://", "").replace("http://", "").split("/")[0] or email.split("@")[1]
+            site = entry.get("url") or f"https://{domain}"
+            candidates.append({
+                "email": email,
+                "segment": "audit",
+                "client_id": cid,
+                "track_id": "post-audit",
+                "track_position_days": days,
+                "subject": tmpl["subject"].format(domain=domain),
+                "body": tmpl["body"].format(
+                    domain=domain, site=site,
+                    finding="the highest-impact finding in your report — see the link below for the full breakdown",
+                ),
+                "due_days": days,
+            })
+            break
+    candidates.sort(key=lambda c: -c["due_days"])
+    return candidates[:max_count]
+
+
 # ── Trickle cycle ───────────────────────────────────────────────────
 
 def run_trickle():
-    """Send 1-2 nurture emails to the leads most due for contact."""
+    """Send 1-2 emails per run across segment, teardown, and audit tracks."""
     from lead_store import LeadStore
 
     db = LeadStore()
@@ -365,107 +619,104 @@ def run_trickle():
 
     candidates = pick_leads_for_nurture(db, send_log,
                                          max_count=MAX_PER_TRICKLE)
+    teardown_cands = pick_teardown_followups(send_log, max_count=MAX_PER_TRICKLE)
+    audit_cands = pick_audit_nurture(send_log, max_count=MAX_PER_TRICKLE)
 
-    if not candidates:
+    all_candidates = (teardown_cands + audit_cands + candidates)[:MAX_PER_TRICKLE]
+
+    if not all_candidates:
         print("[trickle] No leads due for nurture")
         return {"sent": 0, "skipped": 0, "errors": 0, "candidates": 0}
 
-    print(f"[trickle] {len(candidates)} lead(s) due for nurture")
+    print(f"[trickle] {len(all_candidates)} lead(s) due for nurture "
+          f"(segment={len(candidates)}, teardown={len(teardown_cands)}, audit={len(audit_cands)})")
     sent = 0
     errors = 0
-    skipped = 0
 
-    for c in candidates:
+    for c in all_candidates:
         email = c["email"]
         segment = c["segment"]
+
+        # Prebuilt track candidate (teardown/audit) — has subject/body/client_id
+        if "client_id" in c and "body" in c:
+            ok, msg_id = send_email(email, c["subject"], c["body"], client_id=c["client_id"])
+            if ok:
+                log_sent(email, c["subject"], segment, msg_id,
+                         track_id=c.get("track_id"), track_position_days=c.get("track_position_days"),
+                         client_id=c["client_id"])
+                sent += 1
+                print(f"  ✓ {email} [{segment}/{c.get('track_id','')}]: {c['subject'][:50]}")
+            else:
+                if msg_id == "429_rate_limit":
+                    print(f"  → Rate limit hit after {sent} sent. Remaining deferred.")
+                    errors += 1
+                    break
+                errors += 1
+            if sent < len(all_candidates):
+                time.sleep(3)
+            continue
+
+        # Legacy segment candidate — existing track-aware path
         lead = c["lead"]
         tmpl = c["template"]
-        
-        # Get track info if available
         track_id = lead.get("nurture_track", "")
         track_position = lead.get("track_position_days", 0)
-        
-        # Try track-aware rendering if track assigned
+        subject_fp = tmpl["subject"]
+        cid = f"nurture:segment:{hashlib.sha1(f'{email}|{subject_fp}'.encode()).hexdigest()[:12]}"
+
         if track_id and track_id != "":
-            # Determine template ID based on segment + track + position
-            track_topic = track_id.split("-")[0]  # headline-clarity → headline
-            
-            # Map position to template variant
-            # Position 0-7 = first template, 8-14 = second template, etc.
-            position_variant = min(track_position // 7 + 1, 3)  # Cap at 3
-            
+            track_topic = track_id.split("-")[0]
+            position_variant = min(track_position // 7 + 1, 3)
             if segment == "hot":
-                # Hot leads always get pitch template
                 template_id = f"hot_{track_topic}_pitch_1"
             elif segment == "cold":
-                # Cold: diagnosis or intro templates
                 template_id = f"cold_{track_topic}_{'diagnosis' if position_variant == 1 else 'intro'}_{position_variant}"
             elif segment == "warm":
-                # Warm: teardown or checklist templates
                 template_id = f"warm_{track_topic}_{'teardown' if position_variant == 1 else 'checklist'}_{position_variant}"
             else:
-                # Fallback
                 template_id = f"{segment}_{track_topic}_1"
-            
-            # Render using template_renderer
+
             rendered = render_template(
                 template_id=template_id,
                 lead=lead,
-                audit=None,  # Audit data would come from audit store
-                extra_vars={
-                    "checkout_url": f"https://nebulacomponents.shop/checkout?email={email}"
-                }
+                audit=None,
+                extra_vars={"checkout_url": f"https://nebulacomponents.shop/checkout?email={email}"}
             )
-            
+
             if rendered:
                 subject = rendered["subject"]
                 body = rendered["body"]
-                
-                # Send email
-                ok, msg_id = send_email(email, subject, body)
+                ok, msg_id = send_email(email, subject, body, client_id=cid)
                 if ok:
-                    log_sent(email, subject, segment, msg_id, track_id=track_id, track_position_days=track_position)
+                    log_sent(email, subject, segment, msg_id, track_id=track_id,
+                             track_position_days=track_position, client_id=cid)
                     sent += 1
                     print(f"  ✓ {email} [{segment}/{track_id}]: {subject[:50]}")
                 else:
                     if msg_id == "429_rate_limit":
-                        print(f"  → Rate limit hit after {sent} sent. Remaining {len(candidates)-sent-1} deferred.")
+                        print(f"  → Rate limit hit after {sent} sent. Remaining deferred.")
                         errors += 1
                         break
                     errors += 1
-                
-                if sent < len(candidates):
+                if sent < len(all_candidates):
                     time.sleep(3)
                 continue
-        
-        # Fall back to legacy template if no track or rendering failed
+
         domain = lead.get("url", "").replace("https://", "").replace("http://", "").split("/")[0] or email.split("@")[1] if "@" in email else "yoursite.com"
         site = lead.get("url", "") or f"https://{domain}"
         audit_summary = get_audit_summary(lead)
         checkout_url = f"https://nebulacomponents.shop/checkout?email={email}&url={site}"
 
-        # Signal-based personalization: use the originating buying trigger as the opener
-        # Only applies to the first cold template (position 0 in the sequence)
         trigger_text = (lead.get("trigger_text") or "").strip()
         signal_opener = ""
         if trigger_text and c["template_index"] == 0 and segment == "cold":
-            # Truncate to a clean, readable length
             opener = trigger_text[:120].rstrip(".,;")
             signal_opener = f"Came across your post about \"{opener}\" — ran a quick audit on your page.\n\n"
 
         try:
-            subject = tmpl["subject"].format(
-                domain=domain[:30],
-                domain_example=domain[:20],
-            )
-            body = tmpl["body"].format(
-                site=site,
-                domain=domain[:30],
-                email=email,
-                audit_summary=audit_summary,
-                checkout_url=checkout_url,
-            )
-            # Inject signal opener before the generic body when available
+            subject = tmpl["subject"].format(domain=domain[:30], domain_example=domain[:20])
+            body = tmpl["body"].format(site=site, domain=domain[:30], email=email,
+                                       audit_summary=audit_summary, checkout_url=checkout_url)
             if signal_opener:
                 body = signal_opener + body
         except KeyError as e:
@@ -473,25 +724,23 @@ def run_trickle():
             errors += 1
             continue
 
-        ok, msg_id = send_email(email, subject, body)
+        ok, msg_id = send_email(email, subject, body, client_id=cid)
         if ok:
-            log_sent(email, subject, segment, msg_id)
+            log_sent(email, subject, segment, msg_id, client_id=cid)
             sent += 1
             print(f"  ✓ {email} [{segment}]: {subject[:50]}")
         else:
             if msg_id == "429_rate_limit":
-                # Hit the rate limit — stop immediately, don't burn more sends
-                print(f"  → Rate limit hit after {sent} sent. Remaining {len(candidates)-sent-1} deferred.")
+                print(f"  → Rate limit hit after {sent} sent. Remaining deferred.")
                 errors += 1
                 break
             errors += 1
 
-        # Small delay between sends to be friendly to rate window
-        if sent < len(candidates):
+        if sent < len(all_candidates):
             time.sleep(3)
 
-    print(f"\n[trickle] Sent: {sent}  Errors: {errors}  Deferred: {len(candidates)-sent-errors}")
-    return {"sent": sent, "errors": errors, "candidates": len(candidates)}
+    print(f"\n[trickle] Sent: {sent}  Errors: {errors}  Deferred: {len(all_candidates)-sent-errors}")
+    return {"sent": sent, "errors": errors, "candidates": len(all_candidates)}
 
 
 # ── Legacy batch mode (deprecated) ──────────────────────────────────

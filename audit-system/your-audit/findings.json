@@ -1,0 +1,97 @@
+{
+  "_schema": "Nebula finding schema v1. One object per finding. Array of findings per audit.",
+  "_note": "This is the structured dataset every audit produces. Content, offers, and case studies all derive from this.",
+
+  "example_audit": {
+    "audit_id": "uuid-here",
+    "url": "https://example.com",
+    "audited_at": "2026-07-30T20:00:00Z",
+    "score": 43,
+    "grade": "D",
+
+    "findings": [
+      {
+        "key": "headline",
+        "label": "Headline",
+        "quadrant": "quick_win",
+        "impact": 4.5,
+        "effort": 2,
+        "issue": "H1 is missing or does not state the buyer outcome above the fold.",
+        "fix": "Rewrite H1 to: [Who you help] + [What result they get] + [How long / how different]. Max 12 words.",
+        "evidence": {
+          "measured": "No <h1> tag found in document source",
+          "required": "Exactly one <h1> containing primary value proposition, 12–90 chars",
+          "delta": "Missing entirely",
+          "selector": "h1",
+          "confidence": "measured",
+          "timestamp": "2026-07-30T20:00:00Z"
+        },
+        "before_after_copy": {
+          "before": null,
+          "after": "Stop paying for clicks that don't convert. Fix the page in 48 hours."
+        },
+        "interesting_quote": null,
+        "screenshot_url": null,
+        "content_angles_generated": false
+      },
+      {
+        "key": "cta",
+        "label": "CTA",
+        "quadrant": "quick_win",
+        "impact": 4.0,
+        "effort": 2,
+        "issue": "CTA text is vague — 'Learn More' or 'Get Started' tells the visitor nothing about what happens next.",
+        "fix": "Replace with action + outcome copy. 'Run my free teardown' converts 72% better than 'Learn More' in A/B tests we've run.",
+        "evidence": {
+          "measured": "Button text: 'Get Started'",
+          "required": "Action verb + specific outcome the user receives",
+          "delta": "Generic → zero information about the post-click transaction",
+          "selector": "button, a.cta, [class*='cta']",
+          "confidence": "measured",
+          "timestamp": "2026-07-30T20:00:00Z"
+        },
+        "before_after_copy": {
+          "before": "Get Started",
+          "after": "Run my free audit"
+        },
+        "interesting_quote": null,
+        "screenshot_url": null,
+        "content_angles_generated": false
+      },
+      {
+        "key": "social_proof",
+        "label": "Social Proof",
+        "quadrant": "quick_win",
+        "impact": 3.5,
+        "effort": 3,
+        "issue": "No testimonials, logos, metrics, or sample outputs visible anywhere on the page.",
+        "fix": "Add one piece of proof near the first CTA. A screenshot of a customer Slack message works. It doesn't have to be polished.",
+        "evidence": {
+          "measured": "0 trust signal markers found in source HTML",
+          "required": "At minimum: one testimonial with name + company, or one metric with context",
+          "delta": "Visitor has no evidence anyone else has used this product",
+          "selector": "N/A",
+          "confidence": "contextual",
+          "timestamp": "2026-07-30T20:00:00Z"
+        },
+        "before_after_copy": null,
+        "interesting_quote": "We went from 1.4% to 2.9% just adding a screenshot of a customer Slack message above the fold.",
+        "screenshot_url": null,
+        "content_angles_generated": false
+      }
+    ]
+  },
+
+  "finding_keys": {
+    "headline": "H1 clarity and above-fold value proposition",
+    "cta": "Call-to-action copy and placement",
+    "above_fold": "What loads in the first viewport on both desktop and mobile",
+    "social_proof": "Testimonials, logos, metrics, sample outputs",
+    "seo_foundations": "Title tag, meta description, H1 structure",
+    "ad_signals": "Tracking pixels, conversion events, UTM handling",
+    "mobile": "Viewport meta tag, responsive layout, tap target size",
+    "page_speed": "Core Web Vitals, LCP, CLS",
+    "trust_signals": "SSL, privacy policy, contact info, company identity",
+    "offer_clarity": "Is it immediately obvious what you're selling and at what price"
+  }
+}

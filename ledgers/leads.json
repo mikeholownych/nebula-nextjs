@@ -626,6 +626,60 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "e2e-composite-test@example.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "e2e-composite-test@example.com",
+    "first_seen": "2026-08-01T03:19:39.116365Z",
+    "last_seen": "2026-08-01T03:19:39.116365Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "f99be45b-9319-48fd-8a1f-41573d4c7623",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-01T03:19:39.116365Z",
+    "trigger_text": "",
+    "url": "https://example.org"
+  },
+  "e2e-crawler-test@example.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "e2e-crawler-test@example.com",
+    "first_seen": "2026-08-01T03:41:01.997419Z",
+    "last_seen": "2026-08-01T14:51:10.124615Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "69e30344-f65b-4299-a2b9-d370c40860ca",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-01T14:51:10.124615Z",
+    "trigger_text": "",
+    "url": "https://nebulacomponents.shop"
+  },
   "flynn@snipprompts.com": {
     "content_posts": [],
     "current_stage": "lead_warm",
@@ -3443,7 +3497,7 @@
     "current_stage": "lead_audit",
     "email": "pending@example.com",
     "first_seen": "2026-07-18T01:26:23.082723Z",
-    "last_seen": "2026-07-28T16:22:44.691050Z",
+    "last_seen": "2026-08-01T04:50:24.353286Z",
     "name": "",
     "notes": "",
     "nurture_track": "headline-clarity",
@@ -3459,10 +3513,10 @@
     ],
     "tags": [],
     "total_spent_cents": 0,
-    "track_audit_id": "30c4cd59-1b39-44e5-a31d-9ed776c0270d",
+    "track_audit_id": "b75a28ed-a1e4-4eb5-aa4c-cbbbac482a2c",
     "track_position_days": 0,
-    "track_started_at": "2026-07-28T16:22:44.691050Z",
-    "url": "https://velesgroup.co/"
+    "track_started_at": "2026-08-01T04:50:24.353286Z",
+    "url": "https://aisyndicate.io"
   },
   "quietpulse.social@gmail.com": {
     "content_posts": [],
@@ -3607,6 +3661,33 @@
     "tags": [],
     "total_spent_cents": 0,
     "url": ""
+  },
+  "reddit@reply.test": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "reddit@reply.test",
+    "first_seen": "2026-07-30T18:19:27.997510Z",
+    "last_seen": "2026-07-30T18:19:27.997510Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "01d93443-9555-4d7b-8605-5b09c4d9f5bf",
+    "track_position_days": 0,
+    "track_started_at": "2026-07-30T18:19:27.997510Z",
+    "trigger_text": "",
+    "url": "https://www.readyform.app/"
   },
   "releaselogofficial@gmail.com": {
     "content_posts": [],
@@ -4451,6 +4532,33 @@
     "track_position_days": 0,
     "track_started_at": "2026-07-18T00:02:14.721738Z",
     "url": "https://example.com"
+  },
+  "test@example.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "test@example.com",
+    "first_seen": "2026-07-30T20:33:33.967948Z",
+    "last_seen": "2026-07-30T20:33:33.967948Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "b918a760-229f-4385-919b-e17f1d4743d0",
+    "track_position_days": 0,
+    "track_started_at": "2026-07-30T20:33:33.967948Z",
+    "trigger_text": "",
+    "url": "https://httpbin.org/html"
   },
   "thimas@sby.com": {
     "content_posts": [],

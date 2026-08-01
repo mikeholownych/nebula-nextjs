@@ -6,6 +6,7 @@ interface CardProps {
   variant?: 'default' | 'elevated' | 'bordered'
   padding?: 'none' | 'sm' | 'md' | 'lg'
   style?: CSSProperties
+  id?: string
 }
 
 const variantStyles = {
@@ -27,9 +28,11 @@ export function Card({
   variant = 'default',
   padding = 'md',
   style,
+  id,
 }: CardProps) {
   return (
     <div
+      id={id}
       className={`
         rounded-2xl
         ${variantStyles[variant]}

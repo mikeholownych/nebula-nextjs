@@ -22,8 +22,12 @@ const Brand = () => (
 const NavigationLinks = ({ mobile = false }: { mobile?: boolean }) => (
   <>
     <a href="/pricing" className={`${LINK_CLASSES} ${mobile ? 'py-3' : ''}`}>Pricing</a>
+    <a href="/teardowns" className={`${LINK_CLASSES} ${mobile ? 'py-3' : ''}`}>Teardowns</a>
+    <a href="/benchmarks" className={`${LINK_CLASSES} ${mobile ? 'py-3' : ''}`}>Benchmarks</a>
+    <a href="/lab" className={`${LINK_CLASSES} ${mobile ? 'py-3' : ''}`}>Lab</a>
     <a href="/case-studies" className={`${LINK_CLASSES} ${mobile ? 'py-3' : ''}`}>Case Studies</a>
     <a href="/learning-centre" className={`${LINK_CLASSES} ${mobile ? 'py-3' : ''}`}>Learning</a>
+    <a href="/workspace" className={`${LINK_CLASSES} ${mobile ? 'py-3' : ''}`}>Workspace</a>
     <a
       href="/audit"
       className={`${mobile ? 'mt-2 text-center' : ''} rounded-lg bg-accent px-4 py-2 text-sm font-medium text-bg transition-colors hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg`}

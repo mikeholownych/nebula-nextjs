@@ -67,7 +67,9 @@ class AuditDB:
             return row['id']
     
     async def update_audit(self, audit_id: UUID, score: float, grade: str,
-                          findings: List[dict], status: str = 'completed') -> bool:
+                          findings: List[dict], status: str = 'completed',
+                          composite: Optional[float] = None,
+                          composite_anchor: Optional[float] = None) -> bool:
         """Update audit with results"""
         await self.connect()
 
@@ -76,10 +78,12 @@ class AuditDB:
                 """
                 UPDATE audits
                 SET score = $2, grade = $3, findings = $4,
-                    status = $5, completed_at = NOW()
+                    status = $5, completed_at = NOW(),
+                    composite = $6, composite_anchor = $7
                 WHERE id = $1
                 """,
-                audit_id, int(score * 10), grade, json.dumps(findings), status
+                audit_id, int(score * 10), grade, json.dumps(findings), status,
+                composite, composite_anchor,
             )
             updated = result == 'UPDATE 1'
             if updated and status == 'completed':
@@ -204,6 +208,209 @@ class AuditDB:
             )
             return result == 'UPDATE 1'
 
+    # ── Monitoring ────────────────────────────────────────────────────
+
+    async def list_monitors(self, email: str) -> List[dict]:
+        """List monitors for a workspace email, newest first."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            rows = await conn.fetch(
+                """
+                SELECT id, email, url, cadence, active, next_run_at,
+                       last_run_at, last_score, created_at, updated_at
+                FROM monitors
+                WHERE email = $1
+                ORDER BY created_at DESC
+                """,
+                email,
+            )
+            out = []
+            for r in rows:
+                d = dict(r)
+                d["id"] = str(d["id"])
+                d["last_score"] = float(d["last_score"]) if d.get("last_score") is not None else None
+                d["next_run_at"] = d["next_run_at"].isoformat() if d.get("next_run_at") else None
+                d["last_run_at"] = d["last_run_at"].isoformat() if d.get("last_run_at") else None
+                d["created_at"] = d["created_at"].isoformat() if d.get("created_at") else None
+                d["updated_at"] = d["updated_at"].isoformat() if d.get("updated_at") else None
+                out.append(d)
+            return out
+
+    async def create_monitor(self, email: str, url: str, cadence: str = "weekly") -> Optional[dict]:
+        """Create a monitor. Idempotent per (email, url): re-activates and resets cadence."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                INSERT INTO monitors (email, url, cadence, active, next_run_at)
+                VALUES ($1, $2, $3, true, now())
+                ON CONFLICT (email, url) DO UPDATE
+                SET cadence = EXCLUDED.cadence,
+                    active = true,
+                    next_run_at = now(),
+                    updated_at = now()
+                RETURNING id, email, url, cadence, active, next_run_at,
+                          last_run_at, last_score, created_at, updated_at
+                """,
+                email, url, cadence,
+            )
+            if not row:
+                return None
+            d = dict(row)
+            d["id"] = str(d["id"])
+            d["last_score"] = float(d["last_score"]) if d.get("last_score") is not None else None
+            d["next_run_at"] = d["next_run_at"].isoformat() if d.get("next_run_at") else None
+            d["last_run_at"] = d["last_run_at"].isoformat() if d.get("last_run_at") else None
+            d["created_at"] = d["created_at"].isoformat() if d.get("created_at") else None
+            d["updated_at"] = d["updated_at"].isoformat() if d.get("updated_at") else None
+            return d
+
+    async def update_monitor(self, monitor_id: str, cadence: Optional[str] = None,
+                             active: Optional[bool] = None) -> Optional[dict]:
+        """Update a monitor's cadence or active flag."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                UPDATE monitors
+                SET cadence = COALESCE($2, cadence),
+                    active = COALESCE($3, active),
+                    updated_at = now()
+                WHERE id = $1
+                RETURNING id, email, url, cadence, active, next_run_at,
+                          last_run_at, last_score, created_at, updated_at
+                """,
+                monitor_id, cadence, active,
+            )
+            if not row:
+                return None
+            d = dict(row)
+            d["id"] = str(d["id"])
+            d["last_score"] = float(d["last_score"]) if d.get("last_score") is not None else None
+            d["next_run_at"] = d["next_run_at"].isoformat() if d.get("next_run_at") else None
+            d["last_run_at"] = d["last_run_at"].isoformat() if d.get("last_run_at") else None
+            d["created_at"] = d["created_at"].isoformat() if d.get("created_at") else None
+            d["updated_at"] = d["updated_at"].isoformat() if d.get("updated_at") else None
+            return d
+
+    async def delete_monitor(self, monitor_id: str) -> bool:
+        """Delete a monitor (and its events via cascade)."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            result = await conn.execute(
+                "DELETE FROM monitors WHERE id = $1",
+                monitor_id,
+            )
+            return result == "DELETE 1"
+
+    async def get_due_monitors(self) -> List[dict]:
+        """Active monitors whose next run is due, oldest next_run first."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            rows = await conn.fetch(
+                """
+                SELECT id, email, url, cadence, active, next_run_at,
+                       last_run_at, last_score, created_at, updated_at
+                FROM monitors
+                WHERE active = true AND next_run_at <= now()
+                ORDER BY next_run_at ASC
+                """,
+            )
+            out = []
+            for r in rows:
+                d = dict(r)
+                d["id"] = str(d["id"])
+                d["last_score"] = float(d["last_score"]) if d.get("last_score") is not None else None
+                d["next_run_at"] = d["next_run_at"].isoformat() if d.get("next_run_at") else None
+                d["last_run_at"] = d["last_run_at"].isoformat() if d.get("last_run_at") else None
+                out.append(d)
+            return out
+
+    async def mark_monitor_ran(self, monitor_id: str, score: Optional[float]) -> None:
+        """Record a completed run and schedule the next one per cadence."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                "SELECT cadence FROM monitors WHERE id = $1",
+                monitor_id,
+            )
+            if not row:
+                return
+            cadence = row["cadence"]
+            if cadence == "monthly":
+                interval = "interval '1 month'"
+            else:
+                interval = "interval '1 week'"
+            await conn.execute(
+                f"""
+                UPDATE monitors
+                SET last_run_at = now(),
+                    last_score = $2,
+                    next_run_at = now() + {interval},
+                    updated_at = now()
+                WHERE id = $1
+                """,
+                monitor_id, score,
+            )
+
+    async def create_monitor_event(self, monitor_id: str, audit_id: Optional[UUID],
+                                   status: str, prev_score: Optional[float],
+                                   new_score: Optional[float], summary: str) -> dict:
+        """Record a monitoring event (improved/regressed/no_change/new_fail/error)."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                INSERT INTO monitor_events (monitor_id, audit_id, status, prev_score, new_score, summary)
+                VALUES ($1, $2, $3, $4, $5, $6)
+                RETURNING id, monitor_id, audit_id, status, prev_score, new_score, summary, created_at
+                """,
+                monitor_id, audit_id, status, prev_score, new_score, summary,
+            )
+            d = dict(row)
+            d["id"] = str(d["id"])
+            d["monitor_id"] = str(d["monitor_id"])
+            d["audit_id"] = str(d["audit_id"]) if d.get("audit_id") else None
+            d["prev_score"] = float(d["prev_score"]) if d.get("prev_score") is not None else None
+            d["new_score"] = float(d["new_score"]) if d.get("new_score") is not None else None
+            d["created_at"] = d["created_at"].isoformat() if d.get("created_at") else None
+            return d
+
+    async def list_monitor_events(self, monitor_id: str, limit: int = 20) -> List[dict]:
+        """Recent events for one monitor, newest first."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            rows = await conn.fetch(
+                """
+                SELECT id, monitor_id, audit_id, status, prev_score, new_score, summary, created_at
+                FROM monitor_events
+                WHERE monitor_id = $1
+                ORDER BY created_at DESC
+                LIMIT $2
+                """,
+                monitor_id, limit,
+            )
+            out = []
+            for r in rows:
+                d = dict(r)
+                d["id"] = str(d["id"])
+                d["monitor_id"] = str(d["monitor_id"])
+                d["audit_id"] = str(d["audit_id"]) if d.get("audit_id") else None
+                d["prev_score"] = float(d["prev_score"]) if d.get("prev_score") is not None else None
+                d["new_score"] = float(d["new_score"]) if d.get("new_score") is not None else None
+                d["created_at"] = d["created_at"].isoformat() if d.get("created_at") else None
+                out.append(d)
+            return out
+
+
     async def get_or_create_share_token(self, audit_id: UUID) -> Optional[str]:
         """Return the audit's share token, generating and persisting one on
         first request. share_token has a UNIQUE constraint in the schema;
@@ -238,7 +445,8 @@ class AuditDB:
             row = await conn.fetchrow(
                 """
                 SELECT id, customer_id, url, email, name, status,
-                       score, grade, findings, created_at, completed_at,
+                       score, grade, composite, composite_anchor, findings,
+                       created_at, completed_at,
                        email_sent_at, paid_at, paid_product
                 FROM audits WHERE share_token = $1
                 """,
@@ -251,6 +459,10 @@ class AuditDB:
                 data['findings'] = json.loads(data['findings'])
             if data.get('score') is not None:
                 data['score'] = data['score'] / 10.0
+            if data.get('composite') is not None:
+                data['composite'] = float(data['composite'])
+            if data.get('composite_anchor') is not None:
+                data['composite_anchor'] = float(data['composite_anchor'])
             data['audit_id'] = str(data.pop('id'))
             if data.get('customer_id'):
                 data['customer_id'] = str(data['customer_id'])
@@ -286,7 +498,8 @@ class AuditDB:
             row = await conn.fetchrow(
                 """
                 SELECT id, customer_id, url, email, name, status, 
-                       score, grade, findings, created_at, completed_at,
+                       score, grade, composite, composite_anchor, findings,
+                       created_at, completed_at,
                        email_sent_at, paid_at, paid_product
                 FROM audits WHERE id = $1
                 """,
@@ -300,6 +513,11 @@ class AuditDB:
                 # Convert score back to float (stored as int * 10)
                 if data.get('score') is not None:
                     data['score'] = data['score'] / 10.0
+                # composite already numeric(3,1) — cast for JSON serialization
+                if data.get('composite') is not None:
+                    data['composite'] = float(data['composite'])
+                if data.get('composite_anchor') is not None:
+                    data['composite_anchor'] = float(data['composite_anchor'])
                 # Convert UUIDs to strings for JSON serialization
                 data['audit_id'] = str(data.pop('id'))
                 if data.get('customer_id'):
@@ -307,6 +525,62 @@ class AuditDB:
                 return data
             return None
     
+    async def claim_audit(self, audit_id: UUID, email: str) -> Optional[dict]:
+        """Link an anonymous audit to a real email address.
+
+        Returns a dict with claimed=True if the update succeeded, or
+        claimed=False + current_email if the audit is already owned by a
+        *different* email so the caller can return a 400.  Returns None if
+        the audit does not exist.
+        """
+        await self.connect()
+
+        ANONYMOUS_PLACEHOLDERS = {
+            None,
+            "",
+            "anonymous",
+            "anonymous@example.com",
+            "placeholder@example.com",
+        }
+
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                "SELECT id, email FROM audits WHERE id = $1",
+                audit_id,
+            )
+            if row is None:
+                return None
+
+            current_email = row["email"]
+
+            # Normalise for comparison
+            current_norm = (current_email or "").strip().lower()
+            new_norm = email.strip().lower()
+
+            if current_norm in {(p or "").lower() for p in ANONYMOUS_PLACEHOLDERS}:
+                # Unclaimed — update the audit email
+                await conn.execute(
+                    "UPDATE audits SET email = $2 WHERE id = $1",
+                    audit_id, new_norm,
+                )
+                # Also ensure a customers record exists for this email
+                await conn.execute(
+                    """
+                    INSERT INTO customers (email)
+                    VALUES ($1)
+                    ON CONFLICT (email) DO NOTHING
+                    """,
+                    new_norm,
+                )
+                return {"claimed": True, "audit_id": str(audit_id), "email": new_norm}
+
+            if current_norm == new_norm:
+                # Already claimed by the same email — idempotent success
+                return {"claimed": True, "audit_id": str(audit_id), "email": current_norm}
+
+            # Claimed by a different email — caller should return 400
+            return {"claimed": False, "audit_id": str(audit_id), "email": current_norm}
+
     async def get_audits_by_email(self, email: str, limit: int = 10) -> List[dict]:
         """Get audits by email"""
         await self.connect()
@@ -314,7 +588,8 @@ class AuditDB:
         async with self.pool.acquire() as conn:
             rows = await conn.fetch(
                 """
-                SELECT id, url, status, score, grade, created_at, completed_at
+                SELECT id, url, status, score, grade, composite, composite_anchor,
+                       created_at, completed_at
                 FROM audits
                 WHERE email = $1
                 ORDER BY created_at DESC
@@ -323,6 +598,231 @@ class AuditDB:
                 email, limit
             )
             return [dict(r) for r in rows]
+
+    async def get_latest_completed_audit(self, email: str, url: str) -> Optional[dict]:
+        """Latest completed audit for (email, url), or None."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                SELECT id, url, status, score, grade, composite, composite_anchor,
+                       created_at, completed_at
+                FROM audits
+                WHERE email = $1 AND url = $2 AND status = 'completed'
+                ORDER BY created_at DESC
+                LIMIT 1
+                """,
+                email, url
+            )
+            if not row:
+                return None
+            d = dict(row)
+            d["id"] = str(d["id"])
+            d["score"] = float(d["score"]) if d.get("score") is not None else None
+            return d
+
+    async def sync_recommendations(self, email: str) -> List[dict]:
+        """Derive the recommendation kanban from completed audits.
+
+        - Upserts findings from the latest completed audit per URL into
+          recommendations (status preserved on re-sync).
+        - Auto-verifies: a recommendation whose URL has a newer completed
+          audit that no longer flags that finding key moves to 'done' with
+          verified_at set (the 'next audit checks it' loop).
+        Returns rows ordered: to_fix, doing, done; impact desc within group.
+        """
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            latest_per_url = await conn.fetch(
+                """
+                SELECT DISTINCT ON (url) id, url, findings, completed_at
+                FROM audits
+                WHERE email = $1 AND status = 'completed' AND findings IS NOT NULL
+                ORDER BY url, completed_at DESC
+                """,
+                email,
+            )
+            for a in latest_per_url:
+                findings = a["findings"]
+                if isinstance(findings, str):
+                    findings = json.loads(findings)
+                for f in findings:
+                    await conn.execute(
+                        """
+                        INSERT INTO recommendations
+                            (email, audit_id, url, finding_key, label, impact, effort, quadrant, status)
+                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'to_fix')
+                        ON CONFLICT (email, url, finding_key)
+                        DO UPDATE SET
+                            audit_id = EXCLUDED.audit_id,
+                            label = EXCLUDED.label,
+                            impact = EXCLUDED.impact,
+                            effort = EXCLUDED.effort,
+                            quadrant = EXCLUDED.quadrant,
+                            updated_at = now()
+                        """,
+                        email, a["id"], a["url"], f.get("key"), f.get("label"),
+                        f.get("impact", 0), f.get("effort", 0), f.get("quadrant"),
+                    )
+
+            # latest flag-set per URL for auto-verification
+            latest_keys = {}
+            for a in latest_per_url:
+                findings = a["findings"]
+                if isinstance(findings, str):
+                    findings = json.loads(findings)
+                latest_keys[a["url"]] = {f.get("key") for f in findings}
+
+            recs = await conn.fetch(
+                "SELECT id, url, finding_key, status FROM recommendations WHERE email = $1",
+                email,
+            )
+            for r in recs:
+                keys = latest_keys.get(r["url"])
+                if (
+                    keys is not None
+                    and r["finding_key"] not in keys
+                    and r["status"] != "done"
+                ):
+                    await conn.execute(
+                        """
+                        UPDATE recommendations
+                        SET status = 'done', verified_at = now(), updated_at = now()
+                        WHERE id = $1
+                        """,
+                        r["id"],
+                    )
+
+            rows = await conn.fetch(
+                """
+                SELECT id, email, audit_id, url, finding_key, label, impact, effort,
+                       quadrant, status, verified_at, created_at, updated_at
+                FROM recommendations
+                WHERE email = $1
+                ORDER BY
+                    CASE status WHEN 'to_fix' THEN 0 WHEN 'doing' THEN 1 ELSE 2 END,
+                    impact DESC
+                """,
+                email,
+            )
+            out = []
+            for r in rows:
+                d = dict(r)
+                d["id"] = str(d["id"])
+                d["audit_id"] = str(d["audit_id"])
+                d["impact"] = float(d["impact"])
+                d["effort"] = float(d["effort"])
+                out.append(d)
+            return out
+
+    async def update_recommendation_status(self, rec_id: str, status: str) -> Optional[dict]:
+        """Move a recommendation between kanban columns."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                UPDATE recommendations
+                SET status = $1, updated_at = now()
+                WHERE id = $2
+                RETURNING id, email, audit_id, url, finding_key, label, impact,
+                          effort, quadrant, status, verified_at, created_at, updated_at
+                """,
+                status, rec_id,
+            )
+            if not row:
+                return None
+            d = dict(row)
+            d["id"] = str(d["id"])
+            d["audit_id"] = str(d["audit_id"])
+            d["impact"] = float(d["impact"])
+            d["effort"] = float(d["effort"])
+            return d
+
+    # ── Lab experiments (Component Lab History) ──────────────────────────
+
+    async def list_lab_experiments(self, email: str, limit: int = 200) -> List[dict]:
+        """List saved lab experiments for a workspace email, newest first."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            rows = await conn.fetch(
+                """
+                SELECT id, email, url, label, score, grade, components, ad_copy,
+                       status, created_at, updated_at
+                FROM lab_experiments
+                WHERE email = $1
+                ORDER BY created_at DESC
+                LIMIT $2
+                """,
+                email, limit,
+            )
+            out = []
+            for r in rows:
+                d = dict(r)
+                d["id"] = str(d["id"])
+                d["score"] = float(d["score"]) if d.get("score") is not None else None
+                if d.get("components") and isinstance(d["components"], str):
+                    d["components"] = json.loads(d["components"])
+                out.append(d)
+            return out
+
+    async def create_lab_experiment(self, email: str, url: str, label: str,
+                                    score: float, grade: Optional[str],
+                                    components: dict, ad_copy: Optional[str]) -> dict:
+        """Save a lab run as an experiment."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                INSERT INTO lab_experiments (email, url, label, score, grade, components, ad_copy)
+                VALUES ($1, $2, $3, $4, $5, $6, $7)
+                RETURNING id, email, url, label, score, grade, components, ad_copy,
+                          status, created_at, updated_at
+                """,
+                email, url, label, score, grade,
+                json.dumps(components) if components else None,
+                ad_copy,
+            )
+            d = dict(row)
+            d["id"] = str(d["id"])
+            d["score"] = float(d["score"]) if d.get("score") is not None else None
+            if d.get("components") and isinstance(d["components"], str):
+                d["components"] = json.loads(d["components"])
+            return d
+
+    async def update_lab_experiment_status(self, exp_id: str, status: str) -> Optional[dict]:
+        """Mark an experiment as production (or back to saved)."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                UPDATE lab_experiments
+                SET status = $1, updated_at = now()
+                WHERE id = $2
+                RETURNING id, email, url, label, score, grade, components, ad_copy,
+                          status, created_at, updated_at
+                """,
+                status, exp_id,
+            )
+            if not row:
+                return None
+            d = dict(row)
+            d["id"] = str(d["id"])
+            d["score"] = float(d["score"]) if d.get("score") is not None else None
+            return d
+
+    async def delete_lab_experiment(self, exp_id: str) -> bool:
+        """Delete a saved experiment."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            cur = await conn.execute("DELETE FROM lab_experiments WHERE id = $1", exp_id)
+            return cur == "DELETE 1"
     
     async def get_aggregate_stats(self) -> dict:
         """Real counts for the homepage's aggregate-proof strip. No fabricated
@@ -341,6 +841,158 @@ class AuditDB:
             completed = row['completed_audits'] or 0
             avg_score = round(float(row['avg_score_raw']) / 10.0, 1) if row['avg_score_raw'] is not None else None
             return {"completed_audits": completed, "avg_score": avg_score}
+
+    async def get_benchmarks(self) -> dict:
+        """Per-component benchmark aggregates from real completed audits.
+        Privacy-safe: no URLs, no emails — only component failure rates,
+        average impact, and score distribution."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            rows = await conn.fetch(
+                """
+                SELECT score, grade, findings
+                FROM audits
+                WHERE status = 'completed'
+                  AND score IS NOT NULL
+                """
+            )
+
+        if not rows:
+            return {"audit_count": 0, "components": [], "distribution": []}
+
+        import json as _json
+
+        # Score distribution buckets (0-10 scale, stored as 0-100)
+        buckets = {"0-3": 0, "4-5": 0, "6-7": 0, "8-10": 0}
+        component_counts: dict[str, dict] = {}
+        scores = []
+
+        for row in rows:
+            score = row["score"]
+            if score is None:
+                continue
+            score_10 = score / 10.0
+            scores.append(score_10)
+            if score_10 < 4:
+                buckets["0-3"] += 1
+            elif score_10 < 6:
+                buckets["4-5"] += 1
+            elif score_10 < 8:
+                buckets["6-7"] += 1
+            else:
+                buckets["8-10"] += 1
+
+            findings = row["findings"]
+            if isinstance(findings, str):
+                try:
+                    findings = _json.loads(findings)
+                except Exception:
+                    findings = []
+            if not isinstance(findings, list):
+                continue
+            for f in findings:
+                if not isinstance(f, dict):
+                    continue
+                key = f.get("key") or f.get("label") or "unknown"
+                key = str(key).replace("_", " ").title()
+                label = f.get("label") or key
+                impact = f.get("impact") or 0
+                entry = component_counts.setdefault(
+                    label, {"key": key, "label": label, "failures": 0, "impact_sum": 0.0}
+                )
+                entry["failures"] += 1
+                entry["impact_sum"] += float(impact)
+
+        components = []
+        for entry in component_counts.values():
+            components.append(
+                {
+                    "label": entry["label"],
+                    "failures": entry["failures"],
+                    "avg_impact": round(entry["impact_sum"] / entry["failures"], 1)
+                    if entry["failures"]
+                    else 0,
+                    "share": round(entry["failures"] / max(len(scores), 1) * 100),
+                }
+            )
+        components.sort(key=lambda c: c["failures"], reverse=True)
+
+        return {
+            "audit_count": len(scores),
+            "avg_score": round(sum(scores) / len(scores), 1) if scores else None,
+            "highest": round(max(scores), 1) if scores else None,
+            "lowest": round(min(scores), 1) if scores else None,
+            "components": components[:12],
+            "distribution": [{"bucket": k, "count": v} for k, v in buckets.items()],
+        }
+
+    async def get_recent_finding(self) -> dict | None:
+        """Return the most interesting finding from the most recent completed audit.
+        Used for the homepage's 'recent finding' strip. Returns None when no
+        eligible audits exist. Never exposes the URL — only the finding label,
+        issue summary, impact score, and time-ago."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                SELECT score, grade, findings, completed_at
+                FROM audits
+                WHERE status = 'completed'
+                  AND findings IS NOT NULL
+                  AND findings != '[]'
+                ORDER BY completed_at DESC
+                LIMIT 1
+                """
+            )
+            if not row:
+                return None
+
+            findings_raw = row['findings']
+            if isinstance(findings_raw, str):
+                import json as _json
+                try:
+                    findings = _json.loads(findings_raw)
+                except Exception:
+                    return None
+            else:
+                findings = findings_raw
+
+            if not findings:
+                return None
+
+            # Pick the highest-impact finding
+            top = max(findings, key=lambda f: f.get('impact', 0))
+
+            completed_at = row['completed_at']
+            if completed_at:
+                from datetime import timezone as _tz
+                if completed_at.tzinfo is None:
+                    completed_at = completed_at.replace(tzinfo=_tz.utc)
+                from datetime import datetime as _dt
+                diff = _dt.now(_tz.utc) - completed_at
+                hours = int(diff.total_seconds() / 3600)
+                if hours < 1:
+                    time_ago = 'just now'
+                elif hours == 1:
+                    time_ago = '1 hour ago'
+                elif hours < 48:
+                    time_ago = f'{hours} hours ago'
+                else:
+                    time_ago = f'{hours // 24} days ago'
+            else:
+                time_ago = 'recently'
+
+            return {
+                'label': top.get('label', 'Finding'),
+                'issue': top.get('issue', ''),
+                'impact': top.get('impact', 0),
+                'quadrant': top.get('quadrant', ''),
+                'overall_score': round(float(row['score']) / 10.0, 1) if row['score'] else None,
+                'grade': row['grade'],
+                'completed_at': time_ago,
+            }
 
     async def create_purchase(self, customer_id: UUID, audit_id: Optional[UUID],
                              product: str, amount_cents: int,

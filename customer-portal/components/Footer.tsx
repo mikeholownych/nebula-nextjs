@@ -26,6 +26,7 @@ export default function Footer() {
             <p className="text-xs font-medium text-fg-muted uppercase tracking-widest mb-4">Product</p>
             <ul className="space-y-3">
               <li><a href="/audit" className="text-sm text-fg-muted hover:text-fg transition-colors">Free Audit</a></li>
+              <li><a href="/workspace" className="text-sm text-fg-muted hover:text-fg transition-colors">Workspace</a></li>
               <li><a href="/pricing" className="text-sm text-fg-muted hover:text-fg transition-colors">Pricing</a></li>
               <li><a href="/teardowns" className="text-sm text-fg-muted hover:text-fg transition-colors">Teardowns</a></li>
               <li><a href="/benchmarks" className="text-sm text-fg-muted hover:text-fg transition-colors">Benchmarks</a></li>

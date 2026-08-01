@@ -389,6 +389,56 @@ class AgentMailClient:
         # Default: cold (polite but not buying)
         return "cold"
 
+    def diagnose_reply(self, thread: dict, message_body: str) -> str:
+        """
+        48-hour diagnostic (cold-DM carousel, implemented 2026-07-31):
+        map a reply to the sentence that failed, so copy gets fixed, not just
+        relabeled. Complementary to classify_reply(): classification decides
+        what to DO; diagnosis decides what to FIX.
+
+        Returns one of:
+          s1_trigger_stale    — "what audit?" / context not recognized
+          s2_who_unclear      — "who is this?" / identity missing
+          s3_diagnosed        — defensive reply / we made an assumption
+          s4_ask_too_big      — "not right now" / ask was too big
+          none                — no diagnostic signal (e.g. warm replies)
+        """
+        body_lower = message_body.lower()
+        subject_lower = thread.get("subject", "").lower()
+        combined = body_lower + " " + subject_lower
+
+        # S4: ask too big — deferral
+        if any(s in combined for s in [
+            "not right now", "not now", "too busy", "no time",
+            "later this month", "next quarter", "maybe in the future",
+            "not at this time", "not a priority", "not the priority",
+        ]):
+            return "s4_ask_too_big"
+
+        # S2: identity unclear
+        if any(s in combined for s in [
+            "who is this", "who are you", "what is nebula", "what do you do",
+            "did you email me", "why did you email me", "how did you get",
+        ]):
+            return "s2_who_unclear"
+
+        # S3: we made an assumption / diagnosed their business
+        if any(s in combined for s in [
+            "how do you know", "that's wrong", "you don't know", "you assumed",
+            "stop assuming", "don't tell me what", "you got it wrong",
+            "incorrect", "not accurate", "that's not true",
+        ]):
+            return "s3_diagnosed"
+
+        # S1: stale trigger — context not recognized
+        if any(s in combined for s in [
+            "what audit", "which audit", "i never requested", "didn't request",
+            "don't remember", "not sure what you", "who are you talking about",
+        ]):
+            return "s1_trigger_stale"
+
+        return "none"
+
     def triage_inbox(self) -> dict:
         """
         Full inbox triage. Returns classified dict:
