@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { headers } from 'next/headers'
 import SiteNav from '@/components/SiteNav'
 import Footer from '@/components/Footer'
 import WebMCP from '@/components/WebMCP'
@@ -47,13 +48,20 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const requestHeaders = await headers()
+  const country = (
+    requestHeaders.get('cf-ipcountry') ||
+    requestHeaders.get('x-vercel-ip-country') ||
+    requestHeaders.get('x-country-code') ||
+    ''
+  ).toUpperCase() || null
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Agent discovery: llms.txt link tag for crawlers that don't read response headers */}
         <link rel="describedby" href="/llms.txt" type="text/plain" />
@@ -76,7 +84,7 @@ export default function RootLayout({
                   var raw = localStorage.getItem('nebula-cookie-consent');
                   if (!raw) return;
                   var state = JSON.parse(raw);
-                  if (state && state.version >= 1) {
+                  if (state && state.version >= 1 && (state.level === 'all' || state.level === 'necessary')) {
                     document.documentElement.setAttribute('data-cookie-consent', 'given');
                   }
                 } catch (e) {}
@@ -100,7 +108,7 @@ export default function RootLayout({
         <SiteNav />
         {children}
         <Footer />
-        <LazyCookieConsent />
+        <LazyCookieConsent country={country} />
         <WebMCP />
       </body>
     </html>

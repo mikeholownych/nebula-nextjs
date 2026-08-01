@@ -53,10 +53,7 @@ type TabId = 'dashboard' | 'audits' | 'projects' | 'compare' | 'recommendations'
 const EMAIL_KEY = 'nebula_ws_email'
 
 export default function WorkspaceClient() {
-  const [email, setEmail] = useState<string>(() => {
-    if (typeof window === 'undefined') return ''
-    return window.localStorage.getItem(EMAIL_KEY) || ''
-  })
+  const [email, setEmail] = useState('')
   const [emailInput, setEmailInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -90,6 +87,10 @@ export default function WorkspaceClient() {
     } finally {
       setLoading(false)
     }
+  }, [])
+
+  useEffect(() => {
+    setEmail(window.localStorage.getItem(EMAIL_KEY) || '')
   }, [])
 
   useEffect(() => {
@@ -222,9 +223,9 @@ export default function WorkspaceClient() {
   ]
 
   return (
-    <main className="min-h-screen bg-[#f7f7f5] text-[#171717] pt-24" id="main-content" role="main">
+    <main className="min-h-screen bg-[#050505] text-white pt-24" id="main-content" role="main">
       <div className="mx-auto flex max-w-[1440px] gap-0 px-4 py-5 sm:px-6 lg:px-8">
-        <aside className="hidden w-56 shrink-0 border-r border-[#e5e5e2] pr-5 lg:block" aria-label="Workspace navigation">
+        <aside className="hidden w-56 shrink-0 border-r border-gray-800 pr-5 lg:block" aria-label="Workspace navigation">
           <div className="sticky top-28">
             <div className="mb-8 px-3">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8b8b86]">Nebula</p>
@@ -241,7 +242,7 @@ export default function WorkspaceClient() {
                         onClick={() => setTab(item.id)}
                         aria-current={tab === item.id ? 'page' : undefined}
                         className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-[13px] font-medium transition-colors ${
-                          tab === item.id ? 'bg-[#e9e9e5] text-[#171717]' : 'text-[#777771] hover:bg-[#efefec] hover:text-[#222]'
+                          tab === item.id ? 'bg-[#1a1a1a] text-white' : 'text-gray-400 hover:bg-[#111] hover:text-white'
                         }`}
                       >
                         <span className={`h-1.5 w-1.5 rounded-full ${tab === item.id ? 'bg-[#171717]' : 'bg-[#c7c7c1]'}`} aria-hidden="true" />
@@ -252,19 +253,19 @@ export default function WorkspaceClient() {
                 </div>
               ))}
             </div>
-            <div className="mt-10 border-t border-[#e5e5e2] px-3 pt-4">
+            <div className="mt-10 border-t border-gray-800 px-3 pt-4">
               <p className="truncate text-xs text-[#8b8b86]" title={email}>{email}</p>
-              <button onClick={signOut} className="mt-2 text-xs font-medium text-[#777771] hover:text-[#171717]">Sign out</button>
+              <button onClick={signOut} className="mt-2 text-xs font-medium text-gray-400 hover:text-white">Sign out</button>
             </div>
           </div>
         </aside>
 
         <div className="min-w-0 flex-1 lg:pl-8">
-          <header className="mb-7 flex flex-wrap items-end justify-between gap-4 border-b border-[#e5e5e2] pb-6">
+          <header className="mb-7 flex flex-wrap items-end justify-between gap-4 border-b border-gray-800 pb-6">
             <div>
               <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#8b8b86]">{tab === 'dashboard' ? 'Overview' : 'Workspace'}</p>
-              <h1 className="text-2xl font-semibold tracking-[-0.03em] text-[#171717]">{tab === 'dashboard' ? 'Good to see you' : navGroups.flatMap((g) => g.items).find((item) => item.id === tab)?.label}</h1>
-              <p className="mt-1 max-w-xl text-sm text-[#777771]">{tab === 'dashboard' ? 'See what changed, what matters, and what to fix next.' : email}</p>
+              <h1 className="text-2xl font-semibold tracking-[-0.03em] text-white">{tab === 'dashboard' ? 'Good to see you' : navGroups.flatMap((g) => g.items).find((item) => item.id === tab)?.label}</h1>
+              <p className="mt-1 max-w-xl text-sm text-gray-400">{tab === 'dashboard' ? 'See what changed, what matters, and what to fix next.' : email}</p>
             </div>
             <div className="flex items-center gap-2">
               <span className="hidden text-xs text-[#999992] sm:inline">{email}</span>
@@ -272,7 +273,7 @@ export default function WorkspaceClient() {
             </div>
           </header>
           {email && (
-            <div className="text-xs text-[#8b8b86] border-t border-[#e5e5e2] py-2 px-4 -mx-4 mb-4">
+            <div className="text-xs text-[#8b8b86] border-t border-gray-800 py-2 px-4 -mx-4 mb-4">
               Your workspace is tied to your audit email. Audit findings are about public pages — no private data is stored here.
             </div>
           )}
@@ -292,9 +293,9 @@ export default function WorkspaceClient() {
               </select>
             </div>
             {/* Tablet (640–1023px): horizontal scrollable tab row */}
-            <div className="hidden sm:flex gap-1 overflow-x-auto border-b border-[#e5e5e2] pb-px">
+            <div className="hidden sm:flex gap-1 overflow-x-auto border-b border-gray-800 pb-px">
               {navGroups.flatMap((group) => group.items).map((item) => (
-                <button key={item.id} onClick={() => setTab(item.id)} aria-current={tab === item.id ? 'page' : undefined} className={`whitespace-nowrap px-3 py-2 text-xs font-semibold ${tab === item.id ? 'border-b-2 border-[#171717] text-[#171717]' : 'text-[#8b8b86]'}`}>{item.label}</button>
+                <button key={item.id} onClick={() => setTab(item.id)} aria-current={tab === item.id ? 'page' : undefined} className={`whitespace-nowrap px-3 py-2 text-xs font-semibold ${tab === item.id ? 'border-b-2 border-white text-white' : 'text-[#8b8b86]'}`}>{item.label}</button>
               ))}
             </div>
           </nav>
