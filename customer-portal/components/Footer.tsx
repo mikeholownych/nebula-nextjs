@@ -29,9 +29,18 @@ export default function Footer() {
               <li><a href="/workspace" className="text-sm text-fg-muted hover:text-fg transition-colors">Workspace</a></li>
               <li><a href="/pricing" className="text-sm text-fg-muted hover:text-fg transition-colors">Pricing</a></li>
               <li><a href="/teardowns" className="text-sm text-fg-muted hover:text-fg transition-colors">Teardowns</a></li>
+              <li><a href="/case-studies" className="text-sm text-fg-muted hover:text-fg transition-colors">Case Studies</a></li>
               <li><a href="/benchmarks" className="text-sm text-fg-muted hover:text-fg transition-colors">Benchmarks</a></li>
               <li><a href="/learning-centre" className="text-sm text-fg-muted hover:text-fg transition-colors">Learning Centre</a></li>
               <li><a href="/resources/citable" className="text-sm text-fg-muted hover:text-fg transition-colors">Citable</a></li>
+              <li><a href="/7-systems" className="text-sm text-fg-muted hover:text-fg transition-colors">7 Systems</a></li>
+              <li><a href="/concepts" className="text-sm text-fg-muted hover:text-fg transition-colors">Concepts</a></li>
+              <li><a href="/cta-optimization" className="text-sm text-fg-muted hover:text-fg transition-colors">CTA Optimization</a></li>
+              <li><a href="/editorial-standards" className="text-sm text-fg-muted hover:text-fg transition-colors">Editorial Standards</a></li>
+              <li><a href="/headline-optimization" className="text-sm text-fg-muted hover:text-fg transition-colors">Headline Optimization</a></li>
+              <li><a href="/mobile-landing-page-optimization" className="text-sm text-fg-muted hover:text-fg transition-colors">Mobile Optimization</a></li>
+              <li><a href="/page-speed-conversion" className="text-sm text-fg-muted hover:text-fg transition-colors">Page Speed &amp; Conversion</a></li>
+              <li><a href="/roas-cliff" className="text-sm text-fg-muted hover:text-fg transition-colors">ROAS Cliff</a></li>
             </ul>
           </div>
 

@@ -5,7 +5,7 @@ import BreadcrumbSchema from '@/app/components/BreadcrumbSchema'
 export const metadata: Metadata = {
   title: 'About Nebula Components - Evidence-Backed Conversion Optimization',
   description:
-    'Nebula Components diagnoses landing page conversion failures for founders running paid ads. We identify message-match gaps, trust signal problems, and CTA friction - then fix them.',
+    'Evidence-backed landing page diagnosis for founders running paid ads. We identify message-match, trust, and CTA problems that waste clicks.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/about',
   },

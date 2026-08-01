@@ -38,6 +38,7 @@ export function proxy(request: NextRequest) {
       const mdUrl = request.nextUrl.clone()
       mdUrl.pathname = '/llms.txt'
       const res = NextResponse.rewrite(mdUrl)
+      res.headers.set('x-nebula-pathname', pathname)
       res.headers.set('Content-Type', 'text/markdown; charset=utf-8')
       res.headers.set('X-Markdown-Source', 'llms.txt')
       res.headers.set('Vary', 'Accept')
@@ -46,6 +47,7 @@ export function proxy(request: NextRequest) {
 
     // Add Vary: Accept so caches don't serve HTML to markdown agents
     const res = NextResponse.next()
+    res.headers.set('x-nebula-pathname', pathname)
     res.headers.set('Vary', 'Accept')
     return res
   }

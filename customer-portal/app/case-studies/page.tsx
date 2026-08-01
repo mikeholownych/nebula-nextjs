@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: 'Case Studies | Nebula Components',
-  description: "Evidence-backed Nebula Components case studies. We don't publish an entry until its evidence, measurement window, permission, disclosure, and publication metadata are complete.",
+  description: 'Evidence-backed case studies published only when permission, measurement, and supporting evidence are complete.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/case-studies',
   },

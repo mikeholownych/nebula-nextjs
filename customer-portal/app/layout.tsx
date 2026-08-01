@@ -26,7 +26,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Nebula Components — Landing Page Conversion Optimization',
     description: 'Evidence-backed landing page conversion diagnosis and implementation for founders spending on paid ads with low or zero conversions.',
-    url: 'https://nebulacomponents.shop',
     siteName: 'Nebula Components',
     locale: 'en_US',
     type: 'website',
@@ -63,6 +62,13 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Keep Open Graph URL aligned with the requested canonical path. The
+            root metadata cannot infer child routes, so the proxy supplies the
+            original pathname for this request. */}
+        <meta
+          property="og:url"
+          content={`https://nebulacomponents.shop${requestHeaders.get('x-nebula-pathname') || '/'}`}
+        />
         {/* Agent discovery: llms.txt link tag for crawlers that don't read response headers */}
         <link rel="describedby" href="/llms.txt" type="text/plain" />
         {/* DNS prefetch for Cloudflare Web Analytics beacon — CF injects beacon.min.js
