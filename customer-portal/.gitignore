@@ -83,3 +83,6 @@ scripts/add-breadcrumb*.py
 
 # Large generated reports
 wcag_audit_report.json
+
+# Audit screenshots (runtime artifacts, regenerated on demand)
+public/audit-screenshots/
