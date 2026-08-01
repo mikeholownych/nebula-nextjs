@@ -1,12 +1,14 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import Link from 'next/link'
 import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
 import { Card } from '@/components/ui'
+import CheckoutPageTracker from './CheckoutPageTracker'
 
 export const metadata: Metadata = {
   title: 'Checkout — One-Leak Repair Sprint | Nebula Components',
   description:
-    'Purchase the One-Leak Repair Sprint for $97. One landing page, one approved repair, implemented and verified by Nebula.',
+    'Purchase the One-Leak Repair Sprint for $97. One landing page, one targeted AI prompt pack — implement the fix yourself or with your developer.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/checkout',
   },
@@ -15,6 +17,7 @@ export const metadata: Metadata = {
 export default function CheckoutPage() {
   return (
     <main className="min-h-screen bg-bg px-6 py-12">
+      <Suspense fallback={null}><CheckoutPageTracker /></Suspense>
       <div className="mx-auto max-w-lg">
         <div className="mb-8 text-center">
           <Link href="/" className="text-xl font-semibold text-fg">
@@ -70,19 +73,14 @@ export default function CheckoutPage() {
           <h2 className="mb-3 text-base font-semibold text-fg">What happens after you pay</h2>
           <ol className="space-y-3">
             <li>1. Stripe confirms your purchase immediately.</li>
-            <li>2. Within one business day, we confirm the audited URL and propose one bounded repair.</li>
-            <li>3. You approve the scope and grant temporary collaborator access or approve a buyer-approved patch handoff.</li>
-            <li>4. We implement the repair, verify production, and deliver the before/after evidence packet.</li>
+            <li>2. Your targeted AI prompts are delivered — exact copy, code, or configuration changes written for your specific failing signals.</li>
+            <li>3. You implement them yourself, with your developer, or through your CMS. No site access required from Nebula.</li>
+            <li>4. Run the free audit again within 30 days to verify the fix held.</li>
           </ol>
-          <p className="mt-4">
-            Never send passwords by email. Use your platform&apos;s collaborator role or keep deployment under your control through the approved patch path.
-          </p>
 
           <h2 className="mb-3 mt-6 text-base font-semibold text-fg">Bounded scope</h2>
           <p>
-            This purchase covers one page-level repair. It excludes full redesigns, multiple pages,
-            backend application logic, analytics migrations, and paid third-party tools. If we cannot
-            safely implement a bounded repair on your page, you receive a full refund before work begins.
+            This purchase covers AI prompts for one high-impact finding from your audit — exact copy changes, code snippets, or configuration fixes targeted to your specific page. It excludes full redesigns, multiple pages, backend application logic, analytics migrations, and paid third-party tools.
           </p>
 
           <h2 className="mb-3 mt-6 text-base font-semibold text-fg">Evidence, not a lift guarantee</h2>

@@ -42,13 +42,12 @@ export default function TermsPage() {
             {fixPack ? (
               <p className="text-base leading-7 text-fg-muted">
                 The current One-Leak Repair Sprint ({formatUsd(fixPack.priceCents)}) covers one
-                landing page and one high-confidence, buyer-approved repair. Nebula records the
-                baseline, confirms the scope with you, implements the repair through temporary
-                collaborator access or a buyer-approved patch handoff, and verifies the live
-                change. Payment is processed securely through Stripe. One additional same-scope
-                evidence check may be requested within {fixPack.reAudit.windowDays} days to observe
-                what changed and what remains open. This service does not guarantee conversion
-                lift.
+                landing page. After payment, you receive targeted AI prompts written for your
+                specific failing signals — exact copy changes, code snippets, or configuration
+                fixes. You implement them yourself, with your developer, or through your CMS.
+                Nebula does not take access to your site, CMS, or hosting. One additional
+                same-scope evidence check may be requested within {fixPack.reAudit.windowDays} days
+                to verify the fix held. This service does not guarantee conversion lift.
               </p>
             ) : (
               <p className="text-base leading-7 text-fg-muted">
