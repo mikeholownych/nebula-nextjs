@@ -27,6 +27,7 @@ RATE_LIMITS = {
     "/api/webhook/stripe": (1000, 60),  # 1000 req/min (webhooks)
     "/audit/run": (5, 60),              # 5 req/min — core audit engine
     "/audit/lab": (10, 60),             # 10 req/min — component lab
+    "/audit/by-email": (20, 60),        # 20 req/min — prevents bulk email enumeration
     "default_authenticated": (100, 60), # 100 req/min
     "default_anonymous": (20, 60),      # 20 req/min
 }

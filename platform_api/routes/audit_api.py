@@ -333,6 +333,10 @@ async def get_audits_by_email(email: str = Query(..., min_length=3, max_length=3
     """List all audits for a workspace email — powers the Customer Workspace
     (dashboard, projects, immutable audit history). Each row is a version of
     that URL at a point in time. Must be defined before /{audit_id}."""
+    import re
+    # Reject malformed emails early — must contain @ with a dot after it
+    if not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
+        raise HTTPException(status_code=400, detail="Invalid email format")
     try:
         audits = await audit_db.get_audits_by_email(email, limit=200)
         # findings payloads are heavy; lighten the list for the workspace

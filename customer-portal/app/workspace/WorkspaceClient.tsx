@@ -12,6 +12,7 @@ import ReportView from './reportView'
 import AchievementsView from './achievementsView'
 import AssistantView from './assistantView'
 import TeamView from './teamView'
+import SettingsView from './settingsView'
 
 export interface WorkspaceAudit {
   id: string
@@ -47,7 +48,7 @@ export interface AuditDetail {
   findings: AuditFinding[]
 }
 
-type TabId = 'dashboard' | 'audits' | 'projects' | 'compare' | 'recommendations' | 'experiments' | 'billing' | 'monitoring' | 'timeline' | 'reports' | 'achievements' | 'assistant' | 'team'
+type TabId = 'dashboard' | 'audits' | 'projects' | 'compare' | 'recommendations' | 'experiments' | 'billing' | 'monitoring' | 'timeline' | 'reports' | 'achievements' | 'assistant' | 'team' | 'settings'
 
 const EMAIL_KEY = 'nebula_ws_email'
 
@@ -189,77 +190,130 @@ export default function WorkspaceClient() {
   }
 
   // ── Workspace ───────────────────────────────────────────────────────
-  const navItems: { id: TabId; label: string }[] = [
-    { id: 'dashboard', label: 'Dashboard' },
-    { id: 'audits', label: 'Audits' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'compare', label: 'Compare' },
-    { id: 'recommendations', label: 'Recommendations' },
-    { id: 'experiments', label: 'Experiments' },
-    { id: 'billing', label: 'Billing' },
-    { id: 'monitoring', label: 'Monitoring' },
-    { id: 'timeline', label: 'Timeline' },
-    { id: 'reports', label: 'Reports' },
-    { id: 'achievements', label: 'Achievements' },
-    { id: 'assistant', label: 'AI Assistant' },
-    { id: 'team', label: 'Team' },
+  const navGroups: { label: string; items: { id: TabId; label: string; icon: string }[] }[] = [
+    {
+      label: 'Workspace',
+      items: [
+        { id: 'dashboard', label: 'Dashboard', icon: 'grid' },
+        { id: 'audits', label: 'Audits', icon: 'scan' },
+        { id: 'projects', label: 'Projects', icon: 'folder' },
+        { id: 'recommendations', label: 'Fix queue', icon: 'check' },
+      ],
+    },
+    {
+      label: 'Analyze',
+      items: [
+        { id: 'compare', label: 'Compare', icon: 'compare' },
+        { id: 'experiments', label: 'Component Lab', icon: 'flask' },
+        { id: 'monitoring', label: 'Monitoring', icon: 'pulse' },
+        { id: 'timeline', label: 'Timeline', icon: 'clock' },
+      ],
+    },
+    {
+      label: 'Account',
+      items: [
+        { id: 'reports', label: 'Reports', icon: 'report' },
+        { id: 'billing', label: 'Billing', icon: 'card' },
+        { id: 'assistant', label: 'AI Assistant', icon: 'spark' },
+        { id: 'team', label: 'Team', icon: 'users' },
+        { id: 'settings', label: 'Settings', icon: 'gear' },
+      ],
+    },
   ]
 
   return (
-    <main
-      className="min-h-screen bg-[#050505] text-white pt-24"
-      id="main-content"
-      role="main"
-    >
-      <div className="max-w-6xl mx-auto px-6 py-10">
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-          <div>
-            <p className="text-sm text-emerald-400 font-medium">Workspace</p>
-            <h1 className="text-3xl font-bold">{email}</h1>
+    <main className="min-h-screen bg-[#f7f7f5] text-[#171717] pt-24" id="main-content" role="main">
+      <div className="mx-auto flex max-w-[1440px] gap-0 px-4 py-5 sm:px-6 lg:px-8">
+        <aside className="hidden w-56 shrink-0 border-r border-[#e5e5e2] pr-5 lg:block" aria-label="Workspace navigation">
+          <div className="sticky top-28">
+            <div className="mb-8 px-3">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8b8b86]">Nebula</p>
+              <p className="mt-1 text-sm font-semibold text-[#222]">Customer workspace</p>
+            </div>
+            <div className="space-y-7">
+              {navGroups.map((group) => (
+                <div key={group.label}>
+                  <p className="mb-2 px-3 text-[10px] font-bold uppercase tracking-[0.16em] text-[#a0a09a]">{group.label}</p>
+                  <div className="space-y-0.5">
+                    {group.items.map((item) => (
+                      <button
+                        key={item.id}
+                        onClick={() => setTab(item.id)}
+                        aria-current={tab === item.id ? 'page' : undefined}
+                        className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-[13px] font-medium transition-colors ${
+                          tab === item.id ? 'bg-[#e9e9e5] text-[#171717]' : 'text-[#777771] hover:bg-[#efefec] hover:text-[#222]'
+                        }`}
+                      >
+                        <span className={`h-1.5 w-1.5 rounded-full ${tab === item.id ? 'bg-[#171717]' : 'bg-[#c7c7c1]'}`} aria-hidden="true" />
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-10 border-t border-[#e5e5e2] px-3 pt-4">
+              <p className="truncate text-xs text-[#8b8b86]" title={email}>{email}</p>
+              <button onClick={signOut} className="mt-2 text-xs font-medium text-[#777771] hover:text-[#171717]">Sign out</button>
+            </div>
           </div>
-          <button
-            onClick={signOut}
-            className="text-sm text-gray-400 hover:text-white transition-colors"
-          >
-            Sign out
-          </button>
+        </aside>
+
+        <div className="min-w-0 flex-1 lg:pl-8">
+          <header className="mb-7 flex flex-wrap items-end justify-between gap-4 border-b border-[#e5e5e2] pb-6">
+            <div>
+              <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#8b8b86]">{tab === 'dashboard' ? 'Overview' : 'Workspace'}</p>
+              <h1 className="text-2xl font-semibold tracking-[-0.03em] text-[#171717]">{tab === 'dashboard' ? 'Good to see you' : navGroups.flatMap((g) => g.items).find((item) => item.id === tab)?.label}</h1>
+              <p className="mt-1 max-w-xl text-sm text-[#777771]">{tab === 'dashboard' ? 'See what changed, what matters, and what to fix next.' : email}</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="hidden text-xs text-[#999992] sm:inline">{email}</span>
+              <a href="/audit" className="rounded-lg bg-[#171717] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#333]">Run new audit</a>
+            </div>
+          </header>
+          {email && (
+            <div className="text-xs text-[#8b8b86] border-t border-[#e5e5e2] py-2 px-4 -mx-4 mb-4">
+              Your workspace is tied to your audit email. Audit findings are about public pages — no private data is stored here.
+            </div>
+          )}
+
+          <nav className="mb-6 lg:hidden" aria-label="Workspace sections">
+            {/* Mobile: select dropdown */}
+            <div className="block sm:hidden">
+              <select
+                value={tab}
+                onChange={(e) => setTab(e.target.value as TabId)}
+                className="w-full rounded-lg border border-border bg-bg-muted py-2 px-3 text-fg text-sm focus:outline-none"
+                aria-label="Navigate workspace"
+              >
+                {navGroups.flatMap((group) => group.items).map((item) => (
+                  <option key={item.id} value={item.id}>{item.label}</option>
+                ))}
+              </select>
+            </div>
+            {/* Tablet (640–1023px): horizontal scrollable tab row */}
+            <div className="hidden sm:flex gap-1 overflow-x-auto border-b border-[#e5e5e2] pb-px">
+              {navGroups.flatMap((group) => group.items).map((item) => (
+                <button key={item.id} onClick={() => setTab(item.id)} aria-current={tab === item.id ? 'page' : undefined} className={`whitespace-nowrap px-3 py-2 text-xs font-semibold ${tab === item.id ? 'border-b-2 border-[#171717] text-[#171717]' : 'text-[#8b8b86]'}`}>{item.label}</button>
+              ))}
+            </div>
+          </nav>
+
+          {tab === 'dashboard' && <DashboardView audits={audits || []} latestDetail={latestDetail} />}
+          {tab === 'audits' && <AuditsView audits={audits || []} />}
+          {tab === 'projects' && <ProjectsView audits={audits || []} />}
+          {tab === 'compare' && <CompareView audits={audits || []} />}
+          {tab === 'recommendations' && <RecsView email={email} />}
+          {tab === 'experiments' && <ExperimentsView email={email} />}
+          {tab === 'billing' && <BillingView email={email} />}
+          {tab === 'monitoring' && <MonitoringView email={email} />}
+          {tab === 'timeline' && <TimelineView email={email} />}
+          {tab === 'reports' && <ReportView audits={audits || []} />}
+          {tab === 'achievements' && <AchievementsView email={email} latestAuditId={audits?.[0]?.id ?? null} />}
+          {tab === 'assistant' && <AssistantView email={email} audits={audits || []} />}
+          {tab === 'team' && <TeamView email={email} />}
+          {tab === 'settings' && <SettingsView email={email} />}
         </div>
-
-        <nav
-          aria-label="Workspace sections"
-          className="flex gap-1 mb-8 border-b border-gray-800"
-        >
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setTab(item.id)}
-              aria-pressed={tab === item.id}
-              className={`px-4 py-2.5 text-sm font-medium -mb-px border-b-2 transition-colors ${
-                tab === item.id
-                  ? 'border-emerald-400 text-white'
-                  : 'border-transparent text-gray-400 hover:text-gray-200'
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
-        </nav>
-
-        {tab === 'dashboard' && (
-          <DashboardView audits={audits || []} latestDetail={latestDetail} />
-        )}
-        {tab === 'audits' && <AuditsView audits={audits || []} />}
-        {tab === 'projects' && <ProjectsView audits={audits || []} />}
-        {tab === 'compare' && <CompareView audits={audits || []} />}
-        {tab === 'recommendations' && <RecsView email={email} />}
-        {tab === 'experiments' && <ExperimentsView email={email} />}
-        {tab === 'billing' && <BillingView email={email} />}
-        {tab === 'monitoring' && <MonitoringView email={email} />}
-        {tab === 'timeline' && <TimelineView email={email} />}
-        {tab === 'reports' && <ReportView audits={audits || []} />}
-        {tab === 'achievements' && <AchievementsView email={email} latestAuditId={audits?.[0]?.id ?? null} />}
-        {tab === 'assistant' && <AssistantView email={email} audits={audits || []} />}
-        {tab === 'team' && <TeamView email={email} />}
       </div>
     </main>
   )

@@ -44,6 +44,11 @@ export default function Footer() {
               <li><a href="/vs/hubspot-website-grader" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. HubSpot Grader</a></li>
               <li><a href="/vs/unbounce" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. Unbounce</a></li>
               <li><a href="/vs/silktide" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. Silktide</a></li>
+              <li><a href="/vs/hotjar" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. Hotjar</a></li>
+              <li><a href="/vs/semrush-site-audit" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. SEMrush Site Audit</a></li>
+              <li><a href="/vs/crazy-egg" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. Crazy Egg</a></li>
+              <li><a href="/vs/screaming-frog" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. Screaming Frog</a></li>
+              <li><a href="/vs/google-analytics" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. Google Analytics</a></li>
             </ul>
           </div>
 

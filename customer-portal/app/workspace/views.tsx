@@ -83,8 +83,6 @@ function Sparkline({ points, width = 260, height = 64 }: { points: number[]; wid
   )
 }
 
-// ── Dashboard ─────────────────────────────────────────────────────────
-
 export function DashboardView({ audits, latestDetail }: { audits: WorkspaceAudit[]; latestDetail: AuditDetail | null }) {
   const sorted = useMemo(
     () => [...audits].sort((a, b) => (b.created_at || '').localeCompare(a.created_at || '')),
@@ -92,136 +90,86 @@ export function DashboardView({ audits, latestDetail }: { audits: WorkspaceAudit
   )
   const latest = sorted[0]
   const previous = sorted[1]
-
   const delta = useMemo(() => {
-    if (!latest || !previous) return null
-    const a = scoreOf(latest)
-    const b = scoreOf(previous)
-    // Only compare when both audits are for the same page
-    if (pathKey(latest.url) !== pathKey(previous.url)) return null
-    return Math.round((a - b) * 10) / 10
+    if (!latest || !previous || pathKey(latest.url) !== pathKey(previous.url)) return null
+    return Math.round((scoreOf(latest) - scoreOf(previous)) * 10) / 10
   }, [latest, previous])
-
   const trendPoints = useMemo(() => {
     if (!latest) return []
     const key = pathKey(latest.url)
-    return sorted
-      .filter((a) => pathKey(a.url) === key)
-      .reverse()
-      .map((a) => scoreOf(a))
+    return sorted.filter((a) => pathKey(a.url) === key).reverse().map(scoreOf)
   }, [sorted, latest])
-
   const counts = severityCounts(latestDetail?.findings || [])
   const latestUrl = latest ? displayUrl(latest.url) : '—'
+  const auditedPages = new Set(audits.map((audit) => pathKey(audit.url))).size
 
   if (!latest) {
     return (
-      <div className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-10 text-center">
-        <h2 className="text-xl font-bold mb-2">No audits yet</h2>
-        <p className="text-gray-400 mb-6 max-w-md mx-auto">
-          Run your first free audit — your score, findings, and history will appear here.
-        </p>
-        <a
-          href="/audit"
-          className="inline-block rounded-lg bg-emerald-500 px-6 py-2.5 text-sm font-semibold text-black hover:bg-emerald-400 transition-colors"
-        >
-          Run free audit
-        </a>
+      <div className="rounded-2xl border border-[#e5e5e2] bg-white p-10 text-center shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#999992]">Your workspace is ready</p>
+        <h2 className="text-xl font-semibold tracking-[-0.02em] text-[#171717]">Start with a real page diagnosis</h2>
+        <p className="mx-auto mb-6 mt-2 max-w-md text-sm leading-6 text-[#777771]">Run a free audit to establish your first baseline. Scores, findings, and history will appear here without fabricated data.</p>
+        <a href="/audit" className="inline-flex rounded-lg bg-[#171717] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#333]">Run first audit</a>
       </div>
     )
   }
 
   return (
     <div className="space-y-6">
-      {/* Row 1: score + issues + latest audit */}
-      <div className="grid md:grid-cols-3 gap-4">
-        <section className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-6">
-          <p className="text-xs text-gray-500 uppercase tracking-widest mb-2">Overall score</p>
-          <div className="flex items-end gap-3">
-            <span className="text-5xl font-bold text-emerald-400">
-              {Math.round(scoreOf(latest) * 10)}
-            </span>
-            <span className="text-gray-500 mb-1">/100</span>
-          </div>
-          {delta !== null ? (
-            <p className={`mt-2 text-sm ${delta >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-              {delta >= 0 ? '↑' : '↓'} {Math.abs(delta).toFixed(1)} since last audit
-            </p>
-          ) : (
-            <p className="mt-2 text-sm text-gray-500">First audit — baseline set</p>
-          )}
-          {trendPoints.length >= 2 && (
-            <div className="mt-4">
-              <Sparkline points={trendPoints} />
-              <p className="text-xs text-gray-500 mt-1">Score over {trendPoints.length} audits</p>
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <MetricCard label="Latest score" value={`${Math.round(scoreOf(latest) * 10)}/100`} detail={delta === null ? 'Baseline established' : `${delta >= 0 ? '+' : ''}${delta.toFixed(1)} since last audit`} tone={delta !== null && delta < 0 ? 'red' : 'dark'} />
+        <MetricCard label="Critical findings" value={String(counts.critical)} detail={`${counts.warning} warnings · ${counts.advisory} advisory`} tone={counts.critical > 0 ? 'red' : 'dark'} />
+        <MetricCard label="Audited pages" value={String(auditedPages)} detail={`${audits.length} total audit versions`} tone="dark" />
+        <MetricCard label="Last audit" value={fmtDate(latest.completed_at || latest.created_at)} detail={latest.grade ? `Grade ${latest.grade}` : 'Completed'} tone="dark" />
+      </div>
+
+      <div className="grid gap-4 xl:grid-cols-[1.45fr_0.85fr]">
+        <section className="rounded-2xl border border-[#e5e5e2] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#999992]">Page health</p>
+              <h2 className="mt-2 text-lg font-semibold tracking-[-0.02em] text-[#171717]">{latestUrl}</h2>
+              <p className="mt-1 text-sm text-[#777771]">Latest measured score and movement for this page.</p>
             </div>
-          )}
+            <a href={`/audit/${latest.id}/results`} className="rounded-lg border border-[#d9d9d4] px-3 py-2 text-xs font-semibold text-[#444] hover:border-[#999] hover:bg-[#fafaf8]">Open report ↗</a>
+          </div>
+          <div className="mt-8 flex items-end gap-6">
+            <div>
+              <span className="text-6xl font-semibold tracking-[-0.06em] text-[#171717]">{Math.round(scoreOf(latest) * 10)}</span><span className="ml-1 text-sm text-[#999992]">/100</span>
+            </div>
+            {delta !== null && <span className={`mb-2 rounded-full px-2.5 py-1 text-xs font-semibold ${delta >= 0 ? 'bg-[#e7f4eb] text-[#28733e]' : 'bg-[#fbe8e7] text-[#a43a35]'}`}>{delta >= 0 ? '↑' : '↓'} {Math.abs(delta).toFixed(1)} pts</span>}
+          </div>
+          {trendPoints.length >= 2 ? <div className="mt-6"><Sparkline points={trendPoints} width={560} height={92} /><p className="mt-2 text-xs text-[#999992]">Score history · {trendPoints.length} audits on this page</p></div> : <div className="mt-6 rounded-xl bg-[#f7f7f5] px-4 py-3 text-xs text-[#777771]">Run another audit on this page to create a measured trend.</div>}
         </section>
 
-        <section className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-6">
-          <p className="text-xs text-gray-500 uppercase tracking-widest mb-2">Findings</p>
-          <div className="flex gap-6 mt-2">
-            <div>
-              <p className="text-3xl font-bold text-red-400">{counts.critical}</p>
-              <p className="text-xs text-gray-500">Critical</p>
-            </div>
-            <div>
-              <p className="text-3xl font-bold text-amber-400">{counts.warning}</p>
-              <p className="text-xs text-gray-500">Warnings</p>
-            </div>
-            <div>
-              <p className="text-3xl font-bold text-gray-400">{counts.advisory}</p>
-              <p className="text-xs text-gray-500">Advisory</p>
-            </div>
-          </div>
-          <p className="mt-3 text-xs text-gray-500">
-            From the latest audit ({latestDetail ? Math.round((latestDetail.composite ?? latestDetail.score) * 10) : '—'}/100)
-          </p>
-        </section>
-
-        <section className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-6 flex flex-col">
-          <p className="text-xs text-gray-500 uppercase tracking-widest mb-2">Latest audit</p>
-          <p className="text-lg font-semibold text-white">{latestUrl}</p>
-          <p className="text-sm text-gray-400">
-            {fmtDate(latest.completed_at || latest.created_at)} · Grade {latest.grade || '—'}
-          </p>
-          <a
-            href={`/audit/${latest.id}/results`}
-            className="mt-auto pt-4 inline-flex items-center text-sm text-emerald-400 hover:text-emerald-300"
-          >
-            Review →
-          </a>
+        <section className="rounded-2xl border border-[#e5e5e2] bg-[#171717] p-6 text-white shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#a8a8a1]">Next best action</p>
+          <h2 className="mt-3 text-xl font-semibold tracking-[-0.03em]">Fix the highest-impact leak.</h2>
+          <p className="mt-3 text-sm leading-6 text-[#b9b9b2]">Use the latest findings to choose one bounded repair, then re-audit the same page to verify the condition changed.</p>
+          <div className="mt-8 flex items-center justify-between border-t border-white/15 pt-4 text-sm"><span className="text-[#b9b9b2]">Latest status</span><span className="font-semibold">{counts.critical > 0 ? `${counts.critical} critical` : 'No critical findings'}</span></div>
+          <a href="/recommendations" className="mt-4 inline-flex w-full justify-center rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-[#171717] hover:bg-[#e9e9e5]">Open fix queue →</a>
         </section>
       </div>
 
-      {/* Row 2: suggested next audit + plan */}
-      <div className="grid md:grid-cols-2 gap-4">
-        <section className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-6">
-          <p className="text-xs text-gray-500 uppercase tracking-widest mb-2">Suggested next audit</p>
-          <p className="text-gray-300 mb-4">
-            Re-run the audit on <span className="text-white font-medium">{latestUrl}</span> to
-            verify fixes or catch regressions. New runs become new versions in your history.
-          </p>
-          <a
-            href={`/audit?url=${encodeURIComponent(latest.url)}`}
-            className="inline-block rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-black hover:bg-emerald-400 transition-colors"
-          >
-            Run follow-up audit →
-          </a>
+      <div className="grid gap-4 lg:grid-cols-2">
+        <section className="rounded-2xl border border-[#e5e5e2] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+          <div className="flex items-center justify-between"><div><p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#999992]">Recent audit</p><h2 className="mt-2 text-lg font-semibold text-[#171717]">{latestUrl}</h2></div><span className="text-xs text-[#999992]">{fmtDate(latest.completed_at || latest.created_at)}</span></div>
+          <div className="mt-5 flex items-center justify-between rounded-xl bg-[#f7f7f5] px-4 py-3"><span className="text-sm text-[#777771]">Grade</span><span className="text-2xl font-semibold text-[#171717]">{latest.grade || '—'}</span></div>
+          <a href={`/audit/${latest.id}/results`} className="mt-4 inline-flex text-sm font-semibold text-[#444] hover:text-[#171717]">Review findings →</a>
         </section>
-
-        <section className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-6">
-          <p className="text-xs text-gray-500 uppercase tracking-widest mb-2">Plan</p>
-          <p className="text-lg font-semibold text-white">Pay-per-fix</p>
-          <p className="text-sm text-gray-400 mt-1">
-            Free audits included. The{' '}
-            <a href="/pricing" className="text-emerald-400 hover:underline">$97 One-Leak Repair Sprint</a>{' '}
-            implements your highest-confidence fix when you are ready.
-          </p>
+        <section className="rounded-2xl border border-[#e5e5e2] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#999992]">Keep your baseline current</p>
+          <h2 className="mt-2 text-lg font-semibold text-[#171717]">Verify the next change</h2>
+          <p className="mt-2 text-sm leading-6 text-[#777771]">Run a follow-up after implementing a fix. New runs are preserved as immutable versions in your audit history.</p>
+          <a href={`/audit?url=${encodeURIComponent(latest.url)}`} className="mt-5 inline-flex rounded-lg bg-[#171717] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#333]">Run follow-up audit →</a>
         </section>
       </div>
     </div>
   )
+}
+
+function MetricCard({ label, value, detail, tone }: { label: string; value: string; detail: string; tone: 'dark' | 'red' }) {
+  return <section className="rounded-2xl border border-[#e5e5e2] bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]"><p className="text-xs font-semibold uppercase tracking-[0.13em] text-[#999992]">{label}</p><p className={`mt-4 text-3xl font-semibold tracking-[-0.04em] ${tone === 'red' ? 'text-[#b33d38]' : 'text-[#171717]'}`}>{value}</p><p className="mt-2 truncate text-xs text-[#888881]">{detail}</p></section>
 }
 
 // ── Audits (immutable versions) ───────────────────────────────────────
