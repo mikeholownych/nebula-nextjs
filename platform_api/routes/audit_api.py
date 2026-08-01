@@ -950,3 +950,25 @@ async def send_audit_email(request: EmailRequest):
             status="error",
             error="Email delivery unavailable",
         )
+
+
+# ── Team endpoint ────────────────────────────────────────────────────────────
+
+from datetime import datetime, timezone
+
+@router.get("/team")
+async def get_team(email: str = Query(..., description="User email")):
+    """Return team members for a given email. Placeholder until JWT auth is live."""
+    if not email:
+        raise HTTPException(status_code=400, detail="email is required")
+    return {
+        "email": email,
+        "members": [
+            {
+                "email": email,
+                "role": "owner",
+                "joinedAt": datetime.now(timezone.utc).isoformat(),
+            }
+        ],
+        "inviteStatus": "coming_soon",
+    }

@@ -3497,7 +3497,7 @@
     "current_stage": "lead_audit",
     "email": "pending@example.com",
     "first_seen": "2026-07-18T01:26:23.082723Z",
-    "last_seen": "2026-08-01T04:50:24.353286Z",
+    "last_seen": "2026-08-01T15:48:13.195234Z",
     "name": "",
     "notes": "",
     "nurture_track": "headline-clarity",
@@ -3513,10 +3513,10 @@
     ],
     "tags": [],
     "total_spent_cents": 0,
-    "track_audit_id": "b75a28ed-a1e4-4eb5-aa4c-cbbbac482a2c",
+    "track_audit_id": "b7e24c63-62fa-4c1b-9050-1d7e0b666fdb",
     "track_position_days": 0,
-    "track_started_at": "2026-08-01T04:50:24.353286Z",
-    "url": "https://aisyndicate.io"
+    "track_started_at": "2026-08-01T15:48:13.195234Z",
+    "url": "https://nebulacomponents.shop/"
   },
   "quietpulse.social@gmail.com": {
     "content_posts": [],

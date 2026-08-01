@@ -159,3 +159,4 @@
 {"timestamp": "2026-08-01T14:51:10.124615Z", "email": "e2e-crawler-test@example.com", "action": "upsert", "stage": "lead_audit", "stages": ["lead_audit"], "source": "audit_completion", "name": null, "nurture_track": "headline-clarity"}
 {"timestamp": "2026-08-01T15:43:02.425438Z", "email": "e2e-crawler-test@example.com", "action": "upsert", "stage": "lead_audit", "stages": ["lead_audit"], "source": "audit_completion", "name": null, "nurture_track": "headline-clarity"}
 {"timestamp": "2026-08-01T15:43:26.984700Z", "email": "e2e-crawler-test@example.com", "action": "upsert", "stage": "lead_audit", "stages": ["lead_audit"], "source": "audit_completion", "name": null, "nurture_track": "headline-clarity"}
+{"timestamp": "2026-08-01T15:48:13.195234Z", "email": "pending@example.com", "action": "upsert", "stage": "lead_audit", "stages": ["lead_audit"], "source": "audit_completion", "name": null, "nurture_track": "headline-clarity"}
