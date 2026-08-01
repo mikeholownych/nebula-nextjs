@@ -106,7 +106,7 @@ export default function AuditPage() {
             <div className="overflow-hidden rounded-2xl border border-border">
               <Image
                 src="/screenshots/audit-results-example.webp"
-                alt="Real Nebula audit results for nebulacomponents.shop showing a 7.4/10 conversion readiness score, Grade B, 0 critical issues, 0 warnings, and 2 advisory findings"
+                alt="Real Nebula audit results for nebulacomponents.shop showing a 7.7/10 conversion readiness score, Grade B, analysed across 9 conversion signals"
                 width={1600}
                 height={650}
                 className="h-auto w-full"
