@@ -21,11 +21,19 @@ from platform_api.middleware.rate_limit import setup_rate_limiting
 async def lifespan(_app: FastAPI):
     """Initialize and close shared runtime integrations."""
     from platform_api.redis_client import redis_client
+    from platform_api.db import init_db
     from platform_api.posthog_client import (
         init_posthog,
         shutdown_posthog,
         warn_missing_token,
     )
+
+    # Initialize database
+    if settings.DATABASE_URL:
+        init_db(settings.DATABASE_URL)
+        print("✅ Database initialized")
+    else:
+        print("⚠️  DATABASE_URL not set — DB routes will fail")
 
     await redis_client.connect()
     print("✅ Redis connected")
