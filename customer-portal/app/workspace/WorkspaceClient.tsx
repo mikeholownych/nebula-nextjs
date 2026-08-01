@@ -8,6 +8,7 @@ import ExperimentsView from './experimentsView'
 import BillingView from './billingView'
 import MonitoringView from './monitoringView'
 import TimelineView from './timelineView'
+import ReportView from './reportView'
 
 export interface WorkspaceAudit {
   id: string
@@ -42,7 +43,7 @@ export interface AuditDetail {
   findings: AuditFinding[]
 }
 
-type TabId = 'dashboard' | 'audits' | 'projects' | 'compare' | 'recommendations' | 'experiments' | 'billing' | 'monitoring' | 'timeline'
+type TabId = 'dashboard' | 'audits' | 'projects' | 'compare' | 'recommendations' | 'experiments' | 'billing' | 'monitoring' | 'timeline' | 'reports'
 
 const EMAIL_KEY = 'nebula_ws_email'
 
@@ -194,6 +195,7 @@ export default function WorkspaceClient() {
     { id: 'billing', label: 'Billing' },
     { id: 'monitoring', label: 'Monitoring' },
     { id: 'timeline', label: 'Timeline' },
+    { id: 'reports', label: 'Reports' },
   ]
 
   return (
@@ -247,6 +249,7 @@ export default function WorkspaceClient() {
         {tab === 'billing' && <BillingView email={email} />}
         {tab === 'monitoring' && <MonitoringView email={email} />}
         {tab === 'timeline' && <TimelineView email={email} />}
+        {tab === 'reports' && <ReportView audits={audits || []} />}
       </div>
     </main>
   )

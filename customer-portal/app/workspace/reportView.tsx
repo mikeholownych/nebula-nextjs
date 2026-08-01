@@ -1,335 +1,218 @@
 'use client'
 
-import { useState, useCallback } from 'react'
-import { WorkspaceAudit, AuditDetail, AuditFinding } from './WorkspaceClient'
+import { useEffect, useState } from 'react'
+import type { WorkspaceAudit } from './WorkspaceClient'
 
-interface ReportViewProps {
-  audits: WorkspaceAudit[]
+interface Finding {
+  key: string
+  label: string
+  impact: number
+  effort: number
+  quadrant: string | null
+  issue?: string
+  fix?: string
+  evidence?: unknown
 }
 
-function gradeColor(grade: string | null): string {
-  if (!grade) return '#6b7280'
-  const g = grade.toUpperCase()
-  if (g === 'A' || g === 'A+') return '#10b981'
-  if (g === 'B') return '#3b82f6'
-  if (g === 'C') return '#f59e0b'
-  if (g === 'D') return '#ef4444'
-  return '#6b7280'
+interface AuditDetail {
+  audit_id: string
+  url: string
+  status: string
+  score: number
+  grade: string
+  composite?: number
+  findings: Finding[]
+  completed_at?: string | null
+  created_at?: string
 }
 
-function formatDate(dateStr?: string | null): string {
-  if (!dateStr) return '—'
-  try {
-    return new Date(dateStr).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    })
-  } catch {
-    return dateStr
-  }
+function fmtDate(iso?: string | null): string {
+  if (!iso) return '—'
+  return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
 }
 
-function evidenceToString(evidence: unknown): string {
+function impactLabel(impact: number): { label: string; cls: string } {
+  if (impact >= 8) return { label: 'Critical', cls: 'text-red-400 bg-red-500/10 border-red-500/30' }
+  if (impact >= 5) return { label: 'Warning', cls: 'text-amber-400 bg-amber-500/10 border-amber-500/30' }
+  return { label: 'Advisory', cls: 'text-gray-400 bg-gray-500/10 border-gray-500/30' }
+}
+
+function domainOf(url: string): string {
+  try { return new URL(url).hostname.replace(/^www\./, '') } catch { return url }
+}
+
+function evidenceText(evidence: unknown): string {
   if (!evidence) return ''
   if (typeof evidence === 'string') return evidence
-  if (typeof evidence === 'number') return String(evidence)
-  if (Array.isArray(evidence)) return evidence.map(evidenceToString).join(', ')
   if (typeof evidence === 'object') {
-    try {
-      return JSON.stringify(evidence, null, 2)
-    } catch {
-      return String(evidence)
-    }
+    const e = evidence as Record<string, unknown>
+    const parts: string[] = []
+    if (e.measured) parts.push(`Measured: ${e.measured}`)
+    if (e.required) parts.push(`Required: ${e.required}`)
+    if (e.delta) parts.push(`Gap: ${e.delta}`)
+    return parts.join(' · ')
   }
-  return String(evidence)
+  return ''
 }
 
-export default function ReportView({ audits }: ReportViewProps) {
-  const [selectedId, setSelectedId] = useState<string>('')
+export default function ReportView({ audits }: { audits: WorkspaceAudit[] }) {
+  const [selectedId, setSelectedId] = useState<string>(audits[0]?.id ?? '')
   const [detail, setDetail] = useState<AuditDetail | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
 
-  const fetchDetail = useCallback(async (id: string) => {
-    if (!id) {
-      setDetail(null)
-      return
-    }
+  useEffect(() => {
+    if (!selectedId) return
     setLoading(true)
     setError(null)
-    try {
-      const res = await fetch(`/api/audit/${id}`)
-      if (!res.ok) throw new Error('Failed to load audit detail')
-      const data = await res.json()
-      setDetail(data)
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Something went wrong')
-      setDetail(null)
-    } finally {
-      setLoading(false)
-    }
-  }, [])
+    fetch(`/api/audit/${selectedId}`)
+      .then((r) => r.ok ? r.json() : Promise.reject('Failed to load'))
+      .then((d) => setDetail(d))
+      .catch((e) => setError(String(e)))
+      .finally(() => setLoading(false))
+  }, [selectedId])
 
-  const handleSelect = (id: string) => {
-    setSelectedId(id)
-    fetchDetail(id)
-  }
-
-  const handlePrint = () => {
-    window.print()
-  }
-
-  const handleCopyLink = async () => {
-    if (!selectedId) return
-    const link = `https://nebulacomponents.shop/audit/${selectedId}/results`
-    try {
-      await navigator.clipboard.writeText(link)
+  const copyLink = () => {
+    const url = `https://nebulacomponents.shop/audit/${selectedId}/results`
+    navigator.clipboard.writeText(url).then(() => {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
-    } catch {
-      // fallback
-      const ta = document.createElement('textarea')
-      ta.value = link
-      document.body.appendChild(ta)
-      ta.select()
-      document.execCommand('copy')
-      document.body.removeChild(ta)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    }
+    })
   }
 
-  const selectedAudit = audits.find((a) => a.id === selectedId)
+  if (audits.length === 0) {
+    return (
+      <div className="py-16 text-center text-gray-400">
+        No audits yet. Run a{' '}
+        <a href="/audit" className="text-emerald-400 hover:underline">free audit</a>{' '}
+        first — reports appear here automatically.
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-6">
-      {/* Controls — hidden when printing */}
-      <div className="print:hidden">
-        <h2 className="text-2xl font-bold mb-1">Reports &amp; Export</h2>
-        <p className="text-gray-400 text-sm mb-6">
-          Select an audit to generate a shareable, print-ready report.
-        </p>
-
-        <div className="flex flex-wrap gap-4 items-end">
-          <div className="flex-1 min-w-[260px]">
-            <label htmlFor="audit-select" className="block text-sm text-gray-300 mb-2">
-              Select audit
-            </label>
-            <select
-              id="audit-select"
-              value={selectedId}
-              onChange={(e) => handleSelect(e.target.value)}
-              className="w-full rounded-lg border border-gray-700 bg-[#0d0d0d] px-4 py-2.5 text-white focus:border-emerald-500 focus:outline-none"
-            >
-              <option value="">— Choose an audit —</option>
-              {audits.map((a) => (
-                <option key={a.id} value={a.id}>
-                  {a.url} — {a.grade ?? 'N/A'} — {formatDate(a.completed_at || a.created_at)}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {selectedId && (
-            <div className="flex gap-3">
-              <button
-                onClick={handlePrint}
-                disabled={!detail}
-                className="rounded-lg bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-black hover:bg-emerald-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Print / Save as PDF
-              </button>
-              <button
-                onClick={handleCopyLink}
-                disabled={!selectedId}
-                className="rounded-lg border border-gray-700 px-4 py-2.5 text-sm font-medium text-gray-300 hover:text-white hover:border-gray-500 transition-colors"
-              >
-                {copied ? '✓ Copied!' : 'Copy share link'}
-              </button>
-            </div>
-          )}
+      {/* Controls — print:hidden */}
+      <div className="flex flex-wrap items-center gap-4 print:hidden">
+        <div className="flex-1 min-w-0">
+          <label htmlFor="report-select" className="block text-xs text-gray-400 mb-1">
+            Select audit
+          </label>
+          <select
+            id="report-select"
+            value={selectedId}
+            onChange={(e) => setSelectedId(e.target.value)}
+            className="w-full rounded-lg border border-gray-700 bg-[#0d0d0d] px-3 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
+          >
+            {audits.map((a) => (
+              <option key={a.id} value={a.id}>
+                {domainOf(a.url)} — {a.grade ?? '?'} {a.score != null ? `${a.score}/10` : ''} · {fmtDate(a.completed_at ?? a.created_at)}
+              </option>
+            ))}
+          </select>
         </div>
 
-        {loading && (
-          <p className="mt-4 text-gray-400 text-sm">Loading audit detail…</p>
-        )}
-        {error && (
-          <p className="mt-4 text-red-400 text-sm">{error}</p>
-        )}
-
-        {audits.length === 0 && (
-          <div className="mt-8 rounded-lg border border-gray-800 bg-[#0a0a0a] p-8 text-center text-gray-500">
-            No audits found. Run an{' '}
-            <a href="/audit" className="text-emerald-400 hover:underline">
-              audit
-            </a>{' '}
-            first.
-          </div>
-        )}
+        <div className="flex gap-3 pt-5">
+          <button
+            onClick={copyLink}
+            className="rounded-lg border border-gray-700 px-4 py-2 text-sm text-gray-300 hover:border-emerald-500 hover:text-white transition-colors"
+          >
+            {copied ? '✓ Copied' : 'Copy share link'}
+          </button>
+          <button
+            onClick={() => window.print()}
+            className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-black hover:bg-emerald-400 transition-colors"
+          >
+            Print / Save as PDF
+          </button>
+        </div>
       </div>
 
-      {/* Report — shown on screen and when printing */}
-      {detail && selectedAudit && (
-        <div
-          id="nebula-report"
-          className="bg-white text-gray-900 rounded-xl p-8 print:rounded-none print:p-0 print:shadow-none shadow-lg"
-        >
-          {/* Header */}
-          <div className="flex items-start justify-between mb-8 pb-6 border-b border-gray-200">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-semibold uppercase tracking-widest text-gray-400">
-                  Nebula Components
-                </span>
-              </div>
-              <h1 className="text-2xl font-bold text-gray-900 break-all">
-                {detail.url}
-              </h1>
-              <p className="text-sm text-gray-500 mt-1">
-                Audit report generated {formatDate(selectedAudit.completed_at || selectedAudit.created_at)}
-              </p>
-            </div>
-            <div className="text-right shrink-0 ml-6">
-              <div
-                className="text-5xl font-black leading-none"
-                style={{ color: gradeColor(detail.grade) }}
-              >
-                {detail.grade ?? '—'}
-              </div>
-              <div className="text-sm text-gray-500 mt-1">
-                Score: {detail.score != null ? `${detail.score}/100` : '—'}
-              </div>
-              {detail.composite != null && (
-                <div className="text-xs text-gray-400 mt-0.5">
-                  Composite: {detail.composite}
-                </div>
-              )}
-            </div>
-          </div>
+      {loading && <div className="py-8 text-center text-gray-400">Loading report…</div>}
+      {error && <div className="py-8 text-center text-red-400">{error}</div>}
 
-          {/* Summary row */}
-          <div className="grid grid-cols-3 gap-4 mb-8">
-            <div className="rounded-lg bg-gray-50 p-4">
-              <div className="text-xs text-gray-500 uppercase tracking-wider mb-1">URL</div>
-              <div className="text-sm font-medium text-gray-800 break-all">{detail.url}</div>
-            </div>
-            <div className="rounded-lg bg-gray-50 p-4">
-              <div className="text-xs text-gray-500 uppercase tracking-wider mb-1">Grade</div>
-              <div
-                className="text-xl font-bold"
-                style={{ color: gradeColor(detail.grade) }}
-              >
-                {detail.grade ?? '—'}
+      {/* Report body — shown on screen and in print */}
+      {detail && !loading && (
+        <div className="rounded-2xl border border-gray-800 bg-[#0a0a0a] p-8 print:border-none print:bg-white print:text-black print:p-0">
+
+          {/* Header */}
+          <div className="mb-8 border-b border-gray-800 pb-8 print:border-gray-200">
+            <p className="text-xs font-semibold uppercase tracking-widest text-emerald-400 print:text-emerald-700 mb-2">
+              Landing Page Audit Report · Nebula Components
+            </p>
+            <h1 className="text-2xl font-bold text-white print:text-black">{detail.url}</h1>
+            <p className="mt-1 text-sm text-gray-400 print:text-gray-600">
+              Audited {fmtDate(detail.completed_at ?? detail.created_at)}
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-6">
+              <div>
+                <p className="text-xs text-gray-500 print:text-gray-500 uppercase tracking-widest">Score</p>
+                <p className="text-4xl font-bold text-white print:text-black">
+                  {detail.composite ?? detail.score}
+                  <span className="text-xl text-gray-400 print:text-gray-500">/10</span>
+                </p>
               </div>
-            </div>
-            <div className="rounded-lg bg-gray-50 p-4">
-              <div className="text-xs text-gray-500 uppercase tracking-wider mb-1">Audit Date</div>
-              <div className="text-sm font-medium text-gray-800">
-                {formatDate(selectedAudit.completed_at || selectedAudit.created_at)}
+              <div>
+                <p className="text-xs text-gray-500 print:text-gray-500 uppercase tracking-widest">Grade</p>
+                <p className="text-4xl font-bold text-white print:text-black">{detail.grade}</p>
+              </div>
+              <div>
+                <p className="text-xs text-gray-500 print:text-gray-500 uppercase tracking-widest">Findings</p>
+                <p className="text-4xl font-bold text-white print:text-black">{detail.findings?.length ?? 0}</p>
               </div>
             </div>
           </div>
 
           {/* Findings */}
-          <div className="mb-8">
-            <h2 className="text-lg font-bold text-gray-900 mb-4">
-              Findings ({detail.findings?.length ?? 0})
-            </h2>
-
-            {(!detail.findings || detail.findings.length === 0) ? (
-              <p className="text-gray-500 text-sm">No findings recorded for this audit.</p>
-            ) : (
-              <div className="space-y-4">
-                {detail.findings.map((finding: AuditFinding, idx: number) => (
-                  <div
-                    key={finding.key || idx}
-                    className="rounded-lg border border-gray-200 p-5 break-inside-avoid"
-                  >
+          {detail.findings && detail.findings.length > 0 ? (
+            <div className="space-y-6">
+              <h2 className="text-lg font-bold text-white print:text-black">Findings</h2>
+              {detail.findings.map((f, i) => {
+                const tone = impactLabel(f.impact)
+                const ev = evidenceText(f.evidence)
+                return (
+                  <div key={f.key} className="rounded-xl border border-gray-800 print:border-gray-200 p-5">
                     <div className="flex items-start justify-between gap-4 mb-3">
-                      <h3 className="font-semibold text-gray-900">{finding.label || finding.key}</h3>
-                      <div className="flex gap-2 shrink-0">
-                        {finding.impact != null && (
-                          <span className="rounded-full bg-red-100 text-red-700 px-2.5 py-0.5 text-xs font-medium">
-                            Impact {finding.impact}
-                          </span>
-                        )}
-                        {finding.effort != null && (
-                          <span className="rounded-full bg-blue-100 text-blue-700 px-2.5 py-0.5 text-xs font-medium">
-                            Effort {finding.effort}
-                          </span>
-                        )}
-                        {finding.quadrant && (
-                          <span className="rounded-full bg-gray-100 text-gray-600 px-2.5 py-0.5 text-xs font-medium capitalize">
-                            {finding.quadrant}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    {finding.issue && (
-                      <div className="mb-3">
-                        <div className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1">
-                          Issue
-                        </div>
-                        <p className="text-sm text-gray-700">{finding.issue}</p>
-                      </div>
-                    )}
-
-                    {finding.evidence != null && (
-                      <div className="mb-3">
-                        <div className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1">
-                          Evidence
-                        </div>
-                        <div className="text-sm text-gray-700 bg-gray-50 rounded p-3 font-mono whitespace-pre-wrap break-all">
-                          {evidenceToString(finding.evidence)}
-                        </div>
-                      </div>
-                    )}
-
-                    {finding.fix && (
                       <div>
-                        <div className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1">
-                          Recommended Fix
-                        </div>
-                        <p className="text-sm text-gray-700">{finding.fix}</p>
+                        <p className="text-xs text-gray-500 print:text-gray-500 uppercase tracking-widest mb-0.5">
+                          Finding {i + 1}
+                        </p>
+                        <h3 className="font-bold text-white print:text-black">{f.label}</h3>
+                      </div>
+                      <span className={`shrink-0 rounded-full border px-2.5 py-0.5 text-xs font-semibold ${tone.cls}`}>
+                        {tone.label} · {f.impact}/10
+                      </span>
+                    </div>
+                    {f.issue && (
+                      <p className="text-sm text-gray-300 print:text-gray-700 mb-3">{f.issue}</p>
+                    )}
+                    {ev && (
+                      <div className="rounded-lg bg-[#111] print:bg-gray-50 border border-gray-800 print:border-gray-200 px-4 py-2.5 mb-3">
+                        <p className="text-xs text-gray-500 print:text-gray-500 uppercase tracking-widest mb-1">Evidence</p>
+                        <p className="text-xs font-mono text-gray-400 print:text-gray-600">{ev}</p>
+                      </div>
+                    )}
+                    {f.fix && (
+                      <div>
+                        <p className="text-xs text-gray-500 print:text-gray-500 uppercase tracking-widest mb-1">Recommended fix</p>
+                        <p className="text-sm text-gray-300 print:text-gray-700">{f.fix}</p>
                       </div>
                     )}
                   </div>
-                ))}
-              </div>
-            )}
-          </div>
+                )
+              })}
+            </div>
+          ) : (
+            <p className="text-gray-400 print:text-gray-600">No findings — all signals passed.</p>
+          )}
 
           {/* Footer */}
-          <div className="border-t border-gray-200 pt-6 mt-8 flex items-center justify-between">
-            <div>
-              <p className="text-sm font-semibold text-gray-900">Nebula Components</p>
-              <p className="text-xs text-gray-400">nebulacomponents.shop</p>
-            </div>
-            <div className="text-right">
-              <p className="text-xs text-gray-400">
-                Report ID: {detail.audit_id}
-              </p>
-              <p className="text-xs text-gray-400 mt-0.5">
-                View online:{' '}
-                <a
-                  href={`https://nebulacomponents.shop/audit/${detail.audit_id}/results`}
-                  className="text-emerald-600 hover:underline"
-                >
-                  nebulacomponents.shop/audit/{detail.audit_id}/results
-                </a>
-              </p>
-            </div>
+          <div className="mt-10 border-t border-gray-800 print:border-gray-200 pt-6 text-xs text-gray-500 print:text-gray-400 flex items-center justify-between">
+            <span>Generated by Nebula Components · nebulacomponents.shop</span>
+            <span>Audit ID: {detail.audit_id}</span>
           </div>
-        </div>
-      )}
-
-      {/* Print-only: show placeholder when nothing selected */}
-      {!detail && (
-        <div className="hidden print:block text-center py-20 text-gray-400">
-          No report selected.
         </div>
       )}
     </div>
