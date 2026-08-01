@@ -137,13 +137,15 @@ export default async function TeardownPage({
               Page snapshot · {t.auditedAt}
             </p>
             <BrowserMockupCard theme="dark" url={t.domain}>
-              <Image
-                src={t.screenshotUrl}
-                alt={`${t.name} landing page snapshot — ${t.auditedAt}`}
-                fill
-                className="object-cover object-top"
-                sizes="(max-width: 896px) 100vw, 896px"
-              />
+              <div className="relative h-80 w-full">
+                <Image
+                  src={t.screenshotUrl}
+                  alt={`${t.name} landing page snapshot — ${t.auditedAt}`}
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 896px) 100vw, 896px"
+                />
+              </div>
             </BrowserMockupCard>
           </div>
         )}
