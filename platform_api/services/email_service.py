@@ -15,6 +15,8 @@ class AuditEmailData(BaseModel):
     findings: List[dict]
     email: str
     name: Optional[str] = None
+    custom_subject: Optional[str] = None
+    custom_body: Optional[str] = None
 
 
 class EmailService:

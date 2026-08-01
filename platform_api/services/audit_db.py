@@ -370,19 +370,19 @@ class AuditDB:
                 return
             cadence = row["cadence"]
             if cadence == "monthly":
-                interval = "interval '1 month'"
+                interval = "1 month"
             else:
-                interval = "interval '1 week'"
+                interval = "1 week"
             await conn.execute(
-                f"""
+                """
                 UPDATE monitors
                 SET last_run_at = now(),
                     last_score = $2,
-                    next_run_at = now() + {interval},
+                    next_run_at = now() + $3::interval,
                     updated_at = now()
                 WHERE id = $1
                 """,
-                monitor_id, score,
+                monitor_id, score, interval,
             )
 
     async def create_monitor_event(self, monitor_id: str, audit_id: Optional[UUID],

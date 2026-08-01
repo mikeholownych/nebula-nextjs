@@ -40,6 +40,7 @@ class FollowUpSequence:
         for seq in self.SEQUENCE:
             threshold = datetime.utcnow() - timedelta(hours=seq["delay_hours"])
             
+            await audit_db.connect()
             async with audit_db.pool.acquire() as conn:
                 rows = await conn.fetch(
                     """

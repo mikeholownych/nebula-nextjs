@@ -195,7 +195,7 @@ async def google_auth(
         
         # Create session
         session_data = {
-            "ip": request.client.host,
+            "ip": request.client.host if request.client else None,
             "user_agent": request.headers.get("user-agent", ""),
             "auth_method": "google"
         }
