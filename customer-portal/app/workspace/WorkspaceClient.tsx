@@ -23,6 +23,7 @@ export interface WorkspaceAudit {
   composite_anchor?: number | null
   created_at?: string
   completed_at?: string | null
+  screenshot_url?: string | null
 }
 
 export interface AuditFinding {

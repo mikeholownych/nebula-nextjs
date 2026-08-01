@@ -54,10 +54,15 @@ function AuditFormContent() {
     })
 
     try {
+      const wsEmail = window.localStorage.getItem('nebula_ws_email')
       const response = await fetch('/api/audit/start', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: processedUrl, referrer: referrer || undefined }),
+        body: JSON.stringify({
+          url: processedUrl,
+          referrer: referrer || undefined,
+          email: wsEmail || undefined,
+        }),
       })
 
       if (!response.ok) {

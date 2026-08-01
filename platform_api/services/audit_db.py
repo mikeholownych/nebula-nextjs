@@ -100,7 +100,33 @@ class AuditDB:
                     await self.record_cohort_aggregate(conn, score, grade, findings)
                 except Exception:
                     pass
+                # Fire-and-forget screenshot for visual diffs — never blocks completion.
+                try:
+                    url_row = await conn.fetchrow("SELECT url FROM audits WHERE id = $1", audit_id)
+                    if url_row:
+                        import asyncio as _asyncio
+                        from platform_api.services.screenshot_service import capture_audit_screenshot
+                        _asyncio.create_task(
+                            self._capture_and_store_screenshot(audit_id, url_row['url'])
+                        )
+                except Exception:
+                    pass
             return updated
+
+    async def _capture_and_store_screenshot(self, audit_id: UUID, url: str) -> None:
+        """Capture a screenshot of the audited URL and store the path in the DB."""
+        try:
+            from platform_api.services.screenshot_service import capture_audit_screenshot
+            screenshot_url = await capture_audit_screenshot(str(audit_id), url)
+            if screenshot_url:
+                await self.connect()
+                async with self.pool.acquire() as conn:
+                    await conn.execute(
+                        "UPDATE audits SET screenshot_url = $2 WHERE id = $1",
+                        audit_id, screenshot_url,
+                    )
+        except Exception:
+            pass
 
     async def record_cohort_aggregate(
         self, conn, score: float, grade: str, findings: List[dict]
@@ -589,7 +615,7 @@ class AuditDB:
             rows = await conn.fetch(
                 """
                 SELECT id, url, status, score, grade, composite, composite_anchor,
-                       created_at, completed_at
+                       created_at, completed_at, screenshot_url
                 FROM audits
                 WHERE email = $1
                 ORDER BY created_at DESC

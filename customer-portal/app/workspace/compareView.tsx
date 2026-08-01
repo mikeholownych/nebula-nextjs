@@ -287,6 +287,29 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
         {loading && <p className="text-xs text-gray-500 mt-4">Loading findings…</p>}
       </section>
 
+      {/* Visual diff — screenshots side by side if available */}
+      {before?.screenshot_url && after?.screenshot_url && samePage && (
+        <section className="rounded-xl border border-gray-800 bg-[#0a0a0a] p-5">
+          <h3 className="mb-4 text-sm font-semibold text-gray-300 uppercase tracking-widest">Page snapshots</h3>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <p className="text-xs text-gray-500 mb-2">Before · {fmtDate(before.completed_at || before.created_at)}</p>
+              <div className="rounded-lg border border-gray-700 overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={before.screenshot_url} alt="Before" className="w-full object-cover object-top" />
+              </div>
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 mb-2">After · {fmtDate(after.completed_at || after.created_at)}</p>
+              <div className="rounded-lg border border-gray-700 overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={after.screenshot_url} alt="After" className="w-full object-cover object-top" />
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Signal group diff */}
       <section className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-6">
         <h3 className="text-sm font-semibold text-white mb-4">Components</h3>

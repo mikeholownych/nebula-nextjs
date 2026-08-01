@@ -64,11 +64,9 @@ export default function ProcessingPage() {
 
   const [submitting, setSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
+  const [autoUnlocking, setAutoUnlocking] = useState(false)
 
-  const handleEmailSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!email || submitting) return
-
+  const doUnlock = async (email: string, name?: string) => {
     setSubmitting(true)
     setSubmitError(null)
 
@@ -93,14 +91,37 @@ export default function ProcessingPage() {
 
       // Cookie is now set — redirect to results page (no ?unlocked query param needed)
       pushWithViewTransition(router, `/audit/${auditId}/results`)
+      return true
     } catch (err) {
       const error = err instanceof Error ? err : new Error(String(err))
       posthog.captureException(error)
       setSubmitError(error.message)
+      return false
     } finally {
       setSubmitting(false)
     }
   }
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email || submitting) return
+    await doUnlock(email, name)
+  }
+
+  // Logged-in workspace user: skip the email capture step entirely. The audit
+  // was already started with their workspace email, so unlock with it and
+  // route straight to the full report. If unlock fails, fall back to the form.
+  useEffect(() => {
+    if (status !== 'ready' || autoUnlocking) return
+    const wsEmail = window.localStorage.getItem('nebula_ws_email')
+    if (!wsEmail) return
+    setAutoUnlocking(true)
+    ;(async () => {
+      const ok = await doUnlock(wsEmail)
+      if (!ok) setAutoUnlocking(false)
+    })()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status])
 
   return (
     <main className="min-h-screen bg-bg px-6 py-12 pt-24">
