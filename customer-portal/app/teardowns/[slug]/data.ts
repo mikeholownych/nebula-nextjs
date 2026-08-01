@@ -26,6 +26,7 @@ export type Teardown = {
 export const TEARDOWNS: Record<string, Teardown> = {
   basecamp: {
     slug: 'basecamp',
+    screenshotUrl: '/teardown-screenshots/basecamp.png',
     name: 'Basecamp',
     url: 'https://basecamp.com',
     domain: 'basecamp.com',
@@ -84,6 +85,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   notion: {
     slug: 'notion',
+    screenshotUrl: '/teardown-screenshots/notion.png',
     name: 'Notion',
     url: 'https://notion.so',
     domain: 'notion.so',
@@ -133,6 +135,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   calendly: {
     slug: 'calendly',
+    screenshotUrl: '/teardown-screenshots/calendly.png',
     name: 'Calendly',
     url: 'https://calendly.com',
     domain: 'calendly.com',
@@ -191,6 +194,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   carrd: {
     slug: 'carrd',
+    screenshotUrl: '/teardown-screenshots/carrd.png',
     name: 'Carrd',
     url: 'https://carrd.co',
     domain: 'carrd.co',
@@ -249,6 +253,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   beehiiv: {
     slug: 'beehiiv',
+    screenshotUrl: '/teardown-screenshots/beehiiv.png',
     name: 'Beehiiv',
     url: 'https://beehiiv.com',
     domain: 'beehiiv.com',
@@ -307,6 +312,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   webflow: {
     slug: 'webflow',
+    screenshotUrl: '/teardown-screenshots/webflow.png',
     name: 'Webflow',
     url: 'https://webflow.com',
     domain: 'webflow.com',
@@ -356,6 +362,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   kit: {
     slug: 'kit',
+    screenshotUrl: '/teardown-screenshots/kit.png',
     name: 'Kit',
     url: 'https://kit.com',
     domain: 'kit.com',
@@ -405,6 +412,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   hotjar: {
     slug: 'hotjar',
+    screenshotUrl: '/teardown-screenshots/hotjar.png',
     name: 'Hotjar',
     url: 'https://hotjar.com',
     domain: 'hotjar.com',
@@ -454,6 +462,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   unbounce: {
     slug: 'unbounce',
+    screenshotUrl: '/teardown-screenshots/unbounce.png',
     name: 'Unbounce',
     url: 'https://unbounce.com',
     domain: 'unbounce.com',
@@ -503,6 +512,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   framer: {
     slug: 'framer',
+    screenshotUrl: '/teardown-screenshots/framer.png',
     name: 'Framer',
     url: 'https://framer.com',
     domain: 'framer.com',
@@ -552,6 +562,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   postmint: {
     slug: 'postmint',
+    screenshotUrl: '/teardown-screenshots/postmint.png',
     name: 'Postmint',
     url: 'https://postmint.de/en',
     domain: 'postmint.de',
@@ -583,6 +594,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   knallhart: {
     slug: 'knallhart',
+    screenshotUrl: '/teardown-screenshots/knallhart.png',
     name: 'knallhart.dev',
     url: 'https://knallhart.dev',
     domain: 'knallhart.dev',
