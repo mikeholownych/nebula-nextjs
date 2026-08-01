@@ -5,7 +5,7 @@ import { createCollectionPageSchema } from '@/app/lib/schema'
 
 export const metadata: Metadata = {
   title: 'Learning Centre - Landing Page Conversion Leaks | Nebula',
-  description: "Free conversion guides for founders burning ad spend on pages that don't convert. Diagnose Google, Meta, TikTok, and LinkedIn ad leaks. Start with the free audit.",
+  description: "Free conversion guides for founders burning ad spend on pages that don't convert. Diagnose Google, Meta, TikTok, and LinkedIn ad leaks. Start with the free...",
   alternates: { canonical: 'https://nebulacomponents.shop/learning-centre' },
 }
 

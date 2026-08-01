@@ -4,7 +4,7 @@ import LabClient from './LabClient'
 export const metadata: Metadata = {
   title: 'Component Lab — Check Your Headline, CTA & Message Match | Nebula',
   description:
-    'Three evidence-backed component checks: message match, headline, and CTA. Paste your ad copy and page URL — get status, evidence, and the pass standard for each component.',
+    'Three evidence-backed component checks: message match, headline, and CTA. Paste your ad copy and page URL — get status, evidence, and the pass standard for...',
 }
 
 export default function LabPage() {

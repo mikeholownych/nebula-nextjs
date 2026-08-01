@@ -5,7 +5,7 @@ import Benchmarks from './Benchmarks'
 export const metadata: Metadata = {
   title: 'Landing Page Benchmarks — Real Audit Data | Nebula',
   description:
-    'Per-component failure benchmarks from real landing page audits: above-fold clarity, ad signals, SEO foundations, CTA, load speed, social proof, and more. Updated from actual audits, not projections.',
+    'Per-component failure benchmarks from real landing page audits: above-fold clarity, ad signals, SEO foundations, CTA, load speed, social proof, and more....',
 }
 
 export default function BenchmarksPage() {

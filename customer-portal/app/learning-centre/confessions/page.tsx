@@ -5,7 +5,7 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Founder Confessions: When We Found Our Page Was Broken',
   description:
-    "Anonymous stories from founders who discovered their landing page had been silently broken - sometimes for months. How long it had been broken. How much they spent. What they were blaming instead.",
+    "Anonymous stories from founders whose landing pages were silently broken for months. What they spent, and what they blamed instead.",
   alternates: {
     canonical: 'https://nebulacomponents.shop/learning-centre/confessions',
   },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const articleSchema = createArticleSchema({
   headline: 'Founder Confessions: The Moment We Found Out Our Page Was Broken',
   description:
-    "Anonymous stories from founders who discovered their landing page had been silently broken - sometimes for months. How long it had been broken. How much they spent. What they were blaming instead.",
+    "Anonymous stories from founders whose landing pages were silently broken for months. What they spent, and what they blamed instead.",
   url: 'https://nebulacomponents.shop/learning-centre/confessions',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',

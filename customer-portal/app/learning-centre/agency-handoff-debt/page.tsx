@@ -5,7 +5,7 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Agency Handoff Debt: 7 Regressions That Kill Conversions',
   description:
-    'You hired an agency, got a great landing page, then handed it to a developer for minor changes. Here are the 7 ways it quietly stopped working - and how to find them.',
+    'You hired an agency, got a great landing page, then handed it to a developer. Here are 7 ways it quietly stopped working - and how to find them.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/learning-centre/agency-handoff-debt',
   },
@@ -15,7 +15,7 @@ const articleSchema = createArticleSchema({
   headline:
     'Agency Handoff Debt: 7 Silent Regressions That Kill Landing Page Performance',
   description:
-    'You hired an agency, got a great landing page, then handed it to a developer for minor changes. Here are the 7 ways it quietly stopped working - and how to find them.',
+    'You hired an agency, got a great landing page, then handed it to a developer. Here are 7 ways it quietly stopped working - and how to find them.',
   url: 'https://nebulacomponents.shop/learning-centre/agency-handoff-debt',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
