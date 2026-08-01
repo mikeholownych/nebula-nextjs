@@ -69,6 +69,13 @@ export default async function RootLayout({
           property="og:url"
           content={`https://nebulacomponents.shop${requestHeaders.get('x-nebula-pathname') || '/'}`}
         />
+        {/* Supply a complete image set even when child metadata overrides the
+            root Open Graph object. */}
+        <meta property="og:image" content="https://nebulacomponents.shop/opengraph-image" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Nebula Components — diagnose landing-page conversion leaks before they burn more ad spend" />
         {/* Agent discovery: llms.txt link tag for crawlers that don't read response headers */}
         <link rel="describedby" href="/llms.txt" type="text/plain" />
         {/* DNS prefetch for Cloudflare Web Analytics beacon — CF injects beacon.min.js

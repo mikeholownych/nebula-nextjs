@@ -4,7 +4,7 @@ import { COMPARISONS } from './[slug]/data'
 
 export const metadata: Metadata = {
   title: 'Nebula vs. Other Landing Page Audit Tools | Nebula',
-  description: 'Side-by-side comparisons of Nebula against PageSpeed Insights, HubSpot Website Grader, Nibbler, and Google Lighthouse — what each checks, what it costs, and who it is for.',
+  description: 'Side-by-side comparisons of Nebula against PageSpeed Insights, HubSpot Website Grader, Nibbler, and Google Lighthouse — what each checks, costs, and who it is for.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/vs',
   },
