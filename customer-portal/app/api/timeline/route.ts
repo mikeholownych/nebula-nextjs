@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const PLATFORM_API = 'http://127.0.0.1:8001'
+const PLATFORM_API = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
 export async function GET(req: NextRequest) {
   const email = req.nextUrl.searchParams.get('email')

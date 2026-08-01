@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     }
 
     const response = await fetch(
-      `http://127.0.0.1:8001/audit/recommendations?email=${encodeURIComponent(email)}`,
+      `${process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'}/audit/recommendations?email=${encodeURIComponent(email)}`,
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },

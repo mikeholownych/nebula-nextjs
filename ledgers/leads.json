@@ -172,6 +172,33 @@
     "total_spent_cents": 0,
     "url": "https://alloceraintelligence.com"
   },
+  "audit-probe-2026@example.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "audit-probe-2026@example.com",
+    "first_seen": "2026-08-01T16:06:39.074473Z",
+    "last_seen": "2026-08-01T16:06:39.074473Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "32cdfc3d-b1ff-4b55-8dfa-82397c958a6b",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-01T16:06:39.074473Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
   "beniciocardozomdp@gmail.com": {
     "content_posts": [],
     "current_stage": "lead_warm",
@@ -658,7 +685,7 @@
     "current_stage": "lead_audit",
     "email": "e2e-crawler-test@example.com",
     "first_seen": "2026-08-01T03:41:01.997419Z",
-    "last_seen": "2026-08-01T15:43:26.984700Z",
+    "last_seen": "2026-08-01T15:57:17.976243Z",
     "name": "",
     "notes": "",
     "nurture_track": "headline-clarity",
@@ -674,11 +701,11 @@
     ],
     "tags": [],
     "total_spent_cents": 0,
-    "track_audit_id": "3b41f8c5-19fd-4a96-8a82-4853bbd78e90",
+    "track_audit_id": "e95ed35e-293c-4a08-9dd4-d5fc58778db0",
     "track_position_days": 0,
-    "track_started_at": "2026-08-01T15:43:26.984700Z",
+    "track_started_at": "2026-08-01T15:57:17.976243Z",
     "trigger_text": "",
-    "url": "https://nebulacomponents.shop/monitor-qa"
+    "url": "https://example.com"
   },
   "flynn@snipprompts.com": {
     "content_posts": [],
@@ -3497,7 +3524,7 @@
     "current_stage": "lead_audit",
     "email": "pending@example.com",
     "first_seen": "2026-07-18T01:26:23.082723Z",
-    "last_seen": "2026-08-01T15:48:13.195234Z",
+    "last_seen": "2026-08-01T15:58:29.220997Z",
     "name": "",
     "notes": "",
     "nurture_track": "headline-clarity",
@@ -3513,10 +3540,10 @@
     ],
     "tags": [],
     "total_spent_cents": 0,
-    "track_audit_id": "b7e24c63-62fa-4c1b-9050-1d7e0b666fdb",
+    "track_audit_id": "69ea3917-0722-4e47-b4bf-36bf853427b4",
     "track_position_days": 0,
-    "track_started_at": "2026-08-01T15:48:13.195234Z",
-    "url": "https://nebulacomponents.shop/"
+    "track_started_at": "2026-08-01T15:58:29.220997Z",
+    "url": "https://example.org"
   },
   "quietpulse.social@gmail.com": {
     "content_posts": [],

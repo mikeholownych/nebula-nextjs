@@ -49,9 +49,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Also log to our own analytics (PostgreSQL)
-    // This ensures we have a record even without GA4
-    // TODO: Insert into analytics_events table
+    // GA4 Measurement Protocol forwarding is the primary analytics path.
+    // Local DB analytics_events table not implemented — PostHog covers behavioral analytics.
 
     return NextResponse.json({ success: true, events_received: events.length });
   } catch (error: unknown) {

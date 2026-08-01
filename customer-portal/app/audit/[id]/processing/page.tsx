@@ -152,7 +152,22 @@ export default function ProcessingPage() {
           </Card>
         )}
 
-        {status === 'ready' && (
+        {status === 'ready' && autoUnlocking && (
+          <Card variant="elevated" className="vt-audit-card finding-reveal text-center">
+            <div className="mb-4 text-5xl finding-reveal" style={{ animationDelay: '120ms' }}>🔓</div>
+            <h1 className="mb-2 text-2xl font-bold text-fg">
+              Your Audit Is Ready
+            </h1>
+            <p className="mb-6 text-fg-muted">
+              Unlocking your full report…
+            </p>
+            <div className="mx-auto h-1.5 w-48 overflow-hidden rounded-full bg-border">
+              <div className="h-full w-full origin-left animate-pulse rounded-full bg-accent" />
+            </div>
+          </Card>
+        )}
+
+        {status === 'ready' && !autoUnlocking && (
           <Card variant="elevated" className="vt-audit-card finding-reveal text-center">
             <div className="mb-4 text-5xl finding-reveal" style={{ animationDelay: '120ms' }}>✓</div>
             <h1 className="mb-2 text-2xl font-bold text-fg">

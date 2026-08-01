@@ -23,7 +23,7 @@ export async function PATCH(
     }
 
     const response = await fetch(
-      `http://127.0.0.1:8001/audit/recommendations/${encodeURIComponent(id)}`,
+      `${process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'}/audit/recommendations/${encodeURIComponent(id)}`,
       {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },

@@ -1,7 +1,7 @@
 import { createFAQPageSchema } from '@/app/lib/schema'
 
 const repairSprintAnswer =
-  'One landing page and one high-confidence page-level repair selected from the audit. Nebula records the baseline, confirms the scope with you, implements the approved repair, verifies production, and runs a same-scope re-audit. The service does not guarantee conversion lift.'
+  'One landing page and one high-confidence, buyer-approved repair. Nebula delivers targeted AI prompts written for your specific failing signals — exact copy, code, or configuration changes — instantly after checkout. No site access required. You implement them yourself or hand them to your developer. Includes one same-scope re-audit within 30 days.'
 
 export const pricingFAQSchema = createFAQPageSchema([
   {
@@ -14,19 +14,19 @@ export const pricingFAQSchema = createFAQPageSchema([
   },
   {
     question: 'Do I need to share access to my site?',
-    answer: 'Not for the free audit. For paid implementation, you approve the scope and grant temporary collaborator access or approve a buyer-controlled patch handoff. Never send passwords by email.',
+    answer: 'No. Nebula does not take access to your site, CMS, or hosting — for the free audit or the paid sprint. The sprint delivers AI prompts you run yourself or hand to your developer.',
   },
   {
     question: 'What if the repair cannot be implemented safely?',
-    answer: 'If the page or available access path cannot support a safe bounded repair, Nebula refunds the purchase in full before work begins.',
+    answer: 'If the identified leak cannot be addressed with a safe, bounded prompt-based repair, Nebula refunds the purchase in full.',
   },
   {
     question: 'Does the repair guarantee a higher conversion rate?',
-    answer: 'No. Nebula verifies the observed page condition, implementation, and same-scope re-audit. Traffic quality, offer strength, campaign changes, and measurement windows also affect business outcomes.',
+    answer: 'No. Nebula identifies and delivers fixes for the highest-confidence conversion leak found. Traffic quality, offer strength, campaign changes, and measurement windows also affect business outcomes.',
   },
   {
     question: 'What landing page problems does Nebula diagnose?',
-    answer: "Seven recurring failure patterns: message-match failure, missing trust signals above the fold, mobile layout friction hiding the CTA, slow load time, unclear or competing CTAs, form friction, and compliance gaps blocking the conversion path.",
+    answer: 'Nine recurring signal failures: message-match failure, missing trust signals, mobile CTA hidden below fold, slow load speed, unclear or competing CTAs, above-fold clarity gaps, missing ad tracking signals, weak SEO foundations, and AI readiness gaps.',
   },
 ])
 
@@ -41,7 +41,7 @@ export const homeFAQSchema = createFAQPageSchema([
   },
   {
     question: 'Why do landing pages fail to convert paid traffic?',
-    answer: "Most landing page failures follow seven diagnosable patterns: the ad promise does not match the page headline, no social proof appears above the fold, the CTA is invisible on mobile, the page loads too slowly, the primary action competes with secondary links, forms ask for too much before delivering value, or a consent layer blocks the conversion path.",
+    answer: 'Most landing page failures follow diagnosable patterns: the ad promise does not match the page headline, no social proof appears above the fold, the CTA is hidden on mobile, the page loads too slowly, the primary action competes with secondary links, or the page lacks signals for AI and search discoverability.',
   },
   {
     question: 'Do you need access to my website to run the audit?',
@@ -52,7 +52,7 @@ export const homeFAQSchema = createFAQPageSchema([
 export const auditPageFAQSchema = createFAQPageSchema([
   {
     question: 'What does the free landing page audit check?',
-    answer: 'Seven conversion signals: message-match, above-fold trust, mobile CTA visibility, Core Web Vitals, CTA clarity, form friction, and compliance conditions affecting the conversion path.',
+    answer: 'Nine conversion signals: message match, trust signals, mobile CTA visibility, above the fold clarity, ad signals, SEO foundations, AI readiness, CTA clarity, and load speed.',
   },
   {
     question: 'How long does the landing page audit take?',
@@ -60,7 +60,7 @@ export const auditPageFAQSchema = createFAQPageSchema([
   },
   {
     question: 'What happens after the free audit?',
-    answer: 'You see your 7-point score and specific findings. If the page has a high-confidence page-level leak, the $97 One-Leak Repair Sprint can implement and verify one buyer-approved repair.',
+    answer: 'You see your 9-signal score and specific findings. If the page has a high-confidence conversion leak, the $97 One-Leak Repair Sprint delivers targeted AI prompts to fix it instantly.',
   },
   {
     question: 'Does the audit require an account or login?',

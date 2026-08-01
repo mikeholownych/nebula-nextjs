@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
+
 /**
  * POST /api/workspace/assistant
  * Body: { email: string, question: string, auditIds: string[] }
@@ -27,7 +29,7 @@ interface AuditDetail {
 
 async function fetchAuditDetail(id: string): Promise<AuditDetail | null> {
   try {
-    const res = await fetch(`http://127.0.0.1:8001/audit/${id}`, {
+    const res = await fetch(`/audit/${id}`, {
       signal: AbortSignal.timeout(8000),
     })
     if (!res.ok) return null
@@ -99,7 +101,7 @@ export async function POST(request: NextRequest) {
 
     // Try Bedrock via platform API
     try {
-      const platformRes = await fetch('http://127.0.0.1:8001/workspace/assistant', {
+      const platformRes = await fetch('${API_BASE}/workspace/assistant', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

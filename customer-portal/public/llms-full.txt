@@ -45,7 +45,7 @@ The Sprint excludes full redesigns, multiple pages, backend application logic, a
 No retainer. No ongoing commitment. Pay once for one bounded repair.
 
 ### Free Audit
-Automated URL submission and 7-point scoring across message-match, trust signals, mobile layout, load time, CTA clarity, form friction, and compliance. No email required to see results. Self-serve at https://nebulacomponents.shop/audit
+Automated URL submission and 7-point scoring across message-match, trust signals, mobile layout, load time, CTA clarity, form friction, and compliance. No email required to see results. Self-serve at https://nebulacomponents.shop/audit. Visitors with an active workspace session (localStorage `nebula_ws_email`) skip the email-capture step entirely — their audit is created under that email and they land directly on the full unlocked report; anonymous visitors unlock by submitting their email (httpOnly cookie, verified server-side).
 
 ## Component Lab
 Three component checks at https://nebulacomponents.shop/lab — Message Match, Headline, CTA. Paste ad copy (optional) + page URL; the same engine as the free audit returns status, evidence, and the pass standard for each component. Ad copy enables a transparent term-overlap comparison between the ad's meaningful terms and the page's actual H1/title.

@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const upstream = await fetch(
-      `http://127.0.0.1:8001/audit/badges?email=${encodeURIComponent(email)}`,
+      `${process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'}/audit/badges?email=${encodeURIComponent(email)}`,
       { cache: 'no-store' }
     )
     const data = await upstream.json()
