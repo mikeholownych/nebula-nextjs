@@ -9,6 +9,16 @@ import {
   WritableStream,
 } from 'stream/web'
 
+// React 19 removed react-dom/test-utils.act — shim it so @testing-library/react works.
+// https://github.com/testing-library/react-testing-library/issues/1375
+import { act } from 'react'
+;(globalThis as Record<string, unknown>).IS_REACT_ACT_ENVIRONMENT = true
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const reactDomTestUtils = require('react-dom/test-utils') as Record<string, unknown>
+if (!reactDomTestUtils['act']) {
+  reactDomTestUtils['act'] = act
+}
+
 if (!globalThis.TextEncoder) globalThis.TextEncoder = TextEncoder
 if (!globalThis.TextDecoder) globalThis.TextDecoder = TextDecoder as typeof globalThis.TextDecoder
 if (!globalThis.structuredClone) {
@@ -24,7 +34,11 @@ const {
   Headers: EdgeHeaders,
   Request: EdgeRequest,
   Response: EdgeResponse,
-} = require('next/dist/compiled/@edge-runtime/primitives')
+} = require('next/dist/compiled/@edge-runtime/primitives') as {
+  Headers: typeof globalThis.Headers
+  Request: typeof globalThis.Request
+  Response: typeof globalThis.Response
+}
 
 if (!globalThis.Headers) globalThis.Headers = EdgeHeaders
 if (!globalThis.Request) globalThis.Request = EdgeRequest
