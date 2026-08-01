@@ -4,7 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Public Audit Teardowns | Nebula',
   description:
-    'Nebula runs its 7-signal audit on well-known public pages and publishes the raw findings. Not customers — demonstrations of what the engine produces.',
+    'Nebula runs its 9-signal audit on well-known public pages and publishes the raw findings. Not customers — demonstrations of what the engine produces.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/teardowns',
   },
@@ -144,7 +144,7 @@ export default function TeardownsPage() {
           Real audits on well-known pages
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
-          These companies are not Nebula customers. We run the same 7-signal engine on public pages
+          These companies are not Nebula customers. We run the same 9-signal engine on public pages
           and publish the raw findings — not to criticize anyone, but to show exactly what the audit
           produces on pages you can verify yourself.
         </p>

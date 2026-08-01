@@ -3,6 +3,7 @@ import Link from 'next/link'
 import SelfScan from './components/SelfScan'
 import AggregateProof from './components/AggregateProof'
 import RecentFinding from './components/RecentFinding'
+import { TEARDOWNS } from './teardowns/[slug]/data'
 import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE } from './lib/homepageContent'
 
 export const metadata: Metadata = {
@@ -20,14 +21,18 @@ export const metadata: Metadata = {
 }
 
 const SIGNALS = [
-  { key: 'message_match', label: 'Message match', desc: 'Ad promise matches page headline' },
-  { key: 'trust_signals', label: 'Trust signals', desc: 'Social proof visible above fold' },
-  { key: 'mobile_cta', label: 'Mobile CTA', desc: 'Primary action visible without scroll' },
-  { key: 'load_time', label: 'Load time', desc: 'LCP under 2.5s on mobile' },
-  { key: 'cta_clarity', label: 'CTA clarity', desc: 'One clear action, no competing choices' },
-  { key: 'form_friction', label: 'Form friction', desc: 'Five fields or fewer, clear labels' },
-  { key: 'compliance', label: 'Compliance', desc: 'No consent banner blocking conversion' },
+  { key: 'message_match', label: 'Message match', desc: 'Ad promise matches page headline', pass: 'Headline repeats the ad promise within 3 words' },
+  { key: 'trust_signals', label: 'Trust signals', desc: 'Social proof visible above fold', pass: '2+ trust signals above the fold' },
+  { key: 'mobile_cta', label: 'Mobile CTA', desc: 'Primary action visible without scroll', pass: 'CTA visible on a 375px viewport without scrolling' },
+  { key: 'load_time', label: 'Load time', desc: 'LCP under 2.5s on mobile', pass: 'LCP < 2.5s, CLS < 0.1, INP < 200ms' },
+  { key: 'cta_clarity', label: 'CTA clarity', desc: 'One clear action, no competing choices', pass: 'Exactly one primary action, clearly labeled' },
+  { key: 'above_fold', label: 'Above the fold', desc: 'Offer and promise visible without scrolling', pass: 'Visitor understands what is offered and what to do next within the first viewport' },
+  { key: 'ad_signals', label: 'Ad signals', desc: 'Ad-tracking artifacts present in page source', pass: 'At least one recognised ad-tracking artifact in the fetched source' },
+  { key: 'seo_foundations', label: 'SEO foundations', desc: 'Title, meta description, and H1 all present', pass: 'Title tag, meta description, and a single descriptive H1 all present' },
+  { key: 'ai_readiness', label: 'AI readiness', desc: 'Page is citable by AI systems', pass: 'Structured signals (JSON-LD, OG tags, clean hierarchy) present' },
 ]
+
+const TEARDOWN_PROOFS = ['knallhart', 'postmint', 'basecamp']
 
 const PATTERNS = [
   {
@@ -61,24 +66,29 @@ export default function Home() {
 
             {/* Left: copy */}
             <div className="flex flex-col justify-center">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
+                Landing pages don't convert. Components do.
+              </p>
               <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl lg:text-6xl">
-                Find Out Why Your Landing Page Is Not Converting
+                We scored our own landing page 7.1/10 and published every finding. Now score yours.
               </h1>
               <p className="mt-6 max-w-lg text-lg leading-7 text-fg-muted">
-                Before you pause ad spend: identify observable conversion friction across 7 key page signals. Free, no signup required, results in under two minutes.
+                Nebula checks your landing page with a 7-component conversion framework to find
+                exactly what's preventing visitors from becoming customers. Free score, no signup,
+                results in under two minutes.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
                   href="/audit"
                   className="rounded-xl bg-accent px-7 py-3.5 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
                 >
-                  Find the Leak
+                  Get My Score
                 </Link>
                 <Link
-                  href="/pricing"
+                  href="/teardowns"
                   className="text-sm text-fg-muted hover:text-fg transition-colors"
                 >
-                  $97 One-Leak Repair Sprint if it fails &rarr;
+                  See Sample Audit &rarr;
                 </Link>
               </div>
               {/* Reserve height to prevent CLS when async components load */}
@@ -100,22 +110,29 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 2. Seven signals grid ── */}
+                {/* ── 2. Nine signals grid ── */}
         <section className="border-t border-border px-6 py-16">
           <div className="mx-auto max-w-6xl">
             <div className="mb-10 grid gap-2 md:grid-cols-2 md:items-end">
               <h2 className="text-2xl font-bold tracking-tight text-fg md:text-3xl">
-                Seven signals. Every scan.
+                Nine signals. Every scan.
               </h2>
               <p className="text-base text-fg-muted md:text-right">
                 Not opinions. Specific pass/fail checks against your actual page.
               </p>
             </div>
+            <p className="-mt-6 mb-8 max-w-2xl text-sm text-fg-muted">
+              Every high-converting page is built from the same small set of components. These are
+              the seven we check, each with a concrete pass standard and evidence from your page.
+            </p>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {SIGNALS.slice(0, 4).map((s) => (
                 <div key={s.key} className="rounded-xl border border-border bg-bg-muted/20 p-4">
                   <p className="mb-1 font-semibold text-fg text-sm">{s.label}</p>
                   <p className="text-xs text-fg-muted leading-5">{s.desc}</p>
+                  <p className="mt-2 border-t border-border pt-2 text-xs text-fg-muted/70 leading-5">
+                    Pass: {s.pass}
+                  </p>
                 </div>
               ))}
             </div>
@@ -124,8 +141,79 @@ export default function Home() {
                 <div key={s.key} className="rounded-xl border border-border bg-bg-muted/20 p-4">
                   <p className="mb-1 font-semibold text-fg text-sm">{s.label}</p>
                   <p className="text-xs text-fg-muted leading-5">{s.desc}</p>
+                  <p className="mt-2 border-t border-border pt-2 text-xs text-fg-muted/70 leading-5">
+                    Pass: {s.pass}
+                  </p>
                 </div>
               ))}
+            </div>
+            <div className="mt-8 grid gap-4 md:grid-cols-3">
+              {[
+                {
+                  heading: 'What you receive',
+                  body: 'Overall score and grade, pass/fail per signal with the evidence from your page, and a prioritized fix list ranked by impact and effort.',
+                },
+                {
+                  heading: 'See a real report',
+                  body: 'Every public teardown below is generated by the same engine your free scan uses. Same format, same evidence standard. Live aggregate benchmarks from all completed audits are on the benchmarks page.',
+                  link: { href: '/benchmarks', label: 'Browse live benchmarks' },
+                },
+                {
+                  heading: 'What happens next',
+                  body: 'Fix the highest-impact leak yourself with the report, or pick the $97 One-Leak Repair Sprint and get the fix delivered as targeted prompts.',
+                },
+              ].map((item) => (
+                <div key={item.heading} className="rounded-xl border border-border bg-bg-muted/10 p-5">
+                  <h3 className="mb-1 text-sm font-semibold text-fg">{item.heading}</h3>
+                  <p className="text-sm text-fg-muted leading-6">{item.body}</p>
+                  {item.link && (
+                    <Link href={item.link.href} className="mt-2 inline-block text-sm font-semibold text-accent hover:text-accent-light transition-colors">
+                      {item.link.label} &rarr;
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── 2b. Teardown proof: real reports on real pages ── */}
+        <section className="border-t border-border bg-bg-muted/10 px-6 py-16">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-8 grid gap-2 md:grid-cols-2 md:items-end">
+              <h2 className="text-2xl font-bold tracking-tight text-fg md:text-3xl">
+                Real reports on real pages.
+              </h2>
+              <p className="text-base text-fg-muted md:text-right">
+                Public teardowns we published. Same engine, same format as your free audit.
+              </p>
+            </div>
+            <div className="grid gap-4 md:grid-cols-3">
+              {TEARDOWN_PROOFS.map((slug) => {
+                const t = TEARDOWNS[slug]
+                if (!t) return null
+                return (
+                  <Link
+                    key={slug}
+                    href={`/teardowns/${slug}`}
+                    className="group rounded-2xl border border-border bg-bg-muted/20 p-6 hover:border-accent/40 transition-colors"
+                  >
+                    <div className="mb-3 flex items-center justify-between">
+                      <p className="text-xs font-semibold text-fg-muted">{t.domain}</p>
+                      <p className="font-mono text-xs text-fg">
+                        {t.score}/10 <span className="text-fg-muted">Grade {t.grade}</span>
+                      </p>
+                    </div>
+                    <p className="text-sm text-fg-muted leading-6">{t.summary}</p>
+                    <p className="mt-3 text-xs text-fg-muted/70">
+                      {t.findings.length} findings documented
+                    </p>
+                    <p className="mt-4 text-sm font-semibold text-accent group-hover:text-accent-light transition-colors">
+                      View the full report &rarr;
+                    </p>
+                  </Link>
+                )
+              })}
             </div>
           </div>
         </section>
@@ -191,8 +279,8 @@ export default function Home() {
                 },
                 {
                   n: '02',
-                  heading: 'Get 7 signals checked',
-                  body: 'Message match, trust, mobile CTA, load time, CTA clarity, form friction, compliance - scored against your actual page.',
+                  heading: 'Get 9 signals checked',
+                  body: 'Message match, trust, mobile CTA, load time, CTA clarity, above fold, ad signals, SEO foundations, AI readiness — scored against your actual page.',
                 },
                 {
                   n: '03',
@@ -262,6 +350,7 @@ export default function Home() {
                       'Prioritized fixes with impact and effort scores',
                       'No signup to see your results',
                       '$97 One-Leak Repair Sprint implements your highest-confidence fix',
+                      'Free re-audit 30 days after you implement the fix',
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-2">
                         <span className="mt-0.5 shrink-0 text-accent">✓</span>

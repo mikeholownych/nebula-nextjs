@@ -50,7 +50,7 @@ export const COMPARISONS: Record<string, Comparison> = {
     rows: [
       { feature: "Cost", nebula: "Free audit + $97 fix prompts", competitor: "Free", nebulaWins: false },
       { feature: "Requires email to see results", nebula: "No", competitor: "Yes — email is required before results are shown", nebulaWins: true },
-      { feature: "Checks conversion signals", nebula: "Yes — 7 signals including CTA, trust, social proof, message match", competitor: "No — performance, SEO, mobile, security only", nebulaWins: true },
+      { feature: "Checks conversion signals", nebula: "Yes — 9 signals including CTA, trust, social proof, message match", competitor: "No — performance, SEO, mobile, security only", nebulaWins: true },
       { feature: "Output specificity", nebula: "Evidence from your actual page HTML per signal", competitor: "Overall grade + 4 category scores — 17 metrics claimed", nebulaWins: true },
       { feature: "Deep landing pages supported", nebula: "Yes — any public URL", competitor: "No — homepage scan only", nebulaWins: true },
       { feature: "Fix path included", nebula: "$97 AI prompts targeted to your specific failing signals", competitor: "Generic tiered recommendations only — no AI prompts", nebulaWins: true },
@@ -91,7 +91,7 @@ export const COMPARISONS: Record<string, Comparison> = {
       { feature: "Cost", nebula: "Free audit + $97 one-time fix prompts", competitor: "$29 to $249/month — AI Smart Traffic requires Optimize at $249/mo", nebulaWins: true },
       { feature: "Requires signup and credit card", nebula: "No", competitor: "Yes — 14-day trial requires credit card", nebulaWins: true },
       { feature: "Works on your existing page", nebula: "Yes — paste any public URL", competitor: "No — pages must be built inside Unbounce", nebulaWins: true },
-      { feature: "Audits why a page is not converting", nebula: "Yes — 7 conversion signals, evidence per finding", competitor: "No — Smart Traffic routes between variants, it does not diagnose", nebulaWins: true },
+      { feature: "Audits why a page is not converting", nebula: "Yes — 9 conversion signals, evidence per finding", competitor: "No — Smart Traffic routes between variants, it does not diagnose", nebulaWins: true },
       { feature: "Time to first insight", nebula: "Under 2 minutes", competitor: "Days to weeks — Smart Traffic requires 50+ visits to learn", nebulaWins: true },
       { feature: "Platform lock-in", nebula: "None — findings apply to your existing stack", competitor: "Full lock-in — requires migrating pages to Unbounce builder", nebulaWins: true },
       { feature: "Ongoing optimization", nebula: "30-day re-audit included", competitor: "Continuous A/B testing and traffic routing — if you stay on the platform", nebulaWins: false },

@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import Link from 'next/link'
 import { Card } from '@/components/ui'
 import PurchaseTracker from './PurchaseTracker'
@@ -5,7 +6,7 @@ import PurchaseTracker from './PurchaseTracker'
 export default function ThankYouPage() {
   return (
     <main className="min-h-screen bg-bg px-6 py-12 flex items-start justify-center pt-24">
-      <PurchaseTracker />
+      <Suspense fallback={null}><PurchaseTracker /></Suspense>
       <div className="mx-auto max-w-lg w-full space-y-6">
 
         {/* Confirmation */}

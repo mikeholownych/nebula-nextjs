@@ -335,7 +335,7 @@ export default function AboveFoldLandingPagePage() {
               Not sure what is visible above the fold on your page?
             </p>
             <p className="text-fg-muted text-sm mb-4">
-              The free Nebula audit checks all 7 conversion signals - including
+              The free Nebula audit checks all 9 conversion signals - including
               mobile layout (signal 3) - and returns a prioritised fix list.
             </p>
             <Link
@@ -372,7 +372,7 @@ export default function AboveFoldLandingPagePage() {
               Find the leak on your page
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
-              The free Nebula audit checks all 7 signals and returns a
+              The free Nebula audit checks all 9 signals and returns a
               prioritised list of what to fix first. The $97 One-Leak Repair
               Sprint selects one high-confidence page-level repair, confirms
               the scope with you, implements it, and verifies the live

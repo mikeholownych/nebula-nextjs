@@ -26,6 +26,8 @@ export interface AuditResult {
   status: string
   score: number
   grade: string
+  composite?: number
+  composite_anchor?: number
   findings: Finding[]
   error?: string
 }
@@ -99,6 +101,12 @@ export function parseAuditResult(value: unknown): AuditResult {
     status: text(value.status, 'unknown', 50),
     score: score(value.score),
     grade: text(value.grade, 'N/A', 3),
+    composite: typeof value.composite === 'number' && Number.isFinite(value.composite)
+      ? Math.min(10, Math.max(0, value.composite))
+      : undefined,
+    composite_anchor: typeof value.composite_anchor === 'number' && Number.isFinite(value.composite_anchor)
+      ? Math.min(10, Math.max(0, value.composite_anchor))
+      : undefined,
     findings,
     error: typeof value.error === 'string' ? text(value.error, '', 300) : undefined,
   }

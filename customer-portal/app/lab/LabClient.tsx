@@ -164,6 +164,65 @@ export default function LabClient() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<LabResponse | null>(null)
+  // Save-to-workspace state
+  const [saveEmail, setSaveEmail] = useState<string>(() => {
+    if (typeof window === 'undefined') return ''
+    return window.localStorage.getItem('nebula_ws_email') || ''
+  })
+  const [saveLabel, setSaveLabel] = useState('')
+  const [saving, setSaving] = useState(false)
+  const [saveError, setSaveError] = useState<string | null>(null)
+  const [savedId, setSavedId] = useState<string | null>(null)
+
+  function buildSavePayload() {
+    if (!result) return null
+    const comps: Record<string, { status?: string; score?: number | null }> = {}
+    for (const [key, c] of Object.entries(result.components)) {
+      comps[key] = { status: c.status, score: c.score }
+    }
+    return {
+      url: result.url,
+      score: result.score ?? 0,
+      grade: result.grade,
+      components: comps,
+      adCopy: adCopy.trim() || null,
+    }
+  }
+
+  async function handleSave(e: React.FormEvent) {
+    e.preventDefault()
+    const email = saveEmail.trim().toLowerCase()
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setSaveError('Enter a valid email address')
+      return
+    }
+    const payload = buildSavePayload()
+    if (!payload) return
+    setSaving(true)
+    setSaveError(null)
+    try {
+      const res = await fetch('/api/lab-experiments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, label: saveLabel.trim() || `Run ${new Date().toLocaleDateString()}`, ...payload }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setSaveError(data.error ?? 'Save failed')
+      } else {
+        window.localStorage.setItem('nebula_ws_email', email)
+        setSavedId(data.id)
+        posthog.capture('lab_experiment_saved', {
+          page_domain: (() => { try { return new URL(payload.url).hostname } catch { return payload.url } })(),
+          score: payload.score,
+        })
+      }
+    } catch {
+      setSaveError('Could not reach the save endpoint.')
+    } finally {
+      setSaving(false)
+    }
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -272,6 +331,69 @@ export default function LabClient() {
                 Run full free audit →
               </Link>
             </div>
+
+            {/* Save to workspace */}
+            {savedId ? (
+              <div className="rounded-2xl border border-accent/40 bg-accent/10 px-5 py-4">
+                <p className="text-sm font-semibold text-accent">
+                  ✓ Saved to your workspace
+                </p>
+                <p className="mt-1 text-sm text-fg-muted">
+                  Find it under Workspace → Experiments, track variants, and mark the winner as
+                  production.
+                </p>
+                <Link
+                  href="/workspace"
+                  className="mt-3 inline-block rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
+                >
+                  Open workspace →
+                </Link>
+              </div>
+            ) : (
+              <form onSubmit={handleSave} className="rounded-2xl border border-border bg-bg-panel p-5">
+                <p className="text-sm font-semibold text-fg">Save this run to your workspace</p>
+                <p className="mt-0.5 text-xs text-fg-muted">
+                  Track experiments (Headline A, B, C…), compare scores, and mark the winner as
+                  production.
+                </p>
+                <div className="mt-3 grid gap-3 sm:grid-cols-[1fr_1.2fr]">
+                  <div>
+                    <label htmlFor="lab-save-label" className="mb-1 block text-xs font-semibold text-fg-muted">
+                      Label
+                    </label>
+                    <input
+                      id="lab-save-label"
+                      type="text"
+                      value={saveLabel}
+                      onChange={(e) => setSaveLabel(e.target.value)}
+                      placeholder="Headline A"
+                      className="w-full rounded-xl border border-border bg-bg px-3 py-2.5 text-sm text-fg placeholder:text-fg-muted/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="lab-save-email" className="mb-1 block text-xs font-semibold text-fg-muted">
+                      Workspace email
+                    </label>
+                    <input
+                      id="lab-save-email"
+                      type="email"
+                      value={saveEmail}
+                      onChange={(e) => setSaveEmail(e.target.value)}
+                      placeholder="you@company.com"
+                      className="w-full rounded-xl border border-border bg-bg px-3 py-2.5 text-sm text-fg placeholder:text-fg-muted/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    />
+                  </div>
+                </div>
+                {saveError && <p className="mt-2 text-sm text-red-400">{saveError}</p>}
+                <button
+                  type="submit"
+                  disabled={saving}
+                  className="mt-3 rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors disabled:opacity-50"
+                >
+                  {saving ? 'Saving…' : 'Save experiment'}
+                </button>
+              </form>
+            )}
 
             {/* Conversion layer */}
             <div className="space-y-4">

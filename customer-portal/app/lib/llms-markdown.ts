@@ -1,0 +1,222 @@
+import { publicFacts } from './public-facts'
+import { TEARDOWNS } from '@/app/teardowns/[slug]/data'
+import { getArticles } from '@/app/learning-centre/lib/getArticles'
+
+/**
+ * Markdown variants for key public pages, served at the same URL + ".md"
+ * per the llms.txt proposal (https://llmstxt.org/): "pages that have
+ * information that might be useful for LLMs to read provide a clean
+ * markdown version of those pages at the same URL as the original page,
+ * but with .md appended."
+ *
+ * Everything here is derived from canonical data sources (public-facts.ts,
+ * teardown data) so the mirrors cannot drift from the HTML pages.
+ */
+
+const site = 'https://nebulacomponents.shop'
+
+function markdownPage(title: string, canonicalPath: string, body: string): string {
+  return [
+    `# ${title}`,
+    '',
+    `> Markdown version of ${site}${canonicalPath}`,
+    '',
+    body.trim(),
+    '',
+  ].join('\n')
+}
+
+export function buildTeardownsIndexMarkdown(): string {
+  const entries = Object.values(TEARDOWNS)
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map(
+      (t) =>
+        `- [${t.name}](${site}/teardowns/${t.slug}.md): ${t.domain} — ${t.score}/10, Grade ${t.grade}. ${t.summary}`
+    )
+    .join('\n')
+
+  return markdownPage(
+    'Nebula Teardowns',
+    '/teardowns',
+    `Nebula publishes public landing page teardowns as evidence-based growth content: real pages, cold paid-traffic conditions, 9-signal scoring, and annotated findings. Every finding cites the observable condition — not an opinion.
+
+HTML index: ${site}/teardowns
+
+## All Teardowns
+
+${entries}
+
+## Method
+
+Each teardown checks the same 9 signals as the free audit: message match, above-fold trust, mobile CTA visibility, core web vitals, CTA clarity, form friction, and compliance. Scores are snapshots of page-level conditions for cold paid traffic — not verdicts on the business.
+
+Each teardown page is also available in markdown by appending .md to its URL (e.g. ${site}/teardowns/knallhart.md).`
+  )
+}
+
+export function buildTeardownMarkdown(slug: string): string | null {
+  const t = TEARDOWNS[slug]
+  if (!t) return null
+
+  const findings = t.findings
+    .map((f) => `- **${f.label}** (impact ${f.impact}/10 · ${f.quadrant})\n  - Issue: ${f.issue}\n  - Evidence: ${f.evidence}\n  - Fix: ${f.fix}`)
+    .join('\n')
+
+  return markdownPage(
+    `${t.name} Landing Page Audit — ${t.score}/10`,
+    `/teardowns/${t.slug}`,
+    `Nebula ran its 9-signal audit on ${t.url}.
+
+- Score: ${t.score}/10
+- Grade: ${t.grade}
+- Audited: ${t.auditedAt}
+
+${t.summary}
+
+${t.context}
+
+## Findings
+
+${findings}
+
+---
+HTML version: ${site}/teardowns/${t.slug}
+Run your own free audit: ${site}/audit`
+  )
+}
+
+const fixPack = publicFacts.fixPack
+
+const pricingMarkdown = markdownPage(
+  'Nebula Pricing',
+  '/pricing',
+  `Nebula sells one thing: fixing landing page conversion leaks for founders who are spending on ads and not converting.
+
+## One-Leak Repair Sprint — $${(fixPack.priceCents / 100).toFixed(0)} (one-time)
+
+- One landing page, one high-confidence page-level repair selected from your free audit.
+- Delivery: ${fixPack.delivery.artifact} via ${fixPack.delivery.method} (${fixPack.delivery.timing}).
+- Implementation: ${fixPack.implementation.owner === 'customer_or_developer' ? 'you or your developer' : 'Nebula'} implements; Nebula requires no site access (${fixPack.implementation.nebulaSiteAccess}).
+- 30-day re-audit included (${fixPack.reAudit.windowDays} days).
+- Price locked through ${fixPack.priceValidUntil}.
+- Checkout: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
+
+## Retainer — $1,497
+
+For founders who want ongoing conversion work: recurring audits, prioritized fixes, and measurement.
+
+## Agency Partner — $497
+
+For agencies that want white-label conversion audits for their clients.
+
+No sales calls. Self-serve checkout. Evidence-first: the audit names the leak before you pay for anything.`
+)
+
+const auditMarkdown = markdownPage(
+  'Free Landing Page Audit — Nebula',
+  '/audit',
+  `The free Nebula audit is a 60-second automated diagnosis of any landing page, scoring 9 conversion signals:
+
+1. Message-match: does the ad headline match the page headline?
+2. Above-fold trust: at least two trust signals above the scroll line?
+3. Mobile CTA visibility: primary CTA visible on a 375px viewport without scrolling?
+4. Core Web Vitals: LCP < 2.5s, CLS < 0.1, INP < 200ms?
+5. CTA clarity: exactly one primary action, clearly labeled?
+6. Form friction: five fields or fewer, clear labels, stated benefit?
+7. Compliance: GDPR/CCPA without blocking the conversion path?
+
+Each failing signal is tied to evidence from the actual page and ranked by likely impact.
+
+- No signup required to run it
+- No email required to see results
+- No sales calls
+- Full report delivered instantly
+
+Run it: ${site}/audit`
+)
+
+const aboutMarkdown = markdownPage(
+  'About Nebula',
+  '/about',
+  `Mike Holownych founded Nebula Components to provide evidence-backed landing page diagnosis and bounded remediation materials. The operating premise: most landing page failures are diagnosable, they follow repeating patterns, and they can be fixed. The problem is not the ad — it is the page.
+
+The free audit checks 9 conversion signals with observable evidence. The One-Leak Repair Sprint ($97) implements the highest-confidence fix with a 30-day re-audit. Nebula publishes public teardowns as evidence-based content and maintains Citable, an open-source CLI for search and AI discoverability governance.
+
+LinkedIn: https://linkedin.com/in/mikeholownych
+GitHub: https://github.com/mikeholownych`
+)
+
+const learningCentreMarkdown = markdownPage(
+  'Learning Centre — Nebula',
+  '/learning-centre',
+  `${getArticles().length} articles diagnosing specific landing page failure patterns for founders running paid traffic: landing pages not converting, Google Ads clicks without sales, Facebook ads getting no leads, B2B SaaS and eCommerce conversion problems, high CPC with low conversion rate, bounce rate analysis, mobile optimization, CTA failures, message-match checklists, proof-before-CTA frameworks, and the paid traffic leak map.
+
+Every article is available as a clean markdown mirror at /learning-centre/<slug>.md:
+
+${getArticles()
+  .sort((a, b) => a.title.localeCompare(b.title))
+  .map((a) => `- [${a.title}](https://nebulacomponents.shop/learning-centre/${a.slug}.md) — ${a.category}`)
+  .join('\n')}
+
+HTML article index: ${site}/learning-centre`
+)
+
+const playbooksMarkdown = markdownPage(
+  'Playbooks — Nebula',
+  '/playbooks',
+  `Founder productivity and AI-ops guides published by Nebula. Topics cover working with AI agents, automation workflows, and operating systems for solo founders.
+
+Index: ${site}/playbooks`
+)
+
+const caseStudiesMarkdown = markdownPage(
+  'Case Studies — Nebula',
+  '/case-studies',
+  `Nebula publishes a customer case study only when it meets four requirements: a real client (or a documented reason for anonymization), an actual before/after metric, a defined measurement window, and inspectable supporting evidence.
+
+As of ${new Date().toISOString().slice(0, 10)}, zero case studies are approved for publication. Nebula does not publish illustrative outcomes as customer results.
+
+Index: ${site}/case-studies`
+)
+
+const privacyMarkdown = markdownPage(
+  'Privacy Policy — Nebula',
+  '/privacy-policy',
+  `Nebula collects only what it needs to run the audit service:
+
+- Audit submissions are processed server-side; results pages require no account.
+- Analytics: cohort/persona aggregates only; no individual visitor profiling. GA4 runs with Consent Mode v2, default denied.
+- Email addresses submitted to unlock results are used to deliver the report and (optionally) post-audit follow-up; opt-out available.
+- No data sold. No individual visitor profiles.
+
+Full policy: ${site}/privacy-policy`
+)
+
+const citableRelease = publicFacts.citable.release
+const citableMarkdown = markdownPage(
+  'Citable — Open-Source AI Discoverability Governance',
+  '/resources/citable',
+  `Citable is an open-source CLI for search and AI discoverability governance: auditing whether a site is actually retrievable by search engines and AI systems, with evidence rather than opinions.
+
+- Version: ${citableRelease.version}
+- License: ${citableRelease.license}
+- npm: ${citableRelease.package}
+- GitHub: https://github.com/mikeholownych/citable
+- Documentation: ${site}/resources/citable
+
+Citable runs ${citableRelease.detectorCount} detectors across ${citableRelease.namespaceCount} namespaces and ${citableRelease.registryCount} schema-validated registries, covering crawl, page, SEO, AEO, GEO, entity, claims, evidence, schema, agent, lifecycle, corroboration, and architecture signals. Each run produces an evidence package: raw observations, detector logic, and findings with severity, confidence, and remediation.
+
+What Citable does not prove: that a page will be crawled, ranked, cited, or that any remediation will produce a measurable outcome. Those are probabilistic outcomes influenced by factors outside the page.`
+)
+
+export const LLMS_MARKDOWN: Record<string, string> = {
+  audit: auditMarkdown,
+  pricing: pricingMarkdown,
+  about: aboutMarkdown,
+  'learning-centre': learningCentreMarkdown,
+  teardowns: buildTeardownsIndexMarkdown(),
+  playbooks: playbooksMarkdown,
+  'case-studies': caseStudiesMarkdown,
+  'privacy-policy': privacyMarkdown,
+  'resources/citable': citableMarkdown,
+}

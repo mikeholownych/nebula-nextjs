@@ -15,9 +15,9 @@ export type FixPackPublicFact = {
     sessionEndpoint: '/api/checkout'
   }
   delivery: {
-    artifact: 'tailored_prompt_pack'
-    method: 'automated_email'
-    timing: 'within_minutes'
+    artifact: 'targeted_ai_prompts'
+    method: 'instant_on_checkout'
+    timing: 'immediately'
   }
   implementation: {
     owner: 'customer_or_developer'

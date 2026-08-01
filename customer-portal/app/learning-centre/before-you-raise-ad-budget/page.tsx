@@ -5,7 +5,7 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Before You Raise Ad Budget: Fix The Leaks First | Nebula Components',
   description:
-    'Raising ad budget before fixing landing page leaks scales waste proportionally. Here is the 7-signal checklist to run before touching your daily spend.',
+    'Raising ad budget before fixing landing page leaks scales waste proportionally. Here is the 9-signal checklist to run before touching your daily spend.',
   alternates: {
     canonical: 'https://nebulacomponents.shop/learning-centre/before-you-raise-ad-budget',
   },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const articleSchema = createArticleSchema({
   headline: 'Before You Raise Ad Budget: Fix The Leaks First',
   description:
-    'Raising ad budget before fixing landing page leaks scales waste proportionally. Here is the 7-signal checklist to run before touching your daily spend.',
+    'Raising ad budget before fixing landing page leaks scales waste proportionally. Here is the 9-signal checklist to run before touching your daily spend.',
   url: 'https://nebulacomponents.shop/learning-centre/before-you-raise-ad-budget',
   publishedDate: '2026-07-16',
   modifiedDate: '2026-07-21',
@@ -61,7 +61,7 @@ const faqSchema = {
       name: 'What is a practical way to check for landing page leaks before raising budget?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Run the 7-signal check in order: (1) does the headline match the ad promise? (2) is proof visible before the CTA? (3) does the page load and display correctly on mobile at 390px? (4) is LCP under 2.5 seconds? (5) is there one clear CTA - not three options? (6) does the form ask for the minimum required information? (7) is there specific social proof - a result, a number, a named customer? The first signal that fails is the first fix. Earlier signals gate later ones.',
+        text: 'Run the 9-signal check in order: (1) does the headline match the ad promise? (2) is proof visible before the CTA? (3) does the page load and display correctly on mobile at 390px? (4) is LCP under 2.5 seconds? (5) is there one clear CTA - not three options? (6) does the form ask for the minimum required information? (7) is there specific social proof - a result, a number, a named customer? The first signal that fails is the first fix. Earlier signals gate later ones.',
       },
     },
   ],
@@ -172,10 +172,10 @@ export default function BeforeYouRaiseAdBudget() {
             </ul>
           </section>
 
-          {/* 7-signal pre-spend checklist */}
+          {/* 9-signal pre-spend checklist */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
-              The 7-signal pre-spend checklist
+              The 9-signal pre-spend checklist
             </h2>
             <p className="leading-relaxed text-fg-muted">
               Run these in order. The signals are sequenced: a visitor who
@@ -241,7 +241,7 @@ export default function BeforeYouRaiseAdBudget() {
               {[
                 'Your paid search conversion rate is at or above the average for your vertical (WordStream 2026: Business Services 4.85%, all-industries 8.18%)',
                 'You have at least 500 paid sessions through the same page to confirm the rate is stable - not a statistical artefact of a good week',
-                'You have verified the 7 signals are structurally in place on the page',
+                'You have verified the 9 signals are structurally in place on the page',
                 'You have confirmed the rate holds on mobile (not just desktop)',
                 'Increasing volume does not require changing targeting to lower-intent audiences to find more traffic',
               ].map((item, i) => (
@@ -313,7 +313,7 @@ export default function BeforeYouRaiseAdBudget() {
               Run the leak check before the next budget increase
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
-              The free Nebula audit checks all 7 signals and returns a
+              The free Nebula audit checks all 9 signals and returns a
               prioritised fix list. The $97 One-Leak Repair Sprint selects one
               high-confidence page-level repair, confirms the scope with you,
               implements it, and verifies the live change - before you spend

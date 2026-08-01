@@ -36,6 +36,7 @@ export default function ProcessingPage() {
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(progressInterval)
+          posthog.capture('audit_ready', { audit_id: auditId })
           setStatus('ready')
           return 100
         }
@@ -183,7 +184,10 @@ export default function ProcessingPage() {
             </form>
 
             <button
-              onClick={() => pushWithViewTransition(router, `/audit/${auditId}/results`)}
+              onClick={() => {
+                posthog.capture('audit_email_skipped', { audit_id: auditId })
+                pushWithViewTransition(router, `/audit/${auditId}/results`)
+              }}
               className="mt-4 text-sm text-accent hover:underline"
             >
               View preview now →

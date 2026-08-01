@@ -40,6 +40,8 @@ export async function GET(
       status: data.status,
       score: data.score, // Already converted to float by FastAPI
       grade: data.grade,
+      composite: data.composite ?? undefined,
+      composite_anchor: data.composite_anchor ?? undefined,
       findings: data.findings || [],
       email: data.email,
       name: data.name,

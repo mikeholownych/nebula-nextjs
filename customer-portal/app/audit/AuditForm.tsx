@@ -16,6 +16,12 @@ function AuditFormContent() {
   useEffect(() => {
     const from = searchParams.get('from')
     if (from) setReferrer(decodeURIComponent(from))
+    const prefilled = searchParams.get('url')
+    if (prefilled) setUrl(prefilled)
+    posthog.capture('audit_page_viewed', {
+      referrer: from ? decodeURIComponent(from) : undefined,
+      prefilled: prefilled ? true : undefined,
+    })
   }, [searchParams])
 
   const handleSubmit = async (e: React.FormEvent) => {

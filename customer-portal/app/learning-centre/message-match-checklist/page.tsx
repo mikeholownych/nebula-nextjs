@@ -18,7 +18,7 @@ const articleSchema = createArticleSchema({
     'Message match is the degree to which your landing page fulfills the exact promise your ad made. Use this 60-second audit checklist before your next paid traffic campaign.',
   url: 'https://nebulacomponents.shop/learning-centre/message-match-checklist',
   publishedDate: '2025-07-15',
-  modifiedDate: '2026-07-21',
+  modifiedDate: '2026-07-29',
 })
 
 export default function MessageMatchChecklistPage() {

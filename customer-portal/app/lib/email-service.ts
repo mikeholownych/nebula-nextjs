@@ -25,7 +25,7 @@ export function getEmailTemplate(emailNumber: number, firstName: string = 'there
 
 I noticed you're running paid traffic to your site. The targeting looks solid — but something's breaking between click and conversion.
 
-We've diagnosed what we call the "proof gap" on 47 landing pages this quarter. 94% of founders missing social proof above the fold. The ones who fix it see conversion lift in 11 days average.
+We've run our audit on 54 real landing pages this quarter. The most common leak: social proof missing above the fold. We publish the full pass standards and failure rates so you can judge the claim yourself: https://nebulacomponents.shop/benchmarks
 
 Your page triggered the same pattern. I'm not asking you to buy anything — I want to give you the diagnosis free.
 
@@ -34,24 +34,20 @@ Paste your URL here: https://nebulacomponents.shop
 Takes under two minutes. You'll see exactly what's leaking and which fix pays back fastest.
 
 Mike H
-Founder, Nebula Components
-
-P.S. Last week: SaaS founder burned $15k on Meta with zero conversions. Audit showed the problem in 4 minutes. Fixed in 2 hours. Now at 23 sales/week.`
+Founder, Nebula Components`
     },
     2: {
-      subject: `${firstName}, that $15k wasn't wasted`,
+      subject: `${firstName}, the audit is free`,
       body: `${firstName},
 
 Quick follow-up on yesterday's email.
 
-The SaaS founder I mentioned — $15k burned, zero conversions — thought the problem was their targeting. It wasn't.
-
-The audit showed 3 leaks:
-1. Headline didn't match the ad promise (trust gap)
+Most pages we audit show the same three leaks:
+1. Headline doesn't match the ad promise (trust gap)
 2. No proof visible before CTA (credibility gap)
 3. Multiple competing buttons (decision paralysis)
 
-They fixed leak #1 in 20 minutes. Next day: first sale in 6 weeks.
+We publish the failure rates for all of these on the benchmarks page: https://nebulacomponents.shop/benchmarks
 
 The diagnosis is free. The fix is $97. The ROI is measurable.
 
@@ -59,7 +55,7 @@ Paste your URL: https://nebulacomponents.shop
 
 — Mike H
 
-P.S. They didn't hire us to fix it. They used the audit and did it themselves. That's the point — you should be able to see the problem clearly enough to solve it yourself.`
+P.S. You don't need us to implement anything. The audit shows the problem clearly enough to solve yourself.`
     },
     3: {
       subject: 'Your retargeting is working against you',
@@ -77,7 +73,7 @@ https://nebulacomponents.shop
 
 — Mike H
 
-P.S. One founder we audited cut retargeting spend by 80% after fixing the page. Conversions went up. The page was the leak all along.`
+P.S. Retargeting spend is wasted until the page converts. Run the audit first, then decide.`
     },
     4: {
       subject: 'The 5-point landing page checklist I use',
@@ -93,7 +89,7 @@ Before you run your next ad, run this 60-second check:
 
 If any of these fail, you're paying for clicks that won't convert.
 
-No pitch. No ask. Just a framework that's worked for 47 founders this quarter.
+No pitch. No ask. Just the checklist our audits are built around.
 
 — Mike H
 

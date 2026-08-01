@@ -30,7 +30,7 @@ const faqSchema = {
       name: 'What is a good landing page conversion rate?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "It depends on traffic source, offer type, and vertical. For paid search (Google Ads), WordStream's 2026 benchmarks across 13,000+ campaigns found an all-industries average of 8.18%. For Business Services - the most relevant vertical for B2B lead gen - the average is 4.85%. A rate below your vertical's average with meaningful traffic (500+ sessions) is a diagnostic signal, not a verdict. The right question is not 'is my rate good' but 'which of the 7 conversion signals is pulling it down.'",
+        text: "It depends on traffic source, offer type, and vertical. For paid search (Google Ads), WordStream's 2026 benchmarks across 13,000+ campaigns found an all-industries average of 8.18%. For Business Services - the most relevant vertical for B2B lead gen - the average is 4.85%. A rate below your vertical's average with meaningful traffic (500+ sessions) is a diagnostic signal, not a verdict. The right question is not 'is my rate good' but 'which of the 9 conversion signals is pulling it down.'",
       },
     },
     {
@@ -62,7 +62,7 @@ const faqSchema = {
       name: 'How many sessions do I need before my conversion rate is meaningful?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'At least 500 paid traffic sessions to a single landing page before drawing diagnostic conclusions. Below that, variance is too high - a single week with unusual traffic composition can shift a 3% rate to 8% and back without the page changing at all. If you are below 500 sessions, focus on ensuring the 7 signals are in place structurally rather than optimising toward a number.',
+        text: 'At least 500 paid traffic sessions to a single landing page before drawing diagnostic conclusions. Below that, variance is too high - a single week with unusual traffic composition can shift a 3% rate to 8% and back without the page changing at all. If you are below 500 sessions, focus on ensuring the 9 signals are in place structurally rather than optimising toward a number.',
       },
     },
   ],
@@ -241,7 +241,7 @@ export default function LandingPageConversionRateBenchmark() {
               {[
                 'Segment by source and device - confirm the low rate is present on the channel you are optimising for, not an artefact of a high-bounce source dragging the overall number down.',
                 'Check load time - if LCP is above 4 seconds on mobile, fix that before anything else. You cannot diagnose copy or layout problems if visitors are bouncing before the page renders.',
-                'Run the 7-signal check - message-match, trust, mobile layout, load time, CTA clarity, form friction, proof. The first broken signal is the first fix. Earlier signals gate later ones.',
+                'Run the 9-signal check - message-match, trust, mobile layout, load time, CTA clarity, form friction, proof. The first broken signal is the first fix. Earlier signals gate later ones.',
                 'Compare against the right benchmark - your vertical, your traffic source, your offer type. A B2B SaaS lead-gen page at 4% compared against an e-commerce transaction benchmark is a category error.',
               ].map((step, i) => (
                 <li key={i} className="flex items-start gap-3 text-fg-muted">

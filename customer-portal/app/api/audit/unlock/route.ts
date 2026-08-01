@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { appendFile } from 'fs/promises'
 import { getPostHogClient, captureServerException } from '@/app/lib/posthog-server'
 import { signAuditUnlock } from '@/app/lib/audit-unlock-token'
 
@@ -40,6 +41,24 @@ export async function POST(request: NextRequest) {
     }
 
     const audit = await auditRes.json()
+
+    // 1b. Record the audit completer for the post-audit nurture track
+    //     (read by nurture_engine.py pick_audit_nurture). Non-fatal.
+    try {
+      await appendFile(
+        '/home/mike/nebula/audit_leads.jsonl',
+        JSON.stringify({
+          audit_id,
+          email,
+          name: name ?? null,
+          url: audit.url ?? null,
+          timestamp: new Date().toISOString(),
+        }) + '\n',
+        'utf8'
+      )
+    } catch {
+      // Nurture intake must never block unlock
+    }
 
     // 2. Send the full report email. Unlock remains available if delivery is
     //    down, but the response must never claim an unconfirmed send.

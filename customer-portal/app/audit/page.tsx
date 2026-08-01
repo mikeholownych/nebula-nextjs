@@ -67,7 +67,7 @@ export default function AuditPage() {
                 See if the page is what&apos;s killing your ads.
               </h1>
               <p className="mt-4 max-w-lg text-lg leading-7 text-fg-muted">
-                Paste your URL. Get 7 conversion signals checked against your actual page.
+                Paste your URL. Get 9 conversion signals checked against your actual page.
                 No email required to see results.
               </p>
               <ul className="mt-6 space-y-2">
@@ -133,7 +133,7 @@ export default function AuditPage() {
               <div className="h-8 w-px bg-border hidden sm:block" />
               <div>
                 <p className="font-semibold text-fg text-sm">example-startup.com</p>
-                <p className="text-xs text-fg-muted">{failCount} of 7 signals failing</p>
+                <p className="text-xs text-fg-muted">{failCount} of 9 signals failing</p>
               </div>
               <div className="ml-auto rounded-lg bg-signal-fail/10 px-3 py-1 font-mono text-xs text-signal-fail">
                 Grade D
@@ -225,7 +225,7 @@ export default function AuditPage() {
             <h2 className="mb-3 text-base font-semibold text-fg">How It Works</h2>
             <ol className="list-decimal space-y-1 pl-5 text-sm text-fg-muted">
               <li>Enter your landing page URL in the field above</li>
-              <li>The audit engine fetches and scores your page across all 7 signals</li>
+              <li>The audit engine fetches and scores your page across all 9 signals</li>
               <li>You receive a structured report with specific, actionable findings</li>
               <li>Each finding includes a severity rating and a recommended fix</li>
             </ol>
@@ -279,16 +279,16 @@ export default function AuditPage() {
               </h2>
               <p className="mb-6 text-base text-fg-muted leading-7">
                 The free audit shows you what is broken and in what order to fix it.
-                The Repair Sprint selects one high-confidence page-level repair, confirms
-                the scope with you, implements it on your live page, and verifies the
-                change. One payment, no retainer, no calls required.
+                Pay $97 and receive targeted AI prompts written for your specific failing signals —
+                exact copy changes, code snippets, or configuration fixes — delivered instantly.
+                No site access needed. You implement them yourself or hand them to your developer.
               </p>
               <div className="space-y-2">
                 {[
-                  'Full 7-point diagnosis written up',
-                  'One high-confidence repair implemented and verified on your live page',
-                  'Scope confirmed with you before any change is made',
-                  'One additional same-scope evidence check within 30 days',
+                  'Targeted AI prompts written for your specific failing signals',
+                  'Exact copy, code, or config changes — not generic advice',
+                  'Delivered instantly after checkout — no emails to wait for',
+                  'One additional same-scope re-audit within 30 days',
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2 text-sm text-fg-muted">
                     <span className="mt-0.5 shrink-0 text-accent">✓</span>

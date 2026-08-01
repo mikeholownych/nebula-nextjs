@@ -1,0 +1,52 @@
+import { NextRequest, NextResponse } from 'next/server'
+
+/**
+ * Move a recommendation between kanban columns
+ * PATCH /api/recommendations/[id]  { status: 'to_fix' | 'doing' | 'done' }
+ */
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params
+    let body: { status?: string }
+    try {
+      body = await request.json()
+    } catch {
+      return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
+    }
+
+    const status = body.status
+    if (!status || !['to_fix', 'doing', 'done'].includes(status)) {
+      return NextResponse.json({ error: 'Invalid status' }, { status: 400 })
+    }
+
+    const response = await fetch(
+      `http://127.0.0.1:8001/audit/recommendations/${encodeURIComponent(id)}`,
+      {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status }),
+        signal: AbortSignal.timeout(10000),
+      }
+    )
+
+    if (!response.ok) {
+      const data = await response.json().catch(() => null)
+      return NextResponse.json(
+        { error: data?.message || 'Failed to update recommendation' },
+        { status: response.status }
+      )
+    }
+
+    const data = await response.json()
+    return NextResponse.json(data)
+  } catch (error) {
+    console.error('Recommendation update error:', error)
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    )
+  }
+}

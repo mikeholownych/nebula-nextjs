@@ -140,7 +140,7 @@ export default function LandingPageBounceRateHigh() {
                 {
                   n: '1',
                   label: 'Offer mismatch',
-                  body: 'The ad promised one thing. The page delivered another. If visitors do not see what they came for within the first viewport, they leave. This is message-match failure - signal 1 of the 7 conversion signals. A generic headline, a buried CTA, or an unclear value proposition all produce the same bounce pattern: high CTR on the ad, high bounce on the page.',
+                  body: 'The ad promised one thing. The page delivered another. If visitors do not see what they came for within the first viewport, they leave. This is message-match failure - signal 1 of the 9 conversion signals. A generic headline, a buried CTA, or an unclear value proposition all produce the same bounce pattern: high CTR on the ad, high bounce on the page.',
                 },
                 {
                   n: '2',
@@ -279,7 +279,7 @@ export default function LandingPageBounceRateHigh() {
               Find the cause on your page
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
-              The free Nebula audit checks all 7 signals and identifies which
+              The free Nebula audit checks all 9 signals and identifies which
               one is producing your bounce. The $97 One-Leak Repair Sprint
               selects one high-confidence page-level repair, confirms the
               scope with you, implements it, and verifies the live change.

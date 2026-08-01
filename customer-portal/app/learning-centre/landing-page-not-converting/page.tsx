@@ -25,7 +25,7 @@ const articleSchema = createArticleSchema({
 const faqItems = [
     {
       question: 'What is the most common reason a landing page does not convert?',
-      answer: "A broken promise between the ad and the page headline. When the ad says '50% off running shoes' and the page headline says 'Shop Our Collection,' the visitor has no confirmation they are in the right place and leaves. This is what the message-match signal in Nebula's 7-signal audit framework measures.",
+      answer: "A broken promise between the ad and the page headline. When the ad says '50% off running shoes' and the page headline says 'Shop Our Collection,' the visitor has no confirmation they are in the right place and leaves. This is what the message-match signal in Nebula's 9-signal audit framework measures.",
     },
     {
       question: 'How do I know if my landing page conversion rate is actually low?',
@@ -202,7 +202,7 @@ export default function LandingPageNotConvertingPage() {
               Week.&rdquo; Not a paraphrase - the same nouns. The visitor
               arrived because of a specific promise; the headline either
               confirms they are in the right place or it does not.
-              Message-match is signal 1 of the 7 conversion signals the Nebula
+              Message-match is signal 1 of the 9 conversion signals the Nebula
               audit measures, because it determines whether any of the other
               signals get a chance to work.
             </p>
@@ -307,7 +307,7 @@ export default function LandingPageNotConvertingPage() {
               Not sure which leak is active on your page?
             </p>
             <p className="text-fg-muted text-sm mb-4">
-              Run the free Nebula audit. It checks all 7 conversion signals and
+              Run the free Nebula audit. It checks all 9 conversion signals and
               tells you which one is breaking the sequence.
             </p>
             <Link
@@ -407,14 +407,14 @@ export default function LandingPageNotConvertingPage() {
             </p>
           </section>
 
-          {/* Decision tree — canonical 7 signals */}
+          {/* Decision tree — canonical 9 signals */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Which leak do you fix first?
             </h2>
             <p className="mb-5 leading-relaxed text-fg-muted">
               The five leaks above are the failure modes a founder experiences;
-              the 7 conversion signals are what the Nebula audit measures - each
+              the 9 conversion signals are what the Nebula audit measures - each
               signal maps to the leak it surfaces. Fix in signal order. Earlier
               signals act as gates: if signal 1 is broken, fixing signal 6 does
               nothing.
@@ -550,7 +550,7 @@ export default function LandingPageNotConvertingPage() {
               Find the leak on your page
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
-              The free Nebula audit checks all 7 signals and returns a
+              The free Nebula audit checks all 9 signals and returns a
               prioritised list of what to fix first. The $97 One-Leak Repair
               Sprint selects one high-confidence page-level repair, confirms
               the scope with you, implements it, and verifies the live

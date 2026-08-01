@@ -80,7 +80,7 @@ export default async function TeardownPage({
           {t.domain} — What the Audit Engine Found
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
-          Nebula ran its 7-signal audit on{' '}
+          Nebula ran its 9-signal audit on{' '}
           <a
             href={t.url}
             target="_blank"

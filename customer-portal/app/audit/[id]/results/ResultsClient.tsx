@@ -356,19 +356,74 @@ function findingAnchor(finding: Finding): string {
   return `finding-${finding.key.replace(/[^a-z0-9_-]+/gi, '-').toLowerCase()}`
 }
 
-function ReportNavigation() {
+type ReportTabId = (typeof REPORT_NAVIGATION)[number]['id']
+
+function OverviewNext({ onSelect, unlocked, findingCount }: {
+  onSelect: (id: ReportTabId) => void
+  unlocked: boolean
+  findingCount: number
+}) {
+  return (
+    <section id="next-steps" className="border-b border-border py-12">
+      <h2 className="text-xl font-extrabold text-fg">Next steps</h2>
+      <p className="mt-2 max-w-[65ch] text-base leading-7 text-fg-muted">
+        The overview is the orientation. The tabs above hold the evidence, the signal breakdown, and the repair plan.
+      </p>
+      <div className="mt-6 grid gap-4 sm:grid-cols-3">
+        <button
+          onClick={() => onSelect('evidence')}
+          className="group rounded-xl border border-border p-5 text-left transition-colors hover:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        >
+          <span className="block text-sm font-semibold text-fg">Evidence</span>
+          <span className="mt-1 block text-sm leading-6 text-fg-muted">
+            {findingCount} failed signal{findingCount === 1 ? '' : 's'} with measured deltas and selectors
+          </span>
+        </button>
+        <button
+          onClick={() => onSelect('signals')}
+          className="group rounded-xl border border-border p-5 text-left transition-colors hover:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        >
+          <span className="block text-sm font-semibold text-fg">Signals</span>
+          <span className="mt-1 block text-sm leading-6 text-fg-muted">
+            Seven conversion signals, one clean pass standard each
+          </span>
+        </button>
+        <button
+          onClick={() => onSelect('remediation')}
+          className="group rounded-xl border border-border p-5 text-left transition-colors hover:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        >
+          <span className="block text-sm font-semibold text-fg">Repair plan</span>
+          <span className="mt-1 block text-sm leading-6 text-fg-muted">
+            {unlocked ? 'Select your $97 repair' : 'Unlock every finding to see the full plan'}
+          </span>
+        </button>
+      </div>
+    </section>
+  )
+}
+
+function ReportTabs({ active, onSelect }: { active: ReportTabId; onSelect: (id: ReportTabId) => void }) {
   return (
     <nav aria-label="Audit report sections" className="sticky top-20 z-20 -mx-6 mb-12 border-y border-border bg-bg/95 px-6 py-4 backdrop-blur-sm">
-      <div className="mx-auto flex w-full max-w-5xl gap-2 overflow-x-auto pb-1 sm:justify-center">
-        {REPORT_NAVIGATION.map((item) => (
-          <a
-            key={item.id}
-            href={`#${item.id}`}
-            className="min-h-11 shrink-0 rounded-lg border border-border px-4 py-2 text-sm font-semibold text-fg-muted transition-colors hover:border-accent hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          >
-            {item.label}
-          </a>
-        ))}
+      <div className="mx-auto flex w-full max-w-5xl gap-2 overflow-x-auto pb-1 sm:justify-center" role="tablist">
+        {REPORT_NAVIGATION.map((item) => {
+          const selected = item.id === active
+          return (
+            <button
+              key={item.id}
+              role="tab"
+              aria-selected={selected}
+              onClick={() => onSelect(item.id)}
+              className={`min-h-11 shrink-0 rounded-lg border px-4 py-2 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                selected
+                  ? 'border-accent bg-accent/10 text-accent'
+                  : 'border-border text-fg-muted hover:border-accent hover:text-accent'
+              }`}
+            >
+              {item.label}
+            </button>
+          )
+        })}
       </div>
     </nav>
   )
@@ -377,6 +432,9 @@ function ReportNavigation() {
 function ReportOverview({ results }: { results: AuditResult }) {
   const summary = summarizeFindings(results.findings)
   const hostname = new URL(results.url).hostname
+  const headline = results.composite ?? results.score
+  const anchor = results.composite_anchor ?? 7.0
+  const weighted = results.composite !== undefined
 
   return (
     <section id="overview" className="scroll-mt-40 border-b border-border pb-16">
@@ -395,10 +453,16 @@ function ReportOverview({ results }: { results: AuditResult }) {
             <div>
               <p className="text-sm font-semibold text-fg-muted">Conversion readiness</p>
               <p className="mt-1 tabular-nums">
-                <span className="text-6xl font-extrabold text-accent">{results.score.toFixed(1)}</span>
+                <span className="text-6xl font-extrabold text-accent">{headline.toFixed(1)}</span>
                 <span className="text-2xl text-fg-muted">/10</span>
               </p>
-              <p className="mt-2 text-sm text-fg-muted">Grade {results.grade} · evidence-backed assessment</p>
+              <p className="mt-2 text-sm text-fg-muted">
+                Grade {results.grade} · {weighted ? 'weighted across high-impact components' : 'evidence-backed assessment'}
+              </p>
+              <p className="mt-1 text-xs text-fg-muted">
+                <span className={headline >= anchor ? 'font-semibold text-accent' : ''}>Good from {anchor.toFixed(1)}</span>
+                {' · '}published component pass standard
+              </p>
             </div>
             <dl className="grid grid-cols-3 gap-6 border-t border-border pt-6 sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0">
               <div>
@@ -421,7 +485,7 @@ function ReportOverview({ results }: { results: AuditResult }) {
   )
 }
 
-function FixFirstQueue({ findings }: { findings: Finding[] }) {
+function FixFirstQueue({ findings, auditId, onGoToRemediation }: { findings: Finding[]; auditId: string; onGoToRemediation?: () => void }) {
   const queue = buildPriorityQueue(findings).slice(0, 3)
 
   return (
@@ -433,9 +497,21 @@ function FixFirstQueue({ findings }: { findings: Finding[] }) {
             Ranked by impact first, then effort. This is the shortest path from diagnosis to a cleaner test.
           </p>
         </div>
-        <a href="#remediation" className="min-h-11 shrink-0 rounded-lg bg-accent px-6 py-4 text-sm font-semibold text-bg transition-colors hover:bg-accent-light">
-          Get every fix — $97
-        </a>
+        {onGoToRemediation ? (
+          <button
+            onClick={() => {
+              posthog.capture('audit_cta_clicked', { audit_id: auditId, cta: 'fix_first_queue' })
+              onGoToRemediation()
+            }}
+            className="min-h-11 shrink-0 rounded-lg bg-accent px-6 py-4 text-sm font-semibold text-bg transition-colors hover:bg-accent-light"
+          >
+            Get every fix — $97
+          </button>
+        ) : (
+          <span className="min-h-11 shrink-0 rounded-lg border border-border px-6 py-4 text-sm font-semibold text-fg-muted">
+            Get every fix — $97
+          </span>
+        )}
       </div>
 
       {queue.length > 0 ? (
@@ -543,16 +619,18 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
   const [sendingEmail, setSendingEmail] = useState(false)
   const [emailSent, setEmailSent] = useState(false)
   const [emailError, setEmailError] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState<ReportTabId>('overview')
 
   useEffect(() => {
     const fetchResults = async () => {
       try {
         const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(auditId)
 
+        let parsed: ReturnType<typeof parseAuditResult>
         if (isUuid) {
           const response = await fetch(`/api/audit/${auditId}`)
           if (!response.ok) throw new Error('Failed to fetch audit')
-          setResults(parseAuditResult(await response.json()))
+          parsed = parseAuditResult(await response.json())
         } else {
           // Legacy: run new audit from URL in path
           const response = await fetch('/api/audit/run', {
@@ -564,8 +642,16 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
             }),
           })
           if (!response.ok) throw new Error('Failed to fetch results')
-          setResults(parseAuditResult(await response.json()))
+          parsed = parseAuditResult(await response.json())
         }
+        setResults(parsed)
+        posthog.capture('audit_results_viewed', {
+          audit_id: auditId,
+          score: parsed.score,
+          grade: parsed.grade,
+          unlocked: initialUnlocked,
+          findings_count: parsed.findings.length,
+        })
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error')
       } finally {
@@ -687,12 +773,33 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
   return (
     <main id="main-content" className="min-h-screen bg-bg px-6 py-12 pt-24">
       <div className="mx-auto max-w-5xl">
-        <ReportNavigation />
-        <ReportOverview results={results} />
-        <FixFirstQueue findings={results.findings} />
-        <SignalBreakdown findings={results.findings} />
+        <ReportTabs active={activeTab} onSelect={setActiveTab} />
 
-        <section id="evidence" className="scroll-mt-40 py-16">
+        {activeTab === 'overview' && (
+          <>
+            <ReportOverview results={results} />
+            <FixFirstQueue findings={results.findings} auditId={auditId} onGoToRemediation={() => setActiveTab('remediation')} />
+            <OverviewNext
+              onSelect={setActiveTab}
+              unlocked={unlocked && !sharedView}
+              findingCount={results.findings.length}
+            />
+          </>
+        )}
+
+        {activeTab === 'fix-first' && (
+          <>
+            <FixFirstQueue findings={results.findings} auditId={auditId} onGoToRemediation={() => setActiveTab('remediation')} />
+            {unlocked && results.findings.length > 0 && <SlackSnippet findings={results.findings} />}
+          </>
+        )}
+
+        {activeTab === 'signals' && (
+          <SignalBreakdown findings={results.findings} />
+        )}
+
+        {activeTab === 'evidence' && (
+          <section id="evidence" className="scroll-mt-40 py-16">
           <div className="mb-8">
             <h2 className="text-2xl font-extrabold text-fg">Evidence-backed findings</h2>
             <p className="mt-2 max-w-[65ch] text-base leading-7 text-fg-muted">
@@ -853,10 +960,13 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
           <SlackSnippet findings={results.findings} />
         )}
         </section>
+        )}
 
+        {activeTab === 'remediation' && (
+          <>
         {/* Email gate — shown only when not yet unlocked */}
         {!unlocked && !emailSent && (
-          <Card variant="elevated" className="mt-8">
+          <Card variant="elevated" className="mt-8" id="unlock">
             <h3 className="mb-2 text-center text-2xl font-extrabold text-fg">
               Unlock All {results.findings.length} Findings
             </h3>
@@ -919,6 +1029,11 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                     ? `/checkout?audit_id=${encodeURIComponent(auditId)}`
                     : '#unlock'
                 }
+                onClick={() => posthog.capture('audit_cta_clicked', {
+                  audit_id: auditId,
+                  cta: 'remediation_section',
+                  unlocked,
+                })}
                 className="block w-full rounded-lg bg-accent px-4 py-2 text-center font-semibold text-bg transition-colors hover:bg-accent-light"
               >
                 {unlocked && !sharedView
@@ -962,6 +1077,8 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
             </div>
           ))}
         </div>
+          </>
+        )}
       </div>
     </main>
   )

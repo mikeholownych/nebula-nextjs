@@ -282,7 +282,7 @@ export default function MobileLandingPageLeaks() {
               Find the mobile leaks on your page
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
-              The free Nebula audit checks all 7 signals - including mobile layout, LCP,
+              The free Nebula audit checks all 9 signals - including mobile layout, LCP,
               and CTA visibility - against your actual landing page URL. The $97 One-Leak
               Repair Sprint selects one high-confidence page-level repair, confirms the
               scope with you, implements it, and verifies the live change. It does not

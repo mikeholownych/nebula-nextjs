@@ -357,7 +357,7 @@ export default function LandingPageLoadTimeSlow() {
               Find the leak on your page
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
-              The free Nebula audit checks all 7 signals including load time.
+              The free Nebula audit checks all 9 signals including load time.
               The $97 One-Leak Repair Sprint selects one high-confidence
               page-level repair, confirms the scope with you, implements it,
               and verifies the live change. It does not promise conversion
