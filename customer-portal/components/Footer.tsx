@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-border bg-bg-elevated mt-20">
       <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
             <a href="/" className="inline-flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity" aria-label="Nebula Components home">
@@ -27,8 +27,22 @@ export default function Footer() {
             <ul className="space-y-3">
               <li><a href="/audit" className="text-sm text-fg-muted hover:text-fg transition-colors">Free Audit</a></li>
               <li><a href="/pricing" className="text-sm text-fg-muted hover:text-fg transition-colors">Pricing</a></li>
+              <li><a href="/teardowns" className="text-sm text-fg-muted hover:text-fg transition-colors">Teardowns</a></li>
+              <li><a href="/benchmarks" className="text-sm text-fg-muted hover:text-fg transition-colors">Benchmarks</a></li>
               <li><a href="/learning-centre" className="text-sm text-fg-muted hover:text-fg transition-colors">Learning Centre</a></li>
               <li><a href="/resources/citable" className="text-sm text-fg-muted hover:text-fg transition-colors">Citable</a></li>
+            </ul>
+          </div>
+
+          {/* Comparisons */}
+          <div>
+            <p className="text-xs font-medium text-fg-muted uppercase tracking-widest mb-4">Comparisons</p>
+            <ul className="space-y-3">
+              <li><a href="/vs/pagespeed-insights" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. PageSpeed Insights</a></li>
+              <li><a href="/vs/google-lighthouse" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. Google Lighthouse</a></li>
+              <li><a href="/vs/hubspot-website-grader" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. HubSpot Grader</a></li>
+              <li><a href="/vs/unbounce" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. Unbounce</a></li>
+              <li><a href="/vs/silktide" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. Silktide</a></li>
             </ul>
           </div>
 
