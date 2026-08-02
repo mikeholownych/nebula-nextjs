@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nebulacomponents.shop/schemas/evidence-dispatch.json",
+  "title": "Nebula Evidence Dispatch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["dispatch_id", "format", "title", "status", "trigger", "evidence", "finding", "distribution", "measurement", "review"],
+  "properties": {
+    "dispatch_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]+$"},
+    "format": {"enum": ["audit_pattern", "founder_teardown", "ai_visibility_check", "build_note"]},
+    "title": {"type": "string", "minLength": 10},
+    "status": {"enum": ["draft", "verified", "published", "measuring", "retracted"]},
+    "trigger": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_url", "source_type", "observed_at", "exact_quote"],
+      "properties": {
+        "source_url": {"type": "string", "format": "uri"},
+        "source_type": {"enum": ["live_html", "founder_statement", "audit_record", "production_event", "internal_build"]},
+        "observed_at": {"type": "string", "minLength": 10},
+        "exact_quote": {"type": "string", "minLength": 10}
+      }
+    },
+    "evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["page_url", "captured_at", "items"],
+      "properties": {
+        "page_url": {"type": "string", "format": "uri"},
+        "captured_at": {"type": "string", "minLength": 10},
+        "capture_hash": {"type": "string"},
+        "items": {
+          "type": "array", "minItems": 1,
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["claim", "verbatim_quote", "locator"],
+            "properties": {
+              "claim": {"type": "string", "minLength": 10},
+              "verbatim_quote": {"type": "string", "minLength": 5},
+              "locator": {"type": "string", "minLength": 2},
+              "status": {"enum": ["verified", "retracted"]}
+            }
+          }
+        }
+      }
+    },
+    "finding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["statement", "limitation", "bounded_fix"],
+      "properties": {
+        "statement": {"type": "string", "minLength": 10},
+        "limitation": {"type": "string", "minLength": 10},
+        "bounded_fix": {"type": "string", "minLength": 10}
+      }
+    },
+    "distribution": {
+      "type": "object", "additionalProperties": false,
+      "required": ["channels", "approval_required", "approved"],
+      "properties": {
+        "channels": {"type": "array", "minItems": 1, "items": {"enum": ["site", "linkedin", "x", "email", "newsletter", "direct_reply"]}},
+        "approval_required": {"type": "boolean"},
+        "approved": {"type": "boolean"},
+        "notes": {"type": "string"}
+      }
+    },
+    "measurement": {
+      "type": "object", "additionalProperties": false,
+      "required": ["ledger_slug", "baseline_metrics", "success_signal"],
+      "properties": {
+        "ledger_slug": {"type": "string", "minLength": 2},
+        "baseline_metrics": {"type": "object"},
+        "success_signal": {"type": "string", "minLength": 10},
+        "review_after_days": {"type": "integer", "minimum": 1}
+      }
+    },
+    "review": {
+      "type": "object", "additionalProperties": false,
+      "required": ["reviewer", "decision", "reviewed_at"],
+      "properties": {
+        "reviewer": {"type": "string", "minLength": 2},
+        "decision": {"enum": ["pending", "approved", "rejected", "retracted"]},
+        "reviewed_at": {"type": "string", "minLength": 10},
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}
