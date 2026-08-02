@@ -1,0 +1,22 @@
+{
+  "url": "https://nebulacomponents.shop/what-is-landing-page-audit",
+  "sha256": "872ad28bff2a16523ab8eea71621caa32b7da7656617ecd2d4f3a27b31cbe57b",
+  "questions": [
+    {
+      "q": "What is a landing page audit?",
+      "answers": [
+        "systematic evaluation",
+        "prioritized fix list",
+        "scored diagnostic"
+      ]
+    },
+    {
+      "q": "What score scale does the landing page audit use?",
+      "answers": [
+        "1\u201310",
+        "1-10",
+        "1 to 10"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "url": "https://nebulacomponents.shop/llms.txt",
+  "sha256": "40b55b17d6788d4543ce6905d1a042fa776b99dcb6bd6c6add68a5aeab687921",
+  "questions": [
+    {
+      "q": "What is Nebula's buying trigger?",
+      "answers": [
+        "spending on ads and not converting"
+      ]
+    },
+    {
+      "q": "Does Nebula publish verified client case studies?",
+      "answers": [
+        "none published yet",
+        "requires real before/after metric"
+      ]
+    }
+  ]
+}

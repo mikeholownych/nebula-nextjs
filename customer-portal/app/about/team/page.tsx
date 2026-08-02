@@ -20,7 +20,7 @@ const founderSchema = {
   jobTitle: 'Founder',
   url: 'https://nebulacomponents.shop/about/team',
   description:
-    'Founder of Nebula Components. Identified the same seven conversion failure patterns recurring across landing page after landing page - the basis for the 7-point diagnostic framework used in every Nebula audit.',
+    'Founder of Nebula Components. Identified the same seven conversion failure patterns recurring across landing page after landing page - the basis for the 9-point diagnostic framework used in every Nebula audit.',
   knowsAbout: [
     'Landing page conversion optimization',
     'Message-match diagnosis',
@@ -55,7 +55,7 @@ export default function TeamPage() {
           diagnosable.
         </p>
         <p className="mb-8 text-lg leading-relaxed text-fg-muted">
-          That observation became the 7-point diagnostic framework every Nebula audit runs today -
+          That observation became the 9-point diagnostic framework every Nebula audit runs today -
           the same framework behind the free audit and the paid One-Leak Repair Sprint.
         </p>
 
@@ -80,7 +80,7 @@ export default function TeamPage() {
 
         <p className="mb-8 text-fg-muted">
           Nebula Components publishes evidence-backed landing-page conversion guidance and runs
-          automated audit scoring across the same 7 conversion signals.
+          automated audit scoring across the same 9 conversion signals.
         </p>
 
         <span className="text-accent">mike{'@'}nebulacomponents.shop</span>

@@ -110,6 +110,24 @@ export default function PricingPage() {
             </p>
           </div>
 
+          <section aria-labelledby="pricing-answers" className="mb-12 rounded-2xl border border-border bg-bg-muted/10 p-6">
+            <h2 id="pricing-answers" className="mb-4 text-lg font-semibold text-fg">Direct answers</h2>
+            <div className="grid gap-4 md:grid-cols-3">
+              <div>
+                <h3 className="font-semibold text-fg">What does the free audit check?</h3>
+                <p className="mt-1 text-sm leading-6 text-fg-muted">It checks 9 conversion signals against a public landing page and returns results in under 2 minutes.</p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-fg">What does the repair sprint cost?</h3>
+                <p className="mt-1 text-sm leading-6 text-fg-muted">The One-Leak Repair Sprint costs $97 as a one-time payment.</p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-fg">Does it guarantee more conversions?</h3>
+                <p className="mt-1 text-sm leading-6 text-fg-muted">No. It targets a specific page condition and does not promise conversion lift; the same-scope re-audit is available within 30 days.</p>
+              </div>
+            </div>
+          </section>
+
           <div className="grid gap-8 md:grid-cols-2">
             <Card variant="bordered">
               <p className="mb-3 text-sm font-medium text-fg-muted">Free</p>

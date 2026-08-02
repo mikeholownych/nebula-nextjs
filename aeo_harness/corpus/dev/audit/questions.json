@@ -1,0 +1,30 @@
+{
+  "url": "https://nebulacomponents.shop/audit",
+  "sha256": "36269464dc3c88d5d88d0efcc955676f89a51c483267def2b8c746c1e0a74198",
+  "questions": [
+    {
+      "q": "How long does the free audit take?",
+      "answers": [
+        "under 2 minutes",
+        "under two minutes",
+        "2 minutes"
+      ]
+    },
+    {
+      "q": "Does the free audit require an email or signup?",
+      "answers": [
+        "no email required",
+        "no signup",
+        "no account"
+      ]
+    },
+    {
+      "q": "What viewport does the audit use for mobile CTA checks?",
+      "answers": [
+        "375px",
+        "375 px",
+        "375"
+      ]
+    }
+  ]
+}

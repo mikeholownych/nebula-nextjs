@@ -19,7 +19,7 @@ export default function WhatIsLandingPageAudit() {
                 name: "What is a landing page audit?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "A landing page audit is a systematic evaluation of your page across 5 conversion dimensions: headline clarity, CTA effectiveness, social proof, page speed, and mobile experience. It scores each dimension on a 1–10 scale and produces a prioritized fix list.",
+                  text: "A landing page audit is a systematic evaluation of a page across 9 conversion signals: message match, trust signals, mobile CTA, load speed, CTA clarity, above-the-fold clarity, ad signals, SEO foundations, and AI citation readiness. It scores each signal on a 1–10 scale and produces a prioritized fix list.",
                 },
               },
               {
@@ -61,7 +61,7 @@ export default function WhatIsLandingPageAudit() {
             What Is a Landing Page Audit? The Complete Guide for Founders
           </h1>
           <p className="text-gray-400 text-lg">
-            A systematic audit evaluates five dimensions and should show evidence for every recommended fix.
+            A systematic audit evaluates nine conversion signals and should show evidence for every recommended fix.
           </p>
           <p className="text-gray-500 text-sm mt-4">
             Updated July 5, 2026 · 8 min read
@@ -77,34 +77,30 @@ export default function WhatIsLandingPageAudit() {
             What Is a Landing Page Audit?
           </h2>
           <p className="text-gray-300 mb-4">
-            A landing page audit is a <strong className="text-white">systematic evaluation</strong> of your page across 5 conversion dimensions: headline clarity, CTA effectiveness, social proof, page speed, and mobile experience.
+            A landing page audit is a <strong className="text-white">systematic evaluation</strong> of a page across 9 conversion signals: message match, trust signals, mobile CTA, load speed, CTA clarity, above-the-fold clarity, ad signals, SEO foundations, and AI citation readiness.
           </p>
           <p className="text-gray-300 mb-4">
-            It scores each dimension on a 1–10 scale and produces a prioritized fix list. It is not a subjective opinion - it's a scored diagnostic that reveals exactly where you're losing money.
+            It scores each signal on a 1–10 scale and produces a prioritized fix list. It is not a subjective opinion - it's a scored diagnostic that reveals exactly where you're losing money.
           </p>
           <div className="bg-[#161b22] border border-[#30363d] rounded-lg p-6 my-6">
-            <p className="text-emerald-400 font-semibold mb-2">The 5 Dimensions:</p>
+            <p className="text-emerald-400 font-semibold mb-2">The 9 Signals:</p>
             <ul className="space-y-2 text-gray-300">
-              <li className="flex items-start gap-2">
-                <span className="text-emerald-500">→</span>
-                <span><strong className="text-white">Headline Clarity</strong> - Does it pass the "clarity test"?</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-emerald-500">→</span>
-                <span><strong className="text-white">CTA Effectiveness</strong> - Is the button visible? Compelling?</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-emerald-500">→</span>
-                <span><strong className="text-white">Social Proof</strong> - Reviews? Testimonials? Results?</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-emerald-500">→</span>
-                <span><strong className="text-white">Page Speed</strong> - Under 3 seconds? Mobile-first?</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-emerald-500">→</span>
-                <span><strong className="text-white">Mobile Experience</strong> - Thumb-friendly? Readable?</span>
-              </li>
+              {[
+                ["Message Match", "Does the page repeat the promise that earned the click?"],
+                ["Trust Signals", "Is proof visible before the visitor must act?"],
+                ["Mobile CTA", "Is the primary action visible on a 375px viewport?"],
+                ["Load Speed", "Does the page meet the LCP, CLS, and INP thresholds?"],
+                ["CTA Clarity", "Is there one clear primary action?"],
+                ["Above-the-Fold Clarity", "Are the offer, audience, and action clear immediately?"],
+                ["Ad Signals", "Are recognized ad-tracking artifacts present in source HTML?"],
+                ["SEO Foundations", "Are the title, meta description, and H1 present?"],
+                ["AI Citation Readiness", "Does the page expose structured, extractable signals?"],
+              ].map(([name, description]) => (
+                <li key={name} className="flex items-start gap-2">
+                  <span className="text-emerald-500">→</span>
+                  <span><strong className="text-white">{name}</strong> - {description}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </section>

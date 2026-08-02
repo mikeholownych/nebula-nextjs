@@ -244,7 +244,7 @@ export default function ProofBeforeCTAPage() {
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
               <div>
                 <span className="font-semibold text-fg">A specific, verifiable process claim.</span>{' '}
-                &quot;Every audit runs the same 7-point diagnostic&quot; is proof of rigor even
+                &quot;Every audit runs the same 9-signal diagnostic&quot; is proof of rigor even
                 without an outcome number attached - it tells the visitor the evaluation is
                 systematic, not improvised.
               </div>

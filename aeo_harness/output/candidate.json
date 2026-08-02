@@ -1,0 +1,161 @@
+{
+  "source": "candidate",
+  "correct": 14,
+  "total": 15,
+  "accuracy": 0.9333,
+  "pages": [
+    {
+      "page": "homepage",
+      "split": "dev",
+      "correct": 3,
+      "total": 3,
+      "questions": [
+        {
+          "q": "What does Nebula Components provide?",
+          "retrieved_chunk": 0,
+          "overlap": 5,
+          "matched_answer": "landing page conversion optimization",
+          "correct": true
+        },
+        {
+          "q": "What does the free Nebula audit check?",
+          "retrieved_chunk": 0,
+          "overlap": 7,
+          "matched_answer": "9 conversion signals",
+          "correct": true
+        },
+        {
+          "q": "What is the One-Leak Repair Sprint price?",
+          "retrieved_chunk": 0,
+          "overlap": 8,
+          "matched_answer": "$97",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "page": "audit",
+      "split": "dev",
+      "correct": 3,
+      "total": 3,
+      "questions": [
+        {
+          "q": "How long does the free audit take?",
+          "retrieved_chunk": 0,
+          "overlap": 7,
+          "matched_answer": "under 2 minutes",
+          "correct": true
+        },
+        {
+          "q": "Does the free audit require an email or signup?",
+          "retrieved_chunk": 0,
+          "overlap": 9,
+          "matched_answer": "no email required",
+          "correct": true
+        },
+        {
+          "q": "What viewport does the audit use for mobile CTA checks?",
+          "retrieved_chunk": 0,
+          "overlap": 10,
+          "matched_answer": "375px",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "page": "pricing",
+      "split": "dev",
+      "correct": 3,
+      "total": 3,
+      "questions": [
+        {
+          "q": "What does the One-Leak Repair Sprint cost?",
+          "retrieved_chunk": 0,
+          "overlap": 8,
+          "matched_answer": "$97",
+          "correct": true
+        },
+        {
+          "q": "Does Nebula promise conversion lift?",
+          "retrieved_chunk": 0,
+          "overlap": 5,
+          "matched_answer": "does not promise conversion lift",
+          "correct": true
+        },
+        {
+          "q": "How long is the same-scope re-audit window?",
+          "retrieved_chunk": 0,
+          "overlap": 9,
+          "matched_answer": "30 days",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "page": "definition",
+      "split": "dev",
+      "correct": 2,
+      "total": 2,
+      "questions": [
+        {
+          "q": "What is a landing page audit?",
+          "retrieved_chunk": 0,
+          "overlap": 6,
+          "matched_answer": "systematic evaluation",
+          "correct": true
+        },
+        {
+          "q": "What score scale does the landing page audit use?",
+          "retrieved_chunk": 0,
+          "overlap": 9,
+          "matched_answer": "1\u201310",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "page": "about",
+      "split": "holdout",
+      "correct": 1,
+      "total": 2,
+      "questions": [
+        {
+          "q": "Who founded Nebula Components?",
+          "retrieved_chunk": 0,
+          "overlap": 3,
+          "matched_answer": "Mike Holownych",
+          "correct": true
+        },
+        {
+          "q": "Who does Nebula work with?",
+          "retrieved_chunk": 0,
+          "overlap": 3,
+          "matched_answer": null,
+          "correct": false
+        }
+      ]
+    },
+    {
+      "page": "llms",
+      "split": "holdout",
+      "correct": 2,
+      "total": 2,
+      "questions": [
+        {
+          "q": "What is Nebula's buying trigger?",
+          "retrieved_chunk": 0,
+          "overlap": 5,
+          "matched_answer": "spending on ads and not converting",
+          "correct": true
+        },
+        {
+          "q": "Does Nebula publish verified client case studies?",
+          "retrieved_chunk": 2,
+          "overlap": 4,
+          "matched_answer": "none published yet",
+          "correct": true
+        }
+      ]
+    }
+  ]
+}

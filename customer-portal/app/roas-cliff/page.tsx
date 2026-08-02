@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://nebulacomponents.shop/roas-cliff' },
   openGraph: {
     title: 'The ROAS Cliff - Why Your CTR Looks Fine and Your Page Converts Nobody | Nebula Components',
-    description: 'Score your landing page across 7 conversion signals. See your monthly leak estimate. Three fixes that actually move the number.',
+    description: 'Score your landing page across 9 conversion signals. See your monthly leak estimate. Three fixes that actually move the number.',
     type: 'article',
     url: 'https://nebulacomponents.shop/roas-cliff',
   },
@@ -224,7 +224,7 @@ export default function RoasCliffPage() {
         </h3>
 
         <p className="mb-5 text-fg-muted">
-          A specific, evidence-backed next step reduces decision friction. Nebula delivers audit results in under two minutes across 7 conversion signals.
+          A specific, evidence-backed next step reduces decision friction. Nebula delivers audit results in under two minutes across 9 conversion signals.
         </p>
 
         <div className="border-t border-border my-12" />

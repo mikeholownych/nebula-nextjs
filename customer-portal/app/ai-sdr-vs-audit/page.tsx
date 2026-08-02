@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: "You Don't Need an AI SDR — Fix Your Landing Page First | Nebula Components",
-  description: "Before you spend $25k on an AI SDR platform, establish an evidence-backed landing-page baseline across 7 conversion signals.",
+  description: "Before you spend $25k on an AI SDR platform, establish an evidence-backed landing-page baseline across 9 conversion signals.",
   alternates: { canonical: 'https://nebulacomponents.shop/ai-sdr-vs-audit' },
 }
 
@@ -166,10 +166,10 @@ export default function AiSdrVsAuditPage() {
         {/* Bounded availability notice */}
         <div className="bg-accent-dim border border-accent/30 rounded-xl p-6 mb-8">
           <div className="text-xs font-bold tracking-widest uppercase text-accent mb-2">
-            Free audit live — 7 conversion signals
+            Free audit live — 9 conversion signals
           </div>
           <p className="mb-0">
-            Run a free audit across 7 conversion signals — no signup required. Completion time
+            Run a free audit across 9 conversion signals — no signup required. Completion time
             varies by page and service load.{' '}
             <a href="/audit" className="text-accent font-bold hover:underline">Run your free audit →</a>
           </p>

@@ -1,0 +1,28 @@
+{
+  "url": "https://nebulacomponents.shop/pricing",
+  "sha256": "7fff35f1745bc65d87fbf5d2ae1770e5316c7d07f437d1f5157fd00eb504a26d",
+  "questions": [
+    {
+      "q": "What does the One-Leak Repair Sprint cost?",
+      "answers": [
+        "$97",
+        "97"
+      ]
+    },
+    {
+      "q": "Does Nebula promise conversion lift?",
+      "answers": [
+        "does not promise conversion lift",
+        "does not by itself prove business impact",
+        "no"
+      ]
+    },
+    {
+      "q": "How long is the same-scope re-audit window?",
+      "answers": [
+        "30 days",
+        "30-day"
+      ]
+    }
+  ]
+}

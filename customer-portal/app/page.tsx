@@ -110,6 +110,26 @@ export default function Home() {
           </div>
         </section>
 
+        <section aria-labelledby="direct-answers" className="border-y border-border bg-bg-muted/10 px-6 py-10">
+          <div className="mx-auto max-w-6xl">
+            <h2 id="direct-answers" className="mb-5 text-xl font-bold tracking-tight text-fg">Direct answers</h2>
+            <div className="grid gap-4 md:grid-cols-3">
+              <div>
+                <h3 className="font-semibold text-fg">What does Nebula provide?</h3>
+                <p className="mt-1 text-sm leading-6 text-fg-muted">Nebula provides evidence-backed landing page conversion diagnosis for founders spending on paid ads with low or zero conversions.</p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-fg">What does the free audit check?</h3>
+                <p className="mt-1 text-sm leading-6 text-fg-muted">The free audit checks 9 conversion signals against the actual page and returns a prioritized fix list in under 2 minutes.</p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-fg">What does the $97 repair sprint do?</h3>
+                <p className="mt-1 text-sm leading-6 text-fg-muted">The One-Leak Repair Sprint delivers targeted prompts for the highest-confidence page fix. It does not promise conversion lift.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
                 {/* ── 2. Nine signals grid ── */}
         <section className="border-t border-border px-6 py-16">
           <div className="mx-auto max-w-6xl">

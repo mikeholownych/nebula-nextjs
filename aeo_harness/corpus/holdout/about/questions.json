@@ -1,0 +1,19 @@
+{
+  "url": "https://nebulacomponents.shop/about",
+  "sha256": "5ee7b7f17228b6d3a322b04302e0323ebc3473cc131912a6f760efde2fb1c07c",
+  "questions": [
+    {
+      "q": "Who founded Nebula Components?",
+      "answers": [
+        "Mike Holownych"
+      ]
+    },
+    {
+      "q": "Who does Nebula work with?",
+      "answers": [
+        "founders and operators",
+        "actively spending on paid ads"
+      ]
+    }
+  ]
+}
