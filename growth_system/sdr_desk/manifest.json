@@ -1,0 +1,513 @@
+{
+  "version": "1.0",
+  "source": "user-provided message.txt",
+  "skill_count": 42,
+  "jobs": {
+    "1": {
+      "name": "Signal Hunter",
+      "profile": "market",
+      "skills": [
+        "sdr-01-lead-magnet-radar",
+        "sdr-02-trend-research",
+        "sdr-03-industry-pulse",
+        "sdr-04-the-intent-miner",
+        "sdr-05-the-megatrend-spotter",
+        "sdr-06-timing-watch"
+      ]
+    },
+    "2": {
+      "name": "ICP Scorer",
+      "profile": "market",
+      "skills": [
+        "sdr-07-icp-scoring",
+        "sdr-08-the-icp-magnet",
+        "sdr-09-behavioral-profiling",
+        "sdr-10-the-customer-avatar-sculptor",
+        "sdr-11-the-pipeline-prioritizer",
+        "sdr-12-list-cleaner"
+      ]
+    },
+    "3": {
+      "name": "Prospect Researcher",
+      "profile": "market",
+      "skills": [
+        "sdr-13-people-search",
+        "sdr-14-company-search",
+        "sdr-15-company-intelligence",
+        "sdr-16-profile-viewer",
+        "sdr-17-the-competitor-x-ray",
+        "sdr-18-the-earnings-call-decoder"
+      ]
+    },
+    "4": {
+      "name": "Voice Writer",
+      "profile": "growth",
+      "skills": [
+        "sdr-19-voice-learning",
+        "sdr-20-ghostwriter-protocol",
+        "sdr-21-communication-blueprints",
+        "sdr-22-the-cold-email-sniper",
+        "sdr-23-the-inbound-dm-closer",
+        "sdr-24-the-top-voice-mimic"
+      ]
+    },
+    "5": {
+      "name": "Sequence Builder",
+      "profile": "growth",
+      "skills": [
+        "sdr-25-outreach-frameworks",
+        "sdr-26-the-follow-up-phantom",
+        "sdr-27-the-email-funnel-architect",
+        "sdr-28-the-omnichannel-alchemist",
+        "sdr-29-the-offer-constructor",
+        "sdr-30-sequence-audit"
+      ]
+    },
+    "6": {
+      "name": "Reply Classifier",
+      "profile": "support",
+      "skills": [
+        "sdr-31-reply-classify",
+        "sdr-32-the-objection-obliterator",
+        "sdr-33-the-inbox-zero-enforcer",
+        "sdr-34-objection-tag",
+        "sdr-35-the-network-nurturer",
+        "sdr-36-the-engagement-sniper"
+      ]
+    },
+    "7": {
+      "name": "Meeting Qualifier",
+      "profile": "support",
+      "skills": [
+        "sdr-37-book-call",
+        "sdr-38-the-discovery-call-autopsy",
+        "sdr-39-no-show-save",
+        "sdr-40-the-meeting-synthesizer",
+        "sdr-41-pipeline-report",
+        "sdr-42-the-bottleneck-detective"
+      ]
+    }
+  },
+  "skills": [
+    {
+      "id": "sdr-01-lead-magnet-radar",
+      "number": 1,
+      "title": "Lead Magnet Radar",
+      "job": "Signal Hunter",
+      "job_number": 1,
+      "profile": "market",
+      "what_it_does": "watches the free resources your competitors give away and tells you which topics are pulling real comment volume right now. What people beg for in a comment section is what they will answer a DM about.",
+      "watch_for": "it will happily invent comment counts if you let it. The UNVERIFIED rule is doing real work, do not delete it."
+    },
+    {
+      "id": "sdr-02-trend-research",
+      "number": 2,
+      "title": "Trend Research",
+      "job": "Signal Hunter",
+      "job_number": 1,
+      "profile": "market",
+      "what_it_does": "takes a topic and comes back with what genuinely changed in the last thirty days, with sources, so your opener references something real instead of something generic.",
+      "watch_for": "anything without a link. Cut it before it reaches a message."
+    },
+    {
+      "id": "sdr-03-industry-pulse",
+      "number": 3,
+      "title": "Industry Pulse",
+      "job": "Signal Hunter",
+      "job_number": 1,
+      "profile": "market",
+      "what_it_does": "a weekly readout on one vertical. Who raised, who cut, who shipped, who got acquired, and which of those is a reason to reach out.",
+      "watch_for": "quiet weeks. A padded pulse is worse than a short one, because you will act on filler."
+    },
+    {
+      "id": "sdr-04-the-intent-miner",
+      "number": 4,
+      "title": "The Intent Miner",
+      "job": "Signal Hunter",
+      "job_number": 1,
+      "profile": "market",
+      "what_it_does": "scrapes the public places your buyers complain out loud, then ranks the complaints by how often they repeat.",
+      "watch_for": "invented quotes. If a quote has no source, it did not happen."
+    },
+    {
+      "id": "sdr-05-the-megatrend-spotter",
+      "number": 5,
+      "title": "The Megatrend Spotter",
+      "job": "Signal Hunter",
+      "job_number": 1,
+      "profile": "market",
+      "what_it_does": "looks past this week and flags the shift your buyer will be budgeting for in two quarters, so you get there before the category is crowded.",
+      "watch_for": "confident futurism with nothing underneath it. Every shift needs something happening today."
+    },
+    {
+      "id": "sdr-06-timing-watch",
+      "number": 6,
+      "title": "Timing Watch",
+      "job": "Signal Hunter",
+      "job_number": 1,
+      "profile": "market",
+      "what_it_does": "tracks the events that reliably free up budget, like a funding round, a new head of the function you sell to, or an office opening, and tells you the day to move.",
+      "watch_for": "stale triggers dressed up as fresh ones. The date column is the whole point."
+    },
+    {
+      "id": "sdr-07-icp-scoring",
+      "number": 7,
+      "title": "ICP Scoring",
+      "job": "ICP Scorer",
+      "job_number": 2,
+      "profile": "market",
+      "what_it_does": "scores every account against your real closed won customers rather than your aspirational deck.",
+      "watch_for": "it flattering your deck. If the rubric it derives looks exactly like your marketing site, your won and lost data was too thin."
+    },
+    {
+      "id": "sdr-08-the-icp-magnet",
+      "number": 8,
+      "title": "The ICP Magnet",
+      "job": "ICP Scorer",
+      "job_number": 2,
+      "profile": "market",
+      "what_it_does": "works backwards from your best customers and writes the profile you should have been targeting all along.",
+      "watch_for": "it reaching for headcount and industry because those are easy. Push it back to the situation."
+    },
+    {
+      "id": "sdr-09-behavioral-profiling",
+      "number": 9,
+      "title": "Behavioral Profiling",
+      "job": "ICP Scorer",
+      "job_number": 2,
+      "profile": "market",
+      "what_it_does": "reads how a person actually communicates in public and tells you whether to be blunt, warm, technical or brief.",
+      "watch_for": "horoscope output. If the read would fit anyone, the sample was too small."
+    },
+    {
+      "id": "sdr-10-the-customer-avatar-sculptor",
+      "number": 10,
+      "title": "The Customer Avatar Sculptor",
+      "job": "ICP Scorer",
+      "job_number": 2,
+      "profile": "market",
+      "what_it_does": "builds the full picture of the person you are writing to, including what they are measured on and what makes them look bad.",
+      "watch_for": "the assumption flag. It should tell you which parts it guessed."
+    },
+    {
+      "id": "sdr-11-the-pipeline-prioritizer",
+      "number": 11,
+      "title": "The Pipeline Prioritizer",
+      "job": "ICP Scorer",
+      "job_number": 2,
+      "profile": "market",
+      "what_it_does": "takes the whole list and sorts it into work today, work this month, and leave alone.",
+      "watch_for": "an oversized \"today\" pile. If it hands you thirty accounts, it ignored the capacity line."
+    },
+    {
+      "id": "sdr-12-list-cleaner",
+      "number": 12,
+      "title": "List Cleaner",
+      "job": "ICP Scorer",
+      "job_number": 2,
+      "profile": "market",
+      "what_it_does": "strips the dead rows, the wrong titles, the people who left, and the duplicates hiding behind a different spelling.",
+      "watch_for": "silent deletion. Always read the summary count."
+    },
+    {
+      "id": "sdr-13-people-search",
+      "number": 13,
+      "title": "People Search",
+      "job": "Prospect Researcher",
+      "job_number": 3,
+      "profile": "market",
+      "what_it_does": "finds the actual humans in a target account by role and seniority, and tells you which one to open with.",
+      "watch_for": "invented names and guessed email formats. NONE FOUND is a valid, useful answer."
+    },
+    {
+      "id": "sdr-14-company-search",
+      "number": 14,
+      "title": "Company Search",
+      "job": "Prospect Researcher",
+      "job_number": 3,
+      "profile": "market",
+      "what_it_does": "builds the target account list from a description of who you sell to, not from a filter you half remember setting.",
+      "watch_for": "a list that is really just an industry filter. The evidence column is the test."
+    },
+    {
+      "id": "sdr-15-company-intelligence",
+      "number": 15,
+      "title": "Company Intelligence",
+      "job": "Prospect Researcher",
+      "job_number": 3,
+      "profile": "market",
+      "what_it_does": "one page on the company. What they sell, who they compete with, what they just changed, and where you fit.",
+      "watch_for": "an opening line that is portable. If it fits any company in the sector, it fits none of them."
+    },
+    {
+      "id": "sdr-16-profile-viewer",
+      "number": 16,
+      "title": "Profile Viewer",
+      "job": "Prospect Researcher",
+      "job_number": 3,
+      "profile": "market",
+      "what_it_does": "reads one person's public footprint and returns the three things about them worth mentioning.",
+      "watch_for": "it reaching for personal details. The avoid list exists for a reason."
+    },
+    {
+      "id": "sdr-17-the-competitor-x-ray",
+      "number": 17,
+      "title": "The Competitor X-Ray",
+      "job": "Prospect Researcher",
+      "job_number": 3,
+      "profile": "market",
+      "what_it_does": "works out who they are probably using today and what that vendor is bad at, so you have something to say.",
+      "watch_for": "trash talk. It loses deals. The angle should respect the choice they already made."
+    },
+    {
+      "id": "sdr-18-the-earnings-call-decoder",
+      "number": 18,
+      "title": "The Earnings Call Decoder",
+      "job": "Prospect Researcher",
+      "job_number": 3,
+      "profile": "market",
+      "what_it_does": "for public targets, pulls the priorities leadership repeated on the last call, because repetition is where the budget goes.",
+      "watch_for": "a reconstructed transcript. If there is no source, there is no skill."
+    },
+    {
+      "id": "sdr-19-voice-learning",
+      "number": 19,
+      "title": "Voice Learning",
+      "job": "Voice Writer",
+      "job_number": 4,
+      "profile": "growth",
+      "what_it_does": "feed it a handful of things you have actually written and it extracts your rhythm, so everything downstream sounds like you.",
+      "watch_for": "it improving you. Improved is not you, and the whole point is you."
+    },
+    {
+      "id": "sdr-20-ghostwriter-protocol",
+      "number": 20,
+      "title": "Ghostwriter Protocol",
+      "job": "Voice Writer",
+      "job_number": 4,
+      "profile": "growth",
+      "what_it_does": "turns a rough thought into a finished message in your voice, keeping your argument rather than replacing it.",
+      "watch_for": "it replacing your point with a smoother, blander one. The keep-my-argument rule is not optional."
+    },
+    {
+      "id": "sdr-21-communication-blueprints",
+      "number": 21,
+      "title": "Communication Blueprints",
+      "job": "Voice Writer",
+      "job_number": 4,
+      "profile": "growth",
+      "what_it_does": "templates for the awkward messages. The breakup, the re-engage, the wrong person handoff, the apology.",
+      "watch_for": "politeness padding. Under eighty words is the discipline."
+    },
+    {
+      "id": "sdr-22-the-cold-email-sniper",
+      "number": 22,
+      "title": "The Cold Email Sniper",
+      "job": "Voice Writer",
+      "job_number": 4,
+      "profile": "growth",
+      "what_it_does": "writes a short cold email built on one specific observation about the account, and nothing else.",
+      "watch_for": "the self check. If it says the email is portable, it is not finished."
+    },
+    {
+      "id": "sdr-23-the-inbound-dm-closer",
+      "number": 23,
+      "title": "The Inbound DM Closer",
+      "job": "Voice Writer",
+      "job_number": 4,
+      "profile": "growth",
+      "what_it_does": "handles the person who just engaged with you. Warm, quick, and asking for the right next step.",
+      "watch_for": "making them ask twice. Deliver in the first message or you lose them."
+    },
+    {
+      "id": "sdr-24-the-top-voice-mimic",
+      "number": 24,
+      "title": "The Top Voice Mimic",
+      "job": "Voice Writer",
+      "job_number": 4,
+      "profile": "growth",
+      "what_it_does": "studies a writer whose tone converts in your market and pulls out the mechanics, so you can borrow the structure without copying the person.",
+      "watch_for": "near copies. Take the shape, never the sentences."
+    },
+    {
+      "id": "sdr-25-outreach-frameworks",
+      "number": 25,
+      "title": "Outreach Frameworks",
+      "job": "Sequence Builder",
+      "job_number": 5,
+      "profile": "growth",
+      "what_it_does": "the full sequence structure per segment. How many touches, how far apart, and what each one is for.",
+      "watch_for": "bump touches. If a touch has no new information, it is training them to ignore you."
+    },
+    {
+      "id": "sdr-26-the-follow-up-phantom",
+      "number": 26,
+      "title": "The Follow-Up Phantom",
+      "job": "Sequence Builder",
+      "job_number": 5,
+      "profile": "growth",
+      "what_it_does": "writes follow ups that add something new each time instead of nudging.",
+      "watch_for": "an ask hiding in number two. The no-ask touch is the one that earns the reply to number three."
+    },
+    {
+      "id": "sdr-27-the-email-funnel-architect",
+      "number": 27,
+      "title": "The Email Funnel Architect",
+      "job": "Sequence Builder",
+      "job_number": 5,
+      "profile": "growth",
+      "what_it_does": "maps what happens after a reply. Which sequence they exit, what they get next, and who owns them now.",
+      "watch_for": "the leaks section. That is the whole reason to run this skill."
+    },
+    {
+      "id": "sdr-28-the-omnichannel-alchemist",
+      "number": 28,
+      "title": "The Omnichannel Alchemist",
+      "job": "Sequence Builder",
+      "job_number": 5,
+      "profile": "growth",
+      "what_it_does": "takes one message and reshapes it for the inbox, the DM, and the comment section, without it reading like the same thing three times.",
+      "watch_for": "a pitch in the comment. It reads as a pitch to everyone, and it costs you the account."
+    },
+    {
+      "id": "sdr-29-the-offer-constructor",
+      "number": 29,
+      "title": "The Offer Constructor",
+      "job": "Sequence Builder",
+      "job_number": 5,
+      "profile": "growth",
+      "what_it_does": "sharpens what you are actually asking for, because most sequences fail on a vague ask rather than bad copy.",
+      "watch_for": "your own attachment to the meeting ask. The smaller rung usually outperforms it."
+    },
+    {
+      "id": "sdr-30-sequence-audit",
+      "number": 30,
+      "title": "Sequence Audit",
+      "job": "Sequence Builder",
+      "job_number": 5,
+      "profile": "growth",
+      "what_it_does": "runs over your live sequences on a schedule and flags the ones that have stopped working.",
+      "watch_for": "verdicts on tiny samples. Under a hundred sends, it is reading noise."
+    },
+    {
+      "id": "sdr-31-reply-classify",
+      "number": 31,
+      "title": "Reply Classify",
+      "job": "Reply Classifier",
+      "job_number": 6,
+      "profile": "support",
+      "what_it_does": "sorts every reply into interested, later, referred and dead, and tells you the next action for each.",
+      "watch_for": "optimistic classification. \"Send me info\" is not a buying signal."
+    },
+    {
+      "id": "sdr-32-the-objection-obliterator",
+      "number": 32,
+      "title": "The Objection Obliterator",
+      "job": "Reply Classifier",
+      "job_number": 6,
+      "profile": "support",
+      "what_it_does": "takes the objection you just got and writes three responses at different levels of directness.",
+      "watch_for": "it defending you when the honest answer is that you are not a fit."
+    },
+    {
+      "id": "sdr-33-the-inbox-zero-enforcer",
+      "number": 33,
+      "title": "The Inbox Zero Enforcer",
+      "job": "Reply Classifier",
+      "job_number": 6,
+      "profile": "support",
+      "what_it_does": "runs the inbox down to nothing on a schedule, drafting what it can and escalating what it should not touch.",
+      "watch_for": "it drafting for the angry pile. That rule is there because a machine apology reads as an insult."
+    },
+    {
+      "id": "sdr-34-objection-tag",
+      "number": 34,
+      "title": "Objection Tag",
+      "job": "Reply Classifier",
+      "job_number": 6,
+      "profile": "support",
+      "what_it_does": "records which objections keep appearing and how often, so you fix the message instead of re-answering forever.",
+      "watch_for": "better rebuttals. If you are answering the same objection weekly, the message is wrong, not the answer."
+    },
+    {
+      "id": "sdr-35-the-network-nurturer",
+      "number": 35,
+      "title": "The Network Nurturer",
+      "job": "Reply Classifier",
+      "job_number": 6,
+      "profile": "support",
+      "what_it_does": "keeps the people who said \"not now\" genuinely warm with something useful, so the later date is not wasted.",
+      "watch_for": "the drop list. Some \"not now\" answers are polite noes, and chasing them is how you waste a quarter."
+    },
+    {
+      "id": "sdr-36-the-engagement-sniper",
+      "number": 36,
+      "title": "The Engagement Sniper",
+      "job": "Reply Classifier",
+      "job_number": 6,
+      "profile": "support",
+      "what_it_does": "finds the target accounts posting publicly today and drafts a comment worth reading.",
+      "watch_for": "hollow agreement. If it cannot add anything, skipping is the correct output."
+    },
+    {
+      "id": "sdr-37-book-call",
+      "number": 37,
+      "title": "Book Call",
+      "job": "Meeting Qualifier",
+      "job_number": 7,
+      "profile": "support",
+      "what_it_does": "sends the booking message, handles the reschedule, and locks the slot without four emails of ping pong.",
+      "watch_for": "the bare calendar link. Two named times converts better every time."
+    },
+    {
+      "id": "sdr-38-the-discovery-call-autopsy",
+      "number": 38,
+      "title": "The Discovery Call Autopsy",
+      "job": "Meeting Qualifier",
+      "job_number": 7,
+      "profile": "support",
+      "what_it_does": "takes the transcript and returns what they actually said they wanted, what they avoided, and what to do next.",
+      "watch_for": "a flattering autopsy. The mistakes section is the reason to run it."
+    },
+    {
+      "id": "sdr-39-no-show-save",
+      "number": 39,
+      "title": "No Show Save",
+      "job": "Meeting Qualifier",
+      "job_number": 7,
+      "profile": "support",
+      "what_it_does": "catches the ghost within an hour and rebooks them without sounding annoyed.",
+      "watch_for": "passive aggression. \"I noticed you weren't able to make it\" is guilt wearing a suit."
+    },
+    {
+      "id": "sdr-40-the-meeting-synthesizer",
+      "number": 40,
+      "title": "The Meeting Synthesizer",
+      "job": "Meeting Qualifier",
+      "job_number": 7,
+      "profile": "support",
+      "what_it_does": "turns any call into notes, next steps, and an update anyone else can read, before you have left the room.",
+      "watch_for": "invented deadlines. An UNASSIGNED action is honest and actionable, a fake one is neither."
+    },
+    {
+      "id": "sdr-41-pipeline-report",
+      "number": 41,
+      "title": "Pipeline Report",
+      "job": "Meeting Qualifier",
+      "job_number": 7,
+      "profile": "support",
+      "what_it_does": "the Friday readout. What booked, what died, what is stuck and why, written without you.",
+      "watch_for": "three recommendations. One change, executed, beats three considered."
+    },
+    {
+      "id": "sdr-42-the-bottleneck-detective",
+      "number": 42,
+      "title": "The Bottleneck Detective",
+      "job": "Meeting Qualifier",
+      "job_number": 7,
+      "profile": "support",
+      "what_it_does": "looks across the whole desk and names the single stage costing you the most, so you fix one thing instead of tinkering with five.",
+      "watch_for": "a list of problems. The value here is the refusal to give you more than one.\n\nThe order to build them in\nDo not install all forty two on day one. You will use nine of them and forget the rest.\n\nWeek one, build Job 3 and Job 4. Research and voice. Those two alone change your reply rate.\n\nWeek two, add Job 6. Sorting replies is where the leak is on almost every desk.\n\nWeek three, add Job 1 and Job 2, so you stop working a stale list.\n\nWeek four, add Job 5 and Job 7 and let the whole thing run.\n\nWhat to never hand over\nThree things stay with you, permanently.\n\nThe decision to contact someone. The desk suggests. You approve. The day that flips is the day you become the thing everyone complains about.\n\nThe price conversation. Let it draft. Never let it send.\n\nA bad reply. When someone is annoyed, a human answers. Every time.\n\nEverything else on this list is fair game, and every hour it takes back is an hour you spend on the calls that close."
+    }
+  ]
+}
