@@ -40,3 +40,5 @@ venv/bin/python3 aeo_harness/citation_metrics.py --captures /path/to/captures.js
 ```
 
 An empty capture file returns `status: no_data`; it is never mislabeled as zero visibility.
+
+The broader prompt behavior contract is documented in `../docs/prompt-evaluation-playbook.md` and machine-readable at `prompt-evaluation-contract.json`. It covers factuality, citation correctness, adversarial inputs, structured tool use, claim-level grading, and accept/revert gates.
