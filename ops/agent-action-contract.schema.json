@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Nebula CEO Action Contract",
+  "type": "object",
+  "required": ["directive_id", "source_memo", "observed_at", "evidence", "actions"],
+  "properties": {
+    "directive_id": {"type": "string", "minLength": 1},
+    "source_memo": {"type": "string", "minLength": 1},
+    "observed_at": {"type": "string", "format": "date-time"},
+    "evidence": {
+      "type": "object",
+      "required": ["memo_age_hours", "warm_replies", "real_payments"],
+      "properties": {
+        "memo_age_hours": {"type": "number", "minimum": 0},
+        "warm_replies": {"type": "integer", "minimum": 0},
+        "real_payments": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": true
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["action_id", "assignee", "goal", "verification", "constraints", "retry_policy", "recheck_after_minutes"],
+        "properties": {
+          "action_id": {"type": "string", "minLength": 1},
+          "assignee": {"type": "string", "minLength": 1},
+          "goal": {"type": "string", "minLength": 1},
+          "verification": {"type": "string", "minLength": 1},
+          "constraints": {"type": "string", "minLength": 1},
+          "required_artifacts": {"type": "array", "items": {"type": "string"}},
+          "evidence_strength": {"enum": ["observed", "derived", "inherited", "unknown"]},
+          "retry_policy": {
+            "type": "object",
+            "required": ["max_attempts", "backoff_minutes", "escalate_after"],
+            "properties": {
+              "max_attempts": {"type": "integer", "minimum": 1},
+              "backoff_minutes": {"type": "integer", "minimum": 1},
+              "escalate_after": {"type": "integer", "minimum": 1}
+            }
+          },
+          "recheck_after_minutes": {"type": "integer", "minimum": 1}
+        }
+      }
+    }
+  }
+}
