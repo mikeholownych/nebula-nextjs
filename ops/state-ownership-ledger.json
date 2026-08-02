@@ -1,0 +1,122 @@
+{
+  "schema_version": "1.0",
+  "ledger_id": "nebula-state-ownership",
+  "last_verified": "2026-08-02",
+  "principles": [
+    "No state transition without an owner.",
+    "No completion without evidence.",
+    "External side effects require idempotency and reconciliation.",
+    "Unknown or conflicting evidence routes to review instead of being inferred."
+  ],
+  "lifecycles": [
+    {
+      "id": "audit",
+      "owner": "platform-api",
+      "source_of_truth": "platform_api/services/audit_db.py",
+      "states": ["requested", "pending", "running", "completed", "failed", "waiting"],
+      "transitions": [
+        {"from": "requested", "to": "pending", "evidence": ["customer-portal/app/api/audit/start/route.ts"]},
+        {"from": "pending", "to": "running", "evidence": ["schema/sop-001-audit-intake.md"]},
+        {"from": "running", "to": "completed", "evidence": ["audits.completed_at", "findings rows", "audit.completed event"]},
+        {"from": "running", "to": "failed", "evidence": ["audits.error_message", "audit.failed event"]},
+        {"from": "pending", "to": "waiting", "evidence": ["HTTP 429", "audit rate-limit event"]}
+      ],
+      "retry": {"policy": "bounded", "max_attempts": 2, "reconcile": "preserve prior audit records; rerun creates a new version"},
+      "gaps": ["transition enforcement is documented but not yet centralized in one state-transition module"]
+    },
+    {
+      "id": "payment",
+      "owner": "stripe-webhook",
+      "source_of_truth": "customer-portal/app/api/webhooks/stripe/route.ts",
+      "states": ["checkout_started", "paid_review", "paid_confirmed", "processing", "delivered", "failed", "refunded"],
+      "transitions": [
+        {"from": "checkout_started", "to": "paid_confirmed", "evidence": ["checkout.session.completed", "livemode=true", "payment_status=paid", "currency=usd", "metadata.audit_id", "metadata.offer_key"]},
+        {"from": "paid_confirmed", "to": "processing", "evidence": ["purchase row", "advisory lock", "fulfillment dispatch"]},
+        {"from": "processing", "to": "delivered", "evidence": ["delivery artifact", "purchase_completed event"]},
+        {"from": "processing", "to": "failed", "evidence": ["fulfillment failure record", "review alert"]},
+        {"from": "paid_review", "to": "paid_confirmed", "evidence": ["human reconciliation of missing metadata"]}
+      ],
+      "retry": {"policy": "Stripe retry plus advisory lock", "max_attempts": 2, "reconcile": "same Stripe session is idempotent"},
+      "gaps": ["direct payment-link purchases can lack audit_id metadata", "manual review is still required for some canonical paid receipts"]
+    },
+    {
+      "id": "fulfillment",
+      "owner": "mike-manual-delivery",
+      "source_of_truth": "customer-portal/__tests__/stripe-webhook-fulfillment-gate.test.ts",
+      "states": ["not_started", "paid_confirmed", "kickoff_required", "in_progress", "delivered", "failed", "cancelled", "reverted"],
+      "transitions": [
+        {"from": "paid_confirmed", "to": "kickoff_required", "evidence": ["Telegram kickoff alert", "purchase row"]},
+        {"from": "kickoff_required", "to": "in_progress", "evidence": ["scope approval", "before snapshot"]},
+        {"from": "in_progress", "to": "delivered", "evidence": ["prompt/fix artifact", "after snapshot", "delivery confirmation"]},
+        {"from": "in_progress", "to": "reverted", "evidence": ["rollback artifact", "intervention status"]},
+        {"from": "in_progress", "to": "cancelled", "evidence": ["access timeout or refund record"]}
+      ],
+      "retry": {"policy": "human retry after failure diagnosis", "max_attempts": 2, "reconcile": "never claim delivery from payment alone"},
+      "gaps": ["offer copy and actual manual-first kickoff must remain aligned", "no single canonical fulfillment state store across all delivery paths"]
+    },
+    {
+      "id": "workspace-identity",
+      "owner": "customer-portal-auth",
+      "source_of_truth": "customer-portal/app/workspace/WorkspaceClient.tsx",
+      "states": ["anonymous", "email_keyed_demo", "authenticated", "revoked"],
+      "transitions": [
+        {"from": "anonymous", "to": "email_keyed_demo", "evidence": ["localStorage.nebula_ws_email"]},
+        {"from": "anonymous", "to": "authenticated", "evidence": ["server-verified auth session"]},
+        {"from": "authenticated", "to": "revoked", "evidence": ["logout or account deletion record"]}
+      ],
+      "retry": {"policy": "no identity retry; re-authenticate", "max_attempts": 1, "reconcile": "server authorization wins over client identity"},
+      "gaps": ["email_keyed_demo must not authorize private customer data", "signed ownership session and route-complete ownership checks remain required"]
+    },
+    {
+      "id": "lead",
+      "owner": "growth-support-gates",
+      "source_of_truth": "CLAUDE.md",
+      "states": ["discovered", "site_found", "contacted", "audit_delivered", "pitch_sent", "paid", "dead", "bounced", "max_retries_exceeded"],
+      "transitions": [
+        {"from": "discovered", "to": "site_found", "evidence": ["verified domain record"]},
+        {"from": "site_found", "to": "contacted", "evidence": ["approved send receipt", "bounce/opt-out checks"]},
+        {"from": "contacted", "to": "audit_delivered", "evidence": ["audit artifact", "delivery receipt"]},
+        {"from": "audit_delivered", "to": "pitch_sent", "evidence": ["approved offer send receipt"]},
+        {"from": "pitch_sent", "to": "paid", "evidence": ["verified Stripe payment"]}
+      ],
+      "retry": {"policy": "bounded follow-up with bounce and opt-out gates", "max_attempts": 3, "reconcile": "deduplicate by canonical lead identity"},
+      "gaps": ["outbound delivery remains approval-gated", "some legacy lead artifacts exist outside the canonical lead store"]
+    },
+    {
+      "id": "agent-task",
+      "owner": "ceo-reconciler-kanban",
+      "source_of_truth": "docs/agent-operating-loop.md",
+      "states": ["created", "queued", "running", "completed", "blocked", "failed", "superseded"],
+      "transitions": [
+        {"from": "created", "to": "queued", "evidence": ["kanban task id", "idempotency key"]},
+        {"from": "queued", "to": "running", "evidence": ["kanban run record"]},
+        {"from": "running", "to": "completed", "evidence": ["verification artifact", "completed kanban run"]},
+        {"from": "running", "to": "blocked", "evidence": ["blocked reason", "recheck timestamp"]},
+        {"from": "running", "to": "failed", "evidence": ["failure record", "bounded retry count"]}
+      ],
+      "retry": {"policy": "bounded retries with recheck window", "max_attempts": 2, "reconcile": "open/completed/blocked keys prevent duplicates"},
+      "gaps": ["some profile worker failures still require operational review"]
+    },
+    {
+      "id": "aeo-evaluation",
+      "owner": "aeo-harness-human-review",
+      "source_of_truth": "aeo_harness/README.md",
+      "states": ["snapshot", "scored", "candidate", "human_review", "accepted", "reverted", "citation_no_data"],
+      "transitions": [
+        {"from": "snapshot", "to": "scored", "evidence": ["source hash", "output/original.json"]},
+        {"from": "scored", "to": "candidate", "evidence": ["candidate artifact", "dev/holdout split"]},
+        {"from": "candidate", "to": "human_review", "evidence": ["semantic report", "factual diff"]},
+        {"from": "human_review", "to": "accepted", "evidence": ["rendered QA", "holdout non-regression"]},
+        {"from": "human_review", "to": "reverted", "evidence": ["critical claim failure or holdout regression"]}
+      ],
+      "retry": {"policy": "re-run with pinned inputs/model; never overwrite holdout", "max_attempts": 3, "reconcile": "retain source hash and decision report"},
+      "gaps": ["real AI-engine capture adapters are not yet connected", "model-based semantic judging requires approved provider configuration"]
+    }
+  ],
+  "priority_gaps": [
+    {"id": "P0-payment-binding", "severity": "critical", "owner": "stripe-webhook", "goal": "Make every paid purchase deterministically bind to an audit and fulfillment record.", "evidence_needed": ["metadata.audit_id", "canonical purchase row", "fulfillment transition receipt"]},
+    {"id": "P0-workspace-ownership", "severity": "critical", "owner": "customer-portal-auth", "goal": "Replace client-controlled email identity with signed server ownership and enforce it on every private route.", "evidence_needed": ["server session", "negative cross-owner authorization tests", "browser-verified private route"]},
+    {"id": "P1-transition-module", "severity": "high", "owner": "platform-api", "goal": "Centralize legal lifecycle transitions and reject arbitrary state writes.", "evidence_needed": ["transition matrix tests", "invalid transition rejection", "event receipt"]},
+    {"id": "P1-log-hygiene", "severity": "high", "owner": "ops-finance", "goal": "Bound operational logs and retain structured failure context.", "evidence_needed": ["rotation policy", "bounded file size", "correlation fields"]}
+  ]
+}
