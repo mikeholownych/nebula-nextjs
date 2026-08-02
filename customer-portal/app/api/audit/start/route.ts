@@ -9,7 +9,7 @@ import { assertPublicHttpUrl } from '@/app/lib/ssrf-guard'
 
 export async function POST(request: NextRequest) {
   try {
-    let body: { url?: string; email?: string; name?: string; referrer?: string }
+    let body: { url?: string; email?: string; name?: string; referrer?: string; audit_reason?: string }
     try {
       body = await request.json()
     } catch {
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
-    const { url, email, name, referrer } = body
+    const { url, email, name, referrer, audit_reason } = body
 
     // Validate URL
     if (!url) {
@@ -106,6 +106,7 @@ export async function POST(request: NextRequest) {
           score: data.score,
           grade: data.grade,
           referrer: referrer || null,
+          audit_reason: audit_reason || null,
         },
       })
       await ph.flush()

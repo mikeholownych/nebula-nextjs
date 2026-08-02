@@ -7,6 +7,7 @@ import posthog from '@/app/lib/posthog-browser'
 
 function AuditFormContent() {
   const [url, setUrl] = useState('')
+  const [reason, setReason] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [referrer, setReferrer] = useState<string | null>(null)
@@ -51,6 +52,7 @@ function AuditFormContent() {
       page_url: processedUrl,
       page_domain: new URL(processedUrl).hostname,
       referrer: referrer ?? null,
+      audit_reason: reason.trim() || null,
     })
 
     try {
@@ -62,6 +64,7 @@ function AuditFormContent() {
           url: processedUrl,
           referrer: referrer || undefined,
           email: wsEmail || undefined,
+          audit_reason: reason.trim() || undefined,
         }),
       })
 
@@ -112,6 +115,22 @@ function AuditFormContent() {
             onChange={(e) => setUrl(e.target.value)}
             disabled={loading}
             className="w-full rounded-lg border border-fg-muted/30 bg-bg px-4 py-3 text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none disabled:opacity-50"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="reason" className="mb-2 block text-sm font-medium text-fg-muted">
+            What made you run this audit today? <span className="text-fg-muted/60">(optional)</span>
+          </label>
+          <textarea
+            id="reason"
+            placeholder="e.g. ads aren't converting, launching next week, page feels off…"
+            value={reason}
+            onChange={(e) => setReason(e.target.value)}
+            disabled={loading}
+            rows={2}
+            maxLength={300}
+            className="w-full resize-none rounded-lg border border-fg-muted/30 bg-bg px-4 py-3 text-sm text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none disabled:opacity-50"
           />
         </div>
 
