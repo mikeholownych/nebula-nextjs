@@ -21,7 +21,7 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["action_id", "assignee", "goal", "verification", "constraints", "retry_policy", "recheck_after_minutes"],
+        "required": ["action_id", "assignee", "goal", "verification", "constraints", "retry_policy", "execution", "recheck_after_minutes"],
         "properties": {
           "action_id": {"type": "string", "minLength": 1},
           "assignee": {"type": "string", "minLength": 1},
@@ -37,6 +37,21 @@
               "max_attempts": {"type": "integer", "minimum": 1},
               "backoff_minutes": {"type": "integer", "minimum": 1},
               "escalate_after": {"type": "integer", "minimum": 1}
+            }
+          },
+          "execution": {
+            "type": "object",
+            "required": ["pattern", "max_workers", "max_retries", "max_runtime_seconds", "max_input_tokens", "max_output_tokens", "max_cost_usd", "verification_required", "canonical_writer"],
+            "properties": {
+              "pattern": {"enum": ["single_call", "prompt_chaining", "routing", "parallelization", "orchestrator_workers", "evaluator_optimizer"]},
+              "max_workers": {"type": "integer", "minimum": 1, "maximum": 2},
+              "max_retries": {"type": "integer", "minimum": 0, "maximum": 2},
+              "max_runtime_seconds": {"type": "integer", "minimum": 1, "maximum": 1200},
+              "max_input_tokens": {"type": "integer", "minimum": 1, "maximum": 100000},
+              "max_output_tokens": {"type": "integer", "minimum": 1, "maximum": 10000},
+              "max_cost_usd": {"type": "number", "minimum": 0, "maximum": 5},
+              "verification_required": {"const": true},
+              "canonical_writer": {"type": "string", "minLength": 1}
             }
           },
           "recheck_after_minutes": {"type": "integer", "minimum": 1}
