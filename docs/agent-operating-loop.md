@@ -29,6 +29,13 @@ The machine-readable contract is:
 ops/agent-action-contract.schema.json
 ```
 
+Production changes additionally require:
+
+```text
+ops/production-change-contract.schema.json
+docs/production-change-contract.md
+```
+
 Each action includes:
 
 - `goal`: the outcome, not an activity list.
