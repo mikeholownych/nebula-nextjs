@@ -3,6 +3,7 @@
 from typing import Any, Dict, Optional
 
 from fastapi import HTTPException, Request, status
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
 
@@ -61,11 +62,18 @@ async def http_exception_handler(
     )
 
 
+def _request_id(request: Request) -> str | None:
+    """Safely resolve the request ID without assuming middleware ran."""
+    return request.headers.get("X-Request-ID") or getattr(
+        request.state, "request_id", None
+    )
+
+
 async def validation_exception_handler(
-    request: Request, exc: Exception
+    request: Request, exc: RequestValidationError
 ) -> JSONResponse:
-    """Handle validation exceptions with envelope formatting."""
-    request_id = request.headers.get("X-Request-ID") or request.state.request_id
+    """Handle validation errors with envelope formatting."""
+    request_id = _request_id(request)
     
     # FastAPI validation errors have a specific structure
     # For now, return a generic validation error
@@ -87,7 +95,7 @@ async def generic_exception_handler(
     request: Request, exc: Exception
 ) -> JSONResponse:
     """Handle all other exceptions with envelope formatting."""
-    request_id = request.headers.get("X-Request-ID") or request.state.request_id
+    request_id = _request_id(request)
     
     # In production, don't expose internal error details
     message = "Internal server error"

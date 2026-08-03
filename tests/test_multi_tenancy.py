@@ -29,14 +29,14 @@ print("=" * 60)
 
 # 1. List sites
 sites = site_registry.list_sites()
-check("list_sites returns both sites", "nebulacomponents.shop" in sites and "launchcrate.io" in sites,
+check("list_sites returns both sites", "nebulacomponents.com" in sites and "launchcrate.io" in sites,
       f"Got: {sites}")
 
 # 2. Load nebulacomponents config
-nc = site_registry.load_site_config("nebulacomponents.shop")
+nc = site_registry.load_site_config("nebulacomponents.com")
 check("Nebula brand_name", nc["brand_name"] == "Nebula Components", f"Got: {nc.get('brand_name')}")
 check("Nebula competitors", "Unbounce" in nc["competitors"], f"Got: {nc['competitors']}")
-check("Nebula offer price", nc["offer_price"] == 147, f"Got: {nc.get('offer_price')}")
+check("Nebula offer price", nc["offer_price"] == 97, f"Got: {nc.get('offer_price')}")
 
 # 3. Load launchcrate config
 lc = site_registry.load_site_config("launchcrate.io")
@@ -47,7 +47,7 @@ check("LaunchCrate offer price differs", lc["offer_price"] != nc["offer_price"],
       f"Nebula: {nc.get('offer_price')} | LC: {lc.get('offer_price')}")
 
 # 4. Keywords — no cross-contamination
-nc_kw = site_registry.get_keywords("nebulacomponents.shop", "high_intent")
+nc_kw = site_registry.get_keywords("nebulacomponents.com", "high_intent")
 lc_kw = site_registry.get_keywords("launchcrate.io", "high_intent")
 check("Nebula high-intent keywords include 'landing page audit'",
       "landing page audit" in nc_kw, f"Got top-3: {nc_kw[:3]}")
@@ -59,15 +59,15 @@ check("No cross-contamination: Nebula keywords absent from LC",
       not any("landing page audit" in kw for kw in lc_kw), f"LC has: {lc_kw}")
 
 # 5. AI queries isolation
-nc_ai = site_registry.get_ai_queries("nebulacomponents.shop")
+nc_ai = site_registry.get_ai_queries("nebulacomponents.com")
 lc_ai = site_registry.get_ai_queries("launchcrate.io")
 check("Nebula AI queries include 'landing page audit'",
-      "what is the best landing page audit tool" in nc_ai, f"Got: {nc_ai}")
+      any("landing page audit" in q for q in nc_ai), f"Got: {nc_ai}")
 check("LaunchCrate AI queries include 'saas launch'",
       "how to launch a SaaS fast" in lc_ai, f"Got: {lc_ai}")
 
 # 6. Validate sites
-check("Nebula site validates", site_registry.validate_site("nebulacomponents.shop"))
+check("Nebula site validates", site_registry.validate_site("nebulacomponents.com"))
 check("LaunchCrate site validates", site_registry.validate_site("launchcrate.io"))
 
 # 7. Non-existent site

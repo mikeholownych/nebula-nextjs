@@ -34,9 +34,38 @@ class RedisClient:
         self.redis_url = redis_url or settings.REDIS_URL
         self._pool: Optional[ConnectionPool] = None
         self._client: Optional[Redis] = None
+        self._loop: Optional[Any] = None
+    
+    def _current_loop(self) -> Any:
+        """Return the running asyncio event loop, if any."""
+        try:
+            import asyncio
+            return asyncio.get_running_loop()
+        except RuntimeError:
+            return None
     
     async def connect(self) -> None:
-        """Initialize Redis connection pool."""
+        """Initialize Redis connection pool, loop-aware.
+
+        The async Redis client binds its transport to the running event loop.
+        If a pool exists but belongs to a different loop (e.g. across test
+        event loops), tear it down and create a fresh one so we never leak a
+        cross-loop connection (which crashes with 'Event loop is closed').
+        """
+        loop = self._current_loop()
+        if self._pool is not None and self._loop is not None and self._loop is not loop:
+            # Pool belongs to a dead/different loop — tear it down first.
+            try:
+                if self._client:
+                    await self._client.aclose()
+            except Exception:
+                pass
+            try:
+                await self._pool.aclose()
+            except Exception:
+                pass
+            self._client = None
+            self._pool = None
         if self._pool is None:
             self._pool = ConnectionPool.from_url(
                 self.redis_url,
@@ -44,6 +73,7 @@ class RedisClient:
                 max_connections=50,
             )
             self._client = Redis(connection_pool=self._pool)
+            self._loop = loop
     
     async def disconnect(self) -> None:
         """Close Redis connection pool."""

@@ -224,6 +224,7 @@ class AgentMailClient:
                 DeliveryPurpose.AUDIT_DELIVERY: "audit",
                 DeliveryPurpose.CONVERSATION_REPLY: "conversation",
                 DeliveryPurpose.INTERNAL: "internal",
+                DeliveryPurpose.TRANSACTIONAL: "txn",
             }[purpose]
             client_id = f"{prefix}:{digest}"
 
@@ -291,6 +292,17 @@ class AgentMailClient:
         """Send only to a configured internal recipient."""
         return self.__send_scoped(
             to, subject, purpose=DeliveryPurpose.INTERNAL, **kwargs
+        )
+
+    def send_transactional(self, to: list, subject: str, **kwargs) -> dict:
+        """Send a transactional/auth email (magic link, receipt, security notice).
+
+        Exempt from marketing opt-outs and lead-state gates by CAN-SPAM. Uses
+        the same single-authority transport and delivery ledger as every other
+        outbound message.
+        """
+        return self.__send_scoped(
+            to, subject, purpose=DeliveryPurpose.TRANSACTIONAL, **kwargs
         )
 
     def reply(

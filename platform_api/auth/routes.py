@@ -24,6 +24,7 @@ from platform_api.db import Organization, User, UserIdentity, get_session
 from platform_api.posthog_client import get_posthog
 from platform_api.redis_client import get_redis
 from .google import GoogleOAuthError, verify_google_token
+from .github import GitHubOAuthError, exchange_code_for_token, fetch_github_user, generate_authorize_url, validate_state
 from .jwt import (
     JWTError,
     create_session,
@@ -180,7 +181,7 @@ async def google_auth(
             org = Organization(
                 id=uuid4(),
                 name=f"{google_user.get('name', 'My')} Organization",
-                slug=f"org-{user.id.hex[:8]}"
+                slug=f"org-{str(user.id).replace('-', '')[:8]}"
             )
             db.add(org)
             db.flush()  # Get org.id
@@ -221,7 +222,7 @@ async def google_auth(
         return TokenResponse(
             access_token=token,
             user_id=str(user.id),
-            email=user.email
+            email=user.email or ""
         )
 
     except GoogleOAuthError as e:
@@ -298,39 +299,27 @@ If you didn't request this link, you can safely ignore this email.
 Nebula Components -- nebulacomponents.com
 """.strip()
 
-    # Magic link is a transactional auth email — send directly via AgentMail REST API,
-    # bypassing the marketing OutboundReleaseGate which applies to lead outreach only.
+    # Magic link is a transactional auth email. Route it through the single
+    # outbound authority (AgentMailClient.send_transactional) which uses the
+    # same transport + delivery ledger as everything else, with a
+    # CAN-SPAM-exempt transactional purpose (no marketing opt-out/lead gates).
     _recipient_email = body.email
 
     def _send_transactional() -> dict:
-        key_path = os.path.expanduser("~/.hermes/secrets/agentmail_org.key")
-        api_key = os.environ.get("AGENTMAIL_API_KEY") or os.environ.get("AM_KEY") or ""
-        if not api_key and os.path.exists(key_path):
-            with open(key_path) as f:
-                api_key = f.read().strip()
+        from agentmail_client import AgentMailClient
 
-        inbox = "nebulashop@agentmail.to"
-        payload = _json.dumps({
-            "to": [_recipient_email],
-            "subject": "Your Nebula Components sign-in link",
-            "text": text_body,
-            "html": html_body,
-        }).encode()
-        url = f"https://api.agentmail.to/v0/inboxes/{inbox}/messages/send"
-        req = urllib.request.Request(
-            url,
-            data=payload,
-            headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
-            method="POST",
-        )
+        client = AgentMailClient()
         try:
-            with urllib.request.urlopen(req, timeout=20) as resp:
-                return _json.loads(resp.read())
-        except urllib.error.HTTPError as exc:
-            body_text = exc.read().decode()
-            return {"_error": exc.code, "_body": body_text[:800]}
-        except Exception as exc:
+            result = client.send_transactional(
+                [_recipient_email],
+                "Your Nebula Components sign-in link",
+                text=text_body,
+                html=html_body,
+                client_id=f"magic-link:{_recipient_email}:{redis_key.split(':')[-1]}",
+            )
+        except Exception as exc:  # noqa: BLE001 - surface as _error like prior transport
             return {"_error": str(exc)}
+        return result or {"_error": "empty response"}
 
     result = await asyncio.to_thread(_send_transactional)
 
@@ -363,7 +352,8 @@ async def verify_magic_link(
     if not data:
         raise HTTPException(status_code=400, detail="Invalid or expired magic link")
 
-    email: str = data.get("email") if isinstance(data, dict) else str(data)
+    email_raw = data.get("email") if isinstance(data, dict) else str(data)
+    email: str = email_raw or ""
     if not email:
         raise HTTPException(status_code=400, detail="Invalid magic link data")
 
@@ -381,7 +371,7 @@ async def verify_magic_link(
         org = Organization(
             id=uuid4(),
             name=f"My Organization",
-            slug=f"org-{user.id.hex[:8]}"
+            slug=f"org-{str(user.id).replace('-', '')[:8]}"
         )
         db.add(org)
         db.flush()
@@ -404,7 +394,7 @@ async def verify_magic_link(
             org = Organization(
                 id=uuid4(),
                 name="My Organization",
-                slug=f"org-{user.id.hex[:8]}"
+                slug=f"org-{str(user.id).replace('-', '')[:8]}"
             )
             db.add(org)
             db.flush()
@@ -444,6 +434,345 @@ async def verify_magic_link(
         user_id=str(user.id),
         email=email,
     )
+
+
+# --- Google OAuth (server-side redirect flow) ---
+
+GOOGLE_CALLBACK_PATH = "/api/auth/google/callback"
+GOOGLE_AUTHORIZE_URL = "https://accounts.google.com/o/oauth2/v2/auth"
+GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token"
+
+
+@router.get("/google/authorize")
+async def google_authorize(
+    request: Request,
+    redis=Depends(get_redis),
+):
+    """Generate Google OAuth authorization URL (server-side flow).
+
+    Returns {url} that the frontend should redirect the browser to.
+    """
+    import secrets
+
+    if not settings.GOOGLE_CLIENT_ID:
+        raise HTTPException(status_code=500, detail="GOOGLE_CLIENT_ID not configured")
+
+    state = secrets.token_urlsafe(32)
+    await redis.set(f"google_oauth_state:{state}", {"ts": "1"}, ttl=600)
+
+    base_url = settings.PUBLIC_BASE_URL.rstrip("/")
+    redirect_uri = f"{base_url}{GOOGLE_CALLBACK_PATH}"
+
+    params = (
+        f"client_id={settings.GOOGLE_CLIENT_ID}"
+        f"&redirect_uri={redirect_uri}"
+        f"&response_type=code"
+        f"&scope=openid%20email%20profile"
+        f"&state={state}"
+        f"&access_type=online"
+        f"&prompt=select_account"
+    )
+
+    return {"url": f"{GOOGLE_AUTHORIZE_URL}?{params}"}
+
+
+@router.get("/google/callback")
+async def google_callback(
+    request: Request,
+    response: Response,
+    code: str,
+    state: str,
+    redis=Depends(get_redis),
+    db=Depends(get_session),
+):
+    """Handle Google OAuth callback (server-side code exchange).
+
+    Exchanges code for tokens, verifies ID token, creates/finds user,
+    issues JWT session.
+    """
+    import httpx
+
+    # Validate state
+    state_key = f"google_oauth_state:{state}"
+    state_data = await redis.get(state_key)
+    if not state_data:
+        raise HTTPException(status_code=401, detail="Invalid or expired OAuth state")
+    await redis.delete(state_key)
+
+    base_url = settings.PUBLIC_BASE_URL.rstrip("/")
+    redirect_uri = f"{base_url}{GOOGLE_CALLBACK_PATH}"
+
+    # Exchange code for tokens
+    async with httpx.AsyncClient() as client:
+        token_resp = await client.post(
+            GOOGLE_TOKEN_URL,
+            data={
+                "client_id": settings.GOOGLE_CLIENT_ID,
+                "client_secret": settings.GOOGLE_CLIENT_SECRET,
+                "code": code,
+                "grant_type": "authorization_code",
+                "redirect_uri": redirect_uri,
+            },
+            timeout=10.0,
+        )
+
+    if token_resp.status_code != 200:
+        raise HTTPException(status_code=401, detail="Google token exchange failed")
+
+    token_data = token_resp.json()
+    id_token_str = token_data.get("id_token")
+    if not id_token_str:
+        raise HTTPException(status_code=401, detail="No id_token from Google")
+
+    # Verify the ID token using the existing verifier
+    try:
+        google_user = await verify_google_token(id_token_str)
+    except GoogleOAuthError as e:
+        raise HTTPException(status_code=401, detail=str(e))
+
+    if not google_user.get("email"):
+        raise HTTPException(status_code=400, detail="Email required")
+    if google_user.get("email_verified") is not True:
+        raise HTTPException(status_code=401, detail="Verified email required")
+
+    # Find or create user (same logic as POST /auth/google)
+    identity = db.query(UserIdentity).filter_by(
+        issuer="google",
+        subject=google_user["subject"]
+    ).first()
+    is_new_user = identity is None
+
+    if identity:
+        user = identity.user
+        org = db.query(Organization).join(
+            Organization.memberships
+        ).filter_by(user_id=user.id).first()
+    else:
+        user = User(id=uuid4(), email=google_user["email"])
+        if hasattr(user, "name"):
+            user.name = google_user.get("name")
+        if hasattr(user, "picture"):
+            user.picture = google_user.get("picture")
+        db.add(user)
+
+        identity = UserIdentity(
+            id=uuid4(),
+            user_id=user.id,
+            issuer="google",
+            subject=google_user["subject"]
+        )
+        db.add(identity)
+
+        org = Organization(
+            id=uuid4(),
+            name=f"{google_user.get('name', 'My')} Organization",
+            slug=f"org-{str(user.id).replace('-', '')[:8]}"
+        )
+        db.add(org)
+        db.flush()
+
+        from ..db.models import Membership
+        membership = Membership(
+            id=uuid4(),
+            user_id=user.id,
+            organization_id=org.id,
+            role="owner"
+        )
+        db.add(membership)
+        db.commit()
+
+    # Create session
+    session_data = {
+        "ip": request.client.host if request.client else None,
+        "user_agent": request.headers.get("user-agent", ""),
+        "auth_method": "google"
+    }
+
+    token = await create_session(
+        redis,
+        str(user.id),
+        str(org.id) if org else "",
+        session_data
+    )
+
+    # Set cookie
+    response.set_cookie(
+        key="access_token",
+        value=token,
+        httponly=True,
+        secure=True,
+        samesite="lax",
+        max_age=settings.JWT_EXPIRATION_DAYS * 24 * 3600,
+        path="/",
+    )
+
+    ph = get_posthog()
+    if ph:
+        event_name = "user_signed_up" if is_new_user else "user_logged_in"
+        with new_context(client=ph):
+            identify_context(str(user.id))
+            ph.capture(event_name, properties={"auth_method": "google_redirect"})
+
+    return TokenResponse(
+        access_token=token,
+        user_id=str(user.id),
+        email=user.email or ""
+    )
+
+
+# --- GitHub OAuth ---
+
+GITHUB_CALLBACK_PATH = "/api/auth/github/callback"
+
+
+@router.get("/github/authorize")
+async def github_authorize(
+    request: Request,
+    redis=Depends(get_redis),
+):
+    """Generate GitHub OAuth authorization URL.
+
+    Returns {url} that the frontend should redirect the browser to.
+    """
+    # Use the public-facing base URL for the redirect URI
+    # (GitHub redirects to the Next.js frontend, not the internal API)
+    base_url = settings.PUBLIC_BASE_URL.rstrip("/")
+    redirect_uri = f"{base_url}{GITHUB_CALLBACK_PATH}"
+
+    try:
+        url = await generate_authorize_url(redis, redirect_uri)
+        return {"url": url}
+    except GitHubOAuthError as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/github/callback")
+async def github_callback(
+    request: Request,
+    response: Response,
+    code: str,
+    state: str,
+    redis=Depends(get_redis),
+    db=Depends(get_session),
+):
+    """Handle GitHub OAuth callback.
+
+    Exchanges code for token, fetches user, creates/finds internal user,
+    creates JWT session, and returns TokenResponse.
+    """
+    try:
+        # Validate CSRF state
+        await validate_state(redis, state)
+
+        # Build redirect_uri (must match what was used in authorize)
+        base_url = settings.PUBLIC_BASE_URL.rstrip("/")
+        redirect_uri = f"{base_url}{GITHUB_CALLBACK_PATH}"
+
+        # Exchange code for access token
+        access_token = await exchange_code_for_token(code, redirect_uri)
+
+        # Fetch GitHub user profile
+        github_user = await fetch_github_user(access_token)
+
+        if not github_user.get("subject"):
+            raise HTTPException(status_code=400, detail="GitHub user ID unavailable")
+
+        # Check if identity exists (issuer='github', subject=github_user_id)
+        identity = db.query(UserIdentity).filter_by(
+            issuer="github",
+            subject=github_user["subject"],
+        ).first()
+        is_new_user = identity is None
+
+        if identity:
+            # Existing user — sign in
+            user = identity.user
+            org = db.query(Organization).join(
+                Organization.memberships
+            ).filter_by(user_id=user.id).first()
+        else:
+            # New user — create account
+            user = User(
+                id=uuid4(),
+                email=github_user.get("email"),
+            )
+            # Set name/picture if model supports it
+            if hasattr(user, "name"):
+                user.name = github_user.get("name")
+            if hasattr(user, "picture"):
+                user.picture = github_user.get("picture")
+            db.add(user)
+
+            # Create identity
+            identity = UserIdentity(
+                id=uuid4(),
+                user_id=user.id,
+                issuer="github",
+                subject=github_user["subject"],
+            )
+            db.add(identity)
+
+            # Create default organization
+            org_name = f"{github_user.get('name') or github_user.get('login', 'My')} Organization"
+            org = Organization(
+                id=uuid4(),
+                name=org_name,
+                slug=f"org-{str(user.id).replace('-', '')[:8]}",
+            )
+            db.add(org)
+            db.flush()
+
+            # Create owner membership
+            from ..db.models import Membership
+            membership = Membership(
+                id=uuid4(),
+                user_id=user.id,
+                organization_id=org.id,
+                role="owner",
+            )
+            db.add(membership)
+            db.commit()
+
+        # Create JWT session
+        session_data = {
+            "ip": request.client.host if request.client else None,
+            "user_agent": request.headers.get("user-agent", ""),
+            "auth_method": "github",
+        }
+
+        token = await create_session(
+            redis,
+            str(user.id),
+            str(org.id) if org else "",
+            session_data,
+        )
+
+        # Set HTTP-only cookie
+        response.set_cookie(
+            key="access_token",
+            value=token,
+            httponly=True,
+            secure=True,
+            samesite="lax",
+            max_age=settings.JWT_EXPIRATION_DAYS * 24 * 3600,
+            path="/",
+        )
+
+        ph = get_posthog()
+        if ph:
+            event_name = "user_signed_up" if is_new_user else "user_logged_in"
+            with new_context(client=ph):
+                identify_context(str(user.id))
+                ph.capture(event_name, properties={"auth_method": "github"})
+
+        return TokenResponse(
+            access_token=token,
+            user_id=str(user.id),
+            email=user.email or "",
+        )
+
+    except GitHubOAuthError as e:
+        raise HTTPException(status_code=401, detail=str(e))
 
 
 # --- Session Management ---
@@ -522,17 +851,19 @@ async def revoke_specific_session(
 
 # --- User Info ---
 
-@router.get("/me", response_model=UserResponse)
+@router.get("/me")
 async def get_me(
     current_user = Depends(get_current_user)
 ):
-    """Get current user information."""
+    """Get current user information including workspace context."""
     user = current_user["user"]
     
-    return UserResponse(
-        id=str(user.id),
-        email=user.email,
-        name=None,  # TODO: Add name field to User model
-        picture=None,
-        created_at=user.created_at
-    )
+    return {
+        "id": str(user.id),
+        "email": user.email,
+        "name": getattr(user, "name", None),
+        "picture": getattr(user, "picture", None),
+        "status": getattr(user, "status", "active"),
+        "org_id": current_user.get("org_id"),
+        "created_at": user.created_at.isoformat(),
+    }

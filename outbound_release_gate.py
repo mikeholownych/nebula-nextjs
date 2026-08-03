@@ -28,6 +28,7 @@ class DeliveryPurpose(str, Enum):
     AUDIT_DELIVERY = "audit_delivery"
     CONVERSATION_REPLY = "conversation_reply"
     INTERNAL = "internal"
+    TRANSACTIONAL = "transactional"
 
 
 @dataclass(frozen=True)
@@ -66,6 +67,7 @@ class OutboundReleaseGate:
         DeliveryPurpose.AUDIT_DELIVERY: ("audit:", "platform-audit:", "fix-pack:"),
         DeliveryPurpose.CONVERSATION_REPLY: ("reply:", "conversation:"),
         DeliveryPurpose.INTERNAL: ("internal:", "upwork-digest:"),
+        DeliveryPurpose.TRANSACTIONAL: ("txn:", "magic-link:", "platform:"),
     }
 
     def __init__(
@@ -575,6 +577,10 @@ class OutboundReleaseGate:
             return "invalid_client_id_scope"
         if purpose is DeliveryPurpose.INTERNAL:
             return None if recipient in self.internal_recipients else "internal_recipient_not_allowed"
+        if purpose is DeliveryPurpose.TRANSACTIONAL:
+            # Transactional/auth email (magic links, receipts, security notices):
+            # exempt from marketing opt-outs and lead-state gates by CAN-SPAM.
+            return None
 
         found, reason = self._lead_state(recipient)
         if not found:

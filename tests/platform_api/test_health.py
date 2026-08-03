@@ -1,20 +1,10 @@
 """Test health and readiness endpoints."""
 
 import pytest
-from httpx import AsyncClient, ASGITransport
 from unittest.mock import MagicMock
 
 from platform_api.main import app
 import platform_api.main as main_module
-
-
-@pytest.fixture
-async def client():
-    """Async test client."""
-    async with AsyncClient(
-        transport=ASGITransport(app=app), base_url="http://test"
-    ) as client:
-        yield client
 
 
 @pytest.mark.asyncio
