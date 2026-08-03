@@ -223,6 +223,7 @@ describe('production safety containment', () => {
   it('fails checkout closed without a validated HTTPS production base URL', async () => {
     process.env.STRIPE_SECRET_KEY = '«redacted:sk_test_…»'
     delete process.env.NEXT_PUBLIC_URL
+    delete process.env.NEXT_PUBLIC_SITE_URL
 
     const response = await checkoutPost(checkoutRequest())
 

@@ -95,7 +95,13 @@ export async function POST(request: NextRequest) {
 
   let baseUrl: URL
   try {
-    baseUrl = new URL(process.env.NEXT_PUBLIC_URL || '')
+    // Canonical site URL var is NEXT_PUBLIC_SITE_URL (what deployments set);
+    // NEXT_PUBLIC_URL remains as a legacy alias for tests/older configs.
+    const siteUrl =
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      process.env.NEXT_PUBLIC_URL ||
+      ''
+    baseUrl = new URL(siteUrl)
     if (
       baseUrl.protocol !== 'https:' ||
       baseUrl.username !== '' ||
