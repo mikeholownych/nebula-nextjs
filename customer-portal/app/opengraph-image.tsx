@@ -7,6 +7,50 @@ export const size = {
 }
 export const contentType = 'image/png'
 
+/**
+ * SignalMark — 3×3 grid of conversion-signal dots, matching the brand
+ * glyph in components/NebulaMark.tsx (NebulaLogo decorative pattern:
+ * top row pass, middle mixed, bottom neutral).
+ */
+function SignalMark({ size = 32 }: { size?: number }) {
+  const pattern: ('pass' | 'neutral')[] = [
+    'pass', 'pass', 'pass',
+    'pass', 'pass', 'neutral',
+    'neutral', 'neutral', 'neutral',
+  ]
+  const dot = Math.round(size * 0.19)
+  return (
+    <div
+      style={{
+        width: size,
+        height: size,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+    >
+      {[0, 1, 2].map((row) => (
+        <div key={row} style={{ display: 'flex', justifyContent: 'space-between' }}>
+          {[0, 1, 2].map((col) => {
+            const state = pattern[row * 3 + col]
+            return (
+              <div
+                key={col}
+                style={{
+                  width: dot,
+                  height: dot,
+                  borderRadius: '50%',
+                  background: state === 'pass' ? '#00c2a0' : 'rgba(158,158,158,0.25)',
+                }}
+              />
+            )
+          })}
+        </div>
+      ))}
+    </div>
+  )
+}
+
 export default function OpenGraphImage() {
   return new ImageResponse(
     (
@@ -25,22 +69,7 @@ export default function OpenGraphImage() {
       >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <div
-              style={{
-                width: 34,
-                height: 34,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 9,
-                background: '#00c2a0',
-                color: '#050505',
-                fontSize: 24,
-                fontWeight: 900,
-              }}
-            >
-              N
-            </div>
+            <SignalMark size={34} />
             <div style={{ display: 'flex', fontSize: 27, fontWeight: 750, letterSpacing: '-0.02em' }}>
               Nebula Components
             </div>
