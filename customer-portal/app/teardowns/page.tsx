@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     'Nebula runs its 9-signal audit on well-known public pages and publishes the raw findings. Not customers — demonstrations of what the engine produces.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/teardowns',
+    canonical: 'https://nebulacomponents.com/teardowns',
   },
 }
 
@@ -130,6 +130,36 @@ const TEARDOWNS = [
     topFinding: 'Zero social-sharing metadata (0 og: tags, 0 twitter: cards) on a product whose founder\'s entire distribution is X posts and forum threads — every shared link renders as a bare URL.',
     findingCount: 3,
     auditedAt: 'July 31, 2026',
+  },
+  {
+    slug: 'cloudwise',
+    name: 'CloudWise',
+    url: 'cloudcostwise.io',
+    score: 7.1,
+    grade: 'B',
+    topFinding: 'Founder-reported: approximately $2,700 in ad spend, around 6 trial signups, and 0 paid conversions. Current snapshot: strong page fundamentals, but ad-tracking evidence is not visible in static source.',
+    findingCount: 3,
+    auditedAt: 'August 3, 2026',
+  },
+  {
+    slug: 'postdew',
+    name: 'PostDew',
+    url: 'postdew.com',
+    score: 4.8,
+    grade: 'D',
+    topFinding: 'Founder-reported: 0 paying customers, 0 signups from approximately 10 LinkedIn cold DMs, and 0 signups from a flagged Show HN post. Current snapshot: no static H1, CTA, or trust markers.',
+    findingCount: 5,
+    auditedAt: 'August 3, 2026',
+  },
+  {
+    slug: 'smartwatermark',
+    name: 'SmartWatermark',
+    url: 'smartwatermark.app',
+    score: 7.5,
+    grade: 'B',
+    topFinding: 'Founder-reported: 84 landing-page visitors, 24 app visitors, 0 sales, and 79% bounce. Current snapshot: strong headline, CTA, SEO, and proof signals; runtime tracking remains unverified.',
+    findingCount: 2,
+    auditedAt: 'August 3, 2026',
   },
 ]
 
