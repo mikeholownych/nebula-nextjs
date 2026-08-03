@@ -1,0 +1,69 @@
+{
+  "url": "https://nebulacomponents.com/",
+  "status_code": 200,
+  "content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\"/><link rel=\"stylesheet\" href=\"/_next/static/chunks/2v95ohpqu44f1.css\" data-precedence=\"next\"/><link rel=\"preload\" as=\"script\" fetchPriority=\"low\" href=\"/_next/static/chunks/34t3p516eaooe.js\"/><script src=\"/_next/static/chunks/24zfb12aud3-6.js\" async=\"\"></script><script src=\"/_next/static/chunks/15j5tzijszemg.js\" async=\"\"></script><script src=\"/_next/...",
+  "raw_content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\"/><link rel=\"stylesheet\" href=\"/_next/static/chunks/2...",
+  "is_spa": false,
+  "extracted_text": "We scored our own landing page and published every finding. Now score yours.\nPaste your URL. Nebula checks 9 conversion signals against your actual page and returns a prioritized fix list. Free, no signup, takes under two minutes.\n6.2/10 \u2014 the average score across all landing pages audited through this engine. That is a C. Most pages running paid traffic fail at least 3 of 9 signals before a visitor sees the CTA.\nBefore the audit engine, there was a spreadsheet. Working with founders on paid tra...",
+  "publication_date": "2026-01-30",
+  "accessibility_tree": null,
+  "headers": {
+    "Date": "Mon, 03 Aug 2026 07:07:53 GMT",
+    "Content-Type": "text/html; charset=utf-8",
+    "Transfer-Encoding": "chunked",
+    "Connection": "keep-alive",
+    "Cache-Control": "public, max-age=0, must-revalidate",
+    "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=nWEWIrMt2j1Lhe3%2BMbUA4OWp9ZsP3CuW27jzjxTszBSCjFC85TU0hQG4%2FWC6fODiF3Wewmsbk%2BXzLswODmK1SCWp9GPeENJy%2BAV3XGEmeqQJFpHV%2B0gfAKNgdYMa9IMuq1AEqnYx0A%3D%3D\"}]}",
+    "content-security-policy-report-only": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://us.posthog.com https://us.i.posthog.com https://cloudflareinsights.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://buy.stripe.com; frame-ancestors 'self'",
+    "link": "</llms.txt>; rel=\"describedby\"; type=\"text/plain\", </.well-known/api-catalog>; rel=\"https://www.rfc-editor.org/rfc/rfc9727#section-3\", </.well-known/agent-skills/index.json>; rel=\"describedby\"; type=\"application/json\", </openapi.json>; rel=\"describedby\"; type=\"application/json\", </.well-known/acp.json>; rel=\"https://agenticcommerce.dev/rel/discovery\", </.well-known/ucp>; rel=\"https://ucp.dev/rel/discovery\", </.well-known/http-message-signatures-directory>; rel=\"https://ietf.org/rel/jwks\", </auth.md>; rel=\"https://workos.com/auth-md\"",
+    "permissions-policy": "camera=(), microphone=(), geolocation=()",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+    "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "SAMEORIGIN",
+    "x-nebula-pathname": "/",
+    "x-nebula-revision": "becddd9b48cf95d2bb2f772e4acbaf687d89c87f",
+    "cf-cache-status": "DYNAMIC",
+    "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+    "Content-Encoding": "br",
+    "Server": "cloudflare",
+    "CF-RAY": "a2537ce9cf51ac87-YYZ",
+    "alt-svc": "h3=\":443\"; ma=86400"
+  },
+  "redirect_chain": [],
+  "console_errors": [],
+  "render_diagnostics": [],
+  "render_engine": null,
+  "render_ms": null,
+  "mode_used": "raw",
+  "error": null,
+  "structured_data": {
+    "block_count": 2,
+    "processed_count": 2,
+    "total_bytes": 1177,
+    "truncated": false,
+    "blocks": [
+      {
+        "index": 1,
+        "size_bytes": 862,
+        "valid": true,
+        "types": [
+          "ContactPoint",
+          "Organization",
+          "Person"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 2,
+        "size_bytes": 315,
+        "valid": true,
+        "types": [
+          "WebSite"
+        ],
+        "types_truncated": false
+      }
+    ]
+  }
+}

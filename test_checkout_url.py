@@ -14,7 +14,7 @@ def test_checkout_url():
     print("=" * 50)
     
     # Test URL
-    test_url = "https://nebulacomponents.shop/checkout?email=mike.holownych@aisyndicate.io&url=https://aisyndicate.io"
+    test_url = "https://nebulacomponents.com/checkout?email=mike.holownych@aisyndicate.io&url=https://aisyndicate.io"
     
     # Parse URL
     parsed = urllib.parse.urlparse(test_url)

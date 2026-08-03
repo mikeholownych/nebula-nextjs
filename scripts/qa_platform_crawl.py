@@ -14,7 +14,7 @@ from urllib.parse import urljoin, urlparse
 import requests
 from bs4 import BeautifulSoup
 
-BASE = "https://nebulacomponents.shop"
+BASE = "https://nebulacomponents.com"
 OUT = Path("qa-output/artifacts/platform-crawl.json")
 CRITICAL = [
     "/", "/audit", "/audit.html", "/thank-you.html", "/ai-ops-retainer.html",
@@ -94,7 +94,7 @@ def fetch(url: str) -> dict:
         "unlabeled_inputs": unlabeled,
         "images": len(images),
         "images_missing_alt": len([i for i in images if i.get("alt") is None]),
-        "internal_links": sorted({u for u in links if urlparse(u).netloc == "nebulacomponents.shop"}),
+        "internal_links": sorted({u for u in links if urlparse(u).netloc == "nebulacomponents.com"}),
         "broken_fragments": broken_fragments,
         "unsafe_blank_links": external_target_blank,
         "stripe_slugs": sorted(set(re.findall(r"buy\.stripe\.com/([A-Za-z0-9]+)", response.text))),

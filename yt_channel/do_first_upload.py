@@ -19,7 +19,7 @@ description = (
     "Full landing page audit of NebulaComponents.shop.\n\n"
     "Score: 6.4/10 (C)\n\n"
     "Every dimension scored with actionable fixes.\n\n"
-    "Free instant audit of your site: https://nebulacomponents.shop"
+    "Free instant audit of your site: https://nebulacomponents.com"
 )
 
 video_id = upload_video(

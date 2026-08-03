@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-BASE_URL="https://nebulacomponents.shop"
+BASE_URL="https://nebulacomponents.com"
 
 log() { printf '[ai-citation-check] %s\n' "$*"; }
 

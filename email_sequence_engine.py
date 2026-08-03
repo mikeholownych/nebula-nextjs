@@ -114,7 +114,7 @@ SEQUENCES = {
                     "--\n"
                     "Mike from Nebula Components\n"
                     "P.S. If you want all 5 leaks fixed in 24h without touching your page, "
-                    "the $97 Fix Pack is here: https://nebulacomponents.shop/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day1_signature\n"
+                    "the $97 Fix Pack is here: https://nebulacomponents.com/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day1_signature\n"
                 ),
             },
             # Day 2: Message Match — soft CTA
@@ -145,7 +145,7 @@ SEQUENCES = {
                     "Mike\n"
                     "P.S. Want your headline rewritten to match your ICP's buying trigger? "
                     "The $97 Fix Pack includes a full hero section rewrite: "
-                    "https://nebulacomponents.shop/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day2_ps\n"
+                    "https://nebulacomponents.com/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day2_ps\n"
                 ),
             },
             # Day 3: One-Action Page — soft CTA
@@ -176,7 +176,7 @@ SEQUENCES = {
                     "--\n"
                     "Mike\n"
                     "P.S. Want your CTA rewritten as a decision-driving button? Fixed in the $97 pack: "
-                    "https://nebulacomponents.shop/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day3_ps\n"
+                    "https://nebulacomponents.com/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day3_ps\n"
                 ),
             },
             # Day 4: Proof Before Pitch — soft CTA
@@ -207,7 +207,7 @@ SEQUENCES = {
                     "Mike\n"
                     "P.S. Want your trust proof repositioned + a dedicated social proof section? "
                     "Included in the $97 Fix Pack: "
-                    "https://nebulacomponents.shop/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day4_ps\n"
+                    "https://nebulacomponents.com/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day4_ps\n"
                 ),
             },
             # Day 5: Fix Before More Spend — direct pitch
@@ -235,7 +235,7 @@ SEQUENCES = {
                     "→ Get it done for you ($97): I'll rewrite your hero, CTA, proof, FAQ, and mobile sections in 24h\n\n"
                     "→ Do nothing ($0): Keep running ads into a leaking page\n\n"
                     "If you want the $97 Fix Pack, it's here:\n"
-                    "https://nebulacomponents.shop/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day5_cta\n\n"
+                    "https://nebulacomponents.com/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day5_cta\n\n"
                     "No calls. No calendar. No agency retainers. Just a fixed page.\n\n"
                     "Thanks for going through the course.\n\n"
                     "--\n"
@@ -267,7 +267,7 @@ SEQUENCES = {
                     "  → Delivered in 24 hours\n"
                     "  → $97, one checkout, done\n\n"
                     "No agency retainer. No sales call. Just a fixed price for a fixed outcome.\n\n"
-                    "https://nebulacomponents.shop/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=offer_sequence&amp;utm_content=offer_intro\n"
+                    "https://nebulacomponents.com/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=offer_sequence&amp;utm_content=offer_intro\n"
                 ),
             },
             {
@@ -285,7 +285,7 @@ SEQUENCES = {
                     "That's 3x more leads from the same ad spend. On a $97 fix.\n\n"
                     "Your audit already showed you where your leaks are. The question is: "
                     "do you want to fix them yourself, or have them done in 24h?\n\n"
-                    "https://nebulacomponents.shop/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=offer_sequence&amp;utm_content=social_proof\n"
+                    "https://nebulacomponents.com/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=offer_sequence&amp;utm_content=social_proof\n"
                 ),
             },
         ],
@@ -335,7 +335,7 @@ SEQUENCES = {
                     "The Fix Pack adapts to your audit results. If your low score is Headline, we fix the headline. "
                     "If it's Trust, we fix the trust proof. It's not a template — it's a tailored implementation.\n\n"
                     "$97. 24h delivery. No meetings.\n\n"
-                    "https://nebulacomponents.shop/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=objection_handling&amp;utm_content=objection_scope\n"
+                    "https://nebulacomponents.com/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=objection_handling&amp;utm_content=objection_scope\n"
                 ),
             },
         ],
@@ -362,7 +362,7 @@ SEQUENCES = {
                     "  \"Went from 0.8% to 2.4% in 5 days. The headline rewrite alone paid for itself 30x.\"\n\n"
                     "Your audit results are waiting. The fix is $97. If it doesn't improve your conversion "
                     "within 30 days, I'll refund it. No questions.\n\n"
-                    "https://nebulacomponents.shop/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=abandoned_checkout&amp;utm_content=ac_nudge\n"
+                    "https://nebulacomponents.com/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=abandoned_checkout&amp;utm_content=ac_nudge\n"
                 ),
             },
             {
@@ -378,7 +378,7 @@ SEQUENCES = {
                     "The cheapest time to fix your page is right now, when the audit already told you "
                     "exactly what's wrong.\n\n"
                     "If you have a specific question I haven't answered, just reply. Happy to help either way.\n\n"
-                    "https://nebulacomponents.shop/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=abandoned_checkout&amp;utm_content=ac_last_call\n"
+                    "https://nebulacomponents.com/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=abandoned_checkout&amp;utm_content=ac_last_call\n"
                 ),
             },
         ],

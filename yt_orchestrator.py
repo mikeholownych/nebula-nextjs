@@ -31,7 +31,7 @@ logger = logging.getLogger("orchestrator")
 # ── Subject pool — sites to audit for YouTube content ───────────────
 SUBJECT_POOL = [
     # Rotating pool of sites that our scraper can actually fetch.
-    "https://nebulacomponents.shop",
+    "https://nebulacomponents.com",
     "https://www.producthunt.com",
     "https://www.shopify.com/pricing",
     "https://webflow.com/pricing",
@@ -43,7 +43,7 @@ SUBJECT_POOL = [
     "https://www.atlassian.com/software/jira/pricing",
 ]
 
-FALLBACK_URL = "https://nebulacomponents.shop"
+FALLBACK_URL = "https://nebulacomponents.com"
 
 
 def _get_next_subject():

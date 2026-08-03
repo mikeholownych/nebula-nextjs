@@ -1,0 +1,53 @@
+{
+  "sites": [
+    {
+      "url": "sc-domain:syndicateclaw.ca",
+      "permission": "siteOwner"
+    },
+    {
+      "url": "sc-domain:mikeholownych.com",
+      "permission": "siteOwner"
+    },
+    {
+      "url": "sc-domain:agentradar.app",
+      "permission": "siteOwner"
+    },
+    {
+      "url": "sc-domain:mcpcodex.ca",
+      "permission": "siteOwner"
+    },
+    {
+      "url": "sc-domain:demandos.pro",
+      "permission": "siteOwner"
+    },
+    {
+      "url": "sc-domain:nameforge.pro",
+      "permission": "siteOwner"
+    },
+    {
+      "url": "sc-domain:gofaultline.dev",
+      "permission": "siteOwner"
+    },
+    {
+      "url": "sc-domain:aisyndicate.io",
+      "permission": "siteOwner"
+    },
+    {
+      "url": "sc-domain:nebulacomponents.shop",
+      "permission": "siteOwner"
+    },
+    {
+      "url": "sc-domain:nebulacomponents.com",
+      "permission": "siteOwner"
+    },
+    {
+      "url": "sc-domain:syndicategate.ca",
+      "permission": "siteOwner"
+    },
+    {
+      "url": "sc-domain:syndicatecode.ca",
+      "permission": "siteOwner"
+    }
+  ],
+  "error": null
+}

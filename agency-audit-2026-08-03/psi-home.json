@@ -1,0 +1,1408 @@
+{
+  "url": "https://nebulacomponents.com",
+  "psi": {
+    "mobile": {
+      "url": "https://nebulacomponents.com",
+      "strategy": "mobile",
+      "lighthouse_scores": {
+        "performance": 95,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lab_metrics": {
+        "first-contentful-paint": {
+          "value": 1669.453981684025,
+          "display": "1.7\u00a0s",
+          "score": 0.93
+        },
+        "largest-contentful-paint": {
+          "value": 2401,
+          "display": "2.4\u00a0s",
+          "score": 0.91
+        },
+        "total-blocking-time": {
+          "value": 0,
+          "display": "0\u00a0ms",
+          "score": 1
+        },
+        "cumulative-layout-shift": {
+          "value": 0,
+          "display": "0",
+          "score": 1
+        },
+        "speed-index": {
+          "value": 4237.253666441873,
+          "display": "4.2\u00a0s",
+          "score": 0.77
+        },
+        "interactive": {
+          "value": 2401,
+          "display": "2.4\u00a0s",
+          "score": 0.98
+        }
+      },
+      "field_metrics": {},
+      "opportunities": [
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "savings_ms": 150,
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/)."
+        }
+      ],
+      "diagnostics": [
+        {
+          "id": "total-byte-weight",
+          "title": "Avoids enormous network payloads",
+          "display": "Total size was 242\u00a0KiB",
+          "score": 1,
+          "description": "Large network payloads cost users real money and are highly correlated with long load times. [Learn how to reduce payload sizes](https://developer.chrome.com/docs/lighthouse/performance/total-byte-weight/)."
+        },
+        {
+          "id": "mainthread-work-breakdown",
+          "title": "Minimizes main-thread work",
+          "display": "0.4\u00a0s",
+          "score": 1,
+          "description": "Consider reducing the time spent parsing, compiling and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to minimize main-thread work](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)"
+        },
+        {
+          "id": "bootup-time",
+          "title": "JavaScript execution time",
+          "display": "0.2\u00a0s",
+          "score": 1,
+          "description": "Consider reducing the time spent parsing, compiling, and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to reduce Javascript execution time](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/)."
+        },
+        {
+          "id": "layout-shifts",
+          "title": "Avoid large layout shifts",
+          "display": "",
+          "score": null,
+          "description": "These are the largest layout shifts observed on the page. Each table item represents a single layout shift, and shows the element that shifted the most. Below each item are possible root causes that led to the layout shift. Some of these layout shifts may not be included in the CLS metric value due to [windowing](https://web.dev/articles/cls#what_is_cls). [Learn how to improve CLS](https://web.dev/articles/optimize-cls)"
+        },
+        {
+          "id": "long-tasks",
+          "title": "Avoid long main-thread tasks",
+          "display": "",
+          "score": null,
+          "description": "Lists the longest tasks on the main thread, useful for identifying worst contributors to input delay. [Learn how to avoid long main-thread tasks](https://web.dev/articles/optimize-long-tasks)"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "display": "Est savings of 29\u00a0KiB",
+          "score": 0,
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/)."
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "display": "Est savings of 11\u00a0KiB",
+          "score": 0.5,
+          "description": "Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes consumed by network activity. [Learn how to reduce unused CSS](https://developer.chrome.com/docs/lighthouse/performance/unused-css-rules/)."
+        }
+      ],
+      "failed_audits": [
+        {
+          "id": "legacy-javascript-insight",
+          "title": "Legacy JavaScript",
+          "score": 0,
+          "display": "Est savings of 14\u00a0KiB",
+          "description": "Polyfills and transforms enable older browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/articles/baseline-and-polyfills) features, unless you know you must support older browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://developer.chrome.com/docs/performance/insights/legacy-javascript)"
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0,
+          "display": "Est savings of 150\u00a0ms",
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path."
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0,
+          "display": "",
+          "description": "[Avoid chaining critical requests](https://developer.chrome.com/docs/performance/insights/network-dependency-tree) by reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load."
+        },
+        {
+          "id": "cache-insight",
+          "title": "Use efficient cache lifetimes",
+          "score": 0,
+          "display": "Est savings of 5\u00a0KiB",
+          "description": "A long cache lifetime can speed up repeat visits to your page. [Learn more about caching](https://developer.chrome.com/docs/performance/insights/cache)."
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0.5,
+          "display": "Est savings of 11\u00a0KiB",
+          "description": "Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes consumed by network activity. [Learn how to reduce unused CSS](https://developer.chrome.com/docs/lighthouse/performance/unused-css-rules/)."
+        },
+        {
+          "id": "speed-index",
+          "title": "Speed Index",
+          "score": 0.77,
+          "display": "4.2\u00a0s",
+          "description": "Speed Index shows how quickly the contents of a page are visibly populated. [Learn more about the Speed Index metric](https://developer.chrome.com/docs/lighthouse/performance/speed-index/)."
+        }
+      ],
+      "passed_audits_count": 85,
+      "seo_audits": [
+        {
+          "id": "is-crawlable",
+          "title": "Page isn\u2019t blocked from indexing",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "document-title",
+          "title": "Document has a `<title>` element",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "meta-description",
+          "title": "Document has a meta description",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "http-status-code",
+          "title": "Page has successful HTTP status code",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "link-text",
+          "title": "Links have descriptive text",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "crawlable-anchors",
+          "title": "Links are crawlable",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "robots-txt",
+          "title": "robots.txt is valid",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "hreflang",
+          "title": "Document has a valid `hreflang`",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "canonical",
+          "title": "Document has a valid `rel=canonical`",
+          "score": 1,
+          "pass": true
+        }
+      ],
+      "accessibility_audits": [],
+      "audit_details": {
+        "unused-javascript": {
+          "title": "Reduce unused JavaScript",
+          "headings": [
+            "url",
+            "totalBytes",
+            "wastedBytes"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js",
+              "totalBytes": 72336,
+              "wastedBytes": 29507
+            }
+          ],
+          "total_items": 1
+        },
+        "baseline": {
+          "title": "Baseline Features",
+          "headings": [
+            "featureId",
+            "displayStatus",
+            "source"
+          ],
+          "items": [
+            {
+              "featureId": "https://webstatus.dev/features/long-animation-frames",
+              "displayStatus": "{'status': 'limited', 'type': 'baseline-status', 'displayString': 'Limited Availability'}",
+              "source": "https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496"
+            },
+            {
+              "featureId": "https://webstatus.dev/features/layout-instability",
+              "displayStatus": "{'status': 'limited', 'type': 'baseline-status', 'displayString': 'Limited Availability'}",
+              "source": "https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496"
+            },
+            {
+              "featureId": "https://webstatus.dev/features/requestidlecallback",
+              "displayStatus": "{'status': 'limited', 'displayString': 'Limited Availability', 'type': 'baseline-status'}",
+              "source": "_lighthouse-eval.js"
+            },
+            {
+              "featureId": "https://webstatus.dev/features/scrollend",
+              "displayStatus": "{'status': 'low', 'type': 'baseline-status', 'displayString': 'Newly Available (2025-12-12)'}",
+              "source": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js"
+            },
+            {
+              "featureId": "https://webstatus.dev/features/uint8array-base64-hex",
+              "displayStatus": "{'displayString': 'Newly Available (2025-09-05)', 'status': 'low', 'type': 'baseline-status'}",
+              "source": "http://ghost-rider/driver.html"
+            }
+          ],
+          "total_items": 21
+        },
+        "viewport-insight": {
+          "title": "Optimize viewport for mobile",
+          "headings": [
+            "node"
+          ],
+          "items": [
+            {
+              "node": "{'path': '1,HTML,0,HEAD,1,META', 'snippet': '<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">', 'type': 'node', 'boundingRect': {'top': 0, 'right': 0, 'bottom':"
+            }
+          ],
+          "total_items": 1
+        },
+        "network-requests": {
+          "title": "Network Requests",
+          "headings": [
+            "url",
+            "protocol",
+            "networkRequestTime",
+            "networkEndTime",
+            "transferSize",
+            "resourceSize",
+            "statusCode",
+            "mimeType",
+            "resourceType"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/",
+              "protocol": "h2",
+              "networkRequestTime": 0.8289999961853027,
+              "networkEndTime": 293.0920000076294,
+              "transferSize": 24201,
+              "resourceSize": 134107,
+              "statusCode": 200,
+              "mimeType": "text/html",
+              "resourceType": "Document"
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/2v95ohpqu44f1.css",
+              "protocol": "h2",
+              "networkRequestTime": 304.5769999027252,
+              "networkEndTime": 500.37800002098083,
+              "transferSize": 15857,
+              "resourceSize": 71105,
+              "statusCode": 200,
+              "mimeType": "text/css",
+              "resourceType": "Stylesheet"
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/34t3p516eaooe.js",
+              "protocol": "h2",
+              "networkRequestTime": 304.6379998922348,
+              "networkEndTime": 371.63100004196167,
+              "transferSize": 2783,
+              "resourceSize": 1296,
+              "statusCode": 200,
+              "mimeType": "application/javascript",
+              "resourceType": "Script"
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/24zfb12aud3-6.js",
+              "protocol": "h2",
+              "networkRequestTime": 372.71399998664856,
+              "networkEndTime": 425.2849999666214,
+              "transferSize": 11013,
+              "resourceSize": 30971,
+              "statusCode": 200,
+              "mimeType": "application/javascript",
+              "resourceType": "Script"
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js",
+              "protocol": "h2",
+              "networkRequestTime": 426.5659999847412,
+              "networkEndTime": 447.70300006866455,
+              "transferSize": 74530,
+              "resourceSize": 231606,
+              "statusCode": 200,
+              "mimeType": "application/javascript",
+              "resourceType": "Script"
+            }
+          ],
+          "total_items": 21
+        },
+        "legacy-javascript-insight": {
+          "title": "Legacy JavaScript",
+          "headings": [
+            "url",
+            "wastedBytes"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js",
+              "wastedBytes": 14090
+            }
+          ],
+          "total_items": 1
+        },
+        "origin-isolation": {
+          "title": "Ensure proper origin isolation with COOP",
+          "headings": [
+            "description",
+            "directive",
+            "severity"
+          ],
+          "items": [
+            {
+              "description": "No COOP header found",
+              "severity": "High"
+            }
+          ],
+          "total_items": 1
+        },
+        "server-response-time": {
+          "title": "Initial server response time was short",
+          "headings": [
+            "url",
+            "responseTime"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/",
+              "responseTime": 14
+            }
+          ],
+          "total_items": 1
+        },
+        "unused-css-rules": {
+          "title": "Reduce unused CSS",
+          "headings": [
+            "url",
+            "totalBytes",
+            "wastedBytes"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/2v95ohpqu44f1.css",
+              "totalBytes": 13693,
+              "wastedBytes": 11279
+            }
+          ],
+          "total_items": 1
+        },
+        "main-thread-tasks": {
+          "title": "Tasks",
+          "headings": [
+            "startTime",
+            "duration"
+          ],
+          "items": [
+            {
+              "startTime": 296.67,
+              "duration": 8.677
+            },
+            {
+              "startTime": 449.84,
+              "duration": 9.059
+            },
+            {
+              "startTime": 503.67,
+              "duration": 8.719
+            },
+            {
+              "startTime": 513.342,
+              "duration": 9.391
+            },
+            {
+              "startTime": 525.979,
+              "duration": 24.873
+            }
+          ],
+          "total_items": 15
+        },
+        "total-byte-weight": {
+          "title": "Avoids enormous network payloads",
+          "headings": [
+            "url",
+            "totalBytes"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js",
+              "totalBytes": 74530
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/3e9r2ivsi6ymu.js",
+              "totalBytes": 39536
+            },
+            {
+              "url": "https://nebulacomponents.com/",
+              "totalBytes": 24201
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/2v95ohpqu44f1.css",
+              "totalBytes": 15857
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/33u59vf_8xpd-.js",
+              "totalBytes": 15007
+            }
+          ],
+          "total_items": 10
+        },
+        "mainthread-work-breakdown": {
+          "title": "Minimizes main-thread work",
+          "headings": [
+            "groupLabel",
+            "duration"
+          ],
+          "items": [
+            {
+              "groupLabel": "Script Evaluation",
+              "duration": 289.74839999998886
+            },
+            {
+              "groupLabel": "Other",
+              "duration": 59.95800000000055
+            },
+            {
+              "groupLabel": "Style & Layout",
+              "duration": 35.9532
+            },
+            {
+              "groupLabel": "Script Parsing & Compilation",
+              "duration": 29.755200000000002
+            },
+            {
+              "groupLabel": "Garbage Collection",
+              "duration": 8.176799999999998
+            }
+          ],
+          "total_items": 7
+        },
+        "render-blocking-insight": {
+          "title": "Render-blocking requests",
+          "headings": [
+            "url",
+            "totalBytes",
+            "wastedMs"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/2v95ohpqu44f1.css",
+              "totalBytes": 15857,
+              "wastedMs": 317
+            }
+          ],
+          "total_items": 1
+        },
+        "third-parties-insight": {
+          "title": "3rd parties",
+          "headings": [
+            "entity",
+            "transferSize",
+            "mainThreadTime"
+          ],
+          "items": [
+            {
+              "entity": "Cloudflare",
+              "transferSize": 11714,
+              "mainThreadTime": 3.2429999113082886
+            }
+          ],
+          "total_items": 1
+        },
+        "csp-xss": {
+          "title": "Ensure CSP is effective against XSS attacks",
+          "headings": [
+            "description",
+            "directive",
+            "severity"
+          ],
+          "items": [
+            {
+              "description": "No CSP found in enforcement mode",
+              "severity": "High"
+            }
+          ],
+          "total_items": 1
+        },
+        "network-rtt": {
+          "title": "Network Round Trip Times",
+          "headings": [
+            "origin",
+            "rtt"
+          ],
+          "items": [
+            {
+              "origin": "https://static.cloudflareinsights.com",
+              "rtt": 1.15371
+            },
+            {
+              "origin": "https://nebulacomponents.com",
+              "rtt": 0.002382771991705868
+            }
+          ],
+          "total_items": 2
+        },
+        "dom-size-insight": {
+          "title": "Optimize DOM size",
+          "headings": [
+            "statistic",
+            "node",
+            "value"
+          ],
+          "items": [
+            {
+              "statistic": "Total elements",
+              "value": "{'value': 499, 'granularity': 1, 'type': 'numeric'}"
+            },
+            {
+              "statistic": "DOM depth",
+              "node": "{'path': '1,HTML,1,BODY,2,MAIN,7,SECTION,0,DIV,0,DIV,1,DIV,0,DIV,1,UL,0,LI,0,SPAN', 'nodeLabel': '\u2715', 'type': 'node', 'lhId': 'page-3-SPAN', 'snippet': '<span class=\"mt-0.5 shrink-0 text-danger\">', 'b",
+              "value": "{'granularity': 1, 'value': 10, 'type': 'numeric'}"
+            },
+            {
+              "statistic": "Most children",
+              "node": "{'nodeLabel': 'body', 'boundingRect': {'left': 0, 'bottom': 13015, 'height': 13015, 'width': 412, 'right': 412, 'top': 0}, 'lhId': 'page-2-BODY', 'selector': 'body', 'path': '1,HTML,1,BODY', 'type': '",
+              "value": "{'type': 'numeric', 'value': 40, 'granularity': 1}"
+            }
+          ],
+          "total_items": 3
+        },
+        "trusted-types-xss": {
+          "title": "Mitigate DOM-based XSS with Trusted Types",
+          "headings": [
+            "description",
+            "severity"
+          ],
+          "items": [
+            {
+              "description": "No `Content-Security-Policy` header with Trusted Types directive found",
+              "severity": "High"
+            }
+          ],
+          "total_items": 1
+        },
+        "resource-summary": {
+          "title": "Resources Summary",
+          "headings": [
+            "label",
+            "requestCount",
+            "transferSize"
+          ],
+          "items": [
+            {
+              "label": "Total",
+              "requestCount": 21,
+              "transferSize": 248157
+            },
+            {
+              "label": "Script",
+              "requestCount": 12,
+              "transferSize": 191872
+            },
+            {
+              "label": "Document",
+              "requestCount": 1,
+              "transferSize": 24201
+            },
+            {
+              "label": "Other",
+              "requestCount": 7,
+              "transferSize": 16227
+            },
+            {
+              "label": "Stylesheet",
+              "requestCount": 1,
+              "transferSize": 15857
+            }
+          ],
+          "total_items": 9
+        },
+        "network-server-latency": {
+          "title": "Server Backend Latencies",
+          "headings": [
+            "origin",
+            "serverResponseTime"
+          ],
+          "items": [
+            {
+              "origin": "https://nebulacomponents.com",
+              "serverResponseTime": 1
+            },
+            {
+              "origin": "https://static.cloudflareinsights.com",
+              "serverResponseTime": 1
+            }
+          ],
+          "total_items": 2
+        },
+        "bootup-time": {
+          "title": "JavaScript execution time",
+          "headings": [
+            "url",
+            "total",
+            "scripting",
+            "scriptParseCompile"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js",
+              "total": 267.30599999999305,
+              "scripting": 228.39359999999297,
+              "scriptParseCompile": 10.544400000000001
+            },
+            {
+              "url": "https://nebulacomponents.com/",
+              "total": 57.39239999999999,
+              "scripting": 6.395999999999993,
+              "scriptParseCompile": 4.447199999999993
+            }
+          ],
+          "total_items": 2
+        },
+        "cache-insight": {
+          "title": "Use efficient cache lifetimes",
+          "headings": [
+            "url",
+            "cacheLifetimeMs",
+            "totalBytes"
+          ],
+          "items": [
+            {
+              "url": "https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496",
+              "cacheLifetimeMs": 86400000,
+              "totalBytes": 11714
+            }
+          ],
+          "total_items": 1
+        }
+      },
+      "analysis_timestamp": "2026-08-03T07:10:25.483Z",
+      "error": null
+    },
+    "desktop": {
+      "url": "https://nebulacomponents.com",
+      "strategy": "desktop",
+      "lighthouse_scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lab_metrics": {
+        "first-contentful-paint": {
+          "value": 459.7409721637777,
+          "display": "0.5\u00a0s",
+          "score": 1
+        },
+        "largest-contentful-paint": {
+          "value": 567,
+          "display": "0.6\u00a0s",
+          "score": 1
+        },
+        "total-blocking-time": {
+          "value": 0,
+          "display": "0\u00a0ms",
+          "score": 1
+        },
+        "cumulative-layout-shift": {
+          "value": 0.002620129093951709,
+          "display": "0.003",
+          "score": 1
+        },
+        "speed-index": {
+          "value": 500.85376485406346,
+          "display": "0.5\u00a0s",
+          "score": 1
+        },
+        "interactive": {
+          "value": 567,
+          "display": "0.6\u00a0s",
+          "score": 1
+        }
+      },
+      "field_metrics": {},
+      "opportunities": [
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "savings_ms": 30,
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/)."
+        }
+      ],
+      "diagnostics": [
+        {
+          "id": "total-byte-weight",
+          "title": "Avoids enormous network payloads",
+          "display": "Total size was 250\u00a0KiB",
+          "score": 1,
+          "description": "Large network payloads cost users real money and are highly correlated with long load times. [Learn how to reduce payload sizes](https://developer.chrome.com/docs/lighthouse/performance/total-byte-weight/)."
+        },
+        {
+          "id": "mainthread-work-breakdown",
+          "title": "Minimizes main-thread work",
+          "display": "0.4\u00a0s",
+          "score": 1,
+          "description": "Consider reducing the time spent parsing, compiling and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to minimize main-thread work](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)"
+        },
+        {
+          "id": "bootup-time",
+          "title": "JavaScript execution time",
+          "display": "0.1\u00a0s",
+          "score": 1,
+          "description": "Consider reducing the time spent parsing, compiling, and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to reduce Javascript execution time](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/)."
+        },
+        {
+          "id": "layout-shifts",
+          "title": "Avoid large layout shifts",
+          "display": "1 layout shift found",
+          "score": 1,
+          "description": "These are the largest layout shifts observed on the page. Each table item represents a single layout shift, and shows the element that shifted the most. Below each item are possible root causes that led to the layout shift. Some of these layout shifts may not be included in the CLS metric value due to [windowing](https://web.dev/articles/cls#what_is_cls). [Learn how to improve CLS](https://web.dev/articles/optimize-cls)"
+        },
+        {
+          "id": "long-tasks",
+          "title": "Avoid long main-thread tasks",
+          "display": "",
+          "score": null,
+          "description": "Lists the longest tasks on the main thread, useful for identifying worst contributors to input delay. [Learn how to avoid long main-thread tasks](https://web.dev/articles/optimize-long-tasks)"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "display": "Est savings of 29\u00a0KiB",
+          "score": 0,
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/)."
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "display": "Est savings of 11\u00a0KiB",
+          "score": 0.5,
+          "description": "Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes consumed by network activity. [Learn how to reduce unused CSS](https://developer.chrome.com/docs/lighthouse/performance/unused-css-rules/)."
+        }
+      ],
+      "failed_audits": [
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0,
+          "display": "",
+          "description": "[Avoid chaining critical requests](https://developer.chrome.com/docs/performance/insights/network-dependency-tree) by reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load."
+        },
+        {
+          "id": "legacy-javascript-insight",
+          "title": "Legacy JavaScript",
+          "score": 0,
+          "display": "Est savings of 14\u00a0KiB",
+          "description": "Polyfills and transforms enable older browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/articles/baseline-and-polyfills) features, unless you know you must support older browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://developer.chrome.com/docs/performance/insights/legacy-javascript)"
+        },
+        {
+          "id": "cache-insight",
+          "title": "Use efficient cache lifetimes",
+          "score": 0,
+          "display": "Est savings of 5\u00a0KiB",
+          "description": "A long cache lifetime can speed up repeat visits to your page. [Learn more about caching](https://developer.chrome.com/docs/performance/insights/cache)."
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0.5,
+          "display": "",
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path."
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0.5,
+          "display": "Est savings of 11\u00a0KiB",
+          "description": "Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes consumed by network activity. [Learn how to reduce unused CSS](https://developer.chrome.com/docs/lighthouse/performance/unused-css-rules/)."
+        }
+      ],
+      "passed_audits_count": 87,
+      "seo_audits": [
+        {
+          "id": "is-crawlable",
+          "title": "Page isn\u2019t blocked from indexing",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "document-title",
+          "title": "Document has a `<title>` element",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "meta-description",
+          "title": "Document has a meta description",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "http-status-code",
+          "title": "Page has successful HTTP status code",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "link-text",
+          "title": "Links have descriptive text",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "crawlable-anchors",
+          "title": "Links are crawlable",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "robots-txt",
+          "title": "robots.txt is valid",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "hreflang",
+          "title": "Document has a valid `hreflang`",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "canonical",
+          "title": "Document has a valid `rel=canonical`",
+          "score": 1,
+          "pass": true
+        }
+      ],
+      "accessibility_audits": [],
+      "audit_details": {
+        "render-blocking-insight": {
+          "title": "Render-blocking requests",
+          "headings": [
+            "url",
+            "totalBytes",
+            "wastedMs"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/2v95ohpqu44f1.css",
+              "totalBytes": 15870,
+              "wastedMs": 54
+            }
+          ],
+          "total_items": 1
+        },
+        "mainthread-work-breakdown": {
+          "title": "Minimizes main-thread work",
+          "headings": [
+            "groupLabel",
+            "duration"
+          ],
+          "items": [
+            {
+              "groupLabel": "Script Evaluation",
+              "duration": 117.48600000000044
+            },
+            {
+              "groupLabel": "Other",
+              "duration": 110.59799999999994
+            },
+            {
+              "groupLabel": "Style & Layout",
+              "duration": 63.11500000000001
+            },
+            {
+              "groupLabel": "Script Parsing & Compilation",
+              "duration": 30.975999999999996
+            },
+            {
+              "groupLabel": "Rendering",
+              "duration": 24.209000000000053
+            }
+          ],
+          "total_items": 6
+        },
+        "origin-isolation": {
+          "title": "Ensure proper origin isolation with COOP",
+          "headings": [
+            "description",
+            "directive",
+            "severity"
+          ],
+          "items": [
+            {
+              "description": "No COOP header found",
+              "severity": "High"
+            }
+          ],
+          "total_items": 1
+        },
+        "trusted-types-xss": {
+          "title": "Mitigate DOM-based XSS with Trusted Types",
+          "headings": [
+            "description",
+            "severity"
+          ],
+          "items": [
+            {
+              "description": "No `Content-Security-Policy` header with Trusted Types directive found",
+              "severity": "High"
+            }
+          ],
+          "total_items": 1
+        },
+        "network-server-latency": {
+          "title": "Server Backend Latencies",
+          "headings": [
+            "origin",
+            "serverResponseTime"
+          ],
+          "items": [
+            {
+              "origin": "https://static.cloudflareinsights.com",
+              "serverResponseTime": 2
+            },
+            {
+              "origin": "https://nebulacomponents.com",
+              "serverResponseTime": 1
+            }
+          ],
+          "total_items": 2
+        },
+        "bootup-time": {
+          "title": "JavaScript execution time",
+          "headings": [
+            "url",
+            "total",
+            "scripting",
+            "scriptParseCompile"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/",
+              "total": 137.405,
+              "scripting": 10.218999999999994,
+              "scriptParseCompile": 3.754999999999996
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js",
+              "total": 80.72500000000005,
+              "scripting": 46.718000000000046,
+              "scriptParseCompile": 10.426
+            },
+            {
+              "url": "Unattributable",
+              "total": 50.284000000000106,
+              "scripting": 5.047999999999999,
+              "scriptParseCompile": 0
+            }
+          ],
+          "total_items": 3
+        },
+        "baseline": {
+          "title": "Baseline Features",
+          "headings": [
+            "featureId",
+            "displayStatus",
+            "source"
+          ],
+          "items": [
+            {
+              "featureId": "https://webstatus.dev/features/long-animation-frames",
+              "displayStatus": "{'displayString': 'Limited Availability', 'status': 'limited', 'type': 'baseline-status'}",
+              "source": "https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496"
+            },
+            {
+              "featureId": "https://webstatus.dev/features/layout-instability",
+              "displayStatus": "{'displayString': 'Limited Availability', 'status': 'limited', 'type': 'baseline-status'}",
+              "source": "https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496"
+            },
+            {
+              "featureId": "https://webstatus.dev/features/requestidlecallback",
+              "displayStatus": "{'status': 'limited', 'type': 'baseline-status', 'displayString': 'Limited Availability'}",
+              "source": "_lighthouse-eval.js"
+            },
+            {
+              "featureId": "https://webstatus.dev/features/accent-color",
+              "displayStatus": "{'type': 'baseline-status', 'status': 'limited', 'displayString': 'Limited Availability'}",
+              "source": "https://nebulacomponents.com/"
+            },
+            {
+              "featureId": "https://webstatus.dev/features/scrollend",
+              "displayStatus": "{'displayString': 'Newly Available (2025-12-12)', 'type': 'baseline-status', 'status': 'low'}",
+              "source": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js"
+            }
+          ],
+          "total_items": 25
+        },
+        "unused-javascript": {
+          "title": "Reduce unused JavaScript",
+          "headings": [
+            "url",
+            "totalBytes",
+            "wastedBytes"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js",
+              "totalBytes": 72324,
+              "wastedBytes": 29714
+            }
+          ],
+          "total_items": 1
+        },
+        "network-rtt": {
+          "title": "Network Round Trip Times",
+          "headings": [
+            "origin",
+            "rtt"
+          ],
+          "items": [
+            {
+              "origin": "https://static.cloudflareinsights.com",
+              "rtt": 1.248975
+            },
+            {
+              "origin": "https://nebulacomponents.com",
+              "rtt": 0.001984278740772338
+            }
+          ],
+          "total_items": 2
+        },
+        "dom-size-insight": {
+          "title": "Optimize DOM size",
+          "headings": [
+            "statistic",
+            "node",
+            "value"
+          ],
+          "items": [
+            {
+              "statistic": "Total elements",
+              "value": "{'type': 'numeric', 'value': 538, 'granularity': 1}"
+            },
+            {
+              "statistic": "DOM depth",
+              "node": "{'path': '1,HTML,1,BODY,2,MAIN,0,SECTION,0,DIV,1,DIV,0,DIV,2,DIV,0,DIV,1,UL,4,LI,0,SPAN,0,SPAN', 'lhId': 'page-4-SPAN', 'selector': 'ul.space-y-1.5 > li.finding-reveal > span.flex > span.h-1.5', 'type",
+              "value": "{'value': 12, 'type': 'numeric', 'granularity': 1}"
+            },
+            {
+              "statistic": "Most children",
+              "node": "{'lhId': 'page-3-BODY', 'path': '1,HTML,1,BODY', 'boundingRect': {'width': 1335, 'top': 0, 'height': 7276, 'right': 1335, 'left': 0, 'bottom': 7276}, 'selector': 'body', 'snippet': '<body>', 'nodeLabe",
+              "value": "{'granularity': 1, 'type': 'numeric', 'value': 40}"
+            }
+          ],
+          "total_items": 3
+        },
+        "unused-css-rules": {
+          "title": "Reduce unused CSS",
+          "headings": [
+            "url",
+            "totalBytes",
+            "wastedBytes"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/2v95ohpqu44f1.css",
+              "totalBytes": 13686,
+              "wastedBytes": 10883
+            }
+          ],
+          "total_items": 1
+        },
+        "csp-xss": {
+          "title": "Ensure CSP is effective against XSS attacks",
+          "headings": [
+            "description",
+            "directive",
+            "severity"
+          ],
+          "items": [
+            {
+              "description": "No CSP found in enforcement mode",
+              "severity": "High"
+            }
+          ],
+          "total_items": 1
+        },
+        "network-requests": {
+          "title": "Network Requests",
+          "headings": [
+            "url",
+            "protocol",
+            "networkRequestTime",
+            "networkEndTime",
+            "transferSize",
+            "resourceSize",
+            "statusCode",
+            "mimeType",
+            "resourceType"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/",
+              "protocol": "h2",
+              "networkRequestTime": 0.8730001449584961,
+              "networkEndTime": 192.08399987220764,
+              "transferSize": 24209,
+              "resourceSize": 134107,
+              "statusCode": 200,
+              "mimeType": "text/html",
+              "resourceType": "Document"
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/2v95ohpqu44f1.css",
+              "protocol": "h2",
+              "networkRequestTime": 202.96999979019165,
+              "networkEndTime": 287.5369999408722,
+              "transferSize": 15870,
+              "resourceSize": 71105,
+              "statusCode": 200,
+              "mimeType": "text/css",
+              "resourceType": "Stylesheet"
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/34t3p516eaooe.js",
+              "protocol": "h2",
+              "networkRequestTime": 203.1449999809265,
+              "networkEndTime": 283.1399998664856,
+              "transferSize": 2782,
+              "resourceSize": 1296,
+              "statusCode": 200,
+              "mimeType": "application/javascript",
+              "resourceType": "Script"
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/24zfb12aud3-6.js",
+              "protocol": "h2",
+              "networkRequestTime": 284.87400007247925,
+              "networkEndTime": 364.24699997901917,
+              "transferSize": 11010,
+              "resourceSize": 30971,
+              "statusCode": 200,
+              "mimeType": "application/javascript",
+              "resourceType": "Script"
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js",
+              "protocol": "h2",
+              "networkRequestTime": 289.0610001087189,
+              "networkEndTime": 354.9949998855591,
+              "transferSize": 74527,
+              "resourceSize": 231606,
+              "statusCode": 200,
+              "mimeType": "application/javascript",
+              "resourceType": "Script"
+            }
+          ],
+          "total_items": 24
+        },
+        "third-parties-insight": {
+          "title": "3rd parties",
+          "headings": [
+            "entity",
+            "transferSize",
+            "mainThreadTime"
+          ],
+          "items": [
+            {
+              "entity": "Cloudflare",
+              "transferSize": 11714,
+              "mainThreadTime": 3.9120001792907715
+            }
+          ],
+          "total_items": 1
+        },
+        "legacy-javascript-insight": {
+          "title": "Legacy JavaScript",
+          "headings": [
+            "url",
+            "wastedBytes"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js",
+              "wastedBytes": 14089
+            }
+          ],
+          "total_items": 1
+        },
+        "resource-summary": {
+          "title": "Resources Summary",
+          "headings": [
+            "label",
+            "requestCount",
+            "transferSize"
+          ],
+          "items": [
+            {
+              "label": "Total",
+              "requestCount": 24,
+              "transferSize": 256304
+            },
+            {
+              "label": "Script",
+              "requestCount": 12,
+              "transferSize": 191874
+            },
+            {
+              "label": "Other",
+              "requestCount": 10,
+              "transferSize": 24351
+            },
+            {
+              "label": "Document",
+              "requestCount": 1,
+              "transferSize": 24209
+            },
+            {
+              "label": "Stylesheet",
+              "requestCount": 1,
+              "transferSize": 15870
+            }
+          ],
+          "total_items": 9
+        },
+        "server-response-time": {
+          "title": "Initial server response time was short",
+          "headings": [
+            "url",
+            "responseTime"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/",
+              "responseTime": 13
+            }
+          ],
+          "total_items": 1
+        },
+        "layout-shifts": {
+          "title": "Avoid large layout shifts",
+          "headings": [
+            "node",
+            "score"
+          ],
+          "items": [
+            {
+              "node": "{'path': '1,HTML,1,BODY,2,MAIN,1,SECTION', 'lhId': 'page-1-SECTION', 'selector': 'body > main#main-content > section.border-y', 'type': 'node', 'boundingRect': {'bottom': 1175, 'top': 1053, 'height': ",
+              "score": 0.002620129093951709
+            }
+          ],
+          "total_items": 1
+        },
+        "main-thread-tasks": {
+          "title": "Tasks",
+          "headings": [
+            "startTime",
+            "duration"
+          ],
+          "items": [
+            {
+              "startTime": 194.619,
+              "duration": 12.738
+            },
+            {
+              "startTime": 292.282,
+              "duration": 9.613
+            },
+            {
+              "startTime": 301.907,
+              "duration": 52.882
+            },
+            {
+              "startTime": 357.77,
+              "duration": 6.989
+            },
+            {
+              "startTime": 374.448,
+              "duration": 6.638
+            }
+          ],
+          "total_items": 16
+        },
+        "viewport-insight": {
+          "title": "Optimize viewport for mobile",
+          "headings": [
+            "node"
+          ],
+          "items": [
+            {
+              "node": "{'lhId': 'page-2-META', 'path': '1,HTML,0,HEAD,1,META', 'selector': 'head > meta', 'nodeLabel': 'head > meta', 'boundingRect': {'height': 0, 'right': 0, 'left': 0, 'top': 0, 'bottom': 0, 'width': 0}, "
+            }
+          ],
+          "total_items": 1
+        },
+        "cache-insight": {
+          "title": "Use efficient cache lifetimes",
+          "headings": [
+            "url",
+            "cacheLifetimeMs",
+            "totalBytes"
+          ],
+          "items": [
+            {
+              "url": "https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496",
+              "cacheLifetimeMs": 86400000,
+              "totalBytes": 11714
+            }
+          ],
+          "total_items": 1
+        },
+        "total-byte-weight": {
+          "title": "Avoids enormous network payloads",
+          "headings": [
+            "url",
+            "totalBytes"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js",
+              "totalBytes": 74527
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/3e9r2ivsi6ymu.js",
+              "totalBytes": 39539
+            },
+            {
+              "url": "https://nebulacomponents.com/",
+              "totalBytes": 24209
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/2v95ohpqu44f1.css",
+              "totalBytes": 15870
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/33u59vf_8xpd-.js",
+              "totalBytes": 15012
+            }
+          ],
+          "total_items": 10
+        }
+      },
+      "analysis_timestamp": "2026-08-03T07:10:37.420Z",
+      "error": null
+    }
+  },
+  "crux": {
+    "target": "https://nebulacomponents.com",
+    "metrics": {},
+    "collection_period": null,
+    "form_factor": "ALL",
+    "error": "No CrUX data for this origin. The site likely has insufficient Chrome traffic volume for eligibility."
+  },
+  "error": null
+}

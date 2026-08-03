@@ -11,7 +11,7 @@ import subprocess
 from datetime import datetime
 
 CLAUDE_SEO_SCRIPTS = "/home/mike/claude-seo/scripts"
-PROPERTY = "sc-domain:nebulacomponents.shop"
+PROPERTY = "sc-domain:nebulacomponents.com"
 
 def get_search_analytics():
     cmd = [
@@ -62,7 +62,7 @@ def main():
             q = item["query"]
             pos = item["position"]
             imp = item["impressions"]
-            page_short = item["page"].replace("https://nebulacomponents.shop", "") or "/"
+            page_short = item["page"].replace("https://nebulacomponents.com", "") or "/"
             
             # Action logic
             if "b2b saas" in q.lower():

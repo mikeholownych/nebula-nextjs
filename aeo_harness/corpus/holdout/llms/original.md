@@ -6,34 +6,34 @@ Nebula Components checks what a paid visitor experiences: message match, above-f
 
 Target customer: founders actively spending on ads (Google, Meta, LinkedIn) who are not converting. The buying trigger is "spending on ads and not converting" — not a demographic filter.
 
-Full expanded context: [llms-full.txt](https://nebulacomponents.shop/llms-full.txt)
+Full expanded context: [llms-full.txt](https://nebulacomponents.com/llms-full.txt)
 
 ## Docs
 
-- [Free audit](https://nebulacomponents.shop/audit): 60-second automated diagnosis across 9 conversion signals — no signup required
-- [Pricing](https://nebulacomponents.shop/pricing): One-Leak Repair Sprint $97 (locked through 2026-12-31); $1,497 retainer; $497 agency partner
-- [Learning Centre](https://nebulacomponents.shop/learning-centre): 41 articles on landing page conversion issues, paid traffic leaks, and ad-to-page diagnosis (each also available as markdown at /learning-centre/<slug>.md)
-- [About](https://nebulacomponents.shop/about): Founder and company background
-- [Citable (open source)](https://nebulacomponents.shop/resources/citable): Evidence layer for SEO, AEO, and GEO audits — 123 detectors, Apache 2.0, npm @nebulacomponents/citable
+- [Free audit](https://nebulacomponents.com/audit): 60-second automated diagnosis across 9 conversion signals — no signup required
+- [Pricing](https://nebulacomponents.com/pricing): One-Leak Repair Sprint $97 (locked through 2026-12-31); $1,497 retainer; $497 agency partner
+- [Learning Centre](https://nebulacomponents.com/learning-centre): 41 articles on landing page conversion issues, paid traffic leaks, and ad-to-page diagnosis (each also available as markdown at /learning-centre/<slug>.md)
+- [About](https://nebulacomponents.com/about): Founder and company background
+- [Citable (open source)](https://nebulacomponents.com/resources/citable): Evidence layer for SEO, AEO, and GEO audits — 123 detectors, Apache 2.0, npm @nebulacomponents/citable
 
 ## API
 
-- [OpenAPI spec](https://nebulacomponents.shop/openapi.json): REST API for audit submission and results retrieval
-- [Agentic Commerce](https://nebulacomponents.shop/.well-known/acp.json): ACP discovery endpoint
-- [Agent skills](https://nebulacomponents.shop/.well-known/agent-skills/index.json): Hermes-compatible skill index
+- [OpenAPI spec](https://nebulacomponents.com/openapi.json): REST API for audit submission and results retrieval
+- [Agentic Commerce](https://nebulacomponents.com/.well-known/acp.json): ACP discovery endpoint
+- [Agent skills](https://nebulacomponents.com/.well-known/agent-skills/index.json): Hermes-compatible skill index
 
 ## Optional
 
-- [Teardowns](https://nebulacomponents.shop/teardowns): Public landing page teardowns with annotated findings
-- [Benchmarks](https://nebulacomponents.shop/benchmarks): Real per-component failure rates and score distribution from completed audits
-- [Component Lab](https://nebulacomponents.shop/lab): Three component checks (message match, headline, CTA) run against a page using the same audit engine
-- [Workspace](https://nebulacomponents.shop/workspace): Email-keyed customer workspace — dashboard, project grouping, and immutable audit version history
-- [Comparisons](https://nebulacomponents.shop/compare): Honest Nebula vs tool comparisons (Unbounce, Instapage, PageSpeed Insights, Leadpages) with stated boundaries
-- [Knallhart teardown](https://nebulacomponents.shop/teardowns/knallhart): Cold paid-traffic audit of knallhart.dev
-- [Postmint teardown](https://nebulacomponents.shop/teardowns/postmint): Cold paid-traffic audit of postmint.de
-- [Case studies](https://nebulacomponents.shop/case-studies): Published client outcomes (requires real before/after metric, measurement window, and inspectable evidence — none published yet)
-- [Playbooks](https://nebulacomponents.shop/playbooks): Founder productivity and AI-ops guides
-- [Privacy policy](https://nebulacomponents.shop/privacy-policy): Cohort/persona aggregates only; no individual visitor profiling; GA4 consent denied by default
+- [Teardowns](https://nebulacomponents.com/teardowns): Public landing page teardowns with annotated findings
+- [Benchmarks](https://nebulacomponents.com/benchmarks): Real per-component failure rates and score distribution from completed audits
+- [Component Lab](https://nebulacomponents.com/lab): Three component checks (message match, headline, CTA) run against a page using the same audit engine
+- [Workspace](https://nebulacomponents.com/workspace): Email-keyed customer workspace — dashboard, project grouping, and immutable audit version history
+- [Comparisons](https://nebulacomponents.com/compare): Honest Nebula vs tool comparisons (Unbounce, Instapage, PageSpeed Insights, Leadpages) with stated boundaries
+- [Knallhart teardown](https://nebulacomponents.com/teardowns/knallhart): Cold paid-traffic audit of knallhart.dev
+- [Postmint teardown](https://nebulacomponents.com/teardowns/postmint): Cold paid-traffic audit of postmint.de
+- [Case studies](https://nebulacomponents.com/case-studies): Published client outcomes (requires real before/after metric, measurement window, and inspectable evidence — none published yet)
+- [Playbooks](https://nebulacomponents.com/playbooks): Founder productivity and AI-ops guides
+- [Privacy policy](https://nebulacomponents.com/privacy-policy): Cohort/persona aggregates only; no individual visitor profiling; GA4 consent denied by default
 
 ## Direct answers
 

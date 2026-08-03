@@ -12,35 +12,15 @@ Nebula
 
 Components
 
-Pricing
-
 Teardowns
 
-Benchmarks
-
-Lab
-
-Case Studies
-
-Learning
-
-Workspace
+Pricing
 
 Free Audit
 
-Pricing
-
 Teardowns
 
-Benchmarks
-
-Lab
-
-Case Studies
-
-Learning
-
-Workspace
+Pricing
 
 Free Audit
 
@@ -170,49 +150,35 @@ Teardowns
 
 Case Studies
 
-Benchmarks
+Learn
+
+Brand Kit
+
+Press Kit
 
 Learning Centre
 
-Citable
+Benchmarks
 
-7 Systems
+Lab
 
-Concepts
+Diagnostic Guides →
 
-CTA Optimization
+Industry Audits →
 
-Editorial Standards
-
-Headline Optimization
-
-Mobile Optimization
-
-Page Speed & Conversion
-
-ROAS Cliff
-
-Comparisons
+Compare
 
 vs. PageSpeed Insights
 
-vs. Google Lighthouse
-
-vs. HubSpot Grader
+vs. Hotjar
 
 vs. Unbounce
 
-vs. Silktide
-
-vs. Hotjar
-
 vs. SEMrush Site Audit
-
-vs. Crazy Egg
 
 vs. Screaming Frog
 
-vs. Google Analytics
+vs. Crazy Egg
 
 Legal
 

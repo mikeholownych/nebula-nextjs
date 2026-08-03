@@ -20,7 +20,7 @@ LOCAL_ENDPOINTS = [
     ("blog",  "http://localhost:8766"),
 ]
 TUNNEL_ENDPOINTS = [
-    ("main",  "https://nebulacomponents.shop"),
+    ("main",  "https://nebulacomponents.com"),
     ("www",   "https://www.nebulacomponents.shop"),
     ("blog",  "https://blog.nebulacomponents.shop"),
 ]

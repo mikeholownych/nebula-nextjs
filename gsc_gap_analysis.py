@@ -28,15 +28,15 @@ CANNIBAL_DELTA    = 3.0     # two pages within 3 positions on same query = canni
 
 # Pages already on site (slug → url)
 EXISTING_PAGES = {
-    "why-landing-pages-dont-convert":     "https://nebulacomponents.shop/why-landing-pages-dont-convert.html",
-    "ai-sdr-vs-audit":                    "https://nebulacomponents.shop/ai-sdr-vs-audit.html",
-    "blog-trigger-aware-outreach":        "https://nebulacomponents.shop/blog-trigger-aware-outreach.html",
-    "what-is-landing-page-audit":         "https://nebulacomponents.shop/what-is-landing-page-audit.html",
-    "headline-optimization":              "https://nebulacomponents.shop/headline-optimization.html",
-    "cta-optimization":                   "https://nebulacomponents.shop/cta-optimization.html",
-    "social-proof-landing-page":          "https://nebulacomponents.shop/social-proof-landing-page.html",
-    "page-speed-conversion":              "https://nebulacomponents.shop/page-speed-conversion.html",
-    "mobile-landing-page-optimization":   "https://nebulacomponents.shop/mobile-landing-page-optimization.html",
+    "why-landing-pages-dont-convert":     "https://nebulacomponents.com/why-landing-pages-dont-convert.html",
+    "ai-sdr-vs-audit":                    "https://nebulacomponents.com/ai-sdr-vs-audit.html",
+    "blog-trigger-aware-outreach":        "https://nebulacomponents.com/blog-trigger-aware-outreach.html",
+    "what-is-landing-page-audit":         "https://nebulacomponents.com/what-is-landing-page-audit.html",
+    "headline-optimization":              "https://nebulacomponents.com/headline-optimization.html",
+    "cta-optimization":                   "https://nebulacomponents.com/cta-optimization.html",
+    "social-proof-landing-page":          "https://nebulacomponents.com/social-proof-landing-page.html",
+    "page-speed-conversion":              "https://nebulacomponents.com/page-speed-conversion.html",
+    "mobile-landing-page-optimization":   "https://nebulacomponents.com/mobile-landing-page-optimization.html",
 }
 
 
@@ -227,8 +227,8 @@ def run_analysis(csv_path: str) -> str:
             "|---|---|---|---|---|---|",
         ]
         for c in cannibals:
-            pa = c['page_a'].replace('https://nebulacomponents.shop','')
-            pb = c['page_b'].replace('https://nebulacomponents.shop','')
+            pa = c['page_a'].replace('https://nebulacomponents.com','')
+            pb = c['page_b'].replace('https://nebulacomponents.com','')
             lines.append(f"| {c['query']} | {pa} | {c['pos_a']:.1f} | {pb} | {c['pos_b']:.1f} | {c['impressions']:,} |")
 
     if emerging:

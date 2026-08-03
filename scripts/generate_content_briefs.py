@@ -159,9 +159,9 @@ def generate_medium_outline(finding: str, track: str) -> dict:
                 },
             ],
             "cta": {
-                "link": "nebulacomponents.shop/audit",
+                "link": "nebulacomponents.com/audit",
                 "utm": f"?utm_source=medium&utm_medium=article&utm_campaign={track}",
-                "text": "Get your free audit → nebulacomponents.shop/audit",
+                "text": "Get your free audit → nebulacomponents.com/audit",
             },
             "seo_keywords": [
                 "landing page conversion",

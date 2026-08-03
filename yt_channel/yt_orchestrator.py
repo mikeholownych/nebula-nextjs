@@ -3,7 +3,7 @@
 
 Pipeline:
   1. Pick the most recent eligible lead from audit_leads.jsonl that hasn't
-     had a YouTube video produced yet (or fall back to nebulacomponents.shop)
+     had a YouTube video produced yet (or fall back to nebulacomponents.com)
   2. Scrape page HTML & run the full structured audit
   3. Produce a long-form video + thumbnail
   4. Upload to YouTube (if OAuth is set up)
@@ -67,7 +67,7 @@ def pick_lead() -> tuple[str, str, dict | None]:
 
     Returns (url, email, existing_audit).
     Chooses the most recent entry that hasn't had a video yet.
-    Falls back to nebulacomponents.shop.
+    Falls back to nebulacomponents.com.
     """
     produced = load_produced_domains()
 
@@ -105,9 +105,9 @@ def pick_lead() -> tuple[str, str, dict | None]:
                 pass
             return url, entry.get("email", ""), existing_audit
 
-    # Fallback: nebulacomponents.shop
-    log.info("No new leads found — falling back to nebulacomponents.shop")
-    return "https://nebulacomponents.shop", "admin@nebulacomponents.shop", None
+    # Fallback: nebulacomponents.com
+    log.info("No new leads found — falling back to nebulacomponents.com")
+    return "https://nebulacomponents.com", "admin@nebulacomponents.shop", None
 
 
 def log_production(domain, title, score, video_path, duration):

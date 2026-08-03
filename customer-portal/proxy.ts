@@ -1,6 +1,8 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nebulacomponents.com'
+
 /**
  * Proxy / edge middleware for Nebula Components.
  *
@@ -10,6 +12,33 @@ import { NextResponse } from 'next/server'
  * 3. Markdown for Agents (RFC content negotiation): Accept: text/markdown → llms.txt
  */
 export function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl
+
+  // ── Workspace route protection (coarse navigation guard) ──────────────────
+  // Redirects unauthenticated browsers away from /workspace to /login.
+  // This is NOT the security boundary — every API route, server action, and
+  // data-access function independently verifies auth via requireWorkspaceUser().
+  if (pathname === '/workspace' || pathname.startsWith('/workspace/')) {
+    const token = request.cookies.get('access_token')?.value
+    if (!token) {
+      const loginUrl = new URL('/login', SITE_URL)
+      loginUrl.searchParams.set('returnTo', pathname)
+      return NextResponse.redirect(loginUrl)
+    }
+  }
+
+  // ── Protect workspace API routes from obviously unauthenticated requests ──
+  if (pathname.startsWith('/api/workspace/') || pathname === '/api/audits/by-email') {
+    const token = request.cookies.get('access_token')?.value
+    const authHeader = request.headers.get('authorization')
+    if (!token && !authHeader) {
+      return new NextResponse(JSON.stringify({ error: 'Authentication required' }), {
+        status: 401,
+        headers: { 'Content-Type': 'application/json' },
+      })
+    }
+  }
+
   const host = request.headers.get('host') ?? ''
 
   // ── 1. Domain migration: every variant → .com apex ──────────────────────────
@@ -39,8 +68,6 @@ export function proxy(request: NextRequest) {
     url.port = ''
     return NextResponse.redirect(url, 301)
   }
-
-  const { pathname } = request.nextUrl
 
   // ── 2. Legacy HTML/static aliases — definitive 410 ─────────────────────────
   // Block legacy .html routes

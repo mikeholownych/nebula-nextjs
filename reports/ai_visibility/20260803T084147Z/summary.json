@@ -1,0 +1,12 @@
+{
+  "site": "nebulacomponents.com",
+  "generated_at": "2026-08-03T08:41:47.119192+00:00",
+  "measurement": "real_engine_api",
+  "summary": {
+    "status": "no_data",
+    "responses": 0,
+    "reason": "OPENROUTER_API_KEY is not configured",
+    "errors": []
+  },
+  "capture_file": "/home/mike/nebula/reports/ai_visibility/20260803T084147Z/captures.jsonl"
+}

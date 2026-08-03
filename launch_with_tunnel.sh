@@ -6,7 +6,7 @@ TUNNEL_ID="8cfcc2e1-cf49-4d57-b412-c1ec0474ffd2"
 TUNNEL_NAME="nebula-challenge"
 
 echo "[INFO] Setting up public URL for $97 audit page"
-echo "[URL] Will be available at: https://nebulacomponents.shop/audit.html"
+echo "[URL] Will be available at: https://nebulacomponents.com/audit.html"
 echo "[ACTION] The page is already running on port 8765 locally"
 
 # Verify the page exists
@@ -16,5 +16,5 @@ if [ ! -f ~/nebula/audit.html ]; then
 fi
 
 echo "[OK] audit.html is ready"
-echo "[NEXT] Deploy to nebulacomponents.shop via Cloudflare tunnel"
+echo "[NEXT] Deploy to nebulacomponents.com via Cloudflare tunnel"
 

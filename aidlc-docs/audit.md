@@ -417,3 +417,44 @@ Trigger_lead_engine scrapes Reddit for high-intent signals (founder ad bleed, Go
 
 **Next checkpoint:** 2026-07-29 08:00 UTC — Fix deployed, cost model, bounce audit, ICP confidence stated.
 
+
+## 2026-08-03T05:39:32Z — Canonical-domain continuation
+
+User input (verbatim):
+
+> .com is supposed to be the canonical
+> continue
+> continue
+
+Execution resumed against the live customer portal. Objective: make nebulacomponents.com the only canonical web origin while preserving .shop as a redirect source.
+
+### Execution result — 2026-08-03T06:24:05Z
+
+- Decision: `.com` is the only canonical content origin; `.shop` is retained exclusively as a legacy redirect source and for existing verified sender identities where changing mail domains could break delivery.
+- Implemented and deployed canonical metadata, sitemap, robots, OG, JSON-LD, internal/public links, generated markdown, API discovery files, operational URL producers, redirect tests, and deployment verification.
+- Corrected a live HTTP redirect defect where the tunnel-origin URL produced `https://localhost`; the regression test now emulates `Host: nebulacomponents.com` with an internal localhost URL.
+- Replaced the live audit-page screenshot because its pixels still displayed `nebulacomponents.shop` despite corrected alt text.
+- Verification receipts: Next.js production build passed; 16/16 metadata/discovery tests passed; 2/2 redirect tests passed; 13/13 deployed routes passed; live scans of five representative pages and four discovery resources found zero `.shop` references; rendered-browser inspection passed.
+- Open blocker: HTTP `.shop` variants still have a two-hop Cloudflare chain (`http .shop` → `https .shop` → `https .com`). Cloudflare API writes are blocked: the present token returns 403 for Rulesets, Page Rules, and zone settings; browser dashboard is unauthenticated. HTTPS `.shop` and all `.com`/`www.com` variants are single-hop or direct as appropriate.
+
+
+## 2026-08-03T06:49:29Z — Cloudflare credential and redirect closure
+
+**User input:** `[REDACTED CLOUDFLARE API TOKEN]`
+
+**Security handling:** Credential value intentionally omitted from the audit record. Stored outside the repository at `~/.hermes/secrets/cloudflare.key` with mode `600`; synchronized to the mode-600 Hermes environment.
+
+**Execution:** Verified the token as active and scoped to three relevant zones. Created a `.shop` zone Single Redirect rule that sends apex and `www` HTTP/HTTPS requests directly to `https://nebulacomponents.com` with path/query preservation. Purged the `.shop` cache because the old Always Use HTTPS response remained cached at the apex.
+
+**Verification:** All four `.shop` scheme/host variants returned `301` directly to `https://nebulacomponents.com/audit?x=2`; following redirects produced one redirect and a final `200`. Canonical edge-chain remediation is complete.
+
+## 2026-08-03T08:26:30Z — Agency audit remediation authorized
+
+- Complete raw user instruction: "Proceed with all findings. Decisions: Option B — Self-implementation kit"
+- Canonical offer decision: $97 self-implementation kit; Nebula supplies a tailored implementation artifact, customer/developer applies it, no conversion-lift guarantee, 30-day same-scope re-audit.
+- Scope accepted: payments, billing security, analytics/attribution, SEO/indexation, accessibility/performance, Cloudflare/security, offer and email integrity, production verification.
+- Execution branch: fix/agency-audit-remediation-20260803.
+
+## 2026-08-03T10:31:06Z — Analytics default correction
+
+Raw user input: `[Mon 2026-08-03 10:31:06 UTC] [Mike H] analytics are supposed to default to accepted, unless declined (unless user is in EU)`

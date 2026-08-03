@@ -1,0 +1,71 @@
+{
+  "actions": [
+    {
+      "action_id": "warm-reply-payment-reconcile",
+      "assignee": "support",
+      "constraints": "Read-only; do not send email, call anyone, pitch, or modify lead/payment ledgers.",
+      "evidence_strength": "derived",
+      "execution": {
+        "canonical_writer": "ceo_action_reconciler",
+        "max_cost_usd": 5.0,
+        "max_input_tokens": 100000,
+        "max_output_tokens": 10000,
+        "max_retries": 2,
+        "max_runtime_seconds": 1200,
+        "max_workers": 1,
+        "pattern": "routing",
+        "verification_required": true
+      },
+      "goal": "Determine the next buyer-safe step for the existing warm-reply cohort and verify payment-path readiness.",
+      "recheck_after_minutes": 360,
+      "required_artifacts": [
+        "content/support/<date>_inbox-inspection-report.md"
+      ],
+      "retry_policy": {
+        "backoff_minutes": 360,
+        "escalate_after": 2,
+        "max_attempts": 2
+      },
+      "status": "already_completed",
+      "verification": "Return the current warm-reply count, last-contact timestamps, checkout handoff status, and one approved next action."
+    },
+    {
+      "action_id": "payment-path-verification",
+      "assignee": "ops-finance",
+      "constraints": "Read-only; do not create payments, modify Stripe, or change production configuration.",
+      "evidence_strength": "derived",
+      "execution": {
+        "canonical_writer": "ceo_action_reconciler",
+        "max_cost_usd": 5.0,
+        "max_input_tokens": 100000,
+        "max_output_tokens": 10000,
+        "max_retries": 2,
+        "max_runtime_seconds": 1200,
+        "max_workers": 1,
+        "pattern": "single_call",
+        "verification_required": true
+      },
+      "goal": "Verify whether a real payment would be captured and reconciled end-to-end.",
+      "recheck_after_minutes": 360,
+      "required_artifacts": [
+        "content/ops-finance/<date>_revenue-funnel-reconciliation.md"
+      ],
+      "retry_policy": {
+        "backoff_minutes": 360,
+        "escalate_after": 2,
+        "max_attempts": 2
+      },
+      "status": "already_completed",
+      "verification": "Inspect the active webhook route/configuration and test/live ledger separation; return evidence paths and one blocking unknown."
+    }
+  ],
+  "directive_id": "ceo-20260803T141053Z",
+  "evidence": {
+    "memo_age_hours": 16.17,
+    "real_payments": 0,
+    "source": "live Nebula ledgers plus Hermes kanban state",
+    "warm_replies": 1
+  },
+  "observed_at": "2026-08-03T14:10:53.649867+00:00",
+  "source_memo": "/home/mike/.hermes/cron/output/3e3cbbc1e56c/2026-08-02_22-00-27.md"
+}

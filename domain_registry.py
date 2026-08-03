@@ -29,7 +29,7 @@ from typing import Optional
 # Add new domains here as they warm up.  Format: "inbox@domain.com"
 REGISTERED_INBOXES: list[str] = [
     "ops@launchcrate.io",
-    # "outreach@nebulacomponents.shop",   # add when ready
+    # "outreach@nebulacomponents.com",   # add when ready
     # "hello@nebulalaunch.io",            # add when ready
 ]
 

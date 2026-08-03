@@ -19,8 +19,8 @@ export type Teardown = {
   summary: string
   context: string
   findings: Finding[]
-  /** Optional OG/screenshot image shown in a browser mockup above the findings. */
-  screenshotUrl?: string
+  /** Required source-page snapshot shown above the findings. */
+  screenshotUrl: string
 }
 
 export const TEARDOWNS: Record<string, Teardown> = {
@@ -635,6 +635,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   cloudwise: {
     slug: 'cloudwise',
+    screenshotUrl: '/teardown-screenshots/cloudwise.png',
     name: 'CloudWise',
     url: 'https://cloudcostwise.io',
     domain: 'cloudcostwise.io',
@@ -675,6 +676,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   postdew: {
     slug: 'postdew',
+    screenshotUrl: '/teardown-screenshots/postdew.png',
     name: 'PostDew',
     url: 'https://postdew.com',
     domain: 'postdew.com',
@@ -733,6 +735,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   smartwatermark: {
     slug: 'smartwatermark',
+    screenshotUrl: '/teardown-screenshots/smartwatermark.png',
     name: 'SmartWatermark',
     url: 'https://smartwatermark.app',
     domain: 'smartwatermark.app',
@@ -764,6 +767,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   folioverse: {
     slug: 'folioverse',
+    screenshotUrl: '/teardown-screenshots/folioverse.png',
     name: 'Folioverse',
     url: 'https://www.folioverse.app',
     domain: 'www.folioverse.app',

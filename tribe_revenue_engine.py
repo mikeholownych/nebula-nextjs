@@ -130,7 +130,7 @@ No pressure. Usually that means one of three things:
 2. you want to DIY first
 3. you need lower-risk help before implementation
 
-If it's #2, use the free audit path again: https://nebulacomponents.shop/audit.html
+If it's #2, use the free audit path again: https://nebulacomponents.com/audit.html
 If it's #3, reply "bridge" and I'll send the lighter consulting option.
 
 — Nebula"""

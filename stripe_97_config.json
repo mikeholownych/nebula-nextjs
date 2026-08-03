@@ -5,6 +5,6 @@
   "currency": "USD",
   "billing_behavior": "payment",
   "redirect_success": "https://launchcrate.io/audit-success.html",
-  "redirect_cancel": "https://nebulacomponents.shop",
+  "redirect_cancel": "https://nebulacomponents.com",
   "status": "PENDING - create in Stripe Dashboard"
 }

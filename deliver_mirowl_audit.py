@@ -115,7 +115,7 @@ Either way, the audit is yours. No strings.
 
 — Mike
 Nebula Components
-nebulacomponents.shop
+nebulacomponents.com
 """
 
     # ── HTML ────────────────────────────────────────────────────────────────────
@@ -167,7 +167,7 @@ nebulacomponents.shop
   </div>
 
   <p style="margin:28px 0 0 0;color:#555;font-size:13px">Either way — the audit is yours. No strings.</p>
-  <p style="margin:12px 0 0 0;color:#888;font-size:13px">— Mike<br>Nebula Components<br><a href="https://nebulacomponents.shop" style="color:#555">nebulacomponents.shop</a></p>
+  <p style="margin:12px 0 0 0;color:#888;font-size:13px">— Mike<br>Nebula Components<br><a href="https://nebulacomponents.com" style="color:#555">nebulacomponents.com</a></p>
 </div>
 </body>
 </html>"""

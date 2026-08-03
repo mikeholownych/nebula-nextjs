@@ -40,7 +40,7 @@ tracking_elements = {
     'page_view': {
         'description': 'Track initial page load',
         'params': {
-            'page_location': 'https://nebulacomponents.shop',
+            'page_location': 'https://nebulacomponents.com',
             'page_title': 'Landing Page',
             'page_type': 'landing'
         }

@@ -1,0 +1,764 @@
+{
+  "url": "https://nebulacomponents.com/teardowns/hotjar",
+  "psi": {
+    "mobile": {
+      "url": "https://nebulacomponents.com/teardowns/hotjar",
+      "strategy": "mobile",
+      "lighthouse_scores": {
+        "performance": 99,
+        "accessibility": 93,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lab_metrics": {
+        "first-contentful-paint": {
+          "value": 1655.7644347224596,
+          "display": "1.7\u00a0s",
+          "score": 0.93
+        },
+        "largest-contentful-paint": {
+          "value": 1951,
+          "display": "2.0\u00a0s",
+          "score": 0.97
+        },
+        "total-blocking-time": {
+          "value": 5,
+          "display": "10\u00a0ms",
+          "score": 1
+        },
+        "cumulative-layout-shift": {
+          "value": 0,
+          "display": "0",
+          "score": 1
+        },
+        "speed-index": {
+          "value": 1655.7644347224596,
+          "display": "1.7\u00a0s",
+          "score": 1
+        },
+        "interactive": {
+          "value": 2243.9500000000003,
+          "display": "2.2\u00a0s",
+          "score": 0.99
+        }
+      },
+      "field_metrics": {},
+      "opportunities": [
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "savings_ms": 300,
+          "description": "Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes consumed by network activity. [Learn how to reduce unused CSS](https://developer.chrome.com/docs/lighthouse/performance/unused-css-rules/)."
+        }
+      ],
+      "diagnostics": [
+        {
+          "id": "total-byte-weight",
+          "title": "Avoids enormous network payloads",
+          "display": "Total size was 258\u00a0KiB",
+          "score": 1,
+          "description": "Large network payloads cost users real money and are highly correlated with long load times. [Learn how to reduce payload sizes](https://developer.chrome.com/docs/lighthouse/performance/total-byte-weight/)."
+        },
+        {
+          "id": "mainthread-work-breakdown",
+          "title": "Minimizes main-thread work",
+          "display": "0.2\u00a0s",
+          "score": 1,
+          "description": "Consider reducing the time spent parsing, compiling and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to minimize main-thread work](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)"
+        },
+        {
+          "id": "bootup-time",
+          "title": "JavaScript execution time",
+          "display": "0.1\u00a0s",
+          "score": 1,
+          "description": "Consider reducing the time spent parsing, compiling, and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to reduce Javascript execution time](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/)."
+        },
+        {
+          "id": "layout-shifts",
+          "title": "Avoid large layout shifts",
+          "display": "",
+          "score": null,
+          "description": "These are the largest layout shifts observed on the page. Each table item represents a single layout shift, and shows the element that shifted the most. Below each item are possible root causes that led to the layout shift. Some of these layout shifts may not be included in the CLS metric value due to [windowing](https://web.dev/articles/cls#what_is_cls). [Learn how to improve CLS](https://web.dev/articles/optimize-cls)"
+        },
+        {
+          "id": "long-tasks",
+          "title": "Avoid long main-thread tasks",
+          "display": "1 long task found",
+          "score": 1,
+          "description": "Lists the longest tasks on the main thread, useful for identifying worst contributors to input delay. [Learn how to avoid long main-thread tasks](https://web.dev/articles/optimize-long-tasks)"
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "display": "Est savings of 31\u00a0KiB",
+          "score": 0.5,
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/)."
+        },
+        {
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "display": "Est savings of 11\u00a0KiB",
+          "score": 0,
+          "description": "Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes consumed by network activity. [Learn how to reduce unused CSS](https://developer.chrome.com/docs/lighthouse/performance/unused-css-rules/)."
+        }
+      ],
+      "failed_audits": [
+        {
+          "id": "color-contrast",
+          "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+          "score": 0,
+          "display": "",
+          "description": "Low-contrast text is difficult or impossible for many users to read. [Learn how to provide sufficient color contrast](https://dequeuniversity.com/rules/axe/4.12/color-contrast)."
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0,
+          "display": "",
+          "description": "[Avoid chaining critical requests](https://developer.chrome.com/docs/performance/insights/network-dependency-tree) by reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load."
+        },
+        {
+          "id": "link-in-text-block",
+          "title": "Links rely on color to be distinguishable.",
+          "score": 0,
+          "display": "",
+          "description": "Low-contrast text is difficult or impossible for many users to read. Link text that is discernible improves the experience for users with low vision. [Learn how to make links distinguishable](https://dequeuniversity.com/rules/axe/4.12/link-in-text-block)."
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "score": 0.5,
+          "display": "",
+          "description": "Requests are blocking the page's initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path."
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "score": 0.5,
+          "display": "Est savings of 31\u00a0KiB",
+          "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/)."
+        },
+        {
+          "id": "cache-insight",
+          "title": "Use efficient cache lifetimes",
+          "score": 0.5,
+          "display": "Est savings of 5\u00a0KiB",
+          "description": "A long cache lifetime can speed up repeat visits to your page. [Learn more about caching](https://developer.chrome.com/docs/performance/insights/cache)."
+        },
+        {
+          "id": "legacy-javascript-insight",
+          "title": "Legacy JavaScript",
+          "score": 0.5,
+          "display": "Est savings of 14\u00a0KiB",
+          "description": "Polyfills and transforms enable older browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/articles/baseline-and-polyfills) features, unless you know you must support older browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://developer.chrome.com/docs/performance/insights/legacy-javascript)"
+        }
+      ],
+      "passed_audits_count": 86,
+      "seo_audits": [
+        {
+          "id": "is-crawlable",
+          "title": "Page isn\u2019t blocked from indexing",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "document-title",
+          "title": "Document has a `<title>` element",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "meta-description",
+          "title": "Document has a meta description",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "http-status-code",
+          "title": "Page has successful HTTP status code",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "link-text",
+          "title": "Links have descriptive text",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "crawlable-anchors",
+          "title": "Links are crawlable",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "robots-txt",
+          "title": "robots.txt is valid",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "image-alt",
+          "title": "Image elements have `[alt]` attributes",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "hreflang",
+          "title": "Document has a valid `hreflang`",
+          "score": 1,
+          "pass": true
+        },
+        {
+          "id": "canonical",
+          "title": "Document has a valid `rel=canonical`",
+          "score": 1,
+          "pass": true
+        }
+      ],
+      "accessibility_audits": [
+        {
+          "id": "color-contrast",
+          "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+          "score": 0,
+          "display": ""
+        },
+        {
+          "id": "link-in-text-block",
+          "title": "Links rely on color to be distinguishable.",
+          "score": 0,
+          "display": ""
+        }
+      ],
+      "audit_details": {
+        "bootup-time": {
+          "title": "JavaScript execution time",
+          "headings": [
+            "url",
+            "total",
+            "scripting",
+            "scriptParseCompile"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js",
+              "total": 90.97559999999984,
+              "scripting": 73.50359999999985,
+              "scriptParseCompile": 16.7136
+            }
+          ],
+          "total_items": 1
+        },
+        "csp-xss": {
+          "title": "Ensure CSP is effective against XSS attacks",
+          "headings": [
+            "description",
+            "directive",
+            "severity"
+          ],
+          "items": [
+            {
+              "description": "No CSP found in enforcement mode",
+              "severity": "High"
+            }
+          ],
+          "total_items": 1
+        },
+        "render-blocking-insight": {
+          "title": "Render-blocking requests",
+          "headings": [
+            "url",
+            "totalBytes",
+            "wastedMs"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/398f2wy4d2s62.css",
+              "totalBytes": 15892,
+              "wastedMs": 302
+            }
+          ],
+          "total_items": 1
+        },
+        "viewport-insight": {
+          "title": "Optimize viewport for mobile",
+          "headings": [
+            "node"
+          ],
+          "items": [
+            {
+              "node": "{'nodeLabel': 'head > meta', 'selector': 'head > meta', 'snippet': '<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">', 'path': '1,HTML,0,HEAD,1,META', 'type': '"
+            }
+          ],
+          "total_items": 1
+        },
+        "origin-isolation": {
+          "title": "Ensure proper origin isolation with COOP",
+          "headings": [
+            "description",
+            "directive",
+            "severity"
+          ],
+          "items": [
+            {
+              "description": "No COOP header found",
+              "severity": "High"
+            }
+          ],
+          "total_items": 1
+        },
+        "total-byte-weight": {
+          "title": "Avoids enormous network payloads",
+          "headings": [
+            "url",
+            "totalBytes"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js",
+              "totalBytes": 74531
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/3e9r2ivsi6ymu.js",
+              "totalBytes": 39535
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/image?url=%2Fteardown-screenshots%2Fhotjar.png&w=750&q=75",
+              "totalBytes": 21262
+            },
+            {
+              "url": "https://nebulacomponents.com/teardowns/hotjar",
+              "totalBytes": 19548
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/398f2wy4d2s62.css",
+              "totalBytes": 15892
+            }
+          ],
+          "total_items": 10
+        },
+        "mainthread-work-breakdown": {
+          "title": "Minimizes main-thread work",
+          "headings": [
+            "groupLabel",
+            "duration"
+          ],
+          "items": [
+            {
+              "groupLabel": "Script Evaluation",
+              "duration": 97.62119999999997
+            },
+            {
+              "groupLabel": "Script Parsing & Compilation",
+              "duration": 43.0656
+            },
+            {
+              "groupLabel": "Other",
+              "duration": 37.118400000000015
+            },
+            {
+              "groupLabel": "Style & Layout",
+              "duration": 20.858399999999996
+            },
+            {
+              "groupLabel": "Rendering",
+              "duration": 5.261999999999999
+            }
+          ],
+          "total_items": 6
+        },
+        "network-rtt": {
+          "title": "Network Round Trip Times",
+          "headings": [
+            "origin",
+            "rtt"
+          ],
+          "items": [
+            {
+              "origin": "https://static.cloudflareinsights.com",
+              "rtt": 0.9234899999999998
+            },
+            {
+              "origin": "https://nebulacomponents.com",
+              "rtt": 0.0020117591800943744
+            }
+          ],
+          "total_items": 2
+        },
+        "server-response-time": {
+          "title": "Initial server response time was short",
+          "headings": [
+            "url",
+            "responseTime"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/teardowns/hotjar",
+              "responseTime": 10
+            }
+          ],
+          "total_items": 1
+        },
+        "resource-summary": {
+          "title": "Resources Summary",
+          "headings": [
+            "label",
+            "requestCount",
+            "transferSize"
+          ],
+          "items": [
+            {
+              "label": "Total",
+              "requestCount": 20,
+              "transferSize": 264099
+            },
+            {
+              "label": "Script",
+              "requestCount": 12,
+              "transferSize": 195402
+            },
+            {
+              "label": "Image",
+              "requestCount": 1,
+              "transferSize": 21262
+            },
+            {
+              "label": "Document",
+              "requestCount": 1,
+              "transferSize": 19548
+            },
+            {
+              "label": "Stylesheet",
+              "requestCount": 1,
+              "transferSize": 15892
+            }
+          ],
+          "total_items": 9
+        },
+        "unused-javascript": {
+          "title": "Reduce unused JavaScript",
+          "headings": [
+            "url",
+            "totalBytes",
+            "wastedBytes"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js",
+              "totalBytes": 72333,
+              "wastedBytes": 31309
+            }
+          ],
+          "total_items": 1
+        },
+        "color-contrast": {
+          "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+          "headings": [
+            "node"
+          ],
+          "items": [
+            {
+              "node": "{'boundingRect': {'bottom': 1091, 'right': 131, 'left': 89, 'height': 12, 'top': 1079, 'width': 42}, 'path': '1,HTML,1,BODY,2,MAIN,0,ARTICLE,6,DIV,1,DIV,0,DIV,1,DIV,0,SPAN', 'selector': 'div.w-full > "
+            }
+          ],
+          "total_items": 1
+        },
+        "main-thread-tasks": {
+          "title": "Tasks",
+          "headings": [
+            "startTime",
+            "duration"
+          ],
+          "items": [
+            {
+              "startTime": 130.178,
+              "duration": 8.213
+            },
+            {
+              "startTime": 189.038,
+              "duration": 7.926
+            },
+            {
+              "startTime": 196.973,
+              "duration": 20.943
+            },
+            {
+              "startTime": 226.51,
+              "duration": 6.857
+            },
+            {
+              "startTime": 343.819,
+              "duration": 50.363
+            }
+          ],
+          "total_items": 9
+        },
+        "long-tasks": {
+          "title": "Avoid long main-thread tasks",
+          "headings": [
+            "url",
+            "startTime",
+            "duration"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js",
+              "startTime": 2251,
+              "duration": 60
+            }
+          ],
+          "total_items": 1
+        },
+        "dom-size-insight": {
+          "title": "Optimize DOM size",
+          "headings": [
+            "statistic",
+            "node",
+            "value"
+          ],
+          "items": [
+            {
+              "statistic": "Total elements",
+              "value": "{'type': 'numeric', 'granularity': 1, 'value': 301}"
+            },
+            {
+              "statistic": "DOM depth",
+              "node": "{'lhId': 'page-3-feTurbulence', 'selector': 'svg.absolute > defs > filter#nc-rough > feturbulence', 'snippet': '<feTurbulence type=\"fractalNoise\" baseFrequency=\"0.045\" numOctaves=\"2\" seed=\"4\" result=\"",
+              "value": "{'value': 13, 'type': 'numeric', 'granularity': 1}"
+            },
+            {
+              "statistic": "Most children",
+              "node": "{'boundingRect': {'left': 0, 'right': 412, 'height': 5895, 'top': 0, 'width': 412, 'bottom': 5895}, 'selector': 'body', 'path': '1,HTML,1,BODY', 'snippet': '<body>', 'type': 'node', 'lhId': 'page-2-BO",
+              "value": "{'type': 'numeric', 'granularity': 1, 'value': 35}"
+            }
+          ],
+          "total_items": 3
+        },
+        "network-requests": {
+          "title": "Network Requests",
+          "headings": [
+            "url",
+            "protocol",
+            "networkRequestTime",
+            "networkEndTime",
+            "transferSize",
+            "resourceSize",
+            "statusCode",
+            "mimeType",
+            "resourceType"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/teardowns/hotjar",
+              "protocol": "h2",
+              "networkRequestTime": 0.7309999465942383,
+              "networkEndTime": 127.94400000572205,
+              "transferSize": 19548,
+              "resourceSize": 94867,
+              "statusCode": 200,
+              "mimeType": "text/html",
+              "resourceType": "Document"
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/398f2wy4d2s62.css",
+              "protocol": "h2",
+              "networkRequestTime": 137.51500010490417,
+              "networkEndTime": 186.3549997806549,
+              "transferSize": 15892,
+              "resourceSize": 71222,
+              "statusCode": 200,
+              "mimeType": "text/css",
+              "resourceType": "Stylesheet"
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/34t3p516eaooe.js",
+              "protocol": "h2",
+              "networkRequestTime": 137.5569999217987,
+              "networkEndTime": 158.02699995040894,
+              "transferSize": 2778,
+              "resourceSize": 1296,
+              "statusCode": 200,
+              "mimeType": "application/javascript",
+              "resourceType": "Script"
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/24zfb12aud3-6.js",
+              "protocol": "h2",
+              "networkRequestTime": 159.40400004386902,
+              "networkEndTime": 178.00200009346008,
+              "transferSize": 11010,
+              "resourceSize": 30971,
+              "statusCode": 200,
+              "mimeType": "application/javascript",
+              "resourceType": "Script"
+            },
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js",
+              "protocol": "h2",
+              "networkRequestTime": 179.1670000553131,
+              "networkEndTime": 339.59999990463257,
+              "transferSize": 74531,
+              "resourceSize": 231606,
+              "statusCode": 200,
+              "mimeType": "application/javascript",
+              "resourceType": "Script"
+            }
+          ],
+          "total_items": 20
+        },
+        "unused-css-rules": {
+          "title": "Reduce unused CSS",
+          "headings": [
+            "url",
+            "totalBytes",
+            "wastedBytes"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/398f2wy4d2s62.css",
+              "totalBytes": 13717,
+              "wastedBytes": 11226
+            }
+          ],
+          "total_items": 1
+        },
+        "cache-insight": {
+          "title": "Use efficient cache lifetimes",
+          "headings": [
+            "url",
+            "cacheLifetimeMs",
+            "totalBytes"
+          ],
+          "items": [
+            {
+              "url": "https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496",
+              "cacheLifetimeMs": 86400000,
+              "totalBytes": 11714
+            }
+          ],
+          "total_items": 1
+        },
+        "legacy-javascript-insight": {
+          "title": "Legacy JavaScript",
+          "headings": [
+            "url",
+            "wastedBytes"
+          ],
+          "items": [
+            {
+              "url": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js",
+              "wastedBytes": 14090
+            }
+          ],
+          "total_items": 1
+        },
+        "link-in-text-block": {
+          "title": "Links rely on color to be distinguishable.",
+          "headings": [
+            "node"
+          ],
+          "items": [
+            {
+              "node": "{'path': '1,HTML,1,BODY,2,MAIN,0,ARTICLE,3,P,2,A', 'nodeLabel': 'hotjar.com', 'boundingRect': {'bottom': 402, 'height': 20, 'top': 382, 'right': 360, 'width': 83, 'left': 277}, 'snippet': '<a href=\"ht"
+            }
+          ],
+          "total_items": 1
+        },
+        "third-parties-insight": {
+          "title": "3rd parties",
+          "headings": [
+            "entity",
+            "transferSize",
+            "mainThreadTime"
+          ],
+          "items": [
+            {
+              "entity": "Cloudflare",
+              "transferSize": 11714,
+              "mainThreadTime": 2.7300000190734863
+            }
+          ],
+          "total_items": 1
+        },
+        "trusted-types-xss": {
+          "title": "Mitigate DOM-based XSS with Trusted Types",
+          "headings": [
+            "description",
+            "severity"
+          ],
+          "items": [
+            {
+              "description": "No `Content-Security-Policy` header with Trusted Types directive found",
+              "severity": "High"
+            }
+          ],
+          "total_items": 1
+        },
+        "network-server-latency": {
+          "title": "Server Backend Latencies",
+          "headings": [
+            "origin",
+            "serverResponseTime"
+          ],
+          "items": [
+            {
+              "origin": "https://static.cloudflareinsights.com",
+              "serverResponseTime": 2
+            },
+            {
+              "origin": "https://nebulacomponents.com",
+              "serverResponseTime": 1
+            }
+          ],
+          "total_items": 2
+        },
+        "baseline": {
+          "title": "Baseline Features",
+          "headings": [
+            "featureId",
+            "displayStatus",
+            "source"
+          ],
+          "items": [
+            {
+              "featureId": "https://webstatus.dev/features/long-animation-frames",
+              "displayStatus": "{'status': 'limited', 'displayString': 'Limited Availability', 'type': 'baseline-status'}",
+              "source": "https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496"
+            },
+            {
+              "featureId": "https://webstatus.dev/features/layout-instability",
+              "displayStatus": "{'displayString': 'Limited Availability', 'status': 'limited', 'type': 'baseline-status'}",
+              "source": "https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496"
+            },
+            {
+              "featureId": "https://webstatus.dev/features/requestidlecallback",
+              "displayStatus": "{'status': 'limited', 'type': 'baseline-status', 'displayString': 'Limited Availability'}",
+              "source": "_lighthouse-eval.js"
+            },
+            {
+              "featureId": "https://webstatus.dev/features/scrollend",
+              "displayStatus": "{'status': 'low', 'displayString': 'Newly Available (2025-12-12)', 'type': 'baseline-status'}",
+              "source": "https://nebulacomponents.com/_next/static/chunks/15j5tzijszemg.js"
+            },
+            {
+              "featureId": "https://webstatus.dev/features/uint8array-base64-hex",
+              "displayStatus": "{'displayString': 'Newly Available (2025-09-05)', 'status': 'low', 'type': 'baseline-status'}",
+              "source": "http://ghost-rider/driver.html"
+            }
+          ],
+          "total_items": 22
+        }
+      },
+      "analysis_timestamp": "2026-08-03T07:40:15.276Z",
+      "error": null
+    }
+  },
+  "crux": {
+    "target": "https://nebulacomponents.com/teardowns/hotjar",
+    "metrics": {},
+    "collection_period": null,
+    "form_factor": "ALL",
+    "error": "No CrUX data for this URL. The site likely has insufficient Chrome traffic volume for eligibility."
+  },
+  "error": null
+}

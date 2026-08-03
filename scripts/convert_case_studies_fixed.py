@@ -104,7 +104,7 @@ for filepath in files_to_convert:
         "author": {
             "@type": "Organization",
             "name": "Nebula Components",
-            "url": "https://nebulacomponents.shop"
+            "url": "https://nebulacomponents.com"
         },
         "about": {
             "@type": "Service",

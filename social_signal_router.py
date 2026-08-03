@@ -24,7 +24,7 @@ GS = BASE / "growth_system"
 SIGNAL_QUEUE = GS / "evergreen_social_signal_queue.jsonl"
 OUTREACH_QUEUE = GS / "evergreen_outreach_queue.jsonl"
 CONFIG_PATH = GS / "social_signal_playbook.json"
-AUDIT_URL = "https://nebulacomponents.shop/"
+AUDIT_URL = "https://nebulacomponents.com/"
 
 PAIN_TERMS = [
     "ad spend", "paid ads", "google ads", "meta ads", "facebook ads", "ppc",

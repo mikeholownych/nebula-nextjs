@@ -8,7 +8,7 @@ from __future__ import annotations
 import argparse, collections, json
 from pathlib import Path
 from urllib.parse import urlparse
-CANONICAL_HOST='nebulacomponents.shop'
+CANONICAL_HOST='nebulacomponents.com'
 def is_canonical(url): return urlparse(url).netloc.lower().removeprefix('www.')==CANONICAL_HOST
 def main(path):
  rows=[json.loads(x) for x in Path(path).read_text().splitlines() if x.strip()]

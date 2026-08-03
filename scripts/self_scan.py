@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the real audit engine against nebulacomponents.shop's own homepage
+"""Run the real audit engine against nebulacomponents.com's own homepage
 and write a static JSON snapshot the homepage hero reads to play its
 self-scan calibration animation — see customer-portal/app/components/
 SelfScan.tsx. Not a live per-visitor scan: this is meant to run on a
@@ -22,7 +22,7 @@ sys.path.insert(0, str(NEBULA_DIR))
 
 from deliver_audit import scrape_page, score_audit  # noqa: E402
 
-DEFAULT_URL = "https://nebulacomponents.shop"
+DEFAULT_URL = "https://nebulacomponents.com"
 OUTPUT_PATH = NEBULA_DIR / "customer-portal" / "public" / "self_scan.json"
 
 DIM_LABELS = {

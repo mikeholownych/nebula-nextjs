@@ -1,0 +1,1703 @@
+[
+  {
+    "device": "mobile",
+    "route": "/",
+    "status": 200,
+    "finalUrl": "https://nebulacomponents.com/?agency-audit=20260803",
+    "title": "Landing Page Audit for Paid Traffic Not Converting | Nebula",
+    "h1": [
+      "We scored our own landing page and published every finding. Now score yours."
+    ],
+    "viewport": 390,
+    "scrollWidth": 390,
+    "overflow": [],
+    "main": true,
+    "mainId": "main-content",
+    "skipLinks": [
+      {
+        "text": "Skip to main content",
+        "href": "#main-content"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Get My Score",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "See Sample Audit →",
+        "href": "/teardowns"
+      },
+      {
+        "tag": "A",
+        "text": "knallhart.dev 5.8/10 Grade C Nebula ran its 9-signal audit on knallhart.dev — the \"AI roasts your we",
+        "href": "/teardowns/knallhart"
+      },
+      {
+        "tag": "A",
+        "text": "postmint.de 6.8/10 Grade B Nebula ran its 9-signal audit on postmint.de/en — the \"one sentence into ",
+        "href": "/teardowns/postmint"
+      },
+      {
+        "tag": "A",
+        "text": "Run the audit free →",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "See what you actually get →",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Ads Getting Clicks But No Sales →",
+        "href": "/ads-getting-clicks-but-no-sales"
+      },
+      {
+        "tag": "A",
+        "text": "Landing Page CTA Audit & Friction →",
+        "href": "/landing-page-cta-audit"
+      },
+      {
+        "tag": "A",
+        "text": "Mobile Landing Page Audit & Viewport Leaks →",
+        "href": "/mobile-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "SaaS Landing Page Audit (ICP, Demo & Trial Friction) →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "Ecommerce Landing Page Audit (Product & Price Clarity) →",
+        "href": "/ecommerce-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "Lead Generation Landing Page Audit (Form Friction) →",
+        "href": "/lead-generation-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Industry Audits →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "vs. SEMrush Site Audit",
+        "href": "/vs/semrush-site-audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Essential only",
+        "href": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Accept all",
+        "href": null
+      }
+    ],
+    "forms": [],
+    "consoleErrors": [],
+    "failedRequests": [],
+    "axe": {
+      "violations": [],
+      "passes": 25,
+      "incomplete": 1
+    }
+  },
+  {
+    "device": "mobile",
+    "route": "/audit",
+    "status": 200,
+    "finalUrl": "https://nebulacomponents.com/audit?agency-audit=20260803",
+    "title": "Free Landing Page Audit: Find Conversion Friction | Nebula",
+    "h1": [
+      "See if the page is what's killing your ads."
+    ],
+    "viewport": 390,
+    "scrollWidth": 390,
+    "overflow": [],
+    "main": true,
+    "mainId": "main-content",
+    "skipLinks": [
+      {
+        "text": "Skip to main content",
+        "href": "#main-content"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Find the Leak",
+        "href": null
+      },
+      {
+        "tag": "A",
+        "text": "Get the Repair Sprint →",
+        "href": "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Industry Audits →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "vs. SEMrush Site Audit",
+        "href": "/vs/semrush-site-audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Essential only",
+        "href": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Accept all",
+        "href": null
+      }
+    ],
+    "forms": [
+      {
+        "action": "https://nebulacomponents.com/audit?agency-audit=20260803",
+        "method": "get",
+        "inputs": [
+          {
+            "tag": "INPUT",
+            "type": "url",
+            "name": "",
+            "required": false,
+            "placeholder": "https://yoursite.com/landing-page",
+            "aria": ""
+          },
+          {
+            "tag": "TEXTAREA",
+            "type": "textarea",
+            "name": "",
+            "required": false,
+            "placeholder": "e.g. ads aren't converting, launching next week, page feels off…",
+            "aria": ""
+          },
+          {
+            "tag": "BUTTON",
+            "type": "submit",
+            "name": "",
+            "placeholder": "",
+            "aria": ""
+          }
+        ]
+      }
+    ],
+    "consoleErrors": [],
+    "failedRequests": [],
+    "axe": {
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": 1,
+          "targets": [
+            [
+              ".text-fg-muted\\/60"
+            ]
+          ]
+        }
+      ],
+      "passes": 28,
+      "incomplete": 1
+    }
+  },
+  {
+    "device": "mobile",
+    "route": "/pricing",
+    "status": 200,
+    "finalUrl": "https://nebulacomponents.com/pricing?agency-audit=20260803",
+    "title": "Landing Page Audit Pricing & One-Leak Repair Sprint | Nebula",
+    "h1": [
+      "Pricing"
+    ],
+    "viewport": 390,
+    "scrollWidth": 390,
+    "overflow": [],
+    "main": true,
+    "mainId": "main-content",
+    "skipLinks": [
+      {
+        "text": "Skip to main content",
+        "href": "#main-content"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Run free audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Review checkout →",
+        "href": "/checkout"
+      },
+      {
+        "tag": "A",
+        "text": "Run free audit →",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Industry Audits →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "vs. SEMrush Site Audit",
+        "href": "/vs/semrush-site-audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Essential only",
+        "href": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Accept all",
+        "href": null
+      }
+    ],
+    "forms": [],
+    "consoleErrors": [],
+    "failedRequests": [],
+    "axe": {
+      "violations": [],
+      "passes": 27,
+      "incomplete": 1
+    }
+  },
+  {
+    "device": "mobile",
+    "route": "/learning-centre",
+    "status": 502,
+    "finalUrl": "https://nebulacomponents.com/learning-centre?agency-audit=20260803",
+    "title": "nebulacomponents.com | 502: Bad gateway",
+    "h1": [
+      "Bad gateway Error code 502"
+    ],
+    "viewport": 390,
+    "scrollWidth": 390,
+    "overflow": [],
+    "main": false,
+    "mainId": "",
+    "skipLinks": [],
+    "buttons": [
+      {
+        "tag": "BUTTON",
+        "text": "Click to reveal",
+        "href": null
+      }
+    ],
+    "forms": [],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 502 ()"
+    ],
+    "failedRequests": [],
+    "axe": {
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": 2,
+          "targets": [
+            [
+              "div:nth-child(2) > a"
+            ],
+            [
+              "#brand_link"
+            ]
+          ]
+        },
+        {
+          "id": "link-in-text-block",
+          "impact": "serious",
+          "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
+          "nodes": 1,
+          "targets": [
+            [
+              "div:nth-child(2) > a"
+            ]
+          ]
+        },
+        {
+          "id": "link-name",
+          "impact": "serious",
+          "description": "Ensure links have discernible text",
+          "nodes": 1,
+          "targets": [
+            [
+              ".mb-10.md\\:m-0.relative > a"
+            ]
+          ]
+        }
+      ],
+      "passes": 10,
+      "incomplete": 2
+    }
+  },
+  {
+    "device": "mobile",
+    "route": "/case-studies",
+    "status": 200,
+    "finalUrl": "https://nebulacomponents.com/case-studies?agency-audit=20260803",
+    "title": "Case Studies | Nebula Components",
+    "h1": [
+      "No client case studies yet — here is what the engine does instead."
+    ],
+    "viewport": 390,
+    "scrollWidth": 390,
+    "overflow": [],
+    "main": true,
+    "mainId": "main-content",
+    "skipLinks": [
+      {
+        "text": "Skip to main content",
+        "href": "#main-content"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Industry Audits →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "vs. SEMrush Site Audit",
+        "href": "/vs/semrush-site-audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Essential only",
+        "href": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Accept all",
+        "href": null
+      }
+    ],
+    "forms": [],
+    "consoleErrors": [],
+    "failedRequests": [],
+    "axe": {
+      "violations": [],
+      "passes": 25,
+      "incomplete": 1
+    }
+  },
+  {
+    "device": "mobile",
+    "route": "/resources",
+    "status": 200,
+    "finalUrl": "https://nebulacomponents.com/resources?agency-audit=20260803",
+    "title": "Resources — Tools & Open Source | Nebula Components",
+    "h1": [
+      "Resources"
+    ],
+    "viewport": 390,
+    "scrollWidth": 390,
+    "overflow": [],
+    "main": true,
+    "mainId": "main-content",
+    "skipLinks": [
+      {
+        "text": "Skip to main content",
+        "href": "#main-content"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "OPEN SOURCE CLI Citable The evidence layer for defensible SEO, AEO, and GEO audits. 123 detectors ac",
+        "href": "/resources/citable"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Industry Audits →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "vs. SEMrush Site Audit",
+        "href": "/vs/semrush-site-audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Essential only",
+        "href": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Accept all",
+        "href": null
+      }
+    ],
+    "forms": [],
+    "consoleErrors": [],
+    "failedRequests": [],
+    "axe": {
+      "violations": [],
+      "passes": 25,
+      "incomplete": 1
+    }
+  },
+  {
+    "device": "mobile",
+    "route": "/why-is-my-landing-page-not-converting",
+    "status": 200,
+    "finalUrl": "https://nebulacomponents.com/why-is-my-landing-page-not-converting?agency-audit=20260803",
+    "title": "Why Is My Landing Page Not Converting? Diagnostic Guide | Nebula",
+    "h1": [
+      "Why Is My Landing Page Not Converting?"
+    ],
+    "viewport": 390,
+    "scrollWidth": 390,
+    "overflow": [],
+    "main": true,
+    "mainId": "main-content",
+    "skipLinks": [
+      {
+        "text": "Skip to main content",
+        "href": "#main-content"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Run Free Landing Page Audit →",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Message Match Audit",
+        "href": "/landing-page-message-match"
+      },
+      {
+        "tag": "A",
+        "text": "SaaS Audit Guide",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "Repair Sprint Pricing",
+        "href": "/pricing"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Industry Audits →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "vs. SEMrush Site Audit",
+        "href": "/vs/semrush-site-audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Essential only",
+        "href": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Accept all",
+        "href": null
+      }
+    ],
+    "forms": [],
+    "consoleErrors": [],
+    "failedRequests": [],
+    "axe": {
+      "violations": [],
+      "passes": 25,
+      "incomplete": 1
+    }
+  },
+  {
+    "device": "mobile",
+    "route": "/ads-getting-clicks-but-no-sales",
+    "status": 200,
+    "finalUrl": "https://nebulacomponents.com/ads-getting-clicks-but-no-sales?agency-audit=20260803",
+    "title": "Ads Getting Clicks But No Sales? Post-Click Audit | Nebula",
+    "h1": [
+      "Ads Getting Clicks But No Sales?"
+    ],
+    "viewport": 390,
+    "scrollWidth": 390,
+    "overflow": [],
+    "main": true,
+    "mainId": "main-content",
+    "skipLinks": [
+      {
+        "text": "Skip to main content",
+        "href": "#main-content"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Run Free Audit Now →",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Ecommerce Audit",
+        "href": "/ecommerce-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "SaaS Audit",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "Repair Sprint Pricing",
+        "href": "/pricing"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Industry Audits →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "vs. SEMrush Site Audit",
+        "href": "/vs/semrush-site-audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Essential only",
+        "href": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Accept all",
+        "href": null
+      }
+    ],
+    "forms": [],
+    "consoleErrors": [],
+    "failedRequests": [],
+    "axe": {
+      "violations": [],
+      "passes": 25,
+      "incomplete": 0
+    }
+  },
+  {
+    "device": "mobile",
+    "route": "/teardowns/hotjar",
+    "status": 200,
+    "finalUrl": "https://nebulacomponents.com/teardowns/hotjar?agency-audit=20260803",
+    "title": "Hotjar Landing Page Audit: What Nebula Found | Nebula",
+    "h1": [
+      "hotjar.com — What the Audit Engine Found"
+    ],
+    "viewport": 390,
+    "scrollWidth": 614,
+    "overflow": [
+      {
+        "tag": "DIV",
+        "cls": "",
+        "left": 49,
+        "right": 481,
+        "width": 432
+      },
+      {
+        "tag": "P",
+        "cls": "text-xs font-semibold uppercase tracking-widest text-fg-muted",
+        "left": 49,
+        "right": 481,
+        "width": 432
+      },
+      {
+        "tag": "H3",
+        "cls": "mt-1 text-xl font-bold text-fg",
+        "left": 49,
+        "right": 481,
+        "width": 432
+      },
+      {
+        "tag": "SPAN",
+        "cls": "relative inline-block px-[0.35em] whitespace-nowrap",
+        "left": 49,
+        "right": 481,
+        "width": 432
+      },
+      {
+        "tag": "svg",
+        "cls": "pointer-events-none absolute inset-y-[-0.25em] left-[-0.15em] h-[calc(100%+0.5em)] w-[calc(100%+0.3em)] text-red-400",
+        "left": 46,
+        "right": 484,
+        "width": 438
+      },
+      {
+        "tag": "path",
+        "cls": "",
+        "left": 83,
+        "right": 467,
+        "width": 383
+      },
+      {
+        "tag": "path",
+        "cls": "",
+        "left": 124,
+        "right": 457,
+        "width": 333
+      },
+      {
+        "tag": "DIV",
+        "cls": "flex shrink-0 flex-col items-end gap-1",
+        "left": 497,
+        "right": 614,
+        "width": 117
+      },
+      {
+        "tag": "SPAN",
+        "cls": "rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent",
+        "left": 497,
+        "right": 614,
+        "width": 117
+      },
+      {
+        "tag": "SPAN",
+        "cls": "text-xs font-semibold text-accent",
+        "left": 546,
+        "right": 614,
+        "width": 68
+      },
+      {
+        "tag": "DIV",
+        "cls": "",
+        "left": 49,
+        "right": 420,
+        "width": 371
+      },
+      {
+        "tag": "P",
+        "cls": "text-xs font-semibold uppercase tracking-widest text-fg-muted",
+        "left": 49,
+        "right": 420,
+        "width": 371
+      },
+      {
+        "tag": "H3",
+        "cls": "mt-1 text-xl font-bold text-fg",
+        "left": 49,
+        "right": 420,
+        "width": 371
+      },
+      {
+        "tag": "SPAN",
+        "cls": "relative inline-block whitespace-nowrap",
+        "left": 49,
+        "right": 420,
+        "width": 371
+      },
+      {
+        "tag": "svg",
+        "cls": "pointer-events-none absolute bottom-[-0.32em] left-[-1%] h-[0.5em] w-[102%] text-accent",
+        "left": 45,
+        "right": 424,
+        "width": 379
+      },
+      {
+        "tag": "path",
+        "cls": "",
+        "left": 51,
+        "right": 416,
+        "width": 365
+      },
+      {
+        "tag": "DIV",
+        "cls": "flex shrink-0 flex-col items-end gap-1",
+        "left": 436,
+        "right": 553,
+        "width": 117
+      },
+      {
+        "tag": "SPAN",
+        "cls": "rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent",
+        "left": 436,
+        "right": 553,
+        "width": 117
+      },
+      {
+        "tag": "SPAN",
+        "cls": "text-xs font-semibold text-accent",
+        "left": 485,
+        "right": 553,
+        "width": 68
+      }
+    ],
+    "main": true,
+    "mainId": "main-content",
+    "skipLinks": [
+      {
+        "text": "Skip to main content",
+        "href": "#main-content"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Industry Audits →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "vs. SEMrush Site Audit",
+        "href": "/vs/semrush-site-audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Essential only",
+        "href": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Accept all",
+        "href": null
+      }
+    ],
+    "forms": [],
+    "consoleErrors": [],
+    "failedRequests": [],
+    "axe": {
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": 1,
+          "targets": [
+            [
+              ".truncate"
+            ]
+          ]
+        },
+        {
+          "id": "link-in-text-block",
+          "impact": "serious",
+          "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
+          "nodes": 1,
+          "targets": [
+            [
+              ".hover\\:text-accent-light"
+            ]
+          ]
+        }
+      ],
+      "passes": 26,
+      "incomplete": 1
+    }
+  },
+  {
+    "device": "desktop",
+    "route": "/",
+    "status": 200,
+    "finalUrl": "https://nebulacomponents.com/?agency-audit=20260803",
+    "title": "Landing Page Audit for Paid Traffic Not Converting | Nebula",
+    "h1": [
+      "We scored our own landing page and published every finding. Now score yours."
+    ],
+    "viewport": 1440,
+    "scrollWidth": 1440,
+    "overflow": [],
+    "main": true,
+    "mainId": "main-content",
+    "skipLinks": [
+      {
+        "text": "Skip to main content",
+        "href": "#main-content"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Get My Score",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "See Sample Audit →",
+        "href": "/teardowns"
+      },
+      {
+        "tag": "A",
+        "text": "knallhart.dev 5.8/10 Grade C Nebula ran its 9-signal audit on knallhart.dev — the \"AI roasts your we",
+        "href": "/teardowns/knallhart"
+      },
+      {
+        "tag": "A",
+        "text": "postmint.de 6.8/10 Grade B Nebula ran its 9-signal audit on postmint.de/en — the \"one sentence into ",
+        "href": "/teardowns/postmint"
+      },
+      {
+        "tag": "A",
+        "text": "Run the audit free →",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "See what you actually get →",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Ads Getting Clicks But No Sales →",
+        "href": "/ads-getting-clicks-but-no-sales"
+      },
+      {
+        "tag": "A",
+        "text": "Landing Page CTA Audit & Friction →",
+        "href": "/landing-page-cta-audit"
+      },
+      {
+        "tag": "A",
+        "text": "Mobile Landing Page Audit & Viewport Leaks →",
+        "href": "/mobile-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "SaaS Landing Page Audit (ICP, Demo & Trial Friction) →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "Ecommerce Landing Page Audit (Product & Price Clarity) →",
+        "href": "/ecommerce-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "Lead Generation Landing Page Audit (Form Friction) →",
+        "href": "/lead-generation-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Industry Audits →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "vs. SEMrush Site Audit",
+        "href": "/vs/semrush-site-audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Essential only",
+        "href": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Accept all",
+        "href": null
+      }
+    ],
+    "forms": [],
+    "consoleErrors": [],
+    "failedRequests": [],
+    "axe": {
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": 2,
+          "targets": [
+            [
+              ".finding-reveal.justify-between.items-center:nth-child(10) > .gap-2.items-center.flex"
+            ],
+            [
+              ".finding-reveal.justify-between.items-center:nth-child(10) > .text-accent"
+            ]
+          ]
+        }
+      ],
+      "passes": 24,
+      "incomplete": 1
+    }
+  },
+  {
+    "device": "desktop",
+    "route": "/audit",
+    "status": 200,
+    "finalUrl": "https://nebulacomponents.com/audit?agency-audit=20260803",
+    "title": "Free Landing Page Audit: Find Conversion Friction | Nebula",
+    "h1": [
+      "See if the page is what's killing your ads."
+    ],
+    "viewport": 1440,
+    "scrollWidth": 1440,
+    "overflow": [],
+    "main": true,
+    "mainId": "main-content",
+    "skipLinks": [
+      {
+        "text": "Skip to main content",
+        "href": "#main-content"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Find the Leak",
+        "href": null
+      },
+      {
+        "tag": "A",
+        "text": "Get the Repair Sprint →",
+        "href": "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Industry Audits →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "vs. SEMrush Site Audit",
+        "href": "/vs/semrush-site-audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Essential only",
+        "href": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Accept all",
+        "href": null
+      }
+    ],
+    "forms": [
+      {
+        "action": "https://nebulacomponents.com/audit?agency-audit=20260803",
+        "method": "get",
+        "inputs": [
+          {
+            "tag": "INPUT",
+            "type": "url",
+            "name": "",
+            "required": false,
+            "placeholder": "https://yoursite.com/landing-page",
+            "aria": ""
+          },
+          {
+            "tag": "TEXTAREA",
+            "type": "textarea",
+            "name": "",
+            "required": false,
+            "placeholder": "e.g. ads aren't converting, launching next week, page feels off…",
+            "aria": ""
+          },
+          {
+            "tag": "BUTTON",
+            "type": "submit",
+            "name": "",
+            "placeholder": "",
+            "aria": ""
+          }
+        ]
+      }
+    ],
+    "consoleErrors": [],
+    "failedRequests": [],
+    "axe": {
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": 1,
+          "targets": [
+            [
+              ".text-fg-muted\\/60"
+            ]
+          ]
+        }
+      ],
+      "passes": 27,
+      "incomplete": 1
+    }
+  },
+  {
+    "device": "desktop",
+    "route": "/pricing",
+    "status": 200,
+    "finalUrl": "https://nebulacomponents.com/pricing?agency-audit=20260803",
+    "title": "Landing Page Audit Pricing & One-Leak Repair Sprint | Nebula",
+    "h1": [
+      "Pricing"
+    ],
+    "viewport": 1440,
+    "scrollWidth": 1440,
+    "overflow": [],
+    "main": true,
+    "mainId": "main-content",
+    "skipLinks": [
+      {
+        "text": "Skip to main content",
+        "href": "#main-content"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Run free audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Review checkout →",
+        "href": "/checkout"
+      },
+      {
+        "tag": "A",
+        "text": "Run free audit →",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Industry Audits →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "vs. SEMrush Site Audit",
+        "href": "/vs/semrush-site-audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Essential only",
+        "href": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Accept all",
+        "href": null
+      }
+    ],
+    "forms": [],
+    "consoleErrors": [],
+    "failedRequests": [],
+    "axe": {
+      "violations": [],
+      "passes": 26,
+      "incomplete": 1
+    }
+  },
+  {
+    "device": "desktop",
+    "route": "/learning-centre",
+    "status": 200,
+    "finalUrl": "https://nebulacomponents.com/learning-centre?agency-audit=20260803",
+    "title": "Learning Centre - Landing Page Conversion Leaks | Nebula",
+    "h1": [
+      "Fix the page, not the ad"
+    ],
+    "viewport": 1440,
+    "scrollWidth": 1440,
+    "overflow": [],
+    "main": true,
+    "mainId": "main-content",
+    "skipLinks": [
+      {
+        "text": "Skip to main content",
+        "href": "#main-content"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Run the free audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Run the free audit →",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Industry Audits →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "vs. SEMrush Site Audit",
+        "href": "/vs/semrush-site-audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Essential only",
+        "href": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Accept all",
+        "href": null
+      }
+    ],
+    "forms": [],
+    "consoleErrors": [],
+    "failedRequests": [],
+    "axe": {
+      "violations": [],
+      "passes": 25,
+      "incomplete": 1
+    }
+  },
+  {
+    "device": "desktop",
+    "route": "/case-studies",
+    "status": 200,
+    "finalUrl": "https://nebulacomponents.com/case-studies?agency-audit=20260803",
+    "title": "Case Studies | Nebula Components",
+    "h1": [
+      "No client case studies yet — here is what the engine does instead."
+    ],
+    "viewport": 1440,
+    "scrollWidth": 1440,
+    "overflow": [],
+    "main": true,
+    "mainId": "main-content",
+    "skipLinks": [
+      {
+        "text": "Skip to main content",
+        "href": "#main-content"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Industry Audits →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "vs. SEMrush Site Audit",
+        "href": "/vs/semrush-site-audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Essential only",
+        "href": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Accept all",
+        "href": null
+      }
+    ],
+    "forms": [],
+    "consoleErrors": [],
+    "failedRequests": [],
+    "axe": {
+      "violations": [],
+      "passes": 24,
+      "incomplete": 0
+    }
+  },
+  {
+    "device": "desktop",
+    "route": "/resources",
+    "status": 200,
+    "finalUrl": "https://nebulacomponents.com/resources?agency-audit=20260803",
+    "title": "Resources — Tools & Open Source | Nebula Components",
+    "h1": [
+      "Resources"
+    ],
+    "viewport": 1440,
+    "scrollWidth": 1440,
+    "overflow": [],
+    "main": true,
+    "mainId": "main-content",
+    "skipLinks": [
+      {
+        "text": "Skip to main content",
+        "href": "#main-content"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "OPEN SOURCE CLI Citable The evidence layer for defensible SEO, AEO, and GEO audits. 123 detectors ac",
+        "href": "/resources/citable"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Industry Audits →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "vs. SEMrush Site Audit",
+        "href": "/vs/semrush-site-audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Essential only",
+        "href": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Accept all",
+        "href": null
+      }
+    ],
+    "forms": [],
+    "consoleErrors": [],
+    "failedRequests": [],
+    "axe": {
+      "violations": [],
+      "passes": 24,
+      "incomplete": 1
+    }
+  },
+  {
+    "device": "desktop",
+    "route": "/why-is-my-landing-page-not-converting",
+    "status": 200,
+    "finalUrl": "https://nebulacomponents.com/why-is-my-landing-page-not-converting?agency-audit=20260803",
+    "title": "Why Is My Landing Page Not Converting? Diagnostic Guide | Nebula",
+    "h1": [
+      "Why Is My Landing Page Not Converting?"
+    ],
+    "viewport": 1440,
+    "scrollWidth": 1440,
+    "overflow": [],
+    "main": true,
+    "mainId": "main-content",
+    "skipLinks": [
+      {
+        "text": "Skip to main content",
+        "href": "#main-content"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Run Free Landing Page Audit →",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Message Match Audit",
+        "href": "/landing-page-message-match"
+      },
+      {
+        "tag": "A",
+        "text": "SaaS Audit Guide",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "Repair Sprint Pricing",
+        "href": "/pricing"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Industry Audits →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "vs. SEMrush Site Audit",
+        "href": "/vs/semrush-site-audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Essential only",
+        "href": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Accept all",
+        "href": null
+      }
+    ],
+    "forms": [],
+    "consoleErrors": [],
+    "failedRequests": [],
+    "axe": {
+      "violations": [],
+      "passes": 24,
+      "incomplete": 1
+    }
+  },
+  {
+    "device": "desktop",
+    "route": "/ads-getting-clicks-but-no-sales",
+    "status": 200,
+    "finalUrl": "https://nebulacomponents.com/ads-getting-clicks-but-no-sales?agency-audit=20260803",
+    "title": "Ads Getting Clicks But No Sales? Post-Click Audit | Nebula",
+    "h1": [
+      "Ads Getting Clicks But No Sales?"
+    ],
+    "viewport": 1440,
+    "scrollWidth": 1440,
+    "overflow": [],
+    "main": true,
+    "mainId": "main-content",
+    "skipLinks": [
+      {
+        "text": "Skip to main content",
+        "href": "#main-content"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Run Free Audit Now →",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Ecommerce Audit",
+        "href": "/ecommerce-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "SaaS Audit",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "Repair Sprint Pricing",
+        "href": "/pricing"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Industry Audits →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "vs. SEMrush Site Audit",
+        "href": "/vs/semrush-site-audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Essential only",
+        "href": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Accept all",
+        "href": null
+      }
+    ],
+    "forms": [],
+    "consoleErrors": [],
+    "failedRequests": [],
+    "axe": {
+      "violations": [],
+      "passes": 24,
+      "incomplete": 1
+    }
+  },
+  {
+    "device": "desktop",
+    "route": "/teardowns/hotjar",
+    "status": 200,
+    "finalUrl": "https://nebulacomponents.com/teardowns/hotjar?agency-audit=20260803",
+    "title": "Hotjar Landing Page Audit: What Nebula Found | Nebula",
+    "h1": [
+      "hotjar.com — What the Audit Engine Found"
+    ],
+    "viewport": 1440,
+    "scrollWidth": 1440,
+    "overflow": [],
+    "main": true,
+    "mainId": "main-content",
+    "skipLinks": [
+      {
+        "text": "Skip to main content",
+        "href": "#main-content"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Free Audit",
+        "href": "/audit"
+      },
+      {
+        "tag": "A",
+        "text": "Industry Audits →",
+        "href": "/saas-landing-page-audit"
+      },
+      {
+        "tag": "A",
+        "text": "vs. SEMrush Site Audit",
+        "href": "/vs/semrush-site-audit"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Essential only",
+        "href": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Accept all",
+        "href": null
+      }
+    ],
+    "forms": [],
+    "consoleErrors": [],
+    "failedRequests": [],
+    "axe": {
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "nodes": 1,
+          "targets": [
+            [
+              ".truncate"
+            ]
+          ]
+        },
+        {
+          "id": "link-in-text-block",
+          "impact": "serious",
+          "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
+          "nodes": 1,
+          "targets": [
+            [
+              ".hover\\:text-accent-light"
+            ]
+          ]
+        }
+      ],
+      "passes": 25,
+      "incomplete": 1
+    }
+  }
+]

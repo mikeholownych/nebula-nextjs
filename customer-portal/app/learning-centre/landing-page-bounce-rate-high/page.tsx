@@ -17,7 +17,7 @@ const articleSchema = createArticleSchema({
     'A high bounce rate on paid traffic means the first screen is not delivering on the promise that brought visitors there. Bounce is a symptom - these are the causes.',
   url: 'https://nebulacomponents.com/learning-centre/landing-page-bounce-rate-high',
   publishedDate: '2026-07-16',
-  modifiedDate: '2026-07-21',
+  modifiedDate: '2026-08-03',
 })
 
 const faqSchema = {
@@ -62,6 +62,22 @@ const faqSchema = {
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'If your mobile bounce rate is significantly higher than desktop - more than 15 percentage points - the gap is almost always a layout problem, not an audience problem. Mobile visitors need the headline and CTA visible without scrolling, and they need the page to load in under 3 seconds on a mobile connection. Diagnose mobile layout (signal 3) and load time (signal 4) specifically for your mobile segment before concluding that mobile traffic is lower quality.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the average bounce rate for landing pages across industries?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Bounce rates vary significantly by industry and traffic type. B2B landing pages typically see 25-55% bounce rates, while e-commerce typically ranges 20-45%. Paid traffic landing pages commonly see 40-60% as baseline. Your benchmark depends on whether traffic is cold (higher bounce expected) or warm (lower bounce expected). Compare against pages receiving similar traffic sources rather than broad industry averages.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does bounce rate differ by traffic source?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Organic search traffic typically bounces 40-60% on landing pages. Paid ads (Google Ads, social) commonly see 50-70% bounce rates due to colder audiences. Direct traffic and email tend to bounce 20-40%. Referral traffic bounces 30-50%. These differences reflect visitor intent—organic searchers found you; ad clickers were interrupted. Judge each source against its own baseline, not against overall site averages.',
       },
     },
   ],

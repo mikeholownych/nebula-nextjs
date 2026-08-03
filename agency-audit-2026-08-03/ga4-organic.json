@@ -1,0 +1,118 @@
+{
+  "property": "544419051",
+  "report": "organic_traffic",
+  "date_range": {
+    "start": "2026-07-04",
+    "end": "2026-08-02"
+  },
+  "totals": {
+    "sessions": 8,
+    "users": 5,
+    "pageviews": 20,
+    "avg_daily_sessions": 1.6
+  },
+  "daily_data": [
+    {
+      "date": "20260709",
+      "sessions": 1,
+      "users": 1,
+      "pageviews": 2,
+      "bounce_rate": 0.0,
+      "avg_session_duration": 1723.2,
+      "engagement_rate": 100.0
+    },
+    {
+      "date": "20260711",
+      "sessions": 1,
+      "users": 1,
+      "pageviews": 1,
+      "bounce_rate": 0.0,
+      "avg_session_duration": 14.7,
+      "engagement_rate": 100.0
+    },
+    {
+      "date": "20260713",
+      "sessions": 1,
+      "users": 1,
+      "pageviews": 0,
+      "bounce_rate": 0.0,
+      "avg_session_duration": 2331.4,
+      "engagement_rate": 100.0
+    },
+    {
+      "date": "20260730",
+      "sessions": 3,
+      "users": 1,
+      "pageviews": 17,
+      "bounce_rate": 33.3,
+      "avg_session_duration": 629.5,
+      "engagement_rate": 66.7
+    },
+    {
+      "date": "20260802",
+      "sessions": 2,
+      "users": 1,
+      "pageviews": 0,
+      "bounce_rate": 100.0,
+      "avg_session_duration": 595.6,
+      "engagement_rate": 0.0
+    }
+  ],
+  "top_pages": [
+    {
+      "landing_page": "",
+      "sessions": 2,
+      "users": 1,
+      "pageviews": 0,
+      "bounce_rate": 100.0,
+      "engagement_rate": 0.0
+    },
+    {
+      "landing_page": "(not set)",
+      "sessions": 2,
+      "users": 2,
+      "pageviews": 0,
+      "bounce_rate": 50.0,
+      "engagement_rate": 50.0
+    },
+    {
+      "landing_page": "/",
+      "sessions": 1,
+      "users": 1,
+      "pageviews": 2,
+      "bounce_rate": 0.0,
+      "engagement_rate": 100.0
+    },
+    {
+      "landing_page": "/7-systems.html",
+      "sessions": 1,
+      "users": 1,
+      "pageviews": 1,
+      "bounce_rate": 0.0,
+      "engagement_rate": 100.0
+    },
+    {
+      "landing_page": "/teardowns/carrd",
+      "sessions": 1,
+      "users": 1,
+      "pageviews": 15,
+      "bounce_rate": 0.0,
+      "engagement_rate": 100.0
+    },
+    {
+      "landing_page": "/teardowns/notion",
+      "sessions": 1,
+      "users": 1,
+      "pageviews": 2,
+      "bounce_rate": 0.0,
+      "engagement_rate": 100.0
+    }
+  ],
+  "quota_tokens_used": {
+    "daily_consumed": 1,
+    "daily_remaining": 199999,
+    "hourly_consumed": 1,
+    "hourly_remaining": 39999
+  },
+  "error": null
+}

@@ -25,7 +25,7 @@ def test_publish_main_writes_public_pages(tmp_path, monkeypatch, capsys):
     magnet_dir.mkdir()
     gs.mkdir()
     src = magnet_dir / "sample.md"
-    src.write_text("# Sample\n\nRun the audit: https://nebulacomponents.shop/audit.html")
+    src.write_text("# Sample\n\nRun the audit: https://nebulacomponents.com/audit.html")
     config = gs / "hormozi_lead_magnet_vault.json"
     config.write_text(json.dumps({"magnets": [{"title": "Sample", "file": str(src)}]}))
 

@@ -1,0 +1,20 @@
+{
+  "property": "sc-domain:nebulacomponents.com",
+  "rows": [],
+  "totals": {
+    "clicks": 0,
+    "impressions": 0,
+    "ctr": 0,
+    "position": 0
+  },
+  "totals_source": "dimensionless_aggregate",
+  "totals_complete": true,
+  "quick_wins": [],
+  "warnings": [],
+  "row_count": 0,
+  "error": null,
+  "date_range": {
+    "start": "2026-07-04",
+    "end": "2026-07-31"
+  }
+}

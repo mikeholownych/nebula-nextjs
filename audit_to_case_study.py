@@ -118,13 +118,13 @@ def generate_case_study_html(entry: dict, slug: str, vertical: str) -> str:
     <title>Case Study: {vertical_display} Landing Page Audit — {overall}/10 Score | Nebula Components</title>
     <meta name="description" content="See how a {vertical_display} landing page scored {overall}/10 on conversion audit. Real issues found, exact fixes applied. Free audit tool included.">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://nebulacomponents.shop/case-studies/{slug}.html">
+    <link rel="canonical" href="https://nebulacomponents.com/case-studies/{slug}.html">
     
     <!-- Open Graph -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="Case Study: {vertical_display} Landing Page Audit — {overall}/10">
     <meta property="og:description" content="Real conversion audit breakdown for a {vertical_display} site. Score: {overall}/10. See the exact leaks and fixes.">
-    <meta property="og:url" content="https://nebulacomponents.shop/case-studies/{slug}.html">
+    <meta property="og:url" content="https://nebulacomponents.com/case-studies/{slug}.html">
     <meta property="og:site_name" content="Nebula Components">
     
     <!-- Twitter Card -->
@@ -143,7 +143,7 @@ def generate_case_study_html(entry: dict, slug: str, vertical: str) -> str:
         "author": {{
             "@type": "Organization",
             "name": "Nebula Components",
-            "url": "https://nebulacomponents.shop"
+            "url": "https://nebulacomponents.com"
         }},
         "about": {{
             "@type": "Service",
@@ -232,7 +232,7 @@ def generate_case_study_html(entry: dict, slug: str, vertical: str) -> str:
         <div class="cta-box">
             <h3>Audit Your Own Page in 60 Seconds</h3>
             <p>Paste your URL → get a full conversion scorecard with exact fixes.</p>
-            <a href="https://nebulacomponents.shop/audit.html" class="btn">Run Free Audit →</a>
+            <a href="https://nebulacomponents.com/audit.html" class="btn">Run Free Audit →</a>
         </div>
         
         <div class="footer-note">
@@ -256,7 +256,7 @@ def generate_index_page(case_studies: list):
     <title>Conversion Audit Case Studies | Nebula Components</title>
     <meta name="description" content="Real landing page conversion audits across SaaS, ecommerce, agency, and more. See actual scores, issues found, and fixes applied.">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://nebulacomponents.shop/case-studies/">
+    <link rel="canonical" href="https://nebulacomponents.com/case-studies/">
     <style>
         * {{ box-sizing: border-box; margin: 0; padding: 0; }}
         body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1f2937; background: #fafafa; }}
@@ -289,7 +289,7 @@ def generate_index_page(case_studies: list):
     <div class="container">
         <div class="header">
             <h1>Landing Page Conversion Audit Case Studies</h1>
-            <p>Real audits. Real scores. Real patterns. <a href="https://nebulacomponents.shop/audit.html" style="color: #047857;">Run your own free audit →</a></p>
+            <p>Real audits. Real scores. Real patterns. <a href="https://nebulacomponents.com/audit.html" style="color: #047857;">Run your own free audit →</a></p>
         </div>
         
         <div class="grid">
@@ -319,7 +319,7 @@ def generate_index_page(case_studies: list):
         <div class="cta-banner">
             <h2>Audit Your Own Page Free</h2>
             <p>Paste your URL → get a 5-dimension conversion scorecard with exact fixes in 60 seconds.</p>
-            <a href="https://nebulacomponents.shop/audit.html" class="btn">Run Free Audit →</a>
+            <a href="https://nebulacomponents.com/audit.html" class="btn">Run Free Audit →</a>
         </div>
     </div>
 </body>
@@ -428,7 +428,7 @@ def main():
     save_state(state)
     
     print(f"\nDone. Generated {len(new_studies)} new case studies. Total: {len(all_studies)}")
-    print(f"Index: https://nebulacomponents.shop/case-studies/")
+    print(f"Index: https://nebulacomponents.com/case-studies/")
 
 if __name__ == "__main__":
     main()

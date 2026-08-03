@@ -171,9 +171,9 @@ def generate_script(page, audit, url=None):
 
     desc_lines.extend([
         "",
-        "🔧 Fix Map: https://nebulacomponents.shop/7-systems.html",
-        "🚀 Free Instant Audit: https://nebulacomponents.shop/audit.html",
-        "💻 DIY Fix Kit: https://nebulacomponents.shop/checkout.html",
+        "🔧 Fix Map: https://nebulacomponents.com/7-systems.html",
+        "🚀 Free Instant Audit: https://nebulacomponents.com/audit.html",
+        "💻 DIY Fix Kit: https://nebulacomponents.com/checkout.html",
         "",
         f"#landingpage #cro #conversionoptimization #{domain.split('.')[0]}",
     ])

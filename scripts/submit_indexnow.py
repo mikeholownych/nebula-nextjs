@@ -7,7 +7,7 @@ import sys
 import subprocess
 
 KEY = "c8f12a94d30b4e8597f519623e59b671"
-HOST = "nebulacomponents.shop"
+HOST = "nebulacomponents.com"
 KEY_LOCATION = f"https://{HOST}/{KEY}.txt"
 
 URLS = [

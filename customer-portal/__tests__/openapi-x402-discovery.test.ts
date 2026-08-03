@@ -94,3 +94,44 @@ describe('x402scan OpenAPI discovery contract', () => {
     expect(operation.responses['402']).toBeUndefined()
   })
 })
+
+describe('MPP OpenAPI discovery contract', () => {
+  it('publishes a canonical payable operation without relabelling the existing x402 routes', () => {
+    const operation = spec.paths['/api/mpp/audit'].get
+
+    expect(operation['x-payment-info']).toEqual({
+      offers: [
+        {
+          intent: 'charge',
+          method: 'tempo',
+          amount: '100000',
+          currency: '0x20C000000000000000000000b9537d11c60E8b50',
+          description: 'One landing-page audit for 0.10 USDC.e on Tempo.',
+        },
+      ],
+    })
+    expect(operation.responses['402']).toEqual({ description: 'Payment Required' })
+    expect(operation.parameters).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: 'url',
+          in: 'query',
+          required: true,
+        }),
+      ]),
+    )
+  })
+
+  it('publishes a flat compatibility alias for scanners using the earlier discovery shape', () => {
+    const operation = spec.paths['/api/mpp/audit-compat'].get
+
+    expect(operation['x-payment-info']).toEqual({
+      intent: 'charge',
+      method: 'tempo',
+      amount: '100000',
+      currency: '0x20C000000000000000000000b9537d11c60E8b50',
+      description: 'One landing-page audit for 0.10 USDC.e on Tempo.',
+    })
+    expect(operation.responses['402']).toEqual({ description: 'Payment Required' })
+  })
+})

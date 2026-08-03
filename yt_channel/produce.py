@@ -74,7 +74,7 @@ def make_intro_card(domain, overall, grade):
     d.text((cx, cy), f"{overall:.0f}", fill=colour, font=score_font, anchor="mm")
     d.text((cx, cy+55), f"/10 · Grade {grade}", fill=MUTED, font=label_font, anchor="mm")
 
-    d.text((W//2, H-40), "nebulacomponents.shop", fill=DIM, font=label_font, anchor="mm")
+    d.text((W//2, H-40), "nebulacomponents.com", fill=DIM, font=label_font, anchor="mm")
     return img
 
 
@@ -155,10 +155,10 @@ def make_outro_card(domain):
         big = body = small = ImageFont.load_default()
 
     d.text((W//2, 200), "Get Your Free Audit", fill=ACCENT, font=big, anchor="mm")
-    d.text((W//2, 270), "nebulacomponents.shop/audit", fill=WHITE, font=body, anchor="mm")
+    d.text((W//2, 270), "nebulacomponents.com/audit", fill=WHITE, font=body, anchor="mm")
     d.text((W//2, 340), "No call · No credit card · Instant results", fill=MUTED, font=small, anchor="mm")
 
-    d.text((W//2, 480), "DIY Fix Kit: nebulacomponents.shop/checkout", fill=DIM, font=small, anchor="mm")
+    d.text((W//2, 480), "DIY Fix Kit: nebulacomponents.com/checkout", fill=DIM, font=small, anchor="mm")
     d.text((W//2, 520), "$97 Done-For-You Fix Pack available", fill=DIM, font=small, anchor="mm")
 
     d.text((W//2, H-40), "Nebula Components — Autonomous Conversion Engineering", fill=DIM, font=small, anchor="mm")

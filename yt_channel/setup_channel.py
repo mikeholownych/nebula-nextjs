@@ -15,7 +15,7 @@ DESCRIPTION = (
     "Free landing page audits for ecommerce brands and SaaS founders.\n\n"
     "Every video tears down a real site: score it across 9 dimensions, "
     "find the leaks, and show you exactly what to fix.\n\n"
-    "Get a free audit of your own site: https://nebulacomponents.shop"
+    "Get a free audit of your own site: https://nebulacomponents.com"
 )
 
 KEYWORDS = [

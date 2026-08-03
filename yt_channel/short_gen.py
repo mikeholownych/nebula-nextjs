@@ -123,7 +123,7 @@ def generate_short_script(page, audit, url=None):
         f"Free landing page audit: {domain}\n\n"
         f"Score: {overall:.0f}/10 — worst issue: {worst_label} ({worst_score:.0f}/10)\n\n"
         f"Get a free audit of your own site:\n"
-        f"https://nebulacomponents.shop\n\n"
+        f"https://nebulacomponents.com\n\n"
         f"#LandingPage #CRO #ConversionOptimization #Shorts #MarketingTips"
     )
 

@@ -1,0 +1,15 @@
+{
+  "tls_version": "TLSv1.3",
+  "cipher": "TLS_AES_256_GCM_SHA384",
+  "subject": {
+    "commonName": "nebulacomponents.com"
+  },
+  "issuer": {
+    "countryName": "US",
+    "organizationName": "Google Trust Services",
+    "commonName": "WE1"
+  },
+  "notBefore": "Aug  3 02:46:26 2026 GMT",
+  "notAfter": "Nov  1 03:45:05 2026 GMT",
+  "san_count": 2
+}

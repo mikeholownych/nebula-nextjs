@@ -6,35 +6,15 @@ Nebula
 
 Components
 
-Pricing
-
 Teardowns
 
-Benchmarks
-
-Lab
-
-Case Studies
-
-Learning
-
-Workspace
+Pricing
 
 Free Audit
 
-Pricing
-
 Teardowns
 
-Benchmarks
-
-Lab
-
-Case Studies
-
-Learning
-
-Workspace
+Pricing
 
 Free Audit
 
@@ -42,35 +22,79 @@ Landing pages don't convert. Components do.
 
 We scored our own landing page and published every finding. Now score yours.
 
-Nebula checks your landing page across 9 conversion signals to find exactly what's preventing visitors from becoming customers. Free score, no signup, results in under two minutes.
+Paste your URL. Nebula checks 9 conversion signals against your actual page and returns a prioritized fix list. Free, no signup, takes under two minutes.
 
 Get My Score
 
 See Sample Audit →
 
-Live - our own audit
+Live — our own audit
 
 Same engine every free scan uses.
 
-Direct answers
+6.2
 
-What does Nebula provide?
+/10
 
-Nebula provides evidence-backed landing page conversion diagnosis for founders spending on paid ads with low or zero conversions.
+— the average score across all landing pages audited through this engine. That is a C. Most pages running paid traffic fail at least 3 of 9 signals before a visitor sees the CTA.
 
-What does the free audit check?
+See full benchmarks →
 
-The free audit checks 9 conversion signals against the actual page and returns a prioritized fix list in under 2 minutes.
+Why this exists
 
-What does the $97 repair sprint do?
+We run this audit on ourselves first.
 
-The One-Leak Repair Sprint delivers targeted prompts for the highest-confidence page fix. It does not promise conversion lift.
+Before the audit engine, there was a spreadsheet. Working with founders on paid traffic, the same page failures kept showing up — wrong headline, no proof above the fold, a CTA buried under the nav. The clicks were coming in. The sales weren't. The page looked fine. The problems were specific and fixable every time. Nebula is the instrument that finds them.
+
+The live score above is a B. Not perfect — that's intentional. Most tools lead with case studies they can't verify. We'd rather show you the actual data on our own page first. Every signal. Every evidence atom. The same output you get.
+
+When we have a real client outcome with a measurement window and a way to verify it, it goes here.
+
+nebulacomponents.com — last scan
+
+Message match
+
+pass
+
+Trust signals
+
+pass
+
+Mobile CTA
+
+pass
+
+Load time
+
+pass
+
+CTA clarity
+
+pass
+
+Above the fold
+
+pass
+
+Ad signals
+
+pass
+
+SEO foundations
+
+pass
+
+AI readiness
+
+pass
+
+Grade B — real engine, real page
 
 Nine signals. Every scan.
 
 Not opinions. Specific pass/fail checks against your actual page.
 
-Every high-converting page is built from the same small set of components. These are the nine we check, each with a concrete pass standard and evidence from your page.
+Nine checks against your actual page. Each one has a concrete pass standard and returns the raw value from your page as evidence.
 
 Message match
 
@@ -146,7 +170,7 @@ Structured signals (JSON-LD, OG tags, clean hierarchy) present
 
 What you receive
 
-Overall score and grade, pass/fail per signal with the evidence from your page, and a prioritized fix list ranked by impact and effort.
+Overall score and grade, pass/fail per signal with the evidence from your page, and a fix list ranked by impact and effort.
 
 See a real report
 
@@ -160,9 +184,9 @@ What happens next
 
 Fix the highest-impact leak yourself with the report, or pick the $97 One-Leak Repair Sprint and get the fix delivered as targeted prompts.
 
-Real reports on real pages.
+Named pages. Named failures.
 
-Public teardowns we published. Same engine, same format as your free audit.
+These are audits we ran in public. Every finding has a source, a measured value, and a fix.
 
 knallhart.dev
 
@@ -210,7 +234,7 @@ Grade
 
 C
 
-Nebula ran its 9-signal audit on basecamp.com. Score: 5.4/10, Grade C. Five specific findings — evidence-backed, not opinions.
+A $100M company with a landing page that fails 5 of 9 conversion signals. This is what happens when brand equity carries a page that the engine can still read.
 
 5
 
@@ -220,13 +244,13 @@ View the full report →
 
 The ads did their job. The page had one job.
 
-Most founders spend real money on ads before asking whether the page was the problem. These are the three failures we find most.
+Most founders blame the ad. Three page failures account for most of the cases we see.
 
 Most common
 
 Pricing behind the email gate
 
-Asking for commitment before demonstrating value. The visitor has not decided yet; requiring commitment too early can increase abandonment.
+Asking for commitment before demonstrating value. The visitor hasn't decided yet — gating behind email before showing them anything useful is how you lose them.
 
 message_match
 
@@ -238,17 +262,17 @@ Second most common
 
 CTA you cannot see
 
-Low CTA contrast can make the primary action harder to identify when visitors arrive from paid ads.
+Low contrast, buried placement, or competing nav links. The visitor wants to act and can't find where to go.
 
 Third most common
 
 No proof above the fold
 
-Missing proof before a high-commitment action can increase perceived risk for cold traffic.
+Cold traffic doesn't know you. Asking them to buy before they've seen evidence of anything raises the cost of every click.
 
-Running multi-week traffic experiments on obvious page-level friction can waste ad budget.
+Running traffic experiments on pages with structural friction burns budget on the wrong variable.
 
-Fix structural friction first. Then test.
+Fix the page first. Then test creative.
 
 From URL to fix list in under 2 minutes.
 
@@ -274,7 +298,7 @@ Run the audit free →
 
 Not a sales call in disguise.
 
-You have seen "free audit" - a PDF with 8 generic recommendations and a discovery call at the end. This is different. No email required to see your results.
+You have seen "free audit" — a PDF with 8 generic recommendations and a discovery call at the end. This is different. No email required to see your results.
 
 See what you actually get →
 
@@ -300,7 +324,7 @@ Nebula audit
 
 ✓
 
-Real scrape - scored against 7 specific conversion signals
+Real scrape - scored against 9 specific conversion signals
 
 ✓
 
@@ -318,71 +342,39 @@ $97 One-Leak Repair Sprint implements your highest-confidence fix
 
 Free re-audit 30 days after you implement the fix
 
-Know what the click proved - and what it did not.
+Know what the click proved — and what it did not.
 
 A click proves the ad worked. The page determines whether that click becomes a decision.
 
 A click is not the finish line.
 
-An ad click proves the message created enough interest to investigate. The landing page carries that interest forward - or kills it. If the page changes the promise, hides the next step, or asks for trust before earning it, the visitor leaves and the ad gets blamed.
+An ad click proves the message was interesting enough to investigate. The landing page carries that interest forward — or kills it. If the page contradicts the ad, hides the next step, or asks for trust before earning it, the visitor leaves and the ad takes the blame.
 
 The audit follows the actual path.
 
-Nebula checks what a paid visitor experiences: message match, above-fold clarity, visible action, proof, mobile usability, performance, measurement. Each failing signal is tied to evidence from your page and ranked by likely impact. The report does not estimate revenue or promise a conversion lift that has not been measured.
+Nebula checks what a paid visitor experiences: message match, above-fold clarity, visible action, proof, mobile usability, performance, measurement. Each failing signal is tied to raw evidence from your page and ranked by impact. The report does not estimate revenue or promise lift that has not been measured.
 
 Use it as a stop-or-fix decision.
 
-If the page passes, investigate the audience or offer instead. If it fails, you have a bounded repair list before spending another dollar on acquisition. Fix the highest-impact leak first, run the audit again, compare.
+If the page passes, look at the audience or offer instead. If it fails, fix the highest-impact issue first, then run the audit again and compare. That's the whole loop.
 
-We run this audit on ourselves first.
+Direct answers
 
-See the live score above. Not a perfect score - that is what you are getting - actual data, not marketing claims. Most landing-page tools lead with case studies they cannot verify. We would rather prove it on our own page first.
+What does Nebula provide?
 
-When we have a real client outcome with dates, proof, and a way for you to verify it, it goes here - not before.
+A scored, evidence-backed diagnosis of why your landing page isn't converting paid traffic — not generic advice, not a sales call.
 
-nebulacomponents.shop - last scan
+What does the free audit check?
 
-Message match
+9 signals against your actual page. Returns pass/fail per signal with the raw evidence, plus a fix list ranked by impact. Under 2 minutes.
 
-pass
+What does the $97 repair sprint do?
 
-Trust signals
-
-pass
-
-Mobile CTA
-
-pass
-
-Load time
-
-pass
-
-CTA clarity
-
-pass
-
-Above the fold
-
-pass
-
-Ad signals
-
-pass
-
-SEO foundations
-
-pass
-
-AI readiness
-
-pass
-
-Grade B - real engine, real page
+Targeted prompts for the highest-confidence fix on your page. It does not promise conversion lift — no one can before the fix is live and measured.
 
 Diagnostic Guides & Industry Audits
 
-Explore step-by-step diagnostic sequences for common paid traffic conversion failures and industry-specific audit benchmarks.
+Step-by-step diagnostic sequences for common paid traffic conversion failures and industry-specific audit benchmarks.
 
 Conversion Leak Diagnostics
 
@@ -408,7 +400,7 @@ Lead Generation Landing Page Audit (Form Friction) →
 
 Run the audit before you spend another dollar.
 
-Free, no signup required. Discover observable conversion leaks on your page.
+Free, no signup. Find the specific thing costing you conversions.
 
 Find the Leak →
 
@@ -430,49 +422,35 @@ Teardowns
 
 Case Studies
 
-Benchmarks
+Learn
+
+Brand Kit
+
+Press Kit
 
 Learning Centre
 
-Citable
+Benchmarks
 
-7 Systems
+Lab
 
-Concepts
+Diagnostic Guides →
 
-CTA Optimization
+Industry Audits →
 
-Editorial Standards
-
-Headline Optimization
-
-Mobile Optimization
-
-Page Speed & Conversion
-
-ROAS Cliff
-
-Comparisons
+Compare
 
 vs. PageSpeed Insights
 
-vs. Google Lighthouse
-
-vs. HubSpot Grader
+vs. Hotjar
 
 vs. Unbounce
 
-vs. Silktide
-
-vs. Hotjar
-
 vs. SEMrush Site Audit
-
-vs. Crazy Egg
 
 vs. Screaming Frog
 
-vs. Google Analytics
+vs. Crazy Egg
 
 Legal
 

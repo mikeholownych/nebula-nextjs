@@ -1,0 +1,17 @@
+{
+  "status_counts": {
+    "open": 1,
+    "expired": 99
+  },
+  "payment_status_counts": {
+    "unpaid": 100
+  },
+  "amount_total_counts": {
+    "97.0": 66,
+    "147.0": 18,
+    "7.0": 9,
+    "1497.0": 3,
+    "0.0": 3,
+    "997.0": 1
+  }
+}

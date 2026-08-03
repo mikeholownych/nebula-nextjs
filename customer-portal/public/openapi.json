@@ -207,6 +207,89 @@
         }
       }
     },
+    "/api/mpp/audit": {
+      "get": {
+        "operationId": "runMppPaidAudit",
+        "summary": "Run a landing page conversion audit with MPP payment authentication",
+        "description": "Native MPP Payment-auth endpoint charging 0.10 USDC.e on Tempo. Existing x402 clients should continue to use /api/v1.",
+        "x-payment-info": {
+          "offers": [
+            {
+              "intent": "charge",
+              "method": "tempo",
+              "amount": "100000",
+              "currency": "0x20C000000000000000000000b9537d11c60E8b50",
+              "description": "One landing-page audit for 0.10 USDC.e on Tempo."
+            }
+          ]
+        },
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uri",
+              "minLength": 8,
+              "example": "https://example.com"
+            },
+            "description": "Public HTTP or HTTPS landing-page URL to audit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Audit findings with scored conversion leaks and prioritised fixes"
+          },
+          "400": {
+            "description": "Missing or invalid target URL"
+          },
+          "402": {
+            "description": "Payment Required"
+          }
+        }
+      }
+    },
+    "/api/mpp/audit-compat": {
+      "get": {
+        "operationId": "runMppPaidAuditCompatibility",
+        "summary": "Run the same MPP-paid audit through the flat-discovery compatibility alias",
+        "description": "Compatibility alias for clients using the earlier flat x-payment-info discovery shape. Payment behavior and output match /api/mpp/audit.",
+        "deprecated": true,
+        "x-payment-info": {
+          "intent": "charge",
+          "method": "tempo",
+          "amount": "100000",
+          "currency": "0x20C000000000000000000000b9537d11c60E8b50",
+          "description": "One landing-page audit for 0.10 USDC.e on Tempo."
+        },
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uri",
+              "minLength": 8,
+              "example": "https://example.com"
+            },
+            "description": "Public HTTP or HTTPS landing-page URL to audit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Audit findings with scored conversion leaks and prioritised fixes"
+          },
+          "400": {
+            "description": "Missing or invalid target URL"
+          },
+          "402": {
+            "description": "Payment Required"
+          }
+        }
+      }
+    },
     "/api/audit/start": {
       "post": {
         "operationId": "submitAudit",

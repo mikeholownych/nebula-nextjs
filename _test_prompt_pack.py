@@ -7,7 +7,7 @@ from deliver_audit import scrape_page, score_audit
 from audit_pipeline.prompts.generator import build_prompt_pack
 
 # Scrape a real page
-page = scrape_page('https://nebulacomponents.shop')
+page = scrape_page('https://nebulacomponents.com')
 audit = score_audit(page)
 
 # Build prompt pack exactly like delivery pipeline does

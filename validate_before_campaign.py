@@ -26,7 +26,7 @@ def test_local_endpoint():
 def test_tunnel_endpoint():
     """Check Cloudflare tunnel"""
     try:
-        req = urllib.request.Request("https://nebulacomponents.shop/", method='HEAD')
+        req = urllib.request.Request("https://nebulacomponents.com/", method='HEAD')
         with urllib.request.urlopen(req, timeout=5) as resp:
             return resp.status == 200
     except:

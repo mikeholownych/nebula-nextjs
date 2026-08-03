@@ -17,7 +17,7 @@ const articleSchema = createArticleSchema({
     'Low conversion on an ecommerce landing page almost always comes down to 5 fixable structural issues. Diagnose which one is costing you customers before running more ads.',
   url: 'https://nebulacomponents.com/learning-centre/ecommerce-landing-page-not-converting',
   publishedDate: '2026-07-16',
-  modifiedDate: '2026-07-21',
+  modifiedDate: '2026-08-03',
 })
 
 const faqSchema = {
@@ -62,6 +62,30 @@ const faqSchema = {
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'Segment your analytics before testing price. If your add-to-cart rate is low (visitors are not even reaching the cart), the problem is above the fold - product images, headline, or proof. If add-to-cart rate is healthy but purchase rate is low, the problem is at checkout - shipping cost reveal, form friction, or trust signals at payment. If both rates are low on mobile but healthy on desktop, the problem is mobile layout or mobile load time, not price. Only test price after the page structure is clean - a lower price on a broken page still fails.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What\'s the difference between a landing page that doesn\'t convert and one that converts well?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Converting pages typically have: a clear value proposition visible above the fold, a single focused CTA, visible trust signals before asking for action, mobile-optimized forms with minimal fields, and page load time under 1 second. Non-converting pages often have unclear messaging, multiple competing CTAs, hidden trust elements, long forms, or unclear next steps. The conversion gap usually widens on mobile and with cold traffic.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I know if my landing page conversion problem is a design issue or a traffic quality issue?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Compare conversion rates by traffic source and device. If organic or direct traffic converts but paid traffic doesn\'t, the issue is messaging misalignment—traffic expectations don\'t match page promise. If all traffic sources underperform equally, the page has structural problems: unclear CTA, slow load, or poor mobile experience. If conversion drops significantly on mobile but desktop performs, it\'s a mobile-specific design issue.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What\'s the fastest way to diagnose why a landing page isn\'t converting?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Start with: (1) mobile usability—can visitors find and click the primary CTA above the fold? (2) page speed—does it load in under 1 second? (3) message match—does the page match what the ad promised? (4) trust visibility—are social proof or security elements visible before the CTA? These four account for the majority of conversion leaks and are fixable within hours, not weeks.',
       },
     },
   ],

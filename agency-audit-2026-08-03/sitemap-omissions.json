@@ -1,0 +1,205 @@
+{
+  "count": 25,
+  "pages": [
+    {
+      "url": "https://nebulacomponents.com/",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com",
+      "title": "Landing Page Audit for Paid Traffic Not Converting | Nebula"
+    },
+    {
+      "url": "https://nebulacomponents.com/benchmarks",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com",
+      "title": "Conversion Health Index \u2014 Landing Page Benchmark Data | Nebula"
+    },
+    {
+      "url": "https://nebulacomponents.com/brand",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/brand",
+      "title": "Brand Kit \u2014 Nebula Components"
+    },
+    {
+      "url": "https://nebulacomponents.com/checkout",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/checkout",
+      "title": "Checkout \u2014 One-Leak Repair Sprint | Nebula Components"
+    },
+    {
+      "url": "https://nebulacomponents.com/lab",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com",
+      "title": "Component Lab \u2014 Check Your Headline, CTA & Message Match | Nebula"
+    },
+    {
+      "url": "https://nebulacomponents.com/press",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/press",
+      "title": "Press Kit \u2014 Nebula Components"
+    },
+    {
+      "url": "https://nebulacomponents.com/teardowns",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/teardowns",
+      "title": "Public Audit Teardowns | Nebula"
+    },
+    {
+      "url": "https://nebulacomponents.com/teardowns/basecamp",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/teardowns/basecamp",
+      "title": "Basecamp Landing Page Audit: What Nebula Found | Nebula"
+    },
+    {
+      "url": "https://nebulacomponents.com/teardowns/beehiiv",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/teardowns/beehiiv",
+      "title": "Beehiiv Landing Page Audit: What Nebula Found | Nebula"
+    },
+    {
+      "url": "https://nebulacomponents.com/teardowns/calendly",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/teardowns/calendly",
+      "title": "Calendly Landing Page Audit: What Nebula Found | Nebula"
+    },
+    {
+      "url": "https://nebulacomponents.com/teardowns/carrd",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/teardowns/carrd",
+      "title": "Carrd Landing Page Audit: What Nebula Found | Nebula"
+    },
+    {
+      "url": "https://nebulacomponents.com/teardowns/framer",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/teardowns/framer",
+      "title": "Framer Landing Page Audit: What Nebula Found | Nebula"
+    },
+    {
+      "url": "https://nebulacomponents.com/teardowns/hotjar",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/teardowns/hotjar",
+      "title": "Hotjar Landing Page Audit: What Nebula Found | Nebula"
+    },
+    {
+      "url": "https://nebulacomponents.com/teardowns/kit",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/teardowns/kit",
+      "title": "Kit Landing Page Audit: What Nebula Found | Nebula"
+    },
+    {
+      "url": "https://nebulacomponents.com/teardowns/knallhart",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/teardowns/knallhart",
+      "title": "knallhart.dev Landing Page Audit: What Nebula Found | Nebula"
+    },
+    {
+      "url": "https://nebulacomponents.com/teardowns/notion",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/teardowns/notion",
+      "title": "Notion Landing Page Audit: What Nebula Found | Nebula"
+    },
+    {
+      "url": "https://nebulacomponents.com/teardowns/postmint",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/teardowns/postmint",
+      "title": "Postmint Landing Page Audit: What Nebula Found | Nebula"
+    },
+    {
+      "url": "https://nebulacomponents.com/teardowns/unbounce",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/teardowns/unbounce",
+      "title": "Unbounce Landing Page Audit: What Nebula Found | Nebula"
+    },
+    {
+      "url": "https://nebulacomponents.com/teardowns/webflow",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/teardowns/webflow",
+      "title": "Webflow Landing Page Audit: What Nebula Found | Nebula"
+    },
+    {
+      "url": "https://nebulacomponents.com/vs/crazy-egg",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/vs/crazy-egg",
+      "title": "Crazy Egg vs. Nebula \u2014 Landing Page Audit Comparison"
+    },
+    {
+      "url": "https://nebulacomponents.com/vs/hotjar",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/vs/hotjar",
+      "title": "Hotjar vs. Nebula \u2014 Landing Page Audit Comparison"
+    },
+    {
+      "url": "https://nebulacomponents.com/vs/pagespeed-insights",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/vs/pagespeed-insights",
+      "title": "PageSpeed Insights vs. Nebula \u2014 Landing Page Audit Comparison"
+    },
+    {
+      "url": "https://nebulacomponents.com/vs/screaming-frog",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/vs/screaming-frog",
+      "title": "Screaming Frog vs. Nebula \u2014 Landing Page Audit Comparison"
+    },
+    {
+      "url": "https://nebulacomponents.com/vs/semrush-site-audit",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/vs/semrush-site-audit",
+      "title": "SEMrush Site Audit vs. Nebula \u2014 Landing Page Audit Comparison"
+    },
+    {
+      "url": "https://nebulacomponents.com/vs/unbounce",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "noindex": false,
+      "canonical": "https://nebulacomponents.com/vs/unbounce",
+      "title": "Unbounce vs. Nebula \u2014 Landing Page Audit Comparison"
+    }
+  ]
+}

@@ -11,7 +11,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from posthog import identify_context, new_context
 
-from ..db.models import Audit, Membership, Organization, User
+from ..db.models import Membership, Organization, User
 from ..db.session import get_session as get_db
 from ..auth.routes import get_current_user
 from ..posthog_client import get_posthog
@@ -51,14 +51,15 @@ class MemberInvite(BaseModel):
 @router.get("/{org_id}", response_model=OrganizationResponse)
 async def get_organization(
     org_id: UUID,
-    user: User = Depends(get_current_user),
+    current_user: dict = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
     """Get organization by ID."""
     # Check membership
+    user_id = UUID(current_user["user_id"])
     result = await db.execute(
         select(Membership).where(
-            Membership.user_id == user.id,
+            Membership.user_id == user_id,
             Membership.organization_id == org_id,
         )
     )
@@ -89,14 +90,15 @@ async def get_organization(
 async def update_organization(
     org_id: UUID,
     update_data: OrganizationUpdate,
-    user: User = Depends(get_current_user),
+    current_user: dict = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
     """Update organization."""
     # Check membership (must be owner or admin)
+    user_id = UUID(current_user["user_id"])
     result = await db.execute(
         select(Membership).where(
-            Membership.user_id == user.id,
+            Membership.user_id == user_id,
             Membership.organization_id == org_id,
         )
     )
@@ -126,7 +128,7 @@ async def update_organization(
     ph = get_posthog()
     if ph:
         with new_context(client=ph):
-            identify_context(str(user["user_id"]))
+            identify_context(str(current_user["user_id"]))
             ph.capture(
                 "organization_updated",
                 properties={
@@ -144,14 +146,15 @@ async def update_organization(
 @router.get("/{org_id}/members", response_model=List[MemberResponse])
 async def list_members(
     org_id: UUID,
-    user: User = Depends(get_current_user),
+    current_user: dict = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
     """List organization members."""
     # Check membership
+    user_id = UUID(current_user["user_id"])
     result = await db.execute(
         select(Membership).where(
-            Membership.user_id == user.id,
+            Membership.user_id == user_id,
             Membership.organization_id == org_id,
         )
     )
@@ -172,18 +175,58 @@ async def list_members(
     return members
 
 
+@router.get("/{org_id}/membership")
+async def get_membership(
+    org_id: UUID,
+    user_id: Optional[UUID] = None,
+    current_user: dict = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get a user's membership in this organization.
+
+    Used by the frontend auth primitives to verify workspace access.
+    Only the authenticated user can look up their own membership (user_id
+    parameter is ignored — always resolves from JWT for security).
+    """
+    lookup_id = UUID(current_user["user_id"])
+
+    result = await db.execute(
+        select(Membership).where(
+            Membership.user_id == lookup_id,
+            Membership.organization_id == org_id,
+        )
+    )
+    membership = result.scalar_one_or_none()
+
+    if not membership:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Membership not found",
+        )
+
+    return {
+        "id": str(membership.id),
+        "user_id": str(membership.user_id),
+        "organization_id": str(membership.organization_id),
+        "role": membership.role,
+        "status": getattr(membership, "status", "active"),
+        "created_at": membership.created_at.isoformat(),
+    }
+
+
 @router.post("/{org_id}/invites", response_model=MemberResponse)
 async def invite_member(
     org_id: UUID,
     invite: MemberInvite,
-    user: User = Depends(get_current_user),
+    current_user: dict = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
     """Invite a member to organization."""
     # Check membership (must be owner or admin)
+    user_id = UUID(current_user["user_id"])
     result = await db.execute(
         select(Membership).where(
-            Membership.user_id == user.id,
+            Membership.user_id == user_id,
             Membership.organization_id == org_id,
         )
     )
@@ -235,7 +278,7 @@ async def invite_member(
     ph = get_posthog()
     if ph:
         with new_context(client=ph):
-            identify_context(str(user["user_id"]))
+            identify_context(str(current_user["user_id"]))
             ph.capture(
                 "member_invited",
                 properties={

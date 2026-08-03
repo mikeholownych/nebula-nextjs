@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
+    "prebuild": "npm test -- --runInBand __tests__/teardown-screenshot-integrity.test.ts",
     "dev": "next dev --port 3000",
     "build": "node scripts/generate-build-info.mjs && node scripts/generate-learning-centre-md.mjs && next build",
     "start": "next start --port 3000",
@@ -31,13 +32,15 @@
     "@x402/extensions": "^2.19.0",
     "@x402/next": "^2.19.0",
     "fast-xml-parser": "5.10.1",
+    "mppx": "^0.8.15",
     "next": "16.2.11",
     "pg": "^8.22.0",
     "posthog-js": "^1.407.1",
     "posthog-node": "^5.46.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "stripe": "^22.3.2"
+    "stripe": "^22.3.2",
+    "viem": "^2.55.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.6",

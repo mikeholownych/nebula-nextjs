@@ -127,7 +127,7 @@ def post_body(commits: list[dict[str, str]], s: dict) -> str:
 <!-- wp:heading --><h2 class="wp-block-heading">Next move</h2><!-- /wp:heading -->
 <!-- wp:paragraph --><p>Keep turning every useful build into a public asset: learning page, audit proof, outreach angle, or offer improvement.</p><!-- /wp:paragraph -->
 
-<!-- wp:paragraph --><p><a href="https://nebulacomponents.shop/learning-center/">Open the Learning Center</a> · <a href="https://nebulacomponents.shop/audit">Run the free audit</a></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><a href="https://nebulacomponents.com/learning-center/">Open the Learning Center</a> · <a href="https://nebulacomponents.com/audit">Run the free audit</a></p><!-- /wp:paragraph -->
 """.strip()
 
 

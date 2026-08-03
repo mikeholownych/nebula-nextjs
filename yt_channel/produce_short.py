@@ -185,7 +185,7 @@ def make_cta_card():
     box_y = 560
     box_h = 100
     d.rounded_rectangle([80, box_y, SW - 80, box_y + box_h], radius=12, fill=BG_CARD)
-    d.text((SW // 2, box_y + box_h // 2), "nebulacomponents.shop", fill=ACCENT, font=f["md"], anchor="mm")
+    d.text((SW // 2, box_y + box_h // 2), "nebulacomponents.com", fill=ACCENT, font=f["md"], anchor="mm")
 
     d.text((SW // 2, 740), "No call · No credit card", fill=MUTED, font=f["sm"], anchor="mm")
     d.text((SW // 2, 800), "Instant results", fill=MUTED, font=f["sm"], anchor="mm")

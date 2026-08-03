@@ -21,7 +21,7 @@ import json, os, datetime
 # Business physical address — update this to your actual business address
 BUSINESS_NAME = "Nebula Components"
 BUSINESS_ADDRESS = "Nebula Components, 66 Sonneck Square, Scarborough, ON M1E 1A9"
-UNSUBSCRIBE_BASE = "https://nebulacomponents.shop/unsubscribe.html"
+UNSUBSCRIBE_BASE = "https://nebulacomponents.com/unsubscribe.html"
 
 def compliance_footer(email):
     """Return the CAN-SPAM compliant footer block for any email."""

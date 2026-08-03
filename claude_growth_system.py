@@ -21,7 +21,7 @@ from typing import Iterable
 
 DEFAULT_BASE = Path("/home/mike/nebula")
 SYSTEM_DIR = "growth_system"
-AUDIT_URL = "https://nebulacomponents.shop/"
+AUDIT_URL = "https://nebulacomponents.com/"
 CHECKOUT_URL = "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
 
 ICP_TEXT = """# ICP
@@ -92,7 +92,7 @@ Nebula Components is the autonomous conversion leak detector for founders burnin
 ## CTA Format
 - Action verb + outcome + link: "Run my free audit →" not "Click here for more info"
 - No friction claim: "No call. No calendar. No card required."
-- Ends at the URL: every CTA points to nebulacomponents.shop or the audit tool.
+- Ends at the URL: every CTA points to nebulacomponents.com or the audit tool.
 
 ## Voice Examples
 - "Paste the URL. Get the scored teardown. Buy the $147 fix pack. No sales call."

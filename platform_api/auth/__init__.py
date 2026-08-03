@@ -2,6 +2,7 @@
 
 Provides:
 - Google OAuth 2.0 verification
+- GitHub OAuth 2.0 authorization code flow
 - JWT session management
 - Auth routes (endpoints)
 """
@@ -10,6 +11,14 @@ from .google import (
     GoogleOAuthError,
     GoogleOIDCVerifier,
     verify_google_token,
+)
+
+from .github import (
+    GitHubOAuthError,
+    exchange_code_for_token,
+    fetch_github_user,
+    generate_authorize_url,
+    validate_state,
 )
 
 from .jwt import (
@@ -28,6 +37,12 @@ __all__ = [
     "GoogleOAuthError",
     "GoogleOIDCVerifier",
     "verify_google_token",
+    # GitHub OAuth
+    "GitHubOAuthError",
+    "exchange_code_for_token",
+    "fetch_github_user",
+    "generate_authorize_url",
+    "validate_state",
     # JWT Sessions
     "JWTError",
     "create_jwt",

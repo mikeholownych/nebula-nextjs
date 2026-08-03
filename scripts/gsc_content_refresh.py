@@ -37,7 +37,7 @@ REFRESH_RECORD_PATH = NEBULA_ROOT / "logs" / "content_refresh_record.jsonl"
 INDEXNOW_SCRIPT = str(NEBULA_ROOT / "scripts" / "submit_indexnow.py")
 CLAUDE_SEO_SCRIPTS = "/home/mike/claude-seo/scripts"
 
-HOST = "nebulacomponents.shop"
+HOST = "nebulacomponents.com"
 INDEXNOW_KEY = "c8f12a94d30b4e8597f519623e59b671"
 INDEXNOW_KEY_LOCATION = f"https://{HOST}/{INDEXNOW_KEY}.txt"
 
@@ -200,7 +200,7 @@ def _serp_fallback(query: str, n: int) -> list[str]:
     try:
         import urllib.request
         import urllib.parse
-        q = urllib.parse.quote_plus(query + " site:*.com -site:nebulacomponents.shop")
+        q = urllib.parse.quote_plus(query + " site:*.com -site:nebulacomponents.com")
         url = f"https://html.duckduckgo.com/html/?q={q}"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=10) as resp:
@@ -318,7 +318,7 @@ def generate_content_improvements(
         if t and not t.startswith("[fetch failed")
     ) or "No competitor content retrieved."
 
-    prompt = f"""You are an SEO content editor for Nebula Components (nebulacomponents.shop), a conversion rate optimization tool.
+    prompt = f"""You are an SEO content editor for Nebula Components (nebulacomponents.com), a conversion rate optimization tool.
 
 Target query: "{query}"
 Page: {page_path}

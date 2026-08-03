@@ -2,7 +2,7 @@
   {
     "id": "audit-definition",
     "query": "What is a landing page audit?",
-    "source": "https://nebulacomponents.shop/what-is-landing-page-audit",
+    "source": "https://nebulacomponents.com/what-is-landing-page-audit",
     "claims": [
       {"id": "audit-definition-systematic", "text": "A landing page audit is a systematic evaluation of a page.", "required_terms": ["systematic evaluation"], "importance": "critical"},
       {"id": "audit-definition-nine", "text": "Nebula evaluates 9 conversion signals.", "required_terms": ["9 conversion signals"], "importance": "critical"},
@@ -12,7 +12,7 @@
   {
     "id": "free-audit",
     "query": "What does the free Nebula audit provide?",
-    "source": "https://nebulacomponents.shop/audit",
+    "source": "https://nebulacomponents.com/audit",
     "claims": [
       {"id": "free-audit-speed", "text": "The audit returns results in under 2 minutes.", "required_terms": ["under 2 minutes", "under two minutes"], "importance": "high"},
       {"id": "free-audit-no-signup", "text": "The audit does not require signup or email to see results.", "required_terms": ["no signup", "no email required"], "importance": "critical"},
@@ -22,7 +22,7 @@
   {
     "id": "repair-sprint",
     "query": "What does the One-Leak Repair Sprint cost and guarantee?",
-    "source": "https://nebulacomponents.shop/pricing",
+    "source": "https://nebulacomponents.com/pricing",
     "claims": [
       {"id": "repair-price", "text": "The One-Leak Repair Sprint costs $97.", "required_terms": ["$97"], "importance": "critical"},
       {"id": "repair-scope", "text": "The sprint targets one specific page condition.", "required_terms": ["one", "specific page condition"], "importance": "high"},
@@ -33,7 +33,7 @@
   {
     "id": "company-fit",
     "query": "Who is Nebula Components for?",
-    "source": "https://nebulacomponents.shop/about",
+    "source": "https://nebulacomponents.com/about",
     "claims": [
       {"id": "company-fit-founders", "text": "Nebula works with founders and operators actively spending on paid ads.", "required_terms": ["founders and operators", "actively spending on paid ads"], "importance": "critical"},
       {"id": "company-fit-trigger", "text": "The buying trigger is paid traffic with weak conversions.", "required_terms": ["not seeing the conversions", "not converting", "low or zero conversions"], "importance": "critical"}

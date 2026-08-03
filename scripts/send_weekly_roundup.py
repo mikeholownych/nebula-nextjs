@@ -42,7 +42,7 @@ def build_roundup_email(lead: dict, content_items: list) -> dict:
     bullets = []
     for item in content_items[:3]:
         title = item.get("title", "This week's insight")
-        link = item.get("link", "https://nebulacomponents.shop")
+        link = item.get("link", "https://nebulacomponents.com")
         bullets.append(f"• **{title}** — [Read →]({link})")
     
     bullets_text = "\n".join(bullets)
@@ -56,7 +56,7 @@ Quick roundup of this week's conversion insights:
 {bullets_text.replace('**', '').replace('[Read →](', '').replace(')', '')}
 
 Want these delivered to your page? The Fix Pack is $97:
-https://nebulacomponents.shop/checkout.html?utm_source=weekly_roundup&utm_medium=email&utm_campaign=conversion_newsletter
+https://nebulacomponents.com/checkout.html?utm_source=weekly_roundup&utm_medium=email&utm_campaign=conversion_newsletter
 
 Best,
 Mike from Nebula Components
@@ -87,7 +87,7 @@ Unsubscribe: Reply UNSUBSCRIBE
 
 <p style="margin-top: 1.5rem;">
 Want these delivered to your page? The Fix Pack is $97:<br>
-<a href="https://nebulacomponents.shop/checkout.html?utm_source=weekly_roundup&utm_medium=email&utm_campaign=conversion_newsletter" style="color:#667eea;">Get the Fix Pack →</a>
+<a href="https://nebulacomponents.com/checkout.html?utm_source=weekly_roundup&utm_medium=email&utm_campaign=conversion_newsletter" style="color:#667eea;">Get the Fix Pack →</a>
 </p>
 
 <p>Best,<br>Mike from Nebula Components</p>
@@ -200,7 +200,7 @@ def get_weekly_content() -> list:
                         title = finding[:60] + "..." if len(finding) > 60 else finding
                         content_items.append({
                             "title": title,
-                            "link": "https://nebulacomponents.shop/audit",
+                            "link": "https://nebulacomponents.com/audit",
                             "type": "linkedin",
                         })
                     elif "medium_outline" in data:
@@ -208,7 +208,7 @@ def get_weekly_content() -> list:
                         title = outline.get("headline", "Conversion insight")
                         content_items.append({
                             "title": title,
-                            "link": "https://nebulacomponents.shop/audit",
+                            "link": "https://nebulacomponents.com/audit",
                             "type": "medium",
                         })
         except Exception:
@@ -231,9 +231,9 @@ async def main(dry_run: bool = True):
         
         # Fallback: use Daniel's email types
         content_items = [
-            {"title": "Day 2: The Message Match Fix", "link": "https://nebulacomponents.shop/audit", "type": "course"},
-            {"title": "Day 4: Proof Before Pitch", "link": "https://nebulacomponents.shop/audit", "type": "course"},
-            {"title": "Day 5: Fix Before More Spend", "link": "https://nebulacomponents.shop/checkout.html", "type": "offer"},
+            {"title": "Day 2: The Message Match Fix", "link": "https://nebulacomponents.com/audit", "type": "course"},
+            {"title": "Day 4: Proof Before Pitch", "link": "https://nebulacomponents.com/audit", "type": "course"},
+            {"title": "Day 5: Fix Before More Spend", "link": "https://nebulacomponents.com/checkout.html", "type": "offer"},
         ]
     
     print(f"[ROUNDUP] Found {len(content_items)} content items")

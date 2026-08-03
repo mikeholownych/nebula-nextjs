@@ -3,7 +3,7 @@ set -euo pipefail
 
 SITE_UNIT=nebula-nextjs.service
 TUNNEL_UNIT=cloudflared-tunnel.service
-PUBLIC_URL=https://nebulacomponents.shop/
+PUBLIC_URL=https://nebulacomponents.com/
 LOCAL_URL=http://127.0.0.1:3000/
 
 assert_state() {
@@ -67,7 +67,7 @@ for target in "$LOCAL_URL" "$PUBLIC_URL"; do
   origin="${target%/}"
   asset_url="${origin%/*}"
   [[ "$target" == "$LOCAL_URL" ]] && asset_url="http://127.0.0.1:3000"
-  [[ "$target" == "$PUBLIC_URL" ]] && asset_url="https://nebulacomponents.shop"
+  [[ "$target" == "$PUBLIC_URL" ]] && asset_url="https://nebulacomponents.com"
   code=$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 15 "${asset_url}${css_path}")
   [[ "$code" == 200 ]] || { printf 'FAIL: stylesheet %s%s returned %s (page HTML was 200 — stale build/process mismatch)\n' "$asset_url" "$css_path" "$code" >&2; exit 1; }
   printf 'PASS: %s stylesheet %s returned HTTP 200\n' "$target" "$css_path"
@@ -85,7 +85,7 @@ if [[ -n "$expected_sha" && "$expected_sha" =~ ^[a-f0-9]{40}$ ]]; then
 
   # Public edge check across user agents
   for agent in 'Mozilla/5.0' 'Googlebot' 'bingbot' 'curl/8.0'; do
-    edge_sha=$(curl -fsS -A "$agent" -H 'Cache-Control: no-cache' --max-time 10 "https://nebulacomponents.shop/api/build-info" | grep -oE '"revision":"[a-f0-9]{40}"' | cut -d'"' -f4 || true)
+    edge_sha=$(curl -fsS -A "$agent" -H 'Cache-Control: no-cache' --max-time 10 "https://nebulacomponents.com/api/build-info" | grep -oE '"revision":"[a-f0-9]{40}"' | cut -d'"' -f4 || true)
     [[ "$edge_sha" == "$expected_sha" ]] || {
       printf 'FAIL: public edge SHA %s for UA "%s" does not match expected SHA %s\n' "${edge_sha:-<none>}" "$agent" "$expected_sha" >&2
       exit 1
@@ -95,14 +95,14 @@ if [[ -n "$expected_sha" && "$expected_sha" =~ ^[a-f0-9]{40}$ ]]; then
 fi
 
 # Verify Edge Content Marker Assertions
-concepts_html=$(curl -fsS -H 'Cache-Control: no-cache' https://nebulacomponents.shop/concepts || true)
+concepts_html=$(curl -fsS -H 'Cache-Control: no-cache' https://nebulacomponents.com/concepts || true)
 if grep -Eq '40.?60%|90% of landing page problems' <<< "$concepts_html"; then
   printf 'FAIL: stale or prohibited copy detected on public /concepts\n' >&2
   exit 1
 fi
 printf 'PASS: public /concepts verified free of prohibited claims\n'
 
-audit_html=$(curl -fsS -H 'Cache-Control: no-cache' https://nebulacomponents.shop/audit || true)
+audit_html=$(curl -fsS -H 'Cache-Control: no-cache' https://nebulacomponents.com/audit || true)
 if ! grep -Fq 'Audit Data Handling' <<< "$audit_html"; then
   printf 'FAIL: Audit Data Handling section missing from public /audit\n' >&2
   exit 1
@@ -110,7 +110,7 @@ fi
 printf 'PASS: public /audit verified containing inspection boundaries disclosure\n'
 
 # Verify Learning Centre Copy Governance (prohibit legacy dogmatic phrasing)
-lc_html=$(curl -fsS -H 'Cache-Control: no-cache' https://nebulacomponents.shop/learning-centre/landing-page-not-converting || true)
+lc_html=$(curl -fsS -H 'Cache-Control: no-cache' https://nebulacomponents.com/learning-centre/landing-page-not-converting || true)
 if grep -Eq 'at least one of five diagnosable leak patterns|strongly indicates' <<< "$lc_html"; then
   printf 'FAIL: dogmatic diagnostic claims detected on public learning-centre page\n' >&2
   exit 1

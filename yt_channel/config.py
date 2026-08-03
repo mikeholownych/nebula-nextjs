@@ -17,7 +17,7 @@ CHANNEL_DESCRIPTION = (
     "speed, mobile, SEO, tracking, and more — then walk through every issue "
     "so you can fix your own conversions.\n\n"
     "No talking heads. No fluff. Just the data.\n\n"
-    "Get your free instant audit: https://nebulacomponents.shop/audit.html"
+    "Get your free instant audit: https://nebulacomponents.com/audit.html"
 )
 
 # --- Video production ---

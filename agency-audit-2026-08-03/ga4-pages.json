@@ -1,0 +1,66 @@
+{
+  "property": "544419051",
+  "report": "top_organic_pages",
+  "date_range": {
+    "start": "2026-07-04",
+    "end": "2026-08-02"
+  },
+  "pages": [
+    {
+      "landing_page": "",
+      "sessions": 2,
+      "users": 1,
+      "pageviews": 0,
+      "bounce_rate": 100.0,
+      "engagement_rate": 0.0
+    },
+    {
+      "landing_page": "(not set)",
+      "sessions": 2,
+      "users": 2,
+      "pageviews": 0,
+      "bounce_rate": 50.0,
+      "engagement_rate": 50.0
+    },
+    {
+      "landing_page": "/",
+      "sessions": 1,
+      "users": 1,
+      "pageviews": 2,
+      "bounce_rate": 0.0,
+      "engagement_rate": 100.0
+    },
+    {
+      "landing_page": "/7-systems.html",
+      "sessions": 1,
+      "users": 1,
+      "pageviews": 1,
+      "bounce_rate": 0.0,
+      "engagement_rate": 100.0
+    },
+    {
+      "landing_page": "/teardowns/carrd",
+      "sessions": 1,
+      "users": 1,
+      "pageviews": 15,
+      "bounce_rate": 0.0,
+      "engagement_rate": 100.0
+    },
+    {
+      "landing_page": "/teardowns/notion",
+      "sessions": 1,
+      "users": 1,
+      "pageviews": 2,
+      "bounce_rate": 0.0,
+      "engagement_rate": 100.0
+    }
+  ],
+  "total_organic_sessions": 8,
+  "quota_tokens_used": {
+    "daily_consumed": 1,
+    "daily_remaining": 199997,
+    "hourly_consumed": 1,
+    "hourly_remaining": 39997
+  },
+  "error": null
+}

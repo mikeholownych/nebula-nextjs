@@ -12,9 +12,9 @@ from datetime import datetime
 
 CLAUDE_SEO_SCRIPTS = "/home/mike/claude-seo/scripts"
 TARGET_URLS = [
-    "https://nebulacomponents.shop/",
-    "https://nebulacomponents.shop/pricing",
-    "https://nebulacomponents.shop/audit",
+    "https://nebulacomponents.com/",
+    "https://nebulacomponents.com/pricing",
+    "https://nebulacomponents.com/audit",
 ]
 
 def check_url(url, strategy="mobile"):

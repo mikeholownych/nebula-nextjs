@@ -90,7 +90,7 @@ What I'd deliver for this project:
 I don't do calls before I've seen the page. Send me the URL and I'll come back with a specific observation before we even discuss next steps.
 
 — Mike
-Nebula Components | nebulacomponents.shop
+Nebula Components | nebulacomponents.com
 """
 
 logging.basicConfig(

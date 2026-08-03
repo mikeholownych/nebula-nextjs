@@ -87,7 +87,7 @@ def cmd_add(args) -> int:
         "published_at": args.published_at or now_iso(),
         "company": args.company,
         "slug": args.slug,
-        "url": args.url or f"https://nebulacomponents.shop/teardowns/{args.slug}",
+        "url": args.url or f"https://nebulacomponents.com/teardowns/{args.slug}",
         "pain_source": args.pain_source or "",
         "status": "live_measuring",
         "last_checked": now_iso(),

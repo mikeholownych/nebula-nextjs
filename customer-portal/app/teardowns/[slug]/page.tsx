@@ -130,25 +130,23 @@ export default async function TeardownPage({
           {t.name} may update their page at any time; this reflects a snapshot taken {t.auditedAt}.
         </div>
 
-        {/* Browser mockup — shown when a screenshot is available */}
-        {t.screenshotUrl && (
-          <div className="mt-8">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-fg-muted">
-              Page snapshot · {t.auditedAt}
-            </p>
-            <BrowserMockupCard theme="dark" url={t.domain}>
-              <div className="relative h-80 w-full">
-                <Image
-                  src={t.screenshotUrl}
-                  alt={`${t.name} landing page snapshot — ${t.auditedAt}`}
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 896px) 100vw, 896px"
-                />
-              </div>
-            </BrowserMockupCard>
-          </div>
-        )}
+        {/* Required source-page snapshot */}
+        <div className="mt-8">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-fg-muted">
+            Page snapshot · {t.auditedAt}
+          </p>
+          <BrowserMockupCard theme="dark" url={t.domain}>
+            <div className="relative h-80 w-full">
+              <Image
+                src={t.screenshotUrl}
+                alt={`${t.name} landing page snapshot — ${t.auditedAt}`}
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 896px) 100vw, 896px"
+              />
+            </div>
+          </BrowserMockupCard>
+        </div>
 
         {/* Findings */}
         <section className="mt-12">

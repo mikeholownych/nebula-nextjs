@@ -238,3 +238,21 @@ striking_distance_action_plan.md
 company_os/control_receipts.jsonl
 company_os/improvement_proposals.jsonl
 company_os/rollback/
+
+# ── Generated agent-tool skill mirrors (canonical in .claude/skills/) ────────
+.agents/
+.augment/
+.codebuddy/
+.codewhale/
+.continue/
+.cursor/
+.factory/
+.gemini/
+.kilocode/
+.kiro/
+.opencode/
+.qoder/
+.roo/
+.trae/
+.warp/
+.windsurf/

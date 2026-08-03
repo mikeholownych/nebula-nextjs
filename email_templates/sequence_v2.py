@@ -19,10 +19,10 @@ Saw your product {url} and noticed one specific thing that's likely costing you 
 
 Happy to do a full teardown — no charge. I do these for founders who are actively shipping because the feedback is worth more to me than a fee at this stage.
 
-Run the self-serve audit: https://nebulacomponents.shop/audit.html
+Run the self-serve audit: https://nebulacomponents.com/audit.html
 
 — Mike
-nebulacomponents.shop
+nebulacomponents.com
 """,
     },
 
@@ -55,7 +55,7 @@ Thanks for replying — send me your URL and I'll get the audit back to you with
 While I'm at it: if after seeing the audit you want me to implement the fixes, I offer a $97 done-for-you service (rewritten copy, CTA placement, trust signals, mobile check, 24h turnaround). No obligation — the audit is free regardless.
 
 — Mike
-nebulacomponents.shop
+nebulacomponents.com
 """,
     },
 

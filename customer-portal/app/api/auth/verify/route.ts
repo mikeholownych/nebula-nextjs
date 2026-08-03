@@ -7,11 +7,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
+// Behind the Cloudflare tunnel Next.js derives request.url as localhost:3000.
+// Redirects MUST use the public site URL or the browser lands on localhost.
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nebulacomponents.com'
+
+function redirectTo(path: string): NextResponse {
+  return NextResponse.redirect(new URL(path, SITE_URL))
+}
 
 export async function GET(request: NextRequest) {
   const token = request.nextUrl.searchParams.get('token') ?? ''
   if (!token) {
-    return NextResponse.redirect(new URL('/login?error=missing_token', request.url))
+    return redirectTo('/login?error=missing_token')
   }
 
   try {
@@ -25,18 +32,18 @@ export async function GET(request: NextRequest) {
 
     if (!upstream.ok) {
       // Verification failed — redirect to login with error
-      return NextResponse.redirect(new URL('/login?error=invalid_token', request.url))
+      return redirectTo('/login?error=invalid_token')
     }
 
     const data = await upstream.json() as { access_token?: string; email?: string }
     const accessToken = data.access_token
 
     if (!accessToken) {
-      return NextResponse.redirect(new URL('/login?error=no_token', request.url))
+      return redirectTo('/login?error=no_token')
     }
 
     // Redirect to workspace and set cookie
-    const redirectResponse = NextResponse.redirect(new URL('/workspace', request.url))
+    const redirectResponse = NextResponse.redirect(new URL('/workspace', SITE_URL))
 
     redirectResponse.cookies.set('access_token', accessToken, {
       httpOnly: true,
@@ -55,6 +62,6 @@ export async function GET(request: NextRequest) {
     return redirectResponse
   } catch (err) {
     console.error('[auth/verify proxy]', err)
-    return NextResponse.redirect(new URL('/login?error=service_unavailable', request.url))
+    return redirectTo('/login?error=service_unavailable')
   }
 }

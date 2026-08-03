@@ -172,6 +172,222 @@
     "total_spent_cents": 0,
     "url": "https://alloceraintelligence.com"
   },
+  "anonymous+2cc2112c-ba9a-4cbc-b899-a454581330ea@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+2cc2112c-ba9a-4cbc-b899-a454581330ea@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-03T12:26:25.553101Z",
+    "last_seen": "2026-08-03T12:26:25.553101Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "853cbf39-0376-40d6-8ff7-96d99f0b99f3",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-03T12:26:25.553101Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
+  "anonymous+4887fa6f-6799-4af2-a20e-111a59f7c139@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+4887fa6f-6799-4af2-a20e-111a59f7c139@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-03T12:33:32.383734Z",
+    "last_seen": "2026-08-03T12:33:32.383734Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "0d6eeb44-89ec-4d81-9e79-1de2eed44f1f",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-03T12:33:32.383734Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
+  "anonymous+4d238523-bef0-49e4-883a-33f40a810136@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+4d238523-bef0-49e4-883a-33f40a810136@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-03T12:26:26.473130Z",
+    "last_seen": "2026-08-03T12:26:26.473130Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "4afba087-1e1a-4fcd-9148-f96b4f5ef944",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-03T12:26:26.473130Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
+  "anonymous+553d8778-fd4a-4001-b5f6-57f6d93c010e@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+553d8778-fd4a-4001-b5f6-57f6d93c010e@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-03T12:26:28.307422Z",
+    "last_seen": "2026-08-03T12:26:28.307422Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "3d1db980-9e74-43cd-b499-640f4224bf0c",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-03T12:26:28.307422Z",
+    "trigger_text": "",
+    "url": "https://gofaultline.dev"
+  },
+  "anonymous+561a7380-21fb-4ec4-aa83-2e69952ffa55@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+561a7380-21fb-4ec4-aa83-2e69952ffa55@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-03T12:33:46.217758Z",
+    "last_seen": "2026-08-03T12:33:46.217758Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "4122a93c-e5f2-433d-8832-251c53b58a9f",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-03T12:33:46.217758Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
+  "anonymous+7b798cd9-e2cf-4a61-a6c4-9fb35d78b618@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+7b798cd9-e2cf-4a61-a6c4-9fb35d78b618@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-03T12:37:02.410982Z",
+    "last_seen": "2026-08-03T12:37:02.410982Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "b60ceeb4-1537-4b7d-b32e-c886667c2540",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-03T12:37:02.410982Z",
+    "trigger_text": "",
+    "url": "https://gofaultline.dev"
+  },
+  "anonymous+897f4dd6-fd32-4565-af89-f98286eb98ce@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+897f4dd6-fd32-4565-af89-f98286eb98ce@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-03T12:31:28.711084Z",
+    "last_seen": "2026-08-03T12:31:28.711084Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "84c22189-8d60-46a7-a585-2c7c17a431e0",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-03T12:31:28.711084Z",
+    "trigger_text": "",
+    "url": "https://gofaultline.dev"
+  },
+  "anonymous+95c244d9-1faf-4111-93bd-ce1ea8ddd400@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+95c244d9-1faf-4111-93bd-ce1ea8ddd400@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-03T12:30:50.009984Z",
+    "last_seen": "2026-08-03T12:30:50.009984Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "ebeee7f9-07d9-4864-a132-15b4dd107436",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-03T12:30:50.009984Z",
+    "trigger_text": "",
+    "url": "https://gofaultline.dev"
+  },
   "audit-probe-2026@example.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -198,6 +414,33 @@
     "track_started_at": "2026-08-01T16:06:39.074473Z",
     "trigger_text": "",
     "url": "https://example.com"
+  },
+  "audit@nebulacomponents.shop": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "audit@nebulacomponents.shop",
+    "first_seen": "2026-08-02T18:24:12.752606Z",
+    "last_seen": "2026-08-02T18:33:52.884431Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "88c097f2-2109-4929-a1a6-7f746eb69cae",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-02T18:33:52.884431Z",
+    "trigger_text": "",
+    "url": "https://smartwatermark.app"
   },
   "beniciocardozomdp@gmail.com": {
     "content_posts": [],
@@ -3524,7 +3767,7 @@
     "current_stage": "lead_audit",
     "email": "pending@example.com",
     "first_seen": "2026-07-18T01:26:23.082723Z",
-    "last_seen": "2026-08-01T15:58:29.220997Z",
+    "last_seen": "2026-08-03T08:19:58.655218Z",
     "name": "",
     "notes": "",
     "nurture_track": "headline-clarity",
@@ -3540,10 +3783,64 @@
     ],
     "tags": [],
     "total_spent_cents": 0,
-    "track_audit_id": "69ea3917-0722-4e47-b4bf-36bf853427b4",
+    "track_audit_id": "7ed7cbf3-3709-4f65-8535-bdd55295dd9a",
     "track_position_days": 0,
-    "track_started_at": "2026-08-01T15:58:29.220997Z",
-    "url": "https://example.org"
+    "track_started_at": "2026-08-03T08:19:58.655218Z",
+    "url": "https://example.com"
+  },
+  "probe@example.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "probe@example.com",
+    "first_seen": "2026-08-03T12:26:18.196333Z",
+    "last_seen": "2026-08-03T12:26:18.196333Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "bf44286e-53c2-4e16-82b2-157ca5f29dfc",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-03T12:26:18.196333Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
+  "qa-workspace-20260803-001@example.invalid": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "qa-workspace-20260803-001@example.invalid",
+    "first_seen": "2026-08-03T08:21:10.961304Z",
+    "last_seen": "2026-08-03T08:21:10.961304Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "8fd6b727-eb3c-4ecb-a9c8-262d9d6efe6e",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-03T08:21:10.961304Z",
+    "trigger_text": "",
+    "url": "https://example.com"
   },
   "quietpulse.social@gmail.com": {
     "content_posts": [],

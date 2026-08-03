@@ -345,6 +345,8 @@ if __name__ == "__main__":
                 "localhost",
                 "localhost:*",
                 "[::1]:*",
+                "mcp.nebulacomponents.com",
+                "mcp.nebulacomponents.com:443",
                 "mcp.nebulacomponents.shop",
                 "mcp.nebulacomponents.shop:443",
             ],
@@ -352,6 +354,7 @@ if __name__ == "__main__":
                 "http://127.0.0.1:*",
                 "http://localhost:*",
                 "http://[::1]:*",
+                "https://mcp.nebulacomponents.com",
                 "https://mcp.nebulacomponents.shop",
             ],
         )

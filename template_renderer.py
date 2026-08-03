@@ -33,11 +33,11 @@ DEFAULTS = {
     "cta_text": "Your CTA",
     "testimonial_sample": "Your testimonial",
     "ad_text_sample": "Your ad copy",
-    "audit_link_with_source": "https://nebulacomponents.shop/audit.html",
-    "headline_worksheet_link": "https://nebulacomponents.shop/resources/headline-worksheet",
-    "message_match_worksheet_link": "https://nebulacomponents.shop/resources/message-match-worksheet",
-    "cta_worksheet_link": "https://neblecomponents.shop/resources/cta-worksheet",
-    "proof_worksheet_link": "https://nebulacomponents.shop/resources/proof-guide",
+    "audit_link_with_source": "https://nebulacomponents.com/audit.html",
+    "headline_worksheet_link": "https://nebulacomponents.com/resources/headline-worksheet",
+    "message_match_worksheet_link": "https://nebulacomponents.com/resources/message-match-worksheet",
+    "cta_worksheet_link": "https://nebulacomponents.com/resources/cta-worksheet",
+    "proof_worksheet_link": "https://nebulacomponents.com/resources/proof-guide",
     "stripe_fix_pack_link": "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h",
 }
 

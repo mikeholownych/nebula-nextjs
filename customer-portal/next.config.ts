@@ -255,7 +255,7 @@ const nextConfig: NextConfig = {
       // CF email obfuscation (cdn-cgi link rewriting) is harmless anti-spam; disable it
       // in the CF dashboard (Scrape Shield → Email Address Obfuscation → Off) if needed.
       {
-        source: '/(.*)',
+        source: '/((?!_next).*)',
         headers: [
           {
             key: 'Cache-Control',
@@ -267,12 +267,18 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // Next.js static chunks: immutable long cache (content-hashed filenames)
+      // Next.js static chunks: immutable long cache (content-hashed filenames).
+      // Also sets Cloudflare-CDN-Cache-Control to prevent CF from caching 404s
+      // that occur during the brief window between build deploy and service restart.
       {
         source: '/_next/static/(.*)',
         headers: [
           {
             key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Cloudflare-CDN-Cache-Control',
             value: 'public, max-age=31536000, immutable',
           },
         ],

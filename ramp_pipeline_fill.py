@@ -143,7 +143,7 @@ def send_first_touch(rec: dict) -> dict:
         body = (
             f"{rec.get('trigger', '')} — so I put {domain} through our audit engine.\n\n"
             f"{rec.get('notes', '')}\n\n"
-            f"Full teardown with evidence: https://nebulacomponents.shop/teardowns/{slug}\n\n"
+            f"Full teardown with evidence: https://nebulacomponents.com/teardowns/{slug}\n\n"
             "No ask. If it finds something worth fixing, the $97 One-Leak Repair Sprint "
             "implements the highest-impact finding.\n"
         )
@@ -153,7 +153,7 @@ def send_first_touch(rec: dict) -> dict:
         body = (
             f"{rec.get('trigger', '')} — that's exactly the signal we built our audit engine for.\n\n"
             "Same engine that powers our public teardowns. Free, no signup, results in under two minutes:\n"
-            "https://nebulacomponents.shop/audit\n\n"
+            "https://nebulacomponents.com/audit\n\n"
             "If it finds a real leak, the $97 One-Leak Repair Sprint implements the highest-impact "
             "finding — with a 30-day re-audit included.\n"
         )

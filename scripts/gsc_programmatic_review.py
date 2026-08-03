@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 GSC Programmatic Review Tool — Automated Google Search Console Analysis & Health Check
-Queries GSC Search Analytics API, URL Inspection API, and Sitemaps API for nebulacomponents.shop.
+Queries GSC Search Analytics API, URL Inspection API, and Sitemaps API for nebulacomponents.com.
 """
 
 import os
@@ -12,7 +12,7 @@ from datetime import datetime
 
 PYTHON_BIN = sys.executable
 CLAUDE_SEO_SCRIPTS = "/home/mike/claude-seo/scripts"
-PROPERTY = "sc-domain:nebulacomponents.shop"
+PROPERTY = "sc-domain:nebulacomponents.com"
 
 def run_command(args):
     cmd = [PYTHON_BIN] + args
@@ -54,15 +54,15 @@ def generate_report():
     
     # 3. URL Inspection
     core_urls = [
-        "https://nebulacomponents.shop/",
-        "https://nebulacomponents.shop/pricing",
-        "https://nebulacomponents.shop/audit",
-        "https://nebulacomponents.shop/concepts",
-        "https://nebulacomponents.shop/learning-centre",
-        "https://nebulacomponents.shop/learning-centre/landing-page-not-converting",
-        "https://nebulacomponents.shop/learning-centre/paid-traffic-leak-map",
-        "https://nebulacomponents.shop/learning-centre/mobile-landing-page-leaks",
-        "https://nebulacomponents.shop/resources/citable",
+        "https://nebulacomponents.com/",
+        "https://nebulacomponents.com/pricing",
+        "https://nebulacomponents.com/audit",
+        "https://nebulacomponents.com/concepts",
+        "https://nebulacomponents.com/learning-centre",
+        "https://nebulacomponents.com/learning-centre/landing-page-not-converting",
+        "https://nebulacomponents.com/learning-centre/paid-traffic-leak-map",
+        "https://nebulacomponents.com/learning-centre/mobile-landing-page-leaks",
+        "https://nebulacomponents.com/resources/citable",
     ]
     inspection = inspect_urls(core_urls)
     
@@ -118,7 +118,7 @@ def generate_report():
     md.append("| URL | Coverage State | Indexing | Last Crawl Time | Canonical Match |")
     md.append("|:---|:---|:---|:---|:---|")
     for res in inspection.get("results", []):
-        url_path = res["url"].replace("https://nebulacomponents.shop", "") or "/"
+        url_path = res["url"].replace("https://nebulacomponents.com", "") or "/"
         idx = res.get("index_status", {})
         cov = idx.get("coverage_state", "Unknown")
         state = idx.get("indexing_state", "Unknown")
@@ -146,7 +146,7 @@ def generate_report():
         md.append("| Query | Position | Impressions | Clicks | CTR | Ranking Page |")
         md.append("|:---|:---|:---|:---|:---|:---|")
         for item in striking_distance:
-            p_short = item["page"].replace("https://nebulacomponents.shop", "") or "/"
+            p_short = item["page"].replace("https://nebulacomponents.com", "") or "/"
             md.append(f"| **{item['query']}** | `{item['position']}` | {item['impressions']} | {item['clicks']} | {item['ctr']}% | `{p_short}` |")
     else:
         md.append("No queries currently in striking distance (positions 4–20).")
@@ -156,7 +156,7 @@ def generate_report():
     md.append("| Query | Position | Impressions | Clicks | CTR | Target Page |")
     md.append("|:---|:---|:---|:---|:---|:---|")
     for item in top_queries[:15]:
-        p_short = item["page"].replace("https://nebulacomponents.shop", "") or "/"
+        p_short = item["page"].replace("https://nebulacomponents.com", "") or "/"
         md.append(f"| {item['query']} | `{item['position']}` | {item['impressions']} | {item['clicks']} | {item['ctr']}% | `{p_short}` |")
     md.append("")
     

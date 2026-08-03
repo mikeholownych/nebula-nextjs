@@ -1,0 +1,13 @@
+{
+  "mode": "live",
+  "charges_returned": 0,
+  "successful_unrefunded_charges": 0,
+  "gross_successful_usd": 0.0,
+  "successful_last_30d": 0,
+  "gross_last_30d_usd": 0.0,
+  "checkout_sessions_returned": 100,
+  "paid_checkout_sessions": 0,
+  "paid_checkout_sessions_last_30d": 0,
+  "has_more_charges": false,
+  "has_more_sessions": true
+}

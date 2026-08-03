@@ -24,7 +24,7 @@ from pathlib import Path
 from typing import Any
 
 BASE_DEFAULT = Path("/home/mike/nebula")
-PUBLIC_URL_DEFAULT = "https://nebulacomponents.shop"
+PUBLIC_URL_DEFAULT = "https://nebulacomponents.com"
 LOCAL_URL_DEFAULT = "http://127.0.0.1:3000"
 SERVICE_DEFAULT = "nebula-nextjs"  # was "nebula-site" — the obsolete alias unit; see INC-0004/INC-0005
 

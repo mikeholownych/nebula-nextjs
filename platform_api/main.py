@@ -15,6 +15,7 @@ from platform_api.errors import (
 )
 from platform_api.middleware import setup_cors, setup_middleware
 from platform_api.middleware.rate_limit import setup_rate_limiting
+from platform_api.infra import health_router, MaintenanceMiddleware
 
 
 @asynccontextmanager
@@ -72,6 +73,7 @@ app = FastAPI(
 # Setup middleware
 setup_middleware(app, max_body_size=settings.MAX_JSON_BODY_BYTES)
 setup_cors(app, settings.ALLOWED_ORIGINS)
+app.add_middleware(MaintenanceMiddleware)
 
 # Rate limiting — uses the Redis client connected in lifespan
 from platform_api.redis_client import redis_client as _redis_client
@@ -83,11 +85,16 @@ from platform_api.auth.routes import router as auth_router
 from platform_api.routes.audits import router as audits_router
 from platform_api.routes.organizations import router as orgs_router
 from platform_api.routes.audit_api import router as audit_api_router
+from platform_api.routes.verify_api import router as verify_router
+from platform_api.routes.dispatch_api import router as dispatch_router
 
 app.include_router(auth_router, prefix="/api")
 app.include_router(orgs_router)
 app.include_router(audits_router)
 app.include_router(audit_api_router)
+app.include_router(verify_router)
+app.include_router(dispatch_router)
+app.include_router(health_router)
 
 
 # Exception handlers - order matters

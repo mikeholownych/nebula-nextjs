@@ -38,7 +38,7 @@ STATE_PATH = NEBULA / "night_watch_state.json"
 REPORT_PATH = NEBULA / "night_watch_report.json"
 ALERT_LOG_PATH = NEBULA / "night_watch_alerts.jsonl"
 
-USER_AGENT = "Mozilla/5.0 (compatible; NebulaNightWatch/1.0; +https://nebulacomponents.shop)"
+USER_AGENT = "Mozilla/5.0 (compatible; NebulaNightWatch/1.0; +https://nebulacomponents.com)"
 FETCH_TIMEOUT = 15  # seconds per URL — fast, lightweight
 MAX_LEADS_PER_RUN = 200
 REPORT_THRESHOLD_CHANGE = 0.15  # 15% hash difference = "changed"

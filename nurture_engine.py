@@ -427,7 +427,7 @@ TEARDOWN_SEQ = [
         "body": "Quick follow-up on the teardown I sent.\n\n"
                 "{extra}\n\n"
                 "If you fix that one, the 30-day re-audit will show the before/after. "
-                "Free — the offer is https://nebulacomponents.shop/pricing\n",
+                "Free — the offer is https://nebulacomponents.com/pricing\n",
     },
     {
         "step": "d6", "min_days": 6,
@@ -442,7 +442,7 @@ TEARDOWN_SEQ = [
         "step": "d12", "min_days": 12,
         "subject": "Closing the loop on {domain}",
         "body": "Last note on this one — the teardown stays live at "
-                "https://nebulacomponents.shop/teardowns/{slug} whenever you need it.\n\n"
+                "https://nebulacomponents.com/teardowns/{slug} whenever you need it.\n\n"
                 "If you ship the fix yourself, reply with the result and I'll re-audit it "
                 "free. If you'd rather we do it, the sprint link is above. Either way, "
                 "good luck with {domain}.\n",
@@ -515,13 +515,13 @@ AUDIT_SEQ = [
         "subject": "Your audit is ready — the one finding that matters",
         "body": "You ran the free audit on {site}. Here's the short version:\n\n"
                 "{finding}\n\n"
-                "See the full breakdown anytime: https://nebulacomponents.shop/audit\n",
+                "See the full breakdown anytime: https://nebulacomponents.com/audit\n",
     },
     {
         "step": "d4", "min_days": 4,
         "subject": "What a fixed version of {domain} looks like",
         "body": "Same engine, real before/after — we teardown public sites and show "
-                "exactly what's leaking: https://nebulacomponents.shop/teardowns\n\n"
+                "exactly what's leaking: https://nebulacomponents.com/teardowns\n\n"
                 "Every finding includes the evidence. That's the standard your fix "
                 "should meet too.\n",
     },
@@ -680,7 +680,7 @@ def run_trickle():
                 template_id=template_id,
                 lead=lead,
                 audit=None,
-                extra_vars={"checkout_url": f"https://nebulacomponents.shop/checkout?email={email}"}
+                extra_vars={"checkout_url": f"https://nebulacomponents.com/checkout?email={email}"}
             )
 
             if rendered:
@@ -705,7 +705,7 @@ def run_trickle():
         domain = lead.get("url", "").replace("https://", "").replace("http://", "").split("/")[0] or email.split("@")[1] if "@" in email else "yoursite.com"
         site = lead.get("url", "") or f"https://{domain}"
         audit_summary = get_audit_summary(lead)
-        checkout_url = f"https://nebulacomponents.shop/checkout?email={email}&url={site}"
+        checkout_url = f"https://nebulacomponents.com/checkout?email={email}&url={site}"
 
         trigger_text = (lead.get("trigger_text") or "").strip()
         signal_opener = ""
@@ -778,7 +778,7 @@ def run_nurture_cycle():
             domain = lead.get("url", "").replace("https://", "").replace("http://", "").split("/")[0] or email.split("@")[1] if "@" in email else "yoursite.com"
             site = lead.get("url", "") or f"https://{domain}"
             audit_summary = get_audit_summary(lead)
-            checkout_url = f"https://nebulacomponents.shop/checkout?email={email}&url={site}"
+            checkout_url = f"https://nebulacomponents.com/checkout?email={email}&url={site}"
 
             sent_for_lead = send_log.get(email, set())
             sent_any = False

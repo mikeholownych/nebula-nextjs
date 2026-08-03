@@ -1,0 +1,107 @@
+[
+  {
+    "url": "https://nebulacomponents.com/",
+    "status": 200,
+    "headers": {
+      "server": "cloudflare",
+      "cf-cache-status": "DYNAMIC",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-security-policy": null,
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "cross-origin-opener-policy": null,
+      "cross-origin-resource-policy": null,
+      "content-type": "text/html; charset=utf-8",
+      "content-encoding": "br",
+      "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding",
+      "etag": null
+    }
+  },
+  {
+    "url": "https://nebulacomponents.com/audit",
+    "status": 200,
+    "headers": {
+      "server": "cloudflare",
+      "cf-cache-status": "DYNAMIC",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-security-policy": null,
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "cross-origin-opener-policy": null,
+      "cross-origin-resource-policy": null,
+      "content-type": "text/html; charset=utf-8",
+      "content-encoding": "br",
+      "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding",
+      "etag": null
+    }
+  },
+  {
+    "url": "https://nebulacomponents.com/pricing",
+    "status": 200,
+    "headers": {
+      "server": "cloudflare",
+      "cf-cache-status": "DYNAMIC",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-security-policy": null,
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "cross-origin-opener-policy": null,
+      "cross-origin-resource-policy": null,
+      "content-type": "text/html; charset=utf-8",
+      "content-encoding": "br",
+      "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding",
+      "etag": null
+    }
+  },
+  {
+    "url": "https://nebulacomponents.com/robots.txt",
+    "status": 200,
+    "headers": {
+      "server": "cloudflare",
+      "cf-cache-status": "REVALIDATED",
+      "cache-control": "public, max-age=14400, must-revalidate",
+      "content-security-policy": null,
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "cross-origin-opener-policy": null,
+      "cross-origin-resource-policy": null,
+      "content-type": "text/plain; charset=UTF-8",
+      "content-encoding": "gzip",
+      "vary": "Accept-Encoding",
+      "etag": "W/\"4cf-19fc62cf8c0\""
+    }
+  },
+  {
+    "url": "https://nebulacomponents.com/sitemap.xml",
+    "status": 200,
+    "headers": {
+      "server": "cloudflare",
+      "cf-cache-status": "DYNAMIC",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-security-policy": null,
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "permissions-policy": "camera=(), microphone=(), geolocation=()",
+      "cross-origin-opener-policy": null,
+      "cross-origin-resource-policy": null,
+      "content-type": "application/xml",
+      "content-encoding": "br",
+      "vary": "Accept, rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+      "etag": null
+    }
+  }
+]

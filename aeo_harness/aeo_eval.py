@@ -15,30 +15,30 @@ from urllib.request import Request, urlopen
 ROOT=Path(__file__).resolve().parent
 CORPUS=ROOT/'corpus'; OUTPUT=ROOT/'output'
 PAGES=[
- {'id':'homepage','split':'dev','url':'https://nebulacomponents.shop/','questions':[
+ {'id':'homepage','split':'dev','url':'https://nebulacomponents.com/','questions':[
   {'q':'What does Nebula Components provide?','answers':['landing page conversion optimization','landing page conversion diagnosis','landing page conversion optimization for founders']},
   {'q':'What does the free Nebula audit check?','answers':['9 conversion signals','nine conversion signals']},
   {'q':'What is the One-Leak Repair Sprint price?','answers':['$97','97']},
  ]},
- {'id':'audit','split':'dev','url':'https://nebulacomponents.shop/audit','questions':[
+ {'id':'audit','split':'dev','url':'https://nebulacomponents.com/audit','questions':[
   {'q':'How long does the free audit take?','answers':['under 2 minutes','under two minutes','2 minutes']},
   {'q':'Does the free audit require an email or signup?','answers':['no email required','no signup','no account']},
   {'q':'What viewport does the audit use for mobile CTA checks?','answers':['375px','375 px','375']},
  ]},
- {'id':'pricing','split':'dev','url':'https://nebulacomponents.shop/pricing','questions':[
+ {'id':'pricing','split':'dev','url':'https://nebulacomponents.com/pricing','questions':[
   {'q':'What does the One-Leak Repair Sprint cost?','answers':['$97','97']},
   {'q':'Does Nebula promise conversion lift?','answers':['does not promise conversion lift','does not by itself prove business impact','no']},
   {'q':'How long is the same-scope re-audit window?','answers':['30 days','30-day']},
  ]},
- {'id':'definition','split':'dev','url':'https://nebulacomponents.shop/what-is-landing-page-audit','questions':[
+ {'id':'definition','split':'dev','url':'https://nebulacomponents.com/what-is-landing-page-audit','questions':[
   {'q':'What is a landing page audit?','answers':['systematic evaluation','prioritized fix list','scored diagnostic']},
   {'q':'What score scale does the landing page audit use?','answers':['1–10','1-10','1 to 10']},
  ]},
- {'id':'about','split':'holdout','url':'https://nebulacomponents.shop/about','questions':[
+ {'id':'about','split':'holdout','url':'https://nebulacomponents.com/about','questions':[
   {'q':'Who founded Nebula Components?','answers':['Mike Holownych']},
   {'q':'Who does Nebula work with?','answers':['founders and operators','actively spending on paid ads']},
  ]},
- {'id':'llms','split':'holdout','url':'https://nebulacomponents.shop/llms.txt','questions':[
+ {'id':'llms','split':'holdout','url':'https://nebulacomponents.com/llms.txt','questions':[
   {'q':'What is Nebula\'s buying trigger?','answers':['spending on ads and not converting']},
   {'q':'Does Nebula publish verified client case studies?','answers':['none published yet','requires real before/after metric']},
  ]},

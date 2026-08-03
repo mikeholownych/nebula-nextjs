@@ -25,7 +25,7 @@ from deliver_audit import scrape_page, score_audit
 
 ROOT = pathlib.Path(__file__).resolve().parent
 OUT = ROOT / "local_business_prospects.jsonl"
-USER_AGENT = "NebulaLocalBusinessSignal/1.0 (+https://nebulacomponents.shop)"
+USER_AGENT = "NebulaLocalBusinessSignal/1.0 (+https://nebulacomponents.com)"
 EMAIL_RE = re.compile(r"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}", re.I)
 
 # Dallas/Fort Worth test box. Expand by adding named bboxes once this proves ROI.

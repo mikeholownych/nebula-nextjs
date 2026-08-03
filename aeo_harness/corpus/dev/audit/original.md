@@ -6,35 +6,15 @@ Nebula
 
 Components
 
-Pricing
-
 Teardowns
 
-Benchmarks
-
-Lab
-
-Case Studies
-
-Learning
-
-Workspace
+Pricing
 
 Free Audit
 
-Pricing
-
 Teardowns
 
-Benchmarks
-
-Lab
-
-Case Studies
-
-Learning
-
-Workspace
+Pricing
 
 Free Audit
 
@@ -60,7 +40,7 @@ Not a mockup
 
 This is a real audit of our own homepage.
 
-We ran nebulacomponents.shop through the same audit engine every visitor uses. No edits, no cherry-picked run - this is the actual results screen.
+We ran nebulacomponents.com through the same audit engine every visitor uses. No edits, no cherry-picked run - this is the actual results screen.
 
 Here is what the output looks like.
 
@@ -278,49 +258,35 @@ Teardowns
 
 Case Studies
 
-Benchmarks
+Learn
+
+Brand Kit
+
+Press Kit
 
 Learning Centre
 
-Citable
+Benchmarks
 
-7 Systems
+Lab
 
-Concepts
+Diagnostic Guides →
 
-CTA Optimization
+Industry Audits →
 
-Editorial Standards
-
-Headline Optimization
-
-Mobile Optimization
-
-Page Speed & Conversion
-
-ROAS Cliff
-
-Comparisons
+Compare
 
 vs. PageSpeed Insights
 
-vs. Google Lighthouse
-
-vs. HubSpot Grader
+vs. Hotjar
 
 vs. Unbounce
 
-vs. Silktide
-
-vs. Hotjar
-
 vs. SEMrush Site Audit
-
-vs. Crazy Egg
 
 vs. Screaming Frog
 
-vs. Google Analytics
+vs. Crazy Egg
 
 Legal
 
@@ -347,5 +313,9 @@ Essential only
 Accept all
 
 Drop your landing page URL — see what's leaking
+
+What made you run this audit today?
+
+(optional)
 
 Find the Leak

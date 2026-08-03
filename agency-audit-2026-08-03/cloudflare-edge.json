@@ -1,0 +1,96 @@
+{
+  "zone_settings": {
+    "0rtt": {
+      "value": "off",
+      "editable": true
+    },
+    "always_use_https": {
+      "value": "off",
+      "editable": true
+    },
+    "automatic_https_rewrites": {
+      "value": "on",
+      "editable": true
+    },
+    "brotli": {
+      "value": "on",
+      "editable": true
+    },
+    "browser_check": {
+      "value": "on",
+      "editable": true
+    },
+    "cache_level": {
+      "value": "aggressive",
+      "editable": true
+    },
+    "early_hints": {
+      "value": "off",
+      "editable": true
+    },
+    "http2": {
+      "value": "on",
+      "editable": false
+    },
+    "http3": {
+      "value": "on",
+      "editable": true
+    },
+    "min_tls_version": {
+      "value": "1.0",
+      "editable": true
+    },
+    "opportunistic_encryption": {
+      "value": "on",
+      "editable": true
+    },
+    "rocket_loader": {
+      "value": "off",
+      "editable": true
+    },
+    "security_level": {
+      "value": "medium",
+      "editable": true
+    },
+    "ssl": {
+      "value": "full",
+      "editable": true
+    },
+    "tls_1_3": {
+      "value": "on",
+      "editable": true
+    }
+  },
+  "dnssec": {
+    "status": 200,
+    "result": {
+      "status": "disabled",
+      "flags": null,
+      "algorithm": null,
+      "digest_algorithm": null
+    }
+  },
+  "rulesets": {
+    "status": 200,
+    "result": [
+      {
+        "id": "70339d97bdb34195bbf054b1ebe81f76",
+        "name": "Cloudflare Normalization Ruleset",
+        "kind": "managed",
+        "phase": "http_request_sanitize"
+      },
+      {
+        "id": "77454fe2d30c4220b5701f6fdfb893ba",
+        "name": "Cloudflare Managed Free Ruleset",
+        "kind": "managed",
+        "phase": "http_request_firewall_managed"
+      },
+      {
+        "id": "4d21379b4f9f4bb088e0729962c8b3cf",
+        "name": "DDoS L7 ruleset",
+        "kind": "managed",
+        "phase": "ddos_l7"
+      }
+    ]
+  }
+}

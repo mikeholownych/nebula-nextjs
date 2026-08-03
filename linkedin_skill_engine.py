@@ -27,7 +27,7 @@ WARM_LIST = LINKEDIN_DIR / "warm_list.jsonl"
 OUTREACH_DRAFTS = LINKEDIN_DIR / "outreach_drafts.jsonl"
 WARM_TRACKER = LINKEDIN_DIR / "warm_tracker.jsonl"
 POST_AUTOPSY = LINKEDIN_DIR / "post_autopsy.jsonl"
-AUDIT_URL = "https://nebulacomponents.shop/audit"
+AUDIT_URL = "https://nebulacomponents.com/audit"
 DAILY_CAP = 20
 
 

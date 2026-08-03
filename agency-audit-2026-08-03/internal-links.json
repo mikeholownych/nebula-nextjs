@@ -1,0 +1,29 @@
+{
+  "checked": 121,
+  "broken": [
+    {
+      "url": "https://nebulacomponents.com/why-landing-pages-dont-convert",
+      "status": 404,
+      "final": "https://nebulacomponents.com/why-landing-pages-dont-convert",
+      "redirects": [],
+      "linked_from": [
+        "https://nebulacomponents.com/ai-sdr-vs-audit",
+        "https://nebulacomponents.com/social-proof-landing-page"
+      ]
+    },
+    {
+      "url": "https://nebulacomponents.com/cdn-cgi/l/email-protection",
+      "status": 404,
+      "final": "https://nebulacomponents.com/cdn-cgi/l/email-protection",
+      "redirects": [],
+      "linked_from": [
+        "https://nebulacomponents.com/editorial-standards",
+        "https://nebulacomponents.com/terms",
+        "https://nebulacomponents.com/learning-centre/confessions",
+        "https://nebulacomponents.com/resources/citable",
+        "https://nebulacomponents.com/resources/citable/quick-start"
+      ]
+    }
+  ],
+  "redirected": []
+}

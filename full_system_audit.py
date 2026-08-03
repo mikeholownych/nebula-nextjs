@@ -52,7 +52,7 @@ except Exception as e:
 
 # Cloudflare tunnel
 try:
-    req = urllib.request.Request("https://nebulacomponents.shop/", method='HEAD', timeout=5)
+    req = urllib.request.Request("https://nebulacomponents.com/", method='HEAD', timeout=5)
     with urllib.request.urlopen(req) as resp:
         check("Cloudflare Tunnel", resp.status == 200, critical=True)
 except urllib.error.HTTPError as e:

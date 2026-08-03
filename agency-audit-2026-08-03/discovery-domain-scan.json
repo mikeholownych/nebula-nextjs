@@ -1,0 +1,44 @@
+[
+  {
+    "path": "/robots.txt",
+    "status": 200,
+    "shop_refs": 0,
+    "com_refs": 2,
+    "bytes": 1223
+  },
+  {
+    "path": "/llms.txt",
+    "status": 200,
+    "shop_refs": 0,
+    "com_refs": 19,
+    "bytes": 4463
+  },
+  {
+    "path": "/llms-full.txt",
+    "status": 200,
+    "shop_refs": 0,
+    "com_refs": 30,
+    "bytes": 13665
+  },
+  {
+    "path": "/openapi.json",
+    "status": 200,
+    "shop_refs": 0,
+    "com_refs": 4,
+    "bytes": 9754
+  },
+  {
+    "path": "/.well-known/acp.json",
+    "status": 200,
+    "shop_refs": 2,
+    "com_refs": 0,
+    "bytes": 386
+  },
+  {
+    "path": "/.well-known/agent-skills/index.json",
+    "status": 200,
+    "shop_refs": 8,
+    "com_refs": 0,
+    "bytes": 2251
+  }
+]
