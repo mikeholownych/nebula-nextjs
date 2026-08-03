@@ -3,7 +3,7 @@
 
 import sys, json, time, re, subprocess, os, argparse, ipaddress, socket, logging
 from datetime import datetime, timezone
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urlencode, urljoin, urlparse
 from pathlib import Path
 
 # Fix Map — visual execution roadmap (Nico's FORGE adaptation)
@@ -1152,18 +1152,16 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
     }
     _qw_labels = [_dim_labels_lookup.get(o["key"], o["label"]) for o in _matrix if o["quadrant"] == "quick_win"]
     if _qw_labels:
-        _qw_str = " + ".join(_qw_labels[:2])
-        if score < 6.5:
-            pitch_line = (
-                f"AI prompts for: {_qw_str} — delivered by email within minutes, no call. "
-                f"At {spend_label} this pays for itself fast once you apply them."
-            )
-        else:
-            pitch_line = (
-                f"AI prompts for: {_qw_str} — delivered by email within minutes. No call required."
-            )
+        _qw_str = _qw_labels[0]
+        pitch_line = (
+            f"A tailored implementation kit for one selected {_qw_str} finding, sent by email after successful payment. "
+            "You or your developer applies the change; no site access or call is required."
+        )
     else:
-        pitch_line = "Implements the fix in 24h. No call required. Full refund if not satisfied."
+        pitch_line = (
+            "A tailored implementation kit for one selected finding, applied by you or your developer. "
+            "No site access, call, or conversion-lift guarantee."
+        )
 
 
     if broken_only:
@@ -1232,16 +1230,20 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
             for o in av[:1]:
                 lines.append(f"    ✗ {o['label']}")
 
+    audit_offer_url = "https://nebulacomponents.com/audit?" + urlencode({
+        "url": page.get("url", ""),
+        "source": "audit_email",
+    })
     lines.extend([
         "",
         "━" * 40,
         "",
-        f"$97 Fix Pack — {pitch_line}",
-        "Details + FAQ: https://nebulacomponents.shop/primer",
-        "One-click checkout: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h",
+        f"$97 One-Leak Self-Implementation Kit — {pitch_line}",
+        "Details + FAQ: https://nebulacomponents.com/primer",
+        f"Run or reopen the audit to unlock eligible checkout: {audit_offer_url}",
         "",
-        "📩 Delivered by email within minutes — no 24-hour wait, no call.",
-        "🔒 We never ask for access to your site, CMS, or hosting — you apply the prompts yourself.",
+        "📩 The paid kit is sent by email after Stripe confirms payment.",
+        "🔒 We never ask for access to your site, CMS, or hosting — you apply the tailored change yourself.",
         "🔁 One free re-audit within 30 days to see what changed.",
         "",
         "━" * 40,
@@ -1250,7 +1252,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         "📊 Data privacy — this audit analyzed your page's public HTML only.",
         "   We never accessed: your analytics, ad accounts, CMS, customer data, or server.",
         "   Your email is used only for delivery and never shared.",
-        "   Full policy: https://nebulacomponents.shop/audit#data-privacy",
+        "   Full policy: https://nebulacomponents.com/audit#data-privacy",
         "",
         "— Nebula Components",
     ])
@@ -1272,7 +1274,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         html_body += f"""
 <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:560px;margin:16px auto 0;padding-top:16px;border-top:1px solid #e5e7eb;text-align:center;">
   <div style="font-size:13px;color:#6b7280;">
-    <a href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h" style="color:#059669;text-decoration:underline;">Implement these findings — $97 Fix Pack →</a>
+    <a href="{audit_offer_url}" style="color:#059669;text-decoration:underline;">Run the audit to unlock the $97 self-implementation kit →</a>
   </div>
 </div>"""
     else:
@@ -1346,9 +1348,9 @@ Key findings:
 - Social proof: {"Present" if score >= 7 else "Missing"}
 
 The full audit is ready here (self-serve):
-https://nebulacomponents.shop/audit.html?url={url}
+https://nebulacomponents.com/audit.html?url={url}
 
-If you'd like me to implement these fixes with the $97 Fix Pack (done in 24h), just reply "YES" and I'll get started.
+If you want one tailored implementation-ready change, run the audit and select the $97 self-implementation kit from the eligible report. You or your developer applies it.
 
 Best,
 Nebula Audit Agent"""
@@ -1537,7 +1539,7 @@ def main():
             "url": args.url,
             "score": score,
             "sent_at": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "audit_url": f"https://nebulacomponents.shop/audit.html?url={args.url}",
+            "audit_url": f"https://nebulacomponents.com/audit.html?url={args.url}",
             "trigger_context": args.trigger_context,
         }
         save_contacted(contacted)

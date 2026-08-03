@@ -208,7 +208,9 @@ export async function POST(request: NextRequest) {
       alreadyDelivered = statusResult.rows[0]?.fulfillment_status === 'delivered'
     } catch (err) {
       console.error('Failed to persist purchase — will let Stripe retry:', err)
-      captureServerException(err, { route: 'POST /api/webhooks/stripe', properties: { stripe_session_id: session.id } })
+      if (session.metadata?.analytics_consent === 'all') {
+        captureServerException(err, { route: 'POST /api/webhooks/stripe', properties: { stripe_session_id: session.id } })
+      }
       return NextResponse.json({ error: 'Failed to record purchase' }, { status: 500 })
     }
 
@@ -262,7 +264,9 @@ export async function POST(request: NextRequest) {
       await deliverPromptPack(auditId, customerEmail, session.id)
     } catch (err) {
       console.error('Self-implementation kit delivery failed:', err)
-      captureServerException(err, { route: 'POST /api/webhooks/stripe', properties: { stripe_session_id: session.id, phase: 'fulfillment' } })
+      if (session.metadata?.analytics_consent === 'all') {
+        captureServerException(err, { route: 'POST /api/webhooks/stripe', properties: { stripe_session_id: session.id, phase: 'fulfillment' } })
+      }
       if (client && locked) {
         await restoreFailedFulfillment(client, session.id)
       }
@@ -309,11 +313,15 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    try {
+    const analyticsPersonId = session.metadata?.analytics_person_id
+    if (
+      session.metadata?.analytics_consent === 'all'
+      && typeof analyticsPersonId === 'string'
+      && /^person_[0-9a-f]{32}$/.test(analyticsPersonId)
+    ) try {
       const ph = getPostHogClient()
-      ph.identify({ distinctId: customerEmail, properties: {} })
       ph.capture({
-        distinctId: customerEmail,
+        distinctId: analyticsPersonId,
         event: 'purchase_completed',
         properties: {
           stripe_session_id: session.id,
@@ -337,23 +345,9 @@ export async function POST(request: NextRequest) {
       amount_paid: invoice.amount_paid,
     })
 
-    if (invoice.customer_email) {
-      try {
-        const ph = getPostHogClient()
-        ph.capture({
-          distinctId: invoice.customer_email,
-          event: 'invoice_payment_succeeded',
-          properties: {
-            invoice_id: invoice.id,
-            amount_paid: invoice.amount_paid,
-            currency: invoice.currency,
-          },
-        })
-        await ph.flush()
-      } catch {
-        // Non-fatal
-      }
-    }
+    // Invoice events do not carry the browser consent contract. Keep them in
+    // Stripe/billing records, but do not send them to analytics without a
+    // consented pseudonymous identity.
   }
 
   return NextResponse.json({ received: true })

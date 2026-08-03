@@ -125,8 +125,8 @@ Your score: {audit['score']/10}/10 (Grade: {audit['grade']})
 
 {self._format_finding(quick_win) if quick_win else ""}
 
-Want help implementing this? Book a 15-min call:
-https://nebulacomponents.shop/audit
+Want one tailored implementation-ready change? The $97 self-implementation kit is available from an eligible audit report. You or your developer applies it:
+https://nebulacomponents.com/audit
 
 Best,
 Mike from Nebula Components
@@ -142,11 +142,11 @@ Quick question: Did you implement any fixes from your landing page audit?
 
 {self._format_finding(quick_win) if quick_win else ""}
 
-This fix alone could improve your conversion rate by 10-20%.
+The audit records the observed condition; it does not predict conversion lift.
 
-If you want implementation, the $97 Fix Pack covers the highest-impact fixes with no call required.
+The $97 self-implementation kit covers one selected finding with no call or site access required.
 
-https://nebulacomponents.shop/audit
+https://nebulacomponents.com/audit
 
 Best,
 Mike
@@ -158,12 +158,10 @@ Hi {audit.get('name', 'there')},
 
 Still thinking about your landing page conversion rate?
 
-Your audit score was {audit['score']/10}/10 - that's a {100 - audit['score']*10}% improvement opportunity.
+Your audit score was {audit['score']/10}/10. That score is a diagnostic baseline, not a revenue forecast.
 
-Most founders I talk to are leaving 5-10x revenue on the table because their landing pages don't convert.
-
-I can help fix that with the $97 Fix Pack. No call required:
-https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
+The $97 One-Leak Self-Implementation Kit turns one selected finding into a tailored change you or your developer applies. No call, site access, or conversion-lift guarantee:
+https://nebulacomponents.com/audit
 
 Best,
 Mike from Nebula Components

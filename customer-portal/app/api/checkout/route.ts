@@ -3,6 +3,7 @@ import { getPostHogClient, captureServerException } from '@/app/lib/posthog-serv
 import { getActiveFixPack } from '@/app/lib/public-facts'
 import { readAuditUnlock } from '@/app/lib/audit-unlock-token'
 import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
+import { analyticsPersonId, hasServerAnalyticsConsent, readAttributionHeader } from '@/app/lib/analytics-consent'
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
@@ -109,6 +110,28 @@ export async function POST(request: NextRequest) {
     )
   }
 
+  const analyticsConsent = hasServerAnalyticsConsent(request)
+  const personId = analyticsConsent ? analyticsPersonId(auditIdentity.email) : null
+  const attribution = readAttributionHeader(request)
+  const stripeParams = new URLSearchParams({
+    'line_items[0][price_data][currency]': fixPack.currency.toLowerCase(),
+    'line_items[0][price_data][unit_amount]': String(fixPack.priceCents),
+    'line_items[0][price_data][product_data][name]': REPAIR_SPRINT_OFFER.name,
+    'line_items[0][quantity]': '1',
+    'payment_method_types[0]': 'card',
+    mode: 'payment',
+    success_url: new URL('/thank-you?session_id={CHECKOUT_SESSION_ID}', baseUrl).toString(),
+    cancel_url: new URL(`${fixPack.checkout.pagePath}?audit_id=${encodeURIComponent(auditId)}`, baseUrl).toString(),
+    customer_email: auditIdentity.email,
+    'metadata[audit_id]': auditId,
+    'metadata[offer_key]': fixPack.checkout.offerKey,
+    'metadata[analytics_consent]': analyticsConsent ? 'all' : 'necessary',
+  })
+  if (personId) stripeParams.set('metadata[analytics_person_id]', personId)
+  for (const [key, value] of Object.entries(attribution)) {
+    stripeParams.set(`metadata[${key}]`, value.slice(0, 500))
+  }
+
   let session: unknown
   try {
     const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
@@ -117,25 +140,7 @@ export async function POST(request: NextRequest) {
         Authorization: `Bearer ${stripeSecretKey}`,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: new URLSearchParams({
-        'line_items[0][price_data][currency]': fixPack.currency.toLowerCase(),
-        'line_items[0][price_data][unit_amount]': String(fixPack.priceCents),
-        'line_items[0][price_data][product_data][name]': REPAIR_SPRINT_OFFER.name,
-        'line_items[0][quantity]': '1',
-        'payment_method_types[0]': 'card',
-        mode: 'payment',
-        success_url: new URL(
-          '/thank-you?session_id={CHECKOUT_SESSION_ID}',
-          baseUrl,
-        ).toString(),
-        cancel_url: new URL(
-          `${fixPack.checkout.pagePath}?audit_id=${encodeURIComponent(auditId)}`,
-          baseUrl,
-        ).toString(),
-        customer_email: auditIdentity.email,
-        'metadata[audit_id]': auditId,
-        'metadata[offer_key]': fixPack.checkout.offerKey,
-      }),
+      body: stripeParams,
     })
 
     if (!response.ok) {
@@ -146,7 +151,9 @@ export async function POST(request: NextRequest) {
     session = await response.json()
   } catch (error) {
     console.error('[Checkout API] Stripe provider request failed:', error)
-    captureServerException(error, { route: 'POST /api/checkout' })
+    if (hasServerAnalyticsConsent(request)) {
+      captureServerException(error, { route: 'POST /api/checkout' })
+    }
     return NextResponse.json({ code: 'CHECKOUT_PROVIDER_ERROR' }, { status: 502 })
   }
 
@@ -154,16 +161,17 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ code: 'CHECKOUT_PROVIDER_ERROR' }, { status: 502 })
   }
 
-  if (typeof session.id === 'string') {
+  if (typeof session.id === 'string' && analyticsConsent && personId) {
     try {
       const ph = getPostHogClient()
       ph.capture({
-        distinctId: session.id,
+        distinctId: personId,
         event: 'checkout_session_created',
         properties: {
           offer_key: fixPack.checkout.offerKey,
           audit_id: auditId,
           stripe_session_id: session.id,
+          ...attribution,
         },
       })
       void ph.flush().catch(() => undefined)

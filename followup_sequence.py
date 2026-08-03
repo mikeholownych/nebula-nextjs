@@ -11,6 +11,7 @@ Usage:
 import sys, json, os, re, time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
+from urllib.parse import quote_plus
 from outbound_release_gate import OutboundReleaseGate
 
 # ── Stripe personalised checkout links ────────────────────────────
@@ -21,7 +22,7 @@ try:
 except ImportError:
     HAS_STRIPE_LINKS = False
     def get_97_checkout_url(email, lead_url, audit_score, domain):  # type: ignore
-        return "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
+        return f"https://nebulacomponents.com/audit?url={quote_plus(lead_url)}&source=followup_sequence"
 
 DRY_RUN = "--dry-run" in sys.argv
 
@@ -45,7 +46,7 @@ HOT_LEAD      = NEBULA / "HOT_LEAD.json"
 LEDGER        = NEBULA / "ledgers/customer-ledger.jsonl"
 FOLLOWUP_ST   = NEBULA / "followup_state.jsonl"
 
-STRIPE    = "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
+STRIPE    = "https://nebulacomponents.com/audit?source=followup_sequence"
 
 # ── Sequence definitions ──────────────────────────────────────────
 # Hardened 10-touch pipeline per the followup-hardening skill:
@@ -126,7 +127,7 @@ Implementation: {stripe}
 
 Won't follow up again on this round. If something changes, the audit link is always live:
 
-https://nebulacomponents.shop/audit.html?url=https://{domain}
+https://nebulacomponents.com/audit.html?url=https://{domain}
 
 — Nebula Audit Agent"""),
 ]
@@ -143,7 +144,7 @@ Two visible issues stood out:
 1. {issue1}
 2. {issue2}
 
-The full audit breaks down 5 dimensions: https://nebulacomponents.shop/audit.html?url=https://{domain}
+The full audit breaks down 5 dimensions: https://nebulacomponents.com/audit.html?url=https://{domain}
 
 No call. No pitch. Just the findings.
 
@@ -158,7 +159,7 @@ Following up on the {domain} audit. The most actionable fix is {issue1}.
 Here's the fix: {top_fix}
 
 You can verify whether it's still an issue by re-running the audit after changes:
-https://nebulacomponents.shop/audit.html?url=https://{domain}
+https://nebulacomponents.com/audit.html?url=https://{domain}
 
 — Nebula"""),
 
@@ -184,7 +185,7 @@ A SaaS founder had the same {issue1} issue — trial signups were at 2.1%. Same 
 
 Sharing in case it's useful, not to pressure you.
 
-Free audit link if you want to re-check: https://nebulacomponents.shop/audit.html
+Free audit link if you want to re-check: https://nebulacomponents.com/audit.html
 
 — Nebula"""),
 
@@ -200,7 +201,7 @@ Most paid-traffic pages convert at 1–2%. The ones that hit 4–5% without touc
 
 The {issue1} issue on {domain} is exactly that gap.
 
-Free audit if you want to verify: https://nebulacomponents.shop/audit.html?url=https://{domain}
+Free audit if you want to verify: https://nebulacomponents.com/audit.html?url=https://{domain}
 
 — Nebula"""),
 
@@ -235,9 +236,9 @@ One thing that might be more useful: across 200+ audits, three issues show up on
 2. Headline written for people who already know the product — not for the ad click (67%)
 3. Multiple competing CTAs above the fold before the visitor decides they want anything (58%)
 
-Full write-up: https://nebulacomponents.shop/case-studies/
+Full write-up: https://nebulacomponents.com/case-studies/
 
-Free audit if you'd like to check {domain}: https://nebulacomponents.shop/audit.html
+Free audit if you'd like to check {domain}: https://nebulacomponents.com/audit.html
 
 — Nebula"""),
 
@@ -284,7 +285,7 @@ Since I last checked {domain}, we've run 500+ more audits. The same three issues
 
 If you ever want to re-check {domain}, the audit is still free:
 
-https://nebulacomponents.shop/audit.html
+https://nebulacomponents.com/audit.html
 
 — Nebula"""),
 
@@ -312,7 +313,7 @@ Sent the {domain} audit yesterday. One finding I didn't want to bury in the repo
 
 Your headline and ad are making different promises. Visitors arrive expecting one thing, see another, and leave. That gap is the most common reason paid traffic doesn't convert — and it's mechanical, not a budget problem.
 
-The fix is a headline rewrite and one CTA adjustment. We implement it in 24h for $97. If it doesn't move your numbers, full refund.
+The $97 option is a tailored self-implementation kit for one selected finding. You or your developer applies it; the 30-day re-audit checks the same page condition, not conversion lift.
 
 → {stripe}
 
@@ -325,11 +326,9 @@ Happy to answer questions before you decide.
 
 Following up on the {domain} audit.
 
-A SaaS founder had the same issue: headline written for people who already knew the product, CTA competing with a nav bar. Trial signups were 2.1%. We realigned the messaging — same traffic, same budget. Six weeks later: 4.8%.
+The evidence in your audit is the useful part: it records the observed condition and gives you a repeatable baseline. Nebula does not currently publish a verified customer outcome for this offer.
 
-Sharing in case it's a useful data point, not to pressure you.
-
-If you want the implementation: $97, done in 24h. → {stripe}
+If you want one implementation-ready change: $97, customer-implemented. → {stripe}
 
 — Nebula"""),
     (7, "recycle_final",
@@ -341,8 +340,8 @@ Last note from me on the {domain} audit.
 The findings don't expire. If you come back to this later, the audit is still accurate and the fix is the same.
 
 Two ways to use it:
-1. We implement it — $97, 24h: {stripe}
-2. Re-run the free audit anytime: https://nebulacomponents.shop/audit.html
+1. Get one tailored self-implementation kit — $97: {stripe}
+2. Re-run the free audit anytime: https://nebulacomponents.com/audit
 
 Won't follow up again. Thanks for the time.
 
@@ -433,13 +432,13 @@ def hot_lead_pitch_body(url, audit_score, audit_grade, checkout_url=None):
 
     if score >= 8:
         finding = f"{d} scores well on structure — the gap is in message-match. Your headline is probably written for people who already know what you do, not for the ad click that brought them there."
-        cta_line = f"One headline rewrite + CTA realignment. We implement it in 24h."
+        cta_line = "The $97 kit supplies one tailored headline or CTA change for you or your developer to apply."
     elif score >= 6:
         finding = f"The {d} audit flagged 2-3 fixable issues: first-screen proof positioning, CTA competition, and message-match with your ad creative. Any one of them is enough to tank a paid traffic campaign."
-        cta_line = f"We implement the top fix in 24h. Most clients see measurable lift within 2 weeks."
+        cta_line = "The $97 kit supplies one tailored change for the selected finding; the 30-day re-audit checks that condition."
     else:
         finding = f"{d} has a visible conversion leak on the first screen. Visitors arrive from ads, don't find confirmation that they're in the right place, and leave before the CTA. The page looks fine — the leak is in the sequence."
-        cta_line = f"The fix is specific and fast. We implement it in 24h."
+        cta_line = "The $97 kit turns one selected finding into a specific change you or your developer can apply."
 
     return f"""Hi,
 
@@ -447,7 +446,7 @@ def hot_lead_pitch_body(url, audit_score, audit_grade, checkout_url=None):
 
 {cta_line}
 
-$97 — self-serve checkout, no call needed:
+$97 self-implementation kit — run or reopen the audit to unlock eligible checkout:
 {pay_url}
 
 — Nebula"""

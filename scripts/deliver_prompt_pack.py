@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
-"""Deliver the full AI prompt pack to a paying customer.
+"""Deliver one tailored self-implementation kit to a paying customer.
 
 Triggered by the Stripe webhook (customer-portal/app/api/webhooks/stripe/route.ts)
 the moment a real checkout.session.completed event lands for the Fix Pack offer.
 
-The paid offer is: full 7-point audit + a complete set of AI prompts (one per
-weak dimension) tailored to the customer's actual page, for them to run
-through Claude/ChatGPT/their own developer. This script is what makes that
-claim true rather than just copy — it re-scrapes the real page, regenerates
-the full pack (audit_pipeline.prompts.generator.build_prompt_pack — the same
-generator that already produces the free teaser prompt), and emails it.
+The paid offer is one customer-implemented copy, code, or configuration change
+for the highest-impact failing signal. The script re-resolves the exact paid
+audit, re-scrapes its URL, generates candidate artifacts, selects the worst
+scoring signal, and emails that one bounded implementation kit.
 
 Usage: venv/bin/python3 scripts/deliver_prompt_pack.py \
   --email buyer@example.com --stripe-session-id cs_live_... \
@@ -60,7 +58,7 @@ def load_ledger_rows():
 
 def already_delivered(stripe_session_id, rows):
     return any(
-        r.get("event_type") == "prompt_pack_delivered"
+        r.get("event_type") in {"implementation_kit_delivered", "prompt_pack_delivered"}
         and r.get("stripe_session_id") == stripe_session_id
         for r in rows
     )
@@ -116,14 +114,14 @@ def update_hot_lead_stage(email, url):
     matched = False
     for lead in leads:
         if isinstance(lead, dict) and (lead.get("email") or "").lower() == email.lower():
-            lead["stage"] = "prompt_pack_delivered"
+            lead["stage"] = "implementation_kit_delivered"
             lead["status"] = "fulfilled"
             lead["action"] = "monitor_reply"
             lead["fulfilled_at"] = now
             matched = True
     if not matched:
         leads.append({
-            "email": email, "url": url, "stage": "prompt_pack_delivered",
+            "email": email, "url": url, "stage": "implementation_kit_delivered",
             "status": "fulfilled", "action": "monitor_reply", "fulfilled_at": now,
         })
     tmp = HOT_LEAD_PATH.with_suffix(".json.tmp")
@@ -132,17 +130,20 @@ def update_hot_lead_stage(email, url):
 
 
 def compose_email(url, pack, audit):
-    all_prompts = ([pack["teaser"]] if pack["teaser"] else []) + pack["full_pack"]
-    body = generate_prompt_pack_text(all_prompts)
+    selected = [pack["teaser"]] if pack["teaser"] else []
+    body = generate_prompt_pack_text(selected)
+    selected_label = pack["teaser"].get("label", "highest-impact finding") if pack["teaser"] else "highest-impact finding"
     intro = (
-        f"Here's your full prompt pack for {url}.\n\n"
+        f"Here's your One-Leak Self-Implementation Kit for {url}.\n\n"
         f"Overall score: {audit.get('overall')}/10 ({audit.get('overall_grade')})\n\n"
-        f"Paste each prompt below into Claude, ChatGPT, or Gemini (or hand this "
-        f"to your developer) — each one is built from what we actually found on "
-        f"your page, not a generic template.\n\n"
+        f"Selected finding: {selected_label}.\n\n"
+        f"Use the tailored artifact below yourself, in your CMS, or hand it to "
+        f"your developer. It is built from what the audit found on your page, "
+        f"not from a generic template. Re-run the same audit within 30 days to "
+        f"verify that page condition changed. This does not guarantee conversion lift.\n\n"
         f"{'=' * 40}\n\n"
     )
-    subject = f"Your prompt pack — {len(all_prompts)} fixes for {url}"
+    subject = f"Your One-Leak Self-Implementation Kit — {selected_label}"
     return subject, intro + body
 
 
@@ -161,7 +162,7 @@ def main():
 
     rows = load_ledger_rows()
     if already_delivered(stripe_session_id, rows):
-        log(f"{stripe_session_id} already has a prompt_pack_delivered record — skipping (idempotent)")
+        log(f"{stripe_session_id} already has a kit delivery record — skipping (idempotent)")
         return 0
 
     try:
@@ -189,7 +190,7 @@ def main():
         )
         return 1
 
-    log(f"building full prompt pack for {email} ({url})")
+    log(f"building self-implementation kit for {email} ({url})")
     try:
         page = scrape_page(url)
         audit = score_audit(page)
@@ -223,17 +224,18 @@ def main():
 
     append_ledger({
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "event_type": "prompt_pack_delivered",
+        "event_type": "implementation_kit_delivered",
         "stripe_session_id": stripe_session_id,
         "audit_id": audit_id,
         "email": email,
         "url": url,
-        "prompt_count": pack["count"],
+        "finding_count": 1,
+        "selected_finding": pack["teaser"].get("key") if pack["teaser"] else None,
         "message_id": sent.get("message_id"),
     })
     update_hot_lead_stage(email, url)
-    log(f"delivered {pack['count']} prompts to {email} for {url}")
-    telegram_notify(f"✅ Prompt pack delivered — {email} ({url}), {pack['count']} prompts")
+    log(f"delivered self-implementation kit to {email} for {url}")
+    telegram_notify(f"✅ Self-implementation kit delivered — {email} ({url})")
     return 0
 
 

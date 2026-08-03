@@ -2,9 +2,6 @@ import re
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parents[1]
-
-# Production systemd serves the Next.js application from customer-portal only.
-# Any new deployed content root must be added here so offer checks expand with deployment scope.
 DEPLOYED_CONTENT_ROOTS = (
     BASE / "customer-portal" / "app",
     BASE / "customer-portal" / "public",
@@ -50,26 +47,18 @@ def test_active_runtime_has_no_retired_fix_pack_payment_link():
     assert not failures, f"Retired Stripe link remains in: {failures}"
 
 
-def test_audit_results_page_has_only_the_canonical_fix_pack_offer():
+def test_audit_results_page_has_only_the_canonical_self_implementation_offer():
     page = BASE / "customer-portal" / "app" / "audit" / "[id]" / "results" / "ResultsClient.tsx"
     text = page.read_text()
     assert "Audit Lite" not in text
     assert "$7" not in text
     assert "$1,497" not in text
-    assert "$97 Fix Pack" in text
-    # 2026-07-24: rotated off plink_1TsYoeEINR1kU9chNMFuKhDu after discovering
-    # (via `stripe payment_links retrieve` against the live account) that its
-    # only price was actually $147 (price_1TsYoeEINR1kU9chokWZFetZ), not the
-    # $97 every LEGACY_OFFER_PATTERNS check above assumed the code enforced.
-    # That link is now deactivated in Stripe. This class of bug is invisible
-    # to this file by construction — it checks what the copy says, not what
-    # Stripe actually charges. See scripts/deliver_prompt_pack.py's sibling
-    # note; a periodic live-price check against the Stripe API, not another
-    # copy regex, is what would actually catch a repeat of this.
-    assert "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h" in text
+    assert "One-Leak Self-Implementation Kit" in text
+    assert "/checkout?audit_id=" in text
+    assert "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h" not in text
 
 
-def test_active_audit_emails_have_only_the_canonical_fix_pack_offer():
+def test_active_audit_emails_have_only_the_canonical_self_implementation_offer():
     delivery_surfaces = (
         BASE / "deliver_audit.py",
         BASE / "platform_api" / "services" / "email_service.py",
@@ -80,14 +69,6 @@ def test_active_audit_emails_have_only_the_canonical_fix_pack_offer():
         assert not re.search(r"\$147\b", text), path
         assert not re.search(r"\$7\b", text), path
         assert not re.search(r"\$1,?497\b", text), path
-        assert "$97 Fix Pack" in text, path
-        # 2026-07-24: rotated off plink_1TsYoeEINR1kU9chNMFuKhDu after discovering
-    # (via `stripe payment_links retrieve` against the live account) that its
-    # only price was actually $147 (price_1TsYoeEINR1kU9chokWZFetZ), not the
-    # $97 every LEGACY_OFFER_PATTERNS check above assumed the code enforced.
-    # That link is now deactivated in Stripe. This class of bug is invisible
-    # to this file by construction — it checks what the copy says, not what
-    # Stripe actually charges. See scripts/deliver_prompt_pack.py's sibling
-    # note; a periodic live-price check against the Stripe API, not another
-    # copy regex, is what would actually catch a repeat of this.
-    assert "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h" in text, path
+        assert "Self-Implementation Kit" in text or "self-implementation kit" in text, path
+        assert "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h" not in text, path
+        assert "https://nebulacomponents.com/audit" in text, path

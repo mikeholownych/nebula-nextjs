@@ -6,7 +6,7 @@ FastAPI routes for audit processing (called by n8n workflows)
 from fastapi import APIRouter, BackgroundTasks, HTTPException, Query
 from pydantic import BaseModel, HttpUrl
 from typing import Optional
-from uuid import UUID
+from uuid import UUID, uuid4
 import subprocess
 import json
 import sys
@@ -20,6 +20,7 @@ from platform_api.posthog_client import get_posthog
 from platform_api.services.email_service import email_service, AuditEmailData
 from platform_api.services.audit_db import audit_db
 from platform_api.services.analytics import analytics
+from platform_api.infra.circuit_breaker import CircuitBreaker, CircuitOpenError
 
 # Import track assignment trigger
 import sys
@@ -38,6 +39,8 @@ class AuditRequest(BaseModel):
     email: Optional[str] = None
     name: Optional[str] = None
     audit_id: Optional[str] = None
+    analytics_consent: bool = False
+    analytics_distinct_id: Optional[str] = None
 
 
 class AuditResponse(BaseModel):
@@ -59,21 +62,26 @@ class AuditResponse(BaseModel):
 async def run_audit(request: AuditRequest):
     """Run deliver_audit.py and return JSON results. Persist to DB."""
     try:
+        # Anonymous audits receive a unique non-deliverable identity so unrelated
+        # visitors never collapse into a shared customer or analytics person.
+        audit_email = request.email or f"anonymous+{uuid4()}@invalid.nebulacomponents.com"
         # Create audit record in DB
         audit_id = await audit_db.create_audit(
             url=request.url,
-            email=request.email or 'anonymous@example.com',
+            email=audit_email,
             name=request.name
         )
         
-        # Track audit started
-        await analytics.track_audit_started(
-            url=request.url,
-            email=request.email or 'anonymous'
-        )
+        # Track audit started only after explicit analytics consent. The ID is
+        # browser- or server-derived and must never be a raw email address.
+        if request.analytics_consent and request.analytics_distinct_id:
+            await analytics.track_audit_started(
+                url=request.url,
+                email=request.analytics_distinct_id,
+            )
         ph = get_posthog()
-        distinct_id = request.email or str(audit_id)
-        if ph:
+        distinct_id = request.analytics_distinct_id or str(audit_id)
+        if request.analytics_consent and request.analytics_distinct_id and ph:
             with new_context(client=ph):
                 identify_context(distinct_id)
                 ph.capture("audit_started", properties={"audit_id": str(audit_id)})
@@ -83,7 +91,7 @@ async def run_audit(request: AuditRequest):
             "/home/mike/nebula/venv/bin/python3",
             AUDIT_SCRIPT,
             request.url,
-            request.email or "placeholder@example.com",
+            audit_email,
             "--json",
             "--dry-run",
         ]
@@ -98,7 +106,7 @@ async def run_audit(request: AuditRequest):
         )
         
         if result.returncode != 0:
-            if ph:
+            if request.analytics_consent and request.analytics_distinct_id and ph:
                 with new_context(client=ph):
                     identify_context(distinct_id)
                     ph.capture("audit_failed", properties={"audit_id": str(audit_id), "reason": "script_error"})
@@ -118,7 +126,7 @@ async def run_audit(request: AuditRequest):
                 break
         
         if not json_line:
-            if ph:
+            if request.analytics_consent and request.analytics_distinct_id and ph:
                 with new_context(client=ph):
                     identify_context(distinct_id)
                     ph.capture("audit_failed", properties={"audit_id": str(audit_id), "reason": "no_json_output"})
@@ -159,13 +167,14 @@ async def run_audit(request: AuditRequest):
 
         asyncio.create_task(_fire_content_pipeline())
 
-        # Track audit completed
-        await analytics.track_audit_completed(
-            email=request.email or 'anonymous',
-            score=data.get('score', 0),
-            grade=data.get('grade', 'N/A')
-        )
-        if ph:
+        # Track audit completed only for the same consented pseudonymous journey.
+        if request.analytics_consent and request.analytics_distinct_id:
+            await analytics.track_audit_completed(
+                email=request.analytics_distinct_id,
+                score=data.get('score', 0),
+                grade=data.get('grade', 'N/A'),
+            )
+        if request.analytics_consent and request.analytics_distinct_id and ph:
             with new_context(client=ph):
                 identify_context(distinct_id)
                 ph.capture(
@@ -209,8 +218,8 @@ async def run_audit(request: AuditRequest):
         
     except subprocess.TimeoutExpired:
         ph = get_posthog()
-        if ph:
-            distinct_id = request.email or str(request.audit_id or "unknown")
+        if request.analytics_consent and request.analytics_distinct_id and ph:
+            distinct_id = request.analytics_distinct_id
             with new_context(client=ph):
                 identify_context(distinct_id)
                 ph.capture("audit_failed", properties={"reason": "timeout"})
@@ -222,8 +231,8 @@ async def run_audit(request: AuditRequest):
         )
     except json.JSONDecodeError:
         ph = get_posthog()
-        if ph:
-            distinct_id = request.email or str(request.audit_id or "unknown")
+        if request.analytics_consent and request.analytics_distinct_id and ph:
+            distinct_id = request.analytics_distinct_id
             with new_context(client=ph):
                 identify_context(distinct_id)
                 ph.capture("audit_failed", properties={"reason": "json_parse_error"})
@@ -765,7 +774,7 @@ async def _send_monitor_alert_email(email: str, url: str, status: str,
             f"Your Nebula monitor detected a change on {url}.\n\n"
             f"{summary}\n\n"
             f"Score: {round(prev_score)}/100 → {round(new_score)}/100\n\n"
-            f"View your workspace: https://nebulacomponents.shop/workspace\n\n"
+            f"View your workspace: https://nebulacomponents.com/workspace\n\n"
             f"— Nebula Components"
         )
         from agentmail_client import AgentMailClient
@@ -873,7 +882,9 @@ async def workspace_assistant(body: AssistantRequest):
             "If the answer requires audit data, tell me to run an audit first."
         )
 
-    try:
+    llm_breaker = CircuitBreaker("openrouter_assistant", failure_threshold=5, recovery_timeout_seconds=30)
+
+    async def call_llm():
         async with httpx.AsyncClient(timeout=12.0) as client:
             resp = await client.post(
                 "https://openrouter.ai/api/v1/chat/completions",
@@ -893,8 +904,13 @@ async def workspace_assistant(body: AssistantRequest):
             )
             resp.raise_for_status()
             data = resp.json()
-            answer = data["choices"][0]["message"]["content"]
-            return {"answer": answer}
+            return data["choices"][0]["message"]["content"]
+
+    try:
+        answer = await llm_breaker(call_llm)()
+        return {"answer": answer}
+    except CircuitOpenError:
+        raise HTTPException(status_code=503, detail="LLM temporarily unavailable — circuit open")
     except httpx.TimeoutException:
         raise HTTPException(status_code=504, detail="LLM timeout")
     except Exception as e:

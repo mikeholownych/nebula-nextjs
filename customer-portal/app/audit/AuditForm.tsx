@@ -111,6 +111,9 @@ function AuditFormContent() {
           <input
             id="url"
             type="url"
+            name="landing-page-url"
+            autoComplete="url"
+            required
             placeholder="https://yoursite.com/landing-page"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
@@ -121,10 +124,11 @@ function AuditFormContent() {
 
         <div>
           <label htmlFor="reason" className="mb-2 block text-sm font-medium text-fg-muted">
-            What made you run this audit today? <span className="text-fg-muted/60">(optional)</span>
+            What made you run this audit today? <span className="text-fg-muted">(optional)</span>
           </label>
           <textarea
             id="reason"
+            name="audit-reason"
             placeholder="e.g. ads aren't converting, launching next week, page feels off…"
             value={reason}
             onChange={(e) => setReason(e.target.value)}

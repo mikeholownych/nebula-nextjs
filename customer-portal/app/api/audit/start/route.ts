@@ -135,7 +135,9 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Audit start error:', error)
-    captureServerException(error, { route: 'POST /api/audit/start' })
+    if (hasServerAnalyticsConsent(request)) {
+      captureServerException(error, { route: 'POST /api/audit/start' })
+    }
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

@@ -71,6 +71,7 @@ const nextConfig: NextConfig = {
       // Legacy .html → current app routes (301)
       { source: '/blog-trigger-aware-outreach.html',    destination: '/learning-centre', permanent: true },
       { source: '/why-landing-pages-dont-convert.html', destination: '/learning-centre/landing-page-not-converting', permanent: true },
+      { source: '/why-landing-pages-dont-convert',      destination: '/learning-centre/landing-page-not-converting', permanent: true },
       { source: '/cta-optimization.html',               destination: '/cta-optimization',   permanent: true },
       { source: '/roas-cliff.html',                     destination: '/roas-cliff',          permanent: true },
       { source: '/ai-sdr-vs-audit.html',                destination: '/ai-sdr-vs-audit',     permanent: true },

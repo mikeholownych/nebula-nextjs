@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Card } from '@/components/ui'
 import posthog from '@/app/lib/posthog-browser'
+import { analyticsHeaders } from '@/app/lib/client-analytics'
 import { parseAuditResult, type AuditResult, type Finding } from './auditResultSchema'
 import { getDisease, diseaseTierClass, complexityBadge, extractSerpData } from './diseases'
 import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
@@ -677,7 +678,6 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
     setSendingEmail(true)
     setEmailError(null)
 
-    posthog.identify(emailForm.email, { name: emailForm.name || undefined })
     posthog.capture('audit_email_submitted', { audit_id: auditId, source: 'results_page', has_name: Boolean(emailForm.name) })
 
     try {
@@ -685,8 +685,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-POSTHOG-DISTINCT-ID': posthog.get_distinct_id() ?? '',
-          'X-POSTHOG-SESSION-ID': posthog.get_session_id() ?? '',
+          ...analyticsHeaders(),
         },
         body: JSON.stringify({
           audit_id: auditId,
@@ -703,14 +702,9 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
 
       setEmailSent(data.email_sent === true)
       setUnlocked(true)
-
-      // Fire-and-forget: link this email to the audit so anonymous audits
-      // are claimed the moment the visitor enters their address.
-      fetch('/api/audit/claim', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ audit_id: auditId, email: emailForm.email }),
-      }).catch(() => {/* non-fatal */})
+      if (typeof data.analytics_person_id === 'string') {
+        posthog.identify(data.analytics_person_id)
+      }
     } catch (err) {
       setEmailError(err instanceof Error ? err.message : 'Something went wrong')
     } finally {

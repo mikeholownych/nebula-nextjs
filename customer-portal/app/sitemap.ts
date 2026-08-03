@@ -2,6 +2,8 @@ import { MetadataRoute } from 'next'
 import { getPublishedCaseStudies } from '@/app/lib/public-facts'
 import { getPublishedCitableRoutes } from '@/app/resources/citable/content'
 import { getArticles } from './learning-centre/lib/getArticles'
+import { TEARDOWNS } from './teardowns/[slug]/data'
+import { COMPARISONS } from './vs/[slug]/data'
 
 export const dynamic = 'force-dynamic'
 
@@ -50,6 +52,12 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
       '/what-is-landing-page-audit',
       '/workspace',
       '/playbooks',
+      '/benchmarks',
+      '/brand',
+      '/lab',
+      '/press',
+      '/teardowns',
+      '/vs',
     ],
     priority: 0.7,
   },
@@ -106,7 +114,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route.kind === 'overview' ? 0.8 : 0.7,
   }))
 
+  const teardownEntries: MetadataRoute.Sitemap = Object.keys(TEARDOWNS).sort().map((slug) => ({
+    url: `${BASE_URL}/teardowns/${slug}`,
+    changeFrequency: 'yearly',
+    priority: 0.7,
+  }))
+
+  const comparisonEntries: MetadataRoute.Sitemap = Object.keys(COMPARISONS).sort().map((slug) => ({
+    url: `${BASE_URL}/vs/${slug}`,
+    changeFrequency: 'yearly',
+    priority: 0.6,
+  }))
+
   // lastModified is intentionally omitted until each content object has a
   // truthful, durable publication/update timestamp. Build time is not freshness.
-  return [homeEntry, ...coreEntries, ...articleEntries, ...playbookEntries, ...caseStudyEntries, ...citableEntries]
+  return [homeEntry, ...coreEntries, ...articleEntries, ...playbookEntries, ...caseStudyEntries, ...citableEntries, ...teardownEntries, ...comparisonEntries]
 }

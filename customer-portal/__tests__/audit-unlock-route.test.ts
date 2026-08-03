@@ -41,6 +41,7 @@ describe('POST /api/audit/unlock delivery truthfulness', () => {
   it('unlocks but reports email_sent=false when delivery is unconfirmed', async () => {
     jest.spyOn(global, 'fetch')
       .mockResolvedValueOnce(Response.json(audit))
+      .mockResolvedValueOnce(Response.json({ success: true }))
       .mockResolvedValueOnce(Response.json({ status: 'failed', error: 'release_blocked' }))
 
     const response = await POST(request())
@@ -54,6 +55,7 @@ describe('POST /api/audit/unlock delivery truthfulness', () => {
   it('reports email_sent=true only with explicit sent status and receipt', async () => {
     jest.spyOn(global, 'fetch')
       .mockResolvedValueOnce(Response.json(audit))
+      .mockResolvedValueOnce(Response.json({ success: true }))
       .mockResolvedValueOnce(Response.json({ status: 'sent', message_id: 'msg-123' }))
 
     const response = await POST(request())
@@ -66,6 +68,7 @@ describe('POST /api/audit/unlock delivery truthfulness', () => {
   it('makes the signed audit identity available to checkout', async () => {
     jest.spyOn(global, 'fetch')
       .mockResolvedValueOnce(Response.json(audit))
+      .mockResolvedValueOnce(Response.json({ success: true }))
       .mockResolvedValueOnce(Response.json({ status: 'sent', message_id: 'msg-123' }))
 
     const response = await POST(request())

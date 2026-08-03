@@ -44,7 +44,7 @@ class DeliverPromptPackTests(unittest.TestCase):
 
     def test_already_delivered_keys_on_stripe_session_not_email(self):
         rows = [{
-            "event_type": "prompt_pack_delivered",
+            "event_type": "implementation_kit_delivered",
             "email": "Buyer@Example.com",
             "stripe_session_id": "cs_first",
         }]
@@ -77,7 +77,7 @@ class DeliverPromptPackTests(unittest.TestCase):
 
     def test_main_is_idempotent_on_repeat_delivery(self):
         rows = [{
-            "event_type": "prompt_pack_delivered",
+            "event_type": "implementation_kit_delivered",
             "email": "different@example.com",
             "stripe_session_id": "cs_test",
         }]
@@ -130,9 +130,9 @@ class DeliverPromptPackTests(unittest.TestCase):
 
             self.assertEqual(rc, 0)
             ledger_row = json.loads(ledger_path.read_text().splitlines()[-1])
-            self.assertEqual(ledger_row["event_type"], "prompt_pack_delivered")
+            self.assertEqual(ledger_row["event_type"], "implementation_kit_delivered")
             self.assertEqual(ledger_row["stripe_session_id"], "cs_test")
-            self.assertEqual(ledger_row["prompt_count"], 2)
+            self.assertEqual(ledger_row["finding_count"], 1)
             self.assertEqual(ledger_row["message_id"], "msg_123")
             mock_send.assert_called_once_with(
                 to="buyer@example.com",
@@ -142,10 +142,13 @@ class DeliverPromptPackTests(unittest.TestCase):
             )
 
             hot_leads = json.loads(hot_lead_path.read_text())
-            self.assertEqual(hot_leads[0]["stage"], "prompt_pack_delivered")
+            self.assertEqual(hot_leads[0]["stage"], "implementation_kit_delivered")
             self.assertEqual(hot_leads[0]["status"], "fulfilled")
             mock_notify.assert_called_once()
-            self.assertIn("Prompt pack delivered", mock_notify.call_args[0][0])
+            self.assertIn("Self-implementation kit delivered", mock_notify.call_args[0][0])
+            sent_body = mock_send.call_args.kwargs["body"]
+            self.assertIn("teaser prompt", sent_body)
+            self.assertNotIn("second prompt", sent_body)
 
 
 if __name__ == "__main__":

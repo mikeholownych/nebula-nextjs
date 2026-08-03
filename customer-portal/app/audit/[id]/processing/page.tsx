@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { Card } from '@/components/ui'
 import { pushWithViewTransition } from '../../_lib/view-transition'
 import posthog from '@/app/lib/posthog-browser'
+import { analyticsHeaders } from '@/app/lib/client-analytics'
 
 const STATUS_MESSAGES = [
   { message: 'Scanning page structure...', duration: 2000 },
@@ -70,7 +71,6 @@ export default function ProcessingPage() {
     setSubmitting(true)
     setSubmitError(null)
 
-    posthog.identify(email, { name: name || undefined })
     posthog.capture('audit_email_submitted', { audit_id: auditId, has_name: Boolean(name) })
 
     try {
@@ -78,15 +78,17 @@ export default function ProcessingPage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-POSTHOG-DISTINCT-ID': posthog.get_distinct_id() ?? '',
-          'X-POSTHOG-SESSION-ID': posthog.get_session_id() ?? '',
+          ...analyticsHeaders(),
         },
         body: JSON.stringify({ audit_id: auditId, email, name: name || undefined }),
       })
 
+      const data = await res.json().catch(() => ({}))
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}))
         throw new Error(data.error ?? 'Could not unlock results')
+      }
+      if (typeof data.analytics_person_id === 'string') {
+        posthog.identify(data.analytics_person_id)
       }
 
       // Cookie is now set — redirect to results page (no ?unlocked query param needed)

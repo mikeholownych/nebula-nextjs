@@ -55,6 +55,8 @@ function makeSession(overrides: Record<string, unknown> = {}) {
     metadata: {
       offer_key: 'fix-pack',
       audit_id: '123e4567-e89b-12d3-a456-426614174000',
+      analytics_consent: 'all',
+      analytics_person_id: `person_${'a'.repeat(32)}`,
     },
     ...overrides,
   }

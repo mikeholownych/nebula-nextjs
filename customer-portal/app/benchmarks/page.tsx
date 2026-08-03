@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: 'Landing Page Benchmarks — Real Audit Data | Nebula',
   description:
     'Per-component failure benchmarks from completed landing page audits. Empty states are shown until a verified dataset exists.',
+  alternates: { canonical: '/benchmarks' },
 }
 
 export default function BenchmarksPage() {

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import posthog from '@/app/lib/posthog-browser'
+import { analyticsHeaders } from '@/app/lib/client-analytics'
 
 interface Props {
   auditId: string
@@ -45,7 +46,7 @@ export default function CheckoutCTAButton({ auditId, endpoint, offerKey }: Props
     try {
       const response = await fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...analyticsHeaders() },
         body: JSON.stringify({ auditId, offerKey }),
       })
       const result: unknown = await response.json()

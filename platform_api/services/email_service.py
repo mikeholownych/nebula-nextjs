@@ -58,22 +58,22 @@ class EmailService:
             {findings_html}
             
             <div style="background: #f5f5f5; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
-                <h3 style="margin-top: 0;">Ready to fix these issues?</h3>
-                <p><strong>$97 Fix Pack</strong> — implementation of the highest-impact conversion fixes.</p>
+                <h3 style="margin-top: 0;">Want one implementation-ready change?</h3>
+                <p><strong>$97 One-Leak Self-Implementation Kit</strong> — one tailored change for one selected finding. You or your developer applies it; no site access or conversion-lift guarantee.</p>
                 <p style="margin-bottom: 0;">
-                    <a href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h" style="color: #667eea;">Get the $97 Fix Pack →</a>
+                    <a href="https://nebulacomponents.com/audit" style="color: #667eea;">Open the audit to unlock eligible checkout →</a>
                 </p>
             </div>
             
             <p style="color: #666; font-size: 0.9rem;">
                 Want the full report with all {len(data.findings)} findings? 
-                <a href="https://nebulacomponents.shop/audit" style="color: #667eea;">Run another audit</a>
+                <a href="https://nebulacomponents.com/audit" style="color: #667eea;">Run another audit</a>
             </p>
             
             <hr style="border: none; border-top: 1px solid #eee; margin: 2rem 0;">
             <p style="color: #999; font-size: 0.85rem;">
                 Nebula Components — Conversion optimization for founders wasting money on ads.<br>
-                <a href="https://nebulacomponents.shop" style="color: #999;">nebulacomponents.shop</a>
+                <a href="https://nebulacomponents.com" style="color: #999;">nebulacomponents.com</a>
             </p>
         </body>
         </html>
@@ -88,10 +88,10 @@ Score: {data.score:.1f}/10 (Grade: {data.grade})
 Top Prioritized Fixes:
 {chr(10).join([f"- {f.get('label', f.get('key'))}: {f.get('issue', '')}" for f in data.findings[:3]])}
 
-Ready to fix these?
-- $97 Fix Pack — implementation of the highest-impact conversion fixes
+Want one implementation-ready change?
+- $97 One-Leak Self-Implementation Kit — one tailored change for one selected finding. You or your developer applies it. No site access or conversion-lift guarantee.
 
-Get started: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
+Open the audit to unlock eligible checkout: https://nebulacomponents.com/audit
 
 --
 Nebula Components — Conversion optimization for founders

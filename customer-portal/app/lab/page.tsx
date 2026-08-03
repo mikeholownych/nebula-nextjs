@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: 'Component Lab — Check Your Headline, CTA & Message Match | Nebula',
   description:
     'Three evidence-backed component checks: message match, headline, and CTA. Paste your ad copy and page URL — get status, evidence, and the pass standard for...',
+  alternates: { canonical: '/lab' },
 }
 
 export default function LabPage() {
