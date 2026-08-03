@@ -143,9 +143,10 @@ export default function Home() {
                 is the instrument that finds them.
               </p>
               <p className="mt-4 text-base text-fg-muted leading-7">
-                Our live self-scan scores a B. Not perfect — that&apos;s intentional. Most tools lead
-                with case studies they can&apos;t verify. We&apos;d rather show you the actual data on our
-                own page first. Every signal. Every evidence atom. The same output you get.
+                Our live self-scan — the widget above — scores a B. Not perfect, and that&apos;s
+                intentional. Most tools lead with case studies they can&apos;t verify. We&apos;d rather
+                show you the actual data on our own page first. Every signal. Every evidence
+                atom. The same output you get.
               </p>
               <p className="mt-4 text-sm text-fg-muted">
                 When we have a real client outcome with dates, proof, and a way for you to verify it, it goes here.
@@ -153,7 +154,7 @@ export default function Home() {
             </div>
             <div className="rounded-2xl border border-border bg-bg-muted/30 p-6 font-mono text-sm">
               <p className="mb-4 text-xs text-fg-muted">
-                Illustrative audit snapshot — not current evidence
+                Sample output format — not our live score
               </p>
               {SIGNALS.map((s) => (
                 <div key={s.key} className="mb-2 flex items-center justify-between text-xs">
@@ -162,7 +163,7 @@ export default function Home() {
                 </div>
               ))}
               <div className="mt-3 border-t border-border pt-3 text-xs text-fg-muted">
-                Grade B shown for explanation only; verify the live page with a fresh audit.
+                Static example only — scores here are fictional. The live score is the widget above.
               </div>
             </div>
           </div>
