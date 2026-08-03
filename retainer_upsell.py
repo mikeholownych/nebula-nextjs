@@ -6,11 +6,14 @@ Sends the canonical $1,497/mo AI Ops Retainer offer to qualified audit recipient
 Run via cron every 6h. Each eligible lead gets ONE upsell, then marked done.
 
 Eligibility:
-  - stage = audit_delivered
-  - audit_delivered_at is 24–72h ago
+  - stage is audit_delivered or pitch_sent
+  - pitch_sent_at is at least 14 days ago
   - paid_at IS NULL
   - bounced_at IS NULL
   - upsell_sent_at IS NULL (custom column, added on first run)
+
+The retainer is a delayed follow-on offer. It must never be sent immediately
+after audit delivery or in the same short window as the initial pitch.
 """
 
 import json
@@ -23,6 +26,7 @@ DB_PATH   = Path("/home/mike/nebula/lead_state.db")
 LOG_FILE  = Path("/home/mike/nebula/logs/retainer_upsell.log")
 INBOX = "nebulashop@agentmail.to"
 STRIPE_RETAINER_URL = "https://buy.stripe.com/00w5kD1nK0wkaa573A43S0c"
+MIN_POST_PITCH_DAYS = 14
 
 logging.basicConfig(
     level=logging.INFO,
@@ -69,21 +73,21 @@ def ensure_upsell_column(conn):
 
 def get_eligible_leads(conn) -> list[dict]:
     now = datetime.now(timezone.utc)
-    cutoff_min = (now - timedelta(hours=72)).isoformat()
-    cutoff_max = (now - timedelta(hours=24)).isoformat()
+    pitch_cutoff = (now - timedelta(days=MIN_POST_PITCH_DAYS)).isoformat()
 
     rows = conn.execute("""
-        SELECT email, url, audit_delivered_at
+        SELECT email, url, audit_delivered_at, pitch_sent_at
         FROM leads
-        WHERE stage = 'audit_delivered'
-          AND audit_delivered_at >= ?
-          AND audit_delivered_at <= ?
+        WHERE stage IN ('audit_delivered', 'pitch_sent')
+          AND pitch_sent_at IS NOT NULL
+          AND pitch_sent_at <= ?
           AND paid_at IS NULL
           AND bounced_at IS NULL
           AND upsell_sent_at IS NULL
-    """, (cutoff_min, cutoff_max)).fetchall()
+    """, (pitch_cutoff,)).fetchall()
 
-    return [{"email": r[0], "url": r[1], "audit_delivered_at": r[2]} for r in rows]
+    return [{"email": r[0], "url": r[1], "audit_delivered_at": r[2],
+             "pitch_sent_at": r[3]} for r in rows]
 
 
 def send_upsell(to: str, domain: str) -> bool:
