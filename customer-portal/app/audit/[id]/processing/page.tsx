@@ -115,13 +115,28 @@ export default function ProcessingPage() {
   // route straight to the full report. If unlock fails, fall back to the form.
   useEffect(() => {
     if (status !== 'ready' || autoUnlocking) return
-    const wsEmail = window.localStorage.getItem('nebula_ws_email')
-    if (!wsEmail) return
-    setAutoUnlocking(true)
-    ;(async () => {
-      const ok = await doUnlock(wsEmail)
-      if (!ok) setAutoUnlocking(false)
-    })()
+
+    // Resolve identity from the server-validated session, not localStorage.
+    // localStorage identity state is not authoritative and is absent for
+    // workspace users who never visited the Lab page.
+    let cancelled = false
+    fetch('/api/auth/me', { cache: 'no-store' })
+      .then(async (response) => {
+        if (!response.ok) return null
+        const user = await response.json()
+        return typeof user?.email === 'string' ? user.email : null
+      })
+      .then((wsEmail) => {
+        if (cancelled || !wsEmail) return
+        setAutoUnlocking(true)
+        void doUnlock(wsEmail).then((ok) => {
+          if (!ok) setAutoUnlocking(false)
+        })
+      })
+      .catch(() => undefined)
+    return () => {
+      cancelled = true
+    }
   }, [status])
 
   return (

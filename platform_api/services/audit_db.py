@@ -15,8 +15,11 @@ class AuditDB:
     """PostgreSQL database service for audit records"""
     
     def __init__(self):
+        # Audit pipeline has its own dedicated database. It must NOT inherit
+        # the platform DATABASE_URL (which points at nebula_platform for the
+        # auth tables). Use AUDIT_DATABASE_URL when set, else the default.
         self.db_url = os.getenv(
-            "DATABASE_URL",
+            "AUDIT_DATABASE_URL",
             "postgresql://postgres@/nebula_audit?host=/var/run/postgresql&port=5433"
         )
         self.pool = None

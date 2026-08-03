@@ -28,6 +28,13 @@ class Settings(BaseSettings):
     # Google OAuth
     GOOGLE_CLIENT_ID: Optional[str] = None
     GOOGLE_CLIENT_SECRET: Optional[str] = None
+
+    # GitHub OAuth
+    GITHUB_CLIENT_ID: Optional[str] = None
+    GITHUB_CLIENT_SECRET: Optional[str] = None
+
+    # Public-facing base URL (used for OAuth redirect URIs)
+    PUBLIC_BASE_URL: str = "https://nebulacomponents.com"
     
     # JWT
     SECRET_KEY: Optional[str] = None
@@ -63,6 +70,9 @@ class Settings(BaseSettings):
     model_config = {
         "env_file": ".env",
         "case_sensitive": False,
+        # The shared .env also carries frontend-only vars (NEXT_PUBLIC_*) —
+        # the API must tolerate them rather than crash at startup.
+        "extra": "ignore",
     }
     
     @field_validator("DATABASE_URL")
