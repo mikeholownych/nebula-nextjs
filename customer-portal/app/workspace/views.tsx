@@ -92,7 +92,8 @@ export function DashboardView({ audits, latestDetail }: { audits: WorkspaceAudit
   const previous = sorted[1]
   const delta = useMemo(() => {
     if (!latest || !previous || pathKey(latest.url) !== pathKey(previous.url)) return null
-    return Math.round((scoreOf(latest) - scoreOf(previous)) * 10) / 10
+    // Scores are 0–10 internally; display deltas in /100 units to match the card value
+    return Math.round((scoreOf(latest) - scoreOf(previous)) * 10)
   }, [latest, previous])
   const trendPoints = useMemo(() => {
     if (!latest) return []
@@ -117,7 +118,7 @@ export function DashboardView({ audits, latestDetail }: { audits: WorkspaceAudit
   return (
     <div className="space-y-6">
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <MetricCard label="Latest score" value={`${Math.round(scoreOf(latest) * 10)}/100`} detail={delta === null ? 'Baseline established' : `${delta >= 0 ? '+' : ''}${delta.toFixed(1)} since last audit`} tone={delta !== null && delta < 0 ? 'red' : 'dark'} />
+        <MetricCard label="Latest score" value={`${Math.round(scoreOf(latest) * 10)}/100`} detail={delta === null ? 'Baseline established' : `${scoreOf(latest).toFixed(1)}/10 · ${delta >= 0 ? '+' : ''}${Number.isInteger(delta) ? delta : delta.toFixed(1)} since last audit`} tone={delta !== null && delta < 0 ? 'red' : 'dark'} />
         <MetricCard label="Critical findings" value={String(counts.critical)} detail={`${counts.warning} warnings · ${counts.advisory} advisory`} tone={counts.critical > 0 ? 'red' : 'dark'} />
         <MetricCard label="Audited pages" value={String(auditedPages)} detail={`${audits.length} total audit versions`} tone="dark" />
         <MetricCard label="Last audit" value={fmtDate(latest.completed_at || latest.created_at)} detail={latest.grade ? `Grade ${latest.grade}` : 'Completed'} tone="dark" />
@@ -137,7 +138,7 @@ export function DashboardView({ audits, latestDetail }: { audits: WorkspaceAudit
             <div>
               <span className="text-6xl font-semibold tracking-[-0.06em] text-fg">{Math.round(scoreOf(latest) * 10)}</span><span className="ml-1 text-sm text-fg-dim">/100</span>
             </div>
-            {delta !== null && <span className={`mb-2 rounded-full px-2.5 py-1 text-xs font-semibold ${delta >= 0 ? 'bg-[#e7f4eb] text-[#28733e]' : 'bg-[#fbe8e7] text-[#a43a35]'}`}>{delta >= 0 ? '↑' : '↓'} {Math.abs(delta).toFixed(1)} pts</span>}
+            {delta !== null && <span className={`mb-2 rounded-full px-2.5 py-1 text-xs font-semibold ${delta >= 0 ? 'bg-[#e7f4eb] text-[#28733e]' : 'bg-[#fbe8e7] text-[#a43a35]'}`}>{delta >= 0 ? '↑' : '↓'} {Number.isInteger(delta) ? Math.abs(delta) : Math.abs(delta).toFixed(1)} pts</span>}
           </div>
           {trendPoints.length >= 2 ? <div className="mt-6"><Sparkline points={trendPoints} width={560} height={92} /><p className="mt-2 text-xs text-fg-dim">Score history · {trendPoints.length} audits on this page</p></div> : <div className="mt-6 rounded-xl bg-bg px-4 py-3 text-xs text-fg-muted">Run another audit on this page to create a measured trend.</div>}
         </section>

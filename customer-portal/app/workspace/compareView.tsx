@@ -55,6 +55,13 @@ function severityRank(s: Severity): number {
   return s === 'critical' ? 3 : s === 'warning' ? 2 : s === 'advisory' ? 1 : 0
 }
 
+// Finding keys belong to a canonical signal group; render the group label so the
+// Findings list and the Components grid never disagree about what a signal is called.
+function groupLabelForFinding(f: AuditFinding): string {
+  const group = SIGNAL_GROUPS.find((g) => g.keys.includes(f.key))
+  return group ? group.label : f.label
+}
+
 function movementText(before: Severity, after: Severity): { label: string; tone: 'good' | 'bad' | 'neutral' } | null {
   const diff = severityRank(after) - severityRank(before)
   if (diff === 0) return null
@@ -262,7 +269,7 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
                   {delta > 0 ? '+' : ''}
                   {Number.isInteger(delta) ? delta : delta.toFixed(1)}
                 </p>
-                <p className="text-xs text-fg-dim mt-1">score movement</p>
+                <p className="text-xs text-fg-dim mt-1">score movement · 0–10 scale shown ×10</p>
                 {samePage ? (
                   <p className="text-xs text-accent/80 mt-1">same page</p>
                 ) : (
@@ -349,7 +356,7 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
               {findingDiff.fixed.map((f) => (
                 <li key={`fixed-${f.key}`} className="flex items-center justify-between rounded-lg border border-accent/20 bg-accent/5 px-4 py-2.5">
                   <div>
-                    <p className="text-sm text-fg">{f.label}</p>
+                    <p className="text-sm text-fg">{groupLabelForFinding(f)}</p>
                     <p className="text-xs text-fg-dim">was impact {f.impact.toFixed(1)}</p>
                   </div>
                   <span className="text-xs text-accent">✓ no longer flagged</span>
@@ -368,7 +375,7 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
               {findingDiff.fresh.map((f) => (
                 <li key={`fresh-${f.key}`} className="flex items-center justify-between rounded-lg border border-red-900/40 bg-danger-dim px-4 py-2.5">
                   <div>
-                    <p className="text-sm text-fg">{f.label}</p>
+                    <p className="text-sm text-fg">{groupLabelForFinding(f)}</p>
                     <p className="text-xs text-fg-dim">impact {f.impact.toFixed(1)} · {f.quadrant?.replace(/_/g, ' ') || ''}</p>
                   </div>
                   <span className="text-xs text-danger">new</span>
@@ -387,7 +394,7 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
               {findingDiff.worsened.map((f) => (
                 <li key={`worsened-${f.key}`} className="flex items-center justify-between rounded-lg border border-signal-fail/20 bg-signal-fail/5 px-4 py-2.5">
                   <div>
-                    <p className="text-sm text-fg">{f.label}</p>
+                    <p className="text-sm text-fg">{groupLabelForFinding(f)}</p>
                     <p className="text-xs text-fg-dim">impact {f.impact.toFixed(1)} · {f.quadrant?.replace(/_/g, ' ') || ''}</p>
                   </div>
                   <span className="text-xs text-signal-fail">regressed</span>
@@ -406,7 +413,7 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
               {findingDiff.improved.map((f) => (
                 <li key={`improved-${f.key}`} className="flex items-center justify-between rounded-lg border border-border bg-bg-panel px-4 py-2.5">
                   <div>
-                    <p className="text-sm text-fg">{f.label}</p>
+                    <p className="text-sm text-fg">{groupLabelForFinding(f)}</p>
                     <p className="text-xs text-fg-dim">impact {f.impact.toFixed(1)} · {f.quadrant?.replace(/_/g, ' ') || ''}</p>
                   </div>
                   <span className="text-xs text-accent">lower impact</span>
@@ -425,7 +432,7 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
               {findingDiff.unchanged.map((f) => (
                 <li key={`unchanged-${f.key}`} className="flex items-center justify-between rounded-lg border border-border bg-bg-panel/60 px-4 py-2.5">
                   <div>
-                    <p className="text-sm text-fg-muted">{f.label}</p>
+                    <p className="text-sm text-fg-muted">{groupLabelForFinding(f)}</p>
                     <p className="text-xs text-fg-dim">impact {f.impact.toFixed(1)} · {f.quadrant?.replace(/_/g, ' ') || ''}</p>
                   </div>
                   <span className="text-xs text-fg-dim">no change</span>

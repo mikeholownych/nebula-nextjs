@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import type { WorkspaceAudit } from './WorkspaceClient'
+import { SIGNAL_GROUPS } from '../audit/[id]/results/reportArchitecture'
 
 interface Finding {
   key: string
@@ -29,6 +30,13 @@ interface AuditDetail {
 function fmtDate(iso?: string | null): string {
   if (!iso) return '—'
   return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+}
+
+// Finding keys belong to a canonical signal group; render the group label so the
+// report and the signal framework never disagree about what a finding is called.
+function groupLabelForFinding(f: Finding): string {
+  const group = SIGNAL_GROUPS.find((g) => g.keys.includes(f.key))
+  return group ? group.label : f.label
 }
 
 function impactLabel(impact: number): { label: string; cls: string } {
@@ -179,7 +187,7 @@ export default function ReportView({ audits }: { audits: WorkspaceAudit[] }) {
                         <p className="text-xs text-fg-dim print:text-fg-dim uppercase tracking-widest mb-0.5">
                           Finding {i + 1}
                         </p>
-                        <h3 className="font-bold text-fg print:text-bg">{f.label}</h3>
+                        <h3 className="font-bold text-fg print:text-bg">{groupLabelForFinding(f)}</h3>
                       </div>
                       <span className={`shrink-0 rounded-full border px-2.5 py-0.5 text-xs font-semibold ${tone.cls}`}>
                         {tone.label} · {f.impact}/10
