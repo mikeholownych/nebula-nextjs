@@ -24,7 +24,7 @@ NEBULA_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(NEBULA_DIR))
 
 from deliver_audit import scrape_page, score_audit, send_via_agentmail, HOT_LEAD_PATH  # noqa: E402
-from audit_pipeline.prompts.generator import build_prompt_pack, generate_prompt_pack_text  # noqa: E402
+from audit_pipeline.prompts.real_generator import generate_real_pack  # noqa: E402
 
 LEDGER_FILE = NEBULA_DIR / "ledgers" / "customer-ledger.jsonl"
 TELEGRAM_TARGET = "telegram:5920497760"
@@ -130,21 +130,40 @@ def update_hot_lead_stage(email, url):
 
 
 def compose_email(url, pack, audit):
-    selected = [pack["teaser"]] if pack["teaser"] else []
-    body = generate_prompt_pack_text(selected)
-    selected_label = pack["teaser"].get("label", "highest-impact finding") if pack["teaser"] else "highest-impact finding"
+    teaser = pack["teaser"] if pack else None
+    if not teaser:
+        return "Your One-Leak Self-Implementation Kit", (
+            f"Here's your One-Leak Self-Implementation Kit for {url}.\n\n"
+            "We could not generate a kit for this audit. You will be contacted "
+            "shortly with a manual fix.\n"
+        )
+
+    selected_label = teaser.get("label") or teaser.get("title") or "highest-impact finding"
+    prompt_md = teaser.get("prompt_md", "")
+    generated_note = "" if pack.get("llm_generated") else (
+        "\n\nNote: prompt generation was unavailable, so this is the standard "
+        "template. It still contains the real page context above the blanks.\n"
+    )
+
     intro = (
         f"Here's your One-Leak Self-Implementation Kit for {url}.\n\n"
         f"Overall score: {audit.get('overall')}/10 ({audit.get('overall_grade')})\n\n"
         f"Selected finding: {selected_label}.\n\n"
-        f"Use the tailored artifact below yourself, in your CMS, or hand it to "
-        f"your developer. It is built from what the audit found on your page, "
-        f"not from a generic template. Re-run the same audit within 30 days to "
-        f"verify that page condition changed. This does not guarantee conversion lift.\n\n"
+        f"Run the prompt below in your terminal agent (Claude Code, Cursor, "
+        f"Codex, or any coding agent with terminal + file access in your "
+        f"repository). It is already filled in with what the audit found on "
+        f"your page — your real headline, real CTA, real platform — and it "
+        f"tells the agent exactly what to change, which files to touch, and "
+        f"how to verify the fix. Where a fact can only come from you (a real "
+        f"customer name, an exact review count), the agent will ask for it "
+        f"before proceeding.\n\n"
+        f"Run the same audit again within 30 days to verify the condition "
+        f"changed. This does not guarantee conversion lift.\n\n"
         f"{'=' * 40}\n\n"
     )
+    body = intro + prompt_md + generated_note
     subject = f"Your One-Leak Self-Implementation Kit — {selected_label}"
-    return subject, intro + body
+    return subject, body
 
 
 def main():
@@ -194,7 +213,7 @@ def main():
     try:
         page = scrape_page(url)
         audit = score_audit(page)
-        pack = build_prompt_pack(audit, page, email=email, stated_goal="conversions")
+        pack = generate_real_pack(audit, page, email=email, stated_goal="conversions")
     except Exception as e:
         log(f"failed to build prompt pack: {e}")
         telegram_notify(f"⚠️ Prompt pack purchase from {email} ({url}) — pack generation failed: {e}. Needs manual follow-up.")

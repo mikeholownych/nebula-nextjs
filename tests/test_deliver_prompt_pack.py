@@ -123,7 +123,7 @@ class DeliverPromptPackTests(unittest.TestCase):
                      patch.object(dpp, "fetch_audited_url", return_value="https://lead.example"), \
                      patch.object(dpp, "scrape_page", return_value={"url": "https://lead.example"}), \
                      patch.object(dpp, "score_audit", return_value={"overall": 7.0, "overall_grade": "B", "dimensions": {}}), \
-                     patch.object(dpp, "build_prompt_pack", return_value=fake_pack), \
+                     patch.object(dpp, "generate_real_pack", return_value=fake_pack), \
                      patch.object(dpp, "send_via_agentmail", return_value={"ok": True, "message_id": "msg_123"}) as mock_send, \
                      patch.object(dpp, "telegram_notify") as mock_notify:
                     rc = dpp.main()

@@ -55,23 +55,26 @@ class AuditConversionCtaTests(unittest.TestCase):
         text = email["text"].lower()
         html = email["html"].lower()
 
-        self.assertIn("$97 fix pack", text)
+        # Current offer copy: $97 One-Leak Self-Implementation Kit (self-serve,
+        # delivered by email after Stripe payment, one free re-audit in 30 days)
+        self.assertIn("$97 one-leak self-implementation kit", text)
         self.assertNotIn("$147", text)
-        self.assertIn("https://buy.stripe.com/5kqbj1eawdj6eql1jg43s0h", text)
-        self.assertIn("24h", text)
-        self.assertIn("one-click checkout", text)
+        self.assertNotIn("$97 fix pack", text)  # old offer naming, no longer used
+        self.assertIn("run or reopen the audit to unlock eligible checkout", text)
+        self.assertIn("sent by email after stripe confirms payment", text)
+        self.assertIn("we never ask for access to your site, cms, or hosting", text)
+        self.assertIn("one free re-audit within 30 days", text)
         self.assertNotIn("delivered in 48h", text)
-        self.assertIn("24h", html)
 
     def test_audit_email_sells_specific_scope_not_generic_fixes(self):
         email = self.sample_email()
         text = email["text"].lower()
 
-        self.assertIn("$97 fix pack", text)
+        self.assertIn("$97 one-leak self-implementation kit", text)
         self.assertNotIn("$147", text)
-        self.assertIn("24h", text)
-        self.assertIn("no call", text)
-        self.assertIn("full refund", text)
+        self.assertNotIn("$97 fix pack", text)  # old offer naming, no longer used
+        self.assertIn("no site access", text)
+        self.assertIn("applied by you or your developer", text)
 
 
 if __name__ == "__main__":

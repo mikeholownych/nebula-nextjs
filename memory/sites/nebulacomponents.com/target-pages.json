@@ -1,0 +1,62 @@
+{
+  "site": "nebulacomponents.com",
+  "target_pages": [
+    {
+      "path": "/",
+      "priority": 10,
+      "intent": "convert",
+      "keywords": ["landing page audit", "conversion leak", "free audit"],
+      "funnel_stage": "bottom",
+      "description": "Primary evidence-standard positioning and free-audit conversion page"
+    },
+    {
+      "path": "/audit",
+      "priority": 10,
+      "intent": "convert",
+      "keywords": ["free landing page audit", "landing page analysis"],
+      "funnel_stage": "bottom",
+      "description": "Free 9-signal audit entry point"
+    },
+    {
+      "path": "/paid-traffic-leak-scorecard",
+      "priority": 9,
+      "intent": "self_assess",
+      "keywords": ["paid traffic leak scorecard", "ads getting clicks but no sales"],
+      "funnel_stage": "middle",
+      "description": "Trigger-specific self-assessment before the measured audit"
+    },
+    {
+      "path": "/benchmarks",
+      "priority": 9,
+      "intent": "research",
+      "keywords": ["landing page benchmark data", "conversion health index"],
+      "funnel_stage": "middle",
+      "description": "Live Conversion Health Index and methodology"
+    },
+    {
+      "path": "/research/landing-page-performance-q3-2026",
+      "priority": 9,
+      "intent": "research",
+      "keywords": ["state of landing page performance", "landing page research"],
+      "funnel_stage": "top",
+      "description": "Q3 2026 aggregate landing-page research report"
+    },
+    {
+      "path": "/pricing",
+      "priority": 8,
+      "intent": "purchase",
+      "keywords": ["One-Leak Repair Sprint", "landing page repair"],
+      "funnel_stage": "bottom",
+      "description": "$97 One-Leak Repair Sprint"
+    },
+    {
+      "path": "/teardowns",
+      "priority": 8,
+      "intent": "evidence",
+      "keywords": ["landing page teardowns", "public landing page audits"],
+      "funnel_stage": "middle",
+      "description": "Named public findings with source evidence and fixes"
+    }
+  ],
+  "excluded_paths": ["/admin", "/internal", "/.well-known"]
+}

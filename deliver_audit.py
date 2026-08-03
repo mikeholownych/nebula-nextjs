@@ -197,11 +197,18 @@ def scrape_page(url):
     title = (soup.title.get_text(" ", strip=True) if soup.title else "")[:500]
     h1 = (soup.find("h1").get_text(" ", strip=True) if soup.find("h1") else "")[:500]
     text = soup.get_text(" ", strip=True)[:MAX_EXTRACTED_TEXT]
-    ctas = [
-        el.get_text(" ", strip=True)[:MAX_CTA_TEXT]
-        for el in soup.find_all(["a", "button"], limit=MAX_CTA_COUNT)
-        if el.get_text(" ", strip=True)
-    ]
+    ctas = []
+    for el in soup.find_all(["a", "button"], limit=MAX_CTA_COUNT):
+        label = el.get_text(" ", strip=True)[:MAX_CTA_TEXT]
+        if not label:
+            continue
+        low = label.lower()
+        # Skip accessibility/nav chrome that isn't a conversion CTA
+        if low in {"skip to content", "skip to main content", "menu", "navigation", "home", "open menu", "close menu"}:
+            continue
+        if len(low) < 2:
+            continue
+        ctas.append(label)
     return {"url": url, "html": html_text, "title": title, "h1": h1, "text": text, "ctas": ctas}
 
 
