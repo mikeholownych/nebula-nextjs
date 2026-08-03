@@ -233,7 +233,7 @@ const nextConfig: NextConfig = {
           // from static.cloudflareinsights.com — must be in script-src and
           // connect-src or it logs a CSP violation in DevTools (Best Practices -4).
           {
-            key: 'Content-Security-Policy-Report-Only',
+            key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com",
