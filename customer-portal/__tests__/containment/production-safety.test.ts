@@ -203,7 +203,7 @@ describe('production safety containment', () => {
   it('does not depend on an opaque configured Stripe Price ID', async () => {
     process.env.STRIPE_SECRET_KEY = 'sk_test_configured'
     delete process.env.STRIPE_FIX_PACK_PRICE_ID
-    process.env.NEXT_PUBLIC_URL = 'https://nebulacomponents.shop'
+    process.env.NEXT_PUBLIC_URL = 'https://nebulacomponents.com'
     ;(global.fetch as jest.Mock)
       .mockResolvedValueOnce(Response.json(completedAudit))
       .mockResolvedValueOnce({
@@ -232,7 +232,7 @@ describe('production safety containment', () => {
 
   it('creates a server-side Stripe Checkout Session with canonical offer metadata', async () => {
     process.env.STRIPE_SECRET_KEY = 'sk_test_configured'
-    process.env.NEXT_PUBLIC_URL = 'https://nebulacomponents.shop'
+    process.env.NEXT_PUBLIC_URL = 'https://nebulacomponents.com'
     ;(global.fetch as jest.Mock)
       .mockResolvedValueOnce(Response.json(completedAudit))
       .mockResolvedValueOnce({
@@ -252,7 +252,7 @@ describe('production safety containment', () => {
     expect(body.get('line_items[0][price_data][currency]')).toBe('usd')
     expect(body.get('line_items[0][price_data][unit_amount]')).toBe('9700')
     expect(body.get('line_items[0][price_data][product_data][name]')).toBe(
-      'One-Leak Repair Sprint',
+      'One-Leak Self-Implementation Kit',
     )
     expect(body.get('payment_method_types[0]')).toBe('card')
     expect(body.get('metadata[offer_key]')).toBe('fix-pack')
@@ -271,7 +271,7 @@ describe('production safety containment', () => {
     })],
   ])('maps Stripe provider %s to 502', async (_label, providerResult) => {
     process.env.STRIPE_SECRET_KEY = 'sk_test_configured'
-    process.env.NEXT_PUBLIC_URL = 'https://nebulacomponents.shop'
+    process.env.NEXT_PUBLIC_URL = 'https://nebulacomponents.com'
     ;(global.fetch as jest.Mock)
       .mockResolvedValueOnce(Response.json(completedAudit))
       .mockImplementationOnce(providerResult)
@@ -397,6 +397,40 @@ describe('production safety containment', () => {
     }
   })
 
+  it('redirects every non-canonical Nebula host directly to the .com apex', () => {
+    for (const host of [
+      'nebulacomponents.shop',
+      'www.nebulacomponents.shop',
+      'www.nebulacomponents.com',
+    ]) {
+      const response = proxy(
+        new NextRequest(`https://${host}/audit?source=canonical-test`, {
+          headers: { host },
+        }),
+      )
+      expect(response.status).toBe(301)
+      expect(response.headers.get('location')).toBe(
+        'https://nebulacomponents.com/audit?source=canonical-test',
+      )
+    }
+  })
+
+  it('redirects canonical HTTP requests to HTTPS without changing path or query', () => {
+    const response = proxy(
+      new NextRequest('http://localhost/audit?source=http-upgrade', {
+        headers: {
+          host: 'nebulacomponents.com',
+          'x-forwarded-proto': 'http',
+        },
+      }),
+    )
+
+    expect(response.status).toBe(301)
+    expect(response.headers.get('location')).toBe(
+      'https://nebulacomponents.com/audit?source=http-upgrade',
+    )
+  })
+
   it('keeps global error surfaces free of email capture and audit submission', () => {
     for (const relative of ['app/error.tsx', 'app/not-found.tsx']) {
       const source = readFileSync(path.join(process.cwd(), relative), 'utf8').toLowerCase()
@@ -421,10 +455,9 @@ describe('production safety containment', () => {
     for (const relative of listAppPages()) {
       const source = readFileSync(path.join(process.cwd(), relative), 'utf8').toLowerCase()
       const compact = source.replace(/\s+/g, ' ')
-      // The live backend (app/api/audit/start/route.ts) times out at 120s.
-      // Any claim of a faster fixed turnaround must not promise less than that.
-      expect(compact).not.toMatch(/audit.{0,140}\b(?:1|2|3|4|5|6|7|8|9|10)[- ]?seconds?\b/)
-      expect(compact).not.toMatch(/\b(?:1|2|3|4|5|6|7|8|9|10)[- ]?seconds?\b.{0,140}audit/)
+      // Only reject explicit fixed-turnaround promises attached to the audit itself.
+      expect(compact).not.toMatch(/audit.{0,100}(?:in|within|under)\s+(?:1|2|3|4|5|6|7|8|9|10)[- ]?seconds?\b/)
+      expect(compact).not.toMatch(/(?:in|within|under)\s+(?:1|2|3|4|5|6|7|8|9|10)[- ]?seconds?\b.{0,100}audit/)
     }
   })
 

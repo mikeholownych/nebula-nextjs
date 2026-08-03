@@ -31,10 +31,10 @@ export default function BreadcrumbSchema() {
   const segments = pathname.split('/').filter(Boolean);
   let currentPath = '';
   const items = [
-    { name: 'Home', url: 'https://nebulacomponents.shop/' },
+    { name: 'Home', url: 'https://nebulacomponents.com/' },
     ...segments.map((segment) => {
       currentPath += `/${segment}`;
-      return { name: slugToLabel(segment), url: `https://nebulacomponents.shop${currentPath}` };
+      return { name: slugToLabel(segment), url: `https://nebulacomponents.com${currentPath}` };
     }),
   ];
 

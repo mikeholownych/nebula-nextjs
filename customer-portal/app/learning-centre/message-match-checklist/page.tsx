@@ -5,18 +5,18 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Message Match Checklist: Align Your Ad to Your Landing Page | Nebula',
   description:
-    'Message match is the degree to which your landing page fulfills the exact promise your ad made. Use this 60-second audit checklist before your next paid traffic campaign.',
+    'Message match is the degree to which your landing page fulfills the exact promise your ad made. Use this audit checklist before your next paid traffic campaign.',
   alternates: {
     canonical:
-      'https://nebulacomponents.shop/learning-centre/message-match-checklist',
+      'https://nebulacomponents.com/learning-centre/message-match-checklist',
   },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'Message Match Checklist for Paid Traffic Landing Pages',
   description:
-    'Message match is the degree to which your landing page fulfills the exact promise your ad made. Use this 60-second audit checklist before your next paid traffic campaign.',
-  url: 'https://nebulacomponents.shop/learning-centre/message-match-checklist',
+    'Message match is the degree to which your landing page fulfills the exact promise your ad made. Use this audit checklist before your next paid traffic campaign.',
+  url: 'https://nebulacomponents.com/learning-centre/message-match-checklist',
   publishedDate: '2025-07-15',
   modifiedDate: '2026-07-29',
 })
@@ -206,9 +206,9 @@ export default function MessageMatchChecklistPage() {
             <p className="mb-6 leading-relaxed text-fg-muted">
               Run the Nebula audit to get a scored breakdown of your landing page&apos;s message match,
               offer clarity, and conversion structure. If the audit surfaces a confirmed break, the{' '}
-              <span className="font-medium text-fg">$97 One-Leak Repair Sprint</span> selects the
-              rewritten hero or CTA as the one high-confidence repair, confirms scope with you,
-              implements it, and verifies the live change - no retainer, no scope creep.
+              <span className="font-medium text-fg">$97 One-Leak Self-Implementation Kit</span> supplies
+              tailored hero or CTA copy for one high-confidence finding. You or your developer implements it,
+              and the 30-day re-audit verifies the page condition - no retainer, no scope creep.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link

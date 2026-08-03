@@ -4,13 +4,13 @@ export const metadata: Metadata = {
   title: 'Data Rights — Nebula Components',
   description: 'Exercise your GDPR and CCPA data rights. Request access, deletion, or export of your personal data.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/data-rights',
+    canonical: 'https://nebulacomponents.com/data-rights',
   },
 };
 
 export default function DataRightsPage() {
   return (
-    <div className="max-w-3xl mx-auto px-5 pt-32 pb-24">
+    <main id="main-content" className="max-w-3xl mx-auto px-5 pt-32 pb-24">
       <h1 className="text-4xl font-bold text-fg mb-3 tracking-tight">
         Your Data Rights
       </h1>
@@ -53,7 +53,7 @@ export default function DataRightsPage() {
                 href="/about"
                 className="text-[var(--accent)] font-semibold hover:underline"
               >
-                privacy{'\u0040'}nebulacomponents.shop
+                privacy{'\u0040'}nebulacomponents.com
               </a>
             </p>
             <p className="text-fg-muted mt-2">
@@ -129,6 +129,6 @@ export default function DataRightsPage() {
           </p>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

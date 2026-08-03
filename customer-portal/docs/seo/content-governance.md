@@ -1,6 +1,6 @@
 # Content Governance & Claim Verification Policy — Nebula Components
 
-**Domain**: `nebulacomponents.shop`  
+**Domain**: `nebulacomponents.com`
 **Governing Standard**: Strict Evidence-Backed Claim Control  
 
 ---

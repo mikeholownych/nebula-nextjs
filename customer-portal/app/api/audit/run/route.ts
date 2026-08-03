@@ -17,7 +17,7 @@ import { auditBodyDiscovery } from '@/lib/x402-discovery'
  * so the 402 payment-required payload contains the correct resource URL.
  */
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nebulacomponents.shop'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nebulacomponents.com'
 
 const handler = async (request: NextRequest) => {
   try {

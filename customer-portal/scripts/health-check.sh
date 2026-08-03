@@ -13,7 +13,7 @@
 
 set -uo pipefail
 
-BASE_URL="https://nebulacomponents.shop"
+BASE_URL="https://nebulacomponents.com"
 STATE_FILE="/home/mike/nebula/customer-portal/route_health_alert_state.json"
 TELEGRAM_TARGET="telegram:5920497760"
 ALERT_COOLDOWN_SECONDS=1800  # 30 min — this is a lower-urgency, content-level check

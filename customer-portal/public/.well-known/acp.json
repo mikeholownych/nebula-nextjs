@@ -3,12 +3,12 @@
     "name": "acp",
     "version": "2026-01-30",
     "supported_versions": ["2026-01-30"],
-    "documentation_url": "https://nebulacomponents.shop/acp.md"
+    "documentation_url": "https://nebulacomponents.com/acp.md"
   },
-  "api_base_url": "https://nebulacomponents.shop/api",
+  "api_base_url": "https://nebulacomponents.com/api",
   "transports": ["rest"],
   "capabilities": {
-    "services": ["checkout"],
+    "services": ["audit-bound-self-implementation-kit-checkout"],
     "supported_currencies": ["usd"],
     "supported_locales": ["en-US"]
   }

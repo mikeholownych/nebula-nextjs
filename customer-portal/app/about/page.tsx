@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Evidence-backed landing page diagnosis for founders running paid ads. We identify message-match, trust, and CTA problems that waste clicks.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/about',
+    canonical: 'https://nebulacomponents.com/about',
   },
 }
 
@@ -69,7 +69,7 @@ export default function AboutPage() {
           <p className="text-fg-muted">
             Email is a reliable way to reach us. Response time is typically within one business day.
           </p>
-          <p className="mt-3 text-accent">{'hello\u0040nebulacomponents.shop'}</p>
+          <p className="mt-3 text-accent">{'hello0040nebulacomponents.com'}</p>
         </section>
 
         <div className="flex gap-4">

@@ -5,13 +5,13 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Facebook Ads Clicks But No Leads: Fix The Page | Nebula',
   description: 'High CTR, zero leads? Separate Meta ad delivery from post-click behaviour, then test message match, proof, friction, and tracking.',
-  alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/facebook-ads-no-leads' },
+  alternates: { canonical: 'https://nebulacomponents.com/learning-centre/facebook-ads-no-leads' },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'Facebook Ads Getting Clicks But No Leads: The Page Broke The Chain',
   description: 'High CTR, zero leads? Separate Meta ad delivery from post-click behaviour, then test message match, proof, friction, and tracking.',
-  url: 'https://nebulacomponents.shop/learning-centre/facebook-ads-no-leads',
+  url: 'https://nebulacomponents.com/learning-centre/facebook-ads-no-leads',
   publishedDate: '2026-07-21',
   modifiedDate: '2026-07-21',
 })

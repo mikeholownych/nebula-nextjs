@@ -22,7 +22,7 @@ export default function SEOHead({
   faqItems = [],
 }: SEOHeadProps) {
   const pathname = usePathname();
-  const url = `https://nebulacomponents.shop${pathname}`;
+  const url = `https://nebulacomponents.com${pathname}`;
   
   // Generate schema based on type
   const schemas: object[] = [];

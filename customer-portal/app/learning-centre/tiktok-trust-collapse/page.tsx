@@ -6,14 +6,14 @@ export const metadata: Metadata = {
   title: "The TikTok Trust Collapse: When Gen Z Buyers Hit a Page That Looks Like 2019 | Nebula",
   description: "TikTok trains buyers to detect inauthenticity instantly. If your landing page looks like 2019, Gen Z bounces before they read a word. Here is what to fix.",
   alternates: {
-    canonical: "https://nebulacomponents.shop/learning-centre/tiktok-trust-collapse",
+    canonical: "https://nebulacomponents.com/learning-centre/tiktok-trust-collapse",
   },
 }
 
 const articleSchema = createArticleSchema({
   headline: "The TikTok Trust Collapse: When Gen Z Buyers Hit a Page That Looks Like 2019",
   description: "TikTok trains buyers to detect inauthenticity instantly. If your landing page looks like 2019, Gen Z bounces before they read a word. Here is what to fix.",
-  url: "https://nebulacomponents.shop/learning-centre/tiktok-trust-collapse",
+  url: "https://nebulacomponents.com/learning-centre/tiktok-trust-collapse",
   publishedDate: "2026-07-25",
   modifiedDate: "2026-07-25",
 })

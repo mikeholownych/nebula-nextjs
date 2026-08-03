@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
@@ -8,8 +9,9 @@ const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
  * POST /api/monitors           create { email, url, cadence }
  */
 export async function GET(request: NextRequest) {
-  const email = request.nextUrl.searchParams.get('email') || ''
-  if (!email) return NextResponse.json({ error: 'email required' }, { status: 400 })
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
+  const email = auth.user.email
   try {
     const res = await fetch(
       `${API_BASE}/audit/monitors?email=${encodeURIComponent(email)}`,
@@ -23,6 +25,8 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
   let body: unknown
   try {
     body = await request.json()
@@ -33,7 +37,7 @@ export async function POST(request: NextRequest) {
     const res = await fetch(`${API_BASE}/audit/monitors`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
+      body: JSON.stringify({ ...(body as Record<string, unknown>), email: auth.user.email }),
       signal: AbortSignal.timeout(10_000),
     })
     const data = await res.json()

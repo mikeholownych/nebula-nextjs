@@ -53,8 +53,8 @@ User accepts: analytics_storage: 'granted'
 | Privacy policy | ✅ | app/privacy-policy/page.tsx |
 | Data rights page | ✅ | app/data-rights/page.tsx |
 | Data retention policy | ✅ | In privacy policy |
-| Right to access | ✅ | privacy@nebulacomponents.shop |
-| Right to erasure | ✅ | privacy@nebulacomponents.shop |
+| Right to access | ✅ | privacy@nebulacomponents.com |
+| Right to erasure | ✅ | privacy@nebulacomponents.com |
 | Right to portability | ✅ | Data rights page |
 | Cookie preference storage | ✅ | localStorage (consent versioning) |
 

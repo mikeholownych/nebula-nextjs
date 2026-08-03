@@ -28,7 +28,7 @@ export default function OGCardSource() {
         </div>
       </div>
       <div className="absolute bottom-12 right-[72px] text-gray-400 text-base">
-        nebulacomponents.shop
+        nebulacomponents.com
       </div>
     </div>
   );

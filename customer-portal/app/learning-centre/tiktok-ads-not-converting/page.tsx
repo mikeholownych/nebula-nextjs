@@ -5,13 +5,13 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'TikTok Ads Getting Views But No Sales: Fix The Landing Page | Nebula Components',
   description: "TikTok ads driving views but zero sales? The creative isn't the problem - your landing page is killing the conversion. Here's the exact disconnect to fix.",
-  alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/tiktok-ads-not-converting' },
+  alternates: { canonical: 'https://nebulacomponents.com/learning-centre/tiktok-ads-not-converting' },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'TikTok Ads Getting Views But No Sales: The Landing Page Disconnect',
   description: "TikTok ads driving views but zero sales? The creative isn't the problem - your landing page is killing the conversion. Here's the exact disconnect to fix.",
-  url: 'https://nebulacomponents.shop/learning-centre/tiktok-ads-not-converting',
+  url: 'https://nebulacomponents.com/learning-centre/tiktok-ads-not-converting',
   publishedDate: '2026-07-21',
   modifiedDate: '2026-07-21',
 })

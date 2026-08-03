@@ -1,0 +1,26 @@
+export const REPAIR_SPRINT_OFFER = {
+  key: 'fix-pack',
+  name: 'One-Leak Self-Implementation Kit',
+  priceUsd: 97,
+  summary: 'Run the free audit, then get a tailored self-implementation kit for one high-impact finding. You or your developer applies the supplied copy, code, or configuration change.',
+  howItWorks: [
+    'Run the free audit — paste your URL, get 9 signals scored in under 2 minutes',
+    'Review the initial findings and unlock the full report by email',
+    'Pay $97 for a kit tailored to one high-impact finding',
+    'Apply the supplied copy, code, or configuration change yourself or with your developer',
+  ],
+  includes: [
+    'A tailored implementation kit for one specific failing signal',
+    'One high-impact finding selected from your audit results',
+    'Exact copy, code, or configuration change — not generic advice',
+    'Same-scope re-audit within 30 days to verify the fix held',
+  ],
+  excludes: [
+    'Full redesigns or multiple pages',
+    'Backend application logic or analytics migrations',
+    'Paid third-party tools',
+    'A promise of conversion lift',
+  ],
+  evidenceBoundary:
+    'The re-audit verifies whether the selected page condition changed; the kit does not guarantee conversion lift.',
+} as const

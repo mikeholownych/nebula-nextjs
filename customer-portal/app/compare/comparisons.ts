@@ -64,7 +64,7 @@ export const comparisons: Comparison[] = [
       { dimension: 'Scoring', tool: 'A/B test winner (relative)', nebula: 'Component scores vs published pass standards (absolute)' },
       { dimension: 'Evidence', tool: 'Test statistics', nebula: 'Measured page observations, selectors, and deltas per finding' },
       { dimension: 'Pass standards', tool: 'Not published', nebula: 'Published on /benchmarks from the live audit dataset' },
-      { dimension: 'Price', tool: 'Monthly subscription', nebula: 'Free audit; $97 One-Leak Repair Sprint' },
+      { dimension: 'Price', tool: 'Monthly subscription', nebula: 'Free audit; $97 One-Leak Self-Implementation Kit' },
     ],
     useBoth:
       'The honest workflow: Unbounce builds the page, Nebula audits it. Use Unbounce to ship variants quickly, then run the free audit on the live variant to see which component actually fails its pass standard before you invest in test traffic.',
@@ -102,7 +102,7 @@ export const comparisons: Comparison[] = [
       { dimension: 'Scoring', tool: 'Proprietary in-platform score', nebula: 'Composite score + component scores with a published "good from" anchor' },
       { dimension: 'Dataset', tool: 'Not published', nebula: 'Public /benchmarks from real audits (54 completed to date)' },
       { dimension: 'Deliverable', tool: 'Experiments and variants', nebula: 'Ranked fix queue with measured evidence per finding' },
-      { dimension: 'Price', tool: 'Monthly subscription', nebula: 'Free audit; $97 One-Leak Repair Sprint' },
+      { dimension: 'Price', tool: 'Monthly subscription', nebula: 'Free audit; $97 One-Leak Self-Implementation Kit' },
     ],
     useBoth:
       'Instapage is a strong platform for pages you control there. Run the Nebula audit on those same pages to get an independent, standard-anchored check before spending experiment budget — then use Instapage to implement the fixes.',
@@ -140,7 +140,7 @@ export const comparisons: Comparison[] = [
       { dimension: 'Output', tool: 'Performance score + diagnostics', nebula: 'Composite score, component scores, ranked fix queue' },
       { dimension: 'Pass standard', tool: 'Published (Google thresholds)', nebula: 'Published per component on /benchmarks' },
       { dimension: 'Dataset', tool: 'Single-page lab runs', nebula: 'Cross-page benchmarks from completed audits' },
-      { dimension: 'Price', tool: 'Free', nebula: 'Free audit; $97 One-Leak Repair Sprint' },
+      { dimension: 'Price', tool: 'Free', nebula: 'Free audit; $97 One-Leak Self-Implementation Kit' },
     ],
     useBoth:
       'Use PSI for the speed dimension — it is excellent at it. Use the Nebula audit for the conversion dimensions PSI does not touch. A page that scores 95 on PSI and converts at zero has a leak PSI cannot see.',
@@ -177,7 +177,7 @@ export const comparisons: Comparison[] = [
       { dimension: 'Diagnosis', tool: 'None', nebula: 'Every component scored with evidence' },
       { dimension: 'Message match', tool: 'Not checked', nebula: 'Ad promise vs headline alignment checked' },
       { dimension: 'Pass standards', tool: 'Not published', nebula: 'Published on /benchmarks' },
-      { dimension: 'Price', tool: 'Monthly subscription', nebula: 'Free audit; $97 One-Leak Repair Sprint' },
+      { dimension: 'Price', tool: 'Monthly subscription', nebula: 'Free audit; $97 One-Leak Self-Implementation Kit' },
     ],
     useBoth:
       'Leadpages gets you live in an afternoon; Nebula tells you whether the live page is actually built for conversion. Run the free audit the same day you publish, before you spend on traffic.',

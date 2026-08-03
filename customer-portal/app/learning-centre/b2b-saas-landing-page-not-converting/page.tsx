@@ -5,7 +5,7 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'B2B SaaS Landing Page Not Converting: Fix Message-Match First | Nebula Components',
   description: 'When a B2B SaaS landing page is not converting paid traffic, message-match is the first thing to audit. Learn the 3-step fix.',
-  alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/b2b-saas-landing-page-not-converting' },
+  alternates: { canonical: 'https://nebulacomponents.com/learning-centre/b2b-saas-landing-page-not-converting' },
 }
 
 const faqSchema = {
@@ -74,7 +74,7 @@ const faqSchema = {
 const articleSchema = createArticleSchema({
   headline: 'B2B SaaS Landing Page Not Converting: Fix Message-Match First',
   description: 'When a B2B SaaS landing page is not converting paid traffic, message-match is the first thing to audit. Learn the 3-step fix.',
-  url: 'https://nebulacomponents.shop/learning-centre/b2b-saas-landing-page-not-converting',
+  url: 'https://nebulacomponents.com/learning-centre/b2b-saas-landing-page-not-converting',
   publishedDate: '2025-07-15',
   modifiedDate: '2026-07-29',
 })

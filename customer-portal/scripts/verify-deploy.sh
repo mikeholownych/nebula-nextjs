@@ -4,7 +4,7 @@
 
 set -e
 
-BASE_URL="https://nebulacomponents.shop"
+BASE_URL="https://nebulacomponents.com"
 
 # Critical routes to verify
 ROUTES=(
@@ -31,13 +31,15 @@ PASSED=0
 
 for route in "${ROUTES[@]}"; do
   URL="$BASE_URL$route"
-  STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL" --max-time 10 2>/dev/null || echo "000")
+  RESULT=$(curl -sL -o /dev/null -w "%{http_code} %{url_effective}" "$URL" --max-time 10 2>/dev/null || echo "000 $URL")
+  STATUS=${RESULT%% *}
+  EFFECTIVE_URL=${RESULT#* }
   
   if [ "$STATUS" = "200" ]; then
-    echo "✅ $route → $STATUS"
+    echo "✅ $route → $STATUS ($EFFECTIVE_URL)"
     PASSED=$((PASSED + 1))
   else
-    echo "❌ $route → $STATUS"
+    echo "❌ $route → $STATUS ($EFFECTIVE_URL)"
     FAILED=$((FAILED + 1))
   fi
 done

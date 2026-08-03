@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 export async function GET(req: NextRequest) {
-  const email = req.nextUrl.searchParams.get('email') || ''
-  if (!email) {
-    return NextResponse.json({ error: 'email required' }, { status: 400 })
-  }
+  const auth = await requireWorkspaceUser(req)
+  if ('response' in auth) return auth.response
+  const email = auth.user.email
 
   try {
     const upstream = await fetch(

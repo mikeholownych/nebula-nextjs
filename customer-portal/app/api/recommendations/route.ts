@@ -1,12 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 /**
  * Recommendation kanban for a workspace email
  * GET /api/recommendations?email=...  (syncs from latest audits, returns cards)
  */
 export async function GET(request: NextRequest) {
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
   try {
-    const email = request.nextUrl.searchParams.get('email') || ''
+    const email = auth.user.email
     if (!email || email.length < 3 || email.length > 320) {
       return NextResponse.json({ error: 'Valid email required' }, { status: 400 })
     }

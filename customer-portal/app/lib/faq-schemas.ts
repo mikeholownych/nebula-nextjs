@@ -1,7 +1,7 @@
 import { createFAQPageSchema } from '@/app/lib/schema'
 
 const repairSprintAnswer =
-  'One landing page and one high-confidence, buyer-approved repair. Nebula delivers targeted AI prompts written for your specific failing signals — exact copy, code, or configuration changes — instantly after checkout. No site access required. You implement them yourself or hand them to your developer. Includes one same-scope re-audit within 30 days.'
+  'One landing page and one high-confidence audit finding. Nebula sends a tailored self-implementation kit after successful payment — exact copy, a code snippet, or a configuration change. No site access is required. You implement it yourself or hand it to your developer. Includes one same-scope re-audit within 30 days.'
 
 export const pricingFAQSchema = createFAQPageSchema([
   {
@@ -9,16 +9,16 @@ export const pricingFAQSchema = createFAQPageSchema([
     answer: 'A 9-signal audit scoring message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, and load speed. Each signal gets specific findings and prioritized repairs ranked by likely conversion impact.',
   },
   {
-    question: 'How is the $97 One-Leak Repair Sprint delivered?',
+    question: 'How is the $97 One-Leak Self-Implementation Kit delivered?',
     answer: repairSprintAnswer,
   },
   {
     question: 'Do I need to share access to my site?',
-    answer: 'No. Nebula does not take access to your site, CMS, or hosting — for the free audit or the paid sprint. The sprint delivers AI prompts you run yourself or hand to your developer.',
+    answer: 'No. Nebula does not take access to your site, CMS, or hosting. The paid kit contains implementation instructions you run yourself or hand to your developer.',
   },
   {
     question: 'What if the repair cannot be implemented safely?',
-    answer: 'If the identified leak cannot be addressed with a safe, bounded prompt-based repair, Nebula refunds the purchase in full.',
+    answer: 'If Nebula cannot generate the promised bounded implementation kit for the selected finding, contact support for a delivery review or refund.',
   },
   {
     question: 'Does the repair guarantee a higher conversion rate?',
@@ -36,7 +36,7 @@ export const homeFAQSchema = createFAQPageSchema([
     answer: 'Under 2 minutes. Paste your URL and get a scored 9-signal diagnosis with findings ranked by likely conversion impact.',
   },
   {
-    question: "What's included in the $97 One-Leak Repair Sprint?",
+    question: "What's included in the $97 One-Leak Self-Implementation Kit?",
     answer: repairSprintAnswer,
   },
   {
@@ -60,7 +60,7 @@ export const auditPageFAQSchema = createFAQPageSchema([
   },
   {
     question: 'What happens after the free audit?',
-    answer: 'You see your 9-signal score and specific findings. If the page has a high-confidence conversion leak, the $97 One-Leak Repair Sprint delivers targeted AI prompts to fix it instantly.',
+    answer: 'You see your 9-signal score and initial findings. If the page has a high-confidence conversion leak, the $97 One-Leak Self-Implementation Kit supplies a tailored change for one selected finding.',
   },
   {
     question: 'Does the audit require an account or login?',

@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { randomUUID } from 'node:crypto'
 import { getPostHogClient, captureServerException } from '@/app/lib/posthog-server'
 import { assertPublicHttpUrl } from '@/app/lib/ssrf-guard'
+import { clientAnalyticsDistinctId, hasServerAnalyticsConsent, readAttributionHeader } from '@/app/lib/analytics-consent'
 
 /**
  * Start an audit by calling FastAPI directly
@@ -18,7 +20,7 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
-    const { url, email, name, referrer, audit_reason } = body
+    const { url, referrer, audit_reason } = body
 
     // Validate URL
     if (!url) {
@@ -63,14 +65,22 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Call FastAPI directly
+    const analyticsConsent = hasServerAnalyticsConsent(request)
+    const distinctId = clientAnalyticsDistinctId(request)
+    const attribution = readAttributionHeader(request)
+    const anonymousEmail = `anonymous+${randomUUID()}@invalid.nebulacomponents.com`
+
+    // Public audit start never trusts a client-supplied email; ownership is
+    // established later through the signed unlock flow.
     const apiResponse = await fetch('http://127.0.0.1:8001/audit/run', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         url: processedUrl,
-        email: email || 'pending@example.com',
-        name: name || null
+        email: anonymousEmail,
+        name: null,
+        analytics_consent: analyticsConsent,
+        analytics_distinct_id: distinctId,
       }),
       signal: AbortSignal.timeout(120000) // 2 minute timeout
     })
@@ -93,8 +103,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const distinctId = request.headers.get('X-POSTHOG-DISTINCT-ID') ?? `anon_audit_${data.audit_id}`
-    try {
+    if (analyticsConsent && distinctId) try {
       const ph = getPostHogClient()
       ph.capture({
         distinctId,
@@ -107,6 +116,7 @@ export async function POST(request: NextRequest) {
           grade: data.grade,
           referrer: referrer || null,
           audit_reason: audit_reason || null,
+          ...attribution,
         },
       })
       await ph.flush()

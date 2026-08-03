@@ -7,7 +7,7 @@ export const metadata = {
   title: 'Case Studies | Nebula Components',
   description: 'Evidence-backed case studies published only when permission, measurement, and supporting evidence are complete.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/case-studies',
+    canonical: 'https://nebulacomponents.com/case-studies',
   },
 }
 

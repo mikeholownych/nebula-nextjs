@@ -120,7 +120,6 @@ export default function ProcessingPage() {
       const ok = await doUnlock(wsEmail)
       if (!ok) setAutoUnlocking(false)
     })()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status])
 
   return (

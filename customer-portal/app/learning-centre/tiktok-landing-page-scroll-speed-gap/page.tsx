@@ -6,14 +6,14 @@ export const metadata: Metadata = {
   title: 'TikTok to Landing Page: The Scroll-Speed Gap That Burns Your Ad Budget',
   description: "TikTok rewards rapid pass/fail decisions. Your landing page wasn't built for that. Here's the scroll-speed gap killing your conversions - and how to fix it before you scale spend.",
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre/tiktok-landing-page-scroll-speed-gap',
+    canonical: 'https://nebulacomponents.com/learning-centre/tiktok-landing-page-scroll-speed-gap',
   },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'TikTok to Landing Page: The Scroll-Speed Gap That Burns Your Ad Budget',
   description: "TikTok rewards rapid pass/fail decisions. Your landing page wasn't built for that. Here's the scroll-speed gap killing your conversions - and how to fix it before you scale spend.",
-  url: 'https://nebulacomponents.shop/learning-centre/tiktok-landing-page-scroll-speed-gap',
+  url: 'https://nebulacomponents.com/learning-centre/tiktok-landing-page-scroll-speed-gap',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
 })

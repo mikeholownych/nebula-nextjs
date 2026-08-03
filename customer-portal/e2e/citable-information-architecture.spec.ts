@@ -53,7 +53,7 @@ for (const route of routes) {
     await expect(page.getByRole('heading', { level: 1, name: route.h1 })).toHaveCount(1)
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       'href',
-      `https://nebulacomponents.shop${route.path}`,
+      `https://nebulacomponents.com${route.path}`,
     )
     await expect(page.getByText(/Customer cases and benchmark outcomes are not published/i)).toBeVisible()
     await expect(page.getByText(/Workflow and deployment verification remain unavailable/i)).toBeVisible()

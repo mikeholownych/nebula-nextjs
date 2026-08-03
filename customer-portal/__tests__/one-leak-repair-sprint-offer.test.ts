@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
+import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
 
 const root = process.cwd()
 const read = (relativePath: string) => fs.readFileSync(path.join(root, relativePath), 'utf8')
@@ -15,7 +15,7 @@ const publicSurfacePaths = [
 ]
 
 const forbiddenLegacyLanguage =
-  /AI prompt pack|prompt pack|prompt per finding|every finding|no site access required|within minutes of payment|conversion does not improve|full implementation of all identified fixes/i
+  /AI prompt pack|prompt pack|prompt per finding|temporary collaborator|Nebula implements|implements (?:it|the fix) for you|within minutes of payment|full implementation of all identified fixes|refund if (?:your )?conversion/i
 
 const activePublicFiles = ['app', 'components', 'public'].flatMap((directory) => {
   const walk = (absoluteDirectory: string): string[] =>
@@ -29,16 +29,17 @@ const activePublicFiles = ['app', 'components', 'public'].flatMap((directory) =>
 })
 
 const forbiddenPaidOfferDrift =
-  /\bFix Pack\b|Conversion Fix Pack|AI prompt pack|prompt pack|Fix Pack Prompt|tailored AI prompt|one prompt per finding|implements every finding|full implementation of all identified fixes|conversion does not improve/i
+  /\bFix Pack\b|Conversion Fix Pack|AI prompt pack|prompt pack|Fix Pack Prompt|tailored AI prompt|one prompt per finding|implements every finding|temporary collaborator|full implementation of all identified fixes|refund if (?:your )?conversion/i
 
-describe('One-Leak Repair Sprint offer integrity', () => {
-  it('keeps the locked commercial identifiers stable', () => {
+describe('One-Leak Self-Implementation Kit offer integrity', () => {
+  it('defines the $97 offer as a customer-implemented kit', () => {
     expect(REPAIR_SPRINT_OFFER).toMatchObject({
       key: 'fix-pack',
-      name: 'One-Leak Repair Sprint',
+      name: 'One-Leak Self-Implementation Kit',
       priceUsd: 97,
-      checkoutUrl: 'https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h',
     })
+    expect(REPAIR_SPRINT_OFFER.summary).toMatch(/customer|developer|implement/i)
+    expect(REPAIR_SPRINT_OFFER.evidenceBoundary).toMatch(/does not guarantee conversion lift/i)
   })
 
   it.each(publicSurfacePaths)('%s contains no obsolete prompt-pack or guarantee language', (relativePath) => {
@@ -57,18 +58,18 @@ describe('One-Leak Repair Sprint offer integrity', () => {
     expect(drift).toEqual([])
   })
 
-  it('states the bounded scope and evidence boundary on pricing', () => {
+  it('states the bounded self-implementation scope and evidence boundary on pricing', () => {
     const pricing = read('app/pricing/page.tsx')
-    expect(pricing).toContain('One-Leak Repair Sprint')
+    expect(pricing).toContain('One-Leak Self-Implementation Kit')
     expect(pricing).toMatch(/one landing page/i)
-    expect(pricing).toMatch(/one high-confidence repair/i)
+    expect(pricing).toMatch(/customer|developer|implement/i)
     expect(pricing).toMatch(/does not promise conversion lift/i)
   })
 
-  it('states access and refund boundaries before checkout', () => {
+  it('states no-access and no-lift-guarantee boundaries before checkout', () => {
     const checkout = read('app/checkout/page.tsx')
-    expect(checkout).toMatch(/temporary collaborator access|buyer-approved patch/i)
-    expect(checkout).toMatch(/never send (?:us )?passwords/i)
-    expect(checkout).toMatch(/full refund before work begins/i)
+    expect(checkout).toMatch(/no site access|required from Nebula/i)
+    expect(checkout).toMatch(/implement.*yourself|your developer|through your CMS/i)
+    expect(checkout).toMatch(/does not guarantee conversion lift/i)
   })
 })

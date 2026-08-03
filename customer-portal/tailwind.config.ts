@@ -8,11 +8,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Background colors
+        // Background colors — four tones for depth layering
         bg: {
           DEFAULT: '#050505',
           elevated: '#0a0a0a',
           panel: '#111111',
+          surface: '#0d1110',  // warm-tinted elevated surface for lifted cards
         },
         // Foreground colors
         fg: {
@@ -20,12 +21,17 @@ const config: Config = {
           muted: '#9e9e9e',
           dim: '#7c7c7c',
         },
-        // Accent colors (emerald)
+        // Accent — surgical teal, distinct from Tailwind default emerald
         accent: {
-          DEFAULT: '#10b981',
-          light: '#34d399',
-          dark: '#059669',
-          dim: 'rgba(16, 185, 129, 0.1)',
+          DEFAULT: '#00c2a0',
+          light: '#33d4b8',
+          dark: '#009980',
+          dim: 'rgba(0, 194, 160, 0.1)',
+        },
+        // Secondary accent — slate blue for lower-hierarchy interactive states
+        secondary: {
+          DEFAULT: '#4a7fa5',
+          dim: 'rgba(74, 127, 165, 0.1)',
         },
         // Semantic colors
         danger: {
@@ -62,6 +68,14 @@ const config: Config = {
         '5xl': ['3rem', { lineHeight: '1' }],
         '6xl': ['3.75rem', { lineHeight: '1' }],
       },
+      letterSpacing: {
+        // Section-head tracking — separates from body without size increase
+        section: '0.02em',
+        // Display tracking — tighter at large sizes
+        display: '-0.04em',
+        tight: '-0.02em',
+        wide: '0.12em',
+      },
       spacing: {
         '18': '4.5rem',
         '22': '5.5rem',
@@ -74,9 +88,12 @@ const config: Config = {
         '3xl': '24px',
       },
       boxShadow: {
-        glow: '0 0 40px rgba(16, 185, 129, 0.15)',
-        'glow-sm': '0 0 20px rgba(16, 185, 129, 0.1)',
-        'glow-lg': '0 0 60px rgba(16, 185, 129, 0.2)',
+        // Updated to match new accent teal
+        glow: '0 0 40px rgba(0, 194, 160, 0.15)',
+        'glow-sm': '0 0 20px rgba(0, 194, 160, 0.1)',
+        'glow-lg': '0 0 60px rgba(0, 194, 160, 0.2)',
+        // Lifted card shadow for surface-elevated panels
+        lifted: '0 2px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.04)',
       },
       animation: {
         'pulse-soft': 'pulse-soft 2s ease-in-out infinite',

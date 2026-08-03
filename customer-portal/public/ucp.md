@@ -4,27 +4,27 @@ Nebula Components publishes a Universal Commerce Protocol business profile at `/
 
 ## Service
 
-- **Namespace:** `shop.nebulacomponents.commerce`
+- **Namespace:** `com.nebulacomponents.commerce`
 - **Transport:** REST
-- **Endpoint:** `https://nebulacomponents.shop/api`
-- **OpenAPI schema:** `https://nebulacomponents.shop/openapi.json`
+- **Endpoint:** `https://nebulacomponents.com/api`
+- **OpenAPI schema:** `https://nebulacomponents.com/openapi.json`
 
 ## Checkout capability
 
-`shop.nebulacomponents.commerce.checkout` creates a Stripe-hosted checkout session for the fixed-price Nebula One-Leak Repair Sprint.
+`com.nebulacomponents.commerce.checkout` creates an audit-bound Stripe-hosted checkout session for the fixed-price Nebula One-Leak Self-Implementation Kit.
 
 ### Request
 
-`POST https://nebulacomponents.shop/api/checkout`
+`POST https://nebulacomponents.com/api/checkout`
 
 ```json
 {
   "offerKey": "fix-pack",
-  "email": "buyer@example.com"
+  "auditId": "123e4567-e89b-12d3-a456-426614174000"
 }
 ```
 
-The server owns the product and price mapping. Client-supplied prices, amounts, or line items are rejected.
+The request also requires the verified audit-unlock cookie issued for that audit. The server owns the delivery email, product, and price mapping. Client-supplied emails, prices, amounts, or line items are rejected.
 
 ### Response
 
@@ -40,4 +40,4 @@ The buyer completes payment on Stripe. Card data is never received or stored by 
 
 ## Capability schema
 
-`https://nebulacomponents.shop/.well-known/ucp-checkout.schema.json`
+`https://nebulacomponents.com/.well-known/ucp-checkout.schema.json`

@@ -4,13 +4,13 @@ export const metadata: Metadata = {
   title: 'Privacy Policy — Nebula Components',
   description: 'Nebula Components privacy policy. How we collect, use, and protect your data. GDPR and CCPA compliant.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/privacy-policy',
+    canonical: 'https://nebulacomponents.com/privacy-policy',
   },
 }
 
 export default function PrivacyPolicy() {
   return (
-    <div className="max-w-3xl mx-auto px-5 pt-32 pb-24">
+    <main id="main-content" className="max-w-3xl mx-auto px-5 pt-32 pb-24">
       <h1 className="text-4xl font-bold text-fg mb-3 tracking-tight">
         Privacy Policy
       </h1>
@@ -19,7 +19,7 @@ export default function PrivacyPolicy() {
       </p>
 
       <p className="text-fg-muted mb-6">
-        Nebula Components (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) operates the website nebulacomponents.shop and provides landing page audit services. This privacy policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
+        Nebula Components (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) operates the website nebulacomponents.com and provides landing page audit services. This privacy policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
       </p>
 
       <section className="mt-10">
@@ -36,7 +36,7 @@ export default function PrivacyPolicy() {
         <ul className="list-disc pl-6 text-fg-muted space-y-2 mb-6">
           <li>Submit a landing page URL for audit</li>
           <li>Provide your email address for audit delivery</li>
-          <li>Purchase a One-Leak Repair Sprint or other services</li>
+          <li>Purchase a One-Leak Self-Implementation Kit or other services</li>
           <li>Contact us via email or web form</li>
           <li>Subscribe to our newsletter or updates</li>
         </ul>
@@ -76,7 +76,7 @@ export default function PrivacyPolicy() {
         </p>
         <ul className="list-disc pl-6 text-fg-muted space-y-2">
           <li>Deliver your free landing page audit to your email</li>
-          <li>Process payments for One-Leak Repair Sprints and services</li>
+          <li>Process payments for One-Leak Self-Implementation Kits and services</li>
           <li>Send transactional emails (audit delivery, purchase confirmation)</li>
           <li>Respond to your inquiries and support requests</li>
           <li>Improve our website and services through analytics</li>
@@ -166,7 +166,7 @@ export default function PrivacyPolicy() {
             href="/about"
             className="text-[var(--accent)] font-semibold hover:underline"
           >
-            privacy{'\u0040'}nebulacomponents.shop
+            privacy{'\u0040'}nebulacomponents.com
           </a>. We respond within 30 days.
         </p>
       </section>
@@ -229,13 +229,13 @@ export default function PrivacyPolicy() {
             href="/about"
             className="text-[var(--accent)] font-semibold hover:underline"
           >
-            privacy{'\u0040'}nebulacomponents.shop
+            privacy{'\u0040'}nebulacomponents.com
           </a>
         </p>
         <p className="text-fg-muted">
           <strong>Response time:</strong> Within 30 days (typically 2-5 business days)
         </p>
       </div>
-    </div>
+    </main>
   )
 }

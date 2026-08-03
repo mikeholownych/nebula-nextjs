@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Reverse-engineer your paid traffic maths. At $50 CPC and $200 AOV you need 25% CVR to break even - an impossible target. Here\'s the formula that shows you exactly what your landing page must deliver before you touch your bids.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre/cpc-break-even-landing-page',
+    canonical: 'https://nebulacomponents.com/learning-centre/cpc-break-even-landing-page',
   },
 }
 
@@ -16,7 +16,7 @@ const articleSchema = createArticleSchema({
     'What a $50 CPC Actually Needs to Look Like on a Landing Page to Break Even',
   description:
     'Reverse-engineer your paid traffic maths. At $50 CPC and $200 AOV you need 25% CVR to break even - an impossible target. Here\'s the formula that shows you exactly what your landing page must deliver before you touch your bids.',
-  url: 'https://nebulacomponents.shop/learning-centre/cpc-break-even-landing-page',
+  url: 'https://nebulacomponents.com/learning-centre/cpc-break-even-landing-page',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
 })

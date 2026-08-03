@@ -1,11 +1,11 @@
 # Nebula Components ACP Discovery
 
-Nebula Components publishes Agentic Commerce Protocol discovery metadata at `/.well-known/acp.json` for its REST-based One-Leak Repair Sprint checkout.
+Nebula Components publishes Agentic Commerce Protocol discovery metadata at `/.well-known/acp.json` for its audit-bound One-Leak Self-Implementation Kit checkout.
 
 ## Discovery
 
 - **Protocol version:** `2026-01-30`
-- **API base URL:** `https://nebulacomponents.shop/api`
+- **API base URL:** `https://nebulacomponents.com/api`
 - **Transport:** `rest`
 - **Service:** `checkout`
 - **Currency:** USD
@@ -13,7 +13,7 @@ Nebula Components publishes Agentic Commerce Protocol discovery metadata at `/.w
 
 ## Current checkout API
 
-`POST https://nebulacomponents.shop/api/checkout`
+`POST https://nebulacomponents.com/api/checkout`
 
 ```json
 {
@@ -34,6 +34,6 @@ Payment is completed on Stripe's hosted checkout. Nebula Components never receiv
 
 ## Related machine-readable resources
 
-- OpenAPI: `https://nebulacomponents.shop/openapi.json`
-- UCP profile: `https://nebulacomponents.shop/.well-known/ucp`
-- Checkout request schema: `https://nebulacomponents.shop/.well-known/ucp-checkout.schema.json`
+- OpenAPI: `https://nebulacomponents.com/openapi.json`
+- UCP profile: `https://nebulacomponents.com/.well-known/ucp`
+- Checkout request schema: `https://nebulacomponents.com/.well-known/ucp-checkout.schema.json`

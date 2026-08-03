@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from 'next'
 import { headers } from 'next/headers'
+import { Suspense } from 'react'
 import SiteNav from '@/components/SiteNav'
 import Footer from '@/components/Footer'
 import WebMCP from '@/components/WebMCP'
 import LazyCookieConsent from './components/LazyCookieConsent'
+import AnalyticsRuntime from './components/AnalyticsRuntime'
 import './globals.css'
 import { organizationSchema, websiteSchema } from './lib/schema'
 
@@ -38,12 +40,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.svg?v=20260803', type: 'image/svg+xml' },
-      { url: '/favicon-32x32.png?v=20260803', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon-16x16.png?v=20260803', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
     ],
-    shortcut: '/favicon.svg?v=20260803',
-    apple: '/favicon.png?v=20260803',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.png',
   },
 }
 
@@ -78,10 +80,7 @@ export default async function RootLayout({
         <meta property="og:image:alt" content="Nebula Components — diagnose landing-page conversion leaks before they burn more ad spend" />
         {/* Agent discovery: llms.txt link tag for crawlers that don't read response headers */}
         <link rel="describedby" href="/llms.txt" type="text/plain" />
-        {/* DNS prefetch for Cloudflare Web Analytics beacon — CF injects beacon.min.js
-            at the edge; dns-prefetch speeds up its connection so it resolves sooner
-            and doesn't extend the critical network chain as long. */}
-        <link rel="dns-prefetch" href="//static.cloudflareinsights.com" />
+
         {/*
           Runs before <body> paints so returning visitors who already
           consented (localStorage) never see the cookie banner flash in —
@@ -122,6 +121,7 @@ export default async function RootLayout({
         {children}
         <Footer />
         <LazyCookieConsent country={country} />
+        <Suspense fallback={null}><AnalyticsRuntime /></Suspense>
         <WebMCP />
       </body>
     </html>

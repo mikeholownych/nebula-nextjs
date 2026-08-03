@@ -7,7 +7,7 @@ describe('social metadata', () => {
   it('anchors generated social image URLs to the production origin', () => {
     const layout = read('app/layout.tsx')
 
-    expect(layout).toContain("metadataBase: new URL('https://nebulacomponents.shop')")
+    expect(layout).toContain("metadataBase: new URL('https://nebulacomponents.com')")
     expect(layout).not.toContain('localhost:3000')
   })
 

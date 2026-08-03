@@ -7,7 +7,7 @@ import {
 } from '@/app/resources/citable/content'
 import { createBreadcrumbSchema } from '@/app/lib/schema'
 
-const BASE_URL = 'https://nebulacomponents.shop'
+const BASE_URL = 'https://nebulacomponents.com'
 
 interface CitablePageShellProps {
   route: CitableRoute

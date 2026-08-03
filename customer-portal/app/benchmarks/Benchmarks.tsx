@@ -81,6 +81,23 @@ export default function Benchmarks() {
     )
   }
 
+  if (data.audit_count === 0) {
+    return (
+      <section className="px-6 py-16">
+        <div className="mx-auto max-w-6xl rounded-2xl border border-border bg-bg-muted/10 p-8">
+          <h2 className="text-xl font-bold text-fg">No verified benchmark data yet</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-fg-muted">
+            Benchmarks appear after completed audits are added to the published evidence dataset.
+            We will not substitute sample averages or placeholder charts.
+          </p>
+          <a href="/audit" className="mt-5 inline-flex rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-bg">
+            Run the first audit →
+          </a>
+        </div>
+      </section>
+    )
+  }
+
   const maxFailures = Math.max(1, ...data.components.map((c) => c.failures))
 
   return (

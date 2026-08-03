@@ -6,14 +6,14 @@ export const metadata: Metadata = {
   title: 'Proof Before CTA: Social Proof Placement Guide | Nebula',
   description:
     'What visitors see before a CTA can change how they evaluate the ask. Use these proof-placement sequences as hypotheses to test on your own traffic.',
-  alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/proof-before-cta' },
+  alternates: { canonical: 'https://nebulacomponents.com/learning-centre/proof-before-cta' },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'Proof Before CTA: Why Social Proof Placement Determines Conversion',
   description:
     'What visitors see before a CTA can change how they evaluate the ask. These proof-placement sequences are testable hypotheses, not universal laws.',
-  url: 'https://nebulacomponents.shop/learning-centre/proof-before-cta',
+  url: 'https://nebulacomponents.com/learning-centre/proof-before-cta',
   publishedDate: '2025-07-15',
   modifiedDate: '2026-07-27',
 })
@@ -280,8 +280,7 @@ export default function ProofBeforeCTAPage() {
           <p className="mb-6 leading-relaxed text-fg-muted">
             The free Nebula audit reports where the page may lose credibility before the
             CTA - missing proof, weak proof, misplaced proof. If the audit flags a proof leak,
-            the $97 One-Leak Repair Sprint selects it as the one high-confidence repair,
-            confirms the scope with you, implements it, and verifies the live change.
+            the $97 One-Leak Self-Implementation Kit delivers a tailored kit for that high-confidence finding. You or your developer implements it, and the 30-day re-audit verifies the page condition.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link

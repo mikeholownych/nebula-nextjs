@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 /**
  * Move a recommendation between kanban columns
@@ -8,6 +9,8 @@ export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
   try {
     const { id } = await params
     let body: { status?: string }

@@ -144,14 +144,14 @@ Nebula has a **strong technical foundation** but lacks critical SEO infrastructu
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": "https://nebulacomponents.shop/#organization",
+  "@id": "https://nebulacomponents.com/#organization",
   "name": "Nebula Components",
-  "url": "https://nebulacomponents.shop",
-  "logo": "https://nebulacomponents.shop/logo.png",
+  "url": "https://nebulacomponents.com",
+  "logo": "https://nebulacomponents.com/logo.png",
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "sales",
-    "email": "hello@nebulacomponents.shop"
+    "email": "hello@nebulacomponents.com"
   }
 }
 
@@ -159,8 +159,8 @@ Nebula has a **strong technical foundation** but lacks critical SEO infrastructu
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "@id": "https://nebulacomponents.shop/#website",
-  "url": "https://nebulacomponents.shop",
+  "@id": "https://nebulacomponents.com/#website",
+  "url": "https://nebulacomponents.com",
   "name": "Nebula Components",
   "publisher": { "@id": "#organization" }
 }

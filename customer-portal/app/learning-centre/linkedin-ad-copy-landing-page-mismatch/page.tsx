@@ -6,14 +6,14 @@ export const metadata: Metadata = {
   title: 'Why Your LinkedIn Ad Does the Job and Your Landing Page Undoes It | Nebula',
   description: 'LinkedIn ads build professional credibility in seconds. Most landing pages destroy it just as fast. Here is exactly what causes the mismatch and how to fix it without a full redesign.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre/linkedin-ad-copy-landing-page-mismatch',
+    canonical: 'https://nebulacomponents.com/learning-centre/linkedin-ad-copy-landing-page-mismatch',
   },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'Why Your LinkedIn Ad Does the Job and Your Landing Page Undoes It',
   description: 'LinkedIn ads build professional credibility in seconds. Most landing pages destroy it just as fast. Here is exactly what causes the mismatch and how to fix it without a full redesign.',
-  url: 'https://nebulacomponents.shop/learning-centre/linkedin-ad-copy-landing-page-mismatch',
+  url: 'https://nebulacomponents.com/learning-centre/linkedin-ad-copy-landing-page-mismatch',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
 })

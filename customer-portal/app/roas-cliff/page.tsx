@@ -5,18 +5,18 @@ import '../globals.css'
 export const metadata: Metadata = {
   title: 'The ROAS Cliff - Why Your CTR Looks Fine and Your Page Converts Nobody | Nebula Components',
   description: 'A self-diagnostic guide for founders running paid traffic with zero or weak conversions. Score your landing page in 10 minutes. Find the monthly leak.',
-  alternates: { canonical: 'https://nebulacomponents.shop/roas-cliff' },
+  alternates: { canonical: 'https://nebulacomponents.com/roas-cliff' },
   openGraph: {
     title: 'The ROAS Cliff - Why Your CTR Looks Fine and Your Page Converts Nobody | Nebula Components',
     description: 'Score your landing page across 9 conversion signals. See your monthly leak estimate. Three fixes that actually move the number.',
     type: 'article',
-    url: 'https://nebulacomponents.shop/roas-cliff',
+    url: 'https://nebulacomponents.com/roas-cliff',
   },
 }
 
 export default function RoasCliffPage() {
   return (
-    <div className="min-h-screen bg-bg-elevated text-fg pt-24">
+    <main id="main-content" className="min-h-screen bg-bg-elevated text-fg pt-24">
       <div className="max-w-[740px] mx-auto px-6 py-16 pb-32">
 
         <p className="text-fg-muted text-sm mb-12">
@@ -252,17 +252,17 @@ export default function RoasCliffPage() {
           </Link>
           <br />
           <Link
-            href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
+            href="/audit"
             className="inline-block border border-border text-fg-muted font-medium px-7 py-3 rounded-md mt-3 hover:border-accent transition-colors"
           >
-            Skip ahead - $97 One-Leak Repair Sprint
+            Run the audit before checkout
           </Link>
           <p className="text-xs text-fg-muted mt-4">
-            No discovery call. No testing phase. Full refund if we don&apos;t find a problem worth fixing.
+            No discovery call. No testing phase. The kit targets one verified page condition and does not guarantee conversion lift.
           </p>
         </div>
 
       </div>
-    </div>
+    </main>
   )
 }

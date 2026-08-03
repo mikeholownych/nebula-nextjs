@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Low conversion on an ecommerce landing page almost always comes down to 5 fixable structural issues. Diagnose which one is costing you customers before running more ads.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre/ecommerce-landing-page-not-converting',
+    canonical: 'https://nebulacomponents.com/learning-centre/ecommerce-landing-page-not-converting',
   },
 }
 
@@ -15,7 +15,7 @@ const articleSchema = createArticleSchema({
   headline: 'Ecommerce Landing Page Not Converting: Fix These 5 Leaks First',
   description:
     'Low conversion on an ecommerce landing page almost always comes down to 5 fixable structural issues. Diagnose which one is costing you customers before running more ads.',
-  url: 'https://nebulacomponents.shop/learning-centre/ecommerce-landing-page-not-converting',
+  url: 'https://nebulacomponents.com/learning-centre/ecommerce-landing-page-not-converting',
   publishedDate: '2026-07-16',
   modifiedDate: '2026-07-21',
 })
@@ -303,8 +303,8 @@ export default function EcommerceLandingPageNotConverting() {
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 9 signals - including proof placement,
               mobile layout, and load time - against your actual landing page URL. The
-              $97 One-Leak Repair Sprint selects one high-confidence page-level repair,
-              confirms the scope with you, implements it, and verifies the live change.
+              $97 One-Leak Self-Implementation Kit supplies a tailored change for one high-confidence
+              page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition.
               It does not promise conversion lift.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -318,7 +318,7 @@ export default function EcommerceLandingPageNotConverting() {
                 href="/pricing"
                 className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
-                See the One-Leak Repair Sprint
+                See the One-Leak Self-Implementation Kit
               </Link>
             </div>
           </section>

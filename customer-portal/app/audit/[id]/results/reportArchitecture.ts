@@ -9,13 +9,15 @@ export const REPORT_NAVIGATION = [
 ] as const
 
 export type SignalGroupId =
-  | 'message'
-  | 'action'
-  | 'proof'
-  | 'mobile'
-  | 'performance'
-  | 'measurement'
-  | 'discovery'
+  | 'message_match'
+  | 'trust'
+  | 'mobile_cta'
+  | 'load_time'
+  | 'cta_clarity'
+  | 'above_fold'
+  | 'ad_signals'
+  | 'seo_foundations'
+  | 'ai_readiness'
 
 export interface SignalGroupDefinition {
   id: SignalGroupId
@@ -26,46 +28,58 @@ export interface SignalGroupDefinition {
 
 export const SIGNAL_GROUPS: SignalGroupDefinition[] = [
   {
-    id: 'message',
+    id: 'message_match',
     label: 'Message Match',
-    description: 'Can a visitor understand the promise and connect it to the ad they clicked?',
-    keys: ['headline'],
+    description: 'Does the page promise match the expectation created by the ad or referring source?',
+    keys: ['headline', 'message_match'],
   },
   {
-    id: 'action',
-    label: 'Action & Friction',
-    description: 'Is the next step obvious, visible, and proportionate to visitor intent?',
-    keys: ['cta', 'above_fold'],
-  },
-  {
-    id: 'proof',
-    label: 'Trust & Proof',
+    id: 'trust',
+    label: 'Trust Signals',
     description: 'Does the page support its claims before asking for commitment?',
-    keys: ['social_proof'],
+    keys: ['social_proof', 'trust'],
   },
   {
-    id: 'mobile',
-    label: 'Mobile Experience',
-    description: 'Does the page preserve hierarchy, readability, and tap access on small screens?',
-    keys: ['mobile'],
+    id: 'mobile_cta',
+    label: 'Mobile CTA',
+    description: 'Is the primary action visible and usable on a small viewport?',
+    keys: ['mobile', 'mobile_cta'],
   },
   {
-    id: 'performance',
-    label: 'Performance',
+    id: 'load_time',
+    label: 'Load Time',
     description: 'Does the page become useful quickly enough to keep paid visitors from bouncing?',
-    keys: ['load_speed'],
+    keys: ['load_speed', 'load_time'],
   },
   {
-    id: 'measurement',
-    label: 'Measurement',
-    description: 'Can ad clicks be connected to outcomes without guessing?',
+    id: 'cta_clarity',
+    label: 'CTA Clarity',
+    description: 'Is the next step obvious and proportionate to visitor intent?',
+    keys: ['cta', 'cta_clarity'],
+  },
+  {
+    id: 'above_fold',
+    label: 'Above-Fold Clarity',
+    description: 'Can a visitor understand the offer and next action in the first viewport?',
+    keys: ['above_fold'],
+  },
+  {
+    id: 'ad_signals',
+    label: 'Ad Signals',
+    description: 'Can paid clicks be connected to outcomes without guessing?',
     keys: ['ad_signals'],
   },
   {
-    id: 'discovery',
-    label: 'Discovery & Compliance',
-    description: 'Can search and AI systems interpret, cite, and safely surface the page?',
-    keys: ['seo_foundations', 'ai_readiness', 'local_gbp'],
+    id: 'seo_foundations',
+    label: 'SEO Foundations',
+    description: 'Can search systems retrieve and interpret the page foundations?',
+    keys: ['seo_foundations'],
+  },
+  {
+    id: 'ai_readiness',
+    label: 'AI Readiness',
+    description: 'Can answer engines identify, verify, and cite the page accurately?',
+    keys: ['ai_readiness', 'local_gbp'],
   },
 ]
 
@@ -104,7 +118,7 @@ export function groupFindingsBySignal(findings: Finding[]): GroupedSignal[] {
 
   const unassigned = findings.filter((finding) => !assigned.has(finding.key))
   if (unassigned.length) {
-    const discovery = groups.find((group) => group.id === 'discovery')
+    const discovery = groups.find((group) => group.id === 'ai_readiness')
     if (discovery) {
       discovery.findings = buildPriorityQueue([...discovery.findings, ...unassigned])
       const severities = discovery.findings.map(findingSeverity)

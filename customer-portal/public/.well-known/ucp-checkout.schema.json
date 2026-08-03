@@ -1,19 +1,20 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://nebulacomponents.shop/.well-known/ucp-checkout.schema.json",
-  "name": "shop.nebulacomponents.commerce.checkout",
-  "title": "Nebula One-Leak Repair Sprint Checkout",
-  "description": "Creates a Stripe-hosted checkout session for the fixed-price Nebula One-Leak Repair Sprint.",
+  "$id": "https://nebulacomponents.com/.well-known/ucp-checkout.schema.json",
+  "name": "com.nebulacomponents.commerce.checkout",
+  "title": "Nebula One-Leak Self-Implementation Kit Checkout",
+  "description": "Creates an audit-bound Stripe-hosted checkout session for the fixed-price $97 self-implementation kit. A verified audit-unlock cookie is also required.",
   "type": "object",
-  "required": ["offerKey", "email"],
+  "required": ["offerKey", "auditId"],
   "properties": {
     "offerKey": {
       "const": "fix-pack",
       "description": "Server-recognized offer identifier. Prices and amounts are never accepted from clients."
     },
-    "email": {
+    "auditId": {
       "type": "string",
-      "format": "email"
+      "format": "uuid",
+      "description": "Completed eligible audit bound to the caller's verified unlock cookie."
     }
   },
   "additionalProperties": false

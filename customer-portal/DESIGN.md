@@ -5,10 +5,13 @@ colors:
   near-black: "#050505"
   bg-elevated: "#0a0a0a"
   bg-panel: "#111111"
-  signal-emerald: "#10b981"
-  emerald-light: "#34d399"
-  emerald-dark: "#059669"
-  emerald-dim: "rgba(16, 185, 129, 0.1)"
+  bg-surface: "#0d1110"
+  signal-teal: "#00c2a0"
+  teal-light: "#33d4b8"
+  teal-dark: "#009980"
+  teal-dim: "rgba(0, 194, 160, 0.1)"
+  secondary: "#4a7fa5"
+  secondary-dim: "rgba(74, 127, 165, 0.1)"
   fg: "#ffffff"
   fg-muted: "#9e9e9e"
   fg-dim: "#666666"
@@ -22,14 +25,15 @@ typography:
   display:
     fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, system-ui, sans-serif"
     fontSize: "clamp(2.5rem, 6vw, 4rem)"
-    fontWeight: 700
+    fontWeight: 800
     lineHeight: 1.1
-    letterSpacing: "-0.03em"
+    letterSpacing: "-0.04em"
   headline:
     fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, system-ui, sans-serif"
     fontSize: "clamp(2rem, 4vw, 2.5rem)"
     fontWeight: 700
     lineHeight: 1.2
+    letterSpacing: "0.02em"
   title:
     fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, system-ui, sans-serif"
     fontSize: "1.5rem"
@@ -64,16 +68,16 @@ spacing:
   "2xl": "64px"
 components:
   button-primary:
-    backgroundColor: "{colors.signal-emerald}"
+    backgroundColor: "{colors.signal-teal}"
     textColor: "{colors.near-black}"
     rounded: "{rounded.lg}"
     padding: "16px 32px"
   button-primary-hover:
-    backgroundColor: "{colors.emerald-light}"
+    backgroundColor: "{colors.teal-light}"
     textColor: "{colors.near-black}"
   button-secondary:
     backgroundColor: "transparent"
-    textColor: "{colors.signal-emerald}"
+    textColor: "{colors.signal-teal}"
     rounded: "{rounded.lg}"
     padding: "14px 28px"
   card-default:

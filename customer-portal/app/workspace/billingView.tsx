@@ -106,12 +106,12 @@ export default function BillingView({ email }: { email: string }) {
         >
           <div>
             <p className="text-xl font-bold">
-              {isOwner ? 'One-Leak Repair Sprint' : 'Free'}
+              {isOwner ? 'One-Leak Self-Implementation Kit' : 'Free'}
             </p>
             <p className="text-sm text-fg-muted mt-1">
               {isOwner
-                ? 'Targeted AI prompts for one failing conversion signal, delivered instantly. Includes a 30-day re-audit.'
-                : 'Free landing page audit — 60-second diagnosis across conversion, technical, and discoverability signals.'}
+                ? 'Targeted implementation instructions for one failing conversion signal, sent after successful payment. Includes a 30-day re-audit.'
+                : 'Free landing page audit — diagnosis across conversion, technical, and discoverability signals.'}
             </p>
           </div>
           <span
@@ -156,7 +156,7 @@ export default function BillingView({ email }: { email: string }) {
           <div className="rounded-xl border border-dashed border-border p-8 text-center">
             <p className="text-fg font-medium">No purchases yet</p>
             <p className="text-sm text-fg-dim mt-1">
-              When you buy the One-Leak Repair Sprint, the receipt and fulfillment status
+              When you buy the One-Leak Self-Implementation Kit, the receipt and fulfillment status
               appear here automatically.
             </p>
             <a
@@ -212,8 +212,8 @@ export default function BillingView({ email }: { email: string }) {
             <>
               Receipts are emailed by Stripe for every payment. Need a copy or have a billing
               question?{' '}
-              <a href="mailto:hello@nebulacomponents.shop" className="text-accent-light hover:underline">
-                hello@nebulacomponents.shop
+              <a href="mailto:hello@nebulacomponents.com" className="text-accent-light hover:underline">
+                hello@nebulacomponents.com
               </a>
             </>
           )}

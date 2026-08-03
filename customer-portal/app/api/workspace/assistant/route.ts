@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
@@ -60,7 +61,7 @@ function buildFallbackAnswer(
 ): string {
   const valid = audits.filter((a): a is AuditDetail => a !== null)
   if (valid.length === 0) {
-    return `No audit data is available yet for ${email}. Run a free audit at nebulacomponents.shop/audit to get data-grounded answers.`
+    return `No audit data is available yet for ${email}. Run a free audit at nebulacomponents.com/audit to get data-grounded answers.`
   }
 
   const questionLower = question.toLowerCase()
@@ -146,16 +147,18 @@ function buildFallbackAnswer(
 }
 
 export async function POST(request: NextRequest) {
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
   try {
     const body = await request.json()
-    const { email, question, auditIds } = body as {
-      email: string
+    const { question, auditIds } = body as {
       question: string
       auditIds: string[]
     }
+    const email = auth.user.email
 
-    if (!email || !question) {
-      return NextResponse.json({ error: 'email and question are required' }, { status: 400 })
+    if (!question) {
+      return NextResponse.json({ error: 'question is required' }, { status: 400 })
     }
 
     const ids = (auditIds || []).slice(0, 5)

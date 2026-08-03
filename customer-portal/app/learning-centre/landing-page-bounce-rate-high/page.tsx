@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'A high bounce rate on paid traffic means the first screen is not delivering on the promise that brought visitors there. Bounce is a symptom - these are the causes.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre/landing-page-bounce-rate-high',
+    canonical: 'https://nebulacomponents.com/learning-centre/landing-page-bounce-rate-high',
   },
 }
 
@@ -15,7 +15,7 @@ const articleSchema = createArticleSchema({
   headline: 'Landing Page Bounce Rate High? It Is Usually 3 Diagnosable Causes',
   description:
     'A high bounce rate on paid traffic means the first screen is not delivering on the promise that brought visitors there. Bounce is a symptom - these are the causes.',
-  url: 'https://nebulacomponents.shop/learning-centre/landing-page-bounce-rate-high',
+  url: 'https://nebulacomponents.com/learning-centre/landing-page-bounce-rate-high',
   publishedDate: '2026-07-16',
   modifiedDate: '2026-07-21',
 })
@@ -280,9 +280,8 @@ export default function LandingPageBounceRateHigh() {
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 9 signals and identifies which
-              one is producing your bounce. The $97 One-Leak Repair Sprint
-              selects one high-confidence page-level repair, confirms the
-              scope with you, implements it, and verifies the live change.
+              one is producing your bounce. The $97 One-Leak Self-Implementation Kit
+              delivers a tailored kit for one high-confidence page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition.
               It does not promise conversion lift.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -296,7 +295,7 @@ export default function LandingPageBounceRateHigh() {
                 href="/pricing"
                 className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
-                See the One-Leak Repair Sprint
+                See the One-Leak Self-Implementation Kit
               </Link>
             </div>
           </section>

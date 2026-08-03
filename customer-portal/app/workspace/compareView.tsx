@@ -132,7 +132,6 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
         }
       })
     ).finally(() => setLoading(false))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [beforeId, afterId])
 
   if (sorted.length < 2) {
@@ -200,7 +199,7 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
     return { fixed: byImpact(fixed), fresh: byImpact(fresh), improved: byImpact(improved), worsened: byImpact(worsened), unchanged: byImpact(unchanged) }
   }, [beforeDetail, afterDetail])
 
-  const selectOptions = (excludeId?: string | null) =>
+  const selectOptions = (_excludeId?: string | null) =>
     sorted.map((a) => (
       <option key={a.id} value={a.id}>
         {displayUrl(a.url)} · {fmtDate(a.completed_at || a.created_at)} · {Math.round(scoreOf(a) * 10)}/100
@@ -295,14 +294,12 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
             <div>
               <p className="text-xs text-fg-dim mb-2">Before · {fmtDate(before.completed_at || before.created_at)}</p>
               <div className="rounded-lg border border-border overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={before.screenshot_url} alt="Before" className="w-full object-cover object-top" />
               </div>
             </div>
             <div>
               <p className="text-xs text-fg-dim mb-2">After · {fmtDate(after.completed_at || after.created_at)}</p>
               <div className="rounded-lg border border-border overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={after.screenshot_url} alt="After" className="w-full object-cover object-top" />
               </div>
             </div>

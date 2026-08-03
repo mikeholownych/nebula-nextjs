@@ -27,12 +27,12 @@ export function generateMetadata({
       title: `${t.name} Landing Page Audit: What Nebula Found | Nebula`,
       description: t.summary,
       alternates: {
-        canonical: `https://nebulacomponents.shop/teardowns/${t.slug}`,
+        canonical: `https://nebulacomponents.com/teardowns/${t.slug}`,
       },
       openGraph: {
         title: `${t.name} Landing Page Audit: ${t.score}/10 — What the Engine Found`,
         description: t.summary,
-        url: `https://nebulacomponents.shop/teardowns/${t.slug}`,
+        url: `https://nebulacomponents.com/teardowns/${t.slug}`,
       },
     }
   })
@@ -216,7 +216,7 @@ export default async function TeardownPage({
             Find the Leak →
           </Link>
           <p className="mt-4 text-xs text-fg-muted">
-            If it finds something worth fixing, the $97 One-Leak Repair Sprint implements the highest-impact finding.
+            If it finds something worth fixing, the $97 One-Leak Self-Implementation Kit supplies the tailored copy, code, or configuration change for one selected finding.
           </p>
         </section>
       </article>

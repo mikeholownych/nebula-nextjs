@@ -5,13 +5,13 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Traffic But No Form Fills: Fix The Leak | Nebula',
   description: 'Getting traffic but no form fills? The form is almost never the first problem. Here\'s how to diagnose where trust broke down before visitors ever reached the form.',
-  alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/traffic-but-no-form-fills' },
+  alternates: { canonical: 'https://nebulacomponents.com/learning-centre/traffic-but-no-form-fills' },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'Traffic But No Form Fills: The Form Is Usually Not The First Leak',
   description: 'Getting traffic but no form fills? The form is almost never the first problem. Here\'s how to diagnose where trust broke down before visitors ever reached the form.',
-  url: 'https://nebulacomponents.shop/learning-centre/traffic-but-no-form-fills',
+  url: 'https://nebulacomponents.com/learning-centre/traffic-but-no-form-fills',
   publishedDate: '2026-07-21',
   modifiedDate: '2026-07-21',
 })

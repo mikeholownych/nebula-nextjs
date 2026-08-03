@@ -6,7 +6,7 @@ import { LinkButton } from '@/components/ui/LinkButton'
 
 const title = 'Landing Page Intelligence Stack: 6 Evidence-Grade Workflows'
 const description = 'Download six inspectable workflows for message match, trust, mobile layout, CTA friction, prioritization, and fix verification.'
-const canonical = 'https://nebulacomponents.shop/learning-centre/landing-page-intelligence-stack'
+const canonical = 'https://nebulacomponents.com/learning-centre/landing-page-intelligence-stack'
 const downloadHref = '/downloads/nebula-landing-page-intelligence-stack-v1.zip'
 
 export const metadata: Metadata = {
@@ -69,8 +69,8 @@ const articleSchema = createArticleSchema({
 })
 
 const breadcrumbSchema = createBreadcrumbSchema([
-  { name: 'Home', url: 'https://nebulacomponents.shop' },
-  { name: 'Learning Centre', url: 'https://nebulacomponents.shop/learning-centre' },
+  { name: 'Home', url: 'https://nebulacomponents.com' },
+  { name: 'Learning Centre', url: 'https://nebulacomponents.com/learning-centre' },
   { name: 'Landing Page Intelligence Stack', url: canonical },
 ])
 

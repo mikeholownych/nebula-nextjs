@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://nebulacomponents.shop/schemas/landing-page-evidence-record-v1.json",
+  "$id": "https://nebulacomponents.com/schemas/landing-page-evidence-record-v1.json",
   "title": "Landing Page Evidence Record",
   "type": "object",
   "additionalProperties": false,

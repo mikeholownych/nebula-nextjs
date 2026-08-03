@@ -1,20 +1,30 @@
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import Link from 'next/link'
-import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
+import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
 import { Card } from '@/components/ui'
 import CheckoutPageTracker from './CheckoutPageTracker'
+import CheckoutCTAButton from './CheckoutCTAButton'
 
 export const metadata: Metadata = {
-  title: 'Checkout — One-Leak Repair Sprint | Nebula Components',
+  title: 'Checkout — One-Leak Self-Implementation Kit | Nebula Components',
   description:
-    'Purchase the One-Leak Repair Sprint for $97. One landing page, one targeted AI prompt pack — implement the fix yourself or with your developer.',
+    'Purchase the $97 One-Leak Self-Implementation Kit for one audited landing-page finding.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/checkout',
+    canonical: 'https://nebulacomponents.com/checkout',
   },
+  robots: { index: false, follow: false },
 }
 
-export default function CheckoutPage() {
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
+export default async function CheckoutPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ audit_id?: string }>
+}) {
+  const { audit_id: auditId } = await searchParams
+  const eligibleAuditId = typeof auditId === 'string' && UUID_RE.test(auditId)
   return (
     <main id="main-content" className="min-h-screen bg-bg px-6 py-12">
       <Suspense fallback={null}><CheckoutPageTracker /></Suspense>
@@ -31,7 +41,7 @@ export default function CheckoutPage() {
 
         <Card variant="bordered" className="mb-6">
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-            One page · one repair · verified
+            One page · one finding · self-implemented
           </p>
           <h2 className="mb-4 text-xl font-semibold text-fg">{REPAIR_SPRINT_OFFER.name}</h2>
           <ul className="mb-4 space-y-2 text-sm text-fg-muted">
@@ -48,19 +58,32 @@ export default function CheckoutPage() {
           </div>
         </Card>
 
-        <a
-          href={REPAIR_SPRINT_OFFER.checkoutUrl}
-          className="mt-2 block w-full rounded-xl bg-accent py-4 text-center font-semibold text-bg transition-colors hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
-        >
-          Pay $97 - Secure checkout via Stripe
-        </a>
+        {eligibleAuditId ? (
+          <CheckoutCTAButton
+            auditId={auditId}
+            endpoint="/api/checkout"
+            offerKey={REPAIR_SPRINT_OFFER.key}
+          />
+        ) : (
+          <div className="rounded-xl border border-border bg-bg-muted/30 p-5 text-center">
+            <p className="text-sm text-fg-muted">
+              The kit is generated from a completed audit. Run or reopen your audit before checkout.
+            </p>
+            <Link
+              href="/audit"
+              className="mt-4 inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg"
+            >
+              Run the free audit
+            </Link>
+          </div>
+        )}
 
         <p className="mt-6 text-center text-sm text-fg-muted">
           Card details are entered only on Stripe. Nebula does not collect or store payment information.
         </p>
 
         <p className="mt-3 text-center text-sm text-fg-muted">
-          Questions? Email <span className="text-fg">hello{'\u0040'}nebulacomponents.shop</span> before purchasing.
+          Questions? Email <span className="text-fg">hello{'\u0040'}nebulacomponents.com</span> before purchasing.
         </p>
 
         <div className="mt-8 text-center">
@@ -73,21 +96,21 @@ export default function CheckoutPage() {
           <h2 className="mb-3 text-base font-semibold text-fg">What happens after you pay</h2>
           <ol className="space-y-3">
             <li>1. Stripe confirms your purchase immediately.</li>
-            <li>2. Your targeted AI prompts are delivered — exact copy, code, or configuration changes written for your specific failing signals.</li>
-            <li>3. You implement them yourself, with your developer, or through your CMS. No site access required from Nebula.</li>
+            <li>2. Your tailored kit is sent by email — exact copy, code, or configuration written for one selected finding.</li>
+            <li>3. You implement it yourself, with your developer, or through your CMS. No site access is required from Nebula.</li>
             <li>4. Run the free audit again within 30 days to verify the fix held.</li>
           </ol>
 
           <h2 className="mb-3 mt-6 text-base font-semibold text-fg">Bounded scope</h2>
           <p>
-            This purchase covers AI prompts for one high-impact finding from your audit — exact copy changes, code snippets, or configuration fixes targeted to your specific page. It excludes full redesigns, multiple pages, backend application logic, analytics migrations, and paid third-party tools.
+            This purchase covers a self-implementation kit for one high-impact finding from your audit — exact copy, a code snippet, or a configuration change targeted to your specific page. It excludes full redesigns, multiple pages, backend application logic, analytics migrations, and paid third-party tools.
           </p>
 
           <h2 className="mb-3 mt-6 text-base font-semibold text-fg">Evidence, not a lift guarantee</h2>
           <p>
             We verify what page condition was observed, what was changed, and whether that condition
             changed on re-audit. Traffic quality, offer strength, campaign changes, and measurement
-            windows remain outside this repair, so the service does not guarantee conversion lift.
+            windows remain outside this kit, so the service does not guarantee conversion lift.
           </p>
         </section>
       </div>

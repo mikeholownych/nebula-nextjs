@@ -5,13 +5,13 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Retargeting Ads Not Converting: The Landing Page Is Still The Issue | Nebula Components',
   description: 'Retargeting campaigns that do not convert send warm traffic to the same broken landing pages as cold campaigns.',
-  alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/retargeting-ads-not-converting' },
+  alternates: { canonical: 'https://nebulacomponents.com/learning-centre/retargeting-ads-not-converting' },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'Retargeting Ads Not Converting? The First Page Failed Them',
   description: 'Retargeting campaigns that do not convert send warm traffic to the same broken landing pages as cold campaigns.',
-  url: 'https://nebulacomponents.shop/learning-centre/retargeting-ads-not-converting',
+  url: 'https://nebulacomponents.com/learning-centre/retargeting-ads-not-converting',
   publishedDate: '2026-01-01',
   modifiedDate: '2026-07-27',
 })
@@ -142,9 +142,8 @@ export default function LearningCentrePage() {
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Find the leak on your page</h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
-              The free Nebula audit identifies likely page-side leaks. The $97 One-Leak Repair Sprint
-              selects one high-confidence page-level repair, confirms the scope with you, implements it,
-              and verifies the live change. It does not promise conversion lift.
+              The free Nebula audit identifies likely page-side leaks. The $97 One-Leak Self-Implementation Kit
+              delivers a tailored kit for one high-confidence page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition. It does not promise conversion lift.
             </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/audit" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">

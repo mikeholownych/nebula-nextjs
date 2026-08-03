@@ -22,7 +22,7 @@ import {
   getPublishedCitableRoutes,
 } from '@/app/resources/citable/content'
 
-const ORIGIN = 'https://nebulacomponents.shop'
+const ORIGIN = 'https://nebulacomponents.com'
 const root = process.cwd()
 
 const publishedPaths = [
@@ -125,7 +125,7 @@ describe('Citable information architecture', () => {
       .map((script) => JSON.parse(script.textContent ?? '{}'))
       .find((schema) => schema['@type'] === 'SoftwareApplication')
     expect(softwareSchema?.['@id']).toBe(
-      'https://nebulacomponents.shop/resources/citable#software',
+      'https://nebulacomponents.com/resources/citable#software',
     )
   })
 

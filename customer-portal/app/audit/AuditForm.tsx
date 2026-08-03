@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Card } from '@/components/ui'
 import posthog from '@/app/lib/posthog-browser'
+import { analyticsHeaders } from '@/app/lib/client-analytics'
 
 function AuditFormContent() {
   const [url, setUrl] = useState('')
@@ -58,14 +59,12 @@ function AuditFormContent() {
     })
 
     try {
-      const wsEmail = window.localStorage.getItem('nebula_ws_email')
       const response = await fetch('/api/audit/start', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...analyticsHeaders() },
         body: JSON.stringify({
           url: processedUrl,
           referrer: referrer || undefined,
-          email: wsEmail || undefined,
           audit_reason: reason.trim() || undefined,
         }),
       })

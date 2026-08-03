@@ -14,7 +14,7 @@ export default function ThankYouPage() {
           <div className="mb-4 text-4xl">✓</div>
           <h1 className="mb-3 text-3xl font-bold text-fg">You&apos;re in.</h1>
           <p className="mb-2 text-fg-muted">
-            Your One-Leak Repair Sprint is confirmed. We&apos;ll contact you at the email used during checkout - expect to hear from us within one business day to confirm the audited URL, repair scope, and access path.
+            Your payment is confirmed. The One-Leak Self-Implementation Kit will be sent to the email used at checkout. You or your developer applies the tailored change; Nebula does not require site access.
           </p>
           <p className="text-sm text-fg-muted">
             Payment status: confirmed. Your Stripe receipt is your payment confirmation.

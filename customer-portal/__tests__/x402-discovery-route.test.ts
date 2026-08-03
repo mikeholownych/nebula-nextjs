@@ -29,7 +29,7 @@ describe('GET /api/v1 x402 discovery route', () => {
     const challenge = decodeChallenge(response)
 
     expect(challenge.x402Version).toBe(2)
-    expect(challenge.resource.url).toBe('https://nebulacomponents.shop/api/v1')
+    expect(challenge.resource.url).toBe('https://nebulacomponents.com/api/v1')
     expect(NETWORK).toBe('eip155:8453')
     expect(FACILITATOR_URL).toBe('https://facilitator.payai.network')
     expect(challenge.accepts).toEqual(

@@ -22,7 +22,7 @@ const auditResultSchema = expect.objectContaining({
 
 describe('x402scan OpenAPI discovery contract', () => {
   it('publishes ownership contact and agent guidance', () => {
-    expect(spec.info.contact.email).toBe('hello@nebulacomponents.shop')
+    expect(spec.info.contact.email).toBe('hello@nebulacomponents.com')
     expect(spec.info['x-guidance']).toEqual(expect.any(String))
     expect(spec.info['x-guidance'].length).toBeGreaterThan(20)
   })
@@ -44,7 +44,7 @@ describe('x402scan OpenAPI discovery contract', () => {
   })
 
   it('declares an invocable required URL query parameter for GET /v1', () => {
-    expect(spec.servers).toEqual([{ url: 'https://nebulacomponents.shop' }])
+    expect(spec.servers).toEqual([{ url: 'https://nebulacomponents.com' }])
     const operation = spec.paths['/api/v1'].get
     expect(operation.parameters).toEqual(
       expect.arrayContaining([
@@ -84,7 +84,12 @@ describe('x402scan OpenAPI discovery contract', () => {
     ['/api/audit/start', 'post'],
   ])('%s is explicitly free/non-x402 discovery metadata', (path, method) => {
     const operation = spec.paths[path][method]
-    expect(operation.security).toEqual([])
+    if (path === '/api/checkout') {
+      expect(operation.security).toEqual(expect.any(Array))
+      expect(operation.security.length).toBeGreaterThan(0)
+    } else {
+      expect(operation.security).toEqual([])
+    }
     expect(operation['x-payment-info']).toBeUndefined()
     expect(operation.responses['402']).toBeUndefined()
   })

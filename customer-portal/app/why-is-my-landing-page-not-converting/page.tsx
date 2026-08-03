@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description:
     'Step-by-step diagnostic guide for landing pages getting clicks but no conversions. Identify observable friction across message match, trust, and CTA hierarchy.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/why-is-my-landing-page-not-converting',
+    canonical: 'https://nebulacomponents.com/why-is-my-landing-page-not-converting',
   },
   openGraph: {
     title: 'Why Is My Landing Page Not Converting? Diagnostic Guide | Nebula',
     description:
       'Step-by-step diagnostic guide for landing pages getting clicks but no conversions. Identify observable friction across message match, trust, and CTA hierarchy.',
-    url: 'https://nebulacomponents.shop/why-is-my-landing-page-not-converting',
+    url: 'https://nebulacomponents.com/why-is-my-landing-page-not-converting',
     siteName: 'Nebula Components',
     type: 'article',
   },
@@ -26,7 +26,7 @@ const articleSchema = {
     'Detailed diagnostic guide separating page-level conversion friction from ad targeting, offer economics, and traffic quality.',
   author: { '@type': 'Organization', name: 'Nebula Components' },
   publisher: { '@type': 'Organization', name: 'Nebula Components' },
-  mainEntityOfPage: 'https://nebulacomponents.shop/why-is-my-landing-page-not-converting',
+  mainEntityOfPage: 'https://nebulacomponents.com/why-is-my-landing-page-not-converting',
 }
 
 const faqItems = [
@@ -58,12 +58,12 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://nebulacomponents.shop' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://nebulacomponents.com' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Why Is My Landing Page Not Converting',
-      item: 'https://nebulacomponents.shop/why-is-my-landing-page-not-converting',
+      item: 'https://nebulacomponents.com/why-is-my-landing-page-not-converting',
     },
   ],
 }
@@ -206,7 +206,7 @@ export default function WhyNotConvertingPage() {
               SaaS Audit Guide
             </Link>
             <Link href="/pricing" className="hover:text-accent">
-              Repair Sprint Pricing
+              Self-Implementation Kit Pricing
             </Link>
           </footer>
         </article>

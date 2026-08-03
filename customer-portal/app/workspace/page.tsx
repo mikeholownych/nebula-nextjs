@@ -8,10 +8,10 @@ export const metadata: Metadata = {
     title: 'Workspace — Nebula Components',
     description:
       'Dashboard, projects, and immutable audit history for your landing pages.',
-    url: 'https://nebulacomponents.shop/workspace',
+    url: 'https://nebulacomponents.com/workspace',
   },
   alternates: {
-    canonical: 'https://nebulacomponents.shop/workspace',
+    canonical: 'https://nebulacomponents.com/workspace',
   },
 }
 

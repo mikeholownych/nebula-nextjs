@@ -11,7 +11,7 @@ import { NextResponse } from 'next/server'
 
 const REGISTRATION_INFO = {
   service: 'Nebula Components',
-  url: 'https://nebulacomponents.shop',
+  url: 'https://nebulacomponents.com',
   auth_required: false,
   public_endpoints: [
     { path: '/api/audit/run', method: 'POST', description: 'Run a landing page conversion audit' },
@@ -61,7 +61,7 @@ export async function POST(request: Request) {
         'Use public endpoints without credentials.',
         'Contact nebulashop@agentmail.to for API key provisioning if write access is needed.',
       ],
-      documentation: 'https://nebulacomponents.shop/auth.md',
+      documentation: 'https://nebulacomponents.com/auth.md',
     },
     { status: 201 }
   )

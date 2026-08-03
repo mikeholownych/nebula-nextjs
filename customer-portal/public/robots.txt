@@ -1,4 +1,4 @@
-# nebulacomponents.shop — robots.txt
+# nebulacomponents.com — robots.txt
 # Policy: search indexing and answer-engine retrieval are welcome.
 # Model-training crawlers listed below are explicitly disallowed.
 #
@@ -9,55 +9,80 @@
 # AI model training — disallowed
 User-Agent: GPTBot
 Disallow: /
+Content-Signal: ai-train=no, search=no, ai-input=no
 
 User-Agent: ClaudeBot
 Disallow: /
+Content-Signal: ai-train=no, search=no, ai-input=no
 
 User-Agent: Google-Extended
 Disallow: /
-
-User-Agent: CCBot
-Disallow: /
-
-User-Agent: omgili
-Disallow: /
+Content-Signal: ai-train=no, search=no, ai-input=no
 
 User-Agent: Applebot-Extended
 Disallow: /
+Content-Signal: ai-train=no, search=no, ai-input=no
 
-# AI answer-engine input and retrieval — allowed
-User-Agent: ChatGPT-User
-Allow: /
+User-Agent: CCBot
+Disallow: /
+Content-Signal: ai-train=no, search=no, ai-input=no
 
-User-Agent: OAI-SearchBot
-Allow: /
+User-Agent: omgili
+Disallow: /
+Content-Signal: ai-train=no, search=no, ai-input=no
+
+User-Agent: Bytespider
+Disallow: /
+Content-Signal: ai-train=no, search=no, ai-input=no
 
 User-Agent: anthropic-ai
 Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+# AI answer/search retrieval — allowed; training still prohibited
+User-Agent: OAI-SearchBot
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+User-Agent: ChatGPT-User
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 
 User-Agent: PerplexityBot
 Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 
 User-Agent: Perplexity-User
 Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+User-Agent: Claude-SearchBot
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 
 User-Agent: GoogleOther
 Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 
 User-Agent: cohere-ai
 Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 
 User-Agent: meta-externalagent
 Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 
-# Standard search indexing — allowed
+# Standard crawlers
 User-Agent: *
 Allow: /
 Disallow: /api/
 Disallow: /audit/*/results
+Disallow: /workspace/
+Disallow: /checkout/
 Disallow: /audit/*/processing
 Disallow: /dashboard/
 Disallow: /lead-dashboard/
 Disallow: /audit-dashboard/
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 
-Sitemap: https://nebulacomponents.shop/sitemap.xml
+Sitemap: https://nebulacomponents.com/sitemap.xml

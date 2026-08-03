@@ -6,7 +6,7 @@ import { createCollectionPageSchema } from '@/app/lib/schema'
 export const metadata: Metadata = {
   title: 'Learning Centre - Landing Page Conversion Leaks | Nebula',
   description: "Free conversion guides for founders burning ad spend on pages that don't convert. Diagnose Google, Meta, TikTok, and LinkedIn ad leaks. Start with the free...",
-  alternates: { canonical: 'https://nebulacomponents.shop/learning-centre' },
+  alternates: { canonical: 'https://nebulacomponents.com/learning-centre' },
 }
 
 export default function LearningCentreIndex() {
@@ -15,10 +15,10 @@ export default function LearningCentreIndex() {
   const collectionSchema = createCollectionPageSchema({
     name: 'Learning Centre - Landing Page Conversion Leaks',
     description: "Free conversion guides for founders burning ad spend on pages that don't convert.",
-    url: 'https://nebulacomponents.shop/learning-centre',
+    url: 'https://nebulacomponents.com/learning-centre',
     items: articles.map((a) => ({
       name: a.title,
-      url: `https://nebulacomponents.shop/learning-centre/${a.slug}`,
+      url: `https://nebulacomponents.com/learning-centre/${a.slug}`,
     })),
   })
 

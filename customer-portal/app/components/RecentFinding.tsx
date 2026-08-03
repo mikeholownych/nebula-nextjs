@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-interface RecentFinding {
+interface RecentFindingData {
   label: string
   issue: string
   impact: number
@@ -19,13 +19,13 @@ interface RecentFinding {
  * Renders nothing if no data is available (graceful degradation).
  */
 export default function RecentFinding() {
-  const [finding, setFinding] = useState<RecentFinding | null>(null)
+  const [finding, setFinding] = useState<RecentFindingData | null>(null)
 
   useEffect(() => {
     let cancelled = false
     fetch('/api/audit/stats/recent-finding')
       .then((res) => (res.ok ? res.json() : null))
-      .then((data: RecentFinding | null) => {
+      .then((data: RecentFindingData | null) => {
         if (!cancelled && data && data.label && data.issue) setFinding(data)
       })
       .catch(() => {

@@ -29,9 +29,9 @@ describe('audit report information architecture', () => {
     ])
   })
 
-  it('defines exactly seven conversion signal groups', () => {
-    expect(SIGNAL_GROUPS).toHaveLength(7)
-    expect(new Set(SIGNAL_GROUPS.map((group) => group.id)).size).toBe(7)
+  it('defines exactly nine conversion signal groups', () => {
+    expect(SIGNAL_GROUPS).toHaveLength(9)
+    expect(new Set(SIGNAL_GROUPS.map((group) => group.id)).size).toBe(9)
   })
 
   it('sorts the priority queue by impact descending, then effort ascending', () => {
@@ -55,8 +55,10 @@ describe('audit report information architecture', () => {
       finding({ key: 'social_proof' }),
       finding({ key: 'mobile' }),
       finding({ key: 'load_speed' }),
+      finding({ key: 'above_fold' }),
       finding({ key: 'ad_signals' }),
       finding({ key: 'seo_foundations' }),
+      finding({ key: 'ai_readiness' }),
     ]
 
     const grouped = groupFindingsBySignal(findings)

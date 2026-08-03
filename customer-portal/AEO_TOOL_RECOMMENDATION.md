@@ -102,7 +102,7 @@ For each query, track:
 
 1. Go to https://platform.tryprofound.com/welcome
 2. Sign up with work email
-3. Connect domain: `nebulacomponents.shop`
+3. Connect domain: `nebulacomponents.com`
 4. Add 20 priority prompts
 5. Set tracking to daily
 6. Connect Google Analytics

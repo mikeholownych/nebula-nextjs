@@ -43,7 +43,7 @@ export default function WhatIsLandingPageAudit() {
                 name: "Should I fix my landing page myself or pay someone?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "If the audit shows a low-difficulty issue, DIY may be sufficient. The $97 One-Leak Repair Sprint is for one high-confidence page-level repair that Nebula scopes, implements, and verifies.",
+                  text: "If the audit shows a low-difficulty issue, DIY may be sufficient. The $97 One-Leak Self-Implementation Kit is for one high-confidence page-level repair that Nebula scopes, implements, and verifies.",
                 },
               },
             ],
@@ -51,7 +51,7 @@ export default function WhatIsLandingPageAudit() {
         }}
       />
 
-      {/* Article Header */}
+      <main id="main-content">
       <header className="bg-[#0d1117] pt-28 pb-16 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-emerald-400 text-xs font-bold mb-4">
@@ -184,8 +184,8 @@ export default function WhatIsLandingPageAudit() {
                 <li>• Live implementation verification</li>
                 <li>• Same-scope re-audit evidence</li>
               </ul>
-              <Link href="/checkout" className="text-emerald-400 text-xs mt-4 inline-block hover:underline">
-                Review One-Leak Repair Sprint →
+              <Link href="/audit" className="text-emerald-400 text-xs mt-4 inline-block hover:underline">
+                Run the audit before checkout →
               </Link>
             </div>
           </div>
@@ -207,6 +207,7 @@ export default function WhatIsLandingPageAudit() {
           </Link>
         </section>
       </article>
+      </main>
     </>
   );
 }

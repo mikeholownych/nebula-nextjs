@@ -3,12 +3,12 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Editorial Standards — Nebula Components',
   description: 'Nebula Components editorial standards for content accuracy, provenance, and correction policy.',
-  alternates: { canonical: 'https://nebulacomponents.shop/editorial-standards' },
+  alternates: { canonical: 'https://nebulacomponents.com/editorial-standards' },
 }
 
 export default function EditorialStandardsPage() {
   return (
-    <div className="min-h-screen bg-bg text-fg font-sans">
+    <main id="main-content" className="min-h-screen bg-bg text-fg font-sans">
       <div className="max-w-3xl mx-auto px-6 py-16">
         <header className="mb-12">
           <p className="text-accent text-sm font-bold tracking-widest uppercase mb-4">Trust &amp; Accuracy</p>
@@ -71,14 +71,14 @@ export default function EditorialStandardsPage() {
 
           <div>
             <h2 className="text-2xl font-bold text-accent mb-3">Contact</h2>
-            <p className="text-fg-muted">To report an error or request clarification: <span className="text-accent">{'correct' + String.fromCharCode(64) + 'nebulacomponents.shop'}</span></p>
+            <p className="text-fg-muted">To report an error or request clarification: <span className="text-accent">{'correct' + String.fromCharCode(64) + 'nebulacomponents.com'}</span></p>
           </div>
         </section>
 
-        <footer className="mt-12 pt-24 border-t border-border">
+        <div className="mt-12 pt-24 border-t border-border">
           <p className="text-sm text-fg-dim">Last updated: July 15, 2026</p>
-        </footer>
+        </div>
       </div>
-    </div>
+    </main>
   )
 }

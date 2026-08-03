@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { pool } from '@/app/lib/db'
+import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 /**
  * GET /api/workspace/export?email=...
@@ -7,7 +8,9 @@ import { pool } from '@/app/lib/db'
  */
 
 export async function GET(request: NextRequest) {
-  const email = (request.nextUrl.searchParams.get('email') || '').trim().toLowerCase()
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
+  const email = auth.user.email
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: 'Valid email required' }, { status: 400 })
   }

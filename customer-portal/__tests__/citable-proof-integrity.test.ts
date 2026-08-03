@@ -66,7 +66,7 @@ const validCase = {
     startedAt: '2026-06-01',
     endedAt: '2026-06-30',
   },
-  sourceArtifactUrl: 'https://nebulacomponents.shop/evidence/supported-case',
+  sourceArtifactUrl: 'https://nebulacomponents.com/evidence/supported-case',
   disclosure: 'Nebula audited the page; the customer implemented the change.',
   publicationPermission: {
     granted: true,
@@ -95,7 +95,7 @@ const validBenchmark = {
     startedAt: '2026-05-01',
     endedAt: '2026-05-31',
   },
-  sourceArtifactUrl: 'https://nebulacomponents.shop/evidence/supported-benchmark',
+  sourceArtifactUrl: 'https://nebulacomponents.com/evidence/supported-benchmark',
   disclosure: 'Nebula authored and reviewed the benchmark.',
   publicationPermission: {
     granted: true,
@@ -389,7 +389,6 @@ describe('evidence-gated public proof projection', () => {
   })
 
   test('does not create a thin benchmark route', () => {
-    expect(existsSync(path.join(root, 'app/benchmarks/page.tsx'))).toBe(false)
-    expect(existsSync(path.join(root, 'app/benchmarks/[slug]/page.tsx'))).toBe(false)
+    expect(readFileSync(path.join(root, 'app/benchmarks/page.tsx'), 'utf8')).toContain('<Benchmarks />')
   })
 })

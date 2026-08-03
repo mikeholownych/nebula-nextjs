@@ -176,7 +176,7 @@ find . -name "*.test.*" | wc -l
 #### A. Hardcoded Secrets in Example
 ```bash
 # .env.example (should have placeholders)
-STRIPE_SECRET_KEY=sk_test_...
+STRIPE_SECRET_KEY=[REDACTED]
 DATABASE_URL=postgresql://nebula:***@localhost:5433/nebula_platform
 ```
 

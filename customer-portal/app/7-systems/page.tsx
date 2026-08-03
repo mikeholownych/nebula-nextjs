@@ -1,7 +1,7 @@
 export const metadata = {
   title: '7 Systems Every Ecom Brand Needs That Most Skip — Nebula Components',
   description: 'A conversion engineer\'s checklist of the 7 systems every ecommerce brand needs to stop leaking conversions.',
-  alternates: { canonical: 'https://nebulacomponents.shop/7-systems' },
+  alternates: { canonical: 'https://nebulacomponents.com/7-systems' },
 };
 
 const systems = [
@@ -243,10 +243,10 @@ export default function SevenSystemsPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="/checkout"
+                href="/audit"
                 className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-8 py-4 rounded-lg transition"
               >
-                Get the One-Leak Repair Sprint →
+                Run the audit before checkout →
               </a>
               <a
                 href="/audit"

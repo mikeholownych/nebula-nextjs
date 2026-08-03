@@ -5,13 +5,13 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Pricing Page Not Converting: The Real Reason Visitors Do Not Buy | Nebula Components',
   description: 'A pricing page that does not convert usually has one of four diagnosable problems. Identify yours before changing the price.',
-  alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/pricing-page-not-converting' },
+  alternates: { canonical: 'https://nebulacomponents.com/learning-centre/pricing-page-not-converting' },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'Pricing Page Not Converting? The Tier Structure May Be Wrong',
   description: 'A pricing page that does not convert usually has one of four diagnosable problems. Identify yours before changing the price.',
-  url: 'https://nebulacomponents.shop/learning-centre/pricing-page-not-converting',
+  url: 'https://nebulacomponents.com/learning-centre/pricing-page-not-converting',
   publishedDate: '2026-01-01',
   modifiedDate: '2026-07-27',
 })
@@ -141,9 +141,8 @@ export default function LearningCentrePage() {
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Fix your pricing page</h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
-              The free Nebula audit identifies likely page-side leaks. The $97 One-Leak Repair Sprint
-              selects one high-confidence page-level repair, confirms the scope with you, implements it,
-              and verifies the live change. It does not promise conversion lift.
+              The free Nebula audit identifies likely page-side leaks. The $97 One-Leak Self-Implementation Kit
+              delivers a tailored kit for one high-confidence page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition. It does not promise conversion lift.
             </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/audit" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">

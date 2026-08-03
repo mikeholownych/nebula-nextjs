@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { pool } from '@/app/lib/db'
+import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 /**
  * POST /api/workspace/delete-account
@@ -11,9 +12,10 @@ import { pool } from '@/app/lib/db'
  */
 
 export async function POST(request: NextRequest) {
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
   try {
-    const body = await request.json()
-    const email = (body.email || '').trim().toLowerCase()
+    const email = auth.user.email
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: 'Valid email required' }, { status: 400 })
@@ -58,10 +60,9 @@ export async function POST(request: NextRequest) {
  * Cancel a pending deletion request (within 7-day window)
  */
 export async function DELETE(request: NextRequest) {
-  const email = (request.nextUrl.searchParams.get('email') || '').trim().toLowerCase()
-  if (!email) {
-    return NextResponse.json({ error: 'email required' }, { status: 400 })
-  }
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
+  const email = auth.user.email
 
   try {
     const result = await pool.query(

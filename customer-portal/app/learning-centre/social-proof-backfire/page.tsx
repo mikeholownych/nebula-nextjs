@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Four specific testimonial configurations that actively reduce trust below baseline - stock photos, stale dates, ICP mismatch, and generic claims. How to diagnose and fix each one.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre/social-proof-backfire',
+    canonical: 'https://nebulacomponents.com/learning-centre/social-proof-backfire',
   },
 }
 
@@ -16,7 +16,7 @@ const articleSchema = createArticleSchema({
     'Social Proof Backfire: The 4 Testimonial Configurations That Hurt Conversion More Than No Testimonials At All',
   description:
     'Four specific testimonial configurations that actively reduce trust below baseline - stock photos, stale dates, ICP mismatch, and generic claims. How to diagnose and fix each one.',
-  url: 'https://nebulacomponents.shop/learning-centre/social-proof-backfire',
+  url: 'https://nebulacomponents.com/learning-centre/social-proof-backfire',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
 })

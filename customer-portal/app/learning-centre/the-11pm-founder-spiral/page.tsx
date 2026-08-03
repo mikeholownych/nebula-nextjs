@@ -6,14 +6,14 @@ export const metadata: Metadata = {
   title: 'The 11pm Founder Spiral | Nebula Learning Centre',
   description: 'It\'s 11:47pm and you\'ve refreshed Ads Manager three times. You\'re not looking for data. You\'re looking for reassurance. Here\'s what\'s actually happening - and what your page is silently doing while you spiral.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre/the-11pm-founder-spiral',
+    canonical: 'https://nebulacomponents.com/learning-centre/the-11pm-founder-spiral',
   },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'The 11pm Founder Spiral',
   description: 'It\'s 11:47pm and you\'ve refreshed Ads Manager three times. You\'re not looking for data. You\'re looking for reassurance. Here\'s what\'s actually happening - and what your page is silently doing while you spiral.',
-  url: 'https://nebulacomponents.shop/learning-centre/the-11pm-founder-spiral',
+  url: 'https://nebulacomponents.com/learning-centre/the-11pm-founder-spiral',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
 })

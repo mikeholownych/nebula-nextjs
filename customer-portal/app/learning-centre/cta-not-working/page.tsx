@@ -5,13 +5,13 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'CTA Not Working? Fix Commitment, Clarity, And Timing | Nebula',
   description: 'Your CTA fails when it asks for more than the page has earned. Learn the 4 CTA failure modes, the commitment ladder, and the copy formula that converts.',
-  alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/cta-not-working' },
+  alternates: { canonical: 'https://nebulacomponents.com/learning-centre/cta-not-working' },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'CTA Not Working? Fix Commitment, Clarity, And Timing',
   description: 'Your CTA fails when it asks for more than the page has earned. Learn the 4 CTA failure modes, the commitment ladder, and the copy formula that converts.',
-  url: 'https://nebulacomponents.shop/learning-centre/cta-not-working',
+  url: 'https://nebulacomponents.com/learning-centre/cta-not-working',
   publishedDate: '2026-07-21',
   modifiedDate: '2026-07-21',
 })

@@ -3,7 +3,7 @@
   "asOf": "2026-07-25",
   "entries": [
     {
-      "claimId": "claim-7-point-diagnosis",
+      "claimId": "claim-9-signal-diagnosis",
       "route": "/audit",
       "slot": "audit-method-summary",
       "projectionType": "visible_text",

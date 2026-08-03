@@ -5,13 +5,13 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Meta Ads High Frequency Not Converting: The Page Is The Problem | Nebula Components',
   description: 'High-frequency Meta ads that are not converting are usually not an ad fatigue problem. They are a landing page problem.',
-  alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/meta-ads-high-frequency-not-converting' },
+  alternates: { canonical: 'https://nebulacomponents.com/learning-centre/meta-ads-high-frequency-not-converting' },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'Meta Ads High Frequency? The Page May Be Burning Budget',
   description: 'High-frequency Meta ads that are not converting are usually not an ad fatigue problem. They are a landing page problem.',
-  url: 'https://nebulacomponents.shop/learning-centre/meta-ads-high-frequency-not-converting',
+  url: 'https://nebulacomponents.com/learning-centre/meta-ads-high-frequency-not-converting',
   publishedDate: '2026-01-01',
   modifiedDate: '2026-07-27',
 })
@@ -167,9 +167,8 @@ export default function LearningCentrePage() {
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Find the leak on your page</h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
-              The free Nebula audit identifies likely page-side leaks. The $97 One-Leak Repair Sprint
-              selects one high-confidence page-level repair, confirms the scope with you, implements it,
-              and verifies the live change. It does not promise conversion lift.
+              The free Nebula audit identifies likely page-side leaks. The $97 One-Leak Self-Implementation Kit
+              delivers a tailored kit for one high-confidence page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition. It does not promise conversion lift.
             </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/audit" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">

@@ -5,7 +5,7 @@ import { promisify } from 'util'
 import type { PoolClient } from 'pg'
 import { getPostHogClient, captureServerException } from '@/app/lib/posthog-server'
 import { pool } from '@/app/lib/db'
-import { isCanonicalFixPackReceipt, getActiveFixPack } from '@/app/lib/public-facts'
+import { isCanonicalFixPackReceipt } from '@/app/lib/public-facts'
 
 const execFileAsync = promisify(execFile)
 
@@ -23,12 +23,11 @@ async function sendSaleAlert(message: string): Promise<void> {
   }
 }
 
-// The exact One-Leak Repair Sprint price, in cents. Other live Stripe prices
-// still receive a sale alert, but only this amount creates a repair-sprint
+// The exact One-Leak Self-Implementation Kit price, in cents. Other live Stripe prices
+// still receive a sale alert, but only this amount creates a self-implementation-kit
 // kickoff. The first customer loops are intentionally manual: the persisted
-// purchase and alert are the source of truth, and no automatic deliverable is
-// sent before the repair scope and access path are confirmed with the buyer.
-const REPAIR_SPRINT_AMOUNT_CENTS = 9700
+// purchase and fulfillment state are the source of truth. Canonical receipts
+// trigger the bounded self-implementation-kit delivery automatically.
 
 // The database processing claim prevents concurrent dispatch. The delivery
 // script provides the second idempotency boundary, keyed by Stripe session ID,
@@ -130,8 +129,8 @@ export async function POST(request: NextRequest) {
       try {
         const insertResult = await pool.query(
           `INSERT INTO purchases
-            (stripe_session_id, stripe_event_id, customer_email, offer_key, amount_total, currency, payment_status, fulfillment_status)
-           VALUES ($1, $2, $3, $4, $5, $6, $7, 'review')
+            (stripe_session_id, stripe_event_id, customer_email, offer_key, amount_total, currency, payment_status, livemode, fulfillment_status)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'review')
            ON CONFLICT (stripe_session_id) DO NOTHING
            RETURNING stripe_session_id`,
           [
@@ -142,6 +141,7 @@ export async function POST(request: NextRequest) {
             session.amount_total,
             session.currency,
             session.payment_status,
+            event.livemode,
           ],
         )
         inserted = insertResult.rowCount === 1
@@ -178,8 +178,8 @@ export async function POST(request: NextRequest) {
 
       await client.query(
         `INSERT INTO purchases
-          (stripe_session_id, stripe_event_id, customer_email, offer_key, amount_total, currency, payment_status, fulfillment_status)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, 'pending')
+          (stripe_session_id, stripe_event_id, customer_email, offer_key, amount_total, currency, payment_status, livemode, fulfillment_status)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'pending')
          ON CONFLICT (stripe_session_id) DO NOTHING
          RETURNING stripe_session_id`,
         [
@@ -190,6 +190,7 @@ export async function POST(request: NextRequest) {
           session.amount_total,
           session.currency,
           session.payment_status,
+          event.livemode,
         ]
       )
 
@@ -226,44 +227,49 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ received: true, duplicate: true })
     }
 
-    // The One-Leak Repair Sprint is manual-first: while it's the live managed
-    // offer, a matching $97 receipt gets a Telegram kickoff alert instead of
-    // the retired automatic prompt-pack subprocess — Mike confirms the
-    // audited URL, repair scope, approval, and access path by hand before
-    // any deliverable goes out. If there's no currently-active managed offer
-    // (e.g. a $97 receipt arrives after the public price window closes),
-    // there's no live kickoff workflow to alert into, so it falls back to
-    // the legacy automatic delivery rather than silently doing nothing.
-    const activeFixPack = getActiveFixPack()
-    const isRepairSprint = activeFixPack !== undefined && session.amount_total === REPAIR_SPRINT_AMOUNT_CENTS
+    // Claim the receipt for fulfillment before any delivery side effect. The
+    // delivery script is independently idempotent by Stripe session ID, so a
+    // retry of a crash-sticky processing row is safe.
+    try {
+      const processingResult = await client.query(
+        `UPDATE purchases
+         SET fulfillment_status = 'processing'
+         WHERE stripe_session_id = $1
+           AND fulfillment_status IN ('pending', 'failed', 'processing')
+         RETURNING stripe_session_id`,
+        [session.id],
+      )
+      if (processingResult.rowCount !== 1) {
+        throw new Error('Fulfillment could not be claimed for processing')
+      }
+    } catch (err) {
+      console.error('Failed to claim fulfillment - will let Stripe retry:', err)
+      return NextResponse.json({ error: 'Fulfillment claim failed' }, { status: 500 })
+    }
 
     if (event.livemode) {
       const amount = session.amount_total != null
         ? `$${(session.amount_total / 100).toFixed(2)}`
         : 'unknown amount'
       const offerKey = session.metadata?.offer_key ?? 'unknown offer'
-      const email = session.customer_email ?? 'no email'
-      const message = isRepairSprint
-        ? `🛠 *REPAIR SPRINT KICKOFF REQUIRED*\n${amount} — ${email}\nsession: ${session.id}\nConfirm audited URL, one-repair scope, approval, and access path.`
-        : `💰 *SALE* — ${amount} — ${offerKey} — ${email}\nsession: ${session.id}`
+      const email = customerEmail
+      const message = `💰 *SALE* — ${amount} — ${offerKey} — ${email}\nsession: ${session.id}`
 
       void sendSaleAlert(message)
     }
 
-    if (!isRepairSprint) {
-      try {
-        await deliverPromptPack(auditId, customerEmail, session.id)
-      } catch (err) {
-        console.error('Legacy delivery fulfillment failed:', err)
-        captureServerException(err, { route: 'POST /api/webhooks/stripe', properties: { stripe_session_id: session.id, phase: 'fulfillment' } })
-        if (client && locked) {
-          await restoreFailedFulfillment(client, session.id)
-        }
-        return NextResponse.json(
-          { error: 'Fulfillment failed' },
-          { status: 500 },
-        )
+    try {
+      await deliverPromptPack(auditId, customerEmail, session.id)
+    } catch (err) {
+      console.error('Self-implementation kit delivery failed:', err)
+      captureServerException(err, { route: 'POST /api/webhooks/stripe', properties: { stripe_session_id: session.id, phase: 'fulfillment' } })
+      if (client && locked) {
+        await restoreFailedFulfillment(client, session.id)
       }
+      return NextResponse.json(
+        { error: 'Fulfillment failed' },
+        { status: 500 },
+      )
     }
 
     try {

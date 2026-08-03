@@ -6,14 +6,14 @@ export const metadata: Metadata = {
   title: 'Your Google Ads CTR Is 8% But Conversion Rate Is 0.1% - The Landing Page Disconnect Audit | Nebula',
   description: 'High CTR proves your ad works. A 0.1% conversion rate proves your landing page doesn\'t. Diagnose exactly why the ad-to-page handoff fails when click signals are strong.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre/google-ads-high-ctr-low-conversion',
+    canonical: 'https://nebulacomponents.com/learning-centre/google-ads-high-ctr-low-conversion',
   },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'Your Google Ads CTR Is 8% But Conversion Rate Is 0.1% - The Landing Page Disconnect Audit',
   description: 'High CTR proves your ad works. A 0.1% conversion rate proves your landing page doesn\'t. Diagnose exactly why the ad-to-page handoff fails when click signals are strong.',
-  url: 'https://nebulacomponents.shop/learning-centre/google-ads-high-ctr-low-conversion',
+  url: 'https://nebulacomponents.com/learning-centre/google-ads-high-ctr-low-conversion',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
 })

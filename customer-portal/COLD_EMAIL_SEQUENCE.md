@@ -33,7 +33,7 @@ We've diagnosed what we call the "proof gap" on 47 landing pages this quarter. 9
 
 Your page triggered the same pattern. I'm not asking you to buy anything — I want to give you the diagnosis free.
 
-Paste your URL here: nebulacomponents.shop
+Paste your URL here: nebulacomponents.com
 
 Takes 60 seconds. You'll see exactly what's leaking and which fix pays back fastest.
 
@@ -73,7 +73,7 @@ They fixed leak #1 in 20 minutes. Next day: first sale in 6 weeks.
 
 The diagnosis is free. The fix is $147. The ROI is measurable.
 
-Paste your URL: nebulacomponents.shop
+Paste your URL: nebulacomponents.com
 
 — Mike H
 
@@ -105,7 +105,7 @@ The visitors who didn't convert the first time? They're seeing the same page tha
 
 Run the audit before you spend another dollar on retargeting:
 
-nebulacomponents.shop
+nebulacomponents.com
 
 — Mike H
 
@@ -143,7 +143,7 @@ No pitch. No ask. Just a framework that's worked for 47 founders this quarter.
 
 — Mike H
 
-P.S. If you want to see how your page scores (free), nebulacomponents.shop
+P.S. If you want to see how your page scores (free), nebulacomponents.com
 ```
 
 **Triggers applied:**
@@ -171,7 +171,7 @@ I'm not going to keep emailing about this because I respect your time.
 
 But if you ever want to see exactly what's broken — for free, no follow-up pressure — the audit is always available:
 
-nebulacomponents.shop
+nebulacomponents.com
 
 Paste your URL. 60 seconds. You'll see the leak.
 

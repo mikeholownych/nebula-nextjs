@@ -92,14 +92,14 @@ const pricingMarkdown = markdownPage(
   '/pricing',
   `Nebula sells one thing: fixing landing page conversion leaks for founders who are spending on ads and not converting.
 
-## One-Leak Repair Sprint — $${(fixPack.priceCents / 100).toFixed(0)} (one-time)
+## One-Leak Self-Implementation Kit — $${(fixPack.priceCents / 100).toFixed(0)} (one-time)
 
 - One landing page, one high-confidence page-level repair selected from your free audit.
 - Delivery: ${fixPack.delivery.artifact} via ${fixPack.delivery.method} (${fixPack.delivery.timing}).
 - Implementation: ${fixPack.implementation.owner === 'customer_or_developer' ? 'you or your developer' : 'Nebula'} implements; Nebula requires no site access (${fixPack.implementation.nebulaSiteAccess}).
 - 30-day re-audit included (${fixPack.reAudit.windowDays} days).
 - Price locked through ${fixPack.priceValidUntil}.
-- Checkout: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
+- Checkout: https://nebulacomponents.com/checkout (requires a completed, unlocked audit; Nebula creates a Stripe Checkout Session with audit metadata)
 
 ## Retainer — $1,497
 
@@ -115,22 +115,23 @@ No sales calls. Self-serve checkout. Evidence-first: the audit names the leak be
 const auditMarkdown = markdownPage(
   'Free Landing Page Audit — Nebula',
   '/audit',
-  `The free Nebula audit is a 60-second automated diagnosis of any landing page, scoring 9 conversion signals:
+  `The free Nebula audit is an under-two-minute automated diagnosis of any public landing page, scoring 9 conversion signals:
 
-1. Message-match: does the ad headline match the page headline?
-2. Above-fold trust: at least two trust signals above the scroll line?
-3. Mobile CTA visibility: primary CTA visible on a 375px viewport without scrolling?
-4. Core Web Vitals: LCP < 2.5s, CLS < 0.1, INP < 200ms?
-5. CTA clarity: exactly one primary action, clearly labeled?
-6. Form friction: five fields or fewer, clear labels, stated benefit?
-7. Compliance: GDPR/CCPA without blocking the conversion path?
+1. Message match
+2. Trust signals
+3. Mobile CTA visibility
+4. Load time
+5. CTA clarity
+6. Above-fold clarity
+7. Ad signals
+8. SEO foundations
+9. AI readiness
 
 Each failing signal is tied to evidence from the actual page and ranked by likely impact.
 
-- No signup required to run it
-- No email required to see results
+- No account required to run it
+- Score and initial findings appear before email; email unlocks the full report
 - No sales calls
-- Full report delivered instantly
 
 Run it: ${site}/audit`
 )
@@ -140,7 +141,7 @@ const aboutMarkdown = markdownPage(
   '/about',
   `Mike Holownych founded Nebula Components to provide evidence-backed landing page diagnosis and bounded remediation materials. The operating premise: most landing page failures are diagnosable, they follow repeating patterns, and they can be fixed. The problem is not the ad — it is the page.
 
-The free audit checks 9 conversion signals with observable evidence. The One-Leak Repair Sprint ($97) implements the highest-confidence fix with a 30-day re-audit. Nebula publishes public teardowns as evidence-based content and maintains Citable, an open-source CLI for search and AI discoverability governance.
+The free audit checks 9 conversion signals with observable evidence. The One-Leak Self-Implementation Kit ($97) supplies a tailored change for one high-confidence finding; the customer or their developer implements it, with a 30-day re-audit included. Nebula publishes public teardowns as evidence-based content and maintains Citable, an open-source CLI for search and AI discoverability governance.
 
 LinkedIn: https://linkedin.com/in/mikeholownych
 GitHub: https://github.com/mikeholownych`

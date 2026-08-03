@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Your CTA looks fine on your flagship phone - but on 375px screens it disappears below the fold before visitors ever scroll. Here\'s the layout problem, and how to fix it.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre/cta-below-fold-mobile',
+    canonical: 'https://nebulacomponents.com/learning-centre/cta-below-fold-mobile',
   },
 }
 
@@ -15,7 +15,7 @@ const articleSchema = createArticleSchema({
   headline: 'Your CTA May Be Below the Fold on Smaller Phones',
   description:
     'Your CTA looks fine on your flagship phone - but on 375px screens it disappears below the fold before visitors ever scroll. Here\'s the layout problem, and how to fix it.',
-  url: 'https://nebulacomponents.shop/learning-centre/cta-below-fold-mobile',
+  url: 'https://nebulacomponents.com/learning-centre/cta-below-fold-mobile',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
 })

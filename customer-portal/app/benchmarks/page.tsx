@@ -5,7 +5,7 @@ import Benchmarks from './Benchmarks'
 export const metadata: Metadata = {
   title: 'Landing Page Benchmarks — Real Audit Data | Nebula',
   description:
-    'Per-component failure benchmarks from real landing page audits: above-fold clarity, ad signals, SEO foundations, CTA, load speed, social proof, and more....',
+    'Per-component failure benchmarks from completed landing page audits. Empty states are shown until a verified dataset exists.',
 }
 
 export default function BenchmarksPage() {
@@ -20,9 +20,8 @@ export default function BenchmarksPage() {
             Landing Page Benchmarks
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-fg-muted md:text-lg">
-            How often each conversion component fails across real audits we have run — and how
-            much impact that failure typically carries. This page is generated from actual audit
-            findings. Every teardown we publish adds to it.
+            This page reports component-level results from completed audits. It never substitutes
+            estimates or placeholder averages; when the verified dataset is empty, the page says so.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link

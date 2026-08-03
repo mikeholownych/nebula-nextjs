@@ -1,4 +1,6 @@
-import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
+import { getActiveFixPack } from '@/app/lib/public-facts'
+
+const ACTIVE_FIX_PACK = getActiveFixPack()
 
 /**
  * WebMCP — exposes Nebula Components site tools to supporting browsers without
@@ -55,20 +57,15 @@ export function WEB_MCP_RUNTIME() {
               name: 'Free Audit',
               price: '$0',
               description: 'Automated landing page audit — 9 conversion signals: message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, and load speed.',
-              url: 'https://nebulacomponents.shop/audit',
+              url: 'https://nebulacomponents.com/audit',
             },
             {
-              name: ${JSON.stringify(REPAIR_SPRINT_OFFER.name)},
-              price: ${JSON.stringify(`$${REPAIR_SPRINT_OFFER.priceUsd}`)},
-              description: ${JSON.stringify(`${REPAIR_SPRINT_OFFER.summary} ${REPAIR_SPRINT_OFFER.evidenceBoundary}`)},
-              url: 'https://nebulacomponents.shop/pricing',
+              name: 'One-Leak Self-Implementation Kit',
+              price: ${JSON.stringify(ACTIVE_FIX_PACK ? `$${ACTIVE_FIX_PACK.priceCents / 100}` : 'Unavailable')},
+              description: 'Tailored implementation instructions for one verified page condition; re-audit verifies the condition changed, not conversion lift.',
+              url: 'https://nebulacomponents.com/pricing',
             },
-            {
-              name: 'Growth Launch',
-              price: '$997',
-              description: 'End-to-end landing page build and optimisation for founders launching with paid traffic.',
-              url: 'https://nebulacomponents.shop/pricing',
-            },
+
           ],
         }),
       })

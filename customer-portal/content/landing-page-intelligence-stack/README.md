@@ -19,4 +19,4 @@ The stack records what was observed, where it appeared, what it may mean, and wh
 
 Run workflows 1–4 to collect evidence. Use workflow 5 to rank supported defects. After a change, use workflow 6 to compare the same page, viewport, and interaction path.
 
-Records can follow `evidence-record.schema.json`. The live Nebula audit is available at https://nebulacomponents.shop/audit.
+Records can follow `evidence-record.schema.json`. The live Nebula audit is available at https://nebulacomponents.com/audit.

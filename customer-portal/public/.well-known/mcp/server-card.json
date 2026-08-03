@@ -1,0 +1,40 @@
+{
+  "serverInfo": {
+    "name": "Nebula Audit Engine",
+    "version": "1.28.1"
+  },
+  "description": "Evidence-grade landing-page audit service for founders running paid traffic.",
+  "transport": {
+    "type": "streamable-http",
+    "endpoint": "https://mcp.nebulacomponents.com/mcp"
+  },
+  "capabilities": {
+    "tools": {
+      "listChanged": false
+    },
+    "resources": {},
+    "prompts": {}
+  },
+  "tools": [
+    {
+      "name": "run_audit",
+      "description": "Run an evidence-grade landing-page audit against a public URL."
+    },
+    {
+      "name": "compare_audits",
+      "description": "Audit and compare two public landing pages."
+    },
+    {
+      "name": "get_audit",
+      "description": "Retrieve a completed audit by ID."
+    },
+    {
+      "name": "recent_audits",
+      "description": "List recent audit records."
+    }
+  ],
+  "authentication": {
+    "required": false
+  },
+  "documentation": "https://nebulacomponents.com/auth.md"
+}

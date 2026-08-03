@@ -29,9 +29,9 @@ describe('canonical public facts', () => {
         sessionEndpoint: '/api/checkout',
       },
       delivery: {
-        artifact: 'tailored_prompt_pack',
+        artifact: 'tailored_implementation_kit',
         method: 'automated_email',
-        timing: 'within_minutes',
+        timing: 'after_successful_payment',
       },
       implementation: {
         owner: 'customer_or_developer',
@@ -90,7 +90,7 @@ describe('canonical public facts', () => {
       fixes: ['The documented remediation.'],
       result: 'The observed result, without a causal guarantee.',
       methodology: 'Compared the declared metric over the stated window.',
-      evidenceUrl: 'https://nebulacomponents.shop/evidence/supported-example',
+      evidenceUrl: 'https://nebulacomponents.com/evidence/supported-example',
       measurementWindow: {
         startedAt: '2026-06-01',
         endedAt: '2026-06-30',
@@ -151,7 +151,7 @@ describe('canonical public facts', () => {
         fixes: ['Remediation.'],
         result: 'Observed result.',
         methodology: 'Declared method.',
-        evidenceUrl: 'https://nebulacomponents.shop/evidence/expired-example',
+        evidenceUrl: 'https://nebulacomponents.com/evidence/expired-example',
         measurementWindow: { startedAt: '2026-06-01', endedAt: '2026-06-30' },
         publicationPermission: { granted: true, grantedAt: '2026-07-01' },
         review: {

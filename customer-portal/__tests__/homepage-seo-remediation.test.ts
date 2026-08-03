@@ -23,13 +23,13 @@ describe('homepage SEO report remediations', () => {
     expect(copy).toContain('conversion')
   })
 
-  it('uses only standard robots.txt directives', () => {
+  it('uses standard robots.txt and Content Signals directives', () => {
     const robots = fs.readFileSync(path.join(root, 'public', 'robots.txt'), 'utf8')
     const unsupported = robots
       .split(/\r?\n/)
       .map((line) => line.trim())
       .filter((line) => line && !line.startsWith('#'))
-      .filter((line) => !/^(User-Agent|Allow|Disallow|Sitemap):/i.test(line))
+      .filter((line) => !/^(User-Agent|Allow|Disallow|Sitemap|Content-Signal):/i.test(line))
 
     expect(unsupported).toEqual([])
   })

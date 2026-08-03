@@ -81,12 +81,16 @@ async def get_current_user(
     Raises:
         HTTPException 401: If token invalid or missing
     """
-    # Get token from Authorization header
+    # Accept the browser's HTTP-only session cookie, with Authorization kept
+    # for API clients and backwards compatibility.
     auth_header = request.headers.get("Authorization")
-    if not auth_header or not auth_header.startswith("Bearer "):
+    cookie_token = request.cookies.get("access_token")
+    if cookie_token:
+        token = cookie_token
+    elif auth_header and auth_header.startswith("Bearer "):
+        token = auth_header[7:]
+    else:
         raise HTTPException(status_code=401, detail="Missing authorization token")
-    
-    token = auth_header[7:]  # Remove "Bearer " prefix
     
     try:
         # Verify JWT
@@ -255,7 +259,7 @@ async def request_magic_link(
         ttl=MAGIC_LINK_TTL,
     )
 
-    magic_url = f"https://nebulacomponents.shop/workspace?magic={token}"
+    magic_url = f"https://nebulacomponents.com/api/auth/verify?token={token}"
 
     html_body = f"""
     <html>
@@ -276,7 +280,7 @@ async def request_magic_link(
         <hr style="border: none; border-top: 1px solid #eee; margin: 2rem 0;">
         <p style="color: #999; font-size: 0.85rem;">
             Nebula Components &mdash; Conversion optimization for founders wasting money on ads.<br>
-            <a href="https://nebulacomponents.shop" style="color: #999;">nebulacomponents.shop</a>
+            <a href="https://nebulacomponents.com" style="color: #999;">nebulacomponents.com</a>
         </p>
     </body>
     </html>
@@ -291,7 +295,7 @@ Click the link below to sign in (expires in 15 minutes):
 If you didn't request this link, you can safely ignore this email.
 
 --
-Nebula Components -- nebulacomponents.shop
+Nebula Components -- nebulacomponents.com
 """.strip()
 
     # Magic link is a transactional auth email — send directly via AgentMail REST API,

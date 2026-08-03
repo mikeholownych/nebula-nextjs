@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${rich.company} | Nebula Components Case Study`,
       description: rich.challenge,
       alternates: {
-        canonical: `https://nebulacomponents.shop/case-studies/${rich.slug}`,
+        canonical: `https://nebulacomponents.com/case-studies/${rich.slug}`,
       },
     }
   }
@@ -32,12 +32,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${study.title} | Nebula Components Case Study`,
     description: study.description,
     alternates: {
-      canonical: `https://nebulacomponents.shop/case-studies/${study.slug}`,
+      canonical: `https://nebulacomponents.com/case-studies/${study.slug}`,
     },
     openGraph: {
       title: study.title,
       description: study.description,
-      url: `https://nebulacomponents.shop/case-studies/${study.slug}`,
+      url: `https://nebulacomponents.com/case-studies/${study.slug}`,
     },
   }
 }

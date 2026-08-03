@@ -6,14 +6,14 @@ export const metadata: Metadata = {
   title: 'Your Headline Promises One Thing. Your CTA Asks for Something Else. Here\'s the Receipt.',
   description: 'Most founders can\'t diagnose headline-CTA mismatch without an outside eye. Your headline creates an expectation; your CTA asks for something different. Visitors experience a bait-and-switch they can\'t articulate - so they just leave.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre/headline-cta-mismatch',
+    canonical: 'https://nebulacomponents.com/learning-centre/headline-cta-mismatch',
   },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'Your Headline Promises One Thing. Your CTA Asks for Something Else. Here\'s the Receipt.',
   description: 'Most founders can\'t diagnose headline-CTA mismatch without an outside eye. Your headline creates an expectation; your CTA asks for something different. Visitors experience a bait-and-switch they can\'t articulate - so they just leave.',
-  url: 'https://nebulacomponents.shop/learning-centre/headline-cta-mismatch',
+  url: 'https://nebulacomponents.com/learning-centre/headline-cta-mismatch',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
 })

@@ -25,11 +25,11 @@ export default function SocialProofLandingPage() {
             headline: "Social Proof on Landing Pages",
             description:
               "How to add, place, and structure social proof that converts skeptical visitors — testimonials, numbers, logos.",
-            url: "https://nebulacomponents.shop/social-proof-landing-page",
+            url: "https://nebulacomponents.com/social-proof-landing-page",
             publisher: {
               "@type": "Organization",
               name: "Nebula Components",
-              url: "https://nebulacomponents.shop",
+              url: "https://nebulacomponents.com",
             },
           }),
         }}
@@ -80,7 +80,7 @@ export default function SocialProofLandingPage() {
       />
 
       {/* Container */}
-      <div className="max-w-[720px] mx-auto px-6 py-12 pb-20">
+      <main id="main-content" className="max-w-[720px] mx-auto px-6 py-12 pb-20">
         {/* Main Content */}
         <h1 className="text-2xl sm:text-3xl md:text-[2.4rem] font-extrabold leading-tight text-fg mt-8 mb-4">
           Social Proof on Landing Pages
@@ -167,7 +167,7 @@ export default function SocialProofLandingPage() {
             Related Articles
           </h3>
           <Link
-            href="/why-landing-pages-dont-convert"
+            href="/learning-centre/landing-page-not-converting"
             className="block text-accent hover:text-accent-light text-[0.95rem] mb-2 transition-colors"
           >
             Why Your Landing Page Isn't Converting
@@ -199,7 +199,7 @@ export default function SocialProofLandingPage() {
           </p>
         </div>
 
-      </div>
+      </main>
 
       {/* Cookie Consent Script */}
       <script src="/cookie-consent.js" defer />

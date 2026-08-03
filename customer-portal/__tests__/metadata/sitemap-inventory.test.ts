@@ -3,7 +3,7 @@ import path from 'path'
 import sitemap from '@/app/sitemap'
 import { getArticles } from '@/app/learning-centre/lib/getArticles'
 
-const ORIGIN = 'https://nebulacomponents.shop'
+const ORIGIN = 'https://nebulacomponents.com'
 const LC_DIR = path.join(process.cwd(), 'app', 'learning-centre')
 const SKIP_DIRS = new Set(['lib', 'citable'])
 

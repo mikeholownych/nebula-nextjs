@@ -6,14 +6,14 @@ export const metadata: Metadata = {
   title: 'Your Ad Says One Thing and Your Page Says Something Else: The Invisible Conversion Killer',
   description: "Message match failure can make paid clicks feel disconnected from the landing page. Inspect the handoff and test a focused H1 correction before redesigning.",
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre/ad-says-one-thing-page-says-another',
+    canonical: 'https://nebulacomponents.com/learning-centre/ad-says-one-thing-page-says-another',
   },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'Your Ad Says One Thing and Your Page Says Something Else: The Invisible Conversion Killer',
   description: "Message match failure can make paid clicks feel disconnected from the landing page. Inspect the handoff and test a focused H1 correction before redesigning.",
-  url: 'https://nebulacomponents.shop/learning-centre/ad-says-one-thing-page-says-another',
+  url: 'https://nebulacomponents.com/learning-centre/ad-says-one-thing-page-says-another',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
 })

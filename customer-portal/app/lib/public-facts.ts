@@ -15,9 +15,9 @@ export type FixPackPublicFact = {
     sessionEndpoint: '/api/checkout'
   }
   delivery: {
-    artifact: 'targeted_ai_prompts'
-    method: 'instant_on_checkout'
-    timing: 'immediately'
+    artifact: 'tailored_implementation_kit'
+    method: 'automated_email'
+    timing: 'after_successful_payment'
   }
   implementation: {
     owner: 'customer_or_developer'
@@ -153,9 +153,9 @@ export const publicFacts = {
       sessionEndpoint: '/api/checkout',
     },
     delivery: {
-      artifact: 'tailored_prompt_pack',
+      artifact: 'tailored_implementation_kit',
       method: 'automated_email',
-      timing: 'within_minutes',
+      timing: 'after_successful_payment',
     },
     implementation: {
       owner: 'customer_or_developer',
@@ -250,9 +250,9 @@ function isValidFixPack(
 
   return (
     isRecord(delivery) &&
-    delivery.artifact === 'tailored_prompt_pack' &&
+    delivery.artifact === 'tailored_implementation_kit' &&
     delivery.method === 'automated_email' &&
-    delivery.timing === 'within_minutes' &&
+    delivery.timing === 'after_successful_payment' &&
     isRecord(implementation) &&
     implementation.owner === 'customer_or_developer' &&
     implementation.nebulaSiteAccess === 'none' &&

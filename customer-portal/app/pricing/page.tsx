@@ -1,17 +1,17 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getActiveFixPack, type FixPackPublicFact } from '@/app/lib/public-facts'
-import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
+import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
 import { Card, PageShell } from '@/components/ui'
 
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Landing Page Audit Pricing & One-Leak Repair Sprint | Nebula',
+  title: 'Landing Page Audit Pricing & One-Leak Self-Implementation Kit | Nebula',
   description:
-    'Free landing page audit — no signup, results in under 2 minutes. Plus the $97 One-Leak Repair Sprint: targeted AI prompts for your specific failing signals.',
+    'Free 9-signal landing page audit plus a $97 self-implementation kit for one selected finding.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/pricing',
+    canonical: 'https://nebulacomponents.com/pricing',
   },
 }
 
@@ -19,23 +19,23 @@ function buildServiceSchema(fixPack: FixPackPublicFact) {
   return {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  '@id': 'https://nebulacomponents.shop/pricing#fix-pack',
+  '@id': 'https://nebulacomponents.com/pricing#fix-pack',
   name: REPAIR_SPRINT_OFFER.name,
   description: REPAIR_SPRINT_OFFER.summary,
-  provider: { '@id': 'https://nebulacomponents.shop/#organization' },
+  provider: { '@id': 'https://nebulacomponents.com/#organization' },
   serviceType: 'Landing Page Conversion Optimization',
-  url: 'https://nebulacomponents.shop/pricing',
+  url: 'https://nebulacomponents.com/pricing',
   offers: {
     '@type': 'Offer',
     price: String(REPAIR_SPRINT_OFFER.priceUsd),
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
-    url: `https://nebulacomponents.shop${fixPack.checkout.pagePath}`,
+    url: `https://nebulacomponents.com${fixPack.checkout.pagePath}`,
     priceValidUntil: fixPack.priceValidUntil,
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Repair Sprint deliverables',
+    name: 'Self-Implementation Kit deliverables',
     itemListElement: REPAIR_SPRINT_OFFER.includes.map((name) => ({
       '@type': 'Offer',
       itemOffered: { '@type': 'Service', name },
@@ -46,8 +46,8 @@ function buildServiceSchema(fixPack: FixPackPublicFact) {
 
 const faqItems = [
   {
-    q: 'What is included in the One-Leak Repair Sprint?',
-    a: 'After the free audit, you pay $97 and receive targeted AI prompts written for your specific failing signals — exact copy changes, code snippets, or configuration fixes. You implement them yourself, with your developer, or through your CMS. No site access required from Nebula.',
+    q: 'What is included in the One-Leak Self-Implementation Kit?',
+    a: 'After the free audit, you pay $97 and receive a tailored implementation kit for one specific failing signal — exact copy, a code snippet, or a configuration change. You implement it yourself, with your developer, or through your CMS. No site access is required by Nebula.',
   },
   {
     q: 'Why only one finding?',
@@ -55,15 +55,15 @@ const faqItems = [
   },
   {
     q: 'Do I need to give Nebula access to my site?',
-    a: 'No. The prompts are delivered instantly after checkout — you apply them yourself or hand them to your developer. Nebula never needs CMS, hosting, or repo access.',
+    a: 'No. The tailored kit is sent after successful payment — you apply it yourself or hand it to your developer. Nebula never needs CMS, hosting, or repository access.',
   },
   {
     q: 'How long does it take?',
-    a: 'Stripe confirms immediately. Your prompts are delivered as soon as the checkout completes — no waiting, no emails to check. Implementation speed depends on your setup.',
+    a: 'Stripe confirms the payment first. The tailored kit is then sent to the email used at checkout. Implementation speed depends on your setup.',
   },
   {
     q: 'Does the repair guarantee more conversions?',
-    a: 'No. The prompts fix a specific page condition identified by the audit. Conversion outcomes also depend on traffic quality, offer strength, and measurement windows. The 30-day re-audit shows whether the page condition changed — not whether revenue went up.',
+    a: 'No. The kit targets a specific page condition identified by the audit. Conversion outcomes also depend on traffic quality, offer strength, and measurement windows. The 30-day re-audit shows whether the page condition changed — not whether revenue went up.',
   },
   {
     q: 'What does the 30-day evidence check cover?',
@@ -103,7 +103,7 @@ export default function PricingPage() {
         <div className="mx-auto max-w-4xl px-6 py-20">
           <div className="mb-16 text-center">
             <p className="mx-auto mt-4 max-w-xl text-fg-muted">
-              No retainer. No undefined redesign. Pay once for one bounded repair, implemented and verified.
+              No retainer. No undefined redesign. Pay once for one bounded implementation kit and apply it yourself.
             </p>
             <p className="mt-3 text-sm text-fg-muted">
               Under 2 minutes · no signup · no sales call
@@ -118,8 +118,8 @@ export default function PricingPage() {
                 <p className="mt-1 text-sm leading-6 text-fg-muted">It checks 9 conversion signals against a public landing page and returns results in under 2 minutes.</p>
               </div>
               <div>
-                <h3 className="font-semibold text-fg">What does the repair sprint cost?</h3>
-                <p className="mt-1 text-sm leading-6 text-fg-muted">The One-Leak Repair Sprint costs $97 as a one-time payment.</p>
+                <h3 className="font-semibold text-fg">What does the self-implementation kit cost?</h3>
+                <p className="mt-1 text-sm leading-6 text-fg-muted">The One-Leak Self-Implementation Kit costs $97 as a one-time payment.</p>
               </div>
               <div>
                 <h3 className="font-semibold text-fg">Does it guarantee more conversions?</h3>
@@ -158,12 +158,12 @@ export default function PricingPage() {
 
             <Card variant="bordered">
               <p className="mb-3 text-sm font-medium text-fg-muted">One-time payment</p>
-              <h2 className="text-2xl font-semibold text-fg">One-Leak Repair Sprint</h2>
-              <p className="mt-1 text-sm italic text-fg-muted">Fix the highest-impact leak — prompts delivered instantly</p>
+              <h2 className="text-2xl font-semibold text-fg">One-Leak Self-Implementation Kit</h2>
+              <p className="mt-1 text-sm italic text-fg-muted">Fix the highest-impact leak — kit sent after successful payment</p>
               <p className="mt-2 text-4xl font-bold text-fg">${REPAIR_SPRINT_OFFER.priceUsd}</p>
               <p className="mt-4 text-fg-muted">
-                Run the free audit first — see your findings immediately, no email required.
-                Pay $97 to get targeted AI prompts that fix the highest-impact finding on your specific page.
+                Run the free audit on one landing page first — see your score and initial findings before sharing an email.
+                Pay $97 for a tailored implementation kit for one high-impact finding on your specific page.
               </p>
               <div className="mt-6 space-y-3">
                 {'howItWorks' in REPAIR_SPRINT_OFFER && Array.isArray(REPAIR_SPRINT_OFFER.howItWorks) &&
@@ -181,8 +181,8 @@ export default function PricingPage() {
                 This service does not promise conversion lift. It proves what page condition was found,
                 what changed, and whether that same condition changed on re-audit.
               </p>
-              <Link href="/checkout" className="mt-8 inline-flex rounded-xl bg-accent px-5 py-3 font-semibold text-bg transition-colors hover:bg-accent-light">
-                Review checkout →
+              <Link href="/audit" className="mt-8 inline-flex rounded-xl bg-accent px-5 py-3 font-semibold text-bg transition-colors hover:bg-accent-light">
+                Run the audit first →
               </Link>
             </Card>
           </div>

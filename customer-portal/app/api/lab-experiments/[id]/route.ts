@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
@@ -11,6 +12,8 @@ export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
   try {
     const { id } = await params
     const body = await request.json().catch(() => null)
@@ -21,7 +24,7 @@ export async function PATCH(
     const response = await fetch(`${API_BASE}/audit/lab-experiments/${encodeURIComponent(id)}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status: body.status }),
+      body: JSON.stringify({ status: body.status, email: auth.user.email }),
       signal: AbortSignal.timeout(10000),
     })
 
@@ -41,9 +44,11 @@ export async function PATCH(
 }
 
 export async function DELETE(
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
   try {
     const { id } = await params
     const response = await fetch(`${API_BASE}/audit/lab-experiments/${encodeURIComponent(id)}`, {

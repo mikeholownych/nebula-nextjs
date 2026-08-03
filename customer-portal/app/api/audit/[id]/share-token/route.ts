@@ -34,7 +34,7 @@ export async function GET(
 
     // Build the canonical share URL using the public host header if available,
     // falling back to the tunnel domain.
-    const origin = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://nebulacomponents.shop'
+    const origin = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://nebulacomponents.com'
     const share_url = `${origin}/audit/${id}/results?share=${share_token}`
 
     return NextResponse.json({ share_token, share_url })

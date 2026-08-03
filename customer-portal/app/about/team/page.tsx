@@ -5,7 +5,7 @@ import BreadcrumbSchema from '@/app/components/BreadcrumbSchema'
 export const metadata: Metadata = {
   title: 'Mike Holownych - Founder, Nebula Components',
   description: 'Mike Holownych founded Nebula Components after observing the same seven conversion failure patterns recur across landing page after landing page.',
-  alternates: { canonical: 'https://nebulacomponents.shop/about/team' },
+  alternates: { canonical: 'https://nebulacomponents.com/about/team' },
 }
 
 // Extends the same #founder Person node declared site-wide in
@@ -15,10 +15,10 @@ export const metadata: Metadata = {
 const founderSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  '@id': 'https://nebulacomponents.shop/#founder',
+  '@id': 'https://nebulacomponents.com/#founder',
   name: 'Mike Holownych',
   jobTitle: 'Founder',
-  url: 'https://nebulacomponents.shop/about/team',
+  url: 'https://nebulacomponents.com/about/team',
   description:
     'Founder of Nebula Components. Identified the same seven conversion failure patterns recurring across landing page after landing page - the basis for the 9-point diagnostic framework used in every Nebula audit.',
   knowsAbout: [
@@ -31,7 +31,7 @@ const founderSchema = {
     'https://www.linkedin.com/in/mikeholownych',
     'https://github.com/mikeholownych',
   ],
-  worksFor: { '@id': 'https://nebulacomponents.shop/#organization' },
+  worksFor: { '@id': 'https://nebulacomponents.com/#organization' },
 }
 
 export default function TeamPage() {
@@ -43,20 +43,36 @@ export default function TeamPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(founderSchema) }}
       />
       <div className="mx-auto max-w-3xl px-6 py-16">
-        <h1 className="mb-2 text-4xl font-bold">Mike Holownych</h1>
-        <p className="mb-6 font-medium text-accent">Founder, Nebula Components</p>
+        <div className="flex flex-col sm:flex-row gap-8 items-start mb-8">
+          <img
+            src="/mike-holownych-founder.jpg"
+            alt="Mike Holownych, Founder of Nebula Components"
+            width={140}
+            height={210}
+            className="rounded-xl object-cover shrink-0 border border-border"
+          />
+          <div>
+            <h1 className="mb-2 text-4xl font-bold">Mike Holownych</h1>
+            <p className="mb-4 font-medium text-accent">Founder, Nebula Components</p>
+          </div>
+        </div>
 
         <p className="mb-4 text-lg leading-relaxed text-fg-muted">
           Before founding Nebula Components, I worked with founders running paid traffic whose
-          landing pages weren&apos;t converting. The same seven failure patterns kept showing up,
-          page after page - message-match gaps, missing trust signals, mobile layout friction, slow
-          load times, unclear CTAs, form friction, and compliance gaps. None of them were creative
-          problems or targeting problems. They were structural page problems, and they were
-          diagnosable.
+          landing pages weren&apos;t converting. The same failures showed up page after page —
+          message-match gaps, missing trust signals, mobile friction, slow load times, unclear CTAs.
+          None of them were creative or targeting problems. They were structural issues on the page
+          itself, and they could all be diagnosed from the HTML.
+        </p>
+        <p className="mb-4 text-lg leading-relaxed text-fg-muted">
+          What I kept seeing: founders spending thousands on traffic to pages with a broken headline,
+          a hidden CTA, and no proof above the fold — then changing the ad when the page was the
+          problem. Ad performance problems are almost always page problems. Most of the time the
+          fix is specific and verifiable. I built Nebula to surface it without a consulting engagement.
         </p>
         <p className="mb-8 text-lg leading-relaxed text-fg-muted">
-          That observation became the 9-point diagnostic framework every Nebula audit runs today -
-          the same framework behind the free audit and the paid One-Leak Repair Sprint.
+          That pattern is what the 9-point diagnostic framework is built from — the same checks
+          that run on every free audit and the paid One-Leak Self-Implementation Kit.
         </p>
 
         <div className="mb-8 flex flex-wrap gap-4 text-sm">
@@ -83,7 +99,7 @@ export default function TeamPage() {
           automated audit scoring across the same 9 conversion signals.
         </p>
 
-        <span className="text-accent">mike{'@'}nebulacomponents.shop</span>
+        <span className="text-accent">mike{'@'}nebulacomponents.com</span>
 
         <div className="mt-10">
           <Link href="/about" className="text-sm text-fg-muted hover:text-fg">← About Nebula Components</Link>

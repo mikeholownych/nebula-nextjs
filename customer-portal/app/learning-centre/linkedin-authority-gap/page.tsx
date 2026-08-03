@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Why high-credential LinkedIn audiences bounce from pages that convert Facebook traffic - and the specific checks you need before scaling LinkedIn spend.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre/linkedin-authority-gap',
+    canonical: 'https://nebulacomponents.com/learning-centre/linkedin-authority-gap',
   },
 }
 
@@ -16,7 +16,7 @@ const articleSchema = createArticleSchema({
     'The LinkedIn-to-Page Authority Gap: Why High-Credential Audiences Bounce From Pages That Convert Facebook Traffic',
   description:
     'Why high-credential LinkedIn audiences bounce from pages that convert Facebook traffic - and the specific checks you need before scaling LinkedIn spend.',
-  url: 'https://nebulacomponents.shop/learning-centre/linkedin-authority-gap',
+  url: 'https://nebulacomponents.com/learning-centre/linkedin-authority-gap',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
 })
@@ -403,7 +403,7 @@ export default function LinkedInAuthorityGapPage() {
             designed for evaluator-mode visitors.
           </p>
           <Link
-            href="https://nebulacomponents.shop"
+            href="https://nebulacomponents.com"
             className="inline-block rounded-xl bg-accent px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90"
           >
             See Nebula components →

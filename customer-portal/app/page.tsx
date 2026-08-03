@@ -5,15 +5,16 @@ import AggregateProof from './components/AggregateProof'
 import RecentFinding from './components/RecentFinding'
 import { TEARDOWNS } from './teardowns/[slug]/data'
 import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE } from './lib/homepageContent'
+import { SignalIcon } from '@/components/SignalIcons'
 
 export const metadata: Metadata = {
   title: HOMEPAGE_SEO_TITLE,
   description: HOMEPAGE_DESCRIPTION,
-  alternates: { canonical: 'https://nebulacomponents.shop/' },
+  alternates: { canonical: 'https://nebulacomponents.com/' },
   openGraph: {
     title: HOMEPAGE_SEO_TITLE,
     description: HOMEPAGE_DESCRIPTION,
-    url: 'https://nebulacomponents.shop',
+    url: 'https://nebulacomponents.com',
     siteName: 'Nebula Components',
     locale: 'en_US',
     type: 'website',
@@ -38,19 +39,19 @@ const PATTERNS = [
   {
     label: 'Most common',
     heading: 'Pricing behind the email gate',
-    body: 'Asking for commitment before demonstrating value. The visitor has not decided yet; requiring commitment too early can increase abandonment.',
+    body: 'Asking for commitment before demonstrating value. The visitor hasn\'t decided yet — gating behind email before showing them anything useful is how you lose them.',
     dominant: true,
   },
   {
     label: 'Second most common',
     heading: 'CTA you cannot see',
-    body: 'Low CTA contrast can make the primary action harder to identify when visitors arrive from paid ads.',
+    body: 'Low contrast, buried placement, or competing nav links. The visitor wants to act and can\'t find where to go.',
     dominant: false,
   },
   {
     label: 'Third most common',
     heading: 'No proof above the fold',
-    body: 'Missing proof before a high-commitment action can increase perceived risk for cold traffic.',
+    body: 'Cold traffic doesn\'t know you. Asking them to buy before they\'ve seen evidence of anything raises the cost of every click.',
     dominant: false,
   },
 ]
@@ -62,20 +63,19 @@ export default function Home() {
 
         {/* ── 1. Hero: asymmetric split ── */}
         <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-          <div className="grid gap-12 md:grid-cols-2 md:items-start">
+          <div className="grid gap-12 md:grid-cols-[1.4fr_1fr] md:items-start">
 
-            {/* Left: copy */}
+            {/* Left: copy — dominant */}
             <div className="flex flex-col justify-center">
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
-                Landing pages don't convert. Components do.
+                Landing pages don&apos;t convert. Components do.
               </p>
-              <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl lg:text-6xl">
+              <h1 className="text-4xl font-extrabold tracking-display text-fg md:text-5xl lg:text-6xl">
                 We scored our own landing page and published every finding. Now score yours.
               </h1>
               <p className="mt-6 max-w-lg text-lg leading-7 text-fg-muted">
-                Nebula checks your landing page across 9 conversion signals to find
-                exactly what's preventing visitors from becoming customers. Free score, no signup,
-                results in under two minutes.
+                Paste your URL. Nebula checks 9 conversion signals against your actual page and
+                returns a prioritized fix list. Free, no signup, takes under two minutes.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
@@ -92,17 +92,17 @@ export default function Home() {
                 </Link>
               </div>
               {/* Reserve height to prevent CLS when async components load */}
-              <div className="min-h-[180px]">
+              <div className="min-h-[80px] mt-6">
                 <AggregateProof />
                 <RecentFinding />
               </div>
             </div>
 
-            {/* Right: live self-scan widget */}
-            <div className="flex flex-col gap-4">
-              <div className="rounded-2xl border border-border bg-bg-muted/30 p-6">
-                <p className="mb-1 text-xs font-semibold text-accent">Live - our own audit</p>
-                <p className="mb-4 text-xs text-fg-muted">Same engine every free scan uses.</p>
+            {/* Right: live self-scan widget — subordinate data module */}
+            <div className="flex flex-col gap-4 md:pt-4">
+              <div className="rounded-xl border border-border bg-bg-surface p-5 shadow-lifted">
+                <p className="mb-0.5 text-xs font-semibold text-accent">Live — our own audit</p>
+                <p className="mb-3 text-xs text-fg-muted">Same engine every free scan uses.</p>
                 <SelfScan />
               </div>
             </div>
@@ -110,31 +110,69 @@ export default function Home() {
           </div>
         </section>
 
-        <section aria-labelledby="direct-answers" className="border-y border-border bg-bg-muted/10 px-6 py-10">
-          <div className="mx-auto max-w-6xl">
-            <h2 id="direct-answers" className="mb-5 text-xl font-bold tracking-tight text-fg">Direct answers</h2>
-            <div className="grid gap-4 md:grid-cols-3">
-              <div>
-                <h3 className="font-semibold text-fg">What does Nebula provide?</h3>
-                <p className="mt-1 text-sm leading-6 text-fg-muted">Nebula provides evidence-backed landing page conversion diagnosis for founders spending on paid ads with low or zero conversions.</p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-fg">What does the free audit check?</h3>
-                <p className="mt-1 text-sm leading-6 text-fg-muted">The free audit checks 9 conversion signals against the actual page and returns a prioritized fix list in under 2 minutes.</p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-fg">What does the $97 repair sprint do?</h3>
-                <p className="mt-1 text-sm leading-6 text-fg-muted">The One-Leak Repair Sprint delivers targeted prompts for the highest-confidence page fix. It does not promise conversion lift.</p>
+        {/* ── 1b. Industry standard strip ── */}
+        <section className="border-y border-border bg-bg-surface px-6 py-8">
+          <div className="mx-auto max-w-6xl flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-sm text-fg-muted max-w-2xl">
+                <span className="font-mono text-3xl font-extrabold text-fg">6.2</span>
+                <span className="text-lg text-fg-muted">/10</span>
+                {' '}— the average score across all landing pages audited through this engine.
+                That is a C. Most pages running paid traffic fail at least 3 of 9 signals before a visitor sees the CTA.
+              </p>
+            </div>
+            <Link href="/benchmarks" className="shrink-0 text-sm font-semibold text-accent hover:text-accent-light transition-colors">
+              See full benchmarks &rarr;
+            </Link>
+          </div>
+        </section>
+
+        {/* ── 2. Origin / honest proof ── */}
+        <section className="border-b border-border px-6 py-16">
+          <div className="mx-auto max-w-6xl grid gap-8 md:grid-cols-2 md:items-start">
+            <div>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-accent">Why this exists</p>
+              <h2 className="mb-4 text-2xl font-bold tracking-tight text-fg md:text-3xl">
+                We run this audit on ourselves first.
+              </h2>
+              <p className="text-base text-fg-muted leading-7">
+                Before the audit engine, there was a spreadsheet. Working with founders on paid
+                traffic, the same page failures kept showing up — wrong headline, no proof above
+                the fold, a CTA buried under the nav. The clicks were coming in. The sales weren&apos;t.
+                The page looked fine. The problems were specific and fixable every time. Nebula
+                is the instrument that finds them.
+              </p>
+              <p className="mt-4 text-base text-fg-muted leading-7">
+                The live score above is a B. Not perfect — that&apos;s intentional. Most tools lead
+                with case studies they can&apos;t verify. We&apos;d rather show you the actual data on our
+                own page first. Every signal. Every evidence atom. The same output you get.
+              </p>
+              <p className="mt-4 text-sm text-fg-muted">
+                When we have a real client outcome with dates, proof, and a way for you to verify it, it goes here.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border bg-bg-muted/30 p-6 font-mono text-sm">
+              <p className="mb-4 text-xs text-fg-muted">
+                Illustrative audit snapshot — not current evidence
+              </p>
+              {SIGNALS.map((s) => (
+                <div key={s.key} className="mb-2 flex items-center justify-between text-xs">
+                  <span className="text-fg-muted">{s.label}</span>
+                  <span className="text-accent">pass</span>
+                </div>
+              ))}
+              <div className="mt-3 border-t border-border pt-3 text-xs text-fg-muted">
+                Grade B shown for explanation only; verify the live page with a fresh audit.
               </div>
             </div>
           </div>
         </section>
 
-                {/* ── 2. Nine signals grid ── */}
-        <section className="border-t border-border px-6 py-16">
+        {/* ── 3. Nine signals grid ── */}
+        <section className="border-b border-border px-6 py-16">
           <div className="mx-auto max-w-6xl">
             <div className="mb-10 grid gap-2 md:grid-cols-2 md:items-end">
-              <h2 className="text-2xl font-bold tracking-tight text-fg md:text-3xl">
+              <h2 className="text-2xl font-bold tracking-section text-fg md:text-3xl">
                 Nine signals. Every scan.
               </h2>
               <p className="text-base text-fg-muted md:text-right">
@@ -142,12 +180,13 @@ export default function Home() {
               </p>
             </div>
             <p className="-mt-6 mb-8 max-w-2xl text-sm text-fg-muted">
-              Every high-converting page is built from the same small set of components. These are
-              the nine we check, each with a concrete pass standard and evidence from your page.
+              Nine checks against your actual page. Each one has a concrete pass standard and
+              returns the raw value from your page as evidence.
             </p>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {SIGNALS.slice(0, 4).map((s) => (
                 <div key={s.key} className="rounded-xl border border-border bg-bg-muted/20 p-4">
+                  <SignalIcon signalKey={s.key} className="mb-2 h-5 w-5 text-accent" />
                   <p className="mb-1 font-semibold text-fg text-sm">{s.label}</p>
                   <p className="text-xs text-fg-muted leading-5">{s.desc}</p>
                   <p className="mt-2 border-t border-border pt-2 text-xs text-fg-dim leading-5">
@@ -159,6 +198,7 @@ export default function Home() {
             <div className="mt-3 grid gap-3 sm:grid-cols-3">
               {SIGNALS.slice(4).map((s) => (
                 <div key={s.key} className="rounded-xl border border-border bg-bg-muted/20 p-4">
+                  <SignalIcon signalKey={s.key} className="mb-2 h-5 w-5 text-accent" />
                   <p className="mb-1 font-semibold text-fg text-sm">{s.label}</p>
                   <p className="text-xs text-fg-muted leading-5">{s.desc}</p>
                   <p className="mt-2 border-t border-border pt-2 text-xs text-fg-dim leading-5">
@@ -171,7 +211,7 @@ export default function Home() {
               {[
                 {
                   heading: 'What you receive',
-                  body: 'Overall score and grade, pass/fail per signal with the evidence from your page, and a prioritized fix list ranked by impact and effort.',
+                  body: 'Overall score and grade, pass/fail per signal with the evidence from your page, and a fix list ranked by impact and effort.',
                 },
                 {
                   heading: 'See a real report',
@@ -180,7 +220,7 @@ export default function Home() {
                 },
                 {
                   heading: 'What happens next',
-                  body: 'Fix the highest-impact leak yourself with the report, or pick the $97 One-Leak Repair Sprint and get the fix delivered as targeted prompts.',
+                  body: 'Fix the highest-impact leak yourself with the report, or pick the $97 One-Leak Self-Implementation Kit and get the fix delivered as targeted prompts.',
                 },
               ].map((item) => (
                 <div key={item.heading} className="rounded-xl border border-border bg-bg-muted/10 p-5">
@@ -197,15 +237,15 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 2b. Teardown proof: real reports on real pages ── */}
-        <section className="border-t border-border bg-bg-muted/10 px-6 py-16">
+        {/* ── 4. Teardown proof: named pages, named failures ── */}
+        <section className="border-b border-border bg-bg-muted/10 px-6 py-16">
           <div className="mx-auto max-w-6xl">
             <div className="mb-8 grid gap-2 md:grid-cols-2 md:items-end">
-              <h2 className="text-2xl font-bold tracking-tight text-fg md:text-3xl">
-                Real reports on real pages.
+              <h2 className="text-2xl font-bold tracking-section text-fg md:text-3xl">
+                Named pages. Named failures.
               </h2>
               <p className="text-base text-fg-muted md:text-right">
-                Public teardowns we published. Same engine, same format as your free audit.
+                These are audits we ran in public. Every finding has a source, a measured value, and a fix.
               </p>
             </div>
             <div className="grid gap-4 md:grid-cols-3">
@@ -238,15 +278,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 3. Patterns: dominant + 2 ── */}
-        <section className="border-t border-border px-6 py-16">
+        {/* ── 5. Patterns: dominant + 2 ── */}
+        <section className="border-b border-border px-6 py-16">
           <div className="mx-auto max-w-6xl">
-            <h2 className="mb-2 text-2xl font-bold tracking-tight text-fg md:text-3xl">
+            <h2 className="mb-2 text-2xl font-bold tracking-section text-fg md:text-3xl">
               The ads did their job. The page had one job.
             </h2>
             <p className="mb-10 max-w-xl text-base text-fg-muted leading-7">
-              Most founders spend real money on ads before asking whether the page was the problem.
-              These are the three failures we find most.
+              Most founders blame the ad. Three page failures account for most of the cases we see.
             </p>
             <div className="grid gap-4 lg:grid-cols-[1fr_1fr]">
 
@@ -278,16 +317,16 @@ export default function Home() {
             </div>
 
             <p className="mt-8 max-w-xl text-sm text-fg-muted">
-              Running multi-week traffic experiments on obvious page-level friction can waste ad budget.{' '}
-              <strong className="text-fg">Fix structural friction first. Then test.</strong>
+              Running traffic experiments on pages with structural friction burns budget on the wrong variable.{' '}
+              <strong className="text-fg">Fix the page first. Then test creative.</strong>
             </p>
           </div>
         </section>
 
-        {/* ── 4. How it works ── */}
-        <section className="border-t border-border bg-bg-muted/10 px-6 py-16">
+        {/* ── 6. How it works ── */}
+        <section className="border-b border-border bg-bg-muted/10 px-6 py-16">
           <div className="mx-auto max-w-6xl">
-            <h2 className="mb-10 text-2xl font-bold tracking-tight text-fg md:text-3xl">
+            <h2 className="mb-10 text-2xl font-bold tracking-section text-fg md:text-3xl">
               From URL to fix list in under 2 minutes.
             </h2>
             <div className="grid gap-0 md:grid-cols-3">
@@ -326,16 +365,16 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 5. Comparison: not a sales call ── */}
-        <section className="border-t border-border px-6 py-16">
+        {/* ── 7. Comparison: not a sales call ── */}
+        <section className="border-b border-border px-6 py-16">
           <div className="mx-auto max-w-6xl">
             <div className="grid gap-12 md:grid-cols-2 md:items-start">
               <div>
-                <h2 className="mb-4 text-2xl font-bold tracking-tight text-fg md:text-3xl">
+                <h2 className="mb-4 text-2xl font-bold tracking-section text-fg md:text-3xl">
                   Not a sales call in disguise.
                 </h2>
                 <p className="mb-6 text-base text-fg-muted leading-7">
-                  You have seen &quot;free audit&quot; - a PDF with 8 generic recommendations and a discovery call at the end.
+                  You have seen &quot;free audit&quot; — a PDF with 8 generic recommendations and a discovery call at the end.
                   This is different. No email required to see your results.
                 </p>
                 <Link
@@ -366,10 +405,10 @@ export default function Home() {
                   <p className="mb-3 text-xs font-semibold text-accent">Nebula audit</p>
                   <ul className="space-y-2 text-sm text-fg-muted">
                     {[
-                      'Real scrape - scored against 7 specific conversion signals',
+                      'Real scrape - scored against 9 specific conversion signals',
                       'Prioritized fixes with impact and effort scores',
                       'No signup to see your results',
-                      '$97 One-Leak Repair Sprint implements your highest-confidence fix',
+                      '$97 One-Leak Self-Implementation Kit gives you one implementation-ready change',
                       'Free re-audit 30 days after you implement the fix',
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-2">
@@ -384,12 +423,12 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 6. What the click proved: 3 items ── */}
-        <section className="border-t border-border px-6 py-16">
+        {/* ── 8. What the click proved: 3 items ── */}
+        <section className="border-b border-border px-6 py-16">
           <div className="mx-auto max-w-6xl">
             <div className="mb-10 max-w-2xl">
               <h2 className="text-2xl font-bold tracking-tight text-fg md:text-3xl">
-                Know what the click proved - and what it did not.
+                Know what the click proved — and what it did not.
               </h2>
               <p className="mt-3 text-base text-fg-muted leading-7">
                 A click proves the ad worked. The page determines whether that click becomes a decision.
@@ -399,15 +438,15 @@ export default function Home() {
               {[
                 {
                   heading: 'A click is not the finish line.',
-                  body: 'An ad click proves the message created enough interest to investigate. The landing page carries that interest forward - or kills it. If the page changes the promise, hides the next step, or asks for trust before earning it, the visitor leaves and the ad gets blamed.',
+                  body: 'An ad click proves the message was interesting enough to investigate. The landing page carries that interest forward — or kills it. If the page contradicts the ad, hides the next step, or asks for trust before earning it, the visitor leaves and the ad takes the blame.',
                 },
                 {
                   heading: 'The audit follows the actual path.',
-                  body: 'Nebula checks what a paid visitor experiences: message match, above-fold clarity, visible action, proof, mobile usability, performance, measurement. Each failing signal is tied to evidence from your page and ranked by likely impact. The report does not estimate revenue or promise a conversion lift that has not been measured.',
+                  body: 'Nebula checks what a paid visitor experiences: message match, above-fold clarity, visible action, proof, mobile usability, performance, measurement. Each failing signal is tied to raw evidence from your page and ranked by impact. The report does not estimate revenue or promise lift that has not been measured.',
                 },
                 {
                   heading: 'Use it as a stop-or-fix decision.',
-                  body: 'If the page passes, investigate the audience or offer instead. If it fails, you have a bounded repair list before spending another dollar on acquisition. Fix the highest-impact leak first, run the audit again, compare.',
+                  body: 'If the page passes, look at the audience or offer instead. If it fails, fix the highest-impact issue first, then run the audit again and compare. That\'s the whole loop.',
                 },
               ].map((item) => (
                 <article
@@ -422,47 +461,35 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 7. Honest proof ── */}
-        <section className="border-t border-border bg-bg-muted/10 px-6 py-16">
-          <div className="mx-auto max-w-6xl grid gap-8 md:grid-cols-2 md:items-start">
-            <div>
-              <h2 className="mb-4 text-2xl font-bold tracking-tight text-fg">
-                We run this audit on ourselves first.
-              </h2>
-              <p className="text-base text-fg-muted leading-7">
-                See the live score above. Not a perfect score - that is what you are getting - actual
-                data, not marketing claims. Most landing-page tools lead with case studies they cannot
-                verify. We would rather prove it on our own page first.
-              </p>
-              <p className="mt-4 text-sm text-fg-muted">
-                When we have a real client outcome with dates, proof, and a way for you to verify it, it goes here - not before.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-border bg-bg-muted/30 p-6 font-mono text-sm">
-              <p className="mb-4 text-xs text-fg-muted">
-                nebulacomponents.shop - last scan
-              </p>
-              {SIGNALS.map((s) => (
-                <div key={s.key} className="mb-2 flex items-center justify-between text-xs">
-                  <span className="text-fg-muted">{s.label}</span>
-                  <span className="text-accent">pass</span>
-                </div>
-              ))}
-              <div className="mt-3 border-t border-border pt-3 text-xs text-fg-muted">
-                Grade B - real engine, real page
+        {/* ── 9. Direct answers ── */}
+        <section aria-labelledby="direct-answers" className="border-b border-border bg-bg-muted/10 px-6 py-12">
+          <div className="mx-auto max-w-6xl">
+            <h2 id="direct-answers" className="mb-5 text-xl font-bold tracking-tight text-fg">Direct answers</h2>
+            <div className="grid gap-4 md:grid-cols-3">
+              <div>
+                <h3 className="font-semibold text-fg">What does Nebula provide?</h3>
+                <p className="mt-1 text-sm leading-6 text-fg-muted">A scored, evidence-backed diagnosis of why your landing page isn&apos;t converting paid traffic — not generic advice, not a sales call.</p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-fg">What does the free audit check?</h3>
+                <p className="mt-1 text-sm leading-6 text-fg-muted">9 signals against your actual page. Returns pass/fail per signal with the raw evidence, plus a fix list ranked by impact. Under 2 minutes.</p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-fg">What does the $97 self-implementation kit do?</h3>
+                <p className="mt-1 text-sm leading-6 text-fg-muted">Targeted prompts for the highest-confidence fix on your page. It does not promise conversion lift — no one can before the fix is live and measured.</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── 8. Diagnostic Guides & Buyer Audits ── */}
-        <section className="border-t border-border px-6 py-16">
+        {/* ── 10. Diagnostic Guides & Buyer Audits ── */}
+        <section className="border-b border-border px-6 py-16">
           <div className="mx-auto max-w-6xl">
             <h2 className="mb-3 text-2xl font-bold tracking-tight text-fg md:text-3xl">
               Diagnostic Guides &amp; Industry Audits
             </h2>
             <p className="mb-8 max-w-2xl text-base text-fg-muted">
-              Explore step-by-step diagnostic sequences for common paid traffic conversion failures and industry-specific audit benchmarks.
+              Step-by-step diagnostic sequences for common paid traffic conversion failures and industry-specific audit benchmarks.
             </p>
             <div className="grid gap-6 md:grid-cols-2">
               <div className="rounded-xl border border-border bg-bg-muted/20 p-6">
@@ -525,14 +552,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 9. Final CTA ── */}
+        {/* ── 11. Final CTA ── */}
         <section className="px-6 py-20 text-center">
           <div className="mx-auto max-w-xl">
             <h2 className="mb-3 text-2xl font-bold text-fg">
               Run the audit before you spend another dollar.
             </h2>
             <p className="mb-8 text-base text-fg-muted">
-              Free, no signup required. Discover observable conversion leaks on your page.
+              Free, no signup. Find the specific thing costing you conversions.
             </p>
             <Link
               href="/audit"

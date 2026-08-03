@@ -6,13 +6,13 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Founder Second Brain: Capture and Reuse Your Best Thinking | Nebula Components',
   description: 'How founders can build an AI-assisted second brain to capture decisions, frameworks, and content that compounds over time.',
-  alternates: { canonical: 'https://nebulacomponents.shop/playbooks/founder-second-brain' },
+  alternates: { canonical: 'https://nebulacomponents.com/playbooks/founder-second-brain' },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'Founder Second Brain: Capture and Reuse Your Best Thinking',
   description: 'How founders can build an AI-assisted second brain to capture decisions, frameworks, and content that compounds over time.',
-  url: 'https://nebulacomponents.shop/playbooks/founder-second-brain',
+  url: 'https://nebulacomponents.com/playbooks/founder-second-brain',
   publishedDate: '2025-07-15',
   modifiedDate: '2026-07-19',
 })

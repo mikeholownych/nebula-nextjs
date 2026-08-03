@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Anonymous stories from founders whose landing pages were silently broken for months. What they spent, and what they blamed instead.",
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre/confessions',
+    canonical: 'https://nebulacomponents.com/learning-centre/confessions',
   },
 }
 
@@ -15,7 +15,7 @@ const articleSchema = createArticleSchema({
   headline: 'Founder Confessions: The Moment We Found Out Our Page Was Broken',
   description:
     "Anonymous stories from founders whose landing pages were silently broken for months. What they spent, and what they blamed instead.",
-  url: 'https://nebulacomponents.shop/learning-centre/confessions',
+  url: 'https://nebulacomponents.com/learning-centre/confessions',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
 })

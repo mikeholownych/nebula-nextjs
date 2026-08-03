@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     'What is a good landing page conversion rate? The benchmarks vary by traffic source, offer type, and vertical. Here is how to read them without drawing wrong conclusions.',
   alternates: {
     canonical:
-      'https://nebulacomponents.shop/learning-centre/landing-page-conversion-rate-benchmark',
+      'https://nebulacomponents.com/learning-centre/landing-page-conversion-rate-benchmark',
   },
 }
 
@@ -16,7 +16,7 @@ const articleSchema = createArticleSchema({
   headline: 'Landing Page Conversion Rate Benchmark: What the Numbers Actually Mean',
   description:
     'What is a good landing page conversion rate? The benchmarks vary by traffic source, offer type, and vertical. Here is how to read them without drawing wrong conclusions.',
-  url: 'https://nebulacomponents.shop/learning-centre/landing-page-conversion-rate-benchmark',
+  url: 'https://nebulacomponents.com/learning-centre/landing-page-conversion-rate-benchmark',
   publishedDate: '2026-07-21',
   modifiedDate: '2026-07-21',
 })
@@ -285,9 +285,8 @@ export default function LandingPageConversionRateBenchmark() {
               Find what is pulling your rate down
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
-              The free Nebula audit identifies likely page-side leaks. The $97 One-Leak Repair Sprint
-              selects one high-confidence page-level repair, confirms the scope with you, implements it,
-              and verifies the live change. It does not promise conversion lift.
+              The free Nebula audit identifies likely page-side leaks. The $97 One-Leak Self-Implementation Kit
+              delivers a tailored kit for one high-confidence page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition. It does not promise conversion lift.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -300,7 +299,7 @@ export default function LandingPageConversionRateBenchmark() {
                 href="/pricing"
                 className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
-                See the One-Leak Repair Sprint
+                See the One-Leak Self-Implementation Kit
               </Link>
             </div>
           </section>

@@ -9,10 +9,10 @@ export const metadata: Metadata = {
     title: 'Nebula Components vs Landing Page Tools — Comparisons',
     description:
       'Evidence-led landing page audit vs the builders and meters. Honest boundaries, published pass standards.',
-    url: 'https://nebulacomponents.shop/compare',
+    url: 'https://nebulacomponents.com/compare',
   },
   alternates: {
-    canonical: 'https://nebulacomponents.shop/compare',
+    canonical: 'https://nebulacomponents.com/compare',
   },
 }
 

@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS purchases (
   amount_total INTEGER,
   currency VARCHAR(10),
   payment_status VARCHAR(50),
+  livemode BOOLEAN NOT NULL DEFAULT TRUE,
   fulfillment_status VARCHAR(20) DEFAULT 'pending', -- pending, processing, failed, delivered, review
   created_at TIMESTAMPTZ DEFAULT NOW()
 );

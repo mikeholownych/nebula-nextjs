@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     'A landing page that does not convert paid traffic frequently exhibits observable friction across standard page signals. Diagnose structural friction before making redesign assumptions.',
   alternates: {
     canonical:
-      'https://nebulacomponents.shop/learning-centre/landing-page-not-converting',
+      'https://nebulacomponents.com/learning-centre/landing-page-not-converting',
   },
 }
 
@@ -17,7 +17,7 @@ const articleSchema = createArticleSchema({
   headline: 'Landing Page Not Converting? Diagnose These 5 Leaks First',
   description:
     'A landing page that does not convert paid traffic frequently exhibits observable friction across standard page signals. Diagnose structural friction before making redesign assumptions.',
-  url: 'https://nebulacomponents.shop/learning-centre/landing-page-not-converting',
+  url: 'https://nebulacomponents.com/learning-centre/landing-page-not-converting',
   publishedDate: '2026-07-16',
   modifiedDate: '2026-07-27',
 })
@@ -41,7 +41,7 @@ const faqItems = [
     },
     {
       question: 'How long does it take to fix a non-converting landing page?',
-      answer: "Depends on which leak is active. A message-match fix (rewriting the headline and hero copy) takes 2-4 hours with a clear brief. A proof restructure (repositioning testimonials, adding specificity) takes a day. A full CTA and form-friction overhaul is 1-2 days. Nebula's $97 One-Leak Repair Sprint selects one high-confidence repair from the audit, confirms the scope with you, implements it, and verifies the live change.",
+      answer: "Depends on which leak is active. A message-match fix (rewriting the headline and hero copy) takes 2-4 hours with a clear brief. A proof restructure (repositioning testimonials, adding specificity) takes a day. A full CTA and form-friction overhaul is 1-2 days. Nebula's $97 One-Leak Self-Implementation Kit supplies a tailored change for one high-confidence finding; you or your developer implements it, and the 30-day re-audit verifies the page condition.",
     },
 ]
 
@@ -530,13 +530,13 @@ export default function LandingPageNotConvertingPage() {
               This is a real audit, not an illustration
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
-              We ran nebulacomponents.shop through the same audit engine every visitor uses.
+              We ran nebulacomponents.com through the same audit engine every visitor uses.
               No edits, no cherry-picked run - this is the actual results screen.
             </p>
             <div className="overflow-hidden rounded-2xl border border-border">
               <Image
                 src="/screenshots/audit-results-example.webp"
-                alt="Real Nebula audit results for nebulacomponents.shop showing a 7.4/10 conversion readiness score, Grade B, 0 critical issues, 0 warnings, and 2 advisory findings"
+                alt="Real Nebula audit results for nebulacomponents.com showing a 7.4/10 conversion readiness score, Grade B, 0 critical issues, 0 warnings, and 2 advisory findings"
                 width={1600}
                 height={650}
                 className="h-auto w-full"
@@ -551,10 +551,10 @@ export default function LandingPageNotConvertingPage() {
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 9 signals and returns a
-              prioritised list of what to fix first. The $97 One-Leak Repair
-              Sprint selects one high-confidence page-level repair, confirms
-              the scope with you, implements it, and verifies the live
-              change. It does not promise conversion lift.
+              prioritised list of what to fix first. The $97 One-Leak Self-Implementation Kit
+              supplies a tailored change for one high-confidence page-level finding. You or your
+              developer implements it, and the 30-day re-audit verifies the page condition.
+              It does not promise conversion lift.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -567,7 +567,7 @@ export default function LandingPageNotConvertingPage() {
                 href="/pricing"
                 className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
-                See the One-Leak Repair Sprint
+                See the One-Leak Self-Implementation Kit
               </Link>
             </div>
           </section>

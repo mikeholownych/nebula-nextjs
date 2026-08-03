@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { DashboardView, AuditsView, ProjectsView } from './views'
 import CompareView from './compareView'
 import RecsView from './recsView'
@@ -50,11 +50,9 @@ export interface AuditDetail {
 
 type TabId = 'dashboard' | 'audits' | 'projects' | 'compare' | 'recommendations' | 'experiments' | 'billing' | 'monitoring' | 'timeline' | 'reports' | 'achievements' | 'assistant' | 'team' | 'settings'
 
-const EMAIL_KEY = 'nebula_ws_email'
-
 export default function WorkspaceClient() {
   const [email, setEmail] = useState('')
-  const [emailInput, setEmailInput] = useState('')
+  const [authLoading, setAuthLoading] = useState(true)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [audits, setAudits] = useState<WorkspaceAudit[] | null>(null)
@@ -90,29 +88,17 @@ export default function WorkspaceClient() {
   }, [])
 
   useEffect(() => {
-    setEmail(window.localStorage.getItem(EMAIL_KEY) || '')
-
-    // Handle invite token acceptance
-    const params = new URLSearchParams(window.location.search)
-    const inviteToken = params.get('invite')
-    if (inviteToken) {
-      fetch('/api/workspace/team/accept', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: inviteToken }),
+    fetch('/api/auth/me', { cache: 'no-store' })
+      .then(async (response) => {
+        if (!response.ok) {
+          window.location.replace('/login')
+          return
+        }
+        const user = await response.json()
+        setEmail(user.email || '')
       })
-        .then((r) => r.json())
-        .then((data) => {
-          if (data.ok && data.memberEmail) {
-            window.localStorage.setItem(EMAIL_KEY, data.memberEmail)
-            setEmail(data.memberEmail)
-          }
-          window.history.replaceState({}, '', '/workspace')
-        })
-        .catch(() => {
-          window.history.replaceState({}, '', '/workspace')
-        })
-    }
+      .catch(() => window.location.replace('/login'))
+      .finally(() => setAuthLoading(false))
   }, [])
 
   useEffect(() => {
@@ -121,69 +107,14 @@ export default function WorkspaceClient() {
     }
   }, [email, load])
 
-  const enter = () => {
-    const value = emailInput.trim().toLowerCase()
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-      setError('Enter a valid email address')
-      return
-    }
-    window.localStorage.setItem(EMAIL_KEY, value)
-    setEmail(value)
-    setEmailInput('')
-  }
-
-  const signOut = () => {
-    window.localStorage.removeItem(EMAIL_KEY)
-    setEmail('')
-    setAudits(null)
-    setLatestDetail(null)
-    setTab('dashboard')
+  const signOut = async () => {
+    await fetch('/api/auth/logout', { method: 'POST' }).catch(() => undefined)
+    window.location.replace('/login')
   }
 
   // ── Gate ────────────────────────────────────────────────────────────
-  if (!email) {
-    return (
-      <main
-        className="min-h-screen bg-bg text-fg pt-24"
-        id="main-content"
-      >
-        <div className="max-w-md mx-auto px-6 py-16">
-          <h1 className="text-3xl font-bold mb-2">Your Workspace</h1>
-          <p className="text-fg-muted mb-8">
-            Audit history, project health, and what to work on next — tied to the email
-            you used for your audits.
-          </p>
-          <div className="bg-bg-elevated border border-border rounded-lg p-6">
-            <label htmlFor="ws-email" className="block text-sm text-fg-muted mb-2">
-              Email used for your audits
-            </label>
-            <input
-              id="ws-email"
-              type="email"
-              value={emailInput}
-              onChange={(e) => setEmailInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && enter()}
-              placeholder="you@company.com"
-              className="w-full rounded-lg border border-border bg-bg-panel px-4 py-2.5 text-fg placeholder-fg-dim focus:border-accent focus:outline-none"
-            />
-            {error && <p className="mt-2 text-sm text-danger">{error}</p>}
-            <button
-              onClick={enter}
-              className="mt-4 w-full rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
-            >
-              Open workspace
-            </button>
-            <p className="mt-4 text-xs text-fg-dim">
-              No audits yet? Run a{' '}
-              <a href="/audit" className="text-accent-light hover:underline">
-                free audit
-              </a>{' '}
-              first — results appear here automatically.
-            </p>
-          </div>
-        </div>
-      </main>
-    )
+  if (authLoading) {
+    return <main className="min-h-screen bg-bg text-fg pt-24" id="main-content"><div className="max-w-6xl mx-auto px-6 py-16 text-fg-muted">Checking your session…</div></main>
   }
 
   // ── Loading / error ─────────────────────────────────────────────────

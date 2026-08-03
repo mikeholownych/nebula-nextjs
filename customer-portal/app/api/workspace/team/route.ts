@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { pool } from '@/app/lib/db'
 import { randomBytes } from 'crypto'
+import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 /**
  * GET /api/workspace/team?email=...
@@ -12,10 +13,9 @@ import { randomBytes } from 'crypto'
  */
 
 export async function GET(request: NextRequest) {
-  const email = (request.nextUrl.searchParams.get('email') || '').trim().toLowerCase()
-  if (!email) {
-    return NextResponse.json({ error: 'email required' }, { status: 400 })
-  }
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
+  const email = auth.user.email
 
   try {
     const result = await pool.query(
@@ -50,9 +50,11 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
   try {
     const body = await request.json()
-    const ownerEmail = (body.ownerEmail || '').trim().toLowerCase()
+    const ownerEmail = auth.user.email
     const inviteEmail = (body.inviteEmail || '').trim().toLowerCase()
     const role = body.role || 'viewer'
 
@@ -102,7 +104,7 @@ export async function POST(request: NextRequest) {
     // Send invite email via SendGrid if available
     const sendgridKey = process.env.SENDGRID_API_KEY
     if (sendgridKey && !sendgridKey.includes('placeholder')) {
-      const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://nebulacomponents.shop'
+      const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://nebulacomponents.com'
       const inviteUrl = `${baseUrl}/workspace?invite=${inviteToken}`
 
       try {
@@ -114,7 +116,7 @@ export async function POST(request: NextRequest) {
           },
           body: JSON.stringify({
             personalizations: [{ to: [{ email: inviteEmail }] }],
-            from: { email: 'noreply@nebulacomponents.shop', name: 'Nebula Components' },
+            from: { email: 'noreply@nebulacomponents.com', name: 'Nebula Components' },
             subject: `You've been invited to a Nebula workspace`,
             content: [
               {

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 /**
  * Fetch audit by ID from database
@@ -9,6 +10,8 @@ export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
   try {
     const { id } = await params
     
@@ -33,6 +36,9 @@ export async function GET(
     }
     
     const data = await response.json()
+    if (data.email && data.email.trim().toLowerCase() !== auth.user.email) {
+      return NextResponse.json({ error: 'Audit not found' }, { status: 404 })
+    }
     
     return NextResponse.json({
       audit_id: data.audit_id,

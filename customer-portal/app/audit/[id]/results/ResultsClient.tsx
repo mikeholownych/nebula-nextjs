@@ -5,7 +5,7 @@ import { Card } from '@/components/ui'
 import posthog from '@/app/lib/posthog-browser'
 import { parseAuditResult, type AuditResult, type Finding } from './auditResultSchema'
 import { getDisease, diseaseTierClass, complexityBadge, extractSerpData } from './diseases'
-import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
+import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
 import {
   REPORT_NAVIGATION,
   buildPriorityQueue,
@@ -200,7 +200,7 @@ function SerpSnippet({ finding, url }: { finding: Finding; url: string }) {
         </div>
       </div>
       <p className="mt-2 text-sm leading-6 text-fg-muted">
-        This is what searchers see before clicking. The Repair Sprint can rewrite your title and meta description if that's the selected repair.
+        This is what searchers see before clicking. The implementation kit can supply replacement copy for your title and meta description if that's the selected repair.
       </p>
     </div>
   )
@@ -385,7 +385,7 @@ function OverviewNext({ onSelect, unlocked, findingCount }: {
         >
           <span className="block text-sm font-semibold text-fg">Signals</span>
           <span className="mt-1 block text-sm leading-6 text-fg-muted">
-            Seven conversion signals, one clean pass standard each
+            Nine conversion signals, one clean pass standard each
           </span>
         </button>
         <button
@@ -452,12 +452,21 @@ function ReportOverview({ results }: { results: AuditResult }) {
           <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-sm font-semibold text-fg-muted">Conversion readiness</p>
-              <p className="mt-1 tabular-nums">
-                <span className="text-6xl font-extrabold text-accent">{headline.toFixed(1)}</span>
-                <span className="text-2xl text-fg-muted">/10</span>
-              </p>
-              <p className="mt-2 text-sm text-fg-muted">
-                Grade {results.grade} · {weighted ? 'weighted across high-impact components' : 'evidence-backed assessment'}
+              <div className="flex items-end gap-6">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted">Score</p>
+                  <p className="mt-1 tabular-nums">
+                    <span className="text-5xl font-extrabold text-accent">{headline.toFixed(1)}</span>
+                    <span className="text-xl text-fg-muted">/10</span>
+                  </p>
+                </div>
+                <div className="border-l border-border pl-6">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted">Grade</p>
+                  <p className="mt-1 font-mono text-[96px] font-extrabold leading-none text-fg tracking-tighter">{results.grade}</p>
+                </div>
+              </div>
+              <p className="mt-3 text-sm text-fg-muted">
+                {weighted ? 'Weighted across high-impact signals' : 'Evidence-backed assessment'}
               </p>
               <p className="mt-1 text-xs text-fg-muted">
                 <span className={headline >= anchor ? 'font-semibold text-accent' : ''}>Good from {anchor.toFixed(1)}</span>
@@ -505,11 +514,11 @@ function FixFirstQueue({ findings, auditId, onGoToRemediation }: { findings: Fin
             }}
             className="min-h-11 shrink-0 rounded-lg bg-accent px-6 py-4 text-sm font-semibold text-bg transition-colors hover:bg-accent-light"
           >
-            Get every fix — $97
+            Get one tailored fix — $97
           </button>
         ) : (
           <span className="min-h-11 shrink-0 rounded-lg border border-border px-6 py-4 text-sm font-semibold text-fg-muted">
-            Get every fix — $97
+            Get one tailored fix — $97
           </span>
         )}
       </div>
@@ -554,7 +563,7 @@ function SignalBreakdown({ findings }: { findings: Finding[] }) {
 
   return (
     <section id="signals" className="scroll-mt-40 border-b border-border py-16">
-      <h2 className="text-2xl font-extrabold text-fg">Seven conversion signals</h2>
+      <h2 className="text-2xl font-extrabold text-fg">Nine conversion signals</h2>
       <p className="mt-2 max-w-[65ch] text-base leading-7 text-fg-muted">
         A signal marked “Not flagged” means this run returned no failure for that category. It does not claim a conversion lift or replace a controlled experiment.
       </p>
@@ -1015,7 +1024,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
           <UnlockConfirmation emailSent={emailSent} email={emailForm.email} auditId={auditId} />
         )}
 
-        {/* Canonical offer: free audit → $97 One-Leak Repair Sprint */}
+        {/* Canonical offer: free audit → $97 One-Leak Self-Implementation Kit */}
         <section id="remediation" className="scroll-mt-40 border-t border-border pt-16">
           <div className="space-y-6">
           <h2 className="text-center text-2xl font-extrabold text-fg">
@@ -1027,9 +1036,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
               <h3 className="mb-1 text-2xl font-extrabold text-fg">${REPAIR_SPRINT_OFFER.priceUsd} {REPAIR_SPRINT_OFFER.name}</h3>
               <p className="mb-2 text-2xl font-extrabold tabular-nums text-accent">${REPAIR_SPRINT_OFFER.priceUsd}</p>
               <p className="mb-4 max-w-[65ch] text-base leading-7 text-fg-muted">
-                {REPAIR_SPRINT_OFFER.summary} Nebula selects one high-confidence repair from
-                this audit's findings, confirms the scope with you, implements it, and verifies
-                the live change.
+                {REPAIR_SPRINT_OFFER.summary} Nebula delivers a tailored kit for one high-confidence finding from this audit. You or your developer implements it, and the 30-day re-audit verifies the page condition.
               </p>
               <a
                 href={

@@ -5,7 +5,7 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Coach Consultant Landing Page Not Converting: Fix The Discovery Call Ask | Nebula Components',
   description: 'Coaches and consultants lose clients on the landing page before the sales call. Here\'s why the discovery call ask is the leak - and what to fix first.',
-  alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/coach-consultant-landing-page' },
+  alternates: { canonical: 'https://nebulacomponents.com/learning-centre/coach-consultant-landing-page' },
 }
 
 const faqSchema = {
@@ -50,7 +50,7 @@ const faqSchema = {
 const articleSchema = createArticleSchema({
   headline: 'Coach Or Consultant Landing Page Not Converting? The Discovery Call Ask Is The Leak',
   description: 'Coaches and consultants lose clients on the landing page before the sales call. Here\'s why the discovery call ask is the leak - and what to fix first.',
-  url: 'https://nebulacomponents.shop/learning-centre/coach-consultant-landing-page',
+  url: 'https://nebulacomponents.com/learning-centre/coach-consultant-landing-page',
   publishedDate: '2026-07-21',
   modifiedDate: '2026-07-21',
 })

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'You hired an agency, got a great landing page, then handed it to a developer. Here are 7 ways it quietly stopped working - and how to find them.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre/agency-handoff-debt',
+    canonical: 'https://nebulacomponents.com/learning-centre/agency-handoff-debt',
   },
 }
 
@@ -16,7 +16,7 @@ const articleSchema = createArticleSchema({
     'Agency Handoff Debt: 7 Silent Regressions That Kill Landing Page Performance',
   description:
     'You hired an agency, got a great landing page, then handed it to a developer. Here are 7 ways it quietly stopped working - and how to find them.',
-  url: 'https://nebulacomponents.shop/learning-centre/agency-handoff-debt',
+  url: 'https://nebulacomponents.com/learning-centre/agency-handoff-debt',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
 })

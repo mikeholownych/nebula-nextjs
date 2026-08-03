@@ -4,18 +4,18 @@ export const metadata: Metadata = {
   title: 'Page Speed and Conversion Rate | Nebula Components',
   description: 'How slow load times kill landing page conversions — and the 3 fastest fixes.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/page-speed-conversion',
+    canonical: 'https://nebulacomponents.com/page-speed-conversion',
   },
   openGraph: {
     title: 'Page Speed and Conversion Rate',
     description: 'How slow load times kill landing page conversions — and the 3 fastest fixes.',
-    url: 'https://nebulacomponents.shop/page-speed-conversion',
+    url: 'https://nebulacomponents.com/page-speed-conversion',
     type: 'article',
-    images: ['https://nebulacomponents.shop/og-card.png'],
+    images: ['https://nebulacomponents.com/og-card.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['https://nebulacomponents.shop/og-card.png'],
+    images: ['https://nebulacomponents.com/og-card.png'],
   },
 }
 

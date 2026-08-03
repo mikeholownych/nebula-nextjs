@@ -18,7 +18,7 @@ export default function ArticlePage({
   children,
 }: ArticlePageProps) {
   const pathname = usePathname();
-  const url = `https://nebulacomponents.shop${pathname}`;
+  const url = `https://nebulacomponents.com${pathname}`;
 
   const articleSchema = createArticleSchema({
     headline: title,

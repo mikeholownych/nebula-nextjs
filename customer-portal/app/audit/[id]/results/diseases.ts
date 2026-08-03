@@ -6,7 +6,7 @@
  * replacing it. Every name must be understandable without knowing what an H1 is.
  *
  * Rule: sounds manageable to understand, not DIY-fixable without expertise.
- * That balance keeps the $97 One-Leak Repair Sprint relevant after the name lands.
+ * That balance keeps the $97 One-Leak Self-Implementation Kit relevant after the name lands.
  */
 
 /**

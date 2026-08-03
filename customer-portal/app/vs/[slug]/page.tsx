@@ -19,12 +19,12 @@ export function generateMetadata({
       title: `${c.competitorName} vs. Nebula — Landing Page Audit Comparison`,
       description: c.intent,
       alternates: {
-        canonical: `https://nebulacomponents.shop/vs/${c.slug}`,
+        canonical: `https://nebulacomponents.com/vs/${c.slug}`,
       },
       openGraph: {
         title: `${c.competitorName} vs. Nebula`,
         description: c.intent,
-        url: `https://nebulacomponents.shop/vs/${c.slug}`,
+        url: `https://nebulacomponents.com/vs/${c.slug}`,
       },
     }
   })

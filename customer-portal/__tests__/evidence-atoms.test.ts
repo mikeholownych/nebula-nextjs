@@ -38,20 +38,20 @@ function compileFixture(claims: object, evidence: object, surfaces: object) {
 
 describe('Evidence Atom Registry', () => {
   it('publishes a verified claim only on its declared surface', () => {
-    const claim = getPublicClaim('claim-7-point-diagnosis', {
+    const claim = getPublicClaim('claim-9-signal-diagnosis', {
       route: '/audit',
       slot: 'audit-method-summary',
     })
 
     expect(claim).toEqual({
-      claimId: 'claim-7-point-diagnosis',
+      claimId: 'claim-9-signal-diagnosis',
       text: 'Nebula uses a 9-signal audit framework covering message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, and load speed.',
-      evidenceIds: ['evidence-7point-framework-definition'],
+      evidenceIds: ['evidence-9signal-framework-definition'],
       supportStatus: 'directly_supported',
     })
 
     expect(
-      getPublicClaim('claim-7-point-diagnosis', {
+      getPublicClaim('claim-9-signal-diagnosis', {
         route: '/pricing',
         slot: 'audit-method-summary',
       }),
@@ -93,12 +93,12 @@ describe('Evidence Atom Registry', () => {
   it('renders the governed claim on the declared audit surface', () => {
     // The AuditPage is a React Server Component and cannot be rendered in JSDOM.
     // Instead verify the claim is present in the compiled registry with correct attributes.
-    const claim = getPublicClaim('claim-7-point-diagnosis', {
+    const claim = getPublicClaim('claim-9-signal-diagnosis', {
       route: '/audit',
       slot: 'audit-method-summary',
     })
     expect(claim).not.toBeNull()
-    expect(claim?.claimId).toBe('claim-7-point-diagnosis')
+    expect(claim?.claimId).toBe('claim-9-signal-diagnosis')
     expect(claim?.text).toBe(
       'Nebula uses a 9-signal audit framework covering message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, and load speed.',
     )

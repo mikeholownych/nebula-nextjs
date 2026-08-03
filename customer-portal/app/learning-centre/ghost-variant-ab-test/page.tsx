@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'A ghost variant is when your control quietly breaks mid-test - a missing pixel, a truncated H1, a 404ing social proof block - and the "winning" variant wins by default. Here is how to detect it before you ship.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre/ghost-variant-ab-test',
+    canonical: 'https://nebulacomponents.com/learning-centre/ghost-variant-ab-test',
   },
 }
 
@@ -15,7 +15,7 @@ const articleSchema = createArticleSchema({
   headline: 'The Ghost Variant: When Your A/B Test Winner Is a False Positive',
   description:
     'A ghost variant is when your control quietly breaks mid-test - a missing pixel, a truncated H1, a 404ing social proof block - and the "winning" variant wins by default. Here is how to detect it before you ship.',
-  url: 'https://nebulacomponents.shop/learning-centre/ghost-variant-ab-test',
+  url: 'https://nebulacomponents.com/learning-centre/ghost-variant-ab-test',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
 })

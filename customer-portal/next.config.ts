@@ -52,12 +52,18 @@ const nextConfig: NextConfig = {
   // Rule: content pages → nearest current equivalent (301); true orphans → /gone (410).
   async redirects() {
     return [
-      // www → apex (duplicate host, both returning 200 — kills authority split)
+      // www variants → canonical .com apex (single hop)
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'www.nebulacomponents.shop' }],
-        destination: 'https://nebulacomponents.shop/:path*',
-        permanent: true,
+        destination: 'https://nebulacomponents.com/:path*',
+        statusCode: 301,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.nebulacomponents.com' }],
+        destination: 'https://nebulacomponents.com/:path*',
+        statusCode: 301,
       },
       // Trailing-slash duplicate (skipTrailingSlashRedirect is on globally for
       // the PostHog /ingest proxy, so this one page needs its own explicit rule)

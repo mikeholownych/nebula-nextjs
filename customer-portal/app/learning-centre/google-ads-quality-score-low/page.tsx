@@ -5,13 +5,13 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Google Ads Quality Score Low: Fix The Page | Nebula',
   description: 'Low Quality Score is a landing page problem, not an ad problem. Learn what Google is measuring and how to fix it.',
-  alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/google-ads-quality-score-low' },
+  alternates: { canonical: 'https://nebulacomponents.com/learning-centre/google-ads-quality-score-low' },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'Google Ads Quality Score Low? Fix The Page Before The Account',
   description: 'Low Quality Score is a landing page problem, not an ad problem. Learn what Google is measuring and how to fix it.',
-  url: 'https://nebulacomponents.shop/learning-centre/google-ads-quality-score-low',
+  url: 'https://nebulacomponents.com/learning-centre/google-ads-quality-score-low',
   publishedDate: '2026-01-01',
   modifiedDate: '2026-07-27',
 })

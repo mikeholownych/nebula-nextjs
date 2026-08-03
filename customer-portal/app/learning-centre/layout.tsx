@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     'In-depth guides on landing page conversion leaks: message-match failures, trust signal gaps, mobile friction, slow load times, and paid traffic diagnostics.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre',
+    canonical: 'https://nebulacomponents.com/learning-centre',
   },
 }
 

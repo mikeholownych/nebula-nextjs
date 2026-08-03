@@ -1,25 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { pool } from '@/app/lib/db'
+import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 /**
  * Billing summary for the workspace.
- * GET /api/billing/summary?email=...
+ * GET /api/billing/summary
  *
- * Reads purchases from the webhook's `nebula_platform` DB (same store the
+ * The authenticated workspace identity is authoritative; query-string email
+ * values are ignored. Reads live-mode purchases from the webhook's
+ * `nebula_platform` DB (same store the
  * Stripe webhook writes to) and, when a Stripe customer exists for the email,
  * creates a customer-portal session so the user can see invoices, receipts,
  * and payment methods.
  */
 
 const OFFER_NAMES: Record<string, string> = {
-  'fix-pack': 'One-Leak Repair Sprint',
+  'fix-pack': 'One-Leak Self-Implementation Kit',
   'agency-partner': 'Agency Partner',
   retainer: 'Conversion Retainer',
 }
 
 const OFFER_AMOUNT_NAMES: Record<number, string> = {
-  9700: 'One-Leak Repair Sprint',
+  9700: 'One-Leak Self-Implementation Kit',
   49700: 'Agency Partner',
   149700: 'Conversion Retainer',
 }
@@ -51,9 +54,9 @@ function isPaid(paymentStatus: string | null): boolean {
 }
 
 export async function GET(request: NextRequest) {
-  const email = (request.nextUrl.searchParams.get('email') || '')
-    .trim()
-    .toLowerCase()
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
+  const email = auth.user.email
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: 'Valid email required' }, { status: 400 })
@@ -75,6 +78,7 @@ export async function GET(request: NextRequest) {
               currency, payment_status, fulfillment_status, created_at
        FROM purchases
        WHERE lower(customer_email) = $1
+         AND livemode = TRUE
        ORDER BY created_at DESC`,
       [email],
     )
@@ -120,7 +124,7 @@ export async function GET(request: NextRequest) {
       if (customer) {
         const session = await stripe.billingPortal.sessions.create({
           customer: customer.id,
-          return_url: `${process.env.NEXT_PUBLIC_URL ?? 'https://nebulacomponents.shop'}/workspace`,
+          return_url: `${process.env.NEXT_PUBLIC_URL ?? 'https://nebulacomponents.com'}/workspace`,
         })
         billingPortalUrl = session.url
       }

@@ -134,7 +134,7 @@ function extractMarkdown(meta, pageSrc) {
     '',
     '---',
     '',
-    `*Markdown version of https://nebulacomponents.shop/learning-centre/${meta.slug} — HTML: [${meta.title}](https://nebulacomponents.shop/learning-centre/${meta.slug})*`
+    `*Markdown version of https://nebulacomponents.com/learning-centre/${meta.slug} — HTML: [${meta.title}](https://nebulacomponents.com/learning-centre/${meta.slug})*`
   )
   return parts.join('\n').trim() + '\n'
 }

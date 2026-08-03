@@ -2,16 +2,47 @@ import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
 /**
- * Legacy static HTML is quarantined until Task 14 completes the App Router
- * migration and Task 11 verifies every buyer-facing claim. Extensionless App
- * Router routes remain available.
+ * Proxy / edge middleware for Nebula Components.
  *
- * Also handles:
- * - Markdown for Agents (RFC content negotiation): Accept: text/markdown → llms.txt
+ * Responsibilities:
+ * 1. Domain migration: nebulacomponents.shop → nebulacomponents.com (301)
+ * 2. Block legacy .html routes
+ * 3. Markdown for Agents (RFC content negotiation): Accept: text/markdown → llms.txt
  */
 export function proxy(request: NextRequest) {
+  const host = request.headers.get('host') ?? ''
+
+  // ── 1. Domain migration: every variant → .com apex ──────────────────────────
+  if (
+    host === 'nebulacomponents.shop' ||
+    host === 'www.nebulacomponents.shop' ||
+    host === 'www.nebulacomponents.com'
+  ) {
+    const url = request.nextUrl.clone()
+    url.protocol = 'https:'
+    url.hostname = 'nebulacomponents.com'
+    url.port = ''
+    return NextResponse.redirect(url, 301)
+  }
+
+  // Cloudflare forwards the visitor-facing scheme in this header. Keep the
+  // canonical host HTTPS-only instead of serving duplicate HTTP documents.
+  const forwardedProto = request.headers
+    .get('x-forwarded-proto')
+    ?.split(',')[0]
+    ?.trim()
+    .toLowerCase()
+  if (host === 'nebulacomponents.com' && forwardedProto === 'http') {
+    const url = request.nextUrl.clone()
+    url.protocol = 'https:'
+    url.hostname = 'nebulacomponents.com'
+    url.port = ''
+    return NextResponse.redirect(url, 301)
+  }
+
   const { pathname } = request.nextUrl
 
+  // ── 2. Legacy HTML/static aliases — definitive 410 ─────────────────────────
   // Block legacy .html routes
   if (pathname.toLowerCase().endsWith('.html')) {
     return new NextResponse('Not Found', {

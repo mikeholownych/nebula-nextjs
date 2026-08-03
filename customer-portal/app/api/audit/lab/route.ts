@@ -44,7 +44,29 @@ function scoreToStatus(score: number | null): 'pass' | 'warning' | 'fail' | 'unk
   return 'fail'
 }
 
-function extractFinding(f: any) {
+type LabFinding = {
+  key?: string
+  issue?: string
+  fix?: string
+  evidence?: {
+    measured?: unknown
+    required?: unknown
+    delta?: unknown
+    selector?: unknown
+  }
+  note?: string
+}
+
+type LabResponse = {
+  findings?: unknown
+  dimensions?: Record<string, { score?: unknown }>
+  page_h1?: unknown
+  page_title?: unknown
+  score?: unknown
+  grade?: unknown
+}
+
+function extractFinding(f: LabFinding | null) {
   if (!f) return null
   return {
     issue: f.issue ?? '',
@@ -101,11 +123,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Audit engine unavailable' }, { status: upstream.status })
     }
 
-    const data = await upstream.json()
-    const findings = Array.isArray(data.findings) ? data.findings : []
+    const data = await upstream.json() as LabResponse
+    const findings = Array.isArray(data.findings)
+      ? data.findings.filter((f): f is LabFinding => Boolean(f && typeof f === 'object'))
+      : []
     const dims = data.dimensions && typeof data.dimensions === 'object' ? data.dimensions : {}
 
-    const findingByKey = (key: string) => findings.find((f: any) => f?.key === key) ?? null
+    const findingByKey = (key: string) => findings.find((f) => f.key === key) ?? null
     const dimScore = (key: string): number | null => {
       const d = dims[key]
       return d && typeof d.score === 'number' ? d.score : null

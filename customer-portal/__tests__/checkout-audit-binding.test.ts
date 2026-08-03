@@ -3,6 +3,8 @@
 import { NextRequest } from 'next/server'
 import { POST } from '@/app/api/checkout/route'
 import { signAuditUnlock } from '@/app/lib/audit-unlock-token'
+import fs from 'node:fs'
+import path from 'node:path'
 
 const auditId = '123e4567-e89b-12d3-a456-426614174000'
 
@@ -25,7 +27,7 @@ describe('POST /api/checkout audit binding', () => {
     process.env = {
       ...originalEnv,
       AUDIT_UNLOCK_SECRET: 'checkout-test-secret',
-      NEXT_PUBLIC_URL: 'https://nebulacomponents.shop',
+      NEXT_PUBLIC_URL: 'https://nebulacomponents.com',
       PLATFORM_API_URL: 'http://127.0.0.1:8001',
       STRIPE_SECRET_KEY: 'sk_test_configured',
     }
@@ -81,5 +83,14 @@ describe('POST /api/checkout audit binding', () => {
     const stripeBody = new URLSearchParams(String(stripeInit.body))
     expect(stripeBody.get('metadata[audit_id]')).toBe(auditId)
     expect(stripeBody.get('customer_email')).toBe('buyer@example.com')
+  })
+
+  it('routes the public checkout page through the audit-bound API rather than a static payment link', () => {
+    const checkoutPage = fs.readFileSync(
+      path.join(process.cwd(), 'app/checkout/page.tsx'),
+      'utf8',
+    )
+    expect(checkoutPage).toContain('CheckoutCTAButton')
+    expect(checkoutPage).not.toContain('REPAIR_SPRINT_OFFER.checkoutUrl')
   })
 })

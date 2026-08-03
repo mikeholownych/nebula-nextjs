@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     'Submit your landing page URL for a free conversion audit. We check message-match, trust signals, mobile layout, form friction, load time, and compliance in...',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/audit',
+    canonical: 'https://nebulacomponents.com/audit',
   },
 }
 

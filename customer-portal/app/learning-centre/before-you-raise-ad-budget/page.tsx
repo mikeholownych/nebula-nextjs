@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Raising ad budget before fixing landing page leaks scales waste proportionally. Here is the 9-signal checklist to run before touching your daily spend.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre/before-you-raise-ad-budget',
+    canonical: 'https://nebulacomponents.com/learning-centre/before-you-raise-ad-budget',
   },
 }
 
@@ -15,7 +15,7 @@ const articleSchema = createArticleSchema({
   headline: 'Before You Raise Ad Budget: Fix The Leaks First',
   description:
     'Raising ad budget before fixing landing page leaks scales waste proportionally. Here is the 9-signal checklist to run before touching your daily spend.',
-  url: 'https://nebulacomponents.shop/learning-centre/before-you-raise-ad-budget',
+  url: 'https://nebulacomponents.com/learning-centre/before-you-raise-ad-budget',
   publishedDate: '2026-07-16',
   modifiedDate: '2026-07-21',
 })
@@ -314,9 +314,9 @@ export default function BeforeYouRaiseAdBudget() {
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 9 signals and returns a
-              prioritised fix list. The $97 One-Leak Repair Sprint selects one
-              high-confidence page-level repair, confirms the scope with you,
-              implements it, and verifies the live change - before you spend
+              prioritised fix list. The $97 One-Leak Self-Implementation Kit supplies a tailored
+              change for one high-confidence page-level finding. You or your developer implements it,
+              and the 30-day re-audit verifies the page condition - before you spend
               another dollar on traffic.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -330,7 +330,7 @@ export default function BeforeYouRaiseAdBudget() {
                 href="/pricing"
                 className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
-                See the One-Leak Repair Sprint
+                See the One-Leak Self-Implementation Kit
               </Link>
             </div>
           </section>

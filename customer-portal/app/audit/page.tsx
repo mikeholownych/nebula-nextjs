@@ -7,11 +7,11 @@ import AuditForm from './AuditForm'
 export const metadata: Metadata = {
   title: 'Free Landing Page Audit: Find Conversion Friction | Nebula',
   description: 'Run a free evidence-backed landing page audit. Discover observable conversion friction across message match, trust signals, mobile layout, and page speed.',
-  alternates: { canonical: 'https://nebulacomponents.shop/audit' },
+  alternates: { canonical: 'https://nebulacomponents.com/audit' },
   openGraph: {
     title: 'Free Landing Page Audit: Find Conversion Friction | Nebula',
     description: 'Run a free evidence-backed landing page audit. Discover observable conversion friction across message match, trust signals, mobile layout, and page speed.',
-    url: 'https://nebulacomponents.shop/audit',
+    url: 'https://nebulacomponents.com/audit',
     siteName: 'Nebula Components',
     locale: 'en_US',
     type: 'website',
@@ -34,7 +34,7 @@ const SAMPLE_FINDINGS = [
 ]
 
 export default function AuditPage() {
-  const auditMethodClaim = getPublicClaim('claim-7-point-diagnosis', {
+  const auditMethodClaim = getPublicClaim('claim-9-signal-diagnosis', {
     route: '/audit',
     slot: 'audit-method-summary',
   })
@@ -57,7 +57,7 @@ export default function AuditPage() {
           <div className="grid gap-12 md:grid-cols-2 md:items-start">
 
             {/* Form first on mobile (order-1 on mobile, order-2 on md+) */}
-            <div className="order-1 rounded-2xl border border-border bg-bg-muted/30 p-6 md:order-2 md:p-8">
+            <div id="run-audit" className="order-1 rounded-2xl border border-border bg-bg-muted/30 p-6 md:order-2 md:p-8">
               <p className="mb-4 text-sm font-semibold text-fg">
                 Paste your landing page URL
               </p>
@@ -71,13 +71,13 @@ export default function AuditPage() {
               </h1>
               <p className="mt-4 max-w-lg text-lg leading-7 text-fg-muted">
                 Paste your URL. Get 9 conversion signals checked against your actual page.
-                No email required to see results.
+                See your score and initial findings before sharing an email.
               </p>
               <ul className="mt-6 space-y-2">
                 {[
                   'Results in under 2 minutes',
                   'No signup, no account',
-                  '$97 One-Leak Repair Sprint implements your highest-confidence fix',
+                  '$97 One-Leak Self-Implementation Kit gives you one implementation-ready change',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-fg-muted">
                     <span className="text-accent">✓</span>
@@ -97,16 +97,18 @@ export default function AuditPage() {
               Not a mockup
             </p>
             <h2 className="mb-4 text-2xl font-bold tracking-tight text-fg md:text-3xl">
-              This is a real audit of our own homepage.
+              See the evidence before you decide.
             </h2>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent">Historical proof</p>
             <p className="mb-6 max-w-2xl text-fg-muted">
-              We ran nebulacomponents.shop through the same audit engine every visitor uses.
-              No edits, no cherry-picked run - this is the actual results screen.
+              This screenshot is a historical audit artifact captured from nebulacomponents.com.
+              It documents the result format and evidence surface; it is not a current score.
+              Run a fresh audit below for current evidence.
             </p>
             <div className="overflow-hidden rounded-2xl border border-border">
               <Image
-                src="/screenshots/audit-results-example.webp"
-                alt="Real Nebula audit results for nebulacomponents.shop showing a 7.7/10 conversion readiness score, Grade B, analysed across 9 conversion signals"
+                src="/screenshots/audit-results-example-com.webp"
+                alt="Historical Nebula audit results artifact for nebulacomponents.com showing a 7.7/10 conversion readiness score, Grade B, analysed across 9 conversion signals"
                 width={1600}
                 height={650}
                 className="h-auto w-full"
@@ -275,24 +277,24 @@ export default function AuditPage() {
           </div>
         </section>
 
-        {/* ── 4. After the audit: repair sprint ── */}
+        {/* ── 4. After the audit: self-implementation kit ── */}
         <section className="border-t border-border px-6 py-14">
           <div className="mx-auto max-w-6xl grid gap-10 md:grid-cols-2 md:items-start">
             <div>
               <h2 className="mb-4 text-2xl font-bold tracking-tight text-fg md:text-3xl">
-                If it fails, the $97 One-Leak Repair Sprint fixes it.
+                If it fails, the $97 kit gives you one implementation-ready change.
               </h2>
               <p className="mb-6 text-base text-fg-muted leading-7">
                 The free audit shows you what is broken and in what order to fix it.
-                Pay $97 and receive targeted AI prompts written for your specific failing signals —
-                exact copy changes, code snippets, or configuration fixes — delivered instantly.
-                No site access needed. You implement them yourself or hand them to your developer.
+                Pay $97 and receive a tailored implementation kit for one specific failing signal —
+                exact copy changes, code snippets, or configuration fixes — sent after successful payment.
+                No site access is needed. You implement it yourself or hand it to your developer.
               </p>
               <div className="space-y-2">
                 {[
-                  'Targeted AI prompts written for your specific failing signals',
-                  'Exact copy, code, or config changes — not generic advice',
-                  'Delivered instantly after checkout — no emails to wait for',
+                  'Tailored implementation instructions for one selected finding',
+                  'Exact copy, a code snippet, or a configuration change — not generic advice',
+                  'Sent by email after successful payment',
                   'One additional same-scope re-audit within 30 days',
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2 text-sm text-fg-muted">
@@ -311,10 +313,10 @@ export default function AuditPage() {
                 After the free audit identifies what is leaking.
               </p>
               <a
-                href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
+                href="#run-audit"
                 className="block w-full rounded-xl bg-accent py-3.5 text-center font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-sm"
               >
-                Get the Repair Sprint &rarr;
+                Run the audit first &rarr;
               </a>
               <p className="mt-3 text-center text-xs text-fg-muted">
                 Run the free audit first &rarr;

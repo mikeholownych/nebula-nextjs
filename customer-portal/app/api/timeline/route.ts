@@ -1,20 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 const PLATFORM_API = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
 export async function GET(req: NextRequest) {
-  const email = req.nextUrl.searchParams.get('email')
-  if (!email) {
-    return NextResponse.json({ error: 'email required' }, { status: 400 })
-  }
+  const auth = await requireWorkspaceUser(req)
+  if ('response' in auth) return auth.response
+  const email = auth.user.email
   try {
     const upstream = await fetch(
       `${PLATFORM_API}/audit/timeline?email=${encodeURIComponent(email)}`,
       { cache: 'no-store' }
     )
     const data = await upstream.json()
-    return NextResponse.json(data, { status: upstream.status })
+    if (!upstream.ok) return NextResponse.json({ email, events: [] }, { status: 200 })
+    return NextResponse.json(data)
   } catch {
-    return NextResponse.json({ error: 'Timeline unavailable' }, { status: 503 })
+    return NextResponse.json({ email, events: [] }, { status: 200 })
   }
 }

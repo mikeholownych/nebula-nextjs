@@ -6,13 +6,13 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'Specialist AI Agent Library: Deploy Purpose-Built Agents for Growth | Nebula Components',
   description: 'How to build and deploy a library of specialist AI agents that handle defined tasks in your growth and operations stack.',
-  alternates: { canonical: 'https://nebulacomponents.shop/playbooks/specialist-ai-agent-library' },
+  alternates: { canonical: 'https://nebulacomponents.com/playbooks/specialist-ai-agent-library' },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'Specialist AI Agent Library: Deploy Purpose-Built Agents for Growth',
   description: 'How to build and deploy a library of specialist AI agents that handle defined tasks in your growth and operations stack.',
-  url: 'https://nebulacomponents.shop/playbooks/specialist-ai-agent-library',
+  url: 'https://nebulacomponents.com/playbooks/specialist-ai-agent-library',
   publishedDate: '2025-07-15',
   modifiedDate: '2026-07-19',
 })
@@ -157,16 +157,15 @@ export default function SpecialistAiAgentLibraryPage() {
         <section className="mt-6 rounded-2xl border border-accent/40 bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Want this installed instead of documented?</h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
-              The free Nebula audit identifies likely page-side leaks. The $97 One-Leak Repair Sprint
-              selects one high-confidence page-level repair, confirms the scope with you, implements it,
-              and verifies the live change. It does not promise conversion lift.
+              The free Nebula audit identifies likely page-side leaks. The $97 One-Leak Self-Implementation Kit
+              delivers a tailored kit for one high-confidence page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition. It does not promise conversion lift.
             </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/audit" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">
               Run the free audit
             </Link>
-            <Link href="/checkout" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
-              Review the $97 One-Leak Repair Sprint
+            <Link href="/audit" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
+              Run the audit before checkout
             </Link>
           </div>
         </section>

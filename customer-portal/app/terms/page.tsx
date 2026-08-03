@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic'
 export const metadata: Metadata = {
   title: 'Terms of Service — Nebula Components',
   description: 'Terms of service for Nebula Components landing page audit and optimization services.',
-  alternates: { canonical: 'https://nebulacomponents.shop/terms' },
+  alternates: { canonical: 'https://nebulacomponents.com/terms' },
 }
 
 export default function TermsPage() {
@@ -41,17 +41,17 @@ export default function TermsPage() {
             <h2 className="mb-3 text-lg font-semibold text-fg">3. Paid Services</h2>
             {fixPack ? (
               <p className="text-base leading-7 text-fg-muted">
-                The current One-Leak Repair Sprint ({formatUsd(fixPack.priceCents)}) covers one
-                landing page. After payment, you receive targeted AI prompts written for your
-                specific failing signals — exact copy changes, code snippets, or configuration
-                fixes. You implement them yourself, with your developer, or through your CMS.
+                The current One-Leak Self-Implementation Kit ({formatUsd(fixPack.priceCents)}) covers one
+                landing page and one selected audit finding. After payment, you receive a tailored
+                implementation kit containing exact copy, a code snippet, or a configuration change.
+                You implement it yourself, with your developer, or through your CMS.
                 Nebula does not take access to your site, CMS, or hosting. One additional
                 same-scope evidence check may be requested within {fixPack.reAudit.windowDays} days
                 to verify the fix held. This service does not guarantee conversion lift.
               </p>
             ) : (
               <p className="text-base leading-7 text-fg-muted">
-                No verified paid Repair Sprint offer is currently available. Any future paid
+                No verified paid Self-Implementation Kit offer is currently available. Any future paid
                 service will be described at checkout before payment is accepted.
               </p>
             )}
@@ -79,8 +79,8 @@ export default function TermsPage() {
             <h2 className="mb-3 text-lg font-semibold text-fg">6. Contact</h2>
             <p className="text-base leading-7 text-fg-muted">
               For questions about these terms, contact us at{' '}
-              <a href="mailto:hello@nebulacomponents.shop" className="text-accent hover:underline">
-                hello@nebulacomponents.shop
+              <a href="mailto:hello@nebulacomponents.com" className="text-accent hover:underline">
+                hello@nebulacomponents.com
               </a>.
             </p>
           </section>

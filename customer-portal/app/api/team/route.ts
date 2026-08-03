@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 const PLATFORM_API = process.env.PLATFORM_API_URL || 'http://localhost:8001'
 
 export async function GET(req: NextRequest) {
-  const email = req.nextUrl.searchParams.get('email') || ''
-  if (!email) {
-    return NextResponse.json({ error: 'email is required' }, { status: 400 })
-  }
+  const auth = await requireWorkspaceUser(req)
+  if ('response' in auth) return auth.response
+  const email = auth.user.email
   try {
     const res = await fetch(
       `${PLATFORM_API}/audit/team?email=${encodeURIComponent(email)}`,

@@ -4,7 +4,7 @@ import { comparisons, getComparison } from '../comparisons'
 
 export const dynamicParams = false
 
-const BASE_URL = 'https://nebulacomponents.shop'
+const BASE_URL = 'https://nebulacomponents.com'
 
 export function generateStaticParams() {
   return comparisons.map((c) => ({ slug: c.slug }))

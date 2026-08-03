@@ -98,7 +98,7 @@ export default function OpenGraphImage() {
           }}
         >
           <div style={{ display: 'flex' }}>Leak diagnosis → prioritized fix path</div>
-          <div style={{ display: 'flex', color: '#34d399', fontWeight: 650 }}>nebulacomponents.shop</div>
+          <div style={{ display: 'flex', color: '#34d399', fontWeight: 650 }}>nebulacomponents.com</div>
         </div>
       </div>
     ),

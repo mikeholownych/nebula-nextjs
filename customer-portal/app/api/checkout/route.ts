@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getPostHogClient, captureServerException } from '@/app/lib/posthog-server'
 import { getActiveFixPack } from '@/app/lib/public-facts'
 import { readAuditUnlock } from '@/app/lib/audit-unlock-token'
-import { REPAIR_SPRINT_OFFER } from '@/app/lib/repair-sprint-offer'
+import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 

@@ -5,7 +5,7 @@ import { getArticles } from './learning-centre/lib/getArticles'
 
 export const dynamic = 'force-dynamic'
 
-const BASE_URL = 'https://nebulacomponents.shop'
+const BASE_URL = 'https://nebulacomponents.com'
 
 // Priority reflects actual page importance, not a uniform default — legal/
 // utility pages sit well below commercial and hub pages so the signal means

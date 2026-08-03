@@ -28,7 +28,7 @@ If you are the other agent:
 ## Current Production
 
 Server running on port 3000: `proc_bb334fdb2e83`
-Tunnel: `nebulacomponents.shop`
+Tunnel: `nebulacomponents.com`
 
 ---
 *This file created by session running this chat*

@@ -12,7 +12,7 @@ import { auditQueryDiscovery } from '@/lib/x402-discovery'
  * This reaches the same real FastAPI audit engine as POST /api/audit/run.
  */
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nebulacomponents.shop'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nebulacomponents.com'
 
 const handler = async (request: NextRequest) => {
   const targetUrl = request.nextUrl.searchParams.get('url')?.trim()

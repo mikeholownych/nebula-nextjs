@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
@@ -8,8 +9,10 @@ const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
  * POST /api/lab-experiments            → save a lab run
  */
 export async function GET(request: NextRequest) {
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
   try {
-    const email = request.nextUrl.searchParams.get('email') || ''
+    const email = auth.user.email
     if (!email || email.length < 3 || email.length > 320) {
       return NextResponse.json({ error: 'Valid email required' }, { status: 400 })
     }
@@ -34,12 +37,15 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
   try {
     const body = await request.json().catch(() => null)
     if (!body) {
       return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
     }
-    const { email, url, label, score, grade, components, adCopy } = body
+    const { url, label, score, grade, components, adCopy } = body
+    const email = auth.user.email
     if (!email || !url || !label || typeof score !== 'number') {
       return NextResponse.json({ error: 'email, url, label, and score required' }, { status: 400 })
     }

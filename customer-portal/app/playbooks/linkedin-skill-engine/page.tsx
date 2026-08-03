@@ -6,13 +6,13 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'LinkedIn Skill Engine: Build Authority With Your Own Experience | Nebula Components',
   description: 'How to extract your real professional skills and frameworks into LinkedIn content that builds authority without manufactured noise.',
-  alternates: { canonical: 'https://nebulacomponents.shop/playbooks/linkedin-skill-engine' },
+  alternates: { canonical: 'https://nebulacomponents.com/playbooks/linkedin-skill-engine' },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'LinkedIn Skill Engine: Build Authority With Your Own Experience',
   description: 'How to extract your real professional skills and frameworks into LinkedIn content that builds authority without manufactured noise.',
-  url: 'https://nebulacomponents.shop/playbooks/linkedin-skill-engine',
+  url: 'https://nebulacomponents.com/playbooks/linkedin-skill-engine',
   publishedDate: '2025-07-15',
   modifiedDate: '2026-07-19',
 })

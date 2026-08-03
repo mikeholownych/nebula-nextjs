@@ -5,13 +5,13 @@ import { createArticleSchema } from '../../lib/schema'
 export const metadata: Metadata = {
   title: 'LinkedIn Ads Getting Clicks But No Conversions: Fix The Page First | Nebula Components',
   description: 'If LinkedIn ads get clicks but no conversions, separate campaign delivery from post-click behaviour before changing targeting or the landing page.',
-  alternates: { canonical: 'https://nebulacomponents.shop/learning-centre/linkedin-ads-not-converting' },
+  alternates: { canonical: 'https://nebulacomponents.com/learning-centre/linkedin-ads-not-converting' },
 }
 
 const articleSchema = createArticleSchema({
   headline: 'LinkedIn Ads Getting Clicks But No Conversions: Isolate the Post-Click Leak',
   description: 'If LinkedIn ads get clicks but no conversions, separate campaign delivery from post-click behaviour before changing targeting or the landing page.',
-  url: 'https://nebulacomponents.shop/learning-centre/linkedin-ads-not-converting',
+  url: 'https://nebulacomponents.com/learning-centre/linkedin-ads-not-converting',
   publishedDate: '2026-07-21',
   modifiedDate: '2026-07-21',
 })

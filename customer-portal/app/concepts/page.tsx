@@ -1,132 +1,223 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Concepts — Nebula Components',
-  description: 'Proprietary concepts and methodologies developed by Nebula Components for landing page conversion optimization.',
+  title: 'Nebula Concepts: Frameworks Behind the 9-Signal Landing Page Audit | Nebula',
+  description:
+    'The diagnostic vocabulary Nebula uses to evaluate landing page conversion fitness — signals, evidence atoms, conversion leaks, message match, above-fold state, structural friction, grades, and the One-Leak Self-Implementation Kit.',
+  alternates: { canonical: 'https://nebulacomponents.com/concepts' },
   openGraph: {
-    title: 'Concepts — Nebula Components',
-    description: 'Proprietary concepts: Trigger-aware prospecting, Message-match audit, 7-Point Diagnosis.',
-    url: 'https://nebulacomponents.shop/concepts',
-  },
-  alternates: {
-    canonical: 'https://nebulacomponents.shop/concepts',
+    title: 'Nebula Concepts: Frameworks Behind the 9-Signal Landing Page Audit',
+    description:
+      'The diagnostic vocabulary Nebula uses to evaluate landing page conversion fitness — signals, evidence atoms, conversion leaks, message match, above-fold state, structural friction, grades, and the One-Leak Self-Implementation Kit.',
+    url: 'https://nebulacomponents.com/concepts',
+    siteName: 'Nebula Components',
+    type: 'article',
   },
 }
 
-const concepts = [
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Nebula Concepts: Frameworks Behind the 9-Signal Landing Page Audit',
+  description:
+    'The diagnostic vocabulary Nebula uses to evaluate landing page conversion fitness — signals, evidence atoms, conversion leaks, message match, above-fold state, structural friction, grades, and the One-Leak Self-Implementation Kit.',
+  author: { '@type': 'Organization', name: 'Nebula Components' },
+  publisher: { '@type': 'Organization', name: 'Nebula Components' },
+  mainEntityOfPage: 'https://nebulacomponents.com/concepts',
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://nebulacomponents.com' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Concepts',
+      item: 'https://nebulacomponents.com/concepts',
+    },
+  ],
+}
+
+const CONCEPTS = [
   {
-    id: 'trigger-aware-prospecting',
-    name: 'Trigger-Aware Prospecting',
-    definition: 'Lead generation method that identifies prospects based on buying triggers (actions indicating purchase intent) rather than demographic filters.',
-    keyPrinciple: 'A prospect actively searching for a solution is more valuable than a prospect matching a demographic profile.',
-    example: 'Founder searching "Google ads clicks no sales" (trigger) vs "Founder with SaaS company" (demographic).',
-    source: 'https://nebulacomponents.shop/learning-centre',
+    id: 'signal',
+    name: 'Signal',
+    definition:
+      'A single observable, measurable dimension of a landing page\'s conversion fitness. Nebula checks 9 signals per audit. Each has a defined pass standard and returns raw evidence.',
+    whyItMatters:
+      'Breaking the audit into discrete signals makes findings falsifiable and actionable. A composite score without signal-level detail cannot tell you which element to fix — and fixing the wrong element wastes the budget.',
+    howNebulaMeasures:
+      'The engine evaluates each signal independently against the page\'s actual HTML response. Signals include: headline (H1 count, ICP clarity), CTA (label, above-fold visibility), social proof (source-order position, specificity), load speed (payload bytes, LCP proxy), and four others. Each returns pass or fail with the raw value that determined the result.',
   },
   {
-    id: 'message-match-audit',
-    name: 'Message-Match Audit',
-    definition: 'Diagnostic process that verifies whether landing page headline matches the ad promise that drove the visitor.',
-    keyPrinciple: 'A mismatch between the ad promise and landing-page message introduces a plausible abandonment point. The effect must be measured against actual campaign and conversion data.',
-    example: 'Ad: "Get more leads" → Landing Page: "CRM for Sales Teams" (mismatch). Should be: "Get more leads for your sales team."',
-    source: 'https://nebulacomponents.shop/learning-centre/message-match-checklist',
+    id: 'evidence-atom',
+    name: 'Evidence Atom',
+    definition:
+      'The raw value from the page that justifies a pass or fail finding — H1 text, meta description character count, payload bytes, CTA label.',
+    whyItMatters:
+      'Most audit tools return recommendations without showing their work. An evidence atom makes every finding independently verifiable: you can open the page source and confirm whether the H1 Nebula found is actually the H1 on your page. There is no proprietary scoring black box.',
+    howNebulaMeasures:
+      'Every signal finding stores the evidence atom alongside the pass/fail verdict. Examples: headline signal stores the exact H1 text. Load speed signal stores the payload size in bytes. Meta description signal stores the character count and the full description text. The audit report surfaces these directly.',
   },
   {
-    id: 'seven-point-diagnosis',
-    name: '7-Point Landing Page Diagnosis',
-    definition: "Nebula's audit framework evaluating seven structural landing page condition categories.",
-    keyPrinciple: 'Nebula groups the page-level conditions it evaluates into seven diagnostic categories: message match, CTA clarity, proof placement, mobile experience, load speed, form friction, and trust signals.',
-    example: 'Audit score of 6.2/10 indicates specific failures in message match (3/10) and CTA clarity (5/10).',
-    points: [
-      'Message Match (Ad → Landing Page alignment)',
-      'CTA Clarity (What action, why now)',
-      'Proof Placement (Testimonials near decision points)',
-      'Mobile Experience (Responsive, touch-friendly)',
-      'Load Speed (<3s on 4G)',
-      'Form Friction (Minimize fields)',
-      'Trust Signals (Guarantees, security badges)',
-    ],
-    source: 'https://nebulacomponents.shop/audit',
+    id: 'conversion-leak',
+    name: 'Conversion Leak',
+    definition:
+      'A specific page-level defect that reduces the proportion of visitors who complete the primary action. A page can have multiple leaks; the audit ranks them by impact.',
+    whyItMatters:
+      'The word "leak" is deliberate: it frames the problem as a fixable structural defect rather than a weak offer or wrong audience. A page leaking 60% of its mobile visitors through a buried CTA is not a traffic problem. It is a structural problem with a bounded fix.',
+    howNebulaMeasures:
+      'Nebula identifies leaks at the signal level — each failed signal is a candidate leak. The audit ranks failed signals by estimated conversion impact (message match and CTA failures are ranked highest; load speed and SEO signals are ranked lower for paid traffic). The One-Leak Self-Implementation Kit targets the highest-ranked leak.',
   },
+  {
+    id: 'message-match',
+    name: 'Message Match',
+    definition:
+      'The degree of continuity between the ad that brought the visitor and the headline they see when they arrive. A score of 0 means the ad and page are unrelated.',
+    whyItMatters:
+      'A visitor who clicked an ad for "project management for engineering teams" and lands on a headline that reads "The all-in-one workspace" faces an immediate disorientation: did they click the right link? The cognitive cost of resolving that question is a conversion-rate penalty. The ad already paid for the click — message mismatch discards that spend in the first two seconds.',
+    howNebulaMeasures:
+      'Nebula checks the H1 text against the page\'s own title tag and meta description for internal consistency. When an ad URL is provided, it compares ad copy against the H1 directly. The signal returns the H1 text as the evidence atom so the mismatch is visible, not inferred.',
+  },
+  {
+    id: 'above-fold-state',
+    name: 'Above-Fold State',
+    definition:
+      'What a visitor sees before scrolling. For paid traffic, this is the only content that matters for the decision to stay or leave.',
+    whyItMatters:
+      'Cold paid traffic makes the stay-or-leave decision within the first viewport. If the primary CTA, an ICP-confirming headline, and at least one proof element are not visible before the first scroll, the page is asking visitors to commit effort before it has earned their attention. Most do not.',
+    howNebulaMeasures:
+      'Nebula checks for CTA presence in the source-order HTML above the fold proxy. It checks whether the H1 is in the static HTML (not rendered by JavaScript). It checks for at least one trust signal in the above-fold region. Each of these is a binary pass/fail backed by the raw HTML evidence.',
+  },
+  {
+    id: 'structural-friction',
+    name: 'Structural Friction',
+    definition:
+      'Page-level obstacles that cost conversions regardless of ad quality or offer strength. Structural friction is fixable; it does not require a new product or a different audience.',
+    whyItMatters:
+      'Founders and operators who are losing money on paid traffic typically assume the problem is the ad creative, the audience targeting, or the offer price. Structural friction — a five-field form, a CTA below fold, a page that loads in six seconds on mobile — explains a large share of conversion failures without requiring any of those assumptions to be true. Fixing structural friction is the highest-certainty lever in conversion optimization.',
+    howNebulaMeasures:
+      'Structural friction signals in Nebula\'s audit include: form field count (more than two fields above fold is a friction flag), CTA placement, mobile tap target size, page weight, and font size. These are observable in the HTML and CSS — no session recording or A/B test data required.',
+  },
+  {
+    id: 'one-leak-self-implementation-kit',
+    name: 'One-Leak Self-Implementation Kit',
+    definition:
+      'Nebula\'s $97 paid product. Takes the highest-impact finding from the audit and delivers targeted implementation instructions. One leak, one fix, one re-audit window.',
+    whyItMatters:
+      'A full-page redesign is the wrong response to a single conversion leak. If the audit identifies that the H1 has zero ICP clarity, the correct intervention is a headline rewrite — not a new design system. The Self-Implementation Kit scopes the change to the single highest-impact finding, delivers implementation-ready instructions, and includes a re-audit to confirm the finding is resolved.',
+    howNebulaMeasures:
+      'The Sprint is triggered by the audit output. The highest-ranked failed signal determines the sprint scope. Deliverables are specific to the signal: for a headline failure, the sprint returns three alternative H1 candidates with rationale. For a load speed failure, it returns the specific asset causing the LCP regression and the implementation path to fix it.',
+  },
+  {
+    id: 'grade',
+    name: 'Grade',
+    definition:
+      'Letter grade (A–F) derived from the composite signal score. A = 90+, B = 75–89, C = 60–74, D = 45–59, F = below 45.',
+    whyItMatters:
+      'A numeric score without a reference frame is harder to act on. The grade maps the score to a decision: a Grade A page has no material leaks and is unlikely to benefit from structural changes. A Grade B page passes most signals but has at least one material leak worth fixing. A Grade D or F page has multiple structural failures that are collectively suppressing conversions.',
+    howNebulaMeasures:
+      'Each of the 9 signals contributes to the composite score with equal weighting unless override logic applies (a zero H1 count forces the score below 50 regardless of other signals). The grade is computed from the final composite. The audit report shows both the numeric score and the grade letter, with the failed signals that drove the result listed below.',
+  },
+]
+
+const relatedLinks = [
+  { href: '/audit', title: 'Run a Free Audit' },
+  { href: '/why-is-my-landing-page-not-converting', title: 'Why Is My Landing Page Not Converting?' },
+  { href: '/what-is-landing-page-audit', title: 'What Is a Landing Page Audit?' },
+  { href: '/pricing', title: 'Self-Implementation Kit Pricing' },
 ]
 
 export default function ConceptsPage() {
   return (
-    <main className="min-h-screen bg-[#050505] text-white pt-24" id="main-content">
-      <div className="max-w-4xl mx-auto px-6 py-12">
-        <h1 id="hero-title" className="text-4xl font-bold mb-4">
-          Proprietary Concepts
-        </h1>
-        <p className="text-gray-400 text-lg mb-8">
-          Methodologies developed by Nebula Components for landing page conversion optimization.
-        </p>
-        
-        <section className="space-y-8">
-          {concepts.map((concept) => (
-            <article
-              key={concept.id}
-              id={concept.id}
-              className="bg-[#0a0a0a] border border-gray-800 rounded-lg p-6"
-            >
-              <h2 className="text-2xl font-bold text-emerald-400 mb-2">
-                {concept.name}
-              </h2>
-              
-              <div className="space-y-4 text-gray-300">
-                <div>
-                  <strong className="text-white">Definition:</strong>
-                  <p className="mt-1">{concept.definition}</p>
-                </div>
-                
-                <div>
-                  <strong className="text-white">Key Principle:</strong>
-                  <p className="mt-1">{concept.keyPrinciple}</p>
-                </div>
-                
-                <div>
-                  <strong className="text-white">Example:</strong>
-                  <p className="mt-1">{concept.example}</p>
-                </div>
-                
-                {'points' in concept && concept.points && (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <main id="main-content" className="min-h-screen bg-bg pt-24 pb-16">
+        <article className="mx-auto max-w-4xl px-6">
+
+          {/* Header */}
+          <header className="mb-12">
+            <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">
+              Nebula Frameworks
+            </p>
+            <h1 className="text-3xl font-extrabold tracking-tight text-fg md:text-5xl">
+              How Nebula diagnoses landing page conversion failures
+            </h1>
+            <p className="mt-4 text-lg text-fg-muted leading-relaxed max-w-2xl">
+              These are the concepts behind the 9-signal audit. Each term has a precise definition, a measurable standard, and a specific role in Nebula&rsquo;s diagnostic output. Understanding them makes it easier to read an audit report, interpret a grade, and decide which finding to act on first.
+            </p>
+          </header>
+
+          {/* Concept cards */}
+          <section className="mb-14 space-y-4">
+            {CONCEPTS.map((c, i) => (
+              <div
+                key={c.id}
+                id={c.id}
+                className="rounded-xl border border-border bg-bg-muted/20 p-6"
+              >
+                <div className="flex items-start gap-3 mb-3">
+                  <span className="shrink-0 font-mono text-xs text-fg-dim mt-0.5">{String(i + 1).padStart(2, '0')}</span>
                   <div>
-                    <strong className="text-white">The 7 Points:</strong>
-                    <ol className="mt-2 list-decimal list-inside space-y-1">
-                      {concept.points.map((point, idx) => (
-                        <li key={idx}>{point}</li>
-                      ))}
-                    </ol>
+                    <h2 className="text-base font-semibold text-fg">{c.name}</h2>
+                    <p className="text-sm text-fg-muted leading-6 mt-1">{c.definition}</p>
                   </div>
-                )}
-                
-                <div className="text-sm text-gray-500">
-                  <strong>Source:</strong>{' '}
-                  <a href={concept.source} className="text-emerald-400 hover:underline">
-                    {concept.source}
-                  </a>
+                </div>
+
+                <div className="pl-7 space-y-3 mt-4">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-1">Why it matters for conversion</p>
+                    <p className="text-sm text-fg-muted leading-6">{c.whyItMatters}</p>
+                  </div>
+                  <div className="border-l-2 border-accent/30 pl-4">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-1">How Nebula measures it</p>
+                    <p className="text-sm text-fg-muted leading-6">{c.howNebulaMeasures}</p>
+                  </div>
                 </div>
               </div>
-              
-              {/* DefinedTerm Schema */}
-              <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                  __html: JSON.stringify({
-                    '@context': 'https://schema.org',
-                    '@type': 'DefinedTerm',
-                    '@id': `https://nebulacomponents.shop/concepts#${concept.id}`,
-                    name: concept.name,
-                    description: concept.definition,
-                    inDefinedTermSet: {
-                      '@type': 'DefinedTermSet',
-                      name: 'Nebula Components Methodology',
-                    },
-                  }),
-                }}
-              />
-            </article>
-          ))}
-        </section>
-      </div>
-    </main>
+            ))}
+          </section>
+
+          {/* CTA */}
+          <section className="mb-14 rounded-2xl border border-border bg-bg-muted/30 p-8 text-center">
+            <h2 className="text-2xl font-bold text-fg mb-3">See these concepts applied to your page</h2>
+            <p className="text-sm text-fg-muted max-w-xl mx-auto mb-6">
+              Paste your URL. Nebula runs all 9 signals and returns each finding with the raw evidence atom — H1 text, CTA label, payload bytes, trust signal count. Free, no signup, under 2 minutes.
+            </p>
+            <Link
+              href="/audit"
+              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors text-base"
+            >
+              Run Free Audit &rarr;
+            </Link>
+          </section>
+
+          {/* Related */}
+          <footer className="border-t border-border pt-8 flex flex-wrap gap-4 text-sm text-fg-muted">
+            <span className="font-semibold text-fg">Related:</span>
+            {relatedLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="hover:text-accent transition-colors"
+              >
+                {link.title}
+              </Link>
+            ))}
+          </footer>
+
+        </article>
+      </main>
+    </>
   )
 }

@@ -13,7 +13,6 @@ import {
 // https://github.com/testing-library/react-testing-library/issues/1375
 import { act } from 'react'
 ;(globalThis as Record<string, unknown>).IS_REACT_ACT_ENVIRONMENT = true
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 const reactDomTestUtils = require('react-dom/test-utils') as Record<string, unknown>
 if (!reactDomTestUtils['act']) {
   reactDomTestUtils['act'] = act

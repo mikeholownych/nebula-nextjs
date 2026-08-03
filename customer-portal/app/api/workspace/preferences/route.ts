@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { pool } from '@/app/lib/db'
+import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 /**
  * GET /api/workspace/preferences?email=...
@@ -7,10 +8,9 @@ import { pool } from '@/app/lib/db'
  */
 
 export async function GET(request: NextRequest) {
-  const email = (request.nextUrl.searchParams.get('email') || '').trim().toLowerCase()
-  if (!email) {
-    return NextResponse.json({ error: 'email required' }, { status: 400 })
-  }
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
+  const email = auth.user.email
 
   try {
     const result = await pool.query(
@@ -31,17 +31,15 @@ export async function GET(request: NextRequest) {
 }
 
 export async function PATCH(request: NextRequest) {
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
   try {
     const body = await request.json()
-    const { email, preferences, timezone } = body as {
-      email: string
+    const { preferences, timezone } = body as {
       preferences?: Record<string, unknown>
       timezone?: string
     }
 
-    if (!email) {
-      return NextResponse.json({ error: 'email required' }, { status: 400 })
-    }
 
     const prefs = preferences ?? { regressionAlerts: true, weeklyDigest: false }
     const tz = timezone ?? 'UTC'
@@ -53,7 +51,7 @@ export async function PATCH(request: NextRequest) {
          preferences = $2,
          timezone = $3,
          updated_at = now()`,
-      [email.trim().toLowerCase(), JSON.stringify(prefs), tz]
+      [auth.user.email, JSON.stringify(prefs), tz]
     )
 
     return NextResponse.json({ ok: true, preferences: prefs, timezone: tz })

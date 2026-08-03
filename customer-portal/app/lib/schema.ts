@@ -4,10 +4,10 @@
 export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  '@id': 'https://nebulacomponents.shop/#organization',
+  '@id': 'https://nebulacomponents.com/#organization',
   name: 'Nebula Components',
-  url: 'https://nebulacomponents.shop',
-  logo: 'https://nebulacomponents.shop/logo-dark.png',
+  url: 'https://nebulacomponents.com',
+  logo: 'https://nebulacomponents.com/logo-dark.png',
   description: 'Evidence-backed landing-page conversion guidance and implementation services.',
   foundingDate: '2024',
   contactPoint: {
@@ -25,27 +25,27 @@ export const organizationSchema = {
   ],
   founder: {
     '@type': 'Person',
-    '@id': 'https://nebulacomponents.shop/#founder',
+    '@id': 'https://nebulacomponents.com/#founder',
     name: 'Mike Holownych',
     jobTitle: 'Founder',
-    url: 'https://nebulacomponents.shop/about/team',
+    url: 'https://nebulacomponents.com/about/team',
     sameAs: [
       'https://www.linkedin.com/in/mikeholownych',
       'https://github.com/mikeholownych',
     ],
-    worksFor: { '@id': 'https://nebulacomponents.shop/#organization' },
+    worksFor: { '@id': 'https://nebulacomponents.com/#organization' },
   },
 }
 
 export const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  '@id': 'https://nebulacomponents.shop/#website',
-  url: 'https://nebulacomponents.shop',
+  '@id': 'https://nebulacomponents.com/#website',
+  url: 'https://nebulacomponents.com',
   name: 'Nebula Components',
   description: 'Evidence-backed landing-page conversion guidance from Nebula Components.',
   publisher: {
-    '@id': 'https://nebulacomponents.shop/#organization',
+    '@id': 'https://nebulacomponents.com/#organization',
   },
 }
 
@@ -104,11 +104,11 @@ export function createArticleSchema(article: {
     // organizationSchema — every article previously inlined a separate
     // "Mike H" Person object here, fragmenting the entity across ~40
     // pages instead of letting Search/AI crawlers merge them into one.
-    author: { '@id': 'https://nebulacomponents.shop/#founder' },
+    author: { '@id': 'https://nebulacomponents.com/#founder' },
     datePublished: article.publishedDate,
     dateModified: article.modifiedDate || article.publishedDate,
     publisher: {
-      '@id': 'https://nebulacomponents.shop/#organization',
+      '@id': 'https://nebulacomponents.com/#organization',
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
@@ -118,16 +118,16 @@ export function createArticleSchema(article: {
     // already used for social share cards) rather than omitting `image`
     // entirely — no per-article photography exists yet, and Article rich
     // results require this property to be eligible at all.
-    image: article.image || 'https://nebulacomponents.shop/opengraph-image',
+    image: article.image || 'https://nebulacomponents.com/opengraph-image',
   }
 }
 
 export const auditWebApplicationSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
-  '@id': 'https://nebulacomponents.shop/audit#app',
+  '@id': 'https://nebulacomponents.com/audit#app',
   name: 'Nebula Landing Page Audit',
-  url: 'https://nebulacomponents.shop/audit',
+  url: 'https://nebulacomponents.com/audit',
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Any (browser-based)',
   offers: {
@@ -135,7 +135,7 @@ export const auditWebApplicationSchema = {
     price: '0',
     priceCurrency: 'USD',
   },
-  provider: { '@id': 'https://nebulacomponents.shop/#organization' },
+  provider: { '@id': 'https://nebulacomponents.com/#organization' },
 }
 
 export function createFAQPageSchema(faqItems: Array<{ question: string; answer: string }>) {

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 
 const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
@@ -8,6 +9,8 @@ const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
  * DELETE /api/monitors/[id]
  */
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
   const { id } = await params
   let body: unknown
   try {
@@ -19,7 +22,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     const res = await fetch(`${API_BASE}/audit/monitors/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
+      body: JSON.stringify({ ...(body as Record<string, unknown>), email: auth.user.email }),
       signal: AbortSignal.timeout(10_000),
     })
     const data = await res.json()
@@ -30,6 +33,8 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
 }
 
 export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const auth = await requireWorkspaceUser(_request)
+  if ('response' in auth) return auth.response
   const { id } = await params
   try {
     const res = await fetch(`${API_BASE}/audit/monitors/${id}`, {

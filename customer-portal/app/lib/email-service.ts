@@ -25,11 +25,11 @@ export function getEmailTemplate(emailNumber: number, firstName: string = 'there
 
 I noticed you're running paid traffic to your site. The targeting looks solid — but something's breaking between click and conversion.
 
-We've run our audit on 54 real landing pages this quarter. The most common leak: social proof missing above the fold. We publish the full pass standards and failure rates so you can judge the claim yourself: https://nebulacomponents.shop/benchmarks
+We've run our audit on 54 real landing pages this quarter. The most common leak: social proof missing above the fold. We publish the full pass standards and failure rates so you can judge the claim yourself: https://nebulacomponents.com/benchmarks
 
 Your page triggered the same pattern. I'm not asking you to buy anything — I want to give you the diagnosis free.
 
-Paste your URL here: https://nebulacomponents.shop
+Paste your URL here: https://nebulacomponents.com
 
 Takes under two minutes. You'll see exactly what's leaking and which fix pays back fastest.
 
@@ -47,11 +47,11 @@ Most pages we audit show the same three leaks:
 2. No proof visible before CTA (credibility gap)
 3. Multiple competing buttons (decision paralysis)
 
-We publish the failure rates for all of these on the benchmarks page: https://nebulacomponents.shop/benchmarks
+We publish the failure rates for all of these on the benchmarks page: https://nebulacomponents.com/benchmarks
 
 The diagnosis is free. The fix is $97. The ROI is measurable.
 
-Paste your URL: https://nebulacomponents.shop
+Paste your URL: https://nebulacomponents.com
 
 — Mike H
 
@@ -69,7 +69,7 @@ The visitors who didn't convert the first time? They're seeing the same page tha
 
 Run the audit before you spend another dollar on retargeting:
 
-https://nebulacomponents.shop
+https://nebulacomponents.com
 
 — Mike H
 
@@ -93,7 +93,7 @@ No pitch. No ask. Just the checklist our audits are built around.
 
 — Mike H
 
-P.S. If you want to see how your page scores (free), https://nebulacomponents.shop`
+P.S. If you want to see how your page scores (free), https://nebulacomponents.com`
     },
     5: {
       subject: 'Last email on this',
@@ -107,11 +107,11 @@ I'm not going to keep emailing about this because I respect your time.
 
 But if you ever want to see exactly what's broken — for free, no follow-up pressure — the audit is always available:
 
-https://nebulacomponents.shop
+https://nebulacomponents.com
 
 Paste your URL. Takes under two minutes. You'll see the leak.
 
-If you fix it yourself, great. If you want our $97 One-Leak Repair Sprint, that's there too. But the diagnosis is free either way.
+If you fix it yourself, great. If you want our $97 One-Leak Self-Implementation Kit, that's there too. But the diagnosis is free either way.
 
 Mike H
 
@@ -119,8 +119,8 @@ Founder, Nebula Components
 
 ---
 
-Nebula Components — https://nebulacomponents.shop
-Unsubscribe: https://nebulacomponents.shop/unsubscribe?email=${firstName.toLowerCase()}%40example.com`
+Nebula Components — https://nebulacomponents.com
+Unsubscribe: https://nebulacomponents.com/unsubscribe?email=${firstName.toLowerCase()}%40example.com`
     }
   };
 

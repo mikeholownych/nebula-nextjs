@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Removing all barriers from your form can backfire. Zero friction creates zero trust. Learn which types of friction kill conversions and which build confidence.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/learning-centre/form-has-zero-friction',
+    canonical: 'https://nebulacomponents.com/learning-centre/form-has-zero-friction',
   },
 }
 
@@ -15,7 +15,7 @@ const articleSchema = createArticleSchema({
   headline: "Your Form Has Zero Friction and That's Exactly Why Nobody Fills It Out",
   description:
     'Removing all barriers from your form can backfire. Zero friction creates zero trust. Learn which types of friction kill conversions and which build confidence.',
-  url: 'https://nebulacomponents.shop/learning-centre/form-has-zero-friction',
+  url: 'https://nebulacomponents.com/learning-centre/form-has-zero-friction',
   publishedDate: '2026-07-25',
   modifiedDate: '2026-07-25',
 })
