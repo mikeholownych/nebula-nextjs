@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import ScorecardClient from './ScorecardClient'
+import { scorecardFaqItems } from './scorecardFaq'
 
 export const metadata: Metadata = {
   title: 'Paid-Traffic Leak Scorecard | Nebula Components',
@@ -30,6 +31,34 @@ export default function PaidTrafficLeakScorecardPage() {
         </div>
 
         <ScorecardClient />
+
+        <section className="mt-20 border-t border-border pt-12" aria-labelledby="scorecard-faq-heading">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Questions</p>
+          <h2 id="scorecard-faq-heading" className="mt-2 text-2xl font-bold tracking-tight text-fg">About this scorecard</h2>
+          <div className="mt-6 divide-y divide-border rounded-2xl border border-border bg-bg-muted/15">
+            {scorecardFaqItems.map((item) => (
+              <article key={item.question} className="p-5 md:p-6">
+                <h3 className="font-semibold text-fg">{item.question}</h3>
+                <p className="mt-2 text-sm leading-6 text-fg-muted">{item.answer}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: scorecardFaqItems.map((item) => ({
+                '@type': 'Question',
+                name: item.question,
+                acceptedAnswer: { '@type': 'Answer', text: item.answer },
+              })),
+            }),
+          }}
+        />
       </div>
     </main>
   )

@@ -15,12 +15,14 @@ function AuditFormContent() {
   const searchParams = useSearchParams()
 
   useEffect(() => {
+    const source = searchParams.get('source')
     const from = searchParams.get('from')
-    if (from) setReferrer(decodeURIComponent(from))
+    const attribution = source || (from ? decodeURIComponent(from) : null)
+    if (attribution) setReferrer(attribution)
     const prefilled = searchParams.get('url')
     if (prefilled) setUrl(prefilled)
     posthog.capture('audit_page_viewed', {
-      referrer: from ? decodeURIComponent(from) : undefined,
+      referrer: attribution || undefined,
       prefilled: prefilled ? true : undefined,
     })
   }, [searchParams])

@@ -1,6 +1,7 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import posthog from '@/app/lib/posthog-browser'
 import { scorecardQuestions, scoreScorecard } from './scorecardData'
 
 const AUDIT_HREF = '/audit?source=paid-traffic-leak-scorecard'
@@ -32,14 +33,24 @@ export default function ScorecardClient() {
   const question = scorecardQuestions[stepIndex]
   const bandCopy = BAND_COPY[result.band]
 
+  useEffect(() => {
+    posthog.capture('scorecard_started')
+  }, [])
+
   function answer(value: boolean) {
     const nextAnswers = { ...answers, [question.id]: value }
     setAnswers(nextAnswers)
     if (stepIndex === scorecardQuestions.length - 1) {
+      const finalResult = scoreScorecard(nextAnswers)
+      posthog.capture('scorecard_completed', { risk_band: finalResult.band })
       setComplete(true)
       return
     }
     setStepIndex((current) => current + 1)
+  }
+
+  function handleAuditClick() {
+    posthog.capture('scorecard_audit_cta_clicked', { risk_band: result.band })
   }
 
   function restart() {
@@ -95,6 +106,7 @@ export default function ScorecardClient() {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <a
             href={AUDIT_HREF}
+            onClick={handleAuditClick}
             className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 text-center font-semibold text-bg transition hover:bg-accent-light"
           >
             Run the free evidence-backed audit
