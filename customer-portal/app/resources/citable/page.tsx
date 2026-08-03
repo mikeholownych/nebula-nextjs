@@ -8,6 +8,7 @@ import {
   CITABLE_SOFTWARE_ID,
   citableLicenseFacts,
   citableReleaseFacts,
+  citableFaqItems,
   getCitableMetadata,
   getCitableRouteByPath,
   getPublishedCitableRoutes,
@@ -41,6 +42,19 @@ const citableSchema = {
   author: { '@id': 'https://nebulacomponents.shop/#organization' },
 }
 
+const citableFaqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: citableFaqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+}
+
 const supportingRoutes = getPublishedCitableRoutes()
 
 export default function CitablePage() {
@@ -49,6 +63,10 @@ export default function CitablePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(citableSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(citableFaqSchema) }}
       />
 
       <CitablePageShell route={route} showRelatedNavigation={false}>
@@ -153,6 +171,23 @@ export default function CitablePage() {
             Citable does not guarantee crawling, indexing, ranking, citation, recommendation,
             inclusion, sentiment, conversion, workflow success, or deployment success.
           </p>
+        </section>
+
+        <section aria-labelledby="citable-faq-heading" className="mt-14 border-t border-border pt-12">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent">
+            Direct answers
+          </p>
+          <h2 id="citable-faq-heading" className="mt-3 text-3xl font-bold tracking-tight text-fg">
+            Citable questions, answered
+          </h2>
+          <div className="mt-7 grid gap-4 md:grid-cols-2">
+            {citableFaqItems.map((item) => (
+              <article key={item.question} className="rounded-2xl border border-border bg-bg-panel p-6">
+                <h3 className="text-lg font-semibold text-fg">{item.question}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-fg-muted">{item.answer}</p>
+              </article>
+            ))}
+          </div>
         </section>
 
         <CitableProofPanel />

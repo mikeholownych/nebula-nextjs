@@ -63,6 +63,44 @@ export const citableReleaseFacts: CitableReleaseFacts = {
   highlights: citableRelease.highlights,
 }
 
+export interface CitableFaqItem {
+  question: string
+  answer: string
+}
+
+export const citableFaqItems: readonly CitableFaqItem[] = [
+  {
+    question: 'What is Citable?',
+    answer:
+      'Citable is an open-source evidence and governance package for recording bounded observations about retrieval, answer extractability, claims, entities, and controlled change. It preserves evidence for review without claiming that an external system will rank, cite, recommend, or convert.',
+  },
+  {
+    question: 'Is Citable open source?',
+    answer:
+      `Yes. The published package ${citableReleaseFacts.packageName} is licensed under ${citableReleaseFacts.license}. The synchronized release projection documents version ${citableReleaseFacts.version}; package facts do not by themselves prove deployment or workflow state.`,
+  },
+  {
+    question: 'What can Citable establish?',
+    answer:
+      'Citable can establish what a bounded run observed about the selected source, what registered evidence supports a claim under a declared policy, whether controlled entities are consistent, and whether a supplied change or release receipt satisfies its stated checks.',
+  },
+  {
+    question: 'What can Citable not establish?',
+    answer:
+      'Citable cannot prove future crawling, indexing, search ranking, AI-provider retrieval, citation, recommendation, sentiment, conversion, customer outcomes, or deployment success unless a separate governed observation and receipt establishes that specific outcome.',
+  },
+  {
+    question: 'How does Citable relate to Nebula?',
+    answer:
+      'Citable is the public evidence-layer component. Nebula uses evidence and audit workflows to interpret conversion problems, implement a bounded repair, and verify the changed page separately from any downstream business outcome.',
+  },
+  {
+    question: 'When should I use Citable?',
+    answer:
+      'Use Citable when a decision needs inspectable inputs, explicit limits, registered support, and a preserved evidence package. Use separate crawler, rank-tracking, or AI-visibility monitoring when ongoing external-system behavior is the decision input.',
+  },
+]
+
 export const citableLicenseFacts = {
   identifier: citableReleaseFacts.license,
   label: citableReleaseFacts.license.replace('-', ' '),
