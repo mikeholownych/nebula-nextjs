@@ -14,14 +14,14 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nebulacomponents.shop'),
+  metadataBase: new URL('https://nebulacomponents.com'),
   title: {
     default: 'Nebula Components — Landing Page Conversion Optimization',
     template: '%s',
   },
   description: 'Evidence-backed landing page conversion diagnosis and implementation for founders spending on paid ads with low or zero conversions.',
   alternates: {
-    canonical: 'https://nebulacomponents.shop/',
+    canonical: 'https://nebulacomponents.com/',
   },
   openGraph: {
     title: 'Nebula Components — Landing Page Conversion Optimization',
@@ -38,12 +38,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon.svg?v=20260803', type: 'image/svg+xml' },
+      { url: '/favicon-32x32.png?v=20260803', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png?v=20260803', sizes: '16x16', type: 'image/png' },
     ],
-    shortcut: '/favicon.svg',
-    apple: '/favicon.png',
+    shortcut: '/favicon.svg?v=20260803',
+    apple: '/favicon.png?v=20260803',
   },
 }
 
@@ -67,11 +67,11 @@ export default async function RootLayout({
             original pathname for this request. */}
         <meta
           property="og:url"
-          content={`https://nebulacomponents.shop${requestHeaders.get('x-nebula-pathname') || '/'}`}
+          content={`https://nebulacomponents.com${requestHeaders.get('x-nebula-pathname') || '/'}`}
         />
         {/* Supply a complete image set even when child metadata overrides the
             root Open Graph object. */}
-        <meta property="og:image" content="https://nebulacomponents.shop/opengraph-image" />
+        <meta property="og:image" content="https://nebulacomponents.com/opengraph-image" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
