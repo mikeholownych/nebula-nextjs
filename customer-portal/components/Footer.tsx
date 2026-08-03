@@ -62,15 +62,25 @@ export default function Footer() {
         {/* Legal row — sits below the main grid, full-width subtle strip */}
         <div className="mt-10 pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-            {/* Legal links */}
-            <ul className="flex flex-wrap gap-x-6 gap-y-2">
-              <li>
-                <p className="text-xs font-medium text-fg-muted uppercase tracking-widest mb-2 md:hidden">Legal</p>
-              </li>
-              <li><a href="/privacy-policy" className="text-xs text-fg-muted hover:text-fg transition-colors">Privacy Policy</a></li>
-              <li><a href="/terms" className="text-xs text-fg-muted hover:text-fg transition-colors">Terms of Service</a></li>
-              <li><a href="/data-rights" className="text-xs text-fg-muted hover:text-fg transition-colors">Data Rights</a></li>
-            </ul>
+            {/* Legal links + IndieAscent badge */}
+            <div className="flex flex-col gap-4">
+              <ul className="flex flex-wrap gap-x-6 gap-y-2">
+                <li>
+                  <p className="text-xs font-medium text-fg-muted uppercase tracking-widest mb-2 md:hidden">Legal</p>
+                </li>
+                <li><a href="/privacy-policy" className="text-xs text-fg-muted hover:text-fg transition-colors">Privacy Policy</a></li>
+                <li><a href="/terms" className="text-xs text-fg-muted hover:text-fg transition-colors">Terms of Service</a></li>
+                <li><a href="/data-rights" className="text-xs text-fg-muted hover:text-fg transition-colors">Data Rights</a></li>
+              </ul>
+              <a href="https://indieascent.com/p/nebula-components?ia_badge=1" target="_blank" rel="noopener noreferrer">
+                <img
+                  src="https://indieascent.com/badge/standard-dark.svg"
+                  alt="Marked on IndieAscent"
+                  width={200}
+                  height={54}
+                />
+              </a>
+            </div>
 
             {/* Copyright + Social */}
             <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
