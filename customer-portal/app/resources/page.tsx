@@ -6,32 +6,32 @@ export const metadata: Metadata = {
   title: 'Resources — Tools & Open Source | Nebula Components',
   description:
     'Open-source tools and resources from Nebula Components — including Citable, the search and AI discoverability governance CLI for SEO, AEO, and GEO audits.',
-  alternates: { canonical: 'https://nebulacomponents.shop/resources' },
+  alternates: { canonical: 'https://nebulacomponents.com/resources' },
 }
 
 const resourceSchema = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
-  '@id': 'https://nebulacomponents.shop/resources',
+  '@id': 'https://nebulacomponents.com/resources',
   name: 'Resources — Nebula Components',
   description:
     'Open-source tools built from real conversion and discoverability problems on real sites.',
-  url: 'https://nebulacomponents.shop/resources',
-  publisher: { '@id': 'https://nebulacomponents.shop/#organization' },
+  url: 'https://nebulacomponents.com/resources',
+  publisher: { '@id': 'https://nebulacomponents.com/#organization' },
   hasPart: [
     {
       '@type': 'SoftwareApplication',
-      '@id': 'https://nebulacomponents.shop/resources/citable',
+      '@id': 'https://nebulacomponents.com/resources/citable',
       name: 'Citable',
       applicationCategory: 'DeveloperApplication',
       operatingSystem: 'Node.js',
-      url: 'https://nebulacomponents.shop/resources/citable',
+      url: 'https://nebulacomponents.com/resources/citable',
       downloadUrl: 'https://www.npmjs.com/package/@nebulacomponents/citable',
       softwareVersion: citableReleaseFacts.version,
       license: citableLicenseFacts.url,
       description:
-        `The evidence layer for defensible SEO, AEO, and GEO audits. ${citableReleaseFacts.detectorCount} detectors across ${citableReleaseFacts.namespaceCount} namespaces. Evidence packages on every run.`,
-      author: { '@id': 'https://nebulacomponents.shop/#organization' },
+        `Citable is the open evidence layer beneath Nebula for defensible SEO, AEO, and GEO audits. ${citableReleaseFacts.detectorCount} detectors across ${citableReleaseFacts.namespaceCount} namespaces. Evidence packages on every run.`,
+      author: { '@id': 'https://nebulacomponents.com/#organization' },
     },
   ],
 }
@@ -61,7 +61,7 @@ export default function ResourcesPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">Open Source CLI</p>
               <h2 className="text-xl font-semibold tracking-tight text-fg">Citable</h2>
               <p className="flex-1 text-sm leading-relaxed text-fg-muted">
-                The evidence layer for defensible SEO, AEO, and GEO audits.{' '}
+                The open evidence layer beneath Nebula for defensible SEO, AEO, and GEO audits.{' '}
                 {citableReleaseFacts.detectorCount} detectors across{' '}
                 {citableReleaseFacts.namespaceCount} namespaces — technical retrieval, entity
                 identity, claim governance, agent-readiness, and more. Evidence packages on every
@@ -92,6 +92,11 @@ export default function ResourcesPage() {
               reproducible. If a Citable audit says your <code className="rounded bg-bg-elevated px-1.5 py-0.5 text-fg">robots.txt</code> blocks AI retrieval,
               anyone can verify that independently. That&apos;s the operating premise: evidence over opinion,
               at every layer.
+            </p>
+            <p className="mb-4 max-w-2xl leading-relaxed text-fg-muted">
+              Citable is the open verification layer; Nebula is the commercial application built on
+              top of it. Citable defines what can be supported. Nebula turns supported observations
+              into conversion diagnostics, repairs, and follow-up decisions.
             </p>
             <p>
               <Link href="/resources/citable" className="font-semibold text-accent hover:text-accent-light transition-colors">

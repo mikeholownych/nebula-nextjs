@@ -39,7 +39,7 @@ const citableSchema = {
   softwareVersion: citableReleaseFacts.version,
   dateModified: citableReleaseFacts.releasedAt,
   license: citableLicenseFacts.url,
-  author: { '@id': 'https://nebulacomponents.shop/#organization' },
+  author: { '@id': 'https://nebulacomponents.com/#organization' },
 }
 
 const citableFaqSchema = {
@@ -70,6 +70,45 @@ export default function CitablePage() {
       />
 
       <CitablePageShell route={route} showRelatedNavigation={false}>
+        <section aria-labelledby="architecture-heading" className="mb-14">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent">
+            Open foundation · commercial application
+          </p>
+          <h2 id="architecture-heading" className="mt-3 max-w-3xl text-3xl font-bold tracking-tight text-fg">
+            Citable is the evidence layer. Nebula is the application.
+          </h2>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-fg-muted">
+            Citable is not another SaaS product competing with Nebula. It is open infrastructure
+            for making verification inspectable: what evidence supports an observation, whether a
+            claim is reproducible, and what remains unknown. Nebula applies that foundation to
+            landing-page conversion decisions and customer workflows.
+          </p>
+          <div className="mt-7 grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl border border-accent/30 bg-bg-panel p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">Citable</p>
+              <h3 className="mt-3 text-xl font-semibold tracking-tight text-fg">Open-source evidence layer</h3>
+              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-fg-muted">
+                <li>· Defines what qualifies as evidence</li>
+                <li>· Preserves bounded observations and receipts</li>
+                <li>· Makes claims inspectable and reproducible</li>
+                <li>· Reusable by teams, tools, and applications</li>
+              </ul>
+            </div>
+            <div className="rounded-2xl border border-border bg-bg-panel p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">Nebula</p>
+              <h3 className="mt-3 text-xl font-semibold tracking-tight text-fg">Commercial optimization platform</h3>
+              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-fg-muted">
+                <li>· Finds and explains landing-page leaks</li>
+                <li>· Recommends the next bounded change</li>
+                <li>· Delivers repair workflows and re-audits</li>
+                <li>· Measures outcomes without inventing proof</li>
+              </ul>
+            </div>
+          </div>
+          <p className="mt-6 max-w-3xl text-base font-medium leading-relaxed text-fg">
+            Citable asks: “Can this claim be supported?” Nebula asks: “What should we fix next?”
+          </p>
+        </section>
         <section aria-labelledby="release-facts-heading">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>

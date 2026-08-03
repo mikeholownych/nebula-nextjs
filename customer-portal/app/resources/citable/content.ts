@@ -5,7 +5,7 @@ import {
   getPublishedCaseStudies,
 } from '@/app/lib/public-facts'
 
-export const CITABLE_ORIGIN = 'https://nebulacomponents.shop'
+export const CITABLE_ORIGIN = 'https://nebulacomponents.com'
 export const CITABLE_OVERVIEW_PATH = '/resources/citable'
 export const CITABLE_SOFTWARE_ID = `${CITABLE_ORIGIN}${CITABLE_OVERVIEW_PATH}#software`
 
@@ -92,7 +92,7 @@ export const citableFaqItems: readonly CitableFaqItem[] = [
   {
     question: 'How does Citable relate to Nebula?',
     answer:
-      'Citable is the public evidence-layer component. Nebula uses evidence and audit workflows to interpret conversion problems, implement a bounded repair, and verify the changed page separately from any downstream business outcome.',
+      'Citable is not a second SaaS competing with Nebula. It is the open evidence layer that underpins Nebula: a reusable verification methodology for deciding what can be observed, supported, reproduced, and claimed. Nebula is the commercial application that turns verified evidence into landing-page diagnostics, recommendations, repairs, and follow-up decisions.',
   },
   {
     question: 'When should I use Citable?',
@@ -427,10 +427,10 @@ export const citableRoutes: readonly CitableRoute[] = [
     h1: 'Citable',
     eyebrow: 'Open-source evidence layer',
     description:
-      'Citable records what a web property makes technically available, what its content can support, and what external systems have actually been observed doing.',
+      'Citable is the open evidence layer beneath Nebula: it records what a web property makes technically available, what its content can support, and what external systems have actually been observed doing.',
     primaryQuestion: 'What can Citable establish without promising rankings or citations?',
     directAnswer:
-      'Citable establishes bounded observations about retrieval, extraction, claim support, entity consistency, and controlled change. It preserves evidence for review while keeping ranking, citation, conversion, workflow, deployment, customer, and benchmark outcomes explicitly separate.',
+      'Citable is the open evidence layer. It establishes bounded observations about retrieval, extraction, claim support, entity consistency, and controlled change. Nebula is the application that uses those verified observations to answer what is broken, why the team believes it is broken, and what to change next. Citable preserves the evidence while keeping ranking, citation, conversion, workflow, deployment, customer, and benchmark outcomes explicitly separate.',
     relatedPaths: [quickStartPath, ...jobRoutes.map(({ path }) => path)],
   },
   {
