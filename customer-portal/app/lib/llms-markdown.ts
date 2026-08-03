@@ -13,7 +13,7 @@ import { getArticles } from '@/app/learning-centre/lib/getArticles'
  * teardown data) so the mirrors cannot drift from the HTML pages.
  */
 
-const site = 'https://nebulacomponents.shop'
+const site = 'https://nebulacomponents.com'
 
 function markdownPage(title: string, canonicalPath: string, body: string): string {
   return [
@@ -155,7 +155,7 @@ Every article is available as a clean markdown mirror at /learning-centre/<slug>
 
 ${getArticles()
   .sort((a, b) => a.title.localeCompare(b.title))
-  .map((a) => `- [${a.title}](https://nebulacomponents.shop/learning-centre/${a.slug}.md) — ${a.category}`)
+  .map((a) => `- [${a.title}](https://nebulacomponents.com/learning-centre/${a.slug}.md) — ${a.category}`)
   .join('\n')}
 
 HTML article index: ${site}/learning-centre`
@@ -203,6 +203,8 @@ const citableMarkdown = markdownPage(
 - npm: ${citableRelease.package}
 - GitHub: https://github.com/mikeholownych/citable
 - Documentation: ${site}/resources/citable
+
+Citable is the open evidence layer beneath Nebula, not a second SaaS competing with it. Citable defines what evidence can support an observation, whether a claim is reproducible, and what remains unknown. Nebula is the commercial application that turns verified evidence into landing-page diagnostics, recommendations, repairs, and follow-up decisions.
 
 Citable runs ${citableRelease.detectorCount} detectors across ${citableRelease.namespaceCount} namespaces and ${citableRelease.registryCount} schema-validated registries, covering crawl, page, SEO, AEO, GEO, entity, claims, evidence, schema, agent, lifecycle, corroboration, and architecture signals. Each run produces an evidence package: raw observations, detector logic, and findings with severity, confidence, and remediation.
 
