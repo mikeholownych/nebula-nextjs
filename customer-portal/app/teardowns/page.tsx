@@ -161,6 +161,16 @@ const TEARDOWNS = [
     findingCount: 2,
     auditedAt: 'August 3, 2026',
   },
+  {
+    slug: 'folioverse',
+    name: 'Folioverse',
+    url: 'www.folioverse.app',
+    score: 5.6,
+    grade: 'C',
+    topFinding: 'Founder-reported: €100 in Google Ads spend, 91 clicks, 0 signups, and 10-second average paid-visitor sessions. Current snapshot: no static H1 or CTA candidate, with ad tracking unverified.',
+    findingCount: 5,
+    auditedAt: 'August 3, 2026',
+  },
 ]
 
 export default function TeardownsPage() {
