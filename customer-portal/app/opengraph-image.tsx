@@ -20,7 +20,7 @@ export default function OpenGraphImage() {
           padding: '64px 72px',
           color: '#ffffff',
           background:
-            'radial-gradient(circle at 86% 18%, rgba(16,185,129,0.25), transparent 31%), #050505',
+            'radial-gradient(circle at 86% 18%, rgba(0,194,160,0.28), transparent 34%), #050505',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -33,7 +33,7 @@ export default function OpenGraphImage() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: 9,
-                background: '#10b981',
+                background: '#00c2a0',
                 color: '#050505',
                 fontSize: 24,
                 fontWeight: 900,
@@ -48,10 +48,10 @@ export default function OpenGraphImage() {
           <div
             style={{
               display: 'flex',
-              border: '1px solid rgba(16,185,129,0.55)',
+              border: '1px solid rgba(0,194,160,0.55)',
               borderRadius: 999,
               padding: '10px 18px',
-              color: '#34d399',
+              color: '#33d4b8',
               fontSize: 16,
               fontWeight: 650,
               letterSpacing: '0.08em',
@@ -63,7 +63,7 @@ export default function OpenGraphImage() {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', maxWidth: 960 }}>
-          <div style={{ display: 'flex', color: '#34d399', fontSize: 22, fontWeight: 650, marginBottom: 20 }}>
+          <div style={{ display: 'flex', color: '#33d4b8', fontSize: 22, fontWeight: 650, marginBottom: 20 }}>
             For founders burning cash on ads
           </div>
           <div
@@ -78,7 +78,7 @@ export default function OpenGraphImage() {
           >
             <div style={{ display: 'flex' }}>Your ads are fine.</div>
             <div style={{ display: 'flex' }}>
-              Your landing page has&nbsp;<span style={{ color: '#34d399' }}>a leak.</span>
+              Your landing page has&nbsp;<span style={{ color: '#00c2a0' }}>a leak.</span>
             </div>
           </div>
           <div style={{ display: 'flex', marginTop: 24, color: '#9e9e9e', fontSize: 25 }}>
@@ -97,8 +97,8 @@ export default function OpenGraphImage() {
             fontSize: 18,
           }}
         >
-          <div style={{ display: 'flex' }}>Leak diagnosis → prioritized fix path</div>
-          <div style={{ display: 'flex', color: '#34d399', fontWeight: 650 }}>nebulacomponents.com</div>
+          <div style={{ display: 'flex' }}>9-signal audit → One-Leak Repair Sprint</div>
+          <div style={{ display: 'flex', color: '#00c2a0', fontWeight: 650 }}>nebulacomponents.com</div>
         </div>
       </div>
     ),
