@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import ScorecardClient from './ScorecardClient'
 import { scorecardFaqItems } from './scorecardFaq'
 
@@ -28,6 +29,13 @@ export default function PaidTrafficLeakScorecardPage() {
           <p className="mt-5 text-lg leading-8 text-fg-muted">
             Use this seven-question scorecard to identify conversion conditions worth inspecting. Then run the measured audit on your actual landing page.
           </p>
+          <Link
+            href="/downloads/paid-traffic-leak-scorecard.pdf"
+            download
+            className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition hover:decoration-accent"
+          >
+            Download the printable worksheet (PDF) <span aria-hidden="true">-&gt;</span>
+          </Link>
         </div>
 
         <ScorecardClient />
