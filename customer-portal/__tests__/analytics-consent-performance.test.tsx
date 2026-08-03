@@ -62,12 +62,12 @@ describe('consent-gated analytics loading', () => {
     window.removeEventListener('cookie-consent-update', consentListener)
   })
 
-  it('blocks the edge-injected Cloudflare beacon from the enforced CSP', () => {
+  it('allows the Cloudflare Web Analytics beacon in the enforced CSP', () => {
     const config = read('next.config.ts')
     expect(config).toContain("key: 'Content-Security-Policy'")
     expect(config).not.toContain("key: 'Content-Security-Policy-Report-Only'")
-    expect(config).not.toContain('https://static.cloudflareinsights.com')
-    expect(config).not.toContain('https://cloudflareinsights.com')
+    expect(config).toContain('https://static.cloudflareinsights.com')
+    expect(config).toContain('https://cloudflareinsights.com')
   })
 
   it('does not load Google Analytics when the visitor accepts essential cookies only', () => {
