@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import CookieConsent, {
   CONSENT_RUNTIME,
+  getConsentRuntime,
 } from '@/app/components/CookieConsent'
 
 const read = (relative: string) =>
@@ -11,8 +12,10 @@ const read = (relative: string) =>
 describe('consent-gated analytics loading', () => {
   beforeEach(() => {
     localStorage.clear()
-    document.head.querySelectorAll('[data-test-analytics-script]')
+    document.head.querySelectorAll('[data-test-analytics-script], #gtag-src, script[data-nebula-posthog]')
       .forEach((element) => element.remove())
+    delete (window as Window & { gtag?: unknown }).gtag
+    delete (window as Window & { dataLayer?: unknown }).dataLayer
   })
 
   afterEach(() => {
@@ -28,8 +31,8 @@ describe('consent-gated analytics loading', () => {
   })
 
   it('loads Google Analytics only after the visitor accepts analytics cookies', () => {
-    render(<CookieConsent />)
-    window.eval(CONSENT_RUNTIME)
+    render(<CookieConsent country="DE" />)
+    window.eval(getConsentRuntime('DE'))
 
     expect(
       document.head.querySelector('script[src*="googletagmanager.com/gtag/js"]'),
@@ -42,15 +45,64 @@ describe('consent-gated analytics loading', () => {
     ).not.toBeNull()
   })
 
-  it('does not load Google Analytics when the visitor accepts essential cookies only', () => {
+  it('announces consent and PostHog readiness so the landing page is attributed immediately', () => {
     render(<CookieConsent />)
     window.eval(CONSENT_RUNTIME)
+    const consentListener = jest.fn()
+    window.addEventListener('cookie-consent-update', consentListener)
+
+    fireEvent.click(screen.getByRole('button', { name: /accept all/i }))
+
+    expect(consentListener).toHaveBeenCalled()
+    expect(JSON.parse(localStorage.getItem('nebula-cookie-consent') || '{}')).toMatchObject({
+      level: 'all',
+      version: 1,
+    })
+    expect(CONSENT_RUNTIME).toContain("new CustomEvent('nebula-posthog-ready')")
+    window.removeEventListener('cookie-consent-update', consentListener)
+  })
+
+  it('blocks the edge-injected Cloudflare beacon from the enforced CSP', () => {
+    const config = read('next.config.ts')
+    expect(config).toContain("key: 'Content-Security-Policy'")
+    expect(config).not.toContain("key: 'Content-Security-Policy-Report-Only'")
+    expect(config).not.toContain('https://static.cloudflareinsights.com')
+    expect(config).not.toContain('https://cloudflareinsights.com')
+  })
+
+  it('does not load Google Analytics when the visitor accepts essential cookies only', () => {
+    render(<CookieConsent country="DE" />)
+    window.eval(getConsentRuntime('DE'))
 
     fireEvent.click(screen.getByRole('button', { name: /essential only/i }))
 
     expect(
       document.head.querySelector('script[src*="googletagmanager.com/gtag/js"]'),
     ).toBeNull()
+  })
+
+  it('defaults analytics to accepted for non-EU visitors until they decline', () => {
+    render(<CookieConsent country="CA" />)
+    window.eval(getConsentRuntime('CA'))
+
+    expect(
+      document.head.querySelector('script[src*="googletagmanager.com/gtag/js"]'),
+    ).not.toBeNull()
+    expect(document.documentElement.getAttribute('data-analytics-default')).toBe('accepted')
+    expect(localStorage.getItem('nebula-cookie-consent')).toBeNull()
+  })
+
+  it('honors a non-EU visitor declining the default analytics state', () => {
+    render(<CookieConsent country="CA" />)
+    window.eval(getConsentRuntime('CA'))
+
+    fireEvent.click(screen.getByRole('button', { name: /essential only/i }))
+
+    expect(JSON.parse(localStorage.getItem('nebula-cookie-consent') || '{}')).toMatchObject({
+      level: 'necessary',
+      version: 1,
+    })
+    expect(document.documentElement.getAttribute('data-analytics-default')).toBe('declined')
   })
 
   it('loads PostHog from the consent runtime instead of a global client entrypoint', () => {

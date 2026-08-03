@@ -39,6 +39,10 @@ export function getConsentRuntime(country: string | null = null) {
       script.dataset.nebulaPosthog = 'true';
       script.src = '/ingest/static/array.js';
       script.addEventListener('load', function () {
+        try {
+          var current = JSON.parse(localStorage.getItem(key) || 'null');
+          if (current && current.version >= version && current.level === 'necessary') return;
+        } catch (error) {}
         if (!window.posthog) return;
         window.posthog.init(posthogKey, {
           api_host: '/ingest',
@@ -49,6 +53,7 @@ export function getConsentRuntime(country: string | null = null) {
           capture_dead_clicks: true,
           person_profiles: 'identified_only'
         });
+        window.dispatchEvent(new CustomEvent('nebula-posthog-ready'));
       }, { once: true });
       document.head.appendChild(script);
     }
@@ -65,6 +70,7 @@ export function getConsentRuntime(country: string | null = null) {
         timestamp: new Date().toISOString()
       };
       localStorage.setItem(key, JSON.stringify(state));
+      document.documentElement.setAttribute('data-analytics-default', level === 'all' ? 'accepted' : 'declined');
       document.documentElement.setAttribute('data-cookie-consent', 'given');
       banner.classList.add('consent-dismissing');
       var hide = function () { banner.hidden = true; };
@@ -73,7 +79,18 @@ export function getConsentRuntime(country: string | null = null) {
       // doesn't fire (e.g. the element is display:none for some other reason).
       banner.addEventListener('transitionend', hide, { once: true });
       setTimeout(hide, 350);
-      if (level === 'all') loadAnalytics();
+      if (level === 'all') {
+        loadAnalytics();
+        if (window.gtag) {
+          window.gtag('consent', 'update', {
+            analytics_storage: 'granted',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+          });
+        }
+        if (window.posthog && window.posthog.opt_in_capturing) window.posthog.opt_in_capturing();
+      }
       if (window.gtag && level === 'necessary') {
         window.gtag('consent', 'update', {
           analytics_storage: 'denied',
@@ -82,6 +99,9 @@ export function getConsentRuntime(country: string | null = null) {
           personalization_storage: 'denied',
           security_storage: 'granted'
         });
+      }
+      if (level === 'necessary' && window.posthog && window.posthog.opt_out_capturing) {
+        window.posthog.opt_out_capturing();
       }
       window.dispatchEvent(new CustomEvent('cookie-consent-update', { detail: state }));
     }
@@ -99,6 +119,7 @@ export function getConsentRuntime(country: string | null = null) {
       try {
         var next = JSON.parse(event.newValue || 'null');
         if (!next || next.version < version) return;
+        document.documentElement.setAttribute('data-analytics-default', next.level === 'all' ? 'accepted' : 'declined');
         document.documentElement.setAttribute('data-cookie-consent', 'given');
         banner.hidden = true;
         if (next.level === 'all') loadAnalytics();
@@ -108,8 +129,12 @@ export function getConsentRuntime(country: string | null = null) {
     try {
       var stored = JSON.parse(localStorage.getItem(key) || 'null');
       if (stored && stored.version >= version) {
+        document.documentElement.setAttribute('data-analytics-default', stored.level === 'all' ? 'accepted' : 'declined');
         banner.hidden = true;
         if (stored.level === 'all') loadAnalytics();
+      } else {
+        document.documentElement.setAttribute('data-analytics-default', euVisitor ? 'required' : 'accepted');
+        if (!euVisitor) loadAnalytics();
       }
     } catch (error) {}
   })();

@@ -10,7 +10,8 @@ export function hasAnalyticsConsent(): boolean {
   if (typeof window === 'undefined') return false
   try {
     const state = JSON.parse(window.localStorage.getItem(CONSENT_KEY) || 'null')
-    return state?.version >= 1 && state?.level === 'all'
+    if (state?.version >= 1) return state?.level === 'all'
+    return document.documentElement.getAttribute('data-analytics-default') === 'accepted'
   } catch {
     return false
   }
