@@ -1,0 +1,8 @@
+{
+  "policy": {
+    "default_ttl_days": 90,
+    "pinned_requires_reason": true,
+    "deletion_mode": "mark_expired_only"
+  },
+  "entries": []
+}

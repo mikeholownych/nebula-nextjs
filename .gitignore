@@ -233,3 +233,8 @@ aidlc-docs/operations/
 .env.local
 gsc_programmatic_review.md
 striking_distance_action_plan.md
+
+# Nebula AI ops runtime state
+company_os/control_receipts.jsonl
+company_os/improvement_proposals.jsonl
+company_os/rollback/

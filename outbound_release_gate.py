@@ -14,6 +14,8 @@ import time
 from contextlib import contextmanager
 from typing import Callable
 
+from company_os.controls import critic_gate
+
 
 BASE = Path("/home/mike/nebula")
 DEFAULT_INTERNAL_RECIPIENTS = frozenset({"mike.holownych@aisyndicate.io"})
@@ -614,9 +616,24 @@ class OutboundReleaseGate:
         client_id: str,
         *,
         purpose: DeliveryPurpose,
+        draft: str | None = None,
     ) -> GateDecision:
+        """Reserve a send slot only after policy and (when supplied) critic checks."""
         recipient = recipient.strip().lower()
         client_id = client_id.strip()
+        if draft is not None:
+            critic = critic_gate(
+                draft,
+                "outreach" if purpose is DeliveryPurpose.MARKETING else (purpose.value if isinstance(purpose, DeliveryPurpose) else str(purpose)),
+            )
+            if not critic.allowed:
+                return self._decision(
+                    recipient,
+                    purpose,
+                    client_id,
+                    False,
+                    "critic_blocked:" + ",".join(critic.issues),
+                )
         if not recipient or not client_id or not isinstance(purpose, DeliveryPurpose):
             return self._decision(recipient, purpose, client_id, False, "invalid_request")
 
