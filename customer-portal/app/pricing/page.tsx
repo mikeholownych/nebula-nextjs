@@ -141,9 +141,13 @@ export default function PricingPage() {
                 {[
                   'Message-match diagnosis',
                   'Trust signal check',
-                  'Mobile layout review',
-                  'Load time assessment',
-                  'Compliance flag scan',
+                  'Mobile CTA review',
+                  'Above-the-fold clarity check',
+                  'Ad signal detection',
+                  'SEO foundations check',
+                  'CTA clarity audit',
+                  'Load speed assessment',
+                  'AI readiness check',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-fg-muted" />

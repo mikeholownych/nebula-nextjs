@@ -30,7 +30,6 @@ const SAMPLE_FINDINGS = [
   { key: 'ad_signals', label: 'Ad signals', score: 9, pass: true, finding: 'Google Ads conversion tag present in source.' },
   { key: 'seo_foundations', label: 'SEO foundations', score: 6, pass: false, finding: 'Meta description is 197 characters — truncated in SERP at 155.' },
   { key: 'ai_readiness', label: 'AI readiness', score: 7, pass: true, finding: 'OpenGraph tags and JSON-LD present. Page is citable.' },
-  { key: 'headline', label: 'Message match', score: 4, pass: false, finding: 'Ad headline "Cut your CAC in half" — page headline says "Grow your business." Zero word overlap.' },
 ]
 
 export default function AuditPage() {

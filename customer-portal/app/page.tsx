@@ -143,7 +143,7 @@ export default function Home() {
                 is the instrument that finds them.
               </p>
               <p className="mt-4 text-base text-fg-muted leading-7">
-                The live score above is a B. Not perfect — that&apos;s intentional. Most tools lead
+                Our live self-scan scores a B. Not perfect — that&apos;s intentional. Most tools lead
                 with case studies they can&apos;t verify. We&apos;d rather show you the actual data on our
                 own page first. Every signal. Every evidence atom. The same output you get.
               </p>
@@ -375,7 +375,7 @@ export default function Home() {
                 </h2>
                 <p className="mb-6 text-base text-fg-muted leading-7">
                   You have seen &quot;free audit&quot; — a PDF with 8 generic recommendations and a discovery call at the end.
-                  This is different. No email required to see your results.
+                  This is different. See your score and initial findings before sharing an email.
                 </p>
                 <Link
                   href="/audit"
