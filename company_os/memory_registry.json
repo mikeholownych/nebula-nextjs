@@ -1,8 +1,119 @@
 {
+  "entries": [
+    {
+      "created_at": "2026-08-03T11:01:35.780110Z",
+      "fact": "Offer: One-Leak Repair Sprint $97. Price locked through 2026-12-31. Increases to $147 on 2027-01-01.",
+      "id": "offer_fix_pack",
+      "pin_reason": "active offer",
+      "pinned": true,
+      "status": "active",
+      "ttl_days": 90
+    },
+    {
+      "created_at": "2026-08-03T11:01:35.780110Z",
+      "fact": "Stripe $97 Fix Pack buy link: 5kQbJ1eawdj6eql1Jg43S0h",
+      "id": "stripe_fix_pack_link",
+      "pin_reason": "live payment rail",
+      "pinned": true,
+      "status": "active",
+      "ttl_days": 90
+    },
+    {
+      "created_at": "2026-08-03T11:01:35.780110Z",
+      "fact": "Primary domain: nebulacomponents.com (.shop redirects via 301)",
+      "id": "domain_primary",
+      "pin_reason": "infrastructure",
+      "pinned": true,
+      "status": "active",
+      "ttl_days": 90
+    },
+    {
+      "created_at": "2026-08-03T11:01:35.780110Z",
+      "fact": "Primary email: hello@nebulacomponents.com. Outbound: nebulashop@agentmail.to (REST only)",
+      "id": "email_primary",
+      "pin_reason": "infrastructure",
+      "pinned": true,
+      "status": "active",
+      "ttl_days": 90
+    },
+    {
+      "created_at": "2026-08-03T11:01:35.780110Z",
+      "fact": "ICP: founders actively bleeding money on paid ads with zero/poor landing page conversions. Buying trigger, not demographic.",
+      "id": "icp_trigger",
+      "pin_reason": "core positioning",
+      "pinned": true,
+      "status": "active",
+      "ttl_days": 90
+    },
+    {
+      "created_at": "2026-08-03T11:01:35.780110Z",
+      "fact": "Revenue to date: $0. Current bottleneck: audit-to-payment conversion.",
+      "id": "revenue_status",
+      "pinned": false,
+      "renewable": true,
+      "status": "active",
+      "ttl_days": 30
+    },
+    {
+      "created_at": "2026-08-03T11:01:35.780110Z",
+      "fact": "Lead flow: discovered > site_found > contacted > audit_delivered > pitch_sent > paid. Terminal: dead, bounced, max_retries_exceeded.",
+      "id": "lead_stages",
+      "pin_reason": "state machine definition",
+      "pinned": true,
+      "status": "active",
+      "ttl_days": 90
+    },
+    {
+      "created_at": "2026-08-03T11:01:35.780110Z",
+      "fact": "Model tiers: bulk (DeepSeek/Gemini Flash), reasoning (Opus/GPT-5.5), deep (Opus/Sonnet), audit (Opus/Sonnet), creative (GPT-5.5/Sonnet/DeepSeek).",
+      "id": "model_routing_tiers",
+      "pin_reason": "routing policy",
+      "pinned": true,
+      "status": "active",
+      "ttl_days": 90
+    },
+    {
+      "created_at": "2026-08-03T11:01:35.780110Z",
+      "fact": "Critic blocks: unsupported conversion guarantees, call-first CTAs, credential exposure in outreach drafts.",
+      "id": "critic_rules_outreach",
+      "pin_reason": "quality gate definition",
+      "pinned": true,
+      "status": "active",
+      "ttl_days": 90
+    },
+    {
+      "created_at": "2026-08-03T11:01:35.780110Z",
+      "fact": "Agents: market (signal detection), growth (outreach/artifacts), support (inbox/delivery/checkout), ops-finance (ledgers/evidence), ceo (bottleneck/decisions).",
+      "id": "agent_roster",
+      "pin_reason": "org structure",
+      "pinned": true,
+      "status": "active",
+      "ttl_days": 90
+    },
+    {
+      "created_at": "2026-08-03T11:01:35.780110Z",
+      "fact": "GA4 measurement ID: G-KJ9S3450LH",
+      "id": "ga4_property",
+      "pin_reason": "analytics infrastructure",
+      "pinned": true,
+      "status": "active",
+      "ttl_days": 90
+    },
+    {
+      "created_at": "2026-08-03T11:01:35.780110Z",
+      "fact": "Deploy: npm run build in customer-portal then restart nebula-nextjs + cloudflared-tunnel.",
+      "id": "deployment_method",
+      "pin_reason": "deployment procedure",
+      "pinned": true,
+      "status": "active",
+      "ttl_days": 90
+    }
+  ],
+  "last_reconciled_at": "2026-08-03T11:03:12.736494Z",
   "policy": {
     "default_ttl_days": 90,
-    "pinned_requires_reason": true,
-    "deletion_mode": "mark_expired_only"
+    "deletion_mode": "mark_expired_only",
+    "pinned_requires_reason": true
   },
-  "entries": []
+  "seeded_at": "2026-08-03T11:01:35.780110Z"
 }
