@@ -572,6 +572,19 @@ class AuditDB:
             "placeholder@example.com",
         }
 
+        def _is_anonymous(email_value) -> bool:
+            """An audit is unclaimed when its email is a placeholder or the
+            frontend's per-audit anonymous pattern
+            (anonymous+<uuid>@invalid.nebulacomponents.com)."""
+            n = (email_value or "").strip().lower()
+            if n in {(p or "").lower() for p in ANONYMOUS_PLACEHOLDERS}:
+                return True
+            if n.endswith("@invalid.nebulacomponents.com"):
+                return True
+            if n.startswith("anonymous+") and "@" in n:
+                return True
+            return False
+
         async with self.pool.acquire() as conn:
             row = await conn.fetchrow(
                 "SELECT id, email FROM audits WHERE id = $1",
@@ -586,7 +599,7 @@ class AuditDB:
             current_norm = (current_email or "").strip().lower()
             new_norm = email.strip().lower()
 
-            if current_norm in {(p or "").lower() for p in ANONYMOUS_PLACEHOLDERS}:
+            if _is_anonymous(current_email):
                 # Unclaimed — update the audit email
                 await conn.execute(
                     "UPDATE audits SET email = $2 WHERE id = $1",
