@@ -75,13 +75,6 @@ async def get_gsc_auth_url(
     """
     state = secrets.token_urlsafe(32)
 
-    # Store state → user_id in Redis (CSRF protection + user binding)
-    await redis.set(
-        f"gsc_oauth_state:{state}",
-        {"user_id": user_id, "redirect_uri": redirect_uri},
-        ttl=STATE_TTL,
-    )
-
     flow = Flow.from_client_config(
         _client_config(),
         scopes=GOOGLE_GSC_SCOPES,
@@ -93,6 +86,16 @@ async def get_gsc_auth_url(
         prompt="consent",        # Force consent to always get refresh token
         state=state,
         include_granted_scopes="false",
+    )
+
+    # google-auth-oauthlib auto-generates a PKCE code_verifier and includes
+    # code_challenge in the URL. We must persist the verifier so the callback
+    # can pass it to fetch_token() — without it Google returns invalid_grant.
+    code_verifier = getattr(flow, "code_verifier", None)
+    await redis.set(
+        f"gsc_oauth_state:{state}",
+        {"user_id": user_id, "redirect_uri": redirect_uri, "code_verifier": code_verifier},
+        ttl=STATE_TTL,
     )
 
     return auth_url
@@ -115,12 +118,13 @@ async def validate_gsc_state(redis: RedisClient, state: str) -> dict:
     return data if isinstance(data, dict) else {}
 
 
-async def exchange_gsc_code(code: str, redirect_uri: str) -> dict:
+async def exchange_gsc_code(code: str, redirect_uri: str, code_verifier: str | None = None) -> dict:
     """Exchange an authorization code for GSC tokens.
 
     Args:
         code: Authorization code from Google callback
         redirect_uri: Must match the URI used in get_gsc_auth_url
+        code_verifier: PKCE verifier stored in Redis during initiation
 
     Returns:
         Dict with access_token, refresh_token, expiry (datetime | None)
@@ -134,6 +138,9 @@ async def exchange_gsc_code(code: str, redirect_uri: str) -> dict:
             scopes=GOOGLE_GSC_SCOPES,
             redirect_uri=redirect_uri,
         )
+        # Restore PKCE verifier so Google can validate the code_challenge
+        if code_verifier:
+            flow.code_verifier = code_verifier
         flow.fetch_token(code=code)
         creds = flow.credentials  # type: ignore[assignment]
 

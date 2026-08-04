@@ -160,7 +160,11 @@ async def gsc_callback(
 
     # Exchange code for tokens
     try:
-        tokens = await exchange_gsc_code(code, redirect_uri)
+        tokens = await exchange_gsc_code(
+            code,
+            redirect_uri,
+            code_verifier=state_data.get("code_verifier"),
+        )
     except GSCOAuthError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
