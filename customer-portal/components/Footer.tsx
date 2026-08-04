@@ -84,6 +84,11 @@ export default function Footer() {
 
             {/* Copyright + Social */}
             <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+              {/* Nick Launches badge — required for free listing; must be server-rendered HTML */}
+              <a href="https://nicklaunches.com/" target="_blank" rel="noopener" aria-label="Featured on Nick Launches">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="https://nicklaunches.com/badges/featured.png" alt="Featured on Nick Launches" width={122} height={28} style={{ height: '28px', width: 'auto' }} />
+              </a>
               <p className="text-xs text-fg-muted">
                 © {new Date().getFullYear()} Nebula Components. All rights reserved.
               </p>
