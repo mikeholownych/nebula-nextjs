@@ -3,6 +3,7 @@ import { randomUUID } from 'node:crypto'
 import { getPostHogClient, captureServerException } from '@/app/lib/posthog-server'
 import { assertPublicHttpUrl } from '@/app/lib/ssrf-guard'
 import { clientAnalyticsDistinctId, hasServerAnalyticsConsent, readAttributionHeader } from '@/app/lib/analytics-consent'
+import { checkAuditQuota } from '@/app/lib/audit-quota'
 
 /**
  * Start an audit by calling FastAPI directly
@@ -68,7 +69,28 @@ export async function POST(request: NextRequest) {
     const analyticsConsent = hasServerAnalyticsConsent(request)
     const distinctId = clientAnalyticsDistinctId(request)
     const attribution = readAttributionHeader(request)
-    const anonymousEmail = `anonymous+${randomUUID()}@invalid.nebulacomponents.com`
+
+    // Quota gate: check if the submitting email (from the body, if provided) is
+    // within the free-tier limit. Anonymous audits (no email) always pass — quota
+    // is enforced at claim/unlock time when the email is first captured.
+    const submittedEmail = typeof body.email === 'string' ? body.email.trim().toLowerCase() : null
+    if (submittedEmail) {
+      const quota = await checkAuditQuota(submittedEmail)
+      if (!quota.allowed) {
+        return NextResponse.json(
+          {
+            error: quota.reason,
+            code: 'QUOTA_EXCEEDED',
+            plan: quota.plan,
+            resetAt: quota.resetAt,
+            upgradeUrl: 'https://nebulacomponents.com/pricing',
+          },
+          { status: 429 },
+        )
+      }
+    }
+
+    const anonymousEmail = submittedEmail ?? `anonymous+${randomUUID()}@invalid.nebulacomponents.com`
 
     // Public audit start never trusts a client-supplied email; ownership is
     // established later through the signed unlock flow.
