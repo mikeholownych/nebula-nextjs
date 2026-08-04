@@ -351,3 +351,86 @@ async def gsc_metrics(
         avg_position=avg_position,
         top_pages=top_pages,
     )
+
+
+# ---------------------------------------------------------------------------
+# Sitemap discovery
+# ---------------------------------------------------------------------------
+
+import xml.etree.ElementTree as ET
+
+
+class SitemapPage(BaseModel):
+    url: str
+    lastmod: Optional[str] = None
+
+
+class SitemapResponse(BaseModel):
+    site_url: str
+    pages: List[SitemapPage]
+    total: int
+
+
+@router.get("/sitemap", response_model=SitemapResponse)
+async def gsc_sitemap(
+    auth=Depends(get_current_user),
+    db: Session = Depends(get_session),
+):
+    """Fetch and parse the user's sitemap.xml based on their GSC site URL."""
+    user_id = UUID(auth["user_id"])
+    conn = db.query(GscConnection).filter_by(user_id=user_id).first()
+    if not conn or not conn.gsc_site_url:
+        raise HTTPException(status_code=404, detail="No GSC connection or site URL configured")
+
+    site_url = conn.gsc_site_url
+    if site_url.startswith("sc-domain:"):
+        domain = site_url.replace("sc-domain:", "")
+        sitemap_url = f"https://{domain}/sitemap.xml"
+    elif site_url.startswith("http"):
+        sitemap_url = site_url.rstrip("/") + "/sitemap.xml"
+    else:
+        raise HTTPException(status_code=400, detail=f"Cannot derive sitemap from: {site_url}")
+
+    try:
+        async with httpx.AsyncClient(timeout=15, follow_redirects=True) as client:
+            resp = await client.get(sitemap_url)
+            if resp.status_code != 200:
+                raise HTTPException(status_code=502, detail=f"Sitemap returned {resp.status_code}")
+
+            ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+            root = ET.fromstring(resp.text)
+            pages: List[SitemapPage] = []
+
+            # Check if sitemap index
+            sitemaps = root.findall("sm:sitemap", ns)
+            if sitemaps:
+                for sm_elem in sitemaps[:5]:
+                    loc_elem = sm_elem.find("sm:loc", ns)
+                    if loc_elem is not None and loc_elem.text:
+                        child_resp = await client.get(loc_elem.text.strip())
+                        if child_resp.status_code == 200:
+                            child_root = ET.fromstring(child_resp.text)
+                            for url_elem in child_root.findall("sm:url", ns):
+                                loc = url_elem.find("sm:loc", ns)
+                                lastmod = url_elem.find("sm:lastmod", ns)
+                                if loc is not None and loc.text:
+                                    pages.append(SitemapPage(
+                                        url=loc.text.strip(),
+                                        lastmod=lastmod.text.strip() if lastmod is not None and lastmod.text else None,
+                                    ))
+            else:
+                for url_elem in root.findall("sm:url", ns):
+                    loc = url_elem.find("sm:loc", ns)
+                    lastmod = url_elem.find("sm:lastmod", ns)
+                    if loc is not None and loc.text:
+                        pages.append(SitemapPage(
+                            url=loc.text.strip(),
+                            lastmod=lastmod.text.strip() if lastmod is not None and lastmod.text else None,
+                        ))
+
+    except httpx.HTTPError as exc:
+        raise HTTPException(status_code=502, detail=f"Network error: {exc}") from exc
+    except ET.ParseError as exc:
+        raise HTTPException(status_code=502, detail=f"XML parse error: {exc}") from exc
+
+    return SitemapResponse(site_url=site_url, pages=pages, total=len(pages))

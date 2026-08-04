@@ -1,7 +1,9 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { WorkspaceAudit } from './WorkspaceClient'
+
+interface SitemapPage { url: string; lastmod?: string | null }
 
 // ── Helpers ────────────────────────────────────────────────────────────
 
@@ -111,8 +113,25 @@ function ScoreBar({ score }: { score: number }) {
 export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
   const [search, setSearch] = useState('')
   const [keywords, setKeywords] = useState<Record<string, string>>({})
+  const [sitemapPages, setSitemapPages] = useState<SitemapPage[]>([])
+
+  // Fetch sitemap URLs to discover all pages (not just audited ones)
+  useEffect(() => {
+    let cancelled = false
+    fetch('/api/gsc/sitemap')
+      .then(async (res) => {
+        if (!res.ok) return
+        const data = await res.json()
+        if (!cancelled && data.pages) {
+          setSitemapPages(data.pages)
+        }
+      })
+      .catch(() => {}) // Non-fatal — sitemap discovery is optional
+    return () => { cancelled = true }
+  }, [])
 
   // Deduplicate by pathKey, keep most recent audit per unique page
+  // THEN merge sitemap URLs that haven't been audited as unaudited rows
   const uniquePages = useMemo(() => {
     const map = new Map<string, WorkspaceAudit>()
     for (const a of audits) {
@@ -128,13 +147,39 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
         }
       }
     }
-    // Sort most recently audited first
+
+    // Merge sitemap pages as synthetic "unaudited" entries
+    for (const sp of sitemapPages) {
+      const key = pathKeyOf(sp.url)
+      if (!map.has(key)) {
+        map.set(key, {
+          id: `sitemap-${key}`,
+          url: sp.url,
+          status: 'discovered',
+          score: null,
+          grade: null,
+          composite: null,
+          composite_anchor: null,
+          created_at: sp.lastmod || null,
+          completed_at: null,
+        } as unknown as WorkspaceAudit)
+      }
+    }
+
+    // Sort: audited first (most recent), then unaudited alphabetically
     return [...map.values()].sort((a, b) => {
-      const ta = a.completed_at || a.created_at || ''
-      const tb = b.completed_at || b.created_at || ''
-      return tb.localeCompare(ta)
+      const aScored = a.status === 'completed' && a.score !== null
+      const bScored = b.status === 'completed' && b.score !== null
+      if (aScored && !bScored) return -1
+      if (!aScored && bScored) return 1
+      if (aScored && bScored) {
+        const ta = a.completed_at || a.created_at || ''
+        const tb = b.completed_at || b.created_at || ''
+        return tb.localeCompare(ta)
+      }
+      return a.url.localeCompare(b.url)
     })
-  }, [audits])
+  }, [audits, sitemapPages])
 
   const primaryDomain = uniquePages.length > 0 ? hostnameOf(uniquePages[0].url) : null
 
@@ -164,7 +209,7 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
 
   const isScored = (a: WorkspaceAudit) => a.status === 'completed' && a.score !== null
 
-  if (audits.length === 0) {
+  if (audits.length === 0 && sitemapPages.length === 0) {
     return (
       <div className="rounded-2xl border border-border bg-bg-elevated p-10 text-center shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
         <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-fg-dim">No pages yet</p>
