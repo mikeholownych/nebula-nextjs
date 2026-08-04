@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { pool } from '@/app/lib/db'
 import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 import { generateAuditPDF, type AuditFinding } from '@/app/lib/audit-pdf'
+import { verifyAuditUnlock } from '@/app/lib/audit-unlock-token'
 
 /**
  * GET /api/audit/[id]/pdf
@@ -56,26 +57,10 @@ export async function GET(
       return NextResponse.json({ error: 'Service unavailable' }, { status: 503 })
     }
   } else {
-    // No workspace session — check unlock cookie (signed JWT stored as nebula_audit_unlock)
-    const unlockCookie = request.cookies.get('nebula_audit_unlock')?.value
-    if (unlockCookie) {
-      // Verify the unlock cookie grants access to this specific audit
-      try {
-        const { createHmac } = await import('node:crypto')
-        const secret = process.env.AUDIT_UNLOCK_SECRET ?? ''
-        const [tokenAuditId, expiry, sig] = unlockCookie.split('.')
-        const expected = createHmac('sha256', secret)
-          .update(`${tokenAuditId}.${expiry}`)
-          .digest('hex')
-        const expired = parseInt(expiry, 10) < Date.now()
-        if (tokenAuditId === auditId && !expired && sig === expected) {
-          planLabel = 'Free (unlocked)'
-        } else {
-          planLabel = null
-        }
-      } catch {
-        planLabel = null
-      }
+    // No workspace session — check unlock cookie using the same token format as unlock/route.ts
+    const unlockToken = request.cookies.get('nebula_audit_unlock')?.value
+    if (unlockToken && verifyAuditUnlock(auditId, unlockToken)) {
+      planLabel = 'Free (unlocked)'
     }
     if (!planLabel) {
       return NextResponse.json(
