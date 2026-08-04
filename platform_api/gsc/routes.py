@@ -170,6 +170,22 @@ async def gsc_callback(
 
     user_uuid = UUID(user_id_str)
 
+    # Auto-detect the user's primary GSC property (first one returned)
+    auto_site_url: str | None = None
+    try:
+        import httpx
+        async with httpx.AsyncClient(timeout=10) as client:
+            resp = await client.get(
+                "https://www.googleapis.com/webmasters/v3/sites",
+                headers={"Authorization": f"Bearer {tokens['access_token']}"},
+            )
+            if resp.status_code == 200:
+                sites = resp.json().get("siteEntry", [])
+                if sites:
+                    auto_site_url = sites[0].get("siteUrl")
+    except Exception:
+        pass  # Non-fatal — user can select manually in settings
+
     # Upsert the connection row
     conn = db.query(GscConnection).filter_by(user_id=user_uuid).first()
     if conn:
@@ -177,6 +193,8 @@ async def gsc_callback(
         conn.refresh_token = tokens.get("refresh_token") or conn.refresh_token
         conn.token_expiry = tokens.get("expiry")
         conn.connected_at = datetime.now(timezone.utc)
+        if auto_site_url and not conn.gsc_site_url:
+            conn.gsc_site_url = auto_site_url
     else:
         conn = GscConnection(
             id=uuid4(),
@@ -184,7 +202,7 @@ async def gsc_callback(
             access_token=tokens["access_token"],
             refresh_token=tokens.get("refresh_token"),
             token_expiry=tokens.get("expiry"),
-            gsc_site_url=None,   # User sets site in /settings UI
+            gsc_site_url=auto_site_url,
             connected_at=datetime.now(timezone.utc),
         )
         db.add(conn)
