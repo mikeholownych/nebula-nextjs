@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nebula Audit Widget — Demo</title>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; background: #0a0f1a; color: #e2e8f0;
+           display: flex; flex-direction: column; align-items: center; padding: 40px 16px; }
+    h1 { font-size: 20px; margin-bottom: 4px; }
+    p.sub { color: #94a3b8; margin-bottom: 28px; }
+    .demo-box { width: 100%; max-width: 420px; }
+    .demo-box .label { font-size: 12px; color: #94a3b8; margin-bottom: 8px; text-transform: uppercase; letter-spacing: .05em; }
+    hr { width: 100%; max-width: 420px; border: 0; border-top: 1px solid #1e293b; margin: 32px 0; }
+  </style>
+</head>
+<body>
+  <h1>Nebula Audit Widget — Demo</h1>
+  <p class="sub">Embedded on a simulated agency site (partner: <code>agency_demo</code>)</p>
+
+  <div class="demo-box">
+    <div class="label">Dark theme (default)</div>
+    <div id="nebula-audit-widget" data-partner="agency_demo" data-theme="dark"></div>
+  </div>
+
+  <hr />
+
+  <div class="demo-box">
+    <div class="label">Light theme</div>
+    <div id="nebula-audit-widget-light" data-partner="agency_demo" data-theme="light"></div>
+  </div>
+
+  <script src="https://nebulacomponents.com/widget/audit.js" async></script>
+</body>
+</html>

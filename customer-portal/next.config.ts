@@ -179,6 +179,12 @@ const nextConfig: NextConfig = {
         source: '/primer',
         destination: '/primer.html',
       },
+      // Widget demo page — same .html fall-through quirk as /primer; nested
+      // public .html files need an explicit extensionless rewrite.
+      {
+        source: '/widget/demo',
+        destination: '/widget/demo.html',
+      },
     ]
   },
   // Allow serving static HTML

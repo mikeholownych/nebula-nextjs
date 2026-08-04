@@ -51,7 +51,14 @@ Nobody cites the leader's opinions; they cite the leader's **data and receipts**
 
 **What:** The $497 embeddable widget is the highest-leverage distribution asset: 10 agencies × their clients = audits without ad spend; each embed = "Powered by Nebula" backlink. Marvlus data says show the score *before* the paywall.
 
-**Status: SPEC ONLY.** `docs/superpowers/specs/2026-08-04-embeddable-audit-widget.md` written. Next: build the widget (score-first UX), then recruit 3 agencies manually to seed.
+**Status: BUILT + VERIFIED 2026-08-04 (MVP live; partner recruitment next).**
+- Spec: `docs/superpowers/specs/2026-08-04-embeddable-audit-widget.md` (unchanged).
+- Widget JS: `public/widget/audit.js` — vanilla JS + shadow DOM, dark/light themes, form → processing → score ring → top-3 findings → "See full report" (partner-attributed), "Powered by Nebula" in all states, multi-instance support, graceful error handling.
+- API: `app/api/widget/audit/route.ts` — validates partner via `GET /audit/partners/{id}` (platform API), CORS allowlist enforced per partner domain, rate limits (10/hr per partner, 3/day per IP via `widget_usage` in lead_state.db), SSRF guard, runs the same engine as /api/audit/start, records `source=widget` + `partner_id` on the audit row AND a lead in lead_state.db (`source_partner` column added).
+- Backend: `partners` table + `source`/`partner_id` columns on `audits` (migration `20260804_add_widget_partners.sql`); `audit_db.get_partner/create_partner/add_partner_domain`; platform route `GET /audit/partners/{partner_id}` (before the `/{audit_id}` catch-all).
+- Registration: `scripts/register_partner.py` (id/name/domains/plan → prints embed code).
+- Demo + verification: `/widget/demo` (dark + light themes) — verified live in a rendered browser: score cards 6.9/B (stripe) and 5.9/C (linear), report links carry `?partner=agency_demo`, leads attributed at both DB layers, CORS denial (403, no ACAO) and unknown-partner (403) verified, rate limit 429 verified.
+- **Next: recruit 3 agencies manually to seed; auto-registration from Stripe webhook is future work.**
 
 ### Play 5 — Content at scale: teardowns + comparisons + programmatic
 

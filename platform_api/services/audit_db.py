@@ -52,7 +52,9 @@ class AuditDB:
             )
             return row['id']
     
-    async def create_audit(self, url: str, email: str, name: Optional[str] = None) -> UUID:
+    async def create_audit(self, url: str, email: str, name: Optional[str] = None,
+                           source: Optional[str] = None,
+                           partner_id: Optional[str] = None) -> UUID:
         """Create a new audit record"""
         await self.connect()
         
@@ -61,11 +63,11 @@ class AuditDB:
         async with self.pool.acquire() as conn:
             row = await conn.fetchrow(
                 """
-                INSERT INTO audits (customer_id, url, email, name, status)
-                VALUES ($1, $2, $3, $4, 'pending')
+                INSERT INTO audits (customer_id, url, email, name, status, source, partner_id)
+                VALUES ($1, $2, $3, $4, 'pending', $5, $6)
                 RETURNING id
                 """,
-                customer_id, url, email, name
+                customer_id, url, email, name, source, partner_id
             )
             return row['id']
     
@@ -1074,6 +1076,74 @@ class AuditDB:
                 )
             
             return row['id']
+
+    # ── Widget partners (Play 4: agencies as distribution layer) ─────────────
+    async def get_partner(self, partner_id: str) -> Optional[dict]:
+        """Look up a widget partner by id. Returns None if not found."""
+        await self.connect()
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                "SELECT id, name, email, plan, status, domains FROM partners WHERE id = $1",
+                partner_id,
+            )
+            if not row:
+                return None
+            domains = row["domains"]
+            if isinstance(domains, str):
+                try:
+                    domains = json.loads(domains)
+                except Exception:
+                    domains = []
+            return {
+                "id": row["id"],
+                "name": row["name"],
+                "email": row["email"],
+                "plan": row["plan"],
+                "status": row["status"],
+                "domains": domains or [],
+            }
+
+    async def create_partner(self, partner_id: str, name: str,
+                             domains: List[str], email: Optional[str] = None,
+                             plan: str = "agency") -> bool:
+        """Register a widget partner. Returns False if the id already exists."""
+        await self.connect()
+        async with self.pool.acquire() as conn:
+            try:
+                await conn.execute(
+                    """
+                    INSERT INTO partners (id, name, email, plan, status, domains)
+                    VALUES ($1, $2, $3, $4, 'active', $5::jsonb)
+                    """,
+                    partner_id, name, email, plan, json.dumps(domains or []),
+                )
+                return True
+            except Exception:
+                return False
+
+    async def add_partner_domain(self, partner_id: str, domain: str) -> bool:
+        """Add a domain to a partner's CORS allowlist."""
+        await self.connect()
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                "SELECT domains FROM partners WHERE id = $1", partner_id
+            )
+            if not row:
+                return False
+            domains = row["domains"]
+            if isinstance(domains, str):
+                try:
+                    domains = json.loads(domains)
+                except Exception:
+                    domains = []
+            if domain in domains:
+                return True
+            domains.append(domain)
+            await conn.execute(
+                "UPDATE partners SET domains = $2::jsonb, updated_at = NOW() WHERE id = $1",
+                partner_id, json.dumps(domains),
+            )
+            return True
 
 
 # Singleton

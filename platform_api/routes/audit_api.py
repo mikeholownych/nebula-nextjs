@@ -41,6 +41,8 @@ class AuditRequest(BaseModel):
     audit_id: Optional[str] = None
     analytics_consent: bool = False
     analytics_distinct_id: Optional[str] = None
+    source: Optional[str] = None
+    partner_id: Optional[str] = None
 
 
 class AuditResponse(BaseModel):
@@ -69,7 +71,9 @@ async def run_audit(request: AuditRequest):
         audit_id = await audit_db.create_audit(
             url=request.url,
             email=audit_email,
-            name=request.name
+            name=request.name,
+            source=request.source,
+            partner_id=request.partner_id
         )
         
         # Track audit started only after explicit analytics consent. The ID is
@@ -957,6 +961,32 @@ async def get_team(email: str = Query(..., description="User email")):
         })
 
     return {"email": email, "members": members}
+
+
+# ── Widget partners (Play 4: agencies as distribution layer) ────────────────
+# Declared BEFORE the /{audit_id} catch-all — same 422-as-UUID rule as /stats/*.
+
+@router.get("/partners/{partner_id}")
+async def get_partner(partner_id: str):
+    """Validate a widget partner id and return its CORS allowlist.
+
+    Used by the embeddable widget route (customer-portal /api/widget/audit)
+    to (a) reject unknown partner ids and (b) enforce per-domain CORS.
+    """
+    try:
+        partner = await audit_db.get_partner(partner_id)
+    except Exception:
+        return {"valid": False, "error": "partner_lookup_failed"}
+    if not partner:
+        return {"valid": False, "error": "not_found"}
+    return {
+        "valid": partner["status"] == "active",
+        "id": partner["id"],
+        "name": partner["name"],
+        "plan": partner["plan"],
+        "status": partner["status"],
+        "domains": partner["domains"],
+    }
 
 
 @router.get("/{audit_id}")
