@@ -38,7 +38,7 @@ export default function Footer() {
               <li><a href="/brand" className="text-sm text-fg-muted hover:text-fg transition-colors">Brand Kit</a></li>
               <li><a href="/press" className="text-sm text-fg-muted hover:text-fg transition-colors">Press Kit</a></li>
               <li><a href="/learning-centre" className="text-sm text-fg-muted hover:text-fg transition-colors">Learning Centre</a></li>
-              <li><a href="/benchmarks" className="text-sm text-fg-muted hover:text-fg transition-colors">Benchmarks</a></li>
+              <li><a href="/benchmarks" className="text-sm text-fg-muted hover:text-fg transition-colors">Leak Index</a></li>
               <li><a href="/lab" className="text-sm text-fg-muted hover:text-fg transition-colors">Lab</a></li>
               <li><a href="/why-is-my-landing-page-not-converting" className="text-sm text-fg-muted hover:text-fg transition-colors">Diagnostic Guides →</a></li>
               <li><a href="/saas-landing-page-audit" className="text-sm text-fg-muted hover:text-fg transition-colors">Industry Audits →</a></li>

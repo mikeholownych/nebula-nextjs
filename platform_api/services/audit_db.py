@@ -5,7 +5,7 @@ Database service for audit persistence
 import os
 import asyncpg
 import secrets
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional, List
 from uuid import UUID
 import json
@@ -909,6 +909,7 @@ class AuditDB:
         buckets = {"0-3": 0, "4-5": 0, "6-7": 0, "8-10": 0}
         component_counts: dict[str, dict] = {}
         scores = []
+        total_findings = 0
 
         for row in rows:
             score = row["score"]
@@ -933,6 +934,7 @@ class AuditDB:
                     findings = []
             if not isinstance(findings, list):
                 continue
+            total_findings += len(findings)
             for f in findings:
                 if not isinstance(f, dict):
                     continue
@@ -960,11 +962,22 @@ class AuditDB:
             )
         components.sort(key=lambda c: c["failures"], reverse=True)
 
+        # The citable headline stat: average number of failed conversion
+        # signals per completed audit. ("The average landing page leaks N of 9
+        # conversion signals.") Also surface the single most common leak.
+        avg_failures_per_page = (
+            round(total_findings / len(scores), 1) if scores else 0.0
+        )
+        top_leak = components[0] if components else None
+
         return {
             "audit_count": len(scores),
             "avg_score": round(sum(scores) / len(scores), 1) if scores else None,
             "highest": round(max(scores), 1) if scores else None,
             "lowest": round(min(scores), 1) if scores else None,
+            "avg_failures_per_page": avg_failures_per_page,
+            "top_leak": top_leak,
+            "generated_at": datetime.now(timezone.utc).isoformat(),
             "components": components[:12],
             "distribution": [{"bucket": k, "count": v} for k, v in buckets.items()],
         }

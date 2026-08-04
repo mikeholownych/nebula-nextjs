@@ -2,20 +2,23 @@
 
 import { useEffect, useState } from 'react'
 
+export type BenchmarksData = {
+  audit_count: number
+  avg_score: number | null
+  highest: number | null
+  lowest: number | null
+  avg_failures_per_page: number | null
+  top_leak: { label: string; failures: number; avg_impact: number; share: number } | null
+  generated_at: string | null
+  components: ComponentStat[]
+  distribution: { bucket: string; count: number }[]
+}
+
 type ComponentStat = {
   label: string
   failures: number
   avg_impact: number
   share: number
-}
-
-type BenchmarksData = {
-  audit_count: number
-  avg_score: number | null
-  highest: number | null
-  lowest: number | null
-  components: ComponentStat[]
-  distribution: { bucket: string; count: number }[]
 }
 
 const SIGNAL_DESCRIPTIONS: Record<string, string> = {
@@ -36,7 +39,7 @@ const SIGNAL_DESCRIPTIONS: Record<string, string> = {
 // can always be checked against the actual check that produced it.
 const PASS_STANDARDS: Record<string, string> = {
   'Above Fold':
-    'Visitor understands what is offered, who it\'s for, and what to do next within the first viewport.',
+    "Visitor understands what is offered, who it's for, and what to do next within the first viewport.",
   'Ad Signals':
     'At least one recognized ad-tracking artifact in the fetched page source (pixel, tag manager, GA4, or conversion API reference).',
   'Seo Foundations': 'Title tag, meta description, and a single descriptive H1 all present.',
@@ -44,28 +47,36 @@ const PASS_STANDARDS: Record<string, string> = {
   'Load Speed': 'LCP under 2.5s, CLS under 0.1, INP under 200ms on mobile.',
   'Social Proof':
     'Proof near the first CTA: sample output, customer quote, metric, guarantee, or process evidence.',
-  'Ai Readiness': 'Structured signals that make the page citable and understandable to AI systems (JSON-LD, OG tags, clean hierarchy).',
+  'Ai Readiness':
+    'Structured signals that make the page citable and understandable to AI systems (JSON-LD, OG tags, clean hierarchy).',
   Headline: 'H1 is 12–90 characters and names the buyer outcome, not a generic claim.',
   'Local Gbp': 'LocalBusiness/Product structured data or GBP product listing indicators present.',
   Mobile: 'Primary action visible and usable on a 375px viewport.',
 }
 
-export default function Benchmarks() {
-  const [data, setData] = useState<BenchmarksData | null>(null)
+const fmtDate = (iso: string | null): string | null => {
+  if (!iso) return null
+  const d = new Date(iso)
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+}
+
+export default function Benchmarks({ initialData }: { initialData?: BenchmarksData | null }) {
+  const [data, setData] = useState<BenchmarksData | null>(initialData ?? null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    if (data) return
     fetch('/api/audit/stats/benchmarks')
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
       .then(setData)
       .catch((e) => setError(e instanceof Error ? e.message : 'Failed to load'))
-  }, [])
+  }, [data])
 
   if (error) {
     return (
       <section className="px-6 py-16">
         <div className="mx-auto max-w-6xl">
-          <p className="text-sm text-signal-fail">Benchmarks unavailable right now ({error}).</p>
+          <p className="text-sm text-signal-fail">Leak Index unavailable right now ({error}).</p>
         </div>
       </section>
     )
@@ -75,7 +86,7 @@ export default function Benchmarks() {
     return (
       <section className="px-6 py-16">
         <div className="mx-auto max-w-6xl">
-          <p className="text-sm text-fg-muted">Loading real benchmark data&hellip;</p>
+          <p className="text-sm text-fg-muted">Loading real audit data&hellip;</p>
         </div>
       </section>
     )
@@ -85,10 +96,10 @@ export default function Benchmarks() {
     return (
       <section className="px-6 py-16">
         <div className="mx-auto max-w-6xl rounded-2xl border border-border bg-bg-muted/10 p-8">
-          <h2 className="text-xl font-bold text-fg">No verified benchmark data yet</h2>
+          <h2 className="text-xl font-bold text-fg">No verified audit data yet</h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-fg-muted">
-            Benchmarks appear after completed audits are added to the published evidence dataset.
-            We will not substitute sample averages or placeholder charts.
+            The Leak Index appears after completed audits are added to the published evidence
+            dataset. We will not substitute sample averages or placeholder charts.
           </p>
           <a href="/audit" className="mt-5 inline-flex rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-bg">
             Run the first audit →
@@ -99,12 +110,47 @@ export default function Benchmarks() {
   }
 
   const maxFailures = Math.max(1, ...data.components.map((c) => c.failures))
+  const updated = fmtDate(data.generated_at)
 
   return (
     <section className="px-6 py-16">
       <div className="mx-auto max-w-6xl space-y-12">
+        {/* The citable stat */}
+        <div className="rounded-2xl border border-accent/30 bg-accent/5 p-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent">
+            The headline leak
+          </p>
+          <p className="mt-3 text-2xl font-bold leading-tight tracking-tight text-fg md:text-4xl">
+            The average landing page leaks{' '}
+            <span className="text-accent">
+              {data.avg_failures_per_page !== null && data.avg_failures_per_page !== undefined
+                ? data.avg_failures_per_page.toFixed(1)
+                : '—'}{' '}
+              of 9 conversion signals
+            </span>
+            .
+          </p>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-fg-muted">
+            {data.top_leak ? (
+              <>
+                The most common leak: <span className="font-semibold text-fg">{data.top_leak.label}</span>,
+                failing on {data.top_leak.share}% of audited pages. If you are paying for traffic
+                and the page is not converting, the leak is usually not the ad — it is one of these
+                signals.
+              </>
+            ) : (
+              'No single leak dominates the sample yet.'
+            )}
+          </p>
+          {updated && (
+            <p className="mt-4 text-xs text-fg-muted">
+              Updated {updated} · {data.audit_count} completed audits
+            </p>
+          )}
+        </div>
+
         {/* Headline stats */}
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-4">
           {[
             { label: 'Audits in sample', value: data.audit_count, suffix: '' },
             { label: 'Average score', value: data.avg_score?.toFixed(1) ?? '—', suffix: '/10' },
@@ -115,6 +161,11 @@ export default function Benchmarks() {
                   ? `${data.lowest.toFixed(1)}–${data.highest.toFixed(1)}`
                   : '—',
               suffix: '/10',
+            },
+            {
+              label: 'Top leak failure rate',
+              value: data.top_leak ? `${data.top_leak.share}%` : '—',
+              suffix: data.top_leak ? data.top_leak.label : '',
             },
           ].map((s) => (
             <div key={s.label} className="rounded-xl border border-border bg-bg-muted/20 p-5">
@@ -161,21 +212,19 @@ export default function Benchmarks() {
           </div>
         </div>
 
-        {/* Component failure rates */}
+        {/* Component failure rates — where paid traffic leaks first */}
         <div>
           <h2 className="mb-2 text-xl font-bold tracking-tight text-fg">
-            Component failure rates
+            Where paid traffic leaks first
           </h2>
           <p className="mb-6 max-w-2xl text-sm text-fg-muted">
-            Share of audited pages where each component failed its pass standard. A component that
-            fails on 100% of pages is where most paid traffic leaks first.
+            Share of audited pages where each conversion signal failed its pass standard. A signal
+            that fails on 100% of pages is where most paid traffic leaks before a visitor ever
+            converts.
           </p>
           <div className="space-y-3">
             {data.components.map((c) => (
-              <div
-                key={c.label}
-                className="rounded-xl border border-border bg-bg-muted/10 p-4"
-              >
+              <div key={c.label} className="rounded-xl border border-border bg-bg-muted/10 p-4">
                 <div className="mb-2 flex flex-wrap items-baseline justify-between gap-2">
                   <div>
                     <p className="text-sm font-semibold text-fg">{c.label}</p>
@@ -183,8 +232,8 @@ export default function Benchmarks() {
                       {SIGNAL_DESCRIPTIONS[c.label] ?? 'Conversion component'}
                     </p>
                   </div>
-                  <p className="text-xs font-mono text-fg-muted">avg impact{' '}
-                    {c.avg_impact.toFixed(1)}/10
+                  <p className="text-xs font-mono text-fg-muted">
+                    avg impact {c.avg_impact.toFixed(1)}/10
                   </p>
                 </div>
                 <div className="h-2 w-full overflow-hidden rounded-full bg-bg-muted">
@@ -205,9 +254,54 @@ export default function Benchmarks() {
           </div>
         </div>
 
+        {/* Methodology */}
+        <div className="rounded-2xl border border-border bg-bg-muted/10 p-8">
+          <h2 className="text-xl font-bold tracking-tight text-fg">Methodology</h2>
+          <div className="mt-4 grid gap-6 md:grid-cols-2">
+            <div>
+              <h3 className="text-sm font-semibold text-fg">How the data is collected</h3>
+              <p className="mt-2 text-sm leading-6 text-fg-muted">
+                Each completed audit fetches a public landing page, runs the same 9 conversion-signal
+                checks, and records a 0–10 score plus which signals failed their pass standard. The
+                Leak Index aggregates only audits marked <span className="font-semibold text-fg">completed</span> —
+                no drafts, no estimates, no placeholder averages.
+              </p>
+              <p className="mt-3 text-sm leading-6 text-fg-muted">
+                Pass standards are published on this page so every statistic can be checked against
+                the exact check that produced it. A signal is reported as failed only when the
+                fetched evidence does not meet the standard.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-fg">Privacy</h3>
+              <p className="mt-2 text-sm leading-6 text-fg-muted">
+                No page URLs, emails, or personal data are shown. Only aggregate failure rates,
+                average impact, and score distribution are published.
+              </p>
+              <h3 className="mt-5 text-sm font-semibold text-fg">Freshness</h3>
+              <p className="mt-2 text-sm leading-6 text-fg-muted">
+                The index updates continuously as audits complete. The sample size grows with every
+                audit and teardown. The JSON endpoint used by this page is{' '}
+                <a href="/api/audit/stats/benchmarks" className="text-accent underline underline-offset-2">
+                  /api/audit/stats/benchmarks
+                </a>
+                .
+              </p>
+            </div>
+          </div>
+          <div className="mt-6 border-t border-border pt-5 text-xs text-fg-muted">
+            Benchmarks are computed from completed audits only. This is aggregate data, not
+            individualized conversion advice — see the{' '}
+            <a href="/audit" className="text-accent underline underline-offset-2">
+              free audit
+            </a>{' '}
+            for a page-level diagnosis.
+          </div>
+        </div>
+
         <p className="border-t border-border pt-6 text-xs text-fg-muted">
-          Benchmarks are computed from completed audits only. No page URLs, emails, or personal
-          data are shown. Sample size grows with every audit and teardown.
+          The Landing Page Leak Index is computed from completed audits only. No page URLs, emails,
+          or personal data are shown. Sample size grows with every audit and teardown.
         </p>
       </div>
     </section>
