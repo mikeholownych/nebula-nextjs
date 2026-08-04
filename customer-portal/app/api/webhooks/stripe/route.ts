@@ -7,6 +7,7 @@ import { getPostHogClient, captureServerException } from '@/app/lib/posthog-serv
 import { pool } from '@/app/lib/db'
 import { isCanonicalFixPackReceipt } from '@/app/lib/public-facts'
 import { planFromStripePrice } from '@/app/lib/subscription-plans'
+import { sendSubscriptionWelcome } from '@/app/lib/subscription-emails'
 
 const execFileAsync = promisify(execFile)
 
@@ -429,6 +430,8 @@ export async function POST(request: NextRequest) {
         void sendSaleAlert(
           `🔁 *NEW SUBSCRIPTION* — ${resolved.plan.toUpperCase()} — ${amount} — ${email}\nsubscription: ${sub.id}`,
         )
+        // Send welcome email — fire-and-forget, non-blocking
+        void sendSubscriptionWelcome(email, resolved.plan)
       }
       if (event.livemode && event.type === 'customer.subscription.deleted') {
         void sendSaleAlert(
