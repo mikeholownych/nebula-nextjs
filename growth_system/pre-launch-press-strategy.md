@@ -61,12 +61,13 @@ These create permanent indexed pages that AI engines crawl. Each is a third-part
 ### Original Data Angle
 Our 86-audit dataset is unique. No one else has published aggregate findings from automated conversion audits. This IS the earned media hook.
 
-**Pitch-ready data points:**
-- 86 landing pages audited, average score 6.3/10
-- Score range: 4.0–7.7 (no page scored above 78%)
-- Most common conversion leak: message match failure
-- Pages spending on ads averaged X% lower on CTA clarity than organic pages
-- [Run additional queries against DB to extract more publishable stats]
+**Pitch-ready data points (verified from DB, Aug 4):**
+- 86 landing pages audited, average score 62.7/100, median 61
+- Grade distribution: 40 B / 43 C / 3 D — **zero A's**
+- Above-fold failures: **100% of pages** (86/86)
+- Ad signal continuity failures: **99%** (85/86)
+- Load speed — the thing every free tool measures — only flagged on **29%**
+- Quick wins outnumber major projects 241:138 (~2:1)
 
 **Potential headline angles:**
 1. "We audited 86 landing pages. The #1 reason ads don't convert isn't what you think."
@@ -106,19 +107,22 @@ Sep 8  (T+6)   Follow up press with "launched #X on PH" angle
 
 ## The Press Pitch Template
 
-**Subject**: Data: We audited 86 landing pages — here's the #1 conversion killer
+**Subject**: Data: We audited 86 landing pages — zero scored an A
 
 **Body**:
 
 Hi [Name],
 
-I ran 86 free landing page audits for founders spending on Google/Meta ads. The results surprised me:
+I ran 86 automated landing page audits for founders spending on Google/Meta ads. The results surprised me:
 
-- Average conversion readiness: 6.3/10
-- #1 problem: message match failure (ad says one thing, page says another) — present in [X]% of pages
-- Speed tools like PageSpeed Insights miss it entirely — they only score performance, not conversion architecture
+- Not one page out of 86 scored an A (average: 62.7/100)
+- 100% had above-the-fold failures — headline present, but no CTA in the first viewport
+- 99% failed ad signal continuity (the page doesn't continue what the ad promised)
+- Page speed — the thing every free tool measures — was only a problem on 29%
 
-I built Nebula (nebulacomponents.com/audit) to score 9 conversion signals in 90 seconds — free, no signup. It's the first tool to include AI readiness as a scored dimension.
+The industry's default diagnostic (run PageSpeed, fix the score) targets the least common failure.
+
+I built Nebula (nebulacomponents.com/audit) to score 9 conversion signals in 90 seconds — free, no signup. It's the first audit tool to include AI readiness as a scored dimension.
 
 Launching on Product Hunt September 2. Happy to share the full dataset or walk through findings for a piece.
 

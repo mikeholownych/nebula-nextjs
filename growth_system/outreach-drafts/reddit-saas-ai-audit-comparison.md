@@ -33,6 +33,12 @@ So I ran the same page through three approaches:
 
 **The difference:** AI chat gives you a checklist that applies to every page on the internet. A conversion audit finds the *specific* leak on *this* page.
 
+The stats across all 86 audits so far:
+- **Zero pages scored an A** (best: 77/100, average: 62.7)
+- **100% had above-the-fold failures** — headline present, no CTA in first viewport
+- **99% failed ad signal continuity** — the page doesn't continue what the ad promised
+- **Page speed was only a problem on 29%** — yet it's the only thing most free tools measure
+
 The most common leak across 86 audits: **message match failure** (ad promises X, page headline says Y). Speed tools miss it. ChatGPT gives you "improve your headline" without identifying the gap.
 
 If you want to try it: https://nebulacomponents.com/audit (free, no signup, ~90 seconds)
