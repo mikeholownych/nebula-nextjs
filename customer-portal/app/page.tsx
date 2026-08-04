@@ -151,6 +151,9 @@ export default function Home() {
               <p className="mt-4 text-sm text-fg-muted">
                 When we have a real client outcome with dates, proof, and a way for you to verify it, it goes here.
               </p>
+              <p className="mt-3 text-xs text-fg-dim">
+                Last updated: <time dateTime="2026-08-04">August 2026</time>
+              </p>
             </div>
             <div className="rounded-2xl border border-border bg-bg-muted/30 p-6 font-mono text-sm">
               <p className="mb-4 text-xs text-fg-muted">
