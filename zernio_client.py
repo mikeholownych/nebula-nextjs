@@ -94,6 +94,7 @@ class ZernioClient:
         tags: Optional[list] = None,
         profile_id: Optional[str] = None,
         timezone: str = "UTC",
+        subreddit: Optional[str] = None,
     ) -> dict:
         """
         Create a post. SAFE BY DEFAULT: draft=True stores a draft and publishes
@@ -102,12 +103,15 @@ class ZernioClient:
         """
         if publish_now and scheduled_for:
             raise ZernioError("publish_now and scheduled_for are mutually exclusive")
+        platform_entry: dict[str, Any] = {"platform": platform, "accountId": account_id}
+        if subreddit:
+            platform_entry["platformSpecificData"] = {"subreddit": subreddit}
         body: dict[str, Any] = {
             "content": content,
             "isDraft": bool(draft),
             "publishNow": bool(publish_now),
             "timezone": timezone,
-            "platforms": [{"platform": platform, "accountId": account_id}],
+            "platforms": [platform_entry],
         }
         if scheduled_for:
             body["scheduledFor"] = scheduled_for

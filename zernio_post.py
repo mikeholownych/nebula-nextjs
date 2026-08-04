@@ -57,6 +57,7 @@ def main() -> int:
     p.add_argument("--content", help="post content")
     p.add_argument("--content-file", help="path to file with post content")
     p.add_argument("--title", help="optional title (LinkedIn)")
+    p.add_argument("--subreddit", help="Reddit only: subreddit to post to, e.g. ecommerce (no /r/ prefix)")
     p.add_argument("--schedule", help='future ISO timestamp to schedule, e.g. 2026-08-06T09:00:00Z')
     p.add_argument("--publish", action="store_true", help="publish immediately (requires --yes)")
     p.add_argument("--yes", action="store_true", help="confirm immediate publish")
@@ -104,6 +105,7 @@ def main() -> int:
         scheduled_for=scheduled,
         publish_now=publish_now,
         title=args.title or "",
+        subreddit=args.subreddit,
     )
 
     pid = post.get("post", {}).get("_id") or post.get("_id")
