@@ -33,7 +33,7 @@ from zernio_client import ZernioClient, ZernioError
 # Known connected account IDs (override via env if accounts change)
 ACCOUNT_IDS = {
     "linkedin": os.environ.get("ZERNIO_LINKEDIN_ACCOUNT_ID", "6a71436beb10586dadceb928"),
-    "reddit": os.environ.get("ZERNIO_REDDIT_ACCOUNT_ID", "6a71416deb10586dadce3a88"),
+    "bluesky": os.environ.get("ZERNIO_BLUESKY_ACCOUNT_ID", "6a716822eb10586dadd70840"),
 }
 PLATFORMS = sorted(ACCOUNT_IDS.keys())
 
