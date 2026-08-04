@@ -33,10 +33,13 @@ Nobody cites the leader's opinions; they cite the leader's **data and receipts**
 
 **What:** Every $97 Fix Pack and $1,497 retainer must produce a documented before/after: audit → leak found → fix → measured change. With an attribution standard (flagged Jul 26, not yet closed).
 
-**Status: NOT BUILT.**
-- Create `ops/outcomes/receipts/` ledger; each engagement records: client (consented), audit_id, leak found, fix, before/after score or metric, date, attribution.
-- 5-10 receipts = the "leaders sell receipts" proof layer. Converts the audit funnel (Marvlus: 27% audit-to-client via instant proof).
-- Publishable case studies derive from receipts, never before receipts exist.
+**Status: EXECUTED 2026-08-04 (mechanism ready; ledger empty until first paid engagement).**
+- Standard: `docs/outcomes/receipts/README.md` — attribution standard, score-based conclusion ladder (confirmed ≥ +1.0 / suggested +0.5–1.0 / no_change < 0.5 / decline ≤ -0.5 / insufficient_data), receipt lifecycle (draft → confirmed → published), triggers, and the rule that score receipts may never claim conversion lift (analytics method + SOP-005 required for conversion claims).
+- Template: `docs/outcomes/receipts/RECEIPT_TEMPLATE.md` (JSON schema + field rules).
+- Generator: `scripts/receipt_draft_from_monitor.py` — drafts score-based receipts from `monitored_pages.baseline_score` vs `last_score` + `monitoring_events`; connect/query timeouts, duplicate guard, `--dry-run`.
+- Tests: `tests/test_receipt_drafts.py` — 9 tests passing (ladder, ID sequencing, draft shape).
+- Verified end-to-end with a temp monitor row (4.0 → 6.5 = improvement_confirmed), then cleaned up DB + ledger. Runtime ledger: `ops/outcomes/receipts/receipts.jsonl` (gitignored, append-only, starts empty).
+- **Trigger wiring (pending first engagement):** Fix Pack delivered → draft immediately (baseline = delivered audit); monitor `improved` event after fix → run the script; retainer/agency completion → draft with both methods where possible.
 
 ### Play 3 — Win the phrase before FunnelCanary does
 
