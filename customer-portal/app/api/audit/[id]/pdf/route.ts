@@ -70,22 +70,26 @@ export async function GET(
     }
   }
 
-  // Fetch audit data
+  // Fetch audit data via platform API (same as /api/audit/[id])
   let auditData: {
     url: string; score: number; grade: string
     findings: AuditFinding[]; created_at: string; email: string
   } | null = null
 
+  const PLATFORM_API = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
   try {
-    const result = await pool.query(
-      `SELECT url, score, grade, findings, created_at, email
-       FROM audits WHERE id = $1 LIMIT 1`,
-      [auditId],
-    )
-    if (!result.rows.length) {
+    const res = await fetch(`${PLATFORM_API}/audit/${auditId}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      signal: AbortSignal.timeout(15_000),
+    })
+    if (res.status === 404) {
       return NextResponse.json({ error: 'Audit not found' }, { status: 404 })
     }
-    auditData = result.rows[0]
+    if (!res.ok) {
+      return NextResponse.json({ error: 'Audit service unavailable' }, { status: 503 })
+    }
+    auditData = await res.json()
   } catch {
     return NextResponse.json({ error: 'Database unavailable' }, { status: 503 })
   }

@@ -43,10 +43,10 @@ const nextConfig: NextConfig = {
   // Don't advertise the framework in responses
   poweredByHeader: false,
   // Enable gzip/brotli compression at the Next.js origin layer.
-  // Cloudflare sits in front but HTML pages have Cache-Control: no-transform
-  // (prevents CF email obfuscation), which also blocks CF-level compression.
-  // Enabling origin compression ensures HTML responses are compressed regardless.
   compress: true,
+  // Keep pdfkit external so its __dirname-based font paths resolve at runtime
+  // (bundling it rewrites __dirname to /ROOT which breaks font file lookups).
+  serverExternalPackages: ['pdfkit'],
   // 301/410 map for legacy static .html URLs indexed by Google (GSC 2026-07-21)
   // Frees crawl budget from dead URLs; preserves any query association on equity-bearing pages.
   // Rule: content pages → nearest current equivalent (301); true orphans → /gone (410).
