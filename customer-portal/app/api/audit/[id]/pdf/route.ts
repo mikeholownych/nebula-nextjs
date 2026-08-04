@@ -101,7 +101,7 @@ export async function GET(
   // Generate PDF
   let pdfBuffer: Buffer
   try {
-    pdfBuffer = generateAuditPDF({
+    pdfBuffer = await generateAuditPDF({
       auditId,
       url: auditData.url,
       score: auditData.score ?? 0,
@@ -116,7 +116,7 @@ export async function GET(
   }
 
   const filename = `nebula-audit-${auditId.slice(0, 8)}.pdf`
-  return new NextResponse(pdfBuffer as unknown as BodyInit, {
+  return new NextResponse(new Uint8Array(pdfBuffer), {
     status: 200,
     headers: {
       'Content-Type': 'application/pdf',

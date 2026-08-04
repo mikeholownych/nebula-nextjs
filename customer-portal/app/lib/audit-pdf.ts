@@ -70,22 +70,22 @@ function statusLabel(score: number): string {
   return 'FAIL'
 }
 
-export function generateAuditPDF(data: AuditReportData): Buffer {
-  const chunks: Buffer[] = []
-  const doc = new PDFDocument({
-    size: 'A4',
-    margins: { top: 48, bottom: 48, left: 48, right: 48 },
-    info: {
-      Title: `Nebula Audit Report — ${data.url}`,
-      Author: 'Nebula Components',
-      Subject: 'Landing Page Conversion Audit',
-      Keywords: '9-signal, landing page, conversion, audit',
-      Creator: 'nebulacomponents.com',
-    },
-  })
-  doc.on('data', (chunk: Buffer) => chunks.push(chunk))
+export function generateAuditPDF(data: AuditReportData): Promise<Buffer> {
+  return new Promise((resolve, reject) => {
+    const chunks: Buffer[] = []
+    const doc = new PDFDocument({
+      size: 'A4',
+      margins: { top: 48, bottom: 48, left: 48, right: 48 },
+      info: {
+        Title: `Nebula Audit Report — ${data.url}`,
+        Author: 'Nebula Components',
+        Subject: 'Landing Page Conversion Audit',
+        Keywords: '9-signal, landing page, conversion, audit',
+        Creator: 'nebulacomponents.com',
+      },
+    })
 
-  const W = 595 - 96  // A4 width minus margins
+    const W = 595 - 96  // A4 width minus margins
   const ACCENT = COLORS.accent
 
   // ── Page 1: Header ───────────────────────────────────────────────────────
@@ -284,7 +284,9 @@ export function generateAuditPDF(data: AuditReportData): Buffer {
       48, y, { width: W, align: 'center' },
     )
 
-  doc.end()
-
-  return Buffer.concat(chunks)
+    doc.on('data', (chunk: Buffer) => chunks.push(chunk))
+    doc.on('end', () => resolve(Buffer.concat(chunks)))
+    doc.on('error', reject)
+    doc.end()
+  })
 }
