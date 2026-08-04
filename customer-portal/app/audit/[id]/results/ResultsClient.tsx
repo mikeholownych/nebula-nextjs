@@ -282,11 +282,20 @@ function UnlockConfirmation({ emailSent, email, auditId }: { emailSent: boolean;
       )}
 
       {/* Share link — always shown after unlock */}
-      <div className="border-t border-border pt-6 flex items-center justify-between gap-4">
+      <div className="border-t border-border pt-6 flex items-center justify-between gap-4 flex-wrap">
         <p className="text-sm text-fg-muted">
           Send this report to your developer or agency
         </p>
-        <ShareButton auditId={auditId} />
+        <div className="flex items-center gap-3">
+          <a
+            href={`/api/audit/${auditId}/pdf`}
+            download
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-bg-muted/10 px-4 py-2 text-sm font-medium text-fg-muted transition-colors hover:border-accent hover:text-fg"
+          >
+            <span>↓</span> Export PDF
+          </a>
+          <ShareButton auditId={auditId} />
+        </div>
       </div>
     </Card>
   )
