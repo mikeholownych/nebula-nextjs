@@ -221,6 +221,40 @@ class Audit(Base):
         return f"<Audit {self.id} ({self.status})>"
 
 
+class GscConnection(Base):
+    """Google Search Console OAuth connection for a user.
+
+    One connection per user (unique on user_id).
+    Stores tokens needed to query the Search Analytics API on their behalf.
+    """
+
+    __tablename__ = "gsc_connections"
+    __table_args__ = (
+        Index("ix_gsc_connections_user_id", "user_id"),
+    )
+
+    id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    user_id: Mapped[UUID] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"),
+        nullable=False,
+        unique=True,
+    )
+    # TODO: encrypt access_token + refresh_token at rest (KMS / Fernet) before production
+    access_token: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    refresh_token: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    token_expiry: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    gsc_site_url: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    connected_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        nullable=False,
+        default=utcnow,
+        server_default=text("now()"),
+    )
+
+    def __repr__(self) -> str:
+        return f"<GscConnection user={self.user_id} site={self.gsc_site_url}>"
+
+
 class Invoice(Base):
     """Invoice record from Stripe."""
 

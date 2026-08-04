@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react'
 import type { WorkspaceAudit, AuditDetail } from './WorkspaceClient'
+import GscWidget from './gscWidget'
 
 // ── Helpers ───────────────────────────────────────────────────────────
 
@@ -83,7 +84,7 @@ function Sparkline({ points, width = 260, height = 64 }: { points: number[]; wid
   )
 }
 
-export function DashboardView({ audits, latestDetail }: { audits: WorkspaceAudit[]; latestDetail: AuditDetail | null }) {
+export function DashboardView({ audits, latestDetail, email }: { audits: WorkspaceAudit[]; latestDetail: AuditDetail | null; email?: string }) {
   const sorted = useMemo(
     () => [...audits].sort((a, b) => (b.created_at || '').localeCompare(a.created_at || '')),
     [audits]
@@ -165,6 +166,8 @@ export function DashboardView({ audits, latestDetail }: { audits: WorkspaceAudit
           <a href={`/audit?url=${encodeURIComponent(latest.url)}`} className="mt-5 inline-flex rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-bg hover:bg-gray-200">Run follow-up audit →</a>
         </section>
       </div>
+
+      {email && <GscWidget email={email} />}
     </div>
   )
 }

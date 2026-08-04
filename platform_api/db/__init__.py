@@ -3,6 +3,7 @@
 from .base import Base, metadata
 from .models import (
     AuditEvent,
+    GscConnection,
     Membership,
     Organization,
     Subscription,
@@ -26,6 +27,7 @@ __all__ = [
     "Membership",
     "Subscription",
     "AuditEvent",
+    "GscConnection",
     "init_db",
     "create_tables",
     "drop_tables",
