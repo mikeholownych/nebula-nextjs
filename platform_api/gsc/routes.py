@@ -284,7 +284,7 @@ async def gsc_metrics(
 
     encoded_site = urllib.parse.quote(site_url, safe="")
     api_base = (
-        f"https://searchconsole.googleapis.com/v1/sites/{encoded_site}/searchAnalytics/query"
+        f"https://www.googleapis.com/webmasters/v3/sites/{encoded_site}/searchAnalytics/query"
     )
     headers = {
         "Authorization": f"Bearer {access_token}",
