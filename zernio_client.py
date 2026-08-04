@@ -78,6 +78,59 @@ class ZernioClient:
         q = f"?profileId={urllib.parse.quote(profile_id)}" if profile_id else ""
         return self._request("GET", f"/accounts{q}").get("accounts", [])
 
+    # ── Reddit (authenticated via connected account; read-only) ──────────
+
+    def list_reddit_subreddits(self, account_id: str) -> list:
+        return self._request("GET", f"/accounts/{account_id}/reddit-subreddits").get("subreddits", [])
+
+    def search_reddit(
+        self,
+        account_id: str,
+        q: str,
+        subreddit: Optional[str] = None,
+        *,
+        sort: str = "new",
+        limit: int = 25,
+        restrict_sr: bool = False,
+        after: Optional[str] = None,
+    ) -> dict:
+        """
+        Search Reddit posts via the connected account (authenticated OAuth —
+        the compliant path; Reddit blocks anonymous datacenter scraping).
+        Rate limits: Reddit API is ~60 req/min; Zernio free tier is 60 req/min.
+        Keep call sites to <=1 req / 2s and limit to <=25 results.
+        """
+        params = {"accountId": account_id, "q": q, "sort": sort, "limit": str(limit)}
+        if subreddit:
+            params["subreddit"] = subreddit
+        if restrict_sr:
+            params["restrict_sr"] = "1"
+        if after:
+            params["after"] = after
+        qs = urllib.parse.urlencode(params)
+        return self._request("GET", f"/reddit/search?{qs}")
+
+    def get_reddit_feed(
+        self,
+        account_id: str,
+        subreddit: Optional[str] = None,
+        *,
+        sort: str = "hot",
+        limit: int = 25,
+        t: Optional[str] = None,
+        after: Optional[str] = None,
+    ) -> dict:
+        """Fetch a subreddit feed via the connected account (read-only)."""
+        params = {"accountId": account_id, "sort": sort, "limit": str(limit)}
+        if subreddit:
+            params["subreddit"] = subreddit
+        if t:
+            params["t"] = t
+        if after:
+            params["after"] = after
+        qs = urllib.parse.urlencode(params)
+        return self._request("GET", f"/reddit/feed?{qs}")
+
     # ── Posts ───────────────────────────────────────────────────────────
 
     def create_post(
