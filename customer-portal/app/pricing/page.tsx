@@ -3,13 +3,14 @@ import Link from 'next/link'
 import { getActiveFixPack, type FixPackPublicFact } from '@/app/lib/public-facts'
 import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
 import { Card, PageShell } from '@/components/ui'
+import MembershipGrid from './MembershipGrid'
 
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Landing Page Audit Pricing & One-Leak Self-Implementation Kit | Nebula',
+  title: 'Pricing — Memberships & One-Leak Self-Implementation Kit | Nebula',
   description:
-    'Free 9-signal landing page audit plus a $97 self-implementation kit for one selected finding.',
+    'Free 9-signal landing page audit, Pro/Growth/Agency memberships with monitoring and white-label reports, plus a $97 one-time self-implementation kit.',
   alternates: {
     canonical: 'https://nebulacomponents.com/pricing',
   },
@@ -100,10 +101,10 @@ export default function PricingPage() {
         />
       )}
       <PageShell title="Pricing" description="Only verified, currently available offers are shown.">
-        <div className="mx-auto max-w-4xl px-6 py-20">
+        <div className="mx-auto max-w-6xl px-6 py-20">
           <div className="mb-16 text-center">
             <p className="mx-auto mt-4 max-w-xl text-fg-muted">
-              No retainer. No undefined redesign. Pay once for one bounded implementation kit and apply it yourself.
+              Start free. Upgrade for continuous monitoring, team workspaces, or agency white-label. Need a single bounded fix? The $97 kit is one-time.
             </p>
             <p className="mt-3 text-sm text-fg-muted">
               Under 2 minutes · no signup · no sales call
@@ -128,6 +129,9 @@ export default function PricingPage() {
             </div>
           </section>
 
+          <MembershipGrid />
+
+          <h2 className="mt-16 mb-6 text-center text-2xl font-bold text-fg">Need one bounded fix instead?</h2>
           <div className="grid gap-8 md:grid-cols-2">
             <Card variant="bordered">
               <p className="mb-3 text-sm font-medium text-fg-muted">Free</p>

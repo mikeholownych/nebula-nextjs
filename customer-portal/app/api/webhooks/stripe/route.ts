@@ -6,6 +6,7 @@ import type { PoolClient } from 'pg'
 import { getPostHogClient, captureServerException } from '@/app/lib/posthog-server'
 import { pool } from '@/app/lib/db'
 import { isCanonicalFixPackReceipt } from '@/app/lib/public-facts'
+import { planFromStripePrice } from '@/app/lib/subscription-plans'
 
 const execFileAsync = promisify(execFile)
 
@@ -348,6 +349,93 @@ export async function POST(request: NextRequest) {
     // Invoice events do not carry the browser consent contract. Keep them in
     // Stripe/billing records, but do not send them to analytics without a
     // consented pseudonymous identity.
+  }
+
+  // ── Subscription lifecycle (Pro / Growth / Agency memberships) ──
+  if (
+    event.type === 'customer.subscription.created'
+    || event.type === 'customer.subscription.updated'
+    || event.type === 'customer.subscription.deleted'
+  ) {
+    const sub = event.data.object as Stripe.Subscription
+    const item = sub.items?.data?.[0]
+    const priceId = item?.price?.id
+    const resolved = priceId ? planFromStripePrice(priceId) : null
+
+    // Ignore subscriptions that are not Nebula membership plans.
+    if (resolved) {
+      let email: string | null = null
+      try {
+        const customer = await getStripeClient().customers.retrieve(
+          typeof sub.customer === 'string' ? sub.customer : sub.customer.id,
+        )
+        if (!('deleted' in customer) || !customer.deleted) {
+          email = (customer as Stripe.Customer).email ?? null
+        }
+      } catch (err) {
+        console.error('Failed to resolve subscription customer email:', err)
+      }
+
+      if (!email) {
+        // Without an email we cannot bind the subscription to a workspace.
+        // Record nothing but acknowledge so Stripe does not retry forever;
+        // the subscription remains authoritative in Stripe.
+        console.error('Subscription event without resolvable email:', sub.id)
+        return NextResponse.json({ received: true, unbound: true })
+      }
+
+      const status = event.type === 'customer.subscription.deleted'
+        ? 'canceled'
+        : sub.status
+      const periodStart = item?.current_period_start ?? null
+      const periodEnd = item?.current_period_end ?? null
+
+      try {
+        await pool.query(
+          `INSERT INTO subscriptions
+            (email, stripe_customer_id, stripe_subscription_id, plan, billing_interval,
+             status, livemode, current_period_start, current_period_end, cancel_at_period_end, updated_at)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, to_timestamp($8), to_timestamp($9), $10, NOW())
+           ON CONFLICT (stripe_subscription_id) DO UPDATE SET
+             plan = EXCLUDED.plan,
+             billing_interval = EXCLUDED.billing_interval,
+             status = EXCLUDED.status,
+             current_period_start = EXCLUDED.current_period_start,
+             current_period_end = EXCLUDED.current_period_end,
+             cancel_at_period_end = EXCLUDED.cancel_at_period_end,
+             updated_at = NOW()`,
+          [
+            email.toLowerCase(),
+            typeof sub.customer === 'string' ? sub.customer : sub.customer.id,
+            sub.id,
+            resolved.plan,
+            resolved.interval,
+            status,
+            event.livemode,
+            periodStart,
+            periodEnd,
+            sub.cancel_at_period_end ?? false,
+          ],
+        )
+      } catch (err) {
+        console.error('Failed to persist subscription — will let Stripe retry:', err)
+        return NextResponse.json({ error: 'Failed to record subscription' }, { status: 500 })
+      }
+
+      if (event.livemode && event.type === 'customer.subscription.created') {
+        const amount = item?.price?.unit_amount != null
+          ? `$${(item.price.unit_amount / 100).toFixed(2)}/${resolved.interval === 'annual' ? 'yr' : 'mo'}`
+          : 'unknown amount'
+        void sendSaleAlert(
+          `🔁 *NEW SUBSCRIPTION* — ${resolved.plan.toUpperCase()} — ${amount} — ${email}\nsubscription: ${sub.id}`,
+        )
+      }
+      if (event.livemode && event.type === 'customer.subscription.deleted') {
+        void sendSaleAlert(
+          `🔻 *SUBSCRIPTION CANCELED* — ${resolved.plan.toUpperCase()} — ${email}\nsubscription: ${sub.id}`,
+        )
+      }
+    }
   }
 
   return NextResponse.json({ received: true })

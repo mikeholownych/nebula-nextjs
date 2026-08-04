@@ -1,0 +1,17 @@
+{
+  "nebula-pro": {
+    "product": "prod_V0miNSuuHWjJIm",
+    "monthly": "price_1U0l9AEINR1kU9chtiA64BKd",
+    "annual": "price_1U0l9BEINR1kU9chItjep7v9"
+  },
+  "nebula-growth": {
+    "product": "prod_V0mijugkOqkcDJ",
+    "monthly": "price_1U0l9BEINR1kU9chHMT77i8i",
+    "annual": "price_1U0l9BEINR1kU9chdxMOIkr6"
+  },
+  "nebula-agency": {
+    "product": "prod_V0miqtrSEnPtiC",
+    "monthly": "price_1U0l9CEINR1kU9chAZGBoJHS",
+    "annual": "price_1U0l9CEINR1kU9chITjlRF0H"
+  }
+}
