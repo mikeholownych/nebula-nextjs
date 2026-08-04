@@ -44,7 +44,6 @@ function ClicksSparkline({ rows }: { rows: DailyRow[] }) {
       return `${x},${y}`
     })
     .join(' ')
-  const area = `M0,${H} L${pts.replace(/,/g, ' L').split(' L').slice(0).join(' L')} L${W},${H} Z`
 
   return (
     <svg

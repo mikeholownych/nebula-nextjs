@@ -14,7 +14,7 @@ function redirectTo(path: string): NextResponse {
   return NextResponse.redirect(new URL(path, SITE_URL))
 }
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     const upstream = await fetch(`${API_BASE}/api/auth/google/authorize`, {
       method: 'GET',
