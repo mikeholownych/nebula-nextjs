@@ -1,49 +1,71 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
+import { pool } from '@/app/lib/db'
 
-const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const auth = await requireWorkspaceUser(request)
+  if ('response' in auth) return auth.response
+  const { id } = await params
 
-/**
- * Monitor actions
- * PATCH /api/monitors/[id]  { cadence?, active? }
- * DELETE /api/monitors/[id]
- */
+  const mp = await pool.query(
+    `SELECT mp.*, s.stripe_subscription_id
+     FROM monitored_pages mp
+     JOIN subscriptions s ON s.id = mp.subscription_id
+     WHERE mp.id = $1 AND LOWER(mp.email) = $2`,
+    [parseInt(id, 10), auth.user.email],
+  )
+  if (!mp.rows.length) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+
+  const events = await pool.query(
+    `SELECT id, audit_id, score, grade, score_delta, alert_sent, checked_at
+     FROM monitoring_events WHERE monitored_page_id = $1
+     ORDER BY checked_at DESC LIMIT 20`,
+    [parseInt(id, 10)],
+  )
+  return NextResponse.json({ monitor: mp.rows[0], events: events.rows })
+}
+
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const auth = await requireWorkspaceUser(request)
   if ('response' in auth) return auth.response
   const { id } = await params
-  let body: unknown
-  try {
-    body = await request.json()
-  } catch {
-    return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
+
+  let body: { label?: string; interval_hours?: number; alert_threshold?: number; active?: boolean }
+  try { body = await request.json() } catch {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
-  try {
-    const res = await fetch(`${API_BASE}/audit/monitors/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...(body as Record<string, unknown>), email: auth.user.email }),
-      signal: AbortSignal.timeout(10_000),
-    })
-    const data = await res.json()
-    return NextResponse.json(data, { status: res.ok ? 200 : res.status })
-  } catch {
-    return NextResponse.json({ error: 'Monitor update failed' }, { status: 502 })
-  }
+
+  const updates: string[] = ['updated_at = NOW()']
+  const values: (string | number | boolean)[] = []
+
+  if (typeof body.label === 'string') { values.push(body.label); updates.push(`label = $${values.length}`) }
+  if (typeof body.interval_hours === 'number') { values.push(Math.max(24, Math.min(168, body.interval_hours))); updates.push(`check_interval_hours = $${values.length}`) }
+  if (typeof body.alert_threshold === 'number') { values.push(Math.max(1, Math.min(50, body.alert_threshold))); updates.push(`alert_threshold = $${values.length}`) }
+  if (typeof body.active === 'boolean') { values.push(body.active); updates.push(`active = $${values.length}`) }
+
+  if (updates.length === 1) return NextResponse.json({ error: 'Nothing to update' }, { status: 400 })
+
+  values.push(parseInt(id, 10)); values.push(auth.user.email)
+  const result = await pool.query(
+    `UPDATE monitored_pages SET ${updates.join(', ')}
+     WHERE id = $${values.length - 1} AND LOWER(email) = $${values.length}
+     RETURNING id, url, label, active, check_interval_hours, alert_threshold`,
+    values,
+  )
+  if (!result.rowCount) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+  return NextResponse.json({ monitor: result.rows[0] })
 }
 
-export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const auth = await requireWorkspaceUser(_request)
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const auth = await requireWorkspaceUser(request)
   if ('response' in auth) return auth.response
   const { id } = await params
-  try {
-    const res = await fetch(`${API_BASE}/audit/monitors/${id}`, {
-      method: 'DELETE',
-      signal: AbortSignal.timeout(10_000),
-    })
-    const data = await res.json()
-    return NextResponse.json(data, { status: res.ok ? 200 : res.status })
-  } catch {
-    return NextResponse.json({ error: 'Monitor delete failed' }, { status: 502 })
-  }
+
+  const result = await pool.query(
+    `UPDATE monitored_pages SET active = FALSE, updated_at = NOW()
+     WHERE id = $1 AND LOWER(email) = $2 RETURNING id`,
+    [parseInt(id, 10), auth.user.email],
+  )
+  if (!result.rowCount) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+  return NextResponse.json({ deleted: true })
 }

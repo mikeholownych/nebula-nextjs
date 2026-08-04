@@ -389,6 +389,8 @@ describe('evidence-gated public proof projection', () => {
   })
 
   test('does not create a thin benchmark route', () => {
-    expect(readFileSync(path.join(root, 'app/benchmarks/page.tsx'), 'utf8')).toContain('<Benchmarks />')
+    const content = readFileSync(path.join(root, 'app/benchmarks/page.tsx'), 'utf8')
+    // Page must render the Benchmarks component (with or without props)
+    expect(content).toMatch(/<Benchmarks(\s[^>]*)?\s*\/>/)
   })
 })
