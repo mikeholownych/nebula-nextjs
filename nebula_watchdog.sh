@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Nebula watchdog — runs every 5 min via cron
-# Checks: port 8766 (WP), cloudflared, webhook server (9000)
+# Checks: cloudflared, webhook server (9000)
 # Restarts anything dead. Logs to /home/mike/nebula/watchdog.log
 #
 # Removed 2026-07-24 (INC-0004/INC-0005): this used to also check port 8765
@@ -17,6 +17,10 @@
 # scripts/notify_production_health.py, which alerts on Telegram instead of
 # blindly restarting a service — a bad restart target here doesn't get a
 # second chance to cause a multi-hour outage.
+#
+# Removed 2026-08-04: port 8766 (blog-wordpress-1) restart block. The
+# build-in-public WordPress blog experiment is retired; content archived in
+# .legacy/blog-wordpress/. Do NOT re-add this check.
 set -euo pipefail
 
 LOG="/home/mike/nebula/watchdog.log"
@@ -28,13 +32,6 @@ check_port() {
 }
 
 log() { echo "[$(ts)] $*" >> "$LOG"; }
-
-# --- 8766 WordPress ---
-code=$(check_port 8766)
-if [[ "$code" == "000" ]]; then
-  log "RESTART blog-wordpress-1 docker container"
-  docker restart blog-wordpress-1 2>>"$LOG" || true
-fi
 
 # --- cloudflared ---
 if ! systemctl is-active --quiet cloudflared-tunnel; then

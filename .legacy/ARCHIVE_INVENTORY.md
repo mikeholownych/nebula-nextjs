@@ -4,6 +4,22 @@ Date: 2026-07-20 UTC
 Task: `t_a043bfba`
 Policy: preserve first; never delete untracked work without a paper trail.
 
+## Build-in-Public WordPress Blog — RETIRED 2026-08-04 UTC
+
+Experiment: `blog.nebulacomponents.shop` (build-in-public content experiment). Declared failed by owner; subdomain now 301-redirects to `nebulacomponents.com` (via `.shop` zone ruleset `b400928d85d046fb8776be0ffcb23237`). Full content archived below before the Docker stack was stopped.
+
+- Archive: `.legacy/blog-wordpress/`
+- Source: Docker stack `/home/mike/nebula/blog/docker-compose.yml` (containers `blog-wordpress-1` + `blog-db-1`, port 8766)
+- Contents: 10 published posts (Day 1 → Day 17 build logs + postmortems), 120KB MySQL dump, uploads
+- Files:
+  - `db/nebula_blog_full.sql` (120,317 bytes) — full MySQL dump of `nebula_blog`
+  - `content/posts.md` (33,390 bytes) — all 10 posts as readable markdown
+  - `content/posts_raw.txt` — raw tab-separated export
+  - `content/post_list.tsv` — title/date index
+  - `uploads/` — wp-content/uploads (2026/ dir, minimal media)
+- Restoration: `docker compose -f /home/mike/nebula/blog/docker-compose.yml up -d` restores a live stack; `db/nebula_blog_full.sql` restores content into MySQL.
+- Watchdog: `nebula_watchdog.sh` port-8766 restart block removed 2026-08-04 to stop reviving the retired stack.
+
 ## Baseline
 
 The reported “1196 changed/untracked paths” was confirmed as 11 tracked modifications plus 1182 untracked files (1193 current paths; Git's top-level summary collapsed the generated directories). Most untracked volume came from reproducible Citable audit runs and snapshots.
