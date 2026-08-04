@@ -323,7 +323,7 @@ async def gsc_metrics(
                 "startDate": start_date.isoformat(),
                 "endDate": end_date.isoformat(),
                 "dimensions": ["page"],
-                "rowLimit": 10,
+                "rowLimit": 500,
                 "orderBy": [{"fieldName": "clicks", "sortOrder": "DESCENDING"}],
             }
             pages_resp = await client.post(api_base, json=pages_payload, headers=headers)

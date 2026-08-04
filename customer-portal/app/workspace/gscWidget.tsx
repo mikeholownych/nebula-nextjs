@@ -99,9 +99,10 @@ export default function GscWidget({ email }: { email: string }) {
         if (cancelled) return
         setStatus(data)
         if (data.connected) {
-          const mRes = await fetch('/api/gsc/metrics?days=28')
-          if (!cancelled) {
-            if (mRes.ok) {
+          const siteUrl = data.site_url
+          if (siteUrl) {
+            const mRes = await fetch(`/api/gsc/metrics?days=28&site_url=${encodeURIComponent(siteUrl)}`)
+            if (!cancelled && mRes.ok) {
               const m: GscMetrics = await mRes.json()
               setMetrics(m)
             }

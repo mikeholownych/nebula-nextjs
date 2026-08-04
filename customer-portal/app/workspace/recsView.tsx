@@ -152,7 +152,13 @@ export default function RecsView({
     setError(null)
     try {
       const res = await fetch(`/api/recommendations?email=${encodeURIComponent(email)}`)
-      if (!res.ok) throw new Error('Failed to load recommendations')
+            if (!res.ok) {
+        if (res.status === 404) {
+          setRecs([])
+          return
+        }
+        throw new Error('Failed to load recommendations')
+      }
       const data = await res.json()
       setRecs(data.recommendations || [])
     } catch (e) {

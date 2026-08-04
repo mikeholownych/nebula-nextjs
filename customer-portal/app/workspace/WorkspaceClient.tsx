@@ -58,7 +58,9 @@ export default function WorkspaceClient() {
   const [error, setError] = useState<string | null>(null)
   const [audits, setAudits] = useState<WorkspaceAudit[] | null>(null)
   const [latestDetail, setLatestDetail] = useState<AuditDetail | null>(null)
-  const [tab, setTab] = useState<TabId>('dashboard')
+  const searchParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null
+  const initialTab = (searchParams?.get('tab') as TabId) || 'dashboard'
+  const [tab, setTab] = useState<TabId>(initialTab)
 
   const load = useCallback(async (targetEmail: string) => {
     setLoading(true)

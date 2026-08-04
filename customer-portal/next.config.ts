@@ -237,7 +237,7 @@ const nextConfig: NextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com",
               "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data:",
+              "img-src 'self' data: https://indieascent.com https://nicklaunches.com",
               "font-src 'self' data:",
               "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://us.posthog.com https://us.i.posthog.com https://cloudflareinsights.com",
               "frame-src 'none'",
