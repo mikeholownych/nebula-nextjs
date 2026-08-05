@@ -506,28 +506,66 @@ def score_audit(page):
         above_fold_fix = "Run rendered viewport inspection before treating source order as visual placement."
 
     # --- Ad-source artifact dimension ---
+    # Page-type context: a homepage or brand page is not a paid landing page.
+    # Scoring it as one produces false positives — no ad tracking on a homepage
+    # is the correct state, not a leak. Adjust scoring and messaging accordingly.
+    from urllib.parse import urlparse as _urlparse
+    _parsed_url = _urlparse(url) if url else None
+    _url_path = (_parsed_url.path.rstrip("/") if _parsed_url else "") or ""
+    _is_homepage = _url_path == "" or _url_path == "/"
+    _is_about = any(seg in _url_path.lower() for seg in ["/about", "/team", "/contact", "/blog", "/press", "/careers", "/legal", "/privacy", "/terms"])
+    _is_brand_page = _is_homepage or _is_about
+
     tracking_soup = BeautifulSoup(html_text, "html.parser")
     fb_pixel = bool(re.search(r'\bfbq\s*\(|connect\.facebook\.net/.+fbevents', lower))
-    ga4 = bool(re.search(r'\bgtag\s*\(|["\']g-[a-z0-9]{6,}["\']', lower))
+    ga4 = bool(re.search(r'\bgtag\s*\(|["\'`]g-[a-z0-9]{6,}["\']', lower))
     utm_links = bool(tracking_soup.find("a", href=re.compile(r"[?&]utm_(?:source|medium|campaign)=", re.IGNORECASE)))
     conversion_call = bool(re.search(r"(?:fbq|gtag)\s*\([^\n]{0,120}(?:purchase|generate_lead|conversion|completeregistration)", lower))
     signals_found = sum([fb_pixel, ga4, utm_links, conversion_call])
-    ad_signals_score = min(2 + 2 * signals_found, 10)
-    source_checks = [
-        (fb_pixel, "Facebook Pixel initializer"),
-        (ga4, "GA4 initializer/ID"),
-        (utm_links, "UTM-bearing link"),
-        (conversion_call, "explicit conversion call"),
-    ]
-    found_list = [name for flag, name in source_checks if flag]
-    missing_list = [name for flag, name in source_checks if not flag]
-    if found_list and missing_list:
-        ad_signals_issue = f"Static source artifacts found: {', '.join(found_list)}. Not observed: {', '.join(missing_list)}. Runtime firing remains unverified."
-    elif found_list:
-        ad_signals_issue = f"Four static source artifacts observed: {', '.join(found_list)}. Runtime firing remains unverified."
+
+    if _is_brand_page:
+        # On a homepage/brand page, GA4 is expected; pixel, UTM, and conversion
+        # calls are NOT expected and their absence is not a finding.
+        # Score on analytics presence alone (GA4 = full marks; nothing = low).
+        if ga4:
+            ad_signals_score = 8
+            ad_signals_issue = (
+                "Analytics (GA4) present in source. Facebook Pixel, UTM-bearing links, "
+                "and conversion calls are not expected on a homepage — their absence is correct, not a leak."
+            )
+            ad_signals_fix = (
+                "Verify GA4 fires on page load via browser devtools or Tag Assistant. "
+                "If running paid traffic to this homepage, add UTM parameters to ad destination URLs."
+            )
+        else:
+            ad_signals_score = 3
+            ad_signals_issue = (
+                "No analytics artifact observed in source HTML. "
+                "A homepage should carry at minimum a GA4 or equivalent measurement tag "
+                "so paid traffic can be attributed."
+            )
+            ad_signals_fix = (
+                "Add GA4 (or equivalent analytics) to the page. "
+                "Pixel and conversion calls belong on dedicated landing pages, not the homepage."
+            )
     else:
-        ad_signals_issue = "No recognized ad-tracking artifact observed in fetched source HTML; runtime/server-side tracking remains unverified."
-    ad_signals_fix = "Run consent-aware browser/network validation; add only tracking artifacts proven absent."
+        # Dedicated landing page — all four signals are expected.
+        ad_signals_score = min(2 + 2 * signals_found, 10)
+        source_checks = [
+            (fb_pixel, "Facebook Pixel initializer"),
+            (ga4, "GA4 initializer/ID"),
+            (utm_links, "UTM-bearing link"),
+            (conversion_call, "explicit conversion call"),
+        ]
+        found_list = [name for flag, name in source_checks if flag]
+        missing_list = [name for flag, name in source_checks if not flag]
+        if found_list and missing_list:
+            ad_signals_issue = f"Static source artifacts found: {', '.join(found_list)}. Not observed: {', '.join(missing_list)}. Runtime firing remains unverified."
+        elif found_list:
+            ad_signals_issue = f"Four static source artifacts observed: {', '.join(found_list)}. Runtime firing remains unverified."
+        else:
+            ad_signals_issue = "No recognized ad-tracking artifact observed in fetched source HTML; runtime/server-side tracking remains unverified."
+        ad_signals_fix = "Run consent-aware browser/network validation; add only tracking artifacts proven absent."
 
     # --- SEO Foundations dimension (naming conventions) ---
     _soup = BeautifulSoup(html_text, "html.parser") if html_text else None
