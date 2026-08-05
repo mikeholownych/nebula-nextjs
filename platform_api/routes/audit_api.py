@@ -5,7 +5,7 @@ FastAPI routes for audit processing (called by n8n workflows)
 
 from fastapi import APIRouter, BackgroundTasks, HTTPException, Query
 from pydantic import BaseModel, HttpUrl
-from typing import Optional
+from typing import List, Optional
 from uuid import UUID, uuid4
 import subprocess
 import json
@@ -965,6 +965,36 @@ async def get_team(email: str = Query(..., description="User email")):
 
 # ── Widget partners (Play 4: agencies as distribution layer) ────────────────
 # Declared BEFORE the /{audit_id} catch-all — same 422-as-UUID rule as /stats/*.
+
+class CreatePartnerRequest(BaseModel):
+    partner_id: str
+    name: str
+    email: Optional[str] = None
+    domains: List[str] = []
+    plan: str = "agency"
+    status: str = "active"
+
+
+@router.post("/partners")
+async def create_partner_route(req: CreatePartnerRequest):
+    """Create a widget partner (called by Stripe webhook on $497 purchase).
+
+    Internal only — not exposed to the public internet (Next.js calls this
+    server-side from the webhook handler via PLATFORM_API_URL).
+    """
+    created = await audit_db.create_partner(
+        partner_id=req.partner_id,
+        name=req.name,
+        domains=req.domains,
+        email=req.email,
+        plan=req.plan,
+        status=req.status,
+    )
+    if not created:
+        # Partner already exists — idempotent
+        return {"created": False, "partner_id": req.partner_id, "note": "already_exists"}
+    return {"created": True, "partner_id": req.partner_id}
+
 
 @router.get("/partners/{partner_id}")
 async def get_partner(partner_id: str):

@@ -71,6 +71,75 @@ async function restoreFailedFulfillment(
   }
 }
 
+/**
+ * Auto-provision a widget partner account on $497 agency checkout.
+ *
+ * The payment link collects `agency_domain` as a custom_field. We derive a
+ * partner_id from the email, create the partner in nebula_audit via the
+ * platform API, and send the embed snippet + onboarding via Telegram alert.
+ */
+async function provisionAgencyPartner(
+  session: Stripe.Checkout.Session,
+  email: string,
+): Promise<void> {
+  // Extract the domain from Stripe's custom_fields response
+  const customFields = (session as unknown as { custom_fields?: Array<{ key: string; text?: { value: string } }> }).custom_fields
+  const domainField = customFields?.find(f => f.key === 'agency_domain')
+  const rawDomain = domainField?.text?.value?.trim().toLowerCase() || ''
+
+  // Normalize: strip protocol, path, trailing slash
+  const domain = rawDomain
+    .replace(/^https?:\/\//, '')
+    .replace(/\/.*$/, '')
+    .replace(/\/$/, '')
+
+  if (!domain || !domain.includes('.')) {
+    throw new Error(`Invalid agency_domain: "${rawDomain}"`)
+  }
+
+  // Derive partner_id from email prefix (before @), slugified
+  const emailPrefix = email.split('@')[0]
+    .replace(/[^a-z0-9]/gi, '_')
+    .toLowerCase()
+    .slice(0, 32)
+  const partnerId = `agency_${emailPrefix}_${Date.now().toString(36)}`
+
+  const platformApiUrl = (process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001')
+    .replace(/\/$/, '')
+
+  const createResp = await fetch(`${platformApiUrl}/audit/partners`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      partner_id: partnerId,
+      name: email.split('@')[1]?.replace(/\.[^.]+$/, '') || email,
+      email,
+      domains: [domain],
+      plan: 'agency',
+      status: 'active',
+    }),
+    signal: AbortSignal.timeout(15_000),
+  })
+
+  if (!createResp.ok) {
+    const errBody = await createResp.text().catch(() => '')
+    throw new Error(`Platform API partner creation failed: ${createResp.status} ${errBody}`)
+  }
+
+  // Send onboarding Telegram alert with embed code
+  const embedCode = `<div id="nebula-audit-widget" data-partner="${partnerId}" data-theme="dark"></div>\n<script src="https://nebulacomponents.com/widget/audit.js" async></script>`
+  const alertMessage =
+    `🤝 *AGENCY PARTNER PROVISIONED*\n` +
+    `Email: ${email}\n` +
+    `Partner ID: \`${partnerId}\`\n` +
+    `Domain: ${domain}\n` +
+    `Stripe session: ${session.id}\n\n` +
+    `Embed code:\n\`\`\`\n${embedCode}\n\`\`\`\n\n` +
+    `Next: send welcome email with embed instructions.`
+
+  void sendSaleAlert(alertMessage)
+}
+
 function getStripeClient(): Stripe {
   return new Stripe(process.env.STRIPE_SECRET_KEY!, {
     apiVersion: '2026-06-24.dahlia',
@@ -127,6 +196,18 @@ export async function POST(request: NextRequest) {
     })
 
     if (!canFulfill) {
+      // ── Agency Partner auto-provision ($497 widget purchase) ──────────
+      const isAgencyPartner = session.metadata?.offer_key === 'agency_partner'
+      if (isAgencyPartner && customerEmail && event.livemode) {
+        try {
+          await provisionAgencyPartner(session, customerEmail)
+        } catch (err) {
+          console.error('Agency partner auto-provision failed:', err)
+          // Non-fatal — the purchase is still recorded below as "review" and
+          // the sale alert fires; manual provisioning remains possible.
+        }
+      }
+
       let inserted = false
       try {
         const insertResult = await pool.query(

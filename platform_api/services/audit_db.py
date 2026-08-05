@@ -1105,7 +1105,8 @@ class AuditDB:
 
     async def create_partner(self, partner_id: str, name: str,
                              domains: List[str], email: Optional[str] = None,
-                             plan: str = "agency") -> bool:
+                             plan: str = "agency",
+                             status: str = "active") -> bool:
         """Register a widget partner. Returns False if the id already exists."""
         await self.connect()
         async with self.pool.acquire() as conn:
@@ -1113,9 +1114,9 @@ class AuditDB:
                 await conn.execute(
                     """
                     INSERT INTO partners (id, name, email, plan, status, domains)
-                    VALUES ($1, $2, $3, $4, 'active', $5::jsonb)
+                    VALUES ($1, $2, $3, $4, $5, $6::jsonb)
                     """,
-                    partner_id, name, email, plan, json.dumps(domains or []),
+                    partner_id, name, email, plan, status, json.dumps(domains or []),
                 )
                 return True
             except Exception:
