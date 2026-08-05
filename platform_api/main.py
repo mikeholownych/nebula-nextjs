@@ -89,6 +89,7 @@ from platform_api.routes.verify_api import router as verify_router
 from platform_api.routes.dispatch_api import router as dispatch_router
 from platform_api.gsc.routes import router as gsc_router
 from platform_api.audit.schedule_routes import router as audit_schedule_router
+from platform_api.routes.report_routes import router as report_router
 
 app.include_router(auth_router, prefix="/api")
 app.include_router(orgs_router)
@@ -99,6 +100,7 @@ app.include_router(dispatch_router)
 app.include_router(health_router)
 app.include_router(gsc_router)
 app.include_router(audit_schedule_router)
+app.include_router(report_router)
 
 
 # Exception handlers - order matters

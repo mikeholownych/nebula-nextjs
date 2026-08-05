@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { pool } from '@/app/lib/db'
 
 const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 
@@ -16,12 +17,37 @@ interface Finding {
 
 interface SharedAudit {
   id: string
+  audit_id?: string
   url: string
   score: number
   grade: string
   findings: Finding[]
+  email?: string
   completed_at?: string | null
   created_at?: string
+}
+
+interface AgencyBranding {
+  agency_name?: string
+  agency_logo_url?: string
+}
+
+async function getAgencyBranding(email?: string): Promise<AgencyBranding | null> {
+  if (!email) return null
+  try {
+    const result = await pool.query(
+      'SELECT preferences FROM workspace_preferences WHERE email = $1',
+      [email.trim().toLowerCase()],
+    )
+    const prefs = result.rows[0]?.preferences
+    if (!prefs) return null
+    return {
+      agency_name: prefs.agency_name || undefined,
+      agency_logo_url: prefs.agency_logo_url || undefined,
+    }
+  } catch {
+    return null
+  }
 }
 
 function fmtDate(iso?: string | null) {
@@ -87,6 +113,10 @@ export default async function SharedPortalPage({
 
   if (!audit) notFound()
 
+  const branding = await getAgencyBranding(audit.email)
+  const auditId = audit.audit_id ?? audit.id
+  const pdfUrl = `/api/report/pdf?audit_id=${encodeURIComponent(auditId)}&share=${encodeURIComponent(token)}`
+
   const scoreColor = audit.score >= 7 ? 'text-emerald-400' : audit.score >= 5 ? 'text-amber-400' : 'text-red-400'
 
   return (
@@ -95,9 +125,21 @@ export default async function SharedPortalPage({
 
         {/* Header */}
         <div className="mb-12">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-emerald-400">
-            Audit Report · Shared via Nebula Components
-          </p>
+          {branding?.agency_name ? (
+            <div className="mb-3 flex items-center gap-3">
+              {branding.agency_logo_url && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={branding.agency_logo_url} alt={branding.agency_name} className="h-8 w-auto" />
+              )}
+              <p className="text-xs font-semibold uppercase tracking-widest text-emerald-400">
+                Prepared by {branding.agency_name}
+              </p>
+            </div>
+          ) : (
+            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-emerald-400">
+              Audit Report · Shared via Nebula Components
+            </p>
+          )}
           <h1 className="text-3xl font-bold text-white break-all">{audit.url}</h1>
           <p className="mt-2 text-sm text-gray-400">Audited {fmtDate(audit.completed_at ?? audit.created_at)}</p>
 
@@ -117,6 +159,16 @@ export default async function SharedPortalPage({
               <p className="text-5xl font-bold text-white">{audit.findings?.length ?? 0}</p>
             </div>
           </div>
+        </div>
+
+        {/* PDF download */}
+        <div className="mb-8">
+          <a
+            href={pdfUrl}
+            className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-2.5 text-sm font-semibold text-emerald-400 transition-colors hover:bg-emerald-500/20"
+          >
+            <span>↓</span> Download PDF report
+          </a>
         </div>
 
         {/* Disclosure */}
