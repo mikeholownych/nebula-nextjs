@@ -45,7 +45,7 @@ Nobody cites the leader's opinions; they cite the leader's **data and receipts**
 
 **What:** The category to own is **"conversion leak detection"** — not "audit" (Screaming Frog), not "optimization" (Unbounce). Use "leak" + "evidence" consistently across site, guides, widget, schema.
 
-**Status: PARTIAL.** "leak" language already in `/paid-traffic-leak-scorecard`, `/vs`, compare pages, `mobile-landing-page-audit`. FunnelCanary is trying to own "funnel leaks." We are ahead on content; content seizes the phrase. Standardize: audits = "leak detection," results = "leaks found," fixes = "leak repairs." Leak Index naming directly serves this.
+**Status: EXECUTED 2026-08-05.** "leak" language now standardized across all key surfaces: site-wide meta description, homepage hero, homepage final CTA, /audit page description + body copy. Combined with pre-existing usage in results page, widget ("leaking conversions"), Leak Index, teardown pages. The phrase "conversion leak detection" is now consistent across every buyer touchpoint. FunnelCanary uses "funnel leaks" — we own "conversion leak detection" which is more specific and search-query aligned.
 
 ### Play 4 — Agencies as the distribution layer
 
