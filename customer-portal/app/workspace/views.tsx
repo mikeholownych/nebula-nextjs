@@ -105,6 +105,17 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
   const latestUrl = latest ? displayUrl(latest.url) : '—'
   const auditedPages = new Set(audits.map((audit) => pathKey(audit.url))).size
 
+  // Revenue leak: sum of revenue_impact across findings
+  const totalLeak = useMemo(() => {
+    const findings = latestDetail?.findings || []
+    let sum = 0
+    for (const f of findings) {
+      if (f.revenue_impact) sum += f.revenue_impact
+    }
+    return sum
+  }, [latestDetail])
+  const hasCpc = totalLeak > 0
+
   if (!latest) {
     return (
       <div className="rounded-2xl border border-border bg-bg-elevated p-10 text-center shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
@@ -122,7 +133,15 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
         <MetricCard label="Latest score" value={`${Math.round(scoreOf(latest) * 10)}/100`} detail={delta === null ? 'Baseline established' : `${scoreOf(latest).toFixed(1)}/10 · ${delta >= 0 ? '+' : ''}${Number.isInteger(delta) ? delta : delta.toFixed(1)} since last audit`} tone={delta !== null && delta < 0 ? 'red' : 'dark'} />
         <MetricCard label="Critical findings" value={String(counts.critical)} detail={`${counts.warning} warnings · ${counts.advisory} advisory`} tone={counts.critical > 0 ? 'red' : 'dark'} />
         <MetricCard label="Audited pages" value={String(auditedPages)} detail={`${audits.length} total audit versions`} tone="dark" />
-        <MetricCard label="Last audit" value={fmtDate(latest.completed_at || latest.created_at)} detail={latest.grade ? `Grade ${latest.grade}` : 'Completed'} tone="dark" />
+        {hasCpc ? (
+          <MetricCard label="Est. Monthly Leak" value={`$${totalLeak.toLocaleString('en-US', { maximumFractionDigits: 0 })}`} detail="Based on your CPC settings" tone="red" />
+        ) : (
+          <section className="rounded-2xl border border-border bg-bg-elevated p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.13em] text-fg-dim">Est. Monthly Leak</p>
+            <p className="mt-4 text-lg font-semibold text-fg-muted">—</p>
+            <a href="/workspace?tab=settings" className="mt-2 inline-block text-xs font-semibold text-accent hover:underline">Set CPC in Settings →</a>
+          </section>
+        )}
       </div>
 
       <div className="grid gap-4 xl:grid-cols-[1.45fr_0.85fr]">

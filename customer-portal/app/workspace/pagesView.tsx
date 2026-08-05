@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import type { WorkspaceAudit } from './WorkspaceClient'
+import type { WorkspaceAudit, AuditDetail } from './WorkspaceClient'
 
 interface SitemapPage { url: string; lastmod?: string | null }
 
@@ -110,7 +110,7 @@ function ScoreBar({ score }: { score: number }) {
 
 // ── Main component ─────────────────────────────────────────────────────
 
-export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
+export default function PagesView({ audits, latestDetail }: { audits: WorkspaceAudit[]; latestDetail?: AuditDetail | null }) {
   const [search, setSearch] = useState('')
   const [keywords, setKeywords] = useState<Record<string, string>>({})
   const [sitemapPages, setSitemapPages] = useState<SitemapPage[]>([])
@@ -307,6 +307,20 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
     return uniquePages.filter((a) => a.url.toLowerCase().includes(q))
   }, [uniquePages, search])
 
+  // Compute revenue leak per page from latestDetail findings
+  const pageLeak = useMemo(() => {
+    const map: Record<string, number> = {}
+    if (!latestDetail?.findings) return map
+    const pageUrl = latestDetail.url
+    const key = pathKeyOf(pageUrl)
+    let total = 0
+    for (const f of latestDetail.findings) {
+      if (f.revenue_impact) total += f.revenue_impact
+    }
+    if (total > 0) map[key] = total
+    return map
+  }, [latestDetail])
+
   const isScored = (a: WorkspaceAudit) => a.status === 'completed' && a.score !== null
 
   if (audits.length === 0 && sitemapPages.length === 0) {
@@ -392,6 +406,7 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
                 <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Target Keyword</th>
                 <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Indexed</th>
                 <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Score</th>
+                <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Leak</th>
                 <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Last Audited</th>
                 <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Action</th>
                 <th className="pb-2 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Schedule</th>
@@ -400,7 +415,7 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
             <tbody>
               {filteredPages.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="py-8 text-center text-sm text-fg-muted">
+                  <td colSpan={8} className="py-8 text-center text-sm text-fg-muted">
                     No pages match your filter.
                   </td>
                 </tr>
@@ -454,6 +469,17 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
                         ) : (
                           <span className="text-fg-muted text-xs">—</span>
                         )}
+                      </td>
+                      <td className="py-3 pr-4">
+                        {(() => {
+                          const leak = pageLeak[key]
+                          if (!leak) return <span className="text-fg-muted text-xs">—</span>
+                          return (
+                            <span className="inline-flex items-center rounded-full border border-red-500/40 bg-red-500/10 px-2 py-0.5 text-[11px] font-semibold text-red-500">
+                              ${leak.toLocaleString('en-US', { maximumFractionDigits: 0 })}/mo
+                            </span>
+                          )
+                        })()}
                       </td>
                       <td className="py-3 pr-4 text-xs text-fg-muted whitespace-nowrap">
                         {fmtDate(a.completed_at || a.created_at)}

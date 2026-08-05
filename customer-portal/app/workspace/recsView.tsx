@@ -147,6 +147,19 @@ export default function RecsView({
   const [error, setError] = useState<string | null>(null)
   const [moving, setMoving] = useState<string | null>(null)
 
+  // Build a map of finding_key -> revenue_impact from latestDetail
+  const revenueMap = (() => {
+    const map: Record<string, number> = {}
+    if (latestDetail?.findings) {
+      for (const f of latestDetail.findings) {
+        if (f.key && f.revenue_impact) {
+          map[f.key] = f.revenue_impact
+        }
+      }
+    }
+    return map
+  })()
+
   const load = useCallback(async () => {
     setLoading(true)
     setError(null)
@@ -287,11 +300,18 @@ export default function RecsView({
                     >
                       <div className="flex items-start justify-between gap-2 mb-2">
                         <p className="text-sm font-medium text-fg">{rec.label}</p>
-                        <span
-                          className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-medium capitalize ${tone.cls}`}
-                        >
-                          {tone.label}
-                        </span>
+                        <div className="flex shrink-0 items-center gap-1.5">
+                          <span
+                            className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-medium capitalize ${tone.cls}`}
+                          >
+                            {tone.label}
+                          </span>
+                          {revenueMap[rec.finding_key] && (
+                            <span className="shrink-0 rounded-full border border-red-500/40 bg-red-500/10 px-2 py-0.5 text-[10px] font-semibold text-red-500">
+                              ${revenueMap[rec.finding_key].toLocaleString('en-US', { maximumFractionDigits: 0 })}/mo
+                            </span>
+                          )}
+                        </div>
                       </div>
                       <p className="text-xs text-fg-dim mb-1">
                         {domainOf(rec.url)} · impact {rec.impact.toFixed(1)} ·{' '}

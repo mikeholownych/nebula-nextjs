@@ -1020,7 +1020,7 @@ async def get_partner(partner_id: str):
 
 
 @router.get("/{audit_id}")
-async def get_audit(audit_id: str, share: Optional[str] = Query(default=None)):
+async def get_audit(audit_id: str, share: Optional[str] = Query(default=None), email: Optional[str] = Query(default=None)):
     """Fetch audit by ID from database.
 
     If `share` is provided, it must be that audit's actual share_token —
@@ -1029,6 +1029,9 @@ async def get_audit(audit_id: str, share: Optional[str] = Query(default=None)):
     requester and doesn't have the unlock cookie). A share token that
     doesn't match returns 404, same as a nonexistent audit, so this can't
     be used to probe which tokens are valid.
+
+    If `email` is provided, revenue_impact is computed per finding using
+    the user's avg_cpc from workspace_preferences.
     """
     try:
         from uuid import UUID
@@ -1044,6 +1047,40 @@ async def get_audit(audit_id: str, share: Optional[str] = Query(default=None)):
 
         if not audit:
             raise HTTPException(status_code=404, detail="Audit not found")
+
+        # Enrich findings with revenue_impact if user has CPC configured
+        if email and audit.get("findings"):
+            try:
+                from platform_api.audit.revenue_estimator import enrich_findings_with_revenue
+                await audit_db.connect()
+                async with audit_db.pool.acquire() as conn:
+                    row = await conn.fetchrow(
+                        "SELECT preferences FROM workspace_preferences WHERE email = $1",
+                        email.strip().lower(),
+                    )
+                if row and row["preferences"]:
+                    import json as _json
+                    prefs = row["preferences"] if isinstance(row["preferences"], dict) else _json.loads(row["preferences"])
+                    avg_cpc = prefs.get("avg_cpc")
+                    if avg_cpc and float(avg_cpc) > 0:
+                        # Estimate monthly visitors from GSC clicks if available, else default 100
+                        monthly_visitors = 100
+                        try:
+                            gsc_row = await conn.fetchrow(
+                                """SELECT SUM(clicks) as total_clicks
+                                   FROM gsc_connections
+                                   WHERE email = $1""",
+                                email.strip().lower(),
+                            )
+                            if gsc_row and gsc_row["total_clicks"]:
+                                monthly_visitors = int(gsc_row["total_clicks"] / 28 * 30)
+                        except Exception:
+                            pass
+                        enrich_findings_with_revenue(
+                            audit["findings"], monthly_visitors, float(avg_cpc)
+                        )
+            except Exception:
+                pass  # Revenue enrichment is best-effort
 
         return audit
 

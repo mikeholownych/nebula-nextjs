@@ -65,6 +65,9 @@ export default function SettingsView({ email }: { email: string }) {
   const [deleteDate, setDeleteDate] = useState<string | null>(null)
   const [exporting, setExporting] = useState(false)
   const [syncing, setSyncing] = useState(false)
+  const [avgCpc, setAvgCpc] = useState<string>('')
+  const [monthlyAdSpend, setMonthlyAdSpend] = useState<string>('')
+  const [savingRevenue, setSavingRevenue] = useState(false)
 
   function showToast(msg: string) {
     setToast(msg)
@@ -104,6 +107,9 @@ export default function SettingsView({ email }: { email: string }) {
           const serverPrefs = { ...defaultNotifPrefs(), ...data.preferences }
           setNotifPrefs(serverPrefs)
           window.localStorage.setItem(NOTIF_KEY, JSON.stringify(serverPrefs))
+          // Load revenue estimation fields
+          if (data.preferences.avg_cpc) setAvgCpc(String(data.preferences.avg_cpc))
+          if (data.preferences.monthly_ad_spend) setMonthlyAdSpend(String(data.preferences.monthly_ad_spend))
         }
         if (data.timezone) {
           setTimezone(data.timezone)
@@ -307,6 +313,74 @@ export default function SettingsView({ email }: { email: string }) {
               </button>
             )}
           </div>
+        </div>
+      </section>
+
+      {/* Revenue Estimation */}
+      <section>
+        <h2 className="mb-1 text-base font-semibold text-fg">Revenue Estimation</h2>
+        <p className="mb-4 text-sm text-fg-muted">Used to estimate $ impact of each finding.</p>
+        <div className="rounded-xl border border-border bg-bg-elevated px-5 py-5 space-y-4">
+          <div>
+            <label htmlFor="avg-cpc" className="block text-xs font-semibold uppercase tracking-wide text-fg-dim mb-2">
+              Average CPC ($)
+            </label>
+            <input
+              id="avg-cpc"
+              type="number"
+              min="0"
+              step="0.01"
+              placeholder="e.g. 2.50"
+              value={avgCpc}
+              onChange={(e) => setAvgCpc(e.target.value)}
+              className="w-full rounded-lg border border-border bg-bg-panel px-3 py-2 text-sm text-fg placeholder:text-fg-dim focus:border-accent focus:outline-none"
+            />
+          </div>
+          <div>
+            <label htmlFor="monthly-ad-spend" className="block text-xs font-semibold uppercase tracking-wide text-fg-dim mb-2">
+              Monthly Ad Spend ($) <span className="normal-case font-normal text-fg-dim">— optional</span>
+            </label>
+            <input
+              id="monthly-ad-spend"
+              type="number"
+              min="0"
+              step="1"
+              placeholder="e.g. 5000"
+              value={monthlyAdSpend}
+              onChange={(e) => setMonthlyAdSpend(e.target.value)}
+              className="w-full rounded-lg border border-border bg-bg-panel px-3 py-2 text-sm text-fg placeholder:text-fg-dim focus:border-accent focus:outline-none"
+            />
+          </div>
+          <button
+            onClick={async () => {
+              setSavingRevenue(true)
+              try {
+                await fetch('/api/workspace/preferences', {
+                  method: 'PATCH',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    email,
+                    preferences: {
+                      avg_cpc: avgCpc ? parseFloat(avgCpc) : null,
+                      monthly_ad_spend: monthlyAdSpend ? parseFloat(monthlyAdSpend) : null,
+                    },
+                  }),
+                })
+                showToast('Revenue settings saved')
+              } catch {
+                showToast('Failed to save — try again')
+              } finally {
+                setSavingRevenue(false)
+              }
+            }}
+            disabled={savingRevenue}
+            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:bg-accent-light transition-colors disabled:opacity-50"
+          >
+            {savingRevenue ? 'Saving…' : 'Save'}
+          </button>
+          <p className="text-xs text-fg-dim">
+            Your CPC is used to estimate the monthly revenue leak for each audit finding. You can update it anytime.
+          </p>
         </div>
       </section>
 
