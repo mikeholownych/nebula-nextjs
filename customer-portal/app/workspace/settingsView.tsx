@@ -71,6 +71,10 @@ export default function SettingsView({ email }: { email: string }) {
   const [agencyName, setAgencyName] = useState<string>('')
   const [agencyLogoUrl, setAgencyLogoUrl] = useState<string>('')
   const [savingBranding, setSavingBranding] = useState(false)
+  const [digestEnabled, setDigestEnabled] = useState<boolean>(true)
+  const [digestDay, setDigestDay] = useState<string>('monday')
+  const [slackWebhookUrl, setSlackWebhookUrl] = useState<string>('')
+  const [savingDigest, setSavingDigest] = useState(false)
 
   function showToast(msg: string) {
     setToast(msg)
@@ -116,6 +120,10 @@ export default function SettingsView({ email }: { email: string }) {
           // Load agency branding fields
           if (data.preferences.agency_name) setAgencyName(String(data.preferences.agency_name))
           if (data.preferences.agency_logo_url) setAgencyLogoUrl(String(data.preferences.agency_logo_url))
+          // Load weekly digest fields
+          if (data.preferences.digest_enabled !== undefined) setDigestEnabled(data.preferences.digest_enabled !== false)
+          if (data.preferences.digest_day) setDigestDay(String(data.preferences.digest_day))
+          if (data.preferences.slack_webhook_url) setSlackWebhookUrl(String(data.preferences.slack_webhook_url))
         }
         if (data.timezone) {
           setTimezone(data.timezone)
@@ -457,6 +465,83 @@ export default function SettingsView({ email }: { email: string }) {
 
       {/* Competitor Tracking */}
       <CompetitorSection showToast={showToast} />
+
+      {/* Weekly Digest */}
+      <section>
+        <h2 className="mb-1 text-base font-semibold text-fg">Weekly Digest</h2>
+        <p className="mb-4 text-sm text-fg-muted">Score changes and top actions, delivered on your schedule.</p>
+        <div className="rounded-xl border border-border bg-bg-elevated px-5 py-5 space-y-4">
+          <label htmlFor="digest-enabled" className="flex items-center gap-3 cursor-pointer">
+            <input
+              id="digest-enabled"
+              type="checkbox"
+              checked={digestEnabled}
+              onChange={(e) => setDigestEnabled(e.target.checked)}
+              className="h-4 w-4 rounded border-border accent-[#00c2a0]"
+            />
+            <span className="text-sm text-fg">Email me a weekly summary</span>
+          </label>
+          <div>
+            <label htmlFor="digest-day" className="block text-xs font-semibold uppercase tracking-wide text-fg-dim mb-2">
+              Delivery day
+            </label>
+            <select
+              id="digest-day"
+              value={digestDay}
+              onChange={(e) => setDigestDay(e.target.value)}
+              className="rounded-lg border border-border bg-bg-panel px-3 py-2 text-sm text-fg focus:border-accent focus:outline-none"
+            >
+              {['monday','tuesday','wednesday','thursday','friday','saturday','sunday'].map((d) => (
+                <option key={d} value={d}>{d.charAt(0).toUpperCase() + d.slice(1)}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label htmlFor="slack-webhook" className="block text-xs font-semibold uppercase tracking-wide text-fg-dim mb-2">
+              Slack webhook URL <span className="normal-case font-normal text-fg-dim">— optional</span>
+            </label>
+            <input
+              id="slack-webhook"
+              type="url"
+              placeholder="https://hooks.slack.com/services/…"
+              value={slackWebhookUrl}
+              onChange={(e) => setSlackWebhookUrl(e.target.value)}
+              className="w-full rounded-lg border border-border bg-bg-panel px-3 py-2 text-sm text-fg placeholder:text-fg-dim focus:border-accent focus:outline-none"
+            />
+          </div>
+          <button
+            onClick={async () => {
+              setSavingDigest(true)
+              try {
+                await fetch('/api/workspace/preferences', {
+                  method: 'PATCH',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    email,
+                    preferences: {
+                      digest_enabled: digestEnabled,
+                      digest_day: digestDay,
+                      slack_webhook_url: slackWebhookUrl.trim() || null,
+                    },
+                  }),
+                })
+                showToast('Digest preferences saved')
+              } catch {
+                showToast('Failed to save — try again')
+              } finally {
+                setSavingDigest(false)
+              }
+            }}
+            disabled={savingDigest}
+            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:bg-accent-light transition-colors disabled:opacity-50"
+          >
+            {savingDigest ? 'Saving…' : 'Save'}
+          </button>
+          <p className="text-xs text-fg-dim">
+            Digests include per-page score changes, new critical findings, and your top recommended action.
+          </p>
+        </div>
+      </section>
 
       {/* Timezone */}
       <section>
