@@ -22,7 +22,7 @@ Nobody cites the leader's opinions; they cite the leader's **data and receipts**
 
 **What:** Publish aggregate benchmark data from every audit run — scores by signal, failure rates, "the average landing page fails X of 9 conversion signals." This is the *citable* thing journalists, founders, and AI engines reference.
 
-**Status: PARTIALLY BUILT — EXECUTED 2026-08-04.**
+**Status: EXECUTED 2026-08-05.** All components live and verified: backend aggregates (`avg_failures_per_page`, `top_leak`, `generated_at`), Leak Index branding + methodology + JSON-LD Dataset schema, `/leak-index` 308 alias, footer link. Dataset at **105 audits** (avg 6.3/10, avg 4.5 leaks/page, Above Fold 100%, Ad Signals 99%) and grows with every audit + teardown batch. **Headline stat for distribution: 0 of 105 audited pages score above 8/10.**
 - Backend: `platform_api/services/audit_db.py::get_benchmarks()` — real aggregates from completed audits; `/audit/stats/benchmarks` live; 87 audits, avg 6.3/10, Above Fold failing 100%.
 - Frontend: `/benchmarks` page renders real data, empty state is honest, `/api/audit/stats/benchmarks` proxy (5-min revalidate), in sitemap.
 - **Done this sprint (2026-08-04):** branded as **The Landing Page Leak Index**; backend now returns `avg_failures_per_page` (4.4) + `top_leak` + `generated_at`; server-rendered data so crawlers see real numbers; **methodology section** (collection, pass standards, privacy, freshness); **JSON-LD Dataset + BreadcrumbList schema** for AI citation; `/leak-index` alias → 308 permanent redirect to `/benchmarks`; footer link relabeled "Leak Index". Deployed + verified live (title, H1, stat cards, distribution, methodology all render).
