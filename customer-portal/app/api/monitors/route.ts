@@ -20,19 +20,24 @@ export async function GET(request: NextRequest) {
   const auth = await requireWorkspaceUser(request)
   if ('response' in auth) return auth.response
 
-  const rows = await pool.query(
-    `SELECT
-       mp.id, mp.url, mp.label, mp.plan, mp.check_interval_hours,
-       mp.last_checked_at, mp.last_score, mp.last_grade,
-       mp.baseline_score, mp.baseline_grade, mp.alert_threshold, mp.active, mp.created_at,
-       mp.last_audit_id,
-       (SELECT score_delta FROM monitoring_events WHERE monitored_page_id = mp.id ORDER BY checked_at DESC LIMIT 1) AS last_delta
-     FROM monitored_pages mp
-     WHERE LOWER(mp.email) = $1 AND mp.active = TRUE
-     ORDER BY mp.created_at DESC`,
-    [auth.user.email],
-  )
-  return NextResponse.json({ monitors: rows.rows })
+  try {
+    const rows = await pool.query(
+      `SELECT
+         mp.id, mp.url, mp.label, mp.plan, mp.check_interval_hours,
+         mp.last_checked_at, mp.last_score, mp.last_grade,
+         mp.baseline_score, mp.baseline_grade, mp.alert_threshold, mp.active, mp.created_at,
+         mp.last_audit_id,
+         (SELECT score_delta FROM monitoring_events WHERE monitored_page_id = mp.id ORDER BY checked_at DESC LIMIT 1) AS last_delta
+       FROM monitored_pages mp
+       WHERE LOWER(mp.email) = $1 AND mp.active = TRUE
+       ORDER BY mp.created_at DESC`,
+      [auth.user.email],
+    )
+    return NextResponse.json({ monitors: rows.rows })
+  } catch (err) {
+    console.error('[monitors GET]', err)
+    return NextResponse.json({ error: 'Failed to fetch monitors' }, { status: 500 })
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -56,11 +61,13 @@ export async function POST(request: NextRequest) {
   }
   const url = parsed.href
 
-  // Resolve subscription
+  // Resolve subscription via user's organization membership
   const sub = await pool.query(
-    `SELECT id, plan FROM subscriptions
-     WHERE LOWER(email) = $1 AND status = 'active' AND livemode = TRUE
-     ORDER BY created_at DESC LIMIT 1`,
+    `SELECT s.id, s.plan FROM subscriptions s
+     JOIN memberships m ON m.organization_id = s.organization_id
+     JOIN users u ON u.id = m.user_id
+     WHERE LOWER(u.email) = $1 AND s.status = 'active' AND m.status = 'active'
+     ORDER BY s.created_at DESC LIMIT 1`,
     [auth.user.email],
   )
   if (!sub.rows.length) {

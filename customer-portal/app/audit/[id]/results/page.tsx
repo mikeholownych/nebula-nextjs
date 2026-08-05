@@ -1,4 +1,4 @@
-import { cookies } from 'next/headers'
+import { cookies, headers } from 'next/headers'
 import { notFound } from 'next/navigation'
 import ResultsClient from './ResultsClient'
 import { verifyAuditUnlock } from '@/app/lib/audit-unlock-token'
@@ -11,35 +11,46 @@ interface Props {
 const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
-/**
- * Server component — determines unlock state via two paths:
- *
- * 1. Cookie path  — the visitor submitted their email on this device.
- *    The httpOnly `audit_unlock_{id}` cookie was set by /api/audit/unlock.
- *
- * 2. Share-token path — a third party opened a ?share=<token> link.
- *    We verify the token against FastAPI server-side (never in the browser)
- *    so the token can't be brute-forced client-side.
- *
- * Both paths render the full ResultsClient with unlocked=true.
- * The share path also sets sharedView=true so the client can suppress
- * the email-gate form and magic-link offer.
- */
 export default async function ResultsPage({ params, searchParams }: Props) {
   const { id } = await params
   const { share } = await searchParams
 
   if (!UUID_RE.test(id)) notFound()
 
-  // --- Cookie unlock (own device) ---
   const cookieStore = await cookies()
+  const headersList = await headers()
+
+  // --- Path 1: Cookie unlock (visitor submitted their email on this device) ---
   const cookieUnlocked = verifyAuditUnlock(id, cookieStore.get(`audit_unlock_${id}`)?.value)
 
-  // --- Share-token unlock (third-party link) ---
+  // --- Path 2: Workspace session (logged-in user bypasses the email gate) ---
+  let sessionUnlocked = false
+  const cookie = headersList.get('cookie')
+  const authorization = headersList.get('authorization')
+  if (!cookieUnlocked && (cookie || authorization)) {
+    try {
+      const res = await fetch(`${API_BASE}/api/auth/me`, {
+        headers: {
+          ...(cookie ? { cookie } : {}),
+          ...(authorization ? { authorization } : {}),
+        },
+        cache: 'no-store',
+        signal: AbortSignal.timeout(3_000),
+      })
+      if (res.ok) {
+        const user = await res.json()
+        if (user.email) sessionUnlocked = true
+      }
+    } catch {
+      // auth service down — fall through to other unlock paths
+    }
+  }
+
+  // --- Path 3: Share-token unlock (third-party link) ---
   let sharedView = false
   let tokenUnlocked = false
 
-  if (share && /^[\w-]{10,64}$/.test(share)) {
+  if (!cookieUnlocked && !sessionUnlocked && share && /^[\w-]{10,64}$/.test(share)) {
     try {
       const res = await fetch(`${API_BASE}/audit/${id}?share=${encodeURIComponent(share)}`, {
         next: { revalidate: 0 },
@@ -51,7 +62,7 @@ export default async function ResultsPage({ params, searchParams }: Props) {
     }
   }
 
-  const unlocked = cookieUnlocked || tokenUnlocked
+  const unlocked = cookieUnlocked || sessionUnlocked || tokenUnlocked
 
   return (
     <ResultsClient
