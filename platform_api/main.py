@@ -92,6 +92,7 @@ from platform_api.audit.schedule_routes import router as audit_schedule_router
 from platform_api.routes.report_routes import router as report_router
 from platform_api.competitor.routes import router as competitor_router
 from platform_api.audit.rewrite_routes import router as rewrite_router
+from platform_api.experiment.routes import router as experiment_router
 
 app.include_router(auth_router, prefix="/api")
 app.include_router(orgs_router)
@@ -105,6 +106,7 @@ app.include_router(audit_schedule_router)
 app.include_router(report_router)
 app.include_router(competitor_router)
 app.include_router(rewrite_router)
+app.include_router(experiment_router)
 
 
 # Exception handlers - order matters

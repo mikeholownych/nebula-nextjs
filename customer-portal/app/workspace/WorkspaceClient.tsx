@@ -6,6 +6,7 @@ import CompareView from './compareView'
 import RecsView from './recsView'
 import PagesView from './pagesView'
 import ExperimentsView from './experimentsView'
+import ExperimentTrackerView from './experimentTrackerView'
 import BillingView from './billingView'
 import MonitoringView from './monitoringView'
 import DiffView from './diffView'
@@ -51,7 +52,7 @@ export interface AuditDetail {
   findings: AuditFinding[]
 }
 
-type TabId = 'dashboard' | 'audits' | 'projects' | 'pages' | 'diff' | 'compare' | 'recommendations' | 'experiments' | 'billing' | 'monitoring' | 'timeline' | 'reports' | 'achievements' | 'assistant' | 'team' | 'settings'
+type TabId = 'dashboard' | 'audits' | 'projects' | 'pages' | 'diff' | 'compare' | 'recommendations' | 'experiments' | 'tracker' | 'billing' | 'monitoring' | 'timeline' | 'reports' | 'achievements' | 'assistant' | 'team' | 'settings'
 
 export default function WorkspaceClient() {
   const [email, setEmail] = useState('')
@@ -165,6 +166,7 @@ export default function WorkspaceClient() {
       items: [
         { id: 'compare', label: 'Compare', icon: 'compare' },
         { id: 'experiments', label: 'Component Lab', icon: 'flask' },
+        { id: 'tracker', label: 'Experiments', icon: 'pulse' },
         { id: 'monitoring', label: 'Monitoring', icon: 'pulse' },
         { id: 'timeline', label: 'Timeline', icon: 'clock' },
       ],
@@ -267,6 +269,7 @@ export default function WorkspaceClient() {
           {tab === 'compare' && <CompareView audits={audits || []} />}
           {tab === 'recommendations' && <RecsView email={email} latestDetail={latestDetail} />}
           {tab === 'experiments' && <ExperimentsView email={email} />}
+          {tab === 'tracker' && <ExperimentTrackerView email={email} />}
           {tab === 'billing' && <BillingView email={email} />}
           {tab === 'monitoring' && <MonitoringView email={email} />}
           {tab === 'timeline' && <TimelineView email={email} />}
