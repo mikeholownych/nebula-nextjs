@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import { getPublicClaim } from '@/app/lib/evidence-atoms'
 import { auditWebApplicationSchema } from '@/app/lib/schema'
 import AuditForm from './AuditForm'
@@ -32,7 +33,27 @@ const SAMPLE_FINDINGS = [
   { key: 'ai_readiness', label: 'AI readiness', score: 7, pass: true, finding: 'OpenGraph tags and JSON-LD present. Page is citable.' },
 ]
 
-export default function AuditPage() {
+const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
+
+type AuditStats = { audit_count: number; avg_failures_per_page: number | null }
+
+async function getAuditStats(): Promise<AuditStats | null> {
+  try {
+    const res = await fetch(`${API_BASE}/audit/stats/benchmarks`, {
+      next: { revalidate: 300 },
+      signal: AbortSignal.timeout(8000),
+    })
+    if (!res.ok) return null
+    const data = (await res.json()) as AuditStats
+    if (!data.audit_count || data.audit_count < 50) return null
+    return data
+  } catch {
+    return null
+  }
+}
+
+export default async function AuditPage() {
+  const stats = await getAuditStats()
   const auditMethodClaim = getPublicClaim('claim-9-signal-diagnosis', {
     route: '/audit',
     slot: 'audit-method-summary',
@@ -84,6 +105,14 @@ export default function AuditPage() {
                   </li>
                 ))}
               </ul>
+              {stats && (
+                <p className="mt-6 border-l-2 border-accent pl-4 text-sm text-fg-muted">
+                  <span className="font-semibold text-fg">{stats.audit_count} landing pages analyzed</span>
+                  {stats.avg_failures_per_page != null && (
+                    <> — average {stats.avg_failures_per_page} conversion leaks per page. Live data from the <Link href="/benchmarks" className="text-accent hover:underline">Landing Page Leak Index</Link>.</>
+                  )}
+                </p>
+              )}
             </div>
 
           </div>
