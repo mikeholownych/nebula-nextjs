@@ -74,7 +74,7 @@ export default function Home() {
                 We scored our own landing page and published every finding. Now score yours.
               </h1>
               <p className="mt-6 max-w-lg text-lg leading-7 text-fg-muted">
-                Paste your URL. Nebula checks 9 conversion signals against your actual page and
+                Paste your URL. Nebula detects conversion leaks across 9 signals on your actual page and
                 returns a prioritized fix list. Free, no signup, takes under two minutes.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -560,10 +560,10 @@ export default function Home() {
         <section className="px-6 py-20 text-center">
           <div className="mx-auto max-w-xl">
             <h2 className="mb-3 text-2xl font-bold text-fg">
-              Run the audit before you spend another dollar.
+              Run the leak detection before you spend another dollar.
             </h2>
             <p className="mb-8 text-base text-fg-muted">
-              Free, no signup. Find the specific thing costing you conversions.
+              Free, no signup. Find the specific leak costing you conversions.
             </p>
             <Link
               href="/audit"

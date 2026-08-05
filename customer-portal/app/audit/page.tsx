@@ -6,11 +6,11 @@ import AuditForm from './AuditForm'
 
 export const metadata: Metadata = {
   title: 'Free Landing Page Audit: Find Conversion Friction | Nebula',
-  description: 'Run a free evidence-backed landing page audit. Discover observable conversion friction across message match, trust signals, mobile layout, and page speed.',
+  description: 'Free conversion leak detection for any landing page. Discovers observable conversion leaks across message match, trust signals, mobile layout, and page speed — evidence-backed, not opinions.',
   alternates: { canonical: 'https://nebulacomponents.com/audit' },
   openGraph: {
     title: 'Free Landing Page Audit: Find Conversion Friction | Nebula',
-    description: 'Run a free evidence-backed landing page audit. Discover observable conversion friction across message match, trust signals, mobile layout, and page speed.',
+    description: 'Free conversion leak detection for any landing page. Discovers observable conversion leaks across message match, trust signals, mobile layout, and page speed — evidence-backed, not opinions.',
     url: 'https://nebulacomponents.com/audit',
     siteName: 'Nebula Components',
     locale: 'en_US',
@@ -69,8 +69,8 @@ export default function AuditPage() {
                 See if the page is what&apos;s killing your ads.
               </h1>
               <p className="mt-4 max-w-lg text-lg leading-7 text-fg-muted">
-                Paste your URL. Get 9 conversion signals checked against your actual page.
-                See your score and initial findings before sharing an email.
+                Paste your URL. Leak detection runs 9 conversion signals against your actual page.
+                See your score and the leaks found before sharing an email.
               </p>
               <ul className="mt-6 space-y-2">
                 {[
