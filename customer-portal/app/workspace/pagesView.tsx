@@ -182,7 +182,7 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
       })
       .catch(() => {})
     return () => { cancelled = true }
-  }, [sitemapPages]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [sitemapPages])
 
   const handleSubmitIndex = async (url: string) => {
     setSubmitting((prev) => new Set(prev).add(url))
