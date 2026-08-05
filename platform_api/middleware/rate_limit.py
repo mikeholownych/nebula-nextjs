@@ -13,6 +13,7 @@ import time
 from typing import Callable, Optional
 
 from fastapi import HTTPException, Request, Response
+from fastapi.responses import JSONResponse
 from fastapi.routing import APIRoute
 from starlette.middleware.base import BaseHTTPMiddleware
 
@@ -87,10 +88,13 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         if not allowed:
             # Get TTL for retry-after header
             ttl = await self.redis.ttl(key)
-            raise HTTPException(
+            # Return a response directly — HTTPException raised inside
+            # BaseHTTPMiddleware.dispatch is not converted by FastAPI's
+            # exception handlers and surfaces as a 500.
+            return JSONResponse(
                 status_code=429,
-                detail=f"Rate limit exceeded. Retry in {ttl} seconds.",
-                headers={"Retry-After": str(ttl)}
+                content={"detail": f"Rate limit exceeded. Retry in {ttl} seconds."},
+                headers={"Retry-After": str(ttl)},
             )
         
         # Process request
