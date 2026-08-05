@@ -8,6 +8,7 @@ import PagesView from './pagesView'
 import ExperimentsView from './experimentsView'
 import BillingView from './billingView'
 import MonitoringView from './monitoringView'
+import DiffView from './diffView'
 import TimelineView from './timelineView'
 import ReportView from './reportView'
 import AchievementsView from './achievementsView'
@@ -49,7 +50,7 @@ export interface AuditDetail {
   findings: AuditFinding[]
 }
 
-type TabId = 'dashboard' | 'audits' | 'projects' | 'pages' | 'compare' | 'recommendations' | 'experiments' | 'billing' | 'monitoring' | 'timeline' | 'reports' | 'achievements' | 'assistant' | 'team' | 'settings'
+type TabId = 'dashboard' | 'audits' | 'projects' | 'pages' | 'diff' | 'compare' | 'recommendations' | 'experiments' | 'billing' | 'monitoring' | 'timeline' | 'reports' | 'achievements' | 'assistant' | 'team' | 'settings'
 
 export default function WorkspaceClient() {
   const [email, setEmail] = useState('')
@@ -154,6 +155,7 @@ export default function WorkspaceClient() {
         { id: 'audits', label: 'Audits', icon: 'scan' },
         { id: 'projects', label: 'Projects', icon: 'folder' },
         { id: 'pages', label: 'Pages', icon: 'map' },
+        { id: 'diff', label: 'Audit Diff', icon: 'diff' },
         { id: 'recommendations', label: 'Fix queue', icon: 'check' },
       ],
     },
@@ -260,6 +262,7 @@ export default function WorkspaceClient() {
           {tab === 'audits' && <AuditsView audits={audits || []} />}
           {tab === 'projects' && <ProjectsView audits={audits || []} />}
           {tab === 'pages' && <PagesView audits={audits || []} />}
+          {tab === 'diff' && <DiffView audits={audits || []} />}
           {tab === 'compare' && <CompareView audits={audits || []} />}
           {tab === 'recommendations' && <RecsView email={email} latestDetail={latestDetail} />}
           {tab === 'experiments' && <ExperimentsView email={email} />}

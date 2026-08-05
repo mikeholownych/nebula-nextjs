@@ -116,6 +116,27 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
   const [sitemapPages, setSitemapPages] = useState<SitemapPage[]>([])
   const [indexedStatus, setIndexedStatus] = useState<Record<string, { indexed: boolean; state?: string }>>({})
   const [submitting, setSubmitting] = useState<Set<string>>(new Set())
+  const [schedules, setSchedules] = useState<Record<string, { id: string; enabled: boolean }>>({})
+  const [schedulingUrl, setSchedulingUrl] = useState<Set<string>>(new Set())
+
+  // Fetch audit schedules on mount
+  useEffect(() => {
+    let cancelled = false
+    fetch('/api/audit/schedules')
+      .then(async (res) => {
+        if (!res.ok || cancelled) return
+        const data = await res.json()
+        if (data.schedules) {
+          const map: Record<string, { id: string; enabled: boolean }> = {}
+          for (const s of data.schedules) {
+            map[s.url] = { id: s.id, enabled: s.enabled }
+          }
+          if (!cancelled) setSchedules(map)
+        }
+      })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [])
 
   // Fetch sitemap URLs to discover all pages (not just audited ones)
   useEffect(() => {
@@ -176,6 +197,37 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
       }
     } catch { /* silent */ }
     setSubmitting((prev) => { const s = new Set(prev); s.delete(url); return s })
+  }
+
+  const handleScheduleToggle = async (url: string) => {
+    setSchedulingUrl((prev) => new Set(prev).add(url))
+    const existing = schedules[url]
+    try {
+      if (existing && existing.enabled) {
+        // Disable schedule
+        const res = await fetch('/api/audit/schedules', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url, interval_days: 7, enabled: false }),
+        })
+        if (res.ok) {
+          const data = await res.json()
+          setSchedules((prev) => ({ ...prev, [url]: { id: data.id, enabled: false } }))
+        }
+      } else {
+        // Enable/create schedule
+        const res = await fetch('/api/audit/schedules', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url, interval_days: 7, enabled: true }),
+        })
+        if (res.ok) {
+          const data = await res.json()
+          setSchedules((prev) => ({ ...prev, [url]: { id: data.id, enabled: true } }))
+        }
+      }
+    } catch { /* silent */ }
+    setSchedulingUrl((prev) => { const s = new Set(prev); s.delete(url); return s })
   }
 
   // Deduplicate by pathKey, keep most recent audit per unique page
@@ -341,13 +393,14 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
                 <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Indexed</th>
                 <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Score</th>
                 <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Last Audited</th>
-                <th className="pb-2 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Action</th>
+                <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Action</th>
+                <th className="pb-2 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Schedule</th>
               </tr>
             </thead>
             <tbody>
               {filteredPages.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="py-8 text-center text-sm text-fg-muted">
+                  <td colSpan={7} className="py-8 text-center text-sm text-fg-muted">
                     No pages match your filter.
                   </td>
                 </tr>
@@ -405,7 +458,7 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
                       <td className="py-3 pr-4 text-xs text-fg-muted whitespace-nowrap">
                         {fmtDate(a.completed_at || a.created_at)}
                       </td>
-                      <td className="py-3">
+                      <td className="py-3 pr-4">
                         {scored ? (
                           <a
                             href={`/audit/${a.id}/results`}
@@ -421,6 +474,33 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
                             Run audit
                           </a>
                         )}
+                      </td>
+                      <td className="py-3">
+                        {(() => {
+                          const sched = schedules[a.url]
+                          const isScheduling = schedulingUrl.has(a.url)
+                          if (isScheduling) {
+                            return <span className="text-[11px] text-fg-dim">…</span>
+                          }
+                          if (sched && sched.enabled) {
+                            return (
+                              <button
+                                onClick={() => handleScheduleToggle(a.url)}
+                                className="inline-flex items-center rounded-full bg-[#00c2a0]/10 px-2 py-0.5 text-[11px] font-medium text-[#00c2a0] hover:bg-[#00c2a0]/20 transition-colors"
+                              >
+                                Weekly ✓
+                              </button>
+                            )
+                          }
+                          return (
+                            <button
+                              onClick={() => handleScheduleToggle(a.url)}
+                              className="inline-flex items-center rounded-full border border-border bg-bg-panel px-2 py-0.5 text-[11px] font-medium text-fg-muted hover:bg-bg-elevated transition-colors"
+                            >
+                              Schedule
+                            </button>
+                          )
+                        })()}
                       </td>
                     </tr>
                   )
