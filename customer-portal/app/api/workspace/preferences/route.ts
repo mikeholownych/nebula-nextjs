@@ -5,6 +5,10 @@ import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
 /**
  * GET /api/workspace/preferences?email=...
  * PATCH /api/workspace/preferences  { email, preferences, timezone }
+ *
+ * preferences JSONB may contain:
+ *   regressionAlerts, weeklyDigest (notification booleans)
+ *   avg_cpc, monthly_ad_spend (revenue estimation numbers)
  */
 
 export async function GET(request: NextRequest) {
@@ -40,8 +44,24 @@ export async function PATCH(request: NextRequest) {
       timezone?: string
     }
 
+    // Merge incoming preferences with existing to preserve fields not in this patch
+    let mergedPrefs: Record<string, unknown> = { regressionAlerts: true, weeklyDigest: false }
+    try {
+      const existing = await pool.query(
+        'SELECT preferences FROM workspace_preferences WHERE email = $1',
+        [auth.user.email]
+      )
+      if (existing.rows.length > 0 && existing.rows[0].preferences) {
+        mergedPrefs = { ...mergedPrefs, ...existing.rows[0].preferences }
+      }
+    } catch {
+      // Use defaults if lookup fails
+    }
 
-    const prefs = preferences ?? { regressionAlerts: true, weeklyDigest: false }
+    if (preferences) {
+      mergedPrefs = { ...mergedPrefs, ...preferences }
+    }
+
     const tz = timezone ?? 'UTC'
 
     await pool.query(
@@ -51,10 +71,10 @@ export async function PATCH(request: NextRequest) {
          preferences = $2,
          timezone = $3,
          updated_at = now()`,
-      [auth.user.email, JSON.stringify(prefs), tz]
+      [auth.user.email, JSON.stringify(mergedPrefs), tz]
     )
 
-    return NextResponse.json({ ok: true, preferences: prefs, timezone: tz })
+    return NextResponse.json({ ok: true, preferences: mergedPrefs, timezone: tz })
   } catch (err) {
     console.error('[Preferences] PATCH failed:', err)
     return NextResponse.json({ error: 'Failed to save preferences' }, { status: 500 })

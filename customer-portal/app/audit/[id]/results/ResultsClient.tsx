@@ -6,6 +6,7 @@ import posthog from '@/app/lib/posthog-browser'
 import { analyticsHeaders } from '@/app/lib/client-analytics'
 import { parseAuditResult, type AuditResult, type Finding } from './auditResultSchema'
 import { getDisease, diseaseTierClass, complexityBadge, extractSerpData } from './diseases'
+import RewritePreview from './RewritePreview'
 import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
 import {
   REPORT_NAVIGATION,
@@ -793,6 +794,17 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
   return (
     <main id="main-content" className="min-h-screen bg-bg px-6 py-12 pt-24">
       <div className="mx-auto max-w-5xl">
+        {unlocked && !sharedView && (
+          <div className="mb-4 flex justify-end">
+            <a
+              href={`/api/report/pdf?audit_id=${encodeURIComponent(auditId)}`}
+              download
+              className="inline-flex items-center gap-2 rounded-lg border border-border bg-bg-muted/10 px-4 py-2 text-sm font-medium text-fg-muted transition-colors hover:border-accent hover:text-fg"
+            >
+              <span>↓</span> Download PDF
+            </a>
+          </div>
+        )}
         <ReportTabs active={activeTab} onSelect={setActiveTab} />
 
         {activeTab === 'overview' && (
@@ -908,6 +920,13 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
 
                     {/* Fix Preview — sentence 1 free, rest locked behind $97 */}
                     <FixPreview finding={finding} unlocked={unlocked} />
+
+                    {/* AI Rewrite Preview — first rewrite free, rest behind $97 Fix Pack */}
+                    <RewritePreview
+                      auditId={auditId}
+                      findingKey={finding.key}
+                      findingCount={results.findings.length}
+                    />
 
                     {/* Evidence block — shown when audit engine provides measurement data */}
                     {finding.evidence && (
