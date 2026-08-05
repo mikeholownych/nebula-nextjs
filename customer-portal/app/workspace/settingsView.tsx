@@ -455,6 +455,9 @@ export default function SettingsView({ email }: { email: string }) {
         </div>
       </section>
 
+      {/* Competitor Tracking */}
+      <CompetitorSection showToast={showToast} />
+
       {/* Timezone */}
       <section>
         <h2 className="mb-1 text-base font-semibold text-fg">Timezone</h2>
@@ -480,5 +483,159 @@ export default function SettingsView({ email }: { email: string }) {
         </div>
       </section>
     </div>
+  )
+}
+
+// ── Competitor Tracking ───────────────────────────────────────────────
+
+interface TrackedCompetitor {
+  id: string
+  url: string
+  label: string | null
+  last_score: number | null
+  last_audited_at: string | null
+}
+
+const MAX_COMPETITORS = 3
+
+function CompetitorSection({ showToast }: { showToast: (msg: string) => void }) {
+  const [competitors, setCompetitors] = useState<TrackedCompetitor[]>([])
+  const [loaded, setLoaded] = useState(false)
+  const [url, setUrl] = useState('')
+  const [label, setLabel] = useState('')
+  const [adding, setAdding] = useState(false)
+  const [deletingId, setDeletingId] = useState<string | null>(null)
+
+  const loadCompetitors = useCallback(async () => {
+    try {
+      const res = await fetch('/api/competitors', { cache: 'no-store' })
+      if (res.ok) {
+        const data = await res.json()
+        setCompetitors(data.competitors || [])
+      }
+    } catch {
+      // Silent — section just shows empty state
+    } finally {
+      setLoaded(true)
+    }
+  }, [])
+
+  useEffect(() => {
+    loadCompetitors()
+  }, [loadCompetitors])
+
+  async function handleAdd() {
+    const trimmed = url.trim()
+    if (!trimmed.startsWith('http://') && !trimmed.startsWith('https://')) {
+      showToast('Enter a valid URL (https://…)')
+      return
+    }
+    setAdding(true)
+    try {
+      const res = await fetch('/api/competitors', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: trimmed, label: label.trim() || null }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (res.ok) {
+        setUrl('')
+        setLabel('')
+        showToast('Competitor added — first audit running')
+        await loadCompetitors()
+      } else {
+        showToast(data.detail || data.error || 'Failed to add competitor')
+      }
+    } catch {
+      showToast('Failed to add — try again')
+    } finally {
+      setAdding(false)
+    }
+  }
+
+  async function handleDelete(id: string) {
+    setDeletingId(id)
+    try {
+      const res = await fetch(`/api/competitors/${id}`, { method: 'DELETE' })
+      if (res.ok) {
+        setCompetitors((prev) => prev.filter((c) => c.id !== id))
+        showToast('Competitor removed')
+      } else {
+        showToast('Delete failed')
+      }
+    } catch {
+      showToast('Delete failed')
+    } finally {
+      setDeletingId(null)
+    }
+  }
+
+  const atMax = competitors.length >= MAX_COMPETITORS
+
+  return (
+    <section>
+      <h2 className="mb-1 text-base font-semibold text-fg">Competitor Tracking</h2>
+      <p className="mb-4 text-sm text-fg-muted">
+        Benchmark your score against up to {MAX_COMPETITORS} competitor pages. Re-audited monthly.
+      </p>
+      <div className="rounded-xl border border-border bg-bg-elevated divide-y divide-border">
+        {loaded && competitors.length === 0 && (
+          <p className="px-5 py-4 text-sm text-fg-dim">No competitors tracked yet.</p>
+        )}
+        {competitors.map((c) => (
+          <div key={c.id} className="flex items-center justify-between gap-4 px-5 py-4">
+            <div className="min-w-0">
+              <p className="truncate text-sm font-medium text-fg">{c.label || c.url}</p>
+              <p className="truncate text-xs text-fg-dim">{c.url}</p>
+            </div>
+            <div className="flex shrink-0 items-center gap-4">
+              <span className="text-sm font-semibold text-fg">
+                {c.last_score !== null ? `${Math.round(c.last_score)}/100` : 'Audit pending'}
+              </span>
+              <button
+                onClick={() => handleDelete(c.id)}
+                disabled={deletingId === c.id}
+                className="rounded-lg border border-danger/30 bg-bg-elevated px-3 py-1.5 text-xs font-semibold text-danger transition-colors hover:bg-danger-dim disabled:opacity-50"
+              >
+                {deletingId === c.id ? 'Removing…' : 'Remove'}
+              </button>
+            </div>
+          </div>
+        ))}
+
+        <div className="px-5 py-4">
+          <div className="grid gap-3 sm:grid-cols-[1.4fr_1fr]">
+            <input
+              type="url"
+              placeholder="https://competitor.com/landing-page"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              disabled={atMax}
+              className="w-full rounded-lg border border-border bg-bg-panel px-3 py-2 text-sm text-fg placeholder:text-fg-dim focus:border-accent focus:outline-none disabled:opacity-50"
+            />
+            <input
+              type="text"
+              placeholder="Label (optional, e.g. Competitor A)"
+              value={label}
+              onChange={(e) => setLabel(e.target.value)}
+              disabled={atMax}
+              className="w-full rounded-lg border border-border bg-bg-panel px-3 py-2 text-sm text-fg placeholder:text-fg-dim focus:border-accent focus:outline-none disabled:opacity-50"
+            />
+          </div>
+          <div className="mt-3 flex items-center justify-between">
+            <p className="text-xs text-fg-dim">
+              Max {MAX_COMPETITORS} competitors{atMax ? ' — remove one to add another' : ''}
+            </p>
+            <button
+              onClick={handleAdd}
+              disabled={adding || atMax || !url.trim()}
+              className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:bg-accent-light transition-colors disabled:opacity-50"
+            >
+              {adding ? 'Adding…' : 'Track competitor'}
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { WorkspaceAudit, AuditDetail } from './WorkspaceClient'
 import GscWidget from './gscWidget'
 
@@ -144,6 +144,8 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
         )}
       </div>
 
+      <CompetitorCard />
+
       <div className="grid gap-4 xl:grid-cols-[1.45fr_0.85fr]">
         <section className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
           <div className="flex flex-wrap items-start justify-between gap-4">
@@ -193,6 +195,93 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
 
 function MetricCard({ label, value, detail, tone }: { label: string; value: string; detail: string; tone: 'dark' | 'red' }) {
   return <section className="rounded-2xl border border-border bg-bg-elevated p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]"><p className="text-xs font-semibold uppercase tracking-[0.13em] text-fg-dim">{label}</p><p className={`mt-4 text-3xl font-semibold tracking-[-0.04em] ${tone === 'red' ? 'text-[#b33d38]' : 'text-fg'}`}>{value}</p><p className="mt-2 truncate text-xs text-[#888881]">{detail}</p></section>
+}
+
+// ── Competitor benchmark card ─────────────────────────────────────────
+
+interface CompetitorComparison {
+  your_score: number | null
+  competitors: {
+    url: string
+    label: string | null
+    last_score: number | null
+    last_audited_at: string | null
+  }[]
+}
+
+function CompetitorCard() {
+  const [data, setData] = useState<CompetitorComparison | null>(null)
+  const [loaded, setLoaded] = useState(false)
+
+  useEffect(() => {
+    fetch('/api/competitors/comparison', { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => setData(d))
+      .catch(() => setData(null))
+      .finally(() => setLoaded(true))
+  }, [])
+
+  if (!loaded) {
+    return (
+      <section className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-fg-dim">You vs Competitors</p>
+        <p className="mt-4 text-sm text-fg-dim">Loading benchmark…</p>
+      </section>
+    )
+  }
+
+  const competitors = data?.competitors || []
+  const yourScore = data?.your_score ?? null
+
+  return (
+    <section className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-fg-dim">You vs Competitors</p>
+          <h2 className="mt-2 text-lg font-semibold tracking-[-0.02em] text-fg">Benchmark</h2>
+        </div>
+        {yourScore !== null && (
+          <div className="text-right">
+            <span className="text-4xl font-semibold tracking-[-0.05em] text-[#00c2a0]">{Math.round(yourScore)}</span>
+            <span className="ml-1 text-sm text-fg-dim">/100 · you</span>
+          </div>
+        )}
+      </div>
+
+      {competitors.length === 0 ? (
+        <div className="mt-4">
+          <p className="text-sm text-fg-muted">Track up to 3 competitor pages and see how your score stacks up.</p>
+          <a href="/workspace?tab=settings" className="mt-2 inline-block text-sm font-semibold text-[#00c2a0] hover:underline">
+            Add competitors in Settings →
+          </a>
+        </div>
+      ) : (
+        <ul className="mt-5 space-y-3">
+          {competitors.slice(0, 3).map((c) => {
+            const name = c.label || displayUrl(c.url)
+            // Your advantage over this competitor: green +N when you're ahead, red -N when behind
+            const advantage = yourScore !== null && c.last_score !== null ? Math.round(yourScore - c.last_score) : null
+            return (
+              <li key={c.url} className="flex items-center justify-between rounded-xl bg-bg px-4 py-3">
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-medium text-fg">{name}</p>
+                  <p className="text-xs text-fg-dim">{c.last_audited_at ? `Audited ${fmtDate(c.last_audited_at)}` : 'Audit pending'}</p>
+                </div>
+                <div className="ml-4 flex shrink-0 items-center gap-3">
+                  <span className="text-lg font-semibold text-fg">{c.last_score !== null ? Math.round(c.last_score) : '—'}</span>
+                  {advantage !== null && (
+                    <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${advantage >= 0 ? 'bg-[#e7f4eb] text-[#28733e]' : 'bg-[#fbe8e7] text-[#a43a35]'}`}>
+                      {advantage >= 0 ? `+${advantage}` : `-${Math.abs(advantage)}`} vs you
+                    </span>
+                  )}
+                </div>
+              </li>
+            )
+          })}
+        </ul>
+      )}
+    </section>
+  )
 }
 
 // ── Audits (immutable versions) ───────────────────────────────────────

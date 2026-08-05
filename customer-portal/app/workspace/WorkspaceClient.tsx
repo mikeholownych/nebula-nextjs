@@ -38,6 +38,7 @@ export interface AuditFinding {
   issue?: string
   fix?: string
   evidence?: unknown
+  revenue_impact?: number
 }
 
 export interface AuditDetail {
@@ -76,7 +77,7 @@ export default function WorkspaceClient() {
       setAudits(list)
 
       if (list.length > 0) {
-        const detailRes = await fetch(`/api/audit/${list[0].id}`)
+        const detailRes = await fetch(`/api/audit/${list[0].id}?email=${encodeURIComponent(targetEmail)}`)
         if (detailRes.ok) {
           const detail = await detailRes.json()
           setLatestDetail(detail)
@@ -261,7 +262,7 @@ export default function WorkspaceClient() {
           {tab === 'dashboard' && <DashboardView audits={audits || []} latestDetail={latestDetail} email={email} />}
           {tab === 'audits' && <AuditsView audits={audits || []} />}
           {tab === 'projects' && <ProjectsView audits={audits || []} />}
-          {tab === 'pages' && <PagesView audits={audits || []} />}
+          {tab === 'pages' && <PagesView audits={audits || []} latestDetail={latestDetail} />}
           {tab === 'diff' && <DiffView audits={audits || []} />}
           {tab === 'compare' && <CompareView audits={audits || []} />}
           {tab === 'recommendations' && <RecsView email={email} latestDetail={latestDetail} />}
