@@ -65,7 +65,7 @@ Nobody cites the leader's opinions; they cite the leader's **data and receipts**
 
 **What:** "X landing page teardown" for the 200 most-advertised SaaS brands + vs-pages. Each teardown = lead magnet + backlink magnet. Weekly cadence, UTM-tagged distribution.
 
-**Status: IN MOTION 2026-08-05.** 28 teardowns live (batch 1: hubspot, mailchimp; batch 2: shopify, slack, zapier, canva, typeform; batch 3: figma, asana, monday, intercom, squarespace; + 16 earlier). All batches audited live via the platform engine (source=teardown) with Playwright hero screenshots; pages browser-verified; screenshot integrity suite 24/24→29/29. Distribution drafts: `ops/teardown_distribution_*.md` (3 batches, awaiting Mike's go to post — outbound approval gate). **Emerging asset: the broken-H1 pattern (shopify/asana/squarespace line-break collapses) — a cross-brand story stronger than any single teardown.** Next: keep cadence (5/week toward the 200-target list), post distribution on approval.
+**Status: IN MOTION 2026-08-05.** 28 teardowns live (batch 1: hubspot, mailchimp; batch 2: shopify, slack, zapier, canva, typeform; batch 3: figma, asana, monday, intercom, squarespace; + 16 earlier). All batches audited live via the platform engine (source=teardown) with Playwright hero screenshots; pages browser-verified; screenshot integrity suite 24/24→29/29. **Distribution ACTIVE 2026-08-05:** pattern post + Canva published to LinkedIn (Zernio) and Bluesky; daily drip cron `e7cd1b110f3e` posts the remaining 9 approved LinkedIn posts (typeform→mailchimp) at 14:00 UTC via `scripts/social_drip.py` + `ops/social_drip_queue.json`. X blocked: `client-not-enrolled` — app must be attached to a Project (dev portal → Apps → Manage → pay-per-use → Production).
 
 ## Sequencing & leverage
 
