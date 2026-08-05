@@ -65,7 +65,7 @@ Nobody cites the leader's opinions; they cite the leader's **data and receipts**
 
 **What:** "X landing page teardown" for the 200 most-advertised SaaS brands + vs-pages. Each teardown = lead magnet + backlink magnet. Weekly cadence, UTM-tagged distribution.
 
-**Status: IN MOTION 2026-08-05.** 23 teardowns live (hubspot, mailchimp, shopify, slack, zapier, canva, typeform + 16 earlier). Batch 2 audited live via the platform engine (source=teardown) with Playwright hero screenshots, all pages browser-verified; screenshot integrity suite 24/24. Distribution drafts for both batches in `ops/teardown_distribution_hubspot_mailchimp_2026-08-04.md` and `ops/teardown_distribution_batch2_2026-08-05.md` (awaiting Mike's go to post — outbound approval gate). Next: keep cadence (5/week toward the 200-target list), post batch 1+2 distribution.
+**Status: IN MOTION 2026-08-05.** 28 teardowns live (batch 1: hubspot, mailchimp; batch 2: shopify, slack, zapier, canva, typeform; batch 3: figma, asana, monday, intercom, squarespace; + 16 earlier). All batches audited live via the platform engine (source=teardown) with Playwright hero screenshots; pages browser-verified; screenshot integrity suite 24/24→29/29. Distribution drafts: `ops/teardown_distribution_*.md` (3 batches, awaiting Mike's go to post — outbound approval gate). **Emerging asset: the broken-H1 pattern (shopify/asana/squarespace line-break collapses) — a cross-brand story stronger than any single teardown.** Next: keep cadence (5/week toward the 200-target list), post distribution on approval.
 
 ## Sequencing & leverage
 
