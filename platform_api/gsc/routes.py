@@ -434,3 +434,137 @@ async def gsc_sitemap(
         raise HTTPException(status_code=502, detail=f"XML parse error: {exc}") from exc
 
     return SitemapResponse(site_url=site_url, pages=pages, total=len(pages))
+
+
+# ---------------------------------------------------------------------------
+# URL Inspection (indexed status check)
+# ---------------------------------------------------------------------------
+
+
+class InspectionResult(BaseModel):
+    url: str
+    indexed: bool
+    coverage_state: Optional[str] = None
+    last_crawl: Optional[str] = None
+
+
+class InspectionResponse(BaseModel):
+    results: List[InspectionResult]
+
+
+@router.post("/inspect", response_model=InspectionResponse)
+async def gsc_inspect(
+    urls: List[str],
+    auth=Depends(get_current_user),
+    db: Session = Depends(get_session),
+):
+    """Check indexed status of URLs via the GSC URL Inspection API.
+
+    Accepts up to 20 URLs per call (Google's batch limit).
+    """
+    user_id = UUID(auth["user_id"])
+    conn = db.query(GscConnection).filter_by(user_id=user_id).first()
+    if not conn:
+        raise HTTPException(status_code=404, detail="No GSC connection")
+
+    access_token = _get_or_refresh_token(conn, db)
+    site_url = conn.gsc_site_url
+    if not site_url:
+        raise HTTPException(status_code=400, detail="No GSC site URL configured")
+
+    # Cap at 20 URLs per request
+    check_urls = urls[:20]
+    results: List[InspectionResult] = []
+
+    async with httpx.AsyncClient(timeout=30) as client:
+        for url in check_urls:
+            try:
+                resp = await client.post(
+                    "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
+                    json={
+                        "inspectionUrl": url,
+                        "siteUrl": site_url,
+                    },
+                    headers={"Authorization": f"Bearer {access_token}"},
+                )
+                if resp.status_code == 200:
+                    data = resp.json()
+                    result = data.get("inspectionResult", {})
+                    index_status = result.get("indexStatusResult", {})
+                    coverage = index_status.get("coverageState", "")
+                    last_crawl = index_status.get("lastCrawlTime")
+                    indexed = coverage in (
+                        "Submitted and indexed",
+                        "Indexed, not submitted in sitemap",
+                    )
+                    results.append(InspectionResult(
+                        url=url,
+                        indexed=indexed,
+                        coverage_state=coverage or None,
+                        last_crawl=last_crawl,
+                    ))
+                else:
+                    # Rate limited or error — mark as unknown
+                    results.append(InspectionResult(url=url, indexed=False, coverage_state="error"))
+            except Exception:
+                results.append(InspectionResult(url=url, indexed=False, coverage_state="error"))
+
+    return InspectionResponse(results=results)
+
+
+# ---------------------------------------------------------------------------
+# IndexNow submission
+# ---------------------------------------------------------------------------
+
+INDEXNOW_KEY = "b9c3d6efa77742c3a718906911d9429f"
+
+
+class IndexNowRequest(BaseModel):
+    urls: List[str]
+
+
+class IndexNowResponse(BaseModel):
+    submitted: int
+    accepted: bool
+
+
+@router.post("/submit-index", response_model=IndexNowResponse)
+async def gsc_submit_index(
+    body: IndexNowRequest,
+    auth=Depends(get_current_user),
+    db: Session = Depends(get_session),
+):
+    """Submit URLs to search engines via IndexNow for faster indexing."""
+    user_id = UUID(auth["user_id"])
+    conn = db.query(GscConnection).filter_by(user_id=user_id).first()
+    if not conn or not conn.gsc_site_url:
+        raise HTTPException(status_code=404, detail="No GSC connection")
+
+    site_url = conn.gsc_site_url
+    if site_url.startswith("sc-domain:"):
+        host = site_url.replace("sc-domain:", "")
+    else:
+        from urllib.parse import urlparse
+        host = urlparse(site_url).hostname or site_url
+
+    submit_urls = body.urls[:100]  # Cap at 100
+
+    payload = {
+        "host": host,
+        "key": INDEXNOW_KEY,
+        "keyLocation": f"https://{host}/{INDEXNOW_KEY}.txt",
+        "urlList": submit_urls,
+    }
+
+    try:
+        async with httpx.AsyncClient(timeout=15) as client:
+            resp = await client.post(
+                "https://api.indexnow.org/indexnow",
+                json=payload,
+                headers={"Content-Type": "application/json; charset=utf-8"},
+            )
+            accepted = resp.status_code in (200, 202)
+    except Exception:
+        accepted = False
+
+    return IndexNowResponse(submitted=len(submit_urls), accepted=accepted)

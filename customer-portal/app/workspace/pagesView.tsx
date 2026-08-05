@@ -114,6 +114,8 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
   const [search, setSearch] = useState('')
   const [keywords, setKeywords] = useState<Record<string, string>>({})
   const [sitemapPages, setSitemapPages] = useState<SitemapPage[]>([])
+  const [indexedStatus, setIndexedStatus] = useState<Record<string, { indexed: boolean; state?: string }>>({})
+  const [submitting, setSubmitting] = useState<Set<string>>(new Set())
 
   // Fetch sitemap URLs to discover all pages (not just audited ones)
   useEffect(() => {
@@ -129,6 +131,52 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
       .catch(() => {}) // Non-fatal — sitemap discovery is optional
     return () => { cancelled = true }
   }, [])
+
+  // Check indexed status for discovered pages (batch of 20)
+  useEffect(() => {
+    if (sitemapPages.length === 0) return
+    let cancelled = false
+    // Check first 20 pages that we don't have status for
+    const toCheck = sitemapPages
+      .filter((p) => !indexedStatus[p.url])
+      .slice(0, 20)
+      .map((p) => p.url)
+    if (toCheck.length === 0) return
+
+    fetch('/api/gsc/inspect', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(toCheck),
+    })
+      .then(async (res) => {
+        if (!res.ok || cancelled) return
+        const data = await res.json()
+        if (data.results) {
+          const newStatus: Record<string, { indexed: boolean; state?: string }> = {}
+          for (const r of data.results) {
+            newStatus[r.url] = { indexed: r.indexed, state: r.coverage_state }
+          }
+          if (!cancelled) setIndexedStatus((prev) => ({ ...prev, ...newStatus }))
+        }
+      })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [sitemapPages]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleSubmitIndex = async (url: string) => {
+    setSubmitting((prev) => new Set(prev).add(url))
+    try {
+      const res = await fetch('/api/gsc/submit-index', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ urls: [url] }),
+      })
+      if (res.ok) {
+        setIndexedStatus((prev) => ({ ...prev, [url]: { indexed: false, state: 'Submitted via IndexNow' } }))
+      }
+    } catch { /* silent */ }
+    setSubmitting((prev) => { const s = new Set(prev); s.delete(url); return s })
+  }
 
   // Deduplicate by pathKey, keep most recent audit per unique page
   // THEN merge sitemap URLs that haven't been audited as unaudited rows
@@ -290,6 +338,7 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
               <tr className="border-b border-border text-left">
                 <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Page</th>
                 <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Target Keyword</th>
+                <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Indexed</th>
                 <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Score</th>
                 <th className="pb-2 pr-4 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Last Audited</th>
                 <th className="pb-2 text-xs font-semibold uppercase tracking-[0.12em] text-fg-dim">Action</th>
@@ -298,7 +347,7 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
             <tbody>
               {filteredPages.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="py-8 text-center text-sm text-fg-muted">
+                  <td colSpan={6} className="py-8 text-center text-sm text-fg-muted">
                     No pages match your filter.
                   </td>
                 </tr>
@@ -324,6 +373,27 @@ export default function PagesView({ audits }: { audits: WorkspaceAudit[] }) {
                           className="rounded-md border border-border bg-bg px-2 py-1 text-xs text-fg placeholder:text-fg-dim focus:outline-none focus:ring-1 focus:ring-[#00c2a0] w-32"
                           aria-label={`Target keyword for ${name}`}
                         />
+                      </td>
+                      <td className="py-3 pr-4">
+                        {(() => {
+                          const status = indexedStatus[a.url]
+                          if (!status) return <span className="text-[11px] text-fg-dim">—</span>
+                          if (status.state === 'Submitted via IndexNow') {
+                            return <span className="inline-flex items-center rounded-full bg-amber-500/10 px-2 py-0.5 text-[11px] font-medium text-amber-400">Submitted</span>
+                          }
+                          if (status.indexed) {
+                            return <span className="inline-flex items-center rounded-full bg-[#00c2a0]/10 px-2 py-0.5 text-[11px] font-medium text-[#00c2a0]">Indexed</span>
+                          }
+                          return (
+                            <button
+                              onClick={() => handleSubmitIndex(a.url)}
+                              disabled={submitting.has(a.url)}
+                              className="inline-flex items-center rounded-full bg-red-500/10 px-2 py-0.5 text-[11px] font-medium text-red-400 hover:bg-red-500/20 transition-colors disabled:opacity-50"
+                            >
+                              {submitting.has(a.url) ? 'Sending…' : 'Not indexed — submit'}
+                            </button>
+                          )
+                        })()}
                       </td>
                       <td className="py-3 pr-4">
                         {scoreVal !== null ? (
