@@ -309,7 +309,7 @@ export default function WhyNotConvertingPage() {
 
           <section className="mb-12 rounded-2xl border border-border bg-bg-muted/30 p-8 text-center">
             <h2 className="text-2xl font-bold text-fg mb-3">
-              Skip the Guessing — Run the 7-Signal Audit
+              Skip the Guessing — Run the 9-Signal Audit
             </h2>
             <p className="text-sm text-fg-muted max-w-xl mx-auto mb-6">
               Nebula&apos;s free landing page audit inspects observable DOM mechanics on your URL —

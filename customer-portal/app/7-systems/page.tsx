@@ -119,7 +119,7 @@ export default function SevenSystemsPage() {
             You&apos;re running ads. You&apos;re getting traffic. But your landing page isn&apos;t converting.
           </p>
           <div className="mt-6 text-sm text-slate-400">
-            Based on 120+ landing page audits ·{' '}
+            Based on published landing page teardowns ·{' '}
             <a href="#free-audit" className="text-emerald-400 hover:text-emerald-300 transition">
               Skip to free audit →
             </a>
@@ -134,7 +134,7 @@ export default function SevenSystemsPage() {
             It&apos;s not one thing. It&apos;s almost always a missing system — not a missing button color or a better font.
           </p>
           <p className="text-slate-300 mb-6">
-            Over 120 landing page audits, we&apos;ve traced every conversion leak back to one of seven systems. Brands that fix{' '}
+            Across our published landing page teardowns, we&apos;ve traced every conversion leak back to one of seven systems. Brands that fix{' '}
             <strong className="text-white">all seven</strong> see 2-4x conversion improvements. Brands that skip even one leave money on the table — and usually don&apos;t know which one.
           </p>
           <p className="text-lg font-semibold text-emerald-400 mb-12">

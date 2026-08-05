@@ -185,7 +185,7 @@ export default function BeforeYouRaiseAdBudget() {
             <ol className="mt-6 space-y-5">
               {[
                 {
-                  signal: 'Message-match',
+                  signal: 'Message match',
                   check: 'Does the page headline use the same noun phrase as the ad that brought the visitor there? If the ad says "Fix your landing page" and the H1 says "Welcome to Acme Inc.", the chain is broken at arrival.',
                 },
                 {
@@ -193,8 +193,8 @@ export default function BeforeYouRaiseAdBudget() {
                   check: 'Is there specific proof visible before the primary CTA? A named customer result, a recognisable logo, or a specific outcome number. Generic "5-star rated" claims without context do not count as trust signals.',
                 },
                 {
-                  signal: 'Mobile layout',
-                  check: 'Open the page on Chrome DevTools at 390px (iPhone 12 Pro). Are the headline, a proof signal, and the CTA all visible without scrolling? If not, fix mobile layout before any other optimisation.',
+                  signal: 'Mobile CTA',
+                  check: 'Open the page on Chrome DevTools at 390px (iPhone 12 Pro). Is the primary CTA visible without scrolling? If not, fix mobile CTA visibility before running mobile traffic.',
                 },
                 {
                   signal: 'Load time',
@@ -205,12 +205,20 @@ export default function BeforeYouRaiseAdBudget() {
                   check: 'Is there one primary CTA with a label that describes the outcome of clicking - not just the mechanics? "Get my free audit" not "Submit." Multiple competing CTAs at equal weight split the visitor\'s attention.',
                 },
                 {
-                  signal: 'Form friction',
-                  check: 'If the conversion action involves a form, does it ask for the minimum information required to deliver the next step - and nothing more? Each additional field reduces completion rate.',
+                  signal: 'Above-fold clarity',
+                  check: 'Can a first-time visitor identify the offer, who it is for, and what to do next within 5 seconds of landing - without scrolling? If the value proposition is below the fold, most paid visitors never see it.',
                 },
                 {
-                  signal: 'Proof',
-                  check: 'Is there at least one specific, attributed proof element on the page - a customer name, a result with a number, a case outcome? Vague testimonials ("Great service!") do not reduce buyer risk. Specific ones do.',
+                  signal: 'Ad signals',
+                  check: 'Do the page\'s conversion elements (form, CTA, offer framing) align with the campaign objective and audience segment the ad targets? Misalignment between ad promise and page delivery wastes spend.',
+                },
+                {
+                  signal: 'SEO foundations',
+                  check: 'Does the page have a unique title tag, meta description, and crawlable body content that reinforces the keyword intent the paid campaign also targets? Organic and paid pages that contradict each other dilute authority.',
+                },
+                {
+                  signal: 'AI readiness',
+                  check: 'Is the page structured so AI answer engines (Google AI Overviews, ChatGPT, Perplexity) can extract and cite its claims? Structured data, clear attributions, and factual specificity improve citation probability.',
                 },
               ].map(({ signal, check }, i) => (
                 <li

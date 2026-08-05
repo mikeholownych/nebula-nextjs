@@ -29,7 +29,7 @@ const faqItems = [
     },
     {
       question: 'How do I know if my landing page conversion rate is actually low?',
-      answer: "WordStream's 2026 Google Ads Benchmarks report - analysing over 13,000 search advertising campaigns from April 2025 to March 2026 - found an all-industries average conversion rate of 8.18%, ranging from 2.64% in Finance and Insurance to 16.22% in Animals and Pets. These are search-campaign averages, not single-page rates, but they give a realistic floor for your vertical. If you are consistently below your vertical's lower bound with meaningful traffic (500+ sessions), that suggests evaluating structural page friction as a candidate cause.",
+      answer: "WordStream's 2026 Google Ads Benchmarks report - analysing over 13,000 search advertising campaigns from April 2025 to March 2026 - found an all-industries median conversion rate of 8.18%, ranging from 2.64% in Finance and Insurance to 16.22% in Animals and Pets. These are median figures across Google and Microsoft Ads search campaigns, not single-page rates, but they give a realistic floor for your vertical. If you are consistently below your vertical's lower bound with meaningful traffic (500+ sessions), that suggests evaluating structural page friction as a candidate cause.",
     },
     {
       question: 'Should I A/B test my landing page before diagnosing the problem?',
@@ -64,7 +64,7 @@ export default function LandingPageNotConvertingPage() {
           {/* Hero */}
           <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
-              Landing Page Leaks · 7 Conversion Signals
+              Landing Page Leaks · 9 Conversion Signals
             </p>
             <h1 className="text-3xl font-bold tracking-tight text-fg md:text-5xl">
               Landing Page Not Converting? Diagnose These 5 Leaks First
@@ -117,11 +117,12 @@ export default function LandingPageNotConvertingPage() {
                 2026 Google Ads Benchmarks report
               </a>{' '}
               - analysing over 13,000 search advertising campaigns from April
-              2025 to March 2026 - found an all-industries average conversion
+              2025 to March 2026 - found an all-industries median conversion
               rate of 8.18%, ranging from 2.64% in Finance and Insurance to
-              16.22% in Animals and Pets. These are search-campaign averages,
-              not single-page rates. Use them only as context; they do not
-              establish what an individual page should achieve.
+              16.22% in Animals and Pets. These are median figures across Google
+              and Microsoft Ads search campaigns, not single-page rates. Use
+              them only as context; they do not establish what an individual
+              page should achieve.
             </p>
             <aside
               role="note"
@@ -422,7 +423,7 @@ export default function LandingPageNotConvertingPage() {
             <ol className="space-y-5">
               {[
                 {
-                  signal: 'Signal 1 - Message-match',
+                  signal: 'Signal 1 - Message match',
                   test: 'Does the headline echo the ad promise exactly?',
                   ifNo:
                     'Fix this first. Nothing else matters until visitors know they are in the right place.',
@@ -436,10 +437,10 @@ export default function LandingPageNotConvertingPage() {
                   surfaces: 'Leaks 2 and 5',
                 },
                 {
-                  signal: 'Signal 3 - Mobile layout',
-                  test: 'Is the headline + CTA visible on a real phone without scrolling?',
+                  signal: 'Signal 3 - Mobile CTA',
+                  test: 'Is the primary CTA visible on a real phone without scrolling?',
                   ifNo:
-                    'Fix before running mobile traffic. Desktop conversion data does not transfer to a broken mobile layout.',
+                    'Fix before running mobile traffic. Desktop conversion data does not transfer to a broken mobile experience.',
                   surfaces: 'Leak 4',
                 },
                 {
@@ -468,16 +469,43 @@ export default function LandingPageNotConvertingPage() {
                   surfaces: 'Leak 3',
                 },
                 {
-                  signal: 'Signal 6 - Form friction',
-                  test: 'Does the form ask for only the information required for the next step?',
-                  ifNo: 'Remove every field that is not needed. Each additional field reduces completion rate.',
-                  surfaces: 'Leak 3',
+                  signal: 'Signal 6 - Above-fold clarity',
+                  test: 'Can a visitor identify the offer, who it is for, and what to do next within 5 seconds of landing?',
+                  ifNo:
+                    'Restructure the hero. If the value proposition requires scrolling to understand, most paid visitors will never reach it.',
+                  surfaces: 'Leak 1',
                 },
                 {
-                  signal: 'Signal 7 - Proof',
-                  test: 'Is the strongest proof element above the fold, specific, and attributable?',
-                  ifNo: 'Reposition or replace it. Anonymous, unlinked, undated proof reduces trust rather than building it.',
-                  surfaces: 'Leak 2',
+                  signal: 'Signal 7 - Ad signals',
+                  test: 'Do the page\'s conversion elements (form, CTA, offer framing) align with the campaign objective and audience segment?',
+                  ifNo:
+                    'Misaligned ad-to-page signals waste spend by attracting clicks that the page cannot convert.',
+                  surfaces: null,
+                },
+                {
+                  signal: 'Signal 8 - SEO foundations',
+                  test: 'Does the page have a unique title, meta description, and crawlable content that matches its paid intent?',
+                  ifNo: (
+                    <>
+                      Not covered by the five-leak model above. Covered in depth
+                      in the{' '}
+                      <Link
+                        href="/learning-centre/what-is-landing-page-audit"
+                        className="text-accent hover:text-accent-light underline"
+                      >
+                        full audit methodology
+                      </Link>
+                      .
+                    </>
+                  ),
+                  surfaces: null,
+                },
+                {
+                  signal: 'Signal 9 - AI readiness',
+                  test: 'Is the page structured so that AI answer engines can extract and cite its claims accurately?',
+                  ifNo:
+                    'Not covered by the five-leak model above. AI citation readiness ensures the page remains discoverable as search shifts toward retrieval-augmented answers.',
+                  surfaces: null,
                 },
               ].map(({ signal, test, ifNo, surfaces }, i) => (
                 <li

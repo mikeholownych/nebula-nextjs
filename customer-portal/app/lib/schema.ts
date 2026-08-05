@@ -44,7 +44,6 @@ export const websiteSchema = {
   url: 'https://nebulacomponents.com',
   name: 'Nebula Components',
   description: 'Evidence-backed landing-page conversion guidance from Nebula Components.',
-  dateModified: '2026-08-04',
   publisher: {
     '@id': 'https://nebulacomponents.com/#organization',
   },
