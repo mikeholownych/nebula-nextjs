@@ -129,21 +129,136 @@ def update_hot_lead_stage(email, url):
     tmp.rename(HOT_LEAD_PATH)  # atomic on same filesystem
 
 
+def _md_to_html(md: str) -> str:
+    """Convert the prompt markdown to styled HTML for the email body.
+
+    Handles the subset of markdown the LLM generator actually produces:
+    headings, bold, code blocks (fenced), inline code, bullet lists,
+    horizontal rules, and plain paragraphs.
+    """
+    import re
+    lines = md.split("\n")
+    out = []
+    in_code = False
+    in_ul = False
+
+    def flush_ul():
+        nonlocal in_ul
+        if in_ul:
+            out.append("</ul>")
+            in_ul = False
+
+    def escape(s):
+        return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+    def inline_fmt(s):
+        # Bold **text**
+        s = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", s)
+        # Inline code `text`
+        s = re.sub(
+            r"`([^`]+)`",
+            r'<code style="background:#1a2530;color:#00c2a0;padding:2px 6px;'
+            r'border-radius:3px;font-family:monospace;font-size:13px;">\1</code>',
+            s,
+        )
+        return s
+
+    for line in lines:
+        # Fenced code block toggle
+        if line.strip().startswith("```"):
+            flush_ul()
+            if not in_code:
+                in_code = True
+                out.append(
+                    '<pre style="background:#0f1923;color:#e2e8f0;padding:16px 20px;'
+                    'border-radius:8px;border-left:3px solid #00c2a0;overflow-x:auto;'
+                    'font-family:\'Courier New\',monospace;font-size:13px;line-height:1.6;'
+                    'margin:16px 0;white-space:pre-wrap;word-break:break-word;">'
+                )
+            else:
+                in_code = False
+                out.append("</pre>")
+            continue
+
+        if in_code:
+            out.append(escape(line))
+            continue
+
+        stripped = line.strip()
+
+        # Horizontal rule
+        if re.match(r"^[-=]{3,}$", stripped):
+            flush_ul()
+            out.append('<hr style="border:none;border-top:1px solid #1e3040;margin:24px 0;">')
+            continue
+
+        # Headings
+        m = re.match(r"^(#{1,4})\s+(.*)", stripped)
+        if m:
+            flush_ul()
+            level = len(m.group(1))
+            text = inline_fmt(escape(m.group(2)))
+            sizes = {1: "22px", 2: "18px", 3: "15px", 4: "14px"}
+            mt = "28px" if level <= 2 else "20px"
+            out.append(
+                f'<h{level} style="color:#e2e8f0;font-size:{sizes[level]};'
+                f'font-weight:700;margin:{mt} 0 8px;line-height:1.3;">'
+                f"{text}</h{level}>"
+            )
+            continue
+
+        # Bullet list item
+        if re.match(r"^[-*]\s+", stripped):
+            if not in_ul:
+                in_ul = True
+                out.append('<ul style="margin:8px 0 8px 0;padding-left:20px;color:#94a3b8;">')
+            text = inline_fmt(escape(re.sub(r"^[-*]\s+", "", stripped)))
+            out.append(
+                f'<li style="margin:4px 0;font-size:14px;line-height:1.6;">{text}</li>'
+            )
+            continue
+
+        flush_ul()
+
+        # Blank line → spacer
+        if not stripped:
+            out.append('<div style="height:8px;"></div>')
+            continue
+
+        # Plain paragraph
+        text = inline_fmt(escape(stripped))
+        out.append(
+            f'<p style="margin:0 0 10px;font-size:14px;line-height:1.7;color:#94a3b8;">{text}</p>'
+        )
+
+    flush_ul()
+    if in_code:
+        out.append("</pre>")
+
+    return "\n".join(out)
+
+
 def compose_email(url, pack, audit):
     teaser = pack["teaser"] if pack else None
+
+    # ── Fallback: kit generation failed ──────────────────────────────────────
     if not teaser:
-        return "Your One-Leak Self-Implementation Kit", (
+        subject = "Your One-Leak Self-Implementation Kit"
+        body = (
             f"Here's your One-Leak Self-Implementation Kit for {url}.\n\n"
             "We could not generate a kit for this audit. You will be contacted "
             "shortly with a manual fix.\n"
         )
+        html = _kit_html(url, audit, "Kit unavailable", body, "", fallback=True)
+        return subject, body, html
 
     selected_label = teaser.get("label") or teaser.get("title") or "highest-impact finding"
     prompt_md = teaser.get("prompt_md", "")
     generated_note = "" if pack.get("llm_generated") else (
-        "\n\nNote: prompt generation was unavailable, so this is the standard "
-        "template. It still contains the real page context above the blanks.\n"
+        "\n\nNote: prompt generation was unavailable. This is the standard template "
+        "filled with your real page context.\n"
     )
+    prompt_md_full = prompt_md + generated_note
 
     intro = (
         f"Here's your One-Leak Self-Implementation Kit for {url}.\n\n"
@@ -161,9 +276,154 @@ def compose_email(url, pack, audit):
         f"changed. This does not guarantee conversion lift.\n\n"
         f"{'=' * 40}\n\n"
     )
-    body = intro + prompt_md + generated_note
+    body = intro + prompt_md_full
     subject = f"Your One-Leak Self-Implementation Kit — {selected_label}"
-    return subject, body
+    html = _kit_html(url, audit, selected_label, intro, prompt_md_full)
+    return subject, body, html
+
+
+def _kit_html(url, audit, selected_label, intro_text, prompt_md, fallback=False):
+    """Build the full HTML email for the kit delivery."""
+    from urllib.parse import urlparse
+    domain = urlparse(url).netloc or url
+    score = audit.get("overall", "?")
+    grade = audit.get("overall_grade", "?")
+    audit_url = f"https://nebulacomponents.com/audit"
+
+    # Score badge colour
+    try:
+        score_num = float(score)
+        badge_color = "#22c55e" if score_num >= 7 else "#f59e0b" if score_num >= 5 else "#ef4444"
+    except (ValueError, TypeError):
+        badge_color = "#94a3b8"
+
+    prompt_html = _md_to_html(prompt_md) if not fallback else (
+        f'<p style="color:#94a3b8;font-size:14px;">{intro_text}</p>'
+    )
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your One-Leak Self-Implementation Kit</title>
+</head>
+<body style="margin:0;padding:0;background:#0a0f14;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0f14;padding:32px 16px;">
+<tr><td align="center">
+<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+  <!-- Header -->
+  <tr><td style="padding:0 0 24px;">
+    <p style="margin:0;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00c2a0;">
+      Nebula Components
+    </p>
+  </td></tr>
+
+  <!-- Hero -->
+  <tr><td style="background:#0f1923;border-radius:12px;padding:28px 28px 24px;border:1px solid #1e3040;margin-bottom:20px;">
+    <p style="margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#00c2a0;">
+      One-Leak Self-Implementation Kit
+    </p>
+    <h1 style="margin:0 0 16px;font-size:22px;font-weight:800;color:#e2e8f0;line-height:1.3;">
+      {selected_label}
+    </h1>
+    <p style="margin:0;font-size:14px;color:#64748b;">
+      {domain}
+    </p>
+  </td></tr>
+
+  <tr><td style="height:16px;"></td></tr>
+
+  <!-- Score card -->
+  <tr><td style="background:#0f1923;border-radius:10px;padding:20px 24px;border:1px solid #1e3040;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td>
+          <p style="margin:0 0 3px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#475569;">Audit Score</p>
+          <p style="margin:0;font-size:32px;font-weight:800;color:{badge_color};line-height:1;">{score}<span style="font-size:16px;color:#475569;font-weight:400;">/10</span></p>
+        </td>
+        <td style="width:1px;background:#1e3040;margin:0 20px;"></td>
+        <td style="padding-left:24px;">
+          <p style="margin:0 0 3px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#475569;">Grade</p>
+          <p style="margin:0;font-size:32px;font-weight:800;color:{badge_color};line-height:1;">{grade}</p>
+        </td>
+        <td style="padding-left:24px;">
+          <p style="margin:0 0 3px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#475569;">Selected Finding</p>
+          <p style="margin:0;font-size:14px;font-weight:600;color:#e2e8f0;">{selected_label}</p>
+        </td>
+      </tr>
+    </table>
+  </td></tr>
+
+  <tr><td style="height:20px;"></td></tr>
+
+  <!-- Intro -->
+  <tr><td style="padding:0 4px;">
+    <p style="margin:0 0 8px;font-size:14px;line-height:1.7;color:#94a3b8;">
+      The prompt below is ready to run in your terminal agent — <strong style="color:#e2e8f0;">Claude Code, Cursor, Codex</strong>, or any agent with terminal + file access in your repository.
+    </p>
+    <p style="margin:0 0 16px;font-size:14px;line-height:1.7;color:#94a3b8;">
+      It is already filled in with your real page data — headline, CTA text, platform. Where only you know the answer (a real customer name, exact review count), the agent will ask before proceeding.
+    </p>
+    <p style="margin:0 0 4px;font-size:13px;line-height:1.6;color:#475569;">
+      Run the free re-audit within 30 days to verify the fix held. This does not guarantee conversion lift.
+    </p>
+  </td></tr>
+
+  <tr><td style="height:24px;"></td></tr>
+
+  <!-- Divider with label -->
+  <tr><td style="padding:0 4px 16px;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td style="border-top:1px solid #1e3040;"></td>
+        <td style="white-space:nowrap;padding:0 12px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#00c2a0;">Your Implementation Prompt</td>
+        <td style="border-top:1px solid #1e3040;"></td>
+      </tr>
+    </table>
+  </td></tr>
+
+  <!-- Prompt content -->
+  <tr><td style="background:#0a0f14;border-radius:10px;padding:24px;border:1px solid #1e3040;">
+    {prompt_html}
+  </td></tr>
+
+  <tr><td style="height:28px;"></td></tr>
+
+  <!-- Re-audit CTA -->
+  <tr><td align="center" style="padding:28px 24px;background:#0f1923;border-radius:10px;border:1px solid #00c2a0;border-opacity:.3;">
+    <p style="margin:0 0 12px;font-size:15px;font-weight:700;color:#e2e8f0;">Verify the fix held</p>
+    <p style="margin:0 0 20px;font-size:13px;color:#64748b;">
+      Once you've applied the change, run the free re-audit on the same URL.<br>Your 30-day window is included.
+    </p>
+    <a href="{audit_url}"
+       style="display:inline-block;background:#00c2a0;color:#0a0f14;text-decoration:none;
+              font-weight:700;font-size:14px;padding:12px 28px;border-radius:8px;letter-spacing:.02em;">
+      Run Re-Audit →
+    </a>
+  </td></tr>
+
+  <tr><td style="height:32px;"></td></tr>
+
+  <!-- Footer -->
+  <tr><td style="border-top:1px solid #1e3040;padding-top:24px;">
+    <p style="margin:0 0 6px;font-size:12px;color:#334155;">
+      <strong style="color:#475569;">Nebula Components</strong> &nbsp;·&nbsp;
+      <a href="https://nebulacomponents.com" style="color:#00c2a0;text-decoration:none;">nebulacomponents.com</a>
+    </p>
+    <p style="margin:0;font-size:11px;color:#1e3040;line-height:1.6;">
+      Questions about your kit? Reply to this email — we respond within one business day.<br>
+      This is a one-time transactional email for your $97 One-Leak Self-Implementation Kit purchase.
+    </p>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>"""
+
 
 
 def main():
@@ -229,11 +489,12 @@ def main():
         )
         return 1
 
-    subject, body = compose_email(url, pack, audit)
+    subject, body, html = compose_email(url, pack, audit)
     sent = send_via_agentmail(
         to=email,
         subject=subject,
         body=body,
+        html=html,
         client_id=delivery_client_id(stripe_session_id),
     )
     if not sent.get("ok"):

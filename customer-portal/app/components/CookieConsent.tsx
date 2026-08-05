@@ -47,7 +47,7 @@ export function getConsentRuntime(country: string | null = null) {
         window.posthog.init(posthogKey, {
           api_host: '/ingest',
           ui_host: 'https://us.posthog.com',
-          defaults: '2026-01-30',
+          defaults: '2026-08-05',
           autocapture: false,
           capture_exceptions: false,
           capture_pageleave: false,

@@ -123,15 +123,28 @@ export async function POST(request: NextRequest) {
     'line_items[0][price_data][currency]': fixPack.currency.toLowerCase(),
     'line_items[0][price_data][unit_amount]': String(fixPack.priceCents),
     'line_items[0][price_data][product_data][name]': REPAIR_SPRINT_OFFER.name,
+    'line_items[0][price_data][product_data][description]':
+      'One targeted fix for your highest-impact conversion leak — exact copy, code, or configuration change for your specific page. Includes a 30-day re-audit to verify the fix held.',
     'line_items[0][quantity]': '1',
+    // Allow card, Link (one-click for returning Stripe customers), and wallets
     'payment_method_types[0]': 'card',
+    'payment_method_types[1]': 'link',
+    // Enable Apple Pay / Google Pay via wallet detection
+    'payment_method_options[card][request_three_d_secure]': 'automatic',
     mode: 'payment',
+    // Stripe Link: allow saving payment method for faster future checkouts
+    'payment_intent_data[setup_future_usage]': 'off_session',
+    // Statement descriptor — what appears on the customer's bank statement
+    'payment_intent_data[statement_descriptor_suffix]': 'NEBULA FIX PACK',
+    submit_type: 'pay',
     success_url: new URL('/thank-you?session_id={CHECKOUT_SESSION_ID}', baseUrl).toString(),
-    cancel_url: new URL(`${fixPack.checkout.pagePath}?audit_id=${encodeURIComponent(auditId)}`, baseUrl).toString(),
+    cancel_url: new URL(`${fixPack.checkout.pagePath}?audit_id=${encodeURIComponent(auditId)}&from=stripe_cancel`, baseUrl).toString(),
     customer_email: auditIdentity.email,
     'metadata[audit_id]': auditId,
     'metadata[offer_key]': fixPack.checkout.offerKey,
     'metadata[analytics_consent]': analyticsConsent ? 'all' : 'necessary',
+    // Audit URL in metadata for fulfillment context
+    'metadata[audit_unlocked_email]': auditIdentity.email,
   })
   if (personId) stripeParams.set('metadata[analytics_person_id]', personId)
   for (const [key, value] of Object.entries(attribution)) {

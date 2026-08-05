@@ -21,10 +21,11 @@ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
 export default async function CheckoutPage({
   searchParams,
 }: {
-  searchParams: Promise<{ audit_id?: string }>
+  searchParams: Promise<{ audit_id?: string; from?: string }>
 }) {
-  const { audit_id: auditId } = await searchParams
+  const { audit_id: auditId, from } = await searchParams
   const eligibleAuditId = typeof auditId === 'string' && UUID_RE.test(auditId)
+  const returnedFromStripe = from === 'stripe_cancel'
   return (
     <main id="main-content" className="min-h-screen bg-bg px-6 py-12">
       <Suspense fallback={null}><CheckoutPageTracker /></Suspense>
@@ -34,9 +35,16 @@ export default async function CheckoutPage({
             Nebula
           </Link>
           <h1 className="mb-2 mt-6 text-3xl font-bold text-fg">Secure Checkout</h1>
-          <p className="text-fg-muted">
-            Payment is completed on Stripe&apos;s hosted checkout. Your card details are never seen or stored by Nebula.
-          </p>
+          {returnedFromStripe ? (
+            <div className="mt-3 rounded-xl border border-accent/30 bg-accent/5 px-4 py-3 text-sm text-fg-muted">
+              <p className="font-semibold text-fg">Your audit is still here.</p>
+              <p className="mt-1">You left the payment page — that's fine. Your findings are saved and your checkout is ready when you are.</p>
+            </div>
+          ) : (
+            <p className="text-fg-muted">
+              Payment is completed on Stripe&apos;s hosted checkout. Your card details are never seen or stored by Nebula.
+            </p>
+          )}
         </div>
 
         <Card variant="bordered" className="mb-6">
@@ -47,7 +55,7 @@ export default async function CheckoutPage({
           <ul className="mb-4 space-y-2 text-sm text-fg-muted">
             {REPAIR_SPRINT_OFFER.includes.map((item) => (
               <li key={item} className="flex items-start gap-2">
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                <span className="text-accent font-bold mt-0.5">✓</span>
                 {item}
               </li>
             ))}

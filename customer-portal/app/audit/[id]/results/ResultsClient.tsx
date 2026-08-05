@@ -457,6 +457,13 @@ function ReportOverview({ results }: { results: AuditResult }) {
           <p className="mt-5 max-w-[65ch] text-base leading-8 text-fg-muted">
             The score is the orientation. The queue below is the work: highest-impact conversion leaks first, with measured evidence and implementation effort attached.
           </p>
+          <p className="mt-4 max-w-[65ch] text-base leading-8 text-fg-muted">
+            The{' '}
+            <a href="#remediation" className="font-semibold text-accent hover:underline">
+              $97 One-Leak Self-Implementation Kit
+            </a>{' '}
+            delivers the exact fix for your highest-impact finding — plus a 30-day re-audit to confirm it held.
+          </p>
         </div>
 
         <Card variant="elevated" className="vt-audit-card">
@@ -1050,16 +1057,22 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
         <section id="remediation" className="scroll-mt-40 border-t border-border pt-16">
           <div className="space-y-6">
           <h2 className="text-center text-2xl font-extrabold text-fg">
-            Turn the findings into a bounded repair plan.
+            Know exactly which one thing to fix — and how to fix it.
           </h2>
 
           <Card variant="bordered" className="relative mx-auto max-w-md overflow-hidden border-accent">
             <div>
-              <h3 className="mb-1 text-2xl font-extrabold text-fg">${REPAIR_SPRINT_OFFER.priceUsd} {REPAIR_SPRINT_OFFER.name}</h3>
+              <h3 className="mb-1 text-2xl font-extrabold text-fg">{REPAIR_SPRINT_OFFER.name}</h3>
               <p className="mb-2 text-2xl font-extrabold tabular-nums text-accent">${REPAIR_SPRINT_OFFER.priceUsd}</p>
               <p className="mb-4 max-w-[65ch] text-base leading-7 text-fg-muted">
-                {REPAIR_SPRINT_OFFER.summary} Nebula delivers a tailored kit for one high-confidence finding from this audit. You or your developer implements it, and the 30-day re-audit verifies the page condition.
+                Not a 12-point checklist. One specific fix for your highest-confidence finding — exact copy, code, or configuration change — ready to implement today.
               </p>
+              <ul className="mb-5 space-y-2 text-sm text-fg-muted">
+                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">✓</span>One implementation-ready fix for your highest-impact leak</li>
+                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">✓</span>Exact copy, code, or configuration change — not generic advice</li>
+                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">✓</span><span><strong className="text-fg">Bonus:</strong> 30-day free re-audit to confirm the fix held</span></li>
+                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">✓</span><span><strong className="text-fg">Bonus:</strong> Your page benchmarked against 117 real audits</span></li>
+              </ul>
               <a
                 href={
                   unlocked && !sharedView
@@ -1074,7 +1087,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                 className="block w-full rounded-lg bg-accent px-4 py-2 text-center font-semibold text-bg transition-colors hover:bg-accent-light"
               >
                 {unlocked && !sharedView
-                  ? `Review the ${REPAIR_SPRINT_OFFER.name} - $${REPAIR_SPRINT_OFFER.priceUsd}`
+                  ? `Get the fix — $${REPAIR_SPRINT_OFFER.priceUsd}`
                   : 'Unlock this audit to select its repair'}
               </a>
             </div>

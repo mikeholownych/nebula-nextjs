@@ -224,7 +224,7 @@ export default function Home() {
                 },
                 {
                   heading: 'What happens next',
-                  body: 'Fix the highest-impact leak yourself with the report, or pick the $97 One-Leak Self-Implementation Kit and get the fix delivered as targeted prompts.',
+                  body: 'Fix the highest-impact leak yourself with the report — or get the $97 One-Leak Self-Implementation Kit: one implementation-ready fix, the 30-day re-audit to confirm it held, and your page benchmarked against 117 real audits.',
                 },
               ].map((item) => (
                 <div key={item.heading} className="rounded-xl border border-border bg-bg-muted/10 p-5">
@@ -480,7 +480,7 @@ export default function Home() {
               </div>
               <div>
                 <h3 className="font-semibold text-fg">What does the $97 self-implementation kit do?</h3>
-                <p className="mt-1 text-sm leading-6 text-fg-muted">Targeted prompts for the highest-confidence fix on your page. It does not promise conversion lift — no one can before the fix is live and measured.</p>
+                <p className="mt-1 text-sm leading-6 text-fg-muted">One targeted fix for your highest-impact finding — exact copy, code, or configuration change written for your specific page. Includes a 30-day re-audit to verify the fix held and your page benchmarked against real audit data. It does not promise conversion lift — no one can before the fix is live and measured.</p>
               </div>
             </div>
           </div>

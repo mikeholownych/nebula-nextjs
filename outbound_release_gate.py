@@ -681,9 +681,15 @@ class OutboundReleaseGate:
                 return decision
 
             last = conn.execute(
-                "SELECT MAX(reserved_at) AS last_at FROM delivery_reservations"
+                "SELECT MAX(reserved_at) AS last_at FROM delivery_reservations "
+                "WHERE purpose = ?",
+                (purpose.value,),
             ).fetchone()["last_at"]
-            if last is not None and now - float(last) < self.min_interval_seconds:
+            # Cooldown only applies to outbound marketing — not to user-requested
+            # audit delivery or transactional messages, which must not be rate-limited
+            # by the marketing drip interval.
+            cooldown_purposes = {DeliveryPurpose.MARKETING, DeliveryPurpose.CONVERSATION_REPLY}
+            if purpose in cooldown_purposes and last is not None and now - float(last) < self.min_interval_seconds:
                 decision = self._decision(
                     recipient, purpose, client_id, False, "mailbox_cooldown", conn
                 )

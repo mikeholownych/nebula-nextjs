@@ -95,7 +95,8 @@ class RedisClient:
         """Check Redis connection health."""
         try:
             result = await self.client.ping()
-            return result == b"PONG" or result == "PONG"
+            # redis-py async returns True (bool) for PING; older versions return b"PONG"
+            return result is True or result == b"PONG" or result == "PONG"
         except RedisError:
             return False
     

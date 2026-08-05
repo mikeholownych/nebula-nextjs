@@ -97,7 +97,7 @@ export default async function AuditPage() {
                 {[
                   'Results in under 2 minutes',
                   'No signup, no account',
-                  '$97 One-Leak Self-Implementation Kit gives you one implementation-ready change',
+                  '$97 One-Leak Self-Implementation Kit: one targeted fix + 30-day re-audit included',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-fg-muted">
                     <span className="text-accent">✓</span>

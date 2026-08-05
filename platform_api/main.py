@@ -48,6 +48,25 @@ async def lifespan(_app: FastAPI):
     elif settings.is_development:
         warn_missing_token("POSTHOG_PROJECT_TOKEN")
 
+    # On startup: fail any audits that are stuck in 'pending' from a previous
+    # crashed/restarted run. These can never self-resolve — a fresh start is the
+    # only recovery path for pending audits older than 5 minutes.
+    try:
+        from platform_api.services.audit_db import audit_db
+        await audit_db.connect()
+        if audit_db.pool is not None:
+            async with audit_db.pool.acquire() as conn:
+                updated = await conn.execute(
+                    """UPDATE audits SET status='failed', completed_at=now()
+                       WHERE status='pending'
+                         AND created_at < now() - interval '5 minutes'"""
+                )
+                count = int(updated.split()[-1]) if updated else 0
+                if count > 0:
+                    print(f"⚠️  Startup: cleared {count} stuck-pending audit(s) → failed")
+    except Exception as exc:
+        print(f"⚠️  Startup pending-audit cleanup failed: {exc}")
+
     try:
         yield
     finally:
