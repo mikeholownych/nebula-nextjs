@@ -104,10 +104,10 @@ export default function SelfScan() {
               </li>
             ))}
           </ul>
-          <div className="mt-3 border-t border-border pt-3 text-xs text-fg-muted">
-            Verified checks shown above. Above Fold and Ad Signals are omitted pending rendered
-            verification.
-          </div>
+          <p className="mt-3 text-xs text-fg-muted">
+            Verified checks shown above. Source-only checks are omitted until rendered verification
+            is available.
+          </p>
         </div>
       )}
     </div>

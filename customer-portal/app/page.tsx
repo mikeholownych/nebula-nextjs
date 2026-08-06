@@ -442,7 +442,7 @@ export default function Home() {
                 },
                 {
                   heading: 'The audit follows the actual path.',
-                  body: 'Nebula checks what a paid visitor experiences: message match, above-fold clarity, visible action, proof, mobile usability, performance, measurement. Each failing signal is tied to raw evidence from your page and ranked by impact. The report does not estimate revenue or promise lift that has not been measured.',
+                  body: 'Nebula checks what a paid visitor experiences: headline, visible action, proof, mobile usability, performance, and measurement. Each failing signal is tied to raw evidence from your page and ranked by impact. The report does not estimate revenue or promise lift that has not been measured.',
                 },
                 {
                   heading: 'Use it as a stop-or-fix decision.',
