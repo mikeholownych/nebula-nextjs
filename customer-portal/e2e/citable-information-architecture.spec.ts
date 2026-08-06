@@ -108,7 +108,7 @@ test('case-study routes reflect the empty governed projection', async ({ page, r
   expect(response?.status()).toBe(200)
   await expect(page.getByRole('heading', {
     level: 1,
-    name: /we don't have one yet/i,
+    name: /no client case studies yet/i,
   })).toBeVisible()
   await expect(page.locator('a[href^="/case-studies/"]')).toHaveCount(0)
   await expect(page.getByText(/\b0 case studies\b/i)).toHaveCount(0)

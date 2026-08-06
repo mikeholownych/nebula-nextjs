@@ -490,7 +490,7 @@ export default function LandingPageNotConvertingPage() {
                       Not covered by the five-leak model above. Covered in depth
                       in the{' '}
                       <Link
-                        href="/learning-centre/what-is-landing-page-audit"
+                        href="/what-is-landing-page-audit"
                         className="text-accent hover:text-accent-light underline"
                       >
                         full audit methodology
