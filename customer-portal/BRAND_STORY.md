@@ -192,3 +192,14 @@ Nebula holds original data no competitor can replicate: real audit scores across
 - Every piece of content that uses this data reinforces the brand platform: *Nebula is the evidence standard*.
 
 **Never present aggregate data as marketing claims.** Every number must trace to actual audit engine output. The 6.2/10 is real. Keep it real.
+
+### Governed evidence records
+
+Evidence version `2026-08-06.v1` distinguishes two non-conflicting datasets:
+
+| Record | Scope | Denominator | Score | Date/precision |
+|---|---|---|---|---|
+| `ALL_AUDITS_BENCHMARK` | All completed audits in the live audit dataset | Every completed audit | 6.2/10, Grade C | Current live dataset; one decimal |
+| `CROSS_INDUSTRY_PAID_TRAFFIC_STUDY` | Cross-industry landing pages running paid traffic | 86 automated page audits | 62.7/100, Grade C | July 2026; one decimal |
+
+The 62.7/100 record is a separate July 2026 study and must never be presented as the all-audits 6.2/10 benchmark. The press surface consumes the versioned record from `app/lib/brand-evidence.ts`.
