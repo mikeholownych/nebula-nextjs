@@ -1,9 +1,11 @@
 import { readFileSync } from 'node:fs'
-import { describe, expect, it } from 'vitest'
+import path from 'node:path'
+import { describe, expect, it } from '@jest/globals'
 
-const tailwind = readFileSync(new URL('../tailwind.config.ts', import.meta.url), 'utf8')
-const styles = readFileSync(new URL('../app/styles.css', import.meta.url), 'utf8')
-const design = readFileSync(new URL('../DESIGN.md', import.meta.url), 'utf8')
+const repo = path.resolve(__dirname, '..')
+const tailwind = readFileSync(path.join(repo, 'tailwind.config.ts'), 'utf8')
+const styles = readFileSync(path.join(repo, 'app/styles.css'), 'utf8')
+const design = readFileSync(path.join(repo, 'DESIGN.md'), 'utf8')
 
 describe('brand token regression guard', () => {
   it('does not reintroduce retired chromatic tokens', () => {
