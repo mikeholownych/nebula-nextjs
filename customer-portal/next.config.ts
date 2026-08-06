@@ -1,5 +1,4 @@
 import type { NextConfig } from 'next'
-import { withPostHogConfig } from '@posthog/nextjs-config'
 import { createHash } from 'node:crypto'
 import { readFileSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
