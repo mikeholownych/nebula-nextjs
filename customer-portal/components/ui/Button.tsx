@@ -31,6 +31,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           inline-flex items-center justify-center gap-2
           transition-[color,background-color,border-color,transform] duration-[160ms] ease-out
           active:scale-[0.97]
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg
           ${variantStyles[variant]}
           ${sizeStyles[size]}
           ${disabled || isLoading ? 'opacity-50 cursor-not-allowed' : ''}
