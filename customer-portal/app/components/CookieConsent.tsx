@@ -56,13 +56,13 @@ export function getConsentRuntime(country: string | null = null) {
           api_host: '/ingest',
           ui_host: 'https://us.posthog.com',
           defaults: '2026-08-05',
-          autocapture: false,
+          autocapture: true,
           capture_exceptions: false,
-          capture_pageleave: false,
+          capture_pageleave: true,
           capture_dead_clicks: false,
           disable_surveys: true,
           disable_session_recording: true,
-          capture_performance: false,
+          capture_performance: true,
           person_profiles: 'identified_only'
         });
         window.dispatchEvent(new CustomEvent('nebula-posthog-ready'));

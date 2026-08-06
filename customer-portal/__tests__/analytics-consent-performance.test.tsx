@@ -115,13 +115,13 @@ describe('consent-gated analytics loading', () => {
     expect(consent).not.toContain("import('posthog-js')")
     expect(consent).toContain("script.src = '/ingest/static/array.js'")
     expect(consent).toContain('NEXT_PUBLIC_POSTHOG_KEY')
-    expect(consent).toContain('autocapture: false')
+    expect(consent).toContain('autocapture: true')
     expect(consent).toContain('capture_exceptions: false')
-    expect(consent).toContain('capture_pageleave: false')
+    expect(consent).toContain('capture_pageleave: true')
     expect(consent).toContain('capture_dead_clicks: false')
     expect(consent).toContain('disable_surveys: true')
     expect(consent).toContain('disable_session_recording: true')
-    expect(consent).toContain('capture_performance: false')
+    expect(consent).toContain('capture_performance: true')
   })
 
   it('does not statically import PostHog from the shared audited-route shell', () => {
