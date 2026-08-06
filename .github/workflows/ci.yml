@@ -2,9 +2,12 @@ name: CI
 
 on:
   push:
-    branches: [main, feature/*, feat/*]
+    branches: [main, feature/*, feat/*, fix/*, clay-review/*]
   pull_request:
     branches: [main]
+
+permissions:
+  contents: read
 
 jobs:
   # Job 1: Governance validation
