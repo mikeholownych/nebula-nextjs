@@ -27,8 +27,7 @@ const SIGNALS = [
   { key: 'social_proof', label: 'Social proof', desc: 'Proof visible near the first CTA', pass: 'Sample output, quote, metric, or guarantee near the CTA' },
   { key: 'mobile', label: 'Mobile viewport', desc: 'Page renders correctly on mobile', pass: 'Responsive viewport meta present' },
   { key: 'load_speed', label: 'Load speed', desc: 'Page does not leak visitors while loading', pass: 'Page weight and request count within sane limits' },
-  { key: 'above_fold', label: 'Above the fold', desc: 'Offer and promise visible without scrolling', pass: 'Visitor understands what is offered and what to do next within the first viewport' },
-  { key: 'ad_signals', label: 'Ad signals', desc: 'Ad-tracking artifacts present in page source', pass: 'Expected tracking (GA4 on homepages, pixel/UTM/conversion on paid pages) present' },
+
   { key: 'seo_foundations', label: 'SEO foundations', desc: 'Title, meta description, and H1 all present', pass: 'Title tag, meta description, and a single descriptive H1 all present' },
   { key: 'ai_readiness', label: 'AI citation readiness', desc: 'Page is citable by AI systems', pass: 'Structured signals (JSON-LD, OG tags, clean hierarchy) present' },
 ]
@@ -50,7 +49,7 @@ const PATTERNS = [
   },
   {
     label: 'Failure mode',
-    heading: 'No proof above the fold',
+    heading: 'No proof near the first CTA',
     body: 'Cold traffic doesn\'t know you. Asking them to buy before they\'ve seen evidence of anything raises the cost of every click.',
     dominant: false,
   },
@@ -340,7 +339,7 @@ export default function Home() {
                 {
                   n: '02',
                   heading: 'Get the page checks run',
-                  body: 'Message match, trust, mobile CTA, load time, CTA clarity, above fold, ad signals, SEO foundations, AI readiness, and applicable technical checks — scored against your actual page.',
+                  body: 'Headline, CTA clarity, social proof, mobile viewport, load speed, SEO foundations, AI readiness, and applicable technical checks — checked against your actual page.',
                 },
                 {
                   n: '03',
