@@ -396,7 +396,7 @@ function OverviewNext({ onSelect, unlocked, findingCount }: {
         >
           <span className="block text-sm font-semibold text-fg">Signals</span>
           <span className="mt-1 block text-sm leading-6 text-fg-muted">
-            Nine conversion signals, one clean pass standard each
+            Core conversion signals with evidence-backed checks
           </span>
         </button>
         <button
@@ -488,7 +488,7 @@ function ReportOverview({ results }: { results: AuditResult }) {
               </p>
               <p className="mt-1 text-xs text-fg-muted">
                 <span className={headline >= anchor ? 'font-semibold text-accent' : ''}>Good from {anchor.toFixed(1)}</span>
-                {' · '}published component pass standard
+                {' · '}observable component check
               </p>
             </div>
             <dl className="grid grid-cols-3 gap-6 border-t border-border pt-6 sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0">
@@ -1071,7 +1071,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                 <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">✓</span>One implementation-ready fix for your highest-impact leak</li>
                 <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">✓</span>Exact copy, code, or configuration change — not generic advice</li>
                 <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">✓</span><span><strong className="text-fg">Bonus:</strong> 30-day free re-audit to confirm the fix held</span></li>
-                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">✓</span><span><strong className="text-fg">Bonus:</strong> Your page benchmarked against 117 real audits</span></li>
+                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">✓</span><span><strong className="text-fg">Bonus:</strong> Your page compared with the current completed-audit benchmark sample</span></li>
               </ul>
               <a
                 href={

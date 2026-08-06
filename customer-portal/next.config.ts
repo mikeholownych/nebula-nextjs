@@ -491,12 +491,9 @@ const nextConfig: NextConfig = {
   },
 }
 
-const posthogApiKey = process.env.POSTHOG_PERSONAL_API_KEY
-export default posthogApiKey
-  ? withPostHogConfig(nextConfig, {
-      personalApiKey: posthogApiKey,
-      projectId: '525183',
-      host: 'https://us.posthog.com',
-      sourcemaps: { deleteAfterUpload: true },
-    })
-  : nextConfig
+// NOTE: withPostHogConfig injects a runAfterProductionCompile hook that requires
+// the personal API key to have 'error_tracking:write' scope for sourcemap upload.
+// Until the key is rotated with that scope, bypass withPostHogConfig to keep
+// production builds working. Re-enable once the key is updated.
+// const posthogApiKey = process.env.POSTHOG_PERSONAL_API_KEY
+export default nextConfig

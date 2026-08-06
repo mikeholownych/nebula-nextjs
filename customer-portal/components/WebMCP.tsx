@@ -56,7 +56,7 @@ export function WEB_MCP_RUNTIME() {
             {
               name: 'Free Audit',
               price: '$0',
-              description: 'Automated landing page audit — 9 conversion signals: message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, and load speed.',
+              description: 'Automated landing page audit — evidence-backed checks for message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, load speed, and applicable technical conditions.',
               url: 'https://nebulacomponents.com/audit',
             },
             {

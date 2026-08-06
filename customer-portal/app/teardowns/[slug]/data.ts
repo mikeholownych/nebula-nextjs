@@ -33,7 +33,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
     score: 5.4,
     grade: 'C',
     auditedAt: 'July 29, 2026',
-    summary: 'A $100M company with a landing page that fails 5 of 9 conversion signals. This is what happens when brand equity carries a page that the engine can still read.',
+    summary: 'A $100M company with a landing page that fails five documented conversion checks. This is what happens when brand equity carries a page that the engine can still read.',
     context: 'Basecamp is a well-run company with a widely-used product. A 5.4/10 is not a verdict on their business — it\'s a snapshot of five specific, measurable page-level conditions the engine flags for cold paid traffic. The finding: trust in the brand has outpaced structural page maintenance. Every issue here is verifiable and fixable in under a week.',
     findings: [
       {
@@ -142,7 +142,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
     score: 5.8,
     grade: 'C',
     auditedAt: 'July 29, 2026',
-    summary: 'Nebula ran its 9-signal audit on calendly.com. Score: 5.8/10, Grade C. Missing H1 entirely. 1.2MB HTML payload — 10× the heuristic ceiling.',
+    summary: 'Nebula ran its evidence-backed audit on calendly.com. Score: 5.8/10, Grade C. Missing H1 entirely. 1.2MB HTML payload — 10× the heuristic ceiling.',
     context: 'Calendly is a widely-used scheduling tool. A 5.8/10 captures five conditions — the missing H1 and payload issues are the most significant. Both are fixable without a visual redesign.',
     findings: [
       {
@@ -569,7 +569,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
     score: 6.8,
     grade: 'B',
     auditedAt: 'July 31, 2026',
-    summary: 'Nebula ran its 9-signal audit on postmint.de/en — the "one sentence into a social graphic" tool whose founder published a full launch autopsy: 118 visitors, 0 external signups, 5-second bounces. Score: 6.8/10, Grade B. The two bugs he diagnosed himself are both fixed on the current page. Two observable defects remain — one of them a genuine technical find.',
+    summary: 'Nebula ran its evidence-backed audit on postmint.de/en — the "one sentence into a social graphic" tool whose founder published a full launch autopsy: 118 visitors, 0 external signups, 5-second bounces. Score: 6.8/10, Grade B. The two bugs he diagnosed himself are both fixed on the current page. Two observable defects remain — one of them a genuine technical find.',
     context: 'Postmint\'s founder Tobias Schaefer wrote the launch post every solo founder should write: real numbers (118 visitors, 0 signups, 1.7% reached register), two self-diagnosed bugs (landing page explained instead of showed; Signup goal never fired), and a public list of fixes. We verified the current page against his own autopsy: the first screen now leads with output, the hero shows a live prefilled example, the template gallery is linked, and the social metadata is complete. His fixes landed. What remains is smaller — and one finding is a leaked PHP template literal sitting in the page\'s structured data.',
     findings: [
       {
@@ -601,7 +601,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
     score: 5.8,
     grade: 'C',
     auditedAt: 'July 31, 2026',
-    summary: 'Nebula ran its 9-signal audit on knallhart.dev — the "AI roasts your website" tool whose founder posted 935 impressions / 38 clicks / 0 sales from Google Ads. Score: 5.8/10, Grade C. The page itself is better than most: clear CTA, real email examples, price stated. The leak is where his traffic actually comes from.',
+    summary: 'Nebula ran its evidence-backed audit on knallhart.dev — the "AI roasts your website" tool whose founder posted 935 impressions / 38 clicks / 0 sales from Google Ads. Score: 5.8/10, Grade C. The page itself is better than most: clear CTA, real email examples, price stated. The leak is where his traffic actually comes from.',
     context: 'knallhart.dev is a €10 "brutally honest website feedback" product. The founder launched on Product Hunt, ran a small Google Ads test (935 impressions, 38 clicks, 4% CTR, zero sales), and posted on Twitter and directories — his distribution IS social links and forum threads. The audit found his page renders as a bare URL every time someone shares it. The irony writes itself: a product that sells brutal, specific website feedback has zero social-sharing metadata — the exact thing that makes every link he shares lose its first impression.',
     findings: [
       {

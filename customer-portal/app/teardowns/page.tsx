@@ -4,7 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Public Audit Teardowns | Nebula',
   description:
-    'Nebula runs its 9-signal audit on well-known public pages and publishes the raw findings. Not customers — demonstrations of what the engine produces.',
+    'Nebula runs its evidence-backed audit on well-known public pages and publishes the raw findings. Not customers — demonstrations of what the engine produces.',
   alternates: {
     canonical: 'https://nebulacomponents.com/teardowns',
   },

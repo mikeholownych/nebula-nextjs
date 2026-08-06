@@ -895,8 +895,11 @@ class AuditDB:
                 """
             )
             completed = row['completed_audits'] or 0
-            avg_score = round(float(row['avg_score_raw']) / 10.0, 1) if row['avg_score_raw'] is not None else None
-            return {"completed_audits": completed, "avg_score": avg_score}
+            # The stored score is a composite that includes deprecated
+            # source-only checks. Do not publish it until component scores
+            # are persisted and rendered-verification exclusions can be
+            # recomputed defensibly.
+            return {"completed_audits": completed, "avg_score": None}
 
     async def get_benchmarks(self) -> dict:
         """Per-component benchmark aggregates from real completed audits.
@@ -924,6 +927,7 @@ class AuditDB:
         component_counts: dict[str, dict] = {}
         scores = []
         total_findings = 0
+        deprecated_keys = {"above_fold", "ad_signals"}
 
         for row in rows:
             score = row["score"]
@@ -948,10 +952,10 @@ class AuditDB:
                     findings = []
             if not isinstance(findings, list):
                 continue
-            total_findings += len(findings)
             for f in findings:
-                if not isinstance(f, dict):
+                if not isinstance(f, dict) or f.get("key") in deprecated_keys:
                     continue
+                total_findings += 1
                 key = f.get("key") or f.get("label") or "unknown"
                 key = str(key).replace("_", " ").title()
                 label = f.get("label") or key
@@ -986,14 +990,14 @@ class AuditDB:
 
         return {
             "audit_count": len(scores),
-            "avg_score": round(sum(scores) / len(scores), 1) if scores else None,
-            "highest": round(max(scores), 1) if scores else None,
-            "lowest": round(min(scores), 1) if scores else None,
+            "avg_score": None,
+            "highest": None,
+            "lowest": None,
             "avg_failures_per_page": avg_failures_per_page,
             "top_leak": top_leak,
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "components": components[:12],
-            "distribution": [{"bucket": k, "count": v} for k, v in buckets.items()],
+            "distribution": [],
         }
 
     async def get_recent_finding(self) -> dict | None:

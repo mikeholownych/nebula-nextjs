@@ -13,7 +13,7 @@ const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 export async function GET() {
   try {
     const upstream = await fetch(`${API_BASE}/audit/stats/aggregate`, {
-      next: { revalidate: 300 },
+      cache: 'no-store',
     })
 
     if (!upstream.ok) {

@@ -4,7 +4,7 @@
   "entries": [
     {
       "claimId": "claim-9-signal-diagnosis",
-      "text": "Nebula uses a 9-signal audit framework covering message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, and load speed.",
+      "text": "Nebula uses an evidence-backed audit framework covering message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, load speed, and applicable technical checks.",
       "route": "/audit",
       "slot": "audit-method-summary",
       "projectionType": "visible_text",

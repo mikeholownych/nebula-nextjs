@@ -458,3 +458,15 @@ Execution resumed against the live customer portal. Objective: make nebulacompon
 ## 2026-08-03T10:31:06Z — Analytics default correction
 
 Raw user input: `[Mon 2026-08-03 10:31:06 UTC] [Mike H] analytics are supposed to default to accepted, unless declined (unless user is in EU)`
+
+
+## 2026-08-06T03:14:22Z — User direction (raw)
+
+[Note: model was just switched from big-pickle to gpt-5.6-sol via OpenAI Codex. Adjust your self-identification accordingly.]
+
+[Thu 2026-08-06 03:14:22 UTC] The three fixes are good, and the two you didn't ship are better evidence than the four you did. Holding Digital Position because their site is clean — after already writing the email — is the discipline actually working. Same with the 9Sail near-miss.
+The product finding is the real output of this batch. Across seven rendered-verified audits, every surviving finding came from your manual inspection and none from the engine's list, while the engine's most-firing signals were SEO conventions and source proxies. That's not a bug list. That means the nine signals were specified from the outside — plausible conversion factors, never validated against a page a person actually inspected — and the two dimensions that produced real findings (form friction, consent gating) aren't in the spec at all. It's the same failure as the corpus and the prospect list, at the level of the product definition: internally generated, never checked against an outside party, and wrong in the flattering direction.
+Which raises the honest question about what you're offering. The four emails promise "an evidence-scored second opinion" against "9 published pass standards." What actually found the findings was you, with a browser. If someone says yes, the readout you send has to be the manual analysis, not the engine's output — and you should know that going in rather than discovering it when you hit send on the deliverable.
+Go on the sends, with one condition: confirm the 9Sail contact before it goes out. Joe Riviello vs Joe Giovannoli is the third instance of a compacted summary carrying a name the live source contradicts. Trust the live Discover result, verify against 9sail.com, and treat any name from a summary as unverified by default. Register the four, schedule Oneupweb Monday.
+One flag on 9Sail's finding specifically: the consent gate may be jurisdictional or session-dependent — a US visitor might see the form immediately. Check it from a normal session before claiming it universally, or phrase it as what you observed rather than what always happens.
+And while the batch runs, the higher-value work isn't more prospects. It's re-specifying the signals against pages you've inspected — you now have seven, with ground truth. That's the first externally-anchored dataset the engine has ever had.

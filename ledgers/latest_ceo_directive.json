@@ -3,7 +3,6 @@
     {
       "action_id": "warm-reply-payment-reconcile",
       "assignee": "support",
-      "blocked_failures": 2,
       "constraints": "Read-only; do not send email, call anyone, pitch, or modify lead/payment ledgers.",
       "evidence_strength": "derived",
       "execution": {
@@ -27,13 +26,12 @@
         "escalate_after": 2,
         "max_attempts": 2
       },
-      "status": "blocked_waiting_recheck",
+      "status": "already_open",
       "verification": "Return the current warm-reply count, last-contact timestamps, checkout handoff status, and one approved next action."
     },
     {
       "action_id": "payment-path-verification",
       "assignee": "ops-finance",
-      "blocked_failures": 2,
       "constraints": "Read-only; do not create payments, modify Stripe, or change production configuration.",
       "evidence_strength": "derived",
       "execution": {
@@ -57,17 +55,17 @@
         "escalate_after": 2,
         "max_attempts": 2
       },
-      "status": "blocked_waiting_recheck",
+      "status": "already_open",
       "verification": "Inspect the active webhook route/configuration and test/live ledger separation; return evidence paths and one blocking unknown."
     }
   ],
-  "directive_id": "ceo-20260806T012149Z",
+  "directive_id": "ceo-20260806T095819Z",
   "evidence": {
-    "memo_age_hours": 3.36,
+    "memo_age_hours": 11.97,
     "real_payments": 0,
     "source": "live Nebula ledgers plus Hermes kanban state",
     "warm_replies": 1
   },
-  "observed_at": "2026-08-06T01:21:49.296498+00:00",
+  "observed_at": "2026-08-06T09:58:19.976274+00:00",
   "source_memo": "/home/mike/.hermes/cron/output/3e3cbbc1e56c/2026-08-05_22-00-09.md"
 }

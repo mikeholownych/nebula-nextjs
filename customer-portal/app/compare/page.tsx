@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Nebula Components vs Landing Page Tools — Comparisons',
     description:
-      'Evidence-led landing page audit vs the builders and meters. Honest boundaries, published pass standards.',
+      'Evidence-led landing page audit vs the builders and meters. Honest boundaries and observable checks.',
     url: 'https://nebulacomponents.com/compare',
   },
   alternates: {
@@ -23,7 +23,7 @@ export default function ComparePage() {
         <h1 className="text-4xl font-bold mb-3">Nebula Components vs the tools founders actually use</h1>
         <p className="text-fg-muted text-lg mb-10">
           Landing page builders create pages. Performance meters measure speed. Nebula audits
-          conversion readiness against published pass standards. These pages state the boundary
+          conversion readiness against observable checks. These pages state the boundary
           honestly — and where the other tool wins, it says so.
         </p>
 
@@ -50,8 +50,8 @@ export default function ComparePage() {
         <section className="mt-12 bg-bg-elevated border border-border rounded-lg p-8 text-center">
           <h2 className="text-2xl font-bold mb-2">Stop comparing. Start diagnosing.</h2>
           <p className="text-fg-muted mb-6 max-w-xl mx-auto">
-            The free audit scores the page you already have against published component pass
-            standards — no signup, no site access, no rebuild.
+            The free audit scores the page you already have against observable component checks —
+            no signup, no site access, no rebuild.
           </p>
           <a
             href="/audit"

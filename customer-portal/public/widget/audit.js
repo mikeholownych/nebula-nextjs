@@ -184,7 +184,7 @@
       h3.textContent = 'Analyzing your page…';
       root.appendChild(h3);
       var p = document.createElement('p');
-      p.textContent = 'Checking 9 conversion signals. Usually 30–90 seconds.';
+      p.textContent = 'Checking the page for conversion leaks. Usually 30–90 seconds.';
       root.appendChild(p);
       var spinner = document.createElement('div');
       spinner.className = 'nw-spinner';

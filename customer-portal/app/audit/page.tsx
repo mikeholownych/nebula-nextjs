@@ -90,7 +90,7 @@ export default async function AuditPage() {
                 See if the page is what&apos;s killing your ads.
               </h1>
               <p className="mt-4 max-w-lg text-lg leading-7 text-fg-muted">
-                Paste your URL. Leak detection runs 9 conversion signals against your actual page.
+                Paste your URL. Leak detection runs core conversion checks against your actual page.
                 See your score and the leaks found before sharing an email.
               </p>
               <ul className="mt-6 space-y-2">
@@ -260,7 +260,7 @@ export default async function AuditPage() {
             <h2 className="mb-3 text-base font-semibold text-fg">How It Works</h2>
             <ol className="list-decimal space-y-1 pl-5 text-sm text-fg-muted">
               <li>Enter your landing page URL in the field above</li>
-              <li>The audit engine fetches and scores your page across all 9 signals</li>
+              <li>The audit engine fetches and scores your page across its core conversion checks and applicable technical checks</li>
               <li>You receive a structured report with specific, actionable findings</li>
               <li>Each finding includes a severity rating and a recommended fix</li>
             </ol>

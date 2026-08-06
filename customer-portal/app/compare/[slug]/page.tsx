@@ -20,7 +20,7 @@ export async function generateMetadata({
   if (!comparison) return {}
 
   const title = `Nebula Components vs ${comparison.toolName} — Landing Page Audit Alternative`
-  const description = `${comparison.shortDescription} How Nebula Components compares: evidence-led conversion audits with published pass standards vs ${comparison.toolName}.`
+  const description = `${comparison.shortDescription} How Nebula Components compares: evidence-led conversion audits with observable checks vs ${comparison.toolName}.`
 
   return {
     title,
@@ -159,7 +159,7 @@ export default async function ComparisonPage({
         <section className="bg-bg-elevated border border-border rounded-lg p-8 text-center">
           <h2 className="text-2xl font-bold mb-2">Run the free audit</h2>
           <p className="text-fg-muted mb-6 max-w-xl mx-auto">
-            Score the page you have right now against published component pass standards — no signup, no site access, no rebuild.
+            Score the page you have right now against observable component checks — no signup, no site access, no rebuild.
           </p>
           <a
             href="/audit"

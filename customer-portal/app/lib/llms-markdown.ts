@@ -31,14 +31,14 @@ export function buildTeardownsIndexMarkdown(): string {
     .sort((a, b) => a.name.localeCompare(b.name))
     .map(
       (t) =>
-        `- [${t.name}](${site}/teardowns/${t.slug}.md): ${t.domain} — ${t.score}/10, Grade ${t.grade}. ${t.summary}`
+        `- [${t.name}](${site}/teardowns/${t.slug}.md): ${t.domain} — ${t.summary.replace(/Score: \d+(?:\.\d+)?\/10, Grade [A-F]\.\s*/g, '')}`
     )
     .join('\n')
 
   return markdownPage(
     'Nebula Teardowns',
     '/teardowns',
-    `Nebula publishes public landing page teardowns as evidence-based growth content: real pages, cold paid-traffic conditions, 9-signal scoring, and annotated findings. Every finding cites the observable condition — not an opinion.
+    `Nebula publishes public landing page teardowns as evidence-based growth content: real pages, cold paid-traffic conditions, documented checks, and annotated findings. Every finding cites the observable condition — not an opinion.
 
 HTML index: ${site}/teardowns
 
@@ -48,7 +48,7 @@ ${entries}
 
 ## Method
 
-Each teardown checks the same 9 signals as the free audit: message match, above-fold trust, mobile CTA visibility, core web vitals, CTA clarity, form friction, and compliance. Scores are snapshots of page-level conditions for cold paid traffic — not verdicts on the business.
+Each teardown applies documented checks to page-level conditions for cold paid traffic — not verdicts on the business. Above Fold and Ad Signals are excluded from public aggregate benchmarks pending rendered verification.
 
 Each teardown page is also available in markdown by appending .md to its URL (e.g. ${site}/teardowns/knallhart.md).`
   )
@@ -63,15 +63,13 @@ export function buildTeardownMarkdown(slug: string): string | null {
     .join('\n')
 
   return markdownPage(
-    `${t.name} Landing Page Audit — ${t.score}/10`,
+    `${t.name} Landing Page Audit`,
     `/teardowns/${t.slug}`,
-    `Nebula ran its 9-signal audit on ${t.url}.
+    `Nebula ran its documented landing-page audit on ${t.url}.
 
-- Score: ${t.score}/10
-- Grade: ${t.grade}
 - Audited: ${t.auditedAt}
 
-${t.summary}
+${t.summary.replace(/Score: \d+(?:\.\d+)?\/10, Grade [A-F]\.\s*/g, '')}
 
 ${t.context}
 
@@ -115,22 +113,20 @@ No sales calls. Self-serve checkout. Evidence-first: the audit names the leak be
 const auditMarkdown = markdownPage(
   'Free Landing Page Audit — Nebula',
   '/audit',
-  `The free Nebula audit is an under-two-minute automated diagnosis of any public landing page, scoring 9 conversion signals:
+  `The free Nebula audit is an under-two-minute automated diagnosis of any public landing page, returning documented conversion checks:
 
 1. Message match
 2. Trust signals
 3. Mobile CTA visibility
 4. Load time
 5. CTA clarity
-6. Above-fold clarity
-7. Ad signals
-8. SEO foundations
-9. AI readiness
+6. SEO foundations
+7. AI readiness
 
-Each failing signal is tied to evidence from the actual page and ranked by likely impact.
+Each recorded finding is tied to evidence from the actual page and ranked by likely impact. Public aggregate benchmarks exclude Above Fold and Ad Signals pending rendered verification.
 
 - No account required to run it
-- Score and initial findings appear before email; email unlocks the full report
+- Initial findings appear before email; email unlocks the full report
 - No sales calls
 
 Run it: ${site}/audit`
@@ -141,7 +137,7 @@ const aboutMarkdown = markdownPage(
   '/about',
   `Mike Holownych founded Nebula Components to provide evidence-backed landing page diagnosis and bounded remediation materials. The operating premise: most landing page failures are diagnosable, they follow repeating patterns, and they can be fixed. The problem is not the ad — it is the page.
 
-The free audit checks 9 conversion signals with observable evidence. The One-Leak Self-Implementation Kit ($97) supplies a tailored change for one high-confidence finding; the customer or their developer implements it, with a 30-day re-audit included. Nebula publishes public teardowns as evidence-based content and maintains Citable, an open-source CLI for search and AI discoverability governance.
+The free audit returns documented conversion checks with observable evidence. The One-Leak Self-Implementation Kit ($97) supplies a tailored change for one high-confidence finding; the customer or their developer implements it, with a 30-day re-audit included. Nebula publishes public teardowns as evidence-based content and maintains Citable, an open-source CLI for search and AI discoverability governance.
 
 LinkedIn: https://linkedin.com/in/mikeholownych
 GitHub: https://github.com/mikeholownych`

@@ -5,67 +5,63 @@ import CitationCopy from './CitationCopy';
 export const metadata: Metadata = {
   title: 'State of Landing Page Performance Q3 2026 | Nebula Research',
   description:
-    'Aggregate findings from 73+ landing page audits: average score 6.2/10, 100% Above Fold failure rate, 3 signals fail per page. Original research by Nebula Components.',
+    'Aggregate findings from 131 completed landing page audits. Public aggregates exclude Above Fold and Ad Signals pending rendered verification. Original research by Nebula Components.',
   alternates: {
     canonical: 'https://nebulacomponents.com/research/landing-page-performance-q3-2026',
   },
 };
 
 const signals = [
+
   {
-    name: 'Above Fold Clarity',
-    rate: '100%',
-    tier: 'critical',
-    description: 'Every page audited fails this check',
-  },
-  {
-    name: 'Message Match',
-    rate: 'High',
+    name: 'SEO Foundations',
+    rate: '78.6%',
     tier: 'high',
-    description: 'H1 does not echo the ad keyword on most pages',
+    description: 'Title, meta description, or descriptive H1 finding',
   },
   {
-    name: 'Trust Signals',
-    rate: 'High',
+    name: 'Social Proof',
+    rate: '42.7%',
     tier: 'high',
-    description: 'Most cold-traffic pages have no social proof above the fold',
+    description: 'Insufficient proof near the first CTA',
   },
   {
-    name: 'Mobile CTA',
-    rate: 'High',
+    name: 'CTA',
+    rate: '42.0%',
     tier: 'high',
-    description: 'CTA below fold on mobile on most pages',
-  },
-  {
-    name: 'Ad Signals',
-    rate: 'High',
-    tier: 'high',
-    description: 'No tracking artifact in page source on most pages',
-  },
-  {
-    name: 'CTA Clarity',
-    rate: 'Moderate',
-    tier: 'moderate',
-    description: 'Competing CTAs or unclear primary action on many pages',
+    description: 'Unclear or competing primary action',
   },
   {
     name: 'Load Speed',
-    rate: 'Moderate',
-    tier: 'moderate',
-    description: 'LCP over 2.5s on mobile on many pages',
-  },
-  {
-    name: 'SEO Foundations',
-    rate: 'Lower',
-    tier: 'lower',
-    description: 'Title, meta, H1 present on most pages',
+    rate: '39.7%',
+    tier: 'high',
+    description: 'Core Web Vitals or load-speed finding',
   },
   {
     name: 'AI Readiness',
-    rate: 'Lower',
-    tier: 'lower',
-    description: 'Structured data present on some pages',
+    rate: '32.1%',
+    tier: 'moderate',
+    description: 'Structured signals for machine-readable content',
   },
+  {
+    name: 'Headline',
+    rate: '16.8%',
+    tier: 'lower',
+    description: 'Headline clarity or outcome-language finding',
+  },
+  {
+    name: 'Local GBP',
+    rate: '5.3%',
+    tier: 'lower',
+    description: 'Applicable local-business profile finding',
+  },
+  {
+    name: 'Mobile',
+    rate: '0.8%',
+    tier: 'lower',
+    description: 'Primary action visibility or usability finding on 375px viewport',
+  },
+  /* Current completed-audit aggregates as of 2026-08-06; /benchmarks is the live source. */
 ];
 
 const tierStyles: Record<string, string> = {
@@ -93,7 +89,7 @@ export default function LandingPagePerformanceQ3Page() {
 
           {/* Subtitle */}
           <p className="text-lg text-[#9e9e9e] leading-relaxed mb-8">
-            Aggregate findings from 73+ landing page audits conducted through the Nebula audit
+            Aggregate findings from 131 completed landing page audits conducted through the Nebula audit
             engine. August 2026.
           </p>
 
@@ -116,7 +112,7 @@ export default function LandingPagePerformanceQ3Page() {
               </Link>
             </span>
             <span className="hidden md:inline text-border">|</span>
-            <span>n = 73+ audits</span>
+            <span>n = 131 completed audits</span>
           </div>
 
           {/* Cite as */}
@@ -138,10 +134,10 @@ export default function LandingPagePerformanceQ3Page() {
           </h2>
           <ul className="space-y-4">
             {[
-              'The average landing page receiving paid traffic scores 6.2/10 — Grade C.',
-              '100% of audited pages fail Above Fold clarity: the offer, promise, and next action are not all visible within the first viewport on mobile.',
-              'The average audited page fails 3 of 9 conversion signals.',
-              'The most common failure is message mismatch: the page headline does not reflect the ad promise that brought the visitor.',
+              'The completed-audit sample contains 131 audits collected through August 2026.',
+              'Public finding rates below exclude Above Fold and Ad Signals because those source-only checks have not passed rendered verification.',
+              'The remaining rates describe recorded findings, not conversion lift or revenue outcomes.',
+              'The live benchmarks endpoint is the source of truth for the current public aggregate table.',
             ].map((finding, i) => (
               <li key={i} className="flex gap-4">
                 <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-[#00c2a0]/10 border border-[#00c2a0]/30 flex items-center justify-center text-[#00c2a0] text-xs font-mono">
@@ -172,8 +168,8 @@ export default function LandingPagePerformanceQ3Page() {
             </p>
             <p>
               <span className="text-white font-medium">Evaluation method.</span> The engine fetches
-              the public HTML source of each submitted URL and evaluates it against 9 documented
-              pass standards. No pages are excluded from aggregate calculations. Named teardowns are
+              the public page and records observable conversion findings against its documented
+              checks. No pages are excluded from aggregate calculations. Named teardowns are
               published at{' '}
               <Link
                 href="/teardowns"
@@ -184,7 +180,7 @@ export default function LandingPagePerformanceQ3Page() {
               .
             </p>
             <p>
-              <span className="text-white font-medium">Sample size.</span> 73+ completed audits.
+              <span className="text-white font-medium">Sample size.</span> 131 completed audits.
             </p>
             <div className="rounded-md border border-border bg-[#0d1110] p-4">
               <p className="text-xs font-medium uppercase tracking-widest text-[#9e9e9e] mb-2">
@@ -202,10 +198,10 @@ export default function LandingPagePerformanceQ3Page() {
         {/* 4. Signal Failure Rates */}
         <section>
           <h2 className="text-2xl font-bold text-white mb-3 pb-3 border-b border-border">
-            Signal Failure Rates
+            Recorded Finding Rates
           </h2>
           <p className="text-[#9e9e9e] text-sm mb-6 leading-relaxed">
-            The percentage of audited pages that failed each of the 9 conversion signals. Signals
+            The percentage of completed audits containing each recorded finding. Findings
             are ordered from highest to lowest observed failure rate.
           </p>
 
@@ -250,7 +246,7 @@ export default function LandingPagePerformanceQ3Page() {
           </div>
 
           <p className="mt-4 text-xs text-[#9e9e9e]">
-            Exact percentages updated continuously at{' '}
+            Live rates may change as completed audits are added. The current source is{' '}
             <Link
               href="/benchmarks"
               className="text-[#00c2a0] underline underline-offset-2 hover:opacity-80 transition-opacity"
@@ -375,10 +371,10 @@ export default function LandingPagePerformanceQ3Page() {
               and traffic temperature. The median sits closer to 2–3%.
             </p>
             <p>
-              Pages passing 7 or more of the 9 Nebula signals are hypothesized to convert at the
-              higher end of that 2–5% range. This hypothesis is grounded in the structural
-              alignment between Nebula's signal criteria and established CRO first principles:
-              above-fold clarity, message scent, and friction reduction.
+              This report does not claim that a particular audit score predicts conversion rate. The
+              dataset records structural findings, not attributable revenue outcomes; above-fold
+              clarity, message scent, and friction reduction remain diagnostic signals rather than
+              a validated conversion-rate model.
             </p>
             <div className="rounded-md border border-border bg-[#0d1110] p-4">
               <p className="text-xs font-medium uppercase tracking-widest text-[#9e9e9e] mb-2">
@@ -419,7 +415,7 @@ export default function LandingPagePerformanceQ3Page() {
             </p>
             <p>
               Fix structural defects first; then the traffic quality and creative questions become
-              answerable. A page that fails 3 of 9 structural signals does not produce reliable
+              answerable. A page with multiple structural findings does not produce reliable
               signal on creative performance. The structural layer must be resolved before
               higher-order variables can be meaningfully tested.
             </p>
@@ -444,7 +440,7 @@ export default function LandingPagePerformanceQ3Page() {
                 Run the audit on your page →
               </span>
               <span className="text-[#9e9e9e] text-xs leading-relaxed">
-                Evaluate your page against all 9 signals. Free.
+                Evaluate your page against the applicable documented checks. Free.
               </span>
             </Link>
             <Link

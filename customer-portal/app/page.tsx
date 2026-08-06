@@ -37,19 +37,19 @@ const TEARDOWN_PROOFS = ['knallhart', 'postmint', 'basecamp']
 
 const PATTERNS = [
   {
-    label: 'Most common',
+    label: 'Failure mode',
     heading: 'Pricing behind the email gate',
     body: 'Asking for commitment before demonstrating value. The visitor hasn\'t decided yet — gating behind email before showing them anything useful is how you lose them.',
     dominant: true,
   },
   {
-    label: 'Second most common',
+    label: 'Failure mode',
     heading: 'CTA you cannot see',
     body: 'Low contrast, buried placement, or competing nav links. The visitor wants to act and can\'t find where to go.',
     dominant: false,
   },
   {
-    label: 'Third most common',
+    label: 'Failure mode',
     heading: 'No proof above the fold',
     body: 'Cold traffic doesn\'t know you. Asking them to buy before they\'ve seen evidence of anything raises the cost of every click.',
     dominant: false,
@@ -74,7 +74,7 @@ export default function Home() {
                 We scored our own landing page and published every finding. Now score yours.
               </h1>
               <p className="mt-6 max-w-lg text-lg leading-7 text-fg-muted">
-                Paste your URL. Nebula detects conversion leaks across 9 signals on your actual page and
+                Paste your URL. Nebula detects conversion leaks across core conversion signals and applicable technical checks on your actual page and
                 returns a prioritized fix list. Free, no signup, takes under two minutes.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -115,10 +115,8 @@ export default function Home() {
           <div className="mx-auto max-w-6xl flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-sm text-fg-muted max-w-2xl">
-                <span className="font-mono text-3xl font-extrabold text-fg">6.5</span>
-                <span className="text-lg text-fg-muted">/10</span>
-                {' '}— the average score across all landing pages audited through this engine.
-                That is a C. Most pages running paid traffic fail at least 4 of 9 signals before a visitor sees the CTA.
+                Live aggregate benchmarks are computed from completed audits only. See the current
+                sample size and verified finding rates on the Leak Index.
               </p>
             </div>
             <Link href="/benchmarks" className="shrink-0 text-sm font-semibold text-accent hover:text-accent-light transition-colors">
@@ -143,10 +141,9 @@ export default function Home() {
                 is the instrument that finds them.
               </p>
               <p className="mt-4 text-base text-fg-muted leading-7">
-                Our live self-scan — the widget above — scores a B. Not perfect, and that&apos;s
-                intentional. Most tools lead with case studies they can&apos;t verify. We&apos;d rather
-                show you the actual data on our own page first. Every signal. Every evidence
-                atom. The same output you get.
+                Our live self-scan — the widget above — shows the evidence from our own page first.
+                Most tools lead with case studies they can&apos;t verify. We&apos;d rather show you the
+                actual data. Every verified check. Every evidence atom. The same output you get.
               </p>
               <p className="mt-4 text-sm text-fg-muted">
                 When we have a real client outcome with dates, proof, and a way for you to verify it, it goes here.
@@ -166,26 +163,26 @@ export default function Home() {
                 </div>
               ))}
               <div className="mt-3 border-t border-border pt-3 text-xs text-fg-muted">
-                Static example only — scores here are fictional. The live score is the widget above.
+                Static example only — these statuses are illustrative, not a live result.
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── 3. Nine signals grid ── */}
+        {/* ── 3. Core checks grid ── */}
         <section className="border-b border-border px-6 py-16">
           <div className="mx-auto max-w-6xl">
             <div className="mb-10 grid gap-2 md:grid-cols-2 md:items-end">
               <h2 className="text-2xl font-bold tracking-section text-fg md:text-3xl">
-                Nine signals. Every scan.
+                Core checks. Every scan.
               </h2>
               <p className="text-base text-fg-muted md:text-right">
                 Not opinions. Specific pass/fail checks against your actual page.
               </p>
             </div>
             <p className="-mt-6 mb-8 max-w-2xl text-sm text-fg-muted">
-              Nine checks against your actual page. Each one has a concrete pass standard and
-              returns the raw value from your page as evidence.
+              Core checks against your actual page. Each one returns the raw value from your page as
+              evidence.
             </p>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {SIGNALS.slice(0, 4).map((s) => (
@@ -194,7 +191,7 @@ export default function Home() {
                   <p className="mb-1 font-semibold text-fg text-sm">{s.label}</p>
                   <p className="text-xs text-fg-muted leading-5">{s.desc}</p>
                   <p className="mt-2 border-t border-border pt-2 text-xs text-fg-dim leading-5">
-                    Pass: {s.pass}
+                    Check: {s.pass}
                   </p>
                 </div>
               ))}
@@ -206,7 +203,7 @@ export default function Home() {
                   <p className="mb-1 font-semibold text-fg text-sm">{s.label}</p>
                   <p className="text-xs text-fg-muted leading-5">{s.desc}</p>
                   <p className="mt-2 border-t border-border pt-2 text-xs text-fg-dim leading-5">
-                    Pass: {s.pass}
+                    Check: {s.pass}
                   </p>
                 </div>
               ))}
@@ -215,7 +212,7 @@ export default function Home() {
               {[
                 {
                   heading: 'What you receive',
-                  body: 'Overall score and grade, pass/fail per signal with the evidence from your page, and a fix list ranked by impact and effort.',
+                  body: 'Recorded findings with evidence from your page, and a fix list ranked by impact and effort.',
                 },
                 {
                   heading: 'See a real report',
@@ -224,7 +221,7 @@ export default function Home() {
                 },
                 {
                   heading: 'What happens next',
-                  body: 'Fix the highest-impact leak yourself with the report — or get the $97 One-Leak Self-Implementation Kit: one implementation-ready fix, the 30-day re-audit to confirm it held, and your page benchmarked against 117 real audits.',
+                  body: 'Fix the highest-impact leak yourself with the report — or get the $97 One-Leak Self-Implementation Kit: one implementation-ready fix, the 30-day re-audit to confirm it held, and your page compared with the current completed-audit benchmark sample.',
                 },
               ].map((item) => (
                 <div key={item.heading} className="rounded-xl border border-border bg-bg-muted/10 p-5">
@@ -264,11 +261,11 @@ export default function Home() {
                   >
                     <div className="mb-3 flex items-center justify-between">
                       <p className="text-xs font-semibold text-fg-muted">{t.domain}</p>
-                      <p className="font-mono text-xs text-fg">
-                        {t.score}/10 <span className="text-fg-muted">Grade {t.grade}</span>
-                      </p>
+
                     </div>
-                    <p className="text-sm text-fg-muted leading-6">{t.summary}</p>
+                    <p className="text-sm text-fg-muted leading-6">
+                      {t.summary.replace(/Score: \d+(?:\.\d+)?\/10, Grade [A-F]\.\s*/g, '')}
+                    </p>
                     <p className="mt-3 text-xs text-fg-dim">
                       {t.findings.length} findings documented
                     </p>
@@ -289,7 +286,7 @@ export default function Home() {
               The ads did their job. The page had one job.
             </h2>
             <p className="mb-10 max-w-xl text-base text-fg-muted leading-7">
-              Most founders blame the ad. Three page failures account for most of the cases we see.
+              Most founders blame the ad. These are recurring page failure modes we inspect in the audit.
             </p>
             <div className="grid gap-4 lg:grid-cols-[1fr_1fr]">
 
@@ -342,8 +339,8 @@ export default function Home() {
                 },
                 {
                   n: '02',
-                  heading: 'Get 9 signals checked',
-                  body: 'Message match, trust, mobile CTA, load time, CTA clarity, above fold, ad signals, SEO foundations, AI readiness — scored against your actual page.',
+                  heading: 'Get the page checks run',
+                  body: 'Message match, trust, mobile CTA, load time, CTA clarity, above fold, ad signals, SEO foundations, AI readiness, and applicable technical checks — scored against your actual page.',
                 },
                 {
                   n: '03',
@@ -379,7 +376,7 @@ export default function Home() {
                 </h2>
                 <p className="mb-6 text-base text-fg-muted leading-7">
                   You have seen &quot;free audit&quot; — a PDF with 8 generic recommendations and a discovery call at the end.
-                  This is different. See your score and initial findings before sharing an email.
+                  This is different. See your initial findings before sharing an email.
                 </p>
                 <Link
                   href="/audit"
@@ -476,7 +473,7 @@ export default function Home() {
               </div>
               <div>
                 <h3 className="font-semibold text-fg">What does the free audit check?</h3>
-                <p className="mt-1 text-sm leading-6 text-fg-muted">9 signals against your actual page. Returns pass/fail per signal with the raw evidence, plus a fix list ranked by impact. Under 2 minutes.</p>
+                <p className="mt-1 text-sm leading-6 text-fg-muted">Core conversion signals and applicable technical checks against your actual page. Returns pass/fail findings with raw evidence, plus a fix list ranked by impact. Under 2 minutes.</p>
               </div>
               <div>
                 <h3 className="font-semibold text-fg">What does the $97 self-implementation kit do?</h3>

@@ -5,7 +5,7 @@ import Benchmarks, { type BenchmarksData } from './Benchmarks'
 export const metadata: Metadata = {
   title: 'The Landing Page Leak Index — Real Audit Data | Nebula',
   description:
-    'Live aggregate data from completed Nebula landing page audits: how many conversion signals the average page leaks, which signals fail most, and score distribution. Updated continuously from real audits — never estimates.',
+    'Live aggregate data from completed Nebula landing page audits: which verified documented checks produce findings. Deprecated source-only checks and composite scores are excluded pending rendered verification.',
   alternates: { canonical: '/benchmarks' },
 }
 
@@ -32,7 +32,7 @@ export default async function BenchmarksPage() {
     '@type': 'Dataset',
     name: 'The Landing Page Leak Index',
     description:
-      'Aggregate conversion-signal failure rates from completed Nebula landing page audits. The index reports, per completed audit, the score (0-10) and which of 9 conversion signals failed their pass standard.',
+      'Aggregate finding rates from completed Nebula landing page audits. The index reports which verified documented checks produced findings; composite scores remain unpublished pending rendered verification.',
     url: 'https://nebulacomponents.com/benchmarks',
     creator: {
       '@type': 'Organization',

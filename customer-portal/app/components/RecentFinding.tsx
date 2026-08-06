@@ -44,11 +44,7 @@ export default function RecentFinding() {
         <p className="text-xs font-semibold uppercase tracking-widest text-accent">
           Last finding — {finding.completed_at}
         </p>
-        {finding.overall_score !== null && (
-          <span className="text-xs font-mono text-fg-muted">
-            {finding.overall_score}/10 · {finding.grade}
-          </span>
-        )}
+
       </div>
       <p className="text-sm font-semibold text-fg">{finding.label}</p>
       <p className="mt-1 text-xs leading-relaxed text-fg-muted line-clamp-2">{finding.issue}</p>

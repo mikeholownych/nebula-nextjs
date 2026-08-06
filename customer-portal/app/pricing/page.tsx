@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic'
 export const metadata: Metadata = {
   title: 'Pricing — Memberships & One-Leak Self-Implementation Kit | Nebula',
   description:
-    'Free 9-signal landing page audit, Pro/Growth/Agency memberships with monitoring and white-label reports, plus a $97 one-time self-implementation kit.',
+    'Free evidence-backed landing page audit, Pro/Growth/Agency memberships with monitoring and white-label reports, plus a $97 one-time self-implementation kit.',
   alternates: {
     canonical: 'https://nebulacomponents.com/pricing',
   },
@@ -116,7 +116,7 @@ export default function PricingPage() {
             <div className="grid gap-4 md:grid-cols-3">
               <div>
                 <h3 className="font-semibold text-fg">What does the free audit check?</h3>
-                <p className="mt-1 text-sm leading-6 text-fg-muted">It checks 9 conversion signals against a public landing page and returns results in under 2 minutes.</p>
+                <p className="mt-1 text-sm leading-6 text-fg-muted">It checks observable conversion conditions against a public landing page and returns results in under 2 minutes.</p>
               </div>
               <div>
                 <h3 className="font-semibold text-fg">What does the self-implementation kit cost?</h3>

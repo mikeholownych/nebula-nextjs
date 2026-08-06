@@ -126,7 +126,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
               {data.avg_failures_per_page !== null && data.avg_failures_per_page !== undefined
                 ? data.avg_failures_per_page.toFixed(1)
                 : '—'}{' '}
-              of 9 conversion signals
+              recorded findings per page
             </span>
             .
           </p>
@@ -178,8 +178,8 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
           ))}
         </div>
 
-        {/* Distribution */}
-        <div>
+        {/* Distribution — unavailable while the composite includes deprecated checks. */}
+        {data.distribution.length > 0 && <div>
           <h2 className="mb-4 text-xl font-bold tracking-tight text-fg">Score distribution</h2>
           <div className="flex h-10 w-full overflow-hidden rounded-xl border border-border">
             {data.distribution.map((d) => {
@@ -210,7 +210,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
               </span>
             ))}
           </div>
-        </div>
+        </div>}
 
         {/* Component failure rates — where paid traffic leaks first */}
         <div>
@@ -261,8 +261,8 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
             <div>
               <h3 className="text-sm font-semibold text-fg">How the data is collected</h3>
               <p className="mt-2 text-sm leading-6 text-fg-muted">
-                Each completed audit fetches a public landing page, runs the same 9 conversion-signal
-                checks, and records a 0–10 score plus which signals failed their pass standard. The
+                Each completed audit fetches a public landing page, runs the documented conversion and
+                applicable technical checks, and records a 0–10 score plus the findings produced. The
                 Leak Index aggregates only audits marked <span className="font-semibold text-fg">completed</span> —
                 no drafts, no estimates, no placeholder averages.
               </p>
@@ -276,7 +276,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
               <h3 className="text-sm font-semibold text-fg">Privacy</h3>
               <p className="mt-2 text-sm leading-6 text-fg-muted">
                 No page URLs, emails, or personal data are shown. Only aggregate failure rates,
-                average impact, and score distribution are published.
+                average impact across verified documented checks are published.
               </p>
               <h3 className="mt-5 text-sm font-semibold text-fg">Freshness</h3>
               <p className="mt-2 text-sm leading-6 text-fg-muted">

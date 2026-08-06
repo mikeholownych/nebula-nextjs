@@ -81,7 +81,7 @@ const TRUST_FAILURES = [
     signal: 'Social Proof Placement',
     label: 'Reviews and testimonials below the fold — cold traffic never reaches them',
     detail:
-      "The majority of cold paid traffic — visitors arriving from an ad for the first time — makes a go/no-go decision within the first viewport. Proof that requires scrolling to find is proof that most first-time visitors never see. Audits across 73+ pages found social proof placed below the fold on the majority of pages running paid traffic. The visitors most in need of trust reduction — cold traffic with no prior brand exposure — are exactly the visitors who won't scroll to find it.",
+      "The majority of cold paid traffic — visitors arriving from an ad for the first time — makes a go/no-go decision within the first viewport. Proof that requires scrolling to find is proof that most first-time visitors never see. The current Leak Index records a Social Proof finding on 42.7% of completed audits. The visitors most in need of trust reduction — cold traffic with no prior brand exposure — are exactly the visitors who won't scroll to find it.",
     fix: 'Move at least two trust signals into the hero section, visible without scrolling on both desktop and 375px mobile. This means placing them above or directly adjacent to the primary CTA. Proof that reaches only visitors who have already decided to convert is not doing conversion work.',
   },
   {

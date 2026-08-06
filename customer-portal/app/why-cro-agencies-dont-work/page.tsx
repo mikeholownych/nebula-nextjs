@@ -172,7 +172,7 @@ export default function WhyCROAgenciesDontWork() {
         <section className="border-y border-border bg-bg-surface px-6 py-8">
           <div className="mx-auto max-w-4xl">
             <p className="text-base leading-7 text-fg-muted max-w-3xl">
-              <span className="font-semibold text-fg">The average landing page audited through this engine scores 6.2/10 and fails 3 of 9 signals.</span>{' '}
+              <span className="font-semibold text-fg">The current completed-audit benchmark averages 6.3/10 and 4.6 recorded findings per page.</span>{' '}
               Every one of those failures is observable, specific, and fixable — without a retainer, without a discovery call, and without running an A/B test that won&apos;t reach significance for six months.
               The audit takes under two minutes. The fix takes a day.
               The retainer is optional.

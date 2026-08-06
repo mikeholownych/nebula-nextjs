@@ -54,16 +54,16 @@ export const comparisons: Comparison[] = [
       'Its templates are starting points, not pass standards. There is no published component criterion the page is checked against.',
     ],
     nebulaFit: [
-      'Nebula audits any live page — including pages built in Unbounce — against published component pass standards.',
+      'Nebula audits any live page — including pages built in Unbounce — against observable component checks.',
       'The audit tells you which component is leaking (headline, CTA, proof, above-fold) before you spend build time on a new variant.',
       'Every failing signal ships with measured evidence and a ranked fix queue, so the next Unbounce variant starts from diagnosis, not guesswork.',
     ],
     table: [
       { dimension: 'Job', tool: 'Build and publish landing pages', nebula: 'Diagnose why an existing page is not converting' },
       { dimension: 'Input', tool: 'A design you create in the editor', nebula: 'A live URL — no site access or rebuild required' },
-      { dimension: 'Scoring', tool: 'A/B test winner (relative)', nebula: 'Component scores vs published pass standards (absolute)' },
+      { dimension: 'Scoring', tool: 'A/B test winner (relative)', nebula: 'Component scores against observable checks' },
       { dimension: 'Evidence', tool: 'Test statistics', nebula: 'Measured page observations, selectors, and deltas per finding' },
-      { dimension: 'Pass standards', tool: 'Not published', nebula: 'Published on /benchmarks from the live audit dataset' },
+      { dimension: 'Evidence', tool: 'Not published', nebula: 'Published on /benchmarks from the live audit dataset' },
       { dimension: 'Price', tool: 'Monthly subscription', nebula: 'Free audit; $97 One-Leak Self-Implementation Kit' },
     ],
     useBoth:
@@ -93,14 +93,14 @@ export const comparisons: Comparison[] = [
     ],
     nebulaFit: [
       'Nebula audits any page regardless of stack — Instapage pages included — so you can diagnose before committing to a platform migration.',
-      'The audit score is anchored to published pass standards on /benchmarks, backed by real completed audits.',
+      'The audit score is anchored to observable checks on /benchmarks, backed by real completed audits.',
       'The ranked fix queue tells you the single highest-leverage repair, which is the difference between an experiment roadmap and a diagnosis.',
     ],
     table: [
       { dimension: 'Job', tool: 'Build, personalize, experiment inside the platform', nebula: 'Diagnose any live page against published standards' },
       { dimension: 'Scope', tool: 'Pages built in Instapage', nebula: 'Any public URL, any builder, any stack' },
       { dimension: 'Scoring', tool: 'Proprietary in-platform score', nebula: 'Composite score + component scores with a published "good from" anchor' },
-      { dimension: 'Dataset', tool: 'Not published', nebula: 'Public /benchmarks from real audits (54 completed to date)' },
+      { dimension: 'Dataset', tool: 'Not published', nebula: 'Public /benchmarks from real completed audits' },
       { dimension: 'Deliverable', tool: 'Experiments and variants', nebula: 'Ranked fix queue with measured evidence per finding' },
       { dimension: 'Price', tool: 'Monthly subscription', nebula: 'Free audit; $97 One-Leak Self-Implementation Kit' },
     ],

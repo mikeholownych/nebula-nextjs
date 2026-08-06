@@ -81,7 +81,9 @@ export default function SelfScan() {
             <span>{timeAgo(snapshot.scanned_at)}</span>
           </div>
           <ul className="space-y-1.5">
-            {snapshot.signals.map((signal, i) => (
+            {snapshot.signals
+              .filter((signal) => signal.key !== 'above_fold' && signal.key !== 'ad_signals')
+              .map((signal, i) => (
               <li
                 key={signal.key}
                 className="finding-reveal flex items-center justify-between"
@@ -103,8 +105,8 @@ export default function SelfScan() {
             ))}
           </ul>
           <div className="mt-3 border-t border-border pt-3 text-xs text-fg-muted">
-            Overall {snapshot.overall.toFixed(1)}/10 · Grade {snapshot.grade} — the same audit
-            engine every free scan runs, checked on ourselves.
+            Verified checks shown above. Above Fold and Ad Signals are omitted pending rendered
+            verification.
           </div>
         </div>
       )}
