@@ -1,12 +1,11 @@
 /**
  * NebulaMark — the Nebula Components brand glyph.
  *
- * A 3×3 grid of signal indicators — each node represents one of the 9
- * conversion signals. Pass state = filled circle. Fail state = ring.
+ * A 3×3 grid of status indicators. Pass state = filled circle. Fail state = ring.
  * At 16×16px it reads as a dense grid. At 32px+ the structure is clear.
  *
- * The mark encodes the entire product philosophy in one symbol:
- * nine discrete checks, each with a binary state, composing a whole.
+ * The mark is intentionally semantic-neutral so the brand glyph does not
+ * encode a particular audit taxonomy or score.
  *
  * Usage:
  *   <NebulaMark size={24} />                    — all neutral (intro/loading)
@@ -20,7 +19,7 @@ export type SignalState = 'pass' | 'fail' | 'neutral'
 
 interface NebulaMarkProps extends SVGProps<SVGSVGElement> {
   size?: number
-  /** 9 states in row-major order (top-left to bottom-right). Defaults to all neutral. */
+  /** Status states in row-major order. Defaults to all neutral. */
   states?: SignalState[]
   /** Color for pass nodes. Defaults to currentColor. */
   passColor?: string
@@ -110,13 +109,13 @@ export function NebulaMark({
 }
 
 /**
- * Static logo variant — uses the Nebula teal accent with a subtle
+ * Static logo variant — uses the Nebula accent with a subtle
  * pass/neutral pattern that reads as intentional at any size.
  * This is the primary brand mark used in SiteNav and Footer.
  */
 export function NebulaLogo({ size = 24, ...props }: { size?: number } & SVGProps<SVGSVGElement>) {
-  // Fixed decorative state: top row pass, middle mixed, bottom neutral
-  // Communicates "most signals pass, one in progress" — the B grade story
+  // Fixed decorative state: top row pass, middle mixed, bottom neutral.
+  // This is decorative branding, not a data or score representation.
   const decorativeStates: SignalState[] = [
     'pass', 'pass', 'pass',
     'pass', 'pass', 'neutral',

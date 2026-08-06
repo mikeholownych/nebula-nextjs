@@ -42,14 +42,15 @@ export default function SiteNav() {
         </div>
         <details className="group relative sm:hidden">
           <summary
-            className="flex cursor-pointer list-none items-center justify-center rounded-lg p-2 text-fg hover:bg-border/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent [&::-webkit-details-marker]:hidden"
+            className="flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center rounded-lg p-2 text-fg hover:bg-border/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent [&::-webkit-details-marker]:hidden"
             aria-label="Toggle navigation"
+            aria-controls="mobile-navigation"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
               <path d="M4 7h16M4 12h16M4 17h16" />
             </svg>
           </summary>
-          <div className="invisible absolute right-0 top-[calc(100%+1rem)] flex w-48 origin-top-right -translate-y-1 scale-95 flex-col gap-1 rounded-xl border border-border bg-bg px-5 py-4 opacity-0 shadow-lg transition-[opacity,transform,visibility] duration-200 ease-out group-open:visible group-open:translate-y-0 group-open:scale-100 group-open:opacity-100">
+          <div id="mobile-navigation" className="invisible absolute right-0 top-[calc(100%+1rem)] flex w-48 origin-top-right -translate-y-1 scale-95 flex-col gap-1 rounded-xl border border-border bg-bg px-5 py-4 opacity-0 shadow-lg transition-[opacity,transform,visibility] duration-200 ease-out motion-reduce:transition-none group-open:visible group-open:translate-y-0 group-open:scale-100 group-open:opacity-100">
             <NavigationLinks mobile />
           </div>
         </details>

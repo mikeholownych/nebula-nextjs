@@ -2,9 +2,12 @@ name: CI
 
 on:
   push:
-    branches: [main, feature/*, feat/*]
+    branches: [main, feature/*, feat/*, fix/*, clay-review/*]
   pull_request:
     branches: [main]
+
+permissions:
+  contents: read
 
 jobs:
   # Job 1: Governance validation
@@ -16,6 +19,8 @@ jobs:
         working-directory: customer-portal
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -40,6 +45,8 @@ jobs:
         working-directory: customer-portal
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -60,6 +67,8 @@ jobs:
         working-directory: customer-portal
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -78,6 +87,8 @@ jobs:
         working-directory: customer-portal
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -102,6 +113,8 @@ jobs:
         working-directory: customer-portal
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -121,7 +134,7 @@ jobs:
           retention-days: 7
           if-no-files-found: warn
 
-  # Job 6: Security audit
+  # Job 6: Security audit (advisory — does not block merge)
   security:
     name: Security Audit
     runs-on: ubuntu-latest
@@ -130,6 +143,8 @@ jobs:
         working-directory: customer-portal
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -137,5 +152,4 @@ jobs:
           cache-dependency-path: customer-portal/package-lock.json
       - run: npm ci
       - name: npm audit (production deps only)
-        run: npm audit --omit=dev --audit-level=moderate
-        continue-on-error: true
+        run: npm audit --omit=dev --audit-level=moderate || true

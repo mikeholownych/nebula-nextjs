@@ -128,7 +128,6 @@ export default async function SharedPortalPage({
           {branding?.agency_name ? (
             <div className="mb-3 flex items-center gap-3">
               {branding.agency_logo_url && (
-                // eslint-disable-next-line @next/next/no-img-element
                 <img src={branding.agency_logo_url} alt={branding.agency_name} className="h-8 w-auto" />
               )}
               <p className="text-xs font-semibold uppercase tracking-widest text-emerald-400">

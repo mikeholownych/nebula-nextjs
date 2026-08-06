@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 
 interface RecentFindingData {
+  key?: string
   label: string
   issue: string
   impact: number
@@ -11,6 +12,9 @@ interface RecentFindingData {
   grade: string | null
   completed_at: string
 }
+
+const DEPRECATED_FINDING_KEYS = new Set(['above_fold', 'ad_signals'])
+const DEPRECATED_FINDING_LABELS = new Set(['above fold', 'above-fold clarity', 'ad signals'])
 
 /**
  * Shows the highest-impact finding from the most recently completed audit.
@@ -26,7 +30,13 @@ export default function RecentFinding() {
     fetch('/api/audit/stats/recent-finding')
       .then((res) => (res.ok ? res.json() : null))
       .then((data: RecentFindingData | null) => {
-        if (!cancelled && data && data.label && data.issue) setFinding(data)
+        const normalizedLabel = data?.label.trim().toLowerCase()
+        const isDeprecated = Boolean(
+          data &&
+            ((data.key && DEPRECATED_FINDING_KEYS.has(data.key)) ||
+              (normalizedLabel && DEPRECATED_FINDING_LABELS.has(normalizedLabel))),
+        )
+        if (!cancelled && data && data.label && data.issue && !isDeprecated) setFinding(data)
       })
       .catch(() => {
         // No data — render nothing rather than fabricating.

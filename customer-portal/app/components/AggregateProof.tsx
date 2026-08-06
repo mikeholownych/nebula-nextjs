@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 
 interface StatsResponse {
   completed_audits: number
-  avg_score: number | null
 }
 
 /**
@@ -36,10 +35,7 @@ export default function AggregateProof() {
 
   return (
     <p className="mx-auto mt-4 max-w-lg text-center font-mono text-xs text-fg-muted">
-      {stats.completed_audits} real audit{stats.completed_audits === 1 ? '' : 's'} completed so far
-      {stats.avg_score !== null && (
-        <> · average score {stats.avg_score.toFixed(1)}/10</>
-      )}
+      {stats.completed_audits} verified audit{stats.completed_audits === 1 ? '' : 's'} in the completed sample
       {' '}— not a projection, the actual number
     </p>
   )

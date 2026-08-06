@@ -135,7 +135,7 @@ export async function POST(request: NextRequest) {
     // Stripe Link: allow saving payment method for faster future checkouts
     'payment_intent_data[setup_future_usage]': 'off_session',
     // Statement descriptor — what appears on the customer's bank statement
-    'payment_intent_data[statement_descriptor_suffix]': 'NEBULA FIX PACK',
+    'payment_intent_data[statement_descriptor_suffix]': 'NEBULA KIT',
     submit_type: 'pay',
     success_url: new URL('/thank-you?session_id={CHECKOUT_SESSION_ID}', baseUrl).toString(),
     cancel_url: new URL(`${fixPack.checkout.pagePath}?audit_id=${encodeURIComponent(auditId)}&from=stripe_cancel`, baseUrl).toString(),

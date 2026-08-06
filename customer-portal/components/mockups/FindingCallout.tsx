@@ -128,7 +128,6 @@ export const FindingCallout = forwardRef<HTMLSpanElement, FindingCalloutProps>(
     if (v.behind) {
       return (
         <>
-          <RoughFilters />
           <span ref={ref} className={cn(v.wrapper, className)}>
             <span className="relative z-10">{children}</span>
             <Svg className={svgClass} />
@@ -139,7 +138,6 @@ export const FindingCallout = forwardRef<HTMLSpanElement, FindingCalloutProps>(
 
     return (
       <>
-        <RoughFilters />
         <span ref={ref} className={cn(v.wrapper, className)}>
           {children}
           <Svg className={svgClass} />

@@ -1,18 +1,17 @@
 {
   "version": 1,
   "asOf": "2026-07-25",
-  "entries": [
+  "entries": [],
+  "omissions": [
     {
       "claimId": "claim-9-signal-diagnosis",
-      "text": "Nebula uses an evidence-backed audit framework covering message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, load speed, and applicable technical checks.",
       "route": "/audit",
       "slot": "audit-method-summary",
       "projectionType": "visible_text",
-      "evidenceIds": [
-        "evidence-9signal-framework-definition"
-      ],
-      "supportStatus": "directly_supported"
+      "failClosedAction": "omit",
+      "reasons": [
+        "missing_claim"
+      ]
     }
-  ],
-  "omissions": []
+  ]
 }

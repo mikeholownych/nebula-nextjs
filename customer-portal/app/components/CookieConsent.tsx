@@ -10,6 +10,14 @@ export function getConsentRuntime(country: string | null = null) {
     var posthogKey = ${JSON.stringify(process.env.NEXT_PUBLIC_POSTHOG_KEY || '')};
     var banner = document.getElementById('cookie-consent-banner');
     if (!banner) return;
+    var previouslyFocused = document.activeElement;
+    var focusable = function () {
+      return Array.prototype.slice.call(banner.querySelectorAll('button, a[href]'));
+    };
+    var focusFirst = function () {
+      var controls = focusable();
+      if (controls[0] && typeof controls[0].focus === 'function') controls[0].focus();
+    };
 
     function loadGoogleAnalytics() {
       if (document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) return;
@@ -77,7 +85,10 @@ export function getConsentRuntime(country: string | null = null) {
       document.documentElement.setAttribute('data-analytics-default', level === 'all' ? 'accepted' : 'declined');
       document.documentElement.setAttribute('data-cookie-consent', 'given');
       banner.classList.add('consent-dismissing');
-      var hide = function () { banner.hidden = true; };
+      var hide = function () {
+        banner.hidden = true;
+        if (previouslyFocused && typeof previouslyFocused.focus === 'function') previouslyFocused.focus();
+      };
       // transitionend gives the fast path; the timeout is a backstop so the
       // banner can never get stuck visible-but-dismissed if the transition
       // doesn't fire (e.g. the element is display:none for some other reason).
@@ -110,6 +121,26 @@ export function getConsentRuntime(country: string | null = null) {
       window.dispatchEvent(new CustomEvent('cookie-consent-update', { detail: state }));
     }
 
+    banner.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        save('necessary');
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      var controls = focusable();
+      if (!controls.length) return;
+      var first = controls[0];
+      var last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+
     document.addEventListener('click', function (event) {
       var target = event.target;
       if (!(target instanceof Element)) return;
@@ -139,6 +170,7 @@ export function getConsentRuntime(country: string | null = null) {
       } else {
         document.documentElement.setAttribute('data-analytics-default', euVisitor ? 'required' : 'accepted');
         if (!euVisitor) loadAnalytics();
+        focusFirst();
       }
     } catch (error) {}
   })();
@@ -153,22 +185,24 @@ export default function CookieConsent({ country = null }: { country?: string | n
       <div
         id="cookie-consent-banner"
         role="dialog"
+        aria-modal="true"
+        tabIndex={-1}
         aria-labelledby="cookie-banner-title"
         aria-describedby="cookie-banner-description"
-        className="fixed bottom-0 left-0 right-0 z-50 max-h-[42vh] overflow-y-auto translate-y-0 border-t border-emerald-500/20 bg-[#0a0a0a] p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] opacity-100 transition-[opacity,transform] duration-300 ease-out [&.consent-dismissing]:translate-y-full [&.consent-dismissing]:opacity-0 md:max-h-none md:p-6"
+        className="fixed bottom-0 left-0 right-0 z-50 max-h-[42vh] overflow-y-auto translate-y-0 border-t border-border bg-bg-panel p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] opacity-100 transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none [&.consent-dismissing]:translate-y-full [&.consent-dismissing]:opacity-0 md:max-h-none md:p-6"
       >
         <div className="mx-auto max-w-5xl">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-8">
             <div className="flex-1">
-              <h2 id="cookie-banner-title" className="mb-1 text-base font-semibold text-white">
+              <h2 id="cookie-banner-title" className="mb-1 text-base font-semibold text-fg">
                 We use cookies
               </h2>
-              <p id="cookie-banner-description" className="text-sm leading-relaxed text-gray-400">
+              <p id="cookie-banner-description" className="text-sm leading-relaxed text-fg-muted">
                 We use cookies for analytics to improve our site. Essential cookies keep your
                 session active. You can accept all cookies or only essential ones.{' '}
                 <a
                   href="/privacy-policy"
-                  className="text-emerald-400 underline underline-offset-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
+                  className="text-accent underline underline-offset-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-panel"
                 >
                   Privacy Policy
                 </a>
@@ -178,14 +212,14 @@ export default function CookieConsent({ country = null }: { country?: string | n
               <button
                 id="cookie-consent-essential"
                 type="button"
-                className="rounded-lg border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-medium text-gray-300 transition-colors hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
+                className="rounded-lg border border-border bg-bg px-5 py-2.5 text-sm font-medium text-fg-muted transition-colors hover:bg-bg-panel focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-panel"
               >
                 Essential only
               </button>
               <button
                 id="cookie-consent-all"
                 type="button"
-                className="rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-black transition-colors hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
+                className="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-bg transition-colors hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-panel"
               >
                 Accept all
               </button>

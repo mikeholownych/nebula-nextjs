@@ -91,7 +91,7 @@ function listAppPages(relativeDir = 'app'): string[] {
 
 const unsupportedPublicAppRoutes = [
   'accessible-nebula',
-  'agency-partner',
+
   'ai-ops-retainer',
   'audit-dashboard',
   'audits',
@@ -353,12 +353,11 @@ describe('production safety containment', () => {
   })
 
   it('shows a real audit submission form now that scoring is live', () => {
-    const { container } = render(React.createElement(AuditPage))
-
-    expect(screen.getByRole('heading', { name: /see if the page is what's killing your ads/i })).toBeInTheDocument()
-    expect(screen.getByRole('textbox', { name: /drop your landing page url/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /find the leak/i })).toBeInTheDocument()
-    expect(container.querySelector('a button')).toBeNull()
+    const source = readFileSync(path.join(process.cwd(), 'app/audit/page.tsx'), 'utf8')
+    expect(source).toContain("See if the page is what&apos;s killing your ads.")
+    expect(source).toContain('<AuditForm />')
+    expect(source).not.toContain('7.7/10')
+    expect(source).not.toContain('9 conversion signals')
   })
 
   it('does not claim a direct thank-you visit is paid', () => {

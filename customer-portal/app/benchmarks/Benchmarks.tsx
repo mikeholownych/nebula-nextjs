@@ -22,15 +22,12 @@ type ComponentStat = {
 }
 
 const SIGNAL_DESCRIPTIONS: Record<string, string> = {
-  'Above Fold': 'Offer and promise visible in the first viewport without scrolling',
-  'Ad Signals': 'Recognizable ad-tracking artifacts in the fetched page source',
   'Seo Foundations': 'Title, meta description, and single descriptive H1 present',
   Cta: 'One clear primary action with action + outcome copy',
   'Load Speed': 'LCP under 2.5s, CLS under 0.1, INP under 200ms on mobile',
   'Social Proof': 'Testimonials, reviews, or proof markers near the first CTA',
   'Ai Readiness': 'Signals that make the page citable and understandable to AI systems',
   Headline: 'Headline that repeats the incoming ad promise and names the outcome',
-  'Local Gbp': 'Google Business Profile signals for local businesses',
   Mobile: 'Primary action visible and usable on a 375px viewport',
 }
 
@@ -38,21 +35,26 @@ const SIGNAL_DESCRIPTIONS: Record<string, string> = {
 // (deliver_audit.py dimension scoring), so the published statistic
 // can always be checked against the actual check that produced it.
 const PASS_STANDARDS: Record<string, string> = {
-  'Above Fold':
-    "Visitor understands what is offered, who it's for, and what to do next within the first viewport.",
-  'Ad Signals':
-    'At least one recognized ad-tracking artifact in the fetched page source (pixel, tag manager, GA4, or conversion API reference).',
   'Seo Foundations': 'Title tag, meta description, and a single descriptive H1 all present.',
-  Cta: 'One primary action with action + outcome copy, visible above the fold.',
+  Cta: 'One primary action with action + outcome copy, visible in the initial viewport.',
   'Load Speed': 'LCP under 2.5s, CLS under 0.1, INP under 200ms on mobile.',
   'Social Proof':
     'Proof near the first CTA: sample output, customer quote, metric, guarantee, or process evidence.',
   'Ai Readiness':
     'Structured signals that make the page citable and understandable to AI systems (JSON-LD, OG tags, clean hierarchy).',
   Headline: 'H1 is 12–90 characters and names the buyer outcome, not a generic claim.',
-  'Local Gbp': 'LocalBusiness/Product structured data or GBP product listing indicators present.',
   Mobile: 'Primary action visible and usable on a 375px viewport.',
 }
+
+const VERIFIED_COMPONENT_LABELS = new Set([
+  'Seo Foundations',
+  'Cta',
+  'Load Speed',
+  'Social Proof',
+  'Ai Readiness',
+  'Headline',
+  'Mobile',
+])
 
 const fmtDate = (iso: string | null): string | null => {
   if (!iso) return null
@@ -109,12 +111,18 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
     )
   }
 
-  const maxFailures = Math.max(1, ...data.components.map((c) => c.failures))
+  const verifiedComponents = data.components.filter((c) => VERIFIED_COMPONENT_LABELS.has(c.label))
+  const maxFailures = Math.max(1, ...verifiedComponents.map((c) => c.failures))
   const updated = fmtDate(data.generated_at)
 
   return (
     <section className="px-6 py-16">
       <div className="mx-auto max-w-6xl space-y-12">
+        <p className="rounded-xl border border-accent/20 bg-accent/5 px-5 py-3 text-sm leading-6 text-fg-muted">
+          Verified sample only: this page publishes rates from the current seven-signal registry.
+          Deprecated source-only checks are omitted until rendered verification is available.
+        </p>
+
         {/* The citable stat */}
         <div className="rounded-2xl border border-accent/30 bg-accent/5 p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent">
@@ -150,18 +158,9 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
         </div>
 
         {/* Headline stats */}
-        <div className="grid gap-3 sm:grid-cols-4">
+        <div className="grid gap-3 sm:grid-cols-2">
           {[
             { label: 'Audits in sample', value: data.audit_count, suffix: '' },
-            { label: 'Average score', value: data.avg_score?.toFixed(1) ?? '—', suffix: '/10' },
-            {
-              label: 'Range',
-              value:
-                data.lowest !== null && data.highest !== null
-                  ? `${data.lowest.toFixed(1)}–${data.highest.toFixed(1)}`
-                  : '—',
-              suffix: '/10',
-            },
             {
               label: 'Top leak failure rate',
               value: data.top_leak ? `${data.top_leak.share}%` : '—',
@@ -223,7 +222,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
             converts.
           </p>
           <div className="space-y-3">
-            {data.components.map((c) => (
+            {verifiedComponents.map((c) => (
               <div key={c.label} className="rounded-xl border border-border bg-bg-muted/10 p-4">
                 <div className="mb-2 flex flex-wrap items-baseline justify-between gap-2">
                   <div>

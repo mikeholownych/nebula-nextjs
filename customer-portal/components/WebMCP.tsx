@@ -1,6 +1,15 @@
 import { getActiveFixPack } from '@/app/lib/public-facts'
 
 const ACTIVE_FIX_PACK = getActiveFixPack()
+const PUBLIC_SIGNAL_LABELS = [
+  'message match',
+  'trust signals',
+  'mobile CTA',
+  'load speed',
+  'CTA clarity',
+  'SEO foundations',
+  'AI readiness',
+] as const
 
 /**
  * WebMCP — exposes Nebula Components site tools to supporting browsers without
@@ -16,10 +25,11 @@ export function WEB_MCP_RUNTIME() {
     (function () {
       var context = navigator.modelContext;
       if (!context || typeof context.registerTool !== 'function') return;
+      var publicSignals = ${JSON.stringify(PUBLIC_SIGNAL_LABELS)};
 
       context.registerTool({
         name: 'request_audit',
-        description: 'Request a free landing page conversion audit from Nebula Components. Provide the landing page URL. Returns audit submission confirmation.',
+        description: 'Request a free evidence-backed landing page audit from Nebula Components. Provide the landing page URL. Returns a stable submission result.',
         inputSchema: {
           type: 'object',
           properties: {
@@ -34,12 +44,20 @@ export function WEB_MCP_RUNTIME() {
           },
           required: ['url']
         },
-        execute: function (input) {
-          var params = new URLSearchParams({ url: input.url });
-          if (input.email) params.set('email', input.email);
-          var target = '/audit?' + params.toString();
-          window.location.href = target;
-          return { status: 'redirecting', url: target };
+        execute: async function (input) {
+          if (!input || typeof input.url !== 'string' || !/^https?:\\/\\//i.test(input.url.trim())) {
+            return { status: 'error', code: 'INVALID_URL', message: 'Provide a public HTTP or HTTPS URL.' };
+          }
+          var response = await fetch('/api/audit/start', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url: input.url, email: input.email || undefined }),
+          });
+          var data = await response.json().catch(function () { return {}; });
+          if (!response.ok || !data.audit_id) {
+            return { status: 'error', code: data.error || 'AUDIT_SUBMISSION_FAILED', message: 'The audit could not be submitted. Try again from the audit page.' };
+          }
+          return { status: 'submitted', audit_id: data.audit_id, url: data.url || input.url };
         }
       });
 
@@ -56,7 +74,7 @@ export function WEB_MCP_RUNTIME() {
             {
               name: 'Free Audit',
               price: '$0',
-              description: 'Automated landing page audit — evidence-backed checks for message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, load speed, and applicable technical conditions.',
+              description: 'Automated landing page audit — evidence-backed checks for ' + publicSignals.join(', ') + '.',
               url: 'https://nebulacomponents.com/audit',
             },
             {
