@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import posthog from '@/app/lib/posthog-browser'
 
@@ -165,14 +165,22 @@ export default function LabClient() {
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<LabResponse | null>(null)
   // Save-to-workspace state
-  const [saveEmail, setSaveEmail] = useState<string>(() => {
-    if (typeof window === 'undefined') return ''
-    return window.localStorage.getItem('nebula_ws_email') || ''
-  })
+  // Save-to-workspace state. Start empty so SSR and the first client render
+  // agree; the stored email is pulled in after mount (reading localStorage
+  // during render caused an input value hydration mismatch for returning
+  // visitors — the quiet sibling of the /workspace React #418 bug).
+  const [saveEmail, setSaveEmail] = useState<string>('')
   const [saveLabel, setSaveLabel] = useState('')
   const [saving, setSaving] = useState(false)
   const [saveError, setSaveError] = useState<string | null>(null)
   const [savedId, setSavedId] = useState<string | null>(null)
+
+  // Pull any previously-used workspace email once, after mount, to prefill the
+  // save form without affecting SSR/first render.
+  useEffect(() => {
+    const stored = window.localStorage.getItem('nebula_ws_email')
+    if (stored) setSaveEmail(stored)
+  }, [])
 
   function buildSavePayload() {
     if (!result) return null
