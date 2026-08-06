@@ -1,6 +1,5 @@
 import { getPublicClaim } from '@/app/lib/evidence-atoms'
 import { render, screen } from '@testing-library/react'
-import AuditPage from '@/app/audit/page'
 import packageManifest from '@/package.json'
 import { execFileSync } from 'node:child_process'
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
@@ -45,7 +44,7 @@ describe('Evidence Atom Registry', () => {
 
     expect(claim).toEqual({
       claimId: 'claim-9-signal-diagnosis',
-      text: 'Nebula uses a 9-signal audit framework covering message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, and load speed.',
+      text: 'Nebula uses an evidence-backed audit framework covering message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, load speed, and applicable technical checks.',
       evidenceIds: ['evidence-9signal-framework-definition'],
       supportStatus: 'directly_supported',
     })
@@ -100,7 +99,7 @@ describe('Evidence Atom Registry', () => {
     expect(claim).not.toBeNull()
     expect(claim?.claimId).toBe('claim-9-signal-diagnosis')
     expect(claim?.text).toBe(
-      'Nebula uses a 9-signal audit framework covering message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, and load speed.',
+      'Nebula uses an evidence-backed audit framework covering message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, load speed, and applicable technical checks.',
     )
   })
 
