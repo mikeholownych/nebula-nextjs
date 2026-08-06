@@ -22,15 +22,15 @@ export const metadata: Metadata = {
 }
 
 const SIGNALS = [
-  { key: 'message_match', label: 'Message match', desc: 'Ad promise matches page headline', pass: 'Headline repeats the ad promise within 3 words' },
-  { key: 'trust_signals', label: 'Trust signals', desc: 'Social proof visible above fold', pass: '2+ trust signals above the fold' },
-  { key: 'mobile_cta', label: 'Mobile CTA', desc: 'Primary action visible without scroll', pass: 'CTA visible on a 375px viewport without scrolling' },
-  { key: 'load_time', label: 'Load time', desc: 'LCP under 2.5s on mobile', pass: 'LCP < 2.5s, CLS < 0.1, INP < 200ms' },
-  { key: 'cta_clarity', label: 'CTA clarity', desc: 'One clear action, no competing choices', pass: 'Exactly one primary action, clearly labeled' },
+  { key: 'headline', label: 'Headline', desc: 'Headline names the buyer outcome', pass: 'Headline is outcome-specific and 12-90 characters' },
+  { key: 'cta', label: 'CTA clarity', desc: 'One clear action, action+outcome language', pass: 'Primary CTA uses action + outcome copy' },
+  { key: 'social_proof', label: 'Social proof', desc: 'Proof visible near the first CTA', pass: 'Sample output, quote, metric, or guarantee near the CTA' },
+  { key: 'mobile', label: 'Mobile viewport', desc: 'Page renders correctly on mobile', pass: 'Responsive viewport meta present' },
+  { key: 'load_speed', label: 'Load speed', desc: 'Page does not leak visitors while loading', pass: 'Page weight and request count within sane limits' },
   { key: 'above_fold', label: 'Above the fold', desc: 'Offer and promise visible without scrolling', pass: 'Visitor understands what is offered and what to do next within the first viewport' },
-  { key: 'ad_signals', label: 'Ad signals', desc: 'Ad-tracking artifacts present in page source', pass: 'At least one recognised ad-tracking artifact in the fetched source' },
+  { key: 'ad_signals', label: 'Ad signals', desc: 'Ad-tracking artifacts present in page source', pass: 'Expected tracking (GA4 on homepages, pixel/UTM/conversion on paid pages) present' },
   { key: 'seo_foundations', label: 'SEO foundations', desc: 'Title, meta description, and H1 all present', pass: 'Title tag, meta description, and a single descriptive H1 all present' },
-  { key: 'ai_readiness', label: 'AI readiness', desc: 'Page is citable by AI systems', pass: 'Structured signals (JSON-LD, OG tags, clean hierarchy) present' },
+  { key: 'ai_readiness', label: 'AI citation readiness', desc: 'Page is citable by AI systems', pass: 'Structured signals (JSON-LD, OG tags, clean hierarchy) present' },
 ]
 
 const TEARDOWN_PROOFS = ['knallhart', 'postmint', 'basecamp']
@@ -115,10 +115,10 @@ export default function Home() {
           <div className="mx-auto max-w-6xl flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-sm text-fg-muted max-w-2xl">
-                <span className="font-mono text-3xl font-extrabold text-fg">6.2</span>
+                <span className="font-mono text-3xl font-extrabold text-fg">6.5</span>
                 <span className="text-lg text-fg-muted">/10</span>
                 {' '}— the average score across all landing pages audited through this engine.
-                That is a C. Most pages running paid traffic fail at least 3 of 9 signals before a visitor sees the CTA.
+                That is a C. Most pages running paid traffic fail at least 4 of 9 signals before a visitor sees the CTA.
               </p>
             </div>
             <Link href="/benchmarks" className="shrink-0 text-sm font-semibold text-accent hover:text-accent-light transition-colors">
