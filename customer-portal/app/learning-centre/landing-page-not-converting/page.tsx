@@ -563,7 +563,7 @@ export default function LandingPageNotConvertingPage() {
             </p>
             <div className="overflow-hidden rounded-2xl border border-border">
               <Image
-                src="/screenshots/audit-results-example.webp"
+                src="/press/scorecard-example.png"
                 alt="Real Nebula audit results for nebulacomponents.com showing a 7.4/10 conversion readiness score, Grade B, 0 critical issues, 0 warnings, and 2 advisory findings"
                 width={1600}
                 height={650}
