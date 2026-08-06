@@ -36,7 +36,7 @@ const SIGNAL_DESCRIPTIONS: Record<string, string> = {
 // can always be checked against the actual check that produced it.
 const PASS_STANDARDS: Record<string, string> = {
   'Seo Foundations': 'Title tag, meta description, and a single descriptive H1 all present.',
-  Cta: 'One primary action with action + outcome copy, visible above the fold.',
+  Cta: 'One primary action with action + outcome copy, visible in the initial viewport.',
   'Load Speed': 'LCP under 2.5s, CLS under 0.1, INP under 200ms on mobile.',
   'Social Proof':
     'Proof near the first CTA: sample output, customer quote, metric, guarantee, or process evidence.',
