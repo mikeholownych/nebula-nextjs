@@ -67,13 +67,13 @@ export const BrowserMockupCard = forwardRef<HTMLDivElement, BrowserMockupCardPro
             styles.chrome,
           )}
         >
-          <div className="flex gap-1.5">
+          <div className="flex gap-1.5" aria-hidden="true">
             <div className="h-2 w-2 rounded-full bg-red-400" />
             <div className="h-2 w-2 rounded-full bg-amber-400" />
             <div className="h-2 w-2 rounded-full bg-emerald-400" />
           </div>
           <div className={cn('flex h-5 flex-1 items-center rounded-md px-2', styles.urlBar)}>
-            <span className={cn('truncate font-mono text-[7px]', styles.urlText)}>{url}</span>
+            <span className={cn('truncate font-mono text-xs', styles.urlText)}>{url}</span>
           </div>
         </div>
 
