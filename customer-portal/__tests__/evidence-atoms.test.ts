@@ -36,18 +36,13 @@ function compileFixture(claims: object, evidence: object, surfaces: object) {
 }
 
 describe('Evidence Atom Registry', () => {
-  it('publishes a verified claim only on its declared surface', () => {
+  it('fails closed when the retired nine-signal claim is omitted', () => {
     const claim = getPublicClaim('claim-9-signal-diagnosis', {
       route: '/audit',
       slot: 'audit-method-summary',
     })
 
-    expect(claim).toEqual({
-      claimId: 'claim-9-signal-diagnosis',
-      text: 'Nebula uses an evidence-backed audit framework covering message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, load speed, and applicable technical checks.',
-      evidenceIds: ['evidence-9signal-framework-definition'],
-      supportStatus: 'directly_supported',
-    })
+    expect(claim).toBeNull()
 
     expect(
       getPublicClaim('claim-9-signal-diagnosis', {
@@ -89,18 +84,14 @@ describe('Evidence Atom Registry', () => {
     expect(generated.omissions[0].reasons).toEqual(['claim_status:retired'])
   })
 
-  it('renders the governed claim on the declared audit surface', () => {
+  it('does not render an omitted claim on the declared audit surface', () => {
     // The AuditPage is a React Server Component and cannot be rendered in JSDOM.
     // Instead verify the claim is present in the compiled registry with correct attributes.
     const claim = getPublicClaim('claim-9-signal-diagnosis', {
       route: '/audit',
       slot: 'audit-method-summary',
     })
-    expect(claim).not.toBeNull()
-    expect(claim?.claimId).toBe('claim-9-signal-diagnosis')
-    expect(claim?.text).toBe(
-      'Nebula uses an evidence-backed audit framework covering message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, load speed, and applicable technical checks.',
-    )
+    expect(claim).toBeNull()
   })
 
   it('fails CI when the generated evidence projection drifts', () => {

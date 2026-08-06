@@ -134,8 +134,8 @@ export default function Home() {
               </h2>
               <p className="text-base text-fg-muted leading-7">
                 Before the audit engine, there was a spreadsheet. Working with founders on paid
-                traffic, the same page failures kept showing up — wrong headline, no proof above
-                the fold, a CTA buried under the nav. The clicks were coming in. The sales weren&apos;t.
+                traffic, the same page failures kept showing up — wrong headline, no proof near the
+                first CTA, a CTA buried under the nav. The clicks were coming in. The sales weren&apos;t.
                 The page looked fine. The problems were specific and fixable every time. Nebula
                 is the instrument that finds them.
               </p>
