@@ -129,3 +129,22 @@ Add Storybook or an equivalent Next-compatible workbench with stories for every 
 - **Runtime:** local Next app inspected in browser at `/`, `/audit`, and `/benchmarks`; desktop screenshot inspected for hierarchy, spacing, cookie overlay, and visual state.
 - **Build checks:** `npm run lint` attempted and failed with the two errors documented above. No source edits were made.
 - **Read-only constraint:** no application source files were modified during this review; the working tree already contained unrelated changes in `customer-portal/app/benchmarks/Benchmarks.tsx`, `customer-portal/app/components/RecentFinding.tsx`, `customer-portal/app/components/SelfScan.tsx`, and `customer-portal/components/WebMCP.tsx`.
+
+## Remediation Status
+
+remediation[15]{id,status,commit,note}:
+F1,fixed,d9de1d81,"AggregateProof no longer renders avg_score; targeted component and full-suite verification passed."
+F2,fixed,62a20274,"NebulaMark is semantic-neutral and contains no deprecated signal labels; source grep passed."
+F3,fixed,ede279e2,"Benchmarks filters to the verified seven-signal set and shows the verified-sample caveat; diff and typecheck passed."
+F4,fixed,70e00607,"RecentFinding rejects deprecated keys and labels before rendering; typecheck and full-suite verification passed."
+F5,fixed,ce2b2d5c,"Audit page removed historical score and nine-signal claims; source assertions and full-suite verification passed."
+F6,fixed,802e4e2b,"Invalid ESLint rule and unused config import removed; npm run lint passed."
+F7,fixed,d9425721,"Input generates stable useId identifiers and aria-errormessage; Input tests passed."
+F8,fixed,bea4d191,"Button owns a tokenized focus-visible ring; Button tests and lint passed."
+F9,fixed,be469f28,"CookieConsent has modal semantics, focus entry/return, Escape, Tab trapping, and reduced-motion behavior; consent tests passed."
+F10,fixed,62224ae5,"CookieConsent consumes semantic design tokens instead of the duplicate raw palette; consent tests and lint passed."
+F11,fixed,085903de,"Original 50bb2333 missed Tailwind; redo centralizes the accent and removes all #10b981 matches from public app/component paths."
+F12,fixed,d3b3c7fa,"Motion duration/easing tokens and global reduced-motion override are present in Tailwind/globals; lint and typecheck passed."
+F13,fixed,682b7388,"WebMCP uses the canonical seven-signal list and returns typed submitted/error results from POST /api/audit/start; lint, typecheck, and 23 targeted tests passed."
+F14,fixed,1e9ad154,"BrowserMockupCard treats chrome dots as decorative and raises URL text to readable text-xs; lint and typecheck passed."
+F-doc,deferred,TODO,"Component workbench is tracked in docs/CLAY_COMPONENT_WORKBENCH_TODO.md with explicit Storybook/workbench acceptance criteria."
