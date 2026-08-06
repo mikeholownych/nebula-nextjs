@@ -16,8 +16,17 @@ type PublicAtom = PublicClaim & Surface & {
   projectionType: string
 }
 
+interface AtomRegistry {
+  version: number
+  asOf: string
+  entries: PublicAtom[]
+  omissions: unknown[]
+}
+
+const typedRegistry = registry as unknown as AtomRegistry
+
 export function getPublicClaim(claimId: string, surface: Surface): PublicClaim | null {
-  const atom = (registry.entries as PublicAtom[]).find(
+  const atom = typedRegistry.entries.find(
     (entry) =>
       entry.claimId === claimId &&
       entry.route === surface.route &&
