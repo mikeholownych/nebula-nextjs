@@ -1,5 +1,9 @@
 import type { Config } from 'tailwindcss'
 
+const NEBULA_ACCENT = '#00c2a0'
+const NEBULA_ACCENT_LIGHT = '#33d4b8'
+const NEBULA_ACCENT_DARK = '#009980'
+
 const config: Config = {
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
@@ -23,9 +27,9 @@ const config: Config = {
         },
         // Accent — surgical teal, distinct from Tailwind default emerald
         accent: {
-          DEFAULT: '#00c2a0',
-          light: '#33d4b8',
-          dark: '#009980',
+          DEFAULT: NEBULA_ACCENT,
+          light: NEBULA_ACCENT_LIGHT,
+          dark: NEBULA_ACCENT_DARK,
           dim: 'rgba(0, 194, 160, 0.1)',
         },
         // Secondary accent — slate blue for lower-hierarchy interactive states
@@ -89,9 +93,9 @@ const config: Config = {
       },
       boxShadow: {
         // Updated to match new accent teal
-        glow: '0 0 40px rgba(0, 194, 160, 0.15)',
-        'glow-sm': '0 0 20px rgba(0, 194, 160, 0.1)',
-        'glow-lg': '0 0 60px rgba(0, 194, 160, 0.2)',
+        glow: `0 0 40px color-mix(in srgb, ${NEBULA_ACCENT} 15%, transparent)`,
+        'glow-sm': `0 0 20px color-mix(in srgb, ${NEBULA_ACCENT} 10%, transparent)`,
+        'glow-lg': `0 0 60px color-mix(in srgb, ${NEBULA_ACCENT} 20%, transparent)`,
         // Lifted card shadow for surface-elevated panels
         lifted: '0 2px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.04)',
       },
