@@ -1,14 +1,9 @@
-# Clay Component Workbench — Follow-up
+# Clay Component Workbench
 
-Status: deferred from the remediation branch.
+Status: implemented.
 
-The Clay review identified the absence of a component workbench for the shared UI library. The remediation pass intentionally did not introduce Storybook or a replacement runtime because the repository has no existing workbench dependency or configuration.
+The live workbench is the Next.js Storybook configuration under `customer-portal/.storybook/`, with one story file for each of the 28 reviewed shared components. See `customer-portal/stories/` and run `npm run storybook` from `customer-portal`.
 
-## Acceptance criteria for the follow-up
+The build-time regression tripwire is `customer-portal/scripts/check-banned-strings.mjs`, exposed as `npm run check:content` and wired into CI.
 
-- Add a Next-compatible component workbench or Storybook/Ladle setup.
-- Add stories/examples for every shared component, including at least Button, Input, CookieConsent, and FindingCallout.
-- Cover default, hover, active, focus-visible, disabled/loading, error, keyboard, reduced-motion, dark/light, and responsive states where applicable.
-- Keep the workbench outside the public marketing funnel and include a CI build check.
-
-Tracking marker: `TODO(clay-review): implement component workbench before the next design-system review.`
+Evidence range: `c697f16f..8a77b63b` on `feat/clay-component-workbench`.
