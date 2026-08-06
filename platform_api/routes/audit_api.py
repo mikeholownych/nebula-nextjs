@@ -151,7 +151,8 @@ async def run_audit(request: AuditRequest):
             composite=data.get('composite'),
             composite_anchor=data.get('composite_anchor'),
             findings=data.get('findings', []),
-            status='completed'
+            status='completed',
+            engine_version=data.get('engine_version')
         )
 
         # Fire content extraction pipeline (non-blocking, best-effort)

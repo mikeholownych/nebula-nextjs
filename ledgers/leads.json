@@ -28,6 +28,33 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "agency-pilot@nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "agency-pilot@nebulacomponents.com",
+    "first_seen": "2026-08-05T21:55:30.069754Z",
+    "last_seen": "2026-08-05T21:59:25.552533Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "8bd48b01-fb47-47f7-9a4d-836f646a8480",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-05T21:59:25.552533Z",
+    "trigger_text": "",
+    "url": "https://leads-iq.com"
+  },
   "ainikaautomation@gmail.com": {
     "content_posts": [],
     "current_stage": "lead_warm",
@@ -172,6 +199,87 @@
     "total_spent_cents": 0,
     "url": "https://alloceraintelligence.com"
   },
+  "anonymous+10ece724-5390-48ef-92e2-64d1ea60f3ca@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+10ece724-5390-48ef-92e2-64d1ea60f3ca@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-04T12:34:00.303834Z",
+    "last_seen": "2026-08-04T12:34:00.303834Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "ab06b612-5597-4198-b905-2227a35a2c3b",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-04T12:34:00.303834Z",
+    "trigger_text": "",
+    "url": "https://nebulacomponents.com"
+  },
+  "anonymous+294c17ac-1648-4ab7-865e-2be7d8e4f17b@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+294c17ac-1648-4ab7-865e-2be7d8e4f17b@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-04T21:53:28.410571Z",
+    "last_seen": "2026-08-04T21:53:28.410571Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "750c07d7-f980-4590-ac89-2e583619f8e4",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-04T21:53:28.410571Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
+  "anonymous+2a051027-c3e3-4335-8988-0e9343d5ec89@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+2a051027-c3e3-4335-8988-0e9343d5ec89@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-04T22:07:09.234581Z",
+    "last_seen": "2026-08-04T22:07:09.234581Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "df841b92-f6e5-4a24-895b-f6218353262c",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-04T22:07:09.234581Z",
+    "trigger_text": "",
+    "url": "https://linear.app"
+  },
   "anonymous+2cc2112c-ba9a-4cbc-b899-a454581330ea@invalid.nebulacomponents.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -198,6 +306,60 @@
     "track_started_at": "2026-08-03T12:26:25.553101Z",
     "trigger_text": "",
     "url": "https://example.com"
+  },
+  "anonymous+3418966f-cfe2-4bf8-8a0c-ef17fa84a8a9@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+3418966f-cfe2-4bf8-8a0c-ef17fa84a8a9@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-05T13:04:02.542096Z",
+    "last_seen": "2026-08-05T13:04:02.542096Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "388637fd-43f0-4dd0-8fcc-50f90f8601b4",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-05T13:04:02.542096Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
+  "anonymous+34700505-cfb4-4bd3-bc5a-c81ec191ab19@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+34700505-cfb4-4bd3-bc5a-c81ec191ab19@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-05T10:52:28.260038Z",
+    "last_seen": "2026-08-05T10:52:28.260038Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "50cc24fb-1476-4d9f-afb6-cbea05fb3980",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-05T10:52:28.260038Z",
+    "trigger_text": "",
+    "url": "https://linear.app"
   },
   "anonymous+4887fa6f-6799-4af2-a20e-111a59f7c139@invalid.nebulacomponents.com": {
     "content_posts": [],
@@ -253,6 +415,33 @@
     "trigger_text": "",
     "url": "https://example.com"
   },
+  "anonymous+4e64cc95-6665-419b-bac7-8457a4285b57@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+4e64cc95-6665-419b-bac7-8457a4285b57@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-05T10:29:56.362707Z",
+    "last_seen": "2026-08-05T10:29:56.362707Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "f4b034a3-30ed-42e6-a5a9-06bd312c88d9",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-05T10:29:56.362707Z",
+    "trigger_text": "",
+    "url": "HTTPS://EXAMPLE.COM"
+  },
   "anonymous+553d8778-fd4a-4001-b5f6-57f6d93c010e@invalid.nebulacomponents.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -306,6 +495,87 @@
     "track_started_at": "2026-08-03T12:33:46.217758Z",
     "trigger_text": "",
     "url": "https://example.com"
+  },
+  "anonymous+587ece7e-80f6-4064-82dc-23828ea04c95@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+587ece7e-80f6-4064-82dc-23828ea04c95@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-03T20:09:55.713779Z",
+    "last_seen": "2026-08-03T20:09:55.713779Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "ea3625a9-9423-4a1d-abe4-41be9bb7d585",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-03T20:09:55.713779Z",
+    "trigger_text": "",
+    "url": "https://motherbrain.app/beta"
+  },
+  "anonymous+5aedf7d4-21f6-4d65-9a74-50c2767766b1@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+5aedf7d4-21f6-4d65-9a74-50c2767766b1@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-04T12:50:57.339439Z",
+    "last_seen": "2026-08-04T12:50:57.339439Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "78abf8d0-0e73-4cbe-9fbf-d12ff66ef1fc",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-04T12:50:57.339439Z",
+    "trigger_text": "",
+    "url": "https://nebulacomponents.com/why-is-my-landing-page-not-converting"
+  },
+  "anonymous+742eae61-b95e-45ad-9f4d-aeb40b461401@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+742eae61-b95e-45ad-9f4d-aeb40b461401@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-05T11:00:34.732067Z",
+    "last_seen": "2026-08-05T11:00:34.732067Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "c876205f-7a5f-4214-8359-06fa53a88dea",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-05T11:00:34.732067Z",
+    "trigger_text": "",
+    "url": "https://notion.so"
   },
   "anonymous+7b798cd9-e2cf-4a61-a6c4-9fb35d78b618@invalid.nebulacomponents.com": {
     "content_posts": [],
@@ -387,6 +657,276 @@
     "track_started_at": "2026-08-03T12:30:50.009984Z",
     "trigger_text": "",
     "url": "https://gofaultline.dev"
+  },
+  "anonymous+aad6e38a-0d1c-4e91-aa47-3e08460bd8df@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+aad6e38a-0d1c-4e91-aa47-3e08460bd8df@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-05T10:43:08.196841Z",
+    "last_seen": "2026-08-05T10:43:08.196841Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "76c475bb-bed7-4cfd-9e11-3a55360164e5",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-05T10:43:08.196841Z",
+    "trigger_text": "",
+    "url": "https://shopify.com"
+  },
+  "anonymous+b0b9d734-f9df-4185-9784-02e41706e76e@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+b0b9d734-f9df-4185-9784-02e41706e76e@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-05T10:31:19.416198Z",
+    "last_seen": "2026-08-05T10:31:19.416198Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "a60dc226-d53b-4414-ba56-e838f8a266e2",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-05T10:31:19.416198Z",
+    "trigger_text": "",
+    "url": "https://stripe.com"
+  },
+  "anonymous+c208c808-4f39-46e0-97d6-12ed263e7061@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+c208c808-4f39-46e0-97d6-12ed263e7061@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-05T10:30:11.797414Z",
+    "last_seen": "2026-08-05T10:30:11.797414Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "16bfbc06-296c-47ac-ad64-5fab4421ad4b",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-05T10:30:11.797414Z",
+    "trigger_text": "",
+    "url": "https://stripe.com"
+  },
+  "anonymous+c9be3c2d-44c3-4c9c-8ba5-fdac70c32a00@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+c9be3c2d-44c3-4c9c-8ba5-fdac70c32a00@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-05T10:29:05.902597Z",
+    "last_seen": "2026-08-05T10:29:05.902597Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "e57b150c-2575-4195-92b8-ae303698345a",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-05T10:29:05.902597Z",
+    "trigger_text": "",
+    "url": "https://example.com?utm_source=google&utm_medium=cpc"
+  },
+  "anonymous+da9336e2-f512-4fa5-8c25-50cec5b25932@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+da9336e2-f512-4fa5-8c25-50cec5b25932@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-03T16:06:05.407679Z",
+    "last_seen": "2026-08-03T16:06:05.407679Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "4c93d5b0-f9f3-407e-ac98-2df3892e0d9c",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-03T16:06:05.407679Z",
+    "trigger_text": "",
+    "url": "https://gofaultline.dev"
+  },
+  "anonymous+dbaa32de-dc8c-4f3c-8c70-d5a69264328b@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+dbaa32de-dc8c-4f3c-8c70-d5a69264328b@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-05T10:40:53.980062Z",
+    "last_seen": "2026-08-05T10:40:53.980062Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "56cdde22-48ac-407d-b830-e2d2cea17be5",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-05T10:40:53.980062Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
+  "anonymous+dbeffa4e-63a7-4e24-8e75-abec89c8178d@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+dbeffa4e-63a7-4e24-8e75-abec89c8178d@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-05T10:41:59.119390Z",
+    "last_seen": "2026-08-05T10:41:59.119390Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "a4a47b18-6a82-45ae-a5e5-c9a94973bb04",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-05T10:41:59.119390Z",
+    "trigger_text": "",
+    "url": "https://stripe.com"
+  },
+  "anonymous+dc483e8a-7519-4b8f-9d1f-3759e3e87d99@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+dc483e8a-7519-4b8f-9d1f-3759e3e87d99@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-04T21:59:54.502605Z",
+    "last_seen": "2026-08-04T21:59:54.502605Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "20bed207-f637-48db-b2a2-b54c7fceac63",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-04T21:59:54.502605Z",
+    "trigger_text": "",
+    "url": "https://stripe.com"
+  },
+  "anonymous+dd6df8e4-e90f-4bfe-95f5-0871bcd39466@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+dd6df8e4-e90f-4bfe-95f5-0871bcd39466@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-05T10:42:33.642002Z",
+    "last_seen": "2026-08-05T10:42:33.642002Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "d42bf1ad-3229-478e-bb53-edd9a82b1e17",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-05T10:42:33.642002Z",
+    "trigger_text": "",
+    "url": "https://github.com"
+  },
+  "anonymous+e7faa100-d400-47bd-b5b2-94a7e9369f96@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+e7faa100-d400-47bd-b5b2-94a7e9369f96@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-05T10:29:47.822286Z",
+    "last_seen": "2026-08-05T10:29:47.822286Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "deae50d2-399c-49d5-b11a-81d70cfb5d13",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-05T10:29:47.822286Z",
+    "trigger_text": "",
+    "url": "https://example.com?utm_source=google&utm_medium=cpc"
   },
   "audit-probe-2026@example.com": {
     "content_posts": [],
@@ -770,6 +1310,33 @@
     "tags": [],
     "total_spent_cents": 0,
     "url": ""
+  },
+  "corey@adsnord.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "corey@adsnord.com",
+    "first_seen": "2026-08-06T00:06:45.482421Z",
+    "last_seen": "2026-08-06T00:06:45.482421Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "c85f3f3c-2e50-4347-ad7d-520dab8d6134",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-06T00:06:45.482421Z",
+    "trigger_text": "",
+    "url": "https://adsnord.com"
   },
   "davidwang913526@gmail.com": {
     "content_posts": [],
@@ -4109,6 +4676,33 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "rutger@sqauras.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "rutger@sqauras.com",
+    "first_seen": "2026-08-06T00:07:52.900061Z",
+    "last_seen": "2026-08-06T00:07:52.900061Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "9a8a9521-bc66-47c2-9122-6390df5f22fb",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-06T00:07:52.900061Z",
+    "trigger_text": "",
+    "url": "https://sqauras.com"
+  },
   "sales@thehiveryiq.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -4185,6 +4779,33 @@
     "tags": [],
     "total_spent_cents": 0,
     "url": ""
+  },
+  "sean.grabowski@keepersdigital.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "sean.grabowski@keepersdigital.com",
+    "first_seen": "2026-08-06T00:07:19.293746Z",
+    "last_seen": "2026-08-06T00:07:19.293746Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "4c4a14db-744a-4d27-a547-2f10c8ed5efb",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-06T00:07:19.293746Z",
+    "trigger_text": "",
+    "url": "https://keepersdigital.com"
   },
   "shadowroot47@outlook.com": {
     "content_posts": [],

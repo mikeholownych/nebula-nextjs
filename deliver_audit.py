@@ -29,6 +29,15 @@ except ImportError:
     build_prompt_pack = None
 
 from bs4 import BeautifulSoup
+
+# ── Engine versioning ─────────────────────────────────────────────────────
+# Bump on ANY scoring-behaviour change. Stamped on every audit record so a
+# disputed score can always be traced to the exact engine that produced it.
+# History:
+#   1.0.0 - original 4-signal ad_signals scoring on all pages
+#   2.0.0 - page-type scoping: homepages/brand pages scored on GA4 presence
+#           only; ad-tracking absence on a homepage is correct, not a leak
+ENGINE_VERSION = "2.1.0"
 import requests
 LEDGERS_DIR = NEBULA_DIR / "ledgers"
 CONTACTED_PATH = NEBULA_DIR / "contacted.json"
@@ -916,6 +925,7 @@ def score_audit(page):
         "composite_anchor": composite_anchor,
         "dimensions": dimensions,
         "opp_matrix": opp_matrix,
+        "engine_version": ENGINE_VERSION,
     }
 
 
@@ -1300,6 +1310,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         "   Full policy: https://nebulacomponents.com/audit#data-privacy",
         "",
         "— Nebula Components",
+        f"Audit engine v{ENGINE_VERSION} — score disputes can be traced to this version.",
     ])
     text_body = "\n".join(lines)
     
@@ -1321,9 +1332,11 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
   <div style="font-size:13px;color:#6b7280;">
     <a href="{audit_offer_url}" style="color:#059669;text-decoration:underline;">Run the audit to unlock the $97 self-implementation kit →</a>
   </div>
+  <div style="font-size:11px;color:#9ca3af;margin-top:8px;">Audit engine v{ENGINE_VERSION} — score disputes can be traced to this version.</div>
 </div>"""
     else:
         html_body = "<p>" + "</p><p>".join(line or "&nbsp;" for line in lines) + "</p>"
+        html_body += f'<p style="font-size:11px;color:#9ca3af;">Audit engine v{ENGINE_VERSION} — score disputes can be traced to this version.</p>'
     
         # Subject: score-tier differentiated
     if score < 4:
@@ -1555,6 +1568,7 @@ def main():
             "name": args.name if hasattr(args, 'name') else None,
             "score": score,
             "grade": audit.get("overall_grade", ""),
+            "engine_version": audit.get("engine_version", ENGINE_VERSION),
             "composite": audit.get("composite"),
             "composite_anchor": audit.get("composite_anchor"),
             "findings": audit.get("opp_matrix", []),

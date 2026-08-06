@@ -28,6 +28,16 @@ class AuditDB:
         """Create connection pool"""
         if not self.pool:
             self.pool = await asyncpg.create_pool(self.db_url, min_size=2, max_size=10)
+            # Ensure the engine_version column exists (idempotent, cheap).
+            # Stamp on every audit so a disputed score traces to the exact
+            # engine version that produced it.
+            try:
+                async with self.pool.acquire() as conn:
+                    await conn.execute(
+                        "ALTER TABLE audits ADD COLUMN IF NOT EXISTS engine_version TEXT"
+                    )
+            except Exception:
+                pass
     
     async def close(self):
         """Close connection pool"""
@@ -74,7 +84,8 @@ class AuditDB:
     async def update_audit(self, audit_id: UUID, score: float, grade: str,
                           findings: List[dict], status: str = 'completed',
                           composite: Optional[float] = None,
-                          composite_anchor: Optional[float] = None) -> bool:
+                          composite_anchor: Optional[float] = None,
+                          engine_version: Optional[str] = None) -> bool:
         """Update audit with results"""
         await self.connect()
 
@@ -84,11 +95,12 @@ class AuditDB:
                 UPDATE audits
                 SET score = $2, grade = $3, findings = $4,
                     status = $5, completed_at = NOW(),
-                    composite = $6, composite_anchor = $7
+                    composite = $6, composite_anchor = $7,
+                    engine_version = COALESCE($8, engine_version)
                 WHERE id = $1
                 """,
                 audit_id, int(score * 10), grade, json.dumps(findings), status,
-                composite, composite_anchor,
+                composite, composite_anchor, engine_version,
             )
             updated = result == 'UPDATE 1'
             if updated and status == 'completed':

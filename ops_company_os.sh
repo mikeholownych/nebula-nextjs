@@ -2,4 +2,4 @@
 set -euo pipefail
 cd /home/mike/nebula
 unset PYTHONHOME
-exec venv/bin/python3 ops_company_os.py "$@"
+exec uv run python ops_company_os.py "$@"

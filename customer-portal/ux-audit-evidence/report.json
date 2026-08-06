@@ -1,0 +1,85 @@
+{
+  "date": "2026-08-05T10:30:49.884Z",
+  "target": "https://nebulacomponents.com",
+  "findings": [
+    {
+      "type": "FRICTION",
+      "stage": "S1",
+      "check": "K1",
+      "detail": "Audit entry point below fold on mobile (y=undefined, viewport=844)",
+      "evidence": "s1-landing-mobile.png"
+    },
+    {
+      "type": "DEFECT",
+      "stage": "S4",
+      "check": "no gate input",
+      "detail": "Neither email gate input nor full results found on results page",
+      "evidence": "s4-pre-gate-desktop.png"
+    },
+    {
+      "type": "FRICTION",
+      "stage": "S6",
+      "check": "K14",
+      "detail": "Price ($97) not visible near the kit CTA",
+      "evidence": "s6-kit-cta.png"
+    },
+    {
+      "type": "FRICTION",
+      "stage": "a11y",
+      "check": "A3",
+      "detail": "34 interactive targets under 44x44px on 390px viewport. Worst: [{\"tag\":\"A\",\"text\":\"Skip to main content\",\"w\":1,\"h\":1},{\"tag\":\"A\",\"text\":\"Teardowns\",\"w\":142,\"h\":43},{\"tag\":\"A\",\"text\":\"Pricing\",\"w\":142,\"h\":43},{\"tag\":\"A\",\"text\":\"Free Audit\",\"w\":142,\"h\":34},{\"tag\":\"A\",\"text\":\"Nebula Components\",\"w\":164,\"h\":20}]",
+      "evidence": "a3-touch-targets.png"
+    }
+  ],
+  "stageResults": [
+    {
+      "id": "S1",
+      "completed": true,
+      "timing": "FMP: mobile=570ms, tablet=260ms, desktop=256ms",
+      "evidence": "s1-landing-*.png",
+      "defects": 0
+    },
+    {
+      "id": "S2",
+      "completed": true,
+      "timing": "input renders, validation tested",
+      "evidence": "s2-validation-test.png",
+      "defects": 0
+    },
+    {
+      "id": "S3",
+      "completed": true,
+      "timing": "8s",
+      "evidence": "s3-completed.png",
+      "defects": 0
+    },
+    {
+      "id": "S4",
+      "completed": false,
+      "timing": "no email gate found",
+      "evidence": "s4-pre-gate-desktop.png",
+      "defects": 1
+    },
+    {
+      "id": "S5",
+      "completed": true,
+      "timing": "report renders inline",
+      "evidence": "s5-full-report.png",
+      "defects": 0
+    },
+    {
+      "id": "S6",
+      "completed": true,
+      "timing": "CTA found",
+      "evidence": "s6-kit-cta.png",
+      "defects": 0
+    },
+    {
+      "id": "S7",
+      "completed": false,
+      "timing": "Landed on about:blank",
+      "evidence": "s7-payment-form.png",
+      "defects": 1
+    }
+  ]
+}

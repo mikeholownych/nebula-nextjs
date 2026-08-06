@@ -28,7 +28,10 @@ Usage as HTTP server (for Hermes or remote agents):
 """
 
 import argparse
+import atexit
 import json
+import os
+import signal
 import subprocess
 import sys
 from pathlib import Path
@@ -37,7 +40,12 @@ NEBULA_DIR = Path("/home/mike/nebula")
 sys.path.insert(0, str(NEBULA_DIR / "venv" / "lib" / "python3.12" / "site-packages"))
 sys.path.insert(0, str(NEBULA_DIR))
 
+from dotenv import load_dotenv
+load_dotenv(NEBULA_DIR / ".env")
+
 from mcp.server.fastmcp import FastMCP
+from posthog import Posthog
+from posthog.mcp import instrument
 
 mcp = FastMCP(
     "Nebula Audit Engine",
@@ -50,6 +58,25 @@ mcp = FastMCP(
         "Use compare_audits to benchmark two pages head-to-head."
     ),
 )
+
+# ── PostHog MCP analytics ──────────────────────────────────────────────────────
+
+_posthog_token = os.environ.get("POSTHOG_PROJECT_TOKEN", "")
+_posthog_host = os.environ.get("POSTHOG_HOST", "https://us.i.posthog.com")
+
+if not _posthog_token:
+    print(
+        "POSTHOG_PROJECT_TOKEN variable required by PostHog is missing or "
+        "un-configured, this causes events to be silently missed. "
+        "This error stops appearing once POSTHOG_PROJECT_TOKEN is configured",
+        file=sys.stderr,
+    )
+
+posthog = Posthog(_posthog_token, host=_posthog_host)
+analytics = instrument(mcp, posthog)
+
+atexit.register(posthog.shutdown)
+signal.signal(signal.SIGTERM, lambda *_: sys.exit(0))
 
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
