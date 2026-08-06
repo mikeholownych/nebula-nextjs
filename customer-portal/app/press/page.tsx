@@ -338,12 +338,12 @@ export default function PressPage() {
             {[
               {
                 name: 'Nebula Wordmark (SVG)',
-                file: '/nebula-wordmark.svg',
+                file: '/brand/wordmark-dark.svg',
                 type: 'Logo',
               },
               {
                 name: 'Nebula Mark (SVG)',
-                file: '/nebula-mark.svg',
+                file: '/brand/mark-dark.svg',
                 type: 'Logo',
               },
               {
