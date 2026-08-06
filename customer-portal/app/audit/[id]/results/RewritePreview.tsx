@@ -127,7 +127,7 @@ export default function RewritePreview({
     }
   }
 
-  // Paywall teaser — blurred stand-in behind the $97 Fix Pack link.
+  // Paywall teaser — blurred stand-in behind the implementation kit link.
   if (state.status === 'paywalled') {
     return (
       <div className="relative mt-4 overflow-hidden rounded-lg border border-border bg-bg/50 p-4">
@@ -152,7 +152,7 @@ export default function RewritePreview({
             }
             className="rounded-lg bg-accent px-4 py-2 text-xs font-semibold text-bg shadow-sm transition-colors hover:bg-accent-light"
           >
-            Unlock all {findingCount} rewrites with the $97 Fix Pack →
+            Unlock all {findingCount} rewrites with the One-Leak Self-Implementation Kit →
           </a>
         </div>
       </div>

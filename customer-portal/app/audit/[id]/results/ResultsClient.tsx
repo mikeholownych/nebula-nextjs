@@ -925,10 +925,10 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                     {/* SERP snippet — only for seo_foundations, uses scraped data */}
                     <SerpSnippet finding={finding} url={results.url} />
 
-                    {/* Fix Preview — sentence 1 free, rest locked behind $97 */}
+                    {/* Fix Preview — sentence 1 free, rest locked behind the implementation kit */}
                     <FixPreview finding={finding} unlocked={unlocked} />
 
-                    {/* AI Rewrite Preview — first rewrite free, rest behind $97 Fix Pack */}
+                    {/* AI Rewrite Preview — first rewrite free, rest behind the implementation kit */}
                     <RewritePreview
                       auditId={auditId}
                       findingKey={finding.key}
