@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { TEARDOWNS } from './data'
 import { BrowserMockupCard } from '@/components/mockups/BrowserMockupCard'
-import { FindingCallout } from '@/components/mockups/FindingCallout'
+import { FindingCallout, RoughFilters } from '@/components/mockups/FindingCallout'
 
 const QUADRANT_COLORS: Record<string, string> = {
   'Quick Win': 'text-accent',
@@ -59,6 +59,7 @@ export default async function TeardownPage({
 
   return (
     <main id="main-content" className="min-h-screen bg-bg pt-24">
+      <RoughFilters />
       <article className="mx-auto max-w-4xl px-6 py-12">
 
         {/* Breadcrumb */}
