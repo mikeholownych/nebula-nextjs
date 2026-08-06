@@ -100,6 +100,15 @@ const config: Config = {
         'fade-in': 'fade-in 0.3s ease-out',
         'slide-up': 'slide-up 0.4s ease-out',
       },
+      transitionDuration: {
+        fast: '160ms',
+        base: '200ms',
+        slow: '300ms',
+      },
+      transitionTimingFunction: {
+        standard: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
+        enter: 'cubic-bezier(0.16, 1, 0.3, 1)',
+      },
       keyframes: {
         'pulse-soft': {
           '0%, 100%': { opacity: '1' },
