@@ -124,10 +124,10 @@ Add Storybook or an equivalent Next-compatible workbench with stories for every 
 
 ## Verification
 
-- **Inventory:** 29 shared/reusable component files reviewed from full source, including `components/**`, `app/components/**`, and `app/benchmarks/Benchmarks.tsx`.
-- **Stories/docs:** no Storybook, Ladle, MDX, or story files found. Nine component tests exist under `__tests__/components/`.
+- **Inventory:** 28 shared/reusable component targets are covered by the workbench; the review's source inventory also includes one aggregate route-level file.
+- **Stories/docs:** Next.js Storybook is configured under `.storybook/`; `stories/` contains exactly 28 component story files with autodocs metadata and state variants. The content guard is wired into CI.
 - **Runtime:** local Next app inspected in browser at `/`, `/audit`, and `/benchmarks`; desktop screenshot inspected for hierarchy, spacing, cookie overlay, and visual state.
-- **Build checks:** `npm run lint` attempted and failed with the two errors documented above. No source edits were made.
+- **Build checks:** `npm run typecheck` and `npm run build-storybook` passed on the workbench branch; `npm run check:content` was demonstrated fail-then-pass with a scratch banned string.
 - **Read-only constraint:** no application source files were modified during this review; the working tree already contained unrelated changes in `customer-portal/app/benchmarks/Benchmarks.tsx`, `customer-portal/app/components/RecentFinding.tsx`, `customer-portal/app/components/SelfScan.tsx`, and `customer-portal/components/WebMCP.tsx`.
 
 ## Remediation Status
@@ -147,4 +147,4 @@ F11,fixed,085903de,"Original 50bb2333 missed Tailwind; redo centralizes the acce
 F12,fixed,d3b3c7fa,"Motion duration/easing tokens and global reduced-motion override are present in Tailwind/globals; lint and typecheck passed."
 F13,fixed,682b7388,"WebMCP uses the canonical seven-signal list and returns typed submitted/error results from POST /api/audit/start; lint, typecheck, and 23 targeted tests passed."
 F14,fixed,1e9ad154,"BrowserMockupCard treats chrome dots as decorative and raises URL text to readable text-xs; lint and typecheck passed."
-F-doc,deferred,TODO,"Component workbench is tracked in docs/CLAY_COMPONENT_WORKBENCH_TODO.md with explicit Storybook/workbench acceptance criteria."
+F-doc,fixed,c697f16f..8a77b63b,"Next.js Storybook workbench covers all 28 components with a11y/themes, autodocs metadata, Tier 1 state stories, and a CI-wired banned-content regression guard; fail-then-pass demonstration recorded in the PR."

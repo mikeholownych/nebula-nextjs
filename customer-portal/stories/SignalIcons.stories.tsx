@@ -1,0 +1,6 @@
+import type { Meta, StoryObj } from '@storybook/nextjs'
+import { SignalIcon, HeadlineIcon, CtaIcon, SocialProofIcon, LoadSpeedIcon, MobileIcon, SeoFoundationsIcon, AiReadinessIcon, AboveFoldIcon, AdSignalsIcon } from '@/components/SignalIcons'
+const meta = { title: 'Tier 2/SignalIcons', component: SignalIcon, tags: ['autodocs'], parameters: { docs: { description: { component: 'Current icon dispatch surface. The full current export set is shown honestly, including legacy exports flagged for follow-up rather than silently dropped.' } } } } satisfies Meta<typeof SignalIcon>
+export default meta
+type Story = StoryObj<typeof meta>
+export const CurrentSignalSet: Story = { args: { signalKey: 'cta' }, render: () => <div className="grid grid-cols-3 gap-5 text-accent">{[['Headline', HeadlineIcon], ['CTA', CtaIcon], ['Social proof', SocialProofIcon], ['Load speed', LoadSpeedIcon], ['Mobile', MobileIcon], ['SEO foundations', SeoFoundationsIcon], ['AI readiness', AiReadinessIcon], ['Legacy fold export', AboveFoldIcon], ['Legacy ad export', AdSignalsIcon]].map(([label, Icon]) => <div key={String(label)} className="flex items-center gap-2 text-sm text-fg"><Icon className="h-6 w-6 text-accent" />{String(label)}</div>)}</div> }
