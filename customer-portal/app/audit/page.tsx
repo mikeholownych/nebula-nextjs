@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
-import { getPublicClaim } from '@/app/lib/evidence-atoms'
 import { auditWebApplicationSchema } from '@/app/lib/schema'
 import AuditForm from './AuditForm'
 
@@ -20,17 +18,15 @@ export const metadata: Metadata = {
 }
 
 // Static sample output - shows what a real audit result looks like.
-// Scores and findings are illustrative only; not a real audit of any live page.
+// Findings are illustrative only; not a real audit of any live page.
 const SAMPLE_FINDINGS = [
-  { key: 'message_match', label: 'Message match', score: 3, pass: false, finding: 'Ad headline "Stop wasting ad spend" does not match page headline "We help businesses grow".' },
-  { key: 'trust_signals', label: 'Trust signals', score: 2, pass: false, finding: 'No testimonials or logos visible above fold. First trust signal appears after 3 scrolls.' },
-  { key: 'mobile_cta', label: 'Mobile CTA', score: 4, pass: false, finding: 'Primary CTA button is 890px from top on 375px viewport — below fold without scroll.' },
-  { key: 'load_speed', label: 'Load speed', score: 8, pass: true, finding: 'LCP 2.1s on mobile. Passes threshold.' },
-  { key: 'cta_clarity', label: 'CTA clarity', score: 5, pass: false, finding: '3 competing CTAs in hero: "Get started", "Learn more", "Book a call". No clear primary action.' },
-  { key: 'above_fold', label: 'Above the fold', score: 3, pass: false, finding: 'Offer not clear until second viewport — headline is a company name, not a buyer outcome.' },
-  { key: 'ad_signals', label: 'Ad signals', score: 9, pass: true, finding: 'Google Ads conversion tag present in source.' },
-  { key: 'seo_foundations', label: 'SEO foundations', score: 6, pass: false, finding: 'Meta description is 197 characters — truncated in SERP at 155.' },
-  { key: 'ai_readiness', label: 'AI readiness', score: 7, pass: true, finding: 'OpenGraph tags and JSON-LD present. Page is citable.' },
+  { key: 'message_match', label: 'Message match', pass: false, finding: 'Ad headline "Stop wasting ad spend" does not match page headline "We help businesses grow".' },
+  { key: 'trust_signals', label: 'Trust signals', pass: false, finding: 'No testimonials or logos visible near the first CTA.' },
+  { key: 'mobile_cta', label: 'Mobile CTA', pass: false, finding: 'Primary CTA is below the initial 375px viewport without scroll.' },
+  { key: 'load_speed', label: 'Load speed', pass: true, finding: 'The page meets the documented loading threshold.' },
+  { key: 'cta_clarity', label: 'CTA clarity', pass: false, finding: 'Competing actions make the primary next step unclear.' },
+  { key: 'seo_foundations', label: 'SEO foundations', pass: false, finding: 'The meta description is longer than the documented search display target.' },
+  { key: 'ai_readiness', label: 'AI readiness', pass: true, finding: 'Structured page signals support machine-readable interpretation.' },
 ]
 
 const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
@@ -54,15 +50,7 @@ async function getAuditStats(): Promise<AuditStats | null> {
 
 export default async function AuditPage() {
   const stats = await getAuditStats()
-  const auditMethodClaim = getPublicClaim('claim-9-signal-diagnosis', {
-    route: '/audit',
-    slot: 'audit-method-summary',
-  })
-
   const failCount = SAMPLE_FINDINGS.filter((f) => !f.pass).length
-  const overallScore = Math.round(
-    SAMPLE_FINDINGS.reduce((sum, f) => sum + f.score, 0) / SAMPLE_FINDINGS.length
-  )
 
   return (
     <>
@@ -91,7 +79,7 @@ export default async function AuditPage() {
               </h1>
               <p className="mt-4 max-w-lg text-lg leading-7 text-fg-muted">
                 Paste your URL. Leak detection runs core conversion checks against your actual page.
-                See your score and the leaks found before sharing an email.
+                See the verified findings before sharing an email.
               </p>
               <ul className="mt-6 space-y-2">
                 {[
@@ -118,32 +106,6 @@ export default async function AuditPage() {
           </div>
         </section>
 
-        {/* ── 1b. Real self-audit screenshot - not a mockup ── */}
-        <section className="border-t border-border px-6 py-14">
-          <div className="mx-auto max-w-4xl">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
-              Not a mockup
-            </p>
-            <h2 className="mb-4 text-2xl font-bold tracking-tight text-fg md:text-3xl">
-              See the evidence before you decide.
-            </h2>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent">Historical proof</p>
-            <p className="mb-6 max-w-2xl text-fg-muted">
-              This screenshot is a historical audit artifact captured from nebulacomponents.com.
-              It documents the result format and evidence surface; it is not a current score.
-              Run a fresh audit below for current evidence.
-            </p>
-            <div className="overflow-hidden rounded-2xl border border-border">
-              <Image
-                src="/screenshots/audit-results-example-com.webp"
-                alt="Historical Nebula audit results artifact for nebulacomponents.com showing a 7.7/10 conversion readiness score, Grade B, analysed across 9 conversion signals"
-                width={1600}
-                height={650}
-                className="h-auto w-full"
-              />
-            </div>
-          </div>
-        </section>
 
         {/* ── 2. Sample output - what you actually see ── */}
         <section className="border-t border-border px-6 py-14">
@@ -157,20 +119,9 @@ export default async function AuditPage() {
               </p>
             </div>
 
-            {/* Score header */}
-            <div className="mb-4 flex flex-wrap items-center gap-4 rounded-2xl border border-border bg-bg-muted/20 p-5">
-              <div className="flex items-baseline gap-1.5">
-                <span className="font-mono text-3xl font-bold text-signal-fail">{overallScore}</span>
-                <span className="font-mono text-sm text-fg-muted">/10</span>
-              </div>
-              <div className="h-8 w-px bg-border hidden sm:block" />
-              <div>
-                <p className="font-semibold text-fg text-sm">example-startup.com</p>
-                <p className="text-xs text-fg-muted">{failCount} of 9 signals failing</p>
-              </div>
-              <div className="ml-auto rounded-lg bg-signal-fail/10 px-3 py-1 font-mono text-xs text-signal-fail">
-                Grade D
-              </div>
+            <div className="mb-4 rounded-2xl border border-border bg-bg-muted/20 p-5">
+              <p className="font-semibold text-fg text-sm">example-startup.com</p>
+              <p className="mt-1 text-xs text-fg-muted">{failCount} of {SAMPLE_FINDINGS.length} verified checks failing</p>
             </div>
 
             {/* Signal rows */}
@@ -190,21 +141,14 @@ export default async function AuditPage() {
                     />
                     <span className="text-sm font-semibold text-fg">{f.label}</span>
                   </div>
-                  <span
-                    className={`font-mono text-sm ${
-                      f.pass ? 'text-accent' : 'text-signal-fail'
-                    }`}
-                  >
-                    {f.score}/10
-                  </span>
                   <p className="text-xs leading-5 text-fg-muted">{f.finding}</p>
                 </div>
               ))}
             </div>
 
             <p className="mt-4 text-xs text-fg-muted">
-              Illustrative output only. Scores, findings, and page URL are fictional.
-              Your audit will reflect your actual page.
+              Illustrative output only. Findings and page URL are fictional.
+              Your audit will reflect your actual page and the checks available for it.
             </p>
           </div>
         </section>
@@ -217,12 +161,13 @@ export default async function AuditPage() {
             </h2>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {[
-                { label: 'Message match', desc: 'Ad promise vs. page headline — within 3 words' },
-                { label: 'Trust signals', desc: 'Testimonials or logos above fold — minimum 2' },
-                { label: 'Mobile CTA', desc: 'Primary action visible on 375px without scroll' },
-                { label: 'Above the fold', desc: 'Offer, audience, and action clear in first viewport' },
-                { label: 'Ad signals', desc: 'Ad pixel or conversion tracking detectable in source' },
-                { label: 'SEO foundations', desc: 'Title tag, meta description, single descriptive H1' },
+                { label: 'Message match', desc: 'Ad promise vs. page headline' },
+                { label: 'Trust signals', desc: 'Proof visible near the first CTA' },
+                { label: 'Mobile CTA', desc: 'Primary action visible on a 375px viewport' },
+                { label: 'Load speed', desc: 'Page meets documented loading thresholds' },
+                { label: 'CTA clarity', desc: 'One primary action with clear outcome copy' },
+                { label: 'SEO foundations', desc: 'Title tag, meta description, and descriptive H1' },
+                { label: 'AI readiness', desc: 'Structured signals support machine-readable interpretation' },
               ].map((item) => (
                 <div key={item.label} className="rounded-xl border border-border bg-bg-muted/20 p-4">
                   <p className="mb-1 font-semibold text-fg text-sm">{item.label}</p>
@@ -242,15 +187,7 @@ export default async function AuditPage() {
                 </div>
               ))}
             </div>
-            {auditMethodClaim && (
-              <p
-                className="mt-6 text-sm text-fg-muted leading-7 max-w-2xl"
-                data-claim-id={auditMethodClaim.claimId}
-                data-evidence-ids={auditMethodClaim.evidenceIds.join(',')}
-              >
-                {auditMethodClaim.text}
-              </p>
-            )}
+
           </div>
         </section>
 
@@ -260,7 +197,7 @@ export default async function AuditPage() {
             <h2 className="mb-3 text-base font-semibold text-fg">How It Works</h2>
             <ol className="list-decimal space-y-1 pl-5 text-sm text-fg-muted">
               <li>Enter your landing page URL in the field above</li>
-              <li>The audit engine fetches and scores your page across its core conversion checks and applicable technical checks</li>
+              <li>The audit engine fetches and evaluates your page across its core conversion checks and applicable technical checks</li>
               <li>You receive a structured report with specific, actionable findings</li>
               <li>Each finding includes a severity rating and a recommended fix</li>
             </ol>
@@ -292,7 +229,7 @@ export default async function AuditPage() {
               <div className="rounded-xl border border-border bg-bg-muted/20 p-5">
                 <h3 className="mb-2 font-semibold text-fg text-sm">JavaScript &amp; Mobile Heuristics</h3>
                 <p className="text-xs text-fg-muted leading-relaxed">
-                  The audit evaluates client-rendered DOM structures and simulates a 375px mobile viewport heuristic to measure element visibility, contrast, and above-fold button positioning.
+                  The audit evaluates client-rendered DOM structures and simulates a 375px mobile viewport heuristic to measure element visibility, contrast, and initial-viewport button positioning.
                 </p>
               </div>
               <div className="rounded-xl border border-border bg-bg-muted/20 p-5">
