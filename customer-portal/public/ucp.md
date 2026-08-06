@@ -11,7 +11,7 @@ Nebula Components publishes a Universal Commerce Protocol business profile at `/
 
 ## Checkout capability
 
-`com.nebulacomponents.commerce.checkout` creates an audit-bound Stripe-hosted checkout session for the fixed-price Nebula One-Leak Self-Implementation Kit.
+`com.nebulacomponents.commerce.checkout` creates an audit-bound Stripe-hosted checkout session for the fixed-price Nebula One-Leak Repair Sprint.
 
 ### Request
 

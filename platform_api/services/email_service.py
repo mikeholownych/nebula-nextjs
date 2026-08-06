@@ -59,7 +59,7 @@ class EmailService:
             
             <div style="background: #f5f5f5; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
                 <h3 style="margin-top: 0;">Want one implementation-ready change?</h3>
-                <p><strong>$97 One-Leak Self-Implementation Kit</strong> — one tailored change for one selected finding. You or your developer applies it; no site access or conversion-lift guarantee.</p>
+                <p><strong>$97 One-Leak Repair Sprint</strong> — one tailored change for one selected finding. You or your developer applies it; no site access or conversion-lift guarantee.</p>
                 <p style="margin-bottom: 0;">
                     <a href="https://nebulacomponents.com/audit" style="color: #667eea;">Open the audit to unlock eligible checkout →</a>
                 </p>
@@ -89,7 +89,7 @@ Top Prioritized Fixes:
 {chr(10).join([f"- {f.get('label', f.get('key'))}: {f.get('issue', '')}" for f in data.findings[:3]])}
 
 Want one implementation-ready change?
-- $97 One-Leak Self-Implementation Kit — one tailored change for one selected finding. You or your developer applies it. No site access or conversion-lift guarantee.
+- $97 One-Leak Repair Sprint — one tailored change for one selected finding. You or your developer applies it. No site access or conversion-lift guarantee.
 
 Open the audit to unlock eligible checkout: https://nebulacomponents.com/audit
 

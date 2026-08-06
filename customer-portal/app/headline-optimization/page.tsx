@@ -238,7 +238,7 @@ export default function HeadlineOptimizationPage() {
             <Link href="/landing-page-message-match" className="hover:text-accent transition-colors">Message Match Guide</Link>
             <Link href="/ads-getting-clicks-but-no-sales" className="hover:text-accent transition-colors">Ads Getting Clicks But No Sales</Link>
             <Link href="/why-is-my-landing-page-not-converting" className="hover:text-accent transition-colors">Why Your Page Isn&apos;t Converting</Link>
-            <Link href="/pricing" className="hover:text-accent transition-colors">Self-Implementation Kit Pricing</Link>
+            <Link href="/pricing" className="hover:text-accent transition-colors">Repair Sprint Pricing</Link>
           </footer>
 
         </article>

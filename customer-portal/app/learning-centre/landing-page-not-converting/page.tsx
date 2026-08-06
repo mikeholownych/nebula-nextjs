@@ -41,7 +41,7 @@ const faqItems = [
     },
     {
       question: 'How long does it take to fix a non-converting landing page?',
-      answer: "Depends on which leak is active. A message-match fix (rewriting the headline and hero copy) takes 2-4 hours with a clear brief. A proof restructure (repositioning testimonials, adding specificity) takes a day. A full CTA and form-friction overhaul is 1-2 days. Nebula's $97 One-Leak Self-Implementation Kit supplies a tailored change for one high-confidence finding; you or your developer implements it, and the 30-day re-audit verifies the page condition.",
+      answer: "Depends on which leak is active. A message-match fix (rewriting the headline and hero copy) takes 2-4 hours with a clear brief. A proof restructure (repositioning testimonials, adding specificity) takes a day. A full CTA and form-friction overhaul is 1-2 days. Nebula's $97 One-Leak Repair Sprint supplies a tailored change for one high-confidence finding; you or your developer implements it, and the 30-day re-audit verifies the page condition.",
     },
 ]
 
@@ -579,7 +579,7 @@ export default function LandingPageNotConvertingPage() {
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 9 signals and returns a
-              prioritised list of what to fix first. The $97 One-Leak Self-Implementation Kit
+              prioritised list of what to fix first. The $97 One-Leak Repair Sprint
               supplies a tailored change for one high-confidence page-level finding. You or your
               developer implements it, and the 30-day re-audit verifies the page condition.
               It does not promise conversion lift.
@@ -595,7 +595,7 @@ export default function LandingPageNotConvertingPage() {
                 href="/pricing"
                 className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
-                See the One-Leak Self-Implementation Kit
+                See the One-Leak Repair Sprint
               </Link>
             </div>
           </section>

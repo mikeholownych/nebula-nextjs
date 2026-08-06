@@ -145,7 +145,7 @@ class DeliverPromptPackTests(unittest.TestCase):
             self.assertEqual(hot_leads[0]["stage"], "implementation_kit_delivered")
             self.assertEqual(hot_leads[0]["status"], "fulfilled")
             mock_notify.assert_called_once()
-            self.assertIn("Self-implementation kit delivered", mock_notify.call_args[0][0])
+            self.assertIn("Repair Sprint delivered", mock_notify.call_args[0][0])
             sent_body = mock_send.call_args.kwargs["body"]
             self.assertIn("teaser prompt", sent_body)
             self.assertNotIn("second prompt", sent_body)

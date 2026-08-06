@@ -322,7 +322,7 @@ export default function BeforeYouRaiseAdBudget() {
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 9 signals and returns a
-              prioritised fix list. The $97 One-Leak Self-Implementation Kit supplies a tailored
+              prioritised fix list. The $97 One-Leak Repair Sprint supplies a tailored
               change for one high-confidence page-level finding. You or your developer implements it,
               and the 30-day re-audit verifies the page condition - before you spend
               another dollar on traffic.
@@ -338,7 +338,7 @@ export default function BeforeYouRaiseAdBudget() {
                 href="/pricing"
                 className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
-                See the One-Leak Self-Implementation Kit
+                See the One-Leak Repair Sprint
               </Link>
             </div>
           </section>

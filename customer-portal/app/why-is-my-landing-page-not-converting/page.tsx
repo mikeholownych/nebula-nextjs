@@ -349,7 +349,7 @@ export default function WhyNotConvertingPage() {
               SaaS Audit Guide
             </Link>
             <Link href="/pricing" className="hover:text-accent">
-              Self-Implementation Kit Pricing
+              Repair Sprint Pricing
             </Link>
           </footer>
         </article>

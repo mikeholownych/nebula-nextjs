@@ -31,11 +31,11 @@ const activePublicFiles = ['app', 'components', 'public'].flatMap((directory) =>
 const forbiddenPaidOfferDrift =
   /\bFix Pack\b|Conversion Fix Pack|AI prompt pack|prompt pack|Fix Pack Prompt|tailored AI prompt|one prompt per finding|implements every finding|temporary collaborator|full implementation of all identified fixes|refund if (?:your )?conversion/i
 
-describe('One-Leak Self-Implementation Kit offer integrity', () => {
+describe('One-Leak Repair Sprint offer integrity', () => {
   it('defines the $97 offer as a customer-implemented kit', () => {
     expect(REPAIR_SPRINT_OFFER).toMatchObject({
       key: 'fix-pack',
-      name: 'One-Leak Self-Implementation Kit',
+      name: 'One-Leak Repair Sprint',
       priceUsd: 97,
     })
     expect(REPAIR_SPRINT_OFFER.summary).toMatch(/customer|developer|implement/i)
@@ -60,7 +60,7 @@ describe('One-Leak Self-Implementation Kit offer integrity', () => {
 
   it('states the bounded self-implementation scope and evidence boundary on pricing', () => {
     const pricing = read('app/pricing/page.tsx')
-    expect(pricing).toContain('One-Leak Self-Implementation Kit')
+    expect(pricing).toContain('One-Leak Repair Sprint')
     expect(pricing).toMatch(/one landing page/i)
     expect(pricing).toMatch(/customer|developer|implement/i)
     expect(pricing).toMatch(/does not promise conversion lift/i)

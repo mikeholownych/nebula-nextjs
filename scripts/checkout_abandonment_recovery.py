@@ -87,7 +87,7 @@ def build_email(email: str, audit_id: str, url: str, score: int, grade: str, fin
 
 Score: {score}/10 (Grade {grade}){finding_line}
 
-The $97 One-Leak Self-Implementation Kit delivers the targeted fix for your highest-impact finding — exact copy, code, or configuration change for your specific page. Includes a 30-day re-audit to verify the fix held.
+The $97 One-Leak Repair Sprint delivers the targeted fix for your highest-impact finding — exact copy, code, or configuration change for your specific page. Includes a 30-day re-audit to verify the fix held.
 
 Resume checkout:
 {checkout_url}
@@ -131,7 +131,7 @@ nebulacomponents.com"""
 {finding_block}
 
 <p style="color:#444;line-height:1.6">
-  The <strong>$97 One-Leak Self-Implementation Kit</strong> delivers the targeted fix for your highest-impact finding —
+  The <strong>$97 One-Leak Repair Sprint</strong> delivers the targeted fix for your highest-impact finding —
   exact copy, code, or configuration change written for your specific page.
   Includes a 30-day re-audit to verify the fix held.
 </p>

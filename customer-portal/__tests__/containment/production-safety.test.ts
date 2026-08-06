@@ -253,7 +253,7 @@ describe('production safety containment', () => {
     expect(body.get('line_items[0][price_data][currency]')).toBe('usd')
     expect(body.get('line_items[0][price_data][unit_amount]')).toBe('9700')
     expect(body.get('line_items[0][price_data][product_data][name]')).toBe(
-      'One-Leak Self-Implementation Kit',
+      'One-Leak Repair Sprint',
     )
     expect(body.get('payment_method_types[0]')).toBe('card')
     expect(body.get('metadata[offer_key]')).toBe('fix-pack')

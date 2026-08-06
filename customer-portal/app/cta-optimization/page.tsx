@@ -237,7 +237,7 @@ export default function CtaOptimizationPage() {
             <Link href="/landing-page-cta-audit" className="hover:text-accent transition-colors">Landing Page CTA Audit</Link>
             <Link href="/headline-optimization" className="hover:text-accent transition-colors">Headline Optimization</Link>
             <Link href="/why-is-my-landing-page-not-converting" className="hover:text-accent transition-colors">Why Your Page Isn&apos;t Converting</Link>
-            <Link href="/pricing" className="hover:text-accent transition-colors">Self-Implementation Kit Pricing</Link>
+            <Link href="/pricing" className="hover:text-accent transition-colors">Repair Sprint Pricing</Link>
           </footer>
 
         </article>

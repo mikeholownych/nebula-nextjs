@@ -280,7 +280,7 @@ export default function ProofBeforeCTAPage() {
           <p className="mb-6 leading-relaxed text-fg-muted">
             The free Nebula audit reports where the page may lose credibility before the
             CTA - missing proof, weak proof, misplaced proof. If the audit flags a proof leak,
-            the $97 One-Leak Self-Implementation Kit delivers a tailored kit for that high-confidence finding. You or your developer implements it, and the 30-day re-audit verifies the page condition.
+            the $97 One-Leak Repair Sprint delivers a tailored kit for that high-confidence finding. You or your developer implements it, and the 30-day re-audit verifies the page condition.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link

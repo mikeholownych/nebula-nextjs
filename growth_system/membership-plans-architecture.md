@@ -57,7 +57,7 @@
 - Custom scoring weights (emphasize signals that matter to your vertical)
 - Bulk audit CSV import/export
 
-### One-Leak Self-Implementation Kit — $97 one-time
+### One-Leak Repair Sprint — $97 one-time
 **Unchanged from current offer. Available to any tier.**
 - Works with or without a subscription
 - Audit-bound (requires completed audit)

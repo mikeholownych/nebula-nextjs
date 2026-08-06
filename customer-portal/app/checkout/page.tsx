@@ -7,9 +7,9 @@ import CheckoutPageTracker from './CheckoutPageTracker'
 import CheckoutCTAButton from './CheckoutCTAButton'
 
 export const metadata: Metadata = {
-  title: 'Checkout — One-Leak Self-Implementation Kit | Nebula Components',
+  title: 'Checkout — One-Leak Repair Sprint | Nebula Components',
   description:
-    'Purchase the $97 One-Leak Self-Implementation Kit for one audited landing-page finding.',
+    'Purchase the $97 One-Leak Repair Sprint for one audited landing-page finding.',
   alternates: {
     canonical: 'https://nebulacomponents.com/checkout',
   },
@@ -111,7 +111,7 @@ export default async function CheckoutPage({
 
           <h2 className="mb-3 mt-6 text-base font-semibold text-fg">Bounded scope</h2>
           <p>
-            This purchase covers a self-implementation kit for one high-impact finding from your audit — exact copy, a code snippet, or a configuration change targeted to your specific page. It excludes full redesigns, multiple pages, backend application logic, analytics migrations, and paid third-party tools.
+            This purchase covers a repair sprint for one high-impact finding from your audit — exact copy, a code snippet, or a configuration change targeted to your specific page. It excludes full redesigns, multiple pages, backend application logic, analytics migrations, and paid third-party tools.
           </p>
 
           <h2 className="mb-3 mt-6 text-base font-semibold text-fg">Evidence, not a lift guarantee</h2>

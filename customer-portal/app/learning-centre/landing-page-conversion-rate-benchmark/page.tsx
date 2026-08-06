@@ -285,7 +285,7 @@ export default function LandingPageConversionRateBenchmark() {
               Find what is pulling your rate down
             </h2>
             <p className="mb-6 leading-relaxed text-fg-muted">
-              The free Nebula audit identifies likely page-side leaks. The $97 One-Leak Self-Implementation Kit
+              The free Nebula audit identifies likely page-side leaks. The $97 One-Leak Repair Sprint
               delivers a tailored kit for one high-confidence page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition. It does not promise conversion lift.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -299,7 +299,7 @@ export default function LandingPageConversionRateBenchmark() {
                 href="/pricing"
                 className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
-                See the One-Leak Self-Implementation Kit
+                See the One-Leak Repair Sprint
               </Link>
             </div>
           </section>

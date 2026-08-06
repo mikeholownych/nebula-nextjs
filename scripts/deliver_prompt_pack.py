@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deliver one tailored self-implementation kit to a paying customer.
+"""Deliver one tailored repair sprint to a paying customer.
 
 Triggered by the Stripe webhook (customer-portal/app/api/webhooks/stripe/route.ts)
 the moment a real checkout.session.completed event lands for the Fix Pack offer.
@@ -243,9 +243,9 @@ def compose_email(url, pack, audit):
 
     # ── Fallback: kit generation failed ──────────────────────────────────────
     if not teaser:
-        subject = "Your One-Leak Self-Implementation Kit"
+        subject = "Your One-Leak Repair Sprint"
         body = (
-            f"Here's your One-Leak Self-Implementation Kit for {url}.\n\n"
+            f"Here's your One-Leak Repair Sprint for {url}.\n\n"
             "We could not generate a kit for this audit. You will be contacted "
             "shortly with a manual fix.\n"
         )
@@ -261,7 +261,7 @@ def compose_email(url, pack, audit):
     prompt_md_full = prompt_md + generated_note
 
     intro = (
-        f"Here's your One-Leak Self-Implementation Kit for {url}.\n\n"
+        f"Here's your One-Leak Repair Sprint for {url}.\n\n"
         f"Overall score: {audit.get('overall')}/10 ({audit.get('overall_grade')})\n\n"
         f"Selected finding: {selected_label}.\n\n"
         f"Run the prompt below in your terminal agent (Claude Code, Cursor, "
@@ -277,7 +277,7 @@ def compose_email(url, pack, audit):
         f"{'=' * 40}\n\n"
     )
     body = intro + prompt_md_full
-    subject = f"Your One-Leak Self-Implementation Kit — {selected_label}"
+    subject = f"Your One-Leak Repair Sprint — {selected_label}"
     html = _kit_html(url, audit, selected_label, intro, prompt_md_full)
     return subject, body, html
 
@@ -306,7 +306,7 @@ def _kit_html(url, audit, selected_label, intro_text, prompt_md, fallback=False)
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Your One-Leak Self-Implementation Kit</title>
+<title>Your One-Leak Repair Sprint</title>
 </head>
 <body style="margin:0;padding:0;background:#0a0f14;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0f14;padding:32px 16px;">
@@ -323,7 +323,7 @@ def _kit_html(url, audit, selected_label, intro_text, prompt_md, fallback=False)
   <!-- Hero -->
   <tr><td style="background:#0f1923;border-radius:12px;padding:28px 28px 24px;border:1px solid #1e3040;margin-bottom:20px;">
     <p style="margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#00c2a0;">
-      One-Leak Self-Implementation Kit
+      One-Leak Repair Sprint
     </p>
     <h1 style="margin:0 0 16px;font-size:22px;font-weight:800;color:#e2e8f0;line-height:1.3;">
       {selected_label}
@@ -414,7 +414,7 @@ def _kit_html(url, audit, selected_label, intro_text, prompt_md, fallback=False)
     </p>
     <p style="margin:0;font-size:11px;color:#1e3040;line-height:1.6;">
       Questions about your kit? Reply to this email — we respond within one business day.<br>
-      This is a one-time transactional email for your $97 One-Leak Self-Implementation Kit purchase.
+      This is a one-time transactional email for your $97 One-Leak Repair Sprint purchase.
     </p>
   </td></tr>
 
@@ -469,7 +469,7 @@ def main():
         )
         return 1
 
-    log(f"building self-implementation kit for {email} ({url})")
+    log(f"building repair sprint for {email} ({url})")
     try:
         page = scrape_page(url)
         audit = score_audit(page)
@@ -514,8 +514,8 @@ def main():
         "message_id": sent.get("message_id"),
     })
     update_hot_lead_stage(email, url)
-    log(f"delivered self-implementation kit to {email} for {url}")
-    telegram_notify(f"✅ Self-implementation kit delivered — {email} ({url})")
+    log(f"delivered repair sprint to {email} for {url}")
+    telegram_notify(f"✅ repair sprint delivered — {email} ({url})")
     return 0
 
 

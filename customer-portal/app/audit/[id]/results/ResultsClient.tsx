@@ -460,7 +460,7 @@ function ReportOverview({ results }: { results: AuditResult }) {
           <p className="mt-4 max-w-[65ch] text-base leading-8 text-fg-muted">
             The{' '}
             <a href="#remediation" className="font-semibold text-accent hover:underline">
-              $97 One-Leak Self-Implementation Kit
+              $97 One-Leak Repair Sprint
             </a>{' '}
             delivers the exact fix for your highest-impact finding — plus a 30-day re-audit to confirm it held.
           </p>
@@ -1053,7 +1053,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
           <UnlockConfirmation emailSent={emailSent} email={emailForm.email} auditId={auditId} />
         )}
 
-        {/* Canonical offer: free audit → $97 One-Leak Self-Implementation Kit */}
+        {/* Canonical offer: free audit → $97 One-Leak Repair Sprint */}
         <section id="remediation" className="scroll-mt-40 border-t border-border pt-16">
           <div className="space-y-6">
           <h2 className="text-center text-2xl font-extrabold text-fg">

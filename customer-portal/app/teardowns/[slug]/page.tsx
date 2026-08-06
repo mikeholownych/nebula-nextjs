@@ -215,7 +215,7 @@ export default async function TeardownPage({
             Find the Leak →
           </Link>
           <p className="mt-4 text-xs text-fg-muted">
-            If it finds something worth fixing, the $97 One-Leak Self-Implementation Kit supplies the tailored copy, code, or configuration change for one selected finding.
+            If it finds something worth fixing, the $97 One-Leak Repair Sprint supplies the tailored copy, code, or configuration change for one selected finding.
           </p>
         </section>
       </article>

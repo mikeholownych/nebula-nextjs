@@ -23,7 +23,7 @@
 |---|-------|-------------|--------|----------|
 | F1 | S1 | "Get My Score" CTA at y=604 on mobile requires scrolling past the full H1 + subtext. The nav "Free Audit" link (y=191) goes to `/audit` which shows the same input — a workaround exists, but the in-page hero CTA demands a scroll even without the cookie banner. | Medium | `s1-landing-mobile.png` |
 | F2 | A3 | 32 interactive targets under 24x24 CSS px on 390px viewport (excluding the 1x1 skip link). Failures are overwhelmingly footer links (16px height), social icons (16x16), and inline content links — not the nav. Nav links at 142x43 **pass** WCAG 2.5.8 (AA, minimum 24x24). Worst offenders: social icons (16x16), footer "Privacy Policy" / "Terms of Service" (82x14, 99x14). The 44x44 figure from Apple HIG / WCAG 2.5.5 (AAA enhanced) is aspirational; the report measures against the AA minimum. | Low–Medium | `a3-touch-targets.png` |
-| F3 | S6 | Price ($97) and product name ("One-Leak Self-Implementation Kit") are visible on the results page only after unlock (line 1058 of ResultsClient.tsx renders `REPAIR_SPRINT_OFFER.priceUsd`). For the user who just submitted their email, this is fine. But a shared-link viewer or workspace user who bypasses the gate lands on results without the pricing CTA visible until they scroll to the remediation section. No price is visible **near** the per-finding "fix" teasers. | Low–Medium | `s6-kit-cta.png` |
+| F3 | S6 | Price ($97) and product name ("One-Leak Repair Sprint") are visible on the results page only after unlock (line 1058 of ResultsClient.tsx renders `REPAIR_SPRINT_OFFER.priceUsd`). For the user who just submitted their email, this is fine. But a shared-link viewer or workspace user who bypasses the gate lands on results without the pricing CTA visible until they scroll to the remediation section. No price is visible **near** the per-finding "fix" teasers. | Low–Medium | `s6-kit-cta.png` |
 | F4 | A2 | "Essential only" cookie banner button contrast ratio 1.47:1 (fg: `rgb(209,213,219)` on bg: `rgba(255,255,255,0.05)`). Fails WCAG AA 4.5:1. This is the only failure detected by computed-luminance sampling on flat backgrounds; the method cannot measure text over gradients, images, or overlays — scope accordingly. | Low | `s1-mobile-full.png` |
 
 ---
@@ -37,7 +37,7 @@
 | **S3** Processing | COMPLETED | ~12–15s | ~18.2s | `s3-running-initial.png`, `s3-completed.png` | Progress bar animates (10%→80%→100%), status text updates. Transitions in-place to gate. |
 | **S4** Email Gate | COMPLETED | Gate appears on `/processing` URL after audit completes | — | `s4-results-page.png`, `s4-fresh-gate.png` | Name (optional) + Email (required). "Send Full Results" POSTs to `/api/audit/unlock` → 200, sets HMAC cookie, redirects to results. "View preview now" is **broken** (B1). |
 | **S5** Full Report | COMPLETED | Immediate after gate submit | — | `s5-after-gate-submit.png` | Report renders with signal scores and findings. URL: `/audit/{id}/results`. The unlock handler calls an internal email service (see Unverifiable U1 below). |
-| **S6** Kit CTA | COMPLETED | CTA present in remediation section | — | `s6-kit-cta.png` | Shows $97, "One-Leak Self-Implementation Kit", 30-day re-audit term when unlocked. |
+| **S6** Kit CTA | COMPLETED | CTA present in remediation section | — | `s6-kit-cta.png` | Shows $97, "One-Leak Repair Sprint", 30-day re-audit term when unlocked. |
 | **S7** Payment | COMPLETED | Redirects to Stripe Checkout | — | `checkout-page.png` (Stripe $97 kit), `m2-after-tier-click.png` (Stripe $29/mo Pro) | `s7-payment-form.png` is a blank capture from a script bug and does NOT establish this finding — `checkout-page.png` does. Stripe hosted checkout renders correctly for both the $97 one-time kit and the $29/mo Pro subscription. |
 | **M1** Pricing | COMPLETED | — | — | `m1-pricing-desktop.png` | Pricing page loads. Tier structure visible (Free / $29 Pro / $79 Growth / $199 Agency). "Start Pro" button present. |
 | **M2** Checkout | COMPLETED | Redirect to Stripe | — | `m2-after-tier-click.png` | "Start Pro" button navigates to `checkout.stripe.com` ($29/mo Nebula Pro subscription). No intermediate page. |
@@ -72,12 +72,12 @@ The `/audit` page renders headline, value props, and the URL input area containe
 
 ### K15: Price / Scope / Re-audit Term Consistency
 
-| Surface | $97 | "One-Leak Self-Implementation Kit" | 30-day re-audit | Scope ("one bounded") |
+| Surface | $97 | "One-Leak Repair Sprint" | 30-day re-audit | Scope ("one bounded") |
 |---------|-----|-----------------------------------|-----------------|-----------------------|
 | `/pricing` | Yes | Yes | Yes (4 mentions) | Yes |
 | `/results` (unlocked) | Yes (code line 1058) | Yes | Yes (line 1061) | Yes ("one high-confidence finding") |
-| Stripe Checkout | Yes ($97 one-time) | "Self-Implementation Kit" in description | Not visible on checkout page | Implied |
-| `self-implementation-kit-offer.ts` | 97 | "One-Leak Self-Implementation Kit" | "Same-scope re-audit within 30 days" | "one specific failing signal" |
+| Stripe Checkout | Yes ($97 one-time) | "Repair Sprint" in description | Not visible on checkout page | Implied |
+| `self-implementation-kit-offer.ts` | 97 | "One-Leak Repair Sprint" | "Same-scope re-audit within 30 days" | "one specific failing signal" |
 
 **Verdict:** Consistent across all surfaces. No contradictions found. The 30-day term does not appear on the Stripe checkout page itself (Stripe shows only the product name and price), which is expected and not actionable.
 
@@ -162,7 +162,7 @@ ux-audit-evidence/
 ├── s4-after-email-submit.png     # S4→S5 transition (POST 200, redirect)
 ├── s5-after-gate-submit.png      # S5 full results rendered after email submit
 ├── s5-full-report.png            # S5 (processing state screenshot, not results)
-├── s6-kit-cta.png                # S6 "One-Leak Self-Implementation Kit" CTA
+├── s6-kit-cta.png                # S6 "One-Leak Repair Sprint" CTA
 ├── s7-payment-form.png           # VOID — blank capture from script bug
 ├── checkout-page.png             # S7 EVIDENCE — Stripe $97 kit checkout
 ├── m1-pricing-desktop.png        # M1 pricing page with tiers
@@ -193,7 +193,7 @@ ux-audit-evidence/
 - Throttled pass: Chromium DevTools Protocol `Network.emulateNetworkConditions` with 1.5 Mbps down, 750 Kbps up, 300ms latency (Slow 4G profile)
 - Warm cache pass: **not run** (unmet requirement)
 - Audit counter provenance traced to source: `audit_db.py:880` — `count(*) FILTER (WHERE status = 'completed') FROM audits`, no internal/test exclusion
-- "One-Leak Self-Implementation Kit" used throughout per canonical product name in `self-implementation-kit-offer.ts`; "Fix Pack" is an internal key only (`key: 'fix-pack'` in the offer object)
+- "One-Leak Repair Sprint" used throughout per canonical product name in `self-implementation-kit-offer.ts`; "Fix Pack" is an internal key only (`key: 'fix-pack'` in the offer object)
 
 ---
 

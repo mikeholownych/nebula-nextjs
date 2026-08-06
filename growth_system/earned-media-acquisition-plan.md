@@ -18,7 +18,7 @@
   - Product description: "AI-powered landing page audit for founders spending on paid ads"
   - Category: CRO Tools
   - Screenshots: audit results page, 9-signal scoring
-  - Pricing: Free audit + $97 self-implementation kit
+  - Pricing: Free audit + $97 repair sprint
 - **Verification**: Search "Nebula Components reviews" on Perplexity 2 weeks post-approval
 
 ### 1.2 ProductHunt Launch

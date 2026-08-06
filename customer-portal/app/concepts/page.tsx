@@ -4,12 +4,12 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Nebula Concepts: Frameworks Behind the 9-Signal Landing Page Audit | Nebula',
   description:
-    'The diagnostic vocabulary Nebula uses to evaluate landing page conversion fitness — signals, evidence atoms, conversion leaks, message match, above-fold state, structural friction, grades, and the One-Leak Self-Implementation Kit.',
+    'The diagnostic vocabulary Nebula uses to evaluate landing page conversion fitness — signals, evidence atoms, conversion leaks, message match, above-fold state, structural friction, grades, and the One-Leak Repair Sprint.',
   alternates: { canonical: 'https://nebulacomponents.com/concepts' },
   openGraph: {
     title: 'Nebula Concepts: Frameworks Behind the 9-Signal Landing Page Audit',
     description:
-      'The diagnostic vocabulary Nebula uses to evaluate landing page conversion fitness — signals, evidence atoms, conversion leaks, message match, above-fold state, structural friction, grades, and the One-Leak Self-Implementation Kit.',
+      'The diagnostic vocabulary Nebula uses to evaluate landing page conversion fitness — signals, evidence atoms, conversion leaks, message match, above-fold state, structural friction, grades, and the One-Leak Repair Sprint.',
     url: 'https://nebulacomponents.com/concepts',
     siteName: 'Nebula Components',
     type: 'article',
@@ -21,7 +21,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Nebula Concepts: Frameworks Behind the 9-Signal Landing Page Audit',
   description:
-    'The diagnostic vocabulary Nebula uses to evaluate landing page conversion fitness — signals, evidence atoms, conversion leaks, message match, above-fold state, structural friction, grades, and the One-Leak Self-Implementation Kit.',
+    'The diagnostic vocabulary Nebula uses to evaluate landing page conversion fitness — signals, evidence atoms, conversion leaks, message match, above-fold state, structural friction, grades, and the One-Leak Repair Sprint.',
   author: { '@type': 'Organization', name: 'Nebula Components' },
   publisher: { '@type': 'Organization', name: 'Nebula Components' },
   mainEntityOfPage: 'https://nebulacomponents.com/concepts',
@@ -70,7 +70,7 @@ const CONCEPTS = [
     whyItMatters:
       'The word "leak" is deliberate: it frames the problem as a fixable structural defect rather than a weak offer or wrong audience. A page leaking 60% of its mobile visitors through a buried CTA is not a traffic problem. It is a structural problem with a bounded fix.',
     howNebulaMeasures:
-      'Nebula identifies leaks at the signal level — each failed signal is a candidate leak. The audit ranks failed signals by estimated conversion impact (message match and CTA failures are ranked highest; load speed and SEO signals are ranked lower for paid traffic). The One-Leak Self-Implementation Kit targets the highest-ranked leak.',
+      'Nebula identifies leaks at the signal level — each failed signal is a candidate leak. The audit ranks failed signals by estimated conversion impact (message match and CTA failures are ranked highest; load speed and SEO signals are ranked lower for paid traffic). The One-Leak Repair Sprint targets the highest-ranked leak.',
   },
   {
     id: 'message-match',
@@ -104,11 +104,11 @@ const CONCEPTS = [
   },
   {
     id: 'one-leak-self-implementation-kit',
-    name: 'One-Leak Self-Implementation Kit',
+    name: 'One-Leak Repair Sprint',
     definition:
       'Nebula\'s $97 paid product. Takes the highest-impact finding from the audit and delivers targeted implementation instructions. One leak, one fix, one re-audit window.',
     whyItMatters:
-      'A full-page redesign is the wrong response to a single conversion leak. If the audit identifies that the H1 has zero ICP clarity, the correct intervention is a headline rewrite — not a new design system. The Self-Implementation Kit scopes the change to the single highest-impact finding, delivers implementation-ready instructions, and includes a re-audit to confirm the finding is resolved.',
+      'A full-page redesign is the wrong response to a single conversion leak. If the audit identifies that the H1 has zero ICP clarity, the correct intervention is a headline rewrite — not a new design system. The Repair Sprint scopes the change to the single highest-impact finding, delivers implementation-ready instructions, and includes a re-audit to confirm the finding is resolved.',
     howNebulaMeasures:
       'The Sprint is triggered by the audit output. The highest-ranked failed signal determines the sprint scope. Deliverables are specific to the signal: for a headline failure, the sprint returns three alternative H1 candidates with rationale. For a load speed failure, it returns the specific asset causing the LCP regression and the implementation path to fix it.',
   },
@@ -128,7 +128,7 @@ const relatedLinks = [
   { href: '/audit', title: 'Run a Free Audit' },
   { href: '/why-is-my-landing-page-not-converting', title: 'Why Is My Landing Page Not Converting?' },
   { href: '/what-is-landing-page-audit', title: 'What Is a Landing Page Audit?' },
-  { href: '/pricing', title: 'Self-Implementation Kit Pricing' },
+  { href: '/pricing', title: 'Repair Sprint Pricing' },
 ]
 
 export default function ConceptsPage() {

@@ -206,7 +206,7 @@ export default function MessageMatchChecklistPage() {
             <p className="mb-6 leading-relaxed text-fg-muted">
               Run the Nebula audit to get a scored breakdown of your landing page&apos;s message match,
               offer clarity, and conversion structure. If the audit surfaces a confirmed break, the{' '}
-              <span className="font-medium text-fg">$97 One-Leak Self-Implementation Kit</span> supplies
+              <span className="font-medium text-fg">$97 One-Leak Repair Sprint</span> supplies
               tailored hero or CTA copy for one high-confidence finding. You or your developer implements it,
               and the 30-day re-audit verifies the page condition - no retainer, no scope creep.
             </p>

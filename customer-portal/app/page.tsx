@@ -220,7 +220,7 @@ export default function Home() {
                 },
                 {
                   heading: 'What happens next',
-                  body: 'Fix the highest-impact leak yourself with the report — or get the $97 One-Leak Self-Implementation Kit: one implementation-ready fix, the 30-day re-audit to confirm it held, and your page compared with the current completed-audit benchmark sample.',
+                  body: 'Fix the highest-impact leak yourself with the report — or get the $97 One-Leak Repair Sprint: one implementation-ready fix, the 30-day re-audit to confirm it held, and your page compared with the current completed-audit benchmark sample.',
                 },
               ].map((item) => (
                 <div key={item.heading} className="rounded-xl border border-border bg-bg-muted/10 p-5">
@@ -408,7 +408,7 @@ export default function Home() {
                       'Real scrape - scored against 9 specific conversion signals',
                       'Prioritized fixes with impact and effort scores',
                       'No signup to see your results',
-                      '$97 One-Leak Self-Implementation Kit gives you one implementation-ready change',
+                      '$97 One-Leak Repair Sprint gives you one implementation-ready change',
                       'Free re-audit 30 days after you implement the fix',
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-2">
@@ -475,7 +475,7 @@ export default function Home() {
                 <p className="mt-1 text-sm leading-6 text-fg-muted">Core conversion signals and applicable technical checks against your actual page. Returns pass/fail findings with raw evidence, plus a fix list ranked by impact. Under 2 minutes.</p>
               </div>
               <div>
-                <h3 className="font-semibold text-fg">What does the $97 self-implementation kit do?</h3>
+                <h3 className="font-semibold text-fg">What does the $97 repair sprint do?</h3>
                 <p className="mt-1 text-sm leading-6 text-fg-muted">One targeted fix for your highest-impact finding — exact copy, code, or configuration change written for your specific page. Includes a 30-day re-audit to verify the fix held and your page benchmarked against real audit data. It does not promise conversion lift — no one can before the fix is live and measured.</p>
               </div>
             </div>

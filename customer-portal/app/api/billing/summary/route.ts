@@ -16,13 +16,13 @@ import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
  */
 
 const OFFER_NAMES: Record<string, string> = {
-  'fix-pack': 'One-Leak Self-Implementation Kit',
+  'fix-pack': 'One-Leak Repair Sprint',
   'agency-partner': 'Agency Partner',
   retainer: 'Conversion Retainer',
 }
 
 const OFFER_AMOUNT_NAMES: Record<number, string> = {
-  9700: 'One-Leak Self-Implementation Kit',
+  9700: 'One-Leak Repair Sprint',
   49700: 'Agency Partner',
   149700: 'Conversion Retainer',
 }

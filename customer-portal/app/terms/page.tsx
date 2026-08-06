@@ -41,7 +41,7 @@ export default function TermsPage() {
             <h2 className="mb-3 text-lg font-semibold text-fg">3. Paid Services</h2>
             {fixPack ? (
               <p className="text-base leading-7 text-fg-muted">
-                The current One-Leak Self-Implementation Kit ({formatUsd(fixPack.priceCents)}) covers one
+                The current One-Leak Repair Sprint ({formatUsd(fixPack.priceCents)}) covers one
                 landing page and one selected audit finding. After payment, you receive a tailored
                 implementation kit containing exact copy, a code snippet, or a configuration change.
                 You implement it yourself, with your developer, or through your CMS.
@@ -51,7 +51,7 @@ export default function TermsPage() {
               </p>
             ) : (
               <p className="text-base leading-7 text-fg-muted">
-                No verified paid Self-Implementation Kit offer is currently available. Any future paid
+                No verified paid Repair Sprint offer is currently available. Any future paid
                 service will be described at checkout before payment is accepted.
               </p>
             )}

@@ -381,8 +381,8 @@
     "/api/checkout": {
       "post": {
         "operationId": "purchaseFixPack",
-        "summary": "Create an audit-bound Stripe Checkout session for the One-Leak Self-Implementation Kit",
-        "description": "Creates a Stripe-hosted checkout session for the server-priced $97 self-implementation kit. Requires an eligible completed audit and its verified unlock cookie. This operation is not protected by x402.",
+        "summary": "Create an audit-bound Stripe Checkout session for the One-Leak Repair Sprint",
+        "description": "Creates a Stripe-hosted checkout session for the server-priced $97 repair sprint. Requires an eligible completed audit and its verified unlock cookie. This operation is not protected by x402.",
         "security": [
           {
             "auditUnlockCookie": []

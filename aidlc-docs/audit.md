@@ -451,7 +451,7 @@ Execution resumed against the live customer portal. Objective: make nebulacompon
 ## 2026-08-03T08:26:30Z — Agency audit remediation authorized
 
 - Complete raw user instruction: "Proceed with all findings. Decisions: Option B — Self-implementation kit"
-- Canonical offer decision: $97 self-implementation kit; Nebula supplies a tailored implementation artifact, customer/developer applies it, no conversion-lift guarantee, 30-day same-scope re-audit.
+- Canonical offer decision: $97 repair sprint; Nebula supplies a tailored implementation artifact, customer/developer applies it, no conversion-lift guarantee, 30-day same-scope re-audit.
 - Scope accepted: payments, billing security, analytics/attribution, SEO/indexation, accessibility/performance, Cloudflare/security, offer and email integrity, production verification.
 - Execution branch: fix/agency-audit-remediation-20260803.
 

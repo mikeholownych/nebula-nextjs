@@ -241,7 +241,7 @@ export default function EcommerceAuditPage() {
             <Link href="/lead-generation-landing-page-audit" className="hover:text-accent transition-colors">Lead Gen Audit</Link>
             <Link href="/landing-page-trust-signals" className="hover:text-accent transition-colors">Trust Signals</Link>
             <Link href="/teardowns" className="hover:text-accent transition-colors">Public Teardowns</Link>
-            <Link href="/pricing" className="hover:text-accent transition-colors">Self-Implementation Kit Pricing</Link>
+            <Link href="/pricing" className="hover:text-accent transition-colors">Repair Sprint Pricing</Link>
           </footer>
 
         </article>

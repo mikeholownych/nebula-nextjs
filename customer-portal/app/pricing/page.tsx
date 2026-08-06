@@ -8,9 +8,9 @@ import MembershipGrid from './MembershipGrid'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Pricing — Memberships & One-Leak Self-Implementation Kit | Nebula',
+  title: 'Pricing — Memberships & One-Leak Repair Sprint | Nebula',
   description:
-    'Free evidence-backed landing page audit, Pro/Growth/Agency memberships with monitoring and white-label reports, plus a $97 one-time self-implementation kit.',
+    'Free evidence-backed landing page audit, Pro/Growth/Agency memberships with monitoring and white-label reports, plus a $97 one-time repair sprint.',
   alternates: {
     canonical: 'https://nebulacomponents.com/pricing',
   },
@@ -36,7 +36,7 @@ function buildServiceSchema(fixPack: FixPackPublicFact) {
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Self-Implementation Kit deliverables',
+    name: 'Repair Sprint deliverables',
     itemListElement: REPAIR_SPRINT_OFFER.includes.map((name) => ({
       '@type': 'Offer',
       itemOffered: { '@type': 'Service', name },
@@ -47,7 +47,7 @@ function buildServiceSchema(fixPack: FixPackPublicFact) {
 
 const faqItems = [
   {
-    q: 'What is included in the One-Leak Self-Implementation Kit?',
+    q: 'What is included in the One-Leak Repair Sprint?',
     a: 'After the free audit, you pay $97 and receive a tailored implementation kit for one specific failing signal — exact copy, a code snippet, or a configuration change. You implement it yourself, with your developer, or through your CMS. No site access is required by Nebula.',
   },
   {
@@ -119,8 +119,8 @@ export default function PricingPage() {
                 <p className="mt-1 text-sm leading-6 text-fg-muted">It checks observable conversion conditions against a public landing page and returns results in under 2 minutes.</p>
               </div>
               <div>
-                <h3 className="font-semibold text-fg">What does the self-implementation kit cost?</h3>
-                <p className="mt-1 text-sm leading-6 text-fg-muted">The One-Leak Self-Implementation Kit costs $97 as a one-time payment.</p>
+                <h3 className="font-semibold text-fg">What does the repair sprint cost?</h3>
+                <p className="mt-1 text-sm leading-6 text-fg-muted">The One-Leak Repair Sprint costs $97 as a one-time payment.</p>
               </div>
               <div>
                 <h3 className="font-semibold text-fg">Does it guarantee more conversions?</h3>
@@ -166,7 +166,7 @@ export default function PricingPage() {
 
             <Card variant="bordered">
               <p className="mb-3 text-sm font-medium text-fg-muted">One-time payment</p>
-              <h2 className="text-2xl font-semibold text-fg">One-Leak Self-Implementation Kit</h2>
+              <h2 className="text-2xl font-semibold text-fg">One-Leak Repair Sprint</h2>
               <p className="mt-1 text-sm italic text-fg-muted">Fix the highest-impact leak — kit sent after successful payment</p>
               <p className="mt-2 text-4xl font-bold text-fg">${REPAIR_SPRINT_OFFER.priceUsd}</p>
               <p className="mt-4 text-fg-muted">

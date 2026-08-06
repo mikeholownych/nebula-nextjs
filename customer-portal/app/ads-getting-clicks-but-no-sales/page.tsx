@@ -288,7 +288,7 @@ export default function AdsClicksNoSalesPage() {
               SaaS Audit
             </Link>
             <Link href="/pricing" className="hover:text-accent transition-colors">
-              Self-Implementation Kit Pricing
+              Repair Sprint Pricing
             </Link>
           </footer>
         </article>

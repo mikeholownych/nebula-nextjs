@@ -85,7 +85,7 @@ export default async function AuditPage() {
                 {[
                   'Results in under 2 minutes',
                   'No signup, no account',
-                  '$97 One-Leak Self-Implementation Kit: one targeted fix + 30-day re-audit included',
+                  '$97 One-Leak Repair Sprint: one targeted fix + 30-day re-audit included',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-fg-muted">
                     <span className="text-accent">✓</span>
@@ -242,7 +242,7 @@ export default async function AuditPage() {
           </div>
         </section>
 
-        {/* ── 4. After the audit: self-implementation kit ── */}
+        {/* ── 4. After the audit: repair sprint ── */}
         <section className="border-t border-border px-6 py-14">
           <div className="mx-auto max-w-6xl grid gap-10 md:grid-cols-2 md:items-start">
             <div>

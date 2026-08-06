@@ -1,8 +1,8 @@
 export const REPAIR_SPRINT_OFFER = {
   key: 'fix-pack',
-  name: 'One-Leak Self-Implementation Kit',
+  name: 'One-Leak Repair Sprint',
   priceUsd: 97,
-  summary: 'Run the free audit, then get a tailored self-implementation kit for one high-impact finding. You or your developer applies the supplied copy, code, or configuration change.',
+  summary: 'Run the free audit, then get a tailored repair sprint for one high-impact finding. You or your developer applies the supplied copy, code, or configuration change.',
   howItWorks: [
     'Run the free audit — paste your URL, get 9 signals scored in under 2 minutes',
     'Review the initial findings and unlock the full report by email',

@@ -313,7 +313,7 @@ Sent the {domain} audit yesterday. One finding I didn't want to bury in the repo
 
 Your headline and ad are making different promises. Visitors arrive expecting one thing, see another, and leave. That gap is the most common reason paid traffic doesn't convert — and it's mechanical, not a budget problem.
 
-The $97 option is a tailored self-implementation kit for one selected finding. You or your developer applies it; the 30-day re-audit checks the same page condition, not conversion lift.
+The $97 option is a tailored repair sprint for one selected finding. You or your developer applies it; the 30-day re-audit checks the same page condition, not conversion lift.
 
 → {stripe}
 
@@ -340,7 +340,7 @@ Last note from me on the {domain} audit.
 The findings don't expire. If you come back to this later, the audit is still accurate and the fix is the same.
 
 Two ways to use it:
-1. Get one tailored self-implementation kit — $97: {stripe}
+1. Get one tailored repair sprint — $97: {stripe}
 2. Re-run the free audit anytime: https://nebulacomponents.com/audit
 
 Won't follow up again. Thanks for the time.
@@ -446,7 +446,7 @@ def hot_lead_pitch_body(url, audit_score, audit_grade, checkout_url=None):
 
 {cta_line}
 
-$97 self-implementation kit — run or reopen the audit to unlock eligible checkout:
+$97 repair sprint — run or reopen the audit to unlock eligible checkout:
 {pay_url}
 
 — Nebula"""

@@ -111,7 +111,7 @@ https://nebulacomponents.com
 
 Paste your URL. Takes under two minutes. You'll see the leak.
 
-If you fix it yourself, great. If you want our $97 One-Leak Self-Implementation Kit, that's there too. But the diagnosis is free either way.
+If you fix it yourself, great. If you want our $97 One-Leak Repair Sprint, that's there too. But the diagnosis is free either way.
 
 Mike H
 
