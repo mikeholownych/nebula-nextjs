@@ -45,7 +45,7 @@ export function WEB_MCP_RUNTIME() {
           required: ['url']
         },
         execute: async function (input) {
-          if (!input || typeof input.url !== 'string' || !/^https?:\\/\\//i.test(input.url.trim())) {
+          if (!input || typeof input.url !== 'string' || !/^https?:\/\//i.test(input.url.trim())) {
             return { status: 'error', code: 'INVALID_URL', message: 'Provide a public HTTP or HTTPS URL.' };
           }
           var response = await fetch('/api/audit/start', {
