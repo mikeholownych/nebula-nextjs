@@ -826,6 +826,47 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
           <>
             <ReportOverview results={results} />
             <FixFirstQueue findings={results.findings} auditId={auditId} onGoToRemediation={() => setActiveTab('remediation')} />
+            {/* Inline email gate — shown on Overview for unlocked visitors and non-shared locked views */}
+            {!unlocked && !sharedView && !emailSent && (
+              <section className="border-y border-border py-12 my-4">
+                <div className="mx-auto max-w-xl text-center">
+                  <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-2">Free — takes 10 seconds</p>
+                  <h2 className="text-2xl font-extrabold text-fg mb-2">
+                    Unlock the full report + receive it in your inbox
+                  </h2>
+                  <p className="text-fg-muted mb-6 text-sm leading-relaxed">
+                    See every finding, the fix preview for each, and the evidence behind the score.
+                  </p>
+                  <form
+                    onSubmit={(e) => { e.preventDefault(); sendEmail() }}
+                    className="flex flex-col sm:flex-row gap-3 justify-center"
+                  >
+                    <input
+                      type="email"
+                      required
+                      placeholder="you@company.com"
+                      value={emailForm.email}
+                      onChange={(e) => setEmailForm({ ...emailForm, email: e.target.value })}
+                      disabled={sendingEmail}
+                      className="flex-1 min-w-0 rounded-lg border border-border bg-bg px-4 py-3 text-sm text-fg placeholder-fg-dim outline-none transition focus:border-accent focus:ring-1 focus:ring-accent disabled:opacity-60"
+                    />
+                    <button
+                      type="submit"
+                      disabled={!emailForm.email || sendingEmail}
+                      className="shrink-0 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-bg transition-all hover:bg-accent-light active:scale-[0.98] disabled:opacity-60"
+                    >
+                      {sendingEmail ? 'Unlocking…' : 'Unlock full report →'}
+                    </button>
+                  </form>
+                  {emailError && (
+                    <p className="mt-3 text-xs text-danger">{emailError}</p>
+                  )}
+                </div>
+              </section>
+            )}
+            {(emailSent || unlocked) && !sharedView && (
+              <UnlockConfirmation emailSent={emailSent} email={emailForm.email} auditId={auditId} />
+            )}
             <OverviewNext
               onSelect={setActiveTab}
               unlocked={unlocked && !sharedView}
