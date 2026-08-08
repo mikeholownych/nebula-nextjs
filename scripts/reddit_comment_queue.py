@@ -8,6 +8,11 @@ Exit 1 = rate-limited or API error (Telegram gets error alert).
 """
 import json, os, sys, urllib.request, urllib.error
 from datetime import datetime, timezone
+from pathlib import Path
+
+# Governance gate — fail-closed. Any violation blocks the send.
+sys.path.insert(0, str(Path(__file__).parent))
+from reddit_governance import govern_reddit_content, record_activity
 
 # Load env from .env if not already set (for cron context)
 ENV_FILE = "/home/mike/nebula/.env"
@@ -19,7 +24,7 @@ if not os.environ.get("ZERNIO_API_KEY") and os.path.exists(ENV_FILE):
             os.environ.setdefault(k.strip(), v.strip())
 
 QUEUE_FILE = "/home/mike/nebula/.reddit_comment_queue.json"
-ACCOUNT_ID = "6a71416deb10586dadce3a88"  # NebulaCRO
+ACCOUNT_ID = "6a772422d0fe733d1a3f3959"  # Reddit: Elegant_Exam_8860
 BASE = "https://zernio.com/api/v1"
 
 
@@ -62,6 +67,18 @@ def main():
     label = item.get("label", post_id)
     remaining_after = len(q["pending"]) - 1
 
+    # ── GOVERNANCE GATE (fail-closed) ──────────────────────────────────
+    sub = (item.get("subreddit", "") or "").lstrip("r/")
+    g = govern_reddit_content(message, sub, "comment", account_id=ACCOUNT_ID)
+    if not g["pass"]:
+        item["governance_blocked_at"] = datetime.now(timezone.utc).isoformat()
+        item["governance_reason"] = g["reason"]
+        q.setdefault("held", []).append(item)
+        q["pending"].pop(0)
+        save_queue(q)
+        print(f"⛔ Reddit comment HELD by governance (no send)\n{label}\nreason: {g['reason']}\nHeld for review: {len(q['held'])}")
+        sys.exit(0)  # no Telegram error — deliberate hold, not a failure
+
     try:
         result = post_comment(api_key, post_id, message)
         comment_id = result.get("data", {}).get("commentId")
@@ -69,6 +86,9 @@ def main():
         item["sent_at"] = datetime.now(timezone.utc).isoformat()
         q["sent"].append(item)
         q["pending"].pop(0)
+        # Record activity for 90/10 + rate limiting
+        is_promo = "sideproject" in sub or "buildinpublic" in sub
+        record_activity(ACCOUNT_ID, "comment", sub, is_promo)
         save_queue(q)
         # stdout goes to Telegram
         print(f"✅ Reddit comment posted\n{label}\ncommentId: {comment_id}\nRemaining in queue: {remaining_after}")
