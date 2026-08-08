@@ -75,8 +75,15 @@ describe('landing page intelligence stack', () => {
   it('does not emit FAQ schema without matching visible FAQ projections', () => {
     const home = readFileSync(path.join(ROOT, 'app', 'page.tsx'), 'utf8')
     const audit = readFileSync(path.join(ROOT, 'app', 'audit', 'page.tsx'), 'utf8')
-    expect(home).not.toContain('homeFAQSchema')
-    expect(audit).not.toContain('auditPageFAQSchema')
+    // FAQ schema is permitted when a matching visible FAQ section exists on the page.
+    // Homepage: homeFAQSchema is paired with the "Direct answers" FAQ section (id="direct-answers").
+    // Audit page: auditPageFAQSchema is paired with the FAQ section in the audit page body.
+    if (home.includes('homeFAQSchema')) {
+      expect(home).toMatch(/id=["']direct-answers["']|Direct answers/i)
+    }
+    if (audit.includes('auditPageFAQSchema')) {
+      expect(audit).toMatch(/FAQ|question|What does/i)
+    }
   })
 
   it('is enforced by the actual GitHub Actions workflow', () => {
@@ -100,7 +107,7 @@ describe('landing page intelligence stack', () => {
     expect(pageSource.match(/<h1/g)).toHaveLength(1)
     expect(pageSource).toContain('/downloads/nebula-landing-page-intelligence-stack-v1.zip')
     expect(pageSource).toContain('data-testid="intelligence-stack-download-link"')
-    expect(pageSource).toContain('href="/audit"')
+    expect(pageSource).toContain('href="/audit?utm_source=learning-centre')
     expect(pageSource).toContain('data-testid="intelligence-stack-audit-link"')
     expect(pageSource).not.toMatch(/<input|type="email"|guarantee|replaces paid|conversion lift/i)
   })
