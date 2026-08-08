@@ -389,6 +389,8 @@ def check_activity(account_id: str) -> list[str]:
 def record_activity(account_id: str, kind: str, subreddit: str, is_promo: bool):
     act = _load_json(ACTIVITY_FILE, {"accounts": {}})
     acc = act["accounts"].setdefault(account_id, {"comments": [], "promo_comments": 0})
+    acc.setdefault("comments", [])
+    acc.setdefault("promo_comments", 0)
     ts = datetime.now(timezone.utc).isoformat()
     acc["comments"].append(ts)
     if is_promo:
