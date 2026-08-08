@@ -1,20 +1,12 @@
 # nebulacomponents.com — robots.txt
-# Policy: search indexing and answer-engine retrieval are welcome.
-# Model-training crawlers listed below are explicitly disallowed.
+# Policy: answer-engine retrieval and search indexing are welcome.
+#         Model-training crawlers are disallowed.
 #
 # ANY RESTRICTIONS EXPRESSED VIA CONTENT SIGNALS ARE EXPRESS RESERVATIONS OF RIGHTS
 # UNDER ARTICLE 4 OF THE EUROPEAN UNION DIRECTIVE 2019/790 ON COPYRIGHT AND RELATED
 # RIGHTS IN THE DIGITAL SINGLE MARKET.
 
-# AI model training — disallowed
-User-Agent: GPTBot
-Disallow: /
-Content-Signal: ai-train=no, search=no, ai-input=no
-
-User-Agent: ClaudeBot
-Disallow: /
-Content-Signal: ai-train=no, search=no, ai-input=no
-
+# ── Training-only crawlers — blocked ────────────────────────────────────────
 User-Agent: Google-Extended
 Disallow: /
 Content-Signal: ai-train=no, search=no, ai-input=no
@@ -35,19 +27,38 @@ User-Agent: Bytespider
 Disallow: /
 Content-Signal: ai-train=no, search=no, ai-input=no
 
-User-Agent: anthropic-ai
+# ── AI answer/search crawlers — allowed; training still prohibited ───────────
+# GPTBot: powers ChatGPT web search and browsing (must be allowed for citations)
+User-Agent: GPTBot
 Allow: /
 Content-Signal: ai-train=no, search=yes, ai-input=yes
 
-# AI answer/search retrieval — allowed; training still prohibited
+# OAI-SearchBot: OpenAI search-specific crawler
 User-Agent: OAI-SearchBot
 Allow: /
 Content-Signal: ai-train=no, search=yes, ai-input=yes
 
+# ChatGPT-User: user-triggered ChatGPT browsing (ignores robots.txt by spec, but explicit)
 User-Agent: ChatGPT-User
 Allow: /
 Content-Signal: ai-train=no, search=yes, ai-input=yes
 
+# ClaudeBot: Claude.ai web features and search (must be allowed for citations)
+User-Agent: ClaudeBot
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+# anthropic-ai: Anthropic training opt-in signal (search=yes preserves retrieval)
+User-Agent: anthropic-ai
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+# Claude-SearchBot: Claude search-specific crawler
+User-Agent: Claude-SearchBot
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
+# PerplexityBot: Perplexity AI search
 User-Agent: PerplexityBot
 Allow: /
 Content-Signal: ai-train=no, search=yes, ai-input=yes
@@ -56,23 +67,22 @@ User-Agent: Perplexity-User
 Allow: /
 Content-Signal: ai-train=no, search=yes, ai-input=yes
 
-User-Agent: Claude-SearchBot
-Allow: /
-Content-Signal: ai-train=no, search=yes, ai-input=yes
-
+# GoogleOther: Google AI Mode and experimental features
 User-Agent: GoogleOther
 Allow: /
 Content-Signal: ai-train=no, search=yes, ai-input=yes
 
+# cohere-ai: Cohere search retrieval
 User-Agent: cohere-ai
 Allow: /
 Content-Signal: ai-train=no, search=yes, ai-input=yes
 
+# meta-externalagent: Meta AI search features
 User-Agent: meta-externalagent
 Allow: /
 Content-Signal: ai-train=no, search=yes, ai-input=yes
 
-# Standard crawlers
+# ── Standard crawlers ────────────────────────────────────────────────────────
 User-Agent: *
 Allow: /
 Disallow: /api/

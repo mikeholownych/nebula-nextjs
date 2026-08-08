@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { auditWebApplicationSchema } from '@/app/lib/schema'
+import { auditPageFAQSchema } from '@/app/lib/faq-schemas'
 import AuditForm from './AuditForm'
 
 export const metadata: Metadata = {
@@ -57,6 +58,10 @@ export default async function AuditPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(auditWebApplicationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(auditPageFAQSchema) }}
       />
       <main id="main-content" className="min-h-screen bg-bg pt-24">
 

@@ -6,6 +6,7 @@ import RecentFinding from './components/RecentFinding'
 import { TEARDOWNS } from './teardowns/[slug]/data'
 import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE } from './lib/homepageContent'
 import { SignalIcon } from '@/components/SignalIcons'
+import { homeFAQSchema } from './lib/faq-schemas'
 
 export const metadata: Metadata = {
   title: HOMEPAGE_SEO_TITLE,
@@ -58,6 +59,10 @@ const PATTERNS = [
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFAQSchema) }}
+      />
       <main id="main-content" className="min-h-screen bg-bg pt-24">
 
         {/* ── 1. Hero: asymmetric split ── */}
