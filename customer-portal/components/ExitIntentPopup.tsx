@@ -36,7 +36,9 @@ function isSuppressed(): boolean {
 function suppress() {
   try {
     localStorage.setItem(SUPPRESS_KEY, JSON.stringify({ until: Date.now() + SUPPRESS_TTL_MS }))
-  } catch {}
+  } catch {
+    // sessionStorage unavailable — suppress is best-effort
+  }
 }
 
 export default function ExitIntentPopup() {
