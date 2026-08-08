@@ -30,6 +30,12 @@ INTERNAL_PATTERNS = (
     "@example.com",
     "@example.invalid",
     "@invalid.nebulacomponents.com",
+    "@nebulacomponents.com",
+    "@nebulacomponents.shop",
+    "agency-pilot@",
+    "audit@nebula",
+    "reddit@reply",
+    "test@audit-demo",
     "qa-workspace-",
     "ux-audit-test@",
     "pending@example",
@@ -37,7 +43,7 @@ INTERNAL_PATTERNS = (
     ".test",  # reserved test TLD
 )
 
-SCORE_CEILING = 60  # 0-100 scale; below 6.0/10 = enough pain to be hot
+SCORE_CEILING = 75  # 0-100 scale; below 7.5/10 is worth following up
 
 
 def load_state() -> dict:
@@ -103,11 +109,40 @@ def top_finding_oneliner(findings: list) -> str:
 def draft_email(url: str, score10: float, oneliner: str, audit_id: str) -> str:
     return (
         f"You ran an audit on {url}. Score: {score10:.1f}/10.\n\n"
-        f"The biggest leak: {oneliner}\n\n"
-        f"That's the fix I'd start with before spending another dollar on ads.\n\n"
-        f"Your full report: https://nebulacomponents.com/audit/{audit_id}/results\n"
-        f"If you want the #1 leak implemented for you: https://nebulacomponents.com/pricing"
+        f"Highest-impact finding: {oneliner}\n\n"
+        f"That's the fix I'd start with before spending another dollar on traffic — "
+        f"it's costing you conversions on every visit right now.\n\n"
+        f"Your full report: https://nebulacomponents.com/audit/{audit_id}/results\n\n"
+        f"If you want the exact fix written for your specific page — copy, code, or config change — "
+        f"that's the $97 One-Leak Repair Sprint: "
+        f"https://nebulacomponents.com/pricing?utm_source=email&utm_medium=hot-audit-followup\n\n"
+        f"Happy to answer questions about what you're seeing.\n\n"
+        f"—\nMike\nNebula Components"
     )
+
+
+def send_pitch(lead: dict) -> bool:
+    """Send the follow-up email. Returns True on success."""
+    try:
+        sys.path.insert(0, str(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+        from agentmail_client import AgentMailClient
+        from lead_store import LeadStore
+
+        store = LeadStore()
+        if store.is_bounced(lead["email"]):
+            return False
+
+        am = AgentMailClient()
+        subject = f"Your audit: {lead['url']} — {lead['grade']} ({lead['score10']}/10)"
+        body = draft_email(lead["url"], lead["score10"], lead["oneliner"], lead["audit_id"])
+        result = am.send_transactional(to=[lead["email"]], subject=subject, text=body)
+        if result.get("message_id") or result.get("id"):
+            store.advance_stage(lead["email"], "pitch_sent")
+            return True
+        return False
+    except Exception as e:
+        print(f"Send failed for {lead['email']}: {e}", file=sys.stderr)
+        return False
 
 
 async def scan(dry_run: bool) -> list:
@@ -124,7 +159,7 @@ async def scan(dry_run: bool) -> list:
                FROM audits
                WHERE status = 'completed'
                  AND score < $1
-                 AND created_at > NOW() - INTERVAL '7 days'
+                 AND created_at > NOW() - INTERVAL '30 days'
                ORDER BY created_at DESC""",
             SCORE_CEILING,
         )
@@ -143,10 +178,14 @@ async def scan(dry_run: bool) -> list:
         if isinstance(findings, str):
             findings = json.loads(findings)
         findings = findings or []
-        keys = {f.get("key") for f in findings}
-        if "ad_signals" not in keys:
-            continue  # no paid-traffic evidence → not the ICP trigger
-        if lead_exists(email):
+
+        # Skip if already pitched (stage = pitch_sent or later)
+        import sqlite3 as _sqlite3
+        _conn = _sqlite3.connect(LEAD_DB)
+        _cur = _conn.execute("SELECT stage FROM leads WHERE email=?", (email,))
+        _row = _cur.fetchone()
+        _conn.close()
+        if _row and _row[0] in ("pitch_sent", "contacted", "paid", "dead", "bounced", "max_retries_exceeded"):
             continue
 
         score10 = round((r["score"] or 0) / 10.0, 1)
@@ -180,15 +219,21 @@ def main() -> int:
             print(f"  {l['email']} | {l['url']} | {l['score10']}/{l['grade']}")
         return 0
 
+    import time as _time
+    sent = 0
+    failed = 0
     for l in hot:
-        print(f"🔥 HOT AUDIT LEAD — {l['email']}")
-        print(f"URL: {l['url']} — score {l['score10']}/10 ({l['grade']})")
-        print(f"Registered in lead_state.db (stage=audit_delivered). Draft ready to send:")
-        print("---")
-        print(draft_email(l["url"], l["score10"], l["oneliner"], l["audit_id"]))
-        print("---")
-        print("Reply 'send' to deliver via AgentMail.")
-        print()
+        ok = send_pitch(l)
+        if ok:
+            sent += 1
+            print(f"✓ Sent + staged pitch_sent: {l['email']} | {l['url']} | {l['score10']}/10 ({l['grade']})")
+        else:
+            failed += 1
+            print(f"✗ Send failed: {l['email']}")
+        _time.sleep(5)  # trickle — never blast
+
+    if sent:
+        print(f"\n{sent} pitch(es) sent, {failed} failed.")
     return 0
 
 

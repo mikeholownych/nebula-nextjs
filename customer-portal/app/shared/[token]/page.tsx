@@ -222,7 +222,7 @@ export default async function SharedPortalPage({
             Same engine. Any public landing page. No signup required.
           </p>
           <Link
-            href="/audit"
+            href="/audit?utm_source=content&utm_medium=organic-content"
             className="mt-5 inline-block rounded-xl bg-emerald-500 px-8 py-3 font-semibold text-black hover:bg-emerald-400 transition-colors"
           >
             Find the Leak →

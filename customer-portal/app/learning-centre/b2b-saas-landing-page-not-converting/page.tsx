@@ -230,7 +230,7 @@ export default function B2BSaaSLandingPageNotConverting() {
               The free audit checks message-match, proof placement, and CTA timing on your actual landing page URL.
             </p>
             <Link
-              href="/audit"
+              href="/audit?utm_source=learning-centre&utm_medium=organic-content"
               className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg transition-colors hover:bg-accent-light"
             >
               Run Free Audit →

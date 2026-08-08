@@ -93,7 +93,7 @@ export default function ReportView({ audits }: { audits: WorkspaceAudit[] }) {
     return (
       <div className="py-16 text-center text-fg-muted">
         No audits yet. Run a{' '}
-        <a href="/audit" className="text-accent hover:underline">free audit</a>{' '}
+        <a href="/audit?utm_source=workspace&utm_medium=internal" className="text-accent hover:underline">free audit</a>{' '}
         first — reports appear here automatically.
       </div>
     )

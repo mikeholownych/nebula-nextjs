@@ -339,7 +339,7 @@ export default function AboveFoldLandingPagePage() {
               mobile layout (signal 3) - and returns a prioritised fix list.
             </p>
             <Link
-              href="/audit"
+              href="/audit?utm_source=learning-centre&utm_medium=organic-content"
               className="inline-flex rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
             >
               Run the free audit
@@ -380,7 +380,7 @@ export default function AboveFoldLandingPagePage() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="/audit"
+                href="/audit?utm_source=learning-centre&utm_medium=organic-content"
                 className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors"
               >
                 Run the free audit

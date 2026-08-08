@@ -189,7 +189,7 @@ export default function SocialProofLandingPage() {
             Automated audit scoring is live and evidence-backed - no signup required.
           </p>
           <Link
-            href="/audit"
+            href="/audit?utm_source=content&utm_medium=organic-content"
             className="inline-block bg-accent text-bg font-bold text-base px-8 py-3.5 rounded-lg hover:bg-accent-light transition-colors"
           >
             Run free audit →

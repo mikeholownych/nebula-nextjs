@@ -362,11 +362,13 @@ export async function POST(request: NextRequest) {
     try {
       const deliveredResult = await client.query(
         `UPDATE purchases
-         SET fulfillment_status = 'delivered'
+         SET fulfillment_status = 'delivered',
+             audit_url          = (SELECT url FROM audits WHERE id = $2::uuid LIMIT 1),
+             reaudit_due_at     = now() + INTERVAL '30 days'
          WHERE stripe_session_id = $1
            AND fulfillment_status = 'processing'
          RETURNING stripe_session_id`,
-        [session.id],
+        [session.id, auditId],
       )
       if (deliveredResult.rowCount !== 1) {
         throw new Error('Fulfillment could not be marked delivered')

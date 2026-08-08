@@ -122,7 +122,7 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
         <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-fg-dim">Your workspace is ready</p>
         <h2 className="text-xl font-semibold tracking-[-0.02em] text-fg">Start with a real page diagnosis</h2>
         <p className="mx-auto mb-6 mt-2 max-w-md text-sm leading-6 text-fg-muted">Run a free audit to establish your first baseline. Scores, findings, and history will appear here without fabricated data.</p>
-        <a href="/audit" className="inline-flex rounded-lg bg-bg-panel px-5 py-2.5 text-sm font-semibold text-fg hover:bg-bg-panel">Run first audit</a>
+        <a href="/audit?utm_source=workspace&utm_medium=internal" className="inline-flex rounded-lg bg-bg-panel px-5 py-2.5 text-sm font-semibold text-fg hover:bg-bg-panel">Run first audit</a>
       </div>
     )
   }
@@ -311,7 +311,7 @@ export function AuditsView({ audits }: { audits: WorkspaceAudit[] }) {
           Every audit you run is preserved forever — like Git commits for your landing page.
         </p>
         <a
-          href="/audit"
+          href="/audit?utm_source=workspace&utm_medium=internal"
           className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
         >
           Run first audit
@@ -392,7 +392,7 @@ export function ProjectsView({ audits }: { audits: WorkspaceAudit[] }) {
         <h2 className="text-xl font-bold mb-2">No projects yet</h2>
         <p className="text-fg-muted mb-6">Audited pages group into projects by domain automatically.</p>
         <a
-          href="/audit"
+          href="/audit?utm_source=workspace&utm_medium=internal"
           className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
         >
           Run first audit

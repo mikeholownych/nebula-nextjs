@@ -159,7 +159,7 @@ export default function PricingPage() {
                   </li>
                 ))}
               </ul>
-              <Link href="/audit" className="mt-8 inline-flex rounded-xl border border-border px-5 py-3 font-semibold text-fg transition-colors hover:border-accent">
+              <Link href="/audit?utm_source=pricing&utm_medium=internal" className="mt-8 inline-flex rounded-xl border border-border px-5 py-3 font-semibold text-fg transition-colors hover:border-accent">
                 Run free audit
               </Link>
             </Card>
@@ -189,7 +189,7 @@ export default function PricingPage() {
                 This service does not promise conversion lift. It proves what page condition was found,
                 what changed, and whether that same condition changed on re-audit.
               </p>
-              <Link href="/audit" className="mt-8 inline-flex rounded-xl bg-accent px-5 py-3 font-semibold text-bg transition-colors hover:bg-accent-light">
+              <Link href="/audit?utm_source=pricing&utm_medium=internal" className="mt-8 inline-flex rounded-xl bg-accent px-5 py-3 font-semibold text-bg transition-colors hover:bg-accent-light">
                 Run the audit first →
               </Link>
             </Card>
@@ -206,7 +206,7 @@ export default function PricingPage() {
               Run the free audit first — see exactly what's leaking before you decide.
             </p>
             <Link
-              href="/audit"
+              href="/audit?utm_source=pricing&utm_medium=internal"
               className="mt-5 inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light"
             >
               Run free audit →

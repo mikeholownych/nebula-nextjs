@@ -252,7 +252,7 @@ export default function AdsClicksNoSalesPage() {
               Run a free audit on your ad destination URL to pinpoint observable page friction and receive a prioritized fix list.
             </p>
             <Link
-              href="/audit"
+              href="/audit?utm_source=content&utm_medium=organic-content"
               className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors text-base"
             >
               Run Free Audit Now &rarr;

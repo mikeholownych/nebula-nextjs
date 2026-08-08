@@ -10,6 +10,7 @@ export const organizationSchema = {
   logo: 'https://nebulacomponents.com/logo-dark.png',
   description: 'Evidence-backed landing-page conversion guidance and implementation services.',
   foundingDate: '2024',
+  dateModified: new Date().toISOString().split('T')[0],
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer support',

@@ -211,7 +211,7 @@ export default function FormHasZeroFrictionPage() {
             what&rsquo;s missing around your form that makes visitors hesitate.
           </p>
           <Link
-            href="/audit"
+            href="/audit?utm_source=learning-centre&utm_medium=organic-content"
             className="mt-6 inline-block rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           >
             Get Your Free Audit

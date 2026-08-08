@@ -239,7 +239,7 @@ export default function RecsView({
             next audit checks whether they actually passed.
           </p>
           <a
-            href="/audit"
+            href="/audit?utm_source=workspace&utm_medium=internal"
             className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
           >
             Run first audit

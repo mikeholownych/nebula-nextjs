@@ -1,0 +1,42 @@
+{
+  "pending": [
+    {
+      "post_id": "1nnpe9b",
+      "url": "https://www.reddit.com/r/PPC/comments/1nnpe9b/looking_for_feedback_my_landing_page_is_not/",
+      "title": "Looking for feedback. My landing page is not converting",
+      "subreddit": "r/PPC",
+      "trigger_type": "roast_request",
+      "message": "Happy to take a look. I'll run it through a structured 9-signal audit \u2014 specific findings rather than subjective impressions. You can run it yourself in ~90s here: https://nebulacomponents.com/audit?utm_source=reddit&utm_medium=comment&utm_campaign=roast-request\n\nOr drop the URL and I'll post back what I find.",
+      "queued_at": "2026-08-08T08:46:24.532980+00:00"
+    },
+    {
+      "post_id": "1rxoany",
+      "url": "https://www.reddit.com/r/Entrepreneur/comments/1rxoany/does_building_a_quick_landing_page_running_ads_to/",
+      "title": "Does building a quick landing page & running ads to validate... zero conversions so far",
+      "subreddit": "r/Entrepreneur",
+      "trigger_type": "zero_conversions",
+      "message": "The ad\u2192page disconnect is usually the culprit. Most pages fail 3-4 of the same signals (headline doesn't match the ad, CTA not visible above fold, no social proof near the CTA). Free 9-signal audit if you want a specific read on what's failing: https://nebulacomponents.com/audit?utm_source=reddit&utm_medium=comment&utm_campaign=zero-conversions",
+      "queued_at": "2026-08-08T08:46:24.533021+00:00"
+    },
+    {
+      "post_id": "1gxutq9",
+      "url": "https://www.reddit.com/r/PPC/comments/1gxutq9/rate_my_landing_page/",
+      "title": "Rate my landing page \u2014 getting flow but not converting",
+      "subreddit": "r/PPC",
+      "trigger_type": "roast_request",
+      "message": "Happy to take a look. I'll run it through a structured 9-signal audit \u2014 specific findings rather than subjective impressions. You can run it yourself in ~90s here: https://nebulacomponents.com/audit?utm_source=reddit&utm_medium=comment&utm_campaign=roast-request\n\nOr drop the URL and I'll post back what I find.",
+      "queued_at": "2026-08-08T08:46:24.533033+00:00"
+    },
+    {
+      "post_id": "1sxh3pj",
+      "url": "https://www.reddit.com/r/FacebookAds/comments/1sxh3pj/meta_ads_purchase_optimization_zero_conversions/",
+      "title": "Meta ads, Purchase optimization, zero conversions after $1,000 spend",
+      "subreddit": "r/FacebookAds",
+      "trigger_type": "zero_conversions",
+      "message": "The ad\u2192page disconnect is usually the culprit. Most pages fail 3-4 of the same signals (headline doesn't match the ad, CTA not visible above fold, no social proof near the CTA). Free 9-signal audit if you want a specific read on what's failing: https://nebulacomponents.com/audit?utm_source=reddit&utm_medium=comment&utm_campaign=zero-conversions",
+      "queued_at": "2026-08-08T08:46:24.533046+00:00"
+    }
+  ],
+  "sent": [],
+  "failed": []
+}

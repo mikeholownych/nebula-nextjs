@@ -78,7 +78,7 @@ export default async function CheckoutPage({
               The kit is generated from a completed audit. Run or reopen your audit before checkout.
             </p>
             <Link
-              href="/audit"
+              href="/audit?utm_source=content&utm_medium=organic-content"
               className="mt-4 inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg"
             >
               Run the free audit

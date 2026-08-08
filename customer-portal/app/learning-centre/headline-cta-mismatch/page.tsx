@@ -149,7 +149,7 @@ export default function HeadlineCtaMismatchPage() {
             The audit checks above-fold structure and CTA mechanics. It flags whether your page has a primary CTA and whether it appears above the fold - and shows the evidence behind each flag. If there is a headline-CTA mismatch, it will surface it.
           </p>
           <Link
-            href="/audit"
+            href="/audit?utm_source=learning-centre&utm_medium=organic-content"
             className="mt-6 inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-fg transition-opacity hover:opacity-90"
           >
             Run the free audit →

@@ -214,7 +214,7 @@ export default function LeadGenAuditPage() {
               Paste your URL. Nebula checks form field count, CTA label, proof placement, mobile form visibility, and post-submit clarity against your actual page — not a template. Free, no signup, under 2 minutes.
             </p>
             <Link
-              href="/audit"
+              href="/audit?utm_source=content&utm_medium=organic-content"
               className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors text-base"
             >
               Run Free Lead Gen Audit &rarr;

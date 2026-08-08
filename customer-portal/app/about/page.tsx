@@ -59,7 +59,7 @@ export default function AboutPage() {
           <p className="text-fg-muted">
             Automated URL submission and scoring are live. Drop in a URL and get a scored, evidence-backed diagnosis - no signup required.
           </p>
-          <Link href="/audit" className="mt-4 inline-block font-semibold text-accent hover:underline">
+          <Link href="/audit?utm_source=content&utm_medium=organic-content" className="mt-4 inline-block font-semibold text-accent hover:underline">
             Run a free audit →
           </Link>
         </section>
@@ -73,7 +73,7 @@ export default function AboutPage() {
         </section>
 
         <div className="flex gap-4">
-          <Link href="/audit" className="inline-block rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-90 transition-opacity">
+          <Link href="/audit?utm_source=content&utm_medium=organic-content" className="inline-block rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-90 transition-opacity">
             Run Free Audit
           </Link>
           <Link href="/learning-centre" className="inline-block rounded-xl border border-border px-6 py-3 font-semibold text-fg hover:border-accent transition-colors">

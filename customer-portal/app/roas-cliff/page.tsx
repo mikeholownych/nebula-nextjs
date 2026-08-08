@@ -245,14 +245,14 @@ export default function RoasCliffPage() {
             Every score, leak calculation, and recommended fix is backed by evidence.
           </p>
           <Link
-            href="/audit"
+            href="/audit?utm_source=content&utm_medium=organic-content"
             className="inline-block bg-accent text-bg font-bold px-8 py-3 rounded-md hover:bg-accent-light transition-colors"
           >
             Run free audit →
           </Link>
           <br />
           <Link
-            href="/audit"
+            href="/audit?utm_source=content&utm_medium=organic-content"
             className="inline-block border border-border text-fg-muted font-medium px-7 py-3 rounded-md mt-3 hover:border-accent transition-colors"
           >
             Run the audit before checkout
