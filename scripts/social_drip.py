@@ -39,19 +39,47 @@ def main() -> int:
 
     post = pending[0]
     if DRY_RUN:
-        print(f"DRY RUN — would post '{post['id']}' ({len(post['content'])} chars) to linkedin")
+        print(f"DRY RUN — would post '{post['id']}' ({len(post['content'])} chars) to linkedin + bluesky")
         return 0
 
     client = ZernioClient()
-    result = client.create_post(
+
+    # ── LinkedIn ──────────────────────────────────────────────────────────
+    li_result = client.create_post(
         post["content"],
         platform="linkedin",
         account_id="6a71436beb10586dadceb928",  # Sedrick Murphy — confirmed active 2026-08-05
         draft=False,
         publish_now=True,
     )
-    post_id = result.get("id") or result.get("_id") or result.get("post", {}).get("id") or "unknown"
-    state["posted"][post["id"]] = post_id
+    li_id = li_result.get("id") or li_result.get("_id") or li_result.get("post", {}).get("id") or "unknown"
+    state["posted"][post["id"]] = li_id
+
+    # ── Bluesky ───────────────────────────────────────────────────────────
+    # Bluesky has a 300-char limit; trim content and append audit CTA if needed
+    bsky_content = post["content"]
+    if len(bsky_content) > 290:
+        # Take first meaningful chunk + audit link
+        lines = bsky_content.split("\n")
+        bsky_short = ""
+        for line in lines:
+            if len(bsky_short) + len(line) + 1 > 240:
+                break
+            bsky_short += line + "\n"
+        bsky_content = bsky_short.strip() + "\n\nhttps://nebulacomponents.com/audit"
+    bsky_content = bsky_content[:300]
+
+    try:
+        bsky_result = client.create_post(
+            bsky_content,
+            platform="bluesky",
+            account_id="6a716822eb10586dadd70840",  # Bluesky account
+            draft=False,
+            publish_now=True,
+        )
+        bsky_id = bsky_result.get("id") or bsky_result.get("_id") or "unknown"
+    except Exception as e:
+        bsky_id = f"error:{e}"
 
     tmp = QUEUE_PATH + ".tmp"
     with open(tmp, "w") as f:
@@ -59,7 +87,7 @@ def main() -> int:
     os.rename(tmp, QUEUE_PATH)
 
     remaining = len([p for p in state["queue"] if p["id"] not in state["posted"]])
-    print(f"📤 LinkedIn drip: posted '{post['id']}' (zernio {post_id}). {remaining} left in queue.")
+    print(f"📤 Drip posted '{post['id']}' — LinkedIn:{li_id} Bluesky:{bsky_id}. {remaining} left.")
     return 0
 
 
