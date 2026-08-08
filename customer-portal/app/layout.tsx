@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import WebMCP from '@/components/WebMCP'
 import LazyCookieConsent from './components/LazyCookieConsent'
 import AnalyticsRuntime from './components/AnalyticsRuntime'
+import ExitIntentPopup from '@/components/ExitIntentPopup'
 import './globals.css'
 import { organizationSchema, websiteSchema } from './lib/schema'
 
@@ -122,6 +123,7 @@ export default async function RootLayout({
         <Footer />
         <LazyCookieConsent country={country} />
         <Suspense fallback={null}><AnalyticsRuntime /></Suspense>
+        <ExitIntentPopup />
         <WebMCP />
       </body>
     </html>
