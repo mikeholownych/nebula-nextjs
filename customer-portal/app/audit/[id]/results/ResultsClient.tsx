@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Card } from '@/components/ui'
 import posthog from '@/app/lib/posthog-browser'
-import { analyticsHeaders } from '@/app/lib/client-analytics'
+import { analyticsHeaders, auditAttemptIdFor } from '@/app/lib/client-analytics'
 import { parseAuditResult, type AuditResult, type Finding } from './auditResultSchema'
 import { getDisease, diseaseTierClass, complexityBadge, extractSerpData } from './diseases'
 import RewritePreview from './RewritePreview'
@@ -695,7 +695,14 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
     setSendingEmail(true)
     setEmailError(null)
 
-    posthog.capture('audit_email_submitted', { audit_id: auditId, source: 'results_page', has_name: Boolean(emailForm.name) })
+    const auditAttemptId = auditAttemptIdFor(auditId)
+
+    posthog.capture('audit_email_submitted', {
+      audit_id: auditId,
+      audit_attempt_id: auditAttemptId,
+      source: 'results_page',
+      has_name: Boolean(emailForm.name),
+    })
 
     try {
       const response = await fetch('/api/audit/unlock', {
@@ -708,6 +715,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
           audit_id: auditId,
           email: emailForm.email,
           name: emailForm.name || undefined,
+          audit_attempt_id: auditAttemptId ?? undefined,
         }),
       })
 

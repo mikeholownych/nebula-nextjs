@@ -21,6 +21,10 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const { audit_id, email, name } = body
+    const auditAttemptId =
+      typeof body.audit_attempt_id === 'string' && body.audit_attempt_id.trim().length > 0
+        ? body.audit_attempt_id.trim().slice(0, 100)
+        : null
 
     if (!audit_id || !email) {
       return NextResponse.json(
@@ -125,6 +129,7 @@ export async function POST(request: NextRequest) {
         event: 'audit_results_unlocked',
         properties: {
           audit_id,
+          audit_attempt_id: auditAttemptId,
           page_url: audit.url,
           score: audit.score,
           grade: audit.grade,
