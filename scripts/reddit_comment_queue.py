@@ -27,6 +27,16 @@ QUEUE_FILE = "/home/mike/nebula/.reddit_comment_queue.json"
 ACCOUNT_ID = "6a772422d0fe733d1a3f3959"  # Reddit: Elegant_Exam_8860
 BASE = "https://zernio.com/api/v1"
 
+# Slow-warm: max one send per RATE_LIMIT_HOURS. After the sitewide removal
+# (2026-08-08), the account must not blast comments. One/day, promo-friendly
+# subs only.
+RATE_LIMIT_HOURS = 24
+
+# Subs where API-posted comments have already triggered Reddit's sitewide
+# filter or whose mods auto-remove anything that looks like promotion.
+# Comments here are HELD for manual review, never auto-sent.
+RISK_HOLD_SUBS = {"ppc", "facebookads", "googleads", "ecommerce", "entrepreneur"}
+
 
 def load_queue():
     if os.path.exists(QUEUE_FILE):
@@ -66,9 +76,29 @@ def main():
     message = item["message"]
     label = item.get("label", post_id)
     remaining_after = len(q["pending"]) - 1
+    sub = (item.get("subreddit", "") or "").lstrip("r/").lower()
+
+    # ── RISK-TIER HOLD (fail-closed) ────────────────────────────────────
+    # Subs that already triggered Reddit's sitewide filter or whose mods
+    # auto-remove promotion. Never auto-send; hold for human review.
+    if sub in RISK_HOLD_SUBS:
+        item["risk_held_at"] = datetime.now(timezone.utc).isoformat()
+        item["risk_hold_reason"] = f"subreddit '{sub}' in RISK_HOLD_SUBS (sitewide-removal risk)"
+        q.setdefault("held", []).append(item)
+        q["pending"].pop(0)
+        save_queue(q)
+        print(f"⛔ Reddit comment HELD (risk tier: {sub})\n{label}\nReason: {item['risk_hold_reason']}\nHeld for review: {len(q['held'])}")
+        sys.exit(0)
+
+    # ── RATE LIMIT (slow-warm: 1/day) ───────────────────────────────────
+    if q.get("sent"):
+        last_sent = datetime.fromisoformat(q["sent"][-1]["sent_at"])
+        hours_since = (datetime.now(timezone.utc) - last_sent).total_seconds() / 3600
+        if hours_since < RATE_LIMIT_HOURS:
+            # Silent exit — within cooldown, nothing to report
+            sys.exit(0)
 
     # ── GOVERNANCE GATE (fail-closed) ──────────────────────────────────
-    sub = (item.get("subreddit", "") or "").lstrip("r/")
     g = govern_reddit_content(message, sub, "comment", account_id=ACCOUNT_ID)
     if not g["pass"]:
         item["governance_blocked_at"] = datetime.now(timezone.utc).isoformat()
@@ -84,6 +114,10 @@ def main():
         comment_id = result.get("data", {}).get("commentId")
         item["comment_id"] = comment_id
         item["sent_at"] = datetime.now(timezone.utc).isoformat()
+        # Post-send verification is MANUAL: Reddit's sitewide filter can remove
+        # a comment while Zernio reports success. Flag for eyeball check.
+        item["verification"] = "pending"
+        item["verify_url"] = f"https://www.reddit.com/r/{sub}/comments/{post_id}/"
         q["sent"].append(item)
         q["pending"].pop(0)
         # Record activity for 90/10 + rate limiting
@@ -91,7 +125,7 @@ def main():
         record_activity(ACCOUNT_ID, "comment", sub, is_promo)
         save_queue(q)
         # stdout goes to Telegram
-        print(f"✅ Reddit comment posted\n{label}\ncommentId: {comment_id}\nRemaining in queue: {remaining_after}")
+        print(f"✅ Reddit comment posted\n{label}\ncommentId: {comment_id}\nVERIFY: {item['verify_url']}\nRemaining in queue: {remaining_after}")
     except urllib.error.HTTPError as e:
         err = e.read().decode()[:300]
         print(f"❌ Reddit comment FAILED (will retry next tick)\n{label}\n{err}")
