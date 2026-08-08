@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Card } from '@/components/ui'
 import posthog from '@/app/lib/posthog-browser'
-import { analyticsHeaders } from '@/app/lib/client-analytics'
+import { analyticsHeaders, newAuditAttemptId, rememberAuditAttemptId } from '@/app/lib/client-analytics'
 
 function AuditFormContent() {
   const [url, setUrl] = useState('')
@@ -51,7 +51,12 @@ function AuditFormContent() {
 
     setLoading(true)
 
+    // Minted here, on the first event of the audit chain, and carried by every
+    // step after it — see newAuditAttemptId in client-analytics.
+    const auditAttemptId = newAuditAttemptId()
+
     posthog.capture('audit_submitted', {
+      audit_attempt_id: auditAttemptId,
       page_url: processedUrl,
       page_domain: new URL(processedUrl).hostname,
       referrer: referrer ?? null,
@@ -66,6 +71,7 @@ function AuditFormContent() {
           url: processedUrl,
           referrer: referrer || undefined,
           audit_reason: reason.trim() || undefined,
+          audit_attempt_id: auditAttemptId,
         }),
       })
 
@@ -76,6 +82,7 @@ function AuditFormContent() {
       const data = await response.json()
 
       if (data.audit_id) {
+        rememberAuditAttemptId(data.audit_id, auditAttemptId)
         router.push(`/audit/${data.audit_id}/processing`)
       } else {
         setError('Audit completed. Full integration coming soon.')

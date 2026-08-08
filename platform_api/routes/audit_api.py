@@ -41,6 +41,10 @@ class AuditRequest(BaseModel):
     audit_id: Optional[str] = None
     analytics_consent: bool = False
     analytics_distinct_id: Optional[str] = None
+    # Correlation key minted in the browser at form submit and shared by every
+    # event in the audit chain, so the funnel can be built on the audit itself
+    # rather than on a person identity that is still anonymous at this point.
+    analytics_attempt_id: Optional[str] = None
     source: Optional[str] = None
     partner_id: Optional[str] = None
 
@@ -85,11 +89,16 @@ async def run_audit(request: AuditRequest):
             )
         ph = get_posthog()
         distinct_id = request.analytics_distinct_id or str(audit_id)
-        if request.analytics_consent and request.analytics_distinct_id and ph:
-            with new_context(client=ph):
-                identify_context(distinct_id)
-                ph.capture("audit_started", properties={"audit_id": str(audit_id)})
-        
+        attempt_id = request.analytics_attempt_id
+
+        # No PostHog `audit_started` here on purpose. It belongs to the caller
+        # (the portal's /api/audit/start route), which holds the referrer and
+        # attribution context this service never sees. Emitting it here as well
+        # produced two `audit_started` events per audit under the same
+        # distinct_id, inflating the funnel's first step and depressing every
+        # conversion rate measured against it. This service owns `audit_completed`
+        # and `audit_failed`, both stamped with the shared correlation key.
+
         # Build command
         cmd = [
             "/home/mike/nebula/venv/bin/python3",
@@ -113,7 +122,7 @@ async def run_audit(request: AuditRequest):
             if request.analytics_consent and request.analytics_distinct_id and ph:
                 with new_context(client=ph):
                     identify_context(distinct_id)
-                    ph.capture("audit_failed", properties={"audit_id": str(audit_id), "reason": "script_error"})
+                    ph.capture("audit_failed", properties={"audit_id": str(audit_id), "audit_attempt_id": attempt_id, "reason": "script_error"})
             return AuditResponse(
                 audit_id=str(audit_id),
                 url=request.url,
@@ -133,7 +142,7 @@ async def run_audit(request: AuditRequest):
             if request.analytics_consent and request.analytics_distinct_id and ph:
                 with new_context(client=ph):
                     identify_context(distinct_id)
-                    ph.capture("audit_failed", properties={"audit_id": str(audit_id), "reason": "no_json_output"})
+                    ph.capture("audit_failed", properties={"audit_id": str(audit_id), "audit_attempt_id": attempt_id, "reason": "no_json_output"})
             return AuditResponse(
                 audit_id=str(audit_id),
                 url=request.url,
@@ -186,6 +195,7 @@ async def run_audit(request: AuditRequest):
                     "audit_completed",
                     properties={
                         "audit_id": str(audit_id),
+                        "audit_attempt_id": attempt_id,
                         "score": data.get("score"),
                         "grade": data.get("grade"),
                         "findings_count": len(data.get("findings", [])),

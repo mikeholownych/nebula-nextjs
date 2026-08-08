@@ -12,7 +12,7 @@ import { checkAuditQuota } from '@/app/lib/audit-quota'
 
 export async function POST(request: NextRequest) {
   try {
-    let body: { url?: string; email?: string; name?: string; referrer?: string; audit_reason?: string }
+    let body: { url?: string; email?: string; name?: string; referrer?: string; audit_reason?: string; audit_attempt_id?: string }
     try {
       body = await request.json()
     } catch {
@@ -22,6 +22,10 @@ export async function POST(request: NextRequest) {
       )
     }
     const { url, referrer, audit_reason } = body
+    const auditAttemptId =
+      typeof body.audit_attempt_id === 'string' && body.audit_attempt_id.trim().length > 0
+        ? body.audit_attempt_id.trim().slice(0, 100)
+        : null
 
     // Validate URL
     if (!url) {
@@ -92,6 +96,29 @@ export async function POST(request: NextRequest) {
 
     const anonymousEmail = submittedEmail ?? `anonymous+${randomUUID()}@invalid.nebulacomponents.com`
 
+    // `audit_started` must be emitted before the blocking /audit/run call, not
+    // after it. /audit/run runs the audit synchronously, so capturing on the way
+    // out stamped `audit_started` *later* than the `audit_completed` it precedes,
+    // which no ordered funnel can step through.
+    if (analyticsConsent && distinctId) try {
+      const ph = getPostHogClient()
+      ph.capture({
+        distinctId,
+        event: 'audit_started',
+        properties: {
+          audit_attempt_id: auditAttemptId,
+          page_url: processedUrl,
+          page_domain: parsedUrl.hostname,
+          referrer: referrer || null,
+          audit_reason: audit_reason || null,
+          ...attribution,
+        },
+      })
+      await ph.flush()
+    } catch {
+      // Non-fatal — never let analytics block the response
+    }
+
     // Public audit start never trusts a client-supplied email; ownership is
     // established later through the signed unlock flow.
     const apiResponse = await fetch('http://127.0.0.1:8001/audit/run', {
@@ -103,6 +130,7 @@ export async function POST(request: NextRequest) {
         name: null,
         analytics_consent: analyticsConsent,
         analytics_distinct_id: distinctId,
+        analytics_attempt_id: auditAttemptId,
       }),
       signal: AbortSignal.timeout(120000) // 2 minute timeout
     })
@@ -125,29 +153,9 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    if (analyticsConsent && distinctId) try {
-      const ph = getPostHogClient()
-      ph.capture({
-        distinctId,
-        event: 'audit_started',
-        properties: {
-          audit_id: data.audit_id,
-          page_url: processedUrl,
-          page_domain: parsedUrl.hostname,
-          score: data.score,
-          grade: data.grade,
-          referrer: referrer || null,
-          audit_reason: audit_reason || null,
-          ...attribution,
-        },
-      })
-      await ph.flush()
-    } catch {
-      // Non-fatal — never let analytics block the response
-    }
-
     return NextResponse.json({
       audit_id: data.audit_id,
+      audit_attempt_id: auditAttemptId,
       url: data.url,
       status: data.status,
       score: data.score,

@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { Card } from '@/components/ui'
 import { pushWithViewTransition } from '../../_lib/view-transition'
 import posthog from '@/app/lib/posthog-browser'
-import { analyticsHeaders } from '@/app/lib/client-analytics'
+import { analyticsHeaders, auditAttemptIdFor } from '@/app/lib/client-analytics'
 
 const STATUS_MESSAGES = [
   { message: 'Scanning page structure...', duration: 2000 },
@@ -71,7 +71,13 @@ export default function ProcessingPage() {
     setSubmitting(true)
     setSubmitError(null)
 
-    posthog.capture('audit_email_submitted', { audit_id: auditId, has_name: Boolean(name) })
+    const auditAttemptId = auditAttemptIdFor(auditId)
+
+    posthog.capture('audit_email_submitted', {
+      audit_id: auditId,
+      audit_attempt_id: auditAttemptId,
+      has_name: Boolean(name),
+    })
 
     try {
       const res = await fetch('/api/audit/unlock', {
@@ -80,7 +86,12 @@ export default function ProcessingPage() {
           'Content-Type': 'application/json',
           ...analyticsHeaders(),
         },
-        body: JSON.stringify({ audit_id: auditId, email, name: name || undefined }),
+        body: JSON.stringify({
+          audit_id: auditId,
+          email,
+          name: name || undefined,
+          audit_attempt_id: auditAttemptId ?? undefined,
+        }),
       })
 
       const data = await res.json().catch(() => ({}))
