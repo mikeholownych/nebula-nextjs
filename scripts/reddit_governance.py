@@ -361,11 +361,18 @@ MIN_SECONDS_BETWEEN = 150  # 2.5 min — comfortable margin over API limits
 
 
 def check_activity(account_id: str) -> list[str]:
-    """Enforce 90/10 ratio + daily comment cap + spacing."""
+    """Enforce 90/10 ratio + daily comment cap + spacing + shadowban lockout."""
     violations = []
     act = _load_json(ACTIVITY_FILE, {"accounts": {}})
     acc = act["accounts"].get(account_id, {"comments": [], "promo_comments": 0})
     comments = acc.get("comments", [])
+
+    # ── SHADOWBAN LOCKOUT (fail-closed) ─────────────────────────────────
+    # If the account is marked shadowbanned in .reddit_activity.json, ALL
+    # sends are blocked. Nothing from this account goes out, ever, until a
+    # human explicitly clears the flag.
+    if acc.get("shadowbanned"):
+        violations.append("account shadowbanned — no sends allowed (clear flag only with human approval)")
 
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     today_count = sum(1 for ts in comments if ts.startswith(today))
