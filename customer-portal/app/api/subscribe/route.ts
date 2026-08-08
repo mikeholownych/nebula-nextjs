@@ -59,6 +59,9 @@ export async function POST(request: NextRequest) {
     'metadata[nebula_plan]': plan,
     'metadata[billing_interval]': interval,
     allow_promotion_codes: 'true',
+    // Stripe sends a recovery email if the session expires with a captured email
+    'after_expiration[recovery][enabled]': 'true',
+    'after_expiration[recovery][allow_promotion_codes]': 'true',
   })
 
   let session: { url?: string; id?: string; error?: { message?: string } }

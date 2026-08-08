@@ -145,6 +145,8 @@ export async function POST(request: NextRequest) {
     'metadata[analytics_consent]': analyticsConsent ? 'all' : 'necessary',
     // Audit URL in metadata for fulfillment context
     'metadata[audit_unlocked_email]': auditIdentity.email,
+    // Stripe sends a recovery email if the session expires with a captured email
+    'after_expiration[recovery][enabled]': 'true',
   })
   if (personId) stripeParams.set('metadata[analytics_person_id]', personId)
   for (const [key, value] of Object.entries(attribution)) {
