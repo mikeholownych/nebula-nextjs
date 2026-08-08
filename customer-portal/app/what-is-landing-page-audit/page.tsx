@@ -184,7 +184,7 @@ export default function WhatIsLandingPageAudit() {
                 <li>• Live implementation verification</li>
                 <li>• Same-scope re-audit evidence</li>
               </ul>
-              <Link href="/audit" className="text-emerald-400 text-xs mt-4 inline-block hover:underline">
+              <Link href="/audit?utm_source=content&utm_medium=organic-content" className="text-emerald-400 text-xs mt-4 inline-block hover:underline">
                 Run the audit before checkout →
               </Link>
             </div>
@@ -200,7 +200,7 @@ export default function WhatIsLandingPageAudit() {
             Automated, evidence-backed scoring is live - drop in a URL and see your results in seconds.
           </p>
           <Link
-            href="/audit"
+            href="/audit?utm_source=content&utm_medium=organic-content"
             className="inline-block bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-8 py-3 rounded-lg transition"
           >
             Get Free Audit →

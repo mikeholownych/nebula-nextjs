@@ -171,7 +171,7 @@ export default function AiSdrVsAuditPage() {
           <p className="mb-0">
             Run a free audit across 9 conversion signals — no signup required. Completion time
             varies by page and service load.{' '}
-            <a href="/audit" className="text-accent font-bold hover:underline">Run your free audit →</a>
+            <a href="/audit?utm_source=content&utm_medium=organic-content" className="text-accent font-bold hover:underline">Run your free audit →</a>
           </p>
         </div>
 
@@ -193,7 +193,7 @@ export default function AiSdrVsAuditPage() {
             and service load.
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-4">
-            <a href="/audit" className="inline-flex items-center gap-2 bg-accent hover:bg-accent-light text-bg font-bold py-4 px-9 rounded-lg transition-colors">
+            <a href="/audit?utm_source=content&utm_medium=organic-content" className="inline-flex items-center gap-2 bg-accent hover:bg-accent-light text-bg font-bold py-4 px-9 rounded-lg transition-colors">
               Run free audit →
             </a>
             <a href="/learning-centre/landing-page-not-converting" className="inline-flex items-center gap-2 bg-transparent border border-border hover:border-accent-light text-fg-muted hover:text-fg font-semibold py-4 px-6 rounded-lg transition-colors">

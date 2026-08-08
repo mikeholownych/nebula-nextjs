@@ -103,7 +103,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
             The Leak Index appears after completed audits are added to the published evidence
             dataset. We will not substitute sample averages or placeholder charts.
           </p>
-          <a href="/audit" className="mt-5 inline-flex rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-bg">
+          <a href="/audit?utm_source=content&utm_medium=organic-content" className="mt-5 inline-flex rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-bg">
             Run the first audit →
           </a>
         </div>
@@ -291,7 +291,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
           <div className="mt-6 border-t border-border pt-5 text-xs text-fg-muted">
             Benchmarks are computed from completed audits only. This is aggregate data, not
             individualized conversion advice — see the{' '}
-            <a href="/audit" className="text-accent underline underline-offset-2">
+            <a href="/audit?utm_source=content&utm_medium=organic-content" className="text-accent underline underline-offset-2">
               free audit
             </a>{' '}
             for a page-level diagnosis.

@@ -147,7 +147,7 @@ export default function CaseStudiesContent({
         <h2 className="text-2xl font-bold text-fg">See it on your page</h2>
         <p className="mt-4 text-fg-muted">Same engine. Your URL. No signup required.</p>
         <Link
-          href="/audit"
+          href="/audit?utm_source=content&utm_medium=organic-content"
           className="mt-8 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
         >
           Find the Leak →

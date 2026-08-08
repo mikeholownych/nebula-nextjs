@@ -318,7 +318,7 @@ export default function WhyNotConvertingPage() {
               self-audit in the <Link href="/teardowns" className="text-accent hover:underline">teardowns</Link>.
             </p>
             <Link
-              href="/audit"
+              href="/audit?utm_source=content&utm_medium=organic-content"
               className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors text-base"
             >
               Run Free Landing Page Audit &rarr;

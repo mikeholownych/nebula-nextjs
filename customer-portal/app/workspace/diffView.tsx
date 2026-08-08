@@ -105,7 +105,7 @@ export default function DiffView({ audits }: { audits: WorkspaceAudit[] }) {
           When you have two or more audits of the same URL, you can compare findings and track your score improvement.
         </p>
         <a
-          href="/audit"
+          href="/audit?utm_source=workspace&utm_medium=internal"
           className="inline-flex rounded-lg bg-[#00c2a0] px-5 py-2.5 text-sm font-semibold text-bg hover:bg-[#00a88a] transition-colors"
         >
           Run an audit →

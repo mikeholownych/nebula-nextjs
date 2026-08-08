@@ -226,7 +226,7 @@ export default function SevenSystemsPage() {
               Automated audit scoring is live and evidence-backed — no signup required.
             </p>
             <a
-              href="/audit"
+              href="/audit?utm_source=content&utm_medium=organic-content"
               className="inline-block bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-8 py-4 rounded-lg transition text-lg"
             >
               View Audit Status →
@@ -243,13 +243,13 @@ export default function SevenSystemsPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="/audit"
+                href="/audit?utm_source=content&utm_medium=organic-content"
                 className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-8 py-4 rounded-lg transition"
               >
                 Run the audit before checkout →
               </a>
               <a
-                href="/audit"
+                href="/audit?utm_source=content&utm_medium=organic-content"
                 className="border-2 border-emerald-600 text-emerald-400 hover:bg-emerald-600 hover:text-white font-semibold px-8 py-4 rounded-lg transition"
               >
                 Run the Free Audit

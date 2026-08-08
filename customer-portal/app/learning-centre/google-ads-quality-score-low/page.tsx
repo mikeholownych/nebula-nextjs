@@ -195,7 +195,7 @@ export default function LearningCentrePage() {
             Before you rewrite ads or restructure campaigns, run the free Nebula audit. It will show you exactly where the landing page breaks the chain from click to conversion.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/audit" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">
+            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">
               Run the free audit
             </Link>
             <Link href="/learning-centre/message-match-checklist" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">

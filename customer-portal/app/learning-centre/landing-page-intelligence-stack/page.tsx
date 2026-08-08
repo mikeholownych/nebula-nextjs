@@ -192,7 +192,7 @@ export default function LandingPageIntelligenceStackPage() {
           </p>
           <div className="mt-8">
             <LinkButton
-              href="/audit"
+              href="/audit?utm_source=learning-centre&utm_medium=organic-content"
               size="lg"
               data-testid="intelligence-stack-audit-link"
             >

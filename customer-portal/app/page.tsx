@@ -78,7 +78,7 @@ export default function Home() {
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
-                  href="/audit"
+                  href="/audit?utm_source=homepage&utm_medium=internal"
                   className="rounded-xl bg-accent px-7 py-3.5 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
                 >
                   Get My Score
@@ -356,7 +356,7 @@ export default function Home() {
             </div>
             <div className="mt-8">
               <Link
-                href="/audit"
+                href="/audit?utm_source=homepage&utm_medium=internal"
                 className="rounded-xl bg-accent px-7 py-3.5 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-sm inline-block"
               >
                 Run the audit free &rarr;
@@ -378,7 +378,7 @@ export default function Home() {
                   This is different. See your initial findings before sharing an email.
                 </p>
                 <Link
-                  href="/audit"
+                  href="/audit?utm_source=homepage&utm_medium=internal"
                   className="rounded-xl border border-accent px-6 py-3 text-sm font-semibold text-accent hover:bg-accent hover:text-bg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors inline-block"
                 >
                   See what you actually get &rarr;
@@ -562,7 +562,7 @@ export default function Home() {
               Free, no signup. Find the specific leak costing you conversions.
             </p>
             <Link
-              href="/audit"
+              href="/audit?utm_source=homepage&utm_medium=internal"
               className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
             >
               Find the Leak &rarr;

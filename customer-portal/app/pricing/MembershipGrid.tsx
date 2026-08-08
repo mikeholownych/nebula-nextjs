@@ -58,7 +58,7 @@ function PlanCard({
       </ul>
       {isFree ? (
         <a
-          href="/audit"
+          href="/audit?utm_source=pricing&utm_medium=internal"
           className="mt-6 inline-flex justify-center rounded-xl border border-border px-5 py-3 font-semibold text-fg transition-colors hover:border-accent"
         >
           Run free audit

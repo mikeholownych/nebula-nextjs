@@ -54,7 +54,7 @@ export default function ComparePage() {
             no signup, no site access, no rebuild.
           </p>
           <a
-            href="/audit"
+            href="/audit?utm_source=content&utm_medium=organic-content"
             className="inline-block rounded-lg bg-accent px-8 py-3 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
           >
             Free Audit

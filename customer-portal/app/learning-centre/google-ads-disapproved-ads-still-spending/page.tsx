@@ -173,7 +173,7 @@ export default function LearningCentrePage() {
             and the 30-day re-audit verifies the page condition. It does not promise conversion lift or account reinstatement.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/audit" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">
+            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">
               Run the free audit
             </Link>
             <Link href="/learning-centre/google-ads-clicks-no-sales" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">

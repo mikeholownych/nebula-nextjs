@@ -212,7 +212,7 @@ export default function MessageMatchChecklistPage() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="/audit"
+                href="/audit?utm_source=learning-centre&utm_medium=organic-content"
                 className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light"
               >
                 Run the free audit

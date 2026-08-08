@@ -21,7 +21,7 @@ const NavigationLinks = ({ mobile = false }: { mobile?: boolean }) => (
     <a href="/teardowns" className={`${LINK_CLASSES} ${mobile ? 'py-3' : ''}`}>Teardowns</a>
     <a href="/pricing" className={`${LINK_CLASSES} ${mobile ? 'py-3' : ''}`}>Pricing</a>
     <a
-      href="/audit"
+      href="/audit?utm_source=site-nav&utm_medium=internal"
       className={`${mobile ? 'mt-2 text-center' : ''} rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg transition-colors hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg`}
     >
       Free Audit

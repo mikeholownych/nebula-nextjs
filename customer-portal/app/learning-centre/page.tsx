@@ -63,7 +63,7 @@ export default function LearningCentreIndex() {
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a
-              href="/audit"
+              href="/audit?utm_source=learning-centre&utm_medium=organic-content"
               className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors"
             >
               Run the free audit
@@ -91,7 +91,7 @@ export default function LearningCentreIndex() {
             The free audit checks your landing page URL against these leak patterns automatically. Takes a couple of minutes.
           </p>
           <a
-            href="/audit"
+            href="/audit?utm_source=learning-centre&utm_medium=organic-content"
             className="mt-8 inline-flex rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors"
           >
             Run the free audit →

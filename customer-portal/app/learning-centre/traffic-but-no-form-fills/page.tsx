@@ -99,7 +99,7 @@ export default function TrafficButNoFormFillsPage() {
           <h2 className="mb-4 text-2xl font-bold text-fg">Find the leak on your page</h2>
           <p className="mb-6 leading-relaxed text-fg-muted">Run the free Nebula audit to see exactly where your page breaks the chain from click to conversion.</p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/audit" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">Run the free audit</Link>
+            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">Run the free audit</Link>
           </div>
         </section>
 

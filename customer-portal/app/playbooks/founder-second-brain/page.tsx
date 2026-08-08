@@ -116,7 +116,7 @@ export default function FounderSecondBrainPage() {
             Before building content systems, understand what is leaking on your landing page. Fix the conversion floor first so new content has somewhere to land.
           </p>
           <Link
-            href="/audit"
+            href="/audit?utm_source=content&utm_medium=organic-content"
             className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors"
           >
             Run Free Audit →

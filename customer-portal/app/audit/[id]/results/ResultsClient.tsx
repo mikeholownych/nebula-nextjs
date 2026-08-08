@@ -1155,7 +1155,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                 </p>
               </div>
               <a
-                href="/audit"
+                href="/audit?utm_source=content&utm_medium=organic-content"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="shrink-0 rounded-lg border border-accent px-6 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent/10"

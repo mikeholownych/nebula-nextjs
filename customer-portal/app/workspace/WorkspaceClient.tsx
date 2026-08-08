@@ -250,7 +250,7 @@ export default function WorkspaceClient() {
             </div>
             <div className="flex items-center gap-2">
               <span className="hidden text-xs text-fg-dim sm:inline">{email}</span>
-              <a href="/audit" className="rounded-lg bg-bg-panel px-4 py-2.5 text-sm font-semibold text-fg transition-colors hover:bg-bg-elevated">Run new audit</a>
+              <a href="/audit?utm_source=workspace&utm_medium=internal" className="rounded-lg bg-bg-panel px-4 py-2.5 text-sm font-semibold text-fg transition-colors hover:bg-bg-elevated">Run new audit</a>
             </div>
           </header>
           {email && (

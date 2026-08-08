@@ -106,7 +106,7 @@ export default function LinkedInSkillEnginePage() {
             Before optimising your LinkedIn presence, ensure the page your traffic lands on is ready to convert. Run the free audit.
           </p>
           <Link
-            href="/audit"
+            href="/audit?utm_source=content&utm_medium=organic-content"
             className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors"
           >
             Run Free Audit →

@@ -122,7 +122,7 @@ export default async function ComparisonPage({
             Free, no signup. Results in under 2 minutes.
           </p>
           <Link
-            href="/audit"
+            href="/audit?utm_source=competitor-page&utm_medium=organic-content"
             className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
           >
             Find the Leak →

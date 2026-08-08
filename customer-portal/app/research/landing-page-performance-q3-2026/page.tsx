@@ -105,7 +105,7 @@ export default function LandingPagePerformanceQ3Page() {
             <span>
               Methodology:{' '}
               <Link
-                href="/audit"
+                href="/audit?utm_source=content&utm_medium=organic-content"
                 className="text-[#00c2a0] underline underline-offset-2 hover:opacity-80 transition-opacity"
               >
                 Nebula Audit Engine
@@ -159,7 +159,7 @@ export default function LandingPagePerformanceQ3Page() {
               <span className="text-white font-medium">Source.</span> All audits were conducted
               through the Nebula audit engine (
               <Link
-                href="/audit"
+                href="/audit?utm_source=content&utm_medium=organic-content"
                 className="text-[#00c2a0] underline underline-offset-2 hover:opacity-80 transition-opacity"
               >
                 nebulacomponents.com/audit
@@ -406,7 +406,7 @@ export default function LandingPagePerformanceQ3Page() {
               yourself using browser developer tools, a mobile device, and the 9 signal definitions
               published at{' '}
               <Link
-                href="/audit"
+                href="/audit?utm_source=content&utm_medium=organic-content"
                 className="text-[#00c2a0] underline underline-offset-2 hover:opacity-80 transition-opacity"
               >
                 nebulacomponents.com/audit
@@ -430,7 +430,7 @@ export default function LandingPagePerformanceQ3Page() {
           </p>
           <div className="grid gap-4 sm:grid-cols-3">
             <Link
-              href="/audit"
+              href="/audit?utm_source=content&utm_medium=organic-content"
               className="group flex flex-col gap-2 rounded-lg border border-border bg-[#050505] p-5 hover:border-[#00c2a0]/50 transition-colors"
             >
               <span className="text-[#00c2a0] text-xs font-medium uppercase tracking-widest">

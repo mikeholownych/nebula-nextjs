@@ -29,7 +29,7 @@ export default function ThankYouPage() {
             Their audit is free: takes under 2 minutes and names the exact leaks.
           </p>
           <a
-            href="/audit"
+            href="/audit?utm_source=content&utm_medium=organic-content"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-lg border border-accent px-5 py-2.5 text-sm font-semibold text-accent transition-colors hover:bg-accent/10"

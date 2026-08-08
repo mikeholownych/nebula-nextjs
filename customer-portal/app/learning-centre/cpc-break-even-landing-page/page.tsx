@@ -248,7 +248,7 @@ export default function CpcBreakEvenLandingPagePage() {
             spectrum, and what specific changes would move it.
           </p>
           <Link
-            href="/audit"
+            href="/audit?utm_source=learning-centre&utm_medium=organic-content"
             className="inline-block rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           >
             Get the free landing page audit →

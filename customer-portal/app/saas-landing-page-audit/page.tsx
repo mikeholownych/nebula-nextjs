@@ -240,7 +240,7 @@ export default function SaasAuditPage() {
               Paste your URL. Nebula checks message match, CTA friction, product proof, and load performance against your actual page — not a template. Free, no signup, under 2 minutes.
             </p>
             <Link
-              href="/audit"
+              href="/audit?utm_source=content&utm_medium=organic-content"
               className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors text-base"
             >
               Run Free SaaS Audit &rarr;

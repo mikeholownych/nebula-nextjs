@@ -13,7 +13,7 @@ export default function NotFoundPage() {
           <Link className="rounded-xl bg-accent px-5 py-3 font-semibold text-bg" href="/">
             Back to home
           </Link>
-          <Link className="rounded-xl border border-border px-5 py-3 font-semibold" href="/audit">
+          <Link className="rounded-xl border border-border px-5 py-3 font-semibold" href="/audit?utm_source=content&utm_medium=organic-content">
             Run free audit
           </Link>
         </div>

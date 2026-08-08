@@ -285,7 +285,7 @@ export default function PaidTrafficLeakMapPage() {
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-4">
               <Link
-                href="/audit"
+                href="/audit?utm_source=learning-centre&utm_medium=organic-content"
                 className="inline-flex rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors"
               >
                 Run the free audit

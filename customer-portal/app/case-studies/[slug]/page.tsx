@@ -179,7 +179,7 @@ function RichCaseStudyPage({ study }: { study: CaseStudy }) {
           <h2 className="text-2xl font-bold text-fg">Get Your Own Result</h2>
           <p className="mt-4 text-fg-muted">Run the free audit. Find your leaks. Fix them.</p>
           <Link
-            href="/audit"
+            href="/audit?utm_source=content&utm_medium=organic-content"
             className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
           >
             Run Free Audit →
@@ -260,7 +260,7 @@ export default async function CaseStudyPage({ params }: Props) {
           <h2 className="text-2xl font-bold text-fg">Get Your Own Result</h2>
           <p className="mt-4 text-fg-muted">Run the free audit. Find your leaks. Fix them.</p>
           <Link
-            href="/audit"
+            href="/audit?utm_source=content&utm_medium=organic-content"
             className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
           >
             Run Free Audit →

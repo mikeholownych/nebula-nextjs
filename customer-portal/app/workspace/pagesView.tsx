@@ -332,7 +332,7 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
           Each page you audit appears here — with scores, keywords, and a history you can build on.
         </p>
         <a
-          href="/audit"
+          href="/audit?utm_source=workspace&utm_medium=internal"
           className="inline-flex rounded-lg bg-[#00c2a0] px-5 py-2.5 text-sm font-semibold text-bg hover:bg-[#00a88a] transition-colors"
         >
           Run your first audit →
