@@ -376,6 +376,7 @@ class AuditDB:
 
     async def mark_monitor_ran(self, monitor_id: str, score: Optional[float]) -> None:
         """Record a completed run and schedule the next one per cadence."""
+        from datetime import timedelta
         await self.connect()
 
         async with self.pool.acquire() as conn:
@@ -386,10 +387,12 @@ class AuditDB:
             if not row:
                 return
             cadence = row["cadence"]
+            # asyncpg requires a timedelta for interval parameters — strings
+            # like '1 week' produce "str has no attribute 'days'" at encode time.
             if cadence == "monthly":
-                interval = "1 month"
+                interval = timedelta(days=30)
             else:
-                interval = "1 week"
+                interval = timedelta(weeks=1)
             await conn.execute(
                 """
                 UPDATE monitors

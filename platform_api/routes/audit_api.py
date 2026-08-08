@@ -14,7 +14,7 @@ import os
 import asyncio
 import httpx
 
-from posthog import identify_context, new_context
+from posthog import identify_context, new_context  # type: ignore[import-untyped]
 
 from platform_api.posthog_client import get_posthog
 from platform_api.services.email_service import email_service, AuditEmailData
@@ -216,6 +216,55 @@ async def run_audit(request: AuditRequest):
             except Exception as e:
                 # Don't fail audit on track assignment error
                 print(f"[audit_api] Track assignment failed: {e}")
+
+        # Auto-send audit results email for real (non-anonymous) addresses.
+        # Fire-and-forget: email failure must never block the audit response.
+        _real_email = (
+            request.email
+            and "@invalid" not in request.email
+            and request.email.strip()
+        )
+        if _real_email:
+            _send_email = str(request.email)
+            _send_name = request.name
+            _send_url = request.url
+            _send_score = data.get('score', 0)
+            _send_grade = data.get('grade', 'N/A')
+            _send_findings = data.get('findings', [])
+            async def _auto_send_email():
+                try:
+                    result_email = await email_service.send_audit_results(
+                        AuditEmailData(
+                            url=_send_url,
+                            email=_send_email,
+                            name=_send_name,
+                            score=_send_score,  # already on 0-10 scale from audit engine
+                            grade=_send_grade,
+                            findings=_send_findings,
+                        )
+                    )
+                    if result_email.get("status") == "sent":
+                        await audit_db.mark_email_sent(audit_id)
+                        ph2 = get_posthog()
+                        if ph2:
+                            with new_context(client=ph2):
+                                identify_context(request.email)
+                                ph2.capture(
+                                    "audit_email_sent",
+                                    properties={
+                                        "audit_id": str(audit_id),
+                                        "grade": data.get("grade"),
+                                        "score": data.get("score"),
+                                        "message_id": result_email.get("message_id"),
+                                        "source": "auto_completion",
+                                    },
+                                )
+                    else:
+                        print(f"[audit_api] email send failed for {audit_id}: {result_email.get('error')}")
+                except Exception as _email_exc:
+                    print(f"[audit_api] email auto-send exception for {audit_id}: {_email_exc}")
+
+            asyncio.create_task(_auto_send_email())
         
         return AuditResponse(
             audit_id=str(audit_id),
