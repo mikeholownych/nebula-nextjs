@@ -104,7 +104,7 @@ export default async function CheckoutPage({
           <h2 className="mb-3 text-base font-semibold text-fg">What happens after you pay</h2>
           <ol className="space-y-3">
             <li>1. Stripe confirms your purchase immediately.</li>
-            <li>2. Your tailored kit is sent by email — exact copy, code, or configuration written for one selected finding.</li>
+            <li>2. Your tailored kit is sent by email within minutes of purchase — exact copy, code, or configuration written for one selected finding.</li>
             <li>3. You implement it yourself, with your developer, or through your CMS. No site access is required from Nebula.</li>
             <li>4. Run the free audit again within 30 days to verify the fix held.</li>
           </ol>
