@@ -132,6 +132,7 @@ def log_production(domain, title, score, video_path, duration):
 
 async def run_pipeline(upload: bool = False):
     """Full production pipeline."""
+    import asyncio
     # 1. Pick lead
     url, email, existing_audit = pick_lead()
     domain = url.replace("https://", "").replace("http://", "").split("/")[0]
@@ -154,10 +155,17 @@ async def run_pipeline(upload: bool = False):
 
     # 3. Produce video
     log.info("Producing video...")
-    result = await produce_video(page, audit, url)
+    from yt_channel.produce_short import produce_short
+    long_result, short_result = await asyncio.gather(
+        produce_video(page, audit, url),
+        produce_short(page, audit, url),
+    )
+    result = long_result
     video_path = Path(result["video_path"])
     thumbnail_path = Path(result["thumbnail_path"])
     script = result["script"]
+    short_path = Path(short_result["video_path"])
+    log.info(f"Short produced: {short_path.name} ({short_result['audio_duration']:.1f}s)")
 
     log.info(f"Video produced: {video_path.name} ({result['audio_duration']:.1f}s)")
 

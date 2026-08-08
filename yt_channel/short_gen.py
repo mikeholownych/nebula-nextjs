@@ -12,6 +12,52 @@ from .script_gen import DIM_LABELS, DIM_SHORT, _score_band, _worst_key
 WPS = 2.8  # Slightly faster pace for Shorts
 
 
+# ── Hormozi hook types (from The 6 Hook Types playbook) ──────────────
+# Bold Claim (24%) · Proof Bomb (22%) · Direct Callout (15%)
+# Case Study Intro (14%) · Story (8%) · Question (6%)
+
+def _build_hormozi_hook(worst, worst_label, worst_score, worst_issue, dims, domain):
+    """Pick a hook type based on the finding; rotate across types."""
+    import hashlib
+    h = int(hashlib.md5((domain + worst).encode()).hexdigest(), 16) % 6
+
+    # Grab a second-worst dimension for contrast
+    sorted_dims = sorted(dims.items(), key=lambda kv: kv[1].get("score", 10))
+    second = sorted_dims[1][0] if len(sorted_dims) > 1 else worst
+    second_label = DIM_LABELS.get(second, second.replace("_", " ").title())
+
+    if h == 0:
+        # Bold Claim — provocative statement, no context
+        return (f"Most landing pages don't fail on design. They fail on "
+                f"{worst_label.lower()} — and nobody notices until the ads stop paying.")
+    if h == 1:
+        # Direct Callout — "You're not X because Y"
+        return (f"Your page isn't losing customers because of your offer. "
+                f"It's losing them because {worst_label.lower()} is broken.")
+    if h == 2:
+        # Proof Bomb — specific number
+        return (f"{worst_score:.0f} out of 10. That's the {worst_label.lower()} "
+                f"score for this page.")
+    if h == 3:
+        # Case Study — introduce the site as the subject
+        return (f"We audited {domain}. The {worst_label.lower()} alone "
+                f"is costing them conversions every day.")
+    if h == 4:
+        # Story — narrative opening
+        return (f"Someone is paying for ads to send people to this page. "
+                f"The page just isn't doing its part.")
+    # Question — rarely used, always followed by answer
+    return (f"Want to know why {domain} isn't converting? "
+            f"It's not the traffic. It's {worst_label.lower()}.")
+
+
+def _build_ppp_reveal(domain, overall, grade, worst_label):
+    """Proof (score) → Promise (what you'll learn) → Plan (the audit)."""
+    return (f"We audited {domain}. Score: {overall:.0f} out of 10, grade {grade}. "
+            f"By the end of this video, you'll know exactly what's broken "
+            f"and how to fix it.")
+
+
 def generate_short_script(page, audit, url=None):
     """Turn audit data into a ~35s YouTube Short script."""
     dims = audit["dimensions"]
@@ -34,19 +80,8 @@ def generate_short_script(page, audit, url=None):
     segments = []
     t = 0.0
 
-    # 1. Hook (3-4s) — pattern interrupt
-    hook_options = {
-        "speed":        f"This site loses visitors in 3 seconds. Here is why.",
-        "mobile":       f"60 percent of your traffic is mobile. This site is failing them.",
-        "social_proof": f"Nobody trusts this page. No testimonials, no proof, no conversions.",
-        "cta":          f"Visitors hit this page and have no idea what to do next.",
-        "headline":     f"This headline is costing the owner customers every single day.",
-        "above_fold":   f"The offer is buried. Visitors leave before they ever see it.",
-        "ad_signals":   f"Ad spend is being wasted because this page has zero tracking.",
-        "pagespeed":    f"Google hates this page. Users bounce before it even loads.",
-        "seo_foundations": f"This page cannot be found. It does not exist to Google.",
-    }
-    hook = hook_options.get(worst, f"This landing page is failing on {worst_label}.")
+    # 1. Hook (3-4s) — Hormozi 6 hook types, rotating by audit findings
+    hook = _build_hormozi_hook(worst, worst_label, worst_score, worst_issue, dims, domain)
     seg = {
         "start": t, "end": t + len(hook.split()) / WPS,
         "text": hook, "visual": "hook_card", "dimension": None,
@@ -54,8 +89,8 @@ def generate_short_script(page, audit, url=None):
     segments.append(seg)
     t = seg["end"]
 
-    # 2. Site + score reveal (4s)
-    reveal = f"We audited {domain}. Score: {overall:.0f} out of 10."
+    # 2. Site + score reveal (4s) — Proof bomb + Promise
+    reveal = _build_ppp_reveal(domain, overall, grade, worst_label)
     seg = {
         "start": t, "end": t + len(reveal.split()) / WPS,
         "text": reveal, "visual": "score_card", "dimension": None,
