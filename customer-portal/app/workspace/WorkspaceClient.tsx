@@ -16,6 +16,14 @@ import AchievementsView from './achievementsView'
 import AssistantView from './assistantView'
 import TeamView from './teamView'
 import SettingsView from './settingsView'
+import {
+  TAB_ACCESS_REQUIREMENTS,
+  resolvePlanLevel,
+  canAccess,
+  LockedTab,
+  LockBadge,
+  type AccessLevel,
+} from './planGate'
 
 export interface WorkspaceAudit {
   id: string
@@ -63,6 +71,7 @@ export default function WorkspaceClient() {
   const [latestDetail, setLatestDetail] = useState<AuditDetail | null>(null)
   // Read searchParams only after mount to avoid SSR/client mismatch
   const [tab, setTab] = useState<TabId>('dashboard')
+  const [planLevel, setPlanLevel] = useState<AccessLevel>('free')
 
   const load = useCallback(async (targetEmail: string) => {
     setLoading(true)
@@ -109,6 +118,13 @@ export default function WorkspaceClient() {
   useEffect(() => {
     if (email) {
       load(email)
+      // Fetch billing plan — non-blocking; defaults to 'free' on failure
+      fetch(`/api/billing/summary?email=${encodeURIComponent(email)}`)
+        .then((r) => r.ok ? r.json() : null)
+        .then((data) => {
+          if (data?.plan) setPlanLevel(resolvePlanLevel(data.plan))
+        })
+        .catch(() => undefined)
     }
   }, [email, load])
 
@@ -196,19 +212,24 @@ export default function WorkspaceClient() {
                 <div key={group.label}>
                   <p className="mb-2 px-3 text-[10px] font-bold uppercase tracking-[0.16em] text-fg-dim">{group.label}</p>
                   <div className="space-y-0.5">
-                    {group.items.map((item) => (
-                      <button
-                        key={item.id}
-                        onClick={() => setTab(item.id)}
-                        aria-current={tab === item.id ? 'page' : undefined}
-                        className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-[13px] font-medium transition-colors ${
-                          tab === item.id ? 'bg-bg-panel text-fg' : 'text-fg-muted hover:bg-bg-elevated hover:text-fg'
-                        }`}
-                      >
-                        <span className={`h-1.5 w-1.5 rounded-full ${tab === item.id ? 'bg-accent' : 'bg-fg-muted'}`} aria-hidden="true" />
-                        {item.label}
-                      </button>
-                    ))}
+                    {group.items.map((item) => {
+                        const required = TAB_ACCESS_REQUIREMENTS[item.id] ?? 'free'
+                        const locked = !canAccess(planLevel, required as AccessLevel)
+                        return (
+                          <button
+                            key={item.id}
+                            onClick={() => setTab(item.id)}
+                            aria-current={tab === item.id ? 'page' : undefined}
+                            className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-[13px] font-medium transition-colors ${
+                              tab === item.id ? 'bg-bg-panel text-fg' : 'text-fg-muted hover:bg-bg-elevated hover:text-fg'
+                            }`}
+                          >
+                            <span className={`h-1.5 w-1.5 rounded-full ${tab === item.id ? 'bg-accent' : 'bg-fg-muted'}`} aria-hidden="true" />
+                            {item.label}
+                            {locked && <LockBadge />}
+                          </button>
+                        )
+                      })}
                   </div>
                 </div>
               ))}
@@ -255,7 +276,7 @@ export default function WorkspaceClient() {
             {/* Tablet (640–1023px): horizontal scrollable tab row */}
             <div className="hidden sm:flex gap-1 overflow-x-auto border-b border-border pb-px">
               {navGroups.flatMap((group) => group.items).map((item) => (
-                <button key={item.id} onClick={() => setTab(item.id)} aria-current={tab === item.id ? 'page' : undefined} className={`whitespace-nowrap px-3 py-2 text-xs font-semibold ${tab === item.id ? 'border-b-2 border-fg text-fg' : 'text-fg-dim'}`}>{item.label}</button>
+                <button key={item.id} onClick={() => setTab(item.id)} aria-current={tab === item.id ? 'page' : undefined} className={`flex items-center gap-1 whitespace-nowrap px-3 py-2 text-xs font-semibold ${tab === item.id ? 'border-b-2 border-fg text-fg' : 'text-fg-dim'}`}>{item.label}{!canAccess(planLevel, (TAB_ACCESS_REQUIREMENTS[item.id] ?? 'free') as AccessLevel) && <LockBadge />}</button>
               ))}
             </div>
           </nav>
@@ -265,17 +286,45 @@ export default function WorkspaceClient() {
           {tab === 'projects' && <ProjectsView audits={audits || []} />}
           {tab === 'pages' && <PagesView audits={audits || []} latestDetail={latestDetail} />}
           {tab === 'diff' && <DiffView audits={audits || []} />}
-          {tab === 'compare' && <CompareView audits={audits || []} />}
+          {tab === 'compare' && (
+            canAccess(planLevel, 'pro')
+              ? <CompareView audits={audits || []} />
+              : <LockedTab tabLabel="Compare" requiredPlan="pro" currentPlan={planLevel} />
+          )}
           {tab === 'recommendations' && <RecsView email={email} latestDetail={latestDetail} />}
-          {tab === 'experiments' && <ExperimentsView email={email} />}
-          {tab === 'tracker' && <ExperimentTrackerView email={email} />}
+          {tab === 'experiments' && (
+            canAccess(planLevel, 'pro')
+              ? <ExperimentsView email={email} />
+              : <LockedTab tabLabel="Component Lab" requiredPlan="pro" currentPlan={planLevel} />
+          )}
+          {tab === 'tracker' && (
+            canAccess(planLevel, 'pro')
+              ? <ExperimentTrackerView email={email} />
+              : <LockedTab tabLabel="Experiment Tracker" requiredPlan="pro" currentPlan={planLevel} />
+          )}
           {tab === 'billing' && <BillingView email={email} />}
-          {tab === 'monitoring' && <MonitoringView email={email} />}
-          {tab === 'timeline' && <TimelineView email={email} />}
-          {tab === 'reports' && <ReportView audits={audits || []} />}
+          {tab === 'monitoring' && (
+            canAccess(planLevel, 'pro')
+              ? <MonitoringView email={email} />
+              : <LockedTab tabLabel="Monitoring" requiredPlan="pro" currentPlan={planLevel} />
+          )}
+          {tab === 'timeline' && (
+            canAccess(planLevel, 'pro')
+              ? <TimelineView email={email} />
+              : <LockedTab tabLabel="Timeline" requiredPlan="pro" currentPlan={planLevel} />
+          )}
+          {tab === 'reports' && (
+            canAccess(planLevel, 'pro')
+              ? <ReportView audits={audits || []} />
+              : <LockedTab tabLabel="Reports" requiredPlan="pro" currentPlan={planLevel} />
+          )}
           {tab === 'achievements' && <AchievementsView email={email} latestAuditId={audits?.[0]?.id ?? null} />}
           {tab === 'assistant' && <AssistantView email={email} audits={audits || []} />}
-          {tab === 'team' && <TeamView email={email} />}
+          {tab === 'team' && (
+            canAccess(planLevel, 'growth')
+              ? <TeamView email={email} />
+              : <LockedTab tabLabel="Team" requiredPlan="growth" currentPlan={planLevel} />
+          )}
           {tab === 'settings' && <SettingsView email={email} />}
         </div>
       </div>
