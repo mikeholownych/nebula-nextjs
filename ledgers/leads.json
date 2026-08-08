@@ -226,6 +226,33 @@
     "trigger_text": "",
     "url": "https://nebulacomponents.com"
   },
+  "anonymous+21e9c841-6d36-44ab-a767-6ac400e1b56d@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+21e9c841-6d36-44ab-a767-6ac400e1b56d@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-07T11:27:41.603821Z",
+    "last_seen": "2026-08-07T11:27:41.603821Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "2431d74e-7075-4286-96e2-2fff7e4c0f73",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-07T11:27:41.603821Z",
+    "trigger_text": "",
+    "url": "https://luxuryaurahub.com/"
+  },
   "anonymous+294c17ac-1648-4ab7-865e-2be7d8e4f17b@invalid.nebulacomponents.com": {
     "content_posts": [],
     "current_stage": "lead_audit",

@@ -1293,7 +1293,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         "",
         "━" * 40,
         "",
-        f"$97 One-Leak Self-Implementation Kit — {pitch_line}",
+        f"$97 One-Leak Repair Sprint — {pitch_line}",
         "Details + FAQ: https://nebulacomponents.com/primer",
         f"Run or reopen the audit to unlock eligible checkout: {audit_offer_url}",
         "",
@@ -1330,7 +1330,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         html_body += f"""
 <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:560px;margin:16px auto 0;padding-top:16px;border-top:1px solid #e5e7eb;text-align:center;">
   <div style="font-size:13px;color:#6b7280;">
-    <a href="{audit_offer_url}" style="color:#059669;text-decoration:underline;">Run the audit to unlock the $97 self-implementation kit →</a>
+    <a href="{audit_offer_url}" style="color:#059669;text-decoration:underline;">Run the audit to unlock the $97 repair sprint →</a>
   </div>
   <div style="font-size:11px;color:#9ca3af;margin-top:8px;">Audit engine v{ENGINE_VERSION} — score disputes can be traced to this version.</div>
 </div>"""
@@ -1408,7 +1408,7 @@ Key findings:
 The full audit is ready here (self-serve):
 https://nebulacomponents.com/audit.html?url={url}
 
-If you want one tailored implementation-ready change, run the audit and select the $97 self-implementation kit from the eligible report. You or your developer applies it.
+If you want one tailored implementation-ready change, run the audit and select the $97 repair sprint from the eligible report. You or your developer applies it.
 
 Best,
 Nebula Audit Agent"""

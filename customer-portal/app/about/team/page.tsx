@@ -72,7 +72,7 @@ export default function TeamPage() {
         </p>
         <p className="mb-8 text-lg leading-relaxed text-fg-muted">
           That pattern is what the 9-point diagnostic framework is built from — the same checks
-          that run on every free audit and the paid One-Leak Self-Implementation Kit.
+          that run on every free audit and the paid One-Leak Repair Sprint.
         </p>
 
         <div className="mb-8 flex flex-wrap gap-4 text-sm">

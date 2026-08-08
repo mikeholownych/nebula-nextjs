@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit-first link builder for the $97 self-implementation kit.
+"""Audit-first link builder for the $97 repair sprint.
 
 The canonical checkout API requires a completed audit UUID and its signed unlock
 cookie. Outreach records do not reliably carry either proof, so this module must

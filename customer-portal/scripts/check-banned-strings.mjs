@@ -11,6 +11,10 @@ const banned = [
   { pattern: /7\.7\/10/gi, reason: 'stale historical score' },
   { pattern: /9 conversion signals/gi, reason: 'deprecated taxonomy count' },
   { pattern: /9-signal/gi, reason: 'deprecated taxonomy count' },
+  { pattern: /One-Leak Self-Implementation Kit/gi, reason: 'retired offer name' },
+  { pattern: /#6366f1|#4f46e5|#22d3ee|#a5b4fc|#0a0a0f/gi, reason: 'retired collateral color' },
+  { pattern: /#4a7fa5|#34d399|#10b981/gi, reason: 'retired brand token' },
+  { pattern: /Karla/gi, reason: 'retired font family' },
 ]
 
 function filesUnder(root) {

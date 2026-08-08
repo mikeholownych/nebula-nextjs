@@ -386,7 +386,7 @@ export default function BrandPage() {
                   Components
                 </p>
                 <p className="text-xs font-mono text-accent/70 mt-2 tracking-wide">
-                  Audit. Optimize. Ship Faster.
+                  The problem was never the ad. It was the page.
                 </p>
               </div>
 

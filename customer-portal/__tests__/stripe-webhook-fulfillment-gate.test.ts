@@ -1,6 +1,6 @@
 /** @jest-environment node */
 
-// The $97 offer is a self-implementation kit. A canonical live purchase must
+// The $97 offer is a repair sprint. A canonical live purchase must
 // transition through processing and deliver the tailored kit exactly once.
 
 import { NextRequest } from 'next/server'
@@ -157,7 +157,7 @@ describe('POST /api/webhooks/stripe fulfillment gating', () => {
     jest.useRealTimers()
   })
 
-  it('delivers the active self-implementation kit through processing and records a sale', async () => {
+  it('delivers the active repair sprint through processing and records a sale', async () => {
     mockConstructEvent(makeSession({ amount_total: 9700 }))
     const response = await postWebhook()
 

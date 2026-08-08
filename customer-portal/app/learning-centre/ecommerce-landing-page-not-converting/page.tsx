@@ -327,7 +327,7 @@ export default function EcommerceLandingPageNotConverting() {
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 9 signals - including proof placement,
               mobile layout, and load time - against your actual landing page URL. The
-              $97 One-Leak Self-Implementation Kit supplies a tailored change for one high-confidence
+              $97 One-Leak Repair Sprint supplies a tailored change for one high-confidence
               page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition.
               It does not promise conversion lift.
             </p>
@@ -342,7 +342,7 @@ export default function EcommerceLandingPageNotConverting() {
                 href="/pricing"
                 className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
-                See the One-Leak Self-Implementation Kit
+                See the One-Leak Repair Sprint
               </Link>
             </div>
           </section>

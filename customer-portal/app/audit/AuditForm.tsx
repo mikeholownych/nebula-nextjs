@@ -12,6 +12,7 @@ function AuditFormContent() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [referrer, setReferrer] = useState<string | null>(null)
+  const [utmParams, setUtmParams] = useState<Record<string, string>>({})
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -22,9 +23,19 @@ function AuditFormContent() {
     if (attribution) setReferrer(attribution)
     const prefilled = searchParams.get('url')
     if (prefilled) setUrl(prefilled)
+
+    // Capture and persist UTM params for attribution
+    const utms: Record<string, string> = {}
+    for (const k of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']) {
+      const v = searchParams.get(k)
+      if (v) utms[k] = v
+    }
+    if (Object.keys(utms).length) setUtmParams(utms)
+
     posthog.capture('audit_page_viewed', {
       referrer: attribution || undefined,
       prefilled: prefilled ? true : undefined,
+      ...utms,
     })
   }, [searchParams])
 
@@ -61,6 +72,7 @@ function AuditFormContent() {
       page_domain: new URL(processedUrl).hostname,
       referrer: referrer ?? null,
       audit_reason: reason.trim() || null,
+      ...utmParams,
     })
 
     try {

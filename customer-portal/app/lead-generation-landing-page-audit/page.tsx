@@ -241,7 +241,7 @@ export default function LeadGenAuditPage() {
             <Link href="/ecommerce-landing-page-audit" className="hover:text-accent transition-colors">Ecommerce Audit</Link>
             <Link href="/landing-page-cta-audit" className="hover:text-accent transition-colors">CTA Audit</Link>
             <Link href="/why-is-my-landing-page-not-converting" className="hover:text-accent transition-colors">Why Is My Page Not Converting</Link>
-            <Link href="/pricing" className="hover:text-accent transition-colors">Self-Implementation Kit Pricing</Link>
+            <Link href="/pricing" className="hover:text-accent transition-colors">Repair Sprint Pricing</Link>
           </footer>
 
         </article>

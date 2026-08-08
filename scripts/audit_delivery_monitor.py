@@ -31,6 +31,9 @@ SERVICE_DEFAULT = "nebula-nextjs"  # was "nebula-site" — the obsolete alias un
 TERMINAL_STAGES = frozenset({"paid", "closed", "dead", "bounced", "max_retries_exceeded", "recircle_60d"})
 TERMINAL_STATUSES = frozenset({"completed", "closed", "bounced", "stop_reply", "test_email", "max_retries_exceeded"})
 WARM_STAGES = frozenset({"warm_reply", "warm_replied", "audit_requested"})
+# A warm row is only "unrouted" when we have NOT already responded to it.
+# Fields written by reply handlers when a response is sent (HOT_LEAD.json schema).
+RESPONSE_EVIDENCE_KEYS = ("our_response_sent_at", "response_sent_at", "replied_at", "responded_at")
 TEST_EMAILS = frozenset({
     "mike.holownych@aisyndicate.io",
     "mike.holownych@gmail.com",
@@ -100,6 +103,19 @@ def load_jsonl(path: Path) -> list[dict[str, Any]]:
     return rows
 
 
+def has_response_evidence(row: dict[str, Any]) -> bool:
+    """True when the row records that we already sent a response to this contact.
+
+    A warm_replied row with response evidence is ROUTED (someone answered it);
+    only warm rows without any response record are truly unrouted.
+    """
+    for key in RESPONSE_EVIDENCE_KEYS:
+        value = row.get(key)
+        if value not in (None, "", "null"):
+            return True
+    return False
+
+
 def is_test_record(row: dict[str, Any]) -> bool:
     return str(row.get("email", "")).strip().lower() in TEST_EMAILS
 
@@ -134,7 +150,11 @@ def collect_pipeline_state(base: Path, now: datetime) -> dict[str, Any]:
             if not parse_timestamp(row.get("updated_at") or row.get("created_at")):
                 missing_action_timestamps += 1
         elif stage in WARM_STAGES and not action and status not in TERMINAL_STATUSES:
-            unrouted_warm_replies.append(ref)
+            # False-positive guard (INC: audit-monitor warm row): a warm row that
+            # already records our response is routed, not unrouted. Only flag rows
+            # with NO response evidence as needing a next action.
+            if not has_response_evidence(row):
+                unrouted_warm_replies.append(ref)
 
         if action == "send_97_pitch" and stage in {"audit_delivered", "pitch_queued"} and status in {"", "pending", "queued"}:
             due = parse_timestamp(row.get("pitch_due_at"))

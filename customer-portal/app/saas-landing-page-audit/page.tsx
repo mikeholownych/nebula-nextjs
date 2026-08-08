@@ -267,7 +267,7 @@ export default function SaasAuditPage() {
             <Link href="/lead-generation-landing-page-audit" className="hover:text-accent transition-colors">Lead Gen Audit</Link>
             <Link href="/why-is-my-landing-page-not-converting" className="hover:text-accent transition-colors">Landing Page Diagnostics</Link>
             <Link href="/teardowns" className="hover:text-accent transition-colors">Public Teardowns</Link>
-            <Link href="/pricing" className="hover:text-accent transition-colors">Self-Implementation Kit Pricing</Link>
+            <Link href="/pricing" className="hover:text-accent transition-colors">Repair Sprint Pricing</Link>
           </footer>
 
         </article>

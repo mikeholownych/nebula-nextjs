@@ -1,3 +1,4 @@
+import { CROSS_INDUSTRY_PAID_TRAFFIC_STUDY } from '@/app/lib/brand-evidence'
 import { CopyPanel, PressReleaseTabs, ScanLine } from './PressKitClient'
 
 // ─── Server Primitives ───────────────────────────────────────────────────────
@@ -89,8 +90,8 @@ export default function PressPage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8">
             <StatCard label="Signals Checked" value="9" note="per audit" />
             <StatCard label="Audit Time" value="<90s" note="AI-powered" />
-            <StatCard label="Pages Audited" value="86+" note="cross-industry study" />
-            <StatCard label="Average Score" value="62.7" note="out of 100" />
+            <StatCard label="Pages Audited" value={`${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.sampleSize}+`} note="cross-industry study" />
+            <StatCard label="Average Score" value={`${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.averageScore}`} note="out of 100" />
           </div>
 
           <DiagnosticPanel className="mt-6">
@@ -116,7 +117,7 @@ export default function PressPage() {
                   </div>
                   <div className="flex gap-2">
                     <dt className="text-fg-muted min-w-[80px]">Model</dt>
-                    <dd className="text-fg font-medium">One-Leak Self-Implementation Kit ($97)</dd>
+                    <dd className="text-fg font-medium">One-Leak Repair Sprint ($97)</dd>
                   </div>
                 </dl>
               </div>
@@ -143,7 +144,7 @@ export default function PressPage() {
           <SectionLabel>02 / Research Data</SectionLabel>
           <SectionTitle><span id="signal-failure-title">Signal Failure Frequency</span></SectionTitle>
           <SectionDescription>
-            From our cross-industry study of 86 landing pages running paid traffic.
+            From our {CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.denominator}.
             These figures are cleared for editorial use with attribution.
           </SectionDescription>
 
@@ -187,7 +188,7 @@ export default function PressPage() {
             </table>
           </div>
           <p className="mt-4 text-[10px] font-mono text-fg-muted/50">
-            Source: Nebula Components cross-industry audit study, July 2026. n=86. Attribution required for reproduction.
+            Source: {CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.source}, {CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.date}. n={CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.sampleSize}. Score scale: {CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.scoreScale}. Attribution required for reproduction.
           </p>
         </div>
       </section>
@@ -208,8 +209,8 @@ export default function PressPage() {
                   <p className="font-mono text-[10px] uppercase tracking-widest text-fg-muted/60 mb-3">Key figures for citation</p>
                   <ul className="space-y-2 text-sm text-fg-muted">
                     <li className="flex items-baseline gap-2">
-                      <span className="text-accent font-mono text-xs">62.7</span>
-                      <span>Average audit score across 86 pages (Grade C)</span>
+                      <span className="text-accent font-mono text-xs">{CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.averageScore}</span>
+                      <span>Average audit score across {CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.sampleSize} pages (Grade {CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.grade})</span>
                     </li>
                     <li className="flex items-baseline gap-2">
                       <span className="text-accent font-mono text-xs">0</span>
@@ -308,17 +309,17 @@ export default function PressPage() {
             <CopyPanel
               label="Short boilerplate"
               filename="boilerplate-short.txt"
-              value="Nebula Components is a conversion diagnostics platform that audits landing pages against 9 evidence-based signals and delivers scored reports with specific fixes. $97 One-Leak Self-Implementation Kit — one tailored fix, customer-implemented, no retainer."
+              value="Nebula Components is a conversion diagnostics platform that audits landing pages against 9 evidence-based signals and delivers scored reports with specific fixes. $97 One-Leak Repair Sprint — one tailored fix, customer-implemented, no retainer."
             />
             <CopyPanel
               label="Medium boilerplate"
               filename="boilerplate-medium.txt"
-              value={`Nebula Components diagnoses why landing pages leak conversions. The platform's AI-powered audit checks 9 conversion signals — from message match and trust density to mobile CTA accessibility — in under 90 seconds. Each audit produces a scored report with specific remediation steps.\n\nThe $97 One-Leak Self-Implementation Kit delivers a tailored implementation guide for the highest-confidence failing signal, designed for the customer or their developer to execute. No retainer, no A/B-test theater, no month-long timelines. A cross-industry study of 86 pages found an average score of 62.7/100, with zero pages earning an A.`}
+              value={`Nebula Components diagnoses why landing pages leak conversions. The platform's AI-powered audit checks 9 conversion signals — from message match and trust density to mobile CTA accessibility — in under 90 seconds. Each audit produces a scored report with specific remediation steps.\n\nThe $97 One-Leak Repair Sprint delivers a tailored implementation guide for the highest-confidence failing signal, designed for the customer or their developer to execute. No retainer, no A/B-test theater, no month-long timelines. A cross-industry study of 86 pages found an average score of 62.7/100, with zero pages earning an A.`}
             />
             <CopyPanel
               label="Long boilerplate"
               filename="boilerplate-long.txt"
-              value={`Nebula Components is a conversion diagnostics platform for founders and operators burning ad spend on underperforming landing pages. The platform audits pages against 9 evidence-based conversion signals — message match, above-fold content, trust signal density, CTA hierarchy, social proof freshness, mobile CTA accessibility, ad signal continuity, objection handling, and load speed — delivering a scored report in under 90 seconds.\n\nThe company's research arm has published findings from automated audits of 86+ landing pages running paid traffic across ecommerce, B2B SaaS, and coaching/consulting verticals. Key finding: the average page scores 62.7/100 (Grade C), and zero pages earned an A. The two most common failures — above-fold content (100%) and ad signal continuity (99%) — are invisible to traditional speed-focused tools like PageSpeed Insights.\n\nNebula's commercial model is a one-time $97 One-Leak Self-Implementation Kit: a tailored implementation guide for the highest-confidence failing signal, written for the customer or their developer to execute. The company positions against the retainer-first CRO agency model, arguing that agencies sell ongoing optimization before completing basic diagnosis — "A/B testing on pages without enough traffic for statistical significance, 90-day timelines for problems fixable in a week."`}
+              value={`Nebula Components is a conversion diagnostics platform for founders and operators burning ad spend on underperforming landing pages. The platform audits pages against 9 evidence-based conversion signals — message match, above-fold content, trust signal density, CTA hierarchy, social proof freshness, mobile CTA accessibility, ad signal continuity, objection handling, and load speed — delivering a scored report in under 90 seconds.\n\nThe company's research arm has published findings from automated audits of 86+ landing pages running paid traffic across ecommerce, B2B SaaS, and coaching/consulting verticals. Key finding: the average page scores 62.7/100 (Grade C), and zero pages earned an A. The two most common failures — above-fold content (100%) and ad signal continuity (99%) — are invisible to traditional speed-focused tools like PageSpeed Insights.\n\nNebula's commercial model is a one-time $97 One-Leak Repair Sprint: a tailored implementation guide for the highest-confidence failing signal, written for the customer or their developer to execute. The company positions against the retainer-first CRO agency model, arguing that agencies sell ongoing optimization before completing basic diagnosis — "A/B testing on pages without enough traffic for statistical significance, 90-day timelines for problems fixable in a week."`}
             />
           </div>
         </div>
@@ -338,12 +339,12 @@ export default function PressPage() {
             {[
               {
                 name: 'Nebula Wordmark (SVG)',
-                file: '/nebula-wordmark.svg',
+                file: '/brand/wordmark-dark.svg',
                 type: 'Logo',
               },
               {
                 name: 'Nebula Mark (SVG)',
-                file: '/nebula-mark.svg',
+                file: '/brand/mark-dark.svg',
                 type: 'Logo',
               },
               {

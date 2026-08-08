@@ -168,7 +168,7 @@ export default function LearningCentrePage() {
           <h2 className="mb-4 text-2xl font-bold text-fg">Find the violation before Google does</h2>
           <p className="mb-6 leading-relaxed text-fg-muted">
             The free Nebula audit identifies likely page-side leaks, including policy-relevant issues
-            like redirects and expired certificates. The $97 One-Leak Self-Implementation Kit supplies
+            like redirects and expired certificates. The $97 One-Leak Repair Sprint supplies
             a tailored change for one high-confidence page-level finding. You or your developer implements it,
             and the 30-day re-audit verifies the page condition. It does not promise conversion lift or account reinstatement.
           </p>

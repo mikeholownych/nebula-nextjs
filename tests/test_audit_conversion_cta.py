@@ -55,9 +55,9 @@ class AuditConversionCtaTests(unittest.TestCase):
         text = email["text"].lower()
         html = email["html"].lower()
 
-        # Current offer copy: $97 One-Leak Self-Implementation Kit (self-serve,
+        # Current offer copy: $97 One-Leak Repair Sprint (self-serve,
         # delivered by email after Stripe payment, one free re-audit in 30 days)
-        self.assertIn("$97 one-leak self-implementation kit", text)
+        self.assertIn("$97 one-leak repair sprint", text)
         self.assertNotIn("$147", text)
         self.assertNotIn("$97 fix pack", text)  # old offer naming, no longer used
         self.assertIn("run or reopen the audit to unlock eligible checkout", text)
@@ -70,7 +70,7 @@ class AuditConversionCtaTests(unittest.TestCase):
         email = self.sample_email()
         text = email["text"].lower()
 
-        self.assertIn("$97 one-leak self-implementation kit", text)
+        self.assertIn("$97 one-leak repair sprint", text)
         self.assertNotIn("$147", text)
         self.assertNotIn("$97 fix pack", text)  # old offer naming, no longer used
         self.assertIn("no site access", text)

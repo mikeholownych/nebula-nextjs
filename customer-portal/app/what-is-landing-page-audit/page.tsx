@@ -43,7 +43,7 @@ export default function WhatIsLandingPageAudit() {
                 name: "Should I fix my landing page myself or pay someone?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "If the audit shows a low-difficulty issue, DIY may be sufficient. The $97 One-Leak Self-Implementation Kit is for one high-confidence page-level repair that Nebula scopes, implements, and verifies.",
+                  text: "If the audit shows a low-difficulty issue, DIY may be sufficient. The $97 One-Leak Repair Sprint is for one high-confidence page-level repair that Nebula scopes, implements, and verifies.",
                 },
               },
             ],

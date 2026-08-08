@@ -86,6 +86,6 @@ Next bounded phase: static/public HTML legacy sweep + rendered-browser verificat
 ## 2026-08-03T08:26:30Z — Full agency audit remediation
 
 - Phase: CONSTRUCTION — IN PROGRESS
-- User decision: Option B self-implementation kit.
+- User decision: Option B repair sprint.
 - Active branch: fix/agency-audit-remediation-20260803.
 - Remediation units: offer contract, payment/fulfillment, billing auth, analytics/attribution, SEO/discovery, accessibility/performance, edge security, live verification.

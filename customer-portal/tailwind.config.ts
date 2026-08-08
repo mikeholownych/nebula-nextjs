@@ -32,10 +32,10 @@ const config: Config = {
           dark: NEBULA_ACCENT_DARK,
           dim: 'rgba(0, 194, 160, 0.1)',
         },
-        // Secondary accent — slate blue for lower-hierarchy interactive states
+        // Information semantic for lower-hierarchy informational states
         secondary: {
-          DEFAULT: '#4a7fa5',
-          dim: 'rgba(74, 127, 165, 0.1)',
+          DEFAULT: '#3b82f6',
+          dim: 'rgba(59, 130, 246, 0.1)',
         },
         // Semantic colors
         danger: {

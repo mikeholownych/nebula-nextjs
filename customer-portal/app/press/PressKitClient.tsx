@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useCallback, useRef } from 'react'
+import { CROSS_INDUSTRY_PAID_TRAFFIC_STUDY } from '@/app/lib/brand-evidence'
 
 // ─── Copy Panel ──────────────────────────────────────────────────────────────
 
@@ -105,8 +106,8 @@ function PressReleasesList() {
     },
     {
       date: '2026-07-25',
-      headline: '86-page audit study: zero pages score an A',
-      summary: 'Cross-industry analysis of landing pages running paid traffic finds universal above-fold content failures and a 62.7 average score.',
+      headline: `${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.sampleSize}-page audit study: zero pages score an A`,
+      summary: `Cross-industry analysis of landing pages running paid traffic finds universal above-fold content failures and a ${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.averageScore} average score.`,
       type: 'research' as const,
     },
     {
@@ -152,8 +153,8 @@ function StoryAngles() {
   const angles = [
     {
       number: '1',
-      headline: 'We audited 86 landing pages. Not one scored an A.',
-      body: 'Across 86 automated audits of pages running paid traffic, the average score is 62.7/100 — Grade C. Zero pages earned an A. The two most common failures: above-fold content (100% of pages) and ad signal continuity (99%).',
+      headline: `We audited ${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.sampleSize} landing pages. Not one scored an A.`,
+      body: `Across ${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.sampleSize} automated audits of pages running paid traffic, the average score is ${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.averageScore}/${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.scoreScale} — Grade ${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.grade}. Zero pages earned an A. The two most common failures: above-fold content (100% of pages) and ad signal continuity (99%).`,
     },
     {
       number: '2',

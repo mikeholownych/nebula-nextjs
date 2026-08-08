@@ -1,7 +1,7 @@
 import { createFAQPageSchema } from '@/app/lib/schema'
 
 const repairSprintAnswer =
-  'One landing page and one high-confidence audit finding. Nebula sends a tailored self-implementation kit after successful payment — exact copy, a code snippet, or a configuration change. No site access is required. You implement it yourself or hand it to your developer. Includes one same-scope re-audit within 30 days.'
+  'One landing page and one high-confidence audit finding. Nebula sends a tailored repair sprint after successful payment — exact copy, a code snippet, or a configuration change. No site access is required. You implement it yourself or hand it to your developer. Includes one same-scope re-audit within 30 days.'
 
 export const pricingFAQSchema = createFAQPageSchema([
   {
@@ -9,7 +9,7 @@ export const pricingFAQSchema = createFAQPageSchema([
     answer: 'A 9-signal audit scoring message match, trust signals, mobile CTA, above the fold, ad signals, SEO foundations, AI readiness, CTA clarity, and load speed. Each signal gets specific findings and prioritized repairs ranked by likely conversion impact.',
   },
   {
-    question: 'How is the $97 One-Leak Self-Implementation Kit delivered?',
+    question: 'How is the $97 One-Leak Repair Sprint delivered?',
     answer: repairSprintAnswer,
   },
   {
@@ -36,7 +36,7 @@ export const homeFAQSchema = createFAQPageSchema([
     answer: 'Under 2 minutes. Paste your URL and get a scored 9-signal diagnosis with findings ranked by likely conversion impact.',
   },
   {
-    question: "What's included in the $97 One-Leak Self-Implementation Kit?",
+    question: "What's included in the $97 One-Leak Repair Sprint?",
     answer: repairSprintAnswer,
   },
   {
@@ -60,7 +60,7 @@ export const auditPageFAQSchema = createFAQPageSchema([
   },
   {
     question: 'What happens after the free audit?',
-    answer: 'You see your 9-signal score and initial findings. If the page has a high-confidence conversion leak, the $97 One-Leak Self-Implementation Kit supplies a tailored change for one selected finding.',
+    answer: 'You see your 9-signal score and initial findings. If the page has a high-confidence conversion leak, the $97 One-Leak Repair Sprint supplies a tailored change for one selected finding.',
   },
   {
     question: 'Does the audit require an account or login?',

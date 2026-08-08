@@ -5,7 +5,7 @@
 
 ## About Nebula Components
 
-Nebula Components is a landing page conversion diagnostic service built for founders running paid ads. We identify structural and messaging failures that cause landing pages to receive traffic but generate no conversions, then produce a bounded self-implementation kit for one selected finding.
+Nebula Components is a landing page conversion diagnostic service built for founders running paid ads. We identify structural and messaging failures that cause landing pages to receive traffic but generate no conversions, then produce a bounded repair sprint for one selected finding.
 
 Our operating premise: most landing page failures are diagnosable. They follow repeating patterns. They can be fixed. The problem is not the ad — it is the page.
 
@@ -41,12 +41,12 @@ Every Nebula audit checks nine signals:
 
 ## Services
 
-### One-Leak Self-Implementation Kit — $97 (one-time)
+### One-Leak Repair Sprint — $97 (one-time)
 One landing page and one high-confidence finding selected from the audit. Nebula supplies exact copy, a code snippet, or a configuration change tailored to that finding. The customer or their developer implements it. One same-scope re-audit is included within 30 days. Price locked through 2026-12-31. Checkout is available only from an eligible audit report at https://nebulacomponents.com/checkout.
 
 The kit excludes full redesigns, multiple pages, backend application logic, analytics migrations, and paid third-party tools. If Nebula cannot generate the promised bounded kit, the buyer may request a delivery review or refund. The re-audit verifies the page condition; it does not by itself prove or guarantee conversion lift.
 
-No retainer. No ongoing commitment. Pay once for one bounded self-implementation kit.
+No retainer. No ongoing commitment. Pay once for one bounded repair sprint.
 
 ### Free Audit
 Automated URL submission and 9-signal scoring across message match, trust, mobile CTA, load time, CTA clarity, above-fold clarity, ad signals, SEO foundations, and AI readiness. The score and initial findings appear before email; anonymous visitors submit an email to unlock the full report. Self-serve at https://nebulacomponents.com/audit.

@@ -106,7 +106,7 @@ export default function BillingView({ email }: { email: string }) {
         >
           <div>
             <p className="text-xl font-bold">
-              {isOwner ? 'One-Leak Self-Implementation Kit' : 'Free'}
+              {isOwner ? 'One-Leak Repair Sprint' : 'Free'}
             </p>
             <p className="text-sm text-fg-muted mt-1">
               {isOwner
@@ -156,7 +156,7 @@ export default function BillingView({ email }: { email: string }) {
           <div className="rounded-xl border border-dashed border-border p-8 text-center">
             <p className="text-fg font-medium">No purchases yet</p>
             <p className="text-sm text-fg-dim mt-1">
-              When you buy the One-Leak Self-Implementation Kit, the receipt and fulfillment status
+              When you buy the One-Leak Repair Sprint, the receipt and fulfillment status
               appear here automatically.
             </p>
             <a

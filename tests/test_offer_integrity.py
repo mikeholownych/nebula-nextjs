@@ -53,7 +53,7 @@ def test_audit_results_page_has_only_the_canonical_self_implementation_offer():
     assert "Audit Lite" not in text
     assert "$7" not in text
     assert "$1,497" not in text
-    assert "One-Leak Self-Implementation Kit" in text
+    assert "One-Leak Repair Sprint" in text
     assert "/checkout?audit_id=" in text
     assert "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h" not in text
 
@@ -69,6 +69,6 @@ def test_active_audit_emails_have_only_the_canonical_self_implementation_offer()
         assert not re.search(r"\$147\b", text), path
         assert not re.search(r"\$7\b", text), path
         assert not re.search(r"\$1,?497\b", text), path
-        assert "Self-Implementation Kit" in text or "self-implementation kit" in text, path
+        assert "Repair Sprint" in text or "repair sprint" in text, path
         assert "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h" not in text, path
         assert "https://nebulacomponents.com/audit" in text, path

@@ -19,9 +19,9 @@
     },
     {
       "claim_id": "CLM-002",
-      "claim": "$97 self-implementation kit for one selected audit finding",
+      "claim": "$97 repair sprint for one selected audit finding",
       "claim_type": "pricing",
-      "entity": "One-Leak Self-Implementation Kit",
+      "entity": "One-Leak Repair Sprint",
       "scope": ["One completed and unlocked audit", "One landing page", "One selected high-confidence finding", "Tailored copy, code snippet, or configuration change", "Customer or developer implements", "One same-scope re-audit within 30 days"],
       "exclusions": ["Done-for-you implementation", "Full redesigns", "Multiple pages", "Backend application logic", "Analytics migrations", "Conversion-lift guarantee"],
       "evidence": ["https://nebulacomponents.com/pricing", "https://nebulacomponents.com/terms"],

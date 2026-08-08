@@ -86,3 +86,6 @@ wcag_audit_report.json
 
 # Audit screenshots (runtime artifacts, regenerated on demand)
 public/audit-screenshots/
+
+*storybook.log
+storybook-static

@@ -50,7 +50,9 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
       '/roas-cliff',
       '/social-proof-landing-page',
       '/what-is-landing-page-audit',
-      '/workspace',
+      // NOTE: /workspace is intentionally absent — it is email-gated (307 →
+      // /login), robots.txt Disallows /workspace/, and gated paths must never
+      // appear in the sitemap (wastes crawl budget, risks soft-404 signals).
       '/playbooks',
       '/benchmarks',
       '/brand',

@@ -152,7 +152,7 @@ export default function RewritePreview({
             }
             className="rounded-lg bg-accent px-4 py-2 text-xs font-semibold text-bg shadow-sm transition-colors hover:bg-accent-light"
           >
-            Unlock all {findingCount} rewrites with the One-Leak Self-Implementation Kit →
+            Unlock all {findingCount} rewrites with the One-Leak Repair Sprint →
           </a>
         </div>
       </div>

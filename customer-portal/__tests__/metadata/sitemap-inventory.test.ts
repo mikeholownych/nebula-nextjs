@@ -21,6 +21,18 @@ function getArticleDirectories(): string[] {
 }
 
 describe('sitemap canonical inventory', () => {
+  it('never includes gated or robots-disallowed paths', () => {
+    // Gated/robots-Disallowed paths (workspace, checkout, api, audit results,
+    // dashboards) must never be submitted. A 307-to-login URL in the sitemap
+    // wastes crawl budget and can be read as a soft-404 by Google.
+    const urlList = sitemap().map(({ url }) => url)
+    const gatedSubstrings = ['/workspace', '/checkout', '/api/', '/dashboard', '/audit/', '/login']
+    const offenders = urlList.filter((url) =>
+      gatedSubstrings.some((g) => url.includes(g))
+    )
+    expect(offenders).toEqual([])
+  })
+
   it('projects every and only learning-centre article metadata record', () => {
     const expected = getArticles()
       .map(({ slug }) => `${ORIGIN}/learning-centre/${slug}`)

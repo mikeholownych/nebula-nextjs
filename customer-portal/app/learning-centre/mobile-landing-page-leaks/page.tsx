@@ -284,7 +284,7 @@ export default function MobileLandingPageLeaks() {
             <p className="mb-6 leading-relaxed text-fg-muted">
               The free Nebula audit checks all 9 signals - including mobile layout, LCP,
               and CTA visibility - against your actual landing page URL. The $97 One-Leak
-              Self-Implementation Kit delivers a tailored kit for one high-confidence page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition. It does not
+              Repair Sprint delivers a tailored kit for one high-confidence page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition. It does not
               promise conversion lift.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -298,7 +298,7 @@ export default function MobileLandingPageLeaks() {
                 href="/pricing"
                 className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors"
               >
-                See the One-Leak Self-Implementation Kit
+                See the One-Leak Repair Sprint
               </Link>
             </div>
           </section>

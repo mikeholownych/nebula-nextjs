@@ -45,7 +45,7 @@ export function WEB_MCP_RUNTIME() {
           required: ['url']
         },
         execute: async function (input) {
-          if (!input || typeof input.url !== 'string' || !/^https?:\\/\\//i.test(input.url.trim())) {
+          if (!input || typeof input.url !== 'string' || !/^https?:\/\//i.test(input.url.trim())) {
             return { status: 'error', code: 'INVALID_URL', message: 'Provide a public HTTP or HTTPS URL.' };
           }
           var response = await fetch('/api/audit/start', {
@@ -78,7 +78,7 @@ export function WEB_MCP_RUNTIME() {
               url: 'https://nebulacomponents.com/audit',
             },
             {
-              name: 'One-Leak Self-Implementation Kit',
+              name: 'One-Leak Repair Sprint',
               price: ${JSON.stringify(ACTIVE_FIX_PACK ? `$${ACTIVE_FIX_PACK.priceCents / 100}` : 'Unavailable')},
               description: 'Tailored implementation instructions for one verified page condition; re-audit verifies the condition changed, not conversion lift.',
               url: 'https://nebulacomponents.com/pricing',

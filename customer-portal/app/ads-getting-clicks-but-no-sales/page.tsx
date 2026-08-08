@@ -282,13 +282,16 @@ export default function AdsClicksNoSalesPage() {
               Message Match Guide
             </Link>
             <Link href="/ecommerce-landing-page-audit" className="hover:text-accent transition-colors">
-              Ecommerce Audit
+              Ecommerce Landing Page Audit
+            </Link>
+            <Link href="/roas-cliff" className="hover:text-accent transition-colors">
+              The ROAS Cliff
             </Link>
             <Link href="/saas-landing-page-audit" className="hover:text-accent transition-colors">
               SaaS Audit
             </Link>
             <Link href="/pricing" className="hover:text-accent transition-colors">
-              Self-Implementation Kit Pricing
+              Repair Sprint Pricing
             </Link>
           </footer>
         </article>

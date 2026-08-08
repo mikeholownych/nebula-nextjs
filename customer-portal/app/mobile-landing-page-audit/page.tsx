@@ -241,7 +241,7 @@ export default function MobileAuditPage() {
             <Link href="/saas-landing-page-audit" className="hover:text-accent transition-colors">SaaS Audit</Link>
             <Link href="/landing-page-cta-audit" className="hover:text-accent transition-colors">CTA Audit</Link>
             <Link href="/ads-getting-clicks-but-no-sales" className="hover:text-accent transition-colors">Ads Getting Clicks But No Sales</Link>
-            <Link href="/pricing" className="hover:text-accent transition-colors">Self-Implementation Kit Pricing</Link>
+            <Link href="/pricing" className="hover:text-accent transition-colors">Repair Sprint Pricing</Link>
           </footer>
 
         </article>

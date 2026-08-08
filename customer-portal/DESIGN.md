@@ -10,8 +10,8 @@ colors:
   teal-light: "#33d4b8"
   teal-dark: "#009980"
   teal-dim: "rgba(0, 194, 160, 0.1)"
-  secondary: "#4a7fa5"
-  secondary-dim: "rgba(74, 127, 165, 0.1)"
+  secondary: "#3b82f6"
+  secondary-dim: "rgba(59, 130, 246, 0.1)"
   fg: "#ffffff"
   fg-muted: "#9e9e9e"
   fg-dim: "#666666"
@@ -96,7 +96,7 @@ components:
 
 **Creative North Star: "The Conversion Lab"**
 
-Assertive authority meets clinical precision. The system projects confidence through density and sharpness — not friendliness, not warmth, not restraint. This is diagnostic equipment, not a lifestyle brand. The system font stack (SF Pro, Segoe UI, Roboto) renders instantly with zero loading cost; authority comes from committed weight contrast and tight tracking, not letterform novelty. The near-black foundation (#050505) eliminates visual competition. Signal Emerald (#10b981) marks actionable elements with authority, pulling the eye toward what matters.
+Assertive authority meets clinical precision. The system projects confidence through density and sharpness — not friendliness, not warmth, not restraint. This is diagnostic equipment, not a lifestyle brand. The system font stack (SF Pro, Segoe UI, Roboto) renders instantly with zero loading cost; authority comes from committed weight contrast and tight tracking, not letterform novelty. The near-black foundation (#050505) eliminates visual competition. Signal Teal (#00c2a0) marks actionable elements with authority, pulling the eye toward what matters.
 
 The aesthetic explicitly rejects generic AI SaaS cream, CRO agency theatrics, and "black-box AI says so" interfaces. No conversion claims without evidence. No decorative motion. No gradient text. Every visual choice serves the belief ladder — the visitor must believe Nebula finds real, specific defects on their page.
 
@@ -104,7 +104,7 @@ Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmo
 
 **Key Characteristics:**
 - Near-black canvas eliminates everything but the diagnostic content
-- Signal Emerald authority on actions and positive signal — used sparingly (≤10% surface area)
+- Signal Teal authority on actions and positive signal — used sparingly (≤10% surface area)
 - System font stack: instant render, weight-capable, zero loading cost
 - Ambient depth via layered glow, never drop shadows
 - Tight tracking (-0.03em) on display for condensed authority
@@ -116,13 +116,13 @@ Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmo
 
 ## 2. Colors
 
-**Signal Emerald palette** — one accent, high contrast, clinical authority. The palette is deliberately restrained: one primary accent carries the entire brand signal.
+**Signal Teal palette** — one accent, high contrast, clinical authority. The palette is deliberately restrained: one primary accent carries the entire brand signal.
 
 ### Primary
 
-- **Signal Emerald** (#10b981): Primary accent. Used exclusively on CTAs, positive indicators, step numbers, success states, and findings that mark "fixed" or "correct." Never decorative. Always carries semantic meaning.
-- **Emerald Light** (#34d399): Hover state for primary buttons. Same hue, higher lightness.
-- **Emerald Dark** (#059669): Pressed state, secondary accents when Signal Emerald needs support.
+- **Signal Teal** (#00c2a0): Primary accent. Used exclusively on CTAs, positive indicators, step numbers, success states, and findings that mark "fixed" or "correct." Never decorative. Always carries semantic meaning.
+- **Teal Light** (#33d4b8): Hover state for primary buttons. Same hue, higher lightness.
+- **Teal Dark** (#009980): Pressed state, secondary accents when Signal Teal needs support.
 
 ### Neutral
 
@@ -143,13 +143,13 @@ Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmo
 
 ### Named Rules
 
-**The One Signal Rule.** Signal Emerald is reserved for actionable elements and positive signal. It appears on ≤10% of any screen surface. Its rarity is the point.
+**The One Signal Rule.** Signal Teal is reserved for actionable elements and positive signal. It appears on ≤10% of any screen surface. Its rarity is the point.
 
-**The No-Warm-Neutral Rule.** Backgrounds live on the cool near-black axis. No cream, sand, paper, parchment, or warm-tinted neutrals. Warmth is carried by the emerald accent and imagery — never the canvas.
+**The No-Warm-Neutral Rule.** Backgrounds live on the cool near-black axis. No cream, sand, paper, parchment, or warm-tinted neutrals. Warmth is carried by the teal accent and imagery — never the canvas.
 
-**The Authority-Not-Friendliness Rule.** Signal Emerald is not "friendly green." It marks signal, not inclusion. No pastel tints, no soft gradients. Sharp, saturated, assertive.
+**The Authority-Not-Friendliness Rule.** Signal Teal is not "friendly green." It marks signal, not inclusion. No pastel tints, no soft gradients. Sharp, saturated, assertive.
 
-**The AAA Gap (resolved).** PRODUCT.md targets WCAG 2.2 AAA (7:1 for body text, 4.5:1 for large text). FG Muted (#888888 → #9e9e9e) and Danger (#ef4444 → #f37979) both used to fall short (~5.0-5.75:1, AA-only). Both were bumped, same hue, to clear 7:1 against both Near Black and BG Panel. Signal Emerald, Warning, and body text on any documented background already cleared AAA before this fix.
+**The AAA Gap (resolved).** PRODUCT.md targets WCAG 2.2 AAA (7:1 for body text, 4.5:1 for large text). FG Muted (#888888 → #9e9e9e) and Danger (#ef4444 → #f37979) both used to fall short (~5.0-5.75:1, AA-only). Both were bumped, same hue, to clear 7:1 against both Near Black and BG Panel. Signal Teal, Warning, and body text on any documented background already cleared AAA before this fix.
 
 ---
 
@@ -179,7 +179,7 @@ Tailwind's own `text-xs`…`text-6xl` utility scale (defined in `tailwind.config
 
 **The Weight-Contrast Rule.** Display (700) and Body (400) are 300 weight apart. No intermediate siblings. The gap creates hierarchy.
 
-**The No-Decoration Rule.** No gradient text. No text-shadow effects. Signal Emerald may appear as solid color or background — never as gradient-fill on typography.
+**The No-Decoration Rule.** No gradient text. No text-shadow effects. Signal Teal may appear as solid color or background — never as gradient-fill on typography.
 
 ---
 
@@ -191,10 +191,10 @@ The system rejects conventional drop shadows (offset + blur + spread) entirely. 
 
 ### Glow Vocabulary
 
-- **Ambient Emerald** (120px blur, 600×600px, radial-gradient emerald @ 0.15 opacity): Fixed-position orb, top-right quadrant. Creates ambient glow from within the atmosphere.
+- **Ambient Teal** (120px blur, 600×600px, radial-gradient teal @ 0.15 opacity): Fixed-position orb, top-right quadrant. Creates ambient glow from within the atmosphere.
 - **Ambient Blue** (120px blur, 600×600px, radial-gradient blue @ 0.12 opacity): Fixed-position orb, bottom-left. Cooler counterpoint.
-- **Button Glow** (0 0 16px rgba(16, 185, 129, 0.25)): Primary button hover state. Responsive, not ambient.
-- **Card Glow** (0 0 40px rgba(16, 185, 129, 0.15)): Featured/pricing cards — `shadow-glow` in `tailwind.config.ts`.
+- **Button Glow** (0 0 16px rgba(0, 194, 160, 0.25)): Primary button hover state. Responsive, not ambient.
+- **Card Glow** (0 0 40px rgba(0, 194, 160, 0.15)): Featured/pricing cards — `shadow-glow` in `tailwind.config.ts`.
 
 ### Named Rules
 
@@ -212,12 +212,12 @@ The system rejects conventional drop shadows (offset + blur + spread) entirely. 
 
 **Shape:** Actual rendered radii by size (`components/ui/Button.tsx`): 8px (`sm`), 12px (`md`, the default and most common size), 16px (`lg`, hero emphasis). Never full-pill.
 
-- **Primary** (Signal Emerald bg, Near Black text, fontWeight 600): Main CTAs — "Run Free Audit", "Review checkout", form submits.
-  - Hover: BG shifts to Emerald Light, Button Glow appears (16px @ 0.25).
+- **Primary** (Signal Teal bg, Near Black text, fontWeight 600): Main CTAs — "Run Free Audit", "Review checkout", form submits.
+  - Hover: BG shifts to Teal Light, Button Glow appears (16px @ 0.25).
   - Active: No lift, reduced glow.
   - Touch devices: No hover lift; active uses scale(0.98) instead.
-- **Secondary / Outline** (transparent bg, 1–2px Signal Emerald border, Signal Emerald text): Secondary actions — "View audit status", "Review checkout →" on outline contexts.
-  - Hover: BG shifts to Emerald Dim, border stays.
+- **Secondary / Outline** (transparent bg, 1–2px Signal Teal border, Signal Teal text): Secondary actions — "View audit status", "Review checkout →" on outline contexts.
+  - Hover: BG shifts to Teal Dim, border stays.
 - **Ghost** (transparent bg, FG Muted text): Tertiary nav, cancel actions.
   - Hover: Text shifts to FG.
 
@@ -236,7 +236,7 @@ The system rejects conventional drop shadows (offset + blur + spread) entirely. 
 
 **Style:** Near Black background, 1px Border, rounded-xl (12px), padding 12–16px (`px-4 py-3`).
 
-- **Focus:** Border shifts to Signal Emerald, focus ring (`ring-2 ring-accent/20`).
+- **Focus:** Border shifts to Signal Teal, focus ring (`ring-2 ring-accent/20`).
 - **Error:** Border shifts to Danger; error text below in Danger, `role="alert"`.
 - **Helper text:** FG Dim, shown only when no error is present.
 
@@ -244,14 +244,14 @@ The system rejects conventional drop shadows (offset + blur + spread) entirely. 
 
 **Header:** Fixed, backdrop-filter blur(20px), BG Elevated @ 0.8 opacity. Padded 16px 24px desktop, 12px 16px mobile.
 
-- **Nav Links:** FG Muted text, 14px, fontWeight 600. Hover shifts to Signal Emerald.
+- **Nav Links:** FG Muted text, 14px, fontWeight 600. Hover shifts to Signal Teal.
 - **Touch:** Min-height 44px, increased padding on coarse pointers.
 - **Mobile:** Stacked vertical menu below header on max-width 480px.
 
 ### Proof Section Components
 
-- **Before/After Tags:** tag-before (Danger Dim bg, Danger text, 4px radius), tag-after (Emerald Dim bg, Signal Emerald text, 4px radius).
-- **Shift Cards:** old/danger-tinted border, new/emerald-tinted border, 32px padding.
+- **Before/After Tags:** tag-before (Danger Dim bg, Danger text, 4px radius), tag-after (Teal Dim bg, Signal Teal text, 4px radius).
+- **Shift Cards:** old/danger-tinted border, new/teal-tinted border, 32px padding.
 
 ---
 
@@ -259,7 +259,7 @@ The system rejects conventional drop shadows (offset + blur + spread) entirely. 
 
 ### Do:
 
-- **Do** use Signal Emerald (#10b981) exclusively for actionable elements and positive signal — CTAs, step numbers, success states, "fixed" highlights.
+- **Do** use Signal Teal (#00c2a0) exclusively for actionable elements and positive signal — CTAs, step numbers, success states, "fixed" highlights.
 - **Do** maintain Near Black (#050505) as the body background everywhere. No warm neutral tints.
 - **Do** use ambient glow orbs (120px blur, 0.15 opacity) for atmospheric depth instead of drop shadows.
 - **Do** set display headlines with tight tracking (-0.03em) but never below that floor.
@@ -271,7 +271,7 @@ The system rejects conventional drop shadows (offset + blur + spread) entirely. 
 
 ### Don't:
 
-- **Don't** use gradient text (`background-clip: text` with gradient). Solid Signal Emerald or nothing.
+- **Don't** use gradient text (`background-clip: text` with gradient). Solid Signal Teal or nothing.
 - **Don't** apply side-stripe borders (border-left/right greater than 1px) as visual decoration.
 - **Don't** use identical card grids with icon + heading + text repeated endlessly.
 - **Don't** add a tiny uppercase tracked eyebrow above every section. One named kicker is deliberate; eyebrows as section grammar is AI scaffolding.

@@ -241,9 +241,10 @@ export default function CtaAuditPage() {
             <Link href="/saas-landing-page-audit" className="hover:text-accent transition-colors">SaaS Landing Page Audit</Link>
             <Link href="/ecommerce-landing-page-audit" className="hover:text-accent transition-colors">Ecommerce Audit</Link>
             <Link href="/lead-generation-landing-page-audit" className="hover:text-accent transition-colors">Lead Gen Audit</Link>
+            <Link href="/cta-optimization" className="hover:text-accent transition-colors">CTA Optimization Playbook</Link>
             <Link href="/why-is-my-landing-page-not-converting" className="hover:text-accent transition-colors">Landing Page Diagnostics</Link>
             <Link href="/ads-getting-clicks-but-no-sales" className="hover:text-accent transition-colors">Clicks But No Sales</Link>
-            <Link href="/pricing" className="hover:text-accent transition-colors">Self-Implementation Kit Pricing</Link>
+            <Link href="/pricing" className="hover:text-accent transition-colors">Repair Sprint Pricing</Link>
           </footer>
 
         </article>

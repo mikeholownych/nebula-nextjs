@@ -25,7 +25,7 @@ async function sendSaleAlert(message: string): Promise<void> {
   }
 }
 
-// The exact One-Leak Self-Implementation Kit price, in cents. Other live Stripe prices
+// The exact One-Leak Repair Sprint price, in cents. Other live Stripe prices
 // still receive a sale alert, but only this amount creates a self-implementation-kit
 // kickoff. The first customer loops are intentionally manual: the persisted
 // purchase and fulfillment state are the source of truth. Canonical receipts
@@ -346,7 +346,7 @@ export async function POST(request: NextRequest) {
     try {
       await deliverPromptPack(auditId, customerEmail, session.id)
     } catch (err) {
-      console.error('Self-implementation kit delivery failed:', err)
+      console.error('repair sprint delivery failed:', err)
       if (session.metadata?.analytics_consent === 'all') {
         captureServerException(err, { route: 'POST /api/webhooks/stripe', properties: { stripe_session_id: session.id, phase: 'fulfillment' } })
       }

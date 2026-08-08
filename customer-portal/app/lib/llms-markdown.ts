@@ -90,7 +90,7 @@ const pricingMarkdown = markdownPage(
   '/pricing',
   `Nebula sells one thing: fixing landing page conversion leaks for founders who are spending on ads and not converting.
 
-## One-Leak Self-Implementation Kit — $${(fixPack.priceCents / 100).toFixed(0)} (one-time)
+## One-Leak Repair Sprint — $${(fixPack.priceCents / 100).toFixed(0)} (one-time)
 
 - One landing page, one high-confidence page-level repair selected from your free audit.
 - Delivery: ${fixPack.delivery.artifact} via ${fixPack.delivery.method} (${fixPack.delivery.timing}).
@@ -137,7 +137,7 @@ const aboutMarkdown = markdownPage(
   '/about',
   `Mike Holownych founded Nebula Components to provide evidence-backed landing page diagnosis and bounded remediation materials. The operating premise: most landing page failures are diagnosable, they follow repeating patterns, and they can be fixed. The problem is not the ad — it is the page.
 
-The free audit returns documented conversion checks with observable evidence. The One-Leak Self-Implementation Kit ($97) supplies a tailored change for one high-confidence finding; the customer or their developer implements it, with a 30-day re-audit included. Nebula publishes public teardowns as evidence-based content and maintains Citable, an open-source CLI for search and AI discoverability governance.
+The free audit returns documented conversion checks with observable evidence. The One-Leak Repair Sprint ($97) supplies a tailored change for one high-confidence finding; the customer or their developer implements it, with a 30-day re-audit included. Nebula publishes public teardowns as evidence-based content and maintains Citable, an open-source CLI for search and AI discoverability governance.
 
 LinkedIn: https://linkedin.com/in/mikeholownych
 GitHub: https://github.com/mikeholownych`

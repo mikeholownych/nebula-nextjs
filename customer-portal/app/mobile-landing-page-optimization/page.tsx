@@ -162,7 +162,7 @@ const relatedLinks = [
   { href: '/page-speed-conversion', title: 'Page Speed and Conversion' },
   { href: '/landing-page-cta-audit', title: 'Landing Page CTA Audit' },
   { href: '/ads-getting-clicks-but-no-sales', title: 'Ads Getting Clicks But No Sales' },
-  { href: '/pricing', title: 'Self-Implementation Kit Pricing' },
+  { href: '/pricing', title: 'Repair Sprint Pricing' },
 ]
 
 export default function MobileLandingPageOptimization() {

@@ -20,11 +20,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#e2e8f0;line-height:1.6;min-height:100vh}
+    body{font-family:'Inter',sans-serif;background:#0a0f14;color:#e2e8f0;line-height:1.6;min-height:100vh}
     .container{max-width:1200px;margin:0 auto;padding:0 24px}
     
     /* Top bar */
-    .top-bar{background:linear-gradient(90deg,#6366f1,#22d3ee);padding:8px;text-align:center;font-size:0.75rem;font-weight:600}
+    .top-bar{background:linear-gradient(90deg,#009980,#33d4b8);padding:8px;text-align:center;font-size:0.75rem;font-weight:600}
     .top-bar a{color:#fff;text-decoration:none}
 
     /* Layout */
@@ -38,7 +38,7 @@
     .field{margin-bottom:14px}
     .field label{display:block;font-size:0.6875rem;font-weight:600;color:#94a3b8;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.03em}
     .field input,.field textarea{width:100%;padding:9px 12px;background:#080812;border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:#e2e8f0;font-family:inherit;font-size:0.8125rem;outline:none;transition:border-color 0.2s}
-    .field input:focus,.field textarea:focus{border-color:#a5b4fc}
+    .field input:focus,.field textarea:focus{border-color:#7dd3fc}
     .field textarea{resize:vertical;min-height:50px}
     .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
@@ -54,8 +54,8 @@
     .feature-list{margin-top:8px}
     .feature-item{display:flex;align-items:center;gap:8px;margin-bottom:6px}
     .feature-item input[type="text"]{flex:1;padding:6px 10px;background:#080812;border:1px solid rgba(255,255,255,0.08);border-radius:6px;color:#e2e8f0;font-family:inherit;font-size:0.75rem;outline:none;transition:border-color 0.2s}
-    .feature-item input[type="text"]:focus{border-color:#a5b4fc}
-    .feature-item .f-check{width:16px;height:16px;accent-color:#a5b4fc;cursor:pointer;flex-shrink:0}
+    .feature-item input[type="text"]:focus{border-color:#7dd3fc}
+    .feature-item .f-check{width:16px;height:16px;accent-color:#7dd3fc;cursor:pointer;flex-shrink:0}
 
     /* Toggle switch for Most Popular */
     .toggle-wrap{display:flex;align-items:center;gap:8px}
@@ -68,7 +68,7 @@
     .toggle input:checked + .slider::before{transform:translateX(16px);background-color:#fff}
 
     .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:8px;font-size:0.8125rem;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;text-decoration:none}
-    .btn-primary{background:linear-gradient(135deg,#6366f1,#4f46e5);color:#fff}
+    .btn-primary{background:linear-gradient(135deg,#009980,#009980);color:#fff}
     .btn-primary:hover{transform:translateY(-2px)}
     .btn-outline{background:transparent;color:#818cf8;border:1px solid rgba(99,102,241,0.3)}
     .btn-outline:hover{background:rgba(99,102,241,0.08)}
@@ -347,11 +347,11 @@ function generatePricing(){
 
   return `<!DOCTYPE html><html><head><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#e2e8f0;min-height:100vh;display:flex;align-items:center;justify-content:center}
+    body{font-family:'Inter',sans-serif;background:#0a0f14;color:#e2e8f0;min-height:100vh;display:flex;align-items:center;justify-content:center}
     .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;padding:60px 24px;position:relative}
     @media(max-width:900px){.pricing{grid-template-columns:1fr;max-width:400px}}
-    .pricing::before{content:'';position:absolute;width:600px;height:600px;background:#4f46e5;filter:blur(150px);opacity:0.08;top:-300px;left:-200px;border-radius:50%;pointer-events:none}
-    .pricing::after{content:'';position:absolute;width:400px;height:400px;background:#22d3ee;filter:blur(150px);opacity:0.06;bottom:-200px;right:-150px;border-radius:50%;pointer-events:none}
+    .pricing::before{content:'';position:absolute;width:600px;height:600px;background:#009980;filter:blur(150px);opacity:0.08;top:-300px;left:-200px;border-radius:50%;pointer-events:none}
+    .pricing::after{content:'';position:absolute;width:400px;height:400px;background:#33d4b8;filter:blur(150px);opacity:0.06;bottom:-200px;right:-150px;border-radius:50%;pointer-events:none}
     .card{background:linear-gradient(180deg,rgba(255,255,255,0.04) 0%,rgba(255,255,255,0.01) 100%);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:32px 24px;position:relative;transition:transform 0.3s,box-shadow 0.3s;z-index:1;display:flex;flex-direction:column}
     .card:hover{transform:translateY(-4px);box-shadow:0 12px 48px rgba(99,102,241,0.12)}
     .card.popular{border:1px solid rgba(245,158,11,0.3);background:linear-gradient(180deg,rgba(245,158,11,0.05) 0%,rgba(245,158,11,0.01) 100%);box-shadow:0 8px 32px rgba(245,158,11,0.08)}
@@ -366,7 +366,7 @@ function generatePricing(){
     .feature .icon{font-size:0.875rem;flex-shrink:0}
     .feature-off{color:#94a3b8}
     .btn{display:block;text-align:center;padding:12px 20px;border-radius:10px;font-size:0.875rem;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;text-decoration:none;margin-top:24px;width:100%}
-    .btn-primary{background:linear-gradient(135deg,#6366f1,#4f46e5);color:#fff;box-shadow:0 4px 20px rgba(99,102,241,0.3)}
+    .btn-primary{background:linear-gradient(135deg,#009980,#009980);color:#fff;box-shadow:0 4px 20px rgba(99,102,241,0.3)}
     .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(99,102,241,0.45)}
     .btn-secondary{background:rgba(255,255,255,0.06);color:#e2e8f0;border:1px solid rgba(255,255,255,0.1)}
     .btn-secondary:hover{background:rgba(255,255,255,0.1)}

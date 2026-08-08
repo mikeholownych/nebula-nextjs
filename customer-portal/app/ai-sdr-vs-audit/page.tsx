@@ -91,7 +91,7 @@ export default function AiSdrVsAuditPage() {
             </thead>
             <tbody>
               {[
-                { label: 'Entry cost', zamp: '$25k–$75k pilot', nebula: 'Free (or $97 self-implementation kit)' },
+                { label: 'Entry cost', zamp: '$25k–$75k pilot', nebula: 'Free (or $97 repair sprint)' },
                 { label: 'Time to value', zamp: '4–10 weeks', nebula: 'Audit completion time varies by page and service load' },
                 { label: 'Purchase motion', zamp: 'Book a demo → sales cycle → legal review', nebula: 'Self-serve checkout.' },
                 { label: 'What it evaluates', zamp: 'Outbound volume and sequencing', nebula: 'Landing-page conversion signals' },
@@ -147,7 +147,7 @@ export default function AiSdrVsAuditPage() {
           <li><strong>Run a free audit.</strong> Automated URL submission and evidence-backed scoring are live — no signup required.</li>
           <li>
             <strong>Fix what&apos;s broken.</strong> The free kit shows you what to change.
-            {fixPackPrice && ` The ${fixPackPrice} One-Leak Self-Implementation Kit delivers a tailored kit for one high-confidence page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition.`}
+            {fixPackPrice && ` The ${fixPackPrice} One-Leak Repair Sprint delivers a tailored kit for one high-confidence page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition.`}
           </li>
           <li><strong>Measure the result.</strong> Re-audit the page and compare evidence before deciding whether to add more traffic.</li>
           <li><strong>Then consider an AI SDR.</strong> Use the measured baseline to decide whether additional outbound traffic is justified; an audit cannot guarantee conversion.</li>
