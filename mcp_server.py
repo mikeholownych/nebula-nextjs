@@ -79,6 +79,72 @@ atexit.register(posthog.shutdown)
 signal.signal(signal.SIGTERM, lambda *_: sys.exit(0))
 
 
+# ── API Key rate limiting ──────────────────────────────────────────────────────
+#
+# Free (no key):  10 audit tool calls per IP per day
+# Keyed (nbk_…):  quota enforced by the platform API key service
+#
+# The MCP server is stateless per-request; we validate against the platform
+# API rather than re-implementing the quota logic here.
+
+import collections, threading, time as _time
+
+_FREE_DAILY_LIMIT = 10
+_free_usage: dict[str, list[float]] = collections.defaultdict(list)  # ip → timestamps
+_free_lock = threading.Lock()
+
+def _check_free_quota(ip: str) -> bool:
+    """Return True if the request is within free-tier limits."""
+    now = _time.time()
+    day_ago = now - 86400
+    with _free_lock:
+        _free_usage[ip] = [t for t in _free_usage[ip] if t > day_ago]
+        if len(_free_usage[ip]) >= _FREE_DAILY_LIMIT:
+            return False
+        _free_usage[ip].append(now)
+    return True
+
+
+def _validate_api_key(raw_key: str) -> bool:
+    """Validate a Bearer key against the platform API. Returns True if valid."""
+    import urllib.request, json as _json
+    try:
+        req = urllib.request.Request(
+            "http://127.0.0.1:8001/workspace/api-keys/validate",
+            headers={"Authorization": f"Bearer {raw_key}"},
+        )
+        with urllib.request.urlopen(req, timeout=3) as resp:
+            data = _json.loads(resp.read())
+            return data.get("valid") is True
+    except Exception:
+        return False
+
+
+def _auth_check(tool_name: str = "run_audit") -> str | None:
+    """
+    Check API key or free-tier quota.
+    Returns None if allowed, or an error string if denied.
+    FastMCP doesn't yet expose per-request headers in sync tools,
+    so we read the NEBULA_API_KEY env var set by the client config,
+    or fall back to free-tier IP limiting via a sentinel IP.
+    """
+    raw_key = os.environ.get("NEBULA_API_KEY", "").strip()
+    if raw_key and raw_key.startswith("nbk_"):
+        if _validate_api_key(raw_key):
+            return None
+        return (
+            "Invalid or expired API key. "
+            "Generate a key at https://nebulacomponents.com/workspace?tab=settings"
+        )
+    # Free tier — use process-level counter (one MCP server process per client)
+    if _check_free_quota("default"):
+        return None
+    return (
+        f"Free tier limit reached ({_FREE_DAILY_LIMIT} audits/day via MCP). "
+        "Upgrade at https://nebulacomponents.com/pricing or set NEBULA_API_KEY."
+    )
+
+
 # ── Helpers ────────────────────────────────────────────────────────────────────
 
 def _run_audit_engine(url: str) -> dict:
@@ -158,6 +224,9 @@ def run_audit(url: str) -> str:
         url: The public URL to audit (e.g. https://example.com/landing-page)
     """
     try:
+        denied = _auth_check("run_audit")
+        if denied:
+            return f"⛔ {denied}"
         audit = _run_audit_engine(url)
         return _format_audit(audit, url)
     except Exception as e:
@@ -177,6 +246,9 @@ def compare_audits(url_a: str, url_b: str) -> str:
         url_b: Second URL to audit (comparison target)
     """
     try:
+        denied = _auth_check("compare_audits")
+        if denied:
+            return f"⛔ {denied}"
         audit_a = _run_audit_engine(url_a)
         audit_b = _run_audit_engine(url_b)
 

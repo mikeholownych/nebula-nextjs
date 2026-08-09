@@ -113,6 +113,7 @@ from platform_api.competitor.routes import router as competitor_router
 from platform_api.audit.rewrite_routes import router as rewrite_router
 from platform_api.experiment.routes import router as experiment_router
 from platform_api.routes.leads_api import router as leads_router
+from platform_api.routes.api_key_routes import router as api_key_router
 
 app.include_router(auth_router, prefix="/api")
 app.include_router(orgs_router)
@@ -128,6 +129,7 @@ app.include_router(competitor_router)
 app.include_router(rewrite_router)
 app.include_router(experiment_router)
 app.include_router(leads_router)
+app.include_router(api_key_router)
 
 
 # Exception handlers - order matters

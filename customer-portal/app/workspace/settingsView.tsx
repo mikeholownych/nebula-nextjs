@@ -567,6 +567,9 @@ export default function SettingsView({ email }: { email: string }) {
           <p className="mt-2 text-xs text-fg-dim">Auto-detected from your browser. Changes save automatically.</p>
         </div>
       </section>
+
+      {/* API Keys */}
+      <ApiKeysSection email={email} />
     </div>
   )
 }
@@ -721,6 +724,230 @@ function CompetitorSection({ showToast }: { showToast: (msg: string) => void }) 
           </div>
         </div>
       </div>
+    </section>
+  )
+}
+
+// ── API Keys ──────────────────────────────────────────────────────────
+
+interface ApiKey {
+  id: string
+  key_prefix: string
+  label: string
+  plan: string
+  daily_quota: number
+  used_today: number
+  last_used_at: string | null
+  created_at: string
+}
+
+interface ApiKeysState {
+  keys: ApiKey[]
+  plan: string
+  limit: number
+  quota_per_key_per_day: number
+  can_create: boolean
+}
+
+const PLAN_LABELS: Record<string, string> = {
+  free: 'Free',
+  pro: 'Pro',
+  growth: 'Growth',
+  agency: 'Agency',
+}
+
+function ApiKeysSection({ email }: { email: string }) {
+  const [state, setState] = useState<ApiKeysState | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [creating, setCreating] = useState(false)
+  const [newLabel, setNewLabel] = useState('')
+  const [newKey, setNewKey] = useState<string | null>(null)
+  const [revoking, setRevoking] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [copied, setCopied] = useState(false)
+
+  const load = useCallback(async () => {
+    setLoading(true)
+    try {
+      const res = await fetch(`/api/workspace/api-keys?email=${encodeURIComponent(email)}`)
+      if (!res.ok) throw new Error('Failed to load')
+      const data = await res.json()
+      setState(data)
+    } catch {
+      setError('Could not load API keys')
+    } finally {
+      setLoading(false)
+    }
+  }, [email])
+
+  useEffect(() => { load() }, [load])
+
+  const handleCreate = async () => {
+    setCreating(true)
+    setError(null)
+    setNewKey(null)
+    try {
+      const res = await fetch('/api/workspace/api-keys', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, label: newLabel || 'Default' }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Failed to create')
+      setNewKey(data.key)
+      setNewLabel('')
+      await load()
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Failed to create key')
+    } finally {
+      setCreating(false)
+    }
+  }
+
+  const handleRevoke = async (keyId: string) => {
+    setRevoking(keyId)
+    try {
+      const res = await fetch(
+        `/api/workspace/api-keys/${keyId}?email=${encodeURIComponent(email)}`,
+        { method: 'DELETE' }
+      )
+      if (!res.ok) throw new Error('Failed to revoke')
+      await load()
+    } catch {
+      setError('Failed to revoke key')
+    } finally {
+      setRevoking(null)
+    }
+  }
+
+  const copyKey = async () => {
+    if (!newKey) return
+    await navigator.clipboard.writeText(newKey)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  const isPaidPlan = state && ['pro', 'growth', 'agency'].includes(state.plan)
+
+  return (
+    <section>
+      <h2 className="mb-1 text-base font-semibold text-fg">API Keys</h2>
+      <p className="mb-4 text-sm text-fg-muted">
+        Use API keys to authenticate programmatic access and MCP tool calls.
+        Keys are plan-scoped — quota resets daily at UTC midnight.
+      </p>
+
+      {/* Upgrade gate for free plan */}
+      {!loading && !isPaidPlan && (
+        <div className="rounded-xl border border-border bg-bg-elevated px-5 py-5">
+          <p className="text-sm text-fg-muted mb-3">
+            API key access requires a <strong className="text-fg">Pro plan</strong> or above.
+          </p>
+          <a
+            href="/pricing"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
+          >
+            Upgrade to unlock API access →
+          </a>
+          <p className="mt-3 text-xs text-fg-dim">
+            Pro: 1 key, 50 calls/day · Growth: 3 keys, 200 calls/day · Agency: 10 keys, unlimited
+          </p>
+        </div>
+      )}
+
+      {/* New key banner */}
+      {newKey && (
+        <div className="mb-4 rounded-xl border border-accent/40 bg-accent/5 px-5 py-4">
+          <p className="mb-2 text-sm font-semibold text-accent">
+            ⚠️ Copy this key now — it will not be shown again.
+          </p>
+          <div className="flex items-center gap-2">
+            <code className="flex-1 rounded-lg border border-border bg-bg px-3 py-2 text-xs font-mono text-fg break-all">
+              {newKey}
+            </code>
+            <button
+              onClick={copyKey}
+              className="shrink-0 rounded-lg border border-border bg-bg-elevated px-3 py-2 text-xs font-semibold text-fg transition-colors hover:bg-bg-panel"
+            >
+              {copied ? '✓ Copied' : 'Copy'}
+            </button>
+          </div>
+          <p className="mt-2 text-xs text-fg-dim">
+            Set as <code className="bg-bg-panel px-1 rounded text-fg">NEBULA_API_KEY</code> in your MCP client config.
+          </p>
+        </div>
+      )}
+
+      {isPaidPlan && !loading && state && (
+        <>
+          {/* Existing keys */}
+          <div className="rounded-xl border border-border bg-bg-elevated divide-y divide-border mb-4">
+            {state.keys.length === 0 && (
+              <p className="px-5 py-4 text-sm text-fg-dim">No API keys yet.</p>
+            )}
+            {state.keys.map((k) => (
+              <div key={k.id} className="flex items-center justify-between gap-4 px-5 py-4">
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-sm font-semibold text-fg">{k.label}</span>
+                    <code className="text-xs font-mono text-fg-dim bg-bg-panel px-1.5 py-0.5 rounded">
+                      {k.key_prefix}…
+                    </code>
+                    <span className="text-xs text-fg-dim uppercase tracking-wide">
+                      {PLAN_LABELS[k.plan] ?? k.plan}
+                    </span>
+                  </div>
+                  <p className="mt-0.5 text-xs text-fg-dim">
+                    {k.used_today} / {k.daily_quota === -1 ? '∞' : k.daily_quota} calls today
+                    {k.last_used_at && ` · last used ${new Date(k.last_used_at).toLocaleDateString()}`}
+                  </p>
+                </div>
+                <button
+                  onClick={() => handleRevoke(k.id)}
+                  disabled={revoking === k.id}
+                  className="shrink-0 rounded-lg border border-danger/30 bg-bg-elevated px-3 py-1.5 text-xs font-semibold text-danger transition-colors hover:bg-danger-dim disabled:opacity-50"
+                >
+                  {revoking === k.id ? 'Revoking…' : 'Revoke'}
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {/* Create new key */}
+          {state.can_create ? (
+            <div className="rounded-xl border border-border bg-bg-elevated px-5 py-4">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-fg-dim">
+                Create new key ({state.keys.length}/{state.limit})
+              </p>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="Label (e.g. Production, Claude Desktop)"
+                  value={newLabel}
+                  onChange={(e) => setNewLabel(e.target.value)}
+                  className="flex-1 rounded-lg border border-border bg-bg-panel px-3 py-2 text-sm text-fg placeholder:text-fg-dim focus:border-accent focus:outline-none"
+                />
+                <button
+                  onClick={handleCreate}
+                  disabled={creating}
+                  className="shrink-0 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg transition-colors hover:bg-accent-light disabled:opacity-60"
+                >
+                  {creating ? 'Creating…' : 'Create key'}
+                </button>
+              </div>
+              <p className="mt-2 text-xs text-fg-dim">
+                Each key allows {state.quota_per_key_per_day === -1 ? 'unlimited' : state.quota_per_key_per_day} calls/day.
+              </p>
+            </div>
+          ) : (
+            <p className="text-xs text-fg-dim px-1">
+              Key limit reached ({state.limit}/{state.limit}). Revoke an existing key to create a new one.
+            </p>
+          )}
+
+          {error && <p className="mt-3 text-xs text-danger">{error}</p>}
+        </>
+      )}
     </section>
   )
 }
