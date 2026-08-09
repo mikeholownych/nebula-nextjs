@@ -298,12 +298,36 @@ async def produce_video(page, audit, url=None):
                 if clip:
                     broll_clips[idx] = clip
 
+    # Capture page evidence frames for teardown format
+    # evidence_frames: {finding_key: Path} — used when visual == "evidence_<key>"
+    evidence_frames: dict[str, Path] = {}
+    if any(s.get("visual", "").startswith("evidence_") for s in script["segments"]):
+        try:
+            from yt_channel.page_evidence import capture_finding_evidence
+            findings = audit.get("findings") or audit.get("opp_matrix") or []
+            evidence_frames = await capture_finding_evidence(
+                url or "", findings, job_dir, max_findings=5
+            )
+            logger.info(f"[produce] Evidence frames captured: {list(evidence_frames.keys())}")
+        except Exception as _ev_err:
+            logger.warning(f"[produce] Evidence capture failed (non-fatal): {_ev_err}")
+
     frames = []
     for i, seg in enumerate(script["segments"]):
         dim_key = seg["dimension"]
         visual_type = seg["visual"]
 
-        if visual_type == "intro_card":
+        # Evidence frames: use captured screenshot if available
+        if visual_type.startswith("evidence_"):
+            ev_key = visual_type.replace("evidence_", "")
+            ev_path = evidence_frames.get(ev_key) or evidence_frames.get("above_fold")
+            if ev_path and ev_path.exists():
+                img = Image.open(ev_path).convert("RGB")
+                img = img.resize((W, H), Image.LANCZOS) if img.size != (W, H) else img
+            else:
+                # Fallback: dim card with the page screenshot bg
+                img = make_intro_card(domain, overall, grade, bg)
+        elif visual_type == "intro_card":
             img = make_intro_card(domain, overall, grade, bg)
         elif visual_type == "score_card":
             band = "critical" if overall < 4 else "needs work" if overall < 6.5 else "decent" if overall < 8 else "strong"
@@ -324,12 +348,13 @@ async def produce_video(page, audit, url=None):
             # Fallback to intro-style
             img = make_intro_card(domain, overall, grade, bg)
 
-        # Phase 3: composite over B-roll when available
-        broll_clip = broll_clips.get(i)
-        if broll_clip:
-            img = composite_over_broll(img, broll_clip,
-                                       timestamp_s=1.0 + (i % 3) * 0.5,
-                                       tmp_dir=frames_dir)
+        # Phase 3: composite over B-roll when available (skip for evidence frames)
+        if not visual_type.startswith("evidence_"):
+            broll_clip = broll_clips.get(i)
+            if broll_clip:
+                img = composite_over_broll(img, broll_clip,
+                                           timestamp_s=1.0 + (i % 3) * 0.5,
+                                           tmp_dir=frames_dir)
 
         frame_path = frames_dir / f"frame_{i:04d}.png"
         img.save(frame_path)

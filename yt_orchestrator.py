@@ -216,17 +216,18 @@ async def produce(url=None, dry_run=False, publish=True, script_format="standard
     logger.info(f"Producing long-form video + Short (format={script_format})...")
 
     # Inject live-audit script format when requested
-    _produce_mod = None
-    _produce_short_mod = None
-    _orig_gen = None
-    _orig_short_gen = None
-    if script_format == "live":
-        from yt_channel.live_audit_script import generate_live_script, generate_live_short_script
-        import yt_channel.produce as _produce_mod
-        import yt_channel.produce_short as _produce_short_mod
-        _orig_gen = _produce_mod.generate_script
-        _orig_short_gen = getattr(_produce_short_mod, "generate_short_script", None)
-        _produce_mod.generate_script = lambda page, audit, url=None: generate_live_script(audit, url=url or target_url)
+    import yt_channel.produce as _produce_mod
+    import yt_channel.produce_short as _produce_short_mod
+    _orig_gen = _produce_mod.generate_script
+    _orig_short_gen = getattr(_produce_short_mod, "generate_short_script", None)
+    if script_format in ("live", "teardown"):
+        if script_format == "teardown":
+            from yt_channel.teardown_script import generate_teardown_script
+            from yt_channel.live_audit_script import generate_live_short_script
+            _produce_mod.generate_script = lambda page, audit, url=None: generate_teardown_script(audit, url=url or target_url)
+        else:
+            from yt_channel.live_audit_script import generate_live_script, generate_live_short_script
+            _produce_mod.generate_script = lambda page, audit, url=None: generate_live_script(audit, url=url or target_url)
         if _orig_short_gen:
             _produce_short_mod.generate_short_script = lambda page, audit, url=None: generate_live_short_script(audit, url=url or target_url)
 
@@ -236,7 +237,7 @@ async def produce(url=None, dry_run=False, publish=True, script_format="standard
     )
 
     # Restore original script generators
-    if script_format == "live" and _produce_mod is not None and _orig_gen is not None:
+    if script_format in ("live", "teardown") and _produce_mod is not None and _orig_gen is not None:
         _produce_mod.generate_script = _orig_gen
         if _orig_short_gen is not None and _produce_short_mod is not None:
             _produce_short_mod.generate_short_script = _orig_short_gen
@@ -324,8 +325,8 @@ def main():
     parser.add_argument("--url", help="Audit a specific URL")
     parser.add_argument("--dry-run", action="store_true", help="Generate video only")
     parser.add_argument("--no-publish", action="store_true", help="Skip upload even if auth exists")
-    parser.add_argument("--format", choices=["standard", "live"], default="standard",
-                        help="Script format: standard (dimension-walkthrough) or live (narrated teardown with money math)")
+    parser.add_argument("--format", choices=["standard", "live", "teardown"], default="standard",
+                        help="Script format: standard | live (money-math) | teardown (story-first with page evidence)")
     args = parser.parse_args()
 
     result = asyncio.run(produce(
