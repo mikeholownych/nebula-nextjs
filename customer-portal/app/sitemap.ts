@@ -4,6 +4,7 @@ import { getPublishedCitableRoutes } from '@/app/resources/citable/content'
 import { getArticles } from './learning-centre/lib/getArticles'
 import { TEARDOWNS } from './teardowns/[slug]/data'
 import { COMPARISONS } from './vs/[slug]/data'
+import { PRICING_GUIDE_SLUGS } from './pricing-guides/data'
 
 export const dynamic = 'force-dynamic'
 
@@ -23,6 +24,7 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
       '/why-is-my-landing-page-not-converting',
       '/ads-getting-clicks-but-no-sales',
       '/best-landing-page-audit-tools',
+      '/landing-page-audit-tools-pricing',
       '/landing-page-message-match',
       '/landing-page-trust-signals',
       '/landing-page-cta-audit',
@@ -129,7 +131,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
+  const pricingGuideEntries: MetadataRoute.Sitemap = PRICING_GUIDE_SLUGS.map((slug) => ({
+    url: `${BASE_URL}/pricing-guides/${slug}`,
+    changeFrequency: 'yearly',
+    priority: 0.6,
+  }))
+
   // lastModified is intentionally omitted until each content object has a
   // truthful, durable publication/update timestamp. Build time is not freshness.
-  return [homeEntry, ...coreEntries, ...articleEntries, ...playbookEntries, ...caseStudyEntries, ...citableEntries, ...teardownEntries, ...comparisonEntries]
+  return [homeEntry, ...coreEntries, ...articleEntries, ...playbookEntries, ...caseStudyEntries, ...citableEntries, ...teardownEntries, ...comparisonEntries, ...pricingGuideEntries]
 }

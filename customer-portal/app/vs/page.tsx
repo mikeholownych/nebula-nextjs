@@ -48,6 +48,21 @@ export default function VsIndexPage() {
           <p className="mt-4 text-xs text-accent">Read the guide →</p>
         </Link>
 
+        <Link
+          href="/landing-page-audit-tools-pricing"
+          className="mt-4 block rounded-2xl border border-border bg-bg-panel p-6 transition-colors hover:border-accent"
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Pricing</p>
+          <h2 className="mt-2 text-xl font-bold text-fg">
+            Landing Page Audit Tool Pricing (2026): What 8 Tools Really Cost
+          </h2>
+          <p className="mt-3 text-sm text-fg-muted leading-relaxed">
+            Verified pricing for every tool on this list — free tiers, subscription traps, and the honest
+            alternative.
+          </p>
+          <p className="mt-4 text-xs text-accent">See the pricing breakdown →</p>
+        </Link>
+
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {comparisons.map((c) => (
             <Link

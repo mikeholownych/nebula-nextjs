@@ -303,6 +303,12 @@ export default function BestLandingPageAuditToolsPage() {
           </table>
         </section>
 
+        <p className="mt-6 text-center">
+          <Link href="/landing-page-audit-tools-pricing" className="text-sm font-semibold text-accent hover:underline">
+            See the verified pricing for all 8 tools →
+          </Link>
+        </p>
+
         {/* Why most tools miss the paid-traffic problem */}
         <section className="mt-14 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Why most audit tools miss the paid-traffic problem</h2>
