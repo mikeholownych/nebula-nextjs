@@ -10,6 +10,16 @@ from typing import Optional, List
 from uuid import UUID
 import json
 
+# Internal/founder accounts excluded from all public-facing stats and counts.
+# Audits from these addresses are fully functional but do not inflate metrics.
+INTERNAL_EMAILS: frozenset[str] = frozenset({
+    "mike.holownych@gmail.com",
+    "mcp-agent@nebula.internal",
+    "qa-workspace-20260803-001@example.invalid",
+    "e2e-crawler-test@example.com",
+    "test@example.com",
+})
+
 
 class AuditDB:
     """PostgreSQL database service for audit records"""
@@ -895,7 +905,9 @@ class AuditDB:
                     count(*) FILTER (WHERE status = 'completed') AS completed_audits,
                     avg(score) FILTER (WHERE status = 'completed' AND score IS NOT NULL) AS avg_score_raw
                 FROM audits
-                """
+                WHERE email != ALL($1::text[])
+                """,
+                list(INTERNAL_EMAILS),
             )
             completed = row['completed_audits'] or 0
             # The stored score is a composite that includes deprecated
@@ -917,7 +929,9 @@ class AuditDB:
                 FROM audits
                 WHERE status = 'completed'
                   AND score IS NOT NULL
-                """
+                  AND email != ALL($1::text[])
+                """,
+                list(INTERNAL_EMAILS),
             )
 
         if not rows:
@@ -1018,9 +1032,11 @@ class AuditDB:
                 WHERE status = 'completed'
                   AND findings IS NOT NULL
                   AND findings != '[]'
+                  AND email != ALL($1::text[])
                 ORDER BY completed_at DESC
                 LIMIT 1
-                """
+                """,
+                list(INTERNAL_EMAILS),
             )
             if not row:
                 return None

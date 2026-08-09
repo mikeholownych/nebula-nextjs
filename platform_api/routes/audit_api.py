@@ -217,12 +217,19 @@ async def run_audit(request: AuditRequest):
                 # Don't fail audit on track assignment error
                 print(f"[audit_api] Track assignment failed: {e}")
 
-        # Auto-send audit results email for real (non-anonymous) addresses.
+        # Auto-send audit results email for real (non-anonymous, non-internal) addresses.
         # Fire-and-forget: email failure must never block the audit response.
         _real_email = (
             request.email
             and "@invalid" not in request.email
             and request.email.strip()
+            and request.email.strip().lower() not in {
+                "mike.holownych@gmail.com",
+                "mcp-agent@nebula.internal",
+                "test@example.com",
+                "e2e-crawler-test@example.com",
+                "qa-workspace-20260803-001@example.invalid",
+            }
         )
         if _real_email:
             _send_email = str(request.email)
