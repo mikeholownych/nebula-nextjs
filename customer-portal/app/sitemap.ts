@@ -22,6 +22,7 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
       '/case-studies',
       '/why-is-my-landing-page-not-converting',
       '/ads-getting-clicks-but-no-sales',
+      '/best-landing-page-audit-tools',
       '/landing-page-message-match',
       '/landing-page-trust-signals',
       '/landing-page-cta-audit',

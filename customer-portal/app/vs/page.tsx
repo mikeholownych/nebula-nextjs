@@ -33,6 +33,21 @@ export default function VsIndexPage() {
           and where Nebula fits — so you can pick the right tool for your problem.
         </p>
 
+        <Link
+          href="/best-landing-page-audit-tools"
+          className="mt-8 block rounded-2xl border border-accent/20 bg-accent/5 p-6 transition-colors hover:border-accent"
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Full guide</p>
+          <h2 className="mt-2 text-xl font-bold text-fg">
+            Best Landing Page Audit Tools (2026): 8 Compared for Paid-Traffic Founders
+          </h2>
+          <p className="mt-3 text-sm text-fg-muted leading-relaxed">
+            The ranked list, pricing, and honest verdicts for Nebula, PageSpeed Insights, Hotjar, Crazy Egg,
+            SEMrush, Screaming Frog, HubSpot Website Grader, and Unbounce.
+          </p>
+          <p className="mt-4 text-xs text-accent">Read the guide →</p>
+        </Link>
+
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {comparisons.map((c) => (
             <Link
