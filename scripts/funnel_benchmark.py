@@ -43,6 +43,11 @@ FUNNEL_STEPS = [
     {"event": "checkout_page_viewed",    "label": "Checkout page",          "bench_low": 0.25},  # results->checkout
     {"event": "checkout_initiated",      "label": "Checkout initiated",     "bench_low": 0.50},  # checkout page->init
     {"event": "purchase_confirmed_viewed", "label": "Purchase confirmed",   "bench_low": 0.40},  # init->paid
+    # Ron pre-order benchmark (Chris Koerner l0Vqm0ZIySc 2026-08-09):
+    #  617 pre-orders at $10 deposit -> 270 paid members = 45% deposit->paid.
+    #  Nebula has NO deposit/pre-order step today, so this step is a
+    #  *capability* benchmark: if we add one, ~45% of depositors should pay.
+    {"event": "deposit_preorder",        "label": "Deposit/pre-order",      "bench_low": 0.45, "optional": True},
 ]
 
 
@@ -98,7 +103,13 @@ def analyze(days: int) -> dict:
         conv = (count / prev_count) if (prev_count and prev_count > 0) else None
         status = "ok"
         if conv is not None and step["bench_low"] is not None:
-            status = "LOW" if conv < step["bench_low"] else "ok"
+            # Optional steps (e.g. deposit/pre-order capability) are not
+            # flagged LOW when they don't exist yet — they're capability
+            # benchmarks, not leaks.
+            if step.get("optional") and count == 0:
+                status = "n/a"
+            else:
+                status = "LOW" if conv < step["bench_low"] else "ok"
         steps.append({
             "event": step["event"],
             "label": step["label"],
@@ -138,6 +149,12 @@ def render_text(r: dict) -> str:
         lines.append(f"  {s['label']:<28} {s['count']:>5}  {conv:>6}{bench}{flag}")
     lines.append("")
     lines.append(f"  Entry→Paid: {r['entry_to_paid_pct']}%  |  Paid: {r['paid']}")
+    deposit = next((s for s in r["steps"] if s["event"] == "deposit_preorder"), None)
+    if deposit and deposit["count"] == 0:
+        lines.append("  💡 No deposit/pre-order step — Ron benchmark: ~45% of")
+        lines.append("     $10 depositors convert to paid (617->270, Koerner Office).")
+        lines.append("     Consider a deposit offer for audit completers (email-gate")
+        lines.append("     leavers) before checkout.")
     if r["weakest"]:
         lines.append("")
         lines.append("  ⚠️ Below benchmark: " + ", ".join(r["weakest"]))

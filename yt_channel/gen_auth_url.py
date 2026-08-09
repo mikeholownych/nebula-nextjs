@@ -7,7 +7,8 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 CLIENT_SECRET_FILE = Path("yt_channel/creds/client_secret.json")
 VERIFIER_FILE = Path("yt_channel/creds/code_verifier.txt")
 SCOPES = ["https://www.googleapis.com/auth/youtube.upload",
-          "https://www.googleapis.com/auth/youtube"]
+          "https://www.googleapis.com/auth/youtube",
+          "https://www.googleapis.com/auth/youtube.force-ssl"]
 
 flow = InstalledAppFlow.from_client_secrets_file(
     str(CLIENT_SECRET_FILE), SCOPES,
