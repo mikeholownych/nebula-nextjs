@@ -168,9 +168,20 @@ def generate_short_script(page, audit, url=None):
         "seo_foundations": f"Google Ignoring Your Page? Here's Why #Shorts",
     }
     import hashlib
+    from yt_channel.title_score import pick_best
     style = "question" if int(hashlib.md5(f"{domain}|{worst}".encode()).hexdigest(), 16) % 2 else "declarative"
     hooks = question_hooks if style == "question" else title_hooks
-    title = hooks.get(worst, f"Landing Page Audit: {domain} — {worst_label} Breakdown #Shorts")
+    base = hooks.get(worst, f"Landing Page Audit: {domain} — {worst_label} Breakdown #Shorts")
+
+    # Generate 3-4 variants, score for click potential, pick the best
+    # (holy-trifecta title step; deterministic per domain).
+    declarative = title_hooks.get(worst, base)
+    questioning = question_hooks.get(worst, base)
+    specific = f"{domain} Scores {overall:.0f}/10 — Here's The Worst Issue #Shorts"
+    pain = f"Stop Losing Sales: {domain} Teardown ({overall:.0f}/10) #Shorts"
+    variants = list(dict.fromkeys([declarative, questioning, specific, pain, base]))
+    best = pick_best(variants, is_short=True, domain=domain, has_score=True, seed=f"{domain}|{worst}")
+    title = best.title
 
     description = (
         f"Free landing page audit: {domain}\n\n"

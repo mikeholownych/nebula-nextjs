@@ -271,11 +271,22 @@ async def run_pipeline(upload: bool = False, mode: str = "both"):
                     )
                     continue
 
+                # Per-video tags: domain + worst dimension + niche keywords
+                # (helps YouTube/advertisers classify; cheap, 20 seconds of
+                # effort per Shane's upload-package step).
+                tags = [
+                    "landing page audit", "landing page teardown", "CRO",
+                    "conversion optimization", "website audit",
+                    "landing page review",
+                    domain.replace("www.", ""),
+                    title.split(":")[0].split("—")[0].strip()[:30],
+                ]
                 log.info(f"Uploading {kind} to YouTube...")
                 video_id = upload_video(
                     video_path=str(path),
                     title=title,
                     description=description,
+                    tags=tags,
                     privacy="public",
                 )
                 if video_id:

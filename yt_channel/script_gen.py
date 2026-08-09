@@ -157,6 +157,15 @@ def generate_script(page, audit, url=None):
     else:
         title = f"How {domain} Turns Visitors Into Customers: Breakdown ({overall:.0f}/10)"
 
+    # Holy-trifecta title step: generate variants, score, pick best.
+    from yt_channel.title_score import pick_best
+    variant_pain = f"Your Landing Page Is Costing You Sales: {domain} Teardown ({overall:.0f}/10)"
+    variant_question = f"Is Your Landing Page Leaving Money On The Table? {domain} Audit ({overall:.0f}/10)"
+    variant_specific = f"{domain} Scores {overall:.0f}/10 — Landing Page Audit"
+    best = pick_best([title, variant_pain, variant_question, variant_specific],
+                     is_short=False, domain=domain, has_score=True, seed=domain)
+    title = best.title
+
     # ── Description ─────────────────────────────────────────────────
     desc_lines = [
         f"📊 Landing page audit for {domain}",
@@ -175,6 +184,37 @@ def generate_script(page, audit, url=None):
         "Your worst issue: {worst_label} ({worst_score:.0f}/10)".format(
             worst_label=worst_label,
             worst_score=min(data["score"] for _, data in sorted_dims)),
+        "",
+    ])
+
+    # Chapter timestamps (from segment timing — helps YouTube understand
+    # the video and gives viewers a jump menu).
+    def _mmss(sec: float) -> str:
+        m, s = divmod(int(sec), 60)
+        return f"{m}:{s:02d}"
+    seen = set()
+    chapters = ["Timestamps:"]
+    for seg in segments:
+        visual = seg.get("visual", "")
+        if visual == "intro_card":
+            label = "Intro"
+        elif visual == "score_card":
+            label = "Score Overview"
+        elif visual == "outro_card":
+            label = "Get Your Free Audit"
+        elif visual.startswith("dimension_"):
+            label = DIM_LABELS.get(seg.get("dimension"), seg.get("dimension", "").replace("_", " ").title())
+        else:
+            label = seg.get("dimension") or "Intro"
+        # One chapter per section (worst-dimension gets highlight + narrative
+        # segments — keep only the first, at the earliest timestamp).
+        if label in seen:
+            continue
+        seen.add(label)
+        chapters.append(f"{_mmss(seg['start'])} {label}")
+    desc_lines.append("\n".join(chapters))
+
+    desc_lines.extend([
         "",
         "Get your own free landing page audit — email the fix list to yourself:",
         "https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=video&utm_campaign={domain}".format(domain=domain),
