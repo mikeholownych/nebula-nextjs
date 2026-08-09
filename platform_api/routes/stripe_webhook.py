@@ -24,6 +24,7 @@ from platform_api.services.crm_hooks import purchase_completed, customer_churned
 router = APIRouter()
 
 _STRIPE_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET", "")
+_processed_event_ids: set[str] = set()  # in-process dedup; swap for Redis at scale
 
 
 def _verify_stripe_signature(payload: bytes, sig_header: str, secret: str) -> bool:
@@ -88,7 +89,18 @@ async def stripe_webhook(request: Request):
         raise HTTPException(status_code=400, detail="Invalid JSON")
 
     event_type = event.get("type", "")
+    event_id = event.get("id", "")  # Stripe event ID — use for dedup
     stripe_obj = event.get("data", {}).get("object", {})
+
+    # Dedup: check if this Stripe event was already processed
+    # Uses a simple in-process set for current volume; swap for Redis at scale
+    if event_id and event_id in _processed_event_ids:
+        return {"received": True, "type": event_type, "deduped": True}
+    if event_id:
+        _processed_event_ids.add(event_id)
+        # Prune set if it gets large (memory safety)
+        if len(_processed_event_ids) > 10_000:
+            _processed_event_ids.clear()
 
     # ── charge.succeeded ────────────────────────────────────────────────────
     if event_type == "charge.succeeded":
