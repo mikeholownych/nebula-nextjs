@@ -123,7 +123,7 @@ def _build_snippet(title, description, tags=None):
     }
 
 
-def upload_video(video_path, title, description, tags=None, privacy="public"):
+def upload_video(video_path, title, description, tags=None, privacy="public", notify_subscribers=True):
     """Upload a video to YouTube.
 
     Args:
@@ -132,13 +132,28 @@ def upload_video(video_path, title, description, tags=None, privacy="public"):
         description: Video description
         tags: List of tags
         privacy: "public", "unlisted", or "private"
+        notify_subscribers: True = 'publish to subscriptions feed + notify'
+            (Adam Ivy CghjIJ3wdZA #7). Default True is correct for a
+            single-ICP channel (our 1 subscriber IS the audience).
+            Set False for content that won't resonate with the full
+            subscriber base (e.g. a niche detour) so YouTube doesn't
+            show it to the wrong people first and kill initial reach.
 
     Returns:
         Video ID string, or None on failure
     """
     service = _get_authenticated_service()
     snippet = _build_snippet(title, description, tags)
-    body = {"snippet": snippet, "status": {"privacyStatus": privacy}}
+    body = {
+        "snippet": snippet,
+        "status": {
+            "privacyStatus": privacy,
+            "selfDeclaredMadeForKids": False,   # Adam Ivy #1: never 'made for kids'
+                                                  # unless content is literally for
+                                                  # toddlers (COPPA fine + comments off)
+            "notifySubscribers": notify_subscribers,
+        },
+    }
 
     media = MediaFileUpload(str(video_path), chunksize=-1, resumable=True)
 
