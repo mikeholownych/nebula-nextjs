@@ -142,10 +142,13 @@ def generate_script(page, audit, url=None):
         segments.append(seg)
         t = seg["end"]
 
-    # Call to action (8 seconds)
+    # Call to action (8 seconds) — ends with the verbal sign-off ritual
+    # (vidIQ Primal Branding): the same line every video, so viewers
+    # anticipate it. Also Brenda Turner voice: direct, one-to-one.
     cta = (
         f"Want your own audit? Get a free instant score at nebulacomponents dot com slash audit. "
-        f"Enter your email and the full fix list is sent straight to your inbox. No call, no credit card."
+        f"Enter your email and the full fix list is sent straight to your inbox. No call, no credit card. "
+        f"That's your number. Nebula's got your fix."
     )
     seg = {"start": t, "end": t + len(cta.split()) / WPS, "text": cta,
            "visual": "outro_card", "dimension": None}

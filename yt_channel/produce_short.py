@@ -279,14 +279,6 @@ def make_cta_card():
     return img
 
 
-# ── TTS ─────────────────────────────────────────────────────────────
-
-async def _tts(text, output_path):
-    import edge_tts
-    communicate = edge_tts.Communicate(text, voice="en-US-AriaNeural", rate="+15%")
-    await communicate.save(str(output_path))
-
-
 # ── Main pipeline ────────────────────────────────────────────────────
 
 async def produce_short(page, audit, url=None):
@@ -332,25 +324,50 @@ async def produce_short(page, audit, url=None):
         img.save(path)
         frames.append(path)
 
-    # 2. TTS
-    narration = " ".join(s["text"] for s in script["segments"])
-    audio_path = job_dir / "voiceover.mp3"
-    await _tts(narration, audio_path)
+    # 2. Sonic Foundation — per-segment TTS (pitch micro-variation),
+    #    silence trim, pacing gaps, transition whooshes, -14 LUFS.
+    from yt_channel.audio_engine import (
+        tts_segment, trim_silence, build_narration, build_sfx_track,
+        finalize, PITCH_CYCLE, GAP_S, SFX_LEVEL_DB, RATE_SHORT,
+    )
+    segs = script["segments"]
+    n = len(segs)
+    clips_dir = job_dir / "audio"
+    clips_dir.mkdir(exist_ok=True)
 
-    # 3. Probe audio duration
-    probe = subprocess.run([
-        "ffprobe", "-v", "error", "-show_entries", "format=duration",
-        "-of", "default=noprint_wrappers=1:nokey=1", str(audio_path)
-    ], capture_output=True, text=True)
-    audio_dur = float(probe.stdout.strip()) if probe.stdout.strip() else script["total_duration"]
+    clip_wavs, dur_actual = [], []
+    for i, seg in enumerate(segs):
+        pitch = PITCH_CYCLE[i % len(PITCH_CYCLE)]
+        raw = clips_dir / f"seg_{i:02d}.mp3"
+        wav = clips_dir / f"seg_{i:02d}.wav"
+        await tts_segment(seg["text"], raw, pitch_hz=pitch, rate=RATE_SHORT)
+        dur_actual.append(trim_silence(raw, wav))
+        clip_wavs.append(wav)
+
+    # Shorts have no brand sting — tight pacing gaps only.
+    gaps = [GAP_S] * n
+    gaps[-1] = 0.0
+    narration_wav = job_dir / "narration.wav"
+    build_narration(clip_wavs, gaps, narration_wav)
+
+    durations = []
+    offsets = []          # (timestamp, gain_db) whoosh events
+    cursor = 0.0
+    for i in range(n):
+        d_seg = dur_actual[i] + (gaps[i] if i < n - 1 else 0.0)
+        durations.append(d_seg)
+        if i < n - 1:
+            cursor += d_seg
+            offsets.append((cursor, SFX_LEVEL_DB))
+        else:
+            cursor += d_seg
+
+    sfx_wav = build_sfx_track(offsets, cursor, job_dir / "sfx.wav")
+    audio_path = job_dir / "voiceover.wav"
+    audio_dur = finalize(narration_wav, sfx_wav, audio_path)
 
     # 4. Motion assembly — Ken Burns per segment + fades, then mux audio
     from yt_channel.motion import assemble_motion_video
-    total_seg = script["total_duration"]
-    durations = [
-        (seg["end"] - seg["start"]) * (audio_dur / max(total_seg, 1))
-        for seg in script["segments"]
-    ]
     video_path = config.VIDEO_DIR / f"{job_id}.mp4"
     assemble_motion_video(
         frames, durations, audio_path, video_path, SW, SH,
