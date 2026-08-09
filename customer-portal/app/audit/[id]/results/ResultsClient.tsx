@@ -1159,8 +1159,53 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
         {/* Canonical offer: free audit → $97 One-Leak Repair Sprint */}
         <section id="remediation" className="scroll-mt-40 border-t border-border pt-16">
           <div className="space-y-6">
+          
+          {/* NEW: Before/After Proof Layer (Psychology: Remove risk perception) */}
+          {results.findings.length > 0 && (
+            <Card variant="elevated" className="border-accent/30 bg-accent/5">
+              <div className="mb-4">
+                <p className="text-sm font-semibold uppercase tracking-widest text-accent">Your Exact Fix</p>
+                <h3 className="mt-2 text-xl font-extrabold text-fg">See exactly what you are paying for</h3>
+              </div>
+              
+              {(() => {
+                const worst = [...results.findings].sort((a, b) => b.impact - a.impact)[0];
+                if (!worst) return null;
+                
+                return (
+                  <div className="space-y-4">
+                    <div>
+                      <p className="mb-2 text-sm font-semibold text-fg-muted">BEFORE (Your current issue)</p>
+                      <div className="rounded-lg border border-border bg-danger/5 p-4 font-mono text-sm leading-relaxed text-fg-muted">
+                        {worst.evidence?.measured ? (
+                          <p>{worst.evidence.measured.slice(0, 150)}{worst.evidence.measured.length > 150 ? "..." : ""}</p>
+                        ) : (
+                          <p className="italic">{worst.label}: not meeting threshold</p>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-center">
+                      <span className="text-2xl text-accent">↓</span>
+                    </div>
+                    
+                    <div>
+                      <p className="mb-2 text-sm font-semibold text-fg-muted">AFTER (Your fix - ready to paste)</p>
+                      <div className="rounded-lg border border-border bg-accent/5 p-4 font-mono text-sm leading-relaxed text-fg">
+                        <p>{worst.fix.slice(0, 150)}{worst.fix.length > 150 ? "..." : ""}</p>
+                      </div>
+                      <p className="mt-2 text-xs text-fg-muted">
+                        Exact copy/code/config. No rewrites needed. Paste it in and test.
+                      </p>
+                    </div>
+                  </div>
+                );
+              })()}
+            </Card>
+          )}
+          
           <h2 className="text-center text-2xl font-extrabold text-fg">
-            Know exactly which one thing to fix — and how to fix it.
+            Know exactly which one thing to fix and how to fix it.
           </h2>
 
           <Card variant="bordered" className="relative mx-auto max-w-md overflow-hidden border-accent">
@@ -1168,30 +1213,30 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
               <h3 className="mb-1 text-2xl font-extrabold text-fg">{REPAIR_SPRINT_OFFER.name}</h3>
               <p className="mb-2 text-2xl font-extrabold tabular-nums text-accent">${REPAIR_SPRINT_OFFER.priceUsd}</p>
               <p className="mb-4 max-w-[65ch] text-base leading-7 text-fg-muted">
-                Not a 12-point checklist. One specific fix for your highest-confidence finding — exact copy, code, or configuration change — ready to implement today.
+                Not a 12-point checklist. One specific fix for your highest-confidence finding - exact copy, code, or configuration change - ready to implement today.
               </p>
               <ul className="mb-5 space-y-2 text-sm text-fg-muted">
-                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">✓</span>One implementation-ready fix for your highest-impact leak</li>
-                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">✓</span>Exact copy, code, or configuration change — not generic advice</li>
-                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">✓</span><span><strong className="text-fg">Bonus:</strong> 30-day free re-audit to confirm the fix held</span></li>
-                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">✓</span><span><strong className="text-fg">Bonus:</strong> Your page compared with the current completed-audit benchmark sample</span></li>
+                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span>One implementation-ready fix for your highest-impact leak</li>
+                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span>Exact copy, code, or configuration change - not generic advice</li>
+                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span><span><strong className="text-fg">Bonus:</strong> 30-day free re-audit to confirm the fix held</span></li>
+                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span><span><strong className="text-fg">Bonus:</strong> Your page compared with the current completed-audit benchmark sample</span></li>
               </ul>
               <a
                 href={
                   unlocked && !sharedView
                     ? `/checkout?audit_id=${encodeURIComponent(auditId)}`
-                    : '#unlock'
+                    : "#unlock"
                 }
-                onClick={() => posthog.capture('audit_cta_clicked', {
+                onClick={() => posthog.capture("audit_cta_clicked", {
                   audit_id: auditId,
-                  cta: 'remediation_section',
+                  cta: "remediation_section",
                   unlocked,
                 })}
-                className="block w-full rounded-lg bg-accent px-4 py-2 text-center font-semibold text-bg transition-colors hover:bg-accent-light"
+                className="block w-full rounded-lg bg-danger px-4 py-2 text-center font-semibold text-white transition-colors hover:bg-danger-light"
               >
                 {unlocked && !sharedView
-                  ? `Get the fix — $${REPAIR_SPRINT_OFFER.priceUsd}`
-                  : 'Unlock this audit to select its repair'}
+                  ? `Stop the leak - $${REPAIR_SPRINT_OFFER.priceUsd}`
+                  : "Unlock this audit to select its repair"}
               </a>
             </div>
           </Card>
