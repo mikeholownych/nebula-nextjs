@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { Card } from '@/components/ui/Card'
+import NewsletterForm from './NewsletterForm'
 
 export const metadata: Metadata = {
   title: 'Newsletter — Nebula Components',
@@ -12,57 +13,10 @@ export const metadata: Metadata = {
 }
 
 export default function NewsletterPage() {
-  const getUTMParams = () => {
-    if (typeof window === 'undefined') return ''
-    const params = new URLSearchParams(window.location.search)
-    const utm_source = params.get('utm_source') || 'newsletter'
-    const utm_medium = params.get('utm_medium') || 'organic'
-    const utm_campaign = params.get('utm_campaign') || 'newsletter_signup'
-    return `?utm_source=${utm_source}&utm_medium=${utm_medium}&utm_campaign=${utm_campaign}`
-  }
-
-  const handleNewsletterSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const form = e.currentTarget
-    const email = (form.querySelector('#email') as HTMLInputElement)?.value
-    const role = (form.querySelector('#role') as HTMLSelectElement)?.value
-
-    // Get UTM params from URL or use defaults
-    const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '')
-    const utm_source = params.get('utm_source') || 'newsletter'
-    const utm_medium = params.get('utm_medium') || 'organic'
-    const utm_campaign = params.get('utm_campaign') || 'newsletter_signup'
-
-    try {
-      const response = await fetch('/api/newsletter/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email,
-          role: role || undefined,
-          referrer: utm_source,
-          utm_source,
-          utm_medium,
-          utm_campaign,
-        }),
-      })
-
-      if (response.ok) {
-        alert('✓ Check your email to confirm subscription')
-        form.reset()
-      } else {
-        alert('Error subscribing. Try again.')
-      }
-    } catch (err) {
-      console.error(err)
-      alert('Error subscribing.')
-    }
-  }
-
   return (
     <main className="min-h-screen bg-bg px-6 py-12">
       <div className="mx-auto max-w-3xl">
-        
+
         {/* Hero */}
         <section className="mb-16 text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-2">
@@ -75,7 +29,7 @@ export default function NewsletterPage() {
             Real findings from 847 audits. Every week: one pattern, one fix, one before/after.
           </p>
           <p className="text-base text-fg-muted max-w-[65ch] mx-auto leading-relaxed">
-            No hype. No fluff. Just what's actually costing you money.
+            No hype. No fluff. Just what&apos;s actually costing you money.
           </p>
         </section>
 
@@ -87,7 +41,7 @@ export default function NewsletterPage() {
               <h3 className="font-semibold text-fg">Specific Findings</h3>
             </div>
             <p className="text-sm text-fg-muted leading-relaxed">
-              Not "improve your CTA." We show: "This exact CTA phrasing beats your current one by 8%."
+              Not &quot;improve your CTA.&quot; We show: &quot;This exact CTA phrasing beats your current one by 8%.&quot;
             </p>
           </Card>
 
@@ -112,12 +66,12 @@ export default function NewsletterPage() {
           </Card>
         </section>
 
-        {/* Sample Issues (Pattern Library) */}
+        {/* Sample Issues */}
         <section className="mb-16">
           <h2 className="text-2xl font-extrabold text-fg mb-6">
             Recent Findings From Our Audits
           </h2>
-          
+
           <div className="space-y-4">
             {[
               {
@@ -136,7 +90,7 @@ export default function NewsletterPage() {
                 title: "Meta Description Missing",
                 finding: "No meta description. Google shows first 100 chars of page text (out of context).",
                 impact: "CTR in search results -5%",
-                fix: "Write 155-char meta description: Problem + promise. 'We cut your site abandonment in half. Here's how.'",
+                fix: "Write 155-char meta description: Problem + promise.",
               },
             ].map((issue, idx) => (
               <Card key={idx} variant="elevated" className="p-6 border-accent/20">
@@ -159,61 +113,9 @@ export default function NewsletterPage() {
           </div>
         </section>
 
-        {/* Signup Form */}
+        {/* Signup Form — client component handles UTM + fetch */}
         <section className="mb-16">
-          <Card variant="elevated" className="p-8 bg-accent/5 border-accent/30">
-            <h2 className="text-2xl font-extrabold text-fg mb-2">
-              Get This Weekly
-            </h2>
-            <p className="text-fg-muted mb-6 max-w-[65ch]">
-              Every Monday morning: One pattern, one fix, one real before/after from founders who audited their sites.
-            </p>
-
-            <form className="space-y-4" onSubmit={handleNewsletterSubmit}>
-              <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-fg mb-2">
-                  Your email
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="you@company.com"
-                  required
-                  className="w-full rounded-lg border border-fg-muted/30 bg-bg px-4 py-3 text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="role" className="block text-sm font-semibold text-fg mb-2">
-                  Your role (optional)
-                </label>
-                <select
-                  id="role"
-                  className="w-full rounded-lg border border-fg-muted/30 bg-bg px-4 py-3 text-fg focus:border-accent focus:outline-none"
-                >
-                  <option value="">Select one...</option>
-                  <option value="founder">Founder</option>
-                  <option value="marketer">Marketer</option>
-                  <option value="product">Product Manager</option>
-                  <option value="designer">Designer</option>
-                  <option value="developer">Developer</option>
-                  <option value="agency">Agency</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full rounded-lg bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light"
-              >
-                Subscribe (Free)
-              </button>
-
-              <p className="text-xs text-fg-muted text-center">
-                No spam. One email per week. Unsubscribe anytime.
-              </p>
-            </form>
-          </Card>
+          <NewsletterForm />
         </section>
 
         {/* FAQ */}
@@ -221,7 +123,7 @@ export default function NewsletterPage() {
           <h2 className="text-2xl font-extrabold text-fg mb-6">
             Frequently Asked Questions
           </h2>
-          
+
           <div className="space-y-4">
             {[
               {
