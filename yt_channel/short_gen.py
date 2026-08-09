@@ -140,7 +140,11 @@ def generate_short_script(page, audit, url=None):
     segments.append(seg)
     t = seg["end"]
 
-    # Title — optimised for Shorts discoverability
+    # Title — optimised for Shorts discoverability.
+    # Evidence (title_research 2026-08-09): the strongest ICAHN outlier
+    # (82x views/subs) used a QUESTION-first title, yet only 13% of niche
+    # titles are questions. Rotate declarative/question per subject so the
+    # same dimension gets variety and we test both styles.
     title_hooks = {
         "speed":        f"Your Site Is Bleeding Visitors #Shorts",
         "mobile":       f"Mobile Is Killing Your Conversions #Shorts",
@@ -152,7 +156,21 @@ def generate_short_script(page, audit, url=None):
         "pagespeed":    f"Your Page Load Is Killing Your ROI #Shorts",
         "seo_foundations": f"Google Can't Find Your Page #Shorts",
     }
-    title = title_hooks.get(worst, f"Landing Page Audit: {domain} — {worst_label} Breakdown #Shorts")
+    question_hooks = {
+        "speed":        f"Slow Page? Your Visitors Left 3 Seconds Ago #Shorts",
+        "mobile":       f"Mobile Users Leaving? Here's Why #Shorts",
+        "social_proof": f"Nobody Trusts Your Page? Here's Why #Shorts",
+        "cta":          f"CTA Getting No Clicks? It's Invisible #Shorts",
+        "headline":     f"Headline Not Converting? That's Why #Shorts",
+        "above_fold":   f"Offer Hidden Below the Fold? Big Mistake #Shorts",
+        "ad_signals":   f"Ads Clicking But No Sales? Check This #Shorts",
+        "pagespeed":    f"Page Slow? Your ROI Is Paying For It #Shorts",
+        "seo_foundations": f"Google Ignoring Your Page? Here's Why #Shorts",
+    }
+    import hashlib
+    style = "question" if int(hashlib.md5(f"{domain}|{worst}".encode()).hexdigest(), 16) % 2 else "declarative"
+    hooks = question_hooks if style == "question" else title_hooks
+    title = hooks.get(worst, f"Landing Page Audit: {domain} — {worst_label} Breakdown #Shorts")
 
     description = (
         f"Free landing page audit: {domain}\n\n"

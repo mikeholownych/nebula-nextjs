@@ -52,7 +52,8 @@ SUBJECT_POOL = [
     "https://www.airbnb.com",
     "https://www.mailchimp.com",
     "https://www.squarespace.com",
-    "https://www.wix.com",
+    # NOTE: wix.com REMOVED — SPA HTML exceeds MAX_AUDIT_HTML_BYTES (2MB),
+    # scrape_page raises and previously killed the whole daily run.
     "https://www.canva.com",
     "https://www.dropbox.com",
     "https://www.slack.com",
@@ -80,13 +81,16 @@ def load_produced_domains():
     return produced
 
 
-def pick_lead() -> tuple[str, str, dict | None]:
+def pick_lead(exclude: set[str] | None = None) -> tuple[str, str, dict | None]:
     """Pick the best lead from audit_leads.jsonl.
 
     Returns (url, email, existing_audit).
     Chooses the most recent entry that hasn't had a video yet.
-    Falls back to nebulacomponents.com.
+    Falls back to nebulacomponents.com / round-robin pool.
+    `exclude` — domains to skip (used when a subject fails to scrape,
+    so the pipeline self-heals instead of dying on one bad URL).
     """
+    exclude = exclude or set()
     produced = load_produced_domains()
 
     if AUDIT_LEADS_FILE.exists():
@@ -103,7 +107,7 @@ def pick_lead() -> tuple[str, str, dict | None]:
             if not url:
                 continue
             domain = url.replace("https://", "").replace("http://", "").split("/")[0]
-            if domain in SKIP_DOMAINS:
+            if domain in SKIP_DOMAINS or domain in exclude:
                 continue
             if domain in produced:
                 log.info(f"Skipping {domain} — already produced")
@@ -161,25 +165,38 @@ def log_production(domain, title, score, video_path, duration):
 async def run_pipeline(upload: bool = False, mode: str = "both"):
     """Full production pipeline. mode: 'both' | 'short' | 'long'."""
     import asyncio
-    # 1. Pick lead
-    url, email, existing_audit = pick_lead()
-    domain = url.replace("https://", "").replace("http://", "").split("/")[0]
-    log.info(f"Target domain: {domain}")
-
-    # 2. Run audit (or use cached)
-    if existing_audit and "dimensions" in existing_audit:
-        log.info(f"Using cached audit data for {domain}")
-        page = {"url": url}
-        audit = existing_audit
-    else:
+    # 1. Pick lead — self-healing: if a subject fails to scrape (SPA >
+    # size cap, bot-block, network), advance to the next subject instead
+    # of killing the run. Max 3 attempts.
+    attempted: set[str] = set()
+    url, email, existing_audit = None, None, None
+    domain = ""
+    page = audit = None
+    for _ in range(3):
+        url, email, existing_audit = pick_lead(exclude=attempted)
+        domain = url.replace("https://", "").replace("http://", "").split("/")[0]
+        if existing_audit and "dimensions" in existing_audit:
+            break  # cached audit — no scrape needed
         log.info(f"Running live audit on {url}")
         try:
             page = scrape_page(url)
+            audit = score_audit(page)
+            break
         except Exception as e:
-            log.error(f"Scrape failed: {e}")
-            raise
-        audit = score_audit(page)
+            log.warning(f"Scrape failed for {domain}: {e} — trying next subject")
+            attempted.add(domain)
+            page = audit = None
+    if page is None or audit is None:
+        raise RuntimeError(f"No scrapeable subject found (tried: {sorted(attempted)})")
+    log.info(f"Target domain: {domain}")
+
+    # 2. Audit data ready (cached path reuses `audit` from cache)
+    if not (existing_audit and "dimensions" in existing_audit):
         log.info(f"Audit complete: {audit['overall']}/10 ({audit['overall_grade']})")
+    else:
+        page = {"url": url}
+        audit = existing_audit
+        log.info(f"Using cached audit data for {domain}")
 
     # 3. Produce videos (both, or only the requested one)
     log.info("Producing video...")
@@ -280,16 +297,37 @@ def main():
     parser.add_argument("--upload", action="store_true", help="Upload to YouTube after production")
     parser.add_argument("--mode", choices=["both", "short", "long"], default="both",
                         help="Which video(s) to produce/upload (default: both)")
+    parser.add_argument("--batch", type=int, default=1,
+                        help="Produce N videos in one run (no upload — backlog/buffer pre-production). "
+                             "Subjects advance round-robin each iteration.")
     args = parser.parse_args()
 
     import asyncio
-    entry = asyncio.run(run_pipeline(upload=args.upload, mode=args.mode))
+    if args.batch > 1 and args.upload:
+        log.warning("--batch forces upload=False (never auto-post a burst — account-risk). "
+                    "Producing backlog only.")
+        args.upload = False
+
+    entries = []
+    for i in range(args.batch):
+        if args.batch > 1:
+            log.info(f"── Batch item {i + 1}/{args.batch} ──")
+        try:
+            entry = asyncio.run(run_pipeline(upload=args.upload, mode=args.mode))
+        except Exception as e:
+            log.error(f"Batch item {i + 1} failed: {e} — continuing with next item")
+            continue
+        entries.append(entry)
+        # Refresh produced-domain cache so the next iteration picks a NEW subject
+        global PRODUCED_DOMAINS_CACHE
+        PRODUCED_DOMAINS_CACHE = None
 
     # Print result summary
-    print(json.dumps(entry, indent=2))
-    print(f"\n✅ Video ready: {entry['video_path']}")
+    for entry in entries:
+        print(json.dumps(entry, indent=2))
+        print(f"\n✅ Video ready: {entry['video_path']}")
     if args.upload:
-        print(f"   Title: {entry['title']}")
+        print(f"   Title: {entries[-1]['title']}")
 
 
 if __name__ == "__main__":
