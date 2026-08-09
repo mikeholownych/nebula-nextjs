@@ -222,6 +222,12 @@ def generate_script(page, audit, url=None):
         "Fix Map: https://nebulacomponents.com/7-systems.html",
         "DIY Fix Kit: https://nebulacomponents.com/checkout.html",
         "",
+        # vidIQ tactic (rBIeT9iLmnU): channel URL + sub_confirmation=1
+        # triggers an instant subscribe popup on arrival (choice
+        # architecture — the channel page is a top-3 subscriber source).
+        "Subscribe for a daily landing page teardown:",
+        "https://www.youtube.com/@nebulaaudits?sub_confirmation=1",
+        "",
         f"#landingpage #cro #conversionoptimization #{domain.split('.')[0]}",
     ])
     description = "\n".join(desc_lines)

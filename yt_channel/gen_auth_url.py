@@ -17,7 +17,8 @@ CLIENT_SECRET_FILE = Path("yt_channel/creds/client_secret.json")
 VERIFIER_FILE = Path("yt_channel/creds/code_verifier.txt")
 SCOPES = ["https://www.googleapis.com/auth/youtube.upload",
           "https://www.googleapis.com/auth/youtube",
-          "https://www.googleapis.com/auth/youtube.force-ssl"]
+          "https://www.googleapis.com/auth/youtube.force-ssl",
+          "https://www.googleapis.com/auth/yt-analytics.readonly"]
 
 # Registered redirect for this desktop client (see client_secret.json).
 REDIRECT_URI = "http://localhost"

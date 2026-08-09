@@ -188,6 +188,10 @@ def generate_short_script(page, audit, url=None):
         f"Score: {overall:.0f}/10 — worst issue: {worst_label} ({worst_score:.0f}/10)\n\n"
         f"Get a free audit of your own site — fix list emailed to you:\n"
         f"https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=shorts&utm_campaign={domain}\n\n"
+        # vidIQ tactic (rBIeT9iLmnU): sub_confirmation=1 triggers an instant
+        # subscribe popup on the channel page (choice architecture).
+        f"Subscribe for a daily landing page teardown:\n"
+        f"https://www.youtube.com/@nebulaaudits?sub_confirmation=1\n\n"
         f"#LandingPage #CRO #ConversionOptimization #Shorts #MarketingTips"
     )
 

@@ -34,7 +34,8 @@ CLIENT_SECRET_FILE = CREDS_DIR / "client_secret.json"
 TOKEN_FILE = CREDS_DIR / "token.pickle"
 SCOPES = ["https://www.googleapis.com/auth/youtube.upload",
           "https://www.googleapis.com/auth/youtube",
-          "https://www.googleapis.com/auth/youtube.force-ssl"]
+          "https://www.googleapis.com/auth/youtube.force-ssl",
+          "https://www.googleapis.com/auth/yt-analytics.readonly"]
 
 # ── Auth ────────────────────────────────────────────────────────────
 

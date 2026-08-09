@@ -134,9 +134,17 @@ def analyze() -> dict:
     else:
         try:
             # channel-level audience retention (video-level needs the
-            # youtubeAnalytics API; keep this honest and channel-scoped)
+            # youtubeAnalytics API; keep this honest and channel-scoped).
+            # NOTE: reports() lives on the youtubeAnalytics v2 service,
+            # NOT on the youtube v3 service from _get_authenticated_service.
+            import pickle
+            from googleapiclient.discovery import build
+            from google.oauth2.credentials import Credentials
+            with open(creds_path, "rb") as f:
+                tok = pickle.load(f)
+            an_svc = build("youtubeAnalytics", "v2", credentials=tok)
             end = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-            resp = svc.reports().query(
+            resp = an_svc.reports().query(
                 ids="channel==MINE",
                 startDate="2026-07-01", endDate=end,
                 metrics="averageViewDuration,views,estimatedMinutesWatched",

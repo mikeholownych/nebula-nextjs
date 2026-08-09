@@ -10,7 +10,8 @@ VERIFIER_FILE = Path("yt_channel/creds/code_verifier.txt")
 TOKEN_FILE = Path("yt_channel/creds/token.pickle")
 SCOPES = ["https://www.googleapis.com/auth/youtube.upload",
           "https://www.googleapis.com/auth/youtube",
-          "https://www.googleapis.com/auth/youtube.force-ssl"]
+          "https://www.googleapis.com/auth/youtube.force-ssl",
+          "https://www.googleapis.com/auth/yt-analytics.readonly"]
 
 if len(sys.argv) < 2:
     print("Usage: python3 exchange_code.py <AUTH_CODE>")
