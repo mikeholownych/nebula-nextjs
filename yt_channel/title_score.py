@@ -29,6 +29,26 @@ PAIN_WORDS = (
     "costing", "invisible", "broken", "clicks", "no sales", "not converting",
 )
 
+# Dave Jeltema (JO2JSj3JU48) lessons 12-13: ACUTE pain beats chronic.
+# 'Stop wasting 20 hours on videos that get 300 views. Do this first.'
+# (acute, time-bound, urgent) beat 'How to make sure your next video
+# gets views' (chronic, ongoing). Acute = happened/is happening right
+# now, needs immediate action. Chronic = always present, someday.
+ACUTE_WORDS = (
+    "right now", "today", "this second", "now", "stop wasting",
+    "stop losing", "3 seconds", "just", "already", "still", "immediately",
+    "before", "do this first", "fix it", "left", "left already",
+)
+
+# Problem-aware beats solution-aware: speak to the problem they KNOW
+# they have ('your CTA is invisible') not the solution they don't know
+# exists ('how to increase conversion rates'). Detection: the title
+# names a pain/state, not a how-to/solution framing.
+SOLUTION_SIGNALS = (
+    "how to", "guide", "tips", "tutorial", "learn how", "5 ways",
+    "10 ways", "ways to", "strategy", "checklist", "system",
+)
+
 
 @dataclass
 class TitleOption:
@@ -68,6 +88,18 @@ def score_title(title: str, *, is_short: bool = True, domain: str = "",
     if any(w in t for w in PAIN_WORDS):
         score += 2
         reasons.append("pain-first")
+    # 3b. Acute pain > chronic (Dave Jeltema lesson 12: 'what just
+    #     happened to this person that makes them need this right now?')
+    if any(w in t for w in ACUTE_WORDS):
+        score += 2
+        reasons.append("acute pain")
+    # 3c. Problem-aware > solution-aware (lesson 13: speak to the
+    #     problem they know they have, not the solution they don't).
+    #     Penalize how-to/solution framing unless pain words present.
+    if any(w in t for w in SOLUTION_SIGNALS):
+        if not any(w in t for w in PAIN_WORDS) and "?" not in t:
+            score -= 1
+            reasons.append("solution-aware (prefer problem-aware)")
     # 4. Search-intent keyword
     if any(k in t for k in INTENT_KEYWORDS):
         score += 1

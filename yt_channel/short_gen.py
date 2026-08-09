@@ -43,6 +43,7 @@ SIMPLIFY = {
     "immediately": "right away",
     "visitors": "people",
     "nearly invisible": "hard to see",
+    "invisible": "hard to see",
     "low contrast": "hard to see",
     "increase its contrast": "make it stand out",
     "increase contrast": "make it stand out",
@@ -112,6 +113,26 @@ def _build_ppp_reveal(domain, overall, grade, worst_label):
             f"and how to fix it.")
 
 
+def _strip_end_signals(text: str) -> str:
+    """Dave Jeltema (JO2JSj3JU48) lesson 27: signaling the video is
+    about to end ('in conclusion', 'let's recap') cuts remaining
+    viewership in half — the algorithm treats it as a stop signal and
+    fewer people reach end-screens/suggested videos. Fail-closed:
+    strip any end-signal phrase from generated script text."""
+    import re
+    signals = re.compile(
+        r"\b(in conclusion|let's recap|let us recap|to recap|to sum up|"
+        r"in summary|as a recap|final thoughts|to wrap up|before we wrap up)\b[,:]?\s*",
+        re.IGNORECASE,
+    )
+    text = signals.sub("", text)
+    # clean up the punctuation remnants the strip leaves behind
+    text = re.sub(r"\s{2,}", " ", text)
+    text = re.sub(r"^\s*[,:;]\s*", "", text)
+    text = re.sub(r"\s+[,:;]\s*$", "", text)
+    return text.strip()
+
+
 def generate_short_script(page, audit, url=None):
     """Turn audit data into a ~35s YouTube Short script."""
     dims = audit["dimensions"]
@@ -164,14 +185,25 @@ def generate_short_script(page, audit, url=None):
     prefix = f"The biggest problem: {plain_label} scored {worst_score:.0f} out of 10. "
     if worst_issue:
         issue_text = _simplify(worst_issue)
-        # avoid repeating the label (prefix already says 'your main button')
-        for lead in ("button ", "the button "):
-            if issue_text.lower().startswith(lead):
-                issue_text = issue_text[len(lead):]
-                break
-        words = issue_text.split()
-        issue_text = " ".join(words[: max(0, budget - len(prefix.split()))])
-        problem = f"{prefix}{issue_text}"
+        # If the issue text already names the label as its subject
+        # ('Button is invisible below fold'), use the label as the
+        # subject and drop the scored-fragment join — otherwise we get
+        # 'scored 2 out of 10. is invisible below fold' (fragment,
+        # fails readability AND sounds broken).
+        label_starts = (f"{plain_label} ", "button ", "the button ",
+                        "your button ", "your main button ", "cta ", "the cta ")
+        if issue_text.lower().startswith(label_starts):
+            for lead in label_starts:
+                if issue_text.lower().startswith(lead):
+                    rest = issue_text[len(lead):].strip()
+                    break
+            else:
+                rest = issue_text
+            problem = f"The biggest problem: {plain_label} {rest}."
+        else:
+            words = issue_text.split()
+            issue_text = " ".join(words[: max(0, budget - len(prefix.split()))])
+            problem = f"{prefix}{issue_text}"
     else:
         problem = f"The biggest problem: {plain_label} scored {worst_score:.0f} out of 10. That is {band}."
 
@@ -268,7 +300,20 @@ def generate_short_script(page, audit, url=None):
     questioning = question_hooks.get(worst, base)
     specific = f"{domain} Scores {overall:.0f}/10 — Here's The Worst Issue #Shorts"
     pain = f"Stop Losing Sales: {domain} Teardown ({overall:.0f}/10) #Shorts"
-    variants = list(dict.fromkeys([declarative, questioning, specific, pain, base]))
+    # Dave Jeltema (JO2JSj3JU48) lesson 12: acute pain > chronic — add a
+    # time-bound urgency variant so the picker can reward it.
+    acute = {
+        "speed":        f"Your Visitors Left 3 Seconds Ago. Stop It #Shorts",
+        "mobile":       f"Mobile Users Are Leaving Right Now #Shorts",
+        "social_proof": f"Nobody Trusts You. They Left Already #Shorts",
+        "cta":          f"Your CTA Is Invisible. Fix It Right Now #Shorts",
+        "headline":     f"Your Headline Is Costing You Sales Today #Shorts",
+        "above_fold":   f"Your Offer Is Hidden. Visitors Are Leaving Now #Shorts",
+        "ad_signals":   f"You're Wasting Ad Spend Today #Shorts",
+        "pagespeed":    f"Slow Page? They Left 3 Seconds Ago #Shorts",
+        "seo_foundations": f"Google Can't Find Your Page Today #Shorts",
+    }.get(worst, pain)
+    variants = list(dict.fromkeys([declarative, questioning, specific, pain, acute, base]))
     best = pick_best(variants, is_short=True, domain=domain, has_score=True, seed=f"{domain}|{worst}")
     title = best.title
 
@@ -295,6 +340,14 @@ def generate_short_script(page, audit, url=None):
     from yt_channel.readability import check_script
     readability = check_script(segments)
     readability_fail = [r["fk_grade"] for r in readability if not r["pass"]]
+
+    # Dave Jeltema (JO2JSj3JU48) lesson 27: never signal the video is
+    # about to end ('in conclusion', 'let's recap') — it halves the
+    # remaining viewership and kills the path to suggested videos.
+    # Fail-closed self-heal: strip any end-signal phrase.
+    for seg in segments:
+        if isinstance(seg, dict) and seg.get("text"):
+            seg["text"] = _strip_end_signals(seg["text"])
 
     return {
         "title": title,

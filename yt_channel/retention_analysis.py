@@ -100,6 +100,11 @@ def analyze() -> dict:
             "engagement_rate": round(100 * (likes + comments) / views, 2) if views else 0.0,
             "duration_s": _iso_duration_to_s(v["contentDetails"].get("duration", "PT0S")),
             "production": prod.get(title, {}),
+            # Dave Jeltema (JO2JSj3JU48) lesson 26: '% still watching at
+            # the 90% mark' is the ultimate retention metric. YouTube's
+            # audienceWatchRatio needs a data threshold; until it serves
+            # the curve for this channel tier, None + avg duration proxy.
+            "p90_retention": None,
         })
 
     rows.sort(key=lambda r: r["views"], reverse=True)
@@ -202,7 +207,33 @@ def analyze() -> dict:
                     subs_split = s.get("rows", [])
                 except Exception:
                     subs_split = []
-                per_video[vid_id] = {"rows": rows_day, "subscribed_split": subs_split}
+                # Dave Jeltema (JO2JSj3JU48) lesson 26: '% still watching at
+                # the 90% mark' is the ultimate metric. audienceWatchRatio +
+                # elapsedVideoTimeRatio is the retention curve; on this channel
+                # tier it 500s until there's enough data — probe best-effort
+                # and leave None when the API refuses (never fake it).
+                p90 = None
+                try:
+                    c = an_svc.reports().query(
+                        ids="channel==MINE",
+                        startDate=start, endDate=end,
+                        metrics="audienceWatchRatio",
+                        dimensions="elapsedVideoTimeRatio",
+                        filters=f"video=={vid_id}",
+                        maxResults=30,
+                    ).execute()
+                    curve = c.get("rows", [])
+                    if curve:
+                        # last non-zero bucket ~= 90%+ mark (curve is
+                        # normalized 0..1 elapsed; take the tail mean)
+                        tail = [row[1] for row in curve[-3:] if row[1] is not None]
+                        p90 = round(sum(tail) / len(tail), 3) if tail else None
+                except Exception:
+                    p90 = None
+                per_video[vid_id] = {"rows": rows_day, "subscribed_split": subs_split, "p90_retention": p90}
+            # stitch p90 back into video rows for the report
+            for r in rows:
+                r["p90_retention"] = per_video.get(r["video_id"], {}).get("p90_retention")
             # Channel-level daily totals (same working shape, no filter).
             try:
                 chan_r = an_svc.reports().query(
@@ -287,6 +318,13 @@ def main():
     rt = report["retention"]
     if rt.get("available"):
         print(f"  available: {len(rt.get('rows', []))} video rows")
+        p90s = [r.get("p90_retention") for r in report["videos"] if r.get("p90_retention") is not None]
+        if p90s:
+            print(f"  p90 retention (avg of tail): {sum(p90s)/len(p90s):.1%} "
+                  f"— Dave's 'ultimate metric' (watch it climb)")
+        else:
+            print("  p90 retention: N/A yet — audienceWatchRatio 500s until "
+                  "channel has enough data (probe is wired, will light up)")
     else:
         print(f"  NOT available: {rt.get('reason', '?')}")
     print(f"\nFull report: {out}")
