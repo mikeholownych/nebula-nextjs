@@ -1,0 +1,48 @@
+# Global agent command guard — THE denylist.
+# One POSIX ERE (grep -E) pattern per line. # comments allowed.
+# Source: davidondrej/skills (David Ondrej) — adapted for Linux (no diskutil).
+# Design rule: block only irreversible/catastrophic commands (data loss,
+# disk wipe, repo deletion, token exfil). Local-destructive-but-recoverable
+# commands (rm -rf node_modules, git clean -fdx, npm cache clean --force)
+# stay ALLOWED — over-blocking kills agent usefulness.
+
+# --- catastrophic rm: root, home, user trees -------------------------------
+# sudo rm anything (sudo rm file.txt, sudo rm -rf /tmp/whatever)
+sudo[[:space:]]+rm([[:space:]]|$)
+# rm -rf / , /* , ~ , ~/ , ~/* , $HOME , "$HOME" , /Users , /home , /root
+# (allows rm -rf /tmp/..., rm -rf ~/project/...)
+rm([[:space:]]+-[a-zA-Z]*r[a-zA-Z]*|[[:space:]]+--recursive)([[:space:]]+-{1,2}[a-zA-Z]*)*[[:space:]]+(/([[:space:]]|$)|/[*]|~(/[*]|/?([[:space:]]|$))|["']?\$?["']?HOME|/Users|/home|/root)
+
+# --- raw disk writes --------------------------------------------------------
+dd[[:space:]]+.*of=[[:space:]]*/dev/(disk|rdisk|sd|vd|nvme)
+mkfs[^[:space:]]*[[:space:]]+/dev/
+
+# --- fork bomb ---------------------------------------------------------------
+:\(\)[[:space:]]*\{[[:space:]]*:\|[[:space:]]*:&[[:space:]]*\};
+
+# --- piping the internet straight into a shell -------------------------------
+(curl|wget)[^|]*\|[[:space:]]*(sudo[[:space:]]+)?(sh|bash)
+
+# --- force-push / destructive git refs ----------------------------------------
+# --force (but NOT --force-with-lease); -f; --delete; -d; :refspec delete; +refspec force
+git[[:space:]]+push([[:space:]]+-f([[:space:]]|$)|[[:space:]]+[^[:space:]]+([[:space:]]+[^[:space:]]+)*[[:space:]]+--force([[:space:]]|$)|[[:space:]]+--force([[:space:]]|$))
+git[[:space:]]+push[[:space:]]+[^|]*--delete
+git[[:space:]]+push[[:space:]]+-d([[:space:]]|$)
+git[[:space:]]+push([[:space:]]+[^[:space:]]+)*[[:space:]]+[:+][^[:space:]]*
+
+# --- wipe the safety net -------------------------------------------------------
+git[[:space:]]+reflog[[:space:]]+expire[[:space:]]+--expire(=|-unreachable=)(now|all)
+git[[:space:]]+gc([[:space:]]+--aggressive)?[[:space:]]+--prune=(now|all)
+
+# --- chmod/chown the whole filesystem ------------------------------------------
+chmod([[:space:]]+-R)?[[:space:]]+777[[:space:]]+/
+chown[[:space:]]+-R[[:space:]]+[^[:space:]]+[[:space:]]+/
+
+# --- write to raw devices --------------------------------------------------------
+echo[^>]*>[[:space:]]*/dev/(disk|sd|vd)
+
+# --- GitHub CLI destructive / token exfil -----------------------------------------
+gh[[:space:]]+(repo[[:space:]]+delete|release[[:space:]]+delete|secret[[:space:]]+delete|ssh-key[[:space:]]+delete|gpg-key[[:space:]]+delete)
+gh[[:space:]]+api[[:space:]]+[^|]*(-X[[:space:]]+DELETE|--method[[:space:]]+DELETE|--method=delete)
+gh[[:space:]]+repo[[:space:]]+edit[[:space:]]+[^|]*--visibility[[:space:]]+public
+gh[[:space:]]+auth[[:space:]]+token
