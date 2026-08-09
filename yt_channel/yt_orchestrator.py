@@ -39,9 +39,27 @@ from yt_channel.config import VIDEO_DIR, THUMBNAIL_DIR
 
 PRODUCTION_LOG = VIDEO_DIR / "production_log.jsonl"
 AUDIT_LEADS_FILE = NEBULA_DIR / "audit_leads.jsonl"
+COUNTER_FILE = NEBULA_DIR / "yt_channel" / "tmp" / ".subject_counter"
 SKIP_DOMAINS = {"example.com", "test.com", "localhost"}
 # Domains we've already done (read from production log)
 PRODUCED_DOMAINS_CACHE = None
+
+# Renewable pool for daily shorts — high-traffic sites with clear conversion
+# surfaces. Round-robin via COUNTER_FILE so we never run out of subjects.
+SUBJECT_POOL = [
+    "https://www.shopify.com",
+    "https://www.notion.so",
+    "https://www.airbnb.com",
+    "https://www.mailchimp.com",
+    "https://www.squarespace.com",
+    "https://www.wix.com",
+    "https://www.canva.com",
+    "https://www.dropbox.com",
+    "https://www.slack.com",
+    "https://www.figma.com",
+    "https://www.hubspot.com",
+    "https://www.clickfunnels.com",
+]
 
 
 def load_produced_domains():
@@ -105,9 +123,19 @@ def pick_lead() -> tuple[str, str, dict | None]:
                 pass
             return url, entry.get("email", ""), existing_audit
 
-    # Fallback: nebulacomponents.com
-    log.info("No new leads found — falling back to nebulacomponents.com")
-    return "https://nebulacomponents.com", "admin@nebulacomponents.shop", None
+    # Fallback: round-robin through the renewable subject pool
+    # (fresh audits each day; pool cycles so subjects repeat but with
+    #  a long gap between visits)
+    try:
+        counter = int(COUNTER_FILE.read_text().strip() or "0")
+    except Exception:
+        counter = 0
+    url = SUBJECT_POOL[counter % len(SUBJECT_POOL)]
+    counter += 1
+    COUNTER_FILE.parent.mkdir(parents=True, exist_ok=True)
+    COUNTER_FILE.write_text(str(counter))
+    log.info(f"No new leads — pool subject #{counter - 1}: {url}")
+    return url, "admin@nebulacomponents.shop", None
 
 
 def log_production(domain, title, score, video_path, duration):
@@ -130,8 +158,8 @@ def log_production(domain, title, score, video_path, duration):
     return entry
 
 
-async def run_pipeline(upload: bool = False):
-    """Full production pipeline."""
+async def run_pipeline(upload: bool = False, mode: str = "both"):
+    """Full production pipeline. mode: 'both' | 'short' | 'long'."""
     import asyncio
     # 1. Pick lead
     url, email, existing_audit = pick_lead()
@@ -153,50 +181,75 @@ async def run_pipeline(upload: bool = False):
         audit = score_audit(page)
         log.info(f"Audit complete: {audit['overall']}/10 ({audit['overall_grade']})")
 
-    # 3. Produce video
+    # 3. Produce videos (both, or only the requested one)
     log.info("Producing video...")
     from yt_channel.produce_short import produce_short
-    long_result, short_result = await asyncio.gather(
-        produce_video(page, audit, url),
-        produce_short(page, audit, url),
-    )
-    result = long_result
-    video_path = Path(result["video_path"])
-    thumbnail_path = Path(result["thumbnail_path"])
-    script = result["script"]
-    short_path = Path(short_result["video_path"])
-    log.info(f"Short produced: {short_path.name} ({short_result['audio_duration']:.1f}s)")
-
-    log.info(f"Video produced: {video_path.name} ({result['audio_duration']:.1f}s)")
+    long_result = None
+    short_result = None
+    if mode == "both":
+        long_result, short_result = await asyncio.gather(
+            produce_video(page, audit, url),
+            produce_short(page, audit, url),
+        )
+        result = long_result
+        video_path = Path(result["video_path"])
+        thumbnail_path = Path(result["thumbnail_path"])
+        script = result["script"]
+        short_path = Path(short_result["video_path"])
+        log.info(f"Short produced: {short_path.name} ({short_result['audio_duration']:.1f}s)")
+        log.info(f"Video produced: {video_path.name} ({result['audio_duration']:.1f}s)")
+    elif mode == "short":
+        short_result = await produce_short(page, audit, url)
+        result = None
+        video_path = None
+        thumbnail_path = None
+        script = short_result["script"]
+        short_path = Path(short_result["video_path"])
+        log.info(f"Short produced: {short_path.name} ({short_result['audio_duration']:.1f}s)")
+    else:  # long
+        result = await produce_video(page, audit, url)
+        video_path = Path(result["video_path"])
+        thumbnail_path = Path(result["thumbnail_path"])
+        script = result["script"]
+        short_path = None
+        log.info(f"Video produced: {video_path.name} ({result['audio_duration']:.1f}s)")
 
     # 4. Log production
     entry = log_production(
         domain=domain,
         title=script["title"],
         score=script["overall_score"],
-        video_path=video_path,
-        duration=result["audio_duration"],
+        video_path=video_path or short_path,
+        duration=(result or short_result)["audio_duration"],
     )
 
-    # 5. Upload to YouTube (optional)
+    # 5. Upload to YouTube (optional) — upload BOTH when mode=both
     if upload:
         try:
             from yt_channel.upload import upload_video, set_thumbnail
 
-            log.info("Uploading to YouTube...")
-            video_id = upload_video(
-                video_path=str(video_path),
-                title=script["title"],
-                description=script["description"],
-                privacy="public",
-            )
-            if video_id:
-                log.info(f"✅ Uploaded: https://youtube.com/watch?v={video_id}")
-                if thumbnail_path.exists():
-                    set_thumbnail(video_id, str(thumbnail_path))
-                    log.info("✅ Thumbnail set")
-            else:
-                log.warning("Upload returned no video ID")
+            uploads = []
+            if video_path is not None:
+                uploads.append((video_path, script["title"], script["description"], thumbnail_path, "long"))
+            if short_path is not None and short_result is not None:
+                short_script = short_result["script"]
+                uploads.append((short_path, short_script["title"], short_script["description"], None, "short"))
+
+            for path, title, description, thumb, kind in uploads:
+                log.info(f"Uploading {kind} to YouTube...")
+                video_id = upload_video(
+                    video_path=str(path),
+                    title=title,
+                    description=description,
+                    privacy="public",
+                )
+                if video_id:
+                    log.info(f"✅ Uploaded {kind}: https://youtube.com/watch?v={video_id}")
+                    if thumb is not None and thumb.exists():
+                        set_thumbnail(video_id, str(thumb))
+                        log.info("✅ Thumbnail set")
+                else:
+                    log.warning(f"Upload returned no video ID ({kind})")
         except Exception as e:
             log.warning(f"Upload failed (OAuth may not be set up): {e}")
 
@@ -207,10 +260,12 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(description="Nebula Audits YouTube pipeline")
     parser.add_argument("--upload", action="store_true", help="Upload to YouTube after production")
+    parser.add_argument("--mode", choices=["both", "short", "long"], default="both",
+                        help="Which video(s) to produce/upload (default: both)")
     args = parser.parse_args()
 
     import asyncio
-    entry = asyncio.run(run_pipeline(upload=args.upload))
+    entry = asyncio.run(run_pipeline(upload=args.upload, mode=args.mode))
 
     # Print result summary
     print(json.dumps(entry, indent=2))

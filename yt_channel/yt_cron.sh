@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# YouTube channel cron wrapper — run by cron every Mon+Thu.
-# Produces a video and publishes it.
-# Changed by Hermes 2026-07-09: fix venv path, use nebula root.
+# YouTube channel cron wrapper — DAILY.
+#   Mon + Thu (14:00 UTC): produce + upload BOTH long-form and Short
+#   Other days:           : produce + upload Short only (daily Shorts cadence)
+# Changed by Hermes 2026-08-09: daily Shorts + long on Mon/Thu, uploads both.
 set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 NEBULA_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
@@ -14,8 +15,15 @@ LOG_DIR="$NEBULA_DIR/yt_channel/logs"
 mkdir -p "$LOG_DIR"
 LOG_FILE="$LOG_DIR/$(date +%Y-%m-%d_%H-%M-%S).log"
 
-echo "=== YouTube Pipeline Run: $(date) ===" >> "$LOG_FILE" 2>&1
-python3 yt_channel/yt_orchestrator.py --upload >> "$LOG_FILE" 2>&1
+DOW="$(date +%u)"  # 1=Mon, 4=Thu
+if [ "$DOW" = "1" ] || [ "$DOW" = "4" ]; then
+    MODE="both"
+else
+    MODE="short"
+fi
+
+echo "=== YouTube Pipeline Run: $(date) [mode=$MODE] ===" >> "$LOG_FILE" 2>&1
+python3 yt_channel/yt_orchestrator.py --upload --mode "$MODE" >> "$LOG_FILE" 2>&1
 
 EXIT_CODE=$?
 if [ $EXIT_CODE -eq 0 ]; then

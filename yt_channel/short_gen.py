@@ -132,7 +132,7 @@ def generate_short_script(page, audit, url=None):
     t = seg["end"]
 
     # 5. CTA (4-5s)
-    cta = "Get a free audit of your own site at nebulacomponents dot shop. Takes 30 seconds."
+    cta = "Get a free audit of your own site at nebulacomponents dot com. Takes 30 seconds — your fix list gets emailed to you."
     seg = {
         "start": t, "end": t + len(cta.split()) / WPS,
         "text": cta, "visual": "cta_card", "dimension": None,
@@ -157,8 +157,8 @@ def generate_short_script(page, audit, url=None):
     description = (
         f"Free landing page audit: {domain}\n\n"
         f"Score: {overall:.0f}/10 — worst issue: {worst_label} ({worst_score:.0f}/10)\n\n"
-        f"Get a free audit of your own site:\n"
-        f"https://nebulacomponents.com\n\n"
+        f"Get a free audit of your own site — fix list emailed to you:\n"
+        f"https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=shorts&utm_campaign={domain}\n\n"
         f"#LandingPage #CRO #ConversionOptimization #Shorts #MarketingTips"
     )
 

@@ -138,8 +138,8 @@ def generate_script(page, audit, url=None):
 
     # Call to action (8 seconds)
     cta = (
-        f"Want your own audit? Visit nebulacomponents dot shop slash audit for a free instant score "
-        f"with specific fixes for each issue. No call, no credit card."
+        f"Want your own audit? Get a free instant score at nebulacomponents dot com slash audit. "
+        f"Enter your email and the full fix list is sent straight to your inbox. No call, no credit card."
     )
     seg = {"start": t, "end": t + len(cta.split()) / WPS, "text": cta,
            "visual": "outro_card", "dimension": None}
@@ -147,14 +147,15 @@ def generate_script(page, audit, url=None):
     t = seg["end"]
 
     # ── Title ───────────────────────────────────────────────────────
+    # Search-intent first: lead with the pain, keep domain secondary.
     if overall < 4:
-        title = f"Landing Page Audit: {domain} — Critical Issues Found ({overall:.0f}/10)"
+        title = f"Your Landing Page Is Bleeding Money: {domain} Audit ({overall:.0f}/10)"
     elif overall < 6.5:
-        title = f"Landing Page Teardown: {domain} — Why It Is Not Converting ({overall:.0f}/10)"
+        title = f"Why This Landing Page Isn't Converting: {domain} Teardown ({overall:.0f}/10)"
     elif overall < 8:
-        title = f"Landing Page Review: {domain} — Close to Great ({overall:.0f}/10)"
+        title = f"What {domain} Gets Right (That Most Pages Don't): Review ({overall:.0f}/10)"
     else:
-        title = f"Landing Page Breakdown: {domain} — What They Are Doing Right ({overall:.0f}/10)"
+        title = f"How {domain} Turns Visitors Into Customers: Breakdown ({overall:.0f}/10)"
 
     # ── Description ─────────────────────────────────────────────────
     desc_lines = [
@@ -171,9 +172,14 @@ def generate_script(page, audit, url=None):
 
     desc_lines.extend([
         "",
-        "🔧 Fix Map: https://nebulacomponents.com/7-systems.html",
-        "🚀 Free Instant Audit: https://nebulacomponents.com/audit.html",
-        "💻 DIY Fix Kit: https://nebulacomponents.com/checkout.html",
+        "Your worst issue: {worst_label} ({worst_score:.0f}/10)".format(
+            worst_label=worst_label, worst_score=min(data["score"] for data in sorted_dims)),
+        "",
+        "Get your own free landing page audit — email the fix list to yourself:",
+        "https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=video&utm_campaign={domain}".format(domain=domain),
+        "",
+        "Fix Map: https://nebulacomponents.com/7-systems.html",
+        "DIY Fix Kit: https://nebulacomponents.com/checkout.html",
         "",
         f"#landingpage #cro #conversionoptimization #{domain.split('.')[0]}",
     ])

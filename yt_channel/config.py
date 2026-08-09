@@ -30,8 +30,8 @@ INTRO_TEMPLATE = ROOT / "yt_channel" / "intro.png"
 OUTRO_TEMPLATE = ROOT / "yt_channel" / "outro.png"
 
 # --- YouTube upload ---
-UPLOAD_FREQUENCY = "2x/week"  # Mon + Thu
-UPLOAD_SCHEDULE_CRON = "0 14 * * 1,4"  # Mon/Thu 14:00 UTC
+UPLOAD_FREQUENCY = "daily Shorts + long Mon/Thu"
+UPLOAD_SCHEDULE_CRON = "0 14 * * *"  # Daily 14:00 UTC (wrapper picks mode)
 CATEGORY_ID = "22"  # Science & Technology
 
 # --- SEO defaults ---
