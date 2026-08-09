@@ -107,11 +107,19 @@ def analyze() -> dict:
     avg_views = sum(r["views"] for r in rows) / n
     avg_eng = sum(r["engagement_rate"] for r in rows) / n
 
-    # Outliers vs OUR average (ICAHN with our own data)
+    # 48-hour no-judgment rule (Nastia, ex-YouTube PM, VpKYkZr-1oQ):
+    # don't evaluate a video's performance before ~48h — real-time view
+    # counting is an estimate and the algorithm needs time to find the
+    # audience. Videos younger than 48h are excluded from outlier flags.
+    from datetime import timedelta
+    now = datetime.now(timezone.utc)
     for r in rows:
+        r["hours_since_publish"] = round((now - datetime.fromisoformat(
+            (r["published"] + "T00:00:00+00:00"))).total_seconds() / 3600, 1)
+        r["too_new"] = r["hours_since_publish"] < 48
         r["views_vs_avg"] = round(r["views"] / avg_views, 2) if avg_views else 0.0
         r["eng_vs_avg"] = round(r["engagement_rate"] / avg_eng, 2) if avg_eng else 0.0
-        r["outlier"] = r["views_vs_avg"] >= 2.0 or r["eng_vs_avg"] >= 2.0
+        r["outlier"] = not r["too_new"] and (r["views_vs_avg"] >= 2.0 or r["eng_vs_avg"] >= 2.0)
 
     # Analytics-scope check (true retention)
     retention = None
@@ -162,9 +170,27 @@ def analyze() -> dict:
                         dimensions="day",
                         filters=f"video=={vid_id}",
                     ).execute()
-                    per_video[vid_id] = r.get("rows", [])
+                    rows_day = r.get("rows", [])
                 except Exception:
-                    per_video[vid_id] = []
+                    rows_day = []
+                # Nastia (ex-YouTube PM) diagnostic: the subscribed-vs-unsubscribed
+                # split is the #1 check when a video has "good CTR but low
+                # impressions" — great traction with loyal (subscribed) viewers
+                # but ~zero new-viewer traction means packaging doesn't convert
+                # NEW viewers. subscribedStatus is the API proxy for the
+                # new/returning split (returns [] on a brand-new channel).
+                try:
+                    s = an_svc.reports().query(
+                        ids="channel==MINE",
+                        startDate=start, endDate=end,
+                        metrics="views",
+                        dimensions="subscribedStatus",
+                        filters=f"video=={vid_id}",
+                    ).execute()
+                    subs_split = s.get("rows", [])
+                except Exception:
+                    subs_split = []
+                per_video[vid_id] = {"rows": rows_day, "subscribed_split": subs_split}
             # Channel-level daily totals (same working shape, no filter).
             try:
                 chan_r = an_svc.reports().query(
@@ -197,7 +223,7 @@ def analyze() -> dict:
         "avg_engagement_rate": round(avg_eng, 2),
         "video_count": len(rows),
         "outliers": [r for r in rows if r["outlier"]],
-        "underperformers": [r for r in rows if r["views"] > 0 and r["views_vs_avg"] < 0.5][:5],
+        "underperformers": [r for r in rows if not r["too_new"] and r["views"] > 0 and r["views_vs_avg"] < 0.5][:5],
         "retention": retention,
         "videos": rows,
     }
