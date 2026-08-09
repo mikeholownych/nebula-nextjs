@@ -82,7 +82,8 @@ def generate_script(page, audit, url=None):
 
     # Intro hook (5 seconds) — Brenda Turner fifth wall (RRDJO_UV4I8):
     # talk to the ONE viewer, not an audience. No "we are looking at".
-    hook = f"Here is another landing page audit. Today: {domain}. Watch closely — you will see exactly where the money leaks."
+    # {PAUSE} markers mimic natural speech rhythm (pauses at sentence boundaries).
+    hook = f"Today: {domain}. {{PAUSE}} Watch closely — you will see exactly where the money leaks."
     seg = {"start": t, "end": t + len(hook) / WPS, "text": hook,
            "visual": "intro_card", "dimension": None}
     segments.append(seg)
