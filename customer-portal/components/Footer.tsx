@@ -35,7 +35,7 @@ export default function Footer() {
           <div>
             <p className="text-xs font-medium text-fg-muted uppercase tracking-widest mb-4">Learn</p>
             <ul className="space-y-3">
-              <li><a href="/newsletter" className="text-sm text-fg-muted hover:text-fg transition-colors">Newsletter</a></li>
+              <li><a href="/newsletter?utm_source=footer&utm_medium=link&utm_campaign=newsletter" className="text-sm text-fg-muted hover:text-fg transition-colors">Newsletter</a></li>
               <li><a href="/brand" className="text-sm text-fg-muted hover:text-fg transition-colors">Brand Kit</a></li>
               <li><a href="/press" className="text-sm text-fg-muted hover:text-fg transition-colors">Press Kit</a></li>
               <li><a href="/learning-centre" className="text-sm text-fg-muted hover:text-fg transition-colors">Learning Centre</a></li>

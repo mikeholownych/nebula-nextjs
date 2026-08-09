@@ -12,6 +12,53 @@ export const metadata: Metadata = {
 }
 
 export default function NewsletterPage() {
+  const getUTMParams = () => {
+    if (typeof window === 'undefined') return ''
+    const params = new URLSearchParams(window.location.search)
+    const utm_source = params.get('utm_source') || 'newsletter'
+    const utm_medium = params.get('utm_medium') || 'organic'
+    const utm_campaign = params.get('utm_campaign') || 'newsletter_signup'
+    return `?utm_source=${utm_source}&utm_medium=${utm_medium}&utm_campaign=${utm_campaign}`
+  }
+
+  const handleNewsletterSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const form = e.currentTarget
+    const email = (form.querySelector('#email') as HTMLInputElement)?.value
+    const role = (form.querySelector('#role') as HTMLSelectElement)?.value
+
+    // Get UTM params from URL or use defaults
+    const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '')
+    const utm_source = params.get('utm_source') || 'newsletter'
+    const utm_medium = params.get('utm_medium') || 'organic'
+    const utm_campaign = params.get('utm_campaign') || 'newsletter_signup'
+
+    try {
+      const response = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          role: role || undefined,
+          referrer: utm_source,
+          utm_source,
+          utm_medium,
+          utm_campaign,
+        }),
+      })
+
+      if (response.ok) {
+        alert('✓ Check your email to confirm subscription')
+        form.reset()
+      } else {
+        alert('Error subscribing. Try again.')
+      }
+    } catch (err) {
+      console.error(err)
+      alert('Error subscribing.')
+    }
+  }
+
   return (
     <main className="min-h-screen bg-bg px-6 py-12">
       <div className="mx-auto max-w-3xl">
@@ -122,7 +169,7 @@ export default function NewsletterPage() {
               Every Monday morning: One pattern, one fix, one real before/after from founders who audited their sites.
             </p>
 
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleNewsletterSubmit}>
               <div>
                 <label htmlFor="email" className="block text-sm font-semibold text-fg mb-2">
                   Your email
