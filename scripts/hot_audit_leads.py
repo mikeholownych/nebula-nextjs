@@ -86,8 +86,10 @@ def register_lead(email: str, url: str, score10: float, grade: str) -> None:
         now = datetime.now(timezone.utc).isoformat()
         if "source_partner" not in cols:
             conn.execute("ALTER TABLE leads ADD COLUMN source_partner TEXT")
+        # INSERT OR IGNORE: idempotent — if the lead already exists from a prior
+        # run or from another path (exit intent, audit claim, etc.) we skip silently.
         conn.execute(
-            """INSERT INTO leads
+            """INSERT OR IGNORE INTO leads
                (email, url, stage, source, trigger_context, audit_score, audit_grade,
                 source_partner, discovered_at, updated_at)
                VALUES (?, ?, 'audit_delivered', 'organic_audit', 'hot_audit_lead', ?, ?, NULL, ?, ?)""",
