@@ -55,7 +55,7 @@
 **Email draft**:
 > Hey Edgar, saw your IH posts — $73 on Facebook, 89 LPVs, $0 conversions. Ran adcopystyles.com — biggest finding: no social proof above the fold. You're asking founders to trust you before showing proof it works. One result before the CTA closes that gap. Full audit: nebulacomponents.com/audit — free. Fix pack is $97 if useful. — Sedrick, Nebula
 
-**Status**: READY TO SEND → hello@edgarconejo.com
+**Status**: ✅ SENT — Aug 9 2026, message_id: `0100019fe7226792-8e0aea9a...`, thread_id: `3ae21882-9f61-4dc4-9e11-c7d865cc1dd0`
 
 ---
 
