@@ -190,12 +190,14 @@ def scan_inbox_for_bounces(am_client, max_messages: int = 50) -> list[dict]:
         if not target_email:
             continue
 
-        # Mark hard bounce in LeadStore (creates record if missing)
-        ok = db.mark_bounced(target_email, bounce_type="hard",
-                             bounce_detail=f"NDR via {mid[:40]}: {subject[:100]}")
-        if not ok:
-            print(f"  [BOUNCE WARN] mark_bounced returned False for {target_email}")
-            continue  # Don't log if we couldn't persist
+        # Mark hard bounce in LeadStore (creates record if missing).
+        # mark_bounced returns True for new lead creation, False for update —
+        # both are success. Only skip if is_bounced() fails to confirm.
+        db.mark_bounced(target_email, bounce_type="hard",
+                        bounce_detail=f"NDR via {mid[:40]}: {subject[:100]}")
+        if not db.is_bounced(target_email):
+            print(f"  [BOUNCE WARN] Failed to persist bounce for {target_email}")
+            continue
 
         bounce_event = {
             "timestamp": datetime.now(timezone.utc).isoformat(),
