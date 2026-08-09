@@ -102,6 +102,53 @@ def check_script(segments) -> list:
     return out
 
 
+# ── Fifth-wall voice check (Brenda Turner, RRDJO_UV4I8) ─────────────
+# "Breaking the Fifth Wall": talk to the ONE viewer, not an audience.
+# Audience-register ('we are looking at', 'viewers', newscaster tone)
+# is exactly what makes videos not connect. Pillar 1 = talk to the one,
+# not the crowd; pillar 3 = put the attention on the viewer, not the
+# channel. This gate enforces both on the ASSEMBLED script text.
+LECTURE_TERMS = [
+    "we are looking at", "today we will", "in this video we", "let's now",
+    "lets now", "let us now", "viewers", "the audience", "as you can see we",
+    "we now", "moving on to", "let's take a look", "lets take a look",
+    "this concludes", "in this video you will learn",
+]
+SELF_FOCUS_TERMS = ["i think", "we believe", "our channel", "we hope"]
+
+# Minimum direct address: 0.8 'you/your' per 100 words across the whole
+# script. A lecture register reads ~0; one-to-one reads 3-8.
+MIN_YOU_PER_100 = 0.8
+
+
+def check_voice(text: str) -> dict:
+    """Brenda Turner fifth-wall check — one-to-one direct address, no
+    lecture register, viewer-focus over self-focus.
+
+    Runs on the whole script (the score-reveal ritual line is neutral by
+    design; connection comes from overall tone, not every line).
+    """
+    low = text.lower()
+    words = low.split()
+    words_n = max(len(words), 1)
+    you_count = len(re.findall(r"\b(you|your|yours)\b", low))
+    you_per_100 = you_count / words_n * 100
+    lecture_hits = [t for t in LECTURE_TERMS if t in low]
+    self_hits = [t for t in SELF_FOCUS_TERMS if t in low]
+    reasons = []
+    if lecture_hits:
+        reasons.append(f"lecture register: {', '.join(lecture_hits)}")
+    if you_per_100 < MIN_YOU_PER_100:
+        reasons.append(f"direct address too low ({you_per_100:.2f}/100 words)")
+    return {
+        "pass": not reasons,
+        "you_per_100": round(you_per_100, 2),
+        "lecture_hits": lecture_hits,
+        "self_hits": self_hits,
+        "reason": "; ".join(reasons) or "one-to-one voice ✓",
+    }
+
+
 if __name__ == "__main__":
     text = " ".join(sys.argv[1:])
     if not text:

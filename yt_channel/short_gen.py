@@ -388,6 +388,14 @@ def generate_short_script(page, audit, url=None):
         bad = "; ".join(f"{r['fk_grade']}: {r['text'][:80]}" for r in readability_fail)
         raise ValueError(f"Jenny readability gate FAILED (target ≤{readability[0]['target_grade']}): {bad}")
 
+    # Brenda Turner fifth-wall voice gate (RRDJO_UV4I8) — fail-closed:
+    # a Short that talks AT an audience must never be produced. Runs
+    # after all self-heals so it only sees the final narration.
+    from yt_channel.readability import check_voice
+    voice = check_voice(" ".join(seg.get("text", "") for seg in segments))
+    if not voice["pass"]:
+        raise ValueError(f"Fifth-wall voice gate FAILED: {voice['reason']}")
+
     return {
         "title": title,
         "description": description,
@@ -399,6 +407,7 @@ def generate_short_script(page, audit, url=None):
         "overall_score": overall,
         "domain": domain,
         "format": "short",
+        "voice": voice,
         "readability": {
             "target": 5,
             "segments": readability,

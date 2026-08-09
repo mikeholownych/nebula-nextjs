@@ -80,8 +80,9 @@ def generate_script(page, audit, url=None):
     segments = []
     t = 0.0  # running time cursor
 
-    # Intro hook (5 seconds)
-    hook = f"Here is another landing page audit. Today we are looking at {domain}."
+    # Intro hook (5 seconds) — Brenda Turner fifth wall (RRDJO_UV4I8):
+    # talk to the ONE viewer, not an audience. No "we are looking at".
+    hook = f"Here is another landing page audit. Today: {domain}. Watch closely — you will see exactly where the money leaks."
     seg = {"start": t, "end": t + len(hook) / WPS, "text": hook,
            "visual": "intro_card", "dimension": None}
     segments.append(seg)
@@ -94,16 +95,18 @@ def generate_script(page, audit, url=None):
     segments.append(seg)
     t = seg["end"]
 
-    # Worst dimension highlight (6 seconds)
+    # Worst dimension highlight (6 seconds) — viewer-owned, plain label
+    from yt_channel.short_gen import PLAIN_LABELS as _PL
+    plain = _PL.get(worst, worst_label.lower())
     if worst_score < 6:
         highlight = (
-            f"The biggest problem: {worst_label}, scoring only {worst_score:.0f} out of 10. "
-            f"Here is why that matters."
+            f"The biggest problem is your {plain}: only {worst_score:.0f} out of 10. "
+            f"That is costing you sales."
         )
     else:
         highlight = (
-            f"No critical failures, but {worst_label} at {worst_score:.0f} out of 10 "
-            f"has room to improve."
+            f"No critical failures, but your {plain} scores {worst_score:.0f} out of 10. "
+            f"There is room to grow."
         )
     seg = {"start": t, "end": t + len(highlight) / WPS, "text": highlight,
            "visual": f"dimension_{worst}", "dimension": worst}
@@ -122,9 +125,12 @@ def generate_script(page, audit, url=None):
         if score >= 7 and key != worst:
             continue
 
-        narrative = f"{label}: {score} out of 10. {issue}"
+        # Brenda Turner fifth wall: the viewer owns the audit. Report as
+        # "your {plain}" instead of a third-person report read at them.
+        plain = _PL.get(key, label.lower())
+        narrative = f"Your {plain} scores {score} out of 10. {issue}"
         if fix:
-            narrative += f" Fix: {fix}"
+            narrative += f" Here is the fix: {fix}"
         # Cap per-dimension narration at ~15 seconds
         max_words = int(15 * WPS)
         words = narrative.split()
@@ -242,6 +248,13 @@ def generate_script(page, audit, url=None):
     ])
     description = "\n".join(desc_lines)
 
+    # Brenda Turner fifth-wall voice gate (RRDJO_UV4I8) — fail-closed:
+    # a script that talks AT an audience must never be produced.
+    from yt_channel.readability import check_voice
+    voice = check_voice(" ".join(s["text"] for s in segments))
+    if not voice["pass"]:
+        raise ValueError(f"Fifth-wall voice gate FAILED: {voice['reason']}")
+
     return {
         "title": title,
         "description": description,
@@ -251,6 +264,7 @@ def generate_script(page, audit, url=None):
         "worst_label": worst_label,
         "overall_score": overall,
         "domain": domain,
+        "voice": voice,
     }
 
 
