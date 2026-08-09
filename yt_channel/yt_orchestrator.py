@@ -288,7 +288,39 @@ async def run_pipeline(upload: bool = False, mode: str = "both"):
                 uploads.append((video_path, script["title"], script["description"], thumbnail_path, "long"))
             if short_path is not None and short_result is not None:
                 short_script = short_result.get("script") or {}
-                uploads.append((short_path, short_script.get("title", ""), short_script.get("description", ""), None, "short"))
+                # E'Calm Shorts system (srDpvEnGQg4): pick the BEST MOMENT
+                # as the Short thumbnail — the frame people are most likely
+                # to click, so the video keeps pulling traffic after the
+                # algorithm slows down. For us that's the reward/payoff card
+                # (the big score reveal). We extract it from the rendered
+                # Short and pass it as the custom thumbnail.
+                short_thumb = None
+                try:
+                    import subprocess as _sp
+                    # ffmpeg is already a pipeline dependency; extract a frame
+                    # at ~62% of the Short (the reward/payoff card) directly.
+                    probe = _sp.run(
+                        ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                         "-of", "default=noprint_wrappers=1:nokey=1", str(short_path)],
+                        capture_output=True, text=True)
+                    dur = float(probe.stdout.strip() or 0)
+                    t = max(0.0, dur * 0.62)
+                    frame_png = Path("/tmp") / f"short_frame_{domain.replace('.', '_')}.png"
+                    _sp.run(
+                        ["ffmpeg", "-y", "-v", "error", "-ss", f"{t:.2f}",
+                         "-i", str(short_path), "-frames:v", "1", str(frame_png)],
+                        check=True, capture_output=True)
+                    if frame_png.exists():
+                        # Shorts thumbnail: 9:16 vertical, high-res
+                        from PIL import Image
+                        img = Image.open(frame_png).convert("RGB")
+                        img = img.resize((1080, 1920), Image.LANCZOS)
+                        short_thumb = Path("/tmp") / f"short_thumb_{domain.replace('.', '_')}.png"
+                        img.save(str(short_thumb))
+                        log.info(f"Short thumbnail picked at t={t:.1f}s/{dur:.1f}s (reward moment)")
+                except Exception as e:
+                    log.warning(f"Could not extract short thumbnail: {e}")
+                uploads.append((short_path, short_script.get("title", ""), short_script.get("description", ""), short_thumb, "short"))
 
             for path, title, description, thumb, kind in uploads:
                 # ── Quality gate — fail-closed: broken renders never upload ──

@@ -131,7 +131,21 @@ def generate_short_script(page, audit, url=None):
     segments.append(seg)
     t = seg["end"]
 
-    # 5. CTA (4-5s)
+    # 5. Reward (payoff — E'Calm retention psychology, srDpvEnGQg4):
+    # the most rewarding reveal goes at the END so the viewer feels
+    # payoff, then cut immediately. Score as the reveal moment.
+    reward = (
+        f"There it is: {domain} scores {overall:.0f} out of 10, grade {grade}. "
+        f"That's the number your ads are paying for."
+    )
+    seg = {
+        "start": t, "end": t + len(reward.split()) / WPS,
+        "text": reward, "visual": "reward_card", "dimension": None,
+    }
+    segments.append(seg)
+    t = seg["end"]
+
+    # 6. CTA (4-5s) — single simple call to action, never overloaded
     cta = "Get a free audit of your own site at nebulacomponents dot com. Takes 30 seconds — your fix list gets emailed to you."
     seg = {
         "start": t, "end": t + len(cta.split()) / WPS,

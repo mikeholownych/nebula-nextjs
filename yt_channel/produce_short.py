@@ -222,6 +222,38 @@ def make_fix_card(worst_label, fix_text, bg=None):
     return img
 
 
+def make_reward_card(domain, overall, grade, bg=None):
+    """The payoff moment (E'Calm retention psychology): the most rewarding
+    reveal goes at the END so the viewer feels payoff, then cut immediately.
+    Here: the audited domain's score as the 'reveal' — the thing the whole
+    video has been building toward."""
+    img = _prepare_bg(bg, SW, SH) or Image.new("RGB", (SW, SH), BG)
+    d = ImageDraw.Draw(img)
+    f = _load_fonts()
+    colour = _score_colour(overall)
+
+    d.rectangle([0, 0, SW, 8], fill=ACCENT)
+
+    # Contrast panel — match score_card proportions (fuller, less dead space)
+    panel_w = 920
+    panel_h = 980
+    px = (SW - panel_w) // 2
+    py = 150
+    _panel(d, px, py, panel_w, panel_h, border=colour)
+
+    d.text((SW // 2, py + 70), "THE VERDICT", fill=colour, font=f["sm"], anchor="mm")
+    d.text((SW // 2, py + 160), domain, fill=WHITE, font=f["md"], anchor="mm")
+
+    # Big score — the payoff
+    r = 150
+    cy = py + 500
+    d.ellipse([SW // 2 - r, cy - r, SW // 2 + r, cy + r], outline=colour, width=8)
+    d.text((SW // 2, cy - 20), f"{overall:.0f}", fill=colour, font=f["xl"], anchor="mm")
+    d.text((SW // 2, cy + 185), f"/ 10  Grade {grade}", fill=MUTED, font=f["sm"], anchor="mm")
+    d.rectangle([0, SH - 8, SW, SH], fill=colour)
+    return img
+
+
 def make_cta_card():
     img = Image.new("RGB", (SW, SH), BG)
     d = ImageDraw.Draw(img)
@@ -287,6 +319,7 @@ async def produce_short(page, audit, url=None):
         "problem_card": lambda: make_problem_card(worst_label, worst_score,
                                                    script["segments"][2]["text"], bg),
         "fix_card":     lambda: make_fix_card(worst_label, script["segments"][3]["text"], bg),
+        "reward_card":  lambda: make_reward_card(domain, overall, grade, bg),
         "cta_card":     lambda: make_cta_card(),
     }
 
