@@ -125,6 +125,22 @@ def main() -> int:
         th = Path(args.thumbnail) if args.thumbnail else None
         checks["thumbnail"] = bool(th and th.exists() and th.stat().st_size > 5_000)
 
+    # 8. No dead audio tail (Jenny Hoyos: 'every second counts' — she
+    #    trimmed a 1s silent tail and retention went 83%→88%). Audio
+    #    should play through to the end; a silent final second is a
+    #    drop-off point. Compare audio stream duration vs video.
+    audio_dur = 0.0
+    if has_audio:
+        audio_dur = float(ffprobe(args.video, [
+            "-select_streams", "a:0",
+            "-show_entries", "stream=duration",
+            "-of", "default=noprint_wrappers=1:nokey=1",
+        ]) or 0)
+    # allow muxer padding (~0.4s); flag anything over 0.6s of silence
+    checks["no_dead_tail"] = (dur - audio_dur) <= 0.6 if has_audio else False
+    if not checks["no_dead_tail"]:
+        checks["dead_tail_detail"] = f"video {dur:.2f}s, audio {audio_dur:.2f}s ({(dur-audio_dur):.2f}s tail)"
+
     failed = [k for k, v in checks.items() if v is False]
     result = {
         "pass": not failed,

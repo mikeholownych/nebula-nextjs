@@ -9,7 +9,61 @@ Format:
 
 from .script_gen import DIM_LABELS, DIM_SHORT, _score_band, _worst_key
 
+import re
+
 WPS = 2.8  # Slightly faster pace for Shorts
+
+# ── Jenny Hoyos plain-speak labels (As7abwNhG7Y) ─────────────────────
+# Jargon words like "call to action", "conversion optimization" inflate
+# the readability score (she targets 5th grade or under; Mr Beast = 1st
+# grade). Use these plain equivalents in NARRATION (visual labels can
+# stay technical). This is the 'explain the concept, not the jargon'
+# rule applied to the dimension names.
+PLAIN_LABELS = {
+    "cta": "your main button",
+    "headline": "the headline",
+    "social_proof": "the trust signals",
+    "mobile": "the mobile view",
+    "load_speed": "the load speed",
+    "pagespeed": "the load speed",
+    "ad_signals": "the ad setup",
+    "seo_foundations": "the Google visibility",
+    "above_fold": "the layout",
+}
+
+# Jenny's rule applied to the audit engine's own wording: the generated
+# issue/fix text uses marketing jargon ("CTA", "above the fold",
+# "immediately") that inflates readability. Swap for plain equivalents
+# BEFORE narration (visual text can stay technical).
+SIMPLIFY = {
+    "call to action": "button",
+    "cta": "button",
+    "above the fold": "at the top",
+    "below the fold": "out of sight",
+    "immediately": "right away",
+    "visitors": "people",
+    "nearly invisible": "hard to see",
+    "low contrast": "hard to see",
+    "increase its contrast": "make it stand out",
+    "increase contrast": "make it stand out",
+    "conversion": "sale",
+    "conversions": "sales",
+    "optimization": "tuning",
+    "optimize": "improve",
+    "strategy": "plan",
+    "leverage": "use",
+    "significant": "big",
+    "substantial": "big",
+    "utilize": "use",
+}
+
+
+def _simplify(text: str) -> str:
+    """Strip jargon from audit-generated text (Jenny Hoyos readability)."""
+    t = text
+    for k, v in SIMPLIFY.items():
+        t = re.sub(rf"\b{k}\b", v, t, flags=re.IGNORECASE)
+    return t
 
 
 # ── Hormozi hook types (from The 6 Hook Types playbook) ──────────────
@@ -72,6 +126,7 @@ def generate_short_script(page, audit, url=None):
 
     worst = _worst_key(dims)
     worst_label = DIM_LABELS.get(worst, worst.replace("_", " ").title())
+    plain_label = PLAIN_LABELS.get(worst, worst_label)  # Jenny Hoyos: plain-speak
     worst_score = dims[worst]["score"]
     worst_issue = dims[worst].get("issue", "")
     worst_fix = dims[worst].get("fix", "")
@@ -89,24 +144,36 @@ def generate_short_script(page, audit, url=None):
     segments.append(seg)
     t = seg["end"]
 
-    # 2. Site + score reveal (4s) — Proof bomb + Promise
-    reveal = _build_ppp_reveal(domain, overall, grade, worst_label)
+    # 2. Foreshadow (Jenny Hoyos: 2 lines telling what's at the end;
+    #    the score reveal is held for the REWARD at the end — saying it
+    #    here AND there wastes a second and kills the payoff)
+    foreshadow = (
+        f"We audited {domain}. Watch to the end — you'll see "
+        f"exactly what's broken and how to fix it."
+    )
     seg = {
-        "start": t, "end": t + len(reveal.split()) / WPS,
-        "text": reveal, "visual": "score_card", "dimension": None,
+        "start": t, "end": t + len(foreshadow.split()) / WPS,
+        "text": foreshadow, "visual": "score_card", "dimension": None,
     }
     segments.append(seg)
     t = seg["end"]
 
-    # 3. Problem (10-12s) — explain the worst dimension
+    # 3. Problem (8s total — Jenny: every second counts; long problem
+    #    segments lose the viewer) — plain-speak label + simplified text
+    budget = int(8 * WPS)  # whole-segment word budget (prefix included)
+    prefix = f"The biggest problem: {plain_label} scored {worst_score:.0f} out of 10. "
     if worst_issue:
-        # Cap at ~10 seconds of speech
-        max_words = int(10 * WPS)
-        words = worst_issue.split()
-        issue_text = " ".join(words[:max_words])
-        problem = f"The biggest problem: {worst_label} scored {worst_score:.0f} out of 10. {issue_text}"
+        issue_text = _simplify(worst_issue)
+        # avoid repeating the label (prefix already says 'your main button')
+        for lead in ("button ", "the button "):
+            if issue_text.lower().startswith(lead):
+                issue_text = issue_text[len(lead):]
+                break
+        words = issue_text.split()
+        issue_text = " ".join(words[: max(0, budget - len(prefix.split()))])
+        problem = f"{prefix}{issue_text}"
     else:
-        problem = f"The biggest problem: {worst_label} scored {worst_score:.0f} out of 10. That is {band}."
+        problem = f"The biggest problem: {plain_label} scored {worst_score:.0f} out of 10. That is {band}."
 
     seg = {
         "start": t, "end": t + len(problem.split()) / WPS,
@@ -115,14 +182,19 @@ def generate_short_script(page, audit, url=None):
     segments.append(seg)
     t = seg["end"]
 
-    # 4. Fix (10-12s)
+    # 4. Fix (8s total) — plain-speak
+    budget = int(8 * WPS)
+    prefix = "Here's the fix: "
     if worst_fix:
-        max_words = int(10 * WPS)
-        words = worst_fix.split()
-        fix_text = " ".join(words[:max_words])
-        fix = f"Here is the fix: {fix_text}"
+        fix_text = _simplify(worst_fix)
+        # Jenny: split long sentences to keep FK ≤ 5th grade
+        fix_text = re.sub(r"\bso ", ". ", fix_text, count=1)
+        fix_text = re.sub(r"\bthat ", ". ", fix_text, count=1)
+        words = fix_text.split()
+        fix_text = " ".join(words[: max(0, budget - len(prefix.split()))])
+        fix = f"{prefix}{fix_text}"
     else:
-        fix = f"Fix your {worst_label} and you will see more conversions immediately."
+        fix = f"Fix the {plain_label} and you'll see more sales right away."
 
     seg = {
         "start": t, "end": t + len(fix.split()) / WPS,
@@ -145,8 +217,11 @@ def generate_short_script(page, audit, url=None):
     segments.append(seg)
     t = seg["end"]
 
-    # 6. CTA (4-5s) — single simple call to action, never overloaded
-    cta = "Get a free audit of your own site at nebulacomponents dot com. Takes 30 seconds — your fix list gets emailed to you."
+    # 6. CTA (Jenny Hoyos: short, simple sentences; 'nebulacomponents'
+    #    is a brand name so it carries syllables, but the rest stays
+    #    plain — 4 short sentences, each under 5th grade)
+    cta = ("Get a free audit of your site. It takes 30 seconds. "
+           "Fixes get emailed to you. Nebula Components dot com.")
     seg = {
         "start": t, "end": t + len(cta.split()) / WPS,
         "text": cta, "visual": "cta_card", "dimension": None,
@@ -209,6 +284,12 @@ def generate_short_script(page, audit, url=None):
         f"#LandingPage #CRO #ConversionOptimization #Shorts #MarketingTips"
     )
 
+    # Jenny Hoyos readability gate (As7abwNhG7Y): target 5th grade or
+    # under on every segment; report so the orchestrator can log it.
+    from yt_channel.readability import check_script
+    readability = check_script(segments)
+    readability_fail = [r["fk_grade"] for r in readability if not r["pass"]]
+
     return {
         "title": title,
         "description": description,
@@ -220,4 +301,10 @@ def generate_short_script(page, audit, url=None):
         "overall_score": overall,
         "domain": domain,
         "format": "short",
+        "readability": {
+            "target": 5,
+            "segments": readability,
+            "all_pass": not readability_fail,
+            "failing_grades": readability_fail,
+        },
     }
