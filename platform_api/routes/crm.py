@@ -25,6 +25,7 @@ from platform_api.services.crm import (
     objection_summary,
     resolve_feedback,
     save_weekly_review,
+    get_pool,
 )
 
 router = APIRouter(prefix="/crm")
@@ -114,3 +115,83 @@ async def weekly_review(body: WeeklyReviewIn):
         notes=body.notes,
     )
     return {"success": True, "review": row}
+
+
+# ── Pipeline metrics ──────────────────────────────────────────────────────
+
+@router.get("/pipeline")
+async def pipeline_metrics():
+    """Stage conversion rates, sales velocity, total LTV — live from DB."""
+    pool = await get_pool()
+    async with pool.acquire() as conn:
+        row = await conn.fetchrow("SELECT * FROM crm_funnel_metrics")
+        stale = await conn.fetch(
+            "SELECT email, crm_status, days_inactive, utm_source FROM crm_stale_prospects LIMIT 20"
+        )
+    return {
+        "funnel": dict(row) if row else {},
+        "stale_prospects": [dict(r) for r in stale],
+    }
+
+
+# ── Win / Loss close reason ───────────────────────────────────────────────
+
+class CloseReasonIn(BaseModel):
+    customer_email: str
+    outcome: str          # won | lost
+    close_reason: str     # price | timing | competitor | no_need | no_response
+    notes: str | None = None
+
+
+@router.post("/close-reason")
+async def log_close_reason(body: CloseReasonIn):
+    """Log why a deal closed won or lost. Required for win/loss analysis."""
+    valid_outcomes = {"won", "lost"}
+    valid_reasons = {"price", "timing", "competitor", "no_need", "no_response", "other"}
+
+    if body.outcome not in valid_outcomes:
+        raise HTTPException(400, f"outcome must be one of: {valid_outcomes}")
+    if body.close_reason not in valid_reasons:
+        raise HTTPException(400, f"close_reason must be one of: {valid_reasons}")
+
+    pool = await get_pool()
+    async with pool.acquire() as conn:
+        # Log as feedback entry with close reason
+        await conn.execute("""
+            INSERT INTO crm_feedback
+                (customer_email, interaction_type, objection_reason,
+                 close_reason, outcome, notes, resolved, logged_at)
+            VALUES ($1, $2, $3, $4, $5, $6, TRUE, now())
+        """,
+            body.customer_email,
+            "churn" if body.outcome == "lost" else "win",
+            body.close_reason if body.outcome == "lost" else None,
+            body.close_reason,
+            f"closed_{body.outcome}",
+            body.notes,
+        )
+        # Update customer status
+        new_status = "purchased" if body.outcome == "won" else "cold"
+        await conn.execute(
+            "UPDATE customers SET crm_status = $1, updated_at = now() WHERE email = $2",
+            new_status, body.customer_email,
+        )
+    return {"success": True, "outcome": body.outcome, "reason": body.close_reason}
+
+
+@router.get("/win-loss")
+async def win_loss_analysis():
+    """Win/loss breakdown by close reason — product-market fit diagnostic."""
+    pool = await get_pool()
+    async with pool.acquire() as conn:
+        rows = await conn.fetch("""
+            SELECT
+                outcome,
+                COALESCE(close_reason, 'unspecified') AS reason,
+                COUNT(*) AS count
+            FROM crm_feedback
+            WHERE close_reason IS NOT NULL
+            GROUP BY outcome, COALESCE(close_reason, 'unspecified')
+            ORDER BY outcome, count DESC
+        """)
+    return {"win_loss": [dict(r) for r in rows]}
