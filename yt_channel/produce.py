@@ -3,8 +3,10 @@
 Pipeline: script → TTS audio + visual cards → ffmpeg assembly → thumbnail.
 """
 
-import os, json, asyncio, subprocess, textwrap, math
+import os, json, asyncio, subprocess, textwrap, math, logging
 from pathlib import Path
+
+logger = logging.getLogger("yt_produce")
 
 from PIL import Image, ImageDraw, ImageFont
 
