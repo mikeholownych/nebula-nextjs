@@ -107,6 +107,18 @@ def analyze() -> dict:
     avg_views = sum(r["views"] for r in rows) / n
     avg_eng = sum(r["engagement_rate"] for r in rows) / n
 
+    # View volatility (The Studio / MKBHD, Puny-2wkMZA): 'if you're
+    # trying to sell ad space, reduce the volatility in views between
+    # each video — you should sit within a pretty tight range.'
+    # Coefficient of variation (std/mean) is the standard measure; a
+    # stable channel has low CV, a hit-or-miss channel has high CV.
+    if n >= 2:
+        mean_v = sum(r["views"] for r in rows) / n
+        var_v = sum((r["views"] - mean_v) ** 2 for r in rows) / (n - 1)
+        view_cv = (var_v ** 0.5) / mean_v if mean_v else 0.0
+    else:
+        view_cv = 0.0
+
     # 48-hour no-judgment rule (Nastia, ex-YouTube PM, VpKYkZr-1oQ):
     # don't evaluate a video's performance before ~48h — real-time view
     # counting is an estimate and the algorithm needs time to find the
@@ -221,6 +233,7 @@ def analyze() -> dict:
         "channel": chan_stats,
         "avg_views": round(avg_views, 1),
         "avg_engagement_rate": round(avg_eng, 2),
+        "view_cv": round(view_cv, 3),  # view volatility — low = stable for ad sales
         "video_count": len(rows),
         "outliers": [r for r in rows if r["outlier"]],
         "underperformers": [r for r in rows if not r["too_new"] and r["views"] > 0 and r["views_vs_avg"] < 0.5][:5],
@@ -255,6 +268,8 @@ def main():
     print(f"\n=== Channel performance (ICAHN on our own data) ===")
     print(f"Videos: {report['video_count']} | Avg views: {report['avg_views']} | "
           f"Avg engagement: {report['avg_engagement_rate']}%")
+    print(f"View volatility (CV): {report['view_cv']} "
+          f"{'(low = stable, good for ads)' if report['view_cv'] < 0.5 else '(high = hit-or-miss)'}")
     print(f"Subs: {report['channel'].get('subscriberCount', '?')} | "
           f"Total views: {report['channel'].get('viewCount', '?')}")
     print("\n— OUTLIERS (make more of these) —")

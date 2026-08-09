@@ -90,10 +90,20 @@ def channel_stats() -> dict:
             })
     videos.sort(key=lambda v: v["views"], reverse=True)
 
+    # View volatility (The Studio/MKBHD, Puny-2wkMZA): low CV = stable,
+    # good for ad sales; high CV = hit-or-miss. Needs >= 2 videos.
+    if len(videos) >= 2:
+        mv = sum(v["views"] for v in videos) / len(videos)
+        var_v = sum((v["views"] - mv) ** 2 for v in videos) / (len(videos) - 1)
+        view_cv = (var_v ** 0.5) / mv if mv else 0.0
+    else:
+        view_cv = 0.0
+
     return {
         "subs": int(stats.get("subscriberCount", 0) or 0),
         "total_views": int(stats.get("viewCount", 0) or 0),
         "video_count": len(videos),
+        "view_cv": round(view_cv, 3),
         "videos": videos,
     }
 
@@ -219,6 +229,8 @@ def render_text(r: dict) -> str:
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
         f"CHANNEL",
         f"  Subs: {ch['subs']:,}  |  Total views: {ch['total_views']:,}  |  Videos: {ch['video_count']}",
+        f"  View volatility (CV): {ch['view_cv']} "
+        f"{'(stable ✓)' if ch['view_cv'] < 0.5 else '(volatile — tighten range)'}",
     ]
     if top:
         lines.append(f"  Top video: {top['title'][:42]} — {top['views']} views")
