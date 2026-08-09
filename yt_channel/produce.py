@@ -335,6 +335,26 @@ async def produce_video(page, audit, url=None):
         img.save(frame_path)
         frames.append(frame_path)
 
+    # ── Brand intro frames (prepend) ────────────────────────────────
+    from yt_channel.brand_segments import make_intro_frames, make_outro_frames
+    intro_seq = make_intro_frames(W, H)
+    outro_seq = make_outro_frames(W, H,
+                                  score=overall,
+                                  grade=grade,
+                                  domain=domain)
+    intro_frames, intro_durs = [], []
+    for j, (iimg, idur) in enumerate(intro_seq):
+        p = frames_dir / f"intro_{j:02d}.png"
+        iimg.save(p)
+        intro_frames.append(p)
+        intro_durs.append(idur)
+    outro_frames, outro_durs = [], []
+    for j, (oimg, odur) in enumerate(outro_seq):
+        p = frames_dir / f"outro_{j:02d}.png"
+        oimg.save(p)
+        outro_frames.append(p)
+        outro_durs.append(odur)
+
     # Brand sting (blueprint Phase 4): logo flash over the hook→body
     # transition, never before the hook. Inserted as its own 2s frame +
     # a 2s silent window in the narration (audio engine adds the whoosh).
@@ -403,10 +423,15 @@ async def produce_video(page, audit, url=None):
     audio_duration = finalize(narration_wav, sfx_wav, audio_path)
 
     # 4/5. Motion assembly — Ken Burns per segment + fades, then mux audio
+    # Prepend intro frames/durations and append outro frames/durations.
+    # Intro/outro are visual-only — the audio pad is silence (finalize() set length).
+    all_frames = intro_frames + frames + outro_frames
+    all_durations = intro_durs + durations + outro_durs
+
     from yt_channel.motion import assemble_motion_video
     video_path = config.VIDEO_DIR / f"{job_id}.mp4"
     assemble_motion_video(
-        frames, durations, audio_path, video_path, W, H,
+        all_frames, all_durations, audio_path, video_path, W, H,
     )
 
     # 6. Burn animated word-level captions (Phase 2)
