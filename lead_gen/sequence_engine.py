@@ -28,6 +28,78 @@ DB_PATH = Path(__file__).parent.parent / "lead_gen" / "lead_state.db"
 KEY_PATH = Path.home() / ".hermes" / "secrets" / "agentmail.key"
 INBOX = "nebulashop@agentmail.to"
 
+# Load Hunter key from .env
+def _hunter_key() -> str:
+    env_path = Path(__file__).parent.parent / ".env"
+    if env_path.exists():
+        for line in env_path.read_text().splitlines():
+            if line.startswith("HUNTER_API_KEY="):
+                return line.split("=", 1)[1].strip()
+    return os.environ.get("HUNTER_API_KEY", "")
+
+
+# ── Email Verification ─────────────────────────────────────────────────────
+
+def verify_email(email: str) -> dict:
+    """Verify email via Hunter.io before sending.
+    
+    Returns:
+        { "deliverable": True/False, "status": "valid"|"risky"|"invalid"|"unknown",
+          "score": 0-100, "reason": str }
+    
+    Rules:
+        valid (score >= 70)  → send
+        risky (score 40-69)  → send with caution (log warning)
+        invalid              → skip, mark bounced
+        unknown              → send (can't verify, not worth blocking)
+    """
+    key = _hunter_key()
+    if not key:
+        return {"deliverable": True, "status": "unknown", "score": 0,
+                "reason": "No Hunter key — skipping verification"}
+
+    url = (
+        f"https://api.hunter.io/v2/email-verifier"
+        f"?email={urllib.parse.quote(email)}&api_key={key}"
+    )
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Nebula/1.0"})
+        with urllib.request.urlopen(req, timeout=10) as r:
+            data = json.loads(r.read()).get("data", {})
+            status = data.get("status", "unknown")
+            score = data.get("score", 0)
+            result = data.get("result", "")
+
+            deliverable = status in ("valid", "webmail") or (
+                status == "risky" and score >= 40
+            )
+            reason = f"status={status} score={score} result={result}"
+            return {"deliverable": deliverable, "status": status,
+                    "score": score, "reason": reason}
+    except Exception as e:
+        return {"deliverable": True, "status": "unknown", "score": 0,
+                "reason": f"Verification error: {e}"}
+
+
+def verify_before_send(email: str, db: sqlite3.Connection) -> bool:
+    """Verify email. Returns True if safe to send. Marks invalid as bounced."""
+    result = verify_email(email)
+    if result["status"] == "invalid":
+        db.execute("""
+            UPDATE sequence_state
+            SET status = 'bounced', updated_at = ?
+            WHERE email = ?
+        """, (datetime.now(timezone.utc).isoformat(), email))
+        db.commit()
+        print(f"  ⚠ SKIP {email}: {result['reason']}")
+        return False
+    if not result["deliverable"]:
+        print(f"  ⚠ SKIP {email}: {result['reason']}")
+        return False
+    if result["status"] == "risky":
+        print(f"  ⚠ RISKY {email}: {result['reason']} — sending anyway")
+    return True
+
 # ── Schema ─────────────────────────────────────────────────────────────────
 
 SCHEMA = """
@@ -225,6 +297,9 @@ def run_sequence() -> list[str]:
 
         # D7: Follow-up if not sent and 7+ days since D1
         if not row["d7_sent_at"] and days_since_d1 >= 7:
+            if not verify_before_send(email, db):
+                log.append(f"✗ D7 SKIPPED (verify failed): {email}")
+                continue
             subject, text = _d7_email(row)
             # Reply in the original thread
             if thread_id and row["message_id"]:
@@ -257,6 +332,9 @@ def run_sequence() -> list[str]:
 
         # D17: Breakup if D7 sent and 17+ days since D1 and not yet sent
         if row["d7_sent_at"] and not row["d17_sent_at"] and days_since_d1 >= 17:
+            if not verify_before_send(email, db):
+                log.append(f"✗ D17 SKIPPED (verify failed): {email}")
+                continue
             subject, text = _d17_email(row)
             result = _am_post(
                 f"/inboxes/{INBOX}/messages/send",
@@ -281,6 +359,91 @@ def run_sequence() -> list[str]:
 
     db.close()
     return log
+
+
+# ── Public send_d1 API ─────────────────────────────────────────────────────
+
+def send_d1(
+    email: str,
+    first_name: str,
+    subject: str,
+    body_text: str,
+    body_html: str,
+    product_url: str = "",
+    signal_notes: str = "",
+    audit_finding: str = "",
+) -> dict:
+    """Verify + send Day 1 email + register in sequence. Single entry point.
+    
+    Usage:
+        result = send_d1(
+            email="hello@founder.com",
+            first_name="Alice",
+            subject="yourproduct.com — one finding",
+            body_text="Hey Alice, ...",
+            body_html="<p>Hey Alice, ...</p>",
+            product_url="https://yourproduct.com",
+            signal_notes="$200 FB ads, 0 conversions",
+            audit_finding="no social proof above fold",
+        )
+        print(result)  # {"sent": True, "thread_id": "...", "verified": {...}}
+    """
+    # Step 1: Verify
+    verification = verify_email(email)
+    if verification["status"] == "invalid":
+        return {
+            "sent": False,
+            "reason": f"Email invalid: {verification['reason']}",
+            "verified": verification,
+        }
+    if not verification["deliverable"]:
+        return {
+            "sent": False,
+            "reason": f"Email not deliverable: {verification['reason']}",
+            "verified": verification,
+        }
+
+    # Step 2: Send
+    domain = email.split("@")[0]
+    import time
+    idempotency_key = f"outreach-{domain}-d1-{int(time.time()) // 86400}"
+
+    result = _am_post(
+        f"/inboxes/{INBOX}/messages/send",
+        {
+            "to": [email],
+            "subject": subject,
+            "text": body_text,
+            "html": body_html,
+            "client_id": idempotency_key,
+            "labels": ["targeted-outreach", "sequence-d1"],
+        }
+    )
+
+    if "_error" in result:
+        return {
+            "sent": False,
+            "reason": f"Send failed: HTTP {result['_error']} {result.get('_body','')[:200]}",
+            "verified": verification,
+        }
+
+    # Step 3: Register in sequence
+    register_d1_sent(
+        email=email,
+        first_name=first_name,
+        thread_id=result.get("thread_id", ""),
+        message_id=result.get("message_id", ""),
+        product_url=product_url,
+        signal_notes=signal_notes,
+        audit_finding=audit_finding,
+    )
+
+    return {
+        "sent": True,
+        "thread_id": result.get("thread_id"),
+        "message_id": result.get("message_id"),
+        "verified": verification,
+    }
 
 
 if __name__ == "__main__":
