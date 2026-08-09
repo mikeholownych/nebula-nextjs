@@ -1,0 +1,40 @@
+[Unit]
+Description=Nebula Platform API (FastAPI)
+Documentation=https://nebulacomponents.shop
+After=network.target network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+# User and working directory
+User=mike
+Group=mike
+WorkingDirectory=/home/mike/nebula
+
+# Environment
+Environment=NODE_ENV=production
+Environment=PATH=/home/mike/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=DATABASE_URL=postgresql://postgres@/nebula_platform?host=/var/run/postgresql&port=5433
+
+# Command - use venv python
+ExecStart=/home/mike/.local/bin/uv run --project /home/mike/nebula python -m uvicorn platform_api.main:app --host 127.0.0.1 --port 8001
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=5
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+
+# Resource limits
+LimitNOFILE=65536
+MemoryMax=2G
+TasksMax=256
+
+# Timeout settings
+TimeoutStartSec=60
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target

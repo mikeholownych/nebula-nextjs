@@ -1,0 +1,3 @@
+# Drop-in — add STRIPE_WEBHOOK_SECRET
+# [Service]
+# Environment=STRIPE_WEBHOOK_SECRET=whsec_...
