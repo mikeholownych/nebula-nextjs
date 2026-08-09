@@ -132,7 +132,7 @@ export default function NewsletterPage() {
               },
               {
                 q: "Is this just for selling your audit?",
-                a: "No. The newsletter stands alone. We share real findings from audits we've run, whether or not the founder buys our fix pack. The goal is to build trust through expertise.",
+                a: "No. The newsletter stands alone. We share real findings from audits we've run, whether or not the founder buys our implementation kit. The goal is to build trust through expertise.",
               },
               {
                 q: "Can I unsubscribe?",

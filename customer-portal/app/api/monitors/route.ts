@@ -61,12 +61,11 @@ export async function POST(request: NextRequest) {
   }
   const url = parsed.href
 
-  // Resolve subscription via user's organization membership
+  // Resolve subscription directly by authenticated email. The current schema has no
+  // organization_id on subscriptions; resource ownership is email-scoped here.
   const sub = await pool.query(
     `SELECT s.id, s.plan FROM subscriptions s
-     JOIN memberships m ON m.organization_id = s.organization_id
-     JOIN users u ON u.id = m.user_id
-     WHERE LOWER(u.email) = $1 AND s.status = 'active' AND m.status = 'active'
+     WHERE LOWER(s.email) = $1 AND s.status = 'active' AND s.livemode = TRUE
      ORDER BY s.created_at DESC LIMIT 1`,
     [auth.user.email],
   )
@@ -82,31 +81,36 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Your plan does not include page monitoring.' }, { status: 403 })
   }
 
-  // Check count
-  const count = await pool.query(
-    'SELECT COUNT(*) AS cnt FROM monitored_pages WHERE subscription_id = $1 AND active = TRUE',
-    [subId],
-  )
-  if (parseInt(count.rows[0].cnt, 10) >= limit) {
-    return NextResponse.json(
-      { error: `Your ${plan} plan supports up to ${limit} monitored pages. Upgrade to add more.`, code: 'MONITOR_LIMIT', upgradeUrl: '/pricing' },
-      { status: 429 },
-    )
-  }
-
   const intervalHours = Math.max(24, Math.min(168, Number(body.interval_hours ?? 168)))
   const alertThreshold = Math.max(1, Math.min(50, Number(body.alert_threshold ?? 5)))
 
   try {
+    // Serialize quota check + insert per subscription. A SELECT count followed by
+    // a separate INSERT allows concurrent requests to exceed the plan limit.
     const result = await pool.query(
-      `INSERT INTO monitored_pages
+      `WITH lock AS (
+         SELECT pg_advisory_xact_lock(hashtextextended($1::text, 0))
+       ), current_count AS (
+         SELECT COUNT(*)::int AS cnt
+         FROM monitored_pages
+         WHERE subscription_id = $2 AND active = TRUE
+       )
+       INSERT INTO monitored_pages
          (subscription_id, email, url, label, plan, check_interval_hours, alert_threshold)
-       VALUES ($1, $2, $3, $4, $5, $6, $7)
+       SELECT $2, $3, $4, $5, $6, $7, $8
+       FROM lock, current_count
+       WHERE current_count.cnt < $9
        ON CONFLICT (subscription_id, url) DO UPDATE
          SET active = TRUE, label = EXCLUDED.label, updated_at = NOW()
        RETURNING id, url, label, plan, check_interval_hours, alert_threshold, active, created_at`,
-      [subId, auth.user.email, url, body.label ?? null, plan, intervalHours, alertThreshold],
+      [String(subId), subId, auth.user.email, url, body.label ?? null, plan, intervalHours, alertThreshold, limit],
     )
+    if (!result.rows.length) {
+      return NextResponse.json(
+        { error: `Your ${plan} plan supports up to ${limit} monitored pages. Upgrade to add more.`, code: 'MONITOR_LIMIT', upgradeUrl: '/pricing' },
+        { status: 429 },
+      )
+    }
     return NextResponse.json({ monitor: result.rows[0] }, { status: 201 })
   } catch (err) {
     console.error('[monitors POST]', err)

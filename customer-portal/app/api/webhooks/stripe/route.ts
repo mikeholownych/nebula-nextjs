@@ -513,8 +513,18 @@ export async function POST(request: NextRequest) {
         void sendSaleAlert(
           `🔁 *NEW SUBSCRIPTION* — ${resolved.plan.toUpperCase()} — ${amount} — ${email}\nsubscription: ${sub.id}`,
         )
-        // Send welcome email — fire-and-forget, non-blocking
-        void sendSubscriptionWelcome(email, resolved.plan)
+        // Welcome delivery is persisted as retryable state. The webhook remains
+        // idempotent, while the retry worker can recover provider failures.
+        const welcomeSent = await sendSubscriptionWelcome(email, resolved.plan)
+        await pool.query(
+          `UPDATE subscriptions
+           SET welcome_email_attempts = welcome_email_attempts + 1,
+               welcome_email_sent_at = CASE WHEN $2 THEN NOW() ELSE welcome_email_sent_at END,
+               welcome_email_last_error = CASE WHEN $2 THEN NULL ELSE 'email provider rejected or timed out' END,
+               updated_at = NOW()
+           WHERE stripe_subscription_id = $1`,
+          [sub.id, welcomeSent],
+        )
       }
       if (event.livemode && event.type === 'customer.subscription.deleted') {
         void sendSaleAlert(

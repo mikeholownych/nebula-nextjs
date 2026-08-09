@@ -30,13 +30,16 @@ interface AuditDetail {
   findings: Finding[]
 }
 
-async function fetchAuditDetail(id: string): Promise<AuditDetail | null> {
+async function fetchAuditDetail(id: string, ownerEmail: string): Promise<AuditDetail | null> {
   try {
     const res = await fetch(`${API_BASE}/audit/${id}`, {
       signal: AbortSignal.timeout(8000),
     })
     if (!res.ok) return null
-    return await res.json()
+    const data = await res.json() as AuditDetail & { email?: string }
+    // auditIds are client-supplied; never trust the ID without checking ownership.
+    if (!data.email || data.email.trim().toLowerCase() !== ownerEmail) return null
+    return data
   } catch {
     return null
   }
@@ -162,7 +165,7 @@ export async function POST(request: NextRequest) {
     }
 
     const ids = (auditIds || []).slice(0, 5)
-    const auditDetails = await Promise.all(ids.map((id) => fetchAuditDetail(id)))
+    const auditDetails = await Promise.all(ids.map((id) => fetchAuditDetail(id, email)))
     const validAudits = auditDetails.filter((a): a is AuditDetail => a !== null)
 
     const auditContext = validAudits

@@ -25,8 +25,17 @@ export async function GET(
   const auth = await requireWorkspaceUser(request)
   if (!('response' in auth)) {
     email = auth.user.email
-    // Check subscription
+    // Ownership is required for every authenticated export, including paid users.
+    // Subscription status controls entitlement; it must never replace resource authorization.
     try {
+      const auditOwner = await pool.query(
+        `SELECT email FROM audits WHERE id = $1 LIMIT 1`,
+        [auditId],
+      )
+      if (!auditOwner.rows.length || auditOwner.rows[0].email?.trim().toLowerCase() !== email) {
+        return NextResponse.json({ error: 'Audit not found' }, { status: 404 })
+      }
+
       const sub = await pool.query(
         `SELECT plan FROM subscriptions
          WHERE LOWER(email) = $1 AND status = 'active' AND livemode = TRUE
