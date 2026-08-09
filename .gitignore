@@ -206,6 +206,7 @@ yt_channel/creds/
 yt_channel/logs/
 yt_channel/videos/*.mp4
 yt_channel/thumbnails/*.png
+yt_channel/ads/
 
 # ── Generated prompt packs (per-audit, regenerated on delivery) ──
 audit_pipeline/prompts/packs/*.json
