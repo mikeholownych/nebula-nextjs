@@ -272,15 +272,21 @@ def generate_short_script(page, audit, url=None):
     best = pick_best(variants, is_short=True, domain=domain, has_score=True, seed=f"{domain}|{worst}")
     title = best.title
 
+    # Primal branding (vidIQ pgvFAwznds0): every description carries the
+    # creed + subscribe ritual so the belief system stays consistent.
+    from yt_channel.brand import CREED, SUBSCRIBE_URL, SIGN_OFF
     description = (
         f"Free landing page audit: {domain}\n\n"
         f"Score: {overall:.0f}/10 — worst issue: {worst_label} ({worst_score:.0f}/10)\n\n"
+        f"{CREED}\n\n"
         f"Get a free audit of your own site — fix list emailed to you:\n"
         f"https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=shorts&utm_campaign={domain}\n\n"
         # vidIQ tactic (rBIeT9iLmnU): sub_confirmation=1 triggers an instant
         # subscribe popup on the channel page (choice architecture).
         f"Subscribe for a daily landing page teardown:\n"
-        f"https://www.youtube.com/@nebulaaudits?sub_confirmation=1\n\n"
+        f"{SUBSCRIBE_URL}\n\n"
+        # Element 4: ritual — the verbal sign-off line, same every video
+        f"{SIGN_OFF}\n\n"
         f"#LandingPage #CRO #ConversionOptimization #Shorts #MarketingTips"
     )
 

@@ -216,6 +216,9 @@ def generate_script(page, audit, url=None):
 
     desc_lines.extend([
         "",
+        # Primal branding creed (vidIQ pgvFAwznds0): one line, every video
+        "Real audits. Real scores. No fluff.",
+        "",
         "Get your own free landing page audit — email the fix list to yourself:",
         "https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=video&utm_campaign={domain}".format(domain=domain),
         "",
@@ -227,6 +230,9 @@ def generate_script(page, audit, url=None):
         # architecture — the channel page is a top-3 subscriber source).
         "Subscribe for a daily landing page teardown:",
         "https://www.youtube.com/@nebulaaudits?sub_confirmation=1",
+        "",
+        # Element 4: ritual — the verbal sign-off line, same every video
+        "That's your number. Nebula's got your fix.",
         "",
         f"#landingpage #cro #conversionoptimization #{domain.split('.')[0]}",
     ])
