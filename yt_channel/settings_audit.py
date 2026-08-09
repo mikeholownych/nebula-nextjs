@@ -94,6 +94,16 @@ def audit() -> dict:
             "featured_places_off": "Studio → Settings → Upload defaults → Advanced: Featured places OFF",
             "auto_chapters_off": "Studio → Settings → Upload defaults → Advanced: disable auto chapters; write manual SEO chapters",
             "end_screens": "Editor → End screen: add video/playlist/subscribe (N/A for <2min Shorts)",
+            "player_for_education_off": ("Studio → Settings → Channel → Advanced: 'Allow video to be "
+                                         "played in Player for Education' must stay OFF — Shane Hummus "
+                                         "(N45nMvSOgFQ): his brother enabled it and his AdSense dropped "
+                                         "to ~$0; education-player plays are not ad-monetized."),
+            "community_tab_post": ("Community tab: post the new video link + question right after "
+                                   "upload (no API — manual; 'boost on new channels' per Shane "
+                                   "N45nMvSOgFQ tip #2)"),
+            "pinned_comment": ("Comments → pin our self-comment (link + question) on the newest "
+                               "video — API posts the comment, PIN is Studio-only (10s, per Shane "
+                               "N45nMvSOgFQ tip #6)"),
         },
     }
 

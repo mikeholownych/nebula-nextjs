@@ -23,7 +23,15 @@ else
 fi
 
 echo "=== YouTube Pipeline Run: $(date) [mode=$MODE] ===" >> "$LOG_FILE" 2>&1
-python3 yt_channel/yt_orchestrator.py --upload --mode "$MODE" >> "$LOG_FILE" 2>&1
+
+# Shane Hummus (N45nMvSOgFQ) tip #1: flip any long-form held private
+# >=24h to public (YouTube's AI scans new uploads; new channels get
+# fewer resources so trust matters more). Shorts never held.
+echo "=== Publish Held Videos ===" >> "$LOG_FILE" 2>&1
+python3 yt_channel/post_upload.py --publish-held >> "$LOG_FILE" 2>&1 || true
+echo "=== Publish Held End ===" >> "$LOG_FILE" 2>&1
+
+python3 yt_channel/yt_orchestrator.py --upload --mode "$MODE" --hold-long >> "$LOG_FILE" 2>&1
 
 EXIT_CODE=$?
 if [ $EXIT_CODE -eq 0 ]; then

@@ -195,7 +195,7 @@ def log_production(domain, title, score, video_path, duration):
     return entry
 
 
-async def run_pipeline(upload: bool = False, mode: str = "both"):
+async def run_pipeline(upload: bool = False, mode: str = "both", hold_long: bool = False):
     """Full production pipeline. mode: 'both' | 'short' | 'long'."""
     import asyncio
     # 1. Pick lead — self-healing: if a subject fails to scrape (SPA >
@@ -281,8 +281,10 @@ async def run_pipeline(upload: bool = False, mode: str = "both"):
     # 5. Upload to YouTube (optional) — upload BOTH when mode=both
     if upload:
         try:
-            from yt_channel.upload import upload_video, set_thumbnail
+            from yt_channel.upload import upload_video, set_thumbnail, _get_authenticated_service
+            from yt_channel.post_upload import ensure_playlist, run_post_upload
 
+            svc = _get_authenticated_service()
             uploads = []
             if video_path is not None:
                 uploads.append((video_path, script["title"], script["description"], thumbnail_path, "long"))
@@ -354,19 +356,41 @@ async def run_pipeline(upload: bool = False, mode: str = "both"):
                     title.split(":")[0].split("—")[0].strip()[:30],
                 ]
                 log.info(f"Uploading {kind} to YouTube...")
+                # Shane Hummus (N45nMvSOgFQ) tip #7: file name = title —
+                # YouTube reads the filename during processing (SEO metadata).
+                # 'this tip alone probably got me an extra 10-20M views'.
+                from yt_channel.post_upload import rename_to_title
+                path = rename_to_title(path, title)
+
+                # tip #1: hold LONG-FORM private 24-48h (YouTube's AI scans
+                # new uploads; new channels get fewer resources so trust
+                # matters more). Shorts stay public — the Shorts feed is the
+                # discovery surface and is time-sensitive. publish_held.py
+                # (run by yt_cron.sh) flips held videos to public at 24h.
+                privacy = "private" if (kind == "long" and hold_long) else "public"
                 video_id = upload_video(
                     video_path=str(path),
                     title=title,
                     description=description,
                     tags=tags,
-                    privacy="public",
+                    privacy=privacy,
                 )
                 if video_id:
-                    log.info(f"✅ Uploaded {kind}: https://youtube.com/watch?v={video_id}")
-                    log_stage("upload", domain, "ok", f"{kind} {video_id}")
+                    log.info(f"✅ Uploaded {kind} ({privacy}): https://youtube.com/watch?v={video_id}")
+                    log_stage("upload", domain, "ok", f"{kind} {video_id} {privacy}")
                     if thumb is not None and thumb.exists():
                         set_thumbnail(video_id, str(thumb))
                         log.info("✅ Thumbnail set")
+                    # Post-upload playbook (Shane N45nMvSOgFQ tips #6/#9):
+                    # deep-link into the teardown playlist + self-comment
+                    # with the free-audit link. Fail-closed: never breaks
+                    # the pipeline if a step fails.
+                    try:
+                        pl_id = ensure_playlist(svc)
+                        post = run_post_upload(svc, video_id, kind, playlist_id=pl_id)
+                        log.info(f"Post-upload: playlist={post.get('playlist')} comment={post.get('comment')}")
+                    except Exception as e:
+                        log.warning(f"Post-upload steps failed: {e}")
                 else:
                     log.warning(f"Upload returned no video ID ({kind})")
                     log_stage("upload", domain, "fail", f"{kind}: no video id")
@@ -381,6 +405,8 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(description="Nebula Audits YouTube pipeline")
     parser.add_argument("--upload", action="store_true", help="Upload to YouTube after production")
+    parser.add_argument("--hold-long", action="store_true",
+                        help="Upload long-form as private, publish after 24h (Shane N45nMvSOgFQ tip #1)")
     parser.add_argument("--mode", choices=["both", "short", "long"], default="both",
                         help="Which video(s) to produce/upload (default: both)")
     parser.add_argument("--batch", type=int, default=1,
@@ -399,7 +425,7 @@ def main():
         if args.batch > 1:
             log.info(f"── Batch item {i + 1}/{args.batch} ──")
         try:
-            entry = asyncio.run(run_pipeline(upload=args.upload, mode=args.mode))
+            entry = asyncio.run(run_pipeline(upload=args.upload, mode=args.mode, hold_long=args.hold_long))
         except Exception as e:
             log.error(f"Batch item {i + 1} failed: {e} — continuing with next item")
             continue

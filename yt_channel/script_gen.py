@@ -167,7 +167,14 @@ def generate_script(page, audit, url=None):
     title = best.title
 
     # ── Description ─────────────────────────────────────────────────
+    # Shane Hummus (N45nMvSOgFQ) tip #5: most important links go at the
+    # VERY TOP of the description (above the fold in the preview; ~everyone
+    # sees the first lines, few scroll), SEO copy BELOW the links.
+    audit_link = ("https://nebulacomponents.com/audit?utm_source=youtube"
+                  f"&utm_medium=video&utm_campaign={domain}")
     desc_lines = [
+        audit_link,
+        f"",
         f"📊 Landing page audit for {domain}",
         f"",
         f"Score: {overall:.1f}/10 · Grade {grade}",
@@ -218,9 +225,6 @@ def generate_script(page, audit, url=None):
         "",
         # Primal branding creed (vidIQ pgvFAwznds0): one line, every video
         "Real audits. Real scores. No fluff.",
-        "",
-        "Get your own free landing page audit — email the fix list to yourself:",
-        "https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=video&utm_campaign={domain}".format(domain=domain),
         "",
         "Fix Map: https://nebulacomponents.com/7-systems.html",
         "DIY Fix Kit: https://nebulacomponents.com/checkout.html",
