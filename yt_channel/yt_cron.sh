@@ -34,3 +34,7 @@ fi
 
 # Show last 10 lines to stdout (for cron delivery)
 tail -10 "$LOG_FILE"
+echo ""
+echo "=== Studio Status ===" >> "$LOG_FILE" 2>&1
+python3 yt_channel/studio_status.py >> "$LOG_FILE" 2>&1 || true
+echo "=== Status End ===" >> "$LOG_FILE" 2>&1

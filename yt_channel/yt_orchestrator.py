@@ -38,6 +38,39 @@ from yt_channel.produce import produce_video
 from yt_channel.config import VIDEO_DIR, THUMBNAIL_DIR
 
 PRODUCTION_LOG = VIDEO_DIR / "production_log.jsonl"
+# Per-stage activity log (the "agents log every task" DB from the
+# content-studio pattern — enables the studio dashboard's real success
+# rate and failure view instead of guesswork).
+STUDIO_ACTIVITY_LOG = NEBULA_DIR / "yt_channel" / "logs" / "studio_activity.jsonl"
+
+
+def log_stage(stage: str, domain: str, status: str, detail: str = ""):
+    """Append one stage event to studio_activity.jsonl atomically.
+
+    stage: pick|audit|script|render|qa|upload
+    status: ok|fail|skip
+    Mirrors the per-agent activity logging in the content-studio pattern:
+    every stage logs its name, target, outcome, and timestamp so the
+    dashboard shows real runs + success rate (no fake metrics).
+    """
+    entry = {
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "stage": stage,
+        "domain": domain,
+        "status": status,
+        "detail": detail[:300],
+    }
+    try:
+        STUDIO_ACTIVITY_LOG.parent.mkdir(parents=True, exist_ok=True)
+        tmp = STUDIO_ACTIVITY_LOG.with_suffix(".jsonl.tmp")
+        with open(tmp, "w") as f:
+            if STUDIO_ACTIVITY_LOG.exists():
+                f.write(STUDIO_ACTIVITY_LOG.read_text())
+            f.write(json.dumps(entry) + "\n")
+        os.replace(tmp, STUDIO_ACTIVITY_LOG)
+    except Exception as e:
+        log.warning(f"Could not write studio activity log: {e}")
+    return entry
 AUDIT_LEADS_FILE = NEBULA_DIR / "audit_leads.jsonl"
 COUNTER_FILE = NEBULA_DIR / "yt_channel" / "tmp" / ".subject_counter"
 SKIP_DOMAINS = {"example.com", "test.com", "localhost"}
@@ -181,9 +214,11 @@ async def run_pipeline(upload: bool = False, mode: str = "both"):
         try:
             page = scrape_page(url)
             audit = score_audit(page)
+            log_stage("audit", domain, "ok", f"score {audit['overall']}/10")
             break
         except Exception as e:
             log.warning(f"Scrape failed for {domain}: {e} — trying next subject")
+            log_stage("audit", domain, "fail", str(e)[:200])
             attempted.add(domain)
             page = audit = None
     if page is None or audit is None:
@@ -213,6 +248,7 @@ async def run_pipeline(upload: bool = False, mode: str = "both"):
         thumbnail_path = Path(result["thumbnail_path"])
         script = result["script"]
         short_path = Path(short_result["video_path"])
+        log_stage("render", domain, "ok", f"long+short ({result['audio_duration']:.0f}s / {short_result['audio_duration']:.0f}s)")
         log.info(f"Short produced: {short_path.name} ({short_result['audio_duration']:.1f}s)")
         log.info(f"Video produced: {video_path.name} ({result['audio_duration']:.1f}s)")
     elif mode == "short":
@@ -222,6 +258,7 @@ async def run_pipeline(upload: bool = False, mode: str = "both"):
         thumbnail_path = None
         script = short_result["script"]
         short_path = Path(short_result["video_path"])
+        log_stage("render", domain, "ok", f"short ({short_result['audio_duration']:.0f}s)")
         log.info(f"Short produced: {short_path.name} ({short_result['audio_duration']:.1f}s)")
     else:  # long
         result = await produce_video(page, audit, url)
@@ -229,6 +266,7 @@ async def run_pipeline(upload: bool = False, mode: str = "both"):
         thumbnail_path = Path(result["thumbnail_path"])
         script = result["script"]
         short_path = None
+        log_stage("render", domain, "ok", f"long ({result['audio_duration']:.0f}s)")
         log.info(f"Video produced: {video_path.name} ({result['audio_duration']:.1f}s)")
 
     # 4. Log production
@@ -269,7 +307,9 @@ async def run_pipeline(upload: bool = False, mode: str = "both"):
                         f"QA FAILED for {kind} ({title[:50]}) — upload skipped: "
                         f"{qa.stdout.strip()[:300]}"
                     )
+                    log_stage("qa", domain, "fail", f"{kind}: {qa.stdout.strip()[:200]}")
                     continue
+                log_stage("qa", domain, "ok", kind)
 
                 # Per-video tags: domain + worst dimension + niche keywords
                 # (helps YouTube/advertisers classify; cheap, 20 seconds of
@@ -291,13 +331,16 @@ async def run_pipeline(upload: bool = False, mode: str = "both"):
                 )
                 if video_id:
                     log.info(f"✅ Uploaded {kind}: https://youtube.com/watch?v={video_id}")
+                    log_stage("upload", domain, "ok", f"{kind} {video_id}")
                     if thumb is not None and thumb.exists():
                         set_thumbnail(video_id, str(thumb))
                         log.info("✅ Thumbnail set")
                 else:
                     log.warning(f"Upload returned no video ID ({kind})")
+                    log_stage("upload", domain, "fail", f"{kind}: no video id")
         except Exception as e:
             log.warning(f"Upload failed (OAuth may not be set up): {e}")
+            log_stage("upload", domain, "fail", str(e)[:200])
 
     return entry
 
