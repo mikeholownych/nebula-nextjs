@@ -80,8 +80,10 @@ def generate_script(page, audit, url=None):
     segments = []
     t = 0.0  # running time cursor
 
-    # Intro hook (5 seconds)
-    hook = f"Here is another landing page audit. Today we are looking at {domain}."
+    # Intro hook (5 seconds) — Brenda Turner fifth wall (RRDJO_UV4I8):
+    # talk to the ONE viewer, not an audience. No "we are looking at".
+    # {PAUSE} markers mimic natural speech rhythm (pauses at sentence boundaries).
+    hook = f"Today: {domain}. {{PAUSE}} Watch closely — you will see exactly where the money leaks."
     seg = {"start": t, "end": t + len(hook) / WPS, "text": hook,
            "visual": "intro_card", "dimension": None}
     segments.append(seg)
@@ -94,16 +96,18 @@ def generate_script(page, audit, url=None):
     segments.append(seg)
     t = seg["end"]
 
-    # Worst dimension highlight (6 seconds)
+    # Worst dimension highlight (6 seconds) — viewer-owned, plain label
+    from yt_channel.short_gen import PLAIN_LABELS as _PL
+    plain = _PL.get(worst, worst_label.lower())
     if worst_score < 6:
         highlight = (
-            f"The biggest problem: {worst_label}, scoring only {worst_score:.0f} out of 10. "
-            f"Here is why that matters."
+            f"The biggest problem is your {plain}: only {worst_score:.0f} out of 10. "
+            f"That is costing you sales."
         )
     else:
         highlight = (
-            f"No critical failures, but {worst_label} at {worst_score:.0f} out of 10 "
-            f"has room to improve."
+            f"No critical failures, but your {plain} scores {worst_score:.0f} out of 10. "
+            f"There is room to grow."
         )
     seg = {"start": t, "end": t + len(highlight) / WPS, "text": highlight,
            "visual": f"dimension_{worst}", "dimension": worst}
@@ -122,9 +126,12 @@ def generate_script(page, audit, url=None):
         if score >= 7 and key != worst:
             continue
 
-        narrative = f"{label}: {score} out of 10. {issue}"
+        # Brenda Turner fifth wall: the viewer owns the audit. Report as
+        # "your {plain}" instead of a third-person report read at them.
+        plain = _PL.get(key, label.lower())
+        narrative = f"Your {plain} scores {score} out of 10. {issue}"
         if fix:
-            narrative += f" Fix: {fix}"
+            narrative += f" Here is the fix: {fix}"
         # Cap per-dimension narration at ~15 seconds
         max_words = int(15 * WPS)
         words = narrative.split()
@@ -136,10 +143,13 @@ def generate_script(page, audit, url=None):
         segments.append(seg)
         t = seg["end"]
 
-    # Call to action (8 seconds)
+    # Call to action (8 seconds) — ends with the verbal sign-off ritual
+    # (vidIQ Primal Branding): the same line every video, so viewers
+    # anticipate it. Also Brenda Turner voice: direct, one-to-one.
     cta = (
-        f"Want your own audit? Visit nebulacomponents dot shop slash audit for a free instant score "
-        f"with specific fixes for each issue. No call, no credit card."
+        f"Want your own audit? Get a free instant score at nebulacomponents dot com slash audit. "
+        f"Enter your email and the full fix list is sent straight to your inbox. No call, no credit card. "
+        f"That's your number. Nebula's got your fix."
     )
     seg = {"start": t, "end": t + len(cta.split()) / WPS, "text": cta,
            "visual": "outro_card", "dimension": None}
@@ -147,17 +157,34 @@ def generate_script(page, audit, url=None):
     t = seg["end"]
 
     # ── Title ───────────────────────────────────────────────────────
+    # Search-intent first: lead with the pain, keep domain secondary.
     if overall < 4:
-        title = f"Landing Page Audit: {domain} — Critical Issues Found ({overall:.0f}/10)"
+        title = f"Your Landing Page Is Bleeding Money: {domain} Audit ({overall:.0f}/10)"
     elif overall < 6.5:
-        title = f"Landing Page Teardown: {domain} — Why It Is Not Converting ({overall:.0f}/10)"
+        title = f"Why This Landing Page Isn't Converting: {domain} Teardown ({overall:.0f}/10)"
     elif overall < 8:
-        title = f"Landing Page Review: {domain} — Close to Great ({overall:.0f}/10)"
+        title = f"What {domain} Gets Right (That Most Pages Don't): Review ({overall:.0f}/10)"
     else:
-        title = f"Landing Page Breakdown: {domain} — What They Are Doing Right ({overall:.0f}/10)"
+        title = f"How {domain} Turns Visitors Into Customers: Breakdown ({overall:.0f}/10)"
+
+    # Holy-trifecta title step: generate variants, score, pick best.
+    from yt_channel.title_score import pick_best
+    variant_pain = f"Your Landing Page Is Costing You Sales: {domain} Teardown ({overall:.0f}/10)"
+    variant_question = f"Is Your Landing Page Leaving Money On The Table? {domain} Audit ({overall:.0f}/10)"
+    variant_specific = f"{domain} Scores {overall:.0f}/10 — Landing Page Audit"
+    best = pick_best([title, variant_pain, variant_question, variant_specific],
+                     is_short=False, domain=domain, has_score=True, seed=domain)
+    title = best.title
 
     # ── Description ─────────────────────────────────────────────────
+    # Shane Hummus (N45nMvSOgFQ) tip #5: most important links go at the
+    # VERY TOP of the description (above the fold in the preview; ~everyone
+    # sees the first lines, few scroll), SEO copy BELOW the links.
+    audit_link = ("https://nebulacomponents.com/audit?utm_source=youtube"
+                  f"&utm_medium=video&utm_campaign={domain}")
     desc_lines = [
+        audit_link,
+        f"",
         f"📊 Landing page audit for {domain}",
         f"",
         f"Score: {overall:.1f}/10 · Grade {grade}",
@@ -171,13 +198,66 @@ def generate_script(page, audit, url=None):
 
     desc_lines.extend([
         "",
-        "🔧 Fix Map: https://nebulacomponents.com/7-systems.html",
-        "🚀 Free Instant Audit: https://nebulacomponents.com/audit.html",
-        "💻 DIY Fix Kit: https://nebulacomponents.com/checkout.html",
+        "Your worst issue: {worst_label} ({worst_score:.0f}/10)".format(
+            worst_label=worst_label,
+            worst_score=min(data["score"] for _, data in sorted_dims)),
+        "",
+    ])
+
+    # Chapter timestamps (from segment timing — helps YouTube understand
+    # the video and gives viewers a jump menu).
+    def _mmss(sec: float) -> str:
+        m, s = divmod(int(sec), 60)
+        return f"{m}:{s:02d}"
+    seen = set()
+    chapters = ["Timestamps:"]
+    for seg in segments:
+        visual = seg.get("visual", "")
+        if visual == "intro_card":
+            label = "Intro"
+        elif visual == "score_card":
+            label = "Score Overview"
+        elif visual == "outro_card":
+            label = "Get Your Free Audit"
+        elif visual.startswith("dimension_"):
+            label = DIM_LABELS.get(seg.get("dimension"), seg.get("dimension", "").replace("_", " ").title())
+        else:
+            label = seg.get("dimension") or "Intro"
+        # One chapter per section (worst-dimension gets highlight + narrative
+        # segments — keep only the first, at the earliest timestamp).
+        if label in seen:
+            continue
+        seen.add(label)
+        chapters.append(f"{_mmss(seg['start'])} {label}")
+    desc_lines.append("\n".join(chapters))
+
+    desc_lines.extend([
+        "",
+        # Primal branding creed (vidIQ pgvFAwznds0): one line, every video
+        "Real audits. Real scores. No fluff.",
+        "",
+        "Fix Map: https://nebulacomponents.com/7-systems.html",
+        "DIY Fix Kit: https://nebulacomponents.com/checkout.html",
+        "",
+        # vidIQ tactic (rBIeT9iLmnU): channel URL + sub_confirmation=1
+        # triggers an instant subscribe popup on arrival (choice
+        # architecture — the channel page is a top-3 subscriber source).
+        "Subscribe for a daily landing page teardown:",
+        "https://www.youtube.com/@nebulaaudits?sub_confirmation=1",
+        "",
+        # Element 4: ritual — the verbal sign-off line, same every video
+        "That's your number. Nebula's got your fix.",
         "",
         f"#landingpage #cro #conversionoptimization #{domain.split('.')[0]}",
     ])
     description = "\n".join(desc_lines)
+
+    # Brenda Turner fifth-wall voice gate (RRDJO_UV4I8) — fail-closed:
+    # a script that talks AT an audience must never be produced.
+    from yt_channel.readability import check_voice
+    voice = check_voice(" ".join(s["text"] for s in segments))
+    if not voice["pass"]:
+        raise ValueError(f"Fifth-wall voice gate FAILED: {voice['reason']}")
 
     return {
         "title": title,
@@ -188,6 +268,7 @@ def generate_script(page, audit, url=None):
         "worst_label": worst_label,
         "overall_score": overall,
         "domain": domain,
+        "voice": voice,
     }
 
 

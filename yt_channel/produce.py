@@ -10,6 +10,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 from . import config
 from .script_gen import generate_script, DIM_LABELS
+from .screenshot import prepare_bg as _prepare_bg
+from .screenshot import capture_page
 
 # ── Colour palette (dark Nebula theme) ──────────────────────────────
 BG      = (15, 23, 42)       # slate-900
@@ -48,10 +50,17 @@ def _wrap(text, font, max_width, draw):
     return lines
 
 
-def make_intro_card(domain, overall, grade):
+def _panel(d, x, y, w, h, border=ACCENT, radius=24):
+    """Solid contrast panel so text is readable over any background."""
+    d.rounded_rectangle([x, y, x + w, y + h], radius=radius,
+                        fill=BG, outline=border, width=2)
+
+
+def make_intro_card(domain, overall, grade, bg=None):
     """Channel intro frame."""
-    img = Image.new("RGB", (W, H), BG)
+    img = _prepare_bg(bg, W, H) or Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(img)
+    _panel(d, 70, 60, 1140, 600)
     try:
         title_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 52)
         sub_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 28)
@@ -72,16 +81,16 @@ def make_intro_card(domain, overall, grade):
     colour = _score_colour(overall)
     d.ellipse([cx-60, cy-60, cx+60, cy+60], outline=colour, width=6)
     d.text((cx, cy), f"{overall:.0f}", fill=colour, font=score_font, anchor="mm")
-    d.text((cx, cy+55), f"/10 · Grade {grade}", fill=MUTED, font=label_font, anchor="mm")
-
-    d.text((W//2, H-40), "nebulacomponents.com", fill=DIM, font=label_font, anchor="mm")
+    # Grade line BELOW the circle (not overlapping its bottom stroke)
+    d.text((cx, cy+75), f"/10 · Grade {grade}", fill=MUTED, font=label_font, anchor="mm")
     return img
 
 
-def make_score_card(overall, grade, band, dim_count):
+def make_score_card(overall, grade, band, dim_count, bg=None):
     """Overall score summary frame."""
-    img = Image.new("RGB", (W, H), BG)
+    img = _prepare_bg(bg, W, H) or Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(img)
+    _panel(d, 70, 60, 1140, 600)
     try:
         big = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 100)
         sub = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 32)
@@ -97,10 +106,11 @@ def make_score_card(overall, grade, band, dim_count):
     return img
 
 
-def make_dim_card(dim_key, label, score, issue, fix):
+def make_dim_card(dim_key, label, score, issue, fix, bg=None):
     """Single dimension breakdown frame."""
-    img = Image.new("RGB", (W, H), BG_CARD)
+    img = _prepare_bg(bg, W, H) or Image.new("RGB", (W, H), BG_CARD)
     d = ImageDraw.Draw(img)
+    _panel(d, 70, 60, 1140, 600, border=_score_colour(score))
     try:
         title_f = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 38)
         body_f = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 24)
@@ -143,10 +153,41 @@ def make_dim_card(dim_key, label, score, issue, fix):
     return img
 
 
-def make_outro_card(domain):
-    """CTA frame."""
-    img = Image.new("RGB", (W, H), BG)
+def _dashed_rect(d, box, dash=16, gap=12, width=2, fill=None, outline=None):
+    """Draw a dashed rectangle outline (PIL has no native dash)."""
+    x0, y0, x1, y1 = box
+    segments = []
+    def _dash(p0, p1):
+        length = max(abs(p1[0] - p0[0]) + abs(p1[1] - p0[1]), 1)
+        pos, step = 0.0, dash + gap
+        while pos < length:
+            seg_end = min(pos + dash, length)
+            t0, t1 = pos / length, seg_end / length
+            segments.append((
+                (p0[0] + (p1[0] - p0[0]) * t0, p0[1] + (p1[1] - p0[1]) * t0),
+                (p0[0] + (p1[0] - p0[0]) * t1, p0[1] + (p1[1] - p0[1]) * t1),
+            ))
+            pos += step
+    _dash((x0, y0), (x1, y0))
+    _dash((x1, y0), (x1, y1))
+    _dash((x1, y1), (x0, y1))
+    _dash((x0, y1), (x0, y0))
+    for p0, p1 in segments:
+        d.line([p0, p1], fill=outline or ACCENT, width=width)
+
+
+def make_outro_card(domain, bg=None):
+    """End-screen template (blueprint Phase 4 'Interactive Outro').
+
+    The bottom corners are RESERVED EMPTY ZONES for YouTube's end-screen
+    elements (subscribe + next-video). End screens cannot be set via the
+    Data API — a human drops the elements into these zones in Studio.
+    The zones are drawn as dashed placeholders so the safe area is
+    obvious during manual setup; they read as 'empty on purpose'.
+    """
+    img = _prepare_bg(bg, W, H) or Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(img)
+    _panel(d, 70, 60, 1140, 600)
     try:
         big = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 36)
         body = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 26)
@@ -154,25 +195,47 @@ def make_outro_card(domain):
     except:
         big = body = small = ImageFont.load_default()
 
-    d.text((W//2, 200), "Get Your Free Audit", fill=ACCENT, font=big, anchor="mm")
-    d.text((W//2, 270), "nebulacomponents.com/audit", fill=WHITE, font=body, anchor="mm")
-    d.text((W//2, 340), "No call · No credit card · Instant results", fill=MUTED, font=small, anchor="mm")
+    d.text((W//2, 170), "Get Your Free Audit", fill=ACCENT, font=big, anchor="mm")
+    d.text((W//2, 240), "nebulacomponents.com/audit", fill=WHITE, font=body, anchor="mm")
+    d.text((W//2, 310), "No call · No credit card · Instant results", fill=MUTED, font=small, anchor="mm")
 
-    d.text((W//2, 480), "DIY Fix Kit: nebulacomponents.com/checkout", fill=DIM, font=small, anchor="mm")
-    d.text((W//2, 520), "$97 Done-For-You Fix Pack available", fill=DIM, font=small, anchor="mm")
+    d.text((W//2, 410), "DIY Fix Kit: nebulacomponents.com/checkout", fill=DIM, font=small, anchor="mm")
+    d.text((W//2, 450), "$97 Done-For-You Fix Pack available", fill=DIM, font=small, anchor="mm")
 
-    d.text((W//2, H-40), "Nebula Components — Autonomous Conversion Engineering", fill=DIM, font=small, anchor="mm")
+    # Reserved end-screen zones (YouTube safe area, bottom corners)
+    z_w, z_h, z_y = 330, 190, 540
+    _dashed_rect(d, (80, z_y, 80 + z_w, z_y + z_h), outline=DIM)
+    d.text((80 + z_w // 2, z_y + z_h // 2), "END SCREEN\nSUBSCRIBE", fill=DIM, font=small, anchor="mm")
+    _dashed_rect(d, (W - 80 - z_w, z_y, W - 80, z_y + z_h), outline=DIM)
+    d.text((W - 80 - z_w // 2, z_y + z_h // 2), "END SCREEN\nNEXT VIDEO", fill=DIM, font=small, anchor="mm")
+
+    d.text((W//2, 636), "Nebula Components — Autonomous Conversion Engineering", fill=DIM, font=small, anchor="mm")
     return img
 
 
-# ── Async TTS via edge-tts ──────────────────────────────────────────
+def make_sting_card(bg=None):
+    """Brand sting (blueprint Phase 4 'The 3-Second Rule').
 
-async def _generate_voiceover(text, output_path):
-    """Generate TTS audio file using edge-tts (free, no API key)."""
-    import edge_tts
-    communicate = edge_tts.Communicate(text, voice="en-US-AriaNeural", rate="+10%")
-    await communicate.save(str(output_path))
-    return output_path
+    A static, standardized logo flash shown between the hook and the
+    body (the 'content gap' — never before the hook). Short, silent
+    (the whoosh is mixed by the audio engine), and identical on every
+    video to build brand equity.
+    """
+    img = _prepare_bg(bg, W, H) or Image.new("RGB", (W, H), BG)
+    d = ImageDraw.Draw(img)
+    try:
+        big = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 76)
+        sub = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 30)
+        small = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 22)
+    except:
+        big = sub = small = ImageFont.load_default()
+
+    # Logo lockup on a clean panel
+    _panel(d, 240, 220, 800, 280, border=DIM)
+    d.text((W//2, 300), "NEBULA AUDITS", fill=ACCENT, font=big, anchor="mm")
+    d.text((W//2, 380), "Real audits. Real scores. No fluff.", fill=MUTED, font=sub, anchor="mm")
+    d.text((W//2, 560), "THE VERDICT", fill=DIM, font=small, anchor="mm")
+    return img
 
 
 # ── Main pipeline ───────────────────────────────────────────────────
@@ -212,6 +275,9 @@ async def produce_video(page, audit, url=None):
 
     # 1. Generate visual frames
     _ensure_font()
+    # Try to capture the real page as a background (fallback: flat colour)
+    from yt_channel.screenshot import capture_page_async
+    bg = await capture_page_async(url) if url else None
 
     frames = []
     for i, seg in enumerate(script["segments"]):
@@ -219,12 +285,12 @@ async def produce_video(page, audit, url=None):
         visual_type = seg["visual"]
 
         if visual_type == "intro_card":
-            img = make_intro_card(domain, overall, grade)
+            img = make_intro_card(domain, overall, grade, bg)
         elif visual_type == "score_card":
             band = "critical" if overall < 4 else "needs work" if overall < 6.5 else "decent" if overall < 8 else "strong"
-            img = make_score_card(overall, grade, band, len(dims))
+            img = make_score_card(overall, grade, band, len(dims), bg)
         elif visual_type == "outro_card":
-            img = make_outro_card(domain)
+            img = make_outro_card(domain, bg)
         elif visual_type.startswith("dimension_") and dim_key:
             label = DIM_LABELS.get(dim_key, dim_key.replace("_", " ").title())
             data = dims.get(dim_key, {})
@@ -233,53 +299,89 @@ async def produce_video(page, audit, url=None):
                 data.get("score", 5),
                 data.get("issue", ""),
                 data.get("fix", ""),
+                bg,
             )
         else:
             # Fallback to intro-style
-            img = make_intro_card(domain, overall, grade)
+            img = make_intro_card(domain, overall, grade, bg)
 
         frame_path = frames_dir / f"frame_{i:04d}.png"
         img.save(frame_path)
         frames.append(frame_path)
 
-    # 2. Generate voiceover audio
-    narration = " ".join(s["text"] for s in script["segments"])
-    audio_path = job_dir / "voiceover.mp3"
-    await _generate_voiceover(narration, audio_path)
+    # Brand sting (blueprint Phase 4): logo flash over the hook→body
+    # transition, never before the hook. Inserted as its own 2s frame +
+    # a 2s silent window in the narration (audio engine adds the whoosh).
+    use_sting = len(script["segments"]) >= 2
+    if use_sting:
+        sting_img = make_sting_card(bg)
+        sting_path = frames_dir / "sting.png"
+        sting_img.save(sting_path)
+        frames.insert(1, sting_path)
 
-    # 3. Get audio duration
-    probe = subprocess.run([
-        "ffprobe", "-v", "error", "-show_entries", "format=duration",
-        "-of", "default=noprint_wrappers=1:nokey=1", str(audio_path)
-    ], capture_output=True, text=True)
-    audio_duration = float(probe.stdout.strip()) if probe.stdout.strip() else script["total_duration"]
+    # 2. Sonic Foundation — per-segment TTS with deterministic pitch
+    #    micro-variation, leading/trailing silence trim, controlled
+    #    pacing gaps (<= 0.2s), transition whoosh SFX layer, and -14 LUFS
+    #    loudness normalization (see audio_engine.py).
+    from yt_channel.audio_engine import (
+        tts_segment, trim_silence, build_narration, build_sfx_track,
+        finalize, PITCH_CYCLE, GAP_S, STING_GAP_S, SFX_LEVEL_DB,
+        STING_SFX_DB, RATE_LONG,
+    )
+    segs = script["segments"]
+    n = len(segs)
+    clips_dir = job_dir / "audio"
+    clips_dir.mkdir(exist_ok=True)
 
-    # 4. Calculate per-frame display durations based on segment timing
-    total_seg_duration = script["total_duration"]
-    # Create a concat file for ffmpeg
-    concat_path = job_dir / "concat.txt"
-    with open(concat_path, "w") as f:
-        for i, seg in enumerate(script["segments"]):
-            seg_dur = seg["end"] - seg["start"]
-            # Scale to actual audio duration
-            scaled_dur = seg_dur * (audio_duration / max(total_seg_duration, 1))
-            f.write(f"file '{frames[i]}'\n")
-            f.write(f"duration {scaled_dur:.3f}\n")
-        # Last frame needs an extra entry for mkv format
-        f.write(f"file '{frames[-1]}'\n")
+    clip_wavs, dur_actual = [], []
+    for i, seg in enumerate(segs):
+        pitch = PITCH_CYCLE[i % len(PITCH_CYCLE)]
+        raw = clips_dir / f"seg_{i:02d}.mp3"
+        wav = clips_dir / f"seg_{i:02d}.wav"
+        await tts_segment(seg["text"], raw, pitch_hz=pitch, rate=RATE_LONG)
+        dur_actual.append(trim_silence(raw, wav))
+        clip_wavs.append(wav)
 
-    # 5. Assemble video with ffmpeg
+    # gaps[i] = silence AFTER clip i; the sting window is the hook's gap.
+    gaps = [GAP_S] * n
+    gaps[-1] = 0.0
+    if use_sting:
+        gaps[0] = STING_GAP_S
+
+    narration_wav = job_dir / "narration.wav"
+    build_narration(clip_wavs, gaps, narration_wav)
+
+    # Video timeline: [hook (dur0), sting (2.0), seg1 (dur1+gap), ...]
+    durations = []
+    offsets = []          # (timestamp, gain_db) whoosh events
+    cursor = 0.0
+    for i in range(n):
+        if use_sting and i == 0:
+            durations.append(dur_actual[i])
+            cursor += dur_actual[i]
+            offsets.append((cursor, STING_SFX_DB))       # hook → sting
+            durations.append(STING_GAP_S)
+            cursor += STING_GAP_S
+            offsets.append((cursor, SFX_LEVEL_DB))       # sting → body
+        else:
+            d_seg = dur_actual[i] + (gaps[i] if i < n - 1 else 0.0)
+            durations.append(d_seg)
+            if i < n - 1:
+                cursor += d_seg
+                offsets.append((cursor, SFX_LEVEL_DB))   # body transitions
+            else:
+                cursor += d_seg
+
+    sfx_wav = build_sfx_track(offsets, cursor, job_dir / "sfx.wav")
+    audio_path = job_dir / "voiceover.wav"
+    audio_duration = finalize(narration_wav, sfx_wav, audio_path)
+
+    # 4/5. Motion assembly — Ken Burns per segment + fades, then mux audio
+    from yt_channel.motion import assemble_motion_video
     video_path = config.VIDEO_DIR / f"{job_id}.mp4"
-    subprocess.run([
-        "ffmpeg", "-y",
-        "-f", "concat", "-safe", "0", "-i", str(concat_path),
-        "-i", str(audio_path),
-        "-c:v", "libx264", "-preset", "medium", "-crf", "23",
-        "-c:a", "aac", "-b:a", "128k",
-        "-pix_fmt", "yuv420p",
-        "-shortest",
-        str(video_path)
-    ], check=True, capture_output=True)
+    assemble_motion_video(
+        frames, durations, audio_path, video_path, W, H,
+    )
 
     # 6. Generate thumbnail
     from yt_channel.thumbnail import generate as gen_thumbnail

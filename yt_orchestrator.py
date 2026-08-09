@@ -75,7 +75,7 @@ def _log_result(video_path, script):
     logger.info(f"Logged production: {script['domain']}")
 
 
-async def produce(url=None, dry_run=False, publish=True):
+async def produce(url=None, dry_run=False, publish=True, script_format="standard"):
     """Main orchestration: audit → produce → upload (unless dry-run)."""
     # 1. Pick subject (provided URL or rotate pool)
     target_url = url or _get_next_subject()
@@ -103,11 +103,33 @@ async def produce(url=None, dry_run=False, publish=True):
     logger.info(f"Score: {audit['overall']:.1f}/10 ({audit.get('overall_grade', '?')})")
 
     # 3. Produce long-form video + Short in parallel
-    logger.info("Producing long-form video + Short...")
+    logger.info(f"Producing long-form video + Short (format={script_format})...")
+
+    # Inject live-audit script format when requested
+    _produce_mod = None
+    _produce_short_mod = None
+    _orig_gen = None
+    _orig_short_gen = None
+    if script_format == "live":
+        from yt_channel.live_audit_script import generate_live_script, generate_live_short_script
+        import yt_channel.produce as _produce_mod
+        import yt_channel.produce_short as _produce_short_mod
+        _orig_gen = _produce_mod.generate_script
+        _orig_short_gen = getattr(_produce_short_mod, "generate_short_script", None)
+        _produce_mod.generate_script = lambda page, audit, url=None: generate_live_script(audit, url=url or target_url)
+        if _orig_short_gen:
+            _produce_short_mod.generate_short_script = lambda page, audit, url=None: generate_live_short_script(audit, url=url or target_url)
+
     long_result, short_result = await asyncio.gather(
         produce_video(page, audit, url=target_url),
         produce_short(page, audit, url=target_url),
     )
+
+    # Restore original script generators
+    if script_format == "live" and _produce_mod is not None and _orig_gen is not None:
+        _produce_mod.generate_script = _orig_gen
+        if _orig_short_gen is not None and _produce_short_mod is not None:
+            _produce_short_mod.generate_short_script = _orig_short_gen
     video_path = long_result["video_path"]
     thumbnail_path = long_result["thumbnail_path"]
     script = long_result["script"]
@@ -178,12 +200,15 @@ def main():
     parser.add_argument("--url", help="Audit a specific URL")
     parser.add_argument("--dry-run", action="store_true", help="Generate video only")
     parser.add_argument("--no-publish", action="store_true", help="Skip upload even if auth exists")
+    parser.add_argument("--format", choices=["standard", "live"], default="standard",
+                        help="Script format: standard (dimension-walkthrough) or live (narrated teardown with money math)")
     args = parser.parse_args()
 
     result = asyncio.run(produce(
         url=args.url,
         dry_run=args.dry_run,
         publish=not args.no_publish,
+        script_format=args.format,
     ))
 
     status = result.get("status", "unknown")

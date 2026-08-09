@@ -137,6 +137,13 @@ def classify(subject: str, body: str) -> str:
         "i'd love to schedule", "quick chat", "15 minutes",
         "we work with companies", "growth strategy", "scale your",
         "b2b", "outreach services", "email marketing service",
+        # Autoresponder patterns
+        "welcome you and thank you for your continued dedication",
+        "synchronized global launch",
+        "just-in-time luxury",
+        "noreply", "no-reply", "auto-reply", "automatic reply",
+        "out of office", "vacation", "away from the office",
+        "this is an automated",
     ]
     if any(s in t for s in spam_signals):
         return "spam"

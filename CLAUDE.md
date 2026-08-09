@@ -33,6 +33,11 @@ Load these on demand:
 discovered → site_found → contacted → audit_delivered → pitch_sent → paid
 Terminal: dead, bounced, max_retries_exceeded
 
+## Verify Before You Build (Layer 1)
+Before doing any work on a software/pipeline request, state how you could verify that work — one line, before building. This inserts the verification plan into the prompt before any code is written, so the result is checkable, not just claimed. Format: `verify plan: <what to run/check to prove this works>`.
+- After building: run the verification plan, capture real output (exit code, log line, HTTP status, rendered DOM), and report it. Do not claim completion without the artifact.
+- For scheduled jobs and skills: a job without proven output is theater (see Graduation Gate #7).
+
 ## Pre-commit Content Checks
 Before committing any `.tsx`/`.mdx` content file:
 - `grep -nP '[\x{2580}-\x{259F}\x{FFFD}\x{25A0}-\x{25FF}]' <file>` — block/corruption chars (must return 0 lines)

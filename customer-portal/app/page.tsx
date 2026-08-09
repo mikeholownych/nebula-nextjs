@@ -75,10 +75,10 @@ export default function Home() {
                 Landing pages don&apos;t convert. Components do.
               </p>
               <h1 className="text-4xl font-extrabold tracking-display text-fg md:text-5xl lg:text-6xl">
-                We scored our own landing page and published every finding. Now score yours.
+                Your landing page is leaking paying customers. Here&apos;s exactly where.
               </h1>
               <p className="mt-6 max-w-lg text-lg leading-7 text-fg-muted">
-                Paste your URL. Nebula detects conversion leaks across core conversion signals and applicable technical checks on your actual page and
+                Paste your URL. Nebula checks 9 conversion signals plus technical readiness on your actual page and
                 returns a prioritized fix list. Free, no signup, takes under two minutes.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -86,7 +86,7 @@ export default function Home() {
                   href="/audit?utm_source=homepage&utm_medium=internal"
                   className="rounded-xl bg-accent px-7 py-3.5 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
                 >
-                  Get My Score
+                  Get My Free Score
                 </Link>
                 <Link
                   href="/teardowns"

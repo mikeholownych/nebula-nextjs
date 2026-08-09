@@ -1,0 +1,334 @@
+#!/usr/bin/env python3
+"""Channel performance analyzer — ICAHN with OUR OWN data.
+
+'If you already have a channel, you have better proof of concept — you can
+do the ICAHN method with money (or conversions) instead of views.' — Shane
+Hummus, $333k playbook (YtpQSmu794k).
+
+Ranks our published videos vs the channel average so we can double down on
+what actually outperforms:
+  - outlier videos (views / engagement / CTR-ish) → what to make MORE of
+  - underperformers → what to stop making
+  - per-video stats joined with production_log (domain, title, score)
+
+Retention curves need the yt-analytics.readonly scope, which the current
+OAuth token lacks. If the token gains that scope later, this script will
+pick up averageViewDuration + audienceWatchRatio automatically; until then
+it reports what statistics-only can give us (views, likes, comments) and
+says so explicitly — never pretends analytics data is available.
+
+Usage:
+  python3 yt_channel/retention_analysis.py [--json]
+"""
+
+import sys, json, logging
+from pathlib import Path
+from datetime import datetime, timezone
+
+NEBULA_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(NEBULA_DIR))
+sys.path.insert(0, str(NEBULA_DIR / "venv" / "lib" / "python3.12" / "site-packages"))
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+log = logging.getLogger("retention_analysis")
+
+LOG_DIR = NEBULA_DIR / "yt_channel" / "logs"
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+
+ANALYTICS_SCOPE = "https://www.googleapis.com/auth/yt-analytics.readonly"
+
+
+def _production_map() -> dict[str, dict]:
+    """video title → production log entry (domain, score, kind)."""
+    out = {}
+    log_file = NEBULA_DIR / "yt_channel" / "videos" / "production_log.jsonl"
+    if not log_file.exists():
+        return out
+    for line in log_file.read_text().strip().splitlines():
+        if not line:
+            continue
+        try:
+            e = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        out[e.get("title", "")] = e
+    return out
+
+
+def analyze() -> dict:
+    from yt_channel.upload import _get_authenticated_service
+    svc = _get_authenticated_service()
+
+    # Channel id + upload playlist
+    ch = svc.channels().list(part="contentDetails,statistics", mine=True).execute()["items"][0]
+    uploads_pl = ch["contentDetails"]["relatedPlaylists"]["uploads"]
+    chan_stats = ch["statistics"]
+
+    # All videos
+    items, token = [], None
+    while True:
+        resp = svc.playlistItems().list(
+            part="snippet", playlistId=uploads_pl, maxResults=50,
+            pageToken=token).execute()
+        items.extend(resp.get("items", []))
+        token = resp.get("nextPageToken")
+        if not token:
+            break
+    video_ids = [i["snippet"]["resourceId"]["videoId"] for i in items]
+
+    videos = {}
+    for i in range(0, len(video_ids), 50):
+        batch = ",".join(video_ids[i:i + 50])
+        for v in svc.videos().list(part="snippet,statistics,contentDetails", id=batch).execute().get("items", []):
+            videos[v["id"]] = v
+
+    prod = _production_map()
+    rows = []
+    for vid_id, v in videos.items():
+        st = v.get("statistics", {})
+        views = int(st.get("viewCount", 0) or 0)
+        likes = int(st.get("likeCount", 0) or 0)
+        comments = int(st.get("commentCount", 0) or 0)
+        title = v["snippet"]["title"]
+        rows.append({
+            "video_id": vid_id,
+            "title": title,
+            "published": v["snippet"]["publishedAt"][:10],
+            "views": views,
+            "likes": likes,
+            "comments": comments,
+            "engagement_rate": round(100 * (likes + comments) / views, 2) if views else 0.0,
+            "duration_s": _iso_duration_to_s(v["contentDetails"].get("duration", "PT0S")),
+            "production": prod.get(title, {}),
+            # Dave Jeltema (JO2JSj3JU48) lesson 26: '% still watching at
+            # the 90% mark' is the ultimate retention metric. YouTube's
+            # audienceWatchRatio needs a data threshold; until it serves
+            # the curve for this channel tier, None + avg duration proxy.
+            "p90_retention": None,
+        })
+
+    rows.sort(key=lambda r: r["views"], reverse=True)
+    n = len(rows) or 1
+    avg_views = sum(r["views"] for r in rows) / n
+    avg_eng = sum(r["engagement_rate"] for r in rows) / n
+
+    # View volatility (The Studio / MKBHD, Puny-2wkMZA): 'if you're
+    # trying to sell ad space, reduce the volatility in views between
+    # each video — you should sit within a pretty tight range.'
+    # Coefficient of variation (std/mean) is the standard measure; a
+    # stable channel has low CV, a hit-or-miss channel has high CV.
+    if n >= 2:
+        mean_v = sum(r["views"] for r in rows) / n
+        var_v = sum((r["views"] - mean_v) ** 2 for r in rows) / (n - 1)
+        view_cv = (var_v ** 0.5) / mean_v if mean_v else 0.0
+    else:
+        view_cv = 0.0
+
+    # 48-hour no-judgment rule (Nastia, ex-YouTube PM, VpKYkZr-1oQ):
+    # don't evaluate a video's performance before ~48h — real-time view
+    # counting is an estimate and the algorithm needs time to find the
+    # audience. Videos younger than 48h are excluded from outlier flags.
+    from datetime import timedelta
+    now = datetime.now(timezone.utc)
+    for r in rows:
+        r["hours_since_publish"] = round((now - datetime.fromisoformat(
+            (r["published"] + "T00:00:00+00:00"))).total_seconds() / 3600, 1)
+        r["too_new"] = r["hours_since_publish"] < 48
+        r["views_vs_avg"] = round(r["views"] / avg_views, 2) if avg_views else 0.0
+        r["eng_vs_avg"] = round(r["engagement_rate"] / avg_eng, 2) if avg_eng else 0.0
+        r["outlier"] = not r["too_new"] and (r["views_vs_avg"] >= 2.0 or r["eng_vs_avg"] >= 2.0)
+
+    # Analytics-scope check (true retention)
+    retention = None
+    creds_path = NEBULA_DIR / "yt_channel" / "creds" / "token.pickle"
+    has_analytics = False
+    try:
+        import pickle
+        from google.oauth2.credentials import Credentials
+        with open(creds_path, "rb") as f:
+            tok = pickle.load(f)
+        has_analytics = ANALYTICS_SCOPE in tok.scopes
+    except Exception:
+        pass
+    if not has_analytics:
+        retention = {
+            "available": False,
+            "reason": f"token lacks {ANALYTICS_SCOPE} — one-time consent refresh required "
+                      f"(re-run setup with the added scope) to read true retention curves",
+        }
+    else:
+        try:
+            # channel-level audience retention (video-level needs the
+            # youtubeAnalytics API; keep this honest and channel-scoped).
+            # NOTE: reports() lives on the youtubeAnalytics v2 service,
+            # NOT on the youtube v3 service from _get_authenticated_service.
+            # Query-shape findings (probed 2026-08-09):
+            #   ✅ dimensions=day + filters=video==<id> with
+            #      views,averageViewDuration,subscribersGained
+            #   ❌ dimensions=video (400 "query not supported" — not
+            #      served for this channel even with correct date range)
+            #   ❌ impressions/impressionsClickThroughRate (400 in every
+            #      shape probed)
+            import pickle
+            from googleapiclient.discovery import build
+            from google.oauth2.credentials import Credentials
+            with open(creds_path, "rb") as f:
+                tok = pickle.load(f)
+            an_svc = build("youtubeAnalytics", "v2", credentials=tok)
+            end = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+            start = "2026-08-01"
+            per_video = {}
+            for vid_id in video_ids:
+                try:
+                    r = an_svc.reports().query(
+                        ids="channel==MINE",
+                        startDate=start, endDate=end,
+                        metrics="views,averageViewDuration,subscribersGained",
+                        dimensions="day",
+                        filters=f"video=={vid_id}",
+                    ).execute()
+                    rows_day = r.get("rows", [])
+                except Exception:
+                    rows_day = []
+                # Nastia (ex-YouTube PM) diagnostic: the subscribed-vs-unsubscribed
+                # split is the #1 check when a video has "good CTR but low
+                # impressions" — great traction with loyal (subscribed) viewers
+                # but ~zero new-viewer traction means packaging doesn't convert
+                # NEW viewers. subscribedStatus is the API proxy for the
+                # new/returning split (returns [] on a brand-new channel).
+                try:
+                    s = an_svc.reports().query(
+                        ids="channel==MINE",
+                        startDate=start, endDate=end,
+                        metrics="views",
+                        dimensions="subscribedStatus",
+                        filters=f"video=={vid_id}",
+                    ).execute()
+                    subs_split = s.get("rows", [])
+                except Exception:
+                    subs_split = []
+                # Dave Jeltema (JO2JSj3JU48) lesson 26: '% still watching at
+                # the 90% mark' is the ultimate metric. audienceWatchRatio +
+                # elapsedVideoTimeRatio is the retention curve; on this channel
+                # tier it 500s until there's enough data — probe best-effort
+                # and leave None when the API refuses (never fake it).
+                p90 = None
+                try:
+                    c = an_svc.reports().query(
+                        ids="channel==MINE",
+                        startDate=start, endDate=end,
+                        metrics="audienceWatchRatio",
+                        dimensions="elapsedVideoTimeRatio",
+                        filters=f"video=={vid_id}",
+                        maxResults=30,
+                    ).execute()
+                    curve = c.get("rows", [])
+                    if curve:
+                        # last non-zero bucket ~= 90%+ mark (curve is
+                        # normalized 0..1 elapsed; take the tail mean)
+                        tail = [row[1] for row in curve[-3:] if row[1] is not None]
+                        p90 = round(sum(tail) / len(tail), 3) if tail else None
+                except Exception:
+                    p90 = None
+                per_video[vid_id] = {"rows": rows_day, "subscribed_split": subs_split, "p90_retention": p90}
+            # stitch p90 back into video rows for the report
+            for r in rows:
+                r["p90_retention"] = per_video.get(r["video_id"], {}).get("p90_retention")
+            # Channel-level daily totals (same working shape, no filter).
+            try:
+                chan_r = an_svc.reports().query(
+                    ids="channel==MINE",
+                    startDate=start, endDate=end,
+                    metrics="views,estimatedMinutesWatched,averageViewDuration,subscribersGained",
+                    dimensions="day",
+                ).execute()
+                chan_rows = chan_r.get("rows", [])
+            except Exception as e:
+                chan_rows = []
+                chan_error = str(e)[:200]
+            retention = {
+                "available": True,
+                "rows": chan_rows,
+                "per_video": per_video,
+                "note": ("day+video-filter shape; impressions/CTR not served "
+                         "for this channel (400); dimensions=video unsupported "
+                         "here — see skill"),
+            }
+            if not chan_rows:
+                retention["reason"] = "no analytics data yet (channel is new)"
+        except Exception as e:
+            retention = {"available": False, "reason": str(e)}
+
+    return {
+        "generated": datetime.now(timezone.utc).isoformat(),
+        "channel": chan_stats,
+        "avg_views": round(avg_views, 1),
+        "avg_engagement_rate": round(avg_eng, 2),
+        "view_cv": round(view_cv, 3),  # view volatility — low = stable for ad sales
+        "video_count": len(rows),
+        "outliers": [r for r in rows if r["outlier"]],
+        "underperformers": [r for r in rows if not r["too_new"] and r["views"] > 0 and r["views_vs_avg"] < 0.5][:5],
+        "retention": retention,
+        "videos": rows,
+    }
+
+
+def _iso_duration_to_s(d: str) -> int:
+    import re
+    m = re.match(r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?", d)
+    if not m:
+        return 0
+    h, mi, s = (int(x or 0) for x in m.groups())
+    return h * 3600 + mi * 60 + s
+
+
+def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="Nebula Audits channel performance analyzer")
+    parser.add_argument("--json", action="store_true")
+    args = parser.parse_args()
+    report = analyze()
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    out = LOG_DIR / f"retention_analysis_{stamp}.json"
+    out.write_text(json.dumps(report, indent=2))
+
+    if args.json:
+        print(json.dumps(report, indent=2))
+        return
+
+    print(f"\n=== Channel performance (ICAHN on our own data) ===")
+    print(f"Videos: {report['video_count']} | Avg views: {report['avg_views']} | "
+          f"Avg engagement: {report['avg_engagement_rate']}%")
+    print(f"View volatility (CV): {report['view_cv']} "
+          f"{'(low = stable, good for ads)' if report['view_cv'] < 0.5 else '(high = hit-or-miss)'}")
+    print(f"Subs: {report['channel'].get('subscriberCount', '?')} | "
+          f"Total views: {report['channel'].get('viewCount', '?')}")
+    print("\n— OUTLIERS (make more of these) —")
+    for r in report["outliers"]:
+        prod = r["production"]
+        dom = prod.get("domain", "?")
+        print(f"  {r['views']:>6,}v x{r['views_vs_avg']:>4.1f} avg | eng {r['engagement_rate']}% "
+              f"| {dom:<24} | {r['title'][:52]}")
+    if not report["outliers"]:
+        print("  (none yet — early channel, keep cadence)")
+    print("\n— UNDERPERFORMERS (stop or fix) —")
+    for r in report["underperformers"]:
+        print(f"  {r['views']:>6,}v x{r['views_vs_avg']:>4.1f} avg | {r['title'][:60]}")
+    print("\n— Retention —")
+    rt = report["retention"]
+    if rt.get("available"):
+        print(f"  available: {len(rt.get('rows', []))} video rows")
+        p90s = [r.get("p90_retention") for r in report["videos"] if r.get("p90_retention") is not None]
+        if p90s:
+            print(f"  p90 retention (avg of tail): {sum(p90s)/len(p90s):.1%} "
+                  f"— Dave's 'ultimate metric' (watch it climb)")
+        else:
+            print("  p90 retention: N/A yet — audienceWatchRatio 500s until "
+                  "channel has enough data (probe is wired, will light up)")
+    else:
+        print(f"  NOT available: {rt.get('reason', '?')}")
+    print(f"\nFull report: {out}")
+
+
+if __name__ == "__main__":
+    main()

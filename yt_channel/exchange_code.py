@@ -9,21 +9,36 @@ CLIENT_SECRET_FILE = Path("yt_channel/creds/client_secret.json")
 VERIFIER_FILE = Path("yt_channel/creds/code_verifier.txt")
 TOKEN_FILE = Path("yt_channel/creds/token.pickle")
 SCOPES = ["https://www.googleapis.com/auth/youtube.upload",
-          "https://www.googleapis.com/auth/youtube"]
+          "https://www.googleapis.com/auth/youtube",
+          "https://www.googleapis.com/auth/youtube.force-ssl",
+          "https://www.googleapis.com/auth/yt-analytics.readonly"]
 
 if len(sys.argv) < 2:
     print("Usage: python3 exchange_code.py <AUTH_CODE>")
     sys.exit(1)
 
 code = sys.argv[1].strip()
+# Accept either the raw code or the full redirect URL from the address bar
+# (http://localhost/?code=...&scope=...).
+if code.startswith("http"):
+    from urllib.parse import urlparse, parse_qs
+    qs = parse_qs(urlparse(code).query)
+    if "code" not in qs:
+        print("No code= param found in the pasted URL.", file=sys.stderr)
+        sys.exit(1)
+    code = qs["code"][0]
 
 # Load the PKCE code_verifier saved by gen_auth_url.py
 with open(VERIFIER_FILE) as f:
     verifier = f.read().strip()
 
+# Registered redirect for this desktop client (see client_secret.json).
+# DO NOT use urn:ietf:wg:oauth:2.0:oob — Google blocked the OOB flow.
+REDIRECT_URI = "http://localhost"
+
 flow = InstalledAppFlow.from_client_secrets_file(
     str(CLIENT_SECRET_FILE), SCOPES,
-    redirect_uri="urn:ietf:wg:oauth:2.0:oob"
+    redirect_uri=REDIRECT_URI
 )
 # Restore the PKCE verifier so the code exchange matches
 flow.code_verifier = verifier

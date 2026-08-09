@@ -16,14 +16,14 @@ export function generateMetadata({
     const c = COMPARISONS[slug]
     if (!c) return {}
     return {
-      title: `${c.competitorName} vs. Nebula — Landing Page Audit Comparison`,
-      description: c.intent,
+      title: `${c.competitorName} Alternative: Nebula vs. ${c.competitorName} — Free Landing Page Audit`,
+      description: c.bluf || c.intent,
       alternates: {
         canonical: `https://nebulacomponents.com/vs/${c.slug}`,
       },
       openGraph: {
-        title: `${c.competitorName} vs. Nebula`,
-        description: c.intent,
+        title: `${c.competitorName} Alternative: Nebula vs. ${c.competitorName}`,
+        description: c.bluf || c.intent,
         url: `https://nebulacomponents.com/vs/${c.slug}`,
       },
     }
@@ -65,6 +65,16 @@ export default async function ComparisonPage({
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">{c.intent}</p>
 
+        {/* Bottom Line Up Front — placed high so AI engines and skimming
+            readers can pull the answer as a snippet (Breaking B2B playbook) */}
+        <section
+          aria-label="Bottom line"
+          className="mt-8 rounded-2xl border border-accent/20 bg-accent/5 p-6"
+        >
+          <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Bottom line up front</h2>
+          <p className="mt-3 text-lg leading-8 text-fg">{c.bluf}</p>
+        </section>
+
         {/* Win count */}
         <div className="mt-8 inline-flex items-center gap-3 rounded-xl border border-accent/20 bg-accent/5 px-5 py-3">
           <span className="text-2xl font-bold text-accent">{nebulaWinCount}/{c.rows.length}</span>
@@ -103,6 +113,39 @@ export default async function ComparisonPage({
           <h2 className="mb-4 text-xl font-bold text-fg">Bottom line</h2>
           <p className="text-fg-muted leading-relaxed">{c.verdict}</p>
         </section>
+
+        {/* FAQs — real questions prospects ask; also emitted as FAQPage
+            JSON-LD so AI engines can cite structured answers */}
+        <section className="mt-12" aria-label="Frequently asked questions">
+          <h2 className="mb-6 text-2xl font-bold text-fg">Frequently asked questions</h2>
+          <div className="divide-y divide-border rounded-2xl border border-border bg-bg-panel">
+            {c.faqs.map((faq) => (
+              <details key={faq.q} className="group px-6 py-5">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-semibold text-fg">
+                  {faq.q}
+                  <span aria-hidden="true" className="shrink-0 text-accent transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p className="mt-3 text-fg-muted leading-relaxed">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        {/* FAQPage JSON-LD for AI citation */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: c.faqs.map((faq) => ({
+                '@type': 'Question',
+                name: faq.q,
+                acceptedAnswer: { '@type': 'Answer', text: faq.a },
+              })),
+            }),
+          }}
+        />
 
         {/* Disclosure */}
         <div className="mt-6 rounded-xl border border-signal-fail/20 bg-signal-fail/5 px-5 py-4 text-sm text-fg-muted">

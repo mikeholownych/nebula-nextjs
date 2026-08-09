@@ -1,0 +1,7 @@
+name: command-guard
+version: 1.0.0
+description: "Pre-tool-call denylist guard: blocks catastrophic shell commands (rm -rf / ~, disk wipe, fork bomb, curl|sh, force-push, gh destructive) before the terminal tool runs. Shared denylist: ~/.agents/hooks/dangerous-patterns.txt. Fail-open by design."
+author: Nebula Components (adapted from davidondrej/skills)
+kind: standalone
+provides_hooks:
+  - pre_tool_call
