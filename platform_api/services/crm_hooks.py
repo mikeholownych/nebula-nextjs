@@ -225,6 +225,30 @@ async def purchase_completed(
     except Exception as exc:
         log.warning("purchase_completed sequence stop failed: %s", exc)
 
+    # Trigger fix pack delivery (fail-silent — never block the payment record)
+    if product_type in ("fix_pack", "fix-pack", "97"):
+        try:
+            import asyncio as _aio
+            from pathlib import Path as _Path
+            import sys as _sys
+            _sys.path.insert(0, str(_Path(__file__).parent.parent.parent))
+            from yt_channel.delivery_workflow import DeliveryWorkflow
+
+            async def _deliver():
+                workflow = DeliveryWorkflow()
+                # Construct a minimal Stripe event and pass to the existing handler
+                await workflow.handle_stripe_charge_success({
+                    "data": {"object": {
+                        "receipt_email": email,
+                        "amount": amount_cents,
+                        "payment_intent": stripe_payment_intent_id or "",
+                    }}
+                })
+
+            _aio.create_task(_deliver())
+        except Exception as exc:
+            log.warning("purchase_completed delivery trigger failed: %s", exc)
+
 
 async def support_objection(
     email: str,
