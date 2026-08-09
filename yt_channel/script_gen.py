@@ -173,7 +173,8 @@ def generate_script(page, audit, url=None):
     desc_lines.extend([
         "",
         "Your worst issue: {worst_label} ({worst_score:.0f}/10)".format(
-            worst_label=worst_label, worst_score=min(data["score"] for data in sorted_dims)),
+            worst_label=worst_label,
+            worst_score=min(data["score"] for _, data in sorted_dims)),
         "",
         "Get your own free landing page audit — email the fix list to yourself:",
         "https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=video&utm_campaign={domain}".format(domain=domain),

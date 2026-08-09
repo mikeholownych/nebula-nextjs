@@ -10,6 +10,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 from . import config
 from .script_gen import generate_script, DIM_LABELS
+from .screenshot import prepare_bg as _prepare_bg
+from .screenshot import capture_page
 
 # ── Colour palette (dark Nebula theme) ──────────────────────────────
 BG      = (15, 23, 42)       # slate-900
@@ -48,10 +50,17 @@ def _wrap(text, font, max_width, draw):
     return lines
 
 
-def make_intro_card(domain, overall, grade):
+def _panel(d, x, y, w, h, border=ACCENT, radius=24):
+    """Solid contrast panel so text is readable over any background."""
+    d.rounded_rectangle([x, y, x + w, y + h], radius=radius,
+                        fill=BG, outline=border, width=2)
+
+
+def make_intro_card(domain, overall, grade, bg=None):
     """Channel intro frame."""
-    img = Image.new("RGB", (W, H), BG)
+    img = _prepare_bg(bg, W, H) or Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(img)
+    _panel(d, 70, 60, 1140, 600)
     try:
         title_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 52)
         sub_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 28)
@@ -72,16 +81,16 @@ def make_intro_card(domain, overall, grade):
     colour = _score_colour(overall)
     d.ellipse([cx-60, cy-60, cx+60, cy+60], outline=colour, width=6)
     d.text((cx, cy), f"{overall:.0f}", fill=colour, font=score_font, anchor="mm")
-    d.text((cx, cy+55), f"/10 · Grade {grade}", fill=MUTED, font=label_font, anchor="mm")
-
-    d.text((W//2, H-40), "nebulacomponents.com", fill=DIM, font=label_font, anchor="mm")
+    # Grade line BELOW the circle (not overlapping its bottom stroke)
+    d.text((cx, cy+75), f"/10 · Grade {grade}", fill=MUTED, font=label_font, anchor="mm")
     return img
 
 
-def make_score_card(overall, grade, band, dim_count):
+def make_score_card(overall, grade, band, dim_count, bg=None):
     """Overall score summary frame."""
-    img = Image.new("RGB", (W, H), BG)
+    img = _prepare_bg(bg, W, H) or Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(img)
+    _panel(d, 70, 60, 1140, 600)
     try:
         big = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 100)
         sub = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 32)
@@ -97,10 +106,11 @@ def make_score_card(overall, grade, band, dim_count):
     return img
 
 
-def make_dim_card(dim_key, label, score, issue, fix):
+def make_dim_card(dim_key, label, score, issue, fix, bg=None):
     """Single dimension breakdown frame."""
-    img = Image.new("RGB", (W, H), BG_CARD)
+    img = _prepare_bg(bg, W, H) or Image.new("RGB", (W, H), BG_CARD)
     d = ImageDraw.Draw(img)
+    _panel(d, 70, 60, 1140, 600, border=_score_colour(score))
     try:
         title_f = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 38)
         body_f = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 24)
@@ -143,10 +153,11 @@ def make_dim_card(dim_key, label, score, issue, fix):
     return img
 
 
-def make_outro_card(domain):
+def make_outro_card(domain, bg=None):
     """CTA frame."""
-    img = Image.new("RGB", (W, H), BG)
+    img = _prepare_bg(bg, W, H) or Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(img)
+    _panel(d, 70, 60, 1140, 600)
     try:
         big = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 36)
         body = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 26)
@@ -161,7 +172,7 @@ def make_outro_card(domain):
     d.text((W//2, 480), "DIY Fix Kit: nebulacomponents.com/checkout", fill=DIM, font=small, anchor="mm")
     d.text((W//2, 520), "$97 Done-For-You Fix Pack available", fill=DIM, font=small, anchor="mm")
 
-    d.text((W//2, H-40), "Nebula Components — Autonomous Conversion Engineering", fill=DIM, font=small, anchor="mm")
+    d.text((W//2, 636), "Nebula Components — Autonomous Conversion Engineering", fill=DIM, font=small, anchor="mm")
     return img
 
 
@@ -212,6 +223,9 @@ async def produce_video(page, audit, url=None):
 
     # 1. Generate visual frames
     _ensure_font()
+    # Try to capture the real page as a background (fallback: flat colour)
+    from yt_channel.screenshot import capture_page_async
+    bg = await capture_page_async(url) if url else None
 
     frames = []
     for i, seg in enumerate(script["segments"]):
@@ -219,12 +233,12 @@ async def produce_video(page, audit, url=None):
         visual_type = seg["visual"]
 
         if visual_type == "intro_card":
-            img = make_intro_card(domain, overall, grade)
+            img = make_intro_card(domain, overall, grade, bg)
         elif visual_type == "score_card":
             band = "critical" if overall < 4 else "needs work" if overall < 6.5 else "decent" if overall < 8 else "strong"
-            img = make_score_card(overall, grade, band, len(dims))
+            img = make_score_card(overall, grade, band, len(dims), bg)
         elif visual_type == "outro_card":
-            img = make_outro_card(domain)
+            img = make_outro_card(domain, bg)
         elif visual_type.startswith("dimension_") and dim_key:
             label = DIM_LABELS.get(dim_key, dim_key.replace("_", " ").title())
             data = dims.get(dim_key, {})
@@ -233,10 +247,11 @@ async def produce_video(page, audit, url=None):
                 data.get("score", 5),
                 data.get("issue", ""),
                 data.get("fix", ""),
+                bg,
             )
         else:
             # Fallback to intro-style
-            img = make_intro_card(domain, overall, grade)
+            img = make_intro_card(domain, overall, grade, bg)
 
         frame_path = frames_dir / f"frame_{i:04d}.png"
         img.save(frame_path)
@@ -254,32 +269,17 @@ async def produce_video(page, audit, url=None):
     ], capture_output=True, text=True)
     audio_duration = float(probe.stdout.strip()) if probe.stdout.strip() else script["total_duration"]
 
-    # 4. Calculate per-frame display durations based on segment timing
+    # 4/5. Motion assembly — Ken Burns per segment + fades, then mux audio
+    from yt_channel.motion import assemble_motion_video
     total_seg_duration = script["total_duration"]
-    # Create a concat file for ffmpeg
-    concat_path = job_dir / "concat.txt"
-    with open(concat_path, "w") as f:
-        for i, seg in enumerate(script["segments"]):
-            seg_dur = seg["end"] - seg["start"]
-            # Scale to actual audio duration
-            scaled_dur = seg_dur * (audio_duration / max(total_seg_duration, 1))
-            f.write(f"file '{frames[i]}'\n")
-            f.write(f"duration {scaled_dur:.3f}\n")
-        # Last frame needs an extra entry for mkv format
-        f.write(f"file '{frames[-1]}'\n")
-
-    # 5. Assemble video with ffmpeg
+    durations = [
+        (seg["end"] - seg["start"]) * (audio_duration / max(total_seg_duration, 1))
+        for seg in script["segments"]
+    ]
     video_path = config.VIDEO_DIR / f"{job_id}.mp4"
-    subprocess.run([
-        "ffmpeg", "-y",
-        "-f", "concat", "-safe", "0", "-i", str(concat_path),
-        "-i", str(audio_path),
-        "-c:v", "libx264", "-preset", "medium", "-crf", "23",
-        "-c:a", "aac", "-b:a", "128k",
-        "-pix_fmt", "yuv420p",
-        "-shortest",
-        str(video_path)
-    ], check=True, capture_output=True)
+    assemble_motion_video(
+        frames, durations, audio_path, video_path, W, H,
+    )
 
     # 6. Generate thumbnail
     from yt_channel.thumbnail import generate as gen_thumbnail

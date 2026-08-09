@@ -232,10 +232,28 @@ async def run_pipeline(upload: bool = False, mode: str = "both"):
             if video_path is not None:
                 uploads.append((video_path, script["title"], script["description"], thumbnail_path, "long"))
             if short_path is not None and short_result is not None:
-                short_script = short_result["script"]
-                uploads.append((short_path, short_script["title"], short_script["description"], None, "short"))
+                short_script = short_result.get("script") or {}
+                uploads.append((short_path, short_script.get("title", ""), short_script.get("description", ""), None, "short"))
 
             for path, title, description, thumb, kind in uploads:
+                # ── Quality gate — fail-closed: broken renders never upload ──
+                qa_cmd = [
+                    sys.executable, "yt_channel/qa_video.py",
+                    "--video", str(path),
+                    "--kind", kind,
+                    "--title", title,
+                    "--description", description,
+                ]
+                if thumb is not None:
+                    qa_cmd += ["--thumbnail", str(thumb)]
+                qa = subprocess.run(qa_cmd, capture_output=True, text=True)
+                if qa.returncode != 0:
+                    log.warning(
+                        f"QA FAILED for {kind} ({title[:50]}) — upload skipped: "
+                        f"{qa.stdout.strip()[:300]}"
+                    )
+                    continue
+
                 log.info(f"Uploading {kind} to YouTube...")
                 video_id = upload_video(
                     video_path=str(path),
