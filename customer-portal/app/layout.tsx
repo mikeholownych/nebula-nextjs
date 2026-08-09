@@ -125,6 +125,48 @@ export default async function RootLayout({
         <Suspense fallback={null}><AnalyticsRuntime /></Suspense>
         <ExitIntentPopup />
         <WebMCP />
+        
+        {/* RB2B Visitor Identification Pixel (lead gen Stage 2) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const WEBHOOK_URL = '/api/lead-gen/rb2b-event';
+                const trackPageVisit = () => {
+                  const pagePath = window.location.pathname;
+                  let pageCategory = 'other';
+                  if (pagePath.includes('/audit')) pageCategory = 'audit';
+                  else if (pagePath.includes('/fix-pack') || pagePath.includes('/checkout')) pageCategory = 'fix-pack';
+                  else if (pagePath.includes('/pricing')) pageCategory = 'pricing';
+                  
+                  if (!window.rb2bPageVisits) window.rb2bPageVisits = [];
+                  window.rb2bPageVisits.push(pageCategory);
+                  window.rb2bSessionStart = window.rb2bSessionStart || Date.now();
+                };
+                
+                const sendVisitorProfile = async () => {
+                  if (!window.rb2bPageVisits || window.rb2bPageVisits.length === 0) return;
+                  const totalDwell = Math.round((Date.now() - (window.rb2bSessionStart || Date.now())) / 1000);
+                  const pages = [...new Set(window.rb2bPageVisits)];
+                  const payload = {
+                    pages_visited: pages,
+                    total_dwell_s: totalDwell,
+                    last_visit: new Date().toISOString(),
+                    utm_source: new URLSearchParams(window.location.search).get('utm_source') || 'organic',
+                  };
+                  try {
+                    await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                  } catch (err) {}
+                };
+                
+                window.rb2bSessionStart = Date.now();
+                window.addEventListener('load', trackPageVisit);
+                window.addEventListener('beforeunload', sendVisitorProfile);
+                setTimeout(sendVisitorProfile, 300000);
+              })();
+            `
+          }}
+        />
       </body>
     </html>
   )

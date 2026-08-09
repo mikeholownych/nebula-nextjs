@@ -115,6 +115,14 @@ from platform_api.experiment.routes import router as experiment_router
 from platform_api.routes.leads_api import router as leads_router
 from platform_api.routes.api_key_routes import router as api_key_router
 
+# Lead Gen Pipeline (RB2B + n8n webhooks)
+try:
+  from lead_gen.webhook_endpoints import router as lead_gen_router
+  LEAD_GEN_AVAILABLE = True
+except ImportError:
+  LEAD_GEN_AVAILABLE = False
+  print("⚠️  lead_gen module not available (lead gen routes disabled)")
+
 app.include_router(auth_router, prefix="/api")
 app.include_router(orgs_router)
 app.include_router(audits_router)
@@ -130,6 +138,8 @@ app.include_router(rewrite_router)
 app.include_router(experiment_router)
 app.include_router(leads_router)
 app.include_router(api_key_router)
+if LEAD_GEN_AVAILABLE:
+  app.include_router(lead_gen_router)
 
 
 # Exception handlers - order matters

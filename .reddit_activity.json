@@ -1,0 +1,18 @@
+{
+ "accounts": {
+  "6a772422d0fe733d1a3f3959": {
+   "karma": 1850,
+   "karma_verified_at": "2026-08-08T13:29:05.520165+00:00",
+   "comments": [
+    "2026-08-08T12:59:57.318970+00:00"
+   ],
+   "promo_comments": 0,
+   "karma_floors": {
+    "r/PPC": "1850 BELOW threshold \u2014 AutoMod removes low-karma comments, no manual approval (2026-08-08)"
+   },
+   "shadowbanned": true,
+   "shadowbanned_at": "2026-08-08T23:54:13.828792+00:00",
+   "shadowbanned_note": "Confirmed by Mike 2026-08-08. Trigger: API-posted comment via Zernio on r/PPC (low karma + API fingerprint). Account dead for posting."
+  }
+ }
+}

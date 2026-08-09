@@ -1,39 +1,41 @@
-"""Lead Gen Webhook Endpoints — Flask routes for RB2B + n8n integration.
+"""Lead Gen Webhook Endpoints — FastAPI routes for RB2B + n8n integration.
 
-Mount these in yt_orchestrator.py:
-  from lead_gen.webhook_endpoints import register_webhooks
-  register_webhooks(app)  # Flask app
+Mount these in platform_api/main.py:
+  from lead_gen.webhook_endpoints import setup_lead_gen_routes
+  setup_lead_gen_routes(app)  # FastAPI app
 """
-from flask import Blueprint, request, jsonify
+from fastapi import APIRouter, HTTPException
 import json
 
-bp = Blueprint("lead_gen", __name__)
+
+router = APIRouter(prefix="/api/lead-gen", tags=["lead-gen"])
 
 
-@bp.route("/webhook/rb2b-event", methods=["POST"])
-def handle_rb2b_event():
+@router.post("/rb2b-event")
+async def handle_rb2b_event(payload: dict):
     """RB2B visitor identification webhook.
     
     Expected payload:
     {
-        "company": "Stripe Inc.",
-        "visitor_ip": "203.0.113.42",
         "pages_visited": ["audit", "fix-pack"],
         "total_dwell_s": 245,
-        "last_visit": "2026-08-09T14:30:00Z"
+        "last_visit": "2026-08-09T14:30:00Z",
+        "utm_source": "organic"
     }
     """
     try:
-        payload = request.get_json()
-        from lead_gen.rb2b_handler import handle_rb2b_event
-        result = handle_rb2b_event(payload)
-        return jsonify(result), 200 if result.get("success") else 400
+        from lead_gen.rb2b_handler import handle_rb2b_event as handle_rb2b
+        result = handle_rb2b(payload)
+        if result.get("success"):
+            return result
+        else:
+            raise HTTPException(status_code=400, detail=result.get("error", "Unknown error"))
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        raise HTTPException(status_code=500, detail=str(e))
 
 
-@bp.route("/webhook/outbound-reply", methods=["POST"])
-def handle_outbound_reply():
+@router.post("/outbound-reply")
+async def handle_outbound_reply(payload: dict):
     """n8n reply classification webhook.
     
     Expected payload:
@@ -45,14 +47,16 @@ def handle_outbound_reply():
     }
     """
     try:
-        payload = request.get_json()
         from lead_gen.n8n_reply_handler import handle_reply_webhook
         result = handle_reply_webhook(payload)
-        return jsonify(result), 200 if result.get("success") else 400
+        if result.get("success"):
+            return result
+        else:
+            raise HTTPException(status_code=400, detail=result.get("error", "Unknown error"))
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        raise HTTPException(status_code=500, detail=str(e))
 
 
-def register_webhooks(app):
-    """Register lead_gen webhooks in a Flask app."""
-    app.register_blueprint(bp)
+def setup_lead_gen_routes(app):
+    """Register lead_gen routes in a FastAPI app."""
+    app.include_router(router)

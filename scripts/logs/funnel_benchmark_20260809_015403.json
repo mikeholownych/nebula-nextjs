@@ -1,0 +1,78 @@
+{
+  "available": true,
+  "date_from": "2026-07-26",
+  "days": 14,
+  "steps": [
+    {
+      "event": "audit_page_viewed",
+      "label": "Audit page viewed",
+      "count": 40,
+      "conv": null,
+      "bench_low": null,
+      "status": "ok"
+    },
+    {
+      "event": "audit_submitted",
+      "label": "Audit submitted",
+      "count": 16,
+      "conv": 40.0,
+      "bench_low": 0.3,
+      "status": "ok"
+    },
+    {
+      "event": "audit_ready",
+      "label": "Audit ready (processed)",
+      "count": 14,
+      "conv": 87.5,
+      "bench_low": 0.85,
+      "status": "ok"
+    },
+    {
+      "event": "audit_email_submitted",
+      "label": "Email gate passed",
+      "count": 14,
+      "conv": 100.0,
+      "bench_low": 0.5,
+      "status": "ok"
+    },
+    {
+      "event": "audit_results_viewed",
+      "label": "Results viewed",
+      "count": 19,
+      "conv": 135.7,
+      "bench_low": 0.7,
+      "status": "ok"
+    },
+    {
+      "event": "checkout_page_viewed",
+      "label": "Checkout page",
+      "count": 5,
+      "conv": 26.3,
+      "bench_low": 0.25,
+      "status": "ok"
+    },
+    {
+      "event": "checkout_initiated",
+      "label": "Checkout initiated",
+      "count": 5,
+      "conv": 100.0,
+      "bench_low": 0.5,
+      "status": "ok"
+    },
+    {
+      "event": "purchase_confirmed_viewed",
+      "label": "Purchase confirmed",
+      "count": 0,
+      "conv": 0.0,
+      "bench_low": 0.4,
+      "status": "LOW"
+    }
+  ],
+  "weakest": [
+    "Purchase confirmed"
+  ],
+  "entry_count": 40,
+  "submitted": 16,
+  "paid": 0,
+  "entry_to_paid_pct": 0.0
+}
