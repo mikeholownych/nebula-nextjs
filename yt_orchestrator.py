@@ -59,6 +59,116 @@ def _get_next_subject():
     return subject
 
 
+async def _telegram_review_gate(video_path, short_path, script, short_script,
+                                timeout_s: int = 300) -> bool:
+    """
+    Send a preview to Telegram and wait for ✅ (approve) or ❌ (reject).
+
+    Sends:
+      - First frame of the long-form video as a preview image
+      - Title + first 3 segments of narration as the caption
+      - Reply instructions
+
+    Polls for a reply for up to timeout_s seconds (default 5 min).
+    Returns True if approved, False if rejected or timed out.
+    Bypass entirely by setting REVIEW_GATE_ENABLED=0 in environment.
+    """
+    bot_token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+    chat_id = os.environ.get("TELEGRAM_ALLOWED_USERS", "").split(",")[0].strip()
+
+    if not bot_token or not chat_id:
+        logger.warning("[gate] TELEGRAM_BOT_TOKEN or chat_id not set — auto-approving")
+        return True
+
+    import subprocess as _sp
+    import time as _time
+
+    # Extract first frame as preview
+    preview_path = Path(video_path).with_suffix(".preview.jpg")
+    try:
+        _sp.run([
+            "ffmpeg", "-y", "-ss", "2", "-i", str(video_path),
+            "-frames:v", "1", "-q:v", "3", str(preview_path),
+        ], capture_output=True, check=True)
+    except Exception:
+        preview_path = None
+
+    # Build caption
+    narration_preview = " ".join(
+        s["text"] for s in script.get("segments", [])[:3]
+    )[:800]
+    caption = (
+        f"🎬 *Review Required*\n\n"
+        f"*Title:* {script.get('title', '?')}\n"
+        f"*Score:* {script.get('overall_score', '?')}/10\n\n"
+        f"_{narration_preview}..._\n\n"
+        f"Reply *yes* to publish · *no* to reject\n"
+        f"_(Auto-rejects in {timeout_s//60} min)_"
+    )
+
+    # Send preview via Telegram Bot API
+    base = f"https://api.telegram.org/bot{bot_token}"
+    try:
+        import httpx as _httpx
+        async with _httpx.AsyncClient(timeout=30.0) as client:
+            if preview_path and preview_path.exists():
+                with open(preview_path, "rb") as f:
+                    resp = await client.post(
+                        f"{base}/sendPhoto",
+                        data={"chat_id": chat_id, "caption": caption, "parse_mode": "Markdown"},
+                        files={"photo": f},
+                    )
+            else:
+                resp = await client.post(
+                    f"{base}/sendMessage",
+                    json={"chat_id": chat_id, "text": caption, "parse_mode": "Markdown"},
+                )
+        if not resp.is_success:
+            logger.warning(f"[gate] Telegram send failed: {resp.status_code} — auto-approving")
+            return True
+    except Exception as e:
+        logger.warning(f"[gate] Telegram send error: {e} — auto-approving")
+        return True
+    finally:
+        if preview_path and preview_path.exists():
+            try:
+                preview_path.unlink()
+            except Exception:
+                pass
+
+    # Poll for reply
+    logger.info(f"[gate] Waiting up to {timeout_s}s for Telegram approval…")
+    deadline = _time.time() + timeout_s
+    last_update_id = 0
+
+    import httpx as _httpx2
+    async with _httpx2.AsyncClient(timeout=30.0) as client:
+        while _time.time() < deadline:
+            await asyncio.sleep(8)
+            try:
+                r = await client.get(
+                    f"{base}/getUpdates",
+                    params={"offset": last_update_id + 1, "timeout": 8, "limit": 5},
+                )
+                updates = r.json().get("result", [])
+                for upd in updates:
+                    last_update_id = max(last_update_id, upd.get("update_id", 0))
+                    msg = upd.get("message", {})
+                    if str(msg.get("chat", {}).get("id", "")) == str(chat_id):
+                        text = (msg.get("text") or "").strip().lower()
+                        if text in ("yes", "y", "approve", "✅", "👍"):
+                            logger.info("[gate] Approved by reviewer")
+                            return True
+                        elif text in ("no", "n", "reject", "❌", "👎"):
+                            logger.info("[gate] Rejected by reviewer")
+                            return False
+            except Exception:
+                pass
+
+    logger.warning("[gate] Timed out waiting for review — auto-rejecting to be safe")
+    return False
+
+
 def _log_result(video_path, script):
     """Append to video production log."""
     log_file = config.VIDEO_DIR / "production_log.jsonl"
@@ -149,6 +259,20 @@ async def produce(url=None, dry_run=False, publish=True, script_format="standard
             "short_path": short_path,
             "script": script,
         }
+
+    # Human review gate — send preview to Telegram and wait for ✅ or ❌
+    # REVIEW_GATE_ENABLED env var controls this; set to "0" to bypass.
+    if publish and os.environ.get("REVIEW_GATE_ENABLED", "1") != "0":
+        approved = await _telegram_review_gate(
+            video_path=video_path,
+            short_path=short_path,
+            script=script,
+            short_script=short_script,
+        )
+        if not approved:
+            logger.info("❌ Review gate rejected — video not published")
+            return {"status": "rejected_by_reviewer", "video_path": video_path}
+        logger.info("✅ Review gate approved — proceeding to upload")
 
     # 4. Upload (if OAuth configured and publish=True)
     if publish:

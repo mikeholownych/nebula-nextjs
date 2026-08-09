@@ -3,7 +3,7 @@
 Pipeline: script → TTS audio + visual cards → ffmpeg assembly → thumbnail.
 """
 
-import json, asyncio, subprocess, textwrap, math
+import os, json, asyncio, subprocess, textwrap, math
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -279,6 +279,25 @@ async def produce_video(page, audit, url=None):
     from yt_channel.screenshot import capture_page_async
     bg = await capture_page_async(url) if url else None
 
+    # Pre-fetch B-roll clips per segment (Phase 3 — runs in parallel)
+    from yt_channel.broll import fetch_broll, composite_over_broll, _keywords_for_segment
+    broll_clips: dict[int, "Path | None"] = {}
+    if os.environ.get("PEXELS_API_KEY"):
+        import asyncio as _asyncio
+        async def _fetch_seg_broll(idx, seg, dur):
+            keywords = _keywords_for_segment(seg)
+            clip = await fetch_broll(keywords, duration_s=dur)
+            return idx, clip
+        seg_durs = [5.0] * len(script["segments"])  # estimated, refined later
+        broll_tasks = [_fetch_seg_broll(i, s, seg_durs[i])
+                       for i, s in enumerate(script["segments"])]
+        broll_results = await _asyncio.gather(*broll_tasks, return_exceptions=True)
+        for res in broll_results:
+            if isinstance(res, tuple):
+                idx, clip = res
+                if clip:
+                    broll_clips[idx] = clip
+
     frames = []
     for i, seg in enumerate(script["segments"]):
         dim_key = seg["dimension"]
@@ -304,6 +323,13 @@ async def produce_video(page, audit, url=None):
         else:
             # Fallback to intro-style
             img = make_intro_card(domain, overall, grade, bg)
+
+        # Phase 3: composite over B-roll when available
+        broll_clip = broll_clips.get(i)
+        if broll_clip:
+            img = composite_over_broll(img, broll_clip,
+                                       timestamp_s=1.0 + (i % 3) * 0.5,
+                                       tmp_dir=frames_dir)
 
         frame_path = frames_dir / f"frame_{i:04d}.png"
         img.save(frame_path)
@@ -383,7 +409,30 @@ async def produce_video(page, audit, url=None):
         frames, durations, audio_path, video_path, W, H,
     )
 
-    # 6. Generate thumbnail
+    # 6. Burn animated word-level captions (Phase 2)
+    from yt_channel.captions import generate_captions, burn_captions
+    ass_path = job_dir / f"{job_id}.ass" if job_dir.exists() else \
+        config.TMP_DIR / f"{job_id}_cap.ass"
+    # job_dir was cleaned up — use VIDEO_DIR parent for temp
+    config.VIDEO_DIR.mkdir(parents=True, exist_ok=True)
+    cap_tmp_dir = config.VIDEO_DIR.parent / "tmp" / job_id
+    cap_tmp_dir.mkdir(parents=True, exist_ok=True)
+    ass_file = generate_captions(audio_path, cap_tmp_dir / f"{job_id}.ass",
+                                 is_short=False)
+    if ass_file:
+        captioned_path = config.VIDEO_DIR / f"{job_id}_cap.mp4"
+        try:
+            burn_captions(video_path, ass_file, captioned_path, is_short=False)
+            # Replace video with captioned version
+            import shutil as _shutil
+            _shutil.move(str(captioned_path), str(video_path))
+        except Exception as _cap_err:
+            print(f"[produce] caption burn failed (non-fatal): {_cap_err}")
+        finally:
+            import shutil as _sh2
+            _sh2.rmtree(str(cap_tmp_dir), ignore_errors=True)
+
+    # 7. Generate thumbnail
     from yt_channel.thumbnail import generate as gen_thumbnail
     thumbnail_path = config.THUMBNAIL_DIR / f"{job_id}.png"
     gen_thumbnail(

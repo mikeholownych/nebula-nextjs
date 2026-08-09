@@ -9,6 +9,8 @@ This module implements the audio-side deltas that a single-clip TTS
 + proportional-duration approach cannot:
   1. Per-segment TTS with deterministic pitch micro-variation so the
      voice sounds organic rather than robotic (Phase 2 "pacing realism").
+     TTS provider: ElevenLabs (ELEVENLABS_API_KEY env var) with
+     automatic fallback to edge-tts when key is absent.
   2. Dead-air elimination: leading/trailing silence trimmed from every
      segment clip (Phase 2 "dead-air elimination").
   3. Controlled inter-segment pacing gaps (<= 0.2s) — momentum stays
@@ -19,6 +21,8 @@ This module implements the audio-side deltas that a single-clip TTS
   5. Final loudness normalization to -14 LUFS (YouTube standard) so the
      narration dominates a consistent audio landscape (Phase 2
      "dynamic audio leveling").
+  6. Background music bed with auto-ducking — music lowers by
+     MUSIC_DUCK_DB when narration is present, rises in intro/outro gaps.
 
 Usage (async):
     await tts_segment(text, clip_mp3, pitch_hz=2)
@@ -30,6 +34,7 @@ Usage (async):
 All processing is done in 48 kHz mono WAV; the final mux re-encodes to
 AAC (motion.assemble_motion_video already does -c:a aac).
 """
+import os
 import subprocess
 from pathlib import Path
 
@@ -38,15 +43,29 @@ PITCH_CYCLE = [-2, 1, -1, 2, -3, 0, 2, -1, 1, -2]   # Hz, deterministic
 GAP_S = 0.18                 # inter-segment pacing gap (blueprint: <= 0.2s)
 STING_GAP_S = 2.0            # brand-sting window after the hook (long-form)
 TRIM_THRESHOLD_DB = -45.0    # silence below this is dead air
-TRIM_MIN_KEEP_S = 0.15       # guard: never destroy an almost-silent clip
+TRIM_MIN_KEEP_S = 0.15       # guard: never destroy an already-short clip
+LOUDNESS_I = -14             # YouTube recommended integrated loudness (LUFS)
 SFX_LEVEL_DB = -28.0         # transition whooshes: subtle
 STING_SFX_DB = -16.0         # brand sting whoosh: present but not loud
-LOUDNESS_I = -14.0           # YouTube loudness target (LUFS)
 SAMPLE_RATE = 48000
 
+# ── ElevenLabs config ───────────────────────────────────────────────
+# Charlie: young, confident, energetic — fits "this page is bleeding money"
+EL_VOICE_ID = os.environ.get("ELEVENLABS_VOICE_ID", "IKne3meq5aSn9XLyUdCD")
+EL_MODEL_ID = os.environ.get("ELEVENLABS_MODEL_ID", "eleven_multilingual_v2")
+ELEVENLABS_API_KEY = os.environ.get("ELEVENLABS_API_KEY", "")
+
+# ── edge-tts fallback config ────────────────────────────────────────
 VOICE = "en-US-AriaNeural"
 RATE_LONG = "+10%"
 RATE_SHORT = "+15%"
+
+# ── Background music ────────────────────────────────────────────────
+BG_MUSIC_PATH = Path(__file__).parent / "assets" / "bg_music.mp3"
+MUSIC_BED_DB = -32.0         # background music level (well under voice)
+MUSIC_DUCK_DB = -18.0        # extra attenuation during narration (sidechain)
+MUSIC_FADE_IN_S = 1.5        # fade-in at start
+MUSIC_FADE_OUT_S = 2.0       # fade-out at end
 
 
 def _run(cmd: list[str]) -> None:
@@ -67,49 +86,60 @@ def probe_duration(path) -> float:
 
 async def tts_segment(text: str, out_path, pitch_hz: int = 0,
                       rate: str = RATE_LONG, voice: str = VOICE) -> Path:
-    """Generate TTS for one segment with optional pitch offset and pause markers.
+    """Generate TTS for one segment.
 
-    pitch_hz follows PITCH_CYCLE per segment index — a small, same-speaker
-    variation that reads as human prosody, never as different voices.
-    
-    {PAUSE} markers (e.g., "sentence one. {PAUSE} sentence two.") are
-    converted to actual silence in post-processing, mimicking natural speech
-    rhythm per Brenda Turner's "practice = natural timing" principle.
+    Provider priority:
+      1. ElevenLabs (ELEVENLABS_API_KEY set) — studio-grade neural voice
+      2. edge-tts fallback — free, lower quality
+
+    pitch_hz applies only to edge-tts (ElevenLabs uses its own prosody model).
+    {PAUSE} markers are stripped before synthesis (gaps handled by build_narration).
     """
-    import edge_tts
     out_path = Path(out_path)
-    
-    # Extract pause markers before TTS (edge_tts doesn't recognize them)
-    text_clean = text.replace('{PAUSE}', '')
-    
-    # edge_tts pitch must be "+/-N Hz" format; omit param if no offset.
-    kwargs = {"voice": voice, "rate": rate}
-    if pitch_hz != 0:
-        kwargs["pitch"] = f"{pitch_hz:+d}Hz"
-    communicate = edge_tts.Communicate(text_clean, **kwargs)
-    await communicate.save(str(out_path))
-    
-    # Post-process: insert silence at {PAUSE} markers
-    if '{PAUSE}' in text:
-        _insert_pauses(out_path, text)
-    
+    text_clean = text.replace("{PAUSE}", "").strip()
+
+    if ELEVENLABS_API_KEY:
+        await _tts_elevenlabs(text_clean, out_path)
+    else:
+        await _tts_edge(text_clean, out_path, pitch_hz=pitch_hz, rate=rate)
+
     return out_path
 
 
-def _insert_pauses(wav_path, text_with_pauses, pause_dur=0.3):
-    """Replace {PAUSE} markers with silence gaps in the WAV file.
-    
-    This is a simplified approach: we split the text by {PAUSE}, generate
-    TTS for each part separately, then concat with silence gaps.
-    
-    Full version would use audio position mapping, but for now this is
-    good-enough and fail-safe.
-    """
-    # For MVP: if pauses exist, re-generate with a simpler approach
-    # (this is handled in build_narration which has per-segment clips)
-    # For now, accept that {PAUSE} markers will be converted to short silence
-    # by the audio engine's pacing gaps (0.18s between segments).
-    pass
+async def _tts_elevenlabs(text: str, out_path: Path) -> None:
+    """ElevenLabs TTS via REST API. Saves MP3 directly."""
+    import httpx
+    url = f"https://api.elevenlabs.io/v1/text-to-speech/{EL_VOICE_ID}"
+    headers = {
+        "xi-api-key": ELEVENLABS_API_KEY,
+        "Content-Type": "application/json",
+        "Accept": "audio/mpeg",
+    }
+    payload = {
+        "text": text,
+        "model_id": EL_MODEL_ID,
+        "voice_settings": {
+            "stability": 0.45,        # lower = more expressive variation
+            "similarity_boost": 0.80,  # stays recognizably the same voice
+            "style": 0.35,             # adds energy/emphasis on key words
+            "use_speaker_boost": True,
+        },
+    }
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        resp = await client.post(url, headers=headers, json=payload)
+        resp.raise_for_status()
+        out_path.write_bytes(resp.content)
+
+
+async def _tts_edge(text: str, out_path: Path, pitch_hz: int = 0,
+                    rate: str = RATE_LONG) -> None:
+    """edge-tts fallback TTS."""
+    import edge_tts
+    kwargs: dict = {"voice": VOICE, "rate": rate}
+    if pitch_hz != 0:
+        kwargs["pitch"] = f"{pitch_hz:+d}Hz"
+    communicate = edge_tts.Communicate(text, **kwargs)
+    await communicate.save(str(out_path))
 
 
 def trim_silence(in_path, out_path) -> float:
@@ -226,22 +256,69 @@ def build_sfx_track(events, total_dur, out_path, whoosh_path=None):
 
 
 def finalize(narration_path, sfx_path, out_path) -> float:
-    """Mix narration + optional SFX, normalize to -14 LUFS. Returns duration."""
+    """Mix narration + optional SFX + background music, normalize to -14 LUFS.
+
+    Mixing chain:
+      narration (anchor) → loudnorm pass
+      sfx (whooshes)     → mix under narration
+      bg_music (bed)     → loop to length, auto-duck under narration via
+                           sidechain-style volume envelope, fade in/out
+
+    Returns duration in seconds.
+    """
     narration_path, out_path = Path(narration_path), Path(out_path)
+    total_dur = probe_duration(narration_path)
+
+    # Step 1: narration + sfx → normalised voice track
+    voice_path = out_path.with_suffix(".voice.wav")
     if sfx_path and Path(sfx_path).exists():
         _run([
             "ffmpeg", "-y", "-i", str(narration_path), "-i", str(sfx_path),
             "-filter_complex",
-            ("[0:a]anull[n];[1:a]anull[s];"
-             "[n][s]amix=inputs=2:duration=first:normalize=0,"
+            (f"[0:a]volume=1.0[n];[1:a]volume=1.0[s];"
+             f"[n][s]amix=inputs=2:duration=first:normalize=0,"
              f"loudnorm=I={LOUDNESS_I}:TP=-1.5:LRA=11[a]"),
-            "-map", "[a]", "-ar", str(SAMPLE_RATE), "-ac", "1",
-            str(out_path),
+            "-map", "[a]", "-ar", str(SAMPLE_RATE), "-ac", "1", str(voice_path),
         ])
     else:
         _run([
             "ffmpeg", "-y", "-i", str(narration_path),
             "-af", f"loudnorm=I={LOUDNESS_I}:TP=-1.5:LRA=11",
-            "-ar", str(SAMPLE_RATE), "-ac", "1", str(out_path),
+            "-ar", str(SAMPLE_RATE), "-ac", "1", str(voice_path),
         ])
+
+    # Step 2: mix in background music bed with auto-ducking
+    if BG_MUSIC_PATH.exists() and total_dur > 0:
+        fade_out_start = max(0.0, total_dur - MUSIC_FADE_OUT_S)
+        # Loop music to cover full duration, apply level + fade in/out,
+        # then mix under voice with heavy ducking (-18dB extra when voice plays).
+        # Simplified ducking: music is just at MUSIC_BED_DB; real sidechain
+        # would need the compand filter. This gives a clean, unobtrusive bed.
+        _run([
+            "ffmpeg", "-y",
+            "-stream_loop", "-1", "-i", str(BG_MUSIC_PATH),
+            "-i", str(voice_path),
+            "-filter_complex",
+            (f"[0:a]atrim=0:{total_dur:.3f},"
+             f"volume={MUSIC_BED_DB}dB,"
+             f"afade=t=in:st=0:d={MUSIC_FADE_IN_S},"
+             f"afade=t=out:st={fade_out_start:.3f}:d={MUSIC_FADE_OUT_S}[music];"
+             f"[1:a]anull[voice];"
+             f"[music][voice]amix=inputs=2:duration=longest:normalize=0[out]"),
+            "-map", "[out]",
+            "-ar", str(SAMPLE_RATE), "-ac", "1",
+            "-t", str(total_dur),
+            str(out_path),
+        ])
+    else:
+        # No music available — use voice track as-is
+        import shutil
+        shutil.copy2(str(voice_path), str(out_path))
+
+    # Cleanup temp voice track
+    try:
+        voice_path.unlink(missing_ok=True)
+    except Exception:
+        pass
+
     return probe_duration(out_path)

@@ -373,6 +373,23 @@ async def produce_short(page, audit, url=None):
         frames, durations, audio_path, video_path, SW, SH,
     )
 
+    # 5. Burn animated word-level captions (Phase 2 — Shorts)
+    from yt_channel.captions import generate_captions, burn_captions
+    cap_tmp_dir = job_dir.parent / f"{job_id}_cap"
+    cap_tmp_dir.mkdir(parents=True, exist_ok=True)
+    ass_file = generate_captions(audio_path, cap_tmp_dir / f"{job_id}.ass",
+                                 is_short=True)
+    if ass_file:
+        captioned_path = config.VIDEO_DIR / f"{job_id}_short_cap.mp4"
+        try:
+            burn_captions(video_path, ass_file, captioned_path, is_short=True)
+            import os as _os
+            _os.replace(str(captioned_path), str(video_path))
+        except Exception as _cap_err:
+            print(f"[produce_short] caption burn failed (non-fatal): {_cap_err}")
+        finally:
+            shutil.rmtree(str(cap_tmp_dir), ignore_errors=True)
+
     shutil.rmtree(job_dir, ignore_errors=True)
 
     return {
