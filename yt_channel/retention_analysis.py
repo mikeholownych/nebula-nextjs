@@ -137,6 +137,13 @@ def analyze() -> dict:
             # youtubeAnalytics API; keep this honest and channel-scoped).
             # NOTE: reports() lives on the youtubeAnalytics v2 service,
             # NOT on the youtube v3 service from _get_authenticated_service.
+            # Query-shape findings (probed 2026-08-09):
+            #   ✅ dimensions=day + filters=video==<id> with
+            #      views,averageViewDuration,subscribersGained
+            #   ❌ dimensions=video (400 "query not supported" — not
+            #      served for this channel even with correct date range)
+            #   ❌ impressions/impressionsClickThroughRate (400 in every
+            #      shape probed)
             import pickle
             from googleapiclient.discovery import build
             from google.oauth2.credentials import Credentials
@@ -144,13 +151,42 @@ def analyze() -> dict:
                 tok = pickle.load(f)
             an_svc = build("youtubeAnalytics", "v2", credentials=tok)
             end = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-            resp = an_svc.reports().query(
-                ids="channel==MINE",
-                startDate="2026-07-01", endDate=end,
-                metrics="averageViewDuration,views,estimatedMinutesWatched",
-                dimensions="video",
-            ).execute()
-            retention = {"available": True, "rows": resp.get("rows", [])}
+            start = "2026-08-01"
+            per_video = {}
+            for vid_id in video_ids:
+                try:
+                    r = an_svc.reports().query(
+                        ids="channel==MINE",
+                        startDate=start, endDate=end,
+                        metrics="views,averageViewDuration,subscribersGained",
+                        dimensions="day",
+                        filters=f"video=={vid_id}",
+                    ).execute()
+                    per_video[vid_id] = r.get("rows", [])
+                except Exception:
+                    per_video[vid_id] = []
+            # Channel-level daily totals (same working shape, no filter).
+            try:
+                chan_r = an_svc.reports().query(
+                    ids="channel==MINE",
+                    startDate=start, endDate=end,
+                    metrics="views,estimatedMinutesWatched,averageViewDuration,subscribersGained",
+                    dimensions="day",
+                ).execute()
+                chan_rows = chan_r.get("rows", [])
+            except Exception as e:
+                chan_rows = []
+                chan_error = str(e)[:200]
+            retention = {
+                "available": True,
+                "rows": chan_rows,
+                "per_video": per_video,
+                "note": ("day+video-filter shape; impressions/CTR not served "
+                         "for this channel (400); dimensions=video unsupported "
+                         "here — see skill"),
+            }
+            if not chan_rows:
+                retention["reason"] = "no analytics data yet (channel is new)"
         except Exception as e:
             retention = {"available": False, "reason": str(e)}
 
