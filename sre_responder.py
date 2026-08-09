@@ -508,6 +508,90 @@ NOISE_CHECKS = {
     'Pipeline ramp recent run': (120, 'Stale during source outages — SRE suppresses ramp trigger when sources are broken'),
 }
 
+def _check_cron_errors(state: dict, escalations: list) -> None:
+    """Alert when enabled cron jobs are stuck in error state (SLA: alert within 1h)."""
+    try:
+        import subprocess as sp
+        result = sp.run(
+            ['hermes', 'cron', 'list', '--json'],
+            capture_output=True, text=True, timeout=10
+        )
+        if result.returncode != 0:
+            return
+        data = json.loads(result.stdout)
+        jobs = data.get('jobs', [])
+        erroring = [
+            j for j in jobs
+            if j.get('enabled') and j.get('last_status') == 'error'
+            and j.get('name') not in {
+                # Known acceptable transient errors — skip alerting
+                'nebula-reddit-comment-queue',  # Reddit dead channel
+            }
+        ]
+        if erroring:
+            names = ', '.join(f"`{j['name']}`" for j in erroring[:5])
+            key = 'cron_error_sla'
+            failures = bump_failure(state, key)
+            if failures >= 2:  # 2 consecutive checks = ~30min SLA
+                escalations.append(
+                    f'{len(erroring)} cron job(s) in error state: {names}\n'
+                    f'Fix: `hermes cron run <job_id>` or check script logs'
+                )
+            else:
+                log(f'[cron-sla] {len(erroring)} erroring jobs (attempt {failures}/2): {names}')
+        else:
+            clear_failure(state, 'cron_error_sla')
+    except Exception as e:
+        log(f'[cron-sla] check failed: {e}')
+
+
+def _check_purchase_delivery_gap(state: dict, escalations: list) -> None:
+    """Alert if a purchase landed but delivery email wasn't sent within 15 minutes.
+
+    Queries nebula_audit: customers with crm_status='purchased' where
+    there is no corresponding delivery record (purchases table paid_at > 10min ago
+    and no outbound email sent). Proxy: purchased_at set but no delivery log entry.
+    """
+    try:
+        import asyncpg, asyncio
+
+        async def _check():
+            pool = await asyncpg.create_pool(
+                'postgresql://postgres@/nebula_audit?host=/var/run/postgresql&port=5433',
+                min_size=1, max_size=2, command_timeout=5
+            )
+            async with pool.acquire() as conn:
+                # Find purchases > 15 min old where customer has no tracked email send
+                # We use crm_feedback as a proxy: a 'win' event should exist after purchase
+                gap = await conn.fetchval("""
+                    SELECT count(*) FROM customers c
+                    WHERE c.crm_status = 'purchased'
+                      AND c.updated_at < now() - interval '15 minutes'
+                      AND NOT EXISTS (
+                        SELECT 1 FROM crm_feedback cf
+                        WHERE cf.customer_email = c.email
+                          AND cf.interaction_type = 'win'
+                      )
+                """)
+            await pool.close()
+            return gap or 0
+
+        gap = asyncio.run(_check())
+        if gap > 0:
+            key = 'purchase_delivery_gap'
+            failures = bump_failure(state, key)
+            if failures >= 1:
+                escalations.append(
+                    f'⚠️ {gap} purchase(s) with no delivery record (>15min gap).\n'
+                    f'Check: platform_api/services/crm_hooks.py purchase_completed()\n'
+                    f'Verify: nebula-platform-api.service is running'
+                )
+        else:
+            clear_failure(state, 'purchase_delivery_gap')
+    except Exception as e:
+        log(f'[delivery-gap] check failed (non-fatal): {e}')
+
+
 def evaluate_snr():
     """Identify checks that fire too often without producing action."""
     if not HEALTH_FILE.exists():
@@ -575,6 +659,12 @@ def main():
     newly_suppressed = check_bounce_suppression_sync()
     if newly_suppressed:
         actions_taken.append(f'Suppression sync: {newly_suppressed} newly bounced')
+
+    # 6b. Cron error SLA — alert on enabled cron jobs stuck in error state
+    _check_cron_errors(state, escalations)
+
+    # 6c. Webhook delivery gap — alert if purchases exist without CRM update
+    _check_purchase_delivery_gap(state, escalations)
 
     # 7. Check health file for critical failures that need escalation
     if HEALTH_FILE.exists():

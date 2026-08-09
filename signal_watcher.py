@@ -351,11 +351,13 @@ def scrape_ih_group() -> list[dict]:
 
 def scrape_ih_keywords() -> list[dict]:
     """Source 2: Direct IH web search for high-intent founder posts.
-    
-    Uses DuckDuckGo/web search to find recent IH posts where founders explicitly
-    describe zero-conversion or landing page problems — the signals we want.
+
+    Uses Firecrawl search API (Nous-managed) to find recent IH posts where
+    founders explicitly describe zero-conversion or landing page problems.
+    Falls back to DuckDuckGo HTML scrape if Firecrawl is unavailable.
     """
     import urllib.parse
+    import urllib.request as _urllib_request
 
     IH_QUERIES = [
         'site:indiehackers.com "launched" "no sales" OR "zero revenue" "landing page" 2026',
@@ -369,36 +371,66 @@ def scrape_ih_keywords() -> list[dict]:
     seen_urls: set = set()
 
     for query in IH_QUERIES:
+        urls_found = []
+
+        # Primary: Firecrawl search (Nous-managed key at ~/.hermes/secrets/firecrawl.key)
         try:
-            # Use DuckDuckGo HTML search (no API key needed)
-            params = urllib.parse.urlencode({"q": query, "kl": "us-en"})
-            r = SESSION.get(
-                f"https://html.duckduckgo.com/html/?{params}",
-                headers={"User-Agent": "Mozilla/5.0 (compatible; NebulaScraper/1.0)"},
-                timeout=TIMEOUT,
-            )
-            if r.status_code != 200:
+            fc_url = "https://api.firecrawl.dev/v1/search"
+            fc_key = os.environ.get("FIRECRAWL_API_KEY", "")
+            if not fc_key:
+                key_path = os.path.expanduser("~/.hermes/secrets/firecrawl.key")
+                if os.path.exists(key_path):
+                    fc_key = open(key_path).read().strip()
+            if fc_key:
+                payload = json.dumps({"query": query, "limit": 5}).encode()
+                req = _urllib_request.Request(
+                    fc_url, data=payload, method="POST",
+                    headers={
+                        "Authorization": f"Bearer {fc_key}",
+                        "Content-Type": "application/json",
+                    }
+                )
+                with _urllib_request.urlopen(req, timeout=TIMEOUT) as r:
+                    data = json.loads(r.read())
+                    for item in data.get("data", []):
+                        u = item.get("url", "")
+                        if "indiehackers.com/post" in u:
+                            urls_found.append(u)
+        except Exception:
+            pass
+
+        # Fallback: DuckDuckGo HTML (no auth, may be blocked by bot detection)
+        if not urls_found:
+            try:
+                params = urllib.parse.urlencode({"q": query, "kl": "us-en"})
+                r = SESSION.get(
+                    f"https://html.duckduckgo.com/html/?{params}",
+                    headers={"User-Agent": "Mozilla/5.0 (compatible; NebulaScraper/1.0)"},
+                    timeout=TIMEOUT,
+                )
+                if r.status_code == 200:
+                    import re as _re
+                    urls_found = _re.findall(
+                        r'href="(https://www\.indiehackers\.com/post/[^"]+)"', r.text
+                    )
+            except Exception:
+                pass
+
+        for url in urls_found:
+            url = url.split("?")[0]  # strip query params
+            if url in seen_urls:
                 continue
-            # Parse result links from HTML
-            import re as _re
-            urls = _re.findall(r'href="(https://www\.indiehackers\.com/post/[^"]+)"', r.text)
-            for url in urls:
-                if url in seen_urls or url in seen_urls:
-                    continue
-                seen_urls.add(url)
-                # Extract headline from URL slug
-                slug = url.split("/post/")[-1]
-                headline = slug.replace("-", " ").split("?")[0][:100]
-                leads.append({
-                    "source": "ih_search",
-                    "headline": headline,
-                    "trigger_text": query,
-                    "author": "",
-                    "url": url,
-                    "product_url": "",
-                })
-        except Exception as e:
-            print(f"[IH-search] Error on query '{query[:40]}': {e}")
+            seen_urls.add(url)
+            slug = url.split("/post/")[-1]
+            headline = slug.replace("-", " ")[:100]
+            leads.append({
+                "source": "ih_search",
+                "headline": headline,
+                "trigger_text": query,
+                "author": "",
+                "url": url,
+                "product_url": "",
+            })
 
     print(f"[IH-search] Found {len(leads)} IH posts via direct search")
     return leads
