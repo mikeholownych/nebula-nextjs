@@ -350,10 +350,58 @@ def scrape_ih_group() -> list[dict]:
 
 
 def scrape_ih_keywords() -> list[dict]:
-    """Source 2: IH keyword search — handled within scrape_ih_group already."""
-    # Already integrated into scrape_ih_group's direct strategy
-    # Return empty to avoid double-counting
-    return []
+    """Source 2: Direct IH web search for high-intent founder posts.
+    
+    Uses DuckDuckGo/web search to find recent IH posts where founders explicitly
+    describe zero-conversion or landing page problems — the signals we want.
+    """
+    import urllib.parse
+
+    IH_QUERIES = [
+        'site:indiehackers.com "launched" "no sales" OR "zero revenue" "landing page" 2026',
+        'site:indiehackers.com "ads" "not converting" OR "0 conversions" 2026',
+        'site:indiehackers.com "show IH" "paying customer" "0" 2026',
+        'site:indiehackers.com "conversion rate" "improve" "landing page" 2026',
+        'site:indiehackers.com "feedback" "landing page" "launched" 2026',
+    ]
+
+    leads = []
+    seen_urls: set = set()
+
+    for query in IH_QUERIES:
+        try:
+            # Use DuckDuckGo HTML search (no API key needed)
+            params = urllib.parse.urlencode({"q": query, "kl": "us-en"})
+            r = SESSION.get(
+                f"https://html.duckduckgo.com/html/?{params}",
+                headers={"User-Agent": "Mozilla/5.0 (compatible; NebulaScraper/1.0)"},
+                timeout=TIMEOUT,
+            )
+            if r.status_code != 200:
+                continue
+            # Parse result links from HTML
+            import re as _re
+            urls = _re.findall(r'href="(https://www\.indiehackers\.com/post/[^"]+)"', r.text)
+            for url in urls:
+                if url in seen_urls or url in seen_urls:
+                    continue
+                seen_urls.add(url)
+                # Extract headline from URL slug
+                slug = url.split("/post/")[-1]
+                headline = slug.replace("-", " ").split("?")[0][:100]
+                leads.append({
+                    "source": "ih_search",
+                    "headline": headline,
+                    "trigger_text": query,
+                    "author": "",
+                    "url": url,
+                    "product_url": "",
+                })
+        except Exception as e:
+            print(f"[IH-search] Error on query '{query[:40]}': {e}")
+
+    print(f"[IH-search] Found {len(leads)} IH posts via direct search")
+    return leads
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -653,10 +701,11 @@ def process_leads(all_leads: list, seen: set) -> list:
         trigger_text = lead.get("trigger_text", "")
         score        = score_signal(headline, trigger_text)
 
-        # PH new launches: minimum score 6 (fresh launch = prime conversion prospect)
-        # These founders JUST launched and need conversions — perfect target
+        # PH new launches: only emit if they have explicit conversion/landing page signals.
+        # Generic PH launches without ad spend / conversion pain are noise.
+        # Remove the score floor — let score_signal decide based on patterns.
         if lead.get("source") == "product_hunt" and score < 6:
-            score = 6
+            continue  # drop low-signal PH noise
 
         if score < 6:
             continue
