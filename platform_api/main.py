@@ -143,9 +143,11 @@ app.include_router(api_key_router)
 from platform_api.routes.newsletter import router as newsletter_router
 from platform_api.routes.crm import router as crm_router
 from platform_api.routes.ab_and_scoring import router as ab_router
+from platform_api.routes.stripe_webhook import router as stripe_webhook_router
 app.include_router(newsletter_router, prefix="/api")
 app.include_router(crm_router, prefix="/api")
 app.include_router(ab_router, prefix="/api")
+app.include_router(stripe_webhook_router, prefix="/api")
 if LEAD_GEN_AVAILABLE:
   app.include_router(lead_gen_router)
 

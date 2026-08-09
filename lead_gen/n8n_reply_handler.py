@@ -180,7 +180,24 @@ def handle_reply_webhook(payload: dict) -> dict:
     
     conn.commit()
     conn.close()
-    
+
+    # Sync to PostgreSQL CRM (fail-silent, non-blocking)
+    try:
+        import asyncio, sys
+        sys.path.insert(0, str(Path(__file__).parent.parent))
+        from platform_api.services.crm_hooks import reply_received
+
+        async def _sync():
+            await reply_received(
+                email=email,
+                reply_text=reply_text[:500],
+                classification=classification["classification"],
+                source="email_outreach",
+            )
+        asyncio.run(_sync())
+    except Exception:
+        pass  # never block reply handling
+
     return {
         "success": True,
         "prospect_id": prospect_id,

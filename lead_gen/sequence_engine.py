@@ -438,6 +438,25 @@ def send_d1(
         audit_finding=audit_finding,
     )
 
+    # Step 4: Sync to PostgreSQL CRM (fail-silent)
+    try:
+        import asyncio as _aio
+        import sys as _sys
+        _sys.path.insert(0, str(Path(__file__).parent.parent))
+        from platform_api.services.crm_hooks import outreach_sent as _crm_outreach
+
+        async def _sync_crm():
+            await _crm_outreach(
+                email=email,
+                first_name=first_name,
+                product_url=product_url,
+                sequence_step="d1",
+                signal_notes=signal_notes,
+            )
+        _aio.run(_sync_crm())
+    except Exception:
+        pass
+
     return {
         "sent": True,
         "thread_id": result.get("thread_id"),

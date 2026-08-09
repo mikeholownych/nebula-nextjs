@@ -64,9 +64,18 @@ class AuditResponse(BaseModel):
     error: Optional[str] = None
 
 
+async def _crm_audit_completed(email: str, score: int, utm_source: Optional[str] = None) -> None:
+    """Non-blocking CRM update after audit completes. Fire-and-forget via asyncio.create_task."""
+    try:
+        from platform_api.services.crm_hooks import audit_created, audit_completed
+        await audit_created(email=email, url="", utm_source=utm_source)
+        await audit_completed(email=email, score=score)
+    except Exception:
+        pass  # never block audit response
+
+
 @router.post("/run", response_model=AuditResponse)
 async def run_audit(request: AuditRequest):
-    """Run deliver_audit.py and return JSON results. Persist to DB."""
     try:
         # Anonymous audits receive a unique non-deliverable identity so unrelated
         # visitors never collapse into a shared customer or analytics person.
@@ -163,6 +172,13 @@ async def run_audit(request: AuditRequest):
             status='completed',
             engine_version=data.get('engine_version')
         )
+
+        # CRM: upsert prospect with UTM + score (fail-silent)
+        asyncio.create_task(_crm_audit_completed(
+            email=audit_email,
+            score=data.get('score', 0),
+            utm_source=request.source,
+        ))
 
         # Fire content extraction pipeline (non-blocking, best-effort)
         async def _fire_content_pipeline():
