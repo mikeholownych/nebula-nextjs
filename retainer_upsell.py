@@ -112,6 +112,23 @@ def get_eligible(leads: list[dict]) -> list[dict]:
     return out
 
 
+def _ensure_lead_registered(lead: dict) -> None:
+    """Sync HOT_LEAD.json record into lead_state.db so the outbound gate finds it."""
+    try:
+        sys.path.insert(0, str(Path(__file__).parent))
+        from lead_store import LeadStore
+        store = LeadStore()
+        store.upsert_lead(
+            email=lead["email"],
+            url=lead.get("url", ""),
+            stage=lead.get("stage", "pitch_sent"),
+            source=lead.get("source", "hot_lead_json"),
+            trigger_context=lead.get("trigger_context", "retainer_upsell_sync"),
+        )
+    except Exception as e:
+        log.warning(f"Lead registration sync failed for {lead.get('email')}: {e}")
+
+
 def send_upsell(to: str, domain: str) -> bool:
     subject = SUBJECT.format(domain=domain)
     body    = BODY.format(domain=domain, retainer_url=STRIPE_RETAINER_URL)
@@ -165,6 +182,9 @@ def main(dry_run: bool = False):
     for lead in eligible[:MAX_PER_RUN]:
         email  = lead["email"]
         domain = (lead.get("url") or "").replace("https://", "").replace("http://", "").split("/")[0] or "your page"
+
+        # Ensure lead exists in lead_state.db so the outbound gate clears
+        _ensure_lead_registered(lead)
 
         ok = send_upsell(email, domain)
         if ok:
