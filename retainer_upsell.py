@@ -1,32 +1,33 @@
 #!/usr/bin/env python3
 """
 Retainer Upsell Sender — Nebula Components
-Sends the canonical $1,497/mo AI Ops Retainer offer to qualified audit recipients.
+Sends the $1,497/mo AI Ops Retainer offer to qualified audit recipients.
 
 Run via cron every 6h. Each eligible lead gets ONE upsell, then marked done.
 
-Eligibility:
+Eligibility (sourced from HOT_LEAD.json — canonical lead store):
   - stage is audit_delivered or pitch_sent
   - pitch_sent_at is at least 14 days ago
   - paid_at IS NULL
   - bounced_at IS NULL
-  - upsell_sent_at IS NULL (custom column, added on first run)
+  - upsell_sent_at IS NULL
 
-The retainer is a delayed follow-on offer. It must never be sent immediately
-after audit delivery or in the same short window as the initial pitch.
+NOTE: lead_state.db is a lagging replica and is NOT used for eligibility
+queries. HOT_LEAD.json is the authoritative source of record.
 """
 
 import json
-import sqlite3
 import logging
+import sys
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
-DB_PATH   = Path("/home/mike/nebula/lead_state.db")
-LOG_FILE  = Path("/home/mike/nebula/logs/retainer_upsell.log")
-INBOX = "nebulashop@agentmail.to"
+HOT_LEAD_PATH  = Path("/home/mike/nebula/HOT_LEAD.json")
+LOG_FILE       = Path("/home/mike/nebula/logs/retainer_upsell.log")
+INBOX          = "nebulashop@agentmail.to"
 STRIPE_RETAINER_URL = "https://buy.stripe.com/00w5kD1nK0wkaa573A43S0c"
 MIN_POST_PITCH_DAYS = 14
+MAX_PER_RUN         = 5   # pace sends — retainer is a premium ask
 
 logging.basicConfig(
     level=logging.INFO,
@@ -36,68 +37,93 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 
-SUBJECT = "One more thing about {domain}"
+SUBJECT = "Re: {domain} audit — one more thing"
 
 BODY = """\
 Hey,
 
-I sent your audit for {domain} a day ago.
+You ran an audit on {domain} a while back.
 
-Quick follow-up: most founders I work with hit the same wall after the fix pack — \
-they make the changes, see an initial lift, then conversion starts drifting again \
-because new traffic brings new friction points.
+Most founders I talk to hit a wall after the first fix: they change what the \
+audit flagged, see a lift, then conversion starts drifting again as new \
+traffic brings new friction. Same hole, different shape.
 
-That's why I built the AI Ops Retainer: $1,497/month, I run your landing page through \
-the full 5-dimension audit every month, push an updated fix pack, and flag any \
-new drop-off before it costs you real money.
+That's why the AI Ops Retainer exists. $1,497/month — I run your page \
+through the full audit every month, deliver an updated fix pack, and flag \
+any new drop-off before it costs you real money. No contract. Cancel any time.
 
-No contract. Cancel any time.
+The founders using it are paying less per month than they were losing per \
+week on a page that wasn't converting.
 
-If you want ongoing coverage: {retainer_url}
+If that sounds relevant: {retainer_url}
 
-If you're all set — no worries, just ignore this.
+If you're sorted — no worries, just ignore this.
 
 — Mike
 Nebula Components
 """
 
 
-def ensure_upsell_column(conn):
-    """Add upsell_sent_at column if it doesn't exist yet."""
-    cols = [r[1] for r in conn.execute("PRAGMA table_info(leads)").fetchall()]
-    if "upsell_sent_at" not in cols:
-        conn.execute("ALTER TABLE leads ADD COLUMN upsell_sent_at TEXT")
-        conn.commit()
-        log.info("Added upsell_sent_at column to leads table")
+def _load_leads() -> list[dict]:
+    """Load HOT_LEAD.json. Returns list of lead dicts."""
+    raw = HOT_LEAD_PATH.read_text()
+    data = json.loads(raw)
+    return data if isinstance(data, list) else data.get("leads", [])
 
 
-def get_eligible_leads(conn) -> list[dict]:
+def _save_leads(leads: list[dict]) -> None:
+    """Atomically write HOT_LEAD.json."""
+    tmp = HOT_LEAD_PATH.with_suffix(".tmp")
+    tmp.write_text(json.dumps(leads, indent=2))
+    tmp.replace(HOT_LEAD_PATH)
+
+
+def _parse_dt(s: str | None) -> datetime | None:
+    if not s:
+        return None
+    try:
+        dt = datetime.fromisoformat(s.replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt
+    except Exception:
+        return None
+
+
+def get_eligible(leads: list[dict]) -> list[dict]:
     now = datetime.now(timezone.utc)
-    pitch_cutoff = (now - timedelta(days=MIN_POST_PITCH_DAYS)).isoformat()
-
-    rows = conn.execute("""
-        SELECT email, url, audit_delivered_at, pitch_sent_at
-        FROM leads
-        WHERE stage IN ('audit_delivered', 'pitch_sent')
-          AND pitch_sent_at IS NOT NULL
-          AND pitch_sent_at <= ?
-          AND paid_at IS NULL
-          AND bounced_at IS NULL
-          AND upsell_sent_at IS NULL
-    """, (pitch_cutoff,)).fetchall()
-
-    return [{"email": r[0], "url": r[1], "audit_delivered_at": r[2],
-             "pitch_sent_at": r[3]} for r in rows]
+    cutoff = now - timedelta(days=MIN_POST_PITCH_DAYS)
+    out = []
+    for l in leads:
+        if l.get("stage") not in ("audit_delivered", "pitch_sent"):
+            continue
+        if l.get("paid_at") or l.get("bounced_at") or l.get("upsell_sent_at"):
+            continue
+        pt = _parse_dt(l.get("pitch_sent_at") or l.get("pitch_sent"))
+        if pt is None or pt > cutoff:
+            continue
+        # skip internal / test addresses
+        email = (l.get("email") or "").lower()
+        if not email or "@" not in email:
+            continue
+        if any(x in email for x in ("mike.holownych", "systemd-verify", "verify-crm-test", "@invalid")):
+            continue
+        out.append(l)
+    return out
 
 
 def send_upsell(to: str, domain: str) -> bool:
     subject = SUBJECT.format(domain=domain)
     body    = BODY.format(domain=domain, retainer_url=STRIPE_RETAINER_URL)
-
     try:
-        import sys
         sys.path.insert(0, str(Path(__file__).parent))
         from agentmail_client import AgentMailClient
+        from lead_store import LeadStore
+        # Bounce check before send
+        store = LeadStore()
+        if store.is_bounced(to):
+            log.info(f"Skipping bounced lead: {to}")
+            return False
         result = AgentMailClient(inbox=INBOX).send(
             to=[to],
             subject=subject,
@@ -105,49 +131,58 @@ def send_upsell(to: str, domain: str) -> bool:
             client_id=f"retainer:{to.lower()}:initial",
         )
         if not result.get("_error"):
-            log.info(f"Upsell sent via gated AgentMail → {to} ({domain})")
+            log.info(f"Retainer upsell sent → {to} ({domain})")
             return True
         else:
-            log.warning(
-                f"Upsell blocked/failed {to}: "
-                f"{result.get('_reason') or result.get('_error')}"
-            )
+            log.warning(f"Send blocked {to}: {result.get('_reason') or result.get('_error')}")
             return False
     except Exception as e:
         log.error(f"Send failed {to}: {e}")
         return False
 
 
-def main():
+def main(dry_run: bool = False):
     LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
 
-    conn = sqlite3.connect(DB_PATH)
-    ensure_upsell_column(conn)
+    leads = _load_leads()
+    eligible = get_eligible(leads)
+    log.info(f"Eligible for retainer upsell: {len(eligible)} (cap: {MAX_PER_RUN}/run)")
 
-    leads = get_eligible_leads(conn)
-    log.info(f"Eligible for upsell: {len(leads)}")
+    if dry_run:
+        print(json.dumps({
+            "dry_run": True,
+            "eligible": len(eligible),
+            "sample": [{"email": l["email"], "url": l.get("url"), "pitched_at": l.get("pitch_sent_at")} for l in eligible[:5]]
+        }, indent=2))
+        return
 
     sent = 0
-    for lead in leads:
+    now_iso = datetime.now(timezone.utc).isoformat()
+
+    # Build lookup for fast update
+    lead_index = {l.get("email", "").lower(): i for i, l in enumerate(leads)}
+
+    for lead in eligible[:MAX_PER_RUN]:
         email  = lead["email"]
-        domain = (lead["url"] or "").replace("https://","").replace("http://","").split("/")[0] or "your page"
+        domain = (lead.get("url") or "").replace("https://", "").replace("http://", "").split("/")[0] or "your page"
 
         ok = send_upsell(email, domain)
-        now_iso = datetime.now(timezone.utc).isoformat()
-
         if ok:
-            conn.execute(
-                "UPDATE leads SET upsell_sent_at = ?, updated_at = ? WHERE email = ?",
-                (now_iso, now_iso, email)
-            )
-            conn.commit()
+            idx = lead_index.get(email.lower())
+            if idx is not None:
+                leads[idx]["upsell_sent_at"] = now_iso
+                leads[idx]["updated_at"]     = now_iso
             sent += 1
 
-    conn.close()
-    log.info(f"Upsell run complete — sent: {sent}/{len(leads)}")
-    print(json.dumps({"sent": sent, "eligible": len(leads),
-                      "run_at": datetime.now(timezone.utc).isoformat()}))
+    if sent:
+        _save_leads(leads)
+        log.info(f"HOT_LEAD.json updated — {sent} upsell_sent_at timestamps written")
+
+    result = {"sent": sent, "eligible": len(eligible), "run_at": now_iso}
+    log.info(f"Retainer upsell run complete — {sent}/{min(len(eligible), MAX_PER_RUN)} sent")
+    print(json.dumps(result))
 
 
 if __name__ == "__main__":
-    main()
+    dry = "--dry-run" in sys.argv
+    main(dry_run=dry)
