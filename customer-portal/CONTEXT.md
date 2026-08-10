@@ -40,9 +40,9 @@
 
 **Customer Portal** — Next.js app at `/home/mike/nebula/customer-portal`. Serves `nebulacomponents.com`. Deployed via `nebula-nextjs` systemd unit on :3000, exposed via Cloudflare Tunnel.
 
-**Platform API** — FastAPI app at `/home/mike/nebula/platform_api`. Serves `:8001`. Handles audit runs, user records, monitors, payment webhooks, and dispatch.
+**Platform API** — FastAPI app at `/home/mike/nebula/platform_api`. Serves `:8001`. Handles audit runs, user records, monitors, payment webhooks, and dispatch. Uses two separate PostgreSQL connections: `DATABASE_URL` → `nebula_platform` (auth tables: user identities, OAuth); `AUDIT_DATABASE_URL` → `nebula_audit` (audit pipeline). Supports Google OAuth and GitHub OAuth (`GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET`). CRM hooks fire on audit completion via `platform_api/services/crm_hooks.py`.
 
-**AuditDB** — `platform_api/services/audit_db.py`. Singleton async service backed by `nebula_audit` PostgreSQL DB (port 5433). Primary tables: `audits`, `customers`, `recommendations`, `monitors`, `monitor_events`.
+**AuditDB** — `platform_api/services/audit_db.py`. Singleton async service backed by `nebula_audit` PostgreSQL DB (port 5433). Reads `AUDIT_DATABASE_URL` env var (falls back to the default socket path) — distinct from `DATABASE_URL`, which points at the auth/platform DB. Primary tables: `audits`, `customers`, `recommendations`, `monitors`, `monitor_events`. The `audits` table carries additional columns: `source` (acquisition channel), `partner_id` (referral partner), `engine_version` (stamped on each result for traceability). Founder/internal addresses are listed in `INTERNAL_EMAILS` and excluded from all public-facing stats and counts.
 
 **content_ops DB** — Separate PostgreSQL DB (port 5432). Canonical tables managed by n8n Trigger Engine: `prospects`, `web_properties`, `audits` (different schema), `findings`, `qualifications`, `offers`, `interventions`, `outcomes`, `events`.
 
@@ -74,7 +74,7 @@
 
 **Workspace** — the authenticated area at `/workspace`. Gated by email (localStorage MVP). Shows audit history, monitors, billing.
 
-**Audit Page** — `/audit`. Public URL-input form. Submits to Platform API `/audit/run`. No email required.
+**Audit Page** — `/audit`. Public URL-input form. Submits to Platform API `/audit/run`. No email required. Anonymous audits receive a synthetic `anonymous+<uuid>@invalid.nebulacomponents.com` identity so unrelated visitors never collapse into a shared customer record. Analytics events fire only when `analytics_consent` is true; `audit_started` is emitted by the portal's `/api/audit/start` route (not the API service) to avoid double-counting the funnel's first step.
 
 **Results Page** — `/audit/[id]/results`. Public permalink for a completed audit. Shows score, grade, 9 signal findings, and the $97 offer.
 
@@ -114,3 +114,9 @@
 | frontend | Customer Portal |
 | dashboard | Workspace |
 | grades / scores interchangeably | score (0–100 internal), grade (A–F display) |
+
+---
+
+## Change Log
+
+- 2026-08-10: Updated by context_watcher — Platform API split into nebula_platform (auth) + nebula_audit (pipeline) DBs; AuditDB reads AUDIT_DATABASE_URL, audits table gained source/partner_id/engine_version columns, INTERNAL_EMAILS exclusion added; GitHub OAuth added; CRM hooks wired on audit completion; Audit Page updated with anonymous-identity pattern and analytics_consent gate; brand color renamed signal-emerald → signal-teal (#00c2a0)
