@@ -447,12 +447,13 @@ def score_audit(page):
         # SAY VS. SHOW CONTRADICTION — this is the finding
         proof_score = 4
         proof_issue = (
-            f"Page claims trust ({'/ '.join(trust_claimed[:3])}) but shows no concrete evidence: "
-            f"no named testimonials, no star ratings, no review counts. Visitors read this as a claim, not proof."
+            f"Your page says it's trustworthy ({'/ '.join(trust_claimed[:3])}). "
+            f"But a first-time visitor sees no names, no numbers, no proof. "
+            f"They hear a claim. They need evidence before they'll believe it."
         )
     else:
         proof_score = 3
-        proof_issue = "No trust signals found — no testimonials, reviews, or social proof anywhere on the page."
+        proof_issue = "A stranger landing here sees nothing that proves this worked for anyone else. No quotes, no names, no numbers. They're being asked to trust a page that hasn't earned it yet."
     # HTML-size heuristic (fallback if PageSpeed API unavailable)
     html_size_score = 8 if len(html_text) < 120000 else 5
     html_size_issue = "Page HTML is within normal bounds." if html_size_score >= 7 else f"HTML is {len(html_text)//1000}KB — large pages slow first paint."
@@ -766,20 +767,20 @@ def score_audit(page):
         "headline": {
             "score": headline_score,
             "weight": "high",
-            "issue": "Headline is outcome-specific enough." if headline_score >= 7 else "Headline may not state the buyer outcome clearly above the fold.",
+            "issue": "Your headline tells visitors what you do. It needs to tell them what they get." if headline_score < 7 else "Headline communicates a concrete buyer outcome.",
             "fix": "Lead with the concrete buyer result and target audience in the first sentence."
         },
         "cta": {
             "score": cta_score,
             "weight": "high",
-            "issue": "CTA language is action-oriented." if cta_score >= 7 else "CTA language may be vague or missing above the fold.",
+            "issue": "The button on your page asks visitors to act but does not tell them what changes for them when they do." if cta_score < 7 else "CTA language is action-oriented.",
             "fix": "Use action + outcome copy such as 'Run my free teardown' or 'Get the fix kit'."
         },
         "social_proof": {
             "score": proof_score,
             "weight": "high",
             "issue": proof_issue,
-            "fix": "Add proof near the first CTA: sample output, customer quote, metric, guarantee, or process evidence."
+            "fix": "Add proof near the first CTA: sample output, customer quote, metric, guarantee, or process evidence.",
         },
 
         "mobile": {

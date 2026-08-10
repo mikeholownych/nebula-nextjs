@@ -19,85 +19,206 @@ class AuditEmailData(BaseModel):
     custom_body: Optional[str] = None
 
 
+# ── Revenue math helper ─────────────────────────────────────────────────────
+
+def _revenue_math(score: float) -> str:
+    """Convert a score into a plain-language cost-of-inaction sentence."""
+    if score >= 8:
+        return ""
+    # Assume ~500 monthly visitors at ~$2.50 avg CPC as a conservative baseline
+    monthly_visitors = 500
+    current_cr = round(score / 10 * 0.04, 4)  # score maps to ~0-4% CR
+    baseline_cr = 0.02  # 2% industry baseline
+    if current_cr >= baseline_cr:
+        return ""
+    gap = baseline_cr - current_cr
+    missed = round(monthly_visitors * gap)
+    if missed <= 0:
+        return ""
+    return (
+        f"At your current score, roughly {missed} people a month are leaving "
+        f"without converting who would stay if this page were built right. "
+        f"Every month it stays the way it is, that gap compounds."
+    )
+
+
+# ── Finding renderer ────────────────────────────────────────────────────────
+
+def _render_finding_html(f: dict, index: int) -> str:
+    label = f.get("label") or f.get("key", "Finding")
+    issue = f.get("issue", "")
+    fix = f.get("fix", "")
+    score = f.get("score", 0)
+
+    # Score to signal color
+    if score < 5:
+        signal_color = "#ef4444"
+        signal_label = "Critical"
+    elif score < 7:
+        signal_color = "#f59e0b"
+        signal_label = "Needs fix"
+    else:
+        signal_color = "#22c55e"
+        signal_label = "Passing"
+
+    return f"""
+    <div style="border-left: 3px solid {signal_color}; padding: 1rem 1.25rem; margin: 1rem 0; background: #fafafa; border-radius: 0 6px 6px 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <strong style="color: #1a1a1a; font-size: 0.95rem;">{label}</strong>
+            <span style="font-size: 0.75rem; color: {signal_color}; font-weight: 600;">{signal_label}</span>
+        </div>
+        <p style="margin: 0 0 0.5rem 0; color: #333; font-size: 0.9rem; line-height: 1.5;">{issue}</p>
+        {f'<p style="margin: 0; color: #666; font-size: 0.85rem; font-style: italic;">Fix: {fix}</p>' if fix else ''}
+    </div>
+    """
+
+
+def _render_finding_text(f: dict) -> str:
+    label = f.get("label") or f.get("key", "Finding")
+    issue = f.get("issue", "")
+    fix = f.get("fix", "")
+    lines = [f"[{label}]", issue]
+    if fix:
+        lines.append(f"Fix: {fix}")
+    return "\n".join(lines)
+
+
+# ── Main email builder ──────────────────────────────────────────────────────
+
 class EmailService:
     """AgentMail email sending service"""
-    
+
     def __init__(self):
         self.inbox_id = "nebulashop@agentmail.to"
-    
+
     async def send_audit_results(self, data: AuditEmailData) -> dict:
-        """Send audit results email"""
-        
-        # Build findings list
-        findings_html = "<ul>"
-        for f in data.findings[:3]:  # Show top 3
-            findings_html += f"""
-            <li>
-                <strong>{f.get('label', f.get('key'))}</strong> 
-                ({f.get('quadrant', '').replace('_', ' ').title()})
-                <br><em>{f.get('issue', '')}</em>
-            </li>
-            """
-        findings_html += "</ul>"
-        
-        # Build email body
+        """Send audit results email using the story framework."""
+
+        top_findings = data.findings[:3]
+        revenue_sentence = _revenue_math(data.score)
+
+        # Score label
+        if data.score >= 8:
+            score_context = "Your page is in good shape."
+        elif data.score >= 6.5:
+            score_context = "Your page has real gaps — the kind that cost you quietly, every day."
+        elif data.score >= 5:
+            score_context = "Your page is working against you. Traffic is arriving. Most of it is leaving."
+        else:
+            score_context = "Your page is bleeding money. The ads are running. The page is not closing."
+
+        # Findings HTML
+        findings_html = "".join(
+            _render_finding_html(f, i) for i, f in enumerate(top_findings)
+        )
+
+        # Findings plain text
+        findings_text = "\n\n".join(_render_finding_text(f) for f in top_findings)
+
+        # Story bridge — Mike's story, applied to them
+        story_bridge_html = """
+        <div style="border-top: 1px solid #eee; margin: 2rem 0; padding-top: 1.5rem;">
+            <p style="color: #333; font-size: 0.9rem; line-height: 1.7; margin: 0 0 1rem 0;">
+                I built a tool that reads landing pages and tells founders exactly where their ad spend is disappearing.
+            </p>
+            <p style="color: #333; font-size: 0.9rem; line-height: 1.7; margin: 0 0 1rem 0;">
+                My own landing page didn't convert.
+            </p>
+            <p style="color: #333; font-size: 0.9rem; line-height: 1.7; margin: 0 0 1rem 0;">
+                I had the exact problem I was solving. That took me longer to say out loud than it should have.
+            </p>
+            <p style="color: #333; font-size: 0.9rem; line-height: 1.7; margin: 0;">
+                The findings above are exactly what I found on mine. They are fixable. I fix them for $97.
+            </p>
+        </div>
+        """
+
+        story_bridge_text = (
+            "I built a tool that reads landing pages and tells founders exactly "
+            "where their ad spend is disappearing.\n\n"
+            "My own landing page didn't convert.\n\n"
+            "I had the exact problem I was solving. That took me longer to say "
+            "out loud than it should have.\n\n"
+            "The findings above are exactly what I found on mine. They are fixable. "
+            "I fix them for $97."
+        )
+
+        # CTA
+        cta_html = """
+        <div style="background: #1a1a1a; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; text-align: center;">
+            <p style="color: #fff; font-size: 1rem; margin: 0 0 0.75rem 0; font-weight: 600;">
+                $97. Done in 48 hours. Reply YES and I'll send the link.
+            </p>
+            <p style="color: #999; font-size: 0.8rem; margin: 0;">
+                Or open your audit: <a href="https://nebulacomponents.com/audit" style="color: #a78bfa;">nebulacomponents.com/audit</a>
+            </p>
+        </div>
+        """
+
         html_body = f"""
         <html>
-        <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto;">
-            <h1 style="color: #1a1a1a;">Your Landing Page Audit Results</h1>
-            
-            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 12px; margin: 1rem 0;">
-                <h2 style="margin: 0;">{data.url}</h2>
-                <div style="font-size: 3rem; font-weight: bold; margin: 1rem 0;">
-                    {data.score:.1f}/10
-                    <span style="font-size: 1.5rem; opacity: 0.9;">Grade: {data.grade}</span>
-                </div>
-            </div>
-            
-            <h2 style="color: #333;">Top Prioritized Fixes</h2>
-            {findings_html}
-            
-            <div style="background: #f5f5f5; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
-                <h3 style="margin-top: 0;">Want one implementation-ready change?</h3>
-                <p><strong>$97 One-Leak Repair Sprint</strong> — one tailored change for one selected finding. You or your developer applies it; no site access or conversion-lift guarantee.</p>
-                <p style="margin-bottom: 0;">
-                    <a href="https://nebulacomponents.com/audit" style="color: #667eea;">Open the audit to unlock eligible checkout →</a>
+        <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 580px; margin: 0 auto; color: #1a1a1a; line-height: 1.6;">
+
+            <div style="padding: 2rem 0 1rem 0;">
+                <p style="font-size: 0.8rem; color: #999; margin: 0 0 1.5rem 0; text-transform: uppercase; letter-spacing: 0.05em;">
+                    Nebula — Landing Page Audit
                 </p>
+                <h1 style="font-size: 1.4rem; font-weight: 700; margin: 0 0 0.5rem 0; color: #1a1a1a;">
+                    {data.url}
+                </h1>
+                <div style="font-size: 2.5rem; font-weight: 800; color: #1a1a1a; margin: 0.5rem 0;">
+                    {data.score:.1f}<span style="font-size: 1rem; font-weight: 400; color: #666;">/10</span>
+                    <span style="font-size: 1.2rem; color: #666; margin-left: 0.75rem;">Grade {data.grade}</span>
+                </div>
+                <p style="font-size: 1rem; color: #333; margin: 0.5rem 0 0 0;">{score_context}</p>
+                {f'<p style="font-size: 0.9rem; color: #666; margin: 0.5rem 0 0 0;">{revenue_sentence}</p>' if revenue_sentence else ''}
             </div>
-            
-            <p style="color: #666; font-size: 0.9rem;">
-                Want the full report with all {len(data.findings)} findings? 
-                <a href="https://nebulacomponents.com/audit" style="color: #667eea;">Run another audit</a>
-            </p>
-            
-            <hr style="border: none; border-top: 1px solid #eee; margin: 2rem 0;">
-            <p style="color: #999; font-size: 0.85rem;">
-                Nebula Components — Conversion optimization for founders wasting money on ads.<br>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 1.5rem 0;">
+
+            <h2 style="font-size: 1rem; font-weight: 700; margin: 0 0 0.75rem 0; text-transform: uppercase; letter-spacing: 0.05em; color: #333;">
+                What your visitors are experiencing
+            </h2>
+
+            {findings_html}
+
+            {story_bridge_html}
+
+            {cta_html}
+
+            <p style="color: #999; font-size: 0.8rem; margin: 2rem 0 0 0;">
+                Nebula Components — Mike Holownych<br>
                 <a href="https://nebulacomponents.com" style="color: #999;">nebulacomponents.com</a>
             </p>
+
         </body>
         </html>
         """
-        
+
         text_body = f"""
-Your Landing Page Audit Results
-
 {data.url}
-Score: {data.score:.1f}/10 (Grade: {data.grade})
+Score: {data.score:.1f}/10 (Grade {data.grade})
 
-Top Prioritized Fixes:
-{chr(10).join([f"- {f.get('label', f.get('key'))}: {f.get('issue', '')}" for f in data.findings[:3]])}
+{score_context}
+{revenue_sentence}
 
-Want one implementation-ready change?
-- $97 One-Leak Repair Sprint — one tailored change for one selected finding. You or your developer applies it. No site access or conversion-lift guarantee.
+What your visitors are experiencing:
 
-Open the audit to unlock eligible checkout: https://nebulacomponents.com/audit
+{findings_text}
 
---
-Nebula Components — Conversion optimization for founders
+---
+
+{story_bridge_text}
+
+$97. Done in 48 hours. Reply YES and I'll send the link.
+Or open your audit: https://nebulacomponents.com/audit
+
+-- 
+Mike Holownych
+Nebula Components
         """.strip()
-        
-        # Register the inbound audit request before the fail-closed gate checks identity.
+
+        # Register lead
         from agentmail_client import AgentMailClient
         from lead_store import LeadStore
 
@@ -110,13 +231,20 @@ Nebula Components — Conversion optimization for founders
             source="audit_request",
             trigger_context="requested_platform_audit",
         )
+
+        subject = (
+            data.custom_subject
+            or f"Your audit: {data.url} scored {data.score:.1f}/10 — here's what visitors are hitting"
+        )
+
         result = await asyncio.to_thread(
             AgentMailClient(inbox=self.inbox_id).send_audit,
             to=[data.email],
-            subject=f"Your Audit Results: {data.url} scored {data.score:.1f}/10",
+            subject=subject,
             text=text_body,
             html=html_body,
         )
+
         if not result.get("_error"):
             await asyncio.to_thread(
                 store.upsert_lead,
@@ -127,6 +255,7 @@ Nebula Components — Conversion optimization for founders
                 audit_score=data.score,
                 audit_grade=data.grade,
             )
+
         return {
             "status": "failed" if result.get("_error") else "sent",
             "message_id": result.get("message_id") or result.get("id"),
