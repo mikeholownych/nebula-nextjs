@@ -234,7 +234,7 @@ Nebula Components
 
         subject = (
             data.custom_subject
-            or f"Your audit: {data.url} scored {data.score:.1f}/10 — here's what visitors are hitting"
+            or f"Your page scored {data.score:.1f}/10. Here's what's costing you every day it stays that way."
         )
 
         result = await asyncio.to_thread(

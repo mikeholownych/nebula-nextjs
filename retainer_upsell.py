@@ -57,7 +57,7 @@ week on a page that wasn't converting.
 
 If that sounds relevant: {retainer_url}
 
-If you're sorted — no worries, just ignore this.
+If you're sorted — no worries. If your conversion rate drifted back down after the first fix, you already know why.
 
 — Mike
 Nebula Components
