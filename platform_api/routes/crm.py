@@ -120,14 +120,29 @@ async def weekly_review(body: WeeklyReviewIn):
 # ── Pipeline metrics ──────────────────────────────────────────────────────
 
 @router.get("/pipeline")
-async def pipeline_metrics():
-    """Stage conversion rates, sales velocity, total LTV — live from DB."""
+async def pipeline_metrics(brief: bool = False):
+    """Stage conversion rates, sales velocity, total LTV — live from DB.
+    
+    Add ?brief=1 for a single-line summary (token-efficient for agent crons).
+    """
     pool = await get_pool()
     async with pool.acquire() as conn:
         row = await conn.fetchrow("SELECT * FROM crm_funnel_metrics")
         stale = await conn.fetch(
             "SELECT email, crm_status, days_inactive, utm_source FROM crm_stale_prospects LIMIT 20"
         )
+
+    if brief:
+        # 8-token summary for agent consumption — mirrors daily_retro.py output
+        r = dict(row) if row else {}
+        return (
+            f"{r.get('interested',0)}/{10} interested"
+            f" | {r.get('purchased',0)} purchased"
+            f" | {r.get('churned',0)} churned"
+            f" | ltv_cents={r.get('total_ltv_cents',0)}"
+            f" | stale={len(stale)}"
+        )
+
     return {
         "funnel": dict(row) if row else {},
         "stale_prospects": [dict(r) for r in stale],

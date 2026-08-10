@@ -16,6 +16,7 @@ import time
 import traceback
 import html as html_module
 from datetime import datetime, timezone, timedelta
+from pathlib import Path
 from urllib.parse import urlencode, quote_plus
 from xml.etree import ElementTree as ET
 
@@ -755,6 +756,24 @@ def process_leads(all_leads: list, seen: set) -> list:
             "contacted":    False,
         }
         new_signals.append(signal)
+
+        # Priority fast-path: score 9 signals write to priority_signals.jsonl
+        # The morning-outreach-batch checks this file first for urgent leads
+        if score >= 9:
+            priority_file = Path(__file__).parent / "priority_signals.jsonl"
+            try:
+                existing = []
+                if priority_file.exists():
+                    existing = [
+                        json.loads(l) for l in priority_file.read_text().splitlines()
+                        if l.strip()
+                    ]
+                existing_urls = {e.get("url") for e in existing}
+                if url not in existing_urls:
+                    with open(priority_file, "a") as f:
+                        f.write(json.dumps(signal) + "\n")
+            except Exception:
+                pass  # non-blocking
 
     return new_signals
 
