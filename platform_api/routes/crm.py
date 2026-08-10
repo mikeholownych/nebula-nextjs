@@ -226,3 +226,44 @@ async def crm_health():
                 (SELECT count(*) FROM crm_feedback WHERE logged_at >= now() - interval '7d') AS feedback_7d
         """)
     return {"status": "healthy", "counts": dict(counts)}
+
+
+@router.get("/hook-performance")
+async def hook_performance():
+    """Reply rate by hook variant (A/B/C) — anti-entropy signal for outreach copy.
+    
+    Reads from SQLite sequence_state (local, not PostgreSQL).
+    Returns: sends, replies, reply_rate per variant.
+    Trigger: if any variant reply_rate < 5% after 10+ sends → rewrite that hook.
+    """
+    import sqlite3
+    from pathlib import Path
+    db_path = Path(__file__).parent.parent.parent / "lead_gen" / "lead_state.db"
+    if not db_path.exists():
+        return {"hook_performance": [], "note": "No sequence data yet"}
+    db = sqlite3.connect(str(db_path))
+    db.row_factory = sqlite3.Row
+    rows = db.execute("""
+        SELECT
+            COALESCE(hook_variant, 'A') AS variant,
+            COUNT(*) AS sends,
+            SUM(CASE WHEN replied_at IS NOT NULL THEN 1 ELSE 0 END) AS replies
+        FROM sequence_state
+        GROUP BY COALESCE(hook_variant, 'A')
+        ORDER BY variant
+    """).fetchall()
+    db.close()
+    result = []
+    for r in rows:
+        sends = r["sends"]
+        replies = r["replies"]
+        rate = round(replies / sends * 100, 1) if sends > 0 else 0
+        flag = "⚠️ LOW" if sends >= 10 and rate < 5 else "✓"
+        result.append({
+            "variant": r["variant"],
+            "sends": sends,
+            "replies": replies,
+            "reply_rate_pct": rate,
+            "flag": flag,
+        })
+    return {"hook_performance": result}

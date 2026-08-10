@@ -142,23 +142,32 @@ def register_d1_sent(
     product_url: str = "",
     signal_notes: str = "",
     audit_finding: str = "",
+    hook_variant: str = "",
 ) -> None:
     """Call this immediately after sending Day 1 email."""
+    # Auto-assign hook variant based on send count (round-robin A→B→C)
+    if not hook_variant:
+        db_tmp = get_db()
+        total_sent = db_tmp.execute("SELECT count(*) FROM sequence_state").fetchone()[0]
+        db_tmp.close()
+        hook_variant = ["A", "B", "C"][total_sent % 3]
+
     db = get_db()
     db.execute("""
         INSERT INTO sequence_state
             (email, first_name, product_url, signal_notes, audit_finding,
-             thread_id, message_id, d1_sent_at, status)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active')
+             thread_id, message_id, d1_sent_at, status, hook_variant)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', ?)
         ON CONFLICT(email) DO UPDATE SET
             thread_id     = EXCLUDED.thread_id,
             message_id    = EXCLUDED.message_id,
             d1_sent_at    = EXCLUDED.d1_sent_at,
             signal_notes  = COALESCE(EXCLUDED.signal_notes, sequence_state.signal_notes),
             audit_finding = COALESCE(EXCLUDED.audit_finding, sequence_state.audit_finding),
+            hook_variant  = COALESCE(EXCLUDED.hook_variant, sequence_state.hook_variant),
             updated_at    = CURRENT_TIMESTAMP
     """, (email, first_name, product_url, signal_notes, audit_finding,
-          thread_id, message_id, datetime.now(timezone.utc).isoformat()))
+          thread_id, message_id, datetime.now(timezone.utc).isoformat(), hook_variant))
     db.commit()
     db.close()
 
