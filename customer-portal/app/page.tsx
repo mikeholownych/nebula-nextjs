@@ -149,9 +149,15 @@ export default function Home() {
                 Most tools lead with case studies they can&apos;t verify. We&apos;d rather show you the
                 actual data. Every verified check. Every evidence atom. The same output you get.
               </p>
-              <p className="mt-4 text-sm text-fg-muted">
-                When we have a real client outcome with dates, proof, and a way for you to verify it, it goes here.
-              </p>
+              <div className="mt-6 flex items-start gap-4">
+                <div>
+                  <p className="text-sm font-semibold text-fg">Mike Holownych</p>
+                  <p className="text-xs text-fg-muted">Founder, Nebula Components</p>
+                  <p className="text-xs text-fg-dim mt-1">
+                    Enterprise AI governance lead · TMX Group · AI Syndicate
+                  </p>
+                </div>
+              </div>
               <p className="mt-3 text-xs text-fg-dim">
                 Last updated: <time dateTime="2026-08-04">August 2026</time>
               </p>

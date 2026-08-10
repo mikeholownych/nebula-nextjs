@@ -210,3 +210,19 @@ async def win_loss_analysis():
             ORDER BY outcome, count DESC
         """)
     return {"win_loss": [dict(r) for r in rows]}
+
+
+@router.get("/health")
+async def crm_health():
+    """CRM health check — confirms DB connectivity and returns row counts."""
+    pool = await get_pool()
+    async with pool.acquire() as conn:
+        counts = await conn.fetchrow("""
+            SELECT
+                (SELECT count(*) FROM customers)            AS total_customers,
+                (SELECT count(*) FROM customers WHERE crm_status='purchased') AS purchased,
+                (SELECT count(*) FROM customers WHERE crm_status='pro_subscriber') AS pro,
+                (SELECT count(*) FROM audits WHERE created_at >= now() - interval '24h') AS audits_24h,
+                (SELECT count(*) FROM crm_feedback WHERE logged_at >= now() - interval '7d') AS feedback_7d
+        """)
+    return {"status": "healthy", "counts": dict(counts)}

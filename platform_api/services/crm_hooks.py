@@ -249,6 +249,32 @@ async def purchase_completed(
         except Exception as exc:
             log.warning("purchase_completed delivery trigger failed: %s", exc)
 
+    # Write lookalike signal — teaches the scanner what 'our customer' looks like
+    try:
+        from platform_api.services.crm import get_pool as _get_pool
+        async def _write_lookalike():
+            pool = await _get_pool()
+            async with pool.acquire() as conn:
+                customer = await conn.fetchrow(
+                    "SELECT utm_source, last_score FROM customers WHERE email=$1", email
+                )
+                if customer:
+                    await conn.execute("""
+                        INSERT INTO lookalike_signals
+                            (won_email, utm_source, audit_score, icp_type, won_at)
+                        VALUES ($1, $2, $3, $4, now())
+                        ON CONFLICT DO NOTHING
+                    """,
+                        email,
+                        customer.get("utm_source"),
+                        customer.get("last_score"),
+                        "fix_pack",
+                    )
+        import asyncio as _aio2
+        _aio2.create_task(_write_lookalike())
+    except Exception as exc:
+        log.warning("purchase_completed lookalike signal failed: %s", exc)
+
 
 async def support_objection(
     email: str,
