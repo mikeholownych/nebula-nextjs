@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/home/mike/nebula/.venv/bin/python3
 """Post-purchase outcome nurture — sends follow-up emails after the 30-day re-audit.
 
 Two paths based on score change:

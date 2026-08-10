@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/home/mike/nebula/.venv/bin/python3
 """
 Nebula page monitoring cron.
 Runs for every active monitored_pages row that is due for a check.
