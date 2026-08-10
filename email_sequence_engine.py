@@ -90,7 +90,7 @@ SEQUENCES = {
             {
                 "id": "day1_leak_map",
                 "day": 0,
-                "subject": "Day 1: The 5 places your landing page leaks buyers",
+                "subject": "Your page has a leak. You've been patching the wrong spot.",
                 "type": "text",
                 "body": (
                     "You ran the audit. Now let's decode what it means.\n\n"
@@ -108,20 +108,20 @@ SEQUENCES = {
                     "   Every 1-second delay = 7% fewer conversions.\n\n"
                     "5. MOBILE — Does it work on phone?\n"
                     "   60% of your traffic is mobile. If it's broken, you're bleeding.\n\n"
-                    "SELF-CHECK: Open your audit results. Which zone scored lowest?\n"
-                    "That's your first fix. Tomorrow I'll show you the Message Match test.\n\n"
-                    "No pitch today. Just the leak map.\n\n"
+                    "SELF-CHECK: Open your audit results. Which zone scored lowest?\n\n"
+                    "That's the leak. Most founders who find it try to fix the wrong thing first.\n"
+                    "Tomorrow: the specific reason changing your ad copy doesn't fix it — and what does.\n\n"
                     "--\n"
-                    "Mike from Nebula Components\n"
-                    "P.S. If you want all 5 leaks fixed in 24h without touching your page, "
-                    "the $97 Fix Pack is here: https://nebulacomponents.com/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day1_signature\n"
+                    "Mike\n"
+                    "P.S. If you want to know exactly which of the 5 zones is costing you the most right now, "
+                    "your audit score already has the answer: https://nebulacomponents.com/audit?utm_source=email_course&utm_medium=email&utm_campaign=post_audit&utm_content=day1_ps\n"
                 ),
             },
             # Day 2: Message Match — soft CTA
             {
                 "id": "day2_message_match",
                 "day": 1,
-                "subject": "Day 2: The promise in your ad must match the page",
+                "subject": "You wrote a headline that converts. Then you sent people somewhere else.",
                 "type": "text",
                 "body": (
                     "Yesterday we mapped the 5 leak zones.\n\n"
@@ -139,20 +139,19 @@ SEQUENCES = {
                     "  \"Grow your email list\" → \"Get 500 subscribers without running ads\"\n"
                     "  \"Better team collaboration\" → \"Stop wasting 2 hours/day on status meetings\"\n\n"
                     "Your audit score for Headline Clarity tells you if you have this issue.\n"
-                    "If it's under 7, this is your highest-leverage 15 minutes this week.\n\n"
-                    "Tomorrow: the One-Action Page.\n\n"
+                    "If it's under 7, you're losing conversions to a gap your visitor can't describe — they just leave.\n\n"
+                    "Tomorrow: the exact page element that creates decision paralysis and kills conversion silently.\n\n"
                     "--\n"
                     "Mike\n"
-                    "P.S. Want your headline rewritten to match your ICP's buying trigger? "
-                    "The $97 Fix Pack includes a full hero section rewrite: "
-                    "https://nebulacomponents.com/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day2_ps\n"
+                    "P.S. If your headline score was under 7 and you want to know the exact rewrite, "
+                    "that's one of the three things covered in the $97 fix: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h\n"
                 ),
             },
             # Day 3: One-Action Page — soft CTA
             {
                 "id": "day3_one_action",
                 "day": 2,
-                "subject": "Day 3: Your page is asking for too many things",
+                "subject": "A founder removed 3 words from their page. Conversion rate doubled.",
                 "type": "text",
                 "body": (
                     "Most landing pages leak because they ask for too many actions.\n\n"
