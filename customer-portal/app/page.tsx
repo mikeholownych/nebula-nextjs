@@ -79,7 +79,7 @@ export default function Home() {
               </h1>
               <p className="mt-6 max-w-lg text-lg leading-7 text-fg-muted">
                 Paste your URL. Nebula checks 9 conversion signals plus technical readiness on your actual page and
-                returns a prioritized fix list. Free, no signup, takes under two minutes.
+                returns exactly what's costing you conversions — ranked by impact. Free, no signup, under two minutes.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
@@ -338,7 +338,7 @@ export default function Home() {
         <section className="border-b border-border bg-bg-muted/10 px-6 py-16">
           <div className="mx-auto max-w-6xl">
             <h2 className="mb-10 text-2xl font-bold tracking-section text-fg md:text-3xl">
-              From URL to fix list in under 2 minutes.
+              From URL to knowing exactly what to fix. Under 2 minutes.
             </h2>
             <div className="grid gap-0 md:grid-cols-3">
               {[
@@ -355,7 +355,7 @@ export default function Home() {
                 {
                   n: '03',
                   heading: 'See what to fix first',
-                  body: 'Every failing signal ranked by conversion impact and effort. Specific findings from your page, not generic advice.',
+                  body: 'Every failing signal ranked by conversion impact and effort. Specific findings from your page, not generic advice. You stop guessing. You start fixing the right thing.',
                 },
               ].map((step, i) => (
                 <div key={step.n} className={`border-border p-6 ${i < 2 ? 'md:border-r' : ''}`}>
@@ -483,7 +483,7 @@ export default function Home() {
               </div>
               <div>
                 <h3 className="font-semibold text-fg">What does the free audit check?</h3>
-                <p className="mt-1 text-sm leading-6 text-fg-muted">Core conversion signals and applicable technical checks against your actual page. Returns pass/fail findings with raw evidence, plus a fix list ranked by impact. Under 2 minutes.</p>
+                <p className="mt-1 text-sm leading-6 text-fg-muted">Core conversion signals and applicable technical checks against your actual page. Returns pass/fail findings with raw evidence, ranked by impact. You stop guessing what's wrong. Under 2 minutes.</p>
               </div>
               <div>
                 <h3 className="font-semibold text-fg">What does the $97 repair sprint do?</h3>
