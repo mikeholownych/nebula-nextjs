@@ -223,27 +223,21 @@ def has_reply(thread_id: str) -> bool:
 # ── Email templates ────────────────────────────────────────────────────────
 
 def _d7_email(row) -> tuple[str, str]:
-    """Day 7 follow-up: reply in thread with one value-add."""
+    """Day 7 follow-up: lower-stakes check-in, not a re-pitch."""
     name = row["first_name"] or "there"
-    finding = row["audit_finding"] or "a few conversion gaps"
+    finding = row["audit_finding"] or "a conversion gap"
     product = row["product_url"] or "your site"
+    domain = product.replace("https://", "").replace("http://", "").split("/")[0]
 
-    subject = f"Re: {product.replace('https://', '').replace('http://', '').split('/')[0]} — one thing holding conversions back"
+    subject = f"Re: {domain} — still a problem?"
     text = f"""Hey {name},
 
-Following up on my note from last week.
+Is the {finding} still an issue, or have you sorted it out?
 
-Quick thought: the {finding} issue tends to compound over time — each week without addressing it is more spend going out the door.
-
-Here's a 10-minute fix for the most common version of this:
-1. Run the free audit: nebulacomponents.com/audit
-2. The results show exactly which issues are costing you the most
-3. The fix pack ($97) implements the top 3 changes with copy-paste prompts
-
-If the timing's off, no worries — just thought it might be useful.
+Just checking in — happy to share the quick fix either way.
 
 — Sedrick
-Nebula Components"""
+nebulacomponents.com/audit"""
 
     return subject, text
 
