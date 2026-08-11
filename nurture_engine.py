@@ -50,7 +50,7 @@ MIN_DAYS_BETWEEN = {
 }
 
 # AgentMail config
-INBOX = "nebulashop@agentmail.to"
+INBOX = "sedrick@nebulacomponents.com"
 
 # Test/sandbox emails that must never receive nurture
 TEST_EMAILS = frozenset([

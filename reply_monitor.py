@@ -81,11 +81,27 @@ def main():
     dry_run = "--dry-run" in sys.argv
     print(f"reply_monitor.py {'(DRY-RUN)' if dry_run else '(LIVE)'} — {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
 
-    am = AgentMailClient()
     gate = OutboundReleaseGate()
     processed = load_processed_threads(gate)
-    human_threads = am.get_human_replies()
 
+    # Watch both inboxes: new domain (all future sends) + legacy (existing sequences)
+    inboxes_to_watch = [
+        "sedrick@nebulacomponents.com",
+        "nebulashop@agentmail.to",
+    ]
+    all_human_threads = []
+    for inbox_id in inboxes_to_watch:
+        try:
+            am_inbox = AgentMailClient(inbox=inbox_id)
+            threads = am_inbox.get_human_replies()
+            print(f"  Inbox {inbox_id}: {len(threads)} human reply threads")
+            all_human_threads.extend(threads)
+        except Exception as e:
+            print(f"  Inbox {inbox_id}: error — {e}")
+
+    # Use default client for sending replies (uses new domain)
+    am = AgentMailClient()
+    human_threads = all_human_threads
     new_threads = [t for t in human_threads if t.get("thread_id") not in processed]
     print(f"\nHuman reply threads: {len(human_threads)}  Unprocessed: {len(new_threads)}")
 

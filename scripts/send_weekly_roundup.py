@@ -21,7 +21,7 @@ sys.path.insert(0, str(BASE))
 
 # ─── CONFIG ──────────────────────────────────────────────
 
-INBOX = "nebulashop@agentmail.to"
+INBOX = "hello@nebulacomponents.com"
 CONTENT_QUEUE = BASE / "content_queue"
 
 # ─── EMAIL CONTENT ───────────────────────────────────────

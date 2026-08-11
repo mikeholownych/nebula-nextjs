@@ -24,7 +24,7 @@ from pathlib import Path
 
 HOT_LEAD_PATH  = Path("/home/mike/nebula/HOT_LEAD.json")
 LOG_FILE       = Path("/home/mike/nebula/logs/retainer_upsell.log")
-INBOX          = "nebulashop@agentmail.to"
+INBOX          = "sedrick@nebulacomponents.com"
 STRIPE_RETAINER_URL = "https://buy.stripe.com/00w5kD1nK0wkaa573A43S0c"
 MIN_POST_PITCH_DAYS = 14
 MAX_PER_RUN         = 5   # pace sends — retainer is a premium ask

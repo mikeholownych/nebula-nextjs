@@ -26,7 +26,7 @@ from typing import Any, Callable, Optional
 
 from outbound_release_gate import DeliveryPurpose, OutboundReleaseGate
 
-INBOX = "nebulashop@agentmail.to"
+INBOX = "sedrick@nebulacomponents.com"
 BASE  = "https://api.agentmail.to/v0"
 
 # Nebula state labels (custom — system labels like sent/received are read-only)

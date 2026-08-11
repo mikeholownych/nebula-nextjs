@@ -25,8 +25,9 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 DB_PATH = Path(__file__).parent.parent / "lead_gen" / "lead_state.db"
-KEY_PATH = Path.home() / ".hermes" / "secrets" / "agentmail.key"
-INBOX = "nebulashop@agentmail.to"
+KEY_PATH = Path.home() / ".hermes" / "secrets" / "agentmail_org.key"
+INBOX = "sedrick@nebulacomponents.com"
+LEGACY_INBOX = "nebulashop@agentmail.to"  # watch for replies on existing sequences
 
 # Load Hunter key from .env
 def _hunter_key() -> str:
