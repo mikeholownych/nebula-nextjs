@@ -230,11 +230,14 @@ async def crm_health():
 
 @router.get("/hook-performance")
 async def hook_performance():
-    """Reply rate by hook variant (A/B/C) — anti-entropy signal for outreach copy.
+    """Reply rate AND purchase rate by hook variant (A/B/C).
     
-    Reads from SQLite sequence_state (local, not PostgreSQL).
-    Returns: sends, replies, reply_rate per variant.
-    Trigger: if any variant reply_rate < 5% after 10+ sends → rewrite that hook.
+    Neil Gambit principle: optimize hooks for buyers, not just replies.
+    A hook that gets replies but no purchases is the wrong signal to optimize on.
+    
+    Reads from SQLite sequence_state + PostgreSQL customers table.
+    Trigger: if reply_rate < 5% after 10+ sends → rewrite hook.
+    Trigger: if purchases > 0 and purchase_rate differs by variant → keep winner only.
     """
     import sqlite3
     from pathlib import Path
@@ -247,23 +250,46 @@ async def hook_performance():
         SELECT
             COALESCE(hook_variant, 'A') AS variant,
             COUNT(*) AS sends,
-            SUM(CASE WHEN replied_at IS NOT NULL THEN 1 ELSE 0 END) AS replies
+            SUM(CASE WHEN replied_at IS NOT NULL THEN 1 ELSE 0 END) AS replies,
+            GROUP_CONCAT(email) AS emails
         FROM sequence_state
         GROUP BY COALESCE(hook_variant, 'A')
         ORDER BY variant
     """).fetchall()
     db.close()
+
+    # Count purchases per variant from PostgreSQL customers table
+    purchase_map = {}
+    try:
+        pool = await get_pool()
+        async with pool.acquire() as conn:
+            purchase_rows = await conn.fetch("""
+                SELECT email, crm_status FROM customers
+                WHERE crm_status = 'purchased'
+            """)
+            purchased_emails = {r["email"] for r in purchase_rows}
+    except Exception:
+        purchased_emails = set()
+
     result = []
     for r in rows:
         sends = r["sends"]
         replies = r["replies"]
-        rate = round(replies / sends * 100, 1) if sends > 0 else 0
-        flag = "⚠️ LOW" if sends >= 10 and rate < 5 else "✓"
+        emails = set((r["emails"] or "").split(","))
+        purchases = len(emails & purchased_emails)
+        reply_rate = round(replies / sends * 100, 1) if sends > 0 else 0
+        purchase_rate = round(purchases / sends * 100, 1) if sends > 0 else 0
+        flag = "⚠️ NO_SIGNAL" if sends >= 10 and reply_rate == 0 else (
+               "⚠️ NO_PURCHASES" if sends >= 20 and purchases == 0 else "✓"
+               )
         result.append({
             "variant": r["variant"],
             "sends": sends,
             "replies": replies,
-            "reply_rate_pct": rate,
+            "purchases": purchases,
+            "reply_rate_pct": reply_rate,
+            "purchase_rate_pct": purchase_rate,
             "flag": flag,
+            "note": "Optimize for purchase_rate once data exists" if purchases == 0 else "",
         })
     return {"hook_performance": result}
