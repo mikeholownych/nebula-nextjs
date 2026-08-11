@@ -50,3 +50,5 @@ It cannot send, publish, spend, deploy, change production code, change pricing, 
 - `growth_system/research_experiments/*.json`: proposed experiments with metric and stop condition
 
 An experiment is not considered successful because it produced a reply, click, audit, or checkout start. Those are leading indicators only. `experiment_control.py` marks a variant `SALE_SIGNAL` only when the recipient email matches a payment event in `ledgers/customer-ledger.jsonl`. Twenty sends with zero attributable purchases produces `NO_PURCHASES`. The evaluator never promotes a winner.
+
+A proposed cloned pattern is rejected unless it includes customer-outcome evidence with a sales source, sales attribution, and attributable sales record. Views, engagement, testimonials without transaction evidence, and unverified revenue claims do not pass the clone gate.

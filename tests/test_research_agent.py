@@ -51,6 +51,17 @@ def test_critic_rejects_generic_or_unsafe_action():
     assert any("action_type not allowed" in reason for reason in review["reasons"])
 
 
+def test_critic_rejects_cloning_without_attributable_sales_proof():
+    review = critic(
+        valid_item(action_type="clone_sales_pattern"),
+        brain(),
+        set(),
+    )
+    assert review["accepted"] is False
+    assert any("action_type not allowed" in reason for reason in review["reasons"])
+    assert any("attributable sales proof" in reason for reason in review["reasons"])
+
+
 def test_critic_rejects_duplicates():
     item = valid_item()
     fingerprint = critic(item, brain(), set())["fingerprint"]

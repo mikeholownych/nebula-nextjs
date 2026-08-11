@@ -30,6 +30,7 @@ REQUIRED = {
     "evidence_excerpt", "claim", "why_nebula", "smallest_safe_change",
     "expected_metric", "validation_window", "stop_condition",
 }
+SALES_PROOF_REQUIRED = {"sales_evidence", "sales_source", "sales_attribution"}
 ALLOWED_ACTIONS = {"record_buyer_language", "create_experiment_brief"}
 BLOCKED_ACTION_WORDS = {
     "send", "email", "dm", "publish", "post", "spend", "buy", "price",
@@ -110,6 +111,12 @@ def critic(item: dict[str, Any], brain: dict[str, Any], seen: set[str]) -> dict[
     action = norm(item.get("action_type"))
     if action and action not in ALLOWED_ACTIONS:
         problems.append(f"action_type not allowed: {action}")
+    if action == "clone_sales_pattern":
+        missing_sales = sorted(field for field in SALES_PROOF_REQUIRED if not item.get(field))
+        if source_type != "customer_outcome":
+            problems.append("clone_sales_pattern requires customer_outcome evidence")
+        if missing_sales:
+            problems.append("clone_sales_pattern missing attributable sales proof: " + ", ".join(missing_sales))
     score = SOURCE_QUALITY.get(source_type, 0)
     if relevant:
         score += 20
