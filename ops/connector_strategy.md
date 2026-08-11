@@ -84,3 +84,45 @@ Founder, Nebula Components | Enterprise AI governance lead, TMX Group
 - Phase 1 (now): Identify 3 connector targets, send pitch
 - Phase 2 (after first paying customer): Set up formal affiliate program
 - Phase 3 (after 5 customers): Approach Tier 2 connectors with case study evidence
+
+---
+
+## When the first customer closes — document for RAG
+
+After first $97 fix pack purchase, immediately document:
+1. Their URL
+2. Before audit score (from nebula_audit DB)
+3. Specific findings implemented (from fix pack delivery)
+4. After audit score (run re-audit at 30 days)
+5. Optional: founder quote or Loom
+
+Tag with metadata:
+- icp_type: bleeding/plateau
+- industry: ecommerce/saas/agency/etc
+- finding_type: social_proof/cta/headline/mobile/etc
+- improvement_delta: (after_score - before_score)
+
+This powers the future RAG sales agent that answers:
+"Has this worked for someone with my type of site?"
+
+---
+
+## Phase 3 — Paid Ads Preparation (Neil Gambit database)
+
+When first purchase confirmed + funnel CVR measured, activate paid ads.
+
+**First ad to test:** Static image contrast — lift WithWithout component directly.
+- Hook: "Most founders optimize their ads. Nobody optimizes what happens after the click."  
+- Creative: Left (without Nebula) vs. Right (with Nebula) — already built in WithWithout.tsx
+- CTA: Free audit link
+
+**Second ad to test (UGC-style):** Lightbulb/reframe narrative
+- "You think your ads aren't working. Your ads are working. Your page isn't."
+- Talking head or screen-share of an actual audit result
+
+**Third ad to test:** Question hook (qualifies the viewer)
+- "Are you spending $500+/month on ads with zero conversions?"
+- Pain point + immediate CTA to free audit
+
+**Ad research source:** Neil Gambit's 50 Winning B2B SaaS Ads database
+Full database: https://www.notion.so/50-Winning-Ads-for-B2B-Software-Companies-277a1c95c7da80bc9cdfe83f72d16211
