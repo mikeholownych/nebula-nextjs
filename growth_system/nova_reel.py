@@ -25,7 +25,7 @@ import boto3
 
 PROFILE    = "hermes-runtime"
 REGION     = "us-east-1"
-MODEL_ID   = "amazon.nova-reel-v1:0"
+MODEL_ID   = os.environ.get("NOVA_REEL_MODEL_ID", "amazon.nova-reel-v1:0")
 S3_BUCKET  = "nebula-video-output"
 OUT_DIR    = Path.home() / "Videos" / "nebula-shoots"
 POLL_EVERY = 15   # seconds between status checks
@@ -175,9 +175,13 @@ def process_queue(limit: int = 3):
         brief = shot["brief"]
         anchor = shot.get("visual_dna_anchor") or VISUAL_DNA
         dur   = shot.get("duration") or 6
-        dur   = max(6, min(int(dur), 120))  # Nova Reel: 6–120s, multiples of 6
-        # Round up to nearest multiple of 6
-        dur = ((dur + 5) // 6) * 6
+        dur   = max(6, min(int(dur), 120))
+        # Nova Reel v1:0 currently accepts only 6-second clips. v1:1
+        # supports longer multiples of 6 when explicitly selected.
+        if MODEL_ID.endswith("v1:0"):
+            dur = 6
+        else:
+            dur = ((dur + 5) // 6) * 6
 
         prompt = f"{brief}. {anchor}. Photoreal, shallow depth of field, no text overlays."
 
