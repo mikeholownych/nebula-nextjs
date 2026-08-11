@@ -1,0 +1,18 @@
+{
+  "approval_required_for": [
+    "external_send",
+    "publication",
+    "spend",
+    "production_code"
+  ],
+  "expected_metric": "attributable purchases from the tested hook variant",
+  "hypothesis": "A bounded, reversible test of one change can reveal whether it produces attributable purchases before broader implementation.",
+  "observed_problem": "Teams often spend months implementing assumptions before testing whether customers value the proposed change.",
+  "research_id": "youtube-R3ZonXPQR9g-experiment-method",
+  "smallest_safe_change": "Run one batch of three verified D1 messages using existing hook variants, then observe attributable purchases during the defined window.",
+  "source_url": "https://www.youtube.com/watch?v=R3ZonXPQR9g&t=207",
+  "status": "proposed",
+  "stop_condition": "Stop a variant after 20 sends with zero attributable purchases; retain or revise only after a traced sale.",
+  "validation_window": "20 sends per variant or 14 days, whichever comes first",
+  "why_nebula": "Nebula has no validated purchase from the current hook strategy, so a bounded hook test addresses the live acquisition and payment bottleneck."
+}

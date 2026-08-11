@@ -141,9 +141,16 @@ def critic(item: dict[str, Any], brain: dict[str, Any], seen: set[str]) -> dict[
 def action_for(item: dict[str, Any], review: dict[str, Any]) -> str:
     if not review["accepted"]:
         return "reject"
+    action = norm(item.get("action_type"))
+    # Low-confidence sources may still produce a bounded experiment brief.
+    # The brief is a test proposal, never evidence that the tactic works.
+    if action == "create_experiment_brief" and any(
+        term in norm(item.get("expected_metric")) for term in PURCHASE_METRIC_TERMS
+    ):
+        return action
     if review["score"] < 70:
         return "defer"
-    return norm(item.get("action_type")) or "defer"
+    return action or "defer"
 
 
 def apply_action(item: dict[str, Any], decision: dict[str, Any], base: Path) -> dict[str, Any]:

@@ -51,4 +51,6 @@ It cannot send, publish, spend, deploy, change production code, change pricing, 
 
 An experiment is not considered successful because it produced a reply, click, audit, or checkout start. Those are leading indicators only. Every accepted experiment must name attributable purchases or revenue as its primary metric. `experiment_control.py` marks a variant `SALE_SIGNAL` only when the recipient email matches a payment event in `ledgers/customer-ledger.jsonl`. Twenty sends with zero attributable purchases produces `NO_PURCHASES`. The evaluator never promotes a winner.
 
+A low-confidence source may still create a bounded experiment brief when the brief has a purchase or revenue primary metric, a validation window, and a stop condition. The brief is a test proposal, not proof that the source tactic works. External sends, publication, spend, production code, and promotion still require separate approval and verification.
+
 A proposed cloned pattern is rejected unless it includes customer-outcome evidence with a sales source, sales attribution, and attributable sales record. Views, engagement, testimonials without transaction evidence, and unverified revenue claims do not pass the clone gate.

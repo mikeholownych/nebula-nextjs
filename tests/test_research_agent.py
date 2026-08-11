@@ -37,6 +37,20 @@ def test_critic_accepts_relevant_evidence():
     assert review["reasons"] == []
 
 
+def test_low_confidence_source_can_create_bounded_purchase_experiment():
+    item = valid_item(
+        source_type="video",
+        action_type="create_experiment_brief",
+        expected_metric="attributable purchases from the experiment",
+        confidence="low",
+    )
+    review = critic(item, brain(), set())
+    assert review["accepted"] is True
+    assert review["score"] < 70
+    from research_agent import action_for
+    assert action_for(item, review) == "create_experiment_brief"
+
+
 def test_critic_rejects_non_sales_primary_metric():
     review = critic(valid_item(expected_metric="replies per 10 sends"), brain(), set())
     assert review["accepted"] is False
