@@ -121,3 +121,49 @@ Current foundation: `/home/mike/.hermes/cache/video/nebula-hero-foundation.png`
 3. After 3+ videos: update this file with any patterns that worked better
 4. Never generate music unless Mike explicitly asks
 5. Never use a white background on any Nebula video asset
+
+---
+
+## Visual DNA Anchor — Canonical Style Clause
+
+> Paste this at the end of every still image or video prompt.
+> Change scene language freely. Never change the anchor.
+
+### Base (Default)
+```
+RED Komodo, 35mm anamorphic lens, soft monitor-glow practicals, near-black with teal accent, light film grain, slight vignette
+```
+
+### Warmer variant (warmer emotional tone — founder story content)
+```
+Arri Alexa, 50mm prime, warm desk lamp practicals, dark amber-teal palette, light film grain, halation on highlights
+```
+
+### Colder variant (data/product demos — analytical, clean)
+```
+RED Komodo, 24mm wide, cool blue monitor light, near-black with cool cyan accent, clean digital, subtle lens flare
+```
+
+---
+
+## 5-Genre Anchor Table
+
+| Genre | Visual DNA Anchor |
+|---|---|
+| Product demo | RED Komodo, 35mm anamorphic, overhead practical neon, near-black with teal, clean digital, slight vignette |
+| Founder vlog | Arri Alexa, 50mm prime, soft window backlight, desaturated warm earth, light film grain, natural skin texture |
+| Faceless short | iPhone 15 Pro, 24mm wide, harsh overhead key, high-contrast dark, heavy grain, vignette, no face in frame |
+| Behind the scenes | Bolex 16mm, 25mm prime, available light only, muted desaturated teal, visible grain, raw ungraded feel |
+| Cinematic ad | RED Komodo, 85mm portrait, golden hour side light, muted teal-orange, anamorphic lens flare, 2.39:1 crop |
+
+---
+
+## Anchor Audit Checklist
+Before using any prompt, verify the anchor contains exactly these 5 layers:
+- [ ] Camera body (specific model, not "cinema camera")
+- [ ] Lens (mm + type, not "shallow depth of field" alone)
+- [ ] Light source (specific, not "cinematic lighting")
+- [ ] Palette (2 colour words max)
+- [ ] Texture (grain/vignette/halation — one only)
+
+If any layer is missing → do not send. Fix first.
