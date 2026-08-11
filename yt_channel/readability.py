@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Readability scoring for YouTube scripts — Jenny Hoyos method.
+"""Readability scoring for YouTube scripts - Jenny Hoyos method.
 
 From "Shorts Genius Shares Everything She Knows" (As7abwNhG7Y, 4.8M
 views; Jenny Hoyos: 600M views/yr, 10M avg/video):
@@ -9,7 +9,7 @@ readability formulas. Finding: the most popular Shorts (Mr Beast = 1st
 grade) sit at **5th grade or under**. Target: 5th grade or below.
 
 Gotcha she calls out: words like "business", "finance", "profit" inflate
-the reading level dramatically — explain the concept instead of using
+the reading level dramatically - explain the concept instead of using
 the jargon word.
 
 Implementation: Flesch-Kincaid Grade Level (stdlib, no deps).
@@ -122,7 +122,7 @@ MIN_YOU_PER_100 = 0.8
 
 
 def check_voice(text: str) -> dict:
-    """Brenda Turner fifth-wall check — one-to-one direct address, no
+    """Brenda Turner fifth-wall check - one-to-one direct address, no
     lecture register, viewer-focus over self-focus.
 
     Runs on the whole script (the score-reveal ritual line is neutral by
@@ -156,7 +156,7 @@ if __name__ == "__main__":
         sys.exit(1)
     r = check_text(text)
     status = "✅ PASS" if r["pass"] else "❌ FAIL"
-    print(f"{status} — FK grade {r['fk_grade']} (target ≤{r['target_grade']}), "
+    print(f"{status} - FK grade {r['fk_grade']} (target ≤{r['target_grade']}), "
           f"reading ease {r['reading_ease']}, {r['words']} words")
     if r["jargon"]:
         print(f"  ⚠️ jargon words: {', '.join(r['jargon'])} (consider plain-speak)")

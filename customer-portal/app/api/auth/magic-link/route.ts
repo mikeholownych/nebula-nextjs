@@ -1,7 +1,7 @@
 /**
  * POST /api/auth/magic-link
  * Proxies to the platform API. Forwards cookies for session context.
- * The platform API stub returns 501 until magic link is implemented —
+ * The platform API stub returns 501 until magic link is implemented -
  * this proxy means the frontend wiring is complete and will work
  * automatically when the platform API ships the implementation.
  */

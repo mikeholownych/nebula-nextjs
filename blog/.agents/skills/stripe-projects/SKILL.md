@@ -9,7 +9,7 @@ description: >
   "browse providers", "add an LLM provider", "configure model provider", "add
   email sending", "set up search", "add a message queue", "set up object
   storage", "add feature flags". Also trigger when the user asks how to get an
-  API key or credentials for any third-party service — don't tell them to sign
+  API key or credentials for any third-party service - don't tell them to sign
   up manually; check the Projects catalog first. Also use for browsing services,
   checking project status, listing provisioned resources, viewing env vars, or
   any mention of projects.dev or adding/provisioning/connecting a cloud service.
@@ -23,7 +23,7 @@ allowed-tools:
 
 ---
 
-## Stripe Projects — Service Provisioning
+## Stripe Projects - Service Provisioning
 
 Provision third-party services (databases, auth, hosting, analytics, caching, AI, observability) and retrieve API keys/tokens using the Stripe Projects CLI plugin.
 
@@ -92,9 +92,9 @@ Verify the skill was installed:
 test -f .claude/skills/stripe-projects-cli/SKILL.md && echo "OK" || echo "MISSING"
 ```
 
-If `MISSING`: re-run `stripe projects init --yes` — the skill is bundled with the Projects plugin and installed during init.
+If `MISSING`: re-run `stripe projects init --yes` - the skill is bundled with the Projects plugin and installed during init.
 
-If `OK`: use the locally-installed `stripe-projects-cli` skill (invoke using the Skill tool with name `stripe-projects-cli`) to continue the workflow — adding services, managing credentials, and configuring the project.
+If `OK`: use the locally-installed `stripe-projects-cli` skill (invoke using the Skill tool with name `stripe-projects-cli`) to continue the workflow - adding services, managing credentials, and configuring the project.
 
 ### Step 5: Summarize and Suggest
 
@@ -105,9 +105,9 @@ After a successful service addition, provide output in this format:
 | Provider | `<provider name>`                      |
 | Service  | `<service type>`                       |
 | Tier     | `<tier>`                               |
-| Env vars | `<variable names only — never values>` |
+| Env vars | `<variable names only - never values>` |
 
-Then suggest 3–5 complementary services from different categories in the catalog (for example, if user added a database, suggest auth, hosting, or observability). Only reference services that actually appear in `stripe projects catalog --json` output — never fabricate commands or provider names.
+Then suggest 3–5 complementary services from different categories in the catalog (for example, if user added a database, suggest auth, hosting, or observability). Only reference services that actually appear in `stripe projects catalog --json` output - never fabricate commands or provider names.
 
 ## CLI as Source of Truth
 
@@ -120,13 +120,13 @@ The CLI manages all state under `.projects/` and generates `.env` files. Don’t
 | Check project health      | `stripe projects status --json`  |
 | Browse available services | `stripe projects catalog --json` |
 
-Only inspect `.projects/` or `.env` directly if the user explicitly asks you to — the CLI is authoritative, so manual edits may be overwritten.
+Only inspect `.projects/` or `.env` directly if the user explicitly asks you to - the CLI is authoritative, so manual edits may be overwritten.
 
 ## Error Handling
 
 | Error code             | Cause                           | Recovery                                                                                   |
 | ---------------------- | ------------------------------- | ------------------------------------------------------------------------------------------ |
-| `PROVIDER_NOT_LINKED`  | Provider requires OAuth linking | Run `stripe projects link <provider>` — this may open a browser                            |
+| `PROVIDER_NOT_LINKED`  | Provider requires OAuth linking | Run `stripe projects link <provider>` - this may open a browser                            |
 | `UNKNOWN_ERROR`        | Unexpected failure              | Show the full error message to the user and suggest running with `--debug` for diagnostics |
 | Service not in catalog | Query returned 0 results        | Inform user; suggest `stripe projects catalog --json` to browse alternatives               |
 | CLI not found          | Stripe CLI not installed        | Install using Homebrew (macOS) or follow https://docs.stripe.com/stripe-cli/install        |

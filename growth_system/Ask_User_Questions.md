@@ -1,4 +1,4 @@
-# AskUserQuestion — Pre-Composition Discovery
+# AskUserQuestion - Pre-Composition Discovery
 
 Before composing any outbound, check what data is available:
 1. Do we have the prospect's URL? If yes → run audit first.

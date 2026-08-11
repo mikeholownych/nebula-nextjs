@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-Reddit Content Governance — fail-closed gate for ALL Reddit outbound.
+Reddit Content Governance - fail-closed gate for ALL Reddit outbound.
 
 Every piece of Reddit content (comment or post) must pass this gate before
 Zernio even creates a draft. Purpose: protect the account from
 shadowbans/subreddit bans that are INVISIBLE to the Zernio API.
 
 Two layers:
-  A. HUMANIZE — strip AI tells (based on the humanizer skill / Wikipedia's
+  A. HUMANIZE - strip AI tells (based on the humanizer skill / Wikipedia's
      "Signs of AI writing"). Automod and users both flag AI-sounding content.
-  B. RULES — Reddit sitewide + per-subreddit rules (verified 2026-08-08):
+  B. RULES - Reddit sitewide + per-subreddit rules (verified 2026-08-08):
 
 Subreddit rule database (fetched from public rules / 3rd-party verifiers):
   r/PPC            : SELF-PROMO BANNED. No tool/agency/service mentions,
@@ -27,7 +27,7 @@ Subreddit rule database (fetched from public rules / 3rd-party verifiers):
 
 Sitewide rules enforced:
   - 90/10: self-promo content must be ≤10% of account activity (tracked
-    separately in reddit_activity.json — gate requires 9 non-promo per 1 promo)
+    separately in reddit_activity.json - gate requires 9 non-promo per 1 promo)
   - No same link cross-posted to multiple subs within 24h
   - No engagement bait / vote manipulation ("upvote if", "like this")
   - Disclose affiliation when you do mention your product
@@ -38,7 +38,7 @@ Usage:
   from reddit_governance import govern_reddit_content
   result = govern_reddit_content(text, subreddit="PPC", kind="comment",
                                  account_id="...")
-  if not result["pass"]:  # blocked — reasons in result["violations"]
+  if not result["pass"]:  # blocked - reasons in result["violations"]
 """
 import json
 import os
@@ -249,7 +249,7 @@ def check_humanized(text: str) -> list[str]:
             break
 
     # Em dash overuse
-    if text.count("—") > 2:
+    if text.count("-") > 2:
         violations.append("em dash overuse (>2)")
 
     # Curly quotes
@@ -291,7 +291,7 @@ def check_subreddit_rules(text: str, subreddit: str, kind: str) -> list[str]:
     sub = subreddit.lower().lstrip("r/")
     rules = SUBREDDIT_RULES.get(sub)
     if not rules:
-        violations.append(f"subreddit '{sub}' not in rule database — unknown posture, blocked by default")
+        violations.append(f"subreddit '{sub}' not in rule database - unknown posture, blocked by default")
         return violations
 
     posture = rules["posture"]
@@ -304,19 +304,19 @@ def check_subreddit_rules(text: str, subreddit: str, kind: str) -> list[str]:
 
     if posture in ("banned",):
         if kind == "post":
-            violations.append(f"r/{sub} bans self-promotion — do not post here at all")
+            violations.append(f"r/{sub} bans self-promotion - do not post here at all")
         if has_nebula_url or has_utm:
-            violations.append(f"r/{sub} bans promo — URL to own site is removal+ban risk")
+            violations.append(f"r/{sub} bans promo - URL to own site is removal+ban risk")
         elif has_url:
-            violations.append(f"r/{sub} bans promo — external URL looks like promotion")
+            violations.append(f"r/{sub} bans promo - external URL looks like promotion")
         if has_mention:
-            violations.append(f"r/{sub} bans product mentions in answers — even 'we do X'")
+            violations.append(f"r/{sub} bans product mentions in answers - even 'we do X'")
         if rules.get("no_dm_offer") and re.search(r"\bDM\b|direct message|shoot me a", text, re.I):
             violations.append(f"r/{sub} bans even DM offers for services")
 
     elif posture == "thread_only":
         if kind == "post" and not re.search(r"(share your business|share your saas|weekly.*thread|promotion thread)", low):
-            violations.append(f"r/{sub} allows promo only in its weekly share thread — not as a standalone post")
+            violations.append(f"r/{sub} allows promo only in its weekly share thread - not as a standalone post")
         if has_nebula_url or has_utm:
             violations.append(f"r/{sub}: URL outside the approved share thread = removal risk")
 
@@ -328,9 +328,9 @@ def check_subreddit_rules(text: str, subreddit: str, kind: str) -> list[str]:
                 and word_count >= 80
             )
             if not has_context:
-                violations.append(f"r/{sub} removes bare link drops — needs project context/story (>=80 words + build language)")
+                violations.append(f"r/{sub} removes bare link drops - needs project context/story (>=80 words + build language)")
         if has_utm:
-            violations.append("UTM links are an explicit spam signal on Reddit — strip utm_* params")
+            violations.append("UTM links are an explicit spam signal on Reddit - strip utm_* params")
 
     return violations
 
@@ -357,7 +357,7 @@ def check_sitewide(text: str, kind: str) -> list[str]:
 # ══════════════════════════════════════════════════════════════════════
 
 MAX_COMMENTS_PER_DAY = 5
-MIN_SECONDS_BETWEEN = 150  # 2.5 min — comfortable margin over API limits
+MIN_SECONDS_BETWEEN = 150  # 2.5 min - comfortable margin over API limits
 
 
 def check_activity(account_id: str) -> list[str]:
@@ -372,7 +372,7 @@ def check_activity(account_id: str) -> list[str]:
     # sends are blocked. Nothing from this account goes out, ever, until a
     # human explicitly clears the flag.
     if acc.get("shadowbanned"):
-        violations.append("account shadowbanned — no sends allowed (clear flag only with human approval)")
+        violations.append("account shadowbanned - no sends allowed (clear flag only with human approval)")
 
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     today_count = sum(1 for ts in comments if ts.startswith(today))
@@ -481,9 +481,9 @@ def humanize(text: str) -> str:
     # 1. Curly -> straight quotes
     out = out.replace("\u201c", '"').replace("\u201d", '"').replace("\u2018", "'").replace("\u2019", "'")
     # 2. Collapse 3+ em dashes to one (keep max 2)
-    parts = out.split("—")
+    parts = out.split("-")
     if len(parts) > 3:
-        out = parts[0] + "—" + parts[1] + "—" + "—".join(parts[2:]).replace("—", ",")
+        out = parts[0] + "-" + parts[1] + "-" + "-".join(parts[2:]).replace("-", ",")
     # 3. Strip emoji from body
     out = re.sub(r"[\U0001F300-\U0001FAFF\u2600-\u27BF]", "", out)
     # 4. Remove common filler openers

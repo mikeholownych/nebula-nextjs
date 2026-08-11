@@ -26,9 +26,9 @@ RATE_LIMITS = {
     "/api/auth/magic-link": (5, 900),   # 5 req/15min
     "/api/auth/logout": (10, 60),       # 10 req/min
     "/api/webhook/stripe": (1000, 60),  # 1000 req/min (webhooks)
-    "/audit/run": (5, 60),              # 5 req/min — core audit engine
-    "/audit/lab": (10, 60),             # 10 req/min — component lab
-    "/audit/by-email": (20, 60),        # 20 req/min — prevents bulk email enumeration
+    "/audit/run": (5, 60),              # 5 req/min - core audit engine
+    "/audit/lab": (10, 60),             # 10 req/min - component lab
+    "/audit/by-email": (20, 60),        # 20 req/min - prevents bulk email enumeration
     "default_authenticated": (100, 60), # 100 req/min
     "default_anonymous": (20, 60),      # 20 req/min
 }
@@ -36,10 +36,10 @@ RATE_LIMITS = {
 
 class RateLimitMiddleware(BaseHTTPMiddleware):
     """Rate-limit middleware for all requests.
-    
+
     Uses Redis token bucket algorithm for distributed rate-limiting.
     """
-    
+
     def __init__(self, app, redis: RedisClient):
         super().__init__(app)
         self.redis = redis
@@ -48,13 +48,13 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         local limit = tonumber(ARGV[1])
         local window = tonumber(ARGV[2])
         local now = tonumber(ARGV[3])
-        
+
         -- Clear expired entries
         redis.call('ZREMRANGEBYSCORE', key, 0, now - window * 1000)
-        
+
         -- Count requests in window
         local count = redis.call('ZCARD', key)
-        
+
         if count < limit then
             -- Add request
             redis.call('ZADD', key, now, now .. '-' .. math.random())
@@ -65,30 +65,30 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
             return nil
         end
         """
-    
+
     async def dispatch(self, request: Request, call_next: Callable) -> Response:
         # Skip rate-limiting for health checks
         if request.url.path in ["/healthz", "/readyz"]:
             return await call_next(request)
-        
+
         # Get rate limit config
         max_requests, window_seconds = self._get_rate_limit(request)
-        
+
         # Get identifier (user_id or IP)
         identifier = self._get_identifier(request)
-        
+
         # Build Redis key
         key = f"ratelimit:{identifier}:{request.url.path}"
-        
+
         # Check rate limit
         allowed = await self._check_rate_limit(
             key, max_requests, window_seconds
         )
-        
+
         if not allowed:
             # Get TTL for retry-after header
             ttl = await self.redis.ttl(key)
-            # Return a response directly — HTTPException raised inside
+            # Return a response directly - HTTPException raised inside
             # BaseHTTPMiddleware.dispatch is not converted by FastAPI's
             # exception handlers and surfaces as a 500.
             return JSONResponse(
@@ -96,32 +96,32 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
                 content={"detail": f"Rate limit exceeded. Retry in {ttl} seconds."},
                 headers={"Retry-After": str(ttl)},
             )
-        
+
         # Process request
         response = await call_next(request)
-        
+
         # Add rate limit headers
         response.headers["X-RateLimit-Limit"] = str(max_requests)
         response.headers["X-RateLimit-Window"] = str(window_seconds)
-        
+
         return response
-    
+
     def _get_rate_limit(self, request: Request) -> tuple[int, int]:
         """Get rate limit for endpoint."""
         path = request.url.path
-        
+
         # Check specific endpoint limits
         if path in RATE_LIMITS:
             return RATE_LIMITS[path]
-        
+
         # Check if authenticated
         # (Will be updated when auth middleware is added)
         auth_header = request.headers.get("Authorization")
         if auth_header and auth_header.startswith("Bearer "):
             return RATE_LIMITS["default_authenticated"]
-        
+
         return RATE_LIMITS["default_anonymous"]
-    
+
     def _get_identifier(self, request: Request) -> str:
         """Get identifier for rate-limiting (user_id or IP)."""
         # Try user_id from JWT (if authenticated)
@@ -137,14 +137,14 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
                 return hashlib.sha256(token.encode()).hexdigest()[:16]
             except Exception:
                 pass
-        
+
         # Fall back to IP address
         forwarded = request.headers.get("X-Forwarded-For")
         if forwarded:
             return forwarded.split(",")[0].strip()
-        
+
         return request.client.host if request.client else "unknown"
-    
+
     async def _check_rate_limit(
         self,
         key: str,
@@ -152,12 +152,12 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         window_seconds: int
     ) -> bool:
         """Check if request is allowed using token bucket.
-        
+
         Returns:
             True if allowed, False if rate limit exceeded
         """
         now = int(time.time() * 1000)  # Current time in milliseconds
-        
+
         try:
             # Execute Lua script atomically
             result = await self.redis.client.eval(
@@ -168,9 +168,9 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
                 window_seconds,
                 now
             )
-            
+
             return result is not None
-        
+
         except Exception as e:
             # On Redis error, allow request (fail open)
             print(f"Rate limit error: {e}")

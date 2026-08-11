@@ -1,4 +1,4 @@
-# MISSION — Nebula Components
+# MISSION - Nebula Components
 
 **Last updated:** 2026-07-07
 **Status:** Active
@@ -9,7 +9,7 @@ Eliminate the black box between ad spend and conversion.
 
 Founders spend $3k-$20k/mo on ads, get clicks, and can't figure out why nobody buys. Agencies run "testing phases" for 3 months and deliver nothing. Tools show data but not diagnosis.
 
-Nebula exists to make the leak visible, fixable, and fixed — without calls, calendars, or contracts.
+Nebula exists to make the leak visible, fixable, and fixed - without calls, calendars, or contracts.
 
 ## North Star Metric
 
@@ -59,9 +59,9 @@ Nebula solves this by being faster ($0 audit in 60 seconds), cheaper ($97 fix pa
 
 ## Files
 
-- `/home/mike/nebula/governance/ECONOMICS.md` — Pricing, costs, margins, runway
-- `/home/mike/nebula/governance/VALUES.md` — Decision principles
-- `/home/mike/nebula/governance/ORGANIZATION.md` — Department map
-- `/home/mike/nebula/growth_system/OFFER_MEMO.md` — Offer architecture
-- `/home/mike/nebula/growth_system/ICP_MEMO.md` — ICP research
-- `/home/mike/nebula/growth_system/Nebula_Voice_DNA.md` — Voice and tone
+- `/home/mike/nebula/governance/ECONOMICS.md` - Pricing, costs, margins, runway
+- `/home/mike/nebula/governance/VALUES.md` - Decision principles
+- `/home/mike/nebula/governance/ORGANIZATION.md` - Department map
+- `/home/mike/nebula/growth_system/OFFER_MEMO.md` - Offer architecture
+- `/home/mike/nebula/growth_system/ICP_MEMO.md` - ICP research
+- `/home/mike/nebula/growth_system/Nebula_Voice_DNA.md` - Voice and tone

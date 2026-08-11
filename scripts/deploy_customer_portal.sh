@@ -3,12 +3,12 @@
 #
 # Exists because the 2026-07-26 CSS-outage incident happened when a build was
 # run (commit 8aa1434a) but the systemd service was never restarted to pick
-# it up — nebula-nextjs.service kept serving an old build's HTML against a
+# it up - nebula-nextjs.service kept serving an old build's HTML against a
 # static-asset directory a later build had already overwritten. The manual
 # fix ("build, then restart, then verify") was already documented in
 # deploy/systemd/README.md; this script is that same sequence made
 # impossible to run halfway. Never run `npm run build`/`npm run start`
-# directly for a production deploy — use this script so the restart and
+# directly for a production deploy - use this script so the restart and
 # verify steps can't be skipped or forgotten.
 set -euo pipefail
 
@@ -40,7 +40,7 @@ done
 
 log "Verifying deployed state ..."
 if ! bash "$VERIFY_SCRIPT"; then
-  log "FAIL: post-deploy verification failed. $SITE_UNIT is running the new build but is not healthy — investigate before considering this deploy complete."
+  log "FAIL: post-deploy verification failed. $SITE_UNIT is running the new build but is not healthy - investigate before considering this deploy complete."
   exit 1
 fi
 

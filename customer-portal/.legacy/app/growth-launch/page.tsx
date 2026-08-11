@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Growth Launch — First Customer Guarantee | Nebula Components',
-  description: 'You get a paying customer in 60 days — or we work for free until you do. Landing page audit + rewrite, 200 triggered prospects, done-for-you outreach. $997. No demo required.',
+  title: 'Growth Launch - First Customer Guarantee | Nebula Components',
+  description: 'You get a paying customer in 60 days - or we work for free until you do. Landing page audit + rewrite, 200 triggered prospects, done-for-you outreach. $997. No demo required.',
   openGraph: {
-    title: 'Growth Launch — First Customer Guarantee | Nebula Components',
+    title: 'Growth Launch - First Customer Guarantee | Nebula Components',
     description: 'You get a paying customer in 60 days. Or we work for free until you do. That\'s the offer. $997. No demos. No sales calls. No fine print.',
     url: 'https://nebulacomponents.shop/growth-launch',
     images: [{ url: 'https://nebulacomponents.shop/og-growth-launch.png' }],
@@ -28,16 +28,16 @@ export default function GrowthLaunchPage() {
       <section className="gl-hero">
         <div className="gl-hero-bg" aria-hidden="true" />
         <span className="gl-badge">🚀 Live July 4, 2026</span>
-        <h1>You Get a Paying Customer<br />in 60 Days — <span className="gl-highlight">or We Work Free</span></h1>
+        <h1>You Get a Paying Customer<br />in 60 Days - <span className="gl-highlight">or We Work Free</span></h1>
         <p className="gl-sub">We fix your landing page, find 200 triggered prospects, and run done-for-you outreach. You get a customer. That&apos;s the deal.</p>
         <p className="gl-guarantee-line">🛡️ Not a soft guarantee. If you haven&apos;t closed by day 60, we keep working until you do. No charge.</p>
-        <a href="https://buy.stripe.com/4gMcN5aYk92Qaa5drY43S09" className="gl-hero-cta">Buy Growth Launch — $997 →</a>
+        <a href="https://buy.stripe.com/4gMcN5aYk92Qaa5drY43S09" className="gl-hero-cta">Buy Growth Launch - $997 →</a>
         <div className="gl-trust-row">
           <span className="gl-pill">No demo required</span>
           <span className="gl-pill">No sales call</span>
           <span className="gl-pill">Self-serve checkout</span>
           <span className="gl-pill">60-day guarantee</span>
-          <span className="gl-pill">$997 — one payment</span>
+          <span className="gl-pill">$997 - one payment</span>
         </div>
       </section>
 
@@ -45,14 +45,14 @@ export default function GrowthLaunchPage() {
       <div className="gl-guarantee-banner">
         <div className="gl-shield">🛡️</div>
         <h2>The &quot;No Customer, No Pay&quot; Guarantee</h2>
-        <p>You close at least <strong>1 paying customer</strong> within 60 days of launch. If you don&apos;t, we continue working — <strong>free of charge</strong> — until you do. You keep every deliverable: the page rewrite, the prospect lists, the outreach templates, everything. There is <strong>no scenario where you lose money</strong> on this deal.</p>
+        <p>You close at least <strong>1 paying customer</strong> within 60 days of launch. If you don&apos;t, we continue working - <strong>free of charge</strong> - until you do. You keep every deliverable: the page rewrite, the prospect lists, the outreach templates, everything. There is <strong>no scenario where you lose money</strong> on this deal.</p>
       </div>
 
       {/* Pain Section */}
       <section className="gl-container">
         <div className="gl-narrow">
           <h2 className="gl-center">If You Have Zero Paying Customers, Fix This</h2>
-          <p>You launched. You&apos;re getting traffic — or trying to. But the pipeline is empty. No inbound. No replies to outreach. Just the sound of your runway burning.</p>
+          <p>You launched. You&apos;re getting traffic - or trying to. But the pipeline is empty. No inbound. No replies to outreach. Just the sound of your runway burning.</p>
           <p>The problem isn&apos;t that you need &quot;more leads.&quot; It&apos;s not that your product is bad. It&apos;s that three things are broken at the same time:</p>
           <ol>
             <li><strong>Your landing page leaks.</strong> Even people who want what you&apos;re selling can&apos;t figure out what you do in 5 seconds.</li>
@@ -71,12 +71,12 @@ export default function GrowthLaunchPage() {
             <div className="gl-deliverable">
               <div className="gl-icon">📄</div>
               <h3>Landing Page Audit + Rewrite</h3>
-              <p>We run your page through our conversion rubric, identify the top 5 leaks, and deliver rewritten copy for every section — deployed or ready to deploy.</p>
+              <p>We run your page through our conversion rubric, identify the top 5 leaks, and deliver rewritten copy for every section - deployed or ready to deploy.</p>
             </div>
             <div className="gl-deliverable">
               <div className="gl-icon">🎯</div>
               <h3>200 Triggered Prospects</h3>
-              <p>Not a list of people who &quot;fit the ICP.&quot; A list of people who are actively showing buying signals — posting about ad bleed, asking for landing page help, announcing a launch with zero traction.</p>
+              <p>Not a list of people who &quot;fit the ICP.&quot; A list of people who are actively showing buying signals - posting about ad bleed, asking for landing page help, announcing a launch with zero traction.</p>
             </div>
             <div className="gl-deliverable">
               <div className="gl-icon">📨</div>
@@ -91,7 +91,7 @@ export default function GrowthLaunchPage() {
             <div className="gl-deliverable">
               <div className="gl-icon">📊</div>
               <h3>Performance Dashboard</h3>
-              <p>Live stats: emails sent, replies received, conversations in progress, meetings booked. No black box — you see everything in real time.</p>
+              <p>Live stats: emails sent, replies received, conversations in progress, meetings booked. No black box - you see everything in real time.</p>
             </div>
             <div className="gl-deliverable">
               <div className="gl-icon">♻️</div>
@@ -106,7 +106,7 @@ export default function GrowthLaunchPage() {
       <section className="gl-cta-section">
         <h2>The Offer That Makes Every Alternative Irrelevant</h2>
         <p>$25k AI SDR platform, no guarantee. $2k/mo freelancer, no guarantee. $997 Growth Launch with a &quot;we work free until you win&quot; guarantee. The choice is not hard.</p>
-        <a href="https://buy.stripe.com/4gMcN5aYk92Qaa5drY43S09" className="gl-cta-big">Buy Growth Launch — $997 →</a>
+        <a href="https://buy.stripe.com/4gMcN5aYk92Qaa5drY43S09" className="gl-cta-big">Buy Growth Launch - $997 →</a>
         <p className="gl-cta-sub">🛡️ 60-day guarantee. Self-serve checkout. No demo. No sales call. No risk.</p>
       </section>
 

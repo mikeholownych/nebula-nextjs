@@ -28,7 +28,7 @@ const QUADRANT_LABELS: Record<string, { label: string; tone: 'accent' | 'neutral
 
 /**
  * Returns a single copy-paste-ready line from the worst finding.
- * Format: "[DISEASE/LABEL] — {measured value} | Fix: {fix}"
+ * Format: "[DISEASE/LABEL] - {measured value} | Fix: {fix}"
  * Uses CSS selector when available so a dev can jump to it in DevTools.
  * Falls back to the plain issue text when no evidence is present.
  */
@@ -66,7 +66,7 @@ function SlackSnippet({ findings }: { findings: Finding[] }) {
       setTimeout(() => setState('idle'), 2500)
       posthog.capture('slack_snippet_copied')
     } catch {
-      // clipboard API may be unavailable in some contexts — silent fail
+      // clipboard API may be unavailable in some contexts - silent fail
     }
   }
 
@@ -85,7 +85,7 @@ function SlackSnippet({ findings }: { findings: Finding[] }) {
         {snippet}
       </pre>
       <p className="mt-2 text-xs text-fg-muted">
-        Paste into Slack, email, or a GitHub issue — your dev has everything they need.
+        Paste into Slack, email, or a GitHub issue - your dev has everything they need.
       </p>
     </Card>
   )
@@ -95,16 +95,16 @@ function SlackSnippet({ findings }: { findings: Finding[] }) {
 // Every finding rendered here already represents a dimension that scored
 
 /**
- * FixPreview — shows sentence 1 of the AI fix prompt, blurs the rest.
+ * FixPreview - shows sentence 1 of the AI fix prompt, blurs the rest.
  * Eye path: problem → partial solution → wall → $97 unlock.
- * The fix field already exists in every finding — no backend change needed.
+ * The fix field already exists in every finding - no backend change needed.
  */
 function FixPreview({ finding, unlocked }: { finding: Finding; unlocked: boolean }) {
   const disease = getDisease(finding.key)
   const fixText = finding.fix
   if (!fixText || fixText.length < 20) return null
 
-  // Split at first sentence boundary — period + space or end of string
+  // Split at first sentence boundary - period + space or end of string
   const firstPeriod = fixText.search(/\.\s/)
   const preview = firstPeriod > 20 ? fixText.slice(0, firstPeriod + 1) : fixText.slice(0, Math.min(120, fixText.length))
   const remainder = firstPeriod > 20 ? fixText.slice(firstPeriod + 2) : ''
@@ -155,7 +155,7 @@ function FixPreview({ finding, unlocked }: { finding: Finding; unlocked: boolean
 }
 
 /**
- * SerpSnippet — renders a mock Google SERP preview for seo_foundations findings.
+ * SerpSnippet - renders a mock Google SERP preview for seo_foundations findings.
  * Uses only data already present in finding.evidence.measured.
  * Left: their actual page (blank/truncated). Right: what a good page looks like.
  */
@@ -176,7 +176,7 @@ function SerpSnippet({ finding, url }: { finding: Finding; url: string }) {
     <div className="mt-4 rounded-lg border border-border bg-bg p-4">
       <p className="mb-4 text-xs font-semibold uppercase tracking-[0.1em] text-fg-muted">How You Show Up in Google</p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {/* Their page — broken */}
+        {/* Their page - broken */}
         <div>
           <p className="mb-2 text-xs font-semibold uppercase text-danger">Your page now</p>
           <div className="rounded border border-danger/20 bg-danger/5 p-4 font-sans text-sm">
@@ -196,7 +196,7 @@ function SerpSnippet({ finding, url }: { finding: Finding; url: string }) {
               {serpData.title.length > 50 ? serpData.title.slice(0, 50) + '...' : serpData.title} | Brand
             </p>
             <p className="mt-1 text-sm leading-6 text-fg-muted">
-              [Your value proposition — who it helps, what it does, one outcome. 120–155 chars fills the full preview and earns the click.]
+              [Your value proposition - who it helps, what it does, one outcome. 120–155 chars fills the full preview and earns the click.]
             </p>
           </div>
         </div>
@@ -223,7 +223,7 @@ function FailSignal() {
 /**
  * Shown after email gate is cleared. Confirms unlock and offers a one-click
  * magic-link so the user can save/revisit their audit from any device.
- * The magic-link offer is soft — there's no paywall attached and skipping
+ * The magic-link offer is soft - there's no paywall attached and skipping
  * has zero friction.
  */
 function UnlockConfirmation({ emailSent, email, auditId }: { emailSent: boolean; email: string; auditId: string }) {
@@ -256,11 +256,11 @@ function UnlockConfirmation({ emailSent, email, auditId }: { emailSent: boolean;
         </p>
       </div>
 
-      {/* Magic-link offer — only show when we have an email from this session */}
+      {/* Magic-link offer - only show when we have an email from this session */}
       {email && magicLinkState !== 'sent' && (
         <div className="border-t border-border pt-6 text-center">
           <p className="mb-4 text-sm text-fg-muted">
-            Want to revisit this audit later? Get a one-click login link — no password needed.
+            Want to revisit this audit later? Get a one-click login link - no password needed.
           </p>
           <button
             onClick={requestMagicLink}
@@ -282,7 +282,7 @@ function UnlockConfirmation({ emailSent, email, auditId }: { emailSent: boolean;
         </div>
       )}
 
-      {/* Share link — always shown after unlock */}
+      {/* Share link - always shown after unlock */}
       <div className="border-t border-border pt-6 flex items-center justify-between gap-4 flex-wrap">
         <p className="text-sm text-fg-muted">
           Send this report to your developer or agency
@@ -317,7 +317,7 @@ interface Props {
  * Fetches the share token from the Next.js proxy route and copies the
  * share URL to the clipboard. Shows progressive states: idle → loading →
  * copied → error. The share URL gives anyone with it read-only access to
- * all findings — no email gate. This is the viral distribution mechanism.
+ * all findings - no email gate. This is the viral distribution mechanism.
  */
 function ShareButton({ auditId }: { auditId: string }) {
   const [state, setState] = useState<'idle' | 'loading' | 'copied' | 'error'>('idle')
@@ -446,16 +446,16 @@ function ReportOverview({ results }: { results: AuditResult }) {
   const headline = results.composite ?? results.score
   const anchor = results.composite_anchor ?? 7.0
   const weighted = results.composite !== undefined
-  
+
   // Psychology: Estimate monthly ad spend loss (sunk cost motivation)
   // Rough heuristic: typical founder spends $5-50k/month on ads
   // Each conversion leak costs ~5-15% of spend
-  const estimatedMonthlyLoss = headline < 5 
+  const estimatedMonthlyLoss = headline < 5
     ? '$500–2,000/month bleeding'
-    : headline < 6 
+    : headline < 6
     ? '$200–800/month lost'
     : '$100–500/month at risk'
-  
+
   // Benchmark comparison (relativity principle)
   const benchmarkDiff = 7.0 - headline  // Industry average ~7.0
 
@@ -464,22 +464,22 @@ function ReportOverview({ results }: { results: AuditResult }) {
       <div className="grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-end">
         <div>
           <p className="text-sm font-semibold text-accent">Audit overview</p>
-          
+
           {/* Psychology: Loss aversion + urgency (System 1 activation) */}
           <h1 className="mt-2 text-3xl font-extrabold text-danger md:text-4xl md:tracking-[-0.03em]">
             Your ads are attracting the wrong visitors
           </h1>
           <p className="mt-2 break-all text-base text-fg-muted">{hostname}</p>
-          
+
           {/* Psychology: Sunk cost + emotional hook */}
           <p className="mt-5 max-w-[65ch] text-base leading-8 text-fg-muted font-semibold text-signal-fail">
             You're bleeding {estimatedMonthlyLoss}. Here's why.
           </p>
-          
+
           <p className="mt-4 max-w-[65ch] text-base leading-8 text-fg-muted">
             We analyzed your landing page against patterns from 847 similar sites. We found {summary.critical + summary.warning} conversion leaks. Your {summary.critical} critical issues are costing you the most.
           </p>
-          
+
           {/* Psychology: Endowment effect + autonomy (founder psychology) */}
           <p className="mt-4 max-w-[65ch] text-base leading-8 text-fg-muted">
             <span className="font-semibold text-fg">You control the fix:</span> {' '}
@@ -503,7 +503,7 @@ function ReportOverview({ results }: { results: AuditResult }) {
                     <span className="text-5xl font-extrabold text-danger">{headline.toFixed(1)}</span>
                     <span className="text-xl text-fg-muted">/10</span>
                   </p>
-                  
+
                   {/* Relativity: show vs. benchmark */}
                   <div className="mt-3 flex items-center gap-2 text-xs text-fg-muted">
                     <span>Industry avg:</span>
@@ -519,13 +519,13 @@ function ReportOverview({ results }: { results: AuditResult }) {
               <p className="mt-3 text-sm text-fg-muted">
                 {weighted ? 'Weighted across high-impact signals' : 'Evidence-backed assessment'}
               </p>
-              
+
               {/* Psychology: Scarcity + urgency */}
               <p className="mt-2 text-xs font-semibold text-danger">
                 ⏱️ This audit expires in 7 days
               </p>
             </div>
-            
+
             {/* Psychology: Social proof (pattern matching) */}
             <dl className="grid grid-cols-3 gap-6 border-t border-border pt-6 sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0">
               <div>
@@ -542,7 +542,7 @@ function ReportOverview({ results }: { results: AuditResult }) {
               </div>
             </dl>
           </div>
-          
+
           {/* Psychology: Social proof widget */}
           <div className="mt-6 border-t border-border pt-4">
             <p className="text-xs text-fg-muted">
@@ -557,7 +557,7 @@ function ReportOverview({ results }: { results: AuditResult }) {
 
 function FixFirstQueue({ findings, auditId, onGoToRemediation }: { findings: Finding[]; auditId: string; onGoToRemediation?: () => void }) {
   const queue = buildPriorityQueue(findings).slice(0, 3)
-  
+
   // Psychology: Calculate potential recovery messaging (sunk cost frame)
   const topFinding = queue[0]
   const fixDescription = topFinding ? `Fix your ${topFinding.label.toLowerCase()}` : 'Fix your critical issue'
@@ -571,7 +571,7 @@ function FixFirstQueue({ findings, auditId, onGoToRemediation }: { findings: Fin
           <p className="mt-2 max-w-[65ch] text-base leading-7 text-fg-muted">
             Your top {queue.length} leaks, ranked by impact. Fix them and recover the money you're losing every day your page stays broken.
           </p>
-          
+
           {/* Psychology: Anti-marketing honesty */}
           <p className="mt-3 max-w-[65ch] text-sm leading-6 text-fg-muted">
             No fluff. No philosophy. Just the 3 changes that matter most for your conversion rate.
@@ -586,11 +586,11 @@ function FixFirstQueue({ findings, auditId, onGoToRemediation }: { findings: Fin
             className="min-h-11 shrink-0 rounded-lg bg-danger px-6 py-4 text-sm font-semibold text-white transition-colors hover:bg-danger-light"
           >
             {/* Psychology: Loss frame CTA */}
-            Stop the leak — $97
+            Stop the leak - $97
           </button>
         ) : (
           <span className="min-h-11 shrink-0 rounded-lg border border-border px-6 py-4 text-sm font-semibold text-fg-muted">
-            Stop the leak — $97
+            Stop the leak - $97
           </span>
         )}
       </div>
@@ -689,7 +689,7 @@ function EvidenceMethod({ findings }: { findings: Finding[] }) {
 
 // ── Personalized Next Step ─────────────────────────────────────────────────
 // Shows a single plain-language "here's what this means for you" block
-// based on the worst-scoring finding. No database needed — data is live.
+// based on the worst-scoring finding. No database needed - data is live.
 
 const DIMENSION_PLAIN: Record<string, { headline: string; why: string }> = {
   headline:      { headline: 'Your headline is describing your product, not your customer\'s problem.', why: 'Cold traffic reads the first line and decides in 3 seconds. If they don\'t see their pain, they\'re gone.' },
@@ -705,7 +705,7 @@ const DIMENSION_PLAIN: Record<string, { headline: string; why: string }> = {
 
 function PersonalizedNextStep({ findings }: { findings: Finding[] }) {
   if (!findings.length) return null
-  // Use impact (inverted — higher impact = more broken) to find worst
+  // Use impact (inverted - higher impact = more broken) to find worst
   const worst = [...findings].sort((a, b) => b.impact - a.impact)[0]
   const plain = DIMENSION_PLAIN[worst.key]
   if (!plain) return null
@@ -728,7 +728,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
   const [results, setResults] = useState<AuditResult | null>(null)
   const [error, setError] = useState<string | null>(null)
 
-  // Client-side unlock state — starts from server-determined value but can
+  // Client-side unlock state - starts from server-determined value but can
   // be updated after a successful inline email submission.
   const [unlocked, setUnlocked] = useState(initialUnlocked)
 
@@ -831,7 +831,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
     return (
       <main id="main-content" className="min-h-screen bg-bg px-6 py-12 pt-24">
         <div className="mx-auto max-w-5xl">
-          {/* Skeleton nav — matches ReportNavigation height */}
+          {/* Skeleton nav - matches ReportNavigation height */}
           <nav aria-label="Loading" className="sticky top-20 z-20 -mx-6 mb-12 border-y border-border bg-bg/95 px-6 py-4">
             <div className="mx-auto flex w-full max-w-5xl gap-2 sm:justify-center">
               {['Overview', 'Fix first', 'Signals', 'Evidence', 'Repair'].map((label) => (
@@ -841,7 +841,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
               ))}
             </div>
           </nav>
-          {/* Skeleton overview — matches ReportOverview grid */}
+          {/* Skeleton overview - matches ReportOverview grid */}
           <section className="scroll-mt-40 border-b border-border pb-16">
             <div className="grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-end">
               <div>
@@ -855,7 +855,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                   <div>
                     <p className="text-sm font-semibold text-fg-muted">Conversion readiness</p>
                     <p className="mt-1 tabular-nums">
-                      <span className="text-6xl font-extrabold text-accent/30">—</span>
+                      <span className="text-6xl font-extrabold text-accent/30">-</span>
                       <span className="text-2xl text-fg-muted">/10</span>
                     </p>
                     <div className="mt-2 h-4 w-44 animate-pulse rounded bg-bg-muted/40" />
@@ -872,7 +872,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
               </Card>
             </div>
           </section>
-          {/* Skeleton finding rows — match Card height */}
+          {/* Skeleton finding rows - match Card height */}
           <div className="py-16 space-y-4">
             {[1, 2, 3].map((i) => (
               <div key={i} className="h-28 animate-pulse rounded-xl border border-border bg-bg-muted/20" />
@@ -917,11 +917,11 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
             <PersonalizedNextStep findings={results.findings} />
             <ReportOverview results={results} />
             <FixFirstQueue findings={results.findings} auditId={auditId} onGoToRemediation={() => setActiveTab('remediation')} />
-            {/* Inline email gate — shown on Overview for unlocked visitors and non-shared locked views */}
+            {/* Inline email gate - shown on Overview for unlocked visitors and non-shared locked views */}
             {!unlocked && !sharedView && !emailSent && (
               <section className="border-y border-border py-12 my-4">
                 <div className="mx-auto max-w-xl text-center">
-                  <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-2">Free — takes 10 seconds</p>
+                  <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-2">Free - takes 10 seconds</p>
                   <h2 className="text-2xl font-extrabold text-fg mb-2">
                     Unlock the full report + receive it in your inbox
                   </h2>
@@ -1010,7 +1010,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
               <div>
                 <div className="mb-2 flex items-start justify-between gap-4">
                   <div>
-                    {/* Disease name badge — shown when the key is in our disease map */}
+                    {/* Disease name badge - shown when the key is in our disease map */}
                     {disease && (
                       <div className="mb-2 flex items-center gap-2">
                         <span className={`inline-flex items-center rounded-full border px-2 py-1 text-xs font-extrabold ${diseaseTierClass(disease.tier)}`}>
@@ -1040,7 +1040,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                   </div>
                 </div>
 
-                {/* Disease symptom line — plain English, no jargon */}
+                {/* Disease symptom line - plain English, no jargon */}
                 {disease && (
                   <p className="mb-2 text-base leading-7 italic text-fg-muted">
                     {disease.symptom}
@@ -1049,7 +1049,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
 
                 {unlocked || index < 2 ? (
                   <div className="mt-4 space-y-2 text-base leading-7">
-                    {/* Fix complexity badge — collapses "I'll do it myself" objection */}
+                    {/* Fix complexity badge - collapses "I'll do it myself" objection */}
                     {disease && (() => {
                       const badge = complexityBadge(disease.complexity)
                       return (
@@ -1062,25 +1062,25 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                       <strong>Issue:</strong> {finding.issue}
                     </p>
 
-                    {/* SERP snippet — only for seo_foundations, uses scraped data */}
+                    {/* SERP snippet - only for seo_foundations, uses scraped data */}
                     <SerpSnippet finding={finding} url={results.url} />
 
-                    {/* Fix Preview — sentence 1 free, rest locked behind the implementation kit */}
+                    {/* Fix Preview - sentence 1 free, rest locked behind the implementation kit */}
                     <FixPreview finding={finding} unlocked={unlocked} />
 
-                    {/* AI Rewrite Preview — first rewrite free, rest behind the implementation kit */}
+                    {/* AI Rewrite Preview - first rewrite free, rest behind the implementation kit */}
                     <RewritePreview
                       auditId={auditId}
                       findingKey={finding.key}
                       findingCount={results.findings.length}
                     />
 
-                    {/* Evidence block — shown when audit engine provides measurement data */}
+                    {/* Evidence block - shown when audit engine provides measurement data */}
                     {finding.evidence && (
                       <details className="mt-4 group">
                         <summary className="flex cursor-pointer items-center gap-2 text-xs font-semibold uppercase tracking-[0.1em] text-fg-muted hover:text-fg">
                           {/* Confidence is a neutral fact about the evidence, not a good/bad
-                              signal — deliberately grayscale so it never competes with the
+                              signal - deliberately grayscale so it never competes with the
                               one reserved amber marker (FailSignal) for the visitor's attention. */}
                           <span className={`inline-block h-2 w-2 rounded-full ${
                             finding.evidence.confidence === 'definitive' ? 'bg-fg' :
@@ -1115,7 +1115,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                   </div>
                 ) : (
                   <div className="mt-4 space-y-2">
-                    {/* Complexity badge always visible — collapses objection even before unlock */}
+                    {/* Complexity badge always visible - collapses objection even before unlock */}
                     {disease && (() => {
                       const badge = complexityBadge(disease.complexity)
                       return (
@@ -1130,7 +1130,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                       </p>
                       <span className="text-xs text-accent shrink-0 ml-2">Share email to unlock</span>
                     </div>
-                    {/* Teaser fix preview — always visible, drives unlock desire */}
+                    {/* Teaser fix preview - always visible, drives unlock desire */}
                     <FixPreview finding={finding} unlocked={false} />
                   </div>
                 )}
@@ -1141,7 +1141,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
           })}
           </div>
 
-        {/* Slack snippet — shown after unlock; helps the finding escape the tool */}
+        {/* Slack snippet - shown after unlock; helps the finding escape the tool */}
         {unlocked && results.findings.length > 0 && (
           <SlackSnippet findings={results.findings} />
         )}
@@ -1150,14 +1150,14 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
 
         {activeTab === 'remediation' && (
           <>
-        {/* Email gate — shown only when not yet unlocked */}
+        {/* Email gate - shown only when not yet unlocked */}
         {!unlocked && !emailSent && (
           <Card variant="elevated" className="mt-8" id="unlock">
             <h3 className="mb-2 text-center text-2xl font-extrabold text-fg">
               Unlock All {results.findings.length} Findings
             </h3>
             <p className="mb-4 text-center text-fg-muted">
-              Enter your email to see every finding — plus receive the full report in your inbox
+              Enter your email to see every finding - plus receive the full report in your inbox
             </p>
 
             <div className="space-y-4">
@@ -1196,7 +1196,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
         {/* Canonical offer: free audit → $97 One-Leak Repair Sprint */}
         <section id="remediation" className="scroll-mt-40 border-t border-border pt-16">
           <div className="space-y-6">
-          
+
           {/* NEW: Before/After Proof Layer (Psychology: Remove risk perception) */}
           {results.findings.length > 0 && (
             <Card variant="elevated" className="border-accent/30 bg-accent/5">
@@ -1204,11 +1204,11 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                 <p className="text-sm font-semibold uppercase tracking-widest text-accent">Your Exact Fix</p>
                 <h3 className="mt-2 text-xl font-extrabold text-fg">See exactly what you are paying for</h3>
               </div>
-              
+
               {(() => {
                 const worst = [...results.findings].sort((a, b) => b.impact - a.impact)[0];
                 if (!worst) return null;
-                
+
                 return (
                   <div className="space-y-4">
                     <div>
@@ -1221,11 +1221,11 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                         )}
                       </div>
                     </div>
-                    
+
                     <div className="flex justify-center">
                       <span className="text-2xl text-accent">↓</span>
                     </div>
-                    
+
                     <div>
                       <p className="mb-2 text-sm font-semibold text-fg-muted">AFTER (Your fix - ready to paste)</p>
                       <div className="rounded-lg border border-border bg-accent/5 p-4 font-mono text-sm leading-relaxed text-fg">
@@ -1240,7 +1240,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
               })()}
             </Card>
           )}
-          
+
           <h2 className="text-center text-2xl font-extrabold text-fg">
             Know exactly which one thing to fix and how to fix it.
           </h2>
@@ -1280,14 +1280,14 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
           </div>
         </section>
 
-        {/* Pass it forward — referral moment #1 */}
+        {/* Pass it forward - referral moment #1 */}
         {(emailSent || unlocked) && (
           <Card variant="bordered" className="mt-8 border-accent/30">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="font-semibold text-fg">Know another founder with the same problem?</p>
                 <p className="mt-1 max-w-[65ch] text-base leading-7 text-fg-muted">
-                  Forward their site for a free audit — takes a couple of minutes. The report names the exact leaks, same as yours.
+                  Forward their site for a free audit - takes a couple of minutes. The report names the exact leaks, same as yours.
                 </p>
               </div>
               <a

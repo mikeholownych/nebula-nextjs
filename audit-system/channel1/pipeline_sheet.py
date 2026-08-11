@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-channel1/pipeline_sheet.py — Minimal Channel 1 prospect tracker.
+channel1/pipeline_sheet.py - Minimal Channel 1 prospect tracker.
 
 Usage:
   python3 pipeline_sheet.py add --name "Jane" --company "Acme" --url "https://acme.com" \

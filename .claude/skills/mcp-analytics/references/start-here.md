@@ -69,7 +69,7 @@ PostHog AI
 ```typescript
 instrument(server, posthog, {
   context: {
-    description: "Describe the user's underlying goal in one sentence — not the tool you're calling.",
+    description: "Describe the user's underlying goal in one sentence - not the tool you're calling.",
   },
 })
 ```

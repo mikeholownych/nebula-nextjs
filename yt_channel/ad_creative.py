@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""UGC-style video ad generator — the "HeyGen" analog from Simon Høiberg's
+"""UGC-style video ad generator - the "HeyGen" analog from Simon Høiberg's
 one-person SaaS AI stack (v-AkmjJNxZo).
 
 Turns a promoted URL into a vertical (9:16) UGC-style ad creative:
@@ -10,7 +10,7 @@ Turns a promoted URL into a vertical (9:16) UGC-style ad creative:
   → Ken Burns motion assembly (yt_channel.motion)
   → fail-closed QA gate (yt_channel.qa_video)
 
-No upload — ad creatives are produced for review, not auto-published.
+No upload - ad creatives are produced for review, not auto-published.
 
 Usage:
   python3 yt_channel/ad_creative.py --url https://nebulacomponents.com/audit \
@@ -149,7 +149,7 @@ def build_script(hook: str, domain: str) -> list[dict]:
         {"seg": "hook", "text": hook},
         {"seg": "problem",
          "text": f"Here's the thing. You're paying for clicks, people land on {d}, and nothing happens. "
-                 f"Nine out of ten times it's not the ad — it's the page."},
+                 f"Nine out of ten times it's not the ad - it's the page."},
         {"seg": "proof",
          "text": "In under two minutes, a free audit scores your headline, your CTA, your trust signals, "
                  "and tells you exactly where the leak is. No signup. No sales call."},
@@ -261,7 +261,7 @@ def main() -> int:
     description = (
         f"{hook}\n\nFree landing page audit: https://nebulacomponents.com/audit"
         f"?utm_source=youtube-ad&utm_medium=ugc-creative\n"
-        f"Score your page across 9 conversion signals in under 2 minutes — no signup."
+        f"Score your page across 9 conversion signals in under 2 minutes - no signup."
     )
     qa = subprocess.run(
         [sys.executable, "yt_channel/qa_video.py", "--video", str(ad_path),
@@ -292,7 +292,7 @@ def main() -> int:
     if qa.returncode != 0:
         print("QA FAILED:", qa.stdout[:800], file=sys.stderr)
         return 1
-    print(f"QA PASS — {ad_path} ready for review (manifest: {out_dir / 'manifest.json'})")
+    print(f"QA PASS - {ad_path} ready for review (manifest: {out_dir / 'manifest.json'})")
     return 0
 
 

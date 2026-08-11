@@ -5,16 +5,16 @@ Judges how much weight an external source can carry as corroboration. Used by
 
 ## Scoring dimensions
 
-1. **Editorial independence** — no ownership, payment, or reciprocal
+1. **Editorial independence** - no ownership, payment, or reciprocal
    arrangement with the claiming organization; disclosed relationships reduce
    but do not zero the score, *undisclosed* ones zero it.
-2. **Topical retrieval presence** — is this a source engines already retrieve
+2. **Topical retrieval presence** - is this a source engines already retrieve
    for the topic? (Observed citations in prompt-results are the evidence.)
-3. **Substantive treatment** — the source describes the entity accurately and
+3. **Substantive treatment** - the source describes the entity accurately and
    substantively, not a directory one-liner.
-4. **Stability** — stable URL, accessible to retrieval systems, not paywalled
+4. **Stability** - stable URL, accessible to retrieval systems, not paywalled
    into invisibility.
-5. **Provenance** — publisher identity, publication date, and (for research)
+5. **Provenance** - publisher identity, publication date, and (for research)
    methodology visible.
 
 ## Posture

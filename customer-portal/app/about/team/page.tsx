@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 // Extends the same #founder Person node declared site-wide in
-// organizationSchema (see app/lib/schema.ts) with page-specific detail —
+// organizationSchema (see app/lib/schema.ts) with page-specific detail -
 // same @id, richer profile, per the schema audit's Finding 7. Google and
 // AI crawlers merge same-@id nodes across a page's JSON-LD blocks.
 const founderSchema = {
@@ -59,19 +59,19 @@ export default function TeamPage() {
 
         <p className="mb-4 text-lg leading-relaxed text-fg-muted">
           Before founding Nebula Components, I worked with founders running paid traffic whose
-          landing pages weren&apos;t converting. The same failures showed up page after page —
+          landing pages weren&apos;t converting. The same failures showed up page after page -
           message-match gaps, missing trust signals, mobile friction, slow load times, unclear CTAs.
           None of them were creative or targeting problems. They were structural issues on the page
           itself, and they could all be diagnosed from the HTML.
         </p>
         <p className="mb-4 text-lg leading-relaxed text-fg-muted">
           What I kept seeing: founders spending thousands on traffic to pages with a broken headline,
-          a hidden CTA, and no proof above the fold — then changing the ad when the page was the
+          a hidden CTA, and no proof above the fold - then changing the ad when the page was the
           problem. Ad performance problems are almost always page problems. Most of the time the
           fix is specific and verifiable. I built Nebula to surface it without a consulting engagement.
         </p>
         <p className="mb-8 text-lg leading-relaxed text-fg-muted">
-          That pattern is what the 9-point diagnostic framework is built from — the same checks
+          That pattern is what the 9-point diagnostic framework is built from - the same checks
           that run on every free audit and the paid One-Leak Repair Sprint.
         </p>
 

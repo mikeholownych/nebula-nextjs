@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Subject Line Analyzer — Hook Deconstructor for B2B Email Sequences.
+Subject Line Analyzer - Hook Deconstructor for B2B Email Sequences.
 
 Adapted from UGC Ninja's Claude Viral Intelligence Team (Agent 3: Hook Deconstructor).
 Applies the same hook archetype analysis to email subject lines instead of TikTok hooks.
@@ -62,7 +62,7 @@ ARCHETYPES = {
         "description": "Feels like a one-to-one message, not a broadcast",
         "examples": ["Your landing page audit results", "Quick question about [domain]"],
         "strength": "Personal framing increases familiarity and trust. Best for follow-ups.",
-        "weakness": "Overused in sales sequences — 'Quick question' is heavily filtered now."
+        "weakness": "Overused in sales sequences - 'Quick question' is heavily filtered now."
     },
     "pattern_interrupt": {
         "triggers": ["wait", "hold on", "actually", "surprising", "secret", "counterintuitive", "nobody talks about"],
@@ -79,7 +79,7 @@ def score_subject(subject):
     """Score a subject line against all archetypes. Returns scored archetypes + best fit."""
     sl = subject.lower()
     scored = []
-    
+
     for name, arch in ARCHETYPES.items():
         trigger_count = sum(1 for t in arch["triggers"] if t in sl)
         if trigger_count == 0:
@@ -95,10 +95,10 @@ def score_subject(subject):
             "weakness": arch["weakness"],
             "example": arch["examples"][0],
         })
-    
+
     # Sort by score descending
     scored.sort(key=lambda x: x["score"], reverse=True)
-    
+
     # Overall: best archetype score + bonus for archetype diversity
     if not scored:
         return {
@@ -109,11 +109,11 @@ def score_subject(subject):
             "diagnosis": "No recognizable hook archetype detected. Subject line may be too generic or descriptive.",
             "improvement_hint": "Add a curiosity gap ('why') or specific promise ('in 15 minutes') to trigger an open."
         }
-    
+
     best = scored[0]["score"]
     diversity_bonus = min(2.0, len(scored) * 0.8)
     total = min(10, best + diversity_bonus)
-    
+
     # Grade
     if total >= 8.5:
         grade = "A"
@@ -130,7 +130,7 @@ def score_subject(subject):
     else:
         grade = "F"
         diagnosis = "Very weak. No clear archetype drives the subject line."
-    
+
     # Improvement hint
     if total < 7.0:
         # Suggest the strongest archetype they're not using
@@ -142,7 +142,7 @@ def score_subject(subject):
             hint = "Sharpen the existing archetype. Make the promise more specific."
     else:
         hint = "Good. Consider A/B testing against a different archetype."
-    
+
     return {
         "score": round(total, 1),
         "grade": grade,
@@ -239,11 +239,11 @@ def test():
         "The counterintuitive reason your page isn't converting",
         "How to fix your landing page without hiring an agency",
     ]
-    
+
     results = analyze_subject_batch(test_subjects)
     for r in results:
         print(f"[{r['grade']}] {r['score']}/10  {r['subject']}")
-        print(f"       Best: {r['best_archetype']} — {r['diagnosis']}")
+        print(f"       Best: {r['best_archetype']} - {r['diagnosis']}")
         print(f"       Hint: {r['improvement_hint']}")
         print()
 

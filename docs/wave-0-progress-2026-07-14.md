@@ -1,4 +1,4 @@
-# Wave 0 Progress Report — 2026-07-14
+# Wave 0 Progress Report - 2026-07-14
 
 **Program:** Next.js Customer Platform Transformation
 **Wave:** 0 (Stabilize before building)
@@ -28,12 +28,12 @@
 **Status:** DONE
 **Commit:** `acb4c632`
 **Files:**
-- `platform_api/main.py` — FastAPI app with health/readyz endpoints
-- `platform_api/middleware.py` — Request ID + size limit middleware
-- `platform_api/errors.py` — Error envelope formatting
-- `platform_api/config.py` — Settings validation
-- `pytest.ini` — Fixed pytest-asyncio fixture error
-- `tests/platform_api/test_health.py` — 4/6 tests passing (2 skipped for Wave 2)
+- `platform_api/main.py` - FastAPI app with health/readyz endpoints
+- `platform_api/middleware.py` - Request ID + size limit middleware
+- `platform_api/errors.py` - Error envelope formatting
+- `platform_api/config.py` - Settings validation
+- `pytest.ini` - Fixed pytest-asyncio fixture error
+- `tests/platform_api/test_health.py` - 4/6 tests passing (2 skipped for Wave 2)
 
 **What was done:**
 - Fixed pytest-asyncio fixture error (added `asyncio_mode = auto`)
@@ -143,17 +143,17 @@ curl -s http://localhost:8765/sitemap.xml | grep -o "<loc>[^<]*</loc>" > routes.
 
 ### Platform API (Wave 1)
 1. `platform_api/__init__.py`
-2. `platform_api/config.py` — Settings validation
-3. `platform_api/errors.py` — Error envelope formatting
-4. `platform_api/main.py` — FastAPI app with health endpoints
-5. `platform_api/middleware.py` — Request ID + size limits
-6. `pytest.ini` — Fixed async test configuration
-7. `requirements-platform-api.txt` — Dependencies
+2. `platform_api/config.py` - Settings validation
+3. `platform_api/errors.py` - Error envelope formatting
+4. `platform_api/main.py` - FastAPI app with health endpoints
+5. `platform_api/middleware.py` - Request ID + size limits
+6. `pytest.ini` - Fixed async test configuration
+7. `requirements-platform-api.txt` - Dependencies
 
 ### Tests
-8. `tests/platform_api/test_health.py` — Health endpoint tests
-9. `tests/platform_api/test_health2.py` — Additional health tests
-10. `tests/platform_api/conftest.py` — Test fixtures
+8. `tests/platform_api/test_health.py` - Health endpoint tests
+9. `tests/platform_api/test_health2.py` - Additional health tests
+10. `tests/platform_api/conftest.py` - Test fixtures
 11. Multiple test files for bindings, gaps, security
 
 ### Documentation
@@ -162,7 +162,7 @@ curl -s http://localhost:8765/sitemap.xml | grep -o "<loc>[^<]*</loc>" > routes.
 14. `docs/wave-0-progress-2026-07-14.md` (this file)
 
 ### Scripts
-15. `scripts/discover_topology.sh` — Topology capture script
+15. `scripts/discover_topology.sh` - Topology capture script
 
 ---
 
@@ -172,7 +172,7 @@ curl -s http://localhost:8765/sitemap.xml | grep -o "<loc>[^<]*</loc>" > routes.
 fe951902 WAVE-00: Topology discovery + Next.js proxy.ts documentation
 acb4c632 PLATFORM-01: FastAPI platform API scaffold with health/middleware/error handling
 bfc39908 WEB-01: Next.js scaffold with healthz/readyz endpoints, type-safe build
-83869e1b BASE-02: Freeze Public Route and SEO Behavior  
+83869e1b BASE-02: Freeze Public Route and SEO Behavior
 a396688e security: reject protected contracts covered by next route
 ```
 

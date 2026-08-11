@@ -5,15 +5,15 @@
 Never contact someone without a specific trigger that proves they have the pain RIGHT NOW.
 
 ## The Trigger Stack (ranked by signal quality)
-1. **Job post signal** — posting for "CRO", "landing page", "paid ads help" on Upwork/LinkedIn
-2. **Forum complaint** — r/PPC, r/Entrepreneur: "my ads aren't converting"
-3. **Ad launch signal** — LinkedIn post announcing new campaign (pain arrives in 30 days)
-4. **Agency frustration** — complaining about their current agency
+1. **Job post signal** - posting for "CRO", "landing page", "paid ads help" on Upwork/LinkedIn
+2. **Forum complaint** - r/PPC, r/Entrepreneur: "my ads aren't converting"
+3. **Ad launch signal** - LinkedIn post announcing new campaign (pain arrives in 30 days)
+4. **Agency frustration** - complaining about their current agency
 
 ## Outreach Formula
 1. Find the trigger
 2. Build the artifact (run their audit, show the score)
-3. Send the artifact as the first message — NOT a pitch
+3. Send the artifact as the first message - NOT a pitch
 4. CTA = "here's what I found, want the full fix list?"
 
 ## What NOT to do

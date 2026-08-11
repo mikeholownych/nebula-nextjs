@@ -15,11 +15,11 @@
 | Staging/production confirmation | Yes | From deployment step |
 
 ## Validation Rules
-1. Baseline period must be **before** the deployed changes — minimum 7 days of data
-2. Measurement period must start **after** deployment — minimum 7 days
-3. Do not cherry-pick favorable days — use full baseline and measurement windows
+1. Baseline period must be **before** the deployed changes - minimum 7 days of data
+2. Measurement period must start **after** deployment - minimum 7 days
+3. Do not cherry-pick favorable days - use full baseline and measurement windows
 4. Document all confounders known at time of measurement
-5. Conclusion must be honest — prefer `improvement_suggested` over `improvement_confirmed` unless evidence is statistically significant (> 10% change, > 100 sessions in each period)
+5. Conclusion must be honest - prefer `improvement_suggested` over `improvement_confirmed` unless evidence is statistically significant (> 10% change, > 100 sessions in each period)
 6. Must obtain prospect confirmation before publishing any case study
 
 ## Procedure
@@ -33,7 +33,7 @@
 4. Calculate deltas and record in `outcomes`:
    - `baseline_sessions`, `measurement_sessions`
    - `baseline_cr`, `measurement_cr`
-5. Record `change_description` — what was deployed
+5. Record `change_description` - what was deployed
 6. List all `confounders` (seasonality, new campaigns, site redesigns, competitor changes, etc.)
 7. Determine `conclusion`:
    - `improvement_confirmed`: CR improved > 10% AND no major unconfounded alternate explanation
@@ -90,10 +90,10 @@ Outcome qualifies as `case_study_eligible = TRUE` when ALL of:
 - **Outcome qualifies for case study →** Mike writes the case study, prospect reviews and signs off before publication
 
 ## Automation Readiness Gate
-- [ ] Deterministic trigger: YES — intervention deployed event
-- [ ] Structured inputs: PARTIAL — metrics come from external analytics, not always accessible via API
-- [ ] Bounded output: YES — outcome schema is fixed
-- [ ] Explicit failure handling: YES — defined above
-- [ ] Observable execution: YES — outcomes table + events
-- [ ] Reversibility: NO — outcomes are historical records (but can be updated with new data)
-- [ ] Stable decision rule: YES — conclusion criteria are explicit
+- [ ] Deterministic trigger: YES - intervention deployed event
+- [ ] Structured inputs: PARTIAL - metrics come from external analytics, not always accessible via API
+- [ ] Bounded output: YES - outcome schema is fixed
+- [ ] Explicit failure handling: YES - defined above
+- [ ] Observable execution: YES - outcomes table + events
+- [ ] Reversibility: NO - outcomes are historical records (but can be updated with new data)
+- [ ] Stable decision rule: YES - conclusion criteria are explicit

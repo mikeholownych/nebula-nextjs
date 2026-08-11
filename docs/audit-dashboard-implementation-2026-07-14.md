@@ -1,4 +1,4 @@
-# Audit Dashboard Implementation — Password-Protected Delivery
+# Audit Dashboard Implementation - Password-Protected Delivery
 
 **Date:** 2026-07-14
 **Status:** Live
@@ -33,7 +33,7 @@ Password-protected audit dashboard at `/audit/{audit-id}` that mirrors CDE's app
 - Effort estimate (low/medium)
 
 ### 4. **Conversion CTA**
-- "Get Fix Pack — $147" button at bottom
+- "Get Fix Pack - $147" button at bottom
 - Links to Stripe checkout
 - Clear action path after viewing audit
 
@@ -230,24 +230,24 @@ Expected: "Landing Page Audit Report"
 1. Navigate to `http://localhost:8765/audit/demo`
 2. Enter password: `audit2026`
 3. Dashboard should render with sample data
-4. Click "Get Fix Pack — $147" → Stripe checkout
+4. Click "Get Fix Pack - $147" → Stripe checkout
 
 ---
 
 ## Files Modified
 
-1. `/home/mike/nebula/audit_dashboard.html` — Created (new file)
-2. `/home/mike/nebula/agentic_server.py` — Added route (line ~371)
+1. `/home/mike/nebula/audit_dashboard.html` - Created (new file)
+2. `/home/mike/nebula/agentic_server.py` - Added route (line ~371)
 
 ---
 
 ## CDE Parity Achieved
 
-✅ **"A data system, not a PDF"** — dashboard deliverable
-✅ **Password-protected** — secure access
-✅ **Shareable link** — `nebulacomponents.shop/audit/{id}`
-✅ **Fix priority stack** — ordered by impact
-✅ **Conversion CTA** — path to purchase
+✅ **"A data system, not a PDF"** - dashboard deliverable
+✅ **Password-protected** - secure access
+✅ **Shareable link** - `nebulacomponents.shop/audit/{id}`
+✅ **Fix priority stack** - ordered by impact
+✅ **Conversion CTA** - path to purchase
 
 ---
 

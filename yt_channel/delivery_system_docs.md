@@ -1,8 +1,8 @@
-# Post-Checkout Delivery System — P1 + P2 Complete
+# Post-Checkout Delivery System - P1 + P2 Complete
 
-**Status**: ✅ Complete and ready for deployment  
-**Scope**: P1 (email sequences) + P2 (implementation tracking)  
-**Integration**: Stripe webhook → AgentMail → Cron jobs  
+**Status**: ✅ Complete and ready for deployment
+**Scope**: P1 (email sequences) + P2 (implementation tracking)
+**Integration**: Stripe webhook → AgentMail → Cron jobs
 
 ---
 
@@ -32,20 +32,20 @@
 **File**: `delivery_email_templates.py`
 
 4 emails in sequence:
-- **Email 1** (5 min): "Your $97 fix — ready to paste"
+- **Email 1** (5 min): "Your $97 fix - ready to paste"
   - Exact copy to implement
   - Psychology: No fluff, immediate value
-  
+
 - **Email 2** (1 day): "Implementation guide + before/after"
   - Visual proof of what fix does
   - Checklist to verify deployment
   - Psychology: Support available, clear expectations
-  
+
 - **Email 3** (7 days): "Did you implement? Help if stuck"
   - Check-in before re-audit
   - Low-friction help offer
   - Psychology: No judgment, support available
-  
+
 - **Email 4** (30 days): "Results + Pro upsell" (3 variants)
   - **Success variant**: "You improved from 4/10 → 6/10. Automate with Pro ($29/mo)"
   - **Partial variant**: "Partially live. Here's how to verify deployment"
@@ -85,21 +85,21 @@ CREATE TABLE purchases (
   stripe_charge_id TEXT UNIQUE,
   amount_cents INTEGER,
   purchased_at TEXT,  -- ISO 8601
-  
+
   -- Email tracking
   emails_sent JSON,  -- {email_1: sent_at, email_2: sent_at, ...}
-  
+
   -- Re-audit tracking
   re_audit_scheduled_at TEXT,  -- ISO 8601
   re_audit_completed_at TEXT,  -- ISO 8601
   re_audit_score_after REAL,   -- e.g., 5.2
-  
+
   -- Testimonial tracking (P3)
   testimonial_captured BOOLEAN,
   testimonial_text TEXT,
   testimonial_score_before REAL,
   testimonial_score_after REAL,
-  
+
   -- Pro subscription conversion (P4)
   pro_subscription_id TEXT,
   pro_subscription_activated_at TEXT,
@@ -225,9 +225,9 @@ purchase_completed
 
 ## Files Delivered
 
-1. ✅ `delivery_email_templates.py` — 4 email templates
-2. ✅ `delivery_workflow.py` — Main automation class
-3. ✅ `stripe_webhook.py` — Stripe webhook handler
+1. ✅ `delivery_email_templates.py` - 4 email templates
+2. ✅ `delivery_workflow.py` - Main automation class
+3. ✅ `stripe_webhook.py` - Stripe webhook handler
 4. ✅ This documentation
 
 ---

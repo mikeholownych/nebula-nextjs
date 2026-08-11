@@ -1,7 +1,7 @@
-# Nebula Platform Architecture — Wave 1 (Identity + Billing)
+# Nebula Platform Architecture - Wave 1 (Identity + Billing)
 
-**Date:** 2026-07-14  
-**Status:** IMPLEMENTING  
+**Date:** 2026-07-14
+**Status:** IMPLEMENTING
 **Monthly Cost:** $0 (free tiers + self-hosted)
 
 ---
@@ -529,7 +529,7 @@ curl http://localhost:8766/healthz
 
 ---
 
-**Architecture Status:** APPROVED  
-**Implementation Phase:** Wave 1 (Identity + Billing)  
-**Estimated Completion:** 2-3 days  
+**Architecture Status:** APPROVED
+**Implementation Phase:** Wave 1 (Identity + Billing)
+**Estimated Completion:** 2-3 days
 **Risk Level:** Low (proven patterns)

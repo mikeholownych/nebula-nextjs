@@ -7,7 +7,7 @@ import {
 } from './BrandKitClient'
 
 export const metadata: Metadata = {
-  title: 'Brand Kit — Nebula Components',
+  title: 'Brand Kit - Nebula Components',
   description:
     'Official brand assets, logo usage guidelines, color system, typography, and motion specifications for Nebula Components.',
   alternates: {
@@ -24,7 +24,7 @@ const colors = [
     rgb: '0, 194, 160',
     hsl: '169°, 100%, 38%',
     role: 'Primary brand accent, pass states, interactive elements',
-    a11y: '4.56:1 on Near Black — AA Large',
+    a11y: '4.56:1 on Near Black - AA Large',
     semantic: 'brand',
   },
   {
@@ -33,7 +33,7 @@ const colors = [
     rgb: '5, 5, 5',
     hsl: '0°, 0%, 2%',
     role: 'Primary background, canvas',
-    a11y: '20.9:1 against Off White — AAA',
+    a11y: '20.9:1 against Off White - AAA',
     semantic: 'surface',
   },
   {
@@ -42,7 +42,7 @@ const colors = [
     rgb: '245, 245, 245',
     hsl: '0°, 0%, 96%',
     role: 'Primary foreground, headings, body text',
-    a11y: '20.9:1 on Near Black — AAA',
+    a11y: '20.9:1 on Near Black - AAA',
     semantic: 'text',
   },
   {
@@ -51,7 +51,7 @@ const colors = [
     rgb: '158, 158, 158',
     hsl: '0°, 0%, 62%',
     role: 'Secondary text, annotations, metadata',
-    a11y: '7.05:1 on Near Black — AAA',
+    a11y: '7.05:1 on Near Black - AAA',
     semantic: 'muted',
   },
   {
@@ -59,8 +59,8 @@ const colors = [
     hex: '#f59e0b',
     rgb: '245, 158, 11',
     hsl: '38°, 92%, 50%',
-    role: 'Reserved — failed conversion signal threshold only',
-    a11y: '3.2:1 on Near Black — use at 18px+ bold only',
+    role: 'Reserved - failed conversion signal threshold only',
+    a11y: '3.2:1 on Near Black - use at 18px+ bold only',
     semantic: 'fail',
   },
 ]
@@ -69,7 +69,7 @@ const semanticColors = [
   { name: 'Success', hex: '#00c2a0', usage: 'Pass states, positive outcomes' },
   { name: 'Error', hex: '#f37979', usage: 'Validation errors, destructive actions' },
   { name: 'Information', hex: '#3b82f6', usage: 'Informational notices, links' },
-  { name: 'Signal Fail', hex: '#f59e0b', usage: 'Failed threshold — audit-specific only' },
+  { name: 'Signal Fail', hex: '#f59e0b', usage: 'Failed threshold - audit-specific only' },
 ]
 
 const contrastPairs = [
@@ -417,10 +417,10 @@ export default function BrandPage() {
             THE MARK
         ═══════════════════════════════════════════════════════════════════════ */}
         <section aria-labelledby="mark-heading">
-          <SectionLabel>01 — The Mark</SectionLabel>
+          <SectionLabel>01 - The Mark</SectionLabel>
           <SectionTitle id="mark-heading">Signal Node Grid</SectionTitle>
           <SectionDescription>
-            9 signal nodes in a 3×3 grid. 6 pass (teal), 3 neutral (gray). Represents the B grade — honest about being good, not perfect. The mark encodes no specific audit taxonomy; it is a semantic-neutral brand glyph.
+            9 signal nodes in a 3×3 grid. 6 pass (teal), 3 neutral (gray). Represents the B grade - honest about being good, not perfect. The mark encodes no specific audit taxonomy; it is a semantic-neutral brand glyph.
           </SectionDescription>
 
           {/* Interactive variant gallery */}
@@ -489,7 +489,7 @@ export default function BrandPage() {
             WORDMARK & LOCKUPS
         ═══════════════════════════════════════════════════════════════════════ */}
         <section aria-labelledby="wordmark-heading">
-          <SectionLabel>02 — Wordmark &amp; Lockups</SectionLabel>
+          <SectionLabel>02 - Wordmark &amp; Lockups</SectionLabel>
           <SectionTitle id="wordmark-heading">Brand Lockups</SectionTitle>
           <SectionDescription>
             The wordmark pairs with the signal-node mark in multiple configurations. Each lockup has defined spacing ratios and minimum legible sizes.
@@ -598,10 +598,10 @@ export default function BrandPage() {
             COLOR SYSTEM
         ═══════════════════════════════════════════════════════════════════════ */}
         <section aria-labelledby="colors-heading">
-          <SectionLabel>03 — Color System</SectionLabel>
+          <SectionLabel>03 - Color System</SectionLabel>
           <SectionTitle id="colors-heading">Diagnostic Palette</SectionTitle>
           <SectionDescription>
-            A restrained palette optimized for dark interfaces and maximum contrast ratios. Signal Teal is the sole chromatic accent — everything else is grayscale.
+            A restrained palette optimized for dark interfaces and maximum contrast ratios. Signal Teal is the sole chromatic accent - everything else is grayscale.
           </SectionDescription>
 
           {/* Primary palette */}
@@ -696,10 +696,10 @@ export default function BrandPage() {
             TYPOGRAPHY
         ═══════════════════════════════════════════════════════════════════════ */}
         <section aria-labelledby="typography-heading">
-          <SectionLabel>04 — Typography</SectionLabel>
+          <SectionLabel>04 - Typography</SectionLabel>
           <SectionTitle id="typography-heading">Type Scale</SectionTitle>
           <SectionDescription>
-            System sans-serif for interface and body. Monospace for evidence atoms, scores, diagnostics, and technical labels. No web fonts — zero FOUT, no external requests.
+            System sans-serif for interface and body. Monospace for evidence atoms, scores, diagnostics, and technical labels. No web fonts - zero FOUT, no external requests.
           </SectionDescription>
 
           {/* Font stacks */}
@@ -755,10 +755,10 @@ export default function BrandPage() {
             ICONOGRAPHY & DATA VIZ
         ═══════════════════════════════════════════════════════════════════════ */}
         <section aria-labelledby="icons-heading">
-          <SectionLabel>05 — Iconography &amp; Data Visualization</SectionLabel>
+          <SectionLabel>05 - Iconography &amp; Data Visualization</SectionLabel>
           <SectionTitle id="icons-heading">Visual Language</SectionTitle>
           <SectionDescription>
-            Geometric, minimal icons with consistent 1.5px stroke weight on a 24×24 grid. Square or circular technical geometry — no decorative flourishes.
+            Geometric, minimal icons with consistent 1.5px stroke weight on a 24×24 grid. Square or circular technical geometry - no decorative flourishes.
           </SectionDescription>
 
           {/* Icon examples */}
@@ -834,10 +834,10 @@ export default function BrandPage() {
             USAGE RULES
         ═══════════════════════════════════════════════════════════════════════ */}
         <section aria-labelledby="usage-heading">
-          <SectionLabel>06 — Usage Rules</SectionLabel>
+          <SectionLabel>06 - Usage Rules</SectionLabel>
           <SectionTitle id="usage-heading">Approved &amp; Prohibited</SectionTitle>
           <SectionDescription>
-            The mark is a precision instrument. Treat it with the same care as diagnostic equipment — no decorative embellishment, no arbitrary modification.
+            The mark is a precision instrument. Treat it with the same care as diagnostic equipment - no decorative embellishment, no arbitrary modification.
           </SectionDescription>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -905,10 +905,10 @@ export default function BrandPage() {
             MOTION
         ═══════════════════════════════════════════════════════════════════════ */}
         <section aria-labelledby="motion-heading">
-          <SectionLabel>07 — Motion</SectionLabel>
+          <SectionLabel>07 - Motion</SectionLabel>
           <SectionTitle id="motion-heading">Animation System</SectionTitle>
           <SectionDescription>
-            Restrained technical motion that communicates system state. All animations respect prefers-reduced-motion. Nothing purely decorative — every movement carries information.
+            Restrained technical motion that communicates system state. All animations respect prefers-reduced-motion. Nothing purely decorative - every movement carries information.
           </SectionDescription>
 
           <div className="space-y-2">

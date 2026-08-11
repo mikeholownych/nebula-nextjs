@@ -1,20 +1,20 @@
 """
-teardown_script.py — Story-first narration for landing page teardowns.
+teardown_script.py - Story-first narration for landing page teardowns.
 
 This replaces the findings-list format with a human voice doing a live
 teardown. The narration never says "finding", "signal", or "quadrant".
 It sounds like someone who just opened the page and is talking through
-what they notice — casual, direct, and specific.
+what they notice - casual, direct, and specific.
 
 Script structure (total ~90-120s narration):
-  HOOK        (8-12s)  — Irony + what you're about to see
-  ABOVE_FOLD  (10-15s) — First impression, what the visitor sees
-  FINDING_1   (15-20s) — Biggest issue: what it is, why it costs money, the fix
-  FINDING_2   (15-20s) — Second issue (if Quick Win)
-  FINDING_3   (10-15s) — Third issue (if Quick Win)
-  SCORE       (8-10s)  — The number + what it means in real money
-  OFFER       (8-10s)  — Free audit + $97 sprint
-  CTA         (5-8s)   — Drop your URL in the comments
+  HOOK        (8-12s)  - Irony + what you're about to see
+  ABOVE_FOLD  (10-15s) - First impression, what the visitor sees
+  FINDING_1   (15-20s) - Biggest issue: what it is, why it costs money, the fix
+  FINDING_2   (15-20s) - Second issue (if Quick Win)
+  FINDING_3   (10-15s) - Third issue (if Quick Win)
+  SCORE       (8-10s)  - The number + what it means in real money
+  OFFER       (8-10s)  - Free audit + $97 sprint
+  CTA         (5-8s)   - Drop your URL in the comments
 
 Each segment has:
   text:       narration (human voice, no jargon)
@@ -78,7 +78,7 @@ def _hook_line(ctx: dict) -> str:
     if ctx["is_agency"]:
         return (
             f"This is a paid media agency. They run ads for other businesses. "
-            f"I'm going to audit their own landing page right now — "
+            f"I'm going to audit their own landing page right now - "
             f"and what I find is going to make a lot of sense."
         )
     elif ctx["is_ecom"]:
@@ -97,7 +97,7 @@ def _hook_line(ctx: dict) -> str:
         verb = "costing" if score < 6.5 else "limiting"
         return (
             f"Someone is spending money on ads to send people to this page. "
-            f"I'm going to show you what's {verb} them money — "
+            f"I'm going to show you what's {verb} them money - "
             f"and every single thing I find is fixable this week."
         )
 
@@ -109,7 +109,7 @@ def _above_fold_line(ctx: dict) -> str:
         return (
             "When someone arrives from an ad, this is the first thing they see. "
             "There's no clear headline telling them what this is about. "
-            "Think about that — they clicked an ad, they're interested, "
+            "Think about that - they clicked an ad, they're interested, "
             "and the first thing the page does is leave them guessing."
         )
     elif len(h1.split()) < 4:
@@ -123,7 +123,7 @@ def _above_fold_line(ctx: dict) -> str:
     else:
         return (
             "Here's what the page looks like when someone arrives. "
-            "This is your one shot — the visitor decides in about three seconds "
+            "This is your one shot - the visitor decides in about three seconds "
             "whether they're in the right place. "
             "Let me show you what's working and what isn't."
         )
@@ -138,7 +138,7 @@ FINDING_NARRATION: dict[str, str] = {
         "The headline is the first thing a paid-traffic visitor reads. "
         "{issue_human}. "
         "When the ad said something specific and the page doesn't match it, "
-        "people bounce — not because they weren't interested, but because "
+        "people bounce - not because they weren't interested, but because "
         "the page didn't confirm they were in the right place. "
         "The fix is simple: {fix_human}. "
         "That one change can cut your bounce rate on paid traffic significantly."
@@ -146,7 +146,7 @@ FINDING_NARRATION: dict[str, str] = {
     "cta": (
         "Now look at the call to action. "
         "{issue_human}. "
-        "This matters more than people realize — "
+        "This matters more than people realize - "
         "if someone has to look for the button, they won't. "
         "On paid traffic you're paying for every click, and if the CTA isn't obvious, "
         "you're paying for people to leave. "
@@ -155,7 +155,7 @@ FINDING_NARRATION: dict[str, str] = {
     "mobile": (
         "Here's the mobile view. This is what more than half of your visitors see. "
         "{issue_human}. "
-        "Mobile isn't an afterthought anymore — "
+        "Mobile isn't an afterthought anymore - "
         "it's probably where your highest-intent traffic is coming from. "
         "{fix_human}."
     ),
@@ -172,26 +172,26 @@ FINDING_NARRATION: dict[str, str] = {
         "{issue_human}. "
         "When someone clicks an ad about one thing and the page talks about something else, "
         "the brain flags it as a mismatch. "
-        "They don't consciously know why — they just leave. "
+        "They don't consciously know why - they just leave. "
         "{fix_human}."
     ),
     "load_speed": (
         "Page speed. {issue_human}. "
         "Google's own research says that every extra second of load time "
         "costs roughly seven percent of conversions. "
-        "On paid traffic, you're already paying for those clicks — "
+        "On paid traffic, you're already paying for those clicks - "
         "slow pages mean you're paying for people who left before the page even loaded. "
         "{fix_human}."
     ),
     "seo_foundations": (
         "The technical basics. {issue_human}. "
-        "These aren't just SEO issues — they affect how AI systems and search engines "
+        "These aren't just SEO issues - they affect how AI systems and search engines "
         "read the page, and increasingly, how the page gets cited in AI answers. "
         "If the structure isn't there, the page is invisible to systems that drive traffic. "
         "{fix_human}."
     ),
     "above_fold": (
-        "The above-the-fold section — what the visitor sees without scrolling. "
+        "The above-the-fold section - what the visitor sees without scrolling. "
         "{issue_human}. "
         "This is your conversion window. Everything important needs to be here: "
         "what you do, who it's for, what happens next. "
@@ -301,12 +301,12 @@ def _score_narration(ctx: dict) -> str:
 
 def _offer_narration() -> str:
     return (
-        "You can run this exact audit on your own page right now for free — "
+        "You can run this exact audit on your own page right now for free - "
         "no account, no email, just paste the URL and go. "
         "nebulacomponents dot com slash audit. "
         "Takes about ninety seconds. "
-        "If you want one of these issues actually fixed — "
-        "the specific copy change, the code, the exact implementation — "
+        "If you want one of these issues actually fixed - "
+        "the specific copy change, the code, the exact implementation - "
         "that's the ninety-seven dollar sprint. Link in the description."
     )
 
@@ -352,7 +352,7 @@ def generate_teardown_script(audit: dict, url: str = None) -> dict:
     # 1. Hook
     seg(_hook_line(ctx), "intro_card")
 
-    # 2. Above the fold — show the actual page
+    # 2. Above the fold - show the actual page
     seg(_above_fold_line(ctx), "evidence_above_fold", "above_fold")
 
     # 3. Top findings (up to 3 quick wins)
@@ -380,13 +380,13 @@ def generate_teardown_script(audit: dict, url: str = None) -> dict:
 
     # ── Title ──────────────────────────────────────────────────────────────────
     if score < 5.0:
-        title = f"I Audited {domain}'s Landing Page — Here's What's Burning Their Ad Spend ({score:.1f}/10)"
+        title = f"I Audited {domain}'s Landing Page - Here's What's Burning Their Ad Spend ({score:.1f}/10)"
     elif score < 6.5:
-        title = f"Why {domain} Isn't Converting Paid Traffic — Live Teardown ({score:.1f}/10)"
+        title = f"Why {domain} Isn't Converting Paid Traffic - Live Teardown ({score:.1f}/10)"
     elif score < 8.0:
-        title = f"What {domain} Gets Right (And What It's Still Getting Wrong) — Teardown ({score:.1f}/10)"
+        title = f"What {domain} Gets Right (And What It's Still Getting Wrong) - Teardown ({score:.1f}/10)"
     else:
-        title = f"How {domain} Converts Paid Traffic — Landing Page Breakdown ({score:.1f}/10)"
+        title = f"How {domain} Converts Paid Traffic - Landing Page Breakdown ({score:.1f}/10)"
 
     # ── Description ───────────────────────────────────────────────────────────
     desc_lines = [

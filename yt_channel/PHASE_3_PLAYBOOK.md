@@ -1,15 +1,15 @@
 # Phase 3: Paid Amplification Playbook
 
-**Status**: 📋 DOCUMENTED — awaiting budget approval  
-**Budget required**: $100/day ($3,000/month)  
-**Break-even**: 31 purchases/month  
-**Expected ROAS at scale**: 1.5–3×  
+**Status**: 📋 DOCUMENTED - awaiting budget approval
+**Budget required**: $100/day ($3,000/month)
+**Break-even**: 31 purchases/month
+**Expected ROAS at scale**: 1.5–3×
 **Activation order**: Facebook (Day 1) → Google (Day 3) → LinkedIn (Day 5)
 
 See individual channel runbooks:
-- `PHASE_3_FACEBOOK.md` — $50/day retargeting
-- `PHASE_3_GOOGLE.md` — $30/day retargeting + search
-- `PHASE_3_LINKEDIN.md` — $20/day cold founders
+- `PHASE_3_FACEBOOK.md` - $50/day retargeting
+- `PHASE_3_GOOGLE.md` - $30/day retargeting + search
+- `PHASE_3_LINKEDIN.md` - $20/day cold founders
 
 ---
 
@@ -17,8 +17,8 @@ See individual channel runbooks:
 
 ### Why Retargeting First (Not Cold)
 
-**Cold audiences** (LinkedIn, cold Facebook) require trust-building before converting.  
-**Retargeting audiences** already know Nebula — they ran the audit. They saw the score. They just didn't pull the trigger.
+**Cold audiences** (LinkedIn, cold Facebook) require trust-building before converting.
+**Retargeting audiences** already know Nebula - they ran the audit. They saw the score. They just didn't pull the trigger.
 
 Retargeting is 3–5× more efficient than cold:
 - Familiar brand → lower CPM
@@ -26,9 +26,9 @@ Retargeting is 3–5× more efficient than cold:
 - Pre-qualified → higher CVR
 
 **Activation order**:
-1. **Facebook retarget** ($50/day) — biggest retarget pool, cheapest CPM
-2. **Google retarget** ($30/day) — captures search intent post-audit
-3. **LinkedIn cold** ($20/day) — top-of-funnel, feeds retarget pool
+1. **Facebook retarget** ($50/day) - biggest retarget pool, cheapest CPM
+2. **Google retarget** ($30/day) - captures search intent post-audit
+3. **LinkedIn cold** ($20/day) - top-of-funnel, feeds retarget pool
 
 ---
 
@@ -63,7 +63,7 @@ COLD POOL (LinkedIn only):
 > You ran the audit. You saw the score. Every day you wait, the same visitors bounce.
 > $97 fixes the top 3 leaks in 30 minutes. Founders who implement see avg +$600/mo recovered.
 
-**CTA**: Fix the leaks — $97
+**CTA**: Fix the leaks - $97
 
 **UTM**: `utm_source=[channel]&utm_medium=paid&utm_campaign=retarget_loss_frame`
 
@@ -78,7 +78,7 @@ COLD POOL (LinkedIn only):
 > Fix takes 15 minutes. Average bounce rate improvement: 12%.
 > Your fix pack is waiting.
 
-**CTA**: Get my fix pack — $97
+**CTA**: Get my fix pack - $97
 
 **UTM**: `utm_source=[channel]&utm_medium=paid&utm_campaign=retarget_proof_frame`
 
@@ -92,7 +92,7 @@ COLD POOL (LinkedIn only):
 > Audit results are time-sensitive. Rankings shift. Ad spend burns.
 > Your 3 highest-impact fixes are in your fix pack. Implement before your audit resets.
 
-**CTA**: Claim fix pack before expiry — $97
+**CTA**: Claim fix pack before expiry - $97
 
 **UTM**: `utm_source=[channel]&utm_medium=paid&utm_campaign=retarget_urgency_frame`
 
@@ -187,7 +187,7 @@ Complete before spending any budget:
 - [ ] PostHog receiving paid traffic events
 
 ### Audiences (30 min)
-- [ ] Facebook Custom Audience: "Audit Results Viewers (30 days)" — min 100 people
+- [ ] Facebook Custom Audience: "Audit Results Viewers (30 days)" - min 100 people
 - [ ] Facebook Exclusion Audience: "Fix Pack Purchasers"
 - [ ] Google Remarketing List: "Audit Results Viewers"
 - [ ] LinkedIn Matched Audience: "Site Visitors" (needs 300 min)
@@ -241,7 +241,7 @@ All paid traffic flows into PostgreSQL CRM:
 4. LTV updated → `customers.lifetime_value_cents`
 5. Attribution visible → `GET /api/crm/sources`
 
-**Weekly review includes**: revenue from paid vs organic  
+**Weekly review includes**: revenue from paid vs organic
 **Kill decision based on**: CPA from CRM, not ad platform (more accurate)
 
 ---
@@ -253,7 +253,7 @@ All paid traffic flows into PostgreSQL CRM:
 - Additional purchases: 5-15/month
 - Revenue from paid: $485-1,455/month
 - Net after ad spend ($3,000): -$1,545 to -$2,515
-- **Status**: Learning phase (not profitable yet — normal)
+- **Status**: Learning phase (not profitable yet - normal)
 
 ### Month 2 (Optimized):
 - Retarget pool growing: 200-500 people/month
@@ -281,7 +281,7 @@ Without strong organic (newsletter, SEO, WOM), paid alone will be marginal.
 
 **Status**: Fully documented. Ready to activate on budget approval.
 
-**Activation time**: ~3 hours (technical setup + creative + launch)  
-**Time to first data**: 48 hours  
-**Time to first optimization decision**: 7 days  
+**Activation time**: ~3 hours (technical setup + creative + launch)
+**Time to first data**: 48 hours
+**Time to first optimization decision**: 7 days
 **Time to first profitable month**: 60-90 days

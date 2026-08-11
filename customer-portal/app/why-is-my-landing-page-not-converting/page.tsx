@@ -4,7 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Why Is My Landing Page Not Converting? 12 Root Causes (Diagnostic Guide) | Nebula',
   description:
-    'The complete diagnostic guide to landing pages getting clicks but no conversions. 12 measurable root causes — message match, above-fold clarity, trust proximity, page speed, mobile UX, form friction — with fixes.',
+    'The complete diagnostic guide to landing pages getting clicks but no conversions. 12 measurable root causes - message match, above-fold clarity, trust proximity, page speed, mobile UX, form friction - with fixes.',
   alternates: {
     canonical: 'https://nebulacomponents.com/why-is-my-landing-page-not-converting',
   },
@@ -86,13 +86,13 @@ const diagnostics = [
     title: 'Message Match Is Broken',
     subtitle: 'The ad promised one thing. The page leads with another.',
     check: 'Open your page beside your active ad creative. Does the H1 repeat the same promise, offer, and core terminology? A headline that says "Transform Your Enterprise Stack" when the ad promised a "Free SaaS Pricing Audit" breaks intent in the first 3 seconds.',
-    fix: 'Rewrite the H1 to mirror the ad copy exactly — same offer, same words, same outcome. Do this before touching anything else; it is the highest-leverage fix for paid traffic.',
+    fix: 'Rewrite the H1 to mirror the ad copy exactly - same offer, same words, same outcome. Do this before touching anything else; it is the highest-leverage fix for paid traffic.',
     signal: 'High bounce in the first 5 seconds (70%+).',
   },
   {
     title: 'The Above-Fold Area Does Not Answer "What Is This?"',
     subtitle: 'Visitors need clarity in the first 600px of vertical space.',
-    check: 'On a 1366x768 viewport, can a first-time visitor state what the page offers, who it is for, and what to do next — without scrolling? The fold area should contain: a clear headline, a one-sentence value proposition, a single primary CTA, and one proof signal.',
+    check: 'On a 1366x768 viewport, can a first-time visitor state what the page offers, who it is for, and what to do next - without scrolling? The fold area should contain: a clear headline, a one-sentence value proposition, a single primary CTA, and one proof signal.',
     fix: 'If any of those four elements is missing above the fold, add it. Remove competing secondary CTAs that split attention.',
     signal: 'Low scroll depth combined with high exit rate.',
   },
@@ -100,8 +100,8 @@ const diagnostics = [
     title: 'Trust Signals Are Buried or Missing',
     subtitle: 'Cold paid traffic does not scroll four screens looking for proof.',
     check: 'Within the 100px surrounding your primary CTA, is there a verifiable proof element: client count, rating, testimonial snippet, security badge, or recognizable logo? If your proof is at the bottom of the page, most paid visitors never see it.',
-    fix: 'Place one concrete, verifiable proof signal directly adjacent to the CTA — a real number, a named customer, or a rating with a source. Generic "trusted by" logo walls without context do not move cold traffic.',
-    signal: 'High scroll depth but no click — visitors read but do not believe.',
+    fix: 'Place one concrete, verifiable proof signal directly adjacent to the CTA - a real number, a named customer, or a rating with a source. Generic "trusted by" logo walls without context do not move cold traffic.',
+    signal: 'High scroll depth but no click - visitors read but do not believe.',
   },
   {
     title: 'Page Speed Is Costing You Conversions',
@@ -120,14 +120,14 @@ const diagnostics = [
   {
     title: 'Your CTA Is Ambiguous or Competing',
     subtitle: 'Two CTAs is no CTA.',
-    check: 'Count the calls to action on the page. If there are two or more equally weighted buttons — "Get Started", "Learn More", "Contact Us", "View Pricing" — visitors cannot tell which action moves them forward. Also check that the CTA button color contrasts against the page background.',
+    check: 'Count the calls to action on the page. If there are two or more equally weighted buttons - "Get Started", "Learn More", "Contact Us", "View Pricing" - visitors cannot tell which action moves them forward. Also check that the CTA button color contrasts against the page background.',
     fix: 'Choose one primary action per page. Style it with maximum contrast, keep secondary links subtle text links, and make the CTA label specific to the outcome ("Get My Free Audit" beats "Submit").',
     signal: 'Low click rate on the primary button despite high engagement.',
   },
   {
     title: 'Social Proof Is Vague or Generic',
     subtitle: '"Trusted by 100+ companies" is not evidence.',
-    check: 'Does your proof include specifics — a named logo, a quantified result, a datapoint with a source? Generic claims without verifiable detail actually reduce trust for skeptical paid traffic.',
+    check: 'Does your proof include specifics - a named logo, a quantified result, a datapoint with a source? Generic claims without verifiable detail actually reduce trust for skeptical paid traffic.',
     fix: 'Replace vague claims with one specific, verifiable case: "We cut client X\u2019s form abandonment from 61% to 34% in 30 days" with a real page link. One concrete proof outperforms ten generic logos.',
     signal: 'Visitors read the full page but never take action.',
   },
@@ -135,13 +135,13 @@ const diagnostics = [
     title: 'Form Friction Is Killing the Finish',
     subtitle: 'Every field is a place to leave.',
     check: 'How many fields does your form require? Are optional fields marked as optional? Is there inline validation or does the visitor find out about errors only after clicking submit? Is privacy communicated near the form?',
-    fix: 'Cut fields to the minimum needed to qualify the lead — name and email when possible. Add inline validation, communicate privacy in one line under the button, and use a single-column layout.',
+    fix: 'Cut fields to the minimum needed to qualify the lead - name and email when possible. Add inline validation, communicate privacy in one line under the button, and use a single-column layout.',
     signal: 'Form started but never submitted (high field-engagement, zero completion).',
   },
   {
     title: 'Objections Are Never Answered',
     subtitle: 'The visitor is ready to leave with a question you did not answer.',
-    check: 'List the five biggest objections a skeptical buyer would have about your offer — price, time to result, risk, alternatives, credibility. Is each one answered on the page, or does the page assume the visitor is already convinced?',
+    check: 'List the five biggest objections a skeptical buyer would have about your offer - price, time to result, risk, alternatives, credibility. Is each one answered on the page, or does the page assume the visitor is already convinced?',
     fix: 'Add a compact FAQ block, a risk-reversal statement (refund policy, no-lock-in), or a "how it works" section directly above the final CTA.',
     signal: 'Repeated visits to the same page with no conversion.',
   },
@@ -155,15 +155,15 @@ const diagnostics = [
   {
     title: 'No Next Step After the Primary Action',
     subtitle: 'The conversion path ends in a dead end.',
-    check: 'What happens after someone clicks the CTA? Does the next page continue the message match? Is there a fallback for visitors who are not ready — a secondary offer, a resource, or a clear exit? A checkout or form page that looks nothing like the landing page can kill conversions at the last step.',
+    check: 'What happens after someone clicks the CTA? Does the next page continue the message match? Is there a fallback for visitors who are not ready - a secondary offer, a resource, or a clear exit? A checkout or form page that looks nothing like the landing page can kill conversions at the last step.',
     fix: 'Extend message match to the entire post-click path. Keep the same headline promise on the next page. Add a low-friction secondary option (download a guide, watch a demo) for non-ready visitors.',
-    signal: 'High CTA click rate but very low final conversion — the leak is downstream.',
+    signal: 'High CTA click rate but very low final conversion - the leak is downstream.',
   },
   {
     title: 'You Diagnosed the Wrong Layer Entirely',
     subtitle: 'Sometimes the page is fine and the problem is upstream.',
     check: 'Before rebuilding your page, verify the traffic itself: is the keyword or audience in the ad actually matched to the offer? Is the offer competitive on price? Is the creative promise something the page can deliver? An automated page audit cannot measure ad audience quality or market demand.',
-    fix: 'Isolate the layer: run a controlled A/B test with a changed headline against your current page. If conversion does not move with the page change, the bottleneck is upstream in targeting, offer, or price — not the DOM.',
+    fix: 'Isolate the layer: run a controlled A/B test with a changed headline against your current page. If conversion does not move with the page change, the bottleneck is upstream in targeting, offer, or price - not the DOM.',
     signal: 'Page scores well on every check but conversions stay flat.',
   },
 ]
@@ -196,7 +196,7 @@ export default function WhyNotConvertingPage() {
               When paid traffic brings visitors but no sales or leads, the instinct is to rewrite
               ads or increase campaign budget. Before spending more money on acquisition, diagnose
               the post-click page mechanics that cause visitors to bounce. This guide walks through
-              12 measurable root causes — in the order we check them.
+              12 measurable root causes - in the order we check them.
             </p>
           </header>
 
@@ -231,7 +231,7 @@ export default function WhyNotConvertingPage() {
               </ul>
               <p>
                 Work through the checklist in the order below. Each step isolates one layer of
-                friction. Skip the diagnosis and you risk "fixing" the wrong layer — changing
+                friction. Skip the diagnosis and you risk "fixing" the wrong layer - changing
                 headlines when the problem was page speed, or rebuilding a page when the problem
                 was audience targeting.
               </p>
@@ -309,12 +309,12 @@ export default function WhyNotConvertingPage() {
 
           <section className="mb-12 rounded-2xl border border-border bg-bg-muted/30 p-8 text-center">
             <h2 className="text-2xl font-bold text-fg mb-3">
-              Skip the Guessing — Run the 9-Signal Audit
+              Skip the Guessing - Run the 9-Signal Audit
             </h2>
             <p className="text-sm text-fg-muted max-w-xl mx-auto mb-6">
-              Nebula&apos;s free landing page audit inspects observable DOM mechanics on your URL —
+              Nebula&apos;s free landing page audit inspects observable DOM mechanics on your URL -
               headline clarity, CTA contrast, trust proximity, mobile viewport, page weight, and
-              more — and returns ranked findings with exact measured values. See our own
+              more - and returns ranked findings with exact measured values. See our own
               self-audit in the <Link href="/teardowns" className="text-accent hover:underline">teardowns</Link>.
             </p>
             <Link

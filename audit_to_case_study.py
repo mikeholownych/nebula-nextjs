@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-audit_to_case_study.py — Generate public, SEO-optimized case study pages from delivered audits.
+audit_to_case_study.py - Generate public, SEO-optimized case study pages from delivered audits.
 
 Each delivered audit becomes an anonymous, indexable case study that ranks for:
 - "landing page audit [vertical]"
@@ -69,14 +69,14 @@ def generate_case_study_html(entry: dict, slug: str, vertical: str) -> str:
     grade = entry.get("overall_grade", "?")
     domain = urlparse(url).netloc.replace("www.", "") if url else "unknown"
     timestamp = entry.get("timestamp", datetime.now(timezone.utc).isoformat())
-    
+
     # Parse timestamp for display
     try:
         dt = datetime.fromisoformat(timestamp.replace("Z", "+00:00"))
         date_str = dt.strftime("%B %d, %Y")
     except:
         date_str = "Recent"
-    
+
     # Dimension labels for display
     dim_labels = {
         "headline": "Headline Clarity",
@@ -85,7 +85,7 @@ def generate_case_study_html(entry: dict, slug: str, vertical: str) -> str:
         "speed": "Page Speed",
         "mobile": "Mobile Experience",
     }
-    
+
     # Build dimension breakdown (from audit_leads we may not have full dimensions,
     # but we can infer from score)
     issues = []
@@ -107,31 +107,31 @@ def generate_case_study_html(entry: dict, slug: str, vertical: str) -> str:
             ("Call-to-Action", "Action-oriented CTA with clear value proposition."),
             ("Social Proof", "Testimonials/logos positioned near primary CTA."),
         ]
-    
+
     vertical_display = vertical.replace("_", " ").title()
-    
+
     html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Study: {vertical_display} Landing Page Audit — {overall}/10 Score | Nebula Components</title>
+    <title>Case Study: {vertical_display} Landing Page Audit - {overall}/10 Score | Nebula Components</title>
     <meta name="description" content="See how a {vertical_display} landing page scored {overall}/10 on conversion audit. Real issues found, exact fixes applied. Free audit tool included.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://nebulacomponents.com/case-studies/{slug}.html">
-    
+
     <!-- Open Graph -->
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Case Study: {vertical_display} Landing Page Audit — {overall}/10">
+    <meta property="og:title" content="Case Study: {vertical_display} Landing Page Audit - {overall}/10">
     <meta property="og:description" content="Real conversion audit breakdown for a {vertical_display} site. Score: {overall}/10. See the exact leaks and fixes.">
     <meta property="og:url" content="https://nebulacomponents.com/case-studies/{slug}.html">
     <meta property="og:site_name" content="Nebula Components">
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Case Study: {vertical_display} Landing Page Audit — {overall}/10">
+    <meta name="twitter:title" content="Case Study: {vertical_display} Landing Page Audit - {overall}/10">
     <meta name="twitter:description" content="Real conversion audit breakdown for a {vertical_display} site. Score: {overall}/10.">
-    
+
     <!-- Schema.org -->
     <script type="application/ld+json">
     {{
@@ -159,7 +159,7 @@ def generate_case_study_html(entry: dict, slug: str, vertical: str) -> str:
         }}
     }}
     </script>
-    
+
     <style>
         * {{ box-sizing: border-box; margin: 0; padding: 0; }}
         body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1f2937; background: #fafafa; }}
@@ -197,7 +197,7 @@ def generate_case_study_html(entry: dict, slug: str, vertical: str) -> str:
         <div class="badge">Case Study · {vertical_display}</div>
         <h1>How a {vertical_display} Landing Page Scored <strong>{overall}/10</strong> on Conversion Audit</h1>
         <div class="meta">Published {date_str} · <span class="anonymized">Domain anonymized for privacy</span></div>
-        
+
         <div class="score-card">
             <div class="score-circle grade-{grade.lower()}">
                 <span class="score-value">{overall}</span>
@@ -209,35 +209,35 @@ def generate_case_study_html(entry: dict, slug: str, vertical: str) -> str:
                 <p class="anonymized">Original URL: {domain} (anonymized)</p>
             </div>
         </div>
-        
+
         <div class="section">
             <h2>What the Audit Found</h2>
 """
-    
+
     for title, desc in issues:
         html += f"""            <div class="issue">
                 <div class="issue-title">{title}</div>
                 <div class="issue-desc">{desc}</div>
             </div>
 """
-    
+
     html += f"""        </div>
-        
+
         <div class="section">
             <h2>The Pattern</h2>
             <p style="color: #374151;">Most {vertical_display.lower()} landing pages fail on the same three levers: <strong>headline specificity</strong>, <strong>CTA clarity</strong>, and <strong>proof placement</strong>. This audit scored {overall}/10 because {'the headline names the outcome but the CTA and proof are weak' if overall < 7 else 'it has the fundamentals but misses the conversion multipliers'}.</p>
-            <p style="color: #374151; margin-top: 12px;">The fix isn't a redesign — it's surgical edits to the first screen: outcome-first headline, action+outcome CTA button, and one proof element within 200px of that button.</p>
+            <p style="color: #374151; margin-top: 12px;">The fix isn't a redesign - it's surgical edits to the first screen: outcome-first headline, action+outcome CTA button, and one proof element within 200px of that button.</p>
         </div>
-        
+
         <div class="cta-box">
             <h3>Audit Your Own Page in 60 Seconds</h3>
             <p>Paste your URL → get a full conversion scorecard with exact fixes.</p>
             <a href="https://nebulacomponents.com/audit.html" class="btn">Run Free Audit →</a>
         </div>
-        
+
         <div class="footer-note">
             <p>This case study is based on a real automated audit. Domain and identifying details anonymized.<br>
-            Nebula Components — landing page components that convert.</p>
+            Nebula Components - landing page components that convert.</p>
         </div>
     </div>
 </body>
@@ -247,7 +247,7 @@ def generate_case_study_html(entry: dict, slug: str, vertical: str) -> str:
 def generate_index_page(case_studies: list):
     """Generate index page listing all case studies."""
     CASE_STUDIES_DIR.mkdir(parents=True, exist_ok=True)
-    
+
     html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -291,10 +291,10 @@ def generate_index_page(case_studies: list):
             <h1>Landing Page Conversion Audit Case Studies</h1>
             <p>Real audits. Real scores. Real patterns. <a href="https://nebulacomponents.com/audit.html" style="color: #047857;">Run your own free audit →</a></p>
         </div>
-        
+
         <div class="grid">
 """
-    
+
     for cs in case_studies:
         grade = cs.get("grade", "C").lower()
         slug = cs.get("slug", "")
@@ -313,9 +313,9 @@ def generate_index_page(case_studies: list):
                 </div>
             </article>
 """
-    
+
     html += """        </div>
-        
+
         <div class="cta-banner">
             <h2>Audit Your Own Page Free</h2>
             <p>Paste your URL → get a 5-dimension conversion scorecard with exact fixes in 60 seconds.</p>
@@ -324,7 +324,7 @@ def generate_index_page(case_studies: list):
     </div>
 </body>
 </html>"""
-    
+
     (CASE_STUDIES_DIR / "index.html").write_text(html)
     print(f"  Generated index.html with {len(case_studies)} case studies")
 
@@ -332,26 +332,26 @@ def main():
     # Check for generator freeze (Wave 0 route baseline)
     freeze_file = NEBULA / ".generator-freeze"
     if freeze_file.exists():
-        print("⛔ Generator FROZEN — route baseline capture in progress")
+        print("⛔ Generator FROZEN - route baseline capture in progress")
         print(f"   Freeze file: {freeze_file}")
         print("   To thaw: Remove .generator-freeze or set FROZED=false")
         return
-    
+
     latest_only = "--latest" in sys.argv
     state = load_state()
-    
+
     if not AUDIT_LEADS.exists():
         print("No audit_leads.jsonl found")
         return
-    
+
     CASE_STUDIES_DIR.mkdir(parents=True, exist_ok=True)
-    
+
     lines = AUDIT_LEADS.read_text().strip().splitlines()
     start_line = state.get("last_processed_line", 0) if latest_only else 0
-    
+
     new_studies = []
     all_studies = state.get("generated_slugs", [])
-    
+
     for i, line in enumerate(lines[start_line:], start=start_line):
         if not line.strip():
             continue
@@ -359,15 +359,15 @@ def main():
             entry = json.loads(line)
         except:
             continue
-        
+
         email = entry.get("email", "").lower()
         url = entry.get("url", "")
         overall = entry.get("overall", 0)
         grade = entry.get("overall_grade", "C")
-        
+
         if not url or not email:
             continue
-        
+
         vertical = detect_vertical(url, entry)
         base_slug = f"{vertical}-{slugify(urlparse(url).netloc.replace('www.', ''))}"
         slug = base_slug
@@ -375,11 +375,11 @@ def main():
         while slug in all_studies:
             slug = f"{base_slug}-{counter}"
             counter += 1
-        
+
         # Generate case study
         html = generate_case_study_html(entry, slug, vertical)
         (CASE_STUDIES_DIR / f"{slug}.html").write_text(html)
-        
+
         study_meta = {
             "slug": slug,
             "vertical": vertical,
@@ -391,7 +391,7 @@ def main():
         new_studies.append(study_meta)
         all_studies.append(slug)
         print(f"  Generated: {slug}.html ({vertical}, {overall}/10)")
-    
+
     # Update index with ALL studies (re-read all)
     all_meta = []
     for slug in all_studies:
@@ -420,13 +420,13 @@ def main():
                     "vertical": m_vertical.group(1).lower().replace(" ", "_"),
                     "date": m_date.group(1).strip(),
                 })
-    
+
     generate_index_page(all_studies_meta)
-    
+
     state["last_processed_line"] = len(lines)
     state["generated_slugs"] = all_studies
     save_state(state)
-    
+
     print(f"\nDone. Generated {len(new_studies)} new case studies. Total: {len(all_studies)}")
     print(f"Index: https://nebulacomponents.com/case-studies/")
 

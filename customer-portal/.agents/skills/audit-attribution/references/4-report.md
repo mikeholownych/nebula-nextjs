@@ -1,6 +1,6 @@
-# Step 4 — Generate the audit report
+# Step 4 - Generate the audit report
 
-The audit report is rendered **directly from `.posthog-audit-checks.json`** — that file is the source of truth. Every check the wizard seeded for this skill ends up in the report, even passes; nothing is invented.
+The audit report is rendered **directly from `.posthog-audit-checks.json`** - that file is the source of truth. Every check the wizard seeded for this skill ends up in the report, even passes; nothing is invented.
 
 ## Status
 
@@ -18,12 +18,12 @@ Emit:
 
 The report has four sections in this order:
 
-1. **Summary** — one-paragraph overview, severity counts, and a problematic-items table.
-2. **Recommended actions** — prioritized fixes with `file:line` where applicable.
-3. **Full audit** — every check the wizard ran, grouped by `area`, including passes.
-4. **About this audit** — short closing block explaining what this audit covered.
+1. **Summary** - one-paragraph overview, severity counts, and a problematic-items table.
+2. **Recommended actions** - prioritized fixes with `file:line` where applicable.
+3. **Full audit** - every check the wizard ran, grouped by `area`, including passes.
+4. **About this audit** - short closing block explaining what this audit covered.
 
-For the Full audit section, group rows by each distinct `area` value in the ledger, preserving first-seen area order from the JSON. This skill produces two areas: **Attribution** (fix) and **Attribution — Configuration** (config). Render whatever areas the ledger actually contains.
+For the Full audit section, group rows by each distinct `area` value in the ledger, preserving first-seen area order from the JSON. This skill produces two areas: **Attribution** (fix) and **Attribution - Configuration** (config). Render whatever areas the ledger actually contains.
 
 For each area, write a one-paragraph framing immediately under the area heading, then the table.
 
@@ -34,7 +34,7 @@ For each area, write a one-paragraph framing immediately under the area heading,
 
 ## Summary
 
-[1–2 sentence overview: which surfaces are covered (landing, auth, conversion), overall attribution health, and which lens — fix or configuration — surfaced issues.]
+[1–2 sentence overview: which surfaces are covered (landing, auth, conversion), overall attribution health, and which lens - fix or configuration - surfaced issues.]
 
 **Counts**
 
@@ -43,25 +43,25 @@ For each area, write a one-paragraph framing immediately under the area heading,
 - **Suggestions**: [N] (nice to have)
 - **Passes**: [N]
 
-**Problematic items** _(only `error`, `warning`, `suggestion` — no passes)_
+**Problematic items** _(only `error`, `warning`, `suggestion` - no passes)_
 
 | Severity | Area | Check | File | Details |
 |----------|------|-------|------|---------|
 | `error` | Attribution | [label] | [file:line] | [details] |
 
-If there are no problematic items, write `_No issues found — your attribution setup looks healthy._` instead of the table.
+If there are no problematic items, write `_No issues found - your attribution setup looks healthy._` instead of the table.
 
 ## Recommended actions
 
-Numbered list, ordered by severity (errors → warnings → suggestions), then by area within a severity (Attribution → Attribution — Configuration). Each item is **three sentences**, in this order:
+Numbered list, ordered by severity (errors → warnings → suggestions), then by area within a severity (Attribution → Attribution - Configuration). Each item is **three sentences**, in this order:
 
-1. **What's wrong** — the finding, written as a one-sentence diagnosis derived from `details`.
-2. **Why it matters** — one sentence on the attribution-data-quality consequence (lost UTM trace, untrackable cross-session signup, broken cross-subdomain identity, missing click-id for conversion API).
-3. **How to fix** — one short imperative sentence pointing at `file:line` and the concrete change. End with a docs link.
+1. **What's wrong** - the finding, written as a one-sentence diagnosis derived from `details`.
+2. **Why it matters** - one sentence on the attribution-data-quality consequence (lost UTM trace, untrackable cross-session signup, broken cross-subdomain identity, missing click-id for conversion API).
+3. **How to fix** - one short imperative sentence pointing at `file:line` and the concrete change. End with a docs link.
 
 Format:
 
-1. **[Area] · [label]** — [what's wrong]. _Why it matters:_ [why-it-matters]. _Fix:_ [how-to-fix at `file:line`]. See [docs]([area docs url]).
+1. **[Area] · [label]** - [what's wrong]. _Why it matters:_ [why-it-matters]. _Fix:_ [how-to-fix at `file:line`]. See [docs]([area docs url]).
 
 Suggested docs URLs:
 - `attribution-utm-survives-landing`, `attribution-survives-auth-redirect`, `attribution-on-conversion-events`, `attribution-custom-click-ids` → https://posthog.com/docs/data/utm-segmentation
@@ -81,7 +81,7 @@ This area covers attribution capture quality: whether UTM parameters survive cli
 |-------|--------|------|---------|
 | [label] | [status] | [file] | [details] |
 
-### Attribution — Configuration
+### Attribution - Configuration
 
 This area covers configuration-side attribution health: `cross_subdomain_cookie` on multi-subdomain projects (so marketing-host UTMs follow the user to the app host), `cookieless_mode` and its tradeoff against cross-session attribution, and consent-banner integration with PostHog's opt-in / opt-out APIs.
 
@@ -103,7 +103,7 @@ When an area produced only `pass` rows, write `_No findings to qualify; the stan
 
 ## About this audit
 
-This audit ran the PostHog `audit-attribution` skill — a focused, read-only check of attribution capture health across two lenses: **fix** (capture quality on landing, redirects, conversion events) and **configuration** (cross-subdomain identity, cookieless / consent interactions). All checks scan the project source; none require PostHog MCP access. Attribution checks include conservative skip conditions (`no auth redirect`, `no consent surface`, `no paid-acquisition signal`) so single-host product-only projects don't get noisy warnings.
+This audit ran the PostHog `audit-attribution` skill - a focused, read-only check of attribution capture health across two lenses: **fix** (capture quality on landing, redirects, conversion events) and **configuration** (cross-subdomain identity, cookieless / consent interactions). All checks scan the project source; none require PostHog MCP access. Attribution checks include conservative skip conditions (`no auth redirect`, `no consent surface`, `no paid-acquisition signal`) so single-host product-only projects don't get noisy warnings.
 
 - `error` items break attribution now (broken cross-subdomain identity, guaranteed UTM loss). Fix first.
 - `warning` items work today but cause silent attribution loss (un-preserved UTMs through auth, missing click ids, cookieless × paid-acquisition mismatch). Fix when convenient.

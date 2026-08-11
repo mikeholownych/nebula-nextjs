@@ -69,10 +69,10 @@ def extract_jsonld_date(html):
 converted = 0
 for filepath in files_to_convert:
     print(f"Processing {filepath.name}...")
-    
+
     with open(filepath, 'r') as f:
         html = f.read()
-    
+
     # Extract data
     category = extract_category(html)
     score = extract_score(html)
@@ -81,19 +81,19 @@ for filepath in files_to_convert:
     issues = extract_issues(html)
     pattern_text = extract_pattern_text(html)
     date_published = extract_jsonld_date(html)
-    
+
     slug = filepath.name.replace(".html", "")
-    
+
     # Create directory
     target_dir = TARGET_DIR / slug
     target_dir.mkdir(exist_ok=True)
-    
+
     # Build the issues array as proper JSON
     issues_json = json.dumps(issues, ensure_ascii=False)
-    
+
     # Build pattern text - escape for JSX
     pattern_escaped = pattern_text.replace('\\', '\\\\').replace('"', '\\"')
-    
+
     # Create JSON-LD object
     jsonld_obj = {
         "@context": "https://schema.org",
@@ -119,16 +119,16 @@ for filepath in files_to_convert:
             "unitText": "/10"
         }
     }
-    
+
     # Write the file
     target_file = target_dir / "page.tsx"
-    
+
     with open(target_file, 'w') as f:
         f.write(f'''import {{ Metadata }} from 'next';
 import CaseStudyPage from '../../CaseStudyPage';
 
 export const metadata: Metadata = {{
-  title: "Case Study: {category} Landing Page Audit — {score}/10 Score | Nebula Components",
+  title: "Case Study: {category} Landing Page Audit - {score}/10 Score | Nebula Components",
   description: "See how a {category} landing page scored {score}/10 on conversion audit. Real issues found, exact fixes applied. Free audit tool included.",
 }};
 
@@ -149,7 +149,7 @@ export default function Page() {{
   );
 }}
 ''')
-    
+
     converted += 1
     print(f"  ✓ Created {target_file}")
 

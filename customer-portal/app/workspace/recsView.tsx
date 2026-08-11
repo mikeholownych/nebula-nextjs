@@ -235,7 +235,7 @@ export default function RecsView({
         <div className="bg-bg-elevated border border-border rounded-lg p-10 text-center">
           <h2 className="text-xl font-bold mb-2">No recommendations yet</h2>
           <p className="text-fg-muted mb-6 max-w-md mx-auto">
-            Findings from your audits become cards here. Fix them, move them to Done — and the
+            Findings from your audits become cards here. Fix them, move them to Done - and the
             next audit checks whether they actually passed.
           </p>
           <a
@@ -258,7 +258,7 @@ export default function RecsView({
 
       <div className="flex items-center justify-between">
         <p className="text-sm text-fg-muted">
-          Findings tracked as work. Move cards, fix the page, then run a follow-up audit — anything
+          Findings tracked as work. Move cards, fix the page, then run a follow-up audit - anything
           it stops flagging is verified automatically.
         </p>
         <button
@@ -315,7 +315,7 @@ export default function RecsView({
                       </div>
                       <p className="text-xs text-fg-dim mb-1">
                         {domainOf(rec.url)} · impact {rec.impact.toFixed(1)} ·{' '}
-                        {quadrantLabel(rec.quadrant) || '—'}
+                        {quadrantLabel(rec.quadrant) || '-'}
                       </p>
                       {rec.verified_at && (
                         <p className="text-xs text-accent mb-2">

@@ -17,7 +17,7 @@ export default function CaseStudiesContent({
         <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
           {hasPublishedStudies
             ? 'Published, evidence-backed case studies'
-            : <>No client case studies yet — here is what the engine does instead.</>}
+            : <>No client case studies yet - here is what the engine does instead.</>}
         </h1>
         {hasPublishedStudies ? (
           <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
@@ -28,7 +28,7 @@ export default function CaseStudiesContent({
           <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
             A client case study requires a real before-and-after number and dates you could
             verify. We don&apos;t have one to publish yet. Instead, we run the same audit engine
-            on well-known public pages and publish the raw findings — so you can evaluate the
+            on well-known public pages and publish the raw findings - so you can evaluate the
             tool against pages you already know.
           </p>
         )}
@@ -67,7 +67,7 @@ export default function CaseStudiesContent({
         </section>
       ) : (
         <>
-          {/* Public teardowns — evidence of what the engine produces */}
+          {/* Public teardowns - evidence of what the engine produces */}
           <section className="border-t border-border px-6 py-16">
             <div className="mx-auto max-w-4xl">
               <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
@@ -78,7 +78,7 @@ export default function CaseStudiesContent({
               </h2>
               <p className="mb-8 max-w-2xl text-fg-muted leading-7">
                 These companies are not Nebula customers. We run the same 9-signal engine on their
-                public pages and publish the raw findings — evidence of what the audit produces on
+                public pages and publish the raw findings - evidence of what the audit produces on
                 pages you can verify yourself.
               </p>
               <div className="grid gap-6 md:grid-cols-2">

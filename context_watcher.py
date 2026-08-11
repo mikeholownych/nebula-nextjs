@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-CONTEXT.md Watcher — Nebula Components
+CONTEXT.md Watcher - Nebula Components
 Detects when source-of-truth files have changed since CONTEXT.md was last
 updated, then dispatches a Hermes agent to apply the delta.
 
@@ -107,7 +107,7 @@ def detect_changes(state: dict) -> list[dict]:
         old_sha = state['file_commits'].get(path)
 
         if new_sha and new_sha != old_sha:
-            diff = diff_since(path, old_sha) if old_sha else f"[new file — {path}]"
+            diff = diff_since(path, old_sha) if old_sha else f"[new file - {path}]"
             changes.append({
                 'path': path,
                 'affects': affects,
@@ -132,7 +132,7 @@ def build_agent_prompt(changes: list[dict], context_content: str) -> str:
     return f"""You are the CONTEXT.md maintenance agent for Nebula Components.
 
 Your job: update CONTEXT.md at /home/mike/nebula/customer-portal/CONTEXT.md
-to reflect the changes below. Make only targeted, factual edits — do not
+to reflect the changes below. Make only targeted, factual edits - do not
 restructure or rewrite sections that aren't affected.
 
 Rules:
@@ -144,8 +144,8 @@ Rules:
 - If an offer price changed, update the Product section
 - If nothing in a section changed, leave it exactly as-is
 - At the bottom of the file, append (or update) a `## Change Log` entry:
-  `- {datetime.now(timezone.utc).strftime('%Y-%m-%d')}: Updated by context_watcher — <one-line summary of what changed>`
-- Then commit: git -C /home/mike/nebula add customer-portal/CONTEXT.md && git -C /home/mike/nebula commit -m "docs(context): auto-update CONTEXT.md — <summary>"
+  `- {datetime.now(timezone.utc).strftime('%Y-%m-%d')}: Updated by context_watcher - <one-line summary of what changed>`
+- Then commit: git -C /home/mike/nebula add customer-portal/CONTEXT.md && git -C /home/mike/nebula commit -m "docs(context): auto-update CONTEXT.md - <summary>"
 
 ## Current CONTEXT.md
 
@@ -210,10 +210,10 @@ def main():
 
         log(f"Detected {len(changes)} changed file(s):")
         for c in changes:
-            log(f"  {c['path']} — {c['commit_summary']}")
+            log(f"  {c['path']} - {c['commit_summary']}")
 
         if not CONTEXT_FILE.exists():
-            log(f"CONTEXT.md missing at {CONTEXT_FILE} — skipping agent dispatch.")
+            log(f"CONTEXT.md missing at {CONTEXT_FILE} - skipping agent dispatch.")
             return
 
         context_content = CONTEXT_FILE.read_text()
@@ -234,7 +234,7 @@ def main():
             summary = ', '.join(c['path'].split('/')[-1] for c in changes)
             send_telegram(f"📖 CONTEXT.md updated\nTriggered by: {summary}")
         else:
-            log("Agent failed — state not updated, will retry next run.")
+            log("Agent failed - state not updated, will retry next run.")
 
     finally:
         release_lock()

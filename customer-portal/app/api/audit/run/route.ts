@@ -9,7 +9,7 @@ import { auditBodyDiscovery } from '@/lib/x402-discovery'
  *
  * x402 payment: $0.10 USDC per audit run
  * Agents without payment header receive HTTP 402 with payment requirements.
- * Human users coming through the UI are unaffected — the UI calls /api/audit/start,
+ * Human users coming through the UI are unaffected - the UI calls /api/audit/start,
  * not /api/audit/run directly.
  *
  * URL fix: withX402 reads req.url (which is localhost:3000 behind CF tunnel).
@@ -57,7 +57,7 @@ const routeConfig: RouteConfig = {
         payTo: WALLET_ADDRESS,
       },
     ],
-    description: 'Landing page conversion audit — scores headline, trust signals, CTA, mobile, form friction, load time, and message-match.',
+    description: 'Landing page conversion audit - scores headline, trust signals, CTA, mobile, form friction, load time, and message-match.',
     mimeType: 'application/json',
     extensions: auditBodyDiscovery,
   }
@@ -67,24 +67,24 @@ const x402HttpServer = new x402HTTPResourceServer(x402Server, {
 const x402Handler = withX402FromHTTPServer(handler, x402HttpServer)
 
 export async function POST(request: NextRequest) {
-  // withX402 reads req.url / req.nextUrl — which is localhost:3000 behind the CF tunnel.
+  // withX402 reads req.url / req.nextUrl - which is localhost:3000 behind the CF tunnel.
   // Monkey-patch nextUrl on a clone so the 402 payload emits the public resource URL.
   const publicUrl = new URL(
     request.nextUrl.pathname + request.nextUrl.search,
     SITE_URL,
   )
-  // NextRequest.nextUrl is a NextURL which extends URL — override href in place
+  // NextRequest.nextUrl is a NextURL which extends URL - override href in place
   Object.defineProperty(request, 'url', { value: publicUrl.toString(), writable: false })
   try {
     Object.assign(request.nextUrl, { href: publicUrl.toString() })
   } catch {
-    // nextUrl may be frozen; fall through — url override alone is sufficient
+    // nextUrl may be frozen; fall through - url override alone is sufficient
   }
   return x402Handler(request)
 }
 
 export async function GET() {
-  // Health check — proxy to FastAPI health endpoint (no payment required)
+  // Health check - proxy to FastAPI health endpoint (no payment required)
   try {
     const response = await fetch('http://127.0.0.1:8001/audit/health')
     const data = await response.json()

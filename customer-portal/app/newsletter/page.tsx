@@ -4,10 +4,10 @@ import { Card } from '@/components/ui/Card'
 import NewsletterForm from './NewsletterForm'
 
 export const metadata: Metadata = {
-  title: 'Newsletter — Nebula Components',
+  title: 'Newsletter - Nebula Components',
   description: 'Weekly landing page diagnostics. Real findings from 847 audits. How founders are fixing conversion leaks.',
   openGraph: {
-    title: 'Newsletter — Nebula Components',
+    title: 'Newsletter - Nebula Components',
     description: 'Weekly landing page diagnostics. Real findings from 847 audits. How founders are fixing conversion leaks.',
   },
 }
@@ -113,7 +113,7 @@ export default function NewsletterPage() {
           </div>
         </section>
 
-        {/* Signup Form — client component handles UTM + fetch */}
+        {/* Signup Form - client component handles UTM + fetch */}
         <section className="mb-16">
           <NewsletterForm />
         </section>

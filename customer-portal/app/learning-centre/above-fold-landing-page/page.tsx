@@ -69,7 +69,7 @@ const faqSchema = {
       name: 'What\'s the difference between above-the-fold on mobile vs. desktop?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Mobile viewports are taller (390-844px) but narrower, compressing elements vertically while allowing more content to stack. Desktop viewports (1280px+) display content side-by-side. A headline and CTA visible on desktop may require scrolling on mobile. Always test both—mobile typically drives higher paid traffic volume and lower scroll-through rates.',
+        text: 'Mobile viewports are taller (390-844px) but narrower, compressing elements vertically while allowing more content to stack. Desktop viewports (1280px+) display content side-by-side. A headline and CTA visible on desktop may require scrolling on mobile. Always test both-mobile typically drives higher paid traffic volume and lower scroll-through rates.',
       },
     },
     {
@@ -77,7 +77,7 @@ const faqSchema = {
       name: 'How do I test which above-the-fold elements drive conversions?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Run A/B tests isolating one element: headline text, proof signal type, CTA copy, or visual treatment. Track conversion rate by traffic segment. Use heatmaps and session recordings to observe where visitors focus first. Measure time-to-scroll and exit rate before fold—high exits indicate the above-fold section didn\'t convince them to stay.',
+        text: 'Run A/B tests isolating one element: headline text, proof signal type, CTA copy, or visual treatment. Track conversion rate by traffic segment. Use heatmaps and session recordings to observe where visitors focus first. Measure time-to-scroll and exit rate before fold-high exits indicate the above-fold section didn\'t convince them to stay.',
       },
     },
     {
@@ -128,7 +128,7 @@ export default function AboveFoldLandingPagePage() {
             </p>
           </div>
 
-          {/* Section 1 — 5 required elements */}
+          {/* Section 1 - 5 required elements */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               The 5 elements required above the fold
@@ -178,7 +178,7 @@ export default function AboveFoldLandingPagePage() {
             </p>
           </section>
 
-          {/* Section 2 — Common failures */}
+          {/* Section 2 - Common failures */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               The most common above-fold failures
@@ -220,7 +220,7 @@ export default function AboveFoldLandingPagePage() {
             </ul>
           </section>
 
-          {/* Section 3 — fold varies by device */}
+          {/* Section 3 - fold varies by device */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               The fold is different on every device - test both
@@ -256,7 +256,7 @@ export default function AboveFoldLandingPagePage() {
             </p>
           </section>
 
-          {/* Section 4 — visual hierarchy */}
+          {/* Section 4 - visual hierarchy */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Visual hierarchy: the reading order is the sales sequence
@@ -283,7 +283,7 @@ export default function AboveFoldLandingPagePage() {
             </p>
           </section>
 
-          {/* Section 5 — speed + fold */}
+          {/* Section 5 - speed + fold */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Speed and the fold: slow pages lose visitors before they see the

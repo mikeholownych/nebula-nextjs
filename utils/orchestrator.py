@@ -1,4 +1,4 @@
-"""Workflow orchestrator — loads YAML workflow, loads site memory, generates report."""
+"""Workflow orchestrator - loads YAML workflow, loads site memory, generates report."""
 import sys, json, yaml, logging, datetime, traceback
 from pathlib import Path
 
@@ -58,7 +58,7 @@ def run_workflow(workflow_path, site, target_url=None):
         # Interpolate
         args_str = json.dumps(args).replace("{target_url}", target_url or "").replace("{site}", site)
         step_args = json.loads(args_str)
-        log.info("  Step %s — skill: %s  args: %s", step_id, skill, step_args)
+        log.info("  Step %s - skill: %s  args: %s", step_id, skill, step_args)
         results["steps"].append({"id": step_id, "skill": skill, "args": step_args, "status": "queued"})
 
         # Build step prompt
@@ -81,7 +81,7 @@ Produce a concise report following the skill's methodology. Output markdown.
     report_name = f"{name}_{now.strftime('%Y%m%d_%H%M%S')}.md"
     report_path = REPORTS / report_name
 
-    lines = [f"# {name} — {brand}", f"", f"**Site:** {site}", f"**Run:** {now.isoformat()}"]
+    lines = [f"# {name} - {brand}", f"", f"**Site:** {site}", f"**Run:** {now.isoformat()}"]
     if target_url:
         lines.append(f"**Target:** {target_url}")
     lines += [
@@ -106,7 +106,7 @@ Produce a concise report following the skill's methodology. Output markdown.
     results["report"] = str(report_path)
 
     elapsed = (datetime.datetime.now() - started).total_seconds()
-    log.info("Workflow '%s' complete in %.1fs — report at %s", name, elapsed, report_path)
+    log.info("Workflow '%s' complete in %.1fs - report at %s", name, elapsed, report_path)
     return results
 
 

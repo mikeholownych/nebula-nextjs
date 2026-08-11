@@ -1,4 +1,4 @@
-"""Hunter.io Discover API — find founders/decision-makers by domain seed.
+"""Hunter.io Discover API - find founders/decision-makers by domain seed.
 
 Implements Stage 1 of the trigger-aware lead gen pipeline:
   Input: domain list (50–100 prospects)
@@ -27,7 +27,7 @@ def init_db():
     """Initialize lead_state.db with prospect + contact tables."""
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    
+
     # Prospects table: core entity
     c.execute("""
         CREATE TABLE IF NOT EXISTS prospects (
@@ -41,7 +41,7 @@ def init_db():
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
-    
+
     # Contacts table: email + name + job_title
     c.execute("""
         CREATE TABLE IF NOT EXISTS contacts (
@@ -58,7 +58,7 @@ def init_db():
             FOREIGN KEY(prospect_id) REFERENCES prospects(prospect_id)
         )
     """)
-    
+
     conn.commit()
     conn.close()
 
@@ -69,21 +69,21 @@ def _check_rate_limit():
     now = time.time()
     if now > _rate_bucket["reset_at"]:
         _rate_bucket = {"count": 0, "reset_at": now + RATE_LIMIT_WINDOW}
-    
+
     if _rate_bucket["count"] >= RATE_LIMIT_MAX:
         return False
-    
+
     _rate_bucket["count"] += 1
     return True
 
 
 def discover_from_domains(domain_list: list[str], limit=5) -> dict:
     """Query Hunter.io for founders/decision-makers from seed domains.
-    
+
     Args:
         domain_list: list of domains (e.g., ['acme.com', 'startup.io', ...])
         limit: max contacts per domain (typically 1–5 founders)
-    
+
     Returns:
         {
             "discovered": [
@@ -104,23 +104,23 @@ def discover_from_domains(domain_list: list[str], limit=5) -> dict:
         }
     """
     import requests
-    
+
     hunter_key = os.environ.get("HUNTER_KEY")
     if not hunter_key:
         raise ValueError("HUNTER_KEY not set in environment")
-    
+
     init_db()
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    
+
     discovered = []
     rate_limited = False
-    
+
     for domain in domain_list:
         if not _check_rate_limit():
             rate_limited = True
             break
-        
+
         # Hunter.io Discover API: find people by domain + seniority
         url = "https://api.hunter.io/v2/domain-search"
         params = {
@@ -130,7 +130,7 @@ def discover_from_domains(domain_list: list[str], limit=5) -> dict:
             "seniority": "founder,manager",  # founders + managers (decision-makers)
         }
         headers = {"Authorization": f"Bearer {hunter_key}"}
-        
+
         try:
             resp = requests.get(url, params=params, headers=headers, timeout=10)
             resp.raise_for_status()
@@ -138,7 +138,7 @@ def discover_from_domains(domain_list: list[str], limit=5) -> dict:
         except Exception as e:
             print(f"[discover] Hunter.io error for {domain}: {e}")
             continue
-        
+
         # Extract contacts
         for contact in data.get("data", {}).get("emails", []):
             prospect_id = f"{domain}_{contact.get('first_name', 'unknown').lower()}"
@@ -146,14 +146,14 @@ def discover_from_domains(domain_list: list[str], limit=5) -> dict:
             job_title = contact.get("position", "Founder/CEO")
             confidence = contact.get("confidence", 0.0)
             company_size = data.get("data", {}).get("company_size", "Unknown")
-            
+
             # Store in DB
             try:
                 c.execute("""
                     INSERT OR REPLACE INTO prospects (prospect_id, domain, company_name, company_size)
                     VALUES (?, ?, ?, ?)
                 """, (prospect_id, domain, contact.get("company"), company_size))
-                
+
                 c.execute("""
                     INSERT OR REPLACE INTO contacts
                     (contact_id, prospect_id, email, first_name, last_name, job_title, confidence)
@@ -167,7 +167,7 @@ def discover_from_domains(domain_list: list[str], limit=5) -> dict:
                     job_title,
                     confidence
                 ))
-                
+
                 discovered.append({
                     "prospect_id": prospect_id,
                     "domain": domain,
@@ -180,10 +180,10 @@ def discover_from_domains(domain_list: list[str], limit=5) -> dict:
                 })
             except sqlite3.IntegrityError:
                 pass  # Already exists, skip
-    
+
     conn.commit()
     conn.close()
-    
+
     return {
         "discovered": discovered,
         "rate_limited": rate_limited,
@@ -196,7 +196,7 @@ def list_prospects(status=None, limit=50) -> list[dict]:
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     c = conn.cursor()
-    
+
     if status:
         c.execute(
             "SELECT * FROM prospects WHERE status = ? LIMIT ?",
@@ -204,10 +204,10 @@ def list_prospects(status=None, limit=50) -> list[dict]:
         )
     else:
         c.execute("SELECT * FROM prospects LIMIT ?", (limit,))
-    
+
     rows = c.fetchall()
     conn.close()
-    
+
     return [dict(row) for row in rows]
 
 

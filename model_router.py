@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-model_router.py — cost-tiered model selection for the Nebula pipeline.
+model_router.py - cost-tiered model selection for the Nebula pipeline.
 
 Jack Roberts principle: "Fable 5 on Low beats Opus 4.8 on High for 60% less."
 Use the right model for the right job. Cheap for bulk, expensive for deep.
@@ -55,7 +55,7 @@ TIERS = {
         "fallback_strategy": "quality_first",
     },
     "audit": {
-        "description": "Landing page conversion audit — optimization analysis",
+        "description": "Landing page conversion audit - optimization analysis",
         "models": [
             {"name": "anthropic/claude-opus-4-7",     "provider": "openrouter", "input_cost": 0.015, "output_cost": 0.075},
             {"name": "anthropic/claude-sonnet-4-6",   "provider": "openrouter", "input_cost": 0.003,  "output_cost": 0.015},
@@ -180,7 +180,7 @@ if __name__ == "__main__":
     elif "--savings" in sys.argv:
         print(savings_report())
     else:
-        print("Model Router — cost-tiered model selection")
+        print("Model Router - cost-tiered model selection")
         print(f"Default picks:")
         for tier in TIERS:
             m = pick_model(tier)

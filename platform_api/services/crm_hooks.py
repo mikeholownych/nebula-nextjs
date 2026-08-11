@@ -1,21 +1,21 @@
-"""CRM integration hooks — wires every sales, marketing, and support touchpoint.
+"""CRM integration hooks - wires every sales, marketing, and support touchpoint.
 
 Imported and called at the right place in each pipeline stage.
 All calls are async, non-blocking, fail-silent (never break main flow).
 
 Touchpoints wired:
   Marketing:
-    audit_created()     — called in audit_api.py on every audit start
-    audit_completed()   — called in audit_api.py on every completed audit
-    newsletter_signup() — called in newsletter.py (already done via crm.newsletter_subscribe)
+    audit_created()     - called in audit_api.py on every audit start
+    audit_completed()   - called in audit_api.py on every completed audit
+    newsletter_signup() - called in newsletter.py (already done via crm.newsletter_subscribe)
 
   Sales:
-    outreach_sent()     — called in sequence_engine.py on D1/D7/D17 sends
-    reply_received()    — called in reply_monitor.py and n8n_reply_handler.py
+    outreach_sent()     - called in sequence_engine.py on D1/D7/D17 sends
+    reply_received()    - called in reply_monitor.py and n8n_reply_handler.py
 
   Support (post-purchase):
-    purchase_completed()  — called in Stripe webhook on charge.succeeded
-    support_feedback()    — called when feedback/objection logged
+    purchase_completed()  - called in Stripe webhook on charge.succeeded
+    support_feedback()    - called when feedback/objection logged
 
 Usage pattern (fail-silent):
     from platform_api.services.crm_hooks import audit_created
@@ -51,11 +51,11 @@ async def audit_created(
     utm_campaign: Optional[str] = None,
 ) -> None:
     """Called when any audit starts. Upserts prospect with first-touch UTM.
-    
-    Wire in: audit_api.py → run_audit() — after audit row is created.
+
+    Wire in: audit_api.py → run_audit() - after audit row is created.
     """
     if not email or "@invalid" in email:
-        return  # anonymous audit — skip
+        return  # anonymous audit - skip
     from platform_api.services.crm import upsert_prospect
     await _safe(upsert_prospect(
         email=email,
@@ -71,8 +71,8 @@ async def audit_completed(
     finding_count: int = 0,
 ) -> None:
     """Called when audit finishes with a score. Updates last_score + audit_count.
-    
-    Wire in: audit_api.py → run_audit() — after score is computed.
+
+    Wire in: audit_api.py → run_audit() - after score is computed.
     """
     if not email or "@invalid" in email:
         return
@@ -81,7 +81,7 @@ async def audit_completed(
         email=email,
         audit_score=score,
     ))
-    # Low score = high intent — bump to "interested" if still cold
+    # Low score = high intent - bump to "interested" if still cold
     if score <= 5:
         from platform_api.services.crm import update_crm_status
         from platform_api.services.audit_db import AuditDB
@@ -113,7 +113,7 @@ async def outreach_sent(
     signal_notes: Optional[str] = None,
 ) -> None:
     """Called when any outreach email is sent (D1/D7/D17).
-    
+
     Wire in: sequence_engine.py → send_d1(), and in run_sequence() D7/D17 sends.
     """
     if not email:
@@ -149,7 +149,7 @@ async def reply_received(
     source: str = "email",
 ) -> None:
     """Called when a prospect replies. Updates CRM status and logs feedback.
-    
+
     Wire in:
       - reply_monitor.py → when human reply detected
       - n8n_reply_handler.py → when reply classified
@@ -187,7 +187,7 @@ async def purchase_completed(
     stripe_payment_intent_id: Optional[str] = None,
 ) -> None:
     """Called on Stripe charge.succeeded. Updates CRM status + recalculates LTV.
-    
+
     Wire in: platform_api/routes/stripe_webhook.py → charge.succeeded handler.
     """
     if not email:
@@ -225,7 +225,7 @@ async def purchase_completed(
     except Exception as exc:
         log.warning("purchase_completed sequence stop failed: %s", exc)
 
-    # Trigger fix pack delivery (fail-silent — never block the payment record)
+    # Trigger fix pack delivery (fail-silent - never block the payment record)
     if product_type in ("fix_pack", "fix-pack", "97"):
         try:
             import asyncio as _aio
@@ -249,7 +249,7 @@ async def purchase_completed(
         except Exception as exc:
             log.warning("purchase_completed delivery trigger failed: %s", exc)
 
-    # Write lookalike signal — teaches the scanner what 'our customer' looks like
+    # Write lookalike signal - teaches the scanner what 'our customer' looks like
     try:
         from platform_api.services.crm import get_pool as _get_pool
         async def _write_lookalike():
@@ -283,7 +283,7 @@ async def support_objection(
     source: str = "support_email",
 ) -> None:
     """Called when support identifies a price/confidence/timing objection.
-    
+
     Wire in: support inbox monitor when classifying prospect emails.
     """
     from platform_api.services.crm import log_feedback
@@ -298,7 +298,7 @@ async def support_objection(
 
 async def customer_churned(email: str, reason: str = "") -> None:
     """Called when a Pro subscriber churns (subscription cancelled).
-    
+
     Wire in: Stripe customer.subscription.deleted webhook.
     """
     from platform_api.services.crm import update_crm_status, log_feedback

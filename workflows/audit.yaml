@@ -1,5 +1,5 @@
 name: full-audit
-description: "On-page SEO + content quality + technical health — full site audit"
+description: "On-page SEO + content quality + technical health - full site audit"
 icon: "\U0001F50D"
 steps:
   - id: on_page

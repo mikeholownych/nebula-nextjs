@@ -23,7 +23,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Landing Page Message Match: Ad-to-Page Alignment and Quality Score',
   description:
-    'Diagnostic guide for landing page message match failures — keyword mismatch, offer mismatch, audience mismatch, tone mismatch, visual mismatch, and CTA commitment mismatch between ad and page.',
+    'Diagnostic guide for landing page message match failures - keyword mismatch, offer mismatch, audience mismatch, tone mismatch, visual mismatch, and CTA commitment mismatch between ad and page.',
   author: { '@type': 'Organization', name: 'Nebula Components' },
   publisher: { '@type': 'Organization', name: 'Nebula Components' },
   mainEntityOfPage: 'https://nebulacomponents.com/landing-page-message-match',
@@ -36,11 +36,11 @@ const faqItems = [
   },
   {
     q: 'Does message match affect Quality Score?',
-    a: 'Yes. Google Ads Quality Score includes a landing page experience component that evaluates relevance between the keyword, ad, and landing page content. A high message match — ad keyword appears in the landing page H1, title tag, and meta description — improves Quality Score, which reduces CPC and improves ad placement.',
+    a: 'Yes. Google Ads Quality Score includes a landing page experience component that evaluates relevance between the keyword, ad, and landing page content. A high message match - ad keyword appears in the landing page H1, title tag, and meta description - improves Quality Score, which reduces CPC and improves ad placement.',
   },
   {
     q: 'How closely should the landing page headline match the ad?',
-    a: "The core promise should match within 3 words. If the ad says 'free landing page audit', the H1 should contain 'landing page audit'. The exact phrasing can vary, but the central value claim — what the visitor gets — must be immediately recognizable from the ad they clicked.",
+    a: "The core promise should match within 3 words. If the ad says 'free landing page audit', the H1 should contain 'landing page audit'. The exact phrasing can vary, but the central value claim - what the visitor gets - must be immediately recognizable from the ad they clicked.",
   },
   {
     q: 'What is the difference between keyword match and message match?',
@@ -79,45 +79,45 @@ const breadcrumbSchema = {
 const MESSAGE_FAILURES = [
   {
     signal: 'Headline (H1)',
-    label: "Keyword mismatch — ad targets one term, page headline addresses another",
+    label: "Keyword mismatch - ad targets one term, page headline addresses another",
     detail:
-      "An ad targeting 'landing page audit tool' brings a visitor to a page whose H1 reads 'Conversion optimization platform'. These are not the same thing to the visitor. They clicked expecting a tool for auditing landing pages and arrived at a platform for optimizing conversion — a category that could mean anything. The visitor must re-evaluate whether this page addresses their search intent before proceeding. This re-evaluation creates an exit opportunity that did not exist in the ad. The click was correctly targeted. The page wasted it.",
-    fix: "The H1 must contain the core promise from the ad within the first 6 words. If the ad says 'landing page audit', the H1 should say 'landing page audit'. The phrasing can vary — 'Free landing page audit', 'landing page audit' — but the central keyword must be present and prominent. Check that the H1 matches the title tag, which should also contain the ad's core keyword.",
+      "An ad targeting 'landing page audit tool' brings a visitor to a page whose H1 reads 'Conversion optimization platform'. These are not the same thing to the visitor. They clicked expecting a tool for auditing landing pages and arrived at a platform for optimizing conversion - a category that could mean anything. The visitor must re-evaluate whether this page addresses their search intent before proceeding. This re-evaluation creates an exit opportunity that did not exist in the ad. The click was correctly targeted. The page wasted it.",
+    fix: "The H1 must contain the core promise from the ad within the first 6 words. If the ad says 'landing page audit', the H1 should say 'landing page audit'. The phrasing can vary - 'Free landing page audit', 'landing page audit' - but the central keyword must be present and prominent. Check that the H1 matches the title tag, which should also contain the ad's core keyword.",
   },
   {
     signal: 'Offer',
-    label: "Offer mismatch — ad promises free tool, page leads with pricing",
+    label: "Offer mismatch - ad promises free tool, page leads with pricing",
     detail:
-      "An ad that promises 'Free audit in 2 minutes' creates an explicit expectation: the visitor will get a free audit in 2 minutes. Arriving at a page that leads with a pricing section breaks that expectation at the highest-stakes moment — first impression. The visitor's immediate interpretation is not neutral confusion; it is that they were misled. Pages that run 'free' messaging in ads and then present the free option as a secondary action below pricing are generating the highest-damage trust failure available: the visitor feels deceived before they've read a single body sentence.",
-    fix: "The page must lead with exactly what the ad promised. If the ad says 'free audit', the hero must make the free audit the primary, unmissable action — not a small link below a pricing grid. Match the specific offer language from the ad in the H1 and CTA. If you want to present pricing on the page, place it below the free offer — never above it on a page running free-offer ad creative.",
+      "An ad that promises 'Free audit in 2 minutes' creates an explicit expectation: the visitor will get a free audit in 2 minutes. Arriving at a page that leads with a pricing section breaks that expectation at the highest-stakes moment - first impression. The visitor's immediate interpretation is not neutral confusion; it is that they were misled. Pages that run 'free' messaging in ads and then present the free option as a secondary action below pricing are generating the highest-damage trust failure available: the visitor feels deceived before they've read a single body sentence.",
+    fix: "The page must lead with exactly what the ad promised. If the ad says 'free audit', the hero must make the free audit the primary, unmissable action - not a small link below a pricing grid. Match the specific offer language from the ad in the H1 and CTA. If you want to present pricing on the page, place it below the free offer - never above it on a page running free-offer ad creative.",
   },
   {
     signal: 'Audience',
-    label: 'Audience mismatch — ad targets one ICP, headline addresses another',
+    label: 'Audience mismatch - ad targets one ICP, headline addresses another',
     detail:
-      "An ad targeting ecommerce founders that brings visitors to a page whose headline reads 'Built for marketing teams' has failed to confirm the ICP on arrival. The ecommerce founder reads 'marketing teams' and cannot place themselves in that description. They are a founder, not a marketing team. The page might be exactly right for them — but it has not told them so. Cold traffic expects immediate ICP confirmation: 'You are in the right place. This is for someone like you.' A headline that addresses the wrong audience category generates an exit even when the product is correct.",
-    fix: "The H1 should explicitly name the audience the ad targeted. If the ad targeted ecommerce founders, the H1 should reference ecommerce founders, store owners, or DTC brands — not the generic 'marketing teams' framing. ICP confirmation is the H1's primary job for paid traffic. The visitor already expressed intent through the click; the page's job is to confirm their decision, not make them re-evaluate it.",
+      "An ad targeting ecommerce founders that brings visitors to a page whose headline reads 'Built for marketing teams' has failed to confirm the ICP on arrival. The ecommerce founder reads 'marketing teams' and cannot place themselves in that description. They are a founder, not a marketing team. The page might be exactly right for them - but it has not told them so. Cold traffic expects immediate ICP confirmation: 'You are in the right place. This is for someone like you.' A headline that addresses the wrong audience category generates an exit even when the product is correct.",
+    fix: "The H1 should explicitly name the audience the ad targeted. If the ad targeted ecommerce founders, the H1 should reference ecommerce founders, store owners, or DTC brands - not the generic 'marketing teams' framing. ICP confirmation is the H1's primary job for paid traffic. The visitor already expressed intent through the click; the page's job is to confirm their decision, not make them re-evaluate it.",
   },
   {
     signal: 'Tone',
-    label: "Tone mismatch — urgent ad copy, corporate brand language on page",
+    label: "Tone mismatch - urgent ad copy, corporate brand language on page",
     detail:
-      "An ad with copy like 'Your page is leaking conversions right now' is urgent, specific, and problem-aware. It speaks directly to a visitor who has identified a problem. The page it sends them to opens with 'Empowering businesses to grow' — brand-register language that could apply to any company in any industry. The tonal discontinuity is disorienting: the visitor arrived primed for a direct, problem-specific solution and encountered generic aspiration. The emotional register of the page must match the emotional register of the ad.",
+      "An ad with copy like 'Your page is leaking conversions right now' is urgent, specific, and problem-aware. It speaks directly to a visitor who has identified a problem. The page it sends them to opens with 'Empowering businesses to grow' - brand-register language that could apply to any company in any industry. The tonal discontinuity is disorienting: the visitor arrived primed for a direct, problem-specific solution and encountered generic aspiration. The emotional register of the page must match the emotional register of the ad.",
     fix: "Read your ad copy aloud, then read your H1 aloud. They should feel like they are from the same conversation. If the ad is urgent and problem-specific, the H1 should be urgent and problem-specific. If the ad uses the visitor's industry terminology, the H1 should use the same terminology. Brand-register language on the page that runs direct-response ads is the most common tone mismatch observed.",
   },
   {
     signal: 'Visual Context',
-    label: 'Visual mismatch — ad uses product screenshots, page opens with abstract illustration',
+    label: 'Visual mismatch - ad uses product screenshots, page opens with abstract illustration',
     detail:
-      "An ad that features product screenshots builds a visual expectation: the product looks like this, it is specific, it is real. A page that opens with an abstract geometric illustration breaks that expectation immediately. The visitor formed a mental model of the product from the ad creative — a specific interface, a specific output, a specific result — and the page has replaced it with an image that communicates nothing specific. Visual mismatch is most damaging when the ad's strength was product specificity; abstract illustrations undercut that signal directly.",
-    fix: "Match the visual register of the landing page to the visual register of the ad creative. If the ad features product screenshots, the page hero should feature the same product, at the same level of specificity. If the ad features a before/after comparison, the page should lead with the same comparison. The visitor's visual context carries from the ad to the page — preserve it rather than replacing it.",
+      "An ad that features product screenshots builds a visual expectation: the product looks like this, it is specific, it is real. A page that opens with an abstract geometric illustration breaks that expectation immediately. The visitor formed a mental model of the product from the ad creative - a specific interface, a specific output, a specific result - and the page has replaced it with an image that communicates nothing specific. Visual mismatch is most damaging when the ad's strength was product specificity; abstract illustrations undercut that signal directly.",
+    fix: "Match the visual register of the landing page to the visual register of the ad creative. If the ad features product screenshots, the page hero should feature the same product, at the same level of specificity. If the ad features a before/after comparison, the page should lead with the same comparison. The visitor's visual context carries from the ad to the page - preserve it rather than replacing it.",
   },
   {
     signal: 'CTA',
-    label: "CTA commitment mismatch — ad says 'Get free analysis', page says 'Book a demo'",
+    label: "CTA commitment mismatch - ad says 'Get free analysis', page says 'Book a demo'",
     detail:
-      "An ad CTA of 'Get free analysis' creates a specific commitment expectation: I will receive an analysis, it will be free, and it will not require a sales conversation. Arriving at a page whose primary CTA is 'Book a demo' changes the commitment level without warning. The visitor expected an immediate, free, self-serve output. They are being offered a scheduled sales call. These are not equivalent commitments. The CTA mismatch forces the visitor to re-evaluate their decision at the highest-friction moment — the conversion point.",
-    fix: "The page's primary CTA must match the commitment level the ad created. If the ad promised a free, immediate output, the page CTA must deliver a free, immediate output — not a sales meeting. If the ad was running for a free tool and the page only offers a demo, either change the ad to reflect the actual offer or add the self-serve path the ad promised. CTA commitment mismatch is a trust failure, not just a copy inconsistency.",
+      "An ad CTA of 'Get free analysis' creates a specific commitment expectation: I will receive an analysis, it will be free, and it will not require a sales conversation. Arriving at a page whose primary CTA is 'Book a demo' changes the commitment level without warning. The visitor expected an immediate, free, self-serve output. They are being offered a scheduled sales call. These are not equivalent commitments. The CTA mismatch forces the visitor to re-evaluate their decision at the highest-friction moment - the conversion point.",
+    fix: "The page's primary CTA must match the commitment level the ad created. If the ad promised a free, immediate output, the page CTA must deliver a free, immediate output - not a sales meeting. If the ad was running for a free tool and the page only offers a demo, either change the ad to reflect the actual offer or add the self-serve path the ad promised. CTA commitment mismatch is a trust failure, not just a copy inconsistency.",
   },
 ]
 
@@ -148,7 +148,7 @@ export default function MessageMatchPage() {
               Landing Page Message Match
             </h1>
             <p className="mt-4 text-lg text-fg-muted leading-relaxed max-w-2xl">
-              Message match failures waste correctly targeted clicks. The ad brought the right visitor — the page failed to keep them. Keyword mismatch. Offer mismatch. Wrong ICP in the headline. Urgent ad creative landing on corporate brand language. Each mismatch is observable, measurable, and fixable.
+              Message match failures waste correctly targeted clicks. The ad brought the right visitor - the page failed to keep them. Keyword mismatch. Offer mismatch. Wrong ICP in the headline. Urgent ad creative landing on corporate brand language. Each mismatch is observable, measurable, and fixable.
             </p>
           </header>
 
@@ -188,11 +188,11 @@ export default function MessageMatchPage() {
             <div className="grid gap-3 sm:grid-cols-3">
               {[
                 { signal: 'Keyword Match', pass: 'H1 contains the core keyword from ad targeting', fail: 'H1 addresses a different topic than the ad keyword' },
-                { signal: 'Offer Match', pass: 'Page leads with the offer stated in the ad', fail: "Ad promises free tool — page leads with pricing" },
+                { signal: 'Offer Match', pass: 'Page leads with the offer stated in the ad', fail: "Ad promises free tool - page leads with pricing" },
                 { signal: 'Audience Match', pass: 'H1 explicitly names the ICP the ad targeted', fail: 'H1 addresses a different audience category than the ad' },
                 { signal: 'Tone Match', pass: 'Page tone matches the register of the ad creative', fail: 'Direct-response ad lands on generic brand language' },
-                { signal: 'Visual Match', pass: 'Page hero visuals match the ad creative type', fail: 'Ad uses product screenshots — page opens with abstract illustration' },
-                { signal: 'CTA Match', pass: 'Page CTA commitment level matches the ad CTA', fail: "Ad says 'Get free analysis' — page says 'Book a demo'" },
+                { signal: 'Visual Match', pass: 'Page hero visuals match the ad creative type', fail: 'Ad uses product screenshots - page opens with abstract illustration' },
+                { signal: 'CTA Match', pass: 'Page CTA commitment level matches the ad CTA', fail: "Ad says 'Get free analysis' - page says 'Book a demo'" },
               ].map((s) => (
                 <div key={s.signal} className="rounded-xl border border-border bg-bg-muted/20 p-4">
                   <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">{s.signal}</p>
@@ -211,7 +211,7 @@ export default function MessageMatchPage() {
           <section className="mb-14 rounded-2xl border border-border bg-bg-muted/30 p-8 text-center">
             <h2 className="text-2xl font-bold text-fg mb-3">Audit your message match</h2>
             <p className="text-sm text-fg-muted max-w-xl mx-auto mb-6">
-              Paste your URL. Nebula checks keyword continuity, ICP clarity, offer alignment, and CTA consistency against your actual page — not a template. Free, no signup, under 2 minutes.
+              Paste your URL. Nebula checks keyword continuity, ICP clarity, offer alignment, and CTA consistency against your actual page - not a template. Free, no signup, under 2 minutes.
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
@@ -219,7 +219,7 @@ export default function MessageMatchPage() {
             >
               Run Free Message Match Audit &rarr;
             </Link>
-            <p className="mt-3 text-xs text-fg-muted">No credit card required — results in under 2 minutes</p>
+            <p className="mt-3 text-xs text-fg-muted">No credit card required - results in under 2 minutes</p>
           </section>
 
           {/* FAQ */}

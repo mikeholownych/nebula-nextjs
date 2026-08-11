@@ -16,37 +16,37 @@ UPDATES = {
     "EP0UF0Fpaso": (
         "Why This Landing Page Isn't Converting: nebulacomponents.com Teardown (7/10)",
         "A data-driven landing page teardown of nebulacomponents.com.\n\n"
-        "Score: 6.9/10 — close to great, but with clear conversion leaks.\n\n"
-        "Get your own free landing page audit — fix list emailed to you:\n"
+        "Score: 6.9/10 - close to great, but with clear conversion leaks.\n\n"
+        "Get your own free landing page audit - fix list emailed to you:\n"
         "https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=video&utm_campaign=retitle\n\n"
         "#landingpage #cro #conversionoptimization",
     ),
     "5ykZwtaxGmo": (
         "You're Wasting Ad Spend On This Page #Shorts",
         "Free landing page audit: nebulacomponents.com\n\n"
-        "Get a free audit of your own site — fix list emailed to you:\n"
+        "Get a free audit of your own site - fix list emailed to you:\n"
         "https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=shorts&utm_campaign=retitle\n\n"
         "#LandingPage #CRO #ConversionOptimization #Shorts #MarketingTips",
     ),
     "-D0zQychrcQ": (
         "What stripe.com Gets Right (That Most Pages Don't): Review (7/10)",
         "A data-driven landing page review of stripe.com.\n\n"
-        "Score: 6.8/10 — close to great.\n\n"
-        "Get your own free landing page audit — fix list emailed to you:\n"
+        "Score: 6.8/10 - close to great.\n\n"
+        "Get your own free landing page audit - fix list emailed to you:\n"
         "https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=video&utm_campaign=retitle\n\n"
         "#landingpage #cro #conversionoptimization",
     ),
     "aiK2FVrSHyY": (
         "Why This Landing Page Isn't Converting: patreon.com Teardown",
         "A data-driven landing page teardown of patreon.com.\n\n"
-        "Get your own free landing page audit — fix list emailed to you:\n"
+        "Get your own free landing page audit - fix list emailed to you:\n"
         "https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=video&utm_campaign=retitle\n\n"
         "#landingpage #cro #conversionoptimization",
     ),
     "2053xikPsRE": (
         "You're Wasting Ad Spend On This Page #Shorts",
         "Free landing page audit: nebulacomponents.shop\n\n"
-        "Get a free audit of your own site — fix list emailed to you:\n"
+        "Get a free audit of your own site - fix list emailed to you:\n"
         "https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=shorts&utm_campaign=retitle\n\n"
         "#LandingPage #CRO #ConversionOptimization #Shorts #MarketingTips",
     ),
@@ -54,7 +54,7 @@ UPDATES = {
         "Why This Landing Page Isn't Converting: nebulacomponents.shop Audit (6/10)",
         "A data-driven landing page audit of nebulacomponents.shop.\n\n"
         "Score: 6.4/10.\n\n"
-        "Get your own free landing page audit — fix list emailed to you:\n"
+        "Get your own free landing page audit - fix list emailed to you:\n"
         "https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=video&utm_campaign=retitle\n\n"
         "#landingpage #cro #conversionoptimization",
     ),

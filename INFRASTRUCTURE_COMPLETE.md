@@ -1,7 +1,7 @@
-# ✅ INFRASTRUCTURE FIXED — TUNNEL + REVERSE PROXY + EMAIL
+# ✅ INFRASTRUCTURE FIXED - TUNNEL + REVERSE PROXY + EMAIL
 
-**Status:** ALL SYSTEMS GO  
-**Time:** June 25, 2026 09:30 UTC  
+**Status:** ALL SYSTEMS GO
+**Time:** June 25, 2026 09:30 UTC
 **Public Site:** https://nebulacomponents.shop ✅ LIVE
 
 ---
@@ -89,9 +89,9 @@ Caddy Reverse Proxy (port 8080)
 
 ## Cron Jobs (Always Running)
 
-1. **tunnel_health_monitor** (every 5 min) — Auto-restarts tunnel if down
-2. **audit_auto_responder** (every 5 min) — Checks inbox, routes replies
-3. **challenge_checkin** (every 2 min) — Reports campaign metrics
+1. **tunnel_health_monitor** (every 5 min) - Auto-restarts tunnel if down
+2. **audit_auto_responder** (every 5 min) - Checks inbox, routes replies
+3. **challenge_checkin** (every 2 min) - Reports campaign metrics
 
 ---
 
@@ -118,10 +118,10 @@ Next action: Run Wave 2 campaign NOW with real sends to 50 new prospects.
 
 ## Files Modified
 
-- `/etc/caddy/Caddyfile` — Reverse proxy configuration
-- `~/.cloudflared/config.yml` — Tunnel routes through Caddy:8080
-- `/home/mike/nebula/auto_responder.py` — Fixed IMAP to agentmail
-- `/usr/local/bin/cloudflared` — Fresh binary installed
+- `/etc/caddy/Caddyfile` - Reverse proxy configuration
+- `~/.cloudflared/config.yml` - Tunnel routes through Caddy:8080
+- `/home/mike/nebula/auto_responder.py` - Fixed IMAP to agentmail
+- `/usr/local/bin/cloudflared` - Fresh binary installed
 
 ---
 

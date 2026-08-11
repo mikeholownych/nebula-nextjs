@@ -1,4 +1,4 @@
-# Paid-Traffic Leak Scorecard — Design Specification
+# Paid-Traffic Leak Scorecard - Design Specification
 
 **Date:** 2026-08-03
 **Status:** Approved concept; awaiting written-spec review

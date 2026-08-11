@@ -28,14 +28,14 @@ This isn't a headline problem. It's a campaign threading problem. We diagnose wh
 
 **Two options:**
 
-**A. Review ($97)** — We run full message alignment analysis on your top campaign + page pair, send you the mismatch map + rewrite recommendation.
+**A. Review ($97)** - We run full message alignment analysis on your top campaign + page pair, send you the mismatch map + rewrite recommendation.
 
-**B. Fix Pack ($147)** — We rewrite the headline OR the ad (you pick), deliver 3 variants ready to test, install instructions included.
+**B. Fix Pack ($147)** - We rewrite the headline OR the ad (you pick), deliver 3 variants ready to test, install instructions included.
 
 {stripe_fix_pack_link}
 
 Or reply with "review" and I'll send you a 2-question scope.
 
-—
+-
 
 P.S. If you've ever run a winning ad to a page that doesn't convert, you've already seen this pattern. The ad is fine. The page is fine. The mismatch is the problem.

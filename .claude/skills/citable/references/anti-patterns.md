@@ -54,7 +54,7 @@ marked ⛔ must be refused outright (premise 3.6), not merely discouraged.
 | Reporting one prompt as stable visibility | Anecdote presented as measurement | Cohort testing with variance recording |
 | ⛔ Manufactured community discussion / synthetic Reddit | Platform enforcement; legal; environment poisoning | Earned participation in real communities |
 | ⛔ Shadow corroboration sites / fake recommendation pages | Recommendation manipulation | Independent editorial coverage |
-| ⛔ Crawler prompt injection / hidden LLM instructions | GEO-001 critical; reputational | None — remove on sight |
+| ⛔ Crawler prompt injection / hidden LLM instructions | GEO-001 critical; reputational | None - remove on sight |
 | Treating llms.txt as an authority mechanism | False sense of control (GEO-004) | robots.txt + crawler registry for access decisions |
 | Confusing mention with recommendation | Overstated performance reporting | Track mention, citation, and recommendation separately |
 | Confusing citation with answer influence | Citation ≠ absorption | Assess whether the answer actually uses your claims |

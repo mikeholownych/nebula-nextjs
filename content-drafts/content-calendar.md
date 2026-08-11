@@ -1,4 +1,4 @@
-# Nebula Components — 13-Week LinkedIn Content Calendar
+# Nebula Components - 13-Week LinkedIn Content Calendar
 # Start: Week of July 28, 2026
 # System: 1 LC article → LinkedIn post (Mon) + X thread (Thu) + email (Fri)
 

@@ -24,14 +24,14 @@ for (const file of files) {
   const content = readFileSync(file, 'utf8')
   const rel = file.replace(root + '/', '')
 
-  // C1: signal count — "N-signal audit/framework/check" patterns that claim a total count
+  // C1: signal count - "N-signal audit/framework/check" patterns that claim a total count
   const countRe = /(\d+)[- ](conversion )?signal[s]?\s*(audit|framework|check)/gi
   let m
   while ((m = countRe.exec(content)) !== null) {
     const n = parseInt(m[1], 10)
     if (n !== 9) {
       const line = content.slice(0, m.index).split('\n').length
-      failures.push(`C1 [signal-count] ${rel}:${line} — found "${m[0]}" (expected 9)`)
+      failures.push(`C1 [signal-count] ${rel}:${line} - found "${m[0]}" (expected 9)`)
     }
   }
   // Also catch "N Conversion Signals" as a heading/label (capitalized)
@@ -40,12 +40,12 @@ for (const file of files) {
     const n = parseInt(m[1], 10)
     if (n !== 9) {
       const line = content.slice(0, m.index).split('\n').length
-      failures.push(`C1 [signal-count] ${rel}:${line} — found "${m[0]}" (expected 9)`)
+      failures.push(`C1 [signal-count] ${rel}:${line} - found "${m[0]}" (expected 9)`)
     }
   }
 
   // C2: retired names used AS a named signal (enumerated "Signal N: <retired>")
-  // "proof" and "social proof" are legitimate generic CRO prose — only flag them
+  // "proof" and "social proof" are legitimate generic CRO prose - only flag them
   // when used in an explicit signal enumeration (handled by C3).
   // Only unambiguous framework-specific retired names are checked in proximity.
   const unambiguousRetired = canon.retired.filter(r => !r.includes('proof'))
@@ -54,7 +54,7 @@ for (const file of files) {
     let rm
     while ((rm = re.exec(content)) !== null) {
       const line = content.slice(0, rm.index).split('\n').length
-      failures.push(`C2 [retired-name] ${rel}:${line} — "${retired}" used as a named signal`)
+      failures.push(`C2 [retired-name] ${rel}:${line} - "${retired}" used as a named signal`)
     }
   }
 
@@ -65,13 +65,13 @@ for (const file of files) {
     const canonNormalized = canon.signals.map(s => s.toLowerCase().replace(/-/g, ' '))
     if (!canonNormalized.some(s => name.startsWith(s))) {
       const line = content.slice(0, m.index).split('\n').length
-      failures.push(`C3 [non-canon-signal] ${rel}:${line} — "Signal ${m[1]}: ${m[2].trim()}" not in canon`)
+      failures.push(`C3 [non-canon-signal] ${rel}:${line} - "Signal ${m[1]}: ${m[2].trim()}" not in canon`)
     }
   }
 }
 
 // C5: corruption chars (U+2580–U+259F block elements, U+FFFD replacement char)
-// ResultsClient uses ░ (U+2591) deliberately as a SERP visual — allowed there.
+// ResultsClient uses ░ (U+2591) deliberately as a SERP visual - allowed there.
 const C5_ALLOW = /ResultsClient\.tsx$/
 for (const file of files) {
   if (C5_ALLOW.test(file)) continue
@@ -81,7 +81,7 @@ for (const file of files) {
     const code = content.charCodeAt(i)
     if ((code >= 0x2580 && code <= 0x259F) || code === 0xFFFD) {
       const line = content.slice(0, i).split('\n').length
-      failures.push(`C5 [corruption] ${rel}:${line} — U+${code.toString(16).toUpperCase().padStart(4, '0')}`)
+      failures.push(`C5 [corruption] ${rel}:${line} - U+${code.toString(16).toUpperCase().padStart(4, '0')}`)
       break
     }
   }
@@ -93,5 +93,5 @@ if (failures.length > 0) {
   console.error('')
   process.exit(1)
 } else {
-  console.log('✓ Signal canon check passed — all content consistent with config/signals.canon.json')
+  console.log('✓ Signal canon check passed - all content consistent with config/signals.canon.json')
 }

@@ -111,7 +111,7 @@ export async function GET(request: NextRequest) {
   // Stripe customer portal (invoices, receipts, payment methods). One-time
   // checkout payments are emailed a receipt by Stripe; the portal is the
   // self-serve copy. Only created when a Stripe customer exists for the email
-  // — otherwise we stay silent rather than erroring.
+  // - otherwise we stay silent rather than erroring.
   let billingPortalUrl: string | null = null
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY
   if (stripeSecretKey) {
@@ -142,7 +142,7 @@ export async function GET(request: NextRequest) {
     purchaseCount: purchases.length,
     purchases,
     billingPortalUrl,
-    // Honest MVP framing — there is no credit system yet. Every audit the
+    // Honest MVP framing - there is no credit system yet. Every audit the
     // customer runs is stored in the workspace at no per-audit charge.
     usage: {
       model: 'unlimited',

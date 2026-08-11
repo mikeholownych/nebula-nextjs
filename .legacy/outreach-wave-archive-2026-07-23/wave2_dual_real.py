@@ -74,7 +74,7 @@ def send_sender_a_template_angle(to_email):
     msg["Subject"] = "How to launch a landing page in 2 hours ($7 template)"
     msg["From"] = SENDER_A
     msg["To"] = to_email
-    
+
     body = """Hi there,
 
 I built a landing page template pack that founders are using to launch in hours, not weeks.
@@ -88,11 +88,11 @@ Already have a landing page? I also do $97 audits where I review your copy + sen
 
 Money-back guarantee on both.
 
-—
+-
 Mike"""
-    
+
     msg.attach(MIMEText(body, "plain"))
-    
+
     try:
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=context) as server:
@@ -108,7 +108,7 @@ def send_sender_b_audit_angle(to_email):
     msg["Subject"] = "Want more cold email replies? ($97 done-for-you audit)"
     msg["From"] = SENDER_B
     msg["To"] = to_email
-    
+
     body = """Hi there,
 
 I help founders get replies from cold email through targeted audits.
@@ -122,11 +122,11 @@ Already have good emails? I also created a $7 template pack for instant landing 
 
 Money-back guarantee on both.
 
-—
+-
 Mike"""
-    
+
     msg.attach(MIMEText(body, "plain"))
-    
+
     try:
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=context) as server:
@@ -138,13 +138,13 @@ Mike"""
 
 def main():
     results = {"timestamp": datetime.now().isoformat(), "campaign": "wave2_dual_ab", "results": []}
-    
+
     print(f"🚀 Wave 2: Dual Sender A/B Test")
     print(f"   Total prospects: {len(WAVE1_PROSPECTS)}")
     print(f"   Sender A (templates@): {len(PROSPECTS_A)} emails")
     print(f"   Sender B (audits@): {len(PROSPECTS_B)} emails")
     print()
-    
+
     # Send Sender A (template angle)
     print("📧 Sender A (templates@):")
     a_sent = 0
@@ -156,9 +156,9 @@ def main():
             print(f"   ✅ {email}")
         else:
             print(f"   ❌ {email}: {result.get('error', 'Unknown error')}")
-    
+
     print()
-    
+
     # Send Sender B (audit angle)
     print("📧 Sender B (audits@):")
     b_sent = 0
@@ -170,19 +170,19 @@ def main():
             print(f"   ✅ {email}")
         else:
             print(f"   ❌ {email}: {result.get('error', 'Unknown error')}")
-    
+
     print()
     print(f"✅ Wave 2 Complete: Dual Sender Test")
     print(f"   Sender A (templates@): {a_sent}/{len(PROSPECTS_A)} sent")
     print(f"   Sender B (audits@): {b_sent}/{len(PROSPECTS_B)} sent")
     print(f"   Total: {a_sent + b_sent}/{len(WAVE1_PROSPECTS)}")
-    
+
     # Save results
     results_file = f"wave2_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
     with open(results_file, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\n📊 Results saved to: {results_file}")
-    
+
     return a_sent + b_sent > 0
 
 if __name__ == "__main__":

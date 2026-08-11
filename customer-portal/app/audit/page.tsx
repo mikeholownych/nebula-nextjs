@@ -6,11 +6,11 @@ import AuditForm from './AuditForm'
 
 export const metadata: Metadata = {
   title: 'Free Landing Page Audit: Find Conversion Friction | Nebula',
-  description: 'Free conversion leak detection for any landing page. Discovers observable conversion leaks across message match, trust signals, mobile layout, and page speed — evidence-backed, not opinions.',
+  description: 'Free conversion leak detection for any landing page. Discovers observable conversion leaks across message match, trust signals, mobile layout, and page speed - evidence-backed, not opinions.',
   alternates: { canonical: 'https://nebulacomponents.com/audit' },
   openGraph: {
     title: 'Free Landing Page Audit: Find Conversion Friction | Nebula',
-    description: 'Free conversion leak detection for any landing page. Discovers observable conversion leaks across message match, trust signals, mobile layout, and page speed — evidence-backed, not opinions.',
+    description: 'Free conversion leak detection for any landing page. Discovers observable conversion leaks across message match, trust signals, mobile layout, and page speed - evidence-backed, not opinions.',
     url: 'https://nebulacomponents.com/audit',
     siteName: 'Nebula Components',
     locale: 'en_US',
@@ -102,7 +102,7 @@ export default async function AuditPage() {
                 <p className="mt-6 border-l-2 border-accent pl-4 text-sm text-fg-muted">
                   <span className="font-semibold text-fg">{stats.audit_count} landing pages analyzed</span>
                   {stats.avg_failures_per_page != null && (
-                    <> — average {stats.avg_failures_per_page} conversion leaks per page. Live data from the <Link href="/benchmarks" className="text-accent hover:underline">Landing Page Leak Index</Link>.</>
+                    <> - average {stats.avg_failures_per_page} conversion leaks per page. Live data from the <Link href="/benchmarks" className="text-accent hover:underline">Landing Page Leak Index</Link>.</>
                   )}
                 </p>
               )}
@@ -256,14 +256,14 @@ export default async function AuditPage() {
               </h2>
               <p className="mb-6 text-base text-fg-muted leading-7">
                 The free audit shows you what is broken and in what order to fix it.
-                Pay $97 and receive a tailored implementation kit for one specific failing signal —
-                exact copy changes, code snippets, or configuration fixes — sent after successful payment.
+                Pay $97 and receive a tailored implementation kit for one specific failing signal -
+                exact copy changes, code snippets, or configuration fixes - sent after successful payment.
                 No site access is needed. You implement it yourself or hand it to your developer.
               </p>
               <div className="space-y-2">
                 {[
                   'Tailored implementation instructions for one selected finding',
-                  'Exact copy, a code snippet, or a configuration change — not generic advice',
+                  'Exact copy, a code snippet, or a configuration change - not generic advice',
                   'Sent by email after successful payment',
                   'One additional same-scope re-audit within 30 days',
                 ].map((item) => (

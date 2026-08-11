@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Zernio REST API Client — v0
+Zernio REST API Client - v0
 Single source of truth for Zernio social-scheduling calls (outreach use).
 
 API base: https://zernio.com/api/v1
@@ -40,7 +40,7 @@ class ZernioClient:
     def __init__(self, api_key: Optional[str] = None) -> None:
         self.api_key = api_key or os.environ.get(ENV_KEY)
         if not self.api_key:
-            raise ZernioError(f"{ENV_KEY} not set — add it to .env (see zernio.com/auth.md)")
+            raise ZernioError(f"{ENV_KEY} not set - add it to .env (see zernio.com/auth.md)")
 
     # ── Low-level ────────────────────────────────────────────────────────
 
@@ -95,7 +95,7 @@ class ZernioClient:
         after: Optional[str] = None,
     ) -> dict:
         """
-        Search Reddit posts via the connected account (authenticated OAuth —
+        Search Reddit posts via the connected account (authenticated OAuth -
         the compliant path; Reddit blocks anonymous datacenter scraping).
         Rate limits: Reddit API is ~60 req/min; Zernio free tier is 60 req/min.
         Keep call sites to <=1 req / 2s and limit to <=25 results.
@@ -152,7 +152,7 @@ class ZernioClient:
         """
         Create a post. SAFE BY DEFAULT: draft=True stores a draft and publishes
         nothing. To actually publish, pass draft=False AND either scheduled_for
-        (future ISO timestamp) or publish_now=True — never both silently.
+        (future ISO timestamp) or publish_now=True - never both silently.
         """
         if publish_now and scheduled_for:
             raise ZernioError("publish_now and scheduled_for are mutually exclusive")
@@ -206,5 +206,5 @@ if __name__ == "__main__":
     for a in z.list_accounts():
         print(" -", a.get("platform"), a.get("username"), a.get("_id"))
     if not z.list_accounts():
-        print(" (none connected — connect accounts on the Zernio dashboard first)")
+        print(" (none connected - connect accounts on the Zernio dashboard first)")
     sys.exit(0)

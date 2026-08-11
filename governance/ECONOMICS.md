@@ -1,4 +1,4 @@
-# ECONOMICS — Nebula Components Financial Operating Context
+# ECONOMICS - Nebula Components Financial Operating Context
 
 **Last updated:** 2026-07-13
 **Status:** Active
@@ -13,11 +13,11 @@
 
 | Tier | Name | Price | Stripe Link | Status |
 |---|---|---|---|---|
-| 1 | Free Landing Page Audit | $0 | N/A (self-serve) | Live — nebulacomponents.shop/audit |
+| 1 | Free Landing Page Audit | $0 | N/A (self-serve) | Live - nebulacomponents.shop/audit |
 | 2 | Conversion Fix Pack | $97 | [buy.stripe.com/...](https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h) | Live |
 
-> **2026-07-25: price corrected from $147 to the real $97 (locked through 2026-12-31 per CLAUDE.md; see commit a12c8ff0 earlier this session).** Only the dead link and this row are fixed here. The margin/fee/LTV figures further down this doc (Stripe fees "at $147 transaction", "~96%" margin, LTV ">$1,644", "months to recover CAC") were all computed against $147 and have not been recalculated against $97 — flagging rather than guess-substituting, since Stripe's fee is not a flat ratio (2.9% + $0.30) and margin/LTV need a real recalculation, not a text find-replace.
-| 2b | Legacy Component Pack (not promoted) | $7 | Stripe product prod_UlPk8Awd2ekztb | Live — no longer marketed |
+> **2026-07-25: price corrected from $147 to the real $97 (locked through 2026-12-31 per CLAUDE.md; see commit a12c8ff0 earlier this session).** Only the dead link and this row are fixed here. The margin/fee/LTV figures further down this doc (Stripe fees "at $147 transaction", "~96%" margin, LTV ">$1,644", "months to recover CAC") were all computed against $147 and have not been recalculated against $97 - flagging rather than guess-substituting, since Stripe's fee is not a flat ratio (2.9% + $0.30) and margin/LTV need a real recalculation, not a text find-replace.
+| 2b | Legacy Component Pack (not promoted) | $7 | Stripe product prod_UlPk8Awd2ekztb | Live - no longer marketed |
 | 3 | Growth Launch (First Customer Guarantee) | $997 | [buy.stripe.com/4gMcN5aYk92Qaa5drY43S09](https://buy.stripe.com/4gMcN5aYk92Qaa5drY43S09) | Live |
 | 4 | AI Ops Retainer (monthly) | $1,497/mo | [buy.stripe.com/...](https://buy.stripe.com/00w5kD1nK0wkaa573A43S0c) | Live |
 | 5 | Agency Partner (monthly) | $497/mo | [buy.stripe.com/...](https://buy.stripe.com/aFa8wPc2o7YM9613Ro43S0d) | Live |
@@ -89,7 +89,7 @@
 
 | Offer | Price | Stripe Fee | Delivery Cost | Gross Margin | Notes |
 |---|---|---|---|---|---|
-| Free Audit | $0 | $0 | ~$0.10 (API + email) | N/A | Loss leader — cost is intentional |
+| Free Audit | $0 | $0 | ~$0.10 (API + email) | N/A | Loss leader - cost is intentional |
 | $147 Fix Pack | $147 | ~$4.56 | ~$2 (AI + email delivery) | ~96% | High margin, scales well |
 | $997 Growth Launch | $997 | ~$29.21 | ~$50-100 (intensive AI + human review) | ~90-95% | Labor component needs monitoring |
 | $1,497/mo Retainer | $1,497 | ~$43.71 | ~$100-200 (monthly monitoring) | ~87-90% | Best margin at scale |
@@ -134,16 +134,16 @@
 
 Significant financial decisions are logged in `governance/DECISIONS/`. Cross-reference:
 
-- **DECISIONS/0001-autonomous-business-os-architecture.md** — Adopted Business OS architecture with governance layer. Impact: directory restructuring, no cost impact.
+- **DECISIONS/0001-autonomous-business-os-architecture.md** - Adopted Business OS architecture with governance layer. Impact: directory restructuring, no cost impact.
 
 ---
 
 ## Files Referenced
 
-- `/home/mike/nebula/stripe_checkout_links.json` — Stripe product/price IDs
-- `/home/mike/nebula/stripe_links.py` — current checkout-link resolver and fallback URLs
-- `/home/mike/nebula/stripe_997_links.json` — $997 config
-- `/home/mike/nebula/sre_state.json` — Operational state
-- `/home/mike/nebula/pipeline_health.json` — Pipeline health checks
-- `/home/mike/nebula/night_watch_report.json` — Nightly ops report
-- `/home/mike/nebula/growth_system/OFFER_MEMO.md` — Offer architecture details
+- `/home/mike/nebula/stripe_checkout_links.json` - Stripe product/price IDs
+- `/home/mike/nebula/stripe_links.py` - current checkout-link resolver and fallback URLs
+- `/home/mike/nebula/stripe_997_links.json` - $997 config
+- `/home/mike/nebula/sre_state.json` - Operational state
+- `/home/mike/nebula/pipeline_health.json` - Pipeline health checks
+- `/home/mike/nebula/night_watch_report.json` - Nightly ops report
+- `/home/mike/nebula/growth_system/OFFER_MEMO.md` - Offer architecture details

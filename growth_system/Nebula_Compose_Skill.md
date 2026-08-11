@@ -1,4 +1,4 @@
-# /compose — Write Outbound Message
+# /compose - Write Outbound Message
 
 Rules:
 1. Load Voice DNA first. Read all sections.

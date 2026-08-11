@@ -26,7 +26,7 @@ function makeEvent(
 // 1. Empty state
 // ──────────────────────────────────────────────
 
-describe('ScoreHistoryChart — empty state', () => {
+describe('ScoreHistoryChart - empty state', () => {
   it('renders "No history yet" when events array is empty', () => {
     render(<ScoreHistoryChart monitorId={1} events={[]} />)
     expect(screen.getByTestId('score-history-empty')).toBeInTheDocument()
@@ -43,7 +43,7 @@ describe('ScoreHistoryChart — empty state', () => {
 // 2. Chart renders with 3 data points
 // ──────────────────────────────────────────────
 
-describe('ScoreHistoryChart — with 3 data points', () => {
+describe('ScoreHistoryChart - with 3 data points', () => {
   const threeEvents: ScoreEvent[] = [
     makeEvent(80, 'A', null, '2025-01-01T00:00:00Z'),
     makeEvent(65, 'C', -15, '2025-01-08T00:00:00Z'),
@@ -95,7 +95,7 @@ describe('ScoreHistoryChart — with 3 data points', () => {
 // 3. score_delta color logic
 // ──────────────────────────────────────────────
 
-describe('ScoreHistoryChart — score_delta / segment color logic', () => {
+describe('ScoreHistoryChart - score_delta / segment color logic', () => {
   /**
    * Color is determined by comparing consecutive scores, not delta value.
    * A drop in score → segment color = #ef4444 (danger/red)

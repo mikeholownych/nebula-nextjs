@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-email_linter.py — Pre-send email quality gate.
+email_linter.py - Pre-send email quality gate.
 
 Source: Illingworth "The Cold Email Formula My Best Clients Use Without Realizing"
         Illingworth "ALL Cold Email SOPs to scale to $100k/mo"
@@ -14,8 +14,8 @@ Rules (all MUST pass for email to send):
   6. Token validation: every {placeholder} in subject + body has a matching non-empty value in lead data
 
 Severity levels:
-  ERROR   — blocks send
-  WARN    — logged, allowed through
+  ERROR   - blocks send
+  WARN    - logged, allowed through
 """
 
 import re
@@ -118,7 +118,7 @@ def lint_email(subject: str, body: str, first_name: str = "") -> LintResult:
         r.fail("Zero numbers in body. Illingworth: 'If your email has zero numbers, it feels like zero thought went into it.' Add: audit count, %, $ amount, timeframe.")
 
     # ── Rule 3: CTA is a direct question; no calendar links ────────
-    # Check ALL sentences — P.S. and opt-out footer are expected to trail the CTA
+    # Check ALL sentences - P.S. and opt-out footer are expected to trail the CTA
     sentences = [s.strip() for s in re.split(r'(?<=[.!?])\s+', body.strip()) if s.strip()]
     has_question_cta = any("?" in s for s in sentences)
 
@@ -149,7 +149,7 @@ def lint_email(subject: str, body: str, first_name: str = "") -> LintResult:
 
     # "Quick question" overuse (Illingworth: "No 'quick question'")
     if "quick question" in subj_lower:
-        r.warn("'Quick question' in subject — heavily filtered now. Illingworth explicitly flagged this.")
+        r.warn("'Quick question' in subject - heavily filtered now. Illingworth explicitly flagged this.")
 
     # ── Rule 5: Personalization in subject or opening line ────────
     # Either a template token OR an actual name present
@@ -161,7 +161,7 @@ def lint_email(subject: str, body: str, first_name: str = "") -> LintResult:
     if not (has_token or has_name):
         r.warn(
             "No {{firstName}} or name in subject/opening. "
-            "Illingworth: 33% of top performers used it — keeps tone human, not robotic. "
+            "Illingworth: 33% of top performers used it - keeps tone human, not robotic. "
             "Add to subject: 'Let's chat, {first_name}?' or first line: 'Hi {first_name},'."
         )
 
@@ -169,7 +169,7 @@ def lint_email(subject: str, body: str, first_name: str = "") -> LintResult:
 
 
 # ── Rule 6: Token validator (merge field pre-send QA) ─────────────
-# Source: Illingworth SOPs — "Are all personalisation tokens working?"
+# Source: Illingworth SOPs - "Are all personalisation tokens working?"
 
 _TOKEN_RE = re.compile(r"\{(\w+)\}")  # matches {domain}, {issue1}, etc. (single-brace .format style)
 _DBLTOKEN_RE = re.compile(r"\{\{(\w+)\}\}")  # matches {{firstName}} (double-brace template style)
@@ -178,8 +178,8 @@ _DBLTOKEN_RE = re.compile(r"\{\{(\w+)\}\}")  # matches {{firstName}} (double-bra
 def validate_tokens(subject: str, body: str, lead: dict) -> LintResult:
     """
     Check every {placeholder} in subject + body has a non-empty value in `lead`.
-    Double-brace {{tokens}} are template placeholders (not yet substituted) — warn only.
-    Single-brace {tokens} should already be filled — error if missing/empty.
+    Double-brace {{tokens}} are template placeholders (not yet substituted) - warn only.
+    Single-brace {tokens} should already be filled - error if missing/empty.
     """
     r = LintResult()
     combined = subject + "\n" + body
@@ -188,13 +188,13 @@ def validate_tokens(subject: str, body: str, lead: dict) -> LintResult:
     for token in sorted(set(_TOKEN_RE.findall(combined))):
         val = lead.get(token)
         if val is None:
-            r.fail(f"Missing token '{{{token}}}' — not in lead data. Add to lead dict before send.")
+            r.fail(f"Missing token '{{{token}}}' - not in lead data. Add to lead dict before send.")
         elif str(val).strip() == "":
-            r.fail(f"Empty token '{{{token}}}' — value is blank. Lead data incomplete.")
+            r.fail(f"Empty token '{{{token}}}' - value is blank. Lead data incomplete.")
 
-    # Double-brace: template tokens — warn if still present (means substitution didn't run)
+    # Double-brace: template tokens - warn if still present (means substitution didn't run)
     for token in sorted(set(_DBLTOKEN_RE.findall(combined))):
-        r.warn(f"Unsubstituted template token '{{{{{token}}}}}' still in email — run string substitution before send.")
+        r.warn(f"Unsubstituted template token '{{{{{token}}}}}' still in email - run string substitution before send.")
 
     return r
 
@@ -210,7 +210,7 @@ def gate(subject: str, body: str, first_name: str = "", lead: dict | None = None
         subject       : email subject line
         body          : email body (pre opt-out footer)
         first_name    : lead first name for rule 5 check
-        lead          : full lead dict — enables token validation (rule 6)
+        lead          : full lead dict - enables token validation (rule 6)
         raise_on_error: if True, raises ValueError on any ERROR-level failure
     """
     result = lint_email(subject, body, first_name)
@@ -235,20 +235,20 @@ if __name__ == "__main__":
     )
     # Should PASS: ~74 words, number, question CTA, decent subject
     good_email = (
-        "Your ads — found something, Mike",
+        "Your ads - found something, Mike",
         """Hi Mike,
 
 Saw your post about $3k/mo Google Ads with flat conversions.
 
-Problem I keep seeing: the ads are fine, but the page loses 60%+ of visitors before they see the offer. Ran 100+ audits — the hero section is where the budget bleeds almost every time.
+Problem I keep seeing: the ads are fine, but the page loses 60%+ of visitors before they see the offer. Ran 100+ audits - the hero section is where the budget bleeds almost every time.
 
-Want me to run a free audit on your page? I'll send findings same day — just reply with your URL.
+Want me to run a free audit on your page? I'll send findings same day - just reply with your URL.
 
-—
+-
 Reply STOP to opt out."""
     )
 
-    print("=== Email Linter — smoke test ===\n")
+    print("=== Email Linter - smoke test ===\n")
     for label, (subj, body) in [("BAD", bad_email), ("GOOD", good_email)]:
         r = lint_email(subj, body, first_name="Mike")
         print(f"[{label}] subject: '{subj}'")

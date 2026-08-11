@@ -1,8 +1,8 @@
-"""Global agent command guard — Hermes adapter.
+"""Global agent command guard - Hermes adapter.
 
 Blocks catastrophic shell commands before the terminal tool runs them,
 using the shared denylist at ~/.agents/hooks/dangerous-patterns.txt
-(enforced by ~/.agents/hooks/deny-dangerous.sh — same guard used by
+(enforced by ~/.agents/hooks/deny-dangerous.sh - same guard used by
 Claude Code, Codex, Cursor, OpenCode, etc.).
 
 Contract: pre_tool_call hook returns {"action": "block", "message": ...}

@@ -1,10 +1,10 @@
-# PostHog MCP Analytics — Integration Report
+# PostHog MCP Analytics - Integration Report
 
 ## Summary
 
 The Nebula MCP server (`mcp_server.py`) has been instrumented with PostHog MCP analytics using **Path P1** (Python FastMCP wrapper). Every tool call, agent intent, and error the server handles will now emit `$mcp_*` events to PostHog.
 
-- **SDK path**: `posthog.mcp.instrument()` — wraps the `FastMCP` server object directly
+- **SDK path**: `posthog.mcp.instrument()` - wraps the `FastMCP` server object directly
 - **posthog version**: 7.29.0 (already installed; satisfies `>=7.21` requirement)
 - **Credentials**: `POSTHOG_PROJECT_TOKEN` and `POSTHOG_HOST` were already present in `.env`
 
@@ -14,11 +14,11 @@ The Nebula MCP server (`mcp_server.py`) has been instrumented with PostHog MCP a
 
 ### `mcp_server.py`
 
-Single file modified. All changes are additive — no tool handlers were altered.
+Single file modified. All changes are additive - no tool handlers were altered.
 
 1. **New imports** added at the top:
    - `atexit`, `os`, `signal` (stdlib)
-   - `from dotenv import load_dotenv` — loads `.env` so credentials are available whether the server is run directly or from Claude Desktop
+   - `from dotenv import load_dotenv` - loads `.env` so credentials are available whether the server is run directly or from Claude Desktop
 
 2. **`.env` auto-load** inserted before any app imports:
    ```python
@@ -37,7 +37,7 @@ Single file modified. All changes are additive — no tool handlers were altered
    atexit.register(posthog.shutdown)
    signal.signal(signal.SIGTERM, lambda *_: sys.exit(0))
    ```
-   - `atexit.register(posthog.shutdown)` — flushes the event queue on normal exit
+   - `atexit.register(posthog.shutdown)` - flushes the event queue on normal exit
    - SIGTERM handler converts the signal to `sys.exit(0)` so atexit fires on process termination
 
 ---
@@ -60,7 +60,7 @@ All events share a `$session_id` derived from the MCP protocol session, so calls
 ## No Manual Steps Required
 
 - Credentials are loaded automatically from `.env` (already populated)
-- No package installs needed — `posthog>=7.21` was already a dependency
+- No package installs needed - `posthog>=7.21` was already a dependency
 - Works for both transport modes: STDIO (Claude Desktop) and HTTP (`--http` flag)
 
 ---

@@ -8,7 +8,7 @@ import { requireWorkspaceUser } from '@/app/lib/workspace-auth'
  *
  * Soft-deletes the account (tombstone pattern):
  * 1. Records deletion request with 7-day purge window
- * 2. Returns confirmation — actual purge happens via weekly batch
+ * 2. Returns confirmation - actual purge happens via weekly batch
  */
 
 export async function POST(request: NextRequest) {

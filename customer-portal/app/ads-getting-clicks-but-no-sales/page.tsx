@@ -67,44 +67,44 @@ const breadcrumbSchema = {
 const AD_FAILURES = [
   {
     signal: 'Message Match',
-    label: 'Ad promised X — landing page delivers Y',
+    label: 'Ad promised X - landing page delivers Y',
     detail:
-      'The ad copy set a specific expectation: a price point, a product type, a use case, a promotional offer. The landing page the visitor arrived at addresses a different angle or uses different language. The visitor cannot reconcile the two in under three seconds, so they leave. This is the single largest source of post-click abandonment in paid search. It is not about aesthetics — it is a literal mismatch between the claim that generated the click and the claim the page leads with.',
-    fix: 'Put the ad\'s primary promise — verbatim or near-verbatim — in the H1. If the ad says "Free shipping on orders over $50," the page headline confirms it immediately. One ad group per landing page variant is the structural fix.',
+      'The ad copy set a specific expectation: a price point, a product type, a use case, a promotional offer. The landing page the visitor arrived at addresses a different angle or uses different language. The visitor cannot reconcile the two in under three seconds, so they leave. This is the single largest source of post-click abandonment in paid search. It is not about aesthetics - it is a literal mismatch between the claim that generated the click and the claim the page leads with.',
+    fix: 'Put the ad\'s primary promise - verbatim or near-verbatim - in the H1. If the ad says "Free shipping on orders over $50," the page headline confirms it immediately. One ad group per landing page variant is the structural fix.',
   },
   {
     signal: 'Social Proof',
-    label: 'No proof above the fold — visitor is asked to act before they have a reason to trust',
+    label: 'No proof above the fold - visitor is asked to act before they have a reason to trust',
     detail:
-      'The primary CTA appears before the visitor has seen evidence that the product works. For cold paid traffic — a visitor who has never heard of the brand — this sequence is backward. They arrived via an ad, which is inherently an unverified claim. Asking them to purchase or sign up before providing any third-party validation (a review count, a named testimonial, a visible star rating) requires a level of trust the page has not yet earned.',
+      'The primary CTA appears before the visitor has seen evidence that the product works. For cold paid traffic - a visitor who has never heard of the brand - this sequence is backward. They arrived via an ad, which is inherently an unverified claim. Asking them to purchase or sign up before providing any third-party validation (a review count, a named testimonial, a visible star rating) requires a level of trust the page has not yet earned.',
     fix: 'Place at minimum one trust signal above the fold: a star rating with review count, a named customer quote with a specific outcome, or a recognizable logo with context. The CTA adjacent to proof outperforms the CTA alone.',
   },
   {
     signal: 'Price / Commitment Shock',
     label: 'The ask on the page is larger than the ad implied',
     detail:
-      'The ad created an expectation about the size of the commitment — a low price, a free trial, a no-signup demo. The landing page presents a higher price, a required account creation, or an upsell before the primary action is available. This discrepancy registers as deception regardless of intent. Visitors do not re-evaluate — they leave. Checkout abandonment rates above 70% with a low-friction ad are the observable signature of this failure.',
+      'The ad created an expectation about the size of the commitment - a low price, a free trial, a no-signup demo. The landing page presents a higher price, a required account creation, or an upsell before the primary action is available. This discrepancy registers as deception regardless of intent. Visitors do not re-evaluate - they leave. Checkout abandonment rates above 70% with a low-friction ad are the observable signature of this failure.',
     fix: 'Align the commitment level on the page with the commitment level implied by the ad. If the ad says "Try free," the page CTA says "Try free." If pricing is higher than the ad implied, acknowledge the full offer structure immediately rather than surfacing it at checkout.',
   },
   {
     signal: 'Mobile CTA Visibility',
-    label: '60–80% of ad clicks are mobile — CTA is below the fold',
+    label: '60–80% of ad clicks are mobile - CTA is below the fold',
     detail:
-      'Between 60 and 80 percent of paid social ad clicks originate on mobile devices. On a mobile viewport, a page designed primarily for desktop frequently pushes the primary CTA below a full screen of hero image, headline, and supporting copy. The visitor sees nothing actionable and scrolls — or does not scroll. Page designs with a sticky mobile CTA bar or a CTA within the first 600px of the mobile viewport convert at a measurably higher rate than pages where the first CTA appears at 900px or below.',
+      'Between 60 and 80 percent of paid social ad clicks originate on mobile devices. On a mobile viewport, a page designed primarily for desktop frequently pushes the primary CTA below a full screen of hero image, headline, and supporting copy. The visitor sees nothing actionable and scrolls - or does not scroll. Page designs with a sticky mobile CTA bar or a CTA within the first 600px of the mobile viewport convert at a measurably higher rate than pages where the first CTA appears at 900px or below.',
     fix: 'Test your page on a 390px-wide mobile viewport. If the CTA button is not visible without scrolling, move it above the fold or implement a sticky bottom CTA bar for mobile breakpoints only.',
   },
   {
     signal: 'Page Speed',
-    label: 'LCP over 3 seconds — visitor left before the page rendered',
+    label: 'LCP over 3 seconds - visitor left before the page rendered',
     detail:
-      'Largest Contentful Paint (LCP) above 3 seconds correlates with a 32% increase in bounce rate relative to a 1-second LCP baseline (Google, 2018 — the absolute numbers have shifted but the direction has not changed). Ad traffic is particularly speed-sensitive: the visitor just tapped a small ad unit on a phone, they are mid-scroll, and any delay reactivates the back gesture. A page that loads slowly enough to show a white screen or a layout shift immediately after the click loses a significant fraction of paid clicks before a single word is read.',
-    fix: 'Run PageSpeed Insights on the exact landing page URL — not the homepage. LCP above 3s on mobile is the threshold for corrective action. Common causes: unoptimized hero image, render-blocking JavaScript, no CDN, third-party tag manager loading synchronously.',
+      'Largest Contentful Paint (LCP) above 3 seconds correlates with a 32% increase in bounce rate relative to a 1-second LCP baseline (Google, 2018 - the absolute numbers have shifted but the direction has not changed). Ad traffic is particularly speed-sensitive: the visitor just tapped a small ad unit on a phone, they are mid-scroll, and any delay reactivates the back gesture. A page that loads slowly enough to show a white screen or a layout shift immediately after the click loses a significant fraction of paid clicks before a single word is read.',
+    fix: 'Run PageSpeed Insights on the exact landing page URL - not the homepage. LCP above 3s on mobile is the threshold for corrective action. Common causes: unoptimized hero image, render-blocking JavaScript, no CDN, third-party tag manager loading synchronously.',
   },
   {
     signal: 'Ad Tracking',
-    label: 'No conversion pixel on the page — ad platform optimizes toward clickers, not buyers',
+    label: 'No conversion pixel on the page - ad platform optimizes toward clickers, not buyers',
     detail:
-      'Without a conversion event firing on the post-purchase or post-signup page, the ad platform has no signal about which clicks resulted in transactions. It continues spending against clicks, not outcomes. Over time, the algorithm learns to target users who click ads — not users who buy. Campaigns without pixel-verified conversion events consistently show higher CPCs and lower ROAS than equivalent campaigns with verified conversion signals. The page may be converting some visitors while the platform bids against the wrong audience because it cannot see it.',
+      'Without a conversion event firing on the post-purchase or post-signup page, the ad platform has no signal about which clicks resulted in transactions. It continues spending against clicks, not outcomes. Over time, the algorithm learns to target users who click ads - not users who buy. Campaigns without pixel-verified conversion events consistently show higher CPCs and lower ROAS than equivalent campaigns with verified conversion signals. The page may be converting some visitors while the platform bids against the wrong audience because it cannot see it.',
     fix: 'Verify that the purchase or lead confirmation page fires a conversion event back to every active ad platform (Google Ads, Meta, LinkedIn, TikTok). Use each platform\'s tag diagnostic tool to confirm the event is received. Without this, spend optimization is guesswork.',
   },
 ]
@@ -136,7 +136,7 @@ export default function AdsClicksNoSalesPage() {
               Ads Getting Clicks But No Sales?
             </h1>
             <p className="mt-4 text-lg text-fg-muted leading-relaxed max-w-2xl">
-              When Google, Meta, or LinkedIn campaigns generate steady click volume without purchase completions, the ad network has fulfilled its job. The breakdown sits on the landing page — between the initial click and the final transaction. Six failure patterns account for the majority of post-click abandonment.
+              When Google, Meta, or LinkedIn campaigns generate steady click volume without purchase completions, the ad network has fulfilled its job. The breakdown sits on the landing page - between the initial click and the final transaction. Six failure patterns account for the majority of post-click abandonment.
             </p>
           </header>
 
@@ -197,14 +197,14 @@ export default function AdsClicksNoSalesPage() {
               What the audit checks on a paid traffic landing page
             </h2>
             <p className="text-sm text-fg-muted leading-6 mb-6 max-w-2xl">
-              Nebula reads the actual HTML of your ad destination URL — not a screenshot, not a manual walk-through. Each signal returns pass or fail with the raw value from your page so you can verify the finding independently.
+              Nebula reads the actual HTML of your ad destination URL - not a screenshot, not a manual walk-through. Each signal returns pass or fail with the raw value from your page so you can verify the finding independently.
             </p>
             <div className="grid gap-3 sm:grid-cols-3">
               {[
                 {
                   signal: 'Message Match',
                   pass: 'H1 text contains the primary keyword or claim from the ad creative',
-                  fail: 'H1 describes the brand or product category — ad claim is absent',
+                  fail: 'H1 describes the brand or product category - ad claim is absent',
                 },
                 {
                   signal: 'Social Proof',
@@ -214,17 +214,17 @@ export default function AdsClicksNoSalesPage() {
                 {
                   signal: 'CTA Visibility Mobile',
                   pass: 'Primary CTA button renders within 600px on a 390px-wide viewport',
-                  fail: 'CTA is below 600px on mobile — requires scroll before any action is available',
+                  fail: 'CTA is below 600px on mobile - requires scroll before any action is available',
                 },
                 {
                   signal: 'Load Speed',
                   pass: 'LCP under 2.5s on mobile, hero image under 200KB',
-                  fail: 'LCP above 3s — visitor exits before content renders',
+                  fail: 'LCP above 3s - visitor exits before content renders',
                 },
                 {
                   signal: 'Ad Signals',
                   pass: 'Conversion pixel fires on the confirmation or thank-you page',
-                  fail: 'No verified conversion event — platform optimizes toward clicks not buyers',
+                  fail: 'No verified conversion event - platform optimizes toward clicks not buyers',
                 },
                 {
                   signal: 'Above the Fold',

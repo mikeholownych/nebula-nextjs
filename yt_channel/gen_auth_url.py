@@ -2,10 +2,10 @@
 """Step 1: Generate OAuth URL with known PKCE verifier.
 
 Uses the registered loopback redirect (http://localhost) from
-client_secret.json. DO NOT use urn:ietf:wg:oauth:2.0:oob — Google blocked
+client_secret.json. DO NOT use urn:ietf:wg:oauth:2.0:oob - Google blocked
 the OOB flow (error 400 invalid_request, "The out-of-band (OOB) flow has
 been blocked"). After consent the browser redirects to
-http://localhost/?code=... — the page won't load (nothing listens on
+http://localhost/?code=... - the page won't load (nothing listens on
 port 80), but the code is in the address bar. Paste the whole URL or the
 code into exchange_code.py.
 """

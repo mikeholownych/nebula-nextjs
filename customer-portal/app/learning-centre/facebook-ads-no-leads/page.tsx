@@ -13,7 +13,7 @@ const articleSchema = createArticleSchema({
   description: 'High CTR, zero leads? Separate Meta ad delivery from post-click behaviour, then test message match, proof, friction, and tracking.',
   url: 'https://nebulacomponents.com/learning-centre/facebook-ads-no-leads',
   publishedDate: '2026-07-21',
-  modifiedDate: '2026-07-21',
+  modifiedDate: '2026-08-10',
 })
 
 export default function FacebookAdsNoLeadsPage() {

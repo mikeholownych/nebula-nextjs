@@ -37,7 +37,7 @@ function suppress() {
   try {
     localStorage.setItem(SUPPRESS_KEY, JSON.stringify({ until: Date.now() + SUPPRESS_TTL_MS }))
   } catch {
-    // sessionStorage unavailable — suppress is best-effort
+    // sessionStorage unavailable - suppress is best-effort
   }
 }
 
@@ -171,7 +171,7 @@ export default function ExitIntentPopup() {
               </div>
               <h2 className="text-xl font-bold text-fg">On its way.</h2>
               <p className="text-sm text-fg-muted">
-                Check your inbox — the checklist is headed to <span className="text-fg">{email}</span>.
+                Check your inbox - the checklist is headed to <span className="text-fg">{email}</span>.
               </p>
             </div>
           ) : (
@@ -191,11 +191,11 @@ export default function ExitIntentPopup() {
               </div>
 
               <h2 id="exit-popup-title" className="mb-2 text-2xl font-extrabold leading-tight text-fg">
-                Before you go — grab the checklist.
+                Before you go - grab the checklist.
               </h2>
               <p className="mb-6 text-sm leading-relaxed text-fg-muted">
                 The <strong className="text-fg">Top 5 Landing Page Mistakes</strong> founders make when
-                running paid ads — with the exact fix for each. One page, no fluff.
+                running paid ads - with the exact fix for each. One page, no fluff.
               </p>
 
               {/* Social proof micro-line */}

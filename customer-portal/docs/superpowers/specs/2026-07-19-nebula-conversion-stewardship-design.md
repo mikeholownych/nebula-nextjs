@@ -1,4 +1,4 @@
-# Nebula Conversion Stewardship — Offer and Service Design
+# Nebula Conversion Stewardship - Offer and Service Design
 
 **Status:** Approved design
 **Date:** 2026-07-19
@@ -21,7 +21,7 @@ The service owns the health and disciplined improvement of the post-click conver
 
 > We do not manage your ads. We use read-only Google Ads and GA4 evidence to keep the landing-page conversion system receiving that traffic measured, healthy, and improving.
 
-The customer buys accountable stewardship of a measurable conversion system—not a dashboard, report quota, block of hours, or guaranteed uplift.
+The customer buys accountable stewardship of a measurable conversion system-not a dashboard, report quota, block of hours, or guaranteed uplift.
 
 ## 2. Problem owned
 
@@ -51,14 +51,14 @@ Each month ends with:
 
 ## 3. Offer ladder and funnel
 
-### Stage 1 — Free URL audit
+### Stage 1 - Free URL audit
 
 - Public URL only
 - No account connection
 - Visible conversion risks
 - Zero-friction diagnosis
 
-### Stage 2 — One-Leak Repair Sprint
+### Stage 2 - One-Leak Repair Sprint
 
 - Current live public price is $147.
 - One-time audit and implementation.
@@ -66,7 +66,7 @@ Each month ends with:
 
 Legacy internal references still describe a $97 Repair Sprint. The monthly offer launch must reconcile the live $147 price with all internal records before public copy changes. This design does not authorize a Repair Sprint price change.
 
-### Stage 3 — Private invitation or application
+### Stage 3 - Private invitation or application
 
 A prospect may be invited after the free audit, Repair Sprint, or a readiness review. A Repair Sprint purchase is not mandatory when existing evidence already supports qualification.
 
@@ -80,7 +80,7 @@ Nebula creates a customer-specific **Stewardship Opportunity Brief** containing:
 - Reason a one-time fix will not protect against drift
 - Proposed Month 1 baseline and first-value scope
 
-### Stage 4 — Evidence review
+### Stage 4 - Evidence review
 
 A short evidence review determines:
 
@@ -93,7 +93,7 @@ A short evidence review determines:
 
 This is a qualification decision, not an unrestricted strategy call.
 
-### Stage 5 — 90-day engagement
+### Stage 5 - 90-day engagement
 
 Qualified customers receive:
 
@@ -198,7 +198,7 @@ When evidence identifies an upstream traffic problem, Nebula documents it for th
 
 ## 6. Delivery model
 
-### Month 1 — Foundation and first value
+### Month 1 - Foundation and first value
 
 - Connect read-only Google Ads and GA4.
 - Verify freshness, permissions, and data availability.
@@ -210,7 +210,7 @@ When evidence identifies an upstream traffic problem, Nebula documents it for th
 
 Month 1 must produce a functioning measurement foundation and a tangible improvement. A dashboard setup alone is insufficient delivery.
 
-### Month 2 — Highest-impact initiative
+### Month 2 - Highest-impact initiative
 
 Nebula selects the most valuable issue it controls, defines acceptance criteria, implements it, and verifies production behavior.
 
@@ -224,7 +224,7 @@ Examples:
 - Repair conversion instrumentation.
 - Simplify the on-page path to booking or checkout.
 
-### Month 3 — Measure, refine, and continue
+### Month 3 - Measure, refine, and continue
 
 - Measure the Month 2 intervention where evidence permits.
 - Separate observed changes from causal certainty.
@@ -267,11 +267,11 @@ Broken forms, tracking failures, consent defects, or severe regressions on the o
 
 Every material leak is classified before intervention:
 
-1. **Traffic-intent failure** — identify and hand off; do not manage ads.
-2. **Message-handoff failure** — repair the connection between upstream promise and page experience.
-3. **Conversion-experience failure** — repair proof, hierarchy, forms, mobile, accessibility, performance, or friction.
-4. **Measurement failure** — repair tracking and attribution on the owned surface.
-5. **Offer failure** — diagnose and reshape on-page offer presentation within scope.
+1. **Traffic-intent failure** - identify and hand off; do not manage ads.
+2. **Message-handoff failure** - repair the connection between upstream promise and page experience.
+3. **Conversion-experience failure** - repair proof, hierarchy, forms, mobile, accessibility, performance, or friction.
+4. **Measurement failure** - repair tracking and attribution on the owned surface.
+5. **Offer failure** - diagnose and reshape on-page offer presentation within scope.
 
 Nebula does not blame the page when the evidence indicates traffic quality or another excluded system is the primary cause.
 
@@ -279,11 +279,11 @@ Nebula does not blame the page when the evidence indicates traffic quality or an
 
 ### Evidence sources
 
-1. **Acquisition context** — query themes, campaign context, final URLs, spend, clicks, device, geography, and aggregated demographics where available
-2. **Post-click behavior** — consented sessions, engagement, funnel events, form completion, and conversion
-3. **Experience evidence** — rendered snapshots, audit findings, technical checks, and regressions
-4. **Intervention evidence** — what changed, when, why, production verification, and rollback state
-5. **Outcome evidence** — before/after results, confounders, confidence, and optional customer-supplied aggregate revenue or lead-quality data
+1. **Acquisition context** - query themes, campaign context, final URLs, spend, clicks, device, geography, and aggregated demographics where available
+2. **Post-click behavior** - consented sessions, engagement, funnel events, form completion, and conversion
+3. **Experience evidence** - rendered snapshots, audit findings, technical checks, and regressions
+4. **Intervention evidence** - what changed, when, why, production verification, and rollback state
+5. **Outcome evidence** - before/after results, confounders, confidence, and optional customer-supplied aggregate revenue or lead-quality data
 
 Version one supports Google Ads and GA4 only. Other ad platforms are excluded until the method is proven.
 
@@ -320,10 +320,10 @@ Each candidate leak records:
 
 ### Claim labels
 
-- **Observed** — directly present in source data
-- **Directional** — a pattern exists, but evidence is insufficient for causality
-- **Supported** — multiple sources agree and material confounders are limited
-- **Controlled** — a valid experiment supports causal attribution
+- **Observed** - directly present in source data
+- **Directional** - a pattern exists, but evidence is insufficient for causality
+- **Supported** - multiple sources agree and material confounders are limited
+- **Controlled** - a valid experiment supports causal attribution
 
 A post-change increase is not automatically attributed to Nebula.
 
@@ -459,12 +459,12 @@ The customer owns all implemented assets, reports, and intervention history.
 
 The service requires six bounded components:
 
-1. **Access and connector layer** — read-only Google Ads, GA4, and site access
-2. **Evidence layer** — minimized aggregate observations with provenance and freshness
-3. **Diagnostic layer** — leak classification, confidence, controllability, and prioritization
-4. **Initiative workflow** — approval, scope, acceptance, implementation, rollback, and status
-5. **Verification layer** — rendered production QA, events, forms, accessibility, and monitoring
-6. **Customer evidence layer** — Leak Map, ledger, outcome memo, and export
+1. **Access and connector layer** - read-only Google Ads, GA4, and site access
+2. **Evidence layer** - minimized aggregate observations with provenance and freshness
+3. **Diagnostic layer** - leak classification, confidence, controllability, and prioritization
+4. **Initiative workflow** - approval, scope, acceptance, implementation, rollback, and status
+5. **Verification layer** - rendered production QA, events, forms, accessibility, and monitoring
+6. **Customer evidence layer** - Leak Map, ledger, outcome memo, and export
 
 Each component must be independently testable and replaceable without changing the offer contract.
 

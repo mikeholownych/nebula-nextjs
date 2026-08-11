@@ -23,7 +23,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Mobile Landing Page Audit: CTA Visibility, 44px Tap Targets & Viewport Failures for Meta and TikTok Traffic',
   description:
-    'Diagnostic guide for mobile-specific landing page conversion failures — CTA visibility at 375px, tap target size, viewport meta configuration, form friction, image loading weight, and font size causing iOS zoom.',
+    'Diagnostic guide for mobile-specific landing page conversion failures - CTA visibility at 375px, tap target size, viewport meta configuration, form friction, image loading weight, and font size causing iOS zoom.',
   author: { '@type': 'Organization', name: 'Nebula Components' },
   publisher: { '@type': 'Organization', name: 'Nebula Components' },
   mainEntityOfPage: 'https://nebulacomponents.com/mobile-landing-page-audit',
@@ -50,7 +50,7 @@ const faqItems = [
   },
   {
     q: 'What is the minimum tap target size for mobile buttons?',
-    a: "44×44 CSS pixels — Google's Web Vitals standard and Apple's HIG minimum. Buttons, links, and form controls below this size cause accidental taps on adjacent elements or failed interactions. Variant selectors, size pickers, and icon-only buttons on ecommerce pages are the most frequent offenders.",
+    a: "44×44 CSS pixels - Google's Web Vitals standard and Apple's HIG minimum. Buttons, links, and form controls below this size cause accidental taps on adjacent elements or failed interactions. Variant selectors, size pickers, and icon-only buttons on ecommerce pages are the most frequent offenders.",
   },
   {
     q: 'Does page load speed affect mobile conversion differently than desktop?',
@@ -81,43 +81,43 @@ const MOBILE_FAILURES = [
     signal: 'CTA visibility',
     label: 'Primary CTA not visible on 375px viewport without scrolling',
     detail:
-      "The most common mobile conversion failure is structural: the primary call to action is positioned below a hero section, a headline, and a value proposition paragraph — none of which is the CTA. On a 375px viewport, this typically places the buy button or form submit below the first scroll. Visitors who don't scroll don't see the action they arrived to take. Meta, TikTok, and Instagram traffic arrive on mobile by default — this failure affects the majority of paid click volume.",
-    fix: 'Reorder the above-fold layout for mobile: headline, value statement, primary CTA — in that order, all within the first 600px of the viewport on a 375px screen. Verify in Chrome DevTools device simulation. Supporting content — testimonials, feature details, FAQs — belongs below the fold.',
+      "The most common mobile conversion failure is structural: the primary call to action is positioned below a hero section, a headline, and a value proposition paragraph - none of which is the CTA. On a 375px viewport, this typically places the buy button or form submit below the first scroll. Visitors who don't scroll don't see the action they arrived to take. Meta, TikTok, and Instagram traffic arrive on mobile by default - this failure affects the majority of paid click volume.",
+    fix: 'Reorder the above-fold layout for mobile: headline, value statement, primary CTA - in that order, all within the first 600px of the viewport on a 375px screen. Verify in Chrome DevTools device simulation. Supporting content - testimonials, feature details, FAQs - belongs below the fold.',
   },
   {
     signal: 'Tap targets',
-    label: 'Interactive elements under 44×44px — variant selectors, icon buttons, nav links',
+    label: 'Interactive elements under 44×44px - variant selectors, icon buttons, nav links',
     detail:
-      "Google's Web Vitals standard and Apple's Human Interface Guidelines both specify 44×44 CSS pixels as the minimum touch target. Elements below this size cause two distinct failures: accidental taps on adjacent elements, and missed taps that register as no-action. On ecommerce pages, size and color variant selectors — typically rendered at 32–38px in default Shopify themes — are the most frequent violators. Icon-only buttons (wishlist hearts, share icons, close modals) are a close second.",
-    fix: 'Audit all interactive elements in Chrome DevTools with the Accessibility panel open. Set a minimum height and width of 44px on all buttons, links, and form controls. For icon-only buttons, increase the padding — not the icon size — to reach the minimum touch area without affecting visual design.',
+      "Google's Web Vitals standard and Apple's Human Interface Guidelines both specify 44×44 CSS pixels as the minimum touch target. Elements below this size cause two distinct failures: accidental taps on adjacent elements, and missed taps that register as no-action. On ecommerce pages, size and color variant selectors - typically rendered at 32–38px in default Shopify themes - are the most frequent violators. Icon-only buttons (wishlist hearts, share icons, close modals) are a close second.",
+    fix: 'Audit all interactive elements in Chrome DevTools with the Accessibility panel open. Set a minimum height and width of 44px on all buttons, links, and form controls. For icon-only buttons, increase the padding - not the icon size - to reach the minimum touch area without affecting visual design.',
   },
   {
     signal: 'Viewport meta',
     label: 'Missing or misconfigured viewport meta tag rendering desktop layout on mobile',
     detail:
-      "A page without `<meta name='viewport' content='width=device-width, initial-scale=1'>` renders at desktop width on mobile browsers — typically 980px — and then scales down to fit the screen. The result is an unzoomed desktop layout where all text is illegible, all tap targets are tiny, and CTAs require precision tapping. This is a foundational configuration error that makes every other mobile fix irrelevant until it is corrected.",
-    fix: "Add `<meta name='viewport' content='width=device-width, initial-scale=1'>` to the `<head>` of every landing page. Verify in Chrome DevTools that the device simulation renders the page at mobile width, not as a scaled-down desktop view. This is the first check in the mobile audit — if it fails, no other signal is evaluable.",
+      "A page without `<meta name='viewport' content='width=device-width, initial-scale=1'>` renders at desktop width on mobile browsers - typically 980px - and then scales down to fit the screen. The result is an unzoomed desktop layout where all text is illegible, all tap targets are tiny, and CTAs require precision tapping. This is a foundational configuration error that makes every other mobile fix irrelevant until it is corrected.",
+    fix: "Add `<meta name='viewport' content='width=device-width, initial-scale=1'>` to the `<head>` of every landing page. Verify in Chrome DevTools that the device simulation renders the page at mobile width, not as a scaled-down desktop view. This is the first check in the mobile audit - if it fails, no other signal is evaluable.",
   },
   {
     signal: 'Form friction',
-    label: 'Multi-field forms with no autocomplete — email inputs missing type="email"',
+    label: 'Multi-field forms with no autocomplete - email inputs missing type="email"',
     detail:
-      "Mobile form friction has two observable components. First: multi-field forms without `autocomplete` attributes force the visitor to type every field manually — name, email, company — on a touchscreen keyboard. Second: email inputs without `type='email'` do not trigger the email-optimized keyboard (with the @ symbol prominent) on iOS and Android. Both add friction that is invisible on desktop but material on mobile.",
+      "Mobile form friction has two observable components. First: multi-field forms without `autocomplete` attributes force the visitor to type every field manually - name, email, company - on a touchscreen keyboard. Second: email inputs without `type='email'` do not trigger the email-optimized keyboard (with the @ symbol prominent) on iOS and Android. Both add friction that is invisible on desktop but material on mobile.",
     fix: "Add `autocomplete` attributes to every form field: `autocomplete='name'`, `autocomplete='email'`, `autocomplete='organization'`. Set `type='email'` on all email inputs and `type='tel'` on phone inputs. These attributes cost nothing to implement and directly reduce mobile form abandonment.",
   },
   {
     signal: 'Image loading',
     label: 'Hero and product images loading at desktop resolution on mobile',
     detail:
-      "A 1400×900 hero image loaded on a 375px mobile viewport delivers 2–4x the bytes the device can render. On a median 4G connection, a single oversized hero image adds 1–3 seconds to LCP. Most pages do not use `srcset` or `sizes` attributes to serve mobile-appropriate image dimensions — the same asset served to desktop users is served to mobile visitors at full resolution.",
+      "A 1400×900 hero image loaded on a 375px mobile viewport delivers 2–4x the bytes the device can render. On a median 4G connection, a single oversized hero image adds 1–3 seconds to LCP. Most pages do not use `srcset` or `sizes` attributes to serve mobile-appropriate image dimensions - the same asset served to desktop users is served to mobile visitors at full resolution.",
     fix: "Implement responsive images using `srcset` and `sizes` attributes, or use a CDN that serves appropriately sized variants. A mobile hero image should be 750px wide at 2x for retina, not 1400px. Use WebP format. Verify in Chrome DevTools Network panel that the image loaded on mobile simulation is under 150KB for above-fold images.",
   },
   {
     signal: 'Font size',
     label: 'Body text under 16px causing iOS to zoom on tap, breaking layout',
     detail:
-      "iOS Safari auto-zooms into form inputs and interactive text elements when the font size is below 16px. This zoom behavior is a browser protection against illegible text — but it breaks the page layout for the visitor, requiring them to manually zoom out before continuing. Pages that set body text at 14px or 15px — common in design systems optimized for desktop — trigger this behavior on every form interaction on iOS.",
-    fix: 'Set the minimum font size for all text inputs and body text to 16px in your CSS. On iOS, this prevents the auto-zoom. Verify in Chrome DevTools device simulation and test on a real iPhone if available. The fix is a single CSS rule — it does not require a design overhaul.',
+      "iOS Safari auto-zooms into form inputs and interactive text elements when the font size is below 16px. This zoom behavior is a browser protection against illegible text - but it breaks the page layout for the visitor, requiring them to manually zoom out before continuing. Pages that set body text at 14px or 15px - common in design systems optimized for desktop - trigger this behavior on every form interaction on iOS.",
+    fix: 'Set the minimum font size for all text inputs and body text to 16px in your CSS. On iOS, this prevents the auto-zoom. Verify in Chrome DevTools device simulation and test on a real iPhone if available. The fix is a single CSS rule - it does not require a design overhaul.',
   },
 ]
 
@@ -183,7 +183,7 @@ export default function MobileAuditPage() {
               What the audit checks on a mobile page
             </h2>
             <p className="text-sm text-fg-muted leading-6 mb-6 max-w-2xl">
-              Nebula checks the same 9 signals on every URL. For mobile pages, the signals that fail most often are CTA visibility, tap target size, and viewport configuration. The audit returns pass/fail with the raw value from your page — viewport meta content, image dimensions, font-size declarations — so every finding is verifiable.
+              Nebula checks the same 9 signals on every URL. For mobile pages, the signals that fail most often are CTA visibility, tap target size, and viewport configuration. The audit returns pass/fail with the raw value from your page - viewport meta content, image dimensions, font-size declarations - so every finding is verifiable.
             </p>
             <div className="grid gap-3 sm:grid-cols-3">
               {[
@@ -211,7 +211,7 @@ export default function MobileAuditPage() {
           <section className="mb-14 rounded-2xl border border-border bg-bg-muted/30 p-8 text-center">
             <h2 className="text-2xl font-bold text-fg mb-3">Audit your mobile landing page</h2>
             <p className="text-sm text-fg-muted max-w-xl mx-auto mb-6">
-              Paste your URL. Nebula checks CTA visibility at 375px, tap target sizing, viewport meta configuration, image weight signals, and font size against your actual page — not a template. Free, no signup, under 2 minutes.
+              Paste your URL. Nebula checks CTA visibility at 375px, tap target sizing, viewport meta configuration, image weight signals, and font size against your actual page - not a template. Free, no signup, under 2 minutes.
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"

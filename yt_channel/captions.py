@@ -1,5 +1,5 @@
 """
-captions.py — Word-level animated karaoke captions.
+captions.py - Word-level animated karaoke captions.
 
 Pipeline:
   1. Run faster-whisper on the final mixed audio to get word timestamps
@@ -66,7 +66,7 @@ def generate_captions(audio_path, ass_path, is_short: bool = False) -> Optional[
     try:
         from faster_whisper import WhisperModel
     except ImportError:
-        print("[captions] faster_whisper not installed — skipping captions")
+        print("[captions] faster_whisper not installed - skipping captions")
         return None
 
     try:
@@ -77,7 +77,7 @@ def generate_captions(audio_path, ass_path, is_short: bool = False) -> Optional[
             word_timestamps=True,
             language="en",
             beam_size=5,
-            vad_filter=True,        # skip silence — cleaner word boundaries
+            vad_filter=True,        # skip silence - cleaner word boundaries
         )
 
         # Collect all words with timestamps
@@ -92,7 +92,7 @@ def generate_captions(audio_path, ass_path, is_short: bool = False) -> Optional[
                     })
 
         if not all_words:
-            print("[captions] No words detected — skipping")
+            print("[captions] No words detected - skipping")
             return None
 
         _write_ass(all_words, ass_path, is_short=is_short)

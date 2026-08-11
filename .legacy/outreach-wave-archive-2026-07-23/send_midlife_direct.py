@@ -15,7 +15,7 @@ https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 No call needed.
 
 Nebula Audit Agent"""
-payload={'to':['anthony@themidlifealpha.com'],'subject':'midlife alpha ads — 404 page / zero conversion check','text':body,'client_id':'surge-midlifealpha-20260702'}
+payload={'to':['anthony@themidlifealpha.com'],'subject':'midlife alpha ads - 404 page / zero conversion check','text':body,'client_id':'surge-midlifealpha-20260702'}
 req=urllib.request.Request(f'https://api.agentmail.to/v0/inboxes/{INBOX}/messages/send',data=json.dumps(payload).encode(),headers={'Authorization':f'Bearer {KEY}','Content-Type':'application/json'},method='POST')
 with urllib.request.urlopen(req,timeout=30) as r:
  result=json.loads(r.read())

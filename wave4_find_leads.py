@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Wave 4 Lead Finder — uses Hermes web_search via CLI subprocess to find buying-trigger leads.
+Wave 4 Lead Finder - uses Hermes web_search via CLI subprocess to find buying-trigger leads.
 Searches for founders posting about ad spend + no conversions across Reddit, IH, HN.
 Extracts emails from post URLs where available.
 """
@@ -85,30 +85,30 @@ def search_for_leads():
     """Use curl to hit DuckDuckGo HTML search for each query."""
     all_leads = []
     seen_urls = set()
-    
+
     for q in SEARCH_QUERIES:
         time.sleep(3)
         # Use DuckDuckGo HTML (no JS required)
         import urllib.parse
         encoded = urllib.parse.quote_plus(q)
         url = f'https://html.duckduckgo.com/html/?q={encoded}'
-        
+
         html = fetch_url(url, timeout=15)
         if not html:
             print(f"  [ddg] no response for: {q[:50]}")
             continue
-        
+
         # Extract result links
         link_pattern = r'href="(https?://(?:www\.reddit\.com|news\.ycombinator\.com|www\.indiehackers\.com)[^"]+)"'
         links = re.findall(link_pattern, html)
-        
+
         # Also extract titles/snippets
         title_pattern = r'<a class="result__a"[^>]*>([^<]+)</a>'
         titles = re.findall(title_pattern, html)
-        
+
         snippet_pattern = r'<a class="result__snippet"[^>]*>([^<]+)</a>'
         snippets = re.findall(snippet_pattern, html)
-        
+
         matched_links = 0
         for i, link in enumerate(links):
             if link in seen_urls:
@@ -116,12 +116,12 @@ def search_for_leads():
             # Decode URL entities
             link = link.replace('&amp;', '&')
             seen_urls.add(link)
-            
+
             title = titles[i] if i < len(titles) else ''
             snippet = snippets[i] if i < len(snippets) else ''
             combined = title + ' ' + snippet
             score, matched_kw = score_content(combined)
-            
+
             if score >= 2:
                 matched_links += 1
                 all_leads.append({
@@ -134,9 +134,9 @@ def search_for_leads():
                     'source': 'web_search',
                     'query': q[:60],
                 })
-        
+
         print(f"  [ddg] query {SEARCH_QUERIES.index(q)+1}/{len(SEARCH_QUERIES)}: {len(links)} links, {matched_links} scored")
-    
+
     all_leads.sort(key=lambda x: x['score'], reverse=True)
     return all_leads
 
@@ -145,7 +145,7 @@ def try_extract_email_from_post(lead):
     url = lead.get('url', '')
     if 'reddit.com' not in url:
         return None
-    
+
     # Extract username from Reddit post
     # Pattern: reddit.com/r/sub/comments/id/title/
     # Author is in the HTML
@@ -156,7 +156,7 @@ def try_extract_email_from_post(lead):
         data = json.loads(html)
         author = data[0]['data']['children'][0]['data'].get('author', '')
         post_body = data[0]['data']['children'][0]['data'].get('selftext', '')
-        
+
         # Check if author put email in post body
         emails = extract_email_from_text(post_body)
         if emails:
@@ -169,19 +169,19 @@ def build_email(lead):
     title_snip = lead.get('title', 'your post')[:80]
     matched_kw = lead.get('matched', ['conversion issues'])[0] if lead.get('matched') else 'conversion issues'
     url = lead.get('url', '')
-    
-    subject = f"Saw your post about {matched_kw[:40]} — quick observation"
+
+    subject = f"Saw your post about {matched_kw[:40]} - quick observation"
     body = f"""Hey,
 
 I came across your post: "{title_snip}"
 
-I do free landing page audits — I look at above-the-fold messaging, CTA clarity, and conversion friction. Usually takes me ~60 min, I send findings same day.
+I do free landing page audits - I look at above-the-fold messaging, CTA clarity, and conversion friction. Usually takes me ~60 min, I send findings same day.
 
 If your page is getting traffic but not converting, I can usually spot the top 1-2 issues.
 
 Would it be useful? Just reply with your landing page URL.
 
-— Mike
+- Mike
 nebulacomponents.shop"""
     return subject, body
 
@@ -189,13 +189,13 @@ def main():
     print("=== Wave 4 Lead Finder (Web Search) ===")
     contacted = load_contacted()
     print(f"Already contacted: {len(contacted)}")
-    
+
     print("\n[1] Searching for buying-trigger posts...")
     leads = search_for_leads()
-    
+
     print(f"\nTotal leads found: {len(leads)}")
     with_email = [l for l in leads if l.get('email')]
-    
+
     # Try to get emails from top Reddit posts
     print(f"\n[2] Attempting email extraction from top {min(20, len(leads))} Reddit leads...")
     for lead in leads[:20]:
@@ -207,19 +207,19 @@ def main():
                 lead['author'] = author
                 print(f"  Found email: {email} (u/{author})")
             time.sleep(2)
-    
+
     with_email = [l for l in leads if l.get('email')]
-    
+
     # Save all leads
     with open(LEADS_FILE, 'w') as f:
         json.dump(leads, f, indent=2)
     print(f"\nSaved {len(leads)} leads to wave4_leads_found.json")
     print(f"Leads with extractable emails: {len(with_email)}")
-    
+
     print("\nTop 10 leads by score:")
     for l in leads[:10]:
         print(f"  score={l['score']} | {l.get('email','no-email')} | {l['title'][:60]}")
-    
+
     if not with_email:
         print("\n⚠️  No direct emails found. Reddit/HN leads require contact form or comment reply.")
         print("ACTION NEEDED: Review wave4_leads_found.json and manually reach out via:")
@@ -227,12 +227,12 @@ def main():
         print("  2. Contact forms on their linked sites")
         print("  3. LinkedIn/Twitter from profile")
         return
-    
+
     print(f"\n[3] Sending to {len(with_email)} leads with emails (cap={MAX_SENDS})...")
     from agentmail_client import AgentMailClient
     am = AgentMailClient()
     sent = 0
-    
+
     for lead in with_email:
         if sent >= MAX_SENDS:
             print(f"  Daily cap reached ({MAX_SENDS})")
@@ -262,7 +262,7 @@ def main():
             time.sleep(SEND_DELAY)
         except Exception as e:
             print(f"  ❌ {email}: {e}")
-    
+
     save_contacted(contacted)
     print(f"\n=== Done: {sent} emails sent, {len(contacted)} total contacted ===")
 

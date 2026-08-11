@@ -1,6 +1,6 @@
 /**
- * GET  /api/auth/google — initiates Google OAuth server-side redirect flow
- * POST /api/auth/google — proxies client-side ID token exchange (legacy)
+ * GET  /api/auth/google - initiates Google OAuth server-side redirect flow
+ * POST /api/auth/google - proxies client-side ID token exchange (legacy)
  */
 
 import { NextRequest, NextResponse } from 'next/server'

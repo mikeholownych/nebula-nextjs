@@ -3,8 +3,8 @@
 ## Detailed analysis
 
 - **Transformation type:** Single Next.js application feature.
-- **User-facing change:** Yes — new learning-centre resource and direct download.
-- **Structural change:** Limited — one deterministic static-asset projection pipeline.
+- **User-facing change:** Yes - new learning-centre resource and direct download.
+- **Structural change:** Limited - one deterministic static-asset projection pipeline.
 - **Data model change:** No.
 - **API change:** No.
 - **Infrastructure change:** No.
@@ -15,25 +15,25 @@
 
 ### Inception
 
-- [x] Workspace detection — reused completed brownfield analysis.
-- [x] Requirements analysis — approved bounded requirements.
-- [x] User stories — two stories with acceptance criteria generated.
-- [x] Workflow planning — this document and the canonical implementation plan.
-- [x] Application design — skipped as a separate stage; the approved design stays within existing App Router, static assets, and shared UI boundaries.
-- [x] Units generation — one independently releasable unit; further decomposition would add coordination without an independent release boundary.
+- [x] Workspace detection - reused completed brownfield analysis.
+- [x] Requirements analysis - approved bounded requirements.
+- [x] User stories - two stories with acceptance criteria generated.
+- [x] Workflow planning - this document and the canonical implementation plan.
+- [x] Application design - skipped as a separate stage; the approved design stays within existing App Router, static assets, and shared UI boundaries.
+- [x] Units generation - one independently releasable unit; further decomposition would add coordination without an independent release boundary.
 
 ### Construction
 
-- [x] Functional design — embedded in exact bundle manifest, packager contracts, page contract, and tests.
-- [x] NFR requirements — embedded: deterministic output, fail-closed validation, accessibility, privacy, security, and maintainability.
-- [x] NFR design — embedded in the approved design and implementation plan.
-- [x] Infrastructure design — skipped; existing Next.js service and domain are unchanged.
-- [ ] Code generation — execute after explicit plan approval.
-- [ ] Build and test — execute after code generation.
+- [x] Functional design - embedded in exact bundle manifest, packager contracts, page contract, and tests.
+- [x] NFR requirements - embedded: deterministic output, fail-closed validation, accessibility, privacy, security, and maintainability.
+- [x] NFR design - embedded in the approved design and implementation plan.
+- [x] Infrastructure design - skipped; existing Next.js service and domain are unchanged.
+- [ ] Code generation - execute after explicit plan approval.
+- [ ] Build and test - execute after code generation.
 
 ### Operations
 
-- [ ] Operations — repository stage is a placeholder; deployment verification is included in the build-and-test release task.
+- [ ] Operations - repository stage is a placeholder; deployment verification is included in the build-and-test release task.
 
 ## Execution sequence
 

@@ -1,17 +1,17 @@
-"""Post-Checkout Email Sequences — 4-email delivery + implementation workflow.
+"""Post-Checkout Email Sequences - 4-email delivery + implementation workflow.
 
 Used by: delivery_workflow.py (triggered on Stripe charge success)
 Sends via: AgentMail (fail-closed, registered in lead_state.db)
 
 EMAIL 1 (5 min): Your fix is ready
-EMAIL 2 (1 day): Implementation guide  
+EMAIL 2 (1 day): Implementation guide
 EMAIL 3 (7 days): Did you implement? Share your result
 EMAIL 4 (30 days): Re-audit proof + Pro subscription offer
 """
 
 EMAIL_TEMPLATES = {
     "email_1_fix_ready": {
-        "subject": "Your $97 fix — {finding_label}",
+        "subject": "Your $97 fix - {finding_label}",
         "send_after_seconds": 300,  # 5 min
         "body": """Hi {founder_name},
 
@@ -30,13 +30,13 @@ Your fix is ready.
 1. Copy the text above
 2. Paste it into your landing page
 3. Test on your live site
-4. Reply here when done — I'll send you the verification steps
+4. Reply here when done - I'll send you the verification steps
 
 This one fix typically lifts conversions 3–8%. That's the reason you're here.
 
 Questions? Hit reply. I read every message.
 
-—
+-
 Nebula
 nebulacomponents.com
 """,
@@ -45,7 +45,7 @@ nebulacomponents.com
     },
 
     "email_2_implementation_guide": {
-        "subject": "Before/After proof — how to measure the impact",
+        "subject": "Before/After proof - how to measure the impact",
         "send_after_seconds": 86400,  # 1 day
         "body": """Hi {founder_name},
 
@@ -74,7 +74,7 @@ In 7 days, I'll re-audit your site automatically. If your score improves from {b
 
 Questions on implementation? Reply here. I'll help you.
 
-—
+-
 Nebula
 nebulacomponents.com
 """,
@@ -92,14 +92,14 @@ nebulacomponents.com
 I'm running the re-audit now to check if it worked.
 
 **While I'm checking:**
-If you haven't implemented yet, no problem — just reply and let me know:
+If you haven't implemented yet, no problem - just reply and let me know:
 • Are you stuck? (I'll help)
 • Do you have questions? (I'll answer)
 • Did you implement but unsure if it's live? (I can check)
 
 I'll have the results in a few hours. Either way, you'll hear from me.
 
-—
+-
 Nebula
 nebulacomponents.com
 """,
@@ -108,7 +108,7 @@ nebulacomponents.com
     },
 
     "email_4_results_and_upsell": {
-        "subject": "{result_status}: Your re-audit is live — {score_change}",
+        "subject": "{result_status}: Your re-audit is live - {score_change}",
         "send_after_seconds": 2592000,  # 30 days
         "body": """{email_body_by_result}""",
         "variants": {
@@ -150,9 +150,9 @@ Ready? Click below:
 [CTA: Upgrade to Pro ($29/mo, first month $14.50)]
 [CTA: Audit another site (free)]
 
-Reply if you want something else entirely — I'm flexible.
+Reply if you want something else entirely - I'm flexible.
 
-—
+-
 Nebula
 nebulacomponents.com
 """,
@@ -170,7 +170,7 @@ The fix is partially live or not fully implemented yet. Here's what I'd suggest:
 
 1. Double-check the change is live on your production site (not staging)
 2. Clear your browser cache and test again
-3. Reply here — I'll verify for you
+3. Reply here - I'll verify for you
 
 Most common issues:
 • Change is on staging, not production
@@ -179,7 +179,7 @@ Most common issues:
 
 Once we confirm it's live, we should see a bigger improvement on the next re-audit in 7 days.
 
-—
+-
 Nebula
 nebulacomponents.com
 """,
@@ -203,12 +203,12 @@ This usually means one of three things:
 
 I want to solve this with you. Reply:
 • "I deployed but not sure if it's live" (I'll verify)
-• "I haven't deployed yet" (tell me why — blockers?)
+• "I haven't deployed yet" (tell me why - blockers?)
 • "I need a different fix" (I can suggest alternatives)
 
-Let's figure this out. I've got skin in this game too — I want your fix to work.
+Let's figure this out. I've got skin in this game too - I want your fix to work.
 
-—
+-
 Nebula
 nebulacomponents.com
 """,

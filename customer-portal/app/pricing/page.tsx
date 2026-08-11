@@ -8,7 +8,7 @@ import MembershipGrid from './MembershipGrid'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Pricing — Memberships & One-Leak Repair Sprint | Nebula',
+  title: 'Pricing - Memberships & One-Leak Repair Sprint | Nebula',
   description:
     'Free evidence-backed landing page audit, Pro/Growth/Agency memberships with monitoring and white-label reports, plus a $97 one-time repair sprint.',
   alternates: {
@@ -48,7 +48,7 @@ function buildServiceSchema(fixPack: FixPackPublicFact) {
 const faqItems = [
   {
     q: 'What is included in the One-Leak Repair Sprint?',
-    a: 'After the free audit, you pay $97 and receive a tailored implementation kit for one specific failing signal — exact copy, a code snippet, or a configuration change. You implement it yourself, with your developer, or through your CMS. No site access is required by Nebula.',
+    a: 'After the free audit, you pay $97 and receive a tailored implementation kit for one specific failing signal - exact copy, a code snippet, or a configuration change. You implement it yourself, with your developer, or through your CMS. No site access is required by Nebula.',
   },
   {
     q: 'Why only one finding?',
@@ -56,7 +56,7 @@ const faqItems = [
   },
   {
     q: 'Do I need to give Nebula access to my site?',
-    a: 'No. The tailored kit is sent after successful payment — you apply it yourself or hand it to your developer. Nebula never needs CMS, hosting, or repository access.',
+    a: 'No. The tailored kit is sent after successful payment - you apply it yourself or hand it to your developer. Nebula never needs CMS, hosting, or repository access.',
   },
   {
     q: 'How long does it take?',
@@ -64,7 +64,7 @@ const faqItems = [
   },
   {
     q: 'Does the repair guarantee more conversions?',
-    a: 'No. The kit targets a specific page condition identified by the audit. Conversion outcomes also depend on traffic quality, offer strength, and measurement windows. The 30-day re-audit shows whether the page condition changed — not whether revenue went up.',
+    a: 'No. The kit targets a specific page condition identified by the audit. Conversion outcomes also depend on traffic quality, offer strength, and measurement windows. The 30-day re-audit shows whether the page condition changed - not whether revenue went up.',
   },
   {
     q: 'What does the 30-day evidence check cover?',
@@ -139,7 +139,7 @@ export default function PricingPage() {
               <p className="mt-1 text-sm italic text-fg-muted">See what's leaking before you spend another dollar</p>
               <p className="mt-2 text-3xl font-bold text-fg">Free</p>
               <p className="mt-4 text-fg-muted">
-                Drop in a URL and get a scored, evidence-backed diagnosis in minutes — no signup required.
+                Drop in a URL and get a scored, evidence-backed diagnosis in minutes - no signup required.
               </p>
               <ul className="mt-6 space-y-2 text-sm text-fg-muted">
                 {[
@@ -167,10 +167,10 @@ export default function PricingPage() {
             <Card variant="bordered">
               <p className="mb-3 text-sm font-medium text-fg-muted">One-time payment</p>
               <h2 className="text-2xl font-semibold text-fg">One-Leak Repair Sprint</h2>
-              <p className="mt-1 text-sm italic text-fg-muted">Fix the highest-impact leak — kit sent after successful payment</p>
+              <p className="mt-1 text-sm italic text-fg-muted">Fix the highest-impact leak - kit sent after successful payment</p>
               <p className="mt-2 text-4xl font-bold text-fg">${REPAIR_SPRINT_OFFER.priceUsd}</p>
               <p className="mt-4 text-fg-muted">
-                Run the free audit on one landing page first — see your score and initial findings before sharing an email.
+                Run the free audit on one landing page first - see your score and initial findings before sharing an email.
                 Pay $97 for a tailored implementation kit for one high-impact finding on your specific page.
               </p>
               <div className="mt-6 space-y-3">
@@ -196,14 +196,14 @@ export default function PricingPage() {
           </div>
 
           <p className="mt-6 text-center text-sm text-fg-muted">
-            Every audit you run with an email is kept in a free workspace — audit history, fix queue,
+            Every audit you run with an email is kept in a free workspace - audit history, fix queue,
             compare, timeline, and 30-day re-audit tracking. No subscription required.
           </p>
 
           <div className="mt-12 rounded-2xl border border-accent/20 bg-accent/5 p-8 text-center">
             <p className="text-lg font-semibold text-fg">Not sure yet?</p>
             <p className="mt-2 text-fg-muted">
-              Run the free audit first — see exactly what's leaking before you decide.
+              Run the free audit first - see exactly what's leaking before you decide.
             </p>
             <Link
               href="/audit?utm_source=pricing&utm_medium=internal"

@@ -1,7 +1,7 @@
-# ✅ INFRASTRUCTURE STABLE — TUNNEL RESOLVED
+# ✅ INFRASTRUCTURE STABLE - TUNNEL RESOLVED
 
-**Status:** FULLY OPERATIONAL  
-**Time:** June 25, 2026 09:45 UTC  
+**Status:** FULLY OPERATIONAL
+**Time:** June 25, 2026 09:45 UTC
 **Public Site:** https://nebulacomponents.shop ✅ HTTP 200
 
 ---
@@ -97,20 +97,20 @@ $ ps aux | grep tunnel_monitor_daemon
 
 ## Files & Configuration
 
-- `/home/mike/nebula/tunnel_monitor_daemon.py` — Monitor script
-- `/home/mike/nebula/tunnel_monitor.log` — Tunnel events log
-- `~/.cloudflared/config.yml` — Tunnel routing (direct to 8765/8766, no Caddy)
-- `/etc/caddy/Caddyfile` — Optional reverse proxy (not currently used in critical path)
+- `/home/mike/nebula/tunnel_monitor_daemon.py` - Monitor script
+- `/home/mike/nebula/tunnel_monitor.log` - Tunnel events log
+- `~/.cloudflared/config.yml` - Tunnel routing (direct to 8765/8766, no Caddy)
+- `/etc/caddy/Caddyfile` - Optional reverse proxy (not currently used in critical path)
 
 ---
 
 ## Cron Jobs Running
 
-1. **tunnel_monitor_watchdog** (4f26a91e830a) — Every 2 min, ensures monitor stays alive
-2. **audit_auto_responder** — Every 5 min, processes incoming email replies
-3. **challenge_checkin** — Every 2 min, reports campaign metrics
-4. **challenge_self_audit_6h** — Every 6 hours, full system audit
-5. **challenge_deadman_switch_12h** — Every 12 hours, critical alerts
+1. **tunnel_monitor_watchdog** (4f26a91e830a) - Every 2 min, ensures monitor stays alive
+2. **audit_auto_responder** - Every 5 min, processes incoming email replies
+3. **challenge_checkin** - Every 2 min, reports campaign metrics
+4. **challenge_self_audit_6h** - Every 6 hours, full system audit
+5. **challenge_deadman_switch_12h** - Every 12 hours, critical alerts
 
 ---
 
@@ -132,9 +132,9 @@ $ ps aux | grep tunnel_monitor_daemon
 
 ## Next Checkpoints
 
-- **24h mark:** June 25 10:36 AM UTC — Reply rate report
-- **48h mark:** June 26 10:36 AM UTC — Conversion rate analysis
-- **72h final:** June 27 10:36 AM UTC — Revenue total + challenge report
+- **24h mark:** June 25 10:36 AM UTC - Reply rate report
+- **48h mark:** June 26 10:36 AM UTC - Conversion rate analysis
+- **72h final:** June 27 10:36 AM UTC - Revenue total + challenge report
 
 ---
 

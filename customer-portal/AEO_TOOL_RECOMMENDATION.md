@@ -1,11 +1,11 @@
-# Nebula Components — PromptLoop/AEO Tool Setup
+# Nebula Components - PromptLoop/AEO Tool Setup
 
 ## Recommended Tool: Profound
 
 **Pricing:**
-- **Starter:** $99/month — ChatGPT tracking only, 50 prompts
-- **Growth:** $399/month — ChatGPT + Perplexity + Google AI Overviews, 100 prompts
-- **Enterprise:** Custom — Up to 10 answer engines, dedicated support
+- **Starter:** $99/month - ChatGPT tracking only, 50 prompts
+- **Growth:** $399/month - ChatGPT + Perplexity + Google AI Overviews, 100 prompts
+- **Enterprise:** Custom - Up to 10 answer engines, dedicated support
 
 **Why Profound:**
 1. Tracks ChatGPT, Perplexity, Google AI Overviews, Claude, Gemini, Copilot

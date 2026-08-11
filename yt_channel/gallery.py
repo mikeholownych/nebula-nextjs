@@ -9,7 +9,7 @@ properly assess if they're good or not."
 Our version: extract a preview frame from every video in the production
 log (or reuse the long-form thumbnail), embed them as data URIs in a
 single portable HTML file, and join with studio activity to show upload
-status. Open yt_channel/gallery.html in any browser — no server needed.
+status. Open yt_channel/gallery.html in any browser - no server needed.
 
 Usage:
   python3 yt_channel/gallery.py [--out yt_channel/gallery.html]
@@ -30,7 +30,7 @@ THUMB_DIR = NEBULA_DIR / "yt_channel" / "thumbnails"
 ACTIVITY = NEBULA_DIR / "yt_channel" / "logs" / "studio_activity.jsonl"
 PRODUCTION_LOG = VIDEO_DIR / "production_log.jsonl"
 
-FRAME_W = 360  # preview width (px) — keep HTML small
+FRAME_W = 360  # preview width (px) - keep HTML small
 
 
 def _read_jsonl(path: Path) -> list[dict]:
@@ -95,7 +95,7 @@ def build(out_path: Path) -> int:
             short_cand = VIDEO_DIR / f"{domain.replace('.', '_')}_short.mp4"
             video_path = cand if cand.exists() else short_cand
         if not video_path.exists():
-            log.warning(f"missing file for {domain} — skipping card")
+            log.warning(f"missing file for {domain} - skipping card")
             continue
 
         # Prefer the long-form thumbnail if it exists, else extract a frame
@@ -141,7 +141,7 @@ def build(out_path: Path) -> int:
 
     html = f"""<!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
-<title>Nebula Audits — Video Gallery</title>
+<title>Nebula Audits - Video Gallery</title>
 <style>
   body {{ font-family: -apple-system, system-ui, sans-serif; margin: 0; background: #0f1115; color: #e8eaed; }}
   header {{ padding: 20px 28px; border-bottom: 1px solid #23272f; display: flex; justify-content: space-between; align-items: baseline; }}
@@ -161,7 +161,7 @@ def build(out_path: Path) -> int:
   .score {{ font-size: 15px; font-weight: 700; color: #7dd3fc; }}
   .ts {{ color: #6b7280; }}
 </style></head><body>
-<header><h1>🎬 Nebula Audits — Video Gallery</h1>
+<header><h1>🎬 Nebula Audits - Video Gallery</h1>
 <small>{len(cards)} videos · generated {datetime.now().strftime('%Y-%m-%d %H:%M UTC')} · uploaded {sum(1 for c in cards if c['uploaded'])} / {len(cards)}</small></header>
 <div class="grid">{''.join(card_html(c) for c in cards)}</div>
 </body></html>"""

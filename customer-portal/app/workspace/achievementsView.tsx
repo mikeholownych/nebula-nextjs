@@ -177,7 +177,7 @@ export default function AchievementsView({ email, latestAuditId }: Props) {
           </div>
           {passingCount === SIGNALS.length && (
             <p className="mt-2 text-xs text-accent font-medium">
-              All signals passing — your next completed audit will earn a badge!
+              All signals passing - your next completed audit will earn a badge!
             </p>
           )}
         </div>
@@ -196,7 +196,7 @@ export default function AchievementsView({ email, latestAuditId }: Props) {
               >
                 <span className="text-sm text-fg">{signal.label}</span>
                 {!latestAuditId ? (
-                  <span className="text-xs text-fg-dim">—</span>
+                  <span className="text-xs text-fg-dim">-</span>
                 ) : passing ? (
                   <span className="flex items-center gap-1.5 text-xs font-semibold text-accent">
                     <svg

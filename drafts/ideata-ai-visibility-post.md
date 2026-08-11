@@ -1,8 +1,8 @@
-# Ideata vs Nebula — AI Visibility Post (ready to publish)
+# Ideata vs Nebula - AI Visibility Post (ready to publish)
 
 ## LinkedIn main post (observation-first, no links in body)
 
-We spent the morning looking at ideata.io — an AI visibility tracker that polls
+We spent the morning looking at ideata.io - an AI visibility tracker that polls
 10 AI engines daily and shows you verbatim answers about your brand.
 
 Smart product. Then we did the thing they sell: we asked AI engines what they
@@ -21,14 +21,14 @@ tool."
 
 Not because of the work. Because of the name.
 
-nebulacomponents.shop — a .shop TLD and the word "components." To a human,
+nebulacomponents.shop - a .shop TLD and the word "components." To a human,
 that's a clear description. To an AI model reasoning from patterns, it reads
 like an electronics store.
 
 ChatGPT's base model didn't know us at all. Its training cutoff predates the
 site. It guessed.
 
-Three engines. Two different failure modes. And both are fixable — but only if
+Three engines. Two different failure modes. And both are fixable - but only if
 you're watching the actual answers, not just the dashboards.
 
 This is why "AI visibility" isn't a vanity metric. It's your brand showing up
@@ -40,7 +40,7 @@ same verbatim check for free.
 ## X version (shorter, link allowed in body)
 
 We looked at ideata.io, an AI visibility tracker. Then we did the thing they
-sell — asked AI engines what they say about us.
+sell - asked AI engines what they say about us.
 
 Perplexity: knows exactly what we do. Cited us.
 
@@ -53,7 +53,7 @@ It judged us by the .shop TLD, not the work.
 
 ChatGPT's base model didn't know us at all. Training cutoff. It guessed.
 
-Two engines, two different ways to lose AI visibility. Both fixable — if you
+Two engines, two different ways to lose AI visibility. Both fixable - if you
 watch the verbatim answers, not just dashboards.
 
 Your URL gets the same free check. Drop it below.
@@ -67,8 +67,8 @@ Your URL gets the same free check. Drop it below.
 ## Integrity notes (do not publish)
 
 - Verbatim check was run 2026-08-01 02:54 UTC against openai/gpt-4o-mini and
-  perplexity/sonar via OpenRouter. Claude call 404'd (wrong model ID) — omitted.
+  perplexity/sonar via OpenRouter. Claude call 404'd (wrong model ID) - omitted.
 - This is a 2-query spot check, not a census. Phrase as "we asked" not "research shows."
 - The name-confusion finding is real and repeatable; the Perplexity quote is verbatim.
-- Do NOT fabricate the ChatGPT quote — it said "electronics store," which we
+- Do NOT fabricate the ChatGPT quote - it said "electronics store," which we
   deliberately softened to "guessed." Keep that framing.

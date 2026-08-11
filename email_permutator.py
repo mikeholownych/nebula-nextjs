@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-email_permutator.py — Email address permutation + MX verification.
+email_permutator.py - Email address permutation + MX verification.
 
 Source: Illingworth "How to Find Anyone's Email Address"
   - LinkedIn name + company domain → ranked candidate list
@@ -38,7 +38,7 @@ def _clean(name: str) -> str:
 def permute(first: str, last: str, domain: str) -> list[str]:
     """
     Generate ranked email candidates for a person at a domain.
-    Returns ordered list — most likely first.
+    Returns ordered list - most likely first.
     """
     f = _clean(first)
     l = _clean(last)
@@ -76,8 +76,8 @@ def permute_role(domain: str) -> list[str]:
 
 
 # ── MX record verification ────────────────────────────────────────
-# Uses `host` CLI (stdlib DNS) — no dnspython dependency
-# Illingworth: "Always verify before sending — it kills your deliverability"
+# Uses `host` CLI (stdlib DNS) - no dnspython dependency
+# Illingworth: "Always verify before sending - it kills your deliverability"
 
 @lru_cache(maxsize=512)
 def mx_exists(domain: str) -> bool:
@@ -154,7 +154,7 @@ def log_linkedin_fallback(lead: dict, fallback_file: str = "/home/mike/nebula/li
 # ── CLI smoke test ────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    print("=== Email Permutator — smoke test ===\n")
+    print("=== Email Permutator - smoke test ===\n")
 
     # Permutation test
     print("Permutations for John Doe @ acme.com:")
@@ -173,4 +173,4 @@ if __name__ == "__main__":
         ("Jane", "Smith", "notarealedomain12345.xyz"),
     ]:
         c = top_candidate(first, last, domain)
-        print(f"  {first} {last} @ {domain} → {c or 'NO MX — skip'}")
+        print(f"  {first} {last} @ {domain} → {c or 'NO MX - skip'}")

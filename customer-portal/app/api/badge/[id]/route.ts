@@ -11,7 +11,7 @@ interface BadgeData {
   earned_year: number
 }
 
-// Only numbers ever get interpolated into the SVG below — url/domain never
+// Only numbers ever get interpolated into the SVG below - url/domain never
 // render as text, so there's nothing here that needs HTML/XML escaping.
 function passingBadgeSvg(data: BadgeData): string {
   const before = data.before_score.toFixed(1)
@@ -45,12 +45,12 @@ function svgResponse(svg: string, cacheSeconds: number) {
 }
 
 /**
- * GET /api/badge/[id] — embeddable before/after badge. Not a static image:
+ * GET /api/badge/[id] - embeddable before/after badge. Not a static image:
  * re-fetches the badge's underlying URL host on every render (short cache)
  * and checks it against the incoming Referer, so a page that never earned
  * the badge (or that regressed and lost the underlying data) can't just
  * copy-paste the embed code and claim it. This is Referer-based, so it
- * stops the common accidental case, not a determined screenshot-and-rehost —
+ * stops the common accidental case, not a determined screenshot-and-rehost -
  * see scripts/self_scan.py's weekly-cron precedent for the "recompute from
  * live state, don't freeze at grant time" pattern this reuses.
  */

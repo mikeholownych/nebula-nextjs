@@ -28,7 +28,7 @@ function parseRgb(str) {
       b: parseInt(match[3])
     };
   }
-  
+
   const rgbaMatch = str.match(/rgba\((\d+),\s*(\d+),\s*(\d+)/);
   if (rgbaMatch) {
     return {
@@ -37,7 +37,7 @@ function parseRgb(str) {
       b: parseInt(rgbaMatch[3])
     };
   }
-  
+
   return null;
 }
 
@@ -61,18 +61,18 @@ function getContrastRatio(lum1, lum2) {
 function checkContrast(fgColor, bgColor, isLargeText = false) {
   const fgRgb = parseRgb(fgColor) || hexToRgb(fgColor);
   const bgRgb = parseRgb(bgColor) || hexToRgb(bgColor);
-  
+
   if (!fgRgb || !bgRgb) {
     return { error: 'Invalid color format' };
   }
-  
+
   const fgLum = getLuminance(fgRgb.r, fgRgb.g, fgRgb.b);
   const bgLum = getLuminance(bgRgb.r, bgRgb.g, bgRgb.b);
   const ratio = getContrastRatio(fgLum, bgLum);
-  
+
   const aaMin = isLargeText ? 3.0 : 4.5;
   const aaaMin = isLargeText ? 4.5 : 7.0;
-  
+
   return {
     ratio: ratio.toFixed(2),
     passesAA: ratio >= aaMin,
@@ -91,24 +91,24 @@ const colors = {
   bgPanel: '#0f1011',
   bgSurface: '#191a1b',
   bgElevated: '#28282c',
-  
+
   // Text
   textPrimary: '#f7f8f8',
   textSecondary: '#c8ced8',
   textMuted: '#9ca3af',
   textDisabled: '#787f87',
-  
+
   // Accent (WCAG AA for white text)
   accent: '#007a52',
   accentHover: '#006644',
-  
+
   // White
   white: '#ffffff'
 };
 
 // Test all combinations
 console.log('╔════════════════════════════════════════════════════════════╗');
-console.log('║  WCAG 2.1 Contrast Ratio Check — Nebula Design System      ║');
+console.log('║  WCAG 2.1 Contrast Ratio Check - Nebula Design System      ║');
 console.log('╚════════════════════════════════════════════════════════════╝\n');
 
 const tests = [
@@ -131,15 +131,15 @@ tests.forEach(test => {
   const result = checkContrast(test.fg, test.bg, test.isLarge);
   const status = result.passesAA ? '✅ PASS' : '❌ FAIL';
   const level = result.passesAAA ? 'AAA' : result.passesAA ? 'AA' : 'FAIL';
-  
+
   console.log(`${status} ${test.name}`);
-  console.log(`     Ratio: ${result.ratio}:1 (${level}) — Required: ${result.aaMin}:1 (AA), ${result.aaaMin}:1 (AAA)`);
-  
+  console.log(`     Ratio: ${result.ratio}:1 (${level}) - Required: ${result.aaMin}:1 (AA), ${result.aaaMin}:1 (AAA)`);
+
   if (result.passesAA) {
     passCount++;
   } else {
     failCount++;
-    console.log(`     ⚠️  FAILED WCAG AA — Ratio ${result.ratio}:1 < ${result.aaMin}:1 minimum`);
+    console.log(`     ⚠️  FAILED WCAG AA - Ratio ${result.ratio}:1 < ${result.aaMin}:1 minimum`);
   }
   console.log('');
 });

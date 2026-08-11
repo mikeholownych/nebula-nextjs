@@ -10,7 +10,7 @@ function fmt(n: number): string {
 }
 
 // Industry baseline conversion rate for landing pages with paid traffic
-const BASELINE_CR = 0.02  // 2% — conservative, well-documented average
+const BASELINE_CR = 0.02  // 2% - conservative, well-documented average
 
 // ── types ────────────────────────────────────────────────────────────────────
 
@@ -137,7 +137,7 @@ export default function ROICalculator() {
           <div className="mt-8 rounded-xl border border-border bg-bg-surface overflow-hidden">
             {isBelow ? (
               <>
-                {/* Main number — the gut punch */}
+                {/* Main number - the gut punch */}
                 <div className="bg-signal-fail/8 border-b border-signal-fail/20 p-6 text-center">
                   <p className="text-xs font-semibold uppercase tracking-wider text-signal-fail mb-1">
                     Estimated monthly ad spend wasted on a page that can&apos;t close
@@ -169,7 +169,7 @@ export default function ROICalculator() {
                 {/* CTA */}
                 <div className="border-t border-border p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                   <p className="text-sm text-fg-muted">
-                    Find exactly what&apos;s causing this — free, no signup, under 2 minutes.
+                    Find exactly what&apos;s causing this - free, no signup, under 2 minutes.
                   </p>
                   <Link
                     href="/audit?utm_source=calculator&utm_medium=homepage"
@@ -186,7 +186,7 @@ export default function ROICalculator() {
                   Your conversion rate is at or above the 2% baseline.
                 </p>
                 <p className="mt-1 text-sm text-fg-muted">
-                  Still worth auditing — most pages above 2% have at least one fixable signal holding them back from 3–5%.
+                  Still worth auditing - most pages above 2% have at least one fixable signal holding them back from 3–5%.
                 </p>
                 <Link
                   href="/audit?utm_source=calculator&utm_medium=homepage"
@@ -208,7 +208,7 @@ export default function ROICalculator() {
 
         {!touched && (
           <p className="mt-6 text-center text-xs text-fg-muted">
-            Don&apos;t know your conversion rate? Run the free audit — it&apos;s in the results.
+            Don&apos;t know your conversion rate? Run the free audit - it&apos;s in the results.
           </p>
         )}
 

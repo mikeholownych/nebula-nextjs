@@ -1,7 +1,7 @@
-# Keyword & Route Architecture Map — Nebula Components
+# Keyword & Route Architecture Map - Nebula Components
 
-**Domain**: `nebulacomponents.shop`  
-**Strategy Version**: 1.0 (Production Implementation)  
+**Domain**: `nebulacomponents.shop`
+**Strategy Version**: 1.0 (Production Implementation)
 
 ---
 

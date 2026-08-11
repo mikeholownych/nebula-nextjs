@@ -1,4 +1,4 @@
-"""Lead Gen Webhook Endpoints — FastAPI routes for RB2B + n8n integration.
+"""Lead Gen Webhook Endpoints - FastAPI routes for RB2B + n8n integration.
 
 Mount these in platform_api/main.py:
   from lead_gen.webhook_endpoints import setup_lead_gen_routes
@@ -14,7 +14,7 @@ router = APIRouter(prefix="/api/lead-gen", tags=["lead-gen"])
 @router.post("/rb2b-event")
 async def handle_rb2b_event(payload: dict):
     """RB2B visitor identification webhook.
-    
+
     Expected payload:
     {
         "pages_visited": ["audit", "fix-pack"],
@@ -37,7 +37,7 @@ async def handle_rb2b_event(payload: dict):
 @router.post("/outbound-reply")
 async def handle_outbound_reply(payload: dict):
     """n8n reply classification webhook.
-    
+
     Expected payload:
     {
         "prospect_id": "stripe_founder1",

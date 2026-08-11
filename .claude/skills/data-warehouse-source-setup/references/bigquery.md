@@ -138,7 +138,7 @@ To fix this, download the full service account key from the [Google Cloud Consol
 
 If you see an error like:
 
-> `We couldn't read the private key in your Google Cloud JSON key file — it appears truncated or corrupted.`
+> `We couldn't read the private key in your Google Cloud JSON key file - it appears truncated or corrupted.`
 
 This means the `private_key` field in your JSON key file is damaged, truncated, or was modified incorrectly. This can happen if the key file was partially copied or edited.
 
@@ -152,8 +152,8 @@ If you see an error like:
 
 This means Google's authentication endpoint rejected your service account credentials. This happens when:
 
--   **The private key was rotated or revoked** — Someone generated a new key for this service account, invalidating the old one.
--   **The service account was deleted** — The service account no longer exists in Google Cloud.
+-   **The private key was rotated or revoked** - Someone generated a new key for this service account, invalidating the old one.
+-   **The service account was deleted** - The service account no longer exists in Google Cloud.
 
 To fix this, generate a new JSON key file in the [Google Cloud Console](https://console.cloud.google.com/) under **IAM & Admin > Service Accounts** and upload it to PostHog.
 
@@ -165,9 +165,9 @@ If you see an error like:
 
 This means the dataset or table you specified doesn't exist or isn't accessible from the region PostHog is querying. This can happen when:
 
--   **The dataset was deleted or renamed** — Verify the dataset exists in your [BigQuery console](https://console.cloud.google.com/bigquery).
--   **The dataset is in a non-US region** — Toggle **Manually specify your dataset region** in your source settings and enter the correct region (e.g., `us-east1`, `europe-west1`).
--   **Typo in dataset or table name** — Double-check the spelling in your source configuration.
+-   **The dataset was deleted or renamed** - Verify the dataset exists in your [BigQuery console](https://console.cloud.google.com/bigquery).
+-   **The dataset is in a non-US region** - Toggle **Manually specify your dataset region** in your source settings and enter the correct region (e.g., `us-east1`, `europe-west1`).
+-   **Typo in dataset or table name** - Double-check the spelling in your source configuration.
 
 ### Permission denied
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-domain_registry.py — G7: Domain rotation registry with 1-10-100 ramp.
+domain_registry.py - G7: Domain rotation registry with 1-10-100 ramp.
 
 Illingworth Step 4 protocol:
   Week 1:  ≤10 sends/day/domain  (warmup)

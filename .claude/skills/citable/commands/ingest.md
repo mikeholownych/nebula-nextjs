@@ -15,7 +15,7 @@ failure_behaviour: unknown facts → entity/page marked incomplete with required
 1. Enumerate routes/pages from the built output (or `citable audit` pages index).
 2. For each page, propose a page-registry entry: url, page_type (from content
    shape), indexing_intent (default from config), status `draft`.
-3. Leave owner, reviewer, lifecycle, conversion_action for the operator —
+3. Leave owner, reviewer, lifecycle, conversion_action for the operator -
    list them as required_input per page. Write with saveRegistry (history kept).
 
 ## map-queries / map-prompts
@@ -37,7 +37,7 @@ failure_behaviour: unknown facts → entity/page marked incomplete with required
 1. Inventory evidence artifacts in the repo (specs, benchmarks, reports,
    datasets) and register them with observed metadata plus integrity hash.
 2. verification_status starts `unverified`; a named reviewer moves it to
-   `reviewed`/`verified` — automation never does.
+   `reviewed`/`verified` - automation never does.
 
 ## Validation (all)
 `citable validate` must pass after every write; referential integrity errors

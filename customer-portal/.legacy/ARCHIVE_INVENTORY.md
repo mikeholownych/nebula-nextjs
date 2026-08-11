@@ -28,18 +28,18 @@ Duplicate implementations kept for reference:
 ## Scripts (archived 2026-07-16)
 One-time migration scripts no longer needed:
 
-- `add-breadcrumb-*.py` — Component migration scripts
-- `bulk-add-breadcrumb-*.sh` — Bulk update scripts
-- `bulk-seo-update.py` — SEO metadata migration
+- `add-breadcrumb-*.py` - Component migration scripts
+- `bulk-add-breadcrumb-*.sh` - Bulk update scripts
+- `bulk-seo-update.py` - SEO metadata migration
 
 **Keep scripts in `/scripts/`:**
-- `health-check.sh` — Production monitoring
-- `lint.sh` — CI lint runner
-- `typecheck.sh` — CI typecheck runner
-- `process-emails.sh` — Email queue processor
-- `seo-audit.sh` — SEO audit runner
-- `update-articles.sh` — Article update utility
-- `verify-deploy.sh` — Deployment verification
+- `health-check.sh` - Production monitoring
+- `lint.sh` - CI lint runner
+- `typecheck.sh` - CI typecheck runner
+- `process-emails.sh` - Email queue processor
+- `seo-audit.sh` - SEO audit runner
+- `update-articles.sh` - Article update utility
+- `verify-deploy.sh` - Deployment verification
 
 ## Unsafe purchase prototypes (archived 2026-07-16)
 

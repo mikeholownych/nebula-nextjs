@@ -2,7 +2,7 @@
 
 Knowing *what* a tool was called is one thing. Knowing *why* the agent called it is what makes MCP Analytics useful for product decisions.
 
-The SDK captures intent as a single property — `$mcp_intent` — that can come from one of two sources:
+The SDK captures intent as a single property - `$mcp_intent` - that can come from one of two sources:
 
 1.  **A `context` argument** the agent passes on every tool call. Captured with `$mcp_intent_source = "context_parameter"`.
 2.  **A fallback callback** you supply on `instrument()`. Captured with `$mcp_intent_source = "inferred"`.
@@ -41,7 +41,7 @@ PostHog AI
 
 ```typescript
 server.tool("search_events", schema, async (args) => {
-  // args.context has been stripped — only your real arguments are here
+  // args.context has been stripped - only your real arguments are here
 })
 ```
 
@@ -64,7 +64,7 @@ PostHog AI
 ```typescript
 instrument(server, posthog, {
   context: {
-    description: "Describe the user's underlying goal in one sentence — not the tool you're calling.",
+    description: "Describe the user's underlying goal in one sentence - not the tool you're calling.",
   },
 })
 ```
@@ -75,7 +75,7 @@ Set `context: false` if you don't want the SDK to touch your tool schemas at all
 
 ## The `intentFallback` callback
 
-The `context` argument is *advertised* as required in JSON Schema but isn't enforced at the SDK validation layer. A client that ignores the schema hint (raw cURL, in-house agents, schema-blind crawlers) will still succeed — the call lands in PostHog with `$mcp_intent` empty.
+The `context` argument is *advertised* as required in JSON Schema but isn't enforced at the SDK validation layer. A client that ignores the schema hint (raw cURL, in-house agents, schema-blind crawlers) will still succeed - the call lands in PostHog with `$mcp_intent` empty.
 
 `intentFallback` is the escape hatch. The SDK calls it whenever no `context` argument is present, takes whatever non-empty string you return, and stamps it as `$mcp_intent` with `$mcp_intent_source = "inferred"`.
 
@@ -83,7 +83,7 @@ The SDK does no inference of its own. It doesn't call an LLM. It doesn't inspect
 
 ### Deterministic, per-tool
 
-The cheapest pattern — synchronous, runs on every uncontextualized call. Good default:
+The cheapest pattern - synchronous, runs on every uncontextualized call. Good default:
 
 TypeScript
 
@@ -102,7 +102,7 @@ instrument(server, posthog, {
 
 ### Using transport metadata
 
-`extra` carries MCP transport details — useful when the agent's user-agent or auth context hints at intent:
+`extra` carries MCP transport details - useful when the agent's user-agent or auth context hints at intent:
 
 TypeScript
 
@@ -117,7 +117,7 @@ intentFallback: (request, extra) => {
 
 ### LLM-derived intent
 
-Possible, but think twice. This callback sits on the hot path of every uncontextualized tool call — every LLM round-trip you add here adds latency to the agent's response. If you do this, cache aggressively and budget for failures:
+Possible, but think twice. This callback sits on the hot path of every uncontextualized tool call - every LLM round-trip you add here adds latency to the agent's response. If you do this, cache aggressively and budget for failures:
 
 TypeScript
 
@@ -156,17 +156,17 @@ GROUP BY source
 ORDER BY calls DESC
 ```
 
-A high share of `inferred` means most of your callers are ignoring the schema hint — that's a signal to either improve the `context.description` copy or invest in a better `intentFallback`.
+A high share of `inferred` means most of your callers are ignoring the schema hint - that's a signal to either improve the `context.description` copy or invest in a better `intentFallback`.
 
 ## Gotchas
 
 **\`get\_more\_tools\` reports its source as \`context\_parameter\`**
 
-The virtual `get_more_tools` tool (enabled by `reportMissing: true`) always reports `$mcp_intent_source = "context_parameter"`, even though the SDK is what defined the schema. Defensible — the agent did type a string — but filter it out of source-attribution queries if the number matters.
+The virtual `get_more_tools` tool (enabled by `reportMissing: true`) always reports `$mcp_intent_source = "context_parameter"`, even though the SDK is what defined the schema. Defensible - the agent did type a string - but filter it out of source-attribution queries if the number matters.
 
 **The schema \`required\` field isn't enforced**
 
-`context` is advertised as required in JSON Schema, but the SDK does not re-validate against Zod. A client that ignores the schema hint can send `arguments: {}` and the call still succeeds — landing in PostHog with `$mcp_intent` empty. That's exactly why `intentFallback` exists.
+`context` is advertised as required in JSON Schema, but the SDK does not re-validate against Zod. A client that ignores the schema hint can send `arguments: {}` and the call still succeeds - landing in PostHog with `$mcp_intent` empty. That's exactly why `intentFallback` exists.
 
 **Skip \`intentFallback\` for tight internal servers**
 

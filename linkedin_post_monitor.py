@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-LinkedIn Post Monitor — tracks new commenters/likers on owned posts via Apify.
+LinkedIn Post Monitor - tracks new commenters/likers on owned posts via Apify.
 
 Run: python3 linkedin_post_monitor.py
 
@@ -37,7 +37,7 @@ POST_ANGLES = {
 
 # ─── CREATOR POST MONITORING (AI Outbound Stack Method 2) ──────────
 # Scrape commenters from creator posts in the CRO/landing page space.
-# These are HIGHEST intent — commenters are publicly raising their hand.
+# These are HIGHEST intent - commenters are publicly raising their hand.
 # Reference: The AI Outbound Stack, meadow-leader-47c.notion.site
 CREATOR_POSTS = [
     # Priority: find posts about landing page CRO, ad conversions, or
@@ -58,7 +58,7 @@ CREATOR_PROFILES = {
 # creator_post: commenter on a CRO/lp creator's post (HIGHEST intent)
 LEAD_SOURCE_TYPE = "own_post"  # "own_post" | "creator_post"
 
-# GTM-based content scoring — assess how well a post drives GTM goals.
+# GTM-based content scoring - assess how well a post drives GTM goals.
 # Each angle maps to a GTM intent: validation, inbound, outbound, positioning.
 GTM_ANGLE_INTENTS = {
     "gtm_framework": "positioning_validation",   # Tests ICP/offer hypothesis
@@ -167,7 +167,7 @@ def passes_content_firewall(comment: str) -> tuple:
     if has_signal:
         return True, "active_suffering"
 
-    # Neutral — not AI spam but not buying signal either
+    # Neutral - not AI spam but not buying signal either
     return True, "neutral"
 
 
@@ -282,7 +282,7 @@ def load_cached_results(kind):
 
 
 def check_for_new_engagers():
-    """Main function — check for new engagers and report."""
+    """Main function - check for new engagers and report."""
     state = load_state()
     state["last_run"] = datetime.datetime.utcnow().isoformat() + "Z"
     new_engagers = []
@@ -300,7 +300,7 @@ def check_for_new_engagers():
         except Exception as e:
             print(f"[MONITOR] Commenter fetch error: {e}")
         if not results:
-            print("[MONITOR] No live commenter results — using cached data.")
+            print("[MONITOR] No live commenter results - using cached data.")
             results = load_cached_results("commenters")
 
         seen = set(state.get("seen_comments", []))
@@ -364,7 +364,7 @@ def check_for_new_engagers():
         except Exception as e:
             print(f"[MONITOR] Liker fetch error: {e}")
         if not results:
-            print("[MONITOR] No live liker results — using cached data.")
+            print("[MONITOR] No live liker results - using cached data.")
             results = load_cached_results("likers")
 
         seen = set(state.get("seen_likes", []))

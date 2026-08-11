@@ -30,7 +30,7 @@ function timeAgo(iso: string): string {
 /**
  * Runs the real audit engine against nebulacomponents.com's own page on a
  * schedule (scripts/self_scan.py) and replays the last snapshot here as a
- * calibration-style reveal — proof by demonstration before any sales copy.
+ * calibration-style reveal - proof by demonstration before any sales copy.
  * Not a live per-visitor scan: the JSON is static and cached, so this can't
  * ironically hurt the page's own load-speed signal. Triggers when the
  * component enters the viewport, not on raw page load.
@@ -65,7 +65,7 @@ export default function SelfScan() {
         if (!cancelled && data && Array.isArray(data.signals)) setSnapshot(data)
       })
       .catch(() => {
-        // No snapshot yet, or fetch failed — render nothing rather than fake data.
+        // No snapshot yet, or fetch failed - render nothing rather than fake data.
       })
     return () => {
       cancelled = true
@@ -77,7 +77,7 @@ export default function SelfScan() {
       {snapshot && (
         <div className="finding-reveal rounded-xl border border-border bg-bg-muted/40 p-5 font-mono text-sm">
           <div className="mb-3 flex items-center justify-between text-xs uppercase tracking-wider text-fg-muted">
-            <span>Self-scan — nebulacomponents.com</span>
+            <span>Self-scan - nebulacomponents.com</span>
             <span>{timeAgo(snapshot.scanned_at)}</span>
           </div>
           <ul className="space-y-1.5">

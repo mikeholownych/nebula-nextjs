@@ -1,4 +1,4 @@
-# LinkedIn 80/20 Review — Kleo/Cam Trew → Nebula
+# LinkedIn 80/20 Review - Kleo/Cam Trew → Nebula
 
 Sources reviewed:
 - https://kleo.so/3/bonus/first-results

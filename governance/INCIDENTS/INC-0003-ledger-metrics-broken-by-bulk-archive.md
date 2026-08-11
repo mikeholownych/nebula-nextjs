@@ -11,11 +11,11 @@
 
 ## Situation
 
-On 2026-07-23, "40 tracked scripts formerly under `archived/`" were moved intact to `.legacy/outreach-wave-archive-2026-07-23/` as part of an outbound-bypass cleanup (see `.legacy/ARCHIVE_INVENTORY.md`, "Historical outreach-wave directory cutover"). `ledger_metrics.py` — a genuinely live, self-contained metrics module with no relation to the SMTP/REST outbound bypasses that move was meant to clean up — was swept into that directory move without an individual reference check. `challenge_risk_monitor.py`, `audit_quality_review.py`, and `normalize_public_stats.py` each do `from ledger_metrics import ...` at module level and were left broken (`ModuleNotFoundError`) for approximately 24 hours until this was caught during an unrelated repo review.
+On 2026-07-23, "40 tracked scripts formerly under `archived/`" were moved intact to `.legacy/outreach-wave-archive-2026-07-23/` as part of an outbound-bypass cleanup (see `.legacy/ARCHIVE_INVENTORY.md`, "Historical outreach-wave directory cutover"). `ledger_metrics.py` - a genuinely live, self-contained metrics module with no relation to the SMTP/REST outbound bypasses that move was meant to clean up - was swept into that directory move without an individual reference check. `challenge_risk_monitor.py`, `audit_quality_review.py`, and `normalize_public_stats.py` each do `from ledger_metrics import ...` at module level and were left broken (`ModuleNotFoundError`) for approximately 24 hours until this was caught during an unrelated repo review.
 
 ## Impact
 
-Three scripts non-functional for ~1 day: `challenge_risk_monitor.py` (risk monitoring), `audit_quality_review.py`, `normalize_public_stats.py`. None of the three are in the live crontab, so there's no evidence a scheduled run actually failed during the window — but any manual or ad hoc invocation would have errored immediately on import.
+Three scripts non-functional for ~1 day: `challenge_risk_monitor.py` (risk monitoring), `audit_quality_review.py`, `normalize_public_stats.py`. None of the three are in the live crontab, so there's no evidence a scheduled run actually failed during the window - but any manual or ad hoc invocation would have errored immediately on import.
 
 ## Root Cause
 
@@ -34,7 +34,7 @@ normalize_public_stats.py:9:from ledger_metrics import summary
 
 ## Fix
 
-Restored `ledger_metrics.py` from `.legacy/outreach-wave-archive-2026-07-23/` to the repo root via `git mv` (preserves history). Confirmed the module is self-contained — stdlib only, hardcoded `BASE = Path('/home/mike/nebula')`, no dependency on the outbound-bypass code around it — so restoring it does not reintroduce any of the risk the original archive move addressed.
+Restored `ledger_metrics.py` from `.legacy/outreach-wave-archive-2026-07-23/` to the repo root via `git mv` (preserves history). Confirmed the module is self-contained - stdlib only, hardcoded `BASE = Path('/home/mike/nebula')`, no dependency on the outbound-bypass code around it - so restoring it does not reintroduce any of the risk the original archive move addressed.
 
 ## Verification
 
@@ -42,14 +42,14 @@ Restored `ledger_metrics.py` from `.legacy/outreach-wave-archive-2026-07-23/` to
 
 ## Prevention
 
-Bulk "move N files from directory X to Y" archive operations should include an automated reverse-reference check (grep the moved basenames against the rest of the tree) before or immediately after the move, not rely on the mover's manual judgment of "these all look related." No such check exists yet — worth adding as a small script if bulk archive moves happen again (they have, at least twice, per `ARCHIVE_INVENTORY.md`).
+Bulk "move N files from directory X to Y" archive operations should include an automated reverse-reference check (grep the moved basenames against the rest of the tree) before or immediately after the move, not rely on the mover's manual judgment of "these all look related." No such check exists yet - worth adding as a small script if bulk archive moves happen again (they have, at least twice, per `ARCHIVE_INVENTORY.md`).
 
 ## Rollback
 
-Re-archive `ledger_metrics.py` (not recommended — this immediately re-breaks the three importers).
+Re-archive `ledger_metrics.py` (not recommended - this immediately re-breaks the three importers).
 
 ## Audit Trail
 
-- **Commit:** (restoration committed alongside the broader repo-review fix commit; see `.legacy/ARCHIVE_INVENTORY.md` "Restoration — ledger_metrics.py" entry for the detailed reasoning)
+- **Commit:** (restoration committed alongside the broader repo-review fix commit; see `.legacy/ARCHIVE_INVENTORY.md` "Restoration - ledger_metrics.py" entry for the detailed reasoning)
 - **Files changed:** ledger_metrics.py (restored), .legacy/ARCHIVE_INVENTORY.md
 - **Related:** RETRO-0001

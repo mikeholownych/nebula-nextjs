@@ -1,10 +1,10 @@
-# Global agent command guard — THE denylist.
+# Global agent command guard - THE denylist.
 # One POSIX ERE (grep -E) pattern per line. # comments allowed.
-# Source: davidondrej/skills (David Ondrej) — adapted for Linux (no diskutil).
+# Source: davidondrej/skills (David Ondrej) - adapted for Linux (no diskutil).
 # Design rule: block only irreversible/catastrophic commands (data loss,
 # disk wipe, repo deletion, token exfil). Local-destructive-but-recoverable
 # commands (rm -rf node_modules, git clean -fdx, npm cache clean --force)
-# stay ALLOWED — over-blocking kills agent usefulness.
+# stay ALLOWED - over-blocking kills agent usefulness.
 
 # --- catastrophic rm: root, home, user trees -------------------------------
 # sudo rm anything (sudo rm file.txt, sudo rm -rf /tmp/whatever)

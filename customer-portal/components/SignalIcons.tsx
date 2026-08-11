@@ -15,7 +15,7 @@ const base = {
 }
 
 /**
- * HeadlineIcon — Two horizontal lines of different widths (headline + subhead)
+ * HeadlineIcon - Two horizontal lines of different widths (headline + subhead)
  * with a short vertical cursor bar on the right of the top line.
  */
 export function HeadlineIcon({ className }: IconProps) {
@@ -23,7 +23,7 @@ export function HeadlineIcon({ className }: IconProps) {
     <svg {...base} className={className} aria-hidden="true">
       {/* Headline (wide) */}
       <line x1="3" y1="8" x2="17" y2="8" />
-      {/* Cursor bar — right of headline */}
+      {/* Cursor bar - right of headline */}
       <line x1="19" y1="6" x2="19" y2="10" />
       {/* Subhead (narrower) */}
       <line x1="3" y1="13" x2="12" y2="13" />
@@ -32,7 +32,7 @@ export function HeadlineIcon({ className }: IconProps) {
 }
 
 /**
- * CtaIcon — Rounded rectangle button shape with an arrow pointing right inside.
+ * CtaIcon - Rounded rectangle button shape with an arrow pointing right inside.
  */
 export function CtaIcon({ className }: IconProps) {
   return (
@@ -48,7 +48,7 @@ export function CtaIcon({ className }: IconProps) {
 }
 
 /**
- * AboveFoldIcon — Viewport rectangle with a dashed fold line across the middle;
+ * AboveFoldIcon - Viewport rectangle with a dashed fold line across the middle;
  * content marks appear only above it.
  */
 export function AboveFoldIcon({ className }: IconProps) {
@@ -58,16 +58,16 @@ export function AboveFoldIcon({ className }: IconProps) {
       <rect x="2" y="2" width="20" height="20" rx="1" />
       {/* Fold line (dashed) */}
       <line x1="2" y1="12" x2="22" y2="12" strokeDasharray="3 2" />
-      {/* Content mark — wide bar above fold */}
+      {/* Content mark - wide bar above fold */}
       <line x1="6" y1="7" x2="15" y2="7" />
-      {/* Content mark — narrow bar above fold */}
+      {/* Content mark - narrow bar above fold */}
       <line x1="6" y1="10" x2="11" y2="10" />
     </svg>
   )
 }
 
 /**
- * SocialProofIcon — Three small avatar circles in a row with quote marks below.
+ * SocialProofIcon - Three small avatar circles in a row with quote marks below.
  */
 export function SocialProofIcon({ className }: IconProps) {
   return (
@@ -85,7 +85,7 @@ export function SocialProofIcon({ className }: IconProps) {
 }
 
 /**
- * LoadSpeedIcon — Three vertical bars of increasing height (LCP bars)
+ * LoadSpeedIcon - Three vertical bars of increasing height (LCP bars)
  * with a checkmark above the tallest.
  */
 export function LoadSpeedIcon({ className }: IconProps) {
@@ -104,7 +104,7 @@ export function LoadSpeedIcon({ className }: IconProps) {
 }
 
 /**
- * MobileIcon — Narrow phone outline (rounded rectangle) with a home indicator
+ * MobileIcon - Narrow phone outline (rounded rectangle) with a home indicator
  * bar at the bottom.
  */
 export function MobileIcon({ className }: IconProps) {
@@ -119,7 +119,7 @@ export function MobileIcon({ className }: IconProps) {
 }
 
 /**
- * AdSignalsIcon — A small pixel square with two diagonal tracking-signal lines
+ * AdSignalsIcon - A small pixel square with two diagonal tracking-signal lines
  * radiating from its corner.
  */
 export function AdSignalsIcon({ className }: IconProps) {
@@ -136,13 +136,13 @@ export function AdSignalsIcon({ className }: IconProps) {
 }
 
 /**
- * SeoFoundationsIcon — A label/tag shape (rectangle with pointed left edge and
+ * SeoFoundationsIcon - A label/tag shape (rectangle with pointed left edge and
  * a hole circle) with a search magnifier overlapping the right side.
  */
 export function SeoFoundationsIcon({ className }: IconProps) {
   return (
     <svg {...base} className={className} aria-hidden="true">
-      {/* Tag/label outline — pointed on the left */}
+      {/* Tag/label outline - pointed on the left */}
       <path d="M5,4 L16,4 L16,12 L5,12 L2,8 Z" />
       {/* Tag hole */}
       <circle cx="6.5" cy="8" r="1.2" />
@@ -155,7 +155,7 @@ export function SeoFoundationsIcon({ className }: IconProps) {
 }
 
 /**
- * AiReadinessIcon — Three nodes connected by lines in a triangle (structured
+ * AiReadinessIcon - Three nodes connected by lines in a triangle (structured
  * graph / schema topology).
  */
 export function AiReadinessIcon({ className }: IconProps) {
@@ -174,7 +174,7 @@ export function AiReadinessIcon({ className }: IconProps) {
 }
 
 // ---------------------------------------------------------------------------
-// Dispatch map — covers both the canonical signal keys (task spec) and the
+// Dispatch map - covers both the canonical signal keys (task spec) and the
 // actual keys used in the SIGNALS array in page.tsx
 // ---------------------------------------------------------------------------
 
@@ -196,7 +196,7 @@ const ICON_MAP: Record<string, React.ComponentType<IconProps>> = {
 }
 
 /**
- * Dispatch component — renders the matching icon for a given signal key.
+ * Dispatch component - renders the matching icon for a given signal key.
  * Returns null silently for unknown keys so the grid degrades gracefully.
  */
 export function SignalIcon({

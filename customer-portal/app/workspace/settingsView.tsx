@@ -92,7 +92,7 @@ export default function SettingsView({ email }: { email: string }) {
           body: JSON.stringify({ email, preferences: prefs, timezone: tz }),
         })
       } catch {
-        // Silent — localStorage is the fallback
+        // Silent - localStorage is the fallback
       } finally {
         setSyncing(false)
       }
@@ -160,7 +160,7 @@ export default function SettingsView({ email }: { email: string }) {
       URL.revokeObjectURL(url)
       showToast('Export downloaded')
     } catch {
-      showToast('Export failed — try again')
+      showToast('Export failed - try again')
     } finally {
       setExporting(false)
     }
@@ -186,7 +186,7 @@ export default function SettingsView({ email }: { email: string }) {
         showToast(data.error || 'Request failed')
       }
     } catch {
-      showToast('Request failed — try again')
+      showToast('Request failed - try again')
     }
   }
 
@@ -262,7 +262,7 @@ export default function SettingsView({ email }: { email: string }) {
                 Billing alerts{' '}
                 <span className="ml-1 rounded-full bg-bg-panel px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-fg-dim">Always on</span>
               </p>
-              <p className="mt-0.5 text-xs text-fg-dim">Receipts and payment failure notices — cannot be disabled.</p>
+              <p className="mt-0.5 text-xs text-fg-dim">Receipts and payment failure notices - cannot be disabled.</p>
             </div>
           </div>
         </div>
@@ -352,7 +352,7 @@ export default function SettingsView({ email }: { email: string }) {
           </div>
           <div>
             <label htmlFor="monthly-ad-spend" className="block text-xs font-semibold uppercase tracking-wide text-fg-dim mb-2">
-              Monthly Ad Spend ($) <span className="normal-case font-normal text-fg-dim">— optional</span>
+              Monthly Ad Spend ($) <span className="normal-case font-normal text-fg-dim">- optional</span>
             </label>
             <input
               id="monthly-ad-spend"
@@ -382,7 +382,7 @@ export default function SettingsView({ email }: { email: string }) {
                 })
                 showToast('Revenue settings saved')
               } catch {
-                showToast('Failed to save — try again')
+                showToast('Failed to save - try again')
               } finally {
                 setSavingRevenue(false)
               }
@@ -418,7 +418,7 @@ export default function SettingsView({ email }: { email: string }) {
           </div>
           <div>
             <label htmlFor="agency-logo-url" className="block text-xs font-semibold uppercase tracking-wide text-fg-dim mb-2">
-              Logo URL <span className="normal-case font-normal text-fg-dim">— optional</span>
+              Logo URL <span className="normal-case font-normal text-fg-dim">- optional</span>
             </label>
             <input
               id="agency-logo-url"
@@ -446,7 +446,7 @@ export default function SettingsView({ email }: { email: string }) {
                 })
                 showToast('Agency branding saved')
               } catch {
-                showToast('Failed to save — try again')
+                showToast('Failed to save - try again')
               } finally {
                 setSavingBranding(false)
               }
@@ -498,7 +498,7 @@ export default function SettingsView({ email }: { email: string }) {
           </div>
           <div>
             <label htmlFor="slack-webhook" className="block text-xs font-semibold uppercase tracking-wide text-fg-dim mb-2">
-              Slack webhook URL <span className="normal-case font-normal text-fg-dim">— optional</span>
+              Slack webhook URL <span className="normal-case font-normal text-fg-dim">- optional</span>
             </label>
             <input
               id="slack-webhook"
@@ -527,7 +527,7 @@ export default function SettingsView({ email }: { email: string }) {
                 })
                 showToast('Digest preferences saved')
               } catch {
-                showToast('Failed to save — try again')
+                showToast('Failed to save - try again')
               } finally {
                 setSavingDigest(false)
               }
@@ -602,7 +602,7 @@ function CompetitorSection({ showToast }: { showToast: (msg: string) => void }) 
         setCompetitors(data.competitors || [])
       }
     } catch {
-      // Silent — section just shows empty state
+      // Silent - section just shows empty state
     } finally {
       setLoaded(true)
     }
@@ -629,13 +629,13 @@ function CompetitorSection({ showToast }: { showToast: (msg: string) => void }) 
       if (res.ok) {
         setUrl('')
         setLabel('')
-        showToast('Competitor added — first audit running')
+        showToast('Competitor added - first audit running')
         await loadCompetitors()
       } else {
         showToast(data.detail || data.error || 'Failed to add competitor')
       }
     } catch {
-      showToast('Failed to add — try again')
+      showToast('Failed to add - try again')
     } finally {
       setAdding(false)
     }
@@ -712,7 +712,7 @@ function CompetitorSection({ showToast }: { showToast: (msg: string) => void }) 
           </div>
           <div className="mt-3 flex items-center justify-between">
             <p className="text-xs text-fg-dim">
-              Max {MAX_COMPETITORS} competitors{atMax ? ' — remove one to add another' : ''}
+              Max {MAX_COMPETITORS} competitors{atMax ? ' - remove one to add another' : ''}
             </p>
             <button
               onClick={handleAdd}
@@ -834,7 +834,7 @@ function ApiKeysSection({ email }: { email: string }) {
       <h2 className="mb-1 text-base font-semibold text-fg">API Keys</h2>
       <p className="mb-4 text-sm text-fg-muted">
         Use API keys to authenticate programmatic access and MCP tool calls.
-        Keys are plan-scoped — quota resets daily at UTC midnight.
+        Keys are plan-scoped - quota resets daily at UTC midnight.
       </p>
 
       {/* Upgrade gate for free plan */}
@@ -859,7 +859,7 @@ function ApiKeysSection({ email }: { email: string }) {
       {newKey && (
         <div className="mb-4 rounded-xl border border-accent/40 bg-accent/5 px-5 py-4">
           <p className="mb-2 text-sm font-semibold text-accent">
-            ⚠️ Copy this key now — it will not be shown again.
+            ⚠️ Copy this key now - it will not be shown again.
           </p>
           <div className="flex items-center gap-2">
             <code className="flex-1 rounded-lg border border-border bg-bg px-3 py-2 text-xs font-mono text-fg break-all">

@@ -63,7 +63,7 @@ def _get_authenticated_service():
     if not creds or not creds.valid:
         logger.info("Starting OAuth consent flow (console mode)...")
         print("\n" + "="*60)
-        print("  YOUTUBE OAUTH SETUP — CONSOLE MODE")
+        print("  YOUTUBE OAUTH SETUP - CONSOLE MODE")
         print("="*60)
         flow = InstalledAppFlow.from_client_secrets_file(
             str(CLIENT_SECRET_FILE), SCOPES,
@@ -107,7 +107,7 @@ def setup_oauth():
         logger.info(f"Authenticated as: {channel['snippet']['title']}")
         return True
     else:
-        logger.warning("No channel found — create one at youtube.com first")
+        logger.warning("No channel found - create one at youtube.com first")
         return False
 
 

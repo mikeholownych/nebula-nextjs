@@ -1,4 +1,4 @@
-"""Stripe webhook handler — charge.succeeded and subscription events → CRM.
+"""Stripe webhook handler - charge.succeeded and subscription events → CRM.
 
 Mounted at: POST /api/stripe/webhook
 Stripe signing secret: STRIPE_WEBHOOK_SECRET env var
@@ -30,7 +30,7 @@ _processed_event_ids: set[str] = set()  # in-process dedup; swap for Redis at sc
 def _verify_stripe_signature(payload: bytes, sig_header: str, secret: str) -> bool:
     """Verify Stripe webhook signature (HMAC-SHA256)."""
     if not secret:
-        return True  # Dev mode — no secret configured, allow all
+        return True  # Dev mode - no secret configured, allow all
 
     try:
         # Parse timestamp and signatures from header
@@ -89,7 +89,7 @@ async def stripe_webhook(request: Request):
         raise HTTPException(status_code=400, detail="Invalid JSON")
 
     event_type = event.get("type", "")
-    event_id = event.get("id", "")  # Stripe event ID — use for dedup
+    event_id = event.get("id", "")  # Stripe event ID - use for dedup
     stripe_obj = event.get("data", {}).get("object", {})
 
     # Dedup: check if this Stripe event was already processed

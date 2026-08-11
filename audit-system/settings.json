@@ -31,7 +31,7 @@
   "icp": {
     "primary": "Founders spending $1,000–$5,000/month on paid ads with <1% conversion rate",
     "pain_description": "Traffic arriving, money leaving, zero results. The ad isn't the problem. The page is.",
-    "buying_trigger": "Just burned a budget cycle with no conversions. Not a demographic — a moment.",
+    "buying_trigger": "Just burned a budget cycle with no conversions. Not a demographic - a moment.",
     "secondary": "Agencies running paid traffic for clients whose landing pages underperform",
     "exclusions": [
       "E-commerce product pages (different audit scope)",
@@ -85,8 +85,8 @@
     },
     "confidence_levels": {
       "measured": "Directly observed in fetched HTML or headers",
-      "contextual": "Inferred from source proxies — rendered viewport unverified",
-      "inferred": "Pattern match only — requires validation"
+      "contextual": "Inferred from source proxies - rendered viewport unverified",
+      "inferred": "Pattern match only - requires validation"
     }
   },
 

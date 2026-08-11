@@ -1,4 +1,4 @@
-# Inbox Inspection Report — 2026-08-04
+# Inbox Inspection Report - 2026-08-04
 
 **Task:** CEO action: warm-reply-payment-reconcile
 **Run date:** 2026-08-04
@@ -21,7 +21,7 @@
 
 ## Warm-Reply Cohort (1 lead)
 
-**Referralful.com** — kanzariyamihir@gmail.com
+**Referralful.com** - kanzariyamihir@gmail.com
 
 - Reply text: "Hey" (classified: soft_interest)
 - Replied at: 2026-07-07T12:01:14Z
@@ -29,9 +29,9 @@
 - Message ID: `<0100019f3f051e19-4694b7cc-8baa-4336-9a94-c60d3f2be035-000000@email.amazonses.com>`
 - Source: cold_breakup_email
 - **Days since last touch: 27 days**
-- Current stage: `warm_replied` (no $97 pitch recorded — pitch_sent not set)
+- Current stage: `warm_replied` (no $97 pitch recorded - pitch_sent not set)
 - Audit delivered: not confirmed in HOT_LEAD record (no audit_delivered_at or pitch_sent_at field)
-- $97 checkout link status: **unconfirmed** — response_message_id exists but no stage progression to pitch_sent
+- $97 checkout link status: **unconfirmed** - response_message_id exists but no stage progression to pitch_sent
 
 **Risk:** 27 days of silence after a soft "Hey" reply. No escalation to pitch_sent in HOT_LEAD. Referralful.com is a real SaaS product; this lead is cold but not closed.
 
@@ -39,7 +39,7 @@
 
 ## Recircle Queue (1 lead)
 
-**Retryfix.com** — support@retryfix.com
+**Retryfix.com** - support@retryfix.com
 
 - Reply: "not the right time thanks" (timing_objection)
 - Replied at: 2026-07-07T12:10:56Z
@@ -50,7 +50,7 @@
 
 ## Payment Path Readiness
 
-- $97 Stripe link: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02 — **live and verified**
+- $97 Stripe link: https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02 - **live and verified**
 - Real revenue logged: **$0** (two payments in ledger are test entries: restart-test@example.com and stripe@example.com)
 - stats.json: 0 real payments, 0 real revenue as of 2026-07-13 last update
 - deliver_audit.py: operational (last successful run 2026-07-11)
@@ -70,8 +70,8 @@ Notable: `help@nypost.com` and `contact@support.obakura.com` are almost certainl
 
 ## Checkout Handoff Status
 
-- deliver_audit.py embeds the $97 link in every audit email automatically — path is intact
-- warm_replied record (referralful.com) shows a response was sent but HOT_LEAD stage was never advanced to `pitch_sent` — the checkout link delivery to this lead is **unconfirmed**
+- deliver_audit.py embeds the $97 link in every audit email automatically - path is intact
+- warm_replied record (referralful.com) shows a response was sent but HOT_LEAD stage was never advanced to `pitch_sent` - the checkout link delivery to this lead is **unconfirmed**
 - No inbound "how do I pay" or payment confirmation emails found in current data
 
 ---
@@ -82,9 +82,9 @@ Notable: `help@nypost.com` and `contact@support.obakura.com` are almost certainl
 
 The lead replied "Hey" 28 days ago. We replied same-day but never logged a pitch or advanced the stage. Options:
 
-1. **Send $97 pitch now** — re-engage with a short message and the checkout link. Soft reply = expressed curiosity. 28 days is long but not fatal for a cold lead.
-2. **Treat as cold / close** — no audit delivered, no real buying signal beyond "Hey." Close the record and free the slot.
-3. **Escalate to CEO for manual decision** — flag the thread and let the CEO decide tone and timing.
+1. **Send $97 pitch now** - re-engage with a short message and the checkout link. Soft reply = expressed curiosity. 28 days is long but not fatal for a cold lead.
+2. **Treat as cold / close** - no audit delivered, no real buying signal beyond "Hey." Close the record and free the slot.
+3. **Escalate to CEO for manual decision** - flag the thread and let the CEO decide tone and timing.
 
 **Recommendation:** Option 1 carries minimal risk given the lead reached out. However, no audit was confirmed delivered to this address, so the pitch would land without the value-first context. A better sequence: deliver audit first, then pitch 48h later. This requires CEO approval to send.
 

@@ -86,7 +86,7 @@ Nebula Components is the autonomous conversion leak detector for founders burnin
 ## Proof Rules
 - Every claim needs evidence within 2 sentences.
 - Trust signals must be shown, not just claimed: star ratings, named customers, count numbers, screenshots.
-- "Founded in 2026" is a disadvantage — lead with product proof, not company age.
+- "Founded in 2026" is a disadvantage - lead with product proof, not company age.
 - Reference the self-audit case study: "Score 6.8/10 B. We fixed the 3/10 SEO in 2 minutes."
 
 ## CTA Format
@@ -118,7 +118,7 @@ For every post, create:
 
 # ── Nebula Skill Commands ──────────────────────────────────────────
 
-AUDIT_SKILL = """# /audit — Run Conversion Audit
+AUDIT_SKILL = """# /audit - Run Conversion Audit
 
 Paste any landing page URL. Returns scored breakdown:
 - Headline: clarity, length, keyword overlap with title
@@ -135,16 +135,16 @@ Paste any landing page URL. Returns scored breakdown:
 Deliver via AgentMail to prospect.
 """
 
-FIX_SKILL = """# /fix — Generate Fix Recommendations
+FIX_SKILL = """# /fix - Generate Fix Recommendations
 
 From an audit result, produce implementation-ready fixes:
 - For each dimension scoring < 6: specific code change, copy edit, or config update
 - Priority-ordered by impact/effort quadrant
-- Plain language — the prospect can hand it to a developer or implement themselves
+- Plain language - the prospect can hand it to a developer or implement themselves
 - Gated behind $147 fix pack purchase
 """
 
-COMPOSE_SKILL = """# /compose — Write Outbound Message
+COMPOSE_SKILL = """# /compose - Write Outbound Message
 
 Rules:
 1. Load Voice DNA first. Read all sections.
@@ -159,7 +159,7 @@ Rules:
 10. Read aloud. If it sounds like a template, delete and restart.
 """
 
-SCORE_SKILL = """# /score — Score Prospect ICP Fit
+SCORE_SKILL = """# /score - Score Prospect ICP Fit
 
 Evaluate against buying triggers:
 - Spending on ads? (paid traffic, ad spend, google ads, meta ads, campaigns)
@@ -167,19 +167,19 @@ Evaluate against buying triggers:
 - Has a landing page? (live URL or offer page to audit)
 
 Score 0-100:
-- 80-100: Red alert — contact immediately
-- 50-79: Warm — queue for today's outreach
-- 20-49: Tepid — research first, need more signal
-- 0-19: Not ICP — do not contact
+- 80-100: Red alert - contact immediately
+- 50-79: Warm - queue for today's outreach
+- 20-49: Tepid - research first, need more signal
+- 0-19: Not ICP - do not contact
 
 Return: score, trigger match (list), gap (list for missing triggers), recommendation.
 """
 
-FOLLOWUP_SKILL = """# /followup — Write Follow-Up Message
+FOLLOWUP_SKILL = """# /followup - Write Follow-Up Message
 
 When prospect was contacted but silent for 5+ days:
 1. Never re-pitch the same message.
-2. Add new value: "Ran the audit on a similar page yesterday — found X leak. Your page may have the same pattern."
+2. Add new value: "Ran the audit on a similar page yesterday - found X leak. Your page may have the same pattern."
 3. Prove you are not a bot: reference their specific industry or role.
 4. End with the audit URL. No ask. No urgency.
 5. If 3 follow-ups sent with no reply, archive to cold_pool.jsonl.
@@ -192,7 +192,7 @@ Follow-up cadence:
 
 # ── Ask User Questions ─────────────────────────────────────────────
 
-ASK_USER_QUESTIONS = """# AskUserQuestion — Pre-Composition Discovery
+ASK_USER_QUESTIONS = """# AskUserQuestion - Pre-Composition Discovery
 
 Before composing any outbound, check what data is available:
 1. Do we have the prospect's URL? If yes → run audit first.
@@ -212,7 +212,7 @@ Only compose after at least 2 of (1) URL, (2) pain signal, (3) industry context 
 
 # ── Tools Connectivity Map ─────────────────────────────────────────
 
-TOOLS_MAP = """# Tools Map — Auto vs Manual
+TOOLS_MAP = """# Tools Map - Auto vs Manual
 ## CONNECTS AUTOMATICALLY
 | Tool | What it does | Connected since |
 |------|-------------|-----------------|
@@ -225,7 +225,7 @@ TOOLS_MAP = """# Tools Map — Auto vs Manual
 |------|---------------|-------------|
 | LinkedIn feed read | Claude cannot natively read LinkedIn feed | Use Apify on-demand scrape |
 | LinkedIn DM send | Claude writes DMs; user sends manually | Buffer / Taplio scheduling |
-| Notion content calendar | Can read/write via ntn CLI | Already wired — manual trigger |
+| Notion content calendar | Can read/write via ntn CLI | Already wired - manual trigger |
 | Gmail | Pulls email threads for reply drafting | Via AgentMail for audits only |
 | Post to LinkedIn/X | Claude writes; user copies + pastes | Scheduling via Buffer or Typefully |
 
@@ -234,7 +234,7 @@ If a tool icon has a red X in the infographic, Claude can write/create but not p
 Always write in Claude. Publish via the manual bridge tool.
 """
 
-MARKETING_DEPARTMENT_STACK = """# Claude Marketing Department — Nebula Adaptation
+MARKETING_DEPARTMENT_STACK = """# Claude Marketing Department - Nebula Adaptation
 
 Source steal: UGC Ninja's department architecture: 50 agents, 150 prompts, 30 practical skills.
 Nebula adaptation: keep the same operating map, but collapse it to the conversion-audit business.
@@ -281,7 +281,7 @@ Every agent output must end in one of: patch, send, queued lead, published asset
 No research-only work.
 """
 
-PGA_STRATEGY_STEALS = """# Premium Ghostwriting Academy — Nebula Steals
+PGA_STRATEGY_STEALS = """# Premium Ghostwriting Academy - Nebula Steals
 
 ## Useful Patterns
 1. Rename the category upward: freelancer → Premium Ghostwriter. Nebula equivalent: CRO freelancer/agency → Autonomous Conversion Leak Detector.
@@ -343,7 +343,7 @@ def load_strategy(base: Path = DEFAULT_BASE) -> dict:
 
 def build_content_calendar(days: int = 30) -> list[dict]:
     """Map 30 days of content before writing any single post.
-    
+
     Includes AI-citation-optimized formats based on Meltwater 9.5M citation study:
     - Listicles (54% of most cited content)
     - Comparisons (high citation rate for B2B queries)
@@ -555,7 +555,7 @@ def draft_dm(prospect: dict, strategy: dict | None = None) -> str:
     else:
         traffic_clause = "If you're paying for clicks and the page is not converting"
     dm = (
-        f"{name} — saw your note: {comment}. "
+        f"{name} - saw your note: {comment}. "
         f"{traffic_clause}, the leak is usually headline/CTA/proof mismatch. "
         f"I made a free teardown path to flag the top leaks before anyone spends more on traffic. "
         f"No call, no ask attached. Paste the URL if useful: {AUDIT_URL}"
@@ -612,7 +612,7 @@ def queue_followups(base: Path = DEFAULT_BASE, now: datetime | None = None) -> l
                 "name": row.get("name", ""),
                 "company": row.get("company", ""),
                 "reason": "silent_5_days",
-                "dm": f"{row.get('name', 'there')} — leaving this here in case it helps: if the ad traffic is still not converting, run the free teardown here: {AUDIT_URL}. No ask attached.",
+                "dm": f"{row.get('name', 'there')} - leaving this here in case it helps: if the ad traffic is still not converting, run the free teardown here: {AUDIT_URL}. No ask attached.",
             })
     if followups:
         append_jsonl(gs / "followup_queue.jsonl", followups)

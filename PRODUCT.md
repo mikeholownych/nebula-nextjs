@@ -1,4 +1,4 @@
-# Nebula Components — Design System
+# Nebula Components - Design System
 
 ## Brand
 
@@ -114,5 +114,5 @@
 
 ## Register
 
-**Brand register:** Marketing, landing page, portfolio — design IS the product.
+**Brand register:** Marketing, landing page, portfolio - design IS the product.
 **Reference:** `~/.hermes/skills/impeccable/reference/brand.md`

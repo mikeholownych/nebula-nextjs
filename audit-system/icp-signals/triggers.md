@@ -72,14 +72,14 @@ score = min(score, 100)
 
 ## Signal Sources Ranked by Quality
 
-1. **Explicit pain post** — founder writes "spent $600 on Google Ads, zero leads"
+1. **Explicit pain post** - founder writes "spent $600 on Google Ads, zero leads"
    → Respond within 1 hour. Thread is live. Direct offer to audit.
 
-2. **Named product + conversion failure** — "my [product name] landing page converts at 0.3%"
+2. **Named product + conversion failure** - "my [product name] landing page converts at 0.3%"
    → Highest value. Audience sees the audit. Public social proof opportunity.
 
-3. **Generic complaint** — "landing pages don't convert" without specifics
+3. **Generic complaint** - "landing pages don't convert" without specifics
    → Lower signal. Still worth monitoring. Don't respond unless you have something specific.
 
-4. **Inbound audit request** — they submitted their URL at nebulacomponents.shop
+4. **Inbound audit request** - they submitted their URL at nebulacomponents.shop
    → Already warm. Move directly to audit delivery.

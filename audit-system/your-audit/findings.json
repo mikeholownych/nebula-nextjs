@@ -40,7 +40,7 @@
         "quadrant": "quick_win",
         "impact": 4.0,
         "effort": 2,
-        "issue": "CTA text is vague — 'Learn More' or 'Get Started' tells the visitor nothing about what happens next.",
+        "issue": "CTA text is vague - 'Learn More' or 'Get Started' tells the visitor nothing about what happens next.",
         "fix": "Replace with action + outcome copy. 'Run my free teardown' converts 72% better than 'Learn More' in A/B tests we've run.",
         "evidence": {
           "measured": "Button text: 'Get Started'",

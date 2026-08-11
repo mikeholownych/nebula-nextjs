@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Competitor Thread Probe — detect competitor mentions in Reddit posts.
+"""Competitor Thread Probe - detect competitor mentions in Reddit posts.
 
 Hooks into the ramp pipeline. Scans processed posts for competitor brand
 names and logs matches for outreach/reply opportunities.
@@ -33,7 +33,7 @@ COMPETITOR_PATTERNS = {
     "clickfunnels":   {"name": "ClickFunnels",     "category": "funnel_builder"},
     "swipe pages":    {"name": "Swipe Pages",      "category": "landing_page_builder"},
     "carrd":          {"name": "Carrd",            "category": "landing_page_builder"},
-    
+
     # CRO / analytics
     "hotjar":         {"name": "Hotjar",           "category": "analytics_heatmap"},
     "fullstory":      {"name": "FullStory",        "category": "analytics_session"},
@@ -44,14 +44,14 @@ COMPETITOR_PATTERNS = {
     "optimizely":     {"name": "Optimizely",       "category": "cro_platform"},
     "google optimize":{"name": "Google Optimize",  "category": "cro_platform"},
     "convertize":     {"name": "Convertize",       "category": "cro_platform"},
-    
+
     # A/B testing
     "google analytics":{"name": "Google Analytics", "category": "analytics"},
     "amplitude":      {"name": "Amplitude",        "category": "analytics_product"},
     "mixpanel":       {"name": "Mixpanel",         "category": "analytics_product"},
     "plausible":      {"name": "Plausible",        "category": "analytics_privacy"},
     "fathom":         {"name": "Fathom Analytics", "category": "analytics_privacy"},
-    
+
     # AI marketing / agents
     "trustos":        {"name": "TrustOS",          "category": "ai_marketing_agent"},
     "flagstad":       {"name": "Flagstad/TrustOS", "category": "ai_marketing_agent"},
@@ -65,21 +65,21 @@ COMPETITOR_PATTERNS = {
     "woodpecker":     {"name": "Woodpecker",       "category": "email_outreach"},
     "mailshake":      {"name": "Mailshake",        "category": "email_outreach"},
     "reply.io":       {"name": "Reply.io",         "category": "email_outreach"},
-    
+
     # SEO / content
     "ahrefs":         {"name": "Ahrefs",           "category": "seo_tool"},
     "semrush":        {"name": "Semrush",          "category": "seo_tool"},
     "moz":            {"name": "Moz",              "category": "seo_tool"},
     "screaming frog": {"name": "Screaming Frog",   "category": "seo_technical"},
     "surfer seo":     {"name": "Surfer SEO",       "category": "seo_content"},
-    
+
     # Paid ads
     "metas ads":      {"name": "Meta Ads",         "category": "paid_ads"},
     "google ads":     {"name": "Google Ads",       "category": "paid_ads"},
     "facebook ads":   {"name": "Facebook Ads",     "category": "paid_ads"},
     "linkedin ads":   {"name": "LinkedIn Ads",     "category": "paid_ads"},
     "tiktok ads":     {"name": "TikTok Ads",       "category": "paid_ads"},
-    
+
     # Sales outreach
     "yokr":           {"name": "Yokr",             "category": "sales_outreach_agent"},
     "11x":            {"name": "11x",              "category": "sales_outreach_agent"},
@@ -89,18 +89,18 @@ COMPETITOR_PATTERNS = {
     "bright data":    {"name": "Bright Data",      "category": "web_scraping"},
 }
 
-# Intent categories — posts mentioning these categories have buying intent
+# Intent categories - posts mentioning these categories have buying intent
 INTENT_CATEGORIES = {
-    "cro_platform":  "running a/b tests or heatmap tools — likely to need audit",
-    "analytics_heatmap": "session recording — may not know their conversion problem",
-    "landing_page_builder": "building landing pages — natural audit prospect",
-    "email_outreach": "doing cold email — complementary to landing page audit",
-    "paid_ads": "running ads — core ICP signal",
-    "analytics": "has analytics — needs conversion diagnosis",
-    "seo_tool": "invested in SEO — likely to understand audit value",
-    "ai_marketing_agent": "using AI marketing tools — competitive intelligence",
-    "ai_search_visibility": "competitor in AEO space — high intelligence value",
-    "sales_outreach_agent": "using AI SDR — complementary service",
+    "cro_platform":  "running a/b tests or heatmap tools - likely to need audit",
+    "analytics_heatmap": "session recording - may not know their conversion problem",
+    "landing_page_builder": "building landing pages - natural audit prospect",
+    "email_outreach": "doing cold email - complementary to landing page audit",
+    "paid_ads": "running ads - core ICP signal",
+    "analytics": "has analytics - needs conversion diagnosis",
+    "seo_tool": "invested in SEO - likely to understand audit value",
+    "ai_marketing_agent": "using AI marketing tools - competitive intelligence",
+    "ai_search_visibility": "competitor in AEO space - high intelligence value",
+    "sales_outreach_agent": "using AI SDR - complementary service",
 }
 
 
@@ -279,7 +279,7 @@ def print_report(results: list[dict]):
 def main():
     import argparse
     parser = argparse.ArgumentParser(
-        description="Competitor Thread Probe — detect brand mentions in Reddit posts"
+        description="Competitor Thread Probe - detect brand mentions in Reddit posts"
     )
     parser.add_argument("--scan-file", type=str,
                         help="Path to trigger_leads.jsonl to scan")

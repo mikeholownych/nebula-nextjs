@@ -1,4 +1,4 @@
-# PAYMENT SETUP — CONCRETE STEPS
+# PAYMENT SETUP - CONCRETE STEPS
 
 ## TASK 1: Create Stripe $147 Checkout (5 minutes)
 

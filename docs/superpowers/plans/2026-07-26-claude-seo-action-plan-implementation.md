@@ -1,4 +1,4 @@
-# Claude SEO Review Action Plan — Implementation Plan
+# Claude SEO Review Action Plan - Implementation Plan
 
 > Execution note: implement this plan task by task with test-first changes, an isolated task implementer, and an independent task reviewer. Do not publish fabricated cases, benchmark results, customer outcomes, workflow success, or deployment receipts.
 

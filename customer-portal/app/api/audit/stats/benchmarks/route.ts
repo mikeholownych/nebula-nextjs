@@ -6,7 +6,7 @@ const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
  * Proxy: GET /api/audit/stats/benchmarks
  *
  * Forwards to the FastAPI /audit/stats/benchmarks endpoint. Real aggregates
- * only — per-component failure rates from completed audits. Revalidate
+ * only - per-component failure rates from completed audits. Revalidate
  * briefly; this is public, non-personal aggregate data.
  */
 export async function GET() {

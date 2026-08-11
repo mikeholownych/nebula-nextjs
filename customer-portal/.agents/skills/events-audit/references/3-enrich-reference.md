@@ -4,7 +4,7 @@ Lookup tables and rules subagents apply during step 3 enrichment. Read this file
 
 This file is supporting material for step 3; it has no `next_step` and is not part of the main step chain. The orchestrator does not read it.
 
-The per-SDK capture call signatures (where `event_name` and `properties` live in each SDK's call shape) are in `2-scan.md` under "Per-SDK call signatures". Read that section once at the start of your enrichment run alongside this file — you'll need it to extract `event_name` and `properties`.
+The per-SDK capture call signatures (where `event_name` and `properties` live in each SDK's call shape) are in `2-scan.md` under "Per-SDK call signatures". Read that section once at the start of your enrichment run alongside this file - you'll need it to extract `event_name` and `properties`.
 
 ## Identification surfaces
 
@@ -35,7 +35,7 @@ Examples:
 - `client/src/components/auth/AuthProvider.tsx` → `package: "client"`, `area` rules see `src/components/auth/AuthProvider.tsx`.
 - `src/checkout/Checkout.tsx` → `package: null`, `area` rules see the original path.
 
-Don't fabricate a package from `src/` or `app/` — those are within-package directories.
+Don't fabricate a package from `src/` or `app/` - those are within-package directories.
 
 ## `area` rules
 

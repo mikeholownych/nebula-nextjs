@@ -1,10 +1,10 @@
-# Revenue Funnel Reconciliation — Payment Path Verification
+# Revenue Funnel Reconciliation - Payment Path Verification
 
 **Date:** 2026-08-04
 **Author:** ops-finance agent (run 87, task t_998b9fd2)
 **Scope:** Read-only end-to-end payment capture verification
 **Constraint:** No payments created, no Stripe modifications, no production config changes
-**Prior run:** t_74096fa9 (2026-08-03) — findings unchanged unless noted
+**Prior run:** t_74096fa9 (2026-08-03) - findings unchanged unless noted
 
 ---
 
@@ -18,7 +18,7 @@ equivalently via `nebulacomponents.com`), and persisted to the PostgreSQL
 **One blocking unknown (unchanged):** It cannot be confirmed that the
 `STRIPE_WEBHOOK_SECRET` injected via the systemd drop-in matches the webhook
 endpoint registered in the Stripe dashboard. If they differ, all real-money
-events are silently dropped with a 400 signature error — and we would not know.
+events are silently dropped with a 400 signature error - and we would not know.
 
 **Revenue to date: $0.** payments.log has 7 entries, all test transactions.
 No new real payments since the last verification (2026-07-05).
@@ -42,11 +42,11 @@ No new real payments since the last verification (2026-07-05).
 
 **Delta from yesterday:** `nebulacomponents.com` is now listed as the primary
 ingress entry (above .shop). Both domains route to port 3000. No impact on
-webhook routing — Stripe posts to whichever URL is registered in the dashboard.
+webhook routing - Stripe posts to whichever URL is registered in the dashboard.
 
 **Finding:** `nebulacomponents.shop/api/webhooks/stripe` and
 `nebulacomponents.com/api/webhooks/stripe` both route to Next.js on port 3000.
-There is no special webhook path in the tunnel config — all traffic hits
+There is no special webhook path in the tunnel config - all traffic hits
 Next.js, which owns the `/api/webhooks/stripe` route internally.
 
 ### 1.2 Production Service Status
@@ -58,15 +58,15 @@ Next.js, which owns the `/api/webhooks/stripe` route internally.
 - Memory: 331.5 MB (stable)
 
 **Finding:** Service healthy. Restarted yesterday evening (routine or triggered
-redeploy) — not a concern.
+redeploy) - not a concern.
 
 ### 1.3 Stripe Webhook Route
 
 **Source:** `/home/mike/nebula/customer-portal/app/api/webhooks/stripe/route.ts`
-(last modified 2026-08-03, 12,453 bytes — unchanged from prior run)
+(last modified 2026-08-03, 12,453 bytes - unchanged from prior run)
 
 The webhook handler:
-1. Reads `Stripe-Signature` header — rejects with 400 if missing
+1. Reads `Stripe-Signature` header - rejects with 400 if missing
 2. Calls `getStripeClient().webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET!)` for HMAC verification
 3. On `checkout.session.completed`:
    - Checks `isCanonicalFixPackReceipt()` using `event.livemode` flag + amount + payment_status + currency
@@ -76,7 +76,7 @@ The webhook handler:
 4. Returns `{received: true}` HTTP 200
 
 **Finding:** Code path is complete and unchanged. Test/live separation uses
-Stripe's own `event.livemode` flag — not string-matching on email or payment_id.
+Stripe's own `event.livemode` flag - not string-matching on email or payment_id.
 This is the correct approach.
 
 ---
@@ -99,7 +99,7 @@ not auto-delivered. No string-matching on email or session ID prefix.
 
 The Python server uses string markers (`cs_test`, `test`, `restart-test`,
 `example.com`, `ops@launchcrate.io`) for test detection. This server is on
-port 9000 and handles AgentMail reply webhooks — **not the active Stripe
+port 9000 and handles AgentMail reply webhooks - **not the active Stripe
 payment path**. Revenue stats displayed by this server exclude test entries.
 
 ### 2.3 payments.log Audit
@@ -117,7 +117,7 @@ payment path**. Revenue stats displayed by this server exclude test entries.
 | 2026-07-05 | stripe@example.com | cs_test_a1L9C... | $30 | TEST (cs_test_ prefix) |
 
 **Finding:** No new entries since 2026-07-05. All 7 entries are test transactions.
-payments.log is written by the legacy Python server — not the active Next.js handler.
+payments.log is written by the legacy Python server - not the active Next.js handler.
 Real payments would appear in the PostgreSQL `purchases` table, not this log.
 Revenue = **$0 confirmed**.
 
@@ -130,7 +130,7 @@ No new entries since then (31 days stale).
 
 ---
 
-## Section 3: Database Schema — Purchases Table
+## Section 3: Database Schema - Purchases Table
 
 **Source:** `/home/mike/nebula/customer-portal/db/schema_purchases.sql`
 
@@ -155,12 +155,12 @@ the webhook handler for the non-canonical case.
 
 **Gap (unchanged):** Direct database query blocked (password required, no socket
 auth from this agent). Cannot confirm the `purchases` table is **actually
-present** in the running PostgreSQL instance on port 5433 — schema file exists
+present** in the running PostgreSQL instance on port 5433 - schema file exists
 but migration status is unverified. PostgreSQL IS listening on port 5433.
 
 ---
 
-## Section 4: Stripe Environment — Live Keys Confirmed
+## Section 4: Stripe Environment - Live Keys Confirmed
 
 **Source:** `/etc/systemd/system/nebula-nextjs.service.d/stripe.conf` (verified 2026-08-04)
 
@@ -170,7 +170,7 @@ but migration status is unverified. PostgreSQL IS listening on port 5433.
 
 **Source:** `/home/mike/nebula/.stripe_links`
 
-Active payment links — all use `buy.stripe.com` (Stripe-hosted, live mode):
+Active payment links - all use `buy.stripe.com` (Stripe-hosted, live mode):
 
 | Variable | URL |
 |----------|-----|
@@ -180,7 +180,7 @@ Active payment links — all use `buy.stripe.com` (Stripe-hosted, live mode):
 | `PROMPT_PACK_7_LINK` | `https://buy.stripe.com/8x2dR90jG1Aobe99bI43S0a` |
 
 **Finding:** All secrets are live-mode and unchanged. The `buy.stripe.com` links
-bypass the Next.js checkout session flow — they go directly to Stripe's hosted
+bypass the Next.js checkout session flow - they go directly to Stripe's hosted
 checkout. This means the webhook fires to whatever URL is registered in the
 **Stripe dashboard**, not necessarily `nebulacomponents.shop/api/webhooks/stripe`.
 
@@ -202,7 +202,7 @@ But we cannot verify:
 
 **If they don't match:** Every real payment would arrive, Stripe would POST to
 the registered URL, `constructEvent()` would throw `SignatureVerificationError`,
-the handler returns HTTP 400, Stripe retries up to 72 hours then gives up —
+the handler returns HTTP 400, Stripe retries up to 72 hours then gives up -
 **no purchase row is ever written, no delivery occurs, no alert fires.**
 
 This risk is orthogonal to the code quality (which is sound) and cannot be
@@ -232,9 +232,9 @@ resolved without Stripe dashboard access.
 | Webhook secret mismatch (Stripe dashboard ≠ whsec_ in systemd) | **HIGH** | Stripe dashboard → Developers → Webhooks → check endpoint URL + secret |
 | Dashboard may have old `.shop` URL but primary domain is now `.com` | **HIGH** | Same: Stripe dashboard → confirm registered endpoint domain |
 | purchases table may not exist in running DB (migration not confirmed) | HIGH | `psql -p 5433 -c '\dt purchases'` from mike user |
-| `buy.stripe.com` links bypass Next.js checkout — `audit_id` metadata cannot be set | MEDIUM | Canonical fulfillment requires `audit_id` UUID in session metadata; Stripe-hosted links cannot inject this → purchases go to `review` not auto-delivered |
+| `buy.stripe.com` links bypass Next.js checkout - `audit_id` metadata cannot be set | MEDIUM | Canonical fulfillment requires `audit_id` UUID in session metadata; Stripe-hosted links cannot inject this → purchases go to `review` not auto-delivered |
 | Revenue-cost ledger 31 days stale | MEDIUM | Add cost entries (hosting, AgentMail) and any revenue when it occurs |
-| Legacy Python webhook_server (port 9000) not on Stripe path but still referenced | LOW | Port 9000 not found listening — server appears inactive |
+| Legacy Python webhook_server (port 9000) not on Stripe path but still referenced | LOW | Port 9000 not found listening - server appears inactive |
 
 ---
 
@@ -266,6 +266,6 @@ transactions. Ledger not updated since 2026-07-04.
 3. Signing secret matches `whsec_pq33c1getciaJRXbFDAVe9fHqyTNhgGS`
 
 If the domain on the registered endpoint is `.shop` but `.com` is now
-primary, update the endpoint to `.com` and regenerate the signing secret —
+primary, update the endpoint to `.com` and regenerate the signing secret -
 then update `/etc/systemd/system/nebula-nextjs.service.d/stripe.conf` and
 restart `nebula-nextjs.service`.

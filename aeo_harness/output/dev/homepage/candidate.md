@@ -34,7 +34,7 @@ Get My Score
 
 See Sample Audit →
 
-Live — our own audit
+Live - our own audit
 
 Same engine every free scan uses.
 
@@ -42,7 +42,7 @@ Same engine every free scan uses.
 
 /10
 
-— the average score across all landing pages audited through this engine. That is a C. Most pages running paid traffic fail at least 3 of 9 signals before a visitor sees the CTA.
+- the average score across all landing pages audited through this engine. That is a C. Most pages running paid traffic fail at least 3 of 9 signals before a visitor sees the CTA.
 
 See full benchmarks →
 
@@ -50,13 +50,13 @@ Why this exists
 
 We run this audit on ourselves first.
 
-Before the audit engine, there was a spreadsheet. Working with founders on paid traffic, the same page failures kept showing up — wrong headline, no proof above the fold, a CTA buried under the nav. The clicks were coming in. The sales weren't. The page looked fine. The problems were specific and fixable every time. Nebula is the instrument that finds them.
+Before the audit engine, there was a spreadsheet. Working with founders on paid traffic, the same page failures kept showing up - wrong headline, no proof above the fold, a CTA buried under the nav. The clicks were coming in. The sales weren't. The page looked fine. The problems were specific and fixable every time. Nebula is the instrument that finds them.
 
-The live score above is a B. Not perfect — that's intentional. Most tools lead with case studies they can't verify. We'd rather show you the actual data on our own page first. Every signal. Every evidence atom. The same output you get.
+The live score above is a B. Not perfect - that's intentional. Most tools lead with case studies they can't verify. We'd rather show you the actual data on our own page first. Every signal. Every evidence atom. The same output you get.
 
 When we have a real client outcome with a measurement window and a way to verify it, it goes here.
 
-nebulacomponents.com — last scan
+nebulacomponents.com - last scan
 
 Message match
 
@@ -94,7 +94,7 @@ AI readiness
 
 pass
 
-Grade B — real engine, real page
+Grade B - real engine, real page
 
 Nine signals. Every scan.
 
@@ -204,7 +204,7 @@ Grade
 
 C
 
-Nebula ran its 9-signal audit on knallhart.dev — the "AI roasts your website" tool whose founder posted 935 impressions / 38 clicks / 0 sales from Google Ads. Score: 5.8/10, Grade C. The page itself is better than most: clear CTA, real email examples, price stated. The leak is where his traffic actually comes from.
+Nebula ran its 9-signal audit on knallhart.dev - the "AI roasts your website" tool whose founder posted 935 impressions / 38 clicks / 0 sales from Google Ads. Score: 5.8/10, Grade C. The page itself is better than most: clear CTA, real email examples, price stated. The leak is where his traffic actually comes from.
 
 3
 
@@ -222,7 +222,7 @@ Grade
 
 B
 
-Nebula ran its 9-signal audit on postmint.de/en — the "one sentence into a social graphic" tool whose founder published a full launch autopsy: 118 visitors, 0 external signups, 5-second bounces. Score: 6.8/10, Grade B. The two bugs he diagnosed himself are both fixed on the current page. Two observable defects remain — one of them a genuine technical find.
+Nebula ran its 9-signal audit on postmint.de/en - the "one sentence into a social graphic" tool whose founder published a full launch autopsy: 118 visitors, 0 external signups, 5-second bounces. Score: 6.8/10, Grade B. The two bugs he diagnosed himself are both fixed on the current page. Two observable defects remain - one of them a genuine technical find.
 
 2
 
@@ -256,7 +256,7 @@ Most common
 
 Pricing behind the email gate
 
-Asking for commitment before demonstrating value. The visitor hasn't decided yet — gating behind email before showing them anything useful is how you lose them.
+Asking for commitment before demonstrating value. The visitor hasn't decided yet - gating behind email before showing them anything useful is how you lose them.
 
 message_match
 
@@ -292,7 +292,7 @@ Any public landing page. No account, no signup, no integration required.
 
 Get 9 signals checked
 
-Message match, trust, mobile CTA, load time, CTA clarity, above fold, ad signals, SEO foundations, AI readiness — scored against your actual page.
+Message match, trust, mobile CTA, load time, CTA clarity, above fold, ad signals, SEO foundations, AI readiness - scored against your actual page.
 
 03
 
@@ -304,7 +304,7 @@ Run the audit free →
 
 Not a sales call in disguise.
 
-You have seen "free audit" — a PDF with 8 generic recommendations and a discovery call at the end. This is different. No email required to see your results.
+You have seen "free audit" - a PDF with 8 generic recommendations and a discovery call at the end. This is different. No email required to see your results.
 
 See what you actually get →
 
@@ -348,13 +348,13 @@ $97 One-Leak Repair Sprint implements your highest-confidence fix
 
 Free re-audit 30 days after you implement the fix
 
-Know what the click proved — and what it did not.
+Know what the click proved - and what it did not.
 
 A click proves the ad worked. The page determines whether that click becomes a decision.
 
 A click is not the finish line.
 
-An ad click proves the message was interesting enough to investigate. The landing page carries that interest forward — or kills it. If the page contradicts the ad, hides the next step, or asks for trust before earning it, the visitor leaves and the ad takes the blame.
+An ad click proves the message was interesting enough to investigate. The landing page carries that interest forward - or kills it. If the page contradicts the ad, hides the next step, or asks for trust before earning it, the visitor leaves and the ad takes the blame.
 
 The audit follows the actual path.
 
@@ -368,7 +368,7 @@ Direct answers
 
 What does Nebula provide?
 
-A scored, evidence-backed diagnosis of why your landing page isn't converting paid traffic — not generic advice, not a sales call.
+A scored, evidence-backed diagnosis of why your landing page isn't converting paid traffic - not generic advice, not a sales call.
 
 What does the free audit check?
 
@@ -376,7 +376,7 @@ What does the free audit check?
 
 What does the $97 repair sprint do?
 
-Targeted prompts for the highest-confidence fix on your page. It does not promise conversion lift — no one can before the fix is live and measured.
+Targeted prompts for the highest-confidence fix on your page. It does not promise conversion lift - no one can before the fix is live and measured.
 
 Diagnostic Guides & Industry Audits
 

@@ -12,7 +12,7 @@
 - Current offer moderately commodity-positioned
 
 **Restructured Offer:**
-- Primary: "Landing Page Leak Plug" — $97, 2-hour guarantee
+- Primary: "Landing Page Leak Plug" - $97, 2-hour guarantee
 - Self-sufficient founder variant: "Leak Calculation + Priority List"
 - Risk reversal: Dollar-leak calculation before purchase
 
@@ -29,9 +29,9 @@
 **File:** `/home/mike/nebula/vault/bridge_asset_strategist.py`
 
 **Generated 3 Concepts:**
-1. **Dollar Leak Calculator** (3,500 words) — Interactive calculator + diagnostic
-2. **Agency Bullshit Detector** (4,200 words) — Testing phase survival guide
-3. **ROAS Cliff Repair Manual** (2,800 words) — Step-by-step fix checklist
+1. **Dollar Leak Calculator** (3,500 words) - Interactive calculator + diagnostic
+2. **Agency Bullshit Detector** (4,200 words) - Testing phase survival guide
+3. **ROAS Cliff Repair Manual** (2,800 words) - Step-by-step fix checklist
 
 **Selected:** Concept #1 (Dollar Leak Calculator)
 

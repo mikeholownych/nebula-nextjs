@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Weekly @NebulaAudits channel report — the 'is the channel actually
+"""Weekly @NebulaAudits channel report - the 'is the channel actually
 working' report, delivered automatically.
 
 Applied from Austin Belcak's $16k/mo tracking build (BBjSsuKNuU8): the
@@ -8,7 +8,7 @@ quietly. This one runs on schedule, joins:
 
   1. Channel stats from the YouTube Data API (views, subs, videos, top vid)
   2. Pipeline health from studio_activity.jsonl (runs, success rate, backlog)
-  3. Funnel attribution from PostHog — how many audits were submitted
+  3. Funnel attribution from PostHog - how many audits were submitted
      with utm_source=youtube (the 'is YouTube generating leads' number)
 
 and delivers a concise Hormozi-style report to Telegram.
@@ -225,15 +225,15 @@ def render_text(r: dict) -> str:
     top = ch["videos"][0] if ch["videos"] else None
 
     lines = [
-        f"📊 @NebulaAudits — Weekly Report (last {days}d)",
+        f"📊 @NebulaAudits - Weekly Report (last {days}d)",
         f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
         f"CHANNEL",
         f"  Subs: {ch['subs']:,}  |  Total views: {ch['total_views']:,}  |  Videos: {ch['video_count']}",
         f"  View volatility (CV): {ch['view_cv']} "
-        f"{'(stable ✓)' if ch['view_cv'] < 0.5 else '(volatile — tighten range)'}",
+        f"{'(stable ✓)' if ch['view_cv'] < 0.5 else '(volatile - tighten range)'}",
     ]
     if top:
-        lines.append(f"  Top video: {top['title'][:42]} — {top['views']} views")
+        lines.append(f"  Top video: {top['title'][:42]} - {top['views']} views")
         lines.append(f"  Top % of total: {top['views'] / ch['total_views'] * 100:.0f}%" if ch["total_views"] else "")
 
     lines.append("")
@@ -262,7 +262,7 @@ def render_text(r: dict) -> str:
                 top_src = max(others.items(), key=lambda kv: kv[1])
                 lines.append(f"  Other top source: {top_src[0]} ({top_src[1]})")
     else:
-        lines.append(f"  N/A — {fun.get('reason', '?')}")
+        lines.append(f"  N/A - {fun.get('reason', '?')}")
 
     lines.append("")
     lines.append(f"Generated {r['generated'][:16]} UTC")

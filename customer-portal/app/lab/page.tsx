@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import LabClient from './LabClient'
 
 export const metadata: Metadata = {
-  title: 'Component Lab — Check Your Headline, CTA & Message Match | Nebula',
+  title: 'Component Lab - Check Your Headline, CTA & Message Match | Nebula',
   description:
-    'Three evidence-backed component checks: message match, headline, and CTA. Paste your ad copy and page URL — get status, evidence, and the pass standard for...',
+    'Three evidence-backed component checks: message match, headline, and CTA. Paste your ad copy and page URL - get status, evidence, and the pass standard for...',
   alternates: { canonical: '/lab' },
 }
 
@@ -20,7 +20,7 @@ export default function LabPage() {
             Check the components that decide the click.
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-fg-muted md:text-lg">
-            All 9 conversion components, on demand. Paste your ad copy and page URL — Nebula
+            All 9 conversion components, on demand. Paste your ad copy and page URL - Nebula
             runs the same engine as the free audit and shows you the status, the evidence, and the
             pass standard for each component. Grouped by layer: conversion, technical, discoverability.
           </p>

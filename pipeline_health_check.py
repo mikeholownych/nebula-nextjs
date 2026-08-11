@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-pipeline_health_check.py — Pipeline health monitor + stuck-lead detector.
+pipeline_health_check.py - Pipeline health monitor + stuck-lead detector.
 Runs every 15m via cron. Outputs JSON summary with pass/fail for each check.
 Exit code: 0 (all healthy), 1 (warnings), 2 (critical failures).
 """
@@ -25,10 +25,10 @@ CHECKS = []  # (name, passed, detail)
 def check(name, passed, detail=""):
     CHECKS.append({"name": name, "passed": bool(passed), "detail": detail[:500]})
     icon = "✅" if passed else "❌"
-    print(f"  {icon} {name}" + (f" — {detail[:200]}" if detail else ""))
+    print(f"  {icon} {name}" + (f" - {detail[:200]}" if detail else ""))
 
 def check_smtp():
-    """Verify SMTP credentials work — not just file exists."""
+    """Verify SMTP credentials work - not just file exists."""
     key_file = KEY_FILE
     if not key_file.exists():
         check("SMTP credentials file", False, "Key file missing")
@@ -37,9 +37,9 @@ def check_smtp():
     if not key.startswith("am_us_") or len(key) < 20:
         check("SMTP credentials format", False, "Key doesn't look valid")
         return
-    # SMTP is deprecated — AgentMail is REST-only now
+    # SMTP is deprecated - AgentMail is REST-only now
     # Check via REST API instead
-    check("SMTP connectivity", True, "Deprecated — REST API active")
+    check("SMTP connectivity", True, "Deprecated - REST API active")
 
 def check_file_exists(path, label):
     p = BASE / path
@@ -74,7 +74,7 @@ def count_lead_stages():
     stages = {}
     leadstore_emails = set()
 
-    # 1. LeadStore — authoritative for every lead that exists in it
+    # 1. LeadStore - authoritative for every lead that exists in it
     try:
         sys.path.insert(0, str(BASE))
         from lead_store import LeadStore
@@ -98,7 +98,7 @@ def count_lead_stages():
     except Exception as e:
         print(f"  [LeadStore error] {e}")
 
-    # 2. Legacy files — only for leads NOT yet in LeadStore
+    # 2. Legacy files - only for leads NOT yet in LeadStore
     def _missing(email: str) -> bool:
         return email.lower() not in leadstore_emails
 
@@ -152,13 +152,13 @@ TEST_EMAILS = frozenset([
 
 def detect_stuck_leads(stages):
     """Leads stuck in a stage beyond thresholds without advancement.
-    
+
     Uses LeadStore.get_stuck_leads() as authoritative source.
     Falls back to manual detection for legacy-only leads.
     """
     stuck = []
     leadstore_emails = set()
-    
+
     # 1. Use LeadStore's built-in stuck detection (authoritative)
     try:
         sys.path.insert(0, str(BASE))
@@ -180,8 +180,8 @@ def detect_stuck_leads(stages):
             })
     except Exception as e:
         print(f"  [LeadStore stuck error] {e}")
-    
-    # 2. Legacy-only leads — manual check (only for stages that should advance quickly)
+
+    # 2. Legacy-only leads - manual check (only for stages that should advance quickly)
     ASYNC_STAGES = frozenset({"paid", "dead", "bounced", "discovered", "site_found",
                                "pitch_sent", "pitch_queued"})
     THRESHOLDS = {"audit_delivered": 12}
@@ -226,11 +226,11 @@ def check_cron_jobs():
 def check_dead_letter():
     dl = BASE / "dead_letter_queue.jsonl"
     if not dl.exists():
-        check("Dead letter queue", True, "Empty — no permanently stalled prospects")
+        check("Dead letter queue", True, "Empty - no permanently stalled prospects")
         return
     lines = [l for l in dl.read_text().splitlines() if l.strip()]
     if lines:
-        check("Dead letter queue", False, f"{len(lines)} permanently stalled prospects — needs review")
+        check("Dead letter queue", False, f"{len(lines)} permanently stalled prospects - needs review")
     else:
         check("Dead letter queue", True, "Empty")
 
@@ -249,7 +249,7 @@ def check_recent_ramp_run():
             if mins_ago < 120:
                 check("Pipeline ramp recent run", True, f"{int(mins_ago)}m ago")
             else:
-                check("Pipeline ramp recent run", False, f"{int(mins_ago)}m ago — stale")
+                check("Pipeline ramp recent run", False, f"{int(mins_ago)}m ago - stale")
     except:
         check("Pipeline ramp recent run", False, "Cannot parse report")
 
@@ -262,18 +262,18 @@ def check_pipeline_ramp_lock():
             with open(lock) as f:
                 try:
                     fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
-                    # We got the lock — it was stale
-                    check("Pipeline lock stale", False, "Lock file exists but was acquired — previous run crashed")
+                    # We got the lock - it was stale
+                    check("Pipeline lock stale", False, "Lock file exists but was acquired - previous run crashed")
                     fcntl.flock(f, fcntl.LOCK_UN)
                 except IOError:
                     check("Pipeline lock", True, "Running")
         except:
             check("Pipeline lock", True, "Lock file present")
     else:
-        check("Pipeline lock", True, "No lock file — pipeline not currently running")
+        check("Pipeline lock", True, "No lock file - pipeline not currently running")
 
 def main():
-    print(f"Pipeline Health Check — {NOW.strftime('%Y-%m-%d %H:%M UTC')}")
+    print(f"Pipeline Health Check - {NOW.strftime('%Y-%m-%d %H:%M UTC')}")
     print("=" * 60)
     print()
 
@@ -282,7 +282,7 @@ def main():
     check_file_exists("ramp_pipeline_fill.py", "ramp_pipeline_fill.py")
     check_file_exists("followup_sequence.py", "followup_sequence.py")
     check_file_exists("deliver_audit.py", "deliver_audit.py")
-    # agentic_server.py archived to .legacy/ 2026-07-21 — replaced by platform_api (FastAPI)
+    # agentic_server.py archived to .legacy/ 2026-07-21 - replaced by platform_api (FastAPI)
 
     print()
     print("── SMTP ──")
@@ -297,8 +297,8 @@ def main():
             soft = bs.get("soft_bounces", 0)
             total_events = bs.get("total_bounce_events", 0)
             check("Bounce detection module", True, f"online")
-            # Hard bounces are expected/managed — only alert on NEW ones (>baseline)
-            BOUNCE_BASELINE = 46  # updated 2026-07-14T02:32 — SRE auto-ack: hello@boothkeepos.com (NDR hard bounce)
+            # Hard bounces are expected/managed - only alert on NEW ones (>baseline)
+            BOUNCE_BASELINE = 46  # updated 2026-07-14T02:32 - SRE auto-ack: hello@boothkeepos.com (NDR hard bounce)
             new_bounces = max(0, hard - BOUNCE_BASELINE)
             check("Hard bounces", new_bounces == 0, f"{new_bounces} NEW hard bounce(s) since baseline ({hard} total)" if new_bounces else f"{hard} total bounces (all managed)")
             check(f"Soft bounces", True, f"{soft} soft bounce(s), {total_events} total events")
@@ -306,7 +306,7 @@ def main():
                 latest = bs.get("last_events", [])
                 if latest:
                     for ev in reversed(latest[-3:]):
-                        print(f"     • {ev.get('email','?')} — {ev.get('bounce_type','?')} ({ev.get('reason','')[:80]})")
+                        print(f"     • {ev.get('email','?')} - {ev.get('bounce_type','?')} ({ev.get('reason','')[:80]})")
         except Exception as e:
             check("Bounce stats", False, str(e)[:80])
     else:
@@ -337,7 +337,7 @@ def main():
     if stuck:
         check("Stuck leads detected", False, f"{len(stuck)} leads stalled >4h")
         for s in stuck[:5]:
-            print(f"     • {s['email']} — {s['stage']} for {s['hours_stuck']}h")
+            print(f"     • {s['email']} - {s['stage']} for {s['hours_stuck']}h")
     else:
         check("Stuck leads", True, "No leads stalled >4h")
 
@@ -352,7 +352,7 @@ def main():
             recent = [l for l in lines if l.strip()]
             check("Copy fatigue detector", True, f"outreach_log: {len(recent)} entries; run copy_fatigue_detector.py for full diagnosis")
         else:
-            check("Copy fatigue detector", True, "module available — no outreach_log yet")
+            check("Copy fatigue detector", True, "module available - no outreach_log yet")
     except ImportError:
         check("Copy fatigue detector", False, "copy_fatigue_detector.py not importable")
 

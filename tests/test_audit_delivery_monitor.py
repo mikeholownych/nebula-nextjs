@@ -96,7 +96,7 @@ class AuditDeliveryMonitorTests(unittest.TestCase):
             self.assertEqual(result["overdue_pitches"], 1)
 
     def test_warm_replied_with_our_response_evidence_is_not_unrouted(self):
-        """Regression: kanzariyamihir@gmail.com (2026-07) — warm_replied row
+        """Regression: kanzariyamihir@gmail.com (2026-07) - warm_replied row
         carrying our_response_sent_at was falsely flagged unrouted because the
         predicate ignored response evidence. A responded warm row is routed."""
         with tempfile.TemporaryDirectory() as td:

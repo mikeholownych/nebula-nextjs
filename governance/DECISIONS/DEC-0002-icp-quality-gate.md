@@ -3,7 +3,7 @@
 **Status:** Active
 **Date:** 2026-07-07
 **Author:** CEO Agent
-**Approved by:** Autonomous — within VALUES.md authority (no spend >$50, no legal risk, no irreversible change)
+**Approved by:** Autonomous - within VALUES.md authority (no spend >$50, no legal risk, no irreversible change)
 
 ## Decision
 
@@ -22,7 +22,7 @@ The buying trigger ("founder burning ad dollars with no conversions") was dilute
 ## Evidence
 
 - 141 total leads, 75 contacted, 27 pitch sends, **0 paid** (customer-ledger.jsonl)
-- 30 hard bounces (21% bounce rate — high, partly from non-ICP targeting)
+- 30 hard bounces (21% bounce rate - high, partly from non-ICP targeting)
 - 3 "stuck" leads were all Mike's test emails (false positive)
 - `landing_page_feedback` trigger patterns were matching "feedback on my site" posts without any ad spend mention
 - ICP_MEMO.md clearly defines the buying trigger: "founders actively bleeding money on ads with zero conversions"
@@ -31,22 +31,22 @@ The buying trigger ("founder burning ad dollars with no conversions") was dilute
 
 The trigger_lead_engine.py scoring system had `landing_page_feedback` at 3pts, `ad_bleed` at 4pts, `zero_conversions` at 4pts. The combined score for a "roast my landing page" post without ad spend could reach 5 (warm), which qualified for full audit delivery via `is_high_pain_fit()` when `has_hand_raise` was True.
 
-The ramp_pipeline_fill.py had NO scoring at all — it sent audits to every lead passing the content firewall (which only checks for synthetic/AI content, not ICP fit).
+The ramp_pipeline_fill.py had NO scoring at all - it sent audits to every lead passing the content firewall (which only checks for synthetic/AI content, not ICP fit).
 
 ## Change Made
 
 Added inline ICP scoring with `check_icp_fit()` between the content firewall and audit delivery call:
-1. **Buying trigger combo (ad_bleed + zero_conversions):** Always pass — these are the exact ICP signal
-2. **Ad bleed alone from high-yield source:** Pass — these sources (reddit_ads_pain, reddit_ads_no_conv, reddit_zero_sales) have high conversion probability
-3. **Ad bleed alone without source boost:** Pass — still has active money mention
-4. **Everything else:** Filtered with reason logged — self-serve audit link remains in all outreach, only the automated full audit is gated
+1. **Buying trigger combo (ad_bleed + zero_conversions):** Always pass - these are the exact ICP signal
+2. **Ad bleed alone from high-yield source:** Pass - these sources (reddit_ads_pain, reddit_ads_no_conv, reddit_zero_sales) have high conversion probability
+3. **Ad bleed alone without source boost:** Pass - still has active money mention
+4. **Everything else:** Filtered with reason logged - self-serve audit link remains in all outreach, only the automated full audit is gated
 
 Also excluded 7 test/sandbox emails from pipeline_health_check.py stuck detection (was generating false FAIL).
 
 ## Expected Outcomes
 
 - **Pipeline health** will show PASS (no false stuck-lead failures)
-- **Audit delivery quality** improves — only leads expressing the buying trigger get the full automated audit
+- **Audit delivery quality** improves - only leads expressing the buying trigger get the full automated audit
 - **Bounce rate** should decrease as non-ICP domains are filtered
 - **First conversion probability** increases as $97 pitch lands in front of people who actually have ad spend problems
 - **Trade-off:** Lower total audit volume, higher per-audit conversion probability
@@ -57,9 +57,9 @@ Also excluded 7 test/sandbox emails from pipeline_health_check.py stuck detectio
 
 ## Budget Impact
 
-- **Direct:** $0 — code change only
+- **Direct:** $0 - code change only
 - **Opportunity:** Conserves audit delivery capacity for real prospects
-- **Risk:** None — self-serve audit link remains in all outreach; no real prospect is blocked from the product, only from the automated send
+- **Risk:** None - self-serve audit link remains in all outreach; no real prospect is blocked from the product, only from the automated send
 
 ## Rollback
 

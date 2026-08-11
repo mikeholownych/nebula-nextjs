@@ -1,7 +1,7 @@
 # Nebula Earned Media Acquisition Plan
 ## Objective: Move editorial CITED score from 0% → 30%+ within 60 days
 
-**Context**: The Limy.ai GEO research (Jul 2026) confirms what our CITED audit found — AI engines systematically prefer third-party sources over brand-owned content. Our editorial CITED score is **0%**. Our brand is confused with bicycle parts, streaming services, and guitar components. No third-party source currently defines "Nebula Components = landing page audit tool."
+**Context**: The Limy.ai GEO research (Jul 2026) confirms what our CITED audit found - AI engines systematically prefer third-party sources over brand-owned content. Our editorial CITED score is **0%**. Our brand is confused with bicycle parts, streaming services, and guitar components. No third-party source currently defines "Nebula Components = landing page audit tool."
 
 **Core insight**: We can't content-optimize our way out of this. The missing piece is earned media in the 8 sources AI engines trust for LP audit queries.
 
@@ -24,7 +24,7 @@
 ### 1.2 ProductHunt Launch
 - **Impact**: First independent entity definition; Perplexity crawls PH within 2-4 weeks
 - **Effort**: 2-3 hours prep + scheduled launch day
-- **Positioning**: "Free 9-signal landing page audit — finds the one leak killing your ads"
+- **Positioning**: "Free 9-signal landing page audit - finds the one leak killing your ads"
 - **Tagline**: "Stop burning ad spend on broken landing pages"
 - **Category**: Developer Tools > Analytics, Marketing > Growth Hacking
 - **Assets needed**: OG image, 3 screenshots, maker bio, first comment
@@ -36,7 +36,7 @@
 - **Thread title**: "I asked ChatGPT, Perplexity, and Google to audit my landing page. Here's what each missed that a real audit catches."
 - **Content**: Show real audit output vs AI generic advice with specific evidence (scores, screenshots)
 - **Include**: Link to free audit, specific numbers (73 audits run, average score 5.2/10)
-- **Note**: r/SaaS already has a thread about AI LP audit tools (competitor signal — we need presence there)
+- **Note**: r/SaaS already has a thread about AI LP audit tools (competitor signal - we need presence there)
 
 ---
 
@@ -49,22 +49,22 @@
 - **Current tools listed**: PageSpeed Insights, GTmetrix, Hotjar, SEOptimer, ChatGPT, FixRoast, WAVE, Screaming Frog
 - **Nebula's angle**: Only tool that scores 9 conversion signals (not just speed/SEO), evidence-backed findings with before/after copy suggestions, completely free with no signup required
 - **Action**: Email Aaron Rovner (founder, SaaSHero) with:
-  - Subject: "Missing from your LP audit tools roundup — 9-signal conversion audit (free, no signup)"
-  - Body: "Hi Aaron, I noticed your roundup covers speed tools and AI copilot approaches, but nothing that scores conversion signals specifically (message match, trust, CTA clarity, mobile UX, above-fold). Nebula scores 9 signals in ~90 seconds — here's a sample output: [link]. Happy to let you test it for the article. — Mike"
+  - Subject: "Missing from your LP audit tools roundup - 9-signal conversion audit (free, no signup)"
+  - Body: "Hi Aaron, I noticed your roundup covers speed tools and AI copilot approaches, but nothing that scores conversion signals specifically (message match, trust, CTA clarity, mobile UX, above-fold). Nebula scores 9 signals in ~90 seconds - here's a sample output: [link]. Happy to let you test it for the article. - Mike"
 - **Verification**: Check if added within 2-3 weeks; follow up once if no reply
 
 ### 2.2 FixRoast / LandingBoost Competitor Comparison Pages
 - **Target**: fixroast.com/blog/best-ai-landing-page-optimization-tools-2026
 - **Action**: These competitor blogs list alternatives. Submit Nebula via their "suggest a tool" or contact forms.
-- **Differentiation**: FixRoast is copy-focused; Nebula scores conversion architecture (9 signals). Not a substitute — a complement.
+- **Differentiation**: FixRoast is copy-focused; Nebula scores conversion architecture (9 signals). Not a substitute - a complement.
 
 ### 2.3 LandingScore Inclusion
 - **Target**: landingscore.app/blog/best-free-landing-page-audit-tools
 - **Action**: Reach out showing how Nebula's 9-signal approach differs from their scoring methodology
-- **Angle**: "We score conversion architecture, you score page construction — complementary tools worth listing together"
+- **Angle**: "We score conversion architecture, you score page construction - complementary tools worth listing together"
 
 ### 2.4 Instapage / Unbounce Alternatives
-- **Strategy**: Create comparison content on our site (/vs/instapage, /vs/unbounce — already live) AND get mentioned in "Unbounce alternatives" discussions
+- **Strategy**: Create comparison content on our site (/vs/instapage, /vs/unbounce - already live) AND get mentioned in "Unbounce alternatives" discussions
 - **Reddit threads**: Multiple active "Unbounce alternatives" threads; respond with legitimate comparison noting Nebula audits the page while Unbounce builds it
 
 ---
@@ -96,7 +96,7 @@ These are narrow enough that incumbents won't dominate:
 **Goal**: Single coherent entity description everywhere.
 
 ### 4.1 Canonical Brand Description (use everywhere)
-> "Nebula Components is a free AI-powered landing page audit tool that scores 9 conversion signals — message match, trust, mobile CTA, load speed, CTA clarity, above-fold content, ad signals, SEO foundations, and AI readiness — in 90 seconds. Built for founders spending on paid ads who aren't converting."
+> "Nebula Components is a free AI-powered landing page audit tool that scores 9 conversion signals - message match, trust, mobile CTA, load speed, CTA clarity, above-fold content, ad signals, SEO foundations, and AI readiness - in 90 seconds. Built for founders spending on paid ads who aren't converting."
 
 ### 4.2 Monthly CITED Re-Audit
 - Rerun the 15-prompt × 2-engine audit monthly
@@ -140,7 +140,7 @@ See also: `growth_system/pre-launch-press-strategy.md` for full press timeline, 
 
 - ❌ Write more on-site content hoping AI will find it (the research disproves this)
 - ❌ Pay for backlinks or fake reviews (AI engines verify source authority)
-- ❌ Chase broad terms like "CRO tool" (big brand bias — Optimizely, VWO own these)
+- ❌ Chase broad terms like "CRO tool" (big brand bias - Optimizely, VWO own these)
 - ❌ Treat all AI engines identically (each surfaces different sources)
 - ❌ Ignore brand disambiguation (all other work is wasted if AI thinks we're bike parts)
 

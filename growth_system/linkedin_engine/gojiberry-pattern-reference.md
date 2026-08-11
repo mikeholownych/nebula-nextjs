@@ -1,4 +1,4 @@
-# Gojiberry LinkedIn Playbook — Straight Steals & Integration Notes
+# Gojiberry LinkedIn Playbook - Straight Steals & Integration Notes
 
 **Source:** https://app.notion.com/p/The-LinkedIn-High-Intent-Outreach-System
 **Author:** Romàn, co-founder of gojiberry.ai
@@ -14,10 +14,10 @@ Gojiberry's pattern: **Pure question. No offer. No link. No audit. Just conversa
 | Step | Gojiberry DM | Word Count | Nebula Equivalent |
 |------|-------------|------------|-------------------|
 | 1 | "Quick question - what's your biggest challenge with [topic] right now?" | 23 | "Send the page, I'll tell you the first leak" |
-| 2 | "Interesting — we just solved that for [company]. Mind if I send a 3-min video?" | 27 | "Saw your results — want me to show you the fix?" |
-| Backup | "Hey [Name], noticed you're [observation] — we should chat." | 29 | "Quick value bomb: check if CTA appears before proof" |
+| 2 | "Interesting - we just solved that for [company]. Mind if I send a 3-min video?" | 27 | "Saw your results - want me to show you the fix?" |
+| Backup | "Hey [Name], noticed you're [observation] - we should chat." | 29 | "Quick value bomb: check if CTA appears before proof" |
 
-**Why this matters:** First message with zero ask = lower friction = higher response. You qualify before you offer. When they answer the question, they've invested — conversion to next step is higher.
+**Why this matters:** First message with zero ask = lower friction = higher response. You qualify before you offer. When they answer the question, they've invested - conversion to next step is higher.
 
 **A/B test design:**
 - **TEST** (gojiberry_question_first): Pure question, no offer, no link
@@ -104,8 +104,8 @@ Applicable to Nebula's positioning: swap "LinkedIn" for "every touchpoint" and t
 
 ## Implementation Status
 
-- [x] gojiberry_outreach_pattern.py — Draft generator with A/B patterns
-- [x] gojiberry-pattern-reference.md — This document
+- [x] gojiberry_outreach_pattern.py - Draft generator with A/B patterns
+- [x] gojiberry-pattern-reference.md - This document
 - [ ] Wire into cron workflow (linkedin outreach runner)
 - [ ] Activate LinkedIn agent types in trigger engine
 - [ ] A/B test: question-first vs audit-first first DM

@@ -79,7 +79,7 @@ def build_prompt(changed_files, existing_pages, index_content):
     NEW/CHANGED RAW FILES TO PROCESS:
     {raw_content}
 
-    EXISTING COMPILED PAGES (for context — update in place, don't duplicate):
+    EXISTING COMPILED PAGES (for context - update in place, don't duplicate):
     {existing}
 
     CURRENT INDEX.md:
@@ -97,13 +97,13 @@ def build_prompt(changed_files, existing_pages, index_content):
         "concepts/filename.md": "full file content"
       }},
       "index_additions": [
-        "- [[slug]] — one-line description"
+        "- [[slug]] - one-line description"
       ],
       "summary": "one paragraph of what changed and why"
     }}
 
     Only include pages that actually changed. If nothing in a raw file maps to a new
-    or updated page, leave pages empty. Output raw JSON only — no markdown fences.
+    or updated page, leave pages empty. Output raw JSON only - no markdown fences.
     """).strip()
     return prompt
 
@@ -171,18 +171,18 @@ def git_commit(msg):
 
 def main():
     now = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
-    print(f"=== Vault nightly compile — {now} ===\n")
+    print(f"=== Vault nightly compile - {now} ===\n")
 
     raw_files = get_raw_files()
     if not raw_files:
-        # Silent — no vault/raw/ files means nothing to report
+        # Silent - no vault/raw/ files means nothing to report
         return
 
     watermark = load_watermark()
     changed   = find_changed(raw_files, watermark)
 
     if not changed:
-        # Silent — no output means no Telegram notification
+        # Silent - no output means no Telegram notification
         return
 
     print(f"Changed files: {len(changed)}")

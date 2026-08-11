@@ -17,7 +17,7 @@ const founderSchema = {
 };
 
 export const metadata = {
-  title: 'Mike H — Founder, Nebula Components',
+  title: 'Mike H - Founder, Nebula Components',
   description: 'Mike H founded Nebula Components after running $2.3M+ in ad spend and finding the same 7 conversion leaks repeatedly.',
 };
 
@@ -39,7 +39,7 @@ export default function TeamPage() {
               <h1 className="text-4xl font-bold tracking-tight mb-2">Mike H</h1>
               <p className="text-[#79f2c0] font-medium mb-4">Founder, Nebula Components</p>
               <p className="text-[#9aa7bd] leading-relaxed">
-                After running $2.3M+ in ad spend and diagnosing 200+ landing pages, I found the same 7 conversion leaks repeatedly. Nebula Components is the tool I wished existed — diagnostic, not consultative.
+                After running $2.3M+ in ad spend and diagnosing 200+ landing pages, I found the same 7 conversion leaks repeatedly. Nebula Components is the tool I wished existed - diagnostic, not consultative.
               </p>
             </div>
           </div>

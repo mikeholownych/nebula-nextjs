@@ -154,17 +154,17 @@ function StoryAngles() {
     {
       number: '1',
       headline: `We audited ${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.sampleSize} landing pages. Not one scored an A.`,
-      body: `Across ${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.sampleSize} automated audits of pages running paid traffic, the average score is ${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.averageScore}/${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.scoreScale} — Grade ${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.grade}. Zero pages earned an A. The two most common failures: above-fold content (100% of pages) and ad signal continuity (99%).`,
+      body: `Across ${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.sampleSize} automated audits of pages running paid traffic, the average score is ${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.averageScore}/${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.scoreScale} - Grade ${CROSS_INDUSTRY_PAID_TRAFFIC_STUDY.grade}. Zero pages earned an A. The two most common failures: above-fold content (100% of pages) and ad signal continuity (99%).`,
     },
     {
       number: '2',
       headline: 'The default diagnostic for landing pages measures the wrong thing.',
-      body: "Load speed — the primary output of PageSpeed Insights — was a problem on just 29% of audited pages. The two failures present on virtually every page are invisible to speed tools. Founders are optimizing for the least common failure.",
+      body: "Load speed - the primary output of PageSpeed Insights - was a problem on just 29% of audited pages. The two failures present on virtually every page are invisible to speed tools. Founders are optimizing for the least common failure.",
     },
     {
       number: '3',
       headline: 'The CRO agency model sells retainers before diagnosis.',
-      body: 'Nebula argues the industry model is structurally broken — retainer before diagnosis, A/B tests on pages without enough traffic for significance, 90-day timelines for problems fixable in a week. The audit takes 90 seconds and costs nothing.',
+      body: 'Nebula argues the industry model is structurally broken - retainer before diagnosis, A/B tests on pages without enough traffic for significance, 90-day timelines for problems fixable in a week. The audit takes 90 seconds and costs nothing.',
     },
   ]
 

@@ -7,7 +7,7 @@ first step and depressed every conversion rate measured against it.
 
 `audit_started` is now owned solely by the portal route, which holds the
 referrer and attribution context this service never sees. What this service
-still owns — `audit_completed` and `audit_failed` — carries `audit_attempt_id`,
+still owns - `audit_completed` and `audit_failed` - carries `audit_attempt_id`,
 the correlation key minted in the browser at form submit, so the whole chain can
 be joined on the audit rather than on a person identity that is still anonymous
 when the flow starts.

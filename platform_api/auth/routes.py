@@ -78,7 +78,7 @@ async def get_current_user(
     db = Depends(get_session)
 ) -> dict:
     """Extract and verify current user from JWT.
-    
+
     Raises:
         HTTPException 401: If token invalid or missing
     """
@@ -92,25 +92,25 @@ async def get_current_user(
         token = auth_header[7:]
     else:
         raise HTTPException(status_code=401, detail="Missing authorization token")
-    
+
     try:
         # Verify JWT
         claims = await verify_session(redis, token)
-        
+
         # Get user
         user_id = claims.get("user_id")
         user = db.query(User).filter(User.id == UUID(user_id)).first()
-        
+
         if not user:
             raise HTTPException(status_code=401, detail="User not found")
-        
+
         return {
             "user": user,
             "user_id": user_id,
             "org_id": claims.get("org_id"),
             "session_id": claims.get("jti")
         }
-    
+
     except JWTError as e:
         raise HTTPException(status_code=401, detail=str(e))
 
@@ -125,13 +125,13 @@ async def google_auth(
     db = Depends(get_session)
 ):
     """Authenticate with Google OAuth ID token.
-    
+
     Flow:
     1. Frontend gets ID token from Google Sign-In
     2. Sends to this endpoint
     3. Backend verifies token and creates/updates user
     4. Returns JWT session token
-    
+
     If user doesn't exist, creates:
     - User record
     - UserIdentity (google, subject)
@@ -141,12 +141,12 @@ async def google_auth(
     try:
         # Verify Google token
         google_user = await verify_google_token(body.id_token)
-        
+
         if not google_user.get("email"):
             raise HTTPException(status_code=400, detail="Email required")
         if google_user.get("email_verified") is not True:
             raise HTTPException(status_code=401, detail="Verified email required")
-        
+
         # Check if identity exists
         identity = db.query(UserIdentity).filter_by(
             issuer="google",
@@ -167,7 +167,7 @@ async def google_auth(
                 email=google_user["email"]
             )
             db.add(user)
-            
+
             # Create identity
             identity = UserIdentity(
                 id=uuid4(),
@@ -176,7 +176,7 @@ async def google_auth(
                 subject=google_user["subject"]
             )
             db.add(identity)
-            
+
             # Create default organization
             org = Organization(
                 id=uuid4(),
@@ -185,7 +185,7 @@ async def google_auth(
             )
             db.add(org)
             db.flush()  # Get org.id
-            
+
             # Create membership
             from ..db.models import Membership
             membership = Membership(
@@ -195,23 +195,23 @@ async def google_auth(
                 role="owner"
             )
             db.add(membership)
-            
+
             db.commit()
-        
+
         # Create session
         session_data = {
             "ip": request.client.host if request.client else None,
             "user_agent": request.headers.get("user-agent", ""),
             "auth_method": "google"
         }
-        
+
         token = await create_session(
             redis,
             str(user.id),
             str(org.id),
             session_data
         )
-        
+
         ph = get_posthog()
         if ph:
             event_name = "user_signed_up" if is_new_user else "user_logged_in"
@@ -331,7 +331,7 @@ Nebula Components -- nebulacomponents.com
             detail=f"Failed to send magic link email: {result.get('_body', result.get('_error'))}"
         )
 
-    return {"message": "Magic link sent — check your email (expires in 15 minutes)"}
+    return {"message": "Magic link sent - check your email (expires in 15 minutes)"}
 
 
 @router.get("/verify")
@@ -685,13 +685,13 @@ async def github_callback(
         is_new_user = identity is None
 
         if identity:
-            # Existing user — sign in
+            # Existing user - sign in
             user = identity.user
             org = db.query(Organization).join(
                 Organization.memberships
             ).filter_by(user_id=user.id).first()
         else:
-            # New user — create account
+            # New user - create account
             user = User(
                 id=uuid4(),
                 email=github_user.get("email"),
@@ -784,7 +784,7 @@ async def logout(
     current_user = Depends(get_current_user)
 ):
     """Revoke current session.
-    
+
     Removes from active sessions and blacklists JWT.
     """
     user_id = current_user["user_id"]
@@ -808,9 +808,9 @@ async def logout_all(
 ):
     """Revoke all sessions for current user."""
     user_id = current_user["user_id"]
-    
+
     count = await revoke_all_sessions(redis, user_id)
-    
+
     return {"message": f"Revoked {count} sessions"}
 
 
@@ -821,9 +821,9 @@ async def list_sessions(
 ):
     """List all active sessions for current user."""
     user_id = current_user["user_id"]
-    
+
     sessions = await get_active_sessions(redis, user_id)
-    
+
     return [
         SessionInfo(
             session_id=sid,
@@ -843,9 +843,9 @@ async def revoke_specific_session(
 ):
     """Revoke a specific session."""
     user_id = current_user["user_id"]
-    
+
     await revoke_session(redis, user_id, session_id)
-    
+
     return {"message": f"Session {session_id} revoked"}
 
 
@@ -857,7 +857,7 @@ async def get_me(
 ):
     """Get current user information including workspace context."""
     user = current_user["user"]
-    
+
     return {
         "id": str(user.id),
         "email": user.email,

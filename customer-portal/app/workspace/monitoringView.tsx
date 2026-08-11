@@ -39,7 +39,7 @@ const STATUS_META: Record<
 }
 
 const fmtDate = (iso: string | null): string => {
-  if (!iso) return '—'
+  if (!iso) return '-'
   return new Date(iso).toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
@@ -48,7 +48,7 @@ const fmtDate = (iso: string | null): string => {
 }
 
 const fmtWhen = (iso: string | null): string => {
-  if (!iso) return '—'
+  if (!iso) return '-'
   const d = new Date(iso)
   const now = new Date()
   const diff = d.getTime() - now.getTime()
@@ -208,7 +208,7 @@ export default function MonitoringView({ email }: { email: string }) {
         <section className="rounded-2xl border border-dashed border-border p-10 text-center">
           <p className="text-fg font-medium">No monitored pages yet</p>
           <p className="text-sm text-fg-dim mt-1">
-            Add a URL above and Nebula will watch its conversion score over time — the same
+            Add a URL above and Nebula will watch its conversion score over time - the same
             way Ahrefs watches rankings.
           </p>
         </section>
@@ -288,7 +288,7 @@ export default function MonitoringView({ email }: { email: string }) {
       )}
 
       <p className="text-xs text-fg-dim">
-        Monitoring runs on a scheduled watchdog — you'll get a Telegram alert only when the
+        Monitoring runs on a scheduled watchdog - you'll get a Telegram alert only when the
         score moves meaningfully (≥ 4 points) or a new critical finding appears. Quiet weeks
         stay quiet.
       </p>

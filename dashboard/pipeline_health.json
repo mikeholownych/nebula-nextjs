@@ -28,7 +28,7 @@
     {
       "name": "SMTP connectivity",
       "passed": true,
-      "detail": "Deprecated — REST API active"
+      "detail": "Deprecated - REST API active"
     },
     {
       "name": "Bounce detection module",
@@ -68,7 +68,7 @@
     {
       "name": "Dead letter queue",
       "passed": true,
-      "detail": "Empty — no permanently stalled prospects"
+      "detail": "Empty - no permanently stalled prospects"
     },
     {
       "name": "Stuck leads",

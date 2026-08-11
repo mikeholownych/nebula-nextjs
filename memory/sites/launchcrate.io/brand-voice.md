@@ -9,7 +9,7 @@ You have a SaaS product ready. You need it live. We handle everything: domain, l
 ## What We Say
 
 - "Your SaaS. Live in 24 hours. Full stop."
-- "Landing page, deployment, email sequences, outreach — done for you."
+- "Landing page, deployment, email sequences, outreach - done for you."
 - "You build the product. We build everything around it."
 - "No more wrestling with DNS, email deliverability, or landing page builders."
 
@@ -23,7 +23,7 @@ You have a SaaS product ready. You need it live. We handle everything: domain, l
 
 - "I built my MVP but have no launch plan"
 - "Been working on my landing page for weeks"
-- "Setup takes too long — I just want to ship"
+- "Setup takes too long - I just want to ship"
 - "Not technical enough to deploy properly"
 
 ## Pricing

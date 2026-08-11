@@ -4,23 +4,23 @@
 When a founder replies to your outreach stating they "handle all dev themselves" or "won't be taking the implementation offer," adjust the pitch before delivering the audit.
 
 ## Adjustment Rules
-**Remove:** "$97 implementation done-for-you" framing  
+**Remove:** "$97 implementation done-for-you" framing
 **Replace with:** Two lower-friction options that work for a self-builder:
 
 ```
-Option 1 — Free 20-min call: I'll walk through the findings live. Just reply and we'll find a time.
+Option 1 - Free 20-min call: I'll walk through the findings live. Just reply and we'll find a time.
 
-Option 2 — Written fix priority list ($97): Every issue ranked by impact vs effort, exact copy rewrites, sequenced implementation order. You implement, I advise. Reply "fix list" to start.
+Option 2 - Written fix priority list ($97): Every issue ranked by impact vs effort, exact copy rewrites, sequenced implementation order. You implement, I advise. Reply "fix list" to start.
 ```
 
 ## Opening Line for Audit Delivery
-> "You mentioned you handle dev yourself — perfect. This audit shows you exactly what's leaking conversions and in what order to fix it. No implementation needed from me."
+> "You mentioned you handle dev yourself - perfect. This audit shows you exactly what's leaking conversions and in what order to fix it. No implementation needed from me."
 
 ## Implementation Impact
 This framing:
-- Validates their self-sufficiency instead of fighting it  
-- Reframes the $97 offer as advisory (prioritization + copy) rather than execution  
-- Gives a free option (call) that costs them nothing to say yes to  
+- Validates their self-sufficiency instead of fighting it
+- Reframes the $97 offer as advisory (prioritization + copy) rather than execution
+- Gives a free option (call) that costs them nothing to say yes to
 - Maintains the revenue path without triggering objections
 
 ## HOT_LEAD Tracking

@@ -1,4 +1,4 @@
-## Goal Contradiction — Page vs. Stated Purpose
+## Goal Contradiction - Page vs. Stated Purpose
 
 **Finding:** What your page needs to do vs. what it actually supports.
 

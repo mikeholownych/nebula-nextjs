@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SRE Responder — Nebula Components
+SRE Responder - Nebula Components
 Detect → Remediate → Verify → Escalate (only when auto-fix fails)
 
 Runs every 15 min via cron. Stays silent when healthy.
@@ -196,7 +196,7 @@ def fix_dead_letter():
 
 def fix_stuck_leads():
     """Advance leads stuck >4h in intermediate stages.
-    
+
     Includes freeze tracking: if a lead gets unstuck 3+ times in 24h,
     it's moved to dead to prevent re-stuck loops.
     """
@@ -359,7 +359,7 @@ def _last_ramp_had_zero_sends() -> bool:
         report = json.loads(RAMP_REPORT.read_text())
         sent_count = report.get('counts', {}).get('sent', 0)
         if sent_count == 0:
-            # Also check how recent — if report is old, it's not relevant
+            # Also check how recent - if report is old, it's not relevant
             ts_str = report.get('timestamp', '')
             if ts_str:
                 try:
@@ -381,7 +381,7 @@ def _all_sources_broken() -> bool:
     issues = state.get('known_issues', {})
     broken = [k for k, v in issues.items() if 'blocked' in v.lower() or 'down' in v.lower() or 'unavailable' in v.lower() or 'rate-limited' in v.lower() or 'exhausted' in v.lower()]
     if len(broken) >= 2:
-        log(f'[sources] {len(broken)} known source failures — will use extended cooldown')
+        log(f'[sources] {len(broken)} known source failures - will use extended cooldown')
         return True
     return False
 
@@ -398,7 +398,7 @@ def trigger_ramp_if_starved():
 
     # Cooldown: if last ramp report had 0 sends and it's recent, skip
     if _last_ramp_had_zero_sends():
-        log(f'[ramp-cooldown] Last ramp run produced 0 sends — waiting {RAMP_COOLDOWN_MINUTES}m before retry')
+        log(f'[ramp-cooldown] Last ramp run produced 0 sends - waiting {RAMP_COOLDOWN_MINUTES}m before retry')
         return False
 
     # Extended cooldown if multiple sources are known-broken
@@ -416,10 +416,10 @@ def trigger_ramp_if_starved():
             except Exception:
                 pass
         if any_zero_recent:
-            log(f'[ramp-cooldown] Multiple sources broken + last ramp 0 sends — suppressing ramp trigger')
+            log(f'[ramp-cooldown] Multiple sources broken + last ramp 0 sends - suppressing ramp trigger')
             return False
         else:
-            log(f'[ramp-cooldown] Multiple sources broken — suppressing ramp trigger despite no zero-send evidence')
+            log(f'[ramp-cooldown] Multiple sources broken - suppressing ramp trigger despite no zero-send evidence')
             return False
 
     contacted = BASE / 'contacted.json'
@@ -442,7 +442,7 @@ def trigger_ramp_if_starved():
         if newest_ts:
             hours_dry = (NOW - newest_ts).total_seconds() / 3600
             if hours_dry > 6:
-                log(f'[auto-fix] Pipeline starved ({hours_dry:.1f}h no new leads) — triggering ramp')
+                log(f'[auto-fix] Pipeline starved ({hours_dry:.1f}h no new leads) - triggering ramp')
                 subprocess.Popen(
                     [VENV_PYTHON, str(BASE / 'ramp_pipeline_fill.py')],
                     cwd=str(BASE), close_fds=True,
@@ -467,7 +467,7 @@ def check_bounce_suppression_sync():
     am = AgentMailClient()
 
     # Check leads in 'contacted' stage that haven't moved in >48h
-    # These may be silently suppressed — probe them
+    # These may be silently suppressed - probe them
     probe_file = BASE / 'sre_probe_queue.json'
     queue = []
     if probe_file.exists():
@@ -503,9 +503,9 @@ def check_bounce_suppression_sync():
 
 NOISE_CHECKS = {
     # check_name: (min_alert_interval_minutes, description)
-    'smtp_check': (0, 'SMTP is now retired — always passes'),
-    'ramp_lock_stale': (30, 'Stale lock every ramp run — acceptable'),
-    'Pipeline ramp recent run': (120, 'Stale during source outages — SRE suppresses ramp trigger when sources are broken'),
+    'smtp_check': (0, 'SMTP is now retired - always passes'),
+    'ramp_lock_stale': (30, 'Stale lock every ramp run - acceptable'),
+    'Pipeline ramp recent run': (120, 'Stale during source outages - SRE suppresses ramp trigger when sources are broken'),
 }
 
 def _check_cron_errors(state: dict, escalations: list) -> None:
@@ -524,7 +524,7 @@ def _check_cron_errors(state: dict, escalations: list) -> None:
             j for j in jobs
             if j.get('enabled') and j.get('last_status') == 'error'
             and j.get('name') not in {
-                # Known acceptable transient errors — skip alerting
+                # Known acceptable transient errors - skip alerting
                 'nebula-reddit-comment-queue',  # Reddit dead channel
             }
         ]
@@ -625,7 +625,7 @@ def main():
     if SRE_LOCK.exists():
         age_sec = (NOW.timestamp() - SRE_LOCK.stat().st_mtime)
         if age_sec < LOCK_AGE_MAX:
-            log(f'[lock] Another SRE run in progress (age={age_sec:.0f}s) — skipping')
+            log(f'[lock] Another SRE run in progress (age={age_sec:.0f}s) - skipping')
             return
         else:
             log(f'[lock] Stale lock removed (age={age_sec:.0f}s)')
@@ -664,10 +664,10 @@ def main():
     if newly_suppressed:
         actions_taken.append(f'Suppression sync: {newly_suppressed} newly bounced')
 
-    # 6b. Cron error SLA — alert on enabled cron jobs stuck in error state
+    # 6b. Cron error SLA - alert on enabled cron jobs stuck in error state
     _check_cron_errors(state, escalations)
 
-    # 6c. Webhook delivery gap — alert if purchases exist without CRM update
+    # 6c. Webhook delivery gap - alert if purchases exist without CRM update
     _check_purchase_delivery_gap(state, escalations)
 
     # 7. Check health file for critical failures that need escalation
@@ -700,11 +700,11 @@ def main():
     # 8. SNR evaluation
     evaluate_snr()
 
-    # 9. Check for revenue (real Stripe payments only — test sessions always excluded).
+    # 9. Check for revenue (real Stripe payments only - test sessions always excluded).
     # This is a 15-min-cadence backstop; webhook_server.py also alerts in real time
     # the instant a checkout.session.completed event lands.
     #
-    # Previously read ops/revenue.json, a file nothing in this codebase ever wrote —
+    # Previously read ops/revenue.json, a file nothing in this codebase ever wrote -
     # this check has never fired since it was added. Now reads the same
     # ledger_metrics source of truth used by ledger_metrics.summary() elsewhere.
     try:
@@ -738,7 +738,7 @@ def main():
     if actions_taken:
         log(f'[done] Actions taken: {"; ".join(actions_taken)}')
     else:
-        log('[done] No action needed — pipeline healthy')
+        log('[done] No action needed - pipeline healthy')
 
     # Silent on healthy (no stdout = no cron delivery)
     # Only print if actions taken or escalations (triggers delivery)
@@ -805,7 +805,7 @@ def _fix_ramp_needs_site_extraction():
             'trigger': rec.get('trigger', '')[:120],
             'url': rec.get('url', ''),
             'source': rec.get('source', ''),
-            'reason': 'needs_site_extraction — stale >2h, no site URL extractable',
+            'reason': 'needs_site_extraction - stale >2h, no site URL extractable',
             'retry_count': 3,
             'source_script': 'sre_responder'
         }
@@ -841,18 +841,18 @@ def _track_source_issues():
             apify_circuit = any('circuit-breaker' in l and 'apify' in l for l in recent)
 
             if apify_403:
-                state['known_issues']['apify_scraper'] = 'HTTP 403 — Too many outstanding invoices (billing issue)'
+                state['known_issues']['apify_scraper'] = 'HTTP 403 - Too many outstanding invoices (billing issue)'
             elif apify_timeout:
-                state['known_issues']['apify_scraper'] = 'Request timeout — actor may be slow'
+                state['known_issues']['apify_scraper'] = 'Request timeout - actor may be slow'
             elif apify_circuit:
-                state['known_issues']['apify_scraper'] = 'Circuit breaker tripped — all scrapers failed'
+                state['known_issues']['apify_scraper'] = 'Circuit breaker tripped - all scrapers failed'
             elif 'apify_scraper' in state.get('known_issues', {}):
                 # Check if there's a more recent run without Apify errors
                 if any('apify' in l and not l.endswith('403') and 'HTTP 403' not in l for l in lines[-100:]):
                     # If Apify appears in recent log without errors, it recovered
                     pass
                 elif not any('apify' in l for l in lines[-20:]):
-                    # No Apify activity in last 20 lines — stale issue, not active
+                    # No Apify activity in last 20 lines - stale issue, not active
                     pass
                 else:
                     # Still seeing the issue

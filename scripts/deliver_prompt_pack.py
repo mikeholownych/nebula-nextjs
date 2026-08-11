@@ -267,7 +267,7 @@ def compose_email(url, pack, audit):
         f"Run the prompt below in your terminal agent (Claude Code, Cursor, "
         f"Codex, or any coding agent with terminal + file access in your "
         f"repository). It is already filled in with what the audit found on "
-        f"your page — your real headline, real CTA, real platform — and it "
+        f"your page - your real headline, real CTA, real platform - and it "
         f"tells the agent exactly what to change, which files to touch, and "
         f"how to verify the fix. Where a fact can only come from you (a real "
         f"customer name, an exact review count), the agent will ask for it "
@@ -277,7 +277,7 @@ def compose_email(url, pack, audit):
         f"{'=' * 40}\n\n"
     )
     body = intro + prompt_md_full
-    subject = f"Your One-Leak Repair Sprint — {selected_label}"
+    subject = f"Your One-Leak Repair Sprint - {selected_label}"
     html = _kit_html(url, audit, selected_label, intro, prompt_md_full)
     return subject, body, html
 
@@ -361,10 +361,10 @@ def _kit_html(url, audit, selected_label, intro_text, prompt_md, fallback=False)
   <!-- Intro -->
   <tr><td style="padding:0 4px;">
     <p style="margin:0 0 8px;font-size:14px;line-height:1.7;color:#94a3b8;">
-      The prompt below is ready to run in your terminal agent — <strong style="color:#e2e8f0;">Claude Code, Cursor, Codex</strong>, or any agent with terminal + file access in your repository.
+      The prompt below is ready to run in your terminal agent - <strong style="color:#e2e8f0;">Claude Code, Cursor, Codex</strong>, or any agent with terminal + file access in your repository.
     </p>
     <p style="margin:0 0 16px;font-size:14px;line-height:1.7;color:#94a3b8;">
-      It is already filled in with your real page data — headline, CTA text, platform. Where only you know the answer (a real customer name, exact review count), the agent will ask before proceeding.
+      It is already filled in with your real page data - headline, CTA text, platform. Where only you know the answer (a real customer name, exact review count), the agent will ask before proceeding.
     </p>
     <p style="margin:0 0 4px;font-size:13px;line-height:1.6;color:#475569;">
       Run the free re-audit within 30 days to verify the fix held. This does not guarantee conversion lift.
@@ -413,7 +413,7 @@ def _kit_html(url, audit, selected_label, intro_text, prompt_md, fallback=False)
       <a href="https://nebulacomponents.com" style="color:#00c2a0;text-decoration:none;">nebulacomponents.com</a>
     </p>
     <p style="margin:0;font-size:11px;color:#1e3040;line-height:1.6;">
-      Questions about your kit? Reply to this email — we respond within one business day.<br>
+      Questions about your kit? Reply to this email - we respond within one business day.<br>
       This is a one-time transactional email for your $97 One-Leak Repair Sprint purchase.
     </p>
   </td></tr>
@@ -441,7 +441,7 @@ def main():
 
     rows = load_ledger_rows()
     if already_delivered(stripe_session_id, rows):
-        log(f"{stripe_session_id} already has a kit delivery record — skipping (idempotent)")
+        log(f"{stripe_session_id} already has a kit delivery record - skipping (idempotent)")
         return 0
 
     try:
@@ -449,10 +449,10 @@ def main():
         bounced = LeadStore().is_bounced(email)
     except Exception as e:
         log(f"bounce check failed, refusing to send: {e}")
-        telegram_notify(f"⚠️ Prompt pack delivery blocked — bounce check failed for {email}: {e}")
+        telegram_notify(f"⚠️ Prompt pack delivery blocked - bounce check failed for {email}: {e}")
         return 1
     if bounced:
-        log(f"{email} is bounced — refusing to send")
+        log(f"{email} is bounced - refusing to send")
         telegram_notify(f"⚠️ Prompt pack purchase from {email}, but that address is on the bounce list. Needs manual follow-up.")
         return 1
 
@@ -465,7 +465,7 @@ def main():
         log(f"exact completed audit {audit_id} could not be resolved for {email}")
         telegram_notify(
             f"⚠️ Prompt pack purchase from {email}, but exact audit {audit_id} could not be "
-            f"resolved — refusing to guess a page. Needs manual follow-up."
+            f"resolved - refusing to guess a page. Needs manual follow-up."
         )
         return 1
 
@@ -476,15 +476,15 @@ def main():
         pack = generate_real_pack(audit, page, email=email, stated_goal="conversions")
     except Exception as e:
         log(f"failed to build prompt pack: {e}")
-        telegram_notify(f"⚠️ Prompt pack purchase from {email} ({url}) — pack generation failed: {e}. Needs manual follow-up.")
+        telegram_notify(f"⚠️ Prompt pack purchase from {email} ({url}) - pack generation failed: {e}. Needs manual follow-up.")
         return 1
 
     if pack["count"] == 0:
-        # Page scores well across the board — nothing below the 7/10 threshold
+        # Page scores well across the board - nothing below the 7/10 threshold
         # to generate a prompt for. Real edge case, needs a human, not a silent no-op.
         log(f"{email}: page scored too well to generate any prompts (count=0)")
         telegram_notify(
-            f"⚠️ Prompt pack purchase from {email} ({url}) — the page now scores well enough "
+            f"⚠️ Prompt pack purchase from {email} ({url}) - the page now scores well enough "
             f"that no prompts qualify (all dimensions >= 7/10). Needs a manual response, not an empty email."
         )
         return 1
@@ -499,7 +499,7 @@ def main():
     )
     if not sent.get("ok"):
         log(f"send failed: {sent}")
-        telegram_notify(f"⚠️ Prompt pack purchase from {email} ({url}) — send failed: {sent.get('error')}. Needs manual follow-up.")
+        telegram_notify(f"⚠️ Prompt pack purchase from {email} ({url}) - send failed: {sent.get('error')}. Needs manual follow-up.")
         return 1
 
     append_ledger({
@@ -515,7 +515,7 @@ def main():
     })
     update_hot_lead_stage(email, url)
     log(f"delivered repair sprint to {email} for {url}")
-    telegram_notify(f"✅ repair sprint delivered — {email} ({url})")
+    telegram_notify(f"✅ repair sprint delivered - {email} ({url})")
     return 0
 
 

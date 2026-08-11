@@ -25,23 +25,23 @@ interface AuditOption {
 }
 
 function fmtDate(iso: string | null): string {
-  if (!iso) return '—'
+  if (!iso) return '-'
   const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return '—'
+  if (Number.isNaN(d.getTime())) return '-'
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
 function fmtNum(v: number | null, digits = 1): string {
-  return v === null || v === undefined ? '—' : v.toFixed(digits)
+  return v === null || v === undefined ? '-' : v.toFixed(digits)
 }
 
 function fmtCtr(v: number | null): string {
-  return v === null || v === undefined ? '—' : `${(v * 100).toFixed(2)}%`
+  return v === null || v === undefined ? '-' : `${(v * 100).toFixed(2)}%`
 }
 
 function Delta({ baseline, current, invert = false, pct = false }: { baseline: number | null; current: number | null; invert?: boolean; pct?: boolean }) {
   if (baseline === null || current === null || baseline === undefined || current === undefined) {
-    return <span className="text-fg-dim text-xs">—</span>
+    return <span className="text-fg-dim text-xs">-</span>
   }
   const raw = pct ? (current - baseline) * 100 : current - baseline
   if (Math.abs(raw) < 0.001) return <span className="text-fg-dim text-xs">±0</span>

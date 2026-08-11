@@ -1,4 +1,4 @@
-# Wave 0 Complete — Service Stabilization
+# Wave 0 Complete - Service Stabilization
 
 **Date:** 2026-07-14
 **Wave:** 0 (Stabilize before building)
@@ -27,11 +27,11 @@ Wave 0 is complete. All critical stabilization work packages finished:
 **Commit:** `acb4c632`
 
 **Deliverables:**
-- `platform_api/main.py` — FastAPI app with health endpoints
-- `platform_api/middleware.py` — Request ID + size limit middleware
-- `platform_api/errors.py` — Error envelope formatting
-- `platform_api/config.py` — Settings validation
-- `pytest.ini` — Fixed asyncio fixture error
+- `platform_api/main.py` - FastAPI app with health endpoints
+- `platform_api/middleware.py` - Request ID + size limit middleware
+- `platform_api/errors.py` - Error envelope formatting
+- `platform_api/config.py` - Settings validation
+- `pytest.ini` - Fixed asyncio fixture error
 - Tests: 4/4 passing
 
 **Impact:** Platform foundation for Wave 1-4 bounded contexts.
@@ -246,11 +246,11 @@ bfc39908 WEB-01: Next.js scaffold with healthz/readyz endpoints, type-safe build
 
 **Priority order:**
 
-1. **PostgreSQL schema design** — Customer, organization, billing tables
-2. **Identity provider decision** — Stripe Portal vs auth0/Clerk
-3. **Platform API routes** — Auth, customer state, billing
-4. **Customer dashboard routes** — `/dashboard`, `/account`, `/billing`
-5. **Proxy implementation** — Auth check, customer ID injection
+1. **PostgreSQL schema design** - Customer, organization, billing tables
+2. **Identity provider decision** - Stripe Portal vs auth0/Clerk
+3. **Platform API routes** - Auth, customer state, billing
+4. **Customer dashboard routes** - `/dashboard`, `/account`, `/billing`
+5. **Proxy implementation** - Auth check, customer ID injection
 
 **Estimated timeline:** 5-7 working days
 
@@ -285,6 +285,6 @@ Wave 0 achieved all objectives:
 
 ---
 
-**Next wave:** Wave 1 — Next.js + Platform API implementation
+**Next wave:** Wave 1 - Next.js + Platform API implementation
 **Projected start:** Immediately
 **Projected completion:** July 21-23, 2026 (5-7 days)

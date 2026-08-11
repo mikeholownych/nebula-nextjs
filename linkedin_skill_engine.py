@@ -111,7 +111,7 @@ def word_count(text: str) -> int:
 
 
 def humanize(text: str) -> str:
-    text = text.replace("—", ". ").replace("–", "-")
+    text = text.replace("-", ". ").replace("–", "-")
     for term in AI_SLOP:
         text = re.sub(re.escape(term), "", text, flags=re.I)
     text = re.sub(r"\s+", " ", text).strip()

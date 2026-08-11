@@ -177,11 +177,11 @@ function AuditResultsContent() {
           </p>
           <Link href={`/checkout?audit=${audit.auditId}`}>
             <Button size="lg" className="w-full md:w-auto">
-              Get Fix Pack — ${audit.fixPackPrice}
+              Get Fix Pack - ${audit.fixPackPrice}
             </Button>
           </Link>
           <p className="text-fg-dim text-sm mt-4">
-            Or fix it yourself using the recommendations above — free.
+            Or fix it yourself using the recommendations above - free.
           </p>
         </Card>
 
@@ -192,14 +192,14 @@ function AuditResultsContent() {
               LIMITED OFFER
             </span>
             <h3 className="text-xl font-bold text-fg mb-2">
-              Ongoing Optimization — 20% Off Yearly
+              Ongoing Optimization - 20% Off Yearly
             </h3>
             <p className="text-fg-muted mb-4">
               Monthly audits + priority fixes. Lock in <strong>$79/mo</strong> (normally $99) when you bundle with Fix Pack.
             </p>
             <Link href="/checkout?audit=${audit.auditId}&add=retainer">
               <Button variant="outline" size="lg">
-                Add Monthly Retainer — $79/mo
+                Add Monthly Retainer - $79/mo
               </Button>
             </Link>
           </div>

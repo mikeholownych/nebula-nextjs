@@ -1,8 +1,8 @@
-# Embeddable Audit Widget — Technical Specification
+# Embeddable Audit Widget - Technical Specification
 
 ## Overview
 
-A lightweight JavaScript widget that agency partners can embed on their own websites. When a visitor enters a URL, the widget runs a Nebula landing page audit and displays the score — capturing the lead for both the agency and Nebula.
+A lightweight JavaScript widget that agency partners can embed on their own websites. When a visitor enters a URL, the widget runs a Nebula landing page audit and displays the score - capturing the lead for both the agency and Nebula.
 
 This turns the $497 Agency Partner offer into a lead generation tool that works on the partner's domain, not just ours.
 
@@ -25,10 +25,10 @@ This turns the $497 Agency Partner offer into a lead generation tool that works 
 
 ### States
 
-1. **Form** — URL input + optional email field + "Scan my page" button
-2. **Processing** — animated progress indicator (30-90 seconds)
-3. **Score** — overall score (0-10), grade (A-F), top 3 findings summary
-4. **Expand** — "See full report" links to `nebulacomponents.com/audit/{id}/results?partner=PARTNER_ID`
+1. **Form** - URL input + optional email field + "Scan my page" button
+2. **Processing** - animated progress indicator (30-90 seconds)
+3. **Score** - overall score (0-10), grade (A-F), top 3 findings summary
+4. **Expand** - "See full report" links to `nebulacomponents.com/audit/{id}/results?partner=PARTNER_ID`
 
 ### Data Flow
 

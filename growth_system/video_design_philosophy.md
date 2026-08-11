@@ -1,5 +1,5 @@
-# Nebula Components — Video Design Philosophy
-# Version 1.0 — 2026-08-11
+# Nebula Components - Video Design Philosophy
+# Version 1.0 - 2026-08-11
 # Drop this file into any new video project. Every asset follows this spec.
 
 ---
@@ -26,7 +26,7 @@
 ## Motion Philosophy
 
 **Pacing**
-- Default cut rhythm: 2–3 seconds per scene (per prompt pack #5 — use the best 2-3 seconds of any take)
+- Default cut rhythm: 2–3 seconds per scene (per prompt pack #5 - use the best 2-3 seconds of any take)
 - Animated numbers: count up to final value over 0.8–1.2 seconds, ease-out
 - Text entrance: fade up from 8px below, 300ms, ease-out
 - Never use: zoom-in punches, shake effects, spinning transitions
@@ -49,18 +49,18 @@
 ## Content Rules
 
 **Opening**
-- Start on word one — no countdown, no "hey guys", no logo sting
+- Start on word one - no countdown, no "hey guys", no logo sting
 - First 3 seconds must answer: who this is for and what problem it solves
 - OR: open on a number (the monthly cost, the score, the gap)
 
 **Subtitles**
 - Always: white text, black semi-transparent background pill, 16–18px
 - Word-level sync preferred (per prompt pack #7)
-- Never burn subtitles into the frame — always as overlay layer
+- Never burn subtitles into the frame - always as overlay layer
 
 **Proof elements**
 - Real domain names when possible (knallhart.com, basecamp.com)
-- Real scores from real audits — never mock data
+- Real scores from real audits - never mock data
 - Dollar amounts always: "$847/month" not "hundreds of dollars"
 
 **CTA**
@@ -124,7 +124,7 @@ Current foundation: `/home/mike/.hermes/cache/video/nebula-hero-foundation.png`
 
 ---
 
-## Visual DNA Anchor — Canonical Style Clause
+## Visual DNA Anchor - Canonical Style Clause
 
 > Paste this at the end of every still image or video prompt.
 > Change scene language freely. Never change the anchor.
@@ -134,12 +134,12 @@ Current foundation: `/home/mike/.hermes/cache/video/nebula-hero-foundation.png`
 RED Komodo, 35mm anamorphic lens, soft monitor-glow practicals, near-black with teal accent, light film grain, slight vignette
 ```
 
-### Warmer variant (warmer emotional tone — founder story content)
+### Warmer variant (warmer emotional tone - founder story content)
 ```
 Arri Alexa, 50mm prime, warm desk lamp practicals, dark amber-teal palette, light film grain, halation on highlights
 ```
 
-### Colder variant (data/product demos — analytical, clean)
+### Colder variant (data/product demos - analytical, clean)
 ```
 RED Komodo, 24mm wide, cool blue monitor light, near-black with cool cyan accent, clean digital, subtle lens flare
 ```
@@ -164,7 +164,7 @@ Before using any prompt, verify the anchor contains exactly these 5 layers:
 - [ ] Lens (mm + type, not "shallow depth of field" alone)
 - [ ] Light source (specific, not "cinematic lighting")
 - [ ] Palette (2 colour words max)
-- [ ] Texture (grain/vignette/halation — one only)
+- [ ] Texture (grain/vignette/halation - one only)
 
 If any layer is missing → do not send. Fix first.
 
@@ -187,7 +187,7 @@ If any layer is missing → do not send. Fix first.
 ### Disclosure rule
 If the avatar speaks AS Mike TO a specific person: disclose.
 Add this line to description or video:
-> "This is an AI version of me — written by me, voiced by my AI clone."
+> "This is an AI version of me - written by me, voiced by my AI clone."
 
 For broadcast content: add AI-content tag on Meta/TikTok/YouTube.
 Required by platform policy as of 2026.
@@ -198,4 +198,4 @@ FTC fines for fake testimonials are real.
 Offer a real customer incentive instead (free month for 30-second review).
 
 ### The one rule
-If you feel pressure to hide that it's AI — that feeling is the rule. Disclose.
+If you feel pressure to hide that it's AI - that feeling is the rule. Disclose.

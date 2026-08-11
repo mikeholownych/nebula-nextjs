@@ -1,4 +1,4 @@
-# Nebula Agentic SEO/AEO System — Implementation Plan
+# Nebula Agentic SEO/AEO System - Implementation Plan
 
 Based on the 7 requirements outlined, mapping existing skills to each requirement and identifying gaps.
 
@@ -8,7 +8,7 @@ Based on the 7 requirements outlined, mapping existing skills to each requiremen
 
 **What**: Target pages, priority keywords, brand voice, AI brand description. Written once, no re-explaining.
 
-**Existing**: 
+**Existing**:
 - Memory system (honcho) stores user preferences and brand facts
 - Site configs in `agentic_server.py` (lines 14-43) define pages/priorities
 - llms.txt at site root for AI consumption
@@ -33,11 +33,11 @@ Load via memory tool at session start.
 **What**: Pre-built playbooks for content gap audits, CTR recovery, schema checks, AI citation gap analysis.
 
 **Existing Skills**:
-- `content-gap-analysis` — competitor-relative coverage map
-- `content-refresher` — traffic/ranking decay recovery
-- `schema-markup-generator` — JSON-LD generation
-- `geo-content-optimizer` — AI citation readiness
-- `meta-tags-optimizer` — CTR optimization
+- `content-gap-analysis` - competitor-relative coverage map
+- `content-refresher` - traffic/ranking decay recovery
+- `schema-markup-generator` - JSON-LD generation
+- `geo-content-optimizer` - AI citation readiness
+- `meta-tags-optimizer` - CTR optimization
 
 **Gap**: Need workflow composition layer (multi-skill orchestration).
 
@@ -57,9 +57,9 @@ Create top-level workflow skills that compose existing skills:
 **What**: Specialized agent that checks: does ChatGPT, Perplexity, Gemini cite you on buyer queries? Who wins when you don't? Runs weekly.
 
 **Existing**:
-- `geo-content-optimizer` — optimizes for AI citations
-- `rank-tracker` — includes AI-response checks
-- `alert-manager` — could monitor AI citation loss
+- `geo-content-optimizer` - optimizes for AI citations
+- `rank-tracker` - includes AI-response checks
+- `alert-manager` - could monitor AI citation loss
 
 **Gap**: Need active polling/monitoring of AI engines for specific queries.
 
@@ -89,10 +89,10 @@ hermes cron schedule \
 **What**: Mini setups for content, technical health, GSC data, AI citation. Work in background, report back.
 
 **Existing Skills**:
-- `on-page-seo-auditor` — content agent
-- `technical-seo-checker` — technical health agent
-- `content-quality-auditor` — content QA
-- PerformanceReporter — GSC data agent
+- `on-page-seo-auditor` - content agent
+- `technical-seo-checker` - technical health agent
+- `content-quality-auditor` - content QA
+- PerformanceReporter - GSC data agent
 
 **Gap**: Need agent orchestration framework (parallel execution, reporting consolidation).
 
@@ -191,13 +191,13 @@ Agent loads site-specific memory based on `--site` flag or context.
 
 ## Priority Ranking
 
-1. **Site Rulebook** (1-2h) — Foundation for everything else
-2. **Shortcuts** (30min) — Immediate UX win
-3. **Automations** (2h) — Week 1: ranking + citation scans
-4. **AI Visibility Monitor** (4-6h) — Core differentiator
-5. **Specialized Agents** (2h) — Wire existing skills into cron
-6. **Reusable Workflows** (3h) — Compose skills into meta-workflows
-7. **Site-Specific Rules** (1h) — Multi-tenancy foundation
+1. **Site Rulebook** (1-2h) - Foundation for everything else
+2. **Shortcuts** (30min) - Immediate UX win
+3. **Automations** (2h) - Week 1: ranking + citation scans
+4. **AI Visibility Monitor** (4-6h) - Core differentiator
+5. **Specialized Agents** (2h) - Wire existing skills into cron
+6. **Reusable Workflows** (3h) - Compose skills into meta-workflows
+7. **Site-Specific Rules** (1h) - Multi-tenancy foundation
 
 ---
 

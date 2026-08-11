@@ -19,7 +19,7 @@ export default function ProcessingPage() {
   const params = useParams()
   const router = useRouter()
   const auditId = params.id as string
-  
+
   const [progress, setProgress] = useState(0)
   const [messageIndex, setMessageIndex] = useState(0)
   const [status, setStatus] = useState<'processing' | 'ready' | 'error'>('processing')
@@ -28,7 +28,7 @@ export default function ProcessingPage() {
 
   useEffect(() => {
     // Simulate progress animation. Stepped coarsely (10 ticks, not 50) and
-    // driven by `transform: scaleX()` rather than `width` in the JSX below —
+    // driven by `transform: scaleX()` rather than `width` in the JSX below -
     // width changes force a layout recalc on every tick; transform is
     // compositor-only, so this scales to slow/low-end mobile without jank.
     const totalDuration = STATUS_MESSAGES.reduce((sum, m) => sum + m.duration, 0)
@@ -47,7 +47,7 @@ export default function ProcessingPage() {
 
     // Cycle through messages
     const messageTimeouts: NodeJS.Timeout[] = []
-    
+
     STATUS_MESSAGES.forEach((_, index) => {
       if (index > 0) {
         const timeout = setTimeout(() => {
@@ -102,7 +102,7 @@ export default function ProcessingPage() {
         posthog.identify(data.analytics_person_id)
       }
 
-      // Cookie is now set — redirect to results page (no ?unlocked query param needed)
+      // Cookie is now set - redirect to results page (no ?unlocked query param needed)
       pushWithViewTransition(router, `/audit/${auditId}/results`)
       return true
     } catch (err) {
@@ -158,7 +158,7 @@ export default function ProcessingPage() {
             <h1 className="mb-6 text-2xl font-bold text-fg">
               Analyzing Your Page
             </h1>
-            
+
             {/* Progress Bar */}
             <div className="mb-6">
               <div className="h-3 w-full overflow-hidden rounded-full bg-border">
@@ -218,7 +218,7 @@ export default function ProcessingPage() {
                   className="w-full rounded-xl border border-border bg-bg px-4 py-3 text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
                 />
               </div>
-              
+
               <div>
                 <label htmlFor="email" className="mb-1 block text-left text-sm font-medium text-fg">
                   Email (required)

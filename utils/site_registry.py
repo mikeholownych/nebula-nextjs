@@ -1,4 +1,4 @@
-"""Site registry — multi-tenancy isolation for Nebula's agentic SEO system."""
+"""Site registry - multi-tenancy isolation for Nebula's agentic SEO system."""
 import json
 import sys
 from pathlib import Path

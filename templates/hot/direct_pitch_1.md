@@ -32,6 +32,6 @@ You get:
 
 One page. One problem. 48 hours. Done.
 
-—
+-
 
-P.S. If you've ever worked with an agency, you know the drill — 2-week timeline, $5k minimum, no guarantee. This is the opposite: fast, focused, low-risk. Refund if it doesn't ship on time.
+P.S. If you've ever worked with an agency, you know the drill - 2-week timeline, $5k minimum, no guarantee. This is the opposite: fast, focused, low-risk. Refund if it doesn't ship on time.

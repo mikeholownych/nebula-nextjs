@@ -31,7 +31,7 @@ The data warehouse then starts syncing your Postgres data. You can see details a
 | Option | Description |
 | --- | --- |
 | Connection string (optional)Type: textRequired: False |
-| HostType: textRequired: True | Must be reachable from the public internet. Add PostHog's egress IP addresses to your firewall allowlist (see the docs above) and use a public host — localhost and private IPs (10.x, 172.16–31.x, 192.168.x) can't be reached. For a database that can't be exposed publicly, enable the SSH tunnel below. |
+| HostType: textRequired: True | Must be reachable from the public internet. Add PostHog's egress IP addresses to your firewall allowlist (see the docs above) and use a public host - localhost and private IPs (10.x, 172.16–31.x, 192.168.x) can't be reached. For a database that can't be exposed publicly, enable the SSH tunnel below. |
 | PortType: numberRequired: True |
 | DatabaseType: textRequired: True |
 | UserType: textRequired: True |
@@ -98,7 +98,7 @@ For `IN` and `NOT IN` operators, enter a comma-separated list of values (e.g. `1
 
 **Row filters and existing data**
 
-Row filters apply on the next sync — they don't remove rows that have already been synced. To apply filters retroactively, delete the synced data and resync.
+Row filters apply on the next sync - they don't remove rows that have already been synced. To apply filters retroactively, delete the synced data and resync.
 
 Row filters are not supported for CDC schemas or direct Postgres sources. They only apply to snapshot-style syncs (incremental, append, or full table).
 
@@ -120,15 +120,15 @@ We use a set of IP addresses to access your instance. To ensure this connector w
 
 ## Live queries
 
-In addition to syncing data on a schedule, you can enable live queries on a synced Postgres source. This lets you query your Postgres database directly from the [SQL editor](https://app.posthog.com/sql) — queries run against your live database in real time without duplicating data into PostHog.
+In addition to syncing data on a schedule, you can enable live queries on a synced Postgres source. This lets you query your Postgres database directly from the [SQL editor](https://app.posthog.com/sql) - queries run against your live database in real time without duplicating data into PostHog.
 
 ### Enabling live queries on a new source
 
 When creating a new Postgres source, the source wizard offers three query modes:
 
--   **Sync to PostHog** — Sync selected tables on a schedule. This is the default.
--   **Query live only** — Run queries directly against your database without syncing any data.
--   **Sync and query live** — Sync tables into PostHog and also run live queries against the database from the SQL editor.
+-   **Sync to PostHog** - Sync selected tables on a schedule. This is the default.
+-   **Query live only** - Run queries directly against your database without syncing any data.
+-   **Sync and query live** - Sync tables into PostHog and also run live queries against the database from the SQL editor.
 
 Select **Sync and query live** to enable both scheduled syncs and live queries on the same source.
 
@@ -482,11 +482,11 @@ Disabling CDC:
 
 **Disabling CDC causes data loss**
 
-Changes that occur while CDC is disabled are not captured. If you re-enable CDC later, it starts from the current WAL position — not from where it left off. Any schemas that were using CDC require a full resync to recover.
+Changes that occur while CDC is disabled are not captured. If you re-enable CDC later, it starts from the current WAL position - not from where it left off. Any schemas that were using CDC require a full resync to recover.
 
 ### Repairing CDC
 
-If a CDC source loses its replication slot — either because [WAL lag protection](#wal-lag-protection) dropped it or because it was removed on the source database — CDC syncs stop and PostHog marks the source as broken.
+If a CDC source loses its replication slot - either because [WAL lag protection](#wal-lag-protection) dropped it or because it was removed on the source database - CDC syncs stop and PostHog marks the source as broken.
 
 Instead of disabling and re-enabling CDC (which resets every schema's sync type and requires you to reconfigure each one), you can use **Repair CDC** to recover in place:
 
@@ -494,7 +494,7 @@ Instead of disabling and re-enabling CDC (which resets every schema's sync type 
 2.  Open the **Configuration** tab. A banner indicates that the replication slot or publication is missing.
 3.  Click **Repair CDC** and confirm the action.
 
-Repair recreates the replication slot and publication on your source database, resets every active CDC schema to snapshot mode for a full re-sync, clears the broken markers, and resumes the paused schedules. Changes that occurred between the slot being lost and the repair completing cannot be recovered — tables will match the current source state once the re-sync finishes.
+Repair recreates the replication slot and publication on your source database, resets every active CDC schema to snapshot mode for a full re-sync, clears the broken markers, and resumes the paused schedules. Changes that occurred between the slot being lost and the repair completing cannot be recovered - tables will match the current source state once the re-sync finishes.
 
 The action is idempotent. If a repair fails partway through (for example, due to a connection error), you can safely retry it.
 
@@ -504,7 +504,7 @@ Repairing CDC forces every active CDC schema to re-snapshot from the current sou
 
 ### Resuming CDC
 
-If a CDC source is paused due to a non-retryable failure that left the replication slot intact — such as bad credentials, an SSL requirement, or an unreachable host — you can resume it without a full re-sync once the underlying issue is fixed.
+If a CDC source is paused due to a non-retryable failure that left the replication slot intact - such as bad credentials, an SSL requirement, or an unreachable host - you can resume it without a full re-sync once the underlying issue is fixed.
 
 To resume CDC:
 
@@ -513,11 +513,11 @@ To resume CDC:
 3.  Fix the underlying issue (for example, correct the credentials or network settings).
 4.  Click **Resume CDC**.
 
-PostHog re-probes the source database to confirm the connection now succeeds and that the replication slot and publication still exist. If validation passes, the extraction schedule is unpaused and streaming resumes from where it left off — no re-snapshot required.
+PostHog re-probes the source database to confirm the connection now succeeds and that the replication slot and publication still exist. If validation passes, the extraction schedule is unpaused and streaming resumes from where it left off - no re-snapshot required.
 
 **Resume vs Repair**
 
--   Use **Resume** when the extraction schedule is paused but the slot and publication are intact. This is the cheap path — no data is re-synced.
+-   Use **Resume** when the extraction schedule is paused but the slot and publication are intact. This is the cheap path - no data is re-synced.
 -   Use **Repair** when the slot or publication is missing. Repair recreates them but requires a full re-sync of all CDC schemas.
 
 If PostHog detects that the slot or publication is actually gone (or if the connection still fails), Resume is refused and you're directed to use [Repair CDC](#repairing-cdc) instead.
@@ -656,13 +656,13 @@ Check the slot lag query above. If PostHog-managed slot protection dropped the s
 
 ### Replication slot or publication is missing
 
-This happens when the replication slot is dropped — either by [WAL lag protection](#wal-lag-protection), manually on the source database, or by the database itself (for example, when `max_slot_wal_keep_size` is exceeded). PostHog marks the CDC source as broken and pauses its schedules.
+This happens when the replication slot is dropped - either by [WAL lag protection](#wal-lag-protection), manually on the source database, or by the database itself (for example, when `max_slot_wal_keep_size` is exceeded). PostHog marks the CDC source as broken and pauses its schedules.
 
 To recover, use [Repair CDC](#repairing-cdc) from the **Configuration** tab. Repair recreates the slot and publication, then re-syncs every CDC schema from a fresh snapshot. WAL changes since the slot was lost cannot be recovered.
 
 ### CDC extraction schedule is paused
 
-This happens when a CDC source hits a non-retryable failure — such as bad credentials, an SSL requirement, or an unreachable host — that leaves the replication slot intact. PostHog pauses the extraction schedule to prevent the same failure from repeating.
+This happens when a CDC source hits a non-retryable failure - such as bad credentials, an SSL requirement, or an unreachable host - that leaves the replication slot intact. PostHog pauses the extraction schedule to prevent the same failure from repeating.
 
 To recover:
 
@@ -719,22 +719,22 @@ Alternatively, remove the problematic view from your sync selection in PostHog.
 
 ### `Network is unreachable` or `No route to host`
 
-This error occurs when PostHog cannot establish a network route to your PostgreSQL host. The most common cause is an **IPv6-only host** — PostHog egresses over IPv4, so connections to IPv6-only addresses fail.
+This error occurs when PostHog cannot establish a network route to your PostgreSQL host. The most common cause is an **IPv6-only host** - PostHog egresses over IPv4, so connections to IPv6-only addresses fail.
 
-This is a non-retryable error — PostHog stops syncing until you fix the underlying issue and re-enable the sync or CDC.
+This is a non-retryable error - PostHog stops syncing until you fix the underlying issue and re-enable the sync or CDC.
 
 Common causes:
 
--   **IPv6-only host** — Your database host only resolves to an IPv6 address, but PostHog egresses over IPv4.
--   **Firewall blocking PostHog's IPs** — Your database server's firewall blocks connections from PostHog's IP addresses.
--   **Private network** — The hostname resolves to a private IP address (like `10.x.x.x`, `172.16.x.x`, or `192.168.x.x`).
+-   **IPv6-only host** - Your database host only resolves to an IPv6 address, but PostHog egresses over IPv4.
+-   **Firewall blocking PostHog's IPs** - Your database server's firewall blocks connections from PostHog's IP addresses.
+-   **Private network** - The hostname resolves to a private IP address (like `10.x.x.x`, `172.16.x.x`, or `192.168.x.x`).
 
 Solutions:
 
--   **Use a connection pooler** — Configure a connection pooler (like PgBouncer, Supabase Supavisor, or Neon's pooler) that's reachable over IPv4, then point PostHog at the pooler's host and port.
--   **Enable IPv4 on your provider** — Many managed Postgres providers offer IPv4 add-ons or dual-stack endpoints (e.g., Supabase IPv4 add-on, Neon's shared pooler).
--   **Allowlist PostHog's IPs** — If your firewall is blocking connections, allowlist PostHog's IP addresses (see the [Inbound IP addresses](#inbound-ip-addresses) section above).
--   **Use an SSH tunnel** — If your database is on a private network, configure an SSH tunnel during source setup.
+-   **Use a connection pooler** - Configure a connection pooler (like PgBouncer, Supabase Supavisor, or Neon's pooler) that's reachable over IPv4, then point PostHog at the pooler's host and port.
+-   **Enable IPv4 on your provider** - Many managed Postgres providers offer IPv4 add-ons or dual-stack endpoints (e.g., Supabase IPv4 add-on, Neon's shared pooler).
+-   **Allowlist PostHog's IPs** - If your firewall is blocking connections, allowlist PostHog's IP addresses (see the [Inbound IP addresses](#inbound-ip-addresses) section above).
+-   **Use an SSH tunnel** - If your database is on a private network, configure an SSH tunnel during source setup.
 
 ### Slot invalidated by `max_slot_wal_keep_size`
 

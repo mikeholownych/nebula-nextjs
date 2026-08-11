@@ -1,5 +1,5 @@
 /**
- * NebulaMark — the Nebula Components brand glyph.
+ * NebulaMark - the Nebula Components brand glyph.
  *
  * A 3×3 grid of status indicators. Pass state = filled circle. Fail state = ring.
  * At 16×16px it reads as a dense grid. At 32px+ the structure is clear.
@@ -8,9 +8,9 @@
  * encode a particular audit taxonomy or score.
  *
  * Usage:
- *   <NebulaMark size={24} />                    — all neutral (intro/loading)
- *   <NebulaMark size={24} states={auditStates} />  — live pass/fail from audit
- *   <NebulaMark size={16} className="text-accent" /> — small favicon-scale
+ *   <NebulaMark size={24} />                    - all neutral (intro/loading)
+ *   <NebulaMark size={24} states={auditStates} />  - live pass/fail from audit
+ *   <NebulaMark size={16} className="text-accent" /> - small favicon-scale
  */
 
 import type { SVGProps } from 'react'
@@ -109,7 +109,7 @@ export function NebulaMark({
 }
 
 /**
- * Static logo variant — uses the Nebula accent with a subtle
+ * Static logo variant - uses the Nebula accent with a subtle
  * pass/neutral pattern that reads as intentional at any size.
  * This is the primary brand mark used in SiteNav and Footer.
  */

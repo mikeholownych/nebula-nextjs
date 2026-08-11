@@ -20,13 +20,13 @@ Mike submitted a comprehensive architecture document defining 10 guiding princip
 | Root directory flat with 100+ files | Governance layer in `governance/` directory |
 | No MISSION.md (mission implicit in SOUL.md) | `governance/MISSION.md` with north star metric + boundaries |
 | No VALUES.md (principles in SOUL.md only) | `governance/VALUES.md` with 10 binding principles |
-| No ECONOMICS.md (pricing scattered across Stripe + config files) | `governance/ECONOMICS.md` — single source of truth for all financial data |
-| No ORGANIZATION.md (agent roles in SOUL.md) | `governance/ORGANIZATION.md` — 13 departments mapped to agents, crons, files |
-| No DECISIONS/ log | `governance/DECISIONS/` — structured decision records (this is #1) |
-| No EXPERIMENTS/ log | `governance/EXPERIMENTS/` — formal experiment framework |
-| No INCIDENTS/ log | `governance/INCIDENTS/` — incident postmortems |
-| No SOPs/ directory | `governance/SOPs/` — runbooks for operations |
-| No RETROSPECTIVES/ | `governance/RETROSPECTIVES/` — 30-day retrospectives |
+| No ECONOMICS.md (pricing scattered across Stripe + config files) | `governance/ECONOMICS.md` - single source of truth for all financial data |
+| No ORGANIZATION.md (agent roles in SOUL.md) | `governance/ORGANIZATION.md` - 13 departments mapped to agents, crons, files |
+| No DECISIONS/ log | `governance/DECISIONS/` - structured decision records (this is #1) |
+| No EXPERIMENTS/ log | `governance/EXPERIMENTS/` - formal experiment framework |
+| No INCIDENTS/ log | `governance/INCIDENTS/` - incident postmortems |
+| No SOPs/ directory | `governance/SOPs/` - runbooks for operations |
+| No RETROSPECTIVES/ | `governance/RETROSPECTIVES/` - 30-day retrospectives |
 | No daily briefing agent | New cron: `daily-briefing` at 8:30 AM UTC |
 
 ## Rationale
@@ -43,7 +43,7 @@ Mike submitted a comprehensive architecture document defining 10 guiding princip
 
 1. **Keep existing flat structure.** Rejected: fails auditability, knowledge compounds poorly, no governance layer for autonomous decision-making.
 
-2. **Minimal change — just add a DECISIONS/ folder.** Rejected: without VALUES.md and ECONOMICS.md, decisions lack principled framework.
+2. **Minimal change - just add a DECISIONS/ folder.** Rejected: without VALUES.md and ECONOMICS.md, decisions lack principled framework.
 
 3. **Full Notion migration.** Rejected: adds latency, external dependency, and defeats "everything in git" principle.
 
@@ -53,15 +53,15 @@ Mike submitted a comprehensive architecture document defining 10 guiding princip
 |---|---|
 | Time to create | ~30 min (directories + 6 files) |
 | Ongoing maintenance | ~5-10 min/week (append decisions, update economics) |
-| Risk reduction | High — clear boundaries prevent unauthorized spend, provide recovery paths |
-| Decision velocity | Medium — upfront cost, but faster decisions in future with clear context |
-| Auditability | High — every decision, experiment, and incident has a home |
+| Risk reduction | High - clear boundaries prevent unauthorized spend, provide recovery paths |
+| Decision velocity | Medium - upfront cost, but faster decisions in future with clear context |
+| Auditability | High - every decision, experiment, and incident has a home |
 
 ## Risks
 
-1. **Documentation rot** — living documents must be updated or they become stale. Mitigation: cron jobs reference these docs; stale content surfaces during execution.
-2. **Overhead** — too much process slows execution. Mitigation: only 4 initial documents; new ones added only when a gap is found.
-3. **Mike disengagement** — if Mike ignores governance docs, they're dead. Mitigation: docs are structured for AI consumption first, human readability second.
+1. **Documentation rot** - living documents must be updated or they become stale. Mitigation: cron jobs reference these docs; stale content surfaces during execution.
+2. **Overhead** - too much process slows execution. Mitigation: only 4 initial documents; new ones added only when a gap is found.
+3. **Mike disengagement** - if Mike ignores governance docs, they're dead. Mitigation: docs are structured for AI consumption first, human readability second.
 
 ## Dependencies
 

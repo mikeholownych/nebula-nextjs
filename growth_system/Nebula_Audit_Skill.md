@@ -1,4 +1,4 @@
-# /audit — Run Conversion Audit
+# /audit - Run Conversion Audit
 
 Paste any landing page URL. Returns scored breakdown:
 - Headline: clarity, length, keyword overlap with title

@@ -1,7 +1,7 @@
 /** @jest-environment node */
 
 // Live production logs showed recurring "SyntaxError: Unexpected end of
-// JSON input" 500s on this route — request.json() and apiResponse.json()
+// JSON input" 500s on this route - request.json() and apiResponse.json()
 // both throw uncaught on an empty/malformed body, and the route's outer
 // catch turned that into an opaque 500 with no useful signal. Fixed to
 // return clean, typed error responses instead.

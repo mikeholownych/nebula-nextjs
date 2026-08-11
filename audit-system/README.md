@@ -63,19 +63,19 @@ nebula-audit-system/
 
 ## Key Principles
 
-**ICP is a moment, not a demographic.**  
-Founders spending on ads with zero conversions — right now. Not "founders" in general.
+**ICP is a moment, not a demographic.**
+Founders spending on ads with zero conversions - right now. Not "founders" in general.
 
-**Evidence before creativity.**  
+**Evidence before creativity.**
 Every finding has measured / required / delta. Content comes from real data.
 
-**Specificity converts. Vagueness protects egos.**  
+**Specificity converts. Vagueness protects egos.**
 CTAs, headlines, posts, and outreach all follow the same rule: say the specific thing.
 
-**One leak at a time.**  
+**One leak at a time.**
 The $97 Sprint fixes one finding. Not the whole site. The constraint is the product.
 
-**Content is a byproduct of the audit, not a separate effort.**  
+**Content is a byproduct of the audit, not a separate effort.**
 One audit → 40 content pieces. Automatically. The audit IS the content strategy.
 
 ---
@@ -83,7 +83,7 @@ One audit → 40 content pieces. Automatically. The audit IS the content strateg
 ## Automation Layer (n8n)
 
 | Workflow | ID | Trigger |
-|----------|----|---------| 
+|----------|----|---------|
 | Trigger Engine | `9HGVFfIPDHRYMtuE` | POST /webhook/audit-inbound |
 | Reddit Monitor | `G6azfOHMHxlBva3N` | Every 15 minutes |
 | Content Extractor | `A47FfOyx1b6D2gg2` | POST /webhook/content-extract |
@@ -96,6 +96,6 @@ One audit → 40 content pieces. Automatically. The audit IS the content strateg
 - **Audit engine:** Python + FastAPI at 127.0.0.1:8001
 - **Orchestration:** n8n at n8n.mikeholownych.com
 - **AI:** AWS Bedrock (Claude Sonnet for angles, Haiku for scripts)
-- **Storage:** PostgreSQL — `nebula_audit` db + `content_ops` db
+- **Storage:** PostgreSQL - `nebula_audit` db + `content_ops` db
 - **Notifications:** Telegram (chat ID in settings.json)
 - **Delivery:** AgentMail (nebulashop@agentmail.to)

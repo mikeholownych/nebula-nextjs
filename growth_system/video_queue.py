@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-video_queue.py — video production queue backed by Postgres (nebula_audit db).
+video_queue.py - video production queue backed by Postgres (nebula_audit db).
 Columns: id, created_at, updated_at, brief, visual_dna_anchor, shot_count,
          model, aspect, duration, status, output_url
 
@@ -139,18 +139,18 @@ def cmd_export(args):
 
 def cmd_seed(args):
     shots = [
-        ("Shot 1 — Crash Zoom hook: dashboard shows $0, dark desk, monitor glow only",   "Kling", "16:9", 2),
-        ("Shot 2 — Slow Dolly In: hand types URL into browser, teal glow",               "Kling", "16:9", 4),
-        ("Shot 3 — Crane Down: 9 audit signals lighting up teal one by one",             "Kling", "16:9", 5),
-        ("Shot 4 — Orbit tight: single finding text glows on dark screen",               "Kling", "16:9", 5),
-        ("Shot 5 — Bullet Time: $847/month on dark screen, world frozen",                "Kling", "16:9", 5),
-        ("Shot 6 — Static lock-off: wide dark desk, resolved, coffee steam, monitor",    "Kling", "16:9", 9),
+        ("Shot 1 - Crash Zoom hook: dashboard shows $0, dark desk, monitor glow only",   "Kling", "16:9", 2),
+        ("Shot 2 - Slow Dolly In: hand types URL into browser, teal glow",               "Kling", "16:9", 4),
+        ("Shot 3 - Crane Down: 9 audit signals lighting up teal one by one",             "Kling", "16:9", 5),
+        ("Shot 4 - Orbit tight: single finding text glows on dark screen",               "Kling", "16:9", 5),
+        ("Shot 5 - Bullet Time: $847/month on dark screen, world frozen",                "Kling", "16:9", 5),
+        ("Shot 6 - Static lock-off: wide dark desk, resolved, coffee steam, monitor",    "Kling", "16:9", 9),
     ]
     with conn() as c, c.cursor() as cur:
         # Skip if already seeded
         cur.execute("SELECT count(*) FROM video_queue")
         if cur.fetchone()[0] > 0:
-            print("Queue already has records — skipping seed. Use 'list' to view.")
+            print("Queue already has records - skipping seed. Use 'list' to view.")
             return
         for brief, model, aspect, dur in shots:
             cur.execute("""

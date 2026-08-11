@@ -73,7 +73,7 @@ export default async function PricingGuidePage({
           {guide.toolName} Pricing (2026): What It Really Costs
         </h1>
 
-        {/* BLUF — answer up front for AI snippet pull */}
+        {/* BLUF - answer up front for AI snippet pull */}
         <section aria-label="Bottom line" className="mt-8 rounded-2xl border border-accent/20 bg-accent/5 p-6">
           <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Bottom line up front</h2>
           <p className="mt-3 text-lg leading-8 text-fg">{guide.bluf}</p>
@@ -92,7 +92,7 @@ export default async function PricingGuidePage({
             ))}
           </div>
           <p className="mt-4 text-xs text-fg-muted">
-            Pricing from {guide.toolUrl.replace('https://', '')} as of August 2026. Prices change — verify at{' '}
+            Pricing from {guide.toolUrl.replace('https://', '')} as of August 2026. Prices change - verify at{' '}
             <a href={guide.toolUrl} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
               {guide.toolUrl.replace('https://', '')}
             </a>{' '}
@@ -116,7 +116,7 @@ export default async function PricingGuidePage({
         <section className="mt-12 rounded-2xl border border-accent/20 bg-accent/5 p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The cheaper alternative: Nebula</h2>
           <p className="text-fg leading-relaxed">
-            Nebula audits any public landing page in under 2 minutes — free, no signup, no credit card. It checks the
+            Nebula audits any public landing page in under 2 minutes - free, no signup, no credit card. It checks the
             9 conversion signals that determine whether paid traffic converts: headline message match, CTA clarity,
             trust evidence, above-fold structure, mobile CTA, load speed, ad signals, SEO foundations, and AI citation
             readiness. When the audit finds leaks, the $97 one-time repair sprint writes the exact copy, code, or

@@ -1,5 +1,5 @@
-"""nebula_audit — the database holding every real customer, audit, and
-badge record — was missing from backup_databases.py entirely until this
+"""nebula_audit - the database holding every real customer, audit, and
+badge record - was missing from backup_databases.py entirely until this
 fix; only nebula_platform was ever backed up. Locks in that both
 databases now get backed up independently, and that a failure on one
 doesn't silently mask or block the other."""

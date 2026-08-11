@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Playbooks — Founder Systems | Nebula Components',
-  description: 'Founder-productivity and AI-ops systems from Nebula Components — separate from the Learning Centre, which covers landing page conversion diagnosis.',
+  title: 'Playbooks - Founder Systems | Nebula Components',
+  description: 'Founder-productivity and AI-ops systems from Nebula Components - separate from the Learning Centre, which covers landing page conversion diagnosis.',
   alternates: { canonical: 'https://nebulacomponents.com/playbooks' },
 }
 

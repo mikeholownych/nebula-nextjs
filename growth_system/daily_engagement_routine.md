@@ -1,6 +1,6 @@
-# Daily LinkedIn Engagement Routine — Nebula Components
+# Daily LinkedIn Engagement Routine - Nebula Components
 
-**Source:** Vasilije Simic (Undecagon) — "LinkedIn Inbound Funnel"
+**Source:** Vasilije Simic (Undecagon) - "LinkedIn Inbound Funnel"
 **Principle:** Content builds attention. Daily engagement converts it into conversations.
 
 ## Why This Exists
@@ -12,8 +12,8 @@ LinkedIn's algorithm rewards daily active users. More importantly, your ICP is o
 ### Step 1: Review Trigger Alerts (3 min)
 
 Check the latest output from:
-- `linkedin_post_monitor.py` — new engagers on your posts
-- Reddit trigger monitor — new buying signals
+- `linkedin_post_monitor.py` - new engagers on your posts
+- Reddit trigger monitor - new buying signals
 - Creator posts you're tracking (CRO/landing page space)
 
 **Action:** Reply to every comment on your posts within 24h. Use `linkedin_reply_templates.json` as starting point, rewrite in your voice.
@@ -46,7 +46,7 @@ If already connected: send Touch 1 DM directly.
 Log:
 - Comments you left (save links for reference)
 - DMs sent (note which touch in the sequence)
-- Profile views (YouTube/notebook — track spikes)
+- Profile views (YouTube/notebook - track spikes)
 
 ## Time Budget
 
@@ -61,9 +61,9 @@ Log:
 ## Automation vs Human
 
 **Automated (cron):**
-- `linkedin_post_monitor.py` — monitors engagers every 2h
-- `reddit-trigger-monitor` — finds buying signals every 4h
-- `hot_lead_watcher.sh` — flags high-value leads
+- `linkedin_post_monitor.py` - monitors engagers every 2h
+- `reddit-trigger-monitor` - finds buying signals every 4h
+- `hot_lead_watcher.sh` - flags high-value leads
 
 **Requires Mike:**
 - Replying to comments (use templates as starting point)

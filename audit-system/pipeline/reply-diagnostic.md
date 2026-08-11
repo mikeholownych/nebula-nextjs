@@ -1,6 +1,6 @@
-# Reply Diagnostic — 48-Hour Rule
+# Reply Diagnostic - 48-Hour Rule
 
-Source: Rananjay Raj cold-DM carousel (implemented 2026-07-31).  
+Source: Rananjay Raj cold-DM carousel (implemented 2026-07-31).
 **No reply is data. It usually points at one sentence.**
 
 When a message fails, don't just relabel the lead. Diagnose which sentence
@@ -28,12 +28,12 @@ Every outreach message follows this shape, in this order, no fifth sentence:
 
 | What happened | Which sentence failed | What to change |
 |---------------|----------------------|----------------|
-| Opened, no reply | S3 — the reason was not theirs | Rebuild the "why them" line from real evidence in their domain/site |
-| Never opened | S1, or the timing — the signal was stale | Find a fresher trigger (30-day window) or fix the subject line |
-| "Not right now" | S4 — the ask was too big | Shrink the ask: offer the audit link instead of the $97 pitch |
-| "Who is this?" | S2 — you never said plainly what you do | Rewrite the who-line in plain words, no jargon |
-| A defensive reply | You diagnosed — assumption in S3 | Cut the assumption. State only what you observed (the audit finding) |
-| "What audit?" | S1 — they don't recognize the context | Anchor the trigger explicitly: "You submitted {url} on {date}" |
+| Opened, no reply | S3 - the reason was not theirs | Rebuild the "why them" line from real evidence in their domain/site |
+| Never opened | S1, or the timing - the signal was stale | Find a fresher trigger (30-day window) or fix the subject line |
+| "Not right now" | S4 - the ask was too big | Shrink the ask: offer the audit link instead of the $97 pitch |
+| "Who is this?" | S2 - you never said plainly what you do | Rewrite the who-line in plain words, no jargon |
+| A defensive reply | You diagnosed - assumption in S3 | Cut the assumption. State only what you observed (the audit finding) |
+| "What audit?" | S1 - they don't recognize the context | Anchor the trigger explicitly: "You submitted {url} on {date}" |
 
 ---
 
@@ -51,7 +51,7 @@ Every outreach message follows this shape, in this order, no fifth sentence:
    `/home/mike/nebula/reply_diagnostics.jsonl`.
 
 3. **Review cadence:** When `reply_diagnostics.jsonl` shows the same diagnosis
-   three times in a row, fix that sentence across the templates — don't send
+   three times in a row, fix that sentence across the templates - don't send
    more volume through a broken message.
 
 ---
@@ -77,10 +77,10 @@ Every outreach message follows this shape, in this order, no fifth sentence:
 4. Sentence 3 could not be sent to any other company.
 5. Exactly one question mark, and it is in sentence 4.
 6. No greeting, no "hope this finds you", no "just".
-7. No claim about what is broken inside their company — only what the audit measured.
+7. No claim about what is broken inside their company - only what the audit measured.
 8. It reads cleanly aloud in under fifteen seconds.
 
 ---
 
 *Implement in `send_outreach.py` (gate) and `webhook_server.py` (diagnosis).
-Reference: Rananjay Raj carousel — "The writing was never the problem."*
+Reference: Rananjay Raj carousel - "The writing was never the problem."*

@@ -1,4 +1,4 @@
-"""Outreach sequence engine — human-mimicking multi-touch pipeline.
+"""Outreach sequence engine - human-mimicking multi-touch pipeline.
 
 Manages per-prospect sequences in lead_state.db.
 Runs as a cron job every 6 hours. Only sends when the right day hits.
@@ -7,7 +7,7 @@ Sequence (mirroring the framework):
   D1:  Email sent (manually or by this engine)
   D3:  LinkedIn profile view (logged, done manually by Sedrick)
   D7:  Reply-thread follow-up ("Thoughts?" + one value add)
-  D12: LinkedIn DM (if connected — manual flag)
+  D12: LinkedIn DM (if connected - manual flag)
   D17: Breakup email ("I'll stop reaching out...")
 
 State stored in: lead_gen/lead_state.db → sequence_state table
@@ -43,11 +43,11 @@ def _hunter_key() -> str:
 
 def verify_email(email: str) -> dict:
     """Verify email via Hunter.io before sending.
-    
+
     Returns:
         { "deliverable": True/False, "status": "valid"|"risky"|"invalid"|"unknown",
           "score": 0-100, "reason": str }
-    
+
     Rules:
         valid (score >= 70)  → send
         risky (score 40-69)  → send with caution (log warning)
@@ -57,7 +57,7 @@ def verify_email(email: str) -> dict:
     key = _hunter_key()
     if not key:
         return {"deliverable": True, "status": "unknown", "score": 0,
-                "reason": "No Hunter key — skipping verification"}
+                "reason": "No Hunter key - skipping verification"}
 
     url = (
         f"https://api.hunter.io/v2/email-verifier"
@@ -98,7 +98,7 @@ def verify_before_send(email: str, db: sqlite3.Connection) -> bool:
         print(f"  ⚠ SKIP {email}: {result['reason']}")
         return False
     if result["status"] == "risky":
-        print(f"  ⚠ RISKY {email}: {result['reason']} — sending anyway")
+        print(f"  ⚠ RISKY {email}: {result['reason']} - sending anyway")
     return True
 
 # ── Schema ─────────────────────────────────────────────────────────────────
@@ -230,14 +230,14 @@ def _d7_email(row) -> tuple[str, str]:
     product = row["product_url"] or "your site"
     domain = product.replace("https://", "").replace("http://", "").split("/")[0]
 
-    subject = f"Re: {domain} — still a problem?"
+    subject = f"Re: {domain} - still a problem?"
     text = f"""Hey {name},
 
 Is the {finding} still an issue, or have you sorted it out?
 
-Just checking in — happy to share the quick fix either way.
+Just checking in - happy to share the quick fix either way.
 
-— Sedrick
+- Sedrick
 nebulacomponents.com/audit"""
 
     return subject, text
@@ -252,13 +252,13 @@ def _d17_email(row) -> tuple[str, str]:
     subject = f"Closing the loop on {domain}"
     text = f"""Hey {name},
 
-Since timing seems off, I'll stop reaching out — don't want to clog your inbox.
+Since timing seems off, I'll stop reaching out - don't want to clog your inbox.
 
 If you ever want to run {domain} through an audit, it's always free at nebulacomponents.com/audit. No email required to see the results.
 
 Best of luck with the launch.
 
-— Sedrick
+- Sedrick
 Nebula Components"""
 
     return subject, text
@@ -289,7 +289,7 @@ def run_sequence() -> list[str]:
                 WHERE email = ?
             """, (now.isoformat(), now.isoformat(), email))
             db.commit()
-            log.append(f"✓ REPLIED: {email} — sequence paused, move to manual follow-up")
+            log.append(f"✓ REPLIED: {email} - sequence paused, move to manual follow-up")
             continue
 
         d1_sent = row["d1_sent_at"]
@@ -331,7 +331,7 @@ def run_sequence() -> list[str]:
                 db.commit()
                 log.append(f"✓ D7 SENT: {email} (day {days_since_d1})")
             else:
-                log.append(f"✗ D7 FAILED: {email} — {result.get('_error')} {result.get('_body','')[:80]}")
+                log.append(f"✗ D7 FAILED: {email} - {result.get('_error')} {result.get('_body','')[:80]}")
             continue  # only one touch per run
 
         # D17: Breakup if D7 sent and 17+ days since D1 and not yet sent
@@ -357,9 +357,9 @@ def run_sequence() -> list[str]:
                     WHERE email = ?
                 """, (now.isoformat(), now.isoformat(), email))
                 db.commit()
-                log.append(f"✓ D17 SENT (breakup): {email} — sequence completed")
+                log.append(f"✓ D17 SENT (breakup): {email} - sequence completed")
             else:
-                log.append(f"✗ D17 FAILED: {email} — {result.get('_error')}")
+                log.append(f"✗ D17 FAILED: {email} - {result.get('_error')}")
 
     db.close()
     return log
@@ -378,12 +378,12 @@ def send_d1(
     audit_finding: str = "",
 ) -> dict:
     """Verify + send Day 1 email + register in sequence. Single entry point.
-    
+
     Usage:
         result = send_d1(
             email="hello@founder.com",
             first_name="Alice",
-            subject="yourproduct.com — one finding",
+            subject="yourproduct.com - one finding",
             body_text="Hey Alice, ...",
             body_html="<p>Hey Alice, ...</p>",
             product_url="https://yourproduct.com",

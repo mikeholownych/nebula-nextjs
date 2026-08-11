@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""send_window.py — Illingworth send-time enforcement.
+"""send_window.py - Illingworth send-time enforcement.
 
 Rules:
   - Only send Mon-Fri (weekday 0-4 in Python)
@@ -11,7 +11,7 @@ Usage:
 
     if not in_send_window(recipient_email):
         wait = seconds_until_window()
-        print(f"Outside send window — next open in {wait//60:.0f}m")
+        print(f"Outside send window - next open in {wait//60:.0f}m")
         sys.exit(0)
 
 Both wave4_scraper and followup_sequence import this before the send loop.
@@ -36,7 +36,7 @@ _TZ_HINTS: dict[str, int] = {
     "icloud.com":    -5,
     "hey.com":       -5,
 }
-_DEFAULT_OFFSET_HOURS = -5   # US Eastern (non-DST; -4 in summer — close enough)
+_DEFAULT_OFFSET_HOURS = -5   # US Eastern (non-DST; -4 in summer - close enough)
 
 
 def _est_offset(email: str) -> int:
@@ -94,14 +94,14 @@ def seconds_until_window(recipient_email: str = "") -> int:
 def assert_send_window_or_exit(recipient_email: str = "", script_name: str = "") -> None:
     """
     Call at the top of a send script.  If outside the window, print a clear
-    message and sys.exit(0) — no error, just a clean skip for cron.
+    message and sys.exit(0) - no error, just a clean skip for cron.
     """
     import sys
     if not in_send_window(recipient_email):
         wait = seconds_until_window(recipient_email)
         tag = f"[{script_name}] " if script_name else ""
         print(f"{tag}Outside send window (Mon-Fri 06-10 local). "
-              f"Next open in ~{wait // 3600}h {(wait % 3600) // 60}m — exiting.")
+              f"Next open in ~{wait // 3600}h {(wait % 3600) // 60}m - exiting.")
         sys.exit(0)
 
 

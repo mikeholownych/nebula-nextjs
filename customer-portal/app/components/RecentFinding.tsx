@@ -18,8 +18,8 @@ const DEPRECATED_FINDING_LABELS = new Set(['above fold', 'above-fold clarity', '
 
 /**
  * Shows the highest-impact finding from the most recently completed audit.
- * Proves the engine is live and running — not a static demo.
- * No URL is exposed — only the finding label, issue, and time-ago.
+ * Proves the engine is live and running - not a static demo.
+ * No URL is exposed - only the finding label, issue, and time-ago.
  * Renders nothing if no data is available (graceful degradation).
  */
 export default function RecentFinding() {
@@ -39,7 +39,7 @@ export default function RecentFinding() {
         if (!cancelled && data && data.label && data.issue && !isDeprecated) setFinding(data)
       })
       .catch(() => {
-        // No data — render nothing rather than fabricating.
+        // No data - render nothing rather than fabricating.
       })
     return () => {
       cancelled = true
@@ -52,7 +52,7 @@ export default function RecentFinding() {
     <div className="mx-auto mt-6 max-w-lg rounded-xl border border-border bg-bg-panel px-5 py-4">
       <div className="mb-2 flex items-center justify-between gap-3">
         <p className="text-xs font-semibold uppercase tracking-widest text-accent">
-          Last finding — {finding.completed_at}
+          Last finding - {finding.completed_at}
         </p>
 
       </div>

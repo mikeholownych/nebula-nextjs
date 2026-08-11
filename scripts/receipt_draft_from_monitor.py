@@ -204,7 +204,7 @@ def main() -> int:
             and row.get("fix", {}).get("description") == args.fix_desc
             and row.get("status") == "draft"
         ):
-            print(f"\nDraft already exists: {row.get('receipt_id')} — not duplicating.")
+            print(f"\nDraft already exists: {row.get('receipt_id')} - not duplicating.")
             return 0
 
     LEDGER.parent.mkdir(parents=True, exist_ok=True)

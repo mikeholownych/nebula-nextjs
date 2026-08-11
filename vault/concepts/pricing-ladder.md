@@ -26,8 +26,8 @@
 
 ## Critical Rules
 - **Only send $7 offer** to leads who received $97 pitch and did NOT reply (silent = price objection or no urgency)
-- **Do NOT send more than 24h after $97 pitch** — strike while thread is open
-- **Offer exactly ONE fix** for $7, not a list — specificity creates confidence
+- **Do NOT send more than 24h after $97 pitch** - strike while thread is open
+- **Offer exactly ONE fix** for $7, not a list - specificity creates confidence
 - **If they buy $7 → deliver immediately → upsell to $97** with "you saw one fix, here are the other three"
 - **If they don't buy $7 either → retire the lead** (neither offer resonated)
-- **Never send $7 to leads who already replied to $97 pitch** — they need human followup, not price drop
+- **Never send $7 to leads who already replied to $97 pitch** - they need human followup, not price drop

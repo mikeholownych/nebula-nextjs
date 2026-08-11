@@ -1,10 +1,10 @@
-# Nebula Components — Automated Process Cascade Architecture
+# Nebula Components - Automated Process Cascade Architecture
 
 ## Overview
 
 Nebula runs on trigger/action cascades. Every customer interaction starts with a
 trigger (a real-world signal), not a list. Once triggered, actions cascade
-automatically — no human intervention required.
+automatically - no human intervention required.
 
 This document maps the full cascade so every part of the system is documented,
 testable, and improvable.
@@ -80,11 +80,11 @@ Audit requested
 
 ### 5 Scoring Dimensions
 
-1. **Headline Clarity (0-10)** — Does it describe the problem or the product?
-2. **CTA Actionability (0-10)** — Is it a decision or a label?
-3. **Trust Proof (0-10)** — Is social proof above the fold?
-4. **Page Speed (0-10)** — Load time > 3s = penalty
-5. **Mobile Responsiveness (0-10)** — Works on mobile viewport?
+1. **Headline Clarity (0-10)** - Does it describe the problem or the product?
+2. **CTA Actionability (0-10)** - Is it a decision or a label?
+3. **Trust Proof (0-10)** - Is social proof above the fold?
+4. **Page Speed (0-10)** - Load time > 3s = penalty
+5. **Mobile Responsiveness (0-10)** - Works on mobile viewport?
 
 Each dimension maps to a specific fix in the $147 Fix Pack.
 
@@ -180,7 +180,7 @@ P3: Follow-up check-in (day 7)
 | Trigger | Action | Cadence |
 |---------|--------|---------|
 | 30+ days since last contact | Re-enroll in re-engagement sequence | 30-60 day recircle |
-| Customer_97 — 60 days post-purchase | Upsell to $997 Growth Launch | One-time |
+| Customer_97 - 60 days post-purchase | Upsell to $997 Growth Launch | One-time |
 | Payment failure | Dunning sequence: Day 0, 3, 7 | 3 emails max |
 
 ### Recircle Cascade
@@ -288,4 +288,4 @@ Cron checks list_recircle_candidates(min_age_days=30)
 
 ---
 
-*Documented: 2026-07-05 — Nebula Components Automated Process Cascade*
+*Documented: 2026-07-05 - Nebula Components Automated Process Cascade*

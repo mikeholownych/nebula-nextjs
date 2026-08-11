@@ -1,7 +1,7 @@
 # Lead Magnet Email Sequence: "Top 10 Landing Page Mistakes"
 
-**Triggered by**: Form submission on /landing-page-mistakes  
-**Flow**: Email 1 (immediate) → Email 2 (day 1) → Email 3 (day 3)  
+**Triggered by**: Form submission on /landing-page-mistakes
+**Flow**: Email 1 (immediate) → Email 2 (day 1) → Email 3 (day 3)
 **Goals**: Deliver value, build trust, re-engagement to audit
 
 ---
@@ -31,10 +31,10 @@ Quick scan: 5 minutes.
 
 Next: I'll send you the exact fix for the #1 mistake tomorrow.
 
-— Mike
+- Mike
 Nebula Components
 
-P.S. — Found 3+ mistakes on your page? Get a free full audit to see exactly which ones + the specific fix for each.
+P.S. - Found 3+ mistakes on your page? Get a free full audit to see exactly which ones + the specific fix for each.
 [GET FREE AUDIT]
 ```
 
@@ -79,7 +79,7 @@ For most founders: $500–$1,400/month
 Ad says: "Get 3 custom quotes in 90 seconds"
 H1 becomes: "Get 3 custom quotes in 90 seconds"
 
-Not "Compare rates" or "Quick quotes online" — the EXACT phrase from the ad.
+Not "Compare rates" or "Quick quotes online" - the EXACT phrase from the ad.
 
 ---
 
@@ -91,9 +91,9 @@ If bounce rate drops 5%+, you've found $700-1,400/month.
 
 Tomorrow, I'll share the #2 mistake.
 
-— Mike
+- Mike
 
-P.S. — Want to see ALL your mistakes + the fixes for each? Run a free audit. Takes 90 seconds, shows your exact score + everything costing you money.
+P.S. - Want to see ALL your mistakes + the fixes for each? Run a free audit. Takes 90 seconds, shows your exact score + everything costing you money.
 
 [GET FREE AUDIT]
 ```
@@ -144,9 +144,9 @@ Your fix pack: $97 (implements all 3)
 
 Takes 90 seconds. No email required to see results.
 
-— Mike
+- Mike
 
-P.S. — If you implement even ONE of your top 3 fixes, you'll see the impact in 7 days. Most founders see $300-800/month improvement. Test it.
+P.S. - If you implement even ONE of your top 3 fixes, you'll see the impact in 7 days. Most founders see $300-800/month improvement. Test it.
 ```
 
 ---

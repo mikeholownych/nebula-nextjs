@@ -518,11 +518,11 @@ def format_ascii_box(design_system: dict) -> str:
     if any(dials.get(k) is not None for k in ("variance", "motion", "density")):
         lines.append(section_header("DESIGN DIALS", BOX_WIDTH + 1))
         if dials.get("variance") is not None:
-            lines.append(f"│  Variance: {dials['variance']}/10 — {dials['variance_label']}".ljust(BOX_WIDTH) + "│")
+            lines.append(f"│  Variance: {dials['variance']}/10 - {dials['variance_label']}".ljust(BOX_WIDTH) + "│")
         if dials.get("motion") is not None:
-            lines.append(f"│  Motion:   {dials['motion']}/10 — {dials['motion_label']}".ljust(BOX_WIDTH) + "│")
+            lines.append(f"│  Motion:   {dials['motion']}/10 - {dials['motion_label']}".ljust(BOX_WIDTH) + "│")
         if dials.get("density") is not None:
-            lines.append(f"│  Density:  {dials['density']}/10 — {dials['density_label']}".ljust(BOX_WIDTH) + "│")
+            lines.append(f"│  Density:  {dials['density']}/10 - {dials['density_label']}".ljust(BOX_WIDTH) + "│")
 
     # Pattern section
     lines.append(section_header("PATTERN", BOX_WIDTH + 1))
@@ -653,11 +653,11 @@ def format_markdown(design_system: dict) -> str:
     if any(dials.get(k) is not None for k in ("variance", "motion", "density")):
         lines.append("### Design Dials")
         if dials.get("variance") is not None:
-            lines.append(f"- **Variance:** {dials['variance']}/10 — {dials['variance_label']}")
+            lines.append(f"- **Variance:** {dials['variance']}/10 - {dials['variance_label']}")
         if dials.get("motion") is not None:
-            lines.append(f"- **Motion:** {dials['motion']}/10 — {dials['motion_label']}")
+            lines.append(f"- **Motion:** {dials['motion']}/10 - {dials['motion_label']}")
         if dials.get("density") is not None:
-            lines.append(f"- **Density:** {dials['density']}/10 — {dials['density_label']}")
+            lines.append(f"- **Density:** {dials['density']}/10 - {dials['density_label']}")
         lines.append("")
 
     # Pattern section
@@ -737,7 +737,7 @@ def format_markdown(design_system: dict) -> str:
     # Motion section (GSAP skeleton, only if --motion dial was set)
     if motion_snippet:
         lines.append("### Motion")
-        lines.append(f"**{motion_snippet.get('Category', '')}** ({motion_snippet.get('Intensity Tier', '')}) — Trigger: {motion_snippet.get('Trigger', '')} | Duration: {motion_snippet.get('Duration', '')} | Easing: `{motion_snippet.get('Easing', '')}`")
+        lines.append(f"**{motion_snippet.get('Category', '')}** ({motion_snippet.get('Intensity Tier', '')}) - Trigger: {motion_snippet.get('Trigger', '')} | Duration: {motion_snippet.get('Duration', '')} | Easing: `{motion_snippet.get('Easing', '')}`")
         lines.append("```js")
         lines.append(motion_snippet.get("GSAP Snippet", ""))
         lines.append("```")
@@ -820,7 +820,7 @@ def safe_slug(name, fallback: str = "default") -> str:
 
     Only [a-z0-9_-] survives; every other character (including '/', '\\' and
     '.') collapses into '-'. This makes path traversal via project/page names
-    (e.g. "../../etc") impossible — the slug can never leave its parent dir.
+    (e.g. "../../etc") impossible - the slug can never leave its parent dir.
     """
     slug = re.sub(r'[^a-z0-9_-]+', '-', str(name).lower()).strip('-')
     return slug or fallback
@@ -938,11 +938,11 @@ def format_master_md(design_system: dict) -> str:
     lines.append("")
     lines.append("---")
     lines.append("")
-    
+
     # Global Rules section
     lines.append("## Global Rules")
     lines.append("")
-    
+
     # Color Palette
     lines.append("### Color Palette")
     lines.append("")
@@ -968,7 +968,7 @@ def format_master_md(design_system: dict) -> str:
     if colors.get("notes"):
         lines.append(f"**Color Notes:** {colors.get('notes', '')}")
         lines.append("")
-    
+
     # Typography
     lines.append("### Typography")
     lines.append("")
@@ -985,7 +985,7 @@ def format_master_md(design_system: dict) -> str:
         lines.append(typography.get("css_import", ""))
         lines.append("```")
         lines.append("")
-    
+
     # Spacing Variables (overridden by the VISUAL_DENSITY dial when set)
     default_spacing = DIAL_TIERS["density"][1][2]["spacing"]  # mid-tier = the historical defaults
     scale = spacing_scale or default_spacing
@@ -996,7 +996,7 @@ def format_master_md(design_system: dict) -> str:
     lines.append("### Spacing Variables")
     lines.append("")
     if spacing_scale:
-        lines.append(f"*Density: {dials.get('density')}/10 — {dials.get('density_label')}*")
+        lines.append(f"*Density: {dials.get('density')}/10 - {dials.get('density_label')}*")
         lines.append("")
     lines.append("| Token | Value | Usage |")
     lines.append("|-------|-------|-------|")
@@ -1005,7 +1005,7 @@ def format_master_md(design_system: dict) -> str:
         rem_value = f"{int(px_value.rstrip('px')) / 16:g}rem"
         lines.append(f"| `--space-{token}` | `{px_value}` / `{rem_value}` | {spacing_usage[token]} |")
     lines.append("")
-    
+
     # Shadow Depths
     lines.append("### Shadow Depths")
     lines.append("")
@@ -1016,13 +1016,13 @@ def format_master_md(design_system: dict) -> str:
     lines.append("| `--shadow-lg` | `0 10px 15px rgba(0,0,0,0.1)` | Modals, dropdowns |")
     lines.append("| `--shadow-xl` | `0 20px 25px rgba(0,0,0,0.15)` | Hero images, featured cards |")
     lines.append("")
-    
+
     # Component Specs section
     lines.append("---")
     lines.append("")
     lines.append("## Component Specs")
     lines.append("")
-    
+
     # Buttons
     lines.append("### Buttons")
     lines.append("")
@@ -1056,7 +1056,7 @@ def format_master_md(design_system: dict) -> str:
     lines.append("}")
     lines.append("```")
     lines.append("")
-    
+
     # Cards
     lines.append("### Cards")
     lines.append("")
@@ -1076,7 +1076,7 @@ def format_master_md(design_system: dict) -> str:
     lines.append("}")
     lines.append("```")
     lines.append("")
-    
+
     # Inputs
     lines.append("### Inputs")
     lines.append("")
@@ -1096,7 +1096,7 @@ def format_master_md(design_system: dict) -> str:
     lines.append("}")
     lines.append("```")
     lines.append("")
-    
+
     # Modals
     lines.append("### Modals")
     lines.append("")
@@ -1116,7 +1116,7 @@ def format_master_md(design_system: dict) -> str:
     lines.append("}")
     lines.append("```")
     lines.append("")
-    
+
     # Style section
     lines.append("---")
     lines.append("")
@@ -1133,7 +1133,7 @@ def format_master_md(design_system: dict) -> str:
     if effects:
         lines.append(f"**Key Effects:** {effects}")
         lines.append("")
-    
+
     # Layout Pattern
     lines.append("### Page Pattern")
     lines.append("")
@@ -1152,7 +1152,7 @@ def format_master_md(design_system: dict) -> str:
         lines.append("")
         lines.append("## Motion")
         lines.append("")
-        lines.append(f"**{motion_snippet.get('Category', '')}** ({motion_snippet.get('Intensity Tier', '')}) — Trigger: {motion_snippet.get('Trigger', '')} | Duration: {motion_snippet.get('Duration', '')} | Easing: `{motion_snippet.get('Easing', '')}`")
+        lines.append(f"**{motion_snippet.get('Category', '')}** ({motion_snippet.get('Intensity Tier', '')}) - Trigger: {motion_snippet.get('Trigger', '')} | Duration: {motion_snippet.get('Duration', '')} | Easing: `{motion_snippet.get('Easing', '')}`")
         lines.append("")
         lines.append("```js")
         lines.append(motion_snippet.get("GSAP Snippet", ""))
@@ -1184,14 +1184,14 @@ def format_master_md(design_system: dict) -> str:
     lines.append("")
     lines.append("### Additional Forbidden Patterns")
     lines.append("")
-    lines.append("- ❌ **Emojis as icons** — Use SVG icons (Heroicons, Lucide, Simple Icons)")
-    lines.append("- ❌ **Missing cursor:pointer** — All clickable elements must have cursor:pointer")
-    lines.append("- ❌ **Layout-shifting hovers** — Avoid scale transforms that shift layout")
-    lines.append("- ❌ **Low contrast text** — Maintain 4.5:1 minimum contrast ratio")
-    lines.append("- ❌ **Instant state changes** — Always use transitions (150-300ms)")
-    lines.append("- ❌ **Invisible focus states** — Focus states must be visible for a11y")
+    lines.append("- ❌ **Emojis as icons** - Use SVG icons (Heroicons, Lucide, Simple Icons)")
+    lines.append("- ❌ **Missing cursor:pointer** - All clickable elements must have cursor:pointer")
+    lines.append("- ❌ **Layout-shifting hovers** - Avoid scale transforms that shift layout")
+    lines.append("- ❌ **Low contrast text** - Maintain 4.5:1 minimum contrast ratio")
+    lines.append("- ❌ **Instant state changes** - Always use transitions (150-300ms)")
+    lines.append("- ❌ **Invisible focus states** - Focus states must be visible for a11y")
     lines.append("")
-    
+
     # Pre-Delivery Checklist
     lines.append("---")
     lines.append("")
@@ -1210,7 +1210,7 @@ def format_master_md(design_system: dict) -> str:
     lines.append("- [ ] No content hidden behind fixed navbars")
     lines.append("- [ ] No horizontal scroll on mobile")
     lines.append("")
-    
+
     return "\n".join(lines)
 
 
@@ -1219,12 +1219,12 @@ def format_page_override_md(design_system: dict, page_name: str, page_query: str
     project = design_system.get("project_name", "PROJECT")
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     page_title = page_name.replace("-", " ").replace("_", " ").title()
-    
+
     # Detect page type and generate intelligent overrides
     page_overrides = _generate_intelligent_overrides(page_name, page_query, design_system)
-    
+
     lines = []
-    
+
     lines.append(f"# {page_title} Page Overrides")
     lines.append("")
     lines.append(f"> **PROJECT:** {project}")
@@ -1236,11 +1236,11 @@ def format_page_override_md(design_system: dict, page_name: str, page_query: str
     lines.append("")
     lines.append("---")
     lines.append("")
-    
+
     # Page-specific rules with actual content
     lines.append("## Page-Specific Rules")
     lines.append("")
-    
+
     # Layout Overrides
     lines.append("### Layout Overrides")
     lines.append("")
@@ -1249,9 +1249,9 @@ def format_page_override_md(design_system: dict, page_name: str, page_query: str
         for key, value in layout.items():
             lines.append(f"- **{key}:** {value}")
     else:
-        lines.append("- No overrides — use Master layout")
+        lines.append("- No overrides - use Master layout")
     lines.append("")
-    
+
     # Spacing Overrides
     lines.append("### Spacing Overrides")
     lines.append("")
@@ -1260,9 +1260,9 @@ def format_page_override_md(design_system: dict, page_name: str, page_query: str
         for key, value in spacing.items():
             lines.append(f"- **{key}:** {value}")
     else:
-        lines.append("- No overrides — use Master spacing")
+        lines.append("- No overrides - use Master spacing")
     lines.append("")
-    
+
     # Typography Overrides
     lines.append("### Typography Overrides")
     lines.append("")
@@ -1271,9 +1271,9 @@ def format_page_override_md(design_system: dict, page_name: str, page_query: str
         for key, value in typography.items():
             lines.append(f"- **{key}:** {value}")
     else:
-        lines.append("- No overrides — use Master typography")
+        lines.append("- No overrides - use Master typography")
     lines.append("")
-    
+
     # Color Overrides
     lines.append("### Color Overrides")
     lines.append("")
@@ -1282,9 +1282,9 @@ def format_page_override_md(design_system: dict, page_name: str, page_query: str
         for key, value in colors.items():
             lines.append(f"- **{key}:** {value}")
     else:
-        lines.append("- No overrides — use Master colors")
+        lines.append("- No overrides - use Master colors")
     lines.append("")
-    
+
     # Component Overrides
     lines.append("### Component Overrides")
     lines.append("")
@@ -1293,9 +1293,9 @@ def format_page_override_md(design_system: dict, page_name: str, page_query: str
         for comp in components:
             lines.append(f"- {comp}")
     else:
-        lines.append("- No overrides — use Master component specs")
+        lines.append("- No overrides - use Master component specs")
     lines.append("")
-    
+
     # Page-Specific Components
     lines.append("---")
     lines.append("")
@@ -1308,7 +1308,7 @@ def format_page_override_md(design_system: dict, page_name: str, page_query: str
     else:
         lines.append("- No unique components for this page")
     lines.append("")
-    
+
     # Recommendations
     lines.append("---")
     lines.append("")
@@ -1319,36 +1319,36 @@ def format_page_override_md(design_system: dict, page_name: str, page_query: str
         for rec in recommendations:
             lines.append(f"- {rec}")
     lines.append("")
-    
+
     return "\n".join(lines)
 
 
 def _generate_intelligent_overrides(page_name: str, page_query: str, design_system: dict) -> dict:
     """
     Generate intelligent overrides based on page type using layered search.
-    
+
     Uses the existing search infrastructure to find relevant style, UX, and layout
     data instead of hardcoded page types.
     """
     from core import search
-    
+
     page_lower = page_name.lower()
     query_lower = (page_query or "").lower()
     combined_context = f"{page_lower} {query_lower}"
-    
+
     # Search across multiple domains for page-specific guidance
     style_search = search(combined_context, "style", max_results=1)
     ux_search = search(combined_context, "ux", max_results=3)
     landing_search = search(combined_context, "landing", max_results=1)
-    
+
     # Extract results from search response
     style_results = style_search.get("results", [])
     ux_results = ux_search.get("results", [])
     landing_results = landing_search.get("results", [])
-    
+
     # Detect page type from search results or context
     page_type = _detect_page_type(combined_context, style_results)
-    
+
     # Build overrides from search results
     layout = {}
     spacing = {}
@@ -1357,7 +1357,7 @@ def _generate_intelligent_overrides(page_name: str, page_query: str, design_syst
     components = []
     unique_components = []
     recommendations = []
-    
+
     # Extract style-based overrides
     if style_results:
         style = style_results[0]
@@ -1365,23 +1365,23 @@ def _generate_intelligent_overrides(page_name: str, page_query: str, design_syst
         keywords = style.get("Keywords", "")
         best_for = style.get("Best For", "")
         effects = style.get("Effects & Animation", "")
-        
+
         # Infer layout from style keywords
         if any(kw in keywords.lower() for kw in ["data", "dense", "dashboard", "grid"]):
             layout["Max Width"] = "1400px or full-width"
             layout["Grid"] = "12-column grid for data flexibility"
-            spacing["Content Density"] = "High — optimize for information display"
+            spacing["Content Density"] = "High - optimize for information display"
         elif any(kw in keywords.lower() for kw in ["minimal", "simple", "clean", "single"]):
             layout["Max Width"] = "800px (narrow, focused)"
             layout["Layout"] = "Single column, centered"
-            spacing["Content Density"] = "Low — focus on clarity"
+            spacing["Content Density"] = "Low - focus on clarity"
         else:
             layout["Max Width"] = "1200px (standard)"
             layout["Layout"] = "Full-width sections, centered content"
-        
+
         if effects:
             recommendations.append(f"Effects: {effects}")
-    
+
     # Extract UX guidelines as recommendations
     for ux in ux_results:
         category = ux.get("Category", "")
@@ -1391,32 +1391,32 @@ def _generate_intelligent_overrides(page_name: str, page_query: str, design_syst
             recommendations.append(f"{category}: {do_text}")
         if dont_text:
             components.append(f"Avoid: {dont_text}")
-    
+
     # Extract landing pattern info for section structure
     if landing_results:
         landing = landing_results[0]
         sections = landing.get("Section Order", "")
         cta_placement = landing.get("Primary CTA Placement", "")
         color_strategy = landing.get("Color Strategy", "")
-        
+
         if sections:
             layout["Sections"] = sections
         if cta_placement:
             recommendations.append(f"CTA Placement: {cta_placement}")
         if color_strategy:
             colors["Strategy"] = color_strategy
-    
+
     # Add page-type specific defaults if no search results
     if not layout:
         layout["Max Width"] = "1200px"
         layout["Layout"] = "Responsive grid"
-    
+
     if not recommendations:
         recommendations = [
             "Refer to MASTER.md for all design rules",
             "Add specific overrides as needed for this page"
         ]
-    
+
     return {
         "page_type": page_type,
         "layout": layout,
@@ -1432,7 +1432,7 @@ def _generate_intelligent_overrides(page_name: str, page_query: str, design_syst
 def _detect_page_type(context: str, style_results: list) -> str:
     """Detect page type from context and search results."""
     context_lower = context.lower()
-    
+
     # Check for common page type patterns
     page_patterns = [
         (["dashboard", "admin", "analytics", "data", "metrics", "stats", "monitor", "overview"], "Dashboard / Data View"),
@@ -1446,21 +1446,21 @@ def _detect_page_type(context: str, style_results: list) -> str:
         (["search", "results", "browse", "filter", "catalog", "list"], "Search Results"),
         (["empty", "404", "error", "not found", "zero"], "Empty State"),
     ]
-    
+
     for keywords, page_type in page_patterns:
         if any(kw in context_lower for kw in keywords):
             return page_type
-    
+
     # Fallback: try to infer from style results
     if style_results:
         style_name = style_results[0].get("Style Category", "").lower()
         best_for = style_results[0].get("Best For", "").lower()
-        
+
         if "dashboard" in best_for or "data" in best_for:
             return "Dashboard / Data View"
         elif "landing" in best_for or "marketing" in best_for:
             return "Landing / Marketing"
-    
+
     return "General"
 
 

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Data Rights — Nebula Components',
+  title: 'Data Rights - Nebula Components',
   description: 'Exercise your GDPR and CCPA data rights. Request access, deletion, or export of your personal data.',
   alternates: {
     canonical: 'https://nebulacomponents.com/data-rights',
@@ -23,19 +23,19 @@ export default function DataRightsPage() {
           <h2 className="text-2xl font-bold text-fg mb-4">
             Your Rights
           </h2>
-          
+
           <p className="text-fg-muted mb-6">
             Under GDPR (for EU residents) and CCPA (for California residents), you have the right to:
           </p>
 
           <ul className="list-disc pl-6 text-fg-muted space-y-3 mb-8">
-            <li><strong>Access</strong> — Request a copy of all personal data we hold about you</li>
-            <li><strong>Rectification</strong> — Correct inaccurate or incomplete data</li>
-            <li><strong>Erasure</strong> — Request deletion of your personal data</li>
-            <li><strong>Portability</strong> — Receive your data in a machine-readable format</li>
-            <li><strong>Restriction</strong> — Limit how we use your data</li>
-            <li><strong>Objection</strong> — Object to processing for direct marketing</li>
-            <li><strong>Withdrawal of Consent</strong> — Withdraw consent at any time</li>
+            <li><strong>Access</strong> - Request a copy of all personal data we hold about you</li>
+            <li><strong>Rectification</strong> - Correct inaccurate or incomplete data</li>
+            <li><strong>Erasure</strong> - Request deletion of your personal data</li>
+            <li><strong>Portability</strong> - Receive your data in a machine-readable format</li>
+            <li><strong>Restriction</strong> - Limit how we use your data</li>
+            <li><strong>Objection</strong> - Object to processing for direct marketing</li>
+            <li><strong>Withdrawal of Consent</strong> - Withdraw consent at any time</li>
           </ul>
 
           <h2 className="text-2xl font-bold text-fg mb-4">
@@ -57,7 +57,7 @@ export default function DataRightsPage() {
               </a>
             </p>
             <p className="text-fg-muted mt-2">
-              <strong>Subject line:</strong> Data Rights Request — [Your Email]
+              <strong>Subject line:</strong> Data Rights Request - [Your Email]
             </p>
             <p className="text-fg-muted text-sm mt-3 mb-0">
               We verify your identity before processing. Response time: 30 days (GDPR) / 45 days (CCPA).
@@ -119,9 +119,9 @@ export default function DataRightsPage() {
           </p>
 
           <ul className="list-disc pl-6 text-fg-muted space-y-2 mb-8">
-            <li><strong>Stripe</strong> — Payment processing (PCI-DSS compliant)</li>
-            <li><strong>SendGrid</strong> — Email delivery (transactional)</li>
-            <li><strong>Google Analytics</strong> — Website analytics (anonymized)</li>
+            <li><strong>Stripe</strong> - Payment processing (PCI-DSS compliant)</li>
+            <li><strong>SendGrid</strong> - Email delivery (transactional)</li>
+            <li><strong>Google Analytics</strong> - Website analytics (anonymized)</li>
           </ul>
 
           <p className="text-fg-muted">

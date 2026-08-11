@@ -123,7 +123,7 @@ Style rules:
 - No hashtags unless highly relevant
 - Max 250 words
 - Tone: analytical, honest, slightly deadpan
-- DO NOT fabricate data — only use the findings below
+- DO NOT fabricate data - only use the findings below
 - DO NOT say the page is "bad" or use subjective language
 - Include specific numbers (score, character counts, payload size, etc.) where available
 
@@ -162,7 +162,7 @@ Write only the post text. No preamble."""
         return (
             f"Audited {domain}.\n\n"
             f"Score: {score:.1f}/10 (Grade {grade})\n\n"
-            f"Top finding: {label} — {issue}\n\n"
+            f"Top finding: {label} - {issue}\n\n"
             f"Run the same audit on your page: "
             f"https://nebulacomponents.com/audit?utm_source=linkedin&utm_medium=social&utm_campaign=auto-teardown\n\n"
             f"(URL in comments)"

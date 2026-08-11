@@ -19,5 +19,5 @@ Make each email feel personal by referencing specific context
 # Deterministic variant selection
 url_hash = int(hashlib.md5(lead.get('url', title_snip).encode()).hexdigest(), 16)
 v = _PPQ_VARIANTS[url_hash % len(_PPQ_VARIANTS)]  # 0, 1, 2, or 3
-# Subjects: "Your {kw} — found something" | "{kw} — worth a look?" | "noticed something re: {kw}" | "Struggling with {kw}?"
+# Subjects: "Your {kw} - found something" | "{kw} - worth a look?" | "noticed something re: {kw}" | "Struggling with {kw}?"
 ```

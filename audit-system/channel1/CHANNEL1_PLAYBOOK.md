@@ -1,4 +1,4 @@
-# Channel 1 — Founder-Led Outbound + LinkedIn (90-Day Playbook)
+# Channel 1 - Founder-Led Outbound + LinkedIn (90-Day Playbook)
 
 **Primary channel. The other 89 days of this plan live or die on reply rate here.**
 
@@ -25,12 +25,12 @@ about ROAS; coaches/consultants running lead-ads to a booking page.
 ## 2. Prospect list (30–50 for the first 4–6 weeks)
 
 Sources, in order of signal strength:
-1. People engaging with your Nebula posts (comments on ad/landing content) — +2 score
+1. People engaging with your Nebula posts (comments on ad/landing content) - +2 score
 2. Commenters on 3–5 creator posts about CRO/landing pages (see `linkedin_post_monitor.py` pattern in high-intent-outreach skill)
 3. LinkedIn search: "founder" + "paid ads" / "CAC" / "landing page" in headline or posts
 4. Existing signal-watcher queue (Reddit/IH/HN pain posts with LinkedIn profiles)
-5. **Reddit official API (PRAW)** — `reddit_monitor_praw.py` → `intake_signal_queue.py --queue reddit_leads.jsonl`. The only lane that surfaces TRUE ad-spend ICP (Tier A) — the HN/PH queue is almost all launch ICP. Needs Reddit script-app creds in `~/.hermes/secrets/reddit.env` (2-min setup)
-6. Warm prior contacts (anyone who ran an audit but didn't buy — 30-day recircle)
+5. **Reddit official API (PRAW)** - `reddit_monitor_praw.py` → `intake_signal_queue.py --queue reddit_leads.jsonl`. The only lane that surfaces TRUE ad-spend ICP (Tier A) - the HN/PH queue is almost all launch ICP. Needs Reddit script-app creds in `~/.hermes/secrets/reddit.env` (2-min setup)
+6. Warm prior contacts (anyone who ran an audit but didn't buy - 30-day recircle)
 
 Track in `channel1/pipeline_sheet.csv` via `channel1/pipeline_sheet.py`:
 `name, company, url, linkedin, email, source, trigger, status, first_contact, last_contact, notes`
@@ -49,12 +49,12 @@ fix_purchased → fix_delivered → outcome_measured → case_study_eligible`
      signals, delivered instantly, 30-day re-audit included. Customer implements.
 
 **Critical distinction:** we sell the *repair brief*, not implementation labor.
-That is the whole product. Do not drift into "I'll fix it for you" — that's a
+That is the whole product. Do not drift into "I'll fix it for you" - that's a
 different, unbuilt offer.
 
 ## 4. Execution cadence (3–4 days/week)
 
-- **Day 1 (daily):** 17-min engagement routine — reply to comments on your posts
+- **Day 1 (daily):** 17-min engagement routine - reply to comments on your posts
   (24h SLA), comment value-only on 3–5 ICP posts, send 3–5 touch-1 DMs.
 - **Weekly:** 5–10 new offers. 30–50 prospects in the sheet by week 6.
 - **Pre-audit the top tier:** for prospects with score ≥8 (explicit spend pain +
@@ -75,10 +75,10 @@ different, unbuilt offer.
 | Reply rate per angle | ≥20% on triggers | reply_diagnostics.jsonl (48h diagnostic) |
 
 **Kill rule:** any message angle with 0 replies after 10 sends gets diagnosed
-(via `diagnose_reply` / reply_diagnostics.jsonl) and rewritten — never re-sent
+(via `diagnose_reply` / reply_diagnostics.jsonl) and rewritten - never re-sent
 as-is. Volume does not fix a broken S3.
 
-## 6. Channel 2 (bottom-funnel SEO/AEO) — foundations already exist
+## 6. Channel 2 (bottom-funnel SEO/AEO) - foundations already exist
 
 Already built: Citable stack, technical SEO (search console, sitemaps, schema),
 learning centre, audit pages, agent-readiness (llms.txt, releases page).
@@ -90,10 +90,10 @@ is the slow compound.
 
 ## 7. Do not do (constraints)
 
-- No links in LinkedIn post bodies (algorithm penalty — link-in-first-comment is
+- No links in LinkedIn post bodies (algorithm penalty - link-in-first-comment is
   also hidden; DMs are private, links OK there)
 - No pitch in touch 1. Value or ask-first, never "I offer X"
-- No cold email when a public thread reply exists — thread first, email second
+- No cold email when a public thread reply exists - thread first, email second
 - No Calendly links (no verified scheduler); ask timezone + availability
 - No CAN-SPAM violations: email sends go through send_outreach.py with the
   checklist gate + compliance footer

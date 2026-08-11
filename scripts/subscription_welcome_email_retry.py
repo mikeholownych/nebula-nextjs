@@ -10,8 +10,8 @@ NAMES = {'pro': 'Pro', 'growth': 'Growth', 'agency': 'Agency'}
 
 def send(row):
     name = NAMES.get(row['plan'], row['plan'].title())
-    text = f"Your Nebula {name} plan is active.\n\nRun your first audit: https://nebulacomponents.com/audit\n\n— Mike\nNebula Components"
-    html = f'<p>Your Nebula {name} plan is active.</p><p><a href="https://nebulacomponents.com/audit">Run your first audit →</a></p><p>— Mike<br>Nebula Components</p>'
+    text = f"Your Nebula {name} plan is active.\n\nRun your first audit: https://nebulacomponents.com/audit\n\n- Mike\nNebula Components"
+    html = f'<p>Your Nebula {name} plan is active.</p><p><a href="https://nebulacomponents.com/audit">Run your first audit →</a></p><p>- Mike<br>Nebula Components</p>'
     body = json.dumps({'to': row['email'], 'subject': f'Your Nebula {name} plan is active', 'text': text, 'html': html}).encode()
     req = urllib.request.Request(f'{API}/email/send', data=body, method='POST', headers={'Content-Type': 'application/json'})
     try:

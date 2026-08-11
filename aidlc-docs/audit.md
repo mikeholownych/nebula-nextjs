@@ -1,10 +1,10 @@
-# AI-DLC Audit Trail — Nebula Components
+# AI-DLC Audit Trail - Nebula Components
 
 ## AI-DLC Initialization
 **Timestamp**: 2026-07-07T10:10:00Z
 **User Input**: Shared article "AI-DLC + Claude Code: The End Of Vibe Coding" (Towards AI, Pravin Borate)
 **Action**: Installed AI-DLC workflow from awslabs/aidlc-workflows (v1.0.1, 3.4k stars)
-**Result**: 
+**Result**:
 - Cloned repo → `.aidlc/aidlc-rules/` (28 rule detail files, 539-line core workflow)
 - Created nebula-specific extensions: audit-pipeline, lead-pipeline, compliance-sovereignty
 - Updated CLAUDE.md from 38-line style guide to AI-DLC process playbook + key facts
@@ -12,7 +12,7 @@
 - Competitive intel captured to competitive/awslabs-aidlc.jsonl
 [2026-07-12T00:47:00Z] SRE scan: 3 stuck awaiting_url_or_schedule leads fixed (Zayne→bounced, 2x Obakura→closed). Pipeline healthy. 4 legit audit_delivered leads waiting for Tue send window.
 
-## 2026-07-13T08:44:58Z — Session Continuation
+## 2026-07-13T08:44:58Z - Session Continuation
 
 ### Raw user input
 ```text
@@ -34,7 +34,7 @@
 - Aligned AI Ops page billing language with immediate monthly Stripe billing.
 - Verified personalized $147 Checkout Session generation.
 
-## 2026-07-13T09:55:14Z — External Repository Review
+## 2026-07-13T09:55:14Z - External Repository Review
 
 ### Raw user input
 ```text
@@ -48,7 +48,7 @@
 - Added regression tests proving rate-limited sources are not treated as quiet markets.
 - Wrote research/last30days-skill-review.md.
 
-## 2026-07-13T10:11:56Z — last30days Production Benchmark
+## 2026-07-13T10:11:56Z - last30days Production Benchmark
 
 ### Raw user input
 ```text
@@ -62,7 +62,7 @@
 - Rejected last30days as a production lead source.
 - Fixed Nebula ICP gate false positives exposed by the benchmark and added regression tests.
 
-## 2026-07-13T15:53:40Z — User Request
+## 2026-07-13T15:53:40Z - User Request
 
 ```text
 The project is getting quite large for individual html files. Determine the best framework/cms option for nebula
@@ -81,7 +81,7 @@ The project is getting quite large for individual html files. Determine the best
 - Requirements ambiguity: editor persona materially changes whether a full CMS is justified.
 - Created `aidlc-docs/inception/requirements/requirement-verification-questions.md`.
 
-## 2026-07-13T16:10:59Z — Requirements clarification
+## 2026-07-13T16:10:59Z - Requirements clarification
 
 ### Raw user input
 ```text
@@ -98,7 +98,7 @@ A
 - Generated `aidlc-docs/inception/requirements/requirements.md`.
 - Requirements are awaiting explicit approval before architecture comparison and design.
 
-## 2026-07-13T16:41:38Z — Requirements change
+## 2026-07-13T16:41:38Z - Requirements change
 
 ### Raw user input
 ```text
@@ -110,7 +110,7 @@ Solution should be scoped to a framework or cms solution
 - Explicitly excluded Git alone, custom templating systems, and broad tool collections as the primary solution.
 - Updated requirements remain awaiting approval.
 
-## 2026-07-13T17:26:09Z — Requirements approval
+## 2026-07-13T17:26:09Z - Requirements approval
 
 ### Raw user input
 ```text
@@ -121,7 +121,7 @@ Proceed
 - Requirements approved.
 - Proceeding to compare established framework/CMS products and present the recommended design.
 
-## 2026-07-13T17:31:00Z — Workflow planning
+## 2026-07-13T17:31:00Z - Workflow planning
 
 ### Actions
 - Compared the migration impact against current framework and CMS operating models.
@@ -130,7 +130,7 @@ Proceed
 - Selected an incremental page-family rollout with route, SEO, accessibility, browser, and backend parity gates.
 - Workflow plan is awaiting explicit approval before application design and final product recommendation.
 
-## 2026-07-13T17:30:09Z — Framework selection deep review
+## 2026-07-13T17:30:09Z - Framework selection deep review
 
 ### Raw user input
 ```text
@@ -145,7 +145,7 @@ Why was astro selected vs next.js vs other options.. what's the reasoning behind
 - Recommendation prepared: Astro 7.0.8 as the single primary framework, with no CMS in the current scope.
 - Application-design approval remains pending.
 
-## 2026-07-13T17:44:10Z — Dashboard requirement introduced
+## 2026-07-13T17:44:10Z - Dashboard requirement introduced
 
 ### Raw user input
 ```text
@@ -159,7 +159,7 @@ Does your recommendation change if I say that i would want a customer dashboard 
 - A CMS remains unjustified.
 - Framework selection remains open pending confirmation of whether the dashboard is committed and whether one or two frontend applications are acceptable.
 
-## 2026-07-13T17:57:41Z — Complete transformation implementation plan
+## 2026-07-13T17:57:41Z - Complete transformation implementation plan
 
 ### Raw user input
 ```text
@@ -188,7 +188,7 @@ Create a complete and thorough plan to implement the above transformation
 - All roadmap links resolve to existing plan files.
 - Self-review fixed a root-route collision between initial scaffold and homepage migration.
 
-## 2026-07-13T18:07:03Z — Asynchronous architecture review incorporated
+## 2026-07-13T18:07:03Z - Asynchronous architecture review incorporated
 
 ### Review evidence
 - Three independent repository reviews completed after the initial plan commit.
@@ -208,7 +208,7 @@ Create a complete and thorough plan to implement the above transformation
 - Seven planning documents now contain 1,504 lines, 36 implementation tasks, and 243 executable checkboxes.
 - Placeholder scan, task-step sequence validation, roadmap-link validation, and `git diff --check` all passed with zero findings.
 
-## 2026-07-13T18:33:49Z — Detailed implementation action plan
+## 2026-07-13T18:33:49Z - Detailed implementation action plan
 
 ### Raw user input
 ```text
@@ -233,7 +233,7 @@ Create a detailed action plan for implementation of the above transformation pla
 - All linked implementation-plan files exist.
 - Placeholder scan and `git diff --check` returned zero findings.
 
-## 2026-07-16T23:06:43Z — Task 1 containment completion request
+## 2026-07-16T23:06:43Z - Task 1 containment completion request
 
 ### Raw user input
 ```text
@@ -257,7 +257,7 @@ Create a detailed action plan for implementation of the above transformation pla
 - Built-server HTTP matrix: 27 blocked routes returned 404 with noindex; root emitted two bounded JSON-LD objects; audit API remained fail-closed.
 - Rendered browser check: maintenance home rendered; `/audit-dashboard` rendered the neutral 404 with no forms and `robots=noindex,nofollow`.
 
-## 2026-07-19T09:27:00Z — Audit delivery monitor review
+## 2026-07-19T09:27:00Z - Audit delivery monitor review
 
 ### Raw user input
 Review audit-delivery-monitor job and scripts. Ensure that it's accurate and up to date
@@ -265,7 +265,7 @@ Review audit-delivery-monitor job and scripts. Ensure that it's accurate and up 
 ### Result
 Replaced stale inline agent prompt with deterministic script-only monitor; added current stage/ledger/availability checks, tests, and verified cron execution.
 
-## 2026-07-19T15:19:38Z — Platform API DB auth fix (systemd unit)
+## 2026-07-19T15:19:38Z - Platform API DB auth fix (systemd unit)
 
 ### Raw user input
 ```text
@@ -303,9 +303,9 @@ before it reached the UI, surfacing only the generic fallback message.
   real `audit_id`, `status: "completed"`, score, grade, and findings.
 - Playwright end-to-end: submitted a URL on the live `/audit` page, confirmed
   navigation to `/audit/<real-uuid>/processing` with no page errors.
-- No application code changes required — infra/systemd config only.
+- No application code changes required - infra/systemd config only.
 
-## 2026-07-23T15:15:06Z — Session-start Honcho + parallel outreach directive
+## 2026-07-23T15:15:06Z - Session-start Honcho + parallel outreach directive
 
 ### Raw user input
 
@@ -324,14 +324,14 @@ before it reached the UI, surfacing only the generic fallback message.
 - Updated the reusable `trigger-aware-lead-gen-pipeline` skill with source-lane boundaries.
 - Dispatched a supervised read-only three-agent parallel proof; no sends or canonical-ledger writes allowed.
 
-## 2026-07-23T15:28:04Z — Parallel outreach supervised proof result
+## 2026-07-23T15:28:04Z - Parallel outreach supervised proof result
 
 - Delegation batch `deleg_6ffb093d` completed three isolated read-only audits.
 - Mechanical parallelization PASS: all three lanes completed; no sends, network calls, or canonical-ledger writes.
 - Production activation BLOCKED: source starvation, missing gate provenance, fragmented bounce/rate-limit/dedup controls.
 - Parent-verified proof written to `growth_system/PARALLEL_OUTREACH_PROOF_2026-07-23.md`.
 
-## Landing Page Intelligence Stack — Requirements Continuation
+## Landing Page Intelligence Stack - Requirements Continuation
 **Timestamp**: 2026-07-26T05:08:12Z
 **User Input**: "https://buildwire.ai/blog/6-competitive-intelligence-tools-for-marketers/"
 **AI Response**: "Analyzed the content-to-download funnel and recommended an evidence-grade landing-page intelligence workflow bundle linked to the live audit."
@@ -339,7 +339,7 @@ before it reached the UI, surfacing only the generic fallback message.
 
 ---
 
-## Landing Page Intelligence Stack — Approval
+## Landing Page Intelligence Stack - Approval
 **Timestamp**: 2026-07-26T05:08:12Z
 **User Input**: "proceed"
 **AI Response**: "Accepted as explicit approval of the proposed bounded funnel concept; began brownfield requirements and design documentation."
@@ -347,7 +347,7 @@ before it reached the UI, surfacing only the generic fallback message.
 
 ---
 
-## Landing Page Intelligence Stack — Design Review Gate
+## Landing Page Intelligence Stack - Design Review Gate
 **Timestamp**: 2026-07-26T05:10:25Z
 **AI Prompt**: "Review the design and requirements artifacts, then record A, B, or X in landing-page-intelligence-stack-review-questions.md."
 **Status**: Awaiting explicit approval
@@ -355,7 +355,7 @@ before it reached the UI, surfacing only the generic fallback message.
 
 ---
 
-## Landing Page Intelligence Stack — Design Approval
+## Landing Page Intelligence Stack - Design Approval
 **Timestamp**: 2026-07-26T05:17:15Z
 **User Input**: "approved"
 **AI Response**: "Recorded design approval and started implementation planning."
@@ -364,7 +364,7 @@ before it reached the UI, surfacing only the generic fallback message.
 
 ---
 
-## Landing Page Intelligence Stack — Implementation Plan Review Gate
+## Landing Page Intelligence Stack - Implementation Plan Review Gate
 **Timestamp**: 2026-07-26T05:22:11Z
 **AI Prompt**: "Review the canonical implementation plan and select inline execution, subagent-driven execution, or request changes in the plan review file."
 **Status**: Awaiting explicit implementation-plan approval
@@ -372,7 +372,7 @@ before it reached the UI, surfacing only the generic fallback message.
 
 ---
 
-## Landing Page Intelligence Stack — Implementation Approval
+## Landing Page Intelligence Stack - Implementation Approval
 **Timestamp**: 2026-07-26T05:25:39Z
 **User Input**: "A"
 **AI Response**: "Recorded inline-execution approval and verified the clean test baseline."
@@ -381,7 +381,7 @@ before it reached the UI, surfacing only the generic fallback message.
 
 ---
 
-## 2026-07-26T06:03:32.765229+00:00 — One-Leak Repair Sprint
+## 2026-07-26T06:03:32.765229+00:00 - One-Leak Repair Sprint
 
 **Raw user input:** `proceed`
 
@@ -391,7 +391,7 @@ before it reached the UI, surfacing only the generic fallback message.
 
 ## CEO Daily Memo :: 2026-07-28 22:05 UTC
 
-**STATUS:** 🔴 CRITICAL — Distribution broken, zero real revenue
+**STATUS:** 🔴 CRITICAL - Distribution broken, zero real revenue
 
 **Revenue:**
 - Real: $0.00 (0% of $291 break-even)
@@ -415,10 +415,10 @@ Trigger_lead_engine scrapes Reddit for high-intent signals (founder ad bleed, Go
 
 **Decisions needed:** (1) Reddit API vs. pivot channel?  (2) ICP accurate or wrong? (3) Approve budget for Apify/AgentMail if ROI clear?
 
-**Next checkpoint:** 2026-07-29 08:00 UTC — Fix deployed, cost model, bounce audit, ICP confidence stated.
+**Next checkpoint:** 2026-07-29 08:00 UTC - Fix deployed, cost model, bounce audit, ICP confidence stated.
 
 
-## 2026-08-03T05:39:32Z — Canonical-domain continuation
+## 2026-08-03T05:39:32Z - Canonical-domain continuation
 
 User input (verbatim):
 
@@ -428,7 +428,7 @@ User input (verbatim):
 
 Execution resumed against the live customer portal. Objective: make nebulacomponents.com the only canonical web origin while preserving .shop as a redirect source.
 
-### Execution result — 2026-08-03T06:24:05Z
+### Execution result - 2026-08-03T06:24:05Z
 
 - Decision: `.com` is the only canonical content origin; `.shop` is retained exclusively as a legacy redirect source and for existing verified sender identities where changing mail domains could break delivery.
 - Implemented and deployed canonical metadata, sitemap, robots, OG, JSON-LD, internal/public links, generated markdown, API discovery files, operational URL producers, redirect tests, and deployment verification.
@@ -438,7 +438,7 @@ Execution resumed against the live customer portal. Objective: make nebulacompon
 - Open blocker: HTTP `.shop` variants still have a two-hop Cloudflare chain (`http .shop` → `https .shop` → `https .com`). Cloudflare API writes are blocked: the present token returns 403 for Rulesets, Page Rules, and zone settings; browser dashboard is unauthenticated. HTTPS `.shop` and all `.com`/`www.com` variants are single-hop or direct as appropriate.
 
 
-## 2026-08-03T06:49:29Z — Cloudflare credential and redirect closure
+## 2026-08-03T06:49:29Z - Cloudflare credential and redirect closure
 
 **User input:** `[REDACTED CLOUDFLARE API TOKEN]`
 
@@ -448,25 +448,25 @@ Execution resumed against the live customer portal. Objective: make nebulacompon
 
 **Verification:** All four `.shop` scheme/host variants returned `301` directly to `https://nebulacomponents.com/audit?x=2`; following redirects produced one redirect and a final `200`. Canonical edge-chain remediation is complete.
 
-## 2026-08-03T08:26:30Z — Agency audit remediation authorized
+## 2026-08-03T08:26:30Z - Agency audit remediation authorized
 
-- Complete raw user instruction: "Proceed with all findings. Decisions: Option B — Self-implementation kit"
+- Complete raw user instruction: "Proceed with all findings. Decisions: Option B - Self-implementation kit"
 - Canonical offer decision: $97 repair sprint; Nebula supplies a tailored implementation artifact, customer/developer applies it, no conversion-lift guarantee, 30-day same-scope re-audit.
 - Scope accepted: payments, billing security, analytics/attribution, SEO/indexation, accessibility/performance, Cloudflare/security, offer and email integrity, production verification.
 - Execution branch: fix/agency-audit-remediation-20260803.
 
-## 2026-08-03T10:31:06Z — Analytics default correction
+## 2026-08-03T10:31:06Z - Analytics default correction
 
 Raw user input: `[Mon 2026-08-03 10:31:06 UTC] [Mike H] analytics are supposed to default to accepted, unless declined (unless user is in EU)`
 
 
-## 2026-08-06T03:14:22Z — User direction (raw)
+## 2026-08-06T03:14:22Z - User direction (raw)
 
 [Note: model was just switched from big-pickle to gpt-5.6-sol via OpenAI Codex. Adjust your self-identification accordingly.]
 
-[Thu 2026-08-06 03:14:22 UTC] The three fixes are good, and the two you didn't ship are better evidence than the four you did. Holding Digital Position because their site is clean — after already writing the email — is the discipline actually working. Same with the 9Sail near-miss.
-The product finding is the real output of this batch. Across seven rendered-verified audits, every surviving finding came from your manual inspection and none from the engine's list, while the engine's most-firing signals were SEO conventions and source proxies. That's not a bug list. That means the nine signals were specified from the outside — plausible conversion factors, never validated against a page a person actually inspected — and the two dimensions that produced real findings (form friction, consent gating) aren't in the spec at all. It's the same failure as the corpus and the prospect list, at the level of the product definition: internally generated, never checked against an outside party, and wrong in the flattering direction.
-Which raises the honest question about what you're offering. The four emails promise "an evidence-scored second opinion" against "9 published pass standards." What actually found the findings was you, with a browser. If someone says yes, the readout you send has to be the manual analysis, not the engine's output — and you should know that going in rather than discovering it when you hit send on the deliverable.
+[Thu 2026-08-06 03:14:22 UTC] The three fixes are good, and the two you didn't ship are better evidence than the four you did. Holding Digital Position because their site is clean - after already writing the email - is the discipline actually working. Same with the 9Sail near-miss.
+The product finding is the real output of this batch. Across seven rendered-verified audits, every surviving finding came from your manual inspection and none from the engine's list, while the engine's most-firing signals were SEO conventions and source proxies. That's not a bug list. That means the nine signals were specified from the outside - plausible conversion factors, never validated against a page a person actually inspected - and the two dimensions that produced real findings (form friction, consent gating) aren't in the spec at all. It's the same failure as the corpus and the prospect list, at the level of the product definition: internally generated, never checked against an outside party, and wrong in the flattering direction.
+Which raises the honest question about what you're offering. The four emails promise "an evidence-scored second opinion" against "9 published pass standards." What actually found the findings was you, with a browser. If someone says yes, the readout you send has to be the manual analysis, not the engine's output - and you should know that going in rather than discovering it when you hit send on the deliverable.
 Go on the sends, with one condition: confirm the 9Sail contact before it goes out. Joe Riviello vs Joe Giovannoli is the third instance of a compacted summary carrying a name the live source contradicts. Trust the live Discover result, verify against 9sail.com, and treat any name from a summary as unverified by default. Register the four, schedule Oneupweb Monday.
-One flag on 9Sail's finding specifically: the consent gate may be jurisdictional or session-dependent — a US visitor might see the form immediately. Check it from a normal session before claiming it universally, or phrase it as what you observed rather than what always happens.
-And while the batch runs, the higher-value work isn't more prospects. It's re-specifying the signals against pages you've inspected — you now have seven, with ground truth. That's the first externally-anchored dataset the engine has ever had.
+One flag on 9Sail's finding specifically: the consent gate may be jurisdictional or session-dependent - a US visitor might see the form immediately. Check it from a normal session before claiming it universally, or phrase it as what you observed rather than what always happens.
+And while the batch runs, the higher-value work isn't more prospects. It's re-specifying the signals against pages you've inspected - you now have seven, with ground truth. That's the first externally-anchored dataset the engine has ever had.

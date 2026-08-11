@@ -34,14 +34,14 @@ def classify_reply(subject, preview):
 | Classification | Action | Content |
 |---------------|--------|---------|
 | `purchase_intent` | Send Stripe checkout link | "Here's the checkout link: {STRIPE_97}. Or self-serve DIY kit: {STRIPE_7}" |
-| `info_request` | Send free audit tool link | "Here's the free audit tool — paste your URL: https://yoursite.com/audit.html" |
+| `info_request` | Send free audit tool link | "Here's the free audit tool - paste your URL: https://yoursite.com/audit.html" |
 | `other` | No auto-reply, flag as warm | Log to HOT_LEAD.json for human/CEO review |
 
 ## Critical Rules
-- **Never auto-post to public threads** — auto-reply is for private email replies only
+- **Never auto-post to public threads** - auto-reply is for private email replies only
 - **Log every auto-reply** to a state file to avoid duplicate responses
-- **Purchase intent = send link, not a call booking** — forbidden: calendar links, "reply yes", schedule a call
-- **Info request = send the tool, not a pitch** — let the tool do the selling
+- **Purchase intent = send link, not a call booking** - forbidden: calendar links, "reply yes", schedule a call
+- **Info request = send the tool, not a pitch** - let the tool do the selling
 
 ## Implementation Pattern
 The inbox monitor script should:

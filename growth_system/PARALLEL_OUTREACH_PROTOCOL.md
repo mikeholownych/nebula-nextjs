@@ -14,21 +14,21 @@ Lane C: Job boards + new launches    ┘
 
 ## Lane contracts
 
-### Lane A — Reactive pain signals
+### Lane A - Reactive pain signals
 
 - **Scope:** Google-indexed Reddit/IndieHackers/HN/X posts.
 - **Authoritative code:** `ramp_pipeline_fill.py`, `trigger_lead_engine.py`.
 - **Done:** Returns new candidate records with source URL, trigger evidence, site hint, and source attribution.
 - **Failure:** Returns an explicit zero-candidate/source-health report; zero is not silently treated as healthy.
 
-### Lane B — Warm LinkedIn engagers
+### Lane B - Warm LinkedIn engagers
 
 - **Scope:** Existing Apify exports of Mike/Nebula post likers and commenters.
 - **Authoritative code:** `linkedin_ingest_monitor.py`, `growth_system/apify_raw/`.
 - **Done:** Returns normalized, self-engager-suppressed candidates with comment/post evidence.
 - **Failure:** Returns missing/stale-export evidence; does not fabricate profiles or emails.
 
-### Lane C — Operational buying triggers
+### Lane C - Operational buying triggers
 
 - **Scope:** CRO/landing-page job posts and newly launched products.
 - **Authoritative code:** `wave4_scraper.py` and related source ledgers.

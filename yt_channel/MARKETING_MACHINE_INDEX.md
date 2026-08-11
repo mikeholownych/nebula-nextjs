@@ -1,18 +1,18 @@
-# Nebula Marketing Machine — System Documentation Index
+# Nebula Marketing Machine - System Documentation Index
 
-**Version**: 1.0.0  
-**Last Updated**: Aug 9, 2026  
+**Version**: 1.0.0
+**Last Updated**: Aug 9, 2026
 **Status**: Phase 1 ✅ | Phase 2 ✅ | Phase 3 📋 (documented, awaiting budget approval)
 
 ---
 
 ## What This Is
 
-Nebula's marketing machine converts founders with broken landing pages into paying customers — automatically, repeatably, and measurably. It has three layers:
+Nebula's marketing machine converts founders with broken landing pages into paying customers - automatically, repeatably, and measurably. It has three layers:
 
-1. **Attribution** — Every visitor, audit, and purchase is tagged by source so you know what works
-2. **CRM** — Prospects, purchases, objections, and newsletter engagement in one PostgreSQL DB
-3. **Amplification** — Paid channels ready to activate when budget is approved
+1. **Attribution** - Every visitor, audit, and purchase is tagged by source so you know what works
+2. **CRM** - Prospects, purchases, objections, and newsletter engagement in one PostgreSQL DB
+3. **Amplification** - Paid channels ready to activate when budget is approved
 
 ---
 
@@ -25,7 +25,7 @@ TRAFFIC SOURCES
     ├── Newsletter (Weekly sends, Monday 8 AM ET)
     ├── Lead Magnet (/landing-page-mistakes)
     ├── YouTube (Video descriptions with UTM)
-    └── Paid (PHASE 3 — ready to activate)
+    └── Paid (PHASE 3 - ready to activate)
               │
               ▼
     UTM CAPTURE LAYER
@@ -52,17 +52,17 @@ TRAFFIC SOURCES
          │
          ▼
     POSTGRESQL CRM (nebula_audit DB)
-    • customers       — lifecycle + UTM + LTV
-    • audits          — all audits + UTM
-    • purchases       — Stripe purchases
-    • crm_feedback    — objections/wins/churn
-    • newsletter_subscribers — engagement tracking
-    • crm_weekly_reviews     — Sunday reviews
+    • customers       - lifecycle + UTM + LTV
+    • audits          - all audits + UTM
+    • purchases       - Stripe purchases
+    • crm_feedback    - objections/wins/churn
+    • newsletter_subscribers - engagement tracking
+    • crm_weekly_reviews     - Sunday reviews
          │
          ▼
     ATTRIBUTION DASHBOARDS
-    GET /api/crm/funnel    — daily conversions
-    GET /api/crm/sources   — revenue by UTM
+    GET /api/crm/funnel    - daily conversions
+    GET /api/crm/sources   - revenue by UTM
     GET /api/crm/objections/summary
 ```
 
@@ -80,7 +80,7 @@ TRAFFIC SOURCES
 | `platform_api/services/crm.py` | Core CRM service (asyncpg, PostgreSQL) | ✅ Live |
 | `platform_api/routes/newsletter.py` | Newsletter API endpoints | ✅ Live |
 | `platform_api/routes/crm.py` | CRM attribution/feedback API | ✅ Live |
-| `platform_api/main.py` | FastAPI app — routes mounted at /api | ✅ Live |
+| `platform_api/main.py` | FastAPI app - routes mounted at /api | ✅ Live |
 
 ### Database (nebula_audit PostgreSQL)
 
@@ -104,7 +104,7 @@ TRAFFIC SOURCES
 | `yt_channel/WEEKLY_REVIEW_RITUAL.md` | Sunday review process |
 | `yt_channel/WORD_OF_MOUTH_STRATEGY.md` | K-factor + shareability mechanics |
 | `yt_channel/MARKETING_MACHINE_AUDIT.md` | 7-pillar gap analysis |
-| `yt_channel/PHASE_3_PLAYBOOK.md` | Paid ads — master playbook |
+| `yt_channel/PHASE_3_PLAYBOOK.md` | Paid ads - master playbook |
 | `yt_channel/PHASE_3_FACEBOOK.md` | Facebook/Meta retargeting runbook |
 | `yt_channel/PHASE_3_GOOGLE.md` | Google Ads retargeting runbook |
 | `yt_channel/PHASE_3_LINKEDIN.md` | LinkedIn cold audience runbook |
@@ -246,7 +246,7 @@ Break-even: 31 purchases/month ($97 × 31 = $3,007)
 | Testimonials captured | 1 | 3+ |
 | Open objections resolved | 50% | 80% |
 
-If 4+ metrics hit target → Scale Phase 3 (activate paid ads, raise budget).  
+If 4+ metrics hit target → Scale Phase 3 (activate paid ads, raise budget).
 If <3 metrics → Diagnose bottleneck, iterate before scaling.
 
 ---

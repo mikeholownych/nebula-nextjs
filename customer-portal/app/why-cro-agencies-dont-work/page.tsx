@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Why CRO Agencies Don\'t Work — and What the Evidence Standard Looks Like',
+  headline: 'Why CRO Agencies Don\'t Work - and What the Evidence Standard Looks Like',
   description:
     'The optimization industry sells retainers before diagnosis, generic recommendations over specific evidence, and multi-month timelines for problems fixable in a week.',
   author: { '@type': 'Organization', name: 'Nebula Components' },
@@ -41,23 +41,23 @@ const breadcrumbSchema = {
 const faqItems = [
   {
     q: 'Do CRO agencies actually improve conversion rates?',
-    a: 'Some do, over long engagements with sufficient traffic. But the industry model — retainer before diagnosis, generic recommendations, 90-day timelines — means most founders pay for months before any measurable change is implemented. For pages receiving under 5,000 visits per month, the statistical power for A/B testing doesn\'t exist anyway. The right first step is a diagnostic audit, not an engagement.',
+    a: 'Some do, over long engagements with sufficient traffic. But the industry model - retainer before diagnosis, generic recommendations, 90-day timelines - means most founders pay for months before any measurable change is implemented. For pages receiving under 5,000 visits per month, the statistical power for A/B testing doesn\'t exist anyway. The right first step is a diagnostic audit, not an engagement.',
   },
   {
     q: 'What\'s the difference between a CRO audit and a CRO retainer?',
-    a: 'An audit diagnoses what is observable and measurable on your page right now — specific, verifiable defects with evidence attached. A retainer is an ongoing engagement that usually bundles diagnosis, strategy, creative, testing, and reporting into a monthly fee. The audit should come first, cost less, and determine whether the retainer is even necessary.',
+    a: 'An audit diagnoses what is observable and measurable on your page right now - specific, verifiable defects with evidence attached. A retainer is an ongoing engagement that usually bundles diagnosis, strategy, creative, testing, and reporting into a monthly fee. The audit should come first, cost less, and determine whether the retainer is even necessary.',
   },
   {
     q: 'What should I do before hiring a CRO agency?',
-    a: 'Run an evidence-grade diagnostic audit of your landing page. If the page fails observable checks — message mismatch, CTA not visible on mobile, no social proof above the fold — fix those first. They are structural defects, not optimization opportunities. Fix structural issues yourself, then hire for testing and creative if conversion still underperforms.',
+    a: 'Run an evidence-grade diagnostic audit of your landing page. If the page fails observable checks - message mismatch, CTA not visible on mobile, no social proof above the fold - fix those first. They are structural defects, not optimization opportunities. Fix structural issues yourself, then hire for testing and creative if conversion still underperforms.',
   },
   {
     q: 'Why doesn\'t A/B testing work for most landing pages?',
-    a: 'A/B testing requires statistical significance — typically 1,000+ conversions per variant. Most landing pages for founders running paid ads don\'t have that traffic. Running a split test on a page with 200 monthly visitors will take 18 months to reach significance, and the result will still be uncertain. Fix the structural defects first. Then test when volume exists.',
+    a: 'A/B testing requires statistical significance - typically 1,000+ conversions per variant. Most landing pages for founders running paid ads don\'t have that traffic. Running a split test on a page with 200 monthly visitors will take 18 months to reach significance, and the result will still be uncertain. Fix the structural defects first. Then test when volume exists.',
   },
   {
     q: 'What is an evidence-grade landing page audit?',
-    a: 'An audit where every finding is traceable to a specific, observable condition on the page — an H1 that doesn\'t match the ad, a CTA that is below the fold on 375px, a meta description that is 197 characters. Not an opinion. Not a best practice recommendation. A finding you can verify yourself by looking at the source.',
+    a: 'An audit where every finding is traceable to a specific, observable condition on the page - an H1 that doesn\'t match the ad, a CTA that is below the fold on 375px, a meta description that is 197 characters. Not an opinion. Not a best practice recommendation. A finding you can verify yourself by looking at the source.',
   },
 ]
 
@@ -76,7 +76,7 @@ const FAILURES = [
     n: '01',
     signal: 'Business model',
     heading: 'Retainer before diagnosis',
-    body: 'The standard agency model starts with a discovery call and a monthly engagement. The diagnosis comes after you\'ve signed. This means you pay for the agency to learn what\'s wrong — information that should be the starting point, not the output of month one.',
+    body: 'The standard agency model starts with a discovery call and a monthly engagement. The diagnosis comes after you\'ve signed. This means you pay for the agency to learn what\'s wrong - information that should be the starting point, not the output of month one.',
     fix: 'The audit comes first. It costs less than an hour of agency time, takes under two minutes, and tells you whether there is a structural problem before any money changes hands.',
   },
   {
@@ -91,7 +91,7 @@ const FAILURES = [
     signal: 'Statistical methodology',
     heading: 'A/B testing on pages with insufficient traffic',
     body: 'Running a split test on a landing page with 300 monthly visitors will take 18 months to reach statistical significance at 95% confidence. Most agencies run these tests anyway. The results are noise presented as insight. The founder pauses ad spend and changes nothing, or changes the wrong thing.',
-    fix: 'Fix structural defects before testing. Structural problems — wrong headline, buried CTA, no proof — are not optimization opportunities. They are defects. Fix them with evidence, not experiments.',
+    fix: 'Fix structural defects before testing. Structural problems - wrong headline, buried CTA, no proof - are not optimization opportunities. They are defects. Fix them with evidence, not experiments.',
   },
   {
     n: '04',
@@ -144,7 +144,7 @@ export default function WhyCROAgenciesDontWork() {
             The optimization industry&apos;s structural problem
           </p>
           <h1 className="text-4xl font-extrabold tracking-tight text-fg md:text-5xl">
-            Why CRO agencies don&apos;t work — and what the evidence standard looks like.
+            Why CRO agencies don&apos;t work - and what the evidence standard looks like.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-7 text-fg-muted">
             The industry model sells retainers before diagnosis, A/B tests on pages without enough
@@ -173,7 +173,7 @@ export default function WhyCROAgenciesDontWork() {
           <div className="mx-auto max-w-4xl">
             <p className="text-base leading-7 text-fg-muted max-w-3xl">
               <span className="font-semibold text-fg">The current completed-audit benchmark averages 6.3/10 and 4.6 recorded findings per page.</span>{' '}
-              Every one of those failures is observable, specific, and fixable — without a retainer, without a discovery call, and without running an A/B test that won&apos;t reach significance for six months.
+              Every one of those failures is observable, specific, and fixable - without a retainer, without a discovery call, and without running an A/B test that won&apos;t reach significance for six months.
               The audit takes under two minutes. The fix takes a day.
               The retainer is optional.
             </p>
@@ -229,7 +229,7 @@ export default function WhyCROAgenciesDontWork() {
               <p className="mt-4 text-base text-fg-muted leading-7">
                 When the finding is specific, the fix is specific. When the fix is specific, the
                 before/after is measurable. When the before/after is measurable, you know whether
-                the fix worked. That loop — audit, fix, re-audit — is the product.
+                the fix worked. That loop - audit, fix, re-audit - is the product.
               </p>
               <p className="mt-4 text-base text-fg-muted leading-7">
                 The retainer comes after the loop is proven, not before.
@@ -276,7 +276,7 @@ export default function WhyCROAgenciesDontWork() {
                 {
                   n: '02',
                   heading: 'Fix structural defects',
-                  body: 'Message match, CTA visibility, social proof placement. These are not optimisation opportunities — they are defects. Fix them with the evidence report.',
+                  body: 'Message match, CTA visibility, social proof placement. These are not optimisation opportunities - they are defects. Fix them with the evidence report.',
                 },
                 {
                   n: '03',

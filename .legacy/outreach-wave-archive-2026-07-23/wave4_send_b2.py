@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Wave 4 batch 2 — confirmed emails from IH thread extraction.
+Wave 4 batch 2 - confirmed emails from IH thread extraction.
 """
 import json, ssl, smtplib, datetime
 from email.mime.text import MIMEText
@@ -39,36 +39,36 @@ LEADS = [
         "name": "Flynn",
         "site": "snipprompts.com",
         "wave": 4,
-        "trigger": "PH: 2 upvotes, 0 sales — Product Hunt without distribution amplifies nothing",
-        "subject": "snipprompts.com — why PH gave you 0 sales (free audit)",
-        "lede": "Saw your IH post on the 2-upvote PH launch. The real issue isn't PH — it's that your landing page doesn't convert the organic SEO traffic you're already getting. 182 free pages generating traffic with no paid funnel bridge is leaking money.",
+        "trigger": "PH: 2 upvotes, 0 sales - Product Hunt without distribution amplifies nothing",
+        "subject": "snipprompts.com - why PH gave you 0 sales (free audit)",
+        "lede": "Saw your IH post on the 2-upvote PH launch. The real issue isn't PH - it's that your landing page doesn't convert the organic SEO traffic you're already getting. 182 free pages generating traffic with no paid funnel bridge is leaking money.",
     },
     {
         "email": "support@melororium.com",
         "name": "Kyrylo",
         "site": "melororium.com",
         "wave": 4,
-        "trigger": "Day 4: 0 email subscribers, 0 traffic, 0 sales — page not indexed yet",
-        "subject": "melororium.com — before the PH launch (free audit)",
-        "lede": "Caught your IH day-4 post. You have 6 days before the Product Hunt launch and a landing page that hasn't been indexed yet. That's the window. I can audit the page now and tell you the 3 things that will kill conversion on launch day — before they kill it.",
+        "trigger": "Day 4: 0 email subscribers, 0 traffic, 0 sales - page not indexed yet",
+        "subject": "melororium.com - before the PH launch (free audit)",
+        "lede": "Caught your IH day-4 post. You have 6 days before the Product Hunt launch and a landing page that hasn't been indexed yet. That's the window. I can audit the page now and tell you the 3 things that will kill conversion on launch day - before they kill it.",
     },
     {
-        "email": "postclaw.io@gmail.com",  # placeholder — need real
+        "email": "postclaw.io@gmail.com",  # placeholder - need real
         "name": "Adrien",
         "site": "postclaw.io",
         "wave": 4,
-        "trigger": "$100 Reddit ads, 0 conversions — 100 clicks, nobody stayed",
-        "subject": "postclaw.io — your ad bounce problem (free audit)",
-        "lede": "Read your IH post. 100 ad clicks with zero conversions means traffic hit the page and left. That's a page problem, not an ad problem. 35 organic customers proves the product works — the page just isn't closing paid traffic.",
+        "trigger": "$100 Reddit ads, 0 conversions - 100 clicks, nobody stayed",
+        "subject": "postclaw.io - your ad bounce problem (free audit)",
+        "lede": "Read your IH post. 100 ad clicks with zero conversions means traffic hit the page and left. That's a page problem, not an ad problem. 35 organic customers proves the product works - the page just isn't closing paid traffic.",
     },
     {
-        "email": "postdew@hey.com",  # placeholder — need real
+        "email": "postdew@hey.com",  # placeholder - need real
         "name": "Manish",
         "site": "postdew.com",
         "wave": 4,
         "trigger": "50 visitors, 0 paying customers, 10 cold DMs with 0 signups",
-        "subject": "postdew.com — 5 page fixes that'll change your launch (free audit)",
-        "lede": "Saw your IH post. You already got the 5 hero fixes from the community — dark headline contrast, two competing value props, the private beta badge. But the deeper issue is positioning: 'strips AI cadence' is a feature. Your page needs to open with the LinkedIn credibility fear, not the mechanism.",
+        "subject": "postdew.com - 5 page fixes that'll change your launch (free audit)",
+        "lede": "Saw your IH post. You already got the 5 hero fixes from the community - dark headline contrast, two competing value props, the private beta badge. But the deeper issue is positioning: 'strips AI cadence' is a feature. Your page needs to open with the LinkedIn credibility fear, not the mechanism.",
     },
 ]
 
@@ -82,14 +82,14 @@ I made this as a useful first pass, not a generic agency pitch: a self-serve aud
 No ask attached. If it helps, run it here and keep the output either way:
 https://nebulacomponents.shop/audit.html
 
-— Mike
+- Mike
 nebulacomponents.shop
 """
     html = f"""<p>Hi {lead['name']},</p>
 <p>{lead['lede']}</p>
 <p>I made this as a useful first pass, not a generic agency pitch: a self-serve audit path for <strong>{lead['site']}</strong> that points to the first visible conversion blockers.</p>
 <p>No ask attached. If it helps, run it here and keep the output either way:<br><a href="https://nebulacomponents.shop/audit.html">https://nebulacomponents.shop/audit.html</a></p>
-<p>— Mike<br><a href="https://nebulacomponents.shop">nebulacomponents.shop</a></p>"""
+<p>- Mike<br><a href="https://nebulacomponents.shop">nebulacomponents.shop</a></p>"""
     return txt, html
 
 if __name__ == "__main__":
@@ -100,7 +100,7 @@ if __name__ == "__main__":
         email = lead["email"]
         # Skip placeholder emails
         if "placeholder" in email or email.endswith("hey.com") or email.endswith("gmail.com") and "postclaw" in email:
-            print(f"SKIP {email} (placeholder — need real email)")
+            print(f"SKIP {email} (placeholder - need real email)")
             skipped += 1
             continue
         if email in contacted:

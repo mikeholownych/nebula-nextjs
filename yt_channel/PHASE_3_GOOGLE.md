@@ -1,10 +1,10 @@
-# Phase 3 — Google Ads Retargeting Runbook
+# Phase 3 - Google Ads Retargeting Runbook
 
-**Status**: 📋 Ready to launch — awaiting budget approval  
-**Budget**: $30/day  
-**Audiences**: Audit results page visitors (Display remarketing + Search RLSA)  
-**Goal**: $97 fix pack purchases  
-**Target CPA**: $35  
+**Status**: 📋 Ready to launch - awaiting budget approval
+**Budget**: $30/day
+**Audiences**: Audit results page visitors (Display remarketing + Search RLSA)
+**Goal**: $97 fix pack purchases
+**Target CPA**: $35
 
 ---
 
@@ -42,7 +42,7 @@ Attribution model: Data-driven (or Last click if no history yet)
 Google Ads → Tools → Audience Manager → Audience Lists → Website Visitors:
 
 ```
-List name: "Audit Results — Last 30 Days"
+List name: "Audit Results - Last 30 Days"
 Membership duration: 30 days
 URL rule: URL contains → /audit/  AND  URL contains → /results
 ```
@@ -50,7 +50,7 @@ URL rule: URL contains → /audit/  AND  URL contains → /results
 ### Remarketing List 2: All Site Visitors (Broad)
 
 ```
-List name: "All Site Visitors — Last 60 Days"
+List name: "All Site Visitors - Last 60 Days"
 Membership duration: 60 days
 URL rule: URL contains → nebulacomponents.com
 ```
@@ -58,7 +58,7 @@ URL rule: URL contains → nebulacomponents.com
 ### Exclusion List: Purchasers
 
 ```
-List name: "Fix Pack Purchasers — All Time"
+List name: "Fix Pack Purchasers - All Time"
 Membership duration: 540 days (max)
 URL rule: URL equals → nebulacomponents.com/checkout/success
 ```
@@ -72,7 +72,7 @@ URL rule: URL equals → nebulacomponents.com/checkout/success
 ### Campaign 1: Display Remarketing ($20/day)
 
 ```
-Campaign name: Nebula — Display Retarget — Fix Pack
+Campaign name: Nebula - Display Retarget - Fix Pack
 Campaign type: Display
 Goal: Sales
 Bidding: Target CPA → $35
@@ -80,7 +80,7 @@ Budget: $20/day
 
 Ad Group 1: Audit Results Viewers
   Audiences (Observation + Bid only):
-    + "Audit Results — Last 30 Days" (TARGET)
+    + "Audit Results - Last 30 Days" (TARGET)
     - "Fix Pack Purchasers" (EXCLUDE)
   Placements: Automatic (Responsive Display Ads)
 
@@ -88,7 +88,7 @@ Ad Group 1: Audit Results Viewers
     Headlines (up to 5):
       1. Your landing page is leaking money
       2. Audit done. Fix it for $97.
-      3. 847 audits analyzed — here's the fix
+      3. 847 audits analyzed - here's the fix
       4. Your top 3 fixes. 30 minutes.
       5. Stop the conversion bleed today
     Descriptions (up to 5):
@@ -102,14 +102,14 @@ Ad Group 1: Audit Results Viewers
 ### Campaign 2: Search RLSA ($10/day)
 
 ```
-Campaign name: Nebula — Search RLSA — Fix Pack
+Campaign name: Nebula - Search RLSA - Fix Pack
 Campaign type: Search
 Goal: Website traffic (no enough conversion data yet)
 Bidding: Manual CPC → $3.00 max
 Budget: $10/day
 
-Ad Group 1: Landing Page Problems — Remarketing
-  Audience: "Audit Results — Last 30 Days" (Targeting — not observation)
+Ad Group 1: Landing Page Problems - Remarketing
+  Audience: "Audit Results - Last 30 Days" (Targeting - not observation)
   Keywords (exact + phrase match):
     [landing page not converting]
     [landing page audit]
@@ -120,10 +120,10 @@ Ad Group 1: Landing Page Problems — Remarketing
 
   Responsive Search Ad:
     Headline 1: Your Landing Page Audit Is Ready
-    Headline 2: Fix Your 3 Biggest Leaks — $97
+    Headline 2: Fix Your 3 Biggest Leaks - $97
     Headline 3: 30-Minute Implementation Guide
     Headline 4: Specific Fixes. Not Generic Advice.
-    Headline 5: 847 Audits Analyzed — Yours Too
+    Headline 5: 847 Audits Analyzed - Yours Too
     Description 1: You've already seen your score. Your fix pack has the exact prompts to implement changes today. One-time $97.
     Description 2: Founders who implement their top fix average +$600/month recovered. Your issues. Your fixes. 30 min.
 
@@ -132,16 +132,16 @@ Ad Group 1: Landing Page Problems — Remarketing
 
 ---
 
-## 4. Ad Copy — Responsive Search Ad Variants
+## 4. Ad Copy - Responsive Search Ad Variants
 
 ### Variant 1: Problem-Aware (Default)
 
 ```
-Headline pool (use all — Google rotates):
+Headline pool (use all - Google rotates):
   Your Audit Results Are Ready
   Landing Page Losing You Money?
   Fix Your Top 3 Conversion Leaks
-  $97 Fix Pack — 30 Minutes
+  $97 Fix Pack - 30 Minutes
   Specific Fixes For Your Page
   Not Converting? Here's Why
   847 Audits. Here's What Works.
@@ -149,7 +149,7 @@ Headline pool (use all — Google rotates):
 Description pool:
   You saw your score. The fix pack has exact prompts to implement your top 3 changes today. One-time $97.
   Founders average +$600/mo recovered after implementing their specific fix pack. No dev needed.
-  Your findings are specific to your page. Not generic tips — the exact copy and code prompts.
+  Your findings are specific to your page. Not generic tips - the exact copy and code prompts.
 ```
 
 ---
@@ -172,11 +172,11 @@ Description pool:
 
 ## 6. Bidding Strategy
 
-**Weeks 1-2**: Manual CPC ($3 Search, $1.50 Display) — not enough conversion data for Smart Bidding
+**Weeks 1-2**: Manual CPC ($3 Search, $1.50 Display) - not enough conversion data for Smart Bidding
 **Week 3+** (after 10+ conversions): Switch to Target CPA → $35
 **Month 2+** (after 30+ conversions): Switch to Target ROAS → 250% ($2.50 revenue per $1 spent)
 
-**Rule**: Never switch to Smart Bidding before 10 conversions in the lookback window — Google needs the data.
+**Rule**: Never switch to Smart Bidding before 10 conversions in the lookback window - Google needs the data.
 
 ---
 
@@ -228,7 +228,7 @@ Add to: All Search campaigns → Negative Keywords tab
 | Search CTR below 2% after $30 spend | Rewrite headlines, test new variants |
 | Display CTR below 0.3% after $30 spend | Replace creative, test new images |
 | CPA above $70 after 5 conversions | Pause worst ad group, review audience |
-| Zero conversions after $100 spend | Full review — landing page or tracking issue |
+| Zero conversions after $100 spend | Full review - landing page or tracking issue |
 | Search CPC above $8 consistently | Reduce bids, focus on exact match only |
 
 ---
@@ -264,7 +264,7 @@ Add to: All Search campaigns → Negative Keywords tab
 
 - [ ] Google Tag verified firing on audit results page
 - [ ] Conversion action set up: `Fix Pack Purchase` ($97)
-- [ ] Remarketing list `Audit Results — 30 Days` has 100+ users (Display) or 100+ (Search)
+- [ ] Remarketing list `Audit Results - 30 Days` has 100+ users (Display) or 100+ (Search)
 - [ ] Exclusion list `Fix Pack Purchasers` created
 - [ ] Display campaign created, responsive ad uploaded
 - [ ] Search RLSA campaign created, all keywords added

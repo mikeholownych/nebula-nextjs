@@ -168,7 +168,7 @@ export default function LabClient() {
   // Save-to-workspace state. Start empty so SSR and the first client render
   // agree; the stored email is pulled in after mount (reading localStorage
   // during render caused an input value hydration mismatch for returning
-  // visitors — the quiet sibling of the /workspace React #418 bug).
+  // visitors - the quiet sibling of the /workspace React #418 bug).
   const [saveEmail, setSaveEmail] = useState<string>('')
   const [saveLabel, setSaveLabel] = useState('')
   const [saving, setSaving] = useState(false)
@@ -280,7 +280,7 @@ export default function LabClient() {
           <div className="grid gap-4">
             <div>
               <label htmlFor="ad-copy" className="mb-1.5 block text-sm font-semibold text-fg">
-                Ad copy you are running <span className="text-fg-muted font-normal">(optional — enables Message Match check)</span>
+                Ad copy you are running <span className="text-fg-muted font-normal">(optional - enables Message Match check)</span>
               </label>
               <textarea
                 id="ad-copy"
@@ -326,7 +326,7 @@ export default function LabClient() {
                 <p className="text-sm text-fg-muted">
                   <span className="font-semibold text-fg">{result.url}</span>
                   {result.score !== null && (
-                    <> — <span className="font-semibold text-fg">{result.score}/10</span> · Grade <span className="font-semibold text-fg">{result.grade}</span></>
+                    <> - <span className="font-semibold text-fg">{result.score}/10</span> · Grade <span className="font-semibold text-fg">{result.grade}</span></>
                   )}
                 </p>
                 <ScoreSummary components={result.components} />

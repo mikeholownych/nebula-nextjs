@@ -8,7 +8,7 @@ Nebula Components currently offers landing page audits and implementation servic
 **Trigger Event:** Log into ad account Monday morning. CTR fine, spend up, sales flat. Screenshot + post to Reddit.
 
 **Bleeding Neck Problems:**
-- "Spent $10k on Meta & Google Ads — barely any orders"
+- "Spent $10k on Meta & Google Ads - barely any orders"
 - "Google ads manager says he doesn't know what else to do"
 - "Is Meta Ads getting worse in 2026 or am I doing something wrong?"
 - "clicks but no sales, I have no idea what's broken"
@@ -16,7 +16,7 @@ Nebula Components currently offers landing page audits and implementation servic
 
 **Psychological Architecture:**
 - **Silent Objection:** "The last person I paid said it was a testing phase for 3 months. I ended up with nothing and a lighter bank account."
-- **Green Light Outcome:** Specific dollar number — "your page is currently losing ~$X/month based on your traffic and CTR." Once they see the number, $97 is trivial math.
+- **Green Light Outcome:** Specific dollar number - "your page is currently losing ~$X/month based on your traffic and CTR." Once they see the number, $97 is trivial math.
 - **Enemy:** Ad agency/freelancer who blames the algorithm and charges for a "testing phase"
 
 **Insider Vocabulary:**
@@ -32,14 +32,14 @@ Nebula Components currently offers landing page audits and implementation servic
 - Hotjar/FullStory: "shows me where people click but not what to fix"
 - Generic agencies: "built the page, ran the ads, blamed the niche" / "40-page PDF report, no prioritization"
 
-**Blue Ocean Gap:** Nobody delivers specific diagnosis + dollar leak amount + fast self-serve implementation — all three together.
+**Blue Ocean Gap:** Nobody delivers specific diagnosis + dollar leak amount + fast self-serve implementation - all three together.
 
 ## 2. CURRENT OFFER ANALYSIS (nebulacomponents.shop)
 
 **Core Offer:** Free Landing Page Audit → $97 Fix Pack → $147 Implementation
 
 **Current Messaging:**
-- "Free Landing Page Audit — Score Your Site in 60 Seconds"
+- "Free Landing Page Audit - Score Your Site in 60 Seconds"
 - "Paste your URL. Get a scored landing page audit in 60 seconds"
 - "Fix leaks that kill conversions"
 - "clarity, CTA friction, trust gap, offer specificity"
@@ -58,7 +58,7 @@ Nebula Components currently offers landing page audits and implementation servic
 ## 3. THE GAPS: Market Needs vs Current Offer
 
 ### Gap 1: Dollar Leak Specificity Missing
-**Market Needs:** Explicit dollar amount — "your page is losing ~$X/month"
+**Market Needs:** Explicit dollar amount - "your page is losing ~$X/month"
 **Current Offer:** Generic "conversion leaks" with subjective scoring
 **Impact:** Prospects can't do ROI math; trust stays low
 
@@ -119,22 +119,22 @@ Nebula Components currently offers landing page audits and implementation servic
 ### Dream Outcome (Maximize)
 **Current:** "Fix conversion leaks" (vague)
 **Market Needs:** "Stop losing $X/month on ads" (specific, monetary)
-**Gap:** 2/10 — outcome not quantified or tied to bleeding neck
+**Gap:** 2/10 - outcome not quantified or tied to bleeding neck
 
 ### Perceived Likelihood (Maximize)
 **Current:** 60-second audit, scoring, case studies (implied)
 **Market Needs:** Specific dollar calculation provides mathematical proof
-**Gap:** 3/10 — proof exists but not tailored to trigger event
+**Gap:** 3/10 - proof exists but not tailored to trigger event
 
 ### Time Delay (Minimize)
 **Current:** Implied fast (60 seconds for audit)
 **Market Needs:** Same-day/same-hour fixes for urgent problem
-**Gap:** 6/10 — good but could be tighter (2-hour guarantee vs 24h)
+**Gap:** 6/10 - good but could be tighter (2-hour guarantee vs 24h)
 
 ### Effort & Sacrifice (Minimize)
 **Current:** Self-serve audit, optional implementation
 **Market Needs:** Prioritized to-do list vs full implementation
-**Gap:** 5/10 — good options but could better address "I'll fix it myself"
+**Gap:** 5/10 - good options but could better address "I'll fix it myself"
 
 ## 7. RESTRUCTURED OFFER ARCHITECTURE
 
@@ -150,7 +150,7 @@ Nebula Components currently offers landing page audits and implementation servic
 3. Prioritized list of remaining issues with exact ROI for each
 4. Guarantee: If we don't calculate your leak and fix something in 2h, 100% refund
 
-**Risk Reversal:** 
+**Risk Reversal:**
 - Dollar-leak calculation proves value before purchase
 - 2-hour implementation lock
 - Full refund if not as described
@@ -227,7 +227,7 @@ Free Leak Calc → Skip to $147 Full
 
 **2. Audit Tool Enhancement:**
 - Add: "Estimated monthly loss: $[calculate]" to audit output
-- Add: "Biggest leak: [specific fix] — pluggable in 2 hours"
+- Add: "Biggest leak: [specific fix] - pluggable in 2 hours"
 - Add: "Agency-alternative" section comparing to 3-month testing phase
 
 **3. $97 Fix Pack Reframe:**

@@ -12,7 +12,7 @@ const WITH = [
   { label: 'See the exact leak', detail: 'Score + 3 specific findings. Your page. 2 minutes.' },
   { label: 'Know what to fix first', detail: 'Ranked by conversion impact, not gut feel.' },
   { label: 'Fix it for $97', detail: '48-hour implementation. Same ad spend. Page that closes.' },
-  { label: 'Stop guessing', detail: 'The anxiety of not knowing what\'s wrong — gone.' },
+  { label: 'Stop guessing', detail: 'The anxiety of not knowing what\'s wrong - gone.' },
   { label: 'Run better campaigns', detail: 'Traffic into a page that\'s built for cold visitors.' },
 ]
 
@@ -72,7 +72,7 @@ export default function WithWithout() {
             href="/audit?utm_source=with-without&utm_medium=homepage"
             className="inline-block rounded-xl bg-accent px-8 py-3.5 font-semibold text-bg hover:bg-accent-light transition-colors text-sm"
           >
-            Get My Free Score — 2 Minutes &rarr;
+            Get My Free Score - 2 Minutes &rarr;
           </Link>
           <p className="mt-2 text-xs text-fg-muted">No signup. No card. Just your page and its score.</p>
         </div>

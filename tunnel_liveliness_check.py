@@ -2,7 +2,7 @@
 """
 Tunnel Liveliness Check
 Checks that Cloudflare tunnel (nebulacomponents.shop) is responsive
-and in sync with local endpoints (localhost:8765 — main platform API, localhost:8767 — MCP server).
+and in sync with local endpoints (localhost:8765 - main platform API, localhost:8767 - MCP server).
 Logs to tunnel_liveliness.log and tunnel_metrics.json.
 """
 import os
@@ -17,17 +17,17 @@ METRICS_FILE = os.path.join(BASE_DIR, "tunnel_metrics.json")
 
 LOCAL_ENDPOINTS = [
     ("main",  "http://localhost:8765"),
-    # blog (port 8766) retired 2026-08-04 — WordPress stack stopped, subdomain redirects to .com
+    # blog (port 8766) retired 2026-08-04 - WordPress stack stopped, subdomain redirects to .com
 ]
 TUNNEL_ENDPOINTS = [
     ("main",  "https://nebulacomponents.com"),
     ("www",   "https://www.nebulacomponents.shop"),
-    # blog.nebulacomponents.shop now 301s to nebulacomponents.com — no separate check needed
+    # blog.nebulacomponents.shop now 301s to nebulacomponents.com - no separate check needed
 ]
 
 
 def http_check(url, timeout=10):
-    """Return (status_code, ok) — ok means 2xx or 3xx (no redirect following)."""
+    """Return (status_code, ok) - ok means 2xx or 3xx (no redirect following)."""
     try:
         import requests as _req
         r = _req.get(url, timeout=timeout, allow_redirects=False,

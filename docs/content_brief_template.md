@@ -1,6 +1,6 @@
 # Content Brief Template
 
-**Use:** Quick brief for each post before drafting  
+**Use:** Quick brief for each post before drafting
 **Time:** 5 minutes per brief
 
 ---
@@ -26,7 +26,7 @@
 > [What you'll prove or reveal]
 
 **Angle:**
-> [Your unique take — what's different from what others say]
+> [Your unique take - what's different from what others say]
 
 ---
 
@@ -41,7 +41,7 @@
 5. [Hook variant 5]
 
 **Selected hook:**
-> [Best hook — must pass checklist]
+> [Best hook - must pass checklist]
 
 **Hook checklist:**
 - [ ] Under 10 words
@@ -56,16 +56,16 @@
 
 **Hook:** [First line]
 
-**Setup (2-3 sentences):**  
-> [Why this matters — context]
+**Setup (2-3 sentences):**
+> [Why this matters - context]
 
-**Insight (3-5 sentences):**  
+**Insight (3-5 sentences):**
 > [What the audit data shows]
 
-**Proof (1-2 examples):**  
+**Proof (1-2 examples):**
 > [Specific example, teardown, or data point]
 
-**CTA (1 sentence):**  
+**CTA (1 sentence):**
 > [What they should do next]
 
 ---
@@ -113,7 +113,7 @@
 > Most founders write category descriptions. Their buyers want outcome-specific promises.
 
 **Angle:**
-> Headlines that describe features vs. headlines that promise outcomes — and why the second converts 3x better.
+> Headlines that describe features vs. headlines that promise outcomes - and why the second converts 3x better.
 
 ---
 
@@ -142,16 +142,16 @@
 
 **Hook:** Your headline is visible. Most founders don't know it's their biggest leak.
 
-**Setup:**  
+**Setup:**
 > Headlines are the first thing visitors see. But most founders write what their product is, not what it does for buyers.
 
-**Insight:**  
-> When I audit landing pages, I see the same pattern: "Project Management Platform", "Marketing Automation Tool", "AI Writing Assistant". These are categories. Buyers don't search for categories—they search for outcomes.
+**Insight:**
+> When I audit landing pages, I see the same pattern: "Project Management Platform", "Marketing Automation Tool", "AI Writing Assistant". These are categories. Buyers don't search for categories-they search for outcomes.
 
-**Proof:**  
+**Proof:**
 > Last week I audited a page with the headline "CRM for Small Teams". Their ads promised "Stop Losing Leads". When we tested the headline "Lead Tracking That Catches Every Prospect", demo requests went up 33%.
 
-**CTA:**  
+**CTA:**
 > Comment "AUDIT" and I'll send you a free landing page teardown.
 
 ---
@@ -162,7 +162,7 @@
 
 **Capture:** Reply with `/audit` link
 
-**Compliance:** OK — human reply, no auto-DM
+**Compliance:** OK - human reply, no auto-DM
 
 ---
 

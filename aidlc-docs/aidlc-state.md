@@ -1,7 +1,7 @@
 # AI-DLC State
 
 ## Workflow Status
-- Phase: VERIFICATION — COMPLETE
+- Phase: VERIFICATION - COMPLETE
 - Current Stage: `.com` canonical cutover deployed and Cloudflare edge chain eliminated
 - Initiative: Canonical-domain consolidation + One-Leak Repair Sprint offer cutover
 - Project Type: Brownfield
@@ -13,16 +13,16 @@
 - [x] Targeted Reverse Engineering
 - [x] Requirements Analysis
 - [x] Workflow Planning
-- [x] Application Design — Next.js 16.2.10 selected
-- [x] Units Generation — five independently releasable implementation plans
+- [x] Application Design - Next.js 16.2.10 selected
+- [x] Units Generation - five independently releasable implementation plans
 
 ### CONSTRUCTION
-- [ ] Functional Design — embedded per implementation task
-- [ ] NFR Requirements — embedded in design and plans
-- [ ] NFR Design — embedded in design and plans
-- [ ] Infrastructure Design — covered by deployment plan
-- [ ] Code Generation — execution pending
-- [ ] Build and Test — execution pending
+- [ ] Functional Design - embedded per implementation task
+- [ ] NFR Requirements - embedded in design and plans
+- [ ] NFR Design - embedded in design and plans
+- [ ] Infrastructure Design - covered by deployment plan
+- [ ] Code Generation - execution pending
+- [ ] Build and Test - execution pending
 
 ## Active Extensions
 | Extension | Enabled | Loaded |
@@ -51,7 +51,7 @@
 | Agency white-label plan | `docs/superpowers/plans/04-agency-whitelabel-management.md` | Implementation Planning |
 | Deployment and cutover plan | `docs/superpowers/plans/05-deployment-cutover-operations.md` | Implementation Planning |
 
-## 2026-07-26T10:02:56.117333+00:00 — Offer cutover commit
+## 2026-07-26T10:02:56.117333+00:00 - Offer cutover commit
 
 Shipped/merged: committed offer cutover to `feat/one-leak-repair-sprint-2026-07-26`.
 Branch: feat/one-leak-repair-sprint-2026-07-26
@@ -64,7 +64,7 @@ Proof boundaries: verification covers customer-portal test suite and git commit 
 Clean worktree state: dirty tracked files committed; worktree present at `.worktrees/one-leak-repair-sprint`.
 Next bounded phase: static/public HTML legacy sweep + rendered-browser verification.
 
-## 2026-08-03T06:24:05Z — `.com` canonical cutover
+## 2026-08-03T06:24:05Z - `.com` canonical cutover
 
 - Shipped live: `https://nebulacomponents.com` is now the canonical URL source across Next.js metadata, sitemap, robots, Open Graph, JSON-LD, internal/public links, discovery files, operational scripts, generated content, and deployment checks.
 - Redirect behavior: HTTPS `.shop`, HTTPS `www.shop`, HTTP/HTTPS `www.com`, and HTTP `.com` resolve permanently to HTTPS `.com`; path and query are preserved.
@@ -74,7 +74,7 @@ Next bounded phase: static/public HTML legacy sweep + rendered-browser verificat
 - Status: canonical rendering is live and verified; chain-elimination work remains open and must not be marked complete.
 
 
-## 2026-08-03T06:49:29Z — Cloudflare edge closure
+## 2026-08-03T06:49:29Z - Cloudflare edge closure
 
 - Credential received directly from Mike, stored as a mode-600 secret, and never copied into logs or project files.
 - Token verified active and scoped to exactly three zones: `nebulacomponents.com`, `nebulacomponents.shop`, and `mikeholownych.com`.
@@ -83,9 +83,9 @@ Next bounded phase: static/public HTML legacy sweep + rendered-browser verificat
 - Purged the `.shop` edge cache to remove the cached Always Use HTTPS response that masked the new rule.
 - Live verification: HTTP/HTTPS apex and `www` `.shop` variants each return one 301 directly to `https://nebulacomponents.com`, preserving `/audit?x=2`; no two-hop chain remains.
 
-## 2026-08-03T08:26:30Z — Full agency audit remediation
+## 2026-08-03T08:26:30Z - Full agency audit remediation
 
-- Phase: CONSTRUCTION — IN PROGRESS
+- Phase: CONSTRUCTION - IN PROGRESS
 - User decision: Option B repair sprint.
 - Active branch: fix/agency-audit-remediation-20260803.
 - Remediation units: offer contract, payment/fulfillment, billing auth, analytics/attribution, SEO/discovery, accessibility/performance, edge security, live verification.

@@ -32,7 +32,7 @@ export default function CheckoutImpulsePage() {
   return (
     <>
       <Head>
-        <title>Complete Your Purchase — Nebula Components</title>
+        <title>Complete Your Purchase - Nebula Components</title>
         <meta
           name="description"
           content="Secure checkout for Nebula Components. 256-bit encryption. 30-day refund."
@@ -202,7 +202,7 @@ export default function CheckoutImpulsePage() {
                 <div className="text-[18px] font-bold mb-1">Nebula Conversion Fix Pack</div>
                 <div className="text-[14px] text-[#9ca3af] leading-relaxed">
                   Audit results turned into implementation-ready fixes: headline, CTA, trust proof,
-                  offer, FAQ — rewritten and prioritized
+                  offer, FAQ - rewritten and prioritized
                 </div>
               </div>
 
@@ -230,7 +230,7 @@ export default function CheckoutImpulsePage() {
                   "It's like having an SEO team working in house. The results genuinely blew me
                   away."
                 </p>
-                <div className="text-[13px] text-[#9ca3af]">— Simon Hood, Founder, SooperBooks</div>
+                <div className="text-[13px] text-[#9ca3af]">- Simon Hood, Founder, SooperBooks</div>
               </div>
 
               {/* Guarantee */}

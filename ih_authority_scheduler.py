@@ -3,8 +3,8 @@
 IH Authority Post Scheduler
 ────────────────────────────
 Two jobs:
-  1. First run  — queue the pre-written ih_authority_post.md for posting
-  2. Every 7 d  — generate a fresh post from customer-ledger.jsonl audit data
+  1. First run  - queue the pre-written ih_authority_post.md for posting
+  2. Every 7 d  - generate a fresh post from customer-ledger.jsonl audit data
                   and queue it for the ih_bot.py publish_post() runner
 
 DM job:
@@ -12,7 +12,7 @@ DM job:
   signal_score >= 7, generate a personalised DM and write to dm_queue.jsonl.
 
   NOTE: dm_queue.jsonl is a staging file only. No active sender exists in
-  ih_bot.py — DMs require manual review and dispatch via ih_bot post_reply()
+  ih_bot.py - DMs require manual review and dispatch via ih_bot post_reply()
   or an equivalent future sender. DO NOT add an automated sender without
   governance sign-off.
 
@@ -45,7 +45,7 @@ OUTREACH_DISABLED = os.path.join(BASE_DIR, "OUTREACH_DISABLED")
 POST_INTERVAL_DAYS = 7
 IH_GROUP           = "landing-page-feedback"
 
-# Maximum DMs staged per scheduler run — prevents accidental bulk queuing
+# Maximum DMs staged per scheduler run - prevents accidental bulk queuing
 DM_DAILY_CAP = 10
 
 # Minimum signal score for DM eligibility (inclusive)
@@ -189,7 +189,7 @@ def generate_weekly_post(leads: list[dict]) -> dict:
     examples = sorted_leads[:3] if len(sorted_leads) >= 3 else sorted_leads
     n_audited = len(leads)
 
-    title = f"We audited {n_audited} IH landing pages this week — here's what we found"
+    title = f"We audited {n_audited} IH landing pages this week - here's what we found"
 
     # --- analyse patterns across all leads ---
     avg_score = sum(l.get("score", 0) for l in leads) / len(leads)
@@ -197,7 +197,7 @@ def generate_weekly_post(leads: list[dict]) -> dict:
     pattern_line = (
         f"We ran {n_audited} free landing page audits this week. "
         f"Average score: {avg_score:.1f}/10. "
-        f"{len(low_scorers)} out of {n_audited} scored below 6 — the most common culprit: a missing or buried CTA."
+        f"{len(low_scorers)} out of {n_audited} scored below 6 - the most common culprit: a missing or buried CTA."
     )
 
     # --- build example bullets ---
@@ -208,7 +208,7 @@ def generate_weekly_post(leads: list[dict]) -> dict:
         grade = _grade_label(lead.get("grade", "?"))
         # Heuristic issue description based on score range
         if score < 5:
-            issue = "had zero detectable CTAs — visitors arrive with nowhere to go"
+            issue = "had zero detectable CTAs - visitors arrive with nowhere to go"
         elif score < 6.5:
             issue = "had a strong headline but no clear next step for the visitor"
         elif score < 7.5:
@@ -217,7 +217,7 @@ def generate_weekly_post(leads: list[dict]) -> dict:
             issue = "was close but diluted its primary CTA with duplicate links"
 
         example_blocks.append(
-            f"**{anon.capitalize()} — {score}/10 ({grade})**\n"
+            f"**{anon.capitalize()} - {score}/10 ({grade})**\n"
             f"Issue: {issue.capitalize()}."
         )
 
@@ -237,7 +237,7 @@ Here are three specific examples:
 
 Founders build for people who already understand the product. Cold visitors don't. They have 7 seconds and one question: *what is this and why should I act now?*
 
-Most pages answer the first half brilliantly — and leave the second half blank.
+Most pages answer the first half brilliantly - and leave the second half blank.
 
 No clear CTA = no conversion. Not a low rate. Zero.
 
@@ -245,7 +245,7 @@ No clear CTA = no conversion. Not a low rate. Zero.
 
 **Want us to run yours?**
 
-Drop your URL in the comments. We'll scrape it, score it across 5 dimensions (headline clarity, CTA, social proof, load speed, mobile), and post the findings publicly — or DM you if you prefer.
+Drop your URL in the comments. We'll scrape it, score it across 5 dimensions (headline clarity, CTA, social proof, load speed, mobile), and post the findings publicly - or DM you if you prefer.
 
 No form. No email required. Just a URL."""
 
@@ -357,7 +357,7 @@ def generate_dm(signal: dict) -> dict:
     issue   = _guess_main_issue(signal)
 
     message = (
-        f"Hey {name} — saw your post about {trigger}. "
+        f"Hey {name} - saw your post about {trigger}. "
         f"Looked at {domain}, your {issue}. "
         f"Happy to send over the full audit if useful."
     )
@@ -375,18 +375,18 @@ def process_dm_queue(dry_run: bool = False) -> list[dict]:
     """Process signal_queue and write qualifying DMs to dm_queue.jsonl.
 
     Compliance gates (fail-closed):
-    1. OUTREACH_DISABLED kill switch — refuses to queue any DMs when present.
-    2. Score gate — only signals with signal_score >= DM_MIN_SCORE (7) qualify.
-    3. Already-contacted gate — skips signals where contacted=True.
-    4. Dedup gate — skips signals already in dm_queue.jsonl.
-    5. Daily cap — stages at most DM_DAILY_CAP DMs per run.
+    1. OUTREACH_DISABLED kill switch - refuses to queue any DMs when present.
+    2. Score gate - only signals with signal_score >= DM_MIN_SCORE (7) qualify.
+    3. Already-contacted gate - skips signals where contacted=True.
+    4. Dedup gate - skips signals already in dm_queue.jsonl.
+    5. Daily cap - stages at most DM_DAILY_CAP DMs per run.
 
     dm_queue.jsonl is a STAGING file. No automated sender exists. DMs must
     be manually reviewed and dispatched.
     """
     # ── Kill switch ───────────────────────────────────────────────────────────
     if os.path.exists(OUTREACH_DISABLED):
-        print(f"[DM] OUTREACH_DISABLED marker present — skipping DM queue processing.")
+        print(f"[DM] OUTREACH_DISABLED marker present - skipping DM queue processing.")
         return []
 
     signals    = load_signal_queue()
@@ -399,7 +399,7 @@ def process_dm_queue(dry_run: bool = False) -> list[dict]:
 
     for sig in signals:
         if len(new_dms) >= DM_DAILY_CAP:
-            print(f"[DM] Daily cap ({DM_DAILY_CAP}) reached — deferring remaining signals.")
+            print(f"[DM] Daily cap ({DM_DAILY_CAP}) reached - deferring remaining signals.")
             break
 
         score     = sig.get("signal_score", 0)
@@ -435,7 +435,7 @@ def process_dm_queue(dry_run: bool = False) -> list[dict]:
                 for dm in new_dms:
                     f.write(json.dumps(dm) + "\n")
             print(f"[DM] Wrote {len(new_dms)} DMs → {DM_QUEUE_FILE}")
-            print(f"[DM] ⚠️  Manual review required before sending — no automated sender active.")
+            print(f"[DM] ⚠️  Manual review required before sending - no automated sender active.")
     else:
         print("[DM] Nothing to write.")
 
@@ -466,7 +466,7 @@ def should_post(state: dict) -> tuple[bool, str]:
 
 
 def run_scheduler(dry_run: bool = False, force: bool = False):
-    """Main entry point — run the full scheduler cycle."""
+    """Main entry point - run the full scheduler cycle."""
     print("=" * 60)
     print("IH Authority Post Scheduler")
     print("=" * 60)
@@ -491,22 +491,22 @@ def run_scheduler(dry_run: bool = False, force: bool = False):
         is_first_run = (last is None)
 
         if is_first_run:
-            # First run — queue the pre-written post
+            # First run - queue the pre-written post
             if not os.path.exists(AUTHORITY_POST_MD):
-                print(f"[ERROR] {AUTHORITY_POST_MD} not found — skipping authority post.")
+                print(f"[ERROR] {AUTHORITY_POST_MD} not found - skipping authority post.")
             else:
-                print(f"\n[POST] First run — reading {AUTHORITY_POST_MD}")
+                print(f"\n[POST] First run - reading {AUTHORITY_POST_MD}")
                 new_post = read_authority_post_md()
                 print(f"[POST] Title  : {new_post['title']}")
                 print(f"[POST] Group  : {new_post['group']}")
                 print(f"[POST] Source : {new_post['source']}")
                 print(f"[POST] Body preview:\n{new_post['body'][:400]}...\n")
         else:
-            # Subsequent runs — generate from audit data
+            # Subsequent runs - generate from audit data
             leads = load_audit_leads()
             print(f"\n[AUDIT] Loaded {len(leads)} unique domain leads from {AUDIT_LEADS_FILE}")
             if not leads:
-                print("[WARN] No audit leads found — cannot generate weekly post.")
+                print("[WARN] No audit leads found - cannot generate weekly post.")
             else:
                 new_post = generate_weekly_post(leads)
                 print(f"\n[POST] Generated weekly post")
@@ -524,14 +524,14 @@ def run_scheduler(dry_run: bool = False, force: bool = False):
             state["queued_posts"].append(new_post)
             state["last_posted_at"] = datetime.now(timezone.utc).isoformat()
             save_state(state)
-            print(f"[STATE] Queued post — total queued: {len(state['queued_posts'])}")
+            print(f"[STATE] Queued post - total queued: {len(state['queued_posts'])}")
 
     # ── flush queued posts via publish_post() ─────────────────────────────────
     # ih_bot.py exposes publish_post(title, body, group) and handles the actual
     # IH HTTP calls + marks published entries as consumed.
     queued = state.get("queued_posts", [])
     if queued and not dry_run:
-        print(f"\n[PUBLISH] {len(queued)} post(s) ready — handing off to ih_bot.publish_post()")
+        print(f"\n[PUBLISH] {len(queued)} post(s) ready - handing off to ih_bot.publish_post()")
         try:
             sys.path.insert(0, BASE_DIR)
             from ih_bot import publish_post  # type: ignore
@@ -552,7 +552,7 @@ def run_scheduler(dry_run: bool = False, force: bool = False):
             state["queued_posts"] = [p for p in queued if p not in published]
             save_state(state)
         except ImportError:
-            print("  [WARN] ih_bot.py not found — posts remain in queue for next run.")
+            print("  [WARN] ih_bot.py not found - posts remain in queue for next run.")
     elif queued and dry_run:
         print(f"\n[DRY-RUN] {len(queued)} post(s) already in queue would be handed to publish_post()")
         for i, post in enumerate(queued, 1):
@@ -573,7 +573,7 @@ def run_scheduler(dry_run: bool = False, force: bool = False):
     print(f"  State file           : {STATE_FILE}")
     print(f"  DM queue file        : {DM_QUEUE_FILE}")
     if dry_run:
-        print("\n  ⚠️  DRY-RUN mode — no files were written.")
+        print("\n  ⚠️  DRY-RUN mode - no files were written.")
     print("=" * 60)
 
     return {
@@ -607,7 +607,7 @@ Examples:
 
     if args.dm_only:
         print("=" * 60)
-        print("IH Authority Scheduler — DM-only mode")
+        print("IH Authority Scheduler - DM-only mode")
         print("=" * 60)
         process_dm_queue(dry_run=args.dry_run)
     else:

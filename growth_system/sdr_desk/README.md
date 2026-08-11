@@ -1,4 +1,4 @@
-# Nebula SDR Desk — 42 skills
+# Nebula SDR Desk - 42 skills
 
 Imported from the user-provided SDR Desk document and routed into Nebula profiles.
 

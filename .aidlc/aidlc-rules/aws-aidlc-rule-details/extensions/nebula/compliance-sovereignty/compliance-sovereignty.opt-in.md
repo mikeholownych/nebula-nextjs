@@ -3,7 +3,7 @@
 ## MANDATORY: Compliance Rules
 
 ### Model Selection
-- Nebula supports Claude, OpenAI, Gemini, Mistral — client chooses per residency rules
+- Nebula supports Claude, OpenAI, Gemini, Mistral - client chooses per residency rules
 - Default: Claude Sonnet 4 for deep analysis, GPT-4o-mini for bulk/classification
 - Immutable audit logs for every inference call (model, timestamp, input hash, output hash)
 
@@ -20,6 +20,6 @@
 - DORA: full audit rights + vendor continuity proof
 
 ### Positioning Rules
-- Never claim "SOC 2 certified" — say "SOC 2 practices"
-- Never claim certifications that don't exist — say "HIPAA-ready", "GDPR-ready", not "compliant"
+- Never claim "SOC 2 certified" - say "SOC 2 practices"
+- Never claim certifications that don't exist - say "HIPAA-ready", "GDPR-ready", not "compliant"
 - Sovereignty > security: regulated clients ask "where's my data" before "are you secure"

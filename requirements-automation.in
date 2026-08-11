@@ -1,14 +1,14 @@
 # Dependencies for the standalone root-level automation scripts (lead
 # pipeline, AgentMail outreach, Stripe links, signal scrapers, content/YT
-# tooling) — everything outside platform_api/ and the test/dev tooling
+# tooling) - everything outside platform_api/ and the test/dev tooling
 # already covered by requirements-platform-api.in and requirements-dev.in.
 #
 # Derived by scanning root-level *.py for third-party imports not already
-# declared elsewhere. Not yet compiled to a pinned lockfile — pip-tools
+# declared elsewhere. Not yet compiled to a pinned lockfile - pip-tools
 # isn't installed in venv/; run `pip-compile requirements-automation.in`
 # once it is, or install directly with `pip install -r requirements-automation.in`.
 #
-# Excluded on purpose: `agentmail` (check_agentmail_inbox.py is a dead stub —
+# Excluded on purpose: `agentmail` (check_agentmail_inbox.py is a dead stub -
 # the live AgentMail integration is agentmail_client.py, which talks to the
 # REST API directly and needs no SDK), and `hermes` (list_audit_emails.py is
 # a non-functional one-line placeholder).

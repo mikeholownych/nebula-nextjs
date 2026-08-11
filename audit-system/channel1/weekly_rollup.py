@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-channel1/weekly_rollup.py — Friday decision dashboard. Reads live files and
+channel1/weekly_rollup.py - Friday decision dashboard. Reads live files and
 prints the Channel 1 metrics in EXECUTION ORDER (FRIDAY_CHECKLIST.md):
   0. Freshness → 1. Revenue → 2. Audit rate → 3. Reply rate → 4. Sourcing volume
 
@@ -44,9 +44,9 @@ LEDGER = _env_path("CH1_LEDGER", Path("/home/mike/nebula/ledgers/customer-ledger
 KILL_REASONS = {
     "bad_list": "wrong segment or stale trigger (research, not copy)",
     "weak_proof": "not enough proof in touch 1 (add audit artifact)",
-    "bad_framing": "S3 wrong — they don't feel the pain you name",
+    "bad_framing": "S3 wrong - they don't feel the pain you name",
     "too_much_friction": "ask is a call; drop to $97 link / free audit",
-    "stale_sample": "<5 sends, no statistical basis — don't conclude",
+    "stale_sample": "<5 sends, no statistical basis - don't conclude",
     "too_few_sends": "same as stale_sample; keep the angle, add volume",
 }
 
@@ -118,7 +118,7 @@ def record_kill(angle: str, reason: str, note: str = "") -> None:
     }
     with open(KILL_LOG, "a") as f:
         f.write(json.dumps(entry) + "\n")
-    print(f"🗡️  Killed '{angle}' — reason: {reason} ({KILL_REASONS.get(reason, '?')})")
+    print(f"🗡️  Killed '{angle}' - reason: {reason} ({KILL_REASONS.get(reason, '?')})")
     if note:
         print(f"   Note: {note}")
 
@@ -145,15 +145,15 @@ def main() -> int:
     kills = load_jsonl(KILL_LOG)
 
     print("═" * 62)
-    print("CHANNEL 1 — WEEKLY DECISION DASHBOARD")
+    print("CHANNEL 1 - WEEKLY DECISION DASHBOARD")
     print(f"Generated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
     print("═" * 62)
 
-    # --- 0. FRESHNESS (first — stale data invalidates all downstream judgment) ---
+    # --- 0. FRESHNESS (first - stale data invalidates all downstream judgment) ---
     stats_updated = (stats.get("updated") or stats.get("data_updated") or "unknown")[:10]
     stale = stats_updated != "unknown" and stats_updated < datetime.now(timezone.utc).strftime("%Y-%m-%d")
     print("\n0. FRESHNESS")
-    print(f"   stats.json updated:    {stats_updated}  {'⚠️ STALE — numbers are historical, not this week' if stale else 'ok'}")
+    print(f"   stats.json updated:    {stats_updated}  {'⚠️ STALE - numbers are historical, not this week' if stale else 'ok'}")
     print(f"   Kill ledger entries:   {len(kills)}")
     if kills:
         reasons = Counter(k.get("reason", "?") for k in kills)
@@ -163,7 +163,7 @@ def main() -> int:
         print(f"   → Pattern: {top} → {KILL_REASONS.get(top, '?')}")
 
     if stale and not args.force:
-        print("\n⛔ HARD STOP — stats.json is STALE. Nothing below is trustworthy.")
+        print("\n⛔ HARD STOP - stats.json is STALE. Nothing below is trustworthy.")
         print("   Per FRIDAY_CHECKLIST step 0: refresh the data before acting on anything.")
         print("   (Use --force to preview the board while you fix it.)")
         print("─" * 62)
@@ -213,7 +213,7 @@ def main() -> int:
         label = {"S1": "Trigger", "S2": "Who", "S3": "Why them", "S4": "Ask"}.get(top, top)
         print(f"   → Fix target this week: stage {top} ({label})")
     else:
-        print("   No diagnosed replies yet — reply_diagnostics.jsonl empty.")
+        print("   No diagnosed replies yet - reply_diagnostics.jsonl empty.")
     if flag(reply_rate * 100, "reply_rate_pct") == "RED":
         print("   → RED: fix S1/S3, rewrite, test 5 fresh leads.")
 
@@ -252,7 +252,7 @@ def main() -> int:
         for d in decisions:
             print(f"   → {d}")
     else:
-        print("DECISIONS: no threshold crossed — keep current batch, review next Friday.")
+        print("DECISIONS: no threshold crossed - keep current batch, review next Friday.")
     print("─" * 62)
     return 0
 

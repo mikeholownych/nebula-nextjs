@@ -1,4 +1,4 @@
-# Revenue Funnel Reconciliation — Payment Path Verification
+# Revenue Funnel Reconciliation - Payment Path Verification
 
 **Date:** 2026-08-03
 **Author:** ops-finance agent
@@ -17,7 +17,7 @@ structurally sound.
 **One blocking unknown:** It cannot be confirmed that the `STRIPE_WEBHOOK_SECRET`
 injected via the systemd drop-in matches the webhook endpoint registered in the
 Stripe dashboard. If they differ, all real-money events are silently dropped
-with a 400 signature error — and we would not know.
+with a 400 signature error - and we would not know.
 
 ---
 
@@ -35,7 +35,7 @@ with a 400 signature error — and we would not know.
 | Catch-all | `http://localhost:3000` |
 
 **Finding:** `nebulacomponents.shop/api/webhooks/stripe` routes to Next.js on
-port 3000. There is no special webhook path in the tunnel config — all traffic
+port 3000. There is no special webhook path in the tunnel config - all traffic
 hits Next.js, which owns the `/api/webhooks/stripe` route internally.
 
 ### 1.2 Production Service Status
@@ -43,7 +43,7 @@ hits Next.js, which owns the `/api/webhooks/stripe` route internally.
 **Source:** `systemctl status nebula-nextjs.service`
 
 - `nebula-nextjs.service`: **active (running)** since 2026-08-02 18:08 UTC
-- `nebula-site.service`: **inactive (dead)** — correctly disabled (incident INC-0004 was resolved)
+- `nebula-site.service`: **inactive (dead)** - correctly disabled (incident INC-0004 was resolved)
 - Process PID 1790852 confirmed on port 3000 via `ss -tlnp`
 
 **Finding:** The canonical production service is running. The obsolete service
@@ -54,7 +54,7 @@ that caused INC-0004 is stopped and disabled.
 **Source:** `/home/mike/nebula/customer-portal/app/api/webhooks/stripe/route.ts`
 
 The webhook handler:
-1. Reads `Stripe-Signature` header — rejects with 400 if missing
+1. Reads `Stripe-Signature` header - rejects with 400 if missing
 2. Calls `getStripeClient().webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET!)` for HMAC verification
 3. On `checkout.session.completed`:
    - Checks `isCanonicalFixPackReceipt()` (livemode flag, payment_status, currency, amount)
@@ -66,7 +66,7 @@ The webhook handler:
 4. Returns `{received: true}` HTTP 200
 
 **Finding:** Code path is complete. The test/live separation uses Stripe's own
-`event.livemode` flag — **not** string-matching on email or payment_id. This is
+`event.livemode` flag - **not** string-matching on email or payment_id. This is
 the correct approach. Test events from Stripe CLI or test-mode checkout will
 have `livemode: false` and trigger a non-canonical receipt path (goes to
 `review` status, not auto-delivered).
@@ -125,7 +125,7 @@ No new entries since then.
 
 ---
 
-## Section 3: Database Schema — Purchases Table
+## Section 3: Database Schema - Purchases Table
 
 **Source:** `/home/mike/nebula/customer-portal/db/schema_purchases.sql`
 
@@ -151,12 +151,12 @@ handler for the non-canonical case.
 
 **Gap:** Direct database query was blocked (password required, no socket auth
 from this agent). Cannot confirm the `purchases` table is **actually
-present** in the running PostgreSQL instance on port 5433 — schema file
+present** in the running PostgreSQL instance on port 5433 - schema file
 exists but migration status is unverified.
 
 ---
 
-## Section 4: Stripe Environment — Live Keys Confirmed
+## Section 4: Stripe Environment - Live Keys Confirmed
 
 **Source:** `/etc/systemd/system/nebula-nextjs.service.d/stripe.conf`
 
@@ -173,7 +173,7 @@ Active payment links all use `buy.stripe.com` (Stripe-hosted, live):
 - `NEBULA_LINK`: `https://buy.stripe.com/bJefZhd6s0wkgytew243S07`
 
 **Finding:** All secrets are live-mode. The `buy.stripe.com` links bypass the
-Next.js checkout session flow — they go directly to Stripe's hosted checkout.
+Next.js checkout session flow - they go directly to Stripe's hosted checkout.
 This means the webhook will fire to whatever URL is registered in the **Stripe
 dashboard**, not necessarily `nebulacomponents.shop/api/webhooks/stripe`.
 
@@ -196,7 +196,7 @@ But we cannot verify:
 **If they don't match:** Every real payment would arrive, Stripe would POST to
 the registered URL, `constructEvent()` would throw
 `SignatureVerificationError`, the handler returns HTTP 400, Stripe retries up to
-72 hours then gives up — **no purchase row is ever written, no delivery
+72 hours then gives up - **no purchase row is ever written, no delivery
 occurs, no alert fires**.
 
 The historical STRIPE_AUDIT.md (dated 2026-07-13) documents broken payment
@@ -227,7 +227,7 @@ currently unverifiable without Stripe dashboard access.
 |------|----------|----------------|
 | Webhook secret mismatch (Stripe dashboard ≠ whsec_ in systemd) | **HIGH** | Stripe dashboard → Developers → Webhooks → check endpoint URL + secret |
 | purchases table may not exist in running DB (migration not confirmed) | HIGH | `psql -c '\dt purchases'` from mike user |
-| `buy.stripe.com` links bypass Next.js checkout API — `audit_id` metadata cannot be set by these links | MEDIUM | Canonical `canFulfill` path requires `audit_id` UUID in session metadata; Stripe-hosted links cannot inject this, so purchases via these links go to `fulfillment_status='review'` not auto-delivered |
+| `buy.stripe.com` links bypass Next.js checkout API - `audit_id` metadata cannot be set by these links | MEDIUM | Canonical `canFulfill` path requires `audit_id` UUID in session metadata; Stripe-hosted links cannot inject this, so purchases via these links go to `fulfillment_status='review'` not auto-delivered |
 | Legacy Python webhook_server (port 9000) still referenced in service-route-manifest but not current payment path | LOW | Confirm agentic_server.py is not routing /webhook/stripe to port 9000 |
 | No Ops-Finance ledger entry for each payment link product | LOW | Add entries to revenue-cost-ledger.jsonl when first sale occurs |
 

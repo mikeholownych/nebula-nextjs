@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Run the real audit engine against nebulacomponents.com's own homepage
 and write a static JSON snapshot the homepage hero reads to play its
-self-scan calibration animation — see customer-portal/app/components/
+self-scan calibration animation - see customer-portal/app/components/
 SelfScan.tsx. Not a live per-visitor scan: this is meant to run on a
 schedule (see the graduation-gate note below) and the frontend replays
 the last recorded snapshot.
 
 Deliberately reuses deliver_audit.py's real scoring path (scrape_page +
-score_audit) — the same functions the live self-serve audit API uses —
+score_audit) - the same functions the live self-serve audit API uses -
 so this can't quietly diverge into a fake/hand-tuned number.
 
 Usage: venv/bin/python3 scripts/self_scan.py [url]

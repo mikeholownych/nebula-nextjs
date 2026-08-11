@@ -32,7 +32,7 @@ sys.path.insert(0, str(NEBULA_DIR))
 from deliver_audit import scrape_page, score_audit, send_via_agentmail  # noqa: E402
 
 TELEGRAM_TARGET = "telegram:5920497760"
-# Use the Unix socket postgres superuser path — same pattern as other scripts
+# Use the Unix socket postgres superuser path - same pattern as other scripts
 DEFAULT_DB = "postgresql://postgres@/nebula_platform?host=/var/run/postgresql&port=5433"
 DB_URL = os.environ.get("DATABASE_URL") or os.environ.get("AUDIT_DATABASE_URL") or DEFAULT_DB
 
@@ -107,7 +107,7 @@ def build_email_body(url, original_score, new_score, new_findings, purchase_date
         for f in top_3
     ) if top_3 else "  No failing signals detected."
 
-    subject = f"Your 30-day re-audit: {url} — {grade} ({new_score:.1f}/10)"
+    subject = f"Your 30-day re-audit: {url} - {grade} ({new_score:.1f}/10)"
 
     body = f"""Hi,
 
@@ -116,7 +116,7 @@ Your 30-day re-audit for:
 
 Score: {new_score:.1f}/10  (Grade {grade})  [{delta_str} vs your original audit]
 
-{"✅ The page condition improved — the fix held." if delta > 0 else "⚠️  The score hasn't changed yet — the fix may not have been deployed, or the signal hasn't cleared." if delta == 0 else "⚠️  The score dropped — something may have regressed or the fix wasn't applied."}
+{"✅ The page condition improved - the fix held." if delta > 0 else "⚠️  The score hasn't changed yet - the fix may not have been deployed, or the signal hasn't cleared." if delta == 0 else "⚠️  The score dropped - something may have regressed or the fix wasn't applied."}
 
 Top remaining signals to address:
 {findings_text}
@@ -128,7 +128,7 @@ If you haven't implemented the fix yet, the One-Leak Repair Sprint kit is still 
 
 Run another free audit anytime at https://nebulacomponents.com/audit?utm_source=email&utm_medium=reaudit
 
-—
+-
 Mike
 Nebula Components
 """
@@ -151,7 +151,7 @@ def process_purchase(purchase, dry_run=False):
     session_id = purchase["stripe_session_id"]
     purchase_date = str(purchase["created_at"])[:10]
 
-    log(f"Processing purchase {pid} for {email} — URL: {url}")
+    log(f"Processing purchase {pid} for {email} - URL: {url}")
 
     try:
         new_score, new_findings = run_reaudit(url)

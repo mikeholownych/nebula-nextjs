@@ -1,5 +1,5 @@
 """
-Live Audit Script Generator — "real page, narrated teardown" format.
+Live Audit Script Generator - "real page, narrated teardown" format.
 
 Produces a timed narrative following the content brief:
   Hook (irony) → Setup → 3 Quick Win findings with money math → Offer → CTA
@@ -119,7 +119,7 @@ def generate_live_script(audit: dict, url: str = None) -> dict:
     # 1. Hook (5–8s)
     seg(
         f"If you're running paid ads and not converting, nine times out of ten the problem is not the ad. "
-        f"It's the page. Today I'm going to show you exactly how to find the leak — on a real page, in real time.",
+        f"It's the page. Today I'm going to show you exactly how to find the leak - on a real page, in real time.",
         "intro_card"
     )
 
@@ -170,8 +170,8 @@ def generate_live_script(audit: dict, url: str = None) -> dict:
     # 7. Offer (10s)
     seg(
         f"You can run this exact audit on your own page right now, free, at nebulacomponents dot com slash audit. "
-        f"No signup, takes ninety seconds. If you want one of these findings implemented — "
-        f"the specific fix, the exact code change — that's the ninety-seven dollar sprint. "
+        f"No signup, takes ninety seconds. If you want one of these findings implemented - "
+        f"the specific fix, the exact code change - that's the ninety-seven dollar sprint. "
         f"Link in the description.",
         "cta_card"
     )
@@ -184,11 +184,11 @@ def generate_live_script(audit: dict, url: str = None) -> dict:
 
     # ── Title ──────────────────────────────────────────────────────────────────
     if score < 5:
-        title = f"I Audited a {domain.split('.')[0].title()} Landing Page Live — Here's What's Bleeding Their Ad Spend ({score:.1f}/10)"
+        title = f"I Audited a {domain.split('.')[0].title()} Landing Page Live - Here's What's Bleeding Their Ad Spend ({score:.1f}/10)"
     elif score < 6.5:
-        title = f"Why {domain}'s Landing Page Isn't Converting Paid Traffic — Live Audit ({score:.1f}/10)"
+        title = f"Why {domain}'s Landing Page Isn't Converting Paid Traffic - Live Audit ({score:.1f}/10)"
     else:
-        title = f"Live Landing Page Audit: {domain} ({score:.1f}/10) — What Works and What's Leaking"
+        title = f"Live Landing Page Audit: {domain} ({score:.1f}/10) - What Works and What's Leaking"
 
     # ── Description ────────────────────────────────────────────────────────────
     desc_lines = [
@@ -285,7 +285,7 @@ def generate_live_short_script(audit: dict, url: str = None) -> dict:
     seg(hook_sentence, "hook_card")
 
     # 2. Foreshadow / score tease (3s)
-    seg(f"I ran a nine-signal audit. Watch to the end — you'll see the score.", "score_card", "overall")
+    seg(f"I ran a nine-signal audit. Watch to the end - you'll see the score.", "score_card", "overall")
 
     # 3. Problem (10s)
     if worst:

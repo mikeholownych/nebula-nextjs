@@ -52,7 +52,7 @@ export default function ProofBeforeCTAPage() {
           </p>
         </div>
 
-        {/* Section 1 — Psychology */}
+        {/* Section 1 - Psychology */}
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">
             Why Asking Before Proving Fails
@@ -79,7 +79,7 @@ export default function ProofBeforeCTAPage() {
           </p>
         </section>
 
-        {/* Section 2 — What counts as proof */}
+        {/* Section 2 - What counts as proof */}
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">
             What Actually Counts as Proof
@@ -133,7 +133,7 @@ export default function ProofBeforeCTAPage() {
           </p>
         </section>
 
-        {/* Section 3 — Proof placement */}
+        {/* Section 3 - Proof placement */}
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">
             Where to Place Proof Relative to the CTA
@@ -186,7 +186,7 @@ export default function ProofBeforeCTAPage() {
           </p>
         </section>
 
-        {/* Section 4 — 3 quick implementations */}
+        {/* Section 4 - 3 quick implementations */}
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">
             3 Implementations That Don&apos;t Require a Redesign
@@ -229,7 +229,7 @@ export default function ProofBeforeCTAPage() {
           </div>
         </section>
 
-        {/* Section 5 — Zero testimonials */}
+        {/* Section 5 - Zero testimonials */}
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">
             What to Use When You Have Zero Testimonials Yet

@@ -57,6 +57,6 @@ test('pricing text contrast passes WCAG AA (composited)', async ({ page }) => {
     const rat = ratio(d.fg, realBg);
     if (rat < 4.5) { failures++; console.log(`FAIL ${d.tag} "${d.text}": ${rat.toFixed(2)}:1 fg=${d.fg} bg=${realBg}`); }
   });
-  console.log(`Checked ${data.length} nodes — failures: ${failures}`);
+  console.log(`Checked ${data.length} nodes - failures: ${failures}`);
   expect(failures).toBe(0);
 });

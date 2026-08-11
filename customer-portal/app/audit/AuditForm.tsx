@@ -63,7 +63,7 @@ function AuditFormContent() {
     setLoading(true)
 
     // Minted here, on the first event of the audit chain, and carried by every
-    // step after it — see newAuditAttemptId in client-analytics.
+    // step after it - see newAuditAttemptId in client-analytics.
     const auditAttemptId = newAuditAttemptId()
 
     posthog.capture('audit_submitted', {
@@ -110,14 +110,14 @@ function AuditFormContent() {
 
   return (
     <Card variant="elevated" className="mb-8">
-      {/* Referral welcome banner — only shown when ?from= is present */}
+      {/* Referral welcome banner - only shown when ?from= is present */}
       {referrer && (
         <div className="mb-6 rounded-lg bg-accent/10 border border-accent/30 px-4 py-3 text-sm">
           <p className="font-semibold text-accent">
             {referrer} sent you here.
           </p>
           <p className="mt-0.5 text-fg-muted">
-            Your free audit will name the exact leaks on your page — same report they got.
+            Your free audit will name the exact leaks on your page - same report they got.
           </p>
         </div>
       )}
@@ -125,7 +125,7 @@ function AuditFormContent() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="url" className="mb-2 block text-sm font-semibold text-fg">
-            Drop your landing page URL — see what's leaking
+            Drop your landing page URL - see what's leaking
           </label>
           <input
             id="url"

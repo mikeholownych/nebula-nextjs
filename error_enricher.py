@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Error Enricher — Nebula Components
+Error Enricher - Nebula Components
 Monitors nebula-platform-api journal for 500s and tracebacks.
 On detection: enriches with file → recent commits → prior occurrences → Telegram alert.
 
 Runs every 2 min via cron. Silent when healthy.
-Pattern adapted from airweave-ai/error-monitoring-agent — no Airweave dependency needed.
+Pattern adapted from airweave-ai/error-monitoring-agent - no Airweave dependency needed.
 """
 
 import json
@@ -26,7 +26,7 @@ PLATFORM_API_DIR = BASE / 'platform_api'
 VENV_PYTHON = str(BASE / 'venv/bin/python3')
 
 # How far back to scan for new errors (seconds)
-SCAN_WINDOW_SECONDS = 150  # 2.5 min — overlap to catch boundary errors
+SCAN_WINDOW_SECONDS = 150  # 2.5 min - overlap to catch boundary errors
 
 # Dedup: suppress repeat alerts for same error signature within this window
 DEDUP_WINDOW_MINUTES = 60
@@ -169,7 +169,7 @@ def extract_error_clusters(journal_text: str) -> list[dict]:
 def _parse_block(lines: list[str]) -> dict | None:
     text = '\n'.join(lines)
 
-    # Extract file + line — prefer innermost app frame over venv/stdlib frames
+    # Extract file + line - prefer innermost app frame over venv/stdlib frames
     file_match = None
     app_frame = None
     for m in FILE_PATTERN.finditer(text):

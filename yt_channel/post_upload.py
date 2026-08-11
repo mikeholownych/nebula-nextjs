@@ -1,29 +1,29 @@
 #!/usr/bin/env python3
-"""Post-upload playbook — Shane Hummus "10 Things Every Smart YouTuber
+"""Post-upload playbook - Shane Hummus "10 Things Every Smart YouTuber
 Does IMMEDIATELY After Uploading" (N45nMvSOgFQ, 922K views, $477K/yr
 AdSense). Everything a smart uploader does AFTER the video goes live.
 
 Implemented here (wired into yt_orchestrator.py after upload):
-  1. rename_to_title()  — file name = video title (his tip #7: "this
+  1. rename_to_title()  - file name = video title (his tip #7: "this
      tip alone probably got me an extra 10-20M views over the years").
      YouTube reads the filename as metadata during processing.
-  2. ensure_playlist()  — deep-link to a channel playlist (tip #9):
+  2. ensure_playlist()  - deep-link to a channel playlist (tip #9):
      bingeing sends strong quality signals; every upload joins the
      teardown playlist so suggested/autoplay cycles the whole series.
-  3. add_to_playlist()  — idempotent add (replay-safe; duplicate =
+  3. add_to_playlist()  - idempotent add (replay-safe; duplicate =
      400 ignored).
-  4. post_self_comment()— pinned-comment strategy (tip #6): "almost
+  4. post_self_comment()- pinned-comment strategy (tip #6): "almost
      everyone looks at the comments"; own comment = engagement signal
      + the free-audit link lives in the comments. The API cannot
      actually PIN (Studio-only), so this seeds the comment + the
      manual pin is a 10-second Studio step.
-  5. publish_held()     — 24-48h private hold for LONG-FORM (tip #1):
+  5. publish_held()     - 24-48h private hold for LONG-FORM (tip #1):
      YouTube's AI scans new uploads; new channels get fewer resources
      so trust matters more. Shorts stay public (feed is time-sensitive;
      the Shorts feed IS the discovery surface).
 
 Fail-closed + replay-safe: every step is try/except'd, idempotent via
-post_upload_state.json (video_id → actions done), and never raises —
+post_upload_state.json (video_id → actions done), and never raises -
 a post-upload step failing must not break the pipeline.
 """
 
@@ -38,7 +38,7 @@ log = logging.getLogger("post_upload")
 
 NEBULA_DIR = Path(__file__).resolve().parent.parent
 STATE_FILE = NEBULA_DIR / "yt_channel" / "logs" / "post_upload_state.json"
-PLAYLIST_TITLE = "Nebula Audits — Landing Page Teardowns"
+PLAYLIST_TITLE = "Nebula Audits - Landing Page Teardowns"
 
 FREE_AUDIT_URL = "https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=comments"
 
@@ -86,7 +86,7 @@ def sanitize_filename(title: str, ext: str = ".mp4") -> str:
 def rename_to_title(video_path: str, title: str) -> Path:
     """Rename the produced file to '<title>.mp4' before upload (tip #7).
 
-    Returns the new path. In-place (os.replace) — the produced file
+    Returns the new path. In-place (os.replace) - the produced file
     isn't needed afterward."""
     src = Path(video_path)
     dst = src.with_name(sanitize_filename(title, src.suffix))
@@ -158,7 +158,7 @@ def post_self_comment(service, video_id: str, kind: str = "short") -> bool:
     Text: the free-audit link + a question (questions draw replies,
     replies draw notifications → the 'social hour' effect). One per
     video, tracked in state (replay-safe). Pin is a manual Studio
-    step — the comment is the API-able part."""
+    step - the comment is the API-able part."""
     if _already(video_id, "comment"):
         return True
     text = (

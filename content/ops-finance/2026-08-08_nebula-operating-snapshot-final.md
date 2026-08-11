@@ -1,4 +1,4 @@
-# Nebula Components — Final Signed-Off Operating Report
+# Nebula Components - Final Signed-Off Operating Report
 
 **Date:** 2026-08-08
 **Produced by:** ops-finance (task t_9c1028cf)
@@ -15,7 +15,7 @@ real-dollar weight. Lead counts are internally consistent when the audit deliver
 test-exclusion logic is applied. Three anomalies require CEO attention: a count discrepancy
 in HOT_LEAD.json (snapshot said 47 prod / 2 test; live read returns 48 prod / 1 test), test
 payment entries polluting the ledger, and implementation_kit_delivered records fired against
-test Stripe session IDs from the CEO's own address. Pipeline value remains UNKNOWN — no live
+test Stripe session IDs from the CEO's own address. Pipeline value remains UNKNOWN - no live
 source tracks it. One blocking dependency: AgentMail key unavailable (critical severity per
 monitor), which disables audit delivery even though the delivery infrastructure is otherwise live.
 
@@ -41,14 +41,14 @@ monitor), which disables audit delivery even though the delivery infrastructure 
 | Payments recorded in monitor | 0 | 0 | 0 | **High** |
 | Unrouted warm replies | 0 | 0 | 0 | **High** |
 | Overdue pitches | 0 | 0 | 0 | **High** |
-| Pipeline value ($) | UNKNOWN | UNKNOWN | — | **Low** |
+| Pipeline value ($) | UNKNOWN | UNKNOWN | - | **Low** |
 | AgentMail dependency | (not in snapshot) | CRITICAL FAIL | **NEW** | **High** |
 
 ---
 
 ## Integrity Audit Results
 
-### Check 1 — Revenue: Stripe cross-check
+### Check 1 - Revenue: Stripe cross-check
 
 **Result: PASS**
 
@@ -61,11 +61,11 @@ direct DB query at that time. Revenue figure of $0.00 is consistent across:
 
 No delta to explain. Revenue = $0.00 is verified.
 
-### Check 2 — Lead counts: cross-system consistency
+### Check 2 - Lead counts: cross-system consistency
 
-**Result: PARTIAL PASS — 1 count discrepancy in HOT_LEAD.json**
+**Result: PARTIAL PASS - 1 count discrepancy in HOT_LEAD.json**
 
-**lead_state.db (CRM of record):** 66 total — CONFIRMED
+**lead_state.db (CRM of record):** 66 total - CONFIRMED
   - bounced: 45
   - audit_delivered: 7
   - contacted: 5
@@ -86,41 +86,41 @@ No delta to explain. Revenue = $0.00 is verified.
   The monitor's exclusion logic filters 2 records (test@example.com plus one
   additional by a different test-detection rule), yielding 47. The raw JSON
   file has 48 non-test@example.com rows, one of which the monitor separately
-  treats as test. No fabrication — the monitor and snapshot are self-consistent
+  treats as test. No fabrication - the monitor and snapshot are self-consistent
   via the monitor's own exclusion logic. However the raw file state is 48 prod,
   not 47.
 
 **Email overlap between HOT_LEAD and lead_state.db:** 3 emails (snapshot said 4).
   Snapshot was off by 1 here. Not a material error but worth noting.
 
-### Check 3 — Implausibility check
+### Check 3 - Implausibility check
 
-**Result: PASS — no impossible values**
+**Result: PASS - no impossible values**
 
 - Revenue $0 with 0 paid customers: consistent.
 - 39 audits delivered with 0 payments: plausible (audits delivered free as pitch/trust material).
 - 27 pitch_sent leads with 0 conversions: plausible given 7-day launch timeline.
-- Pipeline value UNKNOWN with $0 revenue: consistent — UNKNOWN is honest.
+- Pipeline value UNKNOWN with $0 revenue: consistent - UNKNOWN is honest.
 - implementation_kit_delivered events with test Stripe session IDs: flagged as anomaly,
   not implausible for a CEO test run.
 
-### Check 4 — Test/simulated payments in live ledger
+### Check 4 - Test/simulated payments in live ledger
 
-**Result: FAIL — 2 test payment records present**
+**Result: FAIL - 2 test payment records present**
 
 Both payment entries in customer-ledger.jsonl are test records:
 
 | Timestamp | Email | Amount | Payment ID | Verdict |
 |---|---|---|---|---|
-| 2026-07-03T11:57:57Z | restart-test@example.com | $97.00 | cs_test_restart_001 | TEST — example.com domain + cs_test prefix |
-| 2026-07-05T19:44:24Z | stripe@example.com | $30.00 | cs_test_a1L9C... | TEST — example.com domain + cs_test prefix |
+| 2026-07-03T11:57:57Z | restart-test@example.com | $97.00 | cs_test_restart_001 | TEST - example.com domain + cs_test prefix |
+| 2026-07-05T19:44:24Z | stripe@example.com | $30.00 | cs_test_a1L9C... | TEST - example.com domain + cs_test prefix |
 
 The audit_delivery_monitor correctly excludes these (test_ledger_rows_excluded: 5)
 and reports payment_events_total = 0. However the raw ledger contains them with no
 annotation. This is a data hygiene issue: anyone reading the raw ledger without the
 monitor's filter would see $127 in fake revenue.
 
-### Check 5 — implementation_kit_delivered test entries
+### Check 5 - implementation_kit_delivered test entries
 
 **Additional finding not in original scope:**
 
@@ -142,7 +142,7 @@ and should be annotated as such or excluded by the monitor's test filter.
 | DQ-5 | Overlap between HOT_LEAD.json and lead_state.db is 3 emails, not 4 as stated in snapshot. | Low | Minor documentation error in parent snapshot. |
 | DQ-6 | nebula_platform.db local file is empty (no tables). All DB-backed revenue claims rely on prior task evidence (t_6548869b). Cannot re-verify locally today. | **Medium** | nebula_platform.db should be initialized or the revenue check source should be the Stripe API directly. |
 | DQ-7 | AgentMail API key is unavailable (monitor reports `agentmail_key: ok=false`, severity=critical). Audit delivery is blocked even though all other infrastructure is live. | **High** | CEO action: restore AgentMail key. No audits can be delivered until resolved. |
-| DQ-8 | Pipeline value ($$) is UNKNOWN — no live source tracks it. 27 leads at pitch_sent stage represent potential revenue but no figure can be cited. | Medium | CEO decision: instrument pipeline value tracking or accept UNKNOWN. |
+| DQ-8 | Pipeline value ($$) is UNKNOWN - no live source tracks it. 27 leads at pitch_sent stage represent potential revenue but no figure can be cited. | Medium | CEO decision: instrument pipeline value tracking or accept UNKNOWN. |
 
 ---
 
@@ -157,7 +157,7 @@ and should be annotated as such or excluded by the monitor's test filter.
 | Last delivery = 2026-07-07 | **High** | Monitor + ledger timestamps agree |
 | No real payments | **High** | Both payment entries confirmed test via email domain + cs_test prefix |
 | AgentMail blocked | **High** | Live monitor run 2026-08-08T05:29Z |
-| Pipeline value | **Low** | UNKNOWN — no tracking instrumented |
+| Pipeline value | **Low** | UNKNOWN - no tracking instrumented |
 | nebula_platform DB schema | **Medium** | Local file empty; prior evidence from t_6548869b not re-verifiable today |
 
 ---

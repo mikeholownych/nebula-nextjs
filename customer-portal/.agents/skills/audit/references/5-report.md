@@ -1,6 +1,6 @@
-# Step 5 — Generate the audit report (and upload it to a notebook)
+# Step 5 - Generate the audit report (and upload it to a notebook)
 
-The audit report is rendered **directly from `.posthog-audit-checks.json`** — that file is the source of truth. Every check the wizard seeded ends up in the report, even passes; nothing is invented. After the markdown is written to disk, this step also writes the report into a PostHog notebook so it's shareable from inside PostHog.
+The audit report is rendered **directly from `.posthog-audit-checks.json`** - that file is the source of truth. Every check the wizard seeded ends up in the report, even passes; nothing is invented. After the markdown is written to disk, this step also writes the report into a PostHog notebook so it's shareable from inside PostHog.
 
 ## Status
 
@@ -16,47 +16,47 @@ Emit, in order:
 
 ## How to call PostHog MCP tools
 
-The PostHog MCP server exposes a single `exec` tool. Every PostHog operation is driven by a CLI-style command string passed in its `command` parameter — the tool may be namespaced by the host (`mcp__posthog__exec`, `mcp__posthog-wizard__exec`), but the command grammar is the same. Tool names and schemas are not predictable, so discover and inspect before you call.
+The PostHog MCP server exposes a single `exec` tool. Every PostHog operation is driven by a CLI-style command string passed in its `command` parameter - the tool may be namespaced by the host (`mcp__posthog__exec`, `mcp__posthog-wizard__exec`), but the command grammar is the same. Tool names and schemas are not predictable, so discover and inspect before you call.
 
-**Grammar** — run in this order:
+**Grammar** - run in this order:
 
 ```text
 exec({ "command": "search <regex>" })      # find tools by name/title/description; `tools` lists them all
-exec({ "command": "info <tool_name>" })     # REQUIRED before every call — description + input schema
+exec({ "command": "info <tool_name>" })     # REQUIRED before every call - description + input schema
 exec({ "command": "schema <tool_name> <field_path>" })  # drill into a field the schema flags with a `hint`
 exec({ "command": "call <tool_name> <json_input>" })    # run the tool
 ```
 
-Running `info <tool_name>` before `call <tool_name>` is mandatory, the same way you read a file before editing it. `info` returns the full schema for simple tools; for large ones it summarizes and attaches `hint` entries pointing at fields to drill into with `schema`. Dot-notation descends objects (`query.source`), array items (`series.0.properties`), and unions. Never guess the structure of a field that carries a hint — drill first.
+Running `info <tool_name>` before `call <tool_name>` is mandatory, the same way you read a file before editing it. `info` returns the full schema for simple tools; for large ones it summarizes and attaches `hint` entries pointing at fields to drill into with `schema`. Dot-notation descends objects (`query.source`), array items (`series.0.properties`), and unions. Never guess the structure of a field that carries a hint - drill first.
 
-Every PostHog tool goes through `exec` this way — there is no separate named tool to call directly. The inner tool names and JSON payloads below are what you pass to `call`.
+Every PostHog tool goes through `exec` this way - there is no separate named tool to call directly. The inner tool names and JSON payloads below are what you pass to `call`.
 
-**Errors** carry a suggestion and similar tool names — read it before retrying. If a name isn't found it may have been renamed; run `search <pattern>` or `tools` again to find the current one.
+**Errors** carry a suggestion and similar tool names - read it before retrying. If a name isn't found it may have been renamed; run `search <pattern>` or `tools` again to find the current one.
 
 | MCP tool | When | Use |
 |----------|------|-----|
 | `notebooks-create` | (a) of "Upload to a PostHog notebook" | Create the notebook with a small placeholder skeleton (title + section headings + placeholder paragraphs). One call. |
-| `notebook-edit` | (b) of "Upload to a PostHog notebook" | Replace one placeholder paragraph in the cloud notebook with a real ProseMirror node. **Called many times** (one per placeholder). Required because the model can't emit the full assembled tree in a single `notebooks-create` tool_use input — it self-truncates. |
+| `notebook-edit` | (b) of "Upload to a PostHog notebook" | Replace one placeholder paragraph in the cloud notebook with a real ProseMirror node. **Called many times** (one per placeholder). Required because the model can't emit the full assembled tree in a single `notebooks-create` tool_use input - it self-truncates. |
 | `notebooks-retrieve` | (c) of "Upload to a PostHog notebook" | Read the cloud notebook back to verify every placeholder has been replaced. |
 
-Run `info <tool>` on each of these before its first `call`, right before the upload sub-step. `mcp__wizard-tools__audit_resolve_checks` is already loaded — you'll use it again after the upload.
+Run `info <tool>` on each of these before its first `call`, right before the upload sub-step. `mcp__wizard-tools__audit_resolve_checks` is already loaded - you'll use it again after the upload.
 
 If `info notebook-edit` returns a not-found error, the project's `notebooks-collaboration` feature flag isn't enabled. Skip the notebook-upload sub-step entirely; emit `Notebook upload skipped: notebook-edit unavailable. The local report at posthog-audit-report.md is still the source of truth.` and resolve `upload-notebook` to `suggestion` with that reason.
 
 ## Action
 
-`Read` the ledger once, then build the report **incrementally** — `Write` a skeleton with placeholder markers, then `Edit` each placeholder with its real section in a separate turn. **Do not compose the whole report in one turn.** A single sustained generation of the full document routinely drops the LLM streaming connection around the 10-minute mark; chunking via Write + Edit keeps every turn short and resets the SSE timer at each tool call. The on-disk file is the source of truth, so a dropped turn loses at most one section, not the whole report.
+`Read` the ledger once, then build the report **incrementally** - `Write` a skeleton with placeholder markers, then `Edit` each placeholder with its real section in a separate turn. **Do not compose the whole report in one turn.** A single sustained generation of the full document routinely drops the LLM streaming connection around the 10-minute mark; chunking via Write + Edit keeps every turn short and resets the SSE timer at each tool call. The on-disk file is the source of truth, so a dropped turn loses at most one section, not the whole report.
 
-**Do not delete `.posthog-audit-checks.json` yet** — the notebook-upload sub-step still resolves a ledger row. The cleanup happens at the very end of this step.
+**Do not delete `.posthog-audit-checks.json` yet** - the notebook-upload sub-step still resolves a ledger row. The cleanup happens at the very end of this step.
 
 The report has four sections in this order:
 
-1. **Summary** — one-paragraph overview, severity counts, and a problematic-items table.
-2. **Recommended actions** — prioritized fixes with `file:line` and a docs link per item.
-3. **Full audit** — every check the wizard ran, grouped by `area`, including passes.
-4. **About this audit** — a short closing block explaining what the audit covered and how to interpret the report. *Static text — already baked into the skeleton.*
+1. **Summary** - one-paragraph overview, severity counts, and a problematic-items table.
+2. **Recommended actions** - prioritized fixes with `file:line` and a docs link per item.
+3. **Full audit** - every check the wizard ran, grouped by `area`, including passes.
+4. **About this audit** - a short closing block explaining what the audit covered and how to interpret the report. *Static text - already baked into the skeleton.*
 
-For the Full audit section, group rows dynamically by each distinct `area` value in the ledger, preserving first-seen area order from the JSON. Today the core audit produces three areas — **Installation**, **Identification**, **Event Capture** — but the report must not hard-code that list; render whatever areas appear.
+For the Full audit section, group rows dynamically by each distinct `area` value in the ledger, preserving first-seen area order from the JSON. Today the core audit produces three areas - **Installation**, **Identification**, **Event Capture** - but the report must not hard-code that list; render whatever areas appear.
 
 For each area, write a one-paragraph framing immediately under the area heading, then the table. Use the canonical copy below verbatim when the area name matches; otherwise write a one-sentence summary derived from the area's check labels.
 
@@ -81,7 +81,7 @@ One `Write` to `posthog-audit-report.md` with section headings and HTML-comment 
 
 ## About this audit
 
-The PostHog wizard runs a five-stage chain: SDK installation → init correctness → identification → event capture → this report. Each stage resolves one or more checks against the project's source tree, recording every result — pass or otherwise — in the ledger this report was generated from.
+The PostHog wizard runs a five-stage chain: SDK installation → init correctness → identification → event capture → this report. Each stage resolves one or more checks against the project's source tree, recording every result - pass or otherwise - in the ledger this report was generated from.
 
 - `error` items break correctness now (events lost, identity broken). Fix first.
 - `warning` items work today but cause subtle data-quality bugs. Fix when convenient.
@@ -90,14 +90,14 @@ The PostHog wizard runs a five-stage chain: SDK installation → init correctnes
 Re-run `posthog-wizard audit` after applying fixes to refresh the ledger.
 ```
 
-This Write should be small — just the structure above. Don't compose section bodies yet.
+This Write should be small - just the structure above. Don't compose section bodies yet.
 
 ### b. Fill the Summary section
 
 One `Edit`:
 
 - `old_string`: `<!-- SECTION_SUMMARY -->`
-- `new_string`: the Summary body — one-paragraph overview, then the counts list, then the problematic-items table (or the "no issues" line). See the Summary template below for the exact shape.
+- `new_string`: the Summary body - one-paragraph overview, then the counts list, then the problematic-items table (or the "no issues" line). See the Summary template below for the exact shape.
 
 Output for this turn is bounded by the Summary content alone (~500 tokens for most projects).
 
@@ -133,27 +133,27 @@ Use these shapes when computing the `new_string` for each Edit above.
 - **Suggestions**: [N] (nice to have)
 - **Passes**: [N]
 
-**Problematic items** _(only `error`, `warning`, `suggestion` — no passes)_
+**Problematic items** _(only `error`, `warning`, `suggestion` - no passes)_
 
 | Severity | Area | Check | File | Details |
 |----------|------|-------|------|---------|
 | `error` | Installation | [label] | [file:line] | [details] |
 ```
 
-If there are no problematic items, replace the table with `_No issues found — your PostHog setup looks healthy._`.
+If there are no problematic items, replace the table with `_No issues found - your PostHog setup looks healthy._`.
 
 ### Recommended actions body
 
 Numbered list, ordered by severity (errors → warnings → suggestions), then by ledger order within a severity. Each item is **three sentences**, in this order:
 
-1. **What's wrong** — the finding, written as a one-sentence diagnosis derived from `details`.
-2. **Why it matters** — one sentence on the data-quality consequence: which downstream artifact (funnels, retention, person count, billing, replays, experiments, etc.) this finding contaminates if left alone, and how. Use the canonical "why it matters" copy below verbatim when the check id matches; otherwise write one sentence rooted in the check's rule.
-3. **How to fix** — one short imperative sentence pointing at `file:line` and the concrete change. End with a docs link.
+1. **What's wrong** - the finding, written as a one-sentence diagnosis derived from `details`.
+2. **Why it matters** - one sentence on the data-quality consequence: which downstream artifact (funnels, retention, person count, billing, replays, experiments, etc.) this finding contaminates if left alone, and how. Use the canonical "why it matters" copy below verbatim when the check id matches; otherwise write one sentence rooted in the check's rule.
+3. **How to fix** - one short imperative sentence pointing at `file:line` and the concrete change. End with a docs link.
 
 Format:
 
 ```markdown
-1. **[Area] · [label]** — [what's wrong]. _Why it matters:_ [why-it-matters]. _Fix:_ [how-to-fix at `file:line`]. See [docs]([area docs url]).
+1. **[Area] · [label]** - [what's wrong]. _Why it matters:_ [why-it-matters]. _Fix:_ [how-to-fix at `file:line`]. See [docs]([area docs url]).
 ```
 
 If there are no actions, write `_Nothing to fix._`.
@@ -200,15 +200,15 @@ The markdown report on disk is the source of truth. The notebook is a shareable,
 
 ### Why two MCP tools instead of one
 
-Earlier versions of this skill called `notebooks-create` once with the full assembled ProseMirror tree as the `content` argument. The assistant turn that emits that tool_use has to *generate the tree as output tokens*, even if it's just copying from a file it just read. For a 12-check audit with tables and bullet lists the full tree is several thousand tokens — past the per-turn output budget for some runs. The model self-truncates and the notebook ships with sections missing.
+Earlier versions of this skill called `notebooks-create` once with the full assembled ProseMirror tree as the `content` argument. The assistant turn that emits that tool_use has to *generate the tree as output tokens*, even if it's just copying from a file it just read. For a 12-check audit with tables and bullet lists the full tree is several thousand tokens - past the per-turn output budget for some runs. The model self-truncates and the notebook ships with sections missing.
 
-The fix is to **build the cloud notebook incrementally**. `notebooks-create` carries only a small skeleton (title + section headings + placeholder paragraphs). Then `notebook-edit` replaces one placeholder paragraph at a time with the real ProseMirror node. Each `notebook-edit` tool_use input is bounded — never more than one block-level node — so it always fits in one turn. The notebook is complete only after the last edit lands.
+The fix is to **build the cloud notebook incrementally**. `notebooks-create` carries only a small skeleton (title + section headings + placeholder paragraphs). Then `notebook-edit` replaces one placeholder paragraph at a time with the real ProseMirror node. Each `notebook-edit` tool_use input is bounded - never more than one block-level node - so it always fits in one turn. The notebook is complete only after the last edit lands.
 
 There's no local notebook payload scratch file in this design. Section content is computed on demand from the ledger and the on-disk report.
 
 ### Orientation: re-read the report
 
-`Read` `posthog-audit-report.md` once. You'll use it as a reference for what content to send in each edit. Don't translate the whole thing up front — translate per placeholder, as you fill each one.
+`Read` `posthog-audit-report.md` once. You'll use it as a reference for what content to send in each edit. Don't translate the whole thing up front - translate per placeholder, as you fill each one.
 
 ### Node mapping (apply per placeholder as you `notebook-edit`)
 
@@ -221,7 +221,7 @@ There's no local notebook payload scratch file in this design. Section content i
 | inline `code` | text node with a `code` mark: `{"type":"text","marks":[{"type":"code"}],"text":"<code>"}` |
 | `**bold**` | text node with a `bold` mark |
 | `[label](url)` | text node with a `link` mark: `{"type":"text","marks":[{"type":"link","attrs":{"href":"<url>"}}],"text":"<label>"}` |
-| pipe table | `{"type":"table","content":[ <tableRow>, ... ]}` — every cell wraps text in a paragraph. First row uses `tableHeader`; remaining rows use `tableCell`. |
+| pipe table | `{"type":"table","content":[ <tableRow>, ... ]}` - every cell wraps text in a paragraph. First row uses `tableHeader`; remaining rows use `tableCell`. |
 
 Table example (mirrors the report's "Problematic items" table):
 
@@ -244,9 +244,9 @@ Table example (mirrors the report's "Problematic items" table):
 
 ### a. Create the notebook with a placeholder skeleton
 
-**One** `notebooks-create` call. The `content` is small — title + intro + section heading nodes + one placeholder paragraph per block-level node you'll later fill. Every placeholder text must be a unique string (the verification + edits depend on uniqueness).
+**One** `notebooks-create` call. The `content` is small - title + intro + section heading nodes + one placeholder paragraph per block-level node you'll later fill. Every placeholder text must be a unique string (the verification + edits depend on uniqueness).
 
-`notebook-edit` replaces **one node** with **one node** — so each block-level part of a section needs its own placeholder. A Full-audit area that renders as `heading + paragraph + table` needs THREE placeholders. Plan the placeholder count from the ledger before sending.
+`notebook-edit` replaces **one node** with **one node** - so each block-level part of a section needs its own placeholder. A Full-audit area that renders as `heading + paragraph + table` needs THREE placeholders. Plan the placeholder count from the ledger before sending.
 
 For a typical doctor deliverable the placeholder set is:
 
@@ -308,13 +308,13 @@ Use uppercased, underscored area names (e.g. `INSTALLATION`, `IDENTIFICATION`, `
 }
 ```
 
-(Strip the `//` comments before sending — JSON doesn't allow them.)
+(Strip the `//` comments before sending - JSON doesn't allow them.)
 
 Substitute `<repo_name>` and `<timestamp>` literally before sending.
 
 Capture the returned `short_id` and `url`. **Hold them; do not emit `[NOTEBOOK_URL]` yet.** The notebook exists in PostHog Cloud at this point but the placeholder paragraphs are still visible. The marker fires only after every edit in (b) succeeds and (c) verifies the cloud notebook is clean.
 
-If `notebooks-create` errors (permission denied, project misconfigured, network, MCP unavailable), emit one line — `Notebook upload failed at notebooks-create: <short reason>. The local report at posthog-audit-report.md is still the source of truth.` — and skip to the resolve sub-step with `upload-notebook` resolved per the matrix below. Don't retry. Don't emit `[NOTEBOOK_URL]`.
+If `notebooks-create` errors (permission denied, project misconfigured, network, MCP unavailable), emit one line - `Notebook upload failed at notebooks-create: <short reason>. The local report at posthog-audit-report.md is still the source of truth.` - and skip to the resolve sub-step with `upload-notebook` resolved per the matrix below. Don't retry. Don't emit `[NOTEBOOK_URL]`.
 
 ### b. Fill each placeholder via `notebook-edit`
 
@@ -324,7 +324,7 @@ For every placeholder in the skeleton, call `notebook-edit` once with:
 - `old_value`: the placeholder paragraph node, exactly as it appears in the skeleton, e.g. `{"type":"paragraph","content":[{"type":"text","text":"__SUMMARY_OVERVIEW__"}]}`
 - `new_value`: the real ProseMirror node for that block
 
-The matcher compares `old_value` to subtrees in the notebook by deep equality. Every key matters — `attrs`, `marks`, `content`. Copy the placeholder shape exactly; don't add a `marks` field that wasn't there.
+The matcher compares `old_value` to subtrees in the notebook by deep equality. Every key matters - `attrs`, `marks`, `content`. Copy the placeholder shape exactly; don't add a `marks` field that wasn't there.
 
 What `new_value` looks like for each placeholder family:
 
@@ -341,7 +341,7 @@ What `new_value` looks like for each placeholder family:
 | `__ABOUT_BULLETS__` | A `bulletList` with the three error/warning/suggestion description bullets. |
 | `__ABOUT_CLOSING__` | A single `paragraph` with the "Re-run posthog-wizard audit" closing sentence. |
 
-Pace your edits one per turn. Don't bundle multiple `notebook-edit` calls in a single assistant message — each MCP call carries a `version` for optimistic concurrency, and parallel calls will 409 each other. Sequential is correct.
+Pace your edits one per turn. Don't bundle multiple `notebook-edit` calls in a single assistant message - each MCP call carries a `version` for optimistic concurrency, and parallel calls will 409 each other. Sequential is correct.
 
 **Error handling per edit:**
 - `409 Conflict` or `410 Gone`: the version moved under you. Run `notebooks-retrieve` to refresh, then re-apply the same edit. The server tells you the latest version in the 409 body.
@@ -352,13 +352,13 @@ Pace your edits one per turn. Don't bundle multiple `notebook-edit` calls in a s
 
 **Required step. Do not skip.** After the last `notebook-edit`, call `notebooks-retrieve` with the `short_id`. In the returned `content`, search the text nodes for any remaining `__` markers (e.g. via the agent's own pattern matching of the `JSON.stringify`'d content).
 
-Expected: **zero `__` markers**. If any remain, the agent skipped at least one `notebook-edit` — identify which placeholder(s) survive, run the missing edit(s), then re-retrieve and re-verify until clean.
+Expected: **zero `__` markers**. If any remain, the agent skipped at least one `notebook-edit` - identify which placeholder(s) survive, run the missing edit(s), then re-retrieve and re-verify until clean.
 
 A leftover placeholder renders as the literal string `__FULL_AUDIT_INSTALLATION_TABLE__` in the notebook UI. The check is cheap; skipping it is the failure mode we've observed in the events-audit twin of this flow.
 
 ### d. Surface the notebook URL
 
-**Only emit `[NOTEBOOK_URL]` after (c) verifies the notebook has zero remaining placeholders.** Until then the notebook still has placeholder strings showing in PostHog Cloud — exactly the half-baked state we don't want the user to see.
+**Only emit `[NOTEBOOK_URL]` after (c) verifies the notebook has zero remaining placeholders.** Until then the notebook still has placeholder strings showing in PostHog Cloud - exactly the half-baked state we don't want the user to see.
 
 Emit a single line on its own (no quotes, no code fence):
 
@@ -375,7 +375,7 @@ Flip the `upload-notebook` row based on outcome:
 - Notebook created and fully filled (every `notebook-edit` succeeded, (c) verified clean) → status `pass`, `file` set to the notebook URL.
 - `notebooks-create` errored → status `warning`, `details: "Notebook upload failed at notebooks-create: <short reason>"`. URL marker not emitted.
 - Some `notebook-edit` calls failed, leaving placeholders in the cloud notebook → status `warning`, `details: "Notebook partially uploaded: <N> of <total> placeholders filled; remaining placeholders visible in the notebook"`. URL marker not emitted (the notebook is half-baked).
-- `notebook-edit` unavailable (no `notebooks-collaboration` feature flag) or MCP unavailable → status `suggestion`, `details: "Skipped — <short reason>"`. URL marker not emitted.
+- `notebook-edit` unavailable (no `notebooks-collaboration` feature flag) or MCP unavailable → status `suggestion`, `details: "Skipped - <short reason>"`. URL marker not emitted.
 
 ```json
 {
@@ -385,7 +385,7 @@ Flip the `upload-notebook` row based on outcome:
 }
 ```
 
-Then delete the ledger — it's transient scratch state and all 12 rows are now resolved:
+Then delete the ledger - it's transient scratch state and all 12 rows are now resolved:
 
 ```
 Bash: rm -f .posthog-audit-checks.json

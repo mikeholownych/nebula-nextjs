@@ -7,7 +7,7 @@ const PRICING_GUIDE_LIST = PRICING_GUIDE_SLUGS.map((slug) => PRICING_GUIDES[slug
 export const metadata: Metadata = {
   title: 'Landing Page Audit Tool Pricing (2026): What 8 Tools Really Cost',
   description:
-    'The real, verified pricing of 8 landing page audit tools — Nebula, Unbounce, Hotjar, Crazy Egg, SEMrush, Screaming Frog, HubSpot Website Grader, PageSpeed Insights — compared head-to-head, with the honest alternative.',
+    'The real, verified pricing of 8 landing page audit tools - Nebula, Unbounce, Hotjar, Crazy Egg, SEMrush, Screaming Frog, HubSpot Website Grader, PageSpeed Insights - compared head-to-head, with the honest alternative.',
   alternates: {
     canonical: 'https://nebulacomponents.com/landing-page-audit-tools-pricing',
   },
@@ -37,19 +37,19 @@ const HUB_FAQS = [
   },
   {
     q: 'Which landing page audit tools require a subscription?',
-    a: 'Hotjar (from $32/month), Crazy Egg (from $49/month), Unbounce (from $29/month, $249/month for Smart Traffic), and SEMrush (from $139.95/month) are subscription-based. Nebula is free for the audit with a one-time $97 fix kit — no subscription.',
+    a: 'Hotjar (from $32/month), Crazy Egg (from $49/month), Unbounce (from $29/month, $249/month for Smart Traffic), and SEMrush (from $139.95/month) are subscription-based. Nebula is free for the audit with a one-time $97 fix kit - no subscription.',
   },
   {
     q: 'Is there a free alternative to Crazy Egg or Hotjar?',
-    a: 'Yes — Nebula audits any public landing page for free, with no signup and no traffic required. The difference: Nebula checks conversion structure (message match, CTA, trust, above-fold) rather than showing behavior heatmaps, which need existing visitor sessions.',
+    a: 'Yes - Nebula audits any public landing page for free, with no signup and no traffic required. The difference: Nebula checks conversion structure (message match, CTA, trust, above-fold) rather than showing behavior heatmaps, which need existing visitor sessions.',
   },
   {
     q: 'Is Unbounce pricing worth it for a single landing page?',
-    a: 'Usually not. Unbounce starts at $29/month and only optimizes pages built inside its platform — the AI Smart Traffic feature that justifies the price requires the $249/month tier. For an existing page, a free conversion audit with a $97 one-time fix kit is the higher-leverage first step.',
+    a: 'Usually not. Unbounce starts at $29/month and only optimizes pages built inside its platform - the AI Smart Traffic feature that justifies the price requires the $249/month tier. For an existing page, a free conversion audit with a $97 one-time fix kit is the higher-leverage first step.',
   },
   {
     q: 'Why is SEMrush $139.95/month?',
-    a: 'SEMrush is a full SEO platform — keyword research, rank tracking, competitor analysis, plus Site Audit as one module. If you only need to know why one landing page is not converting paid traffic, you are paying for a platform you will not use. A conversion audit checks the actual problem for free.',
+    a: 'SEMrush is a full SEO platform - keyword research, rank tracking, competitor analysis, plus Site Audit as one module. If you only need to know why one landing page is not converting paid traffic, you are paying for a platform you will not use. A conversion audit checks the actual problem for free.',
   },
   {
     q: 'Do any of these tools check conversion structure, not just speed or SEO?',
@@ -97,7 +97,7 @@ export default function ToolPricingPage() {
           <p className="mt-3 text-lg leading-8 text-fg">
             Most “audit” tools charge a subscription for an adjacent job: Unbounce from $29/month (builder),
             Hotjar from $32/month (behavior), Crazy Egg from $49/month (heatmaps), SEMrush $139.95/month (SEO
-            platform). Only Nebula audits the conversion layer itself — free, no signup, no traffic required —
+            platform). Only Nebula audits the conversion layer itself - free, no signup, no traffic required -
             with a $97 one-time fix kit instead of a monthly bill. Free utilities that do not check conversion:
             PageSpeed Insights, HubSpot Website Grader (email-gated), Screaming Frog (500-URL free tier).
           </p>
@@ -129,7 +129,7 @@ export default function ToolPricingPage() {
             </tbody>
           </table>
           <p className="mt-4 text-xs text-fg-muted">
-            Pricing verified from vendor public pages as of August 2026. Prices change — verify before deciding.
+            Pricing verified from vendor public pages as of August 2026. Prices change - verify before deciding.
           </p>
         </section>
 
@@ -160,8 +160,8 @@ export default function ToolPricingPage() {
           <p className="text-fg-muted leading-relaxed">
             A founder running paid traffic to a page that does not convert is paying twice: the ad cost every day,
             and a subscription for a tool that does not diagnose the actual problem. Before you add a recurring
-            bill, run a free conversion audit. If the leak is message match, CTA, or trust — the most common
-            causes — no heatmap or SEO crawl will name it. The fix is usually a one-time change, not a monthly
+            bill, run a free conversion audit. If the leak is message match, CTA, or trust - the most common
+            causes - no heatmap or SEO crawl will name it. The fix is usually a one-time change, not a monthly
             platform.
           </p>
         </section>

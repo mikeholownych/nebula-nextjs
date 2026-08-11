@@ -1,5 +1,5 @@
 -- ==========================================================================
--- Nebula Components — Canonical Data Model
+-- Nebula Components - Canonical Data Model
 -- Version 1.0
 -- Builds on existing content_ops database with immutable UUIDs and
 -- a full lifecycle state machine.
@@ -10,7 +10,7 @@
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 -- ==========================================================================
--- PROSPECTS — the person/company at the center
+-- PROSPECTS - the person/company at the center
 -- ==========================================================================
 CREATE TABLE IF NOT EXISTS public.prospects (
     prospect_id        UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -50,7 +50,7 @@ CREATE INDEX IF NOT EXISTS idx_prospects_lifecycle ON public.prospects(lifecycle
 CREATE INDEX IF NOT EXISTS idx_prospects_source ON public.prospects(source);
 
 -- ==========================================================================
--- WEB PROPERTIES — domains/sites owned by a prospect
+-- WEB PROPERTIES - domains/sites owned by a prospect
 -- ==========================================================================
 CREATE TABLE IF NOT EXISTS public.web_properties (
     property_id        UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -70,7 +70,7 @@ CREATE INDEX IF NOT EXISTS idx_web_properties_prospect ON public.web_properties(
 CREATE UNIQUE INDEX IF NOT EXISTS idx_web_properties_domain ON public.web_properties(domain);
 
 -- ==========================================================================
--- AUDITS — each audit execution
+-- AUDITS - each audit execution
 -- ==========================================================================
 CREATE TABLE IF NOT EXISTS public.audits (
     audit_id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -94,7 +94,7 @@ CREATE INDEX IF NOT EXISTS idx_audits_prospect ON public.audits(prospect_id);
 CREATE INDEX IF NOT EXISTS idx_audits_status ON public.audits(status);
 
 -- ==========================================================================
--- FINDINGS — individual diagnostic findings per audit
+-- FINDINGS - individual diagnostic findings per audit
 -- ==========================================================================
 CREATE TABLE IF NOT EXISTS public.findings (
     finding_id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -117,7 +117,7 @@ CREATE INDEX IF NOT EXISTS idx_findings_severity ON public.findings(severity);
 CREATE INDEX IF NOT EXISTS idx_findings_rule ON public.findings(rule_id);
 
 -- ==========================================================================
--- QUALIFICATIONS — commercial qualification records
+-- QUALIFICATIONS - commercial qualification records
 -- ==========================================================================
 CREATE TABLE IF NOT EXISTS public.qualifications (
     qualification_id   UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -139,7 +139,7 @@ CREATE INDEX IF NOT EXISTS idx_qualifications_prospect ON public.qualifications(
 CREATE INDEX IF NOT EXISTS idx_qualifications_class ON public.qualifications(classification);
 
 -- ==========================================================================
--- OFFERS — fix pack offers sent to qualified prospects
+-- OFFERS - fix pack offers sent to qualified prospects
 -- ==========================================================================
 CREATE TABLE IF NOT EXISTS public.offers (
     offer_id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -165,7 +165,7 @@ CREATE INDEX IF NOT EXISTS idx_offers_prospect ON public.offers(prospect_id);
 CREATE INDEX IF NOT EXISTS idx_offers_status ON public.offers(status);
 
 -- ==========================================================================
--- INTERVENTIONS — approved changes deployed to a site
+-- INTERVENTIONS - approved changes deployed to a site
 -- ==========================================================================
 CREATE TABLE IF NOT EXISTS public.interventions (
     intervention_id    UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -192,7 +192,7 @@ CREATE INDEX IF NOT EXISTS idx_interventions_prospect ON public.interventions(pr
 CREATE INDEX IF NOT EXISTS idx_interventions_status ON public.interventions(implementation_status);
 
 -- ==========================================================================
--- OUTCOMES — measured results after interventions
+-- OUTCOMES - measured results after interventions
 -- ==========================================================================
 CREATE TABLE IF NOT EXISTS public.outcomes (
     outcome_id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -220,7 +220,7 @@ CREATE INDEX IF NOT EXISTS idx_outcomes_prospect ON public.outcomes(prospect_id)
 CREATE INDEX IF NOT EXISTS idx_outcomes_intervention ON public.outcomes(intervention_id);
 
 -- ==========================================================================
--- EVENTS — the canonical event log
+-- EVENTS - the canonical event log
 -- ==========================================================================
 CREATE TABLE IF NOT EXISTS public.events (
     event_id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -289,7 +289,7 @@ EXCEPTION WHEN duplicate_object THEN NULL;
 END $$;
 
 -- ==========================================================================
--- VIEW: funnel snapshot — count of prospects at each lifecycle state
+-- VIEW: funnel snapshot - count of prospects at each lifecycle state
 -- ==========================================================================
 CREATE OR REPLACE VIEW public.funnel_snapshot AS
 SELECT
@@ -305,7 +305,7 @@ ORDER BY array_position(ARRAY[
 ]::TEXT[], lifecycle_state);
 
 -- ==========================================================================
--- VIEW: audit funnel — completion and conversion metrics
+-- VIEW: audit funnel - completion and conversion metrics
 -- ==========================================================================
 CREATE OR REPLACE VIEW public.audit_funnel AS
 SELECT

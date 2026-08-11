@@ -1,4 +1,4 @@
-# Inbox Inspection Report — 2026-08-09
+# Inbox Inspection Report - 2026-08-09
 
 **Run type:** CEO action: warm-reply-payment-reconcile (read-only)
 **Constraints:** No outbound sends, no ledger writes, no pitches
@@ -12,9 +12,9 @@
 | pitch_sent | 27 | All stale 26-35 days; avg 33d since last touch (July 8 max) |
 | bounced | 13 | Closed; no action |
 | closed | 6 | Unsubscribes, auto-replies, test emails |
-| warm_replied | 1 | kanzariyamihir@gmail.com — see below |
-| recircle_60d | 1 | support@retryfix.com — re-engage due 2026-09-05 |
-| implementation_kit_delivered | 1 | mike.holownych@gmail.com (gofaultline.dev) — fulfilled 2026-08-05 |
+| warm_replied | 1 | kanzariyamihir@gmail.com - see below |
+| recircle_60d | 1 | support@retryfix.com - re-engage due 2026-09-05 |
+| implementation_kit_delivered | 1 | mike.holownych@gmail.com (gofaultline.dev) - fulfilled 2026-08-05 |
 | **TOTAL** | **49** | |
 
 ---
@@ -31,10 +31,10 @@
 | Reply classification | soft_interest / ambient engagement |
 | Replied at | 2026-07-07T12:01:14Z (32 days ago) |
 | Our response sent | 2026-07-07T23:59:10Z |
-| Checkout handoff status | Not triggered — no explicit buying signal |
+| Checkout handoff status | Not triggered - no explicit buying signal |
 | Current stage | warm_replied (no further action logged) |
 
-**Assessment:** No pricing query, demo request, or purchase intent in original reply. Our response was sent day-of. No follow-up reply recorded in 32 days. Thread is warm but cooling — this cohort is at ambient-interest tier, not active-buying tier.
+**Assessment:** No pricing query, demo request, or purchase intent in original reply. Our response was sent day-of. No follow-up reply recorded in 32 days. Thread is warm but cooling - this cohort is at ambient-interest tier, not active-buying tier.
 
 ---
 
@@ -42,12 +42,12 @@
 
 | Check | Status |
 |-------|--------|
-| Stripe $97 link | Live — https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02 |
-| Stripe $7 link | Live — https://buy.stripe.com/bJefZhd6s0wkgytew243S07 |
-| Stripe $197 link | Live — https://buy.stripe.com/14AcN58Qca6Ueql2Nk43S08 |
+| Stripe $97 link | Live - https://buy.stripe.com/aFa7sL5E03Iwgyt2Nk43S02 |
+| Stripe $7 link | Live - https://buy.stripe.com/bJefZhd6s0wkgytew243S07 |
+| Stripe $197 link | Live - https://buy.stripe.com/14AcN58Qca6Ueql2Nk43S08 |
 | deliver_audit.py | Built and tested |
 | nebula-nextjs (audit page) | Active (200 local + public) |
-| AgentMail webhook | Registered — message.received fires to nebulacomponents.shop/webhook/agentmail |
+| AgentMail webhook | Registered - message.received fires to nebulacomponents.shop/webhook/agentmail |
 | HOT_LEAD.json sync | Current |
 | customer-ledger.jsonl | Current |
 | Real revenue | **$0** (stats.json confirmed; 2 test payments excluded) |
@@ -72,8 +72,8 @@ The checkout handoff has **not been completed** for this lead. Their "Hey" was c
 
 The lead is 32 days stale after a soft-interest reply. Two options exist:
 
-1. **Send $97 pitch now** — reference the original audit, acknowledge the delay, include checkout link directly. Risk: 32-day gap makes this feel cold.
-2. **Mark recircle_60d** — treat like retryfix.com, re-engage at 60-day mark (~2026-09-06). Conservative; avoids a pushy follow-up to a tepid signal.
+1. **Send $97 pitch now** - reference the original audit, acknowledge the delay, include checkout link directly. Risk: 32-day gap makes this feel cold.
+2. **Mark recircle_60d** - treat like retryfix.com, re-engage at 60-day mark (~2026-09-06). Conservative; avoids a pushy follow-up to a tepid signal.
 
 This decision requires CEO sign-off per doctrine (warm lead reply = escalate). Support has no approved template for a 32-day stale warm-reply scenario.
 
@@ -83,7 +83,7 @@ This decision requires CEO sign-off per doctrine (warm lead reply = escalate). S
 
 27 leads in `pitch_sent` with no payment and no reply. Last touch: July 8, 2026 (day3 follow-up sent via `silent_objection_pre_empt` framework). All are 26-35 days past final touch.
 
-**No further follow-up is scheduled.** Any re-engagement of this cohort is a Growth/CEO decision — not within Support's current doctrine.
+**No further follow-up is scheduled.** Any re-engagement of this cohort is a Growth/CEO decision - not within Support's current doctrine.
 
 ---
 
@@ -91,11 +91,11 @@ This decision requires CEO sign-off per doctrine (warm lead reply = escalate). S
 
 | Priority | Item | Route |
 |----------|------|-------|
-| HIGH | kanzariyamihir@gmail.com — 32d stale, warm-replied, no checkout handoff | CEO decision required |
+| HIGH | kanzariyamihir@gmail.com - 32d stale, warm-replied, no checkout handoff | CEO decision required |
 | INFO | 27 pitch_sent leads, avg 33d stale, zero payments | CEO / Growth awareness |
 | INFO | retryfix.com recircle due 2026-09-05 | Auto-queue; no action yet |
 | INFO | mike.holownych@gmail.com implementation kit fulfilled 2026-08-05 | Ops-Finance to log revenue if payment confirmed |
 
 ---
 
-*Generated by Support agent — read-only run — 2026-08-09*
+*Generated by Support agent - read-only run - 2026-08-09*

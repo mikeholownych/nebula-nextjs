@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-[READ-ONLY MONITOR — 2026-07-31] Reddit is DEAD for outreach (account standing,
+[READ-ONLY MONITOR - 2026-07-31] Reddit is DEAD for outreach (account standing,
 API apps denied, comments auto-deleted). This script is KEPT ONLY as a read-only
 market-signal monitor (PRAW official API). It MUST NOT send, reply, or auto-post
 anything. Outreach path: ops/lead_lanes + teardown engine (ramp_pipeline_fill.py v2).
 """
 """
-channel1/reddit_monitor_praw.py — Official Reddit API lead monitor (PRAW).
+channel1/reddit_monitor_praw.py - Official Reddit API lead monitor (PRAW).
 
 Why this exists (2026-07-31): unauthenticated Reddit access is fully blocked
 (JSON API 403, old.reddit Cloudflare, RSS, Apify actors noisy). The OFFICIAL
-API via PRAW is a separate, legitimate path — free tier, narrow subreddit
+API via PRAW is a separate, legitimate path - free tier, narrow subreddit
 monitoring only. This replaces the web_search fallback for freshness: real
 subreddit + real-time new posts + no LLM filter noise.
 
@@ -51,7 +51,7 @@ OUT = HERE / "reddit_leads.jsonl"
 STATE = HERE / "reddit_seen.json"
 SECRETS = Path.home() / ".hermes" / "secrets" / "reddit.env"
 
-# From high-intent-outreach skill — ICP-relevant subreddits
+# From high-intent-outreach skill - ICP-relevant subreddits
 SUBREDDITS = [
     "startups", "SaaS", "PPC", "FacebookAds", "googleads", "ecommerce",
     "smallbusiness", "digital_marketing", "marketing", "EntrepreneurRideAlong",
@@ -70,7 +70,7 @@ TRIGGER_PHRASES = [
     "help with my funnel", "funnel not converting",
 ]
 
-# Financial regex — extended to catch €, K suffix, currency-after-amount
+# Financial regex - extended to catch €, K suffix, currency-after-amount
 FINANCIAL = re.compile(
     r"(\$\s?\d[\d,]*k?|€\s?\d[\d,]*k?|\d[\d,]*k?\s?(usd|eur|cad)|spent|burning|wasted|blew|throwing)",
     re.I,
@@ -135,7 +135,7 @@ def main() -> int:
         print("❌ Missing Reddit OAuth credentials.")
         print("   Create a script app at https://www.reddit.com/prefs/apps, then write")
         print(f"   {SECRETS} with REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET / REDDIT_USER_AGENT.")
-        print("   (PRAW is the OFFICIAL API — distinct from the blocked scraping paths.)")
+        print("   (PRAW is the OFFICIAL API - distinct from the blocked scraping paths.)")
         return 1
 
     import praw

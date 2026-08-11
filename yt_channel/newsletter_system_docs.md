@@ -1,9 +1,9 @@
-# Newsletter System — Landing Page Diagnostics Weekly
+# Newsletter System - Landing Page Diagnostics Weekly
 
-**Status**: ✅ Complete and ready for deployment  
-**Route**: `/newsletter` (signup page)  
-**API**: `POST /api/newsletter/subscribe`, `POST /api/newsletter/unsubscribe`  
-**Cron**: Weekly send (Monday 8 AM ET)  
+**Status**: ✅ Complete and ready for deployment
+**Route**: `/newsletter` (signup page)
+**API**: `POST /api/newsletter/subscribe`, `POST /api/newsletter/unsubscribe`
+**Cron**: Weekly send (Monday 8 AM ET)
 
 ---
 
@@ -44,7 +44,7 @@ Format:
 **Location**: `/newsletter`
 
 **Content**:
-- Hero: "Landing Page Diagnostics — Weekly insights from 847 audits"
+- Hero: "Landing Page Diagnostics - Weekly insights from 847 audits"
 - 3 value props (specific findings, actionable fixes, real results)
 - Sample findings (3 real examples with impact metrics)
 - Signup form (email + optional role dropdown)
@@ -185,10 +185,10 @@ CREATE TABLE newsletter_subscribers (
 
 ## Files Delivered
 
-1. ✅ `/app/newsletter/page.tsx` — Signup page
-2. ✅ `/platform_api/routes/newsletter.py` — API endpoints
-3. ✅ `/platform_api/db/newsletter_schema.py` — Database schema + setup script
-4. ✅ `/yt_channel/weekly_newsletter_job.py` — Weekly send cron job
+1. ✅ `/app/newsletter/page.tsx` - Signup page
+2. ✅ `/platform_api/routes/newsletter.py` - API endpoints
+3. ✅ `/platform_api/db/newsletter_schema.py` - Database schema + setup script
+4. ✅ `/yt_channel/weekly_newsletter_job.py` - Weekly send cron job
 5. ✅ This documentation
 
 ---

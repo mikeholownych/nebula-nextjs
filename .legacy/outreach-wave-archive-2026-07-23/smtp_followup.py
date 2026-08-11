@@ -61,26 +61,26 @@ def send_email(to_email, to_name):
 
 Quick follow-up on my earlier email about Nebula Components.
 
-If you're still working on your landing page and haven't shipped yet — I get it. Building takes forever.
+If you're still working on your landing page and haven't shipped yet - I get it. Building takes forever.
 
 Two things that might help:
 
-1. **DIY ($7):** https://nebulacomponents.shop — 7 dark components. Copy, paste, done. Demo: nebulacomponents.shop/demo.html
+1. **DIY ($7):** https://nebulacomponents.shop - 7 dark components. Copy, paste, done. Demo: nebulacomponents.shop/demo.html
 
-2. **Done-For-You ($197):** https://launchcrate.io — I build your entire page + email setup + outreach sequence. Delivered in 24 hours. 4 spots left at this price.
+2. **Done-For-You ($197):** https://launchcrate.io - I build your entire page + email setup + outreach sequence. Delivered in 24 hours. 4 spots left at this price.
 
 Both backed by a "Ship or It's Free" guarantee. If you don't ship, you don't pay.
 
-Just replying to this email works too — I'll build your page tonight.
+Just replying to this email works too - I'll build your page tonight.
 
 Best,
 Nebula / LaunchCrate"""
 
     html = f"""<p>Hi {to_name},</p>
 <p>Quick follow-up on my earlier email.</p>
-<p>If you're still working on your landing page — <strong>two options:</strong></p>
-<p><strong style="color:#818cf8">1. DIY — $7</strong><br/>7 dark-themed components at <a href="https://nebulacomponents.shop">nebulacomponents.shop</a><br/><a href="https://nebulacomponents.shop/demo.html" style="color:#818cf8">See the demo</a></p>
-<p><strong style="color:#fbbf24">2. Done-For-You — $197 (reg $750)</strong><br/>I build your page + email + outreach. 24h delivery.<br/><a href="https://launchcrate.io" style="display:inline-block;background:linear-gradient(135deg,#fbbf24,#ec4899);color:#0a0a0f;padding:12px 24px;border-radius:8px;font-weight:600;text-decoration:none">Claim a Spot →</a></p>
+<p>If you're still working on your landing page - <strong>two options:</strong></p>
+<p><strong style="color:#818cf8">1. DIY - $7</strong><br/>7 dark-themed components at <a href="https://nebulacomponents.shop">nebulacomponents.shop</a><br/><a href="https://nebulacomponents.shop/demo.html" style="color:#818cf8">See the demo</a></p>
+<p><strong style="color:#fbbf24">2. Done-For-You - $197 (reg $750)</strong><br/>I build your page + email + outreach. 24h delivery.<br/><a href="https://launchcrate.io" style="display:inline-block;background:linear-gradient(135deg,#fbbf24,#ec4899);color:#0a0a0f;padding:12px 24px;border-radius:8px;font-weight:600;text-decoration:none">Claim a Spot →</a></p>
 <p><strong style="color:#34d399">"Ship or It's Free" guarantee on both.</strong></p>
 <p>Just reply to this email and I'll get started.</p>"""
 
@@ -107,20 +107,20 @@ with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=ctx) as server:
         msg["From"] = SMTP_USER
         msg["To"] = email
         msg["Subject"] = "24h follow-up: still looking for a landing page?"
-        
+
         text = f"Hi {name},\n\nQuick follow-up. If you're still working on your landing page:\n\n1. DIY ($7): https://nebulacomponents.shop\n2. Done-For-You ($197): https://launchcrate.io\n\nBoth have a 'Ship or It\\'s Free' guarantee.\n\nBest,\nNebula / LaunchCrate"
         html = f"<p>Hi {name},</p><p>Quick follow-up.</p><p><strong>$7 DIY:</strong> <a href='https://nebulacomponents.shop'>nebulacomponents.shop</a><br/><strong>$197 DFY:</strong> <a href='https://launchcrate.io'>launchcrate.io</a><br/><strong style='color:#34d399'>Ship or It's Free guarantee.</strong></p>"
-        
+
         msg.attach(MIMEText(text, "plain"))
         msg.attach(MIMEText(html, "html"))
-        
+
         try:
             server.sendmail(SMTP_USER, [email], msg.as_string())
             sent += 1
             print(f"[SENT {sent}] {email}")
         except Exception as e:
             print(f"[FAIL] {email}: {e}")
-        
+
         # Small delay between sends
         if sent % 10 == 0:
             time.sleep(2)

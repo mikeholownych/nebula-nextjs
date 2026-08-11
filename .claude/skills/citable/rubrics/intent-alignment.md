@@ -5,14 +5,14 @@ registry and the queries/prompts mapped to it.
 
 ## Scoring dimensions
 
-1. **Declared vs delivered** — a page targeting "vendor evaluation" must contain
+1. **Declared vs delivered** - a page targeting "vendor evaluation" must contain
    evaluation material (capabilities, limitations, pricing qualification,
    comparison), not a re-titled awareness article.
-2. **Intent purity** — informational and transactional intents separated unless
+2. **Intent purity** - informational and transactional intents separated unless
    the registry deliberately combines them.
-3. **Query/prompt fit** — for each mapped query_id/prompt_id, the page contains
+3. **Query/prompt fit** - for each mapped query_id/prompt_id, the page contains
    the expected answer components recorded in the registry.
-4. **Next-step coherence** — the conversion action matches the funnel stage
+4. **Next-step coherence** - the conversion action matches the funnel stage
    (awareness pages don't push "buy now"; selection pages don't end at a blog
    subscription).
 
@@ -20,7 +20,7 @@ registry and the queries/prompts mapped to it.
 
 `strong` (all mapped queries served, next step coherent), `partial` (primary
 query served, variants uncovered), `weak` (declared intent contradicted by
-content), `not_established` (no registry mapping — run `/citable map-queries`
+content), `not_established` (no registry mapping - run `/citable map-queries`
 first).
 
 ## Evidence required
@@ -31,7 +31,7 @@ each expected answer component.
 ## Counterexample
 
 A page registered for "how to implement X" (implementation intent) whose body
-is a category pitch with no steps — flagged by ANS-006 deterministically; this
+is a category pitch with no steps - flagged by ANS-006 deterministically; this
 rubric additionally judges whether the *substance* matches even when an ordered
 list exists.
 

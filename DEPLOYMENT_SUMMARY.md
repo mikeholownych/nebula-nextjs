@@ -1,6 +1,6 @@
-# Content-to-Pipeline System — Deployment Summary
+# Content-to-Pipeline System - Deployment Summary
 
-**Deployed:** 2026-07-18  
+**Deployed:** 2026-07-18
 **Status:** ✅ Production Ready
 
 ---
@@ -189,9 +189,9 @@ python3 scripts/monitor_tracks.py
 
 ## Rollout Complete
 
-**Week 1:** Taxonomy, templates, renderer  
-**Week 2:** Nurture engine integration  
-**Week 3:** Audit API integration  
+**Week 1:** Taxonomy, templates, renderer
+**Week 2:** Nurture engine integration
+**Week 3:** Audit API integration
 **Week 4:** Monitoring + validation ✅
 
 **Status:** Production ready. Next audit will trigger track assignment.

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-generate_dashboard.py — Nebula pipeline visual dashboard.
+generate_dashboard.py - Nebula pipeline visual dashboard.
 
 Jack Roberts principle: visual intelligence layer for the agentic OS.
 A shareable HTML dashboard showing pipeline state, conversion funnel,
@@ -269,7 +269,7 @@ def build_dashboard() -> str:
 
     # ── Night Watch Changes ──
     if nw_changes:
-        html += '<h2 class="section-title">🔔 Night Watch — Site Changes Detected</h2>\n'
+        html += '<h2 class="section-title">🔔 Night Watch - Site Changes Detected</h2>\n'
         html += """<table>
 <thead><tr><th>Email</th><th>Title</th><th>Changes</th></tr></thead>
 <tbody>

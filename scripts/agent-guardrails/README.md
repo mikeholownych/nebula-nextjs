@@ -1,10 +1,10 @@
 # Agent Command Guardrails
 
 A "bouncer" that blocks catastrophic shell commands **before any AI agent
-runs them** — a pre-tool-call denylist, not a system-prompt promise.
+runs them** - a pre-tool-call denylist, not a system-prompt promise.
 
 Source: adapted from [davidondrej/skills](https://github.com/davidondrej/skills)
-(David Ondrej's global-agent-guardrails, MIT) — Linux-adapted, no diskutil.
+(David Ondrej's global-agent-guardrails, MIT) - Linux-adapted, no diskutil.
 
 ## What it blocks
 
@@ -43,7 +43,7 @@ over-blocking kills agent usefulness.
 ```
 
 Hermes adapter contract: `pre_tool_call` hook, `provides_hooks` manifest key,
-returns `{"action": "block", "message": ...}`. **Fail-open by design** — the
+returns `{"action": "block", "message": ...}`. **Fail-open by design** - the
 plugin catches every exception so a broken guard can never brick the terminal
 tool.
 
@@ -68,13 +68,13 @@ cd "$(mktemp -d)" && hermes chat --query 'Run exactly this terminal command: git
 
 ## Gotchas (hard-won)
 
-- **Hermes hooks are fail-open on exceptions** — keep the plugin trivial.
-- **Plugin loads on session start** — an already-running session does not pick
+- **Hermes hooks are fail-open on exceptions** - keep the plugin trivial.
+- **Plugin loads on session start** - an already-running session does not pick
   up a newly enabled plugin until `/reset` or a new session.
 - **`-[a-zA-Z]*` cannot match `--flag`** (double dash): the literal `-` eats
   the first dash and `[a-zA-Z]*` matches empty. Use `-{1,2}` intervals for
   flag groups.
-- **Leftmost-longest vs backtracking**: GNU grep ERE uses DFA semantics —
+- **Leftmost-longest vs backtracking**: GNU grep ERE uses DFA semantics -
   test every pattern against both block AND allow cases (test-guard.sh).
 - **Not a sandbox**: obfuscation (`python -c "shutil.rmtree(...)"`) can slip
   past regex. This is a seatbelt against accidents, not a hostile-agent wall.

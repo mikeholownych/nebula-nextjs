@@ -4,9 +4,9 @@
 
 Three Reddit posts prepared and ready for immediate launch:
 
-1. **r/SaaS** — "I'm building an AI cold email service. Selling $97 pilot spots to fund it."
-2. **r/indiehackers** — "Selling $97 audit to get first customer. Am I insane or onto something?"
-3. **r/Entrepreneur** — "Built an AI cold email service in 2 days. Now selling $97 pilots to fund it."
+1. **r/SaaS** - "I'm building an AI cold email service. Selling $97 pilot spots to fund it."
+2. **r/indiehackers** - "Selling $97 audit to get first customer. Am I insane or onto something?"
+3. **r/Entrepreneur** - "Built an AI cold email service in 2 days. Now selling $97 pilots to fund it."
 
 ## Payment Link
 
@@ -38,7 +38,7 @@ Three Reddit posts prepared and ready for immediate launch:
 
 ## Go/No-Go Decision
 
-**This is GO.** 
+**This is GO.**
 
 Rationale:
 1. Takes 10 minutes to post

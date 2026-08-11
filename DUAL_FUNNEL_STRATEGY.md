@@ -1,4 +1,4 @@
-# DUAL FUNNEL STRATEGY — 72-HOUR CHALLENGE
+# DUAL FUNNEL STRATEGY - 72-HOUR CHALLENGE
 
 ## The Insight
 
@@ -10,13 +10,13 @@ Running TWO offers in parallel captures different buyer psychology:
 | **Serious** | "Get help" | $97 audit | Buys if ready to execute |
 | **Curious** | "See options" | Both available | Decides during email |
 
-**Single offer ($97 only):** Misses the impulse buyer  
-**Single offer ($7 only):** Misses the serious buyer  
+**Single offer ($97 only):** Misses the impulse buyer
+**Single offer ($7 only):** Misses the serious buyer
 **Dual funnel:** Catches both, converts more volume
 
 ---
 
-## Revenue Math — Dual Funnel vs Single Offer
+## Revenue Math - Dual Funnel vs Single Offer
 
 ### Scenario 1: Single $97 Offer (Original Strategy)
 ```
@@ -99,12 +99,12 @@ BRANCH 4: Not Interested Today
 - 30 emails sent
 - Expected reply rate: 1-3 replies
 
-### Wave 2 (Tonight @ 9 PM) — NOW DUAL FUNNEL
+### Wave 2 (Tonight @ 9 PM) - NOW DUAL FUNNEL
 - Positioning: "$7 template first, $97 audit option"
 - 50 new prospects
 - Expected: 7-8 template sales, 2-3 audit sales
 
-### Wave 3 (Tomorrow @ 3 AM) — NOW DUAL FUNNEL
+### Wave 3 (Tomorrow @ 3 AM) - NOW DUAL FUNNEL
 - Positioning: "Last chance - 24 hours left"
 - All non-converters from Waves 1-2
 - Expected: Additional 5-8 template sales, 1-2 audit sales
@@ -126,8 +126,8 @@ BRANCH 4: Not Interested Today
 | Wave 2 Cold | Tomorrow 3 PM | 27 (follow-ups) | 2-3 | 1 | $21-118 |
 | **TOTAL** | **72 hours** | **187** | **17-24** | **5-8** | **$248-879** |
 
-**Conservative estimate:** $248 (covers $200 debt + $48 profit)  
-**Mid estimate:** $500+ (real profit)  
+**Conservative estimate:** $248 (covers $200 debt + $48 profit)
+**Mid estimate:** $500+ (real profit)
 **Aggressive estimate:** $879 (successful funnel)
 
 **Break-even threshold:** $291 (3 × $97 sales OR 41 × $7 sales OR mix)
@@ -169,7 +169,7 @@ When someone replies:
 
 ## Key Advantage of Dual Funnel
 
-**Single funnel:** Forces buyer into one path (high friction)  
+**Single funnel:** Forces buyer into one path (high friction)
 **Dual funnel:** Buyer self-selects (low friction)
 
 This is why SaaS freemium works. The $7 template IS the freemium. It:
@@ -182,12 +182,12 @@ This is why SaaS freemium works. The $7 template IS the freemium. It:
 
 ## Next Steps
 
-✅ Wave 2 updated → Send dual funnel emails tonight @ 9 PM  
-✅ Wave 3 updated → Send dual funnel final push tomorrow @ 3 AM  
-✅ Auto-responder updated → Route template vs audit inquiries  
-✅ Tracking live → Monitor both funnels simultaneously  
+✅ Wave 2 updated → Send dual funnel emails tonight @ 9 PM
+✅ Wave 3 updated → Send dual funnel final push tomorrow @ 3 AM
+✅ Auto-responder updated → Route template vs audit inquiries
+✅ Tracking live → Monitor both funnels simultaneously
 
-**Expected first sale:** 2-6 hours after Wave 2 goes out  
+**Expected first sale:** 2-6 hours after Wave 2 goes out
 **Expected revenue clarity:** By tomorrow noon (24h checkpoint)
 
 Let's execute.

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-nova_reel.py — Amazon Nova Reel video generation via AWS Bedrock.
+nova_reel.py - Amazon Nova Reel video generation via AWS Bedrock.
 
 Supports:
   - Text-to-video

@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test'
 /**
  * Regression check for the sitewide pt-[72px] vs SiteNav's actual rendered
  * height (79px desktop / 89px mobile) gap fixed in 7cad6e8c. jsdom-based
- * Jest tests can't catch this class of bug — jsdom doesn't compute real
+ * Jest tests can't catch this class of bug - jsdom doesn't compute real
  * layout, so bounding boxes are always zero. This needs a real browser.
  */
 const PAGES = ['/', '/learning-centre', '/audit', '/resources', '/thank-you']

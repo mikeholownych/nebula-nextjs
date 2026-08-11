@@ -25,12 +25,12 @@
 
 ## Plan set
 
-0. [`2026-07-13-nextjs-customer-platform-action-plan.md`](2026-07-13-nextjs-customer-platform-action-plan.md) — execution controller with owners, work packages, dependencies, stage gates, evidence, stop conditions, and critical path.
-1. [`01-nextjs-public-site-migration.md`](01-nextjs-public-site-migration.md) — framework foundation, route compatibility, content migration, and public-site parity.
-2. [`02-platform-api-identity-tenancy.md`](02-platform-api-identity-tenancy.md) — OIDC boundary, PostgreSQL, tenant model, RBAC, and platform APIs.
-3. [`03-customer-dashboard-billing.md`](03-customer-dashboard-billing.md) — dashboard shell, account administration, Stripe portal, entitlements, and audit visibility.
-4. [`04-agency-whitelabel-management.md`](04-agency-whitelabel-management.md) — agency/client hierarchy, branding, managed subdomains, and custom domains.
-5. [`05-deployment-cutover-operations.md`](05-deployment-cutover-operations.md) — Cloudflare routing, CI, observability, security gates, production cutover, and rollback.
+0. [`2026-07-13-nextjs-customer-platform-action-plan.md`](2026-07-13-nextjs-customer-platform-action-plan.md) - execution controller with owners, work packages, dependencies, stage gates, evidence, stop conditions, and critical path.
+1. [`01-nextjs-public-site-migration.md`](01-nextjs-public-site-migration.md) - framework foundation, route compatibility, content migration, and public-site parity.
+2. [`02-platform-api-identity-tenancy.md`](02-platform-api-identity-tenancy.md) - OIDC boundary, PostgreSQL, tenant model, RBAC, and platform APIs.
+3. [`03-customer-dashboard-billing.md`](03-customer-dashboard-billing.md) - dashboard shell, account administration, Stripe portal, entitlements, and audit visibility.
+4. [`04-agency-whitelabel-management.md`](04-agency-whitelabel-management.md) - agency/client hierarchy, branding, managed subdomains, and custom domains.
+5. [`05-deployment-cutover-operations.md`](05-deployment-cutover-operations.md) - Cloudflare routing, CI, observability, security gates, production cutover, and rollback.
 
 ## Dependency graph
 
@@ -45,7 +45,7 @@ Text alternative: plans 01 and 02 can begin independently. Customer dashboard re
 
 ## Release sequence
 
-### Release 0 — Baseline and proof
+### Release 0 - Baseline and proof
 
 - [ ] Create an isolated worktree and feature branch.
 - [ ] Freeze route, metadata, screenshot, analytics, Stripe-link, and API baselines.
@@ -53,36 +53,36 @@ Text alternative: plans 01 and 02 can begin independently. Customer dashboard re
 - [ ] Prove Cloudflare path routing can separate Next, existing Python, and platform API traffic.
 - [ ] Stop if either proof fails; revise the architecture decision before migrating content.
 
-### Release 1 — Framework foundation
+### Release 1 - Framework foundation
 
 - [ ] Complete Plan 01 Tasks 1–4.
 - [ ] Serve a canary page through Next.js while all other routes remain on Python.
 - [ ] Verify rollback by returning the canary route to Python.
 
-### Release 2 — Content estate
+### Release 2 - Content estate
 
 - [ ] Migrate case studies, learning centre, articles, comparisons, and products.
 - [ ] Run route, metadata, accessibility, visual, analytics, and link parity after each family.
 - [ ] Keep forms, calculators, dashboard, and homepage on legacy routes.
 
-### Release 3 — Identity and tenant foundation
+### Release 3 - Identity and tenant foundation
 
 - [ ] Complete Plan 02.
 - [ ] Verify OIDC tokens in Python and pass the cross-tenant denial matrix.
 - [ ] Run PostgreSQL backup/restore and migration rollback drills.
 
-### Release 4 — Customer dashboard
+### Release 4 - Customer dashboard
 
 - [ ] Complete Plan 03 behind `customer_dashboard` entitlement.
 - [ ] Enable for an internal Nebula organization, then one test customer.
 - [ ] Verify Stripe Customer Portal and webhook synchronization in Stripe test mode.
 
-### Release 5 — Agency and white-label
+### Release 5 - Agency and white-label
 
 - [ ] Complete Plan 04 managed-subdomain release.
 - [ ] Enable custom domains only after DNS ownership and certificate automation pass staging.
 
-### Release 6 — Production cutover
+### Release 6 - Production cutover
 
 - [ ] Complete Plan 05.
 - [ ] Migrate interactive marketing pages and homepage last.

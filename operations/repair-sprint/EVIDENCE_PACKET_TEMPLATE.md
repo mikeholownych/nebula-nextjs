@@ -24,7 +24,7 @@
 - **Buyer may revoke future publication:** `yes`
 - **Secrets excluded from this record:** `confirmed | not confirmed`
 
-## Baseline — Page-Condition Evidence
+## Baseline - Page-Condition Evidence
 
 - **Baseline timestamp (UTC):**
 - **Production URL/version:**
@@ -65,7 +65,7 @@
 - **Manual checks:**
 - **Rollback exercised or validated:**
 
-## Production Verification — Page-Condition Evidence
+## Production Verification - Page-Condition Evidence
 
 - **Deployment timestamp (UTC):**
 - **Production version/commit:**

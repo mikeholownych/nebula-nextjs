@@ -41,4 +41,4 @@ Use clean HTML with inline styles. Keep total above-fold height under 600px.
 Label each section with a comment so I can adapt it to my CMS.
 ```
 
-**Expected output:** Complete HTML for the above-fold section with headline, sub-headline, CTA, and trust signal — all fitting in one mobile viewport.
+**Expected output:** Complete HTML for the above-fold section with headline, sub-headline, CTA, and trust signal - all fitting in one mobile viewport.

@@ -125,7 +125,7 @@ def main() -> int:
         th = Path(args.thumbnail) if args.thumbnail else None
         checks["thumbnail"] = bool(th and th.exists() and th.stat().st_size > 5_000)
 
-    # 8. No dead audio tail (Jenny Hoyos: 'every second counts' — she
+    # 8. No dead audio tail (Jenny Hoyos: 'every second counts' - she
     #    trimmed a 1s silent tail and retention went 83%→88%). Audio
     #    should play through to the end; a silent final second is a
     #    drop-off point. Compare audio stream duration vs video.

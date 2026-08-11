@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none">
   <!-- Background -->
   <rect width="32" height="32" rx="5" fill="#050505"/>
-  
-  <!-- 3x3 signal grid — larger dots, higher contrast -->
+
+  <!-- 3x3 signal grid - larger dots, higher contrast -->
   <!-- Grid origin: 5,5. Cell: 8x8. Dot r=2.8 -->
   <!-- Row 0: all pass -->
   <circle cx="9"  cy="9"  r="2.8" fill="#00c2a0"/>

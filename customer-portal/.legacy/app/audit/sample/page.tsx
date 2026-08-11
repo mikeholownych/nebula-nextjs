@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Sample Landing Page Audit — Nebula Components',
+  title: 'Sample Landing Page Audit - Nebula Components',
   description: 'Example audit report showing how Nebula diagnoses landing page conversion leaks.',
 }
 
@@ -19,7 +19,7 @@ export default function SampleAuditPage() {
     recommendations: [
       'Your ICP spent $12k on ads last month. Show them you understand that pain in the headline.',
       'Proof must appear before the CTA. Add: "14 founders diagnosed this week" or customer logos.',
-      'One CTA. Pick "Get free audit" or "Buy fix pack" — not both.',
+      'One CTA. Pick "Get free audit" or "Buy fix pack" - not both.',
     ],
   }
 
@@ -74,7 +74,7 @@ export default function SampleAuditPage() {
           </div>
           <div>
             <div style={{ fontSize: '24px', fontWeight: 600 }}>Conversion Score</div>
-            <div className="score-label">Out of 10 — Critical leaks detected</div>
+            <div className="score-label">Out of 10 - Critical leaks detected</div>
           </div>
         </section>
 

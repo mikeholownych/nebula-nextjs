@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 """
-nurture_engine.py — Segment-aware email sequences (TrustOS Layer 2 steal).
+nurture_engine.py - Segment-aware email sequences (TrustOS Layer 2 steal).
 
 Two modes:
   --send      (deprecated) Batch-sends to all leads in segment. Hit AM 429.
   --trickle   (recommended) Sends 1-2 emails per run. Run every 5 min via cron.
 
 TrustOS mapping:
-  Cold  (0-7):   1 email/week — educational
-  Warm  (8-20):  3 emails/week — case studies, social proof
+  Cold  (0-7):   1 email/week - educational
+  Warm  (8-20):  3 emails/week - case studies, social proof
   Hot   (21+):   Immediate pitch + self-serve checkout CTA
 
 Hot leads are handled separately by the pitching pipeline (hot_lead_watcher.py).
 This engine handles cold and warm nurture cadences.
 
 Run:  python3 nurture_engine.py --trickle
-Cron: every 5m — python3 /home/mike/nebula/nurture_engine.py --trickle
+Cron: every 5m - python3 /home/mike/nebula/nurture_engine.py --trickle
 """
 import json
 import hashlib
@@ -77,7 +77,7 @@ def send_email(to_email, subject, text_body, client_id=None):
     """Send through the centralized AgentMail release gate.
 
     Always passes an explicit idempotent client_id (nurture: prefix is whitelisted
-    by OutboundReleaseGate for MARKETING). No auto: hashed ids — they make stuck
+    by OutboundReleaseGate for MARKETING). No auto: hashed ids - they make stuck
     retry loops invisible in delivery_events.
     """
     if DRY_RUN:
@@ -110,7 +110,7 @@ COLD_TEMPLATES = [
         "subject": "Your free landing page audit is ready",
         "body": """Hey,
 
-I checked out {site} and ran it through our audit engine. You're probably spending on ads right now — here's what your landing page is doing to that budget.
+I checked out {site} and ran it through our audit engine. You're probably spending on ads right now - here's what your landing page is doing to that budget.
 
 Quick summary for {domain}:
 {audit_summary}
@@ -120,7 +120,7 @@ The full breakdown shows exactly where the leaks are:
 
 No strings. Just the data.
 
-— Mike
+- Mike
 Nebula Components""",
     },
     {
@@ -137,7 +137,7 @@ It's the page itself:
 We built a free tool that scans for these exact leaks. Here's the one we ran on {site}:
 {checkout_url}
 
-— Mike
+- Mike
 Nebula Components""",
     },
 ]
@@ -158,7 +158,7 @@ We fixed all three. Their conversion rate went from 0.3% to 4.1% in 2 weeks.
 
 The fix pack covers exactly this: {checkout_url}
 
-— Mike
+- Mike
 Nebula Components""",
     },
     {
@@ -174,21 +174,21 @@ We scanned 50 competitors in your space. The ones converting consistently all ha
 The audit we ran on {site} covers all 3:
 {checkout_url}
 
-— Mike
+- Mike
 Nebula Components""",
     },
     {
         "subject": "Quick question about {domain}",
         "body": """Hey,
 
-Got a quick one — have you tried running {site} through an audit tool yet?
+Got a quick one - have you tried running {site} through an audit tool yet?
 
 We ran it through ours and found some interesting things. The full report is here, takes 60 seconds to read:
 {checkout_url}
 
 Curious what you think.
 
-— Mike
+- Mike
 Nebula Components""",
     },
 ]
@@ -202,16 +202,16 @@ We've identified the specific fixes {site} needs to start converting. Here's the
 
 {audit_summary}
 
-The Fix Pack ($147) covers implementation of everything above — deployed to your site within 48 hours.
+The Fix Pack ($147) covers implementation of everything above - deployed to your site within 48 hours.
 
 {checkout_url}
 
 Most clients see results within 7 days.
 
-— Mike
+- Mike
 Nebula Components
 
-P.S. — "We tried an agency before and got nothing." I hear that every week. We don't do 3-month testing cycles. We audit, fix, ship in 48 hours. No retainers. No meetings. Just results.""",
+P.S. - "We tried an agency before and got nothing." I hear that every week. We don't do 3-month testing cycles. We audit, fix, ship in 48 hours. No retainers. No meetings. Just results.""",
     },
     {
         "subject": "Worth 15 minutes this week?",
@@ -219,17 +219,17 @@ P.S. — "We tried an agency before and got nothing." I hear that every week. We
 
 We've been tracking {domain} and the fix opportunities are clear. The audit uncovered specific, measurable issues that are costing you conversions right now.
 
-I'm happy to walk through the results and a fix plan — 15 minutes, no pitch.
+I'm happy to walk through the results and a fix plan - 15 minutes, no pitch.
 
 What does your calendar look like this week?
 
-— Mike
+- Mike
 Nebula Components
 
-P.S. — Not sure if this applies to your industry? Every audit comes with a competitor benchmark. You'll see exactly where you stand vs. companies that are converting.""",
+P.S. - Not sure if this applies to your industry? Every audit comes with a competitor benchmark. You'll see exactly where you stand vs. companies that are converting.""",
     },
     {
-        "subject": "{domain} audit — full breakdown",
+        "subject": "{domain} audit - full breakdown",
         "body": """Hey,
 
 Since you've been checking out the audit, here's the complete picture of what {site} needs:
@@ -243,10 +243,10 @@ The Fix Pack handles all of it:
 
 If you'd rather talk through it first, I'm available.
 
-— Mike
+- Mike
 Nebula Components
 
-P.S. — Think you can fix this yourself? Most of these issues take a dev 8-12 hours to identify and fix. The Fix Pack costs less than 2 hours of dev time and ships in 48 hours.""",
+P.S. - Think you can fix this yourself? Most of these issues take a dev 8-12 hours to identify and fix. The Fix Pack costs less than 2 hours of dev time and ships in 48 hours.""",
     },
 ]
 
@@ -301,7 +301,7 @@ def log_sent(email, subject, segment, message_id, track_id=None, track_position_
         entry["track_id"] = track_id
     if track_position_days is not None:
         entry["track_position_days"] = track_position_days
-    
+
     with open(NURTURE_LOG, "a") as f:
         f.write(json.dumps(entry) + "\n")
 
@@ -312,8 +312,8 @@ def get_audit_summary(lead):
     score = lead.get("audit_score")
     grade = lead.get("audit_grade", "")
     if score and grade:
-        return f"Score: {score:.0f}/100 — Grade: {grade}"
-    return "We found several conversion-blocking issues — fixes are actionable and measurable."
+        return f"Score: {score:.0f}/100 - Grade: {grade}"
+    return "We found several conversion-blocking issues - fixes are actionable and measurable."
 
 
 def lead_state_info(email: str) -> dict:
@@ -329,7 +329,7 @@ def lead_state_info(email: str) -> dict:
         return {}
 
 
-# Stages that mean "already in a conversation/relationship — NOT a cold nurture target"
+# Stages that mean "already in a conversation/relationship - NOT a cold nurture target"
 RELATIONSHIP_STAGES = frozenset({
     "replied", "contacted", "audit_delivered", "pitch_sent", "paid",
     "problem_confirmed", "commercially_qualified", "fix_offered", "fix_purchased",
@@ -364,7 +364,7 @@ def pick_leads_for_nurture(db, send_log, max_count=MAX_PER_TRICKLE) -> list:
                 continue
             ls = lead_state_info(email)
             if ls.get("stage") in RELATIONSHIP_STAGES:
-                continue  # already in conversation — cold nurture would be a mistake
+                continue  # already in conversation - cold nurture would be a mistake
             if (ls.get("source") or "").startswith("teardown-"):
                 continue  # teardown founders get the teardown track, not generic cold
 
@@ -385,7 +385,7 @@ def pick_leads_for_nurture(db, send_log, max_count=MAX_PER_TRICKLE) -> list:
 
             # Check time since last send to this lead (any segment)
             if lead_history:
-                # lead_history is (ts_utc, subj_fp, segment) — oldest first
+                # lead_history is (ts_utc, subj_fp, segment) - oldest first
                 # Get the most recent timestamp
                 recent_ts = max(h[0] for h in lead_history if h[0])
                 try:
@@ -427,7 +427,7 @@ TEARDOWN_SEQ = [
         "body": "Quick follow-up on the teardown I sent.\n\n"
                 "{extra}\n\n"
                 "If you fix that one, the 30-day re-audit will show the before/after. "
-                "Free — the offer is https://nebulacomponents.com/pricing\n",
+                "Free - the offer is https://nebulacomponents.com/pricing\n",
     },
     {
         "step": "d6", "min_days": 6,
@@ -441,7 +441,7 @@ TEARDOWN_SEQ = [
     {
         "step": "d12", "min_days": 12,
         "subject": "Closing the loop on {domain}",
-        "body": "Last note on this one — the teardown stays live at "
+        "body": "Last note on this one - the teardown stays live at "
                 "https://nebulacomponents.com/teardowns/{slug} whenever you need it.\n\n"
                 "If you ship the fix yourself, reply with the result and I'll re-audit it "
                 "free. If you'd rather we do it, the sprint link is above. Either way, "
@@ -507,12 +507,12 @@ def pick_teardown_followups(send_log, max_count=2) -> list:
 
 # ── Post-audit nurture track ───────────────────────────────────────
 # People who completed a free audit and submitted an email. Warm by
-# definition — sequence: findings recap → case study → $97 sprint → re-audit.
+# definition - sequence: findings recap → case study → $97 sprint → re-audit.
 
 AUDIT_SEQ = [
     {
         "step": "d1", "min_days": 1,
-        "subject": "Your audit is ready — the one finding that matters",
+        "subject": "Your audit is ready - the one finding that matters",
         "body": "You ran the free audit on {site}. Here's the short version:\n\n"
                 "{finding}\n\n"
                 "See the full breakdown anytime: https://nebulacomponents.com/audit\n",
@@ -520,25 +520,25 @@ AUDIT_SEQ = [
     {
         "step": "d4", "min_days": 4,
         "subject": "What a fixed version of {domain} looks like",
-        "body": "Same engine, real before/after — we teardown public sites and show "
+        "body": "Same engine, real before/after - we teardown public sites and show "
                 "exactly what's leaking: https://nebulacomponents.com/teardowns\n\n"
                 "Every finding includes the evidence. That's the standard your fix "
                 "should meet too.\n",
     },
     {
         "step": "d9", "min_days": 9,
-        "subject": "The $97 sprint — one leak, fixed, 30-day re-audit",
+        "subject": "The $97 sprint - one leak, fixed, 30-day re-audit",
         "body": "If your audit found a leak worth fixing, this is the smallest way to "
                 "ship it:\n\n"
                 "→ One-Leak Repair Sprint ($97): the highest-impact finding from your "
                 "audit, implemented, with a 30-day re-audit included.\n"
                 "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h\n\n"
-                "No retainer. No site access needed — we write the targeted fix, you "
+                "No retainer. No site access needed - we write the targeted fix, you "
                 "implement it in minutes.\n",
     },
     {
         "step": "d16", "min_days": 16,
-        "subject": "Last one — re-audit stays free",
+        "subject": "Last one - re-audit stays free",
         "body": "Closing the loop: your audit link stays valid, and if you ship any fix "
                 "yourself, the 30-day re-audit will show what changed.\n\n"
                 "If it's still leaking, the sprint link from my last email is the "
@@ -599,7 +599,7 @@ def pick_audit_nurture(send_log, max_count=2) -> list:
                 "subject": tmpl["subject"].format(domain=domain),
                 "body": tmpl["body"].format(
                     domain=domain, site=site,
-                    finding="the highest-impact finding in your report — see the link below for the full breakdown",
+                    finding="the highest-impact finding in your report - see the link below for the full breakdown",
                 ),
                 "due_days": days,
             })
@@ -637,7 +637,7 @@ def run_trickle():
         email = c["email"]
         segment = c["segment"]
 
-        # Prebuilt track candidate (teardown/audit) — has subject/body/client_id
+        # Prebuilt track candidate (teardown/audit) - has subject/body/client_id
         if "client_id" in c and "body" in c:
             ok, msg_id = send_email(email, c["subject"], c["body"], client_id=c["client_id"])
             if ok:
@@ -656,7 +656,7 @@ def run_trickle():
                 time.sleep(3)
             continue
 
-        # Legacy segment candidate — existing track-aware path
+        # Legacy segment candidate - existing track-aware path
         lead = c["lead"]
         tmpl = c["template"]
         track_id = lead.get("nurture_track", "")
@@ -711,7 +711,7 @@ def run_trickle():
         signal_opener = ""
         if trigger_text and c["template_index"] == 0 and segment == "cold":
             opener = trigger_text[:120].rstrip(".,;")
-            signal_opener = f"Came across your post about \"{opener}\" — ran a quick audit on your page.\n\n"
+            signal_opener = f"Came across your post about \"{opener}\" - ran a quick audit on your page.\n\n"
 
         try:
             subject = tmpl["subject"].format(domain=domain[:30], domain_example=domain[:20])

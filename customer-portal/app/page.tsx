@@ -42,7 +42,7 @@ const PATTERNS = [
   {
     label: 'Failure mode',
     heading: 'Pricing behind the email gate',
-    body: 'Asking for commitment before demonstrating value. The visitor hasn\'t decided yet — gating behind email before showing them anything useful is how you lose them.',
+    body: 'Asking for commitment before demonstrating value. The visitor hasn\'t decided yet - gating behind email before showing them anything useful is how you lose them.',
     dominant: true,
   },
   {
@@ -72,17 +72,17 @@ export default function Home() {
         <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
           <div className="grid gap-12 md:grid-cols-[1.4fr_1fr] md:items-start">
 
-            {/* Left: copy — dominant */}
+            {/* Left: copy - dominant */}
             <div className="flex flex-col justify-center">
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
                 Landing pages don&apos;t convert. Conversions do.
               </p>
               <h1 className="text-4xl font-extrabold tracking-display text-fg md:text-5xl lg:text-6xl">
-                Know exactly what&apos;s killing your conversions — without hiring a consultant.
+                Know exactly what&apos;s killing your conversions - without hiring a consultant.
               </h1>
               <p className="mt-6 max-w-lg text-lg leading-7 text-fg-muted">
                 Paste your URL. In under two minutes, Nebula shows you the specific finding costing you conversions,
-                the dollar math behind it, and the exact fix — free, no signup required.
+                the dollar math behind it, and the exact fix - free, no signup required.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
@@ -105,10 +105,10 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right: live self-scan widget — subordinate data module */}
+            {/* Right: live self-scan widget - subordinate data module */}
             <div className="flex flex-col gap-4 md:pt-4">
               <div className="rounded-xl border border-border bg-bg-surface p-5 shadow-lifted">
-                <p className="mb-0.5 text-xs font-semibold text-accent">Live — our own audit</p>
+                <p className="mb-0.5 text-xs font-semibold text-accent">Live - our own audit</p>
                 <p className="mb-3 text-xs text-fg-muted">Same engine every free scan uses.</p>
                 <SelfScan />
               </div>
@@ -145,13 +145,13 @@ export default function Home() {
               </h2>
               <p className="text-base text-fg-muted leading-7">
                 Before the audit engine, there was a spreadsheet. Working with founders on paid
-                traffic, the same page failures kept showing up — wrong headline, no proof near the
+                traffic, the same page failures kept showing up - wrong headline, no proof near the
                 first CTA, a CTA buried under the nav. The clicks were coming in. The sales weren&apos;t.
                 The page looked fine. The problems were specific and fixable every time. Nebula
                 is the instrument that finds them.
               </p>
               <p className="mt-4 text-base text-fg-muted leading-7">
-                Our live self-scan — the widget above — shows the evidence from our own page first.
+                Our live self-scan - the widget above - shows the evidence from our own page first.
                 Most tools lead with case studies they can&apos;t verify. We&apos;d rather show you the
                 actual data. Every verified check. Every evidence atom. The same output you get.
               </p>
@@ -170,7 +170,7 @@ export default function Home() {
             </div>
             <div className="rounded-2xl border border-border bg-bg-muted/30 p-6 font-mono text-sm">
               <p className="mb-4 text-xs text-fg-muted">
-                Sample output format — not our live score
+                Sample output format - not our live score
               </p>
               {SIGNALS.map((s) => (
                 <div key={s.key} className="mb-2 flex items-center justify-between text-xs">
@@ -179,7 +179,7 @@ export default function Home() {
                 </div>
               ))}
               <div className="mt-3 border-t border-border pt-3 text-xs text-fg-muted">
-                Static example only — these statuses are illustrative, not a live result.
+                Static example only - these statuses are illustrative, not a live result.
               </div>
             </div>
           </div>
@@ -237,7 +237,7 @@ export default function Home() {
                 },
                 {
                   heading: 'What happens next',
-                  body: 'Fix the highest-impact leak yourself with the report — or get the $97 One-Leak Repair Sprint: one implementation-ready fix, the 30-day re-audit to confirm it held, and your page compared with the current completed-audit benchmark sample.',
+                  body: 'Fix the highest-impact leak yourself with the report - or get the $97 One-Leak Repair Sprint: one implementation-ready fix, the 30-day re-audit to confirm it held, and your page compared with the current completed-audit benchmark sample.',
                 },
               ].map((item) => (
                 <div key={item.heading} className="rounded-xl border border-border bg-bg-muted/10 p-5">
@@ -340,7 +340,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 6. How it works — animated ── */}
+        {/* ── 6. How it works - animated ── */}
         <HowItWorksAnimated />
 
         {/* ── 6b. With/Without comparison ── */}
@@ -355,7 +355,7 @@ export default function Home() {
                   Not a sales call in disguise.
                 </h2>
                 <p className="mb-6 text-base text-fg-muted leading-7">
-                  You have seen &quot;free audit&quot; — a PDF with 8 generic recommendations and a discovery call at the end.
+                  You have seen &quot;free audit&quot; - a PDF with 8 generic recommendations and a discovery call at the end.
                   This is different. See your initial findings before sharing an email.
                 </p>
                 <Link
@@ -409,7 +409,7 @@ export default function Home() {
           <div className="mx-auto max-w-6xl">
             <div className="mb-10 max-w-2xl">
               <h2 className="text-2xl font-bold tracking-tight text-fg md:text-3xl">
-                Know what the click proved — and what it did not.
+                Know what the click proved - and what it did not.
               </h2>
               <p className="mt-3 text-base text-fg-muted leading-7">
                 A click proves the ad worked. The page determines whether that click becomes a decision.
@@ -419,7 +419,7 @@ export default function Home() {
               {[
                 {
                   heading: 'A click is not the finish line.',
-                  body: 'An ad click proves the message was interesting enough to investigate. The landing page carries that interest forward — or kills it. If the page contradicts the ad, hides the next step, or asks for trust before earning it, the visitor leaves and the ad takes the blame.',
+                  body: 'An ad click proves the message was interesting enough to investigate. The landing page carries that interest forward - or kills it. If the page contradicts the ad, hides the next step, or asks for trust before earning it, the visitor leaves and the ad takes the blame.',
                 },
                 {
                   heading: 'The audit follows the actual path.',
@@ -449,7 +449,7 @@ export default function Home() {
             <div className="grid gap-4 md:grid-cols-3">
               <div>
                 <h3 className="font-semibold text-fg">What does Nebula provide?</h3>
-                <p className="mt-1 text-sm leading-6 text-fg-muted">A scored, evidence-backed diagnosis of why your landing page isn&apos;t converting paid traffic — not generic advice, not a sales call.</p>
+                <p className="mt-1 text-sm leading-6 text-fg-muted">A scored, evidence-backed diagnosis of why your landing page isn&apos;t converting paid traffic - not generic advice, not a sales call.</p>
               </div>
               <div>
                 <h3 className="font-semibold text-fg">What does the free audit check?</h3>
@@ -457,7 +457,7 @@ export default function Home() {
               </div>
               <div>
                 <h3 className="font-semibold text-fg">What does the $97 repair sprint do?</h3>
-                <p className="mt-1 text-sm leading-6 text-fg-muted">One targeted fix for your highest-impact finding — exact copy, code, or configuration change written for your specific page. Includes a 30-day re-audit to verify the fix held and your page benchmarked against real audit data. It does not promise conversion lift — no one can before the fix is live and measured.</p>
+                <p className="mt-1 text-sm leading-6 text-fg-muted">One targeted fix for your highest-impact finding - exact copy, code, or configuration change written for your specific page. Includes a 30-day re-audit to verify the fix held and your page benchmarked against real audit data. It does not promise conversion lift - no one can before the fix is live and measured.</p>
               </div>
             </div>
           </div>

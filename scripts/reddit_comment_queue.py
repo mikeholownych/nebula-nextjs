@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Reddit comment queue — fires one comment per cron tick (every 30 min).
+Reddit comment queue - fires one comment per cron tick (every 30 min).
 State: /home/mike/nebula/.reddit_comment_queue.json
 Exit 0 + no stdout = silent (no Telegram delivery) when queue is empty.
 Exit 0 + stdout = delivers result to Telegram.
@@ -10,7 +10,7 @@ import json, os, sys, urllib.request, urllib.error
 from datetime import datetime, timezone
 from pathlib import Path
 
-# Governance gate — fail-closed. Any violation blocks the send.
+# Governance gate - fail-closed. Any violation blocks the send.
 sys.path.insert(0, str(Path(__file__).parent))
 from reddit_governance import govern_reddit_content, record_activity
 
@@ -68,7 +68,7 @@ def main():
 
     q = load_queue()
     if not q["pending"]:
-        # Silent exit — cron delivers nothing to Telegram, job stays scheduled but quiet
+        # Silent exit - cron delivers nothing to Telegram, job stays scheduled but quiet
         sys.exit(0)
 
     item = q["pending"][0]
@@ -95,7 +95,7 @@ def main():
         last_sent = datetime.fromisoformat(q["sent"][-1]["sent_at"])
         hours_since = (datetime.now(timezone.utc) - last_sent).total_seconds() / 3600
         if hours_since < RATE_LIMIT_HOURS:
-            # Silent exit — within cooldown, nothing to report
+            # Silent exit - within cooldown, nothing to report
             sys.exit(0)
 
     # ── GOVERNANCE GATE (fail-closed) ──────────────────────────────────
@@ -107,7 +107,7 @@ def main():
         q["pending"].pop(0)
         save_queue(q)
         print(f"⛔ Reddit comment HELD by governance (no send)\n{label}\nreason: {g['reason']}\nHeld for review: {len(q['held'])}")
-        sys.exit(0)  # no Telegram error — deliberate hold, not a failure
+        sys.exit(0)  # no Telegram error - deliberate hold, not a failure
 
     try:
         result = post_comment(api_key, post_id, message)
@@ -129,7 +129,7 @@ def main():
     except urllib.error.HTTPError as e:
         err = e.read().decode()[:300]
         print(f"❌ Reddit comment FAILED (will retry next tick)\n{label}\n{err}")
-        # Don't pop from pending — retry next tick
+        # Don't pop from pending - retry next tick
         sys.exit(1)
     except Exception as e:
         print(f"❌ Unexpected error: {type(e).__name__}: {e}")

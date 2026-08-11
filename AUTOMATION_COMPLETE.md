@@ -1,6 +1,6 @@
-# Content Automation Complete — Summary
+# Content Automation Complete - Summary
 
-**Status:** ✅ Operational  
+**Status:** ✅ Operational
 **Created:** 2026-07-18
 
 ---
@@ -38,8 +38,8 @@
 
 ### 2. Automated Monday Pipeline (New)
 
-**Cron Job:** `93f5ca19d3e2` — Active  
-**Schedule:** Every Monday 8:00 AM ET  
+**Cron Job:** `93f5ca19d3e2` - Active
+**Schedule:** Every Monday 8:00 AM ET
 **Delivery:** Delivers briefs to you automatically
 
 **What it does:**
@@ -90,8 +90,8 @@ python3 scripts/generate_content_briefs.py \
 | Friday | Publish + engage | 45-60 min |
 | **Total** | **Your work** | **~90-135 min/week** |
 
-**Before automation:** 4-5 hours/week  
-**After automation:** 90-135 min/week  
+**Before automation:** 4-5 hours/week
+**After automation:** 90-135 min/week
 **Time saved:** 2.5-4 hours/week
 
 ---
@@ -169,18 +169,18 @@ Each article gets:
 
 ## Files Created (10 total)
 
-1. `docs/MEDIUM_INTEGRATION.md` — Medium protocol
-2. `docs/automated_workflow.md` — Full automation architecture
-3. `scripts/generate_content_briefs.py` — Brief generation
-4. `content_queue/linkedin_brief_*.json` — LinkedIn briefs (auto-generated)
-5. `content_queue/medium_outline_*.json` — Medium outlines (auto-generated)
+1. `docs/MEDIUM_INTEGRATION.md` - Medium protocol
+2. `docs/automated_workflow.md` - Full automation architecture
+3. `scripts/generate_content_briefs.py` - Brief generation
+4. `content_queue/linkedin_brief_*.json` - LinkedIn briefs (auto-generated)
+5. `content_queue/medium_outline_*.json` - Medium outlines (auto-generated)
 
 **Plus existing system (from earlier):**
-6. `docs/content_operating_system.md` — Full content system
-7. `docs/hook_library.md` — 80+ hooks
-8. `docs/weekly_workflow_checklist.md` — Day-by-day checklist
-9. `scripts/pull_audit_insights.py` — Extract findings from audits
-10. `docs/weekly_reporting_sheet.md` — Performance scoring
+6. `docs/content_operating_system.md` - Full content system
+7. `docs/hook_library.md` - 80+ hooks
+8. `docs/weekly_workflow_checklist.md` - Day-by-day checklist
+9. `scripts/pull_audit_insights.py` - Extract findings from audits
+10. `docs/weekly_reporting_sheet.md` - Performance scoring
 
 ---
 

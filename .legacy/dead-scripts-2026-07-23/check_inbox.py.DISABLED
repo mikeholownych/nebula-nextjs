@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Nebula Inbox Checker — reads from AgentMail via IMAP
+Nebula Inbox Checker - reads from AgentMail via IMAP
 Loads API key from ~/.hermes/secrets/agentmail.key
 """
 import os, imaplib, email, time
@@ -88,8 +88,8 @@ def main():
         for r in repliers:
             print(f'  - {r}')
     if sales_detected:
-        print('🚨 SALES DETECTED — immediate action required')
-    
+        print('🚨 SALES DETECTED - immediate action required')
+
     with open(LOG_FILE, 'a') as f:
         f.write(f'{time.strftime("%Y-%m-%d %H:%M:%S")} replies={replied_count} sales={sales_detected}\n')
 

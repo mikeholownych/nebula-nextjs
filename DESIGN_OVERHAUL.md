@@ -1,4 +1,4 @@
-# Nebula Design Overhaul — Premium SaaS Transformation
+# Nebula Design Overhaul - Premium SaaS Transformation
 
 **Date:** 2026-07-11
 **Goal:** Transform from amateur DIY to professional SaaS credibility (Linear/Vercel tier)
@@ -47,7 +47,7 @@ OpenType: 'cv01', 'ss03' enabled (geometric alternates)
 Weight Ramp:
 - 300: Light (de-emphasized text)
 - 400: Regular (body)
-- 510: Medium (UI labels, navigation — signature weight)
+- 510: Medium (UI labels, navigation - signature weight)
 - 590: Semibold (strong emphasis)
 
 Size Ramp with Letter-Spacing:
@@ -266,22 +266,22 @@ Apply same CSS variables for consistency.
   --bg-panel: #0f1011;
   --bg-surface: #191a1b;
   --bg-elevated: #28282c;
-  
+
   /* Text */
   --text-primary: #f7f8f8;
   --text-secondary: #d0d6e0;
   --text-muted: #8a8f98;
   --text-disabled: #62666d;
-  
+
   /* Accent (Emerald) */
   --accent-primary: #10b981;
   --accent-hover: #059669;
   --accent-light: #34d399;
-  
+
   /* Borders */
   --border-subtle: rgba(255,255,255,0.05);
   --border-standard: rgba(255,255,255,0.08);
-  
+
   /* Spacing (8px grid) */
   --space-1: 4px;
   --space-2: 8px;
@@ -291,11 +291,11 @@ Apply same CSS variables for consistency.
   --space-6: 48px;
   --space-7: 64px;
   --space-8: 96px;
-  
+
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  
+
   --text-xs: 10px;
   --text-sm: 13px;
   --text-base: 16px;
@@ -304,12 +304,12 @@ Apply same CSS variables for consistency.
   --text-2xl: 32px;
   --text-3xl: 48px;
   --text-4xl: 72px;
-  
+
   --weight-light: 300;
   --weight-regular: 400;
   --weight-medium: 510;
   --weight-semibold: 590;
-  
+
   /* Animation */
   --ease-micro: 0.2s ease;
   --ease-macro: 0.4s cubic-bezier(0.4, 0, 0.2, 1);

@@ -1,18 +1,18 @@
 """
-audit_evidence.py — Evidence layer for Nebula audit findings.
+audit_evidence.py - Evidence layer for Nebula audit findings.
 
 Enriches each finding in the opp_matrix with a structured evidence block:
   {
-    "measured":   str   — what was actually observed/computed
-    "required":   str   — the standard it must meet
-    "delta":      str   — the gap between measured and required
-    "selector":   str   — CSS selector or DOM path to the element (if applicable)
-    "confidence": str   — "definitive" | "high" | "contextual"
-    "timestamp":  str   — ISO8601 UTC
+    "measured":   str   - what was actually observed/computed
+    "required":   str   - the standard it must meet
+    "delta":      str   - the gap between measured and required
+    "selector":   str   - CSS selector or DOM path to the element (if applicable)
+    "confidence": str   - "definitive" | "high" | "contextual"
+    "timestamp":  str   - ISO8601 UTC
   }
 
 Called by score_audit() after the opp_matrix is built.
-Adds no new network calls — operates on the already-fetched soup + audit data.
+Adds no new network calls - operates on the already-fetched soup + audit data.
 """
 
 import json
@@ -96,7 +96,7 @@ def _contrast_ratio(l1: float, l2: float) -> float:
 def _extract_inline_colors(element) -> tuple[str | None, str | None]:
     """
     Try to extract fg/bg hex colours from an element's inline style.
-    Returns (fg_hex, bg_hex) — either may be None.
+    Returns (fg_hex, bg_hex) - either may be None.
     """
     style = element.get("style", "") if element else ""
     declarations = {}
@@ -135,8 +135,8 @@ def _evidence_headline(soup: BeautifulSoup, dim: dict) -> dict:
     if length < 12:
         return {
             "measured":   f'<h1> text: "{txt}" ({length} chars)',
-            "required":   "12–90 chars — enough to convey a specific value proposition",
-            "delta":      f"{12 - length} chars below minimum — too short to communicate benefit",
+            "required":   "12–90 chars - enough to convey a specific value proposition",
+            "delta":      f"{12 - length} chars below minimum - too short to communicate benefit",
             "selector":   selector,
             "confidence": "definitive",
             "timestamp":  _now_iso(),
@@ -144,7 +144,7 @@ def _evidence_headline(soup: BeautifulSoup, dim: dict) -> dict:
     if length > 90:
         return {
             "measured":   f'<h1> text: "{txt[:80]}…" ({length} chars)',
-            "required":   "12–90 chars — above 90 dilutes the primary message",
+            "required":   "12–90 chars - above 90 dilutes the primary message",
             "delta":      f"{length - 90} chars above maximum",
             "selector":   selector,
             "confidence": "high",
@@ -153,7 +153,7 @@ def _evidence_headline(soup: BeautifulSoup, dim: dict) -> dict:
     return {
         "measured":   f'<h1>: "{txt[:80]}" ({length} chars)',
         "required":   "12–90 chars with clear value proposition",
-        "delta":      "Within range — issue is likely specificity or message match",
+        "delta":      "Within range - issue is likely specificity or message match",
         "selector":   selector,
         "confidence": "contextual",
         "timestamp":  _now_iso(),
@@ -202,7 +202,7 @@ def _evidence_cta(soup: BeautifulSoup, dim: dict) -> dict:
             threshold = 3.0 if is_large else 4.5
             passes = ratio >= threshold
             return {
-                "measured": f'CTA "{text}" — inline fg: {fg}, bg: {bg}, contrast: {ratio:.2f}:1',
+                "measured": f'CTA "{text}" - inline fg: {fg}, bg: {bg}, contrast: {ratio:.2f}:1',
                 "required": f"Source-level inline styles: {threshold:.1f}:1 minimum for {'large' if is_large else 'normal'} text; computed-style browser audit required",
                 "delta": (
                     f"Passes source-level threshold by {ratio - threshold:.2f}; rendered/computed contrast remains unverified"
@@ -249,7 +249,7 @@ def _evidence_above_fold(soup: BeautifulSoup, dim: dict, html_text: str) -> dict
         return {
             "measured":   "Early HTML proxy: H1, CTA, and price signal present in first 3,000 source chars",
             "required":   "Rendered viewport inspection is required; source order is not a rendered viewport measurement",
-            "delta":      "No source-order gap detected — visual hierarchy remains unverified",
+            "delta":      "No source-order gap detected - visual hierarchy remains unverified",
             "selector":   "N/A",
             "confidence": "contextual",
             "timestamp":  ts,
@@ -296,7 +296,7 @@ def _evidence_mobile(soup: BeautifulSoup, dim: dict, lower: str) -> dict:
         return {
             "measured":   "No <meta name='viewport'> tag found",
             "required":   '<meta name="viewport" content="width=device-width, initial-scale=1">',
-            "delta":      "Without viewport meta, mobile browsers render desktop layout at ~980px — content is tiny",
+            "delta":      "Without viewport meta, mobile browsers render desktop layout at ~980px - content is tiny",
             "selector":   "head > meta[name='viewport']",
             "confidence": "definitive",
             "timestamp":  ts,
@@ -313,7 +313,7 @@ def _evidence_mobile(soup: BeautifulSoup, dim: dict, lower: str) -> dict:
     return {
         "measured":   f'<meta name="viewport" content="{viewport_content}">',
         "required":   "width=device-width, initial-scale=1",
-        "delta":      "Viewport correctly declared — issue is likely CSS media queries or tap target sizes",
+        "delta":      "Viewport correctly declared - issue is likely CSS media queries or tap target sizes",
         "selector":   "meta[name='viewport']",
         "confidence": "contextual",
         "timestamp":  ts,
@@ -334,7 +334,7 @@ def _evidence_load_speed(dim: dict, html_text: str) -> dict:
             "measured":   f"Lighthouse mobile performance: {score_val}/100" + (f", FCP: {fcp_match.group(1)}s" if fcp_match else ""),
             "required":   "Target ≥70/100 Lighthouse mobile performance; Core Web Vitals require separate metrics",
             "delta":      (f"{threshold - score_val} points below target" if score_val < threshold else f"{score_val - threshold} points above target"),
-            "selector":   "N/A — page-level metric",
+            "selector":   "N/A - page-level metric",
             "confidence": "definitive",
             "timestamp":  ts,
         }

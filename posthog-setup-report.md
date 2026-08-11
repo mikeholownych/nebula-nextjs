@@ -1,6 +1,6 @@
 # PostHog post-wizard report
 
-The wizard has completed a deep integration of the Nebula platform API with PostHog server-side analytics. A `Posthog()` client instance is initialized at startup (with exception autocapture enabled) and flushed gracefully on shutdown. All ten business events across five route files are now captured using the context API (`new_context` + `identify_context`) so every event is correlated to the correct user identity. The existing GA4 analytics service is untouched — PostHog runs alongside it.
+The wizard has completed a deep integration of the Nebula platform API with PostHog server-side analytics. A `Posthog()` client instance is initialized at startup (with exception autocapture enabled) and flushed gracefully on shutdown. All ten business events across five route files are now captured using the context API (`new_context` + `identify_context`) so every event is correlated to the correct user identity. The existing GA4 analytics service is untouched - PostHog runs alongside it.
 
 | Event | Description | File |
 |---|---|---|
@@ -29,9 +29,9 @@ We've built some insights and a dashboard to keep an eye on user behavior, based
 ## Verify before merging
 
 - [ ] Run a full production build (the wizard only verified the files it touched) and fix any lint or type errors introduced by the generated code.
-- [ ] Run the test suite — call sites that were rewritten or instrumented may need updated mocks or fixtures.
+- [ ] Run the test suite - call sites that were rewritten or instrumented may need updated mocks or fixtures.
 - [ ] Add `POSTHOG_PROJECT_TOKEN` and `POSTHOG_HOST` to any monorepo bootstrap scripts or CI secrets so collaborators know what to set.
-- [ ] Confirm the returning-visitor path also calls `identify` — the Google OAuth handler identifies on every login, but confirm the magic-link path (once implemented) also identifies the user.
+- [ ] Confirm the returning-visitor path also calls `identify` - the Google OAuth handler identifies on every login, but confirm the magic-link path (once implemented) also identifies the user.
 - [ ] This project contains a PostgreSQL database, Stripe payment data, and SendGrid send history. Run `npx @posthog/wizard warehouse` to connect these sources to PostHog's data warehouse for richer analytics.
 
 ### Agent skill

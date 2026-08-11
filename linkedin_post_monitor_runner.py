@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-LinkedIn Post Monitor — Process Apify results into trigger_leads.jsonl.
+LinkedIn Post Monitor - Process Apify results into trigger_leads.jsonl.
 
 Steps:
 1. Load raw Apify data (post_search, engagers/likers, engagers/commenters)
@@ -79,13 +79,13 @@ def extract_profiles_from_post_search(raw_results: list[dict]) -> list[dict]:
         if profile_url in seen_urls:
             continue
         seen_urls.add(profile_url)
-        
+
         # Check if the post text signals a buying trigger
         signals = []
         text_lower = text.lower()
         if any(t in text_lower for t in ["ad spend", "ads no sales", "no conversions", "not converting", "conversion rate zero", "landing page"]):
             signals.append("post_text_match")
-        
+
         profiles.append({
             "name": name,
             "profile_url": profile_url,
@@ -116,23 +116,23 @@ def extract_engagers(raw_results: list[dict], engagement_type: str) -> list[dict
         if profile_url in seen_urls:
             continue
         seen_urls.add(profile_url)
-        
+
         subtitle = row.get("subtitle") or ""
         comment = row.get("Content") or row.get("text") or ""
-        
+
         # Build comment string for qualified signal check
         prospect = {
             "comment": comment,
             "role": subtitle,
             "name": name,
         }
-        
+
         qualified = is_qualified_signal(prospect)
         self_engager = is_self_engager(prospect)
-        
+
         if self_engager:
             continue
-        
+
         profiles.append({
             "name": name,
             "profile_url": profile_url,
@@ -157,7 +157,7 @@ def dedup_against_existing(new_profiles: list[dict], existing_leads: list[dict])
         url = lead.get("profile_url") or ""
         if url:
             existing_urls.add(url.strip())
-    
+
     deduped = []
     for p in new_profiles:
         url = p.get("profile_url", "").strip()
@@ -165,59 +165,59 @@ def dedup_against_existing(new_profiles: list[dict], existing_leads: list[dict])
             # Also check short form (just the username part)
             deduped.append(p)
             existing_urls.add(url)
-    
+
     return deduped
 
 
 def main():
     print("=" * 60)
-    print("LinkedIn Post Monitor — Processing Run")
+    print("LinkedIn Post Monitor - Processing Run")
     print(f"Started: {utc_now()}")
     print("=" * 60)
-    
+
     # 1. Load existing leads
     existing_leads = load_jsonl(TRIGGER_LEADS)
     print(f"\nExisting leads in trigger_leads.jsonl: {len(existing_leads)}")
-    
+
     # 2. Load raw Apify data
     post_search_raw = load_json(RAW_DIR / "post_search_latest.json")
     likers_raw = load_json(RAW_DIR / "post_engagers_likers_latest.json")
     commenters_raw = load_json(RAW_DIR / "post_engagers_commenters_latest.json")
-    
+
     print(f"Raw data loaded:")
     print(f"  Post search results: {len(post_search_raw)}")
     print(f"  Likers: {len(likers_raw)}")
     print(f"  Commenters: {len(commenters_raw)}")
-    
+
     # 3. Extract profiles
     search_profiles = extract_profiles_from_post_search(post_search_raw)
     liker_profiles = extract_engagers(likers_raw, "likers")
     commenter_profiles = extract_engagers(commenters_raw, "commenters")
-    
+
     print(f"\nExtracted profiles:")
     print(f"  From post search: {len(search_profiles)}")
     print(f"  From likers: {len(liker_profiles)}")
     print(f"  From commenters: {len(commenter_profiles)}")
-    
+
     # Print some details about extracted profiles
     for p in search_profiles:
         print(f"    POST SEARCH: {p['name']} | {p['profile_url'][:60]}")
         if p['comment']:
             print(f"      Text: {p['comment'][:100]}")
-    
+
     for p in liker_profiles:
         print(f"    LIKER: {p['name']} | role={p['role'][:60]}")
-    
+
     for p in commenter_profiles:
         print(f"    COMMENT: {p['name']} | {p['comment'][:100]}")
-    
+
     # 4. Combine and dedup
     all_new = search_profiles + liker_profiles + commenter_profiles
     print(f"\nTotal extracted before dedup: {len(all_new)}")
-    
+
     new_leads = dedup_against_existing(all_new, existing_leads)
     print(f"After dedup against existing: {len(new_leads)} new")
-    
+
     # 5. Apply qualified signal filter
     qualified_leads = []
     for lead in new_leads:
@@ -233,17 +233,17 @@ def main():
         else:
             # Still include cold leads but mark them
             lead["qualified"] = False
-    
+
     qualified_count = len([l for l in new_leads if l["qualified"]])
     print(f"\nQualified signal count: {qualified_count}/{len(new_leads)}")
-    
+
     # 6. Append only qualified leads (per task instructions)
     qualified_leads = [l for l in new_leads if l.get("qualified")]
-    
+
     if qualified_leads:
         append_jsonl(TRIGGER_LEADS, qualified_leads)
         print(f"\n✅ Appended {len(qualified_leads)} qualified leads to trigger_leads.jsonl")
-        
+
         for lead in qualified_leads:
             print(f"  ⭐ {lead['name']}")
             print(f"     URL: {lead['profile_url']}")
@@ -254,8 +254,8 @@ def main():
     else:
         print("\n✅ No qualified leads to append")
         if new_leads:
-            print(f"   ({len(new_leads)} unqualified leads skipped — none passed is_qualified_signal())")
-    
+            print(f"   ({len(new_leads)} unqualified leads skipped - none passed is_qualified_signal())")
+
     # 7. Summary
     print(f"\n{'=' * 60}")
     print(f"SUMMARY")
@@ -265,7 +265,7 @@ def main():
     print(f"  Qualified leads among new: {qualified_count}")
     print(f"  Total in trigger_leads.jsonl: {len(existing_leads) + len(new_leads)}")
     print(f"  Errors: None")
-    
+
     return {
         "timestamp": utc_now(),
         "engagers_found": len(all_new),

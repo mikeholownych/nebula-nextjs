@@ -59,15 +59,15 @@ URL: https://nebulacomponents.shop/checkout?email=mike.holownych@aisyndicate.io&
 
 #### Generated Concepts
 1. **The Landing Page Leak Calculator** (3500 words, complexity 3/5)
-   - Target: "Spent $10k on ads — barely any orders"
+   - Target: "Spent $10k on ads - barely any orders"
    - Methodology: Message match, ROAS cliff, CTA friction, trust gap
    - Bridge: Dollar calculation → $97 fix
-   
+
 2. **Agency Testing Phase Survival Guide** (4200 words, complexity 4/5)
    - Target: "Paid for 3-month testing phase, got nothing"
    - Methodology: Testing vs stalling, accountability, fast-fix
    - Bridge: Anti-agency positioning
-   
+
 3. **ROAS Cliff Repair Manual** (2800 words, complexity 2/5)
    - Target: "Clicks but no sales, don't know what's broken"
    - Methodology: Hook-to-LP gap, above-fold surgery, offer clarity
@@ -163,7 +163,7 @@ URL: https://nebulacomponents.shop/checkout?email=mike.holownych@aisyndicate.io&
 ### Phase 4: Success Metrics
 
 #### Primary KPIs
-- **Reply Rate**: ≥3% (cold), ≥20% (warm) 
+- **Reply Rate**: ≥3% (cold), ≥20% (warm)
 - **Audit Consumption**: ≥70% of warm leads
 - **Conversion**: ≥5% audit → $97 fix
 - **Time-to-Value**: <2 hours from warm signal to audit delivery
@@ -205,13 +205,13 @@ URL: https://nebulacomponents.shop/checkout?email=mike.holownych@aisyndicate.io&
 #### Common Failure Modes
 1. **Bridge Asset Misalignment**: Doesn't solve painful symptom
    - Mitigation: Test with 5 ICP founders before production
-   
+
 2. **Trigger Engine Noise**: Too many false positives
    - Mitigation: Strict scoring thresholds + human spot checks
-   
+
 3. **Audit Delivery Lag**: > 60 minutes
    - Mitigation: HOT_LEAD auto-delivery + monitoring
-   
+
 4. **Self-Sufficient Founder Gap**: No advisory path
    - Mitigation: Fix list variant + advisory call option
 

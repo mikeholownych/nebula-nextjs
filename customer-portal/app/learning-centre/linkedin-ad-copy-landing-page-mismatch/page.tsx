@@ -41,7 +41,7 @@ export default function LinkedInAdCopyLandingPageMismatchPage() {
           <p className="mt-2 text-sm text-fg-muted">Published 25 July 2026</p>
         </div>
 
-        {/* Section 1 — The LinkedIn context switch */}
+        {/* Section 1 - The LinkedIn context switch */}
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-semibold text-fg">
             The LinkedIn Context Switch
@@ -67,7 +67,7 @@ export default function LinkedInAdCopyLandingPageMismatchPage() {
           </p>
         </section>
 
-        {/* Section 2 — The register collapse */}
+        {/* Section 2 - The register collapse */}
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-semibold text-fg">
             The Register Collapse
@@ -93,7 +93,7 @@ export default function LinkedInAdCopyLandingPageMismatchPage() {
           </p>
         </section>
 
-        {/* Section 3 — The credibility erosion pattern */}
+        {/* Section 3 - The credibility erosion pattern */}
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-semibold text-fg">
             The Credibility Erosion Pattern: 5 Things That Undo Your LinkedIn Ad
@@ -163,7 +163,7 @@ export default function LinkedInAdCopyLandingPageMismatchPage() {
           </p>
         </section>
 
-        {/* Section 4 — LinkedIn-specific pages outperform generic pages */}
+        {/* Section 4 - LinkedIn-specific pages outperform generic pages */}
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-semibold text-fg">
             Why LinkedIn-Specific Landing Pages Outperform Generic Ones by 2–3x
@@ -194,7 +194,7 @@ export default function LinkedInAdCopyLandingPageMismatchPage() {
           </p>
         </section>
 
-        {/* Section 5 — The message match test */}
+        {/* Section 5 - The message match test */}
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-semibold text-fg">
             The Message Match Test for B2B
@@ -239,7 +239,7 @@ export default function LinkedInAdCopyLandingPageMismatchPage() {
           </ul>
         </section>
 
-        {/* Section 6 — Quick fixes */}
+        {/* Section 6 - Quick fixes */}
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-semibold text-fg">
             Quick Fixes: Adapting an Existing Page for LinkedIn Traffic

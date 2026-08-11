@@ -1,4 +1,4 @@
-# Distribution Assets — Nebula Components
+# Distribution Assets - Nebula Components
 **Bridge Asset:** "The ROAS Cliff: Why your CTR looks fine and your page converts nobody"
 **Produced:** 2026-07-07
 
@@ -6,7 +6,7 @@
 
 ## 1. LINKEDIN POSTS
 
-### Post A — Outcome Breakdown (methodology gate)
+### Post A - Outcome Breakdown (methodology gate)
 
 ---
 
@@ -26,7 +26,7 @@ Comment ROAS and I'll send it to your inbox.
 
 ---
 
-### Post B — Steal This (tactical, for smaller guide version)
+### Post B - Steal This (tactical, for smaller guide version)
 
 ---
 
@@ -36,7 +36,7 @@ Nothing wrong with the creative. Nothing wrong with the targeting. The ad was ge
 
 The problem was on line 1 of the landing page.
 
-The ad hook said "stop overpaying for SaaS tools." The landing page opened with "Welcome to Acme — trusted by 200 companies." The visitor clicked expecting a diagnosis. The page gave them a company bio.
+The ad hook said "stop overpaying for SaaS tools." The landing page opened with "Welcome to Acme - trusted by 200 companies." The visitor clicked expecting a diagnosis. The page gave them a company bio.
 
 That gap has a name: hook-to-LP. Fixing it moved conversion from 0.4% to 1.6% in 10 days. Same traffic. Same ad spend.
 
@@ -48,7 +48,7 @@ Comment AUDIT and I'll send it.
 
 ## 2. COLD OUTREACH DM SCRIPTS
 
-### Value Drop — Option 1
+### Value Drop - Option 1
 
 ---
 
@@ -59,17 +59,17 @@ Did the link work okay?
 
 ---
 
-### Curiosity Question — Option 2
+### Curiosity Question - Option 2
 
 ---
 
-Hey [name], debating this with a client — when conversion drops on a paid traffic campaign, do you usually look at the ad first or the landing page first? Seeing a real split on this right now, genuinely curious which way you go.
+Hey [name], debating this with a client - when conversion drops on a paid traffic campaign, do you usually look at the ad first or the landing page first? Seeing a real split on this right now, genuinely curious which way you go.
 
 **Nudge (send day 6, max 6 words):**
 Still curious which way you lean.
 
 **If they reply to Option 2, follow with:**
-Interesting — a lot of people are saying ad first. I actually put together a guide on the LP side of this, since that's usually where we find the actual problem. Here it is if you want it: https://nebulacomponents.shop/roas-cliff.html
+Interesting - a lot of people are saying ad first. I actually put together a guide on the LP side of this, since that's usually where we find the actual problem. Here it is if you want it: https://nebulacomponents.shop/roas-cliff.html
 
 ---
 
@@ -81,7 +81,7 @@ Fix pack URL: https://nebulacomponents.shop (Stripe link)
 
 ---
 
-### Email 1 — The Monday dashboard
+### Email 1 - The Monday dashboard
 
 **Subject options:**
 1. Your CTR is fine
@@ -94,7 +94,7 @@ A pattern we see constantly with founders running paid traffic: Monday morning, 
 
 They screenshot it and post somewhere. "Is Meta getting worse or is it me?"
 
-It's not Meta. The ad moved the traffic. Something between the click and the checkout failed. And it's almost never the ad — it's the page. Specifically, the first 3 seconds of the page.
+It's not Meta. The ad moved the traffic. Something between the click and the checkout failed. And it's almost never the ad - it's the page. Specifically, the first 3 seconds of the page.
 
 The full breakdown of why this happens (and how to find where it's breaking on your specific page) is in the guide here: https://nebulacomponents.shop/roas-cliff.html
 
@@ -105,7 +105,7 @@ P.S. If you want us to run the diagnosis on your page and write the fix, the $97
 
 ---
 
-### Email 2 — The blame loop
+### Email 2 - The blame loop
 
 **Subject options:**
 1. Changing the creative won't fix this
@@ -130,7 +130,7 @@ P.S. The $97 Fix Pack scores your page and delivers the copy fix, usually same d
 
 ---
 
-### Email 3 — Message match explained
+### Email 3 - Message match explained
 
 **Subject options:**
 1. The conversation your ad started
@@ -143,7 +143,7 @@ When someone clicks your ad, they arrive on your landing page carrying a specifi
 
 If the page breaks it, they leave. Usually in under 3 seconds. The ad manager logs the click. The analytics show a bounce. Nobody knows why.
 
-We call this a message match gap. The ad said one thing. The page opened with something different. Not wildly different — subtle. A different emphasis. A different framing. A different promise.
+We call this a message match gap. The ad said one thing. The page opened with something different. Not wildly different - subtle. A different emphasis. A different framing. A different promise.
 
 That subtle gap is the most expensive problem in most paid traffic campaigns. We find it on 85% of pages we audit.
 
@@ -155,7 +155,7 @@ P.S. Want us to score yours specifically? The free audit does it in 60 seconds: 
 
 ---
 
-### Email 4 — The 3 layers
+### Email 4 - The 3 layers
 
 **Subject options:**
 1. Three ways message match breaks
@@ -166,7 +166,7 @@ Hi {firstname},
 
 Message match breaks in three places. Most people only fix the first one.
 
-Layer 1 is headline-to-headline. Does the first line on your page directly continue the claim in the ad? Not echo it — continue it. If your ad says "stop overpaying for scheduling tools," your page headline needs to deliver specificity on that claim. "Setup in 11 minutes, migrated calendar included" continues the conversation. "The scheduling platform for growing teams" starts a different one.
+Layer 1 is headline-to-headline. Does the first line on your page directly continue the claim in the ad? Not echo it - continue it. If your ad says "stop overpaying for scheduling tools," your page headline needs to deliver specificity on that claim. "Setup in 11 minutes, migrated calendar included" continues the conversation. "The scheduling platform for growing teams" starts a different one.
 
 Layer 2 is emotional state. The person who clicked your ad is in a specific mental state. Frustrated. Loss-averse. Skeptical. If your page opens with optimistic benefit language while the visitor is in panic mode, they feel like they walked into the wrong room.
 
@@ -180,7 +180,7 @@ P.S. If you want us to score your page and write the copy fix, it's $97 and usua
 
 ---
 
-### Email 5 — The self-audit framework
+### Email 5 - The self-audit framework
 
 **Subject options:**
 1. Score your landing page in 10 minutes
@@ -191,11 +191,11 @@ Hi {firstname},
 
 There are five things that determine whether a paid traffic landing page converts. Each one is scoreable. Each one has a dollar number attached.
 
-Dimension 1: Message match — does the page continue the ad's conversation?
-Dimension 2: Above-fold clarity — does a stranger know what you sell in 3 seconds?
-Dimension 3: CTA specificity — does the button describe the next 60 seconds or just say "get started"?
-Dimension 4: Trust placement — is your best proof visible before the first CTA?
-Dimension 5: Offer clarity — can someone explain your offer without re-reading the page?
+Dimension 1: Message match - does the page continue the ad's conversation?
+Dimension 2: Above-fold clarity - does a stranger know what you sell in 3 seconds?
+Dimension 3: CTA specificity - does the button describe the next 60 seconds or just say "get started"?
+Dimension 4: Trust placement - is your best proof visible before the first CTA?
+Dimension 5: Offer clarity - can someone explain your offer without re-reading the page?
 
 Score yourself 1-10 on each. Add them up. Under 30 and you're running paid traffic into a leak.
 
@@ -207,7 +207,7 @@ P.S. If you want it scored for you: https://nebulacomponents.shop/audit.html
 
 ---
 
-### Email 6 — CTA specificity
+### Email 6 - CTA specificity
 
 **Subject options:**
 1. "Get started" is costing you conversions
@@ -232,7 +232,7 @@ P.S. If you want us to score your page and write the copy fix, it's $97 and usua
 
 ---
 
-### Email 7 — Above-fold rule
+### Email 7 - Above-fold rule
 
 **Subject options:**
 1. Only the first 3 seconds matter
@@ -243,7 +243,7 @@ Hi {firstname},
 
 A stat we've confirmed across 40+ landing page audits: visitors decide whether to stay within the first 3 seconds of landing. Not after reading the page. Not after seeing the testimonials. In the first viewport, before they scroll.
 
-This means everything below the fold is a secondary problem. The above-fold section — what loads first, what they see before any interaction — is where the conversion rate is actually set.
+This means everything below the fold is a secondary problem. The above-fold section - what loads first, what they see before any interaction - is where the conversion rate is actually set.
 
 Most pages treat above-fold as a header section. It's the only section that matters for cold paid traffic. The headline, the sub-headline, and the first CTA need to do four things in sequence: confirm the visitor is in the right place, continue the ad's promise, show the outcome, and make the next step specific.
 
@@ -257,7 +257,7 @@ P.S. https://nebulacomponents.shop/audit.html
 
 ---
 
-### Email 8 — The trust placement problem
+### Email 8 - The trust placement problem
 
 **Subject options:**
 1. Move your proof up
@@ -270,7 +270,7 @@ Every founder running paid traffic has this somewhere on their landing page: a s
 
 It's usually in section 4 or 5. Below the fold. After the CTA. After the pricing.
 
-The problem: the visitor's silent objection — "I've tried this kind of thing before and got nothing" — activates in the first scroll. If your proof isn't visible before that objection fires, you're asking for trust before you've earned it.
+The problem: the visitor's silent objection - "I've tried this kind of thing before and got nothing" - activates in the first scroll. If your proof isn't visible before that objection fires, you're asking for trust before you've earned it.
 
 The fix isn't redesigning the page. It's moving one proof point up. Specifically, the most identity-matched proof you have: same vertical as the visitor, same problem, measurable result. That proof should live in the first viewport or immediately after the first CTA.
 
@@ -282,7 +282,7 @@ P.S. If you want us to score your page and write the copy fix, it's $97 and usua
 
 ---
 
-### Email 9 — Proof format matters
+### Email 9 - Proof format matters
 
 **Subject options:**
 1. "Trusted by 200 teams" doesn't convert
@@ -309,7 +309,7 @@ P.S. https://nebulacomponents.shop/audit.html
 
 ---
 
-### Email 10 — The leak math
+### Email 10 - The leak math
 
 **Subject options:**
 1. What 0.4% conversion actually costs
@@ -337,7 +337,7 @@ P.S. If you want us to score your page and write the copy fix, it's $97 and usua
 
 ---
 
-### Email 11 — The obvious fix math
+### Email 11 - The obvious fix math
 
 **Subject options:**
 1. When $97 becomes a no-brainer
@@ -362,7 +362,7 @@ P.S. If you want us to score your page and write the copy fix, it's $97 and usua
 
 ---
 
-### Email 12 — Fix 1: the above-fold rewrite
+### Email 12 - Fix 1: the above-fold rewrite
 
 **Subject options:**
 1. One rewrite, most of the lift
@@ -387,7 +387,7 @@ P.S. If you want us to score your page and write the copy fix, it's $97 and usua
 
 ---
 
-### Email 13 — Fix 2: move the proof
+### Email 13 - Fix 2: move the proof
 
 **Subject options:**
 1. Move the testimonial up
@@ -402,7 +402,7 @@ The fix: move the most identity-matched proof you have to the first viewport, or
 
 "Identity-matched" means same vertical as your buyer, same specific problem, measurable result. Not "trusted by teams worldwide." Something like: "DTC founder, $6k/month in Meta spend, found a message match gap, conversion rate doubled in 8 days."
 
-One block moved up the page. That's the change. The difference is that the silent objection — "I've been burned before" — gets addressed before it activates, instead of after.
+One block moved up the page. That's the change. The difference is that the silent objection - "I've been burned before" - gets addressed before it activates, instead of after.
 
 Full breakdown in the guide: https://nebulacomponents.shop/roas-cliff.html
 
@@ -412,7 +412,7 @@ P.S. If you want us to score your page and write the copy fix, it's $97 and usua
 
 ---
 
-### Email 14 — Fix 3: the CTA rewrite
+### Email 14 - Fix 3: the CTA rewrite
 
 **Subject options:**
 1. The 90-second CTA rule
@@ -437,7 +437,7 @@ P.S. If you want us to score your page and write the copy fix, it's $97 and usua
 
 ---
 
-### Email 15 — The testing phase problem
+### Email 15 - The testing phase problem
 
 **Subject options:**
 1. The testing phase is not a deliverable
@@ -450,7 +450,7 @@ A pattern we hear from founders who've worked with agencies: "They said it was a
 
 "Testing phase" is a framing that protects the agency, not the founder. It means: we're not accountable for results during this period. We're just running experiments.
 
-The actual diagnosis, the specific thing that's breaking on your specific page, takes less than an hour to find. It's not a mystery. Message match gap, above-fold clarity failure, CTA ambiguity — these are identifiable. They have fixes. The fixes aren't experiments.
+The actual diagnosis, the specific thing that's breaking on your specific page, takes less than an hour to find. It's not a mystery. Message match gap, above-fold clarity failure, CTA ambiguity - these are identifiable. They have fixes. The fixes aren't experiments.
 
 The reason testing phases take 3 months is that nobody runs the diagnosis on day 1. They start with hypotheses instead.
 
@@ -462,7 +462,7 @@ P.S. No testing phase, no retainer. $97. Same day: https://buy.stripe.com/5kQbJ1
 
 ---
 
-### Email 16 — The ROAS cliff explained
+### Email 16 - The ROAS cliff explained
 
 **Subject options:**
 1. When more spend stops working
@@ -487,7 +487,7 @@ P.S. https://nebulacomponents.shop/audit.html
 
 ---
 
-### Email 17 — CPM creep vs LP problem
+### Email 17 - CPM creep vs LP problem
 
 **Subject options:**
 1. CPM rising doesn't mean what you think
@@ -496,7 +496,7 @@ P.S. https://nebulacomponents.shop/audit.html
 
 Hi {firstname},
 
-CPM creep — rising cost per thousand impressions — gets blamed on targeting and audience saturation. Sometimes that's right.
+CPM creep - rising cost per thousand impressions - gets blamed on targeting and audience saturation. Sometimes that's right.
 
 A lot of the time, the ad account is masking a landing page problem.
 
@@ -514,7 +514,7 @@ P.S. https://nebulacomponents.shop/audit.html
 
 ---
 
-### Email 18 — The 60-second audit
+### Email 18 - The 60-second audit
 
 **Subject options:**
 1. 60-second landing page diagnosis
@@ -525,7 +525,7 @@ Hi {firstname},
 
 The free audit at nebulacomponents.shop takes 60 seconds.
 
-Paste your URL. Get a score across 5 dimensions — message match, above-fold clarity, CTA specificity, trust placement, offer clarity. Plus an estimated monthly conversion leak based on your traffic volume.
+Paste your URL. Get a score across 5 dimensions - message match, above-fold clarity, CTA specificity, trust placement, offer clarity. Plus an estimated monthly conversion leak based on your traffic volume.
 
 No email required to see the result. No discovery call. No PDF with 40 recommendations.
 
@@ -539,7 +539,7 @@ P.S. If you want us to score your page and write the copy fix, it's $97 and usua
 
 ---
 
-### Email 19 — The offer clarity test
+### Email 19 - The offer clarity test
 
 **Subject options:**
 1. The 10-second offer clarity test
@@ -556,7 +556,7 @@ Offer clarity is one of the five dimensions in the scoring system, and it fails 
 
 Visitors won't piece it together. They'll leave.
 
-The fix: price, deliverable, and timeline need to be answerable from a single read. Not perfect prose — just answerable.
+The fix: price, deliverable, and timeline need to be answerable from a single read. Not perfect prose - just answerable.
 
 Guide walks through all 5 dimensions: https://nebulacomponents.shop/roas-cliff.html
 
@@ -566,7 +566,7 @@ P.S. https://nebulacomponents.shop/audit.html
 
 ---
 
-### Email 20 — Loop closer / full system
+### Email 20 - Loop closer / full system
 
 **Subject options:**
 1. The full landing page audit system

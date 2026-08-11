@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Weekly Roundup Email — Daniel Bustamante's "Easier Version" pattern
+Weekly Roundup Email - Daniel Bustamante's "Easier Version" pattern
 
 Sends a 200-300 word email curating the week's best content to all leads
 who've completed the 5-day email course but haven't purchased.
@@ -28,7 +28,7 @@ CONTENT_QUEUE = BASE / "content_queue"
 
 def build_roundup_email(lead: dict, content_items: list) -> dict:
     """Build the weekly roundup email.
-    
+
     Structure (Daniel's pattern):
     1. Greeting with first name
     2. 3 bullet points summarizing week's best content
@@ -37,18 +37,18 @@ def build_roundup_email(lead: dict, content_items: list) -> dict:
     """
     name = lead.get("name", "there")
     email = lead.get("email")
-    
+
     # Build bullet points from content items
     bullets = []
     for item in content_items[:3]:
         title = item.get("title", "This week's insight")
         link = item.get("link", "https://nebulacomponents.com")
-        bullets.append(f"• **{title}** — [Read →]({link})")
-    
+        bullets.append(f"• **{title}** - [Read →]({link})")
+
     bullets_text = "\n".join(bullets)
-    
+
     subject = f"This week in conversion: {len(content_items)} fixes you missed"
-    
+
     text_body = f"""Hi {name},
 
 Quick roundup of this week's conversion insights:
@@ -77,12 +77,12 @@ Unsubscribe: Reply UNSUBSCRIBE
 
 <ul style="list-style: none; padding: 0;">
 """
-    
+
     for b in bullets:
         # Convert markdown-style bullets to HTML
         bullet_html = b.replace("[", "<a href=\"").replace("→](", "\" style=\"color:#667eea;\">Read →</a>")
         html_body += f"<li style=\"margin: 0.5rem 0;\">{bullet_html}</li>\n"
-    
+
     html_body += f"""</ul>
 
 <p style="margin-top: 1.5rem;">
@@ -132,7 +132,7 @@ async def send_email(email_data: dict) -> tuple[bool, str]:
 
 def get_eligible_leads() -> list:
     """Get leads who should receive the weekly roundup.
-    
+
     Criteria:
     - Completed 5-day email course (stage >= lead_warm)
     - Not yet purchased (not in customer_97, customer_997, etc.)
@@ -140,57 +140,57 @@ def get_eligible_leads() -> list:
     - Not bounced
     """
     import lead_manager
-    
+
     leads_db = lead_manager._load()
     eligible = []
-    
+
     terminal_stages = {"customer_97", "customer_997", "subscriber_197", "customer_sdr", "dead", "bounced"}
-    
+
     for email, lead in leads_db.items():
         if lead.get("opted_out"):
             continue
-        
+
         stage = lead.get("current_stage", "")
-        
+
         # Skip terminal stages
         if stage in terminal_stages:
             continue
-        
+
         # Must have completed the email course (stage >= lead_warm)
         sequences = lead.get("email_sequences", {})
         post_audit = sequences.get("post_audit", {})
-        
+
         if not post_audit.get("completed"):
             # Haven't finished the 5-day course yet
             continue
-        
+
         eligible.append(lead)
-    
+
     return eligible
 
 # ─── CONTENT ──────────────────────────────────────────────
 
 def get_weekly_content() -> list:
     """Pull this week's content items from content_queue.
-    
+
     Looks for:
     - LinkedIn briefs
     - Medium outlines
     - Any findings.md updates
     """
     content_items = []
-    
+
     if not CONTENT_QUEUE.exists():
         return content_items
-    
+
     # Find content from the past 7 days
     week_ago = datetime.now(timezone.utc) - timedelta(days=7)
-    
+
     for filepath in CONTENT_QUEUE.glob("*.json"):
         try:
             data = json.loads(filepath.read_text())
             created_at = data.get("created_at", data.get("generated_at", ""))
-            
+
             if created_at:
                 created_dt = datetime.fromisoformat(created_at.replace("Z", "+00:00"))
                 if created_dt >= week_ago:
@@ -213,7 +213,7 @@ def get_weekly_content() -> list:
                         })
         except Exception:
             continue
-    
+
     return content_items
 
 # ─── MAIN ────────────────────────────────────────────────
@@ -221,50 +221,50 @@ def get_weekly_content() -> list:
 async def main(dry_run: bool = True):
     print(f"[ROUNDUP] Weekly roundup email ({'DRY RUN' if dry_run else 'LIVE'})")
     print()
-    
+
     # Get content
     content_items = get_weekly_content()
-    
+
     if not content_items:
         print("[ROUNDUP] No content items found for this week.")
         print("[ROUNDUP] Creating default content from fallback topics...")
-        
+
         # Fallback: use Daniel's email types
         content_items = [
             {"title": "Day 2: The Message Match Fix", "link": "https://nebulacomponents.com/audit", "type": "course"},
             {"title": "Day 4: Proof Before Pitch", "link": "https://nebulacomponents.com/audit", "type": "course"},
             {"title": "Day 5: Fix Before More Spend", "link": "https://nebulacomponents.com/checkout.html", "type": "offer"},
         ]
-    
+
     print(f"[ROUNDUP] Found {len(content_items)} content items")
-    
+
     # Get eligible leads
     eligible_leads = get_eligible_leads()
     print(f"[ROUNDUP] Eligible leads: {len(eligible_leads)}")
-    
+
     if not eligible_leads:
         print("[ROUNDUP] No eligible leads. Exiting.")
         return {"sent": 0, "skipped": 0}
-    
+
     sent = 0
     skipped = 0
-    
+
     for lead in eligible_leads:
         email_data = build_roundup_email(lead, content_items)
-        
+
         if dry_run:
             print(f"[WOULD SEND] {lead['email']}")
             print(f"  Subject: {email_data['subject']}")
             sent += 1
             continue
-        
+
         # Check opt-out again
         import lead_manager
         if lead_manager.is_opted_out(lead["email"]):
-            print(f"[SKIP] {lead['email']} — opted out")
+            print(f"[SKIP] {lead['email']} - opted out")
             skipped += 1
             continue
-        
+
         # Send
         ok, msg = await send_email(email_data)
         if ok:
@@ -273,17 +273,17 @@ async def main(dry_run: bool = True):
         else:
             print(f"[FAIL] {lead['email']}: {msg}")
             skipped += 1
-    
+
     print()
     print(f"[ROUNDUP] Summary: {sent} sent, {skipped} skipped")
-    
+
     return {"sent": sent, "skipped": skipped}
 
 
 if __name__ == "__main__":
     import asyncio
-    
+
     dry_run = "--dry-run" in sys.argv or "--send" not in sys.argv
-    
+
     result = asyncio.run(main(dry_run=dry_run))
     print(f"\n---SUMMARY---\n{json.dumps(result)}")

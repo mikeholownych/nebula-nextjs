@@ -1,9 +1,9 @@
-# Complete Revenue System — Aug 9 2026 Build
+# Complete Revenue System - Aug 9 2026 Build
 
-**Status**: ✅ ALL COMMITTED TO MAIN — READY FOR SEP 2 LAUNCH  
-**Total Commits Today**: 7  
-**Build Status**: All tests passing  
-**Deployment**: Ready (see pre-Sep-2 checklist below)  
+**Status**: ✅ ALL COMMITTED TO MAIN - READY FOR SEP 2 LAUNCH
+**Total Commits Today**: 7
+**Build Status**: All tests passing
+**Deployment**: Ready (see pre-Sep-2 checklist below)
 
 ---
 
@@ -14,14 +14,14 @@ AWARENESS        INTEREST           DESIRE            CONVICTION          ACTION
 ─────────────────────────────────────────────────────────────────────────────→
 YouTube          Free Audit         Audit Results     Before/After Proof   Checkout
 (15 views)       (Psychology ×14)   (Psychology ×14)  (Remove Risk)        ($97)
-                                    
+
                                                       EMAIL SEQUENCE       REPEAT
                                                       ─────────────────────→
                                                       Email 1: "Fix ready"  Pro
                                                       Email 2: "Guide"      Subscription
                                                       Email 3: "Did you?"   ($29/mo)
                                                       Email 4: "Results"
-                                                      
+
                                                       PROOF
                                                       ─────────────────────→
                                                       Auto re-audit (30d)
@@ -66,18 +66,18 @@ YouTube          Free Audit         Audit Results     Before/After Proof   Check
 
 ### **Commit 7: Post-Checkout Delivery System (P1 + P2)**
 - **P1: Email Sequence** (4 emails over 30 days)
-  - Email 1 (5 min): "Your $97 fix — ready to paste"
+  - Email 1 (5 min): "Your $97 fix - ready to paste"
   - Email 2 (1 day): "Implementation guide + before/after"
   - Email 3 (7 days): "Did you implement? Help if stuck"
   - Email 4 (30 days): "Results + Pro upsell" (3 variants: success/partial/unchanged)
-  
+
 - **P2: Implementation Tracking**
   - Stripe webhook handler (validates signature, routes to workflow)
   - Auto-run re-audit at 30 days
   - Compare before → after score
   - Trigger testimonial capture (if success)
   - Trigger Pro upsell (if success)
-  
+
 - **Files**:
   - `delivery_email_templates.py` (template library)
   - `delivery_workflow.py` (automation class + cron methods)
@@ -92,10 +92,10 @@ YouTube          Free Audit         Audit Results     Before/After Proof   Check
 
 | Stage | Lift | Cumulative | Notes |
 |-------|------|-----------|-------|
-| **Baseline** | — | 1-2% | Audit → $97 (no psychology) |
+| **Baseline** | - | 1-2% | Audit → $97 (no psychology) |
 | **+ Psychology** | 30-50% | 1.3-3% | Anchoring, loss aversion, scarcity |
 | **+ Proof layer** | +20-40% | 1.5-4.2% | Before/after removes risk |
-| **+ Delivery workflow** | — | +testimonial | Enable repeat purchases |
+| **+ Delivery workflow** | - | +testimonial | Enable repeat purchases |
 
 ### **Customer Lifetime Value**
 
@@ -112,7 +112,7 @@ With delivery (P1 + P2 + P3):
   - = $430.50/year/customer
   - + testimonial (social proof for future customers)
   - + potential referral ($50 credit)
-  
+
 Multiplied by 10 customers:
   - Without delivery: $970
   - With delivery: $4,305 + social proof + referrals
@@ -209,18 +209,18 @@ Multiplied by 10 customers:
 ## Files Summary
 
 ### **Core Revenue System**
-- `delivery_email_templates.py` — 4-email sequence library
-- `delivery_workflow.py` — Automation orchestration
-- `stripe_webhook.py` — Stripe integration
-- `delivery_system_docs.md` — Full architecture + deployment
+- `delivery_email_templates.py` - 4-email sequence library
+- `delivery_workflow.py` - Automation orchestration
+- `stripe_webhook.py` - Stripe integration
+- `delivery_system_docs.md` - Full architecture + deployment
 
 ### **Supporting Documentation**
-- `aug9_session_summary.md` — Session overview
-- `buyer_psychology_framework.md` — Psychology principles + KPIs
-- `brenda_turner_playbook.md` — Voice delivery framework
-- `trigger_aware_lead_gen_playbook.md` — Lead gen pipeline
-- `sep2_launch_checklist.md` — Deployment blueprint
-- `n8n_reply_handler_setup.md` — Workflow configuration
+- `aug9_session_summary.md` - Session overview
+- `buyer_psychology_framework.md` - Psychology principles + KPIs
+- `brenda_turner_playbook.md` - Voice delivery framework
+- `trigger_aware_lead_gen_playbook.md` - Lead gen pipeline
+- `sep2_launch_checklist.md` - Deployment blueprint
+- `n8n_reply_handler_setup.md` - Workflow configuration
 
 ### **Code Files**
 - `script_gen.py` (Brenda Turner voice gate, {PAUSE} markers)

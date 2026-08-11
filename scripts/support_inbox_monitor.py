@@ -10,7 +10,7 @@ Handles inbound email automatically for:
 
 Escalates to Mike (Telegram) only for:
   🔴 Implementation help that requires looking at the specific kit
-  🔴 Complaints / genuine issues  
+  🔴 Complaints / genuine issues
   🔴 Anything unclassifiable that looks real
 
 Usage:
@@ -54,7 +54,7 @@ You'll receive the results within a few minutes.
 If the score hasn't moved after implementing the fix, reply here with a quick description \
 of what you changed and I'll take a look at what might be blocking the signal.
 
-—
+-
 Mike
 Nebula Components
 """
@@ -64,14 +64,14 @@ Hi,
 
 Thanks for reaching out. A few things that help when implementing the kit:
 
-1. Run the prompt exactly as delivered — it's already filled in with your real page context.
+1. Run the prompt exactly as delivered - it's already filled in with your real page context.
 2. Use a coding agent with terminal + file access (Claude Code, Cursor, or Codex work well).
 3. After implementing, give it 24-48h for any CDN/cache to clear before re-auditing.
 
 If you're hitting a specific error or the agent is asking for something it shouldn't need, \
 reply here with the exact prompt step and I'll debug it with you.
 
-—
+-
 Mike
 Nebula Components
 """
@@ -79,12 +79,12 @@ Nebula Components
 REPLY_POSITIVE = """\
 Hi,
 
-Thanks — genuinely appreciate it.
+Thanks - genuinely appreciate it.
 
 When you're ready to re-audit (or audit another page), the free tool is always at:
 https://nebulacomponents.com/audit?utm_source=email&utm_medium=support
 
-—
+-
 Mike
 """
 
@@ -97,12 +97,12 @@ Our refund policy: if you haven't received your kit within 24 hours of purchase,
 email me with your Stripe receipt and I'll resolve it same day. \
 If you received the kit but it wasn't useful for your situation, \
 reply with what you were hoping it would address and I'll either \
-fix the kit or issue a refund — your call.
+fix the kit or issue a refund - your call.
 
 Receipt lookup: check your email for "Your One-Leak Repair Sprint" \
 or the Stripe receipt from Nebula Components.
 
-—
+-
 Mike
 Nebula Components
 """
@@ -110,9 +110,9 @@ Nebula Components
 REPLY_UNSUBSCRIBE = """\
 Hi,
 
-Done — you're removed. You won't hear from us again.
+Done - you're removed. You won't hear from us again.
 
-—
+-
 Mike
 """
 
@@ -124,7 +124,7 @@ def classify(subject: str, body: str) -> str:
     positive, billing, unsubscribe, complaint, escalate."""
     t = (subject + " " + body).lower()
 
-    # Spam / cold outreach signals — no reply
+    # Spam / cold outreach signals - no reply
     spam_signals = [
         "i wanted to reach out", "i came across your", "we've seen a few simple strategies",
         "we help companies like", "quick question about your visibility",
@@ -298,7 +298,7 @@ def process(am: AgentMailClient, dry_run: bool = False):
         log(f"  [{intent}] {sender_email} | {subject[:60]}")
 
         if intent == "spam":
-            # Silent — just label it
+            # Silent - just label it
             if not dry_run:
                 am.label_thread(thread_id, add=[LABEL_SPAM])
             else:
@@ -322,7 +322,7 @@ def process(am: AgentMailClient, dry_run: bool = False):
             else:
                 reply_text = (
                     "Hi,\n\nThe 30-day re-audit is included with the One-Leak Repair Sprint. "
-                    "If you've purchased, reply with your order email and I'll trigger it manually.\n\n—\nMike"
+                    "If you've purchased, reply with your order email and I'll trigger it manually.\n\n-\nMike"
                 )
             if not dry_run and last_msg_id:
                 am.reply(last_msg_id, recipient=sender_email, text=reply_text)
@@ -347,7 +347,7 @@ def process(am: AgentMailClient, dry_run: bool = False):
                 am.reply(last_msg_id, recipient=sender_email, text=REPLY_BILLING)
                 am.label_thread(thread_id, add=[LABEL_AUTO_REPLIED, LABEL_NOTIFIED])
             telegram(
-                f"💳 BILLING CONTACT — heads-up (auto-reply sent)\n"
+                f"💳 BILLING CONTACT - heads-up (auto-reply sent)\n"
                 f"From: {sender_email}\n"
                 f"Subject: {subject}\n"
                 f"Preview: {preview[:200]}\n"
@@ -366,7 +366,7 @@ def process(am: AgentMailClient, dry_run: bool = False):
             acted += 1
             continue
 
-        # complaint / escalate — alert Mike with full context
+        # complaint / escalate - alert Mike with full context
         purchase_ctx = ""
         if is_customer:
             p = purchase
@@ -377,7 +377,7 @@ def process(am: AgentMailClient, dry_run: bool = False):
             )
 
         telegram(
-            f"🔴 ESCALATION — needs your response\n"
+            f"🔴 ESCALATION - needs your response\n"
             f"Intent: {intent}\n"
             f"From: {sender_email}"
             f"{purchase_ctx}\n"

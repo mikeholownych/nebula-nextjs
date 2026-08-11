@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-waterfall_icp_config.py — Nebula Waterfall ICP Targeting Architecture
+waterfall_icp_config.py - Nebula Waterfall ICP Targeting Architecture
 
 Based on the TAM Architecture Blueprint methodology (Antoine Blitz, April 2026).
 
@@ -30,7 +30,7 @@ CONFIG_PATH = NEBULA / "waterfall_icp_config.json"
 # 1. KEYWORD ARCHITECTURE
 # ══════════════════════════════════════════════════════════════════════════════
 
-# Positional prefixes — paired with domain keywords to form multi-match queries.
+# Positional prefixes - paired with domain keywords to form multi-match queries.
 POSITIONAL_PREFIXES = {
     "c_level": [
         r"\bchief\b", r"\bcmo\b", r"\bcro\b", r"\bcgo\b",
@@ -50,7 +50,7 @@ POSITIONAL_PREFIXES = {
     ],
 }
 
-# Domain keywords — the functional area for Nebula's ICP.
+# Domain keywords - the functional area for Nebula's ICP.
 DOMAIN_KEYWORDS = {
     "growth_marketing": [
         r"\bmarketing\b", r"\bgrowth\b", r"\bdemand gen\b",
@@ -76,28 +76,28 @@ DOMAIN_KEYWORDS = {
 # Exclusions are more powerful than inclusions.
 # Keep this stable; update only when false positives appear.
 EXCLUSIONS = {
-    # Seniority — remove non-decision-makers
+    # Seniority - remove non-decision-makers
     "junior_intern": [
         r"\bintern\b", r"\btrainee\b", r"\bapprentice\b",
         r"\bjunior\b", r"\bjr\b", r"\bassistant\b",
     ],
-    # Status — no budget authority
+    # Status - no budget authority
     "freelance_contractor": [
         r"\bfreelance\b", r"\bfreelancer\b", r"\bcontractor\b",
         r"\bconsultant\b", r"\bindependent\b",
     ],
-    # Scope — narrow functional focus that doesn't own conversion
+    # Scope - narrow functional focus that doesn't own conversion
     "non_conversion_scope": [
         r"\bpr\b", r"\bpublic relations\b", r"\bevents\b",
         r"\bproduct marketing\b",  # product marketing owns positioning not conversion
         r"\bbrand ambassador\b", r"\binfluencer\b",
     ],
-    # Status — currently not active
+    # Status - currently not active
     "inactive": [
         r"\bstudent\b", r"\blooking for\b", r"\bopen to work\b",
         r"\bseeking\b",
     ],
-    # Providers / tech agencies — noise for Nebula's ICP
+    # Providers / tech agencies - noise for Nebula's ICP
     "agency_noise": [
         r"\bagency\b", r"\bads management\b", r"\bgoogle ads expert\b",
         r"\bfacebook ads expert\b", r"\bmanaged ads\b",
@@ -161,7 +161,7 @@ def keyword_coverage_score(title: str, headline: str = "") -> float:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 2. WATERFALL ICP — PRIORITY LEVELS
+# 2. WATERFALL ICP - PRIORITY LEVELS
 # ══════════════════════════════════════════════════════════════════════════════
 
 @dataclass
@@ -210,7 +210,7 @@ class IcpLevel:
                 return 0.6
             return 0.0
 
-        # Department sweep — catch anyone in a matching domain
+        # Department sweep - catch anyone in a matching domain
         if self.department_sweep:
             domain_match = any(
                 matches_any(text, DOMAIN_KEYWORDS[d])
@@ -220,7 +220,7 @@ class IcpLevel:
                 return 0.4
             return 0.0
 
-        # Headline fallback — scan headline for atypical titles
+        # Headline fallback - scan headline for atypical titles
         if self.headline_fallback and headline:
             combined = f"{title} {headline}".lower()
             prefix_match = matches_any(combined, self._compiled_prefixes())
@@ -267,7 +267,7 @@ NEBULA_WATERFALL_ICP = [
         level=1,
         label="Specialized C-level / VP",
         target_description=(
-            "CMO, VP Marketing, Chief Marketing Officer — owns the budget and the"
+            "CMO, VP Marketing, Chief Marketing Officer - owns the budget and the"
             " conversion problem. Direct escalation path."
         ),
         positional_prefixes=["c_level", "head"],
@@ -283,7 +283,7 @@ NEBULA_WATERFALL_ICP = [
         level=2,
         label="Director-level / Head of",
         target_description=(
-            "Head of Marketing, Marketing Director, Director of Growth — owns execution"
+            "Head of Marketing, Marketing Director, Director of Growth - owns execution"
             " and tool decisions. Often the one who raised the ad-spend flag."
         ),
         positional_prefixes=["head", "manager"],
@@ -294,7 +294,7 @@ NEBULA_WATERFALL_ICP = [
         level=3,
         label="Manager + headline signal",
         target_description=(
-            "Growth Manager, Head of Growth, Demand Gen — pushes the actual levers."
+            "Growth Manager, Head of Growth, Demand Gen - pushes the actual levers."
             " High influence on conversion tooling decisions."
         ),
         positional_prefixes=["head", "manager"],
@@ -320,7 +320,7 @@ NEBULA_WATERFALL_ICP = [
         label="Department sweep (any Marketing/Growth)",
         target_description=(
             "Anyone in the marketing, growth, or demand generation function. Nurture"
-            " track — not ready for direct outreach."
+            " track - not ready for direct outreach."
         ),
         positional_prefixes=[],
         domain_keywords=["growth_marketing", "revenue_conversion", "ads_traffic"],
@@ -364,11 +364,11 @@ def cascade_match(title: str, headline: str = "",
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 3. ROUTING TABLE — map ICP priority to funnel action
+# 3. ROUTING TABLE - map ICP priority to funnel action
 # ══════════════════════════════════════════════════════════════════════════════
 
 ROUTING_TABLE = {
-    1: {   # P1 — Specialized C-level
+    1: {   # P1 - Specialized C-level
         "channel": "cold_email_multichannel",
         "route_to": "founder_direct",       # Mike handles high-value
         "message_type": "high_touch_audit",
@@ -376,7 +376,7 @@ ROUTING_TABLE = {
         "cadence": "strategic_3_step",
         "target_response": "audit_tool_visit",
     },
-    2: {   # P2 — Director-level
+    2: {   # P2 - Director-level
         "channel": "cold_email",
         "route_to": "growth_agent",
         "message_type": "personalized_audit",
@@ -384,7 +384,7 @@ ROUTING_TABLE = {
         "cadence": "standard_5_step",
         "target_response": "audit_tool_visit",
     },
-    3: {   # P3 — Manager + headline
+    3: {   # P3 - Manager + headline
         "channel": "cold_email",
         "route_to": "growth_agent",
         "message_type": "evangelistic_audit",
@@ -392,7 +392,7 @@ ROUTING_TABLE = {
         "cadence": "nurture_7_step",
         "target_response": "audit_tool_visit_or_reply",
     },
-    4: {   # P4 — Champions / atypical
+    4: {   # P4 - Champions / atypical
         "channel": "cold_email_or_linkedin",
         "route_to": "growth_agent",
         "message_type": "bottom_up_enablement",
@@ -400,7 +400,7 @@ ROUTING_TABLE = {
         "cadence": "educational_5_step",
         "target_response": "audit_tool_visit",
     },
-    5: {   # P5 — Department sweep
+    5: {   # P5 - Department sweep
         "channel": "automation_nurture",
         "route_to": "marketing_automation",
         "message_type": "educational_sequence",
@@ -408,7 +408,7 @@ ROUTING_TABLE = {
         "cadence": "monthly_educational",
         "target_response": "click_or_reply",
     },
-    6: {   # P6 — Founder fallback
+    6: {   # P6 - Founder fallback
         "channel": "short_cold_email",
         "route_to": "growth_agent",
         "message_type": "qualification_redirect",
@@ -434,7 +434,7 @@ def prepare_name_drop(contacts: list[dict]) -> list[dict]:
     ranking scores, map the first name of a P3-P4 contact into a
     colleague_first_name variable on the P1-P2 rows.
 
-    This is the Name Drop tactic from the TAM Blueprint — ~15-25% lift in
+    This is the Name Drop tactic from the TAM Blueprint - ~15-25% lift in
     reply rates on high-value account sequences.
     """
     if not contacts:
@@ -615,7 +615,7 @@ def main() -> None:
 
     # Default: print config summary
     print("=" * 72)
-    print("NEBULA WATERFALL ICP — Targeting Architecture")
+    print("NEBULA WATERFALL ICP - Targeting Architecture")
     print("Methodology: TAM Architecture Blueprint (Antoine Blitz, April 2026)")
     print("=" * 72)
     print()

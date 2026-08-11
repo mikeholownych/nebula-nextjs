@@ -1,5 +1,5 @@
 #!/bin/bash
-# pipeline/outreach.sh — preview or send outreach for a qualified lead
+# pipeline/outreach.sh - preview or send outreach for a qualified lead
 # Usage:
 #   ./outreach.sh <email>            # preview (dry-run)
 #   ./outreach.sh <email> --send     # actually send via AgentMail

@@ -64,7 +64,7 @@ with sync_playwright() as p:
 
 Via AgentMail (nebulashop@agentmail.to):
 
-**Subject:** Your One-Leak Repair Sprint — [Domain]
+**Subject:** Your One-Leak Repair Sprint - [Domain]
 
 **Body structure:**
 1. Confirm which finding you're fixing (one sentence)

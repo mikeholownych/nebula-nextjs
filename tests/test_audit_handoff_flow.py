@@ -123,7 +123,7 @@ class AuditHandoffFlowTests(unittest.TestCase):
             mock_event.type = "checkout.session.completed"
             mock_event.id = "evt_test_123"
             mock_event.data.object = mock_session
-            body = b"{}"  # body doesn't matter — construct_event is mocked
+            body = b"{}"  # body doesn't matter - construct_event is mocked
             handler = object.__new__(webhook_server.WebhookHandler)
             handler.headers = {"Content-Length": str(len(body)), "Stripe-Signature": "t=1,v1=abc"}
             handler.rfile = BytesIO(body)

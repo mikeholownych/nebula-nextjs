@@ -1,4 +1,4 @@
-# Nebula DIY Kit — 5-Step Implementation Checklist
+# Nebula DIY Kit - 5-Step Implementation Checklist
 
 Follow these steps to implement your audit findings and boost conversions:
 

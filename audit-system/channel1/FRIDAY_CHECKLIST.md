@@ -1,4 +1,4 @@
-# Channel 1 — Friday Operating Checklist (15 minutes, in execution order)
+# Channel 1 - Friday Operating Checklist (15 minutes, in execution order)
 
 **Purpose:** ONE page. Work top to bottom. Every step says what to check, what
 red means, and the EXACT next move. No numbers without a decision.
@@ -13,7 +13,7 @@ message only multiplies noise.
 
 ---
 
-## 0. FRESHNESS (2 min) — do this FIRST, always
+## 0. FRESHNESS (2 min) - do this FIRST, always
 
 - [ ] `stats.json` updated this week? (rollup flags `⚠️ STALE` if not)
 - [ ] Pipeline sheet reflects reality (sends, statuses, touches)?
@@ -21,7 +21,7 @@ message only multiplies noise.
       The rollup refuses to show the board on stale data (use `--force` only to preview while fixing).
       Judging anything on dead data is self-deception.
 
-## 1. REVENUE (3 min) — the only gate that stops everything
+## 1. REVENUE (3 min) - the only gate that stops everything
 
 - [ ] Fix Pack purchases this week? (Stripe + ops-finance ledger)
 - [ ] Audit → purchase rate ≥ 10%?
@@ -32,7 +32,7 @@ IF RED (0 purchases / <3%):
 → The problem is the offer or the delivery, not the list. Fix before volume.
 ```
 
-## 2. AUDIT REQUEST RATE (3 min) — does the offer move people?
+## 2. AUDIT REQUEST RATE (3 min) - does the offer move people?
 
 - [ ] Audits requested this week ≥ 3?
 
@@ -43,18 +43,18 @@ IF 0 THIS WEEK:
   a sample issue, then the free-audit link. Never lead with the offer.
 ```
 
-## 3. REPLY RATE & DIAGNOSTICS (4 min) — is the message resonating?
+## 3. REPLY RATE & DIAGNOSTICS (4 min) - is the message resonating?
 
 - [ ] Reply rate per angle ≥ 20%? (10–19% = workable, <10% = broken)
 - [ ] Any angle at 10 sends / 0 replies? → **KILL IT. Tag the reason.**
 
 ```
-KILL-REASON TAXONOMY — always tag, so the ledger compounds:
+KILL-REASON TAXONOMY - always tag, so the ledger compounds:
   bad_list         → wrong segment or stale trigger (research, not copy)
   weak_proof       → not enough proof in touch 1 (add audit artifact)
-  bad_framing      → S3 wrong — they don't feel the pain you name
+  bad_framing      → S3 wrong - they don't feel the pain you name
   too_much_friction→ ask is a call; drop to $97 link / free audit
-  stale_sample     → <5 sends, no statistical basis — don't conclude
+  stale_sample     → <5 sends, no statistical basis - don't conclude
   too_few_sends    → same as stale_sample; keep the angle, add volume
 
 Record: python3 weekly_rollup.py --kill "<angle>" --reason <reason> [--note "..."]
@@ -63,7 +63,7 @@ Record: python3 weekly_rollup.py --kill "<angle>" --reason <reason> [--note "...
 - [ ] Check S1–S4 failure distribution (reply_diagnostics.jsonl): whichever stage
       fails most is your copy to-do list for next week.
 
-## 4. SOURCING VOLUME (3 min) — only after 0–3 are at least YELLOW
+## 4. SOURCING VOLUME (3 min) - only after 0–3 are at least YELLOW
 
 - [ ] Prospects in sheet ≥ 30 (by week 6)? Touches ≤ 3 per prospect?
 
@@ -80,7 +80,7 @@ IF GREEN across 0–4:
 → Double batch to 10 offers/week. Keep pre-auditing. Protect the reply SLA.
 ```
 
-## 5. TEARDOWN PROPAGATION (2 min) — owned-channel validation
+## 5. TEARDOWN PROPAGATION (2 min) - owned-channel validation
 
 - [ ] Run `python3 teardown_tracker.py rollup`
 

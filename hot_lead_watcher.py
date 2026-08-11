@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-hot_lead_watcher.py — watches HOT_LEAD.json for warm leads needing audit delivery.
+hot_lead_watcher.py - watches HOT_LEAD.json for warm leads needing audit delivery.
 
 Run this every 5 minutes via cron or as a one-shot after inbox_monitor.py.
 Logic:
@@ -43,7 +43,7 @@ def main():
     log("hot_lead_watcher: starting")
 
     if not Path(HOT_LEAD_FILE).exists():
-        log("HOT_LEAD.json not found — nothing to process")
+        log("HOT_LEAD.json not found - nothing to process")
         return
 
     with open(HOT_LEAD_FILE) as f:
@@ -65,10 +65,10 @@ def main():
         # Only act on warm leads that explicitly need audit delivery.
         # Already-delivered audits wait for followup_sequence.py to pitch at pitch_due_at.
         if not (stage in ("warm_reply", "warm", "pending_audit") or action == "deliver_audit"):
-            log(f"HOT_LEAD #{idx} stage='{stage}' action='{action}' — no action needed")
+            log(f"HOT_LEAD #{idx} stage='{stage}' action='{action}' - no action needed")
             continue
         if status not in ("warm", "pending", "pending_audit", ""):
-            log(f"HOT_LEAD #{idx} status='{status}' — no action needed")
+            log(f"HOT_LEAD #{idx} status='{status}' - no action needed")
             continue
 
         sender    = hot.get("sender", "")
@@ -77,7 +77,7 @@ def main():
         lead_url  = hot.get("url", "")
 
         if not thread_id:
-            log(f"HOT_LEAD #{idx}: no thread_id — cannot deliver")
+            log(f"HOT_LEAD #{idx}: no thread_id - cannot deliver")
             hot["status"] = "needs_thread_id"
             changed = True
             continue

@@ -35,7 +35,7 @@ Unknown, conflicting, or incomplete evidence routes to review. It must not be in
 
 ## Highest-priority gaps
 
-### P0 — Bind payment to fulfillment
+### P0 - Bind payment to fulfillment
 
 Every accepted payment must resolve to:
 
@@ -49,7 +49,7 @@ purchase
 
 A paid receipt without `audit_id`, offer identity, or fulfillment scope remains `paid_review`, not delivered.
 
-### P0 — Enforce workspace ownership
+### P0 - Enforce workspace ownership
 
 `nebula_ws_email` is a demo identity marker. It must not authorize access to another customer’s audits, billing, recommendations, or team data.
 
@@ -62,11 +62,11 @@ signed server session
 → negative cross-owner test
 ```
 
-### P1 — Centralize transitions
+### P1 - Centralize transitions
 
 SOPs currently describe legal transitions, but the enforcement boundary is distributed. Introduce transition functions only where multiple callers need the same business decision. Do not create a generic state framework for its own sake.
 
-### P1 — Bound operational failure evidence
+### P1 - Bound operational failure evidence
 
 Logs must be rotated and structured around correlation IDs, operation IDs, entity IDs, retry attempt, state before/after, and failure class. More unstructured output is not more observability.
 

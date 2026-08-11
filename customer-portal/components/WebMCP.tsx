@@ -12,7 +12,7 @@ const PUBLIC_SIGNAL_LABELS = [
 ] as const
 
 /**
- * WebMCP — exposes Nebula Components site tools to supporting browsers without
+ * WebMCP - exposes Nebula Components site tools to supporting browsers without
  * introducing a React client boundary into every route.
  *
  * Tools registered:
@@ -74,7 +74,7 @@ export function WEB_MCP_RUNTIME() {
             {
               name: 'Free Audit',
               price: '$0',
-              description: 'Automated landing page audit — evidence-backed checks for ' + publicSignals.join(', ') + '.',
+              description: 'Automated landing page audit - evidence-backed checks for ' + publicSignals.join(', ') + '.',
               url: 'https://nebulacomponents.com/audit',
             },
             {
@@ -96,7 +96,7 @@ export function WEB_MCP_RUNTIME() {
           properties: {
             query: {
               type: 'string',
-              description: 'Search query — e.g. "message match", "trust signals", "mobile conversion"'
+              description: 'Search query - e.g. "message match", "trust signals", "mobile conversion"'
             }
           },
           required: ['query']

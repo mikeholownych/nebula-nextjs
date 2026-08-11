@@ -5,22 +5,22 @@ to a system that has never seen the organization before.
 
 ## Scoring dimensions
 
-1. **Single subject** — one primary entity/concept per page; competitors for
+1. **Single subject** - one primary entity/concept per page; competitors for
    attention (multiple unrelated H2 topics) lower the score.
-2. **Controlled terminology** — one canonical term used consistently; variants
+2. **Controlled terminology** - one canonical term used consistently; variants
    only if registered as aliases (ENTITY-006 flags drift deterministically;
    this rubric judges whether the drift is meaningful or benign inflection).
-3. **Explicit relationships** — product→organization, capability→product,
+3. **Explicit relationships** - product→organization, capability→product,
    evidence→capability, concept→adjacent-concept distinctions stated in prose.
-4. **Category anchoring** — the entity's category named in text, matching the
+4. **Category anchoring** - the entity's category named in text, matching the
    registry category.
-5. **Jargon load** — proprietary terms defined at first meaningful use.
+5. **Jargon load** - proprietary terms defined at first meaningful use.
 
 ## Posture
 
 `strong` (1–4 hold), `partial` (subject clear, relationships implicit),
 `weak` (subject or category ambiguous), `not_established` (page has no
-registered primary entity — fix the registry first).
+registered primary entity - fix the registry first).
 
 ## Evidence required
 

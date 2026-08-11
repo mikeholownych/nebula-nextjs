@@ -13,7 +13,7 @@ from pathlib import Path
 
 RESEND_KEY_FILE = Path('/home/mike/nebula/secrets/resend.key')
 RESEND_API = 'https://api.resend.com/emails'
-# Use verified sender — update once domain is added to Resend dashboard
+# Use verified sender - update once domain is added to Resend dashboard
 RESEND_FROM = 'Nebula Components <hello@nebulacomponents.shop>'
 
 
@@ -70,7 +70,7 @@ def send(to: list[str], subject: str, text: str, from_addr: str = None) -> dict:
 
 
 def test_connection() -> bool:
-    """Quick connectivity check — doesn't send a real email."""
+    """Quick connectivity check - doesn't send a real email."""
     key = load_resend_key()
     if not key:
         print('[resend] No API key')

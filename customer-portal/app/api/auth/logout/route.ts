@@ -1,6 +1,6 @@
 /**
- * POST /api/auth/logout  — revoke current session
- * GET  /api/auth/me      — return current user (used to check logged-in state)
+ * POST /api/auth/logout  - revoke current session
+ * GET  /api/auth/me      - return current user (used to check logged-in state)
  *
  * Both proxy to the platform API, forwarding the session cookie.
  */

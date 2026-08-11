@@ -1,16 +1,16 @@
-# AUDIT REPORT — Nebula Components
-**Date:** 2026-07-11  
-**Status:** Gaps identified and fixed  
+# AUDIT REPORT - Nebula Components
+**Date:** 2026-07-11
+**Status:** Gaps identified and fixed
 **Previous audit:** June 24 (stale, moved to .deprecated/)
 
 ---
 
 ## EXECUTIVE SUMMARY
 
-**Pipeline health check:** 15/15 passing ✅  
-**Website:** localhost:8765 → 200 ✅ | nebulacomponents.shop → 200 ✅  
-**Revenue:** **$0 MRR** | 0 paying customers  
-**Total leads:** 156 tracked | 74 contacted | 42 bounced | 14 audit_delivered | 20 pitch_sent  
+**Pipeline health check:** 15/15 passing ✅
+**Website:** localhost:8765 → 200 ✅ | nebulacomponents.shop → 200 ✅
+**Revenue:** **$0 MRR** | 0 paying customers
+**Total leads:** 156 tracked | 74 contacted | 42 bounced | 14 audit_delivered | 20 pitch_sent
 **Active crons:** 22 script-based working ✅ | 22 Bedrock-dependent were PAUSED → now resumed with opencode
 
 **Root cause of $0 revenue is definitively identified and now being resolved.**
@@ -151,8 +151,8 @@ File in project root with real Stripe checkout links. Low risk but conventionall
 
 ## IMMEDIATE NEXT STEPS
 
-1. ✅ **Crons resumed** — Reply Monitor will process backlog within 15 min
-2. ✅ **Lead gen restarted** — Reddit trigger monitor will find new leads within 4h
+1. ✅ **Crons resumed** - Reply Monitor will process backlog within 15 min
+2. ✅ **Lead gen restarted** - Reddit trigger monitor will find new leads within 4h
 3. ⏳ **Email sequences** will begin outreach to new leads every 2h
 4. 📋 **Audit:** Reply Monitor needs to classify the 8 unseen threads in inbox
 5. 📋 **Revenue:** First paid customer via pipeline restart (estimated 3-7 days to close)

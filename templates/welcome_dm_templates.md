@@ -43,7 +43,7 @@ Hey [NAME],
 
 Thanks for connecting.
 
-I noticed you're running [ADS/FUNNEL/WEBSITE] — I built a free landing page audit tool that checks for the 5 most common conversion leaks.
+I noticed you're running [ADS/FUNNEL/WEBSITE] - I built a free landing page audit tool that checks for the 5 most common conversion leaks.
 
 It takes 30 seconds, gives you a score, and shows exactly where you're bleeding money.
 
@@ -67,7 +67,7 @@ I write about conversion optimization for founders running ads. A few posts that
 - "Why Your Landing Page Is Leaking Buyers"
 - "The $147 Fix That Saved $3k/mo"
 
-Also — I built a free audit tool that checks your page for the 5 biggest conversion leaks in 30 seconds.
+Also - I built a free audit tool that checks your page for the 5 biggest conversion leaks in 30 seconds.
 
 Want the link, or want me to run a manual teardown for you?
 

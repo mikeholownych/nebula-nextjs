@@ -61,13 +61,13 @@ A lead says: clicks, no sales; ads are working but page is not; landing page not
 
 Score each 0/1.
 
-1. **Message mismatch** — ad promise and page headline do not say the same thing.
-2. **CTA asks too early** — the button asks for commitment before proof exists.
-3. **Trust appears too late** — testimonials, logos, guarantees, or proof are below the first CTA.
-4. **No single next step** — page has multiple competing CTAs above the fold.
-5. **Mobile friction** — form, button, or hero layout breaks on phone.
-6. **Slow first impression** — page feels heavy before the offer is understood.
-7. **Objection silence** — price, timing, credibility, or risk is not addressed before the ask.
+1. **Message mismatch** - ad promise and page headline do not say the same thing.
+2. **CTA asks too early** - the button asks for commitment before proof exists.
+3. **Trust appears too late** - testimonials, logos, guarantees, or proof are below the first CTA.
+4. **No single next step** - page has multiple competing CTAs above the fold.
+5. **Mobile friction** - form, button, or hero layout breaks on phone.
+6. **Slow first impression** - page feels heavy before the offer is understood.
+7. **Objection silence** - price, timing, credibility, or risk is not addressed before the ask.
 
 ## Interpretation
 - 0-2 leaks: traffic quality or offer may be the main issue.
@@ -95,10 +95,10 @@ Give the lead a taste of the actual result before the paid offer.
 
 ## Sample output
 
-**Page:** example paid-traffic landing page  
-**Primary leak:** CTA friction before proof  
-**Why it matters:** visitors are asked to book/buy before they understand why the offer is safe.  
-**Fix:** move proof block directly under the headline, then repeat one CTA after the proof.  
+**Page:** example paid-traffic landing page
+**Primary leak:** CTA friction before proof
+**Why it matters:** visitors are asked to book/buy before they understand why the offer is safe.
+**Fix:** move proof block directly under the headline, then repeat one CTA after the proof.
 **Expected effect:** fewer qualified clicks exit before seeing credibility.
 
 ## What the full audit shows

@@ -685,7 +685,7 @@ class OutboundReleaseGate:
                 "WHERE purpose = ?",
                 (purpose.value,),
             ).fetchone()["last_at"]
-            # Cooldown only applies to outbound marketing — not to user-requested
+            # Cooldown only applies to outbound marketing - not to user-requested
             # audit delivery or transactional messages, which must not be rate-limited
             # by the marketing drip interval.
             cooldown_purposes = {DeliveryPurpose.MARKETING, DeliveryPurpose.CONVERSATION_REPLY}

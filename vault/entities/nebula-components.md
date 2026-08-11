@@ -2,15 +2,15 @@
 > Landing page audit SaaS. ICP: founders bleeding ad spend on non-converting pages.
 
 ## Offer Ladder
-- **$0** — Free audit (AI-scored teardown, emailed in <60s)
-- **$147** — Fix Pack (top 2 issues fixed, implementation)
-- **$997** — Growth Launch (60-day full rebuild)
-- **$197/mo** — Retainer (ongoing monitoring + fixes)
+- **$0** - Free audit (AI-scored teardown, emailed in <60s)
+- **$147** - Fix Pack (top 2 issues fixed, implementation)
+- **$997** - Growth Launch (60-day full rebuild)
+- **$197/mo** - Retainer (ongoing monitoring + fixes)
 
 ## Positioning
 - **Trigger-based**, not demographic. ICP = founder actively losing money on ads.
-- **Self-serve** — no calls, no contracts, no agency markup.
-- **60-second delivery** — audit emailed before the next ad dollar drops.
+- **Self-serve** - no calls, no contracts, no agency markup.
+- **60-second delivery** - audit emailed before the next ad dollar drops.
 - **Diff vs competitors:** Zamp (sales-led), Oxygen (spray-list). We are trigger-aware + self-serve.
 
 ## Key Copy
@@ -19,9 +19,9 @@
 - Trust: "40+ audits delivered · avg score back in 60s · 30-min-or-30-day guarantee"
 
 ## Tech Stack
-- Frontend: `index.html` — static, hosted via cloudflare tunnel
+- Frontend: `index.html` - static, hosted via cloudflare tunnel
 - Backend: `agentic_server.py` (Flask, port 8765)
-- Audit pipeline: `deliver_audit.py` — scrape_page() → score_audit() → compose_audit_email()
+- Audit pipeline: `deliver_audit.py` - scrape_page() → score_audit() → compose_audit_email()
 - DB: `lead_state.db` (access via lead_store.py only)
 - Email: AgentMail REST API
 - Payments: Stripe ($147 Fix Pack link)

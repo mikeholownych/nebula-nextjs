@@ -33,7 +33,7 @@ function citableProjectionHash(): string | null {
 }
 
 const nextConfig: NextConfig = {
-  // Skip TypeScript check during build — run `npm run typecheck` as a separate gate
+  // Skip TypeScript check during build - run `npm run typecheck` as a separate gate
   typescript: { ignoreBuildErrors: true },
   // Explicit workspace root to silence Turbopack lockfile ambiguity warning
   turbopack: { root: __dirname },
@@ -74,7 +74,7 @@ const nextConfig: NextConfig = {
       { source: '/cta-optimization.html',               destination: '/cta-optimization',   permanent: true },
       { source: '/roas-cliff.html',                     destination: '/roas-cliff',          permanent: true },
       { source: '/ai-sdr-vs-audit.html',                destination: '/ai-sdr-vs-audit',     permanent: true },
-      // NOT a legacy orphan — this is the live "Details + FAQ" link embedded
+      // NOT a legacy orphan - this is the live "Details + FAQ" link embedded
       // in every free audit email (deliver_audit.py), served from
       // public/primer.html. A previous pass in this same redirect map
       // mistook it for a dead pre-migration URL and 301'd it to
@@ -91,14 +91,14 @@ const nextConfig: NextConfig = {
       { source: '/ai-ops-retainer.html',                destination: '/pricing',             permanent: true },
       { source: '/beta-tester.html',                    destination: '/pricing',             permanent: true },
       // Relocated out of /learning-centre (2026-07-27): founder-productivity/
-      // AI-ops content, not landing-page conversion diagnosis — topically
+      // AI-ops content, not landing-page conversion diagnosis - topically
       // off-hub per the Cluster audit, given its own /playbooks section
       // instead of being pruned, since all three had live inbound traffic.
       { source: '/learning-centre/founder-second-brain',        destination: '/playbooks/founder-second-brain',        permanent: true },
       { source: '/learning-centre/linkedin-skill-engine',       destination: '/playbooks/linkedin-skill-engine',       permanent: true },
       { source: '/learning-centre/specialist-ai-agent-library', destination: '/playbooks/specialist-ai-agent-library', permanent: true },
       // Consolidated into proof-before-cta (2026-07-27): near-duplicate
-      // thin article covering the same proof-before-ask argument — see
+      // thin article covering the same proof-before-ask argument - see
       // the Content audit's cannibalization finding.
       { source: '/learning-centre/no-testimonials-on-landing-page', destination: '/learning-centre/proof-before-cta', permanent: true },
       // True orphans → 410 Gone (no equity to preserve, no equivalent page)
@@ -139,7 +139,7 @@ const nextConfig: NextConfig = {
     source: '/learning-centre/:slug.md',
     destination: '/md/learning-centre/:slug',
   },
-  // PostHog reverse proxy — routes ingest through Next.js to avoid ad blockers
+  // PostHog reverse proxy - routes ingest through Next.js to avoid ad blockers
   {
     source: '/ingest/static/:path*',
     destination: 'https://us-assets.i.posthog.com/static/:path*',
@@ -168,17 +168,17 @@ const nextConfig: NextConfig = {
         destination: '/:path.html',
       },
       // DO NOT rewrite single-word paths - let static files and app routes handle them
-      // (the assumption above turned out false for direct-hit .html requests —
+      // (the assumption above turned out false for direct-hit .html requests -
       // Next doesn't fall through to public/ for an exact single-word `.html`
       // path here, so single-word public/*.html files need an explicit rewrite
       // like the one below, same as the hyphenated ones get automatically.
-      // /primer is the one link that actually matters — it's the "Details +
+      // /primer is the one link that actually matters - it's the "Details +
       // FAQ" URL embedded in every free audit email.)
       {
         source: '/primer',
         destination: '/primer.html',
       },
-      // Widget demo page — same .html fall-through quirk as /primer; nested
+      // Widget demo page - same .html fall-through quirk as /primer; nested
       // public .html files need an explicit extensionless rewrite.
       {
         source: '/widget/demo',
@@ -234,7 +234,7 @@ const nextConfig: NextConfig = {
           // script-src entry, only connect-src for its API/asset hosts.
           // Stripe checkout is a plain-link navigation to buy.stripe.com, not
           // an embedded script/iframe, so it needs no CSP entry either.
-          // Cloudflare Web Analytics beacon is allowlisted — it defaults on
+          // Cloudflare Web Analytics beacon is allowlisted - it defaults on
           // with general analytics consent (non-EU: accepted by default).
           {
             key: 'Content-Security-Policy',
@@ -256,7 +256,7 @@ const nextConfig: NextConfig = {
       },
       // CF email obfuscation: previously blocked via no-transform in Cache-Control,
       // but no-transform also stops the compression middleware (RFC 7230 §5.7.2 compliance).
-      // Removed no-transform — CF compresses HTML at the edge AND Next.js compresses at origin.
+      // Removed no-transform - CF compresses HTML at the edge AND Next.js compresses at origin.
       // CF email obfuscation (cdn-cgi link rewriting) is harmless anti-spam; disable it
       // in the CF dashboard (Scrape Shield → Email Address Obfuscation → Off) if needed.
       {
@@ -376,7 +376,7 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // /.well-known/api-catalog — RFC 9727 linkset+json
+      // /.well-known/api-catalog - RFC 9727 linkset+json
       {
         source: '/.well-known/api-catalog',
         headers: [
@@ -385,7 +385,7 @@ const nextConfig: NextConfig = {
           { key: 'Access-Control-Allow-Origin', value: '*' },
         ],
       },
-      // /api/build-info — immutable deployment attestation
+      // /api/build-info - immutable deployment attestation
       {
         source: '/api/build-info',
         headers: [
@@ -405,7 +405,7 @@ const nextConfig: NextConfig = {
           { key: 'Access-Control-Allow-Origin', value: '*' },
         ],
       },
-      // /.well-known/oauth-protected-resource — RFC 9728
+      // /.well-known/oauth-protected-resource - RFC 9728
       {
         source: '/.well-known/oauth-protected-resource',
         headers: [
@@ -414,7 +414,7 @@ const nextConfig: NextConfig = {
           { key: 'Access-Control-Allow-Origin', value: '*' },
         ],
       },
-      // /.well-known/acp.json — Agentic Commerce Protocol
+      // /.well-known/acp.json - Agentic Commerce Protocol
       {
         source: '/.well-known/acp.json',
         headers: [
@@ -423,7 +423,7 @@ const nextConfig: NextConfig = {
           { key: 'Access-Control-Allow-Origin', value: '*' },
         ],
       },
-      // /.well-known/ucp — Universal Commerce Protocol
+      // /.well-known/ucp - Universal Commerce Protocol
       {
         source: '/.well-known/ucp',
         headers: [
@@ -432,7 +432,7 @@ const nextConfig: NextConfig = {
           { key: 'Access-Control-Allow-Origin', value: '*' },
         ],
       },
-      // /.well-known/http-message-signatures-directory — Web Bot Auth JWKS
+      // /.well-known/http-message-signatures-directory - Web Bot Auth JWKS
       {
         source: '/.well-known/http-message-signatures-directory',
         headers: [
@@ -441,7 +441,7 @@ const nextConfig: NextConfig = {
           { key: 'Access-Control-Allow-Origin', value: '*' },
         ],
       },
-      // /openapi.json — MPP payment discovery
+      // /openapi.json - MPP payment discovery
       {
         source: '/openapi.json',
         headers: [

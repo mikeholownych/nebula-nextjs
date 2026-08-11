@@ -67,7 +67,7 @@ export default function TeamView({ email }: TeamViewProps) {
         setInviteMsg({ text: data.error || 'Failed to send invite', type: 'error' })
       }
     } catch {
-      setInviteMsg({ text: 'Network error — try again', type: 'error' })
+      setInviteMsg({ text: 'Network error - try again', type: 'error' })
     } finally {
       setSending(false)
     }
@@ -114,7 +114,7 @@ export default function TeamView({ email }: TeamViewProps) {
       <section>
         <h2 className="text-xl font-bold mb-1">Invite Team Member</h2>
         <p className="text-sm text-fg-muted mb-4">
-          Add collaborators to your workspace — they&apos;ll receive an email invitation.
+          Add collaborators to your workspace - they&apos;ll receive an email invitation.
         </p>
         <div className="bg-bg-elevated border border-border rounded-lg p-5 space-y-3">
           <div className="flex gap-3">
@@ -182,7 +182,7 @@ export default function TeamView({ email }: TeamViewProps) {
             {
               role: 'Owner',
               icon: '\u{1F451}',
-              desc: 'Full access — manage workspace, billing, team members, and all audits.',
+              desc: 'Full access - manage workspace, billing, team members, and all audits.',
             },
             {
               role: 'Editor',

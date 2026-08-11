@@ -2,11 +2,11 @@ import { Metadata } from 'next';
 
 
 export const metadata: Metadata = {
-  title: 'AI Marketing Ops — Nebula Components',
-  description: 'Autonomous lead gen, outreach, audit delivery, and monthly CRO — running 24/7 for your business. No agency retainer. No headcount. $497/mo.',
+  title: 'AI Marketing Ops - Nebula Components',
+  description: 'Autonomous lead gen, outreach, audit delivery, and monthly CRO - running 24/7 for your business. No agency retainer. No headcount. $497/mo.',
   openGraph: {
-    title: 'AI Marketing Ops — Nebula Components',
-    description: 'Autonomous lead gen, outreach, audit delivery, and monthly CRO — running 24/7 for your business. No agency retainer. No headcount. $497/mo.',
+    title: 'AI Marketing Ops - Nebula Components',
+    description: 'Autonomous lead gen, outreach, audit delivery, and monthly CRO - running 24/7 for your business. No agency retainer. No headcount. $497/mo.',
     url: 'https://nebulacomponents.shop/marketing-ops',
     type: 'website',
   },
@@ -25,7 +25,7 @@ export default function MarketingOpsPage() {
         <div className="mops-hero">
           <div className="mops-badge">AI Marketing Ops</div>
           <h1>Your marketing engine,<br /><span>running 24/7 without you.</span></h1>
-          <p>We deploy the same autonomous lead-gen + conversion stack we built for ourselves — running continuously for your business. No agency markup. No headcount. No Monday morning stand-ups.</p>
+          <p>We deploy the same autonomous lead-gen + conversion stack we built for ourselves - running continuously for your business. No agency markup. No headcount. No Monday morning stand-ups.</p>
           <div className="mops-hero-cta-row">
             <a href="mailto:ops@launchcrate.io?subject=AI Marketing Ops inquiry" className="mops-btn-primary">Talk to us →</a>
             <a href="#pricing" className="mops-btn-ghost">See pricing ↓</a>
@@ -35,8 +35,8 @@ export default function MarketingOpsPage() {
         {/* WHAT IT IS */}
         <div className="mops-section">
           <div className="mops-section-label">What it is</div>
-          <h2>A full outbound + conversion loop — autonomous</h2>
-          <p>We run a multi-agent pipeline that continuously finds leads with active buying signals, reaches out with a useful artifact (a real audit of their page), and pushes qualified respondents toward your offer — all without human handoff.</p>
+          <h2>A full outbound + conversion loop - autonomous</h2>
+          <p>We run a multi-agent pipeline that continuously finds leads with active buying signals, reaches out with a useful artifact (a real audit of their page), and pushes qualified respondents toward your offer - all without human handoff.</p>
         </div>
 
         {/* AGENT LOOP */}
@@ -48,21 +48,21 @@ export default function MarketingOpsPage() {
               <div className="mops-step-num">1</div>
               <div className="mops-step-body">
                 <strong>Trigger detection</strong>
-                <p>Agents scan Reddit, Upwork, LinkedIn, and Product Hunt 24/7 for founders posting buying signals — "my page isn&apos;t converting," "running ads with no ROI," "bounce rate too high."</p>
+                <p>Agents scan Reddit, Upwork, LinkedIn, and Product Hunt 24/7 for founders posting buying signals - "my page isn&apos;t converting," "running ads with no ROI," "bounce rate too high."</p>
               </div>
             </div>
             <div className="mops-loop-step">
               <div className="mops-step-num">2</div>
               <div className="mops-step-body">
                 <strong>ICP qualification</strong>
-                <p>Every lead scored against your ICP — budget signals, company size, platform, vertical. Off-ICP leads discarded automatically.</p>
+                <p>Every lead scored against your ICP - budget signals, company size, platform, vertical. Off-ICP leads discarded automatically.</p>
               </div>
             </div>
             <div className="mops-loop-step">
               <div className="mops-step-num">3</div>
               <div className="mops-step-body">
                 <strong>Value-first outreach</strong>
-                <p>Lead receives a personalized artifact — a real audit of their landing page with specific findings — before any pitch. Not a cold email. A free consult frame.</p>
+                <p>Lead receives a personalized artifact - a real audit of their landing page with specific findings - before any pitch. Not a cold email. A free consult frame.</p>
               </div>
             </div>
             <div className="mops-loop-step">
@@ -90,7 +90,7 @@ export default function MarketingOpsPage() {
             <div className="mops-inc-item">
               <div className="mops-icon">🔍</div>
               <strong>Trigger-aware lead scraper</strong>
-              <p>Reddit, Upwork, LinkedIn — qualified by buying signal, not demographics</p>
+              <p>Reddit, Upwork, LinkedIn - qualified by buying signal, not demographics</p>
             </div>
             <div className="mops-inc-item">
               <div className="mops-icon">📊</div>
@@ -100,17 +100,17 @@ export default function MarketingOpsPage() {
             <div className="mops-inc-item">
               <div className="mops-icon">✉️</div>
               <strong>Outreach + follow-up sequences</strong>
-              <p>Initial contact, retainer upsell, and digest — all autonomous via AgentMail</p>
+              <p>Initial contact, retainer upsell, and digest - all autonomous via AgentMail</p>
             </div>
             <div className="mops-inc-item">
               <div className="mops-icon">💳</div>
               <strong>Self-serve checkout pipeline</strong>
-              <p>Stripe-linked delivery — buyer pays, receives deliverables automatically</p>
+              <p>Stripe-linked delivery - buyer pays, receives deliverables automatically</p>
             </div>
             <div className="mops-inc-item">
               <div className="mops-icon">📈</div>
               <strong>Lead state tracking</strong>
-              <p>SQLite ledger — every lead tracked from discovery to paid, with full audit trail</p>
+              <p>SQLite ledger - every lead tracked from discovery to paid, with full audit trail</p>
             </div>
             <div className="mops-inc-item">
               <div className="mops-icon">🛡️</div>
@@ -143,7 +143,7 @@ export default function MarketingOpsPage() {
               <div className="mops-icp-icon">🛒</div>
               <div>
                 <strong>E-commerce brands spending on ads</strong>
-                <p>Continuous CRO audit loop — catch conversion drops before they compound.</p>
+                <p>Continuous CRO audit loop - catch conversion drops before they compound.</p>
               </div>
             </div>
           </div>
@@ -188,7 +188,7 @@ export default function MarketingOpsPage() {
               <li><span className="mops-chk">✓</span> 1-week setup + handover documentation</li>
               <li><span className="mops-chk">✓</span> Monthly strategy call (optional, 30 min)</li>
             </ul>
-            <a href="mailto:ops@launchcrate.io?subject=AI Marketing Ops — let%27s talk" className="mops-cta-full">Get started — email us →</a>
+            <a href="mailto:ops@launchcrate.io?subject=AI Marketing Ops - let%27s talk" className="mops-cta-full">Get started - email us →</a>
             <p className="mops-cta-sub">We onboard 2–3 clients/month. Reply and we&apos;ll confirm availability.</p>
           </div>
         </div>
@@ -216,7 +216,7 @@ export default function MarketingOpsPage() {
             </div>
             <div className="mops-faq-item">
               <strong>Do I need to approve every outreach email?</strong>
-              <p>No. The pipeline is autonomous. You can review the proposals queue before submission if preferred — that&apos;s a config toggle.</p>
+              <p>No. The pipeline is autonomous. You can review the proposals queue before submission if preferred - that&apos;s a config toggle.</p>
             </div>
             <div className="mops-faq-item">
               <strong>What&apos;s the cancellation policy?</strong>
@@ -229,7 +229,7 @@ export default function MarketingOpsPage() {
         <div className="mops-bottom-cta">
           <h2>Ready to run on autopilot?</h2>
           <p>Email us and we&apos;ll confirm availability. Onboarding takes 1 week.</p>
-          <a href="mailto:ops@launchcrate.io?subject=AI Marketing Ops — let%27s talk" className="mops-btn-primary">ops@launchcrate.io →</a>
+          <a href="mailto:ops@launchcrate.io?subject=AI Marketing Ops - let%27s talk" className="mops-btn-primary">ops@launchcrate.io →</a>
         </div>
       </div>
     </>

@@ -1,7 +1,7 @@
-# Nebula Positioning Implementation — Trakr Framework Applied
+# Nebula Positioning Implementation - Trakr Framework Applied
 
-**Date:** 2026-07-14  
-**Model:** Trakr.studio competitive positioning  
+**Date:** 2026-07-14
+**Model:** Trakr.studio competitive positioning
 **Status:** Phases 1-2 complete
 
 ---
@@ -17,16 +17,16 @@
 <section class="founder-proof">
   <p>BUILT BY</p>
   <h2>Someone who burned money on 4 failed agency experiments.</h2>
-  <p>39 validated Reddit leads. $0 revenue to date. 
-     Every experiment taught me one thing: 
+  <p>39 validated Reddit leads. $0 revenue to date.
+     Every experiment taught me one thing:
      <strong>filter-based targeting fails. Trigger-aware works.</strong></p>
-  
+
   <stats>
     39 leads matched "spent $10k, no orders"
     $147 self-serve fix pack, no call required
     24h audit to fix delivery
   </stats>
-  
+
   <evidence>
     4 IndieHackers leads enriched with emails
     Pipeline health check runs every 6h
@@ -48,7 +48,7 @@
 <section class="feature-comparison">
   <p>HOW WE COMPARE</p>
   <h2>What existing tools are missing.</h2>
-  
+
   <table>
     <features>
       Speed to diagnosis: 60s (Nebula) vs Instant (PageSpeed) vs 1 week (Hotjar) vs 3-5 days (Agency)
@@ -61,7 +61,7 @@
       Trigger-aware targeting: ✓ (Nebula only)
     </features>
   </table>
-  
+
   <link to="/compare/landing-page-audit-tools.html">📋 See full methodology →</link>
 </section>
 ```
@@ -78,8 +78,8 @@
 ```
 Before: "We audited 200+ landing pages that burned $10k+ in ads with zero conversions."
 
-After: "We audited 200+ landing pages. Same 5 leaks every time. 
-        Avg. monthly burn: $4,200 in wasted ad spend. 
+After: "We audited 200+ landing pages. Same 5 leaks every time.
+        Avg. monthly burn: $4,200 in wasted ad spend.
         Fixable in 24 hours. This finds yours."
 ```
 
@@ -132,7 +132,7 @@ Audit form
 
 2. **Self-serve model:**
    - Trakr: €29/mo team plan (subscription)
-   - Nebula: $147 fix pack (one-time) — lower barrier
+   - Nebula: $147 fix pack (one-time) - lower barrier
 
 3. **Funnel focus:**
    - Trakr: UTMs, GA4 compliance
@@ -171,9 +171,9 @@ Audit form
 
 ## Files Modified
 
-1. `/home/mike/nebula/index.html` — Founder proof + comparison table + quantified impact
-2. `/home/mike/nebula/docs/nebula-landing-audit-2026-07-14.md` — Audit report
-3. `/home/mike/nebula/docs/competitive-positioning-grid.md` — Strategy framework
+1. `/home/mike/nebula/index.html` - Founder proof + comparison table + quantified impact
+2. `/home/mike/nebula/docs/nebula-landing-audit-2026-07-14.md` - Audit report
+3. `/home/mike/nebula/docs/competitive-positioning-grid.md` - Strategy framework
 
 ---
 

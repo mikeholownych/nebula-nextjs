@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Funnel-step benchmark analyzer — 'where exactly is the funnel leaking?'
+"""Funnel-step benchmark analyzer - 'where exactly is the funnel leaking?'
 
 Applied from Brett Malinowski's 7-day build (y-eBAr1uRDQ): he spun up a
 metrics dashboard showing conversion at each funnel step, compared each
@@ -33,7 +33,7 @@ REPORT_DIR.mkdir(parents=True, exist_ok=True)
 # The audit funnel, in order, with industry-benchmark low bounds (labeled).
 # Matches the actual event flow in customer-portal/app/audit + checkout.
 # These are directional heuristics for free-audit -> paid SaaS funnels,
-# NOT guaranteed numbers — the value is relative comparison between steps.
+# NOT guaranteed numbers - the value is relative comparison between steps.
 FUNNEL_STEPS = [
     {"event": "audit_page_viewed",       "label": "Audit page viewed",      "bench_low": None},   # entry
     {"event": "audit_submitted",         "label": "Audit submitted",        "bench_low": 0.30},  # page->submit
@@ -104,7 +104,7 @@ def analyze(days: int) -> dict:
         status = "ok"
         if conv is not None and step["bench_low"] is not None:
             # Optional steps (e.g. deposit/pre-order capability) are not
-            # flagged LOW when they don't exist yet — they're capability
+            # flagged LOW when they don't exist yet - they're capability
             # benchmarks, not leaks.
             if step.get("optional") and count == 0:
                 status = "n/a"
@@ -143,7 +143,7 @@ def render_text(r: dict) -> str:
     lines = [f"🔻 Funnel Benchmark (last {r['days']}d, from {r['date_from']})"]
     lines.append("━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
     for s in r["steps"]:
-        conv = f"{s['conv']}%" if s["conv"] is not None else "   —"
+        conv = f"{s['conv']}%" if s["conv"] is not None else "   -"
         flag = " ⚠️ LOW" if s["status"] == "LOW" else ""
         bench = f" (bench ≥{int(s['bench_low']*100)}%)" if s["bench_low"] else ""
         lines.append(f"  {s['label']:<28} {s['count']:>5}  {conv:>6}{bench}{flag}")
@@ -151,7 +151,7 @@ def render_text(r: dict) -> str:
     lines.append(f"  Entry→Paid: {r['entry_to_paid_pct']}%  |  Paid: {r['paid']}")
     deposit = next((s for s in r["steps"] if s["event"] == "deposit_preorder"), None)
     if deposit and deposit["count"] == 0:
-        lines.append("  💡 No deposit/pre-order step — Ron benchmark: ~45% of")
+        lines.append("  💡 No deposit/pre-order step - Ron benchmark: ~45% of")
         lines.append("     $10 depositors convert to paid (617->270, Koerner Office).")
         lines.append("     Consider a deposit offer for audit completers (email-gate")
         lines.append("     leavers) before checkout.")
@@ -188,7 +188,7 @@ def main():
 
     r = analyze(args.days)
     if not r.get("available"):
-        print(f"N/A — {r.get('reason')}")
+        print(f"N/A - {r.get('reason')}")
         return 1
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")

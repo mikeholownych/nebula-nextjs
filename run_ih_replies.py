@@ -47,7 +47,7 @@ from ih_bot import post_reply
 def load_drafts(path: Path) -> list[dict]:
     """Read all records from a JSONL file."""
     if not path.exists():
-        log.warning("Drafts file not found: %s — nothing to do", path)
+        log.warning("Drafts file not found: %s - nothing to do", path)
         return []
     records = []
     with path.open() as f:
@@ -81,7 +81,7 @@ def is_unposted(record: dict) -> bool:
 def run():
     records = load_drafts(DRAFTS_FILE)
     if not records:
-        log.info("No drafts loaded — exiting.")
+        log.info("No drafts loaded - exiting.")
         return
 
     unposted = [r for r in records if is_unposted(r)]
@@ -90,7 +90,7 @@ def run():
     )
 
     if not unposted:
-        log.info("All drafts already posted — nothing to do.")
+        log.info("All drafts already posted - nothing to do.")
         return
 
     posted_count = 0
@@ -101,10 +101,10 @@ def run():
         reply_text = draft.get("reply_text", "").strip()
 
         if not thread_url:
-            log.warning("Draft %d missing thread_url — skipping: %s", i, draft)
+            log.warning("Draft %d missing thread_url - skipping: %s", i, draft)
             continue
         if not reply_text:
-            log.warning("Draft %d missing reply_text — skipping: %s", i, draft)
+            log.warning("Draft %d missing reply_text - skipping: %s", i, draft)
             continue
 
         log.info(
@@ -117,7 +117,7 @@ def run():
                 "%Y-%m-%dT%H:%M:%SZ"
             )
             posted_count += 1
-            log.info("✓ Reply posted — thread: %s", thread_url)
+            log.info("✓ Reply posted - thread: %s", thread_url)
         except Exception as e:
             failed_count += 1
             log.error("✗ Failed to post reply [%s]: %s", thread_url, e)
@@ -127,7 +127,7 @@ def run():
         save_drafts(DRAFTS_FILE, records)
 
     log.info(
-        "Done — posted: %d, failed: %d, skipped: %d",
+        "Done - posted: %d, failed: %d, skipped: %d",
         posted_count,
         failed_count,
         len(unposted) - posted_count - failed_count,

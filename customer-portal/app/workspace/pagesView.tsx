@@ -35,9 +35,9 @@ function hostnameOf(url: string): string {
 }
 
 function fmtDate(iso?: string | null): string {
-  if (!iso) return '—'
+  if (!iso) return '-'
   const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return '—'
+  if (Number.isNaN(d.getTime())) return '-'
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
@@ -60,7 +60,7 @@ function DonutCard({
   const circ = 2 * Math.PI * r
   const pct = value !== null ? Math.min(Math.max(value, 0), max) / max : 0
   const offset = circ * (1 - pct)
-  const display = value !== null ? Math.round(value) : '—'
+  const display = value !== null ? Math.round(value) : '-'
 
   return (
     <div className="rounded-2xl border border-border bg-bg-elevated p-5 flex flex-col items-center gap-3 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
@@ -149,7 +149,7 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
           setSitemapPages(data.pages)
         }
       })
-      .catch(() => {}) // Non-fatal — sitemap discovery is optional
+      .catch(() => {}) // Non-fatal - sitemap discovery is optional
     return () => { cancelled = true }
   }, [])
 
@@ -329,7 +329,7 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
         <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-fg-dim">No pages yet</p>
         <h2 className="text-xl font-semibold tracking-[-0.02em] text-fg">Your topical map starts here</h2>
         <p className="mx-auto mb-6 mt-2 max-w-md text-sm leading-6 text-fg-muted">
-          Each page you audit appears here — with scores, keywords, and a history you can build on.
+          Each page you audit appears here - with scores, keywords, and a history you can build on.
         </p>
         <a
           href="/audit?utm_source=workspace&utm_medium=internal"
@@ -381,7 +381,7 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-fg-dim">Site</p>
             <h2 className="mt-1 text-base font-semibold text-fg">
-              {primaryDomain ?? '—'}
+              {primaryDomain ?? '-'}
               <span className="ml-2 text-sm text-fg-muted font-normal">
                 {uniquePages.length} {uniquePages.length === 1 ? 'page' : 'pages'}
               </span>
@@ -445,7 +445,7 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
                       <td className="py-3 pr-4">
                         {(() => {
                           const status = indexedStatus[a.url]
-                          if (!status) return <span className="text-[11px] text-fg-dim">—</span>
+                          if (!status) return <span className="text-[11px] text-fg-dim">-</span>
                           if (status.state === 'Submitted via IndexNow') {
                             return <span className="inline-flex items-center rounded-full bg-amber-500/10 px-2 py-0.5 text-[11px] font-medium text-amber-400">Submitted</span>
                           }
@@ -458,7 +458,7 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
                               disabled={submitting.has(a.url)}
                               className="inline-flex items-center rounded-full bg-red-500/10 px-2 py-0.5 text-[11px] font-medium text-red-400 hover:bg-red-500/20 transition-colors disabled:opacity-50"
                             >
-                              {submitting.has(a.url) ? 'Sending…' : 'Not indexed — submit'}
+                              {submitting.has(a.url) ? 'Sending…' : 'Not indexed - submit'}
                             </button>
                           )
                         })()}
@@ -467,13 +467,13 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
                         {scoreVal !== null ? (
                           <ScoreBar score={scoreVal} />
                         ) : (
-                          <span className="text-fg-muted text-xs">—</span>
+                          <span className="text-fg-muted text-xs">-</span>
                         )}
                       </td>
                       <td className="py-3 pr-4">
                         {(() => {
                           const leak = pageLeak[key]
-                          if (!leak) return <span className="text-fg-muted text-xs">—</span>
+                          if (!leak) return <span className="text-fg-muted text-xs">-</span>
                           return (
                             <span className="inline-flex items-center rounded-full border border-red-500/40 bg-red-500/10 px-2 py-0.5 text-[11px] font-semibold text-red-500">
                               ${leak.toLocaleString('en-US', { maximumFractionDigits: 0 })}/mo

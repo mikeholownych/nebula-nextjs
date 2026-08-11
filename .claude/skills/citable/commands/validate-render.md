@@ -17,7 +17,7 @@ failure_behaviour: build/render failure → preserve command, exit code, stderr;
    PDFs, or canvas → finding with the specific missing passages.
 4. If a headless browser is available in the environment, render and diff
    initial vs rendered text to quantify the gap; if not, record
-   `incomplete_checks: rendered comparison unavailable in this environment` —
+   `incomplete_checks: rendered comparison unavailable in this environment` -
    do not extrapolate.
 5. Verdict per page: `server_rendered | hybrid_acceptable | render_dependent |
    not_determined`. Never report site-wide success while any check is

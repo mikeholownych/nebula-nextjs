@@ -77,7 +77,7 @@ const faqSchema = {
       name: 'How do I know if my landing page conversion problem is a design issue or a traffic quality issue?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Compare conversion rates by traffic source and device. If organic or direct traffic converts but paid traffic doesn\'t, the issue is messaging misalignment—traffic expectations don\'t match page promise. If all traffic sources underperform equally, the page has structural problems: unclear CTA, slow load, or poor mobile experience. If conversion drops significantly on mobile but desktop performs, it\'s a mobile-specific design issue.',
+        text: 'Compare conversion rates by traffic source and device. If organic or direct traffic converts but paid traffic doesn\'t, the issue is messaging misalignment-traffic expectations don\'t match page promise. If all traffic sources underperform equally, the page has structural problems: unclear CTA, slow load, or poor mobile experience. If conversion drops significantly on mobile but desktop performs, it\'s a mobile-specific design issue.',
       },
     },
     {
@@ -85,7 +85,7 @@ const faqSchema = {
       name: 'What\'s the fastest way to diagnose why a landing page isn\'t converting?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Start with: (1) mobile usability—can visitors find and click the primary CTA above the fold? (2) page speed—does it load in under 1 second? (3) message match—does the page match what the ad promised? (4) trust visibility—are social proof or security elements visible before the CTA? These four account for the majority of conversion leaks and are fixable within hours, not weeks.',
+        text: 'Start with: (1) mobile usability-can visitors find and click the primary CTA above the fold? (2) page speed-does it load in under 1 second? (3) message match-does the page match what the ad promised? (4) trust visibility-are social proof or security elements visible before the CTA? These four account for the majority of conversion leaks and are fixable within hours, not weeks.',
       },
     },
   ],

@@ -33,7 +33,7 @@ with open(VERIFIER_FILE) as f:
     verifier = f.read().strip()
 
 # Registered redirect for this desktop client (see client_secret.json).
-# DO NOT use urn:ietf:wg:oauth:2.0:oob — Google blocked the OOB flow.
+# DO NOT use urn:ietf:wg:oauth:2.0:oob - Google blocked the OOB flow.
 REDIRECT_URI = "http://localhost"
 
 flow = InstalledAppFlow.from_client_secrets_file(

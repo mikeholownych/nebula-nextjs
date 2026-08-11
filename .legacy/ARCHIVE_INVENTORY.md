@@ -4,7 +4,7 @@ Date: 2026-07-20 UTC
 Task: `t_a043bfba`
 Policy: preserve first; never delete untracked work without a paper trail.
 
-## Build-in-Public WordPress Blog — RETIRED 2026-08-04 UTC
+## Build-in-Public WordPress Blog - RETIRED 2026-08-04 UTC
 
 Experiment: `blog.nebulacomponents.shop` (build-in-public content experiment). Declared failed by owner; subdomain now 301-redirects to `nebulacomponents.com` (via `.shop` zone ruleset `b400928d85d046fb8776be0ffcb23237`). Full content archived below before the Docker stack was stopped.
 
@@ -12,11 +12,11 @@ Experiment: `blog.nebulacomponents.shop` (build-in-public content experiment). D
 - Source: Docker stack `/home/mike/nebula/blog/docker-compose.yml` (containers `blog-wordpress-1` + `blog-db-1`, port 8766)
 - Contents: 10 published posts (Day 1 → Day 17 build logs + postmortems), 120KB MySQL dump, uploads
 - Files:
-  - `db/nebula_blog_full.sql` (120,317 bytes) — full MySQL dump of `nebula_blog`
-  - `content/posts.md` (33,390 bytes) — all 10 posts as readable markdown
-  - `content/posts_raw.txt` — raw tab-separated export
-  - `content/post_list.tsv` — title/date index
-  - `uploads/` — wp-content/uploads (2026/ dir, minimal media)
+  - `db/nebula_blog_full.sql` (120,317 bytes) - full MySQL dump of `nebula_blog`
+  - `content/posts.md` (33,390 bytes) - all 10 posts as readable markdown
+  - `content/posts_raw.txt` - raw tab-separated export
+  - `content/post_list.tsv` - title/date index
+  - `uploads/` - wp-content/uploads (2026/ dir, minimal media)
 - Restoration: `docker compose -f /home/mike/nebula/blog/docker-compose.yml up -d` restores a live stack; `db/nebula_blog_full.sql` restores content into MySQL.
 - Watchdog: `nebula_watchdog.sh` port-8766 restart block removed 2026-08-04 to stop reviving the retired stack.
 
@@ -59,7 +59,7 @@ The retained paths remain visible in `git status --short --untracked-files=all` 
 
 `.gitignore` now excludes only reproducible Citable `runs/` and `snapshots/` directories plus dated browser coverage exports. It deliberately does not ignore Citable YAML configuration or application source.
 
-## Outbound bypass archive — 2026-07-23 UTC
+## Outbound bypass archive - 2026-07-23 UTC
 
 Policy: buyer-facing delivery now has one authority: `agentmail_client.py` backed by `outbound_release_gate.py`. Obsolete direct SMTP/raw REST scripts were preserved, not deleted.
 
@@ -81,7 +81,7 @@ Policy: buyer-facing delivery now has one authority: `agentmail_client.py` backe
 
 No active Hermes cron job referenced the original seven files at archive time. The later six-file cleanup removed one tracked obsolete cron fragment; live scheduling is governed separately. `full_system_audit.py` and `validate_before_campaign.py` now validate the canonical gated REST path instead.
 
-### Historical outreach-wave directory cutover — 2026-07-23 UTC
+### Historical outreach-wave directory cutover - 2026-07-23 UTC
 
 The 40 tracked scripts formerly under `archived/` were moved intact to
 `.legacy/outreach-wave-archive-2026-07-23/`. They are historical campaign,
@@ -89,7 +89,7 @@ SMTP, IMAP, and wave-execution artifacts, have no active code references, and
 must not be interpreted as permitted provider paths. Git history plus this
 move provide the rollback trail; no file was deleted.
 
-## Reply ledger cutover — 2026-07-23 UTC
+## Reply ledger cutover - 2026-07-23 UTC
 
 | Original path | Canonical replacement | Preservation / rollback |
 | --- | --- | --- |
@@ -97,7 +97,7 @@ move provide the rollback trail; no file was deleted.
 
 All active writers, suppression checks, follow-up prefilters, processed-thread deduplication, sequence metrics, and TRIBE queue reads use `OutboundReleaseGate`. V2 separates immutable thread facts from monotonic recipient suppression and leased downstream-action state. A corrupt or conflicting legacy ledger records `reply_ledger_corrupt` and blocks delivery; missing uninitialized state blocks delivery rather than assuming an empty suppression history.
 
-## Test-suite cutover — 2026-07-23 UTC
+## Test-suite cutover - 2026-07-23 UTC
 
 | Original path | Archived path | Reason |
 | --- | --- | --- |
@@ -115,7 +115,7 @@ All active writers, suppression checks, follow-up prefilters, processed-thread d
 
 These files remain in Git history and in `.legacy/`; no test was deleted without a paper trail.
 
-## Dead automation scripts archive — 2026-07-23 UTC
+## Dead automation scripts archive - 2026-07-23 UTC
 
 Repo review found overlapping tunnel-monitoring and inbox-check scripts. Cross-checked each against the live crontab (`crontab -l`), `deploy/systemd/`, and repo-wide grep for any script/service still invoking it; only files with zero live references were moved.
 
@@ -134,13 +134,13 @@ Repo review found overlapping tunnel-monitoring and inbox-check scripts. Cross-c
 
 Not moved despite overlapping names, because each still has a live dependent: `check_emails.py` (opened by `run_nano.sh`), `inbox_monitor.py` (existence-checked by `sre_responder.py`'s health check and referenced in `hot_lead_watcher.py`'s docstring), `check_agentmail_inbox.py` (used by `tests/test_outbound_single_authority.py`). These are still duplicative and worth a follow-up consolidation pass, but archiving them now risked breaking a live health check or test without a deeper investigation than this pass covered.
 
-## Restoration — `ledger_metrics.py` — 2026-07-24 UTC
+## Restoration - `ledger_metrics.py` - 2026-07-24 UTC
 
 | Archived path | Restored path | Reason |
 | --- | --- | --- |
-| `.legacy/outreach-wave-archive-2026-07-23/ledger_metrics.py` | `ledger_metrics.py` | Wrongly swept into the bulk "40 tracked scripts formerly under `archived/`" move (outreach-wave-archive-2026-07-23 entry above), which was a wholesale directory move, not a per-file deprecation review. `challenge_risk_monitor.py`, `audit_quality_review.py`, and `normalize_public_stats.py` all `from ledger_metrics import ...` at module level and were left broken (`ModuleNotFoundError`) from 2026-07-23 until this fix. The module is self-contained (stdlib only, hardcoded `BASE = Path('/home/mike/nebula')`) — restoring it does not reintroduce any of the SMTP/REST outbound-bypass risk the rest of that archive batch was about. Verified: `import ledger_metrics` succeeds, `ledger_metrics.summary()` runs, and all three importing scripts execute cleanly at module level. The file remains present in `.legacy/outreach-wave-archive-2026-07-23/` as well via git history.
+| `.legacy/outreach-wave-archive-2026-07-23/ledger_metrics.py` | `ledger_metrics.py` | Wrongly swept into the bulk "40 tracked scripts formerly under `archived/`" move (outreach-wave-archive-2026-07-23 entry above), which was a wholesale directory move, not a per-file deprecation review. `challenge_risk_monitor.py`, `audit_quality_review.py`, and `normalize_public_stats.py` all `from ledger_metrics import ...` at module level and were left broken (`ModuleNotFoundError`) from 2026-07-23 until this fix. The module is self-contained (stdlib only, hardcoded `BASE = Path('/home/mike/nebula')`) - restoring it does not reintroduce any of the SMTP/REST outbound-bypass risk the rest of that archive batch was about. Verified: `import ledger_metrics` succeeds, `ledger_metrics.summary()` runs, and all three importing scripts execute cleanly at module level. The file remains present in `.legacy/outreach-wave-archive-2026-07-23/` as well via git history.
 
-## Next.js deployment rollback archive — 2026-07-26 UTC
+## Next.js deployment rollback archive - 2026-07-26 UTC
 
 | Original path | Archived path | Files | Classification |
 | --- | --- | ---: | --- |
@@ -150,7 +150,7 @@ The active production build remains in `customer-portal/.next/`. Future
 `.next.rollback-*` directories are ignored so deployment rollback artifacts do
 not pollute source-control status.
 
-## Runtime ledger cleanup — 2026-07-26 UTC
+## Runtime ledger cleanup - 2026-07-26 UTC
 
 | Source | Archived copy | Classification |
 | --- | --- | --- |
@@ -166,7 +166,7 @@ preserved as operational evidence in the archive.
 
 ---
 
-## 2026-07-31 — Apify + Reddit outreach deprecation (full cutover)
+## 2026-07-31 - Apify + Reddit outreach deprecation (full cutover)
 
 Date: 2026-07-31 UTC
 Task: `t_20260731_apify_reddit_deprecation`
@@ -195,19 +195,19 @@ Policy: full cutover, no hybrid. Archived, not deleted.
 | ramp_pipeline_fill.py | OLD scrape pipeline | Archived as `ramp_pipeline_fill.apify_reddit_legacy.py`; replaced by v2 at original path |
 
 ### Kept (read-only)
-- `audit-system/channel1/reddit_monitor_praw.py` — READ-ONLY market-signal monitor
+- `audit-system/channel1/reddit_monitor_praw.py` - READ-ONLY market-signal monitor
   (PRAW official API). Banner added; MUST NOT send/reply/auto-post.
 
 ### Wrappers updated
-- `~/.hermes/scripts/signal_scrapers.sh` — dropped APIFY_TOKEN + signal_scrapers.py;
+- `~/.hermes/scripts/signal_scrapers.sh` - dropped APIFY_TOKEN + signal_scrapers.py;
   now runs ramp_pipeline_fill.py (lane sweep) daily.
-- `~/.hermes/scripts/pipeline_ramp.sh` — dropped trigger_lead_engine /
+- `~/.hermes/scripts/pipeline_ramp.sh` - dropped trigger_lead_engine /
   reddit_prospect_enrich / ad_bleed_signal_ranker; now ramp v2 → followup → nurture.
-- `~/.hermes/scripts/nebula_claude_growth_system.sh` — dropped Apify ingestion steps.
+- `~/.hermes/scripts/nebula_claude_growth_system.sh` - dropped Apify ingestion steps.
 
 ### n8n
-- `Nebula Free Lead Scraper` (54elBkfysuwbzk9o) — already inactive. Not reactivated.
-- `Nebula Reddit Signal Monitor` (G6azfOHMHxlBva3N) — kept ACTIVE (read-only alerts).
+- `Nebula Free Lead Scraper` (54elBkfysuwbzk9o) - already inactive. Not reactivated.
+- `Nebula Reddit Signal Monitor` (G6azfOHMHxlBva3N) - kept ACTIVE (read-only alerts).
 
 ### Pipeline re-enabled
 - `OUTREACH_DISABLED` archived to `OUTREACH_DISABLED.archived-2026-07-31`

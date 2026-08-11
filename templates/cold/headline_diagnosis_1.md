@@ -34,6 +34,6 @@ Read your headline. Then ask: would a stranger know exactly what they'll get? If
 
 {audit_link_with_source}
 
-—
+-
 
 P.S. The headline rewrite worksheet is here if you want to see how the fix looks: {headline_worksheet_link}

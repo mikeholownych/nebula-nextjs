@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ICAHN title research for the Nebula Audits channel.
 
-Finds PROVEN video concepts in the landing-page-audit niche — videos with
+Finds PROVEN video concepts in the landing-page-audit niche - videos with
 views >= 5x the uploader's subscriber count (ideally small channels with
 mediocre titles/thumbnails we can out-execute). Method from Shane Hummus'
 YouTube automation playbook ("ICAHN": look for videos with 5x more views
@@ -104,7 +104,7 @@ def pattern_stats(results: list[dict]) -> dict:
             has_number += 1
         if "?" in t:
             has_question += 1
-        if ":" in t or "—" in t or "–" in t:
+        if ":" in t or "-" in t or "–" in t:
             has_colon += 1
     n = len(results) or 1
     return {
@@ -126,7 +126,7 @@ def main():
     queries = args.queries.split("|") if args.queries else DEFAULT_QUERIES
     results = research(queries)
     if not results:
-        log.error("No results returned — check OAuth/quota.")
+        log.error("No results returned - check OAuth/quota.")
         sys.exit(1)
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")

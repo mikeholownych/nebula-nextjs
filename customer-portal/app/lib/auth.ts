@@ -42,7 +42,7 @@ export async function getSessionToken(): Promise<string | null> {
 /**
  * Get the current authenticated user from the platform API.
  * Returns null if unauthenticated or session invalid.
- * Does NOT throw — use requireAuthenticatedUser() for enforcement.
+ * Does NOT throw - use requireAuthenticatedUser() for enforcement.
  */
 export async function getCurrentUser(): Promise<AuthUser | null> {
   const token = await getSessionToken()

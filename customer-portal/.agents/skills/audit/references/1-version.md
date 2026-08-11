@@ -1,8 +1,8 @@
-# Step 1 — SDK installed + SDK up-to-date
+# Step 1 - SDK installed + SDK up-to-date
 
 **Read ONLY this file.** Do not read any other reference file until this one tells you to.
 
-This step is intentionally narrow. It runs **before any other project work**. Resolve exactly two checks: `sdk-installed` and `sdk-up-to-date`. **Do not** read source code, locate init sites, look at `.env*` files, or scan for identify/capture call sites in this step — that all belongs to later steps.
+This step is intentionally narrow. It runs **before any other project work**. Resolve exactly two checks: `sdk-installed` and `sdk-up-to-date`. **Do not** read source code, locate init sites, look at `.env*` files, or scan for identify/capture call sites in this step - that all belongs to later steps.
 
 ## Status
 
@@ -19,16 +19,16 @@ Emit:
 
 `Glob` for the project's dependency manifests across every language PostHog ships an SDK for. The full list:
 
-- `package.json` — npm / pnpm / yarn (Node, web, React, Next.js, Nuxt, Vue, Svelte, Angular, React Native, Expo)
-- `requirements.txt`, `pyproject.toml`, `Pipfile`, `setup.py` — Python (Django, Flask, FastAPI, etc.)
-- `Gemfile` — Ruby / Ruby on Rails
-- `composer.json` — PHP / Laravel
-- `go.mod` — Go
-- `build.gradle`, `build.gradle.kts`, `pom.xml` — Java / Android
-- `Podfile`, `Package.swift` — iOS / Swift
-- `pubspec.yaml` — Flutter / Dart
-- `*.csproj` — .NET
-- `mix.exs` — Elixir
+- `package.json` - npm / pnpm / yarn (Node, web, React, Next.js, Nuxt, Vue, Svelte, Angular, React Native, Expo)
+- `requirements.txt`, `pyproject.toml`, `Pipfile`, `setup.py` - Python (Django, Flask, FastAPI, etc.)
+- `Gemfile` - Ruby / Ruby on Rails
+- `composer.json` - PHP / Laravel
+- `go.mod` - Go
+- `build.gradle`, `build.gradle.kts`, `pom.xml` - Java / Android
+- `Podfile`, `Package.swift` - iOS / Swift
+- `pubspec.yaml` - Flutter / Dart
+- `*.csproj` - .NET
+- `mix.exs` - Elixir
 
 Read enough of them to identify which PostHog SDK the project uses, what version, and what framework it sits on top of.
 
@@ -39,7 +39,7 @@ If no PostHog SDK is anywhere in the project, emit `[ABORT] No PostHog SDK found
 Once you know the SDK + framework, install the matching integration skill so the rest of the audit has framework-specific install docs to reference instead of guessing:
 
 1. Call `mcp__wizard-tools__load_skill_menu({ category: "integration" })` once to list available integration skill IDs.
-2. Call `mcp__wizard-tools__install_skill({ skillId: "<id>" })` with the **single** ID that matches the framework you detected. Pick one — do not install multiple.
+2. Call `mcp__wizard-tools__install_skill({ skillId: "<id>" })` with the **single** ID that matches the framework you detected. Pick one - do not install multiple.
 
 If no integration skill matches the framework, skip this step. Step 2 will fall back to general framework knowledge.
 
@@ -83,7 +83,7 @@ Single call to `mcp__wizard-tools__audit_resolve_checks` with two updates and **
 }
 ```
 
-Do not include `init-correct` in this call — it's resolved in Step 2.
+Do not include `init-correct` in this call - it's resolved in Step 2.
 
 ---
 

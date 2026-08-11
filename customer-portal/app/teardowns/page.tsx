@@ -4,7 +4,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Public Audit Teardowns | Nebula',
   description:
-    'Nebula runs its evidence-backed audit on well-known public pages and publishes the raw findings. Not customers — demonstrations of what the engine produces.',
+    'Nebula runs its evidence-backed audit on well-known public pages and publishes the raw findings. Not customers - demonstrations of what the engine produces.',
   alternates: {
     canonical: 'https://nebulacomponents.com/teardowns',
   },
@@ -17,7 +17,7 @@ const TEARDOWNS = [
     url: 'carrd.co',
     score: 4.2,
     grade: 'D',
-    topFinding: 'H1 is <h1>Carrd</h1> — the brand name only. Zero value prop. Missing og:title, og:description, and all JSON-LD schema.',
+    topFinding: 'H1 is <h1>Carrd</h1> - the brand name only. Zero value prop. Missing og:title, og:description, and all JSON-LD schema.',
     findingCount: 5,
     auditedAt: 'July 30, 2026',
   },
@@ -37,7 +37,7 @@ const TEARDOWNS = [
     url: 'kit.com',
     score: 4.8,
     grade: 'D',
-    topFinding: 'Meta description is 35 chars. Industry average is 140-155. Google auto-generates the SERP snippet — Kit has ceded their first impression in search entirely.',
+    topFinding: 'Meta description is 35 chars. Industry average is 140-155. Google auto-generates the SERP snippet - Kit has ceded their first impression in search entirely.',
     findingCount: 4,
     auditedAt: 'July 30, 2026',
   },
@@ -57,7 +57,7 @@ const TEARDOWNS = [
     url: 'unbounce.com',
     score: 5.2,
     grade: 'C',
-    topFinding: 'H1: "Launch faster. Convert more." — identical positioning to Leadpages, Instapage, and Swipe Pages. The company that invented the landing page builder has a commodity headline.',
+    topFinding: 'H1: "Launch faster. Convert more." - identical positioning to Leadpages, Instapage, and Swipe Pages. The company that invented the landing page builder has a commodity headline.',
     findingCount: 4,
     auditedAt: 'July 30, 2026',
   },
@@ -67,7 +67,7 @@ const TEARDOWNS = [
     url: 'webflow.com',
     score: 5.8,
     grade: 'C',
-    topFinding: 'Two H1 tags simultaneously in the DOM via A/B test. Google indexes both variants — ranking signal is split between two competing headlines.',
+    topFinding: 'Two H1 tags simultaneously in the DOM via A/B test. Google indexes both variants - ranking signal is split between two competing headlines.',
     findingCount: 4,
     auditedAt: 'July 30, 2026',
   },
@@ -77,7 +77,7 @@ const TEARDOWNS = [
     url: 'framer.com',
     score: 5.6,
     grade: 'C',
-    topFinding: 'Primary CTA reads "Start without AI" on an AI-first product page. Leads with an opt-out of the core differentiator. H1 missing from static HTML — JS-render dependency.',
+    topFinding: 'Primary CTA reads "Start without AI" on an AI-first product page. Leads with an opt-out of the core differentiator. H1 missing from static HTML - JS-render dependency.',
     findingCount: 4,
     auditedAt: 'July 30, 2026',
   },
@@ -107,7 +107,7 @@ const TEARDOWNS = [
     url: 'calendly.com',
     score: 5.8,
     grade: 'C',
-    topFinding: 'Missing H1 entirely. 1.2MB HTML payload — 10× the heuristic ceiling.',
+    topFinding: 'Missing H1 entirely. 1.2MB HTML payload - 10× the heuristic ceiling.',
     findingCount: 5,
     auditedAt: 'July 29, 2026',
   },
@@ -117,7 +117,7 @@ const TEARDOWNS = [
     url: 'postmint.de',
     score: 6.8,
     grade: 'B',
-    topFinding: 'Founder published a full launch autopsy (118 visitors, 0 signups) — both self-diagnosed bugs are fixed. One real defect remains: the JSON-LD @context key is a leaked Blade/PHP template literal, not "@context".',
+    topFinding: 'Founder published a full launch autopsy (118 visitors, 0 signups) - both self-diagnosed bugs are fixed. One real defect remains: the JSON-LD @context key is a leaked Blade/PHP template literal, not "@context".',
     findingCount: 2,
     auditedAt: 'July 31, 2026',
   },
@@ -127,7 +127,7 @@ const TEARDOWNS = [
     url: 'knallhart.dev',
     score: 5.8,
     grade: 'C',
-    topFinding: 'Zero social-sharing metadata (0 og: tags, 0 twitter: cards) on a product whose founder\'s entire distribution is X posts and forum threads — every shared link renders as a bare URL.',
+    topFinding: 'Zero social-sharing metadata (0 og: tags, 0 twitter: cards) on a product whose founder\'s entire distribution is X posts and forum threads - every shared link renders as a bare URL.',
     findingCount: 3,
     auditedAt: 'July 31, 2026',
   },
@@ -137,7 +137,7 @@ const TEARDOWNS = [
     url: 'hubspot.com',
     score: 7.0,
     grade: 'B',
-    topFinding: 'H1 and title share zero keywords — and the title ends in "- Homepage" (a template placeholder). The static H1 search engines index ("grow scale close retain grow") differs from the headline human visitors see.',
+    topFinding: 'H1 and title share zero keywords - and the title ends in "- Homepage" (a template placeholder). The static H1 search engines index ("grow scale close retain grow") differs from the headline human visitors see.',
     findingCount: 5,
     auditedAt: 'August 4, 2026',
   },
@@ -205,7 +205,7 @@ export default function TeardownsPage() {
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
           These companies are not Nebula customers. We run the same 9-signal engine on public pages
-          and publish the raw findings — not to criticize anyone, but to show exactly what the audit
+          and publish the raw findings - not to criticize anyone, but to show exactly what the audit
           produces on pages you can verify yourself.
         </p>
       </section>

@@ -1,5 +1,5 @@
 name: ai-visibility
-description: "AI citation audit — does ChatGPT/Perplexity/Gemini cite you?"
+description: "AI citation audit - does ChatGPT/Perplexity/Gemini cite you?"
 icon: "\U0001F4A1"
 steps:
   - id: ai_citation

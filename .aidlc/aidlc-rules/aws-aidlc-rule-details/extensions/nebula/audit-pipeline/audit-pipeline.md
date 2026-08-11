@@ -5,7 +5,7 @@
 2. Confirm `agentic_server.py` running on port 8765
 3. Confirm AgentMail key at `~/.hermes/secrets/agentmail.key`
 4. Check `LeadStore.is_bounced()` before any send
-5. Verify lead stage state — do not re-send to `pitch_sent` leads
+5. Verify lead stage state - do not re-send to `pitch_sent` leads
 
 ## Scoring
 - 5 dimensions: clarity, CTA friction, trust gap, offer specificity, implementation difficulty

@@ -21,11 +21,11 @@ import lead_manager
 EMAIL = "aolds@oneupweb.com"
 SUBJECT = "An independent look at your PPC page"
 CLIENT_ID = "campaign:batch3:oneupweb:2026-08-10"
-TEXT = """Andy — the McCarthy case study is a strong brag: organic goal completions up 771%. You clearly measure client outcomes.
+TEXT = """Andy - the McCarthy case study is a strong brag: organic goal completions up 771%. You clearly measure client outcomes.
 
 Question: when a buyer lands on your paid media page, does the page itself prove that track record, or just claim it?
 
-I reviewed the rendered page buyers actually see. The page says “proven track record” and “decades of experience” — and shows no numbers, no case study, no testimonial to back it. The proof is one click away in your case studies, but the page itself claims rather than shows.
+I reviewed the rendered page buyers actually see. The page says “proven track record” and “decades of experience” - and shows no numbers, no case study, no testimonial to back it. The proof is one click away in your case studies, but the page itself claims rather than shows.
 
 That's the kind of thing an independent pass catches that a team's own review is calibrated to skip. Would that second opinion be worth anything? If so, I'll send the manual readout and browser evidence.
 

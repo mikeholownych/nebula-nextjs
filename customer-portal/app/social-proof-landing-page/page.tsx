@@ -24,7 +24,7 @@ export default function SocialProofLandingPage() {
             "@type": "Article",
             headline: "Social Proof on Landing Pages",
             description:
-              "How to add, place, and structure social proof that converts skeptical visitors — testimonials, numbers, logos.",
+              "How to add, place, and structure social proof that converts skeptical visitors - testimonials, numbers, logos.",
             url: "https://nebulacomponents.com/social-proof-landing-page",
             publisher: {
               "@type": "Organization",
@@ -55,7 +55,7 @@ export default function SocialProofLandingPage() {
                 name: "Where should social proof go on a landing page?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Immediately adjacent to your primary CTA — ideally directly above the submit button. Also in the hero section (social proof line like '40+ audits delivered · avg score back in 60s'). The worst place is below the fold where skeptics never reach it.",
+                  text: "Immediately adjacent to your primary CTA - ideally directly above the submit button. Also in the hero section (social proof line like '40+ audits delivered · avg score back in 60s'). The worst place is below the fold where skeptics never reach it.",
                 },
               },
               {
@@ -63,7 +63,7 @@ export default function SocialProofLandingPage() {
                 name: "Why don't generic testimonials convert?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Because visitors can't verify them and they don't address the specific concern. 'Amazing tool, highly recommend!' is meaningless. 'Conversion rate went from 1.3% to 3.8% after fixing the headline' is verifiable and outcome-specific — it converts.",
+                  text: "Because visitors can't verify them and they don't address the specific concern. 'Amazing tool, highly recommend!' is meaningless. 'Conversion rate went from 1.3% to 3.8% after fixing the headline' is verifiable and outcome-specific - it converts.",
                 },
               },
               {

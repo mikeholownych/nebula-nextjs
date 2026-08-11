@@ -118,7 +118,7 @@ export default function WorkspaceClient() {
   useEffect(() => {
     if (email) {
       load(email)
-      // Fetch billing plan — non-blocking; defaults to 'free' on failure
+      // Fetch billing plan - non-blocking; defaults to 'free' on failure
       fetch(`/api/billing/summary?email=${encodeURIComponent(email)}`)
         .then((r) => r.ok ? r.json() : null)
         .then((data) => {
@@ -255,7 +255,7 @@ export default function WorkspaceClient() {
           </header>
           {email && (
             <div className="text-xs text-fg-dim border-t border-border py-2 px-4 -mx-4 mb-4">
-              Your workspace is tied to your audit email. Audit findings are about public pages — no private data is stored here.
+              Your workspace is tied to your audit email. Audit findings are about public pages - no private data is stored here.
             </div>
           )}
 

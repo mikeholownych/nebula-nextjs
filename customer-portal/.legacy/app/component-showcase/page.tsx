@@ -1,7 +1,7 @@
 import '@/app/globals.css'
 
 export const metadata = {
-  title: 'Nebula Component Library — Design System Showcase',
+  title: 'Nebula Component Library - Design System Showcase',
   description: 'Design system components extracted from 41 production pages. Consistent, reusable, and optimized.',
 }
 
@@ -203,7 +203,7 @@ export default function ComponentShowcasePage() {
       <footer className="footer">
         <div className="container">
           <p>
-            Nebula Design System v1.0 —
+            Nebula Design System v1.0 -
             <a href="/styles/tokens.md">Tokens</a> ·
             <a href="/styles/nebula-design-system.css">Base Styles</a> ·
             <a href="/styles/nebula-components.css">Components</a>

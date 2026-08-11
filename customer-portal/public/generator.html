@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SaaS Hero Generator — Free by Nebula Components</title>
+  <title>SaaS Hero Generator - Free by Nebula Components</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:'Inter',sans-serif;background:#0a0f14;color:#e2e8f0;line-height:1.6;min-height:100vh}
     .container{max-width:1200px;margin:0 auto;padding:0 24px}
-    
+
     /* Top bar */
     .top-bar{background:linear-gradient(90deg,#009980,#33d4b8);padding:8px;text-align:center;font-size:0.75rem;font-weight:600}
     .top-bar a{color:#fff;text-decoration:none}
@@ -51,14 +51,14 @@
 <body>
 
 <div class="top-bar">
-  ✦ <a href="https://nebulacomponents.shop">Nebula Components</a> — Get 7 premium SaaS landing page sections for <strong>$7</strong> → 
+  ✦ <a href="https://nebulacomponents.shop">Nebula Components</a> - Get 7 premium SaaS landing page sections for <strong>$7</strong> →
 </div>
 
 <div class="app">
   <!-- Editor -->
   <div class="editor">
     <h1>SaaS Hero Generator</h1>
-    <p>Customize your hero section below. The preview updates in real-time. Free to use — grab the HTML when you're done.</p>
+    <p>Customize your hero section below. The preview updates in real-time. Free to use - grab the HTML when you're done.</p>
 
     <div class="field">
       <label for="badge">Badge Text</label>
@@ -77,7 +77,7 @@
 
     <div class="field">
       <label for="subtitle">Subtitle</label>
-      <textarea id="subtitle" oninput="updatePreview()">The developer platform that handles the boilerplate so you can focus on what matters — building products your users love.</textarea>
+      <textarea id="subtitle" oninput="updatePreview()">The developer platform that handles the boilerplate so you can focus on what matters - building products your users love.</textarea>
     </div>
 
     <div class="row">
@@ -106,7 +106,7 @@
 </div>
 
 <div class="upsell">
-  <p>⚡ Love the hero? Get <strong>7 components</strong> (Features, Pricing, Testimonials, FAQ, CTA, Footer + Hero) for <span class="price">$7</span> — <a href="https://nebulacomponents.shop">Buy Nebula Components →</a></p>
+  <p>⚡ Love the hero? Get <strong>7 components</strong> (Features, Pricing, Testimonials, FAQ, CTA, Footer + Hero) for <span class="price">$7</span> - <a href="https://nebulacomponents.shop">Buy Nebula Components →</a></p>
   <p style="font-size:0.75rem;color:#94a3b8;margin-top:6px">Share this tool: <a href="https://news.ycombinator.com/item?id=48639668" style="color:#818cf8" target="_blank" rel="noopener noreferrer">HN</a> · <a href="https://nebulacomponents.shop" style="color:#818cf8">Nebula</a></p>
 </div>
 
@@ -118,12 +118,12 @@ function generateHero(){
   const subtitle = document.getElementById('subtitle').value || '';
   const cta1 = document.getElementById('cta1').value || 'Get Started';
   const cta2 = document.getElementById('cta2').value || 'Learn More';
-  
+
   // Split headline around the highlight
   let parts = headline.split(highlight);
   let beforeHL = parts[0] || '';
   let afterHL = parts.slice(1).join(highlight) || '';
-  
+
   return `<!DOCTYPE html><html><head><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Inter',sans-serif;background:#0a0f14;color:#e2e8f0;min-height:100vh;display:flex;align-items:center;justify-content:center}
@@ -184,7 +184,7 @@ function resetFields(){
     badge: '✦ Now in Public Beta',
     headline: 'Build Faster. Ship Smarter.',
     highlight: 'Ship Smarter.',
-    subtitle: 'The developer platform that handles the boilerplate so you can focus on what matters — building products your users love.',
+    subtitle: 'The developer platform that handles the boilerplate so you can focus on what matters - building products your users love.',
     cta1: 'Start Building Free →',
     cta2: 'See How It Works'
   };

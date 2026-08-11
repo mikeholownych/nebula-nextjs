@@ -16,7 +16,7 @@ export function generateMetadata({
     const c = COMPARISONS[slug]
     if (!c) return {}
     return {
-      title: `${c.competitorName} Alternative: Nebula vs. ${c.competitorName} — Free Landing Page Audit`,
+      title: `${c.competitorName} Alternative: Nebula vs. ${c.competitorName} - Free Landing Page Audit`,
       description: c.bluf || c.intent,
       alternates: {
         canonical: `https://nebulacomponents.com/vs/${c.slug}`,
@@ -65,7 +65,7 @@ export default async function ComparisonPage({
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">{c.intent}</p>
 
-        {/* Bottom Line Up Front — placed high so AI engines and skimming
+        {/* Bottom Line Up Front - placed high so AI engines and skimming
             readers can pull the answer as a snippet (Breaking B2B playbook) */}
         <section
           aria-label="Bottom line"
@@ -114,7 +114,7 @@ export default async function ComparisonPage({
           <p className="text-fg-muted leading-relaxed">{c.verdict}</p>
         </section>
 
-        {/* FAQs — real questions prospects ask; also emitted as FAQPage
+        {/* FAQs - real questions prospects ask; also emitted as FAQPage
             JSON-LD so AI engines can cite structured answers */}
         <section className="mt-12" aria-label="Frequently asked questions">
           <h2 className="mb-6 text-2xl font-bold text-fg">Frequently asked questions</h2>
@@ -151,7 +151,7 @@ export default async function ComparisonPage({
         <div className="mt-6 rounded-xl border border-signal-fail/20 bg-signal-fail/5 px-5 py-4 text-sm text-fg-muted">
           <strong className="text-fg">Note: </strong>
           Competitor information is based on publicly available pricing and feature pages checked in {c.checkedAt}.
-          Prices and features change — verify at{' '}
+          Prices and features change - verify at{' '}
           <a href={c.competitorUrl} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
             {c.competitorUrl.replace('https://', '')}
           </a>{' '}

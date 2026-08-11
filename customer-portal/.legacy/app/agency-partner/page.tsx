@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'White-Label Landing Page Audits — Agency Partner Program | Nebula',
+  title: 'White-Label Landing Page Audits - Agency Partner Program | Nebula',
   description: 'Resell Nebula audits under your own brand. No development. No compliance overhead. $497/mo includes white-label delivery, compliance docs, and dedicated support for your regulated clients.',
   openGraph: {
-    title: 'Agency Partner Program — White-Label Audits',
+    title: 'Agency Partner Program - White-Label Audits',
     description: 'Sell triggered audits under your brand. $497/mo. No dev. Compliance-ready for regulated clients.',
     type: 'website',
   },
@@ -97,7 +97,7 @@ export default function AgencyPartnerPage() {
             Sell triggered audits under your brand.
           </h1>
           <p className="text-gray-400 mt-3 text-base">
-            Your agency lands the client. We power the audit engine — white-labeled, compliance-ready, and built for the regulated clients other vendors can&apos;t quote.
+            Your agency lands the client. We power the audit engine - white-labeled, compliance-ready, and built for the regulated clients other vendors can&apos;t quote.
           </p>
 
           {/* Pricing */}
@@ -133,7 +133,7 @@ export default function AgencyPartnerPage() {
                 <span className="text-blue-400 font-bold shrink-0">→</span>
                 <div>
                   <strong className="text-gray-100">{feature.title}</strong>
-                  <span className="text-gray-400"> — {feature.description}</span>
+                  <span className="text-gray-400"> - {feature.description}</span>
                 </div>
               </li>
             ))}

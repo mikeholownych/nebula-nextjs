@@ -3,7 +3,7 @@
 ## What It Does
 
 Scans Reddit every 15 minutes for founders actively bleeding money on ads.
-Alerts you within the hour — while the thread is still hot and the founder is still watching.
+Alerts you within the hour - while the thread is still hot and the founder is still watching.
 
 ## Monitored Queries
 
@@ -38,7 +38,7 @@ Triggers: [matched pain keywords]
 1. Read the full thread context
 2. If URL is mentioned → run audit immediately
 3. Reply with specific question: "What's your landing page URL?"
-4. Do NOT paste audit results unsolicited — ask first
+4. Do NOT paste audit results unsolicited - ask first
 5. If they share URL → audit → reply with ONE finding (the most impactful)
 6. Link to full audit at nebulacomponents.shop only if they ask
 

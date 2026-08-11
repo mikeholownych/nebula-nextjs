@@ -31,9 +31,9 @@ function displayUrl(url: string): string {
 }
 
 function fmtDate(iso?: string | null): string {
-  if (!iso) return '—'
+  if (!iso) return '-'
   const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return '—'
+  if (Number.isNaN(d.getTime())) return '-'
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
 }
 
@@ -146,7 +146,7 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
       <div className="bg-bg-elevated border border-border rounded-lg p-10 text-center">
         <h2 className="text-xl font-bold mb-2">Compare needs two versions</h2>
         <p className="text-fg-muted mb-6 max-w-md mx-auto">
-          Run a follow-up audit on the same page — the diff shows exactly what changed, like a pull
+          Run a follow-up audit on the same page - the diff shows exactly what changed, like a pull
           request for your landing page.
         </p>
         {sorted[0] && (
@@ -258,7 +258,7 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
               <span className="text-base text-fg-dim font-normal">/100</span>
             </p>
             <p className="text-xs text-fg-dim mt-1">
-              {before ? fmtDate(before.completed_at || before.created_at) : '—'}
+              {before ? fmtDate(before.completed_at || before.created_at) : '-'}
               {before?.grade ? ` · Grade ${before.grade}` : ''}
             </p>
           </div>
@@ -285,7 +285,7 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
               <span className="text-base text-fg-dim font-normal">/100</span>
             </p>
             <p className="text-xs text-fg-dim mt-1">
-              {after ? fmtDate(after.completed_at || after.created_at) : '—'}
+              {after ? fmtDate(after.completed_at || after.created_at) : '-'}
               {after?.grade ? ` · Grade ${after.grade}` : ''}
             </p>
           </div>
@@ -293,7 +293,7 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
         {loading && <p className="text-xs text-fg-dim mt-4">Loading findings…</p>}
       </section>
 
-      {/* Visual diff — screenshots side by side if available */}
+      {/* Visual diff - screenshots side by side if available */}
       {before?.screenshot_url && after?.screenshot_url && samePage && (
         <section className="rounded-xl border border-border bg-bg-elevated p-5">
           <h3 className="mb-4 text-sm font-semibold text-fg-muted uppercase tracking-widest">Page snapshots</h3>

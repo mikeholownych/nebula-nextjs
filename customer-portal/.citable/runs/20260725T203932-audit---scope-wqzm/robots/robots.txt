@@ -1,4 +1,4 @@
-# nebulacomponents.shop — robots.txt
+# nebulacomponents.shop - robots.txt
 # Content Signals (https://contentsignals.org/, IETF draft-romm-aipref-contentsignals)
 # Policy: search=yes (indexing welcome), ai-input=yes (answer-engine retrieval welcome),
 #         ai-train=no (model training explicitly reserved)
@@ -7,7 +7,7 @@
 # UNDER ARTICLE 4 OF THE EUROPEAN UNION DIRECTIVE 2019/790 ON COPYRIGHT AND RELATED
 # RIGHTS IN THE DIGITAL SINGLE MARKET.
 
-# AI model training — disallowed
+# AI model training - disallowed
 User-Agent: GPTBot
 Disallow: /
 
@@ -23,7 +23,7 @@ Disallow: /
 User-Agent: omgili
 Disallow: /
 
-# AI answer-engine input and retrieval — allowed
+# AI answer-engine input and retrieval - allowed
 User-Agent: ChatGPT-User
 Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /
@@ -56,7 +56,7 @@ User-Agent: meta-externalagent
 Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /
 
-# Standard search indexing — allowed
+# Standard search indexing - allowed
 User-Agent: *
 Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /

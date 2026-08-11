@@ -1,4 +1,4 @@
-"""Motion assembly — turn static cards into alive video.
+"""Motion assembly - turn static cards into alive video.
 
 Each frame becomes a slow Ken Burns clip (alternating zoom-in / zoom-out
 with fade in/out), clips are concatenated, then the TTS audio is muxed.

@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from urllib.parse import urlencode, urljoin, urlparse
 from pathlib import Path
 
-# Fix Map — visual execution roadmap (Nico's FORGE adaptation)
+# Fix Map - visual execution roadmap (Nico's FORGE adaptation)
 try:
     from fix_map import build_fix_map
     HAS_FIX_MAP = True
@@ -19,7 +19,7 @@ NEBULA_DIR = Path(__file__).resolve().parent
 # Add the active venv site-packages before importing BeautifulSoup/requests.
 sys.path.insert(0, str(NEBULA_DIR / "venv" / "lib" / "python3.12" / "site-packages"))
 
-# AI Prompt Pack — generates per-finding AI prompts from audit data
+# AI Prompt Pack - generates per-finding AI prompts from audit data
 try:
     sys.path.insert(0, str(NEBULA_DIR))
     from audit_pipeline.prompts.generator import build_prompt_pack
@@ -235,11 +235,11 @@ def _local_gbp_dimension(html_text: str, lower: str) -> dict | None:
     """
     # ── Local business signal detection ──────────────────────────────────
     signals = 0
-    # 1. Physical address patterns (US/CA/international) — require address-adjacent context
+    # 1. Physical address patterns (US/CA/international) - require address-adjacent context
     _addr_re = r'(?:address|located|visit|directions|office|suite|floor)\s*[:\-]?\s*\d{1,5}\s+[\w\s]+(?:st|ave|blvd|rd|dr|way|ln|ct|pl|ste|unit)\b'
     if re.search(_addr_re, lower):
         signals += 1
-    # Postal code — only near address context (not CSS/JS numbers)
+    # Postal code - only near address context (not CSS/JS numbers)
     _postal_re = r'(?:address|street|ave|blvd|road|drive|lane|court|place)\w{0,20}\d{5}(?:-\d{4})?'
     if re.search(_postal_re, lower):
         signals += 1
@@ -252,8 +252,8 @@ def _local_gbp_dimension(html_text: str, lower: str) -> dict | None:
     if re.search(r'maps\.google\.com|google\.com/maps|goo\.gl/maps|iframe.*maps', lower):
         signals += 1
 
-    # 4. Location-specific content near business keywords (counts as 2 — strong local signal)
-    # Service businesses only — exclude generic retail terms (store/shop/retail match domain names)
+    # 4. Location-specific content near business keywords (counts as 2 - strong local signal)
+    # Service businesses only - exclude generic retail terms (store/shop/retail match domain names)
     # Use word boundaries to avoid matching "auto" in "automated", "spa" in CSS classes, etc.
     # Some terms are standalone (wedding, salon), others need context (plumbing, roofing)
     business_types = r'\b(salon|spa\b|clinic|dental|lawyer|attorney|restaurant|caf[ée]|gym|plumb(?:er|ing)|roofer|roofing|hvac|electrician|car repair|pet groomer|veterinarian|photographer|wedding|florist|bakery|landscaping|cleaning service|painting contractor|flooring|tile installer|furniture store)\b'
@@ -264,14 +264,14 @@ def _local_gbp_dimension(html_text: str, lower: str) -> dict | None:
         signals += 1
 
     if signals < 2:
-        return None  # Not a local business — skip this finding
+        return None  # Not a local business - skip this finding
 
     # ── GBP product gap detection ────────────────────────────────────────
     has_gbp = False
 
     # Check for schema.org LocalBusiness with product/service offerings
     if re.search(r'"@type"\s*:\s*"(LocalBusiness|Store|Restaurant|HealthAndBeautyBusiness)"', html_text):
-        # Has LocalBusiness schema — check if products are listed
+        # Has LocalBusiness schema - check if products are listed
         if re.search(r'"@type"\s*:\s*"Product"|offers|price|AggregateOffer', html_text):
             has_gbp = True
 
@@ -284,7 +284,7 @@ def _local_gbp_dimension(html_text: str, lower: str) -> dict | None:
         has_gbp = True
 
     if has_gbp:
-        return None  # Already has GBP product presence — no gap
+        return None  # Already has GBP product presence - no gap
 
     # ── Build the finding ────────────────────────────────────────────────
     return {
@@ -292,7 +292,7 @@ def _local_gbp_dimension(html_text: str, lower: str) -> dict | None:
         "weight": "medium",
         "issue": (
             "Local business detected but no Google Business Profile product listings found. "
-            "GBP products surface your services/pricing directly in Google Search and Maps — "
+            "GBP products surface your services/pricing directly in Google Search and Maps - "
             "before the visitor even clicks through. This is free and takes 15 minutes to set up."
         ),
         "fix": (
@@ -307,10 +307,10 @@ def _local_gbp_dimension(html_text: str, lower: str) -> dict | None:
 def _check_ai_crawlers(url: str) -> dict:
     """Score AI answer-engine access via robots.txt (Ideata-style crawler check).
 
-    Distinguishes RETRIEVAL crawlers (fetch a page to cite it in an answer —
+    Distinguishes RETRIEVAL crawlers (fetch a page to cite it in an answer -
     OAI-SearchBot, ChatGPT-User, anthropic-ai, PerplexityBot, Perplexity-User,
     GoogleOther, Applebot) from TRAINING crawlers (ingest a page to train a
-    model — GPTBot, ClaudeBot, Google-Extended, Applebot-Extended, CCBot).
+    model - GPTBot, ClaudeBot, Google-Extended, Applebot-Extended, CCBot).
 
     Blocking training crawlers is a defensible copyright stance and does NOT
     block citations. Blocking retrieval crawlers is a guaranteed zero in that
@@ -340,7 +340,7 @@ def _check_ai_crawlers(url: str) -> dict:
         return {
             "score": 5,
             "weight": "medium",
-            "issue": "Could not retrieve robots.txt — AI crawler access is unverified",
+            "issue": "Could not retrieve robots.txt - AI crawler access is unverified",
             "fix": "Publish a robots.txt that explicitly allows answer-engine retrieval crawlers (OAI-SearchBot, ChatGPT-User, PerplexityBot, anthropic-ai, GoogleOther).",
             "crawlers": {},
         }
@@ -350,7 +350,7 @@ def _check_ai_crawlers(url: str) -> dict:
         return {
             "score": 7,
             "weight": "medium",
-            "issue": "No robots.txt found — answer engines assume access, but there is no explicit policy",
+            "issue": "No robots.txt found - answer engines assume access, but there is no explicit policy",
             "fix": "Add robots.txt with explicit Allow rules for answer-engine retrieval crawlers (OAI-SearchBot, ChatGPT-User, PerplexityBot, anthropic-ai, GoogleOther).",
             "crawlers": {},
         }
@@ -389,21 +389,21 @@ def _check_ai_crawlers(url: str) -> dict:
     score = max(1, min(10, round(10 - 2.0 * len(blocked_retrieval))))
 
     if not blocked_retrieval:
-        issue = "Answer-engine crawlers are allowed — your page can be read for citations"
+        issue = "Answer-engine crawlers are allowed - your page can be read for citations"
         fix = (
             "Keep retrieval crawlers allowed. If you also want training-crawler control, "
-            "keep GPTBot/ClaudeBot/Google-Extended blocked — a defensible copyright stance "
+            "keep GPTBot/ClaudeBot/Google-Extended blocked - a defensible copyright stance "
             "that does not block citations."
         )
     else:
         issue = (
-            f"Robots.txt blocks answer-engine crawler(s): {', '.join(blocked_retrieval)} — "
+            f"Robots.txt blocks answer-engine crawler(s): {', '.join(blocked_retrieval)} - "
             "these engines cannot cite you"
         )
         fix = (
             "Allow retrieval crawlers (OAI-SearchBot, ChatGPT-User, PerplexityBot, "
             "anthropic-ai, GoogleOther) in robots.txt. Blocking training crawlers "
-            "(GPTBot, ClaudeBot, Google-Extended) is fine — it does not block citations."
+            "(GPTBot, ClaudeBot, Google-Extended) is fine - it does not block citations."
         )
 
     return {
@@ -437,14 +437,14 @@ def score_audit(page):
     _trust_re = (
         r'(\d+\s*(stars?|reviews?|customers?|clients?|companies|users?))'
         r'|(trustpilot|g2\.com|capterra|clutch|google reviews)'
-        r'|(\u201c|\u2018|said|says|—\s*[A-Z])'
+        r'|(\u201c|\u2018|said|says|-\s*[A-Z])'
     )
     trust_shown = bool(re.search(_trust_re, lower, re.IGNORECASE))
     if trust_claimed and trust_shown:
         proof_score = 8
         proof_issue = f"Trust signals present and evidenced ({len(trust_claimed)} trust terms + concrete proof markers)."
     elif trust_claimed and not trust_shown:
-        # SAY VS. SHOW CONTRADICTION — this is the finding
+        # SAY VS. SHOW CONTRADICTION - this is the finding
         proof_score = 4
         proof_issue = (
             f"Your page says it's trustworthy ({'/ '.join(trust_claimed[:3])}). "
@@ -456,7 +456,7 @@ def score_audit(page):
         proof_issue = "A stranger landing here sees nothing that proves this worked for anyone else. No quotes, no names, no numbers. They're being asked to trust a page that hasn't earned it yet."
     # HTML-size heuristic (fallback if PageSpeed API unavailable)
     html_size_score = 8 if len(html_text) < 120000 else 5
-    html_size_issue = "Page HTML is within normal bounds." if html_size_score >= 7 else f"HTML is {len(html_text)//1000}KB — large pages slow first paint."
+    html_size_issue = "Page HTML is within normal bounds." if html_size_score >= 7 else f"HTML is {len(html_text)//1000}KB - large pages slow first paint."
     mobile_score = 8 if "viewport" in lower else 4
 
     # --- PageSpeed dimension ---
@@ -517,7 +517,7 @@ def score_audit(page):
 
     # --- Ad-source artifact dimension ---
     # Page-type context: a homepage or brand page is not a paid landing page.
-    # Scoring it as one produces false positives — no ad tracking on a homepage
+    # Scoring it as one produces false positives - no ad tracking on a homepage
     # is the correct state, not a leak. Adjust scoring and messaging accordingly.
     from urllib.parse import urlparse as _urlparse
     _parsed_url = _urlparse(url) if url else None
@@ -541,7 +541,7 @@ def score_audit(page):
             ad_signals_score = 8
             ad_signals_issue = (
                 "Analytics (GA4) present in source. Facebook Pixel, UTM-bearing links, "
-                "and conversion calls are not expected on a homepage — their absence is correct, not a leak."
+                "and conversion calls are not expected on a homepage - their absence is correct, not a leak."
             )
             ad_signals_fix = (
                 "Verify GA4 fires on page load via browser devtools or Tag Assistant. "
@@ -559,7 +559,7 @@ def score_audit(page):
                 "Pixel and conversion calls belong on dedicated landing pages, not the homepage."
             )
     else:
-        # Dedicated landing page — all four signals are expected.
+        # Dedicated landing page - all four signals are expected.
         ad_signals_score = min(2 + 2 * signals_found, 10)
         source_checks = [
             (fb_pixel, "Facebook Pixel initializer"),
@@ -593,26 +593,26 @@ def score_audit(page):
 
     # Title tag
     if not title_tag:
-        seo_issues.append("No <title> tag found in <head> — SERP will auto-generate one, usually wrong")
+        seo_issues.append("No <title> tag found in <head> - SERP will auto-generate one, usually wrong")
         seo_score -= 2
     elif len(title_tag) < 15:
-        seo_issues.append(f"<title> tag is only {len(title_tag)} chars — too short to signal topic relevance")
+        seo_issues.append(f"<title> tag is only {len(title_tag)} chars - too short to signal topic relevance")
         seo_score -= 1
     elif len(title_tag) > 70:
-        seo_issues.append(f"<title> tag is {len(title_tag)} chars — SERP truncates at 60. Currently reads: \"{title_tag[:60]}…\"")
+        seo_issues.append(f"<title> tag is {len(title_tag)} chars - SERP truncates at 60. Currently reads: \"{title_tag[:60]}…\"")
         seo_score -= 1
     else:
         seo_score += 1  # good length
 
     # Meta description
     if not meta_desc:
-        seo_issues.append("No meta[name=description] found — Google writes its own, usually pulled from body text mid-paragraph")
+        seo_issues.append("No meta[name=description] found - Google writes its own, usually pulled from body text mid-paragraph")
         seo_score -= 1
     elif len(meta_desc) < 80:
-        seo_issues.append(f"meta[name=description] is {len(meta_desc)} chars — below the 120-char minimum that fills a full SERP snippet")
+        seo_issues.append(f"meta[name=description] is {len(meta_desc)} chars - below the 120-char minimum that fills a full SERP snippet")
         seo_score -= 1
     elif len(meta_desc) > 170:
-        seo_issues.append(f"meta[name=description] is {len(meta_desc)} chars — SERP shows ~155. Truncates at: \"{meta_desc[:155]}…\"")
+        seo_issues.append(f"meta[name=description] is {len(meta_desc)} chars - SERP shows ~155. Truncates at: \"{meta_desc[:155]}…\"")
         seo_score -= 0.5
     else:
         seo_score += 1  # good length
@@ -622,7 +622,7 @@ def score_audit(page):
         seo_issues.append("Missing H1 tag")
         seo_score -= 2
     elif h1_count > 1:
-        seo_issues.append(f"Multiple H1 tags ({h1_count}) — should have exactly one")
+        seo_issues.append(f"Multiple H1 tags ({h1_count}) - should have exactly one")
         seo_score -= 1.5
 
     if h1_text and len(h1_text) < 5:
@@ -641,10 +641,10 @@ def score_audit(page):
         stop_words = {"the", "a", "an", "in", "on", "at", "to", "for", "of", "and", "or", "is", "your", "our", "we", "you"}
         significant_common = common - stop_words
         if len(significant_common) == 0:
-            seo_issues.append("H1 and title tag share no significant keywords — messaging misalignment")
+            seo_issues.append("H1 and title tag share no significant keywords - messaging misalignment")
             seo_score -= 1
         elif len(significant_common) < 2:
-            seo_issues.append("H1 and title tag have weak keyword overlap — consider aligning messaging")
+            seo_issues.append("H1 and title tag have weak keyword overlap - consider aligning messaging")
             seo_score -= 0.5
         else:
             seo_score += 1  # aligned messaging
@@ -652,7 +652,7 @@ def score_audit(page):
     seo_score = max(1, min(10, round(seo_score)))
 
     if seo_score >= 7:
-        seo_issue_text = "SEO foundations are solid — title, meta description, and H1 structure are well aligned."
+        seo_issue_text = "SEO foundations are solid - title, meta description, and H1 structure are well aligned."
         seo_fix_text = "Monitor ranking performance; consider adding structured data for rich results."
     elif seo_score >= 4:
         seo_issue_text = "SEO foundations need work: " + "; ".join(seo_issues[:3])
@@ -699,7 +699,7 @@ def score_audit(page):
     elif og_complete >= 2:
         ai_score += 0.5
         ai_findings.append(f"OpenGraph partial ({og_complete}/5)")
-        og_note = f"OpenGraph tags {og_complete}/5 present — add missing: og:image, og:type"
+        og_note = f"OpenGraph tags {og_complete}/5 present - add missing: og:image, og:type"
     else:
         ai_findings.append(f"OpenGraph sparse ({og_complete}/5)")
         og_note = "OpenGraph nearly missing"
@@ -738,7 +738,7 @@ def score_audit(page):
     ai_score = max(1, min(10, round(ai_score)))
 
     if ai_score >= 8:
-        ai_issue_text = f"AI citation ready — entity signals strong. {ai_findings[0] if ai_findings else ''}"
+        ai_issue_text = f"AI citation ready - entity signals strong. {ai_findings[0] if ai_findings else ''}"
         ai_fix_text = "Your page is well-structured for AI citation. To improve further: publish original research, earn editorial placements in LLM-weighted publications (Reuters, Forbes, TIME, Axios)."
     elif ai_score >= 5:
         ai_issue_text = f"AI citation needs structured data: {ai_findings[0] if ai_findings else 'add JSON-LD'}"
@@ -756,7 +756,7 @@ def score_audit(page):
         ai_crawlers = {
             "score": 5,
             "weight": "medium",
-            "issue": "AI crawler access check failed — treat as unverified",
+            "issue": "AI crawler access check failed - treat as unverified",
             "fix": "Re-run the audit to verify robots.txt AI crawler rules.",
             "crawlers": {},
         }
@@ -830,7 +830,7 @@ def score_audit(page):
     # ── Weighted composite (Ideata-style single anchor number) ──────────────
     # Honors the existing high/medium/low dimension metadata instead of treating
     # every dimension as equal. high=3, medium=2, low=1. The anchor is the
-    # component pass standard used on /benchmarks (≥7) — a fixed, published
+    # component pass standard used on /benchmarks (≥7) - a fixed, published
     # criterion, not a moving threshold.
     _WEIGHT_MAP = {"high": 3, "medium": 2, "low": 1}
     _weighted_sum = sum(
@@ -858,16 +858,16 @@ def score_audit(page):
 
         # Effort weights per dimension (70% rule: change burden, not just tech)
         effort_weights = {
-            "headline":     2,   # copy edit — 10 min, no system touch
-            "cta":          2,   # copy edit — 10 min
-            "above_fold":   3,   # layout/copy — CMS edit, possible dev
+            "headline":     2,   # copy edit - 10 min, no system touch
+            "cta":          2,   # copy edit - 10 min
+            "above_fold":   3,   # layout/copy - CMS edit, possible dev
             "social_proof": 3,   # content sourcing + placement
             "load_speed":   7,   # infra + build pipeline + 70% ops change
-            "mobile":       3,   # CSS/viewport — usually one line
+            "mobile":       3,   # CSS/viewport - usually one line
             "ad_signals":   8,   # pixel install + GA4 events + tag manager + 70% team workflow change
-            "seo_foundations": 4, # title/meta edits — low tech, some content work
-            "ai_readiness": 5,   # JSON-LD + OG tags — dev task, one-time setup, moderate effort
-            "ai_crawler_access": 2,  # robots.txt Allow lines — 15-min fix, no system touch
+            "seo_foundations": 4, # title/meta edits - low tech, some content work
+            "ai_readiness": 5,   # JSON-LD + OG tags - dev task, one-time setup, moderate effort
+            "ai_crawler_access": 2,  # robots.txt Allow lines - 15-min fix, no system touch
         }
         effort = effort_weights.get(key, 5)
 
@@ -897,7 +897,7 @@ def score_audit(page):
 
     # ── Evidence enrichment ────────────────────────────────────────────────────
     # Adds measured/required/delta/selector/confidence/timestamp to every finding.
-    # Operates on already-fetched HTML — no new network calls.
+    # Operates on already-fetched HTML - no new network calls.
     try:
         from audit_evidence import enrich_findings_with_evidence
         opp_matrix = enrich_findings_with_evidence(opp_matrix, html_text)
@@ -933,7 +933,7 @@ def score_audit(page):
 
 def detect_goal_contradictions(page, stated_goal):
     """
-    CAIOS M5 — Stakeholder contradiction detection.
+    CAIOS M5 - Stakeholder contradiction detection.
     Compares what the prospect SAID their goal is vs. what their page SHOWS.
     Returns a list of (claim, evidence, severity) tuples.
     """
@@ -957,7 +957,7 @@ def detect_goal_contradictions(page, stated_goal):
         if not has_checkout:
             contradictions.append((
                 "Stated goal: Sales",
-                "No checkout, buy button, or payment processor detected — visitor has nowhere to pay",
+                "No checkout, buy button, or payment processor detected - visitor has nowhere to pay",
                 "HIGH"
             ))
 
@@ -973,7 +973,7 @@ def detect_goal_contradictions(page, stated_goal):
         if not has_phone and not re.search(r'calendly|cal\.com|acuity|book a|schedule', lower):
             contradictions.append((
                 "Stated goal: Bookings",
-                "No booking widget, calendar link, or phone number found — no path to schedule",
+                "No booking widget, calendar link, or phone number found - no path to schedule",
                 "HIGH"
             ))
 
@@ -1069,7 +1069,7 @@ def detect_stack(html_text):
 
 
 def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=None, stated_goal=None, stated_role=None, stated_visitor=None, stated_tone=None, prompt_pack=None):
-    """Compose structured audit email — free-consulting frame, not report delivery."""
+    """Compose structured audit email - free-consulting frame, not report delivery."""
     DIM_LABELS = {
         "headline": "Headline",
         "cta": "CTA",
@@ -1105,7 +1105,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
     else:
         stack_line = ""
 
-    # Real spend override — use actual budget if provided, else conservative $2K estimate
+    # Real spend override - use actual budget if provided, else conservative $2K estimate
     if monthly_spend and monthly_spend > 0:
         spend_label = f"${monthly_spend:,.0f}/mo"
     else:
@@ -1123,7 +1123,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         )
     elif "marketer" in _role or "marketing" in _role or "growth" in _role or "ads" in _role:
         personalized_q = (
-            "Quick follow-up: which campaign is sending traffic to this page right now — "
+            "Quick follow-up: which campaign is sending traffic to this page right now - "
             "paid search, paid social, or email? Knowing the traffic source changes the fix priority."
         )
     elif "agency" in _role or "freelance" in _role or "consultant" in _role:
@@ -1168,7 +1168,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         _stack = (stack_line + " ") if stack_line else ""
         body_opener = (
             f"{_stack}I ran {domain} through our conversion analyzer. The {worst_label.lower()} alone is likely killing every visitor who lands on your page. "
-            f"Pages scoring {score}/10 waste {waste_pct} of paid clicks — at {spend_label} that's {monthly_leak} evaporating before a single conversion."
+            f"Pages scoring {score}/10 waste {waste_pct} of paid clicks - at {spend_label} that's {monthly_leak} evaporating before a single conversion."
         )
         pitch_line = None  # computed below from matrix
     elif score < 6.5:
@@ -1176,7 +1176,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         waste_pct = "40–50%"
         _stack = (stack_line + " ") if stack_line else ""
         body_opener = (
-            f"{_stack}I ran your landing page through our conversion analyzer — your {worst_label.lower()} is the leak. "
+            f"{_stack}I ran your landing page through our conversion analyzer - your {worst_label.lower()} is the leak. "
             f"Pages at {score}/10 lose {waste_pct} of ad clicks to friction. At {spend_label} in traffic that's {monthly_leak} in recoverable waste."
         )
         pitch_line = None  # computed below from matrix
@@ -1185,8 +1185,8 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         waste_pct = "15–20%"
         _stack = (stack_line + " ") if stack_line else ""
         body_opener = (
-            f"{_stack}Checked {domain} — you're closer than most ({score}/10). "
-            f"One or two friction points are likely costing {waste_pct} of conversions — {monthly_leak} at {spend_label}, more at scale."
+            f"{_stack}Checked {domain} - you're closer than most ({score}/10). "
+            f"One or two friction points are likely costing {waste_pct} of conversions - {monthly_leak} at {spend_label}, more at scale."
         )
         pitch_line = None  # computed below from matrix
     else:
@@ -1194,8 +1194,8 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         waste_pct = "5–10%"
         _stack = (stack_line + " ") if stack_line else ""
         body_opener = (
-            f"{_stack}Ran {domain} through our analyzer — it's structurally solid ({score}/10). "
-            f"Found a nuance that may account for {waste_pct} of unconverted clicks — {monthly_leak} at {spend_label}."
+            f"{_stack}Ran {domain} through our analyzer - it's structurally solid ({score}/10). "
+            f"Found a nuance that may account for {waste_pct} of unconverted clicks - {monthly_leak} at {spend_label}."
         )
         pitch_line = None  # computed below from matrix
 
@@ -1247,7 +1247,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         lines.append("")
         lines.append("─" * 40)
         lines.append("")
-        lines.append("🧠 AI Prompt — Paste this into Claude, ChatGPT, or Gemini:")
+        lines.append("🧠 AI Prompt - Paste this into Claude, ChatGPT, or Gemini:")
         lines.append("")
         lines.extend(teaser["prompt_md"].split("\n"))
         lines.append("─" * 40)
@@ -1272,9 +1272,9 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
 
     if qw or maj:
         lines.append("")
-        lines.append("Priority matrix (impact vs. effort — scored from your audit):")
+        lines.append("Priority matrix (impact vs. effort - scored from your audit):")
         if qw:
-            lines.append("  Quick wins (high impact, low effort — do first):")
+            lines.append("  Quick wins (high impact, low effort - do first):")
             for o in qw:
                 lines.append(f"    → {o['label']}: {o['fix']}")
         if maj:
@@ -1294,28 +1294,28 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         "",
         "━" * 40,
         "",
-        f"$97 One-Leak Repair Sprint — {pitch_line}",
+        f"$97 One-Leak Repair Sprint - {pitch_line}",
         "Details + FAQ: https://nebulacomponents.com/primer",
         f"Run or reopen the audit to unlock eligible checkout: {audit_offer_url}",
         "",
         "📩 The paid kit is sent by email after Stripe confirms payment.",
-        "🔒 We never ask for access to your site, CMS, or hosting — you apply the tailored change yourself.",
+        "🔒 We never ask for access to your site, CMS, or hosting - you apply the tailored change yourself.",
         "🔁 One free re-audit within 30 days to see what changed.",
         "",
         "━" * 40,
         "",
 
-        "📊 Data privacy — this audit analyzed your page's public HTML only.",
+        "📊 Data privacy - this audit analyzed your page's public HTML only.",
         "   We never accessed: your analytics, ad accounts, CMS, customer data, or server.",
         "   Your email is used only for delivery and never shared.",
         "   Full policy: https://nebulacomponents.com/audit#data-privacy",
         "",
-        "— Nebula Components",
-        f"Audit engine v{ENGINE_VERSION} — score disputes can be traced to this version.",
+        "- Nebula Components",
+        f"Audit engine v{ENGINE_VERSION} - score disputes can be traced to this version.",
     ])
     text_body = "\n".join(lines)
-    
-    # Fix Map — visual execution roadmap (Nico's FORGE adaptation)
+
+    # Fix Map - visual execution roadmap (Nico's FORGE adaptation)
     fix_map_html = ""
     if HAS_FIX_MAP:
         try:
@@ -1323,7 +1323,7 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
             fix_map_html = fm["html"]
         except Exception:
             pass
-    
+
     if fix_map_html:
         # Show the map instead of raw HTML tags
         page_url = page.get("url", "")
@@ -1333,21 +1333,21 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
   <div style="font-size:13px;color:#6b7280;">
     <a href="{audit_offer_url}" style="color:#059669;text-decoration:underline;">Run the audit to unlock the $97 repair sprint →</a>
   </div>
-  <div style="font-size:11px;color:#9ca3af;margin-top:8px;">Audit engine v{ENGINE_VERSION} — score disputes can be traced to this version.</div>
+  <div style="font-size:11px;color:#9ca3af;margin-top:8px;">Audit engine v{ENGINE_VERSION} - score disputes can be traced to this version.</div>
 </div>"""
     else:
         html_body = "<p>" + "</p><p>".join(line or "&nbsp;" for line in lines) + "</p>"
-        html_body += f'<p style="font-size:11px;color:#9ca3af;">Audit engine v{ENGINE_VERSION} — score disputes can be traced to this version.</p>'
-    
+        html_body += f'<p style="font-size:11px;color:#9ca3af;">Audit engine v{ENGINE_VERSION} - score disputes can be traced to this version.</p>'
+
         # Subject: score-tier differentiated
     if score < 4:
         subject = f"Critical conversion blockers found on {domain}"
     elif score < 6.5:
         subject = f"Found {_article} {worst_label.lower()} problem costing you conversions on {domain}"
     elif score < 8:
-        subject = f"{domain} is close — one fix could make ads profitable"
+        subject = f"{domain} is close - one fix could make ads profitable"
     else:
-        subject = f"Tightening {domain} — quick opportunity spotted"
+        subject = f"Tightening {domain} - quick opportunity spotted"
     return {"subject": subject, "text": text_body, "html": html_body}
 
 

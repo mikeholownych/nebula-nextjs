@@ -37,12 +37,12 @@
       },
       {
         "tag": "A",
-        "text": "knallhart.dev 5.8/10 Grade C Nebula ran its 9-signal audit on knallhart.dev — the \"AI roasts your we",
+        "text": "knallhart.dev 5.8/10 Grade C Nebula ran its 9-signal audit on knallhart.dev - the \"AI roasts your we",
         "href": "/teardowns/knallhart"
       },
       {
         "tag": "A",
-        "text": "postmint.de 6.8/10 Grade B Nebula ran its 9-signal audit on postmint.de/en — the \"one sentence into ",
+        "text": "postmint.de 6.8/10 Grade B Nebula ran its 9-signal audit on postmint.de/en - the \"one sentence into ",
         "href": "/teardowns/postmint"
       },
       {
@@ -386,7 +386,7 @@
     "finalUrl": "https://nebulacomponents.com/case-studies?agency-audit=20260803",
     "title": "Case Studies | Nebula Components",
     "h1": [
-      "No client case studies yet — here is what the engine does instead."
+      "No client case studies yet - here is what the engine does instead."
     ],
     "viewport": 390,
     "scrollWidth": 390,
@@ -445,7 +445,7 @@
     "route": "/resources",
     "status": 200,
     "finalUrl": "https://nebulacomponents.com/resources?agency-audit=20260803",
-    "title": "Resources — Tools & Open Source | Nebula Components",
+    "title": "Resources - Tools & Open Source | Nebula Components",
     "h1": [
       "Resources"
     ],
@@ -675,7 +675,7 @@
     "finalUrl": "https://nebulacomponents.com/teardowns/hotjar?agency-audit=20260803",
     "title": "Hotjar Landing Page Audit: What Nebula Found | Nebula",
     "h1": [
-      "hotjar.com — What the Audit Engine Found"
+      "hotjar.com - What the Audit Engine Found"
     ],
     "viewport": 390,
     "scrollWidth": 614,
@@ -929,12 +929,12 @@
       },
       {
         "tag": "A",
-        "text": "knallhart.dev 5.8/10 Grade C Nebula ran its 9-signal audit on knallhart.dev — the \"AI roasts your we",
+        "text": "knallhart.dev 5.8/10 Grade C Nebula ran its 9-signal audit on knallhart.dev - the \"AI roasts your we",
         "href": "/teardowns/knallhart"
       },
       {
         "tag": "A",
-        "text": "postmint.de 6.8/10 Grade B Nebula ran its 9-signal audit on postmint.de/en — the \"one sentence into ",
+        "text": "postmint.de 6.8/10 Grade B Nebula ran its 9-signal audit on postmint.de/en - the \"one sentence into ",
         "href": "/teardowns/postmint"
       },
       {
@@ -1309,7 +1309,7 @@
     "finalUrl": "https://nebulacomponents.com/case-studies?agency-audit=20260803",
     "title": "Case Studies | Nebula Components",
     "h1": [
-      "No client case studies yet — here is what the engine does instead."
+      "No client case studies yet - here is what the engine does instead."
     ],
     "viewport": 1440,
     "scrollWidth": 1440,
@@ -1373,7 +1373,7 @@
     "route": "/resources",
     "status": 200,
     "finalUrl": "https://nebulacomponents.com/resources?agency-audit=20260803",
-    "title": "Resources — Tools & Open Source | Nebula Components",
+    "title": "Resources - Tools & Open Source | Nebula Components",
     "h1": [
       "Resources"
     ],
@@ -1618,7 +1618,7 @@
     "finalUrl": "https://nebulacomponents.com/teardowns/hotjar?agency-audit=20260803",
     "title": "Hotjar Landing Page Audit: What Nebula Found | Nebula",
     "h1": [
-      "hotjar.com — What the Audit Engine Found"
+      "hotjar.com - What the Audit Engine Found"
     ],
     "viewport": 1440,
     "scrollWidth": 1440,

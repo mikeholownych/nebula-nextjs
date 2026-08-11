@@ -5,9 +5,9 @@ const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
 /**
  * Proxy: GET /api/audit/stats
  *
- * Forwards to the FastAPI /audit/stats/aggregate endpoint. Real counts only —
+ * Forwards to the FastAPI /audit/stats/aggregate endpoint. Real counts only -
  * no fabricated volume. Short revalidate window since this is a public,
- * non-personal aggregate — safe to cache briefly rather than hit the DB on
+ * non-personal aggregate - safe to cache briefly rather than hit the DB on
  * every homepage load.
  */
 export async function GET() {

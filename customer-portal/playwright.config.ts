@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test'
 
 /**
- * Runs against a freshly built app on an ephemeral port (4173) — never
+ * Runs against a freshly built app on an ephemeral port (4173) - never
  * 3000, which is the live production port bound by nebula-nextjs.service
  * on this host. Assumes `next build` already ran (npm run ci runs build
  * before this).

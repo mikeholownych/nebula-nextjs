@@ -4,7 +4,7 @@ export const REPAIR_SPRINT_OFFER = {
   priceUsd: 97,
   summary: 'Run the free audit, then get a tailored repair sprint for one high-impact finding. You or your developer applies the supplied copy, code, or configuration change.',
   howItWorks: [
-    'Run the free audit — paste your URL, get 9 signals scored in under 2 minutes',
+    'Run the free audit - paste your URL, get 9 signals scored in under 2 minutes',
     'Review the initial findings and unlock the full report by email',
     'Pay $97 for a kit tailored to one high-impact finding',
     'Apply the supplied copy, code, or configuration change yourself or with your developer',
@@ -12,7 +12,7 @@ export const REPAIR_SPRINT_OFFER = {
   includes: [
     'A tailored implementation kit for one specific failing signal',
     'One high-impact finding selected from your audit results',
-    'Exact copy, code, or configuration change — not generic advice',
+    'Exact copy, code, or configuration change - not generic advice',
     'Same-scope re-audit within 30 days to verify the fix held',
   ],
   excludes: [

@@ -1,6 +1,6 @@
-# AI Citation Source Map — LLM Publication Weightings
+# AI Citation Source Map - LLM Publication Weightings
 
-Source: SwayyEm (Matt Shealy) — Q2 2026 data
+Source: SwayyEm (Matt Shealy) - Q2 2026 data
 Use: Reference table for AI visibility audit dimension
 Refresh: Quarterly
 
@@ -40,8 +40,8 @@ Each LLM trains on different source publications. A placement that boosts your C
 ### For PR-driven AI citation (SwayyEm's domain)
 - **ChatGPT** responds most to Reuters + Financial Times placements
 - **Claude** weights Forbes and Financial Times heavily
-- **Perplexity** favors TIME and Axios — faster-moving news cycle
-- **Gemini** pulls heavily from Axios and CNN — general news bias
+- **Perplexity** favors TIME and Axios - faster-moving news cycle
+- **Gemini** pulls heavily from Axios and CNN - general news bias
 
 ## Scoring Rubric (for automated AI readiness scoring)
 

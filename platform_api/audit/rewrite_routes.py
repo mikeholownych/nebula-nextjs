@@ -1,8 +1,8 @@
 """AI Rewrite Preview routes (Feature 5).
 
 Endpoints:
-- GET  /api/audit/rewrites/?audit_id=<id>[&share=<token>] — stored rewrites
-- POST /api/audit/rewrites/generate — generate ONE rewrite (cached per
+- GET  /api/audit/rewrites/?audit_id=<id>[&share=<token>] - stored rewrites
+- POST /api/audit/rewrites/generate - generate ONE rewrite (cached per
   (audit_id, finding_key) in the ai_rewrites table, nebula_platform DB)
 
 Access follows platform_api/routes/report_routes.py: either a valid audit
@@ -74,7 +74,7 @@ async def _authorize(
 ) -> dict:
     """Resolve the audit the caller may access. Returns the audit dict.
 
-    Path 1: `share` token matches the audit — read-only share link.
+    Path 1: `share` token matches the audit - read-only share link.
     Path 2: authenticated session whose email owns the audit.
     """
     try:
@@ -160,7 +160,7 @@ def _openrouter_key() -> str:
 
 
 def _bedrock_call(prompt: str) -> Optional[str]:
-    """Synchronous Bedrock converse call — run via asyncio.to_thread."""
+    """Synchronous Bedrock converse call - run via asyncio.to_thread."""
     try:
         import boto3
         from botocore.config import Config
@@ -304,7 +304,7 @@ async def generate_rewrite(
 ):
     """Generate (or return the cached) AI rewrite for one finding.
 
-    The endpoint itself returns any finding's rewrite — the free-teaser
+    The endpoint itself returns any finding's rewrite - the free-teaser
     paywall (first rewrite free, rest behind the $97 Fix Pack) is enforced
     client-side on the results page.
     """

@@ -3,7 +3,7 @@
 ## The Formula
 
 ```
-[LINE 1: Specific fact or number — no question, no "Have you ever"]
+[LINE 1: Specific fact or number - no question, no "Have you ever"]
 
 [LINE 2-3: Context. What most people do / assume. What's actually happening.]
 
@@ -24,11 +24,11 @@
 Your "Get Started" button is costing you 40% of your pipeline.
 
 I audited 47 landing pages last month from founders spending $1k–$5k on ads.
-31 of them had generic CTA text — "Submit," "Learn More," "Get Started."
+31 of them had generic CTA text - "Submit," "Learn More," "Get Started."
 
 Average conversion rate: 1.1%.
 
-The 16 pages with specific CTA copy — "Run my free teardown," "Get my conversion report" —
+The 16 pages with specific CTA copy - "Run my free teardown," "Get my conversion report" -
 averaged 2.9% conversion. Same traffic sources. Same ad spend.
 
 The user needs to know what happens after they click.

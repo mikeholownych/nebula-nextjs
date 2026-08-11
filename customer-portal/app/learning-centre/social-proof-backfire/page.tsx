@@ -159,7 +159,7 @@ export default function SocialProofBackfirePage() {
           </p>
         </section>
 
-        {/* Section 5 — Removing beats keeping */}
+        {/* Section 5 - Removing beats keeping */}
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="text-xl font-bold text-fg">
             Removing Broken Testimonials Outperforms Keeping Them

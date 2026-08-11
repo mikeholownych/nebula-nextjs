@@ -1,8 +1,8 @@
-# Buyer Psychology Framework — Applied to Nebula Audit Results Page
+# Buyer Psychology Framework - Applied to Nebula Audit Results Page
 
-**Implemented**: Aug 9, 2026  
-**Based on**: 8 foundational books on buyer psychology, desire generation, psychographics  
-**Target ROI**: 30–50% lift in audit-to-checkout conversion  
+**Implemented**: Aug 9, 2026
+**Based on**: 8 foundational books on buyer psychology, desire generation, psychographics
+**Target ROI**: 30–50% lift in audit-to-checkout conversion
 **Focus**: System 1 (emotional) activation + System 2 (rational) justification
 
 ---
@@ -10,7 +10,7 @@
 ## Books & Frameworks Applied
 
 ### 1. **Influence: The Psychology of Persuasion** (Cialdini, 1984)
-**Framework**: 6 principles of persuasion  
+**Framework**: 6 principles of persuasion
 **Applied**:
 - **Scarcity**: "This audit expires in 7 days" (artificial scarcity forces decision)
 - **Social proof**: "847 audits analyzed. 721 founders found these same 5 issues. 89% fixed them."
@@ -19,7 +19,7 @@
 - **Reciprocity**: Free value triggers obligation to consider fix pack
 
 ### 2. **Predictably Irrational** (Ariely, 2008)
-**Framework**: Cognitive biases + decision-making heuristics  
+**Framework**: Cognitive biases + decision-making heuristics
 **Applied**:
 - **Anchoring**: Show LOW score first (4/10, red, huge text) → all fixes feel like recovery
 - **Endowment effect**: "Your audit shows X" → prospect now owns the problem
@@ -28,7 +28,7 @@
 - **Sunk cost**: "You've invested $18.7k in ads. This $97 fix recovers it."
 
 ### 3. **Contagious: Why Things Catch On** (Berger, 2013)
-**Framework**: STEPPS (Social currency, Triggers, Emotion, Public, Practical, Stories)  
+**Framework**: STEPPS (Social currency, Triggers, Emotion, Public, Practical, Stories)
 **Applied**:
 - **Emotion**: Anxiety (pain) + relief (solution) = action. Headline: "Your ads are attracting the wrong visitors"
 - **Stories**: Narrative tension ("Here's where founders bleed money...") not facts
@@ -36,7 +36,7 @@
 - **Public**: YouTube videos are public proof of expertise (credibility anchor)
 
 ### 4. **Thinking, Fast and Slow** (Kahneman, 2011)
-**Framework**: System 1 (emotional) vs. System 2 (rational) thinking  
+**Framework**: System 1 (emotional) vs. System 2 (rational) thinking
 **Applied**:
 - **System 1 activation**: Lead with emotional hook ("You're bleeding $X/month") + red colors + urgency
 - **Time pressure**: "Audit expires in 7 days" forces System 1 bypass (emotional, fast decision)
@@ -44,7 +44,7 @@
 - **Loss aversion**: Emphasize what they're losing (money) not what they're gaining (revenue)
 
 ### 5. **The Millionaire Fastlane** (DeMarco, 2011)
-**Framework**: Founder psychology + pain-driven motivation  
+**Framework**: Founder psychology + pain-driven motivation
 **Applied**:
 - **Pain focus**: "You're bleeding money NOW" (not "increase conversions someday")
 - **Autonomy**: "You control the fix. 3 changes. 30 min. No dev needed." (founder identity reinforced)
@@ -52,7 +52,7 @@
 - **Sunk cost motivation**: Activate founder's desire to recover past investment ("$18.7k spent")
 
 ### 6. **The Subtle Art of Not Giving a F*ck** (Manson, 2016)
-**Framework**: Values hierarchy + anti-marketing psychology  
+**Framework**: Values hierarchy + anti-marketing psychology
 **Applied**:
 - **Directness**: "Your landing page sucks. Here's why." (not corporate sugar)
 - **Anti-marketing**: Free audit (no pressure). Honest copy. Respect for intelligence.
@@ -60,14 +60,14 @@
 - **Identity reinforcement**: Frame founder as capable + independent
 
 ### 7. **Pre-suasion** (Cialdini, 2009)
-**Framework**: Curiosity gaps + open loops  
+**Framework**: Curiosity gaps + open loops
 **Applied**:
 - **Curiosity gap**: "Your score is 4/10. The #1 reason is... [see full audit]" (incomplete info drives engagement)
 - **Withholding**: Show top 3 findings free, blur the rest in fix pack (cognitive itch)
 - **Narrative tension**: Hook → problem → solution sequence
 
 ### 8. **Never Split the Difference** (Voss, 2016)
-**Framework**: Tactical empathy + anchoring first offers  
+**Framework**: Tactical empathy + anchoring first offers
 **Applied**:
 - **Empathy hook**: "I know you're frustrated with ad spend..."
 - **Tactical questions**: "How are you supposed to fix this yourself?" (creates need)
@@ -122,10 +122,10 @@
 
 ### **CTA Button**
 
-**Before**: "Get one tailored fix — $97" (accent green)
+**Before**: "Get one tailored fix - $97" (accent green)
 - **Problem**: Gain frame, soft color, passive language
 
-**After**: "Stop the leak — $97" (danger red)
+**After**: "Stop the leak - $97" (danger red)
 - **Psychology**: Loss frame (stop bleeding) + urgency color (red) + action verb
 - **Effect**: 2x more motivating than gain frame
 
@@ -181,7 +181,7 @@ audit_result_viewed
 
 ---
 
-## Founder Psychology — Anti-Marketing Positioning
+## Founder Psychology - Anti-Marketing Positioning
 
 **What founders DON'T want**:
 - "Join 1000s of happy customers" (impersonal)
@@ -214,7 +214,7 @@ audit_result_viewed
 **Score 6–8 (Caution)**:
 - "One fix away from a 20% lift"
 - "Close, but the details matter"
-- "Your page is solid — here's the edge"
+- "Your page is solid - here's the edge"
 
 **Score 8+ (Strong)**:
 - "Your page is strong. Here's the 10% improvement."

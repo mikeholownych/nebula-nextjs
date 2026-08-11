@@ -14,7 +14,7 @@ registry-side integrity checks (MEAS-001/002/003). Do not imply otherwise.
 Inputs the operator exports (Search Console/Bing/analytics CSV or JSON).
 Workflow: validate segmentation (brand vs non-brand, intent, page type,
 device, country), map rows to query registry ids, store under the run's
-evidence package, report coverage of the query portfolio — never sitewide
+evidence package, report coverage of the query portfolio - never sitewide
 averages alone. Refuse to attribute movement to a change without an
 experiment record (MEAS-003).
 
@@ -24,7 +24,7 @@ experiment record (MEAS-003).
    date-time, prompt + variant, follow-up context, answer, retrieved sources,
    citations, mention/recommendation status, position, factual accuracy,
    entity confusion, omissions, sentiment, run index/series.
-2. Store observations under `.citable/runs/<run>/prompt-results/*.json` —
+2. Store observations under `.citable/runs/<run>/prompt-results/*.json` -
    MEAS detectors read them from there.
 3. Scoring uses the narrative-accuracy rubric. One output is anecdote:
    definitive accuracy_status in the prompt registry requires ≥3 observations

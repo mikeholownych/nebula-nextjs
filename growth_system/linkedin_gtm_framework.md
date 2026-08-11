@@ -1,6 +1,6 @@
-# LinkedIn GTM Framework — Nebula Adaptation
+# LinkedIn GTM Framework - Nebula Adaptation
 
-**Source:** Regina Kuts, CEO, Profigent — "Stop Treating LinkedIn Like a Content Platform"
+**Source:** Regina Kuts, CEO, Profigent - "Stop Treating LinkedIn Like a Content Platform"
 **Original:** https://www.linkedin.com/in/regina-kuts/ (July 7, 2026)
 **Stolen concept:** LinkedIn as customer discovery engine, not content publishing platform.
 **Nebula fit:** Direct. Validates trigger-aware outbound, 98% non-engager stat, and "every post is a test" content philosophy.
@@ -25,7 +25,7 @@ Nebula's existing tools map to this directly:
 
 **Original:** "Who do you think buys from you? And why?"
 
-**Nebula adaptation:** Nebula's ICP is already forensic (spent $10K+ on ads with zero conversions). Don't write about "CRO tips." Write about the **specific pain of burning ad budget with nothing to show for it.** That's not a demographic — it's a buying trigger.
+**Nebula adaptation:** Nebula's ICP is already forensic (spent $10K+ on ads with zero conversions). Don't write about "CRO tips." Write about the **specific pain of burning ad budget with nothing to show for it.** That's not a demographic - it's a buying trigger.
 
 **Action:** Every LinkedIn post should test one dimension of the ICP hypothesis:
 | Test | Post Angle | Success Signal |
@@ -53,7 +53,7 @@ Nebula's existing tools map to this directly:
 **Nebula adaptation:** Every Nebula post should answer a question the ICP is already asking:
 - "Why are my ads getting clicks but no sales?"
 - "Is it my landing page or my offer?"
-- "I burned $3K on an agency and they delivered nothing — how do I fix this myself?"
+- "I burned $3K on an agency and they delivered nothing - how do I fix this myself?"
 - "How do I know if my landing page is the leak?"
 
 **Test for every post:** If the ICP wouldn't type the headline into Google, don't write it.
@@ -67,7 +67,7 @@ Nebula's existing tools map to this directly:
 ```
 Burned $5K on ads with zero conversions?
 I built a tool that shows you exactly which leak is killing your page.
-Free audit → [link] — takes 30 seconds.
+Free audit → [link] - takes 30 seconds.
 ```
 
 Not:
@@ -78,7 +78,7 @@ What do you think? Drop your thoughts below.
 **Framework shift:**
 | Bad CTA | Good CTA |
 |---|---|
-| "What do you think?" | "Run the audit on your own page — you'll see the exact same leaks." |
+| "What do you think?" | "Run the audit on your own page - you'll see the exact same leaks." |
 | "Let me know in the comments" | "Curious if your page has this leak. Free audit: [link]" |
 | "Follow for more" | "I share one of these breakdowns each week. DM me your URL and I'll audit it manually." |
 | "Link in bio" | Specific tool link with a direct action verb |
@@ -87,11 +87,11 @@ What do you think? Drop your thoughts below.
 
 **Original:** "98% of LinkedIn users never engage publicly. Content builds familiarity. Outbound starts conversations."
 
-**Nebula adaptation:** This is Nebula's superpower. The trigger-aware outbound engine IS this step — but the content must prime the pump.
+**Nebula adaptation:** This is Nebula's superpower. The trigger-aware outbound engine IS this step - but the content must prime the pump.
 
 **Two-sided engine:**
-1. **Content → inbound familiarity** — Founders see your posts, recognize the pain, join the wait to convert
-2. **Outbound → direct conversations** — Trigger-aware cold emails + DMs based on buying signals (Reddit posts, LinkedIn comments, ad spend signals)
+1. **Content → inbound familiarity** - Founders see your posts, recognize the pain, join the wait to convert
+2. **Outbound → direct conversations** - Trigger-aware cold emails + DMs based on buying signals (Reddit posts, LinkedIn comments, ad spend signals)
 
 **Nebula already has:** `trigger_lead_engine.py`, `scripts/trigger_lead_engine.py`, `linkedin_post_monitor.py`
 **Gap: No LinkedIn DM sequence for high-value engagers.** The reply templates exist in `linkedin_reply_templates.json` but there's no automated DM outreach for 7+ score engagers.
@@ -100,7 +100,7 @@ What do you think? Drop your thoughts below.
 
 **Original:** "Your positioning shouldn't come from brainstorming. It should come from your market."
 
-**Nebula adaptation:** This is what ICP_MEMO.md does already — forensic analysis of what prospects actually say. Every reply, DM, email response, and objection is data.
+**Nebula adaptation:** This is what ICP_MEMO.md does already - forensic analysis of what prospects actually say. Every reply, DM, email response, and objection is data.
 
 **Systematize with:** Add a "positioning signals" log to the LinkedIn monitor:
 - Objections that keep appearing → update cold email frameworks
@@ -134,7 +134,7 @@ Double down on the angle with highest audit→paid conversion rate. Kill angles 
 
 > "Every post is a test. Every reply is feedback. Every conversation makes your positioning stronger."
 
-## Nebula Adaptation — What's Different
+## Nebula Adaptation - What's Different
 
 | Kuts Framework | Nebula Twist |
 |---|---|
@@ -145,9 +145,9 @@ Double down on the angle with highest audit→paid conversion rate. Kill angles 
 | Profile: One offer | Profile: Free audit → $97 fix → $1,497 retainer (ladder) |
 
 ## Files Referenced
-- `linkedin_post_monitor.py` — engager tracking
-- `linkedin_reply_templates.json` — DM/reply templates
-- `linkedin_80_20_review.md` — prior content framework
-- `cold_email_frameworks.json` — email templates
-- `ICP_MEMO.md` — forensic voice research
-- `trigger_lead_engine.py` — outbound engine
+- `linkedin_post_monitor.py` - engager tracking
+- `linkedin_reply_templates.json` - DM/reply templates
+- `linkedin_80_20_review.md` - prior content framework
+- `cold_email_frameworks.json` - email templates
+- `ICP_MEMO.md` - forensic voice research
+- `trigger_lead_engine.py` - outbound engine

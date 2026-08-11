@@ -136,16 +136,16 @@ export default function BetaTesterPage() {
           </h2>
           <ul style={{ paddingLeft: '20px' }}>
             <li style={{ margin: '10px 0', color: '#cbd5e1' }}>
-              <strong>Free Fix Pack</strong> — hero rewrite, CTA redesign, trust proof placement, FAQ section. Delivered as HTML you can paste directly into your page.
+              <strong>Free Fix Pack</strong> - hero rewrite, CTA redesign, trust proof placement, FAQ section. Delivered as HTML you can paste directly into your page.
             </li>
             <li style={{ margin: '10px 0', color: '#cbd5e1' }}>
-              <strong>Priority support</strong> — direct line to the team building your fixes.
+              <strong>Priority support</strong> - direct line to the team building your fixes.
             </li>
             <li style={{ margin: '10px 0', color: '#cbd5e1' }}>
-              <strong>Lifetime access</strong> — keep everything even after the beta ends.
+              <strong>Lifetime access</strong> - keep everything even after the beta ends.
             </li>
             <li style={{ margin: '10px 0', color: '#cbd5e1' }}>
-              <strong>Early adopter badge</strong> — featured on our site if you want.
+              <strong>Early adopter badge</strong> - featured on our site if you want.
             </li>
           </ul>
         </div>
@@ -163,13 +163,13 @@ export default function BetaTesterPage() {
           </h2>
           <ul style={{ paddingLeft: '20px' }}>
             <li style={{ margin: '10px 0', color: '#cbd5e1' }}>
-              <strong>15-minute feedback call</strong> — review the Fix Pack results together.
+              <strong>15-minute feedback call</strong> - review the Fix Pack results together.
             </li>
             <li style={{ margin: '10px 0', color: '#cbd5e1' }}>
-              <strong>Written case study</strong> — 3-5 paragraphs about your experience and results.
+              <strong>Written case study</strong> - 3-5 paragraphs about your experience and results.
             </li>
             <li style={{ margin: '10px 0', color: '#cbd5e1' }}>
-              <strong>Permission to share</strong> — LinkedIn post, case study page, or testimonial quote. We'll never share without your approval on the final text.
+              <strong>Permission to share</strong> - LinkedIn post, case study page, or testimonial quote. We'll never share without your approval on the final text.
             </li>
             <li style={{ margin: '10px 0', color: '#cbd5e1' }}>
               <strong>That's it.</strong> No NDA. No exclusivity. No ongoing commitment.
@@ -199,7 +199,7 @@ export default function BetaTesterPage() {
               Willing to implement our fixes and track results for 7 days
             </li>
             <li style={{ margin: '10px 0', color: '#cbd5e1' }}>
-              Founder, marketer, or owner — decision-maker on your page
+              Founder, marketer, or owner - decision-maker on your page
             </li>
           </ul>
           <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginTop: '12px' }}>

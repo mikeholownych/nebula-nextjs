@@ -22,7 +22,7 @@ def test_hook_lab_scores_and_humanizes():
 
     assert len(hooks) == 10
     assert hooks[0]["score"] >= hooks[-1]["score"]
-    assert all("—" not in h["hook"] for h in hooks)
+    assert all("-" not in h["hook"] for h in hooks)
 
 
 def test_warm_list_and_outreach_are_draft_first(tmp_path, monkeypatch):

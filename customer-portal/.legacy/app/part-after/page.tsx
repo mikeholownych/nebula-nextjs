@@ -27,7 +27,7 @@ export default function PartAfterPage() {
     <div className="min-h-screen bg-[#050505] text-gray-100 font-sans antialiased">
       {/* Scroll Progress Bar */}
       <div id="scroll-prog" className="fixed top-0 left-0 w-0 h-1 bg-amber-500 z-50" aria-hidden="true" />
-      
+
       {/* Header */}
       <header className="max-w-4xl mx-auto px-4 pt-6 pb-8">
         {/* Skeptic Disarm Block */}
@@ -45,7 +45,7 @@ export default function PartAfterPage() {
             </div>
           </div>
           <p className="text-sm text-gray-400 text-center">
-            If any of that landed — <strong className="text-emerald-400">you're exactly who this is for.</strong> 60 seconds. No pitch. The exact leak, ranked by dollar cost. That's it.
+            If any of that landed - <strong className="text-emerald-400">you're exactly who this is for.</strong> 60 seconds. No pitch. The exact leak, ranked by dollar cost. That's it.
           </p>
         </div>
 
@@ -134,8 +134,8 @@ export default function PartAfterPage() {
             <div className="bg-emerald-950/20 border border-emerald-900/50 rounded-lg p-5">
               <p className="font-bold text-emerald-400 mb-3">After 60 seconds here</p>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li>✅ Know which fix pays back fastest — ranked priority</li>
-                <li>✅ Stop guessing — scored across 5 dimensions</li>
+                <li>✅ Know which fix pays back fastest - ranked priority</li>
+                <li>✅ Stop guessing - scored across 5 dimensions</li>
                 <li>✅ In your inbox before your next ad spend</li>
               </ul>
             </div>
@@ -150,7 +150,7 @@ export default function PartAfterPage() {
             {[
               { num: '1', title: 'Paste your URL', desc: 'Drop your landing page URL + email below. Takes 30 seconds.' },
               { num: '2', title: 'Get your scored audit', desc: '5 dimensions scored. Top leaks ranked. Free fix kit in 60 seconds.' },
-              { num: '3', title: 'Fix it or hand it off', desc: 'Use the free kit yourself — or get the $147 Fix Pack.' }
+              { num: '3', title: 'Fix it or hand it off', desc: 'Use the free kit yourself - or get the $147 Fix Pack.' }
             ].map((step) => (
               <div key={step.num} className="text-center p-4 bg-gray-900/50 rounded-xl border border-gray-800">
                 <div className="w-10 h-10 bg-gray-800 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-3">
@@ -167,7 +167,7 @@ export default function PartAfterPage() {
         <section id="audit-form-card" className="bg-[#0a0a0a] border-2 border-emerald-600 rounded-xl p-6">
           <h2 className="text-xl font-bold mb-2">Run the free audit. See exactly where your page leaks.</h2>
           <p className="text-sm text-gray-500 mb-6">Two required fields. Everything else sharpens the diagnosis.</p>
-          
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="url" className="block text-sm font-medium mb-1.5">
@@ -212,10 +212,10 @@ export default function PartAfterPage() {
                 onChange={(e) => setFormData({...formData, goal: e.target.value})}
                 className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-emerald-500 focus:outline-none"
               >
-                <option value="sales">Get a sale — visitor should pay on this page</option>
-                <option value="leads">Capture a lead — visitor should leave an email or number</option>
-                <option value="bookings">Book a call — visitor should schedule time</option>
-                <option value="signups">Drive a signup — visitor should create an account</option>
+                <option value="sales">Get a sale - visitor should pay on this page</option>
+                <option value="leads">Capture a lead - visitor should leave an email or number</option>
+                <option value="bookings">Book a call - visitor should schedule time</option>
+                <option value="signups">Drive a signup - visitor should create an account</option>
               </select>
             </div>
 
@@ -236,7 +236,7 @@ export default function PartAfterPage() {
 
             <div>
               <label htmlFor="monthly_spend" className="block text-sm font-medium mb-1.5">
-                Monthly ad spend <span className="text-gray-500 font-normal">(optional — sizes the waste estimate)</span>
+                Monthly ad spend <span className="text-gray-500 font-normal">(optional - sizes the waste estimate)</span>
               </label>
               <select
                 id="monthly_spend"
@@ -280,7 +280,7 @@ export default function PartAfterPage() {
           {/* Free Kit */}
           <div className="bg-[#0a0a0a] border-2 border-emerald-600 rounded-xl p-6">
             <span className="inline-block bg-emerald-900/50 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
-              Free — instant access
+              Free - instant access
             </span>
             <h3 className="text-lg font-bold mt-3">🎁 Landing Page Fix Kit</h3>
             <div className="text-3xl font-bold text-emerald-400 my-2">$0</div>

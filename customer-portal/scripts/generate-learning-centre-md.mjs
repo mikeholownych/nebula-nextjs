@@ -59,7 +59,7 @@ function inline(raw) {
     .replace(/&lsquo;/g, "'")
     .replace(/&ldquo;/g, '"')
     .replace(/&rdquo;/g, '"')
-    .replace(/&mdash;/g, '—')
+    .replace(/&mdash;/g, '-')
     .replace(/&ndash;/g, '–')
     .replace(/&nbsp;/g, ' ')
     .replace(/\s+/g, ' ')
@@ -108,7 +108,7 @@ function extractMarkdown(meta, pageSrc) {
     // skip the dynamic FAQ heading; faqItems case appends its own section
     if (tag === 'h2' && /frequently asked questions/i.test(text)) continue
     if (tag === 'h1') {
-      // hero title — use meta.title as the single H1
+      // hero title - use meta.title as the single H1
       continue
     } else if (tag === 'h2') blocks.push(`## ${text}`, '')
     else if (tag === 'h3') blocks.push(`### ${text}`, '')
@@ -134,7 +134,7 @@ function extractMarkdown(meta, pageSrc) {
     '',
     '---',
     '',
-    `*Markdown version of https://nebulacomponents.com/learning-centre/${meta.slug} — HTML: [${meta.title}](https://nebulacomponents.com/learning-centre/${meta.slug})*`
+    `*Markdown version of https://nebulacomponents.com/learning-centre/${meta.slug} - HTML: [${meta.title}](https://nebulacomponents.com/learning-centre/${meta.slug})*`
   )
   return parts.join('\n').trim() + '\n'
 }

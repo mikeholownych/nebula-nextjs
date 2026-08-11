@@ -2,11 +2,11 @@
 
 :root {
   /* Typography - 5-size scale (1.25 ratio) */
-  --text-xs: 0.75rem;     /* 12px — captions, tags */
-  --text-sm: 0.875rem;    /* 14px — secondary, nav */
-  --text-base: 1.0625rem; /* 17px — body prose */
-  --text-lg: 1.5rem;      /* 24px — section headings */
-  --text-xl: clamp(2.5rem, 6vw, 4rem); /* 40-64px — hero display */
+  --text-xs: 0.75rem;     /* 12px - captions, tags */
+  --text-sm: 0.875rem;    /* 14px - secondary, nav */
+  --text-base: 1.0625rem; /* 17px - body prose */
+  --text-lg: 1.5rem;      /* 24px - section headings */
+  --text-xl: clamp(2.5rem, 6vw, 4rem); /* 40-64px - hero display */
 
   --bg: #050505;
   --bg-elevated: #0a0a0a;
@@ -145,7 +145,7 @@ a:hover {
   body { font-size: var(--text-base); }
 }
 
-/* Gradient text — DEPRECATED, DO NOT USE */
+/* Gradient text - DEPRECATED, DO NOT USE */
 /* Removed per impeccable anti-pattern ban */
 
 /* Animations */

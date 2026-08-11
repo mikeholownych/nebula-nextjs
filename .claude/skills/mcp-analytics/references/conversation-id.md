@@ -1,12 +1,12 @@
 # Conversation IDs - Docs
 
-A PostHog `$session_id` is per MCP connection — it rotates when the protocol session does. That's the right granularity for "which TCP/WebSocket connection is this?" but it can split a single user conversation into multiple sessions when the client reconnects.
+A PostHog `$session_id` is per MCP connection - it rotates when the protocol session does. That's the right granularity for "which TCP/WebSocket connection is this?" but it can split a single user conversation into multiple sessions when the client reconnects.
 
 `$mcp_conversation_id` is an opt-in property that lets you stitch those calls together at the conversation level instead.
 
 **Opt-in, with caveats**
 
-Conversation IDs are off by default and rely on the agent cooperating. Read the caveats below before enabling — there's a visible side effect on tool responses, and the value is agent-controlled.
+Conversation IDs are off by default and rely on the agent cooperating. Read the caveats below before enabling - there's a visible side effect on tool responses, and the value is agent-controlled.
 
 ## Enabling
 
@@ -70,7 +70,7 @@ LIMIT 50
 
 **The prompt-back leaks into agent UIs**
 
-The "please echo this `conversation_id`" message is appended as a regular `text` content block — the only channel MCP currently offers for server-to-agent communication. Consumers that surface raw tool-call content to end users will see `[SERVER]: Reuse conversation_id=…` in their UI. If the MCP spec grows a dedicated server-directives channel (e.g. on `_meta`), the SDK will move there.
+The "please echo this `conversation_id`" message is appended as a regular `text` content block - the only channel MCP currently offers for server-to-agent communication. Consumers that surface raw tool-call content to end users will see `[SERVER]: Reuse conversation_id=…` in their UI. If the MCP spec grows a dedicated server-directives channel (e.g. on `_meta`), the SDK will move there.
 
 **Agent-controlled values**
 
@@ -78,11 +78,11 @@ When the agent supplies a `conversation_id`, the SDK accepts any non-empty strin
 
 **It's not a session id**
 
-`$session_id` is what PostHog's session-level joins and identity resolution use. `$mcp_conversation_id` is purely a logical grouping label — handy for joins, useless for everything else.
+`$session_id` is what PostHog's session-level joins and identity resolution use. `$mcp_conversation_id` is purely a logical grouping label - handy for joins, useless for everything else.
 
 ## When to skip this
 
-If your MCP server runs over a long-lived connection that already aligns with what you'd call a "conversation" — for example, a stdio server attached to a single Claude Desktop chat — `$session_id` is already doing the right thing. Leave `enableConversationId` off.
+If your MCP server runs over a long-lived connection that already aligns with what you'd call a "conversation" - for example, a stdio server attached to a single Claude Desktop chat - `$session_id` is already doing the right thing. Leave `enableConversationId` off.
 
 Turn it on when:
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-metrics_puller.py — G6: Pull live open/reply metrics from AgentMail and
+metrics_puller.py - G6: Pull live open/reply metrics from AgentMail and
 feed them into copy_fatigue_detector's A/B registry.
 
 Run on schedule (every 6h) via cron:
@@ -57,7 +57,7 @@ def pull_and_update() -> dict:
 
     rows = _load_lines(AB_REGISTRY)
     if not rows:
-        print("[metrics_puller] ab_registry.jsonl empty — nothing to update")
+        print("[metrics_puller] ab_registry.jsonl empty - nothing to update")
         return {"checked": 0, "updated": 0, "errors": 0}
 
     # Build index: email → list of row indices that need outcome update
@@ -69,7 +69,7 @@ def pull_and_update() -> dict:
                 pending.setdefault(em, []).append(i)
 
     if not pending:
-        print("[metrics_puller] All registry entries already have outcomes — done")
+        print("[metrics_puller] All registry entries already have outcomes - done")
         return {"checked": 0, "updated": 0, "errors": 0}
 
     print(f"[metrics_puller] Checking {len(pending)} emails for reply/open outcomes…")
@@ -135,4 +135,4 @@ def pull_and_update() -> dict:
 
 if __name__ == "__main__":
     result = pull_and_update()
-    print(f"\n[metrics_puller] done — {result}")
+    print(f"\n[metrics_puller] done - {result}")

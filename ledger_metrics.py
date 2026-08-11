@@ -96,7 +96,7 @@ def trigger_based_sends() -> list[dict]:
 
 
 def weak_signal_sends() -> list[dict]:
-    """Cold scraped local-business sends with no real trigger — tracked separately."""
+    """Cold scraped local-business sends with no real trigger - tracked separately."""
     rows = []
     for r in load_jsonl(OUTREACH_EVIDENCE):
         text = json.dumps(r, sort_keys=True).lower()

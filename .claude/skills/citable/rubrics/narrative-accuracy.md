@@ -7,15 +7,15 @@ and claim registries. Used by `/citable test-prompts` scoring and
 
 ## Scoring dimensions
 
-1. **Identity accuracy** — right organization, right products, right people;
+1. **Identity accuracy** - right organization, right products, right people;
    no entity confusion with similarly named parties.
-2. **Category accuracy** — placed in the registry category, not an adjacent one.
-3. **Claim fidelity** — priority claims reproduced within their scope; scope
+2. **Category accuracy** - placed in the registry category, not an adjacent one.
+3. **Claim fidelity** - priority claims reproduced within their scope; scope
    stripping counts as an error even when the words match.
-4. **Omission materiality** — missing limitations or exclusions that change a
+4. **Omission materiality** - missing limitations or exclusions that change a
    buyer's conclusion count as inaccuracies, not just absences.
-5. **Fabrication detection** — asserted facts with no owned or observed source
-   (certifications, customers, integrations, breach events) — classify by
+5. **Fabrication detection** - asserted facts with no owned or observed source
+   (certifications, customers, integrations, breach events) - classify by
    contradiction type: naming, legal identity, category, capability,
    performance, pricing, integration, maturity, customer, founder, security,
    regulatory status, product availability.
@@ -24,7 +24,7 @@ and claim registries. Used by `/citable test-prompts` scoring and
 
 `strong` (identity + category + claims accurate, no material omissions),
 `partial` (accurate identity, minor claim drift), `weak` (category error or
-scope-stripped claims), `not_established` (single observation only — needs
+scope-stripped claims), `not_established` (single observation only - needs
 repeated sampling before any posture is recorded; MEAS-002).
 
 ## Evidence required
@@ -42,5 +42,5 @@ account state), the registry rows compared, and per-error classification.
 ## Ambiguity → human review
 
 - Contradiction involves legal or security facts (always).
-- The "error" may reflect a true fact the registries have not caught up with —
+- The "error" may reflect a true fact the registries have not caught up with -
   verify internal truth before external correction (runbook step 4).

@@ -1,4 +1,4 @@
-# PAYMENT SETUP — BOTH STRIPE PRODUCTS
+# PAYMENT SETUP - BOTH STRIPE PRODUCTS
 
 ## CRITICAL: You need to create TWO Stripe products
 
@@ -66,7 +66,7 @@ echo "https://checkout.stripe.com/pay/cs_YOUR_97_LINK_HERE" > ~/.nebula/stripe_9
 - ✅ Easier A/B testing (both links side-by-side)
 - ✅ Better for automatio analytics (all in one place)
 
-**No Gumroad needed** — Use Stripe for both $7 and $147 offers.
+**No Gumroad needed** - Use Stripe for both $7 and $147 offers.
 
 ---
 
@@ -83,7 +83,7 @@ echo "https://checkout.stripe.com/pay/cs_YOUR_97_LINK_HERE" > ~/.nebula/stripe_9
 | 17:50 | Run validation script | 2 min |
 | 18:00 | READY FOR WAVE 2 | ✅ |
 
-**Total time: 26 minutes**  
+**Total time: 26 minutes**
 **Time available: 3 hours 49 minutes**
 
 ---

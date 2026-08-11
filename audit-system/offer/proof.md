@@ -33,13 +33,13 @@ Delta:          [before → after, as numbers]
 ## Example Proof Entry
 
 ```markdown
-## readyform.app — CTA Fix — July 2026
+## readyform.app - CTA Fix - July 2026
 
 **Before:**
 - Date: 2026-07-15
 - CTA text: "Get Started"
 - Finding: cta / 4.0 impact
-- Evidence: Button text "Get Started" — no outcome stated
+- Evidence: Button text "Get Started" - no outcome stated
 - Score: 43 / D
 
 **Fix delivered:** 2026-07-15
@@ -49,7 +49,7 @@ Delta:          [before → after, as numbers]
 
 **After (30-day re-audit):** 2026-08-14
 - CTA text: "Run my free audit"
-- Evidence: Button text confirmed — action + outcome present
+- Evidence: Button text confirmed - action + outcome present
 - Score: 51 / C
 - Delta: +8 score points
 
@@ -73,7 +73,7 @@ A finding becomes a case study when:
 
 ## What to Do With It
 
-1. **Tweet the before/after** — "Changed 3 words on a landing page. Score went from 43 to 51."
-2. **LinkedIn post** — Results story format (see content-factory/linkedin.md)
+1. **Tweet the before/after** - "Changed 3 words on a landing page. Score went from 43 to 51."
+2. **LinkedIn post** - Results story format (see content-factory/linkedin.md)
 3. **Add to nebulacomponents.shop/teardowns** as a real case study
 4. **Use in audit delivery emails** as social proof for the Sprint offer

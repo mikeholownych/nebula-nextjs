@@ -31,7 +31,7 @@ def main():
     now = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
     analytics = get_search_analytics()
     rows = analytics.get("rows", [])
-    
+
     striking = []
     for r in rows:
         pos = r.get("position", 0.0)
@@ -44,26 +44,26 @@ def main():
                 "clicks": r.get("clicks", 0),
                 "ctr": round(r.get("ctr", 0.0) * 100, 2)
             })
-            
+
     striking.sort(key=lambda x: x["position"])
-    
+
     md = []
-    md.append(f"# Striking-Distance Keyword Action Plan — {PROPERTY}")
+    md.append(f"# Striking-Distance Keyword Action Plan - {PROPERTY}")
     md.append(f"**Generated**: {now} | **Target Range**: Positions #4 to #20\n")
-    
+
     if not striking:
         md.append("No queries currently in striking distance.")
     else:
         md.append(f"Found **{len(striking)}** high-potential queries ready for page #1 optimization:\n")
         md.append("| Target Keyword | Current Position | Impressions | Ranking Page | Proposed Content Action |")
         md.append("|:---|:---|:---|:---|:---|")
-        
+
         for item in striking:
             q = item["query"]
             pos = item["position"]
             imp = item["impressions"]
             page_short = item["page"].replace("https://nebulacomponents.com", "") or "/"
-            
+
             # Action logic
             if "b2b saas" in q.lower():
                 action = "Add dedicated section on B2B SaaS buyer friction & ROI proof signals"
@@ -73,14 +73,14 @@ def main():
                 action = "Insert direct FAQ entity schema for 'why landing pages fail to convert'"
             else:
                 action = f"Add dedicated H2 subheading targeting '{q}' and add 2 internal links"
-                
+
             md.append(f"| **{q}** | `{pos}` | {imp} | `{page_short}` | {action} |")
-            
+
     report_content = "\n".join(md) + "\n"
     out_file = "/home/mike/nebula/striking_distance_action_plan.md"
     with open(out_file, "w") as f:
         f.write(report_content)
-        
+
     print(report_content)
 
 if __name__ == "__main__":

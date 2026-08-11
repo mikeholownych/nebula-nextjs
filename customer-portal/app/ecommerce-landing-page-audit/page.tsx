@@ -23,7 +23,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Ecommerce Landing Page Audit: H1 Clarity, Price Visibility & CTA Focus for Product Pages',
   description:
-    'Diagnostic guide for DTC ecommerce product pages receiving paid traffic — headline framing, price and shipping visibility, social proof placement, CTA hierarchy, mobile image usability, and load speed.',
+    'Diagnostic guide for DTC ecommerce product pages receiving paid traffic - headline framing, price and shipping visibility, social proof placement, CTA hierarchy, mobile image usability, and load speed.',
   author: { '@type': 'Organization', name: 'Nebula Components' },
   publisher: { '@type': 'Organization', name: 'Nebula Components' },
   mainEntityOfPage: 'https://nebulacomponents.com/ecommerce-landing-page-audit',
@@ -54,7 +54,7 @@ const faqItems = [
   },
   {
     q: 'How many reviews do I need above the fold to improve conversion?',
-    a: "One prominent aggregate (e.g., '4.8 stars · 2,340 reviews') placed directly below the product headline outperforms zero proof. The count matters more than the prose — visitors use the number as a proxy for adoption risk.",
+    a: "One prominent aggregate (e.g., '4.8 stars · 2,340 reviews') placed directly below the product headline outperforms zero proof. The count matters more than the prose - visitors use the number as a proxy for adoption risk.",
   },
   {
     q: 'Does product image quality affect conversion?',
@@ -62,7 +62,7 @@ const faqItems = [
   },
   {
     q: 'What is the biggest CTA mistake on product pages?',
-    a: "Running 3-4 actions at equal visual weight — Add to Cart, Add to Wishlist, Compare, Share — so the visitor can't identify the primary action. One primary CTA, high contrast, full-width on mobile. Everything else secondary or removed.",
+    a: "Running 3-4 actions at equal visual weight - Add to Cart, Add to Wishlist, Compare, Share - so the visitor can't identify the primary action. One primary CTA, high contrast, full-width on mobile. Everything else secondary or removed.",
   },
 ]
 
@@ -81,42 +81,42 @@ const ECOMMERCE_FAILURES = [
     signal: 'Headline (H1)',
     label: 'Product name as H1 instead of outcome or benefit',
     detail:
-      "Most product pages set the H1 to the product SKU or name — 'Blue Linen Shirt' — which tells a visitor what the product is called, not why it solves their problem. Cold paid traffic arriving from an ad that promised a specific benefit expects the page headline to confirm that benefit immediately. A product-name H1 is a mismatch between the ad promise and the landing page confirmation.",
-    fix: "Reframe the H1 around the buyer's outcome. 'The linen shirt that breathes — even in August' communicates the benefit and extends the ad's promise. The product name can appear as a subtitle or in the breadcrumb. Test the new H1 against the exact ad copy that drove the click.",
+      "Most product pages set the H1 to the product SKU or name - 'Blue Linen Shirt' - which tells a visitor what the product is called, not why it solves their problem. Cold paid traffic arriving from an ad that promised a specific benefit expects the page headline to confirm that benefit immediately. A product-name H1 is a mismatch between the ad promise and the landing page confirmation.",
+    fix: "Reframe the H1 around the buyer's outcome. 'The linen shirt that breathes - even in August' communicates the benefit and extends the ad's promise. The product name can appear as a subtitle or in the breadcrumb. Test the new H1 against the exact ad copy that drove the click.",
   },
   {
     signal: 'Social proof',
     label: 'Star ratings hidden below fold or absent',
     detail:
-      'Cold ad traffic has no prior relationship with the brand. The aggregate review score — stars and count — is the fastest available signal that other buyers have evaluated the purchase risk already. Pages that place reviews below the product description, or surface them only after clicking a tab, are withholding the single most-read trust signal at the moment it is most needed.',
+      'Cold ad traffic has no prior relationship with the brand. The aggregate review score - stars and count - is the fastest available signal that other buyers have evaluated the purchase risk already. Pages that place reviews below the product description, or surface them only after clicking a tab, are withholding the single most-read trust signal at the moment it is most needed.',
     fix: "Place the aggregate rating (e.g., '4.8 stars · 2,340 reviews') directly below the product H1, before the price or variant selector. The count is more important than the text. Link it to the reviews section so the number is verifiable.",
   },
   {
     signal: 'Above the fold',
-    label: 'Price not visible before scroll — shipping buried at checkout',
+    label: 'Price not visible before scroll - shipping buried at checkout',
     detail:
-      "Two pricing surprises kill ecommerce conversions: the price appearing only after variant selection, and the shipping cost appearing only at checkout. Both are friction patterns that require the visitor to commit additional steps before receiving information they need to make a purchase decision. Paid traffic is already costly — the visitor's first qualification question is almost always 'how much is this?'",
-    fix: 'Display the price — including a shipping estimate or free shipping threshold — above the fold, before the Add to Cart button. If shipping varies, show the range or the free shipping threshold. Do not defer this information to checkout.',
+      "Two pricing surprises kill ecommerce conversions: the price appearing only after variant selection, and the shipping cost appearing only at checkout. Both are friction patterns that require the visitor to commit additional steps before receiving information they need to make a purchase decision. Paid traffic is already costly - the visitor's first qualification question is almost always 'how much is this?'",
+    fix: 'Display the price - including a shipping estimate or free shipping threshold - above the fold, before the Add to Cart button. If shipping varies, show the range or the free shipping threshold. Do not defer this information to checkout.',
   },
   {
     signal: 'CTA',
     label: "'Add to Cart' competing with 'Save to Wishlist' and 'Compare' at equal visual weight",
     detail:
-      "Product pages frequently present 3-4 actions — Add to Cart, Save to Wishlist, Compare, Share — at identical size, color, and position. A visitor who cannot immediately identify the primary action is not deciding to buy — they are deciding which button to interpret. Decision paralysis on a CTA is a design failure, not a visitor failure.",
-    fix: 'One primary CTA, high contrast, full-width on mobile. Wishlist, Compare, and Share become icon buttons or links — smaller, muted, never competing visually with the buy action. The hierarchy of visual weight should match the hierarchy of business intent.',
+      "Product pages frequently present 3-4 actions - Add to Cart, Save to Wishlist, Compare, Share - at identical size, color, and position. A visitor who cannot immediately identify the primary action is not deciding to buy - they are deciding which button to interpret. Decision paralysis on a CTA is a design failure, not a visitor failure.",
+    fix: 'One primary CTA, high contrast, full-width on mobile. Wishlist, Compare, and Share become icon buttons or links - smaller, muted, never competing visually with the buy action. The hierarchy of visual weight should match the hierarchy of business intent.',
   },
   {
     signal: 'Mobile',
-    label: 'Image gallery requiring pinch-zoom — variant selectors under 44px',
+    label: 'Image gallery requiring pinch-zoom - variant selectors under 44px',
     detail:
-      'On mobile, a product gallery that requires pinch-to-zoom to see detail signals that the page was not designed for the device the visitor is using. Simultaneously, variant selector buttons — size, color, material — on most Shopify themes are rendered at 32–38px touch targets, below the 44px minimum required for reliable tap interaction. Both failures compound on the same page.',
-    fix: 'Implement swipeable gallery with at least 3 angles natively navigable by swipe — no zoom required to see product detail. Render variant selectors at minimum 44×44px with visible selected state. Test on a 375px viewport before shipping.',
+      'On mobile, a product gallery that requires pinch-to-zoom to see detail signals that the page was not designed for the device the visitor is using. Simultaneously, variant selector buttons - size, color, material - on most Shopify themes are rendered at 32–38px touch targets, below the 44px minimum required for reliable tap interaction. Both failures compound on the same page.',
+    fix: 'Implement swipeable gallery with at least 3 angles natively navigable by swipe - no zoom required to see product detail. Render variant selectors at minimum 44×44px with visible selected state. Test on a 375px viewport before shipping.',
   },
   {
     signal: 'Load speed',
     label: 'Product pages with 8-12 JS bundles delay LCP past 4s on mobile',
     detail:
-      "Shopify's default themes load 8–12 JavaScript bundles on product pages — reviews widgets, chat plugins, upsell apps, loyalty programs — each blocking or competing for render bandwidth. On a median 4G connection, LCP for these pages exceeds 4 seconds. Google's threshold for good LCP is 2.5s. Pages above 4s lose a measurable share of mobile visitors before the page is usable.",
+      "Shopify's default themes load 8–12 JavaScript bundles on product pages - reviews widgets, chat plugins, upsell apps, loyalty programs - each blocking or competing for render bandwidth. On a median 4G connection, LCP for these pages exceeds 4 seconds. Google's threshold for good LCP is 2.5s. Pages above 4s lose a measurable share of mobile visitors before the page is usable.",
     fix: 'Audit active Shopify apps and remove any whose JS loads on the product page but provides no above-fold value. Defer non-critical scripts. Target LCP under 2.5s on simulated 4G in Chrome DevTools. Each app removed from the bundle reduces the LCP window.',
   },
 ]
@@ -183,7 +183,7 @@ export default function EcommerceAuditPage() {
               What the audit checks on an ecommerce product page
             </h2>
             <p className="text-sm text-fg-muted leading-6 mb-6 max-w-2xl">
-              Nebula checks the same 9 signals on every URL. For ecommerce pages, the signals that fail most often are headline framing, social proof placement, and CTA hierarchy. The audit returns pass/fail with the raw value from your page — H1 text, CTA label, review markup presence — so every finding is verifiable.
+              Nebula checks the same 9 signals on every URL. For ecommerce pages, the signals that fail most often are headline framing, social proof placement, and CTA hierarchy. The audit returns pass/fail with the raw value from your page - H1 text, CTA label, review markup presence - so every finding is verifiable.
             </p>
             <div className="grid gap-3 sm:grid-cols-3">
               {[
@@ -211,7 +211,7 @@ export default function EcommerceAuditPage() {
           <section className="mb-14 rounded-2xl border border-border bg-bg-muted/30 p-8 text-center">
             <h2 className="text-2xl font-bold text-fg mb-3">Audit your product landing page</h2>
             <p className="text-sm text-fg-muted max-w-xl mx-auto mb-6">
-              Paste your product URL. Nebula checks H1 framing, price visibility, social proof placement, CTA hierarchy, and load speed against the actual page HTML — not a template. Free, no signup, under 2 minutes.
+              Paste your product URL. Nebula checks H1 framing, price visibility, social proof placement, CTA hierarchy, and load speed against the actual page HTML - not a template. Free, no signup, under 2 minutes.
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"

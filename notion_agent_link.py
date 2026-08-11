@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-notion_agent_link.py — Webhook endpoint for Notion Custom Agent integration.
+notion_agent_link.py - Webhook endpoint for Notion Custom Agent integration.
 Allows a Notion Agent to trigger a landing page audit by posting a URL.
 
 Usage (called from Notion's HTTP tool):
@@ -30,12 +30,12 @@ def queue_audit(url: str, source: str = "notion", notion_db_id: str = "") -> dic
     AUDIT_QUEUE.parent.mkdir(parents=True, exist_ok=True)
     with open(AUDIT_QUEUE, "a") as f:
         f.write(json.dumps(entry) + "\n")
-    
+
     # Also record in leads DB
     leads = {}
     if LEADS_DB.exists():
         leads = json.loads(LEADS_DB.read_text())
-    
+
     email = f"notion-{hash(url)}@import.nebula"
     if email not in leads:
         leads[email] = {
@@ -47,7 +47,7 @@ def queue_audit(url: str, source: str = "notion", notion_db_id: str = "") -> dic
             "created_at": entry["created_at"],
         }
         LEADS_DB.write_text(json.dumps(leads, indent=2))
-    
+
     return {
         "status": "queued",
         "audit_id": f"audit-{hash(url)}",
@@ -59,7 +59,7 @@ def hook_handler(path: str, body: dict) -> dict:
     url = body.get("url", "")
     if not url or not url.startswith(("http://", "https://")):
         return {"status": "error", "message": "Valid URL required"}
-    
+
     result = queue_audit(
         url=url,
         source="notion",

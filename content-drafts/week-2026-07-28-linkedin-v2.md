@@ -1,10 +1,10 @@
-# LinkedIn Posts — Week of July 28, 2026 (v2)
+# LinkedIn Posts - Week of July 28, 2026 (v2)
 
 Rewritten with edge. Not templates. Posts that make you stop scrolling.
 
 ---
 
-## MONDAY — The Most Expensive Typo
+## MONDAY - The Most Expensive Typo
 
 I found a wedding business whose Google result says "in a Canada."
 
@@ -40,21 +40,21 @@ Most founders don't know their Google result has a typo.
 
 They're too busy blaming the algorithm.
 
-nebulacomponents.shop/audit — see what your Google result actually says.
+nebulacomponents.shop/audit - see what your Google result actually says.
 
-—
+-
 
 COMMENTS (pick one):
 
-1. the "in a Canada" detail is the kind of thing you'd never notice unless you actually looked at the SERP — most founders assume their result is fine
-2. bc the click already distrusts the page before it loads — that's the real cost of a typo nobody catches
+1. the "in a Canada" detail is the kind of thing you'd never notice unless you actually looked at the SERP - most founders assume their result is fine
+2. bc the click already distrusts the page before it loads - that's the real cost of a typo nobody catches
 3. I just checked my own Google result and found something similar... this post made me audit my own site
 4. the "ads aren't failing, the page is failing the ads" framing is the most clear way I've seen this said
 5. ngl the 5-minute fix / months of damage ratio is what makes this hurt
 
 ---
 
-## TUESDAY — Your H1 Tag Is Lying to Google
+## TUESDAY - Your H1 Tag Is Lying to Google
 
 I audited a site today.
 
@@ -62,7 +62,7 @@ Found 16 H1 tags.
 
 Google asks for exactly 1.
 
-The other 15 were "Our Values" — Joy, Inclusivity, Consciousness, Sustainability, Simplicity, Evolution.
+The other 15 were "Our Values" - Joy, Inclusivity, Consciousness, Sustainability, Simplicity, Evolution.
 
 Each one wrapped in its own H1 tag.
 
@@ -78,7 +78,7 @@ The page ranks for neither.
 
 Here's what makes this worse:
 
-The real H1 — "Your pop-up wedding bestie with benefits!" — is buried below the fold.
+The real H1 - "Your pop-up wedding bestie with benefits!" - is buried below the fold.
 
 Google sees 16 competing signals and picks none of them.
 
@@ -90,21 +90,21 @@ This is the kind of thing a free audit catches in 60 seconds.
 
 Most founders have no idea their CMS template is sabotaging their SEO.
 
-nebulacomponents.shop/audit — find out how many H1 tags Google sees on your page.
+nebulacomponents.shop/audit - find out how many H1 tags Google sees on your page.
 
-—
+-
 
 COMMENTS (pick one):
 
-1. the values-as-H1 thing is a CMS template issue — I've seen it on Wix, Squarespace, and Shopify stores
-2. bc the person who built the page didn't know H1 meant "this is the ONE thing this page is about" — and neither did the founder
+1. the values-as-H1 thing is a CMS template issue - I've seen it on Wix, Squarespace, and Shopify stores
+2. bc the person who built the page didn't know H1 meant "this is the ONE thing this page is about" - and neither did the founder
 3. wild how a 15-minute fix can unlock ranking potential that's been blocked for months
-4. this is why I audit before I optimize — you can't A/B test your way out of a broken H1 structure
-5. "Google sees 16 competing signals and picks none of them" — that's the entire SEO problem in one line
+4. this is why I audit before I optimize - you can't A/B test your way out of a broken H1 structure
+5. "Google sees 16 competing signals and picks none of them" - that's the entire SEO problem in one line
 
 ---
 
-## WEDNESDAY — The Green Button Nobody Could See
+## WEDNESDAY - The Green Button Nobody Could See
 
 I found a page today where the CTA button was green on a green background.
 
@@ -148,29 +148,29 @@ Fix the page first.
 
 Then test.
 
-If your CTA is below the fold, invisible, or vague — no amount of testing saves it.
+If your CTA is below the fold, invisible, or vague - no amount of testing saves it.
 
-nebulacomponents.shop/audit — find the leaks before you spend another dollar on tests.
+nebulacomponents.shop/audit - find the leaks before you spend another dollar on tests.
 
-—
+-
 
 COMMENTS (pick one):
 
-1. the "testing period was the product" line is the most dangerous thing I've read this week — and it's true
-2. bc agencies get paid to run tests, not to fix the page — the incentive structure is broken
+1. the "testing period was the product" line is the most dangerous thing I've read this week - and it's true
+2. bc agencies get paid to run tests, not to fix the page - the incentive structure is broken
 3. 90 days of testing a button nobody could see... that's not optimization, that's a billing cycle
-4. the $22k number is what makes this hurt — that's not a small mistake, that's a pattern
-5. I've been on the other side of this — the founder who trusted the agency's "inconclusive" report for 6 months
+4. the $22k number is what makes this hurt - that's not a small mistake, that's a pattern
+5. I've been on the other side of this - the founder who trusted the agency's "inconclusive" report for 6 months
 
 ---
 
-## THURSDAY — Your Pricing Is Invisible
+## THURSDAY - Your Pricing Is Invisible
 
 I audited a wedding business today.
 
 Strong social proof. 750+ couples. 183 Google reviews. 4.9 stars.
 
-CBC, CTV, Toronto Life, Financial Post, ELLE, Vice — all featured.
+CBC, CTV, Toronto Life, Financial Post, ELLE, Vice - all featured.
 
 The page looks incredible.
 
@@ -198,7 +198,7 @@ But the visitor doesn't know the price yet.
 
 Why would they lock in a date for something they can't afford?
 
-The fix: move pricing above the fold. Or list the packages as Google Business Profile products — free, 15 minutes, shows pricing in the search result itself.
+The fix: move pricing above the fold. Or list the packages as Google Business Profile products - free, 15 minutes, shows pricing in the search result itself.
 
 Most founders think their page looks great.
 
@@ -206,21 +206,21 @@ It does.
 
 But looking great and converting are different things.
 
-nebulacomponents.shop/audit — see if your pricing is invisible.
+nebulacomponents.shop/audit - see if your pricing is invisible.
 
-—
+-
 
 COMMENTS (pick one):
 
 1. the "4 scrolls before pricing" breakdown is the kind of specific observation that makes you rethink your own page
-2. bc "looks great" and "converts" are different things — and most founders confuse them
-3. the GBP products angle is the real unlock — pricing in the SERP before they even visit your site
-4. I've seen this on so many sites — beautiful design, invisible pricing, zero conversions
-5. the "lock in my date" CTA without pricing context is the exact friction point — you're asking for commitment before trust
+2. bc "looks great" and "converts" are different things - and most founders confuse them
+3. the GBP products angle is the real unlock - pricing in the SERP before they even visit your site
+4. I've seen this on so many sites - beautiful design, invisible pricing, zero conversions
+5. the "lock in my date" CTA without pricing context is the exact friction point - you're asking for commitment before trust
 
 ---
 
-## FRIDAY — What Cloudflare Thinks of Your Site
+## FRIDAY - What Cloudflare Thinks of Your Site
 
 I scored 100/100 on Cloudflare's agent-readiness checker.
 
@@ -268,21 +268,21 @@ The page works for people.
 
 The infrastructure works for machines.
 
-nebulacomponents.shop/audit — see if your site speaks both languages.
+nebulacomponents.shop/audit - see if your site speaks both languages.
 
-—
+-
 
 COMMENTS (pick one):
 
-1. the "agent moves to the next result" framing is the future of local SEO — most businesses aren't ready for this
-2. bc passing discoverability checks is table stakes — 7/7 on API, Auth, MCP & Skill Discovery is the one that matters
+1. the "agent moves to the next result" framing is the future of local SEO - most businesses aren't ready for this
+2. bc passing discoverability checks is table stakes - 7/7 on API, Auth, MCP & Skill Discovery is the one that matters
 3. the gap between "has a robots.txt" and "agents can transact on it" is still enormous for most sites
-4. this is the first time I've seen agent-readiness framed as a local SEO issue — that's the real unlock
-5. ngl I scored my own site and it was embarrassing — this post made me actually check
+4. this is the first time I've seen agent-readiness framed as a local SEO issue - that's the real unlock
+5. ngl I scored my own site and it was embarrassing - this post made me actually check
 
 ---
 
-## SATURDAY — I Built the Machine. Nobody Showed Up.
+## SATURDAY - I Built the Machine. Nobody Showed Up.
 
 I built an audit engine.
 
@@ -324,21 +324,21 @@ The gap between "I built something" and "someone paid for it" is one conversatio
 
 I'm having that conversation this week.
 
-nebulacomponents.shop/audit — if your ads aren't converting, the page is the problem.
+nebulacomponents.shop/audit - if your ads aren't converting, the page is the problem.
 
-—
+-
 
 COMMENTS (pick one):
 
-1. ngl the "$0 revenue" honesty is what makes this post work — most people would never admit it
+1. ngl the "$0 revenue" honesty is what makes this post work - most people would never admit it
 2. bc building the infrastructure before the customer is the most expensive mistake in SaaS
 3. the "I was the costume" line is the kind of self-awareness that makes people trust you
-4. this is the post I wish I'd read 6 months ago — I did the exact same thing
-5. "the gap between I built something and someone paid for it is one conversation" — that's the entire startup problem
+4. this is the post I wish I'd read 6 months ago - I did the exact same thing
+5. "the gap between I built something and someone paid for it is one conversation" - that's the entire startup problem
 
 ---
 
-## SUNDAY — The Lie Your Agency Told You
+## SUNDAY - The Lie Your Agency Told You
 
 Your agency says your ads are failing.
 
@@ -362,7 +362,7 @@ Your social proof is below the fold.
 
 Your form asks for email before the value.
 
-You're not testing — you're paying for proof your page is broken.
+You're not testing - you're paying for proof your page is broken.
 
 Here's the part nobody says out loud:
 
@@ -386,14 +386,14 @@ $97 Fix Pack. 7 days. Pay after you see the draft.
 
 Before you blame the algorithm again.
 
-nebulacomponents.shop/audit — see what's actually broken.
+nebulacomponents.shop/audit - see what's actually broken.
 
-—
+-
 
 COMMENTS (pick one):
 
-1. "Blame the algo keeps agencies in business" is the line that makes this post dangerous — in the best way
-2. bc the platform incentives are aligned against you — they want you to spend more, not convert more
+1. "Blame the algo keeps agencies in business" is the line that makes this post dangerous - in the best way
+2. bc the platform incentives are aligned against you - they want you to spend more, not convert more
 3. this is the take everyone disagrees with until they audit their own page and see the leaks
 4. the "paying for proof your page is broken" framing is the sharpest way I've seen this said
 5. I've been blaming the algorithm for 6 months... this post just ended that

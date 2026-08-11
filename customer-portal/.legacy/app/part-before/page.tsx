@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Free Landing Page Audit — Score Your Site in 60 Seconds | Nebula',
-  description: 'Paste your URL. Get a scored landing page audit in 60 seconds — clarity, CTA friction, trust gap, offer specificity. Free. No sales call. Fix leaks that kill conversions.',
+  title: 'Free Landing Page Audit - Score Your Site in 60 Seconds | Nebula',
+  description: 'Paste your URL. Get a scored landing page audit in 60 seconds - clarity, CTA friction, trust gap, offer specificity. Free. No sales call. Fix leaks that kill conversions.',
   openGraph: {
-    title: 'Free Landing Page Audit — Find Your Conversion Leaks | Nebula',
-    description: 'Paste your URL. Get a scored landing page audit in 60 seconds — clarity, CTA, trust gap, offer specificity. Free. $147 Fix Pack turns it into implementation-ready copy.',
+    title: 'Free Landing Page Audit - Find Your Conversion Leaks | Nebula',
+    description: 'Paste your URL. Get a scored landing page audit in 60 seconds - clarity, CTA, trust gap, offer specificity. Free. $147 Fix Pack turns it into implementation-ready copy.',
     url: 'https://nebulacomponents.shop/',
     type: 'website',
     siteName: 'Nebula Components',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free Landing Page Audit — Find Your Conversion Leaks | Nebula',
+    title: 'Free Landing Page Audit - Find Your Conversion Leaks | Nebula',
     description: 'Paste your URL. Scored teardown in 60 seconds. Clarity, CTA, trust, offer. Free. $147 Fix Pack for implementation.',
     images: ['https://nebulacomponents.shop/og-card.png'],
   },
@@ -131,7 +131,7 @@ export default function PartBeforePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFaq) }}
       />
-      
+
       <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">
         <div className="max-w-2xl mx-auto p-8 text-center">
           <h1 className="text-4xl font-bold mb-4">
@@ -142,7 +142,7 @@ export default function PartBeforePage() {
           </p>
           <div className="bg-[#111] border border-gray-800 rounded-lg p-6">
             <p className="text-gray-400 mb-4">
-              Note: The source HTML file (part_before.html) contains only metadata and structured data — no visible body content was present to convert.
+              Note: The source HTML file (part_before.html) contains only metadata and structured data - no visible body content was present to convert.
             </p>
             <p className="text-sm text-gray-500">
               Source: public/part_before.html (5965 bytes)

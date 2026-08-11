@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'AI Ops Retainer — Keep Your Conversion Savings Running | Nebula',
+  title: 'AI Ops Retainer - Keep Your Conversion Savings Running | Nebula',
   description: '$1,497/month AI Ops Retainer. We monitor your page, iterate on leaks, and govern AI workflows so the savings we proved in the audit keep growing. No long-term contract.',
   openGraph: {
-    title: 'AI Ops Retainer — Keep Conversion Savings Running',
+    title: 'AI Ops Retainer - Keep Conversion Savings Running',
     description: 'We proved the leak. Now keep the savings. $1,497/mo for monitoring, iteration, and governance. 3-month pilot.',
     url: 'https://nebulacomponents.shop/ai-ops-retainer',
     type: 'website',
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Ops Retainer — $1,497/mo',
+    title: 'AI Ops Retainer - $1,497/mo',
     description: 'The proof is in the audit. We keep it real month over month.',
   },
 }
@@ -32,13 +32,13 @@ export default function AIOpsRetainerPage() {
         {/* Hero Section */}
         <section className="bg-[#0a0a0a] border-2 border-[#10b981] rounded-xl p-6 mb-4">
           <span className="inline-block bg-[#d1fae5] text-[#065f46] text-[11px] font-bold px-[10px] py-[3px] rounded-full uppercase tracking-wider">
-            New — AI Ops Retainer
+            New - AI Ops Retainer
           </span>
           <h1 className="text-[28px] font-extrabold tracking-tight leading-tight mt-3">
             Keep the savings.<br />Don&apos;t redo discovery next year.
           </h1>
           <p className="text-[15px] text-[#666] mt-3 mb-5">
-            Your audit proved exactly how much is leaking. That number stays real only if someone watches the page — and the AI workflows — month after month. That&apos;s this.
+            Your audit proved exactly how much is leaking. That number stays real only if someone watches the page - and the AI workflows - month after month. That&apos;s this.
           </p>
 
           {/* Pricing Toggle */}
@@ -121,7 +121,7 @@ export default function AIOpsRetainerPage() {
         <section className="bg-[#0a0a0a] border border-[#1a1a1a] rounded-xl p-6 mb-4">
           <h2 className="text-xl font-bold mb-3">The 5X Rule</h2>
           <p className="text-sm text-[#999]">
-            Your retainer should cost roughly <strong className="text-white">20% of the measurable monthly value we proved exists</strong>. If the audit showed $7,500+/month in conversion leakage, this retainer is not a cost — it&apos;s a discount. You keep $6,000, we keep $1,497, and the savings keep growing.
+            Your retainer should cost roughly <strong className="text-white">20% of the measurable monthly value we proved exists</strong>. If the audit showed $7,500+/month in conversion leakage, this retainer is not a cost - it&apos;s a discount. You keep $6,000, we keep $1,497, and the savings keep growing.
           </p>
           <div className="flex gap-2 flex-wrap mt-3">
             <span className="bg-[#1a1a1a] rounded-full px-3 py-1 text-xs font-semibold text-[#666]">Retainer ≈ 20% of proven leak</span>
@@ -136,7 +136,7 @@ export default function AIOpsRetainerPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
             <div className="bg-[#111] rounded-lg p-[14px]">
               <p className="font-bold text-sm">📊 Monthly audit refresh</p>
-              <p className="text-xs text-[#666] mt-1">We re-score your page monthly. Leaks drift — new content, new campaigns. We catch what changes.</p>
+              <p className="text-xs text-[#666] mt-1">We re-score your page monthly. Leaks drift - new content, new campaigns. We catch what changes.</p>
             </div>
             <div className="bg-[#111] rounded-lg p-[14px]">
               <p className="font-bold text-sm">🔧 Iterative fixes</p>
@@ -179,10 +179,10 @@ export default function AIOpsRetainerPage() {
             <span className="bg-[#0a1a0f] border border-[#bbf7d0] rounded-md px-3 py-1 text-xs font-semibold text-[#10b981]">✓ DORA audit rights</span>
           </div>
           <p className="text-xs text-[#666] mt-4">
-            We support Claude, OpenAI, Gemini, and Mistral — you choose the model that fits your residency and compliance rules. Immutable audit logs trace every inference call. White-label delivery available for agency partners.
+            We support Claude, OpenAI, Gemini, and Mistral - you choose the model that fits your residency and compliance rules. Immutable audit logs trace every inference call. White-label delivery available for agency partners.
           </p>
           <p className="text-xs text-[#666] mt-2">
-            Not certified against every standard — but architected for auditability from day one.{' '}
+            Not certified against every standard - but architected for auditability from day one.{' '}
             <a href="/agency-partner" className="text-[#2563eb] hover:underline">Agency partners get dedicated compliance documentation.</a>
           </p>
         </section>
@@ -210,7 +210,7 @@ export default function AIOpsRetainerPage() {
         <section className="bg-[#0a0a0a] border border-[#1a1a1a] rounded-xl p-6 text-center">
           <h2 className="text-xl font-bold mb-3">You know the number. Protect it.</h2>
           <p className="text-sm text-[#666] mb-4">
-            Start month to month — or save $1,788 with annual.
+            Start month to month - or save $1,788 with annual.
           </p>
           <div className="flex gap-3 justify-center flex-wrap">
             <a

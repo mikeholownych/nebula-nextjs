@@ -1,4 +1,4 @@
-# Value-first audit artifacts — hottest ad-bleed leads — 2026-07-04
+# Value-first audit artifacts - hottest ad-bleed leads - 2026-07-04
 
 Task: t_64d2e5f1
 Source lead file: /home/mike/nebula/leads_2026-07-04.md
@@ -13,7 +13,7 @@ Purpose: use these as email/reddit-DM first touches only after contact path is v
 
 ---
 
-## 1) Curb Caddie — $1,000 Google Ads, almost no conversions
+## 1) Curb Caddie - $1,000 Google Ads, almost no conversions
 
 - Lead / author: u/Suspicious_Role5912
 - Source trigger: https://www.reddit.com/r/PPC/comments/1ju0tsg/help_my_landing_page_1000_in_ads_no_conversions/
@@ -24,11 +24,11 @@ Purpose: use these as email/reddit-DM first touches only after contact path is v
 - Likely conversion leak: Search visitors may be unsure whether the service is available in their area and whether to choose free trial vs estimate; that uncertainty is expensive for high-intent local keywords.
 - Under-100-word opener:
 
-Saw your r/PPC post about spending $1,000 on Google Ads for Curb Caddie and getting basically one non-paying conversion. I looked at the page and the first leak I’d check is above the fold: “in your city” + two CTAs asks visitors to act before they know service coverage or which plan fits them. I can send the 3-point teardown I’d run on the page if useful — no pitch attached.
+Saw your r/PPC post about spending $1,000 on Google Ads for Curb Caddie and getting basically one non-paying conversion. I looked at the page and the first leak I’d check is above the fold: “in your city” + two CTAs asks visitors to act before they know service coverage or which plan fits them. I can send the 3-point teardown I’d run on the page if useful - no pitch attached.
 
 ---
 
-## 2) Handmade home goods store — $800 Google Ads, zero conversions
+## 2) Handmade home goods store - $800 Google Ads, zero conversions
 
 - Lead / author: unknown from prior task; product URL still needs extraction from Reddit post/comments.
 - Source trigger: https://www.reddit.com/r/googleads/comments/1uju7wr/spent_800_on_google_ads_for_my_small_online_store/
@@ -39,11 +39,11 @@ Saw your r/PPC post about spending $1,000 on Google Ads for Curb Caddie and gett
 - Likely conversion leak: Search traffic may be landing on product/category pages that look interchangeable with marketplace options but lack founder story, delivery certainty, and risk reversal.
 - Under-100-word opener:
 
-Saw your r/googleads post about spending $800 on Google Ads for your handmade home goods store and getting zero conversions. That’s painful, but it also narrows the audit: I’d look first at whether the landing page proves why your handmade product is worth choosing over marketplace options before asking for the cart. If you send the store URL, I’ll send back the 3 specific leaks I see — no pitch.
+Saw your r/googleads post about spending $800 on Google Ads for your handmade home goods store and getting zero conversions. That’s painful, but it also narrows the audit: I’d look first at whether the landing page proves why your handmade product is worth choosing over marketplace options before asking for the cart. If you send the store URL, I’ll send back the 3 specific leaks I see - no pitch.
 
 ---
 
-## 3) Shopify Meta ads — $400 in one day, 300 clicks, zero sales
+## 3) Shopify Meta ads - $400 in one day, 300 clicks, zero sales
 
 - Lead / author: unknown from prior task; username/product URL still needs extraction.
 - Source trigger: https://www.reddit.com/r/FacebookAds/comments/1uhw3yk/im_done_with_meta/
@@ -54,11 +54,11 @@ Saw your r/googleads post about spending $800 on Google Ads for your handmade ho
 - Likely conversion leak: Pre-page loss plus Shopify product-page trust gap; the first fix is separating click-loss diagnostics from on-page conversion diagnostics.
 - Under-100-word opener:
 
-Saw your “I’m done with Meta” post — the $400 day with 300 clicks, 150 Shopify visitors, and zero sales stood out. Before blaming the campaign, I’d separate two leaks: the 50% click-to-visitor drop, then the product page conversion issue. That first gap alone can burn budget fast. If you want, send the store URL and I’ll send the exact checks I’d run first.
+Saw your “I’m done with Meta” post - the $400 day with 300 clicks, 150 Shopify visitors, and zero sales stood out. Before blaming the campaign, I’d separate two leaks: the 50% click-to-visitor drop, then the product page conversion issue. That first gap alone can burn budget fast. If you want, send the store URL and I’ll send the exact checks I’d run first.
 
 ---
 
-## 4) Ecommerce operator — $11k spend day, sudden zero sales
+## 4) Ecommerce operator - $11k spend day, sudden zero sales
 
 - Lead / author: unknown from prior task; product URL not captured.
 - Source trigger: https://www.reddit.com/r/FacebookAds/comments/1ulelga/suddenly_zero_sales_on_30_june_till_29_june_i_got/
@@ -69,11 +69,11 @@ Saw your “I’m done with Meta” post — the $400 day with 300 clicks, 150 S
 - Likely conversion leak: Conversion path broke somewhere after the ad click; first audit should check checkout events, payment errors, product availability, page speed, and attribution changes around June 30.
 - Under-100-word opener:
 
-Saw your FacebookAds post about the June 30 cliff — 5-8 sales/day before that, then $11k spend with zero sales. That pattern usually deserves a breakage audit before a creative audit: checkout/payment, event tracking, product availability, redirect, or page-speed changes around the date it flipped. If helpful, I can send the exact conversion-path checklist I’d run against the store.
+Saw your FacebookAds post about the June 30 cliff - 5-8 sales/day before that, then $11k spend with zero sales. That pattern usually deserves a breakage audit before a creative audit: checkout/payment, event tracking, product availability, redirect, or page-speed changes around the date it flipped. If helpful, I can send the exact conversion-path checklist I’d run against the store.
 
 ---
 
-## 5) LinkedIn B2B campaign — $1,500, 31 days, zero form completions
+## 5) LinkedIn B2B campaign - $1,500, 31 days, zero form completions
 
 - Lead / author: unknown from prior task.
 - Source trigger: https://www.reddit.com/r/LinkedinAds/comments/1umjwh0/i_need_help_what_should_i_do/
@@ -84,11 +84,11 @@ Saw your FacebookAds post about the June 30 cliff — 5-8 sales/day before that,
 - Likely conversion leak: Document ad or landing form may be asking for contact details before the visitor sees enough specificity, proof, or perceived value from the asset.
 - Under-100-word opener:
 
-Saw your LinkedInAds post — $1,500 over 31 days with zero form completions is a brutal signal. I’d audit the offer/form before the audience: on LinkedIn, people will click a useful doc but won’t complete a form unless the landing page makes the payoff extremely concrete. If you share the landing page or form, I can send the 3 fixes I’d test first.
+Saw your LinkedInAds post - $1,500 over 31 days with zero form completions is a brutal signal. I’d audit the offer/form before the audience: on LinkedIn, people will click a useful doc but won’t complete a form unless the landing page makes the payoff extremely concrete. If you share the landing page or form, I can send the 3 fixes I’d test first.
 
 ---
 
-## 6) FunghiClear — 7,500 Search/PMax clicks, only 2 sales
+## 6) FunghiClear - 7,500 Search/PMax clicks, only 2 sales
 
 - Lead / author: u/typmarketing
 - Source trigger: https://www.reddit.com/r/PPC/comments/1kchxnn/landing_page_not_converting/
@@ -99,11 +99,11 @@ Saw your LinkedInAds post — $1,500 over 31 days with zero form completions is 
 - Likely conversion leak: Visitors see strong claims, before/after imagery, guarantees, reviews, and clinical language, but may still need clearer “who this is for / who this is not for” and evidence hierarchy before purchase.
 - Under-100-word opener:
 
-Saw your r/PPC post about FunghiClear: 7,500 Search/PMax clicks in 45 days and only 2 sales. I looked at the product page — it has a lot of proof, but for a medically sensitive purchase the order of proof may be the leak. I’d audit whether the page answers “is this safe for my exact case?” before pushing the 25% off/add-to-cart. Happy to send the quick teardown.
+Saw your r/PPC post about FunghiClear: 7,500 Search/PMax clicks in 45 days and only 2 sales. I looked at the product page - it has a lot of proof, but for a medically sensitive purchase the order of proof may be the leak. I’d audit whether the page answers “is this safe for my exact case?” before pushing the 25% off/add-to-cart. Happy to send the quick teardown.
 
 ---
 
-## 7) Time Technologies — Google/Facebook clicks, zero form fills/bookings
+## 7) Time Technologies - Google/Facebook clicks, zero form fills/bookings
 
 - Lead / author: u/BlacksmithDue2467
 - Source trigger: https://www.reddit.com/r/PPC/comments/1ogeww7/help_why_this_landing_page_not_converting/
@@ -120,7 +120,7 @@ Saw your r/PPC post about Google/Facebook ads getting 50+ clicks and zero form f
 
 ---
 
-## 8) LowTDFW / Magnolia Functional Wellness — low CPC, poor bookings/show rate
+## 8) LowTDFW / Magnolia Functional Wellness - low CPC, poor bookings/show rate
 
 - Lead / author: u/farhan583
 - Source trigger: https://www.reddit.com/r/PPC/comments/1pzojnz/why_is_my_landing_page_not_converting/
@@ -136,7 +136,7 @@ Saw your r/PPC post about low CPC traffic to LowTDFW but weak booking/show rates
 
 ---
 
-## 9) First-month Shopify store — clicks, no conversions
+## 9) First-month Shopify store - clicks, no conversions
 
 - Lead / author: unknown from prior task.
 - Source trigger: https://www.reddit.com/r/shopify_hustlers/comments/1ujgms9/first_month_was_rough_not_sure_what_to_change/
@@ -147,11 +147,11 @@ Saw your r/PPC post about low CPC traffic to LowTDFW but weak booking/show rates
 - Likely conversion leak: Product page or landing page is not answering the first-time-buyer trust questions: what is it, why this brand, delivery/returns, reviews/proof, and what happens after purchase.
 - Under-100-word opener:
 
-Saw your shopify_hustlers post about a rough first month — ads getting clicks but no conversions. For a new Shopify store, I’d audit buyer confidence before ad settings: first-screen clarity, product proof, shipping/returns, and whether the page gives a first-time visitor a reason to trust you. If you send the store URL, I’ll send back the 3 leaks I’d fix first.
+Saw your shopify_hustlers post about a rough first month - ads getting clicks but no conversions. For a new Shopify store, I’d audit buyer confidence before ad settings: first-screen clarity, product proof, shipping/returns, and whether the page gives a first-time visitor a reason to trust you. If you send the store URL, I’ll send back the 3 leaks I’d fix first.
 
 ---
 
-## 10) App / Apple Search Ads — installs but no paid conversions
+## 10) App / Apple Search Ads - installs but no paid conversions
 
 - Lead / author: unknown from prior task.
 - Source trigger: https://www.reddit.com/r/iOSAppsMarketing/comments/1uj1kwb/is_anyone_profitable_using_apple_ads/
@@ -169,10 +169,10 @@ Saw your iOSAppsMarketing post about Apple Search Ads producing installs but not
 ## Send-readiness notes
 
 Most send-ready with verified site/email:
-1. Time Technologies — ask@timetechnologiesllc.com — but check contacted/audit history before another touch.
-2. LowTDFW / Magnolia — info@magnoliamedspaandwellness.com — appears already in audit pipeline; avoid duplicate unless this is a planned follow-up.
-3. FunghiClear — site verified; prior pipeline has contact@funghiclear.com in HOT_LEAD history, so avoid duplicate unless sequencing permits.
-4. Curb Caddie — product URL verified but no email in enriched file; contact path is website/manual or Reddit DM.
+1. Time Technologies - ask@timetechnologiesllc.com - but check contacted/audit history before another touch.
+2. LowTDFW / Magnolia - info@magnoliamedspaandwellness.com - appears already in audit pipeline; avoid duplicate unless this is a planned follow-up.
+3. FunghiClear - site verified; prior pipeline has contact@funghiclear.com in HOT_LEAD history, so avoid duplicate unless sequencing permits.
+4. Curb Caddie - product URL verified but no email in enriched file; contact path is website/manual or Reddit DM.
 
 Best untouched high-pain targets needing contact/product extraction:
 1. Handmade home goods $800 / zero conversions.

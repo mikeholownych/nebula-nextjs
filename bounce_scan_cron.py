@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-bounce_scan_cron.py — Periodic inbox scan for NDR/bounce messages.
+bounce_scan_cron.py - Periodic inbox scan for NDR/bounce messages.
 Runs every 30m via cron. Supplements inline SMTP bounce detection.
 """
 import sys, json
@@ -22,18 +22,18 @@ def main():
     except Exception as e:
         print(f"bounce-scan ERROR: Cannot init AgentMail client: {e}")
         sys.exit(1)
-    
+
     bounces = scan_inbox_for_bounces(am, max_messages=50)
-    
+
     if bounces:
         # Only emit output (= Telegram/origin notification) when there are new bounces
-        print(f"⚠️ Bounce scan — {len(bounces)} new bounce(s):")
+        print(f"⚠️ Bounce scan - {len(bounces)} new bounce(s):")
         for b in bounces:
-            print(f"  • {b['target_email']} — {b['subject'][:60]}")
+            print(f"  • {b['target_email']} - {b['subject'][:60]}")
             log_bounce_event(b)
         stats = report_bounce_stats()
         print(f"  Total: {stats['hard_bounces']} hard / {stats['soft_bounces']} soft")
-    # Else: silent — empty stdout = no notification
+    # Else: silent - empty stdout = no notification
 
 if __name__ == "__main__":
     main()

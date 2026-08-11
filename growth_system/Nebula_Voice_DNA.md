@@ -14,15 +14,15 @@ Nebula Components is the autonomous conversion leak detector for founders burnin
 - Concrete nouns. Specific numbers. No abstractions.
 - Verb hierarchy: Strong verbs > Adjectives > Adverbs
   - Verbs create mental images instantly ("Your page is bleeding money" vs "Your page is not performing well")
-  - Adjectives add color but use sparingly — one strong adjective beats three weak ones
+  - Adjectives add color but use sparingly - one strong adjective beats three weak ones
   - Adverbs are nearly always clutter. Cut "very," "really," "quickly," "extremely"
   - Examples: "Burned $5k" > "Spent a lot of money" > "Significant financial expenditure"
 - Prefer Anglo-Saxon words over Latin-derived words (rule from Rory Sutherland/Ogilvy):
-  - "buy" not "purchase" — "Help" not "Assist" — "End" not "Terminate"
-  - "Show" not "Demonstrate" — "Use" not "Utilize" — "Get" not "Obtain"
-  - "Start" not "Initiate" — "Need" not "Require" — "Try" not "Attempt"
-  - "Sell" not "Market" — "Fix" not "Rectify" — "Cut" not "Reduce"
-  - "Give" not "Provide" — "Tell" not "Inform" — "Send" not "Transmit"
+  - "buy" not "purchase" - "Help" not "Assist" - "End" not "Terminate"
+  - "Show" not "Demonstrate" - "Use" not "Utilize" - "Get" not "Obtain"
+  - "Start" not "Initiate" - "Need" not "Require" - "Try" not "Attempt"
+  - "Sell" not "Market" - "Fix" not "Rectify" - "Cut" not "Reduce"
+  - "Give" not "Provide" - "Tell" not "Inform" - "Send" not "Transmit"
 - Use: leak, bleed, burn, fix, ship, score, trigger, gap, friction, proof
 - Avoid: optimize (use fix or improve), empower, leverage, best-in-class, holistic, robust, seamless, cutting-edge
 - Dollar amounts always: "$97 fix pack" not "premium service tier"
@@ -37,7 +37,7 @@ Nebula Components is the autonomous conversion leak detector for founders burnin
 ## Proof Rules
 - Every claim needs evidence within 2 sentences.
 - Trust signals must be shown, not just claimed: star ratings, named customers, count numbers, screenshots.
-- "Founded in 2026" is a disadvantage — lead with product proof, not company age.
+- "Founded in 2026" is a disadvantage - lead with product proof, not company age.
 - Reference the self-audit case study: "Score 6.8/10 B. We fixed the 3/10 SEO in 2 minutes."
 
 ## CTA Format
@@ -54,7 +54,7 @@ Nebula Components is the autonomous conversion leak detector for founders burnin
 - Sometimes skip the persuasion entirely. Just state a compelling fact.
 - The fact itself does the selling. No pitch needed after it.
 - "97% of users renewed their subscription" sells better than any argument.
-- Nebula application: "We audited 40 landing pages last month. 36 had the same above-fold CTA gap." — the reader fills in the implication.
+- Nebula application: "We audited 40 landing pages last month. 36 had the same above-fold CTA gap." - the reader fills in the implication.
 - Rules for fact drops:
   - Must be specific (numbers, dates, names)
   - Must be surprising or counterintuitive

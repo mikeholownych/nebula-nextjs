@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reddit trigger scanner — finds live posts with paid-traffic pain, queues
+"""Reddit trigger scanner - finds live posts with paid-traffic pain, queues
 Zernio comments that offer the free audit.
 
 Searches Google for recent Reddit posts with buying triggers, extracts post IDs,
@@ -8,7 +8,7 @@ drafts value-first comments, and adds them to .reddit_comment_queue.json.
 Runs daily. Comment delivery is handled by reddit_comment_queue.py (every 30min).
 
 Rules:
-- Comments must be value-first — no pitch in the first comment
+- Comments must be value-first - no pitch in the first comment
 - Each post gets one comment max (deduped by post_id)
 - Max 5 new posts per run (Zernio rate limit awareness)
 """
@@ -34,13 +34,13 @@ COMMENT_TEMPLATES = {
         "The ad → page disconnect is usually the culprit here. Most pages fail 3-4 of the "
         "same signals (headline doesn't match the ad, CTA above the fold isn't visible, "
         "social proof is absent or buried). If you share your landing page URL I can run a "
-        "quick diagnostic — free tool, takes about 90 seconds: "
+        "quick diagnostic - free tool, takes about 90 seconds: "
         "https://nebulacomponents.com/audit?utm_source=reddit&utm_medium=comment&utm_campaign=zero-conversions"
     ),
     "ads_not_working": (
         "Before adjusting the campaign, worth checking if the issue is the page rather than "
         "the ad. Ads deliver traffic; the page converts it (or doesn't). A few specific "
-        "signals — message match, above-fold clarity, CTA strength — account for most of "
+        "signals - message match, above-fold clarity, CTA strength - account for most of "
         "the drop. Free audit if you want a specific read on your page: "
         "https://nebulacomponents.com/audit?utm_source=reddit&utm_medium=comment&utm_campaign=ads-not-working"
     ),
@@ -53,7 +53,7 @@ COMMENT_TEMPLATES = {
         "https://nebulacomponents.com/audit?utm_source=reddit&utm_medium=comment&utm_campaign=high-cpc"
     ),
     "roast_landing_page": (
-        "Happy to take a look. I'll run it through a structured audit — 9 conversion signals "
+        "Happy to take a look. I'll run it through a structured audit - 9 conversion signals "
         "with specific findings rather than subjective impressions. "
         "You can run it yourself in ~90s here: "
         "https://nebulacomponents.com/audit?utm_source=reddit&utm_medium=comment&utm_campaign=roast-request\n\n"
@@ -124,7 +124,7 @@ def classify_trigger(title: str, snippet: str) -> str | None:
 
 
 def search_reddit_signals() -> list[dict]:
-    """Use system web_search equivalent — grep Hermes search output."""
+    """Use system web_search equivalent - grep Hermes search output."""
     queries = [
         'site:reddit.com "ads not converting" landing page 2026',
         'site:reddit.com "zero conversions" "ads" "landing page" 2026',

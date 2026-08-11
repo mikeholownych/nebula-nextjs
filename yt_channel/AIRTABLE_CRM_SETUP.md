@@ -1,7 +1,7 @@
 # Airtable CRM Setup: Step-by-Step Implementation
 
-**Status**: Implementation guide (Aug 13-15, 2026)  
-**Effort**: 6-8 hours total  
+**Status**: Implementation guide (Aug 13-15, 2026)
+**Effort**: 6-8 hours total
 **Cost**: ~$20/month (Zapier subscription)
 
 ---
@@ -28,11 +28,11 @@
 4. last_name (Single line text)
 5. company (Single line text)
 6. job_title (Single line text)
-7. utm_source (Single line text) — landing, newsletter, twitter, etc.
-8. utm_medium (Single line text) — organic, social, email
-9. utm_campaign (Single line text) — free_audit, newsletter_signup
+7. utm_source (Single line text) - landing, newsletter, twitter, etc.
+8. utm_medium (Single line text) - organic, social, email
+9. utm_campaign (Single line text) - free_audit, newsletter_signup
 10. first_audit_date (Date)
-11. audit_score (Number) — 0-10
+11. audit_score (Number) - 0-10
 12. finding_count (Number)
 13. status (Single select)
     Options: cold, interested, purchased, pro_subscriber, churned
@@ -87,14 +87,14 @@
 3. interaction_type (Single select, required)
    Options: objection, win, churn, question
 4. objection_reason (Single select)
-   Options: too_expensive, not_sure_works, no_time, 
+   Options: too_expensive, not_sure_works, no_time,
             complexity, already_fixed, other
 5. source (Single select)
    Options: support_email, sales_call, live_chat, feedback_form
 6. date_logged (Date, required, auto-today)
 7. resolved (Checkbox)
 8. resolution_type (Single select)
-   Options: price_discount, proof_demo, followup, educated, 
+   Options: price_discount, proof_demo, followup, educated,
             none_yet
 9. outcome (Single select)
    Options: closed_won, closed_lost, nurturing

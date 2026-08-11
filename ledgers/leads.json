@@ -955,6 +955,33 @@
     "trigger_text": "",
     "url": "https://example.com?utm_source=google&utm_medium=cpc"
   },
+  "anonymous+ead1d414-b2c7-4824-a719-e4a04e2a426a@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+ead1d414-b2c7-4824-a719-e4a04e2a426a@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-09T17:16:39.765727Z",
+    "last_seen": "2026-08-09T17:16:39.765727Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "c828c9f7-ae80-4495-96da-97783f24be7d",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-09T17:16:39.765727Z",
+    "trigger_text": "",
+    "url": "https://postessia.com/"
+  },
   "audit-probe-2026@example.com": {
     "content_posts": [],
     "current_stage": "lead_audit",

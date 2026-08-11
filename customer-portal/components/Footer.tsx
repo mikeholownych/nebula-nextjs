@@ -60,7 +60,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Legal row — sits below the main grid, full-width subtle strip */}
+        {/* Legal row - sits below the main grid, full-width subtle strip */}
         <div className="mt-10 pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             {/* Legal links + IndieAscent badge */}
@@ -85,7 +85,7 @@ export default function Footer() {
 
             {/* Copyright + Social */}
             <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
-              {/* Nick Launches badge — Starter Launch plan (premium badge with UTM) */}
+              {/* Nick Launches badge - Starter Launch plan (premium badge with UTM) */}
               <a href="https://nicklaunches.com/products/nebula-components/?utm_source=nebulacomponents.com&utm_medium=badge&utm_campaign=featured-premium" target="_blank" rel="noopener" aria-label="Nebula Components on Nick Launches">
                 <img src="https://nicklaunches.com/badges/featured-premium-dark.png" alt="Nebula Components on Nick Launches" width={244} height={56} style={{ height: '28px', width: 'auto' }} />
               </a>

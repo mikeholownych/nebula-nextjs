@@ -1,5 +1,5 @@
 /**
- * WebMCP — Expose Nebula Components site tools to AI agents via the browser.
+ * WebMCP - Expose Nebula Components site tools to AI agents via the browser.
  * Implements navigator.modelContext.registerTool() per WebMCP spec.
  * @see https://webmachinelearning.github.io/webmcp/
  */
@@ -7,7 +7,7 @@
   'use strict';
 
   if (typeof navigator.modelContext === 'undefined' || typeof navigator.modelContext.registerTool !== 'function') {
-    return; // Browser doesn't support WebMCP — safe no-op
+    return; // Browser doesn't support WebMCP - safe no-op
   }
 
   const signal = new AbortController();

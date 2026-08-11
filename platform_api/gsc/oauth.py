@@ -1,7 +1,7 @@
 """Google Search Console (GSC) OAuth 2.0 helpers.
 
 Scopes:
-- webmasters.readonly — read-only access to Search Analytics data
+- webmasters.readonly - read-only access to Search Analytics data
 
 Flow:
 1. generate get_gsc_auth_url() → redirect user to Google consent screen
@@ -34,7 +34,7 @@ GOOGLE_GSC_SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly"]
 GOOGLE_AUTHORIZE_URL = "https://accounts.google.com/o/oauth2/v2/auth"
 GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token"
 
-# State TTL — 10 minutes, same as GitHub OAuth
+# State TTL - 10 minutes, same as GitHub OAuth
 STATE_TTL = 600
 
 
@@ -90,7 +90,7 @@ async def get_gsc_auth_url(
 
     # google-auth-oauthlib auto-generates a PKCE code_verifier and includes
     # code_challenge in the URL. We must persist the verifier so the callback
-    # can pass it to fetch_token() — without it Google returns invalid_grant.
+    # can pass it to fetch_token() - without it Google returns invalid_grant.
     code_verifier = getattr(flow, "code_verifier", None)
     await redis.set(
         f"gsc_oauth_state:{state}",

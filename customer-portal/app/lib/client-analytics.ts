@@ -44,15 +44,15 @@ export function persistAttribution(): Record<string, string> {
 /**
  * Audit funnel correlation key.
  *
- * The audit chain is emitted from three places — the browser (`audit_submitted`,
+ * The audit chain is emitted from three places - the browser (`audit_submitted`,
  * `audit_email_submitted`), this app's route handlers (`audit_started`,
  * `audit_results_unlocked`) and the FastAPI service (`audit_completed`,
  * `audit_failed`). Person identity is not a usable join key across them: the
  * visitor is anonymous when the flow starts and only resolves to a stable
  * person at unlock, so a funnel built on person alone cannot connect the steps.
  *
- * `audit_attempt_id` is minted in the browser at form submit — before the audit
- * row (and therefore `audit_id`) exists — and threaded through every downstream
+ * `audit_attempt_id` is minted in the browser at form submit - before the audit
+ * row (and therefore `audit_id`) exists - and threaded through every downstream
  * step, so the whole chain shares one key from the very first event.
  */
 export function newAuditAttemptId(): string {
@@ -65,7 +65,7 @@ export function newAuditAttemptId(): string {
 
 /**
  * Bind an attempt id to the audit id the API assigned it, so the processing and
- * results pages — which only know `audit_id` from the URL — can recover it.
+ * results pages - which only know `audit_id` from the URL - can recover it.
  */
 export function rememberAuditAttemptId(auditId: string, attemptId: string): void {
   if (typeof window === 'undefined' || !hasAnalyticsConsent()) return

@@ -5,7 +5,7 @@
 //
 //  1. `audit_started` was captured *after* the awaited /audit/run call. That call
 //     runs the audit synchronously, so `audit_started` was stamped later than the
-//     `audit_completed` it is supposed to precede — an ordered funnel can never
+//     `audit_completed` it is supposed to precede - an ordered funnel can never
 //     step through that.
 //  2. The FastAPI service emitted its own `audit_started` for the same audit, so
 //     every audit produced two, inflating step one and depressing every rate

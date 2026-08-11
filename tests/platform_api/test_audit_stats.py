@@ -1,7 +1,7 @@
 """Test the homepage aggregate-stats endpoint.
 
 Regression coverage for a real bug found while building it: asyncpg
-returns avg() as decimal.Decimal, and Decimal / float raises TypeError —
+returns avg() as decimal.Decimal, and Decimal / float raises TypeError -
 the route returned a bare 503 with no indication why until traced by hand.
 """
 from decimal import Decimal
@@ -24,13 +24,13 @@ async def client():
 
 @pytest.mark.asyncio
 async def test_get_aggregate_stats_handles_decimal_avg_from_asyncpg():
-    """asyncpg's avg() returns decimal.Decimal, not float — dividing that
+    """asyncpg's avg() returns decimal.Decimal, not float - dividing that
     directly by a float literal raises TypeError. This is the exact bug
     that shipped first; guard against it regressing.
 
     Note: avg_score is currently intentionally suppressed (returns None)
     until component scores are persisted defensibly. The Decimal conversion
-    path is still exercised — we assert no exception and a valid structure.
+    path is still exercised - we assert no exception and a valid structure.
     """
     db = AuditDB()
     db.pool = MagicMock()
@@ -46,7 +46,7 @@ async def test_get_aggregate_stats_handles_decimal_avg_from_asyncpg():
 
     assert result["completed_audits"] == 27
     # avg_score intentionally suppressed until rendered-verification scores
-    # are persisted — just assert it's present with a valid type
+    # are persisted - just assert it's present with a valid type
     assert "avg_score" in result
 
 

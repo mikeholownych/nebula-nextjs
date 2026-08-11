@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { LLMS_MARKDOWN, buildTeardownMarkdown } from '@/app/lib/llms-markdown'
 
 /**
- * Markdown variant catch-all — serves clean markdown at any public page
+ * Markdown variant catch-all - serves clean markdown at any public page
  * URL + ".md" per the llms.txt proposal (https://llmstxt.org/):
  * "pages that have information that might be useful for LLMs to read
  * provide a clean markdown version of those pages at the same URL as the

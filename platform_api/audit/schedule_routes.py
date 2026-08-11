@@ -1,4 +1,4 @@
-"""Audit schedule routes — CRUD for re-audit schedules + diff endpoint."""
+"""Audit schedule routes - CRUD for re-audit schedules + diff endpoint."""
 
 from datetime import datetime, timezone, timedelta
 from typing import Optional

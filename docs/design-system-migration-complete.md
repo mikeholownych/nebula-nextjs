@@ -18,30 +18,30 @@
 ## Files Migrated (19 pages)
 
 ### HIGH PRIORITY (Revenue-critical) ✅
-1. agency-partner.html — $497/mo pricing
-2. checkout.html — Stripe checkout
-3. checkout_v2.html — Alternative checkout
-4. thank-you.html — Post-purchase
+1. agency-partner.html - $497/mo pricing
+2. checkout.html - Stripe checkout
+3. checkout_v2.html - Alternative checkout
+4. thank-you.html - Post-purchase
 
 ### MEDIUM PRIORITY (Marketing) ✅
-5. audit.html — Audit page
-6. ai-ops-retainer.html — $1,497/mo pricing
-7. 7-systems.html — Content marketing
-8. marketing-ops.html — Service page
+5. audit.html - Audit page
+6. ai-ops-retainer.html - $1,497/mo pricing
+7. 7-systems.html - Content marketing
+8. marketing-ops.html - Service page
 
 ### LOW PRIORITY (Internal) ✅
-9. accessible-nebula.html — Accessibility
-10. ad-burn-leaderboard.html — Content
-11. audit_dashboard.html — Dashboard
-12. beta-tester.html — Beta program
-13. checkout-impulse.html — Checkout variant
-14. create_97_checkout.html — Checkout variant
-15. dashboard.html — Internal
-16. launch_page_97.html — Landing
-17. og-card-source.html — Meta
-18. part_before.html — Content
-19. primer.html — Documentation
-20. roas-cliff.html — Content
+9. accessible-nebula.html - Accessibility
+10. ad-burn-leaderboard.html - Content
+11. audit_dashboard.html - Dashboard
+12. beta-tester.html - Beta program
+13. checkout-impulse.html - Checkout variant
+14. create_97_checkout.html - Checkout variant
+15. dashboard.html - Internal
+16. launch_page_97.html - Landing
+17. og-card-source.html - Meta
+18. part_before.html - Content
+19. primer.html - Documentation
+20. roas-cliff.html - Content
 
 ---
 
@@ -99,11 +99,11 @@ Consistent button styling.
 - Border: #1a1a1a (dark gray)
 
 ### Components
-- `.btn-primary` — Emerald button
-- `.btn-secondary` — Outlined button
-- `.card` — Elevated cards
-- `.badge` — Status badges
-- `.glow-orb` — Ambient effects
+- `.btn-primary` - Emerald button
+- `.btn-secondary` - Outlined button
+- `.card` - Elevated cards
+- `.badge` - Status badges
+- `.glow-orb` - Ambient effects
 
 ### Effects
 - Ambient glow orbs (fixed position)
@@ -252,11 +252,11 @@ done
 
 ## Timeline
 
-- 14:42 — Started validation request
-- 14:49 — Option 1 selected (full conversion)
-- 15:38 — Migration script executed
-- 15:39 — All 19 pages migrated
-- 15:40 — Committed and pushed
+- 14:42 - Started validation request
+- 14:49 - Option 1 selected (full conversion)
+- 15:38 - Migration script executed
+- 15:39 - All 19 pages migrated
+- 15:40 - Committed and pushed
 - **Total Time:** ~1 hour
 
 ---

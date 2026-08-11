@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Nebula watchdog — runs every 5 min via cron
+# Nebula watchdog - runs every 5 min via cron
 # Checks: cloudflared, webhook server (9000)
 # Restarts anything dead. Logs to /home/mike/nebula/watchdog.log
 #
@@ -8,14 +8,14 @@
 # pre-Next.js Python server (see .legacy/python-web-server/) and has had
 # nothing listening on it for a long time, so that check always "failed" and
 # this watchdog was unconditionally restarting nebula-site every time it ran
-# — nebula-site is the OBSOLETE alias unit that deploy/systemd/README.md
+# - nebula-site is the OBSOLETE alias unit that deploy/systemd/README.md
 # says must stay disabled/inactive, because it conflicts with the canonical
 # nebula-nextjs.service for port 3000. This is what caused nebula-nextjs.service
 # to be down for 14+ hours while nebula-site silently served stale, pre-fix
-# code — see governance/INCIDENTS/INC-0004 and INC-0005. Production health
+# code - see governance/INCIDENTS/INC-0004 and INC-0005. Production health
 # (including drift like this) is now monitored by
 # scripts/notify_production_health.py, which alerts on Telegram instead of
-# blindly restarting a service — a bad restart target here doesn't get a
+# blindly restarting a service - a bad restart target here doesn't get a
 # second chance to cause a multi-hour outage.
 #
 # Removed 2026-08-04: port 8766 (blog-wordpress-1) restart block. The

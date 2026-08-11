@@ -14,8 +14,8 @@ Meltwater analyzed 9.5 million AI citations across 6 models (ChatGPT-5, Copilot,
 ### 2. Structured Lists (54% of top-cited content)
 - Use **numbered lists** for rankings, steps, or comparisons
 - Use **bullet lists** for features, criteria, or takeaways
-- AI extracts list items as discrete facts — each should be self-contained
-- Format: `1.` or `- ` — not inline commas
+- AI extracts list items as discrete facts - each should be self-contained
+- Format: `1.` or `- ` - not inline commas
 
 ### 3. Named Entities
 - **Company names**: "Nebula Components," "Zamp," "Oxygen"
@@ -42,11 +42,11 @@ Meltwater analyzed 9.5 million AI citations across 6 models (ChatGPT-5, Copilot,
 ### 6. Freshness Signal (48% cited within 3 months)
 - Every post must have a clear **current timestamp** or reference to current events
 - Reference the current date or recent industry development
-- "As of July 2026..." — signals recency to AI crawlers
+- "As of July 2026..." - signals recency to AI crawlers
 - Update older posts with new statistics before resharing
 
 ### 7. Decision-Framing Formats (highest citation rate)
-- **Listicles**: "5 ways to X," "Top 3 tools for Y" — 54% of most cited content
+- **Listicles**: "5 ways to X," "Top 3 tools for Y" - 54% of most cited content
 - **Comparisons**: "Tool A vs Tool B vs Tool C"
 - **Decision frameworks**: "If X, choose A. If Y, choose B."
 - **How-to guides**: "Step 1. Step 2. Step 3."
@@ -60,7 +60,7 @@ Before publishing any post, run this checklist:
 |---------|----------|---------|
 | Title with keyword | Yes | "5 Landing Page Audit Tools Compared" |
 | Section headings (long-form) | Yes if >500 words | "## Why Headline Clarity Matters" |
-| Numbered or bullet list | Yes | "1. Nebula — Self-serve audit" |
+| Numbered or bullet list | Yes | "1. Nebula - Self-serve audit" |
 | At least 2 named entities | Yes | "Nebula Components, AgentMail" |
 | At least 1 specific data point | Yes | "Score: 6.8/10" |
 | Original (not reshared) content | Yes | New angle or data every time |

@@ -1,15 +1,15 @@
-# Repurpose Pack — The Story Framework Audit Rewrite
+# Repurpose Pack - The Story Framework Audit Rewrite
 # Build: Rewrote audit findings from technical → visitor voice + story bridge email
 # Commit: b5820028 | Date: 2026-08-11
 # One build → five standalone posts
 
 ---
 
-## POST 1 — The Demo (30-second video script)
+## POST 1 - The Demo (30-second video script)
 
 ```
 HOOK (0–3s):
-"I rewrote my audit tool today. Not the code — the voice."
+"I rewrote my audit tool today. Not the code - the voice."
 
 CONTEXT:
 Nebula reads landing pages. Before today, it talked like an engineer.
@@ -29,18 +29,18 @@ Same thing in the email:
 That's the difference between a report and a story.
 
 CTA:
-"nebulacomponents.com — free audit, under 2 minutes."
+"nebulacomponents.com - free audit, under 2 minutes."
 ```
 
 ---
 
-## POST 2 — The Before/After
+## POST 2 - The Before/After
 
 ```
 Before and after of ONE finding. Same data. Different voice.
 
 BEFORE (how it read this morning):
-"No trust signals found — no testimonials, reviews,
+"No trust signals found - no testimonials, reviews,
 or social proof anywhere on the page."
 
 AFTER (how it reads now):
@@ -63,7 +63,7 @@ The second one buys the fix.
 
 ---
 
-## POST 3 — The Lesson (one thing I learned)
+## POST 3 - The Lesson (one thing I learned)
 
 ```
 The one thing I learned today:
@@ -102,7 +102,7 @@ Story does.
 
 ---
 
-## POST 4 — The Mistake (what broke and how I fixed it)
+## POST 4 - The Mistake (what broke and how I fixed it)
 
 ```
 I shipped a landing page audit tool
@@ -121,7 +121,7 @@ and checked Stripe six times this week and saw nothing.
 Here's what I ran the copy through to find it:
 
 Three questions. Pass or fail.
-1. Is the customer the hero — or is the company bragging?
+1. Is the customer the hero - or is the company bragging?
 2. Is there a clear feeling? Relief. Pride. Frustration. Pick one.
 3. Is it obvious what happens if they do nothing?
 
@@ -131,18 +131,18 @@ They described problems. They didn't make anyone feel them.
 Took about 3 hours to rewrite the finding generation logic.
 The output now reads like the visitor is narrating their own experience.
 
-If your audit, your pitch deck, your email — passes on question 1
-but fails on questions 2 and 3 —
+If your audit, your pitch deck, your email - passes on question 1
+but fails on questions 2 and 3 -
 you have a documentation problem disguised as a conversion problem.
 ```
 
 ---
 
-## POST 5 — The Offer (comment-a-keyword CTA)
+## POST 5 - The Offer (comment-a-keyword CTA)
 
 ```
 If your landing page is getting traffic but not converting,
-I'll tell you exactly why — in the visitor's voice, not a tech report.
+I'll tell you exactly why - in the visitor's voice, not a tech report.
 
 Free audit. No signup. Under 2 minutes.
 
@@ -160,14 +160,14 @@ Or: nebulacomponents.com
 ## AUDIO PRODUCTION NOTES
 
 Post 1 (video script): needs screen recording showing the before/after finding side by side
-Post 2 (before/after): screenshot only — no voice needed, the text IS the content
+Post 2 (before/after): screenshot only - no voice needed, the text IS the content
 Post 3 (lesson): generate as plain voice, thoughtful pace
 Post 4 (mistake): generate as slightly self-deprecating, the "I shipped something broken" tone
-Post 5 (offer): short, direct — already drafted
+Post 5 (offer): short, direct - already drafted
 
 ## POSTING SCHEDULE
-Day 1: Post 1 (video — most shareable)
-Day 2: Post 3 (lesson — most educational, high save rate)
-Day 3: Post 2 (before/after — screenshot, stops scroll)
-Day 4: Post 4 (mistake — highest trust-building format)
-Day 5: Post 5 (offer — conversion intent)
+Day 1: Post 1 (video - most shareable)
+Day 2: Post 3 (lesson - most educational, high save rate)
+Day 3: Post 2 (before/after - screenshot, stops scroll)
+Day 4: Post 4 (mistake - highest trust-building format)
+Day 5: Post 5 (offer - conversion intent)

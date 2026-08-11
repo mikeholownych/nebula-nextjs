@@ -8,7 +8,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   // If GSAP/ScrollTrigger didn't load, leave everything visible.
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-    console.warn('[anim] GSAP/ScrollTrigger not loaded — content shown without animation');
+    console.warn('[anim] GSAP/ScrollTrigger not loaded - content shown without animation');
     return;
   }
 
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Reduced-motion: skip animations
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    console.log('[anim] Reduced motion — animations disabled');
+    console.log('[anim] Reduced motion - animations disabled');
     return;
   }
 
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (heroH1) {
     const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
-    
+
     if (heroBadge) tl.from(heroBadge, { opacity: 0, y: 20, duration: 0.6 }, 0);
     tl.from(heroH1, { opacity: 0, y: 40, duration: 0.8 }, 0.1);
     if (heroSub) tl.from(heroSub, { opacity: 0, y: 30, duration: 0.7 }, 0.3);

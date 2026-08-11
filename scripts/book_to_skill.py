@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Book to Skill — mechanical extractor (from The Next New Thing, HQqX4rF1nDM).
+"""Book to Skill - mechanical extractor (from The Next New Thing, HQqX4rF1nDM).
 
 Turns a public-domain book text into structured "raw material" that an agent
 then curates into a real SKILL.md. This script does the deterministic part
@@ -16,7 +16,7 @@ Output: a markdown "raw material" file with:
 
 Design rules:
   - stdlib only (runs on any box, no network)
-  - Deterministic — same input, same output
+  - Deterministic - same input, same output
   - NEVER invents content: only extracts the source text
   - The agent's job is the synthesis into SKILL.md (curation, not generation)
 
@@ -118,13 +118,13 @@ def main():
     text = Path(args.book).read_text(errors="replace")
     chapters = extract(text)
     if not chapters:
-        print(f"ERROR: no chapters found in {args.book} — is this a book-format text?", file=sys.stderr)
+        print(f"ERROR: no chapters found in {args.book} - is this a book-format text?", file=sys.stderr)
         sys.exit(1)
 
     out = [f"# Raw material: {args.title}", ""]
     out.append(f"- Author: {args.author}")
     out.append(f"- Chapters detected: {len(chapters)}")
-    out.append("- This file is EXTRACTION ONLY — curate it into SKILL.md, don't paste it whole.")
+    out.append("- This file is EXTRACTION ONLY - curate it into SKILL.md, don't paste it whole.")
     out.append("")
     out.append("## Chapter index")
     out.append("")

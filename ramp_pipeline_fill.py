@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Ramp pipeline fill v2 — trigger-aware manual research lanes (2026-07-31).
+"""Ramp pipeline fill v2 - trigger-aware manual research lanes (2026-07-31).
 
 Replaces the deprecated Apify/Reddit scrape pipeline (archived to
 .legacy/2026-07-31-apify-reddit-deprecation/). Lead sources are now
@@ -20,7 +20,7 @@ Flow per run:
        - audit lane     -> audit intro with self-serve link + trigger context
   5. Write ramp_pipeline_report.json + outreach_evidence.jsonl
 
-Idempotent client_ids (campaign:ramp-<source>-<hash8>) — no auto: retry loops.
+Idempotent client_ids (campaign:ramp-<source>-<hash8>) - no auto: retry loops.
 Rate-safe: MAX_PER_RUN sends per run (AgentMail ~2/5min window; runs are cron-paced).
 
 Usage:
@@ -139,9 +139,9 @@ def send_first_touch(rec: dict) -> dict:
 
     slug = rec.get("teardown_slug")
     if slug:
-        subject = f"Your numbers: {rec.get('trigger','')[:48]} — I audited {domain}"
+        subject = f"Your numbers: {rec.get('trigger','')[:48]} - I audited {domain}"
         body = (
-            f"{rec.get('trigger', '')} — so I put {domain} through our audit engine.\n\n"
+            f"{rec.get('trigger', '')} - so I put {domain} through our audit engine.\n\n"
             f"{rec.get('notes', '')}\n\n"
             f"Full teardown with evidence: https://nebulacomponents.com/teardowns/{slug}\n\n"
             "No ask. If it finds something worth fixing, the $97 One-Leak Repair Sprint "
@@ -149,13 +149,13 @@ def send_first_touch(rec: dict) -> dict:
         )
         labels = ["targeted-outreach", f"teardown-{slug}"]
     else:
-        subject = f"Saw your post about {rec.get('trigger','')[:44]} — here's what your page says"
+        subject = f"Saw your post about {rec.get('trigger','')[:44]} - here's what your page says"
         body = (
-            f"{rec.get('trigger', '')} — that's exactly the signal we built our audit engine for.\n\n"
+            f"{rec.get('trigger', '')} - that's exactly the signal we built our audit engine for.\n\n"
             "Same engine that powers our public teardowns. Free, no signup, results in under two minutes:\n"
             "https://nebulacomponents.com/audit\n\n"
             "If it finds a real leak, the $97 One-Leak Repair Sprint implements the highest-impact "
-            "finding — with a 30-day re-audit included.\n"
+            "finding - with a 30-day re-audit included.\n"
         )
         labels = ["targeted-outreach", "ramp-audit-intro"]
 
@@ -200,7 +200,7 @@ def main() -> int:
 
     print(f"[ramp-v2] new: {len(to_send)}  skipped: {len(skipped)}")
     for s in skipped:
-        print(f"  SKIP {s['email']} — {s['reason']}")
+        print(f"  SKIP {s['email']} - {s['reason']}")
 
     sent, failed, blocked = [], [], []
     for rec in to_send[: args.max]:
@@ -212,12 +212,12 @@ def main() -> int:
         client_id = f"campaign:ramp-{rec.get('source','lane')}-" + \
             hashlib.sha1(f"{email}|{rec.get('trigger','')}".encode()).hexdigest()[:8]
         if already_sent(client_id):
-            print(f"  SKIP {email} — already sent (client_id {client_id})")
+            print(f"  SKIP {email} - already sent (client_id {client_id})")
             continue
         result = send_first_touch(rec)
         if result.get("_error"):
             blocked.append({"email": email, "reason": result.get("_reason", result["_error"])})
-            print(f"  BLOCKED {email} — {result.get('_reason', result['_error'])}")
+            print(f"  BLOCKED {email} - {result.get('_reason', result['_error'])}")
         else:
             sent.append({"email": email, "client_id": client_id,
                          "message_id": result.get("message_id")})

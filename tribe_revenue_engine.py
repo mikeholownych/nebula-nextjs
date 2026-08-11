@@ -100,17 +100,17 @@ def usable_domain(domain: str) -> bool:
 
 
 def referral_body(domain: str) -> str:
-    return f"""Hey — quick ask.
+    return f"""Hey - quick ask.
 
 You were one of the better-fit founders/pages we've audited. Do you know one other founder as sharp as you who is paying for traffic but not getting enough conversions?
 
-If yes, a one-line intro is enough. I'll send them the same free leak map first — no pitch attached.
+If yes, a one-line intro is enough. I'll send them the same free leak map first - no pitch attached.
 
-— Nebula"""
+- Nebula"""
 
 
 def consulting_body(domain: str) -> str:
-    return f"""Hey — if the full implementation is too much or timing is weird, we can do a lighter bridge.
+    return f"""Hey - if the full implementation is too much or timing is weird, we can do a lighter bridge.
 
 Option: 3 short advisory passes over 30 days.
 1. Find the highest-leverage leak
@@ -123,7 +123,7 @@ Worth pricing out for {domain}?"""
 
 
 def cart_body(domain: str) -> str:
-    return f"""Hey — saw you started checkout and didn't finish.
+    return f"""Hey - saw you started checkout and didn't finish.
 
 No pressure. Usually that means one of three things:
 1. timing is off
@@ -133,7 +133,7 @@ No pressure. Usually that means one of three things:
 If it's #2, use the free audit path again: https://nebulacomponents.com/audit.html
 If it's #3, reply "bridge" and I'll send the lighter consulting option.
 
-— Nebula"""
+- Nebula"""
 
 
 def build_referral_queue(customer_rows: list[dict[str, Any]]) -> list[QueueItem]:
@@ -230,7 +230,7 @@ def build_brand_proof_queue(customer_rows: list[dict[str, Any]]) -> list[dict[st
 def write_config() -> None:
     CONFIG.parent.mkdir(parents=True, exist_ok=True)
     CONFIG.write_text(json.dumps({
-        "source": "TRIBE weekly email — Matthew",
+        "source": "TRIBE weekly email - Matthew",
         "traffic": "Split top-of-funnel and bottom-of-funnel; warm intros are higher-value traffic than random visits.",
         "revenue": "Give qualified buyers the thing they are willing to buy; add consulting bridge when full service is too much risk.",
         "inbound": "Ask existing customers/audit relationships for one intro to someone as good as them.",

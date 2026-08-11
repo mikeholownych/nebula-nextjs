@@ -2,9 +2,9 @@
 
 You're running ads. You're getting traffic. But your landing page isn't converting.
 
-**It's not one thing.** It's almost always a missing system — not a missing button color or a better font.
+**It's not one thing.** It's almost always a missing system - not a missing button color or a better font.
 
-Over 120 landing page audits, we've traced every conversion leak back to one of seven systems. Brands that fix **all seven** see 2-4x conversion improvements. Brands that skip even one leave money on the table — and usually don't know which one.
+Over 120 landing page audits, we've traced every conversion leak back to one of seven systems. Brands that fix **all seven** see 2-4x conversion improvements. Brands that skip even one leave money on the table - and usually don't know which one.
 
 This is the checklist.
 
@@ -38,7 +38,7 @@ A landing page has one job: get the visitor to take one specific action. Every w
 - H1 headline states the specific outcome for a specific audience ("Save 40% on Facebook Ad Costs Without Reducing Budget")
 - Primary CTA is above the fold, uses action + outcome language ("Run My Free Teardown" not "Submit" or "Learn More")
 - Social proof (testimonial, case study screenshot, metric, logo wall) is visible before the CTA
-- The page has one primary action — not 5 competing links
+- The page has one primary action - not 5 competing links
 
 **Most common miss:** The headline is a brand tagline ("Your Partner in Growth") instead of a value promise to a specific buyer. The visitor has to figure out why they're there.
 
@@ -58,7 +58,7 @@ Most early-stage ecom brands ignore SEO entirely because "ads are working." Then
 - Exactly one H1 per page that shares significant keywords with the title tag
 - URL is readable and keyword-inclusive (/7-systems-ecom-brand-needs not /page-3?a=xyz)
 
-**Most common miss:** Title tag and H1 don't align — the search result promises one thing, the page headline says another. Google sees the mismatch; bounce rate goes up.
+**Most common miss:** Title tag and H1 don't align - the search result promises one thing, the page headline says another. Google sees the mismatch; bounce rate goes up.
 
 **ROI of fixing:** The naming-consistency fix (title ↔ H1 alignment) is the single highest-ROI SEO move for most pages we audit. It takes 5 minutes and can improve both CTR from search and on-page conversion.
 
@@ -72,7 +72,7 @@ If you don't capture them, you lose them forever. Retargeting ads cost 3x what e
 
 **What working looks like:**
 - A low-friction email capture (lead magnet, calculator, checklist, free audit) above the fold or as an exit-intent
-- Confirmation page offers a next step — not just "check your inbox"
+- Confirmation page offers a next step - not just "check your inbox"
 - New subscribers enter a sequence within 24 hours (not a weekly batch)
 - Segmentation starts on day 1 based on which magnet they opted into
 
@@ -86,7 +86,7 @@ If you don't capture them, you lose them forever. Retargeting ads cost 3x what e
 
 **70%+ of ecom traffic is mobile. 90%+ of ecom revenue is not.**
 
-Mobile traffic converts at a fraction of desktop — not because mobile users aren't buyers, but because most landing pages weren't built for mobile first.
+Mobile traffic converts at a fraction of desktop - not because mobile users aren't buyers, but because most landing pages weren't built for mobile first.
 
 **What working looks like:**
 - Viewport meta tag present and configured correctly
@@ -95,7 +95,7 @@ Mobile traffic converts at a fraction of desktop — not because mobile users ar
 - Font sizes are readable without pinch-zoom (16px minimum for body text)
 - Forms are mobile-native (no tiny dropdowns, date pickers that work on touch)
 
-**Most common miss:** The desktop page "responsive" by shrinking — the CTA gets smaller, buttons get closer together, and the form becomes a frustration exercise.
+**Most common miss:** The desktop page "responsive" by shrinking - the CTA gets smaller, buttons get closer together, and the form becomes a frustration exercise.
 
 **ROI of fixing:** Mobile CTA optimization alone (button size, placement, contrast) can close 20-40% of the desktop-to-mobile conversion gap.
 
@@ -105,7 +105,7 @@ Mobile traffic converts at a fraction of desktop — not because mobile users ar
 
 **The leak isn't always at the top of the funnel.**
 
-Sometimes the landing page is fine — the leak is between "add to cart" and "confirmed purchase."
+Sometimes the landing page is fine - the leak is between "add to cart" and "confirmed purchase."
 
 **What working looks like:**
 - Checkout has 3 or fewer visible steps
@@ -113,7 +113,7 @@ Sometimes the landing page is fine — the leak is between "add to cart" and "co
 - Cart abandonment email sends within 1 hour
 - Thank-you page includes a clear next step (not a dead end)
 
-**Most common miss:** Cart abandonment emails are generic ("You left something in your cart") instead of specific ("Your Free Audit Report is Ready — Here's Your Implementation Access"). The offer should continue on the thank-you page, not end there.
+**Most common miss:** Cart abandonment emails are generic ("You left something in your cart") instead of specific ("Your Free Audit Report is Ready - Here's Your Implementation Access"). The offer should continue on the thank-you page, not end there.
 
 **ROI of fixing:** Cart abandonment emails recover 10-15% of lost revenue. A structured thank-you page add-on offer can add 15-30% to AOV.
 
@@ -141,19 +141,19 @@ Most brands have Google Analytics installed. Few have a feedback loop that actua
 
 **Fix in this order:**
 
-1. **Ad Tracking** — so you can measure everything else
-2. **Landing Page** — so traffic converts once it arrives
-3. **SEO Foundations** — so you build an asset that compounds
-4. **Email Capture** — so you don't lose the 95% who aren't ready yet
-5. **Mobile** — so your mobile traffic converts like desktop
-6. **Checkout** — so conversions don't spill at the finish line
-7. **Analytics** — so you keep getting better, permanently
+1. **Ad Tracking** - so you can measure everything else
+2. **Landing Page** - so traffic converts once it arrives
+3. **SEO Foundations** - so you build an asset that compounds
+4. **Email Capture** - so you don't lose the 95% who aren't ready yet
+5. **Mobile** - so your mobile traffic converts like desktop
+6. **Checkout** - so conversions don't spill at the finish line
+7. **Analytics** - so you keep getting better, permanently
 
 ---
 
 ## How Does Your Page Score?
 
-We built a free conversion analyzer — enter your URL and we'll score your page across all 7 systems (and more). It takes 10 seconds.
+We built a free conversion analyzer - enter your URL and we'll score your page across all 7 systems (and more). It takes 10 seconds.
 
 **→ [Run Your Free Audit](https://nebulacomponents.shop/)**
 

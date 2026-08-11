@@ -121,7 +121,7 @@ applies_to: linkedin-post-monitor, dm_queue, engager_crawler
     "classification": "problem_disclosure",
     "comment_snippet": "Our ads are getting clicks but zero conversions..."
   },
-  "dm_template": "Hi Jane, saw your comment about zero conversions. I've been auditing landing pages that bleed ad spend — the pattern is usually X. If helpful: [free audit link].",
+  "dm_template": "Hi Jane, saw your comment about zero conversions. I've been auditing landing pages that bleed ad spend - the pattern is usually X. If helpful: [free audit link].",
   "created_at": "2026-07-17T14:00:00Z",
   "status": "pending_review",
   "approved_by": null,
@@ -155,7 +155,7 @@ applies_to: linkedin-post-monitor, dm_queue, engager_crawler
 
 ### Never Auto-Send DM
 
-Even if approved API exists, DM from personal profile **always** requires manual send. Only automated DM possible via official LinkedIn Messaging API with explicit permission — not currently implemented.
+Even if approved API exists, DM from personal profile **always** requires manual send. Only automated DM possible via official LinkedIn Messaging API with explicit permission - not currently implemented.
 
 ---
 
@@ -240,26 +240,26 @@ Send outbound email         ← ❌ VIOLATION
 ```python
 def validate_linkedin_event(event: dict) -> tuple[bool, str]:
     """Check compliance before persisting event."""
-    
+
     # 1. No automated DM queue sending
     if event.get("type") == "dm_queued":
         if event.get("auto_send", False):
             return False, "DM auto-send prohibited"
-    
+
     # 2. No email enrichment without consent
     if event.get("type") == "lead_created":
         if event.get("email") and not event.get("consent_source"):
             return False, "Email requires consent_source"
-    
+
     # 3. No browser automation traces
     if event.get("acquisition_method") == "browser_automation":
         return False, "Browser automation violates User Agreement"
-    
+
     # 4. DM queue requires review status
     if event.get("type") == "dm_queued":
         if event.get("status") not in ["pending_review", "approved", "rejected", "sent"]:
             return False, "Invalid DM status"
-    
+
     return True, "passed"
 ```
 
@@ -346,8 +346,8 @@ GDPR may:
 
 ## Summary
 
-**Automated:** Observe, classify, draft, queue  
-**Manual gate:** Reply send, DM send, email collection  
+**Automated:** Observe, classify, draft, queue
+**Manual gate:** Reply send, DM send, email collection
 **Never:** Browser automation, auto-DM, enrichment without consent
 
 **Golden rule:** LinkedIn is an interest detection surface, not a lead database. Move interested people to owned properties before collecting PII.

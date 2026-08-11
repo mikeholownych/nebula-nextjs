@@ -8,7 +8,7 @@ const PLATFORM_API = process.env.PLATFORM_API_URL || 'http://localhost:8001'
  *
  * Binary-streaming proxy to the platform API's PDF report endpoint.
  * Forwards auth cookies / share token untouched and pipes the PDF body
- * straight back — never parse this response as JSON.
+ * straight back - never parse this response as JSON.
  */
 export async function GET(req: NextRequest) {
   const query = req.nextUrl.search // includes leading '?' or is ''
@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
     })
 
     if (!res.ok) {
-      // Error responses from the backend are JSON — pass them through
+      // Error responses from the backend are JSON - pass them through
       const body = await res.text()
       return new NextResponse(body, {
         status: res.status,

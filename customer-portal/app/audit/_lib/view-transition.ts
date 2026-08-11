@@ -11,7 +11,7 @@ type Router = ReturnType<typeof useRouter>
  * morph shared elements instead of hard-cutting between routes.
  *
  * Falls back to a plain `router.push` when the API is unavailable (Firefox,
- * or JS-disabled navigation isn't affected either way) — no regression, just
+ * or JS-disabled navigation isn't affected either way) - no regression, just
  * no enhancement.
  */
 export function pushWithViewTransition(router: Router, href: string) {

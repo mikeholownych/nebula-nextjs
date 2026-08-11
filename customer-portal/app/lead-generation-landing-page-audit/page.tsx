@@ -23,7 +23,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Lead Generation Landing Page Audit: Form Field Count, CTA Labels & Post-Submit Clarity',
   description:
-    'Diagnostic guide for lead generation landing pages receiving paid traffic — form field overload, generic submit labels, missing proof adjacent to the form, mobile form placement, privacy micro-copy, and post-submit clarity.',
+    'Diagnostic guide for lead generation landing pages receiving paid traffic - form field overload, generic submit labels, missing proof adjacent to the form, mobile form placement, privacy micro-copy, and post-submit clarity.',
   author: { '@type': 'Organization', name: 'Nebula Components' },
   publisher: { '@type': 'Organization', name: 'Nebula Components' },
   mainEntityOfPage: 'https://nebulacomponents.com/lead-generation-landing-page-audit',
@@ -58,11 +58,11 @@ const faqItems = [
   },
   {
     q: 'Where should social proof be placed on a lead gen landing page?',
-    a: 'Adjacent to the form, not below it. A testimonial or client logo strip positioned directly above or beside the submit button acts at the moment of commitment — when trust is most needed. Proof at the bottom of the page, after the CTA, is too late for the visitors who abandoned without scrolling.',
+    a: 'Adjacent to the form, not below it. A testimonial or client logo strip positioned directly above or beside the submit button acts at the moment of commitment - when trust is most needed. Proof at the bottom of the page, after the CTA, is too late for the visitors who abandoned without scrolling.',
   },
   {
     q: "What is 'post-submit clarity' and why does it matter?",
-    a: "It's the statement of what happens after the visitor clicks submit. 'We'll be in touch' creates anxiety — when? From whom? For what? 'You'll receive your report in 2 minutes by email' eliminates the uncertainty. Visitors who know exactly what to expect immediately after submitting are less likely to abandon the thank-you page or mark the follow-up as spam.",
+    a: "It's the statement of what happens after the visitor clicks submit. 'We'll be in touch' creates anxiety - when? From whom? For what? 'You'll receive your report in 2 minutes by email' eliminates the uncertainty. Visitors who know exactly what to expect immediately after submitting are less likely to abandon the thank-you page or mark the follow-up as spam.",
   },
 ]
 
@@ -81,43 +81,43 @@ const LEADGEN_FAILURES = [
     signal: 'Form field count',
     label: 'More than 5 fields on a cold-traffic form',
     detail:
-      "Cold traffic has no prior relationship with the brand. Each additional required field is an additional qualification gate the visitor must pass before receiving what was promised in the ad. Beyond 5 fields — name, email, and minimal delivery context — completion rate drops with each added input. Phone number, company size, budget, and job title belong on a qualification call, not the entry form.",
-    fix: 'Audit every field on the form against one question: is this required to deliver what I promised in the ad? Remove any field that fails. Collect qualification data on a follow-up step after the initial conversion — not as a gatekeeper to it.',
+      "Cold traffic has no prior relationship with the brand. Each additional required field is an additional qualification gate the visitor must pass before receiving what was promised in the ad. Beyond 5 fields - name, email, and minimal delivery context - completion rate drops with each added input. Phone number, company size, budget, and job title belong on a qualification call, not the entry form.",
+    fix: 'Audit every field on the form against one question: is this required to deliver what I promised in the ad? Remove any field that fails. Collect qualification data on a follow-up step after the initial conversion - not as a gatekeeper to it.',
   },
   {
     signal: 'CTA label',
     label: "'Submit' as the form button label",
     detail:
-      "'Submit' and 'Send' are system verbs — they describe what the visitor is doing, not what they receive. On a cold-traffic form, the button label is the final moment of decision. A label that reminds the visitor of the outcome ('Get my free audit', 'Book the call', 'Send my report') reaffirms the exchange value at exactly the moment the visitor needs it most.",
+      "'Submit' and 'Send' are system verbs - they describe what the visitor is doing, not what they receive. On a cold-traffic form, the button label is the final moment of decision. A label that reminds the visitor of the outcome ('Get my free audit', 'Book the call', 'Send my report') reaffirms the exchange value at exactly the moment the visitor needs it most.",
     fix: "Replace the generic verb with the outcome statement. Match it to the ad promise. If the ad said 'free audit in 2 minutes', the button should say 'Get my free audit'. The label should be specific enough that a visitor who skimmed the page could infer what they signed up for from the button alone.",
   },
   {
     signal: 'Social proof',
     label: 'No proof adjacent to the form',
     detail:
-      "The moment of highest friction on a lead gen page is the instant before the visitor clicks submit. That is when trust is most needed and most absent. Most pages place testimonials and client logos in a section below the form — where only visitors who scroll past the CTA will see them. Cold traffic that bounces without scrolling never receives the trust signal.",
-    fix: 'Position one testimonial or logo strip directly above or beside the submit button — inside the form container or immediately adjacent to it. A single named quote with a specific outcome outperforms a logo strip. Job title and company are sufficient attribution.',
+      "The moment of highest friction on a lead gen page is the instant before the visitor clicks submit. That is when trust is most needed and most absent. Most pages place testimonials and client logos in a section below the form - where only visitors who scroll past the CTA will see them. Cold traffic that bounces without scrolling never receives the trust signal.",
+    fix: 'Position one testimonial or logo strip directly above or beside the submit button - inside the form container or immediately adjacent to it. A single named quote with a specific outcome outperforms a logo strip. Job title and company are sufficient attribution.',
   },
   {
     signal: 'Above the fold',
     label: 'The form is below the fold on mobile',
     detail:
-      "On mobile, many lead gen pages place the form below a hero section, an explanation of the offer, and a bullet-point feature list. The visitor arrives from an ad on a 375px screen and sees a headline and hero image — no form, no CTA. Visitors who don't scroll don't convert. The form being below the fold on mobile is the most structurally invisible failure on lead gen pages.",
-    fix: 'On mobile, place the form — or at minimum the email field and submit button — within the first viewport. The headline states the offer; the form captures it. Supporting content goes below. If the layout cannot support a form above the fold, use a single-field email capture with full form on the next step.',
+      "On mobile, many lead gen pages place the form below a hero section, an explanation of the offer, and a bullet-point feature list. The visitor arrives from an ad on a 375px screen and sees a headline and hero image - no form, no CTA. Visitors who don't scroll don't convert. The form being below the fold on mobile is the most structurally invisible failure on lead gen pages.",
+    fix: 'On mobile, place the form - or at minimum the email field and submit button - within the first viewport. The headline states the offer; the form captures it. Supporting content goes below. If the layout cannot support a form above the fold, use a single-field email capture with full form on the next step.',
   },
   {
     signal: 'Privacy micro-copy',
     label: "No 'no spam' assurance adjacent to the email field",
     detail:
-      "Cold traffic is skeptical about email capture. The visitor's implicit concern — 'will this result in daily marketing emails?' — goes unaddressed on most lead gen forms. A single line adjacent to the email field ('No spam. Unsubscribe any time.') directly answers the objection at the moment it arises. Its absence is not neutral — it leaves the concern unanswered.",
-    fix: "Add a single line of micro-copy directly below the email input. Keep it specific: 'No spam. Unsubscribe any time.' or 'One email with your report. Nothing else.' Do not use generic privacy policy links as a substitute — the visitor is looking for a human assurance, not a legal document.",
+      "Cold traffic is skeptical about email capture. The visitor's implicit concern - 'will this result in daily marketing emails?' - goes unaddressed on most lead gen forms. A single line adjacent to the email field ('No spam. Unsubscribe any time.') directly answers the objection at the moment it arises. Its absence is not neutral - it leaves the concern unanswered.",
+    fix: "Add a single line of micro-copy directly below the email input. Keep it specific: 'No spam. Unsubscribe any time.' or 'One email with your report. Nothing else.' Do not use generic privacy policy links as a substitute - the visitor is looking for a human assurance, not a legal document.",
   },
   {
     signal: 'Post-submit clarity',
     label: "No statement of what happens after submission",
     detail:
       "'We'll be in touch' creates three unanswered questions: when, from whom, and for what purpose. A visitor who submits a form and receives ambiguous confirmation has no framework for what to do next. They cannot confirm the submission worked. They cannot anticipate the follow-up. Uncertainty after submission increases abandon rate on the thank-you page and increases spam reports on the follow-up email.",
-    fix: "Replace the confirmation message with a specific delivery statement: 'You'll receive your audit by email in 2 minutes. Check your inbox — and spam folder if needed.' State the delivery channel, the delivery time, and the content. This is the contract the visitor agreed to — confirm it explicitly.",
+    fix: "Replace the confirmation message with a specific delivery statement: 'You'll receive your audit by email in 2 minutes. Check your inbox - and spam folder if needed.' State the delivery channel, the delivery time, and the content. This is the contract the visitor agreed to - confirm it explicitly.",
   },
 ]
 
@@ -183,7 +183,7 @@ export default function LeadGenAuditPage() {
               What the audit checks on a lead gen page
             </h2>
             <p className="text-sm text-fg-muted leading-6 mb-6 max-w-2xl">
-              Nebula checks the same 9 signals on every URL. For lead gen pages, the signals that fail most often are form field count, CTA label, and proof proximity. The audit returns pass/fail with the raw value from your page — field count, button label, trust markers in source order — so every finding is verifiable.
+              Nebula checks the same 9 signals on every URL. For lead gen pages, the signals that fail most often are form field count, CTA label, and proof proximity. The audit returns pass/fail with the raw value from your page - field count, button label, trust markers in source order - so every finding is verifiable.
             </p>
             <div className="grid gap-3 sm:grid-cols-3">
               {[
@@ -211,7 +211,7 @@ export default function LeadGenAuditPage() {
           <section className="mb-14 rounded-2xl border border-border bg-bg-muted/30 p-8 text-center">
             <h2 className="text-2xl font-bold text-fg mb-3">Audit your lead generation page</h2>
             <p className="text-sm text-fg-muted max-w-xl mx-auto mb-6">
-              Paste your URL. Nebula checks form field count, CTA label, proof placement, mobile form visibility, and post-submit clarity against your actual page — not a template. Free, no signup, under 2 minutes.
+              Paste your URL. Nebula checks form field count, CTA label, proof placement, mobile form visibility, and post-submit clarity against your actual page - not a template. Free, no signup, under 2 minutes.
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"

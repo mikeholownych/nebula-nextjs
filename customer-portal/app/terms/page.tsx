@@ -4,7 +4,7 @@ import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service — Nebula Components',
+  title: 'Terms of Service - Nebula Components',
   description: 'Terms of service for Nebula Components landing page audit and optimization services.',
   alternates: { canonical: 'https://nebulacomponents.com/terms' },
 }

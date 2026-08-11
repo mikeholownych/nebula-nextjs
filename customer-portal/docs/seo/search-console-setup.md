@@ -1,4 +1,4 @@
-# Search Console & Webmaster Configuration Guide — Nebula Components
+# Search Console & Webmaster Configuration Guide - Nebula Components
 
 **Domain**: `nebulacomponents.com`
 **Sitemap Location**: `https://nebulacomponents.com/sitemap.xml`

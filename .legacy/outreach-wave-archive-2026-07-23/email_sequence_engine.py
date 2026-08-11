@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-Email Sequence Engine — Daniel Bustamante 4-part playbook adapted for Nebula.
+Email Sequence Engine - Daniel Bustamante 4-part playbook adapted for Nebula.
 
 Translates the classic launch email playbook into Nebula's trigger-aware
-funnel. No "waitlists" or "cart opens" — instead, sequences are triggered
+funnel. No "waitlists" or "cart opens" - instead, sequences are triggered
 by real user actions (audit run, checkout visit, purchase).
 
 4-Part Playbook (adapted):
-  Part 1: Audit Delivery (replaces Pre-launch) — Day 0-1
-  Part 2: Offer Sequence (replaces Launch)     — Day 2-5
-  Part 3: Objection Handling (replaces Obj)    — Day 6-9
-  Part 4: Abandoned Checkout (replace AC)      — triggered by visit
+  Part 1: Audit Delivery (replaces Pre-launch) - Day 0-1
+  Part 2: Offer Sequence (replaces Launch)     - Day 2-5
+  Part 3: Objection Handling (replaces Obj)    - Day 6-9
+  Part 4: Abandoned Checkout (replace AC)      - triggered by visit
 
 Run: python3 email_sequence_engine.py [--dry-run] [--send]
 Cron: every 2h
@@ -23,7 +23,7 @@ BASE = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE))
 import lead_manager
 
-# Subject Line Analyzer — scores each subject line against B2B hook archetypes
+# Subject Line Analyzer - scores each subject line against B2B hook archetypes
 try:
     from subject_analyzer import score_subject
     HAS_SUBJECT_ANALYZER = True
@@ -92,14 +92,14 @@ SEQUENCES = {
                 "type": "text",
                 "body": (
                     "You ran a landing page audit. Here's what it checked:\n\n"
-                    "1. Headline Clarity — does it describe the problem or the product?\n"
-                    "2. CTA Actionability — is it a decision or a label?\n"
-                    "3. Trust Proof — is social proof above the fold?\n"
-                    "4. Page Speed — how fast does it load?\n"
-                    "5. Mobile Responsiveness — does it work on phone?\n\n"
+                    "1. Headline Clarity - does it describe the problem or the product?\n"
+                    "2. CTA Actionability - is it a decision or a label?\n"
+                    "3. Trust Proof - is social proof above the fold?\n"
+                    "4. Page Speed - how fast does it load?\n"
+                    "5. Mobile Responsiveness - does it work on phone?\n\n"
                     "If any of these scored under 7, that's a leak.\n\n"
                     "The good news: each leak has a fix. The headline alone accounts "
-                    "for 40% of conversion variance — and it's a 15-minute change.\n\n"
+                    "for 40% of conversion variance - and it's a 15-minute change.\n\n"
                     "Over the next few days I'll show you exactly how to fix each one.\n\n"
                     "First step: review your scores. Then decide if you want the fixes done for you.\n\n"
                     "→ Fix them yourself: the free Fix Kit (templates + checklist) is waiting\n"
@@ -185,16 +185,16 @@ SEQUENCES = {
             {
                 "id": "objection_price",
                 "day": 0,
-                "subject": "The $97 fix that saved $3k/mo in ads — what you get",
+                "subject": "The $97 fix that saved $3k/mo in ads - what you get",
                 "type": "text",
                 "body": (
                     "Saw you checked out the Fix Pack. Let me answer the question everyone asks:\n\n"
                     "What exactly do I get for $97?\n\n"
-                    "- Hero section rewrite (headline + subheadline) — tailored to your ICP\n"
-                    "- CTA button redesign — action-driven, not label-driven\n"
-                    "- Trust proof placement — social proof positioned above the fold\n"
-                    "- FAQ / objection section — addresses doubts before they arise\n"
-                    "- Mobile-first formatting — your page will work on phone\n\n"
+                    "- Hero section rewrite (headline + subheadline) - tailored to your ICP\n"
+                    "- CTA button redesign - action-driven, not label-driven\n"
+                    "- Trust proof placement - social proof positioned above the fold\n"
+                    "- FAQ / objection section - addresses doubts before they arise\n"
+                    "- Mobile-first formatting - your page will work on phone\n\n"
                     "Delivered as HTML you can paste directly into your page. Or we can implement it.\n\n"
                     "The reason it's $97 and not $997: it's a fixed scope. Every Fix Pack is the same "
                     "5 sections, tailored to your audit results. No scope creep, no meetings, no fuss.\n\n"
@@ -210,7 +210,7 @@ SEQUENCES = {
                 "subject": "Not sure if this applies to you? Let me clarify",
                 "type": "text",
                 "body": (
-                    "If you're wondering \"does this work for my type of business?\" — here's the short answer:\n\n"
+                    "If you're wondering \"does this work for my type of business?\" - here's the short answer:\n\n"
                     "The audit checks universal conversion principles. Headline clarity, CTA actionability, "
                     "trust proof, speed, mobile. These matter whether you sell SaaS, services, ecommerce, or lead gen.\n\n"
                     "A few examples of who's used it:\n"
@@ -218,7 +218,7 @@ SEQUENCES = {
                     "  - Service business: 3x more contact form submissions after CTA rewrite\n"
                     "  - Ecommerce store: 40% more add-to-cart after trust proof repositioning\n\n"
                     "The Fix Pack adapts to your audit results. If your low score is Headline, we fix the headline. "
-                    "If it's Trust, we fix the trust proof. It's not a template — it's a tailored implementation.\n\n"
+                    "If it's Trust, we fix the trust proof. It's not a template - it's a tailored implementation.\n\n"
                     "$97. 24h delivery. No meetings.\n\n"
                     "https://nebulacomponents.shop/checkout.html\n"
                 ),
@@ -240,7 +240,7 @@ SEQUENCES = {
                 "body": (
                     "Saw you visited the checkout page. You're probably wondering:\n\n"
                     "Will this actually work for my page?\n\n"
-                    "The Fix Pack is built from your audit results. We don't guess — we fix what the audit "
+                    "The Fix Pack is built from your audit results. We don't guess - we fix what the audit "
                     "told you was broken. If your audit said \"Headline Clarity: 4/10,\" we rewrite your headline. "
                     "Simple as that.\n\n"
                     "Here's what one founder said after getting theirs:\n"
@@ -253,11 +253,11 @@ SEQUENCES = {
             {
                 "id": "ac_last_call",
                 "day": 2,
-                "subject": "Last call — your audit-to-fix window closes soon",
+                "subject": "Last call - your audit-to-fix window closes soon",
                 "type": "text",
                 "body": (
                     "I noticed you haven't picked up the Fix Pack yet.\n\n"
-                    "That's fine — not everyone needs it. But I want to be clear about what happens next:\n\n"
+                    "That's fine - not everyone needs it. But I want to be clear about what happens next:\n\n"
                     "Your audit results don't expire, but the Fix Pack is priced at $97 because it's a "
                     "fixed scope. If we end up building a more complex fix down the road, it'll cost more.\n\n"
                     "The cheapest time to fix your page is right now, when the audit already told you "
@@ -327,7 +327,7 @@ def get_eligible_leads(sequence_id=None):
             # Find first unsent step within timing window
             enrolled_at = seq_state.get("enrolled_at")
             if not enrolled_at:
-                # Not enrolled — first step is eligible immediately
+                # Not enrolled - first step is eligible immediately
                 first_step = seq_config["steps"][0]
                 candidates.append((email, lead, seq_id, first_step, 0))
                 continue
@@ -450,14 +450,14 @@ def process_sequences(dry_run=True):
                 # Subject line analysis
                 if HAS_SUBJECT_ANALYZER:
                     sa = score_subject(subject)
-                    print(f"    Subject Score: [{sa['grade']}] {sa['score']}/10 — {sa['best_archetype'] or 'no archetype'}")
+                    print(f"    Subject Score: [{sa['grade']}] {sa['score']}/10 - {sa['best_archetype'] or 'no archetype'}")
                     print(f"    Subject Hint: {sa['improvement_hint']}")
                 total_sent += 1
                 continue
 
             # Check opt-out
             if lead_manager.is_opted_out(email):
-                print(f"  [SKIP] {email} — opted out")
+                print(f"  [SKIP] {email} - opted out")
                 total_skipped += 1
                 continue
 

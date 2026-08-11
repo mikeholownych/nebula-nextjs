@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-ih_signup.py — Autonomously create an IndieHackers account.
+ih_signup.py - Autonomously create an IndieHackers account.
 Uses AgentMail nebulashop@agentmail.to to receive verification email.
 Saves credentials to ~/.hermes/secrets/ih_creds.json on success.
 
-Key insight: IH uses Ember.js — must use .type() NOT .fill() for inputs.
+Key insight: IH uses Ember.js - must use .type() NOT .fill() for inputs.
 The form has multiple onboarding steps with radio selections.
 """
 
@@ -146,13 +146,13 @@ def main():
         inp.click()
         inp.type(USERNAME, delay=80)
         time.sleep(3)  # Let Firebase check username availability
-        
+
         btns = page.query_selector_all("button")
         next_btn = next((b for b in btns if "NEXT" in (b.inner_text() or "").upper()), None)
         if next_btn:
             next_btn.click()
             time.sleep(3)
-        
+
         # ── Steps 2-10: Onboarding wizard ──────────────────────────
         prev_wizard = ""
         for step in range(2, 15):
@@ -160,7 +160,7 @@ def main():
                 "() => document.querySelector('[class*=\"auth-wizard\"]')?.innerText?.substring(0,200) || ''"
             )
             log(f"Step {step} wizard: {wizard[:80].strip()}")
-            
+
             # Detect final success states
             if any(x in page.url for x in ["/dashboard", "/feed", "/groups", "/products"]):
                 log(f"SUCCESS: Reached {page.url}")
@@ -168,22 +168,22 @@ def main():
             if "sign-up" not in page.url and page.url != "https://www.indiehackers.com/":
                 log(f"Redirected to: {page.url}")
                 break
-            
+
             # Detect email verification screen
             if "check your email" in wizard.lower() or "check your email" in page.content().lower():
                 log("Email verification screen detected")
                 break
-            
+
             # No change → stuck
             if wizard == prev_wizard and step > 3:
-                log("Wizard didn't change — trying forced radio pick + NEXT")
+                log("Wizard didn't change - trying forced radio pick + NEXT")
             prev_wizard = wizard
-            
+
             result = advance_step(page, step)
             if not result:
-                log("No button to click — done with wizard or stuck")
+                log("No button to click - done with wizard or stuck")
                 break
-            
+
             if any(x in (result or "") for x in ["CREATE", "SIGN UP", "JOIN", "FINISH", "DONE"]):
                 log("Final submission clicked")
                 time.sleep(5)
@@ -214,10 +214,10 @@ def main():
             else:
                 log("No verification email received in time")
         elif any(x in final_url for x in ["/dashboard", "/feed", "indiehackers.com/"]) and "sign-up" not in final_url:
-            log("Account created and active — no email verify needed")
+            log("Account created and active - no email verify needed")
             creds["verified"] = True
             CREDS_PATH.write_text(json.dumps(creds, indent=2))
-        
+
         log(f"Done. verified={creds['verified']}")
         browser.close()
 

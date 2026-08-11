@@ -1,8 +1,8 @@
 DATE: 2026-07-04
 SNAPSHOT_TIME_UTC: 2026-07-04T22:32:54+00:00
-TASK: t_610a6bd6 — revenue and evidence integrity snapshot
+TASK: t_610a6bd6 - revenue and evidence integrity snapshot
 
-EXECUTIVE SCOREBOARD — EVIDENCE-BACKED ONLY
+EXECUTIVE SCOREBOARD - EVIDENCE-BACKED ONLY
 REVENUE: $0 real revenue (cumulative: $0)
 COSTS: unknown/unverified; authoritative cost ledger is empty
 P&L: cannot be computed from evidence; with verified revenue only, P&L is $0 minus unknown costs

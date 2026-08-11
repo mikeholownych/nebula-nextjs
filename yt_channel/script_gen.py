@@ -80,10 +80,10 @@ def generate_script(page, audit, url=None):
     segments = []
     t = 0.0  # running time cursor
 
-    # Intro hook (5 seconds) — Brenda Turner fifth wall (RRDJO_UV4I8):
+    # Intro hook (5 seconds) - Brenda Turner fifth wall (RRDJO_UV4I8):
     # talk to the ONE viewer, not an audience. No "we are looking at".
     # {PAUSE} markers mimic natural speech rhythm (pauses at sentence boundaries).
-    hook = f"Today: {domain}. {{PAUSE}} Watch closely — you will see exactly where the money leaks."
+    hook = f"Today: {domain}. {{PAUSE}} Watch closely - you will see exactly where the money leaks."
     seg = {"start": t, "end": t + len(hook) / WPS, "text": hook,
            "visual": "intro_card", "dimension": None}
     segments.append(seg)
@@ -96,7 +96,7 @@ def generate_script(page, audit, url=None):
     segments.append(seg)
     t = seg["end"]
 
-    # Worst dimension highlight (6 seconds) — viewer-owned, plain label
+    # Worst dimension highlight (6 seconds) - viewer-owned, plain label
     from yt_channel.short_gen import PLAIN_LABELS as _PL
     plain = _PL.get(worst, worst_label.lower())
     if worst_score < 6:
@@ -114,7 +114,7 @@ def generate_script(page, audit, url=None):
     segments.append(seg)
     t = seg["end"]
 
-    # Walk through each dimension (sorted by score ascending — worst first)
+    # Walk through each dimension (sorted by score ascending - worst first)
     sorted_dims = sorted(dims.items(), key=lambda kv: kv[1]["score"])
     for key, data in sorted_dims:
         label = DIM_SHORT.get(key, key.replace("_", " ").title())
@@ -143,7 +143,7 @@ def generate_script(page, audit, url=None):
         segments.append(seg)
         t = seg["end"]
 
-    # Call to action (8 seconds) — ends with the verbal sign-off ritual
+    # Call to action (8 seconds) - ends with the verbal sign-off ritual
     # (vidIQ Primal Branding): the same line every video, so viewers
     # anticipate it. Also Brenda Turner voice: direct, one-to-one.
     cta = (
@@ -171,7 +171,7 @@ def generate_script(page, audit, url=None):
     from yt_channel.title_score import pick_best
     variant_pain = f"Your Landing Page Is Costing You Sales: {domain} Teardown ({overall:.0f}/10)"
     variant_question = f"Is Your Landing Page Leaving Money On The Table? {domain} Audit ({overall:.0f}/10)"
-    variant_specific = f"{domain} Scores {overall:.0f}/10 — Landing Page Audit"
+    variant_specific = f"{domain} Scores {overall:.0f}/10 - Landing Page Audit"
     best = pick_best([title, variant_pain, variant_question, variant_specific],
                      is_short=False, domain=domain, has_score=True, seed=domain)
     title = best.title
@@ -204,7 +204,7 @@ def generate_script(page, audit, url=None):
         "",
     ])
 
-    # Chapter timestamps (from segment timing — helps YouTube understand
+    # Chapter timestamps (from segment timing - helps YouTube understand
     # the video and gives viewers a jump menu).
     def _mmss(sec: float) -> str:
         m, s = divmod(int(sec), 60)
@@ -224,7 +224,7 @@ def generate_script(page, audit, url=None):
         else:
             label = seg.get("dimension") or "Intro"
         # One chapter per section (worst-dimension gets highlight + narrative
-        # segments — keep only the first, at the earliest timestamp).
+        # segments - keep only the first, at the earliest timestamp).
         if label in seen:
             continue
         seen.add(label)
@@ -241,18 +241,18 @@ def generate_script(page, audit, url=None):
         "",
         # vidIQ tactic (rBIeT9iLmnU): channel URL + sub_confirmation=1
         # triggers an instant subscribe popup on arrival (choice
-        # architecture — the channel page is a top-3 subscriber source).
+        # architecture - the channel page is a top-3 subscriber source).
         "Subscribe for a daily landing page teardown:",
         "https://www.youtube.com/@nebulaaudits?sub_confirmation=1",
         "",
-        # Element 4: ritual — the verbal sign-off line, same every video
+        # Element 4: ritual - the verbal sign-off line, same every video
         "That's your number. Nebula's got your fix.",
         "",
         f"#landingpage #cro #conversionoptimization #{domain.split('.')[0]}",
     ])
     description = "\n".join(desc_lines)
 
-    # Brenda Turner fifth-wall voice gate (RRDJO_UV4I8) — fail-closed:
+    # Brenda Turner fifth-wall voice gate (RRDJO_UV4I8) - fail-closed:
     # a script that talks AT an audience must never be produced.
     from yt_channel.readability import check_voice
     voice = check_voice(" ".join(s["text"] for s in segments))

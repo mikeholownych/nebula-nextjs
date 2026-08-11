@@ -1,5 +1,5 @@
 """
-broll.py — Per-segment B-roll footage sourcing.
+broll.py - Per-segment B-roll footage sourcing.
 
 Strategy:
   1. Extract search keywords from each segment (finding label + domain context)

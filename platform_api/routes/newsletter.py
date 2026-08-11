@@ -1,4 +1,4 @@
-"""Newsletter subscription API — backed by PostgreSQL via crm service."""
+"""Newsletter subscription API - backed by PostgreSQL via crm service."""
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, EmailStr

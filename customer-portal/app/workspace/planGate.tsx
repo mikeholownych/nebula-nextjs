@@ -4,7 +4,7 @@
  * Plan gating for workspace features.
  *
  * Philosophy: free users see the tab, click it, and land on a clear
- * upgrade prompt — not a blank screen or a 403. The lock is visible in
+ * upgrade prompt - not a blank screen or a 403. The lock is visible in
  * the nav so they know value exists behind it.
  */
 
@@ -108,7 +108,7 @@ export function LockedTab({ tabLabel, requiredPlan, currentPlan }: LockedTabProp
         </Link>
       </div>
 
-      {/* Feature hint — what they'd unlock */}
+      {/* Feature hint - what they'd unlock */}
       <p className="mt-8 text-xs text-fg-dim">
         {tabLabel === 'Monitoring' && 'Weekly score-drop alerts and page health tracking for your live URLs.'}
         {tabLabel === 'Compare' && 'Side-by-side before/after audit comparison with finding-level diff.'}

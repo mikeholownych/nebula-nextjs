@@ -1,4 +1,4 @@
-"""Shortcut router — maps /commands to workflows."""
+"""Shortcut router - maps /commands to workflows."""
 import sys, json, logging
 from pathlib import Path
 

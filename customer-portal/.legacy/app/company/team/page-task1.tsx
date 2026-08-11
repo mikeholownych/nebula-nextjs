@@ -1,10 +1,10 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Team — Nebula Components',
+  title: 'Team - Nebula Components',
   description: 'Meet the Nebula Components team. Landing page conversion specialists.',
   openGraph: {
-    title: 'Team — Nebula Components',
+    title: 'Team - Nebula Components',
     description: 'Meet the Nebula Components team.',
     url: 'https://nebulacomponents.shop/company/team',
   },
@@ -31,7 +31,7 @@ export default function TeamPage() {
         </h1>
 
         <p className="text-gray-300 text-lg mb-8">
-          Small team, specific focus. We don't do "digital strategy" — we find the leak
+          Small team, specific focus. We don't do "digital strategy" - we find the leak
           in your landing page and fix it.
         </p>
 

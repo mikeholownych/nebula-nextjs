@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-GSC Gap Analysis — Agensi playbook applied to Nebula
+GSC Gap Analysis - Agensi playbook applied to Nebula
 Every Monday: export GSC → run this → get 5-10 keyword opportunities → write articles.
 
 Usage:
@@ -10,7 +10,7 @@ Usage:
 
   2. Run: python3 gsc_gap_analysis.py [gsc_export.csv]
 
-  3. Output: keyword_gaps.md — top opportunities with impression counts and positions
+  3. Output: keyword_gaps.md - top opportunities with impression counts and positions
 """
 
 import csv
@@ -77,8 +77,8 @@ def classify_opportunity(row: dict) -> str | None:
     """
     Returns opportunity type or None.
     - 'gap'      : impressions but no ranked page, or position > 15
-    - 'ctr_leak' : good position (≤15) but very low CTR — title/meta fix
-    - 'quick_win': position 11–20, reasonable impressions — new article could rank fast
+    - 'ctr_leak' : good position (≤15) but very low CTR - title/meta fix
+    - 'quick_win': position 11–20, reasonable impressions - new article could rank fast
     """
     if row['impressions'] < MIN_IMPRESSIONS:
         return None
@@ -124,7 +124,7 @@ def find_cannibalization(rows: list[dict]) -> list[dict]:
 def find_emerging_queries(rows: list[dict], top_n: int = 10) -> list[dict]:
     """
     Emerging = high impressions, position > 20, very few clicks.
-    These are new terms Google is testing us for — worth targeting fast.
+    These are new terms Google is testing us for - worth targeting fast.
     """
     emerging = [
         r for r in rows
@@ -173,12 +173,12 @@ def run_analysis(csv_path: str) -> str:
     # ── Build report ──────────────────────────────────────────────────────────
     now = datetime.now().strftime('%Y-%m-%d')
     lines = [
-        f"# GSC Gap Analysis — {now}",
+        f"# GSC Gap Analysis - {now}",
         f"Source: `{csv_path}`  |  Rows: {len(rows)}  |  Gaps: {len(gaps)}  |  CTR leaks: {len(ctr_leaks)}",
         "",
         "---",
         "",
-        "## 🎯 Priority 1 — Keyword Gaps (write these articles first)",
+        "## 🎯 Priority 1 - Keyword Gaps (write these articles first)",
         "_Queries with 20+ impressions but no dedicated ranking page or avg position > 15._",
         "",
         "| Query | Impressions | Position | CTR | Suggested Article Title |",
@@ -192,8 +192,8 @@ def run_analysis(csv_path: str) -> str:
         "",
         "---",
         "",
-        "## ⚡ Priority 2 — Quick Win Positions (11–20)",
-        "_Good impressions, close to page 1 — one new targeted article can steal these._",
+        "## ⚡ Priority 2 - Quick Win Positions (11–20)",
+        "_Good impressions, close to page 1 - one new targeted article can steal these._",
         "",
         "| Query | Impressions | Position | CTR | Suggested Article Title |",
         "|---|---|---|---|---|",
@@ -206,7 +206,7 @@ def run_analysis(csv_path: str) -> str:
         "",
         "---",
         "",
-        "## 📉 Priority 3 — CTR Leaks (good position, low clicks)",
+        "## 📉 Priority 3 - CTR Leaks (good position, low clicks)",
         "_Page is ranking but title/meta isn't compelling. Fix meta description + title tag._",
         "",
         "| Query | Impressions | Position | CTR | Fix |",
@@ -221,7 +221,7 @@ def run_analysis(csv_path: str) -> str:
             "---",
             "",
             "## ⚠️  Cannibalization Issues",
-            "_Two pages competing within 3 positions on the same query — consolidate or differentiate._",
+            "_Two pages competing within 3 positions on the same query - consolidate or differentiate._",
             "",
             "| Query | Page A | Pos A | Page B | Pos B | Impressions |",
             "|---|---|---|---|---|---|",
@@ -236,7 +236,7 @@ def run_analysis(csv_path: str) -> str:
             "",
             "---",
             "",
-            "## 🚀 Emerging Queries (Google testing us — act fast)",
+            "## 🚀 Emerging Queries (Google testing us - act fast)",
             "_High impressions, position > 20, near-zero clicks. Write a dedicated article this week._",
             "",
             "| Query | Impressions | Position | Suggested Article Title |",
@@ -269,7 +269,7 @@ def main():
 
     if not os.path.exists(csv_path):
         print(f"""
-GSC Gap Analysis — Nebula Components
+GSC Gap Analysis - Nebula Components
 =====================================
 CSV not found: {csv_path}
 
@@ -281,7 +281,7 @@ To use this script:
   5. Run: python3 gsc_gap_analysis.py
 
 Expected CSV columns: Query, Clicks, Impressions, CTR, Position
-(Standard GSC export format — no modifications needed)
+(Standard GSC export format - no modifications needed)
 """)
         sys.exit(1)
 

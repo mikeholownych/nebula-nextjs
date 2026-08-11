@@ -90,7 +90,7 @@ test('dashboard renders live operational metrics without placeholders', async ({
   await page.goto(BASE_URL + '/dashboard.html', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('#data-status')).toHaveText(/Live|Stale data/);
   for (const id of ['total-audits', 'total-checkouts', 'conversion-rate', 'total-revenue', 'page-views']) {
-    await expect(page.locator(`#${id}`), id).not.toHaveText('—');
+    await expect(page.locator(`#${id}`), id).not.toHaveText('-');
   }
 });
 

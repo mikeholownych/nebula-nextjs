@@ -1,11 +1,11 @@
-# A/B Test Plan — Nebula Components Landing Page
+# A/B Test Plan - Nebula Components Landing Page
 
 ## Test 1: Hero Headline
 | Variant | Headline | Hypothesis |
 |---------|----------|------------|
-| **Control** | "Your landing page is leaking money. We'll tell you exactly where — free." | Current baseline |
+| **Control** | "Your landing page is leaking money. We'll tell you exactly where - free." | Current baseline |
 | **Variant A** | "Stop bleeding ad spend. Get a free diagnosis that shows exactly why your page doesn't convert." | Stronger pain + outcome framing increases form starts |
-| **Variant B** | "Spent $10K on ads with zero sales? We'll show you the exact leaks — for free." | Specific dollar trigger matches ICP's reality |
+| **Variant B** | "Spent $10K on ads with zero sales? We'll show you the exact leaks - for free." | Specific dollar trigger matches ICP's reality |
 
 **Metric**: Audit form submission rate | **Duration**: 14 days or 100 submissions
 
@@ -37,7 +37,7 @@
 | Variant | Text | Hypothesis |
 |---------|------|------------|
 | **Control** | "Get the $147 Fix Pack →" | Current baseline |
-| **Variant A** | "Fix these issues now — $147 one-time" | More specific about what they get |
+| **Variant A** | "Fix these issues now - $147 one-time" | More specific about what they get |
 | **Variant B** | "Deploy your fixes → $147" | Action-oriented, implies speed |
 
 **Metric**: Stripe checkout click-through rate | **Duration**: 14 days

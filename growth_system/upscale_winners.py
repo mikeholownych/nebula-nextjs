@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-upscale_winners.py — generates Topaz Video AI upscale briefs for winning clips.
+upscale_winners.py - generates Topaz Video AI upscale briefs for winning clips.
 Usage: python3 upscale_winners.py shot3.mp4 shot5.mp4
 Or:    echo -e "shot3.mp4\nshot5.mp4" | python3 upscale_winners.py
 """
@@ -19,14 +19,14 @@ ANCHOR = (
 )
 
 BRIEF_TEMPLATE = """\
-# Topaz Video AI — Master Upscale Brief
+# Topaz Video AI - Master Upscale Brief
 # Generated: {date}
 # Source: {filepath}
 
 ## Upscale Settings
 
 Target resolution: 3840×2160 (4K UHD)
-Preserve grain: YES — do not denoise, do not apply noise reduction
+Preserve grain: YES - do not denoise, do not apply noise reduction
 Motion artifact handling: preserve as cinematic texture
 Output format: ProRes 422 HQ
 
@@ -36,14 +36,14 @@ Output format: ProRes 422 HQ
 ## Paste-ready brief (for Topaz Video AI or similar)
 
 > Upscale {filename} to 3840x2160. Preserve film grain and motion artifacts
-> as cinematic texture — do not denoise, do not apply noise reduction.
+> as cinematic texture - do not denoise, do not apply noise reduction.
 > Style anchor: {anchor}.
 > Output as ProRes 422 HQ for editorial.
 
 ## Destination check (confirm before running)
-- [ ] Phone feed only (TikTok/Reels/Shorts) → SKIP — keep 1080p
+- [ ] Phone feed only (TikTok/Reels/Shorts) → SKIP - keep 1080p
 - [ ] YouTube desktop / brand archive → PROCEED with 4K
-- [ ] LinkedIn / one-off post → SKIP — feed compresses anyway
+- [ ] LinkedIn / one-off post → SKIP - feed compresses anyway
 """
 
 def generate_brief(filename: str) -> Path:

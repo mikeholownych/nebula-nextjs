@@ -27,10 +27,10 @@ SUBJECTS = [
 ]
 
 BODIES = [
-    "Hey Mike — just making sure this is landing in your inbox correctly. No action needed.",
-    "Hey — running a quick deliverability check. You don't need to reply to this one.",
+    "Hey Mike - just making sure this is landing in your inbox correctly. No action needed.",
+    "Hey - running a quick deliverability check. You don't need to reply to this one.",
     "Hi Mike, just a routine check. Everything on your end looking good?",
-    "Hey — wanted to make sure our emails are reaching you. Ignore if so.",
+    "Hey - wanted to make sure our emails are reaching you. Ignore if so.",
     "Hi, confirming delivery. No response needed.",
 ]
 

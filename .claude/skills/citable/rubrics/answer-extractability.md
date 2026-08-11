@@ -5,15 +5,15 @@ without distortion. Complements deterministic ANS-00x detectors.
 
 ## Scoring dimensions
 
-1. **Position** — canonical answer within the first 50–100 words after the H1.
-2. **Self-containment** — passage names its subject explicitly; no deictic
+1. **Position** - canonical answer within the first 50–100 words after the H1.
+2. **Self-containment** - passage names its subject explicitly; no deictic
    references ("as shown above"), no pronoun whose referent is outside the passage.
-3. **Atomicity** — one claim per key sentence; each independently understandable.
-4. **Scope survival** — if the passage is quoted alone, its conditions and
+3. **Atomicity** - one claim per key sentence; each independently understandable.
+4. **Scope survival** - if the passage is quoted alone, its conditions and
    exclusions travel with it (in-sentence, not three paragraphs later).
-5. **Definition quality** — "[Term] is [genus] that [differentia]" plus explicit
+5. **Definition quality** - "[Term] is [genus] that [differentia]" plus explicit
    "It does not include…".
-6. **Structural support** — procedures as ordered steps; comparisons with stated
+6. **Structural support** - procedures as ordered steps; comparisons with stated
    basis and prose equivalent of any table.
 
 ## Posture
@@ -22,7 +22,7 @@ without distortion. Complements deterministic ANS-00x detectors.
 - `partial`: answer present but scope/exclusions live outside the extractable span.
 - `weak`: answer buried after preamble, or dependent on visual context.
 - `not_established`: the page has no identifiable principal question (fix the
-  page registry first — this is an intent problem, not a formatting problem).
+  page registry first - this is an intent problem, not a formatting problem).
 
 ## Evidence required
 

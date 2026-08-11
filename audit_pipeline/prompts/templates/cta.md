@@ -1,4 +1,4 @@
-## CTA — Action-Oriented Language
+## CTA - Action-Oriented Language
 
 **Finding:** Your call-to-action text is weak or vague.
 

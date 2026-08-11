@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Firewall Health Report — daily summary of content firewall activity.
+"""Firewall Health Report - daily summary of content firewall activity.
 
 Reads firewall_blocked.jsonl and reports blocked vs passed stats.
 Run: python3 scripts/firewall_report.py
@@ -21,7 +21,7 @@ def count_window(records, cutoff):
 
 def main():
     if not FIREWALL_LOG.exists():
-        print("No firewall log found — likely no blocked posts yet.")
+        print("No firewall log found - likely no blocked posts yet.")
         print("Summary: 0 blocked | 0 passed | N/A pass rate")
         return
 
@@ -65,7 +65,7 @@ def main():
                 domains[site] += 1
 
     print("=" * 55)
-    print("  CONTENT FIREWALL — WEEKLY HEALTH REPORT")
+    print("  CONTENT FIREWALL - WEEKLY HEALTH REPORT")
     print(f"  Generated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
     print("=" * 55)
     print(f"  Total records: {len(records)}")
@@ -88,7 +88,7 @@ def main():
     # Summary line
     total_week = len(week)
     if total_week > 0:
-        print(f"\n  ▶ {total_week} leads blocked in 7d — pipeline cleaned, outreach quality protected")
+        print(f"\n  ▶ {total_week} leads blocked in 7d - pipeline cleaned, outreach quality protected")
 
     print("=" * 55)
 

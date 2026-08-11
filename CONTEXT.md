@@ -1,9 +1,9 @@
-# Nebula Components — Operational Context
+# Nebula Components - Operational Context
 
-**Last updated**: 2026-08-09  
-**Stack**: Python 3.12 / FastAPI / PostgreSQL (asyncpg) / Next.js 15 / TypeScript  
-**Team**: Mike Holownych (Founder/CRO) + Sedrick Murphy (Growth Agent / Hermes)  
-**Stage**: Phase 1 — first paying customer, $0 revenue  
+**Last updated**: 2026-08-09
+**Stack**: Python 3.12 / FastAPI / PostgreSQL (asyncpg) / Next.js 15 / TypeScript
+**Team**: Mike Holownych (Founder/CRO) + Sedrick Murphy (Growth Agent / Hermes)
+**Stage**: Phase 1 - first paying customer, $0 revenue
 **One metric**: Active outreach sequences → first 5 wins
 
 ---
@@ -19,14 +19,14 @@ nebulacomponents.com (Cloudflare CDN)
 ```
 
 ### Databases
-- `nebula_audit` (PostgreSQL :5433) — audits, customers, CRM, purchases, newsletter
-- `nebula_platform` (PostgreSQL :5433) — auth, organizations (DO NOT mix with nebula_audit)
-- `lead_gen/lead_state.db` (SQLite) — contacts, sequence_state, visitor_events
+- `nebula_audit` (PostgreSQL :5433) - audits, customers, CRM, purchases, newsletter
+- `nebula_platform` (PostgreSQL :5433) - auth, organizations (DO NOT mix with nebula_audit)
+- `lead_gen/lead_state.db` (SQLite) - contacts, sequence_state, visitor_events
 
 ### Key services (systemd)
-- `nebula-nextjs` — Next.js production build, RestartSec=10
-- `nebula-platform-api` — FastAPI + uvicorn, drop-ins in `.service.d/`
-- `cloudflared-tunnel` — Cloudflare tunnel for public ingress
+- `nebula-nextjs` - Next.js production build, RestartSec=10
+- `nebula-platform-api` - FastAPI + uvicorn, drop-ins in `.service.d/`
+- `cloudflared-tunnel` - Cloudflare tunnel for public ingress
 
 ---
 
@@ -52,14 +52,14 @@ Signal found (IH/X/HN)
 
 ## Critical Rules (Do Not Violate)
 
-1. **Never push to `origin`** — always `nebula-origin`
-2. **Never mix nebula_audit and nebula_platform data** — separate DBs, separate concerns
-3. **Anonymous audits** use `anonymous+<uuid>@invalid.nebulacomponents.com` — never real emails
-4. **Reddit is PERMANENTLY DEAD** — IP-level shadowban, all accounts affected
-5. **AgentMail REST only** — never SMTP for outbound (550 errors poison suppression list permanently)
-6. **Outreach gate** — `OUTREACH_DISABLED` file blocks sends when present
-7. **CI has 6 checks** — all must pass before merge
-8. **Pre-existing test failures must be fixed** — never label and leave
+1. **Never push to `origin`** - always `nebula-origin`
+2. **Never mix nebula_audit and nebula_platform data** - separate DBs, separate concerns
+3. **Anonymous audits** use `anonymous+<uuid>@invalid.nebulacomponents.com` - never real emails
+4. **Reddit is PERMANENTLY DEAD** - IP-level shadowban, all accounts affected
+5. **AgentMail REST only** - never SMTP for outbound (550 errors poison suppression list permanently)
+6. **Outreach gate** - `OUTREACH_DISABLED` file blocks sends when present
+7. **CI has 6 checks** - all must pass before merge
+8. **Pre-existing test failures must be fixed** - never label and leave
 
 ---
 
@@ -108,27 +108,27 @@ Cloudflare cache purge after static asset changes:
 ## Outreach Queue State (Aug 9, 2026)
 
 5 active sequences:
-1. Edgar Conejo — hello@edgarconejo.com — adcopystyles.com — D7 due Aug 16
-2. PostClaw — admin@postclaw.io — D7 due Aug 16
-3. qria.io — hello@qria.io — D7 due Aug 16
-4. Postessia — support@postessia.in — D7 due Aug 16
-5. meetsoto — meetsoto.app@gmail.com — D7 due Aug 16
+1. Edgar Conejo - hello@edgarconejo.com - adcopystyles.com - D7 due Aug 16
+2. PostClaw - admin@postclaw.io - D7 due Aug 16
+3. qria.io - hello@qria.io - D7 due Aug 16
+4. Postessia - support@postessia.in - D7 due Aug 16
+5. meetsoto - meetsoto.app@gmail.com - D7 due Aug 16
 
 ---
 
 ## Architecture Decisions (ADRs)
 
-**ADR-001**: Custom PostgreSQL CRM over HubSpot/Airtable  
+**ADR-001**: Custom PostgreSQL CRM over HubSpot/Airtable
 *Reason*: Zero external dependency, direct SQL queries, programmatic PMF diagnostics
 
-**ADR-002**: AgentMail over SendGrid/SES  
+**ADR-002**: AgentMail over SendGrid/SES
 *Reason*: Already configured, reply threading, label-based state machine
 
-**ADR-003**: SQLite for outreach state over PostgreSQL  
+**ADR-003**: SQLite for outreach state over PostgreSQL
 *Reason*: Simple, single-process, no connection pool needed for low-volume outreach
 
-**ADR-004**: Systemd over Docker for service management  
+**ADR-004**: Systemd over Docker for service management
 *Reason*: Lower overhead, native restart policies, drop-in env injection
 
-**ADR-005**: Signal score floor removed from PH  
-*Reason*: Generic PH launches are noise — only emit PH posts with explicit conversion pain language
+**ADR-005**: Signal score floor removed from PH
+*Reason*: Generic PH launches are noise - only emit PH posts with explicit conversion pain language

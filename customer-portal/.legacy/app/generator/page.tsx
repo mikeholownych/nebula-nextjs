@@ -6,7 +6,7 @@ const defaultValues = {
   badge: '✦ Now in Public Beta',
   headline: 'Build Faster. Ship Smarter.',
   highlight: 'Ship Smarter.',
-  subtitle: 'The developer platform that handles the boilerplate so you can focus on what matters — building products your users love.',
+  subtitle: 'The developer platform that handles the boilerplate so you can focus on what matters - building products your users love.',
   cta1: 'Start Building Free →',
   cta2: 'See How It Works',
 };
@@ -80,14 +80,14 @@ export default function GeneratorPage() {
   return (
     <>
       <div className="generator-top-bar">
-        ✦ <a href="https://nebulacomponents.shop">Nebula Components</a> — Get 7 premium SaaS landing page sections for <strong>$7</strong> →
+        ✦ <a href="https://nebulacomponents.shop">Nebula Components</a> - Get 7 premium SaaS landing page sections for <strong>$7</strong> →
       </div>
 
       <div className="generator-app">
         {/* Editor */}
         <div className="generator-editor">
           <h1>SaaS Hero Generator</h1>
-          <p>Customize your hero section below. The preview updates in real-time. Free to use — grab the HTML when you&apos;re done.</p>
+          <p>Customize your hero section below. The preview updates in real-time. Free to use - grab the HTML when you&apos;re done.</p>
 
           <div className="generator-field">
             <label htmlFor="badge">Badge Text</label>
@@ -164,7 +164,7 @@ export default function GeneratorPage() {
       </div>
 
       <div className="generator-upsell">
-        <p>⚡ Love the hero? Get <strong>7 components</strong> (Features, Pricing, Testimonials, FAQ, CTA, Footer + Hero) for <span className="price">$7</span> — <a href="https://nebulacomponents.shop">Buy Nebula Components →</a></p>
+        <p>⚡ Love the hero? Get <strong>7 components</strong> (Features, Pricing, Testimonials, FAQ, CTA, Footer + Hero) for <span className="price">$7</span> - <a href="https://nebulacomponents.shop">Buy Nebula Components →</a></p>
         <p className="generator-upsell-sub">
           Share this tool: <a href="https://news.ycombinator.com/item?id=48639668" target="_blank" rel="noopener noreferrer">HN</a> · <a href="https://nebulacomponents.shop">Nebula</a>
         </p>

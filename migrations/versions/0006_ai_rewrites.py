@@ -5,7 +5,7 @@ Revises: 0005_competitor_tracking
 Create Date: 2026-08-05
 
 AI rewrite previews (Feature 5). audit_id is TEXT (no FK) because audits
-live in the separate nebula_audit database — cross-DB FKs are impossible.
+live in the separate nebula_audit database - cross-DB FKs are impossible.
 """
 from typing import Sequence, Union
 
@@ -25,7 +25,7 @@ def upgrade() -> None:
         'ai_rewrites',
         sa.Column('id', postgresql.UUID(as_uuid=True), primary_key=True,
                   server_default=sa.text('gen_random_uuid()')),
-        # Audit IDs live in nebula_audit — stored as TEXT, no cross-DB FK.
+        # Audit IDs live in nebula_audit - stored as TEXT, no cross-DB FK.
         sa.Column('audit_id', sa.Text, nullable=False),
         sa.Column('finding_key', sa.Text, nullable=False),
         sa.Column('original_text', sa.Text, nullable=True),

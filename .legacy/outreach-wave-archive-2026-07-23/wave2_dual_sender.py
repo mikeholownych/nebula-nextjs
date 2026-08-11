@@ -30,12 +30,12 @@ PROSPECTS_B = [
 
 def send_sender_a_template_angle(to_email):
     """SENDER A: templates@ - Lead with $7 template"""
-    
+
     msg = MIMEMultipart("alternative")
     msg["Subject"] = "How to launch a landing page in 2 hours ($7 template)"  # Template-focused
     msg["From"] = SENDER_A
     msg["To"] = to_email
-    
+
     body = """Hi there,
 
 I built a landing page template pack that founders are using to launch in hours, not weeks.
@@ -49,11 +49,11 @@ Already have a landing page? I also do $97 audits where I review your copy + sen
 
 Money-back guarantee on both.
 
-—
+-
 Mike"""
-    
+
     msg.attach(MIMEText(body, "plain"))
-    
+
     try:
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=context) as server:
@@ -65,12 +65,12 @@ Mike"""
 
 def send_sender_b_audit_angle(to_email):
     """SENDER B: audits@ - Lead with $97 audit"""
-    
+
     msg = MIMEMultipart("alternative")
     msg["Subject"] = "Want more cold email replies? ($97 done-for-you audit)"  # Audit-focused
     msg["From"] = SENDER_B
     msg["To"] = to_email
-    
+
     body = """Hi there,
 
 I help founders get replies from cold email through targeted audits.
@@ -84,11 +84,11 @@ Want to start smaller? I also have a $7 landing page template pack.
 
 Money-back guarantee on both.
 
-—
+-
 Mike"""
-    
+
     msg.attach(MIMEText(body, "plain"))
-    
+
     try:
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=context) as server:
@@ -100,12 +100,12 @@ Mike"""
 
 def main():
     """Wave 2: Split test between two senders"""
-    
+
     results_a = [send_sender_a_template_angle(p) for p in PROSPECTS_A]
     results_b = [send_sender_b_audit_angle(p) for p in PROSPECTS_B]
-    
+
     all_results = results_a + results_b
-    
+
     # Log results
     with open("/home/mike/nebula/wave2_dual_sender_results.json", "w") as f:
         json.dump({
@@ -130,10 +130,10 @@ def main():
                 "total_failed": len([r for r in all_results if r["status"] == "failed"])
             }
         }, f, indent=2)
-    
+
     sent_a = len([r for r in results_a if r["status"] == "sent"])
     sent_b = len([r for r in results_b if r["status"] == "sent"])
-    
+
     print(f"\n✅ Wave 2 Complete: Dual Sender Test")
     print(f"   Sender A (templates@): {sent_a}/{len(results_a)} sent")
     print(f"   Sender B (audits@): {sent_b}/{len(results_b)} sent")

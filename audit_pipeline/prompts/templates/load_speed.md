@@ -1,4 +1,4 @@
-## Load Speed — Page Performance
+## Load Speed - Page Performance
 
 **Finding:** Your page loads slowly, costing conversions.
 

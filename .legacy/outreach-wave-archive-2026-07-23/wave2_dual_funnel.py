@@ -33,7 +33,7 @@ Money-back guarantee on both.
 
 Start with the template. If you want help executing, I've got you.
 
-—
+-
 Mike
 """
 
@@ -48,16 +48,16 @@ PROSPECTS = [
 
 def send_dual_offer_email(to_email, name="Founder"):
     """Send dual funnel: $7 template + $97 audit"""
-    
+
     msg = MIMEMultipart("alternative")
     msg["Subject"] = "How to launch a landing page in 2 hours ($7 template)"
     msg["From"] = FROM_EMAIL
     msg["To"] = to_email
-    
+
     body = DUAL_OFFER_EMAIL.format(name=name)
-    
+
     msg.attach(MIMEText(body, "plain"))
-    
+
     try:
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=context) as server:
@@ -69,13 +69,13 @@ def send_dual_offer_email(to_email, name="Founder"):
 
 def main():
     """Send Wave 2 with dual funnel positioning"""
-    
+
     results = []
     for prospect in PROSPECTS:
         result = send_dual_offer_email(prospect)
         results.append(result)
         print(f"[{result['status'].upper()}] {result['to']}")
-    
+
     # Log results
     with open("/home/mike/nebula/wave2_dual_funnel_results.json", "a") as f:
         f.write(json.dumps({
@@ -86,7 +86,7 @@ def main():
             "failed": len([r for r in results if r["status"] == "failed"]),
             "results": results
         }) + "\n")
-    
+
     print(f"\n✅ Wave 2 Complete: {len([r for r in results if r['status'] == 'sent'])}/{len(results)} sent")
 
 if __name__ == "__main__":

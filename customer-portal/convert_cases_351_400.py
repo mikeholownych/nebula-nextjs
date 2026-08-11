@@ -55,15 +55,15 @@ def extract_case_data(soup):
         "og_description": extract_og_meta(soup, "og:description"),
         "json_ld": extract_json_ld(soup),
     }
-    
+
     # Extract badge text
     badge = soup.find(class_="badge")
     data["badge"] = badge.get_text(strip=True) if badge else "Case Study"
-    
+
     # Extract h1
     h1 = soup.find("h1")
     data["h1"] = h1.get_text(strip=True) if h1 else "Case Study"
-    
+
     # Extract score from JSON-LD
     if data["json_ld"]:
         try:
@@ -73,7 +73,7 @@ def extract_case_data(soup):
             data["score"] = 0
     else:
         data["score"] = 0
-    
+
     # Extract issues
     issues = []
     issue_divs = soup.find_all(class_="issue")
@@ -86,7 +86,7 @@ def extract_case_data(soup):
                 "description": desc_div.get_text(strip=True)
             })
     data["issues"] = issues
-    
+
     # Extract pattern section
     pattern_section = soup.find("div", class_="section")
     if pattern_section:
@@ -97,7 +97,7 @@ def extract_case_data(soup):
             for sib in pattern_h2.find_next_siblings("p"):
                 paragraphs.append(sib.get_text(strip=True))
             data["pattern"] = paragraphs
-    
+
     # Extract grade from score-circle
     score_circle = soup.find(class_="score-circle")
     if score_circle:
@@ -111,7 +111,7 @@ def extract_case_data(soup):
             match = re.search(r"Grade:\s*([A-D])", grade_text.get_text())
             if match:
                 data["grade"] = match.group(1)
-    
+
     # Extract date published (from JSON-LD or meta)
     if data["json_ld"]:
         try:
@@ -121,7 +121,7 @@ def extract_case_data(soup):
             data["date_published"] = ""
     else:
         data["date_published"] = ""
-    
+
     return data
 
 def slugify(filename):
@@ -144,13 +144,13 @@ def generate_page_tsx(filename, case_data):
     """Generate Next.js page.tsx content."""
     slug = slugify(filename)
     json_ld_str = case_data.get("json_ld", "{}") or "{}"
-    
+
     # Escape for JSX
     json_ld_escaped = json_ld_str.replace("`", "\\`").replace("${", "\\${")
-    
+
     grade = case_data.get("grade", "C")
     grade_colors = get_grade_color(grade)
-    
+
     # Build issues JSX
     issues_jsx = []
     for issue in case_data.get("issues", []):
@@ -158,15 +158,15 @@ def generate_page_tsx(filename, case_data):
             <div className="font-semibold text-white mb-1">{issue["title"]}</div>
             <div className="text-white/70">{issue["description"]}</div>
           </div>''')
-    
+
     issues_block = "\n".join(issues_jsx)
-    
+
     # Build pattern paragraphs
     pattern_jsx = []
     for p in case_data.get("pattern", []):
         pattern_jsx.append(f'          <p className="text-white/70 mb-4">{p}</p>')
     pattern_block = "\n".join(pattern_jsx) if pattern_jsx else "          <p className=\"text-white/70\">Analysis coming soon.</p>"
-    
+
     # Extract date for display
     date_str = case_data.get("date_published", "")
     if date_str:
@@ -178,7 +178,7 @@ def generate_page_tsx(filename, case_data):
             date_display = "Recently"
     else:
         date_display = "Recently"
-    
+
     return f'''import type {{ Metadata }} from 'next';
 import Link from 'next/link';
 import Script from 'next/script';
@@ -202,27 +202,27 @@ export default function CaseStudy() {{
         type="application/ld+json"
         dangerouslySetInnerHTML={{{{ __html: jsonLd }}}}
       />
-      
+
       <div className="min-h-screen bg-[#050505] text-white">
         <div className="max-w-3xl mx-auto px-6 py-16">
           <Link href="/" className="text-sm text-emerald-400 hover:text-emerald-300 mb-8 inline-block">
             ← Back to Audit Tool
           </Link>
-          
+
           <div className="mb-4">
             <span className="inline-block bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-sm font-medium">
               {case_data.get("badge", "Case Study")}
             </span>
           </div>
-          
+
           <h1 className="text-3xl md:text-4xl font-bold leading-tight mb-4">
             {case_data.get("h1", "Case Study")}
           </h1>
-          
+
           <p className="text-white/50 text-sm mb-12">
             Published {date_display} · Domain anonymized for privacy
           </p>
-          
+
           <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8">
             <div className="flex items-center gap-6">
               <div className="w-20 h-20 rounded-full {grade_colors[0]} border-3 {grade_colors[1]} flex items-center justify-center flex-shrink-0">
@@ -235,31 +235,31 @@ export default function CaseStudy() {{
               </div>
             </div>
           </div>
-          
+
           <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8">
             <h2 className="text-xl font-bold mb-4 pb-4 border-b border-white/10">What the Audit Found</h2>
 {issues_block}
           </div>
-          
+
           <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8">
             <h2 className="text-xl font-bold mb-4 pb-4 border-b border-white/10">The Pattern</h2>
 {pattern_block}
           </div>
-          
+
           <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-8 text-center">
             <h3 className="text-xl font-bold text-emerald-400 mb-2">Audit Your Own Page in 60 Seconds</h3>
             <p className="text-emerald-200/70 mb-6">Paste your URL → get a full conversion scorecard with exact fixes.</p>
-            <Link 
-              href="/landing-page-audit-tool" 
+            <Link
+              href="/landing-page-audit-tool"
               className="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8 py-4 rounded-xl transition"
             >
               Run Free Audit →
             </Link>
           </div>
-          
+
           <p className="text-center text-white/30 text-sm mt-12">
             This case study is based on a real automated audit. Domain and identifying details anonymized.<br/>
-            Nebula Components — landing page components that convert.
+            Nebula Components - landing page components that convert.
           </p>
         </div>
       </div>
@@ -271,38 +271,38 @@ export default function CaseStudy() {{
 def main():
     files = get_sorted_files()
     print(f"Converting {len(files)} files (cases 351-400)...")
-    
+
     # Ensure APP_DIR exists
     APP_DIR.mkdir(parents=True, exist_ok=True)
-    
+
     for i, html_path in enumerate(files, 351):
         print(f"  [{i}] Processing {html_path.name}...")
-        
+
         # Read HTML
         with open(html_path, "r", encoding="utf-8") as f:
             html_content = f.read()
-        
+
         # Parse with BeautifulSoup
         soup = BeautifulSoup(html_content, "html.parser")
-        
+
         # Extract data
         case_data = extract_case_data(soup)
-        
+
         # Generate page.tsx
         tsx_content = generate_page_tsx(html_path.name, case_data)
-        
+
         # Create directory
         slug = slugify(html_path.name)
         output_dir = APP_DIR / slug
         output_dir.mkdir(parents=True, exist_ok=True)
-        
+
         # Write file
         output_path = output_dir / "page.tsx"
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(tsx_content)
-        
+
         print(f"    ✓ Created {output_path}")
-    
+
     print(f"\n✅ Converted {len(files)} case studies!")
 
 if __name__ == "__main__":

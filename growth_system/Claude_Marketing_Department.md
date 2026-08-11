@@ -1,4 +1,4 @@
-# Claude Marketing Department — Nebula Adaptation
+# Claude Marketing Department - Nebula Adaptation
 
 Source steal: UGC Ninja's department architecture: 50 agents, 150 prompts, 30 practical skills.
 Nebula adaptation: keep the same operating map, but collapse it to the conversion-audit business.

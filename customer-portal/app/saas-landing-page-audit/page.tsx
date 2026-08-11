@@ -23,7 +23,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'SaaS Landing Page Audit: Demo Friction, ICP Clarity & Trial Conversion',
   description:
-    'Diagnostic guide for B2B SaaS landing pages — ICP clarity, demo vs trial CTA friction, product proof, and the 9 conversion signals applied to SaaS-specific failure patterns.',
+    'Diagnostic guide for B2B SaaS landing pages - ICP clarity, demo vs trial CTA friction, product proof, and the 9 conversion signals applied to SaaS-specific failure patterns.',
   author: { '@type': 'Organization', name: 'Nebula Components' },
   publisher: { '@type': 'Organization', name: 'Nebula Components' },
   mainEntityOfPage: 'https://nebulacomponents.com/saas-landing-page-audit',
@@ -32,7 +32,7 @@ const articleSchema = {
 const faqItems = [
   {
     q: 'Why does my SaaS landing page get clicks but no trial signups?',
-    a: 'The most common causes are message mismatch between the ad and the H1, a demo CTA on a product that should offer a self-serve trial, missing product UI above the fold, and no proof adjacent to the primary action. Each of these is observable in the page HTML — an automated audit surfaces which ones apply.',
+    a: 'The most common causes are message mismatch between the ad and the H1, a demo CTA on a product that should offer a self-serve trial, missing product UI above the fold, and no proof adjacent to the primary action. Each of these is observable in the page HTML - an automated audit surfaces which ones apply.',
   },
   {
     q: 'Should a B2B SaaS page use a demo CTA or a trial CTA?',
@@ -40,7 +40,7 @@ const faqItems = [
   },
   {
     q: 'What does "ICP clarity" mean on a landing page?',
-    a: 'ICP clarity means the headline explicitly identifies who the product is for. "The all-in-one workspace" has zero ICP clarity. "The project management tool for engineering teams" has it. Cold paid traffic — arriving from an ad that targeted a specific audience — expects the page to confirm immediately that they are in the right place.',
+    a: 'ICP clarity means the headline explicitly identifies who the product is for. "The all-in-one workspace" has zero ICP clarity. "The project management tool for engineering teams" has it. Cold paid traffic - arriving from an ad that targeted a specific audience - expects the page to confirm immediately that they are in the right place.',
   },
   {
     q: 'Why do SaaS pages score low on social proof signals?',
@@ -81,22 +81,22 @@ const SAAS_FAILURES = [
     signal: 'Headline (H1)',
     label: 'ICP statement replaced by category description',
     detail:
-      'SaaS H1s typically describe the product category instead of naming who it is for. "The all-in-one workspace" tells a visitor nothing about whether they belong on the page. Cold paid traffic arriving from a targeted ad needs confirmation within the first viewport that the product matches their situation — not a feature description.',
+      'SaaS H1s typically describe the product category instead of naming who it is for. "The all-in-one workspace" tells a visitor nothing about whether they belong on the page. Cold paid traffic arriving from a targeted ad needs confirmation within the first viewport that the product matches their situation - not a feature description.',
     fix: 'Replace the product category with the buyer\'s situation. Who is this for, and what does it solve for them specifically? One sentence. Test against the ad headline to confirm message continuity.',
   },
   {
     signal: 'CTA',
     label: 'Demo CTA on a self-serve product',
     detail:
-      'A demo CTA routes cold traffic into a sales pipeline. That is appropriate for products requiring implementation, procurement, or admin setup. For products below ~$200/month ACV that onboard in minutes, asking for a demo is a commitment mismatch — visitors who could convert in 2 minutes are instead put in a queue for a call. Webflow, Notion, and Calendly all have self-serve products. Their CTAs are correct. SaaS pages with comparable products that default to "Book a demo" are converting their most decisive visitors into waiting leads.',
-    fix: 'Match the CTA to the actual sales motion. Self-serve: "Start free" or "Try for free — no card required." Sales-assisted: "See a demo." Do not mix both at equal visual weight in the hero.',
+      'A demo CTA routes cold traffic into a sales pipeline. That is appropriate for products requiring implementation, procurement, or admin setup. For products below ~$200/month ACV that onboard in minutes, asking for a demo is a commitment mismatch - visitors who could convert in 2 minutes are instead put in a queue for a call. Webflow, Notion, and Calendly all have self-serve products. Their CTAs are correct. SaaS pages with comparable products that default to "Book a demo" are converting their most decisive visitors into waiting leads.',
+    fix: 'Match the CTA to the actual sales motion. Self-serve: "Start free" or "Try for free - no card required." Sales-assisted: "See a demo." Do not mix both at equal visual weight in the hero.',
   },
   {
     signal: 'Above the fold',
     label: 'No product UI visible before scroll',
     detail:
-      'Software is evaluated differently from physical products. A visitor cannot hold it, try it, or observe it passively. The fastest proxy for product confidence is a screenshot of the actual interface — not an illustration, not a diagram, not an icon grid. Pages that open with a stock gradient and a headline below it are asking visitors to take an action (sign up) before providing any evidence of what they are signing up for.',
-    fix: 'Put a real product screenshot above the fold. It does not need to be polished — a genuine interface view signals that the product exists and is specific. Crop to the most recognizable or impressive view.',
+      'Software is evaluated differently from physical products. A visitor cannot hold it, try it, or observe it passively. The fastest proxy for product confidence is a screenshot of the actual interface - not an illustration, not a diagram, not an icon grid. Pages that open with a stock gradient and a headline below it are asking visitors to take an action (sign up) before providing any evidence of what they are signing up for.',
+    fix: 'Put a real product screenshot above the fold. It does not need to be polished - a genuine interface view signals that the product exists and is specific. Crop to the most recognizable or impressive view.',
   },
   {
     signal: 'Social proof',
@@ -109,15 +109,15 @@ const SAAS_FAILURES = [
     signal: 'Load speed',
     label: 'JavaScript-heavy rendering delays LCP',
     detail:
-      'SaaS pages frequently render the primary headline and CTA via JavaScript bundles. This means the page\'s most important content arrives late — or not at all for visitors on slow connections. It also means search engine crawlers and link previewers see a blank page. A missing H1 in static HTML (as observed on Calendly) is the most severe form of this problem.',
+      'SaaS pages frequently render the primary headline and CTA via JavaScript bundles. This means the page\'s most important content arrives late - or not at all for visitors on slow connections. It also means search engine crawlers and link previewers see a blank page. A missing H1 in static HTML (as observed on Calendly) is the most severe form of this problem.',
     fix: 'Server-render the above-fold content. The H1, primary CTA, and value statement should be in the static HTML response. Run the audit and check the raw source: if the H1 count in static HTML is zero, the headline is rendering client-side.',
   },
   {
     signal: 'SEO foundations',
     label: 'Title tag misaligned with H1 keyword',
     detail:
-      'SaaS pages commonly run A/B tests by injecting both headline variants into the DOM simultaneously. This creates two H1 tags — both indexed by Google, both competing for the same ranking signal. Webflow\'s production page was observed with two H1 tags: "Make your website a growth engine" and "Make websites that drive results." Neither can win because both dilute the signal for the other.',
-    fix: 'Run A/B tests at the edge or server layer — serve one variant per response. If running client-side A/B tests, ensure only one H1 is in the DOM at any time.',
+      'SaaS pages commonly run A/B tests by injecting both headline variants into the DOM simultaneously. This creates two H1 tags - both indexed by Google, both competing for the same ranking signal. Webflow\'s production page was observed with two H1 tags: "Make your website a growth engine" and "Make websites that drive results." Neither can win because both dilute the signal for the other.',
+    fix: 'Run A/B tests at the edge or server layer - serve one variant per response. If running client-side A/B tests, ensure only one H1 is in the DOM at any time.',
   },
 ]
 
@@ -181,13 +181,13 @@ export default function SaasAuditPage() {
           <section className="mb-14 rounded-2xl border border-border bg-bg-surface p-6 md:p-8">
             <h2 className="text-xl font-bold text-fg mb-3">Real SaaS pages audited by the engine</h2>
             <p className="text-sm text-fg-muted leading-6 mb-5">
-              Nebula has run its 9-signal audit on several major SaaS products. The engine reads the actual HTML — not a screenshot, not a manual review.
+              Nebula has run its 9-signal audit on several major SaaS products. The engine reads the actual HTML - not a screenshot, not a manual review.
             </p>
             <div className="grid gap-3 sm:grid-cols-3">
               {[
-                { name: 'Notion', score: '6.1/10 · C', finding: '417KB HTML — 3.4× heuristic max. H1 and title tell different stories.', slug: 'notion' },
+                { name: 'Notion', score: '6.1/10 · C', finding: '417KB HTML - 3.4× heuristic max. H1 and title tell different stories.', slug: 'notion' },
                 { name: 'Webflow', score: '5.8/10 · C', finding: 'Two H1 tags in DOM via A/B test. Both indexed, neither wins.', slug: 'webflow' },
-                { name: 'Calendly', score: '5.8/10 · C', finding: 'No H1 in static HTML. 1.2MB payload — 10× the heuristic ceiling.', slug: 'calendly' },
+                { name: 'Calendly', score: '5.8/10 · C', finding: 'No H1 in static HTML. 1.2MB payload - 10× the heuristic ceiling.', slug: 'calendly' },
               ].map((t) => (
                 <Link
                   key={t.slug}
@@ -209,7 +209,7 @@ export default function SaasAuditPage() {
               What the audit checks on a SaaS page
             </h2>
             <p className="text-sm text-fg-muted leading-6 mb-6 max-w-2xl">
-              Nebula runs the same 9 signals on every URL. For SaaS pages, the three signals that fail most often are headline, CTA, and social proof. The audit returns pass/fail with the raw value from your page — H1 text, CTA label, source-order trust markers — so you can verify the finding yourself.
+              Nebula runs the same 9 signals on every URL. For SaaS pages, the three signals that fail most often are headline, CTA, and social proof. The audit returns pass/fail with the raw value from your page - H1 text, CTA label, source-order trust markers - so you can verify the finding yourself.
             </p>
             <div className="grid gap-3 sm:grid-cols-3">
               {[
@@ -237,7 +237,7 @@ export default function SaasAuditPage() {
           <section className="mb-14 rounded-2xl border border-border bg-bg-muted/30 p-8 text-center">
             <h2 className="text-2xl font-bold text-fg mb-3">Audit your SaaS landing page</h2>
             <p className="text-sm text-fg-muted max-w-xl mx-auto mb-6">
-              Paste your URL. Nebula checks message match, CTA friction, product proof, and load performance against your actual page — not a template. Free, no signup, under 2 minutes.
+              Paste your URL. Nebula checks message match, CTA friction, product proof, and load performance against your actual page - not a template. Free, no signup, under 2 minutes.
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"

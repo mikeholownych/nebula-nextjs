@@ -8,9 +8,9 @@
 - Terminal states: `paid`, `dead`, `bounced`, `max_retries_exceeded`
 
 ### Before Any Operation
-1. Check `LeadStore.is_bounced(email)` — bounced leads NEVER receive any email
-2. Check `LeadStore.get_lead(email).stage` — do not re-send to same stage
-3. Check `dead_letter_queue.jsonl` — do not retry dead letters automatically
+1. Check `LeadStore.is_bounced(email)` - bounced leads NEVER receive any email
+2. Check `LeadStore.get_lead(email).stage` - do not re-send to same stage
+3. Check `dead_letter_queue.jsonl` - do not retry dead letters automatically
 
 ### Duplicate Send Prevention
 - Set `lead.Status` in-memory struct BEFORE calling `UpdateLeadStatus()`
@@ -19,7 +19,7 @@
 
 ### Bounce Handling
 - SMTP 535/550/552/553 → immediate bounce mark
-- AgentMail 403 → suppressed (do NOT retry — AgentMail blocks permanently)
+- AgentMail 403 → suppressed (do NOT retry - AgentMail blocks permanently)
 - Track in `LeadStore.mark_bounced(email, type, detail)`
 - Write to `dead_letter_queue.jsonl` after MAX_RETRIES (3)
 

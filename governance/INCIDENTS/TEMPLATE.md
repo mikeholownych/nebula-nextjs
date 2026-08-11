@@ -18,7 +18,7 @@ Who/what was affected, for how long, and what's the concrete blast radius (data,
 
 ## Root Cause
 
-Not the symptom — the actual mechanism. Per VALUES.md #9, every incident must trace to a root cause, not a patch on the symptom.
+Not the symptom - the actual mechanism. Per VALUES.md #9, every incident must trace to a root cause, not a patch on the symptom.
 
 ## Evidence
 
@@ -34,7 +34,7 @@ How was the fix confirmed to work (tests, manual repro, monitoring)?
 
 ## Prevention
 
-What stops this class of bug from recurring — a test, a lint rule, a process change? A fix without prevention is a stopgap (VALUES.md #9 requires the proper fix within 7 days if this is one).
+What stops this class of bug from recurring - a test, a lint rule, a process change? A fix without prevention is a stopgap (VALUES.md #9 requires the proper fix within 7 days if this is one).
 
 ## Rollback
 

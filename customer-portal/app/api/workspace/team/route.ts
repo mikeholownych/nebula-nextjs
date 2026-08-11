@@ -127,7 +127,7 @@ export async function POST(request: NextRequest) {
           }),
         })
       } catch {
-        // Email is best-effort — the invite row is created regardless
+        // Email is best-effort - the invite row is created regardless
       }
     }
 

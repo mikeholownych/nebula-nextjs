@@ -1,6 +1,6 @@
-## H1-Title Alignment — Naming Consistency
+## H1-Title Alignment - Naming Consistency
 
-**Finding:** Your H1 and title tag don't share enough keywords — visitors and search engines get mixed signals.
+**Finding:** Your H1 and title tag don't share enough keywords - visitors and search engines get mixed signals.
 
 **Current state:**
 - Title tag: "${title_tag}"
@@ -32,9 +32,9 @@ page is actually about.
 
 Give me 3 options for aligning the title and H1:
 
-Option A — Keep title similar, rework H1
-Option B — Keep H1 similar, rework title  
-Option C — Rework both for optimal keyword alignment
+Option A - Keep title similar, rework H1
+Option B - Keep H1 similar, rework title
+Option C - Rework both for optimal keyword alignment
 
 Each option: title (30-60 chars), H1 (20-70 chars), shared keywords,
 and a one-sentence rationale.

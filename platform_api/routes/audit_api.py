@@ -88,7 +88,7 @@ async def run_audit(request: AuditRequest):
             source=request.source,
             partner_id=request.partner_id
         )
-        
+
         # Track audit started only after explicit analytics consent. The ID is
         # browser- or server-derived and must never be a raw email address.
         if request.analytics_consent and request.analytics_distinct_id:
@@ -117,7 +117,7 @@ async def run_audit(request: AuditRequest):
             "--json",
             "--dry-run",
         ]
-        
+
         # Execute
         result = subprocess.run(
             cmd,
@@ -126,7 +126,7 @@ async def run_audit(request: AuditRequest):
             timeout=120,
             cwd="/home/mike/nebula"
         )
-        
+
         if result.returncode != 0:
             if request.analytics_consent and request.analytics_distinct_id and ph:
                 with new_context(client=ph):
@@ -138,7 +138,7 @@ async def run_audit(request: AuditRequest):
                 status="error",
                 error="Audit processing failed"
             )
-        
+
         # Parse JSON output
         lines = result.stdout.strip().split('\n')
         json_line = None
@@ -146,7 +146,7 @@ async def run_audit(request: AuditRequest):
             if line.strip().startswith('{'):
                 json_line = line
                 break
-        
+
         if not json_line:
             if request.analytics_consent and request.analytics_distinct_id and ph:
                 with new_context(client=ph):
@@ -158,9 +158,9 @@ async def run_audit(request: AuditRequest):
                 status="error",
                 error="No JSON output found"
             )
-        
+
         data = json.loads(json_line)
-        
+
         # Update database
         await audit_db.update_audit(
             audit_id=audit_id,
@@ -193,7 +193,7 @@ async def run_audit(request: AuditRequest):
                         }
                     )
             except Exception:
-                pass  # Non-fatal — never block audit response
+                pass  # Non-fatal - never block audit response
 
         asyncio.create_task(_fire_content_pipeline())
 
@@ -217,7 +217,7 @@ async def run_audit(request: AuditRequest):
                         "findings_count": len(data.get("findings", [])),
                     },
                 )
-        
+
         # Assign nurture track based on findings
         if request.email and data.get('findings'):
             try:
@@ -288,7 +288,7 @@ async def run_audit(request: AuditRequest):
                     print(f"[audit_api] email auto-send exception for {audit_id}: {_email_exc}")
 
             asyncio.create_task(_auto_send_email())
-        
+
         return AuditResponse(
             audit_id=str(audit_id),
             url=request.url,
@@ -302,7 +302,7 @@ async def run_audit(request: AuditRequest):
             page_title=data.get("page_title", ""),
             page_h1=data.get("page_h1", ""),
         )
-        
+
     except subprocess.TimeoutExpired:
         ph = get_posthog()
         if request.analytics_consent and request.analytics_distinct_id and ph:
@@ -347,7 +347,7 @@ class AuditClaimRequest(BaseModel):
 async def claim_audit(body: AuditClaimRequest):
     """Link an anonymous/unclaimed audit to a real email address.
 
-    No auth required — email is the identity for now.
+    No auth required - email is the identity for now.
 
     Returns 200 {"claimed": true, ...} on success.
     Returns 400 if the audit is already owned by a *different* email.
@@ -365,7 +365,7 @@ async def claim_audit(body: AuditClaimRequest):
     try:
         result = await audit_db.claim_audit(audit_uuid, email)
     except Exception:
-        raise HTTPException(status_code=503, detail="Claim unavailable — please try again")
+        raise HTTPException(status_code=503, detail="Claim unavailable - please try again")
 
     if result is None:
         raise HTTPException(status_code=404, detail="Audit not found")
@@ -388,7 +388,7 @@ async def health_check():
 @router.get("/stats/aggregate")
 async def get_aggregate_stats():
     """Real, unfabricated audit volume + average score for the homepage's
-    aggregate-proof strip. Must be defined before /{audit_id} — otherwise
+    aggregate-proof strip. Must be defined before /{audit_id} - otherwise
     that catch-all route would try (and fail) to parse "stats" as a UUID."""
     try:
         return await audit_db.get_aggregate_stats()
@@ -410,7 +410,7 @@ async def get_benchmarks():
 @router.get("/stats/recent-finding")
 async def get_recent_finding():
     """Return the highest-impact finding from the most recent completed audit.
-    Used for the homepage's 'recent finding' strip. No URL is exposed — only
+    Used for the homepage's 'recent finding' strip. No URL is exposed - only
     label, issue summary, impact score, and relative time. Must be defined
     before /{audit_id} so the router doesn't parse 'stats' as a UUID."""
     try:
@@ -426,11 +426,11 @@ async def get_recent_finding():
 
 @router.get("/by-email")
 async def get_audits_by_email(email: str = Query(..., min_length=3, max_length=320)):
-    """List all audits for a workspace email — powers the Customer Workspace
+    """List all audits for a workspace email - powers the Customer Workspace
     (dashboard, projects, immutable audit history). Each row is a version of
     that URL at a point in time. Must be defined before /{audit_id}."""
     import re
-    # Reject malformed emails early — must contain @ with a dot after it
+    # Reject malformed emails early - must contain @ with a dot after it
     if not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
         raise HTTPException(status_code=400, detail="Invalid email format")
     try:
@@ -794,10 +794,10 @@ async def run_due_monitors():
             prev_disp = prev_score if prev_score is not None else 0.0
             if prev_score is None:
                 status = "no_change"
-                summary = f"Baseline audit complete — score {new_score:.0f}/100"
+                summary = f"Baseline audit complete - score {new_score:.0f}/100"
             elif new_critical and (delta is None or delta < 4):
                 status = "new_fail"
-                summary = f"New critical finding — score {prev_score:.0f} → {new_score:.0f}"
+                summary = f"New critical finding - score {prev_score:.0f} → {new_score:.0f}"
             elif delta is not None and delta <= -4:
                 status = "regressed"
                 summary = f"Score dropped {prev_score:.0f} → {new_score:.0f} ({delta:+.0f} pts)"
@@ -806,7 +806,7 @@ async def run_due_monitors():
                 summary = f"Score improved {prev_score:.0f} → {new_score:.0f} ({delta:+.0f} pts)"
             else:
                 status = "no_change"
-                summary = f"No material change — {new_score:.0f}/100"
+                summary = f"No material change - {new_score:.0f}/100"
 
             await audit_db.create_monitor_event(
                 monitor_id, UUID(new_audit_id) if new_audit_id else None,
@@ -817,21 +817,21 @@ async def run_due_monitors():
             points = new_score - prev_disp
             if status == "regressed":
                 alerts.append(
-                    f"📉 Nebula Monitor — {url}\n"
+                    f"📉 Nebula Monitor - {url}\n"
                     f"{round(prev_disp)} → {round(new_score)} ({points:+.0f} pts) · {email}"
                 )
                 asyncio.create_task(_send_monitor_alert_email(
                     email, url, status, prev_score, new_score, summary))
             elif status == "new_fail":
                 alerts.append(
-                    f"🚨 Nebula Monitor — {url}\n"
+                    f"🚨 Nebula Monitor - {url}\n"
                     f"New critical finding · {round(new_score)}/100 · {email}"
                 )
                 asyncio.create_task(_send_monitor_alert_email(
                     email, url, status, prev_score, new_score, summary))
             elif status == "improved":
                 alerts.append(
-                    f"📈 Nebula Monitor — {url}\n"
+                    f"📈 Nebula Monitor - {url}\n"
                     f"{round(prev_disp)} → {round(new_score)} ({points:+.0f} pts) · {email}"
                 )
         except Exception as exc:
@@ -843,7 +843,7 @@ async def run_due_monitors():
             # every cron tick; still alert once so it is visible.
             await audit_db.mark_monitor_ran(monitor_id, None)
             alerts.append(
-                f"⚠️ Nebula Monitor — {url}\nRun failed: {str(exc)[:120]} · {email}"
+                f"⚠️ Nebula Monitor - {url}\nRun failed: {str(exc)[:120]} · {email}"
             )
 
     return {"checked": len(due), "alerts": alerts}
@@ -862,7 +862,7 @@ async def _send_monitor_alert_email(email: str, url: str, status: str,
             f"{summary}\n\n"
             f"Score: {round(prev_score)}/100 → {round(new_score)}/100\n\n"
             f"View your workspace: https://nebulacomponents.com/workspace\n\n"
-            f"— Nebula Components"
+            f"- Nebula Components"
         )
         from agentmail_client import AgentMailClient
         client = AgentMailClient()
@@ -997,7 +997,7 @@ async def workspace_assistant(body: AssistantRequest):
         answer = await llm_breaker(call_llm)()
         return {"answer": answer}
     except CircuitOpenError:
-        raise HTTPException(status_code=503, detail="LLM temporarily unavailable — circuit open")
+        raise HTTPException(status_code=503, detail="LLM temporarily unavailable - circuit open")
     except httpx.TimeoutException:
         raise HTTPException(status_code=504, detail="LLM timeout")
     except Exception as e:
@@ -1047,7 +1047,7 @@ async def get_team(email: str = Query(..., description="User email")):
 
 
 # ── Widget partners (Play 4: agencies as distribution layer) ────────────────
-# Declared BEFORE the /{audit_id} catch-all — same 422-as-UUID rule as /stats/*.
+# Declared BEFORE the /{audit_id} catch-all - same 422-as-UUID rule as /stats/*.
 
 class CreatePartnerRequest(BaseModel):
     partner_id: str
@@ -1062,7 +1062,7 @@ class CreatePartnerRequest(BaseModel):
 async def create_partner_route(req: CreatePartnerRequest):
     """Create a widget partner (called by Stripe webhook on $497 purchase).
 
-    Internal only — not exposed to the public internet (Next.js calls this
+    Internal only - not exposed to the public internet (Next.js calls this
     server-side from the webhook handler via PLATFORM_API_URL).
     """
     created = await audit_db.create_partner(
@@ -1074,7 +1074,7 @@ async def create_partner_route(req: CreatePartnerRequest):
         status=req.status,
     )
     if not created:
-        # Partner already exists — idempotent
+        # Partner already exists - idempotent
         return {"created": False, "partner_id": req.partner_id, "note": "already_exists"}
     return {"created": True, "partner_id": req.partner_id}
 
@@ -1106,7 +1106,7 @@ async def get_partner(partner_id: str):
 async def get_audit(audit_id: str, share: Optional[str] = Query(default=None), email: Optional[str] = Query(default=None)):
     """Fetch audit by ID from database.
 
-    If `share` is provided, it must be that audit's actual share_token —
+    If `share` is provided, it must be that audit's actual share_token -
     this is the third-party share-link path (customer-portal's results
     page.tsx passes ?share=<token> when a visitor isn't the original
     requester and doesn't have the unlock cookie). A share token that
@@ -1179,7 +1179,7 @@ async def get_audit(audit_id: str, share: Optional[str] = Query(default=None), e
 async def get_badge(badge_id: str):
     """Real before/after data for the embeddable badge SVG. Domain-locking
     and image rendering happen in the Next.js proxy (which can read the
-    incoming Referer header) — this route is pure data."""
+    incoming Referer header) - this route is pure data."""
     try:
         from uuid import UUID
         badge_uuid = UUID(badge_id)
@@ -1251,7 +1251,7 @@ async def send_audit_email(request: EmailRequest):
                 findings=request.findings,
             )
         )
-        
+
         # Advance delivery state only after confirmed provider success.
         audits = await audit_db.get_audits_by_email(request.email, limit=1)
         if result.get("status") == "sent" and audits:
@@ -1273,7 +1273,7 @@ async def send_audit_email(request: EmailRequest):
                             "score": request.score,
                         },
                     )
-        
+
         return EmailResponse(
             status=result.get("status", "unknown"),
             message_id=result.get("message_id"),

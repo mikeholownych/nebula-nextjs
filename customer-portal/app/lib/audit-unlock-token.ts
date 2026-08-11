@@ -3,7 +3,7 @@ import { createHmac, timingSafeEqual } from 'crypto'
 /**
  * HMAC-signed token binding an unlocked audit to the email that unlocked it.
  * Prevents a visitor from unlocking gated results just by setting an
- * `audit_unlock_{id}` cookie themselves — the cookie value must carry a
+ * `audit_unlock_{id}` cookie themselves - the cookie value must carry a
  * valid signature over `${auditId}:${email}` that only the server can produce.
  */
 

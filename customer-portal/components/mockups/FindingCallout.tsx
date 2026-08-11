@@ -1,7 +1,7 @@
 /**
  * FindingCallout
- * SVG annotation overlays for teardown findings — circle, crossOut, highlight, underline.
- * Adapted from opensourceui.in — MIT licensed.
+ * SVG annotation overlays for teardown findings - circle, crossOut, highlight, underline.
+ * Adapted from opensourceui.in - MIT licensed.
  * Stripped to the 4 variants useful for audit annotations.
  */
 

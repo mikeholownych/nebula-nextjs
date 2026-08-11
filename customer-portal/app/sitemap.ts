@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic'
 
 const BASE_URL = 'https://nebulacomponents.com'
 
-// Priority reflects actual page importance, not a uniform default — legal/
+// Priority reflects actual page importance, not a uniform default - legal/
 // utility pages sit well below commercial and hub pages so the signal means
 // something (Google ignores it for ranking, but other consumers don't, and a
 // stale/flat value misrepresents the site to anyone who does read it).
@@ -53,7 +53,7 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
       '/roas-cliff',
       '/social-proof-landing-page',
       '/what-is-landing-page-audit',
-      // NOTE: /workspace is intentionally absent — it is email-gated (307 →
+      // NOTE: /workspace is intentionally absent - it is email-gated (307 →
       // /login), robots.txt Disallows /workspace/, and gated paths must never
       // appear in the sitemap (wastes crawl budget, risks soft-404 signals).
       '/playbooks',
@@ -93,7 +93,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     }))
 
-  // Relocated out of /learning-centre (2026-07-27) — founder-productivity/
+  // Relocated out of /learning-centre (2026-07-27) - founder-productivity/
   // AI-ops content, not part of getArticles()'s conversion-diagnosis scan.
   const playbookEntries: MetadataRoute.Sitemap = [
     'founder-second-brain',

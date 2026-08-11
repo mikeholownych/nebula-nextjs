@@ -59,13 +59,13 @@
       "verification": "Inspect the active webhook route/configuration and test/live ledger separation; return evidence paths and one blocking unknown."
     }
   ],
-  "directive_id": "ceo-20260808T103748Z",
+  "directive_id": "ceo-20260811T112640Z",
   "evidence": {
-    "memo_age_hours": 12.62,
+    "memo_age_hours": 13.43,
     "real_payments": 0,
     "source": "live Nebula ledgers plus Hermes kanban state",
     "warm_replies": 1
   },
-  "observed_at": "2026-08-08T10:37:48.858919+00:00",
-  "source_memo": "/home/mike/.hermes/cron/output/3e3cbbc1e56c/2026-08-07_22-00-52.md"
+  "observed_at": "2026-08-11T11:26:40.913849+00:00",
+  "source_memo": "/home/mike/.hermes/cron/output/3e3cbbc1e56c/2026-08-10_22-00-37.md"
 }

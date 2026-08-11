@@ -12,8 +12,8 @@ def send(to_email):
     data = {
         "to": [to_email],
         "subject": "Quick question",
-        "text": "Quick question — what's your biggest challenge with getting your first customers right now?",
-        "html": "<p><strong>Quick question</strong> — what's your biggest challenge with getting your first customers right now?</p>",
+        "text": "Quick question - what's your biggest challenge with getting your first customers right now?",
+        "html": "<p><strong>Quick question</strong> - what's your biggest challenge with getting your first customers right now?</p>",
         "labels": ["question-first"]
     }
     req = urllib.request.Request(f"https://api.agentmail.to/inboxes/{INBOX}/messages/send", data=json.dumps(data).encode(), headers=HEADERS, method="POST")

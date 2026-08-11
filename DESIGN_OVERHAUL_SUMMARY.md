@@ -1,4 +1,4 @@
-# Design Overhaul Summary — 2026-07-11
+# Design Overhaul Summary - 2026-07-11
 
 ## Completed: Premium SaaS Design Transformation
 

@@ -32,8 +32,8 @@ for i, email in enumerate(targets):
     msg["To"] = email
     msg["Subject"] = "24h follow-up: still working on your landing page?"
     msg.attach(MIMEText(f"Quick follow-up:\n\nDIY ($7): https://nebulacomponents.shop\nDFY ($197): https://launchcrate.io\n\nShip or It's Free guarantee.", "plain"))
-    msg.attach(MIMEText(f"<p>Quick follow-up:</p><p><a href='https://nebulacomponents.shop'>Nebula Components</a> — $7 DIY</p><p><a href='https://launchcrate.io'>LaunchCrate</a> — $197 DFY</p><p><strong style='color:#34d399'>Ship or It's Free.</strong></p>", "html"))
-    
+    msg.attach(MIMEText(f"<p>Quick follow-up:</p><p><a href='https://nebulacomponents.shop'>Nebula Components</a> - $7 DIY</p><p><a href='https://launchcrate.io'>LaunchCrate</a> - $197 DFY</p><p><strong style='color:#34d399'>Ship or It's Free.</strong></p>", "html"))
+
     try:
         with smtplib.SMTP_SSL(SMTP[0], SMTP[1], context=ctx) as s:
             s.login(USER, pw)
@@ -42,7 +42,7 @@ for i, email in enumerate(targets):
         print(f"[{sent}/{len(targets)}] {email}")
     except Exception as e:
         print(f"[FAIL] {email}: {str(e)[:60]}")
-    
+
     if i > 0 and i % 5 == 0:
         time.sleep(2)
 

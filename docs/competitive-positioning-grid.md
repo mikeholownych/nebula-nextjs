@@ -1,6 +1,6 @@
 # Nebula Competitive Positioning Grid
 
-**Model:** Trakr.studio feature comparison table  
+**Model:** Trakr.studio feature comparison table
 **Audience:** Founders who've burned money on ads with zero conversions
 
 ---
@@ -32,7 +32,7 @@
 ## Value Stack (Trakr-style)
 
 ### Free Audit Scan
-**$0 — No credit card**
+**$0 - No credit card**
 
 - ✓ Landing page conversion diagnostic
 - ✓ Buying trigger identification
@@ -44,7 +44,7 @@
 ---
 
 ### Conversion Fix Pack
-**$147 — One-time**
+**$147 - One-time**
 
 - ✓ Full diagnostic report (10-15 fixes)
 - ✓ Stack-ranked by revenue impact
@@ -81,7 +81,7 @@
 **Trakr:** "Guided flow, not a blank form."
 
 **Nebula's version:**
-> "Trigger-aware, not filter-based. We don't guess your ICP — we detect who's bleeding money right now."
+> "Trigger-aware, not filter-based. We don't guess your ICP - we detect who's bleeding money right now."
 
 ---
 
@@ -143,7 +143,7 @@
 
 ## Call-to-Action Stack
 
-1. **Primary CTA:** "Scan your landing page — Free"
+1. **Primary CTA:** "Scan your landing page - Free"
 2. **Secondary CTA:** "See how we compare" (scroll to grid)
 3. **Founder proof:** "Built by [founder] after 4 failed experiments"
 
@@ -168,5 +168,5 @@
 
 ---
 
-**Last updated:** 2026-07-14  
+**Last updated:** 2026-07-14
 **Source:** Trakr.studio competitive positioning analysis

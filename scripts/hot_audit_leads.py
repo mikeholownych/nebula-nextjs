@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Hot audit lead scanner — finds founders who ran a free audit, have a real
+"""Hot audit lead scanner - finds founders who ran a free audit, have a real
 email (claimed/unlocked), a low score, and paid-traffic signal failures.
 
 Qualifies → registers in lead_state.db (stage=audit_delivered) → prints a
@@ -86,7 +86,7 @@ def register_lead(email: str, url: str, score10: float, grade: str) -> None:
         now = datetime.now(timezone.utc).isoformat()
         if "source_partner" not in cols:
             conn.execute("ALTER TABLE leads ADD COLUMN source_partner TEXT")
-        # INSERT OR IGNORE: idempotent — if the lead already exists from a prior
+        # INSERT OR IGNORE: idempotent - if the lead already exists from a prior
         # run or from another path (exit intent, audit claim, etc.) we skip silently.
         conn.execute(
             """INSERT OR IGNORE INTO leads
@@ -112,14 +112,14 @@ def draft_email(url: str, score10: float, oneliner: str, audit_id: str) -> str:
     return (
         f"You ran an audit on {url}. Score: {score10:.1f}/10.\n\n"
         f"Highest-impact finding: {oneliner}\n\n"
-        f"That's the fix I'd start with before spending another dollar on traffic — "
+        f"That's the fix I'd start with before spending another dollar on traffic - "
         f"it's costing you conversions on every visit right now.\n\n"
         f"Your full report: https://nebulacomponents.com/audit/{audit_id}/results\n\n"
-        f"If you want the exact fix written for your specific page — copy, code, or config change — "
+        f"If you want the exact fix written for your specific page - copy, code, or config change - "
         f"that's the $97 One-Leak Repair Sprint: "
         f"https://nebulacomponents.com/pricing?utm_source=email&utm_medium=hot-audit-followup\n\n"
         f"Happy to answer questions about what you're seeing.\n\n"
-        f"—\nMike\nNebula Components"
+        f"-\nMike\nNebula Components"
     )
 
 
@@ -135,7 +135,7 @@ def send_pitch(lead: dict) -> bool:
             return False
 
         am = AgentMailClient()
-        subject = f"Your audit: {lead['url']} — {lead['grade']} ({lead['score10']}/10)"
+        subject = f"Your audit: {lead['url']} - {lead['grade']} ({lead['score10']}/10)"
         body = draft_email(lead["url"], lead["score10"], lead["oneliner"], lead["audit_id"])
         result = am.send_transactional(to=[lead["email"]], subject=subject, text=body)
         if result.get("message_id") or result.get("id"):
@@ -216,7 +216,7 @@ def main() -> int:
 
     hot = asyncio.run(scan(dry_run))
     if dry_run:
-        print(f"DRY RUN — {len(hot)} hot lead(s) would alert")
+        print(f"DRY RUN - {len(hot)} hot lead(s) would alert")
         for l in hot:
             print(f"  {l['email']} | {l['url']} | {l['score10']}/{l['grade']}")
         return 0
@@ -232,7 +232,7 @@ def main() -> int:
         else:
             failed += 1
             print(f"✗ Send failed: {l['email']}")
-        _time.sleep(5)  # trickle — never blast
+        _time.sleep(5)  # trickle - never blast
 
     if sent:
         print(f"\n{sent} pitch(es) sent, {failed} failed.")

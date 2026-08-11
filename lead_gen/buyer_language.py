@@ -1,4 +1,4 @@
-# Nebula Outreach — Buyer Language Map
+# Nebula Outreach - Buyer Language Map
 # Generated: Aug 9, 2026
 # Method: Aryan Mahajan's buyer research approach applied to Nebula's ICP
 #
@@ -26,7 +26,7 @@ BUYER_LANGUAGE_MAP = {
         "nobody will tell me which specific thing is broken",
         "everyone says optimize your funnel but nobody shows me what to change",
         "I keep changing the ads but I haven't touched the page",
-        "generic advice — no one tells me what's wrong with MY page",
+        "generic advice - no one tells me what's wrong with MY page",
         "I want to know the exact thing to fix before I spend another dollar",
     ],
 
@@ -62,31 +62,31 @@ BUYER_LANGUAGE_MAP = {
 
     # Outreach posture guidance (Aryan's frame)
     "posture_rules": [
-        "Position as equal, not supplicant — you have findings, they have a problem you can solve",
-        "Frame audit as already done — 'I ran your page through an audit' not 'I'd love to audit your page'",
+        "Position as equal, not supplicant - you have findings, they have a problem you can solve",
+        "Frame audit as already done - 'I ran your page through an audit' not 'I'd love to audit your page'",
         "Frame the finding as something they're already experiencing, not as a diagnosis",
-        "Never ask for a demo slot — offer findings, let them come to you",
-        "The asset (audit) is valuable — you're offering access, not asking for time",
+        "Never ask for a demo slot - offer findings, let them come to you",
+        "The asset (audit) is valuable - you're offering access, not asking for time",
     ],
 
     # D1 email template (correct posture)
     "d1_template": """Hey {first_name or ''},
 
-Ran {domain} through an audit — you're spending on ads but {specific_finding} is likely pulling your conversion rate under what it should be.
+Ran {domain} through an audit - you're spending on ads but {specific_finding} is likely pulling your conversion rate under what it should be.
 
 Here's what I found: {one_sentence_finding}
 
-If that matches what you're seeing, the full audit is at nebulacomponents.com/audit — free, no email needed.
+If that matches what you're seeing, the full audit is at nebulacomponents.com/audit - free, no email needed.
 
 The fix pack ($97) implements the specific changes if you want them done.
 
-— Sedrick, Nebula Components""",
+- Sedrick, Nebula Components""",
 
     # Hook variants by ICP segment (rotate A/B/C for testing)
     "hook_variants": {
-        "A": "Specific finding first — name the exact issue, then the signal",
-        "B": "Signal first — reference their IH/X post, then what we found",
-        "C": "Outcome frame — 'one thing between you and 2x conversions'",
+        "A": "Specific finding first - name the exact issue, then the signal",
+        "B": "Signal first - reference their IH/X post, then what we found",
+        "C": "Outcome frame - 'one thing between you and 2x conversions'",
     }
 }
 

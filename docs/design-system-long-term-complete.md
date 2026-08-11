@@ -21,40 +21,40 @@ Created component library, design tokens, and comprehensive documentation.
 **Components Created:**
 
 #### Base Components
-- `.container` — 1200px max-width with padding
-- `.container-sm` — 720px for narrow content
-- `.container-lg` — 1400px for wide layouts
+- `.container` - 1200px max-width with padding
+- `.container-sm` - 720px for narrow content
+- `.container-lg` - 1400px for wide layouts
 
 #### Navigation
-- `.nav` — Flexible link navigation
+- `.nav` - Flexible link navigation
 - Hover states with accent color
 
 #### Cards
-- `.card` — Standard card with border
-- `.card-elevated` — Enhanced shadow version
+- `.card` - Standard card with border
+- `.card-elevated` - Enhanced shadow version
 
 #### Badges
-- `.badge-accent` — Emerald accent
-- `.badge-blue` — Info blue
-- `.badge-warning` — Warning amber
+- `.badge-accent` - Emerald accent
+- `.badge-blue` - Info blue
+- `.badge-warning` - Warning amber
 
 #### Lists
-- `.ul-feature` — Feature list with checkmarks
+- `.ul-feature` - Feature list with checkmarks
 - Responsive flex layout
 
 #### Grid System
-- `.grid-2` — Two-column layout
-- `.grid-3` — Three-column layout
+- `.grid-2` - Two-column layout
+- `.grid-3` - Three-column layout
 - Mobile responsive breakpoints
 
 #### Pricing
-- `.price` — Large pricing display (42px)
-- `.price-monthly` — Automatic "/mo" suffix
+- `.price` - Large pricing display (42px)
+- `.price-monthly` - Automatic "/mo" suffix
 
 #### Forms
-- `.form-input` — Text input styling
-- `.form-textarea` — Multiline input
-- `.form-select` — Dropdown styling
+- `.form-input` - Text input styling
+- `.form-textarea` - Multiline input
+- `.form-select` - Dropdown styling
 - Focus states with glow effect
 
 #### Utilities

@@ -1,15 +1,15 @@
 """Experiment tracking routes (Feature 7).
 
 Endpoints (all require an authenticated session):
-- GET    /api/experiments/            — list user's experiments, newest first
-- POST   /api/experiments/            — start an experiment (captures baseline)
-- PATCH  /api/experiments/{id}        — conclude / mark inconclusive
-- DELETE /api/experiments/{id}        — delete
-- POST   /api/experiments/{id}/refresh — re-capture current metrics
+- GET    /api/experiments/            - list user's experiments, newest first
+- POST   /api/experiments/            - start an experiment (captures baseline)
+- PATCH  /api/experiments/{id}        - conclude / mark inconclusive
+- DELETE /api/experiments/{id}        - delete
+- POST   /api/experiments/{id}/refresh - re-capture current metrics
 
 Baseline/current metrics:
 - Audit score: latest completed audit for (user email, url) from the
-  nebula_audit DB (cross-DB via audit_db — same pattern as
+  nebula_audit DB (cross-DB via audit_db - same pattern as
   platform_api/routes/report_routes.py).
 - GSC position/CTR: last-28-day searchAnalytics for the page, when the
   user has a gsc_connections row; null otherwise.
@@ -70,7 +70,7 @@ async def _gsc_page_metrics(
 ) -> tuple[Optional[float], Optional[float]]:
     """Last-28-day GSC (position, ctr) for one page, or (None, None).
 
-    Never raises — GSC outages must not break experiment CRUD.
+    Never raises - GSC outages must not break experiment CRUD.
     """
     try:
         conn = (

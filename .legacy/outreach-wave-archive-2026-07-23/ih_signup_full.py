@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ih_signup_full.py — Complete IH signup with all wizard steps handled.
+ih_signup_full.py - Complete IH signup with all wizard steps handled.
 """
 import sys, time, re, json, requests, random, string
 from pathlib import Path
@@ -197,7 +197,7 @@ def main():
         elif "sign-up" not in page.url:
             creds["verified"] = True
             CREDS_PATH.write_text(json.dumps(creds, indent=2))
-            log("Active — no email verify needed")
+            log("Active - no email verify needed")
 
         browser.close()
     log(f"DONE: {USERNAME} verified={creds['verified']}")

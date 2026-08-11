@@ -1,22 +1,22 @@
 {
   "version": "2026-07-07",
   "target_frequency": "5-7 posts/week (7 preferred)",
-  "source": "Vasilije Simic Undecagon playbook — consistent 5-7x/week minimum for inbound funnel momentum",
+  "source": "Vasilije Simic Undecagon playbook - consistent 5-7x/week minimum for inbound funnel momentum",
   "job_types": {
     "Educational": "How-to guides, leak explanations, conversion principles",
     "Testimonial": "Before/after case studies, real founder results",
     "Personal story": "Build-in-public, founder journey, lessons learned",
     "Listicle": "Tool comparisons, ranked lists, resource roundups",
     "Comparison": "Nebula vs competitors, self-serve vs sales-led, etc.",
-    "Infographic": "Vintage newspaper / serif-heavy text infographic — structured rules, examples, visual hierarchy (Rory Sutherland 5 Rules style). Best for positioning + authority. High shareability on LinkedIn."
+    "Infographic": "Vintage newspaper / serif-heavy text infographic - structured rules, examples, visual hierarchy (Rory Sutherland 5 Rules style). Best for positioning + authority. High shareability on LinkedIn."
   },
   "weekly_cadence": {
-    "monday": "Educational (heavy — start week with value)",
+    "monday": "Educational (heavy - start week with value)",
     "tuesday": "Testimonial (social proof midweek)",
     "wednesday": "Personal story (build-in-public midweek)",
     "thursday": "Listicle (comparison/resource day)",
-    "friday": "Comparison (weekend prep — founders planning)",
-    "saturday": "Hook/teach (lighter — weekend scroll mode)",
+    "friday": "Comparison (weekend prep - founders planning)",
+    "saturday": "Hook/teach (lighter - weekend scroll mode)",
     "sunday": "Case study or testimonial (weekend reflection)"
   },
   "weekend_additions": [

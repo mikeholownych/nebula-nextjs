@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-channel1/intake_signal_queue.py — Pull signal-watcher queue into the Channel 1 sheet.
+channel1/intake_signal_queue.py - Pull signal-watcher queue into the Channel 1 sheet.
 
 Usage:
   python3 intake_signal_queue.py [--dry-run] [--min-score 8]
@@ -11,10 +11,10 @@ Tiering (matches CHANNEL1_PLAYBOOK.md):
       These get direct, pre-audited outreach. (Current queue: none.)
   TIER B (audit-first):     real product URL, launch ICP (Show HN etc.).
       These go in the sheet at status=audience with the "new launch, no traction"
-      framing — free audit funnel, NEVER ad-spend copy (known ICP mismatch pitfall).
+      framing - free audit funnel, NEVER ad-spend copy (known ICP mismatch pitfall).
 
 Excluded automatically:
-  - producthunt.com product_urls (listing pages, not landing pages — known pitfall)
+  - producthunt.com product_urls (listing pages, not landing pages - known pitfall)
   - empty / github.com / twitter.com product_urls (nothing to audit)
   - URLs already in the pipeline sheet (dedup by URL)
 """
@@ -31,7 +31,7 @@ NEBULA = Path("/home/mike/nebula")
 QUEUE = NEBULA / "signal_queue.jsonl"
 SHEET = Path(__file__).parent / "pipeline_sheet.csv"
 
-# Launch ICP vs ad-spend ICP. Show HN leads are launch ICP — audit-first, no ad copy.
+# Launch ICP vs ad-spend ICP. Show HN leads are launch ICP - audit-first, no ad copy.
 AD_SPEND_TERMS = [
     "ad spend", " ads", "spent $", "spent €", "zero signups", "no signups",
     "zero conversions", "no conversions", "roas", "cac", "paid traffic",
@@ -143,7 +143,7 @@ def main() -> int:
     if args.dry_run:
         for r in tier_a + tier_b:
             print(f"  [WOULD ADD] {r.get('source')}: {real_url(r.get('product_url') or r.get('url'))}")
-        print("\nDry run — no changes written.")
+        print("\nDry run - no changes written.")
         return 0
 
     added = 0
@@ -153,7 +153,7 @@ def main() -> int:
             continue
         trigger = (r.get("headline") or "")[:120]
         notes = "Tier A: ad-spend ICP, pre-audit before outreach" if r in tier_a else \
-                "Tier B: launch ICP — audit-first, NEVER ad-spend copy"
+                "Tier B: launch ICP - audit-first, NEVER ad-spend copy"
         sheet.append({
             "name": (r.get("author") or "").strip(),
             "company": "",

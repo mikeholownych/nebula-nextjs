@@ -1,5 +1,5 @@
 #!/bin/bash
-# pipeline/qualify.sh — qualification gate for a specific email
+# pipeline/qualify.sh - qualification gate for a specific email
 # Usage: ./qualify.sh <email>
 
 EMAIL="$1"
@@ -9,7 +9,7 @@ echo "=== Qualification Check: $EMAIL ==="
 echo ""
 
 sudo -u postgres psql -p 5433 -d nebula_audit -c "
-SELECT 
+SELECT
   a.email,
   a.url,
   a.score,
@@ -26,8 +26,8 @@ LIMIT 1;" 2>/dev/null
 echo ""
 echo "--- Top findings ---"
 sudo -u postgres psql -d nebula_audit -t -c "
-SELECT 
-  '  [' || (f->>'quadrant') || '] ' || (f->>'label') || ' — impact ' || (f->>'impact') || '/5: ' || LEFT(f->>'issue', 80)
+SELECT
+  '  [' || (f->>'quadrant') || '] ' || (f->>'label') || ' - impact ' || (f->>'impact') || '/5: ' || LEFT(f->>'issue', 80)
 FROM audits a,
   jsonb_array_elements(a.findings) f
 WHERE a.email = '$EMAIL'

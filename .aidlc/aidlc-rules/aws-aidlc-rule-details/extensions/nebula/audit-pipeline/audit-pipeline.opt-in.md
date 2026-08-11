@@ -23,4 +23,4 @@ When any task involves landing page audit delivery, you MUST follow these rules:
 
 ### Audit Trail
 - Log in `aidlc-docs/audit.md` with ISO 8601 timestamps
-- Capture complete raw user input — never summarize
+- Capture complete raw user input - never summarize

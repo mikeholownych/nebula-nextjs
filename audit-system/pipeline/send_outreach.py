@@ -15,10 +15,10 @@ Checks:
     no filler, no guesses, plain-words who-line, reads under 15s)
 
 The message follows the 4-sentence cold-DM structure:
-  S1 TRIGGER   — what changed / the specific thing (the audit itself)
-  S2 WHO       — one plain line about Nebula
-  S3 WHY THEM  — the finding that could only be sent to them
-  S4 THE ASK   — one low-friction invitation, one question mark
+  S1 TRIGGER   - what changed / the specific thing (the audit itself)
+  S2 WHO       - one plain line about Nebula
+  S3 WHY THEM  - the finding that could only be sent to them
+  S4 THE ASK   - one low-friction invitation, one question mark
 
 Source: Rananjay Raj cold-DM carousel (implemented 2026-07-31).
 """
@@ -70,7 +70,7 @@ def check_message(subject: str, body: str, domain: str) -> dict:
 
     Adapted for audit-based outreach: the "no claim about what's broken inside
     their company" box is satisfied by grounding the claim in the audit finding
-    (measured evidence) rather than guessing — but we still block speculative
+    (measured evidence) rather than guessing - but we still block speculative
     language like "probably" in the copy.
     """
     combined = (subject + " " + body).lower()
@@ -79,19 +79,19 @@ def check_message(subject: str, body: str, domain: str) -> dict:
     def add(name, passed, detail=""):
         checks.append({"check": name, "passed": passed, "detail": detail})
 
-    # 1. Trigger named — the subject names the domain (the audit is the trigger)
+    # 1. Trigger named - the subject names the domain (the audit is the trigger)
     add("trigger_named", domain.lower() in subject.lower() or domain.lower() in body.lower(),
         "subject/body names the domain")
 
-    # 2. Work created named — the finding/issue is stated
+    # 2. Work created named - the finding/issue is stated
     has_finding = "finding" in body or "issue" in body or "leak" in body or "conversion" in body.lower()
     add("work_named", has_finding, "body names the specific issue")
 
-    # 3. Who line in plain words — "Nebula" + what we do, no jargon
+    # 3. Who line in plain words - "Nebula" + what we do, no jargon
     has_who = "nebula" in combined and ("audit" in combined or "fix" in combined)
     add("who_plain", has_who, "plain who-line present")
 
-    # 4. Why-them could not be sent to anyone else — domain-specific finding
+    # 4. Why-them could not be sent to anyone else - domain-specific finding
     add("why_them_specific", domain.lower() in body.lower(),
         "body references the specific domain")
 
@@ -108,7 +108,7 @@ def check_message(subject: str, body: str, domain: str) -> dict:
     add("no_filler", not fillers_hit,
         f"fillers found: {fillers_hit}" if fillers_hit else "no fillers")
 
-    # 7. No speculative claim about what's broken — block guess words
+    # 7. No speculative claim about what's broken - block guess words
     guesses_hit = [g for g in GUESS_WORDS if g in combined]
     add("no_guesses", not guesses_hit,
         f"guess words: {guesses_hit}" if guesses_hit else "no guess language")
@@ -131,7 +131,7 @@ def get_audit_data(email):
 
     # Get top finding
     cur.execute("""
-        SELECT 
+        SELECT
             a.url,
             a.score,
             f->>'label',
@@ -152,7 +152,7 @@ def get_audit_data(email):
     # Fallback: any high-impact finding if no quick_win
     if not row:
         cur.execute("""
-            SELECT 
+            SELECT
                 a.url, a.score,
                 f->>'label', f->>'issue', f->>'fix',
                 (f->>'impact')::numeric
@@ -183,7 +183,7 @@ def is_bounced(email):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Message generation — 4-sentence structure
+# Message generation - 4-sentence structure
 # ─────────────────────────────────────────────────────────────────────────────
 
 def build_message(data):
@@ -199,11 +199,11 @@ def build_message(data):
 
     body = f"""Ran an audit on {url}.
 
-We're Nebula — we audit landing pages that burn ad budgets.
+We're Nebula - we audit landing pages that burn ad budgets.
 
 Your highest-impact issue ({impact}/5): {finding}. {issue}
 
-The exact implementation brief — step-by-step fix, verification test, 30-day re-audit — is $97: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
+The exact implementation brief - step-by-step fix, verification test, 30-day re-audit - is $97: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
 
 Want it?"""
 
@@ -220,7 +220,7 @@ def main():
     parser.add_argument("--dry-run", action="store_true", help="Print without sending")
     parser.add_argument("--force", action="store_true", help="Skip lifecycle_state gate")
     parser.add_argument("--skip-checklist", action="store_true",
-                        help="Skip pre-send checklist (emergency only — never use in production)")
+                        help="Skip pre-send checklist (emergency only - never use in production)")
     args = parser.parse_args()
 
     email = args.email
@@ -256,7 +256,7 @@ def main():
         sys.exit(2)
 
     if args.dry_run:
-        print("\n✅ DRY RUN — not sent")
+        print("\n✅ DRY RUN - not sent")
         return
 
     # Send via AgentMail

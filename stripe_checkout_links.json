@@ -4,7 +4,7 @@
     "price_id": "price_1TlsuhEINR1kU9chh3GfbJPt",
     "checkout_link": "https://buy.stripe.com/price_1TlsuhEINR1kU9chh3GfbJPt",
     "amount_dollars": 7.0,
-    "description": "Original Nebula Components HTML/CSS pack (legacy — no longer promoted)"
+    "description": "Original Nebula Components HTML/CSS pack (legacy - no longer promoted)"
   },
   "$97_launchcrate": {
     "product_id": "prod_Ukt2uCVTpDhivG",
@@ -18,13 +18,13 @@
     "price_id": "price_1TpgjBEINR1kU9chEkEOkiHg",
     "checkout_link": "https://buy.stripe.com/4gMcN5aYk92Qaa5drY43S09",
     "amount_dollars": 997.0,
-    "description": "Growth Launch — First Customer Guarantee"
+    "description": "Growth Launch - First Customer Guarantee"
   },
   "$197_trigger_pipeline": {
     "product_id": "prod_UpLQVRdoZv5Aww",
     "price_id": "price_1TpgjCEINR1kU9ch4VU56XRe",
     "checkout_link": null,
     "amount_dollars": 197.0,
-    "description": "Trigger Pipeline — Monthly Lead Feed"
+    "description": "Trigger Pipeline - Monthly Lead Feed"
   }
 }

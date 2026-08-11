@@ -1,14 +1,14 @@
-# Nebula Landing Page Audit — Competitive Positioning vs Trakr.studio
+# Nebula Landing Page Audit - Competitive Positioning vs Trakr.studio
 
-**Date:** 2026-07-14  
-**Auditor:** Hermes (AI CEO)  
+**Date:** 2026-07-14
+**Auditor:** Hermes (AI CEO)
 **Framework:** Trakr.studio competitive positioning blueprint
 
 ---
 
 ## Executive Summary
 
-Nebula's hero positioned well on the specific "4% CTR → 0% conversion" pain. Comparison table exists at `/compare/landing-page-audit-tools.html`. 
+Nebula's hero positioned well on the specific "4% CTR → 0% conversion" pain. Comparison table exists at `/compare/landing-page-audit-tools.html`.
 
 **Gaps vs Trakr:**
 1. No value quantification (Trakr: 150h, €13,500)
@@ -84,13 +84,13 @@ Problem statement:
 ### Trakr's Pricing Section
 
 ```
-Free — €0
+Free - €0
 - All 9 GA4 UTM parameters + custom params
 - Guided builder with channel validation
 - Industry templates & custom syntax rules
 - Link history (last 50 links)
 
-Pro — €29/month
+Pro - €29/month
 - Everything in Free
 - Team workspace (5 seats included)
 - Shared team configurations
@@ -102,16 +102,16 @@ Pro — €29/month
 ### Nebula's Pricing Section
 
 ```
-Free Audit — $0
+Free Audit - $0
 - Scored audit across 5 dimensions
 - Delivered in 60 seconds
 
-Conversion Fix Pack — $147
+Conversion Fix Pack - $147
 - Implementation-ready copy
 - Hero, CTA, trust proof, FAQ
 - Delivered within 24h
 
-AI Ops Retainer — $1,497/month
+AI Ops Retainer - $1,497/month
 - Weekly trigger-based lead scans
 - Unlimited audit deliveries
 - Implementation support
@@ -141,7 +141,7 @@ Balázs Turán
 
 ### Nebula's Founder Proof
 
-**CURRENT:** No dedicated founder section on index.html  
+**CURRENT:** No dedicated founder section on index.html
 **EXISTS:** In memory/profile, Mike's background is stored but not surfaced on landing page
 
 ### Recommendation
@@ -202,7 +202,7 @@ We detect who's bleeding money RIGHT NOW.
 
 ### Trakr's CTAs
 
-1. Primary: "Open the App — Free"
+1. Primary: "Open the App - Free"
 2. Secondary: "See How We Compare"
 
 ### Recommendation
@@ -239,7 +239,7 @@ We detect who's bleeding money RIGHT NOW.
 
 ### Phase 1: Founder Proof Section
 
-**File:** `/home/mike/nebula/index.html`  
+**File:** `/home/mike/nebula/index.html`
 **Insert after line ~1260 (after "Sound familiar?" section)**
 
 ```html
@@ -266,8 +266,8 @@ We detect who's bleeding money RIGHT NOW.
 
 ### Phase 2: Comparison Table Inline
 
-**Action:** Extract core table from `/compare/landing-page-audit-tools.html`  
-**Insert:** After founder proof section  
+**Action:** Extract core table from `/compare/landing-page-audit-tools.html`
+**Insert:** After founder proof section
 **Simplify:** 3 competitors (PageSpeed Insights, Hotjar, Generic SEO Agency) + Feature grid
 
 ### Phase 3: Quantified Impact

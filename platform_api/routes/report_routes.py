@@ -1,7 +1,7 @@
 """Report generation routes.
 
 Endpoints:
-- GET /api/report/pdf?audit_id=<id>[&share=<token>] — branded audit PDF
+- GET /api/report/pdf?audit_id=<id>[&share=<token>] - branded audit PDF
 
 Access: the audit's owner (authenticated session) or anyone holding the
 audit share token. Agency branding (agency_name / agency_logo_url) is read
@@ -59,7 +59,7 @@ async def get_report_pdf(
     """Stream the audit report as a PDF attachment.
 
     Two access paths:
-      1. `share` matches the audit's share_token — read-only share link.
+      1. `share` matches the audit's share_token - read-only share link.
       2. Authenticated session whose email owns the audit.
     Branding comes from the audit owner's preferences for share links, and
     from the requesting user's preferences for authenticated downloads.

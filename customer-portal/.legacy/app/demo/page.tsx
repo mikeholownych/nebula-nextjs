@@ -36,7 +36,7 @@ export default function DemoPage() {
           </h1>
 
           <p className="text-lg text-[#94a3b8] max-w-2xl mx-auto mb-10 leading-relaxed">
-            The developer platform that handles the boilerplate so you can focus on what matters — building products your users love.
+            The developer platform that handles the boilerplate so you can focus on what matters - building products your users love.
           </p>
 
           <div className="flex items-center justify-center gap-4 flex-wrap">
@@ -74,18 +74,18 @@ export default function DemoPage() {
             </div>
             <h2 className="text-4xl font-bold mb-4">Everything you need to ship</h2>
             <p className="text-lg text-[#94a3b8]">
-              No bloat. Just the tools that matter — designed to work together seamlessly.
+              No bloat. Just the tools that matter - designed to work together seamlessly.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { icon: "⚡", title: "Lightning Deploy", desc: "Deploy to production in under 30 seconds. Zero-config builds that just work.", color: "indigo" },
-              { icon: "🔒", title: "Built-in Security", desc: "End-to-end encryption, automatic HTTPS, DDoS protection — included by default.", color: "cyan" },
+              { icon: "🔒", title: "Built-in Security", desc: "End-to-end encryption, automatic HTTPS, DDoS protection - included by default.", color: "cyan" },
               { icon: "📊", title: "Real-time Analytics", desc: "Understand your users with privacy-first analytics. No cookies, no tracking scripts.", color: "rose" },
               { icon: "🔌", title: "API-first Design", desc: "Everything is an API. Integrate with your existing tools and workflows.", color: "amber" },
-              { icon: "🧩", title: "Plugin Ecosystem", desc: "Extend with 200+ plugins. Auth, payments, email, storage — one install away.", color: "indigo" },
-              { icon: "🚀", title: "Edge Runtime", desc: "Run your code at the edge — 300+ locations worldwide. Sub-50ms response times.", color: "cyan" },
+              { icon: "🧩", title: "Plugin Ecosystem", desc: "Extend with 200+ plugins. Auth, payments, email, storage - one install away.", color: "indigo" },
+              { icon: "🚀", title: "Edge Runtime", desc: "Run your code at the edge - 300+ locations worldwide. Sub-50ms response times.", color: "cyan" },
             ].map((feature, i) => (
               <div key={i} className="bg-gradient-to-br from-[#13132a] to-[#14142e] border border-white/6 rounded-2xl p-8 hover:border-[#6366f1]/20 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(99,102,241,0.08)] transition">
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-4 ${
@@ -293,7 +293,7 @@ export default function DemoPage() {
 
           <details className="bg-gradient-to-br from-[#13132a] to-[#14142e] border border-white/6 rounded-2xl p-6 cursor-pointer mt-3 [&_summary::-webkit-details-marker]:hidden">
             <summary className="font-semibold text-[#e2e8f0] text-base">Can I deploy my existing project? <span className="text-[#a5b4fc] text-xs">▼</span></summary>
-            <p className="mt-4 text-sm text-[#94a3b8]">Yes. We support all major frameworks — Next.js, Remix, Astro, SvelteKit, and plain HTML/CSS/JS. Just point us at your repo.</p>
+            <p className="mt-4 text-sm text-[#94a3b8]">Yes. We support all major frameworks - Next.js, Remix, Astro, SvelteKit, and plain HTML/CSS/JS. Just point us at your repo.</p>
           </details>
 
           <details className="bg-gradient-to-br from-[#13132a] to-[#14142e] border border-white/6 rounded-2xl p-6 cursor-pointer mt-3 [&_summary::-webkit-details-marker]:hidden">

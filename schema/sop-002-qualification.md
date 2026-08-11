@@ -17,7 +17,7 @@ Alternatively: triggered manually by Mike when reviewing a prospect with suffici
 | Traffic status | Yes (can be 'unverified') | Assessment or analytics |
 
 ## Validation Rules
-1. Audit must be in `completed` status — do not qualify an incomplete audit
+1. Audit must be in `completed` status - do not qualify an incomplete audit
 2. At least one finding with `severity >= 'medium'` must exist
 3. Findings with `confidence < 0.3` must be flagged for human review before qualification
 4. Qualification must be re-reviewed if audit is re-run with a newer version
@@ -64,7 +64,7 @@ Requires at least 5 of 7 criteria:
 
 ## Decision Points
 - **Conflicting signals** (e.g., high traffic but no demonstrated pain) → route to human review
-- **Missing traffic data** → do not classify as "qualified" — mark as "potentially_qualified" with reason `active_paid_traffic_unconfirmed`
+- **Missing traffic data** → do not classify as "qualified" - mark as "potentially_qualified" with reason `active_paid_traffic_unconfirmed`
 - **New business / pre-revenue** → flag as potentially_qualified; Nebula's $97 fix is appropriate for early-stage but retainer is not
 - **Agency or consultant submitting on behalf of client** → ask for client relationship clarity before qualifying
 
@@ -83,7 +83,7 @@ Requires at least 5 of 7 criteria:
 | Failure | Behavior |
 |---------|----------|
 | No findings for audit | Mark as 'potentially_qualified' with reason `audit_completed_no_findings` |
-| Missing URL | Cannot qualify — set missing_evidence = ['url'] |
+| Missing URL | Cannot qualify - set missing_evidence = ['url'] |
 | Missing traffic data | Classification capped at 'potentially_qualified' |
 
 ## Escalation Path
@@ -92,10 +92,10 @@ Requires at least 5 of 7 criteria:
 - **Prospect disputes qualification** → Mike reviews manually
 
 ## Automation Readiness Gate
-- [ ] Deterministic trigger: YES — audit.completed event
-- [ ] Structured inputs: YES — findings, prospect, web_properties all in known schema
-- [ ] Bounded output: YES — 3 classifications, fixed schema
-- [ ] Explicit failure handling: YES — defined above
-- [ ] Observable execution: YES — qualifications table + events
-- [ ] Reversibility: YES — can re-qualify with new data
-- [ ] Stable decision rule: NOT YET — needs 20+ human qualification cycles to validate thresholds
+- [ ] Deterministic trigger: YES - audit.completed event
+- [ ] Structured inputs: YES - findings, prospect, web_properties all in known schema
+- [ ] Bounded output: YES - 3 classifications, fixed schema
+- [ ] Explicit failure handling: YES - defined above
+- [ ] Observable execution: YES - qualifications table + events
+- [ ] Reversibility: YES - can re-qualify with new data
+- [ ] Stable decision rule: NOT YET - needs 20+ human qualification cycles to validate thresholds

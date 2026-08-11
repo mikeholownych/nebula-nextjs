@@ -1,4 +1,4 @@
-## Headline — Outcome Specificity
+## Headline - Outcome Specificity
 
 **Finding:** Your headline doesn't clearly state the outcome a visitor gets.
 
@@ -32,7 +32,7 @@ Write 5 alternative headlines that:
 1. State a concrete outcome the visitor gets
 2. Implicitly or explicitly identify the target audience
 3. Are under 90 characters
-4. Avoid vague claims — use specific results or mechanics
+4. Avoid vague claims - use specific results or mechanics
 
 Format as a simple numbered list. No explanation. Just headlines.
 ```

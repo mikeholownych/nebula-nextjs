@@ -1317,7 +1317,7 @@ Row filters validate values against the column's data type. Columns with unsuppo
 
 ### How row filters work
 
--   Filters apply on the next sync — they don't remove rows that have already been synced.
+-   Filters apply on the next sync - they don't remove rows that have already been synced.
 -   If a filter references a column that no longer exists or has a type mismatch, the sync fails with an error message. Fix or remove the filter to resume syncing.
 -   Sampling and row count estimates remain unfiltered.
 

@@ -474,11 +474,11 @@ describe('production safety containment', () => {
     ]) {
       const rawSource = readFileSync(path.join(process.cwd(), relative), 'utf8').toLowerCase()
       // "Generic report generated in seconds" on the homepage describes a
-      // *competitor's* shallow audit, contrasted against Nebula's — not a
+      // *competitor's* shallow audit, contrasted against Nebula's - not a
       // claim about Nebula's own turnaround. Strip it before checking.
       const source = rawSource.replace('generic report generated in seconds', '')
       expect(source).not.toContain("fetch('/api/audit'")
-      // Broad pattern, not exact phrases — the real bug (2026-07-24) was that
+      // Broad pattern, not exact phrases - the real bug (2026-07-24) was that
       // exact-phrase checks ('free audit in 60 seconds' etc.) missed sibling
       // wordings like "shows you in 60 seconds" and "takes 60 seconds" that
       // made the same false promise against the real 120s backend timeout
@@ -516,13 +516,13 @@ describe('production safety containment', () => {
     const sitemapSource = readFileSync(path.join(process.cwd(), 'app/sitemap.ts'), 'utf8')
     const publicFactsSource = readFileSync(path.join(process.cwd(), 'app/lib/public-facts.ts'), 'utf8')
 
-    // Unknown slugs still 404 — only evidence-gated registry entries resolve.
+    // Unknown slugs still 404 - only evidence-gated registry entries resolve.
     expect(caseStudySource).toMatch(/notFound\(\)/)
     expect(caseStudySource).not.toContain('score:')
     expect(caseStudySource).not.toContain("'@type': 'CaseStudy'")
 
     // As of 2026-07-24 there are zero real, evidenced case studies (the
-    // previous 4 entries were invented — this business has no completed
+    // previous 4 entries were invented - this business has no completed
     // paid engagements on record). Detail routes and sitemap entries must
     // derive from the same fail-closed public-facts accessor.
     expect(publicFacts.caseStudies.status).toBe('none_published')
@@ -533,7 +533,7 @@ describe('production safety containment', () => {
     expect(sitemapSource).toContain('getPublishedCaseStudies()')
 
     // The index page must not claim real/verified results while
-    // CASE_STUDIES is empty — this is exactly the gap that let 4
+    // CASE_STUDIES is empty - this is exactly the gap that let 4
     // fabricated case studies read as genuine before.
     const indexLower = indexSource.toLowerCase()
     expect(indexLower).not.toMatch(/real results from/)

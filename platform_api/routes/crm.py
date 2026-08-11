@@ -1,4 +1,4 @@
-"""CRM API — attribution dashboards, feedback, weekly reviews.
+"""CRM API - attribution dashboards, feedback, weekly reviews.
 
 Endpoints:
   GET  /api/crm/funnel?days=30         Daily conversion funnel
@@ -121,8 +121,8 @@ async def weekly_review(body: WeeklyReviewIn):
 
 @router.get("/pipeline")
 async def pipeline_metrics(brief: bool = False):
-    """Stage conversion rates, sales velocity, total LTV — live from DB.
-    
+    """Stage conversion rates, sales velocity, total LTV - live from DB.
+
     Add ?brief=1 for a single-line summary (token-efficient for agent crons).
     """
     pool = await get_pool()
@@ -133,7 +133,7 @@ async def pipeline_metrics(brief: bool = False):
         )
 
     if brief:
-        # 8-token summary for agent consumption — mirrors daily_retro.py output
+        # 8-token summary for agent consumption - mirrors daily_retro.py output
         r = dict(row) if row else {}
         return (
             f"{r.get('interested',0)}/{10} interested"
@@ -196,7 +196,7 @@ async def log_close_reason(body: CloseReasonIn):
 
 @router.get("/win-loss")
 async def win_loss_analysis():
-    """Win/loss breakdown by close reason — product-market fit diagnostic."""
+    """Win/loss breakdown by close reason - product-market fit diagnostic."""
     pool = await get_pool()
     async with pool.acquire() as conn:
         rows = await conn.fetch("""
@@ -214,7 +214,7 @@ async def win_loss_analysis():
 
 @router.get("/health")
 async def crm_health():
-    """CRM health check — confirms DB connectivity and returns row counts."""
+    """CRM health check - confirms DB connectivity and returns row counts."""
     pool = await get_pool()
     async with pool.acquire() as conn:
         counts = await conn.fetchrow("""
@@ -231,10 +231,10 @@ async def crm_health():
 @router.get("/hook-performance")
 async def hook_performance():
     """Reply rate AND purchase rate by hook variant (A/B/C).
-    
+
     Neil Gambit principle: optimize hooks for buyers, not just replies.
     A hook that gets replies but no purchases is the wrong signal to optimize on.
-    
+
     Reads from SQLite sequence_state + PostgreSQL customers table.
     Trigger: if reply_rate < 5% after 10+ sends → rewrite hook.
     Trigger: if purchases > 0 and purchase_rate differs by variant → keep winner only.

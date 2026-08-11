@@ -18,7 +18,7 @@ If it reads like marketing, it gets ignored or downvoted.
 **CTA finding (r/Entrepreneur, r/startups, r/PPC):**
 ```
 Quick test that takes 30 seconds: look at your primary CTA button text.
-If it says "Get Started," "Submit," or "Learn More" — swap it for what the
+If it says "Get Started," "Submit," or "Learn More" - swap it for what the
 user actually receives. Instead of "Sign Up," try "Send me the checklist."
 
 We went from 2.3% to 3.7% just changing "Submit" to "Get my conversion audit."

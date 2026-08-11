@@ -77,14 +77,14 @@ function buildFallbackAnswer(
   if (questionLower.includes('most impact') || questionLower.includes('work on first') || questionLower.includes('work on today')) {
     const sorted = [...allFindings].sort((a, b) => b.impact - a.impact)
     const top = sorted.slice(0, 3)
-    if (top.length === 0) return 'All signals are passing — no critical findings to prioritize.'
+    if (top.length === 0) return 'All signals are passing - no critical findings to prioritize.'
     const lines = ['**Highest-impact fixes** (sorted by severity):\n']
     for (const f of top) {
-      lines.push(`1. **${f.label}** (impact: ${f.impact}/10) — ${f.url}`)
+      lines.push(`1. **${f.label}** (impact: ${f.impact}/10) - ${f.url}`)
       if (f.issue) lines.push(`   Problem: ${f.issue}`)
       if (f.fix) lines.push(`   Fix: ${f.fix}`)
     }
-    lines.push('\nStart with #1 — it has the highest measured impact on your conversion score.')
+    lines.push('\nStart with #1 - it has the highest measured impact on your conversion score.')
     return lines.join('\n')
   }
 
@@ -103,7 +103,7 @@ function buildFallbackAnswer(
             lines.push(`• ${f.label}: ${f.issue || 'Signal now failing'}`)
           }
         } else {
-          lines.push('No new failing signals — existing issues may have worsened. Compare the full reports for detail.')
+          lines.push('No new failing signals - existing issues may have worsened. Compare the full reports for detail.')
         }
         return lines.join('\n')
       }
@@ -112,7 +112,7 @@ function buildFallbackAnswer(
 
   if (questionLower.includes('cta')) {
     const ctaFindings = allFindings.filter((f) => f.key === 'cta')
-    if (ctaFindings.length === 0) return 'No CTA issues found across your audited pages — this signal is passing.'
+    if (ctaFindings.length === 0) return 'No CTA issues found across your audited pages - this signal is passing.'
     const lines = ['**CTA issues across your pages:**\n']
     for (const f of ctaFindings) {
       lines.push(`• ${f.url}: ${f.issue || 'CTA signal failing'}`)

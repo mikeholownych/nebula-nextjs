@@ -133,7 +133,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
             <span className="text-accent">
               {data.avg_failures_per_page !== null && data.avg_failures_per_page !== undefined
                 ? data.avg_failures_per_page.toFixed(1)
-                : '—'}{' '}
+                : '-'}{' '}
               recorded findings per page
             </span>
             .
@@ -143,7 +143,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
               <>
                 The most common leak: <span className="font-semibold text-fg">{data.top_leak.label}</span>,
                 failing on {data.top_leak.share}% of audited pages. If you are paying for traffic
-                and the page is not converting, the leak is usually not the ad — it is one of these
+                and the page is not converting, the leak is usually not the ad - it is one of these
                 signals.
               </>
             ) : (
@@ -163,7 +163,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
             { label: 'Audits in sample', value: data.audit_count, suffix: '' },
             {
               label: 'Top leak failure rate',
-              value: data.top_leak ? `${data.top_leak.share}%` : '—',
+              value: data.top_leak ? `${data.top_leak.share}%` : '-',
               suffix: data.top_leak ? data.top_leak.label : '',
             },
           ].map((s) => (
@@ -177,7 +177,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
           ))}
         </div>
 
-        {/* Distribution — unavailable while the composite includes deprecated checks. */}
+        {/* Distribution - unavailable while the composite includes deprecated checks. */}
         {data.distribution.length > 0 && <div>
           <h2 className="mb-4 text-xl font-bold tracking-tight text-fg">Score distribution</h2>
           <div className="flex h-10 w-full overflow-hidden rounded-xl border border-border">
@@ -211,7 +211,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
           </div>
         </div>}
 
-        {/* Component failure rates — where paid traffic leaks first */}
+        {/* Component failure rates - where paid traffic leaks first */}
         <div>
           <h2 className="mb-2 text-xl font-bold tracking-tight text-fg">
             Where paid traffic leaks first
@@ -262,7 +262,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
               <p className="mt-2 text-sm leading-6 text-fg-muted">
                 Each completed audit fetches a public landing page, runs the documented conversion and
                 applicable technical checks, and records a 0–10 score plus the findings produced. The
-                Leak Index aggregates only audits marked <span className="font-semibold text-fg">completed</span> —
+                Leak Index aggregates only audits marked <span className="font-semibold text-fg">completed</span> -
                 no drafts, no estimates, no placeholder averages.
               </p>
               <p className="mt-3 text-sm leading-6 text-fg-muted">
@@ -290,7 +290,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
           </div>
           <div className="mt-6 border-t border-border pt-5 text-xs text-fg-muted">
             Benchmarks are computed from completed audits only. This is aggregate data, not
-            individualized conversion advice — see the{' '}
+            individualized conversion advice - see the{' '}
             <a href="/audit?utm_source=content&utm_medium=organic-content" className="text-accent underline underline-offset-2">
               free audit
             </a>{' '}

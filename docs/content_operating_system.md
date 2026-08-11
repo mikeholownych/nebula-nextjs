@@ -1,7 +1,7 @@
 # Nebula Content Operating System
 
-**Version:** 1.0  
-**Created:** 2026-07-18  
+**Version:** 1.0
+**Created:** 2026-07-18
 **Source:** Adapted from "The In-House Content System" + Nebula track infrastructure
 
 ---
@@ -42,10 +42,10 @@ Each stage feeds the next. The weakest link sets the ceiling.
 
 **Goal:** Pull real buyer pain from audit findings.
 
-**Input:** Last 7-14 audits  
-**Output:** 3-5 finding-based content ideas  
-**Owner:** Founder  
-**Tool:** `scripts/pull_audit_insights.py`  
+**Input:** Last 7-14 audits
+**Output:** 3-5 finding-based content ideas
+**Owner:** Founder
+**Tool:** `scripts/pull_audit_insights.py`
 **Metric:** Insights logged per week
 
 **Process:**
@@ -57,7 +57,7 @@ python3 scripts/pull_audit_insights.py --days 7 --limit 5
 # 1. [headline-clarity] "Your headline describes what it is"
 #    Source: audit_abc123 (example.com)
 #    Angle: They want to know what it does for them
-#    
+#
 # 2. [cta-friction] "Your CTA is visible"
 #    Source: audit_def456 (company.io)
 #    Angle: They don't know what click commits them to
@@ -71,10 +71,10 @@ python3 scripts/pull_audit_insights.py --days 7 --limit 5
 
 **Goal:** Shape findings into specific angles.
 
-**Input:** Findings from Stage 1  
-**Output:** Titled ideas in the idea bank  
-**Owner:** Founder  
-**Tool:** Notion database (or lead_manager idea_bank)  
+**Input:** Findings from Stage 1
+**Output:** Titled ideas in the idea bank
+**Owner:** Founder
+**Tool:** Notion database (or lead_manager idea_bank)
 **Metric:** Ideas ready to brief
 
 **Template:**
@@ -101,10 +101,10 @@ python3 scripts/pull_audit_insights.py --days 7 --limit 5
 
 **Goal:** Earn the first 3 seconds.
 
-**Input:** Content idea from Stage 2  
-**Output:** 5 hook variants → pick 1  
-**Owner:** Founder  
-**Tool:** Hook library (Part 3) + Nebula hooks  
+**Input:** Content idea from Stage 2
+**Output:** 5 hook variants → pick 1
+**Owner:** Founder
+**Tool:** Hook library (Part 3) + Nebula hooks
 **Metric:** Hook pass rate
 
 **Hook Categories (adapted for Nebula):**
@@ -141,10 +141,10 @@ python3 scripts/pull_audit_insights.py --days 7 --limit 5
 
 **Goal:** Deliver on the hook's promise.
 
-**Input:** Hook + idea  
-**Output:** Finished post / video / carousel  
-**Owner:** Founder  
-**Tool:** Google Docs, Canva, CapCut  
+**Input:** Hook + idea
+**Output:** Finished post / video / carousel
+**Owner:** Founder
+**Tool:** Google Docs, Canva, CapCut
 **Metric:** Assets shipped per week
 
 **Format Mix:**
@@ -165,10 +165,10 @@ python3 scripts/pull_audit_insights.py --days 7 --limit 5
 
 **Goal:** Put it where buyers already are.
 
-**Input:** Approved assets  
-**Output:** Published + reshares  
-**Owner:** Founder  
-**Tool:** LinkedIn, scheduler  
+**Input:** Approved assets
+**Output:** Published + reshares
+**Owner:** Founder
+**Tool:** LinkedIn, scheduler
 **Metric:** Impressions and reach
 
 **Schedule:**
@@ -187,10 +187,10 @@ python3 scripts/pull_audit_insights.py --days 7 --limit 5
 
 **Goal:** Turn views into conversation.
 
-**Input:** Published posts  
-**Output:** Replies + conversations started  
-**Owner:** Founder  
-**Tool:** LinkedIn  
+**Input:** Published posts
+**Output:** Replies + conversations started
+**Owner:** Founder
+**Tool:** LinkedIn
 **Metric:** Comments + reply rate
 
 **Compliance:**
@@ -212,7 +212,7 @@ python3 scripts/pull_audit_insights.py --days 7 --limit 5
 ```
 Comment: "I think our headline is fine, it says what we do."
 
-Reply: "Fair point. Curious — when you look at your top 3 ad campaigns, do the headlines match what the ad promised, or explain it differently?"
+Reply: "Fair point. Curious - when you look at your top 3 ad campaigns, do the headlines match what the ad promised, or explain it differently?"
 ```
 
 ---
@@ -221,10 +221,10 @@ Reply: "Fair point. Curious — when you look at your top 3 ad campaigns, do the
 
 **Goal:** Trade value for email + URL.
 
-**Input:** Engaged commenters + profile visitors  
-**Output:** Email + URL captured  
-**Owner:** Founder (marketing role)  
-**Tool:** `/audit` endpoint + forms  
+**Input:** Engaged commenters + profile visitors
+**Output:** Email + URL captured
+**Owner:** Founder (marketing role)
+**Tool:** `/audit` endpoint + forms
 **Metric:** Audits requested
 
 **Capture paths:**
@@ -244,10 +244,10 @@ Reply: "Fair point. Curious — when you look at your top 3 ad campaigns, do the
 
 **Goal:** Build trust until ready.
 
-**Input:** Captured email + URL + audit findings  
-**Output:** Sequence they actually read  
-**Owner:** Nurture engine (automated)  
-**Tool:** `nurture_engine.py` + templates  
+**Input:** Captured email + URL + audit findings
+**Output:** Sequence they actually read
+**Owner:** Nurture engine (automated)
+**Tool:** `nurture_engine.py` + templates
 **Metric:** Open rate, reply rate
 
 **Track Assignment:**
@@ -283,10 +283,10 @@ Example: "Headline fix → 30% more demo requests"
 
 **Goal:** Ask for the call.
 
-**Input:** Nurture sequence + engagement signals  
-**Output:** Booked call  
-**Owner:** Founder (sales role)  
-**Tool:** Calendly + email  
+**Input:** Nurture sequence + engagement signals
+**Output:** Booked call
+**Owner:** Founder (sales role)
+**Tool:** Calendly + email
 **Metric:** Calls booked
 
 **Conversion triggers:**
@@ -305,10 +305,10 @@ Example: "Headline fix → 30% more demo requests"
 
 **Goal:** Keep what works, cut what doesn't.
 
-**Input:** Weekly metrics  
-**Output:** One clear decision  
-**Owner:** Founder  
-**Tool:** `monitor_tracks.py` + Weekly Reporting Sheet  
+**Input:** Weekly metrics
+**Output:** One clear decision
+**Owner:** Founder
+**Tool:** `monitor_tracks.py` + Weekly Reporting Sheet
 **Metric:** Actions shipped per week
 
 **Weekly metrics board:**
@@ -336,8 +336,8 @@ Metrics to track:
 ```
 Week of [date]:
 - Scale: [track/template that beat goals]
-- Improve: [track/template that was average — one change to test]
-- Retire: [track/template that failed — stop using]
+- Improve: [track/template that was average - one change to test]
+- Retire: [track/template that failed - stop using]
 - Next week: [one decision to implement]
 ```
 
@@ -446,7 +446,7 @@ This system connects to your existing infrastructure:
 | Reporting | `scripts/monitor_tracks.py` | Stage 10 metrics |
 
 **New file needed:**
-- `scripts/pull_audit_insights.py` — extracts findings from last N audits for content planning
+- `scripts/pull_audit_insights.py` - extracts findings from last N audits for content planning
 
 ---
 

@@ -2,7 +2,7 @@
 
 - Run: `20260725T203932-audit---scope-wqzm`
 - Command: `audit --scope`
-- Target: url — https://nebulacomponents.shop
+- Target: url - https://nebulacomponents.shop
 - Timestamp: 2026-07-25T20:39:32.275Z
 - Tool version: 1.13.1; commit: c43f0c7844a6ba57aea7b15d98afad5f6b47ea88 (dirty)
 
@@ -178,9 +178,9 @@ These states are not combined into an AI visibility score. Readiness does not es
 - Remediation: Fix the malformed lines; regenerate robots.txt from the crawler policy registry.
 - Verify: Re-parse robots.txt and confirm zero errors. (rerun `CRAWL-004`)
 
-### MEDIUM · PAGE-002 · 2 pages share the title "Free Landing Page Audit — Stop Burning Ad Budget | Nebula Components"
+### MEDIUM · PAGE-002 · 2 pages share the title "Free Landing Page Audit - Stop Burning Ad Budget | Nebula Components"
 
-- Subject: `title:Free Landing Page Audit — Stop Burning Ad Budget | Nebula Components`
+- Subject: `title:Free Landing Page Audit - Stop Burning Ad Budget | Nebula Components`
 - Type: deterministic_observation; confidence: confirmed; deterministic: true
 - Impact: ranking:medium
 - Evidence:
@@ -195,7 +195,7 @@ These states are not combined into an AI visibility score. Readiness does not es
 - Type: probabilistic_inference; confidence: medium; deterministic: false
 - Impact: citation:medium, legal:medium, reputational:medium
 - Evidence:
-  - passage: "Yes, directly. A 2017 Google/SOASTA study found that 53% of mobile users abandoned pages taking longer than 3 seconds to load — and that figure is from 2017, be"
+  - passage: "Yes, directly. A 2017 Google/SOASTA study found that 53% of mobile users abandoned pages taking longer than 3 seconds to load - and that figure is from 2017, be"
 - Remediation: State the baseline, measurement period, and test conditions adjacent to the number, or remove the figure.
 - Verify: Confirm baseline/conditions appear adjacent to each relative quantity. (rerun `ANS-005`)
 - Limitations: heuristic detection; verify manually before acting

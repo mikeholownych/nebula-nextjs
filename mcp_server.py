@@ -3,14 +3,14 @@ Nebula Components MCP Server
 Exposes audit capabilities as MCP tools for Claude Desktop, Hermes, and any MCP client.
 
 Tools:
-  run_audit(url)          — Run a full evidence-grade audit against a public URL
-  get_audit(audit_id)     — Retrieve a completed audit by ID
-  recent_audits(limit)    — List the most recent audits from the database
-  compare_audits(url_a, url_b) — Run audits on two URLs and compare findings side by side
+  run_audit(url)          - Run a full evidence-grade audit against a public URL
+  get_audit(audit_id)     - Retrieve a completed audit by ID
+  recent_audits(limit)    - List the most recent audits from the database
+  compare_audits(url_a, url_b) - Run audits on two URLs and compare findings side by side
 
 Run:
-  python3 mcp_server.py                 (stdio — for Claude Desktop / Hermes MCP)
-  python3 mcp_server.py --http          (HTTP/SSE on port 8002 — for remote MCP clients)
+  python3 mcp_server.py                 (stdio - for Claude Desktop / Hermes MCP)
+  python3 mcp_server.py --http          (HTTP/SSE on port 8002 - for remote MCP clients)
 
 Usage in Claude Desktop (add to claude_desktop_config.json):
   {
@@ -136,7 +136,7 @@ def _auth_check(tool_name: str = "run_audit") -> str | None:
             "Invalid or expired API key. "
             "Generate a key at https://nebulacomponents.com/workspace?tab=settings"
         )
-    # Free tier — use process-level counter (one MCP server process per client)
+    # Free tier - use process-level counter (one MCP server process per client)
     if _check_free_quota("default"):
         return None
     return (
@@ -218,7 +218,7 @@ def run_audit(url: str) -> str:
 
     Returns score (0–10), letter grade, and structured findings. Each finding
     includes the measured value, required standard, gap delta, CSS selector,
-    and confidence level — so results are independently verifiable.
+    and confidence level - so results are independently verifiable.
 
     Args:
         url: The public URL to audit (e.g. https://example.com/landing-page)
@@ -273,12 +273,12 @@ def compare_audits(url_a: str, url_b: str) -> str:
             "",
             f"**Winner:** {winner} (+{delta:.1f} pts)",
             "",
-            f"### {url_a} — Findings",
+            f"### {url_a} - Findings",
         ]
         for f in findings_a:
             lines.append(_format_finding(f))
             lines.append("")
-        lines += [f"### {url_b} — Findings"]
+        lines += [f"### {url_b} - Findings"]
         for f in findings_b:
             lines.append(_format_finding(f))
             lines.append("")
@@ -457,7 +457,7 @@ if __name__ == "__main__":
                 "https://mcp.nebulacomponents.shop",
             ],
         )
-        # streamable-http uses POST /mcp — compatible with Hermes mcp add --url
+        # streamable-http uses POST /mcp - compatible with Hermes mcp add --url
         mcp.run(transport="streamable-http")
     else:
         mcp.run(transport="stdio")

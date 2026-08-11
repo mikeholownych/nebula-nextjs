@@ -10,13 +10,13 @@
 
 ### What CDE Does Well
 
-1. **"A data system, not a PDF"** — Interactive dashboard as core deliverable
-2. **Password-protected** — Shareable link with secure access
-3. **Quantified impact** — €4,900 baseline, clear pricing
-4. **Founder authority** — Balázs Turán, 16 years experience
-5. **Fair warning section** — "Save us both the call if..."
-6. **Timeline transparency** — "From kickoff to dashboard in two weeks"
-7. **Technical proof** — JSON output examples, structured data
+1. **"A data system, not a PDF"** - Interactive dashboard as core deliverable
+2. **Password-protected** - Shareable link with secure access
+3. **Quantified impact** - €4,900 baseline, clear pricing
+4. **Founder authority** - Balázs Turán, 16 years experience
+5. **Fair warning section** - "Save us both the call if..."
+6. **Timeline transparency** - "From kickoff to dashboard in two weeks"
+7. **Technical proof** - JSON output examples, structured data
 
 ### Key Patterns Borrowed
 
@@ -26,7 +26,7 @@
 | **Password protection** | Required for access | Client-side password check ✅ |
 | **Shareable link** | `dashboard.cde.com/report/{brand}` | `nebulacomponents.shop/audit/{id}` ✅ |
 | **Fix priority stack** | Ordered by impact | Sorted by score (critical → low) ✅ |
-| **Conversion CTA** | In dashboard | "Get Fix Pack — $147" button ✅ |
+| **Conversion CTA** | In dashboard | "Get Fix Pack - $147" button ✅ |
 
 ---
 
@@ -91,19 +91,19 @@ if path.startswith("/audit/"):
 
 ### ✅ Implemented
 
-1. **Password-protected dashboard** — `/audit/{id}`
-2. **Fix priority stack** — Sorted by impact
-3. **Visual metrics** — Grade, score, critical count, projected
-4. **Conversion CTA** — Stripe checkout link
-5. **Mobile-responsive** — Works on all devices
+1. **Password-protected dashboard** - `/audit/{id}`
+2. **Fix priority stack** - Sorted by impact
+3. **Visual metrics** - Grade, score, critical count, projected
+4. **Conversion CTA** - Stripe checkout link
+5. **Mobile-responsive** - Works on all devices
 
 ### 🚧 Next (Phase 2)
 
-1. **Dynamic data injection** — API endpoint for audit data
-2. **Server-side password validation** — Secure authentication
-3. **Interactive charts** — Radar charts, bar charts
-4. **Export to PDF** — WeasyPrint integration
-5. **Competitor comparison** — Side-by-side benchmarking
+1. **Dynamic data injection** - API endpoint for audit data
+2. **Server-side password validation** - Secure authentication
+3. **Interactive charts** - Radar charts, bar charts
+4. **Export to PDF** - WeasyPrint integration
+5. **Competitor comparison** - Side-by-side benchmarking
 
 ---
 
@@ -197,11 +197,11 @@ curl -s http://localhost:8765/audit/test123 | grep "Landing Page Audit Report"
 
 ## Next Steps
 
-1. **Deploy to production** — Verify dashboard works on live site
-2. **Add GA4 tracking** — Dashboard engagement metrics
-3. **Build API endpoint** — Dynamic data injection (`GET /api/audit/{id}`)
-4. **Server-side auth** — Secure password validation
-5. **Monitor metrics** — Dashboard view rate, CTA clicks, conversions
+1. **Deploy to production** - Verify dashboard works on live site
+2. **Add GA4 tracking** - Dashboard engagement metrics
+3. **Build API endpoint** - Dynamic data injection (`GET /api/audit/{id}`)
+4. **Server-side auth** - Secure password validation
+5. **Monitor metrics** - Dashboard view rate, CTA clicks, conversions
 
 ---
 

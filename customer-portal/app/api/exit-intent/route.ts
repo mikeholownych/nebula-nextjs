@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       signal: AbortSignal.timeout(6_000),
     })
 
-    // Non-2xx is non-fatal from the user's perspective — we captured the
+    // Non-2xx is non-fatal from the user's perspective - we captured the
     // intent; platform API failure shouldn't block the success state.
     if (!res.ok) {
       console.error('[exit-intent] platform API error', res.status, await res.text().catch(() => ''))
@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
     console.error('[exit-intent] platform API unreachable', err)
   }
 
-  // Always return success to the browser — the lead capture is the goal;
+  // Always return success to the browser - the lead capture is the goal;
   // a backend hiccup shouldn't tell a real user it failed.
   return NextResponse.json({ status: 'captured' })
 }

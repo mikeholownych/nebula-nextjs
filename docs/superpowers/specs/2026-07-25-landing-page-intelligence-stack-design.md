@@ -18,7 +18,7 @@ Publish an article describing the six workflows but provide no usable artifact.
 - **Advantage:** Smallest implementation.
 - **Failure:** Repeats the generic SEO-content pattern and does not demonstrate product quality.
 
-### 2. Direct-download workflow bundle — selected
+### 2. Direct-download workflow bundle - selected
 
 Publish the article and a versioned ZIP containing six inspectable workflows, a README, an evidence schema, and a manifest. No email is required.
 

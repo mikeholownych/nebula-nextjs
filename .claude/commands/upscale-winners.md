@@ -19,14 +19,14 @@ For each filename you paste:
 ## The master upscale brief template (applied to each clip)
 
 ```
-Upscale {FILENAME} to 3840x2160. Preserve film grain and motion artifacts as cinematic texture — do not denoise, do not apply noise reduction. Style anchor: RED Komodo, 35mm anamorphic lens, soft monitor-glow practicals, near-black with teal accent, light film grain, slight vignette. Output as ProRes 422 HQ for editorial.
+Upscale {FILENAME} to 3840x2160. Preserve film grain and motion artifacts as cinematic texture - do not denoise, do not apply noise reduction. Style anchor: RED Komodo, 35mm anamorphic lens, soft monitor-glow practicals, near-black with teal accent, light film grain, slight vignette. Output as ProRes 422 HQ for editorial.
 ```
 
 ## Decision table (run before queuing)
 
 | Destination | Upscale to 4K? | Reason |
 |---|---|---|
-| TikTok / Reels / Shorts (phone feed) | NO — keep 1080p | Phone screens can't render above 1080p |
+| TikTok / Reels / Shorts (phone feed) | NO - keep 1080p | Phone screens can't render above 1080p |
 | YouTube landscape (desktop) | YES if hero/recurring | 4K matters for search thumbnail sharpness |
 | LinkedIn | NO | Feed compresses to 720p anyway |
 | Brand archive / future recut | YES | Master quality for long-term use |

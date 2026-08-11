@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Prospect scraper v2 — targets founders actively asking for landing page help
+Prospect scraper v2 - targets founders actively asking for landing page help
 Sources: IndieHackers Landing Page Feedback group, HN Show HN posts
 This is the new top-of-funnel: find people who WANT what we're selling
 """
@@ -33,14 +33,14 @@ def scrape_hn_landing_page_help():
     })
     url = f"https://hn.algolia.com/api/v1/search?{params}"
     data = json.loads(fetch(url) or '{}')
-    
+
     results = []
     for hit in data.get('hits', []):
         author = hit.get('author', '')
         obj_id = hit.get('objectID', '')
         title = hit.get('title', '')
         url_field = hit.get('url', '')
-        
+
         if author and obj_id:
             results.append({
                 'source': 'hn',
@@ -49,12 +49,12 @@ def scrape_hn_landing_page_help():
                 'title': title,
                 'product_url': url_field,
             })
-    
+
     print(f"HN: found {len(results)} posts")
     return results
 
 def scrape_ih_landing_page_group():
-    """IndieHackers Landing Page Feedback group — recent posts"""
+    """IndieHackers Landing Page Feedback group - recent posts"""
     # IH doesn't have public API, use search
     url = "https://hn.algolia.com/api/v1/search_by_date?query=site:indiehackers.com+landing+page+feedback&hitsPerPage=20"
     # Fall back to known recent posts we found via web search
@@ -107,22 +107,22 @@ def find_contact_email(product_url):
 
 if __name__ == '__main__':
     print("=== Prospect Scraper v2 ===")
-    
+
     prospects = []
     prospects.extend(scrape_hn_landing_page_help())
     prospects.extend(scrape_ih_landing_page_group())
-    
+
     # Try to find contact emails for prospects without them
     for p in prospects:
         if not p.get('contact_guess') and p.get('product_url'):
             p['contact_guess'] = find_contact_email(p['product_url'])
             time.sleep(0.5)
-    
+
     # Save
     out = f'/home/mike/nebula/prospects_v2_{time.strftime("%Y%m%d_%H%M%S")}.json'
     with open(out, 'w') as f:
         json.dump(prospects, f, indent=2)
-    
+
     print(f"\nSaved {len(prospects)} prospects to {out}")
     for p in prospects:
         print(f"  {p.get('author','?')} | {p.get('product','?')} | {p.get('contact_guess','no email')}")

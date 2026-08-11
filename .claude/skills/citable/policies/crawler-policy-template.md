@@ -11,8 +11,8 @@ the two agree).
 | Googlebot | Google | search_indexing (also gates AI features eligibility) | undecided → usually allow |
 | Bingbot | Microsoft | search_indexing (also Copilot surfaces) | undecided |
 | OAI-SearchBot | OpenAI | ai_search_discovery (ChatGPT search citation) | undecided |
-| GPTBot | OpenAI | model_training | undecided — separate decision, legal owner |
-| ChatGPT-User | OpenAI | user_initiated_retrieval | undecided — separate decision |
+| GPTBot | OpenAI | model_training | undecided - separate decision, legal owner |
+| ChatGPT-User | OpenAI | user_initiated_retrieval | undecided - separate decision |
 | PerplexityBot | Perplexity | ai_search_discovery | undecided |
 | Perplexity-User | Perplexity | user_initiated_retrieval | undecided |
 | ClaudeBot | Anthropic | model_training (verify current vendor docs) | undecided |

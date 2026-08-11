@@ -101,7 +101,7 @@ class EmailService:
         if data.score >= 8:
             score_context = "Your page is in good shape."
         elif data.score >= 6.5:
-            score_context = "Your page has real gaps — the kind that cost you quietly, every day."
+            score_context = "Your page has real gaps - the kind that cost you quietly, every day."
         elif data.score >= 5:
             score_context = "Your page is working against you. Traffic is arriving. Most of it is leaving."
         else:
@@ -115,7 +115,7 @@ class EmailService:
         # Findings plain text
         findings_text = "\n\n".join(_render_finding_text(f) for f in top_findings)
 
-        # Story bridge — Mike's story, applied to them
+        # Story bridge - Mike's story, applied to them
         story_bridge_html = """
         <div style="border-top: 1px solid #eee; margin: 2rem 0; padding-top: 1.5rem;">
             <p style="color: #333; font-size: 0.9rem; line-height: 1.7; margin: 0 0 1rem 0;">
@@ -161,7 +161,7 @@ class EmailService:
 
             <div style="padding: 2rem 0 1rem 0;">
                 <p style="font-size: 0.8rem; color: #999; margin: 0 0 1.5rem 0; text-transform: uppercase; letter-spacing: 0.05em;">
-                    Nebula — Landing Page Audit
+                    Nebula - Landing Page Audit
                 </p>
                 <h1 style="font-size: 1.4rem; font-weight: 700; margin: 0 0 0.5rem 0; color: #1a1a1a;">
                     {data.url}
@@ -187,7 +187,7 @@ class EmailService:
             {cta_html}
 
             <p style="color: #999; font-size: 0.8rem; margin: 2rem 0 0 0;">
-                Nebula Components — Mike Holownych<br>
+                Nebula Components - Mike Holownych<br>
                 <a href="https://nebulacomponents.com" style="color: #999;">nebulacomponents.com</a>
             </p>
 
@@ -213,7 +213,7 @@ What your visitors are experiencing:
 $97. Done in 48 hours. Reply YES and I'll send the link.
 Or open your audit: https://nebulacomponents.com/audit
 
--- 
+--
 Mike Holownych
 Nebula Components
         """.strip()

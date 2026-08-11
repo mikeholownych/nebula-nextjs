@@ -4,12 +4,12 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Mobile Landing Page Optimization: 6 Conversion Failures and How to Fix Them | Nebula',
   description:
-    'Most mobile landing page failures are structural — CTA below fold, tap targets under 44px, text that triggers iOS auto-zoom. Each is observable and fixable. This guide covers all six with pass/fail evidence.',
+    'Most mobile landing page failures are structural - CTA below fold, tap targets under 44px, text that triggers iOS auto-zoom. Each is observable and fixable. This guide covers all six with pass/fail evidence.',
   alternates: { canonical: 'https://nebulacomponents.com/mobile-landing-page-optimization' },
   openGraph: {
     title: 'Mobile Landing Page Optimization: 6 Conversion Failures and How to Fix Them | Nebula',
     description:
-      'Most mobile landing page failures are structural — CTA below fold, tap targets under 44px, text that triggers iOS auto-zoom. Each is observable and fixable.',
+      'Most mobile landing page failures are structural - CTA below fold, tap targets under 44px, text that triggers iOS auto-zoom. Each is observable and fixable.',
     url: 'https://nebulacomponents.com/mobile-landing-page-optimization',
     siteName: 'Nebula Components',
     type: 'article',
@@ -26,7 +26,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Mobile Landing Page Optimization: 6 Conversion Failures and How to Fix Them',
   description:
-    'Six structural mobile landing page failures — CTA below fold, tap targets under 44px, text too small, desktop-sized images, missing autocomplete, and horizontal overflow — with pass/fail evidence and bounded fixes.',
+    'Six structural mobile landing page failures - CTA below fold, tap targets under 44px, text too small, desktop-sized images, missing autocomplete, and horizontal overflow - with pass/fail evidence and bounded fixes.',
   author: { '@type': 'Organization', name: 'Nebula Components' },
   publisher: { '@type': 'Organization', name: 'Nebula Components' },
   mainEntityOfPage: 'https://nebulacomponents.com/mobile-landing-page-optimization',
@@ -82,45 +82,45 @@ const faqSchema = {
 const MOBILE_FAILURES = [
   {
     signal: 'CTA Placement',
-    label: 'CTA below fold on mobile — primary action hidden, visitor does not scroll',
+    label: 'CTA below fold on mobile - primary action hidden, visitor does not scroll',
     detail:
       'A CTA that sits in the hero on a 1440px desktop layout frequently falls below the fold on a 390px mobile viewport. The visitor sees the headline, maybe the lede, and then a stock image or a feature row. The button is not visible. Cold paid traffic arriving from an ad does not scroll to find an action they expected to see immediately. The session ends.',
     fix: 'Load the page on a 390px device (or Chrome DevTools device toolbar at 390px) and record a screenshot of the initial viewport. The primary CTA must be visible without scrolling. If it is not, restructure the hero to place the button above any image, subheadline, or proof element.',
   },
   {
     signal: 'Tap Targets',
-    label: 'Tap targets under 44px — variant pickers, small buttons, icon-only links',
+    label: 'Tap targets under 44px - variant pickers, small buttons, icon-only links',
     detail:
-      'Mobile users interact with a fingertip, not a cursor. Elements below 44×44 CSS pixels — variant selectors, icon-only navigation links, close buttons, inline text links — require precision that fingers cannot reliably deliver. Missed taps create frustration and dropout. The failure is common on form pages where "Submit" is styled as a compact inline element rather than a full-width block button.',
+      'Mobile users interact with a fingertip, not a cursor. Elements below 44×44 CSS pixels - variant selectors, icon-only navigation links, close buttons, inline text links - require precision that fingers cannot reliably deliver. Missed taps create frustration and dropout. The failure is common on form pages where "Submit" is styled as a compact inline element rather than a full-width block button.',
     fix: 'Audit every interactive element at 390px width. Any button, link, or form control with a height or width below 44px is a tap-target failure. Full-width block buttons on mobile eliminate the problem entirely for primary CTAs.',
   },
   {
     signal: 'Typography',
-    label: 'Text too small — body under 16px triggers iOS auto-zoom, breaks layout',
+    label: 'Text too small - body under 16px triggers iOS auto-zoom, breaks layout',
     detail:
-      'iOS Safari automatically zooms the viewport when the user taps an input field if the font size is below 16px. This breaks fixed-position elements, disrupts scroll behavior, and shifts the layout in ways that can hide the CTA. Body copy below 16px also fails basic readability on a 375px screen at arm\'s length — the visitor cannot comfortably read the offer, so they do not act on it.',
-    fix: 'Set body font-size to 16px minimum. Set all form input and textarea font-size to 16px or above — this specifically prevents iOS auto-zoom. Check computed font sizes using Chrome DevTools Computed panel at 390px width.',
+      'iOS Safari automatically zooms the viewport when the user taps an input field if the font size is below 16px. This breaks fixed-position elements, disrupts scroll behavior, and shifts the layout in ways that can hide the CTA. Body copy below 16px also fails basic readability on a 375px screen at arm\'s length - the visitor cannot comfortably read the offer, so they do not act on it.',
+    fix: 'Set body font-size to 16px minimum. Set all form input and textarea font-size to 16px or above - this specifically prevents iOS auto-zoom. Check computed font sizes using Chrome DevTools Computed panel at 390px width.',
   },
   {
     signal: 'Images',
-    label: 'Desktop-sized images — 1200px asset on 375px viewport wastes bandwidth and LCP',
+    label: 'Desktop-sized images - 1200px asset on 375px viewport wastes bandwidth and LCP',
     detail:
       'A hero image sized for a 1200px desktop layout sent to a 375px mobile viewport is roughly 3× wider than necessary. The browser downloads and decodes 3× the pixel data. On a 4G connection, an unoptimized image that is 800KB can add 2–3 seconds to Largest Contentful Paint. LCP is Google\'s primary user-experience ranking signal. Slow LCP on mobile increases bounce rate before the page is even interactive.',
     fix: 'Use the <picture> element with srcset breakpoints, or serve images through a CDN that delivers appropriately sized variants by device. Target 375–430px images under 150KB for above-fold hero assets. Run a WebPageTest or Lighthouse audit on a throttled mobile connection to verify LCP improvement.',
   },
   {
     signal: 'Forms',
-    label: 'No autocomplete on forms — email field without type="email" loses mobile keyboard',
+    label: 'No autocomplete on forms - email field without type="email" loses mobile keyboard',
     detail:
       'An <input> element without type="email" renders a standard QWERTY keyboard on iOS, not the email-optimized keyboard with @ and .com keys. An input without autocomplete="email" skips the system\'s stored credential suggestions. Each missing attribute adds friction to form completion on mobile. A three-field form with no autocomplete on any field multiplies the friction across every field.',
     fix: 'Set type="email" on every email input. Set autocomplete attributes explicitly: autocomplete="email", autocomplete="name", autocomplete="tel". Verify that the correct keyboard appears on device for each field. On a standard iOS device, type="email" should surface the keyboard with @ visible as a primary key.',
   },
   {
     signal: 'Layout',
-    label: 'Horizontal overflow — content wider than viewport creates sideways scroll',
+    label: 'Horizontal overflow - content wider than viewport creates sideways scroll',
     detail:
-      'A single oversized element — a fixed-width table, an unscaled image, a wide code block, or an element with a hardcoded pixel width — forces the viewport to expand horizontally. The user can now scroll left and right, which breaks the expected vertical reading flow. Trust badges, comparison tables, and icon rows with too many columns are the most common sources of horizontal overflow on landing pages.',
-    fix: 'Add overflow-x: hidden to the body element to suppress horizontal scroll. Then trace the source: open Chrome DevTools at 390px and inspect elements wider than the viewport. Fix the root cause — use max-width: 100% on images, replace fixed pixel widths with relative widths, and limit icon rows to three columns on mobile.',
+      'A single oversized element - a fixed-width table, an unscaled image, a wide code block, or an element with a hardcoded pixel width - forces the viewport to expand horizontally. The user can now scroll left and right, which breaks the expected vertical reading flow. Trust badges, comparison tables, and icon rows with too many columns are the most common sources of horizontal overflow on landing pages.',
+    fix: 'Add overflow-x: hidden to the body element to suppress horizontal scroll. Then trace the source: open Chrome DevTools at 390px and inspect elements wider than the viewport. Fix the root cause - use max-width: 100% on images, replace fixed pixel widths with relative widths, and limit icon rows to three columns on mobile.',
   },
 ]
 
@@ -137,8 +137,8 @@ const SIGNAL_GRID = [
   },
   {
     signal: 'Font size',
-    pass: 'Body and input text ≥ 16px — no iOS auto-zoom',
-    fail: 'Body or form inputs below 16px — triggers viewport shift',
+    pass: 'Body and input text ≥ 16px - no iOS auto-zoom',
+    fail: 'Body or form inputs below 16px - triggers viewport shift',
   },
   {
     signal: 'Image sizing',
@@ -148,7 +148,7 @@ const SIGNAL_GRID = [
   {
     signal: 'Form autocomplete',
     pass: 'type="email" and autocomplete attributes on all inputs',
-    fail: 'Generic text inputs — wrong keyboard, no credential fill',
+    fail: 'Generic text inputs - wrong keyboard, no credential fill',
   },
   {
     signal: 'Horizontal scroll',
@@ -192,7 +192,7 @@ export default function MobileLandingPageOptimization() {
               Mobile Landing Page Optimization
             </h1>
             <p className="mt-4 text-lg text-fg-muted leading-relaxed max-w-2xl">
-              60–70% of B2B landing page traffic arrives on a mobile device. &lsquo;Responsive&rsquo; means the layout does not break — it does not mean the page converts. A page that passes a responsive audit can still bury the CTA below fold, render unclickable tap targets, trigger iOS auto-zoom on form inputs, and download a 900KB image to a 375px screen. These six structural failures are the most common reasons mobile conversion rates run 50–70% below desktop.
+              60–70% of B2B landing page traffic arrives on a mobile device. &lsquo;Responsive&rsquo; means the layout does not break - it does not mean the page converts. A page that passes a responsive audit can still bury the CTA below fold, render unclickable tap targets, trigger iOS auto-zoom on form inputs, and download a 900KB image to a 375px screen. These six structural failures are the most common reasons mobile conversion rates run 50–70% below desktop.
             </p>
           </header>
 
@@ -227,7 +227,7 @@ export default function MobileLandingPageOptimization() {
               What the mobile audit checks
             </h2>
             <p className="text-sm text-fg-muted leading-6 mb-6 max-w-2xl">
-              Nebula checks each of these signals against your actual page at a 390px viewport. Every finding returns the raw evidence — not a recommendation based on a template.
+              Nebula checks each of these signals against your actual page at a 390px viewport. Every finding returns the raw evidence - not a recommendation based on a template.
             </p>
             <div className="grid gap-3 sm:grid-cols-3">
               {SIGNAL_GRID.map((s) => (

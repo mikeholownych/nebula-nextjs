@@ -32,7 +32,7 @@ const TONE_CLASSES: Record<BillingPurchase['fulfillment']['tone'], string> = {
 }
 
 const fmtUsd = (cents: number | null): string => {
-  if (cents == null) return '—'
+  if (cents == null) return '-'
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -95,7 +95,7 @@ export default function BillingView({ email }: { email: string }) {
       <section className="rounded-2xl border border-border bg-bg-elevated p-6">
         <h2 className="text-lg font-semibold mb-1">Plan</h2>
         <p className="text-sm text-fg-muted mb-4">
-          What you own and what comes with it — no hidden recurring charges.
+          What you own and what comes with it - no hidden recurring charges.
         </p>
         <div
           className={`flex flex-wrap items-center justify-between gap-4 rounded-xl border p-5 ${
@@ -111,7 +111,7 @@ export default function BillingView({ email }: { email: string }) {
             <p className="text-sm text-fg-muted mt-1">
               {isOwner
                 ? 'Targeted implementation instructions for one failing conversion signal, sent after successful payment. Includes a 30-day re-audit.'
-                : 'Free landing page audit — diagnosis across conversion, technical, and discoverability signals.'}
+                : 'Free landing page audit - diagnosis across conversion, technical, and discoverability signals.'}
             </p>
           </div>
           <span
@@ -246,7 +246,7 @@ export default function BillingView({ email }: { email: string }) {
             <p className="text-xs uppercase tracking-wide text-fg-dim">Retainer</p>
             <p className="text-2xl font-bold mt-1">$1,497</p>
             <p className="text-sm text-fg-muted mt-2">
-              Nebula implements the fixes for you — ongoing conversion work, month to month.
+              Nebula implements the fixes for you - ongoing conversion work, month to month.
             </p>
             <a
               href="https://buy.stripe.com/00w5kD1nK0wkaa573A43S0c"

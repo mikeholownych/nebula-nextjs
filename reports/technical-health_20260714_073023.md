@@ -1,4 +1,4 @@
-# technical-health — Nebula Components
+# technical-health - Nebula Components
 
 **Site:** nebulacomponents.shop
 **Run:** 2026-07-14T07:30:23.225904

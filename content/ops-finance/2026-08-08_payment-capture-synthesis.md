@@ -1,4 +1,4 @@
-# Payment Capture Verification — CEO Synthesis Report
+# Payment Capture Verification - CEO Synthesis Report
 
 **Date:** 2026-08-08
 **Author:** ops-finance agent (task t_34cf059c)
@@ -11,7 +11,7 @@ t_a9849c02 (Aug 8 daily verification), t_522efacc (Aug 7 verification)
 ## Verdict: Live Capture Path
 
 **One-time fix-pack ($97): INTACT.**
-**Subscription revenue (Pro/Growth/Agency): STRUCTURALLY INTACT — one external config unverified.**
+**Subscription revenue (Pro/Growth/Agency): STRUCTURALLY INTACT - one external config unverified.**
 
 A real payment hitting `buy.stripe.com` will flow:
 
@@ -32,22 +32,22 @@ Cloudflare tunnel) passing health checks. Zero code changes to payment path sinc
 
 | # | What it proves | File / command |
 |---|---|---|
-| 1 | Stripe live keys confirmed in production | `/home/mike/nebula/.env` — `sk_live_…` + `whsec_pq33c1…` |
-| 2 | Webhook route registered and reachable | `customer-portal/app/api/webhooks/stripe/route.ts` — POST handler, 405 on GET confirmed |
+| 1 | Stripe live keys confirmed in production | `/home/mike/nebula/.env` - `sk_live_…` + `whsec_pq33c1…` |
+| 2 | Webhook route registered and reachable | `customer-portal/app/api/webhooks/stripe/route.ts` - POST handler, 405 on GET confirmed |
 | 3 | Cloudflare routes both domains to port 3000 | `/home/mike/.cloudflared/config.yml` |
-| 4 | Next.js service active | `systemctl show nebula-nextjs.service` — PID 3496796, running since 2026-08-07 01:19 UTC |
+| 4 | Next.js service active | `systemctl show nebula-nextjs.service` - PID 3496796, running since 2026-08-07 01:19 UTC |
 | 5 | Webhook URL resolves live | `curl https://nebulacomponents.com/api/webhooks/stripe` → HTTP 405 |
-| 6 | purchases schema correct (livemode col) | `psql nebula_platform` — `\d purchases` confirms `livemode` column |
-| 7 | subscriptions schema correct (webhook-compatible) | `psql nebula_platform` — `\d subscriptions` confirms `email`, `billing_interval`, `livemode`, `current_period_start/end` |
+| 6 | purchases schema correct (livemode col) | `psql nebula_platform` - `\d purchases` confirms `livemode` column |
+| 7 | subscriptions schema correct (webhook-compatible) | `psql nebula_platform` - `\d subscriptions` confirms `email`, `billing_interval`, `livemode`, `current_period_start/end` |
 | 8 | Four migrations all applied | psql direct reads on `nebula_platform` and `nebula_audit` |
-| 9 | Livemode filtering implemented in code | route.ts checks `event.livemode` before writing — test events do not pollute live tables |
+| 9 | Livemode filtering implemented in code | route.ts checks `event.livemode` before writing - test events do not pollute live tables |
 | 10 | Zero real payments to date | `SELECT COUNT(*) FROM purchases WHERE livemode=true` → 0 real rows (1 QA fixture: `cs_test_billing_qa`, `e2e-crawler-test@example.com`) |
 | 11 | Zero subscriptions to date | `SELECT COUNT(*) FROM subscriptions` on `nebula_platform` → 0 |
-| 12 | No payment-path code changes since Aug 5 | `git log --oneline --since=2026-08-05` — Aug 6/7 commits: brand rename + collateral only |
+| 12 | No payment-path code changes since Aug 5 | `git log --oneline --since=2026-08-05` - Aug 6/7 commits: brand rename + collateral only |
 
 ---
 
-## Livemode Filtering — Ledger Separation Status
+## Livemode Filtering - Ledger Separation Status
 
 The webhook handler in `route.ts` reads `event.livemode` from the Stripe event payload.
 Test-mode events (livemode=false) do not write to `nebula_platform.purchases` or
@@ -68,28 +68,28 @@ No cross-contamination.
 
 ## One Blocking Unknown
 
-**Stripe dashboard webhook configuration — cannot verify read-only from this machine.**
+**Stripe dashboard webhook configuration - cannot verify read-only from this machine.**
 
 Specifically:
 
-1. **Endpoint URL** — Dashboard must point to `https://nebulacomponents.com/api/webhooks/stripe`.
+1. **Endpoint URL** - Dashboard must point to `https://nebulacomponents.com/api/webhooks/stripe`.
    If an old `nebulacomponents.shop` endpoint was registered and never updated, Stripe
    may send to `.shop`. Both domains route to port 3000 via Cloudflare tunnel, so delivery
-   would still succeed — but this is unverified. LOW risk for fix-pack (`.shop` still works);
+   would still succeed - but this is unverified. LOW risk for fix-pack (`.shop` still works);
    MEDIUM risk for subscriptions (if the `.shop` endpoint predates the subscription events).
 
-2. **Subscribed events** — Dashboard must include `customer.subscription.created`,
+2. **Subscribed events** - Dashboard must include `customer.subscription.created`,
    `customer.subscription.updated`, `customer.subscription.deleted`. These events
    were added to the handler in the Aug 4 commits. Registering them in the Stripe
    dashboard is a human-action step. If not done, subscription revenue events are
    silently dropped at Stripe before they reach the handler.
 
 **Impact:** Fix-pack one-time purchases are almost certainly fine (original webhook
-registration predates these changes). Subscription revenue is the at-risk path —
+registration predates these changes). Subscription revenue is the at-risk path -
 if the dashboard events are not updated, no subscription purchase will ever be
 recorded, regardless of how correct the code is.
 
-**Resolution — CEO action required:**
+**Resolution - CEO action required:**
 Log into Stripe dashboard → Developers → Webhooks.
 Confirm: (a) endpoint URL ends in `.com`, (b) all three `customer.subscription.*`
 events are subscribed.
@@ -104,10 +104,10 @@ DATE: 2026-08-08
 REVENUE: $0 (cumulative: $0)
 LIVEMODE PURCHASES: 0 real
 LIVEMODE SUBSCRIPTIONS: 0
-QA FIXTURE IN PURCHASES: 1 row (cs_test_billing_qa — not revenue)
+QA FIXTURE IN PURCHASES: 1 row (cs_test_billing_qa - not revenue)
 PRODUCTION HEALTH: PASS (payment path)
-OUTREACH PIPELINE: FAIL (unrelated — AgentMail/SMTP credential failures)
-BLOCKING UNKNOWN: Stripe dashboard — subscription event subscriptions unconfirmed
+OUTREACH PIPELINE: FAIL (unrelated - AgentMail/SMTP credential failures)
+BLOCKING UNKNOWN: Stripe dashboard - subscription event subscriptions unconfirmed
 MISSING EVIDENCE: Stripe dashboard screenshot or API export
 ```
 

@@ -1,5 +1,5 @@
 export const metadata = {
-  title: '7 Systems Every Ecom Brand Needs That Most Skip — Nebula Components',
+  title: '7 Systems Every Ecom Brand Needs That Most Skip - Nebula Components',
   description: 'A conversion engineer\'s checklist of the 7 systems every ecommerce brand needs to stop leaking conversions.',
   alternates: { canonical: 'https://nebulacomponents.com/7-systems' },
 };
@@ -28,7 +28,7 @@ const systems = [
       'H1 headline states the specific outcome for a specific audience',
       'Primary CTA is above the fold, uses action + outcome language',
       'Social proof (testimonial, case study, metric) is visible before the CTA',
-      'The page has one primary action — not 5 competing links',
+      'The page has one primary action - not 5 competing links',
     ],
     commonMiss: 'The headline is a brand tagline instead of a value promise to a specific buyer.',
     roi: 'A clear value headline + action CTA alone lifts conversions 30-100% in most A/B tests we\'ve seen.',
@@ -44,7 +44,7 @@ const systems = [
       'Exactly one H1 per page that shares significant keywords with the title',
       'URL is readable and keyword-inclusive',
     ],
-    commonMiss: 'Title tag and H1 don\'t align — Google sees the mismatch; bounce rate goes up.',
+    commonMiss: 'Title tag and H1 don\'t align - Google sees the mismatch; bounce rate goes up.',
     roi: 'The naming-consistency fix (title ↔ H1 alignment) is the single highest-ROI SEO move for most pages. It takes 5 minutes.',
   },
   {
@@ -54,7 +54,7 @@ const systems = [
     description: 'If you don\'t capture them, you lose them forever. Retargeting ads cost 3x what email costs.',
     checklist: [
       'A low-friction capture (lead magnet, free audit, checklist) above the fold or as exit-intent',
-      'Confirmation page offers a next step — not just "check your inbox"',
+      'Confirmation page offers a next step - not just "check your inbox"',
       'New subscribers enter a sequence within 24 hours',
       'Segmentation starts on day 1 based on which magnet they opted into',
     ],
@@ -65,21 +65,21 @@ const systems = [
     num: 5,
     title: 'Mobile Optimization',
     subtitle: '70%+ of ecom traffic is mobile. 90%+ of ecom revenue is not.',
-    description: 'Mobile traffic converts at a fraction of desktop — not because mobile users aren\'t buyers, but because most landing pages weren\'t built for mobile first.',
+    description: 'Mobile traffic converts at a fraction of desktop - not because mobile users aren\'t buyers, but because most landing pages weren\'t built for mobile first.',
     checklist: [
       'Viewport meta tag present and configured correctly',
       'CTA button is thumb-friendly (48px+ height, padded from edges)',
       'Above-fold content fits on a phone screen without scrolling',
       'Font sizes are readable without pinch-zoom',
     ],
-    commonMiss: 'The desktop page "responsive" by shrinking — CTA gets smaller, buttons get closer, form becomes frustrating.',
+    commonMiss: 'The desktop page "responsive" by shrinking - CTA gets smaller, buttons get closer, form becomes frustrating.',
     roi: 'Mobile CTA optimization alone can close 20-40% of the desktop-to-mobile conversion gap.',
   },
   {
     num: 6,
     title: 'Checkout & Payment Flow',
     subtitle: 'The leak isn\'t always at the top of the funnel.',
-    description: 'Sometimes the landing page is fine — the leak is between "add to cart" and "confirmed purchase."',
+    description: 'Sometimes the landing page is fine - the leak is between "add to cart" and "confirmed purchase."',
     checklist: [
       'Checkout has 3 or fewer visible steps',
       'Payment options include card + digital wallet',
@@ -131,11 +131,11 @@ export default function SevenSystemsPage() {
       <main id="main-content" className="py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-6">
           <p className="text-lg text-slate-300 mb-6">
-            It&apos;s not one thing. It&apos;s almost always a missing system — not a missing button color or a better font.
+            It&apos;s not one thing. It&apos;s almost always a missing system - not a missing button color or a better font.
           </p>
           <p className="text-slate-300 mb-6">
             Across our published landing page teardowns, we&apos;ve traced every conversion leak back to one of seven systems. Brands that fix{' '}
-            <strong className="text-white">all seven</strong> see 2-4x conversion improvements. Brands that skip even one leave money on the table — and usually don&apos;t know which one.
+            <strong className="text-white">all seven</strong> see 2-4x conversion improvements. Brands that skip even one leave money on the table - and usually don&apos;t know which one.
           </p>
           <p className="text-lg font-semibold text-emerald-400 mb-12">
             This is the checklist.
@@ -150,11 +150,11 @@ export default function SevenSystemsPage() {
                 </span>
                 <span className="text-white">{system.title}</span>
               </h2>
-              
+
               <p className="text-lg font-semibold text-emerald-400 mb-4">
                 {system.subtitle}
               </p>
-              
+
               <p className="text-slate-300 mb-6">
                 {system.description}
               </p>
@@ -210,7 +210,7 @@ export default function SevenSystemsPage() {
                     {idx + 1}
                   </span>
                   <p className="text-slate-300">
-                    <strong className="text-white">{item.name}</strong> — {item.reason}
+                    <strong className="text-white">{item.name}</strong> - {item.reason}
                   </p>
                 </li>
               ))}
@@ -223,7 +223,7 @@ export default function SevenSystemsPage() {
               How Does Your Page Score?
             </h3>
             <p className="text-slate-400 mb-6">
-              Automated audit scoring is live and evidence-backed — no signup required.
+              Automated audit scoring is live and evidence-backed - no signup required.
             </p>
             <a
               href="/audit?utm_source=content&utm_medium=organic-content"
@@ -239,7 +239,7 @@ export default function SevenSystemsPage() {
           {/* Repair Sprint CTA */}
           <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-8 text-center">
             <p className="text-lg text-slate-300 mb-6">
-              <strong className="text-white">Want one high-confidence leak repaired?</strong> $97 — Nebula scopes, implements, and verifies one bounded page-level change. No retainer.
+              <strong className="text-white">Want one high-confidence leak repaired?</strong> $97 - Nebula scopes, implements, and verifies one bounded page-level change. No retainer.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

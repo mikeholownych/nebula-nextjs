@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""YouTube channel orchestrator — run this to produce and publish a video.
+"""YouTube channel orchestrator - run this to produce and publish a video.
 
 Usage:
   python3 yt_orchestrator.py                         # auto-pick next subject
@@ -28,7 +28,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger("orchestrator")
 
-# ── Subject pool — sites to audit for YouTube content ───────────────
+# ── Subject pool - sites to audit for YouTube content ───────────────
 SUBJECT_POOL = [
     # Rotating pool of sites that our scraper can actually fetch.
     "https://nebulacomponents.com",
@@ -77,7 +77,7 @@ async def _telegram_review_gate(video_path, short_path, script, short_script,
     chat_id = os.environ.get("TELEGRAM_ALLOWED_USERS", "").split(",")[0].strip()
 
     if not bot_token or not chat_id:
-        logger.warning("[gate] TELEGRAM_BOT_TOKEN or chat_id not set — auto-approving")
+        logger.warning("[gate] TELEGRAM_BOT_TOKEN or chat_id not set - auto-approving")
         return True
 
     import subprocess as _sp
@@ -124,10 +124,10 @@ async def _telegram_review_gate(video_path, short_path, script, short_script,
                     json={"chat_id": chat_id, "text": caption, "parse_mode": "Markdown"},
                 )
         if not resp.is_success:
-            logger.warning(f"[gate] Telegram send failed: {resp.status_code} — auto-approving")
+            logger.warning(f"[gate] Telegram send failed: {resp.status_code} - auto-approving")
             return True
     except Exception as e:
-        logger.warning(f"[gate] Telegram send error: {e} — auto-approving")
+        logger.warning(f"[gate] Telegram send error: {e} - auto-approving")
         return True
     finally:
         if preview_path and preview_path.exists():
@@ -165,7 +165,7 @@ async def _telegram_review_gate(video_path, short_path, script, short_script,
             except Exception:
                 pass
 
-    logger.warning("[gate] Timed out waiting for review — auto-rejecting to be safe")
+    logger.warning("[gate] Timed out waiting for review - auto-rejecting to be safe")
     return False
 
 
@@ -253,7 +253,7 @@ async def produce(url=None, dry_run=False, publish=True, script_format="standard
     _log_result(video_path, script)
 
     if dry_run:
-        logger.info("DRY RUN — stopping before upload")
+        logger.info("DRY RUN - stopping before upload")
         return {
             "status": "dry_run",
             "video_path": video_path,
@@ -261,7 +261,7 @@ async def produce(url=None, dry_run=False, publish=True, script_format="standard
             "script": script,
         }
 
-    # Human review gate — send preview to Telegram and wait for ✅ or ❌
+    # Human review gate - send preview to Telegram and wait for ✅ or ❌
     # REVIEW_GATE_ENABLED env var controls this; set to "0" to bypass.
     if publish and os.environ.get("REVIEW_GATE_ENABLED", "1") != "0":
         approved = await _telegram_review_gate(
@@ -271,15 +271,15 @@ async def produce(url=None, dry_run=False, publish=True, script_format="standard
             short_script=short_script,
         )
         if not approved:
-            logger.info("❌ Review gate rejected — video not published")
+            logger.info("❌ Review gate rejected - video not published")
             return {"status": "rejected_by_reviewer", "video_path": video_path}
-        logger.info("✅ Review gate approved — proceeding to upload")
+        logger.info("✅ Review gate approved - proceeding to upload")
 
     # 4. Upload (if OAuth configured and publish=True)
     if publish:
         from yt_channel.upload import upload_video, set_thumbnail, TOKEN_FILE
         if not TOKEN_FILE.exists():
-            logger.warning("OAuth not configured — skipping upload.")
+            logger.warning("OAuth not configured - skipping upload.")
             return {"status": "no_auth", "video_path": video_path}
 
         # Upload long-form
@@ -321,7 +321,7 @@ async def produce(url=None, dry_run=False, publish=True, script_format="standard
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Nebula Audits — YouTube Pipeline")
+    parser = argparse.ArgumentParser(description="Nebula Audits - YouTube Pipeline")
     parser.add_argument("--url", help="Audit a specific URL")
     parser.add_argument("--dry-run", action="store_true", help="Generate video only")
     parser.add_argument("--no-publish", action="store_true", help="Skip upload even if auth exists")

@@ -3,22 +3,22 @@
 ## Industry Expert Validation
 
 ### Digital Marketing Experts
-> "Nebula Components has cracked the code on conversion optimization. Their Diagnostic Discipline framework is the most systematic approach I've seen in the industry. It's not just about fixing leaks—it's about building a sustainable process for continuous improvement."
-> 
+> "Nebula Components has cracked the code on conversion optimization. Their Diagnostic Discipline framework is the most systematic approach I've seen in the industry. It's not just about fixing leaks-it's about building a sustainable process for continuous improvement."
+>
 > **- Alex Johnson, PhD, Digital Marketing Professor at NYU Stern**
 
-> "What sets Nebula apart is their data-first methodology. They don't just tell you what's broken—they show you exactly where your money is leaking and how to fix it systematically. This is game-changing for marketers."
-> 
+> "What sets Nebula apart is their data-first methodology. They don't just tell you what's broken-they show you exactly where your money is leaking and how to fix it systematically. This is game-changing for marketers."
+>
 > **- Sarah Williams, Senior Digital Strategist, McKinsey & Company**
 
 ### Conversion Rate Experts
 > "The Diagnostic Discipline framework Nebula has developed is revolutionary. It transforms conversion optimization from guesswork to a precise, measurable science. I've seen clients recover 30-50% of their wasted ad spend within the first month."
-> 
+>
 > **- Michael Chen, Conversion Optimization Specialist, CXL Institute**
 
 ### AI & Analytics Experts
 > "Nebula's integration of AI into their diagnostic process is ahead of the curve. Their ability to identify hidden conversion leaks that traditional analytics miss is remarkable. This is the future of marketing optimization."
-> 
+>
 > **- Dr. Emily Rodriguez, AI Ethics Researcher, Stanford University**
 
 ## Media Coverage

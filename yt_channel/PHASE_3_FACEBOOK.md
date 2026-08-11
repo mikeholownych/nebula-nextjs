@@ -1,10 +1,10 @@
-# Phase 3 — Facebook/Meta Retargeting Runbook
+# Phase 3 - Facebook/Meta Retargeting Runbook
 
-**Status**: 📋 Ready to launch — awaiting budget approval  
-**Budget**: $50/day  
-**Audience**: Visited `/audit/*/results` in last 30 days, exclude purchasers  
-**Goal**: $97 fix pack purchases  
-**Target CPA**: $40 or less  
+**Status**: 📋 Ready to launch - awaiting budget approval
+**Budget**: $50/day
+**Audience**: Visited `/audit/*/results` in last 30 days, exclude purchasers
+**Goal**: $97 fix pack purchases
+**Target CPA**: $40 or less
 
 ---
 
@@ -14,7 +14,7 @@
 
 1. Install [Meta Pixel Helper Chrome extension](https://chrome.google.com/webstore/detail/meta-pixel-helper)
 2. Navigate to `nebulacomponents.com/audit/[any-id]/results`
-3. Open the extension — confirm:
+3. Open the extension - confirm:
    - Pixel fires `PageView` event ✓
    - No errors shown ✓
 4. Confirm in Meta Events Manager → `nebulacomponents.com` → Events → `PageView` appears with recent activity
@@ -39,7 +39,7 @@ In Meta Events Manager → Custom Conversions → Create:
 Meta Business Manager → Audiences → Create Audience → Custom Audience → Website:
 
 ```
-Audience name: "Audit Results — Last 30 Days"
+Audience name: "Audit Results - Last 30 Days"
 Include: People who visited specific web pages
   URL contains: /audit/
   URL contains: /results
@@ -52,7 +52,7 @@ Estimated size: ~100-500 people/month (grows with traffic)
 ### Custom Audience 2: Purchasers (Exclusion)
 
 ```
-Audience name: "Fix Pack Purchasers — All Time"
+Audience name: "Fix Pack Purchasers - All Time"
 Include: People who performed Custom Conversion: Fix Pack Purchase
 Retention: 180 days (max)
 ```
@@ -60,7 +60,7 @@ Retention: 180 days (max)
 ### Lookalike Audience (Week 3+, after 50+ purchasers)
 
 ```
-Source: "Fix Pack Purchasers — All Time"
+Source: "Fix Pack Purchasers - All Time"
 Location: United States + Canada + UK + Australia
 Size: 1% (tightest match)
 Name: "Fix Pack Purchaser Lookalike 1%"
@@ -71,14 +71,14 @@ Name: "Fix Pack Purchaser Lookalike 1%"
 ## 3. Campaign Structure
 
 ```
-CAMPAIGN: Nebula — Retarget — Fix Pack
+CAMPAIGN: Nebula - Retarget - Fix Pack
   Objective: Sales
   Budget type: Campaign Budget Optimization (CBO)
   Daily budget: $50/day
 
-  AD SET 1: Retarget — 30-Day Results Viewers
-    Audience: "Audit Results — Last 30 Days"
-    Exclude: "Fix Pack Purchasers — All Time"
+  AD SET 1: Retarget - 30-Day Results Viewers
+    Audience: "Audit Results - Last 30 Days"
+    Exclude: "Fix Pack Purchasers - All Time"
     Placement: Automatic (let Meta optimize)
     Optimization: Conversions → Fix Pack Purchase
     Bid: Cost Cap → $40
@@ -96,11 +96,11 @@ CAMPAIGN: Nebula — Retarget — Fix Pack
 
 **Primary text**:
 > You ran the audit. You saw the score.
-> 
+>
 > Every day that page stays broken, your ad spend bleeds.
-> 
+>
 > The fix pack implements your top 3 changes in 30 minutes. Founders who do it average +$600/month recovered.
-> 
+>
 > $97. One-time.
 
 **Headline**: Your landing page is leaking money right now
@@ -115,11 +115,11 @@ CAMPAIGN: Nebula — Retarget — Fix Pack
 
 **Primary text**:
 > 847 landing pages audited. Here's what founders fixed first.
-> 
+>
 > Finding #1 across 72% of sites: H1 doesn't match the ad copy.
 > Fix time: 15 minutes. Average bounce rate improvement: 12%.
-> 
-> Your fix pack has your specific issues. Not generic advice — the exact prompts for your page.
+>
+> Your fix pack has your specific issues. Not generic advice - the exact prompts for your page.
 
 **Headline**: 847 audits. Here's what the top founders fixed first.
 
@@ -133,14 +133,14 @@ CAMPAIGN: Nebula — Retarget — Fix Pack
 
 **Primary text**:
 > Your audit expires in 7 days.
-> 
+>
 > After that, your findings reset and you start over.
-> 
+>
 > Your fix pack is already built from your audit. 3 specific changes. Copy-paste prompts. Implement before the window closes.
 
 **Headline**: Your audit expires in 7 days
 
-**Description**: Claim your fix pack before findings reset — $97
+**Description**: Claim your fix pack before findings reset - $97
 
 **CTA button**: Shop Now → `https://nebulacomponents.com/audit?utm_source=facebook&utm_medium=paid&utm_campaign=retarget_urgency_frame`
 
@@ -159,7 +159,7 @@ CAMPAIGN: Nebula — Retarget — Fix Pack
 **Recommended creative approach**:
 - Screenshot of the audit results page (score 4/10, red)
 - Overlay text: "Is your landing page this broken?"
-- No stock photos — authentic audit UI performs better
+- No stock photos - authentic audit UI performs better
 
 ---
 
@@ -246,7 +246,7 @@ https://nebulacomponents.com/audit?utm_source=facebook&utm_medium=paid&utm_campa
 
 - [ ] Meta Pixel firing on `/audit/*/results` (verified in Events Manager)
 - [ ] Custom Conversion: `Fix Pack Purchase` set up
-- [ ] Custom Audience: `Audit Results — Last 30 Days` has 100+ people
+- [ ] Custom Audience: `Audit Results - Last 30 Days` has 100+ people
 - [ ] Exclusion Audience: `Fix Pack Purchasers` created
 - [ ] Campaign created with $50/day CBO budget
 - [ ] Ad Set targeting correct audiences with exclusion applied

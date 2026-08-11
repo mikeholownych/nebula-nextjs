@@ -1,7 +1,7 @@
 DATE: 2026-07-04
 SNAPSHOT_TIME_UTC: 2026-07-04T23:04:35Z
 HANDOFF: ops-finance -> CEO
-TASK: t_ba7d8ac7 — Stage handoff: ops-finance revenue evidence and kill criteria
+TASK: t_ba7d8ac7 - Stage handoff: ops-finance revenue evidence and kill criteria
 
 REVENUE: $0 real revenue (cumulative: $0)
 COSTS: unverified; /home/mike/nebula/ledgers/revenue-cost-ledger.jsonl had 0 rows before this handoff verification row

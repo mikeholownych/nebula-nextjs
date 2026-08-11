@@ -83,7 +83,7 @@ Run your first audit:
 
 If you have questions, reply to this email.
 
-— Mike
+- Mike
 Nebula Components
 nebulacomponents.com`
 
@@ -95,11 +95,11 @@ ${bulletsHtml}
 </ul>
 <p><strong>Next steps:</strong></p>
 <ol>
-  <li><a href="https://nebulacomponents.com/audit">Run your first audit</a> — paste your landing page URL, get 9 signals scored in 90 seconds</li>
-  <li><a href="https://nebulacomponents.com/workspace">Set up page monitoring</a> — add your page to get weekly score-drop alerts</li>
+  <li><a href="https://nebulacomponents.com/audit">Run your first audit</a> - paste your landing page URL, get 9 signals scored in 90 seconds</li>
+  <li><a href="https://nebulacomponents.com/workspace">Set up page monitoring</a> - add your page to get weekly score-drop alerts</li>
 </ol>
 <p>If you have questions, reply to this email.</p>
-<p>— Mike<br>Nebula Components</p>`
+<p>- Mike<br>Nebula Components</p>`
 
   return sendEmail({ to: email, subject, text, html })
 }
@@ -113,7 +113,7 @@ ${bulletsHtml}
  * exists as an explicit hook so the webhook handler documents the intent and
  * so the scheduler can be replaced with a queued task if needed.
  *
- * It is a no-op in the webhook — the cron is authoritative.
+ * It is a no-op in the webhook - the cron is authoritative.
  */
 export function scheduleFirstValueEmail(
   _email: string,

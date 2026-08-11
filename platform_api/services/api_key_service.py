@@ -60,7 +60,7 @@ class ApiKeyService:
     ) -> dict:
         """
         Create a new API key for a workspace.
-        Returns the raw key ONCE — it is never stored in plaintext.
+        Returns the raw key ONCE - it is never stored in plaintext.
         Raises ValueError if the plan doesn't support API keys or the
         key limit for the plan is already reached.
         """

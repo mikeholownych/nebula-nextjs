@@ -92,19 +92,19 @@ def escape_js_string(s):
 
 def generate_page_tsx(slug, category, domain, score, grade_letter, grade_class, issues, pattern_text, jsonld_str):
     """Generate page.tsx content."""
-    
+
     # Format issues as JS array
     issues_js_parts = []
     for issue in issues:
         title_escaped = escape_js_string(issue["title"])
         desc_escaped = escape_js_string(issue["description"])
         issues_js_parts.append('{ title: "' + title_escaped + '", description: "' + desc_escaped + '" }')
-    
+
     issues_js = ", ".join(issues_js_parts)
-    
+
     # Escape pattern text
     pattern_escaped = escape_js_string(pattern_text)
-    
+
     # Parse JSON-LD and create inline version
     try:
         jsonld_obj = json.loads(jsonld_str)
@@ -114,13 +114,13 @@ def generate_page_tsx(slug, category, domain, score, grade_letter, grade_class, 
     except:
         # Fallback to empty object
         jsonld_escaped = "{}"
-    
+
     # Build the content using string concatenation to avoid f-string issues
     content = """import { Metadata } from 'next';
 import CaseStudyPage from '../../CaseStudyPage';
 
 export const metadata: Metadata = {
-  title: "Case Study: """ + category + """ Landing Page Audit — """ + str(score) + """/10 Score | Nebula Components",
+  title: "Case Study: """ + category + """ Landing Page Audit - """ + str(score) + """/10 Score | Nebula Components",
   description: "See how a """ + category + """ landing page scored """ + str(score) + """/10 on conversion audit. Real issues found, exact fixes applied. Free audit tool included.",
 };
 
@@ -145,10 +145,10 @@ export default function Page() {
 converted = 0
 for filepath in files_to_convert:
     print(f"Processing {filepath.name}...")
-    
+
     with open(filepath, 'r') as f:
         html = f.read()
-    
+
     # Extract data
     category = extract_category(html)
     score = extract_score(html)
@@ -157,24 +157,24 @@ for filepath in files_to_convert:
     issues = extract_issues(html)
     pattern_text = extract_pattern_text(html)
     jsonld = extract_jsonld(html)
-    
+
     # Create slug (directory name)
     slug = filepath.name.replace(".html", "")
-    
+
     # Generate content
     content = generate_page_tsx(
         slug, category, domain, score, grade_letter, grade_class,
         issues, pattern_text, jsonld
     )
-    
+
     # Create directory and write file
     target_dir = TARGET_DIR / slug
     target_dir.mkdir(exist_ok=True)
-    
+
     target_file = target_dir / "page.tsx"
     with open(target_file, 'w') as f:
         f.write(content)
-    
+
     converted += 1
     print(f"  ✓ Created {target_file}")
 

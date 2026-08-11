@@ -47,13 +47,13 @@ export default function ErrorPage({ error, reset }: { error: Error; reset: () =>
             <path d="M40 40L80 80M80 40L40 80" stroke="currentColor" strokeWidth="12" strokeLinecap="round" />
           </svg>
         </div>
-        
+
         <h1 className="error-title">
-          Something went wrong — your funnel just stopped
+          Something went wrong - your funnel just stopped
         </h1>
-        
+
         <p className="error-subtitle">
-          We're fixing it. In the meantime, your ads are still running — 
+          We're fixing it. In the meantime, your ads are still running -
           and every click is waste because your site isn't working.
         </p>
 
@@ -63,10 +63,10 @@ export default function ErrorPage({ error, reset }: { error: Error; reset: () =>
             While we fix this, keep your funnel working
           </h2>
           <p className="recovery-desc">
-            Get a free landing page audit — identify where your funnel leaks money 
+            Get a free landing page audit - identify where your funnel leaks money
             before your next campaign. We'll deliver it to your inbox.
           </p>
-          
+
           <form onSubmit={handleSubmit} className="error-form">
             <div className="form-group">
               <label htmlFor="error-email-500">Where should we send your audit?</label>
@@ -100,7 +100,7 @@ export default function ErrorPage({ error, reset }: { error: Error; reset: () =>
             <button onClick={reset} disabled={retrying} className="retry-link">
               {retrying ? 'Retrying automatically... ⏱️ 3s' : 'Try again now'}
             </button>
-            <p className="retry-desc">Or wait — we'll retry automatically in 3 seconds</p>
+            <p className="retry-desc">Or wait - we'll retry automatically in 3 seconds</p>
           </div>
         </div>
 

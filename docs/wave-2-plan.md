@@ -1,4 +1,4 @@
-# Wave 2 Plan — Customer Portal Expansion
+# Wave 2 Plan - Customer Portal Expansion
 
 **Started:** 2026-07-14
 **Scope:** Build customer-facing portal with organization management + subscription handling
@@ -42,30 +42,30 @@
 
 **New Endpoints:**
 ```
-GET    /api/organizations/:id           — Get organization
-PUT    /api/organizations/:id            — Update organization
-POST   /api/organizations/:id/invites   — Invite member
-GET    /api/organizations/:id/members   — List members
-DELETE /api/organizations/:id/members/:userId — Remove member
+GET    /api/organizations/:id           - Get organization
+PUT    /api/organizations/:id            - Update organization
+POST   /api/organizations/:id/invites   - Invite member
+GET    /api/organizations/:id/members   - List members
+DELETE /api/organizations/:id/members/:userId - Remove member
 
-GET    /api/subscriptions               — Get subscription
-POST   /api/subscriptions/checkout      — Create checkout session
-POST   /api/subscriptions/cancel        — Cancel subscription
-GET    /api/subscriptions/invoices      — List invoices
+GET    /api/subscriptions               - Get subscription
+POST   /api/subscriptions/checkout      - Create checkout session
+POST   /api/subscriptions/cancel        - Cancel subscription
+GET    /api/subscriptions/invoices      - List invoices
 
-GET    /api/audits                      — List audits
-GET    /api/audits/:id                  — Get audit details
+GET    /api/audits                      - List audits
+GET    /api/audits/:id                  - Get audit details
 ```
 
 ### Frontend (Next.js)
 
 **New Pages:**
-- `/dashboard` — Overview with metrics
-- `/organization` — Organization settings
-- `/team` — Team management
-- `/subscription` — Subscription management
-- `/audits` — Audit history
-- `/audits/[id]` — Audit details
+- `/dashboard` - Overview with metrics
+- `/organization` - Organization settings
+- `/team` - Team management
+- `/subscription` - Subscription management
+- `/audits` - Audit history
+- `/audits/[id]` - Audit details
 
 **New Components:**
 - Navigation bar

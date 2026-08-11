@@ -9,7 +9,7 @@ export default function OGCardSource() {
         Your landing page is <em className="text-accent not-italic">leaking buyers.</em>
       </h1>
       <p className="text-fg-muted text-[23px] max-w-[760px] leading-[1.4] mb-10">
-        Automated URL submission and scoring are live — every finding is backed by verifiable evidence.
+        Automated URL submission and scoring are live - every finding is backed by verifiable evidence.
       </p>
       <div className="flex gap-3.5">
         <div className="bg-bg-surface border border-accent/40 text-gray-300 text-[15px] px-[18px] py-[9px] rounded-full">

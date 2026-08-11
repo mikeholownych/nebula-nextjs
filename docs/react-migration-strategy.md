@@ -23,11 +23,11 @@ Instead of converting entire pages at once (which is error-prone and time-consum
 ### Implementation Strategy
 
 For each page:
-1. **Analyze structure** — Identify sections, components
-2. **Extract components** — Hero, Features, CTA, Footer
-3. **Create page route** — Next.js route file
-4. **Test thoroughly** — Visual + functional
-5. **Deploy** — Commit and push
+1. **Analyze structure** - Identify sections, components
+2. **Extract components** - Hero, Features, CTA, Footer
+3. **Create page route** - Next.js route file
+4. **Test thoroughly** - Visual + functional
+5. **Deploy** - Commit and push
 
 ---
 
@@ -58,7 +58,7 @@ Given complexity (592-line homepage, 48 pages total), recommend:
 
 **Option B:** Set up monitoring (DONE ✅), then use subagents for parallel conversion
 
-**Recommendation:** Option B is more efficient — monitoring is active, servers healthy. Use subagents (3 at a time) to convert pages systematically without blocking production.
+**Recommendation:** Option B is more efficient - monitoring is active, servers healthy. Use subagents (3 at a time) to convert pages systematically without blocking production.
 
 ---
 
@@ -103,7 +103,7 @@ Each batch runs in parallel, converts HTML to React, tests, and commits.
 
 ## Recommendation
 
-**Pause manual conversion** — Monitoring is active and robust. Production is stable.
+**Pause manual conversion** - Monitoring is active and robust. Production is stable.
 
 **Next action:**
 - Let monitoring run for 24 hours

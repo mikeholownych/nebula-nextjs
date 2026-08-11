@@ -1,8 +1,8 @@
 # Instrumenting a custom server - Docs
 
-[`instrument()`](/docs/mcp-analytics/installation.md) works by wrapping a `@modelcontextprotocol/sdk` `Server` or `McpServer` — it patches that object's request handlers. But not every MCP server is built that way. If you run a **custom dispatcher** — a [Hono](https://hono.dev/) or Express HTTP handler, a Cloudflare Worker / Vercel edge function, or anything that speaks the MCP protocol without the SDK's server abstraction — there's no object for `instrument()` to wrap.
+[`instrument()`](/docs/mcp-analytics/installation.md) works by wrapping a `@modelcontextprotocol/sdk` `Server` or `McpServer` - it patches that object's request handlers. But not every MCP server is built that way. If you run a **custom dispatcher** - a [Hono](https://hono.dev/) or Express HTTP handler, a Cloudflare Worker / Vercel edge function, or anything that speaks the MCP protocol without the SDK's server abstraction - there's no object for `instrument()` to wrap.
 
-For those servers, use **`PostHogMCP`** instead. It's a subclass of the [`posthog-node`](/docs/libraries/node.md) client, so it's a drop-in replacement for your existing PostHog client — `capture`, `identify`, `flush`, `shutdown`, and feature flags all work unchanged — with `captureToolCall` and `captureInitialize` added on top. You resolve identity and context per request and call those methods yourself. They build the same canonical `$mcp_*` events as `instrument()` (same sanitization, truncation, and `$exception` fan-out) and hand them to the inherited `capture()`, so nothing downstream (insights, dashboards, error tracking) can tell the difference.
+For those servers, use **`PostHogMCP`** instead. It's a subclass of the [`posthog-node`](/docs/libraries/node.md) client, so it's a drop-in replacement for your existing PostHog client - `capture`, `identify`, `flush`, `shutdown`, and feature flags all work unchanged - with `captureToolCall` and `captureInitialize` added on top. You resolve identity and context per request and call those methods yourself. They build the same canonical `$mcp_*` events as `instrument()` (same sanitization, truncation, and `$exception` fan-out) and hand them to the inherited `capture()`, so nothing downstream (insights, dashboards, error tracking) can tell the difference.
 
 ## When to use which
 
@@ -27,7 +27,7 @@ const posthog = new PostHogMCP(process.env.POSTHOG_PROJECT_API_KEY, {
 })
 ```
 
-Because it *is* a `PostHog` client, every option and method you already know is available — including `beforeSend` (which runs on the MCP events too) and `enableExceptionAutocapture` (set it to `false` to stop errored tool calls from fanning out a `$exception`). The wrapping-path hooks (`identify`, `context`, `intentFallback`, `eventProperties`) don't apply here: there's no wrapped server to run them against, so you pass identity and properties on each call instead.
+Because it *is* a `PostHog` client, every option and method you already know is available - including `beforeSend` (which runs on the MCP events too) and `enableExceptionAutocapture` (set it to `false` to stop errored tool calls from fanning out a `$exception`). The wrapping-path hooks (`identify`, `context`, `intentFallback`, `eventProperties`) don't apply here: there's no wrapped server to run them against, so you pass identity and properties on each call instead.
 
 ## Capture events
 
@@ -68,7 +68,7 @@ posthog.capture({
 
 | Field | Maps to | Notes |
 | --- | --- | --- |
-| distinctId | distinct_id | Supplying it enables person processing so $set lands on a real person. Omit it for anonymous traffic — events are sent with $process_person_profile: false. |
+| distinctId | distinct_id | Supplying it enables person processing so $set lands on a real person. Omit it for anonymous traffic - events are sent with $process_person_profile: false. |
 | sessionId | $session_id | Omitted from the event entirely when you don't pass one (so stateless captures don't bucket into a non-existent [Session Replay](/docs/session-replay.md) session). |
 | groups | $groups | { groupType: groupKey }, stamped on the event so you never hand-write the $groups key. |
 | setProperties | $set | Person properties ({ name, email, plan }), same as the properties you'd pass to identify. |
@@ -81,17 +81,17 @@ posthog.capture({
 
 **Analytics never breaks your request**
 
-`captureToolCall` and `captureInitialize` are fire-and-forget (they enqueue on the client, like `posthog.capture()`) and never throw — a failure to record analytics can't take down your tool. In serverless or edge environments, flush at the end of the invocation so queued events aren't dropped (see below).
+`captureToolCall` and `captureInitialize` are fire-and-forget (they enqueue on the client, like `posthog.capture()`) and never throw - a failure to record analytics can't take down your tool. In serverless or edge environments, flush at the end of the invocation so queued events aren't dropped (see below).
 
 ## What you don't get (vs `instrument()`)
 
-Because there's no wrapped server, `PostHogMCP` does **not** manage these for you — you pass the equivalent data per call:
+Because there's no wrapped server, `PostHogMCP` does **not** manage these for you - you pass the equivalent data per call:
 
--   **Sessions** — no MCP-session-derived `$session_id` or inactivity rollover. Pass your own `sessionId`.
--   **Identity caching / `$identify` dedupe** — pass `distinctId` (and optional `setProperties`) on each call.
--   **The injected `context` argument, `intentFallback`, `reportMissing`, and `conversation_id`** — these patch tool schemas and request handlers, which only the wrapping path can do.
+-   **Sessions** - no MCP-session-derived `$session_id` or inactivity rollover. Pass your own `sessionId`.
+-   **Identity caching / `$identify` dedupe** - pass `distinctId` (and optional `setProperties`) on each call.
+-   **The injected `context` argument, `intentFallback`, `reportMissing`, and `conversation_id`** - these patch tool schemas and request handlers, which only the wrapping path can do.
 
-Everything from the [event reference](/docs/mcp-analytics/events.md) onward — event names, property shapes, sanitization, error tracking — is identical.
+Everything from the [event reference](/docs/mcp-analytics/events.md) onward - event names, property shapes, sanitization, error tracking - is identical.
 
 ## Graceful shutdown
 
@@ -143,14 +143,14 @@ posthog.capture_tool_call(
 )
 # On the handshake:
 posthog.capture_initialize(client_name="claude-code", client_version="1.2.3", distinct_id=user_id)
-posthog.flush()  # PostHogMCP is a posthog client — flush/shutdown it yourself
+posthog.flush()  # PostHogMCP is a posthog client - flush/shutdown it yourself
 ```
 
-`PostHogMCP(api_key, missing_capability_tool_name="get_more_tools", mcp_exception_autocapture=True, **posthog_kwargs)` accepts the standard `posthog` client kwargs (e.g. `host`). Set `mcp_exception_autocapture=False` to stop a failed tool call from emitting a `$exception` sibling. As in TypeScript, the wrapping-path hooks (`identify`, `context`, `intent_fallback`, `event_properties`) don't apply here — pass identity and properties on each `capture_*` call.
+`PostHogMCP(api_key, missing_capability_tool_name="get_more_tools", mcp_exception_autocapture=True, **posthog_kwargs)` accepts the standard `posthog` client kwargs (e.g. `host`). Set `mcp_exception_autocapture=False` to stop a failed tool call from emitting a `$exception` sibling. As in TypeScript, the wrapping-path hooks (`identify`, `context`, `intent_fallback`, `event_properties`) don't apply here - pass identity and properties on each `capture_*` call.
 
 ### Stateless / multi-pod dispatchers
 
-On a stateless deployment (a fresh server per request, often across pods) there's no connection to carry a session, so `$session_id` fragments and the client name/version — sent only at `initialize` — go missing from later requests. Add the mint middleware to your ASGI app once. It mints a self-encoded token onto the `Mcp-Session-Id` response header at `initialize` and decodes the client's replay on every later request, so every pod recovers the same values with no shared store:
+On a stateless deployment (a fresh server per request, often across pods) there's no connection to carry a session, so `$session_id` fragments and the client name/version - sent only at `initialize` - go missing from later requests. Add the mint middleware to your ASGI app once. It mints a self-encoded token onto the `Mcp-Session-Id` response header at `initialize` and decodes the client's replay on every later request, so every pod recovers the same values with no shared store:
 
 Python
 
@@ -160,7 +160,7 @@ PostHog AI
 from posthog.mcp import PostHogMcpStatelessSessionMiddleware, get_mcp_session
 app.add_middleware(PostHogMcpStatelessSessionMiddleware)
 # ...then in your request handler, feed the recovered session into each capture.
-# The token carries the client identity too — pass it as $mcp_client_* properties
+# The token carries the client identity too - pass it as $mcp_client_* properties
 # (capture_tool_call takes session_id directly, client name/version via properties):
 sess = get_mcp_session(request)  # None until the client replays the token
 posthog.capture_tool_call(
@@ -174,7 +174,7 @@ posthog.capture_tool_call(
 )
 ```
 
-The token is unsigned and carries only what the client volunteered at `initialize` — treat `$session_id` and `$mcp_client_*` as analytics labels, not authentication.
+The token is unsigned and carries only what the client volunteered at `initialize` - treat `$session_id` and `$mcp_client_*` as analytics labels, not authentication.
 
 ### Community questions
 

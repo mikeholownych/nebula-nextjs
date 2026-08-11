@@ -11,7 +11,7 @@ half of Citable. Shared rules for every rubric:
 - Every rubric declares its ambiguity conditions and when human review is
   mandatory. When an ambiguity condition holds, the result is
   `not_established + review_required`, not a guess.
-- Findings produced from rubrics are `evidence_backed_semantic_finding` at most —
+- Findings produced from rubrics are `evidence_backed_semantic_finding` at most -
   never `deterministic_observation`.
 
 | Rubric | File | Human review mandatory when |

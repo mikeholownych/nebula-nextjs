@@ -3,7 +3,7 @@
 ## The Constraints
 
 - Under 240 characters
-- Standalone — makes sense without context
+- Standalone - makes sense without context
 - No hashtags
 - Does not end with a question mark
 - Contains a specific number or named thing
@@ -46,11 +46,11 @@ Your CTA button is 3mm tall. Your bounce rate shows it.
 When a finding is strong enough for a thread:
 
 ```
-Tweet 1: The hook — specific, number-based, pattern interrupt
+Tweet 1: The hook - specific, number-based, pattern interrupt
 Tweet 2: What most people assume (wrong answer)
 Tweet 3: What's actually happening (the measured finding)
-Tweet 4: The cost calculation — ad spend × conversion delta × 12 months
-Tweet 5: The fix — exact, one sentence
+Tweet 4: The cost calculation - ad spend × conversion delta × 12 months
+Tweet 5: The fix - exact, one sentence
 Tweet 6: How to verify it's fixed
 ```
 

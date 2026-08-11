@@ -221,7 +221,7 @@ leads = [
      "https://www.reddit.com/r/SideProject/comments/1q4u32b/5_days_sharing_my_side_project_0_signups_what_am/",
      "unknown",
      "5 days sharing my side project, 0 signups - what am I missing?",
-     "Week 1 of my dropship side project — 0 signups. What am I missing?",
+     "Week 1 of my dropship side project - 0 signups. What am I missing?",
      "",
      None),
 

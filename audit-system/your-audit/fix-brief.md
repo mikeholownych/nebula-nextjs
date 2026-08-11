@@ -8,7 +8,7 @@ The developer should be able to complete it without asking a single clarifying q
 ## Format
 
 ```
-FINDING: [Label] — [Impact score]/5
+FINDING: [Label] - [Impact score]/5
 
 WHAT IS BROKEN:
 [Single sentence. What the measured state is. No adjectives.]
@@ -30,7 +30,7 @@ ESTIMATED EFFORT: [X hours for a developer / X minutes for a non-developer]
 ## Example: Missing H1
 
 ```
-FINDING: Headline — 4.5/5
+FINDING: Headline - 4.5/5
 
 WHAT IS BROKEN:
 No <h1> tag exists in the document. Current first heading is an <h2> inside a hero component.
@@ -38,14 +38,14 @@ No <h1> tag exists in the document. Current first heading is an <h2> inside a he
 WHY IT MATTERS FOR THIS PAGE SPECIFICALLY:
 You're running Google Ads. When users click your ad and land here, their first
 impression is a page with no primary headline. The value prop is buried 800px down.
-Google also uses the H1 to understand what the page is about — without it, your
+Google also uses the H1 to understand what the page is about - without it, your
 Quality Score is penalized and your cost-per-click goes up.
 
 EXACT FIX:
 1. Open your hero component (likely Hero.tsx or index.html)
 2. Locate the main tagline (the large text at the top of the page)
 3. Change its tag from <h2> or <div> to <h1>
-4. Ensure only ONE <h1> exists on the page — search the entire file for other <h1> tags and demote them to <h2>
+4. Ensure only ONE <h1> exists on the page - search the entire file for other <h1> tags and demote them to <h2>
 5. H1 text should follow this structure: [Who you help] + [What result they get]. Target 12–60 characters.
 
 Good example: "Stop paying for clicks that don't convert"
@@ -64,10 +64,10 @@ ESTIMATED EFFORT: 15 minutes for a developer
 ## Example: Vague CTA
 
 ```
-FINDING: CTA — 4.0/5
+FINDING: CTA - 4.0/5
 
 WHAT IS BROKEN:
-Primary call-to-action button text reads "Get Started" — no information about
+Primary call-to-action button text reads "Get Started" - no information about
 what action the user is taking or what they receive after clicking.
 
 WHY IT MATTERS FOR THIS PAGE SPECIFICALLY:
@@ -103,4 +103,4 @@ ESTIMATED EFFORT: 5 minutes
 1. **One fix brief per audit.** The One-Leak Repair Sprint addresses the single highest-impact finding.
 2. **Attach evidence screenshots.** The developer sees the measured state before starting.
 3. **Include the verification test.** If there's no test, there's no done condition.
-4. **Reference the before/after copy** if relevant — the developer should know what the new text is, not just that it needs to change.
+4. **Reference the before/after copy** if relevant - the developer should know what the new text is, not just that it needs to change.

@@ -37,11 +37,11 @@ def assign_nurture_track(lead_email: str, audit_id: str) -> str:
     audit = get_audit_by_id(audit_id)
     if not audit:
         return "default"  # fallback
-    
+
     findings = audit.get("findings", [])
     if not findings:
         return "default"
-    
+
     # Map finding categories to tracks
     track_map = {
         "headline": "headline-clarity",
@@ -49,11 +49,11 @@ def assign_nurture_track(lead_email: str, audit_id: str) -> str:
         "cta": "cta-friction",
         "social_proof": "social-proof"
     }
-    
+
     # Find highest severity finding
     primary = max(findings, key=lambda f: f.get("severity_score", 0))
     category = primary.get("category", "")
-    
+
     return track_map.get(category, "default")
 ```
 
@@ -127,16 +127,16 @@ class NurtureEngine:
         """
         segment = self.lead_store.get_segment(lead_email)
         track_id = self.get_track_assignment(lead_email)
-        
+
         track = NURTURE_TRACKS[track_id]
         position = self.get_track_position(lead_email)  # days since first finding
-        
+
         # Find template at current position for segment
         for step in track:
             if step["day"] <= position:
                 if step["segment"] == "any" or step["segment"] == segment:
                     return self.render_template(step["template"], lead_email)
-        
+
         return None
 ```
 
@@ -162,7 +162,7 @@ New field in nurture log:
 ```python
 def get_next_template(self, lead_email: str) -> Optional[str]:
     segment = self.lead_store.get_segment(lead_email)
-    
+
     # Hot leads: ignore track timing, pitch immediately
     if segment == "hot":
         track_id = self.get_track_assignment(lead_email)
@@ -170,7 +170,7 @@ def get_next_template(self, lead_email: str) -> Optional[str]:
             return self.render_template("hot/headline_pitch_1.md", lead_email)
         # ... other track-specific hot templates
         return self.render_template("hot/direct_pitch_1.md", lead_email)
-    
+
     # Warm/Cold: respect track timing
     # ... proceed with day-based logic
 ```
@@ -184,7 +184,7 @@ def get_next_template(self, lead_email: str) -> Optional[str]:
 
 ### File Changes Required
 
-**1. `lead_manager.py` — Add track column**
+**1. `lead_manager.py` - Add track column**
 
 ```python
 # In upsert_lead()
@@ -193,7 +193,7 @@ def get_next_template(self, lead_email: str) -> Optional[str]:
 "track_position_days": 0,
 ```
 
-**2. `nurture_engine.py` — Extend get_next_template()**
+**2. `nurture_engine.py` - Extend get_next_template()**
 
 - Add `get_track_assignment()` method
 - Add `get_track_position()` method
@@ -201,7 +201,7 @@ def get_next_template(self, lead_email: str) -> Optional[str]:
 
 **3. New directory: `templates/` with track-specific subfolders**
 
-**4. `nurture_log.jsonl` — Add track fields**
+**4. `nurture_log.jsonl` - Add track fields**
 
 ```json
 {"email": "...", "subject": "...", "track_id": "...", "track_position_days": N}

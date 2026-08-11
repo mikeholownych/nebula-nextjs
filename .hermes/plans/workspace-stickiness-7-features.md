@@ -1,4 +1,4 @@
-# Nebula Workspace Enhancement Spec — 7 Stickiness Features
+# Nebula Workspace Enhancement Spec - 7 Stickiness Features
 
 ## Overview
 
@@ -13,9 +13,9 @@ Seven features to add client stickiness and competitive differentiation to the N
 **Spec:**
 - Backend: `audit_schedules` table (user_id, url, interval_days, next_run_at, enabled)
 - Backend: Cron job that re-audits scheduled URLs weekly
-- Backend: `/api/audit/diff?audit_a=<id>&audit_b=<id>` — returns finding-level diff (added, removed, changed findings + score delta)
+- Backend: `/api/audit/diff?audit_a=<id>&audit_b=<id>` - returns finding-level diff (added, removed, changed findings + score delta)
 - Frontend: "Schedule re-audit" toggle per page in Pages tab (defaults to weekly)
-- Frontend: Diff view in workspace — side-by-side or unified showing:
+- Frontend: Diff view in workspace - side-by-side or unified showing:
   - Score: 62 → 78 (+16)
   - Findings resolved (green strikethrough)
   - New findings introduced (red)
@@ -83,7 +83,7 @@ ALTER TABLE user_preferences ADD COLUMN avg_cpc NUMERIC(6,2);
 **Spec:**
 - Already have `/shared/[token]` page skeleton
 - Add: PDF export button (server-side rendered via Puppeteer or @react-pdf)
-- Add: White-label option — user can set their agency name + logo in Settings
+- Add: White-label option - user can set their agency name + logo in Settings
 - Share link includes: audit score, all findings, recommendations, branded header
 - PDF includes: executive summary, score breakdown, finding cards, "Powered by Nebula" footer (removable on paid plan)
 - Optional: custom domain CNAME for agency share links (future)
@@ -108,7 +108,7 @@ ALTER TABLE user_preferences ADD COLUMN agency_logo_url TEXT;
 
 **Spec:**
 - User adds 1-3 competitor URLs in Settings (stored in `competitor_tracking`)
-- Backend: monthly cron audits competitor pages (same engine, no findings exposed — just score)
+- Backend: monthly cron audits competitor pages (same engine, no findings exposed - just score)
 - Dashboard card: "You: 72 | Competitor A: 61 | Competitor B: 85"
 - Pages tab: optional column showing competitor score for same page type
 - Chart: score trend over time (you vs competitors, line chart)
@@ -255,10 +255,10 @@ CREATE TABLE experiments (
 
 ## Principles
 
-- Each feature ships independently — no feature blocks another
+- Each feature ships independently - no feature blocks another
 - All new tables use Alembic migrations with sequential IDs
 - All new routes registered in platform_api/main.py
 - All frontend proxy routes follow existing pattern (authHeaders)
 - No new npm packages unless absolutely required
 - All features gracefully degrade (empty states) when data isn't available
-- Revenue numbers always labeled "estimated" — never claim precision
+- Revenue numbers always labeled "estimated" - never claim precision

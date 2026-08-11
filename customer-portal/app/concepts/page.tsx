@@ -4,12 +4,12 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Nebula Concepts: Frameworks Behind the 9-Signal Landing Page Audit | Nebula',
   description:
-    'The diagnostic vocabulary Nebula uses to evaluate landing page conversion fitness — signals, evidence atoms, conversion leaks, message match, above-fold state, structural friction, grades, and the One-Leak Repair Sprint.',
+    'The diagnostic vocabulary Nebula uses to evaluate landing page conversion fitness - signals, evidence atoms, conversion leaks, message match, above-fold state, structural friction, grades, and the One-Leak Repair Sprint.',
   alternates: { canonical: 'https://nebulacomponents.com/concepts' },
   openGraph: {
     title: 'Nebula Concepts: Frameworks Behind the 9-Signal Landing Page Audit',
     description:
-      'The diagnostic vocabulary Nebula uses to evaluate landing page conversion fitness — signals, evidence atoms, conversion leaks, message match, above-fold state, structural friction, grades, and the One-Leak Repair Sprint.',
+      'The diagnostic vocabulary Nebula uses to evaluate landing page conversion fitness - signals, evidence atoms, conversion leaks, message match, above-fold state, structural friction, grades, and the One-Leak Repair Sprint.',
     url: 'https://nebulacomponents.com/concepts',
     siteName: 'Nebula Components',
     type: 'article',
@@ -21,7 +21,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Nebula Concepts: Frameworks Behind the 9-Signal Landing Page Audit',
   description:
-    'The diagnostic vocabulary Nebula uses to evaluate landing page conversion fitness — signals, evidence atoms, conversion leaks, message match, above-fold state, structural friction, grades, and the One-Leak Repair Sprint.',
+    'The diagnostic vocabulary Nebula uses to evaluate landing page conversion fitness - signals, evidence atoms, conversion leaks, message match, above-fold state, structural friction, grades, and the One-Leak Repair Sprint.',
   author: { '@type': 'Organization', name: 'Nebula Components' },
   publisher: { '@type': 'Organization', name: 'Nebula Components' },
   mainEntityOfPage: 'https://nebulacomponents.com/concepts',
@@ -48,7 +48,7 @@ const CONCEPTS = [
     definition:
       'A single observable, measurable dimension of a landing page\'s conversion fitness. Nebula checks 9 signals per audit. Each has a defined pass standard and returns raw evidence.',
     whyItMatters:
-      'Breaking the audit into discrete signals makes findings falsifiable and actionable. A composite score without signal-level detail cannot tell you which element to fix — and fixing the wrong element wastes the budget.',
+      'Breaking the audit into discrete signals makes findings falsifiable and actionable. A composite score without signal-level detail cannot tell you which element to fix - and fixing the wrong element wastes the budget.',
     howNebulaMeasures:
       'The engine evaluates each signal independently against the page\'s actual HTML response. Signals include: headline (H1 count, ICP clarity), CTA (label, above-fold visibility), social proof (source-order position, specificity), load speed (payload bytes, LCP proxy), and four others. Each returns pass or fail with the raw value that determined the result.',
   },
@@ -56,7 +56,7 @@ const CONCEPTS = [
     id: 'evidence-atom',
     name: 'Evidence Atom',
     definition:
-      'The raw value from the page that justifies a pass or fail finding — H1 text, meta description character count, payload bytes, CTA label.',
+      'The raw value from the page that justifies a pass or fail finding - H1 text, meta description character count, payload bytes, CTA label.',
     whyItMatters:
       'Most audit tools return recommendations without showing their work. An evidence atom makes every finding independently verifiable: you can open the page source and confirm whether the H1 Nebula found is actually the H1 on your page. There is no proprietary scoring black box.',
     howNebulaMeasures:
@@ -70,7 +70,7 @@ const CONCEPTS = [
     whyItMatters:
       'The word "leak" is deliberate: it frames the problem as a fixable structural defect rather than a weak offer or wrong audience. A page leaking 60% of its mobile visitors through a buried CTA is not a traffic problem. It is a structural problem with a bounded fix.',
     howNebulaMeasures:
-      'Nebula identifies leaks at the signal level — each failed signal is a candidate leak. The audit ranks failed signals by estimated conversion impact (message match and CTA failures are ranked highest; load speed and SEO signals are ranked lower for paid traffic). The One-Leak Repair Sprint targets the highest-ranked leak.',
+      'Nebula identifies leaks at the signal level - each failed signal is a candidate leak. The audit ranks failed signals by estimated conversion impact (message match and CTA failures are ranked highest; load speed and SEO signals are ranked lower for paid traffic). The One-Leak Repair Sprint targets the highest-ranked leak.',
   },
   {
     id: 'message-match',
@@ -78,7 +78,7 @@ const CONCEPTS = [
     definition:
       'The degree of continuity between the ad that brought the visitor and the headline they see when they arrive. A score of 0 means the ad and page are unrelated.',
     whyItMatters:
-      'A visitor who clicked an ad for "project management for engineering teams" and lands on a headline that reads "The all-in-one workspace" faces an immediate disorientation: did they click the right link? The cognitive cost of resolving that question is a conversion-rate penalty. The ad already paid for the click — message mismatch discards that spend in the first two seconds.',
+      'A visitor who clicked an ad for "project management for engineering teams" and lands on a headline that reads "The all-in-one workspace" faces an immediate disorientation: did they click the right link? The cognitive cost of resolving that question is a conversion-rate penalty. The ad already paid for the click - message mismatch discards that spend in the first two seconds.',
     howNebulaMeasures:
       'Nebula checks the H1 text against the page\'s own title tag and meta description for internal consistency. When an ad URL is provided, it compares ad copy against the H1 directly. The signal returns the H1 text as the evidence atom so the mismatch is visible, not inferred.',
   },
@@ -98,9 +98,9 @@ const CONCEPTS = [
     definition:
       'Page-level obstacles that cost conversions regardless of ad quality or offer strength. Structural friction is fixable; it does not require a new product or a different audience.',
     whyItMatters:
-      'Founders and operators who are losing money on paid traffic typically assume the problem is the ad creative, the audience targeting, or the offer price. Structural friction — a five-field form, a CTA below fold, a page that loads in six seconds on mobile — explains a large share of conversion failures without requiring any of those assumptions to be true. Fixing structural friction is the highest-certainty lever in conversion optimization.',
+      'Founders and operators who are losing money on paid traffic typically assume the problem is the ad creative, the audience targeting, or the offer price. Structural friction - a five-field form, a CTA below fold, a page that loads in six seconds on mobile - explains a large share of conversion failures without requiring any of those assumptions to be true. Fixing structural friction is the highest-certainty lever in conversion optimization.',
     howNebulaMeasures:
-      'Structural friction signals in Nebula\'s audit include: form field count (more than two fields above fold is a friction flag), CTA placement, mobile tap target size, page weight, and font size. These are observable in the HTML and CSS — no session recording or A/B test data required.',
+      'Structural friction signals in Nebula\'s audit include: form field count (more than two fields above fold is a friction flag), CTA placement, mobile tap target size, page weight, and font size. These are observable in the HTML and CSS - no session recording or A/B test data required.',
   },
   {
     id: 'one-leak-self-implementation-kit',
@@ -108,7 +108,7 @@ const CONCEPTS = [
     definition:
       'Nebula\'s $97 paid product. Takes the highest-impact finding from the audit and delivers targeted implementation instructions. One leak, one fix, one re-audit window.',
     whyItMatters:
-      'A full-page redesign is the wrong response to a single conversion leak. If the audit identifies that the H1 has zero ICP clarity, the correct intervention is a headline rewrite — not a new design system. The Repair Sprint scopes the change to the single highest-impact finding, delivers implementation-ready instructions, and includes a re-audit to confirm the finding is resolved.',
+      'A full-page redesign is the wrong response to a single conversion leak. If the audit identifies that the H1 has zero ICP clarity, the correct intervention is a headline rewrite - not a new design system. The Repair Sprint scopes the change to the single highest-impact finding, delivers implementation-ready instructions, and includes a re-audit to confirm the finding is resolved.',
     howNebulaMeasures:
       'The Sprint is triggered by the audit output. The highest-ranked failed signal determines the sprint scope. Deliverables are specific to the signal: for a headline failure, the sprint returns three alternative H1 candidates with rationale. For a load speed failure, it returns the specific asset causing the LCP regression and the implementation path to fix it.',
   },
@@ -192,7 +192,7 @@ export default function ConceptsPage() {
           <section className="mb-14 rounded-2xl border border-border bg-bg-muted/30 p-8 text-center">
             <h2 className="text-2xl font-bold text-fg mb-3">See these concepts applied to your page</h2>
             <p className="text-sm text-fg-muted max-w-xl mx-auto mb-6">
-              Paste your URL. Nebula runs all 9 signals and returns each finding with the raw evidence atom — H1 text, CTA label, payload bytes, trust signal count. Free, no signup, under 2 minutes.
+              Paste your URL. Nebula runs all 9 signals and returns each finding with the raw evidence atom - H1 text, CTA label, payload bytes, trust signal count. Free, no signup, under 2 minutes.
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"

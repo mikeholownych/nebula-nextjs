@@ -1,7 +1,7 @@
 # Free Audit → Warm Lead → Delivery SLA
 
 ## Core Principle
-When the inbox monitor flags a warm lead, the audit MUST be delivered within 60 minutes. Leaving warm leads in a pending state for 8+ hours kills the conversion — the founder has moved on.
+When the inbox monitor flags a warm lead, the audit MUST be delivered within 60 minutes. Leaving warm leads in a pending state for 8+ hours kills the conversion - the founder has moved on.
 
 ## Automated Delivery Pipeline (Priority 3 Fix)
 The `hot_lead_watcher.py` script (run every 5 min via cron) handles this:
@@ -11,7 +11,7 @@ The `hot_lead_watcher.py` script (run every 5 min via cron) handles this:
 4. Updates `HOT_LEAD.json` → `status: delivered` on success
 
 ## Critical Implementation
-The inbox monitor must WRITE `HOT_LEAD.json` with the warm lead's URL and thread ID immediately on detection — not just log it. The watcher reads from this file. If the inbox monitor doesn't write the file with a URL, the watcher cannot auto-deliver.
+The inbox monitor must WRITE `HOT_LEAD.json` with the warm lead's URL and thread ID immediately on detection - not just log it. The watcher reads from this file. If the inbox monitor doesn't write the file with a URL, the watcher cannot auto-deliver.
 
 ```python
 # inbox_monitor.py: write HOT_LEAD.json on warm signal

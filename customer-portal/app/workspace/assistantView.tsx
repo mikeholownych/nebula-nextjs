@@ -175,7 +175,7 @@ export default function AssistantView({ email, audits }: AssistantViewProps) {
           onChange={(e) => setInput(e.target.value)}
           placeholder={
             recentAuditIds.length === 0
-              ? 'No audit data yet — run an audit first'
+              ? 'No audit data yet - run an audit first'
               : 'Ask about your audit data…'
           }
           disabled={loading || recentAuditIds.length === 0}

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Zernio posting CLI — create drafts / schedule / publish social posts for outreach.
+Zernio posting CLI - create drafts / schedule / publish social posts for outreach.
 
 DRAFT-BY-DEFAULT: without --publish or --schedule, this creates a DRAFT that
 publishes nothing. Publishing requires an explicit flag (and --yes for
@@ -16,10 +16,10 @@ Examples:
   # create a Reddit draft from a file
   python3 zernio_post.py --platform reddit --content-file outreach/reddit_post.md
 
-  # schedule a LinkedIn post (future ISO timestamp) — requires explicit --schedule
+  # schedule a LinkedIn post (future ISO timestamp) - requires explicit --schedule
   python3 zernio_post.py --platform linkedin --content "..." --schedule 2026-08-06T09:00:00Z
 
-  # publish immediately — requires explicit --publish --yes
+  # publish immediately - requires explicit --publish --yes
   python3 zernio_post.py --platform linkedin --content "..." --publish --yes
 """
 
@@ -91,11 +91,11 @@ def main() -> int:
             "immediate publish requires --publish --yes (drafts are free; publishing is permanent)"
         )
     if publish_now:
-        print("PUBLISHING IMMEDIATELY — this goes live now.")
+        print("PUBLISHING IMMEDIATELY - this goes live now.")
     elif scheduled:
         print(f"SCHEDULING for {scheduled}.")
     else:
-        print("Creating DRAFT — nothing will be published.")
+        print("Creating DRAFT - nothing will be published.")
 
     post = z.create_post(
         content=content,

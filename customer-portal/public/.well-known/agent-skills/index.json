@@ -4,7 +4,7 @@
     {
       "name": "link-headers",
       "type": "http-headers",
-      "description": "RFC 8288 Link response headers for agent discovery — api-catalog, service-doc, and agent-skills relations",
+      "description": "RFC 8288 Link response headers for agent discovery - api-catalog, service-doc, and agent-skills relations",
       "url": "https://nebulacomponents.shop/.well-known/agent-skills/link-headers/SKILL.md",
       "sha256": ""
     },

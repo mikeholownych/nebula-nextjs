@@ -20,7 +20,7 @@ WPS = 2.8  # Slightly faster pace for Shorts
 # stay technical). This is the 'explain the concept, not the jargon'
 # rule applied to the dimension names.
 #
-# Labels are BARE nouns (no article) — templates add "the"/"your" so
+# Labels are BARE nouns (no article) - templates add "the"/"your" so
 # phrasing stays grammatical ("the headline" vs "the the headline").
 PLAIN_LABELS = {
     "cta": "main button",
@@ -82,7 +82,7 @@ def _build_hormozi_hook(worst, plain_label, worst_score, worst_issue, dims, doma
     visibility'), and any sentence embedding them blows past the Jenny
     5th-grade FK gate (verified exhaustively 2026-08-09). The hook
     creates curiosity; the PROBLEM segment (next, ~4s later) names the
-    label. Proof/Question keep the label — their phrasing passes for
+    label. Proof/Question keep the label - their phrasing passes for
     every label.
 
     Jenny's rule: the most popular Shorts are 1st-grade reading; the
@@ -92,26 +92,26 @@ def _build_hormozi_hook(worst, plain_label, worst_score, worst_issue, dims, doma
     h = int(hashlib.md5((domain + worst).encode()).hexdigest(), 16) % 6
 
     if h == 0:
-        # Bold Claim — provocative, label-free tease
+        # Bold Claim - provocative, label-free tease
         return (f"Most pages don't fail on design. They fail on the "
                 f"wrong thing. Nobody notices until the ads stop paying.")
     if h == 1:
-        # Direct Callout — "You're not X because Y" (short sentences:
+        # Direct Callout - "You're not X because Y" (short sentences:
         # 'customers/because/offer' in one clause pushes FK past 5th)
         return (f"Your page isn't losing customers. The offer is fine. "
                 f"The page is broken.")
     if h == 2:
-        # Proof Bomb — specific number (label fits; verified all labels)
+        # Proof Bomb - specific number (label fits; verified all labels)
         return (f"{worst_score:.0f} out of 10. That's the {plain_label.lower()} "
                 f"score for this page.")
     if h == 3:
-        # Case Study — audit intro, label-free tease
+        # Case Study - audit intro, label-free tease
         return (f"We ran a full audit. One thing is killing sales.")
     if h == 4:
-        # Story — narrative opening
+        # Story - narrative opening
         return (f"Someone is paying for ads to send people to this page. "
                 f"The page just isn't doing its part.")
-    # Question — rarely used, label fits (verified all labels)
+    # Question - rarely used, label fits (verified all labels)
     return (f"Want to know why this page isn't selling? "
             f"It's not the traffic. It's the {plain_label.lower()}.")
 
@@ -126,7 +126,7 @@ def _build_ppp_reveal(domain, overall, grade, worst_label):
 def _strip_end_signals(text: str) -> str:
     """Dave Jeltema (JO2JSj3JU48) lesson 27: signaling the video is
     about to end ('in conclusion', 'let's recap') cuts remaining
-    viewership in half — the algorithm treats it as a stop signal and
+    viewership in half - the algorithm treats it as a stop signal and
     fewer people reach end-screens/suggested videos. Fail-closed:
     strip any end-signal phrase from generated script text."""
     import re
@@ -166,7 +166,7 @@ def generate_short_script(page, audit, url=None):
     segments = []
     t = 0.0
 
-    # 1. Hook (3-4s) — Hormozi 6 hook types, rotating by audit findings.
+    # 1. Hook (3-4s) - Hormozi 6 hook types, rotating by audit findings.
     # plain_label: narration must be plain-speak (Jenny 5th-grade gate).
     hook = _build_hormozi_hook(worst, plain_label, worst_score, worst_issue, dims, domain)
     seg = {
@@ -177,10 +177,10 @@ def generate_short_script(page, audit, url=None):
     t = seg["end"]
 
     # 2. Foreshadow (Jenny Hoyos: 2 lines telling what's at the end;
-    #    the score reveal is held for the REWARD at the end — saying it
+    #    the score reveal is held for the REWARD at the end - saying it
     #    here AND there wastes a second and kills the payoff)
     foreshadow = (
-        f"We audited {domain}. Watch to the end — you'll see "
+        f"We audited {domain}. Watch to the end - you'll see "
         f"exactly what's broken and how to fix it."
     )
     seg = {
@@ -190,13 +190,13 @@ def generate_short_script(page, audit, url=None):
     segments.append(seg)
     t = seg["end"]
 
-    # 3. Problem (8s total — Jenny: every second counts; long problem
-    #    segments lose the viewer) — plain-speak label + simplified text
+    # 3. Problem (8s total - Jenny: every second counts; long problem
+    #    segments lose the viewer) - plain-speak label + simplified text
     #
     # Jenny-gate self-heal: audit-engine issue prose ('Early source proxy
     # lacks a headline...') is jargon-heavy and can blow past 5th grade.
     # _simplify() covers common words, but unknown technical prose must
-    # NOT sink the segment — fall back to a canned plain-speak line that
+    # NOT sink the segment - fall back to a canned plain-speak line that
     # keeps the structure and passes the gate. Specificity is lost; the
     # Short stays watchable (Jenny: explain the concept, not the jargon).
     from yt_channel.readability import check_text
@@ -206,7 +206,7 @@ def generate_short_script(page, audit, url=None):
         issue_text = _simplify(worst_issue)
         # If the issue text already names the label as its subject
         # ('Button is invisible below fold'), use the label as the
-        # subject and drop the scored-fragment join — otherwise we get
+        # subject and drop the scored-fragment join - otherwise we get
         # 'scored 2 out of 10. is invisible below fold' (fragment,
         # fails readability AND sounds broken).
         label_starts = (f"the {plain_label} ", f"{plain_label} ", "button ",
@@ -243,7 +243,7 @@ def generate_short_script(page, audit, url=None):
     segments.append(seg)
     t = seg["end"]
 
-    # 4. Fix (8s total) — plain-speak, Jenny-gate self-heal (same as
+    # 4. Fix (8s total) - plain-speak, Jenny-gate self-heal (same as
     #    problem: unknown audit-engine fix prose falls back to canned).
     budget = int(8 * WPS)
     prefix = "Here's the fix: "
@@ -267,7 +267,7 @@ def generate_short_script(page, audit, url=None):
     segments.append(seg)
     t = seg["end"]
 
-    # 5. Reward (payoff — E'Calm retention psychology, srDpvEnGQg4):
+    # 5. Reward (payoff - E'Calm retention psychology, srDpvEnGQg4):
     # the most rewarding reveal goes at the END so the viewer feels
     # payoff, then cut immediately. Score as the reveal moment.
     reward = (
@@ -283,7 +283,7 @@ def generate_short_script(page, audit, url=None):
 
     # 6. CTA (Jenny Hoyos: short, simple sentences; 'nebulacomponents'
     #    is a brand name so it carries syllables, but the rest stays
-    #    plain — 4 short sentences, each under 5th grade)
+    #    plain - 4 short sentences, each under 5th grade)
     cta = ("Get a free audit of your site. It takes 30 seconds. "
            "Fixes get emailed to you. Nebula Components dot com.")
     seg = {
@@ -293,7 +293,7 @@ def generate_short_script(page, audit, url=None):
     segments.append(seg)
     t = seg["end"]
 
-    # Title — optimised for Shorts discoverability.
+    # Title - optimised for Shorts discoverability.
     # Evidence (title_research 2026-08-09): the strongest ICAHN outlier
     # (82x views/subs) used a QUESTION-first title, yet only 13% of niche
     # titles are questions. Rotate declarative/question per subject so the
@@ -324,15 +324,15 @@ def generate_short_script(page, audit, url=None):
     from yt_channel.title_score import pick_best
     style = "question" if int(hashlib.md5(f"{domain}|{worst}".encode()).hexdigest(), 16) % 2 else "declarative"
     hooks = question_hooks if style == "question" else title_hooks
-    base = hooks.get(worst, f"Landing Page Audit: {domain} — {worst_label} Breakdown #Shorts")
+    base = hooks.get(worst, f"Landing Page Audit: {domain} - {worst_label} Breakdown #Shorts")
 
     # Generate 3-4 variants, score for click potential, pick the best
     # (holy-trifecta title step; deterministic per domain).
     declarative = title_hooks.get(worst, base)
     questioning = question_hooks.get(worst, base)
-    specific = f"{domain} Scores {overall:.0f}/10 — Here's The Worst Issue #Shorts"
+    specific = f"{domain} Scores {overall:.0f}/10 - Here's The Worst Issue #Shorts"
     pain = f"Stop Losing Sales: {domain} Teardown ({overall:.0f}/10) #Shorts"
-    # Dave Jeltema (JO2JSj3JU48) lesson 12: acute pain > chronic — add a
+    # Dave Jeltema (JO2JSj3JU48) lesson 12: acute pain > chronic - add a
     # time-bound urgency variant so the picker can reward it.
     acute = {
         "speed":        f"Your Visitors Left 3 Seconds Ago. Stop It #Shorts",
@@ -357,19 +357,19 @@ def generate_short_script(page, audit, url=None):
     description = (
         f"https://nebulacomponents.com/audit?utm_source=youtube&utm_medium=shorts&utm_campaign={domain}\n\n"
         f"Free landing page audit: {domain}\n\n"
-        f"Score: {overall:.0f}/10 — worst issue: {worst_label} ({worst_score:.0f}/10)\n\n"
+        f"Score: {overall:.0f}/10 - worst issue: {worst_label} ({worst_score:.0f}/10)\n\n"
         f"{CREED}\n\n"
         # vidIQ tactic (rBIeT9iLmnU): sub_confirmation=1 triggers an instant
         # subscribe popup on the channel page (choice architecture).
         f"Subscribe for a daily landing page teardown:\n"
         f"{SUBSCRIBE_URL}\n\n"
-        # Element 4: ritual — the verbal sign-off line, same every video
+        # Element 4: ritual - the verbal sign-off line, same every video
         f"{SIGN_OFF}\n\n"
         f"#LandingPage #CRO #ConversionOptimization #Shorts #MarketingTips"
     )
 
     # Dave Jeltema (JO2JSj3JU48) lesson 27: never signal the video is
-    # about to end ('in conclusion', 'let's recap') — it halves the
+    # about to end ('in conclusion', 'let's recap') - it halves the
     # remaining viewership and kills the path to suggested videos.
     # Fail-closed self-heal: strip any end-signal phrase.
     for seg in segments:
@@ -378,7 +378,7 @@ def generate_short_script(page, audit, url=None):
 
     # Jenny Hoyos readability gate (As7abwNhG7Y): target 5th grade or
     # under on every segment. RUN LAST (after self-heals) and FAIL-CLOSED:
-    # a Short that violates the gate must never be produced — the
+    # a Short that violates the gate must never be produced - the
     # orchestrator skips upload on any exception, so this raises instead
     # of shipping an 11th-grade sentence to the feed.
     from yt_channel.readability import check_script
@@ -388,7 +388,7 @@ def generate_short_script(page, audit, url=None):
         bad = "; ".join(f"{r['fk_grade']}: {r['text'][:80]}" for r in readability_fail)
         raise ValueError(f"Jenny readability gate FAILED (target ≤{readability[0]['target_grade']}): {bad}")
 
-    # Brenda Turner fifth-wall voice gate (RRDJO_UV4I8) — fail-closed:
+    # Brenda Turner fifth-wall voice gate (RRDJO_UV4I8) - fail-closed:
     # a Short that talks AT an audience must never be produced. Runs
     # after all self-heals so it only sees the final narration.
     from yt_channel.readability import check_voice

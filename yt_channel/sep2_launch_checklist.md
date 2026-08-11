@@ -1,6 +1,6 @@
-# Sep 2 Launch Checklist — YouTube Audit Channel + Trigger-Aware Lead Gen
+# Sep 2 Launch Checklist - YouTube Audit Channel + Trigger-Aware Lead Gen
 
-**Timeline**: 24 days to Sep 2 launch  
+**Timeline**: 24 days to Sep 2 launch
 **Goal**: Nebula audit videos live on YouTube, lead gen pipeline in background (no sends yet)
 
 ---
@@ -243,20 +243,20 @@
 4. If converts to subscription: high-five
 
 **Template follow-up call**:
-> "Hi {first_name}, I saw your reply to our audit offer. You mentioned {quote from their reply}. 
+> "Hi {first_name}, I saw your reply to our audit offer. You mentioned {quote from their reply}.
 > Here's what I'd recommend: {personalized recommendation based on audit}.
 > Can we schedule 15 min to discuss how we'd implement this for you?"
 
 **Template follow-up email**:
 > "Subject: {first_name}, here's the specific fix for {company}"
-> 
+>
 > Based on your interest, I analyzed your audit results. The top 3 fixes:
 > 1. {fix 1}
 > 2. {fix 2}
 > 3. {fix 3}
-> 
+>
 > Implementing these alone will recover ~15% of your lost conversions. Our $97 fix pack does exactly this + monitoring.
-> 
+>
 > When can we start?
 
 ---

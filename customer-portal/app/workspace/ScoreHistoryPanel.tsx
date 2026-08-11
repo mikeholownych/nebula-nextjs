@@ -82,7 +82,7 @@ export default function ScoreHistoryPanel() {
       return
     }
 
-    // Already loading — ignore
+    // Already loading - ignore
     if (cur?.loading) return
 
     // Start loading events
@@ -146,7 +146,7 @@ export default function ScoreHistoryPanel() {
             className="rounded-lg overflow-hidden"
             style={{ background: '#111111', border: '1px solid #1f1f1f' }}
           >
-            {/* Header row — clickable */}
+            {/* Header row - clickable */}
             <button
               type="button"
               onClick={() => toggleMonitor(m.id)}
@@ -179,7 +179,7 @@ export default function ScoreHistoryPanel() {
 
               {/* Score */}
               <span className="text-sm font-semibold w-8 text-right" style={{ color: scoreCol }}>
-                {m.last_score ?? '—'}
+                {m.last_score ?? '-'}
               </span>
 
               {/* Trend arrow */}

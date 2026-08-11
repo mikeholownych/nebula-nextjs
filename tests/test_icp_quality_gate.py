@@ -1,4 +1,4 @@
-"""ICP quality gate tests — validate the live waterfall ICP gate.
+"""ICP quality gate tests - validate the live waterfall ICP gate.
 
 The original tests targeted `ramp_pipeline_fill.check_icp_fit`, which was
 replaced by the trigger-aware pipeline (2026-07-31) and the Waterfall ICP
@@ -13,21 +13,21 @@ from waterfall_icp_config import cascade_match, has_exclusion, validate_contact
 
 
 def test_agency_noise_is_excluded():
-    """Ads agencies are competitors, not ICP — never qualify."""
+    """Ads agencies are competitors, not ICP - never qualify."""
     result = validate_contact("Google Ads Expert", "I manage Facebook ads for clients")
     assert result["valid"] is False
     assert "agency_noise" in result["reason"]
 
 
 def test_junior_or_intern_is_excluded():
-    """Juniors have no budget authority — never qualify."""
+    """Juniors have no budget authority - never qualify."""
     result = validate_contact("Junior Marketing Assistant", "Marketing intern at Acme")
     assert result["valid"] is False
     assert "junior_intern" in result["reason"]
 
 
 def test_cmo_is_a_qualified_icp_match():
-    """A CMO owns the conversion problem — top-priority match."""
+    """A CMO owns the conversion problem - top-priority match."""
     result = validate_contact("CMO", "Chief Marketing Officer at Acme Inc", company_size=50)
     assert result["valid"] is True
     assert result["icp_priority"] == 1
@@ -37,7 +37,7 @@ def test_cmo_is_a_qualified_icp_match():
 
 
 def test_founder_of_small_company_is_qualified():
-    """A founder IS the decision maker — qualifies at the best matching level.
+    """A founder IS the decision maker - qualifies at the best matching level.
 
     'Founder' + a product/SaaS domain signal matches P4 (Champions via
     headline, founder_ceo prefix + product_founder domain) ahead of the

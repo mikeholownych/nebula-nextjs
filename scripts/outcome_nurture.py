@@ -1,5 +1,5 @@
 #!/home/mike/nebula/.venv/bin/python3
-"""Post-purchase outcome nurture — sends follow-up emails after the 30-day re-audit.
+"""Post-purchase outcome nurture - sends follow-up emails after the 30-day re-audit.
 
 Two paths based on score change:
   IMPROVED (delta > 0):  "The fix held. Want to share your result?"
@@ -25,7 +25,7 @@ TELEGRAM_TARGET = "telegram:5920497760"
 REPLY_IMPROVED = """\
 Hi,
 
-Your 30-day re-audit just came back — the score moved in the right direction.
+Your 30-day re-audit just came back - the score moved in the right direction.
 
 That's rare enough that I wanted to flag it. Most people buy a kit, implement something, assume it worked, and never check. You checked.
 
@@ -36,9 +36,9 @@ Two questions if you have a minute:
 
 If yes to #2, I'll draft the write-up and send it to you for approval before anything goes live.
 
-Either way — good work.
+Either way - good work.
 
-—
+-
 Mike
 Nebula Components
 """
@@ -55,9 +55,9 @@ That usually means one of three things:
 
 Can you tell me what you changed on the page? I'll look at the specific condition again and tell you what I see.
 
-No charge — this is part of the sprint.
+No charge - this is part of the sprint.
 
-—
+-
 Mike
 Nebula Components
 """
@@ -68,7 +68,7 @@ One more thing:
 If you know another founder running paid traffic to a page that isn't converting, the free audit is worth 90 seconds of their time:
 https://nebulacomponents.com/audit?utm_source=email&utm_medium=referral
 
-—
+-
 """
 
 
@@ -89,7 +89,7 @@ def telegram(msg):
 
 
 def get_reaudit_eligible():
-    """Purchases with reaudit_sent_at in the last 48h — ready for outcome nurture."""
+    """Purchases with reaudit_sent_at in the last 48h - ready for outcome nurture."""
     import psycopg2
     db_url = "postgresql://postgres@/nebula_platform?host=/var/run/postgresql&port=5433"
 
@@ -223,7 +223,7 @@ def main(dry_run=False):
         latest = get_latest_score(url)
 
         if original is None or latest is None:
-            log(f"  Skipping {email} — no score data")
+            log(f"  Skipping {email} - no score data")
             continue
 
         delta = latest - original
@@ -235,7 +235,7 @@ def main(dry_run=False):
             subject = f"Your re-audit: score improved on {url}"
             body = REPLY_IMPROVED + REPLY_REFERRAL
         else:
-            subject = f"Your 30-day re-audit: {url} — what did you implement?"
+            subject = f"Your 30-day re-audit: {url} - what did you implement?"
             body = REPLY_UNCHANGED
 
         if dry_run:
@@ -253,7 +253,7 @@ def main(dry_run=False):
                     f"📊 Outcome nurture sent\n"
                     f"To: {email}\n"
                     f"Score: {original:.1f} → {latest:.1f} ({delta:+.1f})\n"
-                    f"Type: {'IMPROVED — referral ask' if improved else 'UNCHANGED — diagnostic'}"
+                    f"Type: {'IMPROVED - referral ask' if improved else 'UNCHANGED - diagnostic'}"
                 )
             else:
                 log(f"  ✗ Send failed: {result}")

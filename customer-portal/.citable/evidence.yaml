@@ -6,7 +6,7 @@ entries:
     title: 7-Point Diagnosis Framework Definition
     evidence_type: architecture_specification
     verification_status: verified
-    source: internal — audit pipeline definition
+    source: internal - audit pipeline definition
     access_status: internal
     reuse_status: no_express_reuse_license
 
@@ -14,7 +14,7 @@ entries:
     title: Fix Pack 24-48 Hour Delivery SLA
     evidence_type: primary_documentation
     verification_status: reviewed
-    source: internal — service operations policy
+    source: internal - service operations policy
     access_status: internal
     reuse_status: no_express_reuse_license
 
@@ -22,7 +22,7 @@ entries:
     title: 30-Day Re-Audit Guarantee Policy
     evidence_type: primary_documentation
     verification_status: verified
-    source: internal — service terms
+    source: internal - service terms
     access_status: internal
     reuse_status: no_express_reuse_license
 

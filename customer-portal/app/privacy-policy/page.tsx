@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — Nebula Components',
+  title: 'Privacy Policy - Nebula Components',
   description: 'Nebula Components privacy policy. How we collect, use, and protect your data. GDPR and CCPA compliant.',
   alternates: {
     canonical: 'https://nebulacomponents.com/privacy-policy',
@@ -125,9 +125,9 @@ export default function PrivacyPolicy() {
           We may share your information only with:
         </p>
         <ul className="list-disc pl-6 text-fg-muted space-y-2">
-          <li><strong>Stripe</strong> — for secure payment processing (they handle your card data; we don&apos;t store it)</li>
-          <li><strong>Email service providers</strong> — to deliver your audit and transactional emails</li>
-          <li><strong>Legal authorities</strong> — if required by law or to protect our rights</li>
+          <li><strong>Stripe</strong> - for secure payment processing (they handle your card data; we don&apos;t store it)</li>
+          <li><strong>Email service providers</strong> - to deliver your audit and transactional emails</li>
+          <li><strong>Legal authorities</strong> - if required by law or to protect our rights</li>
         </ul>
       </section>
 
@@ -153,12 +153,12 @@ export default function PrivacyPolicy() {
           Depending on your location, you have the right to:
         </p>
         <ul className="list-disc pl-6 text-fg-muted space-y-2">
-          <li><strong>Access</strong> — request a copy of your personal data</li>
-          <li><strong>Rectification</strong> — correct inaccurate data</li>
-          <li><strong>Erasure</strong> — request deletion of your data</li>
-          <li><strong>Portability</strong> — receive your data in a portable format</li>
-          <li><strong>Opt-out</strong> — unsubscribe from marketing emails at any time</li>
-          <li><strong>Do Not Sell</strong> — we do NOT sell your data, so this right is automatically honored</li>
+          <li><strong>Access</strong> - request a copy of your personal data</li>
+          <li><strong>Rectification</strong> - correct inaccurate data</li>
+          <li><strong>Erasure</strong> - request deletion of your data</li>
+          <li><strong>Portability</strong> - receive your data in a portable format</li>
+          <li><strong>Opt-out</strong> - unsubscribe from marketing emails at any time</li>
+          <li><strong>Do Not Sell</strong> - we do NOT sell your data, so this right is automatically honored</li>
         </ul>
         <p className="text-fg-muted mt-6">
           To exercise these rights, contact us at{' '}

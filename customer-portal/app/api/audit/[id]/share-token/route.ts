@@ -7,7 +7,7 @@ const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
  *
  * Forwards to the FastAPI /audit/{id}/share-token endpoint and returns
  * { share_token, share_url } so the client never needs to talk to port 8001.
- * Only returns the token — never the full audit — so there's no PII leak.
+ * Only returns the token - never the full audit - so there's no PII leak.
  */
 export async function GET(
   _req: NextRequest,

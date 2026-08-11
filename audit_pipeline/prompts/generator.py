@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-prompts/generator.py — Build AI prompt packs from audit findings.
+prompts/generator.py - Build AI prompt packs from audit findings.
 
 Reads the structured audit output (from deliver_audit.score_audit)
 and page data, finds dimensions scoring below 7/10, maps each to
@@ -157,7 +157,7 @@ def _shared_words(page):
     t_words = set(re.findall(r"[a-z]+", title.lower())) - stop
     h_words = set(re.findall(r"[a-z]+", h1.lower())) - stop
     common = t_words & h_words
-    return ", ".join(sorted(common)) if common else "(none — complete misalignment)"
+    return ", ".join(sorted(common)) if common else "(none - complete misalignment)"
 
 
 def _estimated_offer(page):
@@ -177,8 +177,8 @@ def build_prompt_pack(audit, page, email=None, stated_visitor=None, stated_goal=
     Build a prompt pack from audit findings.
 
     Args:
-        audit: dict from score_audit() — {overall, overall_grade, dimensions, opp_matrix}
-        page: dict from scrape_page() — {url, html, title, h1, text, ctas}
+        audit: dict from score_audit() - {overall, overall_grade, dimensions, opp_matrix}
+        page: dict from scrape_page() - {url, html, title, h1, text, ctas}
         email: optional lead email (for file naming)
         stated_visitor: optional audience description
         stated_goal: optional page goal ("sales", "leads", "bookings")
@@ -222,7 +222,7 @@ def build_prompt_pack(audit, page, email=None, stated_visitor=None, stated_goal=
             "page_goal": page_goal,
             "brand_name": brand_name,
             "primary_keyword": primary_kw,
-            "secondary_keywords": "(add keywords here — check Google Search Console for what you rank for)",
+            "secondary_keywords": "(add keywords here - check Google Search Console for what you rank for)",
             "cta_text": cta_text,
             "cta_list": _cta_list(page),
             "html_size": _html_size(page),
@@ -281,7 +281,7 @@ def build_prompt_pack(audit, page, email=None, stated_visitor=None, stated_goal=
         params["has_canonical_note"] = "Set" if params["has_canonical"] == "✅" else "Missing"
         params["og_note"] = f"{params['og_status']}/5 complete"
 
-        # Goal contradiction — separate from dimension check
+        # Goal contradiction - separate from dimension check
         contradictions = dim.get("contradictions", [])
         if contradictions:
             params["stated_goal"] = stated_goal or "conversions"
@@ -289,7 +289,7 @@ def build_prompt_pack(audit, page, email=None, stated_visitor=None, stated_goal=
                 f"• {e}" for _, e, _ in contradictions[:3]
             )
 
-        # H1 misalignment — derived from title/h1
+        # H1 misalignment - derived from title/h1
         params["secondary_keywords"] = "(check your analytics for related search terms)"
 
         # Render the template

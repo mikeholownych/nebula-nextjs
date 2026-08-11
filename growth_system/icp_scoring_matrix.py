@@ -1,5 +1,5 @@
 """
-ICP Scoring Matrix — Weighted Lead Scoring Module
+ICP Scoring Matrix - Weighted Lead Scoring Module
 Adapted from TrustOS Lead Qualification System (flagstad.io, July 2026)
 Scores leads against ICP criteria with weighted dimensions.
 Returns structured qualification verdict for outreach prioritization.
@@ -11,22 +11,22 @@ from typing import Optional
 class ICPScorer:
     """
     Score a lead against a defined ICP using weighted criteria.
-    
+
     Dimensions:
-    - Company Fit (industry, size, revenue, geography) — weight 40%
-    - Person Fit (title, seniority, function) — weight 35%
-    - Behavioral Fit (engagement source, signals) — weight 25%
-    
+    - Company Fit (industry, size, revenue, geography) - weight 40%
+    - Person Fit (title, seniority, function) - weight 35%
+    - Behavioral Fit (engagement source, signals) - weight 25%
+
     Disqualifiers immediately mark as unqualified regardless of score.
     """
 
-    # Default ICP for Nebula Components — trigger-aware ICP
+    # Default ICP for Nebula Components - trigger-aware ICP
     DEFAULT_MATRIX = {
         "company_fit": {
             "weight": 0.40,
             "criteria": {
                 "industry": {
-                    "description": "DTC ecommerce, SaaS, services, education — actively running paid traffic",
+                    "description": "DTC ecommerce, SaaS, services, education - actively running paid traffic",
                     "matches": {
                         "ecommerce": 30,
                         "saas": 30,
@@ -37,7 +37,7 @@ class ICPScorer:
                     "default": 5
                 },
                 "company_size": {
-                    "description": "Small to mid-market (< 500 employees — no dedicated CRO)",
+                    "description": "Small to mid-market (< 500 employees - no dedicated CRO)",
                     "matches": {
                         "1-10": 20,
                         "11-50": 30,
@@ -89,7 +89,7 @@ class ICPScorer:
                     "default": 5
                 },
                 "has_pain_signal": {
-                    "description": "Expressed buying trigger — bleeding money on ads, zero conversions",
+                    "description": "Expressed buying trigger - bleeding money on ads, zero conversions",
                     "matches": {
                         True: 35,
                     },
@@ -114,7 +114,7 @@ class ICPScorer:
                     "default": 10
                 },
                 "urgency_signal": {
-                    "description": "Indicates time pressure — 'right now', 'urgent', 'bleeding', 'desperate'",
+                    "description": "Indicates time pressure - 'right now', 'urgent', 'bleeding', 'desperate'",
                     "matches": {
                         True: 25,
                     },
@@ -137,12 +137,12 @@ class ICPScorer:
     def score(self, lead: dict) -> dict:
         """
         Score a lead dict against the ICP matrix.
-        
+
         Expected lead fields:
         - industry, company_size (str), has_paid_traffic (bool)
         - role, seniority, has_pain_signal (bool)
         - engagement_source, urgency_signal (bool), specificity (bool)
-        
+
         Returns dict with score, status, and dimension breakdown.
         """
         total = 0.0
@@ -162,7 +162,7 @@ class ICPScorer:
                 if lead_value in matches:
                     pts = matches[lead_value]
                 elif isinstance(lead_value, str):
-                    # Fuzzy match — check if any key is a substring of lead_value
+                    # Fuzzy match - check if any key is a substring of lead_value
                     matched = False
                     for key, pts in matches.items():
                         if isinstance(key, str) and key.lower() in lead_value.lower():
@@ -207,14 +207,14 @@ class ICPScorer:
             "status": status,
             "breakdown": breakdown,
             "disqualifiers": disqualifiers,
-            "summary": f"Score: {final_score}/100 — {status.upper()}"
+            "summary": f"Score: {final_score}/100 - {status.upper()}"
         }
 
 
 if __name__ == "__main__":
     scorer = ICPScorer()
 
-    # Example: strong lead — founder running ads, bleeding money
+    # Example: strong lead - founder running ads, bleeding money
     strong = {
         "industry": "ecommerce",
         "company_size": "11-50",
@@ -227,7 +227,7 @@ if __name__ == "__main__":
         "specificity": True,
     }
 
-    # Example: weak lead — no buying signal
+    # Example: weak lead - no buying signal
     weak = {
         "industry": "services",
         "company_size": "1-10",

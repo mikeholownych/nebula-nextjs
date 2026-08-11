@@ -253,7 +253,7 @@ def draft_outreach(signal: dict[str, Any], tier: int) -> str:
     name = first_name(signal.get("name", ""))
     context = clean_signal(signal.get("signal_text", ""))
     msg = (
-        f"{name} — saw this: {context}. "
+        f"{name} - saw this: {context}. "
         "I built a free leak map for paid-traffic pages. "
         "It flags headline, CTA, proof, speed, and mobile gaps before more budget gets spent. "
         f"Run it here: {AUDIT_URL}"

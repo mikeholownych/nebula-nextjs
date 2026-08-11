@@ -10,7 +10,7 @@ Without all three, you have an opinion. With all three, you have a diagnosis.
 ```
 measured:  What we actually found (exact value, tag, text, count)
 required:  What needs to be true for this to not be a leak
-delta:     The gap — and why it matters in the context of paid traffic
+delta:     The gap - and why it matters in the context of paid traffic
 confidence: measured | contextual | inferred
 ```
 
@@ -21,7 +21,7 @@ confidence: measured | contextual | inferred
 | Level | Meaning | When to use |
 |-------|---------|-------------|
 | `measured` | Directly observed in fetched HTML, headers, or DOM | Tag present/absent, text content, status codes |
-| `contextual` | Inferred from source proxies — rendered viewport unverified | Above-fold placement, CTA visibility, JS-rendered content |
+| `contextual` | Inferred from source proxies - rendered viewport unverified | Above-fold placement, CTA visibility, JS-rendered content |
 | `inferred` | Pattern match only | Scoring models, likelihood estimates |
 
 **Rule:** Never present `contextual` findings as `measured`. Label them correctly.
@@ -35,7 +35,7 @@ If you can't measure it directly, say so. The audit's credibility depends on thi
 ```
 measured:  No <h1> tag found in document source
 required:  Exactly one <h1>, 12–90 chars, containing primary value proposition
-delta:     Missing entirely — Google auto-generates SERP headline from body copy
+delta:     Missing entirely - Google auto-generates SERP headline from body copy
 confidence: measured
 ```
 
@@ -43,7 +43,7 @@ confidence: measured
 ```
 measured:  Hero content begins at character position 8,400 in source HTML
 required:  Headline, CTA, and offer term visible within first 3,000 source characters
-delta:     Source order proxy only — rendered viewport position unverified
+delta:     Source order proxy only - rendered viewport position unverified
 confidence: contextual
 note:      "Run Lighthouse or screenshot tool to confirm rendered position"
 ```
@@ -52,7 +52,7 @@ note:      "Run Lighthouse or screenshot tool to confirm rendered position"
 ```
 measured:  0 of 4 expected tracking artifacts found in static HTML
 required:  Facebook Pixel init, GA4 measurement ID, UTM-bearing links, conversion events
-delta:     Client-side or server-side tracking may exist — static source alone cannot confirm absence
+delta:     Client-side or server-side tracking may exist - static source alone cannot confirm absence
 confidence: contextual
 note:      "Verify with DevTools Network tab on live page"
 ```
@@ -75,8 +75,8 @@ note:      "Verify with DevTools Network tab on live page"
 
 When capturing evidence for high-impact findings:
 
-1. **Capture the broken state** — full page screenshot + selector highlight
-2. **Annotate the finding** — overlay the measured value
+1. **Capture the broken state** - full page screenshot + selector highlight
+2. **Annotate the finding** - overlay the measured value
 3. **Save path format:** `screenshots/{audit_id}/{finding_key}-before.png`
 4. **Store URL in findings.json** under `evidence.screenshot_url`
 

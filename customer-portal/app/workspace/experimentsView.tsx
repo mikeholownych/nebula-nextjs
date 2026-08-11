@@ -28,7 +28,7 @@ function domainOf(url: string): string {
 
 function fmtDate(iso: string): string {
   const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return '—'
+  if (Number.isNaN(d.getTime())) return '-'
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
 }
 
@@ -41,7 +41,7 @@ function statusMeta(status?: string): { label: string; cls: string } {
     case 'fail':
       return { label: 'Fail', cls: 'bg-red-500/15 text-danger border-red-700/50' }
     default:
-      return { label: '—', cls: 'bg-bg-elevated text-fg-muted border-border/50' }
+      return { label: '-', cls: 'bg-bg-elevated text-fg-muted border-border/50' }
   }
 }
 
@@ -153,7 +153,7 @@ export default function ExperimentsView({ email }: { email: string }) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <p className="text-sm text-fg-muted">
-          Saved Component Lab runs. Every run is a snapshot — compare scores, then mark the winner
+          Saved Component Lab runs. Every run is a snapshot - compare scores, then mark the winner
           as production.
         </p>
         <a
@@ -196,7 +196,7 @@ export default function ExperimentsView({ email }: { email: string }) {
                 </div>
                 <div className="text-right">
                   <p className={`text-2xl font-bold ${exp.status === 'production' ? 'text-accent' : 'text-fg'}`}>
-                    {score100 ?? '—'}
+                    {score100 ?? '-'}
                     <span className="text-sm text-fg-dim font-normal">/100</span>
                   </p>
                 </div>

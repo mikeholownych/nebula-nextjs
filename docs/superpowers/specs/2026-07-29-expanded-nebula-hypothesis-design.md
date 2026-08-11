@@ -76,7 +76,7 @@ constraints and where that process breaks.
 
 The primary research question is:
 
-> When growth underperforms, how do founders decide what to fix next—and what
+> When growth underperforms, how do founders decide what to fix next-and what
 > causes them to choose the wrong constraint?
 
 The current ICP will be used as an initial recruitment channel, not treated as a

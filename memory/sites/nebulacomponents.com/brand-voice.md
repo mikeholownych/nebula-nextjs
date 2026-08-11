@@ -1,4 +1,4 @@
-# Nebula Components — Brand Voice
+# Nebula Components - Brand Voice
 
 Tone: clinical, direct, evidence-first. Building inspector, not warm agency.
 
@@ -20,8 +20,8 @@ Founders actively spending on paid traffic while the landing page produces weak 
 
 ## Offer
 
-1. Free audit — 9 signals, under 2 minutes, no email required to see results.
-2. $97 One-Leak Repair Sprint — targeted prompts for one highest-confidence failing signal.
+1. Free audit - 9 signals, under 2 minutes, no email required to see results.
+2. $97 One-Leak Repair Sprint - targeted prompts for one highest-confidence failing signal.
 3. No retainer-first framing before verified customer outcomes.
 
 ## Claims Discipline

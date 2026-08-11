@@ -7,7 +7,7 @@ import CheckoutPageTracker from './CheckoutPageTracker'
 import CheckoutCTAButton from './CheckoutCTAButton'
 
 export const metadata: Metadata = {
-  title: 'Checkout — One-Leak Repair Sprint | Nebula Components',
+  title: 'Checkout - One-Leak Repair Sprint | Nebula Components',
   description:
     'Purchase the $97 One-Leak Repair Sprint for one audited landing-page finding.',
   alternates: {
@@ -38,7 +38,7 @@ export default async function CheckoutPage({
           {returnedFromStripe ? (
             <div className="mt-3 rounded-xl border border-accent/30 bg-accent/5 px-4 py-3 text-sm text-fg-muted">
               <p className="font-semibold text-fg">Your audit is still here.</p>
-              <p className="mt-1">You left the payment page — that's fine. Your findings are saved and your checkout is ready when you are.</p>
+              <p className="mt-1">You left the payment page - that's fine. Your findings are saved and your checkout is ready when you are.</p>
             </div>
           ) : (
             <p className="text-fg-muted">
@@ -104,14 +104,14 @@ export default async function CheckoutPage({
           <h2 className="mb-3 text-base font-semibold text-fg">What happens after you pay</h2>
           <ol className="space-y-3">
             <li>1. Stripe confirms your purchase immediately.</li>
-            <li>2. Your tailored kit is sent by email within minutes of purchase — exact copy, code, or configuration written for one selected finding.</li>
+            <li>2. Your tailored kit is sent by email within minutes of purchase - exact copy, code, or configuration written for one selected finding.</li>
             <li>3. You implement it yourself, with your developer, or through your CMS. No site access is required from Nebula.</li>
             <li>4. Run the free audit again within 30 days to verify the fix held.</li>
           </ol>
 
           <h2 className="mb-3 mt-6 text-base font-semibold text-fg">Bounded scope</h2>
           <p>
-            This purchase covers a repair sprint for one high-impact finding from your audit — exact copy, a code snippet, or a configuration change targeted to your specific page. It excludes full redesigns, multiple pages, backend application logic, analytics migrations, and paid third-party tools.
+            This purchase covers a repair sprint for one high-impact finding from your audit - exact copy, a code snippet, or a configuration change targeted to your specific page. It excludes full redesigns, multiple pages, backend application logic, analytics migrations, and paid third-party tools.
           </p>
 
           <h2 className="mb-3 mt-6 text-base font-semibold text-fg">Evidence, not a lift guarantee</h2>

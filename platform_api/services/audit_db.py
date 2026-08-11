@@ -23,7 +23,7 @@ INTERNAL_EMAILS: frozenset[str] = frozenset({
 
 class AuditDB:
     """PostgreSQL database service for audit records"""
-    
+
     def __init__(self):
         # Audit pipeline has its own dedicated database. It must NOT inherit
         # the platform DATABASE_URL (which points at nebula_platform for the
@@ -33,7 +33,7 @@ class AuditDB:
             "postgresql://postgres@/nebula_audit?host=/var/run/postgresql&port=5433"
         )
         self.pool = None
-    
+
     async def connect(self):
         """Create connection pool"""
         if not self.pool:
@@ -48,12 +48,12 @@ class AuditDB:
                     )
             except Exception:
                 pass
-    
+
     async def close(self):
         """Close connection pool"""
         if self.pool:
             await self.pool.close()
-    
+
     async def get_or_create_customer(self, email: str, name: Optional[str] = None) -> UUID:
         """Get or create customer by email"""
         async with self.pool.acquire() as conn:
@@ -64,22 +64,22 @@ class AuditDB:
             )
             if row:
                 return row['id']
-            
+
             # Create new
             row = await conn.fetchrow(
                 "INSERT INTO customers (email, name) VALUES ($1, $2) RETURNING id",
                 email, name
             )
             return row['id']
-    
+
     async def create_audit(self, url: str, email: str, name: Optional[str] = None,
                            source: Optional[str] = None,
                            partner_id: Optional[str] = None) -> UUID:
         """Create a new audit record"""
         await self.connect()
-        
+
         customer_id = await self.get_or_create_customer(email, name)
-        
+
         async with self.pool.acquire() as conn:
             row = await conn.fetchrow(
                 """
@@ -90,7 +90,7 @@ class AuditDB:
                 customer_id, url, email, name, source, partner_id
             )
             return row['id']
-    
+
     async def update_audit(self, audit_id: UUID, score: float, grade: str,
                           findings: List[dict], status: str = 'completed',
                           composite: Optional[float] = None,
@@ -121,13 +121,13 @@ class AuditDB:
                     await self.check_and_award_badge(conn, audit_id)
                 except Exception:
                     pass
-                # Best-effort aggregate-only cohort record — feeds percentile
+                # Best-effort aggregate-only cohort record - feeds percentile
                 # positioning without retaining page URLs, domains, or customer IDs.
                 try:
                     await self.record_cohort_aggregate(conn, score, grade, findings)
                 except Exception:
                     pass
-                # Fire-and-forget screenshot for visual diffs — never blocks completion.
+                # Fire-and-forget screenshot for visual diffs - never blocks completion.
                 try:
                     url_row = await conn.fetchrow("SELECT url FROM audits WHERE id = $1", audit_id)
                     if url_row:
@@ -210,9 +210,9 @@ class AuditDB:
     async def check_and_award_badge(self, conn, audit_id: UUID) -> Optional[dict]:
         """A badge documents one real, specific event: this customer's score
         on this URL genuinely improved between their first audit and a later
-        one — not a fixed pass bar, any real delta. Runs inside the same
+        one - not a fixed pass bar, any real delta. Runs inside the same
         connection/transaction as the completing update_audit call.
-        Idempotent via badges' UNIQUE(customer_id, url) — a badge, once
+        Idempotent via badges' UNIQUE(customer_id, url) - a badge, once
         earned, is never reissued or overwritten even if the page improves
         further or regresses later."""
         row = await conn.fetchrow(
@@ -249,7 +249,7 @@ class AuditDB:
             earliest['score'], latest['score'], latest['created_at'].year
         )
         return dict(badge) if badge else None
-    
+
     async def mark_email_sent(self, audit_id: UUID) -> bool:
         """Mark audit email as sent"""
         await self.connect()
@@ -397,7 +397,7 @@ class AuditDB:
             if not row:
                 return
             cadence = row["cadence"]
-            # asyncpg requires a timedelta for interval parameters — strings
+            # asyncpg requires a timedelta for interval parameters - strings
             # like '1 week' produce "str has no attribute 'days'" at encode time.
             if cadence == "monthly":
                 interval = timedelta(days=30)
@@ -492,7 +492,7 @@ class AuditDB:
             return token
 
     async def get_audit_by_share_token(self, share_token: str) -> Optional[dict]:
-        """Look up an audit by its share token — used to validate a share
+        """Look up an audit by its share token - used to validate a share
         link before returning full results to a visitor who isn't the
         original requester and doesn't have the unlock cookie."""
         await self.connect()
@@ -549,11 +549,11 @@ class AuditDB:
     async def get_audit(self, audit_id: UUID) -> Optional[dict]:
         """Get audit by ID"""
         await self.connect()
-        
+
         async with self.pool.acquire() as conn:
             row = await conn.fetchrow(
                 """
-                SELECT id, customer_id, url, email, name, status, 
+                SELECT id, customer_id, url, email, name, status,
                        score, grade, composite, composite_anchor, findings,
                        created_at, completed_at,
                        email_sent_at, paid_at, paid_product
@@ -569,7 +569,7 @@ class AuditDB:
                 # Convert score back to float (stored as int * 10)
                 if data.get('score') is not None:
                     data['score'] = data['score'] / 10.0
-                # composite already numeric(3,1) — cast for JSON serialization
+                # composite already numeric(3,1) - cast for JSON serialization
                 if data.get('composite') is not None:
                     data['composite'] = float(data['composite'])
                 if data.get('composite_anchor') is not None:
@@ -580,7 +580,7 @@ class AuditDB:
                     data['customer_id'] = str(data['customer_id'])
                 return data
             return None
-    
+
     async def claim_audit(self, audit_id: UUID, email: str) -> Optional[dict]:
         """Link an anonymous audit to a real email address.
 
@@ -627,7 +627,7 @@ class AuditDB:
             new_norm = email.strip().lower()
 
             if _is_anonymous(current_email):
-                # Unclaimed — update the audit email
+                # Unclaimed - update the audit email
                 await conn.execute(
                     "UPDATE audits SET email = $2 WHERE id = $1",
                     audit_id, new_norm,
@@ -644,16 +644,16 @@ class AuditDB:
                 return {"claimed": True, "audit_id": str(audit_id), "email": new_norm}
 
             if current_norm == new_norm:
-                # Already claimed by the same email — idempotent success
+                # Already claimed by the same email - idempotent success
                 return {"claimed": True, "audit_id": str(audit_id), "email": current_norm}
 
-            # Claimed by a different email — caller should return 400
+            # Claimed by a different email - caller should return 400
             return {"claimed": False, "audit_id": str(audit_id), "email": current_norm}
 
     async def get_audits_by_email(self, email: str, limit: int = 10) -> List[dict]:
         """Get audits by email"""
         await self.connect()
-        
+
         async with self.pool.acquire() as conn:
             rows = await conn.fetch(
                 """
@@ -892,10 +892,10 @@ class AuditDB:
         async with self.pool.acquire() as conn:
             cur = await conn.execute("DELETE FROM lab_experiments WHERE id = $1", exp_id)
             return cur == "DELETE 1"
-    
+
     async def get_aggregate_stats(self) -> dict:
         """Real counts for the homepage's aggregate-proof strip. No fabricated
-        numbers — if volume is genuinely small, that's what gets shown."""
+        numbers - if volume is genuinely small, that's what gets shown."""
         await self.connect()
 
         async with self.pool.acquire() as conn:
@@ -918,7 +918,7 @@ class AuditDB:
 
     async def get_benchmarks(self) -> dict:
         """Per-component benchmark aggregates from real completed audits.
-        Privacy-safe: no URLs, no emails — only component failure rates,
+        Privacy-safe: no URLs, no emails - only component failure rates,
         average impact, and score distribution."""
         await self.connect()
 
@@ -1020,7 +1020,7 @@ class AuditDB:
     async def get_recent_finding(self) -> dict | None:
         """Return the most interesting finding from the most recent completed audit.
         Used for the homepage's 'recent finding' strip. Returns None when no
-        eligible audits exist. Never exposes the URL — only the finding label,
+        eligible audits exist. Never exposes the URL - only the finding label,
         issue summary, impact score, and time-ago."""
         await self.connect()
 
@@ -1091,25 +1091,25 @@ class AuditDB:
                              stripe_payment_intent_id: Optional[str] = None) -> UUID:
         """Create purchase record"""
         await self.connect()
-        
+
         async with self.pool.acquire() as conn:
             row = await conn.fetchrow(
                 """
-                INSERT INTO purchases (customer_id, audit_id, product, 
+                INSERT INTO purchases (customer_id, audit_id, product,
                                        amount_cents, stripe_payment_intent_id)
                 VALUES ($1, $2, $3, $4, $5)
                 RETURNING id
                 """,
                 customer_id, audit_id, product, amount_cents, stripe_payment_intent_id
             )
-            
+
             # Also update audit if provided
             if audit_id:
                 await conn.execute(
                     "UPDATE audits SET paid_at = NOW(), paid_product = $2 WHERE id = $1",
                     audit_id, product
                 )
-            
+
             return row['id']
 
     # ── Widget partners (Play 4: agencies as distribution layer) ─────────────

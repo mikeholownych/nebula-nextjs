@@ -26,7 +26,7 @@ def main() -> int:
     new = about_text()
 
     if old == new:
-        print("About already set — no change.")
+        print("About already set - no change.")
         return 0
 
     # channels.update: brandingSettings cannot be combined with other

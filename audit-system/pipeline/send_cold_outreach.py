@@ -12,7 +12,7 @@ client = AgentMailClient()
 outreach = [
     {
         "to": "hello@beetler.ai",
-        "subject": "Audited beetler.ai — found the conversion issue",
+        "subject": "Audited beetler.ai - found the conversion issue",
         "text": """Ran beetler.ai through our conversion audit.
 
 Two findings worth knowing about:
@@ -23,7 +23,7 @@ Two findings worth knowing about:
 
 The full audit is at: https://nebulacomponents.com/audit
 
-If you want the exact fix brief — one finding, specific implementation steps, verification test, 30-day re-audit — it's $97:
+If you want the exact fix brief - one finding, specific implementation steps, verification test, 30-day re-audit - it's $97:
 https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
 
 The social proof fix takes under an hour.
@@ -33,14 +33,14 @@ Nebula Components"""
     },
     {
         "to": "hello@xbeast.io",
-        "subject": "Audited xbeast.io — 803KB page weight + SEO gap",
+        "subject": "Audited xbeast.io - 803KB page weight + SEO gap",
         "text": """Ran xbeast.io through our conversion audit.
 
 Two findings:
 
-1. Page weight: 803KB HTML payload. Industry heuristic is ≤120KB. This is 6.7x over — affects LCP on mobile, which is where most paid ad traffic lands. First meaningful paint is delayed before a visitor even sees your CTA.
+1. Page weight: 803KB HTML payload. Industry heuristic is ≤120KB. This is 6.7x over - affects LCP on mobile, which is where most paid ad traffic lands. First meaningful paint is delayed before a visitor even sees your CTA.
 
-2. SEO gap (3.0/5): Your H1 reads "Grow Your 𝕏 Audience On Autopilot Starting This Week" — your title tag reads "XBeast | AI Agent for X - Create & Schedule High-E". No shared keywords between them. Google treats these as two separate signals. Your SERP description is also 185 chars and truncates mid-sentence at character 155.
+2. SEO gap (3.0/5): Your H1 reads "Grow Your 𝕏 Audience On Autopilot Starting This Week" - your title tag reads "XBeast | AI Agent for X - Create & Schedule High-E". No shared keywords between them. Google treats these as two separate signals. Your SERP description is also 185 chars and truncates mid-sentence at character 155.
 
 Full audit: https://nebulacomponents.com/audit
 
@@ -52,10 +52,10 @@ Nebula Components"""
     },
     {
         "to": "hello@smartwatermark.app",
-        "subject": "Audited smartwatermark.app — tracking gap",
+        "subject": "Audited smartwatermark.app - tracking gap",
         "text": """Ran smartwatermark.app through our conversion audit.
 
-Top finding (4.0/5 impact): No recognized ad-tracking artifacts found in source HTML. No Facebook Pixel initializer, no GA4 measurement ID, no explicit conversion call in the static source. If you're running paid traffic, your campaign is optimizing blind — it can't see what a conversion is.
+Top finding (4.0/5 impact): No recognized ad-tracking artifacts found in source HTML. No Facebook Pixel initializer, no GA4 measurement ID, no explicit conversion call in the static source. If you're running paid traffic, your campaign is optimizing blind - it can't see what a conversion is.
 
 Note: server-side or tag-manager-loaded tracking could explain the absence. But if it's not there, your ad platform is guessing on audience optimization.
 
@@ -69,7 +69,7 @@ Nebula Components"""
     },
     {
         "to": "hello@aisyndicate.io",
-        "subject": "Audited aisyndicate.io — meta description is truncating your SERP",
+        "subject": "Audited aisyndicate.io - meta description is truncating your SERP",
         "text": """Ran aisyndicate.io through our conversion audit.
 
 Top finding (2.5/5): Your meta description is 207 characters. SERP shows ~155. Your description truncates at: "Pre-execution enforcement controls for enterprise AI agents: policy evaluation before action, attributable authority, tamper-evident audit trails, and fail…"
@@ -98,7 +98,7 @@ for email in outreach:
             labels=["cold-outreach", "audit-finding"]
         )
         if result.get("ok") or result.get("id"):
-            print(f"✅ Sent: {email['to']} — {email['subject'][:50]}")
+            print(f"✅ Sent: {email['to']} - {email['subject'][:50]}")
             print(f"   ID: {result.get('id', 'unknown')}\n")
         else:
             print(f"❌ Failed: {email['to']}")

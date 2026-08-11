@@ -65,5 +65,5 @@ Append the result as ONE JSON line to `ops/outcomes/receipts/receipts.jsonl`.
 - `conclusion` must follow the ladder in README.md (score-based) or SOP-005 (analytics-based).
 - `customer_confirmed` is set ONLY by a human (Mike / engagement owner) after customer confirmation.
 - `consented_to_publish` is set ONLY by a human after separate publication consent.
-- Never delete a ledger row — update `status` and add evidence instead (audit trail).
+- Never delete a ledger row - update `status` and add evidence instead (audit trail).
 - `before_score`/`after_score` are on the 0–10 scale as reported by the audit engine.

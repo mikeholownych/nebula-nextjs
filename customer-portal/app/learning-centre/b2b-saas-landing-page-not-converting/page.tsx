@@ -57,7 +57,7 @@ const faqSchema = {
       name: 'How does page load speed and UX impact B2B SaaS conversion rates?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Enterprise buyers expect fast, polished experiences. Pages taking >3 seconds to load see 40-50% higher bounce rates, especially on mobile. Broken navigation, unclear CTAs, or cluttered layouts force visitors to work to find value—they won\'t. Technical debt like unoptimized images, render-blocking scripts, or poor mobile responsiveness signals immaturity. Run page speed audits and conduct UX testing with target buyers to identify friction points before attributing low conversion to messaging alone.',
+        text: 'Enterprise buyers expect fast, polished experiences. Pages taking >3 seconds to load see 40-50% higher bounce rates, especially on mobile. Broken navigation, unclear CTAs, or cluttered layouts force visitors to work to find value-they won\'t. Technical debt like unoptimized images, render-blocking scripts, or poor mobile responsiveness signals immaturity. Run page speed audits and conduct UX testing with target buyers to identify friction points before attributing low conversion to messaging alone.',
       },
     },
     {
@@ -65,7 +65,7 @@ const faqSchema = {
       name: 'What form fields and data collection strategies hurt B2B SaaS conversion?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Asking for excessive information upfront—company size, budget, timeline, use case—before providing value creates abandonment. Enterprise buyers resist early qualification questions. Progressive profiling (collecting data across multiple touchpoints) typically outperforms long forms on first landing. For high-intent pages, 3-5 fields max work best. Test whether a simple email + company name converts better than detailed forms, then progressively gather details via follow-up campaigns.',
+        text: 'Asking for excessive information upfront-company size, budget, timeline, use case-before providing value creates abandonment. Enterprise buyers resist early qualification questions. Progressive profiling (collecting data across multiple touchpoints) typically outperforms long forms on first landing. For high-intent pages, 3-5 fields max work best. Test whether a simple email + company name converts better than detailed forms, then progressively gather details via follow-up campaigns.',
       },
     },
   ],
@@ -152,7 +152,7 @@ export default function B2BSaaSLandingPageNotConverting() {
             </ul>
           </section>
 
-          {/* Section 3 — page structure */}
+          {/* Section 3 - page structure */}
           <section className="mt-14">
             <h2 className="text-2xl font-bold text-fg">3. Value-First Page Structure</h2>
             <p className="mt-4 leading-relaxed text-fg-muted">
@@ -175,7 +175,7 @@ export default function B2BSaaSLandingPageNotConverting() {
             </ol>
           </section>
 
-          {/* Section 3b — demo flow specifics */}
+          {/* Section 3b - demo flow specifics */}
           <section className="mt-14">
             <h2 className="text-2xl font-bold text-fg">3b. The Demo Flow Itself Is Often the Second Leak</h2>
             <p className="mt-4 leading-relaxed text-fg-muted">
@@ -205,7 +205,7 @@ export default function B2BSaaSLandingPageNotConverting() {
             </p>
           </section>
 
-          {/* Section 4 — quick wins */}
+          {/* Section 4 - quick wins */}
           <section className="mt-14">
             <h2 className="text-2xl font-bold text-fg">4. Quick Wins (No Redesign Required)</h2>
             <ul className="mt-6 space-y-3">

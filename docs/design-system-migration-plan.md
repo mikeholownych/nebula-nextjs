@@ -50,17 +50,17 @@ These pages still use old light theme:
 
 ### HIGH PRIORITY (Revenue/Customer-facing)
 
-1. **agency-partner.html** — $497/mo pricing page
-2. **checkout.html** — Stripe checkout
-3. **checkout_v2.html** — Alternative checkout
-4. **thank-you.html** — Post-purchase
+1. **agency-partner.html** - $497/mo pricing page
+2. **checkout.html** - Stripe checkout
+3. **checkout_v2.html** - Alternative checkout
+4. **thank-you.html** - Post-purchase
 
 ### MEDIUM PRIORITY (Marketing)
 
-5. **audit.html** — Audit page
-6. **ai-ops-retainer.html** — $1,497/mo pricing
-7. **7-systems.html** — Content marketing
-8. **marketing-ops.html** — Service page
+5. **audit.html** - Audit page
+6. **ai-ops-retainer.html** - $1,497/mo pricing
+7. **7-systems.html** - Content marketing
+8. **marketing-ops.html** - Service page
 
 ### LOW PRIORITY (Internal/Test)
 

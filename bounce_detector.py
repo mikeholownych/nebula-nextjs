@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-bounce_detector.py — SMTP bounce classification + inbox scanning.
+bounce_detector.py - SMTP bounce classification + inbox scanning.
 
 Scans AgentMail inbox for bounce-related messages (NDR/DSN)
 and cross-references against the lead store.
@@ -77,29 +77,29 @@ BOUNCE_SENDER_PATTERNS = re.compile(
 
 def classify_smtp_response(response_text: str) -> tuple:
     """Classify an SMTP sendmail() response dict into (bounce_type, reason).
-    
+
     Returns ('hard', reason), ('soft', reason), or (None, '') if not a bounce.
     """
     if not response_text:
         return (None, "")
-    
+
     # Extract SMTP code from response
     code_match = re.search(r"(\d{3})", str(response_text))
     code = int(code_match.group(1)) if code_match else None
-    
+
     # Check code-based classification first
     if code in HARD_SMTP_CODES:
         return ("hard", response_text[:200])
     if code in SOFT_SMTP_CODES:
         return ("soft", response_text[:200])
-    
+
     # Check keyword-based classification for response text
     text = str(response_text)
     if HARD_BOUNCE_KEYWORDS.search(text):
         return ("hard", text[:200])
     if SOFT_BOUNCE_KEYWORDS.search(text):
         return ("soft", text[:200])
-    
+
     return (None, "")
 
 
@@ -115,7 +115,7 @@ def extract_bounced_email_from_ndr(body: str, subject: str = "") -> str | None:
         # "bounced@example.com" in subject
         r"([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})",
     ]
-    
+
     haystack = f"{subject}\n{body}"
     for pattern in patterns:
         match = re.search(pattern, haystack)
@@ -191,7 +191,7 @@ def scan_inbox_for_bounces(am_client, max_messages: int = 50) -> list[dict]:
             continue
 
         # Mark hard bounce in LeadStore (creates record if missing).
-        # mark_bounced returns True for new lead creation, False for update —
+        # mark_bounced returns True for new lead creation, False for update -
         # both are success. Only skip if is_bounced() fails to confirm.
         db.mark_bounced(target_email, bounce_type="hard",
                         bounce_detail=f"NDR via {mid[:40]}: {subject[:100]}")
@@ -210,7 +210,7 @@ def scan_inbox_for_bounces(am_client, max_messages: int = 50) -> list[dict]:
 
         seen_ids.add(mid)
         bounces_found.append(bounce_event)
-        print(f"  [BOUNCE] {target_email} — NDR detected: {subject[:60]}")
+        print(f"  [BOUNCE] {target_email} - NDR detected: {subject[:60]}")
 
     return bounces_found
 
@@ -242,13 +242,13 @@ def report_bounce_stats() -> dict:
     """Return bounce statistics for health monitoring."""
     from lead_store import LeadStore
     db = LeadStore()
-    
+
     all_bounced = db.get_bounced_leads()
     ledger = load_bounce_ledger()
-    
+
     hard_count = db.get_bounce_count()
     soft_count = sum(1 for e in ledger if e.get("bounce_type") == "soft")
-    
+
     return {
         "hard_bounces": hard_count,
         "soft_bounces": soft_count,
@@ -260,11 +260,11 @@ def report_bounce_stats() -> dict:
 
 if __name__ == "__main__":
     action = sys.argv[1] if len(sys.argv) > 1 else "help"
-    
+
     if action == "report":
         stats = report_bounce_stats()
         print(json.dumps(stats, indent=2, ensure_ascii=False))
-    
+
     elif action == "test":
         # Test classification
         tests = [
@@ -278,6 +278,6 @@ if __name__ == "__main__":
             btype, _ = classify_smtp_response(response)
             status = "✅" if btype == expected else "❌"
             print(f"  {status} classify({response!r}) = {btype!r} (expected {expected!r})")
-    
+
     else:
         print("Usage: bounce_detector.py [report|test]")

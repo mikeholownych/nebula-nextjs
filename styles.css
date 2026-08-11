@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════════════════════════
    NEBULA PREMIUM DESIGN SYSTEM
-   Inspired by Linear.app — Dark-mode-native, precision design
-   
+   Inspired by Linear.app - Dark-mode-native, precision design
+
    Shared across index.html, audit-lander.html, primer.html
 ══════════════════════════════════════════════════════════ */
 
@@ -11,24 +11,24 @@
   --bg-panel: #0f1011;
   --bg-surface: #191a1b;
   --bg-elevated: #28282c;
-  
+
   /* Text */
   --text-primary: #f7f8f8;
   --text-secondary: #d0d6e0;
   --text-muted: #8a8f98;
   --text-disabled: #62666d;
-  
+
   /* Accent (Emerald) */
   --accent: #10b981;
   --accent-hover: #059669;
   --accent-light: #34d399;
   --accent-glow: rgba(16,185,129,0.3);
-  
+
   /* Status */
   --success: #10b981;
   --warning: #fbbf24;
   --error: #ef4444;
-  
+
   /* Spacing (8px grid) */
   --space-1: 4px;
   --space-2: 8px;
@@ -38,15 +38,15 @@
   --space-6: 48px;
   --space-7: 64px;
   --space-8: 96px;
-  
+
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  
+
   /* Animation */
   --ease-micro: 0.2s ease;
   --ease-macro: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   /* Borders */
   --border-subtle: rgba(255,255,255,0.05);
   --border-standard: rgba(255,255,255,0.08);
@@ -262,20 +262,20 @@ input:focus, select:focus, textarea:focus {
     --space-7: 48px;
     --space-8: 64px;
   }
-  
+
   body {
     font-size: 15px;
   }
-  
+
   h1 {
     font-size: clamp(36px, 8vw, 48px);
     letter-spacing: -1.056px;
   }
-  
+
   h2 {
     font-size: 24px;
   }
-  
+
   .card {
     padding: var(--space-4);
   }

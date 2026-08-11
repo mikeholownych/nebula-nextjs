@@ -17,7 +17,7 @@ ACCENT = "#00c2a0"
 
 
 def _fmt_score(score) -> str:
-    return "—" if score is None else f"{round(score)}"
+    return "-" if score is None else f"{round(score)}"
 
 
 def _fmt_delta(delta) -> str:
@@ -54,17 +54,17 @@ def _score_lines_text(digest: dict) -> str:
 def build_email_bodies(digest: dict) -> tuple[str, str, str]:
     """Return (subject, text_body, html_body) for a digest."""
     n = len(digest["score_changes"])
-    subject = f"Your landing page scores this week — {n} page{'s' if n != 1 else ''} tracked"
+    subject = f"Your landing page scores this week - {n} page{'s' if n != 1 else ''} tracked"
 
     top = digest.get("top_action")
     top_text = ""
     top_html = ""
     if top:
-        top_text = f"\nTop recommended action:\n{top['label']} — {top['issue']}\n({top['url']})\n"
+        top_text = f"\nTop recommended action:\n{top['label']} - {top['issue']}\n({top['url']})\n"
         top_html = f"""
         <div style="background: #f4faf8; border-left: 4px solid {ACCENT}; padding: 16px; border-radius: 8px; margin: 20px 0;">
             <h3 style="margin: 0 0 6px; color: #1a1a1a;">Top recommended action</h3>
-            <p style="margin: 0;"><strong>{top['label']}</strong> — {top['issue']}</p>
+            <p style="margin: 0;"><strong>{top['label']}</strong> - {top['issue']}</p>
             <p style="margin: 6px 0 0; color: #666; font-size: 0.85rem; word-break: break-all;">{top['url']}</p>
         </div>"""
 
@@ -92,7 +92,7 @@ def build_email_bodies(digest: dict) -> tuple[str, str, str]:
         </table>"""
         scores_text = _score_lines_text(digest)
     else:
-        table_html = "<p>No completed audits in the last 7 days — your previous results are still in the workspace.</p>"
+        table_html = "<p>No completed audits in the last 7 days - your previous results are still in the workspace.</p>"
         scores_text = "No completed audits in the last 7 days."
 
     html = f"""
@@ -111,7 +111,7 @@ def build_email_bodies(digest: dict) -> tuple[str, str, str]:
         </p>
         <hr style="border: none; border-top: 1px solid #eee; margin: 2rem 0;">
         <p style="color: #999; font-size: 0.85rem;">
-            Nebula Components — Conversion optimization for founders wasting money on ads.<br>
+            Nebula Components - Conversion optimization for founders wasting money on ads.<br>
             You're receiving this because weekly digest is enabled in your workspace settings.<br>
             <a href="https://nebulacomponents.com/workspace" style="color: #999;">Manage preferences</a>
         </p>
@@ -126,7 +126,7 @@ def build_email_bodies(digest: dict) -> tuple[str, str, str]:
 Open workspace: {digest['workspace_url']}
 
 --
-Nebula Components — weekly digest (disable in workspace settings)
+Nebula Components - weekly digest (disable in workspace settings)
 """.strip()
 
     return subject, text, html
@@ -173,7 +173,7 @@ def send_slack_digest(webhook_url: str, digest: dict, dry_run: bool = False) -> 
         if digest.get("new_critical_count")
         else ""
     )
-    top_md = f"\n*Top action:* {top['label']} — {top['issue']}" if top else ""
+    top_md = f"\n*Top action:* {top['label']} - {top['issue']}" if top else ""
 
     payload = {
         "blocks": [

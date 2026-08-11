@@ -218,7 +218,7 @@ export default function AuditDashboardPage() {
             href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b"
             className="inline-block bg-emerald-400 text-[#0a0a0f] font-semibold px-8 py-3 rounded-lg hover:bg-emerald-500 transition-all hover:-translate-y-0.5"
           >
-            Get Fix Pack — $147
+            Get Fix Pack - $147
           </a>
         </div>
 

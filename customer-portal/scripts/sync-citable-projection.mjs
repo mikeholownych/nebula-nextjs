@@ -56,7 +56,7 @@ function projectedTextFiles(projection) {
   llms = replaceOrFail(
     llms,
     /Citable v\d+\.\d+\.\d+: Evidence layer[^\n]*/,
-    `Citable v${projection.version}: Evidence layer for SEO, AEO, and GEO audits. ${projection.detectorCount} detectors across ${projection.namespaceCount} namespaces and ${projection.registryCount} schema-validated registries (not all detectors are deterministic — each declares its determinism posture). Apache 2.0. npm: @nebulacomponents/citable`,
+    `Citable v${projection.version}: Evidence layer for SEO, AEO, and GEO audits. ${projection.detectorCount} detectors across ${projection.namespaceCount} namespaces and ${projection.registryCount} schema-validated registries (not all detectors are deterministic - each declares its determinism posture). Apache 2.0. npm: @nebulacomponents/citable`,
     'llms.txt Citable summary',
   )
 
@@ -65,7 +65,7 @@ function projectedTextFiles(projection) {
   full = replaceOrFail(
     full,
     /Citable runs \d+ detectors across \d+ namespaces[^\n]*/,
-    `Citable runs ${projection.detectorCount} detectors across ${projection.namespaceCount} namespaces and ${projection.registryCount} schema-validated registries (not all detectors are deterministic — each declares its determinism posture explicitly):`,
+    `Citable runs ${projection.detectorCount} detectors across ${projection.namespaceCount} namespaces and ${projection.registryCount} schema-validated registries (not all detectors are deterministic - each declares its determinism posture explicitly):`,
     'llms-full.txt counts',
   )
   return new Map([[llmsPath, llms], [fullPath, full]])

@@ -10,7 +10,7 @@ Subject: {first_name}, your testimonials are decoration. Let's make them evidenc
 
 {first_name},
 
-The audit found social proof near your decision point — good. The question: does a stranger believe it?
+The audit found social proof near your decision point - good. The question: does a stranger believe it?
 
 **What we saw:**
 
@@ -41,6 +41,6 @@ You get 3 upgraded testimonials + placement guide.
 
 Three proof blocks. Level 4. 48 hours.
 
-—
+-
 
 P.S. If you've ever looked at a competitor's page and thought "their testimonials look fake," that's the hierarchy working. The gap between decoration and evidence is trust. The gap between your quote and their verification is where the sale happens. Or doesn't.

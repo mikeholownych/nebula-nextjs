@@ -34,7 +34,7 @@ async def lifespan(_app: FastAPI):
         init_db(settings.DATABASE_URL)
         print("✅ Database initialized")
     else:
-        print("⚠️  DATABASE_URL not set — DB routes will fail")
+        print("⚠️  DATABASE_URL not set - DB routes will fail")
 
     await redis_client.connect()
     print("✅ Redis connected")
@@ -49,7 +49,7 @@ async def lifespan(_app: FastAPI):
         warn_missing_token("POSTHOG_PROJECT_TOKEN")
 
     # On startup: fail any audits that are stuck in 'pending' from a previous
-    # crashed/restarted run. These can never self-resolve — a fresh start is the
+    # crashed/restarted run. These can never self-resolve - a fresh start is the
     # only recovery path for pending audits older than 5 minutes.
     try:
         from platform_api.services.audit_db import audit_db
@@ -94,7 +94,7 @@ setup_middleware(app, max_body_size=settings.MAX_JSON_BODY_BYTES)
 setup_cors(app, settings.ALLOWED_ORIGINS)
 app.add_middleware(MaintenanceMiddleware)
 
-# Rate limiting — uses the Redis client connected in lifespan
+# Rate limiting - uses the Redis client connected in lifespan
 from platform_api.redis_client import redis_client as _redis_client
 setup_rate_limiting(app, _redis_client)
 
@@ -164,18 +164,18 @@ app.add_exception_handler(Exception, generic_exception_handler)
 async def not_found_handler(request: Request, exc: HTTPException) -> JSONResponse:
     """Handle 404 errors with error envelope."""
     from platform_api.errors import error_envelope
-    
+
     request_id = request.headers.get("X-Request-ID") or (
         request.state.request_id if hasattr(request.state, "request_id") else None
     )
-    
+
     envelope = error_envelope(
         code="not_found",
         message="Resource not found",
         request_id=request_id,
         status_code=404,
     )
-    
+
     return JSONResponse(
         status_code=404,
         content=envelope,

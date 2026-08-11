@@ -5,7 +5,7 @@ Compares completed audits from the last 7 days against the previous 7 days
 workspace UI's "Critical" threshold), and picks the single highest-impact
 open finding as the recommended action.
 
-Returns None when the user has no audits at all — we never send an empty
+Returns None when the user has no audits at all - we never send an empty
 digest.
 """
 

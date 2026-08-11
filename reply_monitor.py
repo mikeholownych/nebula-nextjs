@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-reply_monitor.py — Check AgentMail inbox for human replies, classify, persist.
-Run every 15-30 min via cron. Idempotent — never double-processes a thread.
+reply_monitor.py - Check AgentMail inbox for human replies, classify, persist.
+Run every 15-30 min via cron. Idempotent - never double-processes a thread.
 
 Persists transactionally to outbound_delivery.db via OutboundReleaseGate.
 The historical replied_emails.jsonl is imported once and retained as a local migration artifact.
@@ -79,7 +79,7 @@ def get_sender_email(thread: dict, our_inbox: str = "ops@launchcrate.io") -> str
 
 def main():
     dry_run = "--dry-run" in sys.argv
-    print(f"reply_monitor.py {'(DRY-RUN)' if dry_run else '(LIVE)'} — {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
+    print(f"reply_monitor.py {'(DRY-RUN)' if dry_run else '(LIVE)'} - {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
 
     gate = OutboundReleaseGate()
     processed = load_processed_threads(gate)
@@ -97,7 +97,7 @@ def main():
             print(f"  Inbox {inbox_id}: {len(threads)} human reply threads")
             all_human_threads.extend(threads)
         except Exception as e:
-            print(f"  Inbox {inbox_id}: error — {e}")
+            print(f"  Inbox {inbox_id}: error - {e}")
 
     # Use default client for sending replies (uses new domain)
     am = AgentMailClient()
@@ -109,7 +109,7 @@ def main():
         thread_id = thread.get("thread_id", "")
         email = get_sender_email(thread)
         if not email:
-            print(f"  [SKIP] thread {thread_id[:8]} — no identifiable sender")
+            print(f"  [SKIP] thread {thread_id[:8]} - no identifiable sender")
             continue
 
         # Get the latest message body for classification
@@ -126,7 +126,7 @@ def main():
         # 48-hour diagnostic: log which sentence failed for copy improvement.
         diag = am.diagnose_reply(thread, latest_body)
         if diag != "none":
-            print(f"  [DIAGNOSTIC] {diag} — {email} ({classification})")
+            print(f"  [DIAGNOSTIC] {diag} - {email} ({classification})")
             try:
                 with open(NEBULA / "reply_diagnostics.jsonl", "a") as f:
                     f.write(json.dumps({
@@ -188,7 +188,7 @@ def handle_warm_reply(email: str, body: str, thread_id: str, dry_run: bool) -> b
     G1 + G4: Warm reply → advance LeadStore stage to 'warm', pause cold
     sequence, run audit if URL known, send $97 pitch with Stripe link.
     """
-    print(f"  [WARM] {email} — advancing stage + triggering audit/pitch")
+    print(f"  [WARM] {email} - advancing stage + triggering audit/pitch")
 
     # 1. Advance stage in LeadStore
     try:
@@ -230,15 +230,15 @@ def handle_warm_reply(email: str, body: str, thread_id: str, dry_run: bool) -> b
         stripe_url = get_97_checkout_url(email=email, lead_url=url or f"https://{domain}",
                                          audit_score=score, domain=domain)
 
-        subject = f"re: {domain} — here's what I found" if domain else "re: your site audit"
+        subject = f"re: {domain} - here's what I found" if domain else "re: your site audit"
         body_out = (
-            f"Hey — thanks for getting back.\n\n"
+            f"Hey - thanks for getting back.\n\n"
             f"Ran the audit on {domain or 'your site'}. Score: {score}/10 ({grade}).\n\n"
             f"Main issue: {issue}\n\n"
             f"Fix: {fix}\n\n"
             f"We implement it in 24h for $97. Full refund if it doesn't move your numbers.\n\n"
             f"→ {stripe_url}\n\n"
-            f"—\nReply STOP to opt out."
+            f"-\nReply STOP to opt out."
         )
         ok = send_email(email, subject, body_out, dry_run=False, conversation=True)
         if ok:

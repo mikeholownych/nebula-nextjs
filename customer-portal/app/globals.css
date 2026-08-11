@@ -7,7 +7,7 @@
 ═══════════════════════════════════════════════════════════ */
 
 /* Hides the cookie-consent banner instantly for returning visitors, before
-   hydration — html[data-cookie-consent] is set by a synchronous script in
+   hydration - html[data-cookie-consent] is set by a synchronous script in
    layout.tsx's <head>, which runs before <body> paints. New visitors (no
    attribute) see the banner immediately with no hydration delay. */
 html[data-cookie-consent="given"] #cookie-consent-banner {
@@ -41,11 +41,11 @@ html[data-cookie-consent="given"] #cookie-consent-banner {
 
 /* ─── TYPE SCALE ─────────────────────────────────────────── */
 :root {
-  --text-xs: 0.75rem;     /* 12px — captions, tags */
-  --text-sm: 0.875rem;    /* 14px — secondary, nav */
-  --text-base: 1.0625rem; /* 17px — body prose */
-  --text-lg: 1.5rem;      /* 24px — section headings */
-  --text-xl: clamp(2.5rem, 6vw, 4rem); /* 40-64px — hero display */
+  --text-xs: 0.75rem;     /* 12px - captions, tags */
+  --text-sm: 0.875rem;    /* 14px - secondary, nav */
+  --text-base: 1.0625rem; /* 17px - body prose */
+  --text-lg: 1.5rem;      /* 24px - section headings */
+  --text-xl: clamp(2.5rem, 6vw, 4rem); /* 40-64px - hero display */
 
   --bg: #050505;
   --bg-elevated: #0a0a0a;
@@ -101,7 +101,7 @@ body {
 }
 
 /* ─── HEADER ─────────────────────────────────────────────── */
-/* NOTE: SiteNav uses Tailwind classes for positioning — bare header {} rule removed
+/* NOTE: SiteNav uses Tailwind classes for positioning - bare header {} rule removed
    to prevent position:fixed bleeding onto semantic <header> elements in page bodies */
 .logo {
   font-size: var(--text-lg);
@@ -653,7 +653,7 @@ header nav a:focus-visible {
 }
 
 /* ─── FOOTER ──────────────────────────────────────────────── */
-/* NOTE: SiteFooter uses Tailwind — bare footer {} removed to prevent style bleed
+/* NOTE: SiteFooter uses Tailwind - bare footer {} removed to prevent style bleed
    onto semantic <footer> elements used in article bodies */
 .footer-inner {
   max-width: 600px;

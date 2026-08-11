@@ -1,4 +1,4 @@
-## Social Proof — Trust Signals
+## Social Proof - Trust Signals
 
 **Finding:** Your page talks about trust but shows no evidence.
 

@@ -128,21 +128,21 @@ Status: ✅ MATCHED
 ## Files Validated
 
 ```
-✅ index.html              — Homepage (15K, modern design)
-✅ ai-ops-retainer.html    — High-tier service page
-✅ audit-lander.html       — Lead capture page
-⏭️ Other HTML files (38)   — Not yet validated
+✅ index.html              - Homepage (15K, modern design)
+✅ ai-ops-retainer.html    - High-tier service page
+✅ audit-lander.html       - Lead capture page
+⏭️ Other HTML files (38)   - Not yet validated
 ```
 
 ---
 
 ## Timeline
 
-- Jul 13 18:48 — Worktree created (frozen state)
-- Jul 14 03:04 — ai-ops-retainer.html updated
-- Jul 14 03:44 — audit-lander.html updated
-- Jul 14 06:29 — index.html updated (major redesign)
-- Jul 14 14:42 — VALIDATION performed, pages synced
+- Jul 13 18:48 - Worktree created (frozen state)
+- Jul 14 03:04 - ai-ops-retainer.html updated
+- Jul 14 03:44 - audit-lander.html updated
+- Jul 14 06:29 - index.html updated (major redesign)
+- Jul 14 14:42 - VALIDATION performed, pages synced
 
 **Gap:** 18 hours of production changes not in worktree
 

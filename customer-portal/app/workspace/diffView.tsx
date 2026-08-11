@@ -115,9 +115,9 @@ export default function DiffView({ audits }: { audits: WorkspaceAudit[] }) {
   }
 
   const fmtDate = (iso?: string | null) => {
-    if (!iso) return '—'
+    if (!iso) return '-'
     const d = new Date(iso)
-    if (Number.isNaN(d.getTime())) return '—'
+    if (Number.isNaN(d.getTime())) return '-'
     return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
   }
 
@@ -137,7 +137,7 @@ export default function DiffView({ audits }: { audits: WorkspaceAudit[] }) {
               <option value="">Select audit…</option>
               {comparableAudits.map((a) => (
                 <option key={a.id} value={a.id}>
-                  {a.url.replace(/^https?:\/\//, '').slice(0, 40)} — {fmtDate(a.completed_at || a.created_at)} (Score: {a.score !== null ? Math.round(a.score * 10) : '?'})
+                  {a.url.replace(/^https?:\/\//, '').slice(0, 40)} - {fmtDate(a.completed_at || a.created_at)} (Score: {a.score !== null ? Math.round(a.score * 10) : '?'})
                 </option>
               ))}
             </select>
@@ -153,7 +153,7 @@ export default function DiffView({ audits }: { audits: WorkspaceAudit[] }) {
               <option value="">Select audit…</option>
               {comparableAudits.map((a) => (
                 <option key={a.id} value={a.id}>
-                  {a.url.replace(/^https?:\/\//, '').slice(0, 40)} — {fmtDate(a.completed_at || a.created_at)} (Score: {a.score !== null ? Math.round(a.score * 10) : '?'})
+                  {a.url.replace(/^https?:\/\//, '').slice(0, 40)} - {fmtDate(a.completed_at || a.created_at)} (Score: {a.score !== null ? Math.round(a.score * 10) : '?'})
                 </option>
               ))}
             </select>

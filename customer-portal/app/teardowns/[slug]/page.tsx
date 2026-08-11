@@ -30,7 +30,7 @@ export function generateMetadata({
         canonical: `https://nebulacomponents.com/teardowns/${t.slug}`,
       },
       openGraph: {
-        title: `${t.name} Landing Page Audit: ${t.score}/10 — What the Engine Found`,
+        title: `${t.name} Landing Page Audit: ${t.score}/10 - What the Engine Found`,
         description: t.summary,
         url: `https://nebulacomponents.com/teardowns/${t.slug}`,
       },
@@ -78,7 +78,7 @@ export default async function TeardownPage({
           Public Audit Teardown
         </p>
         <h1 className="text-4xl font-bold tracking-tight text-fg md:text-5xl">
-          {t.domain} — What the Audit Engine Found
+          {t.domain} - What the Audit Engine Found
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
           Nebula ran its evidence-backed audit on{' '}
@@ -91,7 +91,7 @@ export default async function TeardownPage({
             {t.domain}
           </a>{' '}
           on {t.auditedAt}. {t.name} is not a Nebula customer. This page shows the raw output of
-          the same engine every free scan uses — {t.findings.length} findings, evidence included.
+          the same engine every free scan uses - {t.findings.length} findings, evidence included.
         </p>
 
         {/* Score card */}
@@ -126,7 +126,7 @@ export default async function TeardownPage({
           <strong className="text-fg">Disclosure: </strong>
           {t.name} did not request this audit and is not affiliated with Nebula Components.
           This teardown is published to demonstrate what the audit engine produces on a real,
-          well-known page — not to imply any commercial relationship. All findings are
+          well-known page - not to imply any commercial relationship. All findings are
           evidence-backed; source, selector, and confidence are included per finding.{' '}
           {t.name} may update their page at any time; this reflects a snapshot taken {t.auditedAt}.
         </div>
@@ -140,7 +140,7 @@ export default async function TeardownPage({
             <div className="relative h-80 w-full">
               <Image
                 src={t.screenshotUrl}
-                alt={`${t.name} landing page snapshot — ${t.auditedAt}`}
+                alt={`${t.name} landing page snapshot - ${t.auditedAt}`}
                 fill
                 className="object-cover object-top"
                 sizes="(max-width: 896px) 100vw, 896px"
@@ -153,7 +153,7 @@ export default async function TeardownPage({
         <section className="mt-12">
           <h2 className="mb-2 text-2xl font-bold text-fg">{findingWord}</h2>
           <p className="mb-8 text-fg-muted">
-            Ranked by conversion impact. Each finding includes the evidence Nebula used — no opinion, no estimation.
+            Ranked by conversion impact. Each finding includes the evidence Nebula used - no opinion, no estimation.
           </p>
           <div className="space-y-6">
             {t.findings.map((f, i) => (

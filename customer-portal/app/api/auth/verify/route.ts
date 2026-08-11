@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
     })
 
     if (!upstream.ok) {
-      // Verification failed — redirect to login with error
+      // Verification failed - redirect to login with error
       return redirectTo('/login?error=invalid_token')
     }
 

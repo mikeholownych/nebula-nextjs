@@ -186,7 +186,7 @@ export default function GscWidget({ email }: { email: string }) {
 
   // CONNECTED
   const t = metrics?.totals
-  const siteUrl = metrics?.site_url || status.site_url || '—'
+  const siteUrl = metrics?.site_url || status.site_url || '-'
   const rows = metrics?.rows || []
 
   return (
@@ -195,7 +195,7 @@ export default function GscWidget({ email }: { email: string }) {
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-fg-dim">Integrations · Last 28 days</p>
           <h2 className="mt-2 text-lg font-semibold tracking-[-0.02em] text-fg">Google Search Console</h2>
-          {siteUrl !== '—' && (
+          {siteUrl !== '-' && (
             <p className="mt-0.5 text-sm text-fg-muted">{siteUrl}</p>
           )}
         </div>
@@ -211,10 +211,10 @@ export default function GscWidget({ email }: { email: string }) {
       {error && <p className="mb-4 text-sm text-danger">{error}</p>}
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <StatCard label="Clicks" value={t ? t.clicks.toLocaleString() : '—'} />
-        <StatCard label="Impressions" value={t ? t.impressions.toLocaleString() : '—'} />
-        <StatCard label="Avg CTR" value={t ? `${(t.ctr * 100).toFixed(1)}%` : '—'} />
-        <StatCard label="Avg Position" value={t ? t.position.toFixed(1) : '—'} />
+        <StatCard label="Clicks" value={t ? t.clicks.toLocaleString() : '-'} />
+        <StatCard label="Impressions" value={t ? t.impressions.toLocaleString() : '-'} />
+        <StatCard label="Avg CTR" value={t ? `${(t.ctr * 100).toFixed(1)}%` : '-'} />
+        <StatCard label="Avg Position" value={t ? t.position.toFixed(1) : '-'} />
       </div>
 
       {rows.length >= 2 && (

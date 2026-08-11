@@ -1,4 +1,4 @@
-# Premium Ghostwriting Academy — Nebula Steals
+# Premium Ghostwriting Academy - Nebula Steals
 
 ## Useful Patterns
 1. Rename the category upward: freelancer → Premium Ghostwriter. Nebula equivalent: CRO freelancer/agency → Autonomous Conversion Leak Detector.

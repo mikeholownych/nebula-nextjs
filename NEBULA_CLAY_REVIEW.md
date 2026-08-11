@@ -1,4 +1,4 @@
-# Nebula Components — Clay-Standard Design Review
+# Nebula Components - Clay-Standard Design Review
 
 ## Executive Summary
 
@@ -100,25 +100,25 @@ The screenshot on `/audit` is explicitly historical, but the live page still vis
 
 ## Quick Wins
 
-1. **Remove aggregate score rendering** — `app/components/AggregateProof.tsx:38-43`; effort S, blocker. The API already returns `avg_score: null`; the component should not retain a path that can re-expose it.
-2. **Add Button focus-visible styling** — `components/ui/Button.tsx:30-39`; effort S, major.
-3. **Make Input ids deterministic** — `components/ui/Input.tsx:3-10;30-35`; effort S, major.
-4. **Raise mobile nav trigger to 44px** — `components/SiteNav.tsx:43-53`; effort S, major.
-5. **Replace raw cookie-banner palette utilities with semantic tokens** — `app/components/CookieConsent.tsx:158-190`; effort S, major.
-6. **Remove deprecated signal descriptions from Benchmarks** — `app/benchmarks/Benchmarks.tsx:24-55`; effort S, blocker.
-7. **Hoist `RoughFilters` once per page** — `components/mockups/FindingCallout.tsx:14-29;128-147`; effort S/M, major.
+1. **Remove aggregate score rendering** - `app/components/AggregateProof.tsx:38-43`; effort S, blocker. The API already returns `avg_score: null`; the component should not retain a path that can re-expose it.
+2. **Add Button focus-visible styling** - `components/ui/Button.tsx:30-39`; effort S, major.
+3. **Make Input ids deterministic** - `components/ui/Input.tsx:3-10;30-35`; effort S, major.
+4. **Raise mobile nav trigger to 44px** - `components/SiteNav.tsx:43-53`; effort S, major.
+5. **Replace raw cookie-banner palette utilities with semantic tokens** - `app/components/CookieConsent.tsx:158-190`; effort S, major.
+6. **Remove deprecated signal descriptions from Benchmarks** - `app/benchmarks/Benchmarks.tsx:24-55`; effort S, blocker.
+7. **Hoist `RoughFilters` once per page** - `components/mockups/FindingCallout.tsx:14-29;128-147`; effort S/M, major.
 
 ## Strategic Bets
 
-### 1. Canonical design-token and semantic-state layer — L
+### 1. Canonical design-token and semantic-state layer - L
 
 Unify Tailwind, CSS variables, SVG defaults, radii, shadows, typography, durations, easings, and semantic states. Add a static check for raw hex values and a visual token page. This is the highest-leverage investment because the palette and state drift currently repeats across nearly every component.
 
-### 2. Accessible interaction foundation — M/L
+### 2. Accessible interaction foundation - M/L
 
 Standardize Button, LinkButton, Input, navigation, dialog/consent, loading, and error primitives. Add keyboard-only, screen-reader semantics, focus-visible, 200% zoom, touch-target, and prefers-reduced-motion tests. This moves the library from “mostly styled HTML” to a dependable component system.
 
-### 3. Component workbench and evidence contract — L
+### 3. Component workbench and evidence contract - L
 
 Add Storybook or an equivalent Next-compatible workbench with stories for every shared component and state. Pair it with a canonical public-signal registry and build-time checks for stale claims, screenshots, numbers, and deprecated labels. This would make the design system reviewable continuously instead of only during a release audit.
 

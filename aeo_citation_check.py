@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""AEO Citation Checker — score Reddit threads for AI-citability.
+"""AEO Citation Checker - score Reddit threads for AI-citability.
 
 Two modes:
   1. Standalone: python3 aeo_citation_check.py "Brand Name"
@@ -348,7 +348,7 @@ def _generate_recs(brand: str, threads: list[dict], score: int) -> list[str]:
 
     no_urls = [t for t in threads if "body_contains_url" not in t.get("aeo_signals", [])]
     if no_urls and len(no_urls) == len(threads):
-        recs.append("**No threads contain external URLs** — the #1 signal for AI citation. "
+        recs.append("**No threads contain external URLs** - the #1 signal for AI citation. "
                      "Add data-source links to existing threads.")
 
     if tier1:
@@ -362,7 +362,7 @@ def _generate_recs(brand: str, threads: list[dict], score: int) -> list[str]:
         recs.append(f"**Priority**: Write one detailed 'How we solved [X]' post in r/SaaS "
                      f"(800+ words, data, URLs, numbered steps).")
     elif score < 60:
-        recs.append(f"**Next**: Pick your best thread and deepen it — add case-study "
+        recs.append(f"**Next**: Pick your best thread and deepen it - add case-study "
                      f"data, fix the title to match a buyer question, ensure external URLs.")
     else:
         recs.append(f"Maintain momentum: 2-3 expert threads/month. Monitor competitor "
@@ -377,7 +377,7 @@ def print_report(result: dict):
     """Pretty-print the analysis report."""
     print(f"\n{'='*60}")
     label = result.get("score_label", "")
-    print(f"🔍 AEO Citation Report — {result.get('brand', '?')}")
+    print(f"🔍 AEO Citation Report - {result.get('brand', '?')}")
     print(f"{'='*60}")
     print()
 
@@ -403,7 +403,7 @@ def print_report(result: dict):
             print()
 
     print(f"{'─'*40}")
-    print(f"🏆 AEO Citation Score: {result['citation_score']}/100 — {label}")
+    print(f"🏆 AEO Citation Score: {result['citation_score']}/100 - {label}")
     print()
 
     recs = result.get("recommendations", [])
@@ -416,7 +416,7 @@ def print_report(result: dict):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="AEO Citation Checker — score Reddit AI-citability",
+        description="AEO Citation Checker - score Reddit AI-citability",
     )
     parser.add_argument("brand", nargs="?",
                         help="Brand name or domain to check (uses Apify search)")

@@ -1,8 +1,8 @@
-# Nebula Components — AEO Audit Report
+# Nebula Components - AEO Audit Report
 
-**Date:** 2026-07-15  
-**Framework:** Answer Engine Optimization (14-layer model)  
-**Current Maturity:** Level 1.5 (Eligible → Retrievable)  
+**Date:** 2026-07-15
+**Framework:** Answer Engine Optimization (14-layer model)
+**Current Maturity:** Level 1.5 (Eligible → Retrievable)
 **Target:** Level 3 (Citable) in 90 days
 
 ---
@@ -24,7 +24,7 @@
 | 11. Content Automation | 0% | N/A |
 | 12. Provenance | 0% | **Critical** |
 | 13. Page Acceptance | 40% | High |
-| 14. Maturity Model | Level 1.5 | — |
+| 14. Maturity Model | Level 1.5 | - |
 
 ---
 
@@ -225,7 +225,7 @@
 **Requirement:** Safe automation with human verification before publication.
 
 **Current State:**
-- N/A — No automation currently
+- N/A - No automation currently
 
 **Gap:** Not implemented (may be intentional).
 
@@ -265,12 +265,12 @@
 
 ### 14. Maturity Model
 
-**Level 0: Invisible** — Blocked or thin content  
-**Level 1: Eligible** — Indexable, basic SEO  
-**Level 2: Retrievable** — Topic architecture, entity pages, monitoring  
-**Level 3: Citable** — Original evidence, external corroboration, provenance  
-**Level 4: Competitive** — Measured citation share, experiments  
-**Level 5: Category Authority** — Terminology ownership, sustained citations
+**Level 0: Invisible** - Blocked or thin content
+**Level 1: Eligible** - Indexable, basic SEO
+**Level 2: Retrievable** - Topic architecture, entity pages, monitoring
+**Level 3: Citable** - Original evidence, external corroboration, provenance
+**Level 4: Competitive** - Measured citation share, experiments
+**Level 5: Category Authority** - Terminology ownership, sustained citations
 
 **Current:** Level 1.5 (Eligible → approaching Retrievable)
 
@@ -315,23 +315,23 @@ See `AEO_IMPLEMENTATION_ROADMAP.md` for 6-phase plan.
 ## Appendix: Code-to-Content Audit
 
 **Files audited:**
-- `app/company/about/page.tsx` — Organization entity ✅
-- `app/company/team/page.tsx` — Author entities ✅
-- `app/concepts/page.tsx` — Empty structure ⚠️
-- `app/ai-sdr-vs-audit/page.tsx` — Comparison page (good, needs table) ⚠️
-- `app/cta-optimization/page.tsx` — Question format ✅
-- `app/headline-optimization/page.tsx` — Question format ✅
-- `app/case-studies/*` — 420 case studies (orphaned) ❌
-- `public/robots.txt` — AI crawler policy ✅
-- `app/sitemap.ts` — Dynamic sitemap ✅
-- `app/lib/schema.ts` — Schema helpers ✅
+- `app/company/about/page.tsx` - Organization entity ✅
+- `app/company/team/page.tsx` - Author entities ✅
+- `app/concepts/page.tsx` - Empty structure ⚠️
+- `app/ai-sdr-vs-audit/page.tsx` - Comparison page (good, needs table) ⚠️
+- `app/cta-optimization/page.tsx` - Question format ✅
+- `app/headline-optimization/page.tsx` - Question format ✅
+- `app/case-studies/*` - 420 case studies (orphaned) ❌
+- `public/robots.txt` - AI crawler policy ✅
+- `app/sitemap.ts` - Dynamic sitemap ✅
+- `app/lib/schema.ts` - Schema helpers ✅
 
-**Total pages:** 487 static pages built  
-**Citation-ready pages:** ~10 (2%)  
-**Entity pages:** 2 (about, team)  
+**Total pages:** 487 static pages built
+**Citation-ready pages:** ~10 (2%)
+**Entity pages:** 2 (about, team)
 **Evidence pages:** 420 case studies (unlinked)
 
 ---
 
-**Audit completed:** 2026-07-15  
+**Audit completed:** 2026-07-15
 **Next audit:** Quarterly or on major content changes

@@ -84,7 +84,7 @@
     - Example: "'Above the fold' is wrong. Here's why your headline fails wherever it is."
 
 20. "You've been told [X]. The opposite is true."
-    - Example: "You've been told to A/B test colors. The opposite—fix your headline—matters 10x more."
+    - Example: "You've been told to A/B test colors. The opposite-fix your headline-matters 10x more."
 
 ---
 
@@ -296,11 +296,11 @@
 - Visual = 40% of whether they engage
 
 **Post Structure for Lead Magnets:**
-1. Hook (2-4 lines) — stop the scroll
-2. Pain — list 3-5 specific pains your ICP feels
-3. Bridge — "Here's how I solved it / what I built"
-4. What's inside — outcome-focused bullets (NOT features)
-5. CTA — Connect + comment keyword + I'll send
+1. Hook (2-4 lines) - stop the scroll
+2. Pain - list 3-5 specific pains your ICP feels
+3. Bridge - "Here's how I solved it / what I built"
+4. What's inside - outcome-focused bullets (NOT features)
+5. CTA - Connect + comment keyword + I'll send
 
 **Key Rule:** Never a wall of ChatGPT text. Break it. Whitespace. Arrows. Flow.
 
@@ -314,10 +314,10 @@ If your lead magnet feels like it should cost $500, you'll pull buyers. If it fe
 
 ## How to Use This Library
 
-**Monday:** Pull 3 audit findings  
-**Tuesday:** Pick finding → Choose hook category → Write 5 variants  
-**Wednesday:** Select best hook → Draft post  
-**Thursday:** Review hook passes checklist  
+**Monday:** Pull 3 audit findings
+**Tuesday:** Pick finding → Choose hook category → Write 5 variants
+**Wednesday:** Select best hook → Draft post
+**Thursday:** Review hook passes checklist
 **Friday:** Publish
 
 **Hook Checklist:**

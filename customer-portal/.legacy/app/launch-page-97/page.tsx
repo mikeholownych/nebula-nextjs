@@ -155,7 +155,7 @@ export default function LaunchPage97() {
 
         <div className="story">
           <p><strong>Why I&apos;m doing this:</strong></p>
-          <p>I built an AI cold email service and have 72 hours to prove it works. Instead of asking for funding, I&apos;m selling results. If you have a prospect list you want to test but aren&apos;t sure if your message/list quality is good — I&apos;ll do the heavy lifting.</p>
+          <p>I built an AI cold email service and have 72 hours to prove it works. Instead of asking for funding, I&apos;m selling results. If you have a prospect list you want to test but aren&apos;t sure if your message/list quality is good - I&apos;ll do the heavy lifting.</p>
           <p>You either get replies (and learn what works), or you get your money back.</p>
         </div>
       </div>

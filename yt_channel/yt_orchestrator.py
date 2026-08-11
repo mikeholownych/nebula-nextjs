@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""YouTube video orchestrator — picks a lead, audits, produces video, uploads.
+"""YouTube video orchestrator - picks a lead, audits, produces video, uploads.
 
 Pipeline:
   1. Pick the most recent eligible lead from audit_leads.jsonl that hasn't
@@ -39,7 +39,7 @@ from yt_channel.config import VIDEO_DIR, THUMBNAIL_DIR
 
 PRODUCTION_LOG = VIDEO_DIR / "production_log.jsonl"
 # Per-stage activity log (the "agents log every task" DB from the
-# content-studio pattern — enables the studio dashboard's real success
+# content-studio pattern - enables the studio dashboard's real success
 # rate and failure view instead of guesswork).
 STUDIO_ACTIVITY_LOG = NEBULA_DIR / "yt_channel" / "logs" / "studio_activity.jsonl"
 
@@ -77,7 +77,7 @@ SKIP_DOMAINS = {"example.com", "test.com", "localhost"}
 # Domains we've already done (read from production log)
 PRODUCED_DOMAINS_CACHE = None
 
-# Renewable pool for daily shorts — high-traffic sites with clear conversion
+# Renewable pool for daily shorts - high-traffic sites with clear conversion
 # surfaces. Round-robin via COUNTER_FILE so we never run out of subjects.
 SUBJECT_POOL = [
     "https://www.shopify.com",
@@ -85,7 +85,7 @@ SUBJECT_POOL = [
     "https://www.airbnb.com",
     "https://www.mailchimp.com",
     "https://www.squarespace.com",
-    # NOTE: wix.com REMOVED — SPA HTML exceeds MAX_AUDIT_HTML_BYTES (2MB),
+    # NOTE: wix.com REMOVED - SPA HTML exceeds MAX_AUDIT_HTML_BYTES (2MB),
     # scrape_page raises and previously killed the whole daily run.
     "https://www.canva.com",
     "https://www.dropbox.com",
@@ -120,7 +120,7 @@ def pick_lead(exclude: set[str] | None = None) -> tuple[str, str, dict | None]:
     Returns (url, email, existing_audit).
     Chooses the most recent entry that hasn't had a video yet.
     Falls back to nebulacomponents.com / round-robin pool.
-    `exclude` — domains to skip (used when a subject fails to scrape,
+    `exclude` - domains to skip (used when a subject fails to scrape,
     so the pipeline self-heals instead of dying on one bad URL).
     """
     exclude = exclude or set()
@@ -143,7 +143,7 @@ def pick_lead(exclude: set[str] | None = None) -> tuple[str, str, dict | None]:
             if domain in SKIP_DOMAINS or domain in exclude:
                 continue
             if domain in produced:
-                log.info(f"Skipping {domain} — already produced")
+                log.info(f"Skipping {domain} - already produced")
                 continue
             # Found an eligible lead
             log.info(f"Picked lead: {url} (email={entry.get('email', '?')})")
@@ -156,7 +156,7 @@ def pick_lead(exclude: set[str] | None = None) -> tuple[str, str, dict | None]:
                     "dimensions": entry["dimensions"],
                 }
             elif entry.get("score") is not None:
-                # Some leads only have a flat score — we'll re-audit
+                # Some leads only have a flat score - we'll re-audit
                 pass
             return url, entry.get("email", ""), existing_audit
 
@@ -171,7 +171,7 @@ def pick_lead(exclude: set[str] | None = None) -> tuple[str, str, dict | None]:
     counter += 1
     COUNTER_FILE.parent.mkdir(parents=True, exist_ok=True)
     COUNTER_FILE.write_text(str(counter))
-    log.info(f"No new leads — pool subject #{counter - 1}: {url}")
+    log.info(f"No new leads - pool subject #{counter - 1}: {url}")
     return url, "admin@nebulacomponents.shop", None
 
 
@@ -191,14 +191,14 @@ def log_production(domain, title, score, video_path, duration):
             f.write(PRODUCTION_LOG.read_text())
         f.write(json.dumps(entry) + "\n")
     os.replace(tmp, PRODUCTION_LOG)
-    log.info(f"Production logged: {domain} — {title}")
+    log.info(f"Production logged: {domain} - {title}")
     return entry
 
 
 async def run_pipeline(upload: bool = False, mode: str = "both", hold_long: bool = False):
     """Full production pipeline. mode: 'both' | 'short' | 'long'."""
     import asyncio
-    # 1. Pick lead — self-healing: if a subject fails to scrape (SPA >
+    # 1. Pick lead - self-healing: if a subject fails to scrape (SPA >
     # size cap, bot-block, network), advance to the next subject instead
     # of killing the run. Max 3 attempts.
     attempted: set[str] = set()
@@ -209,7 +209,7 @@ async def run_pipeline(upload: bool = False, mode: str = "both", hold_long: bool
         url, email, existing_audit = pick_lead(exclude=attempted)
         domain = url.replace("https://", "").replace("http://", "").split("/")[0]
         if existing_audit and "dimensions" in existing_audit:
-            break  # cached audit — no scrape needed
+            break  # cached audit - no scrape needed
         log.info(f"Running live audit on {url}")
         try:
             page = scrape_page(url)
@@ -217,7 +217,7 @@ async def run_pipeline(upload: bool = False, mode: str = "both", hold_long: bool
             log_stage("audit", domain, "ok", f"score {audit['overall']}/10")
             break
         except Exception as e:
-            log.warning(f"Scrape failed for {domain}: {e} — trying next subject")
+            log.warning(f"Scrape failed for {domain}: {e} - trying next subject")
             log_stage("audit", domain, "fail", str(e)[:200])
             attempted.add(domain)
             page = audit = None
@@ -278,7 +278,7 @@ async def run_pipeline(upload: bool = False, mode: str = "both", hold_long: bool
         duration=(result or short_result)["audio_duration"],
     )
 
-    # 5. Upload to YouTube (optional) — upload BOTH when mode=both
+    # 5. Upload to YouTube (optional) - upload BOTH when mode=both
     if upload:
         try:
             from yt_channel.upload import upload_video, set_thumbnail, _get_authenticated_service
@@ -291,7 +291,7 @@ async def run_pipeline(upload: bool = False, mode: str = "both", hold_long: bool
             if short_path is not None and short_result is not None:
                 short_script = short_result.get("script") or {}
                 # E'Calm Shorts system (srDpvEnGQg4): pick the BEST MOMENT
-                # as the Short thumbnail — the frame people are most likely
+                # as the Short thumbnail - the frame people are most likely
                 # to click, so the video keeps pulling traffic after the
                 # algorithm slows down. For us that's the reward/payoff card
                 # (the big score reveal). We extract it from the rendered
@@ -325,7 +325,7 @@ async def run_pipeline(upload: bool = False, mode: str = "both", hold_long: bool
                 uploads.append((short_path, short_script.get("title", ""), short_script.get("description", ""), short_thumb, "short"))
 
             for path, title, description, thumb, kind in uploads:
-                # ── Quality gate — fail-closed: broken renders never upload ──
+                # ── Quality gate - fail-closed: broken renders never upload ──
                 qa_cmd = [
                     sys.executable, "yt_channel/qa_video.py",
                     "--video", str(path),
@@ -338,7 +338,7 @@ async def run_pipeline(upload: bool = False, mode: str = "both", hold_long: bool
                 qa = subprocess.run(qa_cmd, capture_output=True, text=True)
                 if qa.returncode != 0:
                     log.warning(
-                        f"QA FAILED for {kind} ({title[:50]}) — upload skipped: "
+                        f"QA FAILED for {kind} ({title[:50]}) - upload skipped: "
                         f"{qa.stdout.strip()[:300]}"
                     )
                     log_stage("qa", domain, "fail", f"{kind}: {qa.stdout.strip()[:200]}")
@@ -353,10 +353,10 @@ async def run_pipeline(upload: bool = False, mode: str = "both", hold_long: bool
                     "conversion optimization", "website audit",
                     "landing page review",
                     domain.replace("www.", ""),
-                    title.split(":")[0].split("—")[0].strip()[:30],
+                    title.split(":")[0].split("-")[0].strip()[:30],
                 ]
                 log.info(f"Uploading {kind} to YouTube...")
-                # Shane Hummus (N45nMvSOgFQ) tip #7: file name = title —
+                # Shane Hummus (N45nMvSOgFQ) tip #7: file name = title -
                 # YouTube reads the filename during processing (SEO metadata).
                 # 'this tip alone probably got me an extra 10-20M views'.
                 from yt_channel.post_upload import rename_to_title
@@ -364,7 +364,7 @@ async def run_pipeline(upload: bool = False, mode: str = "both", hold_long: bool
 
                 # tip #1: hold LONG-FORM private 24-48h (YouTube's AI scans
                 # new uploads; new channels get fewer resources so trust
-                # matters more). Shorts stay public — the Shorts feed is the
+                # matters more). Shorts stay public - the Shorts feed is the
                 # discovery surface and is time-sensitive. publish_held.py
                 # (run by yt_cron.sh) flips held videos to public at 24h.
                 privacy = "private" if (kind == "long" and hold_long) else "public"
@@ -410,13 +410,13 @@ def main():
     parser.add_argument("--mode", choices=["both", "short", "long"], default="both",
                         help="Which video(s) to produce/upload (default: both)")
     parser.add_argument("--batch", type=int, default=1,
-                        help="Produce N videos in one run (no upload — backlog/buffer pre-production). "
+                        help="Produce N videos in one run (no upload - backlog/buffer pre-production). "
                              "Subjects advance round-robin each iteration.")
     args = parser.parse_args()
 
     import asyncio
     if args.batch > 1 and args.upload:
-        log.warning("--batch forces upload=False (never auto-post a burst — account-risk). "
+        log.warning("--batch forces upload=False (never auto-post a burst - account-risk). "
                     "Producing backlog only.")
         args.upload = False
 
@@ -427,7 +427,7 @@ def main():
         try:
             entry = asyncio.run(run_pipeline(upload=args.upload, mode=args.mode, hold_long=args.hold_long))
         except Exception as e:
-            log.error(f"Batch item {i + 1} failed: {e} — continuing with next item")
+            log.error(f"Batch item {i + 1} failed: {e} - continuing with next item")
             continue
         entries.append(entry)
         # Refresh produced-domain cache so the next iteration picks a NEW subject

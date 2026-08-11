@@ -10,7 +10,7 @@ Subject: {first_name}, your testimonials are nearby. But do they believe them?
 
 {first_name},
 
-The audit found proof near your decision point — that's good. The question is: does a stranger trust it?
+The audit found proof near your decision point - that's good. The question is: does a stranger trust it?
 
 **What we saw:**
 
@@ -32,6 +32,6 @@ The trust gap is real. They don't know you yet.
 
 {audit_link_with_source}
 
-—
+-
 
 P.S. The evidence hierarchy guide is here: {proof_worksheet_link}

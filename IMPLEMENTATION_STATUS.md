@@ -1,6 +1,6 @@
-# Content-to-Pipeline System — Implementation Status
+# Content-to-Pipeline System - Implementation Status
 
-**Generated:** 2026-07-17  
+**Generated:** 2026-07-17
 **Scope:** Phase 1 integration + 3 artifacts
 
 ---
@@ -288,7 +288,7 @@ All tests passing. Template rendering working. Track assignment logic verified.
 3. **Week 3 (DONE ✅):** Wire into audit completion flow (audit API endpoint)
 4. **Week 4 (DONE ✅):** Production validation + monitoring setup
 
-**Current status:** COMPLETE — Production ready.
+**Current status:** COMPLETE - Production ready.
 
 ---
 

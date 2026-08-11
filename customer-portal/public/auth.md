@@ -1,4 +1,4 @@
-# auth.md — Nebula Components Agent Registration
+# auth.md - Nebula Components Agent Registration
 
 > Machine-readable authentication and registration instructions for AI agents.
 > Spec: https://workos.com/auth-md
@@ -58,4 +58,4 @@ For write-access API credentials, POST to the registration endpoint below.
 - **A2A:** `/.well-known/agent-card.json`
 - **Agent Skills:** `/.well-known/agent-skills/index.json`
 - **API Catalog:** `/.well-known/api-catalog`
-- **WebMCP:** `navigator.modelContext` — 3 tools exposed on page load
+- **WebMCP:** `navigator.modelContext` - 3 tools exposed on page load

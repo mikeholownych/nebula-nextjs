@@ -1,10 +1,10 @@
-# Nebula Membership Plans — Product Architecture
-## Status: APPROVED (Mike, Aug 4 2026) — pricing $29/$79/$199 confirmed, free tier = 1 audit/mo, PH discount = launch week
+# Nebula Membership Plans - Product Architecture
+## Status: APPROVED (Mike, Aug 4 2026) - pricing $29/$79/$199 confirmed, free tier = 1 audit/mo, PH discount = launch week
 
 **Decisions locked:**
 1. Pricing: Pro $29/mo·$290/yr, Growth $79/mo·$790/yr, Agency $199/mo·$1,990/yr ✅
 2. Free tier: 1 audit/month ✅
-3. PH discount: **launch week (Sep 2-9)** — rationale: PH traffic tail runs 3-5 days post-launch; day-only windows leave the long-tail visitors at full price and convert worse. Week window with visible end date + Stripe max_redemptions cap preserves urgency.
+3. PH discount: **launch week (Sep 2-9)** - rationale: PH traffic tail runs 3-5 days post-launch; day-only windows leave the long-tail visitors at full price and convert worse. Week window with visible end date + Stripe max_redemptions cap preserves urgency.
 
 ---
 
@@ -12,7 +12,7 @@
 
 | Tier | Price | Billing | Core Value |
 |------|-------|---------|------------|
-| **Free** | $0 | — | 1 audit/month, 9-signal score + grade, top-line findings |
+| **Free** | $0 | - | 1 audit/month, 9-signal score + grade, top-line findings |
 | **Pro** | $29/mo or $290/yr (save 17%) | Recurring | Unlimited audits, full reports, monitoring, historical comparisons |
 | **Growth** | $79/mo or $790/yr (save 17%) | Recurring | Everything in Pro + multi-page, team seats, priority support, API access |
 | **Agency** | $199/mo or $1,990/yr (save 17%) | Recurring | Everything in Growth + client workspaces, unlimited white-label, reseller margin |
@@ -30,7 +30,7 @@
 - 7-day result retention
 - No monitoring, no historical data
 
-### Pro — $29/mo | $290/yr
+### Pro - $29/mo | $290/yr
 **For**: Solo founders running ads who need ongoing conversion visibility
 
 **Includes**:
@@ -44,7 +44,7 @@
 - Exportable PDF reports
 - Email support
 
-### Growth — $79/mo | $790/yr
+### Growth - $79/mo | $790/yr
 **For**: Agencies, multi-product founders, growth teams
 
 **Includes everything in Pro, plus**:
@@ -57,14 +57,14 @@
 - Custom scoring weights (emphasize signals that matter to your vertical)
 - Bulk audit CSV import/export
 
-### One-Leak Repair Sprint — $97 one-time
+### One-Leak Repair Sprint - $97 one-time
 **Unchanged from current offer. Available to any tier.**
 - Works with or without a subscription
 - Audit-bound (requires completed audit)
 - One finding, one tailored fix, one re-audit
 - Natural upsell from Free → paid after seeing the audit results
 
-### Agency — $199/mo | $1,990/yr
+### Agency - $199/mo | $1,990/yr
 **For**: Agencies auditing client pages as a service; freelance CRO consultants
 
 **Includes everything in Growth, plus**:
@@ -78,17 +78,17 @@
 - Dedicated onboarding call
 - Priority support (same-day response)
 
-**Positioning note**: This supersedes the legacy $497 one-time "agency partner" Stripe link. That link should be deactivated when Agency tier goes live — recurring at $199/mo ($2,388/yr) captures far more LTV than a $497 one-off, and white-label monitoring is the retention hook.
+**Positioning note**: This supersedes the legacy $497 one-time "agency partner" Stripe link. That link should be deactivated when Agency tier goes live - recurring at $199/mo ($2,388/yr) captures far more LTV than a $497 one-off, and white-label monitoring is the retention hook.
 
 ---
 
 ## Strategic Rationale
 
 ### Why add recurring plans now
-1. **Revenue predictability** — $97 one-time purchases don't compound; MRR does
-2. **PH launch pricing** — "Launch special: first year at $290" is a proven PH conversion driver
-3. **Retention through monitoring** — founders who see weekly score alerts don't churn
-4. **Upsell ladder** — Free audit → $29/mo monitoring → $97 kit when they find a leak → $79/mo when they have multiple pages
+1. **Revenue predictability** - $97 one-time purchases don't compound; MRR does
+2. **PH launch pricing** - "Launch special: first year at $290" is a proven PH conversion driver
+3. **Retention through monitoring** - founders who see weekly score alerts don't churn
+4. **Upsell ladder** - Free audit → $29/mo monitoring → $97 kit when they find a leak → $79/mo when they have multiple pages
 
 ### How the $97 kit fits
 The kit is an **add-on** available at any tier, not a replacement for the subscription:
@@ -106,19 +106,19 @@ The kit is an **add-on** available at any tier, not a replacement for the subscr
 ## Implementation Requirements
 
 ### Stripe Products to Create
-1. `nebula-pro-monthly` — $29/mo recurring
-2. `nebula-pro-annual` — $290/yr recurring
-3. `nebula-growth-monthly` — $79/mo recurring
-4. `nebula-growth-annual` — $790/yr recurring
-5. `nebula-agency-monthly` — $199/mo recurring
-6. `nebula-agency-annual` — $1,990/yr recurring
-7. Existing: `one-leak-kit` — $97 one-time (already live)
+1. `nebula-pro-monthly` - $29/mo recurring
+2. `nebula-pro-annual` - $290/yr recurring
+3. `nebula-growth-monthly` - $79/mo recurring
+4. `nebula-growth-annual` - $790/yr recurring
+5. `nebula-agency-monthly` - $199/mo recurring
+6. `nebula-agency-annual` - $1,990/yr recurring
+7. Existing: `one-leak-kit` - $97 one-time (already live)
 8. DEACTIVATE: legacy $497 one-time agency partner link (superseded by Agency tier)
 
 ### Database Changes
 - `subscriptions` table: `id, customer_id, stripe_subscription_id, plan, status, current_period_start, current_period_end, created_at`
 - `workspace` extended with: `plan` (free/pro/growth/agency), `audit_quota`, `team_seats`
-- `client_workspaces` table (Agency tier): `id, parent_org_id, client_name, created_at` — isolated audit/monitoring data per client
+- `client_workspaces` table (Agency tier): `id, parent_org_id, client_name, created_at` - isolated audit/monitoring data per client
 - Existing `purchases` table unchanged (one-time kits)
 
 ### Feature Gating
@@ -186,7 +186,7 @@ Assumes:
 7. **PH launch special coupons** (Aug 25)
 8. **QA + production deploy** (Aug 28-29)
 
-This gives us the full subscription product live by **Aug 29** — 4 days before PH launch.
+This gives us the full subscription product live by **Aug 29** - 4 days before PH launch.
 
 ---
 

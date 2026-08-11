@@ -1,7 +1,7 @@
-# Aug 9 2026 — Session Summary: Buyer Psychology + Conviction Stage Complete
+# Aug 9 2026 - Session Summary: Buyer Psychology + Conviction Stage Complete
 
-**Status**: ✅ ALL COMMITTED TO MAIN  
-**Commits**: 5 (video pipeline, lead gen foundation, buyer psychology framework, proof layer)  
+**Status**: ✅ ALL COMMITTED TO MAIN
+**Commits**: 5 (video pipeline, lead gen foundation, buyer psychology framework, proof layer)
 **Ready for**: Sep 2 launch
 
 ---
@@ -16,7 +16,7 @@
   - Score: Huge red 4/10 (anchoring, loss-aversion trigger)
   - Benchmark: "Your 4/10 | Avg 6/10 | Top 10% 9/10" (relativity)
   - Subheading: "You're bleeding $500-2,000/month" (sunk cost motivation)
-  - CTA: "Stop the leak — $97" (red, loss frame, active verb)
+  - CTA: "Stop the leak - $97" (red, loss frame, active verb)
   - Urgency: "⏱️ Audit expires in 7 days" (scarcity)
   - Social proof: "847 audits analyzed. 721 founders found these. 89% fixed them." (normalcy)
 - **Commit**: `3a8380b6`
@@ -75,7 +75,7 @@ YouTube views
 | **Before/after proof** | Remove risk, show exact value | +20-40% |
 | **Combined** | audit-to-checkout conversion | **30-70%** |
 
-**Baseline**: 1-2% audit → $97 checkout  
+**Baseline**: 1-2% audit → $97 checkout
 **With psychology + proof**: 1.5-4.2% audit → $97 checkout
 
 ---
@@ -103,14 +103,14 @@ YouTube views
 
 ## Books Referenced
 
-1. **Influence** (Cialdini) — 6 principles of persuasion
-2. **Predictably Irrational** (Ariely) — Anchoring, loss aversion, endowment, sunk cost
-3. **Contagious** (Berger) — STEPPS framework (emotion, triggers, stories)
-4. **Thinking, Fast and Slow** (Kahneman) — System 1/2, framing effects
-5. **The Millionaire Fastlane** (DeMarco) — Founder psychology, autonomy, pain-driven motivation
-6. **The Subtle Art of Not Giving a F*ck** (Manson) — Anti-marketing, honesty, values
-7. **Pre-suasion** (Cialdini) — Curiosity gaps, open loops, anchoring first offers
-8. **Never Split the Difference** (Voss) — Tactical empathy, anchoring, tactical questions
+1. **Influence** (Cialdini) - 6 principles of persuasion
+2. **Predictably Irrational** (Ariely) - Anchoring, loss aversion, endowment, sunk cost
+3. **Contagious** (Berger) - STEPPS framework (emotion, triggers, stories)
+4. **Thinking, Fast and Slow** (Kahneman) - System 1/2, framing effects
+5. **The Millionaire Fastlane** (DeMarco) - Founder psychology, autonomy, pain-driven motivation
+6. **The Subtle Art of Not Giving a F*ck** (Manson) - Anti-marketing, honesty, values
+7. **Pre-suasion** (Cialdini) - Curiosity gaps, open loops, anchoring first offers
+8. **Never Split the Difference** (Voss) - Tactical empathy, anchoring, tactical questions
 
 ---
 

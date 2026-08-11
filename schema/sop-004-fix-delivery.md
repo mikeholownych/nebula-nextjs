@@ -19,7 +19,7 @@ Alternatively: `offers.status = 'accepted'` with `payment_received = true` via S
 
 ## Validation Rules
 1. Payment must be confirmed via Stripe webhook (`checkout.session.completed`) before any work begins
-2. Scope is bounded to the specific findings explicitly approved by the prospect — no scope creep
+2. Scope is bounded to the specific findings explicitly approved by the prospect - no scope creep
 3. Before-snapshot must be captured before any code change
 4. After-snapshot must be captured immediately after deployment
 5. Do not deploy to production without prospect's explicit go-ahead
@@ -82,10 +82,10 @@ Alternatively: `offers.status = 'accepted'` with `payment_received = true` via S
 - **Legal/reputational risk (e.g., compliance) →** stop work, consult Mike
 
 ## Automation Readiness Gate
-- [ ] Deterministic trigger: YES — Stripe webhook `checkout.session.completed`
-- [ ] Structured inputs: PARTIAL — interventions are bounded but fix content is human-authored
-- [ ] Bounded output: YES — intervention status + snapshots
-- [ ] Explicit failure handling: YES — defined above
-- [ ] Observable execution: YES — interventions table + events
-- [ ] Reversibility: YES — all changes are revertible; rollback_method recorded
-- [ ] Stable decision rule: NOT YET — each fix is unique; automation of fix content is Phase 4+ goal
+- [ ] Deterministic trigger: YES - Stripe webhook `checkout.session.completed`
+- [ ] Structured inputs: PARTIAL - interventions are bounded but fix content is human-authored
+- [ ] Bounded output: YES - intervention status + snapshots
+- [ ] Explicit failure handling: YES - defined above
+- [ ] Observable execution: YES - interventions table + events
+- [ ] Reversibility: YES - all changes are revertible; rollback_method recorded
+- [ ] Stable decision rule: NOT YET - each fix is unique; automation of fix content is Phase 4+ goal

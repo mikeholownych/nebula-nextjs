@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FULL SYSTEM AUDIT — 72-Hour Challenge Infrastructure
+FULL SYSTEM AUDIT - 72-Hour Challenge Infrastructure
 Checks every component: infrastructure, payment, email, tracking, crons
 """
 import subprocess
@@ -11,7 +11,7 @@ from pathlib import Path
 from datetime import datetime
 
 print("\n" + "="*70)
-print("🔍 FULL SYSTEM AUDIT — AUTONOMOUS BUSINESS OS")
+print("🔍 FULL SYSTEM AUDIT - AUTONOMOUS BUSINESS OS")
 print("="*70)
 print(f"Time: {datetime.now().isoformat()}")
 print("="*70 + "\n")
@@ -208,21 +208,21 @@ try:
         timeout=10
     )
     cron_output = result.stdout
-    
+
     crons_to_check = [
         ("tunnel_liveliness", "Tunnel liveliness monitor"),
         ("tunnel_watchdog", "Tunnel watchdog"),
         ("audit_blast_wave2", "Wave 2 audit blast"),
         ("challenge_checkin", "Self-audit checkpoints"),
     ]
-    
+
     for cron_id, name in crons_to_check:
         if cron_id in cron_output or name.lower() in cron_output.lower():
             check(name, True)
         else:
             check(name, False)
             print(f"       Not found in cron list")
-    
+
 except Exception as e:
     print(f"  ❌ Could not list cron jobs: {e}")
 
@@ -332,10 +332,10 @@ if WARNINGS:
 
 print("\n" + "="*70)
 if FAILURES:
-    print("🚫 AUDIT FAILED — Fix critical issues before Wave 2")
+    print("🚫 AUDIT FAILED - Fix critical issues before Wave 2")
     print("="*70 + "\n")
     exit(1)
 else:
-    print("✅ AUDIT PASSED — Systems ready for deployment")
+    print("✅ AUDIT PASSED - Systems ready for deployment")
     print("="*70 + "\n")
     exit(0)

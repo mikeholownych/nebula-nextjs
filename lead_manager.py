@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Lead Manager — centralized lead database with stage-based segmentation.
+Lead Manager - centralized lead database with stage-based segmentation.
 
 Stages (ordered by funnel progression):
   lead_free_kit    → downloaded free Fix Kit (email capture)
@@ -18,7 +18,7 @@ A customer_97 who later buys Growth Launch upgrades to customer_997.
 import json, os, datetime
 
 # ─── CAN-SPAM Compliance ────────────────────────────────────────────
-# Business physical address — update this to your actual business address
+# Business physical address - update this to your actual business address
 BUSINESS_NAME = "Nebula Components"
 BUSINESS_ADDRESS = "Nebula Components, 66 Sonneck Square, Scarborough, ON M1E 1A9"
 UNSUBSCRIBE_BASE = "https://nebulacomponents.com/unsubscribe.html"
@@ -68,7 +68,7 @@ STAGE_LABELS = {
     "lead_free_kit": "Free Kit Downloaded",
     "lead_audit": "Audit Run",
     "lead_warm": "Warm Lead",
-    "beta_tester": "Beta Tester — case study pending",
+    "beta_tester": "Beta Tester - case study pending",
     "customer_97": "$147 Customer",
     "customer_997": "$997 Customer",
     "subscriber_197": "$197/mo Subscriber",
@@ -78,12 +78,12 @@ STAGE_LABELS = {
 SEGMENTS = {
     "all": "Everyone",
     "active": "All active leads (any stage)",
-    "lead_free_kit": "Free Kit — need audit trigger",
-    "lead_audit": "Ran Audit — ready for upsell",
-    "lead_warm": "Warm — high intent",
-    "beta_tester": "Beta Testers — case study pending",
-    "customer_97": "$147 Customers — upsell to $997",
-    "customer_997": "$997 Customers — upsell to pipeline",
+    "lead_free_kit": "Free Kit - need audit trigger",
+    "lead_audit": "Ran Audit - ready for upsell",
+    "lead_warm": "Warm - high intent",
+    "beta_tester": "Beta Testers - case study pending",
+    "customer_97": "$147 Customers - upsell to $997",
+    "customer_997": "$997 Customers - upsell to pipeline",
     "subscriber_197": "$197/mo Subscribers",
     "non_customer": "Leads who haven't paid yet (free_kit + audit + warm + beta_tester)",
 }
@@ -202,7 +202,7 @@ def upsert_lead(email, stage=None, source=None, name=None, url=None,
             if audit_id:
                 existing["track_audit_id"] = audit_id
 
-        # Persist trigger text on first write only — don't overwrite with a weaker signal
+        # Persist trigger text on first write only - don't overwrite with a weaker signal
         if trigger_text and not existing.get("trigger_text"):
             existing["trigger_text"] = str(trigger_text)[:200]
 
@@ -232,7 +232,7 @@ def upsert_lead(email, stage=None, source=None, name=None, url=None,
             "track_started_at": now if nurture_track else None,
             "track_position_days": 0,
             "track_audit_id": audit_id or "",
-            # Buying signal that first surfaced this lead — used by nurture as personalized opener
+            # Buying signal that first surfaced this lead - used by nurture as personalized opener
             "trigger_text": str(trigger_text)[:200] if trigger_text else "",
         }
         db[email] = entry
@@ -339,8 +339,8 @@ def export_csv(stage=None):
 
 def list_recircle_candidates(min_age_days=30, max_count=50):
     """Return non-customer, non-opted-out leads not contacted in min_age_days.
-    
-    These are candidates for the recircle sequence — re-engage the same ICP
+
+    These are candidates for the recircle sequence - re-engage the same ICP
     with fresh audit findings or new content every 30-60 days.
     """
     db = _load()
@@ -375,28 +375,28 @@ def list_recircle_candidates(min_age_days=30, max_count=50):
 
 def content_performance():
     """Analyze which content posts and angles produce leads at which stages.
-    
+
     Returns dict with:
       - by_angle: {angle: {total_leads, stages_breakdown, max_stage_reached}}
       - by_post: [{url, angle, leads_count, stages, max_stage, first_lead, last_lead}]
       - top_angles: list sorted by lead quality (not volume)
     """
     db = _load()
-    
+
     # Collect all content leads
     post_stats = {}  # url -> stats
     angle_stats = {}  # angle -> stats
-    
+
     for email, lead in db.items():
         content_posts = lead.get("content_posts", [])
         stage = lead.get("current_stage", "")
         stage_rank = _stage_rank(stage)
         total_spent = lead.get("total_spent_cents", 0)
-        
+
         for cp in content_posts:
             url = cp.get("url", "")
             angle = cp.get("angle", "unknown") or "unknown"
-            
+
             # Per-post stats
             if url not in post_stats:
                 post_stats[url] = {
@@ -425,7 +425,7 @@ def content_performance():
                 ps["first_lead"] = fs
             if not ps["last_lead"] or fs > ps["last_lead"]:
                 ps["last_lead"] = fs
-            
+
             # Per-angle stats
             if angle not in angle_stats:
                 angle_stats[angle] = {
@@ -446,20 +446,20 @@ def content_performance():
             if stage_rank > as_["max_stage_rank"]:
                 as_["max_stage_rank"] = stage_rank
                 as_["max_stage"] = stage
-    
+
     # Calculate buyer conversion rate per angle
     for angle, stats in angle_stats.items():
         total = stats["total_leads"]
         buyers = sum(count for stage, count in stats["stages"].items() if _stage_rank(stage) >= _stage_rank("customer_97"))
         stats["buyer_conversion_rate"] = round(buyers / total, 3) if total > 0 else 0
         stats["unique_posts"] = len(stats["unique_posts"])
-    
+
     # Sort angles by buyer conversion rate (highest first)
     top_angles = sorted(angle_stats.values(), key=lambda x: x["buyer_conversion_rate"], reverse=True)
-    
+
     # Sort posts by stage rank (highest first)
     sorted_posts = sorted(post_stats.values(), key=lambda x: x["max_stage_rank"], reverse=True)
-    
+
     return {
         "by_angle": angle_stats,
         "by_post": sorted_posts,
@@ -516,17 +516,17 @@ def log_checkout_visit(email):
     email = email.strip().lower()
     if not email or "@" not in email:
         return False
-    
+
     db = _load()
     now = datetime.datetime.utcnow().isoformat() + "Z"
     lead = db.get(email)
     if not lead:
         return False
-    
+
     visits = lead.setdefault("checkout_visits", [])
     visits.append(now)
     lead["last_seen"] = now
-    
+
     # Auto-enroll in abandoned checkout sequence if not already
     seqs = lead.setdefault("email_sequences", {})
     if "abandoned_checkout" not in seqs:
@@ -535,7 +535,7 @@ def log_checkout_visit(email):
             "sent_steps": [],
             "completed": False,
         }
-    
+
     _save(db)
     return True
 
@@ -570,7 +570,7 @@ def set_sequence_step_sent(email, sequence_id, step_id):
 
 def complete_sequence(email, sequence_id, completes_at=None):
     """Mark a sequence as completed and promote lead stage if appropriate.
-    
+
     Args:
         email: Lead email
         sequence_id: Sequence name identifier
@@ -704,17 +704,17 @@ def migrate_from_jsonl():
 
 
 def generate_angles(count=5, offer=None, audience=None):
-    """Angle Generator — adapted from Claude Marketing Department.
-    
+    """Angle Generator - adapted from Claude Marketing Department.
+
     Generates distinct content angles for Nebula's offers based on real
     lead data, buying triggers, and current content performance.
-    
-    Returns a list of angle dicts with: title, message, target_segment, 
+
+    Returns a list of angle dicts with: title, message, target_segment,
     hook_line, test_priority, pattern.
     """
     db = _load()
     perf = content_performance()
-    
+
     # Build audience description from real leads
     stages = {}
     total_leads = 0
@@ -723,12 +723,12 @@ def generate_angles(count=5, offer=None, audience=None):
         stages[stage] = stages.get(stage, 0) + 1
         total_leads += 1
     top_stage = max(stages, key=stages.get) if stages else "none"
-    
+
     # Determine what's working from content performance
     best_angle = "teach"
     if perf["top_angles"]:
         best_angle = perf["top_angles"][0]["angle"]
-    
+
     # Angle patterns from the playbook
     angle_patterns = [
         {
@@ -782,7 +782,7 @@ def generate_angles(count=5, offer=None, audience=None):
         {
             "title": "The Objection Killer",
             "pattern": "objection",
-            "hook": "\"I don't have time to fix my landing page\" — here's why that's costing you more.",
+            "hook": "\"I don't have time to fix my landing page\" - here's why that's costing you more.",
             "message": "The $147 Fix Pack takes 24h. Losing 60% of your traffic takes forever.",
             "target_segment": "busy_founders",
             "test_priority": 7,
@@ -796,7 +796,7 @@ def generate_angles(count=5, offer=None, audience=None):
             "test_priority": 8,
         },
     ]
-    
+
     # Bias toward best-performing pattern
     if best_angle == "teach":
         taught = [a for a in angle_patterns if a["pattern"] in ("teach_process", "framework", "how_it_works")]
@@ -808,26 +808,26 @@ def generate_angles(count=5, offer=None, audience=None):
         priority = hooked[:2] + others[:count-2]
     else:
         priority = angle_patterns[:count]
-    
+
     # Add real data enrichment
     for angle in priority:
         angle["total_leads"] = total_leads
         angle["top_stage"] = top_stage
         angle["best_angle"] = best_angle
-    
+
     return priority[:count]
 
 
 def generate_icp():
-    """ICP Builder — adapted from Claude Marketing Department.
-    
+    """ICP Builder - adapted from Claude Marketing Department.
+
     Analyzes current lead database to produce a structured ICP definition
     with traits, triggers, channels, and exclusion criteria.
-    
+
     Returns dict with icp_statement, core_traits, triggers, channels, exclusions.
     """
     db = _load()
-    
+
     # Analyze which leads reach the highest stages
     buyers = []
     warm = []
@@ -839,23 +839,23 @@ def generate_icp():
         url = lead.get("url", "")
         tags = lead.get("tags", [])
         rank = _stage_rank(stage)
-        
+
         entry = {"email": email, "stage": stage, "sources": source, "tags": tags}
-        
+
         if rank >= _stage_rank("customer_97"):
             buyers.append(entry)
         elif rank >= _stage_rank("lead_warm"):
             warm.append(entry)
         else:
             cold.append(entry)
-    
+
     # Source analysis
     source_counts = {}
     for entry in buyers + warm:
         for s in entry["sources"]:
             source_counts[s] = source_counts.get(s, 0) + 1
     top_sources = sorted(source_counts, key=source_counts.get, reverse=True)[:3]
-    
+
     # ICP statement
     icp_statement = (
         "Founders running paid ads (Google, Facebook, LinkedIn) with "
@@ -863,7 +863,7 @@ def generate_icp():
         "that doesn't convert, who own their landing page and can make "
         "changes without agency approval."
     )
-    
+
     return {
         "icp_statement": icp_statement,
         "core_traits": {
@@ -923,7 +923,7 @@ def _save_competitors(data):
 
 def update_competitor_messaging(name, data):
     """Add or update a competitor's messaging profile.
-    
+
     data should include:
       - headline: hero value prop
       - problem_claimed: what they say they solve
@@ -943,18 +943,18 @@ def update_competitor_messaging(name, data):
 
 
 def messaging_gap_finder():
-    """Messaging Gap Finder — adapted from Claude Marketing Department.
-    
+    """Messaging Gap Finder - adapted from Claude Marketing Department.
+
     Analyzes competitor messaging against Nebula's buying triggers and
     value props to find uncontested angles we can own.
-    
+
     Returns:
       - gaps: ranked list of messaging angles competitors aren't using
       - occupied: angles competitors already own (avoid or counter)
       - recommendations: what to say, where, and to whom
     """
     competitors = _load_competitors()
-    
+
     # Nebula's own messaging arsenal
     nebula_angles = {
         "trigger_based": "We find people actively bleeding money on ads, not spray a list",
@@ -963,12 +963,12 @@ def messaging_gap_finder():
         "concrete_fix": "Implementable changes, not strategic advice",
         "price_transparency": "$147 for a fix, not a monthly subscription",
         "founder_friendly": "Built for founders by someone who sells to founders",
-        "no_domain_farm": "One inbox, AgentMail handles deliverability — no 75-domain fleet needed",
+        "no_domain_farm": "One inbox, AgentMail handles deliverability - no 75-domain fleet needed",
         "trigger_aware": "Outreach only when someone is actively buying",
         "30_day_guarantee": "30-day money back if conversion doesn't improve",
-        "no_meetings": "From audit to fix to checkout — zero meetings",
+        "no_meetings": "From audit to fix to checkout - zero meetings",
     }
-    
+
     # Known buying triggers we've validated
     buying_triggers = [
         "ad spend with zero conversions",
@@ -978,7 +978,7 @@ def messaging_gap_finder():
         "agencies didn't deliver",
         "burning budget on traffic that doesn't convert",
     ]
-    
+
     # Aggregate all competitor angles
     all_competitor_angles = []
     competitor_names = []
@@ -994,61 +994,61 @@ def messaging_gap_finder():
                 "competitor": name,
                 "angle": f"[GAP they admit] {gap}",
             })
-    
+
     # Score each Nebula angle: is anyone saying this?
     scored_gaps = []
     for key, angle_text in nebula_angles.items():
         occupied_by = []
         for ca in all_competitor_angles:
-            # Simple overlap check — does competitor angle touch this?
+            # Simple overlap check - does competitor angle touch this?
             overlap = _angle_overlap(angle_text, ca["angle"])
             if overlap > 0.3:
                 occupied_by.append(ca["competitor"])
-        
+
         # Check against buying triggers
         trigger_overlap = 0
         for trigger in buying_triggers:
             if _angle_overlap(angle_text, trigger) > 0.2:
                 trigger_overlap += 1
-        
+
         gap_strength = "strong" if len(occupied_by) == 0 else "moderate" if len(occupied_by) == 1 else "occupied"
-        
+
         scored_gaps.append({
             "key": key,
             "nebula_angle": angle_text,
             "gap_strength": gap_strength,
             "competitors_saying_it": occupied_by if occupied_by else ["none"],
             "buying_trigger_relevance": trigger_overlap,
-            "recommendation": "Lead with this — uncontested" if gap_strength == "strong" else "Use but differentiate" if gap_strength == "moderate" else "Avoid head-on — counter or reframe",
+            "recommendation": "Lead with this - uncontested" if gap_strength == "strong" else "Use but differentiate" if gap_strength == "moderate" else "Avoid head-on - counter or reframe",
         })
-    
+
     # Sort: strongest gaps first (no competitor saying it + high trigger relevance)
     scored_gaps.sort(key=lambda x: (
         0 if x["gap_strength"] == "strong" else 1 if x["gap_strength"] == "moderate" else 2,
         -x["buying_trigger_relevance"],
     ))
-    
+
     # What competitors ARE saying (occupied territory)
     occupied_territory = [g for g in scored_gaps if g["gap_strength"] == "occupied"]
-    
+
     # Generate specific recommendations
     strong_gaps = [g for g in scored_gaps if g["gap_strength"] == "strong"]
     recommendations = []
-    
+
     for g in strong_gaps[:3]:
         recommendations.append({
             "angle": g["nebula_angle"],
             "where_to_use": "LinkedIn posts, cold email, landing page headline",
             "why_it_hits": f"Competitors don't say this, and it connects to {g['buying_trigger_relevance']} buying trigger(s)",
         })
-    
+
     # Content performance data (if available)
     try:
         perf = content_performance()
         best_angle_type = perf["top_angles"][0]["angle"] if perf["top_angles"] else "unknown"
     except Exception:
         best_angle_type = "unknown"
-    
+
     return {
         "gap_analysis": {
             "competitors_analyzed": competitor_names,
@@ -1069,12 +1069,12 @@ def messaging_gap_finder():
 
 def _angle_overlap(text_a, text_b):
     """Multi-strategy overlap score between two strings (0.0 to 1.0).
-    
+
     Checks: exact word overlap, substring containment, and keyword signals.
     """
     a_lower = text_a.lower()
     b_lower = text_b.lower()
-    
+
     # Strategy 1: exact word overlap
     words_a = set(a_lower.split())
     words_b = set(b_lower.split())
@@ -1087,7 +1087,7 @@ def _angle_overlap(text_a, text_b):
     sig_b = words_b - stopwords
     intersection = sig_a & sig_b
     word_score = len(intersection) / max(len(sig_a), len(sig_b)) if sig_a and sig_b else 0.0
-    
+
     # Strategy 2: keyword signal matching (semantic clusters)
     trigger_keywords = {
         "ad": {"ad", "ads", "spend", "traffic", "budget", "burning", "wasting", "cost"},
@@ -1099,7 +1099,7 @@ def _angle_overlap(text_a, text_b):
         "founder": {"founder", "founders", "startup", "bootstrapped", "diy"},
         "fix": {"fix", "fixes", "implement", "changes", "deliverable", "concrete"},
     }
-    
+
     keyword_score = 0.0
     matches = 0
     for cluster_name, keywords in trigger_keywords.items():
@@ -1107,10 +1107,10 @@ def _angle_overlap(text_a, text_b):
         b_has = any(kw in b_lower for kw in keywords)
         if a_has and b_has:
             matches += 1
-    
+
     if matches > 0:
         keyword_score = matches / len(trigger_keywords) * 0.5  # weight: 0-0.5
-    
+
     # Strategy 3: substring containment (e.g. "ads" in "wasting money on ads")
     # Check if any 4+ char word from one exists in the other
     long_a = {w for w in sig_a if len(w) > 3}
@@ -1121,7 +1121,7 @@ def _angle_overlap(text_a, text_b):
                     sum(1 for w in long_b if any(w in aw for aw in long_a))
         max_possible = len(long_a) + len(long_b)
         containment_score = (contained / max_possible) * 0.3 if max_possible > 0 else 0.0
-    
+
     # Combined score (0.0 - 1.0)
     return min(1.0, word_score + keyword_score + containment_score)
 

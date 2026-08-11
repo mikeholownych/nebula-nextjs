@@ -1,6 +1,6 @@
-# NEVERMINED AUTONOMOUS BUSINESS FRAMEWORK — KEY LEARNINGS FOR NEBULA
+# NEVERMINED AUTONOMOUS BUSINESS FRAMEWORK - KEY LEARNINGS FOR NEBULA
 
-**Source:** https://nevermined.ai/blog/autonomous-business  
+**Source:** https://nevermined.ai/blog/autonomous-business
 **Relevance:** 90% alignment with your B-OS architecture
 
 ---
@@ -9,7 +9,7 @@
 
 Nevermined defines autonomous business evolution:
 
-### Stage 1: Process-Centric (Current — You are here)
+### Stage 1: Process-Centric (Current - You are here)
 - Automating individual tasks and workflows
 - What you're doing: Email blasts → replies → auto-routing
 - Your example: Wave 1-3 campaigns running autonomously
@@ -44,10 +44,10 @@ Nevermined defines autonomous business evolution:
 
 **Evolutionary Stages of AI-Initiated Payments (Visa Model):**
 
-1. **AI Recommends** — AI suggests, humans approve
-2. **AI Initiates** — AI starts checkout, humans confirm per transaction
-3. **AI Transacts** — AI completes low-risk transactions autonomously (← You're here now)
-4. **AI Orchestrates** — AI manages complex workflows with minimal input
+1. **AI Recommends** - AI suggests, humans approve
+2. **AI Initiates** - AI starts checkout, humans confirm per transaction
+3. **AI Transacts** - AI completes low-risk transactions autonomously (← You're here now)
+4. **AI Orchestrates** - AI manages complex workflows with minimal input
 
 ---
 
@@ -57,11 +57,11 @@ Nevermined defines autonomous business evolution:
 
 **Solutions Nevermined recommends:**
 
-1. **Tamper-proof metering** — Every transaction is cryptographically signed, immutable
-2. **Progressive trust models** — Agents earn greater autonomy by proving reliability
-3. **Multi-layered oversight** — Spend limits, velocity checks, whitelisted merchants, anomaly detection
+1. **Tamper-proof metering** - Every transaction is cryptographically signed, immutable
+2. **Progressive trust models** - Agents earn greater autonomy by proving reliability
+3. **Multi-layered oversight** - Spend limits, velocity checks, whitelisted merchants, anomaly detection
 
-**How this applies to you:** 
+**How this applies to you:**
 - Your 6-hour checkpoint system = progressive trust model
 - Your tunnel liveliness monitor = anomaly detection
 - Your pre-campaign validation = spending controls
@@ -72,12 +72,12 @@ Nevermined defines autonomous business evolution:
 
 Nevermined identifies these pricing models for autonomous businesses:
 
-1. **Usage-based pricing** — Per-action (you: $7 per template)
-2. **Outcome-based pricing** — Per-result (you: pay for booked meetings, not emails sent)
-3. **Value-based pricing** — Percentage of ROI generated (you: take 10% of revenue increased)
+1. **Usage-based pricing** - Per-action (you: $7 per template)
+2. **Outcome-based pricing** - Per-result (you: pay for booked meetings, not emails sent)
+3. **Value-based pricing** - Percentage of ROI generated (you: take 10% of revenue increased)
 
-**Your current model:** Usage-based ($7 template, $97 audit)  
-**Next evolution:** Outcome-based (charge only if customer books a call or sells more)  
+**Your current model:** Usage-based ($7 template, $97 audit)
+**Next evolution:** Outcome-based (charge only if customer books a call or sells more)
 **Ultimate:** Value-based (charge $500/mo + 5% of revenue your audit generates)
 
 ---
@@ -91,7 +91,7 @@ Nevermined describes KYA (Know Your Agent) as parallel to KYC/KYB:
 - Enables persistent reputation tracking
 - Enables programmable payment flows
 
-**For your B-OS:** 
+**For your B-OS:**
 - Each agent (Marketing, Finance, Operations) needs separate identity
 - Track reputation: "This agent generated $X in revenue"
 - Enable agent-to-agent payments: Finance pays Marketing commission on revenue
@@ -103,31 +103,31 @@ Nevermined describes KYA (Know Your Agent) as parallel to KYC/KYB:
 ### 1. Observability & Analytics (Critical Gap)
 Nevermined emphasizes: "Operating autonomous systems requires visibility into performance, costs, and opportunities."
 
-**You have:** Email send counts, reply counts  
+**You have:** Email send counts, reply counts
 **You need:** Real-time dashboards showing CAC, LTV, revenue per channel, conversion funnel
 
 ### 2. Ledger-Grade Metering
 "Every usage record is cryptographically signed and immutable"
 
-**You have:** Logs in .json files  
+**You have:** Logs in .json files
 **You need:** Append-only ledger (blockchain optional, but structured immutable log required)
 
 ### 3. Credits-Based Settlement
 "Prepaid units that align price to value"
 
-**You have:** Direct Stripe charges  
+**You have:** Direct Stripe charges
 **You need:** Credit system where customers prepay $100, burn $7-$97 per purchase
 
 ### 4. Dynamic Pricing Engine
 "Support for usage-based, outcome-based, and value-based models"
 
-**You have:** Fixed $7 and $97  
+**You have:** Fixed $7 and $97
 **You need:** Rules that auto-adjust based on conversion rate, time of day, supply/demand
 
 ### 5. Compliance & Audit Trail
 "Automated reconciliation eliminates manual billing processes"
 
-**You have:** Manual checks  
+**You have:** Manual checks
 **You need:** Automated daily reconciliation proving every payment accounted for
 
 ---
@@ -135,8 +135,8 @@ Nevermined emphasizes: "Operating autonomous systems requires visibility into pe
 ## The Real Competitive Advantage: Speed to Autonomy
 
 Nevermined case study: **Valory**
-- **Before:** 6 weeks to deploy payment infrastructure  
-- **After:** 6 hours using Nevermined  
+- **Before:** 6 weeks to deploy payment infrastructure
+- **After:** 6 hours using Nevermined
 - **Result:** Saved $1000s in engineering costs
 
 **For your challenge:**
@@ -159,7 +159,7 @@ Nevermined case study: **Valory**
 
 ### Your Unique Positioning (Revised)
 
-**Not:** "We build autonomous business platforms"  
+**Not:** "We build autonomous business platforms"
 **Better:** "We run autonomous businesses profitably and show you the playbook"
 
 The evidence:
@@ -206,23 +206,23 @@ The evidence:
 | **Monetization** | Fixed pricing | Usage-based → Outcome → Value |
 | **Agent Identity** | Single operator | Multiple agents with reputation |
 
-By end of 72 hours: Stage 1 complete with real proof  
-By end of 30 days: Stage 2 begins (data-driven decisions)  
+By end of 72 hours: Stage 1 complete with real proof
+By end of 30 days: Stage 2 begins (data-driven decisions)
 By end of 90 days: Stage 3 possible (systems designing their own improvements)
 
 ---
 
 ## Messaging Shift (Nevermined Insight)
 
-**Instead of:** "We're building a B-OS like B-OS AI"  
+**Instead of:** "We're building a B-OS like B-OS AI"
 **Say:** "We're the first autonomous business that proves the model works with real revenue. Here's the playbook."
 
 Nevermined's insight: **Only 1% of companies have achieved AI maturity.** The window for competitive advantage is wide open.
 
 You're not competing on platform. You're competing on *proof*.
 
-By June 27, you have 48+ hours of proof.  
-By July 7, you have 2 weeks of proof.  
+By June 27, you have 48+ hours of proof.
+By July 7, you have 2 weeks of proof.
 By August, you have unbreakable proof + happy paying customers.
 
 **That's your moat.**

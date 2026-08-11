@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Runs verify_production_services.sh on a schedule and alerts on Telegram
-when it fails — the gap identified in INC-0004: the verify script already
+when it fails - the gap identified in INC-0004: the verify script already
 catches drift like the obsolete nebula-site.service serving stale prod,
 but nothing ran it automatically, so a 14-hour outage went unnoticed.
 
-Silent when healthy (per repo convention — no alert = no cron delivery).
+Silent when healthy (per repo convention - no alert = no cron delivery).
 Alerts immediately on a new failure, then at most once per COOLDOWN_MINUTES
 while the failure persists (to avoid spamming every 5 minutes during a
 real outage), and sends one recovery notice when it goes back to healthy.

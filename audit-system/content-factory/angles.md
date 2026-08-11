@@ -27,7 +27,7 @@ Output format (one per line):
 ANGLE_01|finding_key|Platform|Hook line
 
 Rules:
-- Each angle self-contained — no Nebula knowledge required
+- Each angle self-contained - no Nebula knowledge required
 - LinkedIn: 150-200 word post expandable from hook
 - TikTok: visual, demonstrable on screen recording
 - X: under 240 chars, no hashtags, no question ending

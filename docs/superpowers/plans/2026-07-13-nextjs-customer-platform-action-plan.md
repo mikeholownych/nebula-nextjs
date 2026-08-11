@@ -69,9 +69,9 @@ Assuming one primary implementation stream with two parallel review/research wor
 
 ## 5. Detailed work-package backlog
 
-### Wave 0 — Stabilize before building
+### Wave 0 - Stabilize before building
 
-#### SEC-01 — Freeze current Stripe defects with isolated tests
+#### SEC-01 - Freeze current Stripe defects with isolated tests
 
 - **Owner:** Implementation worker
 - **Depends on:** None
@@ -84,7 +84,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Failing tests demonstrate all four defects without writing production ledgers or sending messages.
 - **Exit gate:** Reviewers confirm tests are safe, deterministic, and fail for the intended reasons.
 
-#### SEC-02 — Build the verified Stripe ingestion boundary
+#### SEC-02 - Build the verified Stripe ingestion boundary
 
 - **Owner:** Implementation worker
 - **Depends on:** SEC-01, DATA-02 service scaffold
@@ -98,7 +98,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Signature-valid, signature-invalid, expired-timestamp, malformed-body, and wrong-secret tests pass.
 - **Exit gate:** No JSON parsing occurs before signature verification.
 
-#### SEC-03 — Add idempotency, normalized billing, and transactional outbox
+#### SEC-03 - Add idempotency, normalized billing, and transactional outbox
 
 - **Owner:** Implementation worker
 - **Depends on:** SEC-02, DATA-03 database schema
@@ -113,7 +113,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Duplicate, replayed, out-of-order, test/live mismatch, refund, dispute, and retry tests pass.
 - **Exit gate:** Every valid event produces at most one billing mutation and one fulfillment action.
 
-#### SEC-04 — Cut over `/stripe-webhook`
+#### SEC-04 - Cut over `/stripe-webhook`
 
 - **Owner:** Hermes/CEO agent with Mike notified before production routing change
 - **Depends on:** SEC-03, OPS-03 route manifest, OPS-06 staging rollback
@@ -126,7 +126,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Staging and production smoke evidence, event IDs, and one-time fulfillment counts.
 - **Exit gate:** Customer provisioning remains disabled until this package passes.
 
-#### BASE-01 — Pause generators and stabilize the content inventory
+#### BASE-01 - Pause generators and stabilize the content inventory
 
 - **Owner:** Hermes/CEO agent
 - **Depends on:** None
@@ -138,15 +138,15 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Two timestamped inventory files with identical counts and checksums.
 - **Exit gate:** No route manifest is generated while counts are changing.
 
-#### BASE-02 — Freeze public route and SEO behavior
+#### BASE-02 - Freeze public route and SEO behavior
 
 - **Owner:** Implementation worker
 - **Depends on:** BASE-01
-- **Actions:** Capture every reachable path, status, redirect, canonical, robots directive, title, description, H1s, JSON-LD types, OG/Twitter metadata, internal links, assets, analytics events, and Stripe links—including ignored/generated production pages.
+- **Actions:** Capture every reachable path, status, redirect, canonical, robots directive, title, description, H1s, JSON-LD types, OG/Twitter metadata, internal links, assets, analytics events, and Stripe links-including ignored/generated production pages.
 - **Evidence:** `config/public-route-manifest.json` and passing manifest-contract tests.
 - **Exit gate:** Every known current production route has an explicit expected behavior.
 
-#### OPS-01 — Capture live routing and process topology
+#### OPS-01 - Capture live routing and process topology
 
 - **Owner:** Operations implementation worker
 - **Depends on:** None
@@ -158,9 +158,9 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** `docs/architecture/request-routing.md` and machine-readable service-route manifest.
 - **Exit gate:** No unknown proxy layer or route owner remains.
 
-### Wave 1 — Establish buildable foundations
+### Wave 1 - Establish buildable foundations
 
-#### WEB-01 — Create isolated Next.js application
+#### WEB-01 - Create isolated Next.js application
 
 - **Owner:** Frontend implementation worker
 - **Depends on:** BASE-02
@@ -168,7 +168,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** `npm --prefix web run lint`, `typecheck`, `test`, and `build` all exit `0`; standalone server starts and responds.
 - **Exit gate:** No existing route has moved yet.
 
-#### WEB-02 — Prove `.html` compatibility
+#### WEB-02 - Prove `.html` compatibility
 
 - **Owner:** Frontend implementation worker
 - **Depends on:** WEB-01
@@ -176,7 +176,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Unit and Playwright probe tests.
 - **Exit gate:** If URL/canonical preservation fails, stop and revise routing before content migration.
 
-#### WEB-03 — Build shared public primitives
+#### WEB-03 - Build shared public primitives
 
 - **Owner:** Frontend implementation worker
 - **Depends on:** WEB-01
@@ -184,7 +184,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Unit accessibility tests and homepage metadata fixture parity.
 - **Exit gate:** No site redesign is introduced during parity migration.
 
-#### DATA-01 — Complete the identity-provider spike and ADR
+#### DATA-01 - Complete the identity-provider spike and ADR
 
 - **Owner:** Identity implementation worker
 - **Depends on:** None
@@ -193,7 +193,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** `docs/architecture/adr-001-identity-provider.md` with executed spike results.
 - **Exit gate:** Database remains authorization truth; provider organizations and email do not become tenant keys.
 
-#### DATA-02 — Scaffold bounded platform API
+#### DATA-02 - Scaffold bounded platform API
 
 - **Owner:** Backend implementation worker
 - **Depends on:** DATA-01 interface definition
@@ -201,7 +201,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Authentication, key-rotation, issuer, audience, expiry, timeout, CORS, health, and readiness tests.
 - **Exit gate:** Existing `agentic_server.py` is not expanded with customer-platform routes.
 
-#### DATA-03 — Create PostgreSQL tenant schema and RLS
+#### DATA-03 - Create PostgreSQL tenant schema and RLS
 
 - **Owner:** Backend implementation worker
 - **Depends on:** DATA-02
@@ -209,7 +209,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Upgrade/downgrade/upgrade test, schema constraints, RLS isolation tests, and backup/restore test.
 - **Exit gate:** Runtime role cannot bypass RLS or modify schema.
 
-#### OPS-02 — Establish local service supervision
+#### OPS-02 - Establish local service supervision
 
 - **Owner:** Operations implementation worker
 - **Depends on:** WEB-01, DATA-02, OPS-01
@@ -217,9 +217,9 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** `systemd-analyze verify`, port/bind checks, health checks, and restart-limit tests.
 - **Exit gate:** Services recover from a controlled restart without exposing internal ports.
 
-### Wave 2 — Build public content and tenant foundations in parallel
+### Wave 2 - Build public content and tenant foundations in parallel
 
-#### WEB-04 — Migrate case studies
+#### WEB-04 - Migrate case studies
 
 - **Owner:** Frontend/content implementation worker
 - **Depends on:** WEB-02, WEB-03, BASE-02
@@ -227,7 +227,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Source count equals rendered slug count; no duplicate canonical; sampled route/metadata/visual/accessibility parity passes.
 - **Exit gate:** Activate only a case-study canary route, then the family after production smoke.
 
-#### WEB-05 — Migrate repeatable content families
+#### WEB-05 - Migrate repeatable content families
 
 - **Owner:** Frontend/content implementation worker
 - **Depends on:** WEB-04 patterns
@@ -235,7 +235,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Family-level route, metadata, internal-link, accessibility, and visual parity.
 - **Exit gate:** Each family can roll back independently.
 
-#### DATA-04 — Implement authorization matrix
+#### DATA-04 - Implement authorization matrix
 
 - **Owner:** Backend implementation worker
 - **Depends on:** DATA-03
@@ -243,7 +243,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Full role/permission matrix, IDOR matrix, repository-scope assertions, and RLS defense-in-depth tests.
 - **Exit gate:** Foreign resource identifiers consistently return 404.
 
-#### DATA-05 — Add account, membership, invitation, and client APIs
+#### DATA-05 - Add account, membership, invitation, and client APIs
 
 - **Owner:** Backend implementation worker
 - **Depends on:** DATA-04
@@ -251,7 +251,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** API contract snapshot and tests for duplicate, expired, replayed, unauthorized, escalation, pagination, and delivery-failure cases.
 - **Exit gate:** No provider or browser field can raise effective authority.
 
-#### DATA-06 — Reconcile existing customers safely
+#### DATA-06 - Reconcile existing customers safely
 
 - **Owner:** Backend/data implementation worker
 - **Depends on:** DATA-03, DATA-05
@@ -259,7 +259,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Two identical dry-run reports and a reviewed quarantine report.
 - **Exit gate:** Email matching alone cannot create membership.
 
-#### OPS-03 — Generate and validate service-route manifest
+#### OPS-03 - Generate and validate service-route manifest
 
 - **Owner:** Operations implementation worker
 - **Depends on:** OPS-01, WEB-01, DATA-02
@@ -267,9 +267,9 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** `cloudflared tunnel ingress validate` plus representative `tunnel ingress rule` results.
 - **Exit gate:** Every dynamic route reaches Python/platform API; only approved public routes reach Next.
 
-### Wave 3 — Customer application and remaining public interactions
+### Wave 3 - Customer application and remaining public interactions
 
-#### DASH-01 — Release authenticated dashboard shell
+#### DASH-01 - Release authenticated dashboard shell
 
 - **Owner:** Frontend application worker
 - **Depends on:** WEB-01, DATA-05
@@ -277,7 +277,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Anonymous redirect, authorized rendering, unauthorized tenant selection, caching, keyboard, and API-failure tests.
 - **Exit gate:** Internal Nebula tenant only.
 
-#### DASH-02 — Add account and team administration
+#### DASH-02 - Add account and team administration
 
 - **Owner:** Full-stack implementation worker
 - **Depends on:** DASH-01, DATA-05
@@ -285,7 +285,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** End-to-end invite/accept/revoke and role-ceiling tests.
 - **Exit gate:** One internal test organization completes the lifecycle.
 
-#### DASH-03 — Add billing self-service
+#### DASH-03 - Add billing self-service
 
 - **Owner:** Full-stack implementation worker
 - **Depends on:** SEC-04, DASH-01, DATA-04
@@ -293,7 +293,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Stripe test-mode checkout → signed webhook → entitlement → portal sequence.
 - **Exit gate:** A client administrator cannot view agency invoices when the agency is payer.
 
-#### DASH-04 — Add audit and delivery visibility
+#### DASH-04 - Add audit and delivery visibility
 
 - **Owner:** Full-stack implementation worker
 - **Depends on:** DASH-01, DATA-04
@@ -301,7 +301,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Foreign audit ID returns 404; pagination stays tenant-scoped; source freshness is explicit.
 - **Exit gate:** One test customer validates displayed evidence against backend records.
 
-#### WEB-06 — Migrate interactive marketing routes
+#### WEB-06 - Migrate interactive marketing routes
 
 - **Owner:** Frontend implementation worker
 - **Depends on:** WEB-03, OPS-03
@@ -309,7 +309,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Existing Python payload/response contracts, GA4 event names, validation, accessibility, timeout, retry, and duplicate-submit tests pass.
 - **Exit gate:** Python behavior remains unchanged.
 
-#### OPS-04 — Establish CI and immutable artifacts
+#### OPS-04 - Establish CI and immutable artifacts
 
 - **Owner:** Operations implementation worker
 - **Depends on:** WEB-01, DATA-03
@@ -317,9 +317,9 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Clean CI run, artifact SHA-256, SBOM, provenance, no high/critical unapproved findings, and clean working tree after build.
 - **Exit gate:** Production never runs `git pull`, dependency install, or compilation in the live release directory.
 
-### Wave 4 — Agency and white-label releases
+### Wave 4 - Agency and white-label releases
 
-#### AGENCY-01 — Release agency-client administration
+#### AGENCY-01 - Release agency-client administration
 
 - **Owner:** Full-stack implementation worker
 - **Depends on:** DATA-05, DASH-01
@@ -327,7 +327,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Transition, duplicate, role, self-access, and cross-agency IDOR tests.
 - **Exit gate:** One internal agency with two isolated test clients.
 
-#### BRAND-01 — Release safe branding and assets
+#### BRAND-01 - Release safe branding and assets
 
 - **Owner:** Full-stack implementation worker
 - **Depends on:** AGENCY-01
@@ -335,7 +335,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** XSS, CSS injection, MIME spoofing, replay, cross-tenant asset, and contrast tests.
 - **Exit gate:** Arbitrary CSS, HTML, JavaScript, and SVG remain prohibited.
 
-#### BRAND-02 — Release managed subdomains
+#### BRAND-02 - Release managed subdomains
 
 - **Owner:** Full-stack and operations workers
 - **Depends on:** BRAND-01, OPS-03
@@ -343,7 +343,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Two agencies cannot share branding, protected data, assets, or cached HTML.
 - **Exit gate:** Managed subdomains pass staging and one controlled production tenant.
 
-#### BRAND-03 — Complete Cloudflare for SaaS capability gate
+#### BRAND-03 - Complete Cloudflare for SaaS capability gate
 
 - **Owner:** Hermes/CEO agent
 - **Depends on:** BRAND-02
@@ -351,7 +351,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Capability decision record and staging hostname lifecycle.
 - **Exit gate:** Custom domains do not proceed if capability or cost is unresolved.
 
-#### BRAND-04 — Release verified custom domains
+#### BRAND-04 - Release verified custom domains
 
 - **Owner:** Full-stack and operations workers
 - **Depends on:** BRAND-03
@@ -359,7 +359,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Duplicate, wildcard, confusable, private/internal target, timeout, certificate failure, cache isolation, and rollback tests.
 - **Exit gate:** Traffic activates only after ownership and certificate status are both active.
 
-#### OPS-05 — Add observability and freshness
+#### OPS-05 - Add observability and freshness
 
 - **Owner:** Operations implementation worker
 - **Depends on:** OPS-02, DASH-03
@@ -367,9 +367,9 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Intentionally stale data reports `available=true` and `fresh=false`; secrets/PII are absent from logs.
 - **Exit gate:** Numeric alerts are derived from staging measurements and committed before production.
 
-### Wave 5 — Final public cutover and retirement
+### Wave 5 - Final public cutover and retirement
 
-#### WEB-07 — Migrate homepage last
+#### WEB-07 - Migrate homepage last
 
 - **Owner:** Frontend implementation worker
 - **Depends on:** WEB-05, WEB-06
@@ -377,7 +377,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Route, canonical, metadata, schema, visual, accessibility, analytics, Stripe-link, console, and network tests.
 - **Exit gate:** Homepage canary passes before hostname default changes to Next.
 
-#### OPS-06 — Exercise staging rollback
+#### OPS-06 - Exercise staging rollback
 
 - **Owner:** Operations implementation worker
 - **Depends on:** All release candidates
@@ -385,7 +385,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Timestamped rollback evidence bundle with artifact digests and database revisions.
 - **Exit gate:** No production activation without successful staging rollback of the same boundary.
 
-#### OPS-07 — Execute production cutover
+#### OPS-07 - Execute production cutover
 
 - **Owner:** Hermes/CEO agent; Mike approves irreversible final cutover
 - **Depends on:** WEB-07, OPS-04, OPS-05, OPS-06
@@ -393,7 +393,7 @@ Assuming one primary implementation stream with two parallel review/research wor
 - **Evidence:** Post-activation smoke for status, canonical, CTA, analytics, Stripe, accessibility, console/network, health, readiness, and freshness after every boundary.
 - **Exit gate:** Any stop-the-line condition triggers immediate route rollback.
 
-#### RETIRE-01 — Close rollback window and retire legacy paths
+#### RETIRE-01 - Close rollback window and retire legacy paths
 
 - **Owner:** Implementation and operations workers
 - **Depends on:** Stable production evidence and Mike approval

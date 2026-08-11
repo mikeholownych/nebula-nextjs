@@ -1,9 +1,9 @@
-# GSC Gap Analysis — 2026-07-07
+# GSC Gap Analysis - 2026-07-07
 Source: `/tmp/fake_gsc.csv`  |  Rows: 10  |  Gaps: 6  |  CTR leaks: 3
 
 ---
 
-## 🎯 Priority 1 — Keyword Gaps (write these articles first)
+## 🎯 Priority 1 - Keyword Gaps (write these articles first)
 _Queries with 20+ impressions but no dedicated ranking page or avg position > 15._
 
 | Query | Impressions | Position | CTR | Suggested Article Title |
@@ -17,15 +17,15 @@ _Queries with 20+ impressions but no dedicated ranking page or avg position > 15
 
 ---
 
-## ⚡ Priority 2 — Quick Win Positions (11–20)
-_Good impressions, close to page 1 — one new targeted article can steal these._
+## ⚡ Priority 2 - Quick Win Positions (11–20)
+_Good impressions, close to page 1 - one new targeted article can steal these._
 
 | Query | Impressions | Position | CTR | Suggested Article Title |
 |---|---|---|---|---|
 
 ---
 
-## 📉 Priority 3 — CTR Leaks (good position, low clicks)
+## 📉 Priority 3 - CTR Leaks (good position, low clicks)
 _Page is ranking but title/meta isn't compelling. Fix meta description + title tag._
 
 | Query | Impressions | Position | CTR | Fix |
@@ -36,7 +36,7 @@ _Page is ranking but title/meta isn't compelling. Fix meta description + title t
 
 ---
 
-## 🚀 Emerging Queries (Google testing us — act fast)
+## 🚀 Emerging Queries (Google testing us - act fast)
 _High impressions, position > 20, near-zero clicks. Write a dedicated article this week._
 
 | Query | Impressions | Position | Suggested Article Title |

@@ -1,5 +1,5 @@
 /**
- * Signup-Conversion UX Audit — Nebula Components
+ * Signup-Conversion UX Audit - Nebula Components
  * Traces the full funnel S1→S7 and M1→M3 across viewports.
  */
 import { chromium } from 'playwright'
@@ -52,7 +52,7 @@ async function checkKnownDefects(browser) {
     const status = res?.status() ?? 'timeout'
     const body = await page.textContent('body').catch(() => '')
     const ev = await screenshot(page, `known-defect-${route.slice(1)}`)
-    console.log(`  ${route}: HTTP ${status} — body length ${body.length}`)
+    console.log(`  ${route}: HTTP ${status} - body length ${body.length}`)
     if (status === 500 || (typeof status === 'number' && status >= 500)) {
       finding('DEFECT', 'pre', `${route} returns 500`, `HTTP ${status}. Body: "${body.trim().slice(0, 100)}". This route exists and is throwing.`, ev)
     } else if (status === 404) {
@@ -193,7 +193,7 @@ async function traceS2(browser) {
         console.log(`  Test "${tc.label}": navigated to ${page.url().slice(0, 60)} (input accepted)`)
       }
     } catch (e) {
-      console.log(`  Test "${tc.label}": error during test — ${e.message?.slice(0, 60)}`)
+      console.log(`  Test "${tc.label}": error during test - ${e.message?.slice(0, 60)}`)
     }
   }
 
@@ -213,7 +213,7 @@ async function traceS3(browser) {
 
   const input = await page.$('input[type="url"], input[type="text"], input[placeholder*="url" i], input[placeholder*="http" i], input[placeholder*="site" i], input[name="url"]')
   if (!input) {
-    stageResult('S3', false, 'N/A — no input', '', 1)
+    stageResult('S3', false, 'N/A - no input', '', 1)
     await ctx.close()
     return null
   }
@@ -259,7 +259,7 @@ async function traceS3(browser) {
 
   if (!resultAppeared) {
     finding('DEFECT', 'S3', 'K6', `Audit did not complete within 3 minutes (elapsed: ${Math.round(elapsed/1000)}s)`, ev2)
-    stageResult('S3', false, `${Math.round(elapsed/1000)}s — timed out`, ev2, 1)
+    stageResult('S3', false, `${Math.round(elapsed/1000)}s - timed out`, ev2, 1)
   } else {
     if (elapsed > 120000) {
       finding('FRICTION', 'S3', 'K6', `Audit took ${Math.round(elapsed/1000)}s, exceeding the "<2 minutes" promise`, ev2)
@@ -276,7 +276,7 @@ async function traceS4(browser, auditUrl) {
   console.log('\n=== S4: EMAIL GATE ===')
 
   if (!auditUrl) {
-    stageResult('S4', false, 'N/A — S3 did not complete', '', 0)
+    stageResult('S4', false, 'N/A - S3 did not complete', '', 0)
     return null
   }
 
@@ -302,7 +302,7 @@ async function traceS4(browser, auditUrl) {
     // Maybe it's already unlocked (no gate)
     const fullReport = await page.$('[class*="report"], [class*="results"], [class*="findings"]')
     if (fullReport) {
-      console.log('  No email gate found — report appears fully visible')
+      console.log('  No email gate found - report appears fully visible')
       finding('OBSERVATION', 'S4', 'no gate', 'Results page shows full report without email gate (may already be unlocked from prior session)', ev1)
     } else {
       finding('DEFECT', 'S4', 'no gate input', 'Neither email gate input nor full results found on results page', ev1)
@@ -357,7 +357,7 @@ async function traceS5(browser, auditUrl) {
   console.log('\n=== S5: FULL REPORT DELIVERY ===')
 
   if (!auditUrl) {
-    stageResult('S5', false, 'N/A — S4 did not complete', '', 0)
+    stageResult('S5', false, 'N/A - S4 did not complete', '', 0)
     return
   }
 
@@ -381,7 +381,7 @@ async function traceS6(browser, auditUrl) {
   console.log('\n=== S6: KIT CTA ===')
 
   if (!auditUrl) {
-    stageResult('S6', false, 'N/A — no results page', '', 0)
+    stageResult('S6', false, 'N/A - no results page', '', 0)
     return null
   }
 
@@ -422,14 +422,14 @@ async function traceS7(browser, kitUrl) {
   console.log('\n=== S7: PAYMENT FORM ===')
 
   if (!kitUrl) {
-    stageResult('S7', false, 'N/A — no kit URL', '', 0)
+    stageResult('S7', false, 'N/A - no kit URL', '', 0)
     return
   }
 
   const ctx = await browser.newContext({ viewport: VIEWPORTS[2] })
   const page = await ctx.newPage()
 
-  // Navigate to payment — STOP at payment form, do not submit
+  // Navigate to payment - STOP at payment form, do not submit
   await page.goto(kitUrl, { waitUntil: 'domcontentloaded', timeout: 15000 }).catch(() => null)
   await page.waitForTimeout(3000)
 
@@ -480,12 +480,12 @@ async function traceMembership(browser) {
         if (page.url().includes('stripe.com')) {
           stageResult('M1', true, 'Stripe checkout reached', evM2, 0)
           stageResult('M2', true, 'Stripe handles auth', evM2, 0)
-          stageResult('M3', false, 'not tested — payment not submitted', evM2, 0)
+          stageResult('M3', false, 'not tested - payment not submitted', evM2, 0)
         } else {
           stageResult('M1', true, `Reached ${page.url().slice(0, 60)}`, evM2, 0)
         }
       } else {
-        // Internal link — click and follow
+        // Internal link - click and follow
         await firstTierLink.click()
         await page.waitForTimeout(3000)
         const evM2 = await screenshot(page, 'm2-tier-internal')
@@ -557,7 +557,7 @@ async function checkAccessibility(browser) {
     finding('FRICTION', 'a11y', 'A4', `${unlabeledInputs.length} inputs without programmatic label: ${JSON.stringify(unlabeledInputs)}`, '')
   }
 
-  // A5: Identity at gate — check for company name, contact, privacy near email input
+  // A5: Identity at gate - check for company name, contact, privacy near email input
   await page.goto(`${BASE}/audit`, { waitUntil: 'domcontentloaded' })
   await page.waitForTimeout(2000)
 

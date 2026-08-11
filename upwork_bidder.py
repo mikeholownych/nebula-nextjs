@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Upwork Auto-Bidder — Nebula Components
+Upwork Auto-Bidder - Nebula Components
 Scrape → qualify → generate proposal → queue for review or auto-submit
 
 Flow:
@@ -39,9 +39,9 @@ DIGEST_TO    = "mike.holownych@aisyndicate.io"
 
 MAX_ITEMS_PER_SEARCH = 15
 POLL_INTERVAL = 5
-POLL_MAX = 25   # seconds — quick sweep; stale runs collected next tick
+POLL_MAX = 25   # seconds - quick sweep; stale runs collected next tick
 
-# ICP qualification — title must contain at least one (desc match no longer sufficient)
+# ICP qualification - title must contain at least one (desc match no longer sufficient)
 TITLE_MUST_MATCH = [
     "landing page", "conversion rate", "cro", "conversion optimiz",
     "squeeze page", "sales page", "funnel optim", "a/b test",
@@ -53,16 +53,16 @@ DESC_BOOST_KEYWORDS = [
     "improve conversion", "google ads", "facebook ads", "meta ads",
     "landing page audit", "cro audit", "heatmap", "hotjar",
 ]
-# Negative title keywords — auto-reject even if title matches
+# Negative title keywords - auto-reject even if title matches
 TITLE_REJECT = [
     "lead gen", "lead generation", "scraper", "scraping", "data collect",
     "data entry", "database", "web research", "researcher", "amazon",
     "linkedin", "instagram", "social media", "healthcare", "mortgage",
     "real estate", "e-commerce product", "shopify product",
 ]
-MIN_SCORE = 80  # raised from implicit 50 — only strong fits
+MIN_SCORE = 80  # raised from implicit 50 - only strong fits
 
-# Search queries — tighter, conversion-specific
+# Search queries - tighter, conversion-specific
 SEARCH_QUERIES = [
     "landing page not converting fix",
     "improve landing page conversion rate ads",
@@ -71,17 +71,17 @@ SEARCH_QUERIES = [
     "landing page split test A/B optimization",
 ]
 
-# Proposal template — personalized per job
+# Proposal template - personalized per job
 PROPOSAL_TEMPLATE = """\
 Hi {client_name},
 
-I reviewed your job post — {title_summary}.
+I reviewed your job post - {title_summary}.
 
 I run Nebula Components. We do one thing: find the 1–3 things killing a landing page's conversion rate and fix them.
 
 What I'd deliver for this project:
 - 5-dimension audit scored 1–10 (Headline, CTA, Social Proof, Mobile, Speed)
-- Written root-cause analysis — not a report dump, a clear "here's the leak"
+- Written root-cause analysis - not a report dump, a clear "here's the leak"
 - Implementation-ready fixes: rewritten copy, CTA placement, trust section
 - Delivered within 24h of kickoff
 
@@ -89,7 +89,7 @@ What I'd deliver for this project:
 
 I don't do calls before I've seen the page. Send me the URL and I'll come back with a specific observation before we even discuss next steps.
 
-— Mike
+- Mike
 Nebula Components | nebulacomponents.com
 """
 
@@ -205,13 +205,13 @@ def collect_completed_runs(token: str) -> list:
 
     # Anything still running after deadline stays for next tick
     if pending:
-        log.info(f"  {len(pending)} runs still in flight — persisting for next tick")
+        log.info(f"  {len(pending)} runs still in flight - persisting for next tick")
     save_pending(pending)
     return results
 
 
 def run_apify_searches(token: str, queries: list[str]) -> None:
-    """Fire all searches in parallel — results collected next tick."""
+    """Fire all searches in parallel - results collected next tick."""
     log.info(f"Firing {len(queries)} Apify runs (results collected next tick)...")
     pending = load_pending()
     existing_queries = {r["query"] for r in pending}
@@ -301,13 +301,13 @@ def generate_proposal(job: dict, score: int) -> str:
         if nums:
             b = max(int(n) for n in nums)
             if b < 97:
-                budget_response = f"My fixed rate for this scope is $147 — covers the full audit + implementation-ready fix pack."
+                budget_response = f"My fixed rate for this scope is $147 - covers the full audit + implementation-ready fix pack."
             else:
                 budget_response = f"Happy to work within your budget. My standard rate for a full audit + fix pack is $147–$197 depending on page complexity."
         else:
             budget_response = "My rate for a full audit + implementation fix pack starts at $147."
     else:
-        budget_response = "I work fixed-price on this type of project — $147 for a full audit + implementation fix pack, delivered in 24h."
+        budget_response = "I work fixed-price on this type of project - $147 for a full audit + implementation fix pack, delivered in 24h."
 
     # Summarize title
     title_summary = title.lower().replace("landing page", "the landing page").strip()
@@ -329,7 +329,7 @@ def send_digest(proposals: list) -> bool:
 
     top = sorted(proposals, key=lambda x: x["score"], reverse=True)[:5]
 
-    lines = [f"## Upwork Proposals Queue — {datetime.now().strftime('%Y-%m-%d')}\n"]
+    lines = [f"## Upwork Proposals Queue - {datetime.now().strftime('%Y-%m-%d')}\n"]
     lines.append(f"**{len(proposals)} new proposals queued. Top {len(top)} shown.**\n")
     for i, p in enumerate(top, 1):
         lines.append(f"### {i}. {p['title']}")
@@ -348,7 +348,7 @@ def send_digest(proposals: list) -> bool:
         ).hexdigest()[:20]
         result = AgentMailClient(inbox=INBOX).send_internal(
             to=[DIGEST_TO],
-            subject=f"[Upwork] {len(proposals)} proposals ready — {datetime.now().strftime('%b %d')}",
+            subject=f"[Upwork] {len(proposals)} proposals ready - {datetime.now().strftime('%b %d')}",
             text=body,
             client_id=f"upwork-digest:{digest_key}",
         )
@@ -440,7 +440,7 @@ def main():
         queue.append(entry)
         new_proposals.append(entry)
 
-    log.info(f"Results — qualified: {qualified}, skipped (seen): {skipped_seen}, skipped (off-ICP): {skipped_icp}")
+    log.info(f"Results - qualified: {qualified}, skipped (seen): {skipped_seen}, skipped (off-ICP): {skipped_icp}")
     log.info(f"New proposals queued: {len(new_proposals)}")
 
     save_seen(seen)

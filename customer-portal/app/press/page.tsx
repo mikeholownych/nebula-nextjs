@@ -124,7 +124,7 @@ export default function PressPage() {
               <div className="space-y-3">
                 <p className="font-mono text-[10px] uppercase tracking-widest text-fg-muted/60">Positioning</p>
                 <p className="text-sm text-fg-muted leading-relaxed">
-                  Nebula Components diagnoses why landing pages leak conversions — then fixes them.
+                  Nebula Components diagnoses why landing pages leak conversions - then fixes them.
                   The platform checks 9 conversion signals in under 90 seconds and delivers a
                   scored report with specific remediation steps. No retainer, no A/B-test theater,
                   no month-long timelines.
@@ -259,7 +259,7 @@ export default function PressPage() {
               </div>
               <p className="text-sm text-fg-muted leading-relaxed">
                 Former growth engineer. Built and scaled paid acquisition systems before realizing
-                the entire industry optimizes the wrong layer — ad spend and bidding — while the
+                the entire industry optimizes the wrong layer - ad spend and bidding - while the
                 landing page (the thing that actually converts) is treated as a static artifact.
                 Nebula exists to fix that structural failure.
               </p>
@@ -309,17 +309,17 @@ export default function PressPage() {
             <CopyPanel
               label="Short boilerplate"
               filename="boilerplate-short.txt"
-              value="Nebula Components is a conversion diagnostics platform that audits landing pages against 9 evidence-based signals and delivers scored reports with specific fixes. $97 One-Leak Repair Sprint — one tailored fix, customer-implemented, no retainer."
+              value="Nebula Components is a conversion diagnostics platform that audits landing pages against 9 evidence-based signals and delivers scored reports with specific fixes. $97 One-Leak Repair Sprint - one tailored fix, customer-implemented, no retainer."
             />
             <CopyPanel
               label="Medium boilerplate"
               filename="boilerplate-medium.txt"
-              value={`Nebula Components diagnoses why landing pages leak conversions. The platform's AI-powered audit checks 9 conversion signals — from message match and trust density to mobile CTA accessibility — in under 90 seconds. Each audit produces a scored report with specific remediation steps.\n\nThe $97 One-Leak Repair Sprint delivers a tailored implementation guide for the highest-confidence failing signal, designed for the customer or their developer to execute. No retainer, no A/B-test theater, no month-long timelines. A cross-industry study of 86 pages found an average score of 62.7/100, with zero pages earning an A.`}
+              value={`Nebula Components diagnoses why landing pages leak conversions. The platform's AI-powered audit checks 9 conversion signals - from message match and trust density to mobile CTA accessibility - in under 90 seconds. Each audit produces a scored report with specific remediation steps.\n\nThe $97 One-Leak Repair Sprint delivers a tailored implementation guide for the highest-confidence failing signal, designed for the customer or their developer to execute. No retainer, no A/B-test theater, no month-long timelines. A cross-industry study of 86 pages found an average score of 62.7/100, with zero pages earning an A.`}
             />
             <CopyPanel
               label="Long boilerplate"
               filename="boilerplate-long.txt"
-              value={`Nebula Components is a conversion diagnostics platform for founders and operators burning ad spend on underperforming landing pages. The platform audits pages against 9 evidence-based conversion signals — message match, above-fold content, trust signal density, CTA hierarchy, social proof freshness, mobile CTA accessibility, ad signal continuity, objection handling, and load speed — delivering a scored report in under 90 seconds.\n\nThe company's research arm has published findings from automated audits of 86+ landing pages running paid traffic across ecommerce, B2B SaaS, and coaching/consulting verticals. Key finding: the average page scores 62.7/100 (Grade C), and zero pages earned an A. The two most common failures — above-fold content (100%) and ad signal continuity (99%) — are invisible to traditional speed-focused tools like PageSpeed Insights.\n\nNebula's commercial model is a one-time $97 One-Leak Repair Sprint: a tailored implementation guide for the highest-confidence failing signal, written for the customer or their developer to execute. The company positions against the retainer-first CRO agency model, arguing that agencies sell ongoing optimization before completing basic diagnosis — "A/B testing on pages without enough traffic for statistical significance, 90-day timelines for problems fixable in a week."`}
+              value={`Nebula Components is a conversion diagnostics platform for founders and operators burning ad spend on underperforming landing pages. The platform audits pages against 9 evidence-based conversion signals - message match, above-fold content, trust signal density, CTA hierarchy, social proof freshness, mobile CTA accessibility, ad signal continuity, objection handling, and load speed - delivering a scored report in under 90 seconds.\n\nThe company's research arm has published findings from automated audits of 86+ landing pages running paid traffic across ecommerce, B2B SaaS, and coaching/consulting verticals. Key finding: the average page scores 62.7/100 (Grade C), and zero pages earned an A. The two most common failures - above-fold content (100%) and ad signal continuity (99%) - are invisible to traditional speed-focused tools like PageSpeed Insights.\n\nNebula's commercial model is a one-time $97 One-Leak Repair Sprint: a tailored implementation guide for the highest-confidence failing signal, written for the customer or their developer to execute. The company positions against the retainer-first CRO agency model, arguing that agencies sell ongoing optimization before completing basic diagnosis - "A/B testing on pages without enough traffic for statistical significance, 90-day timelines for problems fixable in a week."`}
             />
           </div>
         </div>

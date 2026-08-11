@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""YouTube settings audit — encodes Adam Ivy's '9 Settings That Kill Small
+"""YouTube settings audit - encodes Adam Ivy's '9 Settings That Kill Small
 Channels' (CghjIJ3wdZA, 404K views) as an automated + manual checklist.
 
 Auto-checked via YouTube Data API:
@@ -7,15 +7,15 @@ Auto-checked via YouTube Data API:
   2. privacyStatus (should be public for published, unlisted default for new)
   3. embeddable == True
   4. license == 'youtube'
-  5. notifySubscribers — WRITE-ONLY, cannot read via API (Studio-only)
+  5. notifySubscribers - WRITE-ONLY, cannot read via API (Studio-only)
 
-Manual (Studio-only toggles — reported, not automatable):
+Manual (Studio-only toggles - reported, not automatable):
   - Upload defaults → UNLISTED (protect against accidental publishing)
   - Blocked words list + 'block links from new commenters' (spam)
   - Featured places OFF (privacy/safety)
   - Automatic chapters OFF → manual chapter titles (SEO)
   - 'Publish to subscriptions feed' checkbox per-video (notifySubscribers)
-  - End screens on long-form (session time) — N/A under 2 min
+  - End screens on long-form (session time) - N/A under 2 min
 
 Usage:
   python3 yt_channel/settings_audit.py [--json]
@@ -69,7 +69,7 @@ def audit() -> dict:
     issues = []
     for v in videos:
         if v["made_for_kids"]:
-            issues.append(f"madeForKids=True on {v['title']} — COPPA fine risk, comments disabled")
+            issues.append(f"madeForKids=True on {v['title']} - COPPA fine risk, comments disabled")
         if v["privacy"] not in ("public", "unlisted"):
             issues.append(f"privacy={v['privacy']} on {v['title']}")
         if not v["embeddable"]:
@@ -95,14 +95,14 @@ def audit() -> dict:
             "auto_chapters_off": "Studio → Settings → Upload defaults → Advanced: disable auto chapters; write manual SEO chapters",
             "end_screens": "Editor → End screen: add video/playlist/subscribe (N/A for <2min Shorts)",
             "player_for_education_off": ("Studio → Settings → Channel → Advanced: 'Allow video to be "
-                                         "played in Player for Education' must stay OFF — Shane Hummus "
+                                         "played in Player for Education' must stay OFF - Shane Hummus "
                                          "(N45nMvSOgFQ): his brother enabled it and his AdSense dropped "
                                          "to ~$0; education-player plays are not ad-monetized."),
             "community_tab_post": ("Community tab: post the new video link + question right after "
-                                   "upload (no API — manual; 'boost on new channels' per Shane "
+                                   "upload (no API - manual; 'boost on new channels' per Shane "
                                    "N45nMvSOgFQ tip #2)"),
             "pinned_comment": ("Comments → pin our self-comment (link + question) on the newest "
-                               "video — API posts the comment, PIN is Studio-only (10s, per Shane "
+                               "video - API posts the comment, PIN is Studio-only (10s, per Shane "
                                "N45nMvSOgFQ tip #6)"),
         },
     }
@@ -128,7 +128,7 @@ def main():
 
     print("\n=== YouTube Settings Audit (Adam Ivy 9-settings) ===")
     print(f"Videos: {report['video_count']} | Subs: {report['channel'].get('subscriberCount','?')}")
-    print("\n— AUTO-CHECKED (API) —")
+    print("\n- AUTO-CHECKED (API) -")
     for k, v in report["auto_checks"].items():
         if k != "issues":
             print(f"  {'✅' if v else '❌'} {k}: {v}")
@@ -137,8 +137,8 @@ def main():
         for i in report["auto_checks"]["issues"]:
             print(f"    ❌ {i}")
     else:
-        print("  ✅ No auto-check issues — madeForKids all False, privacy OK, embeddable all True")
-    print("\n— MANUAL (Studio-only) —")
+        print("  ✅ No auto-check issues - madeForKids all False, privacy OK, embeddable all True")
+    print("\n- MANUAL (Studio-only) -")
     for k, v in report["manual_checks"].items():
         print(f"  ☐ {k}: {v}")
     print(f"\nFull report: {out}")

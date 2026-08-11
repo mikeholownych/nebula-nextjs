@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-IndexNow Submission Helper — Submits core site URLs to IndexNow API (Bing / Yandex)
+IndexNow Submission Helper - Submits core site URLs to IndexNow API (Bing / Yandex)
 """
 
 import sys

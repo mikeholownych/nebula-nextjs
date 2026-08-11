@@ -1,5 +1,5 @@
 """
-page_evidence.py — Element-level screenshot crops for video teardowns.
+page_evidence.py - Element-level screenshot crops for video teardowns.
 
 Captures specific DOM elements from the audited page and annotates them
 to show exactly what the finding is referring to. Each crop becomes a
@@ -233,7 +233,7 @@ async def capture_finding_evidence(
                     img = Image.open(raw).convert("RGB")
                     # Scale to fit 1280×720 if larger, or pad if smaller
                     if img.width < 200 or img.height < 60:
-                        # Element too small — use viewport with highlight
+                        # Element too small - use viewport with highlight
                         break
                     # Resize to 1280×720 preserving aspect
                     ratio = min(DESKTOP_W / img.width, DESKTOP_H / img.height)

@@ -15,14 +15,14 @@ Found during a full repo security review, not by a live exploit report. `webhook
 ## Impact
 
 Any request reaching `POST /webhook/agentmail` (fronted by the Cloudflare tunnel) could forge events with no authentication at all:
-- A forged `message.received` event with a "how do I pay" style body would make the business's real AgentMail inbox send the live $97 checkout link to an arbitrary attacker-chosen address — an open send relay from a trusted sending identity.
+- A forged `message.received` event with a "how do I pay" style body would make the business's real AgentMail inbox send the live $97 checkout link to an arbitrary attacker-chosen address - an open send relay from a trusted sending identity.
 - A forged `message.complained` event would mark an arbitrary email address as bounced/blocklisted, letting an attacker poison the lead pipeline or permanently suppress a real prospect's address.
 
-No evidence was found that this was actually exploited — found via code review, not incident report. Treated as High rather than Critical because exploitation requires knowing/guessing the webhook URL and there's no sign of scanning traffic in the logs reviewed.
+No evidence was found that this was actually exploited - found via code review, not incident report. Treated as High rather than Critical because exploitation requires knowing/guessing the webhook URL and there's no sign of scanning traffic in the logs reviewed.
 
 ## Root Cause
 
-The signature check was written as "verify if present" instead of "require and verify." Contrast with `_handle_stripe` in the same file, which correctly rejects with 400 whenever the `Stripe-Signature` header is absent — the two handlers were inconsistent, and the AgentMail one was the outlier.
+The signature check was written as "verify if present" instead of "require and verify." Contrast with `_handle_stripe` in the same file, which correctly rejects with 400 whenever the `Stripe-Signature` header is absent - the two handlers were inconsistent, and the AgentMail one was the outlier.
 
 ## Evidence
 
@@ -54,11 +54,11 @@ Manual code inspection confirms the new code path rejects before any event proce
 
 ## Prevention
 
-No automated test currently locks this in — a genuine gap. A follow-up should add a unit test asserting `_handle_agentmail` returns 401 for a request with a valid body but no signature header, so this can't silently regress.
+No automated test currently locks this in - a genuine gap. A follow-up should add a unit test asserting `_handle_agentmail` returns 401 for a request with a valid body but no signature header, so this can't silently regress.
 
 ## Rollback
 
-Revert `webhook_server.py` to restore the `if sig_header:` guard (not recommended — this reopens the vulnerability).
+Revert `webhook_server.py` to restore the `if sig_header:` guard (not recommended - this reopens the vulnerability).
 
 ## Audit Trail
 

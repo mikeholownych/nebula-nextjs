@@ -1,4 +1,4 @@
-# Parallel Outreach Supervised Proof — 2026-07-23
+# Parallel Outreach Supervised Proof - 2026-07-23
 
 ## Verdict
 

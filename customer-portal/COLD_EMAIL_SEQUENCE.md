@@ -1,7 +1,7 @@
-# Nebula Components — 7-Trigger Cold Email Sequence
+# Nebula Components - 7-Trigger Cold Email Sequence
 
-**Target ICP:** Founders who spent $10k+ on ads with zero conversions  
-**Buying Trigger:** Active bleeding → Desperate for diagnosis  
+**Target ICP:** Founders who spent $10k+ on ads with zero conversions
+**Buying Trigger:** Active bleeding → Desperate for diagnosis
 **Offer:** Free landing page audit → $97 One-Leak Repair Sprint
 
 ---
@@ -27,17 +27,17 @@
 ```
 {FirstName},
 
-I noticed you're running paid traffic to {Company}. The targeting looks solid — but something's breaking between click and conversion.
+I noticed you're running paid traffic to {Company}. The targeting looks solid - but something's breaking between click and conversion.
 
 We've diagnosed what we call the "proof gap" on 47 landing pages this quarter. 94% of founders missing social proof above the fold. The ones who fix it see conversion lift in 11 days average.
 
-Your page triggered the same pattern. I'm not asking you to buy anything — I want to give you the diagnosis free.
+Your page triggered the same pattern. I'm not asking you to buy anything - I want to give you the diagnosis free.
 
 Paste your URL here: nebulacomponents.com
 
 Takes 60 seconds. You'll see exactly what's leaking and which fix pays back fastest.
 
-— Mike H
+- Mike H
 Founder, Nebula Components
 
 P.S. Last week: SaaS founder burned $15k on Meta with zero conversions. Audit showed the problem in 4 minutes. Fixed in 2 hours. Now at 23 sales/week.
@@ -62,7 +62,7 @@ P.S. Last week: SaaS founder burned $15k on Meta with zero conversions. Audit sh
 
 Quick follow-up on yesterday's email.
 
-The SaaS founder I mentioned — $15k burned, zero conversions — thought the problem was their targeting. It wasn't.
+The SaaS founder I mentioned - $15k burned, zero conversions - thought the problem was their targeting. It wasn't.
 
 The audit showed 3 leaks:
 1. Headline didn't match the ad promise (trust gap)
@@ -75,15 +75,15 @@ The diagnosis is free. The fix is $147. The ROI is measurable.
 
 Paste your URL: nebulacomponents.com
 
-— Mike H
+- Mike H
 
-P.S. They didn't hire us to fix it. They used the audit and did it themselves. That's the point — you should be able to see the problem clearly enough to solve it yourself.
+P.S. They didn't hire us to fix it. They used the audit and did it themselves. That's the point - you should be able to see the problem clearly enough to solve it yourself.
 ```
 
 **Triggers applied:**
 - ✅ Social Proof: Named problem, specific outcome
-- ✅ Curiosity Gap: "3 leaks" — which ones?
-- ✅ Ethics: "They didn't hire us" — builds trust
+- ✅ Curiosity Gap: "3 leaks" - which ones?
+- ✅ Ethics: "They didn't hire us" - builds trust
 - ✅ Authority: Specific diagnosis framework
 
 ---
@@ -101,13 +101,13 @@ If your retargeting pixel is firing but conversions aren't happening, you're pay
 
 That's not a targeting problem. That's a landing page problem.
 
-The visitors who didn't convert the first time? They're seeing the same page that didn't convince them. Retargeting amplifies failure — unless you fix the page first.
+The visitors who didn't convert the first time? They're seeing the same page that didn't convince them. Retargeting amplifies failure - unless you fix the page first.
 
 Run the audit before you spend another dollar on retargeting:
 
 nebulacomponents.com
 
-— Mike H
+- Mike H
 
 P.S. One founder we audited cut retargeting spend by 80% after fixing the page. Conversions went up. The page was the leak all along.
 ```
@@ -131,17 +131,17 @@ P.S. One founder we audited cut retargeting spend by 80% after fixing the page. 
 
 Before you run your next ad, run this 60-second check:
 
-1. □ Headline mirrors the exact ad promise — word for word
-2. □ Proof appears BEFORE the CTA — logos, numbers, testimonial
-3. □ One primary action — not three "learn more" buttons
-4. □ Mobile loads in under 3 seconds — check on 4G, not WiFi
+1. □ Headline mirrors the exact ad promise - word for word
+2. □ Proof appears BEFORE the CTA - logos, numbers, testimonial
+3. □ One primary action - not three "learn more" buttons
+4. □ Mobile loads in under 3 seconds - check on 4G, not WiFi
 5. □ Objections answered before the price/checkout
 
 If any of these fail, you're paying for clicks that won't convert.
 
 No pitch. No ask. Just a framework that's worked for 47 founders this quarter.
 
-— Mike H
+- Mike H
 
 P.S. If you want to see how your page scores (free), nebulacomponents.com
 ```
@@ -169,7 +169,7 @@ If your ad spend is over $10k and you have zero conversions, the problem isn't y
 
 I'm not going to keep emailing about this because I respect your time.
 
-But if you ever want to see exactly what's broken — for free, no follow-up pressure — the audit is always available:
+But if you ever want to see exactly what's broken - for free, no follow-up pressure - the audit is always available:
 
 nebulacomponents.com
 
@@ -177,7 +177,7 @@ Paste your URL. 60 seconds. You'll see the leak.
 
 If you fix it yourself, great. If you want our $97 One-Leak Repair Sprint, that's there too. But the diagnosis is free either way.
 
-— Mike H
+- Mike H
 
 Founder, Nebula Components
 ```
@@ -196,7 +196,7 @@ Founder, Nebula Components
 ```
 Mike H from Nebula
 ```
-NOT "Nebula Components" — human names outperform company names.
+NOT "Nebula Components" - human names outperform company names.
 
 ### Domain Warm-up
 - Send from a warmed domain (not a fresh spam trap)
@@ -251,7 +251,7 @@ Before sending each email, ask:
 
 > "Would I be comfortable if {FirstName} could see exactly how and why I wrote this?"
 
-If yes → Send  
+If yes → Send
 If no → Revise
 
 ---

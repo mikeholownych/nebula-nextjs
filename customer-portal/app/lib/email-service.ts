@@ -23,11 +23,11 @@ export function getEmailTemplate(emailNumber: number, firstName: string = 'there
       subject: 'Spent $10k on ads. No sales?',
       body: `${firstName},
 
-I noticed you're running paid traffic to your site. The targeting looks solid — but something's breaking between click and conversion.
+I noticed you're running paid traffic to your site. The targeting looks solid - but something's breaking between click and conversion.
 
 We've run our audit on 54 real landing pages this quarter. The most common leak: social proof missing above the fold. We publish the full pass standards and failure rates so you can judge the claim yourself: https://nebulacomponents.com/benchmarks
 
-Your page triggered the same pattern. I'm not asking you to buy anything — I want to give you the diagnosis free.
+Your page triggered the same pattern. I'm not asking you to buy anything - I want to give you the diagnosis free.
 
 Paste your URL here: https://nebulacomponents.com
 
@@ -53,7 +53,7 @@ The diagnosis is free. The fix is $97. The ROI is measurable.
 
 Paste your URL: https://nebulacomponents.com
 
-— Mike H
+- Mike H
 
 P.S. You don't need us to implement anything. The audit shows the problem clearly enough to solve yourself.`
     },
@@ -65,13 +65,13 @@ If your retargeting pixel is firing but conversions aren't happening, you're pay
 
 That's not a targeting problem. That's a landing page problem.
 
-The visitors who didn't convert the first time? They're seeing the same page that didn't convince them. Retargeting amplifies failure — unless you fix the page first.
+The visitors who didn't convert the first time? They're seeing the same page that didn't convince them. Retargeting amplifies failure - unless you fix the page first.
 
 Run the audit before you spend another dollar on retargeting:
 
 https://nebulacomponents.com
 
-— Mike H
+- Mike H
 
 P.S. Retargeting spend is wasted until the page converts. Run the audit first, then decide.`
     },
@@ -81,17 +81,17 @@ P.S. Retargeting spend is wasted until the page converts. Run the audit first, t
 
 Before you run your next ad, run this 60-second check:
 
-1. □ Headline mirrors the exact ad promise — word for word
-2. □ Proof appears BEFORE the CTA — logos, numbers, testimonial
-3. □ One primary action — not three "learn more" buttons
-4. □ Mobile loads in under 3 seconds — check on 4G, not WiFi
+1. □ Headline mirrors the exact ad promise - word for word
+2. □ Proof appears BEFORE the CTA - logos, numbers, testimonial
+3. □ One primary action - not three "learn more" buttons
+4. □ Mobile loads in under 3 seconds - check on 4G, not WiFi
 5. □ Objections answered before the price/checkout
 
 If any of these fail, you're paying for clicks that won't convert.
 
 No pitch. No ask. Just the checklist our audits are built around.
 
-— Mike H
+- Mike H
 
 P.S. If you want to see how your page scores (free), https://nebulacomponents.com`
     },
@@ -105,7 +105,7 @@ If your ad spend is over $10k and you have zero conversions, the problem isn't y
 
 I'm not going to keep emailing about this because I respect your time.
 
-But if you ever want to see exactly what's broken — for free, no follow-up pressure — the audit is always available:
+But if you ever want to see exactly what's broken - for free, no follow-up pressure - the audit is always available:
 
 https://nebulacomponents.com
 
@@ -119,7 +119,7 @@ Founder, Nebula Components
 
 ---
 
-Nebula Components — https://nebulacomponents.com
+Nebula Components - https://nebulacomponents.com
 Unsubscribe: https://nebulacomponents.com/unsubscribe?email=${firstName.toLowerCase()}%40example.com`
     }
   };

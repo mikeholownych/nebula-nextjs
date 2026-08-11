@@ -1,7 +1,7 @@
-# Nebula Content System — Complete Integration
+# Nebula Content System - Complete Integration
 
-**Status:** ✅ Operational  
-**Created:** 2026-07-18  
+**Status:** ✅ Operational
+**Created:** 2026-07-18
 **Source:** "The In-House Content System" + Nebula track infrastructure
 
 ---
@@ -147,14 +147,14 @@ Friday (1 hr 15 min):
 
 ## Hook Categories (from library)
 
-1. **Problem revelation** — "Your [X] is [Y]. Most founders don't know..."
-2. **Audit finding** — "I audited [N] pages. [X]% had the same problem."
-3. **Cost** — "You spent [amount] on [X]. Here's where it goes."
-4. **Counter-intuitive** — "Most founders [X]. They're making it worse."
-5. **Teardown** — "I audited [URL]. Here's the [N] things wrong."
-6. **Proof** — "[N] founders made [change]. [result]."
-7. **Narrator** — "I talked to [N] founders. [X]% had the same leak."
-8. **Direct offer** — "I'll audit your landing page for free."
+1. **Problem revelation** - "Your [X] is [Y]. Most founders don't know..."
+2. **Audit finding** - "I audited [N] pages. [X]% had the same problem."
+3. **Cost** - "You spent [amount] on [X]. Here's where it goes."
+4. **Counter-intuitive** - "Most founders [X]. They're making it worse."
+5. **Teardown** - "I audited [URL]. Here's the [N] things wrong."
+6. **Proof** - "[N] founders made [change]. [result]."
+7. **Narrator** - "I talked to [N] founders. [X]% had the same leak."
+8. **Direct offer** - "I'll audit your landing page for free."
 
 Plus 4 **track-specific hook sections:**
 - Headline clarity (20 hooks)
@@ -267,7 +267,7 @@ Audit findings ──→
 
 ## Total Build
 
-**Files:** 9 new  
+**Files:** 9 new
 **Lines:** ~50,000+ (docs + scripts)
 
 **Combined with existing:**

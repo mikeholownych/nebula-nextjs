@@ -94,7 +94,7 @@ describe('GET /api/badge/[id] domain-locked rendering', () => {
     expect(body).not.toContain('Unverified')
   })
 
-  it('never renders raw url content — only numbers are interpolated', async () => {
+  it('never renders raw url content - only numbers are interpolated', async () => {
     jest.spyOn(global, 'fetch').mockResolvedValueOnce(
       Response.json({ ...badgeData, url: 'https://example.com/<script>alert(1)</script>' })
     )

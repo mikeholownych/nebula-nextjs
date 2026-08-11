@@ -17,7 +17,7 @@ export async function GET(
 ) {
   const { id: auditId } = await params
 
-  // Resolve requester identity — either workspace session or unlock cookie
+  // Resolve requester identity - either workspace session or unlock cookie
   let email: string | null = null
   let planLabel: string | null = null
 
@@ -45,7 +45,7 @@ export async function GET(
       if (sub.rows.length > 0) {
         planLabel = sub.rows[0].plan.charAt(0).toUpperCase() + sub.rows[0].plan.slice(1)
       } else {
-        // Authenticated but no subscription — check if they own the audit
+        // Authenticated but no subscription - check if they own the audit
         const auditRow = await pool.query(
           `SELECT email FROM audits WHERE id = $1 LIMIT 1`,
           [auditId],
@@ -66,7 +66,7 @@ export async function GET(
       return NextResponse.json({ error: 'Service unavailable' }, { status: 503 })
     }
   } else {
-    // No workspace session — check unlock cookie using the same token format as unlock/route.ts
+    // No workspace session - check unlock cookie using the same token format as unlock/route.ts
     const unlockToken = request.cookies.get('nebula_audit_unlock')?.value
     if (unlockToken && verifyAuditUnlock(auditId, unlockToken)) {
       planLabel = 'Free (unlocked)'

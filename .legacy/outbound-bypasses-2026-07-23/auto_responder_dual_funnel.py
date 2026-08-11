@@ -18,31 +18,31 @@ FROM_EMAIL = "ops@launchcrate.io"
 
 def check_inbox_and_respond():
     """Check for replies to $7 or $97 offers, respond accordingly"""
-    
+
     context = ssl.create_default_context()
-    
+
     try:
         # Connect to inbox
         with imaplib.IMAP4_SSL(IMAP_HOST, IMAP_PORT, ssl_context=context) as imap:
             imap.login(FROM_EMAIL, AM_KEY)
             imap.select("INBOX")
-            
+
             # Find unread messages
             _, message_ids = imap.search(None, "UNSEEN")
-            
+
             if not message_ids[0]:
                 return {"status": "no_new_messages"}
-            
+
             responses = []
-            
+
             for msg_id in message_ids[0].split():
                 _, msg_data = imap.fetch(msg_id, "(RFC822)")
                 msg = email.message_from_bytes(msg_data[0][1])
-                
+
                 subject = msg.get("Subject", "")
                 from_addr = msg.get("From", "")
                 body = ""
-                
+
                 if msg.is_multipart():
                     for part in msg.walk():
                         if part.get_content_type() == "text/plain":
@@ -50,13 +50,13 @@ def check_inbox_and_respond():
                             break
                 else:
                     body = msg.get_payload(decode=True).decode()
-                
+
                 # Determine which offer they're interested in
-                is_7_template = any(kw in subject.lower() or kw in body.lower() 
+                is_7_template = any(kw in subject.lower() or kw in body.lower()
                                    for kw in ["$7", "template", "landing page"])
-                is_97_audit = any(kw in subject.lower() or kw in body.lower() 
+                is_97_audit = any(kw in subject.lower() or kw in body.lower()
                                  for kw in ["$97", "audit", "cold email"])
-                
+
                 # Route to appropriate response
                 if is_7_template or is_97_audit:
                     response_body = create_response(is_7_template, is_97_audit, from_addr)
@@ -67,18 +67,18 @@ def check_inbox_and_respond():
                         "type": "template" if is_7_template else "audit",
                         "responded": True
                     })
-                    
+
                     # Mark as read
                     imap.store(msg_id, "+FLAGS", "\\Seen")
-            
+
             return {"status": "processed", "responses": responses}
-    
+
     except Exception as e:
         return {"status": "error", "error": str(e)}
 
 def create_response(is_template, is_audit, to_email):
     """Create response for template or audit interest"""
-    
+
     if is_template and is_audit:
         # Interested in both
         body = f"""Thanks for reaching out!
@@ -100,7 +100,7 @@ Money-back guarantee on both. Start with the template, or jump straight to the a
 
 Which interests you more?
 
-—
+-
 Mike"""
     elif is_audit:
         # Audit only
@@ -116,7 +116,7 @@ $97, money-back guarantee.
 
 Ready to go?
 
-—
+-
 Mike"""
     else:
         # Template only
@@ -132,21 +132,21 @@ Download link: [TEMPLATE_LINK]
 
 If you want help executing cold email to promote this, I also offer a $97 audit.
 
-—
+-
 Mike"""
-    
+
     return body
 
 def send_response(to_email, body):
     """Send auto-response"""
-    
+
     msg = MIMEMultipart("alternative")
     msg["Subject"] = "Re: Your Interest"
     msg["From"] = FROM_EMAIL
     msg["To"] = to_email
-    
+
     msg.attach(MIMEText(body, "plain"))
-    
+
     try:
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=context) as server:
@@ -160,14 +160,14 @@ def send_response(to_email, body):
 def main():
     """Run auto-responder"""
     result = check_inbox_and_respond()
-    
+
     # Log
     with open("/home/mike/nebula/auto_responder_dual_funnel.log", "a") as f:
         f.write(json.dumps({
             "timestamp": datetime.now().isoformat(),
             "result": result
         }) + "\n")
-    
+
     print(f"[AUTO-RESPONDER] {result['status']}")
 
 if __name__ == "__main__":

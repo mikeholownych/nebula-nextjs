@@ -1,4 +1,4 @@
-# Repo Cleanup Plan — Post-Next.js Cutover
+# Repo Cleanup Plan - Post-Next.js Cutover
 
 **Date:** 2026-07-17
 **Status:** Ready for execution
@@ -19,32 +19,32 @@
 ### 1. KEEP (Active Business Logic)
 
 **Python (lead-gen, email, pipeline):**
-- `hot_lead_watcher.py` — cron job, active
-- `followup_sequence.py` — cron job, active
-- `trigger_lead_engine.py` — cron job, active
-- `tunnel_liveliness_check.py` — cron job, active
-- `lead_store.py` — used by above
-- `agentmail_client.py` — email integration
-- `reply_monitor.py` — inbox monitoring
-- `sales_pipeline_orchestrator.py` — pipeline logic
-- `pipeline_health_check.py` — monitoring
-- `ramp_pipeline_fill.py` — lead engine
-- `check_agentmail_inbox.py` — inbox check
+- `hot_lead_watcher.py` - cron job, active
+- `followup_sequence.py` - cron job, active
+- `trigger_lead_engine.py` - cron job, active
+- `tunnel_liveliness_check.py` - cron job, active
+- `lead_store.py` - used by above
+- `agentmail_client.py` - email integration
+- `reply_monitor.py` - inbox monitoring
+- `sales_pipeline_orchestrator.py` - pipeline logic
+- `pipeline_health_check.py` - monitoring
+- `ramp_pipeline_fill.py` - lead engine
+- `check_agentmail_inbox.py` - inbox check
 
 **Directories:**
-- `customer-portal/` — **MAIN APP**, Next.js site
-- `web/` — can be removed (empty scaffold, not used)
-- `.aidlc/` — AI-DLC workflow rules
-- `ledgers/` — log files for cron jobs
-- `audit_pipeline/` — audit delivery logic
-- `.worktrees/` — git worktrees for development
-- `.github/` — CI/CD workflows
-- `platform_api/` — FastAPI scaffold (merged from worktree)
+- `customer-portal/` - **MAIN APP**, Next.js site
+- `web/` - can be removed (empty scaffold, not used)
+- `.aidlc/` - AI-DLC workflow rules
+- `ledgers/` - log files for cron jobs
+- `audit_pipeline/` - audit delivery logic
+- `.worktrees/` - git worktrees for development
+- `.github/` - CI/CD workflows
+- `platform_api/` - FastAPI scaffold (merged from worktree)
 
 **Configs:**
-- `.gitignore`, `.prettierrc`, `.eslintrc*` — keep
-- `requirements*.txt` — keep for Python deps
-- `package.json` at root — keep if exists
+- `.gitignore`, `.prettierrc`, `.eslintrc*` - keep
+- `requirements*.txt` - keep for Python deps
+- `package.json` at root - keep if exists
 
 ### 2. ARCHIVE (Deprecated Web Server)
 
@@ -53,10 +53,10 @@
 - These were served by Python server, now replaced by `customer-portal/app/`
 
 **Python web server:**
-- `agentic_server.py` — main server, deprecated
-- `stripe_webhook.py` — webhook handler, deprecated (webhooks now in platform_api/)
-- `agentic_seo_server.py` — SEO server, deprecated
-- `test_server.py` — test server, deprecated
+- `agentic_server.py` - main server, deprecated
+- `stripe_webhook.py` - webhook handler, deprecated (webhooks now in platform_api/)
+- `agentic_seo_server.py` - SEO server, deprecated
+- `test_server.py` - test server, deprecated
 
 **Stripe setup scripts (one-time use):**
 - `create_997_stripe.py`
@@ -66,29 +66,29 @@
 - `setup_webhook.py`
 
 **Pytest cache:**
-- `.pytest_cache/` — can archive
+- `.pytest_cache/` - can archive
 
 **Systemd service files (moved to .legacy):**
-- `nebula-site.service` — disabled
-- `nebula-webhook.service` — disabled
+- `nebula-site.service` - disabled
+- `nebula-webhook.service` - disabled
 
 ### 3. REMOVE (Temporary/Generated)
 
-- `.next/` at root — old build cache (if exists)
-- `__pycache__/` — Python bytecode cache
-- `node_modules/` at root — if exists (customer-portal has its own)
-- `*.pyc`, `*.pyo` — compiled Python
-- `.DS_Store`, `Thumbs.db` — OS files
-- `*.log` at root — move to ledgers/ or delete
+- `.next/` at root - old build cache (if exists)
+- `__pycache__/` - Python bytecode cache
+- `node_modules/` at root - if exists (customer-portal has its own)
+- `*.pyc`, `*.pyo` - compiled Python
+- `.DS_Store`, `Thumbs.db` - OS files
+- `*.log` at root - move to ledgers/ or delete
 
 ### 4. REVIEW (Uncertain)
 
-- `scripts/` at root — may contain utility scripts still in use
-- `adapters/` — check if used by Next.js app
-- `.legacy/outreach-wave-archive-2026-07-23/` — preserved historical outreach-wave scripts
-- `auto-responder/` — may still be active
-- `docs/` — documentation, review relevance
-- Various `.md` files — review and update
+- `scripts/` at root - may contain utility scripts still in use
+- `adapters/` - check if used by Next.js app
+- `.legacy/outreach-wave-archive-2026-07-23/` - preserved historical outreach-wave scripts
+- `auto-responder/` - may still be active
+- `docs/` - documentation, review relevance
+- Various `.md` files - review and update
 
 ---
 
@@ -210,8 +210,8 @@ sudo systemctl start nebula-site.service
 
 - **Files archived:** ~100
 - **Space freed:** ~50-100 MB (HTML + Python + caches)
-- **Risk:** Low — all archived, not deleted
-- **Reversible:** Yes — all files in `.legacy/`
+- **Risk:** Low - all archived, not deleted
+- **Reversible:** Yes - all files in `.legacy/`
 
 ---
 

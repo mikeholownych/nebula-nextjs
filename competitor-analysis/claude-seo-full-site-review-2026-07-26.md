@@ -1,8 +1,8 @@
 # Claude SEO Full-Site Review and Nebula Action Plan
 
-**Review date:** 2026-07-26  
-**Competitor:** https://claude-seo.md/  
-**Compared with:** https://nebulacomponents.shop/ and the local `customer-portal` source  
+**Review date:** 2026-07-26
+**Competitor:** https://claude-seo.md/
+**Compared with:** https://nebulacomponents.shop/ and the local `customer-portal` source
 **Status:** Research and planning only. No implementation performed.
 
 ## Executive conclusion
@@ -263,15 +263,15 @@ Free diagnosis leads to a fixed-price Fix Pack. Claude SEO's site primarily driv
 
 This is a conceptual architecture, not an implementation prescription.
 
-1. **Citable overview** — the category, evidence model, proof, use cases, and next action.
-2. **Quick start** — install, initialize, audit, inspect the evidence package, create an action plan.
-3. **Evidence-grade site auditing** — retrieval, extraction, schema, link graph, and immutable artifacts.
-4. **Claims and citation readiness** — claim support, evidence lifecycle, answer extractability, and limitations.
-5. **Rendered and performance observation** — browser profiles, Lighthouse lab evidence, and lab/field separation.
-6. **Governed remediation** — action plans, dry runs, hash locking, review, verification, and monitoring.
-7. **Agent readiness** — `llms.txt`, crawler policy, Markdown negotiation, MCP/A2A, with clear evidence limits.
-8. **Comparison guide** — when to use Citable, an AI-visibility platform, a commercial crawler, or a combination.
-9. **Major release notes** — only releases with meaningful buyer or operator impact.
+1. **Citable overview** - the category, evidence model, proof, use cases, and next action.
+2. **Quick start** - install, initialize, audit, inspect the evidence package, create an action plan.
+3. **Evidence-grade site auditing** - retrieval, extraction, schema, link graph, and immutable artifacts.
+4. **Claims and citation readiness** - claim support, evidence lifecycle, answer extractability, and limitations.
+5. **Rendered and performance observation** - browser profiles, Lighthouse lab evidence, and lab/field separation.
+6. **Governed remediation** - action plans, dry runs, hash locking, review, verification, and monitoring.
+7. **Agent readiness** - `llms.txt`, crawler policy, Markdown negotiation, MCP/A2A, with clear evidence limits.
+8. **Comparison guide** - when to use Citable, an AI-visibility platform, a commercial crawler, or a combination.
+9. **Major release notes** - only releases with meaningful buyer or operator impact.
 
 Every surface should have unique intent, evidence, and a clear next step. Do not create a page merely because a command or detector exists.
 
@@ -519,7 +519,7 @@ Dates are planning placeholders, not commitments.
 
 ## Handoff summary
 
-- **Decision:** borrow Claude SEO's acquisition system—capability education, proof assets, crawlable linking, release trust, and explicit limitations—without borrowing its branding or score model.
+- **Decision:** borrow Claude SEO's acquisition system-capability education, proof assets, crawlable linking, release trust, and explicit limitations-without borrowing its branding or score model.
 - **Quick wins:** crawlable learning-centre links, canonical claim facts, Citable quick-start architecture.
 - **Strategic builds:** job-led Citable cluster, honest comparison guide, public evidence case.
 - **Long-term bet:** an original, reproducible landing-page evidence benchmark.

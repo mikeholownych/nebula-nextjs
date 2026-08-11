@@ -96,15 +96,15 @@ components:
 
 **Creative North Star: "The Conversion Lab"**
 
-Assertive authority meets clinical precision. The system projects confidence through density and sharpness — not friendliness, not warmth, not restraint. This is diagnostic equipment, not a lifestyle brand. The system font stack (SF Pro, Segoe UI, Roboto) renders instantly with zero loading cost; authority comes from committed weight contrast and tight tracking, not letterform novelty. The near-black foundation (#050505) eliminates visual competition. Signal Teal (#00c2a0) marks actionable elements with authority, pulling the eye toward what matters.
+Assertive authority meets clinical precision. The system projects confidence through density and sharpness - not friendliness, not warmth, not restraint. This is diagnostic equipment, not a lifestyle brand. The system font stack (SF Pro, Segoe UI, Roboto) renders instantly with zero loading cost; authority comes from committed weight contrast and tight tracking, not letterform novelty. The near-black foundation (#050505) eliminates visual competition. Signal Teal (#00c2a0) marks actionable elements with authority, pulling the eye toward what matters.
 
-The aesthetic explicitly rejects generic AI SaaS cream, CRO agency theatrics, and "black-box AI says so" interfaces. No conversion claims without evidence. No decorative motion. No gradient text. Every visual choice serves the belief ladder — the visitor must believe Nebula finds real, specific defects on their page.
+The aesthetic explicitly rejects generic AI SaaS cream, CRO agency theatrics, and "black-box AI says so" interfaces. No conversion claims without evidence. No decorative motion. No gradient text. Every visual choice serves the belief ladder - the visitor must believe Nebula finds real, specific defects on their page.
 
 Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmospheric layering, not lift. The interface feels like surfaces emerging from atmosphere, not sitting on top of it.
 
 **Key Characteristics:**
 - Near-black canvas eliminates everything but the diagnostic content
-- Signal Teal authority on actions and positive signal — used sparingly (≤10% surface area)
+- Signal Teal authority on actions and positive signal - used sparingly (≤10% surface area)
 - System font stack: instant render, weight-capable, zero loading cost
 - Ambient depth via layered glow, never drop shadows
 - Tight tracking (-0.03em) on display for condensed authority
@@ -116,7 +116,7 @@ Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmo
 
 ## 2. Colors
 
-**Signal Teal palette** — one accent, high contrast, clinical authority. The palette is deliberately restrained: one primary accent carries the entire brand signal.
+**Signal Teal palette** - one accent, high contrast, clinical authority. The palette is deliberately restrained: one primary accent carries the entire brand signal.
 
 ### Primary
 
@@ -126,17 +126,17 @@ Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmo
 
 ### Neutral
 
-- **Near Black** (#050505): Body background. Deliberately extreme — eliminates visual competition entirely.
+- **Near Black** (#050505): Body background. Deliberately extreme - eliminates visual competition entirely.
 - **BG Elevated** (#0a0a0a): Secondary background for sections requiring subtle separation.
 - **BG Panel** (#111111): Card backgrounds, input backgrounds, containers.
 - **FG** (#ffffff): Primary text on dark backgrounds. Maximum contrast (21:1).
-- **FG Muted** (#9e9e9e): Secondary text, descriptions, supporting context. Canonical across the codebase: `tailwind.config.ts`'s `fg.muted` and `globals.css`'s `--fg-muted` both resolve to this value. Bumped from #888888 (~5.7:1, AA-only) to clear WCAG 2.2 AAA (~7.05:1 on BG Panel, ~7.6:1 on Near Black) — see the resolved AAA Gap note below.
+- **FG Muted** (#9e9e9e): Secondary text, descriptions, supporting context. Canonical across the codebase: `tailwind.config.ts`'s `fg.muted` and `globals.css`'s `--fg-muted` both resolve to this value. Bumped from #888888 (~5.7:1, AA-only) to clear WCAG 2.2 AAA (~7.05:1 on BG Panel, ~7.6:1 on Near Black) - see the resolved AAA Gap note below.
 - **FG Dim** (#666666): Tertiary text, disabled states.
 - **Border** (rgba(255, 255, 255, 0.06)): Subtle dividers. Near-invisible until needed.
 
 ### Semantic
 
-- **Danger** (#f37979): Error states, "before" tags, negative signal, unfixed defects. Bumped from #ef4444 (~5.0-5.4:1, AA-only) to clear WCAG 2.2 AAA (~7.0:1 on BG Panel, ~7.6:1 on Near Black) — same hue, lightened. Danger Dim is unaffected (a background tint, not text, so AAA text-contrast rules don't apply to it).
+- **Danger** (#f37979): Error states, "before" tags, negative signal, unfixed defects. Bumped from #ef4444 (~5.0-5.4:1, AA-only) to clear WCAG 2.2 AAA (~7.0:1 on BG Panel, ~7.6:1 on Near Black) - same hue, lightened. Danger Dim is unaffected (a background tint, not text, so AAA text-contrast rules don't apply to it).
 - **Danger Dim** (rgba(239, 68, 68, 0.15)): Background tint for danger badges.
 - **Info** (#3b82f6): Secondary glow orb, rarely used in UI.
 - **Warning** (#f59e0b): Scoring highlights, attention markers in audit output. Canonical across the codebase: `tailwind.config.ts`'s `warning` and `globals.css`'s new `--warning` custom property both resolve to this value (`.sample-score` previously hardcoded `#fbbf24` directly; fixed to reference `var(--warning)` / `var(--warning-dim)`).
@@ -145,7 +145,7 @@ Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmo
 
 **The One Signal Rule.** Signal Teal is reserved for actionable elements and positive signal. It appears on ≤10% of any screen surface. Its rarity is the point.
 
-**The No-Warm-Neutral Rule.** Backgrounds live on the cool near-black axis. No cream, sand, paper, parchment, or warm-tinted neutrals. Warmth is carried by the teal accent and imagery — never the canvas.
+**The No-Warm-Neutral Rule.** Backgrounds live on the cool near-black axis. No cream, sand, paper, parchment, or warm-tinted neutrals. Warmth is carried by the teal accent and imagery - never the canvas.
 
 **The Authority-Not-Friendliness Rule.** Signal Teal is not "friendly green." It marks signal, not inclusion. No pastel tints, no soft gradients. Sharp, saturated, assertive.
 
@@ -159,7 +159,7 @@ Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmo
 **Body Font:** Same system stack
 **Label Font:** Same system stack (600 weight, uppercase, tracked)
 
-**Character:** The system font stack provides a neutral, high-performance typographic foundation. On macOS/iOS this renders as SF Pro; on Windows as Segoe UI; on Android as Roboto. This eliminates font-loading performance cost entirely — no FOUT, no CLS from font swap, instant render. Weight contrast (700/400) creates hierarchy without family switching. The choice favors performance over personality; authority comes from density, tracking, and weight, not letterform distinctiveness.
+**Character:** The system font stack provides a neutral, high-performance typographic foundation. On macOS/iOS this renders as SF Pro; on Windows as Segoe UI; on Android as Roboto. This eliminates font-loading performance cost entirely - no FOUT, no CLS from font swap, instant render. Weight contrast (700/400) creates hierarchy without family switching. The choice favors performance over personality; authority comes from density, tracking, and weight, not letterform distinctiveness.
 
 **Historical note:** Karla was documented as the brand font in earlier design artifacts. The production codebase uses the system stack exclusively (see `tailwind.config.ts` and `globals.css`). A static design system CSS file at `public/styles/nebula-design-system.css` still loads Karla via Google Fonts but is not imported by the application.
 
@@ -171,7 +171,7 @@ Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmo
 - **Body** (400, 17px, 1.65): Primary prose, set via `globals.css`'s `--text-base`. Capped at 65–75ch line length for readability. Good contrast against near-black.
 - **Label** (600, 13px, 0.1em tracking, uppercase): Badges, eyebrows, step numbers. Wide tracking creates small-caps appearance.
 
-Tailwind's own `text-xs`…`text-6xl` utility scale (defined in `tailwind.config.ts`, independent of the five roles above) is used ad hoc inside component library code for one-off sizing — e.g. Button's `size` variants pull `text-sm`/`text-base`/`text-lg` directly. It runs about 1px off `--text-base` (16px vs. the body's 17px) at the `base` step; not a defect, just two adjacent scales worth knowing are both live.
+Tailwind's own `text-xs`…`text-6xl` utility scale (defined in `tailwind.config.ts`, independent of the five roles above) is used ad hoc inside component library code for one-off sizing - e.g. Button's `size` variants pull `text-sm`/`text-base`/`text-lg` directly. It runs about 1px off `--text-base` (16px vs. the body's 17px) at the `base` step; not a defect, just two adjacent scales worth knowing are both live.
 
 ### Named Rules
 
@@ -179,7 +179,7 @@ Tailwind's own `text-xs`…`text-6xl` utility scale (defined in `tailwind.config
 
 **The Weight-Contrast Rule.** Display (700) and Body (400) are 300 weight apart. No intermediate siblings. The gap creates hierarchy.
 
-**The No-Decoration Rule.** No gradient text. No text-shadow effects. Signal Teal may appear as solid color or background — never as gradient-fill on typography.
+**The No-Decoration Rule.** No gradient text. No text-shadow effects. Signal Teal may appear as solid color or background - never as gradient-fill on typography.
 
 ---
 
@@ -187,14 +187,14 @@ Tailwind's own `text-xs`…`text-6xl` utility scale (defined in `tailwind.config
 
 **Surfaces emerge from the atmosphere rather than sitting on top of it.**
 
-The system rejects conventional drop shadows (offset + blur + spread) entirely. Depth is conveyed through atmospheric glow and tonal layering — not lift.
+The system rejects conventional drop shadows (offset + blur + spread) entirely. Depth is conveyed through atmospheric glow and tonal layering - not lift.
 
 ### Glow Vocabulary
 
 - **Ambient Teal** (120px blur, 600×600px, radial-gradient teal @ 0.15 opacity): Fixed-position orb, top-right quadrant. Creates ambient glow from within the atmosphere.
 - **Ambient Blue** (120px blur, 600×600px, radial-gradient blue @ 0.12 opacity): Fixed-position orb, bottom-left. Cooler counterpoint.
 - **Button Glow** (0 0 16px rgba(0, 194, 160, 0.25)): Primary button hover state. Responsive, not ambient.
-- **Card Glow** (0 0 40px rgba(0, 194, 160, 0.15)): Featured/pricing cards — `shadow-glow` in `tailwind.config.ts`.
+- **Card Glow** (0 0 40px rgba(0, 194, 160, 0.15)): Featured/pricing cards - `shadow-glow` in `tailwind.config.ts`.
 
 ### Named Rules
 
@@ -212,11 +212,11 @@ The system rejects conventional drop shadows (offset + blur + spread) entirely. 
 
 **Shape:** Actual rendered radii by size (`components/ui/Button.tsx`): 8px (`sm`), 12px (`md`, the default and most common size), 16px (`lg`, hero emphasis). Never full-pill.
 
-- **Primary** (Signal Teal bg, Near Black text, fontWeight 600): Main CTAs — "Run Free Audit", "Review checkout", form submits.
+- **Primary** (Signal Teal bg, Near Black text, fontWeight 600): Main CTAs - "Run Free Audit", "Review checkout", form submits.
   - Hover: BG shifts to Teal Light, Button Glow appears (16px @ 0.25).
   - Active: No lift, reduced glow.
   - Touch devices: No hover lift; active uses scale(0.98) instead.
-- **Secondary / Outline** (transparent bg, 1–2px Signal Teal border, Signal Teal text): Secondary actions — "View audit status", "Review checkout →" on outline contexts.
+- **Secondary / Outline** (transparent bg, 1–2px Signal Teal border, Signal Teal text): Secondary actions - "View audit status", "Review checkout →" on outline contexts.
   - Hover: BG shifts to Teal Dim, border stays.
 - **Ghost** (transparent bg, FG Muted text): Tertiary nav, cancel actions.
   - Hover: Text shifts to FG.
@@ -225,10 +225,10 @@ The system rejects conventional drop shadows (offset + blur + spread) entirely. 
 
 ### Cards
 
-**Corner Style:** 16px (`rounded-2xl`) uniformly — `components/ui/Card.tsx` doesn't vary radius by variant. Never >24px.
+**Corner Style:** 16px (`rounded-2xl`) uniformly - `components/ui/Card.tsx` doesn't vary radius by variant. Never >24px.
 
 - **Default** (BG Panel background): Standard container.
-- **Bordered** (BG Panel, 1px Border): Standard container with a visible edge — used for pricing/plan comparisons.
+- **Bordered** (BG Panel, 1px Border): Standard container with a visible edge - used for pricing/plan comparisons.
 - **Elevated** (BG Panel, `shadow-glow`): Featured/pricing cards.
 - **Internal Padding:** `none` (0) / `sm` (16px) / `md` (24px, default) / `lg` (32px).
 
@@ -259,13 +259,13 @@ The system rejects conventional drop shadows (offset + blur + spread) entirely. 
 
 ### Do:
 
-- **Do** use Signal Teal (#00c2a0) exclusively for actionable elements and positive signal — CTAs, step numbers, success states, "fixed" highlights.
+- **Do** use Signal Teal (#00c2a0) exclusively for actionable elements and positive signal - CTAs, step numbers, success states, "fixed" highlights.
 - **Do** maintain Near Black (#050505) as the body background everywhere. No warm neutral tints.
 - **Do** use ambient glow orbs (120px blur, 0.15 opacity) for atmospheric depth instead of drop shadows.
 - **Do** set display headlines with tight tracking (-0.03em) but never below that floor.
 - **Do** cap body prose at 65–75ch line length.
-- **Do** show evidence — annotated screenshots and specific defects — instead of generic claims.
-- **Do** include skip-link for keyboard navigation. Target WCAG 2.2 AAA (raised from AA; see the resolved AAA Gap note in Colors — FG Muted now clears this).
+- **Do** show evidence - annotated screenshots and specific defects - instead of generic claims.
+- **Do** include skip-link for keyboard navigation. Target WCAG 2.2 AAA (raised from AA; see the resolved AAA Gap note in Colors - FG Muted now clears this).
 - **Do** use the system font stack (`-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif`) for zero-cost rendering. Authority comes from weight and tracking, not letterform.
 - **Do** use the shared `Button`/`Card`/`Input` components from `components/ui/` instead of re-implementing their styles inline.
 
@@ -277,10 +277,10 @@ The system rejects conventional drop shadows (offset + blur + spread) entirely. 
 - **Don't** add a tiny uppercase tracked eyebrow above every section. One named kicker is deliberate; eyebrows as section grammar is AI scaffolding.
 - **Don't** use drop shadows with large blur (≥16px) on cards or buttons. Use centered glow or tonal layering.
 - **Don't** use border-radius greater than 24px on cards.
-- **Don't** fabricate testimonials, case studies, or conversion claims — every claim traces to one of the two documented case studies (48x ROAS ecommerce, −50% CPC B2B SaaS) until more are added.
-- **Don't** look like a "generic AI SaaS", "CRO agency", "website-design studio", "cheap audit generator", "digital-marketing guru funnel", "space-themed novelty brand", "cybersecurity product", "enterprise analytics platform", "SEO audit tool", or "black-box 'AI says so' product" — all explicitly rejected in PRODUCT.md's positioning.
-- **Don't** animate images on hover. If a card needs hover feedback, animate background, border, or shadow — never the image.
+- **Don't** fabricate testimonials, case studies, or conversion claims - every claim traces to one of the two documented case studies (48x ROAS ecommerce, −50% CPC B2B SaaS) until more are added.
+- **Don't** look like a "generic AI SaaS", "CRO agency", "website-design studio", "cheap audit generator", "digital-marketing guru funnel", "space-themed novelty brand", "cybersecurity product", "enterprise analytics platform", "SEO audit tool", or "black-box 'AI says so' product" - all explicitly rejected in PRODUCT.md's positioning.
+- **Don't** animate images on hover. If a card needs hover feedback, animate background, border, or shadow - never the image.
 - **Don't** default to Inter, DM Sans, Fraunces, or any font on the reflex-reject list. The system font stack is the committed production typeface.
-- **Don't** reintroduce the old indigo/mint palette (#6366f1, #a5b4fc, #79f2c0 on #080a0f/#111723) — it was migrated off every page. If it resurfaces anywhere, that's regression, not a second intentional aesthetic.
+- **Don't** reintroduce the old indigo/mint palette (#6366f1, #a5b4fc, #79f2c0 on #080a0f/#111723) - it was migrated off every page. If it resurfaces anywhere, that's regression, not a second intentional aesthetic.
 - **Don't** re-add `dangerouslySetInnerHTML`-based page templates with their own `<body>` tag and unscoped `<style>` block. Every learning-centre article is now plain JSX on shared tokens; new articles should follow that pattern.
-- **Don't** hardcode a token value directly (a hex, an rgba) when a shared color/utility class already names it. `globals.css` used to duplicate `fg-muted` and `warning` at different values than their Tailwind equivalents (`#737373`/`#fbbf24`); both now reference `var(--fg-muted)` / `var(--warning)` at the canonical values — don't reintroduce a hardcoded one-off.
+- **Don't** hardcode a token value directly (a hex, an rgba) when a shared color/utility class already names it. `globals.css` used to duplicate `fg-muted` and `warning` at different values than their Tailwind equivalents (`#737373`/`#fbbf24`); both now reference `var(--fg-muted)` / `var(--warning)` at the canonical values - don't reintroduce a hardcoded one-off.

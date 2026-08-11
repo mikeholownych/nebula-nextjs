@@ -1,5 +1,5 @@
 /**
- * x402 payment protocol — shared server config
+ * x402 payment protocol - shared server config
  * https://x402.org | https://docs.x402.org
  *
  * Receiving wallet: 0x03ce3d56E497ECCFE7Fe1a7f666b9e2307541202

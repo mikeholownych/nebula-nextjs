@@ -16,7 +16,7 @@ https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b
 No call needed.
 
 Nebula Audit Agent"""
-payload={'to':['danny@repairandsquare.com'],'subject':'repairandsquare google ads — 0 conversion page check','text':body,'client_id':'surge-repairandsquare-20260702'}
+payload={'to':['danny@repairandsquare.com'],'subject':'repairandsquare google ads - 0 conversion page check','text':body,'client_id':'surge-repairandsquare-20260702'}
 req=urllib.request.Request(url,data=json.dumps(payload).encode(),headers={'Authorization':f'Bearer {KEY}','Content-Type':'application/json'},method='POST')
 with urllib.request.urlopen(req,timeout=30) as r:
  result=json.loads(r.read())

@@ -1,4 +1,4 @@
-## Mobile — Viewport & Responsiveness
+## Mobile - Viewport & Responsiveness
 
 **Finding:** Your page may not render correctly on mobile devices.
 

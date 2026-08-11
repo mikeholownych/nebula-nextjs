@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Voice capture layer — the "Wispr Flow" analog from Simon Høiberg's
+"""Voice capture layer - the "Wispr Flow" analog from Simon Høiberg's
 one-person SaaS AI stack (v-AkmjJNxZo).
 
 Turns spoken ideas (voice memos, phone recordings, meeting captures) into
@@ -13,8 +13,8 @@ record on any device, drop the audio file anywhere, run:
 
 Provider cascade (first available wins):
   1. OpenAI-compatible Whisper (OPENAI_API_KEY / VOICE_TOOLS_OPENAI_KEY)
-     — uses the configured STT_OPENAI_MODEL (default whisper-1)
-  2. local faster-whisper (pip install faster-whisper) — no API key
+     - uses the configured STT_OPENAI_MODEL (default whisper-1)
+  2. local faster-whisper (pip install faster-whisper) - no API key
   3. fail-closed with a clear install/key message (never silently pass)
 
 Fail-closed: non-zero exit on any failure, nothing partial written.
@@ -99,7 +99,7 @@ def append_note(notes: Path, audio_name: str, text: str, dry_run: bool) -> Path:
     now = dt.datetime.now(dt.timezone.utc)
     stamp = now.strftime("%Y-%m-%d %H:%M UTC")
     entry = (
-        f"\n## {stamp} — voice note ({audio_name})\n\n"
+        f"\n## {stamp} - voice note ({audio_name})\n\n"
         f"{text.strip()}\n"
     )
     if dry_run:

@@ -50,13 +50,13 @@ function GrowthLaunchConfirmationContent() {
       if (!response.ok) throw new Error(result.error || "Submission failed");
 
       setStatus({
-        message: `✅ Got it! You'll receive your audit within 24 hours at ${formData.email}. Check your inbox — we're starting now.`,
+        message: `✅ Got it! You'll receive your audit within 24 hours at ${formData.email}. Check your inbox - we're starting now.`,
         type: "success",
       });
       setSubmitted(true);
     } catch (err: any) {
       setStatus({
-        message: `❌ ${err.message} — Please email ops@launchcrate.io with your details and we'll process it manually.`,
+        message: `❌ ${err.message} - Please email ops@launchcrate.io with your details and we'll process it manually.`,
         type: "error",
       });
     } finally {
@@ -67,7 +67,7 @@ function GrowthLaunchConfirmationContent() {
   return (
     <>
       <Head>
-        <title>Growth Launch — You're In | Nebula Components</title>
+        <title>Growth Launch - You're In | Nebula Components</title>
         <meta
           name="description"
           content="Your Growth Launch purchase is confirmed. Here's what happens next and how to submit your project details."
@@ -100,7 +100,7 @@ function GrowthLaunchConfirmationContent() {
               You're In. Let's Get You Customers.
             </h1>
             <p className="text-[#94a3b8] max-w-[500px] mx-auto">
-              Your Growth Launch purchase is confirmed. Here's exactly what happens next — and the information we need from you to start.
+              Your Growth Launch purchase is confirmed. Here's exactly what happens next - and the information we need from you to start.
             </p>
           </div>
 
@@ -111,7 +111,7 @@ function GrowthLaunchConfirmationContent() {
               <li className="py-3 pl-9 ml-3 border-l-2 border-[#1e1e2e] relative">
                 <div className="absolute w-3 h-3 bg-[#4f46e5] rounded-full left-[-7px] top-4" />
                 <div className="text-[#818cf8] text-xs font-bold uppercase tracking-[0.05em]">
-                  Step 1 — Right now
+                  Step 1 - Right now
                 </div>
                 <div className="text-[#cbd5e1] text-[0.95rem]">
                   <strong className="text-[#f1f5f9]">Fill out the intake form below.</strong> Takes 5 minutes. Tell us your URL, what you sell, and who you sell to.
@@ -120,7 +120,7 @@ function GrowthLaunchConfirmationContent() {
               <li className="py-3 pl-9 ml-3 border-l-2 border-[#1e1e2e] relative">
                 <div className="absolute w-3 h-3 bg-[#4f46e5] rounded-full left-[-7px] top-4" />
                 <div className="text-[#818cf8] text-xs font-bold uppercase tracking-[0.05em]">
-                  Step 2 — Within 24 hours
+                  Step 2 - Within 24 hours
                 </div>
                 <div className="text-[#cbd5e1] text-[0.95rem]">
                   <strong className="text-[#f1f5f9]">Landing page audit delivered.</strong> We'll send you the full audit report with the top 5 conversion leaks identified.
@@ -129,7 +129,7 @@ function GrowthLaunchConfirmationContent() {
               <li className="py-3 pl-9 ml-3 border-l-2 border-[#1e1e2e] relative">
                 <div className="absolute w-3 h-3 bg-[#4f46e5] rounded-full left-[-7px] top-4" />
                 <div className="text-[#818cf8] text-xs font-bold uppercase tracking-[0.05em]">
-                  Step 3 — Within 48 hours
+                  Step 3 - Within 48 hours
                 </div>
                 <div className="text-[#cbd5e1] text-[0.95rem]">
                   <strong className="text-[#f1f5f9]">Landing page rewrite delivered.</strong> Rewritten copy for every section, implemented or ready to deploy. Your call.
@@ -138,7 +138,7 @@ function GrowthLaunchConfirmationContent() {
               <li className="py-3 pl-9 ml-3 border-l-2 border-[#1e1e2e] relative">
                 <div className="absolute w-3 h-3 bg-[#4f46e5] rounded-full left-[-7px] top-4" />
                 <div className="text-[#818cf8] text-xs font-bold uppercase tracking-[0.05em]">
-                  Step 4 — Within 72 hours
+                  Step 4 - Within 72 hours
                 </div>
                 <div className="text-[#cbd5e1] text-[0.95rem]">
                   <strong className="text-[#f1f5f9]">200 triggered prospects delivered.</strong> The prospect list with buying signals annotated. You can review before we send.
@@ -147,7 +147,7 @@ function GrowthLaunchConfirmationContent() {
               <li className="py-3 pl-9 ml-3 border-l-2 border-[#1e1e2e] relative">
                 <div className="absolute w-3 h-3 bg-[#4f46e5] rounded-full left-[-7px] top-4" />
                 <div className="text-[#818cf8] text-xs font-bold uppercase tracking-[0.05em]">
-                  Step 5 — Day 3-17
+                  Step 5 - Day 3-17
                 </div>
                 <div className="text-[#cbd5e1] text-[0.95rem]">
                   <strong className="text-[#f1f5f9]">Outreach campaign runs.</strong> We send value-first emails to all 200 prospects. Replies managed daily. You get warm handoffs.
@@ -156,7 +156,7 @@ function GrowthLaunchConfirmationContent() {
               <li className="py-3 pl-9 ml-3 border-l-2 border-transparent relative">
                 <div className="absolute w-3 h-3 bg-[#4f46e5] rounded-full left-[-7px] top-4" />
                 <div className="text-[#818cf8] text-xs font-bold uppercase tracking-[0.05em]">
-                  Step 6 — Day 60
+                  Step 6 - Day 60
                 </div>
                 <div className="text-[#cbd5e1] text-[0.95rem]">
                   <strong className="text-[#f1f5f9]">You have a customer or we keep working free.</strong> That's the guarantee. No expiration.
@@ -218,7 +218,7 @@ function GrowthLaunchConfirmationContent() {
                   className="w-full p-3.5 bg-[#0d1117] border border-[#2d2d4e] rounded-[10px] text-[16px] text-[#e2e8f0] focus:outline-none focus:border-[#a5b4fc]"
                 />
                 <p className="text-[#94a3b8] text-[13px] mt-1">
-                  If you don't have one yet, write "need one built" — we'll build from scratch.
+                  If you don't have one yet, write "need one built" - we'll build from scratch.
                 </p>
 
                 <label className="block font-semibold mt-5 mb-1.5 text-[#e2e8f0]" htmlFor="offer">
@@ -259,9 +259,9 @@ function GrowthLaunchConfirmationContent() {
                   onChange={handleChange}
                   className="w-full p-3.5 bg-[#0d1117] border border-[#2d2d4e] rounded-[10px] text-[16px] text-[#e2e8f0] focus:outline-none focus:border-[#a5b4fc]"
                 >
-                  <option value="live">Live — ready to accept customers</option>
-                  <option value="beta">Beta — free tier available, paid coming soon</option>
-                  <option value="prelaunch">Pre-launch — taking pre-orders or interest</option>
+                  <option value="live">Live - ready to accept customers</option>
+                  <option value="beta">Beta - free tier available, paid coming soon</option>
+                  <option value="prelaunch">Pre-launch - taking pre-orders or interest</option>
                   <option value="idea">Just an idea (not yet ready)</option>
                 </select>
 
@@ -305,7 +305,7 @@ function GrowthLaunchConfirmationContent() {
           <div className="bg-[#12121c] border-2 border-[#fbbf24] rounded-[14px] p-8 text-center">
             <h2 className="text-[1.3rem] font-bold text-[#f1f5f9] mb-2">🛡️ Your Guarantee Is Active</h2>
             <p className="text-[#94a3b8] mb-0">
-              If you haven't closed a paying customer within 60 days of today, we keep working — at no additional cost — until you do. You keep every deliverable. No clawback. No fine print.
+              If you haven't closed a paying customer within 60 days of today, we keep working - at no additional cost - until you do. You keep every deliverable. No clawback. No fine print.
             </p>
           </div>
         </div>

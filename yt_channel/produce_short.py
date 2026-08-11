@@ -91,7 +91,7 @@ def make_hook_card(hook_text, overall, domain, bg=None):
     # Top accent bar
     d.rectangle([0, 0, SW, 8], fill=ACCENT)
 
-    # Hook text — width-wrapped, font drops if long
+    # Hook text - width-wrapped, font drops if long
     margin = 90
     max_width = SW - margin * 2
     font = f["lg"]
@@ -136,7 +136,7 @@ def make_score_card_short(domain, overall, grade, bg=None):
     _panel(d, px, py, panel_w, panel_h)
 
     d.text((SW // 2, py + 70), "LANDING PAGE AUDIT", fill=MUTED, font=f["xs"], anchor="mm")
-    # Domain — shrink font if too wide for safe margins
+    # Domain - shrink font if too wide for safe margins
     dom_font = f["md"] if d.textlength(domain, font=f["md"]) < panel_w - 140 else f["sm"]
     d.text((SW // 2, py + 160), domain, fill=WHITE, font=dom_font, anchor="mm")
 
@@ -169,7 +169,7 @@ def make_problem_card(worst_label, worst_score, problem_text, bg=None):
     _panel(d, px, py, panel_w, panel_h, border=RED)
 
     d.text((SW // 2, py + 70), "BIGGEST PROBLEM", fill=RED, font=f["sm"], anchor="mm")
-    # Label — shrink font if too wide for safe margins
+    # Label - shrink font if too wide for safe margins
     label = worst_label.upper()
     lf = f["lg"] if d.textlength(label, font=f["lg"]) < panel_w - 140 else f["md"]
     d.text((SW // 2, py + 170), label, fill=WHITE, font=lf, anchor="mm")
@@ -205,7 +205,7 @@ def make_fix_card(worst_label, fix_text, bg=None):
     _panel(d, px, py, panel_w, panel_h, border=GREEN)
 
     d.text((SW // 2, py + 70), "THE FIX", fill=GREEN, font=f["sm"], anchor="mm")
-    # Label — shrink font if too wide for safe margins
+    # Label - shrink font if too wide for safe margins
     label = worst_label.upper()
     lf = f["lg"] if d.textlength(label, font=f["lg"]) < panel_w - 140 else f["md"]
     d.text((SW // 2, py + 170), label, fill=WHITE, font=lf, anchor="mm")
@@ -225,7 +225,7 @@ def make_fix_card(worst_label, fix_text, bg=None):
 def make_reward_card(domain, overall, grade, bg=None):
     """The payoff moment (E'Calm retention psychology): the most rewarding
     reveal goes at the END so the viewer feels payoff, then cut immediately.
-    Here: the audited domain's score as the 'reveal' — the thing the whole
+    Here: the audited domain's score as the 'reveal' - the thing the whole
     video has been building toward."""
     img = _prepare_bg(bg, SW, SH) or Image.new("RGB", (SW, SH), BG)
     d = ImageDraw.Draw(img)
@@ -234,7 +234,7 @@ def make_reward_card(domain, overall, grade, bg=None):
 
     d.rectangle([0, 0, SW, 8], fill=ACCENT)
 
-    # Contrast panel — match score_card proportions (fuller, less dead space)
+    # Contrast panel - match score_card proportions (fuller, less dead space)
     panel_w = 920
     panel_h = 980
     px = (SW - panel_w) // 2
@@ -244,7 +244,7 @@ def make_reward_card(domain, overall, grade, bg=None):
     d.text((SW // 2, py + 70), "THE VERDICT", fill=colour, font=f["sm"], anchor="mm")
     d.text((SW // 2, py + 160), domain, fill=WHITE, font=f["md"], anchor="mm")
 
-    # Big score — the payoff
+    # Big score - the payoff
     r = 150
     cy = py + 500
     d.ellipse([SW // 2 - r, cy - r, SW // 2 + r, cy + r], outline=colour, width=8)
@@ -324,7 +324,7 @@ async def produce_short(page, audit, url=None):
         img.save(path)
         frames.append(path)
 
-    # 2. Sonic Foundation — per-segment TTS (pitch micro-variation),
+    # 2. Sonic Foundation - per-segment TTS (pitch micro-variation),
     #    silence trim, pacing gaps, transition whooshes, -14 LUFS.
     from yt_channel.audio_engine import (
         tts_segment, trim_silence, build_narration, build_sfx_track,
@@ -344,7 +344,7 @@ async def produce_short(page, audit, url=None):
         dur_actual.append(trim_silence(raw, wav))
         clip_wavs.append(wav)
 
-    # Shorts have no brand sting — tight pacing gaps only.
+    # Shorts have no brand sting - tight pacing gaps only.
     gaps = [GAP_S] * n
     gaps[-1] = 0.0
     narration_wav = job_dir / "narration.wav"
@@ -366,14 +366,14 @@ async def produce_short(page, audit, url=None):
     audio_path = job_dir / "voiceover.wav"
     audio_dur = finalize(narration_wav, sfx_wav, audio_path)
 
-    # 4. Motion assembly — Ken Burns per segment + fades, then mux audio
+    # 4. Motion assembly - Ken Burns per segment + fades, then mux audio
     from yt_channel.motion import assemble_motion_video
     video_path = config.VIDEO_DIR / f"{job_id}.mp4"
     assemble_motion_video(
         frames, durations, audio_path, video_path, SW, SH,
     )
 
-    # 5. Burn animated word-level captions (Phase 2 — Shorts)
+    # 5. Burn animated word-level captions (Phase 2 - Shorts)
     from yt_channel.captions import generate_captions, burn_captions
     cap_tmp_dir = job_dir.parent / f"{job_id}_cap"
     cap_tmp_dir.mkdir(parents=True, exist_ok=True)

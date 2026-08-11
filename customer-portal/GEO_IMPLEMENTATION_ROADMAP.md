@@ -1,7 +1,7 @@
-# Nebula Components — GEO Implementation Roadmap
+# Nebula Components - GEO Implementation Roadmap
 
-**Framework:** Generative Engine Optimization (21-layer model)  
-**Current Maturity:** Level 1.5 (Retrievable)  
+**Framework:** Generative Engine Optimization (21-layer model)
+**Current Maturity:** Level 1.5 (Retrievable)
 **Target:** Level 3 (Citable) in 90 days
 
 ---
@@ -325,10 +325,10 @@ Organization: Nebula Components (@id: /#organization)
 
 ### Scaling Priorities
 
-1. **Prompt corpus expansion** — from 50 to 200 prompts
-2. **Evidence depth** — more case studies, benchmarks
-3. **Comparison coverage** — all major competitors
-4. **External mentions** — more publications, podcasts
+1. **Prompt corpus expansion** - from 50 to 200 prompts
+2. **Evidence depth** - more case studies, benchmarks
+3. **Comparison coverage** - all major competitors
+4. **External mentions** - more publications, podcasts
 
 ---
 
@@ -336,8 +336,8 @@ Organization: Nebula Components (@id: /#organization)
 
 | Level | Name | Current | Target (90d) | Evidence |
 |-------|------|---------|--------------|----------|
-| 0 | Unobserved | ✅ PASSED | — | SEO exists |
-| 1 | Retrievable | ✅ PASSED | — | Crawlers allowed |
+| 0 | Unobserved | ✅ PASSED | - | SEO exists |
+| 1 | Retrievable | ✅ PASSED | - | Crawlers allowed |
 | 2 | Understandable | ⚠️ 30% | 90% | Entity structure |
 | 3 | Citable | ❌ 5% | 50% | Original evidence |
 | 4 | Recommendable | ❌ 0% | 30% | ICP + comparisons |
@@ -373,6 +373,6 @@ Organization: Nebula Components (@id: /#organization)
 
 ---
 
-**Last Updated:** 2025-07-15  
-**Status:** Phase 1 80% complete  
+**Last Updated:** 2025-07-15
+**Status:** Phase 1 80% complete
 **Next Milestone:** Entity architecture + claim system (Week 2)

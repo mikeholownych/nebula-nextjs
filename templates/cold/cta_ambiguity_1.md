@@ -35,6 +35,6 @@ Look right below your CTA. Does it say what happens after the click? If not, you
 
 {audit_link_with_source}
 
-—
+-
 
 P.S. The CTA specificity checklist is here: {cta_worksheet_link}

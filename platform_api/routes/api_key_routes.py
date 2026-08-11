@@ -57,7 +57,7 @@ async def create_api_key(body: CreateKeyRequest):
     """
     Create a new API key for a workspace.
     Plan is derived from the workspace's active subscription.
-    The raw key is returned ONCE — store it immediately.
+    The raw key is returned ONCE - store it immediately.
     """
     plan = await _resolve_plan(body.email)
     if plan not in API_KEY_PLANS:
@@ -80,7 +80,7 @@ async def create_api_key(body: CreateKeyRequest):
 
     return {
         **result,
-        "warning": "Store this key securely — it will not be shown again.",
+        "warning": "Store this key securely - it will not be shown again.",
     }
 
 

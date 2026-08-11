@@ -1,6 +1,6 @@
 # Weekly Reporting Sheet Template
 
-**Week of:** [YYYY-MM-DD]  
+**Week of:** [YYYY-MM-DD]
 **Owner:** [Name]
 
 ---
@@ -93,7 +93,7 @@
 > [Track with >30% reply rate OR >2x avg open rate]
 
 **Track to improve:**
-> [Track with avg performance — one change to test]
+> [Track with avg performance - one change to test]
 
 **Track to retire:**
 > [Track with <10% reply rate after 20 sends]
@@ -134,8 +134,8 @@ Audits → Delivered → Nurture → Replies → Calls → Closed
 
 ## Idea Bank Status
 
-**Ideas added this week:** [N]  
-**Ideas used:** [N]  
+**Ideas added this week:** [N]
+**Ideas used:** [N]
 **Ideas remaining:** [N]
 
 **Top insights logged:**

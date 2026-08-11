@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Core Web Vitals & Performance Drift Watcher — Audits PSI / CrUX metrics for key URLs.
+Core Web Vitals & Performance Drift Watcher - Audits PSI / CrUX metrics for key URLs.
 Exits 0 if performance budgets are met, exits 1 if severe regressions occur.
 """
 
@@ -36,29 +36,29 @@ def check_url(url, strategy="mobile"):
 def main():
     now = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
     print(f"=== Core Web Vitals Performance Audit ({now}) ===")
-    
+
     regressions = []
-    
+
     for url in TARGET_URLS:
         for strategy in ["mobile", "desktop"]:
             data = check_url(url, strategy)
             if "error" in data:
-                print(f"[{strategy.upper()}] {url} — Error: {data['error']}")
+                print(f"[{strategy.upper()}] {url} - Error: {data['error']}")
                 continue
-                
+
             metrics = data.get("lab_metrics", {})
             score = data.get("performance_score", 0)
             lcp = metrics.get("lcp_ms", 0) / 1000.0
             cls = metrics.get("cls", 0.0)
-            
+
             print(f"[{strategy.upper()}] {url} -> Score: {score}/100 | LCP: {lcp:.2f}s | CLS: {cls:.3f}")
-            
+
             # Threshold checks: mobile LCP > 3.0s or Score < 80 is a regression alert
             if strategy == "mobile" and (lcp > 3.5 or score < 75):
                 regressions.append(f"Mobile regression on {url}: LCP={lcp:.2f}s, Score={score}")
             elif strategy == "desktop" and (lcp > 2.0 or score < 85):
                 regressions.append(f"Desktop regression on {url}: LCP={lcp:.2f}s, Score={score}")
-                
+
     if regressions:
         print("\nPERFORMANCE REGRESSIONS DETECTED:")
         for r in regressions:

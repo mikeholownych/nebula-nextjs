@@ -1,11 +1,11 @@
 #!/bin/bash
 # Nebula Components - Route Content Health Monitor
-# Checks specific public routes return 200 — catches a page-level regression
+# Checks specific public routes return 200 - catches a page-level regression
 # (e.g. /pricing 500ing) that a root-only "is the site up" check would miss.
 # Complements scripts/health-check.sh (resource checks) and
 # scripts/notify_production_health.py (canonical-service ownership).
 #
-# Fixed 2026-07-24: this only ever echoed to stdout and exited non-zero —
+# Fixed 2026-07-24: this only ever echoed to stdout and exited non-zero -
 # nothing invoked it or captured that output, so a failure here has never
 # actually notified anyone. Now alerts via the same working `hermes send`
 # Telegram mechanism as the other health scripts, with a cooldown so a
@@ -16,7 +16,7 @@ set -uo pipefail
 BASE_URL="https://nebulacomponents.com"
 STATE_FILE="/home/mike/nebula/customer-portal/route_health_alert_state.json"
 TELEGRAM_TARGET="telegram:5920497760"
-ALERT_COOLDOWN_SECONDS=1800  # 30 min — this is a lower-urgency, content-level check
+ALERT_COOLDOWN_SECONDS=1800  # 30 min - this is a lower-urgency, content-level check
 
 ROUTES=(
   "/"

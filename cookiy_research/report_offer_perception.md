@@ -12,7 +12,7 @@ Trust in a free landing page audit is severely eroded by the immediate assumptio
 When evaluating whether to pay $700 for a 24-hour implementation of fixes, founders justify the cost purely through a projected return on investment. They evaluate the price tag mathematically against their customer acquisition cost (CAC) and expected return on ad spend (ROAS). The implementation is deemed worthwhile only if the predicted conversion bump clearly pays for itself within a short timeframe. Founders universally expect a 24-hour turnaround to naturally limit the scope to surface-level changes, such as copy tweaks, layout adjustments, and the addition of trust signals. They are remarkably comfortable with this constraint, provided that these minor changes drive a disproportionate lift in conversion rates. However, they will quickly veto the implementation if the proposed changes feel like templated best practices; solutions must strictly adhere to their established brand voice and niche constraints. When granting access for a third party to actually implement these fixes, founders hesitate due to a profound lack of scope control. They fear unauthorized or irreversible changes that might permanently disrupt their existing, live campaigns. To feel safe granting this access, they demand the ability to roll back changes easily and prevent permanent damage to their current funnels. Given the fast turnaround, founders also express a strong hesitation to commit funds without explicit outcome guarantees. They fear paying $700 for superficial work that yields no lasting results, demanding assurances that the quick adjustments will generate permanent metric improvements.
 
 **The tension between the desire for quick fixes and the fear of generic advice** *(Spans Objectives 1, 2, 3, & 4)*
-A distinct tension emerges between the founders' immediate diagnostic needs and their deep-seated skepticism toward proposed solutions. When determining why users leave their landing pages, founders consistently diagnose a deficiency in trust signals and messaging that fails to directly address their audience's specific anxieties. However, when offered a free audit to solve this exact messaging problem, they immediately suspect the resulting advice will be artificially limited or overly generic unless explicitly proven otherwise. They are acutely aware that their core issue—messaging that feels too generic—cannot be fixed by an auditor applying standard industry templates. This skepticism carries over into the paid implementation phase, where founders demand tailored alignment over generic patches. Even though they expect quick, surface-level fixes within a 24-hour window, they insist that the solutions remain uniquely bespoke to their niche. They require the preceding audit to explicitly prove that the auditor deeply understands their specific brand constraints before they will allow any implementation to proceed. Generic best practices are viewed as an active threat rather than a helpful baseline for optimization. Ultimately, founders will only trust and pay an auditor who can successfully navigate the paradox of delivering rapid, surface-level adjustments that somehow possess deep, niche-specific resonance.
+A distinct tension emerges between the founders' immediate diagnostic needs and their deep-seated skepticism toward proposed solutions. When determining why users leave their landing pages, founders consistently diagnose a deficiency in trust signals and messaging that fails to directly address their audience's specific anxieties. However, when offered a free audit to solve this exact messaging problem, they immediately suspect the resulting advice will be artificially limited or overly generic unless explicitly proven otherwise. They are acutely aware that their core issue-messaging that feels too generic-cannot be fixed by an auditor applying standard industry templates. This skepticism carries over into the paid implementation phase, where founders demand tailored alignment over generic patches. Even though they expect quick, surface-level fixes within a 24-hour window, they insist that the solutions remain uniquely bespoke to their niche. They require the preceding audit to explicitly prove that the auditor deeply understands their specific brand constraints before they will allow any implementation to proceed. Generic best practices are viewed as an active threat rather than a helpful baseline for optimization. Ultimately, founders will only trust and pay an auditor who can successfully navigate the paradox of delivering rapid, surface-level adjustments that somehow possess deep, niche-specific resonance.
 
 ## Context & Method
 - **Sample Size**: N=3
@@ -31,15 +31,15 @@ Founders describe the "clicks but no sales" problem as a frustrating behavioral 
 - **Reliance on surface-level behavioral tracking and technical flags** (Frequency: Several | Confidence: Medium). To diagnose the exact failure point, founders look at basic web analytics and heatmaps to observe CTA abandonment. In some cases, the diagnosis reveals unexpected technical barriers rather than psychological ones.
 
 ### Evidence
-> "It's like a 'window-shopping' effect – they're intrigued but not convinced to commit. It's worrying because we're losing potential customers." — Interview 019f3ce7-e3ea-748e-a2a2-b0d85b87659a [U]
+> "It's like a 'window-shopping' effect – they're intrigued but not convinced to commit. It's worrying because we're losing potential customers." - Interview 019f3ce7-e3ea-748e-a2a2-b0d85b87659a [U]
 
-> "It feels like we were paying for curiosity instead of intent. The click numbers were steady, which usually signals interest, but the bookings didn't match up." — Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [B]
+> "It feels like we were paying for curiosity instead of intent. The click numbers were steady, which usually signals interest, but the bookings didn't match up." - Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [B]
 
-> "We're seeing high-intent clicks from search ads, but they aren't translating into demo requests. It seems there's a disconnect somewhere between attracting interest and getting users to take the next step." — Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [B]
+> "We're seeing high-intent clicks from search ads, but they aren't translating into demo requests. It seems there's a disconnect somewhere between attracting interest and getting users to take the next step." - Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [B]
 
-> "I suspect the lack of specific trust signals and clear outcomes might be the main culprits. Since our services are high-consideration, people need to see legitimacy and tailored results quickly." — Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [B]
+> "I suspect the lack of specific trust signals and clear outcomes might be the main culprits. Since our services are high-consideration, people need to see legitimacy and tailored results quickly." - Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [B]
 
-> "Turned out, a form field validation issue on mobile was blocking submissions, causing us to lose a day's spend." — Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [B]
+> "Turned out, a form field validation issue on mobile was blocking submissions, causing us to lose a day's spend." - Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [B]
 
 ### Observed vs hypothetical
 **Observed:** Founders actively monitor basic analytics (time on page, heatmaps, bounce rates) and immediately attempt DIY diagnostic fixes, such as rewriting product copy, adding trust badges, or checking for mobile responsiveness.
@@ -57,16 +57,16 @@ Founders describe the "clicks but no sales" problem as a frustrating behavioral 
 - **Reliance on surface-level behavioral tracking and technical flags** (Frequency: Several | Confidence: Medium). To diagnose the exact failure point, founders look at basic web analytics and heatmaps to observe CTA abandonment. In some cases, the diagnosis reveals unexpected technical barriers rather than psychological ones.
 
 ### Evidence
-> "It's like a 'window-shopping' effect – they're intrigued but not convinced to commit. It's worrying because we're losing potential customers." — Interview 1 [U]
+> "It's like a 'window-shopping' effect – they're intrigued but not convinced to commit. It's worrying because we're losing potential customers." - Interview 1 [U]
 
-> "I've thought about a few possibilities: unclear messaging, lack of social proof, or maybe the product just doesn't match the promise in the ad. It could also be a trust issue or pricing that seems off." — Interview 1 [U]
+> "I've thought about a few possibilities: unclear messaging, lack of social proof, or maybe the product just doesn't match the promise in the ad. It could also be a trust issue or pricing that seems off." - Interview 1 [U]
 
 > "We're seeing high-intent clicks from search ads, but they aren't translating into demo requests. It seems there's a disconnect somewhere between attracting interest and getting
 
 ## Objective 2: What builds or erodes trust in a free landing page audit offer, and what proof do founders need to believe it is valuable?
 
 ### Direct answer
-Trust in a free landing page audit is primarily eroded by the assumption that the offer is a shallow "bait-and-switch" tactic designed to pitch an expensive, long-term agency retainer. Founders have a low baseline of trust due to past experiences with consultants offering generic, cookie-cutter advice. To build trust and prove value, founders need upfront transparency about the deliverables and clear evidence—such as past examples—that the auditor deeply understands their specific niche, brand constraints, and audience.
+Trust in a free landing page audit is primarily eroded by the assumption that the offer is a shallow "bait-and-switch" tactic designed to pitch an expensive, long-term agency retainer. Founders have a low baseline of trust due to past experiences with consultants offering generic, cookie-cutter advice. To build trust and prove value, founders need upfront transparency about the deliverables and clear evidence-such as past examples-that the auditor deeply understands their specific niche, brand constraints, and audience.
 
 ### Key patterns
 - **The "bait-and-switch" upsell assumption** (Frequency: Many | Confidence: High). Founders immediately suspect that a "free" audit is a high-pressure sales vehicle rather than a genuine diagnostic tool. They assume the resulting advice will be artificially limited or generic unless proven otherwise.
@@ -74,23 +74,23 @@ Trust in a free landing page audit is primarily eroded by the assumption that th
 - **Process and deliverable transparency** (Frequency: Several | Confidence: High). Trust is built before the audit begins by providing a clear, specific outline of what will be reviewed, examples of past successful audits, and clarity on who is actually conducting the work. While data privacy remains a distinct operational barrier to sharing access, providing upfront transparency helps lower the initial defensive posture.
 
 ### Evidence
-> "I'd assume it’s an initial review of the page highlighting potential improvements. But I'd be wary of generic advice or a push to upsell expensive services, like I experienced with a consultant recently." — Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [B]
+> "I'd assume it’s an initial review of the page highlighting potential improvements. But I'd be wary of generic advice or a push to upsell expensive services, like I experienced with a consultant recently." - Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [B]
 
-> "I'd need to see specific feedback related to our page and audience, along with actionable insights. A genuine understanding of our niche and challenges would also help build trust that it’s not just a generic pitch." — Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [B]
+> "I'd need to see specific feedback related to our page and audience, along with actionable insights. A genuine understanding of our niche and challenges would also help build trust that it’s not just a generic pitch." - Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [B]
 
-> "A clear, specific outline of what will be reviewed, transparency about who’s conducting it, and examples of past successes would help." — Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [B]
+> "A clear, specific outline of what will be reviewed, transparency about who’s conducting it, and examples of past successes would help." - Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [B]
 
-> "I'd expect a well-organized report highlighting key areas for improvement, actionable suggestions, and maybe examples of how those changes could be implemented. Ideally, it would include insights specific to our brand’s needs." — Interview 019f3ce7-e3ea-748e-a2a2-b0d85b87659a [U]
+> "I'd expect a well-organized report highlighting key areas for improvement, actionable suggestions, and maybe examples of how those changes could be implemented. Ideally, it would include insights specific to our brand’s needs." - Interview 019f3ce7-e3ea-748e-a2a2-b0d85b87659a [U]
 
 ### Observed vs hypothetical
-**Observed:** Founders exhibit immediate skepticism toward "free" offers, heavily guarding their time based on past negative experiences with generic agency pitches. 
+**Observed:** Founders exhibit immediate skepticism toward "free" offers, heavily guarding their time based on past negative experiences with generic agency pitches.
 **Hypothetical:** Participants state they would willingly trust a provider who showcases past examples and promises niche-specific insights, though it remains untested whether a well-crafted portfolio is entirely sufficient to overcome their ingrained fear of the hard upsell.
 
 ### Gaps
 The transcripts highlight a desire for "examples of past audits" and "tailored reports," but they do not specify what format of proof is most credible (e.g., a PDF case study, a recorded Loom video breakdown, or a live consultation). Additionally, the corpus does not detail exactly how much a provider needs to know about a founder's niche beforehand to cross the threshold from "generic" to "tailored."
 
 ### Direct answer
-Trust in a free landing page audit is primarily eroded by the assumption that the offer is a shallow "bait-and-switch" tactic designed to pitch an expensive, long-term agency retainer. Founders have a low baseline of trust due to past experiences with consultants offering generic, cookie-cutter advice. To build trust and prove value, founders need upfront transparency about the deliverables and clear evidence—such as past examples—that the auditor deeply understands their specific niche, brand constraints, and audience.
+Trust in a free landing page audit is primarily eroded by the assumption that the offer is a shallow "bait-and-switch" tactic designed to pitch an expensive, long-term agency retainer. Founders have a low baseline of trust due to past experiences with consultants offering generic, cookie-cutter advice. To build trust and prove value, founders need upfront transparency about the deliverables and clear evidence-such as past examples-that the auditor deeply understands their specific niche, brand constraints, and audience.
 
 ### Key patterns
 - **The "bait-and-switch" upsell assumption** (Frequency: Many | Confidence: High). Founders immediately suspect that a "free" audit is a high-pressure sales vehicle rather than a genuine diagnostic tool. They assume the resulting advice will be artificially limited or generic unless proven otherwise.
@@ -99,7 +99,7 @@ Trust in a free landing page audit is primarily eroded by the assumption that th
 - **Data privacy and access apprehension** (Frequency: Many | Confidence: High). Founders are highly protective of their backend metrics and customer data. They view unrestricted access as a significant risk and require explicit boundaries regarding what data will be accessed and how it will be protected to feel secure proceeding with a free offer.
 
 ### Evidence
-> "I'd assume it’s an initial review of the page highlighting potential improvements. But I'd be wary of generic advice or a push to upsell expensive services, like I experienced with a consultant recently." — Interview 019
+> "I'd assume it’s an initial review of the page highlighting potential improvements. But I'd be wary of generic advice or a push to upsell expensive services, like I experienced with a consultant recently." - Interview 019
 
 ## Objective 3: What objections, risks, and switching costs prevent founders from accepting a free audit or sharing access/data?
 
@@ -113,17 +113,17 @@ Founders primarily resist free audits out of a fear that "free" implies a high-p
 - **Fear of irreversible disruption to live campaigns** (Frequency: Several | Confidence: Medium). When granting access for actual implementation, founders worry about permanent damage to their current funnels and demand the ability to roll back changes easily.
 
 ### Evidence
-> "The risk is mostly about data privacy and potential upselling pressure. There's also the fear of being judged or led into agreements that don't align with our specific needs and brand values." — Interview 019f3ce7-e3ea-748e-a2a2-b0d85b87659a [U]
+> "The risk is mostly about data privacy and potential upselling pressure. There's also the fear of being judged or led into agreements that don't align with our specific needs and brand values." - Interview 019f3ce7-e3ea-748e-a2a2-b0d85b87659a [U]
 
-> "The main risk is exposure of sensitive data without knowing the audit's credibility. There’s also potential misalignment with our niche needs, and concern about commitment pressure if the audit is actually a sales pitch." — Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [B]
+> "The main risk is exposure of sensitive data without knowing the audit's credibility. There’s also potential misalignment with our niche needs, and concern about commitment pressure if the audit is actually a sales pitch." - Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [B]
 
-> "There’s a concern about data privacy and whether the audit will truly offer value or just try to upsell. I also worry about time wasted reviewing non-specific recommendations." — Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [B]
+> "There’s a concern about data privacy and whether the audit will truly offer value or just try to upsell. I also worry about time wasted reviewing non-specific recommendations." - Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [B]
 
-> "I'd need a clear agreement outlining scope, privacy protections, and access limitations. Also, reassurance that changes can be easily rolled back if they don't perform as expected is critical to feel secure about proceeding." — Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [B]
+> "I'd need a clear agreement outlining scope, privacy protections, and access limitations. Also, reassurance that changes can be easily rolled back if they don't perform as expected is critical to feel secure about proceeding." - Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [B]
 
-> "I'd need to know they have a reputable track record, clear transparency about what they'll access, and assurances about how they handle data. Open communication throughout the process would also help me feel more secure." — Interview 019f3ce7-e3ea-748e-a2a2-b0d85b87659a [U]
+> "I'd need to know they have a reputable track record, clear transparency about what they'll access, and assurances about how they handle data. Open communication throughout the process would also help me feel more secure." - Interview 019f3ce7-e3ea-748e-a2a2-b0d85b87659a [U]
 
-> "I'd need assurance of data privacy, clear understanding of what specific changes will be made, and ideally, some demonstrated expertise in dealing with similar businesses or challenges." — Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [B]
+> "I'd need assurance of data privacy, clear understanding of what specific changes will be made, and ideally, some demonstrated expertise in dealing with similar businesses or challenges." - Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [B]
 
 ### Observed vs hypothetical
 **Observed:** Founders immediately reference past negative experiences with consultants trying to push expensive services or offering off-brand, unfeasible design suggestions.
@@ -135,30 +135,30 @@ The transcripts do not explore the specific technical mechanisms of sharing acce
 ## Objective 4: What decision criteria and value thresholds would make founders pay $700 for a 24-hour implementation of fixes?
 
 ### Direct answer
-Founders justify a $700 fee for a 24-hour implementation purely through a projected return on investment. Because they assume a 24-hour turnaround naturally limits the scope to surface-level changes—like copy tweaks, layout adjustments, and trust signals—they require the preceding audit to prove these specific minor adjustments will unlock a disproportionate lift in conversion rates. If the expected increase in sales or demo requests directly offsets the $700 cost without compromising brand aesthetics, founders are willing to pay for the accelerated execution.
+Founders justify a $700 fee for a 24-hour implementation purely through a projected return on investment. Because they assume a 24-hour turnaround naturally limits the scope to surface-level changes-like copy tweaks, layout adjustments, and trust signals-they require the preceding audit to prove these specific minor adjustments will unlock a disproportionate lift in conversion rates. If the expected increase in sales or demo requests directly offsets the $700 cost without compromising brand aesthetics, founders are willing to pay for the accelerated execution.
 
 ### Key patterns
 - **Direct ROI and metric impact** (Frequency: Many | Confidence: High). Founders evaluate the $700 price tag mathematically against their customer acquisition cost (CAC) and expected return on ad spend (ROAS). The implementation is deemed worthwhile only if the predicted conversion bump clearly pays for itself in a short timeframe.
-- **Assumption of surface-level scope** (Frequency: Many | Confidence: High). Founders universally expect a 24-hour turnaround to consist of minor, fast adjustments—like copy tweaks, layout shifts, or adding trust signals—rather than deep strategic redesigns. They are comfortable with this constraint as long as the minor changes drive major impact.
+- **Assumption of surface-level scope** (Frequency: Many | Confidence: High). Founders universally expect a 24-hour turnaround to consist of minor, fast adjustments-like copy tweaks, layout shifts, or adding trust signals-rather than deep strategic redesigns. They are comfortable with this constraint as long as the minor changes drive major impact.
 - **Demand for tailored alignment over generic patches** (Frequency: Many | Confidence: High). Despite expecting quick fixes within the 24-hour window, founders will veto the implementation if the proposed changes feel like templated best practices. The solutions must be bespoke to their niche and strictly adhere to their established brand voice.
 - **Desire for outcome guarantees** (Frequency: Several | Confidence: Medium). Given the fast turnaround, founders fear paying $700 for superficial work that yields no lasting results. They express a strong hesitation to commit funds without assurances that the quick adjustments will generate permanent metric improvements.
 
 ### Evidence
-> "I'd assume it's a quick execution of straightforward changes like copy tweaks, rearranging elements, or adding trust signals. It's probably more about addressing surface-level issues rather than deeper, strategic transformations." — Interview 019f3ce7-e3ea-748e-a2a2-b0d85b87659a [U]
+> "I'd assume it's a quick execution of straightforward changes like copy tweaks, rearranging elements, or adding trust signals. It's probably more about addressing surface-level issues rather than deeper, strategic transformations." - Interview 019f3ce7-e3ea-748e-a2a2-b0d85b87659a [U]
 
-> "An increase that offsets the cost or significantly impacts the customer journey would justify the investment. I'd also consider if the improvements align with our brand aesthetics and values." — Interview 019f3ce7-e3ea-748e-a2a2-b0d85b87659a [U]
+> "An increase that offsets the cost or significantly impacts the customer journey would justify the investment. I'd also consider if the improvements align with our brand aesthetics and values." - Interview 019f3ce7-e3ea-748e-a2a2-b0d85b87659a [U]
 
-> "I’d assume it includes executing minor yet impactful changes like copy updates, layout adjustments, or fixing tracking issues, preferably without major design overhauls..." — Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [U]
+> "I’d assume it includes executing minor yet impactful changes like copy updates, layout adjustments, or fixing tracking issues, preferably without major design overhauls..." - Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [U]
 
-> "If the predicted boost in CVR could improve CAC or ROAS significantly, it might justify the investment in fixing those funnel bottlenecks quickly." — Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [U]
+> "If the predicted boost in CVR could improve CAC or ROAS significantly, it might justify the investment in fixing those funnel bottlenecks quickly." - Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [U]
 
-> "I’d hesitate if the audit didn’t clearly pinpoint high-impact opportunities or if the proposed fixes seem like quick patches rather than tailored solutions. I'd also need assurance of lasting improvements..." — Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [U]
+> "I’d hesitate if the audit didn’t clearly pinpoint high-impact opportunities or if the proposed fixes seem like quick patches rather than tailored solutions. I'd also need assurance of lasting improvements..." - Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [U]
 
-> "I’d assume it includes making quick, specific fixes to copy and layout, maybe updating trust signals or improving call-to-action clarity. I wouldn’t expect deeper changes like redesign or in-depth testing within that timeframe." — Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [U]
+> "I’d assume it includes making quick, specific fixes to copy and layout, maybe updating trust signals or improving call-to-action clarity. I wouldn’t expect deeper changes like redesign or in-depth testing within that timeframe." - Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [U]
 
-> "If the fixes meaningfully align with our goals, offer a clear lift in conversions, and save us time, it might justify the expense." — Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [U]
+> "If the fixes meaningfully align with our goals, offer a clear lift in conversions, and save us time, it might justify the expense." - Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [U]
 
-> "There’s also concern about committing $700 without a clear guarantee of improved conversions." — Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [U]
+> "There’s also concern about committing $700 without a clear guarantee of improved conversions." - Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [U]
 
 ### Observed vs hypothetical
 **Observed:** Founders have previously rejected external conversion advice when it felt off-brand or logistically unfeasible for their current setup, demonstrating that brand protection ultimately overrides the promise of performance gains.
@@ -174,11 +174,11 @@ Founders describe wasted ad spend using visceral metaphors of destruction and lo
 - **Strategic doubt and pipeline pressure** (Frequency: Several | Confidence: High). The failure to generate ROI from ad spend does not just hurt the current budget; it creates profound uncertainty about future investments. Founders report that these funnel leaks cause them to question their overall marketing effectiveness and feel heightened stress when expected sales leads do not arrive to sustain business growth.
 
 ### Evidence
-> "It feels like pouring money down the drain. It's frustrating and stressful, knowing resources are used with little return, creating uncertainty about future investment decisions and strategy." — Interview 019f3ce7-e3ea-748e-a2a2-b0d85b87659a [B]
+> "It feels like pouring money down the drain. It's frustrating and stressful, knowing resources are used with little return, creating uncertainty about future investment decisions and strategy." - Interview 019f3ce7-e3ea-748e-a2a2-b0d85b87659a [B]
 
-> "I’d say it's frustrating and feels like flying blind. It adds unnecessary pressure, especially when the expected pipeline doesn't materialize, and creates doubts about the effectiveness of our strategies." — Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [B]
+> "I’d say it's frustrating and feels like flying blind. It adds unnecessary pressure, especially when the expected pipeline doesn't materialize, and creates doubts about the effectiveness of our strategies." - Interview 019f3ce7-e403-741e-9404-c8418e5928d3 [B]
 
-> "It feels wasteful and frustrating, like we're burning budget on curiosity instead of actual interest. It’s disheartening because we aim for high-consideration engagements that need clear ROI." — Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [B]
+> "It feels wasteful and frustrating, like we're burning budget on curiosity instead of actual interest. It’s disheartening because we aim for high-consideration engagements that need clear ROI." - Interview 019f3ce7-e3ed-7498-9a25-2ee3a4698322 [B]
 
 ### Observed vs hypothetical
 **Observed:** Founders experience immediate, palpable stress and frustration tied directly to reviewing ad performance dashboards where high spend does not match corresponding acquisitions.
@@ -195,11 +195,11 @@ Founders describe wasted ad spend using visceral metaphors of destruction and lo
 - **Strategic doubt and pipeline pressure** (Frequency: Several | Confidence: High). The failure to generate ROI from ad spend does not just hurt the current budget; it creates profound uncertainty about future investments. Founders report that these funnel leaks cause them to question their overall marketing effectiveness and feel heightened stress when expected sales leads do not arrive to sustain business growth.
 
 ### Evidence
-> "It feels like pouring money down the drain. It's frustrating and stressful, knowing resources are used with little return, creating uncertainty about future investment decisions and strategy." — Interview 1 [B]
+> "It feels like pouring money down the drain. It's frustrating and stressful, knowing resources are used with little return, creating uncertainty about future investment decisions and strategy." - Interview 1 [B]
 
-> "I’d say it's frustrating and feels like flying blind. It adds unnecessary pressure, especially when the expected pipeline doesn't materialize, and creates doubts about the effectiveness of our strategies." — Interview 2 [B]
+> "I’d say it's frustrating and feels like flying blind. It adds unnecessary pressure, especially when the expected pipeline doesn't materialize, and creates doubts about the effectiveness of our strategies." - Interview 2 [B]
 
-> "It feels wasteful and frustrating, like we're burning budget on curiosity instead of actual interest. It’s disheartening because we aim for high-consideration engagements that need clear ROI." — Interview 3 [B]
+> "It feels wasteful and frustrating, like we're burning budget on curiosity instead of actual interest. It’s disheartening because we aim for high-consideration engagements that need clear ROI." - Interview 3 [B]
 
 ### Observed vs hypothetical
 **Observed:** Founders experience immediate, palpable stress and frustration tied directly to reviewing ad performance dashboards where high spend does not match corresponding acquisitions.
@@ -226,4 +226,4 @@ The corpus captures immediate emotional reactions and short-term strategic doubt
 
 ## Additional discoveries
 
-Upon rigorous review of the qualitative data, no defensible additional themes were identified, as the five primary research objectives comprehensively exhausted the corpus. The core objectives successfully captured the entirety of the founders' narrative arc regarding landing page performance—from the mechanics of diagnosing conversion failures and the visceral toll of wasted ad spend, to the specific trust barriers, data privacy concerns, and ROI calculations involved in evaluating third-party audits and paid implementations. Because the targeted research questions deeply aligned with the scope of the founder interviews, all substantive evidence, objections, and linguistic patterns naturally consolidated under the main objective digests, leaving no significant unexplored themes or orphaned data to report.
+Upon rigorous review of the qualitative data, no defensible additional themes were identified, as the five primary research objectives comprehensively exhausted the corpus. The core objectives successfully captured the entirety of the founders' narrative arc regarding landing page performance-from the mechanics of diagnosing conversion failures and the visceral toll of wasted ad spend, to the specific trust barriers, data privacy concerns, and ROI calculations involved in evaluating third-party audits and paid implementations. Because the targeted research questions deeply aligned with the scope of the founder interviews, all substantive evidence, objections, and linguistic patterns naturally consolidated under the main objective digests, leaving no significant unexplored themes or orphaned data to report.

@@ -2,21 +2,21 @@
   "comment_templates": {
     "thanks_for_comment": {
       "trigger": "Any positive or neutral comment",
-      "template": "Appreciate the engagement {{name}}. The tool's free if you want to run it on your own page — curious if you find any of these leaks on yours.",
+      "template": "Appreciate the engagement {{name}}. The tool's free if you want to run it on your own page - curious if you find any of these leaks on yours.",
       "tone": "conversational",
-      "cta": "implicit — curiosity-driven visit"
+      "cta": "implicit - curiosity-driven visit"
     },
     "question_about_audit": {
       "trigger": "How does the audit work / what does it check / is it accurate",
-      "template": "Good question. It checks 5 dimensions — headline clarity, CTA actionability, trust proof placement, page speed, and mobile responsiveness. Each gets a score + specific fix recommendation. Takes 30 seconds: paste URL → get scores → done.",
+      "template": "Good question. It checks 5 dimensions - headline clarity, CTA actionability, trust proof placement, page speed, and mobile responsiveness. Each gets a score + specific fix recommendation. Takes 30 seconds: paste URL → get scores → done.",
       "tone": "informative",
-      "cta": "direct — here's how it works"
+      "cta": "direct - here's how it works"
     },
     "question_about_scope": {
       "trigger": "Does it work for [my type of page / industry]",
-      "template": "The audit checks universal conversion principles — not design opinions. Same rubric works for SaaS landing pages, service pages, lead gen forms. If your page asks someone to take action, the same 5 leaks apply. Run it and see: {{audit_url}}",
+      "template": "The audit checks universal conversion principles - not design opinions. Same rubric works for SaaS landing pages, service pages, lead gen forms. If your page asks someone to take action, the same 5 leaks apply. Run it and see: {{audit_url}}",
       "tone": "confident",
-      "cta": "direct — try it"
+      "cta": "direct - try it"
     },
     "skeptical": {
       "trigger": "How is this different from [tool / GPT / agency]",
@@ -26,37 +26,37 @@
     },
     "objection_free": {
       "trigger": "Nothing is free / what's the catch",
-      "template": "No catch. The audit itself is free with no email gate — see results immediately. If you want the Fix Kit with templates + checklist, that requires an email. Same model as every other SaaS top-of-funnel.",
+      "template": "No catch. The audit itself is free with no email gate - see results immediately. If you want the Fix Kit with templates + checklist, that requires an email. Same model as every other SaaS top-of-funnel.",
       "tone": "transparent",
       "cta": "reassurance"
     },
     "objection_paid_followup": {
       "trigger": "How much does the full fix cost",
-      "template": "$97 for the Conversion Fix Pack — implemented hero, CTA, trust, FAQ sections based on your audit. One checkout, delivered in 24h. $997 for the Growth Launch which includes the fix + 200 triggered prospects + outreach + first customer guarantee. No sales call on either.",
+      "template": "$97 for the Conversion Fix Pack - implemented hero, CTA, trust, FAQ sections based on your audit. One checkout, delivered in 24h. $997 for the Growth Launch which includes the fix + 200 triggered prospects + outreach + first customer guarantee. No sales call on either.",
       "tone": "pricing transparent",
       "cta": "pricing anchor"
     },
     "question_about_results": {
       "trigger": "What results have you seen / case studies",
-      "template": "Most pages running paid traffic to a <2% converting page see 2-3x improvement after fixing headline + CTA — the two most common leaks. The audit shows you exactly where you sit. I share breakdowns publicly on this feed — check my previous posts for examples.",
+      "template": "Most pages running paid traffic to a <2% converting page see 2-3x improvement after fixing headline + CTA - the two most common leaks. The audit shows you exactly where you sit. I share breakdowns publicly on this feed - check my previous posts for examples.",
       "tone": "evidence-backed",
       "cta": "social proof"
     },
     "creator_comment_outreach": {
-      "trigger": "High-value commenter on CRO creator's post — see also cold_email_frameworks 'linkedin_comment_outreach'",
-      "template": "Saw your comment on {{creator}}'s post about {{topic}}. {{one_sentence_showing_you_read_and_have_relevant_take}}. Curious what you're running into — happy to run your landing page through the free audit if you want. No pitch.",
+      "trigger": "High-value commenter on CRO creator's post - see also cold_email_frameworks 'linkedin_comment_outreach'",
+      "template": "Saw your comment on {{creator}}'s post about {{topic}}. {{one_sentence_showing_you_read_and_have_relevant_take}}. Curious what you're running into - happy to run your landing page through the free audit if you want. No pitch.",
       "tone": "conversational + value-first",
-      "cta": "implicit — audit offer, no pressure"
+      "cta": "implicit - audit offer, no pressure"
     },
     "sharing_pain": {
       "trigger": "I have this exact problem / spending on ads with no conversions",
-      "template": "That's exactly who this is for. Run the audit — it's 30 seconds and tells you exactly which leaks are costing you. If you want me to look at the results with you, DM me after. No pitch, just practical next steps.",
+      "template": "That's exactly who this is for. Run the audit - it's 30 seconds and tells you exactly which leaks are costing you. If you want me to look at the results with you, DM me after. No pitch, just practical next steps.",
       "tone": "empathetic + action",
       "cta": "audit + DM open"
     },
     "scenario_known_expert": {
       "trigger": "Someone who clearly knows what they're talking about in the space",
-      "template": "Appreciate that. The tool's built on the same rubric I use for paid audits — just automated the first pass so founders can self-diagnose before spending money.",
+      "template": "Appreciate that. The tool's built on the same rubric I use for paid audits - just automated the first pass so founders can self-diagnose before spending money.",
       "tone": "humble",
       "cta": "reinforces credibility"
     }
@@ -66,15 +66,15 @@
     "never_argue": "If someone disagrees, thank them for the perspective and move on",
     "never_link_directly_in_linkedin": "LinkedIn flags external links in comments. Say 'link in my profile' or 'free tool, Google Nebula Components'",
     "dm_high_value": "High-value engagers (score >= 7 + comment) → DM them directly after replying publicly",
-    "dm_template": "Hey {{name}}, saw your comment on my post about landing page leaks. Happy to run your page through the audit personally if you want — just send the URL. No pitch, no follow-up pressure.",
-    "dm_creator_template": "Hey {{name}}, saw your comment on {{creator}}'s post about {{topic}}. Landed here because I built a tool that finds conversion leaks on landing pages. Happy to run yours through it for free — just send the URL. No pitch.",
+    "dm_template": "Hey {{name}}, saw your comment on my post about landing page leaks. Happy to run your page through the audit personally if you want - just send the URL. No pitch, no follow-up pressure.",
+    "dm_creator_template": "Hey {{name}}, saw your comment on {{creator}}'s post about {{topic}}. Landed here because I built a tool that finds conversion leaks on landing pages. Happy to run yours through it for free - just send the URL. No pitch.",
     "tag_team": "If someone asks a question you can't answer well, pause → Mike should answer that one",
     "warm_dm_sequence": {
       "description": "3-touch DM flow for warm engagers (comment on own post or creator post). Each touch is 2-3 days apart. Stop after reply or call booked.",
       "touch_1": {
         "timing": "Within 24h of their comment/engagement",
         "trigger": "Anyone who left a meaningful comment on a CRO post or Nebula post",
-        "template": "Hey {{name}}, saw your comment on {{post_topic}}. Built a free tool that diagnoses conversion leaks on landing pages — found 3 on mine first week. Happy to run yours through it: nebulacomponents.shop/audit. No pitch, just useful.",
+        "template": "Hey {{name}}, saw your comment on {{post_topic}}. Built a free tool that diagnoses conversion leaks on landing pages - found 3 on mine first week. Happy to run yours through it: nebulacomponents.shop/audit. No pitch, just useful.",
         "objective": "Warm intro + value-first audit link"
       },
       "touch_2": {
@@ -86,7 +86,7 @@
       "touch_3": {
         "timing": "7-10 days after Touch 2 (if no reply)",
         "trigger": "No response to Touch 1 or 2",
-        "template": "Hey {{name}}, last message from me on this. The audit checks 5 things: headline clarity, CTA actionability, trust signals, load speed, mobile layout. 75% of pages fail on headline alone. Yours might be fine — only one way to know. Up to you: nebulacomponents.shop/audit",
+        "template": "Hey {{name}}, last message from me on this. The audit checks 5 things: headline clarity, CTA actionability, trust signals, load speed, mobile layout. 75% of pages fail on headline alone. Yours might be fine - only one way to know. Up to you: nebulacomponents.shop/audit",
         "objective": "Final value summary + soft close, no pressure"
       }
     }

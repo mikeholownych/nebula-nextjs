@@ -74,7 +74,7 @@ Analyze whatever the user has provided:
    - Intent statements or descriptions (already logged in audit.md)
    - Existing requirements documents (search workspace if mentioned)
    - Pasted content or file references
-   - Convert any non-markdown documents to markdown format 
+   - Convert any non-markdown documents to markdown format
 
 ### Step 5: Thorough Completeness Analysis
 
@@ -124,7 +124,7 @@ DO NOT proceed to Step 7 until all questions in requirement-verification-questio
 Present the question file to the user and STOP.
 
 ### Step 7: Generate Requirements Document
-   - **PREREQUISITE**: Step 6 gate must be passed — all answers received and analyzed
+   - **PREREQUISITE**: Step 6 gate must be passed - all answers received and analyzed
    - Create `aidlc-docs/inception/requirements/requirements.md`
    - Include intent analysis summary at the top:
      - User request
@@ -166,7 +166,7 @@ Update `aidlc-docs/aidlc-state.md`:
      3. **Formatted Workflow Message** (mandatory): Always end with this exact format:
 
 ```markdown
-> **📋 <u>**REVIEW REQUIRED:**</u>**  
+> **📋 <u>**REVIEW REQUIRED:**</u>**
 > Please examine the requirements document at: `aidlc-docs/inception/requirements/requirements.md`
 
 
@@ -175,9 +175,9 @@ Update `aidlc-docs/aidlc-state.md`:
 >
 > **You may:**
 >
-> 🔧 **Request Changes** -  Ask for modifications to the requirements if required based on your review 
+> 🔧 **Request Changes** -  Ask for modifications to the requirements if required based on your review
 > [IF User Stories will be skipped, add this option:]
-> 📝 **Add User Stories** - Choose to Include **User Stories** stage (currently skipped based on project simplicity)  
+> 📝 **Add User Stories** - Choose to Include **User Stories** stage (currently skipped based on project simplicity)
 > ✅ **Approve & Continue** - Approve requirements and proceed to **[User Stories/Workflow Planning]**
 
 ---

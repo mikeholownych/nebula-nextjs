@@ -53,8 +53,8 @@ targets = [
 
 # Gojiberry style: 23 words. Just a question. No pitch.
 SUBJECT = "Quick question"
-TEXT = """Quick question — what's your biggest challenge with getting your first customers right now?"""
-HTML = """<p><strong>Quick question</strong> — what's your biggest challenge with getting your first customers right now?</p>"""
+TEXT = """Quick question - what's your biggest challenge with getting your first customers right now?"""
+HTML = """<p><strong>Quick question</strong> - what's your biggest challenge with getting your first customers right now?</p>"""
 
 sent = 0
 for email, _ in targets:

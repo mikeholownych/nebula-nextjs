@@ -1,4 +1,4 @@
-# ICP — Ideal Customer Profile
+# ICP - Ideal Customer Profile
 > NOT a demographic. A buying trigger: founder actively bleeding ad spend with zero conversions.
 
 ## The Trigger (what creates a qualified lead)

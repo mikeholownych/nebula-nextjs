@@ -40,6 +40,6 @@ The visitor didn't have to translate. They saw a description of their problem, i
 
 {audit_link_with_source}
 
-—
+-
 
 P.S. If you want to see how the rewrite framework works, the headline worksheet is here: {headline_worksheet_link}

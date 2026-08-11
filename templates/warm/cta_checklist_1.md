@@ -10,7 +10,7 @@ Subject: {first_name}, your CTA needs to answer 5 questions
 
 {first_name},
 
-We see this pattern constantly: the button is visible, the color is tested, the placement is above the fold — but the click rate is flat.
+We see this pattern constantly: the button is visible, the color is tested, the placement is above the fold - but the click rate is flat.
 
 The missing piece: the visitor doesn't know what the click commits them to.
 
@@ -48,6 +48,6 @@ No guessing.
 
 {audit_link_with_source}
 
-—
+-
 
 P.S. The CTA specificity checklist is here: {cta_worksheet_link}

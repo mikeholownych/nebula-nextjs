@@ -60,7 +60,7 @@ def page(title: str, body_html: str) -> str:
 <head>
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<title>{html.escape(title)} — Nebula Components</title>
+<title>{html.escape(title)} - Nebula Components</title>
 <style>
 body{{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#08090b;color:#f4f1ea;margin:0;line-height:1.6}}
 main{{max-width:820px;margin:0 auto;padding:56px 22px 80px}}

@@ -10,10 +10,10 @@ You're spending $2K-$10K/month on ads. Clicks are coming in. Sales aren't. The a
 
 But it's not.
 
-This guide gives you a specific methodology to calculate exactly how much your landing page is leaking RIGHT NOW in dollars per month — and shows you exactly what to fix first.
+This guide gives you a specific methodology to calculate exactly how much your landing page is leaking RIGHT NOW in dollars per month - and shows you exactly what to fix first.
 
 **By the end, you'll know:**
-- Your exact monthly leak amount (not guesses — actual math)
+- Your exact monthly leak amount (not guesses - actual math)
 - Which of the 4 holes is the biggest leak
 - What order to fix them for maximum ROI
 - Whether you can plug it yourself or need help
@@ -24,14 +24,14 @@ This guide gives you a specific methodology to calculate exactly how much your l
 
 ## Part 1: The 4 Holes That Kill Conversion
 
-Every landing page has the same 4 potential leak points. The question isn't IF you have them — it's WHICH one is costing you the most money.
+Every landing page has the same 4 potential leak points. The question isn't IF you have them - it's WHICH one is costing you the most money.
 
 ### Hole #1: Message Match Gap
 
 **What it is:** Your ad promises X. Your landing page delivers Y. The visitor's brain hits "disconnect" and they bounce.
 
 **Example:**
-- Ad: "Free landing page audit — 60 seconds"
+- Ad: "Free landing page audit - 60 seconds"
 - Landing page: "Premium SaaS components for dark-themed websites"
 - Result: Visitor expected a tool. Got a product catalog. Bounce.
 
@@ -140,7 +140,7 @@ Conservative: $2,000 - $500 = $1,500/month leaking
 Best-case: $5,000 - $500 = $4,500/month leaking
 ```
 
-**Your monthly leak range: $1,500 — $4,500**
+**Your monthly leak range: $1,500 - $4,500**
 
 ### Step 5: Annualize It (30 seconds)
 
@@ -192,7 +192,7 @@ Now that you know HOW MUCH is leaking, you need to know WHERE.
 
 1. **Search for:** testimonials, reviews, customer logos, case studies, "as seen in"
 2. **Count:** How many social proof signals above the fold?
-3. **Check:** Are they specific (name, company, result) or generic (" Loved it!" — Anonymous)?
+3. **Check:** Are they specific (name, company, result) or generic (" Loved it!" - Anonymous)?
 
 **Scoring:**
 - 3+ specific signals: Strong trust
@@ -252,9 +252,9 @@ Offer Clarity creates urgency but only matters if they've already decided to buy
 3. Ensure above-fold CTA matches ad promise
 
 **Example:**
-- Ad: "Free Landing Page Audit — 60 Seconds"
+- Ad: "Free Landing Page Audit - 60 Seconds"
 - Landing page before: "Premium SaaS Components"
-- Landing page after: "Get Your Free Landing Page Audit — Takes 60 Seconds"
+- Landing page after: "Get Your Free Landing Page Audit - Takes 60 Seconds"
 
 ### Fix #2: Trust Gap (45 minutes)
 
@@ -266,7 +266,7 @@ Offer Clarity creates urgency but only matters if they've already decided to buy
 **Template:**
 ```
 "[Specific result] after [timeframe] using [product]"
-— [Name], [Company], [Link]
+- [Name], [Company], [Link]
 ```
 
 ### Fix #3: ROAS Cliff (30 minutes)
@@ -350,7 +350,7 @@ $147 fix pays for itself in 3 days
 
 ## The Bridge: Why This Matters
 
-You've just calculated how much your landing page is leaking. The number is real — not a guess.
+You've just calculated how much your landing page is leaking. The number is real - not a guess.
 
 If you do nothing, that leak continues forever. Every month, that money is gone.
 
@@ -373,9 +373,9 @@ We show you the number first. Then you decide if it's worth fixing.
 - Mobile test on your phone
 
 **Paid (optional):**
-- FullStory ($99/month) — session recordings
-- CrazyEgg ($24/month) — heatmaps
-- Lucky Orange ($10/month) — Live chat + analytics
+- FullStory ($99/month) - session recordings
+- CrazyEgg ($24/month) - heatmaps
+- Lucky Orange ($10/month) - Live chat + analytics
 
 **Our tools:**
 - Free landing page audit: nebulacomponents.shop/audit

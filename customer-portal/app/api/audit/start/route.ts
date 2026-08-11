@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
     const attribution = readAttributionHeader(request)
 
     // Quota gate: check if the submitting email (from the body, if provided) is
-    // within the free-tier limit. Anonymous audits (no email) always pass — quota
+    // within the free-tier limit. Anonymous audits (no email) always pass - quota
     // is enforced at claim/unlock time when the email is first captured.
     const submittedEmail = typeof body.email === 'string' ? body.email.trim().toLowerCase() : null
     if (submittedEmail) {
@@ -116,7 +116,7 @@ export async function POST(request: NextRequest) {
       })
       await ph.flush()
     } catch {
-      // Non-fatal — never let analytics block the response
+      // Non-fatal - never let analytics block the response
     }
 
     // Public audit start never trusts a client-supplied email; ownership is
@@ -134,7 +134,7 @@ export async function POST(request: NextRequest) {
       }),
       signal: AbortSignal.timeout(120000) // 2 minute timeout
     })
-    
+
     if (!apiResponse.ok) {
       return NextResponse.json(
         { error: 'Audit service unavailable' },

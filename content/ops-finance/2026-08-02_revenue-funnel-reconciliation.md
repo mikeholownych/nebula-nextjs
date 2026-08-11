@@ -24,12 +24,12 @@
 
 | Source | Count | Notes |
 |--------|-------|-------|
-| customer-ledger.jsonl audit_delivered events | 40 | Last entry: 2026-07-11 (test@example.com — test send) |
+| customer-ledger.jsonl audit_delivered events | 40 | Last entry: 2026-07-11 (test@example.com - test send) |
 | audit-delivery.log (JSON lines, sent=true) | 16 | JSONL entries only; rest of 250 lines are plaintext log lines |
 | stats.json (main) | 39 | data_updated: 2026-07-13T10:29:33Z |
 | dashboard/stats.json | 39 | updated: 2026-07-05T02:57:31Z |
 
-**Discrepancy:** customer-ledger shows 40 events; stats.json shows 39. The 40th entry (2026-07-11, test@example.com) is a test send to nebulacomponents.shop/audit.html — it should not count as a real delivery. **Reconciled real audits delivered: 39.**
+**Discrepancy:** customer-ledger shows 40 events; stats.json shows 39. The 40th entry (2026-07-11, test@example.com) is a test send to nebulacomponents.shop/audit.html - it should not count as a real delivery. **Reconciled real audits delivered: 39.**
 
 **Last real audit delivery:** 2026-07-07T17:07:32Z (support@godlike.host). No real audits delivered since July 7 per any log. 25-day gap as of today (2026-08-02).
 
@@ -42,7 +42,7 @@
 | dashboard/stats.json emails_sent | 155 | Updated: 2026-07-05T02:57:31Z; trigger_based_sends=66, hot_lead_pitches_sent=7 |
 | stats.json (main) emails_sent | 80 | Updated: 2026-07-13T19:54:23Z; trigger_based_sends=80, hot_lead_pitches_sent=7 |
 
-**Discrepancy flagged:** Dashboard (older, July 5) shows 155 emails; main stats.json (newer, July 13) shows 80. The dashboard was written first when Wave 1-3 outreach (155 emails) had been sent; the main stats.json was rewritten July 13 and reflects only trigger-based sends (80) — the 75-email delta (Wave 1-2 cold outreach) is unaccounted for in main stats.json. **No evidence file reconciles both counts.**
+**Discrepancy flagged:** Dashboard (older, July 5) shows 155 emails; main stats.json (newer, July 13) shows 80. The dashboard was written first when Wave 1-3 outreach (155 emails) had been sent; the main stats.json was rewritten July 13 and reflects only trigger-based sends (80) - the 75-email delta (Wave 1-2 cold outreach) is unaccounted for in main stats.json. **No evidence file reconciles both counts.**
 
 ---
 
@@ -57,7 +57,7 @@
 | lead_state.db replied stage | 1 | kanzariyamihir@gmail.com / referralful.com |
 | tracking_log.jsonl email_sequence_engine_run | warm_replied_added=2 | 2026-07-08T00:02:06Z run; ozigi.app=positive_inquiry, referralful.com=soft_interest |
 
-**Discrepancy flagged:** Main stats.json shows 0 replies. Dashboard shows 3. tracking_log records warm_replied_added=2 (referralful.com, ozigi.app). HOT_LEAD.json and lead_state.db each show 1 warm_replied (referralful.com only — ozigi.app not reflected in HOT_LEAD). No reply events are recorded in customer-ledger.jsonl at all. **Evidence supports 2 warm replies; neither is ledgered.**
+**Discrepancy flagged:** Main stats.json shows 0 replies. Dashboard shows 3. tracking_log records warm_replied_added=2 (referralful.com, ozigi.app). HOT_LEAD.json and lead_state.db each show 1 warm_replied (referralful.com only - ozigi.app not reflected in HOT_LEAD). No reply events are recorded in customer-ledger.jsonl at all. **Evidence supports 2 warm replies; neither is ledgered.**
 
 ---
 
@@ -74,7 +74,7 @@
 | recircle_60d | 1 |
 
 - No HOT_LEAD records in paid/checkout/converted stage
-- HOT_LEAD.json has 48 records; lead_state.db has 30 rows — **18-record discrepancy**
+- HOT_LEAD.json has 48 records; lead_state.db has 30 rows - **18-record discrepancy**
 
 ### lead_state.db (30 rows)
 
@@ -102,7 +102,7 @@
 | trigger_based_sends | 80 | 66 |
 | updated | 2026-07-13T19:54:23Z | 2026-07-05T02:57:31Z |
 
-Main stats.json is newer (July 13) but shows fewer emails and zero replies — it does not appear to be a superset of the dashboard data. The two files are divergent and neither is authoritative.
+Main stats.json is newer (July 13) but shows fewer emails and zero replies - it does not appear to be a superset of the dashboard data. The two files are divergent and neither is authoritative.
 
 ---
 
@@ -112,19 +112,19 @@ Main stats.json is newer (July 13) but shows fewer emails and zero replies — i
 |------|-------|--------|
 | 2026-07-08 | email_sequence_engine_run | Day 3 replies processed; 2 warm_replied added, 1 recircle_60d |
 | 2026-07-13 | stats.json rewrite | main stats.json updated with 80 trigger sends, 0 replies |
-| 2026-07-14 | email opens | lakisha@goldenweeks.co opened twice (pixel fire, 127.0.0.1 — likely bot/proxy) |
-| 2026-07-29 | lead_state.db | referralful.com notes updated — research invite sent |
+| 2026-07-14 | email opens | lakisha@goldenweeks.co opened twice (pixel fire, 127.0.0.1 - likely bot/proxy) |
+| 2026-07-29 | lead_state.db | referralful.com notes updated - research invite sent |
 | 2026-08-02 | hot_lead_watcher | actionable=0, changed=False |
 
 ---
 
 ## Discrepancies Summary
 
-1. **Emails sent:** dashboard=155 vs main stats=80 — 75-email delta unreconciled
-2. **Replies:** main stats=0 vs dashboard=3 vs tracking_log=2 warm_replied — no reply event in customer-ledger
-3. **Audits:** customer-ledger=40 vs stats=39 — off-by-one explained by test send; reconciles to 39 real
+1. **Emails sent:** dashboard=155 vs main stats=80 - 75-email delta unreconciled
+2. **Replies:** main stats=0 vs dashboard=3 vs tracking_log=2 warm_replied - no reply event in customer-ledger
+3. **Audits:** customer-ledger=40 vs stats=39 - off-by-one explained by test send; reconciles to 39 real
 4. **HOT_LEAD vs lead_state.db:** 48 vs 30 records, different stage vocabularies, not synchronized
-5. **Revenue-cost-ledger:** last entry July 4; no cost entries exist at all — infrastructure costs (Proxmox, AgentMail) are unlogged
+5. **Revenue-cost-ledger:** last entry July 4; no cost entries exist at all - infrastructure costs (Proxmox, AgentMail) are unlogged
 
 ---
 

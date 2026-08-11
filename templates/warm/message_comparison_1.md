@@ -41,17 +41,17 @@ Not rewrite both. Pick one thread:
 **Thread A (from ad):**
 
 > Headline: "Cut your CAC by identifying which channels actually convert"
-> Subhead: "See exactly where your best customers come from — and stop funding the others."
+> Subhead: "See exactly where your best customers come from - and stop funding the others."
 
 **Thread B (from page):**
 
-> Ad: "See which channels drive your best conversions — not just clicks"
+> Ad: "See which channels drive your best conversions - not just clicks"
 > Headline (unchanged): "The all-in-one analytics platform"
 
 Either works. The leak is not the message itself. It's the mismatch.
 
 {audit_link_with_source}
 
-—
+-
 
 P.S. The ad/page comparison worksheet is here if you want to run this on your own campaigns: {message_match_worksheet_link}

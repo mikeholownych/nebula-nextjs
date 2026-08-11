@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-night_watch.py — Nebula's "dreaming" engine.
+night_watch.py - Nebula's "dreaming" engine.
 
 Jack Roberts principle: the OS should work while you sleep, re-reading old data,
 finding patterns, and surfacing proactive insights.
@@ -39,7 +39,7 @@ REPORT_PATH = NEBULA / "night_watch_report.json"
 ALERT_LOG_PATH = NEBULA / "night_watch_alerts.jsonl"
 
 USER_AGENT = "Mozilla/5.0 (compatible; NebulaNightWatch/1.0; +https://nebulacomponents.com)"
-FETCH_TIMEOUT = 15  # seconds per URL — fast, lightweight
+FETCH_TIMEOUT = 15  # seconds per URL - fast, lightweight
 MAX_LEADS_PER_RUN = 200
 REPORT_THRESHOLD_CHANGE = 0.15  # 15% hash difference = "changed"
 
@@ -53,7 +53,7 @@ def fetch_page_lightweight(url: str) -> dict | None:
     except (URLError, HTTPError, OSError, ValueError) as e:
         return {"error": str(e)[:120], "status": "down"}
 
-    # Lightweight extraction — no BeautifulSoup needed
+    # Lightweight extraction - no BeautifulSoup needed
     title = ""
     m = re.search(r"<title[^>]*>(.*?)</title>", html, re.IGNORECASE | re.DOTALL)
     if m:
@@ -148,7 +148,7 @@ def should_process_lead(email: str, lead: dict, since_hours: int | None) -> bool
     url = lead.get("url", "").strip()
     if not url or url == "None":
         return False
-    
+
     # Quick filter: domain-only urls (no scheme) need fixing
     if not url.startswith("http"):
         url = "https://" + url
@@ -168,14 +168,14 @@ def should_process_lead(email: str, lead: dict, since_hours: int | None) -> bool
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="Nebula Night Watch — re-scan old leads for site changes")
+    parser = argparse.ArgumentParser(description="Nebula Night Watch - re-scan old leads for site changes")
     parser.add_argument("--dry-run", action="store_true", help="Scan but don't write state")
     parser.add_argument("--quick", action="store_true", help="Skip hash compare, just report current state")
     parser.add_argument("--since", type=int, default=None, help="Only leads contacted in last N hours")
     args = parser.parse_args()
 
     if not CONTACTED_PATH.exists():
-        print("NIGHT_WATCH: contacted.json not found — nothing to scan")
+        print("NIGHT_WATCH: contacted.json not found - nothing to scan")
         return
 
     contacted = json.loads(CONTACTED_PATH.read_text())
@@ -225,7 +225,7 @@ def main():
             "scraped_at": snapshot.get("scraped_at", ""),
         }
 
-        # Rate limit — be polite
+        # Rate limit - be polite
         if scanned % 5 == 0:
             time.sleep(0.3)
 

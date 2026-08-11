@@ -35,7 +35,7 @@ export async function GET(req: NextRequest) {
 
 /**
  * POST /api/audit/rewrites { audit_id, finding_key, share? }
- * Convenience alias — generates (or returns the cached) rewrite for one
+ * Convenience alias - generates (or returns the cached) rewrite for one
  * finding. Canonical path is /api/audit/rewrites/generate.
  */
 export async function POST(req: NextRequest) {

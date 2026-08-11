@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-Email Sequence Engine — Daniel Bustamante 4-part playbook adapted for Nebula.
+Email Sequence Engine - Daniel Bustamante 4-part playbook adapted for Nebula.
 
 Translates the classic launch email playbook into Nebula's trigger-aware
-funnel. No "waitlists" or "cart opens" — instead, sequences are triggered
+funnel. No "waitlists" or "cart opens" - instead, sequences are triggered
 by real user actions (audit run, checkout visit, purchase).
 
 4-Part Playbook (adapted):
-  Part 1: Audit Delivery (replaces Pre-launch) — Day 0-1
-  Part 2: Offer Sequence (replaces Launch)     — Day 2-5
-  Part 3: Objection Handling (replaces Obj)    — Day 6-9
-  Part 4: Abandoned Checkout (replace AC)      — triggered by visit
+  Part 1: Audit Delivery (replaces Pre-launch) - Day 0-1
+  Part 2: Offer Sequence (replaces Launch)     - Day 2-5
+  Part 3: Objection Handling (replaces Obj)    - Day 6-9
+  Part 4: Abandoned Checkout (replace AC)      - triggered by visit
 
 Run: python3 email_sequence_engine.py [--dry-run] [--send]
 Cron: every 2h
@@ -23,7 +23,7 @@ BASE = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE))
 import lead_manager
 
-# Subject Line Analyzer — scores each subject line against B2B hook archetypes
+# Subject Line Analyzer - scores each subject line against B2B hook archetypes
 try:
     from subject_analyzer import score_subject
     HAS_SUBJECT_ANALYZER = True
@@ -86,7 +86,7 @@ SEQUENCES = {
         "label": "5-Day Educational Email Course (Daniel's Conversion Newsletter model)",
         "trigger_stage": "lead_audit",
         "steps": [
-            # Day 1: The Leak Map — pure education, no pitch
+            # Day 1: The Leak Map - pure education, no pitch
             {
                 "id": "day1_leak_map",
                 "day": 0,
@@ -96,28 +96,28 @@ SEQUENCES = {
                     "You ran the audit. Now let's decode what it means.\n\n"
                     "Most founders think they have an ad problem. Usually, they have a destination problem.\n\n"
                     "Paid clicks are being pushed into a page that fails to capture trust, intent, or action.\n"
-                    "That's lead leakage. The fix isn't \"more traffic\" — it's finding the leak before the next dollar goes into ads.\n\n"
+                    "That's lead leakage. The fix isn't \"more traffic\" - it's finding the leak before the next dollar goes into ads.\n\n"
                     "THET 5 LEAK ZONES:\n\n"
-                    "1. HEADLINE — Does it describe the problem or the product?\n"
+                    "1. HEADLINE - Does it describe the problem or the product?\n"
                     "   If visitors don't see their pain in the first 3 seconds, they scroll.\n\n"
-                    "2. CTA — Is it a decision or a label?\n"
+                    "2. CTA - Is it a decision or a label?\n"
                     "   \"Get my first client\" converts. \"Submit\" doesn't.\n\n"
-                    "3. PROOF — Is social proof above the fold?\n"
+                    "3. PROOF - Is social proof above the fold?\n"
                     "   Cold traffic doesn't trust claims. They trust evidence.\n\n"
-                    "4. SPEED — How fast does it load?\n"
+                    "4. SPEED - How fast does it load?\n"
                     "   Every 1-second delay = 7% fewer conversions.\n\n"
-                    "5. MOBILE — Does it work on phone?\n"
+                    "5. MOBILE - Does it work on phone?\n"
                     "   60% of your traffic is mobile. If it's broken, you're bleeding.\n\n"
                     "SELF-CHECK: Open your audit results. Which zone scored lowest?\n\n"
                     "That's the leak. Most founders who find it try to fix the wrong thing first.\n"
-                    "Tomorrow: the specific reason changing your ad copy doesn't fix it — and what does.\n\n"
+                    "Tomorrow: the specific reason changing your ad copy doesn't fix it - and what does.\n\n"
                     "--\n"
                     "Mike\n"
                     "P.S. If you want to know exactly which of the 5 zones is costing you the most right now, "
                     "your audit score already has the answer: https://nebulacomponents.com/audit?utm_source=email_course&utm_medium=email&utm_campaign=post_audit&utm_content=day1_ps\n"
                 ),
             },
-            # Day 2: Message Match — soft CTA
+            # Day 2: Message Match - soft CTA
             {
                 "id": "day2_message_match",
                 "day": 1,
@@ -125,7 +125,7 @@ SEQUENCES = {
                 "type": "text",
                 "body": (
                     "Yesterday we mapped the 5 leak zones.\n\n"
-                    "Today: the most common (and easiest) fix — Message Match.\n\n"
+                    "Today: the most common (and easiest) fix - Message Match.\n\n"
                     "THE PROBLEM:\n"
                     "Your ad says \"Stop losing deals to slow follow-ups.\"\n"
                     "Your headline says \"AI-powered lead generation platform.\"\n\n"
@@ -139,7 +139,7 @@ SEQUENCES = {
                     "  \"Grow your email list\" → \"Get 500 subscribers without running ads\"\n"
                     "  \"Better team collaboration\" → \"Stop wasting 2 hours/day on status meetings\"\n\n"
                     "Your audit score for Headline Clarity tells you if you have this issue.\n"
-                    "If it's under 7, you're losing conversions to a gap your visitor can't describe — they just leave.\n\n"
+                    "If it's under 7, you're losing conversions to a gap your visitor can't describe - they just leave.\n\n"
                     "Tomorrow: the exact page element that creates decision paralysis and kills conversion silently.\n\n"
                     "--\n"
                     "Mike\n"
@@ -147,7 +147,7 @@ SEQUENCES = {
                     "that's one of the three things covered in the $97 fix: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h\n"
                 ),
             },
-            # Day 3: One-Action Page — soft CTA
+            # Day 3: One-Action Page - soft CTA
             {
                 "id": "day3_one_action",
                 "day": 2,
@@ -178,7 +178,7 @@ SEQUENCES = {
                     "https://nebulacomponents.com/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day3_ps\n"
                 ),
             },
-            # Day 4: Proof Before Pitch — soft CTA
+            # Day 4: Proof Before Pitch - soft CTA
             {
                 "id": "day4_proof",
                 "day": 3,
@@ -189,11 +189,11 @@ SEQUENCES = {
                     "Nobody believes it.\n\n"
                     "Cold traffic doesn't trust claims. They trust evidence they can verify.\n\n"
                     "THE PROOF LADDER (lowest to highest trust):\n"
-                    "  1. Logos (weak) — anyone can put a logo on a page\n"
-                    "  2. Testimonials (better) — but still claim-based\n"
-                    "  3. Screenshots (strong) — visible evidence\n"
-                    "  4. Named outcomes (stronger) — \"Sarah at Acme increased leads 3x\"\n"
-                    "  5. Guarantees (strongest) — \"Don't pay if it doesn't work\"\n\n"
+                    "  1. Logos (weak) - anyone can put a logo on a page\n"
+                    "  2. Testimonials (better) - but still claim-based\n"
+                    "  3. Screenshots (strong) - visible evidence\n"
+                    "  4. Named outcomes (stronger) - \"Sarah at Acme increased leads 3x\"\n"
+                    "  5. Guarantees (strongest) - \"Don't pay if it doesn't work\"\n\n"
                     "THE FIX:\n"
                     "Move proof above the first paid ask. Before the CTA. Before the price.\n"
                     "If your proof is below the fold, most visitors never see it.\n\n"
@@ -201,7 +201,7 @@ SEQUENCES = {
                     "Open your page. Scroll until you see the first trust element (logo, testimonial, review).\n"
                     "Is it before the CTA? If not, move it.\n\n"
                     "Your audit score for Trust Proof tells you if this is a leak.\n\n"
-                    "Tomorrow: Fix Before More Spend — the pitch.\n\n"
+                    "Tomorrow: Fix Before More Spend - the pitch.\n\n"
                     "--\n"
                     "Mike\n"
                     "P.S. Want your trust proof repositioned + a dedicated social proof section? "
@@ -209,7 +209,7 @@ SEQUENCES = {
                     "https://nebulacomponents.com/checkout.html?utm_source=email_course&amp;utm_medium=email&amp;utm_campaign=post_audit&amp;utm_content=day4_ps\n"
                 ),
             },
-            # Day 5: Fix Before More Spend — direct pitch
+            # Day 5: Fix Before More Spend - direct pitch
             {
                 "id": "day5_fix_before_spend",
                 "day": 4,
@@ -299,16 +299,16 @@ SEQUENCES = {
             {
                 "id": "objection_price",
                 "day": 0,
-                "subject": "The $97 fix that saved $3k/mo in ads — what you get",
+                "subject": "The $97 fix that saved $3k/mo in ads - what you get",
                 "type": "text",
                 "body": (
                     "Saw you checked out the Fix Pack. Let me answer the question everyone asks:\n\n"
                     "What exactly do I get for $97?\n\n"
-                    "- Hero section rewrite (headline + subheadline) — tailored to your ICP\n"
-                    "- CTA button redesign — action-driven, not label-driven\n"
-                    "- Trust proof placement — social proof positioned above the fold\n"
-                    "- FAQ / objection section — addresses doubts before they arise\n"
-                    "- Mobile-first formatting — your page will work on phone\n\n"
+                    "- Hero section rewrite (headline + subheadline) - tailored to your ICP\n"
+                    "- CTA button redesign - action-driven, not label-driven\n"
+                    "- Trust proof placement - social proof positioned above the fold\n"
+                    "- FAQ / objection section - addresses doubts before they arise\n"
+                    "- Mobile-first formatting - your page will work on phone\n\n"
                     "Delivered as HTML you can paste directly into your page. Or we can implement it.\n\n"
                     "The reason it's $97 and not $997: it's a fixed scope. Every Fix Pack is the same "
                     "5 sections, tailored to your audit results. No scope creep, no meetings, no fuss.\n\n"
@@ -324,7 +324,7 @@ SEQUENCES = {
                 "subject": "Not sure if this applies to you? Let me clarify",
                 "type": "text",
                 "body": (
-                    "If you're wondering \"does this work for my type of business?\" — here's the short answer:\n\n"
+                    "If you're wondering \"does this work for my type of business?\" - here's the short answer:\n\n"
                     "The audit checks universal conversion principles. Headline clarity, CTA actionability, "
                     "trust proof, speed, mobile. These matter whether you sell SaaS, services, ecommerce, or lead gen.\n\n"
                     "A few examples of who's used it:\n"
@@ -332,7 +332,7 @@ SEQUENCES = {
                     "  - Service business: 3x more contact form submissions after CTA rewrite\n"
                     "  - Ecommerce store: 40% more add-to-cart after trust proof repositioning\n\n"
                     "The Fix Pack adapts to your audit results. If your low score is Headline, we fix the headline. "
-                    "If it's Trust, we fix the trust proof. It's not a template — it's a tailored implementation.\n\n"
+                    "If it's Trust, we fix the trust proof. It's not a template - it's a tailored implementation.\n\n"
                     "$97. 24h delivery. No meetings.\n\n"
                     "https://nebulacomponents.com/checkout.html?utm_source=cold_email&amp;utm_medium=email&amp;utm_campaign=objection_handling&amp;utm_content=objection_scope\n"
                 ),
@@ -354,7 +354,7 @@ SEQUENCES = {
                 "body": (
                     "Saw you visited the checkout page. You're probably wondering:\n\n"
                     "Will this actually work for my page?\n\n"
-                    "The Fix Pack is built from your audit results. We don't guess — we fix what the audit "
+                    "The Fix Pack is built from your audit results. We don't guess - we fix what the audit "
                     "told you was broken. If your audit said \"Headline Clarity: 4/10,\" we rewrite your headline. "
                     "Simple as that.\n\n"
                     "Here's what one founder said after getting theirs:\n"
@@ -367,11 +367,11 @@ SEQUENCES = {
             {
                 "id": "ac_last_call",
                 "day": 2,
-                "subject": "Last call — your audit-to-fix window closes soon",
+                "subject": "Last call - your audit-to-fix window closes soon",
                 "type": "text",
                 "body": (
                     "I noticed you haven't picked up the Fix Pack yet.\n\n"
-                    "That's fine — not everyone needs it. But I want to be clear about what happens next:\n\n"
+                    "That's fine - not everyone needs it. But I want to be clear about what happens next:\n\n"
                     "Your audit results don't expire, but the Fix Pack is priced at $97 because it's a "
                     "fixed scope. If we end up building a more complex fix down the road, it'll cost more.\n\n"
                     "The cheapest time to fix your page is right now, when the audit already told you "
@@ -441,7 +441,7 @@ def get_eligible_leads(sequence_id=None):
             # Find first unsent step within timing window
             enrolled_at = seq_state.get("enrolled_at")
             if not enrolled_at:
-                # Not enrolled — first step is eligible immediately
+                # Not enrolled - first step is eligible immediately
                 first_step = seq_config["steps"][0]
                 candidates.append((email, lead, seq_id, first_step, 0))
                 continue
@@ -564,14 +564,14 @@ def process_sequences(dry_run=True):
                 # Subject line analysis
                 if HAS_SUBJECT_ANALYZER:
                     sa = score_subject(subject)
-                    print(f"    Subject Score: [{sa['grade']}] {sa['score']}/10 — {sa['best_archetype'] or 'no archetype'}")
+                    print(f"    Subject Score: [{sa['grade']}] {sa['score']}/10 - {sa['best_archetype'] or 'no archetype'}")
                     print(f"    Subject Hint: {sa['improvement_hint']}")
                 total_sent += 1
                 continue
 
             # Check opt-out
             if lead_manager.is_opted_out(email):
-                print(f"  [SKIP] {email} — opted out")
+                print(f"  [SKIP] {email} - opted out")
                 total_skipped += 1
                 continue
 

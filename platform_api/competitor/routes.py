@@ -1,7 +1,7 @@
 """Competitor benchmark tracking routes.
 
 Users track up to 3 competitor URLs. Competitors are audited with the same
-engine (score only — findings are never exposed). Scores are stored on the
+engine (score only - findings are never exposed). Scores are stored on the
 0-100 display scale to match the workspace dashboard.
 """
 
@@ -29,7 +29,7 @@ class CompetitorCreateRequest(BaseModel):
 
 
 def _competitor_email(user_id: str) -> str:
-    """Synthetic identity for competitor audits — keeps them out of the
+    """Synthetic identity for competitor audits - keeps them out of the
     user's workspace audit list (which is keyed by their real email)."""
     return f"competitor+{user_id}@internal.nebulacomponents.com"
 
@@ -74,7 +74,7 @@ async def _run_competitor_audit(tracking_id: str, user_id: str, url: str) -> Non
         finally:
             session.close()
     except Exception:
-        pass  # Best-effort — cron will retry stale competitors
+        pass  # Best-effort - cron will retry stale competitors
 
 
 @router.get("/")

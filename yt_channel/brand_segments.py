@@ -1,9 +1,9 @@
 """
-brand_segments.py — Branded intro and outro card sequences.
+brand_segments.py - Branded intro and outro card sequences.
 
 Generates multi-frame Pillow sequences that represent the Nebula brand
 intro and outro as video segments. Each sequence is a list of (PIL.Image, dur_s)
-tuples — the caller steps through them, saves PNGs, and passes to motion.py.
+tuples - the caller steps through them, saves PNGs, and passes to motion.py.
 
 Brand spec from nebulacomponents.com/brand:
   - Near Black bg:     #050505
@@ -17,16 +17,16 @@ Brand spec from nebulacomponents.com/brand:
   - Motion: scan line, counter-up, node pulse
 
 Intro sequence (total ~3s):
-  Frame 0 (0.6s) — Black canvas, diagnostic ring fades in
-  Frame 1 (0.6s) — Signal node grid builds (nodes appear)
-  Frame 2 (0.8s) — Wordmark + "Nebula Components" fades in
-  Frame 3 (1.0s) — Tagline appears + scan-line flourish
+  Frame 0 (0.6s) - Black canvas, diagnostic ring fades in
+  Frame 1 (0.6s) - Signal node grid builds (nodes appear)
+  Frame 2 (0.8s) - Wordmark + "Nebula Components" fades in
+  Frame 3 (1.0s) - Tagline appears + scan-line flourish
 
 Outro sequence (total ~4s):
-  Frame 0 (1.0s) — Score counter result (e.g. "6.9/10  Grade: B")
-  Frame 1 (1.0s) — Verdict card: SIG:PASS or SIG:FAIL telemetry label
-  Frame 2 (1.2s) — Mark + wordmark centered
-  Frame 3 (0.8s) — CTA: nebulacomponents.com/audit
+  Frame 0 (1.0s) - Score counter result (e.g. "6.9/10  Grade: B")
+  Frame 1 (1.0s) - Verdict card: SIG:PASS or SIG:FAIL telemetry label
+  Frame 2 (1.2s) - Mark + wordmark centered
+  Frame 3 (0.8s) - CTA: nebulacomponents.com/audit
 """
 
 from pathlib import Path
@@ -51,9 +51,9 @@ TAGLINE = "The problem was never the ad. It was the page."
 
 # Node grid: pass (teal) pattern = top 2 rows (6 nodes) + top-left of row 3
 NODE_STATES = [
-    True,  True,  True,   # row 1 — all pass
-    True,  True,  True,   # row 2 — all pass
-    False, False, False,  # row 3 — all neutral
+    True,  True,  True,   # row 1 - all pass
+    True,  True,  True,   # row 2 - all pass
+    False, False, False,  # row 3 - all neutral
 ]
 
 
@@ -226,7 +226,7 @@ def make_outro_frames(W: int, H: int,
     font_cta_label = _font(max(13, W // 75))
     font_cta_url = _font(max(18, W // 48), bold=True)
     cta_y = cy + 130 if H > 500 else cy + 110
-    d3.text((cx, cta_y), "FREE AUDIT — NO SIGNUP", font=font_cta_label,
+    d3.text((cx, cta_y), "FREE AUDIT - NO SIGNUP", font=font_cta_label,
             fill=(*GRAY[:3], 160), anchor="mm")
     d3.text((cx, cta_y + 28), "nebulacomponents.com/audit", font=font_cta_url,
             fill=(*TEAL[:3], 230), anchor="mm")

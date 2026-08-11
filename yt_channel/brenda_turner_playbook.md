@@ -1,10 +1,10 @@
 # Brenda Turner "Breaking The Fifth Wall" Playbook
 ## Applied to Nebula Components @NebulaAudits
 
-**Source**: "Speak Like This To Stand Out On YouTube (Breaking The Fifth Wall)"  
-**Link**: https://www.youtube.com/watch?v=RRDJO_UV4I8  
-**Author**: Brenda Turner (400K subs, 15-year YouTube track record)  
-**Metrics**: 474K views, 28.4K likes (6% like rate — HIGH), 12:25 duration  
+**Source**: "Speak Like This To Stand Out On YouTube (Breaking The Fifth Wall)"
+**Link**: https://www.youtube.com/watch?v=RRDJO_UV4I8
+**Author**: Brenda Turner (400K subs, 15-year YouTube track record)
+**Metrics**: 474K views, 28.4K likes (6% like rate - HIGH), 12:25 duration
 
 ---
 
@@ -104,25 +104,25 @@ The difference between a video that converts and one that doesn't is **not** fan
 
 ### Script Structure (Aligns with Brenda's Pillars)
 ```
-[Intro Hook — 5s]
-"Today: {domain}. {PAUSE} Watch closely — you will see exactly where the money leaks."
+[Intro Hook - 5s]
+"Today: {domain}. {PAUSE} Watch closely - you will see exactly where the money leaks."
 → SHORT, PUNCHY, ONE-ON-ONE feeling. {PAUSE} mimics natural breath.
 
-[Score Reveal — 4s]
+[Score Reveal - 4s]
 "Overall score: 7.2 out of 10. Grade B. That is good, but not great."
 → CLEAR, FACTUAL, CONVERSATIONAL (not "systems analysis" or "quantitative assessment").
 
-[Worst Dimension Highlight — 6s]
+[Worst Dimension Highlight - 6s]
 "The biggest problem is your CTA placement: only 5 out of 10. That is costing you sales."
 → VIEWER-OWNED ("your CTA"), PLAIN LANGUAGE ("placement", not "call-to-action positioning"),
    OUTCOME-FOCUSED ("costing you sales").
 
-[Walkthrough — X minutes]
+[Walkthrough - X minutes]
 "Your headline clarity scores 6 out of 10. People don't know what you do in the first 3 seconds.
 Here is the fix: replace the current headline with a single-promise statement. Example: 'X for Y who Z.'"
 → SHOW THE PROBLEM, THEN SHOW THE FIX. Brenda's energy: "I care about helping you."
 
-[Call-to-Action — 8s]
+[Call-to-Action - 8s]
 "Want your own audit? Get a free instant score at nebulacomponents.com/audit.
 Enter your email and the full fix list is sent straight to your inbox.
 That's your number. Nebula's got your fix."
@@ -147,7 +147,7 @@ That's your number. Nebula's got your fix."
 ## What TTS Cannot Do (And How We Compensate)
 
 ### Problem 1: Edge-TTS Reads Everything Flat
-Brenda emphasizes: "Practice means natural emphasis." She practices jokes so they land; she practices taglines so the rhythm feels right.  
+Brenda emphasizes: "Practice means natural emphasis." She practices jokes so they land; she practices taglines so the rhythm feels right.
 Edge-TTS has no per-word emphasis control (no SSML markup for <emphasis level="strong"> on key words).
 
 **Compensation**:
@@ -157,7 +157,7 @@ Edge-TTS has no per-word emphasis control (no SSML markup for <emphasis level="s
 - User testing: if flat delivery tanks engagement, post-launch feature: "reviewer mode" for manual re-record.
 
 ### Problem 2: No Natural Pauses Mid-Sentence
-Brenda would pause for breath, for effect, to let an idea land.  
+Brenda would pause for breath, for effect, to let an idea land.
 TTS reads continuous text robotically.
 
 **Compensation**:
@@ -165,7 +165,7 @@ TTS reads continuous text robotically.
 - Future: ML-based pause detection ("insert longer pause after 'important' sentence").
 
 ### Problem 3: No Emotional Variation
-Brenda's voice conveys: genuine interest, caring, directness, humor.  
+Brenda's voice conveys: genuine interest, caring, directness, humor.
 Edge-TTS is neutral.
 
 **Compensation**:
@@ -181,7 +181,7 @@ Edge-TTS is neutral.
 - 15 years on YouTube
 - ~400K subs on only a couple hundred videos
 - 474K views on *this* video (breaking the fourth wall)
-- 6% like rate (HIGH — typical is 3–5%)
+- 6% like rate (HIGH - typical is 3–5%)
 - 28.4K likes
 
 ### Nebula Audit Videos (Current)
@@ -237,6 +237,6 @@ The result: Audit videos that feel like Brenda talking to YOU about YOUR site, n
 
 ---
 
-**Generated**: 2026-08-09  
-**Extracted from**: https://www.youtube.com/watch?v=RRDJO_UV4I8  
+**Generated**: 2026-08-09
+**Extracted from**: https://www.youtube.com/watch?v=RRDJO_UV4I8
 **Implemented in**: yt_channel/produce.py + produce_short.py + script_gen.py + audio_engine.py + readability.py

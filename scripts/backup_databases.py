@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 """Daily backup of the databases and JSON/JSONL state that hold all lead,
 audit, and purchase history for the business. None of this is backed up
-anywhere else — if this machine's disk fails, this is the only copy.
+anywhere else - if this machine's disk fails, this is the only copy.
 
 Backs up: lead_state.db, nebula.db, outbound_delivery.db (SQLite, via the
 online backup API so a concurrent writer can't produce a torn snapshot),
-the nebula_platform AND nebula_audit Postgres databases (pg_dump each —
+the nebula_platform AND nebula_audit Postgres databases (pg_dump each -
 nebula_audit holds every real customer, audit, and badge record; it was
 missing from this script entirely until 2026-07-25, meaning it had zero
 backup coverage), and HOT_LEAD.json plus ledgers/ (the append-only
 business ledgers).
 
 Writes timestamped snapshots under backups/, prunes anything older than
-RETENTION_DAYS. Local-disk only — this protects against corruption,
+RETENTION_DAYS. Local-disk only - this protects against corruption,
 accidental deletion, and bad writes, NOT against the machine or disk
 itself failing. Copying backups/ to another host or object storage is a
 separate step this script does not do.
@@ -113,7 +113,7 @@ def backup_json_state(dest_dir: Path) -> bool:
     ledgers_src = BASE / LEDGERS_DIR
     if ledgers_src.is_dir():
         try:
-            # Raw *.log files are unbounded cron stdout, not curated ledgers —
+            # Raw *.log files are unbounded cron stdout, not curated ledgers -
             # excluded so this doesn't copy tens of MB of log growth daily.
             shutil.copytree(
                 ledgers_src, dest_dir / LEDGERS_DIR,
@@ -159,7 +159,7 @@ def main() -> int:
     prune_old_backups()
 
     if not all(results):
-        log("BACKUP RUN COMPLETED WITH FAILURES — see FAIL lines above")
+        log("BACKUP RUN COMPLETED WITH FAILURES - see FAIL lines above")
         return 1
     log(f"backup run complete: {dest_dir}")
     return 0
@@ -171,7 +171,7 @@ if __name__ == "__main__":
     try:
         fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except BlockingIOError:
-        log("another backup run is already in progress — exiting")
+        log("another backup run is already in progress - exiting")
         sys.exit(0)
     try:
         sys.exit(main())

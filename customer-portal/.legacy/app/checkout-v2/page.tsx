@@ -61,7 +61,7 @@ export default function CheckoutV2Page() {
   return (
     <>
       <Head>
-        <title>Claim Your Fix Pack — Nebula Components</title>
+        <title>Claim Your Fix Pack - Nebula Components</title>
         <meta
           name="description"
           content="Your landing page fix is ready. $147 implementation with 24h delivery. Pre-filled with your audit details."

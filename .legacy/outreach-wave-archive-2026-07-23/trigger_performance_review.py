@@ -2,7 +2,7 @@
 """Self-improvement mining: which trigger_type/vertical/offer_variant is actually
 converting to warm replies, vs which is dead weight.
 
-Modeled on the "Theo" pattern (review what worked, propose changes) — but scoped
+Modeled on the "Theo" pattern (review what worked, propose changes) - but scoped
 to data we actually have: outreach_evidence.jsonl attribution + customer-ledger warm replies.
 """
 from __future__ import annotations

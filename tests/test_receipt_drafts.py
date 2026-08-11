@@ -1,7 +1,7 @@
 """Tests for the proof-receipt draft tool (scripts/receipt_draft_from_monitor.py).
 
 Covers the score-based conclusion ladder, receipt ID sequencing, and draft
-shape — the deterministic parts of the receipts layer (Play 2, leadership
+shape - the deterministic parts of the receipts layer (Play 2, leadership
 strategy). DB wiring is verified manually against nebula_audit.
 """
 import json

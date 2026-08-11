@@ -109,7 +109,7 @@ beforeEach(() => {
 
 // ── tests ─────────────────────────────────────────────────────────────────────
 describe('Subscription onboarding email sequence', () => {
-  describe('sendSubscriptionWelcome — direct unit tests', () => {
+  describe('sendSubscriptionWelcome - direct unit tests', () => {
     it('sends correct subject for pro plan', async () => {
       fetchMock.mockResolvedValueOnce({ ok: true } as Response)
 
@@ -176,7 +176,7 @@ describe('Subscription onboarding email sequence', () => {
     })
   })
 
-  describe('Webhook integration — welcome email gating', () => {
+  describe('Webhook integration - welcome email gating', () => {
     it('sends welcome email when customer.subscription.created fires (live mode)', async () => {
       fetchMock.mockResolvedValue({ ok: true } as Response)
       makeStripeSubEvent('customer.subscription.created')
@@ -247,7 +247,7 @@ describe('Subscription onboarding email sequence', () => {
       expect(() => scheduleFirstValueEmail('user@example.com', 'pro')).not.toThrow()
     })
 
-    it('is a no-op (cron handles delivery) — does not call fetch', async () => {
+    it('is a no-op (cron handles delivery) - does not call fetch', async () => {
       const { scheduleFirstValueEmail } = await import('@/app/lib/subscription-emails')
       scheduleFirstValueEmail('user@example.com', 'pro')
       expect(fetchMock).not.toHaveBeenCalled()

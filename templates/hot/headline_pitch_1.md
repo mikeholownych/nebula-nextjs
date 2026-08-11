@@ -16,7 +16,7 @@ The audit flagged your headline. You already know the problem.
 
 {headline_text}
 
-The visitor has to infer relevance. Every click that doesn't convert — this is part of why.
+The visitor has to infer relevance. Every click that doesn't convert - this is part of why.
 
 **The fix:**
 
@@ -43,6 +43,6 @@ The question is not "will it help?" The question is: how long do you want the he
 
 One page. One headline. 48 hours. Done.
 
-—
+-
 
-P.S. If you've ever worked with an agency, you know the drill — 2-week timeline, $5k minimum, no guarantee. This is the opposite: fast, focused, low-risk. Refund if it doesn't ship on time.
+P.S. If you've ever worked with an agency, you know the drill - 2-week timeline, $5k minimum, no guarantee. This is the opposite: fast, focused, low-risk. Refund if it doesn't ship on time.

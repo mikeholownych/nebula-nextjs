@@ -91,7 +91,7 @@ def post_body(commits: list[dict[str, str]], s: dict) -> str:
     shipped_rows = []
     for category, rows in groups.items():
         items = "".join(
-            f"<li><code>{html.escape(c['sha'])}</code> — {html.escape(c['subject'])}</li>"
+            f"<li><code>{html.escape(c['sha'])}</code> - {html.escape(c['subject'])}</li>"
             for c in rows
         )
         shipped_rows.append(f"<h3>{html.escape(category)}</h3><ul>{items}</ul>")

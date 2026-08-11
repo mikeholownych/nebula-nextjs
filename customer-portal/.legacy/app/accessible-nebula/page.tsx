@@ -126,7 +126,7 @@ export default function AccessibleNebulaPage() {
     { emoji: '⚡', title: 'Features Grid', description: '3-column responsive grid with icon cards, hover lift effects, and glassmorphic borders. Shows value at a glance.' },
     { emoji: '💰', title: 'Pricing Table', description: '3-tier comparison with "Most Popular" highlight, hover scale, feature checklists, and CTA buttons.' },
     { emoji: '⭐', title: 'Testimonials', description: '3-card social proof layout with star ratings, gradient avatars, and statistics bar. Build trust fast.' },
-    { emoji: '❓', title: 'FAQ Accordion', description: 'Accessible expand/collapse with smooth animations. Pure CSS — zero JavaScript needed.' },
+    { emoji: '❓', title: 'FAQ Accordion', description: 'Accessible expand/collapse with smooth animations. Pure CSS - zero JavaScript needed.' },
     { emoji: '🎯', title: 'CTA Section', description: 'Conversion-focused call-to-action with gradient orb background, dual buttons, and trust indicators.' },
     { emoji: '📋', title: 'Footer', description: 'Complete 4-column footer with nav links, legal section, social icons, and gradient dividers.' }
   ]
@@ -169,7 +169,7 @@ export default function AccessibleNebulaPage() {
               <p>
                 7 dark-themed, copy-paste-ready HTML/CSS sections. Hero. Features.
                 Pricing. Testimonials. FAQ. CTA. Footer. One design system. Any
-                framework. Any host. $29 value — yours for <strong>$7</strong> during the
+                framework. Any host. $29 value - yours for <strong>$7</strong> during the
                 launch flash sale.
               </p>
 
@@ -191,7 +191,7 @@ export default function AccessibleNebulaPage() {
                 href="https://buy.stripe.com/4gMdR9aYkenafup3Ro43S00"
                 className="btn btn-primary"
               >
-                🛒 Buy Now — $7 →
+                🛒 Buy Now - $7 →
               </a>
               <a
                 href="https://nebulacomponents.shop/ad-burn-leaderboard.html"
@@ -330,7 +330,7 @@ export default function AccessibleNebulaPage() {
               href="https://buy.stripe.com/4gMdR9aYkenafup3Ro43S00"
               className="btn btn-primary"
             >
-              🛒 Buy Now — $7 →
+              🛒 Buy Now - $7 →
             </a>
             <a
               href="https://nebulacomponents.shop/demo.html"

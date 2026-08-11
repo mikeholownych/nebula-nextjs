@@ -26,7 +26,7 @@ from typing import Any
 BASE_DEFAULT = Path("/home/mike/nebula")
 PUBLIC_URL_DEFAULT = "https://nebulacomponents.com"
 LOCAL_URL_DEFAULT = "http://127.0.0.1:3000"
-SERVICE_DEFAULT = "nebula-nextjs"  # was "nebula-site" — the obsolete alias unit; see INC-0004/INC-0005
+SERVICE_DEFAULT = "nebula-nextjs"  # was "nebula-site" - the obsolete alias unit; see INC-0004/INC-0005
 
 TERMINAL_STAGES = frozenset({"paid", "closed", "dead", "bounced", "max_retries_exceeded", "recircle_60d"})
 TERMINAL_STATUSES = frozenset({"completed", "closed", "bounced", "stop_reply", "test_email", "max_retries_exceeded"})
@@ -268,7 +268,7 @@ def build_report(base: Path, now: datetime, public_url: str, local_url: str, ser
 
 def format_report(report: dict[str, Any]) -> str:
     icon = {"healthy": "✅", "warning": "⚠️", "critical": "❌"}[report["status"]]
-    lines = [f"{icon} AUDIT DELIVERY MONITOR — {report['status'].upper()}", f"As of: {report['as_of']}"]
+    lines = [f"{icon} AUDIT DELIVERY MONITOR - {report['status'].upper()}", f"As of: {report['as_of']}"]
     pipeline = report.get("pipeline")
     if pipeline:
         lines.extend([
@@ -324,7 +324,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     report = build_report(args.base, parse_as_of(args.as_of), args.public_url, args.local_url, args.service)
-    # Silent when healthy — only emit output (= Telegram notification) on warning/critical.
+    # Silent when healthy - only emit output (= Telegram notification) on warning/critical.
     # This prevents daily noise when the pipeline is operating normally.
     if report["status"] != "healthy" or args.strict_exit or args.json:
         print(json.dumps(report, indent=2, sort_keys=True) if args.json else format_report(report))

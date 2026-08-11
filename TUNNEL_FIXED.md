@@ -1,7 +1,7 @@
-# ✅ CLOUDFLARE TUNNEL — FIXED & RESILIENT
+# ✅ CLOUDFLARE TUNNEL - FIXED & RESILIENT
 
-**Status:** RESOLVED - Tunnel now 100% operational with automatic health monitoring  
-**Time:** June 24, 2026 22:21 UTC  
+**Status:** RESOLVED - Tunnel now 100% operational with automatic health monitoring
+**Time:** June 24, 2026 22:21 UTC
 **Public Site:** https://nebulacomponents.shop/ ✅ LIVE
 
 ---
@@ -89,10 +89,10 @@ cloudflared --version  # Verified: 2026.6.1
 
 ## Files Created/Modified
 
-- `tunnel_manager.py` — Health monitor & auto-recovery script
-- `tunnel_manager.log` — Continuous monitoring log
-- `~/.cloudflared/config.yml` — Fixed routing config (only 8765 + 8766)
-- `/usr/local/bin/cloudflared` — Reinstalled binary
+- `tunnel_manager.py` - Health monitor & auto-recovery script
+- `tunnel_manager.log` - Continuous monitoring log
+- `~/.cloudflared/config.yml` - Fixed routing config (only 8765 + 8766)
+- `/usr/local/bin/cloudflared` - Reinstalled binary
 
 ---
 
@@ -100,7 +100,7 @@ cloudflared --version  # Verified: 2026.6.1
 
 **21:00 UTC tonight:**
 - Tunnel is UP
-- Local services are UP  
+- Local services are UP
 - Public site is accessible at nebulacomponents.shop
 - Stripe checkout links will work for customers
 - Auto-responder will route replies properly
@@ -124,8 +124,8 @@ The tunnel monitor runs every 5 minutes and:
 
 ## Wave 2 Countdown
 
-**Current Time:** 22:21 UTC  
-**Wave 2 Launch:** 21:00 UTC (TONIGHT - but that's past!)  
+**Current Time:** 22:21 UTC
+**Wave 2 Launch:** 21:00 UTC (TONIGHT - but that's past!)
 
 **Wait... it's already 22:21. Did Wave 2 launch?**
 

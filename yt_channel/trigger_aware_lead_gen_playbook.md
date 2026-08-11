@@ -1,8 +1,8 @@
 # Trigger-Aware Lead Gen Pipeline
 ## Five Stages: Discovery → Intent Scoring → Outbound → Reply Handling
 
-**Shipping with**: Sep 2 launch, Nebula Components  
-**Goal**: Convert free audit funnel → $97 fix pack → $29+ subscription  
+**Shipping with**: Sep 2 launch, Nebula Components
+**Goal**: Convert free audit funnel → $97 fix pack → $29+ subscription
 **ICP Filter**: Founders actively bleeding money on ads with zero conversions
 
 ---
@@ -20,16 +20,16 @@ Why stuck?
 - No way to detect "who's serious vs. tire-kicker"
 - No proof that visitor is even a founder
 
-Solution: **Trigger-aware outbound** — use intent signals (visitor behavior) to identify serious prospects, then send personalized cold email.
+Solution: **Trigger-aware outbound** - use intent signals (visitor behavior) to identify serious prospects, then send personalized cold email.
 
 ---
 
 ## Five Stages (Architecture)
 
 ### Stage 1: Prospect Discovery (Hunter.io)
-**Input**: Seed domain list (e.g., Stripe, GitLab, Figma — competitors' customers)  
-**Output**: Founder + decision-maker emails  
-**Storage**: `lead_state.db` (prospects + contacts tables)  
+**Input**: Seed domain list (e.g., Stripe, GitLab, Figma - competitors' customers)
+**Output**: Founder + decision-maker emails
+**Storage**: `lead_state.db` (prospects + contacts tables)
 **Rate Limit**: 300 requests/day (fail-closed: skip if limited)
 
 ```python
@@ -55,8 +55,8 @@ result = discover.discover_from_domains(
 ---
 
 ### Stage 2: Visitor Identification (RB2B)
-**Input**: Tracking pixel deployed on site  
-**Output**: Visitor profile (company name → reverse DNS, pages visited, dwell time)  
+**Input**: Tracking pixel deployed on site
+**Output**: Visitor profile (company name → reverse DNS, pages visited, dwell time)
 **Integration**: Webhook at `/webhook/rb2b-event`
 
 When a prospect discovered in Stage 1 visits our site:
@@ -76,14 +76,14 @@ We match the company name to our prospects database → creates visitor_profile.
 ---
 
 ### Stage 3: Intent Scoring (Claude LLM)
-**Input**: Visitor profile (company, pages, dwell time, repeat visits)  
-**Output**: Intent score 0–100 + reasoning  
+**Input**: Visitor profile (company, pages, dwell time, repeat visits)
+**Output**: Intent score 0–100 + reasoning
 **Storage**: Update `prospects.intent_score` in DB
 
 The buying trigger: **"actively bleeding money on ads with zero conversions"**
 
 Signals Claude looks for:
-- **Pain validation** (visited audit page — acknowledging the problem)
+- **Pain validation** (visited audit page - acknowledging the problem)
 - **Solution exploration** (visited fix-pack or pricing)
 - **High engagement** (dwell > 2m, repeat visits, CTA clicks)
 - **Recent activity** (last_visit < 7 days)
@@ -122,8 +122,8 @@ Threshold for outbound: **≥75**
 ---
 
 ### Stage 4: Outbound Delivery (AgentMail)
-**Input**: High-intent prospect (score ≥75)  
-**Output**: Personalized cold email sent via AgentMail  
+**Input**: High-intent prospect (score ≥75)
+**Output**: Personalized cold email sent via AgentMail
 **Storage**: `contacts.last_email_sent` + `prospects.status` updated
 
 Fail-closed gates:
@@ -140,16 +140,16 @@ result = outbound.send_cold_email(
     subject="Patrick, Stripe is leaving money on the table",
     body="""
     Hi Patrick,
-    
+
     I noticed Stripe's landing page isn't optimized for conversions. You're likely
     spending money on ads but not capturing leads effectively.
-    
+
     I put together a free audit that shows exactly where the money leaks:
     [link to nebulacomponents.com/audit]
-    
+
     No call, no credit card. Just the truth.
-    
-    —
+
+    -
     Nebula Components
     """
 )
@@ -170,7 +170,7 @@ result = outbound.send_cold_email(
 ---
 
 ### Stage 5: Reply Handling (n8n Webhook + Manual Review)
-**Input**: Prospect replies to email  
+**Input**: Prospect replies to email
 **Webhook**: `/webhook/outbound-reply` (no uuid in path)
 
 n8n workflow:
@@ -196,7 +196,7 @@ Classification rules:
 
 ---
 
-## Phased Rollout (Sep 2 — Sep 30)
+## Phased Rollout (Sep 2 - Sep 30)
 
 ### Week 1 (Sep 2–9): Discovery + Intent Scoring (No Sends)
 - Deploy discovery.py (query Hunter for 50–100 seed prospects)
@@ -204,7 +204,7 @@ Classification rules:
 - Intent scoring live (background job, no sends yet)
 - Goal: Build prospect database + intent baseline
 
-**Manual work**: None (full automation)  
+**Manual work**: None (full automation)
 **Decision point**: Review top 10 high-intent prospects manually
 
 ### Week 2 (Sep 9–16): Manual Sends + Reply Classification
@@ -213,7 +213,7 @@ Classification rules:
 - Reply handler live (classify replies, update DB)
 - Goal: Validate email messaging before scaling
 
-**Manual work**: Write + send 5 emails, QA replies  
+**Manual work**: Write + send 5 emails, QA replies
 **Decision point**: Did any replies come back? How many said "interested"?
 
 ### Week 3–4 (Sep 16–30): Automated Sends + Monitoring
@@ -222,7 +222,7 @@ Classification rules:
 - Iterate email copy based on reply feedback
 - Goal: Scale outbound, prove intent → conversion relationship
 
-**Manual work**: Respond to incoming leads, iterate copy  
+**Manual work**: Respond to incoming leads, iterate copy
 **Decision point**: What's our reply rate? Can we improve subject line?
 
 ### Week 5+ (Oct 1+): Scale + Optimization
@@ -327,21 +327,21 @@ Brenda Turner's Pillar 4: **"Let go of outcome attachment"**
 
 Our emails don't pitch; they help:
 - "I noticed Stripe's landing page isn't optimized"
-- Subject isn't "BUY NOW" — it's "you're leaving money on the table"
+- Subject isn't "BUY NOW" - it's "you're leaving money on the table"
 - CTA is "get a free audit" not "pay $97"
 
-Prospect feels: genuine care, not desperation.  
+Prospect feels: genuine care, not desperation.
 Result: Higher open rate, higher reply rate, higher conversion.
 
 ---
 
 ## Implementation Files
 
-- `lead_gen/discover.py` — Hunter.io integration
-- `lead_gen/score_intent.py` — Claude intent scoring
-- `lead_gen/outbound.py` — AgentMail integration
-- `lead_gen/__init__.py` — Module entry point
-- `lead_gen/lead_state.db` — SQLite prospect database (auto-created)
+- `lead_gen/discover.py` - Hunter.io integration
+- `lead_gen/score_intent.py` - Claude intent scoring
+- `lead_gen/outbound.py` - AgentMail integration
+- `lead_gen/__init__.py` - Module entry point
+- `lead_gen/lead_state.db` - SQLite prospect database (auto-created)
 
 ---
 

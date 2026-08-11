@@ -1,4 +1,4 @@
-"""Tests for multi-tenancy isolation — each site's data must not bleed into another."""
+"""Tests for multi-tenancy isolation - each site's data must not bleed into another."""
 import sys, json
 from pathlib import Path
 
@@ -46,7 +46,7 @@ check("LaunchCrate competitors differs", lc["competitors"] != nc["competitors"],
 check("LaunchCrate offer price differs", lc["offer_price"] != nc["offer_price"],
       f"Nebula: {nc.get('offer_price')} | LC: {lc.get('offer_price')}")
 
-# 4. Keywords — no cross-contamination
+# 4. Keywords - no cross-contamination
 nc_kw = site_registry.get_keywords("nebulacomponents.com", "high_intent")
 lc_kw = site_registry.get_keywords("launchcrate.io", "high_intent")
 check("Nebula high-intent keywords include 'landing page audit'",

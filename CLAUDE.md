@@ -1,12 +1,12 @@
-# CLAUDE.md — Nebula Components (AI-DLC Workflow)
+# CLAUDE.md - Nebula Components (AI-DLC Workflow)
 
 ## PRIORITY: This workflow OVERRIDES workspace defaults
 When responding to software or pipeline requests, follow the AI-DLC phase-gated workflow.
 
 ## AI-DLC Rules Location
-Rules are installed at `.aidlc/aidlc-rules/` — the base rules directory per AI-DLC spec:
-- `.aidlc/aidlc-rules/aws-aidlc-rules/core-workflow.md` — the 539-line process playbook
-- `.aidlc/aidlc-rules/aws-aidlc-rule-details/` — stage-specific rules (loaded on demand)
+Rules are installed at `.aidlc/aidlc-rules/` - the base rules directory per AI-DLC spec:
+- `.aidlc/aidlc-rules/aws-aidlc-rules/core-workflow.md` - the 539-line process playbook
+- `.aidlc/aidlc-rules/aws-aidlc-rule-details/` - stage-specific rules (loaded on demand)
 
 **CRITICAL:** Always load `common/session-continuity.md` at workflow start for session resumption.
 Reference aidlc-docs/audit.md for the full interaction history.
@@ -20,9 +20,9 @@ Load these on demand:
 ## Key Operational Facts
 - Domain: nebulacomponents.shop
 - Server: localhost:8765 (venv: /home/mike/nebula/venv/bin/python3)
-- Git: github.com:Nebula-Components/nebula-components.git — remote alias `nebula-origin`. **This is the only remote to push to.** A second remote, `origin` (mikeholownych/nebula-nextjs.git), also exists in this checkout and has diverged with unrelated content work — do not push there; if `git push` targets `origin` by default, use `git push nebula-origin main` explicitly.
-- Stripe live secret key (full write access, for Stripe CLI `--api-key` flag or direct API calls): `~/.hermes/.env`, var `STRIPE_SECRET_KEY`. NOT in this repo's own `.env`/`.env.local` files — those only carry restricted/publishable keys. `~/.config/stripe/config.toml`'s default CLI auth is a read-only `rk_live_` key; it will fail on writes (prices, webhooks, payment links) with a permissions error — that's the signal to use the `.hermes` key instead.
-- AgentMail inbox: nebulashop@agentmail.to (REST only — NO SMTP)
+- Git: github.com:Nebula-Components/nebula-components.git - remote alias `nebula-origin`. **This is the only remote to push to.** A second remote, `origin` (mikeholownych/nebula-nextjs.git), also exists in this checkout and has diverged with unrelated content work - do not push there; if `git push` targets `origin` by default, use `git push nebula-origin main` explicitly.
+- Stripe live secret key (full write access, for Stripe CLI `--api-key` flag or direct API calls): `~/.hermes/.env`, var `STRIPE_SECRET_KEY`. NOT in this repo's own `.env`/`.env.local` files - those only carry restricted/publishable keys. `~/.config/stripe/config.toml`'s default CLI auth is a read-only `rk_live_` key; it will fail on writes (prices, webhooks, payment links) with a permissions error - that's the signal to use the `.hermes` key instead.
+- AgentMail inbox: nebulashop@agentmail.to (REST only - NO SMTP)
 - Stripe $97 Fix Pack (locked through 2026-12-31): https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
 - Price increases to $147 on 2027-01-01
 - Stripe $1,497 retainer: https://buy.stripe.com/00w5kD1nK0wkaa573A43S0c
@@ -34,16 +34,16 @@ discovered → site_found → contacted → audit_delivered → pitch_sent → p
 Terminal: dead, bounced, max_retries_exceeded
 
 ## Verify Before You Build (Layer 1)
-Before doing any work on a software/pipeline request, state how you could verify that work — one line, before building. This inserts the verification plan into the prompt before any code is written, so the result is checkable, not just claimed. Format: `verify plan: <what to run/check to prove this works>`.
+Before doing any work on a software/pipeline request, state how you could verify that work - one line, before building. This inserts the verification plan into the prompt before any code is written, so the result is checkable, not just claimed. Format: `verify plan: <what to run/check to prove this works>`.
 - After building: run the verification plan, capture real output (exit code, log line, HTTP status, rendered DOM), and report it. Do not claim completion without the artifact.
 - For scheduled jobs and skills: a job without proven output is theater (see Graduation Gate #7).
 
 ## Pre-commit Content Checks
 Before committing any `.tsx`/`.mdx` content file:
-- `grep -nP '[\x{2580}-\x{259F}\x{FFFD}\x{25A0}-\x{25FF}]' <file>` — block/corruption chars (must return 0 lines)
-- `grep -nP '[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]' <file>` — control chars (must return 0 lines)
-- Drift surfaces: `$97`, `48 hours`, `7 conversion signals` — verify against canonical before commit
-- `grep -n "text-warning\|bg-warning\|border-warning" <file>` (customer-portal) — must return 0 lines. `warning` was removed from tailwind.config.ts on purpose; amber (`signal-fail` / `#f59e0b`) is reserved exclusively for a failed conversion signal on the audit results page (see `FailSignal` in `ResultsClient.tsx`) — it must never mean anything else anywhere on the site
+- `grep -nP '[\x{2580}-\x{259F}\x{FFFD}\x{25A0}-\x{25FF}]' <file>` - block/corruption chars (must return 0 lines)
+- `grep -nP '[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]' <file>` - control chars (must return 0 lines)
+- Drift surfaces: `$97`, `48 hours`, `7 conversion signals` - verify against canonical before commit
+- `grep -n "text-warning\|bg-warning\|border-warning" <file>` (customer-portal) - must return 0 lines. `warning` was removed from tailwind.config.ts on purpose; amber (`signal-fail` / `#f59e0b`) is reserved exclusively for a failed conversion signal on the audit results page (see `FailSignal` in `ResultsClient.tsx`) - it must never mean anything else anywhere on the site
 
 ## Things I Get Wrong Without Reminders
 - **Bounce check placement:** `LeadStore.is_bounced(email)` in BOTH `process_hot_lead_pitches()` AND `ramp_pipeline_fill.py`
@@ -68,8 +68,8 @@ For lead-pipeline work with independent source lanes, use the source-parallel pa
 When delegating any task where proof of completion matters, structure the prompt as:
 
 ```
-for/g: <goal — what must be true when done>
-verify: <how to confirm it happened — log line, file, DB record, API response>
+for/g: <goal - what must be true when done>
+verify: <how to confirm it happened - log line, file, DB record, API response>
 constraints: <what NOT to do / explicit boundaries>
 ```
 
@@ -85,21 +85,21 @@ constraints: Use only the existing warm-reply record; do not create new contacts
 
 ## Agent Job Graduation Gate
 Before turning any demonstrated task into a skill or scheduled job, graduate it through every gate:
-1. **Context** — name the authoritative business files, allowed claims, privacy boundaries, offer version, and excluded actions. Broad memory is orientation, not evidence.
-2. **Outcome contract** — define the goal, measurable done condition, required artifact, evidence record, timeout, and failure behavior. Do not specify only activity.
-3. **Supervised proof** — run at least one representative case and one failure case with human/reviewer inspection. Buyer-facing drafts remain drafts until the live path is independently approved.
-4. **Reusable skill** — save only the corrected, verified procedure. Include exact inputs, verification, rollback, and known pitfalls; never preserve a merely plausible first attempt.
-5. **Least privilege** — grant only the tools and accounts needed for that job. Never connect broad email/calendar/document write scopes simply for convenience.
-6. **Schedule last** — add cron only after supervised proof. Deterministic checks use `no_agent`; all jobs must be idempotent, bounded, source-traceable, and silent when healthy.
-7. **Production verification** — force-run once, inspect the real artifact/delivery log, and verify restart survival. A scheduled job without proven output is theater.
+1. **Context** - name the authoritative business files, allowed claims, privacy boundaries, offer version, and excluded actions. Broad memory is orientation, not evidence.
+2. **Outcome contract** - define the goal, measurable done condition, required artifact, evidence record, timeout, and failure behavior. Do not specify only activity.
+3. **Supervised proof** - run at least one representative case and one failure case with human/reviewer inspection. Buyer-facing drafts remain drafts until the live path is independently approved.
+4. **Reusable skill** - save only the corrected, verified procedure. Include exact inputs, verification, rollback, and known pitfalls; never preserve a merely plausible first attempt.
+5. **Least privilege** - grant only the tools and accounts needed for that job. Never connect broad email/calendar/document write scopes simply for convenience.
+6. **Schedule last** - add cron only after supervised proof. Deterministic checks use `no_agent`; all jobs must be idempotent, bounded, source-traceable, and silent when healthy.
+7. **Production verification** - force-run once, inspect the real artifact/delivery log, and verify restart survival. A scheduled job without proven output is theater.
 
 For autonomous work, give agents outcome contracts rather than micromanaged steps, but retain approval gates for outbound messages, payments, production changes, and confidential data until the specific workflow has earned broader authority.
 
 ## What NOT to Do
-- Never edit aidlc-docs/audit.md with write_file — always append using terminal (echo >>)
+- Never edit aidlc-docs/audit.md with write_file - always append using terminal (echo >>)
 - Never send email without checking LeadStore.is_bounced()
-- Never claim SOC 2/GDPR/HIPAA certification — use "-ready" or "practices" language
-- Never disable `flock` trap — stale lock files cause false health warnings every cycle
+- Never claim SOC 2/GDPR/HIPAA certification - use "-ready" or "practices" language
+- Never disable `flock` trap - stale lock files cause false health warnings every cycle
 
 ## Design Context (customer-portal)
-Full strategic brief lives in `customer-portal/PRODUCT.md` (visual system in `customer-portal/DESIGN.md`). Summary: brand-register marketing site for founders/operators burning ad spend on underperforming landing pages (ecommerce, B2B SaaS, coaches/consultants), plus agencies as a secondary audience via the $497 partner offer. Positioning: "the problem was never the ad, it was the page" — evidence-first, one-time Fix Pack over any retainer framing. Personality: assertive, clinical, evidence-first — diagnostic equipment, not a lifestyle brand. Anti-references: generic AI-SaaS cream, CRO-agency theatrics, black-box-AI styling, SEO-audit-tool genericism. Accessibility target: WCAG 2.2 AAA (DESIGN.md now targets AAA throughout — reconciled 2026-07-23).
+Full strategic brief lives in `customer-portal/PRODUCT.md` (visual system in `customer-portal/DESIGN.md`). Summary: brand-register marketing site for founders/operators burning ad spend on underperforming landing pages (ecommerce, B2B SaaS, coaches/consultants), plus agencies as a secondary audience via the $497 partner offer. Positioning: "the problem was never the ad, it was the page" - evidence-first, one-time Fix Pack over any retainer framing. Personality: assertive, clinical, evidence-first - diagnostic equipment, not a lifestyle brand. Anti-references: generic AI-SaaS cream, CRO-agency theatrics, black-box-AI styling, SEO-audit-tool genericism. Accessibility target: WCAG 2.2 AAA (DESIGN.md now targets AAA throughout - reconciled 2026-07-23).

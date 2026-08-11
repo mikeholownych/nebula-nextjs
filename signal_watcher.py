@@ -1,6 +1,6 @@
 #!/home/mike/nebula/venv/bin/python3
 """
-Signal Watcher — Machine 5 Top-of-Funnel
+Signal Watcher - Machine 5 Top-of-Funnel
 Monitors IndieHackers (via HN Algolia + direct IH attempts), Product Hunt (RSS),
 and HN Algolia for buying trigger posts every 30 minutes.
 
@@ -75,7 +75,7 @@ def append_signal(signal: dict):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SIGNAL SCORING  (Machine 5 — score 1-10, emit only >= 6)
+# SIGNAL SCORING  (Machine 5 - score 1-10, emit only >= 6)
 # ══════════════════════════════════════════════════════════════════════════════
 
 # Tier 9-10: explicit financial/conversion pain
@@ -185,7 +185,7 @@ def score_signal(headline: str, body: str = "") -> int:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SOURCE 1+2 — IndieHackers via HN Algolia cross-links + IH direct attempts
+# SOURCE 1+2 - IndieHackers via HN Algolia cross-links + IH direct attempts
 # ══════════════════════════════════════════════════════════════════════════════
 
 IH_TRIGGER_QUERIES = [
@@ -338,7 +338,7 @@ def scrape_ih_direct() -> list[dict]:
 
 
 def scrape_ih_group() -> list[dict]:
-    """Source 1: IH Landing Page Feedback group — all strategies."""
+    """Source 1: IH Landing Page Feedback group - all strategies."""
     direct = scrape_ih_direct()
     via_hn = scrape_ih_via_hn_algolia()
     # merge, dedup by url
@@ -441,7 +441,7 @@ def scrape_ih_keywords() -> list[dict]:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SOURCE 3 — Product Hunt (Atom RSS feed — no auth needed)
+# SOURCE 3 - Product Hunt (Atom RSS feed - no auth needed)
 # ══════════════════════════════════════════════════════════════════════════════
 
 PH_ATOM_FEEDS = [
@@ -567,7 +567,7 @@ def parse_ph_atom(xml_text: str, cutoff_dt: datetime) -> list[dict]:
 
 
 def scrape_product_hunt() -> list[dict]:
-    """Source 3: Product Hunt — RSS Atom feeds + API fallback."""
+    """Source 3: Product Hunt - RSS Atom feeds + API fallback."""
     print("[PH] Fetching Product Hunt new launches...")
     leads = []
     cutoff = datetime.now(timezone.utc) - timedelta(hours=48)
@@ -583,7 +583,7 @@ def scrape_product_hunt() -> list[dict]:
         if raw_posts:
             print(f"  [PH-API] {len(raw_posts)} posts with <=5 votes from API")
 
-    # B) RSS Atom feeds (no auth needed — confirmed working)
+    # B) RSS Atom feeds (no auth needed - confirmed working)
     if not raw_posts:
         print("  [PH-RSS] Fetching Atom feeds...")
         seen_urls = set()
@@ -607,7 +607,7 @@ def scrape_product_hunt() -> list[dict]:
     for post in raw_posts:
         name    = post.get("name", "")
         tagline = post.get("tagline", "")
-        headline = f"{name} — {tagline}" if tagline else name
+        headline = f"{name} - {tagline}" if tagline else name
         leads.append({
             "source":       "product_hunt",
             "headline":     headline,
@@ -622,7 +622,7 @@ def scrape_product_hunt() -> list[dict]:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SOURCE 4 — HN Algolia (fixed — real results)
+# SOURCE 4 - HN Algolia (fixed - real results)
 # ══════════════════════════════════════════════════════════════════════════════
 
 # Queries designed to actually return results (confirmed working)
@@ -637,7 +637,7 @@ HN_QUERIES = [
     ("traffic but no conversions",               90),
     ("conversion rate terrible",                 90),
     # Show HN + Ask HN for new launches
-    ("Show HN landing page",                     7),    # 7-day — fresh launches
+    ("Show HN landing page",                     7),    # 7-day - fresh launches
     ("Ask HN landing page critique",             30),
     ("Show HN launch feedback",                  7),
     # Broad with relevant terms
@@ -648,7 +648,7 @@ HN_QUERIES = [
 
 def scrape_hn_algolia() -> list[dict]:
     """
-    Source 4: HN Algolia — search for landing-page / conversion pain.
+    Source 4: HN Algolia - search for landing-page / conversion pain.
     Uses variable time windows per query (recent Show HN = 7d, pain signals = 90d).
     """
     print("[HN] Querying HN Algolia for buying trigger posts...")
@@ -739,7 +739,7 @@ def process_leads(all_leads: list, seen: set) -> list:
 
         # PH new launches: only emit if they have explicit conversion/landing page signals.
         # Generic PH launches without ad spend / conversion pain are noise.
-        # Remove the score floor — let score_signal decide based on patterns.
+        # Remove the score floor - let score_signal decide based on patterns.
         if lead.get("source") == "product_hunt" and score < 6:
             continue  # drop low-signal PH noise
 
@@ -783,7 +783,7 @@ def process_leads(all_leads: list, seen: set) -> list:
 
 def main():
     print("=" * 60)
-    print(f"Signal Watcher — {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Signal Watcher - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
 
     seen               = load_seen()

@@ -1,7 +1,7 @@
-# Nebula Components — SEO Implementation Roadmap
+# Nebula Components - SEO Implementation Roadmap
 
-**Framework:** Enterprise SEO Governance (16-layer model)  
-**Current Maturity:** Level 1.5 (Eligible → Structured)  
+**Framework:** Enterprise SEO Governance (16-layer model)
+**Current Maturity:** Level 1.5 (Eligible → Structured)
 **Target:** Level 3 (Competitive) in 90 days
 
 ---
@@ -313,6 +313,6 @@ Create a structured query registry with these fields:
 
 ---
 
-**Last Updated:** 2025-07-15  
-**Status:** Phase 1 70% complete  
+**Last Updated:** 2025-07-15
+**Status:** Phase 1 70% complete
 **Next Milestone:** GSC verification + query registry (Week 1)

@@ -1,4 +1,4 @@
-# LinkedIn Posts — Week of July 28, 2026 (v4)
+# LinkedIn Posts - Week of July 28, 2026 (v4)
 
 No templates. No formulas. Just thinking out loud about things I've learned building and running audit tools.
 
@@ -156,7 +156,7 @@ If you're paying someone to fix your page, ask them one question:
 
 If they haven't run one on themselves, they're not ready to run one on you.
 
-When did you last audit your page — not your ads?
+When did you last audit your page - not your ads?
 
 If this resonated, repost it.
 Follow me for more breakdowns of what's actually broken on landing pages.

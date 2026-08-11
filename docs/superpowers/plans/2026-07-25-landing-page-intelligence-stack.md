@@ -37,30 +37,30 @@ As a founder who wants the workflows applied to a page, I can move from the reso
 
 ### Create
 
-- `customer-portal/content/landing-page-intelligence-stack/manifest.json` — exact bundle registry.
-- `customer-portal/content/landing-page-intelligence-stack/README.md` — bundle purpose, use, and limits.
-- `customer-portal/content/landing-page-intelligence-stack/evidence-record.schema.json` — machine-readable evidence record contract.
+- `customer-portal/content/landing-page-intelligence-stack/manifest.json` - exact bundle registry.
+- `customer-portal/content/landing-page-intelligence-stack/README.md` - bundle purpose, use, and limits.
+- `customer-portal/content/landing-page-intelligence-stack/evidence-record.schema.json` - machine-readable evidence record contract.
 - `customer-portal/content/landing-page-intelligence-stack/workflows/01-message-match-checker.md`
 - `customer-portal/content/landing-page-intelligence-stack/workflows/02-trust-gap-detector.md`
 - `customer-portal/content/landing-page-intelligence-stack/workflows/03-mobile-first-scroll-analyzer.md`
 - `customer-portal/content/landing-page-intelligence-stack/workflows/04-cta-form-friction-analyzer.md`
 - `customer-portal/content/landing-page-intelligence-stack/workflows/05-paid-traffic-leak-prioritizer.md`
 - `customer-portal/content/landing-page-intelligence-stack/workflows/06-fix-verification-workflow.md`
-- `customer-portal/scripts/package-landing-page-intelligence-stack.mjs` — validator, deterministic generator, and drift checker.
-- `customer-portal/public/downloads/nebula-landing-page-intelligence-stack-v1.zip` — generated projection.
-- `customer-portal/public/downloads/nebula-landing-page-intelligence-stack-v1.zip.sha256` — generated digest sidecar.
-- `customer-portal/__tests__/landing-page-intelligence-stack.test.ts` — source, archive, determinism, adversarial, and page-source contracts.
-- `customer-portal/components/ui/LinkButton.tsx` — centralized anchor CTA variants.
-- `customer-portal/app/learning-centre/landing-page-intelligence-stack/page.tsx` — public article/download surface.
-- `customer-portal/app/learning-centre/landing-page-intelligence-stack/meta.json` — automatic learning-centre and sitemap discovery.
-- `customer-portal/e2e/landing-page-intelligence-stack.spec.ts` — rendered and download verification.
+- `customer-portal/scripts/package-landing-page-intelligence-stack.mjs` - validator, deterministic generator, and drift checker.
+- `customer-portal/public/downloads/nebula-landing-page-intelligence-stack-v1.zip` - generated projection.
+- `customer-portal/public/downloads/nebula-landing-page-intelligence-stack-v1.zip.sha256` - generated digest sidecar.
+- `customer-portal/__tests__/landing-page-intelligence-stack.test.ts` - source, archive, determinism, adversarial, and page-source contracts.
+- `customer-portal/components/ui/LinkButton.tsx` - centralized anchor CTA variants.
+- `customer-portal/app/learning-centre/landing-page-intelligence-stack/page.tsx` - public article/download surface.
+- `customer-portal/app/learning-centre/landing-page-intelligence-stack/meta.json` - automatic learning-centre and sitemap discovery.
+- `customer-portal/e2e/landing-page-intelligence-stack.spec.ts` - rendered and download verification.
 
 ### Modify
 
-- `customer-portal/package.json` — direct `fflate` dev dependency and bundle scripts.
-- `customer-portal/package-lock.json` — synchronized lockfile.
-- `.github/workflows/ci.yml` — actual projection-check step.
-- `customer-portal/__tests__/metadata/evidence-integrity.test.ts` — include the new public page in claim checks.
+- `customer-portal/package.json` - direct `fflate` dev dependency and bundle scripts.
+- `customer-portal/package-lock.json` - synchronized lockfile.
+- `.github/workflows/ci.yml` - actual projection-check step.
+- `customer-portal/__tests__/metadata/evidence-integrity.test.ts` - include the new public page in claim checks.
 
 ---
 

@@ -6,10 +6,10 @@ Create moment where prospects stop and think "This is already working"
 ## Implementation Rules
 1. **Show partial results BEFORE asking for email** (VIN model)
 2. **Deliver a REAL, specific 3-point audit** (not generic advice)
-3. **At bottom of audit email**: "If you want me to implement these fixes, it's $97 done-for-you in 24h — reply yes"
+3. **At bottom of audit email**: "If you want me to implement these fixes, it's $97 done-for-you in 24h - reply yes"
 
 ## VIN Model Rule
-Always show partial results BEFORE asking for email. Proof of value before ask. Never gate the entire result — zero-proof gating gets zero email submissions.
+Always show partial results BEFORE asking for email. Proof of value before ask. Never gate the entire result - zero-proof gating gets zero email submissions.
 
 ## Implementation Pattern
 ```python

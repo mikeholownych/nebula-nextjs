@@ -1,16 +1,16 @@
-# SaaSHero Outreach Draft — Aaron Rovner
+# SaaSHero Outreach Draft - Aaron Rovner
 # Target: saashero.net/design/free-landing-page-audit-tools/
-# Status: DRAFT — requires Mike approval before send
+# Status: DRAFT - requires Mike approval before send
 
-Subject: Missing from your LP audit tools roundup — 9-signal conversion audit (free, no signup)
+Subject: Missing from your LP audit tools roundup - 9-signal conversion audit (free, no signup)
 
 ---
 
 Hi Aaron,
 
-Your "8 Best Free Landing Page Audit Tools" piece is solid — the PageSpeed + ChatGPT + FixRoast combo recommendation is smart.
+Your "8 Best Free Landing Page Audit Tools" piece is solid - the PageSpeed + ChatGPT + FixRoast combo recommendation is smart.
 
-One gap I noticed: your roundup covers speed (PageSpeed, GTmetrix), accessibility (WAVE), technical SEO (SEOptimer), and AI copy review (ChatGPT, FixRoast) — but nothing that scores conversion architecture specifically.
+One gap I noticed: your roundup covers speed (PageSpeed, GTmetrix), accessibility (WAVE), technical SEO (SEOptimer), and AI copy review (ChatGPT, FixRoast) - but nothing that scores conversion architecture specifically.
 
 I built Nebula (nebulacomponents.com/audit). It scores 9 conversion signals in ~90 seconds:
 - Message match (ad → page alignment)
@@ -25,13 +25,13 @@ I built Nebula (nebulacomponents.com/audit). It scores 9 conversion signals in ~
 
 Free, no signup, no credit card. Returns a scored report with evidence for each signal.
 
-We've run 86+ audits. Average score: 6.3/10. The most common leak we find is message match failure — the ad promises one thing, the page says another. Speed tools miss this entirely.
+We've run 86+ audits. Average score: 6.3/10. The most common leak we find is message match failure - the ad promises one thing, the page says another. Speed tools miss this entirely.
 
 Here's a sample output if you want to test it: https://nebulacomponents.com/audit
 
 Would fit naturally in your roundup as the "conversion architecture" tool alongside the speed/copy/accessibility tools you already cover. Happy to answer any questions.
 
-— Mike Holownych
+- Mike Holownych
 Founder, Nebula Components
 
 ---

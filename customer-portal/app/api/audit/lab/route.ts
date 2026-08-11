@@ -81,7 +81,7 @@ function extractFinding(f: LabFinding | null) {
 /**
  * POST /api/audit/lab
  *
- * Full 9-signal component lab — runs the same audit engine as the free audit,
+ * Full 9-signal component lab - runs the same audit engine as the free audit,
  * returns all signal dimensions with status, evidence, and pass standards.
  * Ad copy is optional and only affects the Message Match component.
  */

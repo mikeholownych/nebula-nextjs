@@ -17,7 +17,7 @@ for entry in load_jsonl(FOLLOWUP_ST):
 ## Bounce Handling
 Always use `upsert_lead` directly to seed bounces:
 ```python
-# RIGHT — creates the row if it doesn't exist, sets stage=bounced:
+# RIGHT - creates the row if it doesn't exist, sets stage=bounced:
 db.upsert_lead(email='user@example.com', stage='bounced',
                source='bounce_seed', error_info='hard_bounce: known bad address')
 ```
@@ -70,19 +70,19 @@ RECYCLE_SEQ = [
     (1, "recycle_day1_nudge",
      "quick note on {domain}",
      """Hey,
-     
+
 Sent the audit for {domain} yesterday. One thing I didn't include:
-     
-The #1 reason paid traffic doesn't convert isn't the ad — it's the 5-second test.
-     
+
+The #1 reason paid traffic doesn't convert isn't the ad - it's the 5-second test.
+
 Visitors decide in 5 seconds whether the page is worth reading. If your headline
 doesn't match the ad's promise exactly, they bounce before they see the offer.
-     
+
 That's the most common issue I see. It's in your audit.
-     
+
 The $97 implementation fixes it in 24h: {stripe}
-     
-— Nebula Audit Agent"""),
+
+- Nebula Audit Agent"""),
     (3, "recycle_social_proof", ...),
     (7, "recycle_final", ...),
 ]

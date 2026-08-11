@@ -90,7 +90,7 @@ Bullets:
 CTA: **Run my free landing page teardown**
 
 ### $7 DIY kit rewrite
-**Offer:** “The 60-Minute Landing Page Fix Kit — $7”
+**Offer:** “The 60-Minute Landing Page Fix Kit - $7”
 
 Includes:
 - 5-step audit-to-fix checklist.
@@ -178,7 +178,7 @@ Microcopy: “We use your URL only to generate and log the audit. No resale. No 
 - Problem: Hero headline explains the product but not the buyer outcome.
 - Why it matters: Cold visitors decide in seconds whether the page is for them.
 - Fix: Replace “AI workflow platform for teams” with “Turn messy customer messages into support-ready replies in 30 seconds.”
-- Difficulty: Low — copy-only.
+- Difficulty: Low - copy-only.
 - Priority: 9/10.
 
 ### What the free audit checks
@@ -222,49 +222,49 @@ Avoid: “Get started”, “Automated implementation”, “Just results”.
 
 ## 9. FAQ
 
-**Is this just ChatGPT output?**  
+**Is this just ChatGPT output?**
 No. The audit follows a fixed conversion rubric and ties each recommendation to visible page evidence. AI may assist the analysis, but the deliverable is structured around specific page findings, priority, and implementation difficulty.
 
-**Do you need access to my website?**  
+**Do you need access to my website?**
 Not for the free audit or $7 kit. For the $97 fix pack, access is optional and only requested if you want direct implementation.
 
-**Will changes go live automatically?**  
+**Will changes go live automatically?**
 No. Production changes require explicit authorization. Default delivery is implementation-ready copy and instructions.
 
-**What platforms do you support?**  
+**What platforms do you support?**
 Copy/instruction deliverables support any landing page. Direct implementation depends on stack/access. Static HTML is safest. Builders/CMS/custom apps may receive artifact-only delivery.
 
-**What if my page is already good?**  
+**What if my page is already good?**
 The audit will say that and recommend the smallest useful next step, not invent issues.
 
-**What if the audit is not useful?**  
+**What if the audit is not useful?**
 Reply/request support. Paid offers have policy-bounded refund or revision terms.
 
-**How fast do I get results?**  
+**How fast do I get results?**
 Free audit: instant/on-page or emailed in minutes. $7 kit: instant. $97 fix pack: target delivery within 24 hours after required inputs.
 
-**What does the $7 kit include?**  
+**What does the $7 kit include?**
 Checklist, prompts, examples, trust-section templates, CTA templates, and FAQ templates.
 
-**What does the $97 service include?**  
+**What does the $97 service include?**
 Priority fix pack: rewritten sections, recommended layout changes, implementation instructions, and optional direct implementation only when safe and authorized.
 
-**What if implementation is not technically possible?**  
+**What if implementation is not technically possible?**
 You receive implementation-ready copy, layout notes, and step-by-step instructions instead.
 
-**Can I review changes first?**  
+**Can I review changes first?**
 Yes. Review is the default before anything goes live.
 
-**Do you store my URL or data?**  
+**Do you store my URL or data?**
 We store the URL, email, audit result, payment/delivery status, and support/refund events for fulfillment and measurement. We do not resell submitted URLs.
 
-**Is there a refund policy?**  
+**Is there a refund policy?**
 $7: refund within 7 days if no concrete fix. $97: refund or one revision if the deliverable misses stated scope or cannot be fulfilled even as a fallback artifact.
 
-**Who is this best for?**  
+**Who is this best for?**
 Founders with a live landing page, some traffic, and weak conversion.
 
-**Who is this not for?**  
+**Who is this not for?**
 Teams needing full brand strategy, enterprise CRO research, A/B testing infrastructure, custom engineering, or guaranteed conversion lift.
 
 ## 10. Post-submit Confirmation Copy
@@ -300,7 +300,7 @@ Includes:
 
 Delivery: instant download + email receipt.
 Guarantee: 7-day refund if it does not give you one concrete fix.
-CTA: **Pay $7 — get instant access**
+CTA: **Pay $7 - get instant access**
 
 ## 12. $97 Checkout Copy
 
@@ -321,7 +321,7 @@ Not included:
 - ads management
 - unauthorized production changes
 
-CTA: **Pay $97 — start my fix pack**
+CTA: **Pay $97 - start my fix pack**
 
 ## 13. Post-purchase Emails
 

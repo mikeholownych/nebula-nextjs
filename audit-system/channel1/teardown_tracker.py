@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-channel1/teardown_tracker.py — Measure teardown propagation, not content volume.
+channel1/teardown_tracker.py - Measure teardown propagation, not content volume.
 
 The teardown loop is a channel hypothesis. This ledger records, per teardown,
 the 11 validation fields:
@@ -94,7 +94,7 @@ def cmd_add(args) -> int:
     })
     rows.append(entry)
     save(rows)
-    print(f"✅ Added teardown '{args.slug}' to ledger. Propagation starts at zero — as it should.")
+    print(f"✅ Added teardown '{args.slug}' to ledger. Propagation starts at zero - as it should.")
     return 0
 
 
@@ -129,25 +129,25 @@ def cmd_rollup(args) -> int:
     print(f"{'company':<18}{'published':<11}{'contacted':<10}{'response':<18}{'share':<6}{'referral':<9}{'impressions':<12}{'audit_starts':<13}{'purchases':<9}")
     print("-" * 106)
     for r in sorted(rows, key=lambda x: x.get("published_at", "")):
-        resp = (r.get("founder_response") or "—")[:17]
+        resp = (r.get("founder_response") or "-")[:17]
         print(f"{r.get('company','')[:17]:<18}{str(r.get('published_at',''))[:10]:<11}"
               f"{str(r.get('founder_contacted', False)):<10}{resp:<18}{str(r.get('founder_share', False)):<6}"
               f"{r.get('referral_visits', 0):<9}{r.get('search_impressions', 0):<12}"
               f"{r.get('audit_starts', 0):<13}{r.get('repair_purchases', 0):<9}")
-    # Stagnation flags — teardowns that are live but show no propagation
+    # Stagnation flags - teardowns that are live but show no propagation
     print("\nPropagation checks:")
     for r in rows:
         if r.get("status") != "live_measuring":
             continue
         if not r.get("founder_contacted"):
-            print(f"  ⚠️ {r.get('company')}: founder NOT contacted yet — Q1 unanswered. "
+            print(f"  ⚠️ {r.get('company')}: founder NOT contacted yet - Q1 unanswered. "
                   f"Post to LinkedIn/X, then set founder_contacted=true.")
         elif not r.get("founder_share") and r.get("referral_visits", 0) == 0:
             print(f"  ⚠️ {r.get('company')}: founder contacted, no share, 0 referral visits "
-                  f"— distribution retry needed (new channel), NOT a new teardown.")
+                  f"- distribution retry needed (new channel), NOT a new teardown.")
         elif r.get("referral_visits", 0) > 0 and r.get("audit_starts", 0) == 0:
             print(f"  ⚠️ {r.get('company')}: {r.get('referral_visits')} visits, 0 audit starts "
-                  f"— traffic is curiosity, not qualification. Check the CTA/offer on the teardown page.")
+                  f"- traffic is curiosity, not qualification. Check the CTA/offer on the teardown page.")
     return 0
 
 

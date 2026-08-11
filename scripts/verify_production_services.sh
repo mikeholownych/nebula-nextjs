@@ -69,7 +69,7 @@ for target in "$LOCAL_URL" "$PUBLIC_URL"; do
   [[ "$target" == "$LOCAL_URL" ]] && asset_url="http://127.0.0.1:3000"
   [[ "$target" == "$PUBLIC_URL" ]] && asset_url="https://nebulacomponents.com"
   code=$(curl -fsS -o /dev/null -w '%{http_code}' --max-time 15 "${asset_url}${css_path}")
-  [[ "$code" == 200 ]] || { printf 'FAIL: stylesheet %s%s returned %s (page HTML was 200 — stale build/process mismatch)\n' "$asset_url" "$css_path" "$code" >&2; exit 1; }
+  [[ "$code" == 200 ]] || { printf 'FAIL: stylesheet %s%s returned %s (page HTML was 200 - stale build/process mismatch)\n' "$asset_url" "$css_path" "$code" >&2; exit 1; }
   printf 'PASS: %s stylesheet %s returned HTTP 200\n' "$target" "$css_path"
 done
 

@@ -1,4 +1,4 @@
-"""Sonic Foundation — the audio engine of the production line.
+"""Sonic Foundation - the audio engine of the production line.
 
 Blueprint (professional automated video pipeline): "Audio accounts for
 more than half of a viewer's perceived video quality. Professional
@@ -13,7 +13,7 @@ This module implements the audio-side deltas that a single-clip TTS
      automatic fallback to edge-tts when key is absent.
   2. Dead-air elimination: leading/trailing silence trimmed from every
      segment clip (Phase 2 "dead-air elimination").
-  3. Controlled inter-segment pacing gaps (<= 0.2s) — momentum stays
+  3. Controlled inter-segment pacing gaps (<= 0.2s) - momentum stays
      tight, but speech never overlaps between cards.
   4. Transition whoosh SFX layer at every visual boundary, mixed at
      low volume to fake high production value (Phase 5 "audio
@@ -21,7 +21,7 @@ This module implements the audio-side deltas that a single-clip TTS
   5. Final loudness normalization to -14 LUFS (YouTube standard) so the
      narration dominates a consistent audio landscape (Phase 2
      "dynamic audio leveling").
-  6. Background music bed with auto-ducking — music lowers by
+  6. Background music bed with auto-ducking - music lowers by
      MUSIC_DUCK_DB when narration is present, rises in intro/outro gaps.
 
 Usage (async):
@@ -50,7 +50,7 @@ STING_SFX_DB = -16.0         # brand sting whoosh: present but not loud
 SAMPLE_RATE = 48000
 
 # ── ElevenLabs config ───────────────────────────────────────────────
-# Charlie: young, confident, energetic — fits "this page is bleeding money"
+# Charlie: young, confident, energetic - fits "this page is bleeding money"
 EL_VOICE_ID = os.environ.get("ELEVENLABS_VOICE_ID", "IKne3meq5aSn9XLyUdCD")
 EL_MODEL_ID = os.environ.get("ELEVENLABS_MODEL_ID", "eleven_multilingual_v2")
 ELEVENLABS_API_KEY = os.environ.get("ELEVENLABS_API_KEY", "")
@@ -89,8 +89,8 @@ async def tts_segment(text: str, out_path, pitch_hz: int = 0,
     """Generate TTS for one segment.
 
     Provider priority:
-      1. ElevenLabs (ELEVENLABS_API_KEY set) — studio-grade neural voice
-      2. edge-tts fallback — free, lower quality
+      1. ElevenLabs (ELEVENLABS_API_KEY set) - studio-grade neural voice
+      2. edge-tts fallback - free, lower quality
 
     pitch_hz applies only to edge-tts (ElevenLabs uses its own prosody model).
     {PAUSE} markers are stripped before synthesis (gaps handled by build_narration).
@@ -202,7 +202,7 @@ def build_narration(clip_paths, gaps, out_path) -> float:
 def synth_whoosh(out_path, dur: float = 0.35) -> Path:
     """Synthesize a subtle whoosh: descending chirp + noise, faded.
 
-    A 'whoosh' is a downward frequency sweep — aevalsrc gives the chirp,
+    A 'whoosh' is a downward frequency sweep - aevalsrc gives the chirp,
     anoisesrc adds air. Kept as one reusable asset.
     """
     out_path = Path(out_path)
@@ -311,7 +311,7 @@ def finalize(narration_path, sfx_path, out_path) -> float:
             str(out_path),
         ])
     else:
-        # No music available — use voice track as-is
+        # No music available - use voice track as-is
         import shutil
         shutil.copy2(str(voice_path), str(out_path))
 

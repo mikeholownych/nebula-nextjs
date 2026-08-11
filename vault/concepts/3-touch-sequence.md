@@ -14,4 +14,4 @@ Space touches 24-48h apart for optimal conversion
 - **Do NOT send more than 3 touches** to the same lead
 
 ## Multi-Tier Upsell
-After launching a higher-tier offer (e.g. DFY service), email all previous low-ticket leads about it. Frame it as a natural upgrade path and offer a one-time intro price for first X clients. Lead with the lower-tier success ("you saw the landing page quality — now let me build one for you").
+After launching a higher-tier offer (e.g. DFY service), email all previous low-ticket leads about it. Frame it as a natural upgrade path and offer a one-time intro price for first X clients. Lead with the lower-tier success ("you saw the landing page quality - now let me build one for you").

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
-  title: 'Agency Partner Program — Embed Nebula Audits on Your Site | Nebula',
+  title: 'Agency Partner Program - Embed Nebula Audits on Your Site | Nebula',
   description: 'Add a conversion audit widget to your agency site. Your visitors get instant scores, you get qualified leads with full attribution. One-time $497.',
   robots: { index: true, follow: true },
 }
@@ -18,7 +18,7 @@ export default function AgencyPartnerPage() {
         </h1>
         <p className="text-lg text-slate-400 mb-10 max-w-2xl">
           Embed the Nebula audit widget on your site. Visitors enter a URL,
-          get an instant conversion score, and you capture the lead — fully
+          get an instant conversion score, and you capture the lead - fully
           attributed to your agency, zero extra ad spend.
         </p>
 
@@ -29,28 +29,28 @@ export default function AgencyPartnerPage() {
             <li className="flex gap-4">
               <span className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-[#00c2a0]/10 text-[#00c2a0] text-sm font-bold">1</span>
               <div>
-                <span className="font-medium text-white">Purchase once</span> — $497, no recurring fees.
+                <span className="font-medium text-white">Purchase once</span> - $497, no recurring fees.
                 We provision your partner account in minutes.
               </div>
             </li>
             <li className="flex gap-4">
               <span className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-[#00c2a0]/10 text-[#00c2a0] text-sm font-bold">2</span>
               <div>
-                <span className="font-medium text-white">Paste two lines of code</span> — the widget renders inside a shadow DOM,
+                <span className="font-medium text-white">Paste two lines of code</span> - the widget renders inside a shadow DOM,
                 styled to your dark or light preference, zero CSS conflicts.
               </div>
             </li>
             <li className="flex gap-4">
               <span className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-[#00c2a0]/10 text-[#00c2a0] text-sm font-bold">3</span>
               <div>
-                <span className="font-medium text-white">Your visitors scan their page</span> — they get an instant score (0–10)
+                <span className="font-medium text-white">Your visitors scan their page</span> - they get an instant score (0–10)
                 and top 3 conversion leaks. No signup required for the visitor.
               </div>
             </li>
             <li className="flex gap-4">
               <span className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-[#00c2a0]/10 text-[#00c2a0] text-sm font-bold">4</span>
               <div>
-                <span className="font-medium text-white">You get the lead</span> — every audit is attributed to your partner ID.
+                <span className="font-medium text-white">You get the lead</span> - every audit is attributed to your partner ID.
                 Full report link carries your tracking. Upsell to your own services.
               </div>
             </li>
@@ -67,7 +67,7 @@ export default function AgencyPartnerPage() {
             </li>
             <li className="flex items-start gap-2">
               <span className="text-[#00c2a0] mt-1">✓</span>
-              Full lead attribution — every scan shows in your dashboard
+              Full lead attribution - every scan shows in your dashboard
             </li>
             <li className="flex items-start gap-2">
               <span className="text-[#00c2a0] mt-1">✓</span>
@@ -75,7 +75,7 @@ export default function AgencyPartnerPage() {
             </li>
             <li className="flex items-start gap-2">
               <span className="text-[#00c2a0] mt-1">✓</span>
-              &ldquo;Powered by Nebula&rdquo; link — gives you a dofollow backlink from our domain
+              &ldquo;Powered by Nebula&rdquo; link - gives you a dofollow backlink from our domain
             </li>
             <li className="flex items-start gap-2">
               <span className="text-[#00c2a0] mt-1">✓</span>
@@ -90,7 +90,7 @@ export default function AgencyPartnerPage() {
             href="https://buy.stripe.com/aFa8wPc2o7YM9613Ro43S0d"
             className="inline-block px-8 py-4 bg-[#00c2a0] text-[#0a0f1a] font-semibold rounded-lg hover:bg-[#00e0ba] transition-colors text-lg"
           >
-            Get the widget — $497
+            Get the widget - $497
           </a>
           <p className="text-sm text-slate-500 mt-3">
             Stripe handles payment. You&rsquo;ll receive your embed code within minutes.
@@ -101,7 +101,7 @@ export default function AgencyPartnerPage() {
         <section className="mb-14">
           <h2 className="text-xl font-semibold text-white mb-4">Live demo</h2>
           <p className="text-slate-400 mb-4 text-sm">
-            This is the exact widget your visitors see. Try it — enter any URL.
+            This is the exact widget your visitors see. Try it - enter any URL.
           </p>
           <div id="nebula-audit-widget" data-partner="agency_demo" data-theme="dark"></div>
           <Script src="https://nebulacomponents.com/widget/audit.js" strategy="lazyOnload" />
@@ -122,7 +122,7 @@ export default function AgencyPartnerPage() {
               <dt className="font-medium text-white">What if I hit the rate limit?</dt>
               <dd className="mt-1 text-slate-400">
                 The default is 10 audits/hour. If your traffic outgrows that,
-                we&rsquo;ll bump it — reach out and we&rsquo;ll adjust same-day.
+                we&rsquo;ll bump it - reach out and we&rsquo;ll adjust same-day.
               </dd>
             </div>
             <div>

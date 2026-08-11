@@ -1,4 +1,4 @@
-# Pricing Validation Report — 2026-07-14
+# Pricing Validation Report - 2026-07-14
 
 ## Stripe Products (Verified Live)
 
@@ -57,7 +57,7 @@ tests/test_offer_integrity.py::test_active_runtime_has_no_retired_fix_pack_payme
 
 ## Outdated Documentation
 
-**STRIPE_AUDIT.md** (2026-07-13) — This file documents a problem that has been fixed:
+**STRIPE_AUDIT.md** (2026-07-13) - This file documents a problem that has been fixed:
 - It incorrectly claims the checkout shows "LaunchCrate $97"
 - The actual checkout now correctly shows "Conversion Fix Pack $147"
 - This audit is now obsolete and can be archived

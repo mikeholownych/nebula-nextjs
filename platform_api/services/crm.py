@@ -1,4 +1,4 @@
-"""CRM service — PostgreSQL-backed marketing machine.
+"""CRM service - PostgreSQL-backed marketing machine.
 
 Covers:
   • prospect / customer lifecycle tracking (UTM, crm_status, LTV)
@@ -137,8 +137,8 @@ async def upsert_prospect(
     audit_score: int | None = None,
 ) -> dict:
     """Create or update a customer row with CRM marketing fields.
-    
-    Preserves original UTM (first-touch attribution) — only fills if blank.
+
+    Preserves original UTM (first-touch attribution) - only fills if blank.
     Updates last_score and increments audit_count on each audit.
     """
     pool = await get_pool()

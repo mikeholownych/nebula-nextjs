@@ -1,7 +1,7 @@
-# Content Governance & Claim Verification Policy — Nebula Components
+# Content Governance & Claim Verification Policy - Nebula Components
 
-**Domain**: `nebulacomponents.shop`  
-**Governing Standard**: Strict Evidence-Backed Claim Control  
+**Domain**: `nebulacomponents.shop`
+**Governing Standard**: Strict Evidence-Backed Claim Control
 
 ---
 
@@ -11,7 +11,7 @@
 2. **No Turnaround Understatement**: Never publish "60 seconds", "30 minutes", or "instant" turnaround claims. Use accurate descriptions ("runs in seconds", "under two minutes", "real-time inspection").
 3. **No Decorative Proof or Fake Metrics**: Never publish fabricated customer results, fake testimonials, unverified star ratings, or invented benchmark stats.
 4. **No Generic AI Positioning**: Positioning must frame Nebula as an evidence-backed landing page audit tool for paid traffic conversion leaks, not a generic "AI audit" or "AI generator".
-5. **No Em Dashes in User-Facing Copy**: Avoid em dashes (`—`) in user-facing title tags, metadata descriptions, headings, body text, or alt text.
+5. **No Em Dashes in User-Facing Copy**: Avoid em dashes (`-`) in user-facing title tags, metadata descriptions, headings, body text, or alt text.
 6. **No Thin Programmatic Pages**: Every published URL must contain substantive, actionable diagnostic guidance, clear symptom breakdown, and verified code/DOM inspection logic.
 
 ---

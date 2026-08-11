@@ -41,7 +41,7 @@ def build_first_value_email(email: str, plan: str) -> tuple[str, str, str]:
     subject = 'Have you run your audit yet?'
     text = f"""Hi,
 
-You signed up for Nebula {plan_name} — the audit is free and takes 90 seconds.
+You signed up for Nebula {plan_name} - the audit is free and takes 90 seconds.
 
 Paste your landing page URL here to find what's leaking:
 https://nebulacomponents.com/audit
@@ -54,11 +54,11 @@ Both are invisible to PageSpeed Insights. The audit catches them.
 
 → Run your audit: https://nebulacomponents.com/audit
 
-— Mike
+- Mike
 Nebula Components
 """
     html = f"""<p>Hi,</p>
-<p>You signed up for Nebula {plan_name} — the audit is free and takes 90 seconds.</p>
+<p>You signed up for Nebula {plan_name} - the audit is free and takes 90 seconds.</p>
 <p><strong><a href="https://nebulacomponents.com/audit">Paste your landing page URL here →</a></strong></p>
 <p>The two most common failures across 86 pages we've audited:</p>
 <ul>
@@ -67,7 +67,7 @@ Nebula Components
 </ul>
 <p>Both are invisible to PageSpeed Insights. The audit catches them.</p>
 <p><a href="https://nebulacomponents.com/audit">Run your audit now →</a></p>
-<p>— Mike<br>Nebula Components</p>"""
+<p>- Mike<br>Nebula Components</p>"""
     return subject, text, html
 
 

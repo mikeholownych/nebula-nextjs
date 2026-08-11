@@ -68,22 +68,22 @@ The data warehouse then starts syncing your Stripe data. You can see details and
 
 | Table | Description | Sync method | Incremental field | Primary key |
 | --- | --- | --- | --- | --- |
-| BalanceTransaction | A change to your Stripe account balance — a charge, refund, payout, or fee. | Webhook, Append only, Full refresh | created_at | — |
-| Charge | A single attempt to move money into your Stripe account by charging a payment source. | Webhook, Append only, Full refresh | created_at | — |
-| Customer | A Stripe customer, allowing recurring charges and tracking of payments belonging to the same person. | Webhook, Append only, Full refresh | created_at | — |
-| Dispute | A customer's challenge of a charge with their card issuer (a chargeback) and its resolution. | Webhook, Append only, Full refresh | created_at | — |
-| InvoiceItem | A one-off charge or credit added to a customer's upcoming invoice. | Webhook, Append only, Full refresh | date | — |
-| Invoice | A statement of amounts owed by a customer, generated for subscriptions or one-off billing. | Webhook, Append only, Full refresh | created_at | — |
-| Payout | A transfer of funds from your Stripe balance to your bank account or debit card. | Webhook, Append only, Full refresh | created_at | — |
-| Price | How much and how often to charge for a product — its unit cost, currency, and billing interval. | Webhook, Append only, Full refresh | created_at | — |
-| Product | A good or service that you sell, which prices are attached to. | Webhook, Append only, Full refresh | created_at | — |
-| Refund | A refund of all or part of a charge back to the customer. | Webhook, Append only, Full refresh | created_at | — |
-| Subscription | A customer's recurring billing arrangement against one or more prices. | Webhook, Append only, Full refresh | created_at | — |
-| CreditNote | An adjustment to an issued invoice that reduces the amount owed or refunds the customer. | Webhook, Append only, Full refresh | created_at | — |
-| CustomerBalanceTransaction | An adjustment to a single customer's credit balance (used toward or away from future invoices). | Full refresh | — | — |
-| CustomerPaymentMethod | A saved payment method (card, bank account, …) attached to a customer. | Webhook, Full refresh | — | — |
-| Coupon | A discount you can apply to customers, invoices, or subscriptions. | Webhook, Append only, Full refresh | created_at | — |
-| Discount | An applied coupon — the link between a coupon and the customer, subscription, or invoice it discounts. | Webhook only | start | — |
+| BalanceTransaction | A change to your Stripe account balance - a charge, refund, payout, or fee. | Webhook, Append only, Full refresh | created_at | - |
+| Charge | A single attempt to move money into your Stripe account by charging a payment source. | Webhook, Append only, Full refresh | created_at | - |
+| Customer | A Stripe customer, allowing recurring charges and tracking of payments belonging to the same person. | Webhook, Append only, Full refresh | created_at | - |
+| Dispute | A customer's challenge of a charge with their card issuer (a chargeback) and its resolution. | Webhook, Append only, Full refresh | created_at | - |
+| InvoiceItem | A one-off charge or credit added to a customer's upcoming invoice. | Webhook, Append only, Full refresh | date | - |
+| Invoice | A statement of amounts owed by a customer, generated for subscriptions or one-off billing. | Webhook, Append only, Full refresh | created_at | - |
+| Payout | A transfer of funds from your Stripe balance to your bank account or debit card. | Webhook, Append only, Full refresh | created_at | - |
+| Price | How much and how often to charge for a product - its unit cost, currency, and billing interval. | Webhook, Append only, Full refresh | created_at | - |
+| Product | A good or service that you sell, which prices are attached to. | Webhook, Append only, Full refresh | created_at | - |
+| Refund | A refund of all or part of a charge back to the customer. | Webhook, Append only, Full refresh | created_at | - |
+| Subscription | A customer's recurring billing arrangement against one or more prices. | Webhook, Append only, Full refresh | created_at | - |
+| CreditNote | An adjustment to an issued invoice that reduces the amount owed or refunds the customer. | Webhook, Append only, Full refresh | created_at | - |
+| CustomerBalanceTransaction | An adjustment to a single customer's credit balance (used toward or away from future invoices). | Full refresh | - | - |
+| CustomerPaymentMethod | A saved payment method (card, bank account, …) attached to a customer. | Webhook, Full refresh | - | - |
+| Coupon | A discount you can apply to customers, invoices, or subscriptions. | Webhook, Append only, Full refresh | created_at | - |
+| Discount | An applied coupon - the link between a coupon and the customer, subscription, or invoice it discounts. | Webhook only | start | - |
 
 ## Setting up webhooks for real-time syncing
 

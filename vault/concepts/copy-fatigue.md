@@ -36,5 +36,5 @@ d = diagnose_fatigue(
 
 ## Critical Rules
 - **Open rate <40%** = deliverability issue or subject fatigue (Illingworth)
-- **Pass `open_rate=`** to `diagnose_fatigue()` — zones it automatically
+- **Pass `open_rate=`** to `diagnose_fatigue()` - zones it automatically
 - **Diagnose before changing copy**

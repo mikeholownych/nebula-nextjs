@@ -30,7 +30,7 @@ QUERIES = [
 ]
 
 RUNS_PER_QUERY = 3
-DELAY_BETWEEN_CALLS = 4  # seconds — polite pacing
+DELAY_BETWEEN_CALLS = 4  # seconds - polite pacing
 
 
 def call_openrouter(query: str) -> dict:
@@ -142,7 +142,7 @@ def main():
                     "capture_sha256": sha,
                 }
                 rows.append(row)
-                print(f"    OK — citations: {len(citations)}, mention: {'nebula' in content.lower()}", file=sys.stderr)
+                print(f"    OK - citations: {len(citations)}, mention: {'nebula' in content.lower()}", file=sys.stderr)
             except Exception as exc:
                 err = {
                     "engine": ENGINE,

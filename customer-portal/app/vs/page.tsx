@@ -4,7 +4,7 @@ import { COMPARISONS } from './[slug]/data'
 
 export const metadata: Metadata = {
   title: 'Nebula vs. Other Landing Page Audit Tools | Nebula',
-  description: 'Side-by-side comparisons of Nebula against PageSpeed Insights, HubSpot Website Grader, Nibbler, and Google Lighthouse — what each checks, costs, and who it...',
+  description: 'Side-by-side comparisons of Nebula against PageSpeed Insights, HubSpot Website Grader, Nibbler, and Google Lighthouse - what each checks, costs, and who it...',
   alternates: {
     canonical: 'https://nebulacomponents.com/vs',
   },
@@ -30,7 +30,7 @@ export default function VsIndexPage() {
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-fg-muted">
           Every audit tool below checks something different. These pages show exactly what each one checks, what it costs,
-          and where Nebula fits — so you can pick the right tool for your problem.
+          and where Nebula fits - so you can pick the right tool for your problem.
         </p>
 
         <Link
@@ -57,7 +57,7 @@ export default function VsIndexPage() {
             Landing Page Audit Tool Pricing (2026): What 8 Tools Really Cost
           </h2>
           <p className="mt-3 text-sm text-fg-muted leading-relaxed">
-            Verified pricing for every tool on this list — free tiers, subscription traps, and the honest
+            Verified pricing for every tool on this list - free tiers, subscription traps, and the honest
             alternative.
           </p>
           <p className="mt-4 text-xs text-accent">See the pricing breakdown →</p>

@@ -55,7 +55,7 @@ if errors:
         print(f'  - {e}')
     sys.exit(1)
 else:
-    print('All prompts clean — no unresolved template variables or placeholders ✓')
+    print('All prompts clean - no unresolved template variables or placeholders ✓')
 
 # Show teaser
 print()

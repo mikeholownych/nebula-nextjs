@@ -34,6 +34,6 @@ If you're not sure, that's the problem.
 
 {audit_link_with_source}
 
-—
+-
 
 P.S. The ad/page comparison worksheet is here: {message_match_worksheet_link}

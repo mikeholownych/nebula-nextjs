@@ -6,7 +6,7 @@ const API_BASE = process.env.PLATFORM_API_URL ?? 'http://127.0.0.1:8001'
  * Proxy: GET /api/audit/stats/recent-finding
  *
  * Forwards to the FastAPI /audit/stats/recent-finding endpoint.
- * Returns the highest-impact finding from the most recently completed audit —
+ * Returns the highest-impact finding from the most recently completed audit -
  * label, issue, impact, and time-ago. No URL is ever exposed.
  */
 export async function GET() {

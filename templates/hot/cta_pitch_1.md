@@ -47,6 +47,6 @@ If your page gets 1,000 visits/month at 2% conversion:
 
 One CTA. One revision. 48 hours. Done.
 
-—
+-
 
 P.S. The difference between "Get started" and "Run my free audit (60 seconds)" is not copy. It's clarity. The visitor clicks when they know what follows.

@@ -38,7 +38,7 @@ Application Design focuses on:
   - [ ] Validate design completeness and consistency
 
 ### 4. Generate Context-Appropriate Questions
-**DIRECTIVE**: Analyze the requirements and stories to generate questions relevant to THIS specific application design. Use the categories below as guidance. Evaluate each category and, when in doubt about applicability, ask the question rather than skipping it — overconfidence leads to poor outcomes (see overconfidence-prevention.md).
+**DIRECTIVE**: Analyze the requirements and stories to generate questions relevant to THIS specific application design. Use the categories below as guidance. Evaluate each category and, when in doubt about applicability, ask the question rather than skipping it - overconfidence leads to poor outcomes (see overconfidence-prevention.md).
 
 - EMBED questions using [Answer]: tag format
 - Focus on ANY ambiguities, missing information, or areas needing clarification
@@ -118,7 +118,7 @@ If the analysis in step 8 reveals ANY ambiguous answers, you MUST:
 
 [AI-generated summary of application design artifacts created in bullet points]
 
-> **📋 <u>**REVIEW REQUIRED:**</u>**  
+> **📋 <u>**REVIEW REQUIRED:**</u>**
 > Please examine the application design artifacts at: `aidlc-docs/inception/application-design/`
 
 > **🚀 <u>**WHAT'S NEXT?**</u>**

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Card } from '@/components/ui/Card'
 
 export const metadata: Metadata = {
-  title: 'Top 10 Landing Page Mistakes Checklist — Nebula Components',
+  title: 'Top 10 Landing Page Mistakes Checklist - Nebula Components',
   description: 'Free downloadable checklist: The 10 landing page mistakes costing founders thousands in wasted ad spend. One-page scan. Specific fixes included.',
 }
 
@@ -71,7 +71,7 @@ export default function MistakesChecklistPage() {
         {/* What You Get */}
         <section className="mb-16">
           <h2 className="text-2xl font-extrabold text-fg mb-8">What's Inside The Checklist</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
               { num: 1, mistake: 'H1 Doesn\'t Match Ad Copy', why: 'Forces visitors to re-qualify. +12% bounce.' },

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Title variant scoring — 'generate more, pick the strongest'.
+"""Title variant scoring - 'generate more, pick the strongest'.
 
 Implements the title part of Shane Hummus' holy-trifecta system: generate
 several title variants per video, score each for click potential with a
@@ -71,7 +71,7 @@ def score_title(title: str, *, is_short: bool = True, domain: str = "",
     score = 0
     reasons: list[str] = []
 
-    # 1. Specificity — a number in the title (score, %, etc.)
+    # 1. Specificity - a number in the title (score, %, etc.)
     if any(c.isdigit() for c in title):
         score += 2
         reasons.append("has number")
@@ -110,7 +110,7 @@ def score_title(title: str, *, is_short: bool = True, domain: str = "",
         score += 1
         reasons.append("domain named")
 
-    # 6. Length — shorts truncate ~60 chars, long-form ~70
+    # 6. Length - shorts truncate ~60 chars, long-form ~70
     max_len = 60 if is_short else 70
     if len(title) <= max_len:
         score += 1

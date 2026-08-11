@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
     }
 
     // GA4 Measurement Protocol forwarding is the primary analytics path.
-    // Local DB analytics_events table not implemented — PostHog covers behavioral analytics.
+    // Local DB analytics_events table not implemented - PostHog covers behavioral analytics.
 
     return NextResponse.json({ success: true, events_received: events.length });
   } catch (error: unknown) {

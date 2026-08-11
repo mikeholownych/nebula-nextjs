@@ -1,4 +1,4 @@
-## AI Citation Readiness — Structured Data
+## AI Citation Readiness - Structured Data
 
 **Finding:** AI search engines (ChatGPT, Gemini, Perplexity) can't reliably identify or cite your brand.
 
@@ -38,9 +38,9 @@ engines can properly identify and cite my brand.
 - Canonical URL: ${has_canonical_note}
 
 Generate the complete HTML I need to add to my page's <head>:
-1. **JSON-LD structured data** — Organization type with name, URL, logo, sameAs
-2. **OpenGraph meta tags** — all 5 (title, description, image, type, url)
-3. **Twitter card** — summary_large_image with the same OG content
+1. **JSON-LD structured data** - Organization type with name, URL, logo, sameAs
+2. **OpenGraph meta tags** - all 5 (title, description, image, type, url)
+3. **Twitter card** - summary_large_image with the same OG content
 4. **Canonical link tag**
 
 Wrap in ```html blocks. Put inline comments explaining each section.
@@ -48,4 +48,4 @@ At the end: tell me exactly where in the <head> to paste this and
 how to verify it's working (Google Rich Results Test URL).
 ```
 
-**Expected output:** Complete `<head>` snippet with JSON-LD, OG tags, Twitter card, and canonical URL — copy-paste ready. Verify with Google Rich Results Test.
+**Expected output:** Complete `<head>` snippet with JSON-LD, OG tags, Twitter card, and canonical URL - copy-paste ready. Verify with Google Rich Results Test.

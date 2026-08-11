@@ -1,5 +1,5 @@
 """
-Dispatch API — weekly workspace activity digest endpoints.
+Dispatch API - weekly workspace activity digest endpoints.
 """
 
 from fastapi import APIRouter, HTTPException, Query

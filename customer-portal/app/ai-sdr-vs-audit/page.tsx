@@ -4,7 +4,7 @@ import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: "You Don't Need an AI SDR — Fix Your Landing Page First | Nebula Components",
+  title: "You Don't Need an AI SDR - Fix Your Landing Page First | Nebula Components",
   description: "Before you spend $25k on an AI SDR platform, establish an evidence-backed landing-page baseline across 9 conversion signals.",
   alternates: { canonical: 'https://nebulacomponents.com/ai-sdr-vs-audit' },
 }
@@ -44,7 +44,7 @@ export default function AiSdrVsAuditPage() {
       {/* Main Content */}
       <main id="main-content" className="max-w-[780px] mx-auto px-6 py-12 pb-20">
         <p className="mb-4">Let's be direct.</p>
-        <p className="mb-4">You have traffic. You have ad spend. You're getting zero conversions — or close to it. And now someone told you that you need an "AI SDR" or "AI BDR" to fix it.</p>
+        <p className="mb-4">You have traffic. You have ad spend. You're getting zero conversions - or close to it. And now someone told you that you need an "AI SDR" or "AI BDR" to fix it.</p>
         <p className="mb-8">
           Zamp.ai just published their <a href="https://www.zamp.ai/blogs/ai-sdr-bdr-what-they-do-and-how-to-deploy-one" className="text-accent hover:underline">AI SDR guide</a> (July 3, 2026). Good content. But here's what it doesn't tell you:
         </p>
@@ -69,9 +69,9 @@ export default function AiSdrVsAuditPage() {
         </h2>
         <p className="mb-4">Examine these three prerequisites before adding outbound volume:</p>
         <ol className="list-decimal list-inside mb-6 space-y-2">
-          <li><strong>A landing page with a verified baseline</strong> — identify evidenced page defects before adding more traffic.</li>
-          <li><strong>Trigger-aware outreach</strong> — who you contact and when (not demographic filters, but actual buying signals).</li>
-          <li><strong>Volume and sequencing</strong> — the cadence, the follow-ups, the qualification.</li>
+          <li><strong>A landing page with a verified baseline</strong> - identify evidenced page defects before adding more traffic.</li>
+          <li><strong>Trigger-aware outreach</strong> - who you contact and when (not demographic filters, but actual buying signals).</li>
+          <li><strong>Volume and sequencing</strong> - the cadence, the follow-ups, the qualification.</li>
         </ol>
         <p className="mb-6">An AI SDR platform only addresses #3. It assumes #1 and #2 are already solved. If your landing page is weak, an AI SDR is just accelerating the rate at which you waste money on leads that won't convert.</p>
 
@@ -117,7 +117,7 @@ export default function AiSdrVsAuditPage() {
         <h2 className="text-2xl font-bold text-fg mt-12 mb-4">
           The Trigger Problem Zamp Misses
         </h2>
-        <p className="mb-4">Zamp's blog says an AI SDR "pulls target accounts from your ICP criteria" and "cross-references intent data." That's demographic-filter targeting with a fresh coat of paint. It's still spray-and-pray — just faster spray.</p>
+        <p className="mb-4">Zamp's blog says an AI SDR "pulls target accounts from your ICP criteria" and "cross-references intent data." That's demographic-filter targeting with a fresh coat of paint. It's still spray-and-pray - just faster spray.</p>
         <p className="mb-6">Here's what actually works: <strong>trigger-aware targeting</strong>. You don't optimize for who the person is. You optimize for <em>what just happened to them</em>.</p>
 
         {/* Nebula Callout */}
@@ -142,9 +142,9 @@ export default function AiSdrVsAuditPage() {
         <h2 className="text-2xl font-bold text-fg mt-12 mb-4">
           The Real Funnel
         </h2>
-        <p className="mb-4">The smartest path to revenue right now — whether you're pre-revenue or scaling — is:</p>
+        <p className="mb-4">The smartest path to revenue right now - whether you're pre-revenue or scaling - is:</p>
         <ol className="list-decimal list-inside mb-6 space-y-2">
-          <li><strong>Run a free audit.</strong> Automated URL submission and evidence-backed scoring are live — no signup required.</li>
+          <li><strong>Run a free audit.</strong> Automated URL submission and evidence-backed scoring are live - no signup required.</li>
           <li>
             <strong>Fix what&apos;s broken.</strong> The free kit shows you what to change.
             {fixPackPrice && ` The ${fixPackPrice} One-Leak Repair Sprint delivers a tailored kit for one high-confidence page-level finding. You or your developer implements it, and the 30-day re-audit verifies the page condition.`}
@@ -166,10 +166,10 @@ export default function AiSdrVsAuditPage() {
         {/* Bounded availability notice */}
         <div className="bg-accent-dim border border-accent/30 rounded-xl p-6 mb-8">
           <div className="text-xs font-bold tracking-widest uppercase text-accent mb-2">
-            Free audit live — 9 conversion signals
+            Free audit live - 9 conversion signals
           </div>
           <p className="mb-0">
-            Run a free audit across 9 conversion signals — no signup required. Completion time
+            Run a free audit across 9 conversion signals - no signup required. Completion time
             varies by page and service load.{' '}
             <a href="/audit?utm_source=content&utm_medium=organic-content" className="text-accent font-bold hover:underline">Run your free audit →</a>
           </p>

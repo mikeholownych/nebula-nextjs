@@ -1,4 +1,4 @@
-# Nebula — Transcript-to-Cuts Prompt Templates
+# Nebula - Transcript-to-Cuts Prompt Templates
 # Usage: after transcribing a rough shoot, paste one of these prompts + the transcript
 # into a fresh Claude session. Run cuts 1, 2, 3 in sequence from the same transcript.
 
@@ -8,7 +8,7 @@
 
 ```
 You are my video editor. The recording below is a rough, unscripted session where
-I talked through 3 topics back-to-back for Nebula Components — a landing page audit
+I talked through 3 topics back-to-back for Nebula Components - a landing page audit
 tool for founders wasting ad spend.
 
 My voice: direct, plain, no corporate language. Short sentences. Specific numbers.
@@ -21,7 +21,7 @@ separately. When I say "Cut 1," produce the 60-second short-form version. When I
 "Cut 2," produce the 3-minute long-form. When I say "Cut 3," produce the text thread.
 
 Rules that apply to all cuts:
-- Hook in the first 5 seconds — start at the strongest line, not the setup
+- Hook in the first 5 seconds - start at the strongest line, not the setup
 - Cut all filler (um, so, basically, you know, like), repeats, and tangents
 - Mark KEEP / CUT for each chunk with timestamp range
 - For every KEEP, add a [b-roll] suggestion in brackets (screen recording preferred)
@@ -32,7 +32,7 @@ Rules that apply to all cuts:
 
 ---
 
-## CUT 1 PROMPT — 60-second short-form (TikTok / Reels / Shorts)
+## CUT 1 PROMPT - 60-second short-form (TikTok / Reels / Shorts)
 
 ```
 Cut 1: Give me a 60-second version for short-form (vertical, TikTok/Reels/Shorts).
@@ -51,7 +51,7 @@ Return:
 
 ---
 
-## CUT 2 PROMPT — 3-minute deep version (YouTube / LinkedIn)
+## CUT 2 PROMPT - 3-minute deep version (YouTube / LinkedIn)
 
 ```
 Cut 2: Give me a 3-minute version for YouTube or LinkedIn long-form.
@@ -73,10 +73,10 @@ Return:
 
 ---
 
-## CUT 3 PROMPT — Text thread (X / Threads / LinkedIn text post)
+## CUT 3 PROMPT - Text thread (X / Threads / LinkedIn text post)
 
 ```
-Cut 3: Give me a text thread version — no video needed.
+Cut 3: Give me a text thread version - no video needed.
 
 Format (X/Threads style):
 - Post 1: the hook (1–2 sentences max, stops the scroll)
@@ -102,11 +102,11 @@ Return:
 
 ```
 Make this cut tighter. Specifically:
-1. The opening 5 seconds need to land harder — give me 3 new hook options
+1. The opening 5 seconds need to land harder - give me 3 new hook options
 2. Cut another 20% of the runtime, your choice where (mark what you cut and why)
-3. The middle is dragging — find the dip and tell me which 15-second chunk to delete
+3. The middle is dragging - find the dip and tell me which 15-second chunk to delete
 4. Add a b-roll suggestion every 10 seconds where there are currently gaps
-5. The CTA is flat — rewrite it with more stakes (what happens if they don't act)
+5. The CTA is flat - rewrite it with more stakes (what happens if they don't act)
 ```
 
 ---

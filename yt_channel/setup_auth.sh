@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# YouTube Channel OAuth Setup — run once after saving client_secret.json
+# YouTube Channel OAuth Setup - run once after saving client_secret.json
 set -e
 cd "$(dirname "$0")/.."
 source venv/bin/activate
 
-echo "=== Nebula Audits — YouTube OAuth Setup ==="
+echo "=== Nebula Audits - YouTube OAuth Setup ==="
 echo ""
 echo "Before running this:"
 echo "  1. Go to https://console.cloud.google.com"
@@ -33,7 +33,7 @@ python3 -c "
 from yt_channel.upload import setup_oauth
 result = setup_oauth()
 if result:
-    print('✅ OAuth setup complete — YouTube API ready')
+    print('✅ OAuth setup complete - YouTube API ready')
 else:
-    print('❌ Setup incomplete — run again after creating a YouTube channel')
+    print('❌ Setup incomplete - run again after creating a YouTube channel')
 " 2>&1

@@ -34,12 +34,12 @@ function writeStore(auditId: string, store: Record<string, Rewrite>) {
   try {
     window.localStorage.setItem(storageKey(auditId), JSON.stringify(store))
   } catch {
-    // storage full / unavailable — non-fatal, rewrite still displays
+    // storage full / unavailable - non-fatal, rewrite still displays
   }
 }
 
 /**
- * RewritePreview — "Preview AI rewrite" per finding card.
+ * RewritePreview - "Preview AI rewrite" per finding card.
  *
  * FREE TEASER: the first rewrite revealed for an audit (tracked in
  * localStorage under nebula-rewrites-{auditId}) is shown in full. Every
@@ -123,11 +123,11 @@ export default function RewritePreview({
       setTimeout(() => setCopied(false), 2500)
       posthog.capture('rewrite_copied', { audit_id: auditId, finding_key: findingKey })
     } catch {
-      // clipboard unavailable — silent fail
+      // clipboard unavailable - silent fail
     }
   }
 
-  // Paywall teaser — blurred stand-in behind the implementation kit link.
+  // Paywall teaser - blurred stand-in behind the implementation kit link.
   if (state.status === 'paywalled') {
     return (
       <div className="relative mt-4 overflow-hidden rounded-lg border border-border bg-bg/50 p-4">
@@ -138,7 +138,7 @@ export default function RewritePreview({
           className="select-none break-words text-base leading-7 text-fg-muted blur-sm pointer-events-none"
           aria-hidden="true"
         >
-          A sharper, outcome-focused rewrite of this element — specific to your page,
+          A sharper, outcome-focused rewrite of this element - specific to your page,
           your offer, and the evidence above.
         </p>
         <div className="absolute inset-0 flex items-center justify-center">

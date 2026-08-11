@@ -1,4 +1,4 @@
-# Compliance Status — Nebula Components
+# Compliance Status - Nebula Components
 
 **Last Updated:** July 12, 2026
 **Status:** ✅ MAJOR PAGES COMPLIANT (index.html, audit-lander.html)
@@ -25,9 +25,9 @@
   - Contact email: privacy@nebulacomponents.shop
 
 **3. Google Analytics Configuration**
-- `anonymize_ip: true` — IP anonymization enabled
-- `storage: 'none'` — No persistent cookies until consent
-- `ga-disable-G-KJ9S3450LH = true` — Disabled by default
+- `anonymize_ip: true` - IP anonymization enabled
+- `storage: 'none'` - No persistent cookies until consent
+- `ga-disable-G-KJ9S3450LH = true` - Disabled by default
 - Consent required before tracking
 
 **4. User Rights Honored**
@@ -68,7 +68,7 @@
 **3. Consumer Rights**
 - ✅ Right to know (privacy@nebulacomponents.shop)
 - ✅ Right to delete (email request)
-- ✅ Right to opt-out of sale (not applicable — we don't sell)
+- ✅ Right to opt-out of sale (not applicable - we don't sell)
 - ✅ Right to non-discrimination (honored)
 
 ---
@@ -78,7 +78,7 @@
 ### What's Implemented
 
 **HTML Structure:**
-- ✅ `<html lang="en">` — Language declared
+- ✅ `<html lang="en">` - Language declared
 - ✅ Proper heading hierarchy (H1 → H2 → H3)
 - ✅ Semantic HTML elements
 - ✅ Skip links (if needed)
@@ -132,12 +132,12 @@
 
 ### Contrast Ratio Verification (2026-07-12)
 
-**Tools:** `/contrast-check.js` — automated WCAG checker
+**Tools:** `/contrast-check.js` - automated WCAG checker
 
 **Results:**
 - 9/10 tests pass WCAG AA (4.5:1 for normal text)
 - 6/10 tests pass WCAG AAA (7:1 for normal text)
-- 1 test acceptable: Accent color as text on dark (3.71:1) — use only for large text/icons
+- 1 test acceptable: Accent color as text on dark (3.71:1) - use only for large text/icons
 
 **Color Palette (WCAG compliant):**
 ```css
@@ -160,7 +160,7 @@
 
 ### Apply Cookie Consent to All Pages
 
-**Priority:** HIGH — Legal requirement for GDPR
+**Priority:** HIGH - Legal requirement for GDPR
 
 **Files needing update (27 total):**
 - unsubscribe.html

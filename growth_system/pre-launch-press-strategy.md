@@ -10,14 +10,14 @@ These create permanent indexed pages that AI engines crawl. Each is a third-part
 
 | Directory | Effort | Dofollow? | AI Impact | Action |
 |-----------|--------|-----------|-----------|--------|
-| **BetaList** | 15 min + $129 premium | Yes | High — Perplexity cites | Submit as "coming soon" pre-PH; listing goes live before launch day |
+| **BetaList** | 15 min + $129 premium | Yes | High - Perplexity cites | Submit as "coming soon" pre-PH; listing goes live before launch day |
 | **Launching Next** | 10 min | Yes (free) | Medium | Submit with 9-signal positioning |
-| **SaaSHub** | 15 min | Paid tier | Medium — comparison format | Submit in "CRO Tools" + "Landing Page" categories |
-| **AlternativeTo** | 10 min | Yes | High — "alternatives to X" queries | List as alternative to Unbounce, Hotjar, FixRoast |
+| **SaaSHub** | 15 min | Paid tier | Medium - comparison format | Submit in "CRO Tools" + "Landing Page" categories |
+| **AlternativeTo** | 10 min | Yes | High - "alternatives to X" queries | List as alternative to Unbounce, Hotjar, FixRoast |
 | **DevHunt** | 10 min | Yes (free) | Low-medium | Developer-focused; good for entity signal |
 | **Smol Launch** | 10 min | Yes (with badge) | Low | Quick dofollow + listing |
-| **SaaS AI Tools** | 10 min | Free | Medium — AI tool directories are crawled heavily | "AI landing page audit" positioning |
-| **Toolify.ai** | 10 min | Free | Medium — AI-specific directory | Category: AI Marketing Tools |
+| **SaaS AI Tools** | 10 min | Free | Medium - AI tool directories are crawled heavily | "AI landing page audit" positioning |
+| **Toolify.ai** | 10 min | Free | Medium - AI-specific directory | Category: AI Marketing Tools |
 
 **Total**: ~2 hours for 8 permanent entity-establishing pages live before PH day.
 
@@ -27,32 +27,32 @@ These create permanent indexed pages that AI engines crawl. Each is a third-part
 
 ### Target Publications (by relevance to niche)
 
-**Tier A — Martech/CRO focused (highest citation probability)**
+**Tier A - Martech/CRO focused (highest citation probability)**
 
 | Publication | Journalist/Editor | Beat | Pitch angle |
 |-------------|-------------------|------|-------------|
-| **MarTech (martech.org)** | Kim Davis (editorial director) | Marketing technology | "AI audit tool quantifies the exact conversion leak in 90s — replaces $5K agency diagnostics" |
-| **Search Engine Journal** | Matt Southern, Roger Montti | Marketing tools, CRO | "Free tool scores 9 conversion signals — first to include AI readiness as audit dimension" |
+| **MarTech (martech.org)** | Kim Davis (editorial director) | Marketing technology | "AI audit tool quantifies the exact conversion leak in 90s - replaces $5K agency diagnostics" |
+| **Search Engine Journal** | Matt Southern, Roger Montti | Marketing tools, CRO | "Free tool scores 9 conversion signals - first to include AI readiness as audit dimension" |
 | **CXL Blog** | Contributor pitches accepted | CRO research | Offer original data: "86 landing page audits reveal the #1 conversion leak founders miss" |
 | **ConversionXL Institute** | Guest content | CRO methodology | Original research angle from our 86-audit dataset |
 
-**Tier B — Startup/Indie focused (PH amplification)**
+**Tier B - Startup/Indie focused (PH amplification)**
 
 | Publication | Contact method | Pitch angle |
 |-------------|---------------|-------------|
-| **BetaKit** | tips@betakit.com | "Solo founder built AI audit tool processing 86+ pages — launching PH Tuesday" |
-| **Indie Hackers** | Post in community | "I built a free landing page audit — here's what 86 pages taught me about conversion" |
+| **BetaKit** | tips@betakit.com | "Solo founder built AI audit tool processing 86+ pages - launching PH Tuesday" |
+| **Indie Hackers** | Post in community | "I built a free landing page audit - here's what 86 pages taught me about conversion" |
 | **Hacker News (Show HN)** | Self-submit | "Show HN: Free 9-signal landing page audit (built for founders burning ad spend)" |
 | **The SaaS Newsletter** (by Nathan Latka) | Pitch as featured tool | Revenue data + audit count |
 | **FounderBeats** | Submission form | Solo-founder CRO tool story |
 
-**Tier C — Tech press (stretch — lower probability, high impact if hit)**
+**Tier C - Tech press (stretch - lower probability, high impact if hit)**
 
 | Publication | Angle |
 |-------------|-------|
-| **TechCrunch (Startups Weekly)** | "AI audit replaces $5K agency diagnostic — scores message match, trust, and 7 other signals" |
+| **TechCrunch (Startups Weekly)** | "AI audit replaces $5K agency diagnostic - scores message match, trust, and 7 other signals" |
 | **TheNextWeb** | "This free tool finds the one thing killing your ad ROI in 90 seconds" |
-| **VentureBeat (AI section)** | "AI-powered CRO audit uses 9-signal framework — not just speed and SEO" |
+| **VentureBeat (AI section)** | "AI-powered CRO audit uses 9-signal framework - not just speed and SEO" |
 
 ---
 
@@ -63,22 +63,22 @@ Our 86-audit dataset is unique. No one else has published aggregate findings fro
 
 **Pitch-ready data points (verified from DB, Aug 4):**
 - 86 landing pages audited, average score 62.7/100, median 61
-- Grade distribution: 40 B / 43 C / 3 D — **zero A's**
+- Grade distribution: 40 B / 43 C / 3 D - **zero A's**
 - Above-fold failures: **100% of pages** (86/86)
 - Ad signal continuity failures: **99%** (85/86)
-- Load speed — the thing every free tool measures — only flagged on **29%**
+- Load speed - the thing every free tool measures - only flagged on **29%**
 - Quick wins outnumber major projects 241:138 (~2:1)
 
 **Potential headline angles:**
 1. "We audited 86 landing pages. The #1 reason ads don't convert isn't what you think."
 2. "86 landing page audits reveal: 80% of pages have a message match problem"
-3. "Average landing page conversion readiness: 6.3/10 — here's what kills the score"
+3. "Average landing page conversion readiness: 6.3/10 - here's what kills the score"
 
 ### Where to publish pre-PH:
-- **Medium** (republish to Hacker Noon if accepted) — T-10
-- **LinkedIn article** (Mike's personal) — T-7
-- **Indie Hackers post** — T-7
-- **Dev.to** (if technical angle works) — T-10
+- **Medium** (republish to Hacker Noon if accepted) - T-10
+- **LinkedIn article** (Mike's personal) - T-7
+- **Indie Hackers post** - T-7
+- **Dev.to** (if technical angle works) - T-10
 
 ---
 
@@ -99,7 +99,7 @@ Sep 1  (T-1)   Queue Show HN post for launch morning; prep PH assets
 Sep 2  (T-0)   ProductHunt launches (Tuesday, 12:01 AM PT)
 Sep 2  (T-0)   Reddit r/SaaS post goes live (morning ET)
 Sep 3  (T+1)   Reddit r/SideProject post
-Sep 5  (T+3)   Send SaaSHero pitch (Aaron Rovner) — now with PH badge
+Sep 5  (T+3)   Send SaaSHero pitch (Aaron Rovner) - now with PH badge
 Sep 8  (T+6)   Follow up press with "launched #X on PH" angle
 ```
 
@@ -107,7 +107,7 @@ Sep 8  (T+6)   Follow up press with "launched #X on PH" angle
 
 ## The Press Pitch Template
 
-**Subject**: Data: We audited 86 landing pages — zero scored an A
+**Subject**: Data: We audited 86 landing pages - zero scored an A
 
 **Body**:
 
@@ -116,17 +116,17 @@ Hi [Name],
 I ran 86 automated landing page audits for founders spending on Google/Meta ads. The results surprised me:
 
 - Not one page out of 86 scored an A (average: 62.7/100)
-- 100% had above-the-fold failures — headline present, but no CTA in the first viewport
+- 100% had above-the-fold failures - headline present, but no CTA in the first viewport
 - 99% failed ad signal continuity (the page doesn't continue what the ad promised)
-- Page speed — the thing every free tool measures — was only a problem on 29%
+- Page speed - the thing every free tool measures - was only a problem on 29%
 
 The industry's default diagnostic (run PageSpeed, fix the score) targets the least common failure.
 
-I built Nebula (nebulacomponents.com/audit) to score 9 conversion signals in 90 seconds — free, no signup. It's the first audit tool to include AI readiness as a scored dimension.
+I built Nebula (nebulacomponents.com/audit) to score 9 conversion signals in 90 seconds - free, no signup. It's the first audit tool to include AI readiness as a scored dimension.
 
 Launching on Product Hunt September 2. Happy to share the full dataset or walk through findings for a piece.
 
-— Mike Holownych
+- Mike Holownych
 
 ---
 
@@ -149,7 +149,7 @@ Launching on Product Hunt September 2. Happy to share the full dataset or walk t
 
 | Item | Cost | Required? |
 |------|------|-----------|
-| BetaList premium (skip queue) | $129 | Recommended — ensures listing before PH |
+| BetaList premium (skip queue) | $129 | Recommended - ensures listing before PH |
 | SaaSHub featured | ~$50/mo | Optional |
 | All other directories | Free | Yes |
 | Press pitching | $0 (manual) | Yes |

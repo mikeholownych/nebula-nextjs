@@ -1,6 +1,6 @@
-# Automated Content Workflow — "Publish + Engage" Architecture
+# Automated Content Workflow - "Publish + Engage" Architecture
 
-**Your Role:** Review briefs, publish, engage (Monday-Friday, ~1-2 hours total)  
+**Your Role:** Review briefs, publish, engage (Monday-Friday, ~1-2 hours total)
 **System Role:** Everything else (automatic)
 
 ---
@@ -45,7 +45,7 @@ Monthly      → Conversion funnel report
 
 ### 1. Monday Content Pipeline (Cron)
 
-**Schedule:** Every Monday 8:00 AM ET  
+**Schedule:** Every Monday 8:00 AM ET
 **Job ID:** `93f5ca19d3e2`
 
 **What it does:**
@@ -83,7 +83,7 @@ NEXT STEPS:
 
 ### 2. Daily Track Metrics (Cron)
 
-**Schedule:** Every day 9:00 AM ET  
+**Schedule:** Every day 9:00 AM ET
 **Job ID:** `monitor_tracks` (existing)
 
 **What it does:**
@@ -227,7 +227,7 @@ You: Review + approve
 ### Daily Metrics (Telegram)
 
 ```
-TRACK METRICS — 2026-07-18
+TRACK METRICS - 2026-07-18
 
 Leads: 12 (+3 this week)
 ├─ headline-clarity: 5 (42%)
@@ -259,7 +259,7 @@ Best track: headline-clarity (31%)
 WEEKLY CONTENT REVIEW
 
 SCALE: headline-clarity posts (3x avg)
-IMPROVE: CTA posts (avg — test new hook)
+IMPROVE: CTA posts (avg - test new hook)
 RETIRE: Generic hooks (below avg)
 
 NEXT WEEK: Double down on problem-revelation hooks

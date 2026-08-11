@@ -1,12 +1,12 @@
 # Weekly Content Workflow Checklist
 
-**Nebula Content Operating System — Weekly Checklist**
+**Nebula Content Operating System - Weekly Checklist**
 
 ---
 
 ## Monday: Pull Audit Insights
 
-**Time:** 30 minutes  
+**Time:** 30 minutes
 **Output:** 3-5 finding-based ideas
 
 - [ ] Run `python3 scripts/pull_audit_insights.py --days 7 --limit 5`
@@ -33,7 +33,7 @@ Track: [which nurture track this feeds]
 
 ## Tuesday: Plan Posts + Write Hooks
 
-**Time:** 1 hour  
+**Time:** 1 hour
 **Output:** 3-5 briefs with hooks
 
 - [ ] Choose format for each idea (post, carousel, video)
@@ -67,7 +67,7 @@ Track: [headline | CTA | message | proof]
 
 ## Wednesday: Write Drafts
 
-**Time:** 1-2 hours  
+**Time:** 1-2 hours
 **Output:** First drafts of all posts
 
 - [ ] Write posts in batch (don't edit yet)
@@ -79,15 +79,15 @@ Track: [headline | CTA | message | proof]
 
 **Post structure:**
 ```
-[Hook — stops scroll]
+[Hook - stops scroll]
 
-[Setup — why this matters]
+[Setup - why this matters]
 
-[Insight — what audit data shows]
+[Insight - what audit data shows]
 
-[Proof — example or teardown]
+[Proof - example or teardown]
 
-[CTA — what to do next]
+[CTA - what to do next]
 
 ---
 Track: [which problem category]
@@ -97,7 +97,7 @@ Track: [which problem category]
 
 ## Thursday: Review + Schedule
 
-**Time:** 30 minutes  
+**Time:** 30 minutes
 **Output:** Approved + queued
 
 **Review checklist for each post:**
@@ -151,7 +151,7 @@ Track: [which problem category]
 ```
 Comment: "I think our headline is fine."
 
-Reply: "Fair point. Curious — when you look at your ad campaigns, do the headlines match what the ad promised, or explain it differently?"
+Reply: "Fair point. Curious - when you look at your ad campaigns, do the headlines match what the ad promised, or explain it differently?"
 
 [If reply engaged] "Want me to audit it free? Link in comments 👇"
 ```
@@ -167,8 +167,8 @@ Reply: "Fair point. Curious — when you look at your ad campaigns, do the headl
 ```
 Week of [date]:
 - Scale: [track/template that beat 2x avg]
-- Improve: [track that was avg — one change]
-- Retire: [track that failed — stop]
+- Improve: [track that was avg - one change]
+- Retire: [track that failed - stop]
 - Decision: [one thing to change next week]
 ```
 

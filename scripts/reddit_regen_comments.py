@@ -21,7 +21,7 @@ from pathlib import Path
 
 QUEUE_FILE = Path("/home/mike/nebula/.reddit_comment_queue.json")
 
-# Banned subs: pure value only — diagnosis + one concrete check, zero promo
+# Banned subs: pure value only - diagnosis + one concrete check, zero promo
 VALUE_COMMENTS = {
     "roast_request": (
         "A couple of things I'd check first: what's the first thing a visitor "
@@ -41,7 +41,7 @@ VALUE_COMMENTS = {
         "Worth separating the campaign question from the page question. "
         "Ads bring traffic; the page decides what happens next. Check whether "
         "the page actually delivers what the ad promised within the first "
-        "screen — headline, offer, CTA. If that's clean, then look at the "
+        "screen - headline, offer, CTA. If that's clean, then look at the "
         "campaign. Fixing the page first is cheaper than re-testing ads."
     ),
 }
@@ -52,7 +52,7 @@ CONTEXT_COMMENTS = {
         "Took a quick look. The thing that stood out to me: the first screen "
         "doesn't tell me what the product does or what I'd get by signing up. "
         "I had to scroll to figure out the core offer. That's the most common "
-        "pattern I see on new launches — the build is great but the page "
+        "pattern I see on new launches - the build is great but the page "
         "assumes too much. Happy to share a link to a free structured audit "
         "if you want specific findings."
     ),

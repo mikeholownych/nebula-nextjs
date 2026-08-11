@@ -1,7 +1,7 @@
-# Wave 1 Progress — Identity Infrastructure
+# Wave 1 Progress - Identity Infrastructure
 
-**Date:** 2026-07-14  
-**Status:** Phase 1 Complete (Architecture + Database)  
+**Date:** 2026-07-14
+**Status:** Phase 1 Complete (Architecture + Database)
 **Next:** Auth Implementation (2-3 days)
 
 ---
@@ -12,13 +12,13 @@
 - PostgreSQL 16 installed
 - Database `nebula_platform` created
 - 7 tables created:
-  - `users` — Email + timestamps
-  - `user_identities` — OAuth provider mapping
-  - `organizations` — Tenant root
-  - `memberships` — User-org relationships
-  - `subscriptions` — Stripe integration
-  - `audit_events` — Append-only log
-  - `alembic_version` — Migration tracking
+  - `users` - Email + timestamps
+  - `user_identities` - OAuth provider mapping
+  - `organizations` - Tenant root
+  - `memberships` - User-org relationships
+  - `subscriptions` - Stripe integration
+  - `audit_events` - Append-only log
+  - `alembic_version` - Migration tracking
 
 ### 2. Architecture Decisions (100%)
 - **ADR-001:** Google OAuth + PostgreSQL identity ($0/month)
@@ -110,11 +110,11 @@ Google OAuth → OIDC verify → PostgreSQL user → Redis session → JWT
 - `docs/architecture/system-architecture-2026-07-14.md`
 
 ### Backend
-- `platform_api/redis_client.py` — Redis wrapper
-- `platform_api/db/models.py` — SQLAlchemy models
-- `platform_api/db/session.py` — DB session
-- `platform_api/db/base.py` — Base types
-- `migrations/versions/0001_platform_core.py` — Schema migration
+- `platform_api/redis_client.py` - Redis wrapper
+- `platform_api/db/models.py` - SQLAlchemy models
+- `platform_api/db/session.py` - DB session
+- `platform_api/db/base.py` - Base types
+- `migrations/versions/0001_platform_core.py` - Schema migration
 
 ### Configuration
 - `alembic.ini`
@@ -165,6 +165,6 @@ curl http://localhost:8766/healthz
 
 ---
 
-**Status:** ON TRACK  
-**Confidence:** High  
+**Status:** ON TRACK
+**Confidence:** High
 **Blockers:** None

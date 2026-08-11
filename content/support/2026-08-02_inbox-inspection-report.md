@@ -1,4 +1,4 @@
-# Support Inbox Inspection — Aug 2, 2026
+# Support Inbox Inspection - Aug 2, 2026
 
 ## Status
 **Path operational. No urgent action required. One soft-interest reply in progress (awaiting follow-up).**
@@ -8,11 +8,11 @@
 ## Pipeline Snapshot
 
 ### HOT_LEAD.json State (48 entries total)
-- **pitch_sent**: 27 leads (56%) — awaiting payment or reply after $97 pitch
-- **bounced**: 13 leads (27%) — unsubscribe/STOP requests or hard bounces
-- **closed**: 6 leads (13%) — completed or declined offers
-- **warm_replied**: 1 lead (2%) — soft interest, response already sent
-- **recircle_60d**: 1 lead (2%) — timing objection, re-engage Sep 5
+- **pitch_sent**: 27 leads (56%) - awaiting payment or reply after $97 pitch
+- **bounced**: 13 leads (27%) - unsubscribe/STOP requests or hard bounces
+- **closed**: 6 leads (13%) - completed or declined offers
+- **warm_replied**: 1 lead (2%) - soft interest, response already sent
+- **recircle_60d**: 1 lead (2%) - timing objection, re-engage Sep 5
 
 ### Recent Activity (last 30 days)
 - Audit deliveries: Started mid-June, 50+ audits delivered
@@ -30,7 +30,7 @@
 - Replied: 2026-07-07 12:01 UTC
 - Reply: "Hey" (soft interest signal)
 - Our response sent: 2026-07-07 23:59 UTC
-- Next action: Monitor for payment or additional reply (no action required yet — within normal nurture window)
+- Next action: Monitor for payment or additional reply (no action required yet - within normal nurture window)
 
 ### Soft Objection (Recircle)
 **support@retryfix.com** (RetryFix)
@@ -42,9 +42,9 @@
 
 ### Bounced (High-Signal Unsubscribes)
 13 hard bounces recorded. Notable:
-- Zayne Zhang (hacktron.ai) — replied STOP explicitly
-- Berkay Yavuz (adsby.co) — replied STOP explicitly
-- Obakura support team — auto-reply, not founder
+- Zayne Zhang (hacktron.ai) - replied STOP explicitly
+- Berkay Yavuz (adsby.co) - replied STOP explicitly
+- Obakura support team - auto-reply, not founder
 - Multiple others unsubscribed via SES bounce signal
 
 ---
@@ -67,11 +67,11 @@
 
 ## Actionable Summary
 
-1. **No urgent inbox replies** — All current warm/cold/complaint buckets are accounted for in HOT_LEAD state
-2. **One soft-interest lead active** — kanzariyamihir@gmail.com in normal monitoring phase
-3. **Pitch-to-payment conversion funnel running** — 27 leads in pitch_sent awaiting payment/reply (48h-7d post-pitch)
-4. **Unsubscribe compliance working** — 13 bounced entries correctly marked; no re-sends to opted-out addresses
-5. **$97 checkout CTA live** — All audit emails include live Stripe link; payment path clear
+1. **No urgent inbox replies** - All current warm/cold/complaint buckets are accounted for in HOT_LEAD state
+2. **One soft-interest lead active** - kanzariyamihir@gmail.com in normal monitoring phase
+3. **Pitch-to-payment conversion funnel running** - 27 leads in pitch_sent awaiting payment/reply (48h-7d post-pitch)
+4. **Unsubscribe compliance working** - 13 bounced entries correctly marked; no re-sends to opted-out addresses
+5. **$97 checkout CTA live** - All audit emails include live Stripe link; payment path clear
 
 ---
 

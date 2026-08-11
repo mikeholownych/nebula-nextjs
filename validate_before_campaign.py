@@ -88,7 +88,7 @@ def test_tunnel_metrics():
 
 def run_all_checks():
     """Run all checks and collect results"""
-    
+
     checks = [
         ("Local Endpoint (8765)", test_local_endpoint),
         ("Cloudflare Tunnel", test_tunnel_endpoint),
@@ -101,7 +101,7 @@ def run_all_checks():
         ("Tracking Log Ready", test_tracking_log),
         ("Tunnel Metrics Ready", test_tunnel_metrics),
     ]
-    
+
     for name, test_fn in checks:
         print(f"🔍 {name}...", end=" ", flush=True)
         try:
@@ -120,28 +120,28 @@ def run_all_checks():
 
 def print_report():
     """Print validation report"""
-    
+
     print("\n" + "=" * 60)
     print("PRE-CAMPAIGN VALIDATION REPORT")
     print("=" * 60)
-    
+
     passed = len([c for c in CHECKS if c["status"] == "pass"])
     total = len(CHECKS)
-    
+
     print(f"\n📊 Results: {passed}/{total} checks passed")
-    
+
     if FAILURES:
         print("\n❌ FAILURES:")
         for failure in FAILURES:
             print(f"   • {failure}")
-    
+
     print("\n" + "=" * 60)
     if not FAILURES:
-        print("✅ ALL SYSTEMS GREEN — Wave 2 deployment authorized")
+        print("✅ ALL SYSTEMS GREEN - Wave 2 deployment authorized")
         print("=" * 60)
         return True
     else:
-        print("❌ FAILURES DETECTED — Fix before launching Wave 2")
+        print("❌ FAILURES DETECTED - Fix before launching Wave 2")
         print("=" * 60)
         return False
 
@@ -149,10 +149,10 @@ if __name__ == "__main__":
     print("\n🚀 PRE-CAMPAIGN VALIDATION")
     print(f"   Time: {datetime.now().isoformat()}")
     print(f"   Target: Wave 2 Deployment Check\n")
-    
+
     run_all_checks()
     all_green = print_report()
-    
+
     # Save report
     report = {
         "timestamp": datetime.now().isoformat(),
@@ -160,10 +160,10 @@ if __name__ == "__main__":
         "all_passed": all_green,
         "failures": FAILURES
     }
-    
+
     with open("/home/mike/nebula/pre_campaign_validation.json", "w") as f:
         json.dump(report, f, indent=2)
-    
+
     print(f"\n📄 Report saved to: /home/mike/nebula/pre_campaign_validation.json\n")
-    
+
     sys.exit(0 if all_green else 1)

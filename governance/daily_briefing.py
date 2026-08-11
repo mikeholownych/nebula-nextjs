@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-daily_briefing.py — Morning Intelligence Aggregation
+daily_briefing.py - Morning Intelligence Aggregation
 Reads Nebula's data sources and outputs a structured daily briefing.
 Run at 8:30 AM UTC daily.
 """
@@ -70,7 +70,7 @@ class DailyBriefing:
         }
 
     def check_revenue(self):
-        """No API — manual check via economics doc."""
+        """No API - manual check via economics doc."""
         eco = read_file(os.path.join(GOVERNANCE_DIR, "ECONOMICS.md"))
         mrr_line = [l for l in eco.split("\n") if "Total MRR" in l]
         self.sections["revenue"] = {
@@ -142,7 +142,7 @@ class DailyBriefing:
     def format_output(self):
         """Format the briefing for Telegram delivery."""
         out = []
-        out.append(f"📋 **Daily Briefing — {self.date}**")
+        out.append(f"📋 **Daily Briefing - {self.date}**")
         out.append("")
 
         # Revenue
@@ -181,7 +181,7 @@ class DailyBriefing:
         out.append(f"**🧪 Experiments ({len(active_exps)} active)**")
         if active_exps:
             for e in active_exps[:5]:
-                out.append(f"  • {e['file']} — {e['status']}")
+                out.append(f"  • {e['file']} - {e['status']}")
         else:
             out.append("  None active")
         out.append("")
@@ -197,7 +197,7 @@ class DailyBriefing:
 
         # Git
         git = self.sections.get("git", {})
-        out.append(f"**📝 Git — {git.get('commits_today', 0)} commits in 24h**")
+        out.append(f"**📝 Git - {git.get('commits_today', 0)} commits in 24h**")
         recent_commits = git.get("recent", "")
         if recent_commits and recent_commits != "None in last 24h":
             lines = recent_commits.split("\n")[:5]

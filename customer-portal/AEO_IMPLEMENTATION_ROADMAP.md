@@ -1,7 +1,7 @@
-# Nebula Components — AEO Implementation Roadmap
+# Nebula Components - AEO Implementation Roadmap
 
-**Framework:** Answer Engine Optimization (14-layer model)  
-**Current Maturity:** Level 1.5 (Eligible)  
+**Framework:** Answer Engine Optimization (14-layer model)
+**Current Maturity:** Level 1.5 (Eligible)
 **Target:** Level 3 (Citable) in 90 days
 
 ---
@@ -148,7 +148,7 @@ Scale only patterns that demonstrate:
 
 | Level | Criteria | Target Date |
 |-------|----------|-------------|
-| Level 1.5 | Current state | — |
+| Level 1.5 | Current state | - |
 | Level 2.0 | Query registry, entity pages, monitoring | Week 2 |
 | Level 2.5 | Citation-grade content, author linking | Week 4 |
 | Level 3.0 | External corroboration, provenance | Week 8 |

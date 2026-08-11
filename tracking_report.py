@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""tracking_report.py — Check email open rates from pixel tracking log."""
+"""tracking_report.py - Check email open rates from pixel tracking log."""
 
 import json, os
 from collections import Counter
@@ -18,16 +18,16 @@ def main():
     if not opens:
         print("No tracking data yet.")
         return
-    
+
     total = len(opens)
     unique = len(set(o["email"] for o in opens))
-    
+
     print(f"📧 Email Open Tracking Report")
     print(f"{'='*60}")
     print(f"  Total opens recorded: {total}")
     print(f"  Unique email opens:   {unique}")
     print()
-    
+
     # By hour
     hours = Counter()
     for o in opens:
@@ -39,7 +39,7 @@ def main():
         bar = "█" * min(hours[h], 40)
         print(f"    {h}:00  {bar} {hours[h]}")
     print()
-    
+
     print(f"  Recent opens (last 10):")
     for o in opens[-10:]:
         print(f"    {o['timestamp'][:19]}  {o['email']:<35}  {o.get('ua','')[:40]}")

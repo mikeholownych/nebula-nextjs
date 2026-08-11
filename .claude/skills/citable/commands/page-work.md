@@ -5,7 +5,7 @@ purpose: Page-construction and architecture workflows sharing optimize-page's gu
 
 # create-page
 1. Preconditions: a registered query/prompt with no existing target (else it's
-   ARCH-004 territory — consolidate instead); an assigned content owner; the
+   ARCH-004 territory - consolidate instead); an assigned content owner; the
    facts the page needs (from registries and operator), never invented.
 2. Compose per the generative-ready pattern: canonical answer (50–100 words) →
    definition + exclusions → why it matters (operational, not marketing) →
@@ -45,4 +45,4 @@ publication surface of an active claim without re-homing the claim.
 # metadata
 Title/description work: titles identify and differentiate (PAGE-001/002),
 descriptions summarize accurately and never promise absent content. Both are
-derived from page substance — metadata never asserts what the page doesn't say.
+derived from page substance - metadata never asserts what the page doesn't say.

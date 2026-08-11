@@ -237,7 +237,7 @@ export async function POST(request: NextRequest) {
   try {
     recordUsage(usageDb, partner_id, ip)
     const leads = new DatabaseSync(LEAD_DB)
-    // SQLite has no ADD COLUMN IF NOT EXISTS — check then ALTER (idempotent)
+    // SQLite has no ADD COLUMN IF NOT EXISTS - check then ALTER (idempotent)
     const cols = leads.prepare('PRAGMA table_info(leads)').all().map((c) => c.name)
     if (!cols.includes('source_partner')) {
       leads.exec('ALTER TABLE leads ADD COLUMN source_partner TEXT')
@@ -257,7 +257,7 @@ export async function POST(request: NextRequest) {
       )
     leads.close()
   } catch (e) {
-    // Attribution is best-effort — never fail the audit response on a DB hiccup
+    // Attribution is best-effort - never fail the audit response on a DB hiccup
     console.error('[widget] attribution write failed:', e)
   } finally {
     usageDb.close()

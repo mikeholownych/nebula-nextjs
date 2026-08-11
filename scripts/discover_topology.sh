@@ -1,5 +1,5 @@
 #!/bin/bash
-# Topology Discovery — Wave 0
+# Topology Discovery - Wave 0
 # Captures current service bindings for migration planning
 
 set -e

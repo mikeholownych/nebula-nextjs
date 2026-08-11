@@ -27,16 +27,16 @@
 
 The implementation creates one bounded research package:
 
-- `constraint_research.py` — validates de-identified case records and renders aggregate summaries; it never reads contact data.
-- `tests/test_constraint_research.py` — covers record validation, privacy boundaries, aggregation, and Markdown rendering.
-- `operations/constraint-research/README.md` — operating sequence, private-data rules, cohort acceptance criteria, and stop conditions.
-- `operations/constraint-research/INTERVIEW_PROTOCOL.md` — consent script and non-leading critical-decision interview.
-- `operations/constraint-research/CASE_RECORD_TEMPLATE.json` — canonical de-identified record shape copied once per participant.
-- `operations/constraint-research/CODEBOOK.md` — two-pass emergent coding method and code promotion rules.
-- `operations/constraint-research/FINDINGS_TEMPLATE.md` — required aggregate findings and decision-gate structure.
-- `operations/constraint-research/private/` — ignored local working directory for participant records and raw notes; never committed.
-- `docs/research/founder-constraint-cycle-01.md` — final aggregate evidence memo created only after 10–15 valid cases exist.
-- `.gitignore` — excludes the private research directory.
+- `constraint_research.py` - validates de-identified case records and renders aggregate summaries; it never reads contact data.
+- `tests/test_constraint_research.py` - covers record validation, privacy boundaries, aggregation, and Markdown rendering.
+- `operations/constraint-research/README.md` - operating sequence, private-data rules, cohort acceptance criteria, and stop conditions.
+- `operations/constraint-research/INTERVIEW_PROTOCOL.md` - consent script and non-leading critical-decision interview.
+- `operations/constraint-research/CASE_RECORD_TEMPLATE.json` - canonical de-identified record shape copied once per participant.
+- `operations/constraint-research/CODEBOOK.md` - two-pass emergent coding method and code promotion rules.
+- `operations/constraint-research/FINDINGS_TEMPLATE.md` - required aggregate findings and decision-gate structure.
+- `operations/constraint-research/private/` - ignored local working directory for participant records and raw notes; never committed.
+- `docs/research/founder-constraint-cycle-01.md` - final aggregate evidence memo created only after 10–15 valid cases exist.
+- `.gitignore` - excludes the private research directory.
 
 The audit-flow snapshot and longitudinal-case tooling are intentionally excluded. Their fields depend on the provisional taxonomy produced by this cycle.
 
@@ -402,7 +402,7 @@ Append to `.gitignore`:
 
 ```gitignore
 
-# Founder constraint research — private participant data
+# Founder constraint research - private participant data
 operations/constraint-research/private/
 ```
 
@@ -739,7 +739,7 @@ def test_render_summary_labels_taxonomies_provisional():
 
     markdown = render_summary(summarize_cases([record]))
 
-    assert "# Founder Constraint Research — Aggregate Draft" in markdown
+    assert "# Founder Constraint Research - Aggregate Draft" in markdown
     assert "Provisional constraint codes" in markdown
     assert "Provisional diagnostic-failure codes" in markdown
     assert "Do not publish: fewer than 10 valid cases." in markdown
@@ -805,7 +805,7 @@ def render_summary(summary: dict) -> str:
         if case_count >= 10
         else "Do not publish: fewer than 10 valid cases."
     )
-    return f"""# Founder Constraint Research — Aggregate Draft
+    return f"""# Founder Constraint Research - Aggregate Draft
 
 ## Evidence status
 
@@ -925,7 +925,7 @@ At ten valid cases, add interviews until either:
 Create `operations/constraint-research/FINDINGS_TEMPLATE.md`:
 
 ```markdown
-# Founder Constraint Discovery — Cycle 01
+# Founder Constraint Discovery - Cycle 01
 
 ## Evidence status
 

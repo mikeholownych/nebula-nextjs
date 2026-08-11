@@ -1,4 +1,4 @@
-# LinkedIn Posts — Week of July 28, 2026 (v3)
+# LinkedIn Posts - Week of July 28, 2026 (v3)
 
 Rewritten per LinkedIn algorithm mechanics. No links in post body. Engagement CTAs. Short lines. Questions at the end.
 
@@ -14,7 +14,7 @@ RULES APPLIED:
 
 ---
 
-## MONDAY — The "in a Canada" Typo
+## MONDAY - The "in a Canada" Typo
 
 I found a wedding business whose Google result says "in a Canada."
 
@@ -53,7 +53,7 @@ Run a free audit on your site → nebulacomponents.shop/audit
 
 ---
 
-## TUESDAY — 16 H1 Tags
+## TUESDAY - 16 H1 Tags
 
 I audited a site today.
 
@@ -61,7 +61,7 @@ Found 16 H1 tags.
 
 Google asks for exactly 1.
 
-The other 15 were "Our Values" — Joy, Inclusivity, Consciousness, Sustainability, Simplicity, Evolution.
+The other 15 were "Our Values" - Joy, Inclusivity, Consciousness, Sustainability, Simplicity, Evolution.
 
 Each one wrapped in its own H1 tag.
 
@@ -75,7 +75,7 @@ Is it all of them equally?
 
 The page ranks for neither.
 
-The real H1 — "Your pop-up wedding bestie with benefits!" — is buried below the fold.
+The real H1 - "Your pop-up wedding bestie with benefits!" - is buried below the fold.
 
 Google sees 16 competing signals and picks none of them.
 
@@ -92,7 +92,7 @@ Check yours → nebulacomponents.shop/audit
 
 ---
 
-## WEDNESDAY — The Green Button Nobody Could See
+## WEDNESDAY - The Green Button Nobody Could See
 
 I found a page today where the CTA button was green on a green background.
 
@@ -139,13 +139,13 @@ See what's actually broken on your page → nebulacomponents.shop/audit
 
 ---
 
-## THURSDAY — Your Pricing Is Invisible
+## THURSDAY - Your Pricing Is Invisible
 
 I audited a wedding business today.
 
 Strong social proof. 750+ couples. 183 Google reviews. 4.9 stars.
 
-CBC, CTV, Toronto Life, Financial Post — all featured.
+CBC, CTV, Toronto Life, Financial Post - all featured.
 
 The page looks incredible.
 
@@ -186,7 +186,7 @@ Find the leaks → nebulacomponents.shop/audit
 
 ---
 
-## FRIDAY — What Cloudflare Thinks of Your Site
+## FRIDAY - What Cloudflare Thinks of Your Site
 
 I scored 100/100 on Cloudflare's agent-readiness checker.
 
@@ -237,7 +237,7 @@ See your agent-readiness score → nebulacomponents.shop/audit
 
 ---
 
-## SATURDAY — I Built the Machine. Nobody Showed Up.
+## SATURDAY - I Built the Machine. Nobody Showed Up.
 
 I built an audit engine.
 
@@ -286,7 +286,7 @@ If your ads aren't converting, the page is the problem → nebulacomponents.shop
 
 ---
 
-## SUNDAY — The Lie Your Agency Told You
+## SUNDAY - The Lie Your Agency Told You
 
 Your agency says your ads are failing.
 
@@ -310,7 +310,7 @@ Your social proof is below the fold.
 
 Your form asks for email before the value.
 
-You're not testing — you're paying for proof your page is broken.
+You're not testing - you're paying for proof your page is broken.
 
 Here's the part nobody says out loud.
 
@@ -330,7 +330,7 @@ The most expensive thing in marketing isn't bad ads.
 
 It's a good page that converts nobody.
 
-When did you last audit your page — not your ads?
+When did you last audit your page - not your ads?
 
 ---
 

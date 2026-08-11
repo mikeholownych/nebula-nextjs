@@ -37,49 +37,49 @@
 
 ### Database and service core
 
-- `db/migrations/2026071901_stewardship_core.sql` — clients, applications, tokens, OAuth connections, evidence, initiatives, interventions, billing events, audit events, deletion queue.
-- `scripts/run-migrations.mjs` — idempotent SQL migration runner and `schema_migrations` ledger.
-- `app/lib/stewardship/types.ts` — shared domain types and literal unions.
-- `app/lib/stewardship/repository.ts` — parameterized PostgreSQL persistence only.
-- `app/lib/stewardship/crypto.ts` — AES-256-GCM envelope encryption and token hashing.
-- `app/lib/stewardship/auth.ts` — internal bearer authorization and public invite validation.
+- `db/migrations/2026071901_stewardship_core.sql` - clients, applications, tokens, OAuth connections, evidence, initiatives, interventions, billing events, audit events, deletion queue.
+- `scripts/run-migrations.mjs` - idempotent SQL migration runner and `schema_migrations` ledger.
+- `app/lib/stewardship/types.ts` - shared domain types and literal unions.
+- `app/lib/stewardship/repository.ts` - parameterized PostgreSQL persistence only.
+- `app/lib/stewardship/crypto.ts` - AES-256-GCM envelope encryption and token hashing.
+- `app/lib/stewardship/auth.ts` - internal bearer authorization and public invite validation.
 
 ### Customer connection and data ingestion
 
-- `app/lib/stewardship/google-oauth.ts` — authorization URL, code exchange, refresh, revocation.
-- `app/lib/stewardship/google-ads.ts` — Google Ads v24 reporting-only REST adapter.
-- `app/lib/stewardship/ga4.ts` — GA4 Data API v1 reporting-only REST adapter.
-- `app/lib/stewardship/privacy.ts` — URL sanitization, cohort suppression, allowed dimensions, canonicalization.
-- `app/lib/stewardship/sync.ts` — orchestrated collection and atomic snapshot persistence.
-- `app/api/stewardship/google/connect/route.ts` — invite-bound OAuth start.
-- `app/api/stewardship/google/callback/route.ts` — OAuth callback and encrypted token persistence.
+- `app/lib/stewardship/google-oauth.ts` - authorization URL, code exchange, refresh, revocation.
+- `app/lib/stewardship/google-ads.ts` - Google Ads v24 reporting-only REST adapter.
+- `app/lib/stewardship/ga4.ts` - GA4 Data API v1 reporting-only REST adapter.
+- `app/lib/stewardship/privacy.ts` - URL sanitization, cohort suppression, allowed dimensions, canonicalization.
+- `app/lib/stewardship/sync.ts` - orchestrated collection and atomic snapshot persistence.
+- `app/api/stewardship/google/connect/route.ts` - invite-bound OAuth start.
+- `app/api/stewardship/google/callback/route.ts` - OAuth callback and encrypted token persistence.
 
 ### Offer workflow and evidence delivery
 
-- `app/lib/stewardship/readiness.ts` — application validation and deterministic readiness status.
-- `app/lib/stewardship/diagnostics.ts` — evidence-backed Leak Map candidates and claim labels.
-- `app/lib/stewardship/report.ts` — Markdown and JSON customer bundle generation.
-- `scripts/stewardship.ts` — operator commands for invite, accept, sync, initiative, export, checkout, terminate, and purge.
-- `app/conversion-stewardship/apply/[token]/page.tsx` — private noindex application page.
-- `components/stewardship/ApplicationForm.tsx` — accessible application form.
-- `app/api/stewardship/apply/route.ts` — token-bound application submission.
-- `app/api/internal/stewardship/sync/route.ts` — authenticated sync endpoint.
-- `app/api/internal/stewardship/export/route.ts` — authenticated evidence bundle export.
-- `app/api/internal/stewardship/checkout/route.ts` — authenticated private Stripe subscription session creation.
+- `app/lib/stewardship/readiness.ts` - application validation and deterministic readiness status.
+- `app/lib/stewardship/diagnostics.ts` - evidence-backed Leak Map candidates and claim labels.
+- `app/lib/stewardship/report.ts` - Markdown and JSON customer bundle generation.
+- `scripts/stewardship.ts` - operator commands for invite, accept, sync, initiative, export, checkout, terminate, and purge.
+- `app/conversion-stewardship/apply/[token]/page.tsx` - private noindex application page.
+- `components/stewardship/ApplicationForm.tsx` - accessible application form.
+- `app/api/stewardship/apply/route.ts` - token-bound application submission.
+- `app/api/internal/stewardship/sync/route.ts` - authenticated sync endpoint.
+- `app/api/internal/stewardship/export/route.ts` - authenticated evidence bundle export.
+- `app/api/internal/stewardship/checkout/route.ts` - authenticated private Stripe subscription session creation.
 
 ### Existing surfaces to modify
 
-- `package.json` and `package-lock.json` — migration/operator scripts and `googleapis`/`tsx` dependencies.
-- `app/api/webhooks/stripe/route.ts` — persist subscription lifecycle idempotently.
-- `app/pricing/page.tsx` — make the no-retainer claim Fix-Pack-specific and disclose invitation-only stewardship without public checkout.
-- `app/privacy-policy/page.tsx` — aggregate evidence, OAuth, retention, processor, and deletion disclosures.
-- `app/terms/page.tsx` — 90-day term, monthly billing, service credit, off-ramp, exclusions, and ownership.
-- `app/sitemap.ts` — ensure private application routes are absent.
-- `.gitignore` — exclude generated customer exports and local secrets.
-- `.env.example` — document names only; never include values.
-- `.legacy/ARCHIVE_INVENTORY.md` — archive provenance.
-- `__tests__/stewardship/*.test.ts` — focused service tests.
-- `__tests__/containment/production-safety.test.ts` — recursive route and public-copy containment.
+- `package.json` and `package-lock.json` - migration/operator scripts and `googleapis`/`tsx` dependencies.
+- `app/api/webhooks/stripe/route.ts` - persist subscription lifecycle idempotently.
+- `app/pricing/page.tsx` - make the no-retainer claim Fix-Pack-specific and disclose invitation-only stewardship without public checkout.
+- `app/privacy-policy/page.tsx` - aggregate evidence, OAuth, retention, processor, and deletion disclosures.
+- `app/terms/page.tsx` - 90-day term, monthly billing, service credit, off-ramp, exclusions, and ownership.
+- `app/sitemap.ts` - ensure private application routes are absent.
+- `.gitignore` - exclude generated customer exports and local secrets.
+- `.env.example` - document names only; never include values.
+- `.legacy/ARCHIVE_INVENTORY.md` - archive provenance.
+- `__tests__/stewardship/*.test.ts` - focused service tests.
+- `__tests__/containment/production-safety.test.ts` - recursive route and public-copy containment.
 
 ---
 
@@ -621,7 +621,7 @@ For one client and one date range: lock connection, refresh access, collect both
 
 - [ ] **Step 4: Protect the internal endpoint**
 
-`POST /api/internal/stewardship/sync` accepts `{ clientId, startDate, endDate }`, rejects non-internal requests with 401, validates ISO dates and a maximum 92-day span, and returns counts plus freshness—not evidence rows or credentials.
+`POST /api/internal/stewardship/sync` accepts `{ clientId, startDate, endDate }`, rejects non-internal requests with 401, validates ISO dates and a maximum 92-day span, and returns counts plus freshness-not evidence rows or credentials.
 
 - [ ] **Step 5: Verify**
 
@@ -785,7 +785,7 @@ Handle:
 - `customer.subscription.updated`
 - `customer.subscription.deleted`
 
-Insert the Stripe event ID before applying state; duplicate event IDs return 200 without repeating transitions. Store provider IDs, amount, currency, status, and timestamps—not full Stripe payloads. Preserve existing Fix Pack behavior.
+Insert the Stripe event ID before applying state; duplicate event IDs return 200 without repeating transitions. Store provider IDs, amount, currency, status, and timestamps-not full Stripe payloads. Preserve existing Fix Pack behavior.
 
 - [ ] **Step 5: Verify with signed fixtures**
 
@@ -878,7 +878,7 @@ git commit -m "docs(stewardship): align offer privacy and terms"
 
 - [ ] **Step 1: Build a non-customer fixture**
 
-Create deterministic Ads and GA4 HTTP fixtures containing cohorts above and below 20, one tracking mismatch, one intent category, a failed provider response, and a Stripe event replay. Do not use fabricated output as customer proof; label the fixture `TEST DATA — NOT CUSTOMER EVIDENCE` everywhere.
+Create deterministic Ads and GA4 HTTP fixtures containing cohorts above and below 20, one tracking mismatch, one intent category, a failed provider response, and a Stripe event replay. Do not use fabricated output as customer proof; label the fixture `TEST DATA - NOT CUSTOMER EVIDENCE` everywhere.
 
 - [ ] **Step 2: Exercise the full mocked vertical slice**
 

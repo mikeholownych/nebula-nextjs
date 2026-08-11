@@ -1,7 +1,7 @@
-# Nebula Components — Full Platform QA Report
+# Nebula Components - Full Platform QA Report
 
-**Audit date:** 2026-07-13 UTC  
-**Target:** https://nebulacomponents.shop  
+**Audit date:** 2026-07-13 UTC
+**Target:** https://nebulacomponents.shop
 **Scope:** public routes, buyer flows, APIs, security boundaries, Stripe contracts, mobile layout, accessibility, visual integrity, server behavior, and regression suite.
 
 ## Executive verdict
@@ -35,7 +35,7 @@ Primary machine-readable crawl evidence: `qa-output/artifacts/platform-crawl.jso
 
 ## Critical/high defects fixed
 
-### 1. Public exposure of source code and lead/customer data — CRITICAL
+### 1. Public exposure of source code and lead/customer data - CRITICAL
 
 The server's `SimpleHTTPRequestHandler` fallback exposed project-root files publicly, including:
 
@@ -50,7 +50,7 @@ The server's `SimpleHTTPRequestHandler` fallback exposed project-root files publ
 
 **Live verification:** all six representative sensitive paths now return **404**, while HTML, CSS, JavaScript, images, and public case studies still return **200**.
 
-### 2. Unauthenticated administrative CRM APIs — CRITICAL
+### 2. Unauthenticated administrative CRM APIs - CRITICAL
 
 Administrative CRM routes returned lead/client data without authentication.
 
@@ -58,7 +58,7 @@ Administrative CRM routes returned lead/client data without authentication.
 
 **Verification:** unauthenticated routes return **401**; requests with the private bearer token return **200**.
 
-### 3. Audit endpoint SSRF exposure — CRITICAL
+### 3. Audit endpoint SSRF exposure - CRITICAL
 
 User-controlled audit URLs could target loopback, private, link-local, or metadata-network addresses.
 
@@ -66,7 +66,7 @@ User-controlled audit URLs could target loopback, private, link-local, or metada
 
 **Verification:** five SSRF regression tests pass; live requests to `127.0.0.1` fail closed with **400**.
 
-### 4. Audit requests blocked the entire platform — HIGH
+### 4. Audit requests blocked the entire platform - HIGH
 
 The server used single-threaded `TCPServer`; one slow audit fetch could block health checks and checkout traffic.
 
@@ -74,7 +74,7 @@ The server used single-threaded `TCPServer`; one slow audit fetch could block he
 
 **Verification:** a live audit completed in approximately 0.3 seconds while a concurrent health request returned **200** in approximately 0.08 seconds.
 
-### 5. Commercial contract drift — HIGH
+### 5. Commercial contract drift - HIGH
 
 Public pages contained legacy `$97` Fix Pack language and mixed 24-hour/72-hour delivery promises. Stripe's Fix Pack description promised 72 hours while the canonical offer promised 24 hours.
 
@@ -87,7 +87,7 @@ Public pages contained legacy `$97` Fix Pack language and mixed 24-hour/72-hour 
 - Added regression tests blocking legacy `$97` and 72-hour Fix Pack copy.
 - Updated `governance/ECONOMICS.md` to current price, Stripe fee, margin, and LTV math.
 
-### 6. Stripe checkout mismatches — HIGH
+### 6. Stripe checkout mismatches - HIGH
 
 All live commercial contracts were reverified through both Stripe's API and rendered checkout pages:
 
@@ -103,19 +103,19 @@ Active slugs:
 - Retainer: `00w5kD1nK0wkaa573A43S0c`
 - Partner: `aFa8wPc2o7YM9613Ro43S0d`
 
-### 7. Dead newsletter flow — HIGH
+### 7. Dead newsletter flow - HIGH
 
 The public newsletter form posted to an unimplemented route.
 
 **Fix:** implemented validated subscriber capture with deduplication and a subscriber ledger outside the public surface.
 
-### 8. Broken demo-booking handler — HIGH
+### 8. Broken demo-booking handler - HIGH
 
 The booking handler accepted empty payloads, returned success prematurely, and read a deleted `/tmp/am_key` secret.
 
 **Fix:** added JSON/email validation, current AgentMail secret resolution, correct success/error statuses, and safe error responses.
 
-### 9. Broken canonical and lead-magnet routes — HIGH
+### 9. Broken canonical and lead-magnet routes - HIGH
 
 Published aliases and clean lead-magnet URLs could redirect to 404s.
 
@@ -123,7 +123,7 @@ Published aliases and clean lead-magnet URLs could redirect to 404s.
 
 **Verification:** crawler reports zero broken internal links.
 
-### 10. Mobile overflow and hidden CTAs — HIGH
+### 10. Mobile overflow and hidden CTAs - HIGH
 
 - Homepage price-comparison grid overflowed at 375px.
 - Growth Launch comparison table expanded the document to 550px.
@@ -133,7 +133,7 @@ Published aliases and clean lead-magnet URLs could redirect to 404s.
 
 **Verification:** all 11 critical mobile routes pass at 375×812; homepage CTAs and pricing cards remain visible.
 
-### 11. WCAG contrast failures — HIGH
+### 11. WCAG contrast failures - HIGH
 
 The expanded visual suite found failures across editorial pages, dashboard labels, generated case studies, CTA buttons, and muted text.
 
@@ -141,7 +141,7 @@ The expanded visual suite found failures across editorial pages, dashboard label
 
 **Verification:** **87/87 full-site pages pass** the final visual/contrast suite with zero page errors.
 
-### 12. Generated case-study index emitted invalid CSS — HIGH
+### 12. Generated case-study index emitted invalid CSS - HIGH
 
 The index generator emitted literal doubled braces (`{{ ... }}`), causing browsers to ignore its styles.
 
@@ -178,6 +178,6 @@ venv/bin/python3 scripts/qa_platform_crawl.py
 
 ## Launch decision
 
-**Public funnel: GO.**  
-**Internal operational dashboard: GO.**  
+**Public funnel: GO.**
+**Internal operational dashboard: GO.**
 **GA4 traffic/behavior analytics: NOT YET.**

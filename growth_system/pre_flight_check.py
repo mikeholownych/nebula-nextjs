@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-pre_flight_check.py — runs the 6-point content-safety audit before posting.
+pre_flight_check.py - runs the 6-point content-safety audit before posting.
 Usage: python3 pre_flight_check.py --caption "..." --visuals "..." [--platform tiktok,reels,youtube]
 Or:    python3 pre_flight_check.py --file /path/to/video.mp4
        (looks for matching video.caption.txt and video.storyboard.md in same dir)
@@ -55,7 +55,7 @@ RULES = [
             "generated voice", "tts", "text to speech",
         ],
         "fix_red": "Stop immediately. You need written consent before cloning any person's voice except your own.",
-        "fix_yellow": "Confirm the voice is either (a) your own clone, or (b) a stock/fictional voice. If someone else's — get written consent first.",
+        "fix_yellow": "Confirm the voice is either (a) your own clone, or (b) a stock/fictional voice. If someone else's - get written consent first.",
     },
     {
         "id": "ai_disclosure",
@@ -70,7 +70,7 @@ RULES = [
         "fix_red": "N/A",
         "fix_yellow": (
             "Add AI disclosure before posting:\n"
-            "  Caption line: 'Made with AI — script written by me, visuals and voice generated.'\n"
+            "  Caption line: 'Made with AI - script written by me, visuals and voice generated.'\n"
             "  TikTok: Settings → AI-generated content → toggle ON\n"
             "  Reels/Meta: Tag as AI-generated in advanced settings\n"
             "  YouTube Shorts: Add 'AI-generated content' label in upload flow\n"
@@ -88,7 +88,7 @@ RULES = [
             "music", "background music", "soundtrack", "audio track", "song", "beat",
         ],
         "fix_red": "Remove the music immediately. Replace with Suno-generated audio, Epidemic Sound, Artlist, or platform's commercial-cleared library.",
-        "fix_yellow": "Confirm music source. If not Suno, Epidemic Sound, Artlist, or platform-cleared — swap it before posting.",
+        "fix_yellow": "Confirm music source. If not Suno, Epidemic Sound, Artlist, or platform-cleared - swap it before posting.",
     },
     {
         "id": "sensitive_claims",
@@ -160,7 +160,7 @@ def print_table(results: list[dict]) -> bool:
     print("━" * 60)
     for r in results:
         icon = icons[r["status"]]
-        print(f"\n{icon} {r['status']:7} — {r['label']}")
+        print(f"\n{icon} {r['status']:7} - {r['label']}")
         if r["fix"] and r["status"] in ("YELLOW", "RED"):
             for line in r["fix"].split("\n"):
                 print(f"           {line}")
@@ -168,11 +168,11 @@ def print_table(results: list[dict]) -> bool:
             has_red = True
     print()
     if has_red:
-        print("🔴 BLOCKED — fix all RED items before posting.")
+        print("🔴 BLOCKED - fix all RED items before posting.")
     else:
         greens = sum(1 for r in results if r["status"] == "GREEN")
         yellows = sum(1 for r in results if r["status"] == "YELLOW")
-        print(f"✅ CLEAR — {greens} GREEN, {yellows} YELLOW (review before posting)")
+        print(f"✅ CLEAR - {greens} GREEN, {yellows} YELLOW (review before posting)")
     print("━" * 60)
     return has_red
 

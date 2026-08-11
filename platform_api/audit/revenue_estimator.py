@@ -1,4 +1,4 @@
-"""Revenue Impact Estimator — pure function module.
+"""Revenue Impact Estimator - pure function module.
 
 Estimates the monthly revenue leak caused by each audit finding,
 based on bounce-rate assumptions per severity tier and the user's CPC.

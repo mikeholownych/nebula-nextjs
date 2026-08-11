@@ -9,7 +9,7 @@ import {
   WritableStream,
 } from 'stream/web'
 
-// React 19 removed react-dom/test-utils.act — shim it so @testing-library/react works.
+// React 19 removed react-dom/test-utils.act - shim it so @testing-library/react works.
 // https://github.com/testing-library/react-testing-library/issues/1375
 import { act } from 'react'
 ;(globalThis as Record<string, unknown>).IS_REACT_ACT_ENVIRONMENT = true

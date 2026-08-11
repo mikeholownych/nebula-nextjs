@@ -1,7 +1,7 @@
-# Nebula Components — SEO Audit Report
+# Nebula Components - SEO Audit Report
 
-**Date:** 2025-07-15  
-**Standard:** Top-Tier SEO Operating Model (16-layer framework)  
+**Date:** 2025-07-15
+**Standard:** Top-Tier SEO Operating Model (16-layer framework)
 **Maturity Assessment:** Level 1.5 (Eligible → Structured)
 
 ---
@@ -78,7 +78,7 @@ Nebula has a **strong technical foundation** but lacks critical SEO infrastructu
 
 1. **No topic hierarchy beyond learning-centre**
    - Products, solutions, comparisons should have distinct hubs
-   
+
 2. **Case study bloat** (450+ pages)
    - Risk of index bloat, duplicate content
    - Consider noindex or consolidate to top 20 with proper canonical
@@ -132,10 +132,10 @@ Nebula has a **strong technical foundation** but lacks critical SEO infrastructu
 
 ### Critical Gaps
 
-1. **No Organization schema** — Google cannot establish entity
-2. **No BreadcrumbList** — No navigation context for search
-3. **No Product schema** — Missing rich result eligibility
-4. **No WebSite schema** — No search box, site name
+1. **No Organization schema** - Google cannot establish entity
+2. **No BreadcrumbList** - No navigation context for search
+3. **No Product schema** - Missing rich result eligibility
+4. **No WebSite schema** - No search box, site name
 
 ### Required Implementation
 
@@ -274,7 +274,7 @@ Nebula has a **strong technical foundation** but lacks critical SEO infrastructu
 
 ## 7. Minimum Viable SEO Stack
 
-### Phase 1 (Week 1) — Technical Foundation
+### Phase 1 (Week 1) - Technical Foundation
 
 - [ ] Generate `sitemap.xml` (all 487 pages)
 - [ ] Create `robots.txt` with sitemap reference
@@ -283,21 +283,21 @@ Nebula has a **strong technical foundation** but lacks critical SEO infrastructu
 - [ ] Replace Google verification placeholder
 - [ ] Add canonical URLs to all pages
 
-### Phase 2 (Week 2) — Entity Foundation
+### Phase 2 (Week 2) - Entity Foundation
 
 - [ ] Create `/company/about` page
 - [ ] Create `/company/team` page with Person schema
 - [ ] Add author attribution to learning-centre articles
 - [ ] Create breadcrumb component with BreadcrumbList
 
-### Phase 3 (Week 3) — Measurement
+### Phase 3 (Week 3) - Measurement
 
 - [ ] Create query registry (Google Sheets or DB table)
 - [ ] Set up Search Console
 - [ ] Set up Bing Webmaster Tools
 - [ ] Configure conversion tracking
 
-### Phase 4 (Week 4+) — Content Authority
+### Phase 4 (Week 4+) - Content Authority
 
 - [ ] Curate case studies (top 50 with quality signals)
 - [ ] Create comparison pages

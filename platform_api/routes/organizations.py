@@ -186,7 +186,7 @@ async def get_membership(
 
     Used by the frontend auth primitives to verify workspace access.
     Only the authenticated user can look up their own membership (user_id
-    parameter is ignored — always resolves from JWT for security).
+    parameter is ignored - always resolves from JWT for security).
     """
     lookup_id = UUID(current_user["user_id"])
 

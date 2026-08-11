@@ -82,7 +82,7 @@ async def main():
                     else:
                         logger.warning(
                             f"  ✗ Audit trigger failed for {url}: "
-                            f"HTTP {response.status_code} — {response.text[:200]}"
+                            f"HTTP {response.status_code} - {response.text[:200]}"
                         )
                         errors += 1
 

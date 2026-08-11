@@ -225,7 +225,7 @@ async def main():
                     await platform_conn.commit()
                     processed += 1
                     logger.info(
-                        f"  ✓ {url} — score={score} position={position} ctr={ctr}"
+                        f"  ✓ {url} - score={score} position={position} ctr={ctr}"
                     )
 
                 except Exception as e:

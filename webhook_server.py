@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Nebula Webhook Server — port 9000
+Nebula Webhook Server - port 9000
 Handles:
   - Stripe payment events       POST /webhook/stripe
   - AgentMail inbound events    POST /webhook/agentmail
@@ -24,7 +24,7 @@ AUDIT_LEADS_FILE = "/home/mike/nebula/audit_leads.jsonl"
 CHECKOUT_97    = "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
 CHECKOUT_997   = "https://buy.stripe.com/4gMcN5aYk92Qaa5drY43S09"
 
-# In-memory + persisted dedup set — prevents same thread firing duplicate actions
+# In-memory + persisted dedup set - prevents same thread firing duplicate actions
 _seen_threads: set = set()
 _seen_threads_lock = threading.Lock()
 
@@ -275,7 +275,7 @@ def handle_agentmail_event(event: dict):
 
         # DEDUP: skip if we already processed this thread
         if _is_thread_seen(thread_id):
-            print(f"[agentmail] DEDUP: thread {thread_id[:20]} already processed — skipping")
+            print(f"[agentmail] DEDUP: thread {thread_id[:20]} already processed - skipping")
             return
         _mark_thread_seen(thread_id)
 
@@ -323,7 +323,7 @@ def handle_agentmail_event(event: dict):
 
     elif event_type == "message.complained":
         sender = event.get("data", {}).get("sender", "unknown")
-        print(f"[agentmail] COMPLAINT from {sender} — flagging immediately")
+        print(f"[agentmail] COMPLAINT from {sender} - flagging immediately")
         log_to_ledger({
             "timestamp": ts,
             "event": "complaint",
@@ -337,18 +337,18 @@ def handle_agentmail_event(event: dict):
                 from lead_store import LeadStore as _CScoreDB
                 _cdb = _CScoreDB()
                 _cdb.add_score(_c_email, -10, reason="spam_complaint")
-                # Also mark as bounced — this address is dead
+                # Also mark as bounced - this address is dead
                 _cdb.mark_bounced(_c_email, bounce_type="hard",
-                                  bounce_detail="Spam complaint — suppressed by AgentMail")
+                                  bounce_detail="Spam complaint - suppressed by AgentMail")
         except Exception:
             pass
-        # Complaints must be handled immediately — log prominently
+        # Complaints must be handled immediately - log prominently
         with open("/home/mike/nebula/ESCALATE_COMPLAINT.log", "a") as f:
             f.write(f"{ts} COMPLAINT from {sender}\n{json.dumps(event)}\n\n")
 
 
 def _classify_message(subject: str, body: str) -> str:
-    """Quick keyword classification — same logic as agentmail_client.py."""
+    """Quick keyword classification - same logic as agentmail_client.py."""
     combined = (subject + " " + body).lower()
 
     unsub = ["unsubscribe", "remove me", "take me off", "stop emailing",
@@ -381,7 +381,7 @@ def _process_inbound_reply(thread_id, message_id, sender, subject, preview, clas
         # 48-hour diagnostic: log which sentence failed for copy improvement.
         diag = am.diagnose_reply({"subject": subject}, preview)
         if diag != "none":
-            print(f"[agentmail] DIAGNOSTIC: {diag} — {sender} ({classification})")
+            print(f"[agentmail] DIAGNOSTIC: {diag} - {sender} ({classification})")
             try:
                 with open("/home/mike/nebula/reply_diagnostics.jsonl", "a") as f:
                     f.write(json.dumps({
@@ -445,17 +445,17 @@ def _process_inbound_reply(thread_id, message_id, sender, subject, preview, clas
                 "status": "warm" if lead_url else "awaiting_url_or_schedule",
                 "action": "deliver_audit" if lead_url else "request_url_or_schedule",
             })
-            print(f"[agentmail] 🔥 WARM LEAD: {sender} — HOT_LEAD.json written")
+            print(f"[agentmail] 🔥 WARM LEAD: {sender} - HOT_LEAD.json written")
 
         elif classification == "unsubscribe":
             am.label_thread(thread_id, add=["unsubscribe"])
             # Add to blocklist
-            am._req("POST", f"/v0/inboxes/{am.inbox}/lists/send/block/{sender.split('<')[-1].strip('>')}") 
+            am._req("POST", f"/v0/inboxes/{am.inbox}/lists/send/block/{sender.split('<')[-1].strip('>')}")
             print(f"[agentmail] Unsubscribe processed for {sender}")
 
         elif classification == "complaint":
             am.label_thread(thread_id, add=["complaint"])
-            print(f"[agentmail] ⚠️  COMPLAINT labeled — check ESCALATE_COMPLAINT.log")
+            print(f"[agentmail] ⚠️  COMPLAINT labeled - check ESCALATE_COMPLAINT.log")
 
         else:
             am.label_thread(thread_id, add=["cold"])
@@ -494,21 +494,21 @@ class WebhookHandler(BaseHTTPRequestHandler):
     def _handle_stripe(self):
         length = int(self.headers.get("Content-Length", 0))
         body = self.rfile.read(length)
-        
+
         # Verify Stripe signature
         stripe_signature = self.headers.get("Stripe-Signature", "")
         if not stripe_signature:
             print("[stripe] ⚠️  No Stripe-Signature header - rejecting")
             self._send_json(400, {"error": "Missing Stripe-Signature header"})
             return
-            
+
         # Load Stripe webhook secret
         stripe_webhook_secret = load_key(STRIPE_WEBHOOK_SECRET_FILE)
         if not stripe_webhook_secret:
             print("[stripe] ⚠️  No Stripe webhook secret configured")
             self._send_json(500, {"error": "Server configuration error"})
             return
-        
+
         try:
             # Verify signature using Stripe library
             event = stripe.Webhook.construct_event(
@@ -518,12 +518,12 @@ class WebhookHandler(BaseHTTPRequestHandler):
                 tolerance=300  # 5-minute tolerance
             )
             etype = event.type
-            
+
             # Log for debugging
             print(f"[stripe] Verified event: {etype} (id: {event.id})")
-            
+
             # TODO: Add event ID deduplication here
-            
+
             # Event type switching
             if etype == "checkout.session.completed":
                 session = event.data.object
@@ -570,7 +570,7 @@ class WebhookHandler(BaseHTTPRequestHandler):
                 })
                 update_stats("revenue", amount_cents // 100)
 
-                # Real-time Telegram alert — event.livemode is Stripe's own signal for
+                # Real-time Telegram alert - event.livemode is Stripe's own signal for
                 # real vs. test-mode, more reliable than string-matching the email/id.
                 # sre_responder.py also alerts on this within 15 min as a backstop in
                 # case this process crashes before the alert goes out.
@@ -578,13 +578,13 @@ class WebhookHandler(BaseHTTPRequestHandler):
                     try:
                         subprocess.run(
                             ["hermes", "send", "--to", "telegram:5920497760",
-                             f"💰 *SALE* — {amount_str} — {product} — {customer_email}\n"
+                             f"💰 *SALE* - {amount_str} - {product} - {customer_email}\n"
                              f"session: {session.id}"],
                             capture_output=True, timeout=15
                         )
                     except Exception as e:
                         print(f"[stripe] revenue alert failed: {e}")
-                print(f"[SALE] {amount_str} — {product} — {customer_email} (event: {event.id})")
+                print(f"[SALE] {amount_str} - {product} - {customer_email} (event: {event.id})")
             elif etype == "invoice.payment_succeeded":
                 invoice = event.data.object
                 print(f"[stripe] invoice.payment_succeeded: ${invoice.amount_paid/100:.2f}")
@@ -631,7 +631,7 @@ class WebhookHandler(BaseHTTPRequestHandler):
             # Strip "sha256=" prefix if present
             received = sig_header.replace("sha256=", "")
             if not hmac.compare_digest(expected, received):
-                print("[agentmail] ⚠️  Webhook signature mismatch — ignoring")
+                print("[agentmail] ⚠️  Webhook signature mismatch - ignoring")
                 self._send_json(401, {"error": "invalid signature"})
                 return
 

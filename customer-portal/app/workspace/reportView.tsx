@@ -28,7 +28,7 @@ interface AuditDetail {
 }
 
 function fmtDate(iso?: string | null): string {
-  if (!iso) return '—'
+  if (!iso) return '-'
   return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
 }
 
@@ -94,14 +94,14 @@ export default function ReportView({ audits }: { audits: WorkspaceAudit[] }) {
       <div className="py-16 text-center text-fg-muted">
         No audits yet. Run a{' '}
         <a href="/audit?utm_source=workspace&utm_medium=internal" className="text-accent hover:underline">free audit</a>{' '}
-        first — reports appear here automatically.
+        first - reports appear here automatically.
       </div>
     )
   }
 
   return (
     <div className="space-y-6">
-      {/* Controls — print:hidden */}
+      {/* Controls - print:hidden */}
       <div className="flex flex-wrap items-center gap-4 print:hidden">
         <div className="flex-1 min-w-0">
           <label htmlFor="report-select" className="block text-xs text-fg-muted mb-1">
@@ -115,7 +115,7 @@ export default function ReportView({ audits }: { audits: WorkspaceAudit[] }) {
           >
             {audits.map((a) => (
               <option key={a.id} value={a.id}>
-                {domainOf(a.url)} — {a.grade ?? '?'} {a.score != null ? `${a.score}/10` : ''} · {fmtDate(a.completed_at ?? a.created_at)}
+                {domainOf(a.url)} - {a.grade ?? '?'} {a.score != null ? `${a.score}/10` : ''} · {fmtDate(a.completed_at ?? a.created_at)}
               </option>
             ))}
           </select>
@@ -140,7 +140,7 @@ export default function ReportView({ audits }: { audits: WorkspaceAudit[] }) {
       {loading && <div className="py-8 text-center text-fg-muted">Loading report…</div>}
       {error && <div className="py-8 text-center text-danger">{error}</div>}
 
-      {/* Report body — shown on screen and in print */}
+      {/* Report body - shown on screen and in print */}
       {detail && !loading && (
         <div className="rounded-2xl border border-border bg-bg-elevated p-8 print:border-none print:bg-white print:text-bg print:p-0">
 
@@ -213,7 +213,7 @@ export default function ReportView({ audits }: { audits: WorkspaceAudit[] }) {
               })}
             </div>
           ) : (
-            <p className="text-fg-muted print:text-fg-dim">No findings — all signals passed.</p>
+            <p className="text-fg-muted print:text-fg-dim">No findings - all signals passed.</p>
           )}
 
           {/* Footer */}

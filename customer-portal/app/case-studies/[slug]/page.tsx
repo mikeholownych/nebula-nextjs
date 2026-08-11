@@ -94,15 +94,15 @@ function RichCaseStudyPage({ study }: { study: CaseStudy }) {
         <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3">
           <div className="rounded-xl border border-border bg-bg-muted/40 p-5 text-center">
             <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted mb-1">Score before</p>
-            <p className="text-4xl font-bold text-fg">{study.results.scoreBefore || '—'}</p>
+            <p className="text-4xl font-bold text-fg">{study.results.scoreBefore || '-'}</p>
           </div>
           <div className="rounded-xl border border-accent/30 bg-accent/10 p-5 text-center">
             <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted mb-1">Score after</p>
-            <p className="text-4xl font-bold text-accent">{study.results.scoreAfter || '—'}</p>
+            <p className="text-4xl font-bold text-accent">{study.results.scoreAfter || '-'}</p>
           </div>
           <div className="col-span-2 sm:col-span-1 rounded-xl border border-border bg-bg-muted/40 p-5 text-center">
             <p className="text-xs font-semibold uppercase tracking-widest text-fg-muted mb-1">Grade</p>
-            <p className="text-4xl font-bold text-fg">{study.results.grade || '—'}</p>
+            <p className="text-4xl font-bold text-fg">{study.results.grade || '-'}</p>
           </div>
         </div>
 

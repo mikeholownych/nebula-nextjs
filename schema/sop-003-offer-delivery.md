@@ -16,8 +16,8 @@
 | Offer type | Yes | 'one_leak_repair' (default), 'retainer', 'agency_partner' |
 
 ## Validation Rules
-1. Qualification must be `qualified` — do not send offers to `potentially_qualified` or `not_qualified`
-2. Prospect must have an email address — if missing, notify Mike for manual outreach
+1. Qualification must be `qualified` - do not send offers to `potentially_qualified` or `not_qualified`
+2. Prospect must have an email address - if missing, notify Mike for manual outreach
 3. Offer must not already exist with `status = 'sent'` or `status = 'accepted'` for this prospect
 4. Price must match the current published offer for the type ($97 fix pack through 2026-12-31)
 5. Do not send offers on Sunday or after 9pm ET unless Mike explicitly authorizes
@@ -36,7 +36,7 @@
    - **Alternative:** If no email, send via Reddit DM or direct reply thread
 5. Publish event: `offer.sent` with offer_id and stripe_url
 6. Set `prospects.lifecycle_state = 'fix_offered'`
-7. Notify Mike via Telegram: "Offer sent to {email} — ${price}"
+7. Notify Mike via Telegram: "Offer sent to {email} - ${price}"
 
 ## Offer Message Template (Email)
 ```
@@ -63,7 +63,7 @@ Want me to go ahead?
 ## Decision Points
 - **Prospect replies with questions →** answer directly, do not auto-escalate to higher price
 - **Prospect asks "what would you fix?" →** share the top finding evidence block (unlocked) as credibility
-- **Prospect says "too expensive" →** do not discount — $97 is intentionally low. If they can't afford $97, they can't implement fixes
+- **Prospect says "too expensive" →** do not discount - $97 is intentionally low. If they can't afford $97, they can't implement fixes
 - **Prospect asks for retainer →** offer the $1,497 retainer (3-month engagement) if they have > 3 significant issues
 
 ## Outputs
@@ -81,7 +81,7 @@ Want me to go ahead?
 |---------|----------|
 | Stripe checkout creation fails | Log event `offer.stripe_failed`, retry once with 10s delay, then route to Mike |
 | Email send fails | Log event `offer.email_failed`, fall back to manual messaging |
-| No email on file | Notify Mike — cannot auto-send. Mike decides whether to DM on Reddit/LinkedIn |
+| No email on file | Notify Mike - cannot auto-send. Mike decides whether to DM on Reddit/LinkedIn |
 | Duplicate offer detected | Cancel new offer, reference existing offer to prospect |
 
 ## Escalation Path
@@ -90,10 +90,10 @@ Want me to go ahead?
 - **Prospect asks for specific scope not in findings →** Mike reviews feasibility; do not promise out-of-scope work
 
 ## Automation Readiness Gate
-- [ ] Deterministic trigger: YES — qualification completed event
-- [ ] Structured inputs: YES — qualification + findings + prospect
-- [ ] Bounded output: YES — offer created, status set
-- [ ] Explicit failure handling: YES — defined above
-- [ ] Observable execution: YES — offers table + events
-- [ ] Reversibility: YES — offers can be cancelled, new ones created
-- [ ] Stable decision rule: YES — offer is always $97 fix pack (no variation needed until retainer path proven)
+- [ ] Deterministic trigger: YES - qualification completed event
+- [ ] Structured inputs: YES - qualification + findings + prospect
+- [ ] Bounded output: YES - offer created, status set
+- [ ] Explicit failure handling: YES - defined above
+- [ ] Observable execution: YES - offers table + events
+- [ ] Reversibility: YES - offers can be cancelled, new ones created
+- [ ] Stable decision rule: YES - offer is always $97 fix pack (no variation needed until retainer path proven)

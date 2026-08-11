@@ -4,7 +4,7 @@ import { isIP } from 'net'
 /**
  * Best-effort SSRF guard for outbound fetches of user-supplied URLs.
  * Blocks loopback, link-local (incl. cloud metadata 169.254.169.254),
- * and RFC1918/ULA private ranges — both when given directly as the
+ * and RFC1918/ULA private ranges - both when given directly as the
  * hostname and after DNS resolution (defends against DNS rebinding).
  * Not a substitute for network-level egress controls, but stops the
  * obvious cases at the application boundary.
@@ -38,7 +38,7 @@ function isBlockedIP(ip: string): boolean {
   const version = isIP(ip)
   if (version === 4) return isBlockedIPv4(ip)
   if (version === 6) return isBlockedIPv6(ip)
-  return true // not a recognizable IP — treat as unsafe
+  return true // not a recognizable IP - treat as unsafe
 }
 
 export async function assertPublicHttpUrl(url: URL): Promise<void> {

@@ -29,7 +29,7 @@ def main():
     # Check for generator freeze (Wave 0 route baseline)
     freeze_file = NEBULA / ".generator-freeze"
     if freeze_file.exists():
-        print("⛔ Generator FROZEN — route baseline capture in progress")
+        print("⛔ Generator FROZEN - route baseline capture in progress")
         print(f"   Freeze file: {freeze_file}")
         print("   To thaw: Remove .generator-freeze or set FROZED=false")
         return
@@ -39,7 +39,7 @@ def main():
 
 ```bash
 $ python3 audit_to_case_study.py --latest
-⛔ Generator FROZEN — route baseline capture in progress
+⛔ Generator FROZEN - route baseline capture in progress
    Freeze file: /home/mike/nebula/.generator-freeze
    To thaw: Remove .generator-freeze or set FROZED=false
 ```

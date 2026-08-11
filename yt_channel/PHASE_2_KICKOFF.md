@@ -1,8 +1,8 @@
 # Phase 2: CRM + Feedback Loop (Aug 13-15, 2026)
 
-**Goal**: Establish sales/marketing feedback loop via Airtable CRM  
-**Timeline**: 3 days (Aug 13-15)  
-**Effort**: 6-8 hours total  
+**Goal**: Establish sales/marketing feedback loop via Airtable CRM
+**Timeline**: 3 days (Aug 13-15)
+**Effort**: 6-8 hours total
 **Impact**: Link every prospect to their source, objections, outcomes
 
 ---
@@ -31,7 +31,7 @@ With Phase 2:
 
 ### 1. Airtable CRM Setup
 
-**Database**: Nebula Components CRM  
+**Database**: Nebula Components CRM
 **Tables**: 4
 
 #### Table 1: Prospects
@@ -110,7 +110,7 @@ Fields:
 
 #### Integration 1: Stripe → Airtable
 
-**Trigger**: Stripe charge.succeeded  
+**Trigger**: Stripe charge.succeeded
 **Action**: Add row to Airtable "Checkouts" table
 
 ```
@@ -126,7 +126,7 @@ Mapping:
 
 #### Integration 2: Email Opens → Airtable
 
-**Trigger**: Email open (from Brevo/Mailchimp)  
+**Trigger**: Email open (from Brevo/Mailchimp)
 **Action**: Update Newsletter table
 
 ```
@@ -140,7 +140,7 @@ Mapping:
 
 #### Integration 3: Manual Feedback Logger (Google Form → Airtable)
 
-**Trigger**: Form submission (objections, wins, churn)  
+**Trigger**: Form submission (objections, wins, churn)
 **Action**: Add row to Feedback table
 
 ```
@@ -158,7 +158,7 @@ Form fields:
 
 ### 3. Weekly Feedback Review Process
 
-**When**: Tuesday mornings (sync with sales calls from Mon)  
+**When**: Tuesday mornings (sync with sales calls from Mon)
 **What**: Review new feedback entries in Airtable
 
 **Template**:
@@ -282,10 +282,10 @@ Insight: Add ROI calculator to results page
 
 ## Files to Create
 
-1. `AIRTABLE_CRM_SCHEMA.md` — Database structure
-2. `ZAPIER_SETUP_GUIDE.md` — Step-by-step integration
-3. `FEEDBACK_REVIEW_TEMPLATE.md` — Weekly process
-4. `GOOGLE_FORM_FEEDBACK_LOGGER.txt` — Form questions
+1. `AIRTABLE_CRM_SCHEMA.md` - Database structure
+2. `ZAPIER_SETUP_GUIDE.md` - Step-by-step integration
+3. `FEEDBACK_REVIEW_TEMPLATE.md` - Weekly process
+4. `GOOGLE_FORM_FEEDBACK_LOGGER.txt` - Form questions
 
 ---
 

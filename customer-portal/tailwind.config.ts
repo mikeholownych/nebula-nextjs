@@ -12,7 +12,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Background colors — four tones for depth layering
+        // Background colors - four tones for depth layering
         bg: {
           DEFAULT: '#050505',
           elevated: '#0a0a0a',
@@ -25,7 +25,7 @@ const config: Config = {
           muted: '#9e9e9e',
           dim: '#7c7c7c',
         },
-        // Accent — surgical teal, distinct from Tailwind default emerald
+        // Accent - surgical teal, distinct from Tailwind default emerald
         accent: {
           DEFAULT: NEBULA_ACCENT,
           light: NEBULA_ACCENT_LIGHT,
@@ -44,10 +44,10 @@ const config: Config = {
         },
         info: '#3b82f6',
         // Reserved exclusively for "this conversion signal failed its
-        // threshold" — see FailSignal in ResultsClient.tsx. Do not use for
+        // threshold" - see FailSignal in ResultsClient.tsx. Do not use for
         // grade tiers, evidence confidence, or any other UI state; its
         // whole value is that seeing this color anywhere means one specific
-        // thing. (Old bare `warning` token removed on purpose — any stray
+        // thing. (Old bare `warning` token removed on purpose - any stray
         // `bg-warning`/`text-warning` usage now resolves to nothing rather
         // than silently drifting back into a general-purpose caution color.)
         signal: {
@@ -73,9 +73,9 @@ const config: Config = {
         '6xl': ['3.75rem', { lineHeight: '1' }],
       },
       letterSpacing: {
-        // Section-head tracking — separates from body without size increase
+        // Section-head tracking - separates from body without size increase
         section: '0.02em',
-        // Display tracking — tighter at large sizes
+        // Display tracking - tighter at large sizes
         display: '-0.04em',
         tight: '-0.02em',
         wide: '0.12em',

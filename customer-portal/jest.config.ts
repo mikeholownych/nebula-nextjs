@@ -11,7 +11,7 @@ const config: Config = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
-    // React 19 removed act from react-dom/test-utils — redirect to react directly
+    // React 19 removed act from react-dom/test-utils - redirect to react directly
     '^react-dom/test-utils$': '<rootDir>/__mocks__/react-dom-test-utils.js',
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/', '<rootDir>/.legacy/', '<rootDir>/e2e/'],

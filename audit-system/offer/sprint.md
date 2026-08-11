@@ -1,7 +1,7 @@
 # One-Leak Repair Sprint
 
-**Price:** $97  
-**Stripe:** https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h  
+**Price:** $97
+**Stripe:** https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
 **Positioning:** One finding. One fix. Verified.
 
 ---
@@ -26,12 +26,12 @@ The highest-impact finding from the audit, converted into:
 
 The audit is free. The fix brief is $97.
 
-**The moment that closes:**  
+**The moment that closes:**
 They see the finding with evidence. The gap between "this is broken" and "I know exactly how to fix it" is the $97.
 
 **What to say:**
-> "Your highest-impact finding is [finding]. The evidence shows [measured value].  
-> For $97 I'll write the exact fix your developer needs — specific file, specific change, specific verification test.  
+> "Your highest-impact finding is [finding]. The evidence shows [measured value].
+> For $97 I'll write the exact fix your developer needs - specific file, specific change, specific verification test.
 > You implement it. In 30 days I re-audit the same selector to confirm it held."
 
 **What not to say:**

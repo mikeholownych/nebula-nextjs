@@ -13,7 +13,7 @@ const execFileAsync = promisify(execFile)
 
 // Real-time Telegram alert on a real (non-test-mode) sale. Uses the same
 // `hermes send` mechanism as the Python side (sre_responder.py,
-// notify_production_health.py) — this repo has no Telegram bot token
+// notify_production_health.py) - this repo has no Telegram bot token
 // configured, `hermes send` is the only working delivery path.
 // sre_responder.py also checks for new payments every 15 min as a backstop
 // in case this call fails silently (network blip, hermes gateway down, etc).
@@ -203,7 +203,7 @@ export async function POST(request: NextRequest) {
           await provisionAgencyPartner(session, customerEmail)
         } catch (err) {
           console.error('Agency partner auto-provision failed:', err)
-          // Non-fatal — the purchase is still recorded below as "review" and
+          // Non-fatal - the purchase is still recorded below as "review" and
           // the sale alert fires; manual provisioning remains possible.
         }
       }
@@ -241,7 +241,7 @@ export async function POST(request: NextRequest) {
           ? `$${(session.amount_total / 100).toFixed(2)}`
           : 'unknown amount'
         void sendSaleAlert(
-          `⚠️ *CHECKOUT REVIEW* — ${amount} — ${session.metadata?.offer_key ?? 'unknown offer'} — ${customerEmail ?? 'no email'}\n` +
+          `⚠️ *CHECKOUT REVIEW* - ${amount} - ${session.metadata?.offer_key ?? 'unknown offer'} - ${customerEmail ?? 'no email'}\n` +
           `session: ${session.id}`,
         )
       }
@@ -281,7 +281,7 @@ export async function POST(request: NextRequest) {
       // row stuck at 'pending'/'processing' under the same session ID (the
       // advisory lock above serializes concurrent retries of that stuck row
       // so only one recovers it). Only a row that already reached 'delivered'
-      // means this exact session was fully handled before — that's the one
+      // means this exact session was fully handled before - that's the one
       // case a redelivery must not re-alert, re-run fulfillment, or
       // re-capture analytics for.
       const statusResult = await client.query(
@@ -290,7 +290,7 @@ export async function POST(request: NextRequest) {
       )
       alreadyDelivered = statusResult.rows[0]?.fulfillment_status === 'delivered'
     } catch (err) {
-      console.error('Failed to persist purchase — will let Stripe retry:', err)
+      console.error('Failed to persist purchase - will let Stripe retry:', err)
       if (session.metadata?.analytics_consent === 'all') {
         captureServerException(err, { route: 'POST /api/webhooks/stripe', properties: { stripe_session_id: session.id } })
       }
@@ -338,7 +338,7 @@ export async function POST(request: NextRequest) {
         : 'unknown amount'
       const offerKey = session.metadata?.offer_key ?? 'unknown offer'
       const email = customerEmail
-      const message = `💰 *SALE* — ${amount} — ${offerKey} — ${email}\nsession: ${session.id}`
+      const message = `💰 *SALE* - ${amount} - ${offerKey} - ${email}\nsession: ${session.id}`
 
       void sendSaleAlert(message)
     }
@@ -502,7 +502,7 @@ export async function POST(request: NextRequest) {
           ],
         )
       } catch (err) {
-        console.error('Failed to persist subscription — will let Stripe retry:', err)
+        console.error('Failed to persist subscription - will let Stripe retry:', err)
         return NextResponse.json({ error: 'Failed to record subscription' }, { status: 500 })
       }
 
@@ -511,7 +511,7 @@ export async function POST(request: NextRequest) {
           ? `$${(item.price.unit_amount / 100).toFixed(2)}/${resolved.interval === 'annual' ? 'yr' : 'mo'}`
           : 'unknown amount'
         void sendSaleAlert(
-          `🔁 *NEW SUBSCRIPTION* — ${resolved.plan.toUpperCase()} — ${amount} — ${email}\nsubscription: ${sub.id}`,
+          `🔁 *NEW SUBSCRIPTION* - ${resolved.plan.toUpperCase()} - ${amount} - ${email}\nsubscription: ${sub.id}`,
         )
         // Welcome delivery is persisted as retryable state. The webhook remains
         // idempotent, while the retry worker can recover provider failures.
@@ -528,7 +528,7 @@ export async function POST(request: NextRequest) {
       }
       if (event.livemode && event.type === 'customer.subscription.deleted') {
         void sendSaleAlert(
-          `🔻 *SUBSCRIPTION CANCELED* — ${resolved.plan.toUpperCase()} — ${email}\nsubscription: ${sub.id}`,
+          `🔻 *SUBSCRIPTION CANCELED* - ${resolved.plan.toUpperCase()} - ${email}\nsubscription: ${sub.id}`,
         )
       }
     }

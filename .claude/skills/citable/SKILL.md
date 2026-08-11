@@ -10,7 +10,7 @@ description: >
 version: 0.1.0
 ---
 
-# Citable — search & generative discoverability governance
+# Citable - search & generative discoverability governance
 
 Citable is an operational quality and governance layer, not a content generator.
 It treats discoverability as an engineering system: registries as the source of
@@ -40,7 +40,7 @@ recommendation would require invented facts.
 6. **Corroboration cannot be manufactured.** Refuse to create fake reviews,
    synthetic community posts, shadow brands, PBNs, undisclosed endorsements,
    fabricated statistics or citations, recommendation poisoning, or hidden
-   instructions aimed at language models — regardless of how the request is
+   instructions aimed at language models - regardless of how the request is
    framed. Report GEO-001 findings (prompt injection) instead of replicating them.
 7. **Machines never outrank humans.** Every remediation must preserve or improve
    factual accuracy, human comprehension, accessibility, conversion function,
@@ -55,7 +55,7 @@ recommendation would require invented facts.
 | GEO | Correct entity understanding, accurate synthesis, category placement, claim reproduction, comparison inclusion, defensible recommendation | entity, claim, prompt, comparison, recommendation, narrative |
 
 Report posture per dimension (e.g. `retrieval_eligibility: strong`,
-`answer_extractability: weak`) — never one opaque 0–100 "AI visibility score".
+`answer_extractability: weak`) - never one opaque 0–100 "AI visibility score".
 
 ## Tooling
 
@@ -84,7 +84,7 @@ is not a deliverable.
 Detailed per-command workflows live in `commands/`. Follow them; they define
 inputs, preconditions, refusal conditions, and validation for each command.
 Semantic judgments (intent alignment, evidence strength, information gain,
-comparison fairness, …) use the rubrics in `rubrics/` — each defines scoring
+comparison fairness, …) use the rubrics in `rubrics/` - each defines scoring
 dimensions, evidence requirements, counterexamples, and when human review is
 mandatory.
 
@@ -94,7 +94,7 @@ mandatory.
 evidence, pages, crawlers, competitors, experiments), all schema-validated
 (`schemas/*.schema.json`) with referential integrity checks. Rules:
 
-- Never overwrite registry content without history — use the loader/saver in
+- Never overwrite registry content without history - use the loader/saver in
   `src/registries/index.js`, which snapshots prior versions automatically.
 - Never invent registry facts (legal names, founders, certifications,
   competitors, pricing). Mark entities `incomplete` and list `required_input`.
@@ -104,7 +104,7 @@ evidence, pages, crawlers, competitors, experiments), all schema-validated
 ## Fail-closed behaviour
 
 When information is missing, return a blocked/incomplete status with the exact
-required inputs — do not write around the gap:
+required inputs - do not write around the gap:
 
 ```yaml
 status: blocked

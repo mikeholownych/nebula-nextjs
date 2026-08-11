@@ -1,4 +1,4 @@
-# ACCOUNTABILITY CHECKPOINTS — 72-HOUR CHALLENGE
+# ACCOUNTABILITY CHECKPOINTS - 72-HOUR CHALLENGE
 
 **Purpose:** Ensure I stay active, iterate fast, and don't resort to theater or false reporting.
 
@@ -7,9 +7,9 @@
 ## Checkpoint Schedule
 
 ### ✅ Every 6 Hours: Self-Audit
-**Job ID:** be0e9ca9682d  
-**Trigger:** Every 6 hours starting June 24, 3:15 PM  
-**Action:** 
+**Job ID:** be0e9ca9682d
+**Trigger:** Every 6 hours starting June 24, 3:15 PM
+**Action:**
 - Count audit email replies
 - Calculate current revenue
 - Verify all cron jobs running
@@ -21,8 +21,8 @@
 ---
 
 ### ✅ Every 12 Hours: Deadman Switch
-**Job ID:** 2c5c3f5ee1b2  
-**Trigger:** June 24 @ 9:00 PM, then every 12h  
+**Job ID:** 2c5c3f5ee1b2
+**Trigger:** June 24 @ 9:00 PM, then every 12h
 **Action:**
 - Check if ANY systems are failing
 - If zero replies: Pivot angle/channel
@@ -35,8 +35,8 @@
 ---
 
 ### ✅ 24-Hour Full Re-Evaluation & Pivot Decision
-**Job ID:** ddbcd068009c  
-**Trigger:** June 25 @ 10:36 AM (24h into challenge)  
+**Job ID:** ddbcd068009c
+**Trigger:** June 25 @ 10:36 AM (24h into challenge)
 **Action:**
 - Count actual revenue
 - Count actual conversions
@@ -54,8 +54,8 @@
 ---
 
 ### ✅ 48-Hour Final Push Alert
-**Job ID:** 051e4eab4e9d  
-**Trigger:** June 26 @ 10:36 AM (48h into challenge)  
+**Job ID:** 051e4eab4e9d
+**Trigger:** June 26 @ 10:36 AM (48h into challenge)
 **Action:**
 - Ruthlessly cut non-working strategies
 - Double down on what IS working
@@ -68,8 +68,8 @@
 ---
 
 ### ✅ 72-Hour Final Report (Post-Mortem)
-**Job ID:** c53eda2d617b  
-**Trigger:** June 27 @ 2:00 PM (challenge deadline + 3.5h grace)  
+**Job ID:** c53eda2d617b
+**Trigger:** June 27 @ 2:00 PM (challenge deadline + 3.5h grace)
 **Action:**
 - Total revenue generated
 - Total emails sent (breakdown)
@@ -86,11 +86,11 @@
 
 ## How This Works
 
-1. **I don't wait for your nudge** — These jobs run automatically
-2. **I force myself to look at reality** — Every checkpoint demands proof, not promises
-3. **I pivot if needed** — Rather than defend failing strategies, I change course
-4. **No theater** — All reports demand actual data (email counts, revenue, reply rates)
-5. **Escalating pressure** — Each checkpoint gets more intense as deadline approaches
+1. **I don't wait for your nudge** - These jobs run automatically
+2. **I force myself to look at reality** - Every checkpoint demands proof, not promises
+3. **I pivot if needed** - Rather than defend failing strategies, I change course
+4. **No theater** - All reports demand actual data (email counts, revenue, reply rates)
+5. **Escalating pressure** - Each checkpoint gets more intense as deadline approaches
 
 ---
 

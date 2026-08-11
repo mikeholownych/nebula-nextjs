@@ -1,7 +1,7 @@
-# GP Socials — Hormozi Giveaway Landing Page Review
+# GP Socials - Hormozi Giveaway Landing Page Review
 
-**Source:** https://files.gpsocials.com/hormozi-giveaway  
-**Captured:** 2026-07-11 21:24 UTC  
+**Source:** https://files.gpsocials.com/hormozi-giveaway
+**Captured:** 2026-07-11 21:24 UTC
 **Stack:** beehiiv newsletter signup page
 
 ---
@@ -33,10 +33,10 @@
 | Trigger | Implementation |
 |---------|---------------|
 | **Authority borrowing** | Alex Hormozi name in headline (100 videos watched = deep research signal) |
-| **Specific number** | "40% of viewers before the first minute" — creates precision credibility |
-| **Effort investment** | "We watched 100 of his videos back to back" — does the work for you |
-| **Immediate utility** | "breakdown you can use in your next video" — not theoretical, actionable now |
-| **Exclusivity framing** | "Unlock access NOW»" — gate behind email capture |
+| **Specific number** | "40% of viewers before the first minute" - creates precision credibility |
+| **Effort investment** | "We watched 100 of his videos back to back" - does the work for you |
+| **Immediate utility** | "breakdown you can use in your next video" - not theoretical, actionable now |
+| **Exclusivity framing** | "Unlock access NOW»" - gate behind email capture |
 | **Business size segmentation** | Dropdown qualifies leads AND triggers size-specific automation sequences |
 
 ---
@@ -45,17 +45,17 @@
 
 The Business Size dropdown serves dual purpose:
 
-1. **Lead qualification** — filter out non-B2B cohort (they likely don't convert to high-ticket YouTube funnel clients)
-2. **Automation branching** — beehiiv automation_ids can trigger different email sequences based on revenue tier:
+1. **Lead qualification** - filter out non-B2B cohort (they likely don't convert to high-ticket YouTube funnel clients)
+2. **Automation branching** - beehiiv automation_ids can trigger different email sequences based on revenue tier:
    - `0-$10k/m` → "Get your first 10 calls" nurture track
    - `$10k-$30k/m` → "Scale to 20 calls consistently" bridge
    - `$30k-$100k/m` → "Systematize your YouTube funnel" (service pitch)
    - `$100k/m+` → Direct sales outreach (high-ticket consulting/agency)
 
 The form includes hidden fields:
-- `automation_ids: "3a5a8274-e3fc-40ce-9f9a-a8f284a06d7d"` — triggers beehiiv automation
-- `double_opt: "false"` — single opt-in (reduces friction)
-- `auto_login_enabled: "false"` — no immediate account creation
+- `automation_ids: "3a5a8274-e3fc-40ce-9f9a-a8f284a06d7d"` - triggers beehiiv automation
+- `double_opt: "false"` - single opt-in (reduces friction)
+- `auto_login_enabled: "false"` - no immediate account creation
 
 ---
 
@@ -64,7 +64,7 @@ The form includes hidden fields:
 ### 1. **"We Watched 100 X So You Don't Have To" Framework**
 
 Applicable to Nebula:
-> "We audited 200 landing pages with $0 conversions to find the exact 5 patterns killing orders — so you can fix yours in 60 seconds."
+> "We audited 200 landing pages with $0 conversions to find the exact 5 patterns killing orders - so you can fix yours in 60 seconds."
 
 The pattern:
 - [NUMBER] of [TARGET] analyzed
@@ -89,7 +89,7 @@ The footer form captures newsletter subscribers who scrolled past the hero. For 
 
 ### 4. **Specific Statistic in Subhead**
 
-"40% of viewers before the first minute" — precise, compelling, fear-inducing.
+"40% of viewers before the first minute" - precise, compelling, fear-inducing.
 
 Nebula variant:
 > "Most founders lose $8,500 in ad spend before fixing their landing page. You don't have to."
@@ -112,9 +112,9 @@ Nebula variant:
 **Why this works:**
 1. Headline borrows Hormozi authority (instant trust transfer)
 2. Subhead creates pain (40% viewer loss) + promises solution
-3. Form is minimal (email + 1 dropdown) — 8-second completion
+3. Form is minimal (email + 1 dropdown) - 8-second completion
 4. Business size = immediate segmentation = relevant nurture
-5. "Unlock access" — curiosity + exclusivity trigger
+5. "Unlock access" - curiosity + exclusivity trigger
 
 **Potential friction points:**
 - No social proof on page (no logos, testimonials, subscriber count)
@@ -127,7 +127,7 @@ Nebula variant:
 
 | Element | Adaptation |
 |---------|-----------|
-| "We watched 100 X" framework | "We audited 200 landing pages that burned $10k+ in ads with zero conversions — and found the exact 5 patterns killing orders." |
+| "We watched 100 X" framework | "We audited 200 landing pages that burned $10k+ in ads with zero conversions - and found the exact 5 patterns killing orders." |
 | Business size dropdown | "Monthly ad spend" dropdown to qualify Fix Pack vs Retainer intent |
 | Footer secondary form | "Landing Page Teardowns" weekly email capture on long-form content |
 | Specific stat in subhead | "Most founders who burn $10k on ads have the same 3 fixable leaks." |

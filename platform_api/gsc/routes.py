@@ -1,11 +1,11 @@
 """Google Search Console API routes.
 
 Endpoints:
-- GET  /api/gsc/connect    — start OAuth flow (redirects to Google)
-- GET  /api/gsc/callback   — receive authorization code, save tokens
-- DELETE /api/gsc/disconnect — remove the user's GSC connection
-- GET  /api/gsc/status     — {connected, site_url, connected_at}
-- GET  /api/gsc/metrics    — {clicks, impressions, avg_ctr, avg_position, top_pages}
+- GET  /api/gsc/connect    - start OAuth flow (redirects to Google)
+- GET  /api/gsc/callback   - receive authorization code, save tokens
+- DELETE /api/gsc/disconnect - remove the user's GSC connection
+- GET  /api/gsc/status     - {connected, site_url, connected_at}
+- GET  /api/gsc/metrics    - {clicks, impressions, avg_ctr, avg_position, top_pages}
 """
 
 from datetime import datetime, timedelta, timezone
@@ -91,7 +91,7 @@ def _get_or_refresh_token(conn: GscConnection, db: Session) -> str:
         if not conn.refresh_token:
             raise HTTPException(
                 status_code=401,
-                detail="GSC token expired and no refresh token available — please reconnect",
+                detail="GSC token expired and no refresh token available - please reconnect",
             )
         try:
             refreshed = refresh_gsc_token(conn.refresh_token)
@@ -154,7 +154,7 @@ async def gsc_callback(
 
     user_id_str = state_data.get("user_id")
     if not user_id_str:
-        raise HTTPException(status_code=400, detail="Corrupt OAuth state — user_id missing")
+        raise HTTPException(status_code=400, detail="Corrupt OAuth state - user_id missing")
 
     redirect_uri = _gsc_redirect_uri()
 
@@ -184,7 +184,7 @@ async def gsc_callback(
                 if sites:
                     auto_site_url = sites[0].get("siteUrl")
     except Exception:
-        pass  # Non-fatal — user can select manually in settings
+        pass  # Non-fatal - user can select manually in settings
 
     # Upsert the connection row
     conn = db.query(GscConnection).filter_by(user_id=user_uuid).first()
@@ -298,7 +298,7 @@ async def gsc_metrics(
             if agg_resp.status_code == 401:
                 raise HTTPException(
                     status_code=401,
-                    detail="GSC token rejected — please reconnect",
+                    detail="GSC token rejected - please reconnect",
                 )
             if agg_resp.status_code != 200:
                 raise HTTPException(
@@ -504,7 +504,7 @@ async def gsc_inspect(
                         last_crawl=last_crawl,
                     ))
                 else:
-                    # Rate limited or error — mark as unknown
+                    # Rate limited or error - mark as unknown
                     results.append(InspectionResult(url=url, indexed=False, coverage_state="error"))
             except Exception:
                 results.append(InspectionResult(url=url, indexed=False, coverage_state="error"))

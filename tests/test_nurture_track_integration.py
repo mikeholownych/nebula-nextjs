@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-test_nurture_track_integration.py — Test track assignment and template selection.
+test_nurture_track_integration.py - Test track assignment and template selection.
 
 Run: python3 -m pytest tests/test_nurture_track_integration.py -v
 """
@@ -18,7 +18,7 @@ import pytest
 def test_track_assignment_from_headline_finding():
     """Track should be headline-clarity when audit has headline category finding."""
     from lead_manager import upsert_lead, get_lead
-    
+
     # Simulate audit with headline finding
     audit = {
         "id": "TEST-AUDIT-001",
@@ -26,7 +26,7 @@ def test_track_assignment_from_headline_finding():
             {"category": "headline", "severity": "high", "observation": "Headline describes product category"}
         ]
     }
-    
+
     # Assign track based on finding
     track_map = {
         "headline": "headline-clarity",
@@ -34,10 +34,10 @@ def test_track_assignment_from_headline_finding():
         "cta": "cta-friction",
         "social_proof": "social-proof"
     }
-    
+
     primary = max(audit["findings"], key=lambda f: {"high": 3, "medium": 2, "low": 1}.get(f.get("severity", "low"), 1))
     track_id = track_map.get(primary["category"], "default")
-    
+
     assert track_id == "headline-clarity", f"Expected headline-clarity, got {track_id}"
 
 
@@ -49,17 +49,17 @@ def test_track_assignment_from_cta_finding():
             {"category": "cta", "severity": "high", "observation": "CTA ambiguous"}
         ]
     }
-    
+
     track_map = {
         "headline": "headline-clarity",
         "message_match": "message-match",
         "cta": "cta-friction",
         "social_proof": "social-proof"
     }
-    
+
     primary = max(audit["findings"], key=lambda f: {"high": 3, "medium": 2, "low": 1}.get(f.get("severity", "low"), 1))
     track_id = track_map.get(primary["category"], "default")
-    
+
     assert track_id == "cta-friction", f"Expected cta-friction, got {track_id}"
 
 
@@ -73,17 +73,17 @@ def test_track_assignment_multiple_findings():
             {"category": "social_proof", "severity": "low", "observation": "No testimonials"}
         ]
     }
-    
+
     track_map = {
         "headline": "headline-clarity",
         "message_match": "message-match",
         "cta": "cta-friction",
         "social_proof": "social-proof"
     }
-    
+
     primary = max(audit["findings"], key=lambda f: {"high": 3, "medium": 2, "low": 1}.get(f.get("severity", "low"), 1))
     track_id = track_map.get(primary["category"], "default")
-    
+
     assert track_id == "cta-friction", f"Expected cta-friction (high severity), got {track_id}"
 
 
@@ -112,9 +112,9 @@ def test_upsert_lead_with_nurture_track(tmp_path, monkeypatch):
 def test_template_renderer_loads_cold_headline():
     """Template renderer should load cold_headline_diagnosis_1 template."""
     from template_renderer import load_template
-    
+
     template = load_template("cold_headline_diagnosis_1")
-    
+
     assert template is not None, "Template not found"
     assert "subject" in template, "No subject in template"
     assert "body" in template, "No body in template"
@@ -124,25 +124,25 @@ def test_template_renderer_loads_cold_headline():
 def test_template_renderer_renders_variables():
     """Template renderer should substitute variables."""
     from template_renderer import render_template
-    
+
     lead = {
         "email": "jane@example.com",
         "name": "Jane Founder",
         "url": "https://example.com"
     }
-    
+
     audit = {
         "findings": [
             {"category": "headline", "observation": "Headline says 'Platform' but visitor needs outcome"}
         ]
     }
-    
+
     result = render_template(
         template_id="cold_headline_diagnosis_1",
         lead=lead,
         audit=audit
     )
-    
+
     assert result is not None, "Render failed"
     # This template doesn't use {domain} - placeholder not present
     # assert "example.com" in result["body"], "Domain not injected"
@@ -154,7 +154,7 @@ def test_template_renderer_renders_variables():
 def test_segment_track_matrix():
     """Verify segment + track template selection logic."""
     # This tests the concept, not the actual implementation
-    
+
     cases = [
         # (segment, track, expected_template_pattern)
         ("cold", "headline-clarity", "cold_headline"),
@@ -163,11 +163,11 @@ def test_segment_track_matrix():
         ("hot", "headline-clarity", "hot_headline"),
         ("hot", "cta-friction", "hot_cta"),
     ]
-    
+
     for segment, track, expected_prefix in cases:
         # Template ID pattern: {segment}_{track_topic}_{N}
         template_id = f"{expected_prefix}_1"
-        
+
         # Verify template exists
         template_path = BASE / "templates" / segment / f"{template_id}.md"
         # Note: templates may not all exist yet, so just check format
@@ -177,17 +177,17 @@ def test_segment_track_matrix():
 def test_hot_lead_bypasses_timing():
     """Hot leads should get pitch template immediately, ignoring track day timing."""
     # Conceptual test - actual implementation in nurture_engine
-    
+
     segment = "hot"
     track_position_days = 0  # Just assigned
-    
+
     # Hot logic: ignore position, return pitch template
     if segment == "hot":
         selected_template = "hot_direct_pitch_1"
     else:
         # Not implemented in this test
         selected_template = None
-    
+
     assert selected_template == "hot_direct_pitch_1", "Hot lead should bypass timing"
 
 
@@ -195,18 +195,18 @@ def test_track_position_advances_on_send():
     """After sending nurture email, track_position_days should increment."""
     # This would be tested in integration with nurture_engine
     # Conceptual check:
-    
+
     lead = {
         "email": "test@example.com",
         "nurture_track": "headline-clarity",
         "track_position_days": 0,
         "track_started_at": "2026-07-17T10:00:00Z"
     }
-    
+
     # Simulate send at day 2
     lead["track_position_days"] = 2
     lead["last_nurture_sent"] = "2026-07-19T10:00:00Z"
-    
+
     assert lead["track_position_days"] == 2, "Position should advance"
 
 

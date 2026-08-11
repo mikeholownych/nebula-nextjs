@@ -1,4 +1,4 @@
-# Medium Integration — Long-Form Content Pipeline
+# Medium Integration - Long-Form Content Pipeline
 
 **Purpose:** Extend existing LinkedIn content workflow to Medium with longer article-style content
 
@@ -33,19 +33,19 @@
 ### Structure
 
 ```
-[HEADLINE — Problem + Outcome]
+[HEADLINE - Problem + Outcome]
 
-[OPENING — Why this matters]
+[OPENING - Why this matters]
 
-[THE LEAK — What audit data shows]
+[THE LEAK - What audit data shows]
 
-[THE FIX — Step-by-step methodology]
+[THE FIX - Step-by-step methodology]
 
-[THE EVIDENCE — 3-5 examples from audits]
+[THE EVIDENCE - 3-5 examples from audits]
 
-[THE OUTCOME — What changes when you apply this]
+[THE OUTCOME - What changes when you apply this]
 
-[CTA — Resource or next step]
+[CTA - Resource or next step]
 ```
 
 ### Example Article
@@ -54,45 +54,45 @@
 
 **Opening (2-3 paragraphs):**
 > Last month I audited 50 landing pages. 36 of them had the same problem: vague headlines describing what the product is, not what it does for buyers.
-> 
-> These weren't amateur sites. YC companies, funded startups, established SaaS—they all made the same mistake.
-> 
+>
+> These weren't amateur sites. YC companies, funded startups, established SaaS-they all made the same mistake.
+>
 > Here's what the data shows, and how to fix it.
 
 **The Leak (3-4 paragraphs):**
 > When I analyze headlines, I look for one thing: does it promise an outcome, or describe a category?
-> 
+>
 > "Project Management Platform" → Category
 > "Stop Missing Deadlines" → Outcome
-> 
+>
 > The difference matters. Top-performing pages (the 5% converting above 3%) all share one trait: their headline commits to a buyer outcome in the first 7 words.
-> 
+>
 > The other 95% write headlines for themselves. They describe their product. They list features. They say what they are.
-> 
+>
 > Buyers don't read to learn about you. They read to learn about themselves after you.
 
 **The Fix (5-7 paragraphs):**
 > Here's the exact methodology I use to audit headlines:
-> 
+>
 > **Step 1: Identify the Category Claim**
 > Find the first 7 words. If it's a category (CRM, Platform, Tool, Software), that's your baseline.
-> 
+>
 > **Step 2: Extract the Buyer Outcome**
 > What happens after someone uses your product? Write that.
-> 
+>
 > "CRM Platform" → "No More Lost Leads"
 > "Marketing Automation" → "Send Emails That Actually Get Opened"
 > "AI Writing Assistant" → "Publish in Half the Time"
-> 
+>
 > **Step 3: Add Specificity**
 > Vague outcomes don't convert. Add a number, timeframe, or concrete change.
-> 
+>
 > "No More Lost Leads" → "Catch Every Prospect Before They Slip Away"
 > "Send Emails That Get Opened" → "3x Your Open Rate Without Changing Your List"
-> 
+>
 > **Step 4: Test Against Ad Promise**
 > If your ad says "Stop Losing Leads" and your headline says "CRM for Teams", you've created a disconnect. The fix: match the headline to the ad's promise.
-> 
+>
 > **Step 5: Read It Aloud**
 > If it sounds like you wrote it, rewrite it. Write the way buyers talk when they describe their problem.
 
@@ -101,31 +101,31 @@
 > Before: "Integration Platform for Apps"
 > After: "Connect Your Apps Without Asking Engineering"
 > Result: Demo requests +27%
-> 
+>
 > **Example 2: FinTech (expense tracking)**
 > Before: "Expense Management Software"
 > After: "No More Receipt Hoarding"
 > Result: Trial sign-ups +34%
-> 
+>
 > **Example 3: DevTool (CI/CD)**
 > Before: "CI/CD Pipeline Platform"
 > After: "Ship Fast Without Breaking Production"
 > Result: Sign-ups +41%
-> 
+>
 > The pattern is consistent: outcome specificity beats category description every time.
 
 **The Outcome (2-3 paragraphs):**
 > When you change your headline from category to outcome, three things happen:
-> 
-> 1. **Ad spend efficiency** — Your message-match improves. People who clicked expecting "Stop Losing Leads" see "Stop Losing Leads" on the page. Bounce rates drop 15-30%.
-> 
-> 2. **Organic clarity** — Visitors don't have to guess what you do. The first 7 words tell them what changes for them.
-> 
-> 3. **Differentiated positioning** — Instead of competing on category ("We're another CRM"), you compete on outcome ("We're the only CRM that catches prospects before they slip away").
+>
+> 1. **Ad spend efficiency** - Your message-match improves. People who clicked expecting "Stop Losing Leads" see "Stop Losing Leads" on the page. Bounce rates drop 15-30%.
+>
+> 2. **Organic clarity** - Visitors don't have to guess what you do. The first 7 words tell them what changes for them.
+>
+> 3. **Differentiated positioning** - Instead of competing on category ("We're another CRM"), you compete on outcome ("We're the only CRM that catches prospects before they slip away").
 
 **CTA:**
 > If you want to see how your headline scores, I'll audit it for free → nebulacomponents.shop/audit
-> 
+>
 > You'll get specific recommendations tied to your exact copy, not generic best practices.
 
 ---

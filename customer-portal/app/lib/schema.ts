@@ -1,4 +1,4 @@
-// Minimal global structured data. Keep schema current — price and availability must match live state.
+// Minimal global structured data. Keep schema current - price and availability must match live state.
 // unverified, or route-specific products and claims.
 
 export const organizationSchema = {
@@ -14,7 +14,7 @@ export const organizationSchema = {
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer support',
-    // email intentionally omitted from schema — CF email obfuscation
+    // email intentionally omitted from schema - CF email obfuscation
     // rewrites email strings in JSON-LD <script> tags, injecting a
     // render-blocking script that adds ~150ms to FCP/LCP on mobile.
     // Contact email is available via the About page and privacy policy.
@@ -102,7 +102,7 @@ export function createArticleSchema(article: {
     headline: article.headline,
     description: article.description,
     // References the canonical founder Person node declared once in
-    // organizationSchema — every article previously inlined a separate
+    // organizationSchema - every article previously inlined a separate
     // "Mike H" Person object here, fragmenting the entity across ~40
     // pages instead of letting Search/AI crawlers merge them into one.
     author: { '@id': 'https://nebulacomponents.com/#founder' },
@@ -117,7 +117,7 @@ export function createArticleSchema(article: {
     },
     // Falls back to the site's real, live-rendered OG image (same asset
     // already used for social share cards) rather than omitting `image`
-    // entirely — no per-article photography exists yet, and Article rich
+    // entirely - no per-article photography exists yet, and Article rich
     // results require this property to be eligible at all.
     image: article.image || 'https://nebulacomponents.com/opengraph-image',
   }

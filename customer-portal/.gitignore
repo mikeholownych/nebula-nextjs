@@ -52,7 +52,7 @@ lhci-results/
 *.tsbuildinfo
 next-env.d.ts
 
-# Regenerated weekly by cron (scripts/self_scan.py) — not source, would
+# Regenerated weekly by cron (scripts/self_scan.py) - not source, would
 # just be commit noise every run. The live file stays on disk and serves
 # fine untracked; see git history before this line for the last committed
 # snapshot if you need one.

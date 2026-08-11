@@ -4,11 +4,11 @@ Runs every 15 minutes via cron. Compares today's metrics against the
 7-day rolling baseline and fires Telegram alerts on anomalies.
 
 Alerts defined:
-  • CVR drop  — audit→checkout conversion rate falls 20%+ below baseline
-  • CPL spike — cost-per-audit-start implied by source mix changes (proxy)
-  • Audit drought — zero audits in 6h during business hours
-  • Newsletter churn — unsubscribes spike (>5 in a day)
-  • Feedback flood — 3+ open objections of the same type in 24h
+  • CVR drop  - audit→checkout conversion rate falls 20%+ below baseline
+  • CPL spike - cost-per-audit-start implied by source mix changes (proxy)
+  • Audit drought - zero audits in 6h during business hours
+  • Newsletter churn - unsubscribes spike (>5 in a day)
+  • Feedback flood - 3+ open objections of the same type in 24h
 
 Delivered to: Telegram (via Hermes cron deliver channel)
 Silence rules: no repeat alert for same metric within 4h
@@ -37,7 +37,7 @@ ALERT_THRESHOLDS = {
     "objection_flood_count": 3,# alert if same objection type 3+ times in 24h
 }
 
-# Silence file — prevents repeat alerts for same metric within 4h
+# Silence file - prevents repeat alerts for same metric within 4h
 SILENCE_FILE = Path("/tmp/nebula_alert_silences.json")
 
 
@@ -119,7 +119,7 @@ async def check_cvr(pool: asyncpg.Pool) -> list[str]:
                 f"⚠️ *CVR DROP ALERT*\n"
                 f"Today: {today_cvr:.1f}% ({row['today_purchases']} purchases / {row['today_audits']} audits)\n"
                 f"7-day baseline: {baseline:.1f}%\n"
-                f"Drop: {drop_pct:.0f}% — exceeds {ALERT_THRESHOLDS['cvr_drop_pct']}% threshold\n"
+                f"Drop: {drop_pct:.0f}% - exceeds {ALERT_THRESHOLDS['cvr_drop_pct']}% threshold\n"
                 f"_Check: results page, checkout flow, Stripe_"
             )
             silence("cvr_drop")
@@ -203,7 +203,7 @@ async def check_objection_flood(pool: asyncpg.Pool) -> list[str]:
 
 
 async def check_daily_summary(pool: asyncpg.Pool) -> list[str]:
-    """Daily 8 AM ET summary — always fires once per day."""
+    """Daily 8 AM ET summary - always fires once per day."""
     now_et = datetime.now(timezone.utc) - timedelta(hours=4)
     if now_et.hour != 8 or is_silenced("daily_summary"):
         return []
@@ -230,7 +230,7 @@ async def check_daily_summary(pool: asyncpg.Pool) -> list[str]:
     )
 
     summary = [
-        f"📊 *Daily Marketing Summary — {now_et.strftime('%b %d')}*\n"
+        f"📊 *Daily Marketing Summary - {now_et.strftime('%b %d')}*\n"
         f"Audits: {row['audits_today']}\n"
         f"Purchases: {row['purchases_today']} (${row['revenue_today'] / 100:.2f})\n"
         f"CVR: {cvr:.1f}%\n"
@@ -265,4 +265,4 @@ if __name__ == "__main__":
             print(alert)
             print()
     else:
-        print("✓ No alerts — all metrics within normal range")
+        print("✓ No alerts - all metrics within normal range")

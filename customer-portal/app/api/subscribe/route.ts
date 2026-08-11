@@ -7,7 +7,7 @@ import {
 
 // POST /api/subscribe  { plan: 'pro' | 'growth' | 'agency', interval: 'monthly' | 'annual' }
 // Creates a Stripe Checkout Session in subscription mode and returns its URL.
-// No audit binding — memberships are workspace-level, not audit-level. The
+// No audit binding - memberships are workspace-level, not audit-level. The
 // One-Leak Kit remains the audit-bound one-time purchase at /api/checkout.
 export async function POST(request: NextRequest) {
   let body: { plan?: string; interval?: string }

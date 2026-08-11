@@ -1,4 +1,4 @@
-# Channel 1 — Weekly Dashboard Spec (Decision-First)
+# Channel 1 - Weekly Dashboard Spec (Decision-First)
 
 **Purpose:** One 15-minute Friday review. Every number below maps to one
 decision: KEEP (scale), FIX (copy/research), KILL (angle), or ESCALATE (to you).
@@ -7,7 +7,7 @@ If a number doesn't trigger a decision, it doesn't belong here.
 **Run it:** `cd /home/mike/nebula/audit-system/channel1 && python3 weekly_rollup.py`
 Pulls live from pipeline_sheet.csv + stats.json + reply_diagnostics.jsonl + kill_log.jsonl.
 
-**Operational artifact:** `FRIDAY_CHECKLIST.md` — the ordered execution runbook.
+**Operational artifact:** `FRIDAY_CHECKLIST.md` - the ordered execution runbook.
 Review order matters and is enforced by the rollup:
 **0. Freshness → 1. Revenue → 2. Audit rate → 3. Reply rate → 4. Sourcing volume.**
 Volume is reviewed LAST because volume on a dead message only multiplies noise.
@@ -37,9 +37,9 @@ If revenue is red, do not send more outreach. Diagnose the funnel first.
 
 | Metric | Source | Green | Yellow | Red | Decision |
 |---|---|---|---|---|---|
-| Reply rate per angle | stats.json `trigger_reply_rate` (per batch/angle) | ≥20% | 10–19% | <10% | <10% → S1 trigger stale or S3 reason wrong — diagnose, rewrite, resend |
-| No-reply after 10 sends (same angle) | sheet + reply_diagnostics.jsonl | — | — | 10 sends, 0 replies | **KILL the angle.** Never resend as-is. Fix S1/S3, then re-test on 5 fresh leads. Tag the kill reason: `bad_list | weak_proof | bad_framing | too_much_friction | stale_sample | too_few_sends` via `weekly_rollup.py --kill "<angle>" --reason <reason>` → `kill_log.jsonl` |
-| Diagnostic failure distribution | reply_diagnostics.jsonl (S1–S4) | — | — | — | Whichever stage fails most = the fix target for next batch |
+| Reply rate per angle | stats.json `trigger_reply_rate` (per batch/angle) | ≥20% | 10–19% | <10% | <10% → S1 trigger stale or S3 reason wrong - diagnose, rewrite, resend |
+| No-reply after 10 sends (same angle) | sheet + reply_diagnostics.jsonl | - | - | 10 sends, 0 replies | **KILL the angle.** Never resend as-is. Fix S1/S3, then re-test on 5 fresh leads. Tag the kill reason: `bad_list | weak_proof | bad_framing | too_much_friction | stale_sample | too_few_sends` via `weekly_rollup.py --kill "<angle>" --reason <reason>` → `kill_log.jsonl` |
+| Diagnostic failure distribution | reply_diagnostics.jsonl (S1–S4) | - | - | - | Whichever stage fails most = the fix target for next batch |
 
 **Diagnostic mapping (from `diagnose_reply` in agentmail_client.py):**
 - **S1 fail (Trigger):** they don't see the event you referenced → research quality, not copy
@@ -47,7 +47,7 @@ If revenue is red, do not send more outreach. Diagnose the funnel first.
 - **S3 fail (Why them):** they don't feel the pain → wrong segment or wrong framing
 - **S4 fail (Ask):** they engage but won't act → friction too high (call vs $97 link), or they're not qualified
 
-**48-hour rule:** any reply (or notable non-reply pattern) gets diagnosed within 48h —
+**48-hour rule:** any reply (or notable non-reply pattern) gets diagnosed within 48h -
 that's the loop that improves copy week over week. `reply_monitor.py` logs these
 automatically; the failure distribution is your weekly copy to-do list.
 
@@ -56,7 +56,7 @@ automatically; the failure distribution is your weekly copy to-do list.
 | Metric | Source | Green | Yellow | Red | Decision |
 |---|---|---|---|---|---|
 | Audits requested / wk | pipeline_sheet.csv + PostHog | ≥3 | 1–2 | 0 | RED → offer not visible enough in touch 1; lead with audit artifact |
-| Audits delivered | pipeline_sheet.csv | = requested | lagging | < requested | Fix delivery path — every requested audit delivered within 24h |
+| Audits delivered | pipeline_sheet.csv | = requested | lagging | < requested | Fix delivery path - every requested audit delivered within 24h |
 | Pre-audited prospects (score ≥8) | sheet notes | most of batch | some | none | Pre-audit = highest reply play; do it before outreach, not after |
 
 ## 5. Channel 2 Check (once every 2 weeks, 2 minutes)
@@ -80,7 +80,7 @@ ALL GREEN          → double batch size to 10/wk, keep pre-auditing
 
 ## What NOT to look at weekly
 
-- Total emails sent (vanity — drives the wrong behavior)
+- Total emails sent (vanity - drives the wrong behavior)
 - Individual message open rates (too noisy at this volume)
-- PostHog pageviews (that's Channel 2 / demand capture — separate review)
+- PostHog pageviews (that's Channel 2 / demand capture - separate review)
 - Revenue compared to an agency's numbers (you're solo; compare to last week only)

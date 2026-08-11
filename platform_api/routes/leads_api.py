@@ -39,6 +39,6 @@ async def capture_exit_intent(body: ExitIntentRequest):
         logger.info("[exit-intent] captured %s from %s", body.email, body.page)
     except Exception as exc:
         logger.error("[exit-intent] lead store error: %s", exc)
-        # Don't surface to caller — frontend always shows success
+        # Don't surface to caller - frontend always shows success
 
     return {"status": "captured"}

@@ -1202,10 +1202,10 @@
     ],
     "subject": {
       "type": "site",
-      "identifier": "title:Landing Page Audit — Find What’s Killing Your Ads | Nebula"
+      "identifier": "title:Landing Page Audit - Find What’s Killing Your Ads | Nebula"
     },
     "observation": {
-      "summary": "2 pages share the title \"Landing Page Audit — Find What’s Killing Your Ads | Nebula\"",
+      "summary": "2 pages share the title \"Landing Page Audit - Find What’s Killing Your Ads | Nebula\"",
       "evidence": [
         "https://nebulacomponents.shop/",
         "https://nebulacomponents.shop/"
@@ -1431,7 +1431,7 @@
     "observation": {
       "summary": "Relative quantity asserted without baseline or timeframe in the same passage",
       "evidence": [
-        "passage: \"Yes, directly. A 2017 Google/SOASTA study found that 53% of mobile users abandoned pages taking longer than 3 seconds to load — and that figure is from 2017, be\""
+        "passage: \"Yes, directly. A 2017 Google/SOASTA study found that 53% of mobile users abandoned pages taking longer than 3 seconds to load - and that figure is from 2017, be\""
       ],
       "captured_value": null,
       "expected_value": null
@@ -1624,7 +1624,7 @@
     },
     "reasoning": {
       "applicable_requirement": "SEO §3 avoid sitewide exact-match anchors and automated keyword-matched links",
-      "explanation": "The same exact anchor text points at the same URL from a large share of pages — a pattern of mechanical link insertion.",
+      "explanation": "The same exact anchor text points at the same URL from a large share of pages - a pattern of mechanical link insertion.",
       "assumptions": [],
       "limitations": [
         "heuristic detection; verify manually before acting"

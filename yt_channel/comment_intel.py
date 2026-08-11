@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""YouTube comment demand harvesting — the "scrape the comments" move from
+"""YouTube comment demand harvesting - the "scrape the comments" move from
 Chris Koerner's Ron story (l0Vqm0ZIySc).
 
 Ron scraped 200 "I want a Ron" comments and pivoted his whole product to
 that demand. The same signal sits in @NebulaAudits comment sections:
 people literally ask for audits ("audit my site", "do mine next", "check
-out [domain]"). Those are warm, high-intent leads — currently uncollected.
+out [domain]"). Those are warm, high-intent leads - currently uncollected.
 
 This script:
   1. Lists the channel's recent videos (Data API)
@@ -14,7 +14,7 @@ This script:
      "next", CTA engagement)
   4. Appends matches to yt_channel/logs/comment_demand.jsonl (deduped)
   5. Sends hot leads to Telegram for manual reply (human-in-the-loop,
-     never auto-replies — same posture as reddit_signal_alerter)
+     never auto-replies - same posture as reddit_signal_alerter)
 
 Usage:
   venv/bin/python yt_channel/comment_intel.py [--videos N] [--send]
@@ -184,7 +184,7 @@ def main() -> int:
 
             if args.send and signal == "hot":
                 ok = telegram(
-                    f"🔥 YouTube demand signal — manual reply\n\n"
+                    f"🔥 YouTube demand signal - manual reply\n\n"
                     f"Video: {v['title'][:80]}\n"
                     f"Author: {author}\n"
                     f"Signal: {', '.join(reasons)}\n\n"

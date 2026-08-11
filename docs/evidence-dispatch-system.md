@@ -8,10 +8,10 @@ It is not a generic AI trend newsletter and it is not an autonomous outbound sen
 
 ## Formats
 
-- `audit_pattern` — one recurring conversion problem supported by live page evidence;
-- `founder_teardown` — a named founder/product with a public pain trigger and a current-page audit;
-- `ai_visibility_check` — what AI engines mention, cite, omit, or misstate;
-- `build_note` — a Nebula product or operating-system change with verified before/after evidence.
+- `audit_pattern` - one recurring conversion problem supported by live page evidence;
+- `founder_teardown` - a named founder/product with a public pain trigger and a current-page audit;
+- `ai_visibility_check` - what AI engines mention, cite, omit, or misstate;
+- `build_note` - a Nebula product or operating-system change with verified before/after evidence.
 
 ## Data flow
 

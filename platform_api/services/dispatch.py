@@ -1,5 +1,5 @@
 """
-Weekly dispatch service — builds and sends workspace activity summaries.
+Weekly dispatch service - builds and sends workspace activity summaries.
 """
 
 import os
@@ -190,7 +190,7 @@ async def send_dispatch(email: str, manifest: dict) -> bool:
     """Send the dispatch email via SendGrid. Returns True on success."""
     api_key = os.environ.get("SENDGRID_API_KEY")
     if not api_key:
-        logger.error("SENDGRID_API_KEY not set — dispatch not sent")
+        logger.error("SENDGRID_API_KEY not set - dispatch not sent")
         return False
 
     text_body = _format_plaintext(manifest)

@@ -20,7 +20,7 @@ const articleSchema = createArticleSchema({
   modifiedDate: '2026-07-25',
 })
 
-// Seed confessions — real enough to be recognisable, anonymous enough to be safe
+// Seed confessions - real enough to be recognisable, anonymous enough to be safe
 const CONFESSIONS = [
   {
     id: 1,

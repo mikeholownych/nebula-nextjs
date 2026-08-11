@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Wave 4 confirmed sends — personalized per lead context.
+Wave 4 confirmed sends - personalized per lead context.
 """
 import json, ssl, smtplib, datetime, re
 from email.mime.text import MIMEText
@@ -42,25 +42,25 @@ LEADS = [
         "email": "meetsoto.app@gmail.com",
         "name": "Sabb",
         "site": "meetsoto.com",
-        "trigger": "65 visitors, 6 completed your form, zero paid — you know the page is leaking, you just need someone to find where.",
-        "subject": "meetsoto.com — I found the drop-off (free audit)",
-        "lede": "I saw your IH post. 83% bounce before question 1 even after you rewrote the hero. That's not a copy problem — it's a trust-signal problem above the fold.",
+        "trigger": "65 visitors, 6 completed your form, zero paid - you know the page is leaking, you just need someone to find where.",
+        "subject": "meetsoto.com - I found the drop-off (free audit)",
+        "lede": "I saw your IH post. 83% bounce before question 1 even after you rewrote the hero. That's not a copy problem - it's a trust-signal problem above the fold.",
     },
     {
         "email": "contact@smartwatermark.app",
         "name": "the SmartWatermark team",
         "site": "smartwatermark.app",
-        "trigger": "84 visitors, 79% bounce rate, zero sales in 3 weeks — the IH thread nailed that it's a positioning miss, not a product miss.",
-        "subject": "smartwatermark.app — your bounce problem (free audit)",
+        "trigger": "84 visitors, 79% bounce rate, zero sales in 3 weeks - the IH thread nailed that it's a positioning miss, not a product miss.",
+        "subject": "smartwatermark.app - your bounce problem (free audit)",
         "lede": "I pulled up your page after reading your IH post. The 79% bounce is a headline problem: 'stop uploading photos to strangers' is burying the lead. Real estate agents need to hear GPS-stripping before they hear privacy.",
     },
     {
         "email": "support@mirowl.com",
         "name": "the Mirowl team",
         "site": "mirowl.com",
-        "trigger": "97 PH upvotes, 45 downloads, 1 paid user — that gap is a page problem, not a product problem.",
-        "subject": "mirowl.com — the PH→paid gap (free audit)",
-        "lede": "Saw your IH post. 97 upvotes to 1 paid user isn't a conversion rate problem — it's a landing page framing problem. The page talks about what it is, not about the moment someone desperately needs it.",
+        "trigger": "97 PH upvotes, 45 downloads, 1 paid user - that gap is a page problem, not a product problem.",
+        "subject": "mirowl.com - the PH→paid gap (free audit)",
+        "lede": "Saw your IH post. 97 upvotes to 1 paid user isn't a conversion rate problem - it's a landing page framing problem. The page talks about what it is, not about the moment someone desperately needs it.",
     },
 ]
 
@@ -77,7 +77,7 @@ I made the self-serve audit for exactly this pattern so you can see the first co
 No ask attached. If it helps, run it here and keep the output either way:
 https://nebulacomponents.shop/audit.html
 
-— Nebula Audit Agent
+- Nebula Audit Agent
 nebulacomponents.shop
 """
     html = f"""<p>Hi {lead['name']},</p>
@@ -90,7 +90,7 @@ nebulacomponents.shop
 
 <p>No ask attached. If it helps, run it here and keep the output either way:<br><a href="https://nebulacomponents.shop/audit.html">https://nebulacomponents.shop/audit.html</a></p>
 
-<p>— Nebula Audit Agent<br>
+<p>- Nebula Audit Agent<br>
 <a href="https://nebulacomponents.shop">nebulacomponents.shop</a></p>
 """
     return subject, html, text

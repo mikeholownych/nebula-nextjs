@@ -1,7 +1,7 @@
-# Nebula — 5-Shot Higgsfield Sequence Brief
+# Nebula - 5-Shot Higgsfield Sequence Brief
 # Foundation image: https://v3b.fal.media/files/b/0aa5d741/djmKpy_NAH1qu8Qxw6smp_sj7rr7cX.png
 # Use case: 15-second cinematic homepage hero loop
-# Status: READY TO EXECUTE — paste into Higgsfield when motion generation available
+# Status: READY TO EXECUTE - paste into Higgsfield when motion generation available
 
 ---
 
@@ -13,7 +13,7 @@ spilling onto dark desk. Left third empty for headline/CTA overlay. 16:9.
 
 ## The 5-Shot Sequence
 
-### Shot 1 — Hook (cold open)
+### Shot 1 - Hook (cold open)
 - **Higgsfield preset:** Crash Zoom
 - **Motion strength:** 55%
 - **Duration:** 2 seconds
@@ -23,7 +23,7 @@ spilling onto dark desk. Left third empty for headline/CTA overlay. 16:9.
 
 ---
 
-### Shot 2 — Reveal (slow build)
+### Shot 2 - Reveal (slow build)
 - **Higgsfield preset:** Slow Dolly In
 - **Motion strength:** 35%
 - **Duration:** 4 seconds
@@ -33,27 +33,27 @@ spilling onto dark desk. Left third empty for headline/CTA overlay. 16:9.
 
 ---
 
-### Shot 3 — Hero (the money shot)
+### Shot 3 - Hero (the money shot)
 - **Higgsfield preset:** Orbit (360)
 - **Motion strength:** 40%
 - **Duration:** 5 seconds
 - **Prompt:**
-  > A sleek dark monitor displaying a landing page score — glowing teal numbers on a near-black interface. Steam rises faintly from a coffee cup to the right. Monitor light casts shadows across a minimal workspace. Quiet authority. Photoreal, shallow depth of field, cinematic.
+  > A sleek dark monitor displaying a landing page score - glowing teal numbers on a near-black interface. Steam rises faintly from a coffee cup to the right. Monitor light casts shadows across a minimal workspace. Quiet authority. Photoreal, shallow depth of field, cinematic.
 - **Purpose:** The 360 orbit is the "product reveal" shot. This is what gets screenshotted and shared.
 
 ---
 
-### Shot 4 — Context (environment)
+### Shot 4 - Context (environment)
 - **Higgsfield preset:** Crane Down
 - **Motion strength:** 30%
 - **Duration:** 4 seconds
 - **Prompt:**
   > A wide dark desk at night, a single monitor glowing with a diagnostic dashboard, keyboard and coffee to the sides, nothing else. The shot descends from above to reveal the full workspace. Late-night solitude. Photoreal, shallow depth of field, cinematic.
-- **Purpose:** Shows the context — this is a founder working late, not a stock photo office. Adds emotional grounding before the exit.
+- **Purpose:** Shows the context - this is a founder working late, not a stock photo office. Adds emotional grounding before the exit.
 
 ---
 
-### Shot 5 — Exit (transition out)
+### Shot 5 - Exit (transition out)
 - **Higgsfield preset:** Whip Pan
 - **Motion strength:** 65%
 - **Duration:** 1 second
@@ -66,7 +66,7 @@ spilling onto dark desk. Left third empty for headline/CTA overlay. 16:9.
 ## Assembly order
 Shot 1 (2s) → Shot 2 (4s) → Shot 3 (5s) → Shot 4 (4s) → Shot 5 (1s) = **16 seconds total**
 
-For a seamless homepage loop: use Shot 3 (orbit) as standalone 5-second loop — same first and last frame if you feed the foundation image as both keyframes.
+For a seamless homepage loop: use Shot 3 (orbit) as standalone 5-second loop - same first and last frame if you feed the foundation image as both keyframes.
 
 ---
 
@@ -81,7 +81,7 @@ RED Komodo, 35mm anamorphic lens, soft monitor-glow practicals, near-black with 
 - [ ] Attach foundation image to every shot
 - [ ] Select preset from dropdown (do NOT write camera move in text prompt)
 - [ ] Set motion strength per shot (30–65%, never above 80%)
-- [ ] Re-roll each shot 2–3 times — third roll usually the keeper
+- [ ] Re-roll each shot 2–3 times - third roll usually the keeper
 - [ ] Upscale to 1080p before export
 - [ ] Export without audio (homepage loop needs silent video)
 

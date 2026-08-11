@@ -1,7 +1,7 @@
 import { createFAQPageSchema } from '@/app/lib/schema'
 
 const repairSprintAnswer =
-  'One landing page and one high-confidence audit finding. Nebula sends a tailored repair sprint after successful payment — exact copy, a code snippet, or a configuration change. No site access is required. You implement it yourself or hand it to your developer. Includes one same-scope re-audit within 30 days.'
+  'One landing page and one high-confidence audit finding. Nebula sends a tailored repair sprint after successful payment - exact copy, a code snippet, or a configuration change. No site access is required. You implement it yourself or hand it to your developer. Includes one same-scope re-audit within 30 days.'
 
 export const pricingFAQSchema = createFAQPageSchema([
   {
@@ -45,7 +45,7 @@ export const homeFAQSchema = createFAQPageSchema([
   },
   {
     question: 'Do you need access to my website to run the audit?',
-    answer: 'No. We audit the public page. Just paste your URL — no login, dashboard access, or code repository is needed for the free audit.',
+    answer: 'No. We audit the public page. Just paste your URL - no login, dashboard access, or code repository is needed for the free audit.',
   },
 ])
 
@@ -56,7 +56,7 @@ export const auditPageFAQSchema = createFAQPageSchema([
   },
   {
     question: 'How long does the landing page audit take?',
-    answer: 'Under 2 minutes. Paste your URL and results appear automatically — no email required to see your score and initial findings.',
+    answer: 'Under 2 minutes. Paste your URL and results appear automatically - no email required to see your score and initial findings.',
   },
   {
     question: 'What happens after the free audit?',

@@ -1,4 +1,4 @@
-"""Intent Scoring — Claude LLM judges buying trigger from visitor profile.
+"""Intent Scoring - Claude LLM judges buying trigger from visitor profile.
 
 Implements Stage 3 of the trigger-aware lead gen pipeline:
   Input: visitor_profile {company, pages_visited, time_spent_s, ...}
@@ -24,7 +24,7 @@ DB_PATH = Path(__file__).parent / "lead_state.db"
 
 def score_intent(visitor_profile: dict) -> dict:
     """Use Claude to score buying intent 0–100.
-    
+
     Args:
         visitor_profile: {
             "prospect_id": "acme_founder1",
@@ -35,7 +35,7 @@ def score_intent(visitor_profile: dict) -> dict:
             "cta_clicks": 2,
             "last_visit": "2026-08-09T14:30:00Z"
         }
-    
+
     Returns:
         {
             "prospect_id": "acme_founder1",
@@ -45,7 +45,7 @@ def score_intent(visitor_profile: dict) -> dict:
         }
     """
     import anthropic
-    
+
     prompt = f"""You are an intent-scoring agent. Given a visitor profile, score their buying intent 0–100.
 
 BUYING TRIGGER: "actively bleeding money on ads with zero conversions"
@@ -77,7 +77,7 @@ Examples of signals:
 Score generously for founders who show ANY two of the above signals.
 Be strict (< 50) only if engagement is truly minimal (single visit, < 30s).
 """
-    
+
     client = anthropic.Anthropic()
     response = client.messages.create(
         model="claude-3-5-sonnet-20241022",
@@ -86,7 +86,7 @@ Be strict (< 50) only if engagement is truly minimal (single visit, < 30s).
             {"role": "user", "content": prompt}
         ]
     )
-    
+
     text = response.content[0].text
     # Extract JSON from response
     try:
@@ -98,7 +98,7 @@ Be strict (< 50) only if engagement is truly minimal (single visit, < 30s).
             result = {"intent_score": 50, "reasoning": text, "buying_trigger_signals": []}
     except json.JSONDecodeError:
         result = {"intent_score": 50, "reasoning": text, "buying_trigger_signals": []}
-    
+
     result["prospect_id"] = visitor_profile.get("prospect_id")
     return result
 
@@ -107,12 +107,12 @@ def update_prospect_intent(prospect_id: str, intent_score: int, reasoning: str):
     """Update prospect's intent_score in lead_state.db."""
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    
+
     c.execute(
         "UPDATE prospects SET intent_score = ?, updated_at = CURRENT_TIMESTAMP WHERE prospect_id = ?",
         (intent_score, prospect_id)
     )
-    
+
     conn.commit()
     conn.close()
 
@@ -122,7 +122,7 @@ def get_high_intent_prospects(threshold=75) -> list[dict]:
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     c = conn.cursor()
-    
+
     c.execute(
         """
         SELECT p.prospect_id, p.domain, p.company_name, p.intent_score,
@@ -134,10 +134,10 @@ def get_high_intent_prospects(threshold=75) -> list[dict]:
         """,
         (threshold,)
     )
-    
+
     rows = c.fetchall()
     conn.close()
-    
+
     return [dict(row) for row in rows]
 
 
@@ -152,15 +152,15 @@ if __name__ == "__main__":
         "cta_clicks": 2,
         "last_visit": "2026-08-09T14:30:00Z"
     }
-    
+
     result = score_intent(profile)
     print(json.dumps(result, indent=2))
-    
+
     # Update DB
     if "prospect_id" in result:
         update_prospect_intent(result["prospect_id"], result["intent_score"], result.get("reasoning", ""))
         print(f"\nUpdated {result['prospect_id']} intent to {result['intent_score']}")
-    
+
     # List high-intent prospects
     high_intent = get_high_intent_prospects(threshold=75)
     print(f"\nHigh-intent prospects (≥75): {len(high_intent)}")

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reddit signal alerter — surfaces live trigger posts to Mike for manual reply.
+"""Reddit signal alerter - surfaces live trigger posts to Mike for manual reply.
 
 No auto-posting (Reddit account not configured in Zernio). This surfaces
 high-signal posts via Telegram so Mike can manually drop a value-first comment
@@ -23,14 +23,14 @@ TELEGRAM_TARGET = "telegram:5920497760"
 COMMENT_HINTS = {
     "roast_request": (
         "Value-first reply:\n"
-        '"Happy to look. I can run a structured 9-signal audit — specific findings rather than '
+        '"Happy to look. I can run a structured 9-signal audit - specific findings rather than '
         'subjective impressions. Run it yourself in ~90s: '
-        'https://nebulacomponents.com/audit?utm_source=reddit&utm_medium=manual — or drop the URL here."'
+        'https://nebulacomponents.com/audit?utm_source=reddit&utm_medium=manual - or drop the URL here."'
     ),
     "zero_conversions": (
         "Value-first reply:\n"
         '"The ad→page disconnect is usually the culprit. Headline/ad mismatch, CTA not visible above fold, '
-        'no social proof near the CTA — these account for most drops. Free 9-signal audit: '
+        'no social proof near the CTA - these account for most drops. Free 9-signal audit: '
         'https://nebulacomponents.com/audit?utm_source=reddit&utm_medium=manual"'
     ),
     "ads_not_working": (
@@ -85,7 +85,7 @@ def main():
         hint = COMMENT_HINTS.get(trigger, COMMENT_HINTS["zero_conversions"])
 
         msg = (
-            f"📌 Reddit trigger post — manual comment opportunity\n\n"
+            f"📌 Reddit trigger post - manual comment opportunity\n\n"
             f"Subreddit: {post.get('subreddit', '?')}\n"
             f"Title: {post.get('title', '')[:100]}\n"
             f"URL: {post.get('url', '')}\n\n"

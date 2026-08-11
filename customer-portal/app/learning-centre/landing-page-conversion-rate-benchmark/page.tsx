@@ -18,7 +18,7 @@ const articleSchema = createArticleSchema({
     'What is a good landing page conversion rate? The benchmarks vary by traffic source, offer type, and vertical. Here is how to read them without drawing wrong conclusions.',
   url: 'https://nebulacomponents.com/learning-centre/landing-page-conversion-rate-benchmark',
   publishedDate: '2026-07-21',
-  modifiedDate: '2026-07-21',
+  modifiedDate: '2026-08-10',
 })
 
 const faqSchema = {
@@ -63,6 +63,30 @@ const faqSchema = {
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'At least 500 paid traffic sessions to a single landing page before drawing diagnostic conclusions. Below that, variance is too high - a single week with unusual traffic composition can shift a 3% rate to 8% and back without the page changing at all. If you are below 500 sessions, focus on ensuring the 9 signals are in place structurally rather than optimising toward a number.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do you calculate landing page conversion rate?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Divide completed conversions by total visitors, then multiply by 100. Example: 50 conversions ÷ 2,000 visitors × 100 = 2.5% conversion rate. Ensure your analytics platform correctly attributes all conversions to the landing page-partial page views or bot traffic can skew results.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What\'s the difference between mobile and desktop landing page conversion rates?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Mobile typically converts 20-40% lower than desktop, though this varies by industry and offer type. E-commerce often shows the largest gap; B2B lead gen is smaller. When benchmarking, segment by device-a blended rate masks performance problems on one platform.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do you know if your conversion rate benchmark is outdated?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Industry benchmarks shift 2-4 times annually as competitive landscape changes. Use current-year data (last 6-12 months) from your vertical. If your data source doesn\'t specify publication date or sample size, treat it skeptically. Outdated benchmarks can lead to misaligned goals and missed optimization opportunities.',
       },
     },
   ],

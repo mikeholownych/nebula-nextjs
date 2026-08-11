@@ -15,7 +15,7 @@ export default function IndexOldPage() {
         }
       }
     };
-    
+
     const prog = document.getElementById('scroll-prog') as HTMLElement | null;
     const updateProg = () => {
       const scrolled = window.scrollY;
@@ -37,7 +37,7 @@ export default function IndexOldPage() {
       stickyBar?.classList.remove('visible');
       sbarDismissed = true;
     });
-    
+
     const updateStickyBar = () => {
       if (sbarDismissed || !stickyBar) return;
       if (window.scrollY > 400) stickyBar.classList.add('visible');
@@ -101,20 +101,20 @@ export default function IndexOldPage() {
         trigger_type: 'self_serve_url_submit',
         offer_variant: 'audit_first_free_kit'
       };
-      
+
       const submitBtn = document.getElementById('audit-submit-btn') as HTMLButtonElement | null;
       const result = document.getElementById('audit-result');
-      
+
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.textContent = 'Running…';
       }
-      
+
       if (result) {
         result.className = 'card result show';
         result.innerHTML = '<h2>Your audit is running…</h2><p>Checking clarity, CTA friction, trust proof, offer specificity.</p>';
       }
-      
+
       try {
         const resp = await fetch('/api/audit', {
           method: 'POST',
@@ -123,11 +123,11 @@ export default function IndexOldPage() {
         });
         const data = await resp.json();
         if (!resp.ok) throw new Error(data.error || 'Audit failed');
-        
+
         const issues = (data.top_issues || []).slice(0, 5).map((item: any) =>
           '<li><strong>' + item.dim + ':</strong> ' + item.issue + '<br><span class="micro">Fix: ' + item.fix + '</span></li>'
         ).join('');
-        
+
         if (result) {
           result.innerHTML = '<h2>Your audit is ready</h2><p><strong>Score:</strong> ' + data.score + '/10 · <strong>Grade:</strong> ' + data.grade + '</p><ul>' + issues + '</ul><p class="micro">A copy was emailed to you.</p>';
         }
@@ -150,7 +150,7 @@ export default function IndexOldPage() {
       const emailInput = document.getElementById('free-kit-email') as HTMLInputElement | null;
       const status = document.getElementById('free-kit-status');
       if (!emailInput || !status) return;
-      
+
       const email = emailInput.value.trim();
       if (!email.includes('@')) {
         status.style.display = 'block';
@@ -158,11 +158,11 @@ export default function IndexOldPage() {
         status.textContent = 'Please enter a valid email.';
         return;
       }
-      
+
       status.style.display = 'block';
       status.style.color = '#059669';
       status.textContent = 'Sending...';
-      
+
       try {
         const resp = await fetch('/api/free-kit', {
           method: 'POST',
@@ -175,7 +175,7 @@ export default function IndexOldPage() {
         emailInput.value = '';
       } catch (err: any) {
         status.style.color = '#ef4444';
-        status.textContent = '❌ ' + err.message + ' — Email ops@launchcrate.io';
+        status.textContent = '❌ ' + err.message + ' - Email ops@launchcrate.io';
       }
     });
 
@@ -193,7 +193,7 @@ export default function IndexOldPage() {
       const headline = document.getElementById('roi-headline');
       const detail = document.getElementById('roi-detail');
       const res = document.getElementById('roi-result');
-      if (headline) headline.textContent = 'Your page is leaving ' + fmt(gap) + '/mo — ' + fmt(gap * 12) + '/year.';
+      if (headline) headline.textContent = 'Your page is leaving ' + fmt(gap) + '/mo - ' + fmt(gap * 12) + '/year.';
       if (detail) detail.textContent = 'At ' + cvr + '% CVR: ' + fmt(revenue) + '/mo. +50% lift -> ' + fmt(improved) + '/mo.';
       if (res) (res as HTMLElement).style.display = 'block';
     };
@@ -302,7 +302,7 @@ const PAGE_CONTENT = `
       </div>
       <div style="padding:32px 24px;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);">
         <p style="font-weight:700;font-size:18px;margin-bottom:12px;color:#f7f8f8;">Agencies and consultants</p>
-        <p style="font-size:15px;color:#9ca3af;line-height:1.7;margin-bottom:20px;">You work with clients running paid ads. Add a conversion audit to your discovery process — or white-label the output. Scales to your whole book.</p>
+        <p style="font-size:15px;color:#9ca3af;line-height:1.7;margin-bottom:20px;">You work with clients running paid ads. Add a conversion audit to your discovery process - or white-label the output. Scales to your whole book.</p>
         <ul style="list-style:none;padding:0;margin:0;font-size:14px;color:#c8ced8;line-height:1.8;">
           <li style="padding:4px 0;">Data-backed audit for every client</li>
           <li style="padding:4px 0;">$147 Fix Pack as quick-win upsell</li>
@@ -330,7 +330,7 @@ const PAGE_CONTENT = `
       <div style="text-align:center;padding:32px 20px;background:rgba(255,255,255,0.02);border-radius:16px;border:1px solid rgba(255,255,255,0.06);">
         <div style="width:48px;height:48px;background:linear-gradient(135deg, #6ee7b7 0%, #34d399 100%);color:#08090a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;margin:0 auto 16px;">3</div>
         <p style="font-weight:700;font-size:17px;margin-bottom:8px;color:#f7f8f8;">Fix or hand off</p>
-        <p style="font-size:14px;color:#9ca3af;line-height:1.6;">Use the free insights yourself — or get the $147 Fix Pack delivered in 24h.</p>
+        <p style="font-size:14px;color:#9ca3af;line-height:1.6;">Use the free insights yourself - or get the $147 Fix Pack delivered in 24h.</p>
       </div>
     </div>
   </section>
@@ -347,19 +347,19 @@ const PAGE_CONTENT = `
 
       <label for="goal" style="margin-top:12px;">What is this page supposed to do?</label>
       <select id="goal" name="goal">
-        <option value="sales">Get a sale — visitor should pay on this page</option>
-        <option value="leads">Capture a lead — visitor should leave an email or number</option>
-        <option value="bookings">Book a call — visitor should schedule time</option>
-        <option value="signups">Drive a signup — visitor should create an account</option>
+        <option value="sales">Get a sale - visitor should pay on this page</option>
+        <option value="leads">Capture a lead - visitor should leave an email or number</option>
+        <option value="bookings">Book a call - visitor should schedule time</option>
+        <option value="signups">Drive a signup - visitor should create an account</option>
       </select>
 
-      <label for="visitor" style="margin-top:12px;">Who lands here? <span style="color:#9ca3af;font-weight:400;">(optional — sharpens the headline and CTA analysis)</span></label>
+      <label for="visitor" style="margin-top:12px;">Who lands here? <span style="color:#9ca3af;font-weight:400;">(optional - sharpens the headline and CTA analysis)</span></label>
       <input id="visitor" name="visitor" type="text" placeholder="e.g. overwhelmed founders running paid ads, $5K+/mo spend">
 
       <label for="tone" style="margin-top:12px;">What feeling should the page give? <span style="color:#9ca3af;font-weight:400;">(optional)</span></label>
       <input id="tone" name="tone" type="text" placeholder="e.g. calm and premium, or urgent and direct, or technical and trusted">
 
-      <label for="role" style="margin-top:12px;">Your role <span style="color:#9ca3af;font-weight:400;">(optional — changes the follow-up question)</span></label>
+      <label for="role" style="margin-top:12px;">Your role <span style="color:#9ca3af;font-weight:400;">(optional - changes the follow-up question)</span></label>
       <select id="role" name="role">
         <option value="">Prefer not to say</option>
         <option value="founder">Founder / CEO / Owner</option>
@@ -368,7 +368,7 @@ const PAGE_CONTENT = `
         <option value="developer">Developer / Engineer</option>
       </select>
 
-      <label for="monthly_spend" style="margin-top:12px;">Monthly ad spend <span style="color:#9ca3af;font-weight:400;">(optional — sizes the waste estimate)</span></label>
+      <label for="monthly_spend" style="margin-top:12px;">Monthly ad spend <span style="color:#9ca3af;font-weight:400;">(optional - sizes the waste estimate)</span></label>
       <select id="monthly_spend" name="monthly_spend">
         <option value="">Prefer not to say</option>
         <option value="500">Under $500/mo</option>
@@ -379,7 +379,7 @@ const PAGE_CONTENT = `
         <option value="30000">$20K+/mo</option>
       </select>
 
-      <label for="pain_point" style="margin-top:12px;">What's your biggest frustration right now? <span style="color:#9ca3af;font-weight:400;">(optional — helps us personalize the audit)</span></label>
+      <label for="pain_point" style="margin-top:12px;">What's your biggest frustration right now? <span style="color:#9ca3af;font-weight:400;">(optional - helps us personalize the audit)</span></label>
       <textarea id="pain_point" name="pain_point" rows="3" placeholder="e.g. 'Getting traffic but zero conversions', 'Visitors bounce in under 10 seconds', 'CVR dropped after changes', 'Ads cost $ but no sales'"></textarea>
 
       <p class="micro" style="margin-top:8px;">Your URL and email are used to generate, email, and log the audit. No resale. No spam.</p>
@@ -469,7 +469,7 @@ const PAGE_CONTENT = `
     <p><strong>Problem:</strong> Hero headline describes what the product is, not what the buyer gets.</p>
     <p><strong>Why it matters:</strong> Cold visitors decide in under 5 seconds whether the page is for them. A feature headline loses 40-60% of them before they scroll.</p>
     <p><strong>Fix:</strong> Replace "AI workflow platform for teams" with "Turn messy customer messages into support-ready replies in 30 seconds."</p>
-    <p><strong>Difficulty:</strong> Low — copy-only. <strong>Priority:</strong> 9/10.</p>
+    <p><strong>Difficulty:</strong> Low - copy-only. <strong>Priority:</strong> 9/10.</p>
     <p class="micro" style="margin-top:6px;">Every dimension in the audit returns the same structure: evidence → why it matters → the exact fix → difficulty rating.</p>
   </section>
 
@@ -490,7 +490,7 @@ const PAGE_CONTENT = `
 
     <!-- Free -->
     <div class="card" style="border: 2px solid var(--green);">
-      <span class="badge badge-green">Free — instant access</span>
+      <span class="badge badge-green">Free - instant access</span>
       <h2 style="margin-top:12px;">🎁 Landing Page Fix Kit</h2>
       <div class="price" style="color:var(--green);">$0</div>
       <p>For founders who want to apply fixes themselves today. The audit-to-implementation checklist in 5 pages.</p>
@@ -520,7 +520,7 @@ const PAGE_CONTENT = `
         <span style="margin-left:4px;">$147</span>
         <small>one-time</small>
       </div>
-      <p>Your audit → turned into implementation-ready fixes. Hero, CTA, trust proof, offer, FAQ — rewritten and prioritized.</p>
+      <p>Your audit → turned into implementation-ready fixes. Hero, CTA, trust proof, offer, FAQ - rewritten and prioritized.</p>
       <div style="margin:16px 0;">
         <div style="background:#f8fafc;border-radius:10px;padding:12px 14px;margin-bottom:10px;">
           <p style="font-weight:700;margin:0 0 6px;font-size:13px;color:#374151;">Stack value: $490 → <span style="color:#047857;">$147</span></p>
@@ -573,9 +573,9 @@ const PAGE_CONTENT = `
 
   <!-- ── RETAINER (after audit, not before) ── -->
   <section id="retainer" class="card" style="margin-top:var(--space-4);border:2px solid var(--green);">
-    <span style="display:inline-block;background:#d1fae5;color:#065f46;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:0.04em;">New — AI Ops Retainer</span>
+    <span style="display:inline-block;background:#d1fae5;color:#065f46;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:0.04em;">New - AI Ops Retainer</span>
     <h2 style="margin-top:12px;text-align:center;">Protect the savings. Stop redoing discovery.</h2>
-    <p style="font-size:14px;color:var(--muted);margin-bottom:16px;text-align:center;">Your audit proved a real dollar leak. That number stays real only if someone watches the page — month after month.</p>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:16px;text-align:center;">Your audit proved a real dollar leak. That number stays real only if someone watches the page - month after month.</p>
 
     <!-- Pricing Toggle -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
@@ -623,12 +623,12 @@ const PAGE_CONTENT = `
     <h2 style="color:#f87171;">⚠️ Who this is NOT for</h2>
     <p style="font-size:14px;color:#d1d5db;margin-bottom:16px;">If any of these sound like you, you'll churn. We'd rather you not join.</p>
     <ul style="margin:0;padding-left:20px;font-size:14px;line-height:1.9;color:#d1d5db;">
-      <li><strong style="color:#f87171;">You want someone to build it for you.</strong> We diagnose. You implement. Fix Pack gives you the copy and steps — not a done-for-you developer.</li>
+      <li><strong style="color:#f87171;">You want someone to build it for you.</strong> We diagnose. You implement. Fix Pack gives you the copy and steps - not a done-for-you developer.</li>
       <li><strong style="color:#f87171;">You haven't spent money on ads yet.</strong> No baseline = no leak to find. This is for operators who already burned cash on traffic that didn't convert.</li>
       <li><strong style="color:#f87171;">You're testing 47 hypotheses.</strong> We find the highest-leverage fix. If you need a 40-item optimization backlog, hire an agency for $5k/mo.</li>
       <li><strong style="color:#f87171;">You want a 37-page PDF report.</strong> You get actionable priorities ranked by dollar impact. No academic analysis, no "opportunities for improvement."</li>
     </ul>
-    <p style="margin-top:16px;font-size:13px;color:#9ca3af;">If those bullets describe you, Agent-J+ might be a better fit — they teach you to build automations yourself. We fix landing pages. <a href="https://agent-j-plus.com" style="color:var(--blue);">Check them out →</a></p>
+    <p style="margin-top:16px;font-size:13px;color:#9ca3af;">If those bullets describe you, Agent-J+ might be a better fit - they teach you to build automations yourself. We fix landing pages. <a href="https://agent-j-plus.com" style="color:var(--blue);">Check them out →</a></p>
   </section>
 
   <!-- ── FOUNDER FAQ THAT PREEMPTS SKEPTICISM ── -->
@@ -643,16 +643,16 @@ const PAGE_CONTENT = `
       <p class="micro">We do. The $147 fix pack is the entry point. The Growth Launch ($997) includes implementation deployment, monitoring, and a 60-day "no customer, we work free" guarantee. This page exists because $147 removes the "should I think about it?" hesitation. You can see if our output is real for the price of a nice dinner.</p>
     </div>
     <div class="faq-item">
-      <strong>$490 crossed out — did it ever cost that?</strong>
+      <strong>$490 crossed out - did it ever cost that?</strong>
       <p class="micro">That is the value of the deliverables you get: rewritten conversion copy ($150), prioritized fix list ($100), implementation instructions ($120), one revision ($60), and direct implementation option ($60). You're paying $147 for the bundle because the audit tool makes it efficient to produce at scale. The value is real even if the line-item prices are estimates.</p>
     </div>
     <div class="faq-item">
       <strong>Is this just AI-generated fluff?</strong>
-      <p class="micro">The audit follows a fixed conversion rubric — 5 dimensions, each scored against visible page evidence. The output is not a "make it pop" paragraph. It is: evidence → why it matters → the exact fix → difficulty rating. You can verify every recommendation against your own page in under 30 seconds.</p>
+      <p class="micro">The audit follows a fixed conversion rubric - 5 dimensions, each scored against visible page evidence. The output is not a "make it pop" paragraph. It is: evidence → why it matters → the exact fix → difficulty rating. You can verify every recommendation against your own page in under 30 seconds.</p>
     </div>
     <div class="faq-item">
       <strong>What if you can't implement the fix (Shopify, Webflow, etc.)?</strong>
-      <p class="micro">We return rewritten copy, layout recommendations, and step-by-step implementation instructions. If your platform is one we configure directly (Laravel, React, Next.js), we can do it with your authorization. If not, you hand the artifact to your developer — same fix, one hop.</p>
+      <p class="micro">We return rewritten copy, layout recommendations, and step-by-step implementation instructions. If your platform is one we configure directly (Laravel, React, Next.js), we can do it with your authorization. If not, you hand the artifact to your developer - same fix, one hop.</p>
     </div>
     <div class="faq-item">
       <strong>What if I want my money back 29 days from now?</strong>
@@ -667,7 +667,7 @@ const PAGE_CONTENT = `
       <div style="flex:1;min-width:200px;">
         <p style="font-weight:700;font-size:15px;margin:0 0 2px;color:#111827;">Mike H.</p>
         <p style="font-size:12px;color:#6b7280;margin:0 0 12px;">Founder · Nebula Components</p>
-        <p style="font-size:14px;color:#374151;line-height:1.65;margin:0;">I built the five-tool audit stack myself — the per-seat SaaS bills, the agency retainer that delivered a 40-page PDF nobody read, the "strategy call" that turned into a 3-month discovery engagement. I didn't want another tool. I wanted a diagnostic that said: <em>here is the specific thing broken, here is the exact copy to replace it with, here is how hard the fix is.</em> That's what this does. 60 seconds, $0. If you don't see a leak worth fixing, you get every cent back, no question asked.</p>
+        <p style="font-size:14px;color:#374151;line-height:1.65;margin:0;">I built the five-tool audit stack myself - the per-seat SaaS bills, the agency retainer that delivered a 40-page PDF nobody read, the "strategy call" that turned into a 3-month discovery engagement. I didn't want another tool. I wanted a diagnostic that said: <em>here is the specific thing broken, here is the exact copy to replace it with, here is how hard the fix is.</em> That's what this does. 60 seconds, $0. If you don't see a leak worth fixing, you get every cent back, no question asked.</p>
       </div>
     </div>
   </section>
@@ -675,7 +675,7 @@ const PAGE_CONTENT = `
   <!-- ── TRUST & SECURITY ── -->
   <section id="trust" class="card">
     <h2 style="margin-bottom: var(--space-4);">Why Trust Nebula Components?</h2>
-    
+
     <div class="grid" style="gap: var(--space-4);">
       <div class="card">
         <div style="display: flex; align-items: center; gap: var(--space-3);">
@@ -688,7 +688,7 @@ const PAGE_CONTENT = `
           </div>
         </div>
       </div>
-      
+
       <div class="card">
         <div style="display: flex; align-items: center; gap: var(--space-3);">
           <div style="width: 48px; height: 48px; background: #065f46; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">
@@ -700,7 +700,7 @@ const PAGE_CONTENT = `
           </div>
         </div>
       </div>
-      
+
       <div class="card">
         <div style="display: flex; align-items: center; gap: var(--space-3);">
           <div style="width: 48px; height: 48px; background: #065f46; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">
@@ -712,7 +712,7 @@ const PAGE_CONTENT = `
           </div>
         </div>
       </div>
-      
+
       <div class="card">
         <div style="display: flex; align-items: center; gap: var(--space-3);">
           <div style="width: 48px; height: 48px; background: #065f46; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">
@@ -738,12 +738,12 @@ const PAGE_CONTENT = `
     </div>
     <h2 style="margin-top:12px;">"30 Minutes or 30 Days" Unconditional Guarantee</h2>
     <p>Sign up for the $147 Conversion Fix Pack. Run your audit. Read the output.</p>
-    <p>If you do not see a conversion leak worth fixing — <strong>in the first 30 minutes or on day 29</strong> — email <strong>ops@launchcrate.io</strong> and say "refund please."</p>
+    <p>If you do not see a conversion leak worth fixing - <strong>in the first 30 minutes or on day 29</strong> - email <strong>ops@launchcrate.io</strong> and say "refund please."</p>
     <p>We return <strong>every single cent</strong> promptly and quietly. No reason needed. No "but the work was done." No weasel clauses.</p>
     <p style="margin-top:12px;padding:12px;background:rgba(34,197,94,0.15);border-radius:8px;font-size:13px;"><strong style="color:#22c55e;">For retainer clients:</strong> If we don't find a measurable leak to fix each month, you don't pay for that month. We track the fixes, you see the before/after, and if it didn't move the needle, we refund. Simple.</p>
     <p style="margin-top:8px;font-size:13px;color:#fbbf24;">Between me and the support team, average response time is under 60 minutes over a 24/7, 365-day period.</p>
     <p style="margin-top:16px;"><a class="btn" href="https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b" style="font-size:17px;padding:16px 36px;">Get the $147 Fix Pack →</a></p>
-    <p class="micro" style="margin-top:8px;">Or <a href="#audit-form-card" style="color:var(--blue);">run the free audit first</a> — no payment needed.</p>
+    <p class="micro" style="margin-top:8px;">Or <a href="#audit-form-card" style="color:var(--blue);">run the free audit first</a> - no payment needed.</p>
   </section>
 
 
@@ -789,7 +789,7 @@ const PAGE_CONTENT = `
       </div>
       <div style="background:#f9fafb;border-radius:10px;padding:20px 16px;border:1px solid #e5e7eb;">
         <p style="font-size:11px;color:#6b7280;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em;">Clarity Fix · 15min implementation</p>
-        <p style="font-size:14px;color:#374151;line-height:1.55;margin:0 0 8px;"><strong style="color:#059669;">Before:</strong> Headline "Solutions for modern businesses" — zero specificity. Agency quoting $3k rebrand.</p>
+        <p style="font-size:14px;color:#374151;line-height:1.55;margin:0 0 8px;"><strong style="color:#059669;">Before:</strong> Headline "Solutions for modern businesses" - zero specificity. Agency quoting $3k rebrand.</p>
         <p style="font-size:14px;color:#374151;line-height:1.55;margin:0 0 8px;"><strong style="color:#059669;">Fix:</strong> Rewrote to "We fix landing pages burning ad spend. $147. 24h. No call."</p>
         <p style="font-size:14px;color:#374151;line-height:1.55;margin:0 0 8px;"><strong style="color:#059669;">Result:</strong> Saved $3k upfront. Fixed in 15 minutes. Clear value prop.</p>
         <p style="font-size:12px;color:#6b7280;margin:0;">Tom H. · Agency owner</p>
@@ -828,7 +828,7 @@ const PAGE_CONTENT = `
   <!-- ── COMPLIANCE + SOVEREIGNTY ── -->
   <section class="card" style="border:2px solid #059669;">
     <h2>Your data, your model, your rules</h2>
-    <p style="margin-bottom:12px;color:var(--muted);font-size:14px;">Your audit runs on the model you choose — Claude, OpenAI, Gemini, or Mistral. No vendor lock-in. Every inference call logged, tamper-evident, production-ready for regulator review.</p>
+    <p style="margin-bottom:12px;color:var(--muted);font-size:14px;">Your audit runs on the model you choose - Claude, OpenAI, Gemini, or Mistral. No vendor lock-in. Every inference call logged, tamper-evident, production-ready for regulator review.</p>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
       <span style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:4px 12px;font-size:12px;font-weight:600;color:#065f46;">✓ SOC 2 practices</span>
       <span style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:4px 12px;font-size:12px;font-weight:600;color:#065f46;">✓ GDPR-ready</span>
@@ -836,14 +836,14 @@ const PAGE_CONTENT = `
       <span style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:4px 12px;font-size:12px;font-weight:600;color:#065f46;">✓ EU AI Act 2026</span>
       <span style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:4px 12px;font-size:12px;font-weight:600;color:#065f46;">✓ DORA audit rights</span>
     </div>
-    <p class="micro">Not certified against every standard — built for auditability from day one. <a href="mailto:ops@launchcrate.io?subject=Compliance docs" style="color:var(--blue);font-weight:600;">Agency partners: request compliance documentation →</a></p>
+    <p class="micro">Not certified against every standard - built for auditability from day one. <a href="mailto:ops@launchcrate.io?subject=Compliance docs" style="color:var(--blue);font-weight:600;">Agency partners: request compliance documentation →</a></p>
   </section>
 
   <!-- ── PRICE SHOCK COMPARISON (LinkArtemis steal) ── -->
   <section style="background:linear-gradient(135deg,#111827 0%,#1f2937 100%);color:#f3f4f6;padding:40px 20px;border-radius:16px;margin:32px 0;">
     <div style="max-width:860px;margin:0 auto;">
       <h2 style="text-align:center;margin:0 0 28px;font-size:28px;letter-spacing:-0.02em;">The Old Way → The Nebula Way</h2>
-      
+
       <div class="price-shock-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;">
         <!-- Old Way -->
         <div style="background:rgba(239,68,68,0.08);border:2px solid rgba(239,68,68,0.25);border-radius:12px;padding:24px;">
@@ -856,20 +856,20 @@ const PAGE_CONTENT = `
             <li>Generic "brand strategy" PDFs nobody reads</li>
           </ul>
         </div>
-        
+
         <!-- New Way -->
         <div style="background:rgba(110,231,183,0.08);border:2px solid rgba(110,231,183,0.3);border-radius:12px;padding:24px;">
           <div style="color:#6ee7b7;font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">✓ Nebula Way</div>
           <ul style="margin:0;padding-left:18px;font-size:15px;line-height:1.8;color:#d1d5db;">
             <li>Exact diagnosis of <strong style="color:#6ee7b7;">what's blocking orders</strong> in 60s</li>
             <li><strong style="color:#6ee7b7;">$147 self-serve fix pack</strong>, live in 24h</li>
-            <li>Specific Fixes: headline, CTA, trust, offer — <strong style="color:#6ee7b7;">not generic tools</strong></li>
+            <li>Specific Fixes: headline, CTA, trust, offer - <strong style="color:#6ee7b7;">not generic tools</strong></li>
             <li><strong style="color:#6ee7b7;">AI-optimized pages</strong> that get cited</li>
             <li>Implementation-ready copy, <strong style="color:#6ee7b7;">not "strategy"</strong></li>
           </ul>
         </div>
       </div>
-      
+
       <!-- Price Comparison Table -->
       <div style="background:rgba(17,24,39,0.6);border-radius:12px;padding:20px;border:1px solid rgba(255,255,255,0.1);">
         <table style="width:100%;border-collapse:collapse;font-size:14px;">
@@ -903,7 +903,7 @@ const PAGE_CONTENT = `
           </tbody>
         </table>
       </div>
-      
+
       <div style="text-align:center;margin-top:20px;font-size:14px;color:#9ca3af;">
         <strong style="color:#6ee7b7;">Pay once.</strong> Use forever. No monthly creep. <span style="color:#fbbf24;">30-day refund.</span>
       </div>
@@ -914,7 +914,7 @@ const PAGE_CONTENT = `
   <section class="card">
     <h2>How It Works</h2>
     <p>Our Diagnostic Discipline framework systematically identifies and fixes conversion leaks in your marketing funnel.</p>
-    
+
     <div class="grid">
       <div class="card">
         <div class="header">
@@ -922,21 +922,21 @@ const PAGE_CONTENT = `
         </div>
         <p>We start by deeply understanding your current marketing situation through a comprehensive discovery process.</p>
       </div>
-      
+
       <div class="card">
         <div class="header">
           <h3>Data Analysis & Diagnosis</h3>
         </div>
         <p>Using advanced AI-powered analysis, we identify the exact points where your marketing spend is leaking money.</p>
       </div>
-      
+
       <div class="card">
         <div class="header">
           <h3>Prescription & Implementation</h3>
         </div>
         <p>Based on our diagnosis, we create a tailored implementation plan with specific fixes for each identified issue.</p>
       </div>
-      
+
       <div class="card">
         <div class="header">
           <h3>Implementation & Monitoring</h3>
@@ -944,7 +944,7 @@ const PAGE_CONTENT = `
         <p>We help you implement the fixes and monitor results in real-time with ongoing optimization.</p>
       </div>
     </div>
-    
+
     <p style="margin-top: var(--space-4); text-align: center;">
       <a href="#audit-form-card" class="btn btn-green">See how it works with your page →</a>
     </p>
@@ -955,11 +955,11 @@ const PAGE_CONTENT = `
     <h2>Run your free audit</h2>
     <form id="audit-form">
       <strong>How is this different from an AI SDR tool?</strong>
-      <p class="micro">An AI SDR sends emails. This audits your landing page and tells you what to fix. Different job entirely. distinct from AI SDR tools — different job entirely.</p>
+      <p class="micro">An AI SDR sends emails. This audits your landing page and tells you what to fix. Different job entirely. distinct from AI SDR tools - different job entirely.</p>
     </div>
     <div class="faq-item">
       <strong>Do you need access to my website?</strong>
-      <p class="micro">Not for the free audit or the Fix Kit. For the $147 Fix Pack, access is optional — we request it only if direct implementation is part of the deliverable, and only with your explicit authorization.</p>
+      <p class="micro">Not for the free audit or the Fix Kit. For the $147 Fix Pack, access is optional - we request it only if direct implementation is part of the deliverable, and only with your explicit authorization.</p>
     </div>
     <div class="faq-item">
       <strong>Will changes go live automatically?</strong>
@@ -974,7 +974,7 @@ const PAGE_CONTENT = `
   <!-- ── FINAL CTA ── -->
   <div class="cta-block card">
     <h2>You are one audit away from knowing what is broken.</h2>
-    <p style="margin-bottom:18px;color:var(--muted);">Free audit takes 60 seconds. Fix pack ($147) turns it into implementation-ready copy. If it doesn't show you a leak worth fixing — 30 minutes or 30 days — you get every cent back, no questions asked.</p>
+    <p style="margin-bottom:18px;color:var(--muted);">Free audit takes 60 seconds. Fix pack ($147) turns it into implementation-ready copy. If it doesn't show you a leak worth fixing - 30 minutes or 30 days - you get every cent back, no questions asked.</p>
     <a class="btn btn-green" href="#audit-form-card" style="font-size:17px;padding:16px 36px;">Run my free audit →</a>
     <p class="micro" style="margin-top:10px;">No account required. No sales call. Unconditional guarantee on paid plans.</p>
   </div>
@@ -986,7 +986,7 @@ const PAGE_CONTENT = `
 <!-- ── FINAL CTA ── -->
 
 <!-- ══════════════════════════════════════════════════════════
-     P7 — ROI CALCULATOR: "How much is your leak costing you?"
+     P7 - ROI CALCULATOR: "How much is your leak costing you?"
      ══════════════════════════════════════════════════════════ -->
 <section style="padding:72px 20px;background:#0f172a;border-top:1px solid #1e293b;">
   <div style="max-width:560px;margin:0 auto;text-align:center;">
@@ -1021,7 +1021,7 @@ const PAGE_CONTENT = `
         <p id="roi-detail" style="font-size:13px;color:#94a3b8;margin:0 0 14px;"></p>
         <a class="btn btn-green" href="#audit-form-card"
           style="display:inline-block;font-size:14px;padding:10px 22px;">
-          Get the free audit — see exactly what to fix →
+          Get the free audit - see exactly what to fix →
         </a>
       </div>
     </div>
@@ -1031,7 +1031,7 @@ const PAGE_CONTENT = `
 
 
 <!-- ══════════════════════════════════════════════════════════
-     P12 — WITH / WITHOUT COMPARISON
+     P12 - WITH / WITHOUT COMPARISON
      ══════════════════════════════════════════════════════════ -->
 <section style="padding:72px 20px;background:#111827;border-top:1px solid #1e293b;">
   <div style="max-width:720px;margin:0 auto;">
@@ -1046,8 +1046,8 @@ const PAGE_CONTENT = `
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;">
           <li style="color:#94a3b8;font-size:14px;display:flex;gap:8px;"><span style="color:#f87171;flex-shrink:0;">✗</span>Guessing which headline to test next</li>
           <li style="color:#94a3b8;font-size:14px;display:flex;gap:8px;"><span style="color:#f87171;flex-shrink:0;">✗</span>Every ad dollar partially wasted on a leaky page</li>
-          <li style="color:#94a3b8;font-size:14px;display:flex;gap:8px;"><span style="color:#f87171;flex-shrink:0;">✗</span>Agency says "more traffic" — your CPA keeps climbing</li>
-          <li style="color:#94a3b8;font-size:14px;display:flex;gap:8px;"><span style="color:#f87171;flex-shrink:0;">✗</span>No score — no way to prioritize</li>
+          <li style="color:#94a3b8;font-size:14px;display:flex;gap:8px;"><span style="color:#f87171;flex-shrink:0;">✗</span>Agency says "more traffic" - your CPA keeps climbing</li>
+          <li style="color:#94a3b8;font-size:14px;display:flex;gap:8px;"><span style="color:#f87171;flex-shrink:0;">✗</span>No score - no way to prioritize</li>
           <li style="color:#94a3b8;font-size:14px;display:flex;gap:8px;"><span style="color:#f87171;flex-shrink:0;">✗</span>Months of iteration with no clear win</li>
         </ul>
       </div>
@@ -1056,10 +1056,10 @@ const PAGE_CONTENT = `
       <div style="background:#1e293b;border-radius:12px;padding:24px;border-top:3px solid #22c55e;">
         <p style="font-size:13px;font-weight:700;color:#22c55e;text-transform:uppercase;letter-spacing:.1em;margin:0 0 16px;">With your Nebula audit</p>
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;">
-          <li style="color:#f1f5f9;font-size:14px;display:flex;gap:8px;"><span style="color:#22c55e;flex-shrink:0;">✓</span>Scored teardown — worst leak ranked #1</li>
+          <li style="color:#f1f5f9;font-size:14px;display:flex;gap:8px;"><span style="color:#22c55e;flex-shrink:0;">✓</span>Scored teardown - worst leak ranked #1</li>
           <li style="color:#f1f5f9;font-size:14px;display:flex;gap:8px;"><span style="color:#22c55e;flex-shrink:0;">✓</span>Know the one fix that pays back fastest</li>
-          <li style="color:#f1f5f9;font-size:14px;display:flex;gap:8px;"><span style="color:#22c55e;flex-shrink:0;">✓</span>In your inbox in 60 seconds — before your next ad spend</li>
-          <li style="color:#f1f5f9;font-size:14px;display:flex;gap:8px;"><span style="color:#22c55e;flex-shrink:0;">✓</span>$147 to fix it — or ignore it free. Your call.</li>
+          <li style="color:#f1f5f9;font-size:14px;display:flex;gap:8px;"><span style="color:#22c55e;flex-shrink:0;">✓</span>In your inbox in 60 seconds - before your next ad spend</li>
+          <li style="color:#f1f5f9;font-size:14px;display:flex;gap:8px;"><span style="color:#22c55e;flex-shrink:0;">✓</span>$147 to fix it - or ignore it free. Your call.</li>
           <li style="color:#f1f5f9;font-size:14px;display:flex;gap:8px;"><span style="color:#22c55e;flex-shrink:0;">✓</span>No call. No contract. No agency markup.</li>
         </ul>
       </div>
@@ -1075,7 +1075,7 @@ const PAGE_CONTENT = `
 
 
 <!-- ══════════════════════════════════════════════════════════
-     P5 — PROOF FLOOD: before the final CTA
+     P5 - PROOF FLOOD: before the final CTA
      ══════════════════════════════════════════════════════════ -->
 <section style="padding:60px 20px;background:#0f172a;border-top:1px solid #1e293b;">
   <div style="max-width:720px;margin:0 auto;">
@@ -1147,15 +1147,15 @@ const PAGE_CONTENT = `
 <div id="slide-nudge" role="dialog" aria-label="One-time offer" aria-modal="false">
   <button class="nudge-close btn btn-tertiary" aria-label="Dismiss">✕</button>
   <span class="nudge-emoji">🔍</span>
-  <p><strong>Still deciding?</strong><br>The free audit is genuinely free — no payment, no obligation. 60 seconds and you'll know exactly where your page leaks.</p>
+  <p><strong>Still deciding?</strong><br>The free audit is genuinely free - no payment, no obligation. 60 seconds and you'll know exactly where your page leaks.</p>
   <a href="#audit-form-card" onclick="document.getElementById('slide-nudge').classList.remove('show')">Run my free audit →</a>
 </div>
 
   <!-- Cookie Consent Banner (GDPR/CCPA Compliant) -->
-  
+
 
   <!-- GSAP + ScrollTrigger for premium animations -->
-  
-  
-  
+
+
+
 `;

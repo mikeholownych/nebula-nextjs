@@ -1,4 +1,4 @@
-# Nebula — Cinematic Ad Production Brief
+# Nebula - Cinematic Ad Production Brief
 # Concept: "A founder discovers exactly how much their page is costing them."
 # Duration: 30 seconds | 6 shots × 5 seconds
 # Style anchor: RED Komodo, 35mm anamorphic lens, soft monitor-glow practicals, near-black with teal accent, light film grain, slight vignette
@@ -11,9 +11,9 @@
 |---|---|---|---|---|
 | 1 | 2s | Dark monitor. Stripe dashboard. $0. Night. Tension. | Crash Zoom | "You checked Stripe again." |
 | 2 | 4s | Same desk. Browser opens to nebulacomponents.com. URL typed slowly. | Slow Dolly In | "Paste your URL. Two minutes." |
-| 3 | 5s | Audit score appears — teal indicators lighting up one by one across the screen. | Crane Down | "Here's what every visitor felt when they landed." |
+| 3 | 5s | Audit score appears - teal indicators lighting up one by one across the screen. | Crane Down | "Here's what every visitor felt when they landed." |
 | 4 | 5s | Close-up: a single finding glowing on screen. Visitor-voice text visible. Teal accent. | Orbit (tight) | "Not your ads. This. Right here." |
-| 5 | 5s | Dollar amount appears — monthly bleed calculated. Screen glow intensifies slightly. | Bullet Time | "Eight hundred dollars a month. Gone." |
+| 5 | 5s | Dollar amount appears - monthly bleed calculated. Screen glow intensifies slightly. | Bullet Time | "Eight hundred dollars a month. Gone." |
 | 6 | 9s | Wide desk shot. Calm. Monitor still glowing. Coffee. Quiet authority. | Static lock-off | "Fix it for ninety-seven dollars. Done in forty-eight hours." |
 
 **Total:** 30 seconds
@@ -38,7 +38,7 @@ nebulacomponents.com
 
 ---
 
-## VO Script — Marked Up for Recording
+## VO Script - Marked Up for Recording
 
 Pause markers: · = short breath (0.3s) · · = held pause (0.6s) · · · = full stop (1s)
 Stress: CAPS
@@ -74,10 +74,10 @@ nebula · components · dot com.
 > Dark workspace at night, browser open to a minimal landing page audit tool interface, URL being entered in an address bar, teal UI elements, focus on the monitor. RED Komodo, 35mm anamorphic lens, soft monitor-glow practicals, near-black with teal accent, light film grain, slight vignette. Photoreal, shallow depth of field. 16:9.
 
 **Shot 3:**
-> Close-up of a monitor showing an audit score with teal indicators lighting up in sequence — 9 rows of pass/fail signals. The room is otherwise dark. Quiet satisfaction building. RED Komodo, 35mm anamorphic lens, soft monitor-glow practicals, near-black with teal accent, light film grain, slight vignette. Photoreal, shallow depth of field. 16:9.
+> Close-up of a monitor showing an audit score with teal indicators lighting up in sequence - 9 rows of pass/fail signals. The room is otherwise dark. Quiet satisfaction building. RED Komodo, 35mm anamorphic lens, soft monitor-glow practicals, near-black with teal accent, light film grain, slight vignette. Photoreal, shallow depth of field. 16:9.
 
 **Shot 4:**
-> Close-up of a single paragraph of text on a dark screen — a conversion finding written in plain emotional language, teal accent glow, nothing else in frame. Stark. RED Komodo, 35mm anamorphic lens, soft monitor-glow practicals, near-black with teal accent, light film grain, slight vignette. Photoreal, shallow depth of field. 16:9.
+> Close-up of a single paragraph of text on a dark screen - a conversion finding written in plain emotional language, teal accent glow, nothing else in frame. Stark. RED Komodo, 35mm anamorphic lens, soft monitor-glow practicals, near-black with teal accent, light film grain, slight vignette. Photoreal, shallow depth of field. 16:9.
 
 **Shot 5:**
 > Dark monitor. A dollar amount displayed large: "$847/month" in near-white on near-black, teal underline. The only light is the screen. No other context. Heavy. RED Komodo, 35mm anamorphic lens, soft monitor-glow practicals, near-black with teal accent, light film grain, slight vignette. Photoreal, shallow depth of field. 16:9.

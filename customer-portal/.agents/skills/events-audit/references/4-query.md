@@ -2,13 +2,13 @@
 
 **Read ONLY this file.** Do not read any other reference file until this one tells you to.
 
-Pull 30-day volume and `last_seen` for every event the inventory references. The SQL filters to inventory event names — orphan detection is intentionally out of scope (PostHog projects often span multiple repos, so events without a code match are usually noise from another codebase). After merging, resort `rows[]` by `volume_30d` so the report's by-event table naturally surfaces highest-impact events first.
+Pull 30-day volume and `last_seen` for every event the inventory references. The SQL filters to inventory event names - orphan detection is intentionally out of scope (PostHog projects often span multiple repos, so events without a code match are usually noise from another codebase). After merging, resort `rows[]` by `volume_30d` so the report's by-event table naturally surfaces highest-impact events first.
 
-**Soft-degrade if MCP isn't available.** If the project is wrong, the connection fails, or the query errors, do not abort the run. Set a top-level flag in the inventory and continue to step 5 — the report renders with code-side findings only and a disclaimer at the top.
+**Soft-degrade if MCP isn't available.** If the project is wrong, the connection fails, or the query errors, do not abort the run. Set a top-level flag in the inventory and continue to step 5 - the report renders with code-side findings only and a disclaimer at the top.
 
 ## Output discipline
 
-This step is one MCP call, one in-place merge, one `Write`. Do not re-emit the entire inventory in assistant text before writing — streaming the JSON into the conversation before invoking `Write` wastes output tokens. The flow is:
+This step is one MCP call, one in-place merge, one `Write`. Do not re-emit the entire inventory in assistant text before writing - streaming the JSON into the conversation before invoking `Write` wastes output tokens. The flow is:
 
 1. Read the inventory.
 2. Build the IN-list and call `execute-sql`.
@@ -28,22 +28,22 @@ Emit:
 
 ## How to call PostHog MCP tools
 
-The PostHog MCP server exposes a single `exec` tool. Every PostHog operation is driven by a CLI-style command string passed in its `command` parameter — the tool may be namespaced by the host (`mcp__posthog__exec`, `mcp__posthog-wizard__exec`), but the command grammar is the same. Tool names and schemas are not predictable, so discover and inspect before you call.
+The PostHog MCP server exposes a single `exec` tool. Every PostHog operation is driven by a CLI-style command string passed in its `command` parameter - the tool may be namespaced by the host (`mcp__posthog__exec`, `mcp__posthog-wizard__exec`), but the command grammar is the same. Tool names and schemas are not predictable, so discover and inspect before you call.
 
-**Grammar** — run in this order:
+**Grammar** - run in this order:
 
 ```text
 exec({ "command": "search <regex>" })      # find tools by name/title/description; `tools` lists them all
-exec({ "command": "info <tool_name>" })     # REQUIRED before every call — description + input schema
+exec({ "command": "info <tool_name>" })     # REQUIRED before every call - description + input schema
 exec({ "command": "schema <tool_name> <field_path>" })  # drill into a field the schema flags with a `hint`
 exec({ "command": "call <tool_name> <json_input>" })    # run the tool
 ```
 
-Running `info <tool_name>` before `call <tool_name>` is mandatory, the same way you read a file before editing it. `info` returns the full schema for simple tools; for large ones it summarizes and attaches `hint` entries pointing at fields to drill into with `schema`. Dot-notation descends objects (`query.source`), array items (`series.0.properties`), and unions. Never guess the structure of a field that carries a hint — drill first.
+Running `info <tool_name>` before `call <tool_name>` is mandatory, the same way you read a file before editing it. `info` returns the full schema for simple tools; for large ones it summarizes and attaches `hint` entries pointing at fields to drill into with `schema`. Dot-notation descends objects (`query.source`), array items (`series.0.properties`), and unions. Never guess the structure of a field that carries a hint - drill first.
 
-Every PostHog tool goes through `exec` this way — there is no separate named tool to call directly. The inner tool names and JSON payloads below are what you pass to `call`.
+Every PostHog tool goes through `exec` this way - there is no separate named tool to call directly. The inner tool names and JSON payloads below are what you pass to `call`.
 
-**Errors** carry a suggestion and similar tool names — read it before retrying. If a name isn't found it may have been renamed; run `search <pattern>` or `tools` again to find the current one.
+**Errors** carry a suggestion and similar tool names - read it before retrying. If a name isn't found it may have been renamed; run `search <pattern>` or `tools` again to find the current one.
 
 | MCP tool | When | Use |
 |----------|------|-----|
@@ -56,7 +56,7 @@ The active project comes from the wizard session – don't pick or switch projec
 
 ### a. Confirm the project
 
-The active project is whatever the wizard's MCP session targets. If you can't confirm it, or the user said this codebase ships to a different project, **don't abort** — set `mcp_unavailable_reason: "project mismatch"` (see step (g)) and skip to (g) without running the query.
+The active project is whatever the wizard's MCP session targets. If you can't confirm it, or the user said this codebase ships to a different project, **don't abort** - set `mcp_unavailable_reason: "project mismatch"` (see step (g)) and skip to (g) without running the query.
 
 ### b. Build the event-name list
 
@@ -108,7 +108,7 @@ Set top-level keys on the inventory based on what happened:
 | Outcome | `mcp_available` | `mcp_skipped_reason` |
 |---|---|---|
 | Query ran successfully and returned rows | `true` | `null` |
-| Query ran but the result was empty (zero matching events in last 30d) | `true` | `"empty result — likely wrong project, but proceeding"` |
+| Query ran but the result was empty (zero matching events in last 30d) | `true` | `"empty result - likely wrong project, but proceeding"` |
 | IN-list was empty (every capture is dynamic) | `true` | `"no resolved event names to query"` |
 | Project couldn't be confirmed in (a) | `false` | `"project mismatch"` |
 | `execute-sql` errored out (misconfigured project, schema drift, network) | `false` | `"execute-sql failed: <short reason>"` |
@@ -120,13 +120,13 @@ When `mcp_available: false`, leave every row's `volume_30d: null`, `last_seen: n
 
 Set top-level `wrapper_likely: true` when all three hold:
 
-- `infrastructure_event_ratio >= 0.8` — where the ratio is (`rows[]` with `call_kind == "capture"`, `is_dynamic == false`, and `event_name` starting with `$`) ÷ (total resolved capture rows)
+- `infrastructure_event_ratio >= 0.8` - where the ratio is (`rows[]` with `call_kind == "capture"`, `is_dynamic == false`, and `event_name` starting with `$`) ÷ (total resolved capture rows)
 - `wrapper_aliases[]` is empty
 - A PostHog SDK was detected in step 1's manifest scan
 
 Otherwise `wrapper_likely: false`.
 
-`Write` the inventory back. Continue to step 5 in every case — never abort here.
+`Write` the inventory back. Continue to step 5 in every case - never abort here.
 
 ### h. Resolve the phase
 
@@ -141,7 +141,7 @@ Flip the `query-volume` row based on what happened:
       {
         "id": "query-volume",
         "status": "warning",
-        "details": "PostHog MCP unavailable — report will render without 30-day volume data"
+        "details": "PostHog MCP unavailable - report will render without 30-day volume data"
       }
     ]
   }
@@ -152,7 +152,7 @@ Don't abort. Step 5 reads the inventory's `mcp_available` flag and renders accor
 ### i. Notes for the orchestrator
 
 - **Don't retry on failure.** One attempt; if it fails, soft-degrade. The wizard logs the failure reason and the user can re-run with a corrected project.
-- **Don't try to recover by guessing a different project.** The active project is the wizard's session — switching it is out of scope.
+- **Don't try to recover by guessing a different project.** The active project is the wizard's session - switching it is out of scope.
 
 ---
 

@@ -29,7 +29,7 @@ _DB_URL = os.getenv(
 # ── Scoring weights ───────────────────────────────────────────────────────────
 
 TRIGGERS = {
-    # Intent signals — what they did
+    # Intent signals - what they did
     "ran_audit":              20,  # ran the free audit
     "viewed_results":         15,  # viewed results page (>30s)
     "clicked_fix_pack_cta":   25,  # clicked the $97 CTA
@@ -41,7 +41,7 @@ TRIGGERS = {
     "returned_to_site":       15,  # second visit to audit page
     "subscribed_newsletter":  10,
     "downloaded_magnet":      10,
-    # Intent amplifiers — what we know about them
+    # Intent amplifiers - what we know about them
     "high_audit_score_delta": 15,  # low score + ad spend context = more pain
     "objection_price":        -5,  # price objection = lower near-term score
     "replied_to_email":       20,  # any reply = high intent

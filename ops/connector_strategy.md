@@ -5,7 +5,7 @@
 ## What a connector is
 A connector is someone who:
 1. Already has a network of Nebula's ICP (founders spending on ads, zero conversions)
-2. Has high trust with that network (not just reach — trust)
+2. Has high trust with that network (not just reach - trust)
 3. Can naturally recommend Nebula's free audit as value-add to their audience
 
 ## Nebula's connector types (priority order)
@@ -32,7 +32,7 @@ These people already know Mike:
 - Past consulting clients → anyone who hired Mike has a product and likely runs ads
 
 ## The pitch (for Tier 1 connectors)
-Subject: Partnership — your students' #1 reason ads don't convert
+Subject: Partnership - your students' #1 reason ads don't convert
 
 Hey [Name],
 
@@ -42,25 +42,25 @@ I've been following your [course/content] on Facebook ads optimization. One patt
 
 We've audited 158 landing pages and found the same 5 issues causing that exact problem. I built nebulacomponents.com as a free diagnostic tool for exactly this situation.
 
-I'd like to set you up as a partner — when your students hit that wall, you send them to nebulacomponents.com/audit. If they buy the $97 fix pack, you get 25%.
+I'd like to set you up as a partner - when your students hit that wall, you send them to nebulacomponents.com/audit. If they buy the $97 fix pack, you get 25%.
 
 Worth a 15-min call?
 
-— Mike Holownych
+- Mike Holownych
 Founder, Nebula Components | Enterprise AI governance lead, TMX Group
 
 ## Immediate targets (3 connector pitches to send this week)
 
-### Target 1: John Portalios — Meta Ads & Claude for Shopify (Skool)
+### Target 1: John Portalios - Meta Ads & Claude for Shopify (Skool)
 - Community: skool.com/meta-shopify
 - Why: Shopify founders running Meta ads, exact ICP
 - Approach: Skool DM or find email
-- Angle: "Your students' #1 problem is ads working but page not converting — free diagnostic tool"
+- Angle: "Your students' #1 problem is ads working but page not converting - free diagnostic tool"
 
-### Target 2: (TBD — identify via YouTube Meta ads course creators)
+### Target 2: (TBD - identify via YouTube Meta ads course creators)
 - Look for: channels with 50K+ subs, active Discord/Skool community, posts about landing page issues
 
-### Target 3: (TBD — identify via IH/HN Meta ads community discussion)
+### Target 3: (TBD - identify via IH/HN Meta ads community discussion)
 - Look for: people giving advice on Meta ads optimization in IH threads
 
 ## Implementation
@@ -87,7 +87,7 @@ Founder, Nebula Components | Enterprise AI governance lead, TMX Group
 
 ---
 
-## When the first customer closes — document for RAG
+## When the first customer closes - document for RAG
 
 After first $97 fix pack purchase, immediately document:
 1. Their URL
@@ -107,13 +107,13 @@ This powers the future RAG sales agent that answers:
 
 ---
 
-## Phase 3 — Paid Ads Preparation (Neil Gambit database)
+## Phase 3 - Paid Ads Preparation (Neil Gambit database)
 
 When first purchase confirmed + funnel CVR measured, activate paid ads.
 
-**First ad to test:** Static image contrast — lift WithWithout component directly.
-- Hook: "Most founders optimize their ads. Nobody optimizes what happens after the click."  
-- Creative: Left (without Nebula) vs. Right (with Nebula) — already built in WithWithout.tsx
+**First ad to test:** Static image contrast - lift WithWithout component directly.
+- Hook: "Most founders optimize their ads. Nobody optimizes what happens after the click."
+- Creative: Left (without Nebula) vs. Right (with Nebula) - already built in WithWithout.tsx
 - CTA: Free audit link
 
 **Second ad to test (UGC-style):** Lightbulb/reframe narrative

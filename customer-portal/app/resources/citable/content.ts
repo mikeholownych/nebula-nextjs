@@ -423,7 +423,7 @@ export const citableRoutes: readonly CitableRoute[] = [
     kind: 'overview',
     status: 'published',
     path: CITABLE_OVERVIEW_PATH,
-    title: 'Citable — Evidence for Search and AI Readiness',
+    title: 'Citable - Evidence for Search and AI Readiness',
     h1: 'Citable',
     eyebrow: 'Open-source evidence layer',
     description:

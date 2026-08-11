@@ -31,11 +31,11 @@ Connection Request (≤200 chars):
 "Your post on <topic> caught my eye – especially the point about <insight>. I help <ICP> achieve <outcome>. Would love to connect."
 
 Value‑First DM (Day 2):
-"Hey <Name> — quick one. Based on your recent <post/company stage>, I thought this <framework/resource> might be useful: <1‑sentence value>. No ask – just wanted to put it on your radar."
+"Hey <Name> - quick one. Based on your recent <post/company stage>, I thought this <framework/resource> might be useful: <1‑sentence value>. No ask – just wanted to put it on your radar."
 
 Soft Ask (after reply):
 "That’s exactly the problem we solve for <niche> founders. We’ve helped <client type> go from <X> to <Y> in <timeframe>. Would a 20‑min call be worth it to see if it applies to you?"
-``` 
+```
 
 ---
 

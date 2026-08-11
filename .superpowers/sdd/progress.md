@@ -52,13 +52,13 @@
 
 ## Task 9 verification receipts
 
-- `npm run ci`: passed — typecheck, lint, evidence/public-proof/Citable/intelligence projections, production build, 33 Jest suites / 301 tests, and 44 Playwright tests.
-- `node scripts/validate-governance.mjs`: passed — 31 checks, 2 existing warnings, 0 failures.
-- `/home/mike/nebula/venv/bin/python3 -m pytest tests/test_deliver_prompt_pack.py tests/test_agentmail_release_gate.py tests/test_outbound_release_gate.py -q`: passed — 51 tests.
+- `npm run ci`: passed - typecheck, lint, evidence/public-proof/Citable/intelligence projections, production build, 33 Jest suites / 301 tests, and 44 Playwright tests.
+- `node scripts/validate-governance.mjs`: passed - 31 checks, 2 existing warnings, 0 failures.
+- `/home/mike/nebula/venv/bin/python3 -m pytest tests/test_deliver_prompt_pack.py tests/test_agentmail_release_gate.py tests/test_outbound_release_gate.py -q`: passed - 51 tests.
 - `git diff --check`: passed.
-- Independent final code review: approved — no Critical, Important, or Minor findings.
+- Independent final code review: approved - no Critical, Important, or Minor findings.
 - Lighthouse CI desktop lab profile (three runs per route, isolated branch server): passed all four routes at the fixed performance score ≥ 0.90, LCP ≤ 2.5 seconds, CLS ≤ 0.10, and TBT ≤ 200 milliseconds budgets. The explicit desktop profile prevents noisy shared-runner simulated-mobile timing from being misrepresented as field performance; mobile rendering remains covered by 22 Playwright cases.
-- Production sitemap-route checker: three consecutive runs against `https://nebulacomponents.shop/sitemap.xml` passed — 68/68 routes returned HTTP 200 with nonempty bodies on every pass.
-- Production Learning Centre direct-route check: passed — all 45 article routes returned HTTP 200.
+- Production sitemap-route checker: three consecutive runs against `https://nebulacomponents.shop/sitemap.xml` passed - 68/68 routes returned HTTP 200 with nonempty bodies on every pass.
+- Production Learning Centre direct-route check: passed - all 45 article routes returned HTTP 200.
 - Homepage messaging integrity: `customer-portal/app/page.tsx` is unchanged from `main` and retains “Your ads worked. Your page didn't let them.”
 - Deployment: not performed.

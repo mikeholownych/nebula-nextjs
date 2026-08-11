@@ -18,7 +18,7 @@ def send(to_email, subject, text, html):
     except Exception as e:
         return False
 
-# Target 1: r/microsaas "Solo founder — how do you actually find your first customers?"
+# Target 1: r/microsaas "Solo founder - how do you actually find your first customers?"
 # Target 2: r/SideProject "6 weeks, 330 visitors, 0 sales"
 # Target 3: r/microsaas "The micro-SaaS trap nobody warns you about"
 # Target 4: r/microsaas "We won startup competitions but no users"
@@ -30,7 +30,7 @@ def send(to_email, subject, text, html):
 targets = [
     # Person 1: From the "I can build a product in a week" thread - mentioned r/microsaas
     ("rkotcher@gmail.com", "there", "saw you on IndieHackers talking about the struggle to get users"),
-    
+
     # People we already have emails for but will re-target with new angle
     ("matze.schedel@gmail.com", "Matze", "you left a $900k ARR startup to build something new"),
     ("shadowroot47@outlook.com", "there", "you're acquiring micro-SaaS products"),
@@ -46,11 +46,11 @@ targets = [
 for email, name, context in targets:
     text = f"""Hey {name},
 
-I saw you {context}. 
+I saw you {context}.
 
 Quick question: are you stuck trying to get your first customers right now?
 
-I'll make you a bet: I'll build you a complete customer acquisition setup — landing page, outreach sequence, and lead list — in 24 hours. You get your first customer conversation within 7 days, or I refund every penny. 
+I'll make you a bet: I'll build you a complete customer acquisition setup - landing page, outreach sequence, and lead list - in 24 hours. You get your first customer conversation within 7 days, or I refund every penny.
 
 No monthly fee. No contract. Just one focused week to get you unstuck.
 
@@ -58,8 +58,8 @@ Run the self-serve audit: https://nebulacomponents.shop/audit.html
 
 Best,
 """
-    html = f"<p>Hey {name},</p><p>I saw you {context}.</p><p><strong>Quick question: stuck trying to get your first customers?</strong></p><p>I'll build you a complete customer acquisition setup — landing page, outreach sequence, and lead list — in <strong>24 hours</strong>. You get a customer conversation within 7 days or I refund every penny.</p><p>Run the self-serve audit: https://nebulacomponents.shop/audit.html</p><p>Implementation checkout: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b</p>"
-    
+    html = f"<p>Hey {name},</p><p>I saw you {context}.</p><p><strong>Quick question: stuck trying to get your first customers?</strong></p><p>I'll build you a complete customer acquisition setup - landing page, outreach sequence, and lead list - in <strong>24 hours</strong>. You get a customer conversation within 7 days or I refund every penny.</p><p>Run the self-serve audit: https://nebulacomponents.shop/audit.html</p><p>Implementation checkout: https://buy.stripe.com/6oUfZh7M87YM5TPgEa43S0b</p>"
+
     ok = send(email, f"Quick question about getting your first customers", text, html)
     print(f"{'[SENT]' if ok else '[FAIL]'} {email}")
     time.sleep(0.5)

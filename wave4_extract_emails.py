@@ -7,7 +7,7 @@ then scrapes each site for a contact email.
 Fallback chain (Illingworth "How to Find Anyone's Email Address"):
   1. Scrape /contact and /about pages for mailto links
   2. Permutation guess (first.last@domain, flast@domain, first@domain…)
-     — only if domain passes MX check
+     - only if domain passes MX check
   3. LinkedIn DM queue (log_linkedin_fallback) for zero-email leads
 """
 import json, time, re, sys
@@ -85,7 +85,7 @@ def extract_site_urls(text):
 
 def find_contact_email(site_url):
     base = site_url.rstrip('/')
-    # Only try root and /contact — avoid hammering
+    # Only try root and /contact - avoid hammering
     for page in [base, base + '/contact', base + '/about']:
         html = fetch_html(page)
         if not html:
@@ -106,7 +106,7 @@ def build_outreach_email(r):
     title = r['title'][:80]
     site = r.get('site', r.get('site_urls', [''])[0] if r.get('site_urls') else '')
 
-    subject = f"Saw your Reddit post — quick landing page observation"
+    subject = f"Saw your Reddit post - quick landing page observation"
     body = f"""Hey,
 
 Came across your post: "{title}"
@@ -117,7 +117,7 @@ If your page is getting traffic but not converting, I can usually identify the t
 
 Would it be useful? Reply with your URL and I'll get it done today.
 
-— Mike
+- Mike
 nebulacomponents.shop"""
     return subject, body
 
@@ -164,7 +164,7 @@ def main():
                 for su in site_urls[:2]:
                     domain = re.sub(r'^https?://', '', su).split('/')[0].lstrip('www.')
                     if not mx_exists(domain):
-                        print(f"  — {domain}: no MX, skip permutation")
+                        print(f"  - {domain}: no MX, skip permutation")
                         continue
                     candidates = permute(author, "", domain) if author else []
                     if not candidates:

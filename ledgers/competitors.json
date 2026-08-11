@@ -29,12 +29,12 @@
     "source": "zamp.ai website + blog, July 2026"
   },
   "oxygen": {
-    "headline": "GTM infrastructure engineered to 10x revenue — run your entire GTM from Claude Code",
+    "headline": "GTM infrastructure engineered to 10x revenue - run your entire GTM from Claude Code",
     "problem_claimed": "Go-to-market is too fragmented: separate tools for data, enrichment, sequences, CRM; AI coding agents need a durable GTM workspace",
     "icp_description": "Technical founders, GTM engineers, small revenue teams using Claude Code/Codex",
     "pricing": "Self-serve with free tier. Free → $99/mo → $249/mo → $749/mo → $2k/mo managed. No sales call needed.",
     "messaging_angles": [
-      "AI-native GTM workspace — database + enrichment + sequences + CRM",
+      "AI-native GTM workspace - database + enrichment + sequences + CRM",
       "Waterfall enrichment across 6 providers",
       "Multichannel sequences (email + phone + LinkedIn)",
       "Variable-aware AI prompts per lead",

@@ -2,7 +2,7 @@
 
 - Run: `20260725T212148-audit---scope-gkjc`
 - Command: `audit --scope`
-- Target: url — https://nebulacomponents.shop
+- Target: url - https://nebulacomponents.shop
 - Timestamp: 2026-07-25T21:21:48.592Z
 - Tool version: 1.13.1; commit: c43f0c7844a6ba57aea7b15d98afad5f6b47ea88 (dirty)
 
@@ -234,9 +234,9 @@ These states are not combined into an AI visibility score. Readiness does not es
 - Remediation: Record an explicit allow/block decision, owner, and legal rationale for each training-purpose crawler of vendors whose search crawlers are allowed.
 - Verify: Confirm a crawler registry entry with purpose model_training exists for the vendor. (rerun `CRAWL-002`)
 
-### MEDIUM · PAGE-002 · 2 pages share the title "Landing Page Audit — Find What’s Killing Your Ads | Nebula"
+### MEDIUM · PAGE-002 · 2 pages share the title "Landing Page Audit - Find What’s Killing Your Ads | Nebula"
 
-- Subject: `title:Landing Page Audit — Find What’s Killing Your Ads | Nebula`
+- Subject: `title:Landing Page Audit - Find What’s Killing Your Ads | Nebula`
 - Type: deterministic_observation; confidence: confirmed; deterministic: true
 - Impact: ranking:medium
 - Evidence:
@@ -251,7 +251,7 @@ These states are not combined into an AI visibility score. Readiness does not es
 - Type: probabilistic_inference; confidence: medium; deterministic: false
 - Impact: citation:medium, legal:medium, reputational:medium
 - Evidence:
-  - passage: "Yes, directly. A 2017 Google/SOASTA study found that 53% of mobile users abandoned pages taking longer than 3 seconds to load — and that figure is from 2017, be"
+  - passage: "Yes, directly. A 2017 Google/SOASTA study found that 53% of mobile users abandoned pages taking longer than 3 seconds to load - and that figure is from 2017, be"
 - Remediation: State the baseline, measurement period, and test conditions adjacent to the number, or remove the figure.
 - Verify: Confirm baseline/conditions appear adjacent to each relative quantity. (rerun `ANS-005`)
 - Limitations: heuristic detection; verify manually before acting

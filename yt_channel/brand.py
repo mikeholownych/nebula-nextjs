@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Nebula Audits brand identity — vidIQ 'Primal Branding' framework.
+"""Nebula Audits brand identity - vidIQ 'Primal Branding' framework.
 
 From "The Secret Behind YouTube's Biggest Channels" (pgvFAwznds0,
 vidIQ, May 2026; Patrick Hanlon's primal branding: Nike, Apple, Red
 Bull, PewDiePie, Moist Critical, MrBeast all use it):
 
-7 elements — creation story, creed, icon, rituals, sacred words,
+7 elements - creation story, creed, icon, rituals, sacred words,
 anti-believers, leader. For a faceless audit channel, the 'leader' is
 the brand persona; everything else maps to constants below. The goal
 is consistency: every video, description, and thumbnail reinforces the
@@ -25,16 +25,16 @@ AUDIT_URL = "https://nebulacomponents.com/audit"
 SUBSCRIBE_URL = f"https://www.youtube.com/{HANDLE}?sub_confirmation=1"
 
 # ── Element 1: Creation story (why we started) ────────────────────────
-# Every big channel leads with WHY. Ours: the anti-slop stance — real
+# Every big channel leads with WHY. Ours: the anti-slop stance - real
 # audits, real scores, real screenshots (from the 'don't be AI slop'
 # playbook). Written to be vulnerable and specific, not corporate.
 CREATION_STORY = (
     "Every day, founders pay for ads and watch the money disappear. "
-    "The problem isn't the ads — it's the page they land on. "
+    "The problem isn't the ads - it's the page they land on. "
     "Nebula Audits started because automated 'AI slop' teardowns "
     "were useless: no real data, no real screenshots, no real fixes. "
     "So we built the opposite. Every teardown here is a real audit "
-    "of a real site — actual load times, actual conversion signals, "
+    "of a real site - actual load times, actual conversion signals, "
     "an actual score out of 10. No fluff. No hype. Just the number "
     "your ads are paying for, and the fix to change it."
 )
@@ -44,7 +44,7 @@ CREATION_STORY = (
 CREED = "Real audits. Real scores. No fluff."
 
 # ── Element 3: Icon (the thing people recognize without reading) ──────
-# The 'THE VERDICT' score card + score circle is our icon — the same
+# The 'THE VERDICT' score card + score circle is our icon - the same
 # visual in every Short's payoff moment (reward card). Repetition makes
 # it iconic. Also the orange/cyan accent bars.
 ICON = {
@@ -52,12 +52,12 @@ ICON = {
     "score_circle": True,   # the X/10 circle
     "accent_top": "#22D3EE",  # cyan
     "accent_bottom": "#F97316",  # orange
-    "note": "Keep these constants unchanged across ALL videos — the icon is built by repetition.",
+    "note": "Keep these constants unchanged across ALL videos - the icon is built by repetition.",
 }
 
 # ── Element 4: Ritual (recurring moment viewers anticipate) ───────────
 # The daily teardown + the VERDICT reveal at the end is our ritual.
-# The sign-off line is the verbal ritual — same line every video.
+# The sign-off line is the verbal ritual - same line every video.
 SIGN_OFF = "That's your number. Nebula's got your fix."
 
 # ── Element 5: Sacred words (community language) ──────────────────────
@@ -95,7 +95,7 @@ def about_text() -> str:
     return (
         f"{CREED}\n\n"
         f"{CREATION_STORY}\n\n"
-        f"New teardown every day. Watch for the {ICON['label']} at the end — "
+        f"New teardown every day. Watch for the {ICON['label']} at the end - "
         f"that's the number your ads are paying for.\n\n"
         f"Get your own free audit: {AUDIT_URL}"
     )
@@ -114,7 +114,7 @@ def video_signature(include_story: bool = False) -> str:
 
 
 if __name__ == "__main__":
-    print("=== Nebula Audits — Primal Branding constants ===\n")
+    print("=== Nebula Audits - Primal Branding constants ===\n")
     print("CREED:", CREED)
     print("\nABOUT:\n" + about_text())
     print("\nSIGN_OFF:", SIGN_OFF)

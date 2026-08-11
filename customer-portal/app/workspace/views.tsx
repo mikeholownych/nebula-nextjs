@@ -33,9 +33,9 @@ function displayUrl(url: string): string {
 }
 
 function fmtDate(iso?: string | null): string {
-  if (!iso) return '—'
+  if (!iso) return '-'
   const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return '—'
+  if (Number.isNaN(d.getTime())) return '-'
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
 }
 
@@ -53,7 +53,7 @@ function severityCounts(findings: AuditDetail['findings']) {
   return counts
 }
 
-// Sparkline — plain SVG polyline, no chart library.
+// Sparkline - plain SVG polyline, no chart library.
 function Sparkline({ points, width = 260, height = 64 }: { points: number[]; width?: number; height?: number }) {
   if (points.length < 2) return null
   const min = Math.min(...points)
@@ -102,7 +102,7 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
     return sorted.filter((a) => pathKey(a.url) === key).reverse().map(scoreOf)
   }, [sorted, latest])
   const counts = severityCounts(latestDetail?.findings || [])
-  const latestUrl = latest ? displayUrl(latest.url) : '—'
+  const latestUrl = latest ? displayUrl(latest.url) : '-'
   const auditedPages = new Set(audits.map((audit) => pathKey(audit.url))).size
 
   // Revenue leak: sum of revenue_impact across findings
@@ -138,7 +138,7 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
         ) : (
           <section className="rounded-2xl border border-border bg-bg-elevated p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
             <p className="text-xs font-semibold uppercase tracking-[0.13em] text-fg-dim">Est. Monthly Leak</p>
-            <p className="mt-4 text-lg font-semibold text-fg-muted">—</p>
+            <p className="mt-4 text-lg font-semibold text-fg-muted">-</p>
             <a href="/workspace?tab=settings" className="mt-2 inline-block text-xs font-semibold text-accent hover:underline">Set CPC in Settings →</a>
           </section>
         )}
@@ -177,7 +177,7 @@ export function DashboardView({ audits, latestDetail, email }: { audits: Workspa
       <div className="grid gap-4 lg:grid-cols-2">
         <section className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
           <div className="flex items-center justify-between"><div><p className="text-xs font-semibold uppercase tracking-[0.15em] text-fg-dim">Recent audit</p><h2 className="mt-2 text-lg font-semibold text-fg">{latestUrl}</h2></div><span className="text-xs text-fg-dim">{fmtDate(latest.completed_at || latest.created_at)}</span></div>
-          <div className="mt-5 flex items-center justify-between rounded-xl bg-bg px-4 py-3"><span className="text-sm text-fg-muted">Grade</span><span className="text-2xl font-semibold text-fg">{latest.grade || '—'}</span></div>
+          <div className="mt-5 flex items-center justify-between rounded-xl bg-bg px-4 py-3"><span className="text-sm text-fg-muted">Grade</span><span className="text-2xl font-semibold text-fg">{latest.grade || '-'}</span></div>
           <a href={`/audit/${latest.id}/results`} className="mt-4 inline-flex text-sm font-semibold text-[#444] hover:text-fg">Review findings →</a>
         </section>
         <section className="rounded-2xl border border-border bg-bg-elevated p-6 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
@@ -268,7 +268,7 @@ function CompetitorCard() {
                   <p className="text-xs text-fg-dim">{c.last_audited_at ? `Audited ${fmtDate(c.last_audited_at)}` : 'Audit pending'}</p>
                 </div>
                 <div className="ml-4 flex shrink-0 items-center gap-3">
-                  <span className="text-lg font-semibold text-fg">{c.last_score !== null ? Math.round(c.last_score) : '—'}</span>
+                  <span className="text-lg font-semibold text-fg">{c.last_score !== null ? Math.round(c.last_score) : '-'}</span>
                   {advantage !== null && (
                     <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${advantage >= 0 ? 'bg-[#e7f4eb] text-[#28733e]' : 'bg-[#fbe8e7] text-[#a43a35]'}`}>
                       {advantage >= 0 ? `+${advantage}` : `-${Math.abs(advantage)}`} vs you
@@ -308,7 +308,7 @@ export function AuditsView({ audits }: { audits: WorkspaceAudit[] }) {
       <div className="bg-bg-elevated border border-border rounded-lg p-10 text-center">
         <h2 className="text-xl font-bold mb-2">No audit history yet</h2>
         <p className="text-fg-muted mb-6">
-          Every audit you run is preserved forever — like Git commits for your landing page.
+          Every audit you run is preserved forever - like Git commits for your landing page.
         </p>
         <a
           href="/audit?utm_source=workspace&utm_medium=internal"
@@ -323,7 +323,7 @@ export function AuditsView({ audits }: { audits: WorkspaceAudit[] }) {
   return (
     <div className="space-y-8">
       <p className="text-sm text-fg-muted">
-        Every audit is immutable — old versions are never overwritten, so you can always see
+        Every audit is immutable - old versions are never overwritten, so you can always see
         where a page started.
       </p>
       {byPath.map(([key, versions]) => (

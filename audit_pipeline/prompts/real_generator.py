@@ -3,7 +3,7 @@
 
 The $97 deliverable is a prompt the customer pastes into Claude/ChatGPT/Gemini
 and runs themselves. The old implementation was a static template with
-fill-in-the-blank placeholders (customer count, rating, etc.) — a form, not a
+fill-in-the-blank placeholders (customer count, rating, etc.) - a form, not a
 deliverable.
 
 This module uses an LLM (AWS Bedrock via IAM Roles Anywhere primary,
@@ -182,12 +182,12 @@ _SYSTEM_WRITER = (
     "complete, self-contained prompt that a paying customer will hand to an "
     "autonomous terminal coding agent (Claude Code, Cursor, Codex, etc.) "
     "running IN THEIR REPOSITORY, so the agent can actually implement the fix.\n\n"
-    "STORY FRAMEWORK — every finding you write must follow these four beats:\n"
+    "STORY FRAMEWORK - every finding you write must follow these four beats:\n"
     "1. RECOGNITION: Describe what the visitor experiences on this page right now, "
     "in the visitor's voice, not the engineer's. 'A stranger lands here and...' "
     "Make the founder feel what their customer feels.\n"
     "2. THE VILLAIN NAMED: Identify the specific structural problem causing this "
-    "experience. Not 'poor CTA copy' — 'The button says what to do, not what changes "
+    "experience. Not 'poor CTA copy' - 'The button says what to do, not what changes "
     "for them when they do it. Visitors do not click buttons that do not promise them something.'\n"
     "3. THE COST: One sentence. What is this costing them, concretely.\n"
     "4. THE FIX: Exactly what the agent implements, in plain language.\n\n"
@@ -281,7 +281,7 @@ def _dimension_context(key: str, dim: dict, page: dict, params: dict) -> str:
             "UTM links, conversion event) in the right files, (3) add a "
             "browser-console verification step, (4) note platform-specific "
             "plugin/settings paths where applicable. Never fabricate "
-            "measurement IDs — instruct the agent to ask for them."
+            "measurement IDs - instruct the agent to ask for them."
         )
     elif key == "seo_foundations":
         base += f"CURRENT TITLE: {params.get('title_tag', '(none)')}\n"

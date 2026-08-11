@@ -1,4 +1,4 @@
-# Nebula Components — Daily Operating Report
+# Nebula Components - Daily Operating Report
 
 **DATE:** 2026-08-08
 **PERIOD:** Week of 7-day challenge (Day 5, started 2026-08-04)
@@ -13,7 +13,7 @@
 |---|---|
 | REVENUE | $0 (cumulative: $0) |
 | COSTS | hosting (Proxmox homelab) + AgentMail subscription (no $ figure on record) |
-| P&L | $(costs) — no revenue offset |
+| P&L | $(costs) - no revenue offset |
 | CASH POSITION | $0 from product; operating costs ongoing |
 | ACTIVE OFFER | $97 Fix Pack (locked through 2026-12-31) |
 | EMAILS SENT | ~155 cumulative (Wave 1–3, 2026-06-24 to 06-27); 0 this period |
@@ -25,11 +25,11 @@
 
 ---
 
-## Warm Reply Queue — CLEAN
+## Warm Reply Queue - CLEAN
 
 **Unrouted warm replies: 0**
 
-Evidence: `venv/bin/python3 scripts/audit_delivery_monitor.py --strict-exit` — exit code 0, 2026-08-08T05:21:08Z.
+Evidence: `venv/bin/python3 scripts/audit_delivery_monitor.py --strict-exit` - exit code 0, 2026-08-08T05:21:08Z.
 
 Action queue snapshot:
 - Pending audit delivery: 0
@@ -52,7 +52,7 @@ The one `warm_replied` record in HOT_LEAD.json is kanzariyamihir@gmail.com (refe
 | warm_replied | 1 |
 | recircle_60d | 1 |
 
-### lead_state.db / LeadStore (66 records — CRM of record)
+### lead_state.db / LeadStore (66 records - CRM of record)
 
 | Stage | Count |
 |---|---|
@@ -82,11 +82,11 @@ Note: 4 emails overlap between the two systems. Do not sum 47 + 66.
 
 ## Risks
 
-1. **27 pitch_sent leads stale 25–32 days** — no follow-up since 2026-07-08 day-3 sequence. Requires CEO decision on follow-up wave.
-2. **AgentMail key missing** — outreach is blocked until key is restored in environment. No sends possible.
-3. **Zero conversions** — 39 audits delivered, 0 payments. Conversion rate: 0%. Funnel has a structural break between audit delivery and payment. Root cause unresolved.
-4. **Pipeline $ value unknown** — no live source tracks opportunity value. Cannot estimate expected revenue.
-5. **QA fixture row in purchases** with livemode=true (`cs_test_billing_qa`) — should be cleaned or annotated; creates false positive risk in revenue queries.
+1. **27 pitch_sent leads stale 25–32 days** - no follow-up since 2026-07-08 day-3 sequence. Requires CEO decision on follow-up wave.
+2. **AgentMail key missing** - outreach is blocked until key is restored in environment. No sends possible.
+3. **Zero conversions** - 39 audits delivered, 0 payments. Conversion rate: 0%. Funnel has a structural break between audit delivery and payment. Root cause unresolved.
+4. **Pipeline $ value unknown** - no live source tracks opportunity value. Cannot estimate expected revenue.
+5. **QA fixture row in purchases** with livemode=true (`cs_test_billing_qa`) - should be cleaned or annotated; creates false positive risk in revenue queries.
 
 ---
 

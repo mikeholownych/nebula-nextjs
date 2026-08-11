@@ -84,7 +84,7 @@ export default function LandingPagePerformanceQ3Page() {
 
           {/* H1 */}
           <h1 className="font-extrabold text-3xl md:text-5xl leading-tight text-white mb-6">
-            State of Landing Page Performance — Q3 2026
+            State of Landing Page Performance - Q3 2026
           </h1>
 
           {/* Subtitle */}
@@ -278,7 +278,7 @@ export default function LandingPagePerformanceQ3Page() {
               <div className="px-5 py-4 space-y-3 text-[#9e9e9e] leading-relaxed text-sm">
                 <p>
                   A 100% failure rate means this is not an optimization problem; it is a structural
-                  default. Most landing pages are built desktop-first, then responsively adapted —
+                  default. Most landing pages are built desktop-first, then responsively adapted -
                   the above-fold state on mobile is an afterthought, not a design constraint.
                 </p>
                 <div className="rounded border border-[#00c2a0]/20 bg-[#00c2a0]/5 px-4 py-3">
@@ -309,7 +309,7 @@ export default function LandingPagePerformanceQ3Page() {
               <div className="px-5 py-4 space-y-3 text-[#9e9e9e] leading-relaxed text-sm">
                 <p>
                   The visitor arrived from an ad with a specific promise. If the headline does not
-                  confirm that promise within 3 words, the visitor re-evaluates their click — and
+                  confirm that promise within 3 words, the visitor re-evaluates their click - and
                   frequently exits. Most pages fail this check because ads are written separately
                   from landing page copy, often by different people on different timelines.
                 </p>
@@ -396,7 +396,7 @@ export default function LandingPagePerformanceQ3Page() {
           </h2>
           <div className="space-y-5 text-[#9e9e9e] leading-relaxed">
             <p>
-              Before testing creative, audiences, or offers — audit the page structural layer. The
+              Before testing creative, audiences, or offers - audit the page structural layer. The
               structural defects documented in this report exist independently of copy quality,
               visual design, or traffic source. They represent a floor below which optimization
               cannot operate effectively.

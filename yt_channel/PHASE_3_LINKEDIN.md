@@ -1,10 +1,10 @@
-# Phase 3 — LinkedIn Cold Audience Runbook
+# Phase 3 - LinkedIn Cold Audience Runbook
 
-**Status**: 📋 Ready to launch — awaiting budget approval  
-**Budget**: $20/day  
-**Audience**: Cold — founders running paid ads, 1–200 employees  
-**Goal**: Drive free audit starts (feeds retarget pool → $97 purchase)  
-**Primary KPI**: Cost per audit start (target: under $40)  
+**Status**: 📋 Ready to launch - awaiting budget approval
+**Budget**: $20/day
+**Audience**: Cold - founders running paid ads, 1–200 employees
+**Goal**: Drive free audit starts (feeds retarget pool → $97 purchase)
+**Primary KPI**: Cost per audit start (target: under $40)
 **Note**: LinkedIn does NOT directly produce purchases. It fills the retarget pool for Facebook/Google.
 
 ---
@@ -15,7 +15,7 @@
 
 1. LinkedIn Campaign Manager → Account Assets → Insight Tag
 2. Copy the tag snippet (JavaScript)
-3. Add to Nebula site: `customer-portal/app/layout.tsx` — before `</body>`
+3. Add to Nebula site: `customer-portal/app/layout.tsx` - before `</body>`
 
 ```html
 <script type="text/javascript">
@@ -55,12 +55,12 @@ URL rule: URL contains /audit AND contains /results
 
 ## 2. Audience Targeting
 
-### Primary Targeting (Job-Title Based — No Demographics)
+### Primary Targeting (Job-Title Based - No Demographics)
 
 ```
 Campaign Manager → Audiences → Create → Saved Audience
 
-Name: "Founder ICP — Paid Ads Buyers"
+Name: "Founder ICP - Paid Ads Buyers"
 
 Job Titles (include ALL of these):
   Founder
@@ -108,9 +108,9 @@ EXCLUDE:
 ## 3. Campaign Structure
 
 ```
-Campaign Group: Nebula — Paid Amplification
+Campaign Group: Nebula - Paid Amplification
 
-Campaign: LI Cold — Founder ICP — Free Audit
+Campaign: LI Cold - Founder ICP - Free Audit
   Objective: Website Visits
   LinkedIn Audience Network: OFF (keep on LinkedIn only)
   Budget: $20/day (daily budget)
@@ -137,7 +137,7 @@ Campaign: LI Cold — Founder ICP — Free Audit
 > Most founders have 3-5 fixable issues on their landing page. Find yours in 90 seconds.
 
 **Headline** (70 chars max):
-> Free Landing Page Audit — 90 Seconds
+> Free Landing Page Audit - 90 Seconds
 
 **Description** (70 chars max):
 > See exactly what's costing you conversions
@@ -152,9 +152,9 @@ Campaign: LI Cold — Founder ICP — Free Audit
 
 **Intro text**:
 > We analyzed 847 landing pages running paid ads.
-> 
+>
 > 94% had at least one issue costing them $500+ per month.
-> 
+>
 > Run a free audit on yours. Takes 90 seconds.
 
 **Headline**: What's Your Landing Page Score?
@@ -171,11 +171,11 @@ Campaign: LI Cold — Founder ICP — Free Audit
 
 **Intro text**:
 > The #1 finding across 847 landing page audits:
-> 
+>
 > H1 doesn't match the ad headline.
-> 
+>
 > This one issue causes 12%+ bounce rate increase.
-> 
+>
 > Check if your page has it → free audit, no email required.
 
 **Headline**: Is Your H1 Killing Your Conversions?
@@ -196,7 +196,7 @@ Campaign: LI Cold — Founder ICP — Free Audit
 | File type | JPG or PNG |
 | File size | Max 5MB |
 | Aspect ratio | 1.91:1 |
-| Text overlay | Keep minimal — LinkedIn penalizes text-heavy images |
+| Text overlay | Keep minimal - LinkedIn penalizes text-heavy images |
 
 **Recommended creative**: Clean screenshot of audit results UI (score 4/10, findings listed) with minimal branding. Authentic product screenshots outperform designed graphics on LinkedIn.
 
@@ -240,7 +240,7 @@ Campaign: LI Cold — Founder ICP — Free Audit
 |---------|--------|
 | CTR below 0.4% after $40 spend | Pause ad, new creative next week |
 | CPL above $60 after 10 audit starts | Narrow audience (remove lower-relevance job titles) |
-| Zero audit starts after $60 spend | Full review — check UTM tracking, landing page |
+| Zero audit starts after $60 spend | Full review - check UTM tracking, landing page |
 | CPC above $12 consistently | Switch to Manual CPC at $6 |
 | Ad rejected by LinkedIn | Revise copy (common trigger: superlatives, "best", "guaranteed") |
 
@@ -252,7 +252,7 @@ Campaign: LI Cold — Founder ICP — Free Audit
 
 2. **No LinkedIn Audience Network**: LAN extends reach to third-party sites with much lower quality. Keep it on LinkedIn only.
 
-3. **Frequency cap**: LinkedIn auto-applies frequency caps. If CPM spikes after week 2, audience is saturating — expand or pause 2 weeks.
+3. **Frequency cap**: LinkedIn auto-applies frequency caps. If CPM spikes after week 2, audience is saturating - expand or pause 2 weeks.
 
 4. **Creative fatigue**: LinkedIn audiences are small. Rotate fresh creative every 3-4 weeks.
 
@@ -284,7 +284,7 @@ Every LinkedIn audit start:
 1. Lands on `/audit` with `utm_source=linkedin`
 2. Runs audit → recorded in `audits.utm_source = 'linkedin'`
 3. Views results → Meta Pixel fires `PageView` on results URL
-4. Enters Facebook's "Audit Results — Last 30 Days" audience
+4. Enters Facebook's "Audit Results - Last 30 Days" audience
 5. Gets retargeted by Facebook/Google within 24 hours
 
 **Track this**: `GET /api/crm/sources` will show LinkedIn-attributed audits. Facebook retarget pool size visible in Meta Audiences Manager.

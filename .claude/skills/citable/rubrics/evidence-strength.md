@@ -6,18 +6,18 @@ the mandatory semantic gate before any claim moves toward `verified`
 
 ## Scoring dimensions
 
-1. **Directness** — does the evidence address the claim's exact proposition, or
+1. **Directness** - does the evidence address the claim's exact proposition, or
    an adjacent one? ("handles 10k rps" is not supported by "architecture is
    horizontally scalable".)
-2. **Primacy** — primary artifact (test result, specification, certification,
+2. **Primacy** - primary artifact (test result, specification, certification,
    registration) vs secondary report of one.
-3. **Methodological completeness** — methodology, test conditions, measurement
+3. **Methodological completeness** - methodology, test conditions, measurement
    period, population, and environment recorded and appropriate.
-4. **Currency** — evidence dated within the claim's temporal class (see
+4. **Currency** - evidence dated within the claim's temporal class (see
    lifecycle table in the AEO source doc §8).
-5. **Independence** (for comparative/market claims) — at least one source not
+5. **Independence** (for comparative/market claims) - at least one source not
    controlled by the claiming organization.
-6. **Coverage of scope** — evidence covers every deployment/scenario inside the
+6. **Coverage of scope** - evidence covers every deployment/scenario inside the
    claim's declared scope; anything uncovered must appear in exclusions.
 
 ## Posture
@@ -50,4 +50,4 @@ when working from registry metadata alone.
 - Evidence in a language or jurisdiction the reviewer cannot assess.
 - Contradictory evidence exists of comparable primacy.
 - Claim is legal/regulatory, security, financial, medical, certification, or
-  names a customer — legal/SME review regardless of evidence quality.
+  names a customer - legal/SME review regardless of evidence quality.

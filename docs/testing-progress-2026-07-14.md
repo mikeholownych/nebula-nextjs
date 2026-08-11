@@ -1,4 +1,4 @@
-# Testing Session Progress — Session 2
+# Testing Session Progress - Session 2
 
 **Date:** Tuesday, 2026-07-14
 **Duration:** ~2 hours

@@ -1,20 +1,20 @@
 #!/bin/bash
 # Automated resource/process health check with Telegram alerts.
 # Runs every 5 minutes via cron. Complements scripts/notify_production_health.py
-# (which checks canonical-service ownership) — this checks response time,
+# (which checks canonical-service ownership) - this checks response time,
 # memory, disk, and the cloudflared process, none of which that script covers.
 #
 # Fixed 2026-07-24 (INC-0005 follow-up):
 # - Telegram alerts were gated on TELEGRAM_BOT_TOKEN, which is never set
 #   anywhere in this environment, so send_alert() has never actually
-#   delivered anything — only ever wrote to the local log. Now uses the
+#   delivered anything - only ever wrote to the local log. Now uses the
 #   same working `hermes send` mechanism as notify_production_health.py
 #   and sre_responder.py.
 # - Removed the "attempt restart" block, which ran `npm start &` outside
 #   systemd from a separate git worktree on any failed check. This is the
 #   same anti-pattern that caused INC-0004 (a stale, un-managed process
 #   squatting on port 3000 and blocking the canonical systemd service).
-#   Alert only now — a human decides how to recover, per
+#   Alert only now - a human decides how to recover, per
 #   deploy/systemd/README.md's documented restart procedure.
 
 set -uo pipefail
@@ -66,7 +66,7 @@ log_info "Starting health check cycle"
 
 # 1. Check Next.js server
 if ! curl -f -s http://localhost:3000 > /dev/null 2>&1; then
-    send_alert "nextjs_down" "🚨 *NEXT.JS DOWN* — server not responding on port 3000. Time: $(date)"
+    send_alert "nextjs_down" "🚨 *NEXT.JS DOWN* - server not responding on port 3000. Time: $(date)"
 else
     log_info "Next.js server: OK"
 fi
@@ -74,7 +74,7 @@ fi
 # 2. Check response times
 RESPONSE_TIME=$(curl -o /dev/null -s -w '%{time_total}' http://localhost:3000/ 2>/dev/null | awk '{printf "%.3f", $1}')
 if [ -n "$RESPONSE_TIME" ] && (( $(echo "$RESPONSE_TIME > 1.0" | bc -l) )); then
-    send_alert "slow_response" "⚠️ *SLOW RESPONSE* — ${RESPONSE_TIME}s (threshold 1.0s). Time: $(date)"
+    send_alert "slow_response" "⚠️ *SLOW RESPONSE* - ${RESPONSE_TIME}s (threshold 1.0s). Time: $(date)"
 else
     log_info "Response time: ${RESPONSE_TIME}s - OK"
 fi
@@ -82,7 +82,7 @@ fi
 # 3. Check memory usage
 MEMORY_PERCENT=$(free | awk '/Mem:/ {printf "%.1f", ($3/$2)*100}')
 if (( $(echo "$MEMORY_PERCENT > 90" | bc -l) )); then
-    send_alert "high_memory" "🚨 *HIGH MEMORY* — ${MEMORY_PERCENT}% (threshold 90%). Time: $(date)"
+    send_alert "high_memory" "🚨 *HIGH MEMORY* - ${MEMORY_PERCENT}% (threshold 90%). Time: $(date)"
 else
     log_info "Memory usage: ${MEMORY_PERCENT}% - OK"
 fi
@@ -90,14 +90,14 @@ fi
 # 4. Check disk space
 DISK_PERCENT=$(df -h / | awk 'NR==2 {print $5}' | sed 's/%//')
 if [ "$DISK_PERCENT" -gt 90 ]; then
-    send_alert "low_disk" "🚨 *LOW DISK SPACE* — ${DISK_PERCENT}% used (threshold 90%). Time: $(date)"
+    send_alert "low_disk" "🚨 *LOW DISK SPACE* - ${DISK_PERCENT}% used (threshold 90%). Time: $(date)"
 else
     log_info "Disk space: ${DISK_PERCENT}% - OK"
 fi
 
 # 5. Check Cloudflare tunnel
 if ! pgrep -f "cloudflared" > /dev/null; then
-    send_alert "tunnel_down" "🚨 *CLOUDFLARE TUNNEL DOWN* — tunnel process not running. Time: $(date)"
+    send_alert "tunnel_down" "🚨 *CLOUDFLARE TUNNEL DOWN* - tunnel process not running. Time: $(date)"
 else
     log_info "Cloudflare tunnel: OK"
 fi

@@ -77,7 +77,7 @@ export default function LandingPageNotConvertingPage() {
             </p>
           </div>
 
-          {/* Direct answer — AEO extraction target */}
+          {/* Direct answer - AEO extraction target */}
           <section
             data-editorial="answer-first"
             className="mt-6 rounded-2xl border border-border bg-bg-panel p-8"
@@ -151,7 +151,7 @@ export default function LandingPageNotConvertingPage() {
             </div>
           </section>
 
-          {/* Leak 1 — Message match / Trust */}
+          {/* Leak 1 - Message match / Trust */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Leak 1: The ad promise does not match the page headline
@@ -209,7 +209,7 @@ export default function LandingPageNotConvertingPage() {
             </p>
           </section>
 
-          {/* Leak 2 — Proof / Trust */}
+          {/* Leak 2 - Proof / Trust */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Leak 2: Proof is generic, anonymous, or absent
@@ -253,7 +253,7 @@ export default function LandingPageNotConvertingPage() {
             </p>
           </section>
 
-          {/* Leak 3 — CTA clarity / Form friction */}
+          {/* Leak 3 - CTA clarity / Form friction */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Leak 3: The CTA does not match where the visitor is in their
@@ -319,7 +319,7 @@ export default function LandingPageNotConvertingPage() {
             </Link>
           </div>
 
-          {/* Leak 4 — Mobile layout */}
+          {/* Leak 4 - Mobile layout */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Leak 4: The mobile experience breaks the message
@@ -364,7 +364,7 @@ export default function LandingPageNotConvertingPage() {
             </p>
           </section>
 
-          {/* Leak 5 — Trust / objection coverage */}
+          {/* Leak 5 - Trust / objection coverage */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Leak 5: Objections are not handled before the final ask
@@ -408,7 +408,7 @@ export default function LandingPageNotConvertingPage() {
             </p>
           </section>
 
-          {/* Decision tree — canonical 9 signals */}
+          {/* Decision tree - canonical 9 signals */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">
               Which leak do you fix first?
@@ -529,7 +529,7 @@ export default function LandingPageNotConvertingPage() {
             </ol>
           </section>
 
-          {/* FAQ — visible answers without duplicated FAQPage structured data */}
+          {/* FAQ - visible answers without duplicated FAQPage structured data */}
           <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
             <h2 className="mb-6 text-2xl font-bold text-fg">
               Frequently asked questions

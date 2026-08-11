@@ -24,7 +24,7 @@ CRITICAL = [
     "/api/stats", "/does-not-exist-qa-404",
 ]
 EXPECTED_STRIPE = {
-    # 2026-07-24: was "6oUfZh7M87YM5TPgEa43S0b": "$147 Conversion Fix Pack" —
+    # 2026-07-24: was "6oUfZh7M87YM5TPgEa43S0b": "$147 Conversion Fix Pack" -
     # this allowlist itself had the wrong price baked in as "expected".
     # Confirmed live via `stripe payment_links retrieve` that link's only
     # price was $147, contradicting every other price surface on the site

@@ -1,4 +1,4 @@
-# Nebula Design System — Typography
+# Nebula Design System - Typography
 
 ## Font Family
 

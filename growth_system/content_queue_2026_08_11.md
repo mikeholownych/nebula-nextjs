@@ -1,11 +1,11 @@
-# Content Queue — Built Today, Post Tomorrow
+# Content Queue - Built Today, Post Tomorrow
 # Generated: 2026-08-11
 # Format: LinkedIn/X short-form, information gap loop applied
 # Each post: real, happened today, specific numbers, How gated
 
 ---
 
-## POST 1 — The 25 leads who never got the email
+## POST 1 - The 25 leads who never got the email
 **Trigger:** Retainer upsell cron was querying a stale database instead of HOT_LEAD.json
 **Angle:** "My pipeline looked healthy. It wasn't."
 
@@ -22,7 +22,7 @@ The script was reading from a different one.
 
 37 days of eligible leads. Zero upsell attempts.
 The pipeline didn't fail loudly.
-It failed silently — which is worse.
+It failed silently - which is worse.
 
 The fix took 20 minutes.
 The gap it exposed took 37 days to find.
@@ -35,7 +35,7 @@ Same logic. What's running that looks fine but isn't?"
 
 ---
 
-## POST 2 — 5 checkouts, 0 purchases
+## POST 2 - 5 checkouts, 0 purchases
 **Trigger:** MOA analysis of checkout abandonment
 **Angle:** "The expert diagnosis I ran on my own funnel"
 
@@ -48,7 +48,7 @@ Direct response copywriter.
 CRO engineer.
 Founder psychology specialist.
 
-They all agreed on the same root cause — and it wasn't the price.
+They all agreed on the same root cause - and it wasn't the price.
 
 The Stripe link was arriving before the founder had finished deciding.
 
@@ -64,11 +64,11 @@ Send it after they reply.
 The reply IS the proof they felt it.
 ```
 
-**CTA:** "nebulacomponents.com — we find the moment your page loses the sale"
+**CTA:** "nebulacomponents.com - we find the moment your page loses the sale"
 
 ---
 
-## POST 3 — The audit that didn't convert
+## POST 3 - The audit that didn't convert
 **Trigger:** Mike's 20-year story + Nebula's own landing page
 **Angle:** "I built a landing page audit tool. My landing page didn't convert."
 
@@ -88,12 +88,12 @@ I know why now.
 I was doing the work. They were telling the story.
 And story is what makes people open their wallet.
 
-So I built Nebula — a tool that reads landing pages and shows founders exactly
+So I built Nebula - a tool that reads landing pages and shows founders exactly
 where their ad spend is disappearing.
 
 146 people used it. Zero paid.
 
-My landing page — the one selling a tool that diagnoses landing pages — wasn't converting.
+My landing page - the one selling a tool that diagnoses landing pages - wasn't converting.
 
 I had the exact problem I was solving.
 
@@ -110,7 +110,7 @@ It was never your ads.
 
 ---
 
-## POST 4 — The ROI calculator that names the bleed
+## POST 4 - The ROI calculator that names the bleed
 **Trigger:** Built and shipped ROI calculator today
 **Angle:** "I added one section to my homepage. It turns a score into a dollar amount."
 
@@ -132,7 +132,7 @@ It's the movie popcorn test.
 
 37 grams of saturated fat means nothing.
 A bag of popcorn with more fat than a bacon-and-eggs breakfast,
-a Big Mac and fries, and a steak dinner combined — 
+a Big Mac and fries, and a steak dinner combined -
 that's the same fact. Different frame.
 
 Most founders know their landing page isn't converting.
@@ -141,12 +141,12 @@ Once they do, $97 to fix it isn't a decision.
 It's math.
 ```
 
-**CTA:** nebulacomponents.com/audit — the calculator is above the fold
+**CTA:** nebulacomponents.com/audit - the calculator is above the fold
 
 ---
 
-## POST 5 — The 4 lines that changed the resolution
-**Trigger:** Narrative audit — homepage ending on artifact not feeling
+## POST 5 - The 4 lines that changed the resolution
+**Trigger:** Narrative audit - homepage ending on artifact not feeling
 **Angle:** "I audited my own copy against a story framework. Found 2 failures."
 
 ```
@@ -181,7 +181,7 @@ If your copy ends on a deliverable instead of a transformation, you're one sente
 
 ---
 
-## POST 6 — Visual DNA anchor (for the AI video audience)
+## POST 6 - Visual DNA anchor (for the AI video audience)
 **Trigger:** Visual DNA anchor clause built today
 **Angle:** "The 30-word paragraph that fixes visual whiplash in AI video"
 

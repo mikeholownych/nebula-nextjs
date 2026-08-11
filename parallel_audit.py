@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-parallel_audit.py — run N audits concurrently using subprocess delegation.
+parallel_audit.py - run N audits concurrently using subprocess delegation.
 
 Jack Roberts principle: spin up sub-agents for parallel execution.
 Instead of processing leads one-at-a-time, run up to 3 concurrent audit
@@ -38,7 +38,7 @@ from typing import Optional
 NEBULA = Path("/home/mike/nebula")
 AUDIT_LEADS_FILE = NEBULA / "audit_leads.jsonl"
 CONTACTED_PATH = NEBULA / "contacted.json"
-MAX_WORKERS = 3  # Jack's sweet spot — parallel but not rate-limited
+MAX_WORKERS = 3  # Jack's sweet spot - parallel but not rate-limited
 VENV_PYTHON = str(NEBULA / "venv" / "bin" / "python3")
 
 
@@ -109,7 +109,7 @@ def load_leads(path: str = None) -> list[dict]:
         if isinstance(data, list):
             leads = data
         elif isinstance(data, dict):
-            # contacted.json format — keyed by email
+            # contacted.json format - keyed by email
             leads = [{"email": k, **v} for k, v in data.items() if v.get("url")]
     elif path.endswith(".jsonl"):
         for line in Path(path).read_text().strip().split("\n"):
@@ -141,7 +141,7 @@ def load_leads(path: str = None) -> list[dict]:
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="Parallel audit pipeline — run N audits concurrently")
+    parser = argparse.ArgumentParser(description="Parallel audit pipeline - run N audits concurrently")
     parser.add_argument("--leads", type=str, default=None,
                         help="Path to leads file (.json/.jsonl/.txt) or '--stdin' for pipe")
     parser.add_argument("--workers", type=int, default=MAX_WORKERS,
@@ -159,9 +159,9 @@ def main():
         leads = load_leads(args.leads)
 
     print(f"PARALLEL_AUDIT: {len(leads)} leads loaded, {args.workers} workers")
-    
+
     if not leads:
-        print("PARALLEL_AUDIT: no leads with URLs found — nothing to do")
+        print("PARALLEL_AUDIT: no leads with URLs found - nothing to do")
         return
 
     if args.dry_run:

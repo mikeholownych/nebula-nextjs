@@ -1,6 +1,6 @@
-## Ad Tracking — Conversion Measurement
+## Ad Tracking - Conversion Measurement
 
-**Finding:** Your ad tracking setup is incomplete — you can't measure true ROAS.
+**Finding:** Your ad tracking setup is incomplete - you can't measure true ROAS.
 
 **Current signals detected:**
 ${signals_found}

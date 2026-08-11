@@ -26,7 +26,7 @@ export default function AboutPage() {
           <h2 className="text-2xl font-semibold mb-4 text-emerald-400">Mission</h2>
           <p className="text-gray-300 text-lg leading-relaxed">
             Stop the bleed. Founders waste billions on ads that convert at 2-3%. We find the leak
-            with evidence-backed analysis and offer a bounded implementation path — no calls, no retainers, no agency ambiguity.
+            with evidence-backed analysis and offer a bounded implementation path - no calls, no retainers, no agency ambiguity.
           </p>
         </section>
 

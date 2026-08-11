@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-GSC Content Refresh — Automated content refresh loop for Nebula learning-centre pages.
+GSC Content Refresh - Automated content refresh loop for Nebula learning-centre pages.
 
 Flow:
   1. Parse last gsc_programmatic_review.md → extract positions 8-20, ≥3 impressions
@@ -43,7 +43,7 @@ INDEXNOW_KEY_LOCATION = f"https://{HOST}/{INDEXNOW_KEY}.txt"
 
 # Minimum impressions to qualify for refresh
 MIN_IMPRESSIONS = 1
-# Position range to target — wide for early-stage site
+# Position range to target - wide for early-stage site
 POS_MIN = 1.0
 POS_MAX = 100.0
 # Max pages to refresh per run (rate-limit safety)
@@ -67,7 +67,7 @@ def log(msg: str) -> None:
 def parse_striking_distance(review_path: Path) -> list[dict]:
     """Extract positions 8-20, ≥MIN_IMPRESSIONS from last gsc review."""
     if not review_path.exists():
-        log(f"GSC review not found at {review_path} — running it now")
+        log(f"GSC review not found at {review_path} - running it now")
         result = subprocess.run(
             [sys.executable, str(NEBULA_ROOT / "scripts" / "gsc_programmatic_review.py")],
             capture_output=True, text=True, timeout=120
@@ -82,7 +82,7 @@ def parse_striking_distance(review_path: Path) -> list[dict]:
     candidates = []
     seen_pages: set[str] = set()
 
-    # Parse ALL table rows from entire file — covers Section 4 and Section 5
+    # Parse ALL table rows from entire file - covers Section 4 and Section 5
     # Anchored to start of table row (pipe + optional whitespace)
     row_re = re.compile(
         r"^\|\s+\*{0,2}([^|*\n]+?)\*{0,2}\s+\|\s+`([\d.]+)`\s+\|\s+(\d+)\s+\|\s+(\d+)\s+\|\s+([\d.]+)%\s+\|\s+`([^`|]+)`\s+\|",
@@ -304,13 +304,13 @@ def generate_content_improvements(
     """
     api_key, base_url = get_llm_key()
     if not api_key:
-        log("ERROR: No LLM API key found (need OPENROUTER_API_KEY) — skipping AI content diff")
+        log("ERROR: No LLM API key found (need OPENROUTER_API_KEY) - skipping AI content diff")
         return None
 
     try:
         from openai import OpenAI
     except ImportError:
-        log("ERROR: openai module not installed — run: pip install openai")
+        log("ERROR: openai module not installed - run: pip install openai")
         return None
 
     competitor_context = "\n\n---\n\n".join(
@@ -400,7 +400,7 @@ def patch_tsx_file(tsx_path: Path, improvements: dict, query: str) -> bool:
         faq_entries_added = 0
 
         # Detect which FAQ structure this page uses
-        # Pattern A: faqItems = [...] (createArticleSchema pages)  
+        # Pattern A: faqItems = [...] (createArticleSchema pages)
         has_faq_items = bool(re.search(r"const faqItems\s*=\s*\[", content))
         # Pattern B: mainEntity: [...] (schema.org FAQPage pages)
         has_main_entity = bool(re.search(r"mainEntity:\s*\[", content))
@@ -443,7 +443,7 @@ def patch_tsx_file(tsx_path: Path, improvements: dict, query: str) -> bool:
                 changed = True
                 log(f"  → appended {faq_entries_added} FAQ item(s) for query: '{query}'")
         else:
-            log(f"  ⚠ Could not locate FAQ array — skipping FAQ append")
+            log(f"  ⚠ Could not locate FAQ array - skipping FAQ append")
 
     if changed:
         tsx_path.write_text(content)
@@ -485,7 +485,7 @@ def main() -> None:
 
     candidates = parse_striking_distance(GSC_REVIEW_PATH)
     if not candidates:
-        log("No candidates found — exiting")
+        log("No candidates found - exiting")
         return
 
     record = load_refresh_record()
@@ -497,7 +497,7 @@ def main() -> None:
 
     for cand in candidates:
         if processed >= MAX_REFRESHES_PER_RUN:
-            log(f"Reached max {MAX_REFRESHES_PER_RUN} refreshes/run — stopping")
+            log(f"Reached max {MAX_REFRESHES_PER_RUN} refreshes/run - stopping")
             break
 
         page_path = cand["page_path"]
@@ -544,7 +544,7 @@ def main() -> None:
         log(f"  New FAQ items: {len(new_faqs)}")
 
         if not new_faqs and not improvements.get("meta_description_update"):
-            log(f"  → no actionable improvements identified — bumping date only")
+            log(f"  → no actionable improvements identified - bumping date only")
 
         # Patch .tsx
         changed = patch_tsx_file(tsx_path, improvements, query)
@@ -569,7 +569,7 @@ def main() -> None:
     else:
         log("No pages refreshed this run")
 
-    log(f"\n=== GSC Content Refresh DONE — {processed} processed, {len(refreshed_urls)} updated ===")
+    log(f"\n=== GSC Content Refresh DONE - {processed} processed, {len(refreshed_urls)} updated ===")
 
 
 if __name__ == "__main__":

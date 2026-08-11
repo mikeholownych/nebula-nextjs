@@ -8,7 +8,7 @@ Your post on <topic> caught my eye – especially the point about <insight>. I h
 
 ## Value‑First Direct Message (Day 2 after connect)
 ```
-Hey <Name> — quick one. Based on your recent <post/company stage>, I thought this <framework/resource> might be useful: <1‑sentence value>. No ask – just wanted to put it on your radar. Curious if it maps to what you're working on.
+Hey <Name> - quick one. Based on your recent <post/company stage>, I thought this <framework/resource> might be useful: <1‑sentence value>. No ask – just wanted to put it on your radar. Curious if it maps to what you're working on.
 ```
 
 ## Soft Ask (after reply)

@@ -21,7 +21,7 @@ export default function ThankYouPage() {
           </p>
         </Card>
 
-        {/* Bring someone with you — referral moment #2 */}
+        {/* Bring someone with you - referral moment #2 */}
         <Card variant="bordered" className="border-accent/30">
           <p className="font-semibold text-fg mb-1">Know someone else bleeding ad budget?</p>
           <p className="text-sm text-fg-muted mb-4">

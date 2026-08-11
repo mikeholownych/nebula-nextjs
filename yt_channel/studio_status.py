@@ -3,7 +3,7 @@
 
 The content-studio pattern (Komputer Mechanic, TTSPDNUinek): every agent
 logs its name/task/outcome to a DB, and the dashboard shows real runs,
-success rate, and failures — "no fake metrics anywhere."
+success rate, and failures - "no fake metrics anywhere."
 
 This script reads the pipeline's own logs (studio_activity.jsonl,
 production_log.jsonl, retention_analysis_*.json) and prints the studio
@@ -71,7 +71,7 @@ def summarize() -> dict:
     recent = [e for e in activity
               if e.get("timestamp", "") >= cutoff.isoformat()]
 
-    # Backlog: produced but not (yet) uploaded — production entries whose
+    # Backlog: produced but not (yet) uploaded - production entries whose
     # domain has no matching upload ok-stage after the render time.
     uploaded_domains = {
         e["domain"] for e in activity
@@ -105,7 +105,7 @@ def main():
         return
 
     print("\n╔══════════════════════════════════════════════════════════╗")
-    print("║  NEBULA AUDITS — STUDIO STATUS                           ║")
+    print("║  NEBULA AUDITS - STUDIO STATUS                           ║")
     print("╚══════════════════════════════════════════════════════════╝")
     print(f"  Runs (all-time): {report['runs_total']}   |   Last 24h: {report['runs_24h']}")
 
@@ -129,9 +129,9 @@ def main():
         print(f"    {rt.get('video_count',0)} videos | avg views {rt.get('avg_views','?')} | "
               f"avg engagement {rt.get('avg_engagement_rate','?')}%")
         for o in rt.get("outliers", [])[:3]:
-            print(f"    ★ OUTLIER {o.get('views','?')}v x{o.get('views_vs_avg','?')} avg — {o.get('title','')[:50]}")
+            print(f"    ★ OUTLIER {o.get('views','?')}v x{o.get('views_vs_avg','?')} avg - {o.get('title','')[:50]}")
         if not rt.get("outliers"):
-            print("    (no outliers yet — early channel, keep cadence)")
+            print("    (no outliers yet - early channel, keep cadence)")
 
     if report["recent_failures"]:
         print("\n  Recent failures:")

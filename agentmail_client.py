@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AgentMail REST API Client — v0
+AgentMail REST API Client - v0
 Replaces all IMAP polling. Single source of truth for email ops.
 
 API base: https://api.agentmail.to/v0
@@ -29,7 +29,7 @@ from outbound_release_gate import DeliveryPurpose, OutboundReleaseGate
 INBOX = "sedrick@nebulacomponents.com"
 BASE  = "https://api.agentmail.to/v0"
 
-# Nebula state labels (custom — system labels like sent/received are read-only)
+# Nebula state labels (custom - system labels like sent/received are read-only)
 LABEL_WARM       = "warm"
 LABEL_AUDIT_SENT = "audit-sent"
 LABEL_PITCHED    = "pitched"
@@ -376,7 +376,7 @@ class AgentMailClient:
         subject_lower = thread.get("subject", "").lower()
         combined = body_lower + " " + subject_lower
 
-        # Unsubscribe signals (highest priority — must act immediately)
+        # Unsubscribe signals (highest priority - must act immediately)
         unsub_signals = ["unsubscribe", "remove me", "take me off", "stop emailing",
                          "opt out", "opt-out", "don't contact", "do not contact",
                          "not interested", "stop sending"]
@@ -389,7 +389,7 @@ class AgentMailClient:
         if any(s in combined for s in complaint_signals):
             return "complaint"
 
-        # Warm signals — buying intent
+        # Warm signals - buying intent
         warm_signals = ["interested", "yes", "sure", "send it", "send me",
                         "how much", "price", "cost", "what do you charge",
                         "audit", "would love", "sounds good", "let's do it",
@@ -409,17 +409,17 @@ class AgentMailClient:
         what to DO; diagnosis decides what to FIX.
 
         Returns one of:
-          s1_trigger_stale    — "what audit?" / context not recognized
-          s2_who_unclear      — "who is this?" / identity missing
-          s3_diagnosed        — defensive reply / we made an assumption
-          s4_ask_too_big      — "not right now" / ask was too big
-          none                — no diagnostic signal (e.g. warm replies)
+          s1_trigger_stale    - "what audit?" / context not recognized
+          s2_who_unclear      - "who is this?" / identity missing
+          s3_diagnosed        - defensive reply / we made an assumption
+          s4_ask_too_big      - "not right now" / ask was too big
+          none                - no diagnostic signal (e.g. warm replies)
         """
         body_lower = message_body.lower()
         subject_lower = thread.get("subject", "").lower()
         combined = body_lower + " " + subject_lower
 
-        # S4: ask too big — deferral
+        # S4: ask too big - deferral
         if any(s in combined for s in [
             "not right now", "not now", "too busy", "no time",
             "later this month", "next quarter", "maybe in the future",
@@ -442,7 +442,7 @@ class AgentMailClient:
         ]):
             return "s3_diagnosed"
 
-        # S1: stale trigger — context not recognized
+        # S1: stale trigger - context not recognized
         if any(s in combined for s in [
             "what audit", "which audit", "i never requested", "didn't request",
             "don't remember", "not sure what you", "who are you talking about",

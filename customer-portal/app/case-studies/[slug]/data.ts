@@ -1,6 +1,6 @@
 /**
  * Case study data types and entries.
- * Each entry must have real evidence before going live — the placeholder
+ * Each entry must have real evidence before going live - the placeholder
  * below makes this clear and prevents publishing empty data.
  */
 

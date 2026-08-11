@@ -1,22 +1,22 @@
-# Nebula Components — GEO Audit Report
+# Nebula Components - GEO Audit Report
 
-**Date:** 2025-07-15  
-**Framework:** Generative Engine Optimization (21-layer model)  
+**Date:** 2025-07-15
+**Framework:** Generative Engine Optimization (21-layer model)
 **Current Maturity:** Level 1 (Retrievable → Entity Resolution in progress)
 
 ---
 
 ## Executive Summary
 
-**Overall Score:** 35/100 — **Level 1.5** (Retrievable + some Entity work)
+**Overall Score:** 35/100 - **Level 1.5** (Retrievable + some Entity work)
 
 **Critical Gaps:**
-1. No prompt corpus — zero tracking of generative queries
-2. No claim registry — unmanaged public claims
-3. Zero external corroboration — no third-party validation
-4. Missing AI crawler policies — robots.txt treats all bots identically
-5. No llms.txt — AI-specific navigation not implemented
-6. Zero GEO measurement — no cross-engine monitoring
+1. No prompt corpus - zero tracking of generative queries
+2. No claim registry - unmanaged public claims
+3. Zero external corroboration - no third-party validation
+4. Missing AI crawler policies - robots.txt treats all bots identically
+5. No llms.txt - AI-specific navigation not implemented
+6. Zero GEO measurement - no cross-engine monitoring
 
 **Immediate Risks:**
 - Generative engines may hallucinate about Nebula's offerings
@@ -27,7 +27,7 @@
 
 ## Layer-by-Layer Assessment
 
-### 1. Prompt & Demand Intelligence — **0%**
+### 1. Prompt & Demand Intelligence - **0%**
 
 | Requirement | Status | Gap |
 |-------------|--------|-----|
@@ -53,7 +53,7 @@
 
 ---
 
-### 2. Retrieval Eligibility — **85%** ✅
+### 2. Retrieval Eligibility - **85%** ✅
 
 | Requirement | Status | Notes |
 |-------------|--------|-------|
@@ -72,7 +72,7 @@
 
 ---
 
-### 3. Entity Resolution — **30%** ⚠️
+### 3. Entity Resolution - **30%** ⚠️
 
 | Entity Type | Status | Gap |
 |--------------|--------|-----|
@@ -104,7 +104,7 @@
 
 ---
 
-### 4. Claim & Knowledge Architecture — **0%**
+### 4. Claim & Knowledge Architecture - **0%**
 
 | Requirement | Status | Notes |
 |-------------|--------|-------|
@@ -127,7 +127,7 @@
 
 ---
 
-### 5. Generative-Ready Content — **45%** ⚠️
+### 5. Generative-Ready Content - **45%** ⚠️
 
 | Requirement | Status | Notes |
 |-------------|--------|-------|
@@ -161,7 +161,7 @@
 
 ---
 
-### 6. External Corroboration — **5%** ❌
+### 6. External Corroboration - **5%** ❌
 
 | Source Type | Status | Gap |
 |--------------|--------|-----|
@@ -179,7 +179,7 @@
 
 ---
 
-### 7. Recommendation Eligibility — **20%** ⚠️
+### 7. Recommendation Eligibility - **20%** ⚠️
 
 | Requirement | Status | Notes |
 |-------------|--------|-------|
@@ -214,7 +214,7 @@ Risk: AI may not recommend Nebula because category is ambiguous
 
 ---
 
-### 8. Narrative & Reputation Control — **5%** ❌
+### 8. Narrative & Reputation Control - **5%** ❌
 
 | Requirement | Status | Gap |
 |-------------|--------|-----|
@@ -229,7 +229,7 @@ Risk: AI may not recommend Nebula because category is ambiguous
 
 ---
 
-### 9. Cross-Engine Measurement — **0%**
+### 9. Cross-Engine Measurement - **0%**
 
 | Metric | Status | Tool |
 |--------|--------|------|
@@ -242,7 +242,7 @@ Risk: AI may not recommend Nebula because category is ambiguous
 
 ---
 
-### 10. Governance & Lifecycle — **0%**
+### 10. Governance & Lifecycle - **0%**
 
 | Requirement | Status | Gap |
 |-------------|--------|-----|
@@ -294,5 +294,5 @@ Risk: AI may not recommend Nebula because category is ambiguous
 
 ---
 
-**Last Updated:** 2025-07-15  
+**Last Updated:** 2025-07-15
 **Next Review:** 2025-07-22

@@ -48,7 +48,7 @@
           "#b3b3b3",
           "#cccccc"
         ],
-        "note": "Canonical value per tailwind.config.ts; globals.css's --fg-muted custom property matches. Bumped from #888888 (~5.7:1, AA-only) to #9e9e9e (~7.05:1 on BG Panel, ~7.6:1 on Near Black) to clear the WCAG 2.2 AAA 7:1 bar PRODUCT.md targets — resolved, see DESIGN.md's 'AAA Gap' rule."
+        "note": "Canonical value per tailwind.config.ts; globals.css's --fg-muted custom property matches. Bumped from #888888 (~5.7:1, AA-only) to #9e9e9e (~7.05:1 on BG Panel, ~7.6:1 on Near Black) to clear the WCAG 2.2 AAA 7:1 bar PRODUCT.md targets - resolved, see DESIGN.md's 'AAA Gap' rule."
       },
       "danger": {
         "role": "semantic",
@@ -64,7 +64,7 @@
           "#fecaca",
           "#fee2e2"
         ],
-        "note": "Canonical value per tailwind.config.ts. Bumped from #ef4444 (~5.0-5.4:1, AA-only) to #f37979 (~7.0:1 on BG Panel, ~7.6:1 on Near Black) to clear WCAG 2.2 AAA — same hue, lightened. Danger Dim (a background tint, not text) is unchanged; AAA text-contrast rules don't apply to it."
+        "note": "Canonical value per tailwind.config.ts. Bumped from #ef4444 (~5.0-5.4:1, AA-only) to #f37979 (~7.0:1 on BG Panel, ~7.6:1 on Near Black) to clear WCAG 2.2 AAA - same hue, lightened. Danger Dim (a background tint, not text) is unchanged; AAA text-contrast rules don't apply to it."
       },
       "warning": {
         "role": "semantic",
@@ -154,7 +154,7 @@
       "name": "Primary Button (Large / Hero)",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "size=\"lg\" variant for hero CTAs. Today the homepage hero hand-rolls this padding/radius on a raw <Link> instead of using the Button component at this size — that's drift to fix, not a second intended pattern.",
+      "description": "size=\"lg\" variant for hero CTAs. Today the homepage hero hand-rolls this padding/radius on a raw <Link> instead of using the Button component at this size - that's drift to fix, not a second intended pattern.",
       "html": "<button class=\"ds-btn-primary-lg\">Run Free Audit →</button>",
       "css": ".ds-btn-primary-lg { display: inline-flex; align-items: center; justify-content: center; padding: 16px 32px; background: #10b981; color: #050505; font-family: Karla, -apple-system, system-ui, sans-serif; font-weight: 600; font-size: 18px; border-radius: 16px; border: none; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-primary-lg:hover { background: #34d399; transform: translateY(-1px); box-shadow: 0 0 16px rgba(16, 185, 129, 0.25); } .ds-btn-primary-lg:focus-visible { outline: 2px solid #10b981; outline-offset: 4px; }"
     },
@@ -209,10 +209,10 @@
   ],
   "narrative": {
     "northStar": "The Conversion Lab",
-    "overview": "Assertive authority meets clinical precision. The system projects confidence through density and sharpness — not friendliness, not warmth, not restraint. This is diagnostic equipment, not a lifestyle brand. Karla replaced Inter specifically to exit the reflex-default monoculture. Near-black foundation eliminates visual competition. Signal Emerald marks actionable elements with authority.\n\nDepth emerges from ambient glow orbs that create atmospheric layering, not lift. The interface feels like surfaces emerging from atmosphere, not sitting on top of it. Every visual choice serves the belief ladder — the visitor must believe Nebula finds real, specific defects on their page.\n\nResolved drift: the indigo/mint palette and dangerouslySetInnerHTML/nested-body anti-pattern that used to span about/** and most of learning-centre/** has been migrated onto these tokens as plain JSX.",
+    "overview": "Assertive authority meets clinical precision. The system projects confidence through density and sharpness - not friendliness, not warmth, not restraint. This is diagnostic equipment, not a lifestyle brand. Karla replaced Inter specifically to exit the reflex-default monoculture. Near-black foundation eliminates visual competition. Signal Emerald marks actionable elements with authority.\n\nDepth emerges from ambient glow orbs that create atmospheric layering, not lift. The interface feels like surfaces emerging from atmosphere, not sitting on top of it. Every visual choice serves the belief ladder - the visitor must believe Nebula finds real, specific defects on their page.\n\nResolved drift: the indigo/mint palette and dangerouslySetInnerHTML/nested-body anti-pattern that used to span about/** and most of learning-centre/** has been migrated onto these tokens as plain JSX.",
     "keyCharacteristics": [
       "Near-black canvas eliminates everything but diagnostic content",
-      "Signal Emerald authority on actions — used sparingly (≤10% surface)",
+      "Signal Emerald authority on actions - used sparingly (≤10% surface)",
       "Karla grotesque: geometric, weight-capable, assertively non-default",
       "Ambient depth via layered glow, never drop shadows",
       "Tight tracking (-0.03em) on display for condensed authority",
@@ -256,7 +256,7 @@
       "Do use ambient glow orbs for atmospheric depth instead of drop shadows.",
       "Do set display headlines with tight tracking (-0.03em).",
       "Do cap body prose at 65–75ch line length.",
-      "Do show evidence — annotated screenshots and specific defects.",
+      "Do show evidence - annotated screenshots and specific defects.",
       "Do include skip-link for keyboard navigation. Target WCAG 2.2 AAA.",
       "Do use the shared Button/Card/Input components from components/ui/ instead of re-implementing their styles inline."
     ],
@@ -270,8 +270,8 @@
       "Don't fabricate testimonials or conversion claims.",
       "Don't animate images on hover.",
       "Don't default to Inter, DM Sans, or reflex-reject fonts.",
-      "Don't reintroduce the old indigo/mint palette (#6366f1, #a5b4fc, #79f2c0) — it was migrated off every page.",
-      "Don't hardcode a token value directly (a hex, an rgba) when a shared color or utility class already names it — globals.css's fg-muted/warning duplicates were exactly this mistake; both now reference var(--fg-muted)/var(--warning)."
+      "Don't reintroduce the old indigo/mint palette (#6366f1, #a5b4fc, #79f2c0) - it was migrated off every page.",
+      "Don't hardcode a token value directly (a hex, an rgba) when a shared color or utility class already names it - globals.css's fg-muted/warning duplicates were exactly this mistake; both now reference var(--fg-muted)/var(--warning)."
     ]
   }
 }

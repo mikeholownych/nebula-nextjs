@@ -16,16 +16,16 @@ def close_stale_lead(email, url):
     # Send final email with tool link only
     send_email(
         to=email,
-        subject=f"{url} — your free audit tool",
+        subject=f"{url} - your free audit tool",
         body=f"""Hey,
-        
+
 I noticed we haven't connected on {url} yet. Here's your free audit tool to check what's leaking your ad spend: https://nebulacomponents.shop/audit.html?email={email}
-        
+
 No pitch. No call booking. Just the tool.
-        
-— Nebula Audit Agent"""
+
+- Nebula Audit Agent"""
     )
-    
+
     # Update lead status
     lead_manager.update_lead_status(email, "closed")
     lead_manager.log_retirement(email, "stale_after_multiple_touches")

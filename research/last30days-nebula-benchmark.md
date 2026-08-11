@@ -1,7 +1,7 @@
 # last30days Nebula Lead-Discovery Benchmark
 
-**Date:** 2026-07-13  
-**Upstream commit:** `4b027919c76e24ac27875c854bfd9f57c0b7cb69`  
+**Date:** 2026-07-13
+**Upstream commit:** `4b027919c76e24ac27875c854bfd9f57c0b7cb69`
 **Decision:** Do not install as a production lead source. Retain as an optional research candidate.
 
 ## Query
@@ -44,4 +44,4 @@ Source labels no longer bypass missing trigger evidence. Added `zero sales` to t
 
 - **Production lead discovery:** reject. Zero qualified/contactable leads versus Nebula's four.
 - **Market/competitor research:** potentially useful because its source-health, citation, freshness, and watchlist architecture is strong.
-- **Next evaluation:** only revisit after X/YouTube are deliberately configured, then benchmark on market intelligence—not contact acquisition.
+- **Next evaluation:** only revisit after X/YouTube are deliberately configured, then benchmark on market intelligence-not contact acquisition.

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Route Baseline Capture — Wave 0
+# Route Baseline Capture - Wave 0
 # Captures HTTP contracts for all Nebula routes
 
 set -e
@@ -36,17 +36,17 @@ FIRST=true
 while read -r url; do
     # Capture route contract
     RESPONSE=$(curl -s -I -w "\nHTTP_CODE:%{http_code}" "$url" 2>/dev/null)
-    
+
     HTTP_CODE=$(echo "$RESPONSE" | grep "HTTP_CODE:" | cut -d: -f2)
     CONTENT_TYPE=$(echo "$RESPONSE" | grep -i "Content-Type:" | cut -d: -f2- | tr -d '\r')
-    
+
     # Add comma if not first
     if [ "$FIRST" = true ]; then
         FIRST=false
     else
         echo "," >> "$BASELINE_FILE"
     fi
-    
+
     # Add JSON object
     cat >> "$BASELINE_FILE" << ROUTE_EOF
   {
@@ -56,9 +56,9 @@ while read -r url; do
     "timestamp": "$TIMESTAMP"
   }
 ROUTE_EOF
-    
+
     echo "  ✓ $url ($HTTP_CODE)"
-    
+
 done < /tmp/routes.txt
 
 echo "]" >> "$BASELINE_FILE"

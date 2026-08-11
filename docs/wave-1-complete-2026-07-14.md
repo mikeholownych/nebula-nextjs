@@ -1,4 +1,4 @@
-# Wave 1 Complete — Identity Infrastructure
+# Wave 1 Complete - Identity Infrastructure
 
 **Date:** Tuesday, July 14, 2026
 **Duration:** 3 sessions (~14 hours)
@@ -113,27 +113,27 @@ rate_limit:{identifier}     → Token bucket state
 
 **Configuration:**
 ```
-.env                    — Environment variables
-.env.example            — Template
-alembic.ini             — Migrations config
+.env                    - Environment variables
+.env.example            - Template
+alembic.ini             - Migrations config
 ```
 
 **Database:**
 ```
 platform_api/db/
   __init__.py
-  base.py               — SQLAlchemy base
-  models.py             — 7 model classes
-  session.py            — Session management
+  base.py               - SQLAlchemy base
+  models.py             - 7 model classes
+  session.py            - Session management
 ```
 
 **Auth:**
 ```
 platform_api/auth/
   __init__.py
-  google.py             — Google OAuth verification
-  jwt.py                — JWT sessions
-  routes.py             — 7 API endpoints
+  google.py             - Google OAuth verification
+  jwt.py                - JWT sessions
+  routes.py             - 7 API endpoints
 ```
 
 **Redis:**
@@ -145,17 +145,17 @@ platform_api/middleware/rate_limit.py
 **Tests:**
 ```
 tests/
-  test_google_oauth.py         — 7 tests
-  test_jwt_sessions.py         — 15 tests
-  test_jwt_sessions_simple.py  — 3 tests
-  test_auth_routes.py          — 8 tests (pending)
+  test_google_oauth.py         - 7 tests
+  test_jwt_sessions.py         - 15 tests
+  test_jwt_sessions_simple.py  - 3 tests
+  test_auth_routes.py          - 8 tests (pending)
 ```
 
 **Scripts:**
 ```
 scripts/
-  test_auth_flow.py    — Integration test
-  start_api.sh         — Server startup
+  test_auth_flow.py    - Integration test
+  start_api.sh         - Server startup
 ```
 
 **Docs:**
@@ -178,19 +178,19 @@ docs/
 
 **Authentication:**
 ```
-POST   /api/auth/google          — Google OAuth login
-POST   /api/auth/logout           — Revoke current session
-POST   /api/auth/logout-all       — Revoke all sessions
-GET    /api/auth/sessions         — List active sessions
-DELETE /api/auth/sessions/{id}    — Revoke specific session
-GET    /api/auth/me               — Get current user
-POST   /api/auth/magic-link       — Request magic link (pending)
-GET    /api/auth/verify           — Verify magic link (pending)
+POST   /api/auth/google          - Google OAuth login
+POST   /api/auth/logout           - Revoke current session
+POST   /api/auth/logout-all       - Revoke all sessions
+GET    /api/auth/sessions         - List active sessions
+DELETE /api/auth/sessions/{id}    - Revoke specific session
+GET    /api/auth/me               - Get current user
+POST   /api/auth/magic-link       - Request magic link (pending)
+GET    /api/auth/verify           - Verify magic link (pending)
 ```
 
 **Health:**
 ```
-GET    /healthz                   — Health check
+GET    /healthz                   - Health check
 ```
 
 ---

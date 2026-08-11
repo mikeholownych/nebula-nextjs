@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Midnight UTC AgentMail Blast — Fresh personalized outreach only.
+"""Midnight UTC AgentMail Blast - Fresh personalized outreach only.
 Only sends to verified high-pain founders who haven't been contacted before."""
 import json, urllib.request, time, os
 
@@ -46,7 +46,7 @@ for t in targets:
         f"Hi {t['name']},\n\n"
         f"I read your IndieHackers post about {t['context']}. "
         f"That's exactly the kind of situation I've been working on.\n\n"
-        f"I built LaunchCrate — I create professional landing pages + email setup + "
+        f"I built LaunchCrate - I create professional landing pages + email setup + "
         f"outreach sequences for founders who need to ship fast. Delivered in 24 hours. "
         f"Early adopter price: $97 (normally $750).\n\n"
         f"{LC}\n\n"
@@ -64,8 +64,8 @@ for t in targets:
         f"<p><strong style='color:#34d399'>Ship or It's Free guarantee.</strong></p>"
         f"<p>Reply if you want a quick audit.</p>"
     )
-    
-    ok, msg = send(t["email"], f"Saw your IH post — {t['context'][:55]}", text, html)
+
+    ok, msg = send(t["email"], f"Saw your IH post - {t['context'][:55]}", text, html)
     if ok:
         sent += 1
         print(f"[SENT] {t['email']}")

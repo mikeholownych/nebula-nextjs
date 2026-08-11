@@ -32,7 +32,7 @@ Every test we've run: specific CTA outperforms generic by 50 to 70 percent.
 
 CTA (25–30s):
 Go check your button right now. View page source, search for your CTA text.
-If it's "Get Started" — you already know what to do.
+If it's "Get Started" - you already know what to do.
 ```
 
 ---

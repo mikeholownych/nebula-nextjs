@@ -24,8 +24,8 @@
 ## Three-Phase Lifecycle
 
 ### INCEPTION PHASE
-**Purpose**: Planning and architectural decisions  
-**Focus**: Determine WHAT to build and WHY  
+**Purpose**: Planning and architectural decisions
+**Focus**: Determine WHAT to build and WHY
 **Location**: `inception/` directory
 
 **Stages**:
@@ -40,8 +40,8 @@
 **Outputs**: Requirements, user stories, architectural decisions, unit definitions
 
 ### CONSTRUCTION PHASE
-**Purpose**: Detailed design and implementation  
-**Focus**: Determine HOW to build it  
+**Purpose**: Detailed design and implementation
+**Focus**: Determine HOW to build it
 **Location**: `construction/` directory
 
 **Stages**:
@@ -49,14 +49,14 @@
 - NFR Requirements (CONDITIONAL, per-unit)
 - NFR Design (CONDITIONAL, per-unit)
 - Infrastructure Design (CONDITIONAL, per-unit)
-- Code Generation (ALWAYS) — includes Part 1: Planning and Part 2: Generation
+- Code Generation (ALWAYS) - includes Part 1: Planning and Part 2: Generation
 - Build and Test (ALWAYS)
 
 **Outputs**: Design artifacts, NFR implementations, code, tests
 
 ### OPERATIONS PHASE
-**Purpose**: Deployment and operational readiness  
-**Focus**: How to DEPLOY and RUN it  
+**Purpose**: Deployment and operational readiness
+**Focus**: How to DEPLOY and RUN it
 **Location**: `operations/` directory
 
 **Stages**:
@@ -72,7 +72,7 @@
 - **Workspace Detection**: Initial analysis of workspace state and project type
 - **Requirements Analysis**: Gathering requirements (depth varies based on complexity)
 - **Workflow Planning**: Creating execution plan for which phases to run
-- **Code Generation**: Single stage with two parts — Part 1 (Planning) creates detailed implementation plans, Part 2 (Generation) generates actual code based on plans and prior artifacts
+- **Code Generation**: Single stage with two parts - Part 1 (Planning) creates detailed implementation plans, Part 2 (Generation) generates actual code based on plans and prior artifacts
 - **Build and Test**: Building all units and executing comprehensive testing
 
 ### Conditional Stages

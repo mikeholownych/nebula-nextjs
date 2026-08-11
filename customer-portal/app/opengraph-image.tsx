@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og'
 
-export const alt = 'Nebula Components — diagnose landing-page conversion leaks before they burn more ad spend'
+export const alt = 'Nebula Components - diagnose landing-page conversion leaks before they burn more ad spend'
 export const size = {
   width: 1200,
   height: 630,
@@ -8,7 +8,7 @@ export const size = {
 export const contentType = 'image/png'
 
 /**
- * SignalMark — 3×3 grid of conversion-signal dots, matching the brand
+ * SignalMark - 3×3 grid of conversion-signal dots, matching the brand
  * glyph in components/NebulaMark.tsx (NebulaLogo decorative pattern:
  * top row pass, middle mixed, bottom neutral).
  */

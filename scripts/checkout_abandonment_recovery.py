@@ -36,7 +36,7 @@ CHANNEL = "checkout_abandonment_recovery"
 SEND_AFTER_HOURS = 2
 STOP_AFTER_HOURS = 72
 
-# Excluded addresses — internal / test
+# Excluded addresses - internal / test
 EXCLUDED_DOMAINS = {"example.com", "example.invalid", "invalid.nebulacomponents.com"}
 EXCLUDED_PREFIXES = ("anonymous+", "qa-", "test@", "ux-audit-test@", "e2e-")
 
@@ -81,13 +81,13 @@ def build_email(email: str, audit_id: str, url: str, score: int, grade: str, fin
 
     domain = url.replace("https://", "").replace("http://", "").split("/")[0]
 
-    subject = f"Your {domain} audit — the fix is ready"
+    subject = f"Your {domain} audit - the fix is ready"
 
     text = f"""Your audit findings for {url} are saved.
 
 Score: {score}/10 (Grade {grade}){finding_line}
 
-The $97 One-Leak Repair Sprint delivers the targeted fix for your highest-impact finding — exact copy, code, or configuration change for your specific page. Includes a 30-day re-audit to verify the fix held.
+The $97 One-Leak Repair Sprint delivers the targeted fix for your highest-impact finding - exact copy, code, or configuration change for your specific page. Includes a 30-day re-audit to verify the fix held.
 
 Resume checkout:
 {checkout_url}
@@ -97,7 +97,7 @@ Or reopen your full audit:
 
 If you have questions before purchasing, reply to this email.
 
-— Mike
+- Mike
 Nebula Components
 nebulacomponents.com"""
 
@@ -125,13 +125,13 @@ nebulacomponents.com"""
 
 <div style="background:#f7f7f7;border-radius:10px;padding:16px;margin:20px 0;font-family:monospace;font-size:14px">
   <span style="color:#1a1a1a;font-weight:700">{score}/10</span>
-  <span style="color:#666;font-size:12px;margin-left:8px">Grade {grade} — {url}</span>
+  <span style="color:#666;font-size:12px;margin-left:8px">Grade {grade} - {url}</span>
 </div>
 
 {finding_block}
 
 <p style="color:#444;line-height:1.6">
-  The <strong>$97 One-Leak Repair Sprint</strong> delivers the targeted fix for your highest-impact finding —
+  The <strong>$97 One-Leak Repair Sprint</strong> delivers the targeted fix for your highest-impact finding -
   exact copy, code, or configuration change written for your specific page.
   Includes a 30-day re-audit to verify the fix held.
 </p>
@@ -139,7 +139,7 @@ nebulacomponents.com"""
 <div style="margin:28px 0">
   <a href="{checkout_url}"
      style="background:#00c2a0;color:#fff;text-decoration:none;padding:14px 28px;border-radius:8px;font-weight:600;font-size:15px;display:inline-block">
-    Get the fix — $97 →
+    Get the fix - $97 →
   </a>
 </div>
 
@@ -201,7 +201,7 @@ def main(dry_run: bool = False) -> None:
             rows = cur.fetchall()
 
         if not rows:
-            log("No eligible audits for recovery email — silent exit")
+            log("No eligible audits for recovery email - silent exit")
             return
 
         log(f"Found {len(rows)} eligible audit(s) for recovery email")
@@ -249,7 +249,7 @@ def main(dry_run: bool = False) -> None:
 
             sent += 1
 
-        log(f"{'[DRY RUN] ' if dry_run else ''}Done — {sent} recovery email(s) {'would be ' if dry_run else ''}sent")
+        log(f"{'[DRY RUN] ' if dry_run else ''}Done - {sent} recovery email(s) {'would be ' if dry_run else ''}sent")
 
 
 if __name__ == "__main__":
@@ -262,7 +262,7 @@ if __name__ == "__main__":
     try:
         fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except BlockingIOError:
-        log("Another instance is running — exiting")
+        log("Another instance is running - exiting")
         sys.exit(0)
 
     try:

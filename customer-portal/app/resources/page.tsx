@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { citableLicenseFacts, citableReleaseFacts } from './citable/content'
 
 export const metadata: Metadata = {
-  title: 'Resources — Tools & Open Source | Nebula Components',
+  title: 'Resources - Tools & Open Source | Nebula Components',
   description:
-    'Open-source tools and resources from Nebula Components — including Citable, the search and AI discoverability governance CLI for SEO, AEO, and GEO audits.',
+    'Open-source tools and resources from Nebula Components - including Citable, the search and AI discoverability governance CLI for SEO, AEO, and GEO audits.',
   alternates: { canonical: 'https://nebulacomponents.com/resources' },
 }
 
@@ -13,7 +13,7 @@ const resourceSchema = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
   '@id': 'https://nebulacomponents.com/resources',
-  name: 'Resources — Nebula Components',
+  name: 'Resources - Nebula Components',
   description:
     'Open-source tools built from real conversion and discoverability problems on real sites.',
   url: 'https://nebulacomponents.com/resources',
@@ -63,7 +63,7 @@ export default function ResourcesPage() {
               <p className="flex-1 text-sm leading-relaxed text-fg-muted">
                 The open evidence layer beneath Nebula for defensible SEO, AEO, and GEO audits.{' '}
                 {citableReleaseFacts.detectorCount} detectors across{' '}
-                {citableReleaseFacts.namespaceCount} namespaces — technical retrieval, entity
+                {citableReleaseFacts.namespaceCount} namespaces - technical retrieval, entity
                 identity, claim governance, agent-readiness, and more. Evidence packages on every
                 run. {citableLicenseFacts.label}.
               </p>
@@ -84,7 +84,7 @@ export default function ResourcesPage() {
             <p className="mb-4 max-w-2xl leading-relaxed text-fg-muted">
               Every tool here started as an internal need. Citable was built because we needed a
               reproducible, evidence-backed way to audit whether a site was actually retrievable by
-              search engines and AI systems — not just whether it looked correct. Generic SEO dashboards
+              search engines and AI systems - not just whether it looked correct. Generic SEO dashboards
               gave opinions. We needed deterministic observations with evidence packages.
             </p>
             <p className="mb-4 max-w-2xl leading-relaxed text-fg-muted">

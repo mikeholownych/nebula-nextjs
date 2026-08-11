@@ -183,7 +183,7 @@ def make_outro_card(domain, bg=None):
 
     The bottom corners are RESERVED EMPTY ZONES for YouTube's end-screen
     elements (subscribe + next-video). End screens cannot be set via the
-    Data API — a human drops the elements into these zones in Studio.
+    Data API - a human drops the elements into these zones in Studio.
     The zones are drawn as dashed placeholders so the safe area is
     obvious during manual setup; they read as 'empty on purpose'.
     """
@@ -211,7 +211,7 @@ def make_outro_card(domain, bg=None):
     _dashed_rect(d, (W - 80 - z_w, z_y, W - 80, z_y + z_h), outline=DIM)
     d.text((W - 80 - z_w // 2, z_y + z_h // 2), "END SCREEN\nNEXT VIDEO", fill=DIM, font=small, anchor="mm")
 
-    d.text((W//2, 636), "Nebula Components — Autonomous Conversion Engineering", fill=DIM, font=small, anchor="mm")
+    d.text((W//2, 636), "Nebula Components - Autonomous Conversion Engineering", fill=DIM, font=small, anchor="mm")
     return img
 
 
@@ -219,7 +219,7 @@ def make_sting_card(bg=None):
     """Brand sting (blueprint Phase 4 'The 3-Second Rule').
 
     A static, standardized logo flash shown between the hook and the
-    body (the 'content gap' — never before the hook). Short, silent
+    body (the 'content gap' - never before the hook). Short, silent
     (the whoosh is mixed by the audio engine), and identical on every
     video to build brand equity.
     """
@@ -281,7 +281,7 @@ async def produce_video(page, audit, url=None):
     from yt_channel.screenshot import capture_page_async
     bg = await capture_page_async(url) if url else None
 
-    # Pre-fetch B-roll clips per segment (Phase 3 — runs in parallel)
+    # Pre-fetch B-roll clips per segment (Phase 3 - runs in parallel)
     from yt_channel.broll import fetch_broll, composite_over_broll, _keywords_for_segment
     broll_clips: dict[int, "Path | None"] = {}
     if os.environ.get("PEXELS_API_KEY"):
@@ -301,7 +301,7 @@ async def produce_video(page, audit, url=None):
                     broll_clips[idx] = clip
 
     # Capture page evidence frames for teardown format
-    # evidence_frames: {finding_key: Path} — used when visual == "evidence_<key>"
+    # evidence_frames: {finding_key: Path} - used when visual == "evidence_<key>"
     evidence_frames: dict[str, Path] = {}
     if any(s.get("visual", "").startswith("evidence_") for s in script["segments"]):
         try:
@@ -392,7 +392,7 @@ async def produce_video(page, audit, url=None):
         sting_img.save(sting_path)
         frames.insert(1, sting_path)
 
-    # 2. Sonic Foundation — per-segment TTS with deterministic pitch
+    # 2. Sonic Foundation - per-segment TTS with deterministic pitch
     #    micro-variation, leading/trailing silence trim, controlled
     #    pacing gaps (<= 0.2s), transition whoosh SFX layer, and -14 LUFS
     #    loudness normalization (see audio_engine.py).
@@ -449,9 +449,9 @@ async def produce_video(page, audit, url=None):
     audio_path = job_dir / "voiceover.wav"
     audio_duration = finalize(narration_wav, sfx_wav, audio_path)
 
-    # 4/5. Motion assembly — Ken Burns per segment + fades, then mux audio
+    # 4/5. Motion assembly - Ken Burns per segment + fades, then mux audio
     # Prepend intro frames/durations and append outro frames/durations.
-    # Intro/outro are visual-only — the audio pad is silence (finalize() set length).
+    # Intro/outro are visual-only - the audio pad is silence (finalize() set length).
     all_frames = intro_frames + frames + outro_frames
     all_durations = intro_durs + durations + outro_durs
 
@@ -465,7 +465,7 @@ async def produce_video(page, audit, url=None):
     from yt_channel.captions import generate_captions, burn_captions
     ass_path = job_dir / f"{job_id}.ass" if job_dir.exists() else \
         config.TMP_DIR / f"{job_id}_cap.ass"
-    # job_dir was cleaned up — use VIDEO_DIR parent for temp
+    # job_dir was cleaned up - use VIDEO_DIR parent for temp
     config.VIDEO_DIR.mkdir(parents=True, exist_ok=True)
     cap_tmp_dir = config.VIDEO_DIR.parent / "tmp" / job_id
     cap_tmp_dir.mkdir(parents=True, exist_ok=True)

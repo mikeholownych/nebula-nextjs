@@ -18,10 +18,10 @@ User submits a URL via:
 | Name | No | Optional from form |
 
 ## Validation Rules
-1. URL must be valid HTTP/HTTPS — reject `localhost`, `127.0.0.1`, private IP ranges, `10.x`, `172.16-31.x`, `192.168.x`
+1. URL must be valid HTTP/HTTPS - reject `localhost`, `127.0.0.1`, private IP ranges, `10.x`, `172.16-31.x`, `192.168.x`
 2. Domain must resolve (check DNS A/AAAA records)
-3. Site must be accessible — return HTTP 200 on GET
-4. Content-Type must be HTML — reject PDFs, images, binary downloads
+3. Site must be accessible - return HTTP 200 on GET
+4. Content-Type must be HTML - reject PDFs, images, binary downloads
 5. Crawl must not be blocked by `/robots.txt` on audit-relevant paths
 6. Language must be primarily English (ISO 639-1 detection)
 7. Maximum submission rate: 3/hour per email or IP
@@ -76,10 +76,10 @@ User submits a URL via:
 - **Stripe payment failure on x402 →** log event `audit.x402_failed`, return "Payment declined by network"
 
 ## Automation Readiness Gate
-- [ ] Deterministic trigger: YES — form submission or webhook POST
-- [ ] Structured inputs: YES — validated URL + optional email + source
-- [ ] Bounded output: PARTIAL — findings are variable in count but schema is fixed
-- [ ] Explicit failure handling: YES — all failure modes defined above
-- [ ] Observable execution: YES — audits table + events table
-- [ ] Reversibility: YES — audits can be re-run, old records are preserved
-- [ ] Stable decision rule: YES — URL validation and crawl rules are objective
+- [ ] Deterministic trigger: YES - form submission or webhook POST
+- [ ] Structured inputs: YES - validated URL + optional email + source
+- [ ] Bounded output: PARTIAL - findings are variable in count but schema is fixed
+- [ ] Explicit failure handling: YES - all failure modes defined above
+- [ ] Observable execution: YES - audits table + events table
+- [ ] Reversibility: YES - audits can be re-run, old records are preserved
+- [ ] Stable decision rule: YES - URL validation and crawl rules are objective

@@ -1,5 +1,5 @@
 # Agency Partner Recruitment Playbook
-## Play 4 — Seed the first 3 agency partners
+## Play 4 - Seed the first 3 agency partners
 
 **Goal:** 3 agencies embedding the widget within 14 days (by 2026-08-18).
 
@@ -23,13 +23,13 @@
 
 ## Channels (ranked by expected signal quality)
 
-1. **LinkedIn DM (warm)** — find 10 agencies posting about CRO/landing pages
-2. **Agency directory outreach** — Clutch "Conversion Optimization" category
-3. **Indie Hackers / X** — founders with agency offerings, already talking about tools
+1. **LinkedIn DM (warm)** - find 10 agencies posting about CRO/landing pages
+2. **Agency directory outreach** - Clutch "Conversion Optimization" category
+3. **Indie Hackers / X** - founders with agency offerings, already talking about tools
 
 ---
 
-## Outreach Template (LinkedIn DM — cold)
+## Outreach Template (LinkedIn DM - cold)
 
 Subject: Your own lead-gen audit tool (one-time, no monthly)
 
@@ -37,9 +37,9 @@ Subject: Your own lead-gen audit tool (one-time, no monthly)
 
 Hey [Name],
 
-Saw you work on landing pages for [context — their niche/recent post].
+Saw you work on landing pages for [context - their niche/recent post].
 
-We built an embeddable audit widget that scores any landing page (0–10) and shows the top conversion leaks — in real time, right on your agency's site. Your visitors scan their page, you get the lead. Full attribution.
+We built an embeddable audit widget that scores any landing page (0–10) and shows the top conversion leaks - in real time, right on your agency's site. Your visitors scan their page, you get the lead. Full attribution.
 
 It's two lines of HTML. Dark/light theme. No monthly fees. One-time $497.
 
@@ -47,7 +47,7 @@ Live demo: https://nebulacomponents.com/agency-partner
 
 Worth a look? Happy to answer questions.
 
-— Mike, Nebula Components
+- Mike, Nebula Components
 
 ---
 
@@ -77,7 +77,7 @@ One-time $497. No monthly. Live demo: nebulacomponents.com/agency-partner
 3. Mike sends welcome email manually (until volume warrants automation):
    - Embed instructions
    - Their partner ID + domain
-   - Dashboard access (future — workspace integration)
+   - Dashboard access (future - workspace integration)
    - Rate limit bump offer
 
 ---
@@ -96,6 +96,6 @@ One-time $497. No monthly. Live demo: nebulacomponents.com/agency-partner
 ## Anti-patterns to avoid
 
 - Don't pitch agencies that only do branding/logo work (no landing pages)
-- Don't discount below $497 — the offer is already underpriced for lifetime access
+- Don't discount below $497 - the offer is already underpriced for lifetime access
 - Don't promise features that don't exist yet (white-label, dashboard, multi-domain)
-- Don't spam — 10 DMs max per channel, wait for signals before follow-up
+- Don't spam - 10 DMs max per channel, wait for signals before follow-up

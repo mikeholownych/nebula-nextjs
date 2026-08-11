@@ -334,7 +334,7 @@ def build_company_brain(base: Path = BASE, now: datetime | None = None) -> dict[
             "checkout": "buyer cannot pay self-serve",
         },
         "specialist_agent_architecture": {
-            "source_reviewed": "NipPro AI 50 AI Agent Setup Guides — specialist principle + 7-element setup guide",
+            "source_reviewed": "NipPro AI 50 AI Agent Setup Guides - specialist principle + 7-element setup guide",
             "principle": "one agent, one role, one mission, one trigger; handoffs beat generalist context switching",
             "seven_elements": [
                 "role",

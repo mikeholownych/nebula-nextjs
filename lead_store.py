@@ -1,5 +1,5 @@
 """
-lead_store.py — Central lead state machine backed by SQLite.
+lead_store.py - Central lead state machine backed by SQLite.
 Replaces 5+ overlapping JSON/JSONL stores with one authoritative DB.
 
 Usage:
@@ -10,14 +10,14 @@ Usage:
     stats = db.get_stage_counts()
 
 Stages:
-    discovered         — Raw lead from signal source
-    site_found         — URL extracted from source
-    contacted          — Email found, outreach sent
-    audit_delivered    — Self-serve audit delivered
-    pitch_sent         — $97 implementation pitch sent
-    paid               — Customer (payment received)
-    bounced            — Email hard-bounced (invalid/mailbox full/permanent)
-    dead               — Permanently stalled (max retries)
+    discovered         - Raw lead from signal source
+    site_found         - URL extracted from source
+    contacted          - Email found, outreach sent
+    audit_delivered    - Self-serve audit delivered
+    pitch_sent         - $97 implementation pitch sent
+    paid               - Customer (payment received)
+    bounced            - Email hard-bounced (invalid/mailbox full/permanent)
+    dead               - Permanently stalled (max retries)
 """
 import json
 import sqlite3
@@ -86,7 +86,7 @@ class LeadStore:
                 CREATE INDEX IF NOT EXISTS idx_leads_updated ON leads(updated_at);
             """)
 
-            # Migrate existing databases — add columns that may not exist yet
+            # Migrate existing databases - add columns that may not exist yet
             for col_def in [
                 "bounced_at TEXT",
                 "bounce_type TEXT NOT NULL DEFAULT ''",
@@ -100,7 +100,7 @@ class LeadStore:
                 except sqlite3.OperationalError:
                     pass  # Column already exists
 
-            # Create indexes (AFTER migration — columns must exist first)
+            # Create indexes (AFTER migration - columns must exist first)
             try:
                 c.execute("CREATE INDEX IF NOT EXISTS idx_leads_bounced ON leads(bounce_type) WHERE bounce_type != ''")
             except sqlite3.OperationalError:
@@ -141,11 +141,11 @@ class LeadStore:
         "email_clicked":    2,    # TrustOS: click = +2
         "email_replied":    3,    # TrustOS: reply = +3
         "audit_delivered":  3,    # Resource consumed (TrustOS: resource_visit = +1, bumped for depth)
-        "audit_requested":  5,    # High intent — self-serve audit request
+        "audit_requested":  5,    # High intent - self-serve audit request
         "pitch_sent":       1,    # Email sent to them
         "site_found":       1,    # URL extracted
         "bounced":         -5,    # TrustOS: bounce = -5
-        "complained":     -10,    # Spam complaint — severe
+        "complained":     -10,    # Spam complaint - severe
         "silent_30d":      -2,    # Decay tick for 30-day silence
     }
 
@@ -541,7 +541,7 @@ class LeadStore:
             "paid", "dead", "bounced",
             "discovered", "site_found",
             "pitch_sent", "pitch_queued",
-            "needs_review",  # human-review holding stage — not a pipeline failure
+            "needs_review",  # human-review holding stage - not a pipeline failure
         })
         now = datetime.now(timezone.utc)
         stuck = []
@@ -574,7 +574,7 @@ class LeadStore:
         Returns counts of migrated records per source."""
         counts = {"audit_leads": 0, "hot_lead": 0, "contacted": 0, "outreach_evidence": 0}
 
-        # 1. audit_leads.jsonl — stage: audit_delivered
+        # 1. audit_leads.jsonl - stage: audit_delivered
         p = BASE / "audit_leads.jsonl"
         if p.exists():
             for line in p.read_text().splitlines():
@@ -598,7 +598,7 @@ class LeadStore:
                 except:
                     pass
 
-        # 2. HOT_LEAD.json — stage: pitch_sent or audit_delivered
+        # 2. HOT_LEAD.json - stage: pitch_sent or audit_delivered
         p = BASE / "HOT_LEAD.json"
         if p.exists():
             try:
@@ -622,7 +622,7 @@ class LeadStore:
             except:
                 pass
 
-        # 3. contacted.json — stage: contacted
+        # 3. contacted.json - stage: contacted
         p = BASE / "contacted.json"
         if p.exists():
             try:
@@ -650,7 +650,7 @@ class LeadStore:
             except:
                 pass
 
-        # 4. outreach_evidence.jsonl — supplement existing records
+        # 4. outreach_evidence.jsonl - supplement existing records
         p = BASE / "outreach_evidence.jsonl"
         if p.exists():
             for line in p.read_text().splitlines():
@@ -684,7 +684,7 @@ class LeadStore:
         detail_trimmed = bounce_detail[:500] if bounce_detail else ""
 
         if bounce_type == "soft" and lead:
-            # Soft bounce — increment retry, don't mark terminal
+            # Soft bounce - increment retry, don't mark terminal
             return self.upsert_lead(
                 email=email,
                 retry_count=lead.get("retry_count", 0) + 1,
@@ -694,7 +694,7 @@ class LeadStore:
                 bounce_detail=detail_trimmed,
             )
 
-        # Hard bounce — terminal stage, apply -5 score
+        # Hard bounce - terminal stage, apply -5 score
         ok = self.add_score(email, -5, reason=f"hard_bounce: {detail_trimmed[:100]}")
         return self.upsert_lead(
             email=email,

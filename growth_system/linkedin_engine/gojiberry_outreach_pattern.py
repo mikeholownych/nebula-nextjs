@@ -32,9 +32,9 @@ def generate_connection_note(name, signal_context):
     Rule: reference something specific about them. 2-3 sentences. No pitch.
     """
     templates = [
-        f"{name}, saw your thoughts on {signal_context}. Working on the same problem — thought it was worth connecting.",
+        f"{name}, saw your thoughts on {signal_context}. Working on the same problem - thought it was worth connecting.",
         f"{name}, your post about {signal_context} stood out. I'm focused on the same space. Worth a connection?",
-        f"Saw your comment on {signal_context} — some sharp observations. Connecting to follow your work.",
+        f"Saw your comment on {signal_context} - some sharp observations. Connecting to follow your work.",
     ]
     return templates[hash(name + signal_context) % len(templates)]
 
@@ -44,9 +44,9 @@ def generate_first_dm_question(name, signal_context, pain_area):
     Gojiberry Message 1: Pure question. Zero offer. Zero link. Zero pitch.
     """
     templates = [
-        f"Hey {name} — quick question: what's your biggest challenge with {pain_area} right now?",
-        f"Hey {name} — curious: what's the #1 thing you're struggling with on {pain_area}?",
-        f"{name} — what's the most frustrating part about {pain_area} for you at the moment?",
+        f"Hey {name} - quick question: what's your biggest challenge with {pain_area} right now?",
+        f"Hey {name} - curious: what's the #1 thing you're struggling with on {pain_area}?",
+        f"{name} - what's the most frustrating part about {pain_area} for you at the moment?",
     ]
     return templates[hash(name + pain_area) % len(templates)]
 
@@ -64,8 +64,8 @@ def generate_second_dm(name, pain_area, similar_company="SaaS founders"):
     Gojiberry Message 2 (after prospect replies): relate + soft ask.
     """
     templates = [
-        f"Interesting — we just solved that exact problem for {similar_company}. Mind if I send you a 3-minute video showing how?",
-        f"Good to know — that's exactly the pattern we've been fixing for {similar_company}. Want me to show you the fix? 3 min video, no call.",
+        f"Interesting - we just solved that exact problem for {similar_company}. Mind if I send you a 3-minute video showing how?",
+        f"Good to know - that's exactly the pattern we've been fixing for {similar_company}. Want me to show you the fix? 3 min video, no call.",
         f"Makes sense. We've been helping {similar_company} with this same issue. Quick video walkthrough?",
     ]
     return templates[hash(name + pain_area + similar_company) % len(templates)]
@@ -75,7 +75,7 @@ def generate_backup_dm(name, observation):
     """
     Gojiberry Backup DM (if no reply): personal observation + soft ask.
     """
-    return f"Hey {name}, did you get a chance to check my message above? Noticed you're {observation} — we should chat."
+    return f"Hey {name}, did you get a chance to check my message above? Noticed you're {observation} - we should chat."
 
 
 def generate_followup_value(name):

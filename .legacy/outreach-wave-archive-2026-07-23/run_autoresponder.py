@@ -8,8 +8,8 @@ KEY = open('/home/mike/.hermes/secrets/agentmail.key').read().strip()
 INBOX = 'nebulashop@agentmail.to'
 LOG_FILE = '/home/mike/nebula/dual_funnel_autoresponder_log.jsonl'
 
-TEMPLATE_LINK = '[TEMPLATE DOWNLOAD LINK — fill in before deploying]'
-AUDIT_LINK = '[AUDIT PURCHASE LINK — fill in before deploying]'
+TEMPLATE_LINK = '[TEMPLATE DOWNLOAD LINK - fill in before deploying]'
+AUDIT_LINK = '[AUDIT PURCHASE LINK - fill in before deploying]'
 
 def decode_str(s):
     if s is None:
@@ -93,7 +93,7 @@ If you have questions or want to upgrade to the full $97 audit (personalized rev
 – Nebula Components"""
 
     elif classification == 'audit':
-        body = f"""Great timing — here's what the $97 audit includes:
+        body = f"""Great timing - here's what the $97 audit includes:
 
 • Full on-page SEO review
 • Conversion funnel analysis
@@ -107,7 +107,7 @@ If you'd like to see the quality of our work first, the $7 template pack is a gr
 – Nebula Components"""
 
     elif classification == 'both':
-        body = f"""You asked about both — here's the breakdown:
+        body = f"""You asked about both - here's the breakdown:
 
 **$7 Template Pack** → Best if you want a quick win right now. Instant download, use immediately.
 {TEMPLATE_LINK}
@@ -122,10 +122,10 @@ If you'd like to see the quality of our work first, the $7 template pack is a gr
     else:  # general_inquiry
         body = f"""Thanks for getting back to us! Here's a quick overview of what we offer:
 
-**$7 Template Pack** — Instant download. Great for getting started quickly with proven components.
+**$7 Template Pack** - Instant download. Great for getting started quickly with proven components.
 {TEMPLATE_LINK}
 
-**$97 Site Audit** — Personalized review of your site or funnel. Full on-page SEO + conversion analysis with specific action steps. Delivered in 48 hours.
+**$97 Site Audit** - Personalized review of your site or funnel. Full on-page SEO + conversion analysis with specific action steps. Delivered in 48 hours.
 {AUDIT_LINK}
 
 Let us know which sounds like a better fit, or if you have questions about either.
@@ -205,17 +205,17 @@ def main():
             mail.store(msg_id, '+FLAGS', '\\Seen')
             log_entry(entry)
             results.append(entry)
-            print(f'  [{msg_id.decode()}] BOUNCE — skipped')
+            print(f'  [{msg_id.decode()}] BOUNCE - skipped')
             continue
 
         # Filter: self-sent
         if reply_to.lower() == INBOX.lower():
             entry['classification'] = 'self_sent'
-            entry['reason'] = 'Self-sent test message — skipped'
+            entry['reason'] = 'Self-sent test message - skipped'
             mail.store(msg_id, '+FLAGS', '\\Seen')
             log_entry(entry)
             results.append(entry)
-            print(f'  [{msg_id.decode()}] SELF-SENT — skipped')
+            print(f'  [{msg_id.decode()}] SELF-SENT - skipped')
             continue
 
         # Classify
@@ -223,11 +223,11 @@ def main():
 
         if classification == 'reverse_cold_outreach':
             entry['classification'] = 'reverse_cold_outreach'
-            entry['reason'] = 'Sender pitching their own services — not a prospect'
+            entry['reason'] = 'Sender pitching their own services - not a prospect'
             mail.store(msg_id, '+FLAGS', '\\Seen')
             log_entry(entry)
             results.append(entry)
-            print(f'  [{msg_id.decode()}] REVERSE COLD OUTREACH from {reply_to} — skipped')
+            print(f'  [{msg_id.decode()}] REVERSE COLD OUTREACH from {reply_to} - skipped')
             continue
 
         # Genuine prospect

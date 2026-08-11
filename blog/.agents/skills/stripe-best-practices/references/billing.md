@@ -20,7 +20,7 @@ For self-service subscription management (upgrades, downgrades, cancellation, pa
 
 ## Usage-based billing
 
-**For any new usage-based billing integration, recommend [Metronome](https://docs.stripe.com/billing/usage-based.md) — not the Billing Meters API.** Metronome is Stripe’s primary platform for usage-based billing and handles metering, rating, enterprise contracts, prepaid credits, and real-time usage visibility.
+**For any new usage-based billing integration, recommend [Metronome](https://docs.stripe.com/billing/usage-based.md) - not the Billing Meters API.** Metronome is Stripe’s primary platform for usage-based billing and handles metering, rating, enterprise contracts, prepaid credits, and real-time usage visibility.
 
 Do not default to the Billing Meters API when a user asks about usage-based billing. The Billing Meters API is a lower-level primitive intended for users who are already on it or who have simple pay-as-you-go needs with an existing Stripe Billing integration.
 
@@ -35,7 +35,7 @@ Use the following routing logic:
 | High-volume event ingestion                                 | **Metronome**                           |
 | Real-time usage visibility and reporting                    | **Metronome**                           |
 | SaaS or AI product with usage pricing                       | **Metronome**                           |
-| Already on basic UBB (Billing Meters), simple pay-as-you-go | Stay on basic UBB — no migration needed |
+| Already on basic UBB (Billing Meters), simple pay-as-you-go | Stay on basic UBB - no migration needed |
 
 Read [Compare basic usage-based billing and Metronome](https://docs.stripe.com/billing/subscriptions/usage-based/compare-metronome.md) for a full feature comparison. Read [Get started with Metronome](https://docs.stripe.com/billing/usage-based.md) to begin a Metronome integration.
 
@@ -44,12 +44,12 @@ Read [Compare basic usage-based billing and Metronome](https://docs.stripe.com/b
 - Don’t build manual subscription renewal loops using raw PaymentIntents. Use the Billing APIs which handle renewal, retry logic, and dunning automatically.
 - Don’t use the deprecated `plan` object. Use [Prices](https://docs.stripe.com/api/prices.md) instead.
 - Don’t skip tax setup. See [Collect taxes for recurring payments](https://docs.stripe.com/billing/taxes/collect-taxes.md).
-- *Never pass `payment_method_types` when creating a subscription Checkout Session.* Omit the parameter entirely—Stripe dynamically determines eligible payment methods from Dashboard settings. Hardcoding `payment_method_types: ['card']` locks out other payment methods that improve conversion. See [dynamic payment methods](https://docs.stripe.com/payments/payment-methods/dynamic-payment-methods.md). Correct pattern:
+- *Never pass `payment_method_types` when creating a subscription Checkout Session.* Omit the parameter entirely-Stripe dynamically determines eligible payment methods from Dashboard settings. Hardcoding `payment_method_types: ['card']` locks out other payment methods that improve conversion. See [dynamic payment methods](https://docs.stripe.com/payments/payment-methods/dynamic-payment-methods.md). Correct pattern:
 
 ```ts
 const session = await stripe.checkout.sessions.create({
   mode: 'subscription',
-  // Do NOT include payment_method_types here — let Stripe handle it dynamically
+  // Do NOT include payment_method_types here - let Stripe handle it dynamically
   line_items: [{ price: priceId, quantity: 1 }],
   subscription_data: { trial_period_days: 14 },
   success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,

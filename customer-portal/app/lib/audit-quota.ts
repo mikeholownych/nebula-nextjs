@@ -48,13 +48,13 @@ export async function checkAuditQuota(email: string): Promise<QuotaResult> {
       plan = subResult.rows[0].plan
     }
   } catch {
-    // DB unavailable — fail open (don't block audits on quota DB issues)
+    // DB unavailable - fail open (don't block audits on quota DB issues)
     return { allowed: true, plan: 'unknown' }
   }
 
   const quota = auditQuotaFor(plan)
 
-  // Paid plans with unlimited quota — allow immediately
+  // Paid plans with unlimited quota - allow immediately
   if (quota === 'unlimited') {
     return { allowed: true, plan, quota }
   }

@@ -1,7 +1,7 @@
 ---
 name: events-audit
 description: >-
-  Audit PostHog events in a codebase — produce an inventory of every captured
+  Audit PostHog events in a codebase - produce an inventory of every captured
   event mapped to its file, area, and 30-day volume for the product team to
   query
 metadata:
@@ -19,7 +19,7 @@ The audit runs as a 6-step chain (the dashboard step also uploads the report to 
 
 1. Detect SDK
 2. Scan capture sites (grep only)
-3. Enrich (subagent fan-out — the only step that reads source files)
+3. Enrich (subagent fan-out - the only step that reads source files)
 4. Query PostHog for volume
 5. Write report
 6. Create dashboard, then upload the report to a PostHog notebook
@@ -32,7 +32,7 @@ Step 1 seeds the audit checklist as its first action. Don't assume the runtime p
 
 ## The audit checklist
 
-The audit checklist is the **pipeline progress ledger** — one row per workflow phase. The seven ids cover the six steps above plus the notebook upload that closes step 6:
+The audit checklist is the **pipeline progress ledger** - one row per workflow phase. The seven ids cover the six steps above plus the notebook upload that closes step 6:
 
 - `detect-sdk`
 - `scan-sites`
@@ -42,7 +42,7 @@ The audit checklist is the **pipeline progress ledger** — one row per workflow
 - `create-dashboard`
 - `upload-notebook`
 
-Each step file resolves its own row via `mcp__wizard-tools__audit_resolve_checks` once the step's work is done — that's what advances the spinner in the wizard's sidebar. Don't invent new ids.
+Each step file resolves its own row via `mcp__wizard-tools__audit_resolve_checks` once the step's work is done - that's what advances the spinner in the wizard's sidebar. Don't invent new ids.
 
 The qualitative findings (`identity-segmentation`, `coverage-map`, `data-quality`) live in the **report**, not the ledger. Step 5 computes them straight from the inventory and renders them as report sections; they don't need MCP rows.
 
@@ -50,7 +50,7 @@ The checklist lives at `.posthog-audit-checks.json`. It's owned by MCP tools –
 
 ## The events inventory
 
-A second file, `.posthog-events-inventory.json`, is the working event inventory for steps 2 through 4. It holds the capture sites with derived `package`/`area`/`route`/`enclosing` fields, event names, properties, and per-event volume from PostHog. 
+A second file, `.posthog-events-inventory.json`, is the working event inventory for steps 2 through 4. It holds the capture sites with derived `package`/`area`/`route`/`enclosing` fields, event names, properties, and per-event volume from PostHog.
 
 It's **not** MCP-owned – no `audit_*` tool guards it. The inventory is **transient scratch state**, not a deliverable: step 5 deletes `.posthog-audit-checks.json` once the report is written, and step 6 deletes the inventory after the optional dashboard step. The report is the only artifact the user keeps.
 
@@ -61,13 +61,13 @@ Check entry shape:
 - `label` - short human name.
 - `status` - `pending` | `pass` | `error` | `warning` | `suggestion`.
 - `file` - unused for phase rows.
-- `details` - optional short string the wizard surfaces in the "Audit plan" tab if you want to add context to a non-pass phase (e.g. `query-volume` resolving to `warning` with `details: "PostHog MCP unavailable — report rendered without volume data"`).
+- `details` - optional short string the wizard surfaces in the "Audit plan" tab if you want to add context to a non-pass phase (e.g. `query-volume` resolving to `warning` with `details: "PostHog MCP unavailable - report rendered without volume data"`).
 
 ## Key principles
 
 - **Show your evidence.** Cite `file:line` for every non-pass finding.
 - **Frame findings as product questions.** Every finding describes *what product question or insight it blocks*, not what code rule it breaks.
-- **Hand the reader the map. Don't tell the story for them.** The deliverable is a single report with three short qualitative checks plus a few suggested follow-ups. The reader clusters events into flows on demand by asking targeted follow-up questions about the report — the skill doesn't do that synthesis upfront.
+- **Hand the reader the map. Don't tell the story for them.** The deliverable is a single report with three short qualitative checks plus a few suggested follow-ups. The reader clusters events into flows on demand by asking targeted follow-up questions about the report - the skill doesn't do that synthesis upfront.
 
 ## Live activity – `[STATUS]`
 
@@ -86,8 +86,8 @@ Report aborts with `[ABORT]` prefixed messages. The wizard catches these and sto
 - `[ABORT] No PostHog SDK found`
 - `[ABORT] No capture call sites found in any detected SDK`
 
-MCP failures (project mismatch, query errors, no connection) are **not** abort conditions — step 4 soft-degrades and step 5 renders the report with a `{{mcp_disclaimer}}` callout in place of volume sections. See step 4 for the degradation contract.
+MCP failures (project mismatch, query errors, no connection) are **not** abort conditions - step 4 soft-degrades and step 5 renders the report with a `{{mcp_disclaimer}}` callout in place of volume sections. See step 4 for the degradation contract.
 
 ## Framework guidelines
 
-- A missing PostHog configuration must never break the app — read keys optionally (never a required setting), guard init and capture behind their presence, and keep build and boot working with no PostHog environment set — but never silently: in development or debug builds fail loudly, using the language's idiomatic error, with the message "<VAR> variable required by PostHog is missing or un-configured, this causes events to be silently missed. This error stops appearing once <VAR> is configured" (substituting the actual variable name); production stays a no-op
+- A missing PostHog configuration must never break the app - read keys optionally (never a required setting), guard init and capture behind their presence, and keep build and boot working with no PostHog environment set - but never silently: in development or debug builds fail loudly, using the language's idiomatic error, with the message "<VAR> variable required by PostHog is missing or un-configured, this causes events to be silently missed. This error stops appearing once <VAR> is configured" (substituting the actual variable name); production stays a no-op

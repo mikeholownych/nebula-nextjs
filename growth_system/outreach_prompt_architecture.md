@@ -1,12 +1,12 @@
-# Nebula Outreach Prompt System — Conversation Design for Autonomous LinkedIn Outreach
+# Nebula Outreach Prompt System - Conversation Design for Autonomous LinkedIn Outreach
 
 **Source:** Kakiyo / Claude Sonnet 5 LinkedIn playbook
-**Core steal:** Instead of rigid templates, give an agent instructions on HOW to hold a conversation — start to finish, for every prospect, in parallel.
+**Core steal:** Instead of rigid templates, give an agent instructions on HOW to hold a conversation - start to finish, for every prospect, in parallel.
 **Nebula application:** Chain existing assets (Voice DNA, ICP MEMO, cold_email_frameworks, reply_templates) into a single prompt architecture that can run on Sonnet 5.
 
 ## Why This Matters
 
-Kakiyo claims 30-40% reply rate vs 5-10% for template sequences. The difference isn't the model — it's the architecture. Templates treat every prospect the same. Conversation design treats every prospect as a unique interaction with a shared set of instructions.
+Kakiyo claims 30-40% reply rate vs 5-10% for template sequences. The difference isn't the model - it's the architecture. Templates treat every prospect the same. Conversation design treats every prospect as a unique interaction with a shared set of instructions.
 
 Sonnet 5 makes this feasible because it can run the full conversation loop autonomously. Nebula's current system is template-first. This prompt system is conversation-first.
 
@@ -17,12 +17,12 @@ Run these in order, in the same chat context, so the AI retains the full frame.
 ### Prompt 1: Build ICP Filter (Signal Definition)
 
 ```
-You are identifying prospects for Nebula Components — a free landing page audit tool for founders burning ad spend.
+You are identifying prospects for Nebula Components - a free landing page audit tool for founders burning ad spend.
 
 Define exactly who to target using SIGNALS, not demographics:
 - SIGNAL: Recently posted about ad spend with no conversions
 - SIGNAL: Commented on a CRO/landing page post expressing frustration
-- SIGNAL: Job change to Head of Growth / CMO / VP Marketing (first 90 days — most open to new tools)
+- SIGNAL: Job change to Head of Growth / CMO / VP Marketing (first 90 days - most open to new tools)
 - SIGNAL: Company just raised funding and is hiring marketing roles
 
 Nebula's ICP: Founders who have spent $2k-$20k/mo on ads with zero or near-zero conversions.
@@ -35,7 +35,7 @@ When you find a match, log:
 - industry
 - company stage
 
-[Paste your website URL here — turn web search ON]
+[Paste your website URL here - turn web search ON]
 ```
 
 ### Prompt 2: Capture Voice (Voice DNA Load)
@@ -103,8 +103,8 @@ Available frameworks from cold_email_frameworks.json:
 - pain_solution: "[question about pain point]? [audit diagnoses which leak]."
 
 Template starting point (REWRITE in your own words, do not copy):
-[Saw your comment on {{creator}}'s post about {{topic}}] — [your specific insight based on research].
-I built a free tool that diagnoses the exact conversion leak on landing pages — curious if it finds the same patterns on yours: nebulacomponents.shop/audit
+[Saw your comment on {{creator}}'s post about {{topic}}] - [your specific insight based on research].
+I built a free tool that diagnoses the exact conversion leak on landing pages - curious if it finds the same patterns on yours: nebulacomponents.shop/audit
 
 Output: The message. Nothing else.
 ```
@@ -127,13 +127,13 @@ Rules:
 - If they asked a question, answer it directly and honestly.
 - If they expressed skepticism, address the real objection (see Prompt 6).
 - If they expressed interest, move toward qualification (see Prompt 7).
-- Stay in Nebula's voice — short, direct, no fluff.
+- Stay in Nebula's voice - short, direct, no fluff.
 - Never pressure. Never ask "jump on a call." Never pitch the $97 before they've run the audit.
 
 Available response templates from linkedin_reply_templates.json:
 - question_about_audit: Explains how the 5-dimension audit works
 - skeptical: "Fair question. The audit is a fixed rubric, not AI guesswork."
-- sharing_pain: "That's exactly who this is for. Run it — 30 seconds."
+- sharing_pain: "That's exactly who this is for. Run it - 30 seconds."
 - objection_free: "No catch. The audit is free with no email gate."
 
 Output: The next message. Just the message.
@@ -153,7 +153,7 @@ Read the REAL objection behind their words:
 
 Available cold email frameworks for objection handling:
 - guarantee: "If it doesn't show you at least 3 conversion leaks, you're out nothing."
-- silent_objection_pre_empt: "I get it — last agency charged for 'testing' and delivered nothing."
+- silent_objection_pre_empt: "I get it - last agency charged for 'testing' and delivered nothing."
 
 ICP MEMO language for objections:
 - "Your page is leaking ~$X/month. Here's the audit."
@@ -201,7 +201,7 @@ Write a re-engagement message.
 
 Rules:
 - Reference the PREVIOUS conversation naturally ("circling back on the audit we ran")
-- Add NEW value — a recent case study, a new feature, a relevant industry data point
+- Add NEW value - a recent case study, a new feature, a relevant industry data point
 - Keep it short. Don't apologize for following up.
 - If this is the 3rd re-engagement attempt with no reply, mark as dead and move on.
 - Never sound needy. "Up to you" is always the closer.
@@ -225,16 +225,16 @@ Nebula's existing cron system can implement the 8-prompt chain:
 | 2. Voice | Nebula_Voice_DNA.md (loaded by crons) | Already wired |
 | 3. Research | linkedin_post_monitor.py → lead scoring | No individual deep-dive per prospect |
 | 4. Icebreaker | cold_email_frameworks.json (8 frameworks) | Static templates, not personalized per prospect |
-| 5. Conversation | linkedin_reply_templates.json (13 templates) | No dynamic reply handling — manual only |
+| 5. Conversation | linkedin_reply_templates.json (13 templates) | No dynamic reply handling - manual only |
 | 6. Objections | icp_memo_subject_lines / guarantee framework | Documented but not automated |
-| 7. Book | Stripe checkout links | Manual handoff — no AI-led qualification |
-| 8. Revive | followup_sequence.py (recycler) | Already automated — good |
+| 7. Book | Stripe checkout links | Manual handoff - no AI-led qualification |
+| 8. Revive | followup_sequence.py (recycler) | Already automated - good |
 
 **Bottleneck:** Sonnet 5 can run the full loop autonomously. Nebula's current stack runs on Sonnet 4 via Bedrock crons. To close the gap: update the cron model to Sonnet 5 + add a "conversation runner" agent that takes a lead from signal → icebreaker → conversation → book, referencing the 8 prompts as context.
 
 ## Competitive Insight
 
-Kakiyo charges for exactly what this prompt system describes. The difference is Nebula owns the stack end-to-end — triggers, audit, delivery, checkout — and only needs the conversation layer to be agentic. Kakiyo is a tool Nebula could replicate internally with the 8-prompt chain + existing infrastructure.
+Kakiyo charges for exactly what this prompt system describes. The difference is Nebula owns the stack end-to-end - triggers, audit, delivery, checkout - and only needs the conversation layer to be agentic. Kakiyo is a tool Nebula could replicate internally with the 8-prompt chain + existing infrastructure.
 
 ## Key Files Referenced
 

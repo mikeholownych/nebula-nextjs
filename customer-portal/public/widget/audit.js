@@ -1,6 +1,6 @@
 /**
  * Nebula Landing Page Audit Widget
- * Play 4 — agencies as the distribution layer.
+ * Play 4 - agencies as the distribution layer.
  *
  * Embed:
  *   <div id="nebula-audit-widget" data-partner="PARTNER_ID" data-theme="dark"></div>
@@ -150,7 +150,7 @@
 
       var emailInput = document.createElement('input');
       emailInput.type = 'email';
-      emailInput.placeholder = 'Your email (optional) — get the full report';
+      emailInput.placeholder = 'Your email (optional) - get the full report';
       form.appendChild(emailInput);
 
       var submit = document.createElement('button');
@@ -210,7 +210,7 @@
     function renderScore(payload) {
       root.innerHTML = '';
       var score = typeof payload.score === 'number' ? payload.score : null;
-      var grade = payload.grade || '—';
+      var grade = payload.grade || '-';
       var color = gradeColor(grade, theme);
 
       var pill = document.createElement('span');
@@ -259,7 +259,7 @@
       scoreText.setAttribute('x', '60');
       scoreText.setAttribute('y', '58');
       scoreText.setAttribute('text-anchor', 'middle');
-      scoreText.textContent = score == null ? '—' : score.toFixed(1);
+      scoreText.textContent = score == null ? '-' : score.toFixed(1);
       svg.appendChild(scoreText);
 
       var scoreLabel = document.createElementNS(svgNs, 'text');

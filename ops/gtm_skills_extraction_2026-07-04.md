@@ -1,4 +1,4 @@
-# GTM Skills Review — Nebula Extraction
+# GTM Skills Review - Nebula Extraction
 
 Source reviewed: https://github.com/gtm-skills/gtm @ `6e42775`
 Review date: 2026-07-04
@@ -20,9 +20,9 @@ Adopt only the operating pattern:
 The repo is a polished GTM content/platform project, not a production-ready autonomous revenue engine for Nebula.
 
 Useful pieces:
-- `openclaw-skills/deployment/HEARTBEAT.md` — simple recurring agent checklist
-- `openclaw-skills/deployment/WORKING.md` — pipeline handoff board
-- `src/app/api/v1/agents/orchestrate/route.ts` — keyword-based agent routing
+- `openclaw-skills/deployment/HEARTBEAT.md` - simple recurring agent checklist
+- `openclaw-skills/deployment/WORKING.md` - pipeline handoff board
+- `src/app/api/v1/agents/orchestrate/route.ts` - keyword-based agent routing
 - Agent split: Scout → Writer → Rep → Closer
 
 Rejected pieces:
@@ -69,7 +69,7 @@ No checkout path = no outbound.
 Use this for Nebula Kanban tasks:
 
 ```text
-Title: <stage> — <specific outcome>
+Title: <stage> - <specific outcome>
 Assignee: market|growth|support|ops-finance|default
 Priority: 0-3
 Body:

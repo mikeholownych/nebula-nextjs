@@ -40,11 +40,11 @@
 
 ### React Components (7 routes)
 
-- `/` — Login page (Google OAuth)
-- `/dashboard` — User dashboard
-- `/audits` — Audit history
-- `/organization` — Team management
-- `/subscription` — Pricing/plans
+- `/` - Login page (Google OAuth)
+- `/dashboard` - User dashboard
+- `/audits` - Audit history
+- `/organization` - Team management
+- `/subscription` - Pricing/plans
 
 ### Design System
 
@@ -71,23 +71,23 @@ Routes: 7 static, 41 HTML rewrites
 
 ```
 Next.js App (Port 3000)
-├── app/                    — React routes
-│   ├── page.tsx           — Login (Google OAuth)
-│   ├── dashboard/         — User dashboard
-│   ├── audits/            — Audit history
-│   ├── organization/      — Team management
-│   └── subscription/      — Pricing
+├── app/                    - React routes
+│   ├── page.tsx           - Login (Google OAuth)
+│   ├── dashboard/         - User dashboard
+│   ├── audits/            - Audit history
+│   ├── organization/      - Team management
+│   └── subscription/      - Pricing
 │
-├── public/                 — Static HTML pages
-│   ├── index.html         — Homepage
-│   ├── checkout.html      — Stripe checkout
+├── public/                 - Static HTML pages
+│   ├── index.html         - Homepage
+│   ├── checkout.html      - Stripe checkout
 │   ├── agency-partner.html
 │   ├── [38 more HTML files]
 │   └── styles/
 │       ├── nebula-design-system.css
 │       └── nebula-components.css
 │
-└── next.config.ts         — Rewrites for HTML routing
+└── next.config.ts         - Rewrites for HTML routing
 ```
 
 ---
@@ -134,9 +134,9 @@ npm start
 ### Production Build Output
 ```
 .next/
-├── static/          — Static assets
-├── server/          — Server bundles
-└── required/        — Required files
+├── static/          - Static assets
+├── server/          - Server bundles
+└── required/        - Required files
 ```
 
 ---
@@ -301,11 +301,11 @@ python3 -m http.server 8765
 
 ## Timeline
 
-- 15:49 — Started cutover
-- 15:54 — HTML copied to Next.js
-- 15:55 — Build configured
-- 15:56 — Production build succeeded
-- 15:57 — Committed and pushed
+- 15:49 - Started cutover
+- 15:54 - HTML copied to Next.js
+- 15:55 - Build configured
+- 15:56 - Production build succeeded
+- 15:57 - Committed and pushed
 
 **Total Time:** ~10 minutes
 

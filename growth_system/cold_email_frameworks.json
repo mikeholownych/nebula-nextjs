@@ -7,8 +7,8 @@
       "name": "Audit + same-industry case study",
       "original": "Lead magnet + same-industry case study",
       "template": "{{first_name}}, ran a conversion audit for {{company}} using the same {{mechanism}} we used to help {{client_in_same_industry}} increase conversions by {{result}}. Your audit is ready: {{audit_url}}",
-      "nebula_adaptation": "{{first_name}}, ran a landing page audit for {{company}} — same process we used to help a {{client_in_same_industry}} go from 0.8% to 2.4% conversion rate. Your results: {{audit_url}}",
-      "cta": "audit results — no email required",
+      "nebula_adaptation": "{{first_name}}, ran a landing page audit for {{company}} - same process we used to help a {{client_in_same_industry}} go from 0.8% to 2.4% conversion rate. Your results: {{audit_url}}",
+      "cta": "audit results - no email required",
       "when_to_use": "After identifying a buying trigger (ad spend + no conversions)"
     },
     {
@@ -25,7 +25,7 @@
       "name": "Risk-reversed audit",
       "original": "Guarantee / risk reversal",
       "template": "{{first_name}}, interested in {{dream_result}} with {{mechanism}} for {{company}} in the next {{timeframe}}? Our {{mechanism}} guarantees {{dream_result}} in {{timeframe}} or {{risk_reversal}}.",
-      "nebula_adaptation": "{{first_name}}, interested in doubling your landing page conversion rate in the next 30 days — without spending more on traffic? Run the free audit first. If it doesn't show you at least 3 conversion leaks you didn't know about, you're out nothing. {{audit_url}}",
+      "nebula_adaptation": "{{first_name}}, interested in doubling your landing page conversion rate in the next 30 days - without spending more on traffic? Run the free audit first. If it doesn't show you at least 3 conversion leaks you didn't know about, you're out nothing. {{audit_url}}",
       "cta": "risk-free audit",
       "when_to_use": "Objection-prone prospects (founders who've been burned by agencies)"
     },
@@ -34,18 +34,18 @@
       "name": "Pain question → audit",
       "original": "Pain question, then solution",
       "template": "{{first_name}}, {{question_about_pain_point}}? Our {{solution}} {{how_it_fixes_it}} so you {{end_result}}. P.S. {{social_proof}}",
-      "nebula_adaptation": "{{first_name}}, running ads with conversion under 2%? The audit diagnoses exactly which leak is costing you — headline, CTA, trust, speed, or mobile. 30 seconds, no sales call. {{audit_url}} P.S. Pages that fix their headline see 2-3x improvement within 7 days.",
+      "nebula_adaptation": "{{first_name}}, running ads with conversion under 2%? The audit diagnoses exactly which leak is costing you - headline, CTA, trust, speed, or mobile. 30 seconds, no sales call. {{audit_url}} P.S. Pages that fix their headline see 2-3x improvement within 7 days.",
       "cta": "audit + proof",
-      "when_to_use": "Triggered leads — people who've posted/complained about ad spend with no conversions"
+      "when_to_use": "Triggered leads - people who've posted/complained about ad spend with no conversions"
     },
     {
       "id": "signal_quick_fix",
       "name": "Signal + quick fix",
       "original": "Signal touchpoint, pain, quick fix",
       "template": "{{first_name}}, {{relevant_touchpoint}}. Noticed {{relevant_pain_point}}. Interested in {{quick_fix}}?",
-      "nebula_adaptation": "{{first_name}}, saw your post about {{their_recent_post_or_comment}}. Noticed you mentioned ad spend with no conversions. The landing page is usually the bottleneck — not the ads. Run a free audit: 30 seconds, shows you exactly what to fix. {{audit_url}}",
+      "nebula_adaptation": "{{first_name}}, saw your post about {{their_recent_post_or_comment}}. Noticed you mentioned ad spend with no conversions. The landing page is usually the bottleneck - not the ads. Run a free audit: 30 seconds, shows you exactly what to fix. {{audit_url}}",
       "cta": "trigger-relevant audit link",
-      "when_to_use": "Reddit/LinkedIn trigger monitor finds a post — reply value-first, then follow up with this email"
+      "when_to_use": "Reddit/LinkedIn trigger monitor finds a post - reply value-first, then follow up with this email"
     },
     {
       "id": "insight_followup",
@@ -54,28 +54,28 @@
       "template": "{{first_name}}, {{question_about_touchpoint}}. {{unique_market_insight}}. {{cta_to_implement}}",
       "nebula_adaptation": "{{first_name}}, you're in {{industry}}, right? We audited 100 landing pages in that space last month. Only 6 had a clear CTA above the fold. That's a $0 fix that doubles conversion rate. Curious where yours lands: {{audit_url}}",
       "cta": "curiosity-driven audit",
-      "when_to_use": "Industry-specific outreach — show you understand their vertical"
+      "when_to_use": "Industry-specific outreach - show you understand their vertical"
     },
     {
       "id": "linkedin_post_cta",
       "name": "Give this post somewhere to go (GTM framework)",
-      "original": "LinkedIn GTM CTA — audit link, not 'what do you think'",
-      "nebula_adaptation": "{{first_name}}, saw your post on {{topic}}. Most people stop at engagement metrics — but the real signal is who replies. I built a free landing page audit that diagnoses exactly what's costing conversions. Curious if it finds the same leak on your page: {{audit_url}}",
+      "original": "LinkedIn GTM CTA - audit link, not 'what do you think'",
+      "nebula_adaptation": "{{first_name}}, saw your post on {{topic}}. Most people stop at engagement metrics - but the real signal is who replies. I built a free landing page audit that diagnoses exactly what's costing conversions. Curious if it finds the same leak on your page: {{audit_url}}",
       "cta": "value-first audit link in reply to their post engagement",
-      "when_to_use": "After engaging with their LinkedIn post — value first, link second"
+      "when_to_use": "After engaging with their LinkedIn post - value first, link second"
     },
     {
       "id": "linkedin_comment_outreach",
       "name": "Creator comment outreach (AI Outbound Stack Method 2)",
-      "original": "Comment-based outreach — highest intent signal",
-      "nebula_adaptation": "{{first_name}}, saw your comment on {{creator}}'s post about {{topic}}. Most people miss that the landing page is the bottleneck — not the ads. I built a free tool that diagnoses exactly which conversion leak is killing your page. {{audit_url}}",
+      "original": "Comment-based outreach - highest intent signal",
+      "nebula_adaptation": "{{first_name}}, saw your comment on {{creator}}'s post about {{topic}}. Most people miss that the landing page is the bottleneck - not the ads. I built a free tool that diagnoses exactly which conversion leak is killing your page. {{audit_url}}",
       "cta": "audit link referencing their comment context",
-      "when_to_use": "After scraping commenters from CRO/landing page creator posts — highest intent signal available"
+      "when_to_use": "After scraping commenters from CRO/landing page creator posts - highest intent signal available"
     },
     {
       "id": "fact_drop",
       "name": "Fact drop (Rory Sutherland Rule 5)",
-      "original": "Skip persuasion — just state a compelling fact",
+      "original": "Skip persuasion - just state a compelling fact",
       "nebula_adaptation": "{{first_name}}, we audited 40 {{vertical}} landing pages last month. 36 had the same above-fold CTA gap. Free audit shows where yours lands: {{audit_url}}",
       "cta": "fact → no editorializing → audit URL",
       "when_to_use": "When you have a specific, surprising data point relevant to their situation. No pitch. Just fact + link."
@@ -106,7 +106,7 @@
     }
   ],
   "icp_memo_subject_lines": {
-    "note": "From ICP_MEMO forensic research. Use verbatim bleeding-neck language — do not polish.",
+    "note": "From ICP_MEMO forensic research. Use verbatim bleeding-neck language - do not polish.",
     "money_hook": {
       "formula": "Your landing page is leaking ~$[X]/month. Here's the audit.",
       "variants": [
@@ -123,7 +123,7 @@
         "60-minute fix for the conversion leak killing your {{vertical}} ads.",
         "Your next ad set goes live when? Audit done before you press launch."
       ],
-      "when": "Use when speed is the objection — founder just posted about another failed campaign"
+      "when": "Use when speed is the objection - founder just posted about another failed campaign"
     },
     "exclusivity_hook": {
       "formula": "I audited 40+ pages this month and found 1 pattern killing 90% of them. Yours matches it.",
@@ -132,16 +132,16 @@
         "One pattern killed 9 of the last 10 ad campaigns I audited. Your page has it.",
         "Scanned your page. Same above-fold gap that killed ${{common_lost_amount}} for {{similar_company}}."
       ],
-      "when": "Use for warm leads or re-engagement — implies you already looked at their page"
+      "when": "Use for warm leads or re-engagement - implies you already looked at their page"
     },
     "silent_objection_pre_empt": {
       "note": "Address 'I've been burned before' before they think it. Use on Day 3 follow-up.",
-      "template": "{{first_name}}, I get it — last agency charged for a 'testing phase' and delivered nothing. This isn't that. 30 seconds, no call, no contract. Just your page score and what to fix. {{audit_url}}"
+      "template": "{{first_name}}, I get it - last agency charged for a 'testing phase' and delivered nothing. This isn't that. 30 seconds, no call, no contract. Just your page score and what to fix. {{audit_url}}"
     }
   },
   "implementation_notes": [
     "Never use these as-is. Rewrite in your own voice.",
-    "Remove {{placeholder}} tokens — fill with real data before sending.",
+    "Remove {{placeholder}} tokens - fill with real data before sending.",
     "Audit URL should be a unique tracking link per lead (pass email as query param for auto-fill).",
     "Follow-up sequence: Day 0 audit email → Day 3 'did you run it?' → Day 7 'here's a similar page's results' → Day 14 last touch. No more than 4 touches per cycle.",
     "Recircle cadence: same ICP every 30-60 days with new audit findings / new content.",

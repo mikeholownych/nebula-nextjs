@@ -1,4 +1,4 @@
-"""Lead generation pipeline — trigger-aware outbound for Nebula Components.
+"""Lead generation pipeline - trigger-aware outbound for Nebula Components.
 
 Five stages:
 1. Hunter.io Discovery (seed domains → founder emails)

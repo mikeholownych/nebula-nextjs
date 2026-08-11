@@ -3,10 +3,10 @@
 The directories below are immutable evidence packages and are intentionally
 versioned with the source changes they evaluate:
 
-- `runs/<run-id>/` — manifests, environment metadata, detector findings,
+- `runs/<run-id>/` - manifests, environment metadata, detector findings,
   captured headers, robots and sitemap observations, schema/link artifacts,
   checksums, and human-readable reports.
-- `snapshots/<snapshot-id>/` — bounded comparison snapshots derived from runs.
+- `snapshots/<snapshot-id>/` - bounded comparison snapshots derived from runs.
 
 ## Retention policy
 

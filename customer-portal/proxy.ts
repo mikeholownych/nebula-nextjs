@@ -16,7 +16,7 @@ export function proxy(request: NextRequest) {
 
   // ── Workspace route protection (coarse navigation guard) ──────────────────
   // Redirects unauthenticated browsers away from /workspace to /login.
-  // This is NOT the security boundary — every API route, server action, and
+  // This is NOT the security boundary - every API route, server action, and
   // data-access function independently verifies auth via requireWorkspaceUser().
   if (pathname === '/workspace' || pathname.startsWith('/workspace/')) {
     const token = request.cookies.get('access_token')?.value
@@ -69,7 +69,7 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(url, 301)
   }
 
-  // ── 2. Legacy HTML/static aliases — definitive 410 ─────────────────────────
+  // ── 2. Legacy HTML/static aliases - definitive 410 ─────────────────────────
   // Block legacy .html routes
   if (pathname.toLowerCase().endsWith('.html')) {
     return new NextResponse('Not Found', {
@@ -82,7 +82,7 @@ export function proxy(request: NextRequest) {
     })
   }
 
-  // Markdown for Agents — content negotiation
+  // Markdown for Agents - content negotiation
   // Skip assets, .well-known, and API routes
   const isAsset = /\.(ico|png|svg|jpg|jpeg|webp|css|js|json|txt|md|woff2?)$/.test(pathname)
   const isWellKnown = pathname.startsWith('/.well-known')

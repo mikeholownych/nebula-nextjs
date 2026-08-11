@@ -1,5 +1,5 @@
 -- Widget partner distribution (Play 4: agencies as distribution layer)
--- 2026-08-04 — additive; safe to run on live DB.
+-- 2026-08-04 - additive; safe to run on live DB.
 
 CREATE TABLE IF NOT EXISTS partners (
     id          TEXT PRIMARY KEY,              -- partner_id, e.g. 'agency_abc123'

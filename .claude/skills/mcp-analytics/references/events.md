@@ -9,9 +9,9 @@ This page is the wire-level contract for the `@posthog/mcp` SDK. Every event the
 | $mcp_tool_call | Every tools/call request | $mcp_tool_name, $mcp_tool_description, $mcp_parameters, $mcp_response, $mcp_duration_ms, $mcp_is_error, $mcp_error_type/$mcp_error_status (on errors), optionally $mcp_intent/$mcp_intent_source |
 | $mcp_tools_list | Every tools/list response | $mcp_listed_tool_names (string[] of advertised tool names) |
 | $mcp_initialize | Every client/server handshake | $mcp_client_name, $mcp_client_version, $mcp_server_name, $mcp_server_version, $mcp_protocol_version |
-| $mcp_resources_list | Every resources/list request | — |
+| $mcp_resources_list | Every resources/list request | - |
 | $mcp_resource_read | Every resources/read request | $mcp_resource_name, $mcp_parameters, $mcp_response |
-| $mcp_prompts_list | Every prompts/list request | — |
+| $mcp_prompts_list | Every prompts/list request | - |
 | $mcp_prompt_get | Every prompts/get request | $mcp_resource_name (the prompt name) |
 | (your event name) | A call to analytics.capture({ event, properties }) | Sent under the verbatim event name you pass (a customer event, not $-prefixed), with your properties merged in. See [Custom events](/docs/mcp-analytics/custom-events.md). |
 | $mcp_missing_capability | The get_more_tools virtual tool is invoked (reportMissing: true) | The agent's reasoning is captured as $mcp_intent. See [Tracking missing capabilities](/docs/mcp-analytics/missing-capability.md). |
@@ -48,7 +48,7 @@ Present on most `mcp_*` events.
 
 ## Exception properties
 
-Present on `$exception` events emitted alongside any failed tool call. The SDK reuses `@posthog/core`'s error-tracking parser, so these are the same `$exception_list` properties every other PostHog SDK emits — they slot straight into [Error tracking](/docs/error-tracking.md). Set `enableExceptionAutocapture: false` (default `true`) to stop a failed tool call from emitting the `$exception` sibling.
+Present on `$exception` events emitted alongside any failed tool call. The SDK reuses `@posthog/core`'s error-tracking parser, so these are the same `$exception_list` properties every other PostHog SDK emits - they slot straight into [Error tracking](/docs/error-tracking.md). Set `enableExceptionAutocapture: false` (default `true`) to stop a failed tool call from emitting the `$exception` sibling.
 
 | Wire key | Source |
 | --- | --- |
@@ -59,7 +59,7 @@ Plus `$session_id`, `$mcp_resource_name`, `$mcp_tool_name`, `$mcp_tool_descripti
 
 **Symbolicating minified MCP servers**
 
-Stack frames from a bundled/minified MCP server symbolicate the same way as any other PostHog backend SDK — upload your source maps with the [PostHog CLI](/docs/error-tracking/upload-source-maps.md). Source-context lines and project-relative path rewriting (the optional Node frame modifiers) aren't applied by the MCP SDK yet.
+Stack frames from a bundled/minified MCP server symbolicate the same way as any other PostHog backend SDK - upload your source maps with the [PostHog CLI](/docs/error-tracking/upload-source-maps.md). Source-context lines and project-relative path rewriting (the optional Node frame modifiers) aren't applied by the MCP SDK yet.
 
 ## Person properties (`$set`)
 
@@ -81,9 +81,9 @@ Events for sessions with no resolved identity are sent with `$process_person_pro
 
 For product code that queries against the SDK's contract, the package exports:
 
--   `POSTHOG_MCP_ANALYTICS_SOURCE` — the constant `"posthog_mcp_analytics"` (matches `$mcp_source`)
--   `PostHogMCPAnalyticsEvent` — enum of canonical event names
--   `PostHogMCPAnalyticsProperty` — enum of canonical property names
+-   `POSTHOG_MCP_ANALYTICS_SOURCE` - the constant `"posthog_mcp_analytics"` (matches `$mcp_source`)
+-   `PostHogMCPAnalyticsEvent` - enum of canonical event names
+-   `PostHogMCPAnalyticsProperty` - enum of canonical property names
 
 Use them instead of hard-coding strings so renames stay typesafe:
 

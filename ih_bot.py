@@ -196,17 +196,17 @@ def login(page: Page, creds_path: str | Path = DEFAULT_CREDS_PATH) -> bool:
     # ── Wait for redirect away from sign-in ────────────────────────────────
     try:
         page.wait_for_url(lambda url: "/sign-in" not in url, timeout=SLOW_TIMEOUT)
-        log.info("Login successful — redirected to: %s", page.url)
+        log.info("Login successful - redirected to: %s", page.url)
     except PWTimeout:
         # Check for error message
         error_loc = page.locator('[class*="error"], [class*="Error"], .alert')
         if error_loc.is_visible(timeout=2000):
             error_text = error_loc.inner_text()
             _save_debug_screenshot(page, "login_error")
-            raise RuntimeError(f"Login failed — page error: {error_text}")
+            raise RuntimeError(f"Login failed - page error: {error_text}")
         _save_debug_screenshot(page, "login_timeout")
         raise RuntimeError(
-            f"Login timed out — still on: {page.url}. "
+            f"Login timed out - still on: {page.url}. "
             "Check credentials or if IH added a CAPTCHA."
         )
 
@@ -414,11 +414,11 @@ def publish_post(
                     lambda url: "new-post" not in url and "sign-in" not in url,
                     timeout=SLOW_TIMEOUT,
                 )
-                log.info("Post published — now at: %s", page.url)
+                log.info("Post published - now at: %s", page.url)
             except PWTimeout:
                 _save_debug_screenshot(page, "post_publish_timeout")
                 raise RuntimeError(
-                    f"Publish timed out — still on: {page.url}. "
+                    f"Publish timed out - still on: {page.url}. "
                     "Post may not have been submitted."
                 )
 

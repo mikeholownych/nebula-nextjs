@@ -67,7 +67,7 @@ const routeConfig: RouteConfig = {
         payTo: WALLET_ADDRESS,
       },
     ],
-    description: 'Landing page conversion audit — submit a URL and receive scored conversion findings.',
+    description: 'Landing page conversion audit - submit a URL and receive scored conversion findings.',
     mimeType: 'application/json',
     extensions: auditQueryDiscovery,
   }

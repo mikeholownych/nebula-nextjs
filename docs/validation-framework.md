@@ -1,4 +1,4 @@
-# Validation Framework — Nebula Components
+# Validation Framework - Nebula Components
 
 ## Adapted from "The 30-Day SaaS Buildout Blueprint"
 
@@ -45,7 +45,7 @@ Prospect applies at /beta-tester.html
 
 - Don't validate what's already working (audit pipeline, Fix Pack)
 - Don't validate with adjacent markets (test your ICP only)
-- Don't validate with "would you use this?" — validate with "will you give me your URL?"
+- Don't validate with "would you use this?" - validate with "will you give me your URL?"
 
 ### Validation Evidence Standard
 
@@ -59,4 +59,4 @@ Prospect applies at /beta-tester.html
 
 ---
 
-*Documented: 2026-07-05 — Nebula Components Validation Framework*
+*Documented: 2026-07-05 - Nebula Components Validation Framework*

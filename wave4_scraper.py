@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Wave 4 Lead Scraper — buying trigger targets only.
+Wave 4 Lead Scraper - buying trigger targets only.
 Sources: HN Algolia API, Reddit RSS (spaced with delays), IndieHackers
 Deduplicates against contacted.json before any send.
 Outputs leads to wave4_leads.json and sends emails via AgentMailClient.
@@ -26,16 +26,16 @@ BOUNCE_THRESHOLD   = 0.02   # Step 7: alert if bounce rate > 2%
 SPAM_THRESHOLD     = 0.001  # Step 7: alert if spam complaint rate > 0.1%
 SUBJECT_MAX_CHARS  = 60     # Step 6: subject lines under 60 characters
 
-# Step 6: spam trigger words — pre-send copy filter
+# Step 6: spam trigger words - pre-send copy filter
 SPAM_TRIGGER_WORDS = [
-    # 'free' excluded — Nebula's core offer is a free audit; "free" in plain-text context is fine
+    # 'free' excluded - Nebula's core offer is a free audit; "free" in plain-text context is fine
     'guarantee', 'guaranteed', 'urgent', 'act now', 'limited time',
     'click here', 'winner', 'congratulations', 'no obligation', 'risk-free',
     'make money', 'earn money', 'extra income', 'work from home',
     'unsubscribe', 'opt out', '!!!', '???',
 ]
 
-# Step 5: role-based email prefixes — skip, low deliverability + no decision-maker
+# Step 5: role-based email prefixes - skip, low deliverability + no decision-maker
 ROLE_EMAIL_PREFIXES = (
     'info@', 'sales@', 'admin@', 'support@', 'hello@', 'contact@',
     'team@', 'hi@', 'help@', 'noreply@', 'no-reply@', 'billing@',
@@ -74,9 +74,9 @@ def validate_body_structure(body: str) -> tuple[bool, str]:
     """Illingworth Step 6: no images; max 1 link in plain-text outreach."""
     links, images = count_links_images(body)
     if images > 0:
-        return False, f"body contains {images} image(s) — remove for cold email"
+        return False, f"body contains {images} image(s) - remove for cold email"
     if links > 2:
-        return False, f"body has {links} links — keep ≤2 for deliverability"
+        return False, f"body has {links} links - keep ≤2 for deliverability"
     return True, "ok"
 
 HEADERS = {'User-Agent': 'Mozilla/5.0 (compatible; research-bot/1.0)'}
@@ -174,7 +174,7 @@ def scrape_hn():
                     'hn_id': hn_id,
                     'score': score,
                     'matched': matched,
-                    'email': None,  # HN authors have no email — skip for direct email
+                    'email': None,  # HN authors have no email - skip for direct email
                 })
         time.sleep(1)
     print(f"  HN: {len([l for l in leads if l['score']>=2])} scored leads")
@@ -251,7 +251,7 @@ def scrape_ih():
     return leads
 
 
-# ─── TRIGGER 4: Job Board — CRO/Landing Page roles ───────────────
+# ─── TRIGGER 4: Job Board - CRO/Landing Page roles ───────────────
 # Logic: company posting for CRO, conversion, or landing page role
 # = explicit admission they have a conversion problem.
 # Signal priority: HIGHEST (pain is operationalised as a hire)
@@ -339,10 +339,10 @@ def scrape_job_boards():
     return leads
 
 
-# ─── TRIGGER 5: New Product Launch — Show HN + PH ────────────────
+# ─── TRIGGER 5: New Product Launch - Show HN + PH ────────────────
 # Logic: just launched a product = running ads to a brand-new page
 # that almost certainly hasn't been conversion-optimised yet.
-# Signal priority: HIGH (timing — first 72h after launch = max spend, zero data)
+# Signal priority: HIGH (timing - first 72h after launch = max spend, zero data)
 
 LAUNCH_KEYWORDS = [
     'show hn', 'launch', 'just launched', 'we launched', 'launched today',
@@ -357,7 +357,7 @@ def scrape_new_launches():
     Trigger: new launch = new landing page = no CRO yet = immediate pain.
     """
     leads = []
-    three_days_ago = int(time.time()) - (3 * 86400)  # 72h window — hottest signal
+    three_days_ago = int(time.time()) - (3 * 86400)  # 72h window - hottest signal
 
     params = urlencode({
         'query': 'launch landing page feedback startup',
@@ -439,43 +439,43 @@ def scrape_new_launches():
 # ─── EMAIL SENDING ────────────────────────────────────────────────
 import hashlib
 
-# 4 PPQ variants — same structure, different wording
-# Illingworth: "Don't send the same email to thousands" — slight variation avoids dupe detection
+# 4 PPQ variants - same structure, different wording
+# Illingworth: "Don't send the same email to thousands" - slight variation avoids dupe detection
 # Variant selection: deterministic by URL hash so same lead always gets same copy
 _PPQ_VARIANTS = [
     {
-        # Illingworth: "{{CompanyName}} [offer]?" format — outcome-based, human
-        "subject_tpl": "Your {kw} — found something",
+        # Illingworth: "{{CompanyName}} [offer]?" format - outcome-based, human
+        "subject_tpl": "Your {kw} - found something",
         "opening": "Saw your post: \"{snip}\"",
-        "problem": "Problem I keep seeing: ad spend stays flat while conversions drop — usually the landing page is bleeding the budget, not the ads.",
+        "problem": "Problem I keep seeing: ad spend stays flat while conversions drop - usually the landing page is bleeding the budget, not the ads.",
         "proof": "Proof: ran 100+ audits last month. Most pages lose 60–70% of clicks on the hero alone.",
-        "question": "Just reply with your URL — want me to send findings same day?",
-        "ps": "P.S. I know this is cold — but if the page is leaking, it's leaking right now. ☕",
+        "question": "Just reply with your URL - want me to send findings same day?",
+        "ps": "P.S. I know this is cold - but if the page is leaking, it's leaking right now. ☕",
     },
     {
-        # Illingworth: conversational subject, no "Quick question" — flagged as overused
-        "subject_tpl": "{kw} — worth a look?",
+        # Illingworth: conversational subject, no "Quick question" - flagged as overused
+        "subject_tpl": "{kw} - worth a look?",
         "opening": "Found your post: \"{snip}\"",
         "problem": "Most founders I talk to have the same issue: the ads are fine, but the page loses 60%+ of visitors before they ever see the offer.",
         "proof": "I've audited 100+ landing pages. The hero section is almost always where the budget bleeds.",
-        "question": "Worth me taking a look? Free audit, I'll send findings same day — just drop your URL.",
+        "question": "Worth me taking a look? Free audit, I'll send findings same day - just drop your URL.",
         "ps": None,
     },
     {
         "subject_tpl": "noticed something re: {kw}",
         "opening": "Came across your post: \"{snip}\"",
         "problem": "Something I see constantly: paid traffic looks healthy in the dashboard but the page is quietly killing conversions at the hero.",
-        "proof": "100+ audits in — the pattern holds. 60–70% drop-off before anyone reaches the CTA.",
-        "question": "Want me to check yours? Takes me a day — just reply with the URL.",
+        "proof": "100+ audits in - the pattern holds. 60–70% drop-off before anyone reaches the CTA.",
+        "question": "Want me to check yours? Takes me a day - just reply with the URL.",
         "ps": None,
     },
     {
         # Interrogative subject: Illingworth "Struggling with [pain point]?" archetype
         "subject_tpl": "Struggling with {kw}?",
         "opening": "Noticed your post: \"{snip}\"",
-        "problem": "Landing pages bleeding ad spend is one of those problems that's invisible until you look for it — the traffic numbers look fine but the conversions never show up.",
+        "problem": "Landing pages bleeding ad spend is one of those problems that's invisible until you look for it - the traffic numbers look fine but the conversions never show up.",
         "proof": "I run free audits and flag the exact drop-off point. 100+ pages reviewed, same pattern every time.",
-        "question": "Interested? Reply with your URL — I'll send findings same day.",
+        "question": "Interested? Reply with your URL - I'll send findings same day.",
         "ps": "P.S. Worst case you get a free audit. Best case you stop the leak. 🔍",
     },
 ]
@@ -483,13 +483,13 @@ _PPQ_VARIANTS = [
 def build_email(lead):
     """Build a PPQ-format outreach email (Problem / Proof / Question, ≤80 words).
 
-    3 variants rotated by lead URL hash — same structure, different wording.
+    3 variants rotated by lead URL hash - same structure, different wording.
     Illingworth: slight variation per send avoids bulk-duplicate spam detection.
 
     PPQ framework (Hormozi Rule of 100):
-      Problem  — specific pain this ICP is feeling right now (trigger-matched)
-      Proof    — one quantified result or credential
-      Question — soft CTA, easy yes
+      Problem  - specific pain this ICP is feeling right now (trigger-matched)
+      Proof    - one quantified result or credential
+      Question - soft CTA, easy yes
 
     Illingworth 237-campaign rules enforced post-build via email_linter:
       - Word count 60–180
@@ -500,7 +500,7 @@ def build_email(lead):
     title_snip = lead['title'][:80]
     matched_kw = lead.get('matched', ['conversion issues'])[0] if lead.get('matched') else 'conversion issues'
 
-    # Deterministic variant selection via URL hash — same lead always gets same variant
+    # Deterministic variant selection via URL hash - same lead always gets same variant
     url_hash = int(hashlib.md5(lead.get('url', title_snip).encode()).hexdigest(), 16)
     v = _PPQ_VARIANTS[url_hash % len(_PPQ_VARIANTS)]
 
@@ -514,7 +514,7 @@ def build_email(lead):
     if v.get("ps"):
         body += f"{v['ps']}\n\n"
     body += (
-        "—\n"
+        "-\n"
         "Reply STOP to opt out."
     )
 
@@ -531,7 +531,7 @@ def build_email(lead):
             for w in lint.warnings:
                 print(f"  [LINT WARN] {w[:100]}")
     except ImportError:
-        pass  # linter not available — allow through
+        pass  # linter not available - allow through
 
     return subject, body
 
@@ -558,7 +558,7 @@ def send_wave4(leads, contacted):
         WARMUP_MIN_SENDS = 15
         if _warmup_day < WARMUP_MIN_DAYS or _warmup_total < WARMUP_MIN_SENDS:
             print(f"  [G9 WARMUP BLOCK] day={_warmup_day} total_sends={_warmup_total} "
-                  f"— need ≥{WARMUP_MIN_DAYS}d / {WARMUP_MIN_SENDS} sends before outreach")
+                  f"- need ≥{WARMUP_MIN_DAYS}d / {WARMUP_MIN_SENDS} sends before outreach")
             _warmup_ok = False
     except Exception as _we:
         print(f"  [G9 WARMUP BLOCK] warmup state unavailable: {_we}")
@@ -574,7 +574,7 @@ def send_wave4(leads, contacted):
     sent = 0
     for lead in leads:
         if sent >= MAX_SENDS:
-            print(f"  Daily cap ({MAX_SENDS}) reached — stopping")
+            print(f"  Daily cap ({MAX_SENDS}) reached - stopping")
             break
 
         # ── G11: mid-batch bounce spike check ────────────────────────
@@ -582,7 +582,7 @@ def send_wave4(leads, contacted):
             _bounce_rate = _batch_bounced / _batch_sent
             if _bounce_rate > BOUNCE_THRESHOLD:
                 msg = (f"Bounce spike {_bounce_rate:.1%} > {BOUNCE_THRESHOLD:.1%} "
-                       f"({_batch_bounced}/{_batch_sent}) — pausing outreach")
+                       f"({_batch_bounced}/{_batch_sent}) - pausing outreach")
                 print(f"  [G11 BOUNCE PAUSE] {msg}")
                 try:
                     from domain_registry import DomainRegistry as _DR
@@ -593,7 +593,7 @@ def send_wave4(leads, contacted):
 
         email = lead.get('email')
         if not email:
-            continue  # Reddit/HN leads have no email — skip for now
+            continue  # Reddit/HN leads have no email - skip for now
 
         # Step 5: skip role-based addresses (no decision-maker, poor deliverability)
         if is_role_email(email):
@@ -608,7 +608,7 @@ def send_wave4(leads, contacted):
         if _dreg:
             inbox = _dreg.pick_inbox()
             if not inbox:
-                print("  [G7] All inboxes exhausted for today — stopping")
+                print("  [G7] All inboxes exhausted for today - stopping")
                 break
         else:
             inbox = None
@@ -622,19 +622,19 @@ def send_wave4(leads, contacted):
         # Step 6: pre-send subject validation (≤60 chars, no spam triggers, no ALL CAPS)
         valid, reason = validate_subject(subject)
         if not valid:
-            print(f"  SUBJECT FAIL [{reason}] — skipping: {subject[:60]}")
+            print(f"  SUBJECT FAIL [{reason}] - skipping: {subject[:60]}")
             continue
 
         # Step 6: pre-send body spam check
         body_triggers = check_spam_triggers(body)
         if body_triggers:
-            print(f"  BODY SPAM TRIGGERS {body_triggers} — skipping")
+            print(f"  BODY SPAM TRIGGERS {body_triggers} - skipping")
             continue
 
         # Step 6: no images, ≤2 links in body
         body_ok, body_reason = validate_body_structure(body)
         if not body_ok:
-            print(f"  BODY STRUCTURE FAIL [{body_reason}] — skipping")
+            print(f"  BODY STRUCTURE FAIL [{body_reason}] - skipping")
             continue
 
         # ── G8: build HTML mirror of plain-text body ─────────────────
@@ -712,7 +712,7 @@ def main():
         from send_window import assert_send_window_or_exit
         assert_send_window_or_exit(script_name="wave4_scraper")
     except ImportError:
-        pass  # module missing — allow through, don't block sends
+        pass  # module missing - allow through, don't block sends
     contacted = load_contacted()
     print(f"Already contacted: {len(contacted)} leads")
 

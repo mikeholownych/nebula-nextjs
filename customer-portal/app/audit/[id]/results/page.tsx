@@ -42,7 +42,7 @@ export default async function ResultsPage({ params, searchParams }: Props) {
         if (user.email) sessionUnlocked = true
       }
     } catch {
-      // auth service down — fall through to other unlock paths
+      // auth service down - fall through to other unlock paths
     }
   }
 
@@ -58,7 +58,7 @@ export default async function ResultsPage({ params, searchParams }: Props) {
       tokenUnlocked = res.ok
       if (res.ok) sharedView = true
     } catch {
-      // upstream down — treat as locked; visitor will see the teaser
+      // upstream down - treat as locked; visitor will see the teaser
     }
   }
 

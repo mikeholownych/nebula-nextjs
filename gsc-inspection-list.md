@@ -1,4 +1,4 @@
-# GSC URL Inspection List — nebulacomponents.com (.com migration)
+# GSC URL Inspection List - nebulacomponents.com (.com migration)
 
 Generated 2026-08-03 from live GSC API + sitemap sweep. Property `sc-domain:nebulacomponents.com` exists and is owned; sitemap.xml already submitted (91 URLs, 0 errors). `.shop` 301-redirects to `.com` verified.
 
@@ -6,7 +6,7 @@ Generated 2026-08-03 from live GSC API + sitemap sweep. Property `sc-domain:nebu
 
 ---
 
-## TIER 1 — Money pages (submit first, highest business value)
+## TIER 1 - Money pages (submit first, highest business value)
 
 | URL | State (2026-08-03) |
 |---|---|
@@ -15,7 +15,7 @@ Generated 2026-08-03 from live GSC API + sitemap sweep. Property `sc-domain:nebu
 | https://nebulacomponents.com/case-studies | Discovered - currently not indexed |
 | https://nebulacomponents.com/benchmarks | URL is unknown to Google |
 
-## TIER 2 — Comparison / high-intent
+## TIER 2 - Comparison / high-intent
 
 | URL | State (2026-08-03) |
 |---|---|
@@ -29,7 +29,7 @@ Generated 2026-08-03 from live GSC API + sitemap sweep. Property `sc-domain:nebu
 | https://nebulacomponents.com/vs/semrush-site-audit | URL is unknown to Google |
 | https://nebulacomponents.com/vs/screaming-frog | URL is unknown to Google |
 
-## TIER 3 — Flagship content
+## TIER 3 - Flagship content
 
 | URL | State (2026-08-03) |
 |---|---|
@@ -42,7 +42,7 @@ Generated 2026-08-03 from live GSC API + sitemap sweep. Property `sc-domain:nebu
 | https://nebulacomponents.com/learning-centre | URL is unknown to Google |
 | https://nebulacomponents.com/resources | Discovered - currently not indexed |
 
-## TIER 4 — Company / legal
+## TIER 4 - Company / legal
 
 | URL | State (2026-08-03) |
 |---|---|
@@ -53,7 +53,7 @@ Generated 2026-08-03 from live GSC API + sitemap sweep. Property `sc-domain:nebu
 
 ---
 
-## Already indexed (verified — skip)
+## Already indexed (verified - skip)
 
 - https://nebulacomponents.com/ (Submitted and indexed)
 - https://nebulacomponents.com/audit (Submitted and indexed)
@@ -61,7 +61,7 @@ Generated 2026-08-03 from live GSC API + sitemap sweep. Property `sc-domain:nebu
 
 ## Excluded by design (do NOT submit)
 
-- https://nebulacomponents.com/workspace — email-gated, robots.txt `Disallow: /workspace/`
+- https://nebulacomponents.com/workspace - email-gated, robots.txt `Disallow: /workspace/`
 
 ---
 

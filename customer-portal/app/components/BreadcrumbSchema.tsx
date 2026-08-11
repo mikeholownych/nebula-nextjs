@@ -19,7 +19,7 @@ function slugToLabel(slug: string): string {
     .join(' ');
 }
 
-// Emits only the BreadcrumbList JSON-LD for the current path — no visible
+// Emits only the BreadcrumbList JSON-LD for the current path - no visible
 // <nav>. Used in shared layouts (e.g. /learning-centre, /resources/citable)
 // where several individual pages already render their own visual breadcrumb
 // markup; rendering a second one there would duplicate the UI. Schema

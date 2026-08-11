@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-draft_thread_replies.py — Nebula Thread Reply Drafter
+draft_thread_replies.py - Nebula Thread Reply Drafter
 
 Reads signal_queue.jsonl, finds uncontacted signals with score >= 7,
 scrapes their product URL, runs a quick audit, and drafts a short
@@ -36,7 +36,7 @@ except ImportError as e:
 SIGNAL_QUEUE  = "/home/mike/nebula/signal_queue.jsonl"
 REPLY_DRAFTS  = "/home/mike/nebula/reply_drafts.jsonl"
 
-# ─── Test data — used if signal_queue.jsonl is missing or empty ───────────────
+# ─── Test data - used if signal_queue.jsonl is missing or empty ───────────────
 
 TEST_SIGNALS = [
     {
@@ -76,7 +76,7 @@ def load_signals(path: str, min_score: int) -> list[dict]:
                     continue
 
     if not signals:
-        print(f"[INFO] {path} not found or empty — using built-in test data.")
+        print(f"[INFO] {path} not found or empty - using built-in test data.")
         signals = TEST_SIGNALS
 
     eligible = [
@@ -121,7 +121,7 @@ DIM_LABEL = {
 def draft_reply(signal: dict, page: dict, audit: dict) -> str:
     """
     Draft a 2-3 sentence reply.
-    Format: 'Looked at [domain] — [specific issue]. [One sentence fix]. 
+    Format: 'Looked at [domain] - [specific issue]. [One sentence fix].
              Happy to run the full audit if useful.'
     """
     domain    = get_domain(signal["product_url"])
@@ -151,10 +151,10 @@ def draft_reply(signal: dict, page: dict, audit: dict) -> str:
     # Enrich the observation with page-specific detail
     if dim_key == "cta":
         if not ctas:
-            observation = f"No CTA detected on the page — visitors have nowhere to go after reading."
+            observation = f"No CTA detected on the page - visitors have nowhere to go after reading."
         elif len(ctas) >= 3:
             observation = (
-                f"Found {len(ctas)} competing CTAs ({', '.join(ctas[:2])}, …) — "
+                f"Found {len(ctas)} competing CTAs ({', '.join(ctas[:2])}, …) - "
                 f"too many choices quietly kill conversions."
             )
         else:
@@ -162,7 +162,7 @@ def draft_reply(signal: dict, page: dict, audit: dict) -> str:
     elif dim_key == "social_proof":
         proof = page.get("social_proof_signals", [])
         if not proof:
-            observation = f"Zero social proof signals on the page — no testimonials, no customer count, no logos."
+            observation = f"Zero social proof signals on the page - no testimonials, no customer count, no logos."
         else:
             observation = issue_sentence
     elif dim_key == "headline":
@@ -177,7 +177,7 @@ def draft_reply(signal: dict, page: dict, audit: dict) -> str:
         observation += "."
 
     reply = (
-        f"Looked at {domain} — {observation} "
+        f"Looked at {domain} - {observation} "
         f"{fix_sentence} "
         f"Happy to run the full audit if useful."
     )
@@ -234,7 +234,7 @@ def run(min_score: int = 7, single_url: str | None = None):
 
         page = scrape_page(product_url)
         if page.get("error"):
-            print(f"  [WARN] Scrape failed for {domain}: {page['error']} — skipping.")
+            print(f"  [WARN] Scrape failed for {domain}: {page['error']} - skipping.")
             continue
 
         audit = score_audit(page)

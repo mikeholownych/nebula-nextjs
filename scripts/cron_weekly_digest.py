@@ -2,7 +2,7 @@
 """Cron script: weekly workspace digest (email + optional Slack).
 
 Runs daily (e.g. 9am); each user is processed only on their digest_day
-(default monday). Idempotent per ISO week via a JSON state file — a
+(default monday). Idempotent per ISO week via a JSON state file - a
 double-run never double-sends.
 
 Usage:
@@ -108,7 +108,7 @@ def main() -> None:
             continue
 
         if digest is None:
-            logger.info("No audits for %s — skipping (never send empty digests)", email)
+            logger.info("No audits for %s - skipping (never send empty digests)", email)
             skipped += 1
             continue
 

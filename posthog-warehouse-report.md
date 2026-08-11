@@ -1,6 +1,6 @@
-# PostHog Data Warehouse — Source Setup Report
+# PostHog Data Warehouse - Source Setup Report
 
-**Date:** 2026-07-23  
+**Date:** 2026-07-23
 **Project:** Nebula (ID: 525183)
 
 ## Summary
@@ -9,7 +9,7 @@ Three data sources were detected in this project. All three require browser-base
 
 ## Sources
 
-### PostgreSQL — Browser setup required
+### PostgreSQL - Browser setup required
 
 Credentials were not supplied. Complete setup in the PostHog app:
 
@@ -30,14 +30,14 @@ Credentials were not supplied. Complete setup in the PostHog app:
 
 ---
 
-### Stripe — Browser setup required
+### Stripe - Browser setup required
 
 Credentials were not supplied. Complete setup in the PostHog app:
 
 **[Open setup URL](https://us.posthog.com/project/525183/data-warehouse/new-source?kind=Stripe&utm_source=wizard&utm_campaign=warehouse-source)**
 
 **Before you start:**
-- Use a **restricted** API key starting with `rk_live_` — not your secret key (`sk_live_`).
+- Use a **restricted** API key starting with `rk_live_` - not your secret key (`sk_live_`).
 - Create one at Stripe Dashboard > Developers > API Keys > Restricted keys, with:
   - Read on Core, Billing, Connect
   - Write on Webhooks (enables automatic real-time webhook sync)
@@ -45,7 +45,7 @@ Credentials were not supplied. Complete setup in the PostHog app:
 
 ---
 
-### SendGrid — Browser setup required
+### SendGrid - Browser setup required
 
 Credentials were not supplied. Complete setup in the PostHog app:
 
@@ -62,7 +62,7 @@ Credentials were not supplied. Complete setup in the PostHog app:
 
 ## Files Modified
 
-- `posthog-warehouse-report.md` — created (this file)
+- `posthog-warehouse-report.md` - created (this file)
 
 No application source files were modified. This skill only configures external data connections.
 

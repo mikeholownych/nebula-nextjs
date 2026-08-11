@@ -2,11 +2,11 @@ import { Metadata } from 'next'
 import { comparisons } from './comparisons'
 
 export const metadata: Metadata = {
-  title: 'Nebula Components vs Landing Page Tools — Comparisons',
+  title: 'Nebula Components vs Landing Page Tools - Comparisons',
   description:
     'Honest, evidence-led comparisons of Nebula Components against landing page builders and performance tools: Unbounce, Instapage, PageSpeed Insights, Leadpages.',
   openGraph: {
-    title: 'Nebula Components vs Landing Page Tools — Comparisons',
+    title: 'Nebula Components vs Landing Page Tools - Comparisons',
     description:
       'Evidence-led landing page audit vs the builders and meters. Honest boundaries and observable checks.',
     url: 'https://nebulacomponents.com/compare',
@@ -24,7 +24,7 @@ export default function ComparePage() {
         <p className="text-fg-muted text-lg mb-10">
           Landing page builders create pages. Performance meters measure speed. Nebula audits
           conversion readiness against observable checks. These pages state the boundary
-          honestly — and where the other tool wins, it says so.
+          honestly - and where the other tool wins, it says so.
         </p>
 
         <section className="space-y-6">
@@ -50,7 +50,7 @@ export default function ComparePage() {
         <section className="mt-12 bg-bg-elevated border border-border rounded-lg p-8 text-center">
           <h2 className="text-2xl font-bold mb-2">Stop comparing. Start diagnosing.</h2>
           <p className="text-fg-muted mb-6 max-w-xl mx-auto">
-            The free audit scores the page you already have against observable component checks —
+            The free audit scores the page you already have against observable component checks -
             no signup, no site access, no rebuild.
           </p>
           <a

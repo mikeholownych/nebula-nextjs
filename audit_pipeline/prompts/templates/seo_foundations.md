@@ -1,4 +1,4 @@
-## SEO Foundations — Title, Meta, H1
+## SEO Foundations - Title, Meta, H1
 
 **Finding:** Basic SEO elements are missing or misconfigured.
 
@@ -35,8 +35,8 @@ I need to fix my landing page's SEO metadata.
 ${seo_issues_text}
 
 Write optimized replacements for:
-1. **Title tag** (30-60 chars) — includes primary keyword + brand name
-2. **Meta description** (120-160 chars) — includes primary keyword, value prop, and CTA
+1. **Title tag** (30-60 chars) - includes primary keyword + brand name
+2. **Meta description** (120-160 chars) - includes primary keyword, value prop, and CTA
 3. **H1 tag** (one, matches title intent, includes primary keyword)
 
 For each: show the old version, the new version, and the exact

@@ -80,10 +80,10 @@ What surprised you?
 
 ## Decision
 
-- [ ] Adopt — implement permanently
-- [ ] Iterate — modify and re-run
-- [ ] Kill — abandon this approach
-- [ ] Escalate — needs human judgment
+- [ ] Adopt - implement permanently
+- [ ] Iterate - modify and re-run
+- [ ] Kill - abandon this approach
+- [ ] Escalate - needs human judgment
 
 ## Rollback Plan
 

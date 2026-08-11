@@ -15,12 +15,12 @@
 ### Step 3: Prescription & Implementation Plan
 **What we do**: Based on our diagnosis, we create a tailored implementation plan with specific fixes for each identified issue. This includes rewritten copy, optimized CTAs, improved trust elements, and refined offers.
 
-**Why it matters**: We don't just tell you what's wrong—we give you a clear, actionable plan to fix it. Our fixes are proven to work across industries and use cases.
+**Why it matters**: We don't just tell you what's wrong-we give you a clear, actionable plan to fix it. Our fixes are proven to work across industries and use cases.
 
 ### Step 4: Implementation & Monitoring
 **What we do**: We help you implement the fixes and monitor results in real-time. We provide ongoing support and optimization to ensure maximum ROI.
 
-**Why it matters**: Implementation is where the magic happens. Our framework doesn't just identify problems—it delivers measurable results that you can track and optimize over time.
+**Why it matters**: Implementation is where the magic happens. Our framework doesn't just identify problems-it delivers measurable results that you can track and optimize over time.
 
 ## Why This Works
 
@@ -31,7 +31,7 @@ Unlike generic advice or one-off fixes, our framework follows a systematic proce
 Every recommendation is backed by data and proven results from thousands of campaigns we've analyzed.
 
 ### Continuous Improvement
-We don't just fix your page once—we help you build a sustainable process for ongoing optimization and growth.
+We don't just fix your page once-we help you build a sustainable process for ongoing optimization and growth.
 
 ## What You'll Get
 

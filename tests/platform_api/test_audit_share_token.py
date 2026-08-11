@@ -1,6 +1,6 @@
 """Test the audit share-token generation and validation endpoints.
 
-These were missing entirely — the share_token column existed in the
+These were missing entirely - the share_token column existed in the
 nebula_audit schema, and the frontend "Share this report" button called
 GET /audit/{id}/share-token, but no such route (or AuditDB method) was
 ever implemented, so the button always failed with a 404.
@@ -87,8 +87,8 @@ async def test_get_audit_with_wrong_share_token_returns_404(client):
 
 @pytest.mark.asyncio
 async def test_get_audit_with_share_token_for_a_different_audit_id_returns_404(client):
-    """A real, valid share token — but for a *different* audit than the one
-    in the URL path — must not unlock this audit_id."""
+    """A real, valid share token - but for a *different* audit than the one
+    in the URL path - must not unlock this audit_id."""
     audit_id = str(uuid4())
     other_audit_id = str(uuid4())
     audit_payload = {"audit_id": other_audit_id, "url": "https://other.example"}

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Copy Fatigue Detector — Hormozi Rule of 100 Protocol.
+Copy Fatigue Detector - Hormozi Rule of 100 Protocol.
 
 Distinguishes copy fatigue from infrastructure breakdown using
 metric trend analysis. Run weekly or integrate with health check.
@@ -22,7 +22,7 @@ from datetime import datetime, timezone
 # ── Metric thresholds (from 100-Day Scorecard) ────────────────────
 THRESHOLDS = {
     "reply_rate":  {"green": 3.0, "yellow": 1.0},   # % positive replies
-    "open_rate":   {"green": 40.0, "yellow": 25.0},  # % opens — Illingworth: <40% = something wrong
+    "open_rate":   {"green": 40.0, "yellow": 25.0},  # % opens - Illingworth: <40% = something wrong
     "bounce_rate": {"red": 2.5,  "yellow": 1.5},     # % bounced
     "spam_rate":   {"red": 0.3,  "yellow": 0.1},     # % spam complaints
     "warmup_score":{"green": 70, "yellow": 60},       # warmup health 0–100
@@ -78,7 +78,7 @@ def diagnose_fatigue(
         spam_rate           : current spam complaint rate (%)
         warmup_score        : current warmup health score (0–100)
         drop_is_gradual     : True if drop occurred over 2–6 weeks; False if within days
-        open_rate           : current open rate (%) — Illingworth: <40% = something wrong
+        open_rate           : current open rate (%) - Illingworth: <40% = something wrong
 
     Returns dict with:
         diagnosis     : 'copy_fatigue' | 'infrastructure_breakdown' | 'healthy'
@@ -121,7 +121,7 @@ def diagnose_fatigue(
             "reply_delta": reply_delta,
             "action": (
                 "STOP sending. Infrastructure is broken. "
-                "Fix until bounce<1.5%, spam<0.1%, warmup>70% — THEN resume. "
+                "Fix until bounce<1.5%, spam<0.1%, warmup>70% - THEN resume. "
                 "New copy will not save you."
             ),
             "zones": zones,
@@ -234,7 +234,7 @@ def save_hook_entry(entry: dict, path: str = "/home/mike/nebula/hook_bank.jsonl"
 
 # ══════════════════════════════════════════════════════════════════
 # A/B Variation Registry
-# Source: Illingworth SOPs — "A/B test 2 variations for every step"
+# Source: Illingworth SOPs - "A/B test 2 variations for every step"
 #   Track: subject line, CTA phrasing, tone (casual vs structured)
 #   Log per step, per week, with opens/replies/positives/booked
 # ══════════════════════════════════════════════════════════════════
@@ -387,7 +387,7 @@ def print_weekly_sheet(week: int | None = None, path: str = AB_REGISTRY_PATH) ->
 
     label = f"Week {week}" if week else "All Weeks"
     header = f"{'Campaign':<14} {'Step':>4} {'Var':>4} {'Tone':<12} {'Sent':>5} {'Opens':>6} {'OR%':>5} {'Replies':>8} {'RR%':>5} {'Pos':>4} {'Booked':>7}  Subject"
-    print(f"\n=== A/B Performance — {label} ===")
+    print(f"\n=== A/B Performance - {label} ===")
     print(header)
     print("─" * len(header))
     for r in rows:

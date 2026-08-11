@@ -28,7 +28,7 @@ interface TimelineData {
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
 function fmtDate(iso: string | null | undefined): string {
-  if (!iso) return '—'
+  if (!iso) return '-'
   const d = new Date(iso)
   return d.toLocaleDateString('en-US', {
     month: 'short',
@@ -40,7 +40,7 @@ function fmtDate(iso: string | null | undefined): string {
 }
 
 function fmtScore(n: number | null | undefined): string {
-  if (n == null) return '—'
+  if (n == null) return '-'
   return n.toFixed(1)
 }
 
@@ -272,7 +272,7 @@ export default function TimelineView({ email }: { email: string }) {
       <div className="mb-6">
         <h2 className="text-xl font-bold">Activity Timeline</h2>
         <p className="text-sm text-fg-muted mt-1">
-          {data.events.length} event{data.events.length !== 1 ? 's' : ''} — most recent first
+          {data.events.length} event{data.events.length !== 1 ? 's' : ''} - most recent first
         </p>
       </div>
 

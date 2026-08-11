@@ -1,1 +1,1 @@
-"""Nebula Components — Autonomous YouTube Channel Pipeline."""
+"""Nebula Components - Autonomous YouTube Channel Pipeline."""

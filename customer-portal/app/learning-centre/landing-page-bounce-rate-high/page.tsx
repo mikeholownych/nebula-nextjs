@@ -77,7 +77,7 @@ const faqSchema = {
       name: 'How does bounce rate differ by traffic source?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Organic search traffic typically bounces 40-60% on landing pages. Paid ads (Google Ads, social) commonly see 50-70% bounce rates due to colder audiences. Direct traffic and email tend to bounce 20-40%. Referral traffic bounces 30-50%. These differences reflect visitor intent—organic searchers found you; ad clickers were interrupted. Judge each source against its own baseline, not against overall site averages.',
+        text: 'Organic search traffic typically bounces 40-60% on landing pages. Paid ads (Google Ads, social) commonly see 50-70% bounce rates due to colder audiences. Direct traffic and email tend to bounce 20-40%. Referral traffic bounces 30-50%. These differences reflect visitor intent-organic searchers found you; ad clickers were interrupted. Judge each source against its own baseline, not against overall site averages.',
       },
     },
   ],

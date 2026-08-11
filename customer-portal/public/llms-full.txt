@@ -1,4 +1,4 @@
-# Nebula Components — Full LLM Content File
+# Nebula Components - Full LLM Content File
 # https://nebulacomponents.com/llms-full.txt
 # Spec: https://llmstxt.org/
 # Summary: https://nebulacomponents.com/llms.txt
@@ -7,7 +7,7 @@
 
 Nebula Components is a landing page conversion diagnostic service built for founders running paid ads. We identify structural and messaging failures that cause landing pages to receive traffic but generate no conversions, then produce a bounded repair sprint for one selected finding.
 
-Our operating premise: most landing page failures are diagnosable. They follow repeating patterns. They can be fixed. The problem is not the ad — it is the page.
+Our operating premise: most landing page failures are diagnosable. They follow repeating patterns. They can be fixed. The problem is not the ad - it is the page.
 
 ## The Problem We Solve
 
@@ -41,7 +41,7 @@ Every Nebula audit checks nine signals:
 
 ## Services
 
-### One-Leak Repair Sprint — $97 (one-time)
+### One-Leak Repair Sprint - $97 (one-time)
 One landing page and one high-confidence finding selected from the audit. Nebula supplies exact copy, a code snippet, or a configuration change tailored to that finding. The customer or their developer implements it. One same-scope re-audit is included within 30 days. Price locked through 2026-12-31. Checkout is available only from an eligible audit report at https://nebulacomponents.com/checkout.
 
 The kit excludes full redesigns, multiple pages, backend application logic, analytics migrations, and paid third-party tools. If Nebula cannot generate the promised bounded kit, the buyer may request a delivery review or refund. The re-audit verifies the page condition; it does not by itself prove or guarantee conversion lift.
@@ -52,33 +52,33 @@ No retainer. No ongoing commitment. Pay once for one bounded repair sprint.
 Automated URL submission and 9-signal scoring across message match, trust, mobile CTA, load time, CTA clarity, above-fold clarity, ad signals, SEO foundations, and AI readiness. The score and initial findings appear before email; anonymous visitors submit an email to unlock the full report. Self-serve at https://nebulacomponents.com/audit.
 
 ## Component Lab
-Three component checks at https://nebulacomponents.com/lab — Message Match, Headline, CTA. Paste ad copy (optional) + page URL; the same engine as the free audit returns status, evidence, and the pass standard for each component. Ad copy enables a transparent term-overlap comparison between the ad's meaningful terms and the page's actual H1/title.
+Three component checks at https://nebulacomponents.com/lab - Message Match, Headline, CTA. Paste ad copy (optional) + page URL; the same engine as the free audit returns status, evidence, and the pass standard for each component. Ad copy enables a transparent term-overlap comparison between the ad's meaningful terms and the page's actual H1/title.
 
 ## Benchmarks
-Nebula publishes real landing page benchmarks computed from completed audits: how often each conversion component (above-fold clarity, ad signals, SEO foundations, CTA, load speed, social proof, AI readiness, headline) fails, average impact, and score distribution. No URLs or personal data — pure aggregates at https://nebulacomponents.com/benchmarks
+Nebula publishes real landing page benchmarks computed from completed audits: how often each conversion component (above-fold clarity, ad signals, SEO foundations, CTA, load speed, social proof, AI readiness, headline) fails, average impact, and score distribution. No URLs or personal data - pure aggregates at https://nebulacomponents.com/benchmarks
 
 ## Comparisons
-Honest tool-to-tool comparisons at https://nebulacomponents.com/compare — Nebula vs Unbounce, Instapage, PageSpeed Insights, and Leadpages. Each page states what the other tool does well, where it stops, where Nebula fits, and an explicit "use both" recommendation. Nebula is a diagnosis tool, not a builder or a performance meter; boundaries are stated plainly.
+Honest tool-to-tool comparisons at https://nebulacomponents.com/compare - Nebula vs Unbounce, Instapage, PageSpeed Insights, and Leadpages. Each page states what the other tool does well, where it stops, where Nebula fits, and an explicit "use both" recommendation. Nebula is a diagnosis tool, not a builder or a performance meter; boundaries are stated plainly.
 
 ## Workspace
-Email-keyed customer workspace at https://nebulacomponents.com/workspace — enter the email used for audits to open a Dashboard (overall score, findings severity, score trend, suggested next actions), Audit History (immutable versions per URL), Projects, Compare Audits (PR-style diff between audit versions), Recommendation Kanban (To Fix / Doing / Done), Experiments (Component Lab history: saved runs, scores, production marking), Billing (plan, purchase history, Stripe customer portal, upgrade paths), and Monitoring (scheduled re-audits with Telegram alerts on score movement ≥ 4 points or new critical findings). Backed by the same PostgreSQL store as the audit engine.
+Email-keyed customer workspace at https://nebulacomponents.com/workspace - enter the email used for audits to open a Dashboard (overall score, findings severity, score trend, suggested next actions), Audit History (immutable versions per URL), Projects, Compare Audits (PR-style diff between audit versions), Recommendation Kanban (To Fix / Doing / Done), Experiments (Component Lab history: saved runs, scores, production marking), Billing (plan, purchase history, Stripe customer portal, upgrade paths), and Monitoring (scheduled re-audits with Telegram alerts on score movement ≥ 4 points or new critical findings). Backed by the same PostgreSQL store as the audit engine.
 
 ## Teardowns
 
-Nebula publishes public landing page teardowns as evidence-based growth content: real pages, cold paid-traffic conditions, 9-signal scoring, and annotated findings — no opinions without observable support. All teardowns are at https://nebulacomponents.com/teardowns
+Nebula publishes public landing page teardowns as evidence-based growth content: real pages, cold paid-traffic conditions, 9-signal scoring, and annotated findings - no opinions without observable support. All teardowns are at https://nebulacomponents.com/teardowns
 
-- [Knallhart](https://nebulacomponents.com/teardowns/knallhart): knallhart.dev — 5.4/10, Grade C. Five specific findings including above-fold trust gaps and CTA ambiguity. Founder notified with full report.
-- [Postmint](https://nebulacomponents.com/teardowns/postmint): postmint.de — Blade/PHP template literal leak exposed in rendered HTML; message-match and trust findings. Founder notified with full report.
-- [Basecamp](https://nebulacomponents.com/teardowns/basecamp): basecamp.com — 5.4/10, Grade C. Snapshot of five measurable page-level conditions for cold paid traffic.
-- [Notion](https://nebulacomponents.com/teardowns/notion): notion.so — evidence-backed findings under cold paid-traffic conditions.
-- [Calendly](https://nebulacomponents.com/teardowns/calendly): calendly.com — 9-signal audit findings.
-- [Carrd](https://nebulacomponents.com/teardowns/carrd): carrd.co — 9-signal audit findings.
-- [Beehiiv](https://nebulacomponents.com/teardowns/beehiiv): beehiiv.com — 9-signal audit findings.
-- [Webflow](https://nebulacomponents.com/teardowns/webflow): webflow.com — 9-signal audit findings.
-- [Kit](https://nebulacomponents.com/teardowns/kit): kit.com — 9-signal audit findings.
-- [Hotjar](https://nebulacomponents.com/teardowns/hotjar): hotjar.com — 9-signal audit findings.
-- [Unbounce](https://nebulacomponents.com/teardowns/unbounce): unbounce.com — 9-signal audit findings.
-- [Framer](https://nebulacomponents.com/teardowns/framer): framer.com — 9-signal audit findings.
+- [Knallhart](https://nebulacomponents.com/teardowns/knallhart): knallhart.dev - 5.4/10, Grade C. Five specific findings including above-fold trust gaps and CTA ambiguity. Founder notified with full report.
+- [Postmint](https://nebulacomponents.com/teardowns/postmint): postmint.de - Blade/PHP template literal leak exposed in rendered HTML; message-match and trust findings. Founder notified with full report.
+- [Basecamp](https://nebulacomponents.com/teardowns/basecamp): basecamp.com - 5.4/10, Grade C. Snapshot of five measurable page-level conditions for cold paid traffic.
+- [Notion](https://nebulacomponents.com/teardowns/notion): notion.so - evidence-backed findings under cold paid-traffic conditions.
+- [Calendly](https://nebulacomponents.com/teardowns/calendly): calendly.com - 9-signal audit findings.
+- [Carrd](https://nebulacomponents.com/teardowns/carrd): carrd.co - 9-signal audit findings.
+- [Beehiiv](https://nebulacomponents.com/teardowns/beehiiv): beehiiv.com - 9-signal audit findings.
+- [Webflow](https://nebulacomponents.com/teardowns/webflow): webflow.com - 9-signal audit findings.
+- [Kit](https://nebulacomponents.com/teardowns/kit): kit.com - 9-signal audit findings.
+- [Hotjar](https://nebulacomponents.com/teardowns/hotjar): hotjar.com - 9-signal audit findings.
+- [Unbounce](https://nebulacomponents.com/teardowns/unbounce): unbounce.com - 9-signal audit findings.
+- [Framer](https://nebulacomponents.com/teardowns/framer): framer.com - 9-signal audit findings.
 
 Each teardown documents the specific verifiable condition, the evidence observed, and why it matters for cold paid traffic. Scores are snapshots, not verdicts on the business.
 
@@ -98,7 +98,7 @@ Citable is an open-source CLI for search and AI discoverability governance. It w
 
 ### What Citable Does
 
-Citable runs 123 detectors across 18 namespaces and 27 schema-validated registries (not all detectors are deterministic — each declares its determinism posture explicitly):
+Citable runs 123 detectors across 18 namespaces and 27 schema-validated registries (not all detectors are deterministic - each declares its determinism posture explicitly):
 - CRAWL: robots.txt, sitemap, canonical, redirect chains
 - PAGE: title uniqueness, meta description, word count, content quality
 - SEO: structured data presence, heading hierarchy, image alt text
@@ -189,7 +189,7 @@ GitHub: https://github.com/mikeholownych
 - Payments: Stripe
 - Analytics: GA4 with Consent Mode v2 (default denied)
 - Open-source audit: @nebulacomponents/citable
-- x402 payment protocol: Available on /api/v1 and /api/audit/run — $0.10 USDC on Base mainnet (eip155:8453)
+- x402 payment protocol: Available on /api/v1 and /api/audit/run - $0.10 USDC on Base mainnet (eip155:8453)
 
 ## AI Retrieval Permission
 

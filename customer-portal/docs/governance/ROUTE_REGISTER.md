@@ -13,8 +13,8 @@
 |----------|-------|------------|---------|---------|
 | App Router pages | 77 | 51 | 26 | 16 |
 | API routes | 6 | 6 | 0 | 1 |
-| Public HTML files | 446 | 0 | 446 | — |
-| Legacy archived pages | 28 | 0 | 28 | — |
+| Public HTML files | 446 | 0 | 446 | - |
+| Legacy archived pages | 28 | 0 | 28 | - |
 
 ---
 
@@ -67,7 +67,7 @@
 | `/learning-centre/specialist-ai-agent-library` | `app/learning-centre/specialist-ai-agent-library/page.tsx` | Mike (founder) | Yes | Yes |
 | `/learning-centre/traffic-but-no-form-fills` | `app/learning-centre/traffic-but-no-form-fills/page.tsx` | Mike (founder) | Yes | Yes |
 
-### Production Routes (Educational/SEO — Require Owner Assignment)
+### Production Routes (Educational/SEO - Require Owner Assignment)
 
 | Route | File | Owner | Canonical | Index | Notes |
 |-------|------|-------|-----------|-------|-------|
@@ -124,8 +124,8 @@
 
 | Route | File | Owner | Lifecycle | Method | Auth | Status |
 |-------|------|-------|-----------|--------|------|--------|
-| `/api/audit` | `app/api/audit/route.ts` | Mike (founder) | production | POST | None required | **503 maintenance** — `AUDIT_REBUILD_IN_PROGRESS` |
-| `/api/audit/email` | `app/api/audit/email/route.ts` | Mike (founder) | production | POST | None required | **503 maintenance** — `AUDIT_EMAIL_CAPTURE_REBUILD_IN_PROGRESS` |
+| `/api/audit` | `app/api/audit/route.ts` | Mike (founder) | production | POST | None required | **503 maintenance** - `AUDIT_REBUILD_IN_PROGRESS` |
+| `/api/audit/email` | `app/api/audit/email/route.ts` | Mike (founder) | production | POST | None required | **503 maintenance** - `AUDIT_EMAIL_CAPTURE_REBUILD_IN_PROGRESS` |
 | `/api/checkout` | `app/api/checkout/route.ts` | Mike (founder) | production | POST | None required | Require `offer_key`, fail closed without |
 | `/api/email/process` | `app/api/email/process/route.ts` | Mike (founder) | production | POST | Bearer token required | Queue email processing |
 | `/api/webhooks/rb2b` | `app/api/webhooks/rb2b/route.ts` | Mike (founder) | production | POST | HMAC signature required | RB2B inbound events |

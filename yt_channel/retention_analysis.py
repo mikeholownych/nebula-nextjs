@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Channel performance analyzer — ICAHN with OUR OWN data.
+"""Channel performance analyzer - ICAHN with OUR OWN data.
 
-'If you already have a channel, you have better proof of concept — you can
-do the ICAHN method with money (or conversions) instead of views.' — Shane
+'If you already have a channel, you have better proof of concept - you can
+do the ICAHN method with money (or conversions) instead of views.' - Shane
 Hummus, $333k playbook (YtpQSmu794k).
 
 Ranks our published videos vs the channel average so we can double down on
@@ -15,7 +15,7 @@ Retention curves need the yt-analytics.readonly scope, which the current
 OAuth token lacks. If the token gains that scope later, this script will
 pick up averageViewDuration + audienceWatchRatio automatically; until then
 it reports what statistics-only can give us (views, likes, comments) and
-says so explicitly — never pretends analytics data is available.
+says so explicitly - never pretends analytics data is available.
 
 Usage:
   python3 yt_channel/retention_analysis.py [--json]
@@ -114,7 +114,7 @@ def analyze() -> dict:
 
     # View volatility (The Studio / MKBHD, Puny-2wkMZA): 'if you're
     # trying to sell ad space, reduce the volatility in views between
-    # each video — you should sit within a pretty tight range.'
+    # each video - you should sit within a pretty tight range.'
     # Coefficient of variation (std/mean) is the standard measure; a
     # stable channel has low CV, a hit-or-miss channel has high CV.
     if n >= 2:
@@ -125,7 +125,7 @@ def analyze() -> dict:
         view_cv = 0.0
 
     # 48-hour no-judgment rule (Nastia, ex-YouTube PM, VpKYkZr-1oQ):
-    # don't evaluate a video's performance before ~48h — real-time view
+    # don't evaluate a video's performance before ~48h - real-time view
     # counting is an estimate and the algorithm needs time to find the
     # audience. Videos younger than 48h are excluded from outlier flags.
     from datetime import timedelta
@@ -153,7 +153,7 @@ def analyze() -> dict:
     if not has_analytics:
         retention = {
             "available": False,
-            "reason": f"token lacks {ANALYTICS_SCOPE} — one-time consent refresh required "
+            "reason": f"token lacks {ANALYTICS_SCOPE} - one-time consent refresh required "
                       f"(re-run setup with the added scope) to read true retention curves",
         }
     else:
@@ -165,7 +165,7 @@ def analyze() -> dict:
             # Query-shape findings (probed 2026-08-09):
             #   ✅ dimensions=day + filters=video==<id> with
             #      views,averageViewDuration,subscribersGained
-            #   ❌ dimensions=video (400 "query not supported" — not
+            #   ❌ dimensions=video (400 "query not supported" - not
             #      served for this channel even with correct date range)
             #   ❌ impressions/impressionsClickThroughRate (400 in every
             #      shape probed)
@@ -192,7 +192,7 @@ def analyze() -> dict:
                     rows_day = []
                 # Nastia (ex-YouTube PM) diagnostic: the subscribed-vs-unsubscribed
                 # split is the #1 check when a video has "good CTR but low
-                # impressions" — great traction with loyal (subscribed) viewers
+                # impressions" - great traction with loyal (subscribed) viewers
                 # but ~zero new-viewer traction means packaging doesn't convert
                 # NEW viewers. subscribedStatus is the API proxy for the
                 # new/returning split (returns [] on a brand-new channel).
@@ -210,7 +210,7 @@ def analyze() -> dict:
                 # Dave Jeltema (JO2JSj3JU48) lesson 26: '% still watching at
                 # the 90% mark' is the ultimate metric. audienceWatchRatio +
                 # elapsedVideoTimeRatio is the retention curve; on this channel
-                # tier it 500s until there's enough data — probe best-effort
+                # tier it 500s until there's enough data - probe best-effort
                 # and leave None when the API refuses (never fake it).
                 p90 = None
                 try:
@@ -252,7 +252,7 @@ def analyze() -> dict:
                 "per_video": per_video,
                 "note": ("day+video-filter shape; impressions/CTR not served "
                          "for this channel (400); dimensions=video unsupported "
-                         "here — see skill"),
+                         "here - see skill"),
             }
             if not chan_rows:
                 retention["reason"] = "no analytics data yet (channel is new)"
@@ -264,7 +264,7 @@ def analyze() -> dict:
         "channel": chan_stats,
         "avg_views": round(avg_views, 1),
         "avg_engagement_rate": round(avg_eng, 2),
-        "view_cv": round(view_cv, 3),  # view volatility — low = stable for ad sales
+        "view_cv": round(view_cv, 3),  # view volatility - low = stable for ad sales
         "video_count": len(rows),
         "outliers": [r for r in rows if r["outlier"]],
         "underperformers": [r for r in rows if not r["too_new"] and r["views"] > 0 and r["views_vs_avg"] < 0.5][:5],
@@ -303,27 +303,27 @@ def main():
           f"{'(low = stable, good for ads)' if report['view_cv'] < 0.5 else '(high = hit-or-miss)'}")
     print(f"Subs: {report['channel'].get('subscriberCount', '?')} | "
           f"Total views: {report['channel'].get('viewCount', '?')}")
-    print("\n— OUTLIERS (make more of these) —")
+    print("\n- OUTLIERS (make more of these) -")
     for r in report["outliers"]:
         prod = r["production"]
         dom = prod.get("domain", "?")
         print(f"  {r['views']:>6,}v x{r['views_vs_avg']:>4.1f} avg | eng {r['engagement_rate']}% "
               f"| {dom:<24} | {r['title'][:52]}")
     if not report["outliers"]:
-        print("  (none yet — early channel, keep cadence)")
-    print("\n— UNDERPERFORMERS (stop or fix) —")
+        print("  (none yet - early channel, keep cadence)")
+    print("\n- UNDERPERFORMERS (stop or fix) -")
     for r in report["underperformers"]:
         print(f"  {r['views']:>6,}v x{r['views_vs_avg']:>4.1f} avg | {r['title'][:60]}")
-    print("\n— Retention —")
+    print("\n- Retention -")
     rt = report["retention"]
     if rt.get("available"):
         print(f"  available: {len(rt.get('rows', []))} video rows")
         p90s = [r.get("p90_retention") for r in report["videos"] if r.get("p90_retention") is not None]
         if p90s:
             print(f"  p90 retention (avg of tail): {sum(p90s)/len(p90s):.1%} "
-                  f"— Dave's 'ultimate metric' (watch it climb)")
+                  f"- Dave's 'ultimate metric' (watch it climb)")
         else:
-            print("  p90 retention: N/A yet — audienceWatchRatio 500s until "
+            print("  p90 retention: N/A yet - audienceWatchRatio 500s until "
                   "channel has enough data (probe is wired, will light up)")
     else:
         print(f"  NOT available: {rt.get('reason', '?')}")

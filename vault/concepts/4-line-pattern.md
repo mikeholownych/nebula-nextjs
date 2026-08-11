@@ -20,7 +20,7 @@ Line 4: CTA - clear next step
 > "Hi there, I saw your post and thought you might like Nebula Components. It's a landing page kit on sale for $7. Check it out!"
 
 ## Implementation Rules
-- **No pitch in the subject line** — "quick note on {domain}" not "buy now"
-- **Teach ONE concept** (5-second test, message-match, above-fold CTA) — methodology first
-- **Single CTA at the end** — implementation link only
-- **Do NOT mention the audit score again** — they saw it; now give them the why
+- **No pitch in the subject line** - "quick note on {domain}" not "buy now"
+- **Teach ONE concept** (5-second test, message-match, above-fold CTA) - methodology first
+- **Single CTA at the end** - implementation link only
+- **Do NOT mention the audit score again** - they saw it; now give them the why

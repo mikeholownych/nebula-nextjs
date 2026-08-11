@@ -1,4 +1,4 @@
-# Tools Map — Auto vs Manual
+# Tools Map - Auto vs Manual
 
 ## CONNECTS AUTOMATICALLY
 | Tool | What it does | Connected since |
@@ -12,7 +12,7 @@
 |------|---------------|-------------|
 | LinkedIn feed read | Claude cannot natively read LinkedIn feed | Use Apify on-demand scrape |
 | LinkedIn DM send | Claude writes DMs; user sends manually | Buffer / Taplio scheduling |
-| Notion content calendar | Can read/write via ntn CLI | Already wired — manual trigger |
+| Notion content calendar | Can read/write via ntn CLI | Already wired - manual trigger |
 | Gmail | Pulls email threads for reply drafting | Via AgentMail for audits only |
 | Post to LinkedIn/X | Claude writes; user copies + pastes | Scheduling via Buffer or Typefully |
 

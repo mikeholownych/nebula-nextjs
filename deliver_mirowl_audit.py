@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Custom audit delivery for mirowl.com — acknowledges self-sufficient dev.
+Custom audit delivery for mirowl.com - acknowledges self-sufficient dev.
 Pitch: call or $97 fix priority list (not $97 implementation).
 """
 import sys, json, datetime
@@ -20,7 +20,7 @@ def main():
     print(f"[1/4] Scraping {LEAD_URL}...")
     page = scrape_page(LEAD_URL)
     if page.get("error"):
-        print(f"Scrape error: {page['error']} — continuing with partial data")
+        print(f"Scrape error: {page['error']} - continuing with partial data")
 
     print("[2/4] Scoring audit...")
     audit = score_audit(page)
@@ -30,10 +30,10 @@ def main():
 
     print(f"  Overall: {overall}/10 ({grade})")
     for k, v in dims.items():
-        print(f"  {k}: {v['score']}/10 ({v['grade']}) — {v['issue'][:60]}")
+        print(f"  {k}: {v['score']}/10 ({v['grade']}) - {v['issue'][:60]}")
 
     # Compose subject
-    subject = f"mirowl.com audit — {grade} overall ({overall}/10), here's the breakdown"
+    subject = f"mirowl.com audit - {grade} overall ({overall}/10), here's the breakdown"
 
     # Sort by score ascending (worst first)
     sorted_dims = sorted(dims.items(), key=lambda x: x[1]["score"])
@@ -72,13 +72,13 @@ def main():
     if top2:
         top2_name = dim_names.get(top2[0], top2[0])
         top2_data = top2[1]
-        top2_block_txt = f"\n\nSecond priority — {top2_name} ({top2_data['score']}/10):\n{top2_data['fix']}"
+        top2_block_txt = f"\n\nSecond priority - {top2_name} ({top2_data['score']}/10):\n{top2_data['fix']}"
         top2_block_html = f"""
-<p style="margin:16px 0 4px 0;color:#ccc"><strong>Second priority — {top2_name} ({top2_data['score']}/10):</strong></p>
+<p style="margin:16px 0 4px 0;color:#ccc"><strong>Second priority - {top2_name} ({top2_data['score']}/10):</strong></p>
 <p style="margin:0;color:#aaa;font-size:14px">{top2_data['fix']}</p>"""
 
     # ── Plain text ──────────────────────────────────────────────────────────────
-    text = f"""You mentioned you handle dev yourself — perfect. This audit shows you exactly what's leaking conversions and in what order to fix it. No implementation needed from me.
+    text = f"""You mentioned you handle dev yourself - perfect. This audit shows you exactly what's leaking conversions and in what order to fix it. No implementation needed from me.
 
 Here's your audit for {LEAD_URL}:
 
@@ -90,7 +90,7 @@ SCORES BY DIMENSION
 {findings_txt}
 
 ──────────────────────────────────────────────────
-#1 FIX — Highest impact, fix this first
+#1 FIX - Highest impact, fix this first
 ──────────────────────────────────────────────────
 
 {top1_name}: {top1_data['score']}/10
@@ -104,16 +104,16 @@ Fix: {top1_data['fix']}
 
 Two options if you want to go deeper:
 
-1. Free 20-min call — I'll walk through the findings and answer any questions.
+1. Free 20-min call - I'll walk through the findings and answer any questions.
    Just reply and we'll find a time.
 
-2. Written fix priority list ($97) — I'll rank every issue by impact vs effort,
+2. Written fix priority list ($97) - I'll rank every issue by impact vs effort,
    write the exact copy rewrites, and give you a sequenced implementation order.
    No discovery call needed. You implement, I advise. Reply "fix list" to get started.
 
 Either way, the audit is yours. No strings.
 
-— Mike
+- Mike
 Nebula Components
 nebulacomponents.com
 """
@@ -128,7 +128,7 @@ nebulacomponents.com
 <div style="max-width:620px;margin:0 auto;padding:32px 24px">
 
   <div style="background:#111;border-left:3px solid #00ff88;padding:14px 18px;margin-bottom:28px;border-radius:0 6px 6px 0">
-    <p style="margin:0;color:#ccc;font-size:14px">You mentioned you handle dev yourself — <strong style="color:#fff">perfect</strong>. This audit shows you exactly what's leaking conversions and in what order to fix it. No implementation needed from me.</p>
+    <p style="margin:0;color:#ccc;font-size:14px">You mentioned you handle dev yourself - <strong style="color:#fff">perfect</strong>. This audit shows you exactly what's leaking conversions and in what order to fix it. No implementation needed from me.</p>
   </div>
 
   <div style="margin-bottom:20px">
@@ -152,7 +152,7 @@ nebulacomponents.com
   </table>
 
   <div style="background:#0d1f0d;border:1px solid #00ff88;border-radius:6px;padding:20px;margin-bottom:24px">
-    <div style="color:#00ff88;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">#1 Fix — Fix this first</div>
+    <div style="color:#00ff88;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">#1 Fix - Fix this first</div>
     <div style="color:#fff;font-size:16px;font-weight:bold;margin-bottom:8px">{top1_name}: {top1_data['score']}/10</div>
     <p style="margin:0 0 10px 0;color:#ccc;font-size:14px"><strong>Problem:</strong> {top1_data['issue']}</p>
     <p style="margin:0;color:#ccc;font-size:14px"><strong>Fix:</strong> {top1_data['fix']}</p>
@@ -162,12 +162,12 @@ nebulacomponents.com
 
   <div style="background:#111;border:1px solid #333;border-radius:6px;padding:20px;margin-top:28px">
     <p style="margin:0 0 12px 0;color:#888;font-size:12px;text-transform:uppercase;letter-spacing:1px">Want to go deeper?</p>
-    <p style="margin:0 0 10px 0;color:#e0e0e0;font-size:14px"><strong>Option 1 — Free 20-min call:</strong> I'll walk through the findings live. Just reply and we'll find a time.</p>
-    <p style="margin:0;color:#e0e0e0;font-size:14px"><strong>Option 2 — Written fix priority list ($97):</strong> Every issue ranked by impact vs effort, exact copy rewrites, sequenced implementation order. Reply <strong style="color:#00ff88">"fix list"</strong> to get started. You implement, I advise.</p>
+    <p style="margin:0 0 10px 0;color:#e0e0e0;font-size:14px"><strong>Option 1 - Free 20-min call:</strong> I'll walk through the findings live. Just reply and we'll find a time.</p>
+    <p style="margin:0;color:#e0e0e0;font-size:14px"><strong>Option 2 - Written fix priority list ($97):</strong> Every issue ranked by impact vs effort, exact copy rewrites, sequenced implementation order. Reply <strong style="color:#00ff88">"fix list"</strong> to get started. You implement, I advise.</p>
   </div>
 
-  <p style="margin:28px 0 0 0;color:#555;font-size:13px">Either way — the audit is yours. No strings.</p>
-  <p style="margin:12px 0 0 0;color:#888;font-size:13px">— Mike<br>Nebula Components<br><a href="https://nebulacomponents.com" style="color:#555">nebulacomponents.com</a></p>
+  <p style="margin:28px 0 0 0;color:#555;font-size:13px">Either way - the audit is yours. No strings.</p>
+  <p style="margin:12px 0 0 0;color:#888;font-size:13px">- Mike<br>Nebula Components<br><a href="https://nebulacomponents.com" style="color:#555">nebulacomponents.com</a></p>
 </div>
 </body>
 </html>"""
@@ -178,10 +178,10 @@ nebulacomponents.com
     # Get the latest message in the thread to reply to
     msgs = client.list_messages(thread_id=THREAD_ID, limit=10)
     if not msgs:
-        print("[FATAL] No messages found in thread — cannot reply")
+        print("[FATAL] No messages found in thread - cannot reply")
         sys.exit(2)
 
-    # Most recent message is first (or last — sort by timestamp)
+    # Most recent message is first (or last - sort by timestamp)
     latest = sorted(msgs, key=lambda m: m.get("timestamp",""), reverse=True)[0]
     msg_id = latest["message_id"]
     print(f"  Replying to message: {msg_id[:50]}...")

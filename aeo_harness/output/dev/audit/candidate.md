@@ -86,7 +86,7 @@ Mobile CTA
 
 /10
 
-Primary CTA button is 890px from top on 375px viewport — below fold without scroll.
+Primary CTA button is 890px from top on 375px viewport - below fold without scroll.
 
 Load speed
 
@@ -110,7 +110,7 @@ Above the fold
 
 /10
 
-Offer not clear until second viewport — headline is a company name, not a buyer outcome.
+Offer not clear until second viewport - headline is a company name, not a buyer outcome.
 
 Ad signals
 
@@ -126,7 +126,7 @@ SEO foundations
 
 /10
 
-Meta description is 197 characters — truncated in SERP at 155.
+Meta description is 197 characters - truncated in SERP at 155.
 
 AI readiness
 
@@ -142,7 +142,7 @@ Message match
 
 /10
 
-Ad headline "Cut your CAC in half" — page headline says "Grow your business." Zero word overlap.
+Ad headline "Cut your CAC in half" - page headline says "Grow your business." Zero word overlap.
 
 Illustrative output only. Scores, findings, and page URL are fictional. Your audit will reflect your actual page.
 
@@ -150,11 +150,11 @@ What the audit checks
 
 Message match
 
-Ad promise vs. page headline — within 3 words
+Ad promise vs. page headline - within 3 words
 
 Trust signals
 
-Testimonials or logos above fold — minimum 2
+Testimonials or logos above fold - minimum 2
 
 Mobile CTA
 
@@ -218,7 +218,7 @@ The audit inspects visible form fields and labels, but never submits forms, ente
 
 If it fails, the $97 One-Leak Repair Sprint fixes it.
 
-The free audit shows you what is broken and in what order to fix it. Pay $97 and receive targeted AI prompts written for your specific failing signals — exact copy changes, code snippets, or configuration fixes — delivered instantly. No site access needed. You implement them yourself or hand them to your developer.
+The free audit shows you what is broken and in what order to fix it. Pay $97 and receive targeted AI prompts written for your specific failing signals - exact copy changes, code snippets, or configuration fixes - delivered instantly. No site access needed. You implement them yourself or hand them to your developer.
 
 ✓
 
@@ -226,11 +226,11 @@ Targeted AI prompts written for your specific failing signals
 
 ✓
 
-Exact copy, code, or config changes — not generic advice
+Exact copy, code, or config changes - not generic advice
 
 ✓
 
-Delivered instantly after checkout — no emails to wait for
+Delivered instantly after checkout - no emails to wait for
 
 ✓
 
@@ -318,7 +318,7 @@ Essential only
 
 Accept all
 
-Drop your landing page URL — see what's leaking
+Drop your landing page URL - see what's leaking
 
 What made you run this audit today?
 

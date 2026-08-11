@@ -9,7 +9,7 @@
 
 ---
 
-## Workstream 1 — INFRASTRUCTURE (Days 1-2)
+## Workstream 1 - INFRASTRUCTURE (Days 1-2)
 *Eliminate every silent failure mode*
 
 ### 1A: Kill the duplicate cloudflared / fix port 8765 systemd
@@ -27,41 +27,41 @@
 ### 1C: Watchdog hardening
 - [ ] Replace Python http.server with a proper static file server (busybox httpd or Python with correct MIME types)
 - [ ] Single watchdog cron (every 5 min) checks: 8765 up, 8766 up, cloudflared up, webhook up
-- [ ] Watchdog uses zero LLM tokens — pure bash
+- [ ] Watchdog uses zero LLM tokens - pure bash
 - [ ] On failure: restart + log to `/home/mike/nebula/watchdog.log`
 
 ---
 
-## Workstream 2 — OFFER REBUILD (Days 2-3)
+## Workstream 2 - OFFER REBUILD (Days 2-3)
 *Replace cold-blast-to-payment-link with value-first sequence*
 
 ### 2A: Free Audit Delivery System
-- [ ] Write `deliver_audit.py` — takes a URL, runs Lighthouse + manual checklist, generates PDF or HTML audit report
+- [ ] Write `deliver_audit.py` - takes a URL, runs Lighthouse + manual checklist, generates PDF or HTML audit report
 - [ ] Audit covers: above-fold clarity, CTA strength, social proof, load time, mobile
 - [ ] Report branded: "Nebula Audit" header, 5-10 specific findings, 3 priority fixes
 - [ ] Auto-deliver via email within 60 min of warm reply
 
 ### 2B: Email sequence rewrite
 - [ ] Email 1 (cold): specific observation about THEIR landing page, NO pitch, NO link, ends with question
-- [ ] Email 2 (after reply): "I did a quick audit — attaching findings, no strings" + audit PDF
-- [ ] Email 3 (after audit delivered, 48h later): "If you want us to implement these, it's $147 flat — one week turnaround"
+- [ ] Email 2 (after reply): "I did a quick audit - attaching findings, no strings" + audit PDF
+- [ ] Email 3 (after audit delivered, 48h later): "If you want us to implement these, it's $147 flat - one week turnaround"
 - [ ] Email 4 (follow-up, 5 days later): "Still available if timing changed"
 - [ ] All from nebulashop@agentmail.to
 
 ### 2C: Nebula site update
 - [ ] Landing page headline: "We audit your landing page free. Pay $147 only if you want us to fix it."
-- [ ] Remove the $7 kit as the primary CTA — move to secondary offer below the fold
-- [ ] Add: "156 emails sent. 2 replies. 0 sales. Here's what we're changing." — social proof via honest numbers
+- [ ] Remove the $7 kit as the primary CTA - move to secondary offer below the fold
+- [ ] Add: "156 emails sent. 2 replies. 0 sales. Here's what we're changing." - social proof via honest numbers
 - [ ] Stripe link for $147 audit implementation service wired to new checkout
 
 ---
 
-## Workstream 3 — LEAD ENGINE (Days 3-4)
+## Workstream 3 - LEAD ENGINE (Days 3-4)
 *Daily pipeline of live intent signals, not static lists*
 
 ### 3A: Intent-signal scraper (daily cron)
-- [ ] Scrape Indie Hackers "Landing Page Feedback" — extract poster + URL
-- [ ] Scrape Reddit r/EntrepreneurRideAlong + r/SideProject — "roast my landing page" + "feedback" posts
+- [ ] Scrape Indie Hackers "Landing Page Feedback" - extract poster + URL
+- [ ] Scrape Reddit r/EntrepreneurRideAlong + r/SideProject - "roast my landing page" + "feedback" posts
 - [ ] Optionally: HN "Show HN" posts with landing page links
 - [ ] Deduplicate against `/home/mike/nebula/contacted.json`
 - [ ] Output: `/home/mike/nebula/leads_YYYY-MM-DD.json`
@@ -69,14 +69,14 @@
 
 ### 3B: Personalized outreach cron
 - [ ] For each new lead: visit their landing page, extract: headline, CTA, missing social proof
-- [ ] Generate email: "I noticed [specific observation about their page]..." — no template feel
+- [ ] Generate email: "I noticed [specific observation about their page]..." - no template feel
 - [ ] Send max 10/day (quality > volume)
 - [ ] Record sent to `contacted.json`
 - [ ] Run: daily at 9 AM ET (1 hour after scraper)
 
 ---
 
-## Workstream 4 — INBOX INTELLIGENCE (Days 4-5)
+## Workstream 4 - INBOX INTELLIGENCE (Days 4-5)
 *Every warm reply gets a real response within 60 minutes*
 
 ### 4A: Triage system
@@ -98,17 +98,17 @@
 
 ---
 
-## Workstream 5 — BLOG / SOCIAL PROOF (Days 5-6)
+## Workstream 5 - BLOG / SOCIAL PROOF (Days 5-6)
 *Build-in-public engine that generates trust while we sleep*
 
 ### 5A: Live stats API
 - [ ] Endpoint at `/api/stats` (served by webhook server): returns JSON with real metrics
 - [ ] Metrics: revenue, emails_sent, replies, open_convos, uptime
-- [ ] Blog theme fetches this dynamically with JS — no more hardcoded HTML
+- [ ] Blog theme fetches this dynamically with JS - no more hardcoded HTML
 
 ### 5B: Automated blog posts
 - [ ] Weekly auto-post: every Saturday AM, publish challenge recap with real numbers
-- [ ] Format: "Week N: X emails, Y replies, Z revenue — what we learned"
+- [ ] Format: "Week N: X emails, Y replies, Z revenue - what we learned"
 - [ ] Cron: Saturdays 9 AM ET
 
 ### 5C: SEO basics
@@ -118,14 +118,14 @@
 
 ---
 
-## Workstream 6 — JULY 4 DRY RUN (Day 7)
+## Workstream 6 - JULY 4 DRY RUN (Day 7)
 *Prove everything works before the clock starts*
 
 ### 6A: Full system smoke test
-- [ ] Kill and restart all services — verify auto-recovery within 2 min
-- [ ] Send 1 test outreach email through full pipeline — verify delivery + inbox logging
-- [ ] Trigger 1 test warm reply — verify audit auto-generated + delivered
-- [ ] Hit Stripe test checkout — verify payment log + sale notification email
+- [ ] Kill and restart all services - verify auto-recovery within 2 min
+- [ ] Send 1 test outreach email through full pipeline - verify delivery + inbox logging
+- [ ] Trigger 1 test warm reply - verify audit auto-generated + delivered
+- [ ] Hit Stripe test checkout - verify payment log + sale notification email
 
 ### 6B: Challenge brief document
 - [ ] Write `/home/mike/nebula/docs/challenge-july4-brief.md`:
@@ -146,7 +146,7 @@
 | 4 | Jul 1  | 3B, 4A |
 | 5 | Jul 2  | 4B, 4C |
 | 6 | Jul 3  | 5A, 5B, 5C |
-| 7 | Jul 4  | 6A, 6B — challenge brief + dry run |
+| 7 | Jul 4  | 6A, 6B - challenge brief + dry run |
 
 ---
 
@@ -160,6 +160,6 @@ Infrastructure is bulletproof when:
 
 Offers are bulletproof when:
 - The funnel sequence is: observation email → free audit → $147 ask
-- Every step is automated — no human execution required
+- Every step is automated - no human execution required
 - Reply-to-audit latency < 60 minutes
 - Lead source refreshes daily with new intent signals

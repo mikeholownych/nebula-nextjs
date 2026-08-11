@@ -1,6 +1,6 @@
-# GA4 Events Added — Nebula Landing Page Sections
+# GA4 Events Added - Nebula Landing Page Sections
 
-**Date:** 2026-07-14  
+**Date:** 2026-07-14
 **Purpose:** Track engagement with competitive positioning sections
 
 ---
@@ -115,11 +115,11 @@ if ('IntersectionObserver' in window) {
 
 Nebula already tracks these events:
 
-1. `audit_submit` — Form submission (line ~2180)
-2. `free_kit_download` — Fix kit form submit (line ~2218)
-3. `newsletter_signup` — Footer newsletter (line ~2237)
-4. `scroll_depth` — 25/50/75/100% thresholds (line ~2248)
-5. `roi_calc` — ROI calculator interaction (line ~2447)
+1. `audit_submit` - Form submission (line ~2180)
+2. `free_kit_download` - Fix kit form submit (line ~2218)
+3. `newsletter_signup` - Footer newsletter (line ~2237)
+4. `scroll_depth` - 25/50/75/100% thresholds (line ~2248)
+5. `roi_calc` - ROI calculator interaction (line ~2447)
 
 **Total events tracked:** 8 (5 existing + 3 new)
 
@@ -219,9 +219,9 @@ gtag('event', 'founder_proof_view', {
 
 ## Next Steps
 
-1. **Monitor for 7 days** — Collect baseline data
-2. **Check GA4 DebugView** — Confirm events fire correctly
-3. **Create custom dashboard** — Section engagement metrics
+1. **Monitor for 7 days** - Collect baseline data
+2. **Check GA4 DebugView** - Confirm events fire correctly
+3. **Create custom dashboard** - Section engagement metrics
 4. **A/B test founder headline:**
    - Version A: "4 failed experiments"
    - Version B: "39 validated Reddit leads"

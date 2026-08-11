@@ -12,7 +12,7 @@ export default function NotFoundPage() {
     e.preventDefault();
     setStatus('submitting');
     trackEvent('error_page_email_capture', { error_type: '404', email });
-    
+
     // Send lead to agentmail
     fetch('/api/lead', {
       method: 'POST',
@@ -45,13 +45,13 @@ export default function NotFoundPage() {
         </div>
 
         <div className="error-icon">404</div>
-        
+
         <h1 className="error-title">
-          Page not found — but your ad budget still needs to work
+          Page not found - but your ad budget still needs to work
         </h1>
-        
+
         <p className="error-subtitle">
-          You landed on a broken link. That means someone clicked your ad expecting your offer — 
+          You landed on a broken link. That means someone clicked your ad expecting your offer -
           and your funnel just leaked money.
         </p>
 
@@ -61,10 +61,10 @@ export default function NotFoundPage() {
             Fix your funnel before your next campaign
           </h2>
           <p className="recovery-desc">
-            Get a free landing page audit — see exactly why your clicks aren't converting 
+            Get a free landing page audit - see exactly why your clicks aren't converting
             and the one fix that pays back fastest.
           </p>
-          
+
           <form onSubmit={handleSubmit} className="error-form">
             <div className="form-group">
               <label htmlFor="error-email">Where should we send your audit?</label>
@@ -136,7 +136,7 @@ export default function NotFoundPage() {
         <div className="error-emergency">
           <p className="emergency-text">
             <strong>Your funnel is bleeding money right now.</strong>
-            Get the audit before your next campaign — 
+            Get the audit before your next campaign -
             fix what's broken before you spend another dollar.
           </p>
           <Link href="/#form-heading" className="emergency-cta">

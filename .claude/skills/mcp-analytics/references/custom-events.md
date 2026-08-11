@@ -2,7 +2,7 @@
 
 Sometimes the events the SDK emits out of the box aren't enough. You might want to attach metadata to every event, or emit a fully custom event for something that isn't a tool call. The SDK gives you two hooks for that, in order of increasing invasiveness.
 
-## `eventProperties` — metadata on every event
+## `eventProperties` - metadata on every event
 
 Pass an `eventProperties` callback to attach extra properties to every event the SDK emits. The callback runs per request, so values can depend on the current call (request id, transport, headers, env, region, deploy SHA, etc).
 
@@ -41,15 +41,15 @@ PostHog AI
 
 For a "stamp on everything" use case (the closest analogue to `posthog.register(...)` in other SDKs), just return constants from the callback. The callback is per-event rather than session-persistent, so the values can also vary per request if you need them to.
 
-For group analytics, return `groups` from your [`identify`](/docs/mcp-analytics/identifying-users.md) callback rather than hand-writing the `$groups` key — the SDK stamps `$groups` onto every event for the session for you.
+For group analytics, return `groups` from your [`identify`](/docs/mcp-analytics/identifying-users.md) callback rather than hand-writing the `$groups` key - the SDK stamps `$groups` onto every event for the session for you.
 
-Returned values must be JSON-serializable. Errors thrown from your callback are swallowed and surfaced to your `logger` — they never interrupt tool execution.
+Returned values must be JSON-serializable. Errors thrown from your callback are swallowed and surfaced to your `logger` - they never interrupt tool execution.
 
-## `analytics.capture()` — emit an arbitrary event
+## `analytics.capture()` - emit an arbitrary event
 
-When the built-in events don't cover what you need — for example, recording a feedback signal from your own UI, or capturing a domain event that isn't an MCP request — use the `capture()` method on the handle returned by `instrument()`. It writes onto the same queue as everything else, so it inherits the SDK's sanitization, identity, `beforeSend`, and `eventProperties` logic. `capture()` returns a promise you can `await`.
+When the built-in events don't cover what you need - for example, recording a feedback signal from your own UI, or capturing a domain event that isn't an MCP request - use the `capture()` method on the handle returned by `instrument()`. It writes onto the same queue as everything else, so it inherits the SDK's sanitization, identity, `beforeSend`, and `eventProperties` logic. `capture()` returns a promise you can `await`.
 
-You name the event. It's sent verbatim — it's your event, so it is **not** `$`\-prefixed.
+You name the event. It's sent verbatim - it's your event, so it is **not** `$`\-prefixed.
 
 TypeScript
 
@@ -76,7 +76,7 @@ What lands in PostHog:
 | --- | --- |
 | Attach the same properties to every auto-captured event | eventProperties |
 | Emit a one-off event that isn't an MCP request | analytics.capture() |
-| Attach data to a specific tool call (just that one) | Not directly supported — the callbacks run on every event. The SDK doesn't currently expose a per-call hook. |
+| Attach data to a specific tool call (just that one) | Not directly supported - the callbacks run on every event. The SDK doesn't currently expose a per-call hook. |
 
 ### Community questions
 

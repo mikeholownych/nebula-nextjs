@@ -26,6 +26,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.redirect(location, { status: 302 })
   }
 
-  // Unexpected — forward whatever the backend returned
+  // Unexpected - forward whatever the backend returned
   return NextResponse.json({ error: 'Failed to initiate GSC OAuth' }, { status: 500 })
 }

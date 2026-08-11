@@ -1,6 +1,6 @@
 /**
  * BrowserMockupCard
- * Adapted from opensourceui.in — MIT licensed.
+ * Adapted from opensourceui.in - MIT licensed.
  * Wraps children in a realistic browser chrome (light / dark / transparent).
  */
 

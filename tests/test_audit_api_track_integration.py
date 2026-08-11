@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-test_audit_api_track_integration.py — Test track assignment in audit API flow.
+test_audit_api_track_integration.py - Test track assignment in audit API flow.
 
 Run: python3 -m pytest tests/test_audit_api_track_integration.py -v
 """
@@ -20,10 +20,10 @@ def test_audit_api_imports_track_trigger():
     # Note: This requires asyncpg, which is available in the platform environment
     # Skip import test and verify the code directly
     import ast
-    
+
     audit_api_path = Path("/home/mike/nebula/platform_api/routes/audit_api.py")
     source = audit_api_path.read_text()
-    
+
     # Verify import statement exists
     assert "trigger_track_assignment" in source, "trigger_track_assignment not imported"
     assert "from audit_track_trigger import trigger_track_assignment" in source
@@ -34,10 +34,10 @@ def test_trigger_track_assignment_signature():
     """Verify trigger_track_assignment has correct signature."""
     from audit_track_trigger import trigger_track_assignment
     import inspect
-    
+
     sig = inspect.signature(trigger_track_assignment)
     params = list(sig.parameters.keys())
-    
+
     assert "email" in params, "Missing 'email' parameter"
     assert "audit_id" in params, "Missing 'audit_id' parameter"
     assert "findings" in params, "Missing 'findings' parameter"
@@ -50,7 +50,7 @@ def test_track_assignment_with_mock_audit(monkeypatch):
     monkeypatch.setattr(audit_track_trigger, "upsert_lead", lambda **_: None)
     trigger_track_assignment = audit_track_trigger.trigger_track_assignment
     import uuid
-    
+
     # Mock audit data
     email = "test-track-api@example.com"
     audit_id = str(uuid.uuid4())
@@ -59,7 +59,7 @@ def test_track_assignment_with_mock_audit(monkeypatch):
         {"category": "headline", "severity": "high", "observation": "Headline describes product"},
         {"category": "cta", "severity": "medium", "observation": "CTA is ambiguous"}
     ]
-    
+
     # Trigger assignment
     track_id = trigger_track_assignment(
         email=email,
@@ -67,7 +67,7 @@ def test_track_assignment_with_mock_audit(monkeypatch):
         findings=findings,
         url=url
     )
-    
+
     assert track_id in ["headline-clarity", "cta-friction"], f"Unexpected track: {track_id}"
     print(f"✓ Track assigned: {track_id}")
 
@@ -80,10 +80,10 @@ def test_audit_response_includes_nurture_track():
     # This is a design note, not a runtime test
     # The AuditResponse model should be extended to include:
     # nurture_track: Optional[str] = None
-    
+
     # Current implementation adds nurture_track to data dict
     # but doesn't return it in AuditResponse
-    
+
     # Future enhancement: extend AuditResponse model
     assert True, "Design note: AuditResponse should include nurture_track field"
 
@@ -93,7 +93,7 @@ def test_track_assignment_error_handling(monkeypatch):
     import audit_track_trigger
     monkeypatch.setattr(audit_track_trigger, "upsert_lead", lambda **_: None)
     trigger_track_assignment = audit_track_trigger.trigger_track_assignment
-    
+
     # Test with empty findings
     track_id = trigger_track_assignment(
         email="test-empty-findings@example.com",
@@ -101,7 +101,7 @@ def test_track_assignment_error_handling(monkeypatch):
         findings=[],  # Empty findings
         url="https://example.com"
     )
-    
+
     # Empty findings returns default track from assign_track_from_audit
     assert track_id == "headline-clarity", f"Expected default track 'headline-clarity', got: {track_id}"
     print(f"✓ Empty findings returns default track: {track_id}")
@@ -110,7 +110,7 @@ def test_track_assignment_error_handling(monkeypatch):
 def test_api_route_mock_test():
     """
     Mock test for /audit/run route with track assignment.
-    
+
     This is a design note for integration testing.
     Full integration test would require:
     1. Mock database (audit_db)
@@ -125,7 +125,7 @@ def test_api_route_mock_test():
     # → Updates audit with findings
     # → Calls trigger_track_assignment(email, audit_id, findings)
     # → Returns AuditResponse with nurture_track
-    
+
     assert True, "Integration test placeholder"
 
 

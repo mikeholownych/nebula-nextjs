@@ -1,4 +1,4 @@
-# /score — Score Prospect ICP Fit
+# /score - Score Prospect ICP Fit
 
 Evaluate against buying triggers:
 - Spending on ads? (paid traffic, ad spend, google ads, meta ads, campaigns)
@@ -6,10 +6,10 @@ Evaluate against buying triggers:
 - Has a landing page? (live URL or offer page to audit)
 
 Score 0-100:
-- 80-100: Red alert — contact immediately
-- 50-79: Warm — queue for today's outreach
-- 20-49: Tepid — research first, need more signal
-- 0-19: Not ICP — do not contact
+- 80-100: Red alert - contact immediately
+- 50-79: Warm - queue for today's outreach
+- 20-49: Tepid - research first, need more signal
+- 0-19: Not ICP - do not contact
 
 Return: score, trigger match (list), gap (list for missing triggers), recommendation, and exactly one offer route:
 - `free_audit_to_kit`: paid traffic + weak conversions, but no explicit mismatch evidence yet

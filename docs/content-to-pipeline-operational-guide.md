@@ -1,6 +1,6 @@
-# Content-to-Pipeline System — Operational Guide
+# Content-to-Pipeline System - Operational Guide
 
-**Generated:** 2026-07-17  
+**Generated:** 2026-07-17
 **Status:** Production Ready (Week 1-3 complete)
 
 ---
@@ -76,8 +76,8 @@ pick_leads_for_nurture() → filter by segment + timing
 ```bash
 # Check nurture log for track fields
 tail -5 ledgers/nurture_log.jsonl | jq '{
-  email, 
-  track_id, 
+  email,
+  track_id,
   track_position_days,
   timestamp
 }'

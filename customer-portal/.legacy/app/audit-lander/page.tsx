@@ -63,7 +63,7 @@ export default function AuditLanderPage() {
     <>
       <div className="hero">
         <h1>Ads send traffic. <em>Your landing page</em> kills it.</h1>
-        <p className="sub">You paid for the click. Now watch it bounce. Paste your URL — in 60 seconds you get a priority-ranked fix list with specific code changes for each leak.</p>
+        <p className="sub">You paid for the click. Now watch it bounce. Paste your URL - in 60 seconds you get a priority-ranked fix list with specific code changes for each leak.</p>
         <div className="stat">97% of ad clicks don&apos;t convert. <span>Most founders buy more traffic. Smart ones fix the page first.</span></div>
         <div className="trust-row">
           <span className="pill">No sales call</span>
@@ -81,11 +81,11 @@ export default function AuditLanderPage() {
           <h2>What&apos;s included in your free audit <span className="badge green">full scope</span></h2>
           <p className="micro" style={{ marginBottom: '12px' }}>No guesswork. Every audit scores these 5 dimensions and delivers a prioritized fix list tailored to your page:</p>
           <ul className="scope-list">
-            <li><strong>1. Headline Clarity</strong> — Does your headline name the visitor&apos;s problem or just describe your product? We score specificity, emotional resonance, and promise clarity.</li>
-            <li><strong>2. CTA Friction</strong> — Is your call-to-action buried, vague, or competing with too many options? We measure actionability and visual prominence.</li>
-            <li><strong>3. Trust Proof</strong> — Testimonials, case studies, logos, guarantees. We check if proof exists where the visitor needs it (before the decision, not after).</li>
-            <li><strong>4. Offer Specificity</strong> — Does your page say exactly what happens when they click? Vague offers kill conversions. We flag generic language.</li>
-            <li><strong>5. Implementation Difficulty</strong> — Can the fixes be done in 24h or do they need a redesign? We prioritize quick wins first.</li>
+            <li><strong>1. Headline Clarity</strong> - Does your headline name the visitor&apos;s problem or just describe your product? We score specificity, emotional resonance, and promise clarity.</li>
+            <li><strong>2. CTA Friction</strong> - Is your call-to-action buried, vague, or competing with too many options? We measure actionability and visual prominence.</li>
+            <li><strong>3. Trust Proof</strong> - Testimonials, case studies, logos, guarantees. We check if proof exists where the visitor needs it (before the decision, not after).</li>
+            <li><strong>4. Offer Specificity</strong> - Does your page say exactly what happens when they click? Vague offers kill conversions. We flag generic language.</li>
+            <li><strong>5. Implementation Difficulty</strong> - Can the fixes be done in 24h or do they need a redesign? We prioritize quick wins first.</li>
           </ul>
           <p className="micro" style={{ marginTop: '8px' }}>Plus: page speed score, mobile responsiveness check, ad-to-page alignment audit, and a prioritized opportunity matrix ranked by impact vs. effort.</p>
         </div>
@@ -93,7 +93,7 @@ export default function AuditLanderPage() {
         <div className="card" id="audit-form-card">
           <h2 style={{ fontSize: '20px', marginBottom: '6px' }}>See exactly what is leaking</h2>
           <p className="micro" style={{ marginBottom: '10px' }}>The audit checks 5 dimensions and delivers a priority-ranked fix list to your inbox. Each fix comes with specific code + effort estimate. No login. No sales call. No follow-up spam.</p>
-          
+
           <form id="audit-form" onSubmit={handleSubmit}>
             <label htmlFor="url">Your landing page URL</label>
             <input
@@ -185,17 +185,17 @@ export default function AuditLanderPage() {
 
         <div className="testimonial">
           <div className="quote">&quot;The audit nailed exactly why my Google Ads weren&apos;t converting. Fixed the headline in 20 minutes. First conversion by end of week.&quot;</div>
-          <div className="name">— Danny R., Founder, Repair &amp; Square</div>
+          <div className="name">- Danny R., Founder, Repair &amp; Square</div>
         </div>
 
         <div className="card">
-          <h2>$147 fix pack — zero risk, full refund <span className="badge green">guaranteed</span></h2>
-          <p style={{ fontSize: '14px', marginBottom: '12px' }}>After your free audit, you can buy the fix implementation. Here&apos;s exactly what that includes — and how we protect you:</p>
+          <h2>$147 fix pack - zero risk, full refund <span className="badge green">guaranteed</span></h2>
+          <p style={{ fontSize: '14px', marginBottom: '12px' }}>After your free audit, you can buy the fix implementation. Here&apos;s exactly what that includes - and how we protect you:</p>
           <div className="offer-grid">
             <div className="offer-card">
               <div className="price">$147 <small>one-time</small></div>
               <div className="label">24-hour implementation</div>
-              <div className="guarantee">📋 We duplicate your page — zero risk to live campaigns</div>
+              <div className="guarantee">📋 We duplicate your page - zero risk to live campaigns</div>
             </div>
             <div className="offer-card">
               <div className="price">$0 <small>if it doesn&apos;t work</small></div>
@@ -210,15 +210,15 @@ export default function AuditLanderPage() {
         </div>
 
         <div className="card" id="data-privacy">
-          <h2>Data privacy — exactly what we access <span className="badge blue">transparent</span></h2>
-          <p className="micro" style={{ marginBottom: '12px' }}>This is the #1 question founders ask. Here&apos;s the honest answer — no fine print:</p>
+          <h2>Data privacy - exactly what we access <span className="badge blue">transparent</span></h2>
+          <p className="micro" style={{ marginBottom: '12px' }}>This is the #1 question founders ask. Here&apos;s the honest answer - no fine print:</p>
           <div className="privacy-grid">
             <div className="privacy-col yes">
               <h3>✓ What we access</h3>
               <ul>
-                <li>Your landing page URL (public content only — same as visiting it in a browser)</li>
+                <li>Your landing page URL (public content only - same as visiting it in a browser)</li>
                 <li>Page HTML, meta tags, and inline content (what any visitor sees)</li>
-                <li>Your email address (for delivery — stored securely, never shared)</li>
+                <li>Your email address (for delivery - stored securely, never shared)</li>
                 <li>Conversion goal you select (to tailor the fix priority)</li>
               </ul>
             </div>
@@ -233,7 +233,7 @@ export default function AuditLanderPage() {
               </ul>
             </div>
           </div>
-          <p className="micro" style={{ marginTop: '8px' }}>The audit is a public-page analysis — the same data any visitor sees, scored against a conversion rubric. If you later buy the $147 fix and choose to share access for implementation, we sign a data processing agreement and provide a documented rollback plan before any work begins.</p>
+          <p className="micro" style={{ marginTop: '8px' }}>The audit is a public-page analysis - the same data any visitor sees, scored against a conversion rubric. If you later buy the $147 fix and choose to share access for implementation, we sign a data processing agreement and provide a documented rollback plan before any work begins.</p>
         </div>
 
         <div className="stats-grid">
@@ -255,10 +255,10 @@ export default function AuditLanderPage() {
           <h2>Who this isn&apos;t for <span className="badge amber">save us both the time</span></h2>
           <p className="micro" style={{ marginBottom: '12px' }}>This audit is built for founders actively losing money on ads. If any of these apply, you&apos;d be better served elsewhere:</p>
           <ul className="scope-list" style={{ borderLeftColor: '#f59e0b' }}>
-            <li><strong>No ad spend yet</strong> — If you haven&apos;t run paid traffic, there&apos;s nothing to fix. Go run ads first, then come back.</li>
-            <li><strong>No live landing page</strong> — The audit needs a public URL. If your page isn&apos;t live, we can&apos;t score it.</li>
-            <li><strong>Want brand strategy</strong> — This is a conversion fix, not a rebrand. If you need visual identity work, hire a brand agency.</li>
-            <li><strong>No budget to implement</strong> — The audit is free. The fix is $147. If you can&apos;t spend $147 within 30 days, the data just gets stale.</li>
+            <li><strong>No ad spend yet</strong> - If you haven&apos;t run paid traffic, there&apos;s nothing to fix. Go run ads first, then come back.</li>
+            <li><strong>No live landing page</strong> - The audit needs a public URL. If your page isn&apos;t live, we can&apos;t score it.</li>
+            <li><strong>Want brand strategy</strong> - This is a conversion fix, not a rebrand. If you need visual identity work, hire a brand agency.</li>
+            <li><strong>No budget to implement</strong> - The audit is free. The fix is $147. If you can&apos;t spend $147 within 30 days, the data just gets stale.</li>
           </ul>
           <p className="micro" style={{ marginTop: '8px', color: '#f59e0b' }}><strong>Still here?</strong> You&apos;re in the right place. Paste your URL above.</p>
         </div>
@@ -267,10 +267,10 @@ export default function AuditLanderPage() {
           <h2>Your audit is yours forever <span className="badge green">you own it</span></h2>
           <p className="micro" style={{ marginBottom: '12px' }}>Most audit tools lock you into a subscription or hide the data. Not here:</p>
           <ul className="scope-list">
-            <li><strong>Download the full report</strong> — JSON + HTML. Yours to keep, share, or archive.</li>
-            <li><strong>Share with your team</strong> — Private link. No login required. Forward it to your dev, your designer, your agency.</li>
-            <li><strong>Re-run anytime</strong> — The $1,497 retainer includes weekly re-scans. Track improvements over time.</li>
-            <li><strong>No vendor lock-in</strong> — If you cancel, you keep every audit you ever received. We can&apos;t revoke access.</li>
+            <li><strong>Download the full report</strong> - JSON + HTML. Yours to keep, share, or archive.</li>
+            <li><strong>Share with your team</strong> - Private link. No login required. Forward it to your dev, your designer, your agency.</li>
+            <li><strong>Re-run anytime</strong> - The $1,497 retainer includes weekly re-scans. Track improvements over time.</li>
+            <li><strong>No vendor lock-in</strong> - If you cancel, you keep every audit you ever received. We can&apos;t revoke access.</li>
           </ul>
           <p className="micro" style={{ marginTop: '8px' }}>Your data. Your fixes. Your conversion rate.</p>
         </div>
@@ -279,9 +279,9 @@ export default function AuditLanderPage() {
           <h2 style={{ color: '#818cf8' }}>Google&apos;s AI answers are eating your clicks</h2>
           <p className="micro" style={{ marginBottom: '12px' }}>Your SEO playbook was built for blue links. But search changed:</p>
           <ul className="scope-list" style={{ borderLeftColor: '#818cf8' }}>
-            <li><strong>Traffic is up, conversions are flat</strong> — AI Overviews answer questions without sending clicks. Your ranking doesn&apos;t matter if nobody visits.</li>
-            <li><strong>Named, you show up. Described, you disappear</strong> — AI assistants mention brands they know. Category questions (&quot;best X for Y&quot;) are where money moves — and where most brands are invisible.</li>
-            <li><strong>Your landing page is the new front door</strong> — When AI does send a click, your page has seconds to prove value. We measure those seconds.</li>
+            <li><strong>Traffic is up, conversions are flat</strong> - AI Overviews answer questions without sending clicks. Your ranking doesn&apos;t matter if nobody visits.</li>
+            <li><strong>Named, you show up. Described, you disappear</strong> - AI assistants mention brands they know. Category questions (&quot;best X for Y&quot;) are where money moves - and where most brands are invisible.</li>
+            <li><strong>Your landing page is the new front door</strong> - When AI does send a click, your page has seconds to prove value. We measure those seconds.</li>
           </ul>
           <p className="micro" style={{ marginTop: '8px', color: '#818cf8' }}><strong>Fix the page first.</strong> Then worry about AI visibility. Audit above ↑</p>
         </div>

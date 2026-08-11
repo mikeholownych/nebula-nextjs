@@ -1,7 +1,7 @@
 """A/B Test infrastructure for Nebula's marketing machine.
 
 Implements champion-challenger testing on the audit results page.
-Traffic routing is deterministic (hash-based) — same user always sees same variant.
+Traffic routing is deterministic (hash-based) - same user always sees same variant.
 Promotion logic runs weekly: if challenger beats champion at 95% confidence, swap.
 
 Variants currently staged (from buyer_psychology_framework.md):
@@ -37,10 +37,10 @@ EXPERIMENTS = {
     "results_cta_v1": {
         "description": "Audit results page CTA psychology variant",
         "variants": {
-            "A": {"weight": 0.40, "label": "Champion — current psychology"},
-            "B": {"weight": 0.20, "label": "Challenger — aggressive loss frame"},
-            "C": {"weight": 0.20, "label": "Challenger — clock timer urgency"},
-            "D": {"weight": 0.20, "label": "Challenger — artificial scarcity"},
+            "A": {"weight": 0.40, "label": "Champion - current psychology"},
+            "B": {"weight": 0.20, "label": "Challenger - aggressive loss frame"},
+            "C": {"weight": 0.20, "label": "Challenger - clock timer urgency"},
+            "D": {"weight": 0.20, "label": "Challenger - artificial scarcity"},
         },
         "metric": "checkout_started",   # PostHog event to optimize for
         "min_sample": 50,               # per variant before declaring winner
@@ -63,8 +63,8 @@ def assign_variant(
     experiment_id: str,
     user_id: str,
 ) -> Literal["A", "B", "C", "D"]:
-    """Deterministic variant assignment — same user always gets the same variant.
-    
+    """Deterministic variant assignment - same user always gets the same variant.
+
     Uses SHA-256 of (experiment_id + user_id) → maps to [0, 1) → bucket.
     Variant weights must sum to 1.0.
     """

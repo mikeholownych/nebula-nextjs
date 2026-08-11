@@ -1,9 +1,9 @@
-# n8n Reply Handler Setup — Sep 2 Launch Configuration
+# n8n Reply Handler Setup - Sep 2 Launch Configuration
 
 **Objective**: Configure n8n workflow to receive prospect replies, classify them, and post to `/api/lead-gen/outbound-reply` webhook.
 
-**Workflow name**: `lead-gen-reply-handler`  
-**Trigger**: Email reply received (Gmail API, Outlook, or manual forwarding)  
+**Workflow name**: `lead-gen-reply-handler`
+**Trigger**: Email reply received (Gmail API, Outlook, or manual forwarding)
 **Endpoint**: POST https://nebulacomponents.com/api/lead-gen/outbound-reply
 
 ---
@@ -20,12 +20,12 @@
 - **Logic**:
   ```javascript
   // Extract prospect_id from email subject or body
-  // Email subject template: "Re: Your Nebula audit — {prospect_id}"
+  // Email subject template: "Re: Your Nebula audit - {prospect_id}"
   const subjectMatch = $input.first().json.subject.match(/prospect_id:\s*(\w+)/);
   const prospect_id = subjectMatch ? subjectMatch[1] : null;
   const email = $input.first().json.from_email;
   const reply_text = $input.first().json.body;
-  
+
   return {
     prospect_id,
     email,
@@ -69,12 +69,12 @@
 - **Condition**: Only if `classification === 'interested'`
 - **Message template**:
   ```
-  🔥 **Interested Lead**: 
+  🔥 **Interested Lead**:
   Prospect: {{ prospect_id }}
   Email: {{ email }}
   Classification: {{ classification }} ({{ confidence }}% confidence)
   Reply: "{{ reply_text }}"
-  
+
   👉 Follow up now: lead_state.db → prospects → status='interested'
   ```
 - **Recipient**: Sedrick Murphy (Slack @sedrick or email sedrick@nebula.internal)
@@ -97,7 +97,7 @@
 - [ ] Add notification node (Step 5, Slack or email)
 
 ### Testing
-- [ ] Mock email received: subject "Re: Your Nebula audit — prospect_id:test_founder1"
+- [ ] Mock email received: subject "Re: Your Nebula audit - prospect_id:test_founder1"
 - [ ] Body: "Yeah, interested. Can you send more details?"
 - [ ] Check webhook logs: `/api/lead-gen/outbound-reply` received POST
 - [ ] Verify lead_state.db updated: `contacts.reply_status = 'interested'`
@@ -118,7 +118,7 @@ When AgentMail sends cold email (lead_gen/outbound.py), include prospect_id in r
 ```
 From: outbound@nebulacomponents.com
 To: {prospect_email}
-Subject: Your {company} landing page audit — prospect_id:{prospect_id}
+Subject: Your {company} landing page audit - prospect_id:{prospect_id}
 
 Hi {first_name},
 
@@ -132,7 +132,7 @@ I put together a free audit: [link]
 
 No credit card, no call. Just the truth.
 
-—
+-
 Nebula Components
 nebulacomponents.com
 ```
@@ -182,11 +182,11 @@ async def get_metrics():
     from lead_gen.discover import list_prospects
     from lead_gen.score_intent import get_high_intent_prospects
     from lead_gen.n8n_reply_handler import get_interested_prospects
-    
+
     prospects = list_prospects()
     high_intent = get_high_intent_prospects(threshold=75)
     interested = get_interested_prospects()
-    
+
     return {
         "total_prospects": len(prospects),
         "high_intent_prospects": len(high_intent),

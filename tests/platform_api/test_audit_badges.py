@@ -2,7 +2,7 @@
 
 A badge documents one real event: a customer's score on a given URL
 genuinely improved between their first audit and a later one. No fixed
-pass bar — any real, positive delta qualifies (business decision, not a
+pass bar - any real, positive delta qualifies (business decision, not a
 default). Idempotent per (customer_id, url) via a DB unique constraint.
 """
 from datetime import datetime
@@ -73,7 +73,7 @@ async def test_no_badge_when_score_did_not_improve():
     result = await db.check_and_award_badge(conn, audit_id)
 
     assert result is None
-    # Only the audit-history fetch happened — no INSERT attempt.
+    # Only the audit-history fetch happened - no INSERT attempt.
     assert conn.fetchrow.call_count == 1
 
 
@@ -108,7 +108,7 @@ async def test_badge_awarded_on_real_improvement():
 @pytest.mark.asyncio
 async def test_badge_award_is_idempotent_on_conflict():
     """ON CONFLICT DO NOTHING means a second award attempt for the same
-    (customer_id, url) returns no row — not an error, not a duplicate."""
+    (customer_id, url) returns no row - not an error, not a duplicate."""
     db = AuditDB()
     audit_id = uuid4()
     customer_id = uuid4()
@@ -129,7 +129,7 @@ async def test_badge_award_is_idempotent_on_conflict():
 
 @pytest.mark.asyncio
 async def test_update_audit_badge_check_failure_does_not_break_completion():
-    """The audit UPDATE already succeeded by the time badge-check runs —
+    """The audit UPDATE already succeeded by the time badge-check runs -
     a badge-check exception must never surface as an update_audit failure."""
     db = AuditDB()
     db.pool = MagicMock()

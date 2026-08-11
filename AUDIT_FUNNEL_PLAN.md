@@ -1,4 +1,4 @@
-# Audit Funnel — Full Plan
+# Audit Funnel - Full Plan
 
 **Date:** 2026-07-17
 **Status:** Planning
@@ -8,13 +8,13 @@
 
 ## Current Assets
 
-- **Audit Engine:** `deliver_audit.py` — functional, scrapes and scores pages
-- **Next.js App:** `customer-portal/` — 77 pages
+- **Audit Engine:** `deliver_audit.py` - functional, scrapes and scores pages
+- **Next.js App:** `customer-portal/` - 77 pages
 - **Stripe Products:**
-  - $7 — AI Prompt Pack (fix-yourself)
-  - $147 — Fix Pack (implemented in 24h)
-  - $497 — Agency Partner
-  - $1,497/mo — AI Ops Retainer
+  - $7 - AI Prompt Pack (fix-yourself)
+  - $147 - Fix Pack (implemented in 24h)
+  - $497 - Agency Partner
+  - $1,497/mo - AI Ops Retainer
 
 ---
 
@@ -26,7 +26,7 @@
 
 **Elements:**
 - Headline: "Free Landing Page Audit"
-- Subheadline: "Find out why your ads aren't converting — 60 seconds"
+- Subheadline: "Find out why your ads aren't converting - 60 seconds"
 - Single input field: **URL only**
 - Button: "Run Audit" or "Analyze My Page"
 - Trust signals below fold: logos, use cases
@@ -95,7 +95,7 @@
 - CTA buttons:
   - Primary: "Unlock Full Results" (requires email)
   - Secondary: "Get AI prompts to fix these" ($7)
-  - Tertiary: "I'll fix these for you — $147"
+  - Tertiary: "I'll fix these for you - $147"
 
 **Psychology:**
 - Blurred results create curiosity + FOMO
@@ -112,27 +112,27 @@
 
 ### Step 4: Upsell Ladder (In Results)
 
-**Tier 1: AI Prompt Pack — $7**
+**Tier 1: AI Prompt Pack - $7**
 
 - "Get ChatGPT/Claude prompts to fix each issue"
 - Pre-loaded with your page data
 - Copy-paste to get fixes
-- Button: "Get Prompts — $7"
+- Button: "Get Prompts - $7"
 
-**Tier 2: Fix Pack — $147**
+**Tier 2: Fix Pack - $147**
 
 - "We implement headline + above-fold clarity in 24h"
 - Zero risk (we duplicate your page)
 - Full refund if no improvement in 14 days
-- Button: "Fix My Page — $147"
+- Button: "Fix My Page - $147"
 
-**Tier 3: AI Ops Retainer — $1,497/mo**
+**Tier 3: AI Ops Retainer - $1,497/mo**
 
 - Monthly audit refresh
 - Up to 4 fixes per month
 - Priority support
 - OTO: "Pay yearly, get 20% off ($14,364/year = $1,197/mo)"
-- Button: "Subscribe — $1,497/mo" or "$14,364/year (save $3,564)"
+- Button: "Subscribe - $1,497/mo" or "$14,364/year (save $3,564)"
 
 ---
 
@@ -154,7 +154,7 @@ Content:
 
 - "Your audit results are aging"
 - Pages drift, assumptions change
-- CTA: "Get your fix started — $147"
+- CTA: "Get your fix started - $147"
 
 ### Email 3: Value Add (3 days)
 
@@ -166,7 +166,7 @@ Content:
 
 - "What if you never had to audit again?"
 - Monthly monitoring
-- CTA: "Start 3-month trial — $1,497/mo"
+- CTA: "Start 3-month trial - $1,497/mo"
 
 -
 
@@ -193,11 +193,11 @@ CREATE TABLE audits (
 ```
 
 **Status values:**
-- `pending` — just submitted
-- `processing` — scraping in progress
-- `ready` — audit complete, awaiting email
-- `delivered` — email sent
-- `paid` — purchased something
+- `pending` - just submitted
+- `processing` - scraping in progress
+- `ready` - audit complete, awaiting email
+- `delivered` - email sent
+- `paid` - purchased something
 
 ---
 
@@ -322,7 +322,7 @@ Schedule (daily at 9am)
 **Status:** Already running, webhooks available
 **Credentials:** Already configured (PostgreSQL, AgentMail, etc.)
 
-**No additional setup required — use existing n8n instance.**
+**No additional setup required - use existing n8n instance.**
 
 Webhook URLs will be:
 - `https://n8n.mikeholownych.com/webhook/audit/start`
@@ -367,16 +367,16 @@ Webhook URLs will be:
 
 ## Analytics Events
 
-- `audit_started` — URL submitted
-- `audit_processing_viewed` — processing page loaded
-- `audit_email_entered` — email captured
-- `audit_results_viewed` — results page loaded
-- `audit_results_unlocked` — email entered on results page
-- `audit_email_sent` — full results delivered
-- `audit_prompt_purchased` — $7
-- `audit_fix_purchased` — $147
-- `audit_retainer_purchased` — $1,497
-- `audit_retainer_yearly_purchased` — $14,364
+- `audit_started` - URL submitted
+- `audit_processing_viewed` - processing page loaded
+- `audit_email_entered` - email captured
+- `audit_results_viewed` - results page loaded
+- `audit_results_unlocked` - email entered on results page
+- `audit_email_sent` - full results delivered
+- `audit_prompt_purchased` - $7
+- `audit_fix_purchased` - $147
+- `audit_retainer_purchased` - $1,497
+- `audit_retainer_yearly_purchased` - $14,364
 
 ---
 
@@ -434,7 +434,7 @@ Webhook URLs will be:
 
 ## Future State: Customer Dashboard
 
-**Phase 2 (Post-MVP):** `/dashboard` — Customer self-serve portal
+**Phase 2 (Post-MVP):** `/dashboard` - Customer self-serve portal
 
 **Features:**
 - Account management
@@ -510,12 +510,12 @@ CREATE INDEX idx_monitors_customer_id ON monitors(customer_id);
 ```
 
 **Dashboard Routes (Phase 2):**
-- `/dashboard` — Overview (recent audits, subscription status)
-- `/dashboard/audits` — Audit history
-- `/dashboard/audits/[id]` — Single audit details
-- `/dashboard/billing` — Stripe billing portal
-- `/dashboard/monitors` — Active monitoring
-- `/dashboard/resources` — Purchased content
+- `/dashboard` - Overview (recent audits, subscription status)
+- `/dashboard/audits` - Audit history
+- `/dashboard/audits/[id]` - Single audit details
+- `/dashboard/billing` - Stripe billing portal
+- `/dashboard/monitors` - Active monitoring
+- `/dashboard/resources` - Purchased content
 
 **Auth (Phase 2):**
 - Magic link (email-only) or Clerk integration
@@ -526,7 +526,7 @@ CREATE INDEX idx_monitors_customer_id ON monitors(customer_id);
 
 Before proceeding:
 1. ✅ Funnel flow confirmed
-2. ✅ MVP scope confirmed  
+2. ✅ MVP scope confirmed
 3. ✅ Database: PostgreSQL
 4. ✅ Processing: n8n webhooks (async, immediate start)
 5. ✅ n8n: Existing instance at n8n.mikeholownych.com
@@ -541,10 +541,10 @@ Before proceeding:
 - [x] Create PostgreSQL tables (customers, audits, purchases, monitors)
 - [x] Add `--json` flag to deliver_audit.py for API integration
 - [x] Set up n8n workflows via n8n-build MCP:
-  - [x] `J4AQX7eHhht8XRga` — Audit Processing (Resilient) ✅ ACTIVE
-  - [x] `jhxYkE0wppyIGP0F` — Email Delivery Queue ✅ (inactive — needs password)
-  - [x] `cAPeE9LrlIM9dSsN` — Follow-up Sequence ✅ (inactive — needs password)
-- [x] Configure PostgreSQL credentials in n8n (`4A8XEDkH12OxT7IO` — needs password update in UI)
+  - [x] `J4AQX7eHhht8XRga` - Audit Processing (Resilient) ✅ ACTIVE
+  - [x] `jhxYkE0wppyIGP0F` - Email Delivery Queue ✅ (inactive - needs password)
+  - [x] `cAPeE9LrlIM9dSsN` - Follow-up Sequence ✅ (inactive - needs password)
+- [x] Configure PostgreSQL credentials in n8n (`4A8XEDkH12OxT7IO` - needs password update in UI)
 - [x] Create AgentMail API credential (`mPASqxXTDa6UsyRE`)
 - [x] Create FastAPI audit endpoint (`/audit/run` on port 8001)
 - [x] Platform API running (port 8001, background process `proc_52d3e79047bf`)
@@ -565,7 +565,7 @@ Before proceeding:
 **Phase 3: Upsells + Polish (Day 3)**
 - [x] **Stripe checkout integration ($7, $147, $1,497)** ✅
 - [x] **Three pricing tiers created and verified** ✅
-  - Audit Lite ($7): https://buy.stripe.com/aFacN55E0cf2fupafM43S0e — **retired 2026-07-24, deactivated in Stripe.** Never had dedicated fulfillment (would've silently used the $97 Fix Pack's prompt-pack script, or delivered nothing at all — see fix f661f3e1); only the $97 Conversion Fix Pack is a live offer now.
+  - Audit Lite ($7): https://buy.stripe.com/aFacN55E0cf2fupafM43S0e - **retired 2026-07-24, deactivated in Stripe.** Never had dedicated fulfillment (would've silently used the $97 Fix Pack's prompt-pack script, or delivered nothing at all - see fix f661f3e1); only the $97 Conversion Fix Pack is a live offer now.
   - Con...[truncated]
 - [ ] Analytics tracking
 - [ ] Blurred results UX

@@ -54,12 +54,12 @@ sent_count = 0
 for t in targets:
     text = f"""Hi {t['name']},
 
-Earlier today I emailed you about Nebula Components — the dark SaaS landing page pack.
+Earlier today I emailed you about Nebula Components - the dark SaaS landing page pack.
 
 I just launched a flash sale. Here's the new deal:
 
 PRICE: $7 (was $29)
-TIME: 24 hours or 10 sales — whichever hits first
+TIME: 24 hours or 10 sales - whichever hits first
 RISK: If you don't ship a landing page in 30 days, I refund you AND pay you $29
 
 7 components. Hero, Features, Pricing, Testimonials, FAQ, CTA, Footer. One dark design system. Zero dependencies. Copy, paste, deploy.
@@ -79,8 +79,8 @@ Nebula Components"""
 <p><a href="{site_url}" style="display:inline-block;background:linear-gradient(135deg,#fbbf24,#ec4899);color:#0a0a0f;padding:12px 28px;border-radius:10px;font-weight:700;text-decoration:none;font-size:1rem">&rarr; Buy Nebula for $7</a></p>
 <p><a href="{site_url}/demo.html">Preview the demo first</a></p>"""
 
-    success, msg = send_email(t["email"], "Flash sale: $7 (was $29) — 24 hours only", text, html)
-    
+    success, msg = send_email(t["email"], "Flash sale: $7 (was $29) - 24 hours only", text, html)
+
     if success:
         print(f"[SENT] {t['email']}")
         sent_count += 1

@@ -35,8 +35,8 @@
   ],
   "evidence_standards": {
     "fact": "Verified by log, screenshot, Stripe event, or ledger entry",
-    "inference": "Reasonable conclusion from verified facts — labeled as such",
-    "speculation": "Hypothesis without verification — labeled as such",
+    "inference": "Reasonable conclusion from verified facts - labeled as such",
+    "speculation": "Hypothesis without verification - labeled as such",
     "buyer_signal_weak": "likes, views, impressions, generic praise",
     "buyer_signal_moderate": "relevant reply, pain confirmation, pricing question, demo request",
     "buyer_signal_strong": "checkout attempt, paid order, explicit purchase intent, referral"
@@ -47,6 +47,6 @@
     "reply_rate": "1.3% (2/155)",
     "warm_replies": 1,
     "conversions": 0,
-    "root_cause_of_failure": "Filter-based ICP (no buying trigger) — demographic targeting with zero urgency signal"
+    "root_cause_of_failure": "Filter-based ICP (no buying trigger) - demographic targeting with zero urgency signal"
   }
 }

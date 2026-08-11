@@ -1,4 +1,4 @@
-# Stripe Checkout Audit — 2026-07-13
+# Stripe Checkout Audit - 2026-07-13
 
 ## Root Cause of 0/26 Conversions
 
@@ -37,7 +37,7 @@
 | `4gMdR9aYkenafup3Ro43S00` | Nebula Components $7 | ✅ Working |
 | `4gMcN5aYk92Qaa5drY43S09` | Not checked | ? |
 
-## Fix Required (Stripe Dashboard — 2 minutes)
+## Fix Required (Stripe Dashboard - 2 minutes)
 
 1. Go to https://dashboard.stripe.com/products
 2. Click **"LaunchCrate - Done-For-You SaaS Launch"** ($197, the main one `prod_UlPkjwyFBx2QEh`)

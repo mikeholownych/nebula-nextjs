@@ -1,4 +1,4 @@
-# VALUES — Nebula Components Operating Principles
+# VALUES - Nebula Components Operating Principles
 
 **Last updated:** 2026-07-07
 **Status:** Active
@@ -49,7 +49,7 @@ The business has $0 revenue and finite runway.
 - Every pipeline must have a defined failure mode
 - Every automated send must have a kill switch (suppression list, daily cap, bounce detection)
 - Every workflow must be reproducible from a defined state
-- Errors must produce evidence (logs, output files) — never silent failures
+- Errors must produce evidence (logs, output files) - never silent failures
 - SRE jobs must detect stuck leads and stale pipelines, not just report them
 
 ## 6. Complete Auditability
@@ -66,7 +66,7 @@ The business has $0 revenue and finite runway.
 - Failures produce incident reports, not blame
 - Knowledge compounds in living documents, not conversation history
 - Every 30 days: retrospective on what worked, what didn't, what to change
-- SOPs are living documents — updated when a better way is found
+- SOPs are living documents - updated when a better way is found
 
 ## 8. Minimal Human Intervention
 
@@ -74,7 +74,7 @@ The business has $0 revenue and finite runway.
 - Escalation triggers (must escalate): spend > $50, legal risk, irreversible action, strategy change
 - Do NOT escalate for: routine execution, minor copy changes, experiment results, operational recovery
 - When blocked, try an alternative before reporting the blocker
-- When uncertain, gather evidence and decide — don't ask for permission
+- When uncertain, gather evidence and decide - don't ask for permission
 
 ## 9. Root Cause Over Symptoms
 
@@ -85,7 +85,7 @@ The business has $0 revenue and finite runway.
 
 ## 10. Profitability Awareness
 
-- Every action has a cost — compute, API tokens, time, attention
+- Every action has a cost - compute, API tokens, time, attention
 - Prioritize actions with the highest expected ROI
 - Low-ROI experiments (no clear signal, no defined success metric) are not run
 - Regularly audit: unnecessary spending, idle infra, abandoned leads, automation candidates

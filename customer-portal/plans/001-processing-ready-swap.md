@@ -1,4 +1,4 @@
-# 001 — Animate the processing→ready Card swap
+# 001 - Animate the processing→ready Card swap
 
 - **Status**: DONE
 - **Commit**: de2bb34e
@@ -15,14 +15,14 @@ processing Card unmounts and the ready Card mounts in the same tick, with no
 transition on either side. The user sees a hard cut from a progress bar to a
 checkmark.
 
-This is the single highest-emotion moment in the audit funnel — "your audit
-is done," seen exactly once per audit — and it currently gets zero motion
+This is the single highest-emotion moment in the audit funnel - "your audit
+is done," seen exactly once per audit - and it currently gets zero motion
 budget.
 
 Current code:
 
 ```tsx
-// app/audit/[id]/processing/page.tsx:107-131 — processing state, unmounts instantly
+// app/audit/[id]/processing/page.tsx:107-131 - processing state, unmounts instantly
 {status === 'processing' && (
   <Card variant="elevated" className="text-center">
     <h1 className="mb-6 text-2xl font-bold text-fg">
@@ -64,7 +64,7 @@ Current code:
 The `vt-audit-card` class (`app/globals.css:1060-1067`) already gives this
 same Card a `view-transition-name` for the later *route* change
 (processing → `/results`), but that only fires on navigation via
-`pushWithViewTransition`. It does nothing for the in-page `status` flip —
+`pushWithViewTransition`. It does nothing for the in-page `status` flip -
 that swap is a plain conditional render with no motion at all.
 
 ## Target
@@ -75,7 +75,7 @@ teleport" case) on the ready-state Card, instead of introducing any new
 animation, easing, or duration:
 
 ```tsx
-// app/audit/[id]/processing/page.tsx:134 — target
+// app/audit/[id]/processing/page.tsx:134 - target
 <Card variant="elevated" className="vt-audit-card finding-reveal text-center">
 ```
 
@@ -94,11 +94,11 @@ That's the entire required fix. `finding-reveal` is defined at
 
 `animation-fill-mode: both` means the Card starts at `opacity: 0` the
 instant it mounts (no flash-then-animate), then eases up into place over
-420ms. No new CSS is required — do not add a new keyframe or duration.
+420ms. No new CSS is required - do not add a new keyframe or duration.
 
 ### Optional (nice-to-have, same file, do only if Step 1 lands cleanly)
 
-The checkmark is the one truly rare/high-emotion element on this screen —
+The checkmark is the one truly rare/high-emotion element on this screen -
 AUDIT.md category 8 explicitly allows spending extra delight budget on
 rare, high-emotion moments. Give it a beat of its own by delaying it
 slightly past the card's entrance, reusing the same class and the exact
@@ -106,7 +106,7 @@ stagger pattern already established in `ResultsClient.tsx:696`
 (`style={{ animationDelay: ... }}` on a `finding-reveal` element):
 
 ```tsx
-// app/audit/[id]/processing/page.tsx:135 — optional target
+// app/audit/[id]/processing/page.tsx:135 - optional target
 <div className="mb-4 text-5xl finding-reveal" style={{ animationDelay: '120ms' }}>✓</div>
 ```
 
@@ -118,7 +118,7 @@ it if it makes the diff feel out of scope.
 - Motion tokens are not centralized as CSS custom properties in this repo;
   instead, purpose-built animation classes live directly in
   `app/globals.css` and get applied via `className`. `finding-reveal` is
-  the established "content appears, don't teleport it" class — extend it,
+  the established "content appears, don't teleport it" class - extend it,
   don't invent a parallel one.
 - Exemplar to imitate: `app/audit/[id]/results/ResultsClient.tsx:693-696`
   applies `finding-reveal` to each finding `Card` with a staggered
@@ -126,7 +126,7 @@ it if it makes the diff feel out of scope.
   the identical pattern (class + inline `animationDelay`), just without a
   loop since there's only one element.
 - `prefers-reduced-motion` is handled globally at
-  `app/globals.css:1085-1100` — it zeroes all `animation-duration` and
+  `app/globals.css:1085-1100` - it zeroes all `animation-duration` and
   `transition-duration` sitewide. Do not add component-level reduced-motion
   handling; it's already inherited for free.
 
@@ -139,25 +139,25 @@ it if it makes the diff feel out of scope.
 2. (Optional) On the line reading `<div className="mb-4 text-5xl">✓</div>`
    directly below it, change it to
    `<div className="mb-4 text-5xl finding-reveal" style={{ animationDelay: '120ms' }}>✓</div>`.
-3. Save. No other files need to change — `finding-reveal` already exists in
+3. Save. No other files need to change - `finding-reveal` already exists in
    `app/globals.css` and needs no edits.
 
 ## Boundaries
 
-- Do NOT touch `app/globals.css` — the `finding-reveal` keyframe already
+- Do NOT touch `app/globals.css` - the `finding-reveal` keyframe already
   exists and already has the correct values; do not redefine it or add a
   new one.
 - Do NOT touch the progress bar, the `STATUS_MESSAGES` cycling logic, or
   the `setInterval`/`setStatus('ready')` call inside the `useEffect`
-  (`page.tsx:28-62`) — the trigger for the swap is out of scope, only its
+  (`page.tsx:28-62`) - the trigger for the swap is out of scope, only its
   visual result.
 - Do NOT introduce `document.startViewTransition` or `flushSync` for this
   swap. `setStatus('ready')` is called from inside the functional updater
-  passed to `setProgress` (`page.tsx:36-43`), a nested state-setter call —
+  passed to `setProgress` (`page.tsx:36-43`), a nested state-setter call -
   wrapping that in a same-document view transition is fragile to get right
   and unnecessary here; the CSS keyframe approach above sidesteps the
   timing question entirely.
-- Do NOT touch `vt-audit-card` or `pushWithViewTransition` — that governs
+- Do NOT touch `vt-audit-card` or `pushWithViewTransition` - that governs
   the separate cross-route transition to `/results` and must keep working
   unmodified.
 - Do NOT add new dependencies or new CSS classes.
@@ -168,21 +168,21 @@ it if it makes the diff feel out of scope.
 ## Verification
 
 - **Mechanical**: run `npm run typecheck` (`tsc --noEmit`) and
-  `npm run lint` (`eslint .`) from `customer-portal/` — both must pass with
+  `npm run lint` (`eslint .`) from `customer-portal/` - both must pass with
   no new errors. This is a `className` string edit only; neither command
   should report anything.
 - **Feel check**: run `npm run dev`, open `/audit`, submit any URL, and
   watch the screen once the progress bar reaches 100%:
   - The ready Card should visibly ease up into place (starts offset
     `translateY(14px)` + transparent, settles to its resting position) over
-    ~420ms — not appear in a single frame.
+    ~420ms - not appear in a single frame.
   - In Chrome DevTools → Animations panel, set playback to 10% and
     re-trigger; confirm the motion starts fast and decelerates into place
     (the `cubic-bezier(0.22, 1, 0.36, 1)` ease-out feel), with no linear or
     robotic pacing.
   - If the optional checkmark step was applied, confirm it settles
     noticeably after the card itself (~120ms behind), reading as two beats
-    rather than one — not simultaneous, not so delayed it looks broken.
+    rather than one - not simultaneous, not so delayed it looks broken.
   - Toggle `prefers-reduced-motion: reduce` in DevTools → Rendering panel,
     re-trigger the flow, and confirm the ready Card still appears (content
     is never hidden) but the animation collapses to effectively instant,

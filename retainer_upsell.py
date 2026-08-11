@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Retainer Upsell Sender — Nebula Components
+Retainer Upsell Sender - Nebula Components
 Sends the $1,497/mo AI Ops Retainer offer to qualified audit recipients.
 
 Run via cron every 6h. Each eligible lead gets ONE upsell, then marked done.
 
-Eligibility (sourced from HOT_LEAD.json — canonical lead store):
+Eligibility (sourced from HOT_LEAD.json - canonical lead store):
   - stage is audit_delivered or pitch_sent
   - pitch_sent_at is at least 14 days ago
   - paid_at IS NULL
@@ -27,7 +27,7 @@ LOG_FILE       = Path("/home/mike/nebula/logs/retainer_upsell.log")
 INBOX          = "sedrick@nebulacomponents.com"
 STRIPE_RETAINER_URL = "https://buy.stripe.com/00w5kD1nK0wkaa573A43S0c"
 MIN_POST_PITCH_DAYS = 14
-MAX_PER_RUN         = 5   # pace sends — retainer is a premium ask
+MAX_PER_RUN         = 5   # pace sends - retainer is a premium ask
 
 logging.basicConfig(
     level=logging.INFO,
@@ -37,7 +37,7 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 
-SUBJECT = "Re: {domain} audit — one more thing"
+SUBJECT = "Re: {domain} audit - one more thing"
 
 BODY = """\
 Hey,
@@ -48,7 +48,7 @@ Most founders I talk to hit a wall after the first fix: they change what the \
 audit flagged, see a lift, then conversion starts drifting again as new \
 traffic brings new friction. Same hole, different shape.
 
-That's why the AI Ops Retainer exists. $1,497/month — I run your page \
+That's why the AI Ops Retainer exists. $1,497/month - I run your page \
 through the full audit every month, deliver an updated fix pack, and flag \
 any new drop-off before it costs you real money. No contract. Cancel any time.
 
@@ -57,9 +57,9 @@ week on a page that wasn't converting.
 
 If that sounds relevant: {retainer_url}
 
-If you're sorted — no worries. If your conversion rate drifted back down after the first fix, you already know why.
+If you're sorted - no worries. If your conversion rate drifted back down after the first fix, you already know why.
 
-— Mike
+- Mike
 Nebula Components
 """
 
@@ -196,10 +196,10 @@ def main(dry_run: bool = False):
 
     if sent:
         _save_leads(leads)
-        log.info(f"HOT_LEAD.json updated — {sent} upsell_sent_at timestamps written")
+        log.info(f"HOT_LEAD.json updated - {sent} upsell_sent_at timestamps written")
 
     result = {"sent": sent, "eligible": len(eligible), "run_at": now_iso}
-    log.info(f"Retainer upsell run complete — {sent}/{min(len(eligible), MAX_PER_RUN)} sent")
+    log.info(f"Retainer upsell run complete - {sent}/{min(len(eligible), MAX_PER_RUN)} sent")
     print(json.dumps(result))
 
 

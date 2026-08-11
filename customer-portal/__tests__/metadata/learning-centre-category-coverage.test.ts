@@ -7,7 +7,7 @@ describe('learning-centre category coverage', () => {
     // Regression guard: CategoryAccordion only renders an article if its
     // category exists as a key in `categories`, which is built from
     // page.tsx's local `categoryOrder` array. An article whose meta.json
-    // category isn't in that array isn't hidden — it's never rendered
+    // category isn't in that array isn't hidden - it's never rendered
     // anywhere on the hub at all, with no error. This happened in practice
     // when founder-second-brain/linkedin-skill-engine/specialist-ai-agent-library
     // were given category "AI Ops Systems" and landing-page-intelligence-stack

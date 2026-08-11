@@ -1,5 +1,5 @@
 """
-Content Firewall — Synthetic Content Detector
+Content Firewall - Synthetic Content Detector
 Adapted from TrustOS Forensic AI Research (flagstad.io, July 2026)
 Filter: detect and discard AI-generated content, vendor camouflage, and marketing
 disguised as user sentiment from lead scraping pipelines.
@@ -32,10 +32,10 @@ FORBIDDEN_VOCAB = {
 }
 
 ANTI_PATTERNS = [
-    # Type A: Vendor Camouflage — Problem -> Agitation -> Solution structure
+    # Type A: Vendor Camouflage - Problem -> Agitation -> Solution structure
     (r"(?:struggl|battle|wrestl).{0,30}(?:but|however|discover|found|the solution|that's why)",
      "vendor_camouflage_pas"),
-    # Type B: AI Fingerprint — Perfect rhythm (balanced sentence length)
+    # Type B: AI Fingerprint - Perfect rhythm (balanced sentence length)
     (r"^.{50,80}[.!?]\s*.{50,80}[.!?]\s*.{50,80}[.!?]\s*.{50,80}[.!?]",
      "ai_perfect_rhythm"),
     # Type C: Explanatory crutch
@@ -113,7 +113,7 @@ def firewall_score(text: str) -> dict:
         "score": score,
         "verdict": verdict,
         "violations": violations,
-        "readable_summary": f"Score: {score}/100 — {'Human' if verdict == 'human' else 'Synthetic' if verdict == 'synthetic' else 'Ambiguous'} ({len(violations)} violation types, {total_penalty}pts penalized)"
+        "readable_summary": f"Score: {score}/100 - {'Human' if verdict == 'human' else 'Synthetic' if verdict == 'synthetic' else 'Ambiguous'} ({len(violations)} violation types, {total_penalty}pts penalized)"
     }
 
 

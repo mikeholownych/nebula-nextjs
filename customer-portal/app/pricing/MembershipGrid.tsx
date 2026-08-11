@@ -45,7 +45,7 @@ function PlanCard({
       </p>
       {!isFree && interval === 'annual' && plan.monthlyUsd != null && plan.annualUsd != null && (
         <p className="mt-1 text-xs text-fg-muted">
-          ${Math.round(plan.annualUsd / 12)}/mo effective — 2 months free
+          ${Math.round(plan.annualUsd / 12)}/mo effective - 2 months free
         </p>
       )}
       <ul className="mt-5 flex-1 space-y-2 text-sm text-fg-muted">

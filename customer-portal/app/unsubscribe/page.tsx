@@ -39,7 +39,7 @@ export default function UnsubscribePage() {
             setStatusClass('status-done')
             setStatusText(`Unsubscribed: ${email}`)
             setFinePrintHtml(
-              `If this was a mistake, you can <a href="/" className="text-accent hover:underline">run another free audit</a> at any time — we'll only send what you request.`
+              `If this was a mistake, you can <a href="/" className="text-accent hover:underline">run another free audit</a> at any time - we'll only send what you request.`
             )
           } else {
             throw new Error('Unexpected response')

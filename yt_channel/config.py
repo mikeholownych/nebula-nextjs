@@ -10,11 +10,11 @@ ROOT = Path(__file__).resolve().parent.parent
 
 # --- Channel identity ---
 CHANNEL_NAME = "Nebula Audits"
-CHANNEL_TAGLINE = "Data-driven landing page audits — no fluff, no sales calls"
+CHANNEL_TAGLINE = "Data-driven landing page audits - no fluff, no sales calls"
 CHANNEL_DESCRIPTION = (
     "Every video is a real, automated landing page audit. "
-    "We score pages across 9 conversion dimensions — headline, CTA, social proof, "
-    "speed, mobile, SEO, tracking, and more — then walk through every issue "
+    "We score pages across 9 conversion dimensions - headline, CTA, social proof, "
+    "speed, mobile, SEO, tracking, and more - then walk through every issue "
     "so you can fix your own conversions.\n\n"
     "No talking heads. No fluff. Just the data.\n\n"
     "Get your free instant audit: https://nebulacomponents.com/audit.html"

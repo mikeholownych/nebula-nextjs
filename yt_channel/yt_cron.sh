@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# YouTube channel cron wrapper — DAILY.
+# YouTube channel cron wrapper - DAILY.
 #   Mon + Thu (14:00 UTC): produce + upload BOTH long-form and Short
 #   Other days:           : produce + upload Short only (daily Shorts cadence)
 # Changed by Hermes 2026-08-09: daily Shorts + long on Mon/Thu, uploads both.
