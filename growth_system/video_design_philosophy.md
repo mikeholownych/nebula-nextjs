@@ -167,3 +167,35 @@ Before using any prompt, verify the anchor contains exactly these 5 layers:
 - [ ] Texture (grain/vignette/halation — one only)
 
 If any layer is missing → do not send. Fix first.
+
+---
+
+## Avatar & Disclosure Policy
+
+### When to use real footage (non-negotiable)
+- Pre-checkout Loom (sent to specific founder who expects a real person)
+- Homepage hero / about section
+- Any video going to a named individual as a "reply"
+- Any sales call follow-up
+
+### When avatar is acceptable
+- Broadcast short-form posts (generic audience)
+- Product update announcements
+- Volume content (15+ videos/week)
+- Multilingual versions of existing real content
+
+### Disclosure rule
+If the avatar speaks AS Mike TO a specific person: disclose.
+Add this line to description or video:
+> "This is an AI version of me — written by me, voiced by my AI clone."
+
+For broadcast content: add AI-content tag on Meta/TikTok/YouTube.
+Required by platform policy as of 2026.
+
+### Synthetic UGC: Never
+Real customer reviews beat synthetic every time.
+FTC fines for fake testimonials are real.
+Offer a real customer incentive instead (free month for 30-second review).
+
+### The one rule
+If you feel pressure to hide that it's AI — that feeling is the rule. Disclose.
