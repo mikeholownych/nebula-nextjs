@@ -31,6 +31,7 @@ REQUIRED = {
     "expected_metric", "validation_window", "stop_condition",
 }
 SALES_PROOF_REQUIRED = {"sales_evidence", "sales_source", "sales_attribution"}
+PURCHASE_METRIC_TERMS = {"purchase", "purchases", "sale", "sales", "revenue", "paid customer", "payment"}
 ALLOWED_ACTIONS = {"record_buyer_language", "create_experiment_brief"}
 BLOCKED_ACTION_WORDS = {
     "send", "email", "dm", "publish", "post", "spend", "buy", "price",
@@ -95,6 +96,9 @@ def critic(item: dict[str, Any], brain: dict[str, Any], seen: set[str]) -> dict[
         problems.append("evidence_excerpt is too short to audit")
     if len(norm(item.get("claim"))) < 20:
         problems.append("claim is too generic")
+    expected_metric = norm(item.get("expected_metric"))
+    if not any(term in expected_metric for term in PURCHASE_METRIC_TERMS):
+        problems.append("expected_metric must include attributable purchases or revenue")
     bottleneck = norm(brain.get("current_bottleneck"))
     relevance_text = norm(" ".join(str(item.get(k, "")) for k in ("observed_problem", "why_nebula", "expected_metric")))
     relevant = any(token in relevance_text for token in {

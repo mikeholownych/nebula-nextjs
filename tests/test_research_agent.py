@@ -19,7 +19,7 @@ def valid_item(**overrides):
         "claim": "Specific post-click diagnosis is more useful than generic conversion advice.",
         "why_nebula": "This matches the current audit-to-payment bottleneck and the trigger-aware ICP.",
         "smallest_safe_change": "Record the exact buyer phrase for later outreach review.",
-        "expected_metric": "qualified replies per 10 trigger-based sends",
+        "expected_metric": "attributable purchases per 10 trigger-based sends",
         "validation_window": "14 days",
         "stop_condition": "Stop if no qualified replies after 20 reviewed sends.",
         "action_type": "record_buyer_language",
@@ -35,6 +35,12 @@ def test_critic_accepts_relevant_evidence():
     assert review["accepted"] is True
     assert review["score"] >= 70
     assert review["reasons"] == []
+
+
+def test_critic_rejects_non_sales_primary_metric():
+    review = critic(valid_item(expected_metric="replies per 10 sends"), brain(), set())
+    assert review["accepted"] is False
+    assert "expected_metric must include attributable purchases or revenue" in review["reasons"]
 
 
 def test_critic_rejects_generic_or_unsafe_action():
