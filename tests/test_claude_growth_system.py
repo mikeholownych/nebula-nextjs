@@ -47,7 +47,7 @@ class ClaudeGrowthSystemTests(unittest.TestCase):
         calendar = build_content_calendar()
         self.assertEqual(len(calendar), 30)
         jobs = {item["job"] for item in calendar}
-        self.assertEqual(jobs, {"Educational", "Testimonial", "Personal story", "Listicle", "Comparison"})
+        self.assertEqual(jobs, {"Educational", "Testimonial", "Personal story", "Listicle", "Comparison", "Answer-first"})
         self.assertTrue(all("hook" in item and "cta" in item for item in calendar))
         self.assertTrue(all("format" in item for item in calendar))
         self.assertTrue(all("freshness_signal" in item for item in calendar))

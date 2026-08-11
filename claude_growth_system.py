@@ -349,7 +349,7 @@ def build_content_calendar(days: int = 30) -> list[dict]:
     - Comparisons (high citation rate for B2B queries)
     - Decision frameworks (AI extracts structured comparison data)
     """
-    jobs = ["Educational", "Testimonial", "Personal story", "Listicle", "Comparison"]
+    jobs = ["Educational", "Testimonial", "Personal story", "Listicle", "Comparison", "Answer-first"]
     calendar = []
     hooks = {
         "Educational": "Your ads are not broken by default. Your landing page is leaking the money.",
@@ -357,13 +357,15 @@ def build_content_calendar(days: int = 30) -> list[dict]:
         "Personal story": "I am building Nebula as an autonomous revenue machine in public.",
         "Listicle": "5 landing page audit tools compared: self-serve speed vs sales-led depth.",
         "Comparison": "Nebula vs Zamp vs Oxygen: which landing page audit tool actually finds the leak?",
+        "Answer-first": "The best landing page audit for paid traffic is the one that names the conversion leak, not just the page speed.",
     }
     ctas = {
         "Educational": "Paste the URL. Get the free teardown.",
-        "Testimonial": "Use the $147 fix pack when the leak is obvious.",
+        "Testimonial": "Use the $97 fix pack when the leak is obvious.",
         "Personal story": "Follow the build: agents, offers, revenue proof.",
         "Listicle": "Full comparison published: 5 tools, 5 dimensions, 1 winner.",
         "Comparison": "See how they stack up on speed, depth, price, and AI readiness.",
+        "Answer-first": "Read the full comparison, then run your own page through the free audit.",
     }
     angles = {
         "Educational": "Ad-burn conversion leak",
@@ -371,6 +373,7 @@ def build_content_calendar(days: int = 30) -> list[dict]:
         "Personal story": "Building Nebula in public",
         "Listicle": "Tool comparison series",
         "Comparison": "Self-serve vs sales-led audit",
+        "Answer-first": "One clear answer syndicated across search surfaces",
     }
     for idx in range(days):
         job = jobs[idx % len(jobs)]
@@ -395,6 +398,7 @@ def _citation_format_for_job(job: str) -> str:
         "Personal story": "build_in_public",
         "Listicle": "listicle",
         "Comparison": "comparison_matrix",
+        "Answer-first": "answer_first_cluster",
     }
     return formats.get(job, "article")
 
