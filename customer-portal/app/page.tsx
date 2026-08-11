@@ -3,6 +3,8 @@ import Link from 'next/link'
 import SelfScan from './components/SelfScan'
 import AggregateProof from './components/AggregateProof'
 import RecentFinding from './components/RecentFinding'
+import ROICalculator from './components/ROICalculator'
+import WithWithout from './components/WithWithout'
 import { TEARDOWNS } from './teardowns/[slug]/data'
 import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE } from './lib/homepageContent'
 import { SignalIcon } from '@/components/SignalIcons'
@@ -128,6 +130,9 @@ export default function Home() {
             </Link>
           </div>
         </section>
+
+        {/* ── 1c. ROI Calculator ── */}
+        <ROICalculator />
 
         {/* ── 2. Origin / honest proof ── */}
         <section className="border-b border-border px-6 py-16">
@@ -375,6 +380,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* ── 6b. With/Without comparison ── */}
+        <WithWithout />
 
         {/* ── 7. Comparison: not a sales call ── */}
         <section className="border-b border-border px-6 py-16">

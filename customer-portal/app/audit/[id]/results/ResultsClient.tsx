@@ -687,6 +687,42 @@ function EvidenceMethod({ findings }: { findings: Finding[] }) {
   )
 }
 
+// ── Personalized Next Step ─────────────────────────────────────────────────
+// Shows a single plain-language "here's what this means for you" block
+// based on the worst-scoring finding. No database needed — data is live.
+
+const DIMENSION_PLAIN: Record<string, { headline: string; why: string }> = {
+  headline:      { headline: 'Your headline is describing your product, not your customer\'s problem.', why: 'Cold traffic reads the first line and decides in 3 seconds. If they don\'t see their pain, they\'re gone.' },
+  cta:           { headline: 'Your CTA is a label, not a decision.', why: '"Submit" or "Get Started" asks someone to act without telling them what changes. Visitors need to see the outcome before they\'ll click.' },
+  social_proof:  { headline: 'There\'s nothing on your page a stranger would trust.', why: 'Claims without evidence don\'t convert cold traffic. A name, a number, or a screenshot beats any feature list.' },
+  above_fold:    { headline: 'The most important elements aren\'t visible without scrolling.', why: 'Most visitors leave before they scroll. What they see in the first viewport is your entire pitch.' },
+  load_speed:    { headline: 'Your page is slow enough to lose visitors before they read a word.', why: 'Every second of delay drops conversion rate by ~7%. The ad paid for the click. The slow load threw it away.' },
+  mobile:        { headline: 'Your page is broken for more than half your traffic.', why: 'The ad probably ran on mobile. The page wasn\'t built for it. That gap is where the money went.' },
+  seo_foundations: { headline: 'Organic search can\'t find you, and paid traffic can\'t verify you.', why: 'Missing title tags and meta descriptions mean no SEO signal and no trust preview before the click.' },
+  ad_signals:    { headline: 'Your ads are firing into a page that can\'t track what converts.', why: 'Without conversion tracking, you can\'t know which campaign is working. You\'re optimizing blind.' },
+  ai_readiness:  { headline: 'AI tools can\'t read or cite your page.', why: 'Structured data and proper metadata determine whether ChatGPT, Perplexity, and Google AI mention you.' },
+}
+
+function PersonalizedNextStep({ findings }: { findings: Finding[] }) {
+  if (!findings.length) return null
+  // Use impact (inverted — higher impact = more broken) to find worst
+  const worst = [...findings].sort((a, b) => b.impact - a.impact)[0]
+  const plain = DIMENSION_PLAIN[worst.key]
+  if (!plain) return null
+
+  return (
+    <div className="mb-8 rounded-xl border border-accent/30 bg-accent/5 p-6">
+      <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-accent">Your biggest leak</p>
+      <h2 className="text-lg font-bold text-fg leading-snug">{plain.headline}</h2>
+      <p className="mt-2 text-sm text-fg-muted leading-6">{plain.why}</p>
+      <p className="mt-3 text-xs text-fg-muted">
+        This is the <span className="font-semibold text-fg">{worst.label}</span> signal.
+        {' '}The $97 repair fixes this specific issue, not a generic template.
+      </p>
+    </div>
+  )
+}
+
 export default function ResultsClient({ auditId, unlocked: initialUnlocked, sharedView = false }: Props) {
   const [loading, setLoading] = useState(true)
   const [results, setResults] = useState<AuditResult | null>(null)
@@ -878,6 +914,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
 
         {activeTab === 'overview' && (
           <>
+            <PersonalizedNextStep findings={results.findings} />
             <ReportOverview results={results} />
             <FixFirstQueue findings={results.findings} auditId={auditId} onGoToRemediation={() => setActiveTab('remediation')} />
             {/* Inline email gate — shown on Overview for unlocked visitors and non-shared locked views */}
