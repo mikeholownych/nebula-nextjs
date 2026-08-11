@@ -67,6 +67,9 @@ def save_seen(seen: set):
 
 
 def append_signal(signal: dict):
+    from datetime import datetime, timezone
+    if 'discovered_at' not in signal:
+        signal['discovered_at'] = datetime.now(timezone.utc).strftime('%Y-%m-%d')
     with open(QUEUE_FILE, "a") as f:
         f.write(json.dumps(signal) + "\n")
 
