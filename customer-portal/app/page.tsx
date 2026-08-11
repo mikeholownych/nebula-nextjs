@@ -5,6 +5,7 @@ import AggregateProof from './components/AggregateProof'
 import RecentFinding from './components/RecentFinding'
 import ROICalculator from './components/ROICalculator'
 import WithWithout from './components/WithWithout'
+import HowItWorksAnimated from './components/HowItWorksAnimated'
 import { TEARDOWNS } from './teardowns/[slug]/data'
 import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE } from './lib/homepageContent'
 import { SignalIcon } from '@/components/SignalIcons'
@@ -339,47 +340,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 6. How it works ── */}
-        <section className="border-b border-border bg-bg-muted/10 px-6 py-16">
-          <div className="mx-auto max-w-6xl">
-            <h2 className="mb-10 text-2xl font-bold tracking-section text-fg md:text-3xl">
-              From URL to knowing exactly what to fix. Under 2 minutes.
-            </h2>
-            <div className="grid gap-0 md:grid-cols-3">
-              {[
-                {
-                  n: '01',
-                  heading: 'Paste your URL',
-                  body: 'Any public landing page. No account, no signup, no integration required.',
-                },
-                {
-                  n: '02',
-                  heading: 'Get the page checks run',
-                  body: 'Headline, CTA clarity, social proof, mobile viewport, load speed, SEO foundations, AI readiness, and applicable technical checks — checked against your actual page.',
-                },
-                {
-                  n: '03',
-                  heading: 'See what to fix first',
-                  body: 'Every failing signal ranked by conversion impact and effort. Specific findings from your page, not generic advice. You stop guessing. You start fixing the right thing.',
-                },
-              ].map((step, i) => (
-                <div key={step.n} className={`border-border p-6 ${i < 2 ? 'md:border-r' : ''}`}>
-                  <p className="mb-3 font-mono text-xs text-fg-muted">{step.n}</p>
-                  <h3 className="mb-2 font-semibold text-fg">{step.heading}</h3>
-                  <p className="text-sm text-fg-muted leading-6">{step.body}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-8">
-              <Link
-                href="/audit?utm_source=homepage&utm_medium=internal"
-                className="rounded-xl bg-accent px-7 py-3.5 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-sm inline-block"
-              >
-                Run the audit free &rarr;
-              </Link>
-            </div>
-          </div>
-        </section>
+        {/* ── 6. How it works — animated ── */}
+        <HowItWorksAnimated />
 
         {/* ── 6b. With/Without comparison ── */}
         <WithWithout />
