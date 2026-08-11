@@ -22,6 +22,12 @@ BUYER_LANGUAGE_MAP = {
         "the ads are getting clicks, it must be the page",
         "not even a paying customer, just one form fill",
         "spent $X and I have one conversion to show for it",
+        # Neil Gambit ICP framework additions (Aug 11, 2026)
+        "nobody will tell me which specific thing is broken",
+        "everyone says optimize your funnel but nobody shows me what to change",
+        "I keep changing the ads but I haven't touched the page",
+        "generic advice — no one tells me what's wrong with MY page",
+        "I want to know the exact thing to fix before I spend another dollar",
     ],
 
     # What they blame (useful for identifying their current theory vs. reality)
