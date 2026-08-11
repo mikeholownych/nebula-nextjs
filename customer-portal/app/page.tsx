@@ -75,14 +75,14 @@ export default function Home() {
             {/* Left: copy — dominant */}
             <div className="flex flex-col justify-center">
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
-                Landing pages don&apos;t convert. Components do.
+                Landing pages don&apos;t convert. Conversions do.
               </p>
               <h1 className="text-4xl font-extrabold tracking-display text-fg md:text-5xl lg:text-6xl">
-                Your landing page is leaking paying customers. Here&apos;s exactly where.
+                Know exactly what&apos;s killing your conversions — without hiring a consultant.
               </h1>
               <p className="mt-6 max-w-lg text-lg leading-7 text-fg-muted">
-                Paste your URL. Nebula checks 9 conversion signals plus technical readiness on your actual page and
-                returns exactly what's costing you conversions — ranked by impact. Free, no signup, under two minutes.
+                Paste your URL. In under two minutes, Nebula shows you the specific finding costing you conversions,
+                the dollar math behind it, and the exact fix — free, no signup required.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
