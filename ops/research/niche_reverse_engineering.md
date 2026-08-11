@@ -275,3 +275,71 @@ The research supports one conclusion:
 It should become the fastest, most specific path from a founder's visible paid-traffic pain to one evidence-backed landing-page fix.
 
 The immediate next move is not more software. It is a concierge or prepaid $97 offer to a trigger-qualified founder, followed by verified delivery and outcome capture.
+
+## Adjacent early-stage competitor: 1h Money Store
+
+Source: https://1h-money-store.vercel.app/
+
+### Classification
+
+1h Money Store is an adjacent competitor, not a direct replacement for Nebula. It targets the same broad audience of solo founders and freelancers, but sells low-priced digital products rather than conversion diagnosis and implementation.
+
+Products observed on 2026-08-11:
+
+- Meridian: single-file editorial HTML landing-page template, €17.
+- Leverage: 42-prompt AI operating system, €19.
+- Meridian + Leverage bundle, €32.
+- Free landing-page grader, FAQ, and seven free prompts.
+
+### Evidence boundary
+
+The live site establishes product existence, positioning, pricing, checkout framing, free tools, and bundle structure. It does not establish purchases, revenue, customer count, retention, or customer outcomes. Treat it as a commercial model and market signal, not a proven successful business.
+
+### Reverse engineering
+
+- **Customer**: Solo founders and freelancers who are the whole company.
+- **Trigger**: Need to launch a credible page or operate a one-person business faster.
+- **Painful job**: Avoid starting from zero while building, selling, and operating alone.
+- **Offer**: Small self-serve digital products with instant delivery.
+- **Acquisition**: Identity-led landing page, free tools, public directory links, affiliates, and external launch surfaces.
+- **Conversion**: Visible low prices, product cards, bundle savings, Stripe checkout, license language, and money-back guarantee.
+- **Delivery**: Downloadable template and prompt system.
+- **Expansion**: Bundle, free-tool funnel, affiliate program, and possible future services.
+- **Trust mechanism**: Strong art direction, explicit product contents, instant delivery, Stripe, license, and refund language.
+- **Moat**: Currently weak. The defensibility would need to come from distribution, distinctive taste, a growing prompt or template library, or customer outcomes.
+
+### Transferable mechanism for Nebula
+
+Adopt the packaging system, not the visual style:
+
+```text
+Specific founder trigger
+→ free useful tool
+→ low-friction paid artifact
+→ visible price
+→ verified delivery
+→ expansion offer
+```
+
+Nebula's equivalent remains:
+
+```text
+Paid-traffic pain
+→ free evidence-backed finding
+→ $97 one-leak implementation
+→ recurring re-audit
+```
+
+### Bounded Nebula experiment: outcome-packaging test
+
+- **Hypothesis**: Naming the paid offer as one concrete outcome will produce more attributable purchases than generic Fix Pack language.
+- **Audience**: Five new trigger-qualified founders reporting paid clicks and zero or near-zero conversions.
+- **Change**: Change the offer label and CTA only. Keep audit findings, price, checkout, and delivery unchanged.
+- **Variant**: `$97 One-Leak Repair Sprint` and `Fix the leak wasting your paid traffic`.
+- **Attribution**: Unique source ID, variant ID, Stripe metadata, and customer ledger event.
+- **Observation window**: 14 days after the fifth qualified offer or until an attributable purchase occurs.
+- **Stop rule**: Five qualified offers with zero purchases, assuming attribution and checkout are working.
+- **Success condition**: Attributable $97 purchase followed by verified delivery.
+- **Rollback**: Restore the current Fix Pack label if the stop rule is reached without purchase.
+
+The experiment is a hypothesis source only. The 1h Money Store site provides no evidence that its packaging has produced attributable sales.
