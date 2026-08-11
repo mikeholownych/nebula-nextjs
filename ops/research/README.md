@@ -49,4 +49,4 @@ It cannot send, publish, spend, deploy, change production code, change pricing, 
 - `buyer_language_candidates.jsonl`: local candidates for later review
 - `growth_system/research_experiments/*.json`: proposed experiments with metric and stop condition
 
-An item is rejected when it lacks an auditable source, is generic, is duplicated, does not map to the revenue funnel, or proposes a blocked side effect. A video or article alone is never sufficient evidence for a production change.
+An experiment is not considered successful because it produced a reply, click, audit, or checkout start. Those are leading indicators only. `experiment_control.py` marks a variant `SALE_SIGNAL` only when the recipient email matches a payment event in `ledgers/customer-ledger.jsonl`. Twenty sends with zero attributable purchases produces `NO_PURCHASES`. The evaluator never promotes a winner.
