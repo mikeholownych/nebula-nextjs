@@ -203,7 +203,7 @@ We're Nebula - we audit landing pages that burn ad budgets.
 
 Your highest-impact issue ({impact}/5): {finding}. {issue}
 
-The exact implementation brief - step-by-step fix, verification test, 30-day re-audit - is $97: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
+The exact implementation brief - step-by-step fix, verification test, 30-day re-audit - is $97: https://buy.stripe.com/9B63cvc2o7YMcid2Nk43S0j
 
 Want it?"""
 

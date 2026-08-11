@@ -21,7 +21,7 @@ SEEN_THREADS_FILE = "/home/mike/nebula/seen_threads.json"
 HOT_LEAD_FILE  = "/home/mike/nebula/HOT_LEAD.json"
 OUTREACH_EVIDENCE_FILE = "/home/mike/nebula/outreach_evidence.jsonl"
 AUDIT_LEADS_FILE = "/home/mike/nebula/audit_leads.jsonl"
-CHECKOUT_97    = "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
+CHECKOUT_97    = "https://buy.stripe.com/9B63cvc2o7YMcid2Nk43S0j"
 CHECKOUT_997   = "https://buy.stripe.com/4gMcN5aYk92Qaa5drY43S09"
 
 # In-memory + persisted dedup set - prevents same thread firing duplicate actions

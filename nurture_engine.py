@@ -436,7 +436,7 @@ TEARDOWN_SEQ = [
                 "The finding from your teardown costs you {cost_estimate} in lost "
                 "conversions every month if the page keeps the leak.\n\n"
                 "The $97 One-Leak Repair Sprint ships the highest-impact fix with a "
-                "30-day re-audit: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h\n",
+                "30-day re-audit: https://buy.stripe.com/9B63cvc2o7YMcid2Nk43S0j\n",
     },
     {
         "step": "d12", "min_days": 12,
@@ -532,7 +532,7 @@ AUDIT_SEQ = [
                 "ship it:\n\n"
                 "→ One-Leak Repair Sprint ($97): the highest-impact finding from your "
                 "audit, implemented, with a 30-day re-audit included.\n"
-                "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h\n\n"
+                "https://buy.stripe.com/9B63cvc2o7YMcid2Nk43S0j\n\n"
                 "No retainer. No site access needed - we write the targeted fix, you "
                 "implement it in minutes.\n",
     },

@@ -38,7 +38,7 @@ DEFAULTS = {
     "message_match_worksheet_link": "https://nebulacomponents.com/resources/message-match-worksheet",
     "cta_worksheet_link": "https://nebulacomponents.com/resources/cta-worksheet",
     "proof_worksheet_link": "https://nebulacomponents.com/resources/proof-guide",
-    "stripe_fix_pack_link": "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h",
+    "stripe_fix_pack_link": "https://buy.stripe.com/9B63cvc2o7YMcid2Nk43S0j",
 }
 
 

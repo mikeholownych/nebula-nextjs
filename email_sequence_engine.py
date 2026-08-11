@@ -144,7 +144,7 @@ SEQUENCES = {
                     "--\n"
                     "Mike\n"
                     "P.S. If your headline score was under 7 and you want to know the exact rewrite, "
-                    "that's one of the three things covered in the $97 fix: https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h\n"
+                    "that's one of the three things covered in the $97 fix: https://buy.stripe.com/9B63cvc2o7YMcid2Nk43S0j\n"
                 ),
             },
             # Day 3: One-Action Page - soft CTA

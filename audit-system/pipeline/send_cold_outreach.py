@@ -24,7 +24,7 @@ Two findings worth knowing about:
 The full audit is at: https://nebulacomponents.com/audit
 
 If you want the exact fix brief - one finding, specific implementation steps, verification test, 30-day re-audit - it's $97:
-https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
+https://buy.stripe.com/9B63cvc2o7YMcid2Nk43S0j
 
 The social proof fix takes under an hour.
 
@@ -45,7 +45,7 @@ Two findings:
 Full audit: https://nebulacomponents.com/audit
 
 Fix brief (803KB → under 200KB with implementation steps + verification): $97
-https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
+https://buy.stripe.com/9B63cvc2o7YMcid2Nk43S0j
 
 Mike
 Nebula Components"""
@@ -62,7 +62,7 @@ Note: server-side or tag-manager-loaded tracking could explain the absence. But 
 Full audit: https://nebulacomponents.com/audit
 
 If you want us to verify live (DevTools network trace) and write the exact implementation brief: $97
-https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
+https://buy.stripe.com/9B63cvc2o7YMcid2Nk43S0j
 
 Mike
 Nebula Components"""
@@ -81,7 +81,7 @@ Fix: rewrite to 120-155 chars, ending with a complete value statement.
 Full audit: https://nebulacomponents.com/audit
 
 Fix brief (exact rewrite + implementation + 30-day re-audit): $97
-https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
+https://buy.stripe.com/9B63cvc2o7YMcid2Nk43S0j
 
 Mike
 Nebula Components"""
