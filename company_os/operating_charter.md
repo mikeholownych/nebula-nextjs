@@ -67,16 +67,69 @@ Scaling requires an attributable purchase signal and a verified delivery path. R
 
 ## Weekly Operating Review
 
-Run one evidence review each week. The agenda is:
+The review focuses on:
 
-1. What changed in attributable revenue?
-2. Which experiment ran against real prospects?
-3. Which purchase events were attributable?
-4. Which buyer-path step blocked payment or delivery?
-5. Which issue needs IDS treatment?
-6. What one experiment, fix, stop, or scale order follows?
+1. Attributable revenue.
+2. Experiments run against real prospects.
+3. Purchase attribution.
+4. Buyer-path blockers.
+5. Issues requiring resolution.
+6. The next test, fix, stop, or scale order.
 
-The review must not become a status meeting. Activity without revenue or learning is recorded as a risk, not progress.
+It is not a status meeting. Activity without revenue or learning is recorded as a risk, not progress.
+
+## Operating Cadence
+
+### Daily evidence sync
+
+- Check revenue and payment events.
+- Check warm replies and overdue buyer-path actions.
+- Check new trigger-qualified prospects.
+- Check experiment sends and attribution identifiers.
+- Name one blocker if the buyer path is broken.
+
+### Weekly execution review
+
+- Review experiment receipts and purchase attribution.
+- Review agent handoffs and unresolved issues.
+- Compare diagnostic signals with the primary purchase metric.
+- Close, revise, or continue experiments according to their predeclared rules.
+- Publish one CEO directive with one bottleneck and one next order per function.
+
+### Monthly operating-system review
+
+- Remove stale procedures and duplicate sources of truth.
+- Review whether each agent still has one clear owner and measurable outcome.
+- Review failed sends, bounced contacts, payment-path incidents, and delivery failures.
+- Update the company brain only when live evidence changes the business state.
+- Do not add meetings, software, or process unless a recurring failure justifies it.
+
+### Quarterly reset
+
+- Reconfirm the single commercial Rock.
+- Review whether the offer, ICP, and acquisition channels still match live evidence.
+- Archive experiments that reached a stop condition.
+- Promote only purchase-backed findings into repeatable process.
+- Set the next quarter's Rock only after reviewing revenue and customer outcomes.
+
+## Feedback and Learning Rules
+
+- Feedback must name the observed behavior, evidence, impact, and proposed correction.
+- Agents are evaluated on outcomes and evidence quality, not task volume.
+- A failed experiment is useful only when the observation and conclusion are recorded.
+- A positive opinion is not customer validation.
+- A process is not considered reliable until it has been exercised successfully and verified against live state.
+- Any agent or cron that reports completion without a receipt is treated as unverified.
+
+## Culture in Practice
+
+Nebula's culture is defined by repeated decisions:
+
+- We stop activity that cannot connect to a buyer or a learning objective.
+- We do not defend a tactic because it is intellectually appealing.
+- We correct stale assumptions when live evidence changes.
+- We prefer a small real test over a large planning exercise.
+- We make uncertainty visible instead of hiding it behind dashboards or language.
 
 ## IDS Issue Log
 
