@@ -26,6 +26,52 @@ Nebula competes through focused differentiation:
 
 This is a strategic hypothesis, not a proven competitive advantage. Competitive advantage is not declared until buyers pay and outcomes are documented.
 
+## SWOT
+
+### Strengths
+
+- Working audit and results delivery path
+- Existing Stripe, CRM, attribution, and customer-ledger infrastructure
+- Trigger-aware lead discovery and evidence-gated experiment control
+- Custom sender with verified test deliverability
+- Ability to deliver the first Fix Pack manually without new product work
+
+### Weaknesses
+
+- $0 revenue and no paying customer
+- No customer outcome, case study, or before-and-after proof
+- Current outbound test is still small and unbalanced across variants
+- The strongest acquisition signal has not yet been connected to a purchase
+- Lead-source quality and contact verification are not uniformly reliable
+
+### Opportunities
+
+- Founders publicly reporting wasted ad spend or zero conversions
+- Thread-first diagnostic responses where pain is already visible
+- Concierge Fix Pack delivery to learn what buyers actually value
+- Media-buyer, agency, and educator referral paths
+- Cohort testing of audit, CTA, and purchase-flow friction
+
+### Threats
+
+- Email bounces, spam placement, and sender reputation damage
+- Misclassifying launch activity as paid-traffic pain
+- Generic audit competitors and low trust before the first customer
+- Channel restrictions, including Reddit account suppression
+- Increasing activity without improving purchase conversion
+
+## Resource Allocation
+
+Until the first attributable purchase:
+
+- **Growth resources**: prioritize bounded, verified acquisition experiments.
+- **Support resources**: prioritize warm replies, checkout handoff, and manual delivery readiness.
+- **Ops-Finance resources**: prioritize payment-path verification and attribution integrity.
+- **Market resources**: prioritize high-intent trigger discovery, not broad list growth.
+- **CEO resources**: remove low-impact initiatives and keep one commercial initiative active.
+
+Retention, expansion, and long-term lifecycle automation remain deferred until a first customer exists. They are important later, but they cannot solve the current acquisition-to-payment constraint.
+
 ## Shared Aspiration
 
 First, produce and fulfill one attributable Fix Pack purchase. Then determine whether the same trigger, offer, and delivery path can repeat.
