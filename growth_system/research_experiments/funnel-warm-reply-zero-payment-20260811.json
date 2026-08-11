@@ -1,0 +1,18 @@
+{
+  "approval_required_for": [
+    "external_send",
+    "publication",
+    "spend",
+    "production_code"
+  ],
+  "expected_metric": "warm reply to checkout handoff completion, then purchase rate",
+  "hypothesis": "The next experiment should verify the warm-reply to checkout handoff before increasing acquisition volume.",
+  "observed_problem": "The current CEO evidence records one warm reply and zero real payments, so interest has not become revenue.",
+  "research_id": "funnel-warm-reply-zero-payment-20260811",
+  "smallest_safe_change": "Create a read-only experiment brief that measures warm-reply to checkout handoff completion before any new volume test.",
+  "source_url": "file:///home/mike/nebula/ledgers/latest_ceo_directive.json",
+  "status": "proposed",
+  "stop_condition": "Stop and repair the handoff if any qualified warm reply lacks a recorded checkout path or owner.",
+  "validation_window": "7 days or the next 3 qualified warm replies",
+  "why_nebula": "This is direct Nebula funnel evidence and matches the current audit-to-payment bottleneck."
+}
