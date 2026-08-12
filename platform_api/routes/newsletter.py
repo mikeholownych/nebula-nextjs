@@ -18,6 +18,10 @@ from platform_api.services.crm import (
 
 router = APIRouter()
 
+BUSINESS_NAME = "Nebula Components"
+BUSINESS_ADDRESS = "Nebula Components, 66 Sonneck Square, Scarborough, ON M1E 1A9"
+UNSUBSCRIBE_URL = "https://nebulacomponents.com/unsubscribe"
+
 
 class NewsletterSignupRequest(BaseModel):
     email: EmailStr
@@ -46,14 +50,19 @@ async def subscribe(req: NewsletterSignupRequest):
     )
     token = row["confirmation_token"]
     confirm_url = f"https://nebulacomponents.com/api/newsletter/confirm?token={quote(token)}"
+    unsubscribe_url = f"{UNSUBSCRIBE_URL}?email={quote(email)}"
     text = f"""Confirm your Nebula Components newsletter subscription
 
-Click to confirm your subscription:
+You requested the Nebula Components newsletter from our website. Confirm your subscription here:
 {confirm_url}
 
-If you did not request this, ignore this email.
+If you did not request this email, ignore it. You will not receive newsletter issues unless you confirm.
 
-Nebula Components
+You can unsubscribe at any time:
+{unsubscribe_url}
+
+{BUSINESS_NAME}
+{BUSINESS_ADDRESS}
 """
     html = f"""
     <html><body style="margin:0;background:#071014;color:#e8f1f2;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
@@ -63,8 +72,9 @@ Nebula Components
         <p style="font-size:17px;line-height:1.6;color:#b8c9cc;">Confirm your subscription and get the next practical finding for founders spending money on traffic that does not convert.</p>
         <p style="margin:32px 0;"><a href="{confirm_url}" style="display:inline-block;background:#5eead4;color:#071014;padding:15px 22px;border-radius:8px;text-decoration:none;font-weight:700;">Confirm my subscription</a></p>
         <p style="font-size:13px;line-height:1.5;color:#7f989d;">If the button does not work, copy and paste this URL into your browser:<br><a href="{confirm_url}" style="color:#5eead4;word-break:break-all;">{confirm_url}</a></p>
+        <p style="font-size:13px;line-height:1.5;color:#7f989d;">You requested this newsletter from our website. If you did not request it, ignore this email. <a href="{unsubscribe_url}" style="color:#5eead4;">Unsubscribe</a></p>
         <hr style="border:0;border-top:1px solid #203238;margin:32px 0;">
-        <p style="font-size:12px;color:#688087;">Nebula Components<br><a href="https://nebulacomponents.com" style="color:#5eead4;">nebulacomponents.com</a></p>
+        <p style="font-size:12px;color:#688087;">{BUSINESS_NAME}<br>{BUSINESS_ADDRESS}<br><a href="https://nebulacomponents.com" style="color:#5eead4;">nebulacomponents.com</a></p>
       </div>
     </body></html>
     """
@@ -76,6 +86,10 @@ Nebula Components
             "Confirm your Nebula newsletter subscription",
             text=text,
             html=html,
+            headers={
+                "List-Unsubscribe": f"<{unsubscribe_url}>",
+                "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+            },
             client_id=f"txn:newsletter-confirm:{email}:{hashlib.sha256(token.encode()).hexdigest()[:24]}",
         )
 
