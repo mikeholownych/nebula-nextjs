@@ -1,6 +1,7 @@
 """FastAPI application entry point."""
 
 from contextlib import asynccontextmanager
+import os
 
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.exceptions import RequestValidationError
@@ -191,7 +192,13 @@ async def health_check(request: Request) -> dict:
     request_id = request.headers.get("X-Request-ID") or (
         request.state.request_id if hasattr(request.state, "request_id") else None
     )
-    return {"status": "ok", "request_id": request_id}
+    return {"status": "ok", "revision": os.getenv("NEBULA_BUILD_REVISION", "unknown"), "request_id": request_id}
+
+
+@app.get("/build-info", response_model=dict, status_code=status.HTTP_200_OK)
+async def build_info() -> dict:
+    """Expose immutable deployed build identifier for validation."""
+    return {"revision": os.getenv("NEBULA_BUILD_REVISION", "unknown")}
 
 
 @app.post("/healthz", response_model=dict, status_code=status.HTTP_200_OK)

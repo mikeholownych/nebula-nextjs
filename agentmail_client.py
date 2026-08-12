@@ -212,6 +212,7 @@ class AgentMailClient:
         client_id: Optional[str] = None,
         labels: Optional[list] = None,
         headers: Optional[dict[str, str]] = None,
+        reply_to: Optional[str] = None,
     ) -> dict:
         if len(to) != 1 or not isinstance(to[0], str):
             return {"_error": "release_blocked", "_reason": "single_recipient_required"}
@@ -256,6 +257,8 @@ class AgentMailClient:
             data["labels"] = labels
         if headers:
             data["headers"] = headers
+        if reply_to:
+            data["reply_to"] = reply_to
         result = self.__transport("POST", f"/inboxes/{self.inbox}/messages/send", data)
         return self._complete_delivery(client_id, result)
 
@@ -290,6 +293,7 @@ class AgentMailClient:
         client_id: Optional[str] = None,
         labels: Optional[list] = None,
         headers: Optional[dict[str, str]] = None,
+        reply_to: Optional[str] = None,
     ) -> dict:
         """Submit a newsletter only after the PostgreSQL release authority."""
         return self.__send_scoped(
@@ -300,6 +304,7 @@ class AgentMailClient:
             client_id=client_id,
             labels=labels,
             headers=headers,
+            reply_to=reply_to,
             purpose=DeliveryPurpose.NEWSLETTER,
         )
 
