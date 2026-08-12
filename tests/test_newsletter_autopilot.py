@@ -92,3 +92,30 @@ def test_html_render_contains_preheader_and_linked_urls():
     rendered = autopilot.render_html(issue)
     assert issue["preheader"] in rendered
     assert "<a href='https://nebulacomponents.com/audit" in rendered
+
+
+def test_release_metadata_records_source_freshness_and_rights():
+    research = {
+        "source_file": "https://nebulacomponents.com/teardowns/basecamp",
+        "source_url": "https://nebulacomponents.com/teardowns/basecamp",
+        "finding": "The first viewport hides the primary CTA.",
+        "track": "above-fold-clarity",
+        "headline": "Can visitors find the next action?",
+        "content_source": "production_teardown_fallback",
+        "rights_status": "publicly_observable_generalized_finding",
+        "researched_at": "2026-08-12T00:00:00+00:00",
+    }
+    issue = autopilot.edit(autopilot.draft(research))
+    metadata = autopilot.release_metadata(issue, [])
+    assert metadata["content_source"] == "production_teardown_fallback"
+    assert metadata["freshness_validation"]["passed"] is True
+    assert metadata["rights_validation_passed"] is True
+    assert metadata["release_status"] == "APPROVED_FOR_SEND"
+
+
+def test_semantic_duplicate_is_high_risk():
+    issue = {"issue_key": "new", "finding": "CTA clarity for visitors", "track": "cta-clarity", "text": "one"}
+    prior = {"issue_key": "old", "finding": "CTA clarity for visitors", "track": "cta-clarity", "text": "one", "content_fingerprint": autopilot.content_fingerprint(issue)}
+    risk, similar = autopilot.duplicate_risk(issue, [prior])
+    assert risk == "high"
+    assert similar == ["old"]
