@@ -19,9 +19,9 @@ def test_draft_is_valid_and_has_repair_structure():
     }
     issue = autopilot.edit(autopilot.draft(research))
     assert autopilot.validate(issue) == []
-    assert "Why it matters" in issue["text"]
-    assert "The repair" in issue["text"]
-    assert "Verify it" in issue["text"]
+    assert "The page condition is worth looking at" in issue["text"]
+    assert "decide what success means" in issue["text"]
+    assert "See what Nebula finds" in issue["text"]
     assert "Unsubscribe" in issue["text"]
 
 
@@ -119,3 +119,10 @@ def test_semantic_duplicate_is_high_risk():
     risk, similar = autopilot.duplicate_risk(issue, [prior])
     assert risk == "high"
     assert similar == ["old"]
+
+
+def test_human_editor_review_rejects_boilerplate_and_filler():
+    issue = {"text": "Why it matters\n\nHere's the thing.\n\nThe bottom line?\n\nUnlock growth."}
+    review = autopilot.human_editor_review(issue)
+    assert review["passed"] is False
+    assert review["issues"]

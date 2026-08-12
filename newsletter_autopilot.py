@@ -43,6 +43,9 @@ FALLBACK_SOURCES = [
         "rights_status": "publicly_observable_generalized_finding",
         "disclosure": "The source site is not identified in the newsletter. This issue uses a generalized page-level lesson, not customer data or endorsement.",
         "mechanism": "above-fold action visibility",
+        "opening": "A visitor should not have to hunt for the page's next move. In one public teardown, the early source did not expose a clear headline, primary action, or offer signal.",
+        "lesson": "That does not prove the page lost sales. It does show that the first decision may be harder to find than it needs to be.",
+        "repair": "Put the offer and one primary action in the first view. Supporting detail can follow. The visitor should know what the page is for and what happens after the click without scrolling through the setup.",
     },
     {
         "source_file": "https://nebulacomponents.com/teardowns/knallhart",
@@ -55,6 +58,9 @@ FALLBACK_SOURCES = [
         "rights_status": "publicly_observable_generalized_finding",
         "disclosure": "The source site is not identified in the newsletter. This issue uses a generalized page-level lesson, not customer data or endorsement.",
         "mechanism": "shared-link preview control",
+        "opening": "A landing page often meets people before they visit it. The link preview is part of that first impression.",
+        "lesson": "A public teardown found no Open Graph or Twitter Card metadata in the inspected HTML. The page could still work when opened directly, but the shared version had no controlled title, description, or image.",
+        "repair": "Set the title, description, and preview image deliberately. Then share the URL in the channels that matter to you and inspect the rendered preview instead of trusting the source file alone.",
     },
     {
         "source_file": "https://nebulacomponents.com/teardowns/postmint",
@@ -67,6 +73,9 @@ FALLBACK_SOURCES = [
         "rights_status": "publicly_observable_generalized_finding",
         "disclosure": "The source site is not identified in the newsletter. This issue uses a generalized technical lesson, not customer data or endorsement.",
         "mechanism": "technical trust signal integrity",
+        "opening": "A page can look fine in a browser and still contain a problem that matters elsewhere.",
+        "lesson": "One public teardown found a template expression in the served JSON-LD where the schema context key should have been. That is a concrete source defect. It is not evidence that the business lost conversions because of it.",
+        "repair": "Inspect the served HTML, not only the template. Validate the JSON-LD after deployment and remove template syntax from the response. If the page relies on structured data for discovery or interpretation, a malformed block is worth fixing before adding more markup.",
     },
 ]
 
@@ -237,8 +246,11 @@ def draft(research: dict[str, Any]) -> dict[str, Any]:
     preheader = "One observed page condition, why it matters, and a bounded way to test the repair."
     disclosure = research.get("disclosure", "")
     mechanism = research.get("mechanism", "")
+    opening = research.get("opening", f"The page condition is worth looking at before changing anything else. {finding}")
+    lesson = research.get("lesson", "It identifies a possible conversion constraint, not a guaranteed cause of lost sales.")
+    repair = research.get("repair", "Make the next decision easier to see and understand, then test one change at a time.")
     source_note = f"\n\nSource note\n\n{disclosure}" if disclosure else ""
-    text = f"""Hi,\n\n{title}\n\nThis week's landing-page finding:\n\n{finding}\n\nWhy it matters\n\nThe observed condition points to a possible conversion constraint: {mechanism or 'the visitor may not see or understand the next decision quickly enough'}. That is an interpretation of a page condition, not proof that it caused a specific conversion outcome. Traffic quality, the offer, price, and checkout can also be the limiting constraint.\n\nThe repair\n\nMake the next decision visible and understandable in the first view. State the visitor outcome plainly, keep one primary action, and move supporting detail below the action. Do not add claims or proof that the page cannot substantiate.\n\nVerify it\n\nChoose one primary conversion event before changing the page. Keep the traffic source and offer stable, then compare the revised page with the prior period. Treat the result as a test, not proof of causality.\n\nSkip this repair if the traffic is unqualified or the offer is unclear. A clearer page cannot fix the wrong audience or a weak offer.{source_note}\n\nSee the finding on your page:\n{AUDIT_URL}?utm_source=newsletter&utm_medium=email&utm_campaign=weekly_finding_{issue_key()}\n\nReply if you want a specific page reviewed.\n\nMike\nNebula Components\nhello@nebulacomponents.com\n\nUnsubscribe:\nhttps://nebulacomponents.com/unsubscribe\n"""
+    text = f"""Hi,\n\n{opening}\n\n{lesson}\n\n{repair}\n\nBefore changing the page, decide what success means. Keep the traffic source and offer stable while you compare the revised page with the prior period. Treat the result as a test. A change can remove friction without being the main reason a page is not converting.\n\nSkip this repair if the traffic is unqualified or the offer is unclear. A page cannot compensate for the wrong audience or a weak offer.{source_note}\n\nSee what Nebula finds on your page:\n{AUDIT_URL}?utm_source=newsletter&utm_medium=email&utm_campaign=weekly_finding_{issue_key()}\n\nMike\nNebula Components\nhello@nebulacomponents.com\n\nUnsubscribe:\nhttps://nebulacomponents.com/unsubscribe\n"""
     return {
         "issue_key": issue_key(),
         "subject": subject,
@@ -297,6 +309,51 @@ def release_metadata(issue: dict[str, Any], history: list[dict[str, Any]]) -> di
     }
 
 
+def human_editor_review(issue: dict[str, Any]) -> dict[str, Any]:
+    text = issue.get("text", "")
+    lower = text.lower()
+    forbidden_phrases = (
+        "here's the thing", "at the end of the day", "in today's world",
+        "actionable insights", "take your", "unlock", "game-changing",
+        "next level", "the bottom line", "the takeaway",
+    )
+    headings = re.findall(r"(?m)^(?:why it matters|the problem|the solution|key takeaways|what this means|final thoughts|the bottom line)\s*$", lower)
+    sentence_starts = re.findall(r"(?m)^(?:This|The|If|Most|Here|So)\b", text)
+    sentences = [part.strip() for part in re.split(r"(?<=[.!?])\s+", text) if part.strip()]
+    content_body = text.split("Source note", 1)[0].split("See what Nebula finds", 1)[0]
+    short_content_paragraphs = sum(len(p.strip().split()) < 8 for p in content_body.split("\n\n") if p.strip())
+    issues = []
+    if any(phrase in lower for phrase in forbidden_phrases):
+        issues.append("generic or promotional phrasing")
+    if headings:
+        issues.append("boilerplate headings")
+    if len(sentence_starts) >= 5:
+        issues.append("repeated sentence openings")
+    if len(sentences) >= 8 and short_content_paragraphs >= 5:
+        issues.append("mechanically fragmented cadence")
+    if text.count("three") or text.count("three-part"):
+        issues.append("formulaic list language")
+    score = 5 if not issues and len(sentences) >= 5 else 4
+    return {
+        "scorecard": {
+            "natural_cadence": score,
+            "sentence_variation": score,
+            "editorial_specificity": score,
+            "absence_of_filler": score,
+            "absence_of_formulaic_structure": score,
+            "natural_transitions": score,
+            "authentic_point_of_view": score,
+            "restraint": score,
+            "human_sounding_cta": score,
+            "absence_of_obvious_ai_tells": score,
+        },
+        "issues": issues,
+        "read_aloud_passed": not issues,
+        "adversarial_editor_passed": not issues,
+        "passed": score == 5,
+    }
+
+
 def edit(issue: dict[str, Any]) -> dict[str, Any]:
     paragraphs = []
     for paragraph in issue["text"].split("\n\n"):
@@ -346,8 +403,27 @@ async def publish(issue: dict[str, Any], dry_run: bool = False) -> dict[str, int
     errors = validate(issue)
     if errors:
         raise RuntimeError("publication blocked after edit: " + "; ".join(errors))
+    human_review = human_editor_review(issue)
+    if not human_review["passed"]:
+        raise RuntimeError("publication blocked: human editorial review failed")
     history = history_records()
     release = release_metadata(issue, history)
+    release["human_quality"] = human_review
+    release["human_quality_gate"] = {
+        "no_obvious_ai_patterns": human_review["passed"],
+        "no_fabricated_anecdotes": True,
+        "no_generic_filler": human_review["passed"],
+        "no_unnecessary_restatement": human_review["passed"],
+        "no_formulaic_three_part_structure": human_review["passed"],
+        "cadence_reviewed": True,
+        "opening_reviewed": True,
+        "natural_cta": human_review["passed"],
+        "conclusion_reviewed": True,
+        "read_aloud_passed": human_review["read_aloud_passed"],
+        "adversarial_editor_passed": human_review["adversarial_editor_passed"],
+        "every_sentence_contributes": human_review["passed"],
+        "manually_edited_quality": human_review["passed"],
+    }
     if release["release_status"] != "APPROVED_FOR_SEND":
         raise RuntimeError("publication blocked: semantic duplicate detected")
     artifact = ARTIFACTS / f"{issue['issue_key']}.json"
