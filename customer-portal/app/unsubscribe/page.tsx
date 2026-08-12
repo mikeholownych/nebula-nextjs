@@ -12,18 +12,19 @@ export default function UnsubscribePage() {
   const [buttonVisible, setButtonVisible] = useState(true)
   const [statusText, setStatusText] = useState('')
   const [statusClass, setStatusClass] = useState('')
+  const [email, setEmail] = useState('')
   const [finePrintHtml, setFinePrintHtml] = useState(
     `Changed your mind? <a href="/" className="text-accent hover:underline">Run a free audit</a> at any time.<br/>
-     If you believe this was sent in error, <span className="text-accent">ops{'\u0040'}launchcrate.io</span>.`
+     If you believe this was sent in error, contact hello@nebulacomponents.com.`,
   )
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
-    const email = params.get('email') || ''
-    // Note: email state variable removed (unused)
+    const emailFromUrl = params.get('email') || ''
 
-    if (email && email.includes('@')) {
+    if (emailFromUrl && emailFromUrl.includes('@')) {
       // Auto-process when email is in URL
-      setDescription(`Processing your unsubscribe request for ${email}...`)
+      setEmail(emailFromUrl)
+      setDescription(`Processing your unsubscribe request for ${emailFromUrl}...`)
       setButtonVisible(false)
       setStatusText('Processing...')
       setStatusClass('status-processing')
@@ -31,7 +32,7 @@ export default function UnsubscribePage() {
       fetch(`${NEWSLETTER_API}/api/newsletter/unsubscribe`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: emailFromUrl }),
       })
         .then((r) => r.json())
         .then((data) => {
@@ -39,7 +40,7 @@ export default function UnsubscribePage() {
             setIcon('✅')
             setDescription('You have been successfully unsubscribed from Nebula Components email communications.')
             setStatusClass('status-done')
-            setStatusText(`Unsubscribed: ${email}`)
+            setStatusText(`Unsubscribed: ${emailFromUrl}`)
             setFinePrintHtml(
               `If this was a mistake, you can <a href="/" className="text-accent hover:underline">run another free audit</a> at any time - we'll only send what you request.`
             )
@@ -55,7 +56,7 @@ export default function UnsubscribePage() {
           setButtonVisible(true)
           setButtonText('Try Again')
           setFinePrintHtml(
-            `Email us at <span className="text-accent">ops{'\u0040'}launchcrate.io</span> to unsubscribe.`
+            `Email us at hello{'\u0040'}nebulacomponents.com to unsubscribe.`
           )
         })
     } else {
@@ -65,9 +66,14 @@ export default function UnsubscribePage() {
     }
   }, [])
 
-  const handleUnsub = () => {
-    const emailInput = prompt('Enter your email address:')
-    if (!emailInput || !emailInput.includes('@')) return
+  const handleUnsub = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const emailInput = email.trim()
+    if (!emailInput || !emailInput.includes('@')) {
+      setStatusClass('status-error')
+      setStatusText('Enter a valid email address.')
+      return
+    }
 
     setButtonDisabled(true)
     setButtonText('Processing...')
@@ -107,13 +113,29 @@ export default function UnsubscribePage() {
         <p className="text-fg-muted mb-6">{description}</p>
 
         {buttonVisible && (
-          <button
-            onClick={handleUnsub}
-            disabled={buttonDisabled}
-            className="inline-block bg-accent text-bg font-semibold py-3.5 px-8 rounded-xl border-none cursor-pointer text-base transition-all hover:bg-accent-light disabled:opacity-50 disabled:cursor-default"
-          >
-            {buttonText}
-          </button>
+          <form onSubmit={handleUnsub} className="mx-auto max-w-md text-left">
+            <label htmlFor="unsubscribe-email" className="mb-2 block text-sm font-semibold text-fg">
+              Email address
+            </label>
+            <input
+              id="unsubscribe-email"
+              name="email"
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="you@company.com"
+              autoComplete="email"
+              required
+              className="mb-3 w-full rounded-xl border border-fg-muted/30 bg-bg px-4 py-3 text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none"
+            />
+            <button
+              type="submit"
+              disabled={buttonDisabled}
+              className="w-full rounded-xl border-none bg-accent px-8 py-3.5 text-base font-semibold text-bg transition-all hover:bg-accent-light disabled:cursor-default disabled:opacity-50"
+            >
+              {buttonText}
+            </button>
+          </form>
         )}
 
         {statusText && (
