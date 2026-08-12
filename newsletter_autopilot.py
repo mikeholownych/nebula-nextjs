@@ -448,7 +448,7 @@ def edit(issue: dict[str, Any]) -> dict[str, Any]:
 
 def compliance_text(recipient: str) -> str:
     from urllib.parse import quote
-    url = f"{UNSUBSCRIBE_PAGE_URL}?email={quote(recipient, safe='')}"
+    url = "{{UNSUBSCRIBE_URL}}" if recipient.startswith("{{") else f"{UNSUBSCRIBE_PAGE_URL}?email={quote(recipient, safe='')}"
     return (f"\n\n---\nYou received this email because you confirmed a Nebula Components newsletter subscription.\n"
             f"Unsubscribe: {url}\n\n{BUSINESS_NAME}\n{BUSINESS_ADDRESS}\n")
 
@@ -491,81 +491,47 @@ async def ensure_schema(conn: Any) -> None:
 
 
 async def publish(issue: dict[str, Any], dry_run: bool = False) -> dict[str, int | str]:
+    """Create an immutable release artifact and delegate submission to one authority."""
+    from newsletter_release_service import create_release_payload, create_release, send_release
+
     errors = validate(issue)
     if errors:
         raise RuntimeError("publication blocked: " + "; ".join(errors))
     issue = edit(issue)
-    errors = validate(issue)
-    if errors:
-        raise RuntimeError("publication blocked after edit: " + "; ".join(errors))
     issue, human_review = iterate_editorial_review(issue)
     errors = validate(issue)
     if errors:
         raise RuntimeError("publication blocked after editorial revision: " + "; ".join(errors))
     history = history_records()
-    release = release_metadata(issue, history)
-    release["human_quality"] = human_review
-    release["human_quality_gate"] = {
-        "no_obvious_ai_patterns": human_review["passed"],
-        "no_fabricated_anecdotes": True,
-        "no_generic_filler": human_review["passed"],
-        "no_unnecessary_restatement": human_review["passed"],
-        "no_formulaic_three_part_structure": human_review["passed"],
-        "cadence_reviewed": True,
-        "opening_reviewed": True,
-        "natural_cta": human_review["passed"],
-        "conclusion_reviewed": True,
-        "read_aloud_passed": human_review["read_aloud_passed"],
-        "adversarial_editor_passed": human_review["adversarial_editor_passed"],
-        "every_sentence_contributes": human_review["passed"],
-        "manually_edited_quality": human_review["passed"],
-    }
-    if release["release_status"] != "APPROVED_FOR_SEND":
-        raise RuntimeError("publication blocked: semantic duplicate detected")
+    metadata = release_metadata(issue, history)
+    metadata["human_quality"] = human_review
+    metadata["content_status"] = "READY"
+    approved_html = render_html(issue, "{{RECIPIENT_EMAIL}}")
+    approved_text = issue["text"] + compliance_text("{{RECIPIENT_EMAIL}}")
+    release = create_release_payload(
+        issue_id=issue["issue_key"], campaign_id=issue["issue_key"],
+        subject=issue["subject"], preheader=issue.get("preheader", ""),
+        approved_html=approved_html, approved_text=approved_text,
+        template_version="newsletter-autopilot-v2",
+        source_revision=str(issue.get("research", {}).get("source_file", "unknown")),
+        build_revision=os.environ.get("NEBULA_BUILD_REVISION", "unknown"),
+        release_metadata=metadata,
+    )
     artifact = ARTIFACTS / f"{issue['issue_key']}.json"
     ARTIFACTS.mkdir(parents=True, exist_ok=True)
     artifact.write_text(json.dumps({**issue, "release": release, "validation_errors": []}, indent=2, ensure_ascii=False))
     if dry_run:
-        return {"status": "dry_run", "recipient_count": 0, "sent_count": 0, "failed_count": 0, "artifact": str(artifact), "release_status": "APPROVED_FOR_SEND"}
-
+        return {"status": "dry_run", "recipient_count": 0, "sent_count": 0, "failed_count": 0, "artifact": str(artifact), "release_status": "APPROVED"}
     pool = await asyncpg.create_pool(os.getenv("AUDIT_DATABASE_URL", "postgresql://postgres@/nebula_audit?host=/var/run/postgresql&port=5433"), min_size=1, max_size=3)
     try:
         async with pool.acquire() as conn:
-            await ensure_schema(conn)
-            existing = await conn.fetchrow("SELECT status FROM newsletter_issues WHERE issue_key=$1", issue["issue_key"])
-            if existing:
-                return {"status": "already_processed", "recipient_count": 0, "sent_count": 0, "failed_count": 0, "artifact": str(artifact)}
-            rows = await conn.fetch("SELECT email FROM newsletter_subscribers WHERE unsubscribed_at IS NULL AND is_confirmed = TRUE AND COALESCE(bounced_at, NULL) IS NULL AND COALESCE(complained_at, NULL) IS NULL ORDER BY subscribed_at")
-            await conn.execute("INSERT INTO newsletter_issues(issue_key,subject,finding,track,research,draft_text,status) VALUES($1,$2,$3,$4,$5,$6,'publishing')", issue["issue_key"], issue["subject"], issue["finding"], issue["track"], json.dumps(issue["research"]), issue["text"])
-        from agentmail_client import AgentMailClient
-        client = AgentMailClient(inbox=SENDER)
-        sent = failed = 0
-        for row in rows:
-            recipient = row["email"]
-            client_id = f"newsletter:{issue['issue_key']}:{hashlib.sha256(recipient.encode()).hexdigest()[:16]}"
-            text = issue["text"] + compliance_text(recipient)
-            headers = {
-                "List-Unsubscribe": f"<{API_BASE_URL}/api/newsletter/unsubscribe-one-click?email={__import__('urllib.parse', fromlist=['quote']).quote(recipient, safe='')}>",
-                "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
-            }
-            result = client.send([recipient], issue["subject"], text=text, html=render_html(issue, recipient), client_id=client_id, labels=["newsletter", issue["track"]], headers=headers)
-            if result.get("_error"):
-                failed += 1
-            else:
-                sent += 1
-                async with pool.acquire() as conn:
-                    await conn.execute("UPDATE newsletter_subscribers SET last_email_sent_at=now(), emails_sent_count=emails_sent_count+1 WHERE email=$1", recipient)
-        async with pool.acquire() as conn:
-            await conn.execute("UPDATE newsletter_issues SET status='published', published_at=now(), recipient_count=$2, sent_count=$3, failed_count=$4 WHERE issue_key=$1", issue["issue_key"], len(rows), sent, failed)
-        if failed or sent != len(rows):
-            raise RuntimeError("publication receipt incomplete")
-        receipt = {**issue, "release": release, "published_at": now(), "recipient_count": len(rows), "sent_count": sent, "failed_count": failed}
+            persisted = await create_release(conn, release)
+        result = await send_release(persisted, dry_run=False)
         with HISTORY.open("a") as fh:
-            fh.write(json.dumps(receipt, ensure_ascii=False) + "\n")
-        return {"status": "published", "recipient_count": len(rows), "sent_count": sent, "failed_count": failed, "artifact": str(artifact), "release_status": "APPROVED_FOR_SEND"}
+            fh.write(json.dumps({**issue, "release": release, "published_at": now(), "result": result}, ensure_ascii=False) + "\n")
+        return {"status": result["status"], "recipient_count": result.get("sent", 0) + result.get("blocked", 0), "sent_count": result.get("sent", 0), "failed_count": result.get("blocked", 0), "artifact": str(artifact), "release_status": "SENT" if result["status"] == "sent" else "PARTIAL"}
     finally:
         await pool.close()
-
 
 def main() -> int:
     parser = argparse.ArgumentParser()
