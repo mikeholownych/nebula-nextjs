@@ -62,7 +62,7 @@ Nebula Components
             [email],
             "Confirm your Nebula newsletter subscription",
             text=text,
-            client_id=f"newsletter-confirm:{email}:{hashlib.sha256(token.encode()).hexdigest()[:24]}",
+            client_id=f"txn:newsletter-confirm:{email}:{hashlib.sha256(token.encode()).hexdigest()[:24]}",
         )
 
     result = await asyncio.to_thread(_send_confirmation)
