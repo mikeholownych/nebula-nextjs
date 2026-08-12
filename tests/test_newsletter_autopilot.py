@@ -126,3 +126,19 @@ def test_human_editor_review_rejects_boilerplate_and_filler():
     review = autopilot.human_editor_review(issue)
     assert review["passed"] is False
     assert review["issues"]
+
+
+def test_editorial_review_iterates_weak_copy_until_it_passes():
+    research = {
+        "source_file": "/tmp/source.json",
+        "source_url": "https://example.com/source",
+        "finding": "Visitors cannot connect the headline to the promised outcome.",
+        "track": "headline-clarity",
+        "headline": "The headline leak",
+    }
+    issue = autopilot.draft(research)
+    issue["text"] = "Here's the thing.\n\nWhy it matters\n\nUnlock growth.\n\n" + issue["text"]
+    issue, review = autopilot.iterate_editorial_review(issue)
+    assert review["passed"] is True
+    assert issue["editorial_revision_count"] >= 1
+    assert "Here's the thing" not in issue["text"]
