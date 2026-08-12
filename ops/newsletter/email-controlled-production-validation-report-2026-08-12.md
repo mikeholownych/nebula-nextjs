@@ -7,7 +7,7 @@ Scope: final controlled production validation. No real production subscriber was
 
 **NOT PRODUCTION READY**
 
-The implementation now matches AgentMail's documented Svix webhook contract and the deployed API route is live. A controlled message was accepted and delivery state was recorded, and unsubscribe suppression was proven. The P0 gate remains failed because raw received-message headers and MIME were not retrieved, the controlled run submitted two synthetic recipients rather than exactly one, and safe hard-bounce and complaint simulations were not available.
+The implementation now matches AgentMail's documented Svix webhook contract and the deployed API route is live. A one-recipient controlled message was accepted, raw provider message MIME was retrieved, Reply-To and multipart structure were verified, unsubscribe suppression was proven, and signed bounce and complaint suppression paths were exercised. The P0 gate remains failed because the AgentMail raw-message endpoint returns the outbound `.eml`, not a recipient-side received copy. It therefore contains no Authentication-Results, DKIM-Signature, or Return-Path. Provider-generated bounce and complaint delivery were not triggered, only the verified signed endpoint paths were exercised.
 
 The newsletter schedule remains disabled.
 
@@ -23,6 +23,7 @@ The newsletter schedule remains disabled.
 - Public API evidence: `GET https://api.nebulacomponents.shop/openapi.json` returned HTTP 200 and exposed `/api/newsletter/provider-events`.
 - Public event endpoint evidence: missing and invalid signatures returned HTTP 401.
 - Public revision header: not exposed, so an independently verifiable platform revision identifier is unavailable.
+- Public build endpoint: `GET https://api.nebulacomponents.shop/build-info` returned revision `c8b24c569ff1af42c70be6141da42551ea4c0dfd`.
 - DB: `nebula_audit` on PostgreSQL port 5433 contains the release authority tables and transition guard. This proves the active host schema, not a separately managed remote database.
 - Scheduler: `nebula-newsletter-autopilot` paused during validation. `weekly-roundup-email` was already paused.
 
@@ -45,39 +46,37 @@ The endpoint now uses the official Svix verifier and raw request body. A valid s
 
 ## 4. Controlled Release
 
-The first controlled attempt was blocked before provider submission because the shared outbound gate treated the new `campaign:` client ID as an unknown lead. That defect was corrected by adding a dedicated newsletter delivery scope. The second controlled release then submitted two synthetic recipients because two synthetic rows were eligible in the database. This is a validation defect against the requested exactly-one-recipient procedure, not a real-subscriber send.
+The final controlled run used exactly one eligible synthetic recipient. Other synthetic rows were administratively suppressed for test isolation. No real production subscriber was used.
 
-- Release ID: `07a49dcb-da2c-4e7a-8bb6-17251f63ad9a`
-- Campaign ID: `controlled-validation-20260812-04`
-- Recipients: two explicitly authorized synthetic Gmail aliases, redacted
-- Approved hash: `a192e46e2463d2cac1929311f91a61d7b367508265b613190248a9e3f261cc67`
-- Submitted hash: same for both accepted submissions
-- Provider message IDs:
-  - `<0100019ff4694c6e-78d23bd7-c727-4832-9fd7-4c1285d9e649-000000@email.amazonses.com>`
-  - `<0100019ff4694e87-c0eb2e09-c44b-4b1b-886c-e4059e58569f-000000@email.amazonses.com>`
-- Provider state: both `DELIVERED` in the submission ledger after the signed event reconciliation test.
-- Exactly one submission: **FAIL**. Two synthetic submissions occurred.
+- Release ID: `367feff6-e276-450c-8095-c8f8e1fdb4d4`
+- Campaign ID: `controlled-validation-20260812-05`
+- Recipient: one explicitly authorized synthetic Gmail alias, redacted
+- Approved hash: `74f02c7e3401ba76ade9d93bed6ab06cb50f96ab140fecc3c5399a320c4137f3`
+- Submitted hash: identical
+- Provider message ID: `<0100019ff494a8ed-37c95fd2-aeb2-4282-8cde-48748ec494b0-000000@email.amazonses.com>`
+- Provider state: `ACCEPTED`, then raw provider event reconciliation and suppression tests completed.
+- Exactly one submission: **PASS**.
 - No real production subscriber was used.
 
-The AgentMail API copy showed both messages contained plaintext, HTML, the visible unsubscribe URL, `List-Unsubscribe`, and `List-Unsubscribe-Post`.
+The AgentMail raw `.eml` contained plaintext, HTML, the visible unsubscribe URL, `List-Unsubscribe`, `List-Unsubscribe-Post`, and `Reply-To: hello@nebulacomponents.com`.
 
 ## 5. Raw Authentication Evidence
 
 | Control | Result | Evidence |
 |---|---|---|
-| SPF | NOT VERIFIED | No raw received message was retrieved. DNS configuration alone is insufficient. |
-| DKIM | NOT VERIFIED | No raw received message was retrieved. |
-| DKIM d= | NOT VERIFIED | No raw DKIM-Signature header was retrieved. |
-| DMARC | NOT VERIFIED | No raw Authentication-Results header was retrieved. |
-| Alignment | NOT VERIFIED | No raw authentication result was retrieved. |
-| Return-Path | NOT VERIFIED | No raw received headers were retrieved. |
-| From | PASS at provider payload level | `Nebula Components <hello@nebulacomponents.com>` in AgentMail API message record. Raw received header not verified. |
-| Reply-To | NOT VERIFIED | Provider API response did not expose a Reply-To header in the retrieved message representation. |
-| List-Unsubscribe | PASS | AgentMail API message headers contained the HTTPS one-click URL. |
-| List-Unsubscribe-Post | PASS | AgentMail API message headers contained `List-Unsubscribe=One-Click`. |
-| MIME | PARTIAL | Provider API exposed both `text` and `html` fields. Raw `Content-Type` multipart structure was not retrieved. |
+| SPF | NOT VERIFIED | AgentMail `/raw` returned outbound `.eml`, not recipient-side headers. |
+| DKIM | NOT VERIFIED | No recipient-side DKIM-Signature was available. |
+| DKIM d= | NOT VERIFIED | No recipient-side DKIM-Signature was available. |
+| DMARC | NOT VERIFIED | No recipient-side Authentication-Results was available. |
+| Alignment | NOT VERIFIED | No recipient-side authentication result was available. |
+| Return-Path | NOT VERIFIED | Outbound `.eml` omitted recipient-side Return-Path. |
+| From | PASS | Raw outbound `.eml`: `Nebula Components <hello@nebulacomponents.com>`. |
+| Reply-To | PASS | Raw outbound `.eml`: `hello@nebulacomponents.com`. |
+| List-Unsubscribe | PASS | Raw outbound `.eml` contained the HTTPS one-click URL. |
+| List-Unsubscribe-Post | PASS | Raw outbound `.eml` contained `List-Unsubscribe=One-Click`. |
+| MIME | PASS | Raw outbound `.eml` was `multipart/alternative` with `text/plain` and `text/html`. |
 
-The Gmail browser session was not authenticated, so no raw message source was obtained. No authentication result is inferred from DNS or provider acceptance.
+The AgentMail raw endpoint was authenticated and used. It returned a signed download URL for the outbound `.eml`; this is not a recipient-side received copy. The Gmail browser session was not authenticated. No authentication result is inferred from DNS, provider acceptance, or outbound MIME.
 
 ## 6. Unsubscribe Test
 
@@ -89,13 +88,13 @@ The Gmail browser session was not authenticated, so no raw message source was ob
 
 ## 7. Bounce Test
 
-**EXTERNAL LIMITATION.** AgentMail documents `message.bounced` events and the production webhook subscribes to them. No safe provider-supported synthetic hard-bounce trigger was available during this validation. No hard-bounce success is claimed.
+**PARTIAL, signed-path verified.** A valid Svix-signed `message.bounced` payload with `type=hard` was accepted with HTTP 204, persisted, and set `hard_bounced_at`. A later release produced zero submissions for that subscriber. AgentMail-generated delivery of a real bounce event was not triggered.
 
 The implemented endpoint maps a signed `message.bounced` event with bounce type `hard` or `permanent` to `hard_bounced_at` and stores the event. This remains unproven against a real provider-generated bounce event.
 
 ## 8. Complaint Test
 
-**EXTERNAL LIMITATION.** AgentMail documents `message.complained` events and the production webhook subscribes to them. No safe provider-supported synthetic complaint trigger was available during this validation. No complaint suppression success is claimed.
+**PARTIAL, signed-path verified.** A valid Svix-signed `message.complained` payload was accepted with HTTP 204, persisted, and set `complained_at`. A later release produced zero submissions for that subscriber. AgentMail-generated delivery of a real complaint event was not triggered.
 
 The implemented endpoint maps a signed `message.complained` event to `complained_at` and stores the event. This remains unproven against a real provider-generated complaint event.
 
@@ -148,16 +147,13 @@ Compilation of the changed Python modules passed. `git diff --check` passed befo
 
 ### P0
 
-- Raw received-message source proving SPF, DKIM, DMARC, alignment, Return-Path, Reply-To, and MIME structure.
-- Controlled validation must be repeated with exactly one eligible synthetic subscriber. The prior accepted run submitted two synthetic recipients.
-- Safe provider-generated hard-bounce event validation.
-- Safe provider-generated complaint event validation.
-- Independently exposed production deployment revision evidence.
+- Recipient-side raw message source proving SPF, DKIM, DMARC, alignment, and Return-Path.
+- Provider-generated, as opposed to manually signed, bounce and complaint delivery remains unobserved.
 
 ### P1
 
-- Verify provider message `Reply-To` and actual received MIME headers from raw source.
-- Verify provider event delivery for real `message.sent`, `message.bounced`, and `message.complained` events, not only a signed synthetic delivery payload.
+- Obtain an authenticated recipient mailbox export or provider-supported received-message trace.
+- Observe AgentMail-generated bounce and complaint webhooks if AgentMail provides a safe test mechanism.
 
 ### P2
 
@@ -171,28 +167,28 @@ Compilation of the changed Python modules passed. `git diff --check` passed befo
 ## 14. Production Readiness Gate
 
 - remediation committed: **PASS**
-- remediation deployed: **PASS, route live; revision header unavailable**
-- production revision verified: **FAIL**
+- remediation deployed: **PASS**
+- production revision verified: **PASS, `/build-info` returned `c8b24c569ff1af42c70be6141da42551ea4c0dfd`**
 - API event route live: **PASS**
 - AgentMail event contract verified: **PASS**
 - webhook signature contract verified: **PASS**
 - authorized synthetic subscriber created: **PASS**
-- controlled message sent: **PASS, but two synthetic recipients were submitted**
-- exactly one provider submission: **FAIL**
+- controlled message sent: **PASS, one synthetic recipient**
+- exactly one provider submission: **PASS**
 - approved hash equals submitted hash: **PASS**
 - SPF from raw message: **FAIL**
 - DKIM from raw message: **FAIL**
 - DMARC from raw message: **FAIL**
 - DMARC alignment: **FAIL**
 - Return-Path: **FAIL**
-- Reply-To: **EXTERNAL LIMITATION**
-- RFC 8058 headers: **PASS at provider API representation**
-- multipart HTML/plaintext: **PARTIAL, raw MIME unavailable**
+- Reply-To: **PASS, raw outbound `.eml`**
+- RFC 8058 headers: **PASS, raw outbound `.eml`**
+- multipart HTML/plaintext: **PASS, raw outbound `.eml`**
 - visible unsubscribe works: **PASS**
 - RFC 8058 unsubscribe works: **PASS**
 - unsubscribe blocks subsequent send: **PASS**
-- hard-bounce suppression: **EXTERNAL LIMITATION**
-- complaint suppression: **EXTERNAL LIMITATION**
+- hard-bounce suppression: **PASS, signed endpoint path; provider-generated event not observed**
+- complaint suppression: **PASS, signed endpoint path; provider-generated event not observed**
 - provider event IDs reconcile: **PASS for signed delivery test**
 - unknown consent blocks sending: **PASS in implementation and focused tests**
 - legacy provider bypass absent: **PASS for active newsletter entrypoints**
@@ -205,9 +201,7 @@ Compilation of the changed Python modules passed. `git diff --check` passed befo
 
 Remaining blockers are concrete:
 
-1. obtain raw source from the authorized synthetic mailbox and verify authentication, alignment, Return-Path, Reply-To, and MIME;
-2. rerun with one and only one eligible synthetic subscriber;
-3. prove or formally close the hard-bounce and complaint event tests using provider-generated events;
-4. expose or record independently verifiable production revision evidence.
+1. obtain recipient-side raw source from the authorized mailbox and verify SPF, DKIM, DMARC, alignment, and Return-Path;
+2. observe provider-generated bounce and complaint webhook deliveries, or obtain AgentMail's explicit test-event evidence.
 
 Provider acceptance and a `DELIVERED` ledger state do not prove raw authentication or MIME compliance. Production activation is therefore not approved.
