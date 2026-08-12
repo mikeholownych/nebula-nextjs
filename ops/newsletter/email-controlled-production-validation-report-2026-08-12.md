@@ -124,7 +124,7 @@ The service evaluates unknown or non-verified consent as ineligible. No unknown-
 - `nebula-newsletter-autopilot`: paused during validation
 - Authoritative path: wrappers invoke `scripts/send_weekly_roundup.py` or `newsletter_autopilot.py`, which delegate to `newsletter_release_service.py`.
 - Provider bypass scan: active historical sender entrypoints are wrappers or authority code. The shared AgentMail client still contains the generic provider transport, but newsletter calls use the dedicated `send_newsletter` scope and `campaign:` IDs.
-- Scheduler safety: schedule is not enabled until the P0 gate passes.
+- Scheduler safety: schedule remains disabled until an eligible, consent-verified production audience exists and Mike authorizes activation.
 
 ## 12. Test Results
 
