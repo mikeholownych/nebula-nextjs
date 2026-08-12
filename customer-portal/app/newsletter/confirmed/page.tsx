@@ -23,7 +23,7 @@ export default function NewsletterConfirmedPage() {
             You&apos;re on the list.
           </h1>
           <p className="mx-auto max-w-xl text-lg leading-relaxed text-fg-muted">
-            Every Monday, you&apos;ll get one real landing-page finding, one practical fix, and one before-and-after worth studying.
+            Every Wednesday morning, you&apos;ll get one real landing-page finding, one practical fix, and one before-and-after worth studying.
           </p>
         </section>
 

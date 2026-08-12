@@ -128,7 +128,7 @@ export default function NewsletterPage() {
             {[
               {
                 q: "How often do you send?",
-                a: "Every Monday morning (8 AM ET). One email. One finding. One fix. ~3 min read.",
+                a: "Every Wednesday morning (8 AM ET). One email. One finding. One fix. ~3 min read.",
               },
               {
                 q: "Is this just for selling your audit?",

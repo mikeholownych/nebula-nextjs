@@ -63,7 +63,7 @@ export default function NewsletterForm() {
         Get the weekly finding
       </h2>
       <p className="text-fg-muted mb-6">
-        Every Monday morning: One pattern, one fix, one real before/after from founders who audited their sites.
+        Every Wednesday morning: One pattern, one fix, one real before/after from founders who audited their sites.
       </p>
 
       <form className="space-y-4" onSubmit={handleSubmit}>
