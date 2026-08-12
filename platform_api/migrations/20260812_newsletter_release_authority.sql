@@ -85,7 +85,7 @@ CREATE INDEX IF NOT EXISTS idx_newsletter_submission_provider_message ON newslet
 CREATE TABLE IF NOT EXISTS newsletter_event (
   event_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   provider_event_id TEXT NOT NULL UNIQUE,
-  event_type TEXT NOT NULL CHECK (event_type IN ('DELIVERY','HARD_BOUNCE','SOFT_BOUNCE','COMPLAINT','UNSUBSCRIBE')),
+  event_type TEXT NOT NULL CHECK (event_type IN ('SENT','DELIVERY','HARD_BOUNCE','SOFT_BOUNCE','COMPLAINT','REJECTED','UNSUBSCRIBE')),
   provider_message_id TEXT,
   subscriber_id UUID REFERENCES newsletter_subscribers(id),
   release_id UUID REFERENCES newsletter_release(release_id),

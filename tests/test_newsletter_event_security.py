@@ -9,6 +9,9 @@ def test_provider_event_endpoint_requires_signature():
     assert "ON CONFLICT (provider_event_id) DO NOTHING" in source
     assert "HARD_BOUNCE" in source
     assert "COMPLAINT" in source
+    assert '"message.sent": "SENT"' in source
+    assert '"message.rejected": "REJECTED"' in source
+    assert "provider_rejected" in source
 
 
 def test_historical_weekly_job_has_no_provider_or_sqlite_path():

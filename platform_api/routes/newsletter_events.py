@@ -29,18 +29,22 @@ def _payload_hash(payload: dict[str, Any]) -> str:
 def _event_type(payload: dict[str, Any]) -> str:
     provider_type = str(payload.get("event_type") or "").lower()
     return {
+        "message.sent": "SENT",
         "message.delivered": "DELIVERY",
         "message.bounced": "HARD_BOUNCE" if str((payload.get("bounce") or {}).get("type", "")).lower() in {"hard", "permanent"} else "SOFT_BOUNCE",
         "message.complained": "COMPLAINT",
+        "message.rejected": "REJECTED",
     }.get(provider_type, "")
 
 
 def _event_message_id(payload: dict[str, Any]) -> str | None:
     event_type = str(payload.get("event_type") or "")
     section = {
+        "message.sent": "send",
         "message.delivered": "delivery",
         "message.bounced": "bounce",
         "message.complained": "complaint",
+        "message.rejected": "reject",
     }.get(event_type, "")
     value = (payload.get(section) or {}).get("message_id")
     return str(value).strip() if value else None
@@ -49,9 +53,11 @@ def _event_message_id(payload: dict[str, Any]) -> str | None:
 def _event_timestamp(payload: dict[str, Any]) -> datetime:
     event_type = str(payload.get("event_type") or "")
     section = {
+        "message.sent": "send",
         "message.delivered": "delivery",
         "message.bounced": "bounce",
         "message.complained": "complaint",
+        "message.rejected": "reject",
     }.get(event_type, "")
     value = (payload.get(section) or {}).get("timestamp")
     if not value:
@@ -65,9 +71,11 @@ def _event_timestamp(payload: dict[str, Any]) -> datetime:
 def _recipients(payload: dict[str, Any]) -> list[str]:
     event_type = str(payload.get("event_type") or "")
     section = {
+        "message.sent": "send",
         "message.delivered": "delivery",
         "message.bounced": "bounce",
         "message.complained": "complaint",
+        "message.rejected": "reject",
     }.get(event_type, "")
     values = (payload.get(section) or {}).get("recipients") or []
     result: list[str] = []
@@ -101,8 +109,8 @@ async def provider_event(request: Request) -> Response:
 
     message_id = _event_message_id(payload)
     recipients = _recipients(payload)
-    if not message_id or not recipients:
-        raise HTTPException(status_code=400, detail="provider event missing stable message or recipient identity")
+    if not message_id:
+        raise HTTPException(status_code=400, detail="provider event missing stable message identity")
 
     pool = await asyncpg.create_pool(
         os.getenv("AUDIT_DATABASE_URL", "postgresql://postgres@/nebula_audit?host=/var/run/postgresql&port=5433"),
@@ -148,6 +156,16 @@ async def provider_event(request: Request) -> Response:
             elif event_type == "DELIVERY":
                 await conn.execute(
                     "UPDATE newsletter_submission SET provider_acceptance_state='DELIVERED' WHERE provider_message_id=$1",
+                    message_id,
+                )
+            elif event_type == "SENT":
+                await conn.execute(
+                    "UPDATE newsletter_submission SET provider_acceptance_state=CASE WHEN provider_acceptance_state='PENDING' THEN 'ACCEPTED' ELSE provider_acceptance_state END WHERE provider_message_id=$1",
+                    message_id,
+                )
+            elif event_type == "REJECTED":
+                await conn.execute(
+                    "UPDATE newsletter_submission SET provider_acceptance_state='FAILED', last_error=COALESCE(last_error,'provider_rejected') WHERE provider_message_id=$1",
                     message_id,
                 )
     finally:
