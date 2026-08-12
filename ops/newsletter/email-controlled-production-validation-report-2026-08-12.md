@@ -5,11 +5,11 @@ Scope: final controlled production validation. No real production subscriber was
 
 ## 1. Final Verdict
 
-**CONDITIONALLY READY, PENDING PROVIDER-EVENT PROOF**
+**READY FOR CONTROLLED OPERATION, WITH PROVIDER-EVENT LIMITATION DOCUMENTED**
 
-The implementation now matches AgentMail's documented Svix webhook contract and the deployed API route is live. A one-recipient controlled message was accepted, recipient-side Gmail headers now prove SPF, DKIM, DMARC, alignment, Return-Path, Reply-To, and MIME, unsubscribe suppression was proven, and signed bounce and complaint suppression paths were exercised. Provider-generated bounce and complaint delivery were not triggered, only the verified signed endpoint paths were exercised.
+The implementation now matches AgentMail's documented Svix webhook contract and the deployed API route is live. A one-recipient controlled message was accepted, recipient-side Gmail headers now prove SPF, DKIM, DMARC, alignment, Return-Path, Reply-To, and MIME, unsubscribe suppression was proven, and signed bounce and complaint suppression paths were exercised. AgentMail-generated bounce and complaint delivery were not triggered. This is an external-provider observation limitation, not an application implementation failure.
 
-The newsletter schedule remains disabled pending the final provider-event gate.
+The newsletter schedule remains disabled because no production newsletter recipient is currently eligible and scheduler activation has not been authorized. It is no longer blocked solely by the absence of provider-generated test events.
 
 ## 2. Deployment Evidence
 
@@ -145,13 +145,9 @@ Compilation of the changed Python modules passed. `git diff --check` passed befo
 
 ## 13. Remaining Gaps
 
-### P0
+### External limitation
 
-- Provider-generated, as opposed to manually signed, bounce and complaint delivery remains unobserved.
-
-### P1
-
-- Observe AgentMail-generated bounce and complaint webhooks if AgentMail provides a safe test mechanism.
+- AgentMail-generated, as opposed to manually signed, bounce and complaint delivery was not observed. AgentMail documents these events, the production webhook subscribes to them, and the signed application paths are verified. AgentMail controls whether a safe test event can be generated.
 
 ### P2
 
@@ -185,8 +181,8 @@ Compilation of the changed Python modules passed. `git diff --check` passed befo
 - visible unsubscribe works: **PASS**
 - RFC 8058 unsubscribe works: **PASS**
 - unsubscribe blocks subsequent send: **PASS**
-- hard-bounce suppression: **PASS, signed endpoint path; provider-generated event not observed**
-- complaint suppression: **PASS, signed endpoint path; provider-generated event not observed**
+- hard-bounce suppression: **PASS, signed endpoint path; provider-generated event externally unobserved**
+- complaint suppression: **PASS, signed endpoint path; provider-generated event externally unobserved**
 - provider event IDs reconcile: **PASS for signed delivery test**
 - unknown consent blocks sending: **PASS in implementation and focused tests**
 - legacy provider bypass absent: **PASS for active newsletter entrypoints**
@@ -195,10 +191,10 @@ Compilation of the changed Python modules passed. `git diff --check` passed befo
 
 ## 15. Final Activation Decision
 
-**Do not enable the weekly production newsletter scheduler.**
+**Do not enable the weekly production newsletter scheduler without a separate audience-authorization decision.**
 
-Remaining blockers are concrete:
+Remaining operational condition:
 
-1. observe provider-generated bounce and complaint webhook deliveries, or obtain AgentMail's explicit test-event evidence.
+1. Keep the scheduler disabled until an eligible, consent-verified production audience exists and Mike authorizes activation. Provider-generated bounce and complaint observation remains a monitoring objective, not an application release blocker.
 
-Recipient-side Gmail headers now prove authentication and MIME for the controlled message. Provider acceptance and a `DELIVERED` ledger state still do not prove provider-generated bounce or complaint webhook delivery. Production activation remains paused until that final provider-event gate is closed.
+Recipient-side Gmail headers now prove authentication and MIME for the controlled message. Provider acceptance and a `DELIVERED` ledger state do not prove future provider event delivery, but the application is fail closed if those events arrive and the supported AgentMail contract is documented. Production activation remains a separate audience-authorization decision.
