@@ -141,7 +141,7 @@ export default function Home() {
             <div>
               <p className="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-accent">Why this exists</p>
               <h2 className="mb-4 text-2xl font-bold tracking-tight text-fg md:text-3xl">
-                We run this audit on ourselves first.
+                We run this audit on ourselves first. When we have a real client outcome with dates, proof, and a way for you to verify it, we will show that too.
               </h2>
               <p className="text-base text-fg-muted leading-7">
                 Before the audit engine, there was a spreadsheet. Working with founders on paid

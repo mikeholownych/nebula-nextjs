@@ -136,6 +136,6 @@ function qFactor(accept: string, type: string): number {
 export const config = {
   matcher: [
     // Match all routes except _next internals and static assets
-    '/((?!_next/static|_next/image|favicon).*)',
+    '/((?!_next/static|_next/image|favicon|\.well-known).*)',
   ],
 }

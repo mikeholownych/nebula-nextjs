@@ -126,7 +126,10 @@ const nextConfig: NextConfig = {
   // Serve static HTML files from public folder
   async rewrites() {
   return [
-  // llms.txt proposal: markdown variant of teardown pages at URL + ".md".
+  {
+    source: '/.well-known/bimi.svg',
+    destination: '/api/bimi',
+  },
   // Must precede the dynamic /teardowns/[slug] route, which would otherwise
   // capture "knallhart.md" as a slug and 404.
   {
