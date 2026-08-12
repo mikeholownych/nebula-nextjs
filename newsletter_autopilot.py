@@ -28,6 +28,8 @@ QUEUE = BASE / "content_queue"
 ARTIFACTS = BASE / "ops" / "newsletter"
 SENDER = "hello@nebulacomponents.com"
 AUDIT_URL = "https://nebulacomponents.com/audit"
+PRODUCTION_SOURCE_URL = "https://nebulacomponents.com"
+PRODUCTION_FALLBACK_ENABLED = True
 
 
 def now() -> str:
@@ -101,24 +103,78 @@ def load_research() -> dict[str, Any]:
                     "evidence_class": data.get("source_type", "research_intake"),
                 })
                 break
+    # Discard fresh research that does not map to the newsletter promise.
+    relevance_terms = (
+        "landing page", "web page", "headline", "above the fold", "call to action",
+        "cta", "checkout", "paid traffic", "ad spend", "conversion rate", "visitors",
+    )
+    candidates = [
+        item for item in candidates
+        if any(term in " ".join(str(item.get(key, "")) for key in ("finding", "evidence_excerpt", "track", "headline")).lower() for term in relevance_terms)
+    ]
+    # Use verified production content as the weekly fallback when no fresh
+    # qualifying research artifact exists. This keeps the schedule contentful
+    # without converting unrelated external anecdotes into Nebula findings.
+    if not candidates and PRODUCTION_FALLBACK_ENABLED and BASE == Path(__file__).resolve().parent:
+        fallback_pool = [
+            {
+                "source_file": "https://nebulacomponents.com",
+                "source_url": PRODUCTION_SOURCE_URL,
+                "finding": "Your headline tells visitors what you do. It needs to tell them what they get.",
+                "track": "headline-clarity",
+                "headline": "Your headline says what you do. Not what visitors get.",
+                "evidence_excerpt": "Live self-audit finding displayed on the Nebula production homepage.",
+                "evidence_class": "production_self_audit",
+            },
+            {
+                "source_file": "https://nebulacomponents.com/teardowns/basecamp",
+                "source_url": "https://nebulacomponents.com/teardowns/basecamp",
+                "finding": "The first viewport does not expose a clear headline, primary CTA, or offer signal in the early page source.",
+                "track": "above-fold-clarity",
+                "headline": "Can visitors find the next action before they scroll?",
+                "evidence_excerpt": "Nebula public teardown of basecamp.com, snapshot July 29, 2026.",
+                "evidence_class": "public_teardown",
+            },
+            {
+                "source_file": "https://nebulacomponents.com/teardowns/knallhart",
+                "source_url": "https://nebulacomponents.com/teardowns/knallhart",
+                "finding": "The page had no Open Graph or Twitter Card metadata in the inspected HTML, so shared links rendered without a controlled preview.",
+                "track": "distribution-metadata",
+                "headline": "Your landing page has a first impression before the click.",
+                "evidence_excerpt": "Nebula public teardown of knallhart.dev, raw HTML snapshot July 31, 2026.",
+                "evidence_class": "public_teardown",
+            },
+        ]
+        candidates.append(fallback_pool[datetime.now(timezone.utc).isocalendar().week % len(fallback_pool)])
     if not candidates:
         raise RuntimeError("No fresh research artifact found in content_queue or research inbox")
     selected = candidates[0]
     selected = {key: (value.replace("—", "-") if isinstance(value, str) else value) for key, value in selected.items()}
-    selected["evidence_class"] = "internal_research_artifact"
+    selected["evidence_class"] = selected.get("evidence_class") or "internal_research_artifact"
     selected["researched_at"] = now()
     return selected
+
+
+def is_landing_page_relevant(item: dict[str, Any]) -> bool:
+    text = " ".join(str(item.get(key, "")) for key in ("finding", "evidence_excerpt", "track", "headline")).lower()
+    return any(term in text for term in (
+        "landing page", "web page", "headline", "above the fold", "call to action",
+        "cta", "checkout", "paid traffic", "ad spend", "conversion rate", "visitors",
+    ))
 
 
 def draft(research: dict[str, Any]) -> dict[str, Any]:
     finding = research["finding"].replace("—", "-")
     track = research["track"].replace("—", "-").replace("-", " ")
-    title = (research.get("headline") or f"The {track} leak costing you conversions").replace("—", "-")
-    subject = f"Nebula Weekly: {title}"[:110]
-    text = f"""Hi there,\n\nThis week's landing-page leak is simple: {finding}\n\nWhy it matters\n\nVisitors should understand the value of the page without translating internal product language. When the first message is vague, the visitor has to re-qualify the offer before taking the next step.\n\nThe repair\n\nRewrite the first visible message around the outcome the visitor wants. Use the same words your buyer uses in the ad, sales conversation, or problem statement. Remove jargon that describes the product but not the result.\n\nVerify it\n\nRun the revised page for seven days without changing the traffic source. Compare the primary CTA click rate and the next meaningful conversion event against the prior period.\n\nRun the free audit: {AUDIT_URL}?utm_source=newsletter&utm_medium=email&utm_campaign=weekly_finding\n\nReply if you want a specific page reviewed.\n\nMike\nNebula Components\n\nUnsubscribe: https://nebulacomponents.com/unsubscribe\n"""
+    title = (research.get("headline") or f"The {track} leak").replace("—", "-")
+    source_url = research.get("source_url") or PRODUCTION_SOURCE_URL
+    subject = title[:90]
+    preheader = "One observed page condition, why it matters, and a bounded way to test the repair."
+    text = f"""Hi,\n\nThis week's landing-page finding:\n\n{finding}\n\nWhy it matters\n\nThis is a page-level observation from Nebula's production audit work. It identifies a possible conversion constraint. It does not prove that this page issue is the only reason a page is not converting. Traffic quality, the offer, price, and checkout can also be the limiting constraint.\n\nThe repair\n\nRewrite the first visible message so the visitor can recognize the outcome they came for. Keep the promise specific. Remove product language that does not help the visitor decide what happens next.\n\nVerify it\n\nChoose one primary conversion event before changing the page. Keep the traffic source and offer stable, then compare the revised page with the prior period. Treat the result as a test, not proof of causality.\n\nSkip this repair if the traffic is unqualified or the offer is unclear. A clearer page cannot fix the wrong audience or a weak offer.\n\nSee the finding on your page:\n{AUDIT_URL}?utm_source=newsletter&utm_medium=email&utm_campaign=weekly_finding_{issue_key()}\n\nSource:\n{source_url}\n\nReply if you want a specific page reviewed.\n\nMike\nNebula Components\nhello@nebulacomponents.com\n\nUnsubscribe:\nhttps://nebulacomponents.com/unsubscribe\n"""
     return {
         "issue_key": issue_key(),
         "subject": subject,
+        "preheader": preheader,
         "finding": finding,
         "track": research["track"],
         "research": research,
@@ -132,6 +188,8 @@ def validate(issue: dict[str, Any]) -> list[str]:
         errors.append("missing research source")
     if not issue.get("finding"):
         errors.append("missing finding")
+    if not is_landing_page_relevant(issue.get("research", {})):
+        errors.append("research is not relevant to landing-page conversion")
     if not issue.get("subject") or len(issue["subject"]) > 120:
         errors.append("invalid subject")
     if len(issue.get("text", "")) < 300:
@@ -155,8 +213,14 @@ def edit(issue: dict[str, Any]) -> dict[str, Any]:
 
 
 def render_html(issue: dict[str, Any]) -> str:
-    body = html.escape(issue["text"]).replace("\n\n", "</p><p>").replace("\n", "<br>")
-    return f"<html><body style='font-family:Arial,sans-serif;line-height:1.6;max-width:640px;margin:auto'><p>{body}</p></body></html>"
+    escaped = html.escape(issue["text"])
+    paragraphs = []
+    for paragraph in escaped.split("\n\n"):
+        linked = re.sub(r"(https://[^\s<]+)", r"<a href='\1'>\1</a>", paragraph)
+        paragraphs.append(f"<p>{linked.replace(chr(10), '<br>')}</p>")
+    body = "".join(paragraphs)
+    preheader = html.escape(issue.get("preheader", ""))
+    return f"<html><head><meta name='preview' content='{preheader}'></head><body style='font-family:Arial,sans-serif;line-height:1.6;max-width:640px;margin:auto'><div style='display:none;max-height:0;overflow:hidden'>{preheader}</div>{body}</body></html>"
 
 
 async def ensure_schema(conn: Any) -> None:

@@ -69,3 +69,26 @@ def test_research_inbox_is_source_fallback(tmp_path, monkeypatch):
     result = autopilot.load_research()
     assert result["source_url"] == "https://example.com/source"
     assert result["finding"].startswith("Paid traffic")
+
+
+def test_production_fallback_keeps_weekly_content_available(monkeypatch):
+    monkeypatch.setattr(autopilot, "QUEUE", Path("/tmp/nebula-no-content-queue"))
+    monkeypatch.setattr(autopilot, "BASE", Path(autopilot.__file__).resolve().parent)
+    monkeypatch.setattr(autopilot, "PRODUCTION_FALLBACK_ENABLED", True)
+    result = autopilot.load_research()
+    assert result["evidence_class"] in {"production_self_audit", "public_teardown"}
+    assert autopilot.validate(autopilot.edit(autopilot.draft(result))) == []
+
+
+def test_html_render_contains_preheader_and_linked_urls():
+    research = {
+        "source_file": "/tmp/source.json",
+        "source_url": "https://example.com/source",
+        "finding": "Paid traffic reaches the landing page but visitors cannot find the next action.",
+        "track": "cta-clarity",
+        "headline": "The next action is hard to find",
+    }
+    issue = autopilot.edit(autopilot.draft(research))
+    rendered = autopilot.render_html(issue)
+    assert issue["preheader"] in rendered
+    assert "<a href='https://nebulacomponents.com/audit" in rendered
