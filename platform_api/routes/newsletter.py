@@ -1,10 +1,17 @@
 """Newsletter subscription API - backed by PostgreSQL via crm service."""
 
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import RedirectResponse
+from urllib.parse import quote
+
+import asyncio
+import hashlib
 from pydantic import BaseModel, EmailStr
 
 from platform_api.services.crm import (
     newsletter_subscribe,
+    newsletter_mark_confirmation_sent,
+    newsletter_confirm,
     newsletter_unsubscribe,
     newsletter_subscriber_count,
 )
@@ -33,12 +40,43 @@ async def subscribe(req: NewsletterSignupRequest):
         utm_medium=req.utm_medium,
         utm_campaign=req.utm_campaign,
     )
-    resubscribed = row.get("unsubscribed_at") is None and row.get("subscribed_at") is not None
+    token = row["confirmation_token"]
+    confirm_url = f"https://nebulacomponents.com/api/newsletter/confirm?token={quote(token)}"
+    text = f"""Confirm your Nebula Components newsletter subscription
+
+Click to confirm your subscription:
+{confirm_url}
+
+If you did not request this, ignore this email.
+
+Nebula Components
+"""
+
+    def _send_confirmation() -> dict:
+        from agentmail_client import AgentMailClient
+        return AgentMailClient(inbox="hello@nebulacomponents.com").send_transactional(
+            [email],
+            "Confirm your Nebula newsletter subscription",
+            text=text,
+            client_id=f"newsletter-confirm:{email}:{hashlib.sha256(token.encode()).hexdigest()[:24]}",
+        )
+
+    result = await asyncio.to_thread(_send_confirmation)
+    if result.get("_error"):
+        raise HTTPException(502, "Could not send confirmation email")
+    await newsletter_mark_confirmation_sent(email)
     return {
         "success": True,
-        "message": "Subscribed! First newsletter arrives Monday 8 AM ET.",
+        "message": "Check your email to confirm your subscription.",
         "subscriber_id": str(row["id"]),
     }
+
+
+@router.get("/newsletter/confirm")
+async def confirm(token: str):
+    if not token or not await newsletter_confirm(token):
+        raise HTTPException(400, "Invalid or expired confirmation link")
+    return RedirectResponse("https://nebulacomponents.com/newsletter?confirmed=1")
 
 
 @router.post("/newsletter/unsubscribe")

@@ -35,7 +35,7 @@ export default function NewsletterForm() {
       })
       if (res.ok) {
         setStatus('done')
-        setMessage('✓ Subscribed! First issue arrives Monday 8 AM ET.')
+        setMessage('✓ Check your email to confirm your subscription.')
         form.reset()
       } else {
         setStatus('error')
@@ -52,7 +52,7 @@ export default function NewsletterForm() {
       <Card variant="bordered" className="p-8 text-center">
         <p className="text-2xl mb-2">✓</p>
         <p className="font-semibold text-fg">{message}</p>
-        <p className="text-sm text-fg-muted mt-2">Check your inbox Monday morning.</p>
+        <p className="text-sm text-fg-muted mt-2">Your first issue arrives after you confirm.</p>
       </Card>
     )
   }

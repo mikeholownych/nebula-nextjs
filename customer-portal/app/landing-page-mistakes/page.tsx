@@ -38,7 +38,7 @@ export default function MistakesChecklistPage() {
         document.body.removeChild(pdfLink)
 
         // Show confirmation
-        alert('✓ Check your email. Checklist is downloading now.')
+        alert('✓ Check your email to confirm. Your checklist will arrive after confirmation.')
         form.reset()
       } else {
         alert('Error. Try again.')

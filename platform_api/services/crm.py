@@ -11,6 +11,8 @@ All writes are idempotent or upsert-safe.
 from __future__ import annotations
 
 import os
+import hashlib
+import secrets
 from datetime import date, datetime, timezone
 from typing import Optional
 from uuid import UUID
@@ -46,24 +48,65 @@ async def newsletter_subscribe(
     utm_medium: str | None = None,
     utm_campaign: str | None = None,
 ) -> dict:
-    """Upsert a newsletter subscriber.  Returns the row."""
+    """Upsert a pending newsletter subscriber and return a one-time token.
+
+    Every signup starts unconfirmed. The raw token is returned only to the
+    caller that sends the confirmation email; only its SHA-256 hash is stored.
+    """
+    confirmation_token = secrets.token_urlsafe(32)
+    token_hash = hashlib.sha256(confirmation_token.encode()).hexdigest()
     pool = await get_pool()
     async with pool.acquire() as conn:
         row = await conn.fetchrow(
             """
             INSERT INTO newsletter_subscribers
-                (email, name, role, utm_source, utm_medium, utm_campaign)
-            VALUES ($1, $2, $3, $4, $5, $6)
+                (email, name, role, utm_source, utm_medium, utm_campaign,
+                 confirmation_token_hash, is_confirmed)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
             ON CONFLICT (email) DO UPDATE SET
                 name          = COALESCE(EXCLUDED.name, newsletter_subscribers.name),
                 role          = COALESCE(EXCLUDED.role, newsletter_subscribers.role),
                 utm_source    = COALESCE(newsletter_subscribers.utm_source, EXCLUDED.utm_source),
-                unsubscribed_at = NULL   -- re-subscribe if they had unsubscribed
+                utm_medium    = COALESCE(newsletter_subscribers.utm_medium, EXCLUDED.utm_medium),
+                utm_campaign  = COALESCE(newsletter_subscribers.utm_campaign, EXCLUDED.utm_campaign),
+                unsubscribed_at = NULL,
+                confirmation_token_hash = EXCLUDED.confirmation_token_hash,
+                confirmation_sent_at = NULL,
+                is_confirmed = FALSE
             RETURNING *
             """,
             email, name, role, utm_source, utm_medium, utm_campaign,
+            token_hash, False,
         )
-    return dict(row)
+    result = dict(row)
+    result["confirmation_token"] = confirmation_token
+    return result
+
+
+async def newsletter_mark_confirmation_sent(email: str) -> None:
+    pool = await get_pool()
+    async with pool.acquire() as conn:
+        await conn.execute(
+            "UPDATE newsletter_subscribers SET confirmation_sent_at = now() WHERE email = $1",
+            email,
+        )
+
+
+async def newsletter_confirm(token: str) -> bool:
+    token_hash = hashlib.sha256(token.encode()).hexdigest()
+    pool = await get_pool()
+    async with pool.acquire() as conn:
+        result = await conn.execute(
+            """
+            UPDATE newsletter_subscribers
+               SET is_confirmed = TRUE,
+                   confirmation_token_hash = NULL
+             WHERE confirmation_token_hash = $1
+               AND unsubscribed_at IS NULL
+            """,
+            token_hash,
+        )
+    return result == "UPDATE 1"
 
 
 async def newsletter_unsubscribe(email: str) -> bool:

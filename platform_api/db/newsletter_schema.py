@@ -14,6 +14,8 @@ CREATE TABLE newsletter_subscribers (
   confirmation_sent_at TEXT,  -- ISO 8601
   confirmation_token TEXT,  -- For email verification
   is_confirmed BOOLEAN DEFAULT FALSE,
+  confirmation_token_hash TEXT,
+  confirmation_sent_at TEXT,
 );
 
 CREATE INDEX idx_newsletter_subscribers_email ON newsletter_subscribers(email);
@@ -60,7 +62,9 @@ def create_newsletter_table(db_path: str = "/home/mike/nebula/platform_api/lead_
             last_email_sent_at TEXT,
             confirmation_sent_at TEXT,
             confirmation_token TEXT,
-            is_confirmed BOOLEAN DEFAULT FALSE
+            is_confirmed BOOLEAN DEFAULT FALSE,
+            confirmation_token_hash TEXT,
+            confirmation_sent_at TEXT
         )
     """)
     
