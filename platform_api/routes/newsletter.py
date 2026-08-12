@@ -108,7 +108,7 @@ You can unsubscribe at any time:
 async def confirm(token: str):
     if not token or not await newsletter_confirm(token):
         raise HTTPException(400, "Invalid or expired confirmation link")
-    return RedirectResponse("https://nebulacomponents.com/newsletter?confirmed=1")
+    return RedirectResponse("https://nebulacomponents.com/newsletter/confirmed")
 
 
 @router.post("/newsletter/unsubscribe")
