@@ -29,7 +29,9 @@ ARTIFACTS = BASE / "ops" / "newsletter"
 HISTORY = ARTIFACTS / "content_history.jsonl"
 SENDER = "hello@nebulacomponents.com"
 AUDIT_URL = "https://nebulacomponents.com/audit"
-UNSUBSCRIBE_URL = "https://nebulacomponents.com/api/newsletter/unsubscribe"
+API_BASE_URL = "https://api.nebulacomponents.shop"
+UNSUBSCRIBE_URL = f"{API_BASE_URL}/api/newsletter/unsubscribe"
+CONFIRM_URL = f"{API_BASE_URL}/api/newsletter/confirm"
 UNSUBSCRIBE_PAGE_URL = "https://nebulacomponents.com/unsubscribe"
 BUSINESS_NAME = "Nebula Components"
 BUSINESS_ADDRESS = "Nebula Components, 66 Sonneck Square, Scarborough, ON M1E 1A9"
@@ -543,7 +545,7 @@ async def publish(issue: dict[str, Any], dry_run: bool = False) -> dict[str, int
             client_id = f"newsletter:{issue['issue_key']}:{hashlib.sha256(recipient.encode()).hexdigest()[:16]}"
             text = issue["text"] + compliance_text(recipient)
             headers = {
-                "List-Unsubscribe": f"<https://nebulacomponents.com/api/newsletter/unsubscribe-one-click?email={__import__('urllib.parse', fromlist=['quote']).quote(recipient, safe='')}>",
+                "List-Unsubscribe": f"<{API_BASE_URL}/api/newsletter/unsubscribe-one-click?email={__import__('urllib.parse', fromlist=['quote']).quote(recipient, safe='')}>",
                 "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
             }
             result = client.send([recipient], issue["subject"], text=text, html=render_html(issue, recipient), client_id=client_id, labels=["newsletter", issue["track"]], headers=headers)

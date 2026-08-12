@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react'
 
+const NEWSLETTER_API = 'https://api.nebulacomponents.shop'
+
 export default function UnsubscribePage() {
   const [icon, setIcon] = useState('✉️')
   const [description, setDescription] = useState('')
@@ -26,7 +28,7 @@ export default function UnsubscribePage() {
       setStatusText('Processing...')
       setStatusClass('status-processing')
 
-      fetch('/api/newsletter/unsubscribe', {
+      fetch(`${NEWSLETTER_API}/api/newsletter/unsubscribe`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -70,7 +72,7 @@ export default function UnsubscribePage() {
     setButtonDisabled(true)
     setButtonText('Processing...')
 
-    fetch('/api/newsletter/unsubscribe', {
+    fetch(`${NEWSLETTER_API}/api/newsletter/unsubscribe`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: emailInput.trim() }),

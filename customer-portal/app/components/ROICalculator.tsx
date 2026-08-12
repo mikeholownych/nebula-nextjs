@@ -47,7 +47,6 @@ export default function ROICalculator() {
   const currentConversions = Math.round(monthlyClicks * currentCR)
   const baselineConversions = Math.round(monthlyClicks * BASELINE_CR)
   const missedConversions = Math.max(0, baselineConversions - currentConversions)
-  const missedSpend = missedConversions > 0 ? Math.round(missedConversions * avgCPC * (1 / BASELINE_CR)) : 0
   // What those missed conversions cost in ad spend to generate (approximate)
   const wastedMonthly = currentCR < BASELINE_CR
     ? Math.round(monthlySpend * (1 - currentCR / BASELINE_CR))

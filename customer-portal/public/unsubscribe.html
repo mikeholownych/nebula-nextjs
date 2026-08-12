@@ -81,6 +81,7 @@
   </div>
 
   <script>
+    const NEWSLETTER_API = 'https://api.nebulacomponents.shop';
     const params = new URLSearchParams(window.location.search);
     const email = params.get('email') || '';
 
@@ -91,7 +92,7 @@
       document.getElementById('status').className = 'status';
       document.getElementById('status').textContent = 'Processing...';
 
-      fetch('/api/newsletter/unsubscribe', {
+      fetch(`${NEWSLETTER_API}/api/newsletter/unsubscribe`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({email: email})
@@ -129,7 +130,7 @@
       document.getElementById('unsub-btn').disabled = true;
       document.getElementById('unsub-btn').textContent = 'Processing...';
 
-      fetch('/api/newsletter/unsubscribe', {
+      fetch(`${NEWSLETTER_API}/api/newsletter/unsubscribe`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({email: emailInput.trim()})

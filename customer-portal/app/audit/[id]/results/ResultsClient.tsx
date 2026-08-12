@@ -444,7 +444,6 @@ function ReportOverview({ results }: { results: AuditResult }) {
   const summary = summarizeFindings(results.findings)
   const hostname = new URL(results.url).hostname
   const headline = results.composite ?? results.score
-  const anchor = results.composite_anchor ?? 7.0
   const weighted = results.composite !== undefined
 
   // Psychology: Estimate monthly ad spend loss (sunk cost motivation)
@@ -557,10 +556,6 @@ function ReportOverview({ results }: { results: AuditResult }) {
 
 function FixFirstQueue({ findings, auditId, onGoToRemediation }: { findings: Finding[]; auditId: string; onGoToRemediation?: () => void }) {
   const queue = buildPriorityQueue(findings).slice(0, 3)
-
-  // Psychology: Calculate potential recovery messaging (sunk cost frame)
-  const topFinding = queue[0]
-  const fixDescription = topFinding ? `Fix your ${topFinding.label.toLowerCase()}` : 'Fix your critical issue'
 
   return (
     <section id="fix-first" className="scroll-mt-40 border-b border-border py-16">
