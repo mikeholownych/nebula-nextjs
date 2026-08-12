@@ -1,6 +1,6 @@
 """Newsletter subscription API - backed by PostgreSQL via crm service."""
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import RedirectResponse
 from urllib.parse import quote
 
@@ -27,6 +27,10 @@ class NewsletterSignupRequest(BaseModel):
     utm_source: str | None = None
     utm_medium: str | None = None
     utm_campaign: str | None = None
+
+
+class NewsletterUnsubscribeRequest(BaseModel):
+    email: EmailStr
 
 
 @router.post("/newsletter/subscribe")
@@ -80,11 +84,25 @@ async def confirm(token: str):
 
 
 @router.post("/newsletter/unsubscribe")
-async def unsubscribe(email: str):
-    ok = await newsletter_unsubscribe(email.lower().strip())
+async def unsubscribe(req: NewsletterUnsubscribeRequest | None = None, email: str | None = None):
+    recipient = str(req.email if req else email or "").lower().strip()
+    if not recipient:
+        raise HTTPException(400, "Email is required")
+    ok = await newsletter_unsubscribe(recipient)
     if not ok:
-        raise HTTPException(404, "Email not found")
-    return {"success": True, "message": "Unsubscribed"}
+        # Idempotent suppression is safer than revealing subscriber existence.
+        return {"status": "unsubscribed", "success": True, "message": "Unsubscribed"}
+    return {"status": "unsubscribed", "success": True, "message": "Unsubscribed"}
+
+
+@router.post("/newsletter/unsubscribe-one-click")
+async def unsubscribe_one_click(request: Request):
+    """RFC 8058 endpoint for mailbox-provider one-click unsubscribe."""
+    email = request.query_params.get("email", "").lower().strip()
+    if not email:
+        raise HTTPException(400, "Missing unsubscribe identity")
+    await newsletter_unsubscribe(email)
+    return {"status": "unsubscribed"}
 
 
 @router.get("/newsletter/subscribers/count")

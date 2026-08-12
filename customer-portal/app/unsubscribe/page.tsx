@@ -26,7 +26,7 @@ export default function UnsubscribePage() {
       setStatusText('Processing...')
       setStatusClass('status-processing')
 
-      fetch('/api/unsubscribe', {
+      fetch('/api/newsletter/unsubscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -70,7 +70,7 @@ export default function UnsubscribePage() {
     setButtonDisabled(true)
     setButtonText('Processing...')
 
-    fetch('/api/unsubscribe', {
+    fetch('/api/newsletter/unsubscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: emailInput.trim() }),

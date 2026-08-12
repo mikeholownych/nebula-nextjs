@@ -211,6 +211,7 @@ class AgentMailClient:
         html: Optional[str] = None,
         client_id: Optional[str] = None,
         labels: Optional[list] = None,
+        headers: Optional[dict[str, str]] = None,
     ) -> dict:
         if len(to) != 1 or not isinstance(to[0], str):
             return {"_error": "release_blocked", "_reason": "single_recipient_required"}
@@ -253,6 +254,8 @@ class AgentMailClient:
             data["html"] = html
         if labels:
             data["labels"] = labels
+        if headers:
+            data["headers"] = headers
         result = self.__transport("POST", f"/inboxes/{self.inbox}/messages/send", data)
         return self._complete_delivery(client_id, result)
 
@@ -264,6 +267,7 @@ class AgentMailClient:
         html: Optional[str] = None,
         client_id: Optional[str] = None,
         labels: Optional[list] = None,
+        headers: Optional[dict[str, str]] = None,
     ) -> dict:
         """Send marketing email through the centralized release gate."""
         return self.__send_scoped(
@@ -273,6 +277,7 @@ class AgentMailClient:
             html=html,
             client_id=client_id,
             labels=labels,
+            headers=headers,
             purpose=DeliveryPurpose.MARKETING,
         )
 

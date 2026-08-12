@@ -94,6 +94,51 @@ def test_html_render_contains_preheader_and_linked_urls():
     assert "<a href='https://nebulacomponents.com/audit" in rendered
 
 
+def test_compliance_footer_has_identity_address_and_unsubscribe():
+    text = autopilot.compliance_text("reader@example.com")
+    rendered = autopilot.render_html({"text": "A useful issue.", "preheader": "Preview"}, "reader@example.com")
+    assert "confirmed a Nebula Components newsletter subscription" in text
+    assert autopilot.BUSINESS_ADDRESS in text
+    assert "https://nebulacomponents.com/unsubscribe?email=reader%40example.com" in text
+    assert "List-Unsubscribe" not in rendered
+
+
+def test_agentmail_marketing_send_accepts_compliance_headers():
+    from agentmail_client import AgentMailClient
+    from outbound_release_gate import DeliveryPurpose, GateDecision
+
+    captured = {}
+    def transport(method, path, data):
+        captured.update(data)
+        return {"message_id": "msg-1"}
+
+    class Gate:
+        def reserve(self, recipient, client_id, *, purpose):
+            return GateDecision(True, "reserved", client_id)
+        def validate(self, client_id):
+            return GateDecision(True, "validated", client_id)
+        def complete(self, client_id, *, sent, reason="", provider_message_id=""):
+            return None
+        def sent_receipt(self, client_id):
+            return None
+
+    client = AgentMailClient(
+        inbox="hello@nebulacomponents.com",
+        key="test-key",
+        gate=Gate(),
+        transport=transport,
+    )
+    result = client.send(
+        ["reader@example.com"],
+        "Subject",
+        text="Body",
+        client_id="auto:test-header",
+        headers={"List-Unsubscribe-Post": "List-Unsubscribe=One-Click"},
+    )
+    assert result.get("message_id") == "msg-1"
+    assert captured["headers"]["List-Unsubscribe-Post"] == "List-Unsubscribe=One-Click"
+
+
 def test_release_metadata_records_source_freshness_and_rights():
     research = {
         "source_file": "https://nebulacomponents.com/teardowns/basecamp",
