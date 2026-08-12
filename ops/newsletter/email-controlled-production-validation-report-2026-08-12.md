@@ -5,11 +5,11 @@ Scope: final controlled production validation. No real production subscriber was
 
 ## 1. Final Verdict
 
-**NOT PRODUCTION READY**
+**CONDITIONALLY READY, PENDING PROVIDER-EVENT PROOF**
 
-The implementation now matches AgentMail's documented Svix webhook contract and the deployed API route is live. A one-recipient controlled message was accepted, raw provider message MIME was retrieved, Reply-To and multipart structure were verified, unsubscribe suppression was proven, and signed bounce and complaint suppression paths were exercised. The P0 gate remains failed because the AgentMail raw-message endpoint returns the outbound `.eml`, not a recipient-side received copy. It therefore contains no Authentication-Results, DKIM-Signature, or Return-Path. Provider-generated bounce and complaint delivery were not triggered, only the verified signed endpoint paths were exercised.
+The implementation now matches AgentMail's documented Svix webhook contract and the deployed API route is live. A one-recipient controlled message was accepted, recipient-side Gmail headers now prove SPF, DKIM, DMARC, alignment, Return-Path, Reply-To, and MIME, unsubscribe suppression was proven, and signed bounce and complaint suppression paths were exercised. Provider-generated bounce and complaint delivery were not triggered, only the verified signed endpoint paths were exercised.
 
-The newsletter schedule remains disabled.
+The newsletter schedule remains disabled pending the final provider-event gate.
 
 ## 2. Deployment Evidence
 
@@ -22,7 +22,7 @@ The newsletter schedule remains disabled.
 - Local production service: `nebula-platform-api.service`, active after restart.
 - Public API evidence: `GET https://api.nebulacomponents.shop/openapi.json` returned HTTP 200 and exposed `/api/newsletter/provider-events`.
 - Public event endpoint evidence: missing and invalid signatures returned HTTP 401.
-- Public revision header: not exposed, so an independently verifiable platform revision identifier is unavailable.
+- Public revision endpoint: `/build-info` is exposed and independently returned the deployed revision below.
 - Public build endpoint: `GET https://api.nebulacomponents.shop/build-info` returned revision `c8b24c569ff1af42c70be6141da42551ea4c0dfd`.
 - DB: `nebula_audit` on PostgreSQL port 5433 contains the release authority tables and transition guard. This proves the active host schema, not a separately managed remote database.
 - Scheduler: `nebula-newsletter-autopilot` paused during validation. `weekly-roundup-email` was already paused.
@@ -64,19 +64,19 @@ The AgentMail raw `.eml` contained plaintext, HTML, the visible unsubscribe URL,
 
 | Control | Result | Evidence |
 |---|---|---|
-| SPF | NOT VERIFIED | AgentMail `/raw` returned outbound `.eml`, not recipient-side headers. |
-| DKIM | NOT VERIFIED | No recipient-side DKIM-Signature was available. |
-| DKIM d= | NOT VERIFIED | No recipient-side DKIM-Signature was available. |
-| DMARC | NOT VERIFIED | No recipient-side Authentication-Results was available. |
-| Alignment | NOT VERIFIED | No recipient-side authentication result was available. |
-| Return-Path | NOT VERIFIED | Outbound `.eml` omitted recipient-side Return-Path. |
-| From | PASS | Raw outbound `.eml`: `Nebula Components <hello@nebulacomponents.com>`. |
-| Reply-To | PASS | Raw outbound `.eml`: `hello@nebulacomponents.com`. |
-| List-Unsubscribe | PASS | Raw outbound `.eml` contained the HTTPS one-click URL. |
-| List-Unsubscribe-Post | PASS | Raw outbound `.eml` contained `List-Unsubscribe=One-Click`. |
-| MIME | PASS | Raw outbound `.eml` was `multipart/alternative` with `text/plain` and `text/html`. |
+| SPF | PASS | Gmail `Authentication-Results`: `spf=pass`; `smtp.mailfrom=...@mail.nebulacomponents.com`; Gmail received from `24.110.104.197`. |
+| DKIM | PASS | Gmail `Authentication-Results`: `dkim=pass header.i=@nebulacomponents.com header.s=agentmail`. |
+| DKIM d= | PASS | Recipient-side signature: `d=nebulacomponents.com`, selector `agentmail`. |
+| DMARC | PASS | Gmail `Authentication-Results`: `dmarc=pass`, policy `p=REJECT`, From domain `nebulacomponents.com`. |
+| Alignment | PASS | DKIM organizational alignment is exact, and SPF organizational alignment is `mail.nebulacomponents.com` to `nebulacomponents.com`. |
+| Return-Path | PASS | `<...@mail.nebulacomponents.com>`, matching the SPF authenticated organizational domain. |
+| From | PASS | `Nebula Components <hello@nebulacomponents.com>`. |
+| Reply-To | PASS | `hello@nebulacomponents.com`. |
+| List-Unsubscribe | PASS | Recipient headers contained the HTTPS one-click URL. |
+| List-Unsubscribe-Post | PASS | Recipient headers contained `List-Unsubscribe=One-Click`. |
+| MIME | PASS | Recipient headers showed `multipart/alternative` with `text/plain` and `text/html` parts. |
 
-The AgentMail raw endpoint was authenticated and used. It returned a signed download URL for the outbound `.eml`; this is not a recipient-side received copy. The Gmail browser session was not authenticated. No authentication result is inferred from DNS, provider acceptance, or outbound MIME.
+The user supplied recipient-side Gmail headers for the authorized synthetic mailbox. This is direct received-message evidence, not provider configuration inference. The Gmail evidence proves the listed authentication, alignment, Return-Path, Reply-To, RFC 8058 headers, and MIME controls for this controlled message.
 
 ## 6. Unsubscribe Test
 
@@ -147,12 +147,10 @@ Compilation of the changed Python modules passed. `git diff --check` passed befo
 
 ### P0
 
-- Recipient-side raw message source proving SPF, DKIM, DMARC, alignment, and Return-Path.
 - Provider-generated, as opposed to manually signed, bounce and complaint delivery remains unobserved.
 
 ### P1
 
-- Obtain an authenticated recipient mailbox export or provider-supported received-message trace.
 - Observe AgentMail-generated bounce and complaint webhooks if AgentMail provides a safe test mechanism.
 
 ### P2
@@ -176,11 +174,11 @@ Compilation of the changed Python modules passed. `git diff --check` passed befo
 - controlled message sent: **PASS, one synthetic recipient**
 - exactly one provider submission: **PASS**
 - approved hash equals submitted hash: **PASS**
-- SPF from raw message: **FAIL**
-- DKIM from raw message: **FAIL**
-- DMARC from raw message: **FAIL**
-- DMARC alignment: **FAIL**
-- Return-Path: **FAIL**
+- SPF from recipient message: **PASS**
+- DKIM from recipient message: **PASS**
+- DMARC from recipient message: **PASS**
+- DMARC alignment: **PASS**
+- Return-Path: **PASS**
 - Reply-To: **PASS, raw outbound `.eml`**
 - RFC 8058 headers: **PASS, raw outbound `.eml`**
 - multipart HTML/plaintext: **PASS, raw outbound `.eml`**
@@ -201,7 +199,6 @@ Compilation of the changed Python modules passed. `git diff --check` passed befo
 
 Remaining blockers are concrete:
 
-1. obtain recipient-side raw source from the authorized mailbox and verify SPF, DKIM, DMARC, alignment, and Return-Path;
-2. observe provider-generated bounce and complaint webhook deliveries, or obtain AgentMail's explicit test-event evidence.
+1. observe provider-generated bounce and complaint webhook deliveries, or obtain AgentMail's explicit test-event evidence.
 
-Provider acceptance and a `DELIVERED` ledger state do not prove raw authentication or MIME compliance. Production activation is therefore not approved.
+Recipient-side Gmail headers now prove authentication and MIME for the controlled message. Provider acceptance and a `DELIVERED` ledger state still do not prove provider-generated bounce or complaint webhook delivery. Production activation remains paused until that final provider-event gate is closed.
