@@ -281,6 +281,28 @@ class AgentMailClient:
             purpose=DeliveryPurpose.MARKETING,
         )
 
+    def send_newsletter(
+        self,
+        to: list,
+        subject: str,
+        text: Optional[str] = None,
+        html: Optional[str] = None,
+        client_id: Optional[str] = None,
+        labels: Optional[list] = None,
+        headers: Optional[dict[str, str]] = None,
+    ) -> dict:
+        """Submit a newsletter only after the PostgreSQL release authority."""
+        return self.__send_scoped(
+            to,
+            subject,
+            text=text,
+            html=html,
+            client_id=client_id,
+            labels=labels,
+            headers=headers,
+            purpose=DeliveryPurpose.NEWSLETTER,
+        )
+
     def send_audit(self, to: list, subject: str, **kwargs) -> dict:
         """Deliver a requested audit to a known lead."""
         return self.__send_scoped(

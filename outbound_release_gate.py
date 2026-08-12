@@ -29,7 +29,7 @@ class DeliveryPurpose(str, Enum):
     CONVERSATION_REPLY = "conversation_reply"
     INTERNAL = "internal"
     TRANSACTIONAL = "transactional"
-
+    NEWSLETTER = "newsletter"
 
 @dataclass(frozen=True)
 class GateDecision:
@@ -68,7 +68,7 @@ class OutboundReleaseGate:
         DeliveryPurpose.CONVERSATION_REPLY: ("reply:", "conversation:"),
         DeliveryPurpose.INTERNAL: ("internal:", "upwork-digest:"),
         DeliveryPurpose.TRANSACTIONAL: ("txn:", "magic-link:", "platform:"),
-    }
+        DeliveryPurpose.NEWSLETTER: ("campaign:",),    }
 
     def __init__(
         self,
@@ -580,6 +580,11 @@ class OutboundReleaseGate:
         if purpose is DeliveryPurpose.TRANSACTIONAL:
             # Transactional/auth email (magic links, receipts, security notices):
             # exempt from marketing opt-outs and lead-state gates by CAN-SPAM.
+            return None
+        if purpose is DeliveryPurpose.NEWSLETTER:
+            # Newsletter consent and suppression are enforced by the PostgreSQL
+            # release authority immediately before provider I/O. This gate only
+            # supplies the shared durable reservation/idempotency boundary.
             return None
 
         found, reason = self._lead_state(recipient)

@@ -224,7 +224,7 @@ async def send_release(release: dict[str, Any], *, dry_run: bool = False, db_url
                     blocked += 1
                     continue
                 await conn.execute("INSERT INTO newsletter_submission (release_id,decision_id,subscriber_id,idempotency_key,provider,submitted_content_hash) VALUES ($1,$2,$3,$4,'agentmail',$5) ON CONFLICT (idempotency_key) DO NOTHING", release["release_id"], decision_row["decision_id"], current["id"], key, content_hash(payload))
-            result = await __import__("asyncio").to_thread(client.send, [current["email"]], release["subject"], text=payload["text"], html=payload["html"], client_id=f"campaign:{key}", labels=["newsletter", release["campaign_id"]], headers=payload["headers"])
+            result = await __import__("asyncio").to_thread(client.send_newsletter, [current["email"]], release["subject"], text=payload["text"], html=payload["html"], client_id=f"campaign:{key}", labels=["newsletter", release["campaign_id"]], headers=payload["headers"])
             async with pool.acquire() as conn:
                 message_id = result.get("message_id") or result.get("id") if isinstance(result, dict) else None
                 if result.get("_error") if isinstance(result, dict) else True:
