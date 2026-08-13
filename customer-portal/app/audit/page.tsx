@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { auditWebApplicationSchema } from '@/app/lib/schema'
 import { auditPageFAQSchema } from '@/app/lib/faq-schemas'
 import AuditForm from './AuditForm'
+import HonestyGrid from '@/app/components/HonestyGrid'
 
 export const metadata: Metadata = {
   title: 'Free Landing Page Audit: Find Conversion Friction | Nebula',
@@ -246,6 +247,9 @@ export default async function AuditPage() {
             </div>
           </div>
         </section>
+
+        {/* ── 3d. Clinical Transparency ── */}
+        <HonestyGrid />
 
         {/* ── 4. After the audit: repair sprint ── */}
         <section className="border-t border-border px-6 py-14">

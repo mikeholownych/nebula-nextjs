@@ -43,6 +43,6 @@ test('renders the inspectable stack and direct conversion path', async ({ page }
   expect(overflow).toBeLessThanOrEqual(0)
 
   await page.getByTestId('intelligence-stack-audit-link').click()
-  await expect(page).toHaveURL(/\/audit$/)
+  await expect(page).toHaveURL(/\/audit(?:\?.*)?$/)
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
 })

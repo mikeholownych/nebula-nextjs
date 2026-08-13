@@ -194,8 +194,14 @@ class ICPScorer:
         max_possible = sum(d.get("weight", 0.33) * 100 for d in self.matrix.values())
         final_score = min(100, round(total / max_possible * 100, 1)) if max_possible > 0 else 0
 
+        # Disqualifier rule: cold outbound prospects with zero active ad spend are unqualified
+        if lead.get("engagement_source") == "cold_outbound" and lead.get("has_paid_traffic") is False:
+            disqualifiers.append("Cold outbound prospect has no active paid ad spend ($0 spend)")
+
         # Status thresholds
-        if final_score >= 70:
+        if disqualifiers:
+            status = "unqualified"
+        elif final_score >= 70:
             status = "qualified"
         elif final_score >= 45:
             status = "needs_review"
