@@ -1,4 +1,4 @@
-import { NextResponse } from 'next'
+import { NextResponse } from 'next/server'
 import { verifyAuditUnlock } from '@/app/lib/audit-unlock-token'
 import { cookies } from 'next/headers'
 
