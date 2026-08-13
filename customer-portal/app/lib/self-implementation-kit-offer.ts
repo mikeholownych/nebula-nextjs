@@ -24,3 +24,19 @@ export const REPAIR_SPRINT_OFFER = {
   evidenceBoundary:
     'The re-audit verifies whether the selected page condition changed; the kit does not guarantee conversion lift.',
 } as const
+
+export const GROWTH_LAUNCH_OFFER = {
+  key: 'growth-launch',
+  name: 'Growth Launch Sprint',
+  priceUsd: 297,
+  summary: 'Full 7-signal implementation sprint for companies spending $1k+/mo on paid traffic. Tailored copy, Next.js/Tailwind code diffs, JSON-LD schemas, and 30-day re-audit across all failing conversion signals.',
+  includes: [
+    'Complete implementation kit covering all failing conversion signals',
+    'Custom headline, CTA, proof layout, and schema code diffs',
+    'AI Citation (GEO/AEO) extractability setup and llms.txt configuration',
+    'Priority 24-hour turnaround + same-scope 30-day re-audit verification',
+  ],
+  evidenceBoundary:
+    'Verifies observable page conditions across all 7 signals; does not guarantee third-party ad platform revenue outcomes.',
+} as const
+

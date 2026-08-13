@@ -204,6 +204,29 @@ def _render_html(audit, fix_path, overall, grade, projected, projected_grade, di
 </div>"""
 
 
+def verify_deployment_signature(initial_html: str, current_html: str) -> dict:
+    """
+    Verify whether the client has deployed HTML/DOM changes before executing the 30-day re-audit.
+    Prevents false 'fix failed' re-audit logs caused by slow client engineering deployment.
+    """
+    import hashlib
+
+    if not initial_html or not current_html:
+        return {"deployed": False, "reason": "Missing HTML payload", "hash_delta": False}
+
+    h_initial = hashlib.sha256(initial_html.encode("utf-8", errors="ignore")).hexdigest()
+    h_current = hashlib.sha256(current_html.encode("utf-8", errors="ignore")).hexdigest()
+
+    changed = h_initial != h_current
+    return {
+        "deployed": changed,
+        "initial_hash": h_initial[:12],
+        "current_hash": h_current[:12],
+        "reason": "DOM signature changed - deployment verified" if changed else "DOM signature identical - client has not deployed fix yet",
+    }
+
+
+
 if __name__ == "__main__":
     import sys, json
     # Test with sample audit data

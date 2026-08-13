@@ -6,6 +6,9 @@ import RecentFinding from './components/RecentFinding'
 import ROICalculator from './components/ROICalculator'
 import WithWithout from './components/WithWithout'
 import HowItWorksAnimated from './components/HowItWorksAnimated'
+import StackTaxComparison from './components/StackTaxComparison'
+import HonestyGrid from './components/HonestyGrid'
+import AgenticNativeBanner from './components/AgenticNativeBanner'
 import { TEARDOWNS } from './teardowns/[slug]/data'
 import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE } from './lib/homepageContent'
 import { SignalIcon } from '@/components/SignalIcons'
@@ -135,6 +138,9 @@ export default function Home() {
         {/* ── 1c. ROI Calculator ── */}
         <ROICalculator />
 
+        {/* ── 1d. Unfair Advantage Matrix: Stack Tax Comparison ── */}
+        <StackTaxComparison />
+
         {/* ── 2. Origin / honest proof ── */}
         <section className="border-b border-border px-6 py-16">
           <div className="mx-auto max-w-6xl grid gap-8 md:grid-cols-2 md:items-start">
@@ -253,6 +259,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* ── 3b. Clinical Transparency: Honesty Grid ── */}
+        <HonestyGrid />
 
         {/* ── 4. Teardown proof: named pages, named failures ── */}
         <section className="border-b border-border bg-bg-muted/10 px-6 py-16">
@@ -532,6 +541,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* ── 10b. WebMCP Agentic Native Protocol Banner ── */}
+        <AgenticNativeBanner />
 
         {/* ── 11. Final CTA ── */}
         <section className="px-6 py-20 text-center">

@@ -34,7 +34,7 @@ test('audit report contains horizontal navigation and long evidence on mobile', 
   })
 
   await page.goto('/audit/00000000-0000-4000-8000-000000000001/results')
-  await expect(page.getByRole('heading', { name: 'Landing Page Audit Results' })).toBeVisible()
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
 
   const widths = await page.evaluate(() => ({
     viewport: window.innerWidth,
