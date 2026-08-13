@@ -13,8 +13,14 @@ export async function GET(request: Request) {
     )
   }
 
-  const cookieStore = await cookies()
-  const isUnlocked = verifyAuditUnlock(auditId, cookieStore.get(`audit_unlock_${auditId}`)?.value)
+  let unlockToken: string | undefined
+  try {
+    const cookieStore = await cookies()
+    unlockToken = cookieStore.get(`audit_unlock_${auditId}`)?.value
+  } catch {
+    // Unit test environment or missing request store context
+  }
+  const isUnlocked = verifyAuditUnlock(auditId, unlockToken)
 
   // Construct self-contained portable evidence package (Zero Hostage-Taking Principle)
   const exportPackage = {
