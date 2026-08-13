@@ -91,6 +91,7 @@ export default async function AuditPage() {
                 {[
                   'Results in under 2 minutes',
                   'No signup, no account',
+                  'Works with Webflow, Framer, Shopify, WordPress & Next.js',
                   '$97 One-Leak Repair Sprint: one targeted fix + 30-day re-audit included',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-fg-muted">

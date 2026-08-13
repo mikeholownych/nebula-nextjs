@@ -106,7 +106,7 @@ export default function StackTaxComparison() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-accent font-bold">✓</span>
-                <span><strong>Code execution:</strong> Production-ready Next.js / Tailwind code</span>
+                <span><strong>Platform Compatibility:</strong> Webflow, Framer, Shopify, WordPress, or Next.js (delivered as copy rewrites, layout briefs, and code diffs)</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-accent font-bold">✓</span>

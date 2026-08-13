@@ -55,7 +55,7 @@ export default function HonestyGrid() {
               <h3 className="text-lg font-bold text-fg">What We DO Deliver</h3>
             </div>
             <p className="text-sm text-fg-muted leading-6">
-              Empirical 7-signal page analysis, exact dollar ad-spend leak calculations, and production-ready Next.js / Tailwind code diffs delivered within 24 hours of approval.
+              Empirical 7-signal page analysis, dollar ad-spend leak calculations, plain-English copy rewrites, and developer code diffs (Webflow, Framer, Shopify, Next.js) with 30-day re-audit verification included.
             </p>
           </div>
         </div>
