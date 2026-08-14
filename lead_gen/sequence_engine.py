@@ -25,6 +25,11 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 DB_PATH = Path(__file__).parent.parent / "lead_gen" / "lead_state.db"
+import sys
+sys.path.insert(0, str(DB_PATH.parents[1]))
+from hunter_parallel import HunterAdapter
+from mailcheck_adapter import MailCheckAdapter, MailCheckError
+
 KEY_PATH = Path.home() / ".hermes" / "secrets" / "agentmail_org.key"
 INBOX = "sedrick@nebulacomponents.com"
 LEGACY_INBOX = "nebulashop@agentmail.to"  # watch for replies on existing sequences
@@ -42,44 +47,37 @@ def _hunter_key() -> str:
 # ── Email Verification ─────────────────────────────────────────────────────
 
 def verify_email(email: str) -> dict:
-    """Verify email via Hunter.io before sending.
-
-    Returns:
-        { "deliverable": True/False, "status": "valid"|"risky"|"invalid"|"unknown",
-          "score": 0-100, "reason": str }
-
-    Rules:
-        valid (score >= 70)  → send
-        risky (score 40-69)  → send with caution (log warning)
-        invalid              → skip, mark bounced
-        unknown              → send (can't verify, not worth blocking)
-    """
-    key = _hunter_key()
-    if not key:
-        return {"deliverable": True, "status": "unknown", "score": 0,
-                "reason": "No Hunter key - skipping verification"}
-
-    url = (
-        f"https://api.hunter.io/v2/email-verifier"
-        f"?email={urllib.parse.quote(email)}&api_key={key}"
-    )
+    """Run Hunter and MailCheck for every lookup; MailCheck informs Nebula's gate."""
+    hunter = HunterAdapter(db_path=Path(__file__).parent.parent / "mailcheck_beta.db").verify(email)
+    result = {
+        "deliverable": hunter.get("result") == "deliverable" or hunter.get("status") in ("valid", "webmail"),
+        "status": hunter.get("status", "unknown"),
+        "score": hunter.get("score", 0),
+        "result": hunter.get("result", ""),
+        "reason": f"Hunter status={hunter.get('status', '')} score={hunter.get('score', '')} result={hunter.get('result', '')}",
+        "hunter": hunter,
+        "mailcheck_allowed": False,
+    }
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Nebula/1.0"})
-        with urllib.request.urlopen(req, timeout=10) as r:
-            data = json.loads(r.read()).get("data", {})
-            status = data.get("status", "unknown")
-            score = data.get("score", 0)
-            result = data.get("result", "")
-
-            deliverable = status in ("valid", "webmail") or (
-                status == "risky" and score >= 40
-            )
-            reason = f"status={status} score={score} result={result}"
-            return {"deliverable": deliverable, "status": status,
-                    "score": score, "reason": reason}
-    except Exception as e:
-        return {"deliverable": True, "status": "unknown", "score": 0,
-                "reason": f"Verification error: {e}"}
+        mc = MailCheckAdapter(db_path=Path(__file__).parent.parent / "mailcheck_beta.db")
+        decision = mc.verify_for_outreach(email, lead_id="sequence:" + email, source="lead_gen.sequence_engine")
+        result["mailcheck"] = {
+            "verification_id": decision.verification_id,
+            "classification": decision.classification,
+            "decision": decision.decision,
+            "reason": decision.reason,
+        }
+        result["mailcheck_allowed"] = decision.allowed
+        if not decision.allowed:
+            result["deliverable"] = False
+            result["status"] = "mailcheck_blocked"
+            result["reason"] += "; MailCheck " + decision.reason
+    except (MailCheckError, ValueError):
+        result["mailcheck"] = {"error": "MAILCHECK_UNAVAILABLE"}
+        result["deliverable"] = False
+        result["status"] = "mailcheck_unavailable"
+        result["reason"] += "; MailCheck unavailable"
+    return result
 
 
 def verify_before_send(email: str, db: sqlite3.Connection) -> bool:
@@ -131,6 +129,9 @@ def get_db() -> sqlite3.Connection:
     db = sqlite3.connect(str(DB_PATH))
     db.row_factory = sqlite3.Row
     db.execute(SCHEMA)
+    columns = {row[1] for row in db.execute("PRAGMA table_info(sequence_state)")}
+    if "mailcheck_verification_id" not in columns:
+        db.execute("ALTER TABLE sequence_state ADD COLUMN mailcheck_verification_id TEXT")
     db.commit()
     return db
 
@@ -144,6 +145,7 @@ def register_d1_sent(
     signal_notes: str = "",
     audit_finding: str = "",
     hook_variant: str = "",
+    mailcheck_verification_id: str = "",
 ) -> None:
     """Call this immediately after sending Day 1 email."""
     # Auto-assign hook variant based on send count (round-robin A→B→C)
@@ -157,8 +159,8 @@ def register_d1_sent(
     db.execute("""
         INSERT INTO sequence_state
             (email, first_name, product_url, signal_notes, audit_finding,
-             thread_id, message_id, d1_sent_at, status, hook_variant)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', ?)
+             thread_id, message_id, d1_sent_at, status, hook_variant, mailcheck_verification_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, ?)
         ON CONFLICT(email) DO UPDATE SET
             thread_id     = EXCLUDED.thread_id,
             message_id    = EXCLUDED.message_id,
@@ -166,9 +168,10 @@ def register_d1_sent(
             signal_notes  = COALESCE(EXCLUDED.signal_notes, sequence_state.signal_notes),
             audit_finding = COALESCE(EXCLUDED.audit_finding, sequence_state.audit_finding),
             hook_variant  = COALESCE(EXCLUDED.hook_variant, sequence_state.hook_variant),
+            mailcheck_verification_id = COALESCE(EXCLUDED.mailcheck_verification_id, sequence_state.mailcheck_verification_id),
             updated_at    = CURRENT_TIMESTAMP
     """, (email, first_name, product_url, signal_notes, audit_finding,
-          thread_id, message_id, datetime.now(timezone.utc).isoformat(), hook_variant))
+          thread_id, message_id, datetime.now(timezone.utc).isoformat(), hook_variant, mailcheck_verification_id))
     db.commit()
     db.close()
 
@@ -407,6 +410,13 @@ def send_d1(
             "verified": verification,
         }
 
+    if not verification.get("mailcheck_allowed"):
+        return {
+            "sent": False,
+            "reason": "MailCheck release decision did not authorize this send",
+            "verified": verification,
+        }
+
     # Step 2: Send
     domain = email.split("@")[0]
     import time
@@ -440,6 +450,7 @@ def send_d1(
         product_url=product_url,
         signal_notes=signal_notes,
         audit_finding=audit_finding,
+        mailcheck_verification_id=verification.get("mailcheck", {}).get("verification_id", ""),
     )
 
     # Step 4: Sync to PostgreSQL CRM (fail-silent)
@@ -461,11 +472,27 @@ def send_d1(
     except Exception:
         pass
 
+    # Step 5: Record the actual downstream send event for the design-partner loop.
+    outcome_error = ""
+    try:
+        verification_id = verification.get("mailcheck", {}).get("verification_id", "")
+        if verification_id:
+            MailCheckAdapter(db_path=Path(__file__).parent.parent / "mailcheck_beta.db").record_outcome(
+                verification_id,
+                email=email,
+                outcome="SENT",
+                source_system="nebula-outreach",
+                provider="agentmail",
+            )
+    except MailCheckError:
+        outcome_error = "MAILCHECK_OUTCOME_RECORD_FAILED"
+
     return {
         "sent": True,
         "thread_id": result.get("thread_id"),
         "message_id": result.get("message_id"),
         "verified": verification,
+        "outcome_error": outcome_error,
     }
 
 

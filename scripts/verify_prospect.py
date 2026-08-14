@@ -43,6 +43,11 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from design_partner_feedback import record_feedback
+from mailcheck_adapter import MailCheckAdapter, MailCheckError
 
 CACHE_PATH = "ops/agency_verify_cache.json"
 
@@ -216,11 +221,39 @@ def verify(candidate, cache, fresh=False):
     score = ev.get("score")
     smtp = ev.get("smtp_check")
     print("  hunter verifier: status=%s result=%s score=%s smtp=%s" % (status, result, score, smtp))
+    try:
+        mc_decision = MailCheckAdapter().verify_for_outreach(
+            email,
+            lead_id="verify-prospect:" + email,
+            source="scripts.verify_prospect",
+        )
+        mailcheck_observation = {
+            "verification_id": mc_decision.verification_id,
+            "classification": mc_decision.classification,
+            "decision": mc_decision.decision,
+            "allowed": mc_decision.allowed,
+            "reason": mc_decision.reason,
+        }
+        print("  mailcheck: classification=%s decision=%s allowed=%s" % (
+            mc_decision.classification, mc_decision.decision, mc_decision.allowed))
+    except (MailCheckError, ValueError) as exc:
+        mailcheck_observation = {"error": "MAILCHECK_UNAVAILABLE"}
+        print("  mailcheck: unavailable")
     deliverable = result == "deliverable" or status in ("valid", "accept_all") and smtp is True
+    if not mailcheck_observation.get("allowed", False):
+        deliverable = False
     undeliverable = result == "undeliverable" or status == "invalid"
 
     # 2. Hunter domain-search: person + role at the firm
     ds = search_domain(domain, cache, fresh=fresh)
+    record_feedback(
+        feedback_type="coverage_gap",
+        capability="hunter_domain_search_person_enrichment",
+        workflow="scripts.verify_prospect",
+        observation="Hunter supplies indexed people, roles, seniority, decision-maker, and confidence fields; MailCheck currently supplies verification evidence but not this enrichment surface.",
+        impact="Nebula uses this data to distinguish a founder or decision-maker from an employee before outreach.",
+        evidence={"domain": domain, "email_hash": MailCheckAdapter._email_hash(email)},
+    )
     person = None
     parts = [p for p in name.lower().replace(".", " ").split() if len(p) > 1]
     first, last = (parts[0] if parts else ""), (parts[-1] if len(parts) > 1 else "")
@@ -273,6 +306,7 @@ def verify(candidate, cache, fresh=False):
     return {
         "name": name, "email": email, "verdict": verdict, "reason": reason,
         "hunter": {"status": status, "result": result, "score": score, "smtp": smtp},
+        "mailcheck": mailcheck_observation,
         "person": (person or {}).get("value") if person else None,
         "person_position": (person or {}).get("position") if person else None,
         "site_paid_media": paid,
