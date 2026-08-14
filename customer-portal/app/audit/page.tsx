@@ -257,7 +257,7 @@ export default async function AuditPage() {
           <div className="mx-auto max-w-6xl grid gap-10 md:grid-cols-2 md:items-start">
             <div>
               <h2 className="mb-4 text-2xl font-bold tracking-tight text-fg md:text-3xl">
-                If it fails, the $97 kit gives you one implementation-ready change.
+                If it fails, the $97 One-Leak Repair Sprint gives you one scoped repair package within 48 hours.
               </h2>
               <p className="mb-6 text-base text-fg-muted leading-7">
                 The free audit shows you what is broken and in what order to fix it.
