@@ -261,9 +261,9 @@ export default async function AuditPage() {
               </h2>
               <p className="mb-6 text-base text-fg-muted leading-7">
                 The free audit shows you what is broken and in what order to fix it.
-                Pay $97 and receive a tailored implementation kit for one specific failing signal -
+                Pay $97 and receive one scoped repair package for one specific failing signal within 48 hours -
                 exact copy changes, code snippets, or configuration fixes - sent after successful payment.
-                No site access is needed. You implement it yourself or hand it to your developer.
+                No site access is needed to prepare the scoped package.
               </p>
               <div className="space-y-2">
                 {[

@@ -147,7 +147,7 @@ class EmailService:
         cta_html = """
         <div style="background: #1a1a1a; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; text-align: center;">
             <p style="color: #fff; font-size: 1rem; margin: 0 0 0.75rem 0; font-weight: 600;">
-                $97. Done in 48 hours. Reply YES and I'll send the link.
+                $97 One-Leak Repair Sprint. Done in 48 hours. Reply YES and I'll send the link.
             </p>
             <p style="color: #999; font-size: 0.8rem; margin: 0;">
                 Or open your audit: <a href="https://nebulacomponents.com/audit" style="color: #a78bfa;">nebulacomponents.com/audit</a>
@@ -210,7 +210,7 @@ What your visitors are experiencing:
 
 {story_bridge_text}
 
-$97. Done in 48 hours. Reply YES and I'll send the link.
+$97 One-Leak Repair Sprint. Done in 48 hours. Reply YES and I'll send the link.
 Or open your audit: https://nebulacomponents.com/audit
 
 --

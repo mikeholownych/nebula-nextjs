@@ -243,7 +243,7 @@ export default function Home() {
                 },
                 {
                   heading: 'What happens next',
-                  body: 'Fix the highest-impact leak yourself with the report - or get the $97 One-Leak Repair Sprint: one implementation-ready fix, the 30-day re-audit to confirm it held, and your page compared with the current completed-audit benchmark sample.',
+                  body: 'Fix the highest-impact leak yourself with the report - or have Nebula prepare the $97 One-Leak Repair Sprint: one scoped repair package within 48 hours, a 30-day re-audit, and your page compared with the current completed-audit benchmark sample.',
                 },
               ].map((item) => (
                 <div key={item.heading} className="rounded-xl border border-border bg-bg-muted/10 p-5">
@@ -398,7 +398,7 @@ export default function Home() {
                       'Real scrape - scored against 9 specific conversion signals',
                       'Prioritized fixes with impact and effort scores',
                       'No signup to see your results',
-                      '$97 One-Leak Repair Sprint gives you one implementation-ready change',
+                      '$97 One-Leak Repair Sprint gives you one scoped repair package within 48 hours',
                       'Free re-audit 30 days after you implement the fix',
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-2">

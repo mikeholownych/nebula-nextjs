@@ -1248,7 +1248,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                 Not a 12-point checklist. One specific fix for your highest-confidence finding - exact copy, code, or configuration change - ready to implement today.
               </p>
               <ul className="mb-5 space-y-2 text-sm text-fg-muted">
-                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span>One implementation-ready fix for your highest-impact leak</li>
+                <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span>One scoped repair package for your highest-impact leak, prepared within 48 hours</li>
                 <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span>Exact copy, code, or configuration change - not generic advice</li>
                 <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span><span><strong className="text-fg">Bonus:</strong> 30-day free re-audit to confirm the fix held</span></li>
                 <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span><span><strong className="text-fg">Bonus:</strong> Your page compared with the current completed-audit benchmark sample</span></li>

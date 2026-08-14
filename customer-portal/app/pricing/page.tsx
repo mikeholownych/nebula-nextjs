@@ -48,7 +48,7 @@ function buildServiceSchema(fixPack: FixPackPublicFact) {
 const faqItems = [
   {
     q: 'What is included in the One-Leak Repair Sprint?',
-    a: 'After the free audit, you pay $97 and receive a tailored implementation kit for one specific failing signal - exact copy, a code snippet, or a configuration change. You implement it yourself, with your developer, or through your CMS. No site access is required by Nebula.',
+    a: 'After the free audit, you pay $97 and Nebula prepares one scoped repair package for one specific failing signal within 48 hours. It includes the exact copy, code, or configuration change and a 30-day re-audit. No conversion lift is guaranteed.',
   },
   {
     q: 'Why only one finding?',
@@ -171,7 +171,7 @@ export default function PricingPage() {
               <p className="mt-2 text-4xl font-bold text-fg">${REPAIR_SPRINT_OFFER.priceUsd}</p>
               <p className="mt-4 text-fg-muted">
                 Run the free audit on one landing page first - see your score and initial findings before sharing an email.
-                Pay $97 for a tailored implementation kit for one high-impact finding on your specific page.
+                Pay $97 for one scoped repair package for the highest-impact finding on your specific page. Nebula prepares it within 48 hours.
               </p>
               <div className="mt-6 space-y-3">
                 {'howItWorks' in REPAIR_SPRINT_OFFER && Array.isArray(REPAIR_SPRINT_OFFER.howItWorks) &&
