@@ -84,6 +84,7 @@ const nextConfig: NextConfig = {
       { source: '/primer.html',                         destination: '/primer',              permanent: true },
       { source: '/7-systems.html',                      destination: '/learning-centre',      permanent: true },
       { source: '/audit.html',                          destination: '/audit',               permanent: true },
+      { source: '/checkout.html',                       destination: '/checkout',            permanent: true },
       { source: '/self-audit.html',                     destination: '/audit',               permanent: true },
       { source: '/case-studies/self-audit.html',         destination: '/case-studies',         permanent: true },
       { source: '/audit_dashboard.html',                destination: '/audit',               permanent: true },
