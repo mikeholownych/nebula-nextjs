@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import sqlite3
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path('/home/mike/nebula')
@@ -52,7 +53,31 @@ def main() -> int:
             blocked += 1
             results.append({'email': email, 'status': 'blocked_or_failed', 'reason': response.get('reason', 'unknown')})
     db.close()
-    print(json.dumps({'sent': sent, 'blocked': blocked, 'outside_send_window': skipped, 'results': results}, indent=2))
+    report = {
+        'run_at': datetime.now(timezone.utc).isoformat(),
+        'workflow': 'nebula-w6-audit-to-payment',
+        'queue': str(QUEUE),
+        'candidates': len(ready),
+        'audits': sum(1 for x in ready if x.get('audit_finding')),
+        'risk_checked': len(ready),
+        'ready': len(ready),
+        'sent': sent,
+        'delivered': 0,
+        'replied': 0,
+        'audit_engaged': 0,
+        'offer_presented': 0,
+        'checkout_started': 0,
+        'paid': 0,
+        'revenue': 0,
+        'mailcheck_risky_averted': sum(1 for x in queue.get('held', []) if 'mailcheck_not_send_authorized' in (x.get('hold_reason') or '')),
+        'mailcheck_hard_blocks': sum(1 for x in queue.get('held', []) if 'confirmed_invalid_hard_block' in (x.get('hold_reason') or '')),
+        'outside_send_window': skipped,
+        'blocked': blocked,
+        'results': results,
+    }
+    log_path = ROOT / 'ops' / 'w6_run_latest.json'
+    log_path.write_text(json.dumps(report, indent=2))
+    print(json.dumps(report, indent=2))
     return 0
 
 
