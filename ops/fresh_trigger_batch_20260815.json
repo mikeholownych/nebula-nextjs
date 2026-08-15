@@ -1,0 +1,43 @@
+{
+  "created_at": "2026-08-15T11:25:00Z",
+  "deadline": "2026-08-21T23:59:59Z",
+  "method": "fresh_public_trigger_only",
+  "prospects": [
+    {
+      "name": "RemindLink",
+      "site": "https://remindlink.app",
+      "contact_route": "roshanshetty.apps@gmail.com",
+      "hn_post": "https://news.ycombinator.com/item?id=49309141",
+      "source_url": "https://news.ycombinator.com/item?id=49309141",
+      "trigger": "Show HN launch posted about 1 hour ago: RemindLink launched with a clear reminder outcome and public product page.",
+      "trigger_type": "fresh_show_hn_launch",
+      "audit_score": 7.1,
+      "finding": "Audit measured 155.8 KiB HTML and no analytics artifact in the fetched source; attribution and first-visit measurement are unproven.",
+      "message": "Subject: RemindLink launch: one measurement leak I found\n\nHi Roshan,\n\nI saw the RemindLink Show HN launch today. The product promise is clear: save a link and get reminded to read it.\n\nI ran a quick public-page audit. Two concrete notes:\n\n- The homepage is 155.8 KiB of HTML, which is heavier than the audit heuristic for a first load.\n- No analytics artifact was visible in the fetched source, so launch traffic attribution is unproven from the page alone.\n\nI did not access your app, analytics, or hosting. The free audit is here if you want the full evidence and fixes:\nhttps://nebulacomponents.com/audit?utm_source=hn&utm_medium=outreach&utm_campaign=fresh-launch-20260815&utm_content=remindlink\n\nMike\nNebula Components\n\nNebula Components, 66 Sonneck Square, Scarborough, ON M1E 1A9\nUnsubscribe: https://nebulacomponents.com/unsubscribe"
+    },
+    {
+      "name": "Asakiri",
+      "site": "https://www.asakiri.com",
+      "contact_route": "alok@asakiri.com",
+      "hn_post": "https://news.ycombinator.com/item?id=49308153",
+      "source_url": "https://news.ycombinator.com/item?id=49308153",
+      "trigger": "Show HN launch posted about 5 hours ago: Asakiri Studio is in alpha and seeking early interest from course creators.",
+      "trigger_type": "fresh_show_hn_launch",
+      "audit_score": 7.4,
+      "finding": "The primary CTA source text is Asakiri, so the action does not state what changes for the visitor; no analytics artifact was visible in the fetched source.",
+      "message": "Subject: Asakiri launch: one CTA leak I found\n\nHi Alok,\n\nI saw the Asakiri Studio Show HN launch. The local-first course authoring angle is unusually clear.\n\nI ran a quick public-page audit. The main CTA is labeled \"Asakiri\" rather than an outcome such as downloading the studio or starting a course, so a new visitor has to infer the next step. I also could not find an analytics artifact in the fetched source, so launch traffic attribution is unproven from the page alone.\n\nI only checked the public page. The free audit with the exact evidence is here:\nhttps://nebulacomponents.com/audit?utm_source=hn&utm_medium=outreach&utm_campaign=fresh-launch-20260815&utm_content=asakiri\n\nMike\nNebula Components\n\nNebula Components, 66 Sonneck Square, Scarborough, ON M1E 1A9\nUnsubscribe: https://nebulacomponents.com/unsubscribe"
+    },
+    {
+      "name": "Riffn",
+      "site": "https://riffn.io",
+      "contact_route": "hi@riffn.io",
+      "hn_post": "https://news.ycombinator.com/item?id=49308095",
+      "source_url": "https://news.ycombinator.com/item?id=49308095",
+      "trigger": "Show HN launch posted about 5 hours ago: Riffn launched an iOS voice link to coding agents and local models.",
+      "trigger_type": "fresh_show_hn_launch",
+      "audit_score": 7.2,
+      "finding": "No named proof, quote, number, or other trust marker was visible near the first CTA in the fetched source; no analytics artifact was visible either.",
+      "message": "Subject: Riffn launch: one trust leak I found\n\nHi Riffn team,\n\nI saw the Riffn Show HN launch. The hands-free link to repo agents is easy to understand, and the public bridge is a strong credibility asset.\n\nI ran a quick public-page audit. The first CTA has no visible customer proof, usage number, quote, or named result beside it, so a new visitor is being asked to trust the workflow before seeing evidence from another user. I also could not find an analytics artifact in the fetched source, so launch traffic attribution is unproven from the page alone.\n\nI only checked the public page. The free audit with the exact evidence is here:\nhttps://nebulacomponents.com/audit?utm_source=hn&utm_medium=outreach&utm_campaign=fresh-launch-20260815&utm_content=riffn\n\nMike\nNebula Components\n\nNebula Components, 66 Sonneck Square, Scarborough, ON M1E 1A9\nUnsubscribe: https://nebulacomponents.com/unsubscribe"
+    }
+  ]
+}

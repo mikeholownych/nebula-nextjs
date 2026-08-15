@@ -16,7 +16,7 @@ from lead_store import LeadStore
 from mailcheck_adapter import MailCheckAdapter, MailCheckError
 from send_window import in_send_window
 
-BATCH = ROOT / 'ops' / 'fresh_trigger_batch_20260813.json'
+BATCH = ROOT / 'ops' / 'fresh_trigger_batch_20260815.json'
 BETA_CONFIG = Path('/etc/nebula-mailcheck-beta.conf')
 
 
