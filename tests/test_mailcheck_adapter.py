@@ -88,3 +88,20 @@ def test_quota_is_bounded():
             MailCheckAdapter(key_file=key, db_path=Path(d) / "a.db", monthly_quota=99)
         with pytest.raises(ValueError):
             MailCheckAdapter(key_file=key, db_path=Path(d) / "b.db", monthly_quota=501)
+
+
+def test_evidence_persistence_includes_non_authorizing_gateway_enrichment(monkeypatch, adapter):
+    payload = {
+        "dns": [{"mx_records": [{"hostname": "mx-us.mimecast.com"}]}],
+        "smtp": [{"mx_hostname": "mx-us.mimecast.com", "banner": "mx-us.mimecast.com ESMTP"}],
+    }
+
+    def fake_request(method, path, *, body=None, idempotency_key=None):
+        assert method == "GET"
+        assert path.endswith("/evidence")
+        return payload, "req-evidence"
+
+    monkeypatch.setattr(adapter, "_request", fake_request)
+    stored = adapter.evidence("v-mimecast")
+    assert stored["gateway_enrichment"]["security_gateway_vendor"] == "mimecast"
+    assert stored["gateway_enrichment"]["authorizes_sending"] is False

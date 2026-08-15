@@ -17,6 +17,8 @@ from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
+from gateway_fingerprint import enrich_gateway_evidence
+
 BASE = Path("/home/mike/nebula")
 DEFAULT_BASE_URL = "https://mailcheck.mikeholownych.com"
 DEFAULT_KEY_FILE = "/etc/nebula-mailcheck.key"
@@ -217,6 +219,7 @@ class MailCheckAdapter:
         payload, _ = self._request("GET", f"/api/v1/verifications/{verification_id}/evidence")
         if not isinstance(payload, dict):
             raise MailCheckError("MAILCHECK_INVALID_EVIDENCE")
+        payload = enrich_gateway_evidence(payload)
         with sqlite3.connect(self.db_path) as db:
             db.execute(
                 "INSERT INTO evidence(verification_id, evidence_json, fetched_at) VALUES (?, ?, ?) "
