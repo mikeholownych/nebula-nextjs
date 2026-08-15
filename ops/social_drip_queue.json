@@ -1,0 +1,116 @@
+{
+  "posted": {
+    "typeform": "unknown",
+    "shopify": "unknown",
+    "figma": "unknown",
+    "intercom": "unknown",
+    "slack": "unknown",
+    "zapier": "unknown",
+    "monday": "unknown",
+    "hubspot": "unknown",
+    "mailchimp": "unknown",
+    "audit-data-post-20260808": "unknown",
+    "auto-teardown-luxuryaurahub.com-20260808": "unknown",
+    "auto-teardown-sqauras.com-20260809": "unknown",
+    "auto-teardown-postessia.com-20260810": "unknown"
+  },
+  "queue": [
+    {
+      "id": "typeform",
+      "content": "The company whose product IS the first impression ships a homepage with no H1 at all.\n\nTypeform's homepage document contains zero <h1> elements. Not a weak one — none. And the title tag truncates mid-brand in the fetched source: \"Forms & Automated Workflows, Powered by AI | Typef\".\n\nThe two most-weighted on-page signals, both compromised, on a 303KB page.\n\nScore: 6.2/10, Grade C. Every finding has a source, a measured value, and a fix:\nhttps://nebulacomponents.com/teardowns/typeform?utm_source=linkedin&utm_medium=social&utm_campaign=teardown-typeform\n\nSame engine on your page, free:\nhttps://nebulacomponents.com/audit?from=%2Fteardowns%2Ftypeform&utm_source=linkedin&utm_medium=social&utm_campaign=teardown-typeform"
+    },
+    {
+      "id": "shopify",
+      "content": "Shopify's homepage H1 reads \"Be the nextAI all-star\".\n\nNot a typo in this post — the missing space between \"next\" and \"AI\" is a line-break collapse in the production source HTML. The commerce platform that powers millions of storefronts shipped it.\n\nAlso on the page: a 66-character title (truncates in most SERPs at ~60) and a 411KB HTML payload — 3.4x the size heuristic for a marketing page.\n\nScore: 7.1/10, Grade B. Strong page, real maintenance debt at the margins:\nhttps://nebulacomponents.com/teardowns/shopify?utm_source=linkedin&utm_medium=social&utm_campaign=teardown-shopify\n\nIf Shopify ships a line-break collapse in its H1, check yours:\nhttps://nebulacomponents.com/audit?from=%2Fteardowns%2Fshopify&utm_source=linkedin&utm_medium=social&utm_campaign=teardown-shopify"
+    },
+    {
+      "id": "figma",
+      "content": "Figma's homepage HTML is 1,560.7 KiB — the heaviest landing page we've ever measured.\n\n13x the size heuristic. Before one image loads, every visitor parses a megabyte and a half of markup.\n\nAlso visible in the source: the rebrand seam. The title says \"collaborative canvas\". The H1 says \"intelligent canvas\". Two product narratives on one page — weak keyword overlap between the two most-weighted on-page signals.\n\nScore: 7.0/10, Grade B. Full findings with evidence:\nhttps://nebulacomponents.com/teardowns/figma?utm_source=linkedin&utm_medium=social&utm_campaign=teardown-figma\n\nSame engine on your page — free, 60 seconds:\nhttps://nebulacomponents.com/audit?from=%2Fteardowns%2Ffigma&utm_source=linkedin&utm_medium=social&utm_campaign=teardown-figma"
+    },
+    {
+      "id": "intercom",
+      "content": "Intercom sells measurement-heavy CX software. Its homepage static source contains zero measurement artifacts.\n\nNo GA4. No pixel. No UTM-bearing link. No conversion call. The measurement company's page is unmeasurable from the outside.\n\nPlus 1,528 KiB of HTML — second-heaviest we've measured.\n\nScore: 6.9/10, Grade B. Evidence:\nhttps://nebulacomponents.com/teardowns/intercom?utm_source=linkedin&utm_medium=social&utm_campaign=teardown-intercom\n\nRun the same engine on your page:\nhttps://nebulacomponents.com/audit?from=%2Fteardowns%2Fintercom&utm_source=linkedin&utm_medium=social&utm_campaign=teardown-intercom"
+    },
+    {
+      "id": "slack",
+      "content": "Slack sells \"the AI work platform\". Its meta description is 173 characters, so Google truncates it mid-word:\n\n\"Boost productivity and save time with Slack — the AI work platform for managing p…\"\n\nThe company that built a brand on cutting noise lets its own search snippet dissolve into an unfinished sentence.\n\nScore: 6.6/10, Grade B. Full evidence:\nhttps://nebulacomponents.com/teardowns/slack?utm_source=linkedin&utm_medium=social&utm_campaign=teardown-slack\n\nCheck your own snippet length, free:\nhttps://nebulacomponents.com/audit?from=%2Fteardowns%2Fslack&utm_source=linkedin&utm_medium=social&utm_campaign=teardown-slack"
+    },
+    {
+      "id": "zapier",
+      "content": "Zapier is mid-pivot to \"agentic AI\" and the homepage shows the strain.\n\nH1: \"The automation layer for agentic AI\"\nTitle: \"Zapier: Automate AI Workflows, Agents, and Apps\"\n\nTwo different framings of the same product on the same page — plus a 461KB HTML payload, the heaviest in that batch.\n\nScore: 7.4/10, Grade B — strongest of the five. Findings:\nhttps://nebulacomponents.com/teardowns/zapier?utm_source=linkedin&utm_medium=social&utm_campaign=teardown-zapier\n\nSame engine on your page:\nhttps://nebulacomponents.com/audit?from=%2Fteardowns%2Fzapier&utm_source=linkedin&utm_medium=social&utm_campaign=teardown-zapier"
+    },
+    {
+      "id": "monday",
+      "content": "Monday.com's homepage carries two H1 elements.\n\n\"The AI Work Platform for People & Agents\" — and the page can't pick one headline. The primary topical signal, split in two. Plus a 599KB HTML payload, five times the size heuristic.\n\nScore: 6.9/10, Grade B. Full findings:\nhttps://nebulacomponents.com/teardowns/monday?utm_source=linkedin&utm_medium=social&utm_campaign=teardown-monday\n\nSame engine on your page, free:\nhttps://nebulacomponents.com/audit?from=%2Fteardowns%2Fmonday&utm_source=linkedin&utm_medium=social&utm_campaign=teardown-monday"
+    },
+    {
+      "id": "hubspot",
+      "content": "The marketing platform whose homepage tells search engines a different story than the one it tells visitors.\n\nHubSpot's H1 in the static HTML: \"Where go-to-market teams go to grow scale close retain grow.\"\nThe headline humans actually see: \"Where go-to-market teams go to scale.\"\nSame URL. Two different headlines.\n\nAlso shipped to production: a title tag ending in \"- Homepage\" (template placeholder), and a 608KB homepage payload — 5x the size heuristic for a marketing page.\n\nScore: 7.0/10, Grade B. Full findings with evidence:\nhttps://nebulacomponents.com/teardowns/hubspot?utm_source=linkedin&utm_medium=social&utm_campaign=teardown-hubspot\n\nThe lesson: if HubSpot ships a template title suffix, your page probably has one too. Free scan:\nhttps://nebulacomponents.com/audit?from=%2Fteardowns%2Fhubspot&utm_source=linkedin&utm_medium=social&utm_campaign=teardown-hubspot"
+    },
+    {
+      "id": "mailchimp",
+      "content": "The company that sells email marketing — the craft of one clear message — has six H1s on its homepage.\n\nSix. Each telling a different story about what the product is:\n1. \"Email & SMS marketing minus the learning curve\"\n2. \"Effortless growth powered by your data\"\n3. \"AI-powered marketing that brings your customers to you\"\n4. \"An easier way to keep your community engaged\"\n5. \"Connect with clients and grow your business faster\"\n\nSearch engines and screen readers can't tell which is the primary message. The page is structurally telling six stories at once.\n\nScore: 7.2/10, Grade B. The fix is a pure markup change with zero visual impact:\nhttps://nebulacomponents.com/teardowns/mailchimp?utm_source=linkedin&utm_medium=social&utm_campaign=teardown-mailchimp\n\nSame engine on your page:\nhttps://nebulacomponents.com/audit?from=%2Fteardowns%2Fmailchimp&utm_source=linkedin&utm_medium=social&utm_campaign=teardown-mailchimp"
+    },
+    {
+      "id": "audit-data-post-20260808",
+      "content": "I audited 130+ landing pages this month.\n\nThe #1 finding that keeps coming up:\n\nNo H1 tag.\n\nNot \"weak headline.\" Not \"unclear headline.\" Literally no H1 in the source.\n\nOne app I audited scored 4.3/10. The page had:\n— No H1 (zero)\n— Title tag: 12 characters\n— No CTA text in source HTML (client-rendered, pre-JS)\n— Zero social proof\n\nThe founder is spending on ads to this page.\n\nEvery visitor from every ad has to do the work the page refuses to do — figure out what it's for, who it's for, and why they should care.\n\nThat's not a traffic problem. That's a page problem.\n\nThe audit takes 90 seconds and shows you exactly which signals are failing:\n👇 nebulacomponents.com/audit\n\n(URL in comments)",
+      "scheduled_for": null
+    },
+    {
+      "id": "auto-teardown-luxuryaurahub.com-20260808",
+      "url": "https://luxuryaurahub.com/",
+      "content": "Your homepage visitors need a reason to stay within 3 seconds.\n\nluxuryaurahub.com doesn't give them one.\n\nThe first 3,000 characters—your most valuable real estate—contain zero headline. No offer. No clickable element. Just empty space where conversion intent should be.\n\nThat's a 4.0/10 impact problem.\n\nBeyond that, the page is running blind. No GA4. No analytics tag in the source. You're collecting zero data on how people behave, where they drop off, or what actually converts.\n\nThe social proof section? Empty. No testimonials. No reviews. No third-party validation. Just assumptions that visitors will trust you because you exist.\n\nGrade: C (5.7/10).\n\nThis isn't about aesthetics or design taste. This is measurable friction. Every element either moves someone toward a conversion or it doesn't. Right now, too many elements do nothing.\n\nThe fix isn't complicated—it's mechanical. Add a clear headline with an offer term in the first viewport. Install GA4. Surface real customer proof. Test incrementally.\n\nSmall changes compound.\n\nRun the same audit on your page: https://nebulacomponents.com/audit?utm_source=linkedin&utm_medium=social&utm_campaign=auto-teardown",
+      "generated_at": "2026-08-08T11:30:21.841700+00:00",
+      "source": "auto_teardown"
+    },
+    {
+      "id": "auto-teardown-sqauras.com-20260809",
+      "url": "https://sqauras.com",
+      "content": "Sqauras.com's homepage has zero analytics tags in the source code.\n\nThat's not a minor oversight. It means they're flying blind on visitor behavior, conversion funnels, everything. GA4 or equivalent should be standard practice for any site tracking performance.\n\nThe audit also surfaced three structural issues worth fixing:\n\n**Above the fold:** First 3,000 characters contain no headline, CTA, or offer clarity. Users land and don't immediately know what they're looking at.\n\n**SEO foundations:** Two H1 tags instead of one. The H1 and title tag don't share meaningful keyword alignment. Search engines get mixed signals about page intent.\n\n**Overall score: 6.6/10** (B grade). Not failing. Not optimized either.\n\nThe fix list is straightforward—add measurement infrastructure, consolidate heading hierarchy, align on-page messaging. Most of this takes a few hours to implement.\n\nThe gap between \"it works\" and \"it works well\" usually lives in these foundational details. They compound over time.\n\nWant to see how your page stacks up against the same criteria? Run the same audit: https://nebulacomponents.com/audit?utm_source=linkedin&utm_medium=social&utm_campaign=auto-teardown",
+      "generated_at": "2026-08-09T15:46:21.758441+00:00",
+      "source": "auto_teardown"
+    },
+    {
+      "id": "auto-teardown-postessia.com-20260810",
+      "url": "https://postessia.com/",
+      "content": "postessia.com scores 6.4/10. Here's why: zero trust signals on the homepage.\n\nNo testimonials. No reviews. No social proof of any kind. That's a problem when you're asking visitors to convert.\n\nSecond issue: no analytics tags in the source code. GA4, Segment, nothing. You're flying blind on user behavior.\n\nThird: the CTA language above the fold is either vague or missing entirely. Visitors don't know what action you want them to take.\n\nThese three gaps compound. You're asking strangers to trust you without proof, while simultaneously collecting no data on whether they're considering it.\n\nThe math is simple: trust signals → credibility → conversion. Remove any piece and the chain breaks.\n\nMost homepages have at least one of these sorted. postessia.com has none of them.\n\nRun the same audit on your page: https://nebulacomponents.com/audit?utm_source=linkedin&utm_medium=social&utm_campaign=auto-teardown",
+      "generated_at": "2026-08-10T10:36:47.378370+00:00",
+      "source": "auto_teardown"
+    },
+    {
+      "id": "auto-teardown-keepersdigital.com-20260811",
+      "url": "https://keepersdigital.com",
+      "content": "keepersdigital.com is missing analytics entirely. No GA4. No measurement tag in the source HTML.\n\nThat's your baseline problem. You can't optimize what you don't measure.\n\nThe meta description clocks in at 64 characters. Google's showing 120+ in most search results now. You're leaving real estate on the table—literally truncating your pitch before users even click.\n\nThen there's the above-fold section. Has a headline. No clickable action. Visitors land and have nowhere obvious to go.\n\nOverall score: 6.9/10. Functional. Not converting at potential.\n\nThe good news? These are fixable. Add measurement infrastructure. Expand that description to 120 characters minimum. Give people a button they actually want to press.\n\nMost homepages leave performance on the table because nobody's auditing them systematically. You probably have similar gaps.\n\nRun the same audit on your page: https://nebulacomponents.com/audit?utm_source=linkedin&utm_medium=social&utm_campaign=auto-teardown",
+      "generated_at": "2026-08-11T04:10:34.801597+00:00",
+      "source": "auto_teardown"
+    },
+    {
+      "id": "brand-os-w6-page-problem-20260815",
+      "content": "You can buy more clicks and still make less money.\n\nIf the landing page does not answer who it is for, what changes, and why trust you, every ad click has to solve that problem alone.\n\nThat is not a traffic problem. It is a page problem.\n\nRun the free evidence-backed audit: https://nebulacomponents.com/audit?utm_source=linkedin&utm_medium=social&utm_campaign=brand-os-w6-20260815",
+      "campaign": "brand-os-w6-20260815",
+      "status": "queued",
+      "scheduled_for": null
+    },
+    {
+      "id": "brand-os-w6-evidence-over-taste-20260815",
+      "content": "A landing page can look polished and still leak buyers.\n\nThe useful question is not whether the page feels modern. It is whether the source contains the signals a cold visitor needs to act.\n\nHeadline. Offer. Proof. Clear next step.\n\nNebula checks the page, records the evidence, and shows the highest-cost gaps.\n\nRun the free audit: https://nebulacomponents.com/audit?utm_source=linkedin&utm_medium=social&utm_campaign=brand-os-w6-20260815",
+      "campaign": "brand-os-w6-20260815",
+      "status": "queued",
+      "scheduled_for": null
+    },
+    {
+      "id": "brand-os-w6-founder-story-20260815",
+      "content": "I built a tool to find why landing pages do not convert.\n\nThen I looked at my own page and found the same problem.\n\nThe page explained the product. It did not make the next step obvious.\n\nThat is the difference between a page that works and a page that closes.\n\nRun the free audit: https://nebulacomponents.com/audit?utm_source=linkedin&utm_medium=social&utm_campaign=brand-os-w6-20260815",
+      "campaign": "brand-os-w6-20260815",
+      "status": "queued",
+      "scheduled_for": null
+    },
+    {
+      "id": "brand-os-w6-mailcheck-risk-20260815",
+      "content": "A provider saying an address is deliverable is not the same as proving it is safe to send.\n\nIn a 93-contact comparison, MailCheck classified 2 addresses as CONFIRMED_INVALID. Nebula hard-blocked both. It also surfaced ACCEPT_ALL and unresolved states instead of pretending uncertainty was certainty.\n\nThat is not a sales feature. It is a risk and reputation layer for outbound contact decisions.\n\nMailCheck helps outbound systems decide who is safe to contact and how much uncertainty remains before sending.\n\nNo sales claim is attached to this result.",
+      "campaign": "brand-os-w6-20260815",
+      "status": "queued",
+      "scheduled_for": null
+    }
+  ]
+}
