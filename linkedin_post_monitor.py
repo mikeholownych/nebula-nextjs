@@ -40,9 +40,10 @@ POST_ANGLES = {
 # These are HIGHEST intent - commenters are publicly raising their hand.
 # Reference: The AI Outbound Stack, meadow-leader-47c.notion.site
 CREATOR_POSTS = [
-    # Priority: find posts about landing page CRO, ad conversions, or
-    # paid traffic from these creator profiles. Add specific post URLs below.
-    # "https://www.linkedin.com/feed/update/urn:li:activity:<ID>/",
+    # Current public discussions about paid traffic and landing-page conversion.
+    "https://www.linkedin.com/posts/elainequirke_lots-of-brands-are-still-buying-meta-like-activity-7486284258605420545-CIZ5",
+    "https://www.linkedin.com/posts/ben-heath-marketing_if-your-ads-are-getting-clicks-but-no-sales-activity-7324071490537103360-CGo4",
+    "https://www.linkedin.com/posts/mobysiddique_youre-running-ads-and-clicks-are-coming-activity-7366227972929830929-Yhv_",
 ]
 
 # Creator profiles to check for new posts (populate with actual URLs)
