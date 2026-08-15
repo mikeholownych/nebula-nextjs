@@ -143,12 +143,36 @@ function AuditFormContent() {
 
         <div>
           <label htmlFor="reason" className="mb-2 block text-sm font-medium text-fg-muted">
-            What made you run this audit today? <span className="text-fg-muted">(optional)</span>
+            What brought you here today? <span className="text-fg-muted">(optional)</span>
           </label>
+          <div className="mb-3 flex flex-wrap gap-2" aria-label="Audit reason shortcuts">
+            {[
+              "Ads are getting clicks but no conversions",
+              "Launching a new page soon",
+              "The page looks fine but feels off",
+            ].map((option) => (
+              <button
+                key={option}
+                type="button"
+                onClick={() => {
+                  setReason(option)
+                  posthog.capture('audit_reason_selected', { reason: option })
+                }}
+                disabled={loading}
+                className={`rounded-full border px-3 py-1.5 text-left text-xs transition-colors ${
+                  reason === option
+                    ? 'border-accent bg-accent/10 text-accent'
+                    : 'border-border text-fg-muted hover:border-accent hover:text-fg'
+                }`}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
           <textarea
             id="reason"
             name="audit-reason"
-            placeholder="e.g. ads aren't converting, launching next week, page feels off…"
+            placeholder="Tell the audit what changed, or choose a shortcut above."
             value={reason}
             onChange={(e) => setReason(e.target.value)}
             disabled={loading}
@@ -156,6 +180,9 @@ function AuditFormContent() {
             maxLength={300}
             className="w-full resize-none rounded-lg border border-fg-muted/30 bg-bg px-4 py-3 text-sm text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none disabled:opacity-50"
           />
+          <p className="mt-2 text-xs leading-5 text-fg-muted">
+            This helps the report explain the finding in your context. It does not change the checks.
+          </p>
         </div>
 
         <button
