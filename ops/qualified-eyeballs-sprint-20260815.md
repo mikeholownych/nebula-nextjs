@@ -19,28 +19,19 @@ Objective: drive qualified audit starts, not generic traffic, toward one attribu
 3 real buyer conversations
 1 completed $97 payment
 
-## Source lane A: PPC pain
+## Channel exclusion
 
-### 1. $500 Google Ads, 160 clicks, 0 conversions
-Source: https://www.reddit.com/r/GoogleAdsDiscussion/comments/1t4ng49/500_spent_on_google_ads_160_clicks_0_conversions/
+Reddit is permanently excluded. Mike has empirically confirmed that every account is shadowbanned. Do not search Reddit for Nebula acquisition, draft Reddit replies, or recommend Reddit posting.
 
-Draft reply:
+## Source lane A: Direct trigger email
 
-> $500 and 160 clicks with zero conversions is enough to inspect the page before changing the campaign. I would check the promise chain first: what the ad says, what the first viewport says, and whether the primary action is obvious without scrolling. If useful, Nebula has a free evidence-backed audit that checks those conditions against the live page: https://nebulacomponents.com/audit
+Use the existing Nebula trigger engine to identify founders with public evidence of active ad spend and zero conversions. Hunter and MailCheck run for every lookup. Send only when the source trigger, contact route, suppression state, compliance footer, and Nebula release gate pass.
 
-### 2. High landing-page views, no sales
-Source: https://www.reddit.com/r/FacebookAds/comments/1mbt12u/high_landing_page_views_but_no_sales/
+Required email angle:
 
-Draft reply:
+> You said the ads are getting attention but the page is not closing the click. I found one specific condition worth checking. Run the free audit here: https://nebulacomponents.com/audit
 
-> High landing-page views with no sales usually means the ad is earning the click but the page is losing the decision. I would inspect message match, proof near the CTA, and mobile action visibility before increasing spend. This free audit checks those page conditions against the actual URL: https://nebulacomponents.com/audit
-
-### 3. $1,000 in ads, no conversions
-Source: https://www.reddit.com/r/PPC/comments/1ju0tsg/help_my_landing_page_1000_in_ads_no_conversions/
-
-Draft reply:
-
-> The useful question is not only whether the ads are working. It is whether the landing page continues the promise that earned the click. Before changing targeting, check the first viewport, trust evidence, CTA clarity, and mobile visibility. Free audit: https://nebulacomponents.com/audit
+No generic list expansion. Every send must preserve source URL, trigger text, provider observations, and payment attribution.
 
 ## Source lane B: Indie Hackers founder pain
 
@@ -75,9 +66,9 @@ Draft DM:
 
 Use source parameters where the surface supports them:
 
-- `?utm_source=reddit&utm_medium=thread&utm_campaign=qualified-eyeballs-20260815`
 - `?utm_source=indiehackers&utm_medium=thread&utm_campaign=qualified-eyeballs-20260815`
 - `?utm_source=connector&utm_medium=skool&utm_campaign=qualified-eyeballs-20260815`
+- `?utm_source=trigger-email&utm_medium=email&utm_campaign=qualified-eyeballs-20260815`
 
 Primary success event: completed Stripe payment attributed to this experiment.
 
@@ -85,4 +76,4 @@ Diagnostic events: thread reply, audit start, completed audit, checkout start, r
 
 ## Manual action required
 
-Post the three PPC replies and the two Indie Hackers replies manually after checking each thread is still active and the reply adds value. Send the connector DM manually. Do not claim reach until platform receipts or analytics show it.
+Review the two Indie Hackers drafts manually if the threads are still active. Send the connector DM manually. Run the direct trigger-email lane through Nebula's existing provider and release-gate path. Do not claim reach until platform receipts or analytics show it.
