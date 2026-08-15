@@ -165,7 +165,7 @@ def load_research() -> dict[str, Any]:
         })
     # The research intake is the authoritative fallback when content generation
     # has not produced a fresh content_queue artifact yet.
-    if not candidates:
+    if not candidates and BASE != Path(__file__).resolve().parent:
         inbox = BASE / "ops" / "research" / "inbox.jsonl"
         if inbox.exists():
             inbox_mtime = datetime.fromtimestamp(inbox.stat().st_mtime, tz=timezone.utc)
@@ -176,6 +176,9 @@ def load_research() -> dict[str, Any]:
                     continue
                 finding = data.get("observed_problem") or data.get("claim")
                 source_url = data.get("source_url")
+                source_type = str(data.get("source_type", "research_intake"))
+                if source_type not in {"prospect_evidence", "public_teardown", "production_self_audit", "research_intake"}:
+                    continue
                 if not finding or not source_url or not str(source_url).startswith(("http://", "https://")):
                     continue
                 created_at = data.get("reviewed_at") or data.get("created_at") or inbox_mtime.isoformat()

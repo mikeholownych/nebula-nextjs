@@ -540,8 +540,8 @@ class LeadStore:
         ASYNC_STAGES = frozenset({
             "paid", "dead", "bounced",
             "discovered", "site_found",
-            "pitch_sent", "pitch_queued",
-            "needs_review",  # human-review holding stage - not a pipeline failure
+            "contacted", "replied", "warm_replied",
+            "pitch_sent", "pitch_queued", "needs_review",
         })
         now = datetime.now(timezone.utc)
         stuck = []

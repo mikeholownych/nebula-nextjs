@@ -34,9 +34,35 @@ TEST_EMAILS_LC = frozenset([
     'founder@testco.com', 'nebulashop@agentmail.to',
 ])
 
-# ── Telegram alert via hermes ──────────────────────────────────────────────
+# Conditions that justify interrupting Mike. Everything else is quarantined locally
+# for the next autonomous run instead of being pushed as an urgent Telegram alert.
+USER_ESCALATION_TERMS = (
+    'purchase', 'payment', 'revenue', 'security', 'credential', 'unauthorized',
+    'data loss', 'legal', 'compliance', 'production outage', 'service down',
+)
+REVIEW_QUEUE = BASE / 'ops' / 'sre_review_queue.jsonl'
+
+
+def requires_user_escalation(message: str) -> bool:
+    lowered = message.lower()
+    return any(term in lowered for term in USER_ESCALATION_TERMS)
+
+
+def quarantine_escalations(items: list[str]) -> None:
+    """Persist routine anomalies for autonomous review without interrupting Mike."""
+    if not items:
+        return
+    REVIEW_QUEUE.parent.mkdir(parents=True, exist_ok=True)
+    with REVIEW_QUEUE.open('a') as f:
+        for item in items:
+            f.write(json.dumps({
+                'recorded_at': NOW.isoformat(),
+                'status': 'queued_for_autonomous_review',
+                'message': item,
+            }, ensure_ascii=False) + '\n')
+
 def telegram_alert(msg: str, level: str = 'warn'):
-    """Only fires on escalation or revenue events. Not on every warning."""
+    """Only fires on approved high-impact escalation or revenue events."""
     icon = {'info': 'ℹ️', 'warn': '⚠️', 'critical': '🚨', 'revenue': '💰'}.get(level, '⚠️')
     full = f"{icon} *SRE [{level.upper()}]*\n{msg}"
     try:
@@ -48,6 +74,7 @@ def telegram_alert(msg: str, level: str = 'warn'):
             log(f'telegram_alert failed: rc={result.returncode} stderr={result.stderr.strip()}')
     except Exception as e:
         log(f'telegram_alert failed: {e}')
+
 
 def log(msg: str):
     ts = NOW.strftime('%Y-%m-%d %H:%M:%S UTC')
@@ -78,6 +105,13 @@ def bump_failure(state: dict, key: str) -> int:
 def clear_failure(state: dict, key: str):
     state.setdefault('failures', {})
     state['failures'].pop(key, None)
+    state.setdefault('active_alerts', {})
+    state['active_alerts'].pop(key, None)
+
+
+def alert_fingerprint(name: str, detail: str) -> str:
+    """Stable condition identity used to suppress repeat alerts."""
+    return f"{name}|{detail.strip()}"
 
 # ── Remediations ─────────────────────────────────────────────────────────
 
@@ -682,16 +716,23 @@ def main():
                 name = c.get('name', '')
                 detail = c.get('detail', '')
                 failures = bump_failure(state, name)
-                if failures >= 3:
+                fingerprint = alert_fingerprint(name, detail)
+                active_alerts = state.setdefault('active_alerts', {})
+                previous_fingerprint = active_alerts.get(name)
+                if failures >= 3 and previous_fingerprint != fingerprint:
                     escalations.append(f'`{name}` failed {failures}x: {detail}')
+                    active_alerts[name] = fingerprint
+                elif failures >= 3:
+                    log(f'[watch] Suppressed repeat alert for unchanged condition: {name}')
                 else:
                     log(f'[watch] {name} failed (attempt {failures}/3): {detail}')
 
             # Clear failure counters for checks that have recovered
             current_failing = {c.get('name') for c in actionable_failures}
-            for check_name in list(state.get('failures', {}).keys()):
+            for check_name in list(set(state.get('failures', {}).keys()) | set(state.get('active_alerts', {}).keys())):
                 if check_name not in current_failing:
-                    prev = state['failures'].pop(check_name, None)
+                    prev = state.get('failures', {}).pop(check_name, None)
+                    state.setdefault('active_alerts', {}).pop(check_name, None)
                     if prev is not None:
                         log(f'[recovered] Cleared failure counter for "{check_name}" (was {prev})')
         except Exception as e:
@@ -724,11 +765,18 @@ def main():
     except Exception as e:
         log(f'[revenue-check] Error: {e}')
 
-    # 10. Escalate only when needed
+    # 10. Route remaining anomalies by risk. Routine conditions are quarantined
+    # locally; only high-impact categories interrupt Mike.
     if escalations:
-        msg = f"*{len(escalations)} escalation(s) need attention:*\n" + '\n'.join(f'• {e}' for e in escalations)
-        telegram_alert(msg, level='critical')
-        log(f'[escalate] Sent alert: {len(escalations)} issues')
+        user_items = [item for item in escalations if requires_user_escalation(item)]
+        routine_items = [item for item in escalations if not requires_user_escalation(item)]
+        quarantine_escalations(routine_items)
+        if user_items:
+            msg = f"*{len(user_items)} escalation(s) need attention:*\n" + '\n'.join(f'• {e}' for e in user_items)
+            telegram_alert(msg, level='critical')
+            log(f'[escalate] Sent {len(user_items)} high-impact alert(s); quarantined {len(routine_items)} routine item(s)')
+        else:
+            log(f'[quarantine] Stored {len(routine_items)} routine item(s); no user escalation')
 
     # Save state
     state['last_run'] = NOW.isoformat()

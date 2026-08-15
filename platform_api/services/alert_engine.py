@@ -107,7 +107,7 @@ async def check_cvr(pool: asyncpg.Pool) -> list[str]:
         return alerts  # not enough data today
 
     today_cvr = (
-        100.0 * row["today_purchases"] / row["today_audits"]
+        100.0 * float(row["today_purchases"]) / float(row["today_audits"])
         if row["today_audits"] > 0 else 0
     )
     baseline = float(row["baseline_cvr_pct"] or 0)

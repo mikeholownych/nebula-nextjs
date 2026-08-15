@@ -18,21 +18,17 @@ from __future__ import annotations
 import json
 import os
 import sqlite3
-import urllib.error
-import urllib.parse
-import urllib.request
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 DB_PATH = Path(__file__).parent.parent / "lead_gen" / "lead_state.db"
 import sys
 sys.path.insert(0, str(DB_PATH.parents[1]))
+from agentmail_client import AgentMailClient
 from hunter_parallel import HunterAdapter
 from mailcheck_adapter import MailCheckAdapter, MailCheckError
 
-KEY_PATH = Path.home() / ".hermes" / "secrets" / "agentmail_org.key"
 INBOX = "sedrick@nebulacomponents.com"
-LEGACY_INBOX = "nebulashop@agentmail.to"  # watch for replies on existing sequences
 
 # Load Hunter key from .env
 def _hunter_key() -> str:
@@ -178,31 +174,20 @@ def register_d1_sent(
 
 # ── AgentMail helpers ──────────────────────────────────────────────────────
 
-def _get_key() -> str:
-    return KEY_PATH.read_text().strip()
+def _agentmail() -> AgentMailClient:
+    return AgentMailClient(inbox=INBOX)
 
 
-def _am_get(path: str) -> dict:
-    key = _get_key()
-    url = f"https://api.agentmail.to{path}"
-    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {key}"})
-    with urllib.request.urlopen(req, timeout=15) as r:
-        return json.loads(r.read())
-
-
-def _am_post(path: str, body: dict) -> dict:
-    key = _get_key()
-    url = f"https://api.agentmail.to{path}"
-    data = json.dumps(body).encode()
-    req = urllib.request.Request(
-        url, data=data, method="POST",
-        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"}
+def _am_send(*, email: str, subject: str, text: str, html: str | None = None, client_id: str, labels: list[str]) -> dict:
+    return _agentmail().send(
+        [email], subject, text=text, html=html, client_id=client_id, labels=labels
     )
-    try:
-        with urllib.request.urlopen(req, timeout=20) as r:
-            return json.loads(r.read())
-    except urllib.error.HTTPError as e:
-        return {"_error": e.code, "_body": e.read().decode()[:400]}
+
+
+def _am_reply(*, message_id: str, recipient: str, text: str, client_id: str) -> dict:
+    return _agentmail().reply(
+        message_id, recipient=recipient, text=text, client_id=client_id
+    )
 
 
 def has_reply(thread_id: str) -> bool:
@@ -210,13 +195,10 @@ def has_reply(thread_id: str) -> bool:
     if not thread_id:
         return False
     try:
-        data = _am_get(f"/inboxes/{INBOX}/threads/{thread_id}")
-        messages = data.get("messages", [])
-        for msg in messages:
+        for msg in _agentmail().list_messages(thread_id=thread_id):
             labels = msg.get("labels", [])
-            # Inbound non-bounce message = reply
             if "received" in labels and "sent" not in labels:
-                from_addr = msg.get("from", "").lower()
+                from_addr = str(msg.get("from", "")).lower()
                 if not any(x in from_addr for x in ["mailer-daemon", "agentmail.to"]):
                     return True
     except Exception:
@@ -310,20 +292,19 @@ def run_sequence() -> list[str]:
             subject, text = _d7_email(row)
             # Reply in the original thread
             if thread_id and row["message_id"]:
-                result = _am_post(
-                    f"/inboxes/{INBOX}/messages/{urllib.parse.quote(row['message_id'], safe='')}/reply",
-                    {"text": text}
+                result = _am_reply(
+                    message_id=row["message_id"],
+                    recipient=email,
+                    text=text,
+                    client_id=f"outreach-{email.split('@')[0]}-d7-{d1_dt.strftime('%Y%m%d')}",
                 )
             else:
-                result = _am_post(
-                    f"/inboxes/{INBOX}/messages/send",
-                    {
-                        "to": [email],
-                        "subject": subject,
-                        "text": text,
-                        "client_id": f"outreach-{email.split('@')[0]}-d7-{d1_dt.strftime('%Y%m%d')}",
-                        "labels": ["sequence-d7"]
-                    }
+                result = _am_send(
+                    email=email,
+                    subject=subject,
+                    text=text,
+                    client_id=f"outreach-{email.split('@')[0]}-d7-{d1_dt.strftime('%Y%m%d')}",
+                    labels=["sequence-d7"],
                 )
             if "_error" not in result:
                 db.execute("""
@@ -343,15 +324,12 @@ def run_sequence() -> list[str]:
                 log.append(f"✗ D17 SKIPPED (verify failed): {email}")
                 continue
             subject, text = _d17_email(row)
-            result = _am_post(
-                f"/inboxes/{INBOX}/messages/send",
-                {
-                    "to": [email],
-                    "subject": subject,
-                    "text": text,
-                    "client_id": f"outreach-{email.split('@')[0]}-d17-{d1_dt.strftime('%Y%m%d')}",
-                    "labels": ["sequence-d17"]
-                }
+            result = _am_send(
+                email=email,
+                subject=subject,
+                text=text,
+                client_id=f"outreach-{email.split('@')[0]}-d17-{d1_dt.strftime('%Y%m%d')}",
+                labels=["sequence-d17"],
             )
             if "_error" not in result:
                 db.execute("""
@@ -422,16 +400,13 @@ def send_d1(
     import time
     idempotency_key = f"outreach-{domain}-d1-{int(time.time()) // 86400}"
 
-    result = _am_post(
-        f"/inboxes/{INBOX}/messages/send",
-        {
-            "to": [email],
-            "subject": subject,
-            "text": body_text,
-            "html": body_html,
-            "client_id": idempotency_key,
-            "labels": ["targeted-outreach", "sequence-d1"],
-        }
+    result = _am_send(
+        email=email,
+        subject=subject,
+        text=body_text,
+        html=body_html,
+        client_id=idempotency_key,
+        labels=["targeted-outreach", "sequence-d1"],
     )
 
     if "_error" in result:

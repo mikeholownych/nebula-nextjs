@@ -3,7 +3,7 @@ import re
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SKIP_PARTS = {".git", ".legacy", ".worktrees", "tests", "venv", "himalaya-venv", "node_modules"}
+SKIP_PARTS = {".git", ".legacy", ".worktrees", "tests", "venv", ".venv", "himalaya-venv", "node_modules"}
 ALLOWED_RAW_CLIENTS = {
     ROOT / "agentmail_client.py",
     ROOT / "scripts" / "check_agentmail_inbox.py",
