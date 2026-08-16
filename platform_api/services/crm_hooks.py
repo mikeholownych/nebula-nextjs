@@ -185,10 +185,16 @@ async def purchase_completed(
     amount_cents: int,
     product_type: str = "fix_pack",
     stripe_payment_intent_id: Optional[str] = None,
+    audit_id: str = "",
+    audit_url: str = "",
+    first_name: str = "",
 ) -> None:
-    """Called on Stripe charge.succeeded. Updates CRM status + recalculates LTV.
+    """Called on Stripe checkout.session.completed or charge.succeeded.
+    Updates CRM, stops outreach sequence, and triggers automated Fix Pack delivery.
 
-    Wire in: platform_api/routes/stripe_webhook.py → charge.succeeded handler.
+    audit_id and audit_url are sourced from Stripe session metadata when using
+    the /api/checkout route. For static payment links (no metadata), we fall back
+    to the most recent audit in customer-ledger.jsonl for this email.
     """
     if not email:
         return
@@ -231,21 +237,67 @@ async def purchase_completed(
             import asyncio as _aio
             from pathlib import Path as _Path
             import sys as _sys
-            _sys.path.insert(0, str(_Path(__file__).parent.parent.parent))
-            from yt_channel.delivery_workflow import DeliveryWorkflow
+            import subprocess as _sub
+            import json as _json
 
-            async def _deliver():
-                workflow = DeliveryWorkflow()
-                # Construct a minimal Stripe event and pass to the existing handler
-                await workflow.handle_stripe_charge_success({
-                    "data": {"object": {
-                        "receipt_email": email,
-                        "amount": amount_cents,
-                        "payment_intent": stripe_payment_intent_id or "",
-                    }}
-                })
+            nebula_dir = _Path(__file__).parent.parent.parent
 
-            _aio.create_task(_deliver())
+            # Resolve audit_id: use metadata if present, else fall back to ledger
+            _audit_id = audit_id
+            _audit_url = audit_url
+            if not _audit_id:
+                ledger = nebula_dir / "ledgers" / "customer-ledger.jsonl"
+                if ledger.exists():
+                    for _line in reversed(ledger.read_text().splitlines()):
+                        try:
+                            _row = _json.loads(_line)
+                            if (
+                                _row.get("event_type") == "audit_delivered"
+                                and (_row.get("email") or "").lower() == email.lower()
+                            ):
+                                _audit_id = _row.get("audit_id", "")
+                                _audit_url = _row.get("url", _audit_url)
+                                break
+                        except Exception:
+                            continue
+
+            if not _audit_id:
+                log.warning(
+                    "purchase_completed: no audit_id for %s — delivery skipped, "
+                    "manual follow-up required", email
+                )
+            else:
+                async def _deliver(
+                    _email=email,
+                    _aid=_audit_id,
+                    _session=stripe_payment_intent_id or "",
+                    _nd=nebula_dir,
+                    _py=str(nebula_dir / "venv" / "bin" / "python3"),
+                    _script=str(nebula_dir / "scripts" / "deliver_prompt_pack.py"),
+                ):
+                    try:
+                        result = await _aio.get_event_loop().run_in_executor(
+                            None,
+                            lambda: _sub.run(
+                                [_py, _script,
+                                 "--email", _email,
+                                 "--stripe-session-id", _session,
+                                 "--audit-id", _aid],
+                                capture_output=True, text=True, timeout=120,
+                                cwd=str(_nd),
+                            )
+                        )
+                        if result.returncode != 0:
+                            log.warning(
+                                "deliver_prompt_pack failed (rc=%d): %s",
+                                result.returncode, result.stderr[:300]
+                            )
+                        else:
+                            log.info("deliver_prompt_pack succeeded for %s", _email)
+                    except Exception as _exc:
+                        log.warning("deliver_prompt_pack exception: %s", _exc)
+
+                _aio.create_task(_deliver())
         except Exception as exc:
             log.warning("purchase_completed delivery trigger failed: %s", exc)
 

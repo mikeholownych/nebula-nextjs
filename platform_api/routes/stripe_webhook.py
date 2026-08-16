@@ -127,6 +127,7 @@ async def stripe_webhook(request: Request):
         email = _extract_email(stripe_obj)
         amount_cents = stripe_obj.get("amount_total", 0)
         payment_intent_id = stripe_obj.get("payment_intent", "")
+        metadata = stripe_obj.get("metadata") or {}
 
         if email and amount_cents > 0:
             await purchase_completed(
@@ -134,6 +135,9 @@ async def stripe_webhook(request: Request):
                 amount_cents=amount_cents,
                 product_type="fix_pack",
                 stripe_payment_intent_id=payment_intent_id,
+                audit_id=metadata.get("audit_id") or "",
+                audit_url=metadata.get("url") or "",
+                first_name=metadata.get("first_name") or "",
             )
 
     # ── customer.subscription.deleted ──────────────────────────────────────
