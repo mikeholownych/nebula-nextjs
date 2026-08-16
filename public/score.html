@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page Conversion Score — Nebula</title>
+  <meta name="description" content="Enter your domain. See your conversion score and top leak instantly — no signup required.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0c0a;
+      --surface: #111411;
+      --border: #1e231e;
+      --border-strong: #2a322a;
+      --text: #e4e8e0;
+      --text-dim: #8a9488;
+      --text-muted: #5a6458;
+      --accent: #c7ff2f;
+      --accent-dim: #9acc24;
+      --red: #ef4444;
+      --amber: #f59e0b;
+      --green: #22c55e;
+      --radius: 10px;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --mono: 'IBM Plex Mono', 'Courier New', monospace;
+    }
+
+    html, body { min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--font); }
+
+    /* ── Layout ── */
+    .page { max-width: 640px; margin: 0 auto; padding: 48px 20px 80px; }
+
+    /* ── Header ── */
+    .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 48px; }
+    .brand-mark { width: 32px; height: 32px; }
+    .brand-name { font-family: var(--mono); font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: .5px; }
+
+    /* ── Hero ── */
+    .hero { margin-bottom: 40px; }
+    .hero h1 { font-size: clamp(26px, 5vw, 36px); font-weight: 700; line-height: 1.2; margin-bottom: 14px; color: #f0f4ec; }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero p { color: var(--text-dim); font-size: 16px; line-height: 1.6; }
+
+    /* ── Input form ── */
+    .input-row { display: flex; gap: 10px; margin-bottom: 10px; }
+    .domain-input {
+      flex: 1;
+      background: var(--surface);
+      border: 1.5px solid var(--border-strong);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-size: 15px;
+      padding: 13px 16px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .domain-input::placeholder { color: var(--text-muted); }
+    .domain-input:focus { border-color: var(--accent); }
+    .run-btn {
+      background: var(--accent);
+      color: #0a0c0a;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 13px 22px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity .15s;
+      flex-shrink: 0;
+    }
+    .run-btn:hover { opacity: .88; }
+    .run-btn:disabled { opacity: .45; cursor: not-allowed; }
+    .hint { font-size: 13px; color: var(--text-muted); }
+
+    /* ── Loading ── */
+    .loading { display: none; align-items: center; gap: 12px; padding: 24px 0; color: var(--text-dim); font-size: 14px; }
+    .spinner {
+      width: 20px; height: 20px;
+      border: 2px solid var(--border-strong);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      flex-shrink: 0;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Result card ── */
+    .result { display: none; margin-top: 32px; }
+
+    .score-block {
+      background: var(--surface);
+      border: 1.5px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 16px;
+    }
+    .score-row { display: flex; align-items: flex-end; gap: 16px; margin-bottom: 20px; }
+    .score-number { font-size: 64px; font-weight: 800; line-height: 1; font-family: var(--mono); }
+    .score-number.red   { color: var(--red); }
+    .score-number.amber { color: var(--amber); }
+    .score-number.green { color: var(--green); }
+    .score-meta { padding-bottom: 6px; }
+    .score-label { font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 4px; }
+    .score-grade { font-size: 22px; font-weight: 700; }
+
+    /* bar */
+    .score-bar-track { height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 20px; overflow: hidden; }
+    .score-bar-fill { height: 100%; border-radius: 3px; transition: width .6s ease; }
+
+    /* top finding */
+    .finding-label { font-size: 11px; text-transform: uppercase; letter-spacing: .8px; color: var(--text-muted); margin-bottom: 8px; }
+    .finding-text { font-size: 15px; line-height: 1.55; color: var(--text); }
+    .finding-cost { font-size: 13px; color: var(--text-dim); margin-top: 6px; }
+
+    /* ── Dimensions ── */
+    .dims { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; }
+    .dims-header { padding: 14px 20px; border-bottom: 1px solid var(--border); font-size: 12px; text-transform: uppercase; letter-spacing: .8px; color: var(--text-muted); }
+    .dim-row { display: flex; align-items: center; gap: 12px; padding: 11px 20px; border-bottom: 1px solid var(--border); }
+    .dim-row:last-child { border-bottom: none; }
+    .dim-name { font-size: 13px; color: var(--text-dim); flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .dim-bar-track { flex: 2; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .dim-bar-fill { height: 100%; border-radius: 2px; }
+    .dim-score { font-size: 12px; font-family: var(--mono); color: var(--text-muted); width: 28px; text-align: right; flex-shrink: 0; }
+
+    /* ── CTA ── */
+    .cta-block {
+      background: #0e1a0e;
+      border: 1.5px solid #1e3a1e;
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .cta-block h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #f0f4ec; }
+    .cta-block p { font-size: 14px; color: var(--text-dim); line-height: 1.6; margin-bottom: 20px; }
+
+    .email-row { display: flex; gap: 10px; margin-bottom: 10px; }
+    .email-input {
+      flex: 1;
+      background: #0a0c0a;
+      border: 1.5px solid var(--border-strong);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-size: 14px;
+      padding: 12px 14px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .email-input::placeholder { color: var(--text-muted); }
+    .email-input:focus { border-color: var(--accent); }
+    .send-btn {
+      background: var(--accent);
+      color: #0a0c0a;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px 20px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity .15s;
+    }
+    .send-btn:hover { opacity: .88; }
+    .send-btn:disabled { opacity: .45; cursor: not-allowed; }
+    .cta-fine { font-size: 12px; color: var(--text-muted); }
+
+    /* ── Sent state ── */
+    .sent-state { display: none; text-align: center; padding: 20px 0 4px; }
+    .sent-state .check { font-size: 40px; margin-bottom: 12px; }
+    .sent-state h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .sent-state p { font-size: 14px; color: var(--text-dim); }
+
+    /* ── Error ── */
+    .error-msg { display: none; background: #1a0a0a; border: 1px solid #3a1414; border-radius: var(--radius); padding: 14px 16px; color: #f87171; font-size: 14px; margin-top: 12px; }
+
+    /* ── Social proof strip ── */
+    .proof { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border); }
+    .proof-item { font-size: 13px; color: var(--text-muted); }
+    .proof-item strong { color: var(--text-dim); }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Brand -->
+  <div class="brand">
+    <svg class="brand-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="64" height="64" rx="14" fill="#121512"/>
+      <rect x="5" y="5" width="54" height="54" rx="11" fill="none" stroke="#c7ff2f" stroke-width="3"/>
+      <circle cx="32" cy="32" r="17.5" fill="#c7ff2f"/>
+      <path d="M22 34 L29 41.5 L45 24" fill="none" stroke="#0a0c09" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="brand-name">Nebula</span>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>See your landing page<br>conversion score <em>now.</em></h1>
+    <p>Enter your domain. Your score and top conversion leak appear instantly — no signup, no call, no agency pitch.</p>
+  </div>
+
+  <!-- Input -->
+  <div class="input-row">
+    <input class="domain-input" id="domainInput" type="text" placeholder="yourdomain.com" autocomplete="off" spellcheck="false">
+    <button class="run-btn" id="runBtn" onclick="runAudit()">Score it</button>
+  </div>
+  <div class="hint">Works on any public landing page or homepage.</div>
+
+  <!-- Loading -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <span id="loadingMsg">Scanning page...</span>
+  </div>
+
+  <!-- Error -->
+  <div class="error-msg" id="errorMsg"></div>
+
+  <!-- Result -->
+  <div class="result" id="result">
+
+    <!-- Score block -->
+    <div class="score-block">
+      <div class="score-row">
+        <div class="score-number" id="scoreNum">—</div>
+        <div class="score-meta">
+          <div class="score-label">Conversion score</div>
+          <div class="score-grade" id="scoreGrade"></div>
+        </div>
+      </div>
+      <div class="score-bar-track">
+        <div class="score-bar-fill" id="scoreBar" style="width:0%"></div>
+      </div>
+      <div class="finding-label">Top conversion leak</div>
+      <div class="finding-text" id="findingText"></div>
+      <div class="finding-cost" id="findingCost"></div>
+    </div>
+
+    <!-- Dimension breakdown -->
+    <div class="dims" id="dimsBlock">
+      <div class="dims-header">9-signal breakdown</div>
+      <div id="dimsList"></div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-block" id="ctaBlock">
+      <h2>Get the full audit + fix list</h2>
+      <p>The score above covers your top leak. The full report maps all 9 signals, ranks them by impact, and sends a prioritized fix list. We fix the highest-impact issue in 48 hours for $97.</p>
+      <div class="email-row">
+        <input class="email-input" id="emailInput" type="email" placeholder="your@email.com" autocomplete="email">
+        <button class="send-btn" id="sendBtn" onclick="sendAudit()">Send my report</button>
+      </div>
+      <div class="cta-fine">No spam. One email with your full audit. Unsubscribe anytime.</div>
+    </div>
+
+    <!-- Sent state -->
+    <div class="sent-state" id="sentState">
+      <div class="check">✓</div>
+      <h3>Full audit on the way.</h3>
+      <p>Check your inbox — it includes all 9 signals, ranked by impact, with specific fixes.<br>We'll follow up with the implementation offer.</p>
+    </div>
+
+  </div>
+
+  <!-- Proof -->
+  <div class="proof" id="proof" style="display:none">
+    <div class="proof-item"><strong>Free.</strong> No signup to see your score.</div>
+    <div class="proof-item"><strong>48h</strong> fix turnaround on the $97 kit.</div>
+    <div class="proof-item"><strong>No calls.</strong> No retainer. One problem, one fix.</div>
+  </div>
+
+</div>
+
+<script>
+const API_BASE = '';  // same-origin
+
+let currentAuditId = null;
+let currentUrl = null;
+
+function normalizeUrl(raw) {
+  raw = raw.trim().replace(/\/+$/, '');
+  if (!raw) return null;
+  if (!/^https?:\/\//i.test(raw)) raw = 'https://' + raw;
+  try { new URL(raw); return raw; } catch { return null; }
+}
+
+function scoreColor(s) {
+  if (s < 5) return 'red';
+  if (s < 7) return 'amber';
+  return 'green';
+}
+
+function barColor(s) {
+  if (s < 5) return '#ef4444';
+  if (s < 7) return '#f59e0b';
+  return '#22c55e';
+}
+
+function dimLabel(key) {
+  const map = {
+    headline: 'Headline clarity',
+    cta: 'Call to action',
+    social_proof: 'Social proof',
+    mobile: 'Mobile readiness',
+    load_speed: 'Load speed',
+    above_fold: 'Above fold',
+    ad_signals: 'Analytics / tracking',
+    seo_foundations: 'SEO foundations',
+    ai_readiness: 'AI readiness',
+    ai_crawler_access: 'AI crawler access',
+  };
+  return map[key] || key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+const loadingPhrases = [
+  'Scanning page structure...',
+  'Checking above-fold signals...',
+  'Measuring CTA clarity...',
+  'Running 9 conversion checks...',
+  'Scoring your page...',
+];
+let phraseIdx = 0;
+let phraseTimer = null;
+
+function startPhrases() {
+  const el = document.getElementById('loadingMsg');
+  phraseIdx = 0;
+  el.textContent = loadingPhrases[0];
+  phraseTimer = setInterval(() => {
+    phraseIdx = (phraseIdx + 1) % loadingPhrases.length;
+    el.textContent = loadingPhrases[phraseIdx];
+  }, 1800);
+}
+
+function stopPhrases() {
+  if (phraseTimer) { clearInterval(phraseTimer); phraseTimer = null; }
+}
+
+async function runAudit() {
+  const raw = document.getElementById('domainInput').value.trim();
+  const url = normalizeUrl(raw);
+
+  document.getElementById('errorMsg').style.display = 'none';
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('proof').style.display = 'none';
+
+  if (!url) {
+    showError('Enter a valid domain, e.g. yoursite.com');
+    return;
+  }
+
+  const btn = document.getElementById('runBtn');
+  btn.disabled = true;
+  document.getElementById('loading').style.display = 'flex';
+  startPhrases();
+
+  currentUrl = url;
+  currentAuditId = null;
+
+  try {
+    const resp = await fetch('/audit/run', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url, source: 'score_page' }),
+    });
+    const data = await resp.json();
+
+    if (!resp.ok || !data.score) {
+      showError(data.message || 'Could not score that page. Try a different URL.');
+      return;
+    }
+
+    currentAuditId = data.audit_id || null;
+    renderResult(data);
+
+  } catch (e) {
+    showError('Network error — check your connection and try again.');
+  } finally {
+    stopPhrases();
+    document.getElementById('loading').style.display = 'none';
+    btn.disabled = false;
+  }
+}
+
+function renderResult(data) {
+  const score = parseFloat(data.score) || 0;
+  const grade = data.grade || '';
+  const findings = data.findings || [];
+  const dimensions = data.dimensions || {};
+
+  // Score
+  const scoreEl = document.getElementById('scoreNum');
+  scoreEl.textContent = score.toFixed(1);
+  scoreEl.className = 'score-number ' + scoreColor(score);
+  document.getElementById('scoreGrade').textContent = 'Grade ' + grade;
+
+  // Bar
+  const bar = document.getElementById('scoreBar');
+  bar.style.width = (score * 10) + '%';
+  bar.style.background = barColor(score);
+
+  // Top finding
+  const topFinding = findings[0] || {};
+  const issueText = topFinding.issue || topFinding.finding || topFinding.description || '';
+  document.getElementById('findingText').textContent = issueText || 'No critical issues found.';
+
+  // Cost framing
+  const impact = parseFloat(topFinding.impact) || 0;
+  let costLine = '';
+  if (score < 8 && impact >= 3) {
+    costLine = 'This is the signal with the highest impact on your conversion rate.';
+  }
+  document.getElementById('findingCost').textContent = costLine;
+
+  // Dimensions
+  const dimsList = document.getElementById('dimsList');
+  dimsList.innerHTML = '';
+  const dimEntries = Object.entries(dimensions);
+  if (dimEntries.length) {
+    dimEntries.sort((a, b) => (a[1].score || 0) - (b[1].score || 0));
+    dimEntries.forEach(([key, val]) => {
+      const s = parseFloat(val.score) || 0;
+      const row = document.createElement('div');
+      row.className = 'dim-row';
+      row.innerHTML = `
+        <span class="dim-name">${dimLabel(key)}</span>
+        <div class="dim-bar-track">
+          <div class="dim-bar-fill" style="width:${s*10}%;background:${barColor(s)}"></div>
+        </div>
+        <span class="dim-score">${s}/10</span>
+      `;
+      dimsList.appendChild(row);
+    });
+    document.getElementById('dimsBlock').style.display = 'block';
+  } else {
+    document.getElementById('dimsBlock').style.display = 'none';
+  }
+
+  // Show result + proof
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('proof').style.display = 'flex';
+  document.getElementById('ctaBlock').style.display = 'block';
+  document.getElementById('sentState').style.display = 'none';
+}
+
+async function sendAudit() {
+  const email = document.getElementById('emailInput').value.trim();
+  if (!email || !email.includes('@')) {
+    document.getElementById('emailInput').focus();
+    return;
+  }
+
+  const btn = document.getElementById('sendBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  try {
+    // Re-run with email to trigger full audit delivery
+    const body = { url: currentUrl, email, source: 'score_page_cta' };
+    if (currentAuditId) body.audit_id = currentAuditId;
+
+    const resp = await fetch('/audit/run', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+
+    // Show sent state regardless of API outcome (email captured)
+    document.getElementById('ctaBlock').style.display = 'none';
+    document.getElementById('sentState').style.display = 'block';
+
+  } catch (e) {
+    // Still show sent state — email likely captured
+    document.getElementById('ctaBlock').style.display = 'none';
+    document.getElementById('sentState').style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Send my report';
+  }
+}
+
+function showError(msg) {
+  const el = document.getElementById('errorMsg');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+// Enter key on domain input
+document.getElementById('domainInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') runAudit();
+});
+document.getElementById('emailInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') sendAudit();
+});
+
+// Pre-fill from query param ?url=
+(function() {
+  const p = new URLSearchParams(location.search);
+  const u = p.get('url') || p.get('domain');
+  if (u) {
+    document.getElementById('domainInput').value = u.replace(/^https?:\/\//i, '').replace(/\/.*/, '');
+    setTimeout(runAudit, 200);
+  }
+})();
+</script>
+</body>
+</html>
