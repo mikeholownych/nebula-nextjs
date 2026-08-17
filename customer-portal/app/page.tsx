@@ -77,9 +77,6 @@ export default function Home() {
 
             {/* Left: copy - dominant */}
             <div className="flex flex-col justify-center">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
-                Landing pages don&apos;t convert. Conversions do.
-              </p>
               <h1 className="text-4xl font-extrabold tracking-display text-fg md:text-5xl lg:text-6xl">
                 Know exactly what&apos;s killing your conversions - without hiring a consultant.
               </h1>
@@ -87,12 +84,18 @@ export default function Home() {
                 Paste your URL. In under two minutes, Nebula shows you the specific finding costing you conversions,
                 the dollar math behind it, and the exact fix - free, no signup required.
               </p>
+              {/* Benchmark stat bar — static fallback; async data loads below */}
+              <p className="mt-5 text-sm text-fg-muted border-l-2 border-accent/50 pl-3">
+                From <span className="font-semibold text-fg">86+ audits run:</span> avg score 62.7/100.{' '}
+                <span className="font-semibold text-fg">Zero A grades.</span>{' '}
+                <Link href="/benchmarks" className="text-accent hover:text-accent-light transition-colors">See the full index →</Link>
+              </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
                   href="/audit?utm_source=homepage&utm_medium=internal"
                   className="rounded-xl bg-accent px-7 py-3.5 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
                 >
-                  Get My Free Score
+                  Find My Conversion Leak
                 </Link>
                 <Link
                   href="/teardowns"
@@ -111,27 +114,12 @@ export default function Home() {
             {/* Right: live self-scan widget - subordinate data module */}
             <div className="flex flex-col gap-4 md:pt-4">
               <div className="rounded-xl border border-border bg-bg-surface p-5 shadow-lifted">
-                <p className="mb-0.5 text-xs font-semibold text-accent">Live - our own audit</p>
-                <p className="mb-3 text-xs text-fg-muted">Same engine every free scan uses.</p>
+                <p className="mb-0.5 text-xs font-semibold text-accent">We run it on ourselves first</p>
+                <p className="mb-3 text-xs text-fg-muted">This is Nebula's own audit — same engine, same evidence, live result.</p>
                 <SelfScan />
               </div>
             </div>
 
-          </div>
-        </section>
-
-        {/* ── 1b. Industry standard strip ── */}
-        <section className="border-y border-border bg-bg-surface px-6 py-8">
-          <div className="mx-auto max-w-6xl flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div>
-              <p className="text-sm text-fg-muted max-w-2xl">
-                Live aggregate benchmarks are computed from completed audits only. See the current
-                sample size and verified finding rates on the Leak Index.
-              </p>
-            </div>
-            <Link href="/benchmarks" className="shrink-0 text-sm font-semibold text-accent hover:text-accent-light transition-colors">
-              See full benchmarks &rarr;
-            </Link>
           </div>
         </section>
 
@@ -145,7 +133,6 @@ export default function Home() {
         <section className="border-b border-border px-6 py-16">
           <div className="mx-auto max-w-6xl grid gap-8 md:grid-cols-2 md:items-start">
             <div>
-              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-accent">Why this exists</p>
               <h2 className="mb-4 text-2xl font-bold tracking-tight text-fg md:text-3xl">
                 We run this audit on ourselves first. When we have a real client outcome with dates, proof, and a way for you to verify it, we will show that too.
               </h2>
@@ -162,6 +149,13 @@ export default function Home() {
                 actual data. Every verified check. Every evidence atom. The same output you get.
               </p>
               <div className="mt-6 flex items-start gap-4">
+                <img
+                  src="/mike-holownych-founder.png"
+                  alt="Mike Holownych, Founder of Nebula Components"
+                  width={56}
+                  height={56}
+                  className="h-14 w-14 rounded-full object-cover shrink-0"
+                />
                 <div>
                   <p className="text-sm font-semibold text-fg">Mike Holownych</p>
                   <p className="text-xs text-fg-muted">Founder, Nebula Components</p>
@@ -176,16 +170,26 @@ export default function Home() {
             </div>
             <div className="rounded-2xl border border-border bg-bg-muted/30 p-6 font-mono text-sm">
               <p className="mb-4 text-xs text-fg-muted">
-                Sample output format - not our live score
+                Sample output format — illustrative findings
               </p>
-              {SIGNALS.map((s) => (
+              {[
+                { key: 'headline', label: 'Headline', pass: true },
+                { key: 'cta', label: 'CTA clarity', pass: false },
+                { key: 'social_proof', label: 'Social proof', pass: false },
+                { key: 'mobile', label: 'Mobile viewport', pass: true },
+                { key: 'load_speed', label: 'Load speed', pass: false },
+                { key: 'seo_foundations', label: 'SEO foundations', pass: true },
+                { key: 'ai_readiness', label: 'AI readiness', pass: false },
+              ].map((s) => (
                 <div key={s.key} className="mb-2 flex items-center justify-between text-xs">
                   <span className="text-fg-muted">{s.label}</span>
-                  <span className="text-accent">pass</span>
+                  <span className={s.pass ? 'text-accent' : 'text-signal-fail'}>
+                    {s.pass ? 'pass' : 'fail'}
+                  </span>
                 </div>
               ))}
               <div className="mt-3 border-t border-border pt-3 text-xs text-fg-muted">
-                Static example only - these statuses are illustrative, not a live result.
+                4 of 7 checks failing · illustrative example, not a live result
               </div>
             </div>
           </div>

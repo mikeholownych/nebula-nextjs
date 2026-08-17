@@ -69,6 +69,11 @@ html[data-cookie-consent="given"] #cookie-consent-banner {
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+
+/* Typography quality — balance headings, reduce orphans in prose */
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   font-size: var(--text-base);

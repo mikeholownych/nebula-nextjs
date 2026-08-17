@@ -19,24 +19,24 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://nebulacomponents.com'),
   title: {
-    default: 'Nebula Components - Landing Page Conversion Optimization',
+    default: 'Find Your Landing Page Conversion Leak | Nebula Components',
     template: '%s',
   },
-  description: 'Landing page conversion leak detection for founders spending on paid ads with zero conversions. Free evidence-backed audit - find the specific leaks costing you money.',
+  description: 'Free landing page audit that finds the specific conversion leaks costing you ad money. Evidence-backed, no signup, results in under 2 minutes.',
   alternates: {
     canonical: 'https://nebulacomponents.com/',
   },
   openGraph: {
-    title: 'Nebula Components - Landing Page Conversion Optimization',
-    description: 'Landing page conversion leak detection for founders spending on paid ads with zero conversions. Free evidence-backed audit - find the specific leaks costing you money.',
+    title: 'Find Your Landing Page Conversion Leak | Nebula Components',
+    description: 'Free landing page audit that finds the specific conversion leaks costing you ad money. Evidence-backed, no signup, results in under 2 minutes.',
     siteName: 'Nebula Components',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nebula Components - Landing Page Conversion Optimization',
-    description: 'Landing page conversion leak detection for founders spending on paid ads with zero conversions. Free evidence-backed audit - find the specific leaks costing you money.',
+    title: 'Find Your Landing Page Conversion Leak | Nebula Components',
+    description: 'Free landing page audit that finds the specific conversion leaks costing you ad money. Evidence-backed, no signup, results in under 2 minutes.',
     creator: '@NebulaCRO',
   },
   icons: {
