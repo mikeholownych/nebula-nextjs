@@ -5,6 +5,7 @@ Stripe signing secret: STRIPE_WEBHOOK_SECRET env var
 
 Events handled:
   charge.succeeded              → purchase_completed() in CRM
+  customer.subscription.created → subscription_activated() — suppresses drip
   customer.subscription.deleted → customer_churned() in CRM
   checkout.session.completed    → purchase_completed() if not already handled by charge
 """
@@ -19,7 +20,7 @@ from typing import Optional
 
 from fastapi import APIRouter, HTTPException, Request
 
-from platform_api.services.crm_hooks import purchase_completed, customer_churned
+from platform_api.services.crm_hooks import purchase_completed, customer_churned, subscription_activated
 
 router = APIRouter()
 
@@ -154,6 +155,15 @@ async def stripe_webhook(request: Request):
                 email=email,
                 reason=str(cancellation_reason),
             )
+
+    # ── customer.subscription.created ──────────────────────────────────────
+    # Fires when a new Pro/Growth/Agency subscription is created.
+    # Suppress the post-purchase drip (D7/D14 subscription CTAs) — no point
+    # asking someone to subscribe who just subscribed.
+    elif event_type == "customer.subscription.created":
+        email = _extract_email(stripe_obj)
+        if email:
+            await subscription_activated(email=email)
 
     # Return 200 for all handled and unhandled events
     return {"received": True, "type": event_type}

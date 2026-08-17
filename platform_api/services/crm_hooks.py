@@ -327,6 +327,68 @@ async def purchase_completed(
     except Exception as exc:
         log.warning("purchase_completed lookalike signal failed: %s", exc)
 
+    # Enroll in post-purchase drip (D3 check-in, D7 re-audit, D14 subscription)
+    # Fail-silent — never block the payment record.
+    if product_type in ("fix_pack", "fix-pack", "97"):
+        try:
+            import asyncio as _aio3
+            from pathlib import Path as _P3
+            import subprocess as _sub3
+
+            nebula_dir_drip = _P3(__file__).parents[2]
+            _py3 = str(nebula_dir_drip / "venv" / "bin" / "python3")
+            _script3 = str(nebula_dir_drip / "scripts" / "post_purchase_drip.py")
+
+            # Resolve the audit URL from metadata or the ledger (same fallback
+            # as deliver_prompt_pack.py uses for audit_id resolution)
+            _drip_url = audit_url or ""
+            if not _drip_url:
+                import json as _json3
+                ledger = nebula_dir_drip / "ledgers" / "customer-ledger.jsonl"
+                if ledger.exists():
+                    for _line in reversed(ledger.read_text().splitlines()):
+                        try:
+                            _row = _json3.loads(_line)
+                            if (
+                                _row.get("event_type") == "audit_delivered"
+                                and (_row.get("email") or "").lower() == email.lower()
+                            ):
+                                _drip_url = _row.get("url", "")
+                                break
+                        except Exception:
+                            continue
+
+            if _drip_url:
+                async def _enroll_drip(
+                    _e=email, _u=_drip_url,
+                    _py=_py3, _script=_script3,
+                    _nd=str(nebula_dir_drip),
+                ):
+                    try:
+                        import asyncio as _aio_drip
+                        result = await _aio_drip.get_event_loop().run_in_executor(
+                            None,
+                            lambda: __import__("subprocess").run(
+                                [_py, _script, "enroll",
+                                 "--email", _e,
+                                 "--audit-url", _u],
+                                capture_output=True, text=True, timeout=30,
+                                cwd=_nd,
+                            )
+                        )
+                        if result.returncode != 0:
+                            log.warning("post_purchase_drip enroll failed: %s", result.stderr[:200])
+                        else:
+                            log.info("post_purchase_drip enrolled %s", _e)
+                    except Exception as _exc:
+                        log.warning("post_purchase_drip enroll exception: %s", _exc)
+
+                _aio3.create_task(_enroll_drip())
+            else:
+                log.warning("purchase_completed: no audit_url for %s — drip enroll skipped", email)
+        except Exception as exc:
+            log.warning("purchase_completed drip enroll failed: %s", exc)
+
 
 async def support_objection(
     email: str,
@@ -361,3 +423,30 @@ async def customer_churned(email: str, reason: str = "") -> None:
         notes=reason[:500],
         source="stripe_webhook",
     ))
+
+
+async def subscription_activated(email: str) -> None:
+    """Called when a new Pro/Growth/Agency subscription is created.
+
+    Suppresses the post-purchase drip so D7/D14 subscription CTAs
+    don't fire for someone who just subscribed.
+
+    Wire in: Stripe customer.subscription.created webhook.
+    """
+    from platform_api.services.crm import update_crm_status
+    await _safe(update_crm_status(email, "subscriber", notes="subscription created"))
+
+    # Suppress any pending drip steps
+    try:
+        import subprocess
+        from pathlib import Path
+        nebula_dir = Path(__file__).parents[2]
+        py = str(nebula_dir / "venv" / "bin" / "python3")
+        script = str(nebula_dir / "scripts" / "post_purchase_drip.py")
+        subprocess.run(
+            [py, script, "suppress", "--email", email, "--reason", "subscribed"],
+            capture_output=True, text=True, timeout=15,
+            cwd=str(nebula_dir),
+        )
+    except Exception as exc:
+        log.warning("subscription_activated drip suppress failed: %s", exc)
