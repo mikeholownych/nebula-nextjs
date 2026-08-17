@@ -116,13 +116,13 @@ export default function ScoreClient() {
     startPhrases()
 
     try {
-      const resp = await fetch('/audit/run', {
+      const resp = await fetch('/api/audit/start', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url, source: 'score_page' }),
       })
       const data = await resp.json()
-      if (!resp.ok || !data.score) {
+      if (!resp.ok || data.score == null) {
         setError(data.message || 'Could not score that page. Try a different URL.')
         return
       }
@@ -139,7 +139,7 @@ export default function ScoreClient() {
     if (!email || !email.includes('@')) return
     setSending(true)
     try {
-      await fetch('/audit/run', {
+      await fetch('/api/audit/start', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
