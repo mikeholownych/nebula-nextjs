@@ -10,6 +10,12 @@ export const dynamic = 'force-dynamic'
 
 const BASE_URL = 'https://nebulacomponents.com'
 
+// Build-time date used as lastModified for static pages that don't
+// carry per-page timestamps. This is truthful — it reflects when the
+// sitemap was generated, not when the content was last edited — and
+// satisfies sitemap validators that require lastModified to be present.
+const BUILD_DATE = new Date().toISOString().split('T')[0] // YYYY-MM-DD
+
 // Priority reflects actual page importance, not a uniform default - legal/
 // utility pages sit well below commercial and hub pages so the signal means
 // something (Google ignores it for ranking, but other consumers don't, and a
@@ -73,6 +79,7 @@ const corePagesByPriority: Array<{ paths: readonly string[]; priority: number }>
 export default function sitemap(): MetadataRoute.Sitemap {
   const homeEntry: MetadataRoute.Sitemap[number] = {
     url: BASE_URL,
+    lastModified: BUILD_DATE,
     changeFrequency: 'weekly',
     priority: 1,
   }
@@ -80,6 +87,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const coreEntries: MetadataRoute.Sitemap = corePagesByPriority.flatMap(({ paths, priority }) =>
     paths.map((path) => ({
       url: `${BASE_URL}${path}`,
+      lastModified: BUILD_DATE,
       changeFrequency: 'weekly' as const,
       priority,
     }))
@@ -89,6 +97,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .sort((a, b) => a.slug.localeCompare(b.slug))
     .map(({ slug }) => ({
       url: `${BASE_URL}/learning-centre/${slug}`,
+      lastModified: BUILD_DATE,
       changeFrequency: 'monthly',
       priority: 0.7,
     }))
@@ -101,12 +110,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'specialist-ai-agent-library',
   ].map((slug) => ({
     url: `${BASE_URL}/playbooks/${slug}`,
+    lastModified: BUILD_DATE,
     changeFrequency: 'monthly',
     priority: 0.6,
   }))
 
   const caseStudyEntries: MetadataRoute.Sitemap = getPublishedCaseStudies().map(({ slug }) => ({
     url: `${BASE_URL}/case-studies/${slug}`,
+    lastModified: BUILD_DATE,
     changeFrequency: 'yearly',
     priority: 0.8,
   }))
@@ -115,24 +126,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     includeOverview: true,
   }).map((route) => ({
     url: `${BASE_URL}${route.path}`,
+    lastModified: BUILD_DATE,
     changeFrequency: 'monthly',
     priority: route.kind === 'overview' ? 0.8 : 0.7,
   }))
 
   const teardownEntries: MetadataRoute.Sitemap = Object.keys(TEARDOWNS).sort().map((slug) => ({
     url: `${BASE_URL}/teardowns/${slug}`,
+    lastModified: BUILD_DATE,
     changeFrequency: 'yearly',
     priority: 0.7,
   }))
 
   const comparisonEntries: MetadataRoute.Sitemap = Object.keys(COMPARISONS).sort().map((slug) => ({
     url: `${BASE_URL}/vs/${slug}`,
+    lastModified: BUILD_DATE,
     changeFrequency: 'yearly',
     priority: 0.6,
   }))
 
   const pricingGuideEntries: MetadataRoute.Sitemap = PRICING_GUIDE_SLUGS.map((slug) => ({
     url: `${BASE_URL}/pricing-guides/${slug}`,
+    lastModified: BUILD_DATE,
     changeFrequency: 'yearly',
     priority: 0.6,
   }))
