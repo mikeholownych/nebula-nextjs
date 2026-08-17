@@ -78,6 +78,8 @@ export default function Footer() {
               <li><a href="/social-proof-landing-page" className="text-sm text-fg-muted hover:text-fg transition-colors">Social Proof Guide</a></li>
               <li><a href="/playbooks" className="text-sm text-fg-muted hover:text-fg transition-colors">Playbooks</a></li>
               <li><a href="/score" className="text-sm text-fg-muted hover:text-fg transition-colors">Score My Page</a></li>
+              <li><a href="/7-systems" className="text-sm text-fg-muted hover:text-fg transition-colors">7 Systems</a></li>
+              <li><a href="/concepts" className="text-sm text-fg-muted hover:text-fg transition-colors">Concepts</a></li>
             </ul>
           </div>
         </div>

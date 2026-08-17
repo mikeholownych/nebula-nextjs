@@ -201,8 +201,7 @@ export default function SocialProofLandingPage() {
 
       </main>
 
-      {/* Cookie Consent Script */}
-      <script src="/cookie-consent.js" defer />
+
     </div>
   );
 }
