@@ -50,6 +50,59 @@ async function getAuditStats(): Promise<AuditStats | null> {
   }
 }
 
+const softwareAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Nebula Landing Page Audit',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: 'Free landing page audit tool that scores conversion signals across 9 dimensions',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  url: 'https://nebulacomponents.com/audit',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Nebula Components',
+    url: 'https://nebulacomponents.com',
+  },
+}
+
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to audit a landing page for conversion',
+  description: 'Use Nebula to find conversion leaks on any landing page in under 2 minutes.',
+  step: [
+    {
+      '@type': 'HowToStep',
+      position: 1,
+      name: 'Enter your domain',
+      text: 'Paste the full URL of your landing page into the audit tool field above.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 2,
+      name: 'Wait for the 9-signal scan',
+      text: 'Nebula fetches your page and evaluates it across 9 conversion signal categories including message match, trust signals, mobile CTA, load speed, and AI readiness.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 3,
+      name: 'Review findings ranked by impact',
+      text: 'Your audit report lists every failing signal with the raw evidence from your page — specific, verifiable, and ranked by conversion impact.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 4,
+      name: 'Fix the top leak',
+      text: 'Address the highest-impact failing signal first. The $97 One-Leak Repair Sprint delivers one scoped fix package with exact copy, code, or configuration changes within 48 hours.',
+    },
+  ],
+}
+
 export default async function AuditPage() {
   const stats = await getAuditStats()
   const failCount = SAMPLE_FINDINGS.filter((f) => !f.pass).length
@@ -63,6 +116,14 @@ export default async function AuditPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(auditPageFAQSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
       />
       <main id="main-content" className="min-h-screen bg-bg pt-24">
 

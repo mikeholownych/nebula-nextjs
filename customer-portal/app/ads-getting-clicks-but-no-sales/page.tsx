@@ -191,6 +191,30 @@ export default function AdsClicksNoSalesPage() {
             </div>
           </section>
 
+          {/* Mid-page CTA — after 3rd diagnostic, before signal grid */}
+          <section className="mb-14 rounded-2xl border border-accent/30 bg-accent/5 p-8">
+            <h2 className="text-xl font-bold text-fg mb-3">Run the audit on your page now</h2>
+            <p className="text-sm text-fg-muted leading-6 mb-6 max-w-xl">
+              The checks above are manual. Nebula runs them automatically on your URL — 9 signals,
+              ranked by impact, with exact evidence. Free, no signup.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+              <Link
+                href="/audit?utm_source=content&utm_medium=organic-content&utm_campaign=ads-clicks-no-sales"
+                className="inline-block rounded-xl bg-accent px-6 py-3.5 font-semibold text-bg hover:bg-accent-light transition-colors text-sm"
+              >
+                Find the Leak — Free &rarr;
+              </Link>
+              <a
+                href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
+                className="text-sm text-fg-muted hover:text-accent transition-colors"
+              >
+                Already know you need the fix?{' '}
+                <span className="font-semibold text-fg">$97 One-Leak Repair Sprint &rarr;</span>
+              </a>
+            </div>
+          </section>
+
           {/* Pass/Fail signal grid */}
           <section className="mb-14">
             <h2 className="text-2xl font-bold tracking-tight text-fg mb-4">
