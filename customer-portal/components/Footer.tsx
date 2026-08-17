@@ -108,6 +108,13 @@ export default function Footer() {
               ['/ads-getting-clicks-but-no-sales', 'Ads Getting Clicks, No Sales'],
               ['/funnel-audit', 'Funnel Friction Miner'],
               ['/proof', 'Real Audit Data'],
+              ['/roi-calculator', 'Ad Spend ROI Calculator'],
+              ['/for/saas', 'Audit for SaaS'],
+              ['/for/ecommerce', 'Audit for eCommerce'],
+              ['/for/agencies', 'Audit for Agencies'],
+              ['/for/coaching', 'Audit for Coaching'],
+              ['/for/fintech', 'Audit for Fintech'],
+              ['/for/b2b-software', 'Audit for B2B Software'],
             ].map(([href, label], i, arr) => (
               <span key={href} className="flex items-center gap-3">
                 <a
