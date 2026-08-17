@@ -121,6 +121,25 @@ const nextConfig: NextConfig = {
       { source: '/growth-launch.html',                  destination: '/gone',                    permanent: true },
       { source: '/growth-launch-confirmation.html',     destination: '/gone',                    permanent: true },
       { source: '/marketing-ops.html',                  destination: '/gone',                    permanent: true },
+      // GSC 404 remediation (2026-08-17) — bare-route versions of pages
+      // whose .html counterparts were already redirected above, plus orphaned
+      // external links and missing compare slugs.
+      { source: '/dashboard',         destination: '/gone',    permanent: true },
+      { source: '/audit-dashboard',   destination: '/audit',   permanent: true },
+      { source: '/audit/dashboard',   destination: '/audit',   permanent: true },
+      { source: '/organization',      destination: '/gone',    permanent: true },
+      { source: '/subscription',      destination: '/pricing', permanent: true },
+      { source: '/beta-tester',       destination: '/pricing', permanent: true },
+      { source: '/ai-ops-retainer',   destination: '/pricing', permanent: true },
+      // /why-evidence is linked from the MailCheck site → redirect to the
+      // closest equivalent content on the Nebula site
+      { source: '/why-evidence',      destination: '/editorial-standards', permanent: true },
+      // /learn-more is linked from external sources with no internal equivalent
+      { source: '/learn-more',        destination: '/audit',   permanent: true },
+      // Missing compare slugs — redirect to the generic compare index
+      { source: '/compare/semrush',   destination: '/vs/semrush-site-audit', permanent: true },
+      { source: '/compare/hotjar',    destination: '/vs/hotjar',             permanent: true },
+      { source: '/compare/woorank',   destination: '/compare',               permanent: true },
     ]
   },
 
