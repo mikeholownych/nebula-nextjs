@@ -20,10 +20,12 @@ const DEPRECATED_FINDING_LABELS = new Set(['above fold', 'above-fold clarity', '
  * Shows the highest-impact finding from the most recently completed audit.
  * Proves the engine is live and running - not a static demo.
  * No URL is exposed - only the finding label, issue, and time-ago.
- * Renders nothing if no data is available (graceful degradation).
+ * Shows a loading skeleton while fetching (no layout shift).
+ * Renders nothing if no data is available after fetch fails (graceful degradation).
  */
 export default function RecentFinding() {
   const [finding, setFinding] = useState<RecentFindingData | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     let cancelled = false
@@ -37,14 +39,23 @@ export default function RecentFinding() {
               (normalizedLabel && DEPRECATED_FINDING_LABELS.has(normalizedLabel))),
         )
         if (!cancelled && data && data.label && data.issue && !isDeprecated) setFinding(data)
+        if (!cancelled) setLoading(false)
       })
       .catch(() => {
         // No data - render nothing rather than fabricating.
+        if (!cancelled) setLoading(false)
       })
     return () => {
       cancelled = true
     }
   }, [])
+
+  // Loading skeleton: same height as the rendered card (~80px), no layout shift.
+  if (loading) {
+    return (
+      <div className="mx-auto mt-6 max-w-lg rounded-xl border border-border bg-bg-panel px-5 py-4 h-[80px] animate-pulse" />
+    )
+  }
 
   if (!finding) return null
 

@@ -9,6 +9,8 @@ import HowItWorksAnimated from './components/HowItWorksAnimated'
 import StackTaxComparison from './components/StackTaxComparison'
 import HonestyGrid from './components/HonestyGrid'
 import AgenticNativeBanner from './components/AgenticNativeBanner'
+import MobileStickyAuditCTA from './components/MobileStickyAuditCTA'
+import AuditResultMockup from './components/AuditResultMockup'
 import { TEARDOWNS } from './teardowns/[slug]/data'
 import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE } from './lib/homepageContent'
 import { SignalIcon } from '@/components/SignalIcons'
@@ -111,17 +113,22 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right: live self-scan widget - subordinate data module */}
+            {/* Right: product evidence — live self-scan + static mockup */}
             <div className="flex flex-col gap-4 md:pt-4">
               <div className="rounded-xl border border-border bg-bg-surface p-5 shadow-lifted">
                 <p className="mb-0.5 text-xs font-semibold text-accent">We run it on ourselves first</p>
-                <p className="mb-3 text-xs text-fg-muted">This is Nebula's own audit — same engine, same evidence, live result.</p>
+                <p className="mb-3 text-xs text-fg-muted">This is Nebula&apos;s own audit — same engine, same evidence, live result.</p>
                 <SelfScan />
               </div>
+              {/* Static audit output mockup — shows what a real result looks like */}
+              <AuditResultMockup />
             </div>
 
           </div>
         </section>
+
+        {/* Mobile sticky CTA — sentinel placed here so it appears after hero exits viewport */}
+        <MobileStickyAuditCTA />
 
         {/* ── 1c. ROI Calculator ── */}
         <ROICalculator />
