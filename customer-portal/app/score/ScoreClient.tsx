@@ -166,8 +166,9 @@ export default function ScoreClient() {
     <div style={{ minHeight: '100vh', background: '#0a0c0a', color: '#e4e8e0', fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif' }}>
       <div style={{ maxWidth: 640, margin: '0 auto', padding: '48px 20px 80px' }}>
 
-        {/* Brand */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 48 }}>
+        {/* Nav */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 48 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
             <rect width="64" height="64" rx="14" fill="#121512"/>
             <rect x="5" y="5" width="54" height="54" rx="11" fill="none" stroke="#c7ff2f" strokeWidth="3"/>
@@ -175,6 +176,13 @@ export default function ScoreClient() {
             <path d="M22 34 L29 41.5 L45 24" fill="none" stroke="#0a0c09" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
           <span style={{ fontFamily: '"IBM Plex Mono","Courier New",monospace', fontSize: 15, fontWeight: 700, letterSpacing: '.5px' }}>Nebula</span>
+          </div>
+          <a
+            href="/audit"
+            style={{ fontSize: 13, color: '#8a9488', textDecoration: 'none', borderBottom: '1px solid #2a322a', paddingBottom: 1 }}
+          >
+            Full audit →
+          </a>
         </div>
 
         {/* Hero */}
@@ -323,15 +331,44 @@ export default function ScoreClient() {
                   </button>
                 </div>
                 <div style={{ fontSize: 12, color: '#5a6458' }}>No spam. One email with your full audit. Unsubscribe anytime.</div>
+
+                {/* Direct purchase path for decisive D/F buyers */}
+                {score < 6 && (
+                  <div style={{ marginTop: 20, paddingTop: 20, borderTop: '1px solid #1e2a1e' }}>
+                    <p style={{ fontSize: 12, color: '#5a6458', marginBottom: 10 }}>Already know you want the fix?</p>
+                    <a
+                      href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
+                      style={{
+                        display: 'block', textAlign: 'center', background: 'transparent',
+                        border: '1.5px solid #c7ff2f', borderRadius: 10, color: '#c7ff2f',
+                        fontSize: 14, fontWeight: 700, padding: '11px 20px', textDecoration: 'none',
+                      }}
+                    >
+                      Fix my top leak now — $97 →
+                    </a>
+                    <div style={{ fontSize: 11, color: '#3a4438', textAlign: 'center', marginTop: 6 }}>
+                      One finding. 48h delivery. No call, no retainer.
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <div style={{ textAlign: 'center', padding: '28px', background: '#0e1a0e', border: '1.5px solid #1e3a1e', borderRadius: 10 }}>
                 <div style={{ fontSize: 40, marginBottom: 12 }}>✓</div>
                 <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 6, color: '#f0f4ec' }}>Full audit on the way.</h3>
-                <p style={{ fontSize: 14, color: '#8a9488', lineHeight: 1.6 }}>
-                  Check your inbox — it includes all 9 signals, ranked by impact, with specific fixes.<br />
-                  We&apos;ll follow up with the implementation offer.
+                <p style={{ fontSize: 14, color: '#8a9488', lineHeight: 1.6, marginBottom: 20 }}>
+                  Check your inbox — it includes all 9 signals, ranked by impact, with specific fixes.
                 </p>
+                <a
+                  href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
+                  style={{
+                    display: 'inline-block', background: '#c7ff2f', color: '#0a0c0a',
+                    borderRadius: 10, fontSize: 14, fontWeight: 700, padding: '12px 24px', textDecoration: 'none',
+                  }}
+                >
+                  Fix the top leak now — $97 →
+                </a>
+                <div style={{ fontSize: 11, color: '#5a6458', marginTop: 8 }}>No call, no retainer. 48h delivery.</div>
               </div>
             )}
 
@@ -346,6 +383,10 @@ export default function ScoreClient() {
                   <strong style={{ color: '#8a9488' }}>{bold}</strong> {rest}
                 </div>
               ))}
+              <div style={{ width: '100%', fontSize: 12, color: '#3a4438', paddingTop: 4 }}>
+                Want the full 9-signal breakdown with evidence?{' '}
+                <a href="/audit" style={{ color: '#8a9488', textDecoration: 'none', borderBottom: '1px solid #2a322a' }}>Run the full audit →</a>
+              </div>
             </div>
           </div>
         )}

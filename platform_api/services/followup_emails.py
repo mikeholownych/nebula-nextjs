@@ -125,8 +125,10 @@ Your score: {audit['score']/10}/10 (Grade: {audit['grade']})
 
 {self._format_finding(quick_win) if quick_win else ""}
 
-Want one tailored implementation-ready change? The $97 repair sprint is available from an eligible audit report. You or your developer applies it:
-https://nebulacomponents.com/audit
+Ready to fix it?
+
+→ $97 One-Leak Repair Sprint — we handle one selected finding in 48h, no call, no retainer:
+https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
 
 Best,
 Mike from Nebula Components
@@ -146,7 +148,7 @@ The audit records the observed condition; it does not predict conversion lift.
 
 The $97 repair sprint covers one selected finding with no call or site access required.
 
-https://nebulacomponents.com/audit
+→ https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
 
 Best,
 Mike
@@ -161,7 +163,7 @@ Still thinking about your landing page conversion rate?
 Your audit score was {audit['score']/10}/10. That score is a diagnostic baseline, not a revenue forecast.
 
 The $97 One-Leak Repair Sprint turns one selected finding into a tailored change you or your developer applies. No call, site access, or conversion-lift guarantee:
-https://nebulacomponents.com/audit
+→ https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h
 
 Best,
 Mike from Nebula Components

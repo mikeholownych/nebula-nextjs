@@ -9,6 +9,7 @@ import { analyticsHeaders, newAuditAttemptId, rememberAuditAttemptId } from '@/a
 function AuditFormContent() {
   const [url, setUrl] = useState('')
   const [reason, setReason] = useState('')
+  const [monthlyAdSpend, setMonthlyAdSpend] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [referrer, setReferrer] = useState<string | null>(null)
@@ -75,17 +76,18 @@ function AuditFormContent() {
       ...utmParams,
     })
 
-    try {
-      const response = await fetch('/api/audit/start', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', ...analyticsHeaders() },
-        body: JSON.stringify({
-          url: processedUrl,
-          referrer: referrer || undefined,
-          audit_reason: reason.trim() || undefined,
-          audit_attempt_id: auditAttemptId,
-        }),
-      })
+try {
+       const response = await fetch('/api/audit/start', {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json', ...analyticsHeaders() },
+         body: JSON.stringify({
+           url: processedUrl,
+           referrer: referrer || undefined,
+           audit_reason: reason.trim() || undefined,
+           audit_attempt_id: auditAttemptId,
+           monthly_ad_spend: monthlyAdSpend ? parseFloat(monthlyAdSpend) : undefined,
+         }),
+       })
 
       if (!response.ok) {
         throw new Error('Failed to start audit')
@@ -141,49 +143,69 @@ function AuditFormContent() {
           />
         </div>
 
-        <div>
-          <label htmlFor="reason" className="mb-2 block text-sm font-medium text-fg-muted">
-            What brought you here today? <span className="text-fg-muted">(optional)</span>
-          </label>
-          <div className="mb-3 flex flex-wrap gap-2" aria-label="Audit reason shortcuts">
-            {[
-              "Ads are getting clicks but no conversions",
-              "Launching a new page soon",
-              "The page looks fine but feels off",
-            ].map((option) => (
-              <button
-                key={option}
-                type="button"
-                onClick={() => {
-                  setReason(option)
-                  posthog.capture('audit_reason_selected', { reason: option })
-                }}
-                disabled={loading}
-                className={`rounded-full border px-3 py-1.5 text-left text-xs transition-colors ${
-                  reason === option
-                    ? 'border-accent bg-accent/10 text-accent'
-                    : 'border-border text-fg-muted hover:border-accent hover:text-fg'
-                }`}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-          <textarea
-            id="reason"
-            name="audit-reason"
-            placeholder="Tell the audit what changed, or choose a shortcut above."
-            value={reason}
-            onChange={(e) => setReason(e.target.value)}
-            disabled={loading}
-            rows={2}
-            maxLength={300}
-            className="w-full resize-none rounded-lg border border-fg-muted/30 bg-bg px-4 py-3 text-sm text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none disabled:opacity-50"
-          />
-          <p className="mt-2 text-xs leading-5 text-fg-muted">
-            This helps the report explain the finding in your context. It does not change the checks.
-          </p>
-        </div>
+<div>
+           <label htmlFor="reason" className="mb-2 block text-sm font-medium text-fg-muted">
+             What brought you here today? <span className="text-fg-muted">(optional)</span>
+           </label>
+           <div className="mb-3 flex flex-wrap gap-2" aria-label="Audit reason shortcuts">
+             {[
+               "Ads are getting clicks but no conversions",
+               "Launching a new page soon",
+               "The page looks fine but feels off",
+             ].map((option) => (
+               <button
+                 key={option}
+                 type="button"
+                 onClick={() => {
+                   setReason(option)
+                   posthog.capture('audit_reason_selected', { reason: option })
+                 }}
+                 disabled={loading}
+                 className={`rounded-full border px-3 py-1.5 text-left text-xs transition-colors ${
+                   reason === option
+                     ? 'border-accent bg-accent/10 text-accent'
+                     : 'border-border text-fg-muted hover:border-accent hover:text-fg'
+                 }`}
+               >
+                 {option}
+               </button>
+             ))}
+           </div>
+           <textarea
+             id="reason"
+             name="audit-reason"
+             placeholder="Tell the audit what changed, or choose a shortcut above."
+             value={reason}
+             onChange={(e) => setReason(e.target.value)}
+             disabled={loading}
+             rows={2}
+             maxLength={300}
+             className="w-full resize-none rounded-lg border border-fg-muted/30 bg-bg px-4 py-3 text-sm text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none disabled:opacity-50"
+           />
+           <p className="mt-2 text-xs leading-5 text-fg-muted">
+             This helps the report explain the finding in your context. It does not change the checks.
+           </p>
+         </div>
+
+         <div>
+           <label htmlFor="monthly-ad-spend" className="mb-2 block text-sm font-medium text-fg-muted">
+             Monthly ad spend (USD) <span className="text-fg-muted">(optional)</span>
+           </label>
+           <input
+             id="monthly-ad-spend"
+             type="number"
+             name="monthly-ad-spend"
+             placeholder="e.g., 2000"
+             value={monthlyAdSpend}
+             onChange={(e) => setMonthlyAdSpend(e.target.value)}
+             disabled={loading}
+             min="0"
+             className="w-full rounded-lg border border-fg-muted/30 bg-bg px-4 py-3 text-sm text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none disabled:opacity-50"
+           />
+           <p className="mt-2 text-xs leading-5 text-fg-muted">
+             Helps us provide more accurate estimates of potential revenue impact
+           </p>
+         </div>
 
         <button
           type="submit"
@@ -201,6 +223,11 @@ function AuditFormContent() {
             {error}
           </p>
         </div>
+
+        <p className="text-center text-xs text-fg-muted pt-1">
+          Want just the score?{' '}
+          <a href="/score" className="text-accent hover:underline">See your conversion grade instantly →</a>
+        </p>
       </form>
     </Card>
   )

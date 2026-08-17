@@ -214,9 +214,18 @@ export default async function TeardownPage({
           >
             Find the Leak →
           </Link>
-          <p className="mt-4 text-xs text-fg-muted">
-            If it finds something worth fixing, the $97 One-Leak Repair Sprint supplies the tailored copy, code, or configuration change for one selected finding.
-          </p>
+          <div className="mt-6 pt-6 border-t border-accent/10">
+            <p className="text-xs text-fg-muted mb-3">Already know your page has issues? Skip the audit.</p>
+            <a
+              href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
+              className="inline-block rounded-xl border border-accent/60 px-6 py-3 text-sm font-semibold text-accent hover:bg-accent/10 transition-colors"
+            >
+              Fix one leak now — $97 →
+            </a>
+            <p className="mt-2 text-xs text-fg-muted">
+              One finding. 48h delivery. No call, no retainer.
+            </p>
+          </div>
         </section>
       </article>
     </main>
