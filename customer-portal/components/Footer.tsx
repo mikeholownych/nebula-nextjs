@@ -4,9 +4,12 @@ export default function Footer() {
   return (
     <footer className="border-t border-border bg-bg-elevated mt-20">
       <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-8">
+
+        {/* ── Primary nav columns ────────────────────────────────── */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+
           {/* Brand */}
-          <div className="md:col-span-2">
+          <div className="col-span-2 md:col-span-2">
             <a href="/" className="inline-flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity" aria-label="Nebula Components home">
               <NebulaLogo size={18} />
               <span className="text-sm font-medium text-fg tracking-tight">
@@ -23,11 +26,11 @@ export default function Footer() {
             <p className="text-xs font-medium text-fg-muted uppercase tracking-widest mb-4">Product</p>
             <ul className="space-y-3">
               <li><a href="/audit?utm_source=site-nav&utm_medium=internal" className="text-sm text-fg-muted hover:text-fg transition-colors">Free Audit</a></li>
-              <li><a href="/workspace" className="text-sm text-fg-muted hover:text-fg transition-colors">Workspace</a></li>
+              <li><a href="/score" className="text-sm text-fg-muted hover:text-fg transition-colors">Score My Page</a></li>
               <li><a href="/pricing" className="text-sm text-fg-muted hover:text-fg transition-colors">Pricing</a></li>
+              <li><a href="/workspace" className="text-sm text-fg-muted hover:text-fg transition-colors">Workspace</a></li>
               <li><a href="/teardowns" className="text-sm text-fg-muted hover:text-fg transition-colors">Teardowns</a></li>
               <li><a href="/case-studies" className="text-sm text-fg-muted hover:text-fg transition-colors">Case Studies</a></li>
-              <li><a href="/resources/citable" className="text-sm text-fg-muted hover:text-fg transition-colors">Citable</a></li>
             </ul>
           </div>
 
@@ -35,34 +38,12 @@ export default function Footer() {
           <div>
             <p className="text-xs font-medium text-fg-muted uppercase tracking-widest mb-4">Learn</p>
             <ul className="space-y-3">
-              <li><a href="/newsletter?utm_source=footer&utm_medium=link&utm_campaign=newsletter" className="text-sm text-fg-muted hover:text-fg transition-colors">Newsletter</a></li>
-              <li><a href="/brand" className="text-sm text-fg-muted hover:text-fg transition-colors">Brand Kit</a></li>
-              <li><a href="/press" className="text-sm text-fg-muted hover:text-fg transition-colors">Press Kit</a></li>
               <li><a href="/learning-centre" className="text-sm text-fg-muted hover:text-fg transition-colors">Learning Centre</a></li>
+              <li><a href="/playbooks" className="text-sm text-fg-muted hover:text-fg transition-colors">Playbooks</a></li>
               <li><a href="/benchmarks" className="text-sm text-fg-muted hover:text-fg transition-colors">Leak Index</a></li>
+              <li><a href="/resources/citable" className="text-sm text-fg-muted hover:text-fg transition-colors">Citable</a></li>
+              <li><a href="/newsletter?utm_source=footer&utm_medium=link&utm_campaign=newsletter" className="text-sm text-fg-muted hover:text-fg transition-colors">Newsletter</a></li>
               <li><a href="/lab" className="text-sm text-fg-muted hover:text-fg transition-colors">Lab</a></li>
-              <li><a href="/why-is-my-landing-page-not-converting" className="text-sm text-fg-muted hover:text-fg transition-colors">Diagnostic Guides →</a></li>
-              <li><a href="/saas-landing-page-audit" className="text-sm text-fg-muted hover:text-fg transition-colors">Industry Audits →</a></li>
-              <li><a href="/cta-optimization" className="text-sm text-fg-muted hover:text-fg transition-colors">CTA Optimization</a></li>
-              <li><a href="/headline-optimization" className="text-sm text-fg-muted hover:text-fg transition-colors">Headline Optimization</a></li>
-              <li><a href="/mobile-landing-page-optimization" className="text-sm text-fg-muted hover:text-fg transition-colors">Mobile Optimization</a></li>
-              <li><a href="/page-speed-conversion" className="text-sm text-fg-muted hover:text-fg transition-colors">Page Speed & Conversion</a></li>
-            </ul>
-          </div>
-
-          {/* Comparisons */}
-          <div>
-            <p className="text-xs font-medium text-fg-muted uppercase tracking-widest mb-4">Compare</p>
-            <ul className="space-y-3">
-              <li><a href="/vs/pagespeed-insights" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. PageSpeed Insights</a></li>
-              <li><a href="/vs/hotjar" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. Hotjar</a></li>
-              <li><a href="/vs/unbounce" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. Unbounce</a></li>
-              <li><a href="/vs/semrush-site-audit" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. SEMrush Site Audit</a></li>
-              <li><a href="/vs/screaming-frog" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. Screaming Frog</a></li>
-              <li><a href="/vs/crazy-egg" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. Crazy Egg</a></li>
-              <li><a href="/vs" className="text-sm text-fg-muted hover:text-fg transition-colors">All comparisons →</a></li>
-              <li><a href="/compare" className="text-sm text-fg-muted hover:text-fg transition-colors">Tool comparisons →</a></li>
-              <li><a href="/pricing-guides/semrush-pricing" className="text-sm text-fg-muted hover:text-fg transition-colors">Pricing guides →</a></li>
             </ul>
           </div>
 
@@ -71,28 +52,83 @@ export default function Footer() {
             <p className="text-xs font-medium text-fg-muted uppercase tracking-widest mb-4">Company</p>
             <ul className="space-y-3">
               <li><a href="/about" className="text-sm text-fg-muted hover:text-fg transition-colors">About</a></li>
+              <li><a href="/press" className="text-sm text-fg-muted hover:text-fg transition-colors">Press</a></li>
+              <li><a href="/brand" className="text-sm text-fg-muted hover:text-fg transition-colors">Brand Kit</a></li>
               <li><a href="/editorial-standards" className="text-sm text-fg-muted hover:text-fg transition-colors">Editorial Standards</a></li>
-              <li><a href="/ai-sdr-vs-audit" className="text-sm text-fg-muted hover:text-fg transition-colors">AI SDR vs Audit</a></li>
-              <li><a href="/what-is-landing-page-audit" className="text-sm text-fg-muted hover:text-fg transition-colors">What Is a Landing Page Audit?</a></li>
-              <li><a href="/roas-cliff" className="text-sm text-fg-muted hover:text-fg transition-colors">ROAS Cliff</a></li>
-              <li><a href="/social-proof-landing-page" className="text-sm text-fg-muted hover:text-fg transition-colors">Social Proof Guide</a></li>
-              <li><a href="/playbooks" className="text-sm text-fg-muted hover:text-fg transition-colors">Playbooks</a></li>
-              <li><a href="/score" className="text-sm text-fg-muted hover:text-fg transition-colors">Score My Page</a></li>
-              <li><a href="/7-systems" className="text-sm text-fg-muted hover:text-fg transition-colors">7 Systems</a></li>
-              <li><a href="/concepts" className="text-sm text-fg-muted hover:text-fg transition-colors">Concepts</a></li>
+              <li><a href="/vs" className="text-sm text-fg-muted hover:text-fg transition-colors">Tool Comparisons</a></li>
+              <li><a href="/about/team" className="text-sm text-fg-muted hover:text-fg transition-colors">Team</a></li>
             </ul>
           </div>
         </div>
 
-        {/* Legal row - sits below the main grid, full-width subtle strip */}
-        <div className="mt-10 pt-8 border-t border-border">
+        {/* ── Sitemap strip — crawlable, visually quiet ──────────── */}
+        <div className="mt-10 pt-6 border-t border-border">
+          <nav aria-label="Full site index" className="flex flex-wrap gap-x-3 gap-y-1.5">
+            {[
+              ['/why-is-my-landing-page-not-converting', 'Why Pages Don\'t Convert'],
+              ['/what-is-landing-page-audit', 'What Is a Landing Page Audit'],
+              ['/best-landing-page-audit-tools', 'Best Audit Tools'],
+              ['/roas-cliff', 'ROAS Cliff'],
+              ['/social-proof-landing-page', 'Social Proof Guide'],
+              ['/cta-optimization', 'CTA Optimization'],
+              ['/headline-optimization', 'Headline Optimization'],
+              ['/mobile-landing-page-optimization', 'Mobile Optimization'],
+              ['/page-speed-conversion', 'Page Speed & Conversion'],
+              ['/ai-sdr-vs-audit', 'AI SDR vs Audit'],
+              ['/7-systems', '7 Systems'],
+              ['/concepts', 'Concepts'],
+              ['/saas-landing-page-audit', 'SaaS Audit'],
+              ['/ecommerce-landing-page-audit', 'Ecommerce Audit'],
+              ['/mobile-landing-page-audit', 'Mobile Audit'],
+              ['/lead-generation-landing-page-audit', 'Lead Gen Audit'],
+              ['/landing-page-message-match', 'Message Match'],
+              ['/landing-page-trust-signals', 'Trust Signals'],
+              ['/landing-page-cta-audit', 'CTA Audit'],
+              ['/compare', 'Compare Tools'],
+              ['/compare/unbounce', 'vs Unbounce'],
+              ['/compare/instapage', 'vs Instapage'],
+              ['/compare/leadpages', 'vs Leadpages'],
+              ['/compare/pagespeed-insights', 'vs PageSpeed'],
+              ['/vs/hotjar', 'vs Hotjar'],
+              ['/vs/screaming-frog', 'vs Screaming Frog'],
+              ['/vs/crazy-egg', 'vs Crazy Egg'],
+              ['/vs/semrush-site-audit', 'vs SEMrush'],
+              ['/vs/pagespeed-insights', 'vs PageSpeed Insights'],
+              ['/vs/unbounce', 'vs Unbounce'],
+              ['/pricing-guides/semrush-pricing', 'SEMrush Pricing'],
+              ['/pricing-guides/hotjar-pricing', 'Hotjar Pricing'],
+              ['/pricing-guides/crazy-egg-pricing', 'Crazy Egg Pricing'],
+              ['/pricing-guides/unbounce-pricing', 'Unbounce Pricing'],
+              ['/landing-page-audit-tools-pricing', 'Audit Tool Pricing'],
+              ['/resources/citable/quick-start', 'Citable Quick Start'],
+              ['/resources/citable/releases', 'Citable Releases'],
+              ['/resources/citable/compare', 'Citable Compare'],
+              ['/research/landing-page-performance-q3-2026', 'Q3 2026 Research'],
+              ['/paid-traffic-leak-scorecard', 'Leak Scorecard'],
+              ['/ads-getting-clicks-but-no-sales', 'Ads Getting Clicks, No Sales'],
+            ].map(([href, label], i, arr) => (
+              <span key={href} className="flex items-center gap-3">
+                <a
+                  href={href}
+                  className="text-xs text-fg-muted/60 hover:text-fg-muted transition-colors whitespace-nowrap"
+                >
+                  {label}
+                </a>
+                {i < arr.length - 1 && (
+                  <span className="text-border select-none" aria-hidden="true">·</span>
+                )}
+              </span>
+            ))}
+          </nav>
+        </div>
+
+        {/* ── Legal row ──────────────────────────────────────────── */}
+        <div className="mt-8 pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-            {/* Legal links + IndieAscent badge */}
+
+            {/* Legal links + badges */}
             <div className="flex flex-col gap-4">
               <ul className="flex flex-wrap gap-x-6 gap-y-2">
-                <li>
-                  <p className="text-xs font-medium text-fg-muted uppercase tracking-widest mb-2 md:hidden">Legal</p>
-                </li>
                 <li><a href="/privacy-policy" className="text-xs text-fg-muted hover:text-fg transition-colors">Privacy Policy</a></li>
                 <li><a href="/terms" className="text-xs text-fg-muted hover:text-fg transition-colors">Terms of Service</a></li>
                 <li><a href="/data-rights" className="text-xs text-fg-muted hover:text-fg transition-colors">Data Rights</a></li>
@@ -107,9 +143,8 @@ export default function Footer() {
               </a>
             </div>
 
-            {/* Copyright + Social */}
+            {/* Copyright + social */}
             <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
-              {/* Nick Launches badge - Starter Launch plan (premium badge with UTM) */}
               <a href="https://nicklaunches.com/products/nebula-components/?utm_source=nebulacomponents.com&utm_medium=badge&utm_campaign=featured-premium" target="_blank" rel="noopener" aria-label="Nebula Components on Nick Launches">
                 <img src="https://nicklaunches.com/badges/featured-premium-dark.png" alt="Nebula Components on Nick Launches" width={244} height={56} style={{ height: '28px', width: 'auto' }} />
               </a>
@@ -136,6 +171,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
       </div>
     </footer>
   )
