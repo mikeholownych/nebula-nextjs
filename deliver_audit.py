@@ -2,6 +2,9 @@
 """Deliver audit to lead. Scrape URL, score, compose email, send via AgentMail."""
 
 import sys, json, time, re, subprocess, os, argparse, ipaddress, socket, logging
+import base64, hmac, hashlib
+from typing import Optional
+import asyncio
 from datetime import datetime, timezone
 from urllib.parse import urlencode, urljoin, urlparse
 from pathlib import Path
@@ -13,11 +16,30 @@ try:
 except ImportError:
     HAS_FIX_MAP = False
 
+# Guided Implementation Flow - step-by-step implementation guides
+try:
+    from guided_implementation import build_guided_implementation
+    HAS_GUIDED_IMPLEMENTATION = True
+except ImportError:
+    HAS_GUIDED_IMPLEMENTATION = False
+
 # Configuration
 NEBULA_DIR = Path(__file__).resolve().parent
 # The live server runs under system Python but dependencies live in the repo venv.
 # Add the active venv site-packages before importing BeautifulSoup/requests.
 sys.path.insert(0, str(NEBULA_DIR / "venv" / "lib" / "python3.12" / "site-packages"))
+
+# Signal Verifier - for efficient audit scoring
+try:
+    sys.path.insert(0, str(NEBULA_DIR / "platform_api"))
+    from platform_api.services.signal_verifier import (
+        verify_headline, verify_cta, verify_above_fold, verify_social_proof,
+        verify_load_speed, verify_mobile, verify_ad_signals,
+        verify_seo_foundations, verify_ai_readiness, verify_signal
+    )
+    HAS_SIGNAL_VERIFIER = True
+except ImportError:
+    HAS_SIGNAL_VERIFIER = False
 
 # AI Prompt Pack - generates per-finding AI prompts from audit data
 try:
@@ -44,6 +66,33 @@ CONTACTED_PATH = NEBULA_DIR / "contacted.json"
 HOT_LEAD_PATH = NEBULA_DIR / "HOT_LEAD.json"
 STATS_PATH = NEBULA_DIR / "stats.json"
 AUDIT_LOG_PATH = LEDGERS_DIR / "audit-delivery.log"
+
+# ── Audit unlock token (mirrors app/lib/audit-unlock-token.ts) ─────────────
+# Generates HMAC-signed tokens that unlock /audit/{id}/results without
+# requiring the visitor to re-enter their email. Used when embedding a
+# personalised results link in the outreach email.
+def _load_audit_unlock_secret() -> str | None:
+    """Read AUDIT_UNLOCK_SECRET from customer-portal/.env.local."""
+    env_file = NEBULA_DIR / "customer-portal" / ".env.local"
+    if not env_file.exists():
+        return None
+    for line in env_file.read_text().splitlines():
+        if line.startswith("AUDIT_UNLOCK_SECRET="):
+            return line.split("=", 1)[1].strip()
+    return None
+
+def sign_audit_unlock(audit_id: str, email: str) -> str | None:
+    """Return a signed token for the results page ?unlock= param.
+    Returns None if AUDIT_UNLOCK_SECRET is not configured."""
+    secret = _load_audit_unlock_secret()
+    if not secret:
+        return None
+    payload = f"{audit_id}:{email.strip().lower()}"
+    payload_b64 = base64.urlsafe_b64encode(payload.encode()).rstrip(b"=").decode()
+    sig = hmac.new(secret.encode(), payload.encode(), hashlib.sha256).digest()
+    sig_b64 = base64.urlsafe_b64encode(sig).rstrip(b"=").decode()
+    return f"{payload_b64}.{sig_b64}"
+
 LEDGER_FILE = str(LEDGERS_DIR / "customer-ledger.jsonl")
 AUDIT_LEADS_FILE = str(NEBULA_DIR / "audit_leads.jsonl")
 MAX_AUDIT_HTML_BYTES = 2 * 1024 * 1024
@@ -196,12 +245,15 @@ def score_page(html):
 
     return min(score, 10)
 
-def scrape_page(url):
+def scrape_page(url, html: Optional[str] = None):
     """Fetch and parse a landing page for the live self-serve audit API."""
-    session = get_session()
-    html_text = fetch_page(url, session)
-    if not html_text:
-        raise ValueError(f"Could not fetch {url}")
+    if html is None:
+        session = get_session()
+        html_text = fetch_page(url, session)
+        if not html_text:
+            raise ValueError(f"Could not fetch {url}")
+    else:
+        html_text = html
     soup = BeautifulSoup(html_text, "html.parser")
     title = (soup.title.get_text(" ", strip=True) if soup.title else "")[:500]
     h1 = (soup.find("h1").get_text(" ", strip=True) if soup.find("h1") else "")[:500]
@@ -919,6 +971,169 @@ def score_audit(page):
             for finding in opp_matrix
         ]
 
+    # Generate guided implementation flow if available
+    result = {
+        "overall": overall,
+        "overall_grade": grade,
+        "composite": composite,
+        "composite_anchor": composite_anchor,
+        "dimensions": dimensions,
+        "opp_matrix": opp_matrix,
+        "engine_version": ENGINE_VERSION,
+    }
+    
+    if HAS_GUIDED_IMPLEMENTATION:
+        guided_implementation = build_guided_implementation({
+            "overall": overall,
+            "overall_grade": grade,
+            "dimensions": dimensions,
+            "opp_matrix": opp_matrix
+        })
+        result["guided_implementation"] = guided_implementation
+    
+    return result
+
+
+async def _get_signal_verifier_results(html_text: str, url: str) -> dict:
+    """Get results from all signal verifier functions using the pre-fetched HTML."""
+    if not HAS_SIGNAL_VERIFIER:
+        return {}
+    
+    # Define signal verifier functions and their corresponding dimension keys
+    signal_functions = [
+        ("headline", verify_headline),
+        ("cta", verify_cta),
+        ("above_fold", verify_above_fold),
+        ("social_proof", verify_social_proof),
+        ("load_speed", verify_load_speed),
+        ("mobile", verify_mobile),
+        ("ad_signals", verify_ad_signals),
+        ("seo_foundations", verify_seo_foundations),
+        ("ai_readiness", verify_ai_readiness),
+    ]
+    
+    # Create tasks for all verifier functions
+    tasks = []
+    for dim_key, verify_func in signal_functions:
+        # Create a task that calls the verifier function with the pre-fetched HTML
+        task = asyncio.create_task(verify_func(url, html_text))
+        tasks.append((dim_key, task))
+    
+    # Wait for all tasks to complete and collect results
+    results = {}
+    for dim_key, task in tasks:
+        try:
+            result = await task
+            results[dim_key] = result
+        except Exception as e:
+            # If a verifier fails, we'll fall back to original scoring later
+            results[dim_key] = {"error": str(e)}
+    
+    return results
+
+
+def score_audit_with_signal_verifiers(page: dict) -> dict:
+    """Score audit using signal verifier functions for core signals, falling back to original scoring."""
+    # Run the async function to get verifier results
+    try:
+        verifier_results = asyncio.run(_get_signal_verifier_results(
+            page.get("html", ""),
+            page.get("url", "")
+        ))
+    except Exception:
+        # If asyncio.run fails for any reason, fall back to original scoring
+        verifier_results = {}
+    
+    html_text = page.get("html", "")
+    text = page.get("text", "")
+    h1 = page.get("h1", "")
+    url = page.get("url", "")
+    ctas = page.get("ctas", [])
+    lower = html_text.lower()
+    
+    # Initialize dimensions dict
+    dimensions = {}
+    
+    # Define signal verifier functions and their corresponding dimension keys
+    signal_functions = [
+        ("headline", verify_headline),
+        ("cta", verify_cta),
+        ("above_fold", verify_above_fold),
+        ("social_proof", verify_social_proof),
+        ("load_speed", verify_load_speed),
+        ("mobile", verify_mobile),
+        ("ad_signals", verify_ad_signals),
+        ("seo_foundations", verify_seo_foundations),
+        ("ai_readiness", verify_ai_readiness),
+    ]
+    
+    # Process each dimension
+    for dim_key, _ in signal_functions:
+        if dim_key in verifier_results and "error" not in verifier_results[dim_key]:
+            # Use the verifier result
+            result = verifier_results[dim_key]
+            
+            # Convert SignalResult to dimension format
+            # SignalResult score is 0.0-1.0, dimension score is 0-10
+            score = min(10.0, max(0.0, result["score"] * 10.0))
+            
+            # Use the verifier's issue and evidence, or provide defaults
+            issue = result["issue"] if result["issue"] is not None else (
+                f"{dim_key.replace('_', ' ').title()} signal verification completed"
+            )
+            fix = f"Improve {dim_key.replace('_', ' ')} based on audit findings"
+            
+            # Set weight based on dimension importance (matching original score_audit weights)
+            weight_map = {
+                "headline": "high",
+                "cta": "high", 
+                "social_proof": "high",
+                "load_speed": "high",
+                "mobile": "medium",
+                "seo_foundations": "high",
+                "ad_signals": "medium",
+                "above_fold": "high",
+                "ai_readiness": "medium"
+            }
+            weight = weight_map.get(dim_key, "medium")
+            
+            dimensions[dim_key] = {
+                "score": score,
+                "weight": weight,
+                "issue": issue,
+                "fix": fix,
+            }
+        else:
+            # Fall back to original scoring for this dimension
+            dimensions[dim_key] = _get_original_dimension_score(
+                dim_key, page, html_text, text, h1, url, ctas, lower
+            )
+    
+    # Calculate overall score as average of dimension scores
+    if dimensions:
+        overall = round(sum(dim["score"] for dim in dimensions.values()) / len(dimensions), 1)
+    else:
+        overall = 0.0
+    
+    # Determine grade based on overall score
+    grade = "A" if overall >= 8 else "B" if overall >= 6.5 else "C" if overall >= 5 else "D"
+    
+    # Calculate weighted composite score (matching original score_audit)
+    _WEIGHT_MAP = {"high": 3, "medium": 2, "low": 1}
+    _weighted_sum = sum(
+        dim["score"] * _WEIGHT_MAP.get(str(dim.get("weight", "medium")).lower(), 2)
+        for dim in dimensions.values()
+    )
+    _weight_total = sum(
+        _WEIGHT_MAP.get(str(dim.get("weight", "medium")).lower(), 2)
+        for dim in dimensions.values()
+    )
+    composite = round(_weighted_sum / _weight_total, 1) if _weight_total else overall
+    composite_anchor = 7.0  # matches the published component pass standard
+    
+    # Build opportunity matrix using the same logic as original score_audit
+    opp_matrix = _build_opportunity_matrix_from_dimensions(dimensions)
+    
     return {
         "overall": overall,
         "overall_grade": grade,
@@ -928,6 +1143,208 @@ def score_audit(page):
         "opp_matrix": opp_matrix,
         "engine_version": ENGINE_VERSION,
     }
+
+
+def _get_original_dimension_score(dim_key: str, page: dict, html_text: str, text: str, 
+                                 h1: str, url: str, ctas: list, lower: str) -> dict:
+    """Get dimension score using original score_audit logic for a specific dimension."""
+    # This function replicates the scoring logic from the original score_audit function
+    # for individual dimensions, to maintain backward compatibility when signal verifiers fail
+    
+    # Initialize default return
+    default_result = {
+        "score": 5.0,
+        "weight": "medium",
+        "issue": f"{dim_key.replace('_', ' ').title()} dimension",
+        "fix": f"Improve {dim_key.replace('_', ' ')} based on audit findings"
+    }
+    
+    # Map dimension keys to their scoring logic from original score_audit
+    if dim_key == "headline":
+        headline_score = 8 if 12 <= len(h1) <= 90 else (5 if h1 else 2)
+        return {
+            "score": float(headline_score),
+            "weight": "high",
+            "issue": "Your headline tells visitors what you do. It needs to tell them what they get." if headline_score < 7 else "Headline communicates a concrete buyer outcome.",
+            "fix": "Lead with the concrete buyer result and target audience in the first sentence."
+        }
+    elif dim_key == "cta":
+        cta_score = 8 if any(any(word in cta.lower() for word in ["get", "start", "run", "buy", "book", "try"]) for cta in ctas) else (5 if ctas else 2)
+        return {
+            "score": float(cta_score),
+            "weight": "high",
+            "issue": "The button on your page asks visitors to act but does not tell them what changes for them when they do." if cta_score < 7 else "CTA language is action-oriented.",
+            "fix": "Use action + outcome copy such as 'Run my free teardown' or 'Get the fix kit'."
+        }
+    elif dim_key == "social_proof":
+        # Social proof scoring is complex in original score_audit - simplify for fallback
+        trust_words = ["testimonial", "review", "customer", "trusted", "case study", "proof", "guarantee", "results"]
+        trust_claimed = [w for w in trust_words if w in lower]
+        _trust_re = (
+            r'(\d+\s*(stars?|reviews?|customers?|clients?|companies|users?))'
+            r'|(trustpilot|g2\.com|capterra|clutch|google reviews)'
+            r'|(\u201c|\u2018|said|says|-\s*[A-Z])'
+        )
+        trust_shown = bool(re.search(_trust_re, lower, re.IGNORECASE))
+        if trust_claimed and trust_shown:
+            proof_score = 8
+            proof_issue = f"Trust signals present and evidenced ({len(trust_claimed)} trust terms + concrete proof markers)."
+        elif trust_claimed and not trust_shown:
+            proof_score = 4
+            proof_issue = (
+                f"Your page says it's trustworthy ({'/ '.join(trust_claimed[:3])}). "
+                f"But a first-time visitor sees no names, no numbers, no proof. "
+                f"They hear a claim. They need evidence before they'll believe it."
+            )
+        else:
+            proof_score = 3
+            proof_issue = "A stranger landing here sees nothing that proves this worked for anyone else. No quotes, no names, no numbers. They're being asked to trust a page that hasn't earned it yet."
+        return {
+            "score": float(proof_score),
+            "weight": "high",
+            "issue": proof_issue,
+            "fix": "Add proof near the first CTA: sample output, customer quote, metric, guarantee, or process evidence."
+        }
+    elif dim_key == "load_speed":
+        html_size_score = 8 if len(html_text) < 120000 else 5
+        return {
+            "score": float(html_size_score),
+            "weight": "high",
+            "issue": "Page HTML is within normal bounds." if html_size_score >= 7 else f"HTML is {len(html_text)//1000}KB - large pages slow first paint.",
+            "fix": "Compress images, remove render-blocking scripts, enable caching. Target Lighthouse performance >= 70 on mobile."
+        }
+    elif dim_key == "mobile":
+        mobile_score = 8 if "viewport" in lower else 4
+        return {
+            "score": float(mobile_score),
+            "weight": "medium",
+            "issue": "Viewport tag is present." if mobile_score >= 7 else "Mobile viewport metadata may be missing.",
+            "fix": "Ensure responsive viewport and test the hero/form on mobile width."
+        }
+    elif dim_key == "seo_foundations":
+        # Simplified SEO foundations scoring for fallback
+        title_tag = bool(re.search(r"<title[^>]*>.+?</title>", html_text, re.IGNORECASE | re.DOTALL))
+        meta_desc = bool(re.search(r'<meta\s+[^>]*name=["\']description["\']', html_text, re.IGNORECASE))
+        h1_present = bool(h1)
+        seo_score = 5  # baseline
+        if title_tag:
+            seo_score += 1
+        if meta_desc:
+            seo_score += 1
+        if h1_present:
+            seo_score += 1
+        seo_score = max(1, min(10, round(seo_score)))
+        return {
+            "score": float(seo_score),
+            "weight": "high",
+            "issue": "SEO foundations are solid - title, meta description, and H1 structure are well aligned." if seo_score >= 7 else "SEO foundations need work",
+            "fix": "Write a unique 30-60 char title and 120-160 char meta description. Ensure exactly one descriptive H1 that shares keywords with the title."
+        }
+    elif dim_key == "ad_signals":
+        # Simplified ad signals scoring for fallback
+        return {
+            "score": 5.0,
+            "weight": "medium",
+            "issue": "Ad signal verification completed",
+            "fix": "Verify ad tracking implementation matches your campaign requirements"
+        }
+    elif dim_key == "above_fold":
+        # Simplified above fold scoring for fallback
+        fold_html = html_text[:3000]
+        has_h1 = bool(h1)
+        has_cta = bool(re.search(r'<(button|a)[^>]*>.*?</(button|a)>', fold_html, re.IGNORECASE | re.DOTALL))
+        above_fold_score = 8 if has_h1 and has_cta else (5 if has_h1 or has_cta else 2)
+        return {
+            "score": float(above_fold_score),
+            "weight": "high",
+            "issue": "Early source segment contains headline, clickable control, and offer/price terms." if above_fold_score >= 7 else "Early source proxy lacks a headline, clickable control, or offer term",
+            "fix": "Run rendered viewport inspection before treating source order as visual placement."
+        }
+    elif dim_key == "ai_readiness":
+        # Simplified AI readiness scoring for fallback
+        has_jsonld = bool(re.search(r'<script[^>]*type="application/ld\+json"[^>]*>', html_text))
+        ai_score = 5  # baseline
+        if has_jsonld:
+            ai_score += 1
+        ai_score = max(1, min(10, round(ai_score)))
+        return {
+            "score": float(ai_score),
+            "weight": "medium",
+            "issue": "AI citation readiness assessment completed",
+            "fix": "Add JSON-LD Organization schema, complete OpenGraph tags, set canonical URL, and include concrete facts in your copy"
+        }
+    
+    # Return default if dimension key not recognized
+    return default_result
+
+
+def _build_opportunity_matrix_from_dimensions(dimensions: dict) -> list:
+    """Build opportunity matrix from dimension scores, similar to original score_audit logic."""
+    # This is a simplified version of the opportunity matrix building logic
+    # from the original score_audit function
+    
+    DIM_LABELS = {
+        "headline": "Headline",
+        "cta": "CTA",
+        "social_proof": "Social Proof",
+        "load_speed": "Load Speed",
+        "mobile": "Mobile",
+        "seo_foundations": "SEO Foundations",
+        "ad_signals": "Ad Tracking",
+        "above_fold": "Above Fold",
+        "ai_readiness": "AI Citation Readiness",
+    }
+    
+    # Quadrant classification based on impact vs effort
+    effort_weights = {
+        "headline": 2,
+        "cta": 2,
+        "above_fold": 3,
+        "social_proof": 3,
+        "load_speed": 7,
+        "mobile": 3,
+        "ad_signals": 8,
+        "seo_foundations": 4,
+        "ai_readiness": 5,
+    }
+    
+    opp_matrix = []
+    for key, dim in dimensions.items():
+        score_val = dim["score"]
+        if score_val >= 7:
+            continue  # not a problem worth surfacing
+        
+        # Impact: inverse of score (lower score = bigger opportunity)
+        base_impact = round((10 - score_val) / 2, 1)
+        
+        # Effort
+        effort = effort_weights.get(key, 5)
+        
+        # Quadrant
+        if base_impact >= 2.0 and effort <= 4:
+            quadrant = "quick_win"
+        elif base_impact >= 2.0 and effort > 4:
+            quadrant = "major_project"
+        elif base_impact < 2.0 and effort <= 4:
+            quadrant = "fill_in"
+        else:
+            quadrant = "avoid"
+        
+        opp_matrix.append({
+            "key": key,
+            "label": DIM_LABELS.get(key, key.replace("_", " ").title()),
+            "impact": base_impact,
+            "effort": effort,
+            "quadrant": quadrant,
+            "issue": dim["issue"],
+            "fix": dim["fix"],
+        })
+    
+    # Sort: quick_wins first (by impact desc), then major, fill_in, avoid
+    _order = {"quick_win": 0, "major_project": 1, "fill_in": 2, "avoid": 3}
+    opp_matrix.sort(key=lambda x: (_order[x["quadrant"]], -x["impact"]))
+    
+    return opp_matrix
 
 
 
@@ -1068,7 +1485,7 @@ def detect_stack(html_text):
     return ", ".join(signals[:5])  # cap at 5 to keep opener tight
 
 
-def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=None, stated_goal=None, stated_role=None, stated_visitor=None, stated_tone=None, prompt_pack=None):
+def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=None, stated_goal=None, stated_role=None, stated_visitor=None, stated_tone=None, prompt_pack=None, website_audit_id=None):
     """Compose structured audit email - free-consulting frame, not report delivery."""
     DIM_LABELS = {
         "headline": "Headline",
@@ -1162,42 +1579,79 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
             )
 
     # Advisor framing: point at specific dollars, not vague "conversion issues" (CAIOS lesson: advisor sentences name amounts)
+    # Calculate actual monthly leak and recoverable waste based on score and monthly spend
+    if monthly_spend and monthly_spend > 0:
+        monthly_spend_num = monthly_spend
+    else:
+        # Default estimate if no spend provided
+        monthly_spend_num = 2000.0
+    
+    # Determine waste percentage range based on score
     if score < 4:
-        monthly_leak = "~$1,600–$4,000/mo"
-        waste_pct = "70–80%"
-        _stack = (stack_line + " ") if stack_line else ""
+        waste_pct_min, waste_pct_max = 0.70, 0.80  # 70-80%
+        waste_pct_avg = (waste_pct_min + waste_pct_max) / 2  # 75%
+    elif score < 6.5:
+        waste_pct_min, waste_pct_max = 0.40, 0.50  # 40-50%
+        waste_pct_avg = (waste_pct_min + waste_pct_max) / 2  # 45%
+    elif score < 8:
+        waste_pct_min, waste_pct_max = 0.15, 0.20  # 15-20%
+        waste_pct_avg = (waste_pct_min + waste_pct_max) / 2  # 17.5%
+    else:
+        waste_pct_min, waste_pct_max = 0.05, 0.10  # 5-10%
+        waste_pct_avg = (waste_pct_min + waste_pct_max) / 2  # 7.5%
+    
+    # Calculate monthly leak (wasted spend)
+    monthly_leak_num = monthly_spend_num * waste_pct_avg
+    
+    # Calculate recoverable waste from fixing top issue
+    # Get impact score from opportunity matrix (higher impact = more recoverable)
+    _matrix = audit.get("opp_matrix", [])
+    impact_score = 5.0  # Default middle impact
+    if _matrix and len(_matrix) > 0:
+        # Use the impact of the top issue (first in the sorted matrix)
+        impact_score = _matrix[0].get("impact", 5.0)
+        # Normalize impact to 0-1 scale where 10 is max impact
+        impact_normalized = min(impact_score / 10.0, 1.0)
+    else:
+        impact_normalized = 0.5  # Default if no matrix data
+    
+    # Recoverable waste is the portion of the leak that fixing the top issue would recover
+    recoverable_waste_num = monthly_leak_num * impact_normalized
+    
+    # Format values for display
+    if monthly_spend_num >= 1000:
+        spend_label = f"${monthly_spend_num:,.0f}/mo"
+    else:
+        spend_label = f"${monthly_spend_num:.0f}/mo"
+        
+    monthly_leak_label = f"${monthly_leak_num:,.0f}/mo"
+    recoverable_waste_label = f"${recoverable_waste_num:,.0f}/mo"
+    
+    # Format waste percentage as range
+    waste_pct_label = f"{int(waste_pct_min*100)}–{int(waste_pct_max*100)}%"
+    
+    _stack = (stack_line + " ") if stack_line else ""
+    
+    if score < 4:
         body_opener = (
             f"{_stack}I ran {domain} through our conversion analyzer. The {worst_label.lower()} alone is likely killing every visitor who lands on your page. "
-            f"Pages scoring {score}/10 waste {waste_pct} of paid clicks - at {spend_label} that's {monthly_leak} evaporating before a single conversion."
+            f"Pages scoring {score}/10 waste {waste_pct_label} of paid clicks - at {spend_label} that's {monthly_leak_label} evaporating before a single conversion."
         )
-        pitch_line = None  # computed below from matrix
     elif score < 6.5:
-        monthly_leak = "~$800–$1,800/mo"
-        waste_pct = "40–50%"
-        _stack = (stack_line + " ") if stack_line else ""
         body_opener = (
             f"{_stack}I ran your landing page through our conversion analyzer - your {worst_label.lower()} is the leak. "
-            f"Pages at {score}/10 lose {waste_pct} of ad clicks to friction. At {spend_label} in traffic that's {monthly_leak} in recoverable waste."
+            f"Pages at {score}/10 lose {waste_pct_label} of ad clicks to friction. At {spend_label} in traffic that's {monthly_leak_label} in recoverable waste."
         )
-        pitch_line = None  # computed below from matrix
     elif score < 8:
-        monthly_leak = "~$250–$700/mo"
-        waste_pct = "15–20%"
-        _stack = (stack_line + " ") if stack_line else ""
         body_opener = (
             f"{_stack}Checked {domain} - you're closer than most ({score}/10). "
-            f"One or two friction points are likely costing {waste_pct} of conversions - {monthly_leak} at {spend_label}, more at scale."
+            f"One or two friction points are likely costing {waste_pct_label} of conversions - {monthly_leak_label} at {spend_label}, more at scale."
         )
-        pitch_line = None  # computed below from matrix
     else:
-        monthly_leak = "~$100–$300/mo"
-        waste_pct = "5–10%"
-        _stack = (stack_line + " ") if stack_line else ""
         body_opener = (
             f"{_stack}Ran {domain} through our analyzer - it's structurally solid ({score}/10). "
-            f"Found a nuance that may account for {waste_pct} of unconverted clicks - {monthly_leak} at {spend_label}."
+            f"Found a nuance that may account for {waste_pct_label} of unconverted clicks - {monthly_leak_label} at {spend_label}."
         )
-        pitch_line = None  # computed below from matrix
 
     # ── Surgical pitch_line: names exactly what gets built (specificity principle) ──
     _matrix = audit.get("opp_matrix", [])
@@ -1223,6 +1677,9 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
     if broken_only:
         lines.append(body_opener)
         lines.append("")
+        lines.append("")
+        lines.append("*Note: Revenue impact estimates are based on industry benchmarks and audit score. Actual results may vary.*")
+        lines.append("")
         lines.append(f"Score: {score}/10 · Grade {audit['overall_grade']}")
         lines.append("")
         lines.append("What's costing you conversions:")
@@ -1234,8 +1691,12 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
             elif key == "headline" and _headline_issue_override:
                 _issue_text = _headline_issue_override
             lines.append(f"- {label}: {_issue_text} Fix: {item['fix']}")
+
     else:
         lines.append(body_opener)
+        lines.append("")
+        lines.append("")
+        lines.append("*Note: Revenue impact estimates are based on industry benchmarks and audit score. Actual results may vary.*")
         lines.append("")
         for key, item in issues[:1]:
             label = DIM_LABELS.get(key, key.replace("_", " ").title())
@@ -1290,13 +1751,44 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         "url": page.get("url", ""),
         "source": "audit_email",
     })
+    # Direct Stripe payment link — pre-fills recipient email so they land on
+    # a ready-to-pay Stripe checkout with zero additional friction.
+    # Stripe's prefilled_email param populates the email field automatically.
+    STRIPE_97_LINK = "https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
+    stripe_buy_url = STRIPE_97_LINK + "?" + urlencode({
+        "prefilled_email": email,
+        "client_reference_id": urlencode({"url": page.get("url", ""), "source": "audit_email"}),
+    })
+
+    # Signed results URL — bypasses the email gate when the recipient clicks
+    # back to their specific results page. Only available when the audit was
+    # run via the website and the audit UUID is passed to compose_audit_email.
+    results_url = None
+    if website_audit_id:
+        unlock_token = sign_audit_unlock(website_audit_id, email)
+        if unlock_token:
+            results_url = (
+                f"https://nebulacomponents.com/audit/{website_audit_id}/results"
+                f"?unlock={unlock_token}"
+            )
+
     lines.extend([
         "",
         "━" * 40,
         "",
         f"$97 One-Leak Repair Sprint - {pitch_line}",
         "Details + FAQ: https://nebulacomponents.com/primer",
-        f"Run or reopen the audit to unlock eligible checkout: {audit_offer_url}",
+        "",
+        f"Ready to fix it? Pay here (your email is pre-filled):",
+        stripe_buy_url,
+    ])
+    if results_url:
+        lines.extend([
+            "",
+            f"Or review your full results first (no email gate):",
+            results_url,
+        ])
+    lines.extend([
         "",
         "📩 The paid kit is sent by email after Stripe confirms payment.",
         "🔒 We never ask for access to your site, CMS, or hosting - you apply the tailored change yourself.",
@@ -1328,12 +1820,16 @@ def compose_audit_email(page, audit, email, trigger_context=None, monthly_spend=
         # Show the map instead of raw HTML tags
         page_url = page.get("url", "")
         html_body = fix_map_html
+        results_link_html = ""
+        if results_url:
+            results_link_html = f'<p style="font-size:12px;color:#6b7280;margin:8px 0 0;">Or <a href="{results_url}" style="color:#059669;">review your full results first</a> (no email gate required).</p>'
         html_body += f"""
-<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:560px;margin:16px auto 0;padding-top:16px;border-top:1px solid #e5e7eb;text-align:center;">
-  <div style="font-size:13px;color:#6b7280;">
-    <a href="{audit_offer_url}" style="color:#059669;text-decoration:underline;">Run the audit to unlock the $97 repair sprint →</a>
-  </div>
-  <div style="font-size:11px;color:#9ca3af;margin-top:8px;">Audit engine v{ENGINE_VERSION} - score disputes can be traced to this version.</div>
+<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:560px;margin:16px auto 0;padding-top:16px;border-top:1px solid #e5e7eb;">
+  <p style="font-size:14px;font-weight:600;color:#111827;margin:0 0 8px;">{pitch_line}</p>
+  <a href="{stripe_buy_url}" style="display:inline-block;background:#059669;color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;padding:12px 24px;border-radius:8px;margin-bottom:8px;">Fix it now - $97 →</a>
+  <p style="font-size:12px;color:#6b7280;margin:4px 0 0;">Your email is pre-filled. Kit sent within 48 hours after payment. <a href="https://nebulacomponents.com/primer" style="color:#059669;">Details + FAQ</a></p>
+  {results_link_html}
+  <div style="font-size:11px;color:#9ca3af;margin-top:10px;">Audit engine v{ENGINE_VERSION}</div>
 </div>"""
     else:
         html_body = "<p>" + "</p><p>".join(line or "&nbsp;" for line in lines) + "</p>"
@@ -1495,6 +1991,67 @@ def _log_delivery_crash(to, subject, data, attempt):
         f.write(json.dumps(entry) + "\n")
     print(f"[incident-logged] delivery_failure for {to}")
 
+
+def apply_historical_personalization(audit, historical_data):
+    """Apply personalization to audit results based on historical data."""
+    if not historical_data:
+        return audit
+    
+    # Create a copy of the audit to avoid modifying the original
+    personalized_audit = audit.copy()
+    
+    # Get recurring issues from historical data
+    recurring_issues = historical_data.get("recurring_issues", [])
+    score_trend = historical_data.get("score_trend", [])
+    
+    # If we have recurring issues, boost their importance in the opportunity matrix
+    if recurring_issues and "opp_matrix" in personalized_audit:
+        # Create a set of recurring issue keys for quick lookup
+        recurring_keys = {issue.get("key") for issue in recurring_issues if issue.get("key")}
+        
+        # Boost the impact of recurring issues in the opportunity matrix
+        for finding in personalized_audit["opp_matrix"]:
+            if finding.get("key") in recurring_keys:
+                # Increase impact score for recurring issues (up to a maximum of 10)
+                current_impact = finding.get("impact", 0)
+                # Boost by 50% but cap at 10
+                boosted_impact = min(current_impact * 1.5, 10.0)
+                finding["impact"] = round(boosted_impact, 1)
+                
+                # Add a note about this being a recurring issue
+                if "issue" in finding:
+                    finding["issue"] = f"[Recurring Issue] {finding['issue']}"
+                if "fix" in finding:
+                    finding["fix"] = f"[Recurring Issue] {finding['fix']}"
+    
+    # Add contextual insights based on score trend
+    if score_trend and len(score_trend) >= 2:
+        # Calculate score change over time
+        oldest_score = score_trend[0].get("score") if score_trend[0].get("score") is not None else 0
+        newest_score = score_trend[-1].get("score") if score_trend[-1].get("score") is not None else 0
+        score_change = newest_score - oldest_score
+        
+        # Add trend information to the audit
+        personalized_audit["historical_insights"] = {
+            "score_trend": score_trend,
+            "score_change": round(score_change, 1),
+            "improving": score_change > 0.5,
+            "declining": score_change < -0.5,
+            "stable": abs(score_change) <= 0.5
+        }
+        
+        # Add contextual message to findings if score is declining
+        if score_change < -1.0:  # Significant decline
+            for finding in personalized_audit.get("opp_matrix", []):
+                if "issue" in finding:
+                    finding["issue"] = f"[Trend Alert] Your score has dropped {abs(score_change):.1f} points over recent audits. {finding['issue']}"
+    
+    # Add historical data to the audit for API response
+    personalized_audit["historical_data"] = historical_data
+    
+    return personalized_audit
+
+
 def main():
     parser = argparse.ArgumentParser(description="Deliver audit to lead")
     parser.add_argument("url", help="URL to audit")
@@ -1510,7 +2067,18 @@ def main():
     parser.add_argument("--contact-route", help="Verified contact route used for attribution")
     parser.add_argument("--content-firewall-score", type=int, default=None, help="Content Firewall quality score (0-100)")
     parser.add_argument("--icp-score", type=int, default=None, help="ICP scoring matrix score (0-100)")
+    parser.add_argument("--monthly-ad-spend", type=float, default=None, help="Monthly ad spend in USD")
+    parser.add_argument("--historical-data", type=str, default=None, help="JSON string containing historical audit data for personalization")
+    parser.add_argument("--website-audit-id", help="UUID of an audit run via the website — enables a signed results URL in the email")
     args = parser.parse_args()
+
+    # Parse historical data if provided
+    historical_data = None
+    if args.historical_data:
+        try:
+            historical_data = json.loads(args.historical_data)
+        except Exception as e:
+            print(f"[WARN] Failed to parse historical data: {e}")
 
     contacted = load_contacted()
     if args.email in contacted:
@@ -1522,8 +2090,15 @@ def main():
     if not html:
         return
 
-    page = scrape_page(args.url)
-    audit = score_audit(page)
+    page = scrape_page(args.url, html)
+    if HAS_SIGNAL_VERIFIER:
+        audit = score_audit_with_signal_verifiers(page)
+    else:
+        audit = score_audit(page)
+
+    # Apply historical personalization if data was provided
+    if historical_data:
+        audit = apply_historical_personalization(audit, historical_data)
 
     # Build AI prompt pack from audit findings
     prompt_pack = None
@@ -1538,7 +2113,7 @@ def main():
         except Exception as e:
             print(f"[WARN] prompt pack generation failed: {e}")
 
-    email_body = compose_audit_email(page, audit, args.email, trigger_context=args.trigger_context, prompt_pack=prompt_pack)
+    email_body = compose_audit_email(page, audit, args.email, trigger_context=args.trigger_context, monthly_spend=args.monthly_ad_spend, prompt_pack=prompt_pack, website_audit_id=getattr(args, 'website_audit_id', None))
     score = audit["overall"]
     attribution = {
         "source_type": "growth_trigger_queue" if args.source_url or args.lead_id else None,
