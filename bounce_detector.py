@@ -11,7 +11,13 @@ Three detection paths:
   3. Delivery status API (future)
 """
 
-import json, os, re, sys, time
+import hashlib
+import json
+import os
+import re
+import sqlite3
+import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -73,6 +79,43 @@ BOUNCE_SENDER_PATTERNS = re.compile(
     r"noreply@|no-reply@|\bbounce\b|returnpath|mta)",
     re.IGNORECASE,
 )
+
+_MAILCHECK_DB = NEBULA / "mailcheck_beta.db"
+
+
+def _report_bounce_to_mailcheck(email: str, bounce_detail: str) -> None:
+    """Look up the MailCheck verification_id for *email* and record HARD_BOUNCE.
+
+    Fail silently — a MailCheck network error must never block local bounce
+    bookkeeping.  The local ``outcomes`` table in mailcheck_beta.db is always
+    written first by record_outcome(), so the feedback is durable even if the
+    remote POST temporarily fails.
+    """
+    if not _MAILCHECK_DB.exists():
+        return
+    try:
+        from mailcheck_adapter import MailCheckAdapter, MailCheckError
+        email_hash = hashlib.sha256(email.strip().lower().encode()).hexdigest()
+        with sqlite3.connect(_MAILCHECK_DB) as db:
+            row = db.execute(
+                "SELECT verification_id FROM verifications WHERE email_hash = ? "
+                "ORDER BY created_at DESC LIMIT 1",
+                (email_hash,),
+            ).fetchone()
+        if not row:
+            return
+        verification_id = row[0]
+        MailCheckAdapter(db_path=_MAILCHECK_DB).record_outcome(
+            verification_id,
+            email=email,
+            outcome="HARD_BOUNCE",
+            smtp_code=550,
+            enhanced_status="5.1.1",
+            source_system="nebula-bounce-detector",
+            provider="agentmail-ndr",
+        )
+    except Exception:
+        pass  # never block on MailCheck failure
 
 
 def classify_smtp_response(response_text: str) -> tuple:
@@ -198,6 +241,12 @@ def scan_inbox_for_bounces(am_client, max_messages: int = 50) -> list[dict]:
         if not db.is_bounced(target_email):
             print(f"  [BOUNCE WARN] Failed to persist bounce for {target_email}")
             continue
+
+        # Feed outcome back to MailCheck so they can measure false-valid rate.
+        _report_bounce_to_mailcheck(
+            target_email,
+            bounce_detail=f"NDR via {mid[:40]}: {subject[:100]}",
+        )
 
         bounce_event = {
             "timestamp": datetime.now(timezone.utc).isoformat(),
