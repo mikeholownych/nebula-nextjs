@@ -74,7 +74,7 @@
 
 **Workspace** - the authenticated area at `/workspace`. Gated by email (localStorage MVP). Shows audit history, monitors, billing.
 
-**Audit Page** - `/audit`. Public URL-input form. Submits to Platform API `/audit/run`. No email required. Anonymous audits receive a synthetic `anonymous+<uuid>@invalid.nebulacomponents.com` identity so unrelated visitors never collapse into a shared customer record. Analytics events fire only when `analytics_consent` is true; `audit_started` is emitted by the portal's `/api/audit/start` route (not the API service) to avoid double-counting the funnel's first step.
+**Audit Page** - `/audit`. Public URL-input form. Submits to Platform API `/audit/run`. No email required. Anonymous audits receive a synthetic `anonymous+<uuid>@invalid.nebulacomponents.com` identity so unrelated visitors never collapse into a shared customer record. Analytics events fire only when `analytics_consent` is true; `audit_started` is emitted by the portal's `/api/audit/start` route (not the API service) to avoid double-counting the funnel's first step. Feature bullets include: "Results in under 2 minutes", "No signup, no account", "Works with Webflow, Framer, Shopify, WordPress & Next.js", and "$97 One-Leak Repair Sprint: one targeted fix + 30-day re-audit included". Includes `HonestyGrid` component.
 
 **Results Page** - `/audit/[id]/results`. Public permalink for a completed audit. Shows score, grade, 9 signal findings, and the $97 offer.
 
@@ -100,6 +100,8 @@
 
 **IndexNow** - search engine ping protocol. Key deployed at `/nebula-indexnow-key.txt`.
 
+**Next.js Redirects** - `customer-portal/next.config.ts` defines permanent redirects for legacy/dead routes. As of 2026-08-17, 12 GSC-404 routes were added: `/dashboard` → `/gone` (410), `/organization` → `/gone`, `/audit-dashboard` → `/audit`, `/audit/dashboard` → `/audit`, `/subscription` → `/pricing`, `/beta-tester` → `/pricing`, `/ai-ops-retainer` → `/pricing`, `/why-evidence` → `/editorial-standards`, `/learn-more` → `/audit`, `/compare/semrush` → `/vs/semrush-site-audit`, `/compare/hotjar` → `/vs/hotjar`, `/compare/woorank` → `/compare`.
+
 ---
 
 ## Avoid
@@ -120,3 +122,4 @@
 ## Change Log
 
 - 2026-08-10: Updated by context_watcher - Platform API split into nebula_platform (auth) + nebula_audit (pipeline) DBs; AuditDB reads AUDIT_DATABASE_URL, audits table gained source/partner_id/engine_version columns, INTERNAL_EMAILS exclusion added; GitHub OAuth added; CRM hooks wired on audit completion; Audit Page updated with anonymous-identity pattern and analytics_consent gate; brand color renamed signal-emerald → signal-teal (#00c2a0)
+- 2026-08-17: Updated by context_watcher - Audit Page: added HonestyGrid component + Webflow/Framer/Shopify/WordPress/Next.js platform support bullet; next.config.ts: 12 GSC-404 permanent redirects added (documented in Ops/Infra section)
