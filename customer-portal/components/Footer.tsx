@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-border bg-bg-elevated mt-20">
       <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
             <a href="/" className="inline-flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity" aria-label="Nebula Components home">
@@ -43,6 +43,10 @@ export default function Footer() {
               <li><a href="/lab" className="text-sm text-fg-muted hover:text-fg transition-colors">Lab</a></li>
               <li><a href="/why-is-my-landing-page-not-converting" className="text-sm text-fg-muted hover:text-fg transition-colors">Diagnostic Guides →</a></li>
               <li><a href="/saas-landing-page-audit" className="text-sm text-fg-muted hover:text-fg transition-colors">Industry Audits →</a></li>
+              <li><a href="/cta-optimization" className="text-sm text-fg-muted hover:text-fg transition-colors">CTA Optimization</a></li>
+              <li><a href="/headline-optimization" className="text-sm text-fg-muted hover:text-fg transition-colors">Headline Optimization</a></li>
+              <li><a href="/mobile-landing-page-optimization" className="text-sm text-fg-muted hover:text-fg transition-colors">Mobile Optimization</a></li>
+              <li><a href="/page-speed-conversion" className="text-sm text-fg-muted hover:text-fg transition-colors">Page Speed & Conversion</a></li>
             </ul>
           </div>
 
@@ -56,6 +60,24 @@ export default function Footer() {
               <li><a href="/vs/semrush-site-audit" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. SEMrush Site Audit</a></li>
               <li><a href="/vs/screaming-frog" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. Screaming Frog</a></li>
               <li><a href="/vs/crazy-egg" className="text-sm text-fg-muted hover:text-fg transition-colors">vs. Crazy Egg</a></li>
+              <li><a href="/vs" className="text-sm text-fg-muted hover:text-fg transition-colors">All comparisons →</a></li>
+              <li><a href="/compare" className="text-sm text-fg-muted hover:text-fg transition-colors">Tool comparisons →</a></li>
+              <li><a href="/pricing-guides/semrush-pricing" className="text-sm text-fg-muted hover:text-fg transition-colors">Pricing guides →</a></li>
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <p className="text-xs font-medium text-fg-muted uppercase tracking-widest mb-4">Company</p>
+            <ul className="space-y-3">
+              <li><a href="/about" className="text-sm text-fg-muted hover:text-fg transition-colors">About</a></li>
+              <li><a href="/editorial-standards" className="text-sm text-fg-muted hover:text-fg transition-colors">Editorial Standards</a></li>
+              <li><a href="/ai-sdr-vs-audit" className="text-sm text-fg-muted hover:text-fg transition-colors">AI SDR vs Audit</a></li>
+              <li><a href="/what-is-landing-page-audit" className="text-sm text-fg-muted hover:text-fg transition-colors">What Is a Landing Page Audit?</a></li>
+              <li><a href="/roas-cliff" className="text-sm text-fg-muted hover:text-fg transition-colors">ROAS Cliff</a></li>
+              <li><a href="/social-proof-landing-page" className="text-sm text-fg-muted hover:text-fg transition-colors">Social Proof Guide</a></li>
+              <li><a href="/playbooks" className="text-sm text-fg-muted hover:text-fg transition-colors">Playbooks</a></li>
+              <li><a href="/score" className="text-sm text-fg-muted hover:text-fg transition-colors">Score My Page</a></li>
             </ul>
           </div>
         </div>
