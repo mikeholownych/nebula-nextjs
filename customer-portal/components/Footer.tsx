@@ -106,6 +106,8 @@ export default function Footer() {
               ['/research/landing-page-performance-q3-2026', 'Q3 2026 Research'],
               ['/paid-traffic-leak-scorecard', 'Leak Scorecard'],
               ['/ads-getting-clicks-but-no-sales', 'Ads Getting Clicks, No Sales'],
+              ['/funnel-audit', 'Funnel Friction Miner'],
+              ['/proof', 'Real Audit Data'],
             ].map(([href, label], i, arr) => (
               <span key={href} className="flex items-center gap-3">
                 <a
