@@ -49,21 +49,32 @@ export const homeFAQSchema = createFAQPageSchema([
   },
 ])
 
+// Kept in sync with the rendered FAQ in app/audit/page.tsx.
+// Both the JSON-LD (structured search features) and the prose DOM section
+// (AI text-layer citations) should reflect the same Q&A.
 export const auditPageFAQSchema = createFAQPageSchema([
   {
     question: 'What does the free landing page audit check?',
-    answer: 'Nine conversion signals: message match, trust signals, mobile CTA visibility, above the fold clarity, ad signals, SEO foundations, AI readiness, CTA clarity, and load speed.',
+    answer: 'Seven conversion signals against your actual page: message match (ad promise vs. page headline), trust signals (proof near the CTA), mobile CTA visibility on a 375px viewport, load speed, CTA clarity, SEO foundations (title, meta, H1), and AI readiness. Each returns a pass or fail with the raw evidence from your page.',
   },
   {
-    question: 'How long does the landing page audit take?',
-    answer: 'Under 2 minutes. Paste your URL and results appear automatically - no email required to see your score and initial findings.',
+    question: 'How long does the audit take?',
+    answer: 'Under 2 minutes. Paste your URL and the results appear automatically. No email or account required to see your findings.',
   },
   {
-    question: 'What happens after the free audit?',
-    answer: 'You see your 9-signal score and initial findings. If the page has a high-confidence conversion leak, the $97 One-Leak Repair Sprint supplies a tailored change for one selected finding.',
+    question: 'Do I need to create an account?',
+    answer: 'No. You see your score and initial findings without sharing an email. You only provide an email if you want the full written report saved to a workspace.',
   },
   {
-    question: 'Does the audit require an account or login?',
-    answer: 'No. Paste your URL and results appear automatically. You only share your email if you want the full written report.',
+    question: 'What does the $97 One-Leak Repair Sprint include?',
+    answer: 'One scoped repair package for the highest-impact failing signal on your page — exact copy, code, or configuration change written for your specific page and sent by email within 48 hours. Includes one same-scope re-audit within 30 days. No site access required. Does not guarantee conversion lift.',
+  },
+  {
+    question: 'Which platforms does the audit work with?',
+    answer: 'Any publicly accessible landing page: Webflow, Framer, Shopify, WordPress, Next.js, Squarespace, ClickFunnels, or a hand-coded page. The audit fetches the public HTML and evaluates what a visitor actually sees.',
+  },
+  {
+    question: 'What does the audit not cover?',
+    answer: 'The audit cannot observe visitor intent, ad audience quality, offer economics, or post-form conversion flows. It checks observable page conditions — the things a visitor experiences before they decide to act or leave. Business outcomes also depend on traffic quality and offer strength.',
   },
 ])

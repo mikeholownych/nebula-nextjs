@@ -137,6 +137,32 @@ export default async function AuditPage() {
                 Paste your landing page URL
               </p>
               <AuditForm />
+
+              {/* What you get — visible near the CTA for AI citation and user clarity */}
+              <div className="mt-5 border-t border-border pt-5">
+                <p className="mb-3 text-xs font-semibold text-fg">What you receive, free</p>
+                <ul className="space-y-2">
+                  {[
+                    'Pass/fail verdict on each conversion signal',
+                    'Raw evidence from your page — not generic advice',
+                    'Findings ranked by conversion impact',
+                    'No email required to see results',
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-xs text-fg-muted">
+                      <span className="mt-px shrink-0 text-accent">✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Static benchmark stat — always visible, not API-gated */}
+              <p className="mt-4 text-xs text-fg-dim border-l-2 border-accent/40 pl-3">
+                From 139+ audits: avg 2.8 conversion leaks per page.{' '}
+                <Link href="/benchmarks" className="text-accent/80 hover:text-accent transition-colors">
+                  See the Leak Index →
+                </Link>
+              </p>
             </div>
 
             {/* Copy second on mobile (order-2 on mobile, order-1 on md+) */}
@@ -358,6 +384,51 @@ export default async function AuditPage() {
                 Run the free audit first &rarr;
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* ── 5. FAQ — rendered in DOM for AI citation and user clarity ── */}
+        {/* FAQPage schema is also injected in <head> above. The two are intentionally
+            kept in sync: the JSON-LD feeds structured search features; this prose
+            feeds AI engines that read the text layer and users who scan the page. */}
+        <section aria-labelledby="faq-heading" className="border-t border-border bg-bg-muted/10 px-6 py-14">
+          <div className="mx-auto max-w-3xl">
+            <h2 id="faq-heading" className="mb-8 text-2xl font-bold tracking-tight text-fg md:text-3xl">
+              Common questions
+            </h2>
+            <dl className="space-y-8">
+              {[
+                {
+                  q: 'What does the free landing page audit check?',
+                  a: 'Seven conversion signals against your actual page: message match (ad promise vs. page headline), trust signals (proof near the CTA), mobile CTA visibility on a 375px viewport, load speed, CTA clarity, SEO foundations (title, meta, H1), and AI readiness. Each returns a pass or fail with the raw evidence from your page.',
+                },
+                {
+                  q: 'How long does the audit take?',
+                  a: 'Under 2 minutes. Paste your URL and the results appear automatically. No email or account required to see your findings.',
+                },
+                {
+                  q: 'Do I need to create an account?',
+                  a: 'No. You see your score and initial findings without sharing an email. You only provide an email if you want the full written report saved to a workspace.',
+                },
+                {
+                  q: 'What does the $97 One-Leak Repair Sprint include?',
+                  a: 'One scoped repair package for the highest-impact failing signal on your page — exact copy, code, or configuration change written for your specific page and sent by email within 48 hours. Includes one same-scope re-audit within 30 days. No site access required. Does not guarantee conversion lift.',
+                },
+                {
+                  q: 'Which platforms does the audit work with?',
+                  a: 'Any publicly accessible landing page: Webflow, Framer, Shopify, WordPress, Next.js, Squarespace, ClickFunnels, or a hand-coded page. The audit fetches the public HTML and evaluates what a visitor actually sees.',
+                },
+                {
+                  q: 'What does the audit not cover?',
+                  a: 'The audit cannot observe visitor intent, ad audience quality, offer economics, or post-form conversion flows. It checks observable page conditions — the things a visitor experiences before they decide to act or leave. Those conditions are measurable and fixable. Business outcomes also depend on traffic quality and offer strength.',
+                },
+              ].map(({ q, a }) => (
+                <div key={q}>
+                  <dt className="font-semibold text-fg">{q}</dt>
+                  <dd className="mt-2 text-sm leading-7 text-fg-muted">{a}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </section>
 
