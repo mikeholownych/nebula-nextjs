@@ -118,14 +118,14 @@ export default function ROICalculatorClient() {
         </div>
 
         {/* Hero */}
-        <div style={{ marginBottom: 36 }}>
-          <h1 style={{ fontSize: 'clamp(24px,5vw,34px)', fontWeight: 700, lineHeight: 1.2, marginBottom: 12, color: '#f0f4ec' }}>
-            How much is your landing page costing you every month?
-          </h1>
-          <p style={{ color: '#8a9488', fontSize: 16, lineHeight: 1.6 }}>
-            Enter your numbers. The result updates instantly. No signup to see what you're losing.
-          </p>
-        </div>
+<div style={{ marginBottom: 36 }}>
+           <h1 style={{ fontSize: 'clamp(24px,5vw,34px)', fontWeight: 700, lineHeight: 1.2, marginBottom: 12, color: '#f0f4ec' }}>
+             How does your page compare to industry benchmarks?
+           </h1>
+           <p style={{ color: '#8a9488', fontSize: 16, lineHeight: 1.6 }}>
+             Enter your numbers. See how your current performance compares to conservative industry benchmarks.
+           </p>
+         </div>
 
         {/* Inputs */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 32 }}>
@@ -232,24 +232,24 @@ export default function ROICalculatorClient() {
         <div style={{ background: '#111411', border: `1.5px solid ${calc.leakMonthly > 0 ? '#3a1414' : '#1e3a1e'}`, borderRadius: 12, padding: 32, marginBottom: 24 }}>
 
           {/* Monthly leak, the hero number */}
-          <div style={{ textAlign: 'center', marginBottom: 28 }}>
-            <div style={{ fontSize: 13, textTransform: 'uppercase', letterSpacing: '.8px', color: '#5a6458', marginBottom: 8 }}>
-              Monthly revenue leak
-            </div>
-            <div style={{
-              fontSize: 'clamp(48px,10vw,80px)',
-              fontWeight: 900,
-              fontFamily: '"IBM Plex Mono","Courier New",monospace',
-              color: lc,
-              lineHeight: 1,
-              marginBottom: 8,
-            }}>
-              {fmt(calc.leakMonthly)}
-            </div>
-            <div style={{ fontSize: 13, color: '#5a6458' }}>
-              {fmt(calc.leakAnnual)} per year at this rate
-            </div>
-          </div>
+<div style={{ textAlign: 'center', marginBottom: 28 }}>
+             <div style={{ fontSize: 13, textTransform: 'uppercase', letterSpacing: '.8px', color: '#5a6458', marginBottom: 8 }}>
+               Estimated revenue gap vs. benchmark
+             </div>
+             <div style={{
+               fontSize: 'clamp(48px,10vw,80px)',
+               fontWeight: 900,
+               fontFamily: '"IBM Plex Mono","Courier New",monospace',
+               color: lc,
+               lineHeight: 1,
+               marginBottom: 8,
+             }}>
+               {fmt(calc.leakMonthly)}
+             </div>
+             <div style={{ fontSize: 13, color: '#5a6458' }}>
+               {fmt(calc.leakAnnual)} per year at this rate
+             </div>
+           </div>
 
           {/* Breakdown */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 20 }}>
@@ -267,23 +267,22 @@ export default function ROICalculatorClient() {
             ))}
           </div>
 
-          {/* Interpretation */}
-          {calc.isBelowBenchmark ? (
-            <div style={{ background: '#1a0a0a', border: '1px solid #3a1414', borderRadius: 8, padding: 16 }}>
-              <p style={{ fontSize: 14, color: '#f87171', lineHeight: 1.6, margin: 0 }}>
-                Your {VERTICAL_LABELS[vertical].toLowerCase()} page converts at {cvr.toFixed(1)}%, below the {calc.benchmarkCvr}% industry benchmark.
-                That gap is {fmt(calc.leakMonthly)} leaving your funnel every month.
-                The fix is rarely the ads. It&apos;s the page.
-              </p>
-            </div>
-          ) : (
-            <div style={{ background: '#0a1a0a', border: '1px solid #1e3a1e', borderRadius: 8, padding: 16 }}>
-              <p style={{ fontSize: 14, color: '#22c55e', lineHeight: 1.6, margin: 0 }}>
-                Your conversion rate is above the {VERTICAL_LABELS[vertical].toLowerCase()} benchmark of {calc.benchmarkCvr}%.
-                An audit can show whether there are still structural leaks that limit further growth.
-              </p>
-            </div>
-          )}
+{/* Interpretation */}
+           {calc.isBelowBenchmark ? (
+             <div style={{ background: '#1a0a0a', border: '1px solid #3a1414', borderRadius: 8, padding: 16 }}>
+               <p style={{ fontSize: 14, color: '#f87171', lineHeight: 1.6, margin: 0 }}>
+                 Your {VERTICAL_LABELS[vertical].toLowerCase()} page converts at {cvr.toFixed(1)}%, below the {calc.benchmarkCvr}% industry benchmark for this vertical.
+                 This gap represents an estimated opportunity based on the benchmark assumption, not actual revenue lost.
+               </p>
+             </div>
+           ) : (
+             <div style={{ background: '#0a1a0a', border: '1px solid #1e3a1e', borderRadius: 8, padding: 16 }}>
+               <p style={{ fontSize: 14, color: '#22c55e', lineHeight: 1.6, margin: 0 }}>
+                 Your conversion rate is above the {VERTICAL_LABELS[vertical].toLowerCase()} benchmark of {calc.benchmarkCvr}%.
+                 An audit can show whether there are still structural leaks that limit further growth.
+               </p>
+             </div>
+           )}
         </div>
 
         {/* CTA */}
@@ -359,15 +358,12 @@ export default function ROICalculatorClient() {
           <a href="/proof" style={{ fontSize: 13, color: '#5a6458' }}>Real audit data →</a>
         </div>
 
-        {/* Methodology */}
-        <div style={{ marginTop: 32, padding: 16, background: '#0e0f0e', borderRadius: 8 }}>
-          <p style={{ fontSize: 11, color: '#3a4238', lineHeight: 1.6, margin: 0 }}>
-            Methodology: monthly visitors = ad spend / avg CPC by vertical.
-            Revenue leak = (benchmark CVR - your CVR) / 100 x monthly visitors x AOV.
-            Industry benchmark CVRs and avg CPC estimates based on published paid-search data.
-            Results are directional, not guaranteed.
-          </p>
-        </div>
+{/* Methodology */}
+         <div style={{ marginTop: 32, padding: 16, background: '#0e0f0e', borderRadius: 8 }}>
+           <p style={{ fontSize: 11, color: '#3a4238', lineHeight: 1.6, margin: 0 }}>
+             Methodology: monthly visitors = ad spend / avg CPC by vertical. Revenue gap = (benchmark CVR - your CVR) / 100 x monthly visitors x AOV. Industry benchmark CVRs and avg CPC estimates based on published paid-search data. Results are directional estimates based on assumptions, not guarantees of actual performance.
+           </p>
+         </div>
 
       </div>
     </div>

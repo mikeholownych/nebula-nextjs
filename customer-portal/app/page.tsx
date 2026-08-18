@@ -34,14 +34,15 @@ export const metadata: Metadata = {
 }
 
 const SIGNALS = [
-  { key: 'headline', label: 'Headline', desc: 'Headline names the buyer outcome', pass: 'Headline is outcome-specific and 12-90 characters' },
-  { key: 'cta', label: 'CTA clarity', desc: 'One clear action, action+outcome language', pass: 'Primary CTA uses action + outcome copy' },
-  { key: 'social_proof', label: 'Social proof', desc: 'Proof visible near the first CTA', pass: 'Sample output, quote, metric, or guarantee near the CTA' },
-  { key: 'mobile', label: 'Mobile viewport', desc: 'Page renders correctly on mobile', pass: 'Responsive viewport meta present' },
-  { key: 'load_speed', label: 'Load speed', desc: 'Page does not leak visitors while loading', pass: 'Page weight and request count within sane limits' },
-
-  { key: 'seo_foundations', label: 'SEO foundations', desc: 'Title, meta description, and H1 all present', pass: 'Title tag, meta description, and a single descriptive H1 all present' },
-  { key: 'ai_readiness', label: 'AI citation readiness', desc: 'Page is citable by AI systems', pass: 'Structured signals (JSON-LD, OG tags, clean hierarchy) present' },
+  { key: 'message_match', label: 'Message match', desc: 'Ad promise vs. page headline', pass: 'Ad headline matches page headline and names the buyer outcome' },
+  { key: 'cta', label: 'CTA clarity', desc: 'One clear primary action with action + outcome copy', pass: 'Primary CTA uses action + outcome copy, visible in initial viewport' },
+  { key: 'above_fold', label: 'Above-fold clarity', desc: 'Primary CTA, headline, and proof visible before scroll', pass: 'Primary CTA, ICP-specific headline, and trust signal all visible above fold' },
+  { key: 'social_proof', label: 'Trust signals', desc: 'Proof visible near the first CTA', pass: 'Named testimonial, review count, or customer logo visible near primary CTA' },
+  { key: 'load_time', label: 'Load speed', desc: 'Page does not leak visitors while loading', pass: 'LCP under 2.5s, CLS under 0.1, INP under 200ms on mobile' },
+  { key: 'mobile', label: 'Mobile viewport', desc: 'Page renders correctly on mobile', pass: 'Primary CTA visible and usable on 375px viewport without zoom' },
+  { key: 'ad_signals', label: 'Ad tracking', desc: 'Recognized ad-tracking artifact present', pass: 'Facebook Pixel, GA4 ID, or UTM-bearing link present in static HTML' },
+  { key: 'seo_foundations', label: 'SEO foundations', desc: 'Title tag, meta description, and descriptive H1', pass: 'Title tag, meta description, and single descriptive H1 all present' },
+  { key: 'ai_readiness', label: 'AI readiness', desc: 'Structured signals support machine-readable interpretation', pass: 'JSON-LD, OG tags, and clean DOM hierarchy present for AI citation' },
 ]
 
 const TEARDOWN_PROOFS = ['knallhart', 'postmint', 'basecamp']
@@ -196,30 +197,30 @@ export default function Home() {
                 Last updated: <time dateTime="2026-08-04">August 2026</time>
               </p>
             </div>
-            <div className="card-default font-mono text-sm">
-              <p className="mb-5 text-xs text-fg-muted">
-                Sample output format, illustrative findings
-              </p>
-              {[
-                { key: 'headline', label: 'Headline', pass: true },
-                { key: 'cta', label: 'CTA clarity', pass: false },
-                { key: 'social_proof', label: 'Social proof', pass: false },
-                { key: 'mobile', label: 'Mobile viewport', pass: true },
-                { key: 'load_speed', label: 'Load speed', pass: false },
-                { key: 'seo_foundations', label: 'SEO foundations', pass: true },
-                { key: 'ai_readiness', label: 'AI readiness', pass: false },
-              ].map((s) => (
-                <div key={s.key} className="mb-3 flex items-center justify-between text-sm">
-                  <span className="text-fg-muted">{s.label}</span>
-                  <span className={`font-semibold ${s.pass ? 'text-accent' : 'text-signal-fail'}`}>
-                    {s.pass ? 'PASS' : 'FAIL'}
-                  </span>
-                </div>
-              ))}
-              <div className="mt-4 border-t border-border/40 pt-4 text-sm text-fg-muted">
-                4 of 7 checks failing · illustrative example, not a live result
-              </div>
-            </div>
+<div className="card-default font-mono text-sm">
+               <p className="mb-5 text-xs text-fg-muted">
+                 Sample output format, illustrative findings
+               </p>
+               {SIGNALS.slice(0, 7).map((s) => (
+                 <div key={s.key} className="mb-3 flex items-center justify-between text-sm">
+                   <span className="text-fg-muted">{s.label}</span>
+                   <span className={`font-semibold ${s.pass ? 'text-accent' : 'text-signal-fail'}`}>
+                     {s.pass ? 'PASS' : 'FAIL'}
+                   </span>
+                 </div>
+               ))}
+               {SIGNALS.slice(7).map((s) => (
+                 <div key={s.key} className="mb-3 flex items-center justify-between text-sm">
+                   <span className="text-fg-muted">{s.label}</span>
+                   <span className={`font-semibold ${s.pass ? 'text-accent' : 'text-signal-fail'}`}>
+                     {s.pass ? 'PASS' : 'FAIL'}
+                   </span>
+                 </div>
+               ))}
+               <div className="mt-4 border-t border-border/40 pt-4 text-sm text-fg-muted">
+                 {SIGNALS.filter(s => !s.pass).length} of {SIGNALS.length} checks failing · illustrative example, not a live result
+               </div>
+             </div>
           </div>
         </section>
 

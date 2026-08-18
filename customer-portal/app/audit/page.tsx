@@ -24,10 +24,12 @@ export const metadata: Metadata = {
 const SAMPLE_FINDINGS = [
   { key: 'message_match', label: 'Message match', pass: false, finding: 'Ad headline "Stop wasting ad spend" does not match page headline "We help businesses grow".' },
   { key: 'trust_signals', label: 'Trust signals', pass: false, finding: 'No testimonials or logos visible near the first CTA.' },
+  { key: 'above_fold', label: 'Above-fold clarity', pass: false, finding: 'Primary CTA and ICP-specific headline not both visible above fold.' },
   { key: 'mobile_cta', label: 'Mobile CTA', pass: false, finding: 'Primary CTA is below the initial 375px viewport without scroll.' },
   { key: 'load_speed', label: 'Load speed', pass: true, finding: 'The page meets the documented loading threshold.' },
   { key: 'cta_clarity', label: 'CTA clarity', pass: false, finding: 'Competing actions make the primary next step unclear.' },
   { key: 'seo_foundations', label: 'SEO foundations', pass: false, finding: 'The meta description is longer than the documented search display target.' },
+  { key: 'ad_signals', label: 'Ad tracking', pass: false, finding: 'No recognized ad-tracking artifact (Facebook Pixel, GA4 ID, or UTM parameters) in static HTML.' },
   { key: 'ai_readiness', label: 'AI readiness', pass: true, finding: 'Structured page signals support machine-readable interpretation.' },
 ]
 
@@ -253,34 +255,24 @@ export default async function AuditPage() {
             <h2 className="mb-8 text-2xl font-bold tracking-tight text-fg md:text-3xl">
               What the audit checks
             </h2>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {[
-                { label: 'Message match', desc: 'Ad promise vs. page headline' },
-                { label: 'Trust signals', desc: 'Proof visible near the first CTA' },
-                { label: 'Mobile CTA', desc: 'Primary action visible on a 375px viewport' },
-                { label: 'Load speed', desc: 'Page meets documented loading thresholds' },
-                { label: 'CTA clarity', desc: 'One primary action with clear outcome copy' },
-                { label: 'SEO foundations', desc: 'Title tag, meta description, and descriptive H1' },
-                { label: 'AI readiness', desc: 'Structured signals support machine-readable interpretation' },
-              ].map((item) => (
-                <div key={item.label} className="rounded-xl border border-border bg-bg-muted/20 p-4">
-                  <p className="mb-1 font-semibold text-fg text-sm">{item.label}</p>
-                  <p className="text-xs text-fg-muted leading-5">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-3 grid gap-3 sm:grid-cols-3">
-              {[
-                { label: 'CTA clarity', desc: 'One primary action, no competing choices' },
-                { label: 'Load speed', desc: 'LCP under 2.5s, CLS under 0.1, INP under 200ms' },
-                { label: 'AI readiness', desc: 'Structured data and signals for AI citation' },
-              ].map((item) => (
-                <div key={item.label} className="rounded-xl border border-border bg-bg-muted/20 p-4">
-                  <p className="mb-1 font-semibold text-fg text-sm">{item.label}</p>
-                  <p className="text-xs text-fg-muted leading-5">{item.desc}</p>
-                </div>
-              ))}
-            </div>
+<div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-3">
+               {[
+                 { label: 'Message match', desc: 'Ad promise vs. page headline' },
+                 { label: 'Trust signals', desc: 'Proof visible near the first CTA' },
+                 { label: 'Above-fold clarity', desc: 'Primary CTA, headline, and proof visible before scroll' },
+                 { label: 'Mobile CTA', desc: 'Primary action visible on a 375px viewport' },
+                 { label: 'Load speed', desc: 'Page meets documented loading thresholds' },
+                 { label: 'CTA clarity', desc: 'One primary action with clear outcome copy' },
+                 { label: 'SEO foundations', desc: 'Title tag, meta description, and descriptive H1' },
+                 { label: 'Ad tracking', desc: 'Recognized ad-tracking artifact present' },
+                 { label: 'AI readiness', desc: 'Structured signals support machine-readable interpretation' },
+               ].map((item) => (
+                 <div key={item.label} className="rounded-xl border border-border bg-bg-muted/20 p-4">
+                   <p className="mb-1 font-semibold text-fg text-sm">{item.label}</p>
+                   <p className="text-xs text-fg-muted leading-5">{item.desc}</p>
+                 </div>
+               ))}
+             </div>
 
           </div>
         </section>
@@ -398,10 +390,10 @@ export default async function AuditPage() {
             </h2>
             <dl className="space-y-8">
               {[
-                {
-                  q: 'What does the free landing page audit check?',
-                  a: 'Seven conversion signals against your actual page: message match (ad promise vs. page headline), trust signals (proof near the CTA), mobile CTA visibility on a 375px viewport, load speed, CTA clarity, SEO foundations (title, meta, H1), and AI readiness. Each returns a pass or fail with the raw evidence from your page.',
-                },
+{
+    q: 'What does the free landing page audit check?',
+    a: 'Nine conversion signals against your actual page: message match (ad promise vs. page headline), trust signals (proof near the CTA), mobile CTA visibility on a 375px viewport, load speed, CTA clarity, SEO foundations (title, meta, H1), above-fold clarity, ad tracking, and AI readiness. Each returns a pass or fail with the raw evidence from your page.',
+  },
                 {
                   q: 'How long does the audit take?',
                   a: 'Under 2 minutes. Paste your URL and the results appear automatically. No email or account required to see your findings.',

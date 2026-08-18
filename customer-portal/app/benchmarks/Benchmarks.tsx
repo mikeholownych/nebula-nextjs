@@ -22,14 +22,16 @@ type ComponentStat = {
 }
 
 const SIGNAL_DESCRIPTIONS: Record<string, string> = {
-  'Seo Foundations': 'Title, meta description, and single descriptive H1 present',
-  Cta: 'One clear primary action with action + outcome copy',
-  'Load Speed': 'LCP under 2.5s, CLS under 0.1, INP under 200ms on mobile',
-  'Social Proof': 'Testimonials, reviews, or proof markers near the first CTA',
-  'Ai Readiness': 'Signals that make the page citable and understandable to AI systems',
-  Headline: 'Headline that repeats the incoming ad promise and names the outcome',
-  Mobile: 'Primary action visible and usable on a 375px viewport',
-}
+   'Seo Foundations': 'Title tag, meta description, and single descriptive H1 present',
+   Cta: 'One clear primary action with action + outcome copy',
+   'Load Speed': 'LCP under 2.5s, CLS under 0.1, INP under 200ms on mobile',
+   'Social Proof': 'Named testimonial, review count, or customer logo visible near primary CTA',
+   'Ai Readiness': 'JSON-LD, OG tags, and clean DOM hierarchy present for AI citation',
+   Headline: 'Ad headline matches page headline and names the buyer outcome',
+   Mobile: 'Primary CTA visible and usable on 375px viewport without zoom',
+   'Above Fold': 'Primary CTA, ICP-specific headline, and trust signal all visible above fold',
+   'Ad Tracking': 'Facebook Pixel, GA4 ID, or UTM-bearing link present in static HTML',
+ }
 
 // Pass standards mirror the audit engine's own pass/fail logic
 // (deliver_audit.py dimension scoring), so the published statistic
@@ -47,14 +49,16 @@ const PASS_STANDARDS: Record<string, string> = {
 }
 
 const VERIFIED_COMPONENT_LABELS = new Set([
-  'Seo Foundations',
-  'Cta',
-  'Load Speed',
-  'Social Proof',
-  'Ai Readiness',
-  'Headline',
-  'Mobile',
-])
+   'Seo Foundations',
+   'Cta',
+   'Load Speed',
+   'Social Proof',
+   'Ai Readiness',
+   'Headline',
+   'Mobile',
+   'Above Fold',
+   'Ad Tracking',
+ ])
 
 const fmtDate = (iso: string | null): string | null => {
   if (!iso) return null
@@ -138,18 +142,16 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
             </span>
             .
           </p>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-fg-muted">
-            {data.top_leak ? (
-              <>
-                The most common leak: <span className="font-semibold text-fg">{data.top_leak.label}</span>,
-                failing on {data.top_leak.share}% of audited pages. If you are paying for traffic
-                and the page is not converting, the leak is usually not the ad - it is one of these
-                signals.
-              </>
-            ) : (
-              'No single leak dominates the sample yet.'
-            )}
-          </p>
+<p className="mt-3 max-w-2xl text-sm leading-6 text-fg-muted">
+             {data.top_leak ? (
+               <>
+                 The most common leak: <span className="font-semibold text-fg">{data.top_leak.label}</span>,
+                 failing on {data.top_leak.share}% of audited pages. Failure rate shows how frequently each condition appears across completed audits.
+               </>
+             ) : (
+               'No single leak dominates the sample yet.'
+             )}
+           </p>
           {updated && (
             <p className="mt-4 text-xs text-fg-muted">
               Updated {updated} · {data.audit_count} completed audits
@@ -216,11 +218,9 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
           <h2 className="mb-2 text-xl font-bold tracking-tight text-fg">
             Where paid traffic leaks first
           </h2>
-          <p className="mb-6 max-w-2xl text-sm text-fg-muted">
-            Share of audited pages where each conversion signal failed its pass standard. A signal
-            that fails on 100% of pages is where most paid traffic leaks before a visitor ever
-            converts.
-          </p>
+<p className="mb-6 max-w-2xl text-sm text-fg-muted">
+             Share of audited pages where each conversion signal failed its pass standard. Failure rate shows how frequently each condition appears across completed audits. It does not establish that the condition caused conversion loss.
+           </p>
           <div className="space-y-3">
             {verifiedComponents.map((c) => (
               <div key={c.label} className="rounded-xl border border-border bg-bg-muted/10 p-4">

@@ -1630,6 +1630,33 @@
     "trigger_text": "",
     "url": "https://postessia.com/"
   },
+  "anonymous+ee8abb62-b0ed-4eda-b942-8842097a528a@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+ee8abb62-b0ed-4eda-b942-8842097a528a@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-18T17:20:42.894488Z",
+    "last_seen": "2026-08-18T17:20:42.894488Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "bb42cb01-7101-4505-81a3-d60b14c7f678",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-18T17:20:42.894488Z",
+    "trigger_text": "",
+    "url": "https://httpstatus.in/"
+  },
   "anonymous+ef2f9b2c-f169-4013-ab0f-0d118b2a9b41@invalid.nebulacomponents.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
