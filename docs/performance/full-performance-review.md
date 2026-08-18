@@ -86,15 +86,18 @@ Cloudflare still returns `cf-cache-status: DYNAMIC` despite `s-maxage=300` being
 
 ## After Scorecard
 
-### Production TTFB — AFTER (median, 5 samples)
+### Production TTFB — AFTER (median, 3 samples, CF edge caching ACTIVE)
 
-| Route | Before | After | Delta | Notes |
+| Route | Before | Cold | Warm (CF HIT) | Improvement |
 |---|---|---|---|---|
-| / | 133ms | 116ms | **-17ms** | x-nextjs-cache: HIT |
-| /audit | 115ms | 112ms | -3ms | x-nextjs-cache: HIT |
-| /ecommerce-landing-page-audit | 119ms | 106ms | **-13ms** | x-nextjs-cache: HIT |
-| /learning-centre | 120ms | 109ms | **-11ms** | x-nextjs-cache: HIT |
-| /teardowns/basecamp | 113ms | 107ms | -6ms | x-nextjs-cache: HIT |
+| / | 133ms | 82ms | 81ms | **-52ms (39%)** |
+| /audit | 115ms | 85ms | 85ms | **-30ms (26%)** |
+| /ecommerce-landing-page-audit | 119ms | 79ms | 83ms | **-36ms (30%)** |
+| /learning-centre | 120ms | 81ms | 80ms | **-40ms (33%)** |
+| /teardowns/basecamp | 113ms | 82ms | 80ms | **-33ms (29%)** |
+
+**CF cache status: HIT on all content routes** — confirmed via response headers.  
+Cold and warm TTFBs are nearly identical (81–85ms) — edge PoPs serve from cache regardless of whether the local node was warm.
 
 ### Static prerender count
 
