@@ -71,72 +71,68 @@ export default function Home() {
       <main id="main-content" className="min-h-screen bg-bg pt-24">
 
         {/* ── 1. Hero: asymmetric split, copy left, product proof right ── */}
-        {/* Radial glow: gives the dark background atmosphere and depth */}
-        <section className="relative mx-auto max-w-6xl px-6 py-8 md:py-12">
+        <section className="section-hero relative mx-auto max-w-6xl">
           <div
             aria-hidden="true"
-            className="hero-glow"
+            className="pointer-events-none absolute inset-0"
             style={{
-              position: 'absolute',
-              inset: 0,
-              pointerEvents: 'none',
               background:
-                'radial-gradient(ellipse 65% 55% at 68% 45%, rgba(0, 194, 160, 0.22) 0%, rgba(0, 194, 160, 0.08) 45%, transparent 70%)',
-              zIndex: 0,
+                'radial-gradient(ellipse 65% 55% at 68% 45%, rgba(0, 194, 160, 0.15) 0%, rgba(0, 194, 160, 0.05) 45%, transparent 70%)',
             }}
           />
-          <div className="relative grid gap-10 md:grid-cols-[1fr_1.3fr] md:items-start">
+          <div className="relative grid gap-12 md:grid-cols-[1fr_1.3fr] md:items-center">
 
             {/* Left: copy */}
             <div className="flex flex-col">
-              <h1 className="text-3xl font-extrabold tracking-display text-fg md:text-4xl lg:text-[2.75rem] lg:leading-[1.18]">
+              <h1 className="heading-1">
                 Know exactly what&apos;s killing your conversions, without hiring a consultant.
               </h1>
-              <p className="mt-4 max-w-md text-base leading-7 text-fg-muted">
+              <p className="mt-6 max-w-lg text-base leading-relaxed text-fg-muted">
                 Your ads are working. The page isn&apos;t. Nebula runs 9 evidence-backed checks against your actual
                 HTML and shows you the specific leak, with the dollar math and the exact fix.
               </p>
-              <div className="mt-6">
+              <div className="mt-8">
                 <Link
                   href="/audit?utm_source=homepage&utm_medium=internal"
-                  className="inline-block rounded-xl bg-accent px-8 py-4 text-base font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+                  className="inline-block rounded-xl bg-accent px-6 py-3.5 text-base font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
                 >
                   Find My Conversion Leak
                 </Link>
-                <p className="mt-2 text-xs text-fg-muted">Free. No signup. Results in under 2 minutes.</p>
+                <p className="mt-3 text-sm text-fg-muted">Free. No signup. Results in under 2 minutes.</p>
               </div>
-              {/* Stat strip */}
-              <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-border/40 pt-5">
-                <div>
-                  <p className="text-2xl font-black tabular-nums text-accent">139+</p>
-                  <p className="mt-0.5 text-[10px] tracking-widest text-fg-dim uppercase">pages audited</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-black tabular-nums text-accent">0</p>
-                  <p className="mt-0.5 text-[10px] tracking-widest text-fg-dim uppercase">scored an A</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-black tabular-nums text-accent">9</p>
-                  <p className="mt-0.5 text-[10px] tracking-widest text-fg-dim uppercase">signals checked</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-black tabular-nums text-accent">&lt;2 min</p>
-                  <p className="mt-0.5 text-[10px] tracking-widest text-fg-dim uppercase">to results</p>
+              {/* Stat strip - elevated card */}
+              <div className="mt-8 rounded-2xl border border-border/40 bg-bg-surface/50 p-5">
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="text-center">
+                    <p className="stat-number">139+</p>
+                    <p className="stat-label">pages audited</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="stat-number">0</p>
+                    <p className="stat-label">scored an A</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="stat-number">9</p>
+                    <p className="stat-label">signals checked</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="stat-number">&lt;2m</p>
+                    <p className="stat-label">to results</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Right: composed audit card artifact (not screenshot) */}
+            {/* Right: composed audit card artifact */}
             <div className="flex flex-col">
               <div className="relative">
-                {/* Radial accent glow behind card */}
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute -inset-8 bg-[radial-gradient(ellipse_60%_50%_at_70%_40%,rgba(0,194,160,0.15),transparent_70%)]"
+                  className="pointer-events-none absolute -inset-8 bg-[radial-gradient(ellipse_60%_50%_at_70%_40%,rgba(0,194,160,0.12),transparent_70%)]"
                 />
                 <AuditCardArtifact />
               </div>
-              <p className="mt-3 text-xs text-fg-muted">
+              <p className="mt-4 text-sm text-fg-muted">
                 9 signals. Scored against your actual page. Top leak identified with specific evidence and fix.
               </p>
             </div>
@@ -154,46 +150,46 @@ export default function Home() {
         <StackTaxComparison />
 
         {/* ── 2. Origin / honest proof ── */}
-        <section className="border-b border-border px-6 py-16">
-          <div className="mx-auto max-w-6xl grid gap-8 md:grid-cols-2 md:items-start">
+        <section className="section-default">
+          <div className="mx-auto max-w-6xl grid gap-10 md:grid-cols-2 md:items-start">
             <div>
-              <h2 className="mb-4 text-2xl font-bold tracking-tight text-fg md:text-3xl">
+              <h2 className="heading-2 mb-6">
                 We run this audit on ourselves first. When we have a real client outcome with dates, proof, and a way for you to verify it, we will show that too.
               </h2>
-              <p className="text-base text-fg-muted leading-7">
+              <p className="text-base text-fg-muted leading-relaxed">
                 Before the audit engine, there was a spreadsheet. Working with founders on paid
                 traffic, the same page failures kept showing up - wrong headline, no proof near the
                 first CTA, a CTA buried under the nav. The clicks were coming in. The sales weren&apos;t.
                 The page looked fine. The problems were specific and fixable every time. Nebula
                 is the instrument that finds them.
               </p>
-              <p className="mt-4 text-base text-fg-muted leading-7">
+              <p className="mt-5 text-base text-fg-muted leading-relaxed">
                 Our live self-scan - the widget above - shows the evidence from our own page first.
                 Most tools lead with case studies they can&apos;t verify. We&apos;d rather show you the
                 actual data. Every verified check. Every evidence atom. The same output you get.
               </p>
-              <div className="mt-6 flex items-start gap-4">
+              <div className="mt-8 flex items-start gap-4">
                 <img
                   src="/mike-holownych-founder.png"
                   alt="Mike Holownych, Founder of Nebula Components"
-                  width={56}
-                  height={56}
-                  className="h-14 w-14 rounded-full object-cover shrink-0"
+                  width={64}
+                  height={64}
+                  className="h-16 w-16 rounded-full object-cover shrink-0 ring-2 ring-border/40"
                 />
                 <div>
-                  <p className="text-sm font-semibold text-fg">Mike Holownych</p>
-                  <p className="text-xs text-fg-muted">Founder, Nebula Components</p>
-                  <p className="text-xs text-fg-dim mt-1">
+                  <p className="text-base font-semibold text-fg">Mike Holownych</p>
+                  <p className="text-sm text-fg-muted">Founder, Nebula Components</p>
+                  <p className="text-sm text-fg-dim mt-1">
                     Enterprise AI governance lead · TMX Group · AI Syndicate
                   </p>
                 </div>
               </div>
-              <p className="mt-3 text-xs text-fg-dim">
+              <p className="mt-4 text-xs text-fg-dim">
                 Last updated: <time dateTime="2026-08-04">August 2026</time>
               </p>
             </div>
-            <div className="rounded-2xl border border-border bg-bg-muted/30 p-6 font-mono text-sm">
-              <p className="mb-4 text-xs text-fg-muted">
+            <div className="card-default font-mono text-sm">
+              <p className="mb-5 text-xs text-fg-muted">
                 Sample output format, illustrative findings
               </p>
               {[
@@ -205,14 +201,14 @@ export default function Home() {
                 { key: 'seo_foundations', label: 'SEO foundations', pass: true },
                 { key: 'ai_readiness', label: 'AI readiness', pass: false },
               ].map((s) => (
-                <div key={s.key} className="mb-2 flex items-center justify-between text-xs">
+                <div key={s.key} className="mb-3 flex items-center justify-between text-sm">
                   <span className="text-fg-muted">{s.label}</span>
-                  <span className={s.pass ? 'text-accent' : 'text-signal-fail'}>
-                    {s.pass ? 'pass' : 'fail'}
+                  <span className={`font-semibold ${s.pass ? 'text-accent' : 'text-signal-fail'}`}>
+                    {s.pass ? 'PASS' : 'FAIL'}
                   </span>
                 </div>
               ))}
-              <div className="mt-3 border-t border-border pt-3 text-xs text-fg-muted">
+              <div className="mt-4 border-t border-border/40 pt-4 text-sm text-fg-muted">
                 4 of 7 checks failing · illustrative example, not a live result
               </div>
             </div>
@@ -220,45 +216,41 @@ export default function Home() {
         </section>
 
         {/* ── 3. Core checks grid ── */}
-        <section className="border-b border-border px-6 py-16">
+        <section className="section-default">
           <div className="mx-auto max-w-6xl">
-            <div className="mb-10 grid gap-2 md:grid-cols-2 md:items-end">
-              <h2 className="text-2xl font-bold tracking-section text-fg md:text-3xl">
+            <div className="mb-12 grid gap-4 md:grid-cols-2 md:items-end">
+              <h2 className="heading-2">
                 Core checks. Every scan.
               </h2>
               <p className="text-base text-fg-muted md:text-right">
                 Not opinions. Specific pass/fail checks against your actual page.
               </p>
             </div>
-            <p className="-mt-6 mb-8 max-w-2xl text-sm text-fg-muted">
-              Core checks against your actual page. Each one returns the raw value from your page as
-              evidence.
-            </p>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {SIGNALS.slice(0, 4).map((s) => (
-                <div key={s.key} className="rounded-xl border border-border bg-bg-muted/20 p-4">
-                  <SignalIcon signalKey={s.key} className="mb-2 h-5 w-5 text-accent" />
-                  <p className="mb-1 font-semibold text-fg text-sm">{s.label}</p>
-                  <p className="text-xs text-fg-muted leading-5">{s.desc}</p>
-                  <p className="mt-2 border-t border-border pt-2 text-xs text-fg-dim leading-5">
+                <div key={s.key} className="card-default card-hover">
+                  <SignalIcon signalKey={s.key} className="mb-3 h-6 w-6 text-accent" />
+                  <p className="mb-2 font-semibold text-fg">{s.label}</p>
+                  <p className="text-sm text-fg-muted leading-6">{s.desc}</p>
+                  <p className="mt-3 border-t border-border/40 pt-3 text-xs text-fg-dim leading-5">
                     Check: {s.pass}
                   </p>
                 </div>
               ))}
             </div>
-            <div className="mt-3 grid gap-3 sm:grid-cols-3">
+            <div className="mt-5 grid gap-5 sm:grid-cols-3">
               {SIGNALS.slice(4).map((s) => (
-                <div key={s.key} className="rounded-xl border border-border bg-bg-muted/20 p-4">
-                  <SignalIcon signalKey={s.key} className="mb-2 h-5 w-5 text-accent" />
-                  <p className="mb-1 font-semibold text-fg text-sm">{s.label}</p>
-                  <p className="text-xs text-fg-muted leading-5">{s.desc}</p>
-                  <p className="mt-2 border-t border-border pt-2 text-xs text-fg-dim leading-5">
+                <div key={s.key} className="card-default card-hover">
+                  <SignalIcon signalKey={s.key} className="mb-3 h-6 w-6 text-accent" />
+                  <p className="mb-2 font-semibold text-fg">{s.label}</p>
+                  <p className="text-sm text-fg-muted leading-6">{s.desc}</p>
+                  <p className="mt-3 border-t border-border/40 pt-3 text-xs text-fg-dim leading-5">
                     Check: {s.pass}
                   </p>
                 </div>
               ))}
             </div>
-            <div className="mt-8 grid gap-4 md:grid-cols-3">
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
               {[
                 {
                   heading: 'What you receive',
@@ -274,12 +266,12 @@ export default function Home() {
                   body: 'Fix the highest-impact leak yourself with the report - or have Nebula prepare the $97 One-Leak Repair Sprint: one scoped repair package within 48 hours, a 30-day re-audit, and your page compared with the current completed-audit benchmark sample.',
                 },
               ].map((item) => (
-                <div key={item.heading} className="rounded-xl border border-border bg-bg-muted/10 p-5">
-                  <h3 className="mb-1 text-sm font-semibold text-fg">{item.heading}</h3>
-                  <p className="text-sm text-fg-muted leading-6">{item.body}</p>
+                <div key={item.heading} className="card-default">
+                  <h3 className="heading-3 mb-3">{item.heading}</h3>
+                  <p className="text-sm text-fg-muted leading-7">{item.body}</p>
                   {item.link && (
-                    <Link href={item.link.href} className="mt-2 inline-block text-sm font-semibold text-accent hover:text-accent-light transition-colors">
-                      {item.link.label} &rarr;
+                    <Link href={item.link.href} className="mt-4 inline-block text-sm font-semibold text-accent hover:text-accent-light transition-colors">
+                      {item.link.label} →
                     </Link>
                   )}
                 </div>
@@ -292,17 +284,17 @@ export default function Home() {
         <HonestyGrid />
 
         {/* ── 4. Teardown proof: named pages, named failures ── */}
-        <section className="border-b border-border bg-bg-muted/10 px-6 py-16">
+        <section className="section-default bg-bg-muted/5">
           <div className="mx-auto max-w-6xl">
-            <div className="mb-8 grid gap-2 md:grid-cols-2 md:items-end">
-              <h2 className="text-2xl font-bold tracking-section text-fg md:text-3xl">
+            <div className="mb-10 grid gap-4 md:grid-cols-2 md:items-end">
+              <h2 className="heading-2">
                 Named pages. Named failures.
               </h2>
               <p className="text-base text-fg-muted md:text-right">
                 These are audits we ran in public. Every finding has a source, a measured value, and a fix.
               </p>
             </div>
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-3">
               {TEARDOWN_PROOFS.map((slug) => {
                 const t = TEARDOWNS[slug]
                 if (!t) return null
@@ -310,20 +302,17 @@ export default function Home() {
                   <Link
                     key={slug}
                     href={`/teardowns/${slug}`}
-                    className="group rounded-2xl border border-border bg-bg-muted/20 p-6 hover:border-accent/40 transition-colors"
+                    className="card-default card-hover group"
                   >
-                    <div className="mb-3 flex items-center justify-between">
-                      <p className="text-xs font-semibold text-fg-muted">{t.domain}</p>
-
-                    </div>
-                    <p className="text-sm text-fg-muted leading-6">
+                    <p className="mb-3 text-sm font-semibold text-fg-muted">{t.domain}</p>
+                    <p className="text-sm text-fg-muted leading-7">
                       {t.summary.replace(/Score: \d+(?:\.\d+)?\/10, Grade [A-F]\.\s*/g, '')}
                     </p>
-                    <p className="mt-3 text-xs text-fg-dim">
+                    <p className="mt-4 text-xs text-fg-dim font-mono">
                       {t.findings.length} findings documented
                     </p>
-                    <p className="mt-4 text-sm font-semibold text-accent group-hover:text-accent-light transition-colors">
-                      View the full report &rarr;
+                    <p className="mt-5 text-sm font-semibold text-accent group-hover:text-accent-light transition-colors">
+                      View the full report →
                     </p>
                   </Link>
                 )
@@ -333,44 +322,44 @@ export default function Home() {
         </section>
 
         {/* ── 5. Patterns: dominant + 2 ── */}
-        <section className="border-b border-border px-6 py-16">
+        <section className="section-default">
           <div className="mx-auto max-w-6xl">
-            <h2 className="mb-2 text-2xl font-bold tracking-section text-fg md:text-3xl">
+            <h2 className="heading-2 mb-4">
               The ads did their job. The page had one job.
             </h2>
-            <p className="mb-10 max-w-xl text-base text-fg-muted leading-7">
+            <p className="mb-10 max-w-xl text-base text-fg-muted leading-relaxed">
               Most founders blame the ad. These are recurring page failure modes we inspect in the audit.
             </p>
-            <div className="grid gap-4 lg:grid-cols-[1fr_1fr]">
+            <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
 
               {/* Dominant card */}
-              <div className="rounded-2xl border border-border bg-bg-muted/30 p-8 lg:row-span-2">
-                <p className="mb-1 text-xs font-semibold text-accent">{PATTERNS[0].label}</p>
-                <h3 className="mb-4 mt-1 text-xl font-bold text-fg">{PATTERNS[0].heading}</h3>
-                <p className="text-base text-fg-muted leading-7">{PATTERNS[0].body}</p>
-                <div className="mt-8 rounded-xl border border-border bg-bg p-4 font-mono text-xs text-fg-muted">
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="text-accent">message_match</span>
-                    <span className="text-signal-fail">FAIL</span>
+              <div className="card-feature lg:row-span-2">
+                <p className="mb-2 text-xs font-semibold text-accent uppercase tracking-wide">{PATTERNS[0].label}</p>
+                <h3 className="mb-5 text-xl font-bold text-fg">{PATTERNS[0].heading}</h3>
+                <p className="text-base text-fg-muted leading-relaxed">{PATTERNS[0].body}</p>
+                <div className="mt-8 rounded-xl border border-border/40 bg-bg p-5 font-mono text-sm text-fg-muted">
+                  <div className="mb-3 flex items-center justify-between">
+                    <span className="text-accent font-semibold">message_match</span>
+                    <span className="text-signal-fail font-semibold">FAIL</span>
                   </div>
-                  <div className="h-1.5 w-full rounded-full bg-border">
-                    <div className="h-1.5 w-[30%] rounded-full bg-signal-fail" />
+                  <div className="h-2 w-full rounded-full bg-border">
+                    <div className="h-2 w-[30%] rounded-full bg-signal-fail" />
                   </div>
-                  <p className="mt-2 text-fg-muted">Ad: &quot;Get $97 audit&quot; &rarr; Page: &quot;Landing page help&quot;</p>
+                  <p className="mt-3 text-sm">Ad: "Get $97 audit" → Page: "Landing page help"</p>
                 </div>
               </div>
 
               {/* Supporting cards */}
               {PATTERNS.slice(1).map((p) => (
-                <div key={p.label} className="rounded-2xl border border-border bg-bg-muted/20 p-6">
-                  <p className="mb-1 text-xs font-semibold text-accent">{p.label}</p>
-                  <h3 className="mb-2 mt-1 text-base font-bold text-fg">{p.heading}</h3>
-                  <p className="text-sm text-fg-muted leading-6">{p.body}</p>
+                <div key={p.label} className="card-default">
+                  <p className="mb-2 text-xs font-semibold text-accent uppercase tracking-wide">{p.label}</p>
+                  <h3 className="mb-3 heading-3">{p.heading}</h3>
+                  <p className="text-sm text-fg-muted leading-7">{p.body}</p>
                 </div>
               ))}
             </div>
 
-            <p className="mt-8 max-w-xl text-sm text-fg-muted">
+            <p className="mt-10 max-w-xl text-sm text-fg-muted">
               Running traffic experiments on pages with structural friction burns budget on the wrong variable.{' '}
               <strong className="text-fg">Fix the page first. Then test creative.</strong>
             </p>
@@ -384,44 +373,44 @@ export default function Home() {
         <WithWithout />
 
         {/* ── 7. Comparison: not a sales call ── */}
-        <section className="border-b border-border px-6 py-16">
+        <section className="section-default">
           <div className="mx-auto max-w-6xl">
-            <div className="grid gap-12 md:grid-cols-2 md:items-start">
+            <div className="grid gap-10 md:grid-cols-2 md:items-start">
               <div>
-                <h2 className="mb-4 text-2xl font-bold tracking-section text-fg md:text-3xl">
+                <h2 className="heading-2 mb-6">
                   Not a sales call in disguise.
                 </h2>
-                <p className="mb-6 text-base text-fg-muted leading-7">
-                  You have seen &quot;free audit&quot; - a PDF with 8 generic recommendations and a discovery call at the end.
+                <p className="mb-8 text-base text-fg-muted leading-relaxed">
+                  You have seen "free audit" - a PDF with 8 generic recommendations and a discovery call at the end.
                   This is different. See your initial findings before sharing an email.
                 </p>
                 <Link
                   href="/audit?utm_source=homepage&utm_medium=internal"
-                  className="rounded-xl border border-accent px-6 py-3 text-sm font-semibold text-accent hover:bg-accent hover:text-bg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors inline-block"
+                  className="inline-block rounded-xl border-2 border-accent px-5 py-2.5 text-sm font-semibold text-accent hover:bg-accent hover:text-bg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
                 >
-                  See what you actually get &rarr;
+                  See what you actually get →
                 </Link>
               </div>
-              <div className="grid gap-3">
-                <div className="rounded-xl border border-border bg-bg-muted/20 p-5">
-                  <p className="mb-3 text-xs font-semibold text-fg-muted">Other audits</p>
-                  <ul className="space-y-2 text-sm text-fg-muted">
+              <div className="grid gap-5">
+                <div className="card-default border-border/40">
+                  <p className="mb-4 text-xs font-semibold text-fg-muted uppercase tracking-wide">Other audits</p>
+                  <ul className="space-y-3 text-sm text-fg-muted">
                     {[
                       'Generic report - same 8 recommendations for every site',
                       'Vague advice you have to figure out how to apply',
                       'Gated behind a sales call',
                       '3-month engagement to see results',
                     ].map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-0.5 shrink-0 text-danger">✕</span>
-                        {item}
+                      <li key={item} className="flex items-start gap-3">
+                        <span className="mt-1 shrink-0 text-signal-fail">✕</span>
+                        <span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-xl border border-accent/30 bg-accent/5 p-5">
-                  <p className="mb-3 text-xs font-semibold text-accent">Nebula audit</p>
-                  <ul className="space-y-2 text-sm text-fg-muted">
+                <div className="card-feature">
+                  <p className="mb-4 text-xs font-semibold text-accent uppercase tracking-wide">Nebula audit</p>
+                  <ul className="space-y-3 text-sm text-fg-muted">
                     {[
                       'Real scrape - scored against 9 specific conversion signals',
                       'Prioritized fixes with impact and effort scores',
@@ -429,9 +418,9 @@ export default function Home() {
                       '$97 One-Leak Repair Sprint gives you one scoped repair package within 48 hours',
                       'Free re-audit 30 days after you implement the fix',
                     ].map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-0.5 shrink-0 text-accent">✓</span>
-                        {item}
+                      <li key={item} className="flex items-start gap-3">
+                        <span className="mt-1 shrink-0 text-accent">✓</span>
+                        <span>{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -442,17 +431,17 @@ export default function Home() {
         </section>
 
         {/* ── 8. What the click proved: 3 items ── */}
-        <section className="border-b border-border px-6 py-16">
+        <section className="section-default">
           <div className="mx-auto max-w-6xl">
-            <div className="mb-10 max-w-2xl">
-              <h2 className="text-2xl font-bold tracking-tight text-fg md:text-3xl">
+            <div className="mb-12 max-w-2xl">
+              <h2 className="heading-2">
                 Know what the click proved - and what it did not.
               </h2>
-              <p className="mt-3 text-base text-fg-muted leading-7">
+              <p className="mt-4 text-base text-fg-muted leading-relaxed">
                 A click proves the ad worked. The page determines whether that click becomes a decision.
               </p>
             </div>
-            <div className="divide-y divide-border border-t border-b border-border">
+            <div className="divide-y divide-border/40 border-t border-b border-border/40">
               {[
                 {
                   heading: 'A click is not the finish line.',
@@ -469,7 +458,7 @@ export default function Home() {
               ].map((item) => (
                 <article
                   key={item.heading}
-                  className="grid gap-4 py-8 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-12"
+                  className="grid gap-6 py-10 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-12"
                 >
                   <h3 className="text-lg font-bold text-fg">{item.heading}</h3>
                   <p className="text-sm leading-7 text-fg-muted">{item.body}</p>
@@ -480,21 +469,21 @@ export default function Home() {
         </section>
 
         {/* ── 9. Direct answers ── */}
-        <section aria-labelledby="direct-answers" className="border-b border-border bg-bg-muted/10 px-6 py-12">
+        <section aria-labelledby="direct-answers" className="section-default bg-bg-muted/5">
           <div className="mx-auto max-w-6xl">
-            <h2 id="direct-answers" className="mb-5 text-xl font-bold tracking-tight text-fg">Direct answers</h2>
-            <div className="grid gap-4 md:grid-cols-3">
-              <div>
-                <h3 className="font-semibold text-fg">What does Nebula provide?</h3>
-                <p className="mt-1 text-sm leading-6 text-fg-muted">A scored, evidence-backed diagnosis of why your landing page isn&apos;t converting paid traffic - not generic advice, not a sales call.</p>
+            <h2 id="direct-answers" className="heading-2 mb-8">Direct answers</h2>
+            <div className="grid gap-6 md:grid-cols-3">
+              <div className="card-default">
+                <h3 className="heading-3 mb-3">What does Nebula provide?</h3>
+                <p className="text-sm leading-7 text-fg-muted">A scored, evidence-backed diagnosis of why your landing page isn&apos;t converting paid traffic - not generic advice, not a sales call.</p>
               </div>
-              <div>
-                <h3 className="font-semibold text-fg">What does the free audit check?</h3>
-                <p className="mt-1 text-sm leading-6 text-fg-muted">Core conversion signals and applicable technical checks against your actual page. Returns pass/fail findings with raw evidence, ranked by impact. You stop guessing what's wrong. Under 2 minutes.</p>
+              <div className="card-default">
+                <h3 className="heading-3 mb-3">What does the free audit check?</h3>
+                <p className="text-sm leading-7 text-fg-muted">Core conversion signals and applicable technical checks against your actual page. Returns pass/fail findings with raw evidence, ranked by impact. You stop guessing what&apos;s wrong. Under 2 minutes.</p>
               </div>
-              <div>
-                <h3 className="font-semibold text-fg">What does the $97 repair sprint do?</h3>
-                <p className="mt-1 text-sm leading-6 text-fg-muted">One targeted fix for your highest-impact finding - exact copy, code, or configuration change written for your specific page. Includes a 30-day re-audit to verify the fix held and your page benchmarked against real audit data. It does not promise conversion lift - no one can before the fix is live and measured.</p>
+              <div className="card-default">
+                <h3 className="heading-3 mb-3">What does the $97 repair sprint do?</h3>
+                <p className="text-sm leading-7 text-fg-muted">One targeted fix for your highest-impact finding - exact copy, code, or configuration change written for your specific page. Includes a 30-day re-audit to verify the fix held and your page benchmarked against real audit data. It does not promise conversion lift - no one can before the fix is live and measured.</p>
               </div>
             </div>
           </div>

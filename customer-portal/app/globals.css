@@ -1112,3 +1112,53 @@ header nav a:focus-visible {
     animation: none !important;
   }
 }
+
+/* ─── POLISH UTILITIES ─────────────────────────────────────── */
+/* Card system - consistent surfaces */
+
+.card-default {
+  @apply rounded-2xl border border-border/60 bg-bg-surface p-6;
+}
+
+.card-feature {
+  @apply rounded-2xl border border-accent/20 bg-accent/5 p-8;
+}
+
+.card-hover {
+  @apply transition-all duration-200 hover:border-accent/40 hover:shadow-[0_0_24px_rgba(0,194,160,0.08)];
+}
+
+/* Section spacing */
+.section-default {
+  @apply border-b border-border/40 px-6 py-20 md:px-8 md:py-24;
+}
+
+.section-hero {
+  @apply px-6 py-12 md:py-16;
+}
+
+/* Stat blocks */
+.stat-block {
+  @apply text-center;
+}
+
+.stat-number {
+  @apply font-mono text-3xl font-bold tabular-nums text-accent;
+}
+
+.stat-label {
+  @apply mt-1 text-xs font-medium tracking-wide text-fg-dim uppercase;
+}
+
+/* Heading hierarchy */
+.heading-1 {
+  @apply text-4xl font-bold tracking-tight text-fg md:text-5xl lg:text-6xl;
+}
+
+.heading-2 {
+  @apply text-2xl font-bold tracking-tight text-fg md:text-3xl;
+}
+
+.heading-3 {
+  @apply text-lg font-semibold text-fg;
+}
