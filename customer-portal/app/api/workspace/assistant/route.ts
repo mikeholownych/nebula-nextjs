@@ -80,7 +80,7 @@ function buildFallbackAnswer(
     if (top.length === 0) return 'All signals are passing - no critical findings to prioritize.'
     const lines = ['**Highest-impact fixes** (sorted by severity):\n']
     for (const f of top) {
-      lines.push(`1. **${f.label}** (impact: ${f.impact}/10) - ${f.url}`)
+      lines.push(`1. **${f.label}** (priority: ${f.impact}/10) - Rule-derived prioritization score based on journey position, severity, reproducibility and confidence. This is not predicted conversion loss. - ${f.url}`)
       if (f.issue) lines.push(`   Problem: ${f.issue}`)
       if (f.fix) lines.push(`   Fix: ${f.fix}`)
     }
@@ -171,7 +171,7 @@ export async function POST(request: NextRequest) {
     const auditContext = validAudits
       .map((audit) => {
         const findingLines = audit.findings.map(
-          (f) => `    - [${f.key}] ${f.label} (impact ${f.impact}/10): ${f.issue || 'Failing'} → Fix: ${f.fix || 'See report'}`
+          (f) => `    - [${f.key}] ${f.label} (priority ${f.priority}/10) - Rule-derived prioritization score based on journey position, severity, reproducibility and confidence. This is not predicted conversion loss.: ${f.issue || 'Failing'} → Fix: ${f.fix || 'See report'}`
         )
         return [
           `URL: ${audit.url}`,

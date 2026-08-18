@@ -500,7 +500,7 @@ export default function Home() {
             <div className="grid gap-6 md:grid-cols-3">
               <div className="card-default">
                 <h3 className="heading-3 mb-3">What does Nebula provide?</h3>
-                <p className="text-sm leading-7 text-fg-muted">A scored, evidence-backed diagnosis of why your landing page isn&apos;t converting paid traffic - not generic advice, not a sales call.</p>
+                <p className="text-sm leading-7 text-fg-muted">A scored, evidence-backed diagnosis of the page conditions most likely worth investigating first - not generic advice, not a sales call.</p>
               </div>
               <div className="card-default">
                 <h3 className="heading-3 mb-3">What does the free audit check?</h3>

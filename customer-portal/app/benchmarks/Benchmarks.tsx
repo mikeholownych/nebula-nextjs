@@ -216,10 +216,10 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
         {/* Component failure rates - where paid traffic leaks first */}
         <div>
           <h2 className="mb-2 text-xl font-bold tracking-tight text-fg">
-            Where paid traffic leaks first
+            Where audited pages most often fail
           </h2>
 <p className="mb-6 max-w-2xl text-sm text-fg-muted">
-             Share of audited pages where each conversion signal failed its pass standard. Failure rate shows how frequently each condition appears across completed audits. It does not establish that the condition caused conversion loss.
+             Failure rate describes prevalence in the audited sample. It does not establish that a failed condition caused conversion loss.
            </p>
           <div className="space-y-3">
             {verifiedComponents.map((c) => (

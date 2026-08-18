@@ -94,7 +94,7 @@ const howToSchema = {
       '@type': 'HowToStep',
       position: 3,
       name: 'Review findings ranked by impact',
-      text: 'Your audit report lists every failing signal with the raw evidence from your page, specific, verifiable, and ranked by conversion impact.',
+      text: 'Your audit report lists every failing signal with the raw evidence from your page, specific, verifiable, and ranked by observable impact.',
     },
     {
       '@type': 'HowToStep',
@@ -147,7 +147,7 @@ export default async function AuditPage() {
                   {[
                     'Pass/fail verdict on each conversion signal',
                     'Raw evidence from your page, not generic advice',
-                    'Findings ranked by conversion impact',
+                    'Findings ranked by observable impact',
                     'No email required to see results',
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2 text-xs text-fg-muted">

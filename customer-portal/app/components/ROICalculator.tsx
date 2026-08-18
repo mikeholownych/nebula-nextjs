@@ -80,6 +80,8 @@ export default function ROICalculator() {
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-fg-muted text-sm">$</span>
               <input
+                id="monthly-ad-spend"
+                name="monthly-ad-spend"
                 type="number"
                 inputMode="numeric"
                 min={0}
@@ -98,6 +100,8 @@ export default function ROICalculator() {
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-fg-muted text-sm">$</span>
               <input
+                id="avg-cost-per-click"
+                name="avg-cost-per-click"
                 type="number"
                 inputMode="decimal"
                 min={0}
@@ -116,6 +120,8 @@ export default function ROICalculator() {
             </span>
             <div className="relative">
               <input
+                id="current-conversion-rate"
+                name="current-conversion-rate"
                 type="number"
                 inputMode="decimal"
                 min={0}

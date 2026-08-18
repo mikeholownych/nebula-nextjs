@@ -621,7 +621,7 @@ function FixFirstQueue({ findings, auditId, onGoToRemediation }: { findings: Fin
                 <p className="mt-2 max-w-[65ch] text-sm leading-6 text-fg-muted">{finding.issue}</p>
               </div>
               <div className="flex items-center gap-4 md:flex-col md:items-end">
-                <span className="text-xs tabular-nums text-fg-muted">Impact {finding.impact}/10</span>
+                <span className="text-xs tabular-nums text-fg-muted">Priority {finding.impact} title="Rule-derived prioritization score based on journey position, severity, reproducibility and confidence. This is not predicted conversion loss."/10</span>
                 <span className="text-xs tabular-nums text-fg-muted">Effort {finding.effort}/10</span>
                 <a href={`#${findingAnchor(finding)}`} className="text-sm font-semibold text-accent hover:text-fg">View evidence ↓</a>
               </div>

@@ -154,7 +154,7 @@ export default async function TeardownPage({
         <section className="mt-12">
           <h2 className="mb-2 text-2xl font-bold text-fg">{findingWord}</h2>
           <p className="mb-8 text-fg-muted">
-            Ranked by conversion impact. Each finding includes the evidence Nebula used - no opinion, no estimation.
+            Ranked by observable impact. Each finding includes the evidence Nebula used - no opinion, no estimation. Priority scores are rule-based heuristics for fix order, not predicted conversion loss.
           </p>
           <div className="space-y-6">
             {t.findings.map((f, i) => (
@@ -176,7 +176,7 @@ export default async function TeardownPage({
                   </div>
                   <div className="flex shrink-0 flex-col items-end gap-1">
                     <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
-                      Impact {f.impact}/10
+                      Priority {f.impact} title="Rule-derived prioritization score based on journey position, severity, reproducibility and confidence. This is not predicted conversion loss."/10
                     </span>
                     <span className={`text-xs font-semibold ${QUADRANT_COLORS[f.quadrant] ?? 'text-fg-muted'}`}>
                       {f.quadrant}

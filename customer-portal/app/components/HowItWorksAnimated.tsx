@@ -21,7 +21,7 @@ const STEPS = [
   {
     n: '03',
     heading: 'You stop guessing. You start fixing.',
-    body: 'Every failing signal ranked by conversion impact. Specific findings. Not generic advice.',
+    body: 'Every failing signal ranked by observable impact. Specific findings. Not generic advice.',
     icon: '✓',
     detail: 'You know exactly what to fix first. The $97 sprint fixes the top issue for you in 48 hours.',
   },
