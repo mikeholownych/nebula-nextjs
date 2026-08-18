@@ -70,8 +70,21 @@ export default function Home() {
       <main id="main-content" className="min-h-screen bg-bg pt-24">
 
         {/* ── 1. Hero: asymmetric split — copy left, product proof right ── */}
-        <section className="mx-auto max-w-6xl px-6 py-8 md:py-12">
-          <div className="grid gap-10 md:grid-cols-[1fr_1.3fr] md:items-start">
+        {/* Radial glow: gives the dark background atmosphere and depth */}
+        <section className="relative mx-auto max-w-6xl px-6 py-8 md:py-12">
+          <div
+            aria-hidden="true"
+            className="hero-glow"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              pointerEvents: 'none',
+              background:
+                'radial-gradient(ellipse 65% 55% at 68% 45%, rgba(0, 194, 160, 0.22) 0%, rgba(0, 194, 160, 0.08) 45%, transparent 70%)',
+              zIndex: 0,
+            }}
+          />
+          <div className="relative grid gap-10 md:grid-cols-[1fr_1.3fr] md:items-start">
 
             {/* Left: copy */}
             <div className="flex flex-col">
@@ -79,8 +92,8 @@ export default function Home() {
                 Know exactly what&apos;s killing your conversions — without hiring a consultant.
               </h1>
               <p className="mt-4 max-w-lg text-base leading-7 text-fg-muted">
-                Paste your URL. In under two minutes, Nebula shows you the specific finding costing you conversions,
-                the dollar math behind it, and the exact fix — free, no signup.
+                Your ads are working. The page isn&apos;t. Nebula runs 9 evidence-backed checks against your actual
+                HTML and shows you the specific leak — with the dollar math and the exact fix.
               </p>
               <div className="mt-6">
                 <Link
@@ -91,22 +104,22 @@ export default function Home() {
                 </Link>
                 <p className="mt-2 text-xs text-fg-muted">Free. No signup. Results in under 2 minutes.</p>
               </div>
-              {/* Stat strip — fills the left col and adds credibility */}
+              {/* Stat strip */}
               <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-border/40 pt-5">
                 <div>
-                  <p className="text-2xl font-bold tabular-nums text-fg">139+</p>
+                  <p className="text-2xl font-bold tabular-nums text-accent">139+</p>
                   <p className="mt-0.5 text-xs text-fg-muted">pages audited</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold tabular-nums text-fg">0</p>
+                  <p className="text-2xl font-bold tabular-nums text-accent">0</p>
                   <p className="mt-0.5 text-xs text-fg-muted">scored an A</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold tabular-nums text-fg">9</p>
-                  <p className="mt-0.5 text-xs text-fg-muted">conversion signals checked</p>
+                  <p className="text-2xl font-bold tabular-nums text-accent">9</p>
+                  <p className="mt-0.5 text-xs text-fg-muted">conversion signals</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold tabular-nums text-fg">&lt;2 min</p>
+                  <p className="text-2xl font-bold tabular-nums text-accent">&lt;2 min</p>
                   <p className="mt-0.5 text-xs text-fg-muted">to your results</p>
                 </div>
               </div>
@@ -114,7 +127,7 @@ export default function Home() {
 
             {/* Right: product screenshot — what you get */}
             <div className="flex flex-col">
-              <div className="overflow-hidden rounded-2xl border border-border shadow-lifted">
+              <div className="overflow-hidden rounded-2xl border border-border shadow-[0_0_40px_rgba(0,194,160,0.08),0_20px_60px_rgba(0,0,0,0.5)]">
                 {/* Browser chrome strip */}
                 <div className="flex items-center gap-1.5 border-b border-border bg-bg-muted/60 px-4 py-2.5">
                   <span className="h-2.5 w-2.5 rounded-full bg-fg-dim/40" />
