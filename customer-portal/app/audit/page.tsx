@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { auditWebApplicationSchema } from '@/app/lib/schema'
+import { auditWebApplicationSchema, createHowToSchema } from '@/app/lib/schema'
 import { auditPageFAQSchema } from '@/app/lib/faq-schemas'
 import AuditForm from './AuditForm'
 import HonestyGrid from '@/app/components/HonestyGrid'
@@ -72,38 +72,33 @@ const softwareAppSchema = {
   },
 }
 
-const howToSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'HowTo',
+const howToSchema = createHowToSchema({
   name: 'How to audit a landing page for conversion',
   description: 'Use Nebula to find conversion leaks on any landing page in under 2 minutes.',
-  step: [
+  steps: [
     {
-      '@type': 'HowToStep',
-      position: 1,
       name: 'Enter your domain',
       text: 'Paste the full URL of your landing page into the audit tool field above.',
+      position: 1,
     },
     {
-      '@type': 'HowToStep',
-      position: 2,
       name: 'Wait for the 9-signal scan',
       text: 'Nebula fetches your page and evaluates it across 9 conversion signal categories including message match, trust signals, mobile CTA, load speed, and AI readiness.',
+      position: 2,
     },
     {
-      '@type': 'HowToStep',
-      position: 3,
       name: 'Review findings ranked by impact',
       text: 'Your audit report lists every failing signal with the raw evidence from your page, specific, verifiable, and ranked by observable impact.',
+      position: 3,
     },
     {
-      '@type': 'HowToStep',
-      position: 4,
       name: 'Fix the top leak',
       text: 'Address the highest-impact failing signal first. The $97 One-Leak Repair Sprint delivers one scoped fix package with exact copy, code, or configuration changes within 48 hours.',
+      position: 4,
     },
   ],
-}
+  totalTime: 'PT2M',
+})
 
 export default async function AuditPage() {
   const stats = await getAuditStats()

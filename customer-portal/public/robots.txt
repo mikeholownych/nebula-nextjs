@@ -8,8 +8,8 @@
 
 # ── Training-only crawlers - blocked ────────────────────────────────────────
 User-Agent: Google-Extended
-Disallow: /
-Content-Signal: ai-train=no, search=no, ai-input=no
+Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 
 User-Agent: Applebot-Extended
 Disallow: /

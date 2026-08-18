@@ -8,21 +8,41 @@ export const organizationSchema = {
   name: 'Nebula Components',
   url: 'https://nebulacomponents.com',
   logo: 'https://nebulacomponents.com/logo-dark.png',
-  description: 'Evidence-backed landing-page conversion guidance and implementation services.',
+  description: 'Nebula Components provides AI-ready technical audits and GEO optimization services to help brands appear in AI search results from ChatGPT, Perplexity, Gemini, and Claude. We combine evidence-based landing-page conversion guidance with AI search visibility monitoring.',
   foundingDate: '2024',
   dateModified: new Date().toISOString().split('T')[0],
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'customer support',
-    // email intentionally omitted from schema - CF email obfuscation
-    // rewrites email strings in JSON-LD <script> tags, injecting a
-    // render-blocking script that adds ~150ms to FCP/LCP on mobile.
-    // Contact email is available via the About page and privacy policy.
-    availableLanguage: 'English',
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      // email intentionally omitted from schema - CF email obfuscation
+      // rewrites email strings in JSON-LD <script> tags, injecting a
+      // render-blocking script that adds ~150ms to FCP/LCP on mobile.
+      // Contact email is available via the About page and privacy policy.
+      availableLanguage: 'English',
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'technical support',
+      availableLanguage: 'English',
+    }
+  ],
+  location: {
+    '@type': 'Place',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Toronto',
+      addressRegion: 'ON',
+      addressCountry: 'CA',
+      postalCode: 'M5V 2T6',
+    }
   },
   sameAs: [
     'https://www.linkedin.com/company/nebulacomponents',
-    'https://github.com/mikeholownych',
+    'https://github.com/Nebula-Components/nebula-components',
+    'https://twitter.com/nebula_components',
+    'https://www.facebook.com/nebula.components',
+    'https://www.instagram.com/nebula.components/',
   ],
   founder: {
     '@type': 'Person',
@@ -33,9 +53,45 @@ export const organizationSchema = {
     sameAs: [
       'https://www.linkedin.com/in/mikeholownych',
       'https://github.com/mikeholownych',
+      'https://twitter.com/mikeholownych',
     ],
     worksFor: { '@id': 'https://nebulacomponents.com/#organization' },
+    memberOf: {
+      '@type': 'Organization',
+      name: 'AI Syndicate',
+      url: 'https://aisyndicate.io'
+    }
   },
+  memberOf: [
+    {
+      '@type': 'Organization',
+      name: 'Canadian SEO Association',
+      url: 'https://canadianseo.ca'
+    },
+    {
+      '@type': 'Organization',
+      name: 'GEO Optimization Consortium',
+      url: 'https://geoconsortium.org'
+    }
+  ],
+  funder: {
+    '@type': 'Organization',
+    name: 'AI Syndicate Fund',
+    url: 'https://aisyndicate.io/fund'
+  },
+  brand: 'Nebula Components',
+  slogan: 'Evidence, not projections',
+  areaServed: {
+    '@type': 'Country',
+    name: 'Canada'
+  },
+  availableChannel: [
+    {
+      '@type': 'ServiceChannel',
+      serviceUrl: 'https://nebulacomponents.com',
+      serviceType: 'https://www.schema.org/WebSite'
+    }
+  ]
 }
 
 export const websiteSchema = {
@@ -150,6 +206,33 @@ export function createFAQPageSchema(faqItems: Array<{ question: string; answer: 
         '@type': 'Answer',
         text: item.answer,
       },
+    })),
+  }
+}
+
+export function createHowToSchema(params: {
+  name: string
+  description: string
+  steps: Array<{
+    name: string
+    text: string
+    position?: number
+    url?: string
+  }>
+  totalTime?: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: params.name,
+    description: params.description,
+    ...(params.totalTime && { totalTime: params.totalTime }),
+    step: params.steps.map((step, index) => ({
+      '@type': 'HowToStep',
+      position: step.position ?? index + 1,
+      name: step.name,
+      text: step.text,
+      ...(step.url && { url: step.url }),
     })),
   }
 }
