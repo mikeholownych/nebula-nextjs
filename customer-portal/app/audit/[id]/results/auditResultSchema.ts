@@ -22,6 +22,16 @@ export interface Finding {
   principle?: string
   /** One-sentence explanation of why this principle affects conversion */
   principle_explanation?: string
+  /** Signal type: "conversion" | "acquisition" | "technical" */
+  signal_type?: string
+  /** Display label for signal type */
+  signal_type_label?: string
+  /** Provenance of the impact score (0-10) — source, basis, limitation */
+  scoring_provenance?: {
+    source?: string
+    basis?: string
+    limitation?: string
+  }
 }
 
 export interface AuditResult {

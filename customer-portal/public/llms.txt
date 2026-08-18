@@ -48,7 +48,7 @@ Nebula registers tools via `navigator.modelContext` on every page for browsers t
 
 **What is a landing page audit?** A landing page audit is a systematic evaluation of a page across 9 conversion signals: message match, trust signals, mobile CTA, load speed, CTA clarity, above-the-fold clarity, ad signals, SEO foundations, and AI citation readiness. It scores each signal on a 1–10 scale and produces a prioritized fix list.
 
-**How long does the free audit take?** Nebula checks 9 signals against the actual page HTML in under 30 seconds. The same checks done manually in DevTools take 15–25 minutes.
+**How long does the free audit take?** Nebula checks 9 signals against your actual page HTML in under 30 seconds. A manual audit in DevTools takes 15–25 minutes.
 
 **Does the free audit require signup or email?** No account is required. Nebula shows the score and initial findings before email; an email unlocks the full report.
 

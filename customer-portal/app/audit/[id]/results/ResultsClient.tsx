@@ -26,6 +26,22 @@ const QUADRANT_LABELS: Record<string, { label: string; tone: 'accent' | 'neutral
   fill_in: { label: 'Fill-In', tone: 'neutral' },
 }
 
+
+/** 
+ * Signal type icons and labels
+ */
+const SIGNAL_TYPE_ICONS: Record<string, string> = {
+  conversion: '🎯',
+  acquisition: '🔍',
+  technical: '⚙️'
+}
+const SIGNAL_TYPE_LABELS: Record<string, string> = {
+  conversion: 'Conversion',
+  acquisition: 'Acquisition', 
+  technical: 'Technical'
+}
+
+
 /**
  * Returns a single copy-paste-ready line from the worst finding.
  * Format: "[DISEASE/LABEL] - {measured value} | Fix: {fix}"
