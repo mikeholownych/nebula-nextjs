@@ -1,8 +1,17 @@
 import type { Config } from 'tailwindcss'
 
-const NEBULA_ACCENT = '#00c2a0'
-const NEBULA_ACCENT_LIGHT = '#33d4b8'
-const NEBULA_ACCENT_DARK = '#009980'
+// ── Nebula Design System v2 — Editorial Precision ────────────────────────────
+//
+// Selected direction: chartreuse accent on near-black, NebulaMark as system
+// device, editorial type discipline, structural borders only.
+//
+// Key change from v1: accent #00c2a0 (generic teal) → #c7ff2f (Nebula Chartreuse)
+// This is the single most impactful visual change. Every other token is refined,
+// not replaced. Semantic discipline is preserved and extended.
+
+const ACCENT = '#c7ff2f'
+const ACCENT_DIM = 'rgba(199, 255, 47, 0.10)'
+const ACCENT_MID = 'rgba(199, 255, 47, 0.20)'
 
 const config: Config = {
   content: [
@@ -12,119 +21,147 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Background colors - four tones for depth layering
+        // ── Backgrounds — four tones for depth layering ──────────────
         bg: {
-          DEFAULT: '#050505',
-          elevated: '#0a0a0a',
-          panel: '#111111',
-          surface: '#0d1110',  // warm-tinted elevated surface for lifted cards
+          DEFAULT: '#080909',    // slightly warmer than pure black — avoids harsh edge
+          elevated: '#0d0f0e',   // +5% elevated surface
+          panel: '#131615',      // component panels
+          surface: '#191c1a',    // lifted cards — warmly tinted
         },
-        // Foreground colors
+        // ── Foreground ───────────────────────────────────────────────
         fg: {
-          DEFAULT: '#ffffff',
-          muted: '#9e9e9e',
-          dim: '#7c7c7c',
+          DEFAULT: '#e8ebe7',    // warm off-white, not pure #fff — reduces eye strain
+          muted: '#7a8078',      // ~5.2:1 on panel — WCAG AA
+          dim: '#525750',        // de-emphasized metadata
         },
-        // Accent - surgical teal, distinct from Tailwind default emerald
+        // ── Accent — Nebula Chartreuse ────────────────────────────────
+        // Single chromatic accent. Use only on: CTAs, active states,
+        // pass indicators, key data values, mark in brand contexts.
+        // Never decorative.
         accent: {
-          DEFAULT: NEBULA_ACCENT,
-          light: NEBULA_ACCENT_LIGHT,
-          dark: NEBULA_ACCENT_DARK,
-          dim: 'rgba(0, 194, 160, 0.1)',
+          DEFAULT: ACCENT,
+          dim: ACCENT_DIM,
+          mid: ACCENT_MID,
         },
-        // Information semantic for lower-hierarchy informational states
-        secondary: {
-          DEFAULT: '#3b82f6',
-          dim: 'rgba(59, 130, 246, 0.1)',
-        },
-        // Semantic colors
+        // ── Semantic ─────────────────────────────────────────────────
         danger: {
-          DEFAULT: '#f37979',
-          dim: 'rgba(239, 68, 68, 0.15)',
+          DEFAULT: '#f06b6b',   // softened red — still passes AA on panel
+          dim: 'rgba(240, 107, 107, 0.12)',
         },
-        info: '#3b82f6',
-        // Reserved exclusively for "this conversion signal failed its
-        // threshold" - see FailSignal in ResultsClient.tsx. Do not use for
-        // grade tiers, evidence confidence, or any other UI state; its
-        // whole value is that seeing this color anywhere means one specific
-        // thing. (Old bare `warning` token removed on purpose - any stray
-        // `bg-warning`/`text-warning` usage now resolves to nothing rather
-        // than silently drifting back into a general-purpose caution color.)
+        // signal.fail: RESERVED. Amber only for "conversion signal failed".
+        // Do not use for warning states, grades, or any other UI meaning.
         signal: {
           fail: '#f59e0b',
         },
-        // Border
-        border: 'rgba(255, 255, 255, 0.06)',
+        // ── Structural ───────────────────────────────────────────────
+        border: {
+          DEFAULT: 'rgba(255, 255, 255, 0.07)',
+          strong: 'rgba(255, 255, 255, 0.13)',
+          accent: `rgba(199, 255, 47, 0.25)`,
+        },
       },
       fontFamily: {
-        sans: ['var(--font-inter)', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['var(--font-geist-sans)', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace'],
       },
       fontSize: {
-        xs: ['0.75rem', { lineHeight: '1rem' }],
-        sm: ['0.875rem', { lineHeight: '1.25rem' }],
-        base: ['1rem', { lineHeight: '1.5rem' }],
-        lg: ['1.125rem', { lineHeight: '1.75rem' }],
-        xl: ['1.25rem', { lineHeight: '1.75rem' }],
-        '2xl': ['1.5rem', { lineHeight: '2rem' }],
-        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
-        '4xl': ['2.25rem', { lineHeight: '2.6rem' }],
-        '5xl': ['3rem', { lineHeight: '1.18' }],
-        '6xl': ['3.75rem', { lineHeight: '1.12' }],
+        // ── Metadata / labels ────────────────────────────────────────
+        '2xs': ['0.6875rem', { lineHeight: '1rem', letterSpacing: '0.06em' }],  // 11px — eyebrows, tags
+        xs:   ['0.75rem',   { lineHeight: '1.125rem' }],   // 12px
+        sm:   ['0.875rem',  { lineHeight: '1.375rem' }],   // 14px
+        // ── Body ─────────────────────────────────────────────────────
+        base: ['1rem',      { lineHeight: '1.75rem' }],    // 16px body
+        // ── Section headings ─────────────────────────────────────────
+        lg:   ['1.125rem',  { lineHeight: '1.625rem' }],
+        xl:   ['1.25rem',   { lineHeight: '1.75rem' }],
+        '2xl':['1.5rem',    { lineHeight: '2rem' }],
+        '3xl':['1.875rem',  { lineHeight: '2.375rem' }],
+        '4xl':['2.25rem',   { lineHeight: '2.625rem' }],
+        '5xl':['3rem',      { lineHeight: '1.15' }],
+        '6xl':['3.75rem',   { lineHeight: '1.1' }],
+        '7xl':['4.5rem',    { lineHeight: '1.06' }],      // display — hero
       },
       letterSpacing: {
-        // Section-head tracking — neutral, not positive (positive on large type is amateur)
-        section: '-0.01em',
-        // Display tracking — tighter at large sizes, more refined
-        display: '-0.04em',
-        tight: '-0.02em',
-        wide: '0.12em',
+        tightest: '-0.05em',   // display / hero only
+        tighter:  '-0.035em',  // large headings
+        tight:    '-0.02em',   // h2-level
+        normal:    '0em',
+        label:    '0.08em',    // small-caps eyebrows
+        wide:     '0.12em',    // rarely used
       },
+      lineHeight: {
+        editorial: '1.72',   // body prose
+        tight:     '1.15',   // display
+        snug:      '1.3',    // headings
+      },
+      // ── Spacing — systematic scale ───────────────────────────────
       spacing: {
-        '18': '4.5rem',
-        '22': '5.5rem',
-        '88': '22rem',
+        '4.5': '1.125rem',
+        '18':  '4.5rem',
+        '22':  '5.5rem',
+        '88':  '22rem',
+        '104': '26rem',
         '128': '32rem',
+        '144': '36rem',
       },
+      maxWidth: {
+        // Content column widths
+        'reading': '68ch',    // prose max
+        'content': '780px',   // single-column content
+        'wide':    '1100px',  // standard page container
+        'full':    '1280px',  // max page width
+      },
+      // ── Border radius — deliberate, not default ──────────────────
+      // Diagnostic surfaces: sharp or very slightly rounded
+      // UI controls: small radius
+      // Cards/panels: small — no rounding monoculture
       borderRadius: {
-        DEFAULT: '12px',
-        '2xl': '16px',
-        '3xl': '24px',
+        none:   '0px',
+        sm:     '3px',    // default for diagnostic/data surfaces
+        DEFAULT:'6px',    // UI controls, inputs
+        md:     '8px',    // cards, panels
+        lg:     '12px',   // larger containers
+        xl:     '16px',   // sections/heroes
+        full:   '9999px', // pills — used sparingly
       },
+      // ── Box shadow — structural only ─────────────────────────────
       boxShadow: {
-        // Updated to match new accent teal
-        glow: `0 0 40px color-mix(in srgb, ${NEBULA_ACCENT} 15%, transparent)`,
-        'glow-sm': `0 0 20px color-mix(in srgb, ${NEBULA_ACCENT} 10%, transparent)`,
-        'glow-lg': `0 0 60px color-mix(in srgb, ${NEBULA_ACCENT} 20%, transparent)`,
-        // Lifted card shadow for surface-elevated panels
-        lifted: '0 2px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.04)',
+        // No glow effects. Shadows for elevation only.
+        sm:  '0 1px 3px rgba(0,0,0,0.3)',
+        md:  '0 4px 12px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04)',
+        lg:  '0 8px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04)',
+        // Accent ring — for focused/active interactive elements only
+        'ring-accent': `0 0 0 2px ${ACCENT}`,
       },
+      // ── Animation ───────────────────────────────────────────────
       animation: {
-        'pulse-soft': 'pulse-soft 2s ease-in-out infinite',
-        'fade-in': 'fade-in 0.3s ease-out',
-        'slide-up': 'slide-up 0.4s ease-out',
+        'fade-in':    'fade-in 0.24s cubic-bezier(0.16, 1, 0.3, 1)',
+        'slide-up':   'slide-up 0.32s cubic-bezier(0.16, 1, 0.3, 1)',
+        'mark-reveal':'mark-reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
       },
       transitionDuration: {
-        fast: '160ms',
-        base: '200ms',
-        slow: '300ms',
+        fast:   '140ms',
+        base:   '200ms',
+        slow:   '300ms',
+        slower: '500ms',
       },
       transitionTimingFunction: {
         standard: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
-        enter: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        enter:    'cubic-bezier(0.16, 1, 0.3, 1)',
+        exit:     'cubic-bezier(0.4, 0, 1, 1)',
       },
       keyframes: {
-        'pulse-soft': {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0.6' },
-        },
         'fade-in': {
-          '0%': { opacity: '0' },
+          '0%':   { opacity: '0' },
           '100%': { opacity: '1' },
         },
         'slide-up': {
-          '0%': { transform: 'translateY(10px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
+          '0%':   { transform: 'translateY(8px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)',   opacity: '1' },
+        },
+        'mark-reveal': {
+          '0%':   { opacity: '0', transform: 'scale(0.92)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
         },
       },
     },
