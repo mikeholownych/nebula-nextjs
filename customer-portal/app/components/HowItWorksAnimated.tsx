@@ -94,7 +94,7 @@ export default function HowItWorksAnimated() {
         <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4">
           <Link
             href="/audit?utm_source=how-it-works&utm_medium=homepage"
-            className="rounded-xl bg-accent px-7 py-3.5 font-semibold text-bg hover:bg-accent-light transition-colors text-sm inline-block"
+            className="rounded-lg bg-accent px-7 py-3.5 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-sm inline-block"
           >
             Get My Free Score
           </Link>

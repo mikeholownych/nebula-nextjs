@@ -17,11 +17,21 @@ interface BreadcrumbProps {
 
 const ROUTE_LABELS: Record<string, string> = {
   'learning-centre': 'Learning Centre',
+  'teardowns': 'Public Teardowns',
+  'vs': 'Tools Comparison',
+  'compare': 'Compare',
+  'pricing-guides': 'Pricing Guides',
+  'playbooks': 'Playbooks',
+  'case-studies': 'Case Studies',
+  'resources': 'Resources',
   'about': 'About',
   'pricing': 'Pricing',
   'audit': 'Audit',
+  'benchmarks': 'Benchmarks',
   'terms': 'Terms',
   'privacy-policy': 'Privacy Policy',
+  'data-rights': 'Data Rights',
+  'editorial-standards': 'Editorial Standards',
   'thank-you': 'Thank You',
   'unsubscribe': 'Unsubscribe',
 };

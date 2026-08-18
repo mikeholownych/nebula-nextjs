@@ -10,7 +10,7 @@ interface LinkButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 }
 
 const variantStyles: Record<LinkButtonVariant, string> = {
-  primary: 'bg-accent text-bg font-semibold hover:bg-accent-light transition-colors',
+  primary: 'bg-accent text-bg font-semibold hover:opacity-85 hover:bg-accent transition-colors',
   secondary: 'bg-bg-panel text-fg border border-border hover:border-accent transition-colors',
   outline: 'border border-accent text-accent hover:bg-accent-dim transition-colors',
   ghost: 'text-fg-muted hover:text-fg transition-colors',
@@ -18,8 +18,8 @@ const variantStyles: Record<LinkButtonVariant, string> = {
 
 const sizeStyles: Record<LinkButtonSize, string> = {
   sm: 'px-4 py-2 text-sm rounded-lg',
-  md: 'px-6 py-3 text-base rounded-xl',
-  lg: 'px-8 py-4 text-lg rounded-2xl',
+  md: 'px-6 py-3 text-base rounded',
+  lg: 'px-8 py-4 text-lg rounded',
 }
 
 export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(

@@ -19,8 +19,8 @@ export const metadata: Metadata = {
 
 const colors = [
   {
-    name: 'Signal Teal',
-    hex: '#00c2a0',
+    name: 'Nebula Chartreuse',
+    hex: '#c7ff2f',
     rgb: '0, 194, 160',
     hsl: '169°, 100%, 38%',
     role: 'Primary brand accent, pass states, interactive elements',
@@ -29,7 +29,7 @@ const colors = [
   },
   {
     name: 'Near Black',
-    hex: '#050505',
+    hex: '#080909',
     rgb: '5, 5, 5',
     hsl: '0°, 0%, 2%',
     role: 'Primary background, canvas',
@@ -66,18 +66,18 @@ const colors = [
 ]
 
 const semanticColors = [
-  { name: 'Success', hex: '#00c2a0', usage: 'Pass states, positive outcomes' },
+  { name: 'Success', hex: '#c7ff2f', usage: 'Pass states, positive outcomes' },
   { name: 'Error', hex: '#f37979', usage: 'Validation errors, destructive actions' },
   { name: 'Information', hex: '#3b82f6', usage: 'Informational notices, links' },
   { name: 'Signal Fail', hex: '#f59e0b', usage: 'Failed threshold - audit-specific only' },
 ]
 
 const contrastPairs = [
-  { fg: '#F5F5F5', bg: '#050505', ratio: '20.9:1', level: 'AAA' },
-  { fg: '#00c2a0', bg: '#050505', ratio: '4.56:1', level: 'AA Large' },
-  { fg: '#9e9e9e', bg: '#050505', ratio: '7.05:1', level: 'AAA' },
+  { fg: '#F5F5F5', bg: '#080909', ratio: '20.9:1', level: 'AAA' },
+  { fg: '#c7ff2f', bg: '#080909', ratio: '4.56:1', level: 'AA Large' },
+  { fg: '#9e9e9e', bg: '#080909', ratio: '7.05:1', level: 'AAA' },
   { fg: '#9e9e9e', bg: '#111111', ratio: '6.14:1', level: 'AAA' },
-  { fg: '#050505', bg: '#00c2a0', ratio: '4.56:1', level: 'AA Large' },
+  { fg: '#080909', bg: '#c7ff2f', ratio: '4.56:1', level: 'AA Large' },
   { fg: '#ffffff', bg: '#009980', ratio: '3.22:1', level: 'AA Large' },
 ]
 
@@ -107,7 +107,7 @@ const iconExamples = [
 
 const doRules = [
   { rule: 'Use the mark on dark backgrounds with adequate clearspace.' },
-  { rule: 'Use Signal Teal (#00c2a0) as the only chromatic accent in brand contexts.' },
+  { rule: 'Use Nebula Chartreuse (#c7ff2f) as the only chromatic accent in brand contexts.' },
   { rule: "Refer to the product as 'Nebula' or 'Nebula Components'." },
   { rule: 'Maintain minimum 1× mark-width clearspace around the mark.' },
   { rule: 'Use the monospace stack for scores, data, and technical labels.' },
@@ -194,9 +194,9 @@ function HeroMark() {
       className="w-48 h-48 sm:w-60 sm:h-60"
     >
       {/* Outer diagnostic ring */}
-      <circle cx="120" cy="120" r="110" stroke="rgba(0, 194, 160, 0.08)" strokeWidth="0.5" />
-      <circle cx="120" cy="120" r="100" stroke="rgba(0, 194, 160, 0.12)" strokeWidth="0.5" strokeDasharray="2 4" className="motion-safe:animate-[spin_20s_linear_infinite] origin-center" />
-      <circle cx="120" cy="120" r="90" stroke="rgba(0, 194, 160, 0.06)" strokeWidth="0.5" />
+      <circle cx="120" cy="120" r="110" stroke="rgba(199, 255, 47, 0.08)" strokeWidth="0.5" />
+      <circle cx="120" cy="120" r="100" stroke="rgba(199, 255, 47, 0.12)" strokeWidth="0.5" strokeDasharray="2 4" className="motion-safe:animate-[spin_20s_linear_infinite] origin-center" />
+      <circle cx="120" cy="120" r="90" stroke="rgba(199, 255, 47, 0.06)" strokeWidth="0.5" />
 
       {/* Radial grid lines */}
       {Array.from({ length: 12 }, (_, i) => {
@@ -205,7 +205,7 @@ function HeroMark() {
         const y1 = 120 + 85 * Math.sin(angle)
         const x2 = 120 + 115 * Math.cos(angle)
         const y2 = 120 + 115 * Math.sin(angle)
-        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(0, 194, 160, 0.06)" strokeWidth="0.5" />
+        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(199, 255, 47, 0.06)" strokeWidth="0.5" />
       })}
 
       {/* Coordinate ticks */}
@@ -214,7 +214,7 @@ function HeroMark() {
         const x = 120 + 108 * Math.cos(angle)
         const y = 120 + 108 * Math.sin(angle)
         return (
-          <text key={deg} x={x} y={y} fontSize="5" fill="rgba(0, 194, 160, 0.3)" textAnchor="middle" dominantBaseline="middle" fontFamily="monospace">
+          <text key={deg} x={x} y={y} fontSize="5" fill="rgba(199, 255, 47, 0.3)" textAnchor="middle" dominantBaseline="middle" fontFamily="monospace">
             {deg}°
           </text>
         )
@@ -234,7 +234,7 @@ function HeroMark() {
               cx={cx}
               cy={cy}
               r={r}
-              fill={state === 'pass' ? '#00c2a0' : '#9e9e9e'}
+              fill={state === 'pass' ? '#c7ff2f' : '#9e9e9e'}
               opacity={state === 'neutral' ? 0.35 : 1}
             />
           )
@@ -242,7 +242,7 @@ function HeroMark() {
       </g>
 
       {/* Node state indicator labels */}
-      <text x="120" y="225" fontSize="5" fill="rgba(0, 194, 160, 0.4)" textAnchor="middle" fontFamily="monospace">
+      <text x="120" y="225" fontSize="5" fill="rgba(199, 255, 47, 0.4)" textAnchor="middle" fontFamily="monospace">
         SIG:PASS 6/9 · GRADE:B
       </text>
       <text x="120" y="20" fontSize="4.5" fill="rgba(158, 158, 158, 0.4)" textAnchor="middle" fontFamily="monospace">
@@ -272,10 +272,10 @@ function ConstructionDiagram() {
     >
       {/* Grid background */}
       {Array.from({ length: 37 }, (_, i) => (
-        <line key={`v${i}`} x1={i * 10} y1={0} x2={i * 10} y2={280} stroke="rgba(0, 194, 160, 0.04)" strokeWidth="0.5" />
+        <line key={`v${i}`} x1={i * 10} y1={0} x2={i * 10} y2={280} stroke="rgba(199, 255, 47, 0.04)" strokeWidth="0.5" />
       ))}
       {Array.from({ length: 29 }, (_, i) => (
-        <line key={`h${i}`} x1={0} y1={i * 10} x2={360} y2={i * 10} stroke="rgba(0, 194, 160, 0.04)" strokeWidth="0.5" />
+        <line key={`h${i}`} x1={0} y1={i * 10} x2={360} y2={i * 10} stroke="rgba(199, 255, 47, 0.04)" strokeWidth="0.5" />
       ))}
 
       {/* Mark at center, scaled up */}
@@ -292,14 +292,14 @@ function ConstructionDiagram() {
                 cx={cx}
                 cy={cy}
                 r={r}
-                fill={state === 'pass' ? '#00c2a0' : '#9e9e9e'}
+                fill={state === 'pass' ? '#c7ff2f' : '#9e9e9e'}
                 opacity={state === 'neutral' ? 0.35 : 1}
               />
               <circle
                 cx={cx}
                 cy={cy}
                 r={r + 0.5}
-                stroke="rgba(0, 194, 160, 0.15)"
+                stroke="rgba(199, 255, 47, 0.15)"
                 strokeWidth="0.3"
                 strokeDasharray="1 1"
                 fill="none"
@@ -310,8 +310,8 @@ function ConstructionDiagram() {
       </g>
 
       {/* Measurement lines */}
-      <line x1="125" y1="68" x2="155" y2={68} stroke="#00c2a0" strokeWidth="0.5" markerEnd="url(#arrowhead)" markerStart="url(#arrowhead-start)" />
-      <text x="140" y="64" fontSize="7" fill="#00c2a0" textAnchor="middle" fontFamily="monospace">6u</text>
+      <line x1="125" y1="68" x2="155" y2={68} stroke="#c7ff2f" strokeWidth="0.5" markerEnd="url(#arrowhead)" markerStart="url(#arrowhead-start)" />
+      <text x="140" y="64" fontSize="7" fill="#c7ff2f" textAnchor="middle" fontFamily="monospace">6u</text>
 
       <line x1="155" y1="68" x2="165" y2={68} stroke="#9e9e9e" strokeWidth="0.5" />
       <text x="160" y="64" fontSize="6" fill="#9e9e9e" textAnchor="middle" fontFamily="monospace">2u</text>
@@ -319,11 +319,11 @@ function ConstructionDiagram() {
       <text x="295" y="95" fontSize="7" fill="#9e9e9e" textAnchor="start" fontFamily="monospace">r = 2.2u</text>
       <line x1="260" y1="95" x2="292" y2="95" stroke="rgba(158, 158, 158, 0.3)" strokeWidth="0.5" strokeDasharray="2 2" />
 
-      <line x1="120" y1="210" x2="240" y2={210} stroke="rgba(0, 194, 160, 0.4)" strokeWidth="0.5" />
-      <text x="180" y="224" fontSize="7" fill="#00c2a0" textAnchor="middle" fontFamily="monospace">24u total (22u content + 2×1u margin)</text>
+      <line x1="120" y1="210" x2="240" y2={210} stroke="rgba(199, 255, 47, 0.4)" strokeWidth="0.5" />
+      <text x="180" y="224" fontSize="7" fill="#c7ff2f" textAnchor="middle" fontFamily="monospace">24u total (22u content + 2×1u margin)</text>
 
-      <rect x="100" y="60" width="160" height="160" stroke="rgba(0, 194, 160, 0.15)" strokeWidth="0.5" strokeDasharray="4 2" fill="none" rx="2" />
-      <text x="105" y="56" fontSize="6" fill="rgba(0, 194, 160, 0.5)" fontFamily="monospace">CLEARSPACE: 1× mark width</text>
+      <rect x="100" y="60" width="160" height="160" stroke="rgba(199, 255, 47, 0.15)" strokeWidth="0.5" strokeDasharray="4 2" fill="none" rx="2" />
+      <text x="105" y="56" fontSize="6" fill="rgba(199, 255, 47, 0.5)" fontFamily="monospace">CLEARSPACE: 1× mark width</text>
 
       <text x="295" y="115" fontSize="6" fill="#9e9e9e" textAnchor="start" fontFamily="monospace">cell: 6×6u</text>
       <text x="295" y="130" fontSize="6" fill="#9e9e9e" textAnchor="start" fontFamily="monospace">gap: 2u</text>
@@ -333,10 +333,10 @@ function ConstructionDiagram() {
 
       <defs>
         <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
-          <path d="M0,0 L6,2 L0,4" fill="none" stroke="#00c2a0" strokeWidth="0.5" />
+          <path d="M0,0 L6,2 L0,4" fill="none" stroke="#c7ff2f" strokeWidth="0.5" />
         </marker>
         <marker id="arrowhead-start" markerWidth="6" markerHeight="4" refX="1" refY="2" orient="auto-start-reverse">
-          <path d="M6,0 L0,2 L6,4" fill="none" stroke="#00c2a0" strokeWidth="0.5" />
+          <path d="M6,0 L0,2 L6,4" fill="none" stroke="#c7ff2f" strokeWidth="0.5" />
         </marker>
       </defs>
     </svg>
@@ -474,7 +474,7 @@ export default function BrandPage() {
                 <div key={slug} className="bg-bg-surface border border-border rounded-lg p-3 space-y-2">
                   <p className="text-xs font-mono text-fg capitalize">{slug.replace('mark-', '')}</p>
                   <div className="flex flex-wrap gap-2">
-                    <a href={`/brand/${slug}.svg`} download className="text-[10px] font-mono text-accent hover:text-accent-light transition-colors">SVG</a>
+                    <a href={`/brand/${slug}.svg`} download className="text-[10px] font-mono text-accent hover:text-fg transition-colors">SVG</a>
                     {[64, 128, 256].map((s) => (
                       <a key={s} href={`/brand/${slug}-${s}.png`} download className="text-[10px] font-mono text-fg-muted hover:text-fg transition-colors">{s}px</a>
                     ))}
@@ -576,14 +576,14 @@ export default function BrandPage() {
               </div>
               <div className="px-4 py-3 border-t border-border flex items-center justify-between">
                 <span className="text-xs font-mono text-fg-muted">Dark variant</span>
-                <a href="/brand/wordmark-dark.svg" download className="text-xs font-mono text-accent hover:text-accent-light transition-colors">SVG ↓</a>
+                <a href="/brand/wordmark-dark.svg" download className="text-xs font-mono text-accent hover:text-fg transition-colors">SVG ↓</a>
               </div>
             </div>
             <div className="bg-white border border-border rounded-xl overflow-hidden">
               <div className="flex items-center justify-center h-24">
                 <div className="flex items-center gap-2">
                   <MarkInlineDark size={20} />
-                  <span className="text-base font-bold text-[#050505]">Nebula Components</span>
+                  <span className="text-base font-bold text-[#080909]">Nebula Components</span>
                 </div>
               </div>
               <div className="px-4 py-3 border-t border-gray-200 flex items-center justify-between">
@@ -601,7 +601,7 @@ export default function BrandPage() {
           <SectionLabel>03 - Color System</SectionLabel>
           <SectionTitle id="colors-heading">Diagnostic Palette</SectionTitle>
           <SectionDescription>
-            A restrained palette optimized for dark interfaces and maximum contrast ratios. Signal Teal is the sole chromatic accent - everything else is grayscale.
+            A restrained palette optimized for dark interfaces and maximum contrast ratios. Nebula Chartreuse is the sole chromatic accent - everything else is grayscale.
           </SectionDescription>
 
           {/* Primary palette */}
@@ -797,7 +797,7 @@ export default function BrandPage() {
               <h4 className="text-[10px] font-mono uppercase tracking-widest text-accent mb-3">Colors</h4>
               <div className="space-y-2">
                 <MetaTag label="Default" value="fg-muted (#9e9e9e)" />
-                <MetaTag label="Active" value="accent (#00c2a0)" />
+                <MetaTag label="Active" value="accent (#c7ff2f)" />
                 <MetaTag label="Error" value="danger (#f37979)" />
                 <MetaTag label="Disabled" value="fg-dim (0.3 opacity)" />
               </div>
@@ -810,7 +810,7 @@ export default function BrandPage() {
             <DiagnosticPanel>
               <h4 className="text-[10px] font-mono uppercase tracking-widest text-accent mb-3">Line Charts &amp; Score Rings</h4>
               <div className="space-y-2">
-                <MetaTag label="Primary line" value="Signal Teal, 2px" />
+                <MetaTag label="Primary line" value="Nebula Chartreuse, 2px" />
                 <MetaTag label="Secondary" value="fg-muted, 1px dashed" />
                 <MetaTag label="Grid" value="border (0.06 opacity)" />
                 <MetaTag label="Score ring" value="Teal arc on dark track" />
@@ -990,7 +990,7 @@ function MarkInline({ size = 24 }: { size?: number }) {
             cx={cx}
             cy={cy}
             r={r}
-            fill={state === 'pass' ? '#00c2a0' : '#9e9e9e'}
+            fill={state === 'pass' ? '#c7ff2f' : '#9e9e9e'}
             opacity={state === 'neutral' ? 0.35 : 1}
           />
         )

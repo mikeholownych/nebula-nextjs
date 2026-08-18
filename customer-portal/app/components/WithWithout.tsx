@@ -31,7 +31,7 @@ export default function WithWithout() {
 
         <div className="grid gap-6 md:grid-cols-2">
           {/* Without */}
-          <div className="rounded-xl border border-signal-fail/30 bg-signal-fail/5 p-6">
+          <div className="rounded-lg border border-signal-fail/30 bg-signal-fail/5 p-6">
             <p className="mb-5 text-xs font-bold uppercase tracking-widest text-signal-fail">
               Without Nebula
             </p>
@@ -49,7 +49,7 @@ export default function WithWithout() {
           </div>
 
           {/* With */}
-          <div className="rounded-xl border border-accent/30 bg-accent/5 p-6">
+          <div className="rounded-lg border border-accent/30 bg-accent/5 p-6">
             <p className="mb-5 text-xs font-bold uppercase tracking-widest text-accent">
               With Nebula
             </p>
@@ -70,7 +70,7 @@ export default function WithWithout() {
         <div className="mt-8 text-center">
           <Link
             href="/audit?utm_source=with-without&utm_medium=homepage"
-            className="inline-block rounded-xl bg-accent px-8 py-3.5 font-semibold text-bg hover:bg-accent-light transition-colors text-sm"
+            className="inline-block rounded-lg bg-accent px-8 py-3.5 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-sm"
           >
             Get My Free Score - 2 Minutes &rarr;
           </Link>

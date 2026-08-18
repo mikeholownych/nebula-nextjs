@@ -133,7 +133,7 @@ export default function ROICalculator() {
 
         {/* Results */}
         {hasEnoughData && (
-          <div className="mt-8 rounded-xl border border-border bg-bg-surface overflow-hidden">
+          <div className="mt-8 rounded-lg border border-border bg-bg-surface overflow-hidden">
             {isBelow ? (
               <>
                 {/* Main number - the gut punch */}
@@ -172,7 +172,7 @@ export default function ROICalculator() {
                   </p>
                   <Link
                     href="/audit?utm_source=calculator&utm_medium=homepage"
-                    className="shrink-0 rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors text-sm whitespace-nowrap"
+                    className="shrink-0 rounded-lg bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-sm whitespace-nowrap"
                   >
                     Show Me the Leak &rarr;
                   </Link>
@@ -189,7 +189,7 @@ export default function ROICalculator() {
                 </p>
                 <Link
                   href="/audit?utm_source=calculator&utm_medium=homepage"
-                  className="mt-4 inline-block rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors text-sm"
+                  className="mt-4 inline-block rounded-lg bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-sm"
                 >
                   Find What&apos;s Still Leaking &rarr;
                 </Link>

@@ -77,7 +77,7 @@ export default function Home() {
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                'radial-gradient(ellipse 65% 55% at 68% 45%, rgba(0, 194, 160, 0.15) 0%, rgba(0, 194, 160, 0.05) 45%, transparent 70%)',
+                              'radial-gradient(ellipse 55% 45% at 70% 40%, rgba(199, 255, 47, 0.07) 0%, transparent 65%)',
             }}
           />
           <div className="relative grid gap-12 md:grid-cols-[1fr_1.3fr] md:items-center">
@@ -94,7 +94,7 @@ export default function Home() {
               <div className="mt-8">
                 <Link
                   href="/audit?utm_source=homepage&utm_medium=internal"
-                  className="inline-block rounded-xl bg-accent px-6 py-3.5 text-base font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+                  className="inline-block rounded bg-accent px-6 py-3.5 text-base font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
                 >
                   Find My Conversion Leak
                 </Link>
@@ -128,7 +128,7 @@ export default function Home() {
               <div className="relative">
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute -inset-8 bg-[radial-gradient(ellipse_60%_50%_at_70%_40%,rgba(0,194,160,0.12),transparent_70%)]"
+                  className="pointer-events-none absolute -inset-8 bg-[radial-gradient(ellipse_55%_45%_at_70%_40%,rgba(199,255,47,0.06),transparent_65%)]"
                 />
                 <AuditCardArtifact />
               </div>
@@ -270,7 +270,7 @@ export default function Home() {
                   <h3 className="heading-3 mb-3">{item.heading}</h3>
                   <p className="text-sm text-fg-muted leading-7">{item.body}</p>
                   {item.link && (
-                    <Link href={item.link.href} className="mt-4 inline-block text-sm font-semibold text-accent hover:text-accent-light transition-colors">
+                    <Link href={item.link.href} className="mt-4 inline-block text-sm font-semibold text-accent hover:text-fg transition-colors">
                       {item.link.label} →
                     </Link>
                   )}
@@ -284,7 +284,7 @@ export default function Home() {
         <HonestyGrid />
 
         {/* ── 4. Teardown proof: named pages, named failures ── */}
-        <section className="section-default bg-bg-muted/5">
+        <section className="section-default bg-bg-elevated/60">
           <div className="mx-auto max-w-6xl">
             <div className="mb-10 grid gap-4 md:grid-cols-2 md:items-end">
               <h2 className="heading-2">
@@ -311,7 +311,7 @@ export default function Home() {
                     <p className="mt-4 text-xs text-fg-dim font-mono">
                       {t.findings.length} findings documented
                     </p>
-                    <p className="mt-5 text-sm font-semibold text-accent group-hover:text-accent-light transition-colors">
+                    <p className="mt-5 text-sm font-semibold text-accent group-hover:text-fg transition-colors">
                       View the full report →
                     </p>
                   </Link>
@@ -337,7 +337,7 @@ export default function Home() {
                 <p className="mb-2 text-xs font-semibold text-accent uppercase tracking-wide">{PATTERNS[0].label}</p>
                 <h3 className="mb-5 text-xl font-bold text-fg">{PATTERNS[0].heading}</h3>
                 <p className="text-base text-fg-muted leading-relaxed">{PATTERNS[0].body}</p>
-                <div className="mt-8 rounded-xl border border-border/40 bg-bg p-5 font-mono text-sm text-fg-muted">
+                <div className="mt-8 rounded-lg border border-border/40 bg-bg p-5 font-mono text-sm text-fg-muted">
                   <div className="mb-3 flex items-center justify-between">
                     <span className="text-accent font-semibold">message_match</span>
                     <span className="text-signal-fail font-semibold">FAIL</span>
@@ -386,7 +386,7 @@ export default function Home() {
                 </p>
                 <Link
                   href="/audit?utm_source=homepage&utm_medium=internal"
-                  className="inline-block rounded-xl border-2 border-accent px-5 py-2.5 text-sm font-semibold text-accent hover:bg-accent hover:text-bg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+                  className="inline-block rounded border border-accent px-5 py-2.5 text-sm font-semibold text-accent hover:bg-accent hover:text-bg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
                 >
                   See what you actually get →
                 </Link>
@@ -469,7 +469,7 @@ export default function Home() {
         </section>
 
         {/* ── 9. Direct answers ── */}
-        <section aria-labelledby="direct-answers" className="section-default bg-bg-muted/5">
+        <section aria-labelledby="direct-answers" className="section-default bg-bg-elevated/60">
           <div className="mx-auto max-w-6xl">
             <h2 id="direct-answers" className="heading-2 mb-8">Direct answers</h2>
             <div className="grid gap-6 md:grid-cols-3">
@@ -499,7 +499,7 @@ export default function Home() {
               Step-by-step diagnostic sequences for common paid traffic conversion failures and industry-specific audit benchmarks.
             </p>
             <div className="grid gap-6 md:grid-cols-2">
-              <div className="rounded-xl border border-border bg-bg-muted/20 p-6">
+              <div className="rounded-lg border border-border bg-bg-panel/60 p-6">
                 <h3 className="mb-3 text-lg font-semibold text-fg">Conversion Leak Diagnostics</h3>
                 <ul className="space-y-2.5 text-sm text-fg-muted">
                   <li>
@@ -535,7 +535,7 @@ export default function Home() {
                 </ul>
               </div>
 
-              <div className="rounded-xl border border-border bg-bg-muted/20 p-6">
+              <div className="rounded-lg border border-border bg-bg-panel/60 p-6">
                 <h3 className="mb-3 text-lg font-semibold text-fg">Industry-Specific Audits</h3>
                 <ul className="space-y-2.5 text-sm text-fg-muted">
                   <li>
@@ -573,7 +573,7 @@ export default function Home() {
             </p>
             <Link
               href="/audit?utm_source=homepage&utm_medium=internal"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
+              className="inline-block rounded bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
             >
               Find the Leak &rarr;
             </Link>

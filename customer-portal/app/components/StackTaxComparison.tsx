@@ -18,7 +18,7 @@ export default function StackTaxComparison() {
 
         <div className="grid gap-6 md:grid-cols-3">
           {/* Card 1: CRO Agency */}
-          <div className="flex flex-col rounded-2xl border border-border bg-bg-panel p-6 shadow-sm">
+          <div className="flex flex-col rounded-lg border border-border bg-bg-panel p-6 shadow-sm">
             <div className="mb-4">
               <span className="text-xs font-semibold uppercase tracking-wider text-fg-muted">Option 1</span>
               <h3 className="text-xl font-bold text-fg">Traditional CRO Agency</h3>
@@ -52,7 +52,7 @@ export default function StackTaxComparison() {
           </div>
 
           {/* Card 2: DIY SaaS Tool Stack */}
-          <div className="flex flex-col rounded-2xl border border-border bg-bg-panel p-6 shadow-sm">
+          <div className="flex flex-col rounded-lg border border-border bg-bg-panel p-6 shadow-sm">
             <div className="mb-4">
               <span className="text-xs font-semibold uppercase tracking-wider text-fg-muted">Option 2</span>
               <h3 className="text-xl font-bold text-fg">DIY SaaS Tool Stack</h3>
@@ -86,7 +86,7 @@ export default function StackTaxComparison() {
           </div>
 
           {/* Card 3: Nebula Autonomous Engine */}
-          <div className="relative flex flex-col rounded-2xl border-2 border-accent bg-bg-elevated p-6 shadow-lifted">
+          <div className="relative flex flex-col rounded-lg border-2 border-accent bg-bg-elevated p-6 shadow-lifted">
             <div className="absolute -top-3 right-6 rounded-full bg-accent px-3 py-1 text-xs font-bold uppercase tracking-wide text-bg">
               Best Value
             </div>
@@ -119,7 +119,7 @@ export default function StackTaxComparison() {
             </ul>
             <Link
               href="/audit?utm_source=stack_tax_matrix&utm_medium=homepage"
-              className="w-full rounded-xl bg-accent py-3 text-center font-semibold text-bg hover:bg-accent-light transition-colors text-sm"
+              className="w-full rounded-lg bg-accent py-3 text-center font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-sm"
             >
               Get Free Score &amp; Repair Sprint &rarr;
             </Link>

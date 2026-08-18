@@ -89,7 +89,7 @@ export default function AuditResultMockup() {
           {/* Favicon dot */}
           <span
             className="flex-shrink-0 h-3 w-3 rounded-full"
-            style={{ background: 'rgba(0,194,160,0.35)', border: '1px solid #00c2a0' }}
+            style={{ background: 'rgba(0,194,160,0.35)', border: '1px solid #c7ff2f' }}
           />
           <span className="font-mono text-sm text-fg truncate tracking-tight">
             example-saas.com
@@ -253,7 +253,7 @@ export default function AuditResultMockup() {
             ? isTopLeak
               ? '#f37979'
               : '#f59e0b'
-            : '#00c2a0'
+            : '#c7ff2f'
 
           return (
             <div
@@ -309,7 +309,7 @@ export default function AuditResultMockup() {
                       }
                     : {
                         background: 'rgba(0,194,160,0.08)',
-                        color: '#00c2a0',
+                        color: '#c7ff2f',
                         border: '1px solid rgba(0,194,160,0.18)',
                       }
                 }
@@ -337,7 +337,7 @@ export default function AuditResultMockup() {
         <div className="flex items-center gap-1.5 text-xs text-fg-dim">
           <span
             className="h-1.5 w-1.5 rounded-full"
-            style={{ background: '#00c2a0', boxShadow: '0 0 4px #00c2a080' }}
+            style={{ background: '#c7ff2f', boxShadow: '0 0 4px #c7ff2f80' }}
           />
           Nebula Audit Engine
         </div>

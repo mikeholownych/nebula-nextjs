@@ -92,14 +92,14 @@ interface MarkVariantData {
 }
 
 const MARK_VARIANTS: MarkVariantData[] = [
-  { id: 'dark', label: 'Dark', description: 'Primary - dark background', bg: 'bg-bg-surface', markColors: { pass: '#00c2a0', neutral: '#9e9e9e' } },
+  { id: 'dark', label: 'Dark', description: 'Primary - dark background', bg: 'bg-bg-surface', markColors: { pass: '#c7ff2f', neutral: '#9e9e9e' } },
   { id: 'light', label: 'Light', description: 'Inverted - light background', bg: 'bg-white', markColors: { pass: '#009980', neutral: '#666666' } },
   { id: 'mono', label: 'Mono', description: 'Single-tone - grayscale contexts', bg: 'bg-bg-surface', markColors: { pass: '#ffffff', neutral: '#666666' } },
-  { id: 'teal', label: 'Signal Teal', description: 'Full accent - brand-forward', bg: 'bg-bg-surface', markColors: { pass: '#00c2a0', neutral: '#00c2a0' } },
-  { id: 'small', label: 'Small-size', description: 'Optimized for 16px and below', bg: 'bg-bg-surface', markColors: { pass: '#00c2a0', neutral: '#4a4a4a' } },
+  { id: 'teal', label: 'Nebula Chartreuse', description: 'Full accent - brand-forward', bg: 'bg-bg-surface', markColors: { pass: '#c7ff2f', neutral: '#c7ff2f' } },
+  { id: 'small', label: 'Small-size', description: 'Optimized for 16px and below', bg: 'bg-bg-surface', markColors: { pass: '#c7ff2f', neutral: '#4a4a4a' } },
   { id: 'contrast', label: 'High Contrast', description: 'WCAG AAA - maximum legibility', bg: 'bg-[#000000]', markColors: { pass: '#ffffff', neutral: '#ffffff' } },
-  { id: 'outline', label: 'Technical', description: 'Construction / wireframe', bg: 'bg-bg-surface', markColors: { pass: '#00c2a0', neutral: '#333333' } },
-  { id: 'active', label: 'Diagnostic', description: 'Active scanning state', bg: 'bg-bg-surface', markColors: { pass: '#00c2a0', neutral: '#f59e0b' } },
+  { id: 'outline', label: 'Technical', description: 'Construction / wireframe', bg: 'bg-bg-surface', markColors: { pass: '#c7ff2f', neutral: '#333333' } },
+  { id: 'active', label: 'Diagnostic', description: 'Active scanning state', bg: 'bg-bg-surface', markColors: { pass: '#c7ff2f', neutral: '#f59e0b' } },
 ]
 
 export function MarkGallery() {

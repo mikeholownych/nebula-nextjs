@@ -25,6 +25,8 @@ interface NebulaMarkProps extends SVGProps<SVGSVGElement> {
   passColor?: string
   /** Color for fail nodes. Defaults to #f59e0b (signal-fail). */
   failColor?: string
+  /** Render marks as squares instead of circles for a more technical look. */
+  square?: boolean
   /** Color for neutral nodes. Defaults to currentColor at 30% opacity. */
   neutralColor?: string
 }
@@ -114,19 +116,19 @@ export function NebulaMark({
  * This is the primary brand mark used in SiteNav and Footer.
  */
 export function NebulaLogo({ size = 24, ...props }: { size?: number } & SVGProps<SVGSVGElement>) {
-  // Fixed decorative state: top row pass, middle mixed, bottom neutral.
-  // This is decorative branding, not a data or score representation.
+  // Fixed decorative state: top-left cluster pass, rest neutral.
+  // Chartreuse passes, neutral dimmed — matches new accent system.
   const decorativeStates: SignalState[] = [
-    'pass', 'pass', 'pass',
     'pass', 'pass', 'neutral',
+    'pass', 'neutral', 'neutral',
     'neutral', 'neutral', 'neutral',
   ]
   return (
     <NebulaMark
       size={size}
       states={decorativeStates}
-      passColor="#00c2a0"
-      neutralColor="#9e9e9e"
+      passColor="#c7ff2f"
+      neutralColor="#525750"
       {...props}
     />
   )

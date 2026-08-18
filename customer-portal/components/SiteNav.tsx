@@ -1,28 +1,32 @@
 import { NebulaLogo } from '@/components/NebulaMark'
 
-const LINK_CLASSES =
-  'text-sm font-medium tracking-wide text-fg-muted hover:text-fg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded'
+const NAV_LINK =
+  'text-sm font-medium text-fg-muted hover:text-fg transition-colors duration-[140ms] focus:outline-none focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-3 rounded-sm'
 
 const Brand = () => (
   <a
     href="/"
-    className="flex items-center gap-3 transition-opacity hover:opacity-80"
+    className="flex items-center gap-2.5 transition-opacity hover:opacity-75 focus:outline-none focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-3 rounded-sm"
     aria-label="Nebula Components home"
   >
-    <NebulaLogo size={22} />
+    <NebulaLogo size={20} />
     <span className="text-sm font-semibold tracking-tight text-fg">
-      Nebula <span className="font-normal text-fg-muted">Components</span>
+      Nebula<span className="font-light text-fg-muted"> Components</span>
     </span>
   </a>
 )
 
-const NavigationLinks = ({ mobile = false }: { mobile?: boolean }) => (
+const NavLinks = ({ mobile = false }: { mobile?: boolean }) => (
   <>
-    <a href="/teardowns" className={`${LINK_CLASSES} ${mobile ? 'py-3' : ''}`}>Teardowns</a>
-    <a href="/pricing" className={`${LINK_CLASSES} ${mobile ? 'py-3' : ''}`}>Pricing</a>
+    <a href="/teardowns" className={`${NAV_LINK} ${mobile ? 'py-3 block' : ''}`}>
+      Teardowns
+    </a>
+    <a href="/pricing" className={`${NAV_LINK} ${mobile ? 'py-3 block' : ''}`}>
+      Pricing
+    </a>
     <a
       href="/audit?utm_source=site-nav&utm_medium=internal"
-      className={`${mobile ? 'mt-2 text-center' : ''} rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg transition-colors hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg`}
+      className={`${mobile ? 'mt-3 w-full text-center' : ''} btn-primary text-sm py-2 px-4 rounded`}
     >
       Free Audit
     </a>
@@ -31,27 +35,49 @@ const NavigationLinks = ({ mobile = false }: { mobile?: boolean }) => (
 
 export default function SiteNav() {
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 border-b border-border bg-bg/80 px-6 py-4 backdrop-blur-xl">
+    <header className="fixed left-0 right-0 top-0 z-50 border-b border-border bg-bg/90 px-6 py-3.5 backdrop-blur-md">
       <nav
         aria-label="Primary"
-        className="static mx-auto flex max-w-7xl flex-row items-center justify-between bg-transparent p-0"
+        className="mx-auto flex max-w-wide flex-row items-center justify-between"
       >
         <Brand />
+
+        {/* Desktop */}
         <div className="hidden items-center gap-8 sm:flex">
-          <NavigationLinks />
+          <NavLinks />
         </div>
+
+        {/* Mobile */}
         <details className="group relative sm:hidden">
           <summary
-            className="flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center rounded-lg p-2 text-fg hover:bg-border/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent [&::-webkit-details-marker]:hidden"
+            className="flex min-h-[44px] min-w-[44px] cursor-pointer list-none items-center justify-center rounded p-2 text-fg-muted hover:text-fg focus:outline-none focus-visible:outline-2 focus-visible:outline-accent [&::-webkit-details-marker]:hidden"
             aria-label="Toggle navigation"
-            aria-controls="mobile-navigation"
+            aria-controls="mobile-nav"
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+            {/* Hamburger — closed */}
+            <svg
+              className="block group-open:hidden"
+              width="20" height="20" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"
+              aria-hidden="true"
+            >
               <path d="M4 7h16M4 12h16M4 17h16" />
             </svg>
+            {/* X — open */}
+            <svg
+              className="hidden group-open:block"
+              width="20" height="20" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"
+              aria-hidden="true"
+            >
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
           </summary>
-          <div id="mobile-navigation" className="invisible absolute right-0 top-[calc(100%+1rem)] flex w-48 origin-top-right -translate-y-1 scale-95 flex-col gap-1 rounded-xl border border-border bg-bg px-5 py-4 opacity-0 shadow-lg transition-[opacity,transform,visibility] duration-200 ease-out motion-reduce:transition-none group-open:visible group-open:translate-y-0 group-open:scale-100 group-open:opacity-100">
-            <NavigationLinks mobile />
+          <div
+            id="mobile-nav"
+            className="invisible absolute right-0 top-[calc(100%+10px)] w-52 origin-top-right -translate-y-1 scale-95 flex-col gap-0 rounded-lg border border-border bg-bg-panel px-5 py-4 opacity-0 shadow-lg transition-[opacity,transform,visibility] duration-200 ease-out motion-reduce:transition-none group-open:visible group-open:translate-y-0 group-open:scale-100 group-open:opacity-100 flex"
+          >
+            <NavLinks mobile />
           </div>
         </details>
       </nav>

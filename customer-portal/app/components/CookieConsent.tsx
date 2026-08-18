@@ -219,7 +219,7 @@ export default function CookieConsent({ country = null }: { country?: string | n
               <button
                 id="cookie-consent-all"
                 type="button"
-                className="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-bg transition-colors hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-panel"
+                className="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-panel"
               >
                 Accept all
               </button>

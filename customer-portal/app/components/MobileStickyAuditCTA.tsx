@@ -70,7 +70,7 @@ export default function MobileStickyAuditCTA() {
           <div className="flex items-center gap-3">
             <a
               href="/audit?utm_source=mobile-sticky&utm_medium=internal"
-              className="flex-1 rounded-xl bg-accent py-3 text-center text-sm font-semibold text-bg transition-colors hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+              className="flex-1 rounded-xl bg-accent py-3 text-center text-sm font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
             >
               Find My Conversion Leak, Free
             </a>
