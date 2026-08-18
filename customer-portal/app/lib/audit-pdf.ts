@@ -14,14 +14,14 @@ import PDFDocument from 'pdfkit'
 // ── Brand tokens ──────────────────────────────────────────────────────────
 const COLORS = {
   bg: '#0a0a0a',
-  accent: '#00c2a0',
+  accent: '#c7ff2f',
   white: '#ffffff',
   fg: '#e5e7eb',
   muted: '#6b7280',
   border: '#1f2937',
   fail: '#ef4444',
   warn: '#f59e0b',
-  pass: '#00c2a0',
+  pass: '#c7ff2f',
   dark: '#111827',
 }
 

@@ -242,7 +242,7 @@ function CompetitorCard() {
         </div>
         {yourScore !== null && (
           <div className="text-right">
-            <span className="text-4xl font-semibold tracking-[-0.05em] text-[#00c2a0]">{Math.round(yourScore)}</span>
+            <span className="text-4xl font-semibold tracking-[-0.05em] text-[#c7ff2f]">{Math.round(yourScore)}</span>
             <span className="ml-1 text-sm text-fg-dim">/100 · you</span>
           </div>
         )}
@@ -251,7 +251,7 @@ function CompetitorCard() {
       {competitors.length === 0 ? (
         <div className="mt-4">
           <p className="text-sm text-fg-muted">Track up to 3 competitor pages and see how your score stacks up.</p>
-          <a href="/workspace?tab=settings" className="mt-2 inline-block text-sm font-semibold text-[#00c2a0] hover:underline">
+          <a href="/workspace?tab=settings" className="mt-2 inline-block text-sm font-semibold text-[#c7ff2f] hover:underline">
             Add competitors in Settings →
           </a>
         </div>
@@ -312,7 +312,7 @@ export function AuditsView({ audits }: { audits: WorkspaceAudit[] }) {
         </p>
         <a
           href="/audit?utm_source=workspace&utm_medium=internal"
-          className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
+          className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
         >
           Run first audit
         </a>
@@ -393,7 +393,7 @@ export function ProjectsView({ audits }: { audits: WorkspaceAudit[] }) {
         <p className="text-fg-muted mb-6">Audited pages group into projects by domain automatically.</p>
         <a
           href="/audit?utm_source=workspace&utm_medium=internal"
-          className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
+          className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
         >
           Run first audit
         </a>
@@ -428,7 +428,7 @@ export function ProjectsView({ audits }: { audits: WorkspaceAudit[] }) {
           </ul>
           <a
             href={`/audit?url=${encodeURIComponent(project.latest.url)}`}
-            className="text-sm text-accent hover:text-accent-light"
+            className="text-sm text-accent hover:text-fg"
           >
             Run follow-up →
           </a>

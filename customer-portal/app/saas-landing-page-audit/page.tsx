@@ -197,7 +197,7 @@ export default function SaasAuditPage() {
                   <p className="text-xs font-semibold text-fg-muted mb-1">{t.name}</p>
                   <p className="font-mono text-sm text-fg mb-2">{t.score}</p>
                   <p className="text-xs text-fg-muted leading-5">{t.finding}</p>
-                  <p className="mt-3 text-xs font-semibold text-accent group-hover:text-accent-light transition-colors">View full report →</p>
+                  <p className="mt-3 text-xs font-semibold text-accent group-hover:text-fg transition-colors">View full report →</p>
                 </Link>
               ))}
             </div>
@@ -241,7 +241,7 @@ export default function SaasAuditPage() {
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors text-base"
+              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-base"
             >
               Run Free SaaS Audit &rarr;
             </Link>
@@ -260,6 +260,16 @@ export default function SaasAuditPage() {
             </div>
           </section>
 
+
+          <RelatedContent
+            heading="Related resources"
+            items={[
+              { href: '/ecommerce-landing-page-audit', label: 'Ecommerce landing page audit', type: 'audit-type' },
+            { href: '/landing-page-message-match', label: 'Message match audit', type: 'audit-type' },
+            { href: '/landing-page-cta-audit', label: 'CTA audit', type: 'audit-type' },
+            { href: '/audit', label: 'Get your free audit', type: 'cta' }
+            ]}
+          />
 
         </article>
       </main>

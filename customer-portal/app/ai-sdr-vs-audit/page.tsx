@@ -20,7 +20,7 @@ export default function AiSdrVsAuditPage() {
         <div className="max-w-[720px] mx-auto text-center">
           <h1 className="text-[clamp(2rem,5vw,3.2rem)] font-black leading-tight text-fg mb-5">
             You Don't Need an AI SDR.<br />
-            You Need a <span className="text-accent-light">Measured Landing-Page Baseline.</span>
+            You Need a <span className="text-accent/80">Measured Landing-Page Baseline.</span>
           </h1>
           <p className="text-lg text-fg-muted max-w-[600px] mx-auto mb-8">
             More outbound volume cannot establish whether the landing page receiving that traffic
@@ -184,7 +184,7 @@ export default function AiSdrVsAuditPage() {
         <p className="mb-8"><strong>Start with the landing page.</strong> It is an inspectable prerequisite for the traffic an AI SDR would generate.</p>
 
         {/* CTA Section */}
-        <div className="bg-bg-panel shadow-glow border border-border rounded-2xl py-12 px-10 text-center">
+        <div className="bg-bg-panel border border-border rounded-2xl py-12 px-10 text-center">
           <h3 className="text-2xl font-bold text-fg mb-3">
             Run your free landing page audit
           </h3>
@@ -193,10 +193,10 @@ export default function AiSdrVsAuditPage() {
             and service load.
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-4">
-            <a href="/audit?utm_source=content&utm_medium=organic-content" className="inline-flex items-center gap-2 bg-accent hover:bg-accent-light text-bg font-bold py-4 px-9 rounded-lg transition-colors">
+            <a href="/audit?utm_source=content&utm_medium=organic-content" className="inline-flex items-center gap-2 bg-accent hover:opacity-85 hover:bg-accent text-bg font-bold py-4 px-9 rounded-lg transition-colors">
               Run free audit →
             </a>
-            <a href="/learning-centre/landing-page-not-converting" className="inline-flex items-center gap-2 bg-transparent border border-border hover:border-accent-light text-fg-muted hover:text-fg font-semibold py-4 px-6 rounded-lg transition-colors">
+            <a href="/learning-centre/landing-page-not-converting" className="inline-flex items-center gap-2 bg-transparent border border-border hover:border-accent/60 text-fg-muted hover:text-fg font-semibold py-4 px-6 rounded-lg transition-colors">
               Read the full guide
             </a>
           </div>
@@ -217,6 +217,12 @@ export default function AiSdrVsAuditPage() {
           </a>{' '}
           (June 17, 2026).
         </p>
+        <RelatedContent heading="Related resources" items={[
+            { href: '/best-landing-page-audit-tools', label: 'Best audit tools compared', type: 'tool' },
+          { href: '/what-is-landing-page-audit', label: 'What is an audit?', type: 'guide' },
+          { href: '/audit', label: 'Get your free audit', type: 'cta' }
+          ]} />
+
       </main>
     </div>
   )

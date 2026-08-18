@@ -125,7 +125,7 @@ export default async function PricingGuidePage({
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/audit?utm_source=pricing-guide&utm_medium=organic-content"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
             >
               Audit Your Page Free →
             </Link>

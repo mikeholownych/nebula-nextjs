@@ -307,7 +307,7 @@ export default function LabClient() {
                 <button
                   type="submit"
                   disabled={loading || !url.trim()}
-                  className="rounded-xl bg-accent px-7 py-3 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors disabled:opacity-50"
+                  className="rounded-xl bg-accent px-7 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors disabled:opacity-50"
                 >
                   {loading ? 'Running…' : 'Check All Components'}
                 </button>
@@ -352,7 +352,7 @@ export default function LabClient() {
                 </p>
                 <Link
                   href="/workspace"
-                  className="mt-3 inline-block rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
+                  className="mt-3 inline-block rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
                 >
                   Open workspace →
                 </Link>
@@ -396,7 +396,7 @@ export default function LabClient() {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="mt-3 rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors disabled:opacity-50"
+                  className="mt-3 rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors disabled:opacity-50"
                 >
                   {saving ? 'Saving…' : 'Save experiment'}
                 </button>

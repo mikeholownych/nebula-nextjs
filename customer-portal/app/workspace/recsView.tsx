@@ -105,10 +105,10 @@ function FindingsSummary({ detail }: { detail: AuditDetail }) {
 
       {/* Quick wins card */}
       {quickWins.length > 0 && (
-        <div className="rounded-xl border border-[#00c2a0]/30 bg-[#00c2a0]/5 p-5">
+        <div className="rounded-xl border border-[#c7ff2f]/30 bg-[#c7ff2f]/5 p-5">
           <div className="flex items-center gap-3 mb-4">
             <h3 className="text-sm font-semibold text-fg">Quick Wins</h3>
-            <span className="rounded-full bg-[#00c2a0] px-2.5 py-0.5 text-[11px] font-semibold text-bg">
+            <span className="rounded-full bg-[#c7ff2f] px-2.5 py-0.5 text-[11px] font-semibold text-bg">
               {quickWins.length}
             </span>
           </div>
@@ -117,7 +117,7 @@ function FindingsSummary({ detail }: { detail: AuditDetail }) {
               <li key={f.key} className="flex items-start justify-between gap-3">
                 <p className="text-sm text-fg">{f.label}</p>
                 <div className="flex shrink-0 items-center gap-1.5">
-                  <span className="rounded-full border border-[#00c2a0]/40 bg-[#00c2a0]/10 px-2 py-0.5 text-[10px] font-medium text-[#00a88a]">
+                  <span className="rounded-full border border-[#c7ff2f]/40 bg-[#c7ff2f]/10 px-2 py-0.5 text-[10px] font-medium text-[#00a88a]">
                     Quick win
                   </span>
                   <span className="rounded-full border border-amber-500/40 bg-amber-500/10 px-2 py-0.5 text-[10px] font-medium text-amber-600">
@@ -240,7 +240,7 @@ export default function RecsView({
           </p>
           <a
             href="/audit?utm_source=workspace&utm_medium=internal"
-            className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
+            className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
           >
             Run first audit
           </a>
@@ -341,7 +341,7 @@ export default function RecsView({
                         </button>
                         <a
                           href={`/audit/${rec.audit_id}/results`}
-                          className="ml-auto text-xs text-accent hover:text-accent-light"
+                          className="ml-auto text-xs text-accent hover:text-fg"
                         >
                           view audit
                         </a>

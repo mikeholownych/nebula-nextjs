@@ -130,7 +130,7 @@ export default function ReportView({ audits }: { audits: WorkspaceAudit[] }) {
           </button>
           <button
             onClick={() => window.print()}
-            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
+            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
           >
             Print / Save as PDF
           </button>

@@ -136,7 +136,7 @@ export default function MistakesChecklistPage() {
 
               <button
                 type="submit"
-                className="w-full rounded-lg bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light"
+                className="w-full rounded-lg bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
               >
                 Download Checklist (Free)
               </button>
@@ -162,6 +162,16 @@ export default function MistakesChecklistPage() {
           </Link>
         </section>
       </div>
+      <RelatedContent
+        heading="Related resources"
+        items={[
+          { href: '/why-is-my-landing-page-not-converting', label: "Why pages don't convert", type: 'guide' },
+        { href: '/landing-page-cta-audit', label: 'CTA audit', type: 'audit-type' },
+        { href: '/landing-page-message-match', label: 'Message match audit', type: 'audit-type' },
+        { href: '/audit', label: 'Get your free audit', type: 'cta' }
+        ]}
+      />
+
     </main>
   )
 }

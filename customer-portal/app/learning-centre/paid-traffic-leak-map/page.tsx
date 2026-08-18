@@ -225,7 +225,7 @@ export default function PaidTrafficLeakMapPage() {
 
                 <Link
                   href={leak.relatedHref}
-                  className="text-sm font-semibold text-accent hover:text-accent-light transition-colors"
+                  className="text-sm font-semibold text-accent hover:text-fg transition-colors"
                 >
                   {leak.relatedLabel}
                 </Link>
@@ -286,7 +286,7 @@ export default function PaidTrafficLeakMapPage() {
             <div className="mt-6 flex flex-wrap justify-center gap-4">
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-                className="inline-flex rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors"
+                className="inline-flex rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
               >
                 Run the free audit
               </Link>
@@ -302,7 +302,7 @@ export default function PaidTrafficLeakMapPage() {
           <div className="mt-10">
             <Link
               href="/learning-centre"
-              className="text-sm font-semibold text-accent hover:text-accent-light transition-colors"
+              className="text-sm font-semibold text-accent hover:text-fg transition-colors"
             >
               ← Back to Learning Centre
             </Link>

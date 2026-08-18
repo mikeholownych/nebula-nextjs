@@ -168,13 +168,13 @@ export default function SocialProofLandingPage() {
           </h3>
           <Link
             href="/learning-centre/landing-page-not-converting"
-            className="block text-accent hover:text-accent-light text-[0.95rem] mb-2 transition-colors"
+            className="block text-accent hover:text-fg text-[0.95rem] mb-2 transition-colors"
           >
             Why Your Landing Page Isn't Converting
           </Link>
           <Link
             href="/what-is-landing-page-audit"
-            className="block text-accent hover:text-accent-light text-[0.95rem] transition-colors"
+            className="block text-accent hover:text-fg text-[0.95rem] transition-colors"
           >
             What Is a Landing Page Audit?
           </Link>
@@ -190,7 +190,7 @@ export default function SocialProofLandingPage() {
           </p>
           <Link
             href="/audit?utm_source=content&utm_medium=organic-content"
-            className="inline-block bg-accent text-bg font-bold text-base px-8 py-3.5 rounded-lg hover:bg-accent-light transition-colors"
+            className="inline-block bg-accent text-bg font-bold text-base px-8 py-3.5 rounded-lg hover:opacity-85 hover:bg-accent transition-colors"
           >
             Run free audit →
           </Link>
@@ -198,6 +198,15 @@ export default function SocialProofLandingPage() {
             Free audit live · results in under 2 minutes
           </p>
         </div>
+
+        <RelatedContent
+          heading="Related resources"
+          items={[
+            { href: '/landing-page-trust-signals', label: 'Trust signals audit', type: 'audit-type' },
+          { href: '/ecommerce-landing-page-audit', label: 'Ecommerce landing page audit', type: 'audit-type' },
+          { href: '/audit', label: 'Get your free audit', type: 'cta' }
+          ]}
+        />
 
       </main>
 

@@ -20,8 +20,8 @@ function passingBadgeSvg(data: BadgeData): string {
 <rect width="300" height="86" rx="10" fill="#0a0a0a" stroke="#1f1f1f"/>
 <text x="16" y="22" font-family="monospace" font-size="10" letter-spacing="1.5" fill="#9e9e9e">NEBULA VERIFIED</text>
 <text x="16" y="52" font-family="monospace" font-size="22" font-weight="700" fill="#ffffff">${before}</text>
-<text x="66" y="52" font-family="monospace" font-size="16" fill="#00c2a0">&#8594;</text>
-<text x="90" y="52" font-family="monospace" font-size="22" font-weight="700" fill="#00c2a0">${after}</text>
+<text x="66" y="52" font-family="monospace" font-size="16" fill="#c7ff2f">&#8594;</text>
+<text x="90" y="52" font-family="monospace" font-size="22" font-weight="700" fill="#c7ff2f">${after}</text>
 <text x="16" y="72" font-family="monospace" font-size="10" fill="#7c7c7c">#${data.serial_number} &#183; ${data.earned_year}</text>
 </svg>`
 }

@@ -106,7 +106,7 @@ export default function DiffView({ audits }: { audits: WorkspaceAudit[] }) {
         </p>
         <a
           href="/audit?utm_source=workspace&utm_medium=internal"
-          className="inline-flex rounded-lg bg-[#00c2a0] px-5 py-2.5 text-sm font-semibold text-bg hover:bg-[#00a88a] transition-colors"
+          className="inline-flex rounded-lg bg-[#c7ff2f] px-5 py-2.5 text-sm font-semibold text-bg hover:bg-[#00a88a] transition-colors"
         >
           Run an audit →
         </a>
@@ -132,7 +132,7 @@ export default function DiffView({ audits }: { audits: WorkspaceAudit[] }) {
             <select
               value={auditA}
               onChange={(e) => setAuditA(e.target.value)}
-              className="w-full rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg focus:outline-none focus:ring-1 focus:ring-[#00c2a0]"
+              className="w-full rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg focus:outline-none focus:ring-1 focus:ring-[#c7ff2f]"
             >
               <option value="">Select audit…</option>
               {comparableAudits.map((a) => (
@@ -148,7 +148,7 @@ export default function DiffView({ audits }: { audits: WorkspaceAudit[] }) {
             <select
               value={auditB}
               onChange={(e) => setAuditB(e.target.value)}
-              className="w-full rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg focus:outline-none focus:ring-1 focus:ring-[#00c2a0]"
+              className="w-full rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg focus:outline-none focus:ring-1 focus:ring-[#c7ff2f]"
             >
               <option value="">Select audit…</option>
               {comparableAudits.map((a) => (
@@ -188,7 +188,7 @@ export default function DiffView({ audits }: { audits: WorkspaceAudit[] }) {
                 <p className="mt-1 text-xs text-fg-muted">After</p>
               </div>
               <div className="ml-4 text-center">
-                <p className={`text-2xl font-bold tabular-nums ${diff.score_delta > 0 ? 'text-[#00c2a0]' : diff.score_delta < 0 ? 'text-red-400' : 'text-fg-muted'}`}>
+                <p className={`text-2xl font-bold tabular-nums ${diff.score_delta > 0 ? 'text-[#c7ff2f]' : diff.score_delta < 0 ? 'text-red-400' : 'text-fg-muted'}`}>
                   {diff.score_delta > 0 ? '+' : ''}{Math.round(diff.score_delta * 10)}
                 </p>
                 <p className="mt-1 text-xs text-fg-muted">Delta</p>
@@ -202,11 +202,11 @@ export default function DiffView({ audits }: { audits: WorkspaceAudit[] }) {
 
             {diff.findings_removed.length > 0 && (
               <div className="mb-4">
-                <p className="mb-2 text-xs font-semibold text-[#00c2a0]">✓ Resolved ({diff.findings_removed.length})</p>
+                <p className="mb-2 text-xs font-semibold text-[#c7ff2f]">✓ Resolved ({diff.findings_removed.length})</p>
                 <div className="space-y-1">
                   {diff.findings_removed.map((f, i) => (
-                    <div key={i} className="flex items-center gap-2 rounded-lg bg-[#00c2a0]/5 px-3 py-2">
-                      <span className="text-sm text-[#00c2a0] line-through opacity-70">{f.label || f.key || 'Unknown finding'}</span>
+                    <div key={i} className="flex items-center gap-2 rounded-lg bg-[#c7ff2f]/5 px-3 py-2">
+                      <span className="text-sm text-[#c7ff2f] line-through opacity-70">{f.label || f.key || 'Unknown finding'}</span>
                     </div>
                   ))}
                 </div>

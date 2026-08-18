@@ -22,7 +22,7 @@ export function CopyPanel({ value, label, filename }: { value: string; label: st
         <span className="font-mono text-[10px] uppercase tracking-widest text-fg-muted/60">{filename || label}</span>
         <button
           onClick={handleCopy}
-          className="inline-flex items-center gap-1.5 font-mono text-xs text-accent hover:text-accent-light transition-colors px-2 py-1 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+          className="inline-flex items-center gap-1.5 font-mono text-xs text-accent hover:text-fg transition-colors px-2 py-1 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
           aria-label={`Copy ${label}`}
         >
           {copied ? (

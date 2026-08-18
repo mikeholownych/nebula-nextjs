@@ -64,7 +64,7 @@ export default function LearningCentreIndex() {
           <div className="mt-8 flex flex-wrap gap-4">
             <a
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors"
+              className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
             >
               Run the free audit
             </a>
@@ -92,7 +92,7 @@ export default function LearningCentreIndex() {
           </p>
           <a
             href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-            className="mt-8 inline-flex rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors"
+            className="mt-8 inline-flex rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
           >
             Run the free audit →
           </a>

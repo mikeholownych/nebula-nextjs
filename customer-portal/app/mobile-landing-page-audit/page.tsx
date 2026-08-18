@@ -215,7 +215,7 @@ export default function MobileAuditPage() {
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors text-base"
+              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-base"
             >
               Run Free Mobile Audit &rarr;
             </Link>
@@ -234,6 +234,16 @@ export default function MobileAuditPage() {
             </div>
           </section>
 
+
+          <RelatedContent
+            heading="Related resources"
+            items={[
+              { href: '/page-speed-conversion', label: 'Page speed and conversion', type: 'guide' },
+            { href: '/mobile-landing-page-optimization', label: 'Mobile optimization guide', type: 'guide' },
+            { href: '/ecommerce-landing-page-audit', label: 'Ecommerce landing page audit', type: 'audit-type' },
+            { href: '/audit', label: 'Get your free audit', type: 'cta' }
+            ]}
+          />
 
         </article>
       </main>

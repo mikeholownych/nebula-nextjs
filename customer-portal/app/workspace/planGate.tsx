@@ -96,7 +96,7 @@ export function LockedTab({ tabLabel, requiredPlan, currentPlan }: LockedTabProp
       <div className="flex flex-col items-center gap-3 sm:flex-row">
         <Link
           href="/pricing"
-          className="rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-bg transition-colors hover:bg-accent-light"
+          className="rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
         >
           See plans →
         </Link>

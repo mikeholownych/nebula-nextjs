@@ -112,7 +112,7 @@ function AuditEvent({ ev }: { ev: TimelineEvent }) {
             Audit completed
           </span>
           {ev.grade && (
-            <span className="text-xs font-bold bg-accent-dim text-accent-light px-1.5 py-0.5 rounded">
+            <span className="text-xs font-bold bg-accent-dim text-accent/80 px-1.5 py-0.5 rounded">
               Grade {ev.grade}
             </span>
           )}

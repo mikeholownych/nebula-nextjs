@@ -31,7 +31,7 @@ export default function GhostVariantAbTestPage() {
       <div className="mx-auto max-w-3xl px-6 py-14">
         <Link
           href="/learning-centre"
-          className="text-sm font-semibold text-accent hover:text-accent-light transition-colors"
+          className="text-sm font-semibold text-accent hover:text-fg transition-colors"
         >
           ← Learning Centre
         </Link>
@@ -272,7 +272,7 @@ export default function GhostVariantAbTestPage() {
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-light"
+              className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:opacity-85 hover:bg-accent"
             >
               Run Your Free Audit →
             </Link>
@@ -292,7 +292,7 @@ export default function GhostVariantAbTestPage() {
             <li>
               <Link
                 href="/learning-centre/landing-page-not-converting"
-                className="text-sm font-semibold text-accent hover:text-accent-light transition-colors"
+                className="text-sm font-semibold text-accent hover:text-fg transition-colors"
               >
                 Why Your Landing Page Isn't Converting →
               </Link>
@@ -304,7 +304,7 @@ export default function GhostVariantAbTestPage() {
             <li>
               <Link
                 href="/learning-centre/landing-page-load-time-slow"
-                className="text-sm font-semibold text-accent hover:text-accent-light transition-colors"
+                className="text-sm font-semibold text-accent hover:text-fg transition-colors"
               >
                 Landing Page Load Time Is Slow →
               </Link>
@@ -316,7 +316,7 @@ export default function GhostVariantAbTestPage() {
             <li>
               <Link
                 href="/learning-centre/mobile-landing-page-leaks"
-                className="text-sm font-semibold text-accent hover:text-accent-light transition-colors"
+                className="text-sm font-semibold text-accent hover:text-fg transition-colors"
               >
                 Mobile Landing Page Leaks →
               </Link>
@@ -328,7 +328,7 @@ export default function GhostVariantAbTestPage() {
             <li>
               <Link
                 href="/learning-centre/traffic-but-no-form-fills"
-                className="text-sm font-semibold text-accent hover:text-accent-light transition-colors"
+                className="text-sm font-semibold text-accent hover:text-fg transition-colors"
               >
                 Traffic But No Form Fills →
               </Link>

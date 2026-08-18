@@ -107,7 +107,7 @@ export default function LandingPageConversionRateBenchmark() {
         <div className="mx-auto max-w-3xl px-6 py-14">
           <Link
             href="/learning-centre"
-            className="text-sm font-semibold text-accent hover:text-accent-light transition-colors"
+            className="text-sm font-semibold text-accent hover:text-fg transition-colors"
           >
             Back to Learning Centre
           </Link>
@@ -139,7 +139,7 @@ export default function LandingPageConversionRateBenchmark() {
               paid search conversion rates is{' '}
               <a
                 href="https://www.wordstream.com/blog/2026-google-ads-benchmarks"
-                className="text-accent hover:text-accent-light underline"
+                className="text-accent hover:text-fg underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -315,7 +315,7 @@ export default function LandingPageConversionRateBenchmark() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors"
+                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
               >
                 Run the free audit
               </Link>

@@ -21,7 +21,7 @@ export default function TiktokAdsNotConvertingPage() {
     <main id="main-content" className="min-h-screen bg-bg pt-24">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div className="mx-auto max-w-3xl px-6 py-14">
-        <Link href="/learning-centre" className="text-sm font-semibold text-accent hover:text-accent-light transition-colors">
+        <Link href="/learning-centre" className="text-sm font-semibold text-accent hover:text-fg transition-colors">
           ← Learning Centre
         </Link>
 
@@ -113,7 +113,7 @@ export default function TiktokAdsNotConvertingPage() {
             Run the free Nebula audit to see exactly where your page breaks the chain from click to conversion.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">
+            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">
               Run the free audit
             </Link>
             <Link href="/learning-centre" className="inline-flex rounded-xl border border-accent px-6 py-3 font-semibold text-accent hover:bg-accent-dim transition-colors">
@@ -126,16 +126,16 @@ export default function TiktokAdsNotConvertingPage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
           <div className="space-y-1">
-            <Link href="/learning-centre/mobile-landing-page-leaks" className="block py-2 text-accent hover:text-accent-light transition-colors font-medium">
+            <Link href="/learning-centre/mobile-landing-page-leaks" className="block py-2 text-accent hover:text-fg transition-colors font-medium">
               → Mobile Landing Page Leaks
             </Link>
-            <Link href="/learning-centre/message-match-checklist" className="block py-2 text-accent hover:text-accent-light transition-colors font-medium">
+            <Link href="/learning-centre/message-match-checklist" className="block py-2 text-accent hover:text-fg transition-colors font-medium">
               → Message Match Checklist
             </Link>
-            <Link href="/learning-centre/proof-before-cta" className="block py-2 text-accent hover:text-accent-light transition-colors font-medium">
+            <Link href="/learning-centre/proof-before-cta" className="block py-2 text-accent hover:text-fg transition-colors font-medium">
               → Proof Before CTA: The Simple Fix Most Landing Pages Miss
             </Link>
-            <Link href="/learning-centre/landing-page-not-converting" className="block py-2 text-accent hover:text-accent-light transition-colors font-medium">
+            <Link href="/learning-centre/landing-page-not-converting" className="block py-2 text-accent hover:text-fg transition-colors font-medium">
               → Landing Page Not Converting
             </Link>
           </div>

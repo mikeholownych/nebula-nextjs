@@ -206,6 +206,16 @@ export default function WhatIsLandingPageAudit() {
             Get Free Audit →
           </Link>
         </section>
+        <RelatedContent
+          heading="Related resources"
+          items={[
+            { href: '/best-landing-page-audit-tools', label: 'Best audit tools compared', type: 'tool' },
+          { href: '/why-is-my-landing-page-not-converting', label: "Why pages don't convert", type: 'guide' },
+          { href: '/saas-landing-page-audit', label: 'SaaS audit', type: 'audit-type' },
+          { href: '/audit', label: 'Get your free audit', type: 'cta' }
+          ]}
+        />
+
       </article>
       </main>
     </>

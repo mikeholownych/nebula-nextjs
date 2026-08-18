@@ -106,7 +106,7 @@ export default function AboveFoldLandingPagePage() {
         <div className="mx-auto max-w-3xl px-6 py-14">
           <Link
             href="/learning-centre"
-            className="text-sm font-semibold text-accent hover:text-accent-light transition-colors"
+            className="text-sm font-semibold text-accent hover:text-fg transition-colors"
           >
             Back to Learning Centre
           </Link>
@@ -298,7 +298,7 @@ export default function AboveFoldLandingPagePage() {
               study&apos;s full methodology is available at{' '}
               <a
                 href="https://www.thinkwithgoogle.com/_qs/documents/9757/Milliseconds_Make_Millions_report_hQYAbZJ.pdf"
-                className="text-accent hover:text-accent-light underline"
+                className="text-accent hover:text-fg underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -310,7 +310,7 @@ export default function AboveFoldLandingPagePage() {
               According to the{' '}
               <a
                 href="https://almanac.httparchive.org/en/2024/performance"
-                className="text-accent hover:text-accent-light underline"
+                className="text-accent hover:text-fg underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -340,7 +340,7 @@ export default function AboveFoldLandingPagePage() {
             </p>
             <Link
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="inline-flex rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
+              className="inline-flex rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
             >
               Run the free audit
             </Link>
@@ -381,7 +381,7 @@ export default function AboveFoldLandingPagePage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors"
+                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
               >
                 Run the free audit
               </Link>

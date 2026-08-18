@@ -107,7 +107,7 @@ export default function ScorecardClient() {
           <a
             href={AUDIT_HREF}
             onClick={handleAuditClick}
-            className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 text-center font-semibold text-bg transition hover:bg-accent-light"
+            className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 text-center font-semibold text-bg transition hover:opacity-85 hover:bg-accent"
           >
             Run the free evidence-backed audit
           </a>

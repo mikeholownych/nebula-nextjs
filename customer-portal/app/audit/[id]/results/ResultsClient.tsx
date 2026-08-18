@@ -138,7 +138,7 @@ function FixPreview({ finding, unlocked }: { finding: Finding; unlocked: boolean
             <a
               href="#unlock"
               onClick={() => posthog.capture('fix_preview_unlock_clicked', { finding_key: finding.key })}
-              className="rounded-lg bg-accent px-4 py-2 text-xs font-semibold text-bg shadow-sm transition-colors hover:bg-accent-light"
+              className="rounded-lg bg-accent px-4 py-2 text-xs font-semibold text-bg shadow-sm transition-colors hover:opacity-85 hover:bg-accent"
             >
               Unlock this audit first
             </a>
@@ -607,7 +607,7 @@ function FixFirstQueue({ findings, auditId, onGoToRemediation }: { findings: Fin
               <div className="flex items-center gap-4 md:flex-col md:items-end">
                 <span className="text-xs tabular-nums text-fg-muted">Impact {finding.impact}/10</span>
                 <span className="text-xs tabular-nums text-fg-muted">Effort {finding.effort}/10</span>
-                <a href={`#${findingAnchor(finding)}`} className="text-sm font-semibold text-accent hover:text-accent-light">View evidence ↓</a>
+                <a href={`#${findingAnchor(finding)}`} className="text-sm font-semibold text-accent hover:text-fg">View evidence ↓</a>
               </div>
             </li>
           ))}
@@ -939,7 +939,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                     <button
                       type="submit"
                       disabled={!emailForm.email || sendingEmail}
-                      className="shrink-0 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-bg transition-all hover:bg-accent-light active:scale-[0.98] disabled:opacity-60"
+                      className="shrink-0 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-bg transition-all hover:opacity-85 hover:bg-accent active:scale-[0.98] disabled:opacity-60"
                     >
                       {sendingEmail ? 'Unlocking…' : 'Unlock full report →'}
                     </button>
@@ -1173,7 +1173,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
               <button
                 onClick={sendEmail}
                 disabled={!emailForm.email || sendingEmail}
-                className="w-full rounded-xl bg-accent px-6 py-4 font-semibold text-bg transition-colors hover:bg-accent-light disabled:opacity-50"
+                className="w-full rounded-xl bg-accent px-6 py-4 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent disabled:opacity-50"
               >
                 {sendingEmail ? 'Unlocking...' : 'Unlock Full Report'}
               </button>

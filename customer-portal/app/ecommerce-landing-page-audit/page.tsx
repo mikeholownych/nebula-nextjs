@@ -215,7 +215,7 @@ export default function EcommerceAuditPage() {
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors text-base"
+              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-base"
             >
               Run Free Ecommerce Audit &rarr;
             </Link>
@@ -234,6 +234,16 @@ export default function EcommerceAuditPage() {
             </div>
           </section>
 
+
+          <RelatedContent
+            heading="Related resources"
+            items={[
+              { href: '/saas-landing-page-audit', label: 'SaaS landing page audit', type: 'audit-type' },
+            { href: '/mobile-landing-page-audit', label: 'Mobile landing page audit', type: 'audit-type' },
+            { href: '/landing-page-trust-signals', label: 'Trust signals that convert', type: 'guide' },
+            { href: '/audit', label: 'Get your free audit', type: 'cta' }
+            ]}
+          />
 
         </article>
       </main>

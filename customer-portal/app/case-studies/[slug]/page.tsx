@@ -180,7 +180,7 @@ function RichCaseStudyPage({ study }: { study: CaseStudy }) {
           <p className="mt-4 text-fg-muted">Run the free audit. Find your leaks. Fix them.</p>
           <Link
             href="/audit?utm_source=content&utm_medium=organic-content"
-            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
           >
             Run Free Audit →
           </Link>
@@ -261,7 +261,7 @@ export default async function CaseStudyPage({ params }: Props) {
           <p className="mt-4 text-fg-muted">Run the free audit. Find your leaks. Fix them.</p>
           <Link
             href="/audit?utm_source=content&utm_medium=organic-content"
-            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
           >
             Run Free Audit →
           </Link>

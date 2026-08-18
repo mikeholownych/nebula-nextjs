@@ -40,7 +40,7 @@ function SignalMark({ size = 32 }: { size?: number }) {
                   width: dot,
                   height: dot,
                   borderRadius: '50%',
-                  background: state === 'pass' ? '#00c2a0' : 'rgba(158,158,158,0.25)',
+                  background: state === 'pass' ? '#c7ff2f' : 'rgba(158,158,158,0.25)',
                 }}
               />
             )
@@ -107,7 +107,7 @@ export default function OpenGraphImage() {
           >
             <div style={{ display: 'flex' }}>Your ads are fine.</div>
             <div style={{ display: 'flex' }}>
-              Your landing page has&nbsp;<span style={{ color: '#00c2a0' }}>a leak.</span>
+              Your landing page has&nbsp;<span style={{ color: '#c7ff2f' }}>a leak.</span>
             </div>
           </div>
           <div style={{ display: 'flex', marginTop: 24, color: '#9e9e9e', fontSize: 25 }}>
@@ -127,7 +127,7 @@ export default function OpenGraphImage() {
           }}
         >
           <div style={{ display: 'flex' }}>9-signal audit → One-Leak Repair Sprint</div>
-          <div style={{ display: 'flex', color: '#00c2a0', fontWeight: 650 }}>nebulacomponents.com</div>
+          <div style={{ display: 'flex', color: '#c7ff2f', fontWeight: 650 }}>nebulacomponents.com</div>
         </div>
       </div>
     ),

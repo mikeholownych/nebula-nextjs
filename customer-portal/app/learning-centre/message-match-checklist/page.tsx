@@ -213,7 +213,7 @@ export default function MessageMatchChecklistPage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light"
+                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
               >
                 Run the free audit
               </Link>
@@ -269,7 +269,7 @@ export default function MessageMatchChecklistPage() {
         <div className="mt-10">
           <Link
             href="/learning-centre"
-            className="text-sm font-semibold text-accent transition-colors hover:text-accent-light"
+            className="text-sm font-semibold text-accent transition-colors hover:text-fg"
           >
             ← Back to Learning Centre
           </Link>

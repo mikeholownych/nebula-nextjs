@@ -103,7 +103,7 @@ export default function CitableReleasesPage() {
             <ul className="mt-5 grid gap-3 md:grid-cols-3">
               {citableControlledAssets.map((asset) => (
                 <li key={asset.href} className="rounded-xl border border-border bg-bg-panel p-5">
-                  <Link href={asset.href} className="font-semibold text-accent hover:text-accent-light">
+                  <Link href={asset.href} className="font-semibold text-accent hover:text-fg">
                     {asset.label}
                   </Link>
                   <p className="mt-3 text-sm leading-relaxed text-fg-muted">{asset.detail}</p>

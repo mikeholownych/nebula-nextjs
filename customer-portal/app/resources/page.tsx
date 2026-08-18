@@ -99,7 +99,7 @@ export default function ResourcesPage() {
               into conversion diagnostics, repairs, and follow-up decisions.
             </p>
             <p>
-              <Link href="/resources/citable" className="font-semibold text-accent hover:text-accent-light transition-colors">
+              <Link href="/resources/citable" className="font-semibold text-accent hover:text-fg transition-colors">
                 Read the full Citable documentation →
               </Link>
             </p>

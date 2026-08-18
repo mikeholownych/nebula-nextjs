@@ -195,7 +195,7 @@ export default function MonitoringView({ email }: { email: string }) {
           <button
             onClick={addMonitor}
             disabled={busy}
-            className="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light disabled:opacity-50"
+            className="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent disabled:opacity-50"
           >
             {busy ? 'Adding…' : 'Add monitor'}
           </button>

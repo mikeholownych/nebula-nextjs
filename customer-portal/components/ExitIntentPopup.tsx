@@ -166,7 +166,7 @@ export default function ExitIntentPopup() {
             <div className="flex flex-col items-center gap-4 py-4 text-center">
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-accent/15">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                  <path d="M5 13l4 4L19 7" stroke="#00c2a0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M5 13l4 4L19 7" stroke="#c7ff2f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <h2 className="text-xl font-bold text-fg">On its way.</h2>
@@ -181,8 +181,8 @@ export default function ExitIntentPopup() {
               <div className="mb-5 flex items-center gap-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/15">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="#00c2a0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M9 12h6M9 16h4" stroke="#00c2a0" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="#c7ff2f" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M9 12h6M9 16h4" stroke="#c7ff2f" strokeWidth="1.5" strokeLinecap="round"/>
                   </svg>
                 </div>
                 <span className="text-xs font-semibold uppercase tracking-widest text-accent">
@@ -220,7 +220,7 @@ export default function ExitIntentPopup() {
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-bg transition-all hover:bg-accent-light active:scale-[0.98] disabled:opacity-60"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-bg transition-all hover:opacity-85 hover:bg-accent active:scale-[0.98] disabled:opacity-60"
                 >
                   {status === 'loading' ? (
                     <>

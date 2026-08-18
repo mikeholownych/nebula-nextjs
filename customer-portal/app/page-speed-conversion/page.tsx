@@ -215,7 +215,7 @@ export default function PageSpeedConversionPage() {
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors text-base"
+              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-base"
             >
               Run Free Speed Audit &rarr;
             </Link>
@@ -235,6 +235,16 @@ export default function PageSpeedConversionPage() {
             </div>
           </section>
 
+
+          <RelatedContent
+            heading="Related resources"
+            items={[
+              { href: '/mobile-landing-page-audit', label: 'Mobile landing page audit', type: 'audit-type' },
+            { href: '/mobile-landing-page-optimization', label: 'Mobile optimization guide', type: 'guide' },
+            { href: '/best-landing-page-audit-tools', label: 'Best audit tools compared', type: 'tool' },
+            { href: '/audit', label: 'Get your free audit', type: 'cta' }
+            ]}
+          />
 
         </article>
       </main>

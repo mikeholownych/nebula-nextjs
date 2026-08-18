@@ -62,7 +62,7 @@ export default function NewsletterConfirmedPage() {
 
         <p className="mt-8 text-center text-sm text-fg-muted">
           Changed your mind?{' '}
-          <Link href="/unsubscribe" className="text-accent underline underline-offset-4 hover:text-accent-light">
+          <Link href="/unsubscribe" className="text-accent underline underline-offset-4 hover:text-fg">
             Unsubscribe anytime
           </Link>
           .

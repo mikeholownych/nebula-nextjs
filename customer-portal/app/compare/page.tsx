@@ -35,7 +35,7 @@ export default function ComparePage() {
               className="block bg-bg-elevated border border-border rounded-lg p-6 hover:border-accent-dark transition-colors"
             >
               <div className="flex items-center justify-between mb-2">
-                <h2 className="text-xl font-bold text-accent-light">
+                <h2 className="text-xl font-bold text-accent/80">
                   vs {comparison.toolName}
                 </h2>
                 <span className="text-xs text-fg-dim border border-border rounded-full px-3 py-1">
@@ -55,7 +55,7 @@ export default function ComparePage() {
           </p>
           <a
             href="/audit?utm_source=content&utm_medium=organic-content"
-            className="inline-block rounded-lg bg-accent px-8 py-3 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
+            className="inline-block rounded-lg bg-accent px-8 py-3 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
           >
             Free Audit
           </a>

@@ -70,7 +70,7 @@ function PlanCard({
           onClick={() => onSubscribe(planKey)}
           className={`mt-6 inline-flex justify-center rounded-xl px-5 py-3 font-semibold transition-colors disabled:opacity-60 ${
             plan.highlighted
-              ? 'bg-accent text-bg hover:bg-accent-light'
+              ? 'bg-accent text-bg hover:opacity-85 hover:bg-accent'
               : 'border border-border text-fg hover:border-accent'
           }`}
         >

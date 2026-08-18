@@ -27,28 +27,28 @@ export default function AgencyPartnerPage() {
           <h2 className="text-xl font-semibold text-white mb-6">How it works</h2>
           <ol className="space-y-5 text-slate-300">
             <li className="flex gap-4">
-              <span className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-[#00c2a0]/10 text-[#00c2a0] text-sm font-bold">1</span>
+              <span className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-[#c7ff2f]/10 text-[#c7ff2f] text-sm font-bold">1</span>
               <div>
                 <span className="font-medium text-white">Purchase once</span> - $497, no recurring fees.
                 We provision your partner account in minutes.
               </div>
             </li>
             <li className="flex gap-4">
-              <span className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-[#00c2a0]/10 text-[#00c2a0] text-sm font-bold">2</span>
+              <span className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-[#c7ff2f]/10 text-[#c7ff2f] text-sm font-bold">2</span>
               <div>
                 <span className="font-medium text-white">Paste two lines of code</span> - the widget renders inside a shadow DOM,
                 styled to your dark or light preference, zero CSS conflicts.
               </div>
             </li>
             <li className="flex gap-4">
-              <span className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-[#00c2a0]/10 text-[#00c2a0] text-sm font-bold">3</span>
+              <span className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-[#c7ff2f]/10 text-[#c7ff2f] text-sm font-bold">3</span>
               <div>
                 <span className="font-medium text-white">Your visitors scan their page</span> - they get an instant score (0–10)
                 and top 3 conversion leaks. No signup required for the visitor.
               </div>
             </li>
             <li className="flex gap-4">
-              <span className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-[#00c2a0]/10 text-[#00c2a0] text-sm font-bold">4</span>
+              <span className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-[#c7ff2f]/10 text-[#c7ff2f] text-sm font-bold">4</span>
               <div>
                 <span className="font-medium text-white">You get the lead</span> - every audit is attributed to your partner ID.
                 Full report link carries your tracking. Upsell to your own services.
@@ -62,23 +62,23 @@ export default function AgencyPartnerPage() {
           <h2 className="text-xl font-semibold text-white mb-4">What you get</h2>
           <ul className="space-y-2 text-slate-300">
             <li className="flex items-start gap-2">
-              <span className="text-[#00c2a0] mt-1">✓</span>
+              <span className="text-[#c7ff2f] mt-1">✓</span>
               Embeddable widget (dark + light themes, works on any stack)
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#00c2a0] mt-1">✓</span>
+              <span className="text-[#c7ff2f] mt-1">✓</span>
               Full lead attribution - every scan shows in your dashboard
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#00c2a0] mt-1">✓</span>
+              <span className="text-[#c7ff2f] mt-1">✓</span>
               10 audits/hour rate limit (enough for organic traffic; upgradeable)
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#00c2a0] mt-1">✓</span>
+              <span className="text-[#c7ff2f] mt-1">✓</span>
               &ldquo;Powered by Nebula&rdquo; link - gives you a dofollow backlink from our domain
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#00c2a0] mt-1">✓</span>
+              <span className="text-[#c7ff2f] mt-1">✓</span>
               One-time purchase. No monthly fees. No per-scan charges.
             </li>
           </ul>
@@ -88,7 +88,7 @@ export default function AgencyPartnerPage() {
         <section className="mb-14">
           <a
             href="https://buy.stripe.com/aFa8wPc2o7YM9613Ro43S0d"
-            className="inline-block px-8 py-4 bg-[#00c2a0] text-[#0a0f1a] font-semibold rounded-lg hover:bg-[#00e0ba] transition-colors text-lg"
+            className="inline-block px-8 py-4 bg-[#c7ff2f] text-[#0a0f1a] font-semibold rounded-lg hover:bg-[#00e0ba] transition-colors text-lg"
           >
             Get the widget - $497
           </a>
@@ -144,7 +144,7 @@ export default function AgencyPartnerPage() {
         </section>
 
         <footer className="mt-16 text-sm text-slate-600">
-          <Link href="/" className="text-[#00c2a0] hover:underline">← Back to Nebula</Link>
+          <Link href="/" className="text-[#c7ff2f] hover:underline">← Back to Nebula</Link>
         </footer>
       </div>
     </main>

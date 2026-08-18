@@ -23,7 +23,7 @@ export default function CitationCopy() {
         <span className="text-[#9e9e9e] text-xs uppercase tracking-widest">Citation</span>
         <button
           onClick={handleCopy}
-          className="rounded border border-border px-3 py-1 text-xs text-[#9e9e9e] transition-colors hover:border-[#00c2a0] hover:text-[#00c2a0] active:scale-95"
+          className="rounded border border-border px-3 py-1 text-xs text-[#9e9e9e] transition-colors hover:border-[#c7ff2f] hover:text-[#c7ff2f] active:scale-95"
         >
           {copied ? 'Copied ✓' : 'Copy'}
         </button>

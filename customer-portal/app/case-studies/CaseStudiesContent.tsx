@@ -57,7 +57,7 @@ export default function CaseStudiesContent({
                 <p className="mt-3 text-xs text-fg-muted">{study.disclosure}</p>
                 <a
                   href={study.evidenceUrl}
-                  className="mt-5 inline-block text-sm font-semibold text-accent hover:text-accent-light"
+                  className="mt-5 inline-block text-sm font-semibold text-accent hover:text-fg"
                 >
                   Inspect evidence →
                 </a>
@@ -113,7 +113,7 @@ export default function CaseStudiesContent({
                       <p className="mt-2 text-sm text-fg-muted leading-relaxed">{t.findings[0]?.issue.substring(0, 120)}{t.findings[0]?.issue.length > 120 ? '…' : ''}</p>
                       <Link
                         href={`/teardowns/${t.slug}`}
-                        className="mt-5 inline-block text-sm font-semibold text-accent hover:text-accent-light"
+                        className="mt-5 inline-block text-sm font-semibold text-accent hover:text-fg"
                       >
                         Read teardown →
                       </Link>
@@ -148,7 +148,7 @@ export default function CaseStudiesContent({
         <p className="mt-4 text-fg-muted">Same engine. Your URL. No signup required.</p>
         <Link
           href="/audit?utm_source=content&utm_medium=organic-content"
-          className="mt-8 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+          className="mt-8 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
         >
           Find the Leak →
         </Link>

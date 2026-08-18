@@ -201,7 +201,7 @@ export default function AdsClicksNoSalesPage() {
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
               <Link
                 href="/audit?utm_source=content&utm_medium=organic-content&utm_campaign=ads-clicks-no-sales"
-                className="inline-block rounded-xl bg-accent px-6 py-3.5 font-semibold text-bg hover:bg-accent-light transition-colors text-sm"
+                className="inline-block rounded-xl bg-accent px-6 py-3.5 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-sm"
               >
                 Find the Leak, Free &rarr;
               </Link>
@@ -277,7 +277,7 @@ export default function AdsClicksNoSalesPage() {
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors text-base"
+              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-base"
             >
               Run Free Audit Now &rarr;
             </Link>
@@ -318,6 +318,16 @@ export default function AdsClicksNoSalesPage() {
               Repair Sprint Pricing
             </Link>
           </footer>
+          <RelatedContent
+            heading="Related resources"
+            items={[
+              { href: '/landing-page-message-match', label: 'Message match audit', type: 'audit-type' },
+            { href: '/roas-cliff', label: 'The ROAS cliff explained', type: 'guide' },
+            { href: '/why-is-my-landing-page-not-converting', label: "Why pages don't convert", type: 'guide' },
+            { href: '/audit', label: 'Get your free audit', type: 'cta' }
+            ]}
+          />
+
         </article>
       </main>
     </>

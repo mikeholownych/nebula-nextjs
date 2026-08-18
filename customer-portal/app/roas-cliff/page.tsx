@@ -246,7 +246,7 @@ export default function RoasCliffPage() {
           </p>
           <Link
             href="/audit?utm_source=content&utm_medium=organic-content"
-            className="inline-block bg-accent text-bg font-bold px-8 py-3 rounded-md hover:bg-accent-light transition-colors"
+            className="inline-block bg-accent text-bg font-bold px-8 py-3 rounded-md hover:opacity-85 hover:bg-accent transition-colors"
           >
             Run free audit →
           </Link>
@@ -263,6 +263,12 @@ export default function RoasCliffPage() {
         </div>
 
       </div>
+      <RelatedContent heading="Related resources" items={[
+          { href: '/ads-getting-clicks-but-no-sales', label: 'Ads getting clicks but no sales', type: 'guide' },
+        { href: '/landing-page-message-match', label: 'Message match audit', type: 'audit-type' },
+        { href: '/audit', label: 'Get your free audit', type: 'cta' }
+        ]} />
+
     </main>
   )
 }

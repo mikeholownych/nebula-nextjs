@@ -79,7 +79,7 @@ export default function ConfessionsPage() {
       <div className="mx-auto max-w-3xl px-6 py-14">
         <Link
           href="/learning-centre"
-          className="text-sm font-semibold text-accent hover:text-accent-light transition-colors"
+          className="text-sm font-semibold text-accent hover:text-fg transition-colors"
         >
           ← Learning Centre
         </Link>
@@ -152,7 +152,7 @@ export default function ConfessionsPage() {
           <div className="flex flex-wrap gap-4">
             <Link
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors"
+              className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
             >
               Run the free audit
             </Link>
@@ -169,16 +169,16 @@ export default function ConfessionsPage() {
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-xl font-bold text-fg">Related reading</h2>
           <div className="space-y-1">
-            <Link href="/learning-centre/the-11pm-founder-spiral" className="block py-2 text-accent hover:text-accent-light transition-colors font-medium">
+            <Link href="/learning-centre/the-11pm-founder-spiral" className="block py-2 text-accent hover:text-fg transition-colors font-medium">
               → The 11pm founder spiral: what you&apos;re actually looking for when you refresh your dashboard at midnight
             </Link>
-            <Link href="/learning-centre/agency-handoff-debt" className="block py-2 text-accent hover:text-accent-light transition-colors font-medium">
+            <Link href="/learning-centre/agency-handoff-debt" className="block py-2 text-accent hover:text-fg transition-colors font-medium">
               → Agency handoff debt: 7 silent regressions that kill landing page performance
             </Link>
-            <Link href="/learning-centre/ghost-variant-ab-test" className="block py-2 text-accent hover:text-accent-light transition-colors font-medium">
+            <Link href="/learning-centre/ghost-variant-ab-test" className="block py-2 text-accent hover:text-fg transition-colors font-medium">
               → The ghost variant: when your A/B test winner is a false positive
             </Link>
-            <Link href="/learning-centre/landing-page-not-converting" className="block py-2 text-accent hover:text-accent-light transition-colors font-medium">
+            <Link href="/learning-centre/landing-page-not-converting" className="block py-2 text-accent hover:text-fg transition-colors font-medium">
               → Landing page not converting: the diagnostic framework
             </Link>
           </div>

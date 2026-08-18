@@ -196,7 +196,7 @@ export default function ToolPricingPage() {
           </p>
           <Link
             href="/audit?utm_source=pricing-hub&utm_medium=organic-content"
-            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
           >
             Find the Leak →
           </Link>

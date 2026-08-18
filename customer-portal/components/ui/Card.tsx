@@ -11,7 +11,7 @@ interface CardProps {
 
 const variantStyles = {
   default: 'bg-bg-panel',
-  elevated: 'bg-bg-panel shadow-glow',
+  elevated: 'bg-bg-panel',
   bordered: 'bg-bg-panel border border-border',
 }
 

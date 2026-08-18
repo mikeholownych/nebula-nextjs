@@ -32,7 +32,7 @@ export default function AgencyHandoffDebtPage() {
       <div className="mx-auto max-w-3xl px-6 py-14">
         <Link
           href="/learning-centre"
-          className="text-sm font-semibold text-accent hover:text-accent-light transition-colors"
+          className="text-sm font-semibold text-accent hover:text-fg transition-colors"
         >
           ← Learning Centre
         </Link>
@@ -231,7 +231,7 @@ export default function AgencyHandoffDebtPage() {
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white hover:bg-accent-light transition-colors"
+              className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white hover:opacity-85 hover:bg-accent transition-colors"
             >
               Run the free audit →
             </Link>
@@ -251,7 +251,7 @@ export default function AgencyHandoffDebtPage() {
             <li>
               <Link
                 href="/learning-centre/landing-page-not-converting"
-                className="text-accent hover:text-accent-light font-medium transition-colors"
+                className="text-accent hover:text-fg font-medium transition-colors"
               >
                 Why your landing page isn't converting →
               </Link>
@@ -263,7 +263,7 @@ export default function AgencyHandoffDebtPage() {
             <li>
               <Link
                 href="/learning-centre/proof-before-cta"
-                className="text-accent hover:text-accent-light font-medium transition-colors"
+                className="text-accent hover:text-fg font-medium transition-colors"
               >
                 Proof before CTA: the simple fix most landing pages miss →
               </Link>
@@ -275,7 +275,7 @@ export default function AgencyHandoffDebtPage() {
             <li>
               <Link
                 href="/learning-centre/above-fold-landing-page"
-                className="text-accent hover:text-accent-light font-medium transition-colors"
+                className="text-accent hover:text-fg font-medium transition-colors"
               >
                 What should be above the fold on a landing page →
               </Link>
@@ -287,7 +287,7 @@ export default function AgencyHandoffDebtPage() {
             <li>
               <Link
                 href="/learning-centre/landing-page-load-time-slow"
-                className="text-accent hover:text-accent-light font-medium transition-colors"
+                className="text-accent hover:text-fg font-medium transition-colors"
               >
                 Landing page load time is slow →
               </Link>

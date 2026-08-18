@@ -28,7 +28,7 @@ export default function The11pmFounderSpiralPage() {
       <div className="mx-auto max-w-3xl px-6 py-14">
         <Link
           href="/learning-centre"
-          className="text-sm font-semibold text-accent hover:text-accent-light transition-colors"
+          className="text-sm font-semibold text-accent hover:text-fg transition-colors"
         >
           ← Learning Centre
         </Link>
@@ -140,7 +140,7 @@ export default function The11pmFounderSpiralPage() {
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white hover:bg-accent-light transition-colors"
+              className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white hover:opacity-85 hover:bg-accent transition-colors"
             >
               Run the Free Audit →
             </Link>
@@ -160,7 +160,7 @@ export default function The11pmFounderSpiralPage() {
             <li>
               <Link
                 href="/learning-centre/landing-page-not-converting"
-                className="text-accent hover:text-accent-light font-medium transition-colors"
+                className="text-accent hover:text-fg font-medium transition-colors"
               >
                 My Landing Page Gets Traffic But Isn't Converting
               </Link>
@@ -171,7 +171,7 @@ export default function The11pmFounderSpiralPage() {
             <li>
               <Link
                 href="/learning-centre/traffic-but-no-form-fills"
-                className="text-accent hover:text-accent-light font-medium transition-colors"
+                className="text-accent hover:text-fg font-medium transition-colors"
               >
                 Traffic But No Form Fills
               </Link>
@@ -182,7 +182,7 @@ export default function The11pmFounderSpiralPage() {
             <li>
               <Link
                 href="/learning-centre/paid-traffic-leak-map"
-                className="text-accent hover:text-accent-light font-medium transition-colors"
+                className="text-accent hover:text-fg font-medium transition-colors"
               >
                 The Paid Traffic Leak Map
               </Link>
@@ -193,7 +193,7 @@ export default function The11pmFounderSpiralPage() {
             <li>
               <Link
                 href="/learning-centre/before-you-raise-ad-budget"
-                className="text-accent hover:text-accent-light font-medium transition-colors"
+                className="text-accent hover:text-fg font-medium transition-colors"
               >
                 Before You Raise Your Ad Budget
               </Link>

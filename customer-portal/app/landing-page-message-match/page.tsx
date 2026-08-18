@@ -215,7 +215,7 @@ export default function MessageMatchPage() {
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors text-base"
+              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-base"
             >
               Run Free Message Match Audit &rarr;
             </Link>
@@ -235,6 +235,16 @@ export default function MessageMatchPage() {
             </div>
           </section>
 
+
+          <RelatedContent
+            heading="Related resources"
+            items={[
+              { href: '/ads-getting-clicks-but-no-sales', label: 'Ads getting clicks but no sales', type: 'guide' },
+            { href: '/landing-page-trust-signals', label: 'Trust signals audit', type: 'audit-type' },
+            { href: '/saas-landing-page-audit', label: 'SaaS landing page audit', type: 'audit-type' },
+            { href: '/audit', label: 'Get your free audit', type: 'cta' }
+            ]}
+          />
 
         </article>
       </main>

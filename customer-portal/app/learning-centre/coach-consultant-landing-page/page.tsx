@@ -61,7 +61,7 @@ export default function CoachConsultantLandingPagePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <div className="mx-auto max-w-3xl px-6 py-14">
-        <Link href="/learning-centre" className="text-sm font-semibold text-accent hover:text-accent-light transition-colors">
+        <Link href="/learning-centre" className="text-sm font-semibold text-accent hover:text-fg transition-colors">
           ← Learning Centre
         </Link>
         <div className="mt-8 rounded-2xl border border-border bg-bg-panel p-8 md:p-10">
@@ -106,16 +106,16 @@ export default function CoachConsultantLandingPagePage() {
           <h2 className="mb-4 text-2xl font-bold text-fg">Find the leak on your page</h2>
           <p className="mb-6 leading-relaxed text-fg-muted">Run the free Nebula audit to see exactly where your page breaks the chain from click to conversion.</p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors">Run the free audit</Link>
+            <Link href="/audit?utm_source=learning-centre&utm_medium=organic-content" className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors">Run the free audit</Link>
           </div>
         </section>
 
         <section className="mt-6 rounded-2xl border border-border bg-bg-panel p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">Related leak checks</h2>
           <div className="space-y-1">
-            <Link href="/learning-centre/proof-before-cta" className="block text-accent hover:text-accent-light transition-colors">Proof Before CTA: The Ordering Rule That Lifts Conversions →</Link>
-            <Link href="/learning-centre/pricing-page-not-converting" className="block text-accent hover:text-accent-light transition-colors">Pricing Page Not Converting: What The Page Is Hiding →</Link>
-            <Link href="/learning-centre/cta-not-working" className="block text-accent hover:text-accent-light transition-colors">CTA Not Working: The Five Most Common Button Leaks →</Link>
+            <Link href="/learning-centre/proof-before-cta" className="block text-accent hover:text-fg transition-colors">Proof Before CTA: The Ordering Rule That Lifts Conversions →</Link>
+            <Link href="/learning-centre/pricing-page-not-converting" className="block text-accent hover:text-fg transition-colors">Pricing Page Not Converting: What The Page Is Hiding →</Link>
+            <Link href="/learning-centre/cta-not-working" className="block text-accent hover:text-fg transition-colors">CTA Not Working: The Five Most Common Button Leaks →</Link>
           </div>
         </section>
       </div>

@@ -86,7 +86,7 @@ export default async function TeardownPage({
             href={t.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-accent hover:text-accent-light"
+            className="text-accent hover:text-fg"
           >
             {t.domain}
           </a>{' '}
@@ -210,7 +210,7 @@ export default async function TeardownPage({
           </p>
           <Link
             href={`/audit?from=${encodeURIComponent(`/teardowns/${t.slug}`)}`}
-            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
           >
             Find the Leak →
           </Link>

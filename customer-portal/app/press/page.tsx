@@ -272,7 +272,7 @@ export default function PressPage() {
                   href="https://linkedin.com/in/mikeholownych"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-[10px] text-accent hover:text-accent-light transition-colors"
+                  className="font-mono text-[10px] text-accent hover:text-fg transition-colors"
                 >
                   LinkedIn
                 </a>
@@ -280,13 +280,13 @@ export default function PressPage() {
                   href="https://x.com/mikeholownych"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-[10px] text-accent hover:text-accent-light transition-colors"
+                  className="font-mono text-[10px] text-accent hover:text-fg transition-colors"
                 >
                   X / Twitter
                 </a>
                 <a
                   href="mailto:hello@nebulacomponents.com"
-                  className="font-mono text-[10px] text-accent hover:text-accent-light transition-colors"
+                  className="font-mono text-[10px] text-accent hover:text-fg transition-colors"
                 >
                   hello@nebulacomponents.com
                 </a>
@@ -332,7 +332,7 @@ export default function PressPage() {
           <SectionTitle><span id="media-assets-title">Downloadable Assets</span></SectionTitle>
           <SectionDescription>
             Logos, screenshots, and research visuals cleared for editorial use.
-            See the full brand system at <a href="/brand" className="text-accent hover:text-accent-light underline underline-offset-2">/brand</a>.
+            See the full brand system at <a href="/brand" className="text-accent hover:text-fg underline underline-offset-2">/brand</a>.
           </SectionDescription>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
@@ -466,7 +466,7 @@ export default function PressPage() {
                   <div className="flex gap-2">
                     <dt className="text-fg-muted min-w-[60px]">Web</dt>
                     <dd>
-                      <a href="https://nebulacomponents.shop" className="text-accent hover:text-accent-light text-xs font-mono underline underline-offset-2">
+                      <a href="https://nebulacomponents.shop" className="text-accent hover:text-fg text-xs font-mono underline underline-offset-2">
                         nebulacomponents.shop
                       </a>
                     </dd>
@@ -474,7 +474,7 @@ export default function PressPage() {
                   <div className="flex gap-2">
                     <dt className="text-fg-muted min-w-[60px]">Brand</dt>
                     <dd>
-                      <a href="/brand" className="text-accent hover:text-accent-light text-xs font-mono underline underline-offset-2">
+                      <a href="/brand" className="text-accent hover:text-fg text-xs font-mono underline underline-offset-2">
                         /brand
                       </a>
                     </dd>

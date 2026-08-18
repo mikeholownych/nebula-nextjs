@@ -19,7 +19,7 @@ interface MonitorDetail {
   events: ScoreEvent[]
 }
 
-const COLOR_ACCENT = '#00c2a0'
+const COLOR_ACCENT = '#c7ff2f'
 const COLOR_DANGER = '#ef4444'
 const COLOR_WARN = '#f59e0b'
 const COLOR_MUTED = '#6b7280'

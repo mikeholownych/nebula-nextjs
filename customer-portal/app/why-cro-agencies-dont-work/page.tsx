@@ -158,7 +158,7 @@ export default function WhyCROAgenciesDontWork() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="rounded-xl bg-accent px-7 py-3.5 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
+              className="rounded-xl bg-accent px-7 py-3.5 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
             >
               Run the free audit first &rarr;
             </Link>
@@ -311,7 +311,7 @@ export default function WhyCROAgenciesDontWork() {
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
+              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
             >
               Find the Leak &rarr;
             </Link>
@@ -354,6 +354,12 @@ export default function WhyCROAgenciesDontWork() {
             </div>
           </div>
         </section>
+
+        <RelatedContent heading="Related resources" items={[
+            { href: '/what-is-landing-page-audit', label: 'What is a landing page audit?', type: 'guide' },
+          { href: '/best-landing-page-audit-tools', label: 'Best audit tools compared', type: 'tool' },
+          { href: '/audit', label: 'Get your free audit', type: 'cta' }
+          ]} />
 
       </main>
     </>

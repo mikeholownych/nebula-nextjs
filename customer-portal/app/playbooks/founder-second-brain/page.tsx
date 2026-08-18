@@ -117,7 +117,7 @@ export default function FounderSecondBrainPage() {
           </p>
           <Link
             href="/audit?utm_source=content&utm_medium=organic-content"
-            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors"
+            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
           >
             Run Free Audit →
           </Link>

@@ -202,7 +202,7 @@ export default function LandingPageIntelligenceStackPage() {
         </section>
 
         <div className="mt-12">
-          <Link href="/learning-centre" className="font-medium text-accent hover:text-accent-light">
+          <Link href="/learning-centre" className="font-medium text-accent hover:text-fg">
             ← Back to the Learning Centre
           </Link>
         </div>

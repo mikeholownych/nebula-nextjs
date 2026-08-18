@@ -84,7 +84,7 @@ export default function CitableQuickStartPage() {
               Commands are taken from the synchronized published package documentation. Review the{' '}
               <Link
                 href="https://www.npmjs.com/package/@nebulacomponents/citable"
-                className="font-semibold text-accent hover:text-accent-light"
+                className="font-semibold text-accent hover:text-fg"
               >
                 package documentation
               </Link>{' '}

@@ -163,7 +163,7 @@ ${description || 'Detailed summary of what your company offers, who it serves, a
                 </button>
                 <button
                   onClick={() => downloadFile(generatedLlmsTxt, 'llms.txt')}
-                  className="rounded-md bg-accent px-3 py-1.5 text-xs font-semibold text-bg transition-colors hover:bg-accent-light"
+                  className="rounded-md bg-accent px-3 py-1.5 text-xs font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
                 >
                   Download
                 </button>
@@ -190,7 +190,7 @@ ${description || 'Detailed summary of what your company offers, who it serves, a
                 </button>
                 <button
                   onClick={() => downloadFile(generatedSchemaJson, 'schema.jsonld')}
-                  className="rounded-md bg-accent px-3 py-1.5 text-xs font-semibold text-bg transition-colors hover:bg-accent-light"
+                  className="rounded-md bg-accent px-3 py-1.5 text-xs font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
                 >
                   Download
                 </button>

@@ -57,7 +57,7 @@ function ClicksSparkline({ rows }: { rows: DailyRow[] }) {
       <polyline
         points={pts}
         fill="none"
-        stroke="#00c2a0"
+        stroke="#c7ff2f"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -162,7 +162,7 @@ export default function GscWidget({ email }: { email: string }) {
           </div>
           <a
             href="/api/gsc/connect"
-            className="inline-flex items-center gap-2 rounded-lg bg-[#00c2a0] px-4 py-2.5 text-sm font-semibold text-bg hover:bg-[#00a88a] transition-colors"
+            className="inline-flex items-center gap-2 rounded-lg bg-[#c7ff2f] px-4 py-2.5 text-sm font-semibold text-bg hover:bg-[#00a88a] transition-colors"
           >
             Connect Search Console →
           </a>
@@ -175,7 +175,7 @@ export default function GscWidget({ email }: { email: string }) {
             'Track organic growth over time',
           ].map((item) => (
             <li key={item} className="flex items-center gap-2 text-sm text-fg-muted">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#00c2a0] shrink-0" aria-hidden="true" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#c7ff2f] shrink-0" aria-hidden="true" />
               {item}
             </li>
           ))}

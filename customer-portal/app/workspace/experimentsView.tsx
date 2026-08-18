@@ -141,7 +141,7 @@ export default function ExperimentsView({ email }: { email: string }) {
         </p>
         <a
           href="/lab"
-          className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
+          className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
         >
           Open Component Lab
         </a>
@@ -158,7 +158,7 @@ export default function ExperimentsView({ email }: { email: string }) {
         </p>
         <a
           href="/lab"
-          className="text-xs text-accent hover:text-accent-light"
+          className="text-xs text-accent hover:text-fg"
         >
           Open Lab →
         </a>
@@ -229,7 +229,7 @@ export default function ExperimentsView({ email }: { email: string }) {
                   <button
                     onClick={() => setStatus(exp, 'production')}
                     disabled={working === exp.id}
-                    className="rounded-lg bg-accent px-3 py-1.5 text-xs font-semibold text-bg hover:bg-accent-light disabled:opacity-30 transition-colors"
+                    className="rounded-lg bg-accent px-3 py-1.5 text-xs font-semibold text-bg hover:opacity-85 hover:bg-accent disabled:opacity-30 transition-colors"
                   >
                     Mark as production
                   </button>

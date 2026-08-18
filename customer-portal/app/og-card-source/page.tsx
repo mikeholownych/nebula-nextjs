@@ -2,7 +2,7 @@ export default function OGCardSource() {
   return (
     <div className="min-h-[630px] w-[1200px] overflow-hidden bg-bg flex flex-col justify-center items-start p-[72px_80px] relative">
       <div className="absolute top-[90px] right-[-80px] w-[480px] h-[480px] rounded-full bg-accent/25 blur-[100px]" />
-      <div className="text-accent-light text-lg font-semibold tracking-wider uppercase mb-6">
+      <div className="text-accent/80 text-lg font-semibold tracking-wider uppercase mb-6">
         Evidence-backed conversion diagnosis
       </div>
       <h1 className="text-white text-[62px] leading-[1.06] tracking-[-0.03em] max-w-[860px] mb-5 font-extrabold">

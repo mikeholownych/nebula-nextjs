@@ -82,7 +82,7 @@ export default function GoogleAdsClicksNoSales() {
         <div className="mx-auto max-w-3xl px-6 py-14">
           <Link
             href="/learning-centre"
-            className="text-sm font-semibold text-accent hover:text-accent-light transition-colors"
+            className="text-sm font-semibold text-accent hover:text-fg transition-colors"
           >
             Back to Learning Centre
           </Link>
@@ -140,13 +140,13 @@ export default function GoogleAdsClicksNoSales() {
             <div className="mt-5 flex flex-col gap-2 text-sm">
               <Link
                 href="/learning-centre/message-match-checklist"
-                className="font-semibold text-accent hover:text-accent-light"
+                className="font-semibold text-accent hover:text-fg"
               >
                 Compare search intent with page messaging
               </Link>
               <Link
                 href="/learning-centre/landing-page-not-converting"
-                className="font-semibold text-accent hover:text-accent-light"
+                className="font-semibold text-accent hover:text-fg"
               >
                 Diagnose five common landing-page leaks
               </Link>
@@ -307,7 +307,7 @@ export default function GoogleAdsClicksNoSales() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors"
+                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
               >
                 Run the free audit
               </Link>

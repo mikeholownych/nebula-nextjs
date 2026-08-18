@@ -184,7 +184,7 @@ export default function AssistantView({ email, audits }: AssistantViewProps) {
         <button
           type="submit"
           disabled={loading || !input.trim() || recentAuditIds.length === 0}
-          className="rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          className="rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
         >
           Send
         </button>

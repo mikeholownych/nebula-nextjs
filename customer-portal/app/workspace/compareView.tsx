@@ -152,7 +152,7 @@ export default function CompareView({ audits }: { audits: WorkspaceAudit[] }) {
         {sorted[0] && (
           <a
             href={`/audit?url=${encodeURIComponent(sorted[0].url)}`}
-            className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
+            className="inline-block rounded-lg bg-accent px-6 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
           >
             Run follow-up audit
           </a>

@@ -235,7 +235,7 @@ export default function CitablePage() {
           <Link
             href="/resources/citable/quick-start"
             prefetch={false}
-            className="rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light"
+            className="rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
           >
             Run the quick start
           </Link>

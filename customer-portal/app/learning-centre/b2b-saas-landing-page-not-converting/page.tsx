@@ -231,7 +231,7 @@ export default function B2BSaaSLandingPageNotConverting() {
             </p>
             <Link
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg transition-colors hover:bg-accent-light"
+              className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
             >
               Run Free Audit →
             </Link>

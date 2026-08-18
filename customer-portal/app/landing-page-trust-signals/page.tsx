@@ -215,7 +215,7 @@ export default function TrustSignalsPage() {
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors text-base"
+              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-base"
             >
               Run Free Trust Audit &rarr;
             </Link>
@@ -235,6 +235,16 @@ export default function TrustSignalsPage() {
             </div>
           </section>
 
+
+          <RelatedContent
+            heading="Related resources"
+            items={[
+              { href: '/social-proof-landing-page', label: 'Social proof on landing pages', type: 'guide' },
+            { href: '/ecommerce-landing-page-audit', label: 'Ecommerce landing page audit', type: 'audit-type' },
+            { href: '/landing-page-message-match', label: 'Message match audit', type: 'audit-type' },
+            { href: '/audit', label: 'Get your free audit', type: 'cta' }
+            ]}
+          />
 
         </article>
       </main>

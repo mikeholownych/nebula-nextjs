@@ -163,7 +163,7 @@ export default async function ComparisonPage({
           </p>
           <a
             href="/audit?utm_source=content&utm_medium=organic-content"
-            className="inline-block rounded-lg bg-accent px-8 py-3 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
+            className="inline-block rounded-lg bg-accent px-8 py-3 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
           >
             Free Audit
           </a>

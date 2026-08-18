@@ -78,7 +78,7 @@ export default function LandingPagePerformanceQ3Page() {
       <header className="border-b border-border">
         <div className="mx-auto max-w-3xl px-6 py-16 md:py-24">
           {/* Eyebrow */}
-          <p className="mb-6 text-xs font-medium uppercase tracking-[0.2em] text-[#00c2a0]">
+          <p className="mb-6 text-xs font-medium uppercase tracking-[0.2em] text-[#c7ff2f]">
             Nebula Research · Q3 2026
           </p>
 
@@ -106,7 +106,7 @@ export default function LandingPagePerformanceQ3Page() {
               Methodology:{' '}
               <Link
                 href="/audit?utm_source=content&utm_medium=organic-content"
-                className="text-[#00c2a0] underline underline-offset-2 hover:opacity-80 transition-opacity"
+                className="text-[#c7ff2f] underline underline-offset-2 hover:opacity-80 transition-opacity"
               >
                 Nebula Audit Engine
               </Link>
@@ -117,7 +117,7 @@ export default function LandingPagePerformanceQ3Page() {
 
           {/* Cite as */}
           <div className="mt-6 rounded-md border border-border bg-[#0d1110] px-4 py-3 font-mono text-xs text-[#9e9e9e]">
-            <span className="text-[#00c2a0] mr-2">Cite as:</span>
+            <span className="text-[#c7ff2f] mr-2">Cite as:</span>
             Nebula Components. State of Landing Page Performance Q3 2026. August 2026.
             nebulacomponents.com/research/landing-page-performance-q3-2026
           </div>
@@ -140,7 +140,7 @@ export default function LandingPagePerformanceQ3Page() {
               'The live benchmarks endpoint is the source of truth for the current public aggregate table.',
             ].map((finding, i) => (
               <li key={i} className="flex gap-4">
-                <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-[#00c2a0]/10 border border-[#00c2a0]/30 flex items-center justify-center text-[#00c2a0] text-xs font-mono">
+                <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-[#c7ff2f]/10 border border-[#c7ff2f]/30 flex items-center justify-center text-[#c7ff2f] text-xs font-mono">
                   {i + 1}
                 </span>
                 <p className="text-[#9e9e9e] leading-relaxed">{finding}</p>
@@ -160,7 +160,7 @@ export default function LandingPagePerformanceQ3Page() {
               through the Nebula audit engine (
               <Link
                 href="/audit?utm_source=content&utm_medium=organic-content"
-                className="text-[#00c2a0] underline underline-offset-2 hover:opacity-80 transition-opacity"
+                className="text-[#c7ff2f] underline underline-offset-2 hover:opacity-80 transition-opacity"
               >
                 nebulacomponents.com/audit
               </Link>
@@ -173,7 +173,7 @@ export default function LandingPagePerformanceQ3Page() {
               published at{' '}
               <Link
                 href="/teardowns"
-                className="text-[#00c2a0] underline underline-offset-2 hover:opacity-80 transition-opacity"
+                className="text-[#c7ff2f] underline underline-offset-2 hover:opacity-80 transition-opacity"
               >
                 nebulacomponents.com/teardowns
               </Link>
@@ -249,7 +249,7 @@ export default function LandingPagePerformanceQ3Page() {
             Live rates may change as completed audits are added. The current source is{' '}
             <Link
               href="/benchmarks"
-              className="text-[#00c2a0] underline underline-offset-2 hover:opacity-80 transition-opacity"
+              className="text-[#c7ff2f] underline underline-offset-2 hover:opacity-80 transition-opacity"
             >
               nebulacomponents.com/benchmarks
             </Link>
@@ -281,8 +281,8 @@ export default function LandingPagePerformanceQ3Page() {
                   default. Most landing pages are built desktop-first, then responsively adapted -
                   the above-fold state on mobile is an afterthought, not a design constraint.
                 </p>
-                <div className="rounded border border-[#00c2a0]/20 bg-[#00c2a0]/5 px-4 py-3">
-                  <p className="text-xs font-medium uppercase tracking-widest text-[#00c2a0] mb-1">
+                <div className="rounded border border-[#c7ff2f]/20 bg-[#c7ff2f]/5 px-4 py-3">
+                  <p className="text-xs font-medium uppercase tracking-widest text-[#c7ff2f] mb-1">
                     Implication
                   </p>
                   <p>
@@ -313,8 +313,8 @@ export default function LandingPagePerformanceQ3Page() {
                   frequently exits. Most pages fail this check because ads are written separately
                   from landing page copy, often by different people on different timelines.
                 </p>
-                <div className="rounded border border-[#00c2a0]/20 bg-[#00c2a0]/5 px-4 py-3">
-                  <p className="text-xs font-medium uppercase tracking-widest text-[#00c2a0] mb-1">
+                <div className="rounded border border-[#c7ff2f]/20 bg-[#c7ff2f]/5 px-4 py-3">
+                  <p className="text-xs font-medium uppercase tracking-widest text-[#c7ff2f] mb-1">
                     Implication
                   </p>
                   <p>
@@ -328,7 +328,7 @@ export default function LandingPagePerformanceQ3Page() {
             {/* Finding 3 */}
             <div className="border border-border rounded-lg overflow-hidden">
               <div className="bg-[#0d1110] px-5 py-4 flex items-start gap-4">
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-[#00c2a0]/10 border border-[#00c2a0]/30 flex items-center justify-center text-[#00c2a0] font-mono text-sm font-bold">
+                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-[#c7ff2f]/10 border border-[#c7ff2f]/30 flex items-center justify-center text-[#c7ff2f] font-mono text-sm font-bold">
                   3
                 </span>
                 <div>
@@ -344,8 +344,8 @@ export default function LandingPagePerformanceQ3Page() {
                   ad spend often indicates the page has been patched with creative and audience
                   optimization rather than fixed at the structural layer.
                 </p>
-                <div className="rounded border border-[#00c2a0]/20 bg-[#00c2a0]/5 px-4 py-3">
-                  <p className="text-xs font-medium uppercase tracking-widest text-[#00c2a0] mb-1">
+                <div className="rounded border border-[#c7ff2f]/20 bg-[#c7ff2f]/5 px-4 py-3">
+                  <p className="text-xs font-medium uppercase tracking-widest text-[#c7ff2f] mb-1">
                     Implication
                   </p>
                   <p>
@@ -407,7 +407,7 @@ export default function LandingPagePerformanceQ3Page() {
               published at{' '}
               <Link
                 href="/audit?utm_source=content&utm_medium=organic-content"
-                className="text-[#00c2a0] underline underline-offset-2 hover:opacity-80 transition-opacity"
+                className="text-[#c7ff2f] underline underline-offset-2 hover:opacity-80 transition-opacity"
               >
                 nebulacomponents.com/audit
               </Link>
@@ -431,12 +431,12 @@ export default function LandingPagePerformanceQ3Page() {
           <div className="grid gap-4 sm:grid-cols-3">
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="group flex flex-col gap-2 rounded-lg border border-border bg-[#050505] p-5 hover:border-[#00c2a0]/50 transition-colors"
+              className="group flex flex-col gap-2 rounded-lg border border-border bg-[#050505] p-5 hover:border-[#c7ff2f]/50 transition-colors"
             >
-              <span className="text-[#00c2a0] text-xs font-medium uppercase tracking-widest">
+              <span className="text-[#c7ff2f] text-xs font-medium uppercase tracking-widest">
                 01
               </span>
-              <span className="text-white font-semibold text-sm group-hover:text-[#00c2a0] transition-colors">
+              <span className="text-white font-semibold text-sm group-hover:text-[#c7ff2f] transition-colors">
                 Run the audit on your page →
               </span>
               <span className="text-[#9e9e9e] text-xs leading-relaxed">
@@ -445,12 +445,12 @@ export default function LandingPagePerformanceQ3Page() {
             </Link>
             <Link
               href="/benchmarks"
-              className="group flex flex-col gap-2 rounded-lg border border-border bg-[#050505] p-5 hover:border-[#00c2a0]/50 transition-colors"
+              className="group flex flex-col gap-2 rounded-lg border border-border bg-[#050505] p-5 hover:border-[#c7ff2f]/50 transition-colors"
             >
-              <span className="text-[#00c2a0] text-xs font-medium uppercase tracking-widest">
+              <span className="text-[#c7ff2f] text-xs font-medium uppercase tracking-widest">
                 02
               </span>
-              <span className="text-white font-semibold text-sm group-hover:text-[#00c2a0] transition-colors">
+              <span className="text-white font-semibold text-sm group-hover:text-[#c7ff2f] transition-colors">
                 See live benchmark data →
               </span>
               <span className="text-[#9e9e9e] text-xs leading-relaxed">
@@ -459,12 +459,12 @@ export default function LandingPagePerformanceQ3Page() {
             </Link>
             <Link
               href="/teardowns"
-              className="group flex flex-col gap-2 rounded-lg border border-border bg-[#050505] p-5 hover:border-[#00c2a0]/50 transition-colors"
+              className="group flex flex-col gap-2 rounded-lg border border-border bg-[#050505] p-5 hover:border-[#c7ff2f]/50 transition-colors"
             >
-              <span className="text-[#00c2a0] text-xs font-medium uppercase tracking-widest">
+              <span className="text-[#c7ff2f] text-xs font-medium uppercase tracking-widest">
                 03
               </span>
-              <span className="text-white font-semibold text-sm group-hover:text-[#00c2a0] transition-colors">
+              <span className="text-white font-semibold text-sm group-hover:text-[#c7ff2f] transition-colors">
                 Read the full teardowns →
               </span>
               <span className="text-[#9e9e9e] text-xs leading-relaxed">
@@ -488,7 +488,7 @@ export default function LandingPagePerformanceQ3Page() {
           <span>© 2026 Nebula Components. All data from the Nebula audit engine.</span>
           <Link
             href="/research"
-            className="text-[#00c2a0] hover:opacity-80 transition-opacity"
+            className="text-[#c7ff2f] hover:opacity-80 transition-opacity"
           >
             ← All Research
           </Link>

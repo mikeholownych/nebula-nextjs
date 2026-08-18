@@ -98,7 +98,7 @@ function ScoreBar({ score }: { score: number }) {
     <div className="flex items-center gap-2">
       <div className="h-1.5 w-20 rounded-full bg-border overflow-hidden">
         <div
-          className="h-full rounded-full bg-[#00c2a0]"
+          className="h-full rounded-full bg-[#c7ff2f]"
           style={{ width: `${pct}%` }}
           aria-hidden="true"
         />
@@ -333,7 +333,7 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
         </p>
         <a
           href="/audit?utm_source=workspace&utm_medium=internal"
-          className="inline-flex rounded-lg bg-[#00c2a0] px-5 py-2.5 text-sm font-semibold text-bg hover:bg-[#00a88a] transition-colors"
+          className="inline-flex rounded-lg bg-[#c7ff2f] px-5 py-2.5 text-sm font-semibold text-bg hover:bg-[#00a88a] transition-colors"
         >
           Run your first audit →
         </a>
@@ -349,7 +349,7 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
           label="Pages Audited"
           value={uniquePages.length}
           max={Math.max(uniquePages.length, 1)}
-          color="#00c2a0"
+          color="#c7ff2f"
           sub="unique pages"
         />
         <DonutCard
@@ -392,7 +392,7 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
             placeholder="Filter by URL…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg placeholder:text-fg-dim focus:outline-none focus:ring-1 focus:ring-[#00c2a0] w-full sm:w-64"
+            className="rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg placeholder:text-fg-dim focus:outline-none focus:ring-1 focus:ring-[#c7ff2f] w-full sm:w-64"
             aria-label="Filter pages by URL"
           />
         </div>
@@ -438,7 +438,7 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
                           placeholder="Add keyword…"
                           value={kw}
                           onChange={(e) => setKeywords((prev) => ({ ...prev, [key]: e.target.value }))}
-                          className="rounded-md border border-border bg-bg px-2 py-1 text-xs text-fg placeholder:text-fg-dim focus:outline-none focus:ring-1 focus:ring-[#00c2a0] w-32"
+                          className="rounded-md border border-border bg-bg px-2 py-1 text-xs text-fg placeholder:text-fg-dim focus:outline-none focus:ring-1 focus:ring-[#c7ff2f] w-32"
                           aria-label={`Target keyword for ${name}`}
                         />
                       </td>
@@ -450,7 +450,7 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
                             return <span className="inline-flex items-center rounded-full bg-amber-500/10 px-2 py-0.5 text-[11px] font-medium text-amber-400">Submitted</span>
                           }
                           if (status.indexed) {
-                            return <span className="inline-flex items-center rounded-full bg-[#00c2a0]/10 px-2 py-0.5 text-[11px] font-medium text-[#00c2a0]">Indexed</span>
+                            return <span className="inline-flex items-center rounded-full bg-[#c7ff2f]/10 px-2 py-0.5 text-[11px] font-medium text-[#c7ff2f]">Indexed</span>
                           }
                           return (
                             <button
@@ -488,7 +488,7 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
                         {scored ? (
                           <a
                             href={`/audit/${a.id}/results`}
-                            className="rounded-lg border border-[#00c2a0] px-3 py-1.5 text-xs font-semibold text-[#00c2a0] hover:bg-[#00c2a0]/10 transition-colors whitespace-nowrap"
+                            className="rounded-lg border border-[#c7ff2f] px-3 py-1.5 text-xs font-semibold text-[#c7ff2f] hover:bg-[#c7ff2f]/10 transition-colors whitespace-nowrap"
                           >
                             View results
                           </a>
@@ -512,7 +512,7 @@ export default function PagesView({ audits, latestDetail }: { audits: WorkspaceA
                             return (
                               <button
                                 onClick={() => handleScheduleToggle(a.url)}
-                                className="inline-flex items-center rounded-full bg-[#00c2a0]/10 px-2 py-0.5 text-[11px] font-medium text-[#00c2a0] hover:bg-[#00c2a0]/20 transition-colors"
+                                className="inline-flex items-center rounded-full bg-[#c7ff2f]/10 px-2 py-0.5 text-[11px] font-medium text-[#c7ff2f] hover:bg-[#c7ff2f]/20 transition-colors"
                               >
                                 Weekly ✓
                               </button>

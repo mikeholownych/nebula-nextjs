@@ -56,7 +56,7 @@ export default function LandingPageNotConvertingPage() {
         <div className="mx-auto max-w-3xl px-6 py-14">
           <Link
             href="/learning-centre"
-            className="text-sm font-semibold text-accent hover:text-accent-light transition-colors"
+            className="text-sm font-semibold text-accent hover:text-fg transition-colors"
           >
             Back to Learning Centre
           </Link>
@@ -110,7 +110,7 @@ export default function LandingPageNotConvertingPage() {
               WordStream&apos;s{' '}
               <a
                 href="https://www.wordstream.com/blog/2026-google-ads-benchmarks"
-                className="text-accent hover:text-accent-light underline"
+                className="text-accent hover:text-fg underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -138,13 +138,13 @@ export default function LandingPageNotConvertingPage() {
             <div className="mt-5 flex flex-col gap-2 text-sm">
               <Link
                 href="/learning-centre/message-match-checklist"
-                className="font-semibold text-accent hover:text-accent-light"
+                className="font-semibold text-accent hover:text-fg"
               >
                 Check ad-to-page promise alignment
               </Link>
               <Link
                 href="/learning-centre/landing-page-conversion-rate-benchmark"
-                className="font-semibold text-accent hover:text-accent-light"
+                className="font-semibold text-accent hover:text-fg"
               >
                 Interpret landing-page conversion benchmarks carefully
               </Link>
@@ -175,7 +175,7 @@ export default function LandingPageNotConvertingPage() {
               <em>Behaviour &amp; Information Technology</em> (
               <a
                 href="https://doi.org/10.1080/01449290500330448"
-                className="text-accent hover:text-accent-light underline"
+                className="text-accent hover:text-fg underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -313,7 +313,7 @@ export default function LandingPageNotConvertingPage() {
             </p>
             <Link
               href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-              className="inline-flex rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
+              className="inline-flex rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
             >
               Run the free audit
             </Link>
@@ -453,7 +453,7 @@ export default function LandingPageNotConvertingPage() {
                       depth in{' '}
                       <Link
                         href="/learning-centre/landing-page-load-time-slow"
-                        className="text-accent hover:text-accent-light underline"
+                        className="text-accent hover:text-fg underline"
                       >
                         Landing Page Load Time Slow
                       </Link>
@@ -491,7 +491,7 @@ export default function LandingPageNotConvertingPage() {
                       in the{' '}
                       <Link
                         href="/what-is-landing-page-audit"
-                        className="text-accent hover:text-accent-light underline"
+                        className="text-accent hover:text-fg underline"
                       >
                         full audit methodology
                       </Link>
@@ -587,7 +587,7 @@ export default function LandingPageNotConvertingPage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors"
+                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
               >
                 Run the free audit
               </Link>

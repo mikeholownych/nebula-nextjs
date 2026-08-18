@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-08-18T11:51:19Z",
+  "base_url": "http://localhost:3000",
+  "summary": {
+    "total_pages": 126,
+    "orphans": 0,
+    "near_orphans": 19,
+    "deep_pages": 0,
+    "broken": 0,
+    "strategic_weak": 1
+  },
+  "orphaned_pages": [],
+  "strategic_weak": [
+    {
+      "path": "/landing-page-trust-signals",
+      "inbound": 1,
+      "depth": 1
+    }
+  ],
+  "broken_links": []
+}

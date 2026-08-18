@@ -352,7 +352,7 @@ export default function BestLandingPageAuditToolsPage() {
           </p>
           <Link
             href="/audit?utm_source=best-tools-listical&utm_medium=organic-content"
-            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+            className="mt-6 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
           >
             Find the Leak →
           </Link>
@@ -360,6 +360,16 @@ export default function BestLandingPageAuditToolsPage() {
             Under 2 minutes · no signup · no sales call
           </p>
         </section>
+
+        <RelatedContent
+          heading="Related resources"
+          items={[
+            { href: '/landing-page-audit-tools-pricing', label: 'Audit tool pricing compared', type: 'tool' },
+          { href: '/what-is-landing-page-audit', label: 'What is a landing page audit?', type: 'guide' },
+          { href: '/ecommerce-landing-page-audit', label: 'Ecommerce audit', type: 'audit-type' },
+          { href: '/audit', label: 'Get your free audit', type: 'cta' }
+          ]}
+        />
 
       </article>
     </main>

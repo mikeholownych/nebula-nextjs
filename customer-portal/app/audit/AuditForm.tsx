@@ -210,7 +210,7 @@ try {
         <button
           type="submit"
           disabled={!url || loading}
-          className="w-full rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-[color,background-color,transform] duration-[160ms] ease-out hover:bg-accent-light active:scale-[0.97] disabled:opacity-50"
+          className="w-full rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-[color,background-color,transform] duration-[160ms] ease-out hover:opacity-85 hover:bg-accent active:scale-[0.97] disabled:opacity-50"
         >
           {loading ? 'Starting audit…' : 'Find the Leak'}
         </button>

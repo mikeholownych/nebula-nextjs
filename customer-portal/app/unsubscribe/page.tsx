@@ -131,7 +131,7 @@ export default function UnsubscribePage() {
             <button
               type="submit"
               disabled={buttonDisabled}
-              className="w-full rounded-xl border-none bg-accent px-8 py-3.5 text-base font-semibold text-bg transition-all hover:bg-accent-light disabled:cursor-default disabled:opacity-50"
+              className="w-full rounded-xl border-none bg-accent px-8 py-3.5 text-base font-semibold text-bg transition-all hover:opacity-85 hover:bg-accent disabled:cursor-default disabled:opacity-50"
             >
               {buttonText}
             </button>

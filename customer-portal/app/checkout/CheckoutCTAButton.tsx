@@ -72,7 +72,7 @@ export default function CheckoutCTAButton({ auditId, endpoint, offerKey }: Props
         type="button"
         onClick={handleClick}
         disabled={submitting}
-        className="block w-full rounded-2xl bg-accent px-8 py-4 text-center text-lg font-semibold text-bg transition-colors hover:bg-accent-light disabled:cursor-wait disabled:opacity-70"
+        className="block w-full rounded-2xl bg-accent px-8 py-4 text-center text-lg font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent disabled:cursor-wait disabled:opacity-70"
       >
         {submitting ? 'Opening Secure Checkout…' : 'Continue to Secure Stripe Checkout'}
       </button>

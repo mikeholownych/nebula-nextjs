@@ -388,7 +388,7 @@ export default function SettingsView({ email }: { email: string }) {
               }
             }}
             disabled={savingRevenue}
-            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:bg-accent-light transition-colors disabled:opacity-50"
+            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors disabled:opacity-50"
           >
             {savingRevenue ? 'Saving…' : 'Save'}
           </button>
@@ -452,7 +452,7 @@ export default function SettingsView({ email }: { email: string }) {
               }
             }}
             disabled={savingBranding}
-            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:bg-accent-light transition-colors disabled:opacity-50"
+            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors disabled:opacity-50"
           >
             {savingBranding ? 'Saving…' : 'Save'}
           </button>
@@ -477,7 +477,7 @@ export default function SettingsView({ email }: { email: string }) {
               type="checkbox"
               checked={digestEnabled}
               onChange={(e) => setDigestEnabled(e.target.checked)}
-              className="h-4 w-4 rounded border-border accent-[#00c2a0]"
+              className="h-4 w-4 rounded border-border accent-[#c7ff2f]"
             />
             <span className="text-sm text-fg">Email me a weekly summary</span>
           </label>
@@ -533,7 +533,7 @@ export default function SettingsView({ email }: { email: string }) {
               }
             }}
             disabled={savingDigest}
-            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:bg-accent-light transition-colors disabled:opacity-50"
+            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors disabled:opacity-50"
           >
             {savingDigest ? 'Saving…' : 'Save'}
           </button>
@@ -717,7 +717,7 @@ function CompetitorSection({ showToast }: { showToast: (msg: string) => void }) 
             <button
               onClick={handleAdd}
               disabled={adding || atMax || !url.trim()}
-              className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:bg-accent-light transition-colors disabled:opacity-50"
+              className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors disabled:opacity-50"
             >
               {adding ? 'Adding…' : 'Track competitor'}
             </button>
@@ -845,7 +845,7 @@ function ApiKeysSection({ email }: { email: string }) {
           </p>
           <a
             href="/pricing"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:bg-accent-light transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
           >
             Upgrade to unlock API access →
           </a>
@@ -930,7 +930,7 @@ function ApiKeysSection({ email }: { email: string }) {
                 <button
                   onClick={handleCreate}
                   disabled={creating}
-                  className="shrink-0 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg transition-colors hover:bg-accent-light disabled:opacity-60"
+                  className="shrink-0 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent disabled:opacity-60"
                 >
                   {creating ? 'Creating…' : 'Create key'}
                 </button>

@@ -140,7 +140,7 @@ export default function TeamView({ email }: TeamViewProps) {
             <button
               onClick={sendInvite}
               disabled={sending}
-              className="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:bg-accent-light transition-colors whitespace-nowrap disabled:opacity-50"
+              className="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors whitespace-nowrap disabled:opacity-50"
             >
               {sending ? 'Sending…' : 'Send invite'}
             </button>

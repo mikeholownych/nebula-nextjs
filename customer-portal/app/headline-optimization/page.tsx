@@ -211,7 +211,7 @@ export default function HeadlineOptimizationPage() {
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors text-base"
+              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-base"
             >
               Run Free Headline Audit &rarr;
             </Link>
@@ -240,6 +240,15 @@ export default function HeadlineOptimizationPage() {
             <Link href="/why-is-my-landing-page-not-converting" className="hover:text-accent transition-colors">Why Your Page Isn&apos;t Converting</Link>
             <Link href="/pricing" className="hover:text-accent transition-colors">Repair Sprint Pricing</Link>
           </footer>
+
+          <RelatedContent
+            heading="Related resources"
+            items={[
+              { href: '/cta-optimization', label: 'CTA optimization', type: 'guide' },
+            { href: '/landing-page-message-match', label: 'Message match audit', type: 'audit-type' },
+            { href: '/audit', label: 'Get your free audit', type: 'cta' }
+            ]}
+          />
 
         </article>
       </main>

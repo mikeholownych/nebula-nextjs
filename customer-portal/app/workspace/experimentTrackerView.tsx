@@ -48,7 +48,7 @@ function Delta({ baseline, current, invert = false, pct = false }: { baseline: n
   const good = invert ? raw < 0 : raw > 0
   const sign = raw > 0 ? '+' : ''
   return (
-    <span className={`text-xs font-semibold ${good ? 'text-[#00c2a0]' : 'text-red-400'}`}>
+    <span className={`text-xs font-semibold ${good ? 'text-[#c7ff2f]' : 'text-red-400'}`}>
       {sign}{pct ? raw.toFixed(2) + 'pts' : raw.toFixed(1)}
     </span>
   )
@@ -201,7 +201,7 @@ export default function ExperimentTrackerView({ email }: { email: string }) {
           <button
             onClick={createExperiment}
             disabled={creating || !newUrl || !newDescription.trim()}
-            className="rounded-lg bg-[#00c2a0] px-4 py-2 text-sm font-semibold text-bg hover:bg-[#00a88a] transition-colors disabled:opacity-50"
+            className="rounded-lg bg-[#c7ff2f] px-4 py-2 text-sm font-semibold text-bg hover:bg-[#00a88a] transition-colors disabled:opacity-50"
           >
             {creating ? 'Starting…' : 'Start experiment'}
           </button>
@@ -225,8 +225,8 @@ export default function ExperimentTrackerView({ email }: { email: string }) {
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
                     {exp.status === 'running' ? (
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#00c2a0]/10 px-2.5 py-0.5 text-[11px] font-semibold text-[#00c2a0]">
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#00c2a0] animate-pulse" aria-hidden="true" />
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#c7ff2f]/10 px-2.5 py-0.5 text-[11px] font-semibold text-[#c7ff2f]">
+                        <span className="h-1.5 w-1.5 rounded-full bg-[#c7ff2f] animate-pulse" aria-hidden="true" />
                         Running
                       </span>
                     ) : exp.status === 'concluded' ? (
@@ -251,7 +251,7 @@ export default function ExperimentTrackerView({ email }: { email: string }) {
                       </button>
                       <button
                         onClick={() => setStatus(exp.id, 'concluded')}
-                        className="rounded-lg border border-[#00c2a0] px-3 py-1.5 text-xs font-semibold text-[#00c2a0] hover:bg-[#00c2a0]/10 transition-colors"
+                        className="rounded-lg border border-[#c7ff2f] px-3 py-1.5 text-xs font-semibold text-[#c7ff2f] hover:bg-[#c7ff2f]/10 transition-colors"
                       >
                         Conclude
                       </button>

@@ -192,7 +192,7 @@ export default function PricingPage() {
                 This service does not promise conversion lift. It proves what page condition was found,
                 what changed, and whether that same condition changed on re-audit.
               </p>
-              <Link href="/audit?utm_source=pricing&utm_medium=internal" className="mt-8 inline-flex rounded-xl bg-accent px-5 py-3 font-semibold text-bg transition-colors hover:bg-accent-light">
+              <Link href="/audit?utm_source=pricing&utm_medium=internal" className="mt-8 inline-flex rounded-xl bg-accent px-5 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent">
                 Run the audit first →
               </Link>
             </Card>
@@ -210,7 +210,7 @@ export default function PricingPage() {
             </p>
             <Link
               href="/audit?utm_source=pricing&utm_medium=internal"
-              className="mt-5 inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:bg-accent-light"
+              className="mt-5 inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg transition-colors hover:opacity-85 hover:bg-accent"
             >
               Run free audit →
             </Link>

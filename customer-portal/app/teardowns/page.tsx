@@ -433,7 +433,7 @@ export default function TeardownsPage() {
                   <p className="text-xs text-fg-muted">Audited {t.auditedAt}</p>
                   <Link
                     href={`/teardowns/${t.slug}`}
-                    className="text-sm font-semibold text-accent hover:text-accent-light"
+                    className="text-sm font-semibold text-accent hover:text-fg"
                   >
                     Read teardown →
                   </Link>
@@ -449,7 +449,7 @@ export default function TeardownsPage() {
         <p className="mt-4 text-fg-muted">Free, no signup. Same engine as every teardown above.</p>
         <Link
           href="/audit?from=%2Fteardowns"
-          className="mt-8 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
+          className="mt-8 inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
         >
           Find the Leak →
         </Link>

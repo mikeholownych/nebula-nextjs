@@ -161,7 +161,7 @@ export default function BillingView({ email }: { email: string }) {
             </p>
             <a
               href="/pricing"
-              className="mt-4 inline-block rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:bg-accent-light"
+              className="mt-4 inline-block rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:opacity-85 hover:bg-accent"
             >
               See pricing
             </a>
@@ -204,7 +204,7 @@ export default function BillingView({ email }: { email: string }) {
               href={summary.billingPortalUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-accent-light hover:underline"
+              className="text-accent/80 hover:underline"
             >
               Open Stripe customer portal → invoices, receipts, payment methods
             </a>
@@ -212,7 +212,7 @@ export default function BillingView({ email }: { email: string }) {
             <>
               Receipts are emailed by Stripe for every payment. Need a copy or have a billing
               question?{' '}
-              <a href="mailto:hello@nebulacomponents.com" className="text-accent-light hover:underline">
+              <a href="mailto:hello@nebulacomponents.com" className="text-accent/80 hover:underline">
                 hello@nebulacomponents.com
               </a>
             </>

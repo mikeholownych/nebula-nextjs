@@ -82,7 +82,7 @@ export default function LandingPageLoadTimeSlow() {
         <div className="mx-auto max-w-3xl px-6 py-14">
           <Link
             href="/learning-centre"
-            className="text-sm font-semibold text-accent hover:text-accent-light transition-colors"
+            className="text-sm font-semibold text-accent hover:text-fg transition-colors"
           >
             Back to Learning Centre
           </Link>
@@ -128,7 +128,7 @@ export default function LandingPageLoadTimeSlow() {
                   equivalent. The full analysis is at{' '}
                   <a
                     href="https://www.portent.com/blog/analytics/research-site-speed-hurting-everyones-revenue.htm"
-                    className="text-accent hover:text-accent-light underline"
+                    className="text-accent hover:text-fg underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -151,7 +151,7 @@ export default function LandingPageLoadTimeSlow() {
                   methodology and full findings are in the{' '}
                   <a
                     href="https://www.thinkwithgoogle.com/_qs/documents/9757/Milliseconds_Make_Millions_report_hQYAbZJ.pdf"
-                    className="text-accent hover:text-accent-light underline"
+                    className="text-accent hover:text-fg underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -172,7 +172,7 @@ export default function LandingPageLoadTimeSlow() {
                   passed all Core Web Vitals in 2024, according to the{' '}
                   <a
                     href="https://almanac.httparchive.org/en/2024/performance"
-                    className="text-accent hover:text-accent-light underline"
+                    className="text-accent hover:text-fg underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -234,7 +234,7 @@ export default function LandingPageLoadTimeSlow() {
               Check your LCP free at{' '}
               <a
                 href="https://pagespeed.web.dev"
-                className="text-accent hover:text-accent-light underline"
+                className="text-accent hover:text-fg underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -366,7 +366,7 @@ export default function LandingPageLoadTimeSlow() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/audit?utm_source=learning-centre&utm_medium=organic-content"
-                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:bg-accent-light transition-colors"
+                className="inline-flex rounded-xl bg-accent px-6 py-3 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors"
               >
                 Run the free audit
               </Link>

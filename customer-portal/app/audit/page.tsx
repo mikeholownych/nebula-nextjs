@@ -376,7 +376,7 @@ export default async function AuditPage() {
               </p>
               <a
                 href="#run-audit"
-                className="block w-full rounded-xl bg-accent py-3.5 text-center font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-sm"
+                className="block w-full rounded-xl bg-accent py-3.5 text-center font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-sm"
               >
                 Run the audit first &rarr;
               </a>

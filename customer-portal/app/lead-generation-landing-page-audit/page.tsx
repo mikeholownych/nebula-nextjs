@@ -215,7 +215,7 @@ export default function LeadGenAuditPage() {
             </p>
             <Link
               href="/audit?utm_source=content&utm_medium=organic-content"
-              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:bg-accent-light transition-colors text-base"
+              className="inline-block rounded-xl bg-accent px-8 py-4 font-semibold text-bg hover:opacity-85 hover:bg-accent transition-colors text-base"
             >
               Run Free Lead Gen Audit &rarr;
             </Link>
@@ -234,6 +234,16 @@ export default function LeadGenAuditPage() {
             </div>
           </section>
 
+
+          <RelatedContent
+            heading="Related resources"
+            items={[
+              { href: '/landing-page-cta-audit', label: 'CTA audit', type: 'audit-type' },
+            { href: '/landing-page-trust-signals', label: 'Trust signals that convert', type: 'guide' },
+            { href: '/landing-page-message-match', label: 'Message match audit', type: 'audit-type' },
+            { href: '/audit', label: 'Get your free audit', type: 'cta' }
+            ]}
+          />
 
         </article>
       </main>
