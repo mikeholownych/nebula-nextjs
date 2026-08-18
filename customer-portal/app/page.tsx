@@ -154,19 +154,19 @@ export default function Home() {
           <div className="mx-auto max-w-6xl grid gap-10 md:grid-cols-2 md:items-start">
             <div>
               <h2 className="heading-2 mb-6">
-                We run this audit on ourselves first. When we have a real client outcome with dates, proof, and a way for you to verify it, we will show that too.
+                Built from a pattern. The same failures kept showing up.
               </h2>
               <p className="text-base text-fg-muted leading-relaxed">
                 Before the audit engine, there was a spreadsheet. Working with founders on paid
-                traffic, the same page failures kept showing up - wrong headline, no proof near the
+                traffic, the same page failures kept showing up — wrong headline, no proof near the
                 first CTA, a CTA buried under the nav. The clicks were coming in. The sales weren&apos;t.
                 The page looked fine. The problems were specific and fixable every time. Nebula
                 is the instrument that finds them.
               </p>
               <p className="mt-5 text-base text-fg-muted leading-relaxed">
-                Our live self-scan - the widget above - shows the evidence from our own page first.
-                Most tools lead with case studies they can&apos;t verify. We&apos;d rather show you the
-                actual data. Every verified check. Every evidence atom. The same output you get.
+                When there is a verified client outcome with dates and a way for you to confirm it,
+                it will appear here. Until then: the audit runs on your actual page, returns raw
+                evidence, and ranks findings by impact. No estimates. No hypothetical lift.
               </p>
               <div className="mt-8 flex items-start gap-4">
                 <img
