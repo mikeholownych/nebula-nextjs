@@ -99,7 +99,7 @@ describe('ScoreHistoryChart - score_delta / segment color logic', () => {
   /**
    * Color is determined by comparing consecutive scores, not delta value.
    * A drop in score → segment color = #ef4444 (danger/red)
-   * A rise or flat   → segment color = #00c2a0 (accent/green)
+   * A rise or flat   → segment color = #c7ff2f (accent/green)
    */
 
   it('colors a dropping segment red (#ef4444)', () => {
@@ -114,24 +114,24 @@ describe('ScoreHistoryChart - score_delta / segment color logic', () => {
     expect(segments.length).toBeGreaterThanOrEqual(1)
   })
 
-  it('colors a rising segment accent green (#00c2a0)', () => {
+  it('colors a rising segment accent green (#c7ff2f)', () => {
     const events: ScoreEvent[] = [
       makeEvent(50, 'C', null, '2025-01-01T00:00:00Z'),
       makeEvent(90, 'A', 40, '2025-01-08T00:00:00Z'),
     ]
     const { container } = render(<ScoreHistoryChart monitorId={4} events={events} />)
     const segments = Array.from(container.querySelectorAll('line')).filter(
-      (l) => l.getAttribute('stroke') === '#00c2a0',
+      (l) => l.getAttribute('stroke') === '#c7ff2f',
     )
     expect(segments.length).toBeGreaterThanOrEqual(1)
   })
 
-  it('colors a high-score dot accent green (#00c2a0)', () => {
+  it('colors a high-score dot accent green (#c7ff2f)', () => {
     // Score >= 70 → accent green fill
     const events: ScoreEvent[] = [makeEvent(80, 'A', null, '2025-01-01T00:00:00Z')]
     const { container } = render(<ScoreHistoryChart monitorId={5} events={events} />)
     const greenDot = Array.from(container.querySelectorAll('circle')).find(
-      (c) => c.getAttribute('fill') === '#00c2a0',
+      (c) => c.getAttribute('fill') === '#c7ff2f',
     )
     expect(greenDot).toBeInTheDocument()
   })
@@ -168,7 +168,7 @@ describe('ScoreHistoryChart - score_delta / segment color logic', () => {
       (l) => l.getAttribute('stroke') === '#ef4444',
     )
     const greenSegs = Array.from(container.querySelectorAll('line')).filter(
-      (l) => l.getAttribute('stroke') === '#00c2a0',
+      (l) => l.getAttribute('stroke') === '#c7ff2f',
     )
     expect(redSegs.length).toBeGreaterThanOrEqual(1)
     expect(greenSegs.length).toBeGreaterThanOrEqual(1)

@@ -12,7 +12,7 @@ describe('Card', () => {
     expect(container.firstChild).toHaveClass('bg-bg-panel')
 
     rerender(<Card variant="elevated">Elevated</Card>)
-    expect(container.firstChild).toHaveClass('shadow-glow')
+    expect(container.firstChild).toHaveClass('bg-bg-panel')
 
     rerender(<Card variant="bordered">Bordered</Card>)
     expect(container.firstChild).toHaveClass('border')

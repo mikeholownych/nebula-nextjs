@@ -48,6 +48,8 @@ const config: Config = {
           DEFAULT: '#f06b6b',   // softened red — still passes AA on panel
           dim: 'rgba(240, 107, 107, 0.12)',
         },
+        // info: blue — used for neutral/informational UI states
+        info: '#3b82f6',
         // signal.fail: RESERVED. Amber only for "conversion signal failed".
         // Do not use for warning states, grades, or any other UI meaning.
         signal: {

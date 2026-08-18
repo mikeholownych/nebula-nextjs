@@ -167,10 +167,10 @@ export default function Home() {
                 traffic, the same page failures kept showing up — wrong headline, no proof near the
                 first CTA, a CTA buried under the nav. The clicks were coming in. The sales weren&apos;t.
                 The page looked fine. The problems were specific and fixable every time. Nebula
-                is the instrument that finds them.
+                is the instrument that finds them. We run this audit on ourselves first.
               </p>
               <p className="mt-5 text-base text-fg-muted leading-relaxed">
-                When there is a verified client outcome with dates and a way for you to confirm it,
+                When we have a real client outcome with dates, proof, and a way for you to verify it,
                 it will appear here. Until then: the audit runs on your actual page, returns raw
                 evidence, and ranks findings by impact. No estimates. No hypothetical lift.
               </p>

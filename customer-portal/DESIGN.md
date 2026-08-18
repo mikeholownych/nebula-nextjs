@@ -35,7 +35,7 @@ The dark theme is retained but **elevated**: surfaces lift through warm-tinted e
 - **Signal Pass** `#22c55e` — Passing audit checks, positive states
 - **Signal Fail** `#EF4444` — Failing checks, errors (used sparingly)
 - **Signal Warn** `#F59E0B` — Warning states, attention (audit fail ONLY)
-- **Secondary Blue** `#4a7fa5` — Accent alternative, secondary highlights
+- **Secondary** — not used; single-accent system enforced
 
 ### Structural
 - **Border Whisper** `rgba(255, 255, 255, 0.06)` — Card borders, dividers

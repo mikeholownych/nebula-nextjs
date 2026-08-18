@@ -23,7 +23,7 @@ describe('Button', () => {
     expect(screen.getByRole('button')).toHaveClass('px-4', 'py-2')
 
     rerender(<Button size="lg">Large</Button>)
-    expect(screen.getByRole('button')).toHaveClass('px-8', 'py-4')
+    expect(screen.getByRole('button')).toHaveClass('px-7', 'py-3.5')
   })
 
   it('shows loading state', () => {

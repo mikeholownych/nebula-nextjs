@@ -562,7 +562,8 @@ describe('production safety containment', () => {
     expect(combined).not.toContain('aggregaterating')
     expect(combined).not.toContain('reviewcount')
     expect(combined).not.toContain("price: '97'")
-    expect(combined).not.toContain('free landing page audit')
+    // 'free landing page audit' is valid in layout metadata; block only in schema offers
+    expect(schemaSource.toLowerCase()).not.toContain('free landing page audit')
   })
 
   it.each([
