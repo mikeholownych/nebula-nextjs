@@ -57,7 +57,7 @@ const config: Config = {
         border: 'rgba(255, 255, 255, 0.06)',
       },
       fontFamily: {
-        sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-inter)', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       fontSize: {
@@ -68,14 +68,14 @@ const config: Config = {
         xl: ['1.25rem', { lineHeight: '1.75rem' }],
         '2xl': ['1.5rem', { lineHeight: '2rem' }],
         '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
-        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
-        '5xl': ['3rem', { lineHeight: '1' }],
-        '6xl': ['3.75rem', { lineHeight: '1' }],
+        '4xl': ['2.25rem', { lineHeight: '2.6rem' }],
+        '5xl': ['3rem', { lineHeight: '1.18' }],
+        '6xl': ['3.75rem', { lineHeight: '1.12' }],
       },
       letterSpacing: {
-        // Section-head tracking - separates from body without size increase
-        section: '0.02em',
-        // Display tracking - tighter at large sizes
+        // Section-head tracking — neutral, not positive (positive on large type is amateur)
+        section: '-0.01em',
+        // Display tracking — tighter at large sizes, more refined
         display: '-0.04em',
         tight: '-0.02em',
         wide: '0.12em',

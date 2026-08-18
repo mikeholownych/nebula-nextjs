@@ -69,7 +69,7 @@ export default function Home() {
       />
       <main id="main-content" className="min-h-screen bg-bg pt-24">
 
-        {/* ── 1. Hero: asymmetric split — copy left, product proof right ── */}
+        {/* ── 1. Hero: asymmetric split, copy left, product proof right ── */}
         {/* Radial glow: gives the dark background atmosphere and depth */}
         <section className="relative mx-auto max-w-6xl px-6 py-8 md:py-12">
           <div
@@ -88,12 +88,12 @@ export default function Home() {
 
             {/* Left: copy */}
             <div className="flex flex-col">
-              <h1 className="text-3xl font-extrabold tracking-display text-fg md:text-4xl lg:text-5xl">
-                Know exactly what&apos;s killing your conversions — without hiring a consultant.
+              <h1 className="text-3xl font-extrabold tracking-display text-fg md:text-4xl lg:text-[2.75rem] lg:leading-[1.18]">
+                Know exactly what&apos;s killing your conversions, without hiring a consultant.
               </h1>
-              <p className="mt-4 max-w-lg text-base leading-7 text-fg-muted">
+              <p className="mt-4 max-w-md text-base leading-7 text-fg-muted">
                 Your ads are working. The page isn&apos;t. Nebula runs 9 evidence-backed checks against your actual
-                HTML and shows you the specific leak — with the dollar math and the exact fix.
+                HTML and shows you the specific leak, with the dollar math and the exact fix.
               </p>
               <div className="mt-6">
                 <Link
@@ -107,25 +107,25 @@ export default function Home() {
               {/* Stat strip */}
               <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-border/40 pt-5">
                 <div>
-                  <p className="text-2xl font-bold tabular-nums text-accent">139+</p>
-                  <p className="mt-0.5 text-xs text-fg-muted">pages audited</p>
+                  <p className="text-2xl font-black tabular-nums text-accent">139+</p>
+                  <p className="mt-0.5 text-[10px] tracking-widest text-fg-dim uppercase">pages audited</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold tabular-nums text-accent">0</p>
-                  <p className="mt-0.5 text-xs text-fg-muted">scored an A</p>
+                  <p className="text-2xl font-black tabular-nums text-accent">0</p>
+                  <p className="mt-0.5 text-[10px] tracking-widest text-fg-dim uppercase">scored an A</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold tabular-nums text-accent">9</p>
-                  <p className="mt-0.5 text-xs text-fg-muted">conversion signals</p>
+                  <p className="text-2xl font-black tabular-nums text-accent">9</p>
+                  <p className="mt-0.5 text-[10px] tracking-widest text-fg-dim uppercase">signals checked</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold tabular-nums text-accent">&lt;2 min</p>
-                  <p className="mt-0.5 text-xs text-fg-muted">to your results</p>
+                  <p className="text-2xl font-black tabular-nums text-accent">&lt;2 min</p>
+                  <p className="mt-0.5 text-[10px] tracking-widest text-fg-dim uppercase">to results</p>
                 </div>
               </div>
             </div>
 
-            {/* Right: product screenshot — what you get */}
+            {/* Right: product screenshot, what you get */}
             <div className="flex flex-col">
               <div className="overflow-hidden rounded-2xl border border-border shadow-[0_0_40px_rgba(0,194,160,0.08),0_20px_60px_rgba(0,0,0,0.5)]">
                 {/* Browser chrome strip */}
@@ -134,7 +134,7 @@ export default function Home() {
                   <span className="h-2.5 w-2.5 rounded-full bg-fg-dim/40" />
                   <span className="h-2.5 w-2.5 rounded-full bg-fg-dim/40" />
                   <span className="ml-3 flex-1 truncate rounded bg-bg-muted/40 px-3 py-1 text-xs text-fg-dim">
-                    nebulacomponents.com — audit results
+                    nebulacomponents.com, audit results
                   </span>
                 </div>
                 {/* Scorecard: shows real findings with scores, evidence, and top leak */}
@@ -155,7 +155,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Mobile sticky CTA — sentinel placed here so it appears after hero exits viewport */}
+        {/* Mobile sticky CTA, sentinel placed here so it appears after hero exits viewport */}
         <MobileStickyAuditCTA />
 
         {/* ── 1c. ROI Calculator ── */}
@@ -205,7 +205,7 @@ export default function Home() {
             </div>
             <div className="rounded-2xl border border-border bg-bg-muted/30 p-6 font-mono text-sm">
               <p className="mb-4 text-xs text-fg-muted">
-                Sample output format — illustrative findings
+                Sample output format, illustrative findings
               </p>
               {[
                 { key: 'headline', label: 'Headline', pass: true },

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { headers } from 'next/headers'
 import { Suspense } from 'react'
+import { Inter } from 'next/font/google'
 import SiteNav from '@/components/SiteNav'
 import Footer from '@/components/Footer'
 import WebMCP from '@/components/WebMCP'
@@ -9,6 +10,13 @@ import AnalyticsRuntime from './components/AnalyticsRuntime'
 import ExitIntentPopup from '@/components/ExitIntentPopup'
 import './globals.css'
 import { organizationSchema, websiteSchema } from './lib/schema'
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
+})
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -63,7 +71,7 @@ export default async function RootLayout({
     ''
   ).toUpperCase() || null
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={inter.variable}>
       <head>
         {/* Keep Open Graph URL aligned with the requested canonical path. The
             root metadata cannot infer child routes, so the proxy supplies the
