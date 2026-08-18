@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from 'next'
-import { headers } from 'next/headers'
 import { Suspense } from 'react'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import SiteNav from '@/components/SiteNav'
 import SiteFooter from './components/SiteFooter'
 import WebMCP from '@/components/WebMCP'
-import LazyCookieConsent from './components/LazyCookieConsent'
+import GeoConsent from './components/GeoConsent'
+import OgUrl from './components/OgUrl'
 import AnalyticsRuntime from './components/AnalyticsRuntime'
 import ExitIntentPopup from '@/components/ExitIntentPopup'
 import './globals.css'
@@ -52,28 +52,18 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const requestHeaders = await headers()
-  const country = (
-    requestHeaders.get('cf-ipcountry') ||
-    requestHeaders.get('x-vercel-ip-country') ||
-    requestHeaders.get('x-country-code') ||
-    ''
-  ).toUpperCase() || null
   return (
     <html lang="en" suppressHydrationWarning className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <head>
-        {/* Keep Open Graph URL aligned with the requested canonical path. The
-            root metadata cannot infer child routes, so the proxy supplies the
-            original pathname for this request. */}
-        <meta
-          property="og:url"
-          content={`https://nebulacomponents.com${requestHeaders.get('x-nebula-pathname') || '/'}`}
-        />
+        {/* OG URL: isolated dynamic component so layout stays statically renderable */}
+        <Suspense fallback={<meta property="og:url" content="https://nebulacomponents.com/" />}>
+          <OgUrl />
+        </Suspense>
         {/* Supply a complete image set even when child metadata overrides the
             root Open Graph object. */}
         <meta property="og:image" content="https://nebulacomponents.com/opengraph-image" />
@@ -115,6 +105,19 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
+
+        {/* Searchable tracking */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.sa=window.sa||function(){(sa.q=sa.q||[]).push(arguments)}`
+          }}
+        />
+        <script
+          defer
+          src="https://searchable-tracker.searchable.workers.dev/s.js"
+          data-domain="nebulacomponents.com"
+          data-site-token="pst_14b9bc17bc3d1a0a51465b65"
+        />
       </head>
       <body>
         <a href="#main-content" className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-emerald-500 focus:text-black focus:rounded">
@@ -123,7 +126,10 @@ export default async function RootLayout({
         <SiteNav />
         {children}
         <SiteFooter />
-        <LazyCookieConsent country={country} />
+        {/* GeoConsent: isolated dynamic component — reads country from x-nebula-country header */}
+        <Suspense fallback={null}>
+          <GeoConsent />
+        </Suspense>
         <Suspense fallback={null}><AnalyticsRuntime /></Suspense>
         <ExitIntentPopup />
         <WebMCP />

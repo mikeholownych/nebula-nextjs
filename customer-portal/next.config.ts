@@ -263,11 +263,11 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://static.cloudflareinsights.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://static.cloudflareinsights.com https://searchable-tracker.searchable.workers.dev",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https://indieascent.com https://nicklaunches.com",
               "font-src 'self' data:",
-              "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://us.posthog.com https://us.i.posthog.com https://cloudflareinsights.com",
+              "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://us.posthog.com https://us.i.posthog.com https://cloudflareinsights.com https://searchable-tracker.searchable.workers.dev",
               "frame-src 'none'",
               "object-src 'none'",
               "base-uri 'self'",
@@ -277,17 +277,16 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // CF email obfuscation: previously blocked via no-transform in Cache-Control,
-      // but no-transform also stops the compression middleware (RFC 7230 §5.7.2 compliance).
-      // Removed no-transform - CF compresses HTML at the edge AND Next.js compresses at origin.
-      // CF email obfuscation (cdn-cgi link rewriting) is harmless anti-spam; disable it
-      // in the CF dashboard (Scrape Shield → Email Address Obfuscation → Off) if needed.
+      // HTML pages: browser always revalidates, CDN caches for 5 minutes (SSG content).
+      // s-maxage lets Cloudflare serve from edge for 5 minutes before revalidating.
+      // After static generation lands, bump s-maxage to 300+ for content pages.
+      // Dynamic pages (force-dynamic) override this with no-store via Next.js.
       {
         source: '/((?!_next).*)',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=0, must-revalidate',
+            value: 'public, max-age=0, s-maxage=300, stale-while-revalidate=60, must-revalidate',
           },
           {
             key: 'X-Nebula-Revision',
