@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-const NEWSLETTER_API = 'https://api.nebulacomponents.shop'
+const NEWSLETTER_API = 'https://api.nebulacomponents.com'
 
 export default function UnsubscribePage() {
   const [icon, setIcon] = useState('✉️')

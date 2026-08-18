@@ -1,4 +1,5 @@
 "use client";
+import RelatedContent from '@/components/RelatedContent'
 
 import Link from "next/link";
 import Script from "next/script";

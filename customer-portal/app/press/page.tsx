@@ -105,7 +105,7 @@ export default function PressPage() {
                   </div>
                   <div className="flex gap-2">
                     <dt className="text-fg-muted min-w-[80px]">Domain</dt>
-                    <dd className="text-fg font-medium font-mono text-xs">nebulacomponents.shop</dd>
+                    <dd className="text-fg font-medium font-mono text-xs">nebulacomponents.com</dd>
                   </div>
                   <div className="flex gap-2">
                     <dt className="text-fg-muted min-w-[80px]">Founded</dt>
@@ -461,13 +461,13 @@ export default function PressPage() {
                 <dl className="space-y-2 text-sm">
                   <div className="flex gap-2">
                     <dt className="text-fg-muted min-w-[60px]">Email</dt>
-                    <dd className="text-fg font-medium font-mono text-xs">press@nebulacomponents.shop</dd>
+                    <dd className="text-fg font-medium font-mono text-xs">press@nebulacomponents.com</dd>
                   </div>
                   <div className="flex gap-2">
                     <dt className="text-fg-muted min-w-[60px]">Web</dt>
                     <dd>
-                      <a href="https://nebulacomponents.shop" className="text-accent hover:text-fg text-xs font-mono underline underline-offset-2">
-                        nebulacomponents.shop
+                      <a href="https://nebulacomponents.com" className="text-accent hover:text-fg text-xs font-mono underline underline-offset-2">
+                        nebulacomponents.com
                       </a>
                     </dd>
                   </div>
