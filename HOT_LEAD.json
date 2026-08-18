@@ -107,7 +107,7 @@
     "audit_grade": "B",
     "audit_delivered_at": "2026-07-02T10:43:07.059839+00:00",
     "pitch_due_at": "2026-07-04T10:00:00+00:00",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "holiday_timing_adjusted": true,
@@ -116,7 +116,8 @@
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
     "day3_framework": "silent_objection_pre_empt",
     "upsell_sent_at": "2026-08-10T12:51:04.843913+00:00",
-    "updated_at": "2026-08-10T12:51:04.843913+00:00"
+    "updated_at": "2026-08-10T12:51:04.843913+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://funghiclear.com/products/funghiclear-nail-spray-with-manuka-oil",
@@ -126,7 +127,7 @@
     "audit_grade": "B",
     "audit_delivered_at": "2026-07-02T10:44:25.040292+00:00",
     "pitch_due_at": "2026-07-04T10:00:00+00:00",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "holiday_timing_adjusted": true,
@@ -135,7 +136,8 @@
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
     "day3_framework": "silent_objection_pre_empt",
     "upsell_sent_at": "2026-08-10T18:00:27.406151+00:00",
-    "updated_at": "2026-08-10T18:00:27.406151+00:00"
+    "updated_at": "2026-08-10T18:00:27.406151+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://lowtdfw.com/offer",
@@ -145,14 +147,15 @@
     "audit_grade": "B",
     "audit_delivered_at": "2026-07-02T10:44:28.507856+00:00",
     "pitch_due_at": "2026-07-04T10:00:00+00:00",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "holiday_timing_adjusted": true,
     "holiday_timing_note": "Moved to early AM ET July 4; hourly monitor handles replies into evening.",
     "pitch_sent_at": "2026-07-04T10:22:09.520169+00:00",
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
-    "day3_framework": "silent_objection_pre_empt"
+    "day3_framework": "silent_objection_pre_empt",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://invoicingapi.com",
@@ -162,7 +165,7 @@
     "audit_grade": "B",
     "audit_delivered_at": "2026-07-02T12:05:15.699215+00:00",
     "pitch_due_at": "2026-07-04T10:00:00+00:00",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "holiday_timing_adjusted": true,
@@ -171,7 +174,8 @@
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
     "day3_framework": "silent_objection_pre_empt",
     "upsell_sent_at": "2026-08-11T00:00:47.584917+00:00",
-    "updated_at": "2026-08-11T00:00:47.584917+00:00"
+    "updated_at": "2026-08-11T00:00:47.584917+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://usemagnetiq.com",
@@ -198,7 +202,7 @@
     "audit_grade": "C",
     "audit_delivered_at": "2026-07-02T14:00:12.775224+00:00",
     "pitch_due_at": "2026-07-04T10:00:00+00:00",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "holiday_timing_adjusted": true,
@@ -207,7 +211,8 @@
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
     "day3_framework": "silent_objection_pre_empt",
     "upsell_sent_at": "2026-08-11T06:00:31.871123+00:00",
-    "updated_at": "2026-08-11T06:00:31.871123+00:00"
+    "updated_at": "2026-08-11T06:00:31.871123+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://www.sarojhospital.com/gastro-care",
@@ -217,14 +222,18 @@
     "audit_grade": "C",
     "audit_delivered_at": "2026-07-02T16:18:05.777775+00:00",
     "pitch_due_at": "2026-07-04T10:00:00+00:00",
-    "stage": "pitch_sent",
+    "stage": "terminal",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "holiday_timing_adjusted": true,
     "holiday_timing_note": "Moved to early AM ET July 4; hourly monitor handles replies into evening.",
     "pitch_sent_at": "2026-07-04T10:22:12.673668+00:00",
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
-    "day3_framework": "silent_objection_pre_empt"
+    "day3_framework": "silent_objection_pre_empt",
+    "upsell_sent_at": "2026-08-11T12:01:02.747571+00:00",
+    "updated_at": "2026-08-11T12:01:02.747571+00:00",
+    "terminal_reason": "non_icp_domain",
+    "terminal_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://spsroof.com",
@@ -234,12 +243,15 @@
     "audit_grade": "C",
     "audit_delivered_at": "2026-07-03T09:06:28.808153+00:00",
     "pitch_due_at": "2026-07-05T09:06:28.808137+00:00",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "pitch_sent_at": "2026-07-05T09:21:33.680772+00:00",
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
-    "day3_framework": "silent_objection_pre_empt"
+    "day3_framework": "silent_objection_pre_empt",
+    "upsell_sent_at": "2026-08-11T18:00:21.321794+00:00",
+    "updated_at": "2026-08-11T18:00:21.321794+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://salisroofing.com",
@@ -249,12 +261,15 @@
     "audit_grade": "C",
     "audit_delivered_at": "2026-07-03T09:06:35.396113+00:00",
     "pitch_due_at": "2026-07-05T09:06:35.396098+00:00",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "pitch_sent_at": "2026-07-05T09:21:34.578819+00:00",
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
-    "day3_framework": "silent_objection_pre_empt"
+    "day3_framework": "silent_objection_pre_empt",
+    "upsell_sent_at": "2026-08-12T00:00:36.112158+00:00",
+    "updated_at": "2026-08-12T00:00:36.112158+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://www.brookerlaw.com",
@@ -276,12 +291,15 @@
     "audit_grade": "C",
     "audit_delivered_at": "2026-07-03T09:29:05.704284+00:00",
     "pitch_due_at": "2026-07-05T09:29:05.704268+00:00",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "pitch_sent_at": "2026-07-05T10:01:27.963913+00:00",
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
-    "day3_framework": "silent_objection_pre_empt"
+    "day3_framework": "silent_objection_pre_empt",
+    "upsell_sent_at": "2026-08-12T06:00:14.068093+00:00",
+    "updated_at": "2026-08-12T06:00:14.068093+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://greensustainabilitysolutions.com",
@@ -291,12 +309,15 @@
     "audit_grade": "C",
     "audit_delivered_at": "2026-07-03T09:32:43.755557+00:00",
     "pitch_due_at": "2026-07-05T09:32:43.755530+00:00",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "pitch_sent_at": "2026-07-05T10:01:28.782380+00:00",
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
-    "day3_framework": "silent_objection_pre_empt"
+    "day3_framework": "silent_objection_pre_empt",
+    "upsell_sent_at": "2026-08-12T12:00:54.094188+00:00",
+    "updated_at": "2026-08-12T12:00:54.094188+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://www.shaadisouk.com",
@@ -306,12 +327,16 @@
     "audit_grade": "D",
     "audit_delivered_at": "2026-07-03T09:32:46.386846+00:00",
     "pitch_due_at": "2026-07-05T09:32:46.386831+00:00",
-    "stage": "pitch_sent",
+    "stage": "terminal",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "pitch_sent_at": "2026-07-05T10:01:29.582363+00:00",
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
-    "day3_framework": "silent_objection_pre_empt"
+    "day3_framework": "silent_objection_pre_empt",
+    "upsell_sent_at": "2026-08-12T18:00:09.643274+00:00",
+    "updated_at": "2026-08-12T18:00:09.643274+00:00",
+    "terminal_reason": "non_icp_domain",
+    "terminal_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://yourpapersource.com/collections/",
@@ -321,12 +346,15 @@
     "audit_grade": "B",
     "audit_delivered_at": "2026-07-03T10:06:17.204620+00:00",
     "pitch_due_at": "2026-07-05T10:06:17.204605+00:00",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "pitch_sent_at": "2026-07-05T10:25:48.584737+00:00",
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
-    "day3_framework": "silent_objection_pre_empt"
+    "day3_framework": "silent_objection_pre_empt",
+    "upsell_sent_at": "2026-08-13T00:00:18.649676+00:00",
+    "updated_at": "2026-08-13T00:00:18.649676+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://foundcall.org",
@@ -336,12 +364,15 @@
     "audit_grade": "B",
     "audit_delivered_at": "2026-07-03T10:06:19.685404+00:00",
     "pitch_due_at": "2026-07-05T10:06:19.685378+00:00",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "pitch_sent_at": "2026-07-05T10:25:49.358622+00:00",
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
-    "day3_framework": "silent_objection_pre_empt"
+    "day3_framework": "silent_objection_pre_empt",
+    "upsell_sent_at": "2026-08-13T06:00:33.158261+00:00",
+    "updated_at": "2026-08-13T06:00:33.158261+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://magnolia-club.org",
@@ -363,12 +394,13 @@
     "audit_grade": "C",
     "audit_delivered_at": "2026-07-03T10:13:49.653237+00:00",
     "pitch_due_at": "2026-07-05T10:13:49.653223+00:00",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "pitch_sent_at": "2026-07-05T10:26:51.929366+00:00",
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
-    "day3_framework": "silent_objection_pre_empt"
+    "day3_framework": "silent_objection_pre_empt",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://www.meadowsgaragedoors.com/service-areas/north-dallas-tx",
@@ -378,12 +410,15 @@
     "audit_grade": "C",
     "audit_delivered_at": "2026-07-03T10:24:53.626905+00:00",
     "pitch_due_at": "2026-07-05T10:24:53.626890+00:00",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "pitch_sent_at": "2026-07-05T11:31:05.959186+00:00",
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
-    "day3_framework": "silent_objection_pre_empt"
+    "day3_framework": "silent_objection_pre_empt",
+    "upsell_sent_at": "2026-08-13T12:00:46.545197+00:00",
+    "updated_at": "2026-08-13T12:00:46.545197+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://saputo.law",
@@ -405,12 +440,15 @@
     "audit_grade": "B",
     "audit_delivered_at": "2026-07-03T10:25:00.967179+00:00",
     "pitch_due_at": "2026-07-05T10:25:00.967162+00:00",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "pitch_sent_at": "2026-07-05T11:32:08.354167+00:00",
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
-    "day3_framework": "silent_objection_pre_empt"
+    "day3_framework": "silent_objection_pre_empt",
+    "upsell_sent_at": "2026-08-13T18:00:50.427352+00:00",
+    "updated_at": "2026-08-13T18:00:50.427352+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://ratnerpt.com",
@@ -420,12 +458,15 @@
     "audit_grade": "B",
     "audit_delivered_at": "2026-07-03T10:25:04.395427+00:00",
     "pitch_due_at": "2026-07-05T10:25:04.395404+00:00",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "pitch_sent_at": "2026-07-05T11:32:09.127464+00:00",
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
-    "day3_framework": "silent_objection_pre_empt"
+    "day3_framework": "silent_objection_pre_empt",
+    "upsell_sent_at": "2026-08-14T00:00:56.430698+00:00",
+    "updated_at": "2026-08-14T00:00:56.430698+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://whitehorseflowers.com.au/collections/sympathy-flowers",
@@ -435,12 +476,16 @@
     "audit_grade": "B",
     "audit_delivered_at": "2026-07-03T10:33:36.597686+00:00",
     "pitch_due_at": "2026-07-05T10:33:36.597664+00:00",
-    "stage": "pitch_sent",
+    "stage": "terminal",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "pitch_sent_at": "2026-07-05T11:32:09.978082+00:00",
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
-    "day3_framework": "silent_objection_pre_empt"
+    "day3_framework": "silent_objection_pre_empt",
+    "upsell_sent_at": "2026-08-14T06:00:12.131534+00:00",
+    "updated_at": "2026-08-14T06:00:12.131534+00:00",
+    "terminal_reason": "non_icp_domain",
+    "terminal_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "url": "https://www.gepettosguild.com/custom-quote/",
@@ -450,25 +495,30 @@
     "audit_grade": "C",
     "audit_delivered_at": "2026-07-03T10:33:40.301074+00:00",
     "pitch_due_at": "2026-07-05T10:33:40.301056+00:00",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "action": "monitor_payment_or_reply",
     "status": "pitched",
     "pitch_sent_at": "2026-07-05T11:32:10.740185+00:00",
     "day3_followup_sent_at": "2026-07-08T00:02:06.993056+00:00",
-    "day3_framework": "silent_objection_pre_empt"
+    "day3_framework": "silent_objection_pre_empt",
+    "upsell_sent_at": "2026-08-14T12:00:20.501692+00:00",
+    "updated_at": "2026-08-14T12:00:20.501692+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "email": "patriciasfnunes@gmail.com",
     "url": "https://www.patricianunes.pt/couples-experiences",
     "score": 0,
-    "stage": "pitch_sent",
+    "stage": "terminal",
     "pitch_due_at": "2026-07-05T12:02:57Z",
     "status": "pitched",
     "note": "URL corrected from /lisbon-couples-photoshoot to /couples-experiences",
     "action": "monitor_payment_or_reply",
     "audit_score": 5.0,
     "audit_grade": "C",
-    "pitch_sent_at": "2026-07-06T11:46:49.827410+00:00"
+    "pitch_sent_at": "2026-07-06T11:46:49.827410+00:00",
+    "terminal_reason": "non_icp_domain",
+    "terminal_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "email": "contact@curbcaddie.com",
@@ -476,7 +526,7 @@
     "score": 8.0,
     "audit_score": 8.0,
     "audit_grade": "A",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "status": "pitched",
     "action": "monitor_payment_or_reply",
     "thread_id": null,
@@ -487,7 +537,11 @@
     "contact_route": "website_manual_contact:contact@curbcaddie.com",
     "audit_delivered_at": "2026-07-05T08:14:36Z",
     "pitch_due_at": "2026-07-07T08:16:17Z",
-    "pitch_sent_at": "2026-07-07T12:00:33.418917+00:00"
+    "pitch_sent_at": "2026-07-07T12:00:33.418917+00:00",
+    "last_reactivation_sent_at": "2026-08-11T18:42:25.962411+00:00",
+    "last_reactivation_message_id": "<0100019ff21f8d78-efd0113b-3443-4fed-85b6-4fe65ddf587e-000000@email.amazonses.com>",
+    "last_reactivation_subject": "The $1,000 did not buy you a conversion problem",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "email": "hello@hacktron.ai",
@@ -537,7 +591,7 @@
     "score": 5.9,
     "audit_score": 5.9,
     "audit_grade": "C",
-    "stage": "pitch_sent",
+    "stage": "terminal",
     "status": "pitched",
     "action": "monitor_payment_or_reply",
     "thread_id": null,
@@ -548,7 +602,9 @@
     "trigger_type": null,
     "contact_route": null,
     "pitch_due_at": "2026-07-08T12:04:48Z",
-    "pitch_sent_at": "2026-07-08T12:17:13.552002+00:00"
+    "pitch_sent_at": "2026-07-08T12:17:13.552002+00:00",
+    "terminal_reason": "non_icp_domain",
+    "terminal_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "email": "info@xpertstart.com.au",
@@ -556,7 +612,7 @@
     "score": 6.2,
     "audit_score": 6.2,
     "audit_grade": "C",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "status": "pitched",
     "action": "monitor_payment_or_reply",
     "thread_id": null,
@@ -567,7 +623,8 @@
     "trigger_type": null,
     "contact_route": null,
     "pitch_due_at": "2026-07-08T12:05:00Z",
-    "pitch_sent_at": "2026-07-08T12:17:14.317064+00:00"
+    "pitch_sent_at": "2026-07-08T12:17:14.317064+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "email": "info@2getherewesave.com",
@@ -597,7 +654,7 @@
     "score": 6.4,
     "audit_score": 6.4,
     "audit_grade": "C",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "status": "pitched",
     "action": "monitor_payment_or_reply",
     "thread_id": null,
@@ -609,7 +666,8 @@
     "contact_route": null,
     "pitch_due_at": "2026-07-08T13:13:36Z",
     "notes": "Pitch sent via manual_pitch_danny.py \u2014 HOT_LEAD sync corrected",
-    "updated_at": "2026-07-12T03:50:00+00:00"
+    "updated_at": "2026-07-12T03:50:00+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "email": "hello@ziplead.ai",
@@ -683,7 +741,7 @@
     "score": 6.2,
     "audit_score": 6.2,
     "audit_grade": "C",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "status": "pitched",
     "action": "monitor_payment_or_reply",
     "thread_id": null,
@@ -696,7 +754,8 @@
     "pitch_due_at": "2026-07-12T04:49:26Z",
     "notes": "Pitch sent 2026-07-09; SRE corrected stale HOT_LEAD state",
     "updated_at": "2026-07-14T09:46:00Z",
-    "pitch_sent_at": "2026-07-09T12:00:58.501213+00:00"
+    "pitch_sent_at": "2026-07-09T12:00:58.501213+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "email": "support@curiouscats.ai",
@@ -726,7 +785,7 @@
     "score": 5.4,
     "audit_score": 5.4,
     "audit_grade": "C",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "status": "pitched",
     "action": "monitor_payment_or_reply",
     "thread_id": null,
@@ -739,12 +798,13 @@
     "pitch_due_at": "2026-07-12T04:49:26Z",
     "notes": "Queued for pitch \u2014 HOT_LEAD sync corrected",
     "updated_at": "2026-07-12T03:50:00+00:00",
-    "pitch_sent_at": "2026-07-13T01:29:38.720270+00:00"
+    "pitch_sent_at": "2026-07-13T01:29:38.720270+00:00",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "email": "hello@ozigi.app",
     "url": "https://ozigi.app",
-    "stage": "pitch_sent",
+    "stage": "recircle_60d",
     "reply_text": "What services do you offer?",
     "reply_classification": "positive_inquiry",
     "replied_at": "2026-07-07T17:30:07Z",
@@ -753,7 +813,8 @@
     "source": "cold_breakup_email",
     "threaded_reply_sent_at": "2026-07-08T08:05:00Z",
     "status": "pitched",
-    "action": "monitor_payment_or_reply"
+    "action": "monitor_payment_or_reply",
+    "recircle_at": "2026-08-17T01:00:09.563525+00:00"
   },
   {
     "email": "kanzariyamihir@gmail.com",

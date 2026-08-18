@@ -1,0 +1,61 @@
+{
+  "platform": "medium",
+  "track": "page_performance",
+  "finding_rank": 3,
+  "created_at": "2026-08-17T08:02:01.597399+00:00",
+  "working_title": "The 300KB Homepage: Why Bloat Kills Paid Traffic",
+  "headline": "The 300KB Homepage: Why Bloat Kills Paid Traffic",
+  "outline": {
+    "headline": "The 300KB Homepage: Why Bloat Kills Paid Traffic",
+    "subheading": "Data from 3 recent website audits",
+    "structure": [
+      {
+        "section": "Opening",
+        "length": "2-3 paragraphs",
+        "purpose": "Why this matters to founders + founders losing budget"
+      },
+      {
+        "section": "The Leak",
+        "length": "3-4 paragraphs",
+        "purpose": "Audit data: 3 sites have this issue",
+        "stat": "3 of 41 audits"
+      },
+      {
+        "section": "The Fix",
+        "length": "5-7 paragraphs",
+        "purpose": "Step-by-step methodology"
+      },
+      {
+        "section": "The Evidence",
+        "length": "3-5 paragraphs",
+        "purpose": "Real examples from audits",
+        "companies": [
+          "Prokeep",
+          "Transmosis"
+        ]
+      },
+      {
+        "section": "The Outcome",
+        "length": "2-3 paragraphs",
+        "purpose": "What changes when fixed"
+      },
+      {
+        "section": "CTA",
+        "length": "1 paragraph",
+        "purpose": "Link to audit"
+      }
+    ],
+    "cta": {
+      "link": "nebulacomponents.shop/audit",
+      "utm": "?utm_source=medium&utm_medium=article&utm_campaign=page_performance&utm_content=finding-3",
+      "text": "Get your free audit \\u2192 nebulacomponents.shop/audit"
+    },
+    "seo_keywords": [
+      "landing page conversion",
+      "page performance",
+      "conversion rate optimization",
+      "founder productivity",
+      "ad spend ROI"
+    ]
+  }
+}

@@ -70,9 +70,11 @@ def verify_email(email: str) -> dict:
             result["reason"] += "; MailCheck " + decision.reason
     except (MailCheckError, ValueError):
         result["mailcheck"] = {"error": "MAILCHECK_UNAVAILABLE"}
-        result["deliverable"] = False
+        # MailCheck unavailable — fall back to Hunter-only decision.
+        # Hunter already determined deliverability; don't block on MC timeout.
         result["status"] = "mailcheck_unavailable"
-        result["reason"] += "; MailCheck unavailable"
+        result["reason"] += "; MailCheck unavailable (Hunter-only fallback)"
+        result["mailcheck_allowed"] = result["deliverable"]
     return result
 
 
@@ -296,14 +298,14 @@ def run_sequence() -> list[str]:
                     message_id=row["message_id"],
                     recipient=email,
                     text=text,
-                    client_id=f"outreach-{email.split('@')[0]}-d7-{d1_dt.strftime('%Y%m%d')}",
+                    client_id=f"reply:seq-d7-{email.split('@')[0]}-{d1_dt.strftime('%Y%m%d')}",
                 )
             else:
                 result = _am_send(
                     email=email,
                     subject=subject,
                     text=text,
-                    client_id=f"outreach-{email.split('@')[0]}-d7-{d1_dt.strftime('%Y%m%d')}",
+                    client_id=f"auto:seq-d7-{email.split('@')[0]}-{d1_dt.strftime('%Y%m%d')}",
                     labels=["sequence-d7"],
                 )
             if "_error" not in result:
@@ -328,7 +330,7 @@ def run_sequence() -> list[str]:
                 email=email,
                 subject=subject,
                 text=text,
-                client_id=f"outreach-{email.split('@')[0]}-d17-{d1_dt.strftime('%Y%m%d')}",
+                client_id=f"auto:seq-d17-{email.split('@')[0]}-{d1_dt.strftime('%Y%m%d')}",
                 labels=["sequence-d17"],
             )
             if "_error" not in result:
@@ -398,7 +400,7 @@ def send_d1(
     # Step 2: Send
     domain = email.split("@")[0]
     import time
-    idempotency_key = f"outreach-{domain}-d1-{int(time.time()) // 86400}"
+    idempotency_key = f"auto:seq-d1-{domain}-{int(time.time()) // 86400}"
 
     result = _am_send(
         email=email,

@@ -1,0 +1,30 @@
+{
+  "platform": "linkedin",
+  "track": "headline_clarity",
+  "finding_rank": 1,
+  "created_at": "2026-08-17T08:02:01.595884+00:00",
+  "working_title": "Why Ad Spend Gets Wasted: The Invisible Headline Problem",
+  "hook": "I've audited 40+ founder websites. The #1 conversion killer isn't design\u2014it's this one headline mistake that burns money on every paid click.",
+  "sample_companies": [
+    "Fyncom",
+    "Polly"
+  ],
+  "frequency": 28,
+  "brief": {
+    "hook_primary": "I've audited 40+ founder websites. The #1 conversion killer isn't design\u2014it's this one headline mistake that burns money on every paid click.",
+    "hook_variants": [
+      "I audited 28 websites this week. Headline Clarity is costing these founders money.",
+      "68% of the sites I reviewed have the same headline clarity problem. That's 28 paid ad budgets bleeding.",
+      "Your headline clarity is killing your conversions. Here's the fix."
+    ],
+    "structure": {
+      "hook": "[Primary hook above]",
+      "setup": "2-3 sentences why this matters",
+      "insight": "3-5 sentences with audit evidence",
+      "proof": "Mention frequency (e.g., '28 out of 41 sites')",
+      "cta": "Comment AUDIT for free teardown"
+    },
+    "cta_type": "comment",
+    "cta_text": "Comment 'AUDIT' and I'll send you a free landing page teardown."
+  }
+}

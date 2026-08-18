@@ -20,9 +20,10 @@ async def _fetch_html(url: str) -> str:
         return resp.text
 
 
-async def verify_headline(url: str) -> SignalResult:
+async def verify_headline(url: str, html: Optional[str] = None) -> SignalResult:
     try:
-        html = await _fetch_html(url)
+        if html is None:
+            html = await _fetch_html(url)
         match = re.search(r"<h1[^>]*>(.*?)</h1>", html, re.IGNORECASE | re.DOTALL)
         if not match:
             return _result(False, 0.0, "No H1 tag found on page")
@@ -43,9 +44,10 @@ async def verify_headline(url: str) -> SignalResult:
         return _result(False, 0.0, f"Fetch failed: {str(e)[:100]}")
 
 
-async def verify_cta(url: str) -> SignalResult:
+async def verify_cta(url: str, html: Optional[str] = None) -> SignalResult:
     try:
-        html = await _fetch_html(url)
+        if html is None:
+            html = await _fetch_html(url)
         cta_pattern = re.compile(
             r"<(button|a)\b[^>]*>([^<]*?)\b(get|start|try|buy|sign\s*up|book|schedule|"
             r"claim|download|join|subscribe|order|reserve|request|apply)\b",
@@ -60,9 +62,10 @@ async def verify_cta(url: str) -> SignalResult:
         return _result(False, 0.0, f"Fetch failed: {str(e)[:100]}")
 
 
-async def verify_above_fold(url: str) -> SignalResult:
+async def verify_above_fold(url: str, html: Optional[str] = None) -> SignalResult:
     try:
-        html = await _fetch_html(url)
+        if html is None:
+            html = await _fetch_html(url)
         body_match = re.search(r"<body[^>]*>(.*)", html, re.IGNORECASE | re.DOTALL)
         if not body_match:
             return _result(False, 0.0, "No body tag found")
@@ -84,9 +87,10 @@ async def verify_above_fold(url: str) -> SignalResult:
         return _result(False, 0.0, f"Fetch failed: {str(e)[:100]}")
 
 
-async def verify_social_proof(url: str) -> SignalResult:
+async def verify_social_proof(url: str, html: Optional[str] = None) -> SignalResult:
     try:
-        html = await _fetch_html(url)
+        if html is None:
+            html = await _fetch_html(url)
         markers = [
             (r"<blockquote", "blockquote"),
             (r"testimonial", "testimonial keyword"),
@@ -106,7 +110,7 @@ async def verify_social_proof(url: str) -> SignalResult:
         return _result(False, 0.0, f"Fetch failed: {str(e)[:100]}")
 
 
-async def verify_load_speed(url: str) -> SignalResult:
+async def verify_load_speed(url: str, html: Optional[str] = None) -> SignalResult:
     try:
         start = time.monotonic()
         async with httpx.AsyncClient(timeout=TIMEOUT, follow_redirects=True) as client:
@@ -122,9 +126,10 @@ async def verify_load_speed(url: str) -> SignalResult:
         return _result(False, 0.0, f"Request failed: {str(e)[:100]}")
 
 
-async def verify_mobile(url: str) -> SignalResult:
+async def verify_mobile(url: str, html: Optional[str] = None) -> SignalResult:
     try:
-        html = await _fetch_html(url)
+        if html is None:
+            html = await _fetch_html(url)
         viewport = re.search(
             r'<meta\s+[^>]*name=["\']viewport["\'][^>]*>', html, re.IGNORECASE
         )
@@ -135,9 +140,10 @@ async def verify_mobile(url: str) -> SignalResult:
         return _result(False, 0.0, f"Fetch failed: {str(e)[:100]}")
 
 
-async def verify_ad_signals(url: str) -> SignalResult:
+async def verify_ad_signals(url: str, html: Optional[str] = None) -> SignalResult:
     try:
-        html = await _fetch_html(url)
+        if html is None:
+            html = await _fetch_html(url)
         desc_match = re.search(
             r'<meta\s+[^>]*name=["\']description["\'][^>]*content=["\']([^"\']*)["\']',
             html, re.IGNORECASE
@@ -160,9 +166,10 @@ async def verify_ad_signals(url: str) -> SignalResult:
         return _result(False, 0.0, f"Fetch failed: {str(e)[:100]}")
 
 
-async def verify_seo_foundations(url: str) -> SignalResult:
+async def verify_seo_foundations(url: str, html: Optional[str] = None) -> SignalResult:
     try:
-        html = await _fetch_html(url)
+        if html is None:
+            html = await _fetch_html(url)
         checks = {}
         checks["title"] = bool(re.search(r"<title[^>]*>.+?</title>", html, re.IGNORECASE | re.DOTALL))
         checks["meta_desc"] = bool(re.search(r'<meta\s+[^>]*name=["\']description["\']', html, re.IGNORECASE))
@@ -179,9 +186,10 @@ async def verify_seo_foundations(url: str) -> SignalResult:
         return _result(False, 0.0, f"Fetch failed: {str(e)[:100]}")
 
 
-async def verify_ai_readiness(url: str) -> SignalResult:
+async def verify_ai_readiness(url: str, html: Optional[str] = None) -> SignalResult:
     try:
-        html = await _fetch_html(url)
+        if html is None:
+            html = await _fetch_html(url)
         checks = {}
         checks["json_ld"] = bool(re.search(
             r'<script\s+[^>]*type=["\']application/ld\+json["\']', html, re.IGNORECASE
@@ -216,8 +224,8 @@ SIGNAL_VERIFIERS = {
 }
 
 
-async def verify_signal(signal_key: str, url: str) -> SignalResult:
+async def verify_signal(signal_key: str, url: str, html: Optional[str] = None) -> SignalResult:
     verifier = SIGNAL_VERIFIERS.get(signal_key)
     if not verifier:
         return _result(False, 0.0, f"Unknown signal: {signal_key}")
-    return await verifier(url)
+    return await verifier(url, html)

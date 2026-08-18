@@ -1365,6 +1365,13 @@ class AuditDB:
             if domain in domains:
                 return True
             domains.append(domain)
+            
+            await conn.execute(
+                "UPDATE partners SET domains = $2::jsonb, updated_at = NOW() WHERE id = $1",
+                partner_id, json.dumps(domains),
+            )
+            return True
+
     async def record_fix_implementation(self, audit_id: UUID, finding_key: str, implemented: bool, verification_method: str, notes: Optional[str] = None, score_before: Optional[float] = None, score_after: Optional[float] = None) -> bool:
         """Record a fix implementation attempt for an audit."""
         await self.connect()
@@ -1524,15 +1531,9 @@ class AuditDB:
                     "url": row["url"],
                     "audit_score": row["audit_score"],
                     "audit_grade": row["grade"]
-                })
+})
             
             return result
-
-            await conn.execute(
-                "UPDATE partners SET domains = $2::jsonb, updated_at = NOW() WHERE id = $1",
-                partner_id, json.dumps(domains),
-            )
-            return True
 
 
 # Singleton

@@ -7,6 +7,7 @@ import StackTaxComparison from './components/StackTaxComparison'
 import HonestyGrid from './components/HonestyGrid'
 import AgenticNativeBanner from './components/AgenticNativeBanner'
 import MobileStickyAuditCTA from './components/MobileStickyAuditCTA'
+import AuditCardArtifact from './components/AuditCardArtifact'
 import { TEARDOWNS } from './teardowns/[slug]/data'
 import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE } from './lib/homepageContent'
 import { SignalIcon } from '@/components/SignalIcons'
@@ -125,27 +126,15 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right: product screenshot, what you get */}
+            {/* Right: composed audit card artifact (not screenshot) */}
             <div className="flex flex-col">
-              <div className="overflow-hidden rounded-2xl border border-border shadow-[0_0_40px_rgba(0,194,160,0.08),0_20px_60px_rgba(0,0,0,0.5)]">
-                {/* Browser chrome strip */}
-                <div className="flex items-center gap-1.5 border-b border-border bg-bg-muted/60 px-4 py-2.5">
-                  <span className="h-2.5 w-2.5 rounded-full bg-fg-dim/40" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-fg-dim/40" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-fg-dim/40" />
-                  <span className="ml-3 flex-1 truncate rounded bg-bg-muted/40 px-3 py-1 text-xs text-fg-dim">
-                    nebulacomponents.com, audit results
-                  </span>
-                </div>
-                {/* Scorecard: shows real findings with scores, evidence, and top leak */}
-                <img
-                  src="/screenshots/audit-scorecard-hero.webp"
-                  alt="Nebula audit scorecard: 9 conversion signals scored, top leak identified with specific evidence and fix"
-                  width={1400}
-                  height={640}
-                  className="block w-full"
-                  loading="eager"
+              <div className="relative">
+                {/* Radial accent glow behind card */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -inset-8 bg-[radial-gradient(ellipse_60%_50%_at_70%_40%,rgba(0,194,160,0.15),transparent_70%)]"
                 />
+                <AuditCardArtifact />
               </div>
               <p className="mt-3 text-xs text-fg-muted">
                 9 signals. Scored against your actual page. Top leak identified with specific evidence and fix.

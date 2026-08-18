@@ -1,0 +1,118 @@
+{
+  "run_date": "2026-08-16T09:00:09Z",
+  "total_responses": 15,
+  "total_citations": 140,
+  "nebula_mentions": 0,
+  "canonical_citations": 0,
+  "mention_rate": 0.0,
+  "canonical_citation_precision": 0.0,
+  "gap_queries_all": [
+    "What is the best landing page audit tool for founders running paid traffic?",
+    "How do I diagnose why paid ad clicks are not converting?",
+    "Why is my landing page getting clicks but no sales?",
+    "What is the best SaaS landing page audit tool?",
+    "What free tool analyzes landing page conversion problems?"
+  ],
+  "top_winning_domains": [
+    {
+      "domain": "reddit.com",
+      "count": 12,
+      "pct": 8.6
+    },
+    {
+      "domain": "landingboost.app",
+      "count": 9,
+      "pct": 6.4
+    },
+    {
+      "domain": "perspective.co",
+      "count": 6,
+      "pct": 4.3
+    },
+    {
+      "domain": "medium.com",
+      "count": 6,
+      "pct": 4.3
+    },
+    {
+      "domain": "ppc.io",
+      "count": 6,
+      "pct": 4.3
+    },
+    {
+      "domain": "clicksgeek.com",
+      "count": 6,
+      "pct": 4.3
+    },
+    {
+      "domain": "webanatomy.ai",
+      "count": 6,
+      "pct": 4.3
+    },
+    {
+      "domain": "cometly.com",
+      "count": 5,
+      "pct": 3.6
+    },
+    {
+      "domain": "thesnowmedia.com",
+      "count": 4,
+      "pct": 2.9
+    },
+    {
+      "domain": "mywebaudit.com",
+      "count": 3,
+      "pct": 2.1
+    },
+    {
+      "domain": "get-ryze.ai",
+      "count": 3,
+      "pct": 2.1
+    },
+    {
+      "domain": "linkedin.com",
+      "count": 3,
+      "pct": 2.1
+    },
+    {
+      "domain": "community.shopify.com",
+      "count": 3,
+      "pct": 2.1
+    },
+    {
+      "domain": "aestudio.au",
+      "count": 3,
+      "pct": 2.1
+    },
+    {
+      "domain": "cybez.com",
+      "count": 3,
+      "pct": 2.1
+    }
+  ],
+  "brand_answer_mentions": {
+    "LandingBoost": {
+      "count": 6,
+      "pct": 40.0
+    },
+    "Microsoft Clarity": {
+      "count": 2,
+      "pct": 13.3
+    },
+    "Hotjar": {
+      "count": 1,
+      "pct": 6.7
+    },
+    "Systeme.io": {
+      "count": 3,
+      "pct": 20.0
+    }
+  },
+  "capture_method": "openrouter_api_perplexity_sonar",
+  "compare_prior": {
+    "date": "2026-08-09",
+    "rows": 15,
+    "mention_rate": 0.0,
+    "canonical_citations": 0
+  }
+}

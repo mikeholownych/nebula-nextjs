@@ -67,7 +67,7 @@ export const auditPageFAQSchema = createFAQPageSchema([
   },
   {
     question: 'What does the $97 One-Leak Repair Sprint include?',
-    answer: 'One scoped repair package for the highest-impact failing signal on your page — exact copy, code, or configuration change written for your specific page and sent by email within 48 hours. Includes one same-scope re-audit within 30 days. No site access required. Does not guarantee conversion lift.',
+    answer: 'One scoped repair package for the highest-impact failing signal on your page, exact copy, code, or configuration change written for your specific page and sent by email within 48 hours. Includes one same-scope re-audit within 30 days. No site access required. Does not guarantee conversion lift.',
   },
   {
     question: 'Which platforms does the audit work with?',
@@ -75,6 +75,6 @@ export const auditPageFAQSchema = createFAQPageSchema([
   },
   {
     question: 'What does the audit not cover?',
-    answer: 'The audit cannot observe visitor intent, ad audience quality, offer economics, or post-form conversion flows. It checks observable page conditions — the things a visitor experiences before they decide to act or leave. Business outcomes also depend on traffic quality and offer strength.',
+    answer: 'The audit cannot observe visitor intent, ad audience quality, offer economics, or post-form conversion flows. It checks observable page conditions, the things a visitor experiences before they decide to act or leave. Business outcomes also depend on traffic quality and offer strength.',
   },
 ])

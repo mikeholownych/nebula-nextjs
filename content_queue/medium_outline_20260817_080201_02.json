@@ -1,0 +1,61 @@
+{
+  "platform": "medium",
+  "track": "missing_analytics",
+  "finding_rank": 2,
+  "created_at": "2026-08-17T08:02:01.596643+00:00",
+  "working_title": "Why Your Missing GA4 Tag Is Actually a $10,000 Problem",
+  "headline": "Why Your Missing GA4 Tag Is Actually a $10,000 Problem",
+  "outline": {
+    "headline": "Why Your Missing GA4 Tag Is Actually a $10,000 Problem",
+    "subheading": "Data from 7 recent website audits",
+    "structure": [
+      {
+        "section": "Opening",
+        "length": "2-3 paragraphs",
+        "purpose": "Why this matters to founders + founders losing budget"
+      },
+      {
+        "section": "The Leak",
+        "length": "3-4 paragraphs",
+        "purpose": "Audit data: 7 sites have this issue",
+        "stat": "7 of 41 audits"
+      },
+      {
+        "section": "The Fix",
+        "length": "5-7 paragraphs",
+        "purpose": "Step-by-step methodology"
+      },
+      {
+        "section": "The Evidence",
+        "length": "3-5 paragraphs",
+        "purpose": "Real examples from audits",
+        "companies": [
+          "Hellometer",
+          "Modumup - Innovative B2b Marketing Agency"
+        ]
+      },
+      {
+        "section": "The Outcome",
+        "length": "2-3 paragraphs",
+        "purpose": "What changes when fixed"
+      },
+      {
+        "section": "CTA",
+        "length": "1 paragraph",
+        "purpose": "Link to audit"
+      }
+    ],
+    "cta": {
+      "link": "nebulacomponents.shop/audit",
+      "utm": "?utm_source=medium&utm_medium=article&utm_campaign=missing_analytics&utm_content=finding-2",
+      "text": "Get your free audit \\u2192 nebulacomponents.shop/audit"
+    },
+    "seo_keywords": [
+      "landing page conversion",
+      "missing analytics",
+      "conversion rate optimization",
+      "founder productivity",
+      "ad spend ROI"
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "platform": "linkedin",
+  "track": "missing_analytics",
+  "finding_rank": 2,
+  "created_at": "2026-08-17T08:02:01.596624+00:00",
+  "working_title": "Blind Paid Traffic: How Missing Analytics Cost You Revenue",
+  "hook": "Most SaaS founders have GA4 on their site. But here's the shocker: some of the biggest campaigns have ZERO analytics tags. That means zero attribution. That means wasted budget.",
+  "sample_companies": [
+    "Hellometer",
+    "Modumup - Innovative B2b Marketing Agency"
+  ],
+  "frequency": 7,
+  "brief": {
+    "hook_primary": "Most SaaS founders have GA4 on their site. But here's the shocker: some of the biggest campaigns have ZERO analytics tags. That means zero attribution. That means wasted budget.",
+    "hook_variants": [
+      "I audited 7 websites this week. Missing Analytics is costing these founders money.",
+      "68% of the sites I reviewed have the same missing analytics problem. That's 7 paid ad budgets bleeding.",
+      "Your missing analytics is killing your conversions. Here's the fix."
+    ],
+    "structure": {
+      "hook": "[Primary hook above]",
+      "setup": "2-3 sentences why this matters",
+      "insight": "3-5 sentences with audit evidence",
+      "proof": "Mention frequency (e.g., '28 out of 41 sites')",
+      "cta": "Comment AUDIT for free teardown"
+    },
+    "cta_type": "comment",
+    "cta_text": "Comment 'AUDIT' and I'll send you a free landing page teardown."
+  }
+}

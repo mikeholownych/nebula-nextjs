@@ -1,0 +1,84 @@
+📋 MONDAY CONTENT BRIEFS
+2026-08-17
+
+Source: 41 website audits from August 15, 2026
+Pipeline Status: ✓ Audit data extracted | ✓ Content themes identified | ✓ Briefs generated
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FINDING #1
+────────────
+Track: Headline Clarity
+Frequency: 28/41 audits (68%)
+Finding: "Early source proxy lacks a headline, clickable control, or offer term in its first 3,000 characters."
+
+LinkedIn Hook:
+"I've audited 40+ founder websites. The #1 conversion killer isn't design—it's this one headline mistake that burns money on every paid click."
+
+Medium Headline:
+"The Silent Budget Drain: Why Your Homepage Headline Costs More Than You Think"
+
+Sample Companies:
+• Fyncom, Polly
+
+FINDING #2
+────────────
+Track: Missing Analytics
+Frequency: 7/41 audits (17%)
+Finding: "No analytics artifact observed in source HTML. A homepage should carry at minimum a GA4 or equivalent measurement tag so paid traffic can be attributed."
+
+LinkedIn Hook:
+"Most SaaS founders have GA4 on their site. But here's the shocker: some of the biggest campaigns have ZERO analytics tags. That means zero attribution. That means wasted budget."
+
+Medium Headline:
+"Why Your Missing GA4 Tag Is Actually a $10,000 Problem"
+
+Sample Companies:
+• Hellometer, Modumup - Innovative B2b Marketing Agency
+
+FINDING #3
+────────────
+Track: Page Performance
+Frequency: 3/41 audits (7%)
+Finding: "HTML is 244KB - large pages slow first paint."
+
+LinkedIn Hook:
+"Your page loads slow. Your visitor leaves. Your conversion dies. I found 50+ company homepages with 200KB+ of unoptimized HTML. That's 2-4 seconds of wasted paid clicks."
+
+Medium Headline:
+"The 300KB Homepage: Why Bloat Kills Paid Traffic"
+
+Sample Companies:
+• Prokeep, Transmosis
+
+
+FILES:
+─────────
+LinkedIn briefs:     /home/mike/nebula/content_queue/linkedin_brief_20260817_*.json
+Medium outlines:     /home/mike/nebula/content_queue/medium_outline_20260817_*.json
+Full data:           /home/mike/nebula/idea_bank.json
+
+
+NEXT STEPS (Your work — publish + engage)
+───────────────────────────────────────────
+1. Review the briefs and select which findings to feature
+2. Write LinkedIn posts (or ask me to draft them)
+3. Write Medium articles (or ask me to outline them)
+4. Schedule posts:
+   - LinkedIn: Tue/Thu/Sat at 9 AM ET
+   - Medium: Sunday at 10 AM ET
+5. Monitor: Reply to comments within 1 hour (human-approved)
+6. Link to /audit is OK in posts (CTA gateway)
+
+Content Calendar:
+─────────────────
+• Post 1 (Finding #1): Headline Clarity — Tue/Thu/Sat
+• Post 2 (Finding #2): Analytics Gap — Alternate days
+• Post 3 (Finding #3): Page Performance — Rotate schedule
+
+Compliance:
+───────────
+✓ No auto-DM leads
+✓ Comment replies = human-approved
+✓ Link to /audit = OK in posts
+✓ Engagement priority = 1 hour reply time

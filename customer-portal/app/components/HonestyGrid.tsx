@@ -33,7 +33,7 @@ export default function HonestyGrid() {
               <h3 className="text-lg font-bold text-fg">No Fake PMF Fixes</h3>
             </div>
             <p className="text-sm text-fg-muted leading-6">
-              If your underlying product or offer lacks market demand, no amount of conversion optimization will create sales. We fix observable page friction, headline mismatch, and CTA leaks—not business viability.
+              If your underlying product or offer lacks market demand, no amount of conversion optimization will create sales. We fix observable page friction, headline mismatch, and CTA leaks - not business viability.
             </p>
           </div>
 

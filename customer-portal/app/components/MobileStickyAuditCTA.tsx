@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from 'react'
  *
  * Behaviour:
  * - Hidden until hero sentinel scrolls out of view (IntersectionObserver)
- * - Mobile-only (md:hidden — never shown on desktop)
+ * - Mobile-only (md:hidden, never shown on desktop)
  * - Dismissable (dismissed state stored in sessionStorage so it resets
  *   on a new session but doesn't reappear on the same visit after dismiss)
  * - Respects prefers-reduced-motion on entrance animation
@@ -49,12 +49,12 @@ export default function MobileStickyAuditCTA() {
 
   return (
     <>
-      {/* Sentinel — placed at the bottom of the hero section by the parent.
+      {/* Sentinel, placed at the bottom of the hero section by the parent.
           We render it here so the component is self-contained; the parent
           just needs to include <MobileStickyAuditCTA /> once. */}
       <div ref={sentinelRef} id="sticky-cta-sentinel" aria-hidden="true" />
 
-      {/* Sticky bar — mobile only */}
+      {/* Sticky bar, mobile only */}
       {visible && !dismissed && (
         <div
           role="complementary"
@@ -72,7 +72,7 @@ export default function MobileStickyAuditCTA() {
               href="/audit?utm_source=mobile-sticky&utm_medium=internal"
               className="flex-1 rounded-xl bg-accent py-3 text-center text-sm font-semibold text-bg transition-colors hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
             >
-              Find My Conversion Leak — Free
+              Find My Conversion Leak, Free
             </a>
             <button
               onClick={handleDismiss}

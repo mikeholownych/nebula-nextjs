@@ -23,39 +23,41 @@ export default function AboutPage() {
         </p>
 
         <section className="mb-10 rounded-2xl border border-border bg-bg-panel p-6">
-          <h2 className="mb-3 text-2xl font-bold text-accent">What we do</h2>
+          <h2 className="mb-3 text-2xl font-bold">What we do</h2>
           <p className="mb-4 text-fg-muted">
             We run a structured audit against your landing page - checking message-match, trust signals, mobile layout, form friction, load time, and compliance - and deliver a prioritised fix list with specific instructions. If you want implementation, we do that too, at a flat rate, with no retainer required.
           </p>
           <p className="text-fg-muted">
             When we publish a specific outcome claim, it comes with a recorded case behind it -
-            not just a number in a box. We don&apos;t have a verified case study to publish yet;
+            not just a number in a box. We don't have a verified case study to publish yet;
             see <a href="/case-studies" className="underline hover:text-fg">why</a>.
           </p>
         </section>
 
         <section className="mb-10 rounded-2xl border border-border bg-bg-panel p-6">
-          <h2 className="mb-3 text-2xl font-bold text-accent">Who we work with</h2>
+          <h2 className="mb-3 text-2xl font-bold">Who we work with</h2>
           <p className="mb-4 text-fg-muted">
-            Founders and operators who are actively spending on paid ads - Google, Meta, LinkedIn - and not seeing the conversions the click-through rate should produce. In our audits, the landing page is very often part of the problem - but we won&apos;t tell you it&apos;s the only variable. Traffic quality, offer, and price matter too; the audit tells you specifically what we can see on the page itself.
+            Founders and operators who are actively spending on paid ads - Google, Meta, LinkedIn - and not seeing the conversions the click-through rate should produce. In our audits, the landing page is very often part of the problem - but we won't tell you it's the only variable. Traffic quality, offer, and price matter too; the audit tells you specifically what we can see on the page itself.
           </p>
           <ul className="space-y-2 text-fg-muted">
-            {[
-              'Ecommerce brands with strong CTR and weak checkout conversion',
-              'B2B SaaS companies with high demo-request bounce rates',
-              'Coaches and consultants with zero form fills from paid campaigns',
-              'Agencies managing client accounts with disapproval and quality score problems',
-            ].map((item, i) => (
-              <li key={i} className="flex items-start gap-3">
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                {item}
-              </li>
-            ))}
+            {
+              [
+                'Ecommerce brands with strong CTR and weak checkout conversion',
+                'B2B SaaS companies with high demo-request bounce rates',
+                'Coaches and consultants with zero form fills from paid campaigns',
+                'Agencies managing client accounts with disapproval and quality score problems',
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                  {item}
+                </li>
+              ))
+            }
           </ul>
         </section>
 
         <section className="mb-10 rounded-2xl border border-border bg-bg-panel p-6">
-          <h2 className="mb-3 text-2xl font-bold text-accent">Current audit status</h2>
+          <h2 className="mb-3 text-2xl font-bold">Current audit status</h2>
           <p className="text-fg-muted">
             Automated URL submission and scoring are live. Drop in a URL and get a scored, evidence-backed diagnosis - no signup required.
           </p>
@@ -65,11 +67,15 @@ export default function AboutPage() {
         </section>
 
         <section className="mb-10 rounded-2xl border border-border bg-bg-panel p-6">
-          <h2 className="mb-3 text-2xl font-bold text-accent">Contact</h2>
+          <h2 className="mb-3 text-2xl font-bold">Contact</h2>
           <p className="text-fg-muted">
             Email is a reliable way to reach us. Response time is typically within one business day.
           </p>
-          <p className="mt-3 text-accent">{'hello0040nebulacomponents.com'}</p>
+          <p className="mt-3 text-fg">
+            <a href="mailto:hello@nebulacomponents.com" className="text-fg hover:text-accent underline">
+              hello@nebulacomponents.com
+            </a>
+          </p>
         </section>
 
         <div className="flex gap-4">

@@ -1,0 +1,18 @@
+{
+  "approval_required_for": [
+    "external_send",
+    "publication",
+    "spend",
+    "production_code"
+  ],
+  "expected_metric": "Attributable audit requests and completed purchases from r/Entrepreneur trigger-sourced lead candidates",
+  "hypothesis": "A founder who already has decent CTR but zero conversions has already confirmed the ad targeting works \u2014 their explicit bottleneck is the landing page, not discovery or awareness. This sub-segment is higher-readiness than founders who haven't started running ads: they have public evidence of a working ad and a named conversion failure on the page, making them closer to the moment of willingness to pay for a fix.",
+  "observed_problem": "A founder in r/Entrepreneur reports building a landing page, running ads to validate an idea, getting a 0.6% CTR (described as decent) but zero conversions. A commenter makes the precise diagnosis: 'Landing page + ads validates whether people click, not whether they buy. Those are completely different things.'",
+  "research_id": "reddit-entrepreneur-lp-ads-decent-ctr-zero-conversions-2026",
+  "smallest_safe_change": "Identify and document one r/Entrepreneur thread per week where a founder reports acceptable CTR with zero landing page conversions; capture URL, exact quote, and site if visible as a trigger-qualified lead candidate for Market agent scoring \u2014 observation and documentation only, no contact or outreach.",
+  "source_url": "https://www.reddit.com/r/Entrepreneur/comments/1rxoany/does_building_a_quick_landing_page_running_ads_to/",
+  "status": "proposed",
+  "stop_condition": "Stop the r/Entrepreneur scanning effort if no scoreable leads emerge after 5 documented posts",
+  "validation_window": "3 trigger-sourced lead candidates documented or 14 days",
+  "why_nebula": "Nebula's offer is exactly a landing page fix for founders with confirmed ad traffic and zero conversions. A founder who publicly posts 'decent CTR, zero conversions' has already done the diagnostic work Nebula would do in an audit \u2014 they just need the implementation. This is a trigger-sourced lead pattern with a shorter close path than founders who haven't started testing."
+}

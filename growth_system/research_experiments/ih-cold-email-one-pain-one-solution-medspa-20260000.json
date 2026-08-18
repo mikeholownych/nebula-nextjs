@@ -1,0 +1,18 @@
+{
+  "approval_required_for": [
+    "external_send",
+    "publication",
+    "spend",
+    "production_code"
+  ],
+  "expected_metric": "Attributable warm replies and purchases from the single-pain variant vs. current template",
+  "hypothesis": "Cold email subject/body narrowed to ONE specific, situational pain the recipient can immediately self-identify with produces measurably higher replies than a multi-feature or multi-benefit email \u2014 the audit-to-outreach message should name one concrete conversion leak the prospect is currently experiencing.",
+  "observed_problem": "A practitioner selling to medspa owners sent multi-feature cold emails covering their entire system and got zero replies. Narrowing to a single, hyper-specific pain ('you're closed on Sundays and your Botox clients are calling someone else') produced actual reads and replies.",
+  "research_id": "ih-cold-email-one-pain-one-solution-medspa-20260000",
+  "smallest_safe_change": "Rewrite one outreach template so the subject line and first sentence name one specific, observable conversion problem on the prospect's actual site (e.g. CTA below fold on mobile, headline describes product not outcome) \u2014 run 20 sends and compare reply rate to control.",
+  "source_url": "https://www.indiehackers.com/post/cold-email-template-that-sells-how-i-got-100-signups-for-my-beta-saas-dd72fb75a3",
+  "status": "proposed",
+  "stop_condition": "Kill the variant after 20 sends with zero replies; retain control template",
+  "validation_window": "20 sends or 14 days",
+  "why_nebula": "Nebula's trigger-based outreach claims to use public pain signals, but zero replies from 80 sends suggests the message may still be framing Nebula features rather than the prospect's exact, named pain. This evidence provides the buyer-language pattern for a next variant: name their specific conversion leak, not the audit service."
+}

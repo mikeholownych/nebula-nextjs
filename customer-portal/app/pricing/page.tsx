@@ -18,30 +18,30 @@ export const metadata: Metadata = {
 
 function buildServiceSchema(fixPack: FixPackPublicFact) {
   return {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  '@id': 'https://nebulacomponents.com/pricing#fix-pack',
-  name: REPAIR_SPRINT_OFFER.name,
-  description: REPAIR_SPRINT_OFFER.summary,
-  provider: { '@id': 'https://nebulacomponents.com/#organization' },
-  serviceType: 'Landing Page Conversion Optimization',
-  url: 'https://nebulacomponents.com/pricing',
-  offers: {
-    '@type': 'Offer',
-    price: String(REPAIR_SPRINT_OFFER.priceUsd),
-    priceCurrency: 'USD',
-    availability: 'https://schema.org/InStock',
-    url: `https://nebulacomponents.com${fixPack.checkout.pagePath}`,
-    priceValidUntil: fixPack.priceValidUntil,
-  },
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Repair Sprint deliverables',
-    itemListElement: REPAIR_SPRINT_OFFER.includes.map((name) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': 'https://nebulacomponents.com/pricing#fix-pack',
+    name: REPAIR_SPRINT_OFFER.name,
+    description: REPAIR_SPRINT_OFFER.summary,
+    provider: { '@id': 'https://nebulacomponents.com/#organization' },
+    serviceType: 'Landing Page Conversion Optimization',
+    url: 'https://nebulacomponents.com/pricing',
+    offers: {
       '@type': 'Offer',
-      itemOffered: { '@type': 'Service', name },
-    })),
-  },
+      price: String(REPAIR_SPRINT_OFFER.priceUsd),
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url: `https://nebulacomponents.com${fixPack.checkout.pagePath}`,
+      priceValidUntil: fixPack.priceValidUntil,
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Repair Sprint deliverables',
+      itemListElement: REPAIR_SPRINT_OFFER.includes.map((name) => ({
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name },
+      })),
+    },
   }
 }
 
@@ -131,7 +131,7 @@ export default function PricingPage() {
 
           <MembershipGrid />
 
-          <h2 className="mt-16 mb-6 text-center text-2xl font-bold text-fg">Need one bounded fix instead?</h2>
+          <h2 className="mt-16 mb-6 text-center text-2xl font-bold text-fg">Fix Your Landing Page's Biggest Leak</h2>
           <div className="grid gap-8 md:grid-cols-2">
             <Card variant="bordered">
               <p className="mb-3 text-sm font-medium text-fg-muted">Free</p>
@@ -142,22 +142,24 @@ export default function PricingPage() {
                 Drop in a URL and get a scored, evidence-backed diagnosis in minutes - no signup required.
               </p>
               <ul className="mt-6 space-y-2 text-sm text-fg-muted">
-                {[
-                  'Message-match diagnosis',
-                  'Trust signal check',
-                  'Mobile CTA review',
-                  'Above-the-fold clarity check',
-                  'Ad signal detection',
-                  'SEO foundations check',
-                  'CTA clarity audit',
-                  'Load speed assessment',
-                  'AI readiness check',
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-fg-muted" />
-                    {item}
-                  </li>
-                ))}
+                {
+                  [
+                    'Message-match diagnosis',
+                    'Trust signal check',
+                    'Mobile CTA review',
+                    'Above-the-fold clarity check',
+                    'Ad signal detection',
+                    'SEO foundations check',
+                    'CTA clarity audit',
+                    'Load speed assessment',
+                    'AI readiness check',
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-fg-muted" />
+                      {item}
+                    </li>
+                  ))
+                }
               </ul>
               <Link href="/audit?utm_source=pricing&utm_medium=internal" className="mt-8 inline-flex rounded-xl border border-border px-5 py-3 font-semibold text-fg transition-colors hover:border-accent">
                 Run free audit
@@ -168,21 +170,22 @@ export default function PricingPage() {
               <p className="mb-3 text-sm font-medium text-fg-muted">One-time payment</p>
               <h2 className="text-2xl font-semibold text-fg">One-Leak Repair Sprint</h2>
               <p className="mt-1 text-sm italic text-fg-muted">Fix the highest-impact leak - kit sent after successful payment</p>
-              <p className="mt-2 text-4xl font-bold text-fg">${REPAIR_SPRINT_OFFER.priceUsd}</p>
+              <p className="mt-2 text-4xl font-bold text-fg">{REPAIR_SPRINT_OFFER.priceUsd}</p>
               <p className="mt-4 text-fg-muted">
                 Run the free audit on one landing page first - see your score and initial findings before sharing an email.
                 Pay $97 for one scoped repair package for the highest-impact finding on your specific page. Nebula prepares it within 48 hours.
               </p>
               <div className="mt-6 space-y-3">
-                {'howItWorks' in REPAIR_SPRINT_OFFER && Array.isArray(REPAIR_SPRINT_OFFER.howItWorks) &&
-                  (REPAIR_SPRINT_OFFER.howItWorks as string[]).map((step, i) => (
-                    <div key={i} className="flex items-start gap-3 text-sm text-fg-muted">
-                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/20 text-xs font-bold text-accent">
-                        {i + 1}
-                      </span>
-                      {step}
-                    </div>
-                  ))
+                {
+                  'howItWorks' in REPAIR_SPRINT_OFFER && Array.isArray(REPAIR_SPRINT_OFFER.howItWorks) &&
+                    (REPAIR_SPRINT_OFFER.howItWorks as string[]).map((step, i) => (
+                      <div key={i} className="flex items-start gap-3 text-sm text-fg-muted">
+                        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/20 text-xs font-bold text-accent">
+                          {i + 1}
+                        </span>
+                        {step}
+                      </div>
+                    ))
                 }
               </div>
               <p className="mt-6 text-sm leading-6 text-fg-muted">
@@ -216,12 +219,14 @@ export default function PricingPage() {
           <section className="mt-16 rounded-2xl border border-border bg-bg-muted/20 p-8">
             <h2 className="mb-4 text-2xl font-bold text-fg">Frequently asked questions</h2>
             <dl className="space-y-6">
-              {faqItems.map(({ q, a }) => (
-                <div key={q}>
-                  <dt className="font-semibold text-fg">{q}</dt>
-                  <dd className="mt-2 text-fg-muted">{a}</dd>
-                </div>
-              ))}
+              {
+                faqItems.map(({ q, a }) => (
+                  <div key={q}>
+                    <dt className="font-semibold text-fg">{q}</dt>
+                    <dd className="mt-2 text-fg-muted">{a}</dd>
+                  </div>
+                ))
+              }
             </dl>
           </section>
         </div>

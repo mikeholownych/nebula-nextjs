@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 }
 
 export default async function FixLibraryPage() {
-  // Auth gate removed — page shows public content only
+  // Auth gate removed, page shows public content only
   let fixes: FixEffectiveness[] = []
   let error: string | null = null
 
@@ -163,7 +163,7 @@ export default async function FixLibraryPage() {
           </p>
           <p>
             <strong>Data Source:</strong> Verified implementations from the
-            One-Leak Repair Sprint ($97 Fix Pack) service.
+            One-Leak Repair Sprint service.
           </p>
         </div>
       </div>

@@ -1,0 +1,58 @@
+{
+  "created_at": "2026-08-17T08:01:41.407874+00:00",
+  "source": "audit_action_cards_20260815.jsonl",
+  "total_audits": 41,
+  "findings_distribution": {
+    "headline_clarity": 28,
+    "missing_analytics": 7,
+    "page_performance": 3,
+    "general_friction": 3
+  },
+  "top_3_content_ideas": [
+    {
+      "category": "headline_clarity",
+      "frequency": 28,
+      "working_title": "Why Ad Spend Gets Wasted: The Invisible Headline Problem",
+      "linkedin_hook": "I've audited 40+ founder websites. The #1 conversion killer isn't design\u2014it's this one headline mistake that burns money on every paid click.",
+      "medium_headline": "The Silent Budget Drain: Why Your Homepage Headline Costs More Than You Think",
+      "sample_companies": [
+        "Fyncom",
+        "Polly"
+      ],
+      "sample_findings": [
+        "Early source proxy lacks a headline, clickable control, or offer term in its first 3,000 characters.",
+        "Early source proxy lacks a headline, clickable control, or offer term in its first 3,000 characters."
+      ]
+    },
+    {
+      "category": "missing_analytics",
+      "frequency": 7,
+      "working_title": "Blind Paid Traffic: How Missing Analytics Cost You Revenue",
+      "linkedin_hook": "Most SaaS founders have GA4 on their site. But here's the shocker: some of the biggest campaigns have ZERO analytics tags. That means zero attribution. That means wasted budget.",
+      "medium_headline": "Why Your Missing GA4 Tag Is Actually a $10,000 Problem",
+      "sample_companies": [
+        "Hellometer",
+        "Modumup - Innovative B2b Marketing Agency"
+      ],
+      "sample_findings": [
+        "No analytics artifact observed in source HTML. A homepage should carry at minimum a GA4 or equivalent measurement tag so paid traffic can be attributed.",
+        "No analytics artifact observed in source HTML. A homepage should carry at minimum a GA4 or equivalent measurement tag so paid traffic can be attributed."
+      ]
+    },
+    {
+      "category": "page_performance",
+      "frequency": 3,
+      "working_title": "Slow Bytes Kill Revenue: The Bloated HTML Problem",
+      "linkedin_hook": "Your page loads slow. Your visitor leaves. Your conversion dies. I found 50+ company homepages with 200KB+ of unoptimized HTML. That's 2-4 seconds of wasted paid clicks.",
+      "medium_headline": "The 300KB Homepage: Why Bloat Kills Paid Traffic",
+      "sample_companies": [
+        "Prokeep",
+        "Transmosis"
+      ],
+      "sample_findings": [
+        "HTML is 244KB - large pages slow first paint.",
+        "HTML is 368KB - large pages slow first paint."
+      ]
+    }
+  ]
+}

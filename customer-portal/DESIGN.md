@@ -1,286 +1,304 @@
----
-name: Nebula Components
-description: Evidence-backed landing-page conversion diagnostics with clinical authority
-colors:
-  near-black: "#050505"
-  bg-elevated: "#0a0a0a"
-  bg-panel: "#111111"
-  bg-surface: "#0d1110"
-  signal-teal: "#00c2a0"
-  teal-light: "#33d4b8"
-  teal-dark: "#009980"
-  teal-dim: "rgba(0, 194, 160, 0.1)"
-  secondary: "#3b82f6"
-  secondary-dim: "rgba(59, 130, 246, 0.1)"
-  fg: "#ffffff"
-  fg-muted: "#9e9e9e"
-  fg-dim: "#666666"
-  danger: "#f37979"
-  danger-dim: "rgba(239, 68, 68, 0.15)"
-  info: "#3b82f6"
-  warning: "#f59e0b"
-  warning-dim: "rgba(245, 158, 11, 0.15)"
-  border: "rgba(255, 255, 255, 0.06)"
-typography:
-  display:
-    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, system-ui, sans-serif"
-    fontSize: "clamp(2.5rem, 6vw, 4rem)"
-    fontWeight: 800
-    lineHeight: 1.1
-    letterSpacing: "-0.04em"
-  headline:
-    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, system-ui, sans-serif"
-    fontSize: "clamp(2rem, 4vw, 2.5rem)"
-    fontWeight: 700
-    lineHeight: 1.2
-    letterSpacing: "0.02em"
-  title:
-    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, system-ui, sans-serif"
-    fontSize: "1.5rem"
-    fontWeight: 600
-    lineHeight: 1.3
-  body:
-    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, system-ui, sans-serif"
-    fontSize: "17px"
-    fontWeight: 400
-    lineHeight: 1.65
-  label:
-    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, system-ui, sans-serif"
-    fontSize: "13px"
-    fontWeight: 600
-    letterSpacing: "0.1em"
-    textTransform: "uppercase"
-rounded:
-  xs: "2px"
-  sm: "4px"
-  md: "8px"
-  lg: "12px"
-  xl: "16px"
-  "2xl": "24px"
-  pill: "100px"
-  circle: "50%"
-spacing:
-  xs: "8px"
-  sm: "16px"
-  md: "24px"
-  lg: "32px"
-  xl: "48px"
-  "2xl": "64px"
-components:
-  button-primary:
-    backgroundColor: "{colors.signal-teal}"
-    textColor: "{colors.near-black}"
-    rounded: "{rounded.lg}"
-    padding: "16px 32px"
-  button-primary-hover:
-    backgroundColor: "{colors.teal-light}"
-    textColor: "{colors.near-black}"
-  button-secondary:
-    backgroundColor: "transparent"
-    textColor: "{colors.signal-teal}"
-    rounded: "{rounded.lg}"
-    padding: "14px 28px"
-  card-default:
-    backgroundColor: "{colors.bg-panel}"
-    rounded: "{rounded.xl}"
-    padding: "{spacing.lg}"
-  card-bordered:
-    backgroundColor: "{colors.bg-panel}"
-    textColor: "{colors.fg}"
-    rounded: "{rounded.xl}"
----
-
 # Design System: Nebula Components
 
-## 1. Overview
+## 1. Visual Theme & Atmosphere
 
-**Creative North Star: "The Conversion Lab"**
+A **high-agency, forensic-grade interface** that feels like a precision instrument, not a SaaS template. The atmosphere is clinical confidence — the visual language of a tool that finds what others miss.
 
-Assertive authority meets clinical precision. The system projects confidence through density and sharpness - not friendliness, not warmth, not restraint. This is diagnostic equipment, not a lifestyle brand. The system font stack (SF Pro, Segoe UI, Roboto) renders instantly with zero loading cost; authority comes from committed weight contrast and tight tracking, not letterform novelty. The near-black foundation (#050505) eliminates visual competition. Signal Teal (#00c2a0) marks actionable elements with authority, pulling the eye toward what matters.
+**Density:** 4 (Art Gallery Airy) — whitespace as power, not emptiness
+**Variance:** 7 (Offset Asymmetric) — deliberate compositional tension
+**Motion:** 5 (Fluid CSS) — purposeful micro-interactions, no decoration
 
-The aesthetic explicitly rejects generic AI SaaS cream, CRO agency theatrics, and "black-box AI says so" interfaces. No conversion claims without evidence. No decorative motion. No gradient text. Every visual choice serves the belief ladder - the visitor must believe Nebula finds real, specific defects on their page.
-
-Depth emerges from ambient glow orbs (120px blur, 0.15 opacity) that create atmospheric layering, not lift. The interface feels like surfaces emerging from atmosphere, not sitting on top of it.
-
-**Key Characteristics:**
-- Near-black canvas eliminates everything but the diagnostic content
-- Signal Teal authority on actions and positive signal - used sparingly (≤10% surface area)
-- System font stack: instant render, weight-capable, zero loading cost
-- Ambient depth via layered glow, never drop shadows
-- Tight tracking (-0.03em) on display for condensed authority
-- Evidence-first: annotated defects trump marketing claims
-
-**Resolved drift:** the indigo/mint palette (`#6366f1`, `#a5b4fc`, `#79f2c0` on `#080a0f`/`#111723`) that used to appear across `app/about/**` and most of `app/learning-centre/**` has been migrated onto the tokens documented here. The ~20 pages that used a raw `dangerouslySetInnerHTML` HTML-injection anti-pattern (nested `<body>` tag, unscoped global `<style>` overriding `:root`/`body`/`a`/`h1`-`h3` and forcing Inter over Karla) were rewritten as real JSX. The two bespoke pages (`resources/citable`, `resources`) kept their custom `<style>` blocks but had them scoped under a page-level class and recolored. No page should reintroduce this palette or the raw-HTML-injection pattern.
+The dark theme is retained but **elevated**: surfaces lift through warm-tinted elevation, not flat grays. The brand color (#00c2a0) punctuates — it does not saturate.
 
 ---
 
-## 2. Colors
+## 2. Color Palette & Roles
 
-**Signal Teal palette** - one accent, high contrast, clinical authority. The palette is deliberately restrained: one primary accent carries the entire brand signal.
+### Surfaces (Dark Canvas)
+- **Void Black** `#050505` — Root background, negative space
+- **Elevated Dark** `#0a0a0a` — Card containers, lifted panels
+- **Warm Surface** `#0d1110` — Elevated cards, input backgrounds (warm-tinted)
+- **Panel Slate** `#111111` — Deep containers, modal overlays
 
-### Primary
+### Typography
+- **Pure White** `#FFFFFF` — Primary text, high-emphasis
+- **Steel Muted** `#9E9E9E` — Secondary text, descriptions, metadata (AAA contrast)
+- **Whisper** `#6B6B6B` — Tertiary text, timestamps, hint text
 
-- **Signal Teal** (#00c2a0): Primary accent. Used exclusively on CTAs, positive indicators, step numbers, success states, and findings that mark "fixed" or "correct." Never decorative. Always carries semantic meaning.
-- **Teal Light** (#33d4b8): Hover state for primary buttons. Same hue, higher lightness.
-- **Teal Dark** (#009980): Pressed state, secondary accents when Signal Teal needs support.
+### Accent (Single, Controlled)
+- **Nebula Teal** `#00c2a0` — Primary CTA, active states, focus rings, links
+- **Teal Light** `#33d4b8` — Hover states, hover-lift glow (never used directly)
+- **Teal Dark** `#009980` — Pressed states
+- **Teal Dim** `rgba(0, 194, 160, 0.1)` — Background fills, badges
 
-### Neutral
+### Semantic Colors
+- **Signal Pass** `#22c55e` — Passing audit checks, positive states
+- **Signal Fail** `#EF4444` — Failing checks, errors (used sparingly)
+- **Signal Warn** `#F59E0B` — Warning states, attention (audit fail ONLY)
+- **Secondary Blue** `#4a7fa5` — Accent alternative, secondary highlights
 
-- **Near Black** (#050505): Body background. Deliberately extreme - eliminates visual competition entirely.
-- **BG Elevated** (#0a0a0a): Secondary background for sections requiring subtle separation.
-- **BG Panel** (#111111): Card backgrounds, input backgrounds, containers.
-- **FG** (#ffffff): Primary text on dark backgrounds. Maximum contrast (21:1).
-- **FG Muted** (#9e9e9e): Secondary text, descriptions, supporting context. Canonical across the codebase: `tailwind.config.ts`'s `fg.muted` and `globals.css`'s `--fg-muted` both resolve to this value. Bumped from #888888 (~5.7:1, AA-only) to clear WCAG 2.2 AAA (~7.05:1 on BG Panel, ~7.6:1 on Near Black) - see the resolved AAA Gap note below.
-- **FG Dim** (#666666): Tertiary text, disabled states.
-- **Border** (rgba(255, 255, 255, 0.06)): Subtle dividers. Near-invisible until needed.
-
-### Semantic
-
-- **Danger** (#f37979): Error states, "before" tags, negative signal, unfixed defects. Bumped from #ef4444 (~5.0-5.4:1, AA-only) to clear WCAG 2.2 AAA (~7.0:1 on BG Panel, ~7.6:1 on Near Black) - same hue, lightened. Danger Dim is unaffected (a background tint, not text, so AAA text-contrast rules don't apply to it).
-- **Danger Dim** (rgba(239, 68, 68, 0.15)): Background tint for danger badges.
-- **Info** (#3b82f6): Secondary glow orb, rarely used in UI.
-- **Warning** (#f59e0b): Scoring highlights, attention markers in audit output. Canonical across the codebase: `tailwind.config.ts`'s `warning` and `globals.css`'s new `--warning` custom property both resolve to this value (`.sample-score` previously hardcoded `#fbbf24` directly; fixed to reference `var(--warning)` / `var(--warning-dim)`).
-
-### Named Rules
-
-**The One Signal Rule.** Signal Teal is reserved for actionable elements and positive signal. It appears on ≤10% of any screen surface. Its rarity is the point.
-
-**The No-Warm-Neutral Rule.** Backgrounds live on the cool near-black axis. No cream, sand, paper, parchment, or warm-tinted neutrals. Warmth is carried by the teal accent and imagery - never the canvas.
-
-**The Authority-Not-Friendliness Rule.** Signal Teal is not "friendly green." It marks signal, not inclusion. No pastel tints, no soft gradients. Sharp, saturated, assertive.
-
-**The AAA Gap (resolved).** PRODUCT.md targets WCAG 2.2 AAA (7:1 for body text, 4.5:1 for large text). FG Muted (#888888 → #9e9e9e) and Danger (#ef4444 → #f37979) both used to fall short (~5.0-5.75:1, AA-only). Both were bumped, same hue, to clear 7:1 against both Near Black and BG Panel. Signal Teal, Warning, and body text on any documented background already cleared AAA before this fix.
+### Structural
+- **Border Whisper** `rgba(255, 255, 255, 0.06)` — Card borders, dividers
+- **Border Focus** `rgba(0, 194, 160, 0.5)` — Focus rings
 
 ---
 
-## 3. Typography
+## 3. Typography Rules
 
-**Display Font:** System stack (`-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif`)
-**Body Font:** Same system stack
-**Label Font:** Same system stack (600 weight, uppercase, tracked)
+### Font Stack
+- **Display:** `Geist` — Track-tight headlines, controlled scale. **Inter is BANNED.**
+- **Body:** `Geist` — Relaxed leading, 65ch max
+- **Mono:** `JetBrains Mono` — Code, audit scores, timestamps, financial numbers
 
-**Character:** The system font stack provides a neutral, high-performance typographic foundation. On macOS/iOS this renders as SF Pro; on Windows as Segoe UI; on Android as Roboto. This eliminates font-loading performance cost entirely - no FOUT, no CLS from font swap, instant render. Weight contrast (700/400) creates hierarchy without family switching. The choice favors performance over personality; authority comes from density, tracking, and weight, not letterform distinctiveness.
+### Scale Hierarchy
+```css
+--text-xs: 0.75rem;      /* 12px - tags, captions */
+--text-sm: 0.875rem;      /* 14px - secondary, nav */
+--text-base: 1.0625rem;   /* 17px - body prose */
+--text-lg: 1.25rem;       /* 20px - section labels */
+--text-xl: 1.5rem;        /* 24px - section headings */
+--text-2xl: 2rem;         /* 32px - hero subhead */
+--text-hero: clamp(2.5rem, 5vw, 4rem);  /* 40-64px - hero display */
+```
 
-**Historical note:** Karla was documented as the brand font in earlier design artifacts. The production codebase uses the system stack exclusively (see `tailwind.config.ts` and `globals.css`). A static design system CSS file at `public/styles/nebula-design-system.css` still loads Karla via Google Fonts but is not imported by the application.
-
-### Hierarchy
-
-- **Display** (700, clamp(2.5rem, 6vw, 4rem), 1.1, -0.03em): Hero headlines. The largest type on any page. Assertive presence, condensed tracking for density. Never below the fold.
-- **Headline** (700, clamp(2rem, 4vw, 2.5rem), 1.2): Section titles. Used for major page divisions.
-- **Title** (600, 1.5rem, 1.3): Card titles, step headings, secondary labels.
-- **Body** (400, 17px, 1.65): Primary prose, set via `globals.css`'s `--text-base`. Capped at 65–75ch line length for readability. Good contrast against near-black.
-- **Label** (600, 13px, 0.1em tracking, uppercase): Badges, eyebrows, step numbers. Wide tracking creates small-caps appearance.
-
-Tailwind's own `text-xs`…`text-6xl` utility scale (defined in `tailwind.config.ts`, independent of the five roles above) is used ad hoc inside component library code for one-off sizing - e.g. Button's `size` variants pull `text-sm`/`text-base`/`text-lg` directly. It runs about 1px off `--text-base` (16px vs. the body's 17px) at the `base` step; not a defect, just two adjacent scales worth knowing are both live.
-
-### Named Rules
-
-**The Tracking Floor.** Display letter-spacing never goes below -0.03em. Tighter risks letter collision at 4rem scale.
-
-**The Weight-Contrast Rule.** Display (700) and Body (400) are 300 weight apart. No intermediate siblings. The gap creates hierarchy.
-
-**The No-Decoration Rule.** No gradient text. No text-shadow effects. Signal Teal may appear as solid color or background - never as gradient-fill on typography.
+### Typography Constraints
+- **Display headlines:** Track-tight (`letter-spacing: -0.03em`). Weight-driven hierarchy, not size screaming
+- **Body:** Relaxed leading (`1.6`), max-width `65ch`. Never full-bleed.
+- **Numbers:** Always monospace in high-density contexts (audit scores, benchmarks)
+- **BANNED:** Inter, generic system fonts, centered text blocks longer than 2 lines
 
 ---
 
-## 4. Elevation: Ambient Depth
-
-**Surfaces emerge from the atmosphere rather than sitting on top of it.**
-
-The system rejects conventional drop shadows (offset + blur + spread) entirely. Depth is conveyed through atmospheric glow and tonal layering - not lift.
-
-### Glow Vocabulary
-
-- **Ambient Teal** (120px blur, 600×600px, radial-gradient teal @ 0.15 opacity): Fixed-position orb, top-right quadrant. Creates ambient glow from within the atmosphere.
-- **Ambient Blue** (120px blur, 600×600px, radial-gradient blue @ 0.12 opacity): Fixed-position orb, bottom-left. Cooler counterpoint.
-- **Button Glow** (0 0 16px rgba(0, 194, 160, 0.25)): Primary button hover state. Responsive, not ambient.
-- **Card Glow** (0 0 40px rgba(0, 194, 160, 0.15)): Featured/pricing cards - `shadow-glow` in `tailwind.config.ts`.
-
-### Named Rules
-
-**The No-Drop-Shadow Rule.** No traditional drop shadows with offset. Use centered glow (0 offset, high blur) or tonal layering (BG Panel on BG Elevated) instead.
-
-**The Ambient-Not-Lifted Rule.** Glow orbs set atmosphere; state changes set interaction. No static glow on interactive elements at rest.
-
-**The Surface Emergence Rule.** Backgrounds transition through tonal steps (#050505 → #0a0a0a → #111111), not through shadow elevation. Surfaces emerge from depth, not float above it.
-
----
-
-## 5. Components
+## 4. Component Stylings
 
 ### Buttons
-
-**Shape:** Actual rendered radii by size (`components/ui/Button.tsx`): 8px (`sm`), 12px (`md`, the default and most common size), 16px (`lg`, hero emphasis). Never full-pill.
-
-- **Primary** (Signal Teal bg, Near Black text, fontWeight 600): Main CTAs - "Run Free Audit", "Review checkout", form submits.
-  - Hover: BG shifts to Teal Light, Button Glow appears (16px @ 0.25).
-  - Active: No lift, reduced glow.
-  - Touch devices: No hover lift; active uses scale(0.98) instead.
-- **Secondary / Outline** (transparent bg, 1–2px Signal Teal border, Signal Teal text): Secondary actions - "View audit status", "Review checkout →" on outline contexts.
-  - Hover: BG shifts to Teal Dim, border stays.
-- **Ghost** (transparent bg, FG Muted text): Tertiary nav, cancel actions.
-  - Hover: Text shifts to FG.
-
-**Don't** hand-roll hero CTAs as raw `<Link className="...">` markup with one-off Tailwind classes (the homepage's "Run Free Audit" button does this). Use the `Button` component at `size="lg"` so radius, glow, and disabled/loading states stay centralized instead of drifting per page.
+- **Primary:** Solid Nebula Teal fill. No outer glow. Tactile `-1px translateY` on active. Subtle inner shadow for depth.
+- **Secondary:** Ghost/outline. Border in Border Whisper. Text in Pure White.
+- **Hover:** Background-teal-dim fill for secondary. Slight brightness lift for primary.
+- **Focus ring:** 2px Nebula Teal, offset 2px.
+- **BANNED:** Neon outer glows, gradient fills, pill shapes on large buttons
 
 ### Cards
+- **Elevation:** Use ONLY when hierarchy demands. Tint shadows to warm-dark (`rgba(0, 0, 0, 0.4)`).
+- **Border:** 1px Border Whisper, generous `12px` radius.
+- **High-density:** Replace with border-top dividers or negative space — cards only when lifting serves comprehension
+- **Shadow:** `0 4px 24px rgba(0, 0, 0, 0.3)` — diffused, warm-tinted
 
-**Corner Style:** 16px (`rounded-2xl`) uniformly - `components/ui/Card.tsx` doesn't vary radius by variant. Never >24px.
+### Inputs
+- **Label position:** Above input, Steel Muted, `text-sm`
+- **Input field:** Warm Surface fill, Border Whisper, 12px radius
+- **Focus:** Border-Teal, no glow
+- **Error:** Border-Signal Fail, error text below in `text-sm`
+- **BANNED:** Floating labels, full-width inputs (constrain to ~60ch)
 
-- **Default** (BG Panel background): Standard container.
-- **Bordered** (BG Panel, 1px Border): Standard container with a visible edge - used for pricing/plan comparisons.
-- **Elevated** (BG Panel, `shadow-glow`): Featured/pricing cards.
-- **Internal Padding:** `none` (0) / `sm` (16px) / `md` (24px, default) / `lg` (32px).
+### Badges/Pills
+- **Radius:** `9999px` (full pill)
+- **Padding:** `0.25rem 0.75rem`
+- **Background:** Teal Dim for active, Border Whisper for neutral
 
-### Inputs / Fields
-
-**Style:** Near Black background, 1px Border, rounded-xl (12px), padding 12–16px (`px-4 py-3`).
-
-- **Focus:** Border shifts to Signal Teal, focus ring (`ring-2 ring-accent/20`).
-- **Error:** Border shifts to Danger; error text below in Danger, `role="alert"`.
-- **Helper text:** FG Dim, shown only when no error is present.
-
-### Navigation
-
-**Header:** Fixed, backdrop-filter blur(20px), BG Elevated @ 0.8 opacity. Padded 16px 24px desktop, 12px 16px mobile.
-
-- **Nav Links:** FG Muted text, 14px, fontWeight 600. Hover shifts to Signal Teal.
-- **Touch:** Min-height 44px, increased padding on coarse pointers.
-- **Mobile:** Stacked vertical menu below header on max-width 480px.
-
-### Proof Section Components
-
-- **Before/After Tags:** tag-before (Danger Dim bg, Danger text, 4px radius), tag-after (Teal Dim bg, Signal Teal text, 4px radius).
-- **Shift Cards:** old/danger-tinted border, new/teal-tinted border, 32px padding.
+### Score Display
+- **Large numbers:** Monospace, tracked-tight, Nebula Teal
+- **Grade badges:** Solid fills matching grade (A: Signal Pass, B: Teal Dim, C: Warning, D/F: Signal Fail)
 
 ---
 
-## 6. Do's and Don'ts
+## 5. Layout Principles
 
-### Do:
+### Grid System
+- **Containment:** `max-width: 1400px`, centered
+- **Grid-first:** CSS Grid for multi-column, Flexbox only for component internals
+- **BANNED:** `calc()` percentage hacks, uncontained full-bleed sections
 
-- **Do** use Signal Teal (#00c2a0) exclusively for actionable elements and positive signal - CTAs, step numbers, success states, "fixed" highlights.
-- **Do** maintain Near Black (#050505) as the body background everywhere. No warm neutral tints.
-- **Do** use ambient glow orbs (120px blur, 0.15 opacity) for atmospheric depth instead of drop shadows.
-- **Do** set display headlines with tight tracking (-0.03em) but never below that floor.
-- **Do** cap body prose at 65–75ch line length.
-- **Do** show evidence - annotated screenshots and specific defects - instead of generic claims.
-- **Do** include skip-link for keyboard navigation. Target WCAG 2.2 AAA (raised from AA; see the resolved AAA Gap note in Colors - FG Muted now clears this).
-- **Do** use the system font stack (`-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif`) for zero-cost rendering. Authority comes from weight and tracking, not letterform.
-- **Do** use the shared `Button`/`Card`/`Input` components from `components/ui/` instead of re-implementing their styles inline.
+### Hero Section
+- **Structure:** Asymmetric split. Left 55% headline + subhead + CTA. Right 45% visual proof (audit card artifact).
+- **Mobile:** Stack vertically, visual below text.
+- **BANNED:** Centered heroes, full-bleed background images, overlapping text on images
 
-### Don't:
+### Section Rhythm
+- **Vertical spacing:** `clamp(4rem, 10vw, 8rem)` between major sections
+- **Internal section padding:** `4rem` desktop, `2rem` mobile
+- **Section delimiter:** Subtle background shift OR border-top, never both
 
-- **Don't** use gradient text (`background-clip: text` with gradient). Solid Signal Teal or nothing.
-- **Don't** apply side-stripe borders (border-left/right greater than 1px) as visual decoration.
-- **Don't** use identical card grids with icon + heading + text repeated endlessly.
-- **Don't** add a tiny uppercase tracked eyebrow above every section. One named kicker is deliberate; eyebrows as section grammar is AI scaffolding.
-- **Don't** use drop shadows with large blur (≥16px) on cards or buttons. Use centered glow or tonal layering.
-- **Don't** use border-radius greater than 24px on cards.
-- **Don't** fabricate testimonials, case studies, or conversion claims - every claim traces to one of the two documented case studies (48x ROAS ecommerce, −50% CPC B2B SaaS) until more are added.
-- **Don't** look like a "generic AI SaaS", "CRO agency", "website-design studio", "cheap audit generator", "digital-marketing guru funnel", "space-themed novelty brand", "cybersecurity product", "enterprise analytics platform", "SEO audit tool", or "black-box 'AI says so' product" - all explicitly rejected in PRODUCT.md's positioning.
-- **Don't** animate images on hover. If a card needs hover feedback, animate background, border, or shadow - never the image.
-- **Don't** default to Inter, DM Sans, Fraunces, or any font on the reflex-reject list. The system font stack is the committed production typeface.
-- **Don't** reintroduce the old indigo/mint palette (#6366f1, #a5b4fc, #79f2c0 on #080a0f/#111723) - it was migrated off every page. If it resurfaces anywhere, that's regression, not a second intentional aesthetic.
-- **Don't** re-add `dangerouslySetInnerHTML`-based page templates with their own `<body>` tag and unscoped `<style>` block. Every learning-centre article is now plain JSX on shared tokens; new articles should follow that pattern.
-- **Don't** hardcode a token value directly (a hex, an rgba) when a shared color/utility class already names it. `globals.css` used to duplicate `fg-muted` and `warning` at different values than their Tailwind equivalents (`#737373`/`#fbbf24`); both now reference `var(--fg-muted)` / `var(--warning)` at the canonical values - don't reintroduce a hardcoded one-off.
+### Feature Rows (Anti-Pattern Override)
+- **BANNED:** Three equal-width cards side-by-side
+- **USE:** 2-column zig-zag alternating, or asymmetric grid (large + 2 small), or horizontal scroll bands
+
+### Proof Density
+- **Logo bar:** 6–12 customer logos, single row, even grayscale opacity
+- **Case study blocks:** Logo + metric + label + link. Consistent card height.
+- **No testimonials, no case studies?** Use aggregate metrics (e.g., "139 pages audited") with visual counter treatment
+
+---
+
+## 6. Motion & Interaction
+
+### Spring Physics (Default)
+```css
+--spring-stiffness: 100;
+--spring-damping: 20;
+```
+Weighty, confident, not bouncy.
+
+### Micro-Interactions (Perpetual)
+- **Audit score reveal:** Counter animation 0 → score, 800ms, ease-out
+- **Pass/Fail badges:** Pulse once on mount, then static
+- **CTA buttons:** Scale 1.02 on hover, -1px translate on press
+- **Scorecards:** Fade in with slight upward translate (`translateY(8px) → 0`)
+
+### Staggered Reveals
+- Lists of checks/teardowns mount with cascade delays: `delay: index * 60ms`
+- Never instant wall-of-content
+
+### Performance Constraints
+- **Animate ONLY:** `transform`, `opacity`
+- **NEVER animate:** `top`, `left`, `width`, `height`, `margin`
+- **Reduced motion:** All animations cut to instant (`duration: 0.01ms`)
+
+---
+
+## 7. Signature Visual Moment
+
+**The Audit Card Artifact.**
+
+Every hero and results page features a **composed audit card** — not a screenshot, but a designed artifact:
+- Score badge (large monospace number + grade)
+- Top leak callout (accent border-left, bold finding text)
+- Signal pills (Pass/Fail badges, 4–6 visible)
+- Subtle card shadow, warm-tinted
+- Inline with typography, not floating
+
+This repeats across:
+- Homepage hero (example card)
+- Audit results page (live card)
+- Teardown pages (findings summary)
+- Benchmarks page (aggregate stats)
+
+---
+
+## 8. Anti-Patterns (Strictly BANNED)
+
+**Typography:**
+- ❌ Inter font
+- ❌ Generic system fonts (`-apple-system`, `BlinkMacSystemFont`)
+- ❌ Centered text blocks > 2 lines
+- ❌ Screaming headlines (scale > 4rem)
+
+**Color:**
+- ❌ Pure black (`#000000`) — use Void Black instead
+- ❌ Neon outer glows
+- ❌ Multiple accent colors
+- ❌ Purple/blue AI neon aesthetic
+- ❌ Oversaturated accent (> 80%)
+
+**Layout:**
+- ❌ Centered heroes
+- ❌ Three equal-width feature cards
+- ❌ Full-bleed background images with text overlay
+- ❌ Uncontained content (no max-width)
+- ❌ Overlapping elements (text on images)
+
+**Components:**
+- ❌ Emojis in UI
+- ❌ Generic placeholder names ("John Doe", "Acme")
+- ❌ Fake rounded numbers (`99.99%`, `5000+`)
+- ❌ AI copywriting clichés ("Elevate", "Seamless", "Unleash", "Next-Gen")
+- ❌ Filler UI text ("Scroll to explore", "Swipe down")
+- ❌ Broken image links (use `picsum.photos` or SVGs)
+
+**Motion:**
+- ❌ Linear easing (use spring physics)
+- ❌ Instant list mounts (cascade required)
+- ❌ Gratuitous particles/blobs/grain filters
+
+---
+
+## 9. Specific Homepage Composition
+
+### Hero Section
+**Left (55%):**
+- H1: "Know exactly what's killing your conversions."
+- Subhead: "Your ads work. The page doesn't. Nebula runs 9 evidence-backed checks against your actual HTML — finds the leak, with dollar math and the exact fix."
+- Primary CTA: "Find My Leak — Free" (button)
+- Secondary: "No signup. Results in <2 min." (text only, no link)
+
+**Right (45%):**
+- **Composed audit card artifact** (not screenshot):
+  - Score: `67/100` (large mono, Nebula Teal)
+  - Grade badge: `C+` (Signal Fail background)
+  - Top leak callout: Left-border accent, 1-line finding
+  - 6 signal pills: Pass/Fail mix, clearly visible
+  - Subtle shadow, warm-tinted
+
+### Calculator Section
+- Retain bleed calculator, but design as **floating panel** with Warm Surface background, border, and generous padding
+- Inputs: Clean, input-mode numeric where possible
+- Result: Large monospace dollar amount, Signal Fail color
+
+### Unfair Advantage Matrix
+- Retain comparison table, but elevate:
+  - Option cards with border-top divider instead of full cards
+  - Checkmarks in Signal Pass green, X marks in Border Whisper gray
+  - Nebula column: Accent border-left, slight `background: Teal Dim`
+  - Mobile: Stack vertically, Nebula last (highlighted)
+
+### Core Checks Section
+- **BANNED:** 3-column equal card grid
+- **USE:** 2-column grid, alternating (check name left, description right)
+- Each check: Badge (Pass/Fail) + name + brief check description
+- Visual rhythm: Consistent height, clear separation
+
+### Teardowns Section
+- 3 cards in a row: Logo + page URL + finding count badge + link
+- Each card: Same height, border only, no shadow
+- Mobile: Horizontal scroll OR vertical stack
+
+### Final CTA Section
+- Full-width Nebula Teal background
+- White text: "Run the leak detection before you spend another dollar."
+- CTA button: White fill, Nebula Teal text, dark on hover
+
+---
+
+## 10. Responsive Strategy
+
+### Desktop (> 1024px)
+- Hero: Asymmetric split (55/45)
+- Feature rows: 2-column grid or asymmetrical layouts
+- Max containment: 1400px
+
+### Tablet (768–1024px)
+- Hero: Stack vertically, card below text
+- Feature rows: 2-column grids collapse to single column
+- Section padding: 3rem
+
+### Mobile (< 768px)
+- **Single column everywhere.** No exceptions.
+- Hero text: Full-width, left-aligned
+- Audit card: Full-width, stack vertically
+- Feature rows: Stack vertically
+- Touch targets: Minimum 44px
+- Typography: Clamp scale, min `16px` body
+- No horizontal scroll
+
+---
+
+## Implementation Notes
+
+1. **Fonts:** Install `Geist` and `JetBrains Mono` via `next/font` optimization. Load `Geist` as display + body, `JetBrains Mono` for code/numbers.
+
+2. **Color tokens:** Replace Inter-specific references in globals.css with Geist. All hex values above are authoritative.
+
+3. **Motion:** Use Framer Motion for orchestrated animations. Reduce motion preference must disable all non-essential animation.
+
+4. **Polish pass:** Before deploying, audit for:
+   - Centered text blocks > 2 lines
+   - Inter font usage
+   - Pure black backgrounds
+   - Equal 3-column grids
+   - Missing hover/focus states
+
+5. **Performance:** All animations use `transform`/`opacity` only. No layout-thrashing properties.
+
+---
+
+This design system encodes premium, high-agency, non-generic visual language. Every decision intentional. No AI tells. No template defaults.

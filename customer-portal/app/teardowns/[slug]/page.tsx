@@ -220,7 +220,7 @@ export default async function TeardownPage({
               href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
               className="inline-block rounded-xl border border-accent/60 px-6 py-3 text-sm font-semibold text-accent hover:bg-accent/10 transition-colors"
             >
-              Fix one leak now — $97 →
+              Fix one leak now, $97 →
             </a>
             <p className="mt-2 text-xs text-fg-muted">
               One finding. 48h delivery. No call, no retainer.

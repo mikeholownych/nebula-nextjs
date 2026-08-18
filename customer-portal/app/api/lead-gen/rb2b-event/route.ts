@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
  * Client-side visitor profile endpoint.
  * Receives page visit telemetry from layout.tsx and stores in PostgreSQL.
  * 
- * This is NOT the RB2B third-party webhook — that's at /api/webhooks/rb2b.
+ * This is NOT the RB2B third-party webhook, that's at /api/webhooks/rb2b.
  * This is first-party tracking: pages_visited, total_dwell_s, utm_source.
  * 
  * Privacy: Data retained 90 days, subject to /data-rights form.
@@ -50,11 +50,11 @@ export async function POST(request: NextRequest) {
     
     if (!res.ok) {
       console.error('[rb2b-event] Platform API error:', res.status)
-      // Fail silent — don't block visitor
+      // Fail silent, don't block visitor
     }
   } catch (err) {
     console.error('[rb2b-event] Platform API unreachable:', err)
-    // Fail silent — visitor tracking is non-critical
+    // Fail silent, visitor tracking is non-critical
   }
 
   return NextResponse.json({ code: 'PROFILE_RECEIVED' }, { status: 200 })

@@ -1,4 +1,4 @@
-// AuditResultMockup — static, server-rendered replica of a real Nebula audit result.
+// AuditResultMockup, static, server-rendered replica of a real Nebula audit result.
 // No 'use client', no hooks, no external deps. All colors from tailwind.config.ts.
 
 const SIGNALS = [
@@ -17,7 +17,7 @@ const SIGNALS = [
     failRate: 49,
     passed: false,
     topLeak: false,
-    detail: 'Primary CTA is generic ("Get Started") — no outcome specificity',
+    detail: 'Primary CTA is generic ("Get Started"), no outcome specificity',
     impact: 'high',
   },
   {
@@ -44,7 +44,7 @@ const SIGNALS = [
     failRate: 37,
     passed: false,
     topLeak: false,
-    detail: 'LCP 4.1 s — above 2.5 s threshold (Core Web Vitals fail)',
+    detail: 'LCP 4.1 s, above 2.5 s threshold (Core Web Vitals fail)',
     impact: 'medium',
   },
   {
@@ -105,15 +105,15 @@ export default function AuditResultMockup() {
             HTTPS
           </span>
         </div>
-        {/* Subtle watermark — requirement #4 */}
+        {/* Subtle watermark, requirement #4 */}
         <span className="flex-shrink-0 text-xs text-fg-dim tracking-section">
-          Example output — illustrative
+          Example output, illustrative
         </span>
       </div>
 
       {/* ── Score header ─────────────────────────────────────────────── */}
       <div className="flex items-center gap-5 px-5 pt-5 pb-4 border-b border-border">
-        {/* Score ring — conic-gradient, requirement #10 */}
+        {/* Score ring, conic-gradient, requirement #10 */}
         <div
           className="relative flex-shrink-0 flex items-center justify-center"
           style={{ width: 80, height: 80 }}
@@ -136,7 +136,7 @@ export default function AuditResultMockup() {
               strokeWidth="6"
               fill="none"
             />
-            {/* Arc — drawn as stroke-dasharray on a rotated circle */}
+            {/* Arc, drawn as stroke-dasharray on a rotated circle */}
             <circle
               cx="40"
               cy="40"
@@ -204,7 +204,7 @@ export default function AuditResultMockup() {
         </div>
       </div>
 
-      {/* ── Top leak callout — SEO Foundations ──────────────────────── */}
+      {/* ── Top leak callout, SEO Foundations ──────────────────────── */}
       <div
         className="mx-4 mt-4 rounded-xl px-4 py-3 flex items-start gap-3"
         style={{
@@ -225,7 +225,7 @@ export default function AuditResultMockup() {
         <div className="min-w-0">
           <p className="text-sm font-semibold text-fg">
             SEO Foundations{' '}
-            <span className="text-xs text-fg-dim font-normal">— #1 failure across benchmarks</span>
+            <span className="text-xs text-fg-dim font-normal">- #1 failure across benchmarks</span>
           </p>
           <p className="mt-0.5 text-xs text-fg-muted leading-relaxed">
             83% of audited pages fail this signal. No canonical tag, meta description{' '}
@@ -282,7 +282,7 @@ export default function AuditResultMockup() {
                 {signal.label}
               </span>
 
-              {/* Detail — only show on larger */}
+              {/* Detail, only show on larger */}
               <span className="hidden sm:block text-xs text-fg-dim truncate max-w-[180px]">
                 {signal.detail}
               </span>

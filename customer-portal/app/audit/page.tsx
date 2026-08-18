@@ -92,7 +92,7 @@ const howToSchema = {
       '@type': 'HowToStep',
       position: 3,
       name: 'Review findings ranked by impact',
-      text: 'Your audit report lists every failing signal with the raw evidence from your page — specific, verifiable, and ranked by conversion impact.',
+      text: 'Your audit report lists every failing signal with the raw evidence from your page, specific, verifiable, and ranked by conversion impact.',
     },
     {
       '@type': 'HowToStep',
@@ -138,13 +138,13 @@ export default async function AuditPage() {
               </p>
               <AuditForm />
 
-              {/* What you get — visible near the CTA for AI citation and user clarity */}
+              {/* What you get, visible near the CTA for AI citation and user clarity */}
               <div className="mt-5 border-t border-border pt-5">
                 <p className="mb-3 text-xs font-semibold text-fg">What you receive, free</p>
                 <ul className="space-y-2">
                   {[
                     'Pass/fail verdict on each conversion signal',
-                    'Raw evidence from your page — not generic advice',
+                    'Raw evidence from your page, not generic advice',
                     'Findings ranked by conversion impact',
                     'No email required to see results',
                   ].map((item) => (
@@ -156,7 +156,7 @@ export default async function AuditPage() {
                 </ul>
               </div>
 
-              {/* Static benchmark stat — always visible, not API-gated */}
+              {/* Static benchmark stat, always visible, not API-gated */}
               <p className="mt-4 text-xs text-fg-dim border-l-2 border-accent/40 pl-3">
                 From 139+ audits: avg 2.8 conversion leaks per page.{' '}
                 <Link href="/benchmarks" className="text-accent/80 hover:text-accent transition-colors">
@@ -387,7 +387,7 @@ export default async function AuditPage() {
           </div>
         </section>
 
-        {/* ── 5. FAQ — rendered in DOM for AI citation and user clarity ── */}
+        {/* ── 5. FAQ, rendered in DOM for AI citation and user clarity ── */}
         {/* FAQPage schema is also injected in <head> above. The two are intentionally
             kept in sync: the JSON-LD feeds structured search features; this prose
             feeds AI engines that read the text layer and users who scan the page. */}
@@ -412,7 +412,7 @@ export default async function AuditPage() {
                 },
                 {
                   q: 'What does the $97 One-Leak Repair Sprint include?',
-                  a: 'One scoped repair package for the highest-impact failing signal on your page — exact copy, code, or configuration change written for your specific page and sent by email within 48 hours. Includes one same-scope re-audit within 30 days. No site access required. Does not guarantee conversion lift.',
+                  a: 'One scoped repair package for the highest-impact failing signal on your page, exact copy, code, or configuration change written for your specific page and sent by email within 48 hours. Includes one same-scope re-audit within 30 days. No site access required. Does not guarantee conversion lift.',
                 },
                 {
                   q: 'Which platforms does the audit work with?',
@@ -420,7 +420,7 @@ export default async function AuditPage() {
                 },
                 {
                   q: 'What does the audit not cover?',
-                  a: 'The audit cannot observe visitor intent, ad audience quality, offer economics, or post-form conversion flows. It checks observable page conditions — the things a visitor experiences before they decide to act or leave. Those conditions are measurable and fixable. Business outcomes also depend on traffic quality and offer strength.',
+                  a: 'The audit cannot observe visitor intent, ad audience quality, offer economics, or post-form conversion flows. It checks observable page conditions, the things a visitor experiences before they decide to act or leave. Those conditions are measurable and fixable. Business outcomes also depend on traffic quality and offer strength.',
                 },
               ].map(({ q, a }) => (
                 <div key={q}>

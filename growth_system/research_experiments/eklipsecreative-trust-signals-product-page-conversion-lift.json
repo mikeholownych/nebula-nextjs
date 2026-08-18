@@ -1,0 +1,18 @@
+{
+  "approval_required_for": [
+    "external_send",
+    "publication",
+    "spend",
+    "production_code"
+  ],
+  "expected_metric": "Attributable completed purchases from checkout sessions after trust-signal placement is confirmed at payment-entry point",
+  "hypothesis": "Placing a visible guarantee badge or trust signal immediately adjacent to the payment entry field (not just elsewhere on the page) produces measurably higher conversion rates \u2014 32% in 11 days in a controlled test. Nebula's checkout-to-purchase gap is most likely addressable by placement of guarantee language at the exact payment decision point, not elsewhere on the funnel.",
+  "observed_problem": "Nebula has 19 checkout starts and 0 completed purchases. The current Stripe payment link is a bare checkout with no documented trust signals near the payment entry point \u2014 the highest-risk moment for cold first-time buyers.",
+  "research_id": "eklipsecreative-trust-signals-product-page-conversion-lift",
+  "smallest_safe_change": "Audit the current checkout configuration for the presence of guarantee or security language immediately before the payment entry field; if absent, add a one-line guarantee statement at that placement and observe completion rate over the next 10 sessions.",
+  "source_url": "https://eklipsecreative.com/blog/how-trust-signals-improve-product-page-conversions/",
+  "status": "proposed",
+  "stop_condition": "Revert trust-signal placement if no improvement in checkout completion rate after 10 sessions",
+  "validation_window": "10 checkout sessions or 14 days",
+  "why_nebula": "Nebula has no recorded trust signals at the payment entry point. This evidence identifies specific placement (near payment field, before 'Pay' button) as the critical variable \u2014 not just presence of a guarantee. This makes it a testable, reversible, config-level experiment."
+}

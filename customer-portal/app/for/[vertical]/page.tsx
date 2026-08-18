@@ -18,7 +18,7 @@ export async function generateMetadata({
   const v = getVertical(slug)
   if (!v) return {}
 
-  const title = `Landing Page Audit for ${v.name} — Find What's Killing Conversion | Nebula`
+  const title = `Landing Page Audit for ${v.name}, Find What's Killing Conversion | Nebula`
   const description = `${v.pain.slice(0, 140)} Nebula scores your ${v.name.toLowerCase()} page across 9 conversion signals and shows you exactly what to fix.`
 
   return {
@@ -48,7 +48,7 @@ export default async function VerticalPage({
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: `Nebula Landing Page Audit — ${v.name}`,
+    name: `Nebula Landing Page Audit, ${v.name}`,
     applicationCategory: 'BusinessApplication',
     description: `Evidence-backed landing page audit for ${v.name} pages. Identifies conversion leaks across 9 signals.`,
     url: `https://nebulacomponents.com/for/${slug}`,
@@ -123,7 +123,7 @@ export default async function VerticalPage({
           <div className="bg-surface border border-border rounded-xl p-6">
             <p className="text-fg-muted leading-relaxed">{v.benchmark}</p>
             <p className="text-sm text-fg-muted mt-4 border-t border-border pt-4">
-              Source: Nebula audit dataset — real pages scored across 9 conversion signals. No invented benchmarks.
+              Source: Nebula audit dataset, real pages scored across 9 conversion signals. No invented benchmarks.
             </p>
           </div>
         </section>
@@ -133,9 +133,9 @@ export default async function VerticalPage({
           <h2 className="text-2xl font-bold text-fg mb-6">How a Nebula audit works for {v.name.toLowerCase()} pages</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { step: '01', title: 'Enter your URL', desc: 'Paste your landing page URL. The audit runs against the live page — no install, no tracking code.' },
+              { step: '01', title: 'Enter your URL', desc: 'Paste your landing page URL. The audit runs against the live page, no install, no tracking code.' },
               { step: '02', title: 'Get your score', desc: 'Nebula scores your page across 9 conversion signals. Each signal is evidence-backed, not an opinion.' },
-              { step: '03', title: 'See what to fix', desc: 'Findings are ranked by impact. The top leak is named specifically — not "improve your CTA" but the exact structural problem.' },
+              { step: '03', title: 'See what to fix', desc: 'Findings are ranked by impact. The top leak is named specifically, not "improve your CTA" but the exact structural problem.' },
             ].map(({ step, title, desc }) => (
               <div key={step} className="bg-surface border border-border rounded-xl p-5">
                 <div className="text-2xl font-extrabold text-accent mb-2" style={{ fontFamily: 'IBM Plex Mono, Courier New, monospace' }}>{step}</div>
@@ -184,12 +184,12 @@ export default async function VerticalPage({
             ))}
             <li>
               <Link href="/teardowns" className="text-sm text-accent hover:underline">
-                Public teardowns — real pages scored →
+                Public teardowns, real pages scored →
               </Link>
             </li>
             <li>
               <Link href="/proof" className="text-sm text-accent hover:underline">
-                Real audit data — what we found in 139 pages →
+                Real audit data, what we found in 139 pages →
               </Link>
             </li>
           </ul>

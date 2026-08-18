@@ -2,7 +2,7 @@ export const REPAIR_SPRINT_OFFER = {
   key: 'fix-pack',
   name: 'One-Leak Repair Sprint',
   priceUsd: 97,
-  summary: 'Run the free audit, then have Nebula prepare one scoped repair package for the highest-impact finding within 48 hours.',
+  summary: 'Run the free audit, then receive one scoped repair package for the highest-impact finding within 48 hours, you or your developer applies the delivered copy, code, or configuration change.',
   howItWorks: [
     'Run the free audit - paste your URL, get 9 signals scored in under 2 minutes',
     'Review the initial findings and unlock the full report by email',

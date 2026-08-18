@@ -2,11 +2,11 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Real Landing Page Audit Data — 139 Pages Scored | Nebula',
+  title: 'Real Landing Page Audit Data, 139 Pages Scored | Nebula',
   description: 'Live stats from 139 real landing page audits. See the most common conversion leaks, average scores by leak type, and what fixes move the needle.',
   alternates: { canonical: 'https://nebulacomponents.com/proof' },
   openGraph: {
-    title: 'Real Landing Page Audit Data — What Kills Conversion | Nebula',
+    title: 'Real Landing Page Audit Data, What Kills Conversion | Nebula',
     description: 'Evidence from 139 real audits. The most common leaks, real scores, real findings.',
     url: 'https://nebulacomponents.com/proof',
     siteName: 'Nebula Components',
@@ -91,7 +91,7 @@ export default async function ProofPage() {
           </h1>
           <p className="text-fg-muted text-lg leading-relaxed max-w-2xl">
             Every Nebula audit scores a real page submitted by a real founder.
-            This page shows what we&apos;ve found — the patterns, the leaks, the numbers.
+            This page shows what we&apos;ve found, the patterns, the leaks, the numbers.
             No invented benchmarks. No vendor surveys. Evidence from {auditCount} pages.
           </p>
         </div>
@@ -164,7 +164,7 @@ export default async function ProofPage() {
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full" style={{ background: recent.quadrant === 'quick_win' ? '#c7ff2f' : '#8a9488' }} />
                 <span className="text-xs text-fg-muted">
-                  {recent.quadrant === 'quick_win' ? 'Quick win — high impact, low effort' : 'Major project — high impact, high effort'}
+                  {recent.quadrant === 'quick_win' ? 'Quick win, high impact, low effort' : 'Major project, high impact, high effort'}
                 </span>
               </div>
             </div>
@@ -178,7 +178,7 @@ export default async function ProofPage() {
             {[
               {
                 stat: '83%',
-                finding: 'of audited pages have SEO foundation issues — missing or short title tags, no meta description, or H1/title mismatch.',
+                finding: 'of audited pages have SEO foundation issues, missing or short title tags, no meta description, or H1/title mismatch.',
                 implication: 'Paid traffic lands on pages Google can\'t read. Your ad spend is funding a page Google doesn\'t understand.',
               },
               {
@@ -193,7 +193,7 @@ export default async function ProofPage() {
               },
               {
                 stat: '2.8',
-                finding: 'average conversion leaks per page. Most founders only know about one — the headline. The other 1.8 are invisible.',
+                finding: 'average conversion leaks per page. Most founders only know about one, the headline. The other 1.8 are invisible.',
                 implication: 'Fixing the most visible problem rarely uncovers all the revenue. A scored audit shows the full picture.',
               },
             ].map(({ stat, finding, implication }) => (

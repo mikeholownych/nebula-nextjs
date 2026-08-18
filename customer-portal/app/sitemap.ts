@@ -11,8 +11,8 @@ export const dynamic = 'force-dynamic'
 const BASE_URL = 'https://nebulacomponents.com'
 
 // Build-time date used as lastModified for static pages that don't
-// carry per-page timestamps. This is truthful — it reflects when the
-// sitemap was generated, not when the content was last edited — and
+// carry per-page timestamps. This is truthful, it reflects when the
+// sitemap was generated, not when the content was last edited, and
 // satisfies sitemap validators that require lastModified to be present.
 const BUILD_DATE = new Date().toISOString().split('T')[0] // YYYY-MM-DD
 

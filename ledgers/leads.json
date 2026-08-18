@@ -28,6 +28,60 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "adowell@slingr.io": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "adowell@slingr.io",
+    "first_seen": "2026-08-16T18:43:36.831522Z",
+    "last_seen": "2026-08-16T18:43:36.831522Z",
+    "name": "Addison Dowell",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://slingr.io"
+  },
+  "adrian@fyncom.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "adrian@fyncom.com",
+    "first_seen": "2026-08-16T18:43:35.658827Z",
+    "last_seen": "2026-08-16T18:43:35.658827Z",
+    "name": "Adrian Garcia",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://fyncom.com"
+  },
   "agency-pilot@nebulacomponents.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -102,6 +156,60 @@
     "tags": [],
     "total_spent_cents": 0,
     "url": ""
+  },
+  "alex@anysoft.app": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "alex@anysoft.app",
+    "first_seen": "2026-08-16T18:43:36.978722Z",
+    "last_seen": "2026-08-16T18:43:36.978722Z",
+    "name": "Alex Noe",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://anysoft.app"
+  },
+  "alex@hellometer.io": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "alex@hellometer.io",
+    "first_seen": "2026-08-16T18:43:35.717269Z",
+    "last_seen": "2026-08-16T18:43:35.717269Z",
+    "name": "Alexander Popper",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://hellometer.io"
   },
   "algor.tago@gmail.com": {
     "content_posts": [],
@@ -199,6 +307,168 @@
     "total_spent_cents": 0,
     "url": "https://alloceraintelligence.com"
   },
+  "amy@thirdtier.net": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "amy@thirdtier.net",
+    "first_seen": "2026-08-16T18:43:36.437966Z",
+    "last_seen": "2026-08-16T18:43:36.437966Z",
+    "name": "Amy Babinchak",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://thirdtier.net"
+  },
+  "aniket@skillsheet.me": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "aniket@skillsheet.me",
+    "first_seen": "2026-08-16T18:43:36.490005Z",
+    "last_seen": "2026-08-16T18:43:36.490005Z",
+    "name": "Aniket Naravanekar",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://skillsheet.me"
+  },
+  "anonymous+08dff589-b209-43a1-adf9-dc4a38e07a84@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+08dff589-b209-43a1-adf9-dc4a38e07a84@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-14T15:00:59.132155Z",
+    "last_seen": "2026-08-14T15:00:59.132155Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "2d165aa9-73c6-4843-8e2b-e66ce86eda91",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-14T15:00:59.132155Z",
+    "trigger_text": "",
+    "url": "https://www.facebook.com"
+  },
+  "anonymous+09f43e95-c08a-4bc1-b846-b0c7551997ea@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+09f43e95-c08a-4bc1-b846-b0c7551997ea@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-14T14:35:27.158836Z",
+    "last_seen": "2026-08-14T14:35:27.158836Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "e926cc95-064c-487c-abe4-99db5ef1054c",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-14T14:35:27.158836Z",
+    "trigger_text": "",
+    "url": "https://linkvertise.com/access/1230801/solixhub-keysystem-link"
+  },
+  "anonymous+0a911a33-edaa-4e74-9826-67cb0767d34c@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+0a911a33-edaa-4e74-9826-67cb0767d34c@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-11T12:20:23.206063Z",
+    "last_seen": "2026-08-11T12:20:23.206063Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "41c3e38a-7e92-464f-ac3f-52552b3d2b46",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-11T12:20:23.206063Z",
+    "trigger_text": "",
+    "url": "https://motherbrain.app/beta"
+  },
+  "anonymous+0b1a40d0-91fd-48e6-8238-e8f5019b7f92@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+0b1a40d0-91fd-48e6-8238-e8f5019b7f92@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-17T07:19:24.002628Z",
+    "last_seen": "2026-08-17T07:19:24.002628Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "d9f37b15-338f-4871-af8c-52a27cd8dbf2",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-17T07:19:24.002628Z",
+    "trigger_text": "",
+    "url": "https://teamscreen.net"
+  },
   "anonymous+10ece724-5390-48ef-92e2-64d1ea60f3ca@invalid.nebulacomponents.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -225,6 +495,87 @@
     "track_started_at": "2026-08-04T12:34:00.303834Z",
     "trigger_text": "",
     "url": "https://nebulacomponents.com"
+  },
+  "anonymous+16b2a547-9354-49c9-a8d8-8399f01af7c6@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+16b2a547-9354-49c9-a8d8-8399f01af7c6@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-14T15:19:08.191345Z",
+    "last_seen": "2026-08-14T15:19:08.191345Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "e9e2ca27-a026-4f6f-a40b-d8fd5040acc0",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-14T15:19:08.191345Z",
+    "trigger_text": "",
+    "url": "https://www.youtube.com/watch?v=wcoSIV477r8"
+  },
+  "anonymous+1cbff406-0787-4ad0-94f7-23a0304efe9d@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+1cbff406-0787-4ad0-94f7-23a0304efe9d@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-15T23:48:03.819273Z",
+    "last_seen": "2026-08-15T23:48:03.819273Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "513ab9a1-2809-4b22-8479-02fbe3a4557f",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-15T23:48:03.819273Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
+  "anonymous+1d701927-891f-4c1c-b270-bfa0d1a36483@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+1d701927-891f-4c1c-b270-bfa0d1a36483@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-15T23:32:37.955740Z",
+    "last_seen": "2026-08-15T23:32:37.955740Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "9dda9c6f-4b96-46a8-acfd-b3654f8ebc4b",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-15T23:32:37.955740Z",
+    "trigger_text": "",
+    "url": "https://example.com"
   },
   "anonymous+21e9c841-6d36-44ab-a767-6ac400e1b56d@invalid.nebulacomponents.com": {
     "content_posts": [],
@@ -334,6 +685,60 @@
     "trigger_text": "",
     "url": "https://example.com"
   },
+  "anonymous+306d266a-029b-4fda-86e3-ebfccf02277d@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+306d266a-029b-4fda-86e3-ebfccf02277d@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-15T23:32:37.240189Z",
+    "last_seen": "2026-08-15T23:32:37.240189Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "1da7ef46-da3a-4c28-88be-b0f6a4afc136",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-15T23:32:37.240189Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
+  "anonymous+32c23bb2-da9e-4929-bee6-e4ab057df58e@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+32c23bb2-da9e-4929-bee6-e4ab057df58e@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-14T14:34:24.284841Z",
+    "last_seen": "2026-08-14T14:34:24.284841Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "63349ee9-65bb-4565-a129-d048015a7226",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-14T14:34:24.284841Z",
+    "trigger_text": "",
+    "url": "https://nebulacomponents.com/audit?utm_source=homepage&utm_medium=internal#run-audit"
+  },
   "anonymous+3418966f-cfe2-4bf8-8a0c-ef17fa84a8a9@invalid.nebulacomponents.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -387,6 +792,60 @@
     "track_started_at": "2026-08-05T10:52:28.260038Z",
     "trigger_text": "",
     "url": "https://linear.app"
+  },
+  "anonymous+353190d7-0005-4fb6-97ce-a8606894944f@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+353190d7-0005-4fb6-97ce-a8606894944f@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-15T23:36:45.846918Z",
+    "last_seen": "2026-08-15T23:36:45.846918Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "37f9f4e1-e6b0-447a-a0d4-b46c25af7b01",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-15T23:36:45.846918Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
+  "anonymous+3e75ca45-4dd4-49f5-b192-36b25f13b59a@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+3e75ca45-4dd4-49f5-b192-36b25f13b59a@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-15T23:40:37.004636Z",
+    "last_seen": "2026-08-15T23:40:37.004636Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "857686d0-5919-4798-a7c7-5cc5d5278979",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-15T23:40:37.004636Z",
+    "trigger_text": "",
+    "url": "https://example.com"
   },
   "anonymous+4887fa6f-6799-4af2-a20e-111a59f7c139@invalid.nebulacomponents.com": {
     "content_posts": [],
@@ -577,6 +1036,33 @@
     "trigger_text": "",
     "url": "https://nebulacomponents.com/why-is-my-landing-page-not-converting"
   },
+  "anonymous+6c122491-1649-43b2-9ceb-49e7e323b2b2@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+6c122491-1649-43b2-9ceb-49e7e323b2b2@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-14T14:33:49.400934Z",
+    "last_seen": "2026-08-14T14:33:49.400934Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "29286cd4-a989-426b-8610-e2f0f7ee4dbd",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-14T14:33:49.400934Z",
+    "trigger_text": "",
+    "url": "https://nebulacomponents.com/audit?utm_source=homepage&utm_medium=internal#run-audit"
+  },
   "anonymous+742eae61-b95e-45ad-9f4d-aeb40b461401@invalid.nebulacomponents.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -685,6 +1171,33 @@
     "trigger_text": "",
     "url": "https://gofaultline.dev"
   },
+  "anonymous+a0b35b0c-a838-4f2c-a49a-a6c7a0f653bb@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+a0b35b0c-a838-4f2c-a49a-a6c7a0f653bb@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-15T23:30:39.739397Z",
+    "last_seen": "2026-08-15T23:30:39.739397Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "34b20a38-55e7-48a9-83f6-d1548b06710e",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-15T23:30:39.739397Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
   "anonymous+aad6e38a-0d1c-4e91-aa47-3e08460bd8df@invalid.nebulacomponents.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -739,6 +1252,33 @@
     "trigger_text": "",
     "url": "https://stripe.com"
   },
+  "anonymous+bf3ea13d-4bde-4965-9b62-31b3e1b87181@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+bf3ea13d-4bde-4965-9b62-31b3e1b87181@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-17T07:20:56.887304Z",
+    "last_seen": "2026-08-17T07:20:56.887304Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "6785bd4a-54c4-49cd-b8d7-140c8a21cb8e",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-17T07:20:56.887304Z",
+    "trigger_text": "",
+    "url": "https://nebulacomponents.com"
+  },
   "anonymous+c208c808-4f39-46e0-97d6-12ed263e7061@invalid.nebulacomponents.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -766,6 +1306,60 @@
     "trigger_text": "",
     "url": "https://stripe.com"
   },
+  "anonymous+c606cca2-009d-44b4-b8c8-4f33ed96a41f@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+c606cca2-009d-44b4-b8c8-4f33ed96a41f@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-15T23:33:29.859344Z",
+    "last_seen": "2026-08-15T23:33:29.859344Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "09f08b19-7fca-4f86-b23e-785220856fae",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-15T23:33:29.859344Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
+  "anonymous+c8bba6e4-ea29-4347-adcc-8d49666c38c3@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+c8bba6e4-ea29-4347-adcc-8d49666c38c3@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-15T23:38:56.388756Z",
+    "last_seen": "2026-08-15T23:38:56.388756Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "1296e30e-440d-4a9d-9248-7867764bc082",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-15T23:38:56.388756Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
   "anonymous+c9be3c2d-44c3-4c9c-8ba5-fdac70c32a00@invalid.nebulacomponents.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -792,6 +1386,60 @@
     "track_started_at": "2026-08-05T10:29:05.902597Z",
     "trigger_text": "",
     "url": "https://example.com?utm_source=google&utm_medium=cpc"
+  },
+  "anonymous+ca65dba3-45fd-49b6-ba7b-ea3dccd7f8a8@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+ca65dba3-45fd-49b6-ba7b-ea3dccd7f8a8@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-15T23:35:30.432743Z",
+    "last_seen": "2026-08-15T23:35:30.432743Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "b58350ee-1704-40c9-b9f3-c2c031ea4fdb",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-15T23:35:30.432743Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
+  "anonymous+d6a79bb1-0066-409b-bf79-80e618e176c1@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+d6a79bb1-0066-409b-bf79-80e618e176c1@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-15T23:36:17.761174Z",
+    "last_seen": "2026-08-15T23:36:17.761174Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "0abccfba-0c8e-4ac8-924d-6b3c351a5492",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-15T23:36:17.761174Z",
+    "trigger_text": "",
+    "url": "https://example.com"
   },
   "anonymous+da9336e2-f512-4fa5-8c25-50cec5b25932@invalid.nebulacomponents.com": {
     "content_posts": [],
@@ -982,6 +1630,114 @@
     "trigger_text": "",
     "url": "https://postessia.com/"
   },
+  "anonymous+ef2f9b2c-f169-4013-ab0f-0d118b2a9b41@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+ef2f9b2c-f169-4013-ab0f-0d118b2a9b41@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-15T23:39:50.542553Z",
+    "last_seen": "2026-08-15T23:39:50.542553Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "576d48e5-e9be-40f6-8d5d-5316ff25056f",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-15T23:39:50.542553Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
+  "anonymous+f4cbe0c1-56d4-41f7-808f-790baf593cd6@invalid.nebulacomponents.com": {
+    "content_posts": [],
+    "current_stage": "lead_audit",
+    "email": "anonymous+f4cbe0c1-56d4-41f7-808f-790baf593cd6@invalid.nebulacomponents.com",
+    "first_seen": "2026-08-15T23:44:08.934569Z",
+    "last_seen": "2026-08-15T23:44:08.934569Z",
+    "name": "",
+    "notes": "",
+    "nurture_track": "headline-clarity",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "audit_completion"
+    ],
+    "stages": [
+      "lead_audit"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "fc3b487f-1dd9-4541-aeaf-d251199e989c",
+    "track_position_days": 0,
+    "track_started_at": "2026-08-15T23:44:08.934569Z",
+    "trigger_text": "",
+    "url": "https://example.com"
+  },
+  "anthony.lawrence@adventsvcsllc.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "anthony.lawrence@adventsvcsllc.com",
+    "first_seen": "2026-08-16T18:43:36.261758Z",
+    "last_seen": "2026-08-16T18:43:36.261758Z",
+    "name": "Anthony L.",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://adventsvcsllc.com"
+  },
+  "artur@visualsitemaps.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "artur@visualsitemaps.com",
+    "first_seen": "2026-08-16T18:43:36.385131Z",
+    "last_seen": "2026-08-16T18:43:36.385131Z",
+    "name": "Artur M.",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://visualsitemaps.com"
+  },
   "audit-probe-2026@example.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -1036,6 +1792,33 @@
     "trigger_text": "",
     "url": "https://smartwatermark.app"
   },
+  "barbara@polly.ai": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "barbara@polly.ai",
+    "first_seen": "2026-08-16T18:43:35.952741Z",
+    "last_seen": "2026-08-16T18:43:35.952741Z",
+    "name": "Barbara Nicholas",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://polly.ai"
+  },
   "beniciocardozomdp@gmail.com": {
     "content_posts": [],
     "current_stage": "lead_warm",
@@ -1083,6 +1866,33 @@
     "tags": [],
     "total_spent_cents": 0,
     "url": ""
+  },
+  "betsi@cuttingedgejobs.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "betsi@cuttingedgejobs.com",
+    "first_seen": "2026-08-16T18:43:36.757494Z",
+    "last_seen": "2026-08-16T18:43:36.757494Z",
+    "name": "Betsi Rosen",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://cuttingedgejobs.com"
   },
   "bjoroen.eirik@gmail.com": {
     "content_posts": [],
@@ -1132,6 +1942,87 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "blisi@optinosis.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "blisi@optinosis.com",
+    "first_seen": "2026-08-16T18:43:36.454526Z",
+    "last_seen": "2026-08-16T18:43:36.454526Z",
+    "name": "Branden Lisi",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://optinosis.com"
+  },
+  "brian@sidechannel.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "brian@sidechannel.com",
+    "first_seen": "2026-08-16T18:43:35.896298Z",
+    "last_seen": "2026-08-16T18:43:35.896298Z",
+    "name": "Brian Haugli",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://sidechannel.com"
+  },
+  "brooks.young@prokeep.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "brooks.young@prokeep.com",
+    "first_seen": "2026-08-16T18:43:36.015436Z",
+    "last_seen": "2026-08-16T18:43:36.015436Z",
+    "name": "Brooks Young",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://prokeep.com"
+  },
   "career4lucas@gmail.com": {
     "content_posts": [],
     "current_stage": "lead_warm",
@@ -1179,6 +2070,114 @@
     "tags": [],
     "total_spent_cents": 0,
     "url": ""
+  },
+  "chase@transmosis.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "chase@transmosis.com",
+    "first_seen": "2026-08-16T18:43:35.789402Z",
+    "last_seen": "2026-08-16T18:43:35.789402Z",
+    "name": "Chase Norlin",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://transmosis.com"
+  },
+  "chris.rafter@inzata.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "chris.rafter@inzata.com",
+    "first_seen": "2026-08-16T18:43:36.333521Z",
+    "last_seen": "2026-08-16T18:43:36.333521Z",
+    "name": "Christopher Rafter",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://inzata.com"
+  },
+  "chris@fireforeffectffe.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "chris@fireforeffectffe.com",
+    "first_seen": "2026-08-16T18:43:35.703126Z",
+    "last_seen": "2026-08-16T18:43:35.703126Z",
+    "name": "Chris Latam",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://fireforeffectffe.com"
+  },
+  "chris@releaf-financial.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "chris@releaf-financial.com",
+    "first_seen": "2026-08-16T18:43:36.279879Z",
+    "last_seen": "2026-08-16T18:43:36.279879Z",
+    "name": "Chris Surdak",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://releaf-financial.com"
   },
   "contact@qlp.jp": {
     "content_posts": [],
@@ -1392,6 +2391,114 @@
     "trigger_text": "",
     "url": "https://adsnord.com"
   },
+  "dahlia_sutrisno@34strong.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "dahlia_sutrisno@34strong.com",
+    "first_seen": "2026-08-16T18:43:36.776205Z",
+    "last_seen": "2026-08-16T18:43:36.776205Z",
+    "name": "Dahlia Sutrisno",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://34strong.com"
+  },
+  "daniel.fong@networkright.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "daniel.fong@networkright.com",
+    "first_seen": "2026-08-16T18:43:35.849130Z",
+    "last_seen": "2026-08-16T18:43:35.849130Z",
+    "name": "Daniel Fong",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://networkright.com"
+  },
+  "danish.hameed@arhamsoft.us": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "danish.hameed@arhamsoft.us",
+    "first_seen": "2026-08-16T18:43:36.061894Z",
+    "last_seen": "2026-08-16T18:43:36.061894Z",
+    "name": "Danish Hameed",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://arhamsoft.us"
+  },
+  "david@dashqrcodes.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "david@dashqrcodes.com",
+    "first_seen": "2026-08-16T18:43:36.576451Z",
+    "last_seen": "2026-08-16T18:43:36.576451Z",
+    "name": "David Gastelum",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://dashqrcodes.com"
+  },
   "davidwang913526@gmail.com": {
     "content_posts": [],
     "current_stage": "lead_warm",
@@ -1488,6 +2595,60 @@
     "total_spent_cents": 0,
     "url": "https://naxely.com"
   },
+  "dg@ultrade.org": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "dg@ultrade.org",
+    "first_seen": "2026-08-16T18:43:36.541845Z",
+    "last_seen": "2026-08-16T18:43:36.541845Z",
+    "name": "Dan Goldman",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://ultrade.org"
+  },
+  "diane@worldlabs.ai": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "diane@worldlabs.ai",
+    "first_seen": "2026-08-16T18:43:36.795080Z",
+    "last_seen": "2026-08-16T18:43:36.795080Z",
+    "name": "Diane Wales",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://worldlabs.ai"
+  },
   "dinirangapremanayake@gmail.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -1516,6 +2677,87 @@
     "tags": [],
     "total_spent_cents": 0,
     "url": ""
+  },
+  "doron@controlplane.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "doron@controlplane.com",
+    "first_seen": "2026-08-16T18:43:37.015994Z",
+    "last_seen": "2026-08-16T18:43:37.015994Z",
+    "name": "Doron Grinstein",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://controlplane.com"
+  },
+  "dylan.hobbs@vouched.id": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "dylan.hobbs@vouched.id",
+    "first_seen": "2026-08-16T18:43:36.886660Z",
+    "last_seen": "2026-08-16T18:43:36.886660Z",
+    "name": "Dylan Hobbs",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://vouched.id"
+  },
+  "e.altbregina@modumup.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "e.altbregina@modumup.com",
+    "first_seen": "2026-08-16T18:43:35.984729Z",
+    "last_seen": "2026-08-16T18:43:35.984729Z",
+    "name": "Ekaterina Altbregina",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://modumup.com"
   },
   "e2e-composite-test@example.com": {
     "content_posts": [],
@@ -1549,7 +2791,7 @@
     "current_stage": "lead_audit",
     "email": "e2e-crawler-test@example.com",
     "first_seen": "2026-08-01T03:41:01.997419Z",
-    "last_seen": "2026-08-01T15:57:17.976243Z",
+    "last_seen": "2026-08-15T18:43:32.509030Z",
     "name": "",
     "notes": "",
     "nurture_track": "headline-clarity",
@@ -1565,11 +2807,92 @@
     ],
     "tags": [],
     "total_spent_cents": 0,
-    "track_audit_id": "e95ed35e-293c-4a08-9dd4-d5fc58778db0",
+    "track_audit_id": "9f98a47e-cebb-4a32-9ef6-defe226595be",
     "track_position_days": 0,
-    "track_started_at": "2026-08-01T15:57:17.976243Z",
+    "track_started_at": "2026-08-15T18:43:32.509030Z",
     "trigger_text": "",
-    "url": "https://example.com"
+    "url": "https://nebulacomponents.shop"
+  },
+  "edlance@ntiertraining.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "edlance@ntiertraining.com",
+    "first_seen": "2026-08-16T18:43:36.297496Z",
+    "last_seen": "2026-08-16T18:43:36.297496Z",
+    "name": "Ed Lance",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://ntiertraining.com"
+  },
+  "elijah@trackara.app": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "elijah@trackara.app",
+    "first_seen": "2026-08-16T18:43:36.720558Z",
+    "last_seen": "2026-08-16T18:43:36.720558Z",
+    "name": "Elijah Strauss",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://trackara.app"
+  },
+  "ellen@waterbear.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "ellen@waterbear.com",
+    "first_seen": "2026-08-16T18:43:36.367846Z",
+    "last_seen": "2026-08-16T18:43:36.367846Z",
+    "name": "Ellen Windemuth",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://waterbear.com"
   },
   "flynn@snipprompts.com": {
     "content_posts": [],
@@ -1647,6 +2970,60 @@
     "tags": [],
     "total_spent_cents": 0,
     "url": ""
+  },
+  "gdrummond@loch.io": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "gdrummond@loch.io",
+    "first_seen": "2026-08-16T18:43:35.937566Z",
+    "last_seen": "2026-08-16T18:43:35.937566Z",
+    "name": "Garry Drummond, Cissp, Cwna, Cwsp",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://loch.io"
+  },
+  "george@leadershipgs.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "george@leadershipgs.com",
+    "first_seen": "2026-08-16T18:43:36.739015Z",
+    "last_seen": "2026-08-16T18:43:36.739015Z",
+    "name": "George Stern",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://leadershipgs.com"
   },
   "ghostaicorp@gmail.com": {
     "content_posts": [],
@@ -3642,6 +5019,60 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "hoy@runonatlas.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "hoy@runonatlas.com",
+    "first_seen": "2026-08-16T18:43:36.136499Z",
+    "last_seen": "2026-08-16T18:43:36.136499Z",
+    "name": "Michael Hoy \ud83d\udc68\u200d\ud83d\ude80",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://runonatlas.com"
+  },
+  "ilias@mycliqk.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "ilias@mycliqk.com",
+    "first_seen": "2026-08-16T18:43:36.507214Z",
+    "last_seen": "2026-08-16T18:43:36.507214Z",
+    "name": "Ilias Anwar",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://mycliqk.com"
+  },
   "info@cuneiform.chat": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -3719,6 +5150,60 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "iris@ig.technology": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "iris@ig.technology",
+    "first_seen": "2026-08-16T18:43:35.643825Z",
+    "last_seen": "2026-08-16T18:43:35.643825Z",
+    "name": "Iris Garcia",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://ig.technology"
+  },
+  "ishan@sortment.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "ishan@sortment.com",
+    "first_seen": "2026-08-16T18:43:36.524469Z",
+    "last_seen": "2026-08-16T18:43:36.524469Z",
+    "name": "Ishan Rakshit",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://sortment.com"
+  },
   "iuri.jorbenadze@gmail.com": {
     "content_posts": [],
     "current_stage": "lead_warm",
@@ -3766,6 +5251,141 @@
     "tags": [],
     "total_spent_cents": 0,
     "url": ""
+  },
+  "jack@frontrace.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "jack@frontrace.com",
+    "first_seen": "2026-08-16T18:43:36.120548Z",
+    "last_seen": "2026-08-16T18:43:36.120548Z",
+    "name": "Jack Siney \ud83e\udde2",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://frontrace.com"
+  },
+  "jacob@talbotwest.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "jacob@talbotwest.com",
+    "first_seen": "2026-08-16T18:43:36.314759Z",
+    "last_seen": "2026-08-16T18:43:36.314759Z",
+    "name": "Jacob Andra",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://talbotwest.com"
+  },
+  "jake@birddogit.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "jake@birddogit.com",
+    "first_seen": "2026-08-16T18:43:36.923262Z",
+    "last_seen": "2026-08-16T18:43:36.923262Z",
+    "name": "Jake Connell",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://birddogit.com"
+  },
+  "jason@gurulink.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "jason@gurulink.com",
+    "first_seen": "2026-08-16T18:43:36.868147Z",
+    "last_seen": "2026-08-16T18:43:36.868147Z",
+    "name": "Jason Clancy",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://gurulink.com"
+  },
+  "jeremy@conceptplus.ca": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "jeremy@conceptplus.ca",
+    "first_seen": "2026-08-16T18:43:36.905107Z",
+    "last_seen": "2026-08-16T18:43:36.905107Z",
+    "name": "Jeremy Dahan",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://conceptplus.ca"
   },
   "jerryatbusiness@gmail.com": {
     "content_posts": [],
@@ -3815,6 +5435,60 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "jgrammer@teamscreen.net": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "jgrammer@teamscreen.net",
+    "first_seen": "2026-08-16T18:43:35.607454Z",
+    "last_seen": "2026-08-16T18:43:35.607454Z",
+    "name": "John Grammer, Mba",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://teamscreen.net"
+  },
+  "jmehalek@virtuousai.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "jmehalek@virtuousai.com",
+    "first_seen": "2026-08-16T18:43:36.205800Z",
+    "last_seen": "2026-08-16T18:43:36.205800Z",
+    "name": "Jeff Mehalek",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://virtuousai.com"
+  },
   "john@company.com": {
     "content_posts": [],
     "current_stage": "lead_warm",
@@ -3863,6 +5537,87 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "johnz@weeklyaccounting.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "johnz@weeklyaccounting.com",
+    "first_seen": "2026-08-16T18:43:35.578197Z",
+    "last_seen": "2026-08-16T18:43:35.578197Z",
+    "name": "John Zdanowski",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://weeklyaccounting.com"
+  },
+  "jorge@gtm-engineering.io": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "jorge@gtm-engineering.io",
+    "first_seen": "2026-08-16T18:43:36.168189Z",
+    "last_seen": "2026-08-16T18:43:36.168189Z",
+    "name": "Jorge Mac\u00edas \ud83c\uddf5\ud83c\uddf7",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://gtm-engineering.io"
+  },
+  "juan.flores@sgtel.io": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "juan.flores@sgtel.io",
+    "first_seen": "2026-08-16T18:43:35.881376Z",
+    "last_seen": "2026-08-16T18:43:35.881376Z",
+    "name": "Juan Flores",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://sgtel.io"
+  },
   "kevin.chisumdev@gmail.com": {
     "content_posts": [],
     "current_stage": "lead_warm",
@@ -3910,6 +5665,114 @@
     "tags": [],
     "total_spent_cents": 0,
     "url": ""
+  },
+  "kiran.t@amy.pro": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "kiran.t@amy.pro",
+    "first_seen": "2026-08-16T18:43:35.688792Z",
+    "last_seen": "2026-08-16T18:43:35.688792Z",
+    "name": "Kiran Teegala",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://amy.pro"
+  },
+  "krishna@krivatech.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "krishna@krivatech.com",
+    "first_seen": "2026-08-16T18:43:37.053957Z",
+    "last_seen": "2026-08-16T18:43:37.053957Z",
+    "name": "Vamshi N",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://krivatech.com"
+  },
+  "kyle@autobound.ai": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "kyle@autobound.ai",
+    "first_seen": "2026-08-16T18:43:36.614133Z",
+    "last_seen": "2026-08-16T18:43:36.614133Z",
+    "name": "Kyle Schuster",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://autobound.ai"
+  },
+  "kyle@thenetvr.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "kyle@thenetvr.com",
+    "first_seen": "2026-08-16T18:43:36.997235Z",
+    "last_seen": "2026-08-16T18:43:36.997235Z",
+    "name": "Kyle Doran \ud83d\udd54\ud83c\udf0c\u269b\ufe0f",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://thenetvr.com"
   },
   "lakisha@goldenweeks.co": {
     "content_posts": [],
@@ -4128,6 +5991,195 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "lor@spinfrequency.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "lor@spinfrequency.com",
+    "first_seen": "2026-08-16T18:43:36.420418Z",
+    "last_seen": "2026-08-16T18:43:36.420418Z",
+    "name": "Lor Albrighi",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://spinfrequency.com"
+  },
+  "lross@accelery.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "lross@accelery.com",
+    "first_seen": "2026-08-16T18:43:36.596129Z",
+    "last_seen": "2026-08-16T18:43:36.596129Z",
+    "name": "Lenwood Ross",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://accelery.com"
+  },
+  "lucas@rets.ai": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "lucas@rets.ai",
+    "first_seen": "2026-08-16T18:43:35.833331Z",
+    "last_seen": "2026-08-16T18:43:35.833331Z",
+    "name": "Lucas Dahl",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://rets.ai"
+  },
+  "lwells@wildducks.io": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "lwells@wildducks.io",
+    "first_seen": "2026-08-16T18:43:37.092149Z",
+    "last_seen": "2026-08-16T18:43:37.092149Z",
+    "name": "Lara Wells",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://wildducks.io"
+  },
+  "mark@exabits.ai": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "mark@exabits.ai",
+    "first_seen": "2026-08-16T18:43:36.077421Z",
+    "last_seen": "2026-08-16T18:43:36.077421Z",
+    "name": "Mark Fidelman",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://exabits.ai"
+  },
+  "matt@founderos.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "matt@founderos.com",
+    "first_seen": "2026-08-16T18:43:36.105118Z",
+    "last_seen": "2026-08-16T18:43:36.105118Z",
+    "name": "Matt Gray",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://founderos.com"
+  },
+  "matt@powderkeg.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "matt@powderkeg.com",
+    "first_seen": "2026-08-16T18:43:35.967883Z",
+    "last_seen": "2026-08-16T18:43:35.967883Z",
+    "name": "Matt Hunckler",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://powderkeg.com"
+  },
   "matze.schedel@gmail.com": {
     "content_posts": [],
     "current_stage": "lead_warm",
@@ -4272,6 +6324,87 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "mihai@aiflow.ltd": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "mihai@aiflow.ltd",
+    "first_seen": "2026-08-16T18:43:35.760186Z",
+    "last_seen": "2026-08-16T18:43:35.760186Z",
+    "name": "Mihai Anton",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://aiflow.ltd"
+  },
+  "mike@lully.ai": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "mike@lully.ai",
+    "first_seen": "2026-08-16T18:43:36.633013Z",
+    "last_seen": "2026-08-16T18:43:36.633013Z",
+    "name": "Michael Myers",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://lully.ai"
+  },
+  "mmullings@mullingsgroup.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "mmullings@mullingsgroup.com",
+    "first_seen": "2026-08-16T18:43:36.813581Z",
+    "last_seen": "2026-08-16T18:43:36.813581Z",
+    "name": "Matthew Mullings",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://mullingsgroup.com"
+  },
   "muhammadabusufyangoraya@gmail.com": {
     "content_posts": [],
     "current_stage": "lead_warm",
@@ -4383,6 +6516,60 @@
     "stage": "audit_triggered",
     "url": "https://example.com/page"
   },
+  "olga@shopperations.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "olga@shopperations.com",
+    "first_seen": "2026-08-16T18:43:35.774741Z",
+    "last_seen": "2026-08-16T18:43:35.774741Z",
+    "name": "Olga Yurovski",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://shopperations.com"
+  },
+  "onega@qms2go.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "onega@qms2go.com",
+    "first_seen": "2026-08-16T18:43:36.683527Z",
+    "last_seen": "2026-08-16T18:43:36.683527Z",
+    "name": "Onega Ulanova",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://qms2go.com"
+  },
   "pending@example.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -4408,6 +6595,60 @@
     "track_position_days": 0,
     "track_started_at": "2026-08-03T08:19:58.655218Z",
     "url": "https://example.com"
+  },
+  "pnicol@frannet.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "pnicol@frannet.com",
+    "first_seen": "2026-08-16T18:43:36.850040Z",
+    "last_seen": "2026-08-16T18:43:36.850040Z",
+    "name": "Page Nicol",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://frannet.com"
+  },
+  "pratik@testdino.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "pratik@testdino.com",
+    "first_seen": "2026-08-16T18:43:36.243745Z",
+    "last_seen": "2026-08-16T18:43:36.243745Z",
+    "name": "Pratik Patel",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://testdino.com"
   },
   "probe@example.com": {
     "content_posts": [],
@@ -4559,6 +6800,33 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "rathi@xdata-lab.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "rathi@xdata-lab.com",
+    "first_seen": "2026-08-16T18:43:35.818725Z",
+    "last_seen": "2026-08-16T18:43:35.818725Z",
+    "name": "Dr. Dasgupta",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://xdata-lab.com"
+  },
   "rcschupp@gmail.com": {
     "content_posts": [],
     "current_stage": "lead_warm",
@@ -4682,6 +6950,33 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "rgoff@mghus.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "rgoff@mghus.com",
+    "first_seen": "2026-08-16T18:43:36.000170Z",
+    "last_seen": "2026-08-16T18:43:36.000170Z",
+    "name": "Ryan Goff",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://mghus.com"
+  },
   "rkotcher@gmail.com": {
     "content_posts": [],
     "current_stage": "lead_warm",
@@ -4730,6 +7025,87 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "rob@botcopy.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "rob@botcopy.com",
+    "first_seen": "2026-08-16T18:43:36.184348Z",
+    "last_seen": "2026-08-16T18:43:36.184348Z",
+    "name": "Rob Lubow",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://botcopy.com"
+  },
+  "robert@korusgtm.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "robert@korusgtm.com",
+    "first_seen": "2026-08-16T18:43:36.651683Z",
+    "last_seen": "2026-08-16T18:43:36.651683Z",
+    "name": "Robert Bradley \ud83c\udfb5",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://korusgtm.com"
+  },
+  "russell@createsagas.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "russell@createsagas.com",
+    "first_seen": "2026-08-16T18:43:37.034807Z",
+    "last_seen": "2026-08-16T18:43:37.034807Z",
+    "name": "Russell Palmer",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://createsagas.com"
+  },
   "rutger@sqauras.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -4756,6 +7132,60 @@
     "track_started_at": "2026-08-06T00:07:52.900061Z",
     "trigger_text": "",
     "url": "https://sqauras.com"
+  },
+  "ryan.hanley@linqura.ai": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "ryan.hanley@linqura.ai",
+    "first_seen": "2026-08-16T18:43:36.152001Z",
+    "last_seen": "2026-08-16T18:43:36.152001Z",
+    "name": "Ryan Hanley",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://linqura.ai"
+  },
+  "ryan.stomel@capacity.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "ryan.stomel@capacity.com",
+    "first_seen": "2026-08-16T18:43:36.959940Z",
+    "last_seen": "2026-08-16T18:43:36.959940Z",
+    "name": "Ryan Stomel",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://capacity.com"
   },
   "sales@thehiveryiq.com": {
     "content_posts": [],
@@ -4785,6 +7215,60 @@
     "tags": [],
     "total_spent_cents": 0,
     "url": ""
+  },
+  "sam@sandboxx.us": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "sam@sandboxx.us",
+    "first_seen": "2026-08-16T18:43:35.920770Z",
+    "last_seen": "2026-08-16T18:43:35.920770Z",
+    "name": "Sam Meek",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://sandboxx.us"
+  },
+  "sanjay@nachonacho.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "sanjay@nachonacho.com",
+    "first_seen": "2026-08-16T18:43:35.745766Z",
+    "last_seen": "2026-08-16T18:43:35.745766Z",
+    "name": "Sanjay Goel",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://nachonacho.com"
   },
   "scalewords.agency@gmail.com": {
     "content_posts": [],
@@ -4834,6 +7318,33 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "scarawan@web2market.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "scarawan@web2market.com",
+    "first_seen": "2026-08-16T18:43:36.223852Z",
+    "last_seen": "2026-08-16T18:43:36.223852Z",
+    "name": "Suzanne Carawan",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://web2market.com"
+  },
   "sean.grabowski@keepersdigital.com": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -4860,6 +7371,33 @@
     "track_started_at": "2026-08-06T00:07:19.293746Z",
     "trigger_text": "",
     "url": "https://keepersdigital.com"
+  },
+  "sgarcia@seguridata.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "sgarcia@seguridata.com",
+    "first_seen": "2026-08-16T18:43:36.031212Z",
+    "last_seen": "2026-08-16T18:43:36.031212Z",
+    "name": "Samuel Garcia",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://seguridata.com"
   },
   "shadowroot47@outlook.com": {
     "content_posts": [],
@@ -4957,6 +7495,60 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "shelby@cloverleaf.me": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "shelby@cloverleaf.me",
+    "first_seen": "2026-08-16T18:43:36.046370Z",
+    "last_seen": "2026-08-16T18:43:36.046370Z",
+    "name": "Shelby Bolinger",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://cloverleaf.me"
+  },
+  "ssomal@blueoceanglobaltech.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "ssomal@blueoceanglobaltech.com",
+    "first_seen": "2026-08-16T18:43:35.592191Z",
+    "last_seen": "2026-08-16T18:43:35.592191Z",
+    "name": "Sameer Somal, Cfa, Cfp\u00ae, Caia",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://blueoceanglobaltech.com"
+  },
   "stellytips@gmail.com": {
     "content_posts": [],
     "current_stage": "lead_warm",
@@ -5004,6 +7596,87 @@
     "tags": [],
     "total_spent_cents": 0,
     "url": ""
+  },
+  "steve.kang@globalit.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "steve.kang@globalit.com",
+    "first_seen": "2026-08-16T18:43:36.941728Z",
+    "last_seen": "2026-08-16T18:43:36.941728Z",
+    "name": "Steve K.",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://globalit.com"
+  },
+  "steven@artofsalesacademy.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "steven@artofsalesacademy.com",
+    "first_seen": "2026-08-16T18:43:36.402240Z",
+    "last_seen": "2026-08-16T18:43:36.402240Z",
+    "name": "Steven Perchikov",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://artofsalesacademy.com"
+  },
+  "sumanyu@hamming.ai": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "sumanyu@hamming.ai",
+    "first_seen": "2026-08-16T18:43:35.621268Z",
+    "last_seen": "2026-08-16T18:43:35.621268Z",
+    "name": "Sumanyu Sharma",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://hamming.ai"
   },
   "support@adcopystyles.com": {
     "content_posts": [],
@@ -5399,6 +8072,33 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "susan@coachautomator.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "susan@coachautomator.com",
+    "first_seen": "2026-08-16T18:43:37.073071Z",
+    "last_seen": "2026-08-16T18:43:37.073071Z",
+    "name": "Susan Sch\u00f6ning",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://coachautomator.com"
+  },
   "team@launchingai.co": {
     "content_posts": [],
     "current_stage": "lead_audit",
@@ -5607,6 +8307,33 @@
     "total_spent_cents": 0,
     "url": ""
   },
+  "thomas@thebarkerprice.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "thomas@thebarkerprice.com",
+    "first_seen": "2026-08-16T18:43:36.559296Z",
+    "last_seen": "2026-08-16T18:43:36.559296Z",
+    "name": "Thomas Galbraith",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://thebarkerprice.com"
+  },
   "tianyajinhui@gmail.com": {
     "content_posts": [],
     "current_stage": "lead_warm",
@@ -5654,6 +8381,60 @@
     "tags": [],
     "total_spent_cents": 0,
     "url": ""
+  },
+  "tugce@eloquentai.co": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "tugce@eloquentai.co",
+    "first_seen": "2026-08-16T18:43:35.673580Z",
+    "last_seen": "2026-08-16T18:43:35.673580Z",
+    "name": "Tugce Bulut",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://eloquentai.co"
+  },
+  "tyler@contentxlabs.ai": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "tyler@contentxlabs.ai",
+    "first_seen": "2026-08-16T18:43:35.804226Z",
+    "last_seen": "2026-08-16T18:43:35.804226Z",
+    "name": "Tyler Massey",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://contentxlabs.ai"
   },
   "voder.ai.agent@gmail.com": {
     "content_posts": [],
@@ -5750,6 +8531,114 @@
     "tags": [],
     "total_spent_cents": 0,
     "url": ""
+  },
+  "yossi@airtalent.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "yossi@airtalent.com",
+    "first_seen": "2026-08-16T18:43:36.701747Z",
+    "last_seen": "2026-08-16T18:43:36.701747Z",
+    "name": "Yossi Mlynsky",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://airtalent.com"
+  },
+  "zach@fastwill.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "zach@fastwill.com",
+    "first_seen": "2026-08-16T18:43:36.472371Z",
+    "last_seen": "2026-08-16T18:43:36.472371Z",
+    "name": "Zach Tsakiris",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://fastwill.com"
+  },
+  "zach@grantcardone.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "zach@grantcardone.com",
+    "first_seen": "2026-08-16T18:43:35.731501Z",
+    "last_seen": "2026-08-16T18:43:35.731501Z",
+    "name": "Zach Garner",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://grantcardone.com"
+  },
+  "zwatson@ybsloans.com": {
+    "content_posts": [],
+    "current_stage": "discovered",
+    "email": "zwatson@ybsloans.com",
+    "first_seen": "2026-08-16T18:43:36.350544Z",
+    "last_seen": "2026-08-16T18:43:36.350544Z",
+    "name": "Z. Watson",
+    "notes": "",
+    "nurture_track": "",
+    "offer": "",
+    "opted_out": false,
+    "opted_out_at": null,
+    "product_stage": "",
+    "sources": [
+      "instantly_aug16"
+    ],
+    "stages": [
+      "discovered"
+    ],
+    "tags": [],
+    "total_spent_cents": 0,
+    "track_audit_id": "",
+    "track_position_days": 0,
+    "track_started_at": null,
+    "trigger_text": "",
+    "url": "https://ybsloans.com"
   },
   "zyvara.group@gmail.com": {
     "content_posts": [],

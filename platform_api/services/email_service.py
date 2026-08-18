@@ -17,6 +17,7 @@ class AuditEmailData(BaseModel):
     name: Optional[str] = None
     custom_subject: Optional[str] = None
     custom_body: Optional[str] = None
+    guided_implementation: Optional[dict] = None
 
 
 # ── Revenue math helper ─────────────────────────────────────────────────────
@@ -83,6 +84,95 @@ def _render_finding_text(f: dict) -> str:
     return "\n".join(lines)
 
 
+def _render_guided_implementation_text(gi: dict) -> str:
+    """Render guided implementation as plain text."""
+    if not gi or not gi.get("implementation_guide"):
+        return ""
+    
+    guide = gi["implementation_guide"]
+    lines = [
+        "GUIDED IMPLEMENTATION FLOW",
+        "=" * 40,
+        f"Title: {guide.get('title', 'Guided Implementation')}",
+        f"Description: {guide.get('description', '')}",
+        "",
+        "PRINCIPLES:",
+    ]
+    
+    for principle in guide.get("principles", []):
+        lines.append(f"• {principle}")
+    
+    lines.extend(["", "IMPLEMENTATION STEPS:"])
+    
+    for step in guide.get("steps", []):
+        lines.append(f"{step.get('step_id', '?')}. {step.get('title', 'Unknown Step')}")
+        lines.append(f"   Issue: {step.get('issue', '')}")
+        lines.append(f"   Goal: {step.get('goal', '')}")
+        lines.append(f"   Current Score: {step.get('current_score', 0)}/10 → Target: {step.get('target_score', 0)}/10")
+        lines.append(f"   Impact: {step.get('impact', 0)} | Effort: {step.get('effort', 0)} | Quadrant: {step.get('quadrant', 'unknown')}")
+        
+        # Add implementation steps if available
+        impl_steps = step.get("steps", [])
+        if impl_steps:
+            lines.append("   Action Steps:")
+            for impl_step in impl_steps:
+                lines.append(f"     {impl_step.get('order', '?')}. {impl_step.get('action', '')}")
+                if impl_step.get('guidance'):
+                    lines.append(f"       Guidance: {impl_step.get('guidance', '')}")
+                if impl_step.get('validation'):
+                    lines.append(f"       Validation: {impl_step.get('validation', '')}")
+        lines.append("")
+    
+    # Add validation framework
+    validation = guide.get("validation_framework", {})
+    if validation:
+        lines.extend(["", "VALIDATION FRAMEWORK:"])
+        for principle in validation.get("principles", []):
+            lines.append(f"• {principle}")
+        
+        methods = validation.get("methods", [])
+        if methods:
+            lines.append("")
+            lines.append("Validation Methods:")
+            for method in methods:
+                lines.append(f"• {method.get('method', 'Unknown')}: {method.get('description', '')}")
+    
+    # Add progressive disclosure
+    progressive = guide.get("progressive_disclosure", {})
+    if progressive:
+        lines.extend(["", "PROGRESSIVE DISCLOSURE:"])
+        lines.append(f"Philosophy: {progressive.get('philosophy', '')}")
+        for phase in progressive.get("phases", []):
+            lines.append(f"Phase {phase.get('phase', '?')}: {phase.get('title', 'Unknown Phase')}")
+            lines.append(f"  {phase.get('description', '')}")
+            lines.append(f"  Time Commitment: {phase.get('time_commitment', 'Not specified')}")
+            lines.append(f"  Expected Outcome: {phase.get('expected_outcome', 'Not specified')}")
+            lines.append("")
+    
+    # Add troubleshooting
+    troubleshooting = guide.get("troubleshooting", {})
+    if troubleshooting:
+        lines.extend(["", "TROUBLESHOOTING:"])
+        common_issues = troubleshooting.get("common_issues", [])
+        if common_issues:
+            lines.append("Common Issues:")
+            for issue in common_issues:
+                lines.append(f"• {issue.get('issue', 'Unknown issue')}")
+                if issue.get('causes'):
+                    lines.append(f"  Causes: {', '.join(issue.get('causes', []))}")
+                if issue.get('solutions'):
+                    lines.append(f"  Solutions: {', '.join(issue.get('solutions', []))}")
+        lines.append("")
+        
+        debugging_steps = troubleshooting.get("debugging_steps", [])
+        if debugging_steps:
+            lines.append("Debugging Steps:")
+            for i, step in enumerate(debugging_steps, 1):
+                lines.append(f"{i}. {step}")
+    
+    return "\n".join(lines)
+
+
 # ── Main email builder ──────────────────────────────────────────────────────
 
 class EmailService:
@@ -114,6 +204,33 @@ class EmailService:
 
         # Findings plain text
         findings_text = "\n\n".join(_render_finding_text(f) for f in top_findings)
+
+        # Guided implementation HTML and text
+        guided_implementation_html = ""
+        guided_implementation_text = ""
+        if data.guided_implementation and data.guided_implementation.get("implementation_guide"):
+            guide = data.guided_implementation["implementation_guide"]
+            default_description = "Step-by-step instructions to fix your landing page's conversion leaks"
+            guide_description = guide.get("description", default_description)
+            guided_implementation_html = f"""
+            <div style="border-top: 1px solid #eee; margin: 2rem 0; padding-top: 1.5rem;">
+                <h2 style="font-size: 1rem; font-weight: 700; margin: 0 0 0.75rem 0; text-transform: uppercase; letter-spacing: 0.05em; color: #333;">
+                    Guided Implementation Flow
+                </h2>
+                <p style="color: #333; font-size: 0.9rem; line-height: 1.7; margin: 0 0 1rem 0;">
+                    {guide_description}
+                </p>
+                <div style="background: #f8f9fa; border-radius: 6px; padding: 1rem; margin: 1rem 0;">
+                    <h3 style="font-size: 0.9rem; font-weight: 600; margin: 0 0 0.5rem 0; color: #333;">
+                        How to Use This Guide
+                    </h3>
+                    <p style="color: #555; font-size: 0.8rem; line-height: 1.6; margin: 0 0 0.5rem 0;">
+                        Start with the highest impact, lowest effort fixes (quick wins). Validate each step before moving to the next.
+                    </p>
+                </div>
+            </div>
+            """
+            guided_implementation_text = _render_guided_implementation_text(data.guided_implementation)
 
         # Story bridge - Mike's story, applied to them
         story_bridge_html = """
@@ -182,6 +299,8 @@ class EmailService:
 
             {findings_html}
 
+            {guided_implementation_html}
+
             {story_bridge_html}
 
             {cta_html}
@@ -205,6 +324,8 @@ Score: {data.score:.1f}/10 (Grade {data.grade})
 What your visitors are experiencing:
 
 {findings_text}
+
+{guided_implementation_text}
 
 ---
 

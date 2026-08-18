@@ -1,0 +1,89 @@
+{
+  "available": true,
+  "date_from": "2026-08-03",
+  "days": 14,
+  "steps": [
+    {
+      "event": "audit_page_viewed",
+      "label": "Audit page viewed",
+      "count": 284,
+      "conv": null,
+      "bench_low": null,
+      "status": "ok"
+    },
+    {
+      "event": "audit_submitted",
+      "label": "Audit submitted",
+      "count": 28,
+      "conv": 9.9,
+      "bench_low": 0.3,
+      "status": "LOW"
+    },
+    {
+      "event": "audit_ready",
+      "label": "Audit ready (processed)",
+      "count": 29,
+      "conv": 103.6,
+      "bench_low": 0.85,
+      "status": "ok"
+    },
+    {
+      "event": "audit_email_submitted",
+      "label": "Email gate passed",
+      "count": 14,
+      "conv": 48.3,
+      "bench_low": 0.5,
+      "status": "LOW"
+    },
+    {
+      "event": "audit_results_viewed",
+      "label": "Results viewed",
+      "count": 18,
+      "conv": 128.6,
+      "bench_low": 0.7,
+      "status": "ok"
+    },
+    {
+      "event": "checkout_page_viewed",
+      "label": "Checkout page",
+      "count": 23,
+      "conv": 127.8,
+      "bench_low": 0.25,
+      "status": "ok"
+    },
+    {
+      "event": "checkout_initiated",
+      "label": "Checkout initiated",
+      "count": 5,
+      "conv": 21.7,
+      "bench_low": 0.5,
+      "status": "LOW"
+    },
+    {
+      "event": "purchase_confirmed_viewed",
+      "label": "Purchase confirmed",
+      "count": 0,
+      "conv": 0.0,
+      "bench_low": 0.4,
+      "status": "LOW"
+    },
+    {
+      "event": "deposit_preorder",
+      "label": "Deposit/pre-order",
+      "count": 0,
+      "conv": null,
+      "bench_low": 0.45,
+      "status": "ok"
+    }
+  ],
+  "weakest": [
+    "Audit submitted",
+    "Email gate passed",
+    "Checkout initiated",
+    "Purchase confirmed"
+  ],
+  "entry_count": 284,
+  "submitted": 28,
+  "paid": 0,
+  "entry_to_paid_pct": 0.0
+}

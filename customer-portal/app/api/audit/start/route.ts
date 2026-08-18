@@ -12,7 +12,7 @@ import { checkAuditQuota } from '@/app/lib/audit-quota'
 
 export async function POST(request: NextRequest) {
   try {
-    let body: { url?: string; email?: string; name?: string; referrer?: string; audit_reason?: string; audit_attempt_id?: string }
+    let body: { url?: string; email?: string; name?: string; referrer?: string; audit_reason?: string; audit_attempt_id?: string; monthly_ad_spend?: number }
     try {
       body = await request.json()
     } catch {
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
-    const { url, referrer, audit_reason } = body
+    const { url, referrer, audit_reason, monthly_ad_spend } = body
     const auditAttemptId =
       typeof body.audit_attempt_id === 'string' && body.audit_attempt_id.trim().length > 0
         ? body.audit_attempt_id.trim().slice(0, 100)
@@ -121,19 +121,20 @@ export async function POST(request: NextRequest) {
 
     // Public audit start never trusts a client-supplied email; ownership is
     // established later through the signed unlock flow.
-    const apiResponse = await fetch('http://127.0.0.1:8001/audit/run', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        url: processedUrl,
-        email: anonymousEmail,
-        name: null,
-        analytics_consent: analyticsConsent,
-        analytics_distinct_id: distinctId,
-        analytics_attempt_id: auditAttemptId,
-      }),
-      signal: AbortSignal.timeout(120000) // 2 minute timeout
-    })
+const apiResponse = await fetch('http://127.0.0.1:8001/audit/run', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    url: processedUrl,
+    email: anonymousEmail,
+    name: null,
+    analytics_consent: analyticsConsent,
+    analytics_distinct_id: distinctId,
+    analytics_attempt_id: auditAttemptId,
+    monthly_ad_spend: monthly_ad_spend,
+  }),
+  signal: AbortSignal.timeout(120000) // 2 minute timeout
+})
 
     if (!apiResponse.ok) {
       return NextResponse.json(

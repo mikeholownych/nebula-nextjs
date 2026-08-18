@@ -1,0 +1,18 @@
+{
+  "approval_required_for": [
+    "external_send",
+    "publication",
+    "spend",
+    "production_code"
+  ],
+  "expected_metric": "Attributable completed purchases from checkout sessions after guarantee statement is added",
+  "hypothesis": "Adding a visible money-back guarantee to a cold offer checkout page is one of the highest-leverage, lowest-cost conversion levers available \u2014 measured lift ranges from 26% to 100% depending on guarantee duration, with refund rate increasing only marginally (3%). A guarantee statement on the Nebula checkout pre-page should be tested before any pricing or copy restructure.",
+  "observed_problem": "Nebula has 19 checkout starts and 0 completed purchases \u2014 100% abandonment on a $97 cold offer with no visible guarantee. CRO case studies show first-time buyers at unfamiliar brands require risk removal before committing.",
+  "research_id": "conversionfanatics-mbg-checkout-conversion-lift",
+  "smallest_safe_change": "Add a visible '30-day money-back if not satisfied' text line to the pre-checkout landing page and the checkout header \u2014 a copy-only change requiring no code; measure checkout-to-purchase rate over the next 10 sessions.",
+  "source_url": "https://conversionfanatics.com/does-a-money-back-guarantee-matter/",
+  "status": "proposed",
+  "stop_condition": "Revert guarantee language if checkout completion rate does not improve after 10 sessions",
+  "validation_window": "10 checkout sessions or 14 days after guarantee copy is visible",
+  "why_nebula": "Nebula's 19 checkout starts with 0 purchases is a first-time-buyer trust failure. A money-back guarantee directly addresses the risk calculus that blocks cold buyers at $97. This is the correct intervention before diagnosing price, copy, or audience."
+}

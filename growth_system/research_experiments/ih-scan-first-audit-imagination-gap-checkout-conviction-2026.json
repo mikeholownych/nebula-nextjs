@@ -1,0 +1,18 @@
+{
+  "approval_required_for": [
+    "external_send",
+    "publication",
+    "spend",
+    "production_code"
+  ],
+  "expected_metric": "Attributable checkout attempts and purchases from recipients of the revised scan-first audit format vs. the current format",
+  "hypothesis": "An audit artifact that shows a prospect their specific, named problem on their own site (screenshots, annotated observations, before/after framing) converts at a higher rate than a generic diagnosis \u2014 the 'imagination gap' between reading an audit and deciding to pay is closed when the artifact makes the problem undeniable and visible.",
+  "observed_problem": "A founder running a cold-outreach audit service received zero purchases despite audit delivery. A commenter identifies the root issue: the audit artifact requires prospects to 'imagine' their problem rather than showing it directly \u2014 described as the 'imagination gap'.",
+  "research_id": "ih-scan-first-audit-imagination-gap-checkout-conviction-20260330",
+  "smallest_safe_change": "Review one existing delivered audit for: (1) presence of annotated screenshots or rendered problem visualizations, (2) specific named fixes with before/after framing, (3) concrete impact estimate for the prospect's exact site. If absent, rewrite one audit to include these elements and observe whether the revised format produces a checkout attempt from the next recipient.",
+  "source_url": "https://www.indiehackers.com/post/day-3-update-60-cold-dms-sent-2-replies-0-paying-customers-heres-what-i-ve-learnt-and-found-c56da159ad",
+  "status": "proposed",
+  "stop_condition": "Revert to prior audit format if no checkout attempt occurs from the revised format after 3 deliveries",
+  "validation_window": "Next 3 audit deliveries or 14 days",
+  "why_nebula": "Nebula has 39 audits delivered with 0 resulting payments. If the current audit format requires prospects to infer or imagine their problem rather than directly seeing it, the artifact quality gap is the conversion blocker \u2014 not price, channel, or guarantee. This is a direct funnel_data signal from a parallel-context founder whose numbers mirror Nebula's."
+}
