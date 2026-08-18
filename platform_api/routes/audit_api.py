@@ -70,6 +70,7 @@ class AuditResponse(BaseModel):
     effective_fixes: Optional[list] = None
     historical_insights: Optional[dict] = None
     guided_implementation: Optional[dict] = None
+    strategic_finding: Optional[str] = None
 
 
 async def _crm_audit_completed(email: str, score: int, utm_source: Optional[str] = None) -> None:
@@ -208,7 +209,8 @@ async def run_audit(request: AuditRequest):
             findings=data.get('findings', []),
             status='completed',
             engine_version=data.get('engine_version'),
-            guided_implementation=data.get('guided_implementation')
+            guided_implementation=data.get('guided_implementation'),
+            strategic_finding=data.get('strategic_finding'),
         )
 
         # CRM: upsert prospect with UTM + score (fail-silent)
@@ -346,7 +348,8 @@ async def run_audit(request: AuditRequest):
             recurring_issues=data.get("historical_data", {}).get("recurring_issues") if data.get("historical_data") else None,
             effective_fixes=data.get("historical_data", {}).get("effective_fixes") if data.get("historical_data") else None,
             historical_insights=data.get("historical_insights"),
-            guided_implementation=data.get("guided_implementation")
+            guided_implementation=data.get("guided_implementation"),
+            strategic_finding=data.get("strategic_finding"),
         )
 
     except subprocess.TimeoutExpired:
@@ -385,7 +388,9 @@ async def run_audit(request: AuditRequest):
             effective_fixes=None,
             historical_insights=None
         )
-    except Exception:
+    except Exception as _exc:
+        import logging as _log
+        _log.exception("[audit/run] Unhandled exception: %s", _exc)
         return AuditResponse(
             audit_id=request.audit_id,
             url=request.url,

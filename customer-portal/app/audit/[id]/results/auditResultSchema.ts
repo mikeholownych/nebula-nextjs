@@ -18,6 +18,10 @@ export interface Finding {
   issue: string
   fix: string
   evidence?: FindingEvidence
+  /** Short conversion principle name — e.g. "message match", "proof proximity" */
+  principle?: string
+  /** One-sentence explanation of why this principle affects conversion */
+  principle_explanation?: string
 }
 
 export interface AuditResult {
@@ -30,6 +34,11 @@ export interface AuditResult {
   composite_anchor?: number
   findings: Finding[]
   error?: string
+  /**
+   * One sentence naming the dominant structural problem on this page —
+   * synthesized from the full finding set, not just the top signal.
+   */
+  strategic_finding?: string
 }
 
 const MAX_FINDINGS = 50
@@ -76,6 +85,10 @@ function finding(value: unknown, index: number): Finding | null {
     issue: text(value.issue, 'Issue unavailable'),
     fix: text(value.fix, 'Fix unavailable'),
     evidence: evidence(value.evidence),
+    principle: typeof value.principle === 'string' ? text(value.principle, '', 60) : undefined,
+    principle_explanation: typeof value.principle_explanation === 'string'
+      ? text(value.principle_explanation, '', 400)
+      : undefined,
   }
 }
 
@@ -109,5 +122,8 @@ export function parseAuditResult(value: unknown): AuditResult {
       : undefined,
     findings,
     error: typeof value.error === 'string' ? text(value.error, '', 300) : undefined,
+    strategic_finding: typeof value.strategic_finding === 'string'
+      ? text(value.strategic_finding, '', 600)
+      : undefined,
   }
 }

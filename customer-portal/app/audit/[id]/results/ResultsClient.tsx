@@ -993,6 +993,14 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
             <span className="text-sm tabular-nums text-fg-muted">Impact × effort ranked</span>
           </div>
 
+          {/* Strategic finding — structural synthesis above the ranked list */}
+          {results.strategic_finding && (
+            <div className="rounded-md border border-border/60 bg-bg-elevated/60 px-5 py-4">
+              <p className="mb-1 text-2xs font-semibold uppercase tracking-label text-fg-dim">Strategic finding</p>
+              <p className="text-sm leading-6 text-fg-muted">{results.strategic_finding}</p>
+            </div>
+          )}
+
           {results.findings.map((finding, index) => {
             const disease = getDisease(finding.key)
             return (
@@ -1022,6 +1030,11 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                       }`}>
                         {QUADRANT_LABELS[finding.quadrant]?.label || finding.quadrant}
                       </span>
+                      {finding.principle && (
+                        <span className="inline-flex items-center rounded-sm border border-border/60 px-2 py-1 text-2xs font-semibold uppercase tracking-label text-fg-dim">
+                          {finding.principle}
+                        </span>
+                      )}
                       <FailSignal />
                     </div>
                   </div>
@@ -1056,6 +1069,14 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                     <p className="text-fg-muted">
                       <strong>Issue:</strong> {finding.issue}
                     </p>
+
+                    {/* Principle explanation — educational layer on why this affects conversion */}
+                    {finding.principle_explanation && (
+                      <p className="text-xs leading-5 text-fg-dim border-l-2 border-border/60 pl-3">
+                        <span className="font-semibold text-fg-muted">{finding.principle}: </span>
+                        {finding.principle_explanation}
+                      </p>
+                    )}
 
                     {/* SERP snippet - only for seo_foundations, uses scraped data */}
                     <SerpSnippet finding={finding} url={results.url} />

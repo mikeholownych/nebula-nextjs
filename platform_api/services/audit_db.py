@@ -37,14 +37,18 @@ class AuditDB:
     async def connect(self):
         """Create connection pool"""
         if not self.pool:
-            self.pool = await asyncpg.create_pool(self.db_url, min_size=2, max_size=10)
-            # Ensure the engine_version column exists (idempotent, cheap).
-            # Stamp on every audit so a disputed score traces to the exact
-            # engine version that produced it.
+            self.pool = await asyncpg.create_pool(self.db_url, min_size=2, max_size=10, statement_cache_size=0)
+            # Ensure schema columns exist (idempotent, cheap).
             try:
                 async with self.pool.acquire() as conn:
                     await conn.execute(
                         "ALTER TABLE audits ADD COLUMN IF NOT EXISTS engine_version TEXT"
+                    )
+                    await conn.execute(
+                        "ALTER TABLE audits ADD COLUMN IF NOT EXISTS guided_implementation jsonb"
+                    )
+                    await conn.execute(
+                        "ALTER TABLE audits ADD COLUMN IF NOT EXISTS strategic_finding text"
                     )
             except Exception:
                 pass
@@ -96,7 +100,8 @@ class AuditDB:
                           composite: Optional[float] = None,
                           composite_anchor: Optional[float] = None,
                           engine_version: Optional[str] = None,
-                          guided_implementation: Optional[dict] = None) -> bool:
+                          guided_implementation: Optional[dict] = None,
+                          strategic_finding: Optional[str] = None) -> bool:
         """Update audit with results"""
         await self.connect()
 
@@ -108,12 +113,14 @@ class AuditDB:
                     status = $5, completed_at = NOW(),
                     composite = $6, composite_anchor = $7,
                     engine_version = COALESCE($8, engine_version),
-                    guided_implementation = $9
+                    guided_implementation = $9,
+                    strategic_finding = $10
                 WHERE id = $1
                 """,
                 audit_id, int(score * 10), grade, json.dumps(findings), status,
                 composite, composite_anchor, engine_version,
                 json.dumps(guided_implementation) if guided_implementation is not None else None,
+                strategic_finding,
             )
             updated = result == 'UPDATE 1'
             if updated and status == 'completed':

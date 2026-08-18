@@ -981,6 +981,16 @@ def score_audit(page):
         "opp_matrix": opp_matrix,
         "engine_version": ENGINE_VERSION,
     }
+
+    # ── Principles enrichment ──────────────────────────────────────────────────
+    # Adds `principle` + `principle_explanation` to each finding, and
+    # `strategic_finding` to the audit result — educational layer on top of signals.
+    try:
+        from audit_principles import enrich_with_principles, _strategic_finding
+        result["opp_matrix"] = enrich_with_principles(result["opp_matrix"])
+        result["strategic_finding"] = _strategic_finding(result["opp_matrix"], overall)
+    except Exception:
+        logging.exception("Audit principles enrichment failed — continuing without it")
     
     if HAS_GUIDED_IMPLEMENTATION:
         guided_implementation = build_guided_implementation({
@@ -1133,8 +1143,16 @@ def score_audit_with_signal_verifiers(page: dict) -> dict:
     
     # Build opportunity matrix using the same logic as original score_audit
     opp_matrix = _build_opportunity_matrix_from_dimensions(dimensions)
-    
-    return {
+
+    # Principles enrichment (same as score_audit path)
+    try:
+        from audit_principles import enrich_with_principles, _strategic_finding
+        opp_matrix = enrich_with_principles(opp_matrix)
+        strategic_finding = _strategic_finding(opp_matrix, overall)
+    except Exception:
+        strategic_finding = None
+
+    result = {
         "overall": overall,
         "overall_grade": grade,
         "composite": composite,
@@ -1143,6 +1161,9 @@ def score_audit_with_signal_verifiers(page: dict) -> dict:
         "opp_matrix": opp_matrix,
         "engine_version": ENGINE_VERSION,
     }
+    if strategic_finding:
+        result["strategic_finding"] = strategic_finding
+    return result
 
 
 def _get_original_dimension_score(dim_key: str, page: dict, html_text: str, text: str, 
@@ -2156,6 +2177,7 @@ def main():
             "email_body_text": email_body["text"],
             "email_body_html": email_body.get("html", ""),
             "dry_run": args.dry_run,
+            "strategic_finding": audit.get("strategic_finding"),
         }
         print(json.dumps(result))
         return
