@@ -61,7 +61,7 @@ export function getConsentRuntime(country: string | null = null) {
           capture_pageleave: true,
           capture_dead_clicks: false,
           disable_surveys: true,
-          disable_session_recording: true,
+          disable_session_recording: false,
           capture_performance: true,
           person_profiles: 'identified_only'
         });

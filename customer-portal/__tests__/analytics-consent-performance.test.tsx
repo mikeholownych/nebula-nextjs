@@ -120,7 +120,7 @@ describe('consent-gated analytics loading', () => {
     expect(consent).toContain('capture_pageleave: true')
     expect(consent).toContain('capture_dead_clicks: false')
     expect(consent).toContain('disable_surveys: true')
-    expect(consent).toContain('disable_session_recording: true')
+    expect(consent).toContain('disable_session_recording: false')
     expect(consent).toContain('capture_performance: true')
   })
 
