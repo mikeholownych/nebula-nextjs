@@ -46,28 +46,28 @@ function buildServiceSchema(fixPack: FixPackPublicFact) {
 
 const faqItems = [
   {
-    q: 'What is included in the One-Leak Repair Sprint?',
-    a: 'After the free audit, you pay $97 and Nebula prepares one scoped repair package for one specific failing signal within 48 hours. It includes the exact copy, code, or configuration change and a 30-day re-audit. No conversion lift is guaranteed.',
+    q: 'What exactly is included in the Repair Sprint?',
+    a: 'The exact replacement — copy, code snippet, or configuration change — written specifically for what was found on your page. Not "improve your H1." The actual replacement H1 text. Not "add social proof." The specific proof element and where to place it. Plus a 30-day re-audit to confirm the condition changed.',
+  },
+  {
+    q: 'How is this different from a generic CRO audit report?',
+    a: 'A report tells you what is wrong. The Repair Sprint tells you what to change it to. Nebula reads your actual page HTML — your specific H1, your CTA label, your meta description — and writes the replacement for that page. Generic advice is not included because it is not useful.',
   },
   {
     q: 'Why only one finding?',
-    a: 'A bounded change can be tested and measured honestly. Changing many things at once makes it impossible to know what worked. Fix the highest-impact finding first, run the re-audit, then decide what to do next.',
+    a: 'A bounded change is testable and honest. Changing multiple things at once makes it impossible to know what worked. The Repair Sprint fixes the highest-impact finding first, the 30-day re-audit confirms it held, then you have real evidence to act on next.',
   },
   {
     q: 'Do I need to give Nebula access to my site?',
-    a: 'No. The tailored kit is sent after successful payment - you apply it yourself or hand it to your developer. Nebula never needs CMS, hosting, or repository access.',
+    a: 'No. The kit is sent to your email after payment — you or your developer applies it. Nebula never needs CMS, hosting, or repository access. The audit reads your public page HTML.',
   },
   {
-    q: 'How long does it take?',
-    a: 'Stripe confirms the payment first. The tailored kit is then sent to the email used at checkout. Implementation speed depends on your setup.',
+    q: 'How long does the whole process take?',
+    a: 'The audit completes in under 30 seconds. The repair kit arrives within 48 hours of payment. Implementation time depends on what the fix requires — copy changes are minutes, code changes depend on your stack.',
   },
   {
     q: 'Does the repair guarantee more conversions?',
-    a: 'No. The kit targets a specific page condition identified by the audit. Conversion outcomes also depend on traffic quality, offer strength, and measurement windows. The 30-day re-audit shows whether the page condition changed - not whether revenue went up.',
-  },
-  {
-    q: 'What does the 30-day evidence check cover?',
-    a: 'One additional audit run on the same page within 30 days. It documents whether the repaired condition held. It does not by itself prove business impact.',
+    a: 'No — and any service that guarantees conversion lift without a controlled traffic test is making it up. The 30-day re-audit confirms whether the specific page condition changed. Conversion outcomes also depend on traffic quality and offer strength. You get verifiable evidence of what changed, not a revenue promise.',
   },
 ]
 
@@ -166,13 +166,15 @@ export default function PricingPage() {
             </Card>
 
             <Card variant="bordered">
-              <p className="mb-3 text-sm font-medium text-fg-muted">One-time payment</p>
+              <p className="mb-3 text-sm font-medium text-fg-muted">One-time · no subscription</p>
               <h2 className="text-2xl font-semibold text-fg">One-Leak Repair Sprint</h2>
-              <p className="mt-1 text-sm italic text-fg-muted">Fix the highest-impact leak - kit sent after successful payment</p>
-              <p className="mt-2 text-4xl font-bold text-fg">{REPAIR_SPRINT_OFFER.priceUsd}</p>
-              <p className="mt-4 text-fg-muted">
-                Run the free audit on one landing page first - see your score and initial findings before sharing an email.
-                Pay $97 for one scoped repair package for the highest-impact finding on your specific page. Nebula prepares it within 48 hours.
+              <p className="mt-1 text-sm text-fg-muted">Find it. Fix it. Verify it held.</p>
+              <p className="mt-2 text-4xl font-bold text-fg">${REPAIR_SPRINT_OFFER.priceUsd}</p>
+              <p className="mt-4 text-fg-muted leading-relaxed">
+                Run the free audit first — Nebula checks 9 signals against your actual page HTML in under 30 seconds.
+                Then pay $97 and receive the exact fix for your highest-impact finding within 48 hours.
+                Not generic advice — the replacement copy, code snippet, or configuration change written for your specific page.
+                A 30-day re-audit confirms the condition changed.
               </p>
               <div className="mt-6 space-y-3">
                 {

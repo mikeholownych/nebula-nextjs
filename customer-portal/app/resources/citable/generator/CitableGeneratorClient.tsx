@@ -104,7 +104,7 @@ ${description || 'Detailed summary of what your company offers, who it serves, a
             <label className="block text-xs font-mono uppercase text-fg-muted">One-Sentence Tagline / Positioning</label>
             <input
               type="text"
-              placeholder="e.g. Automated 7-signal landing page audit & code repair sprint"
+              placeholder="e.g. Automated 9-signal landing page audit & code repair sprint"
               value={tagline}
               onChange={(e) => setTagline(e.target.value)}
               className="mt-2 w-full rounded-lg border border-border bg-bg p-3 text-sm text-fg placeholder:text-fg-muted/50 focus:border-accent focus:outline-none"

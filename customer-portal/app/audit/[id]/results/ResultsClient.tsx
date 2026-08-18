@@ -481,12 +481,12 @@ function ReportOverview({ results }: { results: AuditResult }) {
 
           {/* Psychology: Endowment effect + autonomy (founder psychology) */}
           <p className="mt-4 max-w-[65ch] text-base leading-8 text-fg-muted">
-            <span className="font-semibold text-fg">You control the fix:</span> {' '}
-            3 changes. 30 minutes. No developers needed. The{' '}
+            <span className="font-semibold text-fg">The fix is specific to your page:</span>{' '}
+            Not "improve your H1" — the actual replacement. Not "add social proof" — the specific element and where to put it. The{' '}
             <a href="#remediation" className="font-semibold text-accent hover:underline">
-              $97 One-Leak Repair Sprint
+              $97 Repair Sprint
             </a>{' '}
-            gives you the exact implementation for your highest-impact finding.
+            delivers the exact copy, code, or configuration change for your highest-impact finding. A 30-day re-audit confirms it held.
           </p>
         </div>
 

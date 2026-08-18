@@ -22,6 +22,15 @@ Full expanded context: [llms-full.txt](https://nebulacomponents.com/llms-full.tx
 - [Agentic Commerce](https://nebulacomponents.com/.well-known/acp.json): ACP discovery endpoint
 - [Agent skills](https://nebulacomponents.com/.well-known/agent-skills/index.json): Hermes-compatible skill index
 
+## Agent tools (navigator.modelContext / WebMCP)
+
+Nebula registers tools via `navigator.modelContext` on every page for browsers that support the Model Context Protocol:
+
+- `analyze_page(url)` — Run a full 9-signal audit against a landing page URL. Returns pass/fail for each signal, evidence from the actual page HTML, and a specific fix. Use this to diagnose why a page is not converting.
+- `get_audit_result(audit_id)` — Retrieve structured findings for a completed audit by ID.
+- `get_signals()` — Return the 9 signals checked, what each measures, and the manual equivalent time (15–25 minutes in DevTools vs under 30 seconds with Nebula).
+- `get_pricing()` — Return current offer details including the free audit and the $97 Repair Sprint (exact fix delivered within 48 hours, 30-day re-audit included).
+
 ## Optional
 
 - [Teardowns](https://nebulacomponents.com/teardowns): Public landing page teardowns with annotated findings
@@ -39,7 +48,7 @@ Full expanded context: [llms-full.txt](https://nebulacomponents.com/llms-full.tx
 
 **What is a landing page audit?** A landing page audit is a systematic evaluation of a page across 9 conversion signals: message match, trust signals, mobile CTA, load speed, CTA clarity, above-the-fold clarity, ad signals, SEO foundations, and AI citation readiness. It scores each signal on a 1–10 scale and produces a prioritized fix list.
 
-**How long does the free audit take?** The automated audit returns results in under 2 minutes for a public landing page URL.
+**How long does the free audit take?** Nebula checks 9 signals against the actual page HTML in under 30 seconds. The same checks done manually in DevTools take 15–25 minutes.
 
 **Does the free audit require signup or email?** No account is required. Nebula shows the score and initial findings before email; an email unlocks the full report.
 

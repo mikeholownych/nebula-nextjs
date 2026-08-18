@@ -4,14 +4,14 @@ const WITHOUT = [
   { label: 'Open Stripe', detail: 'See $0. Again.' },
   { label: 'Change the ad', detail: 'Same result. Better CTR, still no sales.' },
   { label: 'Rewrite the headline', detail: 'Spend a day on copy. Conversions flat.' },
-  { label: 'Blame the audience', detail: '"Maybe my ICP is wrong." It\'s not.' },
+  { label: 'Blame the audience', detail: 'The page fails before the audience decides anything.' },
   { label: 'Keep paying', detail: '$500–$3,000/month into a page that can\'t close.' },
 ]
 
 const WITH = [
   { label: 'See the exact leak', detail: 'Score + 3 specific findings. Your page. 2 minutes.' },
   { label: 'Know what to fix first', detail: 'Ranked by conversion impact, not gut feel.' },
-  { label: 'Fix it for $97', detail: '48-hour implementation. Same ad spend. Page that closes.' },
+  { label: 'Fix it for $97', detail: '48-hour implementation. One specific structural fix applied to your page.' },
   { label: 'Stop guessing', detail: 'The anxiety of not knowing what\'s wrong - gone.' },
   { label: 'Run better campaigns', detail: 'Traffic into a page that\'s built for cold visitors.' },
 ]

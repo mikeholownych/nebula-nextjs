@@ -18,6 +18,36 @@ Adds two fields to the audit output:
 from __future__ import annotations
 from typing import Any
 
+# ── Signal type taxonomy ───────────────────────────────────────────────────
+# Three distinct types — a cold visitor should understand what category each
+# finding belongs to. This addresses the "blurs technical quality defects
+# with acquisition defects with conversion defects" critique.
+#
+# conversion  — directly affects whether a visitor takes the intended action
+# acquisition — affects how traffic reaches or experiences the page
+# technical   — infrastructure issues that constrain both
+
+SIGNAL_TYPES: dict[str, str] = {
+    "headline":        "conversion",   # message match → visitor continues or leaves
+    "cta":             "conversion",   # action visibility → visitor converts or doesn't
+    "above_fold":      "conversion",   # attention window → value prop seen before bounce
+    "social_proof":    "conversion",   # trust signal → risk reduction before action
+    "load_speed":      "technical",    # page renders before visitor abandons
+    "mobile":          "technical",    # page usable on the device delivering the traffic
+    "ad_signals":      "acquisition",  # measurement → knowing what traffic is converting
+    "seo_foundations": "acquisition",  # discoverability → organic traffic can find the page
+    "ai_readiness":    "acquisition",  # AI citation → AI-driven discovery surfaces the page
+    "ai_crawler_access": "acquisition",
+    "local_gbp":       "acquisition",
+}
+
+# Signal type display labels (shown in UI)
+SIGNAL_TYPE_LABELS: dict[str, str] = {
+    "conversion":  "Conversion signal",
+    "acquisition": "Acquisition signal",
+    "technical":   "Technical signal",
+}
+
 # ── Per-signal principle definitions ──────────────────────────────────────────
 # Each entry: signal key → { principle, explanation }
 # principle:   short label (2-5 words) — shown on the findings card

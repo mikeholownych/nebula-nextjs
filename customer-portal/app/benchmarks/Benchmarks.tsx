@@ -119,7 +119,7 @@ export default function Benchmarks({ initialData }: { initialData?: BenchmarksDa
     <section className="px-6 py-16">
       <div className="mx-auto max-w-6xl space-y-12">
         <p className="rounded-xl border border-accent/20 bg-accent/5 px-5 py-3 text-sm leading-6 text-fg-muted">
-          Verified sample only: this page publishes rates from the current seven-signal registry.
+          Verified sample only: this page publishes rates from the current nine-signal registry.
           Deprecated source-only checks are omitted until rendered verification is available.
         </p>
 

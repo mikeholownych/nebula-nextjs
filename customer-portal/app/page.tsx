@@ -94,8 +94,9 @@ export default function Home() {
                 Know exactly what&apos;s killing your conversions, without hiring a consultant.
               </h1>
               <p className="mt-6 max-w-lg text-base leading-relaxed text-fg-muted">
-                Your ads are working. The page is leaking the budget. Nebula scans your actual
-                HTML, calculates the monthly dollar bleed, and delivers the exact fix — in under 2 minutes.
+                Your ads are working. The page is leaking the budget. Nebula checks 9 conversion signals
+                against your actual page HTML in under 30 seconds — then delivers the exact fix for the highest-impact leak,
+                not a list of recommendations.
               </p>
               <div className="mt-8">
                 <Link
@@ -104,7 +105,7 @@ export default function Home() {
                 >
                   Get My Free Conversion Score
                 </Link>
-                <p className="mt-3 text-sm text-fg-muted">Free. No signup. Results in under 2 minutes.</p>
+                <p className="mt-3 text-sm text-fg-muted">Free. No signup. 9 signals checked in under 30 seconds.</p>
               </div>
               {/* Stat strip - elevated card */}
               <div className="mt-8 rounded-lg border border-border/40 bg-bg-surface/50 p-5">
@@ -461,7 +462,7 @@ export default function Home() {
                 Know what the click proved - and what it did not.
               </h2>
               <p className="mt-4 text-base text-fg-muted leading-relaxed">
-                A click proves the ad worked. The page determines whether that click becomes a decision.
+                A click establishes that the ad generated interest. The page determines whether that interest becomes a decision.
               </p>
             </div>
             <div className="divide-y divide-border/40 border-t border-b border-border/40">

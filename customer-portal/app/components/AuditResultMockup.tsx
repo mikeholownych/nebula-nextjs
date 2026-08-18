@@ -332,7 +332,7 @@ export default function AuditResultMockup() {
             <span className="text-fg-muted font-medium">{PASS_COUNT}</span> passed
           </span>
           <span className="text-border">·</span>
-          <span>7 signals</span>
+          <span>9 signals</span>
         </div>
         <div className="flex items-center gap-1.5 text-xs text-fg-dim">
           <span
