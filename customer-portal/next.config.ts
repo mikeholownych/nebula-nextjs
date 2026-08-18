@@ -499,6 +499,24 @@ const nextConfig: NextConfig = {
           { key: 'Access-Control-Allow-Origin', value: '*' },
         ],
       },
+      // /.well-known/oauth-protected-resource
+      {
+        source: '/.well-known/oauth-protected-resource',
+        headers: [
+          { key: 'Content-Type', value: 'application/json' },
+          { key: 'Cache-Control', value: 'public, max-age=3600' },
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+        ],
+      },
+      // /.well-known/oauth-authorization-server
+      {
+        source: '/.well-known/oauth-authorization-server',
+        headers: [
+          { key: 'Content-Type', value: 'application/json' },
+          { key: 'Cache-Control', value: 'public, max-age=3600' },
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+        ],
+      },
       {
         source: '/favicon.ico',
         headers: [

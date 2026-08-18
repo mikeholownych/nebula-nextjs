@@ -154,7 +154,7 @@ export default async function TeardownPage({
         <section className="mt-12">
           <h2 className="mb-2 text-2xl font-bold text-fg">{findingWord}</h2>
           <p className="mb-8 text-fg-muted">
-            Ranked by observable impact. Each finding includes the evidence Nebula used - no opinion, no estimation. Priority scores are rule-based heuristics for fix order, not predicted conversion loss.
+            Ranked by observable priority. Each finding includes the evidence Nebula used - no opinion, no estimation. Priority scores are rule-based heuristics for fix order, not predicted conversion loss.
           </p>
           <div className="space-y-6">
             {t.findings.map((f, i) => (
@@ -165,18 +165,18 @@ export default async function TeardownPage({
                       Finding {i + 1}
                     </p>
                     <h3 className="mt-1 text-xl font-bold text-fg">
-                      {i === 0 ? (
-                        <FindingCallout variant="circle" color="text-red-400">{f.label}</FindingCallout>
-                      ) : f.impact >= 3.5 ? (
-                        <FindingCallout variant="wavy" color="text-accent">{f.label}</FindingCallout>
-                      ) : (
-                        f.label
-                      )}
+{i === 0 ? (
+                         <FindingCallout variant="circle" color="text-red-400">{f.label}</FindingCallout>
+                       ) : f.priority >= 3.5 ? (
+                         <FindingCallout variant="wavy" color="text-accent">{f.label}</FindingCallout>
+                       ) : (
+                         f.label
+                       )}
                     </h3>
                   </div>
                   <div className="flex shrink-0 flex-col items-end gap-1">
-                    <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
-                      Priority {f.impact} title="Rule-derived prioritization score based on journey position, severity, reproducibility and confidence. This is not predicted conversion loss."/10
+                    <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent" title="Rule-derived prioritization score based on journey position, severity, reproducibility and confidence. This is not predicted conversion loss.">
+                      Priority {f.priority}/10
                     </span>
                     <span className={`text-xs font-semibold ${QUADRANT_COLORS[f.quadrant] ?? 'text-fg-muted'}`}>
                       {f.quadrant}

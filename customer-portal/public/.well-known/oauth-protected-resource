@@ -1,7 +1,38 @@
 {
   "resource": "https://nebulacomponents.com",
-  "resource_name": "Nebula Components public audit and agent APIs",
-  "authorization_servers": [],
-  "scopes_supported": ["read", "write"],
-  "resource_documentation": "https://nebulacomponents.com/auth.md"
+  "authorization_servers": [
+    "https://nebulacomponents.com"
+  ],
+  "scopes_supported": [
+    "read"
+  ],
+  "bearer_methods_supported": [
+    "header"
+  ],
+  "agent_auth": {
+    "skill": "https://nebulacomponents.com/auth.md",
+    "register_uri": "https://nebulacomponents.com/api/agent/register",
+    "identity_endpoint": "https://nebulacomponents.com/api/agent/identity",
+    "claim_endpoint": "https://nebulacomponents.com/api/agent/claim",
+    "events_endpoint": "https://nebulacomponents.com/api/agent/events",
+    "identity_types_supported": [
+      "anonymous"
+    ],
+    "anonymous": {
+      "credential_types_supported": [
+        "none"
+      ],
+      "claim_uri": "https://nebulacomponents.com/auth.md",
+      "revocation_uri": null
+    },
+    "credential_types": [
+      "none"
+    ],
+    "scopes_supported": [
+      "read"
+    ],
+    "claim_uri": "https://nebulacomponents.com/auth.md",
+    "revocation_uri": null,
+    "note": "Public endpoints require no credentials. POST to register_uri to declare agent intent or request write-access credentials."
+  }
 }

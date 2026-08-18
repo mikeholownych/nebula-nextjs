@@ -1,25 +1,62 @@
 {
-  "issuer": "https://nebulacomponents.shop",
-  "authorization_endpoint": "https://nebulacomponents.shop/oauth/authorize",
-  "token_endpoint": "https://nebulacomponents.shop/oauth/token",
-  "registration_endpoint": "https://nebulacomponents.shop/api/agent/register",
-  "scopes_supported": ["read", "write"],
-  "response_types_supported": ["code"],
-  "grant_types_supported": ["authorization_code", "client_credentials"],
-  "token_endpoint_auth_methods_supported": ["client_secret_post", "none"],
-  "service_documentation": "https://nebulacomponents.shop/auth.md",
+  "issuer": "https://nebulacomponents.com",
+  "authorization_endpoint": "https://nebulacomponents.com/api/agent/authorize",
+  "token_endpoint": "https://nebulacomponents.com/api/agent/token",
+  "revocation_endpoint": "https://nebulacomponents.com/api/agent/revoke",
+  "jwks_uri": "https://nebulacomponents.com/.well-known/jwks.json",
+  "response_types_supported": [
+    "code",
+    "token"
+  ],
+  "grant_types_supported": [
+    "urn:workos:agent-auth:grant-type:claim"
+  ],
+  "scopes_supported": [
+    "read",
+    "write"
+  ],
+  "token_endpoint_auth_methods_supported": [
+    "none"
+  ],
+  "claims_supported": [
+    "sub",
+    "aud",
+    "exp",
+    "iat",
+    "agent_id"
+  ],
   "agent_auth": {
-    "skill": "https://nebulacomponents.shop/auth.md",
-    "register_uri": "https://nebulacomponents.shop/api/agent/register",
-    "identity_types_supported": ["anonymous"],
+    "skill": "https://nebulacomponents.com/auth.md",
+    "register_uri": "https://nebulacomponents.com/api/agent/register",
+    "identity_endpoint": "https://nebulacomponents.com/api/agent/identity",
+    "claim_endpoint": "https://nebulacomponents.com/api/agent/claim",
+    "events_endpoint": "https://nebulacomponents.com/api/agent/events",
+    "identity_types_supported": [
+      "anonymous"
+    ],
+    "identity_assertion": {
+      "assertion_types_supported": [
+        "urn:ietf:params:oauth:token-type:id-jag"
+      ]
+    },
+    "events_supported": [
+      "https://schemas.workos.com/events/agent/auth/identity/assertion/revoked"
+    ],
     "anonymous": {
-      "credential_types_supported": ["none"],
-      "claim_uri": "https://nebulacomponents.shop/auth.md",
+      "credential_types_supported": [
+        "none"
+      ],
+      "claim_uri": "https://nebulacomponents.com/auth.md",
       "revocation_uri": null
     },
-    "claim_uri": "https://nebulacomponents.shop/auth.md",
+    "credential_types": [
+      "none"
+    ],
+    "scopes_supported": [
+      "read"
+    ],
+    "claim_uri": "https://nebulacomponents.com/auth.md",
     "revocation_uri": null,
-    "scopes_supported": ["read"],
-    "note": "Nebula Components public endpoints require no authentication. Use register_uri to declare agent intent or request write-access credentials."
+    "note": "Public endpoints require no credentials. POST to register_uri to declare agent intent or request write-access credentials."
   }
 }

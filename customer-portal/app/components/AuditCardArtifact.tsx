@@ -111,34 +111,34 @@ export default function AuditCardArtifact({
         </div>
       </div>
 
-      {/* Signal pills */}
-      <div className="mt-4 flex flex-wrap gap-2">
-        {signals.slice(0, 6).map((signal, i) => (
-          <motion.div
-            key={signal.key}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 + i * 0.05, duration: 0.3 }}
-            className={`
-              inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium
-              ${signal.pass
-                ? 'bg-[#22c55e]/10 text-[#22c55e]'
-                : 'bg-[#EF4444]/10 text-red-400'}
-            `}
-          >
-            {signal.pass ? (
-              <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
-            ) : (
-              <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            )}
-            {signal.label}
-          </motion.div>
-        ))}
-      </div>
+{/* Signal pills */}
+       <div className="mt-4 flex flex-wrap gap-2">
+         {signals.map((signal, i) => (
+           <motion.div
+             key={signal.key}
+             initial={{ opacity: 0, scale: 0.9 }}
+             animate={{ opacity: 1, scale: 1 }}
+             transition={{ delay: 0.2 + i * 0.05, duration: 0.3 }}
+             className={`
+               inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium
+               ${signal.pass
+                 ? 'bg-[#22c55e]/10 text-[#22c55e]'
+                 : 'bg-[#EF4444]/10 text-red-400'}
+             `}
+           >
+             {signal.pass ? (
+               <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
+                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+               </svg>
+             ) : (
+               <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
+                 <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+               </svg>
+             )}
+             {signal.label}
+           </motion.div>
+         ))}
+       </div>
 
       {/* Summary */}
       <div className="mt-4 flex items-center justify-between border-t border-border/40 pt-3 text-xs text-fg-muted">

@@ -8,12 +8,12 @@ export default function StackTaxComparison() {
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-accent">
             Unfair Advantage Matrix
           </p>
-          <h2 className="text-3xl font-extrabold tracking-tight text-fg md:text-4xl">
-            Stop paying a $1,500/mo Stack Tax or waiting 3 months for a CRO agency. Get your first fix in 48 hours.
-          </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-base text-fg-muted">
-            Most founders either spend $5k/mo on agencies that deliver 30-page PDFs or stitch 5 tools together and manually execute recommendations. Nebula gives you instant, verified code fixes in under 2 minutes.
-          </p>
+<h2 className="text-3xl font-extrabold tracking-tight text-fg md:text-4xl">
+             Based on industry feedback, founders often report spending on agencies with lengthy timelines or dealing with complex tool stacks. Nebula offers a free audit to identify issues and a repair sprint for targeted fixes.
+           </h2>
+<p className="mx-auto mt-3 max-w-2xl text-base text-fg-muted">
+             Based on industry observations, many founders either spend $5k/mo on agencies that deliver lengthy reports or stitch together multiple tools requiring manual execution. Nebula provides verified code fixes in under 2 minutes.
+           </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
@@ -22,13 +22,13 @@ export default function StackTaxComparison() {
             <div className="mb-4">
               <span className="text-xs font-semibold uppercase tracking-wider text-fg-muted">Option 1</span>
               <h3 className="text-xl font-bold text-fg">Traditional CRO Agency</h3>
-              <p className="mt-1 text-2xl font-extrabold text-fg-muted">$3,000–$15,000<span className="text-xs font-normal">/mo</span></p>
+              <p className="mt-1 text-2xl font-extrabold text-fg-muted">Typically $3,000–$15,000<span className="text-xs font-normal">/mo</span></p>
             </div>
             <ul className="mb-8 space-y-3 text-sm text-fg-muted flex-1">
-              <li className="flex items-start gap-2">
-                <span className="text-signal-fail">✕</span>
-                <span><strong>Time to first fix:</strong> 4 to 12 weeks of discovery calls</span>
-              </li>
+<li className="flex items-start gap-2">
+                 <span className="text-signal-fail">✕</span>
+                 <span><strong>Time to first fix:</strong> Typically 4 to 12 weeks including discovery and implementation</span>
+               </li>
               <li className="flex items-start gap-2">
                 <span className="text-signal-fail">✕</span>
                 <span><strong>Deliverable:</strong> Vague Figma mockups &amp; 30-page PDFs</span>
@@ -56,13 +56,13 @@ export default function StackTaxComparison() {
             <div className="mb-4">
               <span className="text-xs font-semibold uppercase tracking-wider text-fg-muted">Option 2</span>
               <h3 className="text-xl font-bold text-fg">DIY SaaS Tool Stack</h3>
-              <p className="mt-1 text-2xl font-extrabold text-fg-muted">$1,500+<span className="text-xs font-normal">/mo Stack Tax</span></p>
+              <p className="mt-1 text-2xl font-extrabold text-fg-muted">Typically $1,500+<span className="text-xs font-normal">/mo Stack Tax</span></p>
             </div>
             <ul className="mb-8 space-y-3 text-sm text-fg-muted flex-1">
-              <li className="flex items-start gap-2">
-                <span className="text-signal-fail">✕</span>
-                <span><strong>Time to first fix:</strong> 20+ hours/week manual API stitching</span>
-              </li>
+<li className="flex items-start gap-2">
+                 <span className="text-signal-fail">✕</span>
+                 <span><strong>Time to first fix:</strong> 20+ hours/week manual effort typically required</span>
+               </li>
               <li className="flex items-start gap-2">
                 <span className="text-signal-fail">✕</span>
                 <span><strong>Deliverable:</strong> 500-row spreadsheets &amp; complex dashboards</span>
@@ -96,10 +96,10 @@ export default function StackTaxComparison() {
               <p className="mt-1 text-2xl font-extrabold text-accent">$0 <span className="text-sm font-normal text-fg-muted">Free Audit</span> / $97 <span className="text-sm font-normal text-fg-muted">Repair Sprint</span></p>
             </div>
             <ul className="mb-8 space-y-3 text-sm text-fg flex-1">
-              <li className="flex items-start gap-2">
-                <span className="text-accent font-bold">✓</span>
-                <span><strong>Time to first fix:</strong> Sub-60s audit; 24h code delivery</span>
-              </li>
+<li className="flex items-start gap-2">
+                 <span className="text-accent font-bold">✓</span>
+                 <span><strong>Time to first fix:</strong> Sub-60s audit; typically 24h code delivery for Repair Sprint</span>
+               </li>
               <li className="flex items-start gap-2">
                 <span className="text-accent font-bold">✓</span>
                 <span><strong>Deliverable:</strong> Empirical ad spend leak math + exact diffs</span>

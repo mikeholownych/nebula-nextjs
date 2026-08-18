@@ -1,7 +1,7 @@
 export type Finding = {
   key: string
   label: string
-  impact: number
+  priority: number
   quadrant: 'Quick Win' | 'Major Project'
   issue: string
   evidence: string
@@ -39,7 +39,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'SEO Foundations',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: '<title> tag is only 8 characters - "Basecamp" - too short to signal topic relevance. Meta description is 185 chars, truncates in SERP at ~155. H1 text runs 95 characters, above the 90-char heuristic for a clean above-fold message.',
         evidence: 'title: "Basecamp" (8 chars) | meta desc: 185 chars | h1: "The refreshingly straightforward project managemen…" (95 chars) | h1 count: 1',
@@ -48,7 +48,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'social_proof',
         label: 'Social Proof',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Quick Win',
         issue: 'Page uses trust language - "testimonial", "review", "customer", "trusted" - but shows no concrete evidence markers: no named testimonials above fold, no star ratings, no review count.',
         evidence: 'Source trust terms detected: testimonial, review, customer, trusted. Recognized proof markers: none above fold.',
@@ -57,7 +57,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'above_fold',
         label: 'Above-Fold Clarity',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'Source-order analysis did not find a headline, primary CTA, or price/offer signal in the first 3,000 source characters. Requires rendered-viewport inspection to confirm.',
         evidence: 'Early HTML proxy missing: H1 headline, primary CTA, price/offer signal in first 3,000 source chars.',
@@ -66,7 +66,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'headline',
         label: 'Headline Length',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'H1 runs 95 characters - 5 over the 90-char heuristic. Above 90 chars the primary message is diluted, and the fold cut mid-sentence is more likely on small viewports.',
         evidence: '<h1> text: "The refreshingly straightforward project management system that\'s rock-solid a…" - 95 chars (heuristic max 90).',
@@ -75,7 +75,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ad_signals',
         label: 'Ad Tracking',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Major Project',
         issue: 'No recognized ad-tracking artifact found in static HTML - no Facebook Pixel, no GA4 measurement ID, no UTM-bearing link. Runtime or server-side tracking may exist; static source is not conclusive.',
         evidence: 'Source artifacts present: none. Not observed: Facebook Pixel initializer, GA4 initializer, UTM-bearing link, explicit conversion call.',
@@ -98,7 +98,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'page_weight',
         label: 'Page Payload',
-        impact: 5.0,
+        priority: 5.0,
         quadrant: 'Major Project',
         issue: 'Homepage HTML payload is 417KB - 3.4× the 120KB heuristic for a marketing page. Excessive HTML inflates parse time, delays first contentful paint, and signals server-side rendering of content that could be deferred.',
         evidence: 'HTML payload: 417,284 chars (~408KB). Heuristic max: ~120KB. Delta: +297KB above ceiling.',
@@ -107,7 +107,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'h1_title_mismatch',
         label: 'H1 / Title Mismatch',
-        impact: 3.5,
+        priority: 3.5,
         quadrant: 'Quick Win',
         issue: 'The <title> tag and H1 use different primary keywords. Title: "Notion – The all-in-one workspace". H1: "Write. Plan. Collaborate. Organize." - four imperative verbs that don\'t reinforce the title\'s "workspace" framing.',
         evidence: 'title: "Notion – The all-in-one workspace" | h1: "Write. Plan. Collaborate. Organize."',
@@ -116,7 +116,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'cta',
         label: 'CTA Specificity',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'Primary CTA is "Get Notion free" - clear and friction-reducing. However no trial framing, no feature scope, and no "no card required" signal adjacent to the button.',
         evidence: 'Primary CTA: "Get Notion free". No adjacent proof or friction-removal copy.',
@@ -125,7 +125,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'social_proof',
         label: 'Social Proof Above Fold',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: 'No review count, star rating, or named customer logos in the hero. Notion\'s scale (30M+ users) would be a strong proof signal if surfaced above fold.',
         evidence: 'Hero section: H1 → subheadline → CTAs. No social proof markers in first viewport.',
@@ -148,7 +148,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'missing_h1',
         label: 'Missing H1',
-        impact: 5.0,
+        priority: 5.0,
         quadrant: 'Quick Win',
         issue: 'No H1 tag detected in static HTML. The primary headline is rendered via JavaScript, meaning search engines and link previewers that do not execute JS see no headline at all.',
         evidence: 'Static HTML source: h1 count = 0. Headline content rendered client-side via JS bundle.',
@@ -157,7 +157,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'page_weight',
         label: 'Page Payload',
-        impact: 5.0,
+        priority: 5.0,
         quadrant: 'Major Project',
         issue: 'HTML payload is 1.2MB - 10× the 120KB heuristic. This is among the largest marketing homepages observed by the audit engine. Parse time, FCP, and LCP are all materially impacted.',
         evidence: 'HTML payload: 1,228,000+ chars (~1.2MB). Heuristic max: 120KB. Delta: +1.08MB above ceiling.',
@@ -166,7 +166,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'SEO Foundations',
-        impact: 3.5,
+        priority: 3.5,
         quadrant: 'Quick Win',
         issue: 'Meta description is 161 chars - 6 chars over the ~155-char SERP truncation threshold. The tail end of the description will be cut off in most search results.',
         evidence: 'meta description: 161 chars. SERP truncates at ~155. Last 6 chars cut from snippet.',
@@ -175,7 +175,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'above_fold',
         label: 'Above-Fold Clarity',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Quick Win',
         issue: 'Primary headline and CTA are JS-rendered. Source order does not reflect visual placement. Above-fold analysis requires rendered viewport inspection.',
         evidence: 'Static source: no above-fold markers in first 3,000 chars. Headline and CTA loaded via JS bundle.',
@@ -184,7 +184,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'social_proof',
         label: 'Social Proof',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'Trust language present in source ("enterprise", "teams", "integrations") but no named proof markers - no review count, no logo strip, no star rating - detected above fold.',
         evidence: 'Trust terms: enterprise, teams, integrations. Named proof markers above fold: none.',
@@ -207,7 +207,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'headline',
         label: 'Headline / H1',
-        impact: 5.0,
+        priority: 5.0,
         quadrant: 'Quick Win',
         issue: 'H1 contains only the brand name: <h1>Carrd</h1>. Zero keyword signal, zero value prop, zero audience signal. Every major competitor uses the H1 for their core value proposition.',
         evidence: 'Raw HTML: <h1>Carrd</h1>. Competitors: Webflow ("Make your website a growth engine"), Framer ("AI website builder for creating standout sites"), Squarespace ("Build a website").',
@@ -216,7 +216,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'SEO Foundations',
-        impact: 4.5,
+        priority: 4.5,
         quadrant: 'Quick Win',
         issue: 'Meta description is 94 chars - leaves 61 characters of SERP real estate empty. "pretty much anything" appears three times on the page as the core value statement.',
         evidence: 'meta description: "A free platform for building simple, fully responsive one-page sites for pretty much anything." (94 chars). "pretty much anything" found in: meta desc, H1 tagline, H2 subhead.',
@@ -225,7 +225,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'social_proof',
         label: 'Social Proof',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'No social proof above the fold. No star ratings, no testimonial count, no named customer logos. Price ($19/year) is hidden until mid-page.',
         evidence: 'Source-order analysis: no trust markers in first 3,000 chars. "$19 / year" first appears in the Pro section, well below the fold.',
@@ -234,7 +234,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'cta',
         label: 'CTA Clarity',
-        impact: 3.5,
+        priority: 3.5,
         quadrant: 'Quick Win',
         issue: 'Primary CTA reads "Choose a Starting Point" - passive, process-oriented, zero benefit language. Competes at equal visual weight with "Log In". Nav also has "Sign Up" - two labels for the same action.',
         evidence: 'Hero: <button>Choose a Starting Point</button> and <a>Log In</a> side-by-side. Nav: <a>Sign Up</a>.',
@@ -243,7 +243,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'structured_data',
         label: 'Structured Data / Social Preview',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'Missing og:title, og:description, and all JSON-LD structured data. Social share previews render with no title or description.',
         evidence: 'Raw HTML: no <meta property="og:title">, no <meta property="og:description">, no <script type="application/ld+json">.',
@@ -266,7 +266,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'cta',
         label: 'CTA Competition',
-        impact: 5.0,
+        priority: 5.0,
         quadrant: 'Quick Win',
         issue: 'Four competing CTAs appear before the hero section: (1) "Claim 20% off" banner, (2) "Sign up" nav link, (3) "Sign up with Google" hero primary, (4) "Sign up with email" hero secondary. A visitor must choose between four calls to action before reading the value proposition.',
         evidence: 'Source order: banner CTA → nav "Sign up" → hero "Sign up with Google" → hero "Sign up with email". CTA count above fold: 4.',
@@ -275,7 +275,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'headline',
         label: 'H1 Value Prop',
-        impact: 4.5,
+        priority: 4.5,
         quadrant: 'Quick Win',
         issue: 'H1 reads: "NEWSLETTERS. PODCASTS. COMMUNITY. ONE PLATFORM." - a stacked, all-caps product feature list. No verb, no outcome, no "you." The actual value prop is in the subheadline below.',
         evidence: 'Raw H1: <h1>NEWSLETTERS.<br/>PODCASTS.<br/>COMMUNITY.<br/><span>ONE PLATFORM.</span></h1>. Sub-headline: "beehiiv is the only platform that brings together every tool you need to grow and earn."',
@@ -284,7 +284,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'SEO / Technical',
-        impact: 3.5,
+        priority: 3.5,
         quadrant: 'Major Project',
         issue: 'Canonical tag points to https://www.beehiiv.com but page is served at https://beehiiv.com - redirect chain adds latency and creates a split-signal for search engines. Homepage HTML is 262KB - 2.1× the 120KB heuristic.',
         evidence: '<link rel="canonical" href="https://www.beehiiv.com/"> served at https://beehiiv.com. HTML payload: 262,445 chars (~256KB).',
@@ -293,7 +293,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'page_weight',
         label: 'Page Payload',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Major Project',
         issue: '29 JavaScript files in <head> plus 39 preload link tags. The footer newsletter embed (embeds.beehiiv.com) is blocked by ad blockers - producing a broken UI for a significant segment of users.',
         evidence: 'JS files in <head>: 29 (async). Preload links: 39. Footer embed origin: embeds.beehiiv.com - blocked by uBlock Origin default filter list.',
@@ -302,7 +302,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'social_proof',
         label: 'Social Proof Placement',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'Social proof (4.9/5 from 28,479 customers) appears above the CTA buttons - good positioning. However it competes for attention with four CTA variants at the same vertical position.',
         evidence: 'Source order: social proof block → "Sign up with Google" → "Sign up with email". Vertical proximity creates visual competition.',
@@ -325,7 +325,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'h1_duplication',
         label: 'Dual H1 - A/B Test SEO Leak',
-        impact: 5.5,
+        priority: 5.5,
         quadrant: 'Major Project',
         issue: 'Two H1 tags are simultaneously present in the live DOM via Webflow Optimize: "Make your website a growth engine" and "Make websites that drive results." Google indexes both, diluting the ranking signal for either.',
         evidence: 'Raw HTML contains both H1 variants in the same document. Source: Webflow Optimize script injection. Confirmed July 30, 2026.',
@@ -334,7 +334,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'SEO Foundations',
-        impact: 3.5,
+        priority: 3.5,
         quadrant: 'Quick Win',
         issue: 'Meta description is 154 chars - within limit but reads as a feature list. No conversion intent signal, no audience-specific language.',
         evidence: 'meta description: "Design, build, optimize, and rank in AI search - all in Webflow. Enterprise-grade security, CMS, hosting, and AEO built in. Trusted by over 300k teams." (154 chars).',
@@ -343,7 +343,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'cta',
         label: 'CTA Copy',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'Primary CTA is "Get started" - generic, benefit-free, identical to hundreds of SaaS homepages. No trial framing, no "free" signal, no outcome language.',
         evidence: 'Primary hero CTA: <button>Get started</button>. No trial framing.',
@@ -352,7 +352,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'social_proof',
         label: 'Social Proof Specificity',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: '"Trusted by over 300k teams" is present but non-specific. No named logos above the fold, no customer outcome metrics.',
         evidence: 'Hero social proof: "Trusted by over 300k teams." Customer logos appear below fold.',
@@ -375,7 +375,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'meta_description',
         label: 'Meta Description',
-        impact: 5.0,
+        priority: 5.0,
         quadrant: 'Quick Win',
         issue: 'Meta description is only 35 characters: "Kit: The creator marketing platform". Leaves ~120 chars of SERP real estate empty. Google auto-generates a snippet from body text - Kit has ceded first-impression control in search entirely.',
         evidence: '<meta name="description" content="Kit: The creator marketing platform"> (35 chars). Industry average: 140-155 chars. Competitors: ConvertKit.com (155 chars), Mailchimp (152 chars).',
@@ -384,7 +384,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'headline',
         label: 'H1 Value Prop',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'H1 reads "Your email list should be working harder for you" - conversational but vague. "Working harder" is unmeasurable and audience-agnostic. No outcome, no solution named.',
         evidence: '<h1>Your email list should be working harder for you</h1>. No audience qualifier, no outcome metric.',
@@ -393,7 +393,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'brand_confusion',
         label: 'Brand Transition Confusion',
-        impact: 3.5,
+        priority: 3.5,
         quadrant: 'Quick Win',
         issue: 'ConvertKit rebranded to Kit in 2024. Both domains still exist and rank. A visitor arriving via a ConvertKit-branded result lands on a page with no acknowledgment of the name change.',
         evidence: 'convertkit.com and kit.com both resolve. kit.com meta title: "Kit: The creator marketing platform" - no mention of ConvertKit legacy brand.',
@@ -402,7 +402,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'social_proof',
         label: 'Social Proof',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'Primary CTA is "Start free trial" with no proof adjacent. No review count, no subscriber count, no named logos above fold.',
         evidence: 'Hero area: H1 → subheadline → "Start free trial". No social proof markers in first 3,000 source chars.',
@@ -425,7 +425,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'h1_acquisition',
         label: 'H1 Announces Acquisition, Not Value',
-        impact: 5.5,
+        priority: 5.5,
         quadrant: 'Quick Win',
         issue: 'H1 reads "Hotjar has evolved into something more powerful" - corporate announcement copy. First-time visitors see a transition message and must decode what Hotjar does before understanding why to convert.',
         evidence: '<h1>Hotjar has evolved into something more powerful</h1>. Value proposition (heatmaps, session recordings, feedback) is below fold.',
@@ -434,7 +434,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'meta_better_than_h1',
         label: 'Meta Description Better Than H1',
-        impact: 3.5,
+        priority: 3.5,
         quadrant: 'Quick Win',
         issue: 'Meta description reads: "The next best thing to sitting beside someone browsing your site. See where they click, ask what they think, and learn why they drop off." More compelling than the H1 - but buried in the snippet where ~20% of visitors read it.',
         evidence: '<meta name="description" content="The next best thing to sitting beside someone browsing your site..."> (160 chars, slightly over 155-char limit).',
@@ -443,7 +443,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'cta_transition',
         label: 'CTA During Transition',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Major Project',
         issue: 'Primary CTA is "Get started free" but surrounding context ("evolved into something more powerful") creates uncertainty about what the visitor is starting. Hotjar? Contentsquare? A combined product?',
         evidence: 'H1: "Hotjar has evolved into something more powerful" → CTA: "Get started free". No product clarification in hero.',
@@ -452,7 +452,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'social_proof',
         label: 'Social Proof Gap',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'No review count, star rating, or customer count in the hero section. For a UX/CRO tool, social proof is the primary trust signal - buyers evaluate tools by adoption and reviews more than any other category.',
         evidence: 'Hero: H1 → subheadline → "Get started free" → "Watch a demo". No proof markers above fold.',
@@ -475,7 +475,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'h1_commodity',
         label: 'Commodity H1 - No Differentiation',
-        impact: 5.0,
+        priority: 5.0,
         quadrant: 'Quick Win',
         issue: 'H1 reads "Launch faster. Convert more." - this exact promise appears on Leadpages, Instapage, Swipe Pages, and Carrd. A visitor comparing landing page builders cannot distinguish Unbounce from any competitor based on the headline.',
         evidence: 'unbounce.com H1: "Launch faster. Convert more." Leadpages: "Create landing pages that convert." Instapage: "The most powerful landing page platform." All four are interchangeable.',
@@ -484,7 +484,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'meta_description',
         label: 'Meta Description',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Quick Win',
         issue: 'Meta description is 172 chars - 17 chars over the 155-char limit. The CTA ("start turning traffic into customers today!") truncates mid-sentence in Google SERP.',
         evidence: '<meta name="description" content="Grow your leads and sales with Unbounce...start turning traffic into customers today!"> (172 chars). SERP truncates at ~155.',
@@ -493,7 +493,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'cta',
         label: 'CTA Credibility Gap',
-        impact: 3.5,
+        priority: 3.5,
         quadrant: 'Quick Win',
         issue: 'Primary CTA is "Start building for free" - good friction reduction. But the page positions around AI optimization while the CTA makes no reference to it. No trial length, no "no card required" signal.',
         evidence: 'Hero: subheadline references AI-powered optimization → CTA: "Start building for free". No trial framing adjacent.',
@@ -502,7 +502,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'social_proof',
         label: 'Social Proof',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'No named logos, review count, or conversion lift metrics above fold. For a product selling conversion optimization, proving its own conversion via social proof is a meta-statement about quality.',
         evidence: 'Hero: H1 → subheadline → "Start building for free" → "Talk to sales". No proof markers.',
@@ -525,7 +525,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'cta_self_defeating',
         label: 'Self-Defeating Primary CTA',
-        impact: 5.0,
+        priority: 5.0,
         quadrant: 'Quick Win',
         issue: 'The most visible bottom CTA reads "Start without AI" - on a page entirely positioned around AI-powered website building. The primary entry point frames itself as an opt-out of the core differentiator.',
         evidence: 'Primary bottom CTA: "Start without AI". Secondary CTA: "Start with AI". Opt-out variant has equal or greater visual prominence on an AI-first page.',
@@ -534,7 +534,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'h1_js_dependency',
         label: 'H1 JS Rendering Dependency',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Major Project',
         issue: 'Framer renders the H1 via JavaScript - static HTML source contains no <h1> tag. Googlebot runs JS so this is partially mitigated, but link previewers and crawlers that skip JS see no headline.',
         evidence: 'Static HTML source: no <h1> tag. H1 ("Framer is the AI website builder for creating standout sites") appears only after JS execution. Confirmed via raw curl.',
@@ -543,7 +543,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'meta_description',
         label: 'Meta Description',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'Meta description is 151 chars - within limit but reads as a feature list: six verbs, no outcome, no audience signal.',
         evidence: '<meta name="description" content="Create a professional website with Framer\'s no-code AI website builder. Design freely, manage CMS content, optimize SEO, collaborate, and publish fast."> (151 chars).',
@@ -552,7 +552,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'cta_alignment',
         label: 'CTA Copy Alignment',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: 'Four CTAs across nav and hero use three different label patterns: "Sign in", "Get started", "Start with AI", "Start without AI". Inconsistent CTA language increases cognitive load.',
         evidence: 'Nav: "Sign in", "Get started". Hero primary: "Start without AI". Hero secondary: "Start with AI". Three conventions for two actions.',
@@ -575,7 +575,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'jsonld_php_leak',
         label: 'Malformed JSON-LD - Leaked PHP Template Literal',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'The JSON-LD block\'s context key is not "@context" - it is a leaked Blade/PHP template literal: "<?php $__contextArgs = []; if (context()->has($__contextArgs[0])) : ... ?>". Laravel interpreted "@context" as a Blade directive and compiled it into server-side PHP output, which then rendered into the page\'s structured data. The block is non-conformant JSON-LD; search engines can reject the context binding or drop the schema entirely, which would also discard the SoftwareApplication offers (Free/€19/€49) defined inside it.',
         evidence: 'Raw HTML (postmint.de/en, July 31 2026): the ld+json block opens with {"<?php $__contextArgs = [];\\nif (context()->has($__contextArgs[0])) :\\nif (isset($valu…": "https://schema.org", …}. The @context key is the PHP source string; the block also contains valid @graph nodes (Organization, WebSite, SoftwareApplication).',
@@ -584,7 +584,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'no_customer_proof',
         label: 'No Customer Social Proof Anywhere',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Quick Win',
         issue: 'The only proof marker on the page is the founder\'s own note ("I built Postmint because I was tired of watching good ideas go unposted. … Tobias, founder"). Zero customer testimonials, zero review counts, zero customer names or logos, and no aggregateRating in the SoftwareApplication schema. For a paid tool that just ran a launch with 118 visitors and 0 external signups, the page asks a stranger to trust the product with zero third-party validation - the absence is observable and fixable.',
         evidence: 'Body text scan (postmint.de/en, July 31 2026): no testimonial, review, or rating markers in visible copy. SoftwareApplication JSON-LD: "aggregateRating": null. Only quote block: the founder\'s own message.',
@@ -607,7 +607,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'social_sharing',
         label: 'Zero Social Sharing Metadata',
-        impact: 5.0,
+        priority: 5.0,
         quadrant: 'Quick Win',
         issue: 'The page has zero Open Graph tags (og:title, og:description, og:image) and zero Twitter Card tags. When the founder shares knallhart.dev on X, LinkedIn, or Reddit - his primary distribution channels per his own launch post - the link renders as a bare URL with no title, no description, no image. The first impression is lost before anyone reads a word.',
         evidence: 'Raw HTML: og: tags = 0, twitter: card tags = 0 (verified via curl, July 31 2026). Distribution context: launch post names Twitter + directories + Product Hunt as the traffic sources.',
@@ -616,7 +616,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'structured_data',
         label: 'No Structured Data for a Paid Product',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Quick Win',
         issue: 'Zero JSON-LD blocks on a page selling a €10 digital product. Without Product/Offer schema, Google cannot render rich results - no price badge, no review stars, no enhanced SERP presence for "website roast" or "website feedback" queries.',
         evidence: 'application/ld+json count = 0 (verified via curl, July 31 2026). Price stated 5× in visible HTML ("€10") but never exposed to search engines in structured form.',
@@ -625,7 +625,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'canonical',
         label: 'No Canonical URL',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: 'No rel="canonical" link tag. As the page gets syndicated (AI tools directories, launch aggregators, review sites) the risk of duplicate-content dilution grows - Google may pick a syndicated copy as canonical instead of the original.',
         evidence: 'link rel="canonical" count = 0 (verified via curl, July 31 2026).',
@@ -648,7 +648,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ad_signals',
         label: 'Ad Tracking Not Observed in Static Source',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Major Project',
         issue: 'No recognized ad-tracking artifact was observed in the fetched source HTML. That does not prove runtime or server-side tracking is absent, but it means the public source does not provide evidence that paid conversion events are configured.',
         evidence: 'Fetched source artifacts present: none. Not observed: Facebook Pixel initializer, GA4 measurement ID, UTM-bearing link, or explicit conversion call. Snapshot timestamp: 2026-08-03T07:38:25Z.',
@@ -657,7 +657,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'Meta Description Runs Long',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: 'The meta description is 180 characters. Search snippets commonly show roughly 155 characters, so the final part of the message may be truncated.',
         evidence: 'title: "CloudWise – Safe AWS Cost Remediation | CloudWise" (49 chars); meta description: 180 chars; one H1 detected. Snapshot timestamp: 2026-08-03T07:38:25Z.',
@@ -666,7 +666,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'above_fold',
         label: 'Above-Fold Source Proxy Needs Rendered Validation',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'The early HTML proxy contains a headline but no clickable control. This is a source-order warning, not proof that the rendered hero lacks a CTA.',
         evidence: 'Early source proxy did not show a headline, primary CTA, or price/offer signal together in the first 3,000 characters. Rendered viewport position remains unverified. Snapshot timestamp: 2026-08-03T07:38:25Z.',
@@ -689,7 +689,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'headline',
         label: 'No Static H1 Detected',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'No <h1> tag was found in the fetched document. If the primary promise is rendered only through client-side code, non-JavaScript readers and some extraction systems receive no primary heading.',
         evidence: 'Fetched source: h1 count = 0. Page title: "PostDew - Protect your LinkedIn credibility". Snapshot timestamp: 2026-08-03T07:38:26Z.',
@@ -698,7 +698,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'cta',
         label: 'No Source-Level CTA Candidate',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'No button or link text was found in fetched source HTML. Client-rendered controls may still exist, so browser validation is required before calling this a visible CTA failure.',
         evidence: 'Fetched source: no button or link text candidate. Rendered primary journey remains unverified. Snapshot timestamp: 2026-08-03T07:38:26Z.',
@@ -707,7 +707,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'social_proof',
         label: 'No Static Trust Markers',
-        impact: 3.5,
+        priority: 3.5,
         quadrant: 'Quick Win',
         issue: 'No testimonials, reviews, named proof, or other recognized trust markers were found in the fetched source. An early product may not have customer proof yet; the absence should be treated as a constraint, not a reason to fabricate proof.',
         evidence: 'Fetched source trust terms: none; recognized proof markers: none. Snapshot timestamp: 2026-08-03T07:38:26Z.',
@@ -716,7 +716,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ad_signals',
         label: 'Ad Tracking Not Observed in Static Source',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Major Project',
         issue: 'No recognized ad-tracking artifact was observed in fetched source HTML. Runtime or server-side tracking remains unknown.',
         evidence: 'Not observed: Facebook Pixel initializer, GA4 measurement ID, UTM-bearing link, or explicit conversion call. Snapshot timestamp: 2026-08-03T07:38:26Z.',
@@ -725,7 +725,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ai_readiness',
         label: 'No JSON-LD or Canonical Detected',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Major Project',
         issue: 'The static page has Open Graph tags but no valid JSON-LD block and no canonical URL was detected. This is a machine-readable structure gap, not proof of absent search visibility.',
         evidence: 'Valid JSON-LD blocks: 0/0; Open Graph tags: 5/5 non-empty; canonical: absent. Snapshot timestamp: 2026-08-03T07:38:26Z.',
@@ -748,7 +748,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ad_signals',
         label: 'Ad Tracking Not Observed in Static Source',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Major Project',
         issue: 'No recognized ad-tracking artifact was observed in the fetched source HTML. Runtime or server-side tracking remains unknown, so the page source alone cannot explain the reported visitor-to-app drop.',
         evidence: 'Not observed: Facebook Pixel initializer, GA4 measurement ID, UTM-bearing link, or explicit conversion call. Snapshot timestamp: 2026-08-03T07:41:32Z.',
@@ -757,7 +757,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'above_fold',
         label: 'Above-Fold Source Proxy Needs Rendered Validation',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'The early HTML proxy contains a headline but no clickable control. This is a source-order warning, not proof that the rendered CTA is absent.',
         evidence: 'Early source proxy did not show a headline, primary CTA, or price/offer signal together in the first 3,000 characters. Rendered viewport position remains unverified. Snapshot timestamp: 2026-08-03T07:41:32Z.',
@@ -780,7 +780,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'headline',
         label: 'No Static H1 Detected',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'No <h1> tag was found in the fetched document. If the primary promise is rendered only through client-side code, some readers and extraction systems receive no primary heading.',
         evidence: 'Fetched source: h1 count = 0. Page title: "Folioverse - AI Portfolio Mentor for UX Designers". Snapshot timestamp: 2026-08-03T07:48:48Z.',
@@ -789,7 +789,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'cta',
         label: 'No Source-Level CTA Candidate',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'No button or link text was found in fetched source HTML. Client-rendered controls may exist, so browser validation is required before treating this as a visible CTA failure.',
         evidence: 'Fetched source: no button or link text candidate. Rendered primary journey remains unverified. Snapshot timestamp: 2026-08-03T07:48:48Z.',
@@ -798,7 +798,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'above_fold',
         label: 'Above-Fold Source Proxy Needs Rendered Validation',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'The early HTML proxy lacks a headline, clickable control, or offer term in its first 3,000 characters. This is a source-order warning, not proof of the rendered layout.',
         evidence: 'Early source proxy missing: H1, primary CTA, and price/offer signal together in the first 3,000 source characters. Snapshot timestamp: 2026-08-03T07:48:48Z.',
@@ -807,7 +807,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ad_signals',
         label: 'Ad Tracking Not Observed in Static Source',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Major Project',
         issue: 'No recognized ad-tracking artifact was observed in fetched source HTML. Runtime or server-side tracking remains unknown, so the public source alone cannot explain the reported zero-signup result.',
         evidence: 'Not observed: Facebook Pixel initializer, GA4 measurement ID, UTM-bearing link, or explicit conversion call. Snapshot timestamp: 2026-08-03T07:48:48Z.',
@@ -816,7 +816,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'SEO Foundations: Missing H1',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'The title and meta description are present, but the static document has no H1. This is a structural issue, not proof of poor rankings or poor AI visibility.',
         evidence: 'title: "Folioverse - AI Portfolio Mentor for UX Designers" (49 chars); meta description: 135 chars; h1 count: 0. Snapshot timestamp: 2026-08-03T07:48:48Z.',
@@ -839,7 +839,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'H1 / Title Misalignment',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: 'H1 and title tag share no significant keywords - messaging misalignment. The title is "HubSpot | Software & Tools for your Business - Homepage" - the "- Homepage" suffix is a template placeholder that shipped to production. The static H1 reads "Where go-to-market teams go to grow scale close retain grow" - keyword-stacked, with "grow" appearing twice.',
         evidence: 'title: "HubSpot | Software & Tools for your Business - Homepage" (55 chars) | meta desc: 129 chars | h1: "Where go-to-market teams go to grow scale close retain grow" (69 chars) | h1 count: 1. Snapshot timestamp: 2026-08-04T13:02:44Z.',
@@ -848,7 +848,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'h1_rendered_mismatch',
         label: 'Static H1 Differs From Rendered H1',
-        impact: 3.5,
+        priority: 3.5,
         quadrant: 'Major Project',
         issue: 'The static HTML H1 ("Where go-to-market teams go to grow scale close retain grow") is not the headline rendered in a browser ("Where go-to-market teams go to scale."). Search engines and non-JS crawlers index the keyword-stacked static version; human visitors see a different message. The page is effectively running two headlines for two audiences.',
         evidence: 'Rendered hero H1 (Playwright screenshot, 2026-08-04): "Where go-to-market teams go to scale." Static source H1: "Where go-to-market teams go to grow scale close retain grow". Both served on the same URL.',
@@ -857,7 +857,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'load_speed',
         label: 'Page Payload',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Major Project',
         issue: 'HTML payload is 608.5 KiB - 5x the 120KB heuristic for a marketing page. Excessive HTML inflates parse time and delays first paint for every visitor, including the millions of paid visits HubSpot runs to this URL.',
         evidence: 'Fetched HTML payload: 608.5 KiB. Heuristic max: ~120 KiB. Delta: +488.5 KiB above ceiling. Snapshot timestamp: 2026-08-04T13:02:44Z.',
@@ -866,7 +866,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'above_fold',
         label: 'Above-Fold Source Proxy',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'Early source proxy has a headline but no clickable control in the first 3,000 characters. Rendered hero does show CTAs ("Get a demo", "Get started free") - but the source order does not reflect the visual hierarchy.',
         evidence: 'Early HTML proxy missing: H1 headline, primary CTA, price/offer signal together in first 3,000 source chars. Rendered hero (Playwright): headline + 2 CTAs present. Snapshot timestamp: 2026-08-04T13:02:44Z.',
@@ -875,7 +875,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ad_signals',
         label: 'Ad Tracking Not Observed in Static Source',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Major Project',
         issue: 'No recognized ad-tracking artifact observed in fetched source HTML; runtime/server-side tracking remains unverified. For a page running massive paid campaigns, the static source provides no evidence that conversion events are configured on the public document.',
         evidence: 'Not observed: Facebook Pixel initializer, GA4 initializer or measurement ID, UTM-bearing link, explicit conversion call. Snapshot timestamp: 2026-08-04T13:02:44Z.',
@@ -898,7 +898,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'Six H1s - No Single Story',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'The page contains 6 <h1> tags, each with a different value proposition: "Email & SMS marketing minus the learning curve", "Effortless growth powered by your data", "AI-powered marketing that brings your customers to you", "An easier way to keep your community engaged", "Connect with clients and grow your business faster". Search engines and screen readers cannot determine the primary message; the page is structurally telling six stories.',
         evidence: 'h1 count: 6. H1[0]: "Email & SMS marketing minus the learning curve". H1[2]: "AI-powered marketing that brings your customers to you". title: "Email & SMS Marketing Platform | Mailchimp" (42 chars). Snapshot timestamp: 2026-08-04T13:02:54Z.',
@@ -907,7 +907,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'first_visit_modal',
         label: 'Personalization Modal Covers the Hero on First Visit',
-        impact: 3.5,
+        priority: 3.5,
         quadrant: 'Quick Win',
         issue: 'On first visit, a personalization survey modal ("Make Mailchimp work for you - Got a second to answer a couple questions?") covers the hero and nav. A new visitor must either dismiss the modal or answer industry/goal questions before seeing the value proposition. The modal asks "Which of the following best describes your industry?" and "What are the top 3 things you want to achieve?" - 11 answer options - before the pitch.',
         evidence: 'Rendered viewport (Playwright screenshot, 2026-08-04): modal with 2 questions (1 dropdown, 1 multi-select with 8 options) covering the hero. "No thank you" + "Customize my experience" buttons. Cookie banner also present at bottom.',
@@ -916,7 +916,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'load_speed',
         label: 'Page Payload',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Major Project',
         issue: 'HTML payload is 560.4 KiB - 4.6x the 120KB heuristic for a marketing page. Large pages slow first paint and increase abandonment, especially on mobile where Mailchimp\'s ICP (small business owners) is concentrated.',
         evidence: 'Fetched HTML payload: 560.4 KiB. Heuristic max: ~120 KiB. Delta: +440.4 KiB above ceiling. Snapshot timestamp: 2026-08-04T13:02:54Z.',
@@ -925,7 +925,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'above_fold',
         label: 'Above-Fold Source Proxy',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'Early source proxy has a headline but no clickable control in the first 3,000 characters. Rendered hero does show CTAs, but the source order does not reflect the visual hierarchy - and the modal compounds the gap for first-time visitors.',
         evidence: 'Early HTML proxy missing: H1 headline, primary CTA, price/offer signal together in first 3,000 source chars. Snapshot timestamp: 2026-08-04T13:02:54Z.',
@@ -934,7 +934,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ad_signals',
         label: 'Partial Tracking in Static Source',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Major Project',
         issue: 'GA4 initializer/ID found in static source, but no Facebook Pixel initializer, UTM-bearing link, or explicit conversion call observed. Runtime firing remains unverified.',
         evidence: 'Present: GA4 initializer or measurement ID. Not observed: Facebook Pixel initializer, UTM-bearing link, explicit conversion call. Snapshot timestamp: 2026-08-04T13:02:54Z.',
@@ -957,7 +957,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'H1 / Title Misalignment',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: 'H1 and title tag have weak keyword overlap. The title ("Shopify: The All-in-One Commerce Platform for Busi…" - 66 chars, truncated) targets "commerce platform"; the H1 is campaign copy: "Be the nextAI all-star". The missing space in "nextAI" is a line-break collapse that shipped in the source HTML.',
         evidence: 'title: "Shopify: The All-in-One Commerce Platform for Busi" (66 chars) | meta desc: 142 chars | h1: "Be the nextAI all-star" | h1 count: 1. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -966,7 +966,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'above_fold',
         label: 'Above-Fold Source Proxy',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'Early source proxy has a headline but no clickable control in the first 3,000 characters. The rendered hero does carry CTAs - but the source order does not reflect the visual hierarchy, so crawlers and non-JS readers see a weaker page than visitors do.',
         evidence: 'Early HTML proxy missing: H1 headline, primary CTA, price/offer signal together in first 3,000 source chars. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -975,7 +975,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'load_speed',
         label: 'Page Payload',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Major Project',
         issue: 'HTML payload is 411.4 KiB - 3.4x the 120KB heuristic for a marketing page. Excessive HTML inflates parse time and delays first paint on every visit, paid or organic.',
         evidence: 'Fetched HTML payload: 411.4 KiB. Heuristic max: ~120 KiB. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -984,7 +984,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ad_signals',
         label: 'Ad Tracking Not Observed in Static Source',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Major Project',
         issue: 'Only a UTM-bearing link was observed in the static source; no GA4 initializer or measurement ID, no explicit conversion call. For a page receiving paid traffic, the static document provides no evidence of conversion measurement.',
         evidence: 'Static artifacts found: UTM-bearing link. Not observed: Facebook Pixel initializer, GA4 initializer or measurement ID, explicit conversion call. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1007,7 +1007,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'Meta Description Truncation',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'meta[name=description] is 173 chars - SERPs show ~155. The snippet truncates mid-word at "…the AI work platform for managing p", cutting the sentence before it lands.',
         evidence: 'title: "Slack | AI Work Platform & Productivity Tools" (45 chars) | meta desc: 173 chars | h1: "All your people and AI agents working together." | h1 count: 1. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1016,7 +1016,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'above_fold',
         label: 'Above-Fold Source Proxy',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'Early source proxy lacks a headline, clickable control, or offer term in its first 3,000 characters - the critical hierarchy is client-rendered, invisible to non-JS crawlers.',
         evidence: 'Early HTML proxy missing: H1 headline, primary CTA, price/offer signal in first 3,000 source chars. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1025,7 +1025,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'load_speed',
         label: 'Page Payload',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Major Project',
         issue: 'HTML payload is 249.3 KiB - 2x the heuristic ceiling for a marketing page.',
         evidence: 'Fetched HTML payload: 249.3 KiB. Heuristic max: ~120 KiB. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1034,7 +1034,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ad_signals',
         label: 'Conversion Tracking Gap',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Major Project',
         issue: 'GA4 is present, but no UTM-bearing link or explicit conversion call was observed in the static source. Runtime firing remains unverified.',
         evidence: 'Static artifacts found: GA4 initializer or measurement ID. Not observed: Facebook Pixel initializer, UTM-bearing link, explicit conversion call. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1057,7 +1057,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'load_speed',
         label: 'Page Payload',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Major Project',
         issue: 'HTML payload is 461.0 KiB - 3.8x the 120KB heuristic, the heaviest in this teardown batch. Every byte delays first paint for the paid and organic traffic hitting this page.',
         evidence: 'Fetched HTML payload: 461.0 KiB. Heuristic max: ~120 KiB. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1066,7 +1066,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'H1 / Title Misalignment',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: 'H1 and title have weak keyword overlap - the H1 sells "the automation layer for agentic AI" while the title sells "Automate AI Workflows, Agents, and Apps". The mid-pivot messaging split is visible in the source.',
         evidence: 'title: "Zapier: Automate AI Workflows, Agents, and Apps" (47 chars) | meta desc: 150 chars | h1: "The automation layer for agentic AI" | h1 count: 1. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1075,7 +1075,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'above_fold',
         label: 'Above-Fold Source Proxy',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'Early source proxy has a headline but no clickable control in the first 3,000 characters.',
         evidence: 'Early HTML proxy missing: H1 headline, primary CTA, price/offer signal together in first 3,000 source chars. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1084,7 +1084,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ad_signals',
         label: 'Conversion Tracking Gap',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Major Project',
         issue: 'GA4 and a UTM-bearing link are present; no explicit conversion call was observed in the static source.',
         evidence: 'Static artifacts found: GA4 initializer or measurement ID, UTM-bearing link. Not observed: Facebook Pixel initializer, explicit conversion call. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1107,7 +1107,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'Fallback Document Masks the Real Page',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Major Project',
         issue: 'The served document is the "unsupported browser" fallback: title "Unsupported client – Canva" (26 chars, below the 120-char meta minimum applies to the 26-char description too), H1 "Please update your browser". Any non-JS client - crawlers, link unfurlers, assistive fetchers - receives an error page instead of the product story.',
         evidence: 'title: "Unsupported client – Canva" (26 chars) | meta desc: 26 chars | h1: "Please update your browser" | h1 count: 1. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1116,7 +1116,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'social_proof',
         label: 'No Trust Signals',
-        impact: 3.5,
+        priority: 3.5,
         quadrant: 'Quick Win',
         issue: 'No testimonials, reviews, or social proof anywhere in the served document - for a product whose entire growth story is user volume.',
         evidence: 'Fetched source trust terms: none; recognized proof markers: none. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1125,7 +1125,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ai_readiness',
         label: 'No Structured Data',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Major Project',
         issue: 'No JSON-LD structured data, no canonical URL, and only 3/5 OpenGraph tags populated. AI engines and unfurlers get almost nothing to cite.',
         evidence: 'valid JSON-LD: 0/0 block(s) | OpenGraph: 3/5 non-empty tags | Canonical: absent. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1134,7 +1134,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ad_signals',
         label: 'No Tracking Artifacts in Static Source',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Major Project',
         issue: 'No recognized ad-tracking artifact observed in the fetched source at all - no GA4, no pixel, no UTM links, no conversion call.',
         evidence: 'Static artifacts present: none. Not observed: Facebook Pixel initializer, GA4 initializer or measurement ID, UTM-bearing link, explicit conversion call. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1143,7 +1143,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'above_fold',
         label: 'Above-Fold Source Proxy',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'Early source proxy lacks a headline, clickable control, or offer term in its first 3,000 characters - the fallback document has no above-fold content to evaluate.',
         evidence: 'Early HTML proxy missing: H1 headline, primary CTA, price/offer signal in first 3,000 source chars. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1166,7 +1166,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'headline',
         label: 'No H1 in Document',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'No <h1> tag found in the document at all. Search engines, screen readers, and AI crawlers get no primary headline signal from the page - the single most basic structural element of a landing page is absent.',
         evidence: 'No <h1> tag found in document. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1175,7 +1175,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'Title Truncation + Missing H1',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'Title truncates mid-brand in the fetched source ("Forms & Automated Workflows, Powered by AI | Typef") and the H1 is missing entirely - the two most-weighted on-page signals are both compromised.',
         evidence: 'title: "Forms & Automated Workflows, Powered by AI | Typef" (53 chars) | meta desc: 148 chars | h1 count: 0. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1184,7 +1184,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'above_fold',
         label: 'Above-Fold Source Proxy',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'Early source proxy lacks a headline, clickable control, or offer term in its first 3,000 characters.',
         evidence: 'Early HTML proxy missing: H1 headline, primary CTA, price/offer signal in first 3,000 source chars. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1193,7 +1193,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'load_speed',
         label: 'Page Payload',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Major Project',
         issue: 'HTML payload is 303.0 KiB - 2.5x the heuristic ceiling.',
         evidence: 'Fetched HTML payload: 303.0 KiB. Heuristic max: ~120 KiB. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1202,7 +1202,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ad_signals',
         label: 'Conversion Tracking Gap',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Major Project',
         issue: 'GA4 is present; no UTM-bearing link or explicit conversion call observed in the static source.',
         evidence: 'Static artifacts found: GA4 initializer or measurement ID. Not observed: Facebook Pixel initializer, UTM-bearing link, explicit conversion call. Snapshot timestamp: 2026-08-05T00:56:29Z.',
@@ -1225,7 +1225,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'load_speed',
         label: 'Page Payload',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Major Project',
         issue: 'HTML payload is 1,560.7 KiB - 13x the 120KB heuristic and the heaviest in our dataset. HTML this large delays parse and first paint for every visitor and inflates crawl cost on every fetch.',
         evidence: 'Fetched HTML payload: 1560.7 KiB. Heuristic max: ~120 KiB. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1234,7 +1234,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'H1 / Title Misalignment',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: 'H1 and title have weak keyword overlap - "intelligent canvas" (H1) vs "collaborative canvas" (title). The rebrand transition is visible in the source: two product narratives on one page.',
         evidence: 'title: "Figma: The collaborative canvas for design, code, " (56 chars) | meta desc: 164 chars | h1: "The intelligent canvas for infinite creativity" | h1 count: 1. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1243,7 +1243,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'above_fold',
         label: 'Above-Fold Source Proxy',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'Early source proxy has a headline but no clickable control in the first 3,000 characters.',
         evidence: 'Early HTML proxy missing: H1 headline, primary CTA, price/offer signal together in first 3,000 source chars. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1252,7 +1252,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ad_signals',
         label: 'Ad Tracking Not Observed in Static Source',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Major Project',
         issue: 'Only a UTM-bearing link was observed; no GA4 initializer or measurement ID, no explicit conversion call in the static source.',
         evidence: 'Static artifacts found: UTM-bearing link. Not observed: Facebook Pixel initializer, GA4 initializer or measurement ID, explicit conversion call. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1275,7 +1275,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'Broken H1 + Duplicate H1s',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: 'Two problems in the primary signal: the H1 text reads "The OS forhuman-agentteams" (line-break collapse - missing spaces) AND the document carries 2 H1 elements where exactly one should exist. Search engines receive a garbled primary headline, twice.',
         evidence: 'title: "Work & Project Management for Human-Agent Teams • " (55 chars) | meta desc: 106 chars | h1: "The OS forhuman-agentteams" | h1 count: 2. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1284,7 +1284,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'load_speed',
         label: 'Page Payload',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Major Project',
         issue: 'HTML payload is 785.9 KiB - 6.5x the 120KB heuristic.',
         evidence: 'Fetched HTML payload: 785.9 KiB. Heuristic max: ~120 KiB. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1293,7 +1293,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'above_fold',
         label: 'Above-Fold Source Proxy',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'Early source proxy lacks a headline, clickable control, or offer term in its first 3,000 characters - the hero hierarchy is client-rendered.',
         evidence: 'Early HTML proxy missing: H1 headline, primary CTA, price/offer signal in first 3,000 source chars. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1302,7 +1302,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ad_signals',
         label: 'Conversion Tracking Gap',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Major Project',
         issue: 'GA4 is present; no UTM-bearing link or explicit conversion call observed in the static source.',
         evidence: 'Static artifacts found: GA4 initializer or measurement ID. Not observed: Facebook Pixel initializer, UTM-bearing link, explicit conversion call. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1325,7 +1325,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'Duplicate H1 Tags',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: 'The document carries 2 H1 elements - the page\'s primary topical signal is split. H1: "People and agents working as one team".',
         evidence: 'title: "The AI Work Platform for People & Agents | monday." (53 chars) | meta desc: 163 chars | h1: "People and agents working as one team" | h1 count: 2. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1334,7 +1334,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'load_speed',
         label: 'Page Payload',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Major Project',
         issue: 'HTML payload is 598.7 KiB - 5x the 120KB heuristic.',
         evidence: 'Fetched HTML payload: 598.7 KiB. Heuristic max: ~120 KiB. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1343,7 +1343,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'above_fold',
         label: 'Above-Fold Source Proxy',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'Early source proxy lacks a headline, clickable control, or offer term in its first 3,000 characters.',
         evidence: 'Early HTML proxy missing: H1 headline, primary CTA, price/offer signal in first 3,000 source chars. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1352,7 +1352,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ad_signals',
         label: 'Ad Tracking Not Observed in Static Source',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Major Project',
         issue: 'Only a UTM-bearing link observed; no GA4 initializer or explicit conversion call in the static source.',
         evidence: 'Static artifacts found: UTM-bearing link. Not observed: Facebook Pixel initializer, GA4 initializer or measurement ID, explicit conversion call. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1375,7 +1375,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'load_speed',
         label: 'Page Payload',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Major Project',
         issue: 'HTML payload is 1,528.4 KiB - 12.7x the 120KB heuristic and the second-heaviest in our dataset. First paint waits on a megabyte and a half of markup.',
         evidence: 'Fetched HTML payload: 1528.4 KiB. Heuristic max: ~120 KiB. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1384,7 +1384,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ad_signals',
         label: 'No Tracking Artifacts in Static Source',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Major Project',
         issue: 'No recognized ad-tracking artifact observed in the fetched source at all - no GA4, no pixel, no UTM links, no conversion call. For a company selling measurement-heavy CX software, the static document carries nothing measurable.',
         evidence: 'Static artifacts present: none. Not observed: Facebook Pixel initializer, GA4 initializer or measurement ID, UTM-bearing link, explicit conversion call. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1393,7 +1393,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'above_fold',
         label: 'Above-Fold Source Proxy',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'Early source proxy lacks a headline, clickable control, or offer term in its first 3,000 characters - the entire hero is client-rendered.',
         evidence: 'Early HTML proxy missing: H1 headline, primary CTA, price/offer signal in first 3,000 source chars. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1416,7 +1416,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'seo_foundations',
         label: 'Broken H1 Whitespace',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: 'H1 reads "A websitemakes it real" - a line-break collapse fused "website" and "makes" in the source HTML. Title runs 62 chars (truncates at ~60 in SERPs). H1 and title share weak keyword overlap.',
         evidence: 'title: "Website Builder – Easily Create Your Own Website -" (62 chars) | meta desc: 157 chars | h1: "A websitemakes it real" | h1 count: 1. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1425,7 +1425,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'load_speed',
         label: 'Page Payload',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Major Project',
         issue: 'HTML payload is 610.9 KiB - 5x the heuristic ceiling.',
         evidence: 'Fetched HTML payload: 610.9 KiB. Heuristic max: ~120 KiB. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1434,7 +1434,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'above_fold',
         label: 'Above-Fold Source Proxy',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'Early source proxy has a headline but no clickable control in the first 3,000 characters.',
         evidence: 'Early HTML proxy missing: H1 headline, primary CTA, price/offer signal together in first 3,000 source chars. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1443,7 +1443,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
       {
         key: 'ad_signals',
         label: 'Ad Tracking Not Observed in Static Source',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Major Project',
         issue: 'Only a UTM-bearing link observed; no GA4 initializer or explicit conversion call in the static source.',
         evidence: 'Static artifacts found: UTM-bearing link. Not observed: Facebook Pixel initializer, GA4 initializer or measurement ID, explicit conversion call. Snapshot timestamp: 2026-08-05T09:40Z.',
@@ -1466,7 +1466,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'h1_whitespace',
         label: 'H1 Line-Break Collapse',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Quick Win',
         issue: 'The H1 source reads "The productdevelopmentsystem for teamsand agentsThe product development system for teams and agents", "product", "development", "system" and "teams", "and" are fused into single tokens by JSX whitespace collapse. The rendered text displays correctly but the static source that search engines index contains malformed compound words.',
         evidence: 'Raw H1 source (August 2026): "The productdevelopmentsystem for teamsand agents". Same defect confirmed on Shopify ("nextAI"), Asana ("forhuman-agentteams"), Squarespace ("websitemakes") in the same week of teardowns.',
@@ -1475,7 +1475,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'cta_clarity',
         label: 'CTA Count Above Fold',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: 'The hero carries "Get started", "Contact sales", "Open app", and "Download" as equal-weight CTAs below the headline, four choices competing for one action. For a new visitor, the primary conversion path is ambiguous.',
         evidence: 'Hero CTAs observed: "Get started", "Contact sales", "Open app", "Download". No visual hierarchy or primary/secondary differentiation.',
@@ -1484,7 +1484,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'ad_signals',
         label: 'Ad Tracking Not Observed in Static Source',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Major Project',
         issue: 'No recognized ad-tracking artifact was observed in the fetched static source. Runtime or server-side tracking remains unknown from the public document.',
         evidence: 'Not observed: Facebook Pixel initializer, GA4 measurement ID, UTM-bearing link, explicit conversion call. Snapshot: August 2026.',
@@ -1507,7 +1507,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'title_positioning_mismatch',
         label: 'Title / Page Positioning Mismatch',
-        impact: 3.5,
+        priority: 3.5,
         quadrant: 'Quick Win',
         issue: 'Title tag is "Free screen recorder for Mac and PC | Loom", the hero\'s actual pitch is "Unstuck your team with Loom" and the positioning is async team communication, not screen recording. The SERP promise and the page promise are two different products.',
         evidence: 'title: "Free screen recorder for Mac and PC | Loom". Hero H2: "Unstuck your team with Loom". Page emphasis: async video for distributed teams, not screen recording utility.',
@@ -1516,7 +1516,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'social_proof_above_fold',
         label: 'Social Proof Specificity',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: '"Millions of people across 400,000 companies choose Loom" is a volume claim. Named testimonials appear further down the page. The hero proof is a count, not an outcome.',
         evidence: 'Hero proof: "Millions of people across 400,000 companies". Named testimonials (Kieran Flanagan, David Okuinev, Alexis Ohanian) appear below fold.',
@@ -1525,7 +1525,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'ad_signals',
         label: 'Ad Tracking Not Observed in Static Source',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Major Project',
         issue: 'No recognized ad-tracking artifact was observed in the fetched static source. For a product running paid acquisition, runtime validation is required.',
         evidence: 'Not observed: Facebook Pixel initializer, GA4 measurement ID, UTM-bearing link, explicit conversion call. Snapshot: August 2026.',
@@ -1548,7 +1548,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'h1_negative_framing',
         label: 'H1 Framed as Absence, Not Outcome',
-        impact: 3.5,
+        priority: 3.5,
         quadrant: 'Quick Win',
         issue: 'H1 reads "The collaboration layer your AI tools are missing.", the primary conversion message is that the visitor currently lacks something. This negative framing creates a deficit anchor before making a positive case. The H1 and title ("AI Innovation Workspace | Miro") share no keyword.',
         evidence: 'H1: "The collaboration layer your AI tools are missing." Title: "AI Innovation Workspace | Miro". Zero keyword overlap between the two primary signals.',
@@ -1557,7 +1557,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'seo_foundations',
         label: 'H1 / Title Keyword Misalignment',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'The title uses "AI Innovation Workspace" as the primary keyword; the H1 uses "collaboration layer" with no workspace reference. Two different product descriptions on the same page.',
         evidence: 'title: "AI Innovation Workspace | Miro". H1: "The collaboration layer your AI tools are missing." No shared primary keyword.',
@@ -1566,7 +1566,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'above_fold',
         label: 'Above-Fold Source Proxy',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: 'The page is served via Framer, the above-fold content hierarchy is client-rendered. Non-JS crawlers see a reduced document.',
         evidence: 'Page served via Framer CDN. Static source does not contain above-fold CTA in the first 3,000 characters.',
@@ -1589,7 +1589,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'headline',
         label: 'H1 Has Zero Conversion Signal',
-        impact: 5.0,
+        priority: 5.0,
         quadrant: 'Quick Win',
         issue: '"Software to replace all software." names no product category, no audience, and no measurable outcome. A first-time visitor from a paid search ad for "project management tool" lands on a claim that provides no confirmation they are in the right place.',
         evidence: 'H1: "Software to replace all software." Subheadline: "Save time. Save money. Infinite productivity." Title: "ClickUp™ | Maximize productivity • Software, AI, and humans...", truncates in SERP.',
@@ -1598,7 +1598,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'title',
         label: 'Title Truncation and Run-On',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Quick Win',
         issue: 'The page title is a run-on that truncates mid-word in SERPs. "ClickUp™ | Maximize productivity • Software, AI, and humans...", the bullet point and trailing copy cut off before the sentence completes.',
         evidence: 'title: "ClickUp™ | Maximize productivity • Software, AI, and humans...", over 60 chars. SERP truncates at ~60.',
@@ -1607,7 +1607,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'social_proof',
         label: 'Social Proof Below Fold',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'The hero leads with the brand claim and CTA before any social proof. ClickUp has significant G2 review volume and named customers, none appear in the first viewport.',
         evidence: 'Hero: H1 → subheadline → CTA. No proof markers in first viewport. Trust signals appear in subsequent sections.',
@@ -1616,7 +1616,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'above_fold',
         label: 'Above-Fold Source Proxy',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Quick Win',
         issue: 'ClickUp.com is a heavily JavaScript-dependent page. The above-fold hierarchy is client-rendered, non-JS crawlers and slow connections see a degraded document.',
         evidence: 'Page is heavily JS-rendered. Static source does not contain the H1 in the first 3,000 characters in the version fetched.',
@@ -1639,7 +1639,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'seo_foundations',
         label: 'Title Repeats Brand Twice, Truncates',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'The title "Airtable: Build Enterprise-ready AI Workflows, Apps & Agents | Airtable" opens and closes with the brand name, spending 16 characters on a redundant suffix. At 65 characters it also truncates in most SERPs (~60 char threshold), cutting off the trailing "Airtable" anyway.',
         evidence: 'title: "Airtable: Build Enterprise-ready AI Workflows, Apps & Agents | Airtable" (65 chars). Brand appears at position 0 and position 56. SERP truncation threshold: ~60 chars.',
@@ -1648,7 +1648,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'logo_alt_text',
         label: 'Customer Logo Alt Text Missing',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: 'The "Trusted by 500,000 leading teams" logo strip uses generic alt text ("Logo 1" through "Logo 17"). Named logos carry trust weight; unnamed logo images are inaccessible and lose the brand-recognition signal for screen reader users and image crawlers.',
         evidence: 'Logo strip alt attributes: "Logo 1", "Logo 2", "Logo 3"… "Logo 17". No company names surfaced in observable alt attributes.',
@@ -1657,7 +1657,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'ad_signals',
         label: 'Ad Tracking Not Observed in Static Source',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Major Project',
         issue: 'No recognized ad-tracking artifact was observed in the fetched static source. For a page running enterprise paid campaigns, runtime validation is required.',
         evidence: 'Not observed: Facebook Pixel initializer, GA4 measurement ID, UTM-bearing link, explicit conversion call. Snapshot: August 2026.',
@@ -1680,7 +1680,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'cta_duplication',
         label: 'Dual CTA Entry Points, Equal Visual Weight',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Quick Win',
         issue: 'The hero presents both an email capture form ("Enter your work email → Try it free") and a button CTA ("Try it free") at equal visual prominence. A new visitor must choose between two technically identical actions with different UI patterns.',
         evidence: 'Hero: email input field + "Try it free" submit AND standalone "Try it free" button. Both lead to signup. No visual hierarchy differentiating primary from secondary.',
@@ -1689,7 +1689,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'social_proof',
         label: 'Social Proof: Count Without Context',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: '"Trusted by 100,000+ companies in 179 countries" is a volume claim without outcome specificity. Company logo images in the trust strip carry no visible alt text for recognizable brand names.',
         evidence: 'Hero proof: "Trusted by 100,000+ companies in 179 countries". Logo strip shows image files with no brand name surfaced.',
@@ -1698,7 +1698,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'ad_signals',
         label: 'Ad Tracking Not Observed in Static Source',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Major Project',
         issue: 'No recognized ad-tracking artifact was observed in the fetched static source. Runtime or server-side tracking remains unknown.',
         evidence: 'Not observed: Facebook Pixel initializer, GA4 measurement ID, UTM-bearing link, explicit conversion call. Snapshot: August 2026.',
@@ -1721,7 +1721,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'headline',
         label: 'H1 Names No Product Category',
-        impact: 4.5,
+        priority: 4.5,
         quadrant: 'Quick Win',
         issue: '"Build faster, with direction" is slogan copy, not a product claim. It names no category (analytics, product intelligence, event tracking), no audience (product teams, PMs, engineers), and no outcome (reduce churn, improve retention). A visitor comparing analytics tools cannot confirm from the H1 that Mixpanel is an analytics platform.',
         evidence: 'H1: "Build faster, with direction". Subheadline: "Product intelligence for the AI era: ground every decision in customer truth". The product description is in the subheadline, not the H1.',
@@ -1730,7 +1730,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'tagline_redundancy',
         label: 'Above-Fold Tagline Repeats the Problem',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Quick Win',
         issue: 'The page opens with "Mixpanel is for teams that move. Make your move.", this is the second vague claim before any product information. Both the H1 and the opening tagline fail to name the product category.',
         evidence: 'Above-fold sequence: tagline ("Mixpanel is for teams that move. Make your move.") → H1 ("Build faster, with direction") → CTA buttons → subheadline (product description). Product name appears in step 4.',
@@ -1739,7 +1739,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'seo_foundations',
         label: 'Meta Title / H1 Misalignment',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: 'Meta title is "Product Intelligence Platform for the AI Era | Mixpanel", a clear category description. The H1 is "Build faster, with direction", a slogan. The two most-weighted on-page signals describe different things.',
         evidence: 'title: "Product Intelligence Platform for the AI Era | Mixpanel" (54 chars). H1: "Build faster, with direction". Zero keyword overlap.',
@@ -1748,7 +1748,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'ad_signals',
         label: 'Ad Tracking Not Observed in Static Source',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Major Project',
         issue: 'No recognized ad-tracking artifact was observed in the fetched static source. Runtime or server-side tracking remains unknown.',
         evidence: 'Not observed: Facebook Pixel initializer, GA4 measurement ID, UTM-bearing link, explicit conversion call. Snapshot: August 2026.',
@@ -1771,7 +1771,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'seo_foundations',
         label: 'Title Too Short, "New Era" Has No Keyword Signal',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Quick Win',
         issue: 'Title is 38 characters, the shortest in this teardown batch. "A new era for product teams" contains no product category keyword ("analytics", "product intelligence", "digital analytics"). Google\'s organic snippet will likely be auto-generated from body text rather than showing the intended description.',
         evidence: 'title: "Amplitude | A new era for product teams" (38 chars). Target: 50-60 chars with primary keyword. Competitors: Mixpanel ("Product Intelligence Platform for the AI Era", 54 chars), Heap ("Digital Analytics | Heap"), Pendo ("Pendo | The Complete Product Experience Platform").',
@@ -1780,7 +1780,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'social_proof_sequencing',
         label: 'Trust Strip Precedes Value Proposition',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Quick Win',
         issue: 'The hero opens with "Trusted by teams shaping the future" followed by 17 customer logo images before the product description appears. Cold visitors who do not recognize Anthropic, NVIDIA, or Clay must process the logo strip without knowing what they are endorsing.',
         evidence: 'Hero source order: logo strip (17 customer logos) → product description → CTA. Logos appear before the H1-level product claim.',
@@ -1789,7 +1789,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'headline',
         label: 'No H1 in Static Source',
-        impact: 3.5,
+        priority: 3.5,
         quadrant: 'Quick Win',
         issue: 'The page does not serve an H1 in the static HTML. The primary product description ("One interface. All our capabilities.") appears after extensive JS execution. Search engines that do not execute JS receive no primary headline.',
         evidence: 'Static HTML: no <h1> detected. Primary descriptive text is client-rendered. Snapshot: August 2026.',
@@ -1798,7 +1798,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'ad_signals',
         label: 'Ad Tracking Not Observed in Static Source',
-        impact: 2.5,
+        priority: 2.5,
         quadrant: 'Major Project',
         issue: 'No recognized ad-tracking artifact was observed in the fetched static source. Runtime or server-side tracking remains unknown.',
         evidence: 'Not observed: Facebook Pixel initializer, GA4 measurement ID, UTM-bearing link, explicit conversion call. Snapshot: August 2026.',
@@ -1821,7 +1821,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'brand_transition',
         label: 'No Above-Fold Brand Transition Notice',
-        impact: 5.0,
+        priority: 5.0,
         quadrant: 'Quick Win',
         issue: 'The transition notice, "We\'ve transitioned from Drift to 1mind", appears mid-page in a callout section, not above the fold. A branded Drift visitor reads "Turn Website Visitors Into Pipeline" (a Salesloft pitch) as the headline before learning that Drift is no longer the same product. The acquisition and rebrand are explained after the conversion pitch, not before it.',
         evidence: 'H1: "Turn Website Visitors Into Pipeline". Transition notice: mid-page section titled "A new era in conversational AI / We\'ve transitioned from Drift to 1mind". Above fold contains no Drift → 1mind explanation.',
@@ -1830,7 +1830,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'h1_audience_mismatch',
         label: 'H1 Sells Salesloft, Not Drift',
-        impact: 4.0,
+        priority: 4.0,
         quadrant: 'Major Project',
         issue: '"Turn Website Visitors Into Pipeline" is Salesloft\'s value proposition for its chat agent product. A Drift user who relied on conversational marketing, chatbot flows, or lead routing is now reading a pipeline-generation pitch with no acknowledgment of Drift\'s previous use case.',
         evidence: 'H1: "Turn Website Visitors Into Pipeline". Page context: Salesloft chat agents / 1mind integration. Drift\'s legacy use cases (chatbot automation, account-based chat, meeting booking) are not referenced above fold.',
@@ -1839,7 +1839,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'seo_foundations',
         label: 'Canonical URL Conflict',
-        impact: 3.0,
+        priority: 3.0,
         quadrant: 'Major Project',
         issue: 'drift.com redirects to a salesloft.com subdirectory. The canonical authority for "drift" branded searches is now split between a legacy domain and a new product page on a parent company\'s domain. Search engines that have indexed drift.com for years must now reconcile the redirect chain.',
         evidence: 'drift.com → www.salesloft.com/products/chat-agents (observed August 2026). The served page title is "AI Chat Agent for B2B Sales" with no drift.com canonical relationship.',
@@ -1848,7 +1848,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         {
         key: 'social_proof',
         label: 'G2 Rating Not Contextualized',
-        impact: 2.0,
+        priority: 2.0,
         quadrant: 'Quick Win',
         issue: 'The page carries a "4.5 on G2" badge in the hero, but the G2 reviews behind that score are for the Drift product, not the 1mind/Salesloft chat agent being pitched. The proof signal belongs to a product that no longer exists under that name.',
         evidence: 'Hero badge: "4.5 on G2". Product pitched: Salesloft chat agents / 1mind. G2 reviews sourced from: Drift (legacy product).',
