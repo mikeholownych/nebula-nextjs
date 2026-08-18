@@ -4,7 +4,7 @@ import { Suspense } from 'react'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import SiteNav from '@/components/SiteNav'
-import Footer from '@/components/Footer'
+import SiteFooter from './components/SiteFooter'
 import WebMCP from '@/components/WebMCP'
 import LazyCookieConsent from './components/LazyCookieConsent'
 import AnalyticsRuntime from './components/AnalyticsRuntime'
@@ -122,7 +122,7 @@ export default async function RootLayout({
         </a>
         <SiteNav />
         {children}
-        <Footer />
+        <SiteFooter />
         <LazyCookieConsent country={country} />
         <Suspense fallback={null}><AnalyticsRuntime /></Suspense>
         <ExitIntentPopup />

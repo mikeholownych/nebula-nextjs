@@ -260,15 +260,6 @@ export default function SaasAuditPage() {
             </div>
           </section>
 
-          {/* Related */}
-          <footer className="border-t border-border pt-8 flex flex-wrap gap-4 text-sm text-fg-muted">
-            <span className="font-semibold text-fg">Related audits:</span>
-            <Link href="/ecommerce-landing-page-audit" className="hover:text-accent transition-colors">Ecommerce Audit</Link>
-            <Link href="/lead-generation-landing-page-audit" className="hover:text-accent transition-colors">Lead Gen Audit</Link>
-            <Link href="/why-is-my-landing-page-not-converting" className="hover:text-accent transition-colors">Landing Page Diagnostics</Link>
-            <Link href="/teardowns" className="hover:text-accent transition-colors">Public Teardowns</Link>
-            <Link href="/pricing" className="hover:text-accent transition-colors">Repair Sprint Pricing</Link>
-          </footer>
 
         </article>
       </main>

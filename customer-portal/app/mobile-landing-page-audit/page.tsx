@@ -234,15 +234,6 @@ export default function MobileAuditPage() {
             </div>
           </section>
 
-          {/* Related */}
-          <footer className="border-t border-border pt-8 flex flex-wrap gap-4 text-sm text-fg-muted">
-            <span className="font-semibold text-fg">Related audits:</span>
-            <Link href="/ecommerce-landing-page-audit" className="hover:text-accent transition-colors">Ecommerce Audit</Link>
-            <Link href="/saas-landing-page-audit" className="hover:text-accent transition-colors">SaaS Audit</Link>
-            <Link href="/landing-page-cta-audit" className="hover:text-accent transition-colors">CTA Audit</Link>
-            <Link href="/ads-getting-clicks-but-no-sales" className="hover:text-accent transition-colors">Ads Getting Clicks But No Sales</Link>
-            <Link href="/pricing" className="hover:text-accent transition-colors">Repair Sprint Pricing</Link>
-          </footer>
 
         </article>
       </main>

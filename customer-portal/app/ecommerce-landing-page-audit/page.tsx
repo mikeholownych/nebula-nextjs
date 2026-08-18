@@ -234,15 +234,6 @@ export default function EcommerceAuditPage() {
             </div>
           </section>
 
-          {/* Related */}
-          <footer className="border-t border-border pt-8 flex flex-wrap gap-4 text-sm text-fg-muted">
-            <span className="font-semibold text-fg">Related audits:</span>
-            <Link href="/saas-landing-page-audit" className="hover:text-accent transition-colors">SaaS Audit</Link>
-            <Link href="/lead-generation-landing-page-audit" className="hover:text-accent transition-colors">Lead Gen Audit</Link>
-            <Link href="/landing-page-trust-signals" className="hover:text-accent transition-colors">Trust Signals</Link>
-            <Link href="/teardowns" className="hover:text-accent transition-colors">Public Teardowns</Link>
-            <Link href="/pricing" className="hover:text-accent transition-colors">Repair Sprint Pricing</Link>
-          </footer>
 
         </article>
       </main>
