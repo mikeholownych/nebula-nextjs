@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import ROICalculator from './components/ROICalculator'
 import WithWithout from './components/WithWithout'
 import HowItWorksAnimated from './components/HowItWorksAnimated'
@@ -7,7 +8,12 @@ import StackTaxComparison from './components/StackTaxComparison'
 import HonestyGrid from './components/HonestyGrid'
 import AgenticNativeBanner from './components/AgenticNativeBanner'
 import MobileStickyAuditCTA from './components/MobileStickyAuditCTA'
-import AuditCardArtifact from './components/AuditCardArtifact'
+import dynamic from 'next/dynamic'
+const AuditCardArtifact = dynamic(() => import('./components/AuditCardArtifact'), {
+  loading: () => (
+    <div className="h-[340px] w-full max-w-sm rounded-2xl border border-border/40 bg-bg-muted/20 animate-pulse" aria-hidden="true" />
+  ),
+})
 import { TEARDOWNS } from './teardowns/[slug]/data'
 import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE } from './lib/homepageContent'
 import { SignalIcon } from '@/components/SignalIcons'
@@ -169,11 +175,12 @@ export default function Home() {
                 evidence, and ranks findings by impact. No estimates. No hypothetical lift.
               </p>
               <div className="mt-8 flex items-start gap-4">
-                <img
+                <Image
                   src="/mike-holownych-founder.webp"
                   alt="Mike Holownych, Founder of Nebula Components"
                   width={64}
                   height={64}
+                  priority
                   className="h-16 w-16 rounded-full object-cover shrink-0 ring-2 ring-border/40"
                 />
                 <div>

@@ -142,6 +142,7 @@ export default async function TeardownPage({
                 src={t.screenshotUrl}
                 alt={`${t.name} landing page snapshot - ${t.auditedAt}`}
                 fill
+                priority
                 className="object-cover object-top"
                 sizes="(max-width: 896px) 100vw, 896px"
               />
