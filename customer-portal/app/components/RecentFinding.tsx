@@ -53,14 +53,14 @@ export default function RecentFinding() {
   // Loading skeleton: same height as the rendered card (~80px), no layout shift.
   if (loading) {
     return (
-      <div className="mx-auto mt-6 max-w-lg rounded-xl border border-border bg-bg-panel px-5 py-4 h-[80px] animate-pulse" />
+      <div className="mt-6 rounded-xl border border-border bg-bg-panel px-5 py-4 h-[80px] animate-pulse" />
     )
   }
 
   if (!finding) return null
 
   return (
-    <div className="mx-auto mt-6 max-w-lg rounded-xl border border-border bg-bg-panel px-5 py-4">
+    <div className="mt-6 rounded-xl border border-border bg-bg-panel px-5 py-4">
       <div className="mb-2 flex items-center justify-between gap-3">
         <p className="text-xs font-semibold uppercase tracking-widest text-accent">
           Last finding - {finding.completed_at}

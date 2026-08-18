@@ -73,7 +73,7 @@ export default function SelfScan() {
   }, [visible])
 
   return (
-    <div ref={ref} className="mx-auto mt-10 max-w-lg text-left min-h-[220px]" aria-live="polite">
+    <div ref={ref} className="mt-4 min-h-[180px] text-left" aria-live="polite">
       {snapshot && (
         <div className="finding-reveal rounded-xl border border-border bg-bg-muted/40 p-5 font-mono text-sm">
           <div className="mb-3 flex items-center justify-between text-xs uppercase tracking-wider text-fg-muted">

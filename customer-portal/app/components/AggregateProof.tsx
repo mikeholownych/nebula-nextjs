@@ -43,9 +43,8 @@ export default function AggregateProof() {
   }, [])
 
   return (
-    <p className="mx-auto mt-4 max-w-lg text-center font-mono text-xs text-fg-muted">
-      {stats.completed_audits}+ verified audit{stats.completed_audits === 1 ? '' : 's'} in the completed sample
-      {' '}- not a projection, the actual number
+    <p className="mt-3 font-mono text-xs text-fg-muted">
+      {stats.completed_audits}+ landing pages audited
     </p>
   )
 }

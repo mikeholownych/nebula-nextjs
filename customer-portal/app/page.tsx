@@ -1,8 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import SelfScan from './components/SelfScan'
-import AggregateProof from './components/AggregateProof'
-import RecentFinding from './components/RecentFinding'
 import ROICalculator from './components/ROICalculator'
 import WithWithout from './components/WithWithout'
 import HowItWorksAnimated from './components/HowItWorksAnimated'
@@ -10,7 +7,6 @@ import StackTaxComparison from './components/StackTaxComparison'
 import HonestyGrid from './components/HonestyGrid'
 import AgenticNativeBanner from './components/AgenticNativeBanner'
 import MobileStickyAuditCTA from './components/MobileStickyAuditCTA'
-import AuditResultMockup from './components/AuditResultMockup'
 import { TEARDOWNS } from './teardowns/[slug]/data'
 import { HOMEPAGE_DESCRIPTION, HOMEPAGE_SEO_TITLE } from './lib/homepageContent'
 import { SignalIcon } from '@/components/SignalIcons'
@@ -73,55 +69,74 @@ export default function Home() {
       />
       <main id="main-content" className="min-h-screen bg-bg pt-24">
 
-        {/* ── 1. Hero: asymmetric split ── */}
-        <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-          <div className="grid gap-12 md:grid-cols-[1.4fr_1fr] md:items-start">
+        {/* ── 1. Hero: asymmetric split — copy left, product proof right ── */}
+        <section className="mx-auto max-w-6xl px-6 py-8 md:py-12">
+          <div className="grid gap-10 md:grid-cols-[1fr_1.3fr] md:items-start">
 
-            {/* Left: copy - dominant */}
-            <div className="flex flex-col justify-center">
-              <h1 className="text-4xl font-extrabold tracking-display text-fg md:text-5xl lg:text-6xl">
-                Know exactly what&apos;s killing your conversions - without hiring a consultant.
+            {/* Left: copy */}
+            <div className="flex flex-col">
+              <h1 className="text-3xl font-extrabold tracking-display text-fg md:text-4xl lg:text-5xl">
+                Know exactly what&apos;s killing your conversions — without hiring a consultant.
               </h1>
-              <p className="mt-6 max-w-lg text-lg leading-7 text-fg-muted">
+              <p className="mt-4 max-w-lg text-base leading-7 text-fg-muted">
                 Paste your URL. In under two minutes, Nebula shows you the specific finding costing you conversions,
-                the dollar math behind it, and the exact fix - free, no signup required.
+                the dollar math behind it, and the exact fix — free, no signup.
               </p>
-              {/* Benchmark stat bar — static fallback; async data loads below */}
-              <p className="mt-5 text-sm text-fg-muted border-l-2 border-accent/50 pl-3">
-                From <span className="font-semibold text-fg">86+ audits run:</span> avg score 62.7/100.{' '}
-                <span className="font-semibold text-fg">Zero A grades.</span>{' '}
-                <Link href="/benchmarks" className="text-accent hover:text-accent-light transition-colors">See the full index →</Link>
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="mt-6">
                 <Link
                   href="/audit?utm_source=homepage&utm_medium=internal"
-                  className="rounded-xl bg-accent px-7 py-3.5 font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors text-base"
+                  className="inline-block rounded-xl bg-accent px-8 py-4 text-base font-semibold text-bg hover:bg-accent-light focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
                 >
                   Find My Conversion Leak
                 </Link>
-                <Link
-                  href="/teardowns"
-                  className="text-sm text-fg-muted hover:text-fg transition-colors"
-                >
-                  See Sample Audit &rarr;
-                </Link>
+                <p className="mt-2 text-xs text-fg-muted">Free. No signup. Results in under 2 minutes.</p>
               </div>
-              {/* Reserve height to prevent CLS when async components load */}
-              <div className="min-h-[80px] mt-6">
-                <AggregateProof />
-                <RecentFinding />
+              {/* Stat strip — fills the left col and adds credibility */}
+              <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-border/40 pt-5">
+                <div>
+                  <p className="text-2xl font-bold tabular-nums text-fg">139+</p>
+                  <p className="mt-0.5 text-xs text-fg-muted">pages audited</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-bold tabular-nums text-fg">0</p>
+                  <p className="mt-0.5 text-xs text-fg-muted">scored an A</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-bold tabular-nums text-fg">9</p>
+                  <p className="mt-0.5 text-xs text-fg-muted">conversion signals checked</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-bold tabular-nums text-fg">&lt;2 min</p>
+                  <p className="mt-0.5 text-xs text-fg-muted">to your results</p>
+                </div>
               </div>
             </div>
 
-            {/* Right: product evidence — live self-scan + static mockup */}
-            <div className="flex flex-col gap-4 md:pt-4">
-              <div className="rounded-xl border border-border bg-bg-surface p-5 shadow-lifted">
-                <p className="mb-0.5 text-xs font-semibold text-accent">We run it on ourselves first</p>
-                <p className="mb-3 text-xs text-fg-muted">This is Nebula&apos;s own audit — same engine, same evidence, live result.</p>
-                <SelfScan />
+            {/* Right: product screenshot — what you get */}
+            <div className="flex flex-col">
+              <div className="overflow-hidden rounded-2xl border border-border shadow-lifted">
+                {/* Browser chrome strip */}
+                <div className="flex items-center gap-1.5 border-b border-border bg-bg-muted/60 px-4 py-2.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-fg-dim/40" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-fg-dim/40" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-fg-dim/40" />
+                  <span className="ml-3 flex-1 truncate rounded bg-bg-muted/40 px-3 py-1 text-xs text-fg-dim">
+                    nebulacomponents.com — audit results
+                  </span>
+                </div>
+                {/* Scorecard: shows real findings with scores, evidence, and top leak */}
+                <img
+                  src="/screenshots/audit-scorecard-hero.webp"
+                  alt="Nebula audit scorecard: 9 conversion signals scored, top leak identified with specific evidence and fix"
+                  width={1400}
+                  height={640}
+                  className="block w-full"
+                  loading="eager"
+                />
               </div>
-              {/* Static audit output mockup — shows what a real result looks like */}
-              <AuditResultMockup />
+              <p className="mt-3 text-xs text-fg-muted">
+                9 signals. Scored against your actual page. Top leak identified with specific evidence and fix.
+              </p>
             </div>
 
           </div>
