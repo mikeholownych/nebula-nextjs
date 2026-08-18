@@ -47,6 +47,7 @@ class AuditRequest(BaseModel):
     analytics_attempt_id: Optional[str] = None
     source: Optional[str] = None
     partner_id: Optional[str] = None
+    monthly_ad_spend: Optional[float] = None
 
 
 class AuditResponse(BaseModel):
@@ -62,6 +63,13 @@ class AuditResponse(BaseModel):
     page_title: Optional[str] = None
     page_h1: Optional[str] = None
     error: Optional[str] = None
+    # Historical tracking and personalization fields
+    historical_data: Optional[dict] = None
+    score_trend: Optional[list] = None
+    recurring_issues: Optional[list] = None
+    effective_fixes: Optional[list] = None
+    historical_insights: Optional[dict] = None
+    guided_implementation: Optional[dict] = None
 
 
 async def _crm_audit_completed(email: str, score: int, utm_source: Optional[str] = None) -> None:
@@ -109,6 +117,27 @@ async def run_audit(request: AuditRequest):
         # and `audit_failed`, both stamped with the shared correlation key.
 
         # Build command
+        # Fetch historical data for personalization if we have an email
+        historical_data_json = None
+        if request.email and "@invalid" not in request.email:
+            try:
+                # Get audit history and score trend for this user and URL
+                history = await audit_db.get_audit_history(request.email, request.url, limit=5)
+                score_trend = await audit_db.get_score_trend(request.email, request.url, limit=5)
+                recurring_issues = await audit_db.get_recurring_issues(request.email, limit=3)
+                effective_fixes = await audit_db.get_effective_fixes(request.email, limit=3)
+                
+                historical_data = {
+                    "history": history,
+                    "score_trend": score_trend,
+                    "recurring_issues": recurring_issues,
+                    "effective_fixes": effective_fixes
+                }
+                historical_data_json = json.dumps(historical_data)
+            except Exception as e:
+                # Don't fail the audit if historical data fetching fails
+                print(f"[audit_api] Failed to fetch historical data: {e}")
+        
         cmd = [
             "/home/mike/nebula/venv/bin/python3",
             AUDIT_SCRIPT,
@@ -117,6 +146,14 @@ async def run_audit(request: AuditRequest):
             "--json",
             "--dry-run",
         ]
+        
+        # Add historical data if available
+        if historical_data_json:
+            cmd.extend(["--historical-data", historical_data_json])
+            
+        # Add monthly ad spend if provided
+        if request.monthly_ad_spend is not None:
+            cmd.extend(["--monthly-ad-spend", str(request.monthly_ad_spend)])
 
         # Execute
         result = subprocess.run(
@@ -170,7 +207,8 @@ async def run_audit(request: AuditRequest):
             composite_anchor=data.get('composite_anchor'),
             findings=data.get('findings', []),
             status='completed',
-            engine_version=data.get('engine_version')
+            engine_version=data.get('engine_version'),
+            guided_implementation=data.get('guided_implementation')
         )
 
         # CRM: upsert prospect with UTM + score (fail-silent)
@@ -264,6 +302,7 @@ async def run_audit(request: AuditRequest):
                             score=_send_score,  # already on 0-10 scale from audit engine
                             grade=_send_grade,
                             findings=_send_findings,
+                            guided_implementation=data.get('guided_implementation')
                         )
                     )
                     if result_email.get("status") == "sent":
@@ -301,6 +340,13 @@ async def run_audit(request: AuditRequest):
             dimensions=data.get("dimensions", {}),
             page_title=data.get("page_title", ""),
             page_h1=data.get("page_h1", ""),
+            # Historical tracking and personalization fields
+            historical_data=data.get("historical_data"),
+            score_trend=data.get("historical_insights", {}).get("score_trend") if data.get("historical_insights") else None,
+            recurring_issues=data.get("historical_data", {}).get("recurring_issues") if data.get("historical_data") else None,
+            effective_fixes=data.get("historical_data", {}).get("effective_fixes") if data.get("historical_data") else None,
+            historical_insights=data.get("historical_insights"),
+            guided_implementation=data.get("guided_implementation")
         )
 
     except subprocess.TimeoutExpired:
@@ -314,7 +360,12 @@ async def run_audit(request: AuditRequest):
             audit_id=request.audit_id,
             url=request.url,
             status="error",
-            error="Audit timed out (120s limit)"
+            error="Audit timed out (120s limit)",
+            historical_data=None,
+            score_trend=None,
+            recurring_issues=None,
+            effective_fixes=None,
+            historical_insights=None
         )
     except json.JSONDecodeError:
         ph = get_posthog()
@@ -327,14 +378,24 @@ async def run_audit(request: AuditRequest):
             audit_id=request.audit_id,
             url=request.url,
             status="error",
-            error="Audit response was invalid"
+            error="Audit response was invalid",
+            historical_data=None,
+            score_trend=None,
+            recurring_issues=None,
+            effective_fixes=None,
+            historical_insights=None
         )
     except Exception:
         return AuditResponse(
             audit_id=request.audit_id,
             url=request.url,
             status="error",
-            error="Audit processing unavailable"
+            error="Audit processing unavailable",
+            historical_data=None,
+            score_trend=None,
+            recurring_issues=None,
+            effective_fixes=None,
+            historical_insights=None
         )
 
 
@@ -422,6 +483,65 @@ async def get_recent_finding():
         raise
     except Exception:
         raise HTTPException(status_code=503, detail="Recent finding unavailable")
+
+
+# ── Fix Implementation Library ─────────────────────────────────────────────────────
+
+@router.get("/fix-library")
+async def get_fix_library(limit: int = Query(10, ge=1, le=50)):
+    """Get the fix implementation library showing effectiveness of different fixes.
+    Returns top fixes ordered by success rate and average score improvement.
+    Used for social proof in audit emails and the browseable fix library."""
+    try:
+        fixes = await audit_db.get_fix_effectiveness(limit=limit)
+        return {"fixes": fixes}
+    except Exception as e:
+        err = str(e)
+        # Table not yet created — return empty gracefully
+        if "does not exist" in err or "UndefinedTable" in type(e).__name__:
+            return {"fixes": []}
+        raise HTTPException(status_code=503, detail="Fix library unavailable")
+
+
+@router.get("/fix-effectiveness")
+async def get_fix_effectiveness(finding_key: str = Query(..., min_length=1, max_length=100)):
+    """Get effectiveness statistics for a specific fix.
+    Returns detailed data about how well a particular fix performs."""
+    try:
+        effectiveness = await audit_db.get_fix_effectiveness(finding_key=finding_key)
+        if not effectiveness:
+            # Return empty result with zero values if no data yet
+            return {
+                "finding_key": finding_key,
+                "label": finding_key.replace('_', ' ').title(),
+                "total_attempts": 0,
+                "successful_implementations": 0,
+                "avg_score_improvement": 0.0,
+                "positive_outcomes": 0,
+                "success_rate_percentage": 0.0
+            }
+        return effectiveness[0]  # Return the first (and only) item
+    except Exception:
+        raise HTTPException(status_code=503, detail="Fix effectiveness unavailable")
+
+
+@router.get("/fix-history")
+async def get_fix_history(email: str = Query(..., min_length=3, max_length=320), 
+                         limit: int = Query(10, ge=1, le=100)):
+    """Get fix implementation history for a specific user.
+    Shows what fixes the user has attempted and their outcomes."""
+    try:
+        # Validate email format
+        import re
+        if not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
+            raise HTTPException(status_code=400, detail="Invalid email format")
+        
+        history = await audit_db.get_user_fix_history(email=email, limit=limit)
+        return {"email": email, "history": history}
+    except HTTPException:
+        raise
+    except Exception:
+        raise HTTPException(status_code=503, detail="Fix history unavailable")
 
 
 @router.get("/by-email")

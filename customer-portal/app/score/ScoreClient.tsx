@@ -128,7 +128,7 @@ export default function ScoreClient() {
       }
       setResult(data as AuditResult)
     } catch {
-      setError('Network error — check your connection and try again.')
+      setError('Network error, check your connection and try again.')
     } finally {
       stopPhrases()
       setLoading(false)
@@ -191,13 +191,15 @@ export default function ScoreClient() {
             See your landing page conversion score <span style={{ color: '#c7ff2f' }}>now.</span>
           </h1>
           <p style={{ color: '#8a9488', fontSize: 16, lineHeight: 1.6 }}>
-            Enter your domain. Your score and top conversion leak appear instantly — no signup, no call, no agency pitch.
+            Enter your domain. Your score and top conversion leak appear instantly, no signup, no call, no agency pitch.
           </p>
         </div>
 
         {/* Input */}
         <div style={{ display: 'flex', gap: 10, marginBottom: 8 }}>
           <input
+            id="score-domain"
+            name="domain"
             value={domain}
             onChange={e => setDomain(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && runAudit()}
@@ -307,6 +309,8 @@ export default function ScoreClient() {
                 </p>
                 <div style={{ display: 'flex', gap: 10, marginBottom: 8 }}>
                   <input
+                    id="score-email"
+                    name="email"
                     type="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
@@ -344,7 +348,7 @@ export default function ScoreClient() {
                         fontSize: 14, fontWeight: 700, padding: '11px 20px', textDecoration: 'none',
                       }}
                     >
-                      Fix my top leak now — $97 →
+                      Fix my top leak now, $97 →
                     </a>
                     <div style={{ fontSize: 11, color: '#3a4438', textAlign: 'center', marginTop: 6 }}>
                       One finding. 48h delivery. No call, no retainer.
@@ -357,7 +361,7 @@ export default function ScoreClient() {
                 <div style={{ fontSize: 40, marginBottom: 12 }}>✓</div>
                 <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 6, color: '#f0f4ec' }}>Full audit on the way.</h3>
                 <p style={{ fontSize: 14, color: '#8a9488', lineHeight: 1.6, marginBottom: 20 }}>
-                  Check your inbox — it includes all 9 signals, ranked by impact, with specific fixes.
+                  Check your inbox, it includes all 9 signals, ranked by impact, with specific fixes.
                 </p>
                 <a
                   href="https://buy.stripe.com/5kQbJ1eawdj6eql1Jg43S0h"
@@ -366,7 +370,7 @@ export default function ScoreClient() {
                     borderRadius: 10, fontSize: 14, fontWeight: 700, padding: '12px 24px', textDecoration: 'none',
                   }}
                 >
-                  Fix the top leak now — $97 →
+                  Fix the top leak now, $97 →
                 </a>
                 <div style={{ fontSize: 11, color: '#5a6458', marginTop: 8 }}>No call, no retainer. 48h delivery.</div>
               </div>

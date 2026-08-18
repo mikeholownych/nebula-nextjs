@@ -95,7 +95,8 @@ class AuditDB:
                           findings: List[dict], status: str = 'completed',
                           composite: Optional[float] = None,
                           composite_anchor: Optional[float] = None,
-                          engine_version: Optional[str] = None) -> bool:
+                          engine_version: Optional[str] = None,
+                          guided_implementation: Optional[dict] = None) -> bool:
         """Update audit with results"""
         await self.connect()
 
@@ -106,11 +107,13 @@ class AuditDB:
                 SET score = $2, grade = $3, findings = $4,
                     status = $5, completed_at = NOW(),
                     composite = $6, composite_anchor = $7,
-                    engine_version = COALESCE($8, engine_version)
+                    engine_version = COALESCE($8, engine_version),
+                    guided_implementation = $9
                 WHERE id = $1
                 """,
                 audit_id, int(score * 10), grade, json.dumps(findings), status,
                 composite, composite_anchor, engine_version,
+                json.dumps(guided_implementation) if guided_implementation is not None else None,
             )
             updated = result == 'UPDATE 1'
             if updated and status == 'completed':
@@ -676,7 +679,7 @@ class AuditDB:
             row = await conn.fetchrow(
                 """
                 SELECT id, url, status, score, grade, composite, composite_anchor,
-                       created_at, completed_at
+                        created_at, completed_at
                 FROM audits
                 WHERE email = $1 AND url = $2 AND status = 'completed'
                 ORDER BY created_at DESC
@@ -684,13 +687,200 @@ class AuditDB:
                 """,
                 email, url
             )
-            if not row:
-                return None
-            d = dict(row)
-            d["id"] = str(d["id"])
-            d["score"] = float(d["score"]) if d.get("score") is not None else None
-            return d
+        
+        if not row:
+            return None
+        d = dict(row)
+        d["id"] = str(d["id"])
+        d["score"] = float(d["score"]) if d.get("score") is not None else None
+        return d
 
+    async def get_audit_history(self, email: str, url: str, limit: int = 10) -> List[dict]:
+        """Get historical audits for a specific email and URL, ordered by date (newest first)."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            rows = await conn.fetch(
+                """
+                SELECT id, url, status, score, grade, composite, composite_anchor,
+                        created_at, completed_at
+                FROM audits
+                WHERE email = $1 AND url = $2 AND status = 'completed'
+                ORDER BY created_at DESC
+                LIMIT $3
+                """,
+                email, url, limit
+            )
+        return [dict(r) for r in rows]
+
+    async def get_score_trend(self, email: str, url: str, limit: int = 10) -> List[dict]:
+        """Get score trend over time for a specific email and URL."""
+        await self.connect()
+        async with self.pool.acquire() as conn:
+            rows = await conn.fetch(
+                """
+                SELECT 
+                    score::decimal / 10.0 as score,
+                    created_at,
+                    grade
+                FROM audits
+                WHERE email = $1 AND url = $2 AND status = 'completed'
+                ORDER BY created_at ASC
+                LIMIT $3
+                """,
+                email, url, limit
+            )
+            return [
+                {
+                    "score": float(r["score"]) if r["score"] is not None else None,
+                    "date": r["created_at"].isoformat() if r["created_at"] else None,
+                    "grade": r["grade"]
+                }
+                for r in rows
+            ]
+    
+    async def get_recurring_issues(self, email: str, limit: int = 5) -> List[dict]:
+        """Get recurring issues across a user's audit history."""
+        await self.connect()
+        
+        async with self.pool.acquire() as conn:
+            # Get findings from recent audits and count occurrences of each issue
+            rows = await conn.fetch(
+                """
+                SELECT findings
+                FROM audits
+                WHERE email = $1 AND status = 'completed' AND findings IS NOT NULL
+                ORDER BY created_at DESC
+                LIMIT $2
+                """,
+                email, limit * 3  # Get more audits to find recurring issues
+            )
+            
+            # Parse findings and count issue occurrences
+            issue_counts = {}
+            issue_details = {}
+            
+            for row in rows:
+                findings = row["findings"]
+                if isinstance(findings, str):
+                    try:
+                        findings = json.loads(findings)
+                    except Exception:
+                        findings = []
+                if not isinstance(findings, list):
+                    continue
+                    
+                for finding in findings:
+                    if isinstance(finding, dict):
+                        key = finding.get("key")
+                        label = finding.get("label", "Unknown Issue")
+                        if key:
+                            if key not in issue_counts:
+                                issue_counts[key] = 0
+                                issue_details[key] = {
+                                    "label": label,
+                                    "issue": finding.get("issue", ""),
+                                    "fix": finding.get("fix", ""),
+                                    "impact": finding.get("impact", 0)
+                                }
+                            issue_counts[key] += 1
+            
+            # Sort by frequency and return top issues
+            sorted_issues = sorted(issue_counts.items(), key=lambda x: x[1], reverse=True)
+            result = []
+            for key, count in sorted_issues[:limit]:
+                detail = issue_details[key].copy()
+                detail["key"] = key
+                detail["frequency"] = count
+                result.append(detail)
+            
+            return result
+
+    async def get_effective_fixes(self, email: str, limit: int = 5) -> List[dict]:
+        """Get fixes that have historically led to score improvements for a user."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            # Get pairs of consecutive audits for this user to see what changes led to improvements
+            rows = await conn.fetch(
+                """
+                SELECT 
+                    a1.findings as prior_findings,
+                    a2.findings as later_findings,
+                    a1.score as prior_score,
+                    a2.score as later_score,
+                    a2.created_at as later_date
+                FROM audits a1
+                JOIN audits a2 ON a1.email = a2.email AND a1.id < a2.id
+                WHERE a1.email = $1 
+                  AND a1.status = 'completed' 
+                  AND a2.status = 'completed'
+                  AND a1.findings IS NOT NULL
+                  AND a2.findings IS NOT NULL
+                ORDER BY a1.email, a1.created_at DESC, a2.created_at DESC
+                LIMIT $2
+                """,
+                email, limit * 10  # Get more pairs to analyze
+            )
+            
+            # Analyze what fixes led to score improvements
+            fix_effectiveness = {}
+            
+            for row in rows:
+                prior_score = row["prior_score"] or 0
+                later_score = row["later_score"] or 0
+                score_improvement = (later_score or 0) - (prior_score or 0)
+                
+                # Only consider audits where score improved
+                if score_improvement > 0:
+                    try:
+                        prior_findings = json.loads(row["prior_findings"]) if isinstance(row["prior_findings"], str) else row["prior_findings"]
+                        later_findings = json.loads(row["later_findings"]) if isinstance(row["later_findings"], str) else row["later_findings"]
+                    except Exception:
+                        continue
+                    
+                    if not isinstance(prior_findings, list) or not isinstance(later_findings, list):
+                        continue
+                    
+                    # Convert findings to sets of keys for comparison
+                    prior_keys = {f.get("key") for f in prior_findings if isinstance(f, dict) and f.get("key")}
+                    later_keys = {f.get("key") for f in later_findings if isinstance(f, dict) and f.get("key")}
+                    
+                    # Find issues that were fixed (present in prior but not in later)
+                    fixed_keys = prior_keys - later_keys
+                    
+                    # For each fixed issue, record that fixing it was associated with an improvement
+                    for key in fixed_keys:
+                        if key not in fix_effectiveness:
+                            fix_effectiveness[key] = {
+                                "total_improvement": 0,
+                                "count": 0,
+                                "avg_improvement": 0
+                            }
+                        
+                        fix_effectiveness[key]["total_improvement"] += score_improvement
+                        fix_effectiveness[key]["count"] += 1
+            
+            # Calculate average improvement and sort by effectiveness
+            result = []
+            for key, data in fix_effectiveness.items():
+                if data["count"] > 0:
+                    data["avg_improvement"] = round(data["total_improvement"] / data["count"], 1)
+                    # Get label from one of the occurrences (we'd need to store this better in a real implementation)
+                    data["label"] = key.replace("_", " ").title()  # Fallback
+                    result.append({
+                        "key": key,
+                        "label": data["label"],
+                        "avg_improvement": data["avg_improvement"],
+                        "times_fixed": data["count"],
+                        "total_improvement": data["total_improvement"]
+                    })
+            
+            # Sort by average improvement (descending)
+            result.sort(key=lambda x: x["avg_improvement"], reverse=True)
+            return result[:limit]
+
+    
     async def sync_recommendations(self, email: str) -> List[dict]:
         """Derive the recommendation kanban from completed audits.
 
@@ -1175,6 +1365,169 @@ class AuditDB:
             if domain in domains:
                 return True
             domains.append(domain)
+    async def record_fix_implementation(self, audit_id: UUID, finding_key: str, implemented: bool, verification_method: str, notes: Optional[str] = None, score_before: Optional[float] = None, score_after: Optional[float] = None) -> bool:
+        """Record a fix implementation attempt for an audit."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            try:
+                await conn.execute(
+                    """
+                    INSERT INTO fix_implementations (
+                        audit_id, finding_key, implemented, verification_method, notes,
+                        score_before, score_after, implemented_at
+                    ) VALUES (
+                        $1, $2, $3, $4, $5, $6, $7, NOW()
+                    )""",
+                    audit_id, finding_key, implemented, verification_method, notes,
+                    score_before, score_after
+                )
+                return True
+            except Exception:
+                return False
+
+
+    async def get_fix_effectiveness(self, limit: Optional[int] = None, finding_key: Optional[str] = None) -> List[dict]:
+        """Get fix effectiveness statistics. If finding_key provided, returns stats for that fix.
+        If finding_key is None, returns top fixes ordered by effectiveness (limited by limit).
+        """
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            if finding_key:
+                # Get effectiveness for a specific fix
+                rows = await conn.fetch(
+                    """
+                    SELECT 
+                        finding_key,
+                        COUNT(*) as total_attempts,
+                        SUM(CASE WHEN implemented THEN 1 ELSE 0 END) as successful_implementations,
+                        AVG(CASE WHEN score_after IS NOT NULL AND score_before IS NOT NULL THEN score_after - score_before ELSE 0 END) as avg_score_improvement,
+                        SUM(CASE WHEN (score_after IS NOT NULL AND score_before IS NOT NULL AND score_after > score_before) THEN 1 ELSE 0 END) as positive_outcomes
+                    FROM fix_implementations
+                    WHERE finding_key = $1
+                    GROUP BY finding_key
+                    """
+                    , finding_key
+                )
+                
+                if rows:
+                    row = rows[0]
+                    total_attempts = row["total_attempts"]
+                    successful = row["successful_implementations"]
+                    success_rate = (successful / total_attempts * 100) if total_attempts > 0 else 0.0
+                    
+                    return [{
+                        "finding_key": finding_key,
+                        "label": finding_key.replace("_", " ").title(),
+                        "total_attempts": total_attempts,
+                        "successful_implementations": successful,
+                        "avg_score_improvement": round(row["avg_score_improvement"] or 0.0, 1),
+                        "positive_outcomes": row["positive_outcomes"],
+                        "success_rate_percentage": round(success_rate, 1)
+                    }]
+                else:
+                    # Return empty result with zero values
+                    return [{
+                        "finding_key": finding_key,
+                        "label": finding_key.replace("_", " ").title(),
+                        "total_attempts": 0,
+                        "successful_implementations": 0,
+                        "avg_score_improvement": 0.0,
+                        "positive_outcomes": 0,
+                        "success_rate_percentage": 0.0
+                    }]
+            else:
+                # Get top fixes by effectiveness
+                rows = await conn.fetch(
+                    """
+                    SELECT 
+                        finding_key,
+                        COUNT(*) as total_attempts,
+                        SUM(CASE WHEN implemented THEN 1 ELSE 0 END) as successful_implementations,
+                        AVG(CASE WHEN score_after IS NOT NULL AND score_before IS NOT NULL THEN score_after - score_before ELSE 0 END) as avg_score_improvement,
+                        SUM(CASE WHEN (score_after IS NOT NULL AND score_before IS NOT NULL AND score_after > score_before) THEN 1 ELSE 0 END) as positive_outcomes
+                    FROM fix_implementations
+                    WHERE implemented = TRUE
+                    GROUP BY finding_key
+                    HAVING COUNT(*) >= 1
+                    ORDER BY SUM(CASE WHEN score_after IS NOT NULL AND score_before IS NOT NULL THEN score_after - score_before ELSE 0 END) / NULLIF(COUNT(*), 0) DESC, COUNT(*) DESC
+                    LIMIT $1
+                    """
+                    , limit or 10
+                )
+                
+                result = []
+                for row in rows:
+                    total_attempts = row["total_attempts"]
+                    successful = row["successful_implementations"]
+                    success_rate = (successful / total_attempts * 100) if total_attempts > 0 else 0.0
+                    
+                    result.append({
+                        "key": row["finding_key"],
+                        "label": row["finding_key"].replace("_", " ").title(),
+                        "total_attempts": total_attempts,
+                        "successful_implementations": successful,
+                        "avg_score_improvement": round(row["avg_score_improvement"] or 0.0, 1),
+                        "positive_outcomes": row["positive_outcomes"],
+                        "success_rate_percentage": round(success_rate, 1)
+                    })
+                
+                return result
+
+
+    async def get_user_fix_history(self, email: str, limit: int = 10) -> List[dict]:
+        """Get fix implementation history for a specific user."""
+        await self.connect()
+
+        async with self.pool.acquire() as conn:
+            rows = await conn.fetch(
+                """
+                SELECT 
+                    fi.audit_id,
+                    fi.finding_key,
+                    fi.implemented,
+                    fi.verification_method,
+                    fi.notes,
+                    fi.score_before,
+                    fi.score_after,
+                    fi.implemented_at,
+                    a.url,
+                    a.score as audit_score,
+                    a.grade
+                FROM fix_implementations fi
+                JOIN audits a ON fi.audit_id = a.id
+                JOIN customers c ON a.customer_id = c.id
+                WHERE c.email = $1
+                ORDER BY fi.implemented_at DESC
+                LIMIT $2
+                """
+                , email, limit
+            )
+            
+            result = []
+            for row in rows:
+                score_improvement = None
+                if row["score_before"] is not None and row["score_after"] is not None:
+                    score_improvement = round(row["score_after"] - row["score_before"], 1)
+                
+                result.append({
+                    "audit_id": str(row["audit_id"]),
+                    "finding_key": row["finding_key"],
+                    "implemented": row["implemented"],
+                    "verification_method": row["verification_method"],
+                    "notes": row["notes"],
+                    "score_before": row["score_before"],
+                    "score_after": row["score_after"],
+                    "score_improvement": score_improvement,
+                    "implemented_at": row["implemented_at"].isoformat() if row["implemented_at"] else None,
+                    "url": row["url"],
+                    "audit_score": row["audit_score"],
+                    "audit_grade": row["grade"]
+                })
+            
+            return result
+
             await conn.execute(
                 "UPDATE partners SET domains = $2::jsonb, updated_at = NOW() WHERE id = $1",
                 partner_id, json.dumps(domains),

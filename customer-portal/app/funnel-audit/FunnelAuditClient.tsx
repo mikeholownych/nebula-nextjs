@@ -158,7 +158,7 @@ export default function FunnelAuditClient() {
             Find where your funnel <span style={{ color: '#c7ff2f' }}>breaks.</span>
           </h1>
           <p style={{ color: '#8a9488', fontSize: 16, lineHeight: 1.6 }}>
-            Enter up to 3 URLs. Nebula scores each step and shows exactly where conversion drops — so you fix the right leak first, not the last one.
+            Enter up to 3 URLs. Nebula scores each step and shows exactly where conversion drops, so you fix the right leak first, not the last one.
           </p>
         </div>
 
@@ -167,9 +167,11 @@ export default function FunnelAuditClient() {
           {STEP_LABELS.map((label, i) => (
             <div key={i}>
               <div style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '.8px', color: '#5a6458', marginBottom: 6 }}>
-                Step {i + 1} — {label} {i > 0 && <span style={{ color: '#2a322a' }}>(optional)</span>}
+                Step {i + 1}, {label} {i > 0 && <span style={{ color: '#2a322a' }}>(optional)</span>}
               </div>
               <input
+                id={"funnel-url-" + i}
+                name={"funnel_url_" + i}
                 value={urls[i]}
                 onChange={e => updateUrl(i, e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && !running && runFunnelAudit()}
@@ -213,7 +215,7 @@ export default function FunnelAuditClient() {
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
                     <div>
                       <div style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '.8px', color: '#5a6458', marginBottom: 4 }}>
-                        Step {i + 1} — {step.label}
+                        Step {i + 1}, {step.label}
                       </div>
                       <div style={{ fontSize: 13, color: '#5a6458', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 360 }}>
                         {step.url}
@@ -266,7 +268,7 @@ export default function FunnelAuditClient() {
               ))}
             </div>
 
-            {/* Friction map — only when 2+ steps scored */}
+            {/* Friction map, only when 2+ steps scored */}
             {scored.length >= 2 && (
               <div style={{ background: '#0e1a0e', border: '1.5px solid #1e3a1e', borderRadius: 10, padding: 24, marginBottom: 24 }}>
                 <div style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: '.8px', color: '#5a6458', marginBottom: 16 }}>Funnel friction map</div>
@@ -310,6 +312,8 @@ export default function FunnelAuditClient() {
                 </p>
                 <div style={{ display: 'flex', gap: 10, marginBottom: 8 }}>
                   <input
+                    id="funnel-email"
+                    name="email"
                     type="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
