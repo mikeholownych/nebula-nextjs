@@ -1,3 +1,4 @@
+import RelatedContent from '@/components/RelatedContent'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -358,7 +359,8 @@ export default function WhyNotConvertingPage() {
               { href: '/ads-getting-clicks-but-no-sales', label: 'Ads getting clicks but no sales', type: 'guide' },
             { href: '/landing-page-mistakes', label: 'Common landing page mistakes', type: 'guide' },
             { href: '/landing-page-cta-audit', label: 'Audit your CTA', type: 'audit-type' },
-            { href: '/audit', label: 'Get your free audit', type: 'cta' }
+            { href: '/landing-page-trust-signals', label: 'Trust signals that convert', type: 'guide' },
+              { href: '/audit', label: 'Get your free audit', type: 'cta' }
             ]}
           />
 

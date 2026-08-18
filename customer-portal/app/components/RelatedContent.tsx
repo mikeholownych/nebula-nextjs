@@ -1,3 +1,4 @@
+import RelatedContent from '@/components/RelatedContent'
 import Link from 'next/link'
 
 /**

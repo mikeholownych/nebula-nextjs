@@ -1,3 +1,4 @@
+import RelatedContent from '@/components/RelatedContent'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { Card } from '@/components/ui/Card'
@@ -168,7 +169,8 @@ export default function MistakesChecklistPage() {
           { href: '/why-is-my-landing-page-not-converting', label: "Why pages don't convert", type: 'guide' },
         { href: '/landing-page-cta-audit', label: 'CTA audit', type: 'audit-type' },
         { href: '/landing-page-message-match', label: 'Message match audit', type: 'audit-type' },
-        { href: '/audit', label: 'Get your free audit', type: 'cta' }
+        { href: '/landing-page-trust-signals', label: 'Trust signals that convert', type: 'guide' },
+              { href: '/audit', label: 'Get your free audit', type: 'cta' }
         ]}
       />
 

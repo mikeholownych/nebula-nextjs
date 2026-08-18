@@ -1,3 +1,4 @@
+import RelatedContent from '@/components/RelatedContent'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import '../globals.css'

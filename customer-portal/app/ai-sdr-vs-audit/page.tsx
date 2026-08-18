@@ -1,3 +1,4 @@
+import RelatedContent from '@/components/RelatedContent'
 import type { Metadata } from 'next'
 import { formatUsd, getActiveFixPack } from '@/app/lib/public-facts'
 
