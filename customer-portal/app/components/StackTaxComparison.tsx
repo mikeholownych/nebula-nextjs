@@ -9,7 +9,7 @@ export default function StackTaxComparison() {
             Unfair Advantage Matrix
           </p>
           <h2 className="text-3xl font-extrabold tracking-tight text-fg md:text-4xl">
-            Stop paying a $1,500/mo Stack Tax or waiting 3 months for a CRO agency.
+            Stop paying a $1,500/mo Stack Tax or waiting 3 months for a CRO agency. Get your first fix in 48 hours.
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-base text-fg-muted">
             Most founders either spend $5k/mo on agencies that deliver 30-page PDFs or stitch 5 tools together and manually execute recommendations. Nebula gives you instant, verified code fixes in under 2 minutes.

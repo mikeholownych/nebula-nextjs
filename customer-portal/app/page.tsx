@@ -88,29 +88,21 @@ export default function Home() {
                 Know exactly what&apos;s killing your conversions, without hiring a consultant.
               </h1>
               <p className="mt-6 max-w-lg text-base leading-relaxed text-fg-muted">
-                Your ads are working. The page isn&apos;t. Nebula runs 9 evidence-backed checks against your actual
-                HTML and shows you the specific leak, with the dollar math and the exact fix.
+                Your ads are working. The page is leaking the budget. Nebula scans your actual
+                HTML, calculates the monthly dollar bleed, and delivers the exact fix — in under 2 minutes.
               </p>
               <div className="mt-8">
                 <Link
                   href="/audit?utm_source=homepage&utm_medium=internal"
                   className="inline-block rounded bg-accent px-6 py-3.5 text-base font-semibold text-bg hover:opacity-85 hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition-colors"
                 >
-                  Find My Conversion Leak
+                  Get My Free Conversion Score
                 </Link>
                 <p className="mt-3 text-sm text-fg-muted">Free. No signup. Results in under 2 minutes.</p>
               </div>
               {/* Stat strip - elevated card */}
-              <div className="mt-8 rounded-2xl border border-border/40 bg-bg-surface/50 p-5">
+              <div className="mt-8 rounded-lg border border-border/40 bg-bg-surface/50 p-5">
                 <div className="grid grid-cols-2 gap-6">
-                  <div className="text-center">
-                    <p className="stat-number">139+</p>
-                    <p className="stat-label">pages audited</p>
-                  </div>
-                  <div className="text-center">
-                    <p className="stat-number">0</p>
-                    <p className="stat-label">scored an A</p>
-                  </div>
                   <div className="text-center">
                     <p className="stat-number">9</p>
                     <p className="stat-label">signals checked</p>
@@ -118,6 +110,14 @@ export default function Home() {
                   <div className="text-center">
                     <p className="stat-number">&lt;2m</p>
                     <p className="stat-label">to results</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="stat-number">0</p>
+                    <p className="stat-label">pages scored an A</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="stat-number">$0</p>
+                    <p className="stat-label">to find the leak</p>
                   </div>
                 </div>
               </div>
@@ -170,7 +170,7 @@ export default function Home() {
               </p>
               <div className="mt-8 flex items-start gap-4">
                 <img
-                  src="/mike-holownych-founder.png"
+                  src="/mike-holownych-founder.webp"
                   alt="Mike Holownych, Founder of Nebula Components"
                   width={64}
                   height={64}
@@ -318,6 +318,22 @@ export default function Home() {
                 )
               })}
             </div>
+          </div>
+        </section>
+
+        {/* ── Mid-page persistent CTA ── */}
+        <section className="border-b border-border/40 bg-bg-elevated/60 px-6 py-12 text-center">
+          <div className="mx-auto max-w-lg">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-label text-accent">Free · No signup · 2 minutes</p>
+            <h2 className="mb-4 text-xl font-bold text-fg">
+              Get your conversion score now.
+            </h2>
+            <Link
+              href="/audit?utm_source=homepage-mid&utm_medium=internal"
+              className="inline-block rounded bg-accent px-6 py-3 text-sm font-bold text-bg hover:opacity-85 transition-opacity"
+            >
+              Get My Free Conversion Score
+            </Link>
           </div>
         </section>
 
