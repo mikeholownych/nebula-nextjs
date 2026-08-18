@@ -5,7 +5,6 @@ import { REPAIR_SPRINT_OFFER } from '@/app/lib/self-implementation-kit-offer'
 import { Card, PageShell } from '@/components/ui'
 import MembershipGrid from './MembershipGrid'
 
-export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Pricing - Memberships & One-Leak Repair Sprint | Nebula',

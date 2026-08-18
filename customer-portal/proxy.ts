@@ -10,9 +10,25 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nebulacomponents.c
  * 1. Domain migration: nebulacomponents.shop → nebulacomponents.com (301)
  * 2. Block legacy .html routes
  * 3. Markdown for Agents (RFC content negotiation): Accept: text/markdown → llms.txt
+ * 4. Propagate geo country header for cookie consent (avoids headers() in layout)
+ *
+ * PERFORMANCE NOTE (4):
+ * Reading headers() in the root layout opts the entire page tree into dynamic
+ * SSR. By propagating x-nebula-country here in the proxy, the GeoConsent
+ * component can read it in an isolated Suspense boundary, leaving static pages
+ * prerenderable.
  */
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
+
+  // Propagate country for GDPR-aware cookie consent (avoids layout headers() call)
+  const country = (
+    request.headers.get('cf-ipcountry') ||
+    request.headers.get('x-vercel-ip-country') ||
+    request.headers.get('x-country-code') ||
+    ''
+  ).toUpperCase()
+
 
   // ── Workspace route protection (coarse navigation guard) ──────────────────
   // Redirects unauthenticated browsers away from /workspace to /login.
@@ -97,6 +113,7 @@ export function proxy(request: NextRequest) {
       mdUrl.pathname = '/llms.txt'
       const res = NextResponse.rewrite(mdUrl)
       res.headers.set('x-nebula-pathname', pathname)
+      res.headers.set('x-nebula-country', country)
       res.headers.set('Content-Type', 'text/markdown; charset=utf-8')
       res.headers.set('X-Markdown-Source', 'llms.txt')
       res.headers.set('Vary', 'Accept')
@@ -106,11 +123,16 @@ export function proxy(request: NextRequest) {
     // Add Vary: Accept so caches don't serve HTML to markdown agents
     const res = NextResponse.next()
     res.headers.set('x-nebula-pathname', pathname)
+    res.headers.set('x-nebula-country', country)
     res.headers.set('Vary', 'Accept')
     return res
   }
 
-  return NextResponse.next()
+  // For all other routes (assets, API, well-known): still stamp country for any
+  // server component that may read it, but skip the Vary/pathname overhead.
+  const res = NextResponse.next()
+  if (country) res.headers.set('x-nebula-country', country)
+  return res
 }
 
 /**

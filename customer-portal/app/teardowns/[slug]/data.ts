@@ -26,7 +26,7 @@ export type Teardown = {
 export const TEARDOWNS: Record<string, Teardown> = {
   basecamp: {
     slug: 'basecamp',
-    screenshotUrl: '/teardown-screenshots/basecamp.png',
+    screenshotUrl: '/teardown-screenshots/basecamp.webp',
     name: 'Basecamp',
     url: 'https://basecamp.com',
     domain: 'basecamp.com',
@@ -85,7 +85,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   notion: {
     slug: 'notion',
-    screenshotUrl: '/teardown-screenshots/notion.png',
+    screenshotUrl: '/teardown-screenshots/notion.webp',
     name: 'Notion',
     url: 'https://notion.so',
     domain: 'notion.so',
@@ -135,7 +135,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   calendly: {
     slug: 'calendly',
-    screenshotUrl: '/teardown-screenshots/calendly.png',
+    screenshotUrl: '/teardown-screenshots/calendly.webp',
     name: 'Calendly',
     url: 'https://calendly.com',
     domain: 'calendly.com',
@@ -194,7 +194,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   carrd: {
     slug: 'carrd',
-    screenshotUrl: '/teardown-screenshots/carrd.png',
+    screenshotUrl: '/teardown-screenshots/carrd.webp',
     name: 'Carrd',
     url: 'https://carrd.co',
     domain: 'carrd.co',
@@ -253,7 +253,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   beehiiv: {
     slug: 'beehiiv',
-    screenshotUrl: '/teardown-screenshots/beehiiv.png',
+    screenshotUrl: '/teardown-screenshots/beehiiv.webp',
     name: 'Beehiiv',
     url: 'https://beehiiv.com',
     domain: 'beehiiv.com',
@@ -312,7 +312,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   webflow: {
     slug: 'webflow',
-    screenshotUrl: '/teardown-screenshots/webflow.png',
+    screenshotUrl: '/teardown-screenshots/webflow.webp',
     name: 'Webflow',
     url: 'https://webflow.com',
     domain: 'webflow.com',
@@ -362,7 +362,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   kit: {
     slug: 'kit',
-    screenshotUrl: '/teardown-screenshots/kit.png',
+    screenshotUrl: '/teardown-screenshots/kit.webp',
     name: 'Kit',
     url: 'https://kit.com',
     domain: 'kit.com',
@@ -412,7 +412,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   hotjar: {
     slug: 'hotjar',
-    screenshotUrl: '/teardown-screenshots/hotjar.png',
+    screenshotUrl: '/teardown-screenshots/hotjar.webp',
     name: 'Hotjar',
     url: 'https://hotjar.com',
     domain: 'hotjar.com',
@@ -462,7 +462,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   unbounce: {
     slug: 'unbounce',
-    screenshotUrl: '/teardown-screenshots/unbounce.png',
+    screenshotUrl: '/teardown-screenshots/unbounce.webp',
     name: 'Unbounce',
     url: 'https://unbounce.com',
     domain: 'unbounce.com',
@@ -512,7 +512,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   framer: {
     slug: 'framer',
-    screenshotUrl: '/teardown-screenshots/framer.png',
+    screenshotUrl: '/teardown-screenshots/framer.webp',
     name: 'Framer',
     url: 'https://framer.com',
     domain: 'framer.com',
@@ -562,7 +562,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   postmint: {
     slug: 'postmint',
-    screenshotUrl: '/teardown-screenshots/postmint.png',
+    screenshotUrl: '/teardown-screenshots/postmint.webp',
     name: 'Postmint',
     url: 'https://postmint.de/en',
     domain: 'postmint.de',
@@ -594,7 +594,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   knallhart: {
     slug: 'knallhart',
-    screenshotUrl: '/teardown-screenshots/knallhart.png',
+    screenshotUrl: '/teardown-screenshots/knallhart.webp',
     name: 'knallhart.dev',
     url: 'https://knallhart.dev',
     domain: 'knallhart.dev',
@@ -635,7 +635,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   cloudwise: {
     slug: 'cloudwise',
-    screenshotUrl: '/teardown-screenshots/cloudwise.png',
+    screenshotUrl: '/teardown-screenshots/cloudwise.webp',
     name: 'CloudWise',
     url: 'https://cloudcostwise.io',
     domain: 'cloudcostwise.io',
@@ -676,7 +676,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   postdew: {
     slug: 'postdew',
-    screenshotUrl: '/teardown-screenshots/postdew.png',
+    screenshotUrl: '/teardown-screenshots/postdew.webp',
     name: 'PostDew',
     url: 'https://postdew.com',
     domain: 'postdew.com',
@@ -735,7 +735,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   smartwatermark: {
     slug: 'smartwatermark',
-    screenshotUrl: '/teardown-screenshots/smartwatermark.png',
+    screenshotUrl: '/teardown-screenshots/smartwatermark.webp',
     name: 'SmartWatermark',
     url: 'https://smartwatermark.app',
     domain: 'smartwatermark.app',
@@ -767,7 +767,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   folioverse: {
     slug: 'folioverse',
-    screenshotUrl: '/teardown-screenshots/folioverse.png',
+    screenshotUrl: '/teardown-screenshots/folioverse.webp',
     name: 'Folioverse',
     url: 'https://www.folioverse.app',
     domain: 'www.folioverse.app',
@@ -826,7 +826,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   hubspot: {
     slug: 'hubspot',
-    screenshotUrl: '/teardown-screenshots/hubspot.png',
+    screenshotUrl: '/teardown-screenshots/hubspot.webp',
     name: 'HubSpot',
     url: 'https://www.hubspot.com',
     domain: 'hubspot.com',
@@ -885,7 +885,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   mailchimp: {
     slug: 'mailchimp',
-    screenshotUrl: '/teardown-screenshots/mailchimp.png',
+    screenshotUrl: '/teardown-screenshots/mailchimp.webp',
     name: 'Mailchimp',
     url: 'https://mailchimp.com',
     domain: 'mailchimp.com',
@@ -944,7 +944,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   shopify: {
     slug: 'shopify',
-    screenshotUrl: '/teardown-screenshots/shopify.png',
+    screenshotUrl: '/teardown-screenshots/shopify.webp',
     name: 'Shopify',
     url: 'https://www.shopify.com',
     domain: 'shopify.com',
@@ -994,7 +994,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   slack: {
     slug: 'slack',
-    screenshotUrl: '/teardown-screenshots/slack.png',
+    screenshotUrl: '/teardown-screenshots/slack.webp',
     name: 'Slack',
     url: 'https://slack.com',
     domain: 'slack.com',
@@ -1044,7 +1044,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   zapier: {
     slug: 'zapier',
-    screenshotUrl: '/teardown-screenshots/zapier.png',
+    screenshotUrl: '/teardown-screenshots/zapier.webp',
     name: 'Zapier',
     url: 'https://zapier.com',
     domain: 'zapier.com',
@@ -1094,7 +1094,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   canva: {
     slug: 'canva',
-    screenshotUrl: '/teardown-screenshots/canva.png',
+    screenshotUrl: '/teardown-screenshots/canva.webp',
     name: 'Canva',
     url: 'https://www.canva.com',
     domain: 'canva.com',
@@ -1153,7 +1153,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   typeform: {
     slug: 'typeform',
-    screenshotUrl: '/teardown-screenshots/typeform.png',
+    screenshotUrl: '/teardown-screenshots/typeform.webp',
     name: 'Typeform',
     url: 'https://www.typeform.com',
     domain: 'typeform.com',
@@ -1212,7 +1212,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   figma: {
     slug: 'figma',
-    screenshotUrl: '/teardown-screenshots/figma.png',
+    screenshotUrl: '/teardown-screenshots/figma.webp',
     name: 'Figma',
     url: 'https://www.figma.com',
     domain: 'figma.com',
@@ -1262,7 +1262,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   asana: {
     slug: 'asana',
-    screenshotUrl: '/teardown-screenshots/asana.png',
+    screenshotUrl: '/teardown-screenshots/asana.webp',
     name: 'Asana',
     url: 'https://asana.com',
     domain: 'asana.com',
@@ -1312,7 +1312,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   monday: {
     slug: 'monday',
-    screenshotUrl: '/teardown-screenshots/monday.png',
+    screenshotUrl: '/teardown-screenshots/monday.webp',
     name: 'Monday.com',
     url: 'https://monday.com',
     domain: 'monday.com',
@@ -1362,7 +1362,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   intercom: {
     slug: 'intercom',
-    screenshotUrl: '/teardown-screenshots/intercom.png',
+    screenshotUrl: '/teardown-screenshots/intercom.webp',
     name: 'Intercom',
     url: 'https://www.intercom.com',
     domain: 'intercom.com',
@@ -1403,7 +1403,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
   },
   squarespace: {
     slug: 'squarespace',
-    screenshotUrl: '/teardown-screenshots/squarespace.png',
+    screenshotUrl: '/teardown-screenshots/squarespace.webp',
     name: 'Squarespace',
     url: 'https://www.squarespace.com',
     domain: 'squarespace.com',
@@ -1453,7 +1453,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         },
         linear: {
         slug: 'linear',
-        screenshotUrl: '/teardown-screenshots/linear.png',
+        screenshotUrl: '/teardown-screenshots/linear.webp',
         name: 'Linear',
         url: 'https://linear.app',
         domain: 'linear.app',
@@ -1494,7 +1494,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         },
         loom: {
         slug: 'loom',
-        screenshotUrl: '/teardown-screenshots/loom.png',
+        screenshotUrl: '/teardown-screenshots/loom.webp',
         name: 'Loom',
         url: 'https://www.loom.com',
         domain: 'loom.com',
@@ -1535,7 +1535,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         },
         miro: {
         slug: 'miro',
-        screenshotUrl: '/teardown-screenshots/miro.png',
+        screenshotUrl: '/teardown-screenshots/miro.webp',
         name: 'Miro',
         url: 'https://miro.com',
         domain: 'miro.com',
@@ -1576,7 +1576,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         },
         clickup: {
         slug: 'clickup',
-        screenshotUrl: '/teardown-screenshots/clickup.png',
+        screenshotUrl: '/teardown-screenshots/clickup.webp',
         name: 'ClickUp',
         url: 'https://clickup.com',
         domain: 'clickup.com',
@@ -1626,7 +1626,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         },
         airtable: {
         slug: 'airtable',
-        screenshotUrl: '/teardown-screenshots/airtable.png',
+        screenshotUrl: '/teardown-screenshots/airtable.webp',
         name: 'Airtable',
         url: 'https://airtable.com',
         domain: 'airtable.com',
@@ -1667,7 +1667,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         },
         pipedrive: {
         slug: 'pipedrive',
-        screenshotUrl: '/teardown-screenshots/pipedrive.png',
+        screenshotUrl: '/teardown-screenshots/pipedrive.webp',
         name: 'Pipedrive',
         url: 'https://www.pipedrive.com',
         domain: 'pipedrive.com',
@@ -1708,7 +1708,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         },
         mixpanel: {
         slug: 'mixpanel',
-        screenshotUrl: '/teardown-screenshots/mixpanel.png',
+        screenshotUrl: '/teardown-screenshots/mixpanel.webp',
         name: 'Mixpanel',
         url: 'https://mixpanel.com',
         domain: 'mixpanel.com',
@@ -1758,7 +1758,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         },
         amplitude: {
         slug: 'amplitude',
-        screenshotUrl: '/teardown-screenshots/amplitude.png',
+        screenshotUrl: '/teardown-screenshots/amplitude.webp',
         name: 'Amplitude',
         url: 'https://amplitude.com',
         domain: 'amplitude.com',
@@ -1808,7 +1808,7 @@ export const TEARDOWNS: Record<string, Teardown> = {
         },
         drift: {
         slug: 'drift',
-        screenshotUrl: '/teardown-screenshots/drift.png',
+        screenshotUrl: '/teardown-screenshots/drift.webp',
         name: 'Drift',
         url: 'https://drift.com',
         domain: 'drift.com',
