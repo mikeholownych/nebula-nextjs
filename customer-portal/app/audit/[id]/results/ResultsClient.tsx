@@ -492,7 +492,7 @@ function ReportOverview({ results }: { results: AuditResult }) {
           </p>
 
           <p className="mt-4 max-w-[65ch] text-base leading-8 text-fg-muted">
-            We analyzed your landing page against patterns from 847 similar sites. We found {summary.critical + summary.warning} conversion leaks. Your {summary.critical} critical issues are costing you the most.
+            We checked your landing page against 9 conversion signals. We found {summary.critical + summary.warning} failing signals. Your {summary.critical} highest-priority findings are listed first.
           </p>
 
           {/* Psychology: Endowment effect + autonomy (founder psychology) */}
@@ -558,10 +558,10 @@ function ReportOverview({ results }: { results: AuditResult }) {
             </dl>
           </div>
 
-          {/* Psychology: Social proof widget */}
+          {/* Social proof: live audit count */}
           <div className="mt-6 border-t border-border pt-4">
             <p className="text-xs text-fg-muted">
-              <span className="font-semibold text-fg">847 audits analyzed.</span> 721 founders found these same 5 issues. 89% fixed them. Your site matches pattern #3 (conversion killer).
+              <span className="font-semibold text-fg">9 conversion signals checked.</span> Each finding includes evidence from your page HTML and a specific fix recommendation.
             </p>
           </div>
         </Card>
