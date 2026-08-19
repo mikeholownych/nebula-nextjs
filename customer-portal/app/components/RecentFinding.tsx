@@ -71,7 +71,7 @@ export default function RecentFinding() {
       <p className="mt-1 text-xs leading-relaxed text-fg-muted line-clamp-2">{finding.issue}</p>
       {finding.impact > 0 && (
         <p className="mt-2 text-xs text-fg-muted">
-          Priority: <span className="font-semibold text-accent" title="Rule-derived prioritization score based on journey position, severity, reproducibility and confidence. This is not predicted conversion loss.">{finding.impact}/10</span>
+          Priority: <span className="font-semibold text-accent" aria-label="Rule-derived prioritization score based on journey position, severity, reproducibility and confidence. This is not predicted conversion loss.">{finding.impact}/10</span>
           {finding.quadrant && (
             <> · <span className="capitalize">{finding.quadrant.replace('_', ' ')}</span></>
           )}

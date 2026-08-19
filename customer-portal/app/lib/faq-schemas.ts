@@ -22,7 +22,7 @@ export const pricingFAQSchema = createFAQPageSchema([
   },
   {
     question: 'Does the repair guarantee a higher conversion rate?',
-    answer: 'No. Nebula identifies and delivers fixes for the highest-confidence conversion leak found. Traffic quality, offer strength, campaign changes, and measurement windows also affect business outcomes.',
+    answer: 'No. Nebula delivers the exact fix for your highest-priority failing signal. The 30-day re-audit verifies the condition changed. Traffic quality, offer strength, and measurement windows also affect conversion — no service can guarantee lift without controlled traffic and a measurement window.',
   },
   {
     question: 'What landing page problems does Nebula diagnose?',

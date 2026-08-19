@@ -41,7 +41,7 @@ export const verticals: Record<string, Vertical> = {
     icp: 'eCommerce founders and DTC operators spending $1,000+ per month on paid traffic with a product page conversion rate below 2.5%.',
     top_leak: 'Weak social proof near the add-to-cart button. Reviews exist on the page, but they\'re buried below the fold. Visitors who don\'t scroll convert at 0.3x the rate of those who do.',
     second_leak: 'Unclear value proposition in the hero. Visitors need to know immediately: what is it, who is it for, why now. Most product pages open with a lifestyle image and no copy.',
-    benchmark: 'eCommerce product page benchmark: 2.5% on paid traffic. Audited pages with social proof in the first scroll consistently score 2x this rate.',
+    benchmark: 'eCommerce product pages frequently fail on trust signals — social proof exists but is buried below the fold. The audit checks whether proof elements are visible near the primary CTA in the first viewport.',
     cta_copy: 'Score your product page',
     related_links: [
       ['/learning-centre/ecommerce-landing-page-not-converting', 'Why eCommerce pages don\'t convert'],
@@ -126,7 +126,7 @@ export const verticals: Record<string, Vertical> = {
     icp: 'B2B software founders and demand gen leads spending on paid acquisition for products in the $500-50,000 ACV range with a demo request rate below 2%.',
     top_leak: 'No qualification signal. Buyers who see a form that asks only for name and email feel like they\'re entering an automated funnel, not starting a real conversation. A single qualifying question increases demo quality.',
     second_leak: 'ROI language is absent. B2B buyers need to justify the purchase internally. A page that states the business outcome and the comparable cost of the status quo converts better than a feature comparison.',
-    benchmark: 'B2B software demo page benchmark: 2% demo request rate on paid LinkedIn traffic. Pages with role-specific messaging and quantified business outcomes achieve 3-4%.',
+    benchmark: 'B2B software demo pages frequently fail on message match — the page speaks to a generic audience rather than the specific role the ad targeted. The audit checks whether the H1, CTA, and above-fold copy address the buyer role directly.',
     cta_copy: 'Score your B2B page',
     related_links: [
       ['/learning-centre/linkedin-ads-not-converting', 'LinkedIn Ads not converting'],

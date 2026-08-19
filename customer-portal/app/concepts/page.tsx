@@ -66,7 +66,7 @@ const CONCEPTS = [
     id: 'conversion-leak',
     name: 'Conversion Leak',
     definition:
-      'A specific page-level defect that reduces the proportion of visitors who complete the primary action. A page can have multiple leaks; the audit ranks them by impact.',
+      'An observable page condition that fails a documented audit standard and may create friction in the conversion path. A page can have multiple failed conditions; the audit ranks them by priority.',
     whyItMatters:
       'The word "leak" is deliberate: it frames the problem as a fixable structural defect rather than a weak offer or wrong audience. A page leaking 60% of its mobile visitors through a buried CTA is not a traffic problem. It is a structural problem with a bounded fix.',
     howNebulaMeasures:
@@ -98,7 +98,7 @@ const CONCEPTS = [
     definition:
       'Page-level obstacles that cost conversions regardless of ad quality or offer strength. Structural friction is fixable; it does not require a new product or a different audience.',
     whyItMatters:
-      'Founders and operators who are losing money on paid traffic typically assume the problem is the ad creative, the audience targeting, or the offer price. Structural friction - a five-field form, a CTA below fold, a page that loads in six seconds on mobile - explains a large share of conversion failures without requiring any of those assumptions to be true. Fixing structural friction is the highest-certainty lever in conversion optimization.',
+      'Founders and operators running paid traffic often assume the problem is the ad creative, the audience targeting, or the offer price. Structural friction — a five-field form, a CTA below fold, a page that loads in six seconds on mobile — is an observable, fixable variable that can be checked without making any of those assumptions. Addressing structural friction does not guarantee conversion lift, but it removes conditions that are measurably outside documented standards.',
     howNebulaMeasures:
       'Structural friction signals in Nebula\'s audit include: form field count (more than two fields above fold is a friction flag), CTA placement, mobile tap target size, page weight, and font size. These are observable in the HTML and CSS - no session recording or A/B test data required.',
   },

@@ -21,7 +21,8 @@
     { "file": "app/repair-sprint/page.tsx", "line": 108, "reason": "Exclusions list: 'Guaranteed conversion lift'" },
     { "file": "app/lib/self-implementation-kit-offer.ts", "line": 51, "reason": "Offer disclaiming: 'A guarantee of conversion lift'" },
     { "file": "app/lib/faq-schemas.ts", "line": 70, "reason": "FAQ schema disclaimer" },
-    { "file": "app/components/MechanismProof.tsx", "line": 0, "reason": "Evidence boundary disclaimer: warns that others cannot guarantee conversion lift" }
+    { "file": "app/components/MechanismProof.tsx", "line": 0, "reason": "Evidence boundary disclaimer: warns that others cannot guarantee conversion lift" },
+    { "file": "app/concepts/page.tsx", "line": 0, "reason": "Disclaimer: 'does not guarantee conversion lift'" }
   ],
   "exactly-why": [
     { "file": "app/vs/[slug]/data.ts", "line": 116, "reason": "Context: Nebula shows 'exactly why a signal failed' — refers to evidence, not causal business claim" },

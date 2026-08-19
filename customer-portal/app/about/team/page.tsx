@@ -61,14 +61,14 @@ export default function TeamPage() {
           Before founding Nebula Components, I worked with founders running paid traffic whose
           landing pages weren&apos;t converting. The same failures showed up page after page -
           message-match gaps, missing trust signals, mobile friction, slow load times, unclear CTAs.
-          None of them were creative or targeting problems. They were structural issues on the page
-          itself, and they could all be diagnosed from the HTML.
+          In the cases I was working on, these were structural issues on the page
+          itself — and they could all be diagnosed from the HTML.
         </p>
         <p className="mb-4 text-lg leading-relaxed text-fg-muted">
           What I kept seeing: founders spending thousands on traffic to pages with a broken headline,
-          a hidden CTA, and no proof above the fold - then changing the ad when the page was the
-          problem. Ad performance problems are almost always page problems. Most of the time the
-          fix is specific and verifiable. I built Nebula to surface it without a consulting engagement.
+          a hidden CTA, and no proof above the fold — then changing the ad without checking the page
+          first. In my experience, the page is often worth investigating before the ad. The fix is
+          usually specific and verifiable. I built Nebula to surface it without a consulting engagement.
         </p>
         <p className="mb-8 text-lg leading-relaxed text-fg-muted">
           That pattern is what the 9-point diagnostic framework is built from - the same checks

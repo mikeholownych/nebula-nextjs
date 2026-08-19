@@ -37,7 +37,7 @@ export default function GoogleAdsHighCtrLowConversionPage() {
             Your Google Ads CTR Is 8% But Conversion Rate Is 0.1% - The Landing Page Disconnect Audit
           </h1>
           <p className="text-xl leading-relaxed text-fg-muted">
-            An 8% click-through rate is exceptional. It means your headline, offer, and targeting are working. The ad is not the problem. A 0.1% conversion rate on the other side of that click means something breaks the moment a high-intent visitor lands on your page - and most founders spend months optimising the wrong layer trying to fix it.
+            An 8% click-through rate indicates the ad is generating interest. A 0.1% conversion rate on the other side of that click means something may be breaking the moment a high-intent visitor lands on your page. The landing page is one of the variables worth investigating — and it is the one you can check without changing your ad account.
           </p>
         </div>
 

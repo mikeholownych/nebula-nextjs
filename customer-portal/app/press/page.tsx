@@ -130,7 +130,7 @@ export default function PressPage() {
                   or your developer implements it. No retainer, no subscription.
                 </p>
                 <p className="text-xs text-fg-muted/60 italic">
-                  &ldquo;The problem was never the ad. It was the page.&rdquo;
+                  &ldquo;Check the page before you change the ad.&rdquo;
                 </p>
               </div>
             </div>

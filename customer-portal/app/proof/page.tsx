@@ -210,7 +210,7 @@ export default async function ProofPage() {
         <section className="bg-surface border border-border rounded-2xl p-8 text-center">
           <h2 className="text-2xl font-bold text-fg mb-3">See your page in this data.</h2>
           <p className="text-fg-muted mb-6 max-w-md mx-auto">
-            Your page has leaks. The audit names them, ranks them by impact, and tells you what to fix first.
+            The audit checks your page against 9 signals, ranks findings by priority, and shows the evidence.
             Free. No signup required to see your score.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">

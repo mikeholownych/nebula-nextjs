@@ -79,13 +79,13 @@ function buildFallbackAnswer(
     const sorted = [...allFindings].sort((a, b) => b.impact - a.impact)
     const top = sorted.slice(0, 3)
     if (top.length === 0) return 'All signals are passing - no critical findings to prioritize.'
-    const lines = ['**Highest-impact fixes** (sorted by severity):\n']
+    const lines = ['**Highest-priority findings** (sorted by priority):\n']
     for (const f of top) {
-      lines.push(`1. **${f.label}** (priority: ${f.impact}/10) - Rule-derived prioritization score based on journey position, severity, reproducibility and confidence. This is not predicted conversion loss. - ${f.url}`)
+      lines.push(`1. **${f.label}** (priority: ${f.impact}/10) — ${f.url}`)
       if (f.issue) lines.push(`   Problem: ${f.issue}`)
       if (f.fix) lines.push(`   Fix: ${f.fix}`)
     }
-    lines.push('\nStart with #1 - it has the highest measured impact on your conversion score.')
+    lines.push('\nStart with #1 — it has the highest priority based on journey position, severity, and reproducibility.')
     return lines.join('\n')
   }
 
@@ -172,7 +172,7 @@ export async function POST(request: NextRequest) {
     const auditContext = validAudits
       .map((audit) => {
         const findingLines = audit.findings.map(
-          (f) => `    - [${f.key}] ${f.label} (priority ${f.priority}/10) - Rule-derived prioritization score based on journey position, severity, reproducibility and confidence. This is not predicted conversion loss.: ${f.issue || 'Failing'} → Fix: ${f.fix || 'See report'}`
+          (f) => `    - [${f.key}] ${f.label} (priority ${f.priority}/10): ${f.issue || 'Failing'} → Fix: ${f.fix || 'See report'}`
         )
         return [
           `URL: ${audit.url}`,

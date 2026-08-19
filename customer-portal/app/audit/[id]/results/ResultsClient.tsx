@@ -621,7 +621,7 @@ function FixFirstQueue({ findings, auditId, onGoToRemediation }: { findings: Fin
                 <p className="mt-2 max-w-[65ch] text-sm leading-6 text-fg-muted">{finding.issue}</p>
               </div>
               <div className="flex items-center gap-4 md:flex-col md:items-end">
-                <span className="text-xs tabular-nums text-fg-muted">Priority {finding.impact} title="Rule-derived prioritization score based on journey position, severity, reproducibility and confidence. This is not predicted conversion loss."/10</span>
+                <span className="text-xs tabular-nums text-fg-muted" aria-label="Rule-derived prioritization score based on journey position, severity, reproducibility and confidence. This is not predicted conversion loss.">Priority {finding.impact}/10</span>
                 <span className="text-xs tabular-nums text-fg-muted">Effort {finding.effort}/10</span>
                 <a href={`#${findingAnchor(finding)}`} className="text-sm font-semibold text-accent hover:text-fg">View evidence ↓</a>
               </div>
@@ -1056,7 +1056,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
                   </div>
                   <div className="flex gap-2 text-xs tabular-nums">
                     <span className="rounded bg-accent/10 px-2 py-1 text-accent">
-                      Impact: {finding.impact}/10
+                      Priority: {finding.impact}/10
                     </span>
                     <span className="rounded bg-fg-muted/10 px-2 py-1 text-fg-muted">
                       Effort: {finding.effort}/10
@@ -1282,7 +1282,7 @@ export default function ResultsClient({ auditId, unlocked: initialUnlocked, shar
               <h3 className="mb-1 text-2xl font-extrabold text-fg">{REPAIR_SPRINT_OFFER.name}</h3>
               <p className="mb-2 text-2xl font-extrabold tabular-nums text-accent">${REPAIR_SPRINT_OFFER.priceUsd}</p>
               <p className="mb-4 max-w-[65ch] text-base leading-7 text-fg-muted">
-                Not a 12-point checklist. One specific fix for your highest-confidence finding - exact copy, code, or configuration change - ready to implement today.
+                Not a 12-point checklist. One specific fix for your highest-priority finding — exact copy, code, or configuration change — for you or your developer to implement.
               </p>
               <ul className="mb-5 space-y-2 text-sm text-fg-muted">
                 <li className="flex items-start gap-2"><span className="text-accent font-bold mt-0.5">+</span>One scoped repair package for your highest-priority finding, prepared within 48 hours</li>

@@ -53,7 +53,7 @@ const faqSchema = {
       name: 'What causes slow LCP on a landing page?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'The four most common causes: (1) uncompressed hero image - a 2MB PNG in the first viewport will dominate LCP; (2) render-blocking scripts - third-party tools (chat widgets, analytics, ad pixels) loaded in the head block render until they resolve; (3) no CDN - serving assets from a single origin server adds round-trip latency for distant visitors; (4) server response time (TTFB) above 800ms - hosting tier or unoptimised server-side rendering. Image compression alone fixes LCP in most cases.',
+        text: 'The four most common causes: (1) uncompressed hero image - a 2MB PNG in the first viewport will dominate LCP; (2) render-blocking scripts - third-party tools (chat widgets, analytics, ad pixels) loaded in the head block render until they resolve; (3) no CDN - serving assets from a single origin server adds round-trip latency for distant visitors; (4) server response time (TTFB) above 800ms - hosting tier or unoptimised server-side rendering. Image compression is often the simplest intervention when the hero image dominates LCP.',
       },
     },
     {
