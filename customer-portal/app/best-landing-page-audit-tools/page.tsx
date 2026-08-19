@@ -198,8 +198,9 @@ export default function BestLandingPageAuditToolsPage() {
           <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Bottom line up front</h2>
           <p className="mt-3 text-lg leading-8 text-fg">
             Most “landing page audit” tools do not audit conversions - they measure speed, behavior, or technical SEO.
-            Of the 8 tools compared here, only Nebula checks the 9 conversion signals that determine whether paid
-            traffic turns into customers, and it is the only free option with no email gate. PageSpeed Insights is the
+            Of the 8 tools compared here, only Nebula checks 9 observable conversion
+            conditions on the public page, and it is the only free option with no email gate. Those checks do not
+            predict conversion from paid traffic. PageSpeed Insights is the
             right pick for the speed question alone; Hotjar and Crazy Egg for post-launch behavior; SEMrush and
             Screaming Frog for site-wide technical SEO. If your page loads fine but is not converting, start with
             Nebula - free, under 2 minutes, no signup.

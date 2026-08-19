@@ -55,4 +55,32 @@ describe('site surface integrity', () => {
     expect(styles).toMatch(/--accent:\s*#c7ff2f/)
     expect(publicDs).toMatch(/--accent:\s*#c7ff2f/)
   })
+
+  it('keeps the homepage compressed to the instrument sequence', () => {
+    const home = readFileSync(path.join(repo, 'app/page.tsx'), 'utf8')
+    expect(home).toContain('HeroSection')
+    expect(home).toContain('What Nebula checks')
+    expect(home).toContain('See the Repair Sprint')
+    expect(home).toContain('What the audit can prove')
+    expect(home).not.toContain('ROICalculator')
+    expect(home).not.toContain('WithWithout')
+    expect(home).not.toContain('StackTaxComparison')
+    expect(home).not.toContain('HowItWorksAnimated')
+    expect(home).not.toContain('The cost of inaction')
+    expect(home).not.toContain('Not a sales call in disguise')
+  })
+
+  it('bans the stale causal signal-phrase family from current pages', () => {
+    const files = walk(path.join(repo, 'app'), new Set(['.ts', '.tsx']))
+    const stale = 'signals that determine whether paid traffic converts'
+    const outcome = 'consistently convert below 1.5%'
+    const offenders: string[] = []
+    for (const file of files) {
+      const text = readFileSync(file, 'utf8')
+      if (text.includes(stale) || text.includes(outcome)) {
+        offenders.push(path.relative(repo, file))
+      }
+    }
+    expect(offenders).toEqual([])
+  })
 })

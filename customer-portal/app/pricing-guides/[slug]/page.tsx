@@ -116,10 +116,11 @@ export default async function PricingGuidePage({
         <section className="mt-12 rounded-2xl border border-accent/20 bg-accent/5 p-8">
           <h2 className="mb-4 text-2xl font-bold text-fg">The cheaper alternative: Nebula</h2>
           <p className="text-fg leading-relaxed">
-            Nebula audits any public landing page in under 2 minutes - free, no signup, no credit card. It checks the
-            9 conversion signals that determine whether paid traffic converts: headline message match, CTA clarity,
+            Nebula audits any public landing page in under 2 minutes - free, no signup, no credit card. It checks
+            9 observable page conditions: headline message match, CTA clarity,
             trust evidence, above-fold structure, mobile CTA, load speed, ad signals, SEO foundations, and AI citation
-            readiness. When the audit finds leaks, the $97 one-time repair sprint writes the exact copy, code, or
+            readiness. The audit reports those page conditions. It does not predict conversion from paid traffic. When the audit finds failed
+            conditions, the $97 one-time repair sprint writes the exact copy, code, or
             config changes for your page.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">

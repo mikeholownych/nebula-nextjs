@@ -19,7 +19,7 @@ export async function generateMetadata({
   if (!v) return {}
 
   const title = `Landing Page Audit for ${v.name}, Find Failed Page Conditions | Nebula`
-  const description = `${v.pain.slice(0, 140)} Nebula scores your ${v.name.toLowerCase()} page across 9 conversion signals and shows you exactly what to fix.`
+  const description = `${v.pain.slice(0, 140)} Nebula scores your ${v.name.toLowerCase()} page across 9 conversion signals and ranks observable conditions by priority.`
 
   return {
     title,

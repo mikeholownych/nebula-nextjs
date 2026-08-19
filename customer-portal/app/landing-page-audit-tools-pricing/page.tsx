@@ -53,7 +53,7 @@ const HUB_FAQS = [
   },
   {
     q: 'Do any of these tools check conversion structure, not just speed or SEO?',
-    a: 'Only Nebula checks the 9 conversion signals that determine whether paid traffic converts: headline message match against the ad, CTA clarity, trust/social proof, above-fold structure, mobile CTA, load speed, ad signals, SEO foundations, and AI citation readiness. PageSpeed checks speed; Hotjar and Crazy Egg show behavior; SEMrush and Screaming Frog check technical SEO.',
+    a: 'Only Nebula checks 9 observable conversion conditions on the public page: headline message match against the ad, CTA clarity, trust/social proof, above-fold structure, mobile CTA, load speed, ad signals, SEO foundations, and AI citation readiness. Those checks do not predict conversion from paid traffic. PageSpeed checks speed; Hotjar and Crazy Egg show behavior; SEMrush and Screaming Frog check technical SEO.',
   },
 ]
 

@@ -247,7 +247,7 @@ export const COMPARISONS: Record<string, Comparison> = {
     competitorName: "Screaming Frog",
     competitorUrl: "https://screamingfrog.co.uk/seo-spider",
     tagline: "Screaming Frog vs. Nebula - SEO spider vs. conversion audit",
-    intent: "Screaming Frog crawls your site for technical SEO issues. Nebula audits a landing page for the conversion signals that determine whether paid traffic turns into customers.",
+    intent: "Screaming Frog crawls your site for technical SEO issues. Nebula audits a landing page for observable conversion conditions on the public HTML.",
     bluf: "Screaming Frog is a desktop crawler for deep technical SEO audits. Nebula is a browser-based conversion audit for one landing page. One finds broken links and redirect chains; the other finds why paid traffic is not converting - in under 2 minutes, no install.",
     checkedAt: "August 2026",
     targetQuery: "screaming frog alternative conversion audit landing page",
